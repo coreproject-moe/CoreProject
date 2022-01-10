@@ -28,7 +28,9 @@ async def avatar(request, user_id) -> HttpResponse:
     result = await libravatar_raw_query(email, dict(request.GET))
 
     # No reason. Just to be a bit more transparent
-    headers = {"server": f"Python/{python_version()}"}
+    headers = {
+        "server": f"Python/{python_version()}",
+    }
 
     # Pillow processing
     res = Image.open(BytesIO(await result.aread()))
