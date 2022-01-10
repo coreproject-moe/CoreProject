@@ -1,0 +1,172 @@
+{% extends 'components/form_box.html' %}
+<!--prettier-ignore-->
+{% load static %}
+
+{% block title %}
+Register
+{% endblock %}
+
+<!-- We Write HTML here-->
+{% block form %}
+<form method="POST" x-trap="true">
+    {% csrf_token %}
+    <div class="items field is-horizontal">
+        <div class="field-body">
+            <div class="field">
+                <p class="control is-expanded has-icons-left">
+                    {{ form.first_name }}
+                    <span class="icon is-small is-left">
+                        <img
+                            class="animejs__character__a__icon"
+                            src="{% static 'authentication/svg/character_a.svg' %}"
+                            x-init="
+                                () => {
+                                    anime({
+                                        targets:
+                                            '.animejs__character__a__icon',
+                                        scale: 0.8,
+                                    });
+                                }
+                            "
+                        />
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="items field is-horizontal">
+        <div class="field-body">
+            <div class="field">
+                <p class="control is-expanded has-icons-left">
+                    {{ form.last_name }}
+                    <span class="icon is-small is-left">
+                        <img
+                            class="animejs__character__z__icon"
+                            src="{% static 'authentication/svg/character_z.svg' %}"
+                            x-init="
+                                () => {
+                                    anime({
+                                        targets:
+                                            '.animejs__character__z__icon',
+                                        scale: 0.8,
+                                        translateY: -1,
+                                    });
+                                }
+                            "
+                        />
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="items field is-horizontal">
+        <div class="field-body">
+            <div class="field">
+                <p class="control is-expanded has-icons-left">
+                    {{ form.username }}
+                    <span class="icon is-small is-left">
+                        <ion-icon
+                            class="animejs__username__icon"
+                            name="person-circle-outline"
+                            x-init="
+                                () => {
+                                    anime({
+                                        targets:
+                                            '.animejs__username__icon',
+                                        color: '#FFFFFF',
+                                        scale: 1.6,
+                                    });
+                                }
+                            "
+                        ></ion-icon>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="items field is-horizontal">
+        <div class="field-body">
+            <div class="field">
+                <p class="control is-expanded has-icons-left">
+                    {{ form.email }}
+                    <span class="icon is-small is-left">
+                        <ion-icon
+                            class="animejs__mail__icon"
+                            name="mail-outline"
+                            x-init="
+                                () => {
+                                    anime({
+                                        targets: '.animejs__mail__icon',
+                                        color: '#FFFFFF',
+                                        scale: 1.4,
+                                    });
+                                }
+                            "
+                        ></ion-icon>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="items field is-horizontal">
+        <div class="field-body">
+            <div class="field">
+                <p class="control is-expanded has-icons-left">
+                    {{ form.password_1 }}
+                    <span class="icon is-small is-left">
+                        <ion-icon
+                            class="animejs__password__one__icon"
+                            name="lock-closed-outline"
+                            x-init="
+                                () => {
+                                    anime({
+                                        targets:
+                                            '.animejs__password__one__icon',
+                                        color: '#FFFFFF',
+                                        scale: 1.4,
+                                    });
+                                }
+                            "
+                        ></ion-icon>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="items field is-horizontal">
+        <div class="field-body">
+            <div class="field">
+                <p class="control is-expanded has-icons-left">
+                    {{ form.password_2 }}
+                    <span class="icon is-small is-left">
+                        <ion-icon
+                            class="animejs__password__two__icon"
+                            name="document-lock-outline"
+                            x-init="
+                                () => {
+                                    anime({
+                                        targets:
+                                            '.animejs__password__two__icon',
+                                        color: '#FFFFFF',
+                                        scale: 1.7,
+                                    });
+                                }
+                            "
+                        ></ion-icon>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="items columns is-mobile is-centered">
+        <div class="column is-narrow">
+            <button id="button" class="button is-rounded is-centered is-ghost">
+                Register
+            </button>
+        </div>
+    </div>
+</form>
+{% endblock %}

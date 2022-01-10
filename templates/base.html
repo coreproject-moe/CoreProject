@@ -1,0 +1,83 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+            async
+            rel="stylesheet"
+            href="{% static 'vendor/typeface-ubuntu/index.css' %}"
+        />
+        <link
+            async
+            rel="stylesheet"
+            href="{% static 'vendor/typeface-roboto/index.css' %}"
+        />
+        <link
+            async
+            rel="stylesheet"
+            href="{% static 'vendor/typeface-cantarell/index.css' %}"
+        />
+
+        <style>
+            :root {
+                --html-color: black;
+                --navbar-color: black;
+                --border-color: #353333;
+                --button-border-color: hsl(0, 0%, 20%);
+                --button-color-hover: hsl(0, 0%, 5%);
+                --error-message-color: hsl(348.1, 85.9%, 61%);
+            }
+            html {
+                background-color: var(--html-color) !important;
+                scrollbar-width: thin;
+            }
+            body {
+                overflow-x: hidden;
+            }
+            ion-icon {
+                pointer-events: none;
+            }
+            [x-cloak] {
+                display: none !important;
+            }
+            .is-position-absolute {
+                position: absolute !important;
+            }
+        </style>
+        <link
+            defer
+            async
+            rel="stylesheet"
+            href="{% static 'vendor/bulma/bulma.min.css' %}"
+        />
+        <link
+            async
+            rel="stylesheet"
+            href="{% static 'vendor/bulma/bulma-tooltip.min.css' %}"
+        />
+        <script src="{% static 'vendor/anime/anime.min.js' %}"></script>
+
+        <title>{% block title %} {% endblock %}</title>
+        {% block head %} {% endblock %}
+    </head>
+    <body>
+        {% block body %} {% endblock %}
+        <script
+            type="module"
+            src="{% static 'vendor/ionicons/ionicons.esm.js' %}"
+        ></script>
+        <script
+            nomodule
+            src="{% static 'vendor/ionicons/ionicons.js' %}"
+        ></script>
+
+        <script
+            async
+            src="{% static 'vendor/alpinejs/trap/cdn.min.js' %}"
+        ></script>
+        <script async src="{% static 'vendor/alpinejs/cdn.min.js' %}"></script>
+    </body>
+</html>

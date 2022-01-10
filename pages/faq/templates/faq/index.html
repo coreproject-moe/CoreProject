@@ -1,0 +1,162 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<style>
+    html,
+    body {
+        font-family: Ubuntu, Cantarell, sans-serif;
+        font-size: 14px;
+    }
+
+    /* Override bulma  */
+    .title,
+    .content h1,
+    .content h2,
+    .content h3,
+    .content h4,
+    .content h5,
+    .content h6 {
+        color: white !important;
+        opacity: 0.98 !important;
+    }
+    .card {
+        background-color: #0d0d0d !important;
+    }
+
+    .content {
+        color: white;
+        opacity: 0.7;
+    }
+    .navbar-brand .brand-text {
+        font-size: 1.11rem;
+        font-weight: bold;
+    }
+    .hero-body {
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 500px;
+    }
+    .articles {
+        margin: 5rem 0;
+        margin-top: -200px;
+    }
+    .articles .content p {
+        line-height: 2;
+        margin: 15px 0;
+        font-size: 15px;
+    }
+    .author-image {
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        width: 60px;
+        height: 60px;
+        margin-left: -30px;
+        border: 3px solid #ccc;
+        border-radius: 50%;
+    }
+    .media-center {
+        display: block;
+        margin-bottom: 1rem;
+    }
+    .media-content {
+        margin-top: 3rem;
+    }
+    .article,
+    .promo-block {
+        margin-top: 6rem;
+    }
+    div.column.is-8:first-child {
+        padding-top: 0;
+        margin-top: 0;
+    }
+    .article-title {
+        font-size: 2rem;
+        font-weight: lighter;
+        line-height: 2;
+    }
+    .article-subtitle {
+        color: #909aa0;
+        margin-bottom: 3rem;
+    }
+
+    .promo-block .container {
+        margin: 1rem 5rem;
+    }
+
+    .article-body {
+        line-height: 1.4;
+        margin: 0 6rem;
+        font-family: 'Cantarell', sans-serif;
+    }
+
+    @media screen and (max-width: 768px) {
+        .article-body {
+            line-height: 1.4;
+            margin: 0 !important;
+        }
+    }
+</style>
+{% endblock %} {% block body %}
+<section class="hero is-medium is-bold">
+    <div
+        class="hero-body"
+        x-init="
+            () => { 
+                $el.style.backgroundImage = 'url({{ img.url }})';
+            }
+        "
+    >
+        <div class="container has-text-centered">
+            <h1 class="title"></h1>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <!-- START ARTICLE FEED -->
+    <section class="articles">
+        <div class="column is-8 is-offset-2">
+            <!-- START ARTICLE -->
+            <div class="card article">
+                <div class="card-content">
+                    <div class="media">
+                        <div class="media-content has-text-centered is-clipped">
+                            <p class="title article-title">{{self.title}}</p>
+                            <div class="columns is-mobile is-centered">
+                                <div class="is-narrow">
+                                    <figure class="image is-64x64">
+                                        <a
+                                            href="{% url 'api_avatar' request.user.id %}"
+                                            style="border-radius: 99999px"
+                                            class="progressive replace"
+                                        >
+                                            <img
+                                                src="{%static 'core/images/placeholder.png'%}"
+                                                class="preview is-rounded"
+                                                alt="{{ self.owner }}"
+                                            />
+                                        </a>
+                                    </figure>
+                                </div>
+                            </div>
+                            <div class="tags has-addons level-item">
+                                <span class="tag is-rounded is-dark"
+                                    >@{{self.owner}}</span
+                                >
+                                <span class="tag is-rounded is-info">
+                                    {{ self.latest_revision_created_at }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content article-body">
+                        {#<!--prettier-ignore-->#}
+                            {{post.content|safe}}
+                    </div>
+                </div>
+            </div>
+            <!-- END ARTICLE -->
+        </div>
+    </section>
+    <!-- END ARTICLE FEED -->
+</div>
+{% endblock body %}
