@@ -112,15 +112,14 @@
     </div>
 </section>
 <div class="container">
-    <!-- START ARTICLE FEED -->
     <section class="articles">
         <div class="column is-8 is-offset-2">
-            <!-- START ARTICLE -->
             <div class="card article">
                 <div class="card-content">
                     <div class="media">
                         <div class="media-content has-text-centered is-clipped">
-                            <p class="title article-title">{{self.title}}</p>
+                            <p class="title article-title">Faq for AnimeCore</p>
+                            {% comment %}
                             <div class="columns is-mobile is-centered">
                                 <div class="is-narrow">
                                     <figure class="image is-64x64">
@@ -139,24 +138,19 @@
                                 </div>
                             </div>
                             <div class="tags has-addons level-item">
-                                <span class="tag is-rounded is-dark"
-                                    >@{{self.owner}}</span
-                                >
-                                <span class="tag is-rounded is-info">
-                                    {{ self.latest_revision_created_at }}
-                                </span>
+                                <span class="tag is-rounded is-dark"></span>
+                                <span class="tag is-rounded is-info"> </span>
                             </div>
+                            {% endcomment %}
                         </div>
                     </div>
                     <div class="content article-body">
                         {#<!--prettier-ignore-->#}
-                            {{post.content|safe}}
+                            {{ post.content|safe }}
                     </div>
                 </div>
             </div>
-            <!-- END ARTICLE -->
         </div>
     </section>
-    <!-- END ARTICLE FEED -->
 </div>
 {% endblock body %}
