@@ -1,3 +1,4 @@
+from django.http.response import HttpResponse
 from django.urls import reverse
 from django.contrib import messages
 from django.shortcuts import render, redirect
@@ -19,7 +20,7 @@ from .services import (
 # Create your views here.
 
 
-async def login_page(request):
+async def login_page(request) -> HttpResponse:
     """
     A Simple Login Form to authenticate users.
     """
@@ -48,7 +49,7 @@ async def login_page(request):
     return render(request, "authentication/login.html", {"form": form})
 
 
-async def logout(request):
+async def logout(request) -> HttpResponse:
     await auth_logout(request)
 
     next_url = request.GET.get("next", None)
@@ -59,7 +60,7 @@ async def logout(request):
     return redirect(reverse("home_page"))
 
 
-async def register_page(request):
+async def register_page(request) -> HttpResponse:
     """
     A Simple User Register Form
     """
@@ -100,7 +101,7 @@ async def register_page(request):
     return render(request, "authentication/register.html", {"form": form})
 
 
-async def forget_password_form(request):
+async def forget_password_form(request) -> HttpResponse:
 
     form = ForgetPasswordForm(request.POST or None)
     if request.method == "POST":

@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class FaqConfig(AppConfig):
+class AnimeConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "pages.faq"
+    name = "pages.anime"
