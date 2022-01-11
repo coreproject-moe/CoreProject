@@ -11,6 +11,7 @@ localhost {
 
         handle_path /static/* {
                 file_server browse {
+                        precompressed br gzip zstd
                         root C:/Programming/Django-Template-main/staticfiles
                 }
         }
