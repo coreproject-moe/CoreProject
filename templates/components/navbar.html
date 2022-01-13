@@ -15,7 +15,7 @@
     <div
         class="navbar-brand is-clipped"
         x-init="
-            () => {
+            async () => {
                 switch ($store.is_mobile) {
                     case true : {
                         open = false;
@@ -81,14 +81,14 @@
                 <button
                     class="navbar-item button is-ghost is-rounded ml-1 is-unselectable"
                     x-init="
-                        () => {
+                        async () => {
                             if ('{{ request.path }}' == '/') {
                                 $el.classList.add('hover')
                             }
                         }
                     "
                     @mouseenter="
-                        () => {
+                        async () => {
                             anime({
                                 targets: '.animejs__home__icon',
                                 color: '#e50000',
@@ -96,7 +96,7 @@
                         }
                     "
                     @mouseleave="
-                        () => {
+                        async () => {
                             anime({
                                 targets: '.animejs__home__icon',
                                 color: '#d9d9d9',
@@ -104,7 +104,7 @@
                         }
                     "
                     @click.prevent="
-                        () => {
+                        async () => {
                             window.location = '/'
                         }
                     "
@@ -120,7 +120,7 @@
                 <button
                     class="navbar-item button is-ghost is-rounded ml-2 is-unselectable"
                     x-init="
-                        () => {
+                        async () => {
                             const string = '{{ request.path }}';
                             
                             if ( string.includes('blog') ) {
@@ -129,7 +129,7 @@
                         }
                     "
                     @mouseenter="
-                        () => {
+                        async () => {
                             anime({
                                 targets: '.animejs__school__icon',
                                 color: '#e50000',
@@ -137,7 +137,7 @@
                         }
                     "
                     @mouseleave="
-                        () => {
+                        async () => {
                             anime({
                                 targets: '.animejs__school__icon',
                                 color: '#d9d9d9',
@@ -145,7 +145,7 @@
                         }
                     "
                     @click.prevent="
-                        () => {
+                        async () => {
                             window.location = '/blog/'
                         }
                     "
@@ -155,41 +155,41 @@
                         class="animejs__school__icon"
                     ></ion-icon>
                     <p :class="$store.is_mobile ? 'pt-2 nav-icon-button' : ''">
-                        &nbsp; Blog
+                        &nbsp; Anime
                     </p>
                 </button>
                 <button
                     class="navbar-item button is-ghost is-rounded ml-2 is-unselectable"
                     x-init="
-                            () => {
+                            async () => {
                                 if ('{{ request.path }}' === '/projects/') {
                                     $el.classList.add('hover')
                                 }
                             }
                         "
                     @mouseenter="
-                        () => {
+                        async () => {
                             anime({
-                                targets: '.animejs__projects__icon',
+                                targets: '.animejs__manga__icon',
                                 color: '#e50000',
                             })
                         }
                     "
                     @mouseleave="
-                        () => {
+                        async () => {
                             anime({
-                                targets: '.animejs__projects__icon',
+                                targets: '.animejs__manga__icon',
                                 color: '#d9d9d9',
                             })
                         }
                     "
                 >
                     <ion-icon
-                        name="extension-puzzle-sharp"
-                        class="animejs__projects__icon"
+                        name="images-outline"
+                        class="animejs__manga__icon"
                     ></ion-icon>
                     <p :class="$store.is_mobile ? 'pt-2 nav-icon-button' : ''">
-                        &nbsp; Projects
+                        &nbsp; Manga
                     </p>
                 </button>
             </div>
@@ -205,7 +205,7 @@
                     class="is-rounded is-dark animejs__github__button is-clickable"
                     :class="$store.is_mobile ? 'is-hidden ': ''"
                     x-effect="
-                        () => {
+                        async () => {
                             switch ( button_turned ) {
                                 case true : {
                                     anime({
@@ -233,7 +233,7 @@
                         }
                     "
                     @mouseenter="
-                            () => {
+                            async () => {
                                 anime({
                                     targets: '.animejs__logo__github',
                                     color: 'hsl(0, 0%, 100%)',
@@ -245,7 +245,7 @@
                             }
                         "
                     @mouseleave="
-                        () => {
+                        async () => {
                             anime({
                                 targets: '.animejs__logo__github',
                                 color: 'hsl(0, 0%, 80%)',
@@ -257,7 +257,7 @@
                         }
                     "
                     x-init="
-                        () => {
+                        async () => {
                             tippy('.animejs__github__button', {
                                 content: 'Github',
                             })
@@ -270,7 +270,7 @@
                         style="width: 100%; height: 100%"
                         name="logo-github"
                         x-init="
-                            () => {
+                            async () => {
                                 anime({
                                     targets: '.animejs__logo__github',
                                     color: 'hsl(0, 0%, 80%)',
@@ -311,7 +311,7 @@
                         )
                     "
                     @click.prevent="
-                        () => {
+                        async () => {
                             anime({
                                 targets: '.animejs__arrow__back',
                                 rotate: button_turned ? 0 : 180,
@@ -320,7 +320,7 @@
                         }
                     "
                     @mouseenter="
-                        () => {
+                        async () => {
                             anime({
                                 targets: '.animejs__arrow__back',
                                 color: '#e50000',
@@ -332,7 +332,7 @@
                         }
                     "
                     @mouseleave="
-                        () => {
+                        async () => {
                             anime({
                                 targets: '.animejs__arrow__back',
                                 color: 'hsl(0, 0%, 80%)',
@@ -349,7 +349,7 @@
                         name="arrow-back-outline"
                         style="width: 100%; height: 100%"
                         x-init="
-                            () => {
+                            async () => {
                                 anime({
                                     targets: '.animejs__arrow__back',
                                     easing: 'linear',
@@ -376,7 +376,7 @@
                         <button
                             class="button is-ghost is-rounded"
                             @click.prevent="
-                                () => {
+                                async () => {
                                     window.location = '/authentication/login/?next={{ request.path }}'
                                 }
                             "
