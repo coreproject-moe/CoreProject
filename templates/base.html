@@ -57,7 +57,20 @@
             rel="stylesheet"
             href="{% static 'vendor/bulma/bulma-tooltip.min.css' %}"
         />
+        <link
+            async
+            defer
+            rel="stylesheet"
+            href="{% static 'vendor/progressive-image/progressive-image.css' %}"
+        />
+        <script
+            async
+            defer
+            src="{% static 'vendor/progressive-image/progressive-image.js' %}"
+        ></script>
         <script src="{% static 'vendor/anime/anime.min.js' %}"></script>
+        <script src="{% static 'vendor/tippy/popper.min.js'%}"></script>
+        <script src="{% static 'vendor/tippy/tippy-bundle.umd.min.js'%}"></script>
 
         <title>{% block title %} {% endblock %}</title>
         {% block head %} {% endblock %}
@@ -77,6 +90,36 @@
             async
             src="{% static 'vendor/alpinejs/trap/cdn.min.js' %}"
         ></script>
+        <script
+            async
+            src="{% static 'vendor/alpinejs/collapse/cdn.min.js' %}"
+        ></script>
+
         <script async src="{% static 'vendor/alpinejs/cdn.min.js' %}"></script>
+
+        <script>
+            document.addEventListener('alpine:init', () => {
+                // Create a condition that targets viewports at least 768px wide
+                const mediaQuery = window.matchMedia('(max-width: 768px)');
+
+                function handleWindowChange(e) {
+                    // Check if the media query is true
+                    return e.matches;
+                }
+                // Change the store's value
+                window.addEventListener('resize', () => {
+                    switch (handleWindowChange(mediaQuery)) {
+                        case true:
+                            Alpine.store('is_mobile', true);
+                            break;
+                        case false:
+                            Alpine.store('is_mobile', false);
+                            break;
+                    }
+                });
+                // Init the store.
+                Alpine.store('is_mobile', handleWindowChange(mediaQuery));
+            });
+        </script>
     </body>
 </html>

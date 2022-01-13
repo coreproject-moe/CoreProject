@@ -1,0 +1,78 @@
+.navbar {
+    background-color: var(--navbar-color) !important;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.navbar-menu {
+    background-color: var(--navbar-color) !important;
+}
+
+.navbar-start > .button {
+    margin-left: 0.3em;
+    margin-bottom: 0.5em;
+}
+
+.navbar-start .button,
+.navbar-burger {
+    transition: 0.2s;
+    transform: translateY(10px);
+    text-decoration: none !important;
+    color: hsl(0, 0%, 85%) !important;
+}
+
+.navbar-start > .navbar-item:hover,
+.navbar-start > .navbar-item.hover,
+.navbar-burger:hover {
+    background-color: hsl(0, 0%, 7.8%) !important;
+}
+
+/* Button related Stuff | Icon  */
+.navbar-item > a {
+    width: 25px;
+    height: 25px;
+    margin-left: 1em !important;
+    border-radius: 9999px;
+    border-width: 1.8px;
+    border-color: hsl(0, 0%, 20%) !important;
+    background-color: hsl(0, 0%, 10%) !important;
+    transition: 0.2s;
+}
+.navbar-item > a:hover {
+    background-color: hsl(0, 0%, 20%) !important;
+}
+
+/* Side effect  */
+.animejs__facebook__button {
+    transform: translateX(76px);
+    opacity: 0;
+}
+.animejs__github__button {
+    transform: translateX(38px);
+    opacity: 0;
+}
+
+/* Button related Stuff  | Login */
+.navbar-item > .buttons > .button {
+    border-color: var(--button-border-color) !important;
+    border-width: 1.8px;
+    text-decoration: none;
+    color: hsl(0, 0%, 85%) !important;
+    transition: 0.2s;
+}
+
+.navbar-item > .buttons > .button:hover {
+    background-color: var(--button-color-hover) !important;
+}
+
+.navbar-item > .buttons > .button:focus {
+    box-shadow: 0 0 0 0.125em rgba(199, 72, 72, 0.3) !important;
+}
+
+.centered_button {
+    width: 50% !important;
+}
+
+.animejs__arrow__button {
+    height: 25px !important;
+    width: 25px !important;
+}
