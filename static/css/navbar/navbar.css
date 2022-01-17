@@ -23,6 +23,7 @@
 .navbar-start > .navbar-item:hover,
 .navbar-start > .navbar-item.hover,
 .navbar-burger:hover {
+    color: hsl(0, 0%, 100%) !important;
     background-color: hsl(0, 0%, 7.8%) !important;
 }
 

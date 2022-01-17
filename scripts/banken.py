@@ -4,7 +4,8 @@ from pathlib import Path, PurePath
 
 # Point this to Django Media folder
 FOLDER_PATH = Path(__file__).parent.parent
-# Please only one file type.
+
+# Watch only one file type | Multiple file type causes errors
 FILE_TYPE = "**/*.mp4"
 
 # Max size before GC

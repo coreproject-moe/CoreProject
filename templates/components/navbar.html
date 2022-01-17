@@ -121,9 +121,7 @@
                     class="navbar-item button is-ghost is-rounded ml-2 is-unselectable"
                     x-init="
                         async () => {
-                            const string = '{{ request.path }}';
-                            
-                            if ( string.includes('blog') ) {
+                            if ( '{{ request.path }}'.includes('anime') ) {
                                 $el.classList.add('hover')
                             }
                         }
@@ -133,7 +131,8 @@
                             anime({
                                 targets: '.animejs__anime__icon',
                                 color: '#e50000',
-                            })
+                            });
+                        
                         }
                     "
                     @mouseleave="
@@ -141,12 +140,12 @@
                             anime({
                                 targets: '.animejs__anime__icon',
                                 color: '#d9d9d9',
-                            })
+                            });
                         }
                     "
                     @click.prevent="
                         async () => {
-                            window.location = '/blog/'
+                            window.location = '/anime/'
                         }
                     "
                 >
@@ -154,8 +153,9 @@
                         name="film-outline"
                         class="animejs__anime__icon"
                     ></ion-icon>
-                    <p :class="$store.is_mobile ? 'pt-2 nav-icon-button' : ''">
-                        <span class="is-hidden-touch">&nbsp;</span> Anime
+                    <p :class="$store.is_mobile ? 'pt-2 nav-icon-button' : '' ">
+                        <span class="is-hidden-touch">&nbsp;</span>
+                        Anime
                     </p>
                 </button>
                 <button
@@ -237,11 +237,11 @@
                                 anime({
                                     targets: '.animejs__logo__github',
                                     color: 'hsl(0, 0%, 100%)',
-                                })
+                                });
                                 anime({
                                     targets: '.animejs__github__button',
                                     scale: 1.3,
-                                })
+                                });
                             }
                         "
                     @mouseleave="

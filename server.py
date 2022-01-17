@@ -16,23 +16,24 @@ def run_caddy():
 
 def run_redis():
     if os.name == "nt":
-        os.system(".\windows\\redis-server.exe")
+        os.system(".\\windows\\redis-server.exe")
 
 
 def run_django():
-    os.system("python .\manage.py runserver")
+    os.system("python .\\manage.py runserver")
 
 
 def run_banken():
-    os.system("python .\scripts\\filewatcher.py")
+    os.system("python .\\scripts\\banken.py")
 
 
 def collect_staticfiles():
-    os.system("python .\manage.py collectstatic --no-input")
+    os.system("python .\\manage.py collectstatic --no-input")
 
 
 def run():
     global p1, p2, p3, p4, p5
+    
     # Utility first
     p1 = Process(target=collect_staticfiles).start()
 
