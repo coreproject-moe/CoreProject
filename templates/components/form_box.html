@@ -5,37 +5,6 @@
 
 {% block head %}
 
-{#Tooltip configuration#}
-<style>
-    [data-tooltip]::before {
-        color: white !important;
-        background-color: black !important;
-        border: 1px solid #ffffffcf !important;
-    }
-    [data-tooltip]:not(.is-disabled).has-tooltip-right.has-tooltip-arrow::after,
-    [data-tooltip]:not(.is-loading).has-tooltip-right.has-tooltip-arrow::after,
-    [data-tooltip]:not([disabled]).has-tooltip-right.has-tooltip-arrow::after {
-        top: auto;
-        right: 0;
-        bottom: 50%;
-        left: auto;
-        margin: auto -6px -6px auto;
-        border-color: transparent rgba(255, 255, 255, 0.9) transparent
-            transparent;
-    }
-    [data-tooltip]:not(.is-disabled).has-tooltip-left.has-tooltip-arrow::after,
-    [data-tooltip]:not(.is-loading).has-tooltip-left.has-tooltip-arrow::after,
-    [data-tooltip]:not([disabled]).has-tooltip-left.has-tooltip-arrow::after {
-        top: auto;
-        right: auto;
-        bottom: 50%;
-        left: 0;
-        margin: auto auto -6px -5px;
-        border-color: transparent transparent transparent
-            rgba(255, 255, 255, 0.9);
-    }
-</style>
-
 <style>
     .icon-box {
         background-color: transparent;
@@ -97,7 +66,7 @@
         color: var(--error-message-color);
     }
 </style>
-
+<link rel="stylesheet" href="{% static 'css/tooltip/custom.css' %}" />
 {% endblock %}
 <!--prettier-ignore-->
 {% block body %}

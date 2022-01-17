@@ -32,13 +32,14 @@ async def login_page(request) -> HttpResponse:
             password: str = form.cleaned_data["password"]
             user = await get_user_for_auth(username, password)
 
+            await auth_login(request, user)
             next_url = request.GET.get("next", None)
+
             # If theres next url redirect there
             if next_url:
                 return redirect(next_url)
 
             if user:
-                await auth_login(request, user)
                 return redirect(reverse("home_page"))
 
             elif not user:

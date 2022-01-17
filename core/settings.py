@@ -181,3 +181,8 @@ else:
             "TIMEOUT": 0 if DEBUG else 5000,
         }
     }
+
+
+# Override the login url
+# https://stackoverflow.com/questions/49532708/custom-login-url-in-django#49532812
+LOGIN_URL = 'login_page'
