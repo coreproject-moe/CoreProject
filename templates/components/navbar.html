@@ -233,6 +233,39 @@
                         OST
                     </p>
                 </button>
+
+                <div class="control has-icons-left mt-3 ml-4 is-hidden-touch">
+                    <input
+                        class="input has-background-black has-text-white search__input"
+                        type="text"
+                        placeholder="Search Away"
+                        @focus="async () => {
+                            const element = document.querySelectorAll('.navbar-item')
+                            for ( let i = 1; i < element.length; i++ ){
+                                {% comment %} element[i].classList.add('is-hidden') {% endcomment %}
+                            }
+                        }"
+                        @click.outside="async () => {
+                            const element = document.querySelectorAll('.navbar-item')
+                            for ( let i = 1; i < element.length; i++ ){
+                                {% comment %} element[i].classList.remove('is-hidden') {% endcomment %}
+                            }                        
+                        }"
+                    />
+                    <span class="icon is-small is-left">
+                        <ion-icon
+                            name="search-outline"
+                            class="animejs__search__icon"
+                            x-init="async () => {
+                                anime({
+                                    targets:'.animejs__search__icon',
+                                    scale: 1.6,
+                                    color: '#ffffff',
+                                })
+                            }"
+                        ></ion-icon>
+                    </span>
+                </div>
             </div>
         </div>
 
@@ -460,124 +493,146 @@
                 {% endif %}
             </template>
             <template x-if="$store.is_mobile">
-                {% if request.user.is_authenticated %}
-                <div class="columns is-mobile is-centered">
-                    {# Parent DIV #}
-                    <div class="column is-narrow">
-                        <div
-                            class="box mt-2"
-                            style="background-color: black !important"
-                        >
-                            <figure
-                                class="image is-96x96"
-                                @click.prevent="
+                <div>
+                    <div class="control has-icons-left ml-4 mr-4 mb-5">
+                        <input
+                            class="input has-background-black has-text-white search__input"
+                            type="text"
+                            placeholder="Search Away"
+                        />
+                        <span class="icon is-small is-left">
+                            <ion-icon
+                                name="search-outline"
+                                class="animejs__search__icon"
+                                x-init="async () => {
+                                anime({
+                                    targets:'.animejs__search__icon',
+                                    scale: 1.6,
+                                    color: '#ffffff',
+                                })
+                            }"
+                            ></ion-icon>
+                        </span>
+                    </div>
+                    {% if request.user.is_authenticated %}
+                    <div class="columns is-mobile is-centered">
+                        {# Parent DIV #}
+                        <div class="column is-narrow">
+                            <div
+                                class="box mt-2"
+                                style="background-color: black !important"
+                            >
+                                <figure
+                                    class="image is-96x96"
+                                    @click.prevent="
                                     async () => {
                                         window.location = `{% url 'user_edit_info_page' %}`
                                     }
                                 "
+                                >
+                                    <a
+                                        href="{% url 'api_avatar' request.user.id %}?s=96"
+                                        class="progressive replace"
+                                        style="border-radius: 9999px"
+                                    >
+                                        <img
+                                            class="is-rounded preview"
+                                            src="{% static 'images/placeholder/96x96.avif' %}"
+                                        />
+                                    </a>
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="column is-narrow has-text-white">
+                            <div
+                                class="columns is-flex-direction-column is-mobile is-gapless"
                             >
-                                <a
-                                    href="{% url 'api_avatar' request.user.id %}?s=96"
-                                    class="progressive replace"
-                                    style="border-radius: 9999px"
-                                >
-                                    <img
-                                        class="is-rounded preview"
-                                        src="{% static 'images/placeholder/96x96.avif' %}"
-                                    />
-                                </a>
-                            </figure>
-                        </div>
-                    </div>
-                    <div class="column is-narrow has-text-white">
-                        <div
-                            class="columns is-flex-direction-column is-mobile is-gapless"
-                        >
-                            <div class="column">
-                                <span
-                                    class="mobile__frienly__avatar__stats is-inline-block"
-                                >
-                                    <b>First Name</b> : {{
-                                    request.user.first_name }}
-                                </span>
-                            </div>
-                            <div class="column">
-                                <span
-                                    class="mobile__frienly__avatar__stats is-inline-block"
-                                >
-                                    <b>Last Name</b> : {{ request.user.last_name
-                                    }}
-                                </span>
-                            </div>
-                            <div class="column">
-                                <span
-                                    class="mobile__frienly__avatar__stats is-inline-block"
-                                >
-                                    <b>Username</b> : {{ request.user }}
-                                </span>
-                            </div>
-                            <div class="column">
-                                <span
-                                    class="mobile__frienly__avatar__stats is-inline-block"
-                                >
-                                    <b>Email</b> : {{ request.user.email }}
-                                </span>
-                            </div>
-                            <div class="column">
-                                <span
-                                    class="mobile__frienly__avatar__stats is-inline-block"
-                                >
-                                    <b>Date Joined</b> : {{
-                                    request.user.date_joined }}
-                                </span>
-                            </div>
-                            <div class="column">
-                                <span
-                                    class="mobile__frienly__avatar__stats is-inline-block"
-                                >
-                                    <b>Avatar Provider</b> : {{
-                                    request.user.avatar_url }}
-                                </span>
+                                <div class="column">
+                                    <span
+                                        class="mobile__frienly__avatar__stats is-inline-block"
+                                    >
+                                        <b>First Name</b> :
+                                        {{request.user.first_name}}
+                                    </span>
+                                </div>
+                                <div class="column">
+                                    <span
+                                        class="mobile__frienly__avatar__stats is-inline-block"
+                                    >
+                                        <b>Last Name</b> :
+                                        {{request.user.last_name}}
+                                    </span>
+                                </div>
+                                <div class="column">
+                                    <span
+                                        class="mobile__frienly__avatar__stats is-inline-block"
+                                    >
+                                        <b>Username</b> : {{ request.user }}
+                                    </span>
+                                </div>
+                                <div class="column">
+                                    <span
+                                        class="mobile__frienly__avatar__stats is-inline-block"
+                                    >
+                                        <b>Email</b> : {{ request.user.email }}
+                                    </span>
+                                </div>
+                                <div class="column">
+                                    <span
+                                        class="mobile__frienly__avatar__stats is-inline-block"
+                                    >
+                                        <b>Date Joined</b> :
+                                        {{request.user.date_joined}}
+                                    </span>
+                                </div>
+                                <div class="column">
+                                    <span
+                                        class="mobile__frienly__avatar__stats is-inline-block"
+                                    >
+                                        <b>Avatar Provider</b> :
+                                        {{request.user.avatar_url}}
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                {% else %}
-                <div class="columns is-mobile is-centered">
-                    <div class="column is-narrow">
-                        <div class="navbar-item">
-                            <div class="buttons">
-                                <button
-                                    class="button is-ghost is-rounded"
-                                    @click.prevent="
+                    {% else %}
+                    <div class="columns is-mobile is-centered">
+                        <div class="column is-narrow">
+                            <div class="navbar-item">
+                                <div class="buttons">
+                                    <button
+                                        class="button is-ghost is-rounded"
+                                        @click.prevent="
                                         async () => {
                                             window.location = `{% url 'login_page' %}?next={{ request.path }}`
                                         }
                                     "
-                                >
-                                    Log in
-                                </button>
+                                    >
+                                        Log in
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="column is-narrow">
-                        <div class="navbar-item">
-                            <div class="buttons">
-                                <button
-                                    class="button is-ghost is-rounded"
-                                    @click.prevent="
+                        <div class="column is-narrow">
+                            <div class="navbar-item">
+                                <div class="buttons">
+                                    <button
+                                        class="button is-ghost is-rounded"
+                                        @click.prevent="
                                         async () => {
                                             window.location = `{% url 'register_page' %}?next={{ request.path }}`
                                         }
                                     "
-                                >
-                                    Sign Up
-                                </button>
+                                    >
+                                        Sign Up
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    {% endif %}
                 </div>
-                {% endif %}
             </template>
         </div>
     </div>
