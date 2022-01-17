@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{% static 'css/navbar/navbar.css' %}" />
 
 <nav
-    class="navbar container"
+    class="navbar container is-clipped"
     role="navigation"
     aria-label="main navigation"
     x-cloak
@@ -220,7 +220,7 @@
                     "
                     @click.prevent="
                         async () => {
-                            window.location = '/ost /'
+                            window.location = '/ost/'
                         }
                     "
                 >
@@ -407,7 +407,7 @@
             <template x-if="!$store.is_mobile">
                 {% if request.user.is_authenticated %}
                 <figure
-                    class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture"
+                    class="image is-64x64 pt-2 pl-2 tippyjs__avatar__picture"
                     x-init="async () => {
                         tippy('.tippyjs__avatar__picture',{
                             content: '<b>First Name</b> : {{request.user.first_name}}<br/> <b>Last Name</b> : {{request.user.last_name}}<br/> <b>Username</b> : {{request.user}} <br/>  <b>Email</b> : {{request.user.email}}<br/><b>Date Joined</b> : {{request.user.date_joined}}<br/> <b>Avatar Provider</b> : {{request.user.avatar_url}}<br/>',
@@ -460,11 +460,12 @@
                 {% endif %}
             </template>
             <template x-if="$store.is_mobile">
-                {# Parent DIV #} {% if request.user.is_authenticated %}
+                {% if request.user.is_authenticated %}
                 <div class="columns is-mobile is-centered">
+                    {# Parent DIV #}
                     <div class="column is-narrow">
                         <div
-                            class="box"
+                            class="box mt-5"
                             style="background-color: black !important"
                         >
                             <figure
