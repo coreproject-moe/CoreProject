@@ -77,3 +77,9 @@
     height: 25px !important;
     width: 25px !important;
 }
+.mobile__frienly__avatar__stats {
+    max-width: 15em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
