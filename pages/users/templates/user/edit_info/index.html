@@ -68,7 +68,7 @@ Change info for {{ request.user }}
                 <p
                     class="control is-expanded has-icons-left"
                     x-init="
-                        () => {
+                        async () => {
                             for (let i = 0; i < $el.childNodes.length; i++) {
                                 const element = $el.childNodes[i];
 
@@ -89,7 +89,7 @@ Change info for {{ request.user }}
                             class="animejs__a__z__icon"
                             name="alert-circle-outline"
                             x-init="
-                                () => {
+                                async () => {
                                     anime({
                                         targets:
                                             '.animejs__a__z__icon',
@@ -116,7 +116,7 @@ Change info for {{ request.user }}
                 <p
                     class="control is-expanded has-icons-left"
                     x-init="
-                        () => {
+                        async () => {
                             for (let i = 0; i < $el.childNodes.length; i++) {
                                 const element = $el.childNodes[i];
 
@@ -137,7 +137,7 @@ Change info for {{ request.user }}
                             class="animejs__a__z__icon"
                             name="alert-circle-outline"
                             x-init="
-                                () => {
+                                async () => {
                                     anime({
                                         targets:
                                             '.animejs__a__z__icon',
@@ -165,7 +165,7 @@ Change info for {{ request.user }}
                 <p
                     class="control is-expanded has-icons-left"
                     x-init="
-                        () => {
+                        async () => {
                             for (let i = 0; i < $el.childNodes.length; i++) {
                                 const element = $el.childNodes[i];
 
@@ -186,7 +186,7 @@ Change info for {{ request.user }}
                             class="animejs__account__icon"
                             name="person-circle-outline"
                             x-init="
-                                () => {
+                                async () => {
                                     anime({
                                         targets:
                                             '.animejs__account__icon',
@@ -213,12 +213,9 @@ Change info for {{ request.user }}
                 <p class="control is-expanded has-icons-left has-icons-right">
                     {{ form.password }}
                     <span
-                        class="
-                            icon
-                            is-small is-right is-clickable is-unselectable
-                        "
+                        class="icon is-small is-right is-clickable is-unselectable"
                         @click="
-                            () => {
+                            async () => {
                                 password_shown =! password_shown
                             }
                         "
@@ -230,7 +227,7 @@ Change info for {{ request.user }}
                             class="animejs__password__icon"
                             name="document-outline"
                             x-init="
-                                () => {
+                                async () => {
                                     anime({
                                         targets:
                                             '.animejs__password__icon',
@@ -261,7 +258,7 @@ Change info for {{ request.user }}
                             class="animejs__password__lock__icon"
                             name="document-lock-outline"
                             x-init="
-                                () => {
+                                async () => {
                                     anime({
                                         targets:
                                             '.animejs__password__lock__icon',
@@ -293,19 +290,22 @@ Change info for {{ request.user }}
                         value="{{ request.user.date_joined }}"
                     />
                     <span
-                        class="
-                            icon
-                            is-small is-left
-                            has-tooltip-arrow has-tooltip-left
-                            is-clickable
+                        class="icon is-small is-left is-clickable tippyjs__date__joined"
+                        x-init="
+                            async () => {
+                                tippy('.tippyjs__date__joined', {
+                                    content: 'Date joined',
+                                    placement: 'left',
+                                    theme: 'black',
+                                })
+                            }
                         "
-                        data-tooltip="Date Joined"
                     >
                         <ion-icon
                             class="animejs__date__icon"
                             name="calendar-outline"
                             x-init="
-                                () => {
+                                async () => {
                                     anime({
                                         targets:
                                             '.animejs__date__icon',
@@ -330,13 +330,13 @@ Change info for {{ request.user }}
                     <span
                         class="select"
                         x-init="
-                                () => {
+                                async () => {
                                     for (let i = 0; i < $el.childNodes.length; i++) {
                                         const element = $el.childNodes[i];
                 
                                         try {
                                             if (element.tagName.toLowerCase() === 'select') {
-                                                element.value = '{{ request.user.avatar_url }}';
+                                                element.value = '{{ request.user.avatar_url }}'.toLowerCase();
                                             } 
                                         } catch (e) {
                                             // If i dont do this theres a error saying cant access element.tagName
@@ -351,7 +351,7 @@ Change info for {{ request.user }}
                             name="link"
                             class="animejs__link__icon"
                             x-init="
-                                    () => {
+                                    async () => {
                                         anime({
                                             targets:
                                                 '.animejs__link__icon',
@@ -363,18 +363,21 @@ Change info for {{ request.user }}
                         ></ion-icon>
                     </span>
                     <span
-                        class="
-                            icon
-                            is-small is-right is-clickable
-                            has-tooltip-arrow has-tooltip-right
-                            is-hidden-touch
+                        class="icon is-small is-right is-clickable tippyjs__avatar__provider is-hidden-touch"
+                        x-init="
+                            async () => {
+                                tippy('.tippyjs__avatar__provider', {
+                                    content: 'Avatar Provider Name',
+                                    theme: 'black',
+                                    placement: 'right',
+                                })
+                            }
                         "
-                        data-tooltip="Avatar Provider Name"
                         ><ion-icon
                             name="id-card-outline"
                             class="animejs__id__card"
                             x-init="
-                                () => {
+                                async () => {
                                     anime({
                                         targets:
                                             '.animejs__id__card',
