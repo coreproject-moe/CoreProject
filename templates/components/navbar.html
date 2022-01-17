@@ -365,10 +365,16 @@
             <template x-if="!$store.is_mobile">
                 {% if request.user.is_authenticated %}
                 <figure class="image is-48x48 pt-2 pl-2">
-                    <img
-                        class="is-rounded"
-                        src="{% static 'core/images/placeholder.png' %}"
-                    />
+                    <a
+                        href="{% url 'api_avatar' request.user.id %}?s=64"
+                        class="progressive replace"
+                        style="border-radius: 9999px"
+                    >
+                        <img
+                            class="is-rounded preview"
+                            src="{% static 'images/placeholder/96x96.avif' %}"
+                        />
+                    </a>
                 </figure>
                 {% else %}
                 <div class="navbar-item">
