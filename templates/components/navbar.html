@@ -410,7 +410,7 @@
                     class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture"
                     x-init="async () => {
                         tippy('.tippyjs__avatar__picture',{
-                            content: '<b>First Name</b> : {{request.user.first_name}}<br/> <b>Last Name</b> : {{request.user.last_name}}<br/> <b>Email</b> : {{request.user.email}}<br/><b>Date Joined</b> : {{request.user.date_joined}}<br/> <b>Avatar Provider</b> : {{request.user.avatar_url}}<br/>',
+                            content: '<b>First Name</b> : {{request.user.first_name}}<br/> <b>Last Name</b> : {{request.user.last_name}}<br/> <b>Username</b> : {{request.user}} <br/>  <b>Email</b> : {{request.user.email}}<br/><b>Date Joined</b> : {{request.user.date_joined}}<br/> <b>Avatar Provider</b> : {{request.user.avatar_url}}<br/>',
                             theme: 'black',
                             allowHTML: true,
                         })
@@ -499,6 +499,13 @@
                                 >
                                     <b>Last Name</b> :
                                     {{request.user.last_name}}
+                                </span>
+                            </div>
+                            <div class="column">
+                                <span
+                                    class="mobile__frienly__avatar__stats is-inline-block"
+                                >
+                                    <b>Username</b> : {{request.user}}
                                 </span>
                             </div>
                             <div class="column">
