@@ -409,12 +409,17 @@
                 <figure
                     class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture"
                     x-init="async () => {
-                    tippy('.tippyjs__avatar__picture',{
-                        content: '<b>First Name</b> : {{request.user.first_name}}<br/> <b>Last Name</b> : {{request.user.last_name}}<br/> <b>Email</b> : {{request.user.email}}<br/><b>Date Joined</b> : {{request.user.date_joined}}<br/> <b>Avatar Provider</b> : {{request.user.avatar_url}}<br/>',
-                        theme: 'black',
-                        allowHTML: true,
-                    })
-                }"
+                        tippy('.tippyjs__avatar__picture',{
+                            content: '<b>First Name</b> : {{request.user.first_name}}<br/> <b>Last Name</b> : {{request.user.last_name}}<br/> <b>Email</b> : {{request.user.email}}<br/><b>Date Joined</b> : {{request.user.date_joined}}<br/> <b>Avatar Provider</b> : {{request.user.avatar_url}}<br/>',
+                            theme: 'black',
+                            allowHTML: true,
+                        })
+                    }"
+                    @click.prevent="
+                        async () => {
+                            window.location = `{% url 'user_edit_info_page' %}`
+                        }
+                    "
                 >
                     <a
                         href="{% url 'api_avatar' request.user.id %}?s=64"
@@ -434,11 +439,21 @@
                             class="button is-ghost is-rounded"
                             @click.prevent="
                                 async () => {
-                                    window.location = '/authentication/login/?next={{ request.path }}'
+                                    window.location = `{% url 'login_page' %}?next={{ request.path }}`
                                 }
                             "
                         >
                             Log in
+                        </button>
+                        <button
+                            class="button is-ghost is-rounded"
+                            @click.prevent="
+                                async () => {
+                                    window.location = `{% url 'register_page' %}?next={{ request.path }}`
+                                }
+                            "
+                        >
+                            Sign Up
                         </button>
                     </div>
                 </div>
@@ -521,11 +536,27 @@
                                     class="button is-ghost is-rounded"
                                     @click.prevent="
                                         async () => {
-                                            window.location = '/authentication/login/?next={{ request.path }}'
+                                            window.location = `{% url 'login_page' %}?next={{ request.path }}`
                                         }
                                     "
                                 >
                                     Log in
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-narrow">
+                        <div class="navbar-item">
+                            <div class="buttons">
+                                <button
+                                    class="button is-ghost is-rounded"
+                                    @click.prevent="
+                                        async () => {
+                                            window.location = `{% url 'register_page' %}?next={{ request.path }}`
+                                        }
+                                    "
+                                >
+                                    Sign Up
                                 </button>
                             </div>
                         </div>
