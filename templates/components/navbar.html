@@ -82,7 +82,7 @@
                     class="navbar-item button is-ghost is-rounded ml-1 is-unselectable"
                     x-init="
                         async () => {
-                            if ('{{ request.path }}' == '/') {
+                            if ('{{ request.path }}'.toLowerCase().includes('home')) {
                                 $el.classList.add('hover')
                             }
                         }
@@ -121,7 +121,7 @@
                     class="navbar-item button is-ghost is-rounded ml-2 is-unselectable"
                     x-init="
                         async () => {
-                            if ( '{{ request.path }}'.includes('anime') ) {
+                            if ( '{{ request.path }}'.toLowerCase().includes('anime') ) {
                                 $el.classList.add('hover')
                             }
                         }
@@ -162,7 +162,7 @@
                     class="navbar-item button is-ghost is-rounded ml-2 is-unselectable"
                     x-init="
                             async () => {
-                                if ('{{ request.path }}' === '/projects/') {
+                                if ('{{ request.path }}'.toLowerCase().includes('manga')) {
                                     $el.classList.add('hover')
                                 }
                             }
@@ -190,6 +190,47 @@
                     ></ion-icon>
                     <p :class="$store.is_mobile ? 'pt-2 nav-icon-button' : ''">
                         <span class="is-hidden-touch">&nbsp;</span> Manga
+                    </p>
+                </button>
+                <button
+                    class="navbar-item button is-ghost is-rounded ml-2 is-unselectable"
+                    x-init="
+                        async () => {
+                            if ( '{{ request.path }}'.toLowerCase().includes('ost') ) {
+                                $el.classList.add('hover')
+                            }
+                        }
+                    "
+                    @mouseenter="
+                        async () => {
+                            anime({
+                                targets: '.animejs__music__icon',
+                                color: '#e50000',
+                            });
+                        
+                        }
+                    "
+                    @mouseleave="
+                        async () => {
+                            anime({
+                                targets: '.animejs__music__icon',
+                                color: '#d9d9d9',
+                            });
+                        }
+                    "
+                    @click.prevent="
+                        async () => {
+                            window.location = '/ost /'
+                        }
+                    "
+                >
+                    <ion-icon
+                        name="musical-note-outline"
+                        class="animejs__music__icon"
+                    ></ion-icon>
+                    <p :class="$store.is_mobile ? 'pt-2 nav-icon-button' : '' ">
+                        <span class="is-hidden-touch">&nbsp;</span>
+                        OST
                     </p>
                 </button>
             </div>
@@ -369,8 +410,8 @@
                     class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture"
                     x-init="async () => {
                     tippy('.tippyjs__avatar__picture',{
-                        content: '<b>First Name</b> : {{request.user.first_name}}<br/><b>Last Name</b> : {{request.user.last_name}}<br/><b>Email</b> : {{request.user.email}}<br/><b>Date Joined</b> : {{request.user.date_joined}}<br/><b>Avatar Provider</b> : {{request.user.avatar_url}}<br/>',
-                        theme:'black',
+                        content: '<b>First Name</b> : {{request.user.first_name}}<br/> <b>Last Name</b> : {{request.user.last_name}}<br/> <b>Email</b> : {{request.user.email}}<br/><b>Date Joined</b> : {{request.user.date_joined}}<br/> <b>Avatar Provider</b> : {{request.user.avatar_url}}<br/>',
+                        theme: 'black',
                         allowHTML: true,
                     })
                 }"
@@ -404,7 +445,93 @@
                 {% endif %}
             </template>
             <template x-if="$store.is_mobile">
-                <div>{# TODO ADD ICON #}</div>
+                {# Parent DIV #} {% if request.user.is_authenticated %}
+                <div class="columns is-mobile is-centered">
+                    <div class="column is-narrow">
+                        <div
+                            class="box"
+                            style="background-color: black !important"
+                        >
+                            <figure class="image is-64x64">
+                                <a
+                                    href="{% url 'api_avatar' request.user.id %}?s=64"
+                                    class="progressive replace"
+                                    style="border-radius: 9999px"
+                                >
+                                    <img
+                                        class="is-rounded preview"
+                                        src="{% static 'images/placeholder/96x96.avif' %}"
+                                    />
+                                </a>
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="column is-narrow has-text-white">
+                        <div
+                            class="columns is-flex-direction-column is-mobile is-gapless"
+                        >
+                            <div class="column">
+                                <span
+                                    class="mobile__frienly__avatar__stats is-inline-block"
+                                >
+                                    <b>First Name</b> :
+                                    {{request.user.first_name}}
+                                </span>
+                            </div>
+                            <div class="column">
+                                <span
+                                    class="mobile__frienly__avatar__stats is-inline-block"
+                                >
+                                    <b>Last Name</b> :
+                                    {{request.user.last_name}}
+                                </span>
+                            </div>
+                            <div class="column">
+                                <span
+                                    class="mobile__frienly__avatar__stats is-inline-block"
+                                >
+                                    <b>Email</b> : {{request.user.email}}
+                                </span>
+                            </div>
+                            <div class="column">
+                                <span
+                                    class="mobile__frienly__avatar__stats is-inline-block"
+                                >
+                                    <b>Date Joined</b> :
+                                    {{request.user.date_joined}}
+                                </span>
+                            </div>
+                            <div class="column">
+                                <span
+                                    class="mobile__frienly__avatar__stats is-inline-block"
+                                >
+                                    <b>Avatar Provider</b> :
+                                    {{request.user.avatar_url}}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="columns is-mobile is-centered">
+                    <div class="column is-narrow">
+                        <div class="navbar-item">
+                            <div class="buttons">
+                                <button
+                                    class="button is-ghost is-rounded"
+                                    @click.prevent="
+                                        async () => {
+                                            window.location = '/authentication/login/?next={{ request.path }}'
+                                        }
+                                    "
+                                >
+                                    Log in
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
             </template>
         </div>
     </div>
