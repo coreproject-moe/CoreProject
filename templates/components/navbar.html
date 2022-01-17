@@ -467,7 +467,14 @@
                             class="box"
                             style="background-color: black !important"
                         >
-                            <figure class="image is-64x64">
+                            <figure
+                                class="image is-64x64"
+                                @click.prevent="
+                                    async () => {
+                                        window.location = `{% url 'user_edit_info_page' %}`
+                                    }
+                                "
+                            >
                                 <a
                                     href="{% url 'api_avatar' request.user.id %}?s=64"
                                     class="progressive replace"
