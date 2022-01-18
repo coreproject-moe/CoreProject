@@ -79,7 +79,8 @@
                 :class="$store.is_mobile ? 'is-flex is-flex-direction-row is-justify-content-center' : ''"
             >
                 <button
-                    class="navbar-item button is-ghost is-rounded ml-1 is-unselectable"
+                    class="navbar-item button is-ghost is-rounded is-unselectable"
+                    :class="$store.is_mobile ? 'pl-5 pr-5' : 'ml-2'"
                     x-init="
                         async () => {
                             if ('{{ request.path }}'.toLowerCase().includes('home')) {
@@ -118,7 +119,8 @@
                     </p>
                 </button>
                 <button
-                    class="navbar-item button is-ghost is-rounded ml-2 is-unselectable"
+                    class="navbar-item button is-ghost is-rounded is-unselectable"
+                    :class="$store.is_mobile ? 'pl-5 pr-5' : 'ml-2'"
                     x-init="
                         async () => {
                             if ( '{{ request.path }}'.toLowerCase().includes('anime') ) {
@@ -159,7 +161,8 @@
                     </p>
                 </button>
                 <button
-                    class="navbar-item button is-ghost is-rounded ml-2 is-unselectable"
+                    class="navbar-item button is-ghost is-rounded is-unselectable"
+                    :class="$store.is_mobile ? 'pl-5 pr-5' : 'ml-2'"
                     x-init="
                             async () => {
                                 if ('{{ request.path }}'.toLowerCase().includes('manga')) {
@@ -193,7 +196,8 @@
                     </p>
                 </button>
                 <button
-                    class="navbar-item button is-ghost is-rounded ml-2 is-unselectable"
+                    class="navbar-item button is-ghost is-rounded is-unselectable"
+                    :class="$store.is_mobile ? 'pl-5 pr-5' : 'ml-2'"
                     x-init="
                         async () => {
                             if ( '{{ request.path }}'.toLowerCase().includes('ost') ) {
@@ -234,7 +238,8 @@
                     </p>
                 </button>
                 <button
-                    class="navbar-item button is-ghost is-rounded ml-2 is-unselectable"
+                    class="navbar-item button is-ghost is-rounded is-unselectable"
+                    :class="$store.is_mobile ? 'pl-5 pr-5' : 'ml-2'"
                     x-init="
                     async () => {
                         if ( '{{ request.path }}'.toLowerCase().includes('shots') ) {
