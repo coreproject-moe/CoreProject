@@ -6,6 +6,12 @@
 {% block body %}
     {% include 'components/navbar.html' %}
 
+<style>
+    a.has-text-white {
+        text-decoration: underline;
+    }
+</style>
+
 <section class="hero is-fullheight-with-navbar">
     <div class="hero-body is-flex-direction-column">
         <div class="container has-text-centered">
@@ -15,7 +21,7 @@
                 animes, mangas, songs for free.
             </p>
         </div>
-        <div class="container">
+        <div class="container pt-6">
             <div class="content">
                 <h2 class="has-text-white has-text-centered">FAQ</h2>
 
@@ -39,11 +45,63 @@
                 </details>
                 <details>
                     <summary class="has-text-white pt-2">
+                        How do I get banned ?
+                    </summary>
+                    <p class="has-text-white pl-4 pt-2">
+                        <span class="is-size-5">&#8674;</span>
+                        I plan to ban nobody. <br />
+                        <span class="pl-5"
+                            >But if you can&apos;t access the site</span
+                        >
+
+                        <a
+                            class="has-text-white"
+                            href="https://github.com/baseplate-admin/animeCore/"
+                            >submit an issue</a
+                        >.
+                    </p>
+                </details>
+
+                <details>
+                    <summary class="has-text-white pt-2">
+                        How do I set an avatar ?
+                    </summary>
+                    <p class="has-text-white pl-4 pt-2">
+                        <span class="is-size-5">&#8674;</span>
+                        You can set your own avatar by going to <br />
+                        <span class="pl-5"
+                            ><a
+                                class="has-text-white"
+                                href="https://www.libravatar.org/"
+                                >Libravatar</a
+                            >
+                            and opening an account with</span
+                        >
+                        <br />
+                        <span class="pl-5">
+                            {#<!--prettier-ignore-->#}
+                            {% if request.user.is_authenticated %}
+
+                            <strong class="has-text-white"
+                                >{{ request.user.email }}</strong
+                            >
+                            {#<!--prettier-ignore-->#}
+                            {% else %}
+                                the mail you used to open an
+                                account in this site. 
+                            {% endif %}
+                        </span>
+                    </p>
+                </details>
+                <details>
+                    <summary class="has-text-white pt-2">
                         Where do you get the contents from?
                     </summary>
                     <p class="pl-4 pt-2 has-text-white">
                         <span class="is-size-5">&#8674;</span> Mostly from
-                        <a href="https://nyaa.si">nyaa</a>
+                        <a class="has-text-white" href="https://nyaa.si"
+                            >nyaa</a
+                        >
                     </p>
                 </details>
                 <details>
@@ -83,7 +141,9 @@
                             feature.</span
                         >
                         <br /><span class="pl-5"> Since the code is </span>
-                        <a href="https://github.com/baseplate-admin/animeCore/"
+                        <a
+                            class="has-text-white"
+                            href="https://github.com/baseplate-admin/animeCore/"
                             >open source</a
                         >
                         ,<br /><span class="pl-5"
@@ -147,6 +207,7 @@
                         <span class="pl-5">
                             So maybe you can make
                             <a
+                                class="has-text-white"
                                 href="https://github.com/baseplate-admin/animeCore/"
                                 >this</a
                             >
@@ -154,24 +215,7 @@
                         </span>
                     </p>
                 </details>
-                <details>
-                    <summary class="has-text-white pt-2">
-                        How do I get banned ?
-                    </summary>
-                    <p class="has-text-white pl-4 pt-2">
-                        <span class="is-size-5">&#8674;</span>
-                        I plan to ban nobody. But if you can&apos;t access the
-                        site
-                        <br />
 
-                        <span class="pl-5"
-                            ><a
-                                href="https://github.com/baseplate-admin/animeCore/"
-                                >submit an issue</a
-                            ></span
-                        >
-                    </p>
-                </details>
                 <details>
                     <summary class="has-text-white pt-2">
                         What tech stack did you choose for this site?
