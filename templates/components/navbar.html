@@ -281,6 +281,11 @@
                             })
                         }
                     "
+                    @click.prevent="
+                        async () => {
+                            window.location = '{% url 'manga_home_page' %}'
+                        }
+                    "
                 >
                     <ion-icon
                         name="images-outline"
@@ -319,7 +324,7 @@
                     "
                     @click.prevent="
                         async () => {
-                            window.location = '/ost/'
+                            window.location = '{% url 'ost_home_page' %}'
                         }
                     "
                 >
@@ -361,7 +366,7 @@
                 "
                     @click.prevent="
                     async () => {
-                        window.location = '/shots/'
+                        window.location = '{% url 'shots_home_page' %}'
                     }
                 "
                 >
