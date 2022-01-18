@@ -7,7 +7,6 @@ name = "pypi"
 # Django
 Django = {version="*", extras = ["argon2"] }
 whitenoise = {extras = ["brotli"], version = "*"}
-django-tinymce = "*"
 
 # Libravatar client
 libravatar-py = "*"

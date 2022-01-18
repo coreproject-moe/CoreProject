@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     # Apges
     "pages.home",
     "pages.authentication",
-    "pages.faq",
     "pages.users",
 ]
 
