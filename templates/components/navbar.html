@@ -595,7 +595,8 @@
                     "
                 >
                     <a
-                        href="{% url 'api_avatar' request.user.id %}?s=64"
+                        href="{% url 'user_edit_info_page' %}"
+                        data-href="{% url 'api_avatar' request.user.id %}?s=64"
                         class="progressive replace"
                         style="border-radius: 9999px"
                     >
@@ -671,7 +672,8 @@
                                 "
                                 >
                                     <a
-                                        href="{% url 'api_avatar' request.user.id %}?s=96"
+                                        href="{% url 'user_edit_info_page' %}"
+                                        data-href="{% url 'api_avatar' request.user.id %}?s=96"
                                         class="progressive replace"
                                         style="border-radius: 9999px"
                                     >
