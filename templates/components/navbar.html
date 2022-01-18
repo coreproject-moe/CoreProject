@@ -250,7 +250,7 @@
                     @mouseenter="
                     async () => {
                         anime({
-                            targets: '.animejs__image__icon',
+                            targets: '.animejs__shots__icon',
                             color: '#e50000',
                         });
                     
@@ -259,7 +259,7 @@
                     @mouseleave="
                     async () => {
                         anime({
-                            targets: '.animejs__image__icon',
+                            targets: '.animejs__shots__icon',
                             color: '#d9d9d9',
                         });
                     }
@@ -271,8 +271,8 @@
                 "
                 >
                     <ion-icon
-                        name="images-outline"
-                        class="animejs__image__icon"
+                        name="aperture-outline"
+                        class="animejs__shots__icon"
                     ></ion-icon>
                     <p :class="$store.is_mobile ? 'pt-2 nav-icon-button' : '' ">
                         <span class="is-hidden-touch">&nbsp;</span>
