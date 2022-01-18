@@ -26,6 +26,7 @@ urlpatterns = [
     path("home/", include("pages.home.urls")),
     path("authentication/", include("pages.authentication.urls")),
     path("user/", include("pages.users.urls")),
+    path('anime/',include("pages.anime.urls")),
     # Api
     path("api/v1/avatar/", include("api.v1.avatar.urls")),
 ]

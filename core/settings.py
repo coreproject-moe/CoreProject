@@ -40,13 +40,13 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     # 3rd party
-    "tinymce",
     # Custom stuff
     "custom.user",
     # Apges
     "pages.home",
     "pages.authentication",
     "pages.users",
+    "pages.anime",
 ]
 
 MIDDLEWARE = [

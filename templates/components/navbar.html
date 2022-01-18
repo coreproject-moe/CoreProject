@@ -201,7 +201,7 @@
                     "
                     @click.prevent="
                         async () => {
-                            window.location = '/'
+                            window.location = '{% url 'home_page' %}'
                         }
                     "
                 >
@@ -242,7 +242,7 @@
                     "
                     @click.prevent="
                         async () => {
-                            window.location = '/anime/'
+                            window.location = '{% url 'anime_home_page' %}'
                         }
                     "
                 >
