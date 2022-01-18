@@ -39,14 +39,16 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
-    # 3rd party
     # Custom stuff
     "custom.user",
-    # Apges
-    "pages.home",
+    # Pages
     "pages.authentication",
-    "pages.users",
     "pages.anime",
+    "pages.home",
+    "pages.manga",
+    "pages.ost",
+    "pages.shots",
+    "pages.users",
 ]
 
 MIDDLEWARE = [
@@ -184,4 +186,4 @@ else:
 
 # Override the login url
 # https://stackoverflow.com/questions/49532708/custom-login-url-in-django#49532812
-LOGIN_URL = 'login_page'
+LOGIN_URL = "login_page"
