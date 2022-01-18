@@ -26,11 +26,8 @@ urlpatterns = [
     path("home/", include("pages.home.urls")),
     path("authentication/", include("pages.authentication.urls")),
     path("user/", include("pages.users.urls")),
-    path("faq/", include("pages.faq.urls")),
     # Api
     path("api/v1/avatar/", include("api.v1.avatar.urls")),
-    # Custom
-    path("tinymce/", include("tinymce.urls")),
 ]
 
 if settings.DEBUG:
