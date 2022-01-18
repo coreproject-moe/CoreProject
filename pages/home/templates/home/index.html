@@ -1,16 +1,32 @@
 {% extends 'base.html' %}
+<!--prettier-ignore-->
 
+{% load static %}
 <!--prettier-ignore-->
 {% block body %}
     {% include 'components/navbar.html' %}
-<link
-    rel="stylesheet"
-    href="https://unpkg.com/swiper@7/swiper-bundle.min.css"
-/>
-
-<script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="{% static 'vendor/swiper/swiper.min.css' %}" />
+<link rel="stylesheet" href="{% static 'vendor/swiper/theme.css' %}" />
+<script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
 <!-- Slider main container -->
-<div class="swiper">
+<div
+    class="swiper"
+    x-init="async () => {
+        const swiper = new Swiper('.swiper', {
+            // Optional parameters
+            direction: 'horizontal',
+            loop: true,
+            autoplay: {
+                delay: 5000,
+            },
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
+    }"
+>
     <!-- Additional required wrapper -->
     <div class="swiper-wrapper">
         <!-- Slides -->
@@ -38,19 +54,5 @@
         height: 500px;
     }
 </style>
-<script>
-    const swiper = new Swiper('.swiper', {
-        // Optional parameters
-        direction: 'horizontal',
-        loop: true,
-        autoplay: {
-            delay: 5000,
-        },
-        // Navigation arrows
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-    });
-</script>
+
 {% endblock %}
