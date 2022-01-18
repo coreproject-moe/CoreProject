@@ -1,9 +1,8 @@
 # WIP
 
  an example :
- ![2](https://user-images.githubusercontent.com/61817579/149886493-7acc9dea-b2c9-400a-9992-afbf44ece72d.png)
-
- ![1](https://user-images.githubusercontent.com/61817579/149886503-b5ed3c22-0859-4b4c-b835-ad4a1380a9f3.png)
+![1](https://user-images.githubusercontent.com/61817579/149992480-f29a561d-2a9e-47f2-8bc0-ff5df7cbc748.PNG)
+![2](https://user-images.githubusercontent.com/61817579/149992481-65cf82ea-c4aa-41bd-a2e1-a747bfa29537.PNG)
 
 
 
