@@ -26,7 +26,10 @@ urlpatterns = [
     path("home/", include("pages.home.urls")),
     path("authentication/", include("pages.authentication.urls")),
     path("user/", include("pages.users.urls")),
-    path('anime/',include("pages.anime.urls")),
+    path("anime/", include("pages.anime.urls")),
+    path("manga/", include("pages.manga.urls")),
+    path("ost/", include("pages.ost.urls")),
+    path("shots/", include("pages.shots.urls")),
     # Api
     path("api/v1/avatar/", include("api.v1.avatar.urls")),
 ]
