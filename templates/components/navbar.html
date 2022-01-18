@@ -233,7 +233,47 @@
                         OST
                     </p>
                 </button>
-
+                <button
+                    class="navbar-item button is-ghost is-rounded ml-2 is-unselectable"
+                    x-init="
+                    async () => {
+                        if ( '{{ request.path }}'.toLowerCase().includes('shots') ) {
+                            $el.classList.add('hover')
+                        }
+                    }
+                "
+                    @mouseenter="
+                    async () => {
+                        anime({
+                            targets: '.animejs__image__icon',
+                            color: '#e50000',
+                        });
+                    
+                    }
+                "
+                    @mouseleave="
+                    async () => {
+                        anime({
+                            targets: '.animejs__image__icon',
+                            color: '#d9d9d9',
+                        });
+                    }
+                "
+                    @click.prevent="
+                    async () => {
+                        window.location = '/shots/'
+                    }
+                "
+                >
+                    <ion-icon
+                        name="images-outline"
+                        class="animejs__image__icon"
+                    ></ion-icon>
+                    <p :class="$store.is_mobile ? 'pt-2 nav-icon-button' : '' ">
+                        <span class="is-hidden-touch">&nbsp;</span>
+                        Shots
+                    </p>
+                </button>
                 <div class="control has-icons-left mt-3 ml-4 is-hidden-touch">
                     <input
                         class="input has-background-black has-text-white search__input"
