@@ -98,7 +98,7 @@
     }
 </style>
 <nav
-    class="navbar container is-clipped"
+    class="navbar container is-clipped is-fixed-top"
     role="navigation"
     aria-label="main navigation"
     x-cloak
@@ -784,3 +784,8 @@
         </div>
     </div>
 </nav>
+<script>
+    // https://bulma.io/documentation/components/navbar/#fixed-navbar
+    const HTMLTAG = document.getElementsByTagName('html')[0]; // '0' to assign the first (and only `HTML` tag)
+    HTMLTAG.setAttribute('class', 'has-navbar-fixed-top');
+</script>
