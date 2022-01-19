@@ -2,7 +2,60 @@
 <!--prettier-ignore-->
 
 {% block body %}
-<!--prettier-ignore-->
-
-{% include 'components/navbar.html' %}
-{% endblock  %}
+<style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(12em, 1fr));
+        gap: 2em;
+    }
+</style>
+{#<!--prettier-ignore-->#}
+    {% include 'components/navbar.html' %}
+<div class="container">
+    <div class="box pt-6" style="background-color: black">
+        <div class="grid-container">
+            {% for i in '0123456789' %}
+            <div class="card" style="background-color: black !important">
+                <div class="card-image has-background-black">
+                    <figure class="image">
+                        <img
+                            style="
+                                border-top-left-radius: 10px;
+                                border-top-right-radius: 10px;
+                            "
+                            src="https://cdn.myanimelist.net/images/anime/6/73245.jpg"
+                            alt="Placeholder image"
+                        />
+                    </figure>
+                </div>
+                <div
+                    class="card-content has-background-black-bis"
+                    style="
+                        border-bottom-left-radius: 10px;
+                        border-bottom-right-radius: 10px;
+                    "
+                >
+                    <div class="media">
+                        <div class="media-content">
+                            <p class="title is-4 has-text-white">One Piece</p>
+                            <div class="field is-grouped is-grouped-multiline">
+                                <div class="control">
+                                    <div class="tags has-addons">
+                                        <span class="tag is-dark heading"
+                                            >sub</span
+                                        >
+                                        <span class="tag is-info heading"
+                                            >dub</span
+                                        >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
