@@ -14,11 +14,18 @@
 {#<!--prettier-ignore-->#}
     {% include 'components/navbar.html' %}
 <div class="container">
-    <div class="box" style="background-color: black">
-        <p class="title is-size-5 pt-3 has-text-white">Recent Animes:</p>
-
+    <p class="title is-size-5 pt-6 has-text-white">
+        <span class="pr-3"
+            ><ion-icon
+                name="rocket-outline"
+                style="transform: translateY(4px)"
+            ></ion-icon
+        ></span>
+        Recent Animes :
+    </p>
+    <div class="box" style="background-color: black; border: 1px solid white">
         <div class="grid-container">
-            {% for i in '0123456789' %}
+            {% for i in '01234' %}
             <div class="card" style="background-color: black !important">
                 <div class="card-image has-background-black">
                     <figure class="image">
