@@ -14,7 +14,9 @@
 {#<!--prettier-ignore-->#}
     {% include 'components/navbar.html' %}
 <div class="container">
-    <div class="box pt-6" style="background-color: black">
+    <div class="box" style="background-color: black">
+        <p class="title is-size-5 pt-3 has-text-white">Recent Animes:</p>
+
         <div class="grid-container">
             {% for i in '0123456789' %}
             <div class="card" style="background-color: black !important">
@@ -29,7 +31,7 @@
                             class="progressive replace"
                         >
                             <img
-                                src="{% static 'images/placeholder/225x350.png' %}"
+                                src="{% static 'images/placeholder/225x350.avif' %}"
                                 class="preview"
                                 alt="image"
                             />
