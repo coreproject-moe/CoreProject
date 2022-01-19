@@ -37,3 +37,8 @@ urlpatterns = [
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+# Leave everything to react.
+# https://stackoverflow.com/questions/40826295/react-routing-and-django-url-conflict
+# re_path(r"^(?:.*)/?$", anime_home_page, name="anime_home_page"),
