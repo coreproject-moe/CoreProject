@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 <!--prettier-ignore-->
+{% load static %}
+<!--prettier-ignore-->
 
 {% block body %}
 <style>
@@ -18,14 +20,20 @@
             <div class="card" style="background-color: black !important">
                 <div class="card-image has-background-black">
                     <figure class="image">
-                        <img
+                        <a
                             style="
                                 border-top-left-radius: 10px;
                                 border-top-right-radius: 10px;
                             "
-                            src="https://cdn.myanimelist.net/images/anime/6/73245.jpg"
-                            alt="Placeholder image"
-                        />
+                            data-href="https://cdn.myanimelist.net/images/anime/6/73245.jpg"
+                            class="progressive replace"
+                        >
+                            <img
+                                src="{% static 'images/placeholder/225x350.png' %}"
+                                class="preview"
+                                alt="image"
+                            />
+                        </a>
                     </figure>
                 </div>
                 <div
