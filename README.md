@@ -1,3 +1,7 @@
+# Looking for contributors.
+
+The project is at it's infancy. Pull requests are welcomed.
+
 # WIP
 
  an example :
@@ -6,6 +10,3 @@
 
 
 
-# Looking for contributors.
-
-The project is at it's infancy. Pull requests are welcomed.
