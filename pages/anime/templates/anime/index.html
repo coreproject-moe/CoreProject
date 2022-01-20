@@ -6,135 +6,26 @@
 {% block body %}
 <link rel="stylesheet" href="{% static 'vendor/swiper/swiper.min.css' %}" />
 <link rel="stylesheet" href="{% static 'vendor/swiper/theme.css' %}" />
-<style>
-    .grid-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(12em, 1fr));
-    }
-</style>
+
 <style>
     .swiper {
         width: 100%;
         height: 100%;
     }
-
-    .swiper-slide {
-        text-align: center;
-        /* Center slide text vertically */
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        -webkit-justify-content: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        -webkit-align-items: center;
-        align-items: center;
-        height: 36em;
-    }
 </style>
 {#<!--prettier-ignore-->#}
     {% include 'components/navbar.html' %}
-<div class="container">
-    <p class="title is-size-5 pt-6 has-text-white">
-        <span class="pr-3"
-            ><ion-icon
-                name="rocket-outline"
-                style="transform: translateY(4px)"
-            ></ion-icon
-        ></span>
-        Recent Animes :
-    </p>
-    <div class="box" style="background-color: black; border: 1px solid white">
-        <div class="grid-container">
-            <!-- Swiper -->
-            <div class="swiper mySwiper">
-                <div class="swiper-wrapper">
-                    {% for i in '0123456789' %}
-                    <div class="swiper-slide">
-                        <div
-                            class="card"
-                            style="background-color: black !important"
-                        >
-                            <div class="card-image has-background-black">
-                                <figure class="image">
-                                    <a
-                                        style="
-                                            border-top-left-radius: 10px;
-                                            border-top-right-radius: 10px;
-                                        "
-                                        data-href="https://cdn.myanimelist.net/images/anime/6/73245.jpg"
-                                        class="progressive replace"
-                                    >
-                                        <img
-                                            src="{% static 'images/placeholder/225x350.avif' %}"
-                                            class="preview"
-                                            alt="image"
-                                        />
-                                    </a>
-                                </figure>
-                            </div>
-                            <div
-                                class="card-content has-background-black-bis"
-                                style="
-                                    border-bottom-left-radius: 10px;
-                                    border-bottom-right-radius: 10px;
-                                "
-                            >
-                                <div class="media">
-                                    <div class="media-content is-clipped">
-                                        <p class="title is-4 has-text-white">
-                                            One Piece
-                                        </p>
-                                        <p class="subtitle is-6 has-text-white">
-                                            Episodes : <span>&infin;</span>
-                                            <br />
-                                            Duration : total.secnds <br />
-                                        </p>
-                                        <div
-                                            class="field is-grouped is-grouped-multiline"
-                                        >
-                                            <div class="control">
-                                                <div class="tags has-addons">
-                                                    <span
-                                                        class="tag is-dark heading"
-                                                        >sub</span
-                                                    >
-                                                    <span
-                                                        class="tag is-info heading"
-                                                        >dub</span
-                                                    >
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-                <div class="swiper-pagination"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Swiper JS -->
-    <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
-
-    <!-- Initialize Swiper -->
-    <script>
-        var swiper = new Swiper('.mySwiper', {
+<div
+    class="container"
+    x-init="async () => {
+        var swiper = new Swiper('.recent__animes__swiper', {
             // Mobile
             slidesPerView: 2,
             spaceBetween: 10,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
+            mousewheel: {
+                invert: true,
             },
+        
             breakpoints: {
                 // when window width is >= 769px
                 // Tablet
@@ -150,6 +41,88 @@
                 },
             },
         });
-    </script>
+    }"
+>
+    <p class="title is-size-5 pt-6 has-text-white">
+        <span class="pr-3 pl-3"
+            ><ion-icon
+                name="rocket-outline"
+                style="transform: translateY(4px)"
+            ></ion-icon
+        ></span>
+        Recent Animes :
+    </p>
+    <div class="box" style="background-color: black; border: 1px solid white">
+        <div class="swiper recent__animes__swiper">
+            <div class="swiper-wrapper">
+                {% for i in '0123456789' %}
+                <div class="swiper-slide">
+                    <div
+                        class="card"
+                        style="background-color: black !important"
+                    >
+                        <div class="card-image has-background-black">
+                            <figure class="image">
+                                <a
+                                    style="
+                                        border-top-left-radius: 10px;
+                                        border-top-right-radius: 10px;
+                                    "
+                                    data-href="https://cdn.myanimelist.net/images/anime/6/73245.jpg"
+                                    class="progressive replace"
+                                >
+                                    <img
+                                        src="{% static 'images/placeholder/225x350.avif' %}"
+                                        class="preview"
+                                        alt="image"
+                                    />
+                                </a>
+                            </figure>
+                        </div>
+                        <div
+                            class="card-content has-background-black-bis"
+                            style="
+                                border-bottom-left-radius: 10px;
+                                border-bottom-right-radius: 10px;
+                            "
+                        >
+                            <div class="media">
+                                <div class="media-content is-clipped">
+                                    <p class="title is-4 has-text-white">
+                                        One Piece
+                                    </p>
+                                    <p class="subtitle is-6 has-text-white">
+                                        Episodes : <span>&infin;</span>
+                                        <br />
+                                        Duration : total.secnds <br />
+                                    </p>
+                                    <div
+                                        class="field is-grouped is-grouped-multiline"
+                                    >
+                                        <div class="control">
+                                            <div class="tags has-addons">
+                                                <span
+                                                    class="tag is-dark heading"
+                                                    >sub</span
+                                                >
+                                                <span
+                                                    class="tag is-info heading"
+                                                    >dub</span
+                                                >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
 </div>
 {% endblock %}
