@@ -4,11 +4,39 @@
 <!--prettier-ignore-->
 
 {% block body %}
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 <style>
     .grid-container {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(12em, 1fr));
         gap: 2em;
+    }
+</style>
+<style>
+    .swiper {
+        width: 100%;
+        height: 100%;
+    }
+
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+        height: 15em;
     }
 </style>
 {#<!--prettier-ignore-->#}
@@ -25,58 +53,71 @@
     </p>
     <div class="box" style="background-color: black; border: 1px solid white">
         <div class="grid-container">
-            {% for i in '01234' %}
-            <div class="card" style="background-color: black !important">
-                <div class="card-image has-background-black">
-                    <figure class="image">
-                        <a
-                            style="
-                                border-top-left-radius: 10px;
-                                border-top-right-radius: 10px;
-                            "
-                            data-href="https://cdn.myanimelist.net/images/anime/6/73245.jpg"
-                            class="progressive replace"
-                        >
-                            <img
-                                src="{% static 'images/placeholder/225x350.avif' %}"
-                                class="preview"
-                                alt="image"
-                            />
-                        </a>
-                    </figure>
-                </div>
-                <div
-                    class="card-content has-background-black-bis"
-                    style="
-                        border-bottom-left-radius: 10px;
-                        border-bottom-right-radius: 10px;
-                    "
-                >
-                    <div class="media">
-                        <div class="media-content is-clipped">
-                            <p class="title is-4 has-text-white">One Piece</p>
-                            <p class="subtitle is-6 has-text-white">
-                                Episodes : <span>&infin;</span> <br />
-                                Duration : total.secnds <br />
-                            </p>
-                            <div class="field is-grouped is-grouped-multiline">
-                                <div class="control">
-                                    <div class="tags has-addons">
-                                        <span class="tag is-dark heading"
-                                            >sub</span
-                                        >
-                                        <span class="tag is-info heading"
-                                            >dub</span
-                                        >
+            <!-- Swiper -->
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    {% for i in '0123456789' %}
+                    <div class="swiper-slide">
+                        <div class="card">
+                            <div class="card-image">
+                                <figure class="image is-4by5">
+                                    <img
+                                        src="https://bulma.io/images/placeholders/1280x960.png"
+                                        alt="Placeholder image"
+                                    />
+                                </figure>
+                            </div>
+                            <div class="card-content">
+                                <div class="media">
+                                    <div class="media-left">
+                                        <figure class="image is-48x48">
+                                            <img
+                                                src="https://bulma.io/images/placeholders/96x96.png"
+                                                alt="Placeholder image"
+                                            />
+                                        </figure>
                                     </div>
+                                    <div class="media-content">
+                                        <p class="title is-4">John Smith</p>
+                                        <p class="subtitle is-6">@johnsmith</p>
+                                    </div>
+                                </div>
+
+                                <div class="content">
+                                    Lorem ipsum dolor sit amet, consectetur
+                                    adipiscing elit. Phasellus nec iaculis
+                                    mauris. <a>@bulmaio</a>.
+                                    <a href="#">#css</a>
+                                    <a href="#">#responsive</a>
+                                    <br />
+                                    <time datetime="2016-1-1"
+                                        >11:09 PM - 1 Jan 2016</time
+                                    >
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
+                <div class="swiper-pagination"></div>
             </div>
-            {% endfor %}
         </div>
     </div>
+
+    <!-- Swiper JS -->
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper('.mySwiper', {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            freeMode: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+        });
+    </script>
 </div>
 {% endblock %}
