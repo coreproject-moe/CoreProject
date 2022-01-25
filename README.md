@@ -2,6 +2,12 @@
 
 The project is at it's infancy. Pull requests are welcomed.
 
+# Things to do :
+
+* Submit designs ( In PNG format ) ( In Issues )
+* Suggest Libraries.
+
+
 # WIP
 
  an example :
