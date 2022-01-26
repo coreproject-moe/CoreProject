@@ -8,5 +8,9 @@ def anime_home_page(request) -> HttpResponse:
     return render(request, "anime/index.html")
 
 
+def anime_details_page(request, anime_name) -> HttpResponse:
+    return render(request, "anime/[anime_details]/index.html")
+
+
 def anime_name_and_episode_page(request, anime_name, anime_episode) -> HttpResponse:
     pass

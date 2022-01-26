@@ -5,3 +5,7 @@ from django.db import models
 
 class AnimeDetailsPage(models.Model):
     anime_picture = models.ImageField()
+
+
+class AnimeEpisode(models.Model):
+    anime_episode = models.FileField()
