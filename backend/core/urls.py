@@ -19,14 +19,20 @@ from django.urls import include
 from django.conf.urls.static import static
 from django.conf import settings
 
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
 urlpatterns = [
     path("admin/", admin.site.urls),
-        # Pages
-
+    # Pages
     path("user/", include("pages.users.urls")),
-
-        # Api
+    # Api
     path("api/v1/avatar/", include("api.v1.avatar.urls")),
+    # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html#installation
+    path("api/v1/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/v1/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
