@@ -53,12 +53,18 @@ async def login_page(request) -> HttpResponse:
 async def logout(request) -> HttpResponse:
     await auth_logout(request)
 
+    response = redirect("/")
     next_url = request.GET.get("next", None)
+
     # If theres next url redirect there
     if next_url:
-        return redirect(next_url)
+        response = redirect(next_url)
 
-    return redirect(reverse("home_page"))
+    # Thanks Stackoverflow. You guys rock
+    # https://stackoverflow.com/questions/1275357/django-logoutredirect-to-home-page-delete-cookie
+
+    response.delete_cookie("csrftoken")
+    return response
 
 
 async def register_page(request) -> HttpResponse:
