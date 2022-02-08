@@ -1,0 +1,22 @@
+/* Custom color for tooltip */
+
+.tippy-box[data-theme~='black'] {
+    color: white !important;
+    background-color: black !important;
+    border: 1px solid #ffffffcf !important;
+}
+
+.tippy-box[data-theme~='black'][data-placement^='top'] > .tippy-arrow::before {
+    border-top-color: rgba(255, 255, 255, 0.9);
+}
+.tippy-box[data-theme~='black'][data-placement^='bottom']
+    > .tippy-arrow::before {
+    border-bottom-color: rgba(255, 255, 255, 0.9);
+}
+.tippy-box[data-theme~='black'][data-placement^='left'] > .tippy-arrow::before {
+    border-left-color: rgba(255, 255, 255, 0.9);
+}
+.tippy-box[data-theme~='black'][data-placement^='right']
+    > .tippy-arrow::before {
+    border-right-color: rgba(255, 255, 255, 0.9);
+}
