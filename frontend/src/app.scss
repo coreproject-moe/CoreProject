@@ -1,0 +1,47 @@
+:root {
+	--html-color: black;
+	--navbar-color: black;
+	--border-color: #353333;
+	--button-border-color: hsl(0, 0%, 20%);
+	--button-color-hover: hsl(0, 0%, 5%);
+	--error-message-color: #ff0000;
+}
+html {
+	background-color: var(--html-color) !important;
+	scrollbar-width: thin;
+}
+ion-icon {
+	visibility: inherit !important;
+	pointer-events: none;
+}
+body {
+	overflow-x: hidden;
+}
+
+// Bulma override
+.has-text-link-override {
+	color: #1d9bf0 !important;
+}
+
+// Tippy theme
+@import 'tippy.js/dist/tippy.css';
+@import 'tippy.js/animations/scale.css';
+
+.tippy-box[data-theme~='black'] {
+	color: white !important;
+	background-color: black !important;
+	border: 1px solid #ffffffcf !important;
+}
+
+.tippy-box[data-theme~='black'][data-placement^='top'] > .tippy-arrow::before {
+	border-top-color: rgba(255, 255, 255, 0.9);
+}
+.tippy-box[data-theme~='black'][data-placement^='bottom'] > .tippy-arrow::before {
+	border-bottom-color: rgba(255, 255, 255, 0.9);
+}
+.tippy-box[data-theme~='black'][data-placement^='left'] > .tippy-arrow::before {
+	border-left-color: rgba(255, 255, 255, 0.9);
+}
+.tippy-box[data-theme~='black'][data-placement^='right'] > .tippy-arrow::before {
+	border-right-color: rgba(255, 255, 255, 0.9);
+}
