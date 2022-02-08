@@ -2,6 +2,12 @@
 
 The project is at it's infancy. Pull requests are welcomed.
 
+# Stack
+
+* Django
+* Svelte
+* Kivy  (Maybe)
+
 # Things to do :
 
 * Submit designs ( In PNG format ) ( In Issues )
