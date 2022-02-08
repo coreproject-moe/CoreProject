@@ -4,6 +4,8 @@
 
 	// Responsive helper
 	import { responsiveMode } from '$lib/store/responsive';
+	import { isUserAuthenticated, userInfo } from '$lib/store/users';
+
 	import { useEffect } from '$lib/hooks/useEffect';
 
 	// Handle Icons
@@ -14,6 +16,7 @@
 
 	import anime from 'animejs';
 	import tippy from 'tippy.js';
+	import { loginUrl, signupUrl } from '$lib/constants/restEndpoints';
 
 	onMount(async () => {
 		anime({
@@ -78,8 +81,6 @@
 		},
 		() => [arrowButtonTurned]
 	);
-
-	let user: boolean = true;
 </script>
 
 <nav class="navbar container is-clipped is-fixed-top">
@@ -193,7 +194,7 @@
 				<button
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
 						$responsiveMode === 'mobile' ? 'pl-2 pr-2' : 'ml-2'
-					} ${$page.path.includes('ost') ? 'hover' : ''}`}
+					} ${$page.path.includes('soundcore') ? 'hover' : ''}`}
 					on:mouseenter={async () => {
 						anime({
 							targets: '.animejs__music__icon',
@@ -207,13 +208,13 @@
 						});
 					}}
 					on:click|preventDefault={async () => {
-						goto('/ost');
+						goto('/soundcore');
 					}}
 				>
 					<ion-icon name="musical-note-outline" class="animejs__music__icon" />
 					<p class={$responsiveMode === 'mobile' ? 'pt-2 nav-icon-button' : ''}>
 						<span class="is-hidden-touch">&nbsp;</span>
-						OST
+						Soundcore
 					</p>
 				</button>
 				<button
@@ -349,13 +350,27 @@
 					/>
 				</button>
 			</div>
-			{#if !user}
+			{#if !$isUserAuthenticated}
 				<div class="navbar-item">
 					<div class="columns is-mobile is-centered">
 						<div class="column is-narrow">
 							<div class="buttons">
-								<button class="button is-ghost is-rounded"> Log in </button>
-								<button class="button is-ghost is-rounded"> Sign Up </button>
+								<button
+									class="button is-ghost is-rounded"
+									on:click={async () => {
+										goto(`${loginUrl}?next=${$page?.path}`);
+									}}
+								>
+									Log in
+								</button>
+								<button
+									class="button is-ghost is-rounded"
+									on:click={async () => {
+										goto(`${signupUrl}?next=${$page?.path}`);
+									}}
+								>
+									Sign Up
+								</button>
 							</div>
 						</div>
 					</div>

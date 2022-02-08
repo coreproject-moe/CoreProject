@@ -12,6 +12,7 @@ whitenoise = "*"
 # Pillow stuff
 pillow = "*"
 pillow-avif-plugin = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 black = "*"
