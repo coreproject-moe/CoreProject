@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
+django = {extras = ["argon2"], version = "*"}
 djangorestframework = "*"
 djangorestframework-simplejwt = "*"
 libravatar-py = "*"
