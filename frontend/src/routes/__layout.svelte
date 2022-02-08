@@ -1,9 +1,5 @@
 <script lang="ts">
-	// Bulma import
-	import 'bulma/bulma.sass';
-	// Tooltip extension
-	import '@creativebulma/bulma-tooltip/dist/bulma-tooltip.css';
-	// Override the css
+	// Main SCSS import
 	import '../app.scss';
 
 	// Responsive helper
