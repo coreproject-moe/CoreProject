@@ -20,8 +20,8 @@ def run_redis():
 
 
 def run_django():
-    os.system("python .\\manage.py runserver")
-
+    # os.system("python .\\manage.py runserver")
+    os.system('uvicorn core.asgi:application')
 
 def run_banken():
     os.system("python .\\scripts\\banken.py")

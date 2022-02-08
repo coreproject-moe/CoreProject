@@ -8,9 +8,30 @@
 
 <section class="hero is-fullheight-with-navbar">
     <div class="hero-body is-flex-direction-column">
-        <div class="columns is-mobile">
-            <div class="column is-2">First column</div>
-            <div class="column">Second column</div>
+        <div
+            class="columns is-mobile"
+            :class="$store.is_mobile ? 'is-flex-direction-column' : 'is-flex-direction-row'"
+        >
+            <div class="column is-6">
+                <table class="table is-bordered">
+                    <tbody>
+                        <tr>
+                            <td class="is-size-7">Name :</td>
+                            <td>{ anime.name }</td>
+                        </tr>
+                        <tr>
+                            <td>Hello world</td>
+                        </tr>
+                        <tr>
+                            <td>Hello world</td>
+                        </tr>
+                        <tr>
+                            <td>Hello world</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="column is-narrow">Second column</div>
         </div>
     </div>
 </section>
