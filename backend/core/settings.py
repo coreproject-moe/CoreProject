@@ -41,8 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Rest Framework
     "rest_framework",
-    "rest_framework_simplejwt",
-    "rest_framework_simplejwt.token_blacklist",  # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/blacklist_app.html
+    "rest_framework.authtoken",
     "corsheaders",
     # Custom Stuff
     "custom.user",

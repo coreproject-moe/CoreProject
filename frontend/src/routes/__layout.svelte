@@ -81,6 +81,7 @@
 		},
 		() => [arrowButtonTurned]
 	);
+	console.log($userInfo);
 </script>
 
 <nav class="navbar container is-clipped is-fixed-top">
