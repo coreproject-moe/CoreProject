@@ -32,12 +32,6 @@ urlpatterns = [
     path("authentication/", include("pages.authentication.urls")),
     # Api
     path("api/v1/avatar/", include("api.v1.avatar.urls")),
-    # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html#installation
-    path("api/v1/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
-    path("api/v1/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
-    path(
-        "api/v1/token/blacklist/", TokenBlacklistView.as_view(), name="token_blacklist"
-    ),
     # Rest endpoints
     path("api/v1/users/", include("api.v1._user.urls")),
 ]

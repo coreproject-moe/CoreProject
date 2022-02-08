@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 django = {extras = ["argon2"], version = "*"}
 djangorestframework = "*"
-djangorestframework-simplejwt = "*"
 libravatar-py = "*"
 whitenoise = "*"
 # Pillow stuff

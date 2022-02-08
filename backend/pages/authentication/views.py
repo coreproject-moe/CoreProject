@@ -16,6 +16,9 @@ from .services import (
     get_user_by_id,
     send_mail_function,
 )
+from rest_framework.authtoken.models import Token
+
+from asgiref.sync import sync_to_async
 
 # Create your views here.
 
@@ -36,16 +39,23 @@ async def login_page(request) -> HttpResponse:
             next_url = request.GET.get("next", None)
 
             # If theres next url redirect there
+            response = HttpResponse()
+
             if next_url:
-                return redirect(next_url)
+                response = redirect(next_url)
 
             if user:
-                return redirect(reverse("home_page"))
+                response = redirect("/")
 
-            elif not user:
-                messages.warning(
-                    request, "No such user | Check your username and password please"
-                )
+            # https://www.django-rest-framework.org/api-guide/authentication/
+            response.set_cookie(
+                "Authorization",
+                await sync_to_async(Token.objects.create, thread_sensitive=True)(
+                    user=user
+                ),
+            )
+
+            return response
 
     return render(request, "authentication/login.html", {"form": form})
 
@@ -64,6 +74,9 @@ async def logout(request) -> HttpResponse:
     # https://stackoverflow.com/questions/1275357/django-logoutredirect-to-home-page-delete-cookie
 
     response.delete_cookie("csrftoken")
+    response.delete_cookie("sessionid")
+    response.delete_cookie("Authorization")
+
     return response
 
 
