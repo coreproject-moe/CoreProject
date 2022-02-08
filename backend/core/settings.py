@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "custom.user",
     # Pages
     "pages.users",
+    "pages.authentication",
 ]
 
 MIDDLEWARE = [
@@ -114,6 +115,16 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = "user.CustomUser"
 
+# Password hashers
+# https://docs.djangoproject.com/en/3.2/topics/auth/passwords/#using-argon2-with-django
+
+PASSWORD_HASHERS = [
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher",
+    "django.contrib.auth.hashers.BCryptSHA256PasswordHasher",
+]
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -153,3 +164,7 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     )
 }
+
+# Override the login url
+# https://stackoverflow.com/questions/49532708/custom-login-url-in-django#49532812
+LOGIN_URL = "login_page"
