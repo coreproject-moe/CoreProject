@@ -94,9 +94,9 @@
 		});
 	});
 
-	let arrowButtonTurned: boolean = false;
+	let arrowButtonTurned = false;
 
-	let navbarBurgerClosed: boolean = false;
+	let navbarBurgerClosed = false;
 	// Auto close the navbar Buger to close if its on mobile
 	$: navbarBurgerClosed = $responsiveMode === 'mobile';
 
@@ -144,7 +144,6 @@
 	<script src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 	<title>Home Page | CoreProject</title>
-
 </svelte:head>
 
 <nav class="navbar container is-clipped is-fixed-top">
