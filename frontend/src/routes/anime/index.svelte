@@ -21,20 +21,17 @@
 					<div class="card" style="background-color: black !important">
 						<div class="card-image has-background-black">
 							<figure class="image">
-								<!-- <a
+								<a
 									style="
                                         border-top-left-radius: 10px;
                                         border-top-right-radius: 10px;
                                     "
+									href="/anime/one_piece/"
 									data-href="https://cdn.myanimelist.net/images/anime/6/73245.jpg"
 									class="progressive replace"
 								>
-									<img
-                                        src="{% static 'images/placeholder/225x350.avif' %}"
-                                        class="preview"
-                                        alt="image"
-                                    /> 
-								</a>-->
+									<img src="placeholder-225x350.avif" class="preview" alt="" />
+								</a>
 							</figure>
 						</div>
 						<div
