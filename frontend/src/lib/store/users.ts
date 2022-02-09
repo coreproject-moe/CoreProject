@@ -2,30 +2,27 @@ import { writable } from 'svelte/store';
 import { userInfoUrl } from '$lib/constants/restEndpoints';
 import { getCookie } from '$lib/functions/getCookie';
 import { browser } from '$app/env';
-import axios from 'axios';
 
 export const isUserAuthenticated = writable(browser && getCookie('Authorization'));
 
-const getInfo = async () => {
-	const endPoint = userInfoUrl;
-
-	await axios
-		.get(endPoint, {
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-				Authorization: `Token ${getCookie('Authorization')}`
-			}
-		})
-		.then(async (res) => {
-			await userInfo.set(await res.data);
-		})
-		.catch((e) => {
-			console.error(`Cannot POST to server | Reason : ${e}`);
-		});
+const getData = () => {
+	fetch(userInfoUrl, {
+		method: 'GET',
+		headers: {
+			Accept: 'application/json',
+			'Content-Type': 'application/json',
+			Authorization: `Token ${browser && getCookie('Authorization')}`
+		}
+	}).then(async (res) => {
+		const data = await res.json();
+		userInfo.set(data);
+	});
 };
 
-export const userInfo = writable();
+getData();
+
+export const userInfo = writable({}, (set) => {
+	
+});
 
 // Finally works i guess, God i hate JS.
-browser && getInfo();
