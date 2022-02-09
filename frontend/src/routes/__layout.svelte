@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-	import { userInfoUrl } from '$lib/constants/restEndpoints';
+	import { userInfoUrl } from '$lib/constants/backend/restEndpoints';
 	import { browser } from '$app/env';
 	import { getCookie } from '$lib/functions/getCookie';
 
@@ -33,7 +33,14 @@
 	import { isUserAuthenticated } from '$lib/store/users';
 
 	import { useEffect } from '$lib/hooks/useEffect';
-	import { loginUrl, signupUrl, avatarUrl, userEditInfoUrl } from '$lib/constants/restEndpoints';
+	// Constants
+	import {
+		loginPageUrl,
+		signupPageUrl,
+		userEditInfoPageUrl
+	} from '$lib/constants/backend/pageUrlEndpoints';
+	import { avatarUrl } from '$lib/constants/backend/restEndpoints';
+	import { logoUrl } from '$lib/constants/backend/logoEndpoint';
 
 	// Handle Icons
 	import { onMount } from 'svelte';
@@ -43,7 +50,7 @@
 
 	import anime from 'animejs';
 	import tippy from 'tippy.js';
-	import dayjs  from 'dayjs';
+	import dayjs from 'dayjs';
 
 	onMount(async () => {
 		anime({
@@ -121,7 +128,7 @@
 <nav class="navbar container is-clipped is-fixed-top">
 	<div class="navbar-brand is-clipped">
 		<a class="navbar-item is-clickable" href="https://bulma.io">
-			<img src="/static/images/logos/logo.avif" width="112" height="28" />
+			<img src={logoUrl} alt="logo" width="112" height="28" />
 		</a>
 
 		<button
@@ -393,7 +400,7 @@
 								<button
 									class="button is-ghost is-rounded"
 									on:click={async () => {
-										goto(`${loginUrl}?next=${$page?.path}`);
+										goto(`${loginPageUrl}?next=${$page?.path}`);
 									}}
 								>
 									Log in
@@ -401,7 +408,7 @@
 								<button
 									class="button is-ghost is-rounded"
 									on:click={async () => {
-										goto(`${signupUrl}?next=${$page?.path}`);
+										goto(`${signupPageUrl}?next=${$page?.path}`);
 									}}
 								>
 									Sign Up
@@ -414,7 +421,7 @@
 				<figure
 					class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture"
 					on:click|preventDefault={async () => {
-						goto(userEditInfoUrl);
+						goto(userEditInfoPageUrl);
 					}}
 				>
 					<img class="image is-rounded" src={`${avatarUrl}/${userInfo.id}/?s=64`} alt="" />

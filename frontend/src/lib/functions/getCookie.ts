@@ -1,3 +1,6 @@
+// Mapped from Django docs
+// Check out https://docs.djangoproject.com/en/4.0/ref/csrf/
+
 export function getCookie(name: string): string {
 	let cookieValue = null;
 	if (document.cookie && document.cookie !== '') {
