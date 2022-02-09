@@ -1,5 +1,5 @@
 <script context="module" lang="ts">
-	import { userInfoUrl } from '$lib/constants/restEndpoints';
+	import { userInfoUrl } from '$lib/constants/backend/restEndpoints';
 	import { browser } from '$app/env';
 	import { getCookie } from '$lib/functions/getCookie';
 
@@ -24,7 +24,14 @@
 </script>
 
 <script lang="ts">
-	export let userInfo;
+	export let userInfo: {
+		first_name: string;
+		last_name: string;
+		email: string;
+		date_joined: string;
+		username: string;
+		id: number;
+	};
 	// Main SCSS import
 	import '../app.scss';
 
@@ -33,7 +40,14 @@
 	import { isUserAuthenticated } from '$lib/store/users';
 
 	import { useEffect } from '$lib/hooks/useEffect';
-	import { loginUrl, signupUrl, avatarUrl, userEditInfoUrl } from '$lib/constants/restEndpoints';
+
+	// Constants
+	import {
+		loginPageUrl,
+		signupPageUrl,
+		userEditInfoPageUrl
+	} from '$lib/constants/backend/pageUrlEndpoints';
+	import { avatarUrl } from '$lib/constants/backend/restEndpoints';
 
 	// Handle Icons
 	import { onMount } from 'svelte';
@@ -43,6 +57,7 @@
 
 	import anime from 'animejs';
 	import tippy from 'tippy.js';
+	import dayjs from 'dayjs';
 
 	onMount(async () => {
 		anime({
@@ -67,14 +82,23 @@
 			theme: 'black'
 		});
 		tippy('.tippyjs__avatar__picture', {
-			content: `<b>First Name</b> : ${userInfo?.first_name}<br/> <b>Last Name</b> : ${userInfo?.last_name}<br/> <b>Username</b> : ${userInfo?.username}<br/>  <b>Email</b> : ${userInfo?.email}<br/><b>Date Joined</b> : ${userInfo?.date_joined}<br/>`,
+			content: `<b>First Name</b> : ${userInfo?.first_name}<br/> <b>Last Name</b> : ${
+				userInfo?.last_name
+			}<br/> <b>Username</b> : ${userInfo?.username}<br/>  <b>Email</b> : ${
+				userInfo?.email
+			}<br/><b>Date Joined</b> : ${dayjs(userInfo?.date_joined).format(
+				'YYYY-MM-DD [at] HH:mm:ss'
+			)}<br/>`,
 			theme: 'black',
 			allowHTML: true
 		});
 	});
 
-	let navbarBurgerClosed: boolean = false;
 	let arrowButtonTurned: boolean = false;
+
+	let navbarBurgerClosed: boolean = false;
+	// Auto close the navbar Buger to close if its on mobile
+	$: navbarBurgerClosed = $responsiveMode === 'mobile';
 
 	// Listen to changes on arrow button
 	useEffect(
@@ -118,13 +142,15 @@
 	<!-- Import ionicons from CDN | No need to include it in our svelte app -->
 	<script src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 	<title>Home Page | CoreProject</title>
+
 </svelte:head>
 
 <nav class="navbar container is-clipped is-fixed-top">
 	<div class="navbar-brand is-clipped">
 		<a class="navbar-item is-clickable" href="https://bulma.io">
-			<img src="/static/images/logos/logo.avif" width="112" height="28" />
+			<img src="/logo.avif" alt="logo" width="112" height="28" />
 		</a>
 
 		<button
@@ -142,7 +168,7 @@
 		</button>
 	</div>
 
-	<div class="navbar-menu is-active">
+	<div class={`navbar-menu ${navbarBurgerClosed ? '' : 'is-active'}`}>
 		<div>
 			<div
 				class={`navbar-start mb-3 ${
@@ -396,7 +422,7 @@
 								<button
 									class="button is-ghost is-rounded"
 									on:click={async () => {
-										goto(`${loginUrl}?next=${$page?.path}`);
+										goto(`${loginPageUrl}?next=${$page?.path}`);
 									}}
 								>
 									Log in
@@ -404,7 +430,7 @@
 								<button
 									class="button is-ghost is-rounded"
 									on:click={async () => {
-										goto(`${signupUrl}?next=${$page?.path}`);
+										goto(`${signupPageUrl}?next=${$page?.path}`);
 									}}
 								>
 									Sign Up
@@ -414,13 +440,15 @@
 					</div>
 				</div>
 			{:else}
-				<figure
-					class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture"
-					on:click|preventDefault={async () => {
-						goto(userEditInfoUrl);
-					}}
-				>
-					<img class="image is-rounded" src={`${avatarUrl}/${userInfo.id}/?s=64`} alt="" />
+				<figure class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture">
+					<a
+						href={userEditInfoPageUrl}
+						data-href={`${avatarUrl}/${userInfo.id}/?s=64`}
+						class="progressive replace"
+						style="border-radius: 9999px"
+					>
+						<img class="is-rounded preview" alt="logo" src="/placeholder-64x64.avif" />
+					</a>
 				</figure>
 			{/if}
 		</div>
