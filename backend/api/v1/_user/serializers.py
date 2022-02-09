@@ -13,5 +13,5 @@ class UserSerializer(serializers.ModelSerializer):
             "username",
             "email",
             "user_permissions",
+            "date_joined",
         )
-
