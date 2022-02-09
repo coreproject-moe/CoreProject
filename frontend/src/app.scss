@@ -17,6 +17,8 @@ ion-icon {
 body {
 	overflow-x: hidden;
 }
+// Import progressive-image.css
+@import 'https://cdn.jsdelivr.net/npm/progressive-image.js/dist/progressive-image.css';
 
 // Fonts import
 @import url('https://cdn.jsdelivr.net/npm/typeface-ubuntu@1.1.13/index.min.css');
