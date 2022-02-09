@@ -19,7 +19,6 @@ class UserInfo(APIView):
     ]
 
     def get(self, request):
-        print(request.user)
         data = get_user_model().objects.get(id=request.user.id)
         serializer = UserSerializer(data, many=False)
         return Response(serializer.data)
