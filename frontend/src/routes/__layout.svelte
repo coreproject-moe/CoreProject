@@ -48,8 +48,11 @@
 		});
 	});
 
-	let navbarBurgerClosed: boolean = false;
 	let arrowButtonTurned: boolean = false;
+
+	let navbarBurgerClosed: boolean = false;
+	// Auto close the navbar Buger to close if its on mobile
+	$: navbarBurgerClosed = $responsiveMode === 'mobile';
 
 	// Listen to changes on arrow button
 	useEffect(
@@ -81,7 +84,6 @@
 		},
 		() => [arrowButtonTurned]
 	);
-	console.log($userInfo);
 </script>
 
 <nav class="navbar container is-clipped is-fixed-top">
@@ -105,7 +107,7 @@
 		</button>
 	</div>
 
-	<div class="navbar-menu is-active">
+	<div class={`navbar-menu ${navbarBurgerClosed ? '' : 'is-active'}`}>
 		<div>
 			<div
 				class={`navbar-start mb-3 ${
