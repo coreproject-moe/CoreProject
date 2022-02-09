@@ -41,8 +41,7 @@
 			theme: 'black'
 		});
 		tippy('.tippyjs__avatar__picture', {
-			content:
-				'<b>First Name</b> : Zarif<br/> <b>Last Name</b> : Ahnaf<br/> <b>Username</b> : baseplate-admin <br/>  <b>Email</b> : zarifahnaf@outlook.com<br/><b>Date Joined</b> : Jan. 18, 2022, 6:04 p.m.<br/> <b>Avatar Provider</b> : https://seccdn.libravatar.org<br/>',
+			// content: `<b>First Name</b> : ${userInfo?.first_name}<br/> <b>Last Name</b> : ${}<br/> <b>Username</b> : ${await $userInfo?.username}<br/>  <b>Email</b> : ${await $userInfo?.email}<br/><b>Date Joined</b> : Jan. 18, 2022, 6:04 p.m.<br/> <b>Avatar Provider</b> : https://seccdn.libravatar.org<br/>`,
 			theme: 'black',
 			allowHTML: true
 		});
@@ -81,7 +80,6 @@
 		},
 		() => [arrowButtonTurned]
 	);
-	console.log($userInfo);
 </script>
 
 <nav class="navbar container is-clipped is-fixed-top">
@@ -377,7 +375,7 @@
 					</div>
 				</div>
 			{:else}
-				<!-- <figure
+				<figure
 					class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture"
 					on:click|preventDefault={async () => {
 						goto('/user/edit_info/');
@@ -391,7 +389,7 @@
 					>
 						<img src="/api/v1/avatar/1/?s=64" class="is-rounded" alt="" />
 					</a>
-				</figure> -->
+				</figure>
 			{/if}
 		</div>
 	</div>
