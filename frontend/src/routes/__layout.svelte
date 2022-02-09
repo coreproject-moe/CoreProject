@@ -43,6 +43,7 @@
 
 	import anime from 'animejs';
 	import tippy from 'tippy.js';
+	import dayjs  from 'dayjs';
 
 	onMount(async () => {
 		anime({
@@ -67,7 +68,13 @@
 			theme: 'black'
 		});
 		tippy('.tippyjs__avatar__picture', {
-			content: `<b>First Name</b> : ${userInfo?.first_name}<br/> <b>Last Name</b> : ${userInfo?.last_name}<br/> <b>Username</b> : ${userInfo?.username}<br/>  <b>Email</b> : ${userInfo?.email}<br/><b>Date Joined</b> : ${userInfo?.date_joined}<br/>`,
+			content: `<b>First Name</b> : ${userInfo?.first_name}<br/> <b>Last Name</b> : ${
+				userInfo?.last_name
+			}<br/> <b>Username</b> : ${userInfo?.username}<br/>  <b>Email</b> : ${
+				userInfo?.email
+			}<br/><b>Date Joined</b> : ${dayjs(userInfo?.date_joined).format(
+				'YYYY-MM-DD [at] HH:mm:ss'
+			)}<br/>`,
 			theme: 'black',
 			allowHTML: true
 		});
