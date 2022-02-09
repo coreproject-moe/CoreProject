@@ -24,7 +24,14 @@
 </script>
 
 <script lang="ts">
-	export let userInfo;
+	export let userInfo: {
+		first_name: string;
+		last_name: string;
+		email: string;
+		date_joined: string;
+		username: string;
+		id: number;
+	};
 	// Main SCSS import
 	import '../app.scss';
 
@@ -33,6 +40,7 @@
 	import { isUserAuthenticated } from '$lib/store/users';
 
 	import { useEffect } from '$lib/hooks/useEffect';
+
 	// Constants
 	import {
 		loginPageUrl,
@@ -40,7 +48,6 @@
 		userEditInfoPageUrl
 	} from '$lib/constants/backend/pageUrlEndpoints';
 	import { avatarUrl } from '$lib/constants/backend/restEndpoints';
-	import { logoUrl } from '$lib/constants/backend/logoEndpoint';
 
 	// Handle Icons
 	import { onMount } from 'svelte';
@@ -125,10 +132,22 @@
 	);
 </script>
 
+<svelte:head>
+	<!-- Import progressive image | It works seperately from svelte app  -->
+	<script
+		defer
+		src="https://cdn.jsdelivr.net/npm/progressive-image.js/dist/progressive-image.js"
+		async></script>
+
+	<!-- Import ionicons from CDN | No need to include it in our svelte app -->
+	<script src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</svelte:head>
+
 <nav class="navbar container is-clipped is-fixed-top">
 	<div class="navbar-brand is-clipped">
 		<a class="navbar-item is-clickable" href="https://bulma.io">
-			<img src={logoUrl} alt="logo" width="112" height="28" />
+			<img src="/logo.avif" alt="logo" width="112" height="28" />
 		</a>
 
 		<button
@@ -418,13 +437,15 @@
 					</div>
 				</div>
 			{:else}
-				<figure
-					class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture"
-					on:click|preventDefault={async () => {
-						goto(userEditInfoPageUrl);
-					}}
-				>
-					<img class="image is-rounded" src={`${avatarUrl}/${userInfo.id}/?s=64`} alt="" />
+				<figure class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture">
+					<a
+						href={userEditInfoPageUrl}
+						data-href={`${avatarUrl}/${userInfo.id}/?s=64`}
+						class="progressive replace"
+						style="border-radius: 9999px"
+					>
+						<img class="is-rounded preview" alt="logo" src="/placeholder-64x64.avif" />
+					</a>
 				</figure>
 			{/if}
 		</div>
