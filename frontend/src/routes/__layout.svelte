@@ -1,5 +1,8 @@
 <script context="module" lang="ts">
 	import { userInfoUrl } from '$lib/constants/restEndpoints';
+	import { browser } from '$app/env';
+	import { getCookie } from '$lib/functions/getCookie';
+
 	export const load = async ({ fetch }) => {
 		const res = await fetch(userInfoUrl, {
 			method: 'GET',
@@ -40,8 +43,6 @@
 
 	import anime from 'animejs';
 	import tippy from 'tippy.js';
-	import { browser } from '$app/env';
-	import { getCookie } from '$lib/functions/getCookie';
 
 	onMount(async () => {
 		anime({
