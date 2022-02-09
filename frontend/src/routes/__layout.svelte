@@ -1,12 +1,39 @@
+<script context="module" lang="ts">
+	import { userInfoUrl } from '$lib/constants/restEndpoints';
+	import { browser } from '$app/env';
+	import { getCookie } from '$lib/functions/getCookie';
+
+	export const load = async ({ fetch }) => {
+		const res = await fetch(userInfoUrl, {
+			method: 'GET',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				Authorization: `Token ${browser && getCookie('Authorization')}`
+			}
+		});
+
+		const data = await res.json();
+
+		return {
+			props: {
+				userInfo: data
+			}
+		};
+	};
+</script>
+
 <script lang="ts">
+	export let userInfo;
 	// Main SCSS import
 	import '../app.scss';
 
 	// Responsive helper
 	import { responsiveMode } from '$lib/store/responsive';
-	import { isUserAuthenticated, userInfo } from '$lib/store/users';
+	import { isUserAuthenticated } from '$lib/store/users';
 
 	import { useEffect } from '$lib/hooks/useEffect';
+	import { loginUrl, signupUrl, avatarUrl, userEditInfoUrl } from '$lib/constants/restEndpoints';
 
 	// Handle Icons
 	import { onMount } from 'svelte';
@@ -16,7 +43,6 @@
 
 	import anime from 'animejs';
 	import tippy from 'tippy.js';
-	import { loginUrl, signupUrl } from '$lib/constants/restEndpoints';
 
 	onMount(async () => {
 		anime({
@@ -41,8 +67,7 @@
 			theme: 'black'
 		});
 		tippy('.tippyjs__avatar__picture', {
-			content:
-				'<b>First Name</b> : Zarif<br/> <b>Last Name</b> : Ahnaf<br/> <b>Username</b> : baseplate-admin <br/>  <b>Email</b> : zarifahnaf@outlook.com<br/><b>Date Joined</b> : Jan. 18, 2022, 6:04 p.m.<br/> <b>Avatar Provider</b> : https://seccdn.libravatar.org<br/>',
+			content: `<b>First Name</b> : ${userInfo?.first_name}<br/> <b>Last Name</b> : ${userInfo?.last_name}<br/> <b>Username</b> : ${userInfo?.username}<br/>  <b>Email</b> : ${userInfo?.email}<br/><b>Date Joined</b> : ${userInfo?.date_joined}<br/>`,
 			theme: 'black',
 			allowHTML: true
 		});
@@ -379,21 +404,14 @@
 					</div>
 				</div>
 			{:else}
-				<!-- <figure
+				<figure
 					class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture"
 					on:click|preventDefault={async () => {
-						goto('/user/edit_info/');
+						goto(userEditInfoUrl);
 					}}
 				>
-					<a
-						href="/user/edit_info/"
-						data-href="/api/v1/avatar/1/?s=64"
-						class="progressive"
-						style="border-radius: 9999px"
-					>
-						<img src="/api/v1/avatar/1/?s=64" class="is-rounded" alt="" />
-					</a>
-				</figure> -->
+					<img class="image is-rounded" src={`${avatarUrl}/${userInfo.id}/?s=64`} alt="" />
+				</figure>
 			{/if}
 		</div>
 	</div>
