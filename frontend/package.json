@@ -26,6 +26,7 @@
 		"axios": "^0.25.0",
 		"bulma": "^0.9.3",
 		"cssnano": "^5.0.17",
+		"dayjs": "^1.10.7",
 		"eslint": "^8.8.0",
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-svelte3": "^3.4.0",
