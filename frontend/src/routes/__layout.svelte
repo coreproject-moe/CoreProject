@@ -142,6 +142,9 @@
 	<!-- Import ionicons from CDN | No need to include it in our svelte app -->
 	<script src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+	<title>Home Page | CoreProject</title>
+
 </svelte:head>
 
 <nav class="navbar container is-clipped is-fixed-top">
