@@ -5,7 +5,7 @@ export const baseUrl = 'http://127.0.0.1:8000';
     Avatar endpoint
     Example = http://127.0.0.1:8000/api/v1/avatar/1/
 */
-export const avatarUrl = `${baseUrl}/api/v1/avatar/`;
+export const avatarUrl = `${baseUrl}/api/v1/avatar`;
 
 /* 
     Token obtain endpoint
@@ -49,3 +49,9 @@ export const logoutUrl = `${baseUrl}/authentication/logout/`;
 */
 
 export const signupUrl = `${baseUrl}/authentication/register/`;
+
+/* 
+    User Edit Info Page
+    Example = http://127.0.0.1:8000/user/edit_info/
+*/
+export const userEditInfoUrl = `${baseUrl}/user/edit_info/`;
