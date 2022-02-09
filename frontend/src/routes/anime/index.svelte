@@ -1,9 +1,28 @@
-<script>
+<script lang="ts">
 	// Import Swiper Svelte components
 	import { Swiper, SwiperSlide } from 'swiper/svelte';
 
 	// Import Swiper styles
 	import 'swiper/css';
+	import { responsiveMode } from '$lib/store/responsive';
+
+	let swiperSpacesBetween: number;
+	let swiperSlidesPerView: number;
+
+	$: switch ($responsiveMode) {
+		case 'mobile':
+			swiperSpacesBetween = 10;
+			swiperSlidesPerView = 2;
+			break;
+		case 'tablet':
+			swiperSpacesBetween = 20;
+			swiperSlidesPerView = 3;
+			break;
+		case 'desktop':
+			swiperSpacesBetween = 30;
+			swiperSlidesPerView = 5;
+			break;
+	}
 </script>
 
 <div class="container">
@@ -14,23 +33,23 @@
 		Recent Uploads :
 	</p>
 	<div class="box" style="background-color: black; border: 1px solid white">
-		<Swiper spaceBetween={50} slidesPerView={3} on:swiper={(e) => console.log(e.detail[0])}>
-			<!-- {% for i in '0123456789012345678901234567890' %} -->
-			<SwiperSlide>
-				<div class="swiper-slide">
-					<div class="card" style="background-color: black !important">
+		<Swiper spaceBetween={swiperSpacesBetween} slidesPerView={swiperSlidesPerView}>
+			{#each Array(12) as _}
+				<SwiperSlide>
+					<div class="card" style="background-color: black !important;">
 						<div class="card-image has-background-black">
 							<figure class="image">
 								<a
 									style="
                                         border-top-left-radius: 10px;
                                         border-top-right-radius: 10px;
+										
                                     "
 									href="/anime/one_piece/"
 									data-href="https://cdn.myanimelist.net/images/anime/6/73245.jpg"
 									class="progressive replace"
 								>
-									<img src="placeholder-225x350.avif" class="preview" alt="" />
+									<img src="/placeholder-225x350.avif" class="preview" alt="" />
 								</a>
 							</figure>
 						</div>
@@ -61,9 +80,8 @@
 							</div>
 						</div>
 					</div>
-				</div>
-			</SwiperSlide>
-			<!-- {% endfor %} -->
+				</SwiperSlide>
+			{/each}
 		</Swiper>
 	</div>
 </div>
