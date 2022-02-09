@@ -31,6 +31,27 @@ Change info for {{ request.user }}
 </style>
 
 <div class="icon-box box">
+    {% if form.errors %}
+    <div class="box" style="background-color: black; border: 1px dotted red">
+        <p class="has-text-centered error">
+            Oh No 😵 !! There's seems to be an error 🥺
+        </p>
+        <p class="has-text-left error">Please take a look at these :</p>
+        {#<!--prettier-ignore-->#}
+
+        <div class="pl-5">
+            <li class="error-list">
+                {% for field in form %} {% for error in field.errors %}
+
+                <ol>
+                    <p class="error">{{error|escape}}</p>
+                </ol>
+
+                {% endfor %} {% endfor %}
+            </li>
+        </div>
+    </div>
+    {% endif %}
     <div class="columns is-mobile is-centered">
         <div class="column is-narrow">
             <div class="title is-size-4 has-text-white is-unselectable">
