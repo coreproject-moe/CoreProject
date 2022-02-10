@@ -13,8 +13,11 @@ class UserSerializer(serializers.ModelSerializer):
             "email",
             "user_permissions",
             "date_joined",
+            "last_login",
         )
         extra_kwargs = {
+            "id": {"read_only": True},
             "user_permissions": {"read_only": True},
             "date_joined": {"read_only": True},
+            "last_login": {"read_only": True},
         }
