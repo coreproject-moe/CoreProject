@@ -79,16 +79,15 @@
 			opacity: 0.85;
 		}
 
-		.href_tag:hover {
-			color: #3273dc;
-			text-decoration: underline;
-		}
-
 		.error {
 			color: var(--error-message-color);
 		}
 		.error-list::marker {
 			color: #b02a2a;
+		}
+		a.has-text-white {
+			text-decoration-line: underline;
+			text-underline-offset: 4px;
 		}
 	}
 </style>
