@@ -15,7 +15,6 @@ def user_edit_info_page(request):
     form = UserEditInfoForm(request.POST or None, instance=instance)
 
     if request.method == "POST":
-        print(form.errors)
         if form.is_valid():
             form.save()
             return redirect(reverse("user_edit_info_page"))
