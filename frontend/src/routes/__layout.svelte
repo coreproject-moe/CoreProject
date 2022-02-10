@@ -1,5 +1,6 @@
 <script context="module" lang="ts">
 	import { browser } from '$app/env';
+	import { userToken } from '$lib/store/users';
 
 	export async function load({ fetch }) {
 		// For the love of GOD.
@@ -53,7 +54,7 @@
 
 	// Responsive helper
 	import { responsiveMode } from '$lib/store/responsive';
-	import { isUserAuthenticated, userToken } from '$lib/store/users';
+	import { isUserAuthenticated } from '$lib/store/users';
 
 	import { useEffect } from '$lib/hooks/useEffect';
 
