@@ -22,6 +22,7 @@
 	let username = '';
 	let password = '';
 
+	// Show error message if theres an error.
 	let errorMessage = '';
 
 	const handlePasswordInput = async (e: Event) => {
@@ -35,11 +36,13 @@
 	};
 </script>
 
-<div class="columns is-mobile is-centered">
-	<div class="column is-narrow">
-		<p class="error">{errorMessage}</p>
+{#if errorMessage}
+	<div class="columns is-mobile is-centered">
+		<div class="column is-narrow">
+			<p class="error">{errorMessage}</p>
+		</div>
 	</div>
-</div>
+{/if}
 
 <form on:submit|preventDefault={handleFormSubmit} method="POST">
 	<div class="items field is-horizontal">
@@ -51,7 +54,7 @@
 						name="username"
 						class="input"
 						placeholder="Username"
-						maxlength="50"
+						maxlength={50}
 						required={true}
 						bind:value={username}
 					/>
@@ -69,17 +72,16 @@
 					<input
 						type={passwordShown ? 'text' : 'password'}
 						name="password"
-						class="input "
+						class="input"
 						placeholder="Password"
-						maxlength="1024"
-						minlength="8"
+						maxlength={1024}
+						minlength={8}
 						required={true}
 						on:input={handlePasswordInput}
 					/>
 					<span
 						class="icon is-small is-right is-clickable is-unselectable"
 						on:click={async () => {
-							// handle eye icon click?
 							passwordShown = !passwordShown;
 						}}
 					>
