@@ -5,13 +5,19 @@ name = "pypi"
 
 [packages]
 django = {extras = ["argon2"], version = "*"}
-djangorestframework = "*"
-libravatar-py = "*"
+# 3rd Party
 whitenoise = "*"
+django-cors-headers = "*"
+
+# Rest framework
+djangorestframework = "*"
+djangorestframework-simplejwt = "*"
+
+# Extra python library
+libravatar-py = "*"
 # Pillow stuff
 pillow = "*"
 pillow-avif-plugin = "*"
-django-cors-headers = "*"
 
 [dev-packages]
 black = "*"
