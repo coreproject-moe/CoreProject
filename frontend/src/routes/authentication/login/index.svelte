@@ -41,7 +41,7 @@
 	</div>
 </div>
 
-<form on:submit|preventDefault={handleFormSubmit}>
+<form on:submit|preventDefault={handleFormSubmit} method="POST">
 	<div class="items field is-horizontal">
 		<div class="field-body">
 			<div class="field">
