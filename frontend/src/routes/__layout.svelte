@@ -62,6 +62,7 @@
 	import dayjs from 'dayjs';
 
 	onMount(async () => {
+		// AnimeJS
 		anime({
 			targets: '.animejs__arrow__back',
 			easing: 'linear',
@@ -79,6 +80,9 @@
 			color: 'hsl(0, 0%, 80%)',
 			scale: 1
 		});
+
+		// TippyJS
+
 		tippy('.animejs__github__button', {
 			content: 'Github',
 			theme: 'black'
@@ -135,16 +139,6 @@
 </script>
 
 <svelte:head>
-	<!-- Import progressive image | It works seperately from svelte app  -->
-	<script
-		defer
-		src="https://cdn.jsdelivr.net/npm/progressive-image.js/dist/progressive-image.js"
-		async></script>
-
-	<!-- Import ionicons from CDN | No need to include it in our svelte app -->
-	<script src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
 	<title>Home Page | CoreProject</title>
 </svelte:head>
 
