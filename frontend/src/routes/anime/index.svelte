@@ -3,7 +3,7 @@
 	import { Swiper, SwiperSlide } from 'swiper/svelte';
 
 	// Import Swiper styles
-	import 'swiper/css';
+	import 'swiper/scss';
 	import { responsiveMode } from '$lib/store/responsive';
 
 	let swiperSpacesBetween: number;
