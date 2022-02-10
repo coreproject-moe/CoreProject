@@ -62,6 +62,11 @@
 	import dayjs from 'dayjs';
 
 	onMount(async () => {
+		// https://bulma.io/documentation/components/navbar/#fixed-navbar
+		const HTMLTAG = browser && document.getElementsByTagName('html')[0]; // '0' to assign the first (and only `HTML` tag)
+		browser && HTMLTAG.classList.add('has-navbar-fixed-top');
+
+		// AnimeJS
 		anime({
 			targets: '.animejs__arrow__back',
 			easing: 'linear',
@@ -79,6 +84,9 @@
 			color: 'hsl(0, 0%, 80%)',
 			scale: 1
 		});
+
+		// TippyJS
+
 		tippy('.animejs__github__button', {
 			content: 'Github',
 			theme: 'black'
