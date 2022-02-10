@@ -2,7 +2,9 @@
 	import { browser } from '$app/env';
 
 	export async function load({ fetch }) {
-		// For the love of GOD. Run this only in Browser
+		// For the love of GOD.
+		// Run this only in Browser.
+		// Wasted 2+ hours debugging this stupid shit.
 
 		if (browser) {
 			const res = await fetch(userInfoUrl, {
