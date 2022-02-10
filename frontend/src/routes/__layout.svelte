@@ -99,8 +99,8 @@
 	let arrowButtonTurned = false;
 
 	let navbarBurgerClosed = false;
-	// Auto close the navbar Buger to close if its on mobile
-	$: navbarBurgerClosed = $responsiveMode === 'mobile';
+	// Auto close the navbar Buger to close if its on Mobile or Tablet
+	$: navbarBurgerClosed = $responsiveMode === 'mobile' || $responsiveMode === 'tablet';
 
 	// Listen to changes on arrow button
 	useEffect(
@@ -173,14 +173,14 @@
 		<div>
 			<div
 				class={`navbar-start mb-3 ${
-					$responsiveMode === 'mobile'
+					$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
 						? 'is-flex is-flex-direction-row is-justify-content-center'
 						: ''
 				}`}
 			>
 				<button
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
-						$responsiveMode === 'mobile' ? 'pl-2 pr-2' : 'ml-2'
+						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.path.includes('home') ? 'hover' : ''}
 					`}
 					on:mouseenter={async () => {
@@ -200,13 +200,17 @@
 					}}
 				>
 					<ion-icon name="home-sharp" class="animejs__home__icon" />
-					<p class={$responsiveMode === 'mobile' ? 'pt-2 nav-icon-button' : ''}>
+					<p
+						class={$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
+							? 'pt-2 nav-icon-button'
+							: ''}
+					>
 						<span class="is-hidden-touch">&nbsp;</span> Home
 					</p>
 				</button>
 				<button
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
-						$responsiveMode === 'mobile' ? 'pl-2 pr-2' : 'ml-2'
+						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.path.includes('anime') ? 'hover' : ''}
 					`}
 					on:mouseenter={async () => {
@@ -226,14 +230,18 @@
 					}}
 				>
 					<ion-icon name="film-outline" class="animejs__anime__icon" />
-					<p class={$responsiveMode === 'mobile' ? 'pt-2 nav-icon-button' : ''}>
+					<p
+						class={$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
+							? 'pt-2 nav-icon-button'
+							: ''}
+					>
 						<span class="is-hidden-touch">&nbsp;</span>
 						Anime
 					</p>
 				</button>
 				<button
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
-						$responsiveMode === 'mobile' ? 'pl-2 pr-2' : 'ml-2'
+						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.path.includes('manga') ? 'hover' : ''}`}
 					on:mouseenter={async () => {
 						anime({
@@ -252,13 +260,17 @@
 					}}
 				>
 					<ion-icon name="images-outline" class="animejs__manga__icon" />
-					<p class={$responsiveMode === 'mobile' ? 'pt-2 nav-icon-button' : ''}>
+					<p
+						class={$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
+							? 'pt-2 nav-icon-button'
+							: ''}
+					>
 						<span class="is-hidden-touch">&nbsp;</span> Manga
 					</p>
 				</button>
 				<button
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
-						$responsiveMode === 'mobile' ? 'pl-2 pr-2' : 'ml-2'
+						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.path.includes('soundcore') ? 'hover' : ''}`}
 					on:mouseenter={async () => {
 						anime({
@@ -277,14 +289,18 @@
 					}}
 				>
 					<ion-icon name="musical-note-outline" class="animejs__music__icon" />
-					<p class={$responsiveMode === 'mobile' ? 'pt-2 nav-icon-button' : ''}>
+					<p
+						class={$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
+							? 'pt-2 nav-icon-button'
+							: ''}
+					>
 						<span class="is-hidden-touch">&nbsp;</span>
 						Soundcore
 					</p>
 				</button>
 				<button
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
-						$responsiveMode === 'mobile' ? 'pl-2 pr-2' : 'ml-2'
+						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.path.includes('shots') ? 'hover' : ''}`}
 					on:mouseenter={async () => {
 						anime({
@@ -303,7 +319,11 @@
 					}}
 				>
 					<ion-icon name="aperture-outline" class="animejs__shots__icon" />
-					<p class={$responsiveMode === 'mobile' ? 'pt-2 nav-icon-button' : ''}>
+					<p
+						class={$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
+							? 'pt-2 nav-icon-button'
+							: ''}
+					>
 						<span class="is-hidden-touch">&nbsp;</span>
 						Shots
 					</p>
@@ -331,7 +351,7 @@
 			>
 				<button
 					class={`is-rounded is-dark animejs__github__button is-clickable ${
-						$responsiveMode === 'mobile' ? 'is-hidden ' : ''
+						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'is-hidden ' : ''
 					}`}
 					on:mouseenter={async () => {
 						anime({
@@ -356,7 +376,7 @@
 				>
 					<ion-icon
 						class="animejs__logo__github"
-						:class="$responsiveMode === 'mobile' ? 'is-position-absolute' : ''"
+						:class="$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'is-position-absolute' : ''"
 						style="width: 100%; height: 100%; "
 						name="logo-github"
 					/>
@@ -365,7 +385,7 @@
 				<button
 					style="z-index: 1000000"
 					class={`is-rounded is-dark animejs__arrow__button is-clickable ${
-						$responsiveMode === 'mobile' ? 'is-hidden' : ''
+						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'is-hidden' : ''
 					}`}
 					on:mouseenter={async () => {
 						anime({
