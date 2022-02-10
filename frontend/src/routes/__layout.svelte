@@ -437,7 +437,7 @@
 								<button
 									class="button is-ghost is-rounded"
 									on:click={async () => {
-										goto(`${loginPageUrl}?next=${$page?.path}`);
+										goto(`/authentication/login?next=${$page?.path}`);
 									}}
 								>
 									Log in
