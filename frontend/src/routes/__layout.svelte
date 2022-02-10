@@ -11,7 +11,7 @@
 				'Content-Type': 'application/json',
 				Authorization: `Token ${browser && getCookie('Authorization')}`
 			}
-		}).catch((e) => {
+		}).catch(() => {
 			console.error(`Backend Down !!`);
 		});
 
