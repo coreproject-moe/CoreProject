@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import anime from 'animejs';
+	import { tokenObtainUrl } from '$lib/constants/backend/restEndpoints';
+	import { userToken } from '$lib/store/users';
 
 	onMount(async () => {
 		anime({
@@ -31,8 +33,19 @@
 	};
 
 	const handleFormSubmit = async () => {
-		// bind this to jwt
-		console.log(username, password);
+		const res = await fetch(tokenObtainUrl, {
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			},
+			method: 'POST',
+			body: JSON.stringify({
+				username: username,
+				password: password
+			})
+		});
+		const data = await res.json();
+		userToken.set(data);
 	};
 </script>
 
