@@ -6,6 +6,7 @@ from rest_framework import status
 
 from django.contrib.auth import get_user_model
 from .serializers import UserSerializer
+from django.http.response import HttpResponse
 
 # Create your views here.
 
@@ -17,12 +18,12 @@ class UserInfo(APIView):
     ]
     serializer_class = UserSerializer
 
-    def get(self, request):
+    def get(self, request: HttpResponse):
         data = get_user_model().objects.get(id=request.user.id)
         serializer = UserSerializer(data, many=False)
         return Response(serializer.data)
 
-    def post(self, request):
+    def post(self, request: HttpResponse):
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
