@@ -28,11 +28,6 @@ body {
 // Bulma import
 @import 'bulma/bulma.sass';
 
-// Bulma override
-.has-text-link-override {
-	color: #1d9bf0 !important;
-}
-
 // Tippy theme
 @import 'tippy.js/dist/tippy.css';
 @import 'tippy.js/animations/scale.css';
