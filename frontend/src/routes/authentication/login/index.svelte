@@ -67,7 +67,12 @@
 		</div>
 	</div>
 {/if}
+
 {#if $isUserAuthenticated}
+	<div class="columns is-mobile is-centered">
+		<div class="column is-narrow"><p class="has-text-white">You are already logged in 😕</p></div>
+	</div>
+{:else}
 	<form on:submit|preventDefault={handleFormSubmit} method="POST">
 		<div class="items field is-horizontal">
 			<div class="field-body">
@@ -142,9 +147,5 @@
 				</p>
 			</div>
 		</div>
-	</div>
-{:else}
-	<div class="columns is-mobile is-centered">
-		<div class="column is-narrow"><p class="has-text-white">You are already logged in 😕</p></div>
 	</div>
 {/if}

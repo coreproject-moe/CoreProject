@@ -8,9 +8,7 @@ import { tokenRefreshUrl } from '$lib/constants/backend/restEndpoints';
 // On logout delete the cookie.
 // We can listen to the cookie changes to determine if a user is logged in or not.
 
-export const isUserAuthenticated = writable(
-	browser && JSON.parse(localStorage.getItem('tokens')).access === ''
-);
+export const isUserAuthenticated = writable(false);
 
 export const userToken = writable(browser && JSON.parse(localStorage?.getItem('tokens')));
 
