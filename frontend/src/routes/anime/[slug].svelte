@@ -53,7 +53,7 @@
 							<td>anime.aired_from</td>
 						</tr>
 						<tr>
-							<td><p class="is-size-7">Producers :</p></td>
+							<td><p class="is-size-7">Producers:</p></td>
 							<td>anime.producers</td>
 						</tr>
 						<tr>
