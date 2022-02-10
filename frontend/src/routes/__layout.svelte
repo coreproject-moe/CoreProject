@@ -2,6 +2,8 @@
 	import { browser } from '$app/env';
 
 	export async function load({ fetch }) {
+		// For the love of GOD. Run this only in Browser
+
 		if (browser) {
 			const res = await fetch(userInfoUrl, {
 				method: 'GET',
