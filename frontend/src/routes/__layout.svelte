@@ -9,7 +9,7 @@
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
-				Authorization: `Token ${browser && getCookie('Authorization')}`
+				Authorization: `Bearer ${browser && JSON.parse(localStorage.getItem('tokens')).access}`
 			}
 		}).catch(() => {
 			console.error(`Backend Down !!`);
@@ -39,16 +39,12 @@
 
 	// Responsive helper
 	import { responsiveMode } from '$lib/store/responsive';
-	import { isUserAuthenticated } from '$lib/store/users';
+	import { userToken } from '$lib/store/users';
 
 	import { useEffect } from '$lib/hooks/useEffect';
 
 	// Constants
-	import {
-		loginPageUrl,
-		signupPageUrl,
-		userEditInfoPageUrl
-	} from '$lib/constants/backend/pageUrlEndpoints';
+	import { signupPageUrl, userEditInfoPageUrl } from '$lib/constants/backend/pageUrlEndpoints';
 	import { avatarUrl } from '$lib/constants/backend/restEndpoints';
 
 	// Handle Icons
@@ -429,7 +425,7 @@
 					/>
 				</button>
 			</div>
-			{#if !$isUserAuthenticated}
+			{#if !$userToken.access}
 				<div class="navbar-item">
 					<div class="columns is-mobile is-centered">
 						<div class="column is-narrow">

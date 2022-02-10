@@ -1,12 +1,6 @@
 import { baseUrl } from './baseUrl';
 
 /*
-    User login Page endpoint
-    Example = 127.0.0.1:8000/authentication/login/
-*/
-export const loginPageUrl = `${baseUrl}/authentication/login/`;
-
-/*
     User Logour Page endpoint
     Example = 127.0.0.1:8000/authentication/logout/
 */
