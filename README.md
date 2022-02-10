@@ -1,23 +1,6 @@
 # On break:
 
-Due to my current life state, i cannot dedicate time to maintain this project. I will continue after some time, but this project is definitely not abandoned.
-
-
-# Looking for contributors.
-
-The project is at it's infancy. Pull requests are welcomed.
-
-# Stack
-
-* Django
-* Svelte
-* Kivy  (Maybe)
-
-# Things to do :
-
-* Submit designs ( In PNG format ) ( In Issues )
-* Suggest Libraries.
-
+Due to my current life state, i cannot dedicate time to maintain this project. Setting to Archive mode. I will continue after some time, but this project is definitely not abandoned.
 
 # WIP
 
