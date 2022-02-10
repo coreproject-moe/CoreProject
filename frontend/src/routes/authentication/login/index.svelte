@@ -104,7 +104,7 @@
 	<div class="level-left">
 		<div class="level-item is-size-7">
 			<span class="has-text-link">
-				<a class="has-text-white" href="#"> Forgot password? </a>
+				<a class="has-text-white" href="/authentication/forget_password/"> Forgot password? </a>
 			</span>
 		</div>
 	</div>
@@ -113,7 +113,7 @@
 			<p class="new_here_tag">
 				New here?
 				<span class="has-text-link">
-					<a class="has-text-white" href="#"> Register an account </a>
+					<a class="has-text-white" href="/authentication/register/"> Register an account </a>
 				</span>
 			</p>
 		</div>
