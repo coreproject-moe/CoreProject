@@ -1,7 +1,6 @@
 <script context="module" lang="ts">
 	import { userInfoUrl } from '$lib/constants/backend/restEndpoints';
 	import { browser } from '$app/env';
-	import { getCookie } from '$lib/functions/getCookie';
 
 	export const load = async ({ fetch }) => {
 		const res = await fetch(userInfoUrl, {
@@ -11,11 +10,14 @@
 				'Content-Type': 'application/json',
 				Authorization: `Bearer ${browser && JSON.parse(localStorage.getItem('tokens')).access}`
 			}
-		}).catch(() => {
-			console.error(`Backend Down !!`);
+		}).catch((e) => {
+			localStorage.setItem('tokens', JSON.stringify({ refresh: '', access: '' }));
+			userToken.set({ refresh: '', access: '' });
+			console.error(`Can't fetch from backend | Flushing Tokens | Reason : ${e}`);
 		});
 
 		const data = await res.json();
+		console.log(data);
 
 		return {
 			props: {
