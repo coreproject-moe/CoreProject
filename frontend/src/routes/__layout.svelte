@@ -1,33 +1,40 @@
 <script context="module" lang="ts">
-	import { userInfoUrl } from '$lib/constants/backend/restEndpoints';
 	import { browser } from '$app/env';
 
-	export const load = async ({ fetch }) => {
-		const res = await fetch(userInfoUrl, {
-			method: 'GET',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${browser && JSON.parse(localStorage.getItem('tokens')).access}`
-			}
-		}).catch((e) => {
-			localStorage.setItem('tokens', JSON.stringify({ refresh: '', access: '' }));
-			userToken.set({ refresh: '', access: '' });
-			console.error(`Can't fetch from backend | Flushing Tokens | Reason : ${e}`);
-		});
+	export async function load({ fetch }) {
+		if (browser) {
+			const res = await fetch(userInfoUrl, {
+				method: 'GET',
+				headers: new Headers({
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${JSON.parse(localStorage.getItem('tokens')).access}`
+				})
+			}).catch((e) => {
+				localStorage?.setItem('tokens', JSON.stringify({ refresh: '', access: '' }));
+				userToken.set({ refresh: '', access: '' });
+				console.error(`Can't fetch from backend | Flushing Tokens | Reason : ${e}`);
+			});
+			const data = await res.json();
 
-		const data = await res.json();
-		console.log(data);
+			return {
+				props: {
+					userInfo: data
+				}
+			};
+		}
 
 		return {
 			props: {
-				userInfo: data
+				userInfo: {}
 			}
 		};
-	};
+	}
 </script>
 
 <script lang="ts">
+	import { userInfoUrl } from '$lib/constants/backend/restEndpoints';
+
 	export let userInfo: {
 		first_name: string;
 		last_name: string;
@@ -35,13 +42,14 @@
 		date_joined: string;
 		username: string;
 		id: number;
+		last_login: string;
 	};
 	// Main SCSS import
 	import '../app.scss';
 
 	// Responsive helper
 	import { responsiveMode } from '$lib/store/responsive';
-	import { userToken } from '$lib/store/users';
+	import { isUserAuthenticated, userToken } from '$lib/store/users';
 
 	import { useEffect } from '$lib/hooks/useEffect';
 
@@ -86,13 +94,14 @@
 			theme: 'black'
 		});
 		tippy('.tippyjs__avatar__picture', {
-			content: `<b>First Name</b> : ${userInfo?.first_name}<br/> <b>Last Name</b> : ${
-				userInfo?.last_name
-			}<br/> <b>Username</b> : ${userInfo?.username}<br/>  <b>Email</b> : ${
-				userInfo?.email
-			}<br/><b>Date Joined</b> : ${dayjs(userInfo?.date_joined).format(
-				'YYYY-MM-DD [at] HH:mm:ss'
-			)}<br/>`,
+			content: `<b>ID</b> : ${userInfo?.id} <br /> <b>First Name</b> : ${
+				userInfo?.first_name
+			}<br/> <b>Last Name</b> : ${userInfo?.last_name}<br/> <b>Username</b> : ${
+				userInfo?.username
+			}<br/>  <b>Email</b> : ${userInfo?.email}<br/><b>Date Joined</b> : ${dayjs(
+				userInfo?.date_joined
+			).format('YYYY-MM-DD [at] HH:mm:ss')}<br/>
+			<b>Last Active</b> : ${dayjs(userInfo?.last_login)}`,
 			theme: 'black',
 			allowHTML: true
 		});
@@ -427,7 +436,7 @@
 					/>
 				</button>
 			</div>
-			{#if !$userToken.access}
+			{#if $isUserAuthenticated}
 				<div class="navbar-item">
 					<div class="columns is-mobile is-centered">
 						<div class="column is-narrow">
