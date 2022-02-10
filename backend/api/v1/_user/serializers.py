@@ -14,3 +14,7 @@ class UserSerializer(serializers.ModelSerializer):
             "user_permissions",
             "date_joined",
         )
+        extra_kwargs = {
+            "user_permissions": {"read_only": True},
+            "date_joined": {"read_only": True},
+        }

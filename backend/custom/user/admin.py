@@ -10,7 +10,6 @@ class CustomUserAdmin(UserAdmin):
 
     list_display = (
         "email",
-        "avatar_url",
         "first_name",
         "last_name",
         "is_staff",
@@ -42,7 +41,6 @@ class CustomUserAdmin(UserAdmin):
                     "first_name",
                     "last_name",
                     "email",
-                    "avatar_url",
                 )
             },
         ),

@@ -7,7 +7,6 @@ from django.contrib.auth.hashers import (
 
 
 class UserEditInfoForm(forms.ModelForm):
-
     password = forms.CharField(
         required=False,
         widget=forms.PasswordInput(
@@ -35,7 +34,6 @@ class UserEditInfoForm(forms.ModelForm):
             "first_name",
             "last_name",
             "username",
-            "avatar_url",
             "password",
         ]
 
@@ -57,11 +55,6 @@ class UserEditInfoForm(forms.ModelForm):
                     "class": "input",
                     "placeholder": "Username",
                 },
-            ),
-            "avatar_url": forms.Select(
-                attrs={
-                    "class": "select-items",
-                }
             ),
         }
 
