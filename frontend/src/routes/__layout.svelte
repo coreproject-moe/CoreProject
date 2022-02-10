@@ -16,7 +16,7 @@
 					Authorization: `Bearer ${JSON.parse(localStorage.getItem('tokens')).access}`
 				})
 			}).catch((e) => {
-				localStorage?.setItem('tokens', JSON.stringify({ refresh: '', access: '' }));
+				localStorage.removeItem('tokens');
 				userToken.set({ refresh: '', access: '' });
 				console.error(`Can't fetch from backend | Flushing Tokens | Reason : ${e}`);
 			});
