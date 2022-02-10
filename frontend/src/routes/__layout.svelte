@@ -554,11 +554,6 @@
 		height: 25px !important;
 		width: 25px !important;
 	}
-	.mobile__friendly__avatar__stats {
-		max-width: 10em;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-	}
 
 	.search__input::placeholder {
 		color: white !important;
@@ -568,4 +563,10 @@
 		border-color: rgb(175, 7, 7);
 		box-shadow: 0 0 0 0.125em rgba(158, 13, 13, 0.76);
 	}
+
+	// .mobile__friendly__avatar__stats {
+	// 	max-width: 10em;
+	// 	white-space: nowrap;
+	// 	text-overflow: ellipsis;
+	// }
 </style>

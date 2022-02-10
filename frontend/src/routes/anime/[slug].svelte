@@ -9,7 +9,7 @@
 <section class="hero is-fullheight-with-navbar">
 	<div class="hero-body is-flex-direction-column">
 		<div
-			class={`columns is-mobile  container ${
+			class={`columns is-mobile container ${
 				$responsiveMode === 'mobile' ? 'is-flex-direction-column' : 'is-flex-direction-row'
 			}`}
 		>
@@ -85,9 +85,9 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="column is-7 is-flex is-justify-content-center">
-				<div class="content">
-					<h1>Hello World</h1>
+			<div class="column is-7 is-flex is-align-self-center">
+				<div class="content  has-text-white">
+					<h1 class="has-text-white">Hello World</h1>
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan, metus ultrices
 						eleifend gravida, nulla nunc varius lectus, nec rutrum justo nibh eu lectus. Ut
