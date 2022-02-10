@@ -73,6 +73,10 @@
 	import dayjs from 'dayjs';
 
 	onMount(async () => {
+		// https://bulma.io/documentation/components/navbar/#fixed-navbar
+		const HTMLTAG = browser && document.getElementsByTagName('html')[0]; // '0' to assign the first (and only `HTML` tag)
+		browser && HTMLTAG.classList.add('has-navbar-fixed-top');
+
 		// AnimeJS
 		anime({
 			targets: '.animejs__arrow__back',
@@ -382,7 +386,6 @@
 				>
 					<ion-icon
 						class="animejs__logo__github"
-						:class="$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'is-position-absolute' : ''"
 						style="width: 100%; height: 100%; "
 						name="logo-github"
 					/>
