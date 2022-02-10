@@ -29,35 +29,39 @@ async def login_page(request) -> HttpResponse:
     """
     form = LoginForm(request.POST or None)
 
+    # Declare response at top to add cookie
+    response = render(request, "authentication/login.html", {"form": form})
+
     if request.method == "POST":
         if form.is_valid():
             username: str = form.cleaned_data["username"]
             password: str = form.cleaned_data["password"]
+
             user = await get_user_for_auth(username, password)
 
-            await auth_login(request, user)
+            try:
+                await auth_login(request, user)
+            except AttributeError:
+                messages.warning(request, "No such user exists")
+
             next_url = request.GET.get("next", None)
 
-            # If theres next url redirect there
-            response = HttpResponse()
+            # Redirect to root if theres no next query
 
             if next_url:
                 response = redirect(next_url)
 
             if user:
                 response = redirect("/")
+                # https://www.django-rest-framework.org/api-guide/authentication/
+                response.set_cookie(
+                    "Authorization",
+                    await sync_to_async(Token.objects.create, thread_sensitive=True)(
+                        user=user
+                    ),
+                )
 
-            # https://www.django-rest-framework.org/api-guide/authentication/
-            response.set_cookie(
-                "Authorization",
-                await sync_to_async(Token.objects.create, thread_sensitive=True)(
-                    user=user
-                ),
-            )
-
-            return response
-
-    return render(request, "authentication/login.html", {"form": form})
+    return response
 
 
 async def logout(request) -> HttpResponse:
@@ -130,7 +134,7 @@ async def forget_password_form(request) -> HttpResponse:
 
             is_user_actually_there = await check_if_username_exist(username)
             if not is_user_actually_there:
-                messages.warning(request, "Did you enter the correct username")
+                messages.warning(request, "Did you enter the correct username?")
 
             elif is_user_actually_there:
                 user = await get_user_by_id(username)

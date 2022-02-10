@@ -19,12 +19,6 @@ from django.urls import include
 from django.conf.urls.static import static
 from django.conf import settings
 
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-    TokenBlacklistView,
-)
-
 urlpatterns = [
     path("admin/", admin.site.urls),
     # Pages
