@@ -166,7 +166,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html#installation
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
         "rest_framework.authentication.BasicAuthentication",
         "rest_framework.authentication.SessionAuthentication",
     )

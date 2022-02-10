@@ -36,7 +36,7 @@
 		"sass": "^1.49.7",
 		"svelte": "^3.46.4",
 		"svelte-check": "^2.4.3",
-		"svelte-preprocess": "^4.10.2",
+		"svelte-preprocess": "^4.10.3",
 		"swiper": "^8.0.3",
 		"tippy.js": "^6.3.7",
 		"tslib": "^2.3.1",
