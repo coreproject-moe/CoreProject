@@ -143,4 +143,8 @@
 			</div>
 		</div>
 	</div>
-{:else}{/if}
+{:else}
+	<div class="columns is-mobile is-centered">
+		<div class="column is-narrow"><p class="has-text-white">You are already logged in 😕</p></div>
+	</div>
+{/if}
