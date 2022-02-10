@@ -1,3 +1,14 @@
+<script lang="ts">
+	import { onMount } from 'svelte';
+	import { browser } from '$app/env';
+
+	onMount(async () => {
+		// https://bulma.io/documentation/components/navbar/#fixed-navbar
+		const HTMLTAG = browser && document.getElementsByTagName('html')[0]; // '0' to assign the first (and only `HTML` tag)
+		browser && HTMLTAG.classList.remove('has-navbar-fixed-top');
+	});
+</script>
+
 <section class="hero is-fullheight">
 	<div class="hero-body">
 		<div class="container">
