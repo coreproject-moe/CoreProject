@@ -13,7 +13,13 @@
 				$responsiveMode === 'mobile' ? 'is-flex-direction-column' : 'is-flex-direction-row'
 			}`}
 		>
-			<div class={`column ${$responsiveMode === 'mobile' ? 'is-align-self-center is-10' : 'is-5'}`}>
+			<div
+				class={`column is-align-self-center is-flex is-justify-content-center ${
+					$responsiveMode === 'mobile' ? 'is-10' : ''
+				}
+			${$responsiveMode === 'tablet' ? 'is-5' : ''}
+			${$responsiveMode === 'desktop' ? 'is-3' : ''}`}
+			>
 				<table class="table is-bordered has-text-white" style="background-color:black; ">
 					<tbody>
 						<tr>
@@ -29,53 +35,55 @@
 							</td>
 						</tr>
 						<tr>
-							<td class="is-size-7">Name :</td>
+							<td><p class="is-size-7">Name :</p></td>
 							<td>anime.name</td>
 						</tr>
 						<tr>
-							<td class="is-size-7">Score :</td>
+							<td><p class="is-size-7">Score :</p></td>
 							<td> anime.score</td>
 						</tr>
 						<tr>
-							<td class="is-size-7">Episodes :</td>
+							<td>
+								<p class="is-size-7">Episodes :</p>
+							</td>
 							<td>anime.episodes</td>
 						</tr>
 						<tr>
-							<td class="is-size-7">Aired :</td>
+							<td><p class="is-size-7">Aired :</p></td>
 							<td>anime.aired_from</td>
 						</tr>
 						<tr>
-							<td class="is-size-7">Producers :</td>
+							<td><p class="is-size-7">Producers :</p></td>
 							<td>anime.producers</td>
 						</tr>
 						<tr>
-							<td class="is-size-7">Studios :</td>
+							<td><p class="is-size-7">Studios :</p></td>
 							<td>anime.studios</td>
 						</tr>
 						<tr>
-							<td class="is-size-7">Source :</td>
+							<td><p class="is-size-7">Source :</p></td>
 							<td>anime.source</td>
 						</tr>
 						<tr>
-							<td class="is-size-7">Genres :</td>
+							<td><p class="is-size-7">Genres :</p></td>
 							<td>anime.genres</td>
 						</tr>
 						<tr>
-							<td class="is-size-7">Theme :</td>
+							<td><p class="is-size-7">Theme :</p></td>
 							<td>anime.theme</td>
 						</tr>
 						<tr>
-							<td class="is-size-7">Duration :</td>
+							<td><p class="is-size-7">Duration :</p></td>
 							<td>anime.duration</td>
 						</tr>
 						<tr>
-							<td class="is-size-7">Rating :</td>
+							<td><p class="is-size-7">Rating :</p></td>
 							<td>anime.rating</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
-			<div class="column is-7">
+			<div class="column is-7 is-flex is-justify-content-center">
 				<div class="content">
 					<h1>Hello World</h1>
 					<p>
