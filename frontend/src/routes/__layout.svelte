@@ -383,6 +383,9 @@
 							scale: 1
 						});
 					}}
+					on:click={async () => {
+						goto('https://github.com/baseplate-admin/CoreProject');
+					}}
 				>
 					<ion-icon
 						class="animejs__logo__github"
