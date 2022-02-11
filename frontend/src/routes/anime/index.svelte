@@ -2,8 +2,7 @@
 	// Import Swiper Svelte components
 	import { Swiper, SwiperSlide } from 'swiper/svelte';
 
-	// Import Swiper styles
-	import 'swiper/scss';
+
 	import { responsiveMode } from '$lib/store/responsive';
 	import { goto } from '$app/navigation';
 
