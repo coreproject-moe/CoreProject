@@ -1,3 +1,5 @@
+@charset "utf-16";
+
 // Import progressive-image.css
 @import url('https://cdn.jsdelivr.net/npm/progressive-image.js/dist/progressive-image.css');
 
@@ -16,27 +18,9 @@
 @import 'tippy.js/dist/tippy.css';
 @import 'tippy.js/animations/scale.css';
 
-.tippy-box[data-theme~='black'] {
-	color: white !important;
-	background-color: black !important;
-	border: 1px solid #ffffffcf !important;
-}
-
-.tippy-box[data-theme~='black'][data-placement^='top'] > .tippy-arrow::before {
-	border-top-color: rgba(255, 255, 255, 0.9);
-}
-.tippy-box[data-theme~='black'][data-placement^='bottom'] > .tippy-arrow::before {
-	border-bottom-color: rgba(255, 255, 255, 0.9);
-}
-.tippy-box[data-theme~='black'][data-placement^='left'] > .tippy-arrow::before {
-	border-left-color: rgba(255, 255, 255, 0.9);
-}
-.tippy-box[data-theme~='black'][data-placement^='right'] > .tippy-arrow::before {
-	border-right-color: rgba(255, 255, 255, 0.9);
-}
+$tippy-border-color: rgba(255, 255, 255, 0.9);
 
 // Some defaults
-
 :root {
 	--html-color: black;
 	--navbar-color: black;
@@ -48,11 +32,47 @@
 html {
 	background-color: var(--html-color) !important;
 	scrollbar-width: thin;
-}
-ion-icon {
-	visibility: inherit !important;
-	pointer-events: none;
-}
-body {
-	overflow-x: hidden;
+
+	ion-icon {
+		visibility: inherit !important;
+		pointer-events: none;
+	}
+	body {
+		overflow-x: hidden;
+	}
+
+	.tippy-box[data-theme~='black'] {
+		color: white !important;
+		background-color: black !important;
+		border: 1px solid #ffffffcf !important;
+
+		&[data-placement^='top'] {
+			.tippy-arrow {
+				&::before {
+					border-top-color: $tippy-border-color;
+				}
+			}
+		}
+		&[data-placement^='bottom'] {
+			.tippy-arrow {
+				&::before {
+					border-bottom-color: $tippy-border-color;
+				}
+			}
+		}
+		&[data-placement^='left'] {
+			.tippy-arrow {
+				&::before {
+					border-left-color: $tippy-border-color;
+				}
+			}
+		}
+		&[data-placement^='right'] {
+			.tippy-arrow {
+				&::before {
+					border-right-color: $tippy-border-color;
+				}
+			}
+		}
+	}
 }
