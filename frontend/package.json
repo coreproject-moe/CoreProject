@@ -27,7 +27,7 @@
 		"eslint-config-prettier": "^8.3.0",
 		"eslint-plugin-svelte3": "^3.4.0",
 		"postcss": "^8.4.6",
-		"postcss-load-config": "^3.1.1",
+		"postcss-load-config": "^3.1.2",
 		"postcss-nesting": "^10.1.2",
 		"prettier": "^2.5.1",
 		"prettier-plugin-svelte": "^2.6.0",
@@ -35,7 +35,7 @@
 		"svelte": "^3.46.4",
 		"svelte-check": "^2.4.3",
 		"svelte-preprocess": "^4.10.3",
-		"swiper": "^8.0.3",
+		"swiper": "^8.0.5",
 		"tippy.js": "^6.3.7",
 		"tslib": "^2.3.1",
 		"typescript": "^4.5.5"

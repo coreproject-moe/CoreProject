@@ -4,7 +4,7 @@
 	import { tokenObtainUrl } from '$lib/constants/backend/restEndpoints';
 	import { isUserAuthenticated, userToken } from '$lib/store/users';
 	import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
+	import { browser } from '$app/env';
 
 	onMount(async () => {
 		anime({
@@ -46,17 +46,22 @@
 				password: password
 			})
 		});
-		if (res?.status === 200) {
-			const data = await res.json();
+		const data = await res.json();
+
+		if (res?.ok) {
 			userToken.set(data);
 
 			const next = $page.query.get('next');
 
 			// Goto Next page if it exists.
-			if (next) goto(next);
+			if (browser) {
+				if (next) window.location.href = next;
 
-			goto('/home/');
+				window.location.href = '/home/';
+			}
 		}
+
+		errorMessage = data.detail;
 	};
 </script>
 

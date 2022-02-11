@@ -1,16 +1,14 @@
-import { writable } from 'svelte/store';
 import { browser } from '$app/env';
+import { writable } from 'svelte/store';
 import { tokenRefreshUrl } from '$lib/constants/backend/restEndpoints';
 
-// So we are getting the Authorization cookie.
-// I have set up this in the  backend so that,
-// When a user logs in, it will create the token.
-// On logout delete the cookie.
-// We can listen to the cookie changes to determine if a user is logged in or not.
+export const isUserAuthenticated = writable(
+	JSON.parse(browser && localStorage.getItem('tokens')).access !== undefined
+);
 
-export const isUserAuthenticated = writable(false);
-
-export const userToken = writable(browser && JSON.parse(localStorage?.getItem('tokens')));
+export const userToken = writable(
+	(browser && JSON.parse(localStorage?.getItem('tokens'))) || { refresh: '', access: '' }
+);
 
 userToken.subscribe((change: { access: string; refresh: string }) => {
 	browser && localStorage?.setItem('tokens', JSON.stringify(change));
