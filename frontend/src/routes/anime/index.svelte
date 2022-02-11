@@ -5,6 +5,7 @@
 	// Import Swiper styles
 	import 'swiper/scss';
 	import { responsiveMode } from '$lib/store/responsive';
+	import { goto } from '$app/navigation';
 
 	let swiperSpacesBetween: number;
 	let swiperSlidesPerView: number;
@@ -36,21 +37,26 @@
 		<Swiper spaceBetween={swiperSpacesBetween} slidesPerView={swiperSlidesPerView}>
 			{#each Array(12) as _}
 				<SwiperSlide>
-					<div class="card" style="background-color: black !important;">
+					<div
+						class="card is-clickable"
+						style="background-color: black !important;"
+						on:click={async () => {
+							goto('/anime/one_piece');
+						}}
+					>
 						<div class="card-image has-background-black">
 							<figure class="image">
-								<a
+								<div
 									style="
                                         border-top-left-radius: 10px;
                                         border-top-right-radius: 10px;
 										
                                     "
-									href="/anime/one_piece/"
 									data-href="https://cdn.myanimelist.net/images/anime/6/73245.jpg"
 									class="progressive replace"
 								>
 									<img src="/placeholder-225x350.avif" class="preview" alt="" />
-								</a>
+								</div>
 							</figure>
 						</div>
 						<div
