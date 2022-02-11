@@ -48,18 +48,11 @@ async def login_page(request) -> HttpResponse:
 
             # Redirect to root if theres no next query
 
-            if next_url:
-                response = redirect(next_url)
-
             if user:
-                response = redirect("/")
-                # https://www.django-rest-framework.org/api-guide/authentication/
-                response.set_cookie(
-                    "Authorization",
-                    await sync_to_async(Token.objects.create, thread_sensitive=True)(
-                        user=user
-                    ),
-                )
+                if next_url:
+                    response = redirect(next_url)
+                else:
+                    response = redirect("/")
 
     return response
 
@@ -73,13 +66,6 @@ async def logout(request) -> HttpResponse:
     # If theres next url redirect there
     if next_url:
         response = redirect(next_url)
-
-    # Thanks Stackoverflow. You guys rock
-    # https://stackoverflow.com/questions/1275357/django-logoutredirect-to-home-page-delete-cookie
-
-    response.delete_cookie("csrftoken")
-    response.delete_cookie("sessionid")
-    response.delete_cookie("Authorization")
 
     return response
 

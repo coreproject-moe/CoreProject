@@ -14,7 +14,8 @@ const config = {
 				content: ['./src/**/**/*.{svelte,html,js,ts}'],
 				defaultExtractor: (content) => content.match(/[A-Za-z0-9-_:/]+/g) || [],
 				safelist: {
-					deep: [/svelte-/, /swiper-/, /tippy-/]
+					deep: [],
+					greedy: [/swiper/, /svelte/, /tippy/]
 				}
 			}),
 		!dev &&
