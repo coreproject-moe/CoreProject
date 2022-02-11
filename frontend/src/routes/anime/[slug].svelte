@@ -85,7 +85,9 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="column is-7 is-flex is-align-self-center">
+			<div
+				class={`column is-7 is-flex ${$responsiveMode === 'desktop' ? '' : 'is-align-self-center'}`}
+			>
 				<div class="content  has-text-white">
 					<h1 class="has-text-white">Hello World</h1>
 					<p>
