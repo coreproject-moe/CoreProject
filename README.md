@@ -1,6 +1,7 @@
-# On break:
+# On Hiatus:
 
-Due to my current life state, i cannot dedicate time to maintain this project. Setting to Archive mode. I will continue after some time, but this project is definitely not abandoned.
+Recoping with life.
+
 
 # WIP
 
