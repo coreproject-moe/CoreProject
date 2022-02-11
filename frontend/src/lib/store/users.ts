@@ -3,8 +3,10 @@ import { writable } from 'svelte/store';
 import { tokenRefreshUrl } from '$lib/constants/backend/restEndpoints';
 
 const getUserState = () => {
+	// Try catch block to get value
 	try {
-		return JSON.parse(browser && localStorage.getItem('tokens')).access !== undefined;
+		const data = browser && localStorage.getItem('tokens');
+		return JSON.parse(data).access !== undefined;
 	} catch (e) {
 		return false;
 	}
@@ -16,9 +18,12 @@ export const userToken = writable(
 	(browser && JSON.parse(localStorage?.getItem('tokens'))) || { refresh: '', access: '' }
 );
 
+// Monitor changes and set it to localStorage
 userToken.subscribe((change: { access: string; refresh: string }) => {
 	browser && localStorage?.setItem('tokens', JSON.stringify(change));
 });
+
+// Custom function to refresh tokens
 
 setInterval(async () => {
 	if (browser && localStorage.getItem('tokens')) {
