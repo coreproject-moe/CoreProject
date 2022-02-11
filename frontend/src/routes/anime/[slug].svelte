@@ -28,11 +28,13 @@
 								style="border: none;padding-top: 0;padding-bottom: 0;padding-right: 0;padding-left: 0;"
 							>
 								<div class="is-align-self-center is-flex is-justify-content-center pb-1">
-									<img
-										src="https://cdn.myanimelist.net/images/anime/6/73245.jpg"
+									<div
+										class="progressive replace"
+										data-href="https://cdn.myanimelist.net/images/anime/6/73245.jpg"
 										style="border-top-left-radius: 10px;border-top-right-radius: 10px;"
-										alt=""
-									/>
+									>
+										<img alt="" src="/placeholder-225x350.avif" class="preview" />
+									</div>
 								</div>
 							</td>
 						</tr>
