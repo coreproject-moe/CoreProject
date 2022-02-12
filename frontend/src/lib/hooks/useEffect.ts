@@ -1,21 +1,21 @@
 import { afterUpdate, onDestroy } from 'svelte';
 
-export function useEffect(cb: CallableFunction, deps: CallableFunction) {
+export async function useEffect(cb: CallableFunction, deps: CallableFunction) {
 	let cleanup: CallableFunction;
 
-	function apply() {
+	async function apply() {
 		if (cleanup) {
-			cleanup();
+			await cleanup();
 		}
 		cleanup = cb();
 	}
 
 	if (deps) {
 		let values = [];
-		afterUpdate(() => {
+		afterUpdate(async () => {
 			const new_values = deps();
-			if (new_values?.some((value, i) => value !== values[i])) {
-				apply();
+			if (new_values?.some((value: Array<never>[], i: never) => value !== values[i])) {
+				await apply();
 				values = new_values;
 			}
 		});
@@ -24,9 +24,9 @@ export function useEffect(cb: CallableFunction, deps: CallableFunction) {
 		afterUpdate(apply);
 	}
 
-	onDestroy(() => {
+	onDestroy(async () => {
 		if (cleanup) {
-			cleanup();
+			await cleanup();
 		}
 	});
 }
