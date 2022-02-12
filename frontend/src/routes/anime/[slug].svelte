@@ -13,17 +13,14 @@
 			}`}
 		>
 			<div
-				class={`column is-align-self-center is-flex is-justify-content-center ${
-					$responsiveMode === 'mobile' ? 'is-10' : ''
-				} ${$responsiveMode === 'tablet' ? 'is-5' : ''}	${
-					$responsiveMode === 'desktop' ? 'is-3' : ''
-				}`}
+				class={`column is-align-self-center is-flex is-justify-content-center 
+				${$responsiveMode === 'desktop' ? 'is-3' : ''}`}
 			>
 				<table
 					class={`table is-bordered has-text-white has-background-black ${
 						$responsiveMode === 'desktop' ? 'is-position-fixed' : ''
 					}`}
-					style={$responsiveMode === 'desktop' ? 'top:5em' : ''}
+					style={$responsiveMode === 'desktop' ? 'top: 5em;' : 'width: 80%;'}
 				>
 					<tbody>
 						<tr>
@@ -88,9 +85,7 @@
 					</tbody>
 				</table>
 			</div>
-			<div
-				class={`column is-7 is-flex ${$responsiveMode === 'desktop' ? '' : 'is-align-self-center'}`}
-			>
+			<div class={`column is-flex ${$responsiveMode === 'desktop' ? '' : 'is-align-self-center'}`}>
 				<div class="content has-text-white">
 					<h1 class="has-text-white">Hello World</h1>
 					<p>
@@ -116,7 +111,7 @@
 	.grid-container {
 		display: grid;
 		align-items: center;
-		grid-template-columns: repeat(auto-fit, minmax(7em, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(4em, 1fr));
 		background-color: black;
 	}
 	.grid-item {
