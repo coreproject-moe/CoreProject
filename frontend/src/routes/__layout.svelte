@@ -37,7 +37,7 @@
 </script>
 
 <script lang="ts">
-	import { userInfoUrl } from '$lib/constants/backend/restEndpoints';
+	import { userInfoUrl } from '$lib/constants/backend/urls/restEndpoints';
 
 	export let userInfo: {
 		first_name: string;
@@ -58,8 +58,8 @@
 	import { useEffect } from '$lib/hooks/useEffect';
 
 	// Constants
-	import { signupPageUrl, userEditInfoPageUrl } from '$lib/constants/backend/pageUrlEndpoints';
-	import { avatarUrl } from '$lib/constants/backend/restEndpoints';
+	import { signupPageUrl, userEditInfoPageUrl } from '$lib/constants/backend/urls/pageUrlEndpoints';
+	import { avatarUrl } from '$lib/constants/backend/urls/restEndpoints';
 
 	// Handle Icons
 	import { onMount } from 'svelte';
