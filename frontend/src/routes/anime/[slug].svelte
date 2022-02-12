@@ -14,6 +14,7 @@
 			.join(' ')} | {projectName}</title
 	>
 </svelte:head>
+
 <section class="hero is-fullheight-with-navbar">
 	<div class="hero-body is-flex-direction-column">
 		<div
