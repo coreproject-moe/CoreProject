@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     "pages.users",
     "pages.authentication",
     # Rest stuff
-    "api.v1.avatar",
     "api.v1._user",
 ]
 
