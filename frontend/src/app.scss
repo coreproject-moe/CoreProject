@@ -35,6 +35,15 @@ $tippy-border-color: rgba(255, 255, 255, 0.9);
 .has-background-black {
 	background-color: black !important;
 }
+.is-font-face-cantarell {
+	font-family: 'Cantarell';
+}
+.is-font-face-roboto {
+	font-family: 'Roboto';
+}
+.is-font-face-ubuntu {
+	font-family: 'Ubuntu';
+}
 // Some defaults
 :root {
 	--html-color: black;
