@@ -442,7 +442,18 @@
 					/>
 				</button>
 			</div>
-			{#if !$isUserAuthenticated}
+			{#if $isUserAuthenticated}
+				<figure class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture">
+					<a
+						href={userEditInfoPageUrl}
+						data-href={`${avatarUrl}/${userInfo.id}/?s=64`}
+						class="progressive replace"
+						style="border-radius: 9999px"
+					>
+						<img class="is-rounded preview" alt="logo" src="/placeholder-64x64.avif" />
+					</a>
+				</figure>
+			{:else}
 				<div class="navbar-item">
 					<div class="columns is-mobile is-centered">
 						<div class="column is-narrow">
@@ -467,17 +478,6 @@
 						</div>
 					</div>
 				</div>
-			{:else}
-				<figure class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture">
-					<a
-						href={userEditInfoPageUrl}
-						data-href={`${avatarUrl}/${userInfo.id}/?s=64`}
-						class="progressive replace"
-						style="border-radius: 9999px"
-					>
-						<img class="is-rounded preview" alt="logo" src="/placeholder-64x64.avif" />
-					</a>
-				</figure>
 			{/if}
 		</div>
 	</div>
