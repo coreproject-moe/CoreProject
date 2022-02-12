@@ -70,7 +70,7 @@
 	import anime from 'animejs';
 	import tippy from 'tippy.js';
 	import dayjs from 'dayjs';
-
+	import md5 from 'md5';
 	onMount(async () => {
 		// https://bulma.io/documentation/components/navbar/#fixed-navbar
 		const HTMLTAG = browser && document.getElementsByTagName('html')[0]; // '0' to assign the first (and only `HTML` tag)
@@ -446,7 +446,7 @@
 				<figure class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture">
 					<a
 						href={userEditInfoPageUrl}
-						data-href={`${avatarUrl}/${userInfo.id}/?s=64`}
+						data-href={`https://seccdn.libravatar.org/avatar/${md5(userInfo.email)}/?s=64`}
 						class="progressive replace"
 						style="border-radius: 9999px"
 					>
