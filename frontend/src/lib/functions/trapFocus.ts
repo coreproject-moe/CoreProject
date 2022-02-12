@@ -4,8 +4,8 @@
 let trapFocusList: HTMLElement[] = [];
 
 if (typeof window !== 'undefined') {
-	const isNext = (event: KeyboardEvent) => event.keyCode === 9 && !event.shiftKey;
-	const isPrevious = (event: KeyboardEvent) => event.keyCode === 9 && event.shiftKey;
+	const isNext = (event: KeyboardEvent) => !event.shiftKey;
+	const isPrevious = (event: KeyboardEvent) => event.shiftKey;
 	const trapFocusListener = (event: KeyboardEvent) => {
 		if (event.target === window) {
 			return;
