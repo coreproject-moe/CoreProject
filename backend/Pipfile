@@ -6,13 +6,14 @@ name = "pypi"
 [packages]
 django = {extras = ["argon2"], version = "*"}
 # 3rd Party
-whitenoise = "*"
+whitenoise = {extras = ["brotli"], version = "*"}
 django-cors-headers = "*"
-
 # Rest framework
 djangorestframework = "*"
 djangorestframework-simplejwt = "*"
-
+# Webserver
+uvicorn = {version = "*", markers = "sys_platform != 'win32'", extras = ["standard"]}
+gunicorn = {version = "*", markers = "sys_platform != 'win32'", extras = ["gevent","setproctitle"]} # To serve Gunicorn
 # Extra python library
 libravatar-py = "*"
 # Pillow stuff
@@ -28,3 +29,6 @@ python_version = "3.10"
 [scripts]
 dev = 'python manage.py runserver'
 sync = 'python manage.py migrate'
+mksync = 'python manage.py makemigrations'
+prod = "gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
+collectstatic = 'python .\manage.py collectstatic'

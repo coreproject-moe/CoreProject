@@ -51,7 +51,7 @@
 		if (res?.ok) {
 			userToken.set(data);
 
-			const next = $page.query.get('next');
+			const next = $page.url.searchParams.get('next');
 
 			// Goto Next page if it exists.
 			if (browser) {
