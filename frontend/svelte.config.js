@@ -15,7 +15,7 @@ const config = {
 	],
 	kit: {
 		adapter: adapter({
-			precompress: 'br',
+			// precompress: 'br',
 			fallback: 'app.html'
 		})
 		// paths: {
