@@ -6,17 +6,15 @@
 		// For the love of GOD.
 		// Run this only in Browser.
 		// Wasted 2+ hours debugging this stupid shit.
-
 		if (browser) {
 			const res = await fetch(userInfoUrl, {
 				method: 'GET',
 				headers: new Headers({
 					Accept: 'application/json',
 					'Content-Type': 'application/json',
-					Authorization: `Bearer ${JSON.parse(localStorage.getItem('tokens')).access}`
+					Authorization: `Bearer ${get(userToken).access}`
 				})
 			}).catch(async () => {
-				localStorage.removeItem('tokens');
 				userToken.set({ refresh: '', access: '' });
 				console.error("Can't fetch from backend | Flushing Tokens");
 			});
@@ -71,6 +69,7 @@
 	import anime from 'animejs';
 	import tippy from 'tippy.js';
 	import dayjs from 'dayjs';
+	import { get } from 'svelte/store';
 
 	onMount(async () => {
 		// https://bulma.io/documentation/components/navbar/#fixed-navbar
