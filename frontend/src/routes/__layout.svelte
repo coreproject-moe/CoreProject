@@ -1,6 +1,7 @@
 <script context="module" lang="ts">
 	import { browser } from '$app/env';
 	import { userToken } from '$lib/store/users';
+	import { get } from 'svelte/store';
 
 	export async function load({ fetch }) {
 		// For the love of GOD.
@@ -69,7 +70,6 @@
 	import anime from 'animejs';
 	import tippy from 'tippy.js';
 	import dayjs from 'dayjs';
-	import { get } from 'svelte/store';
 
 	onMount(async () => {
 		// https://bulma.io/documentation/components/navbar/#fixed-navbar
