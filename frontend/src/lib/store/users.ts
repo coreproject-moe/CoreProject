@@ -17,24 +17,20 @@ userToken.subscribe((change: { access: string; refresh: string }) => {
 
 // Custom function to refresh tokens
 
-browser &&
-	get(isUserAuthenticated) &&
+browser && // Is browser
+	get(isUserAuthenticated) && // User is authenticated
+	localStorage.getItem('tokens') && // Item exists
 	setInterval(async () => {
-		if (localStorage.getItem('tokens')) {
-			const tokenObj: { access: string; refresh: string } = JSON.parse(
-				localStorage.getItem('tokens')
-			);
-			const res = await fetch(tokenRefreshUrl, {
-				method: 'POST',
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					refresh: tokenObj.refresh
-				})
-			});
-			const data = await res.json();
-			userToken.set({ refresh: tokenObj.refresh, access: data?.access });
-		}
+		const res = await fetch(tokenRefreshUrl, {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				refresh: get(userToken).refresh
+			})
+		});
+		const data = await res.json();
+		userToken.set({ refresh: get(userToken).refresh, access: data?.access });
 	}, 5000);
