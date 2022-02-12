@@ -41,5 +41,9 @@
 		"typescript": "^4.5.5"
 	},
 	"type": "module",
-	"dependencies": {}
+	"dependencies": {
+		"typeface-cantarell": "^1.1.13",
+		"typeface-roboto": "^1.1.13",
+		"typeface-ubuntu": "^1.1.13"
+	}
 }

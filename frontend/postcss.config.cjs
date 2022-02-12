@@ -2,8 +2,7 @@ const cssnano = require('cssnano');
 const autoprefixer = require('autoprefixer');
 const purgecss = require('@fullhuman/postcss-purgecss');
 
-const mode = process.env.NODE_ENV;
-const dev = mode === 'development';
+const dev = process.env.NODE_ENV === 'development';
 
 const config = {
 	plugins: [

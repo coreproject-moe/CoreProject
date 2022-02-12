@@ -191,7 +191,7 @@
 				<button
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
-					} ${$page.path.includes('home') ? 'hover' : ''}
+					} ${$page.url.pathname.includes('home') ? 'hover' : ''}
 					`}
 					on:mouseenter={async () => {
 						anime({
@@ -221,7 +221,7 @@
 				<button
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
-					} ${$page.path.includes('anime') ? 'hover' : ''}
+					} ${$page.url.pathname.includes('anime') ? 'hover' : ''}
 					`}
 					on:mouseenter={async () => {
 						anime({
@@ -252,7 +252,7 @@
 				<button
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
-					} ${$page.path.includes('manga') ? 'hover' : ''}`}
+					} ${$page.url.pathname.includes('manga') ? 'hover' : ''}`}
 					on:mouseenter={async () => {
 						anime({
 							targets: '.animejs__manga__icon',
@@ -281,7 +281,7 @@
 				<button
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
-					} ${$page.path.includes('soundcore') ? 'hover' : ''}`}
+					} ${$page.url.pathname.includes('soundcore') ? 'hover' : ''}`}
 					on:mouseenter={async () => {
 						anime({
 							targets: '.animejs__music__icon',
@@ -311,7 +311,7 @@
 				<button
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
-					} ${$page.path.includes('shots') ? 'hover' : ''}`}
+					} ${$page.url.pathname.includes('shots') ? 'hover' : ''}`}
 					on:mouseenter={async () => {
 						anime({
 							targets: '.animejs__shots__icon',
@@ -466,7 +466,7 @@
 								<button
 									class="button is-ghost is-rounded"
 									on:click={async () => {
-										goto(`/authentication/login?next=${$page?.path}`);
+										goto(`/authentication/login?next=${$page?.url?.pathname}`);
 									}}
 								>
 									Log in
@@ -474,7 +474,7 @@
 								<button
 									class="button is-ghost is-rounded"
 									on:click={async () => {
-										goto(`${signupPageUrl}?next=${$page?.path}`);
+										goto(`${signupPageUrl}?next=${$page?.url?.pathname}`);
 									}}
 								>
 									Sign Up
