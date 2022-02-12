@@ -6,7 +6,7 @@ export const userToken = writable(
 	(browser && JSON.parse(localStorage.getItem('tokens'))) || { refresh: '', access: '' }
 );
 
-export const isUserAuthenticated = writable(get(userToken).access);
+export const isUserAuthenticated = writable(get(userToken).access !== '');
 
 // Monitor changes and set it to localStorage
 userToken.subscribe((change: { access: string; refresh: string }) => {
