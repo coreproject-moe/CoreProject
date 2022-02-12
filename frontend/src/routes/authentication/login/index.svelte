@@ -1,10 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import anime from 'animejs';
+	import { trapFocus } from '$lib/functions/trapFocus';
 	import { tokenObtainUrl } from '$lib/constants/backend/restEndpoints';
 	import { isUserAuthenticated, userToken } from '$lib/store/users';
 	import { page } from '$app/stores';
 	import { browser } from '$app/env';
+	import { projectName } from '$lib/constants/frontend/projectName';
 
 	onMount(async () => {
 		anime({
@@ -65,6 +67,10 @@
 	};
 </script>
 
+<svelte:head>
+	<title>Login Page | {projectName}</title>
+</svelte:head>
+
 {#if errorMessage}
 	<div class="columns is-mobile is-centered">
 		<div class="column is-narrow">
@@ -78,7 +84,7 @@
 		<div class="column is-narrow"><p class="has-text-white">You are already logged in 😕</p></div>
 	</div>
 {:else}
-	<form on:submit|preventDefault={handleFormSubmit} method="POST">
+	<form on:submit|preventDefault={handleFormSubmit} method="POST" use:trapFocus>
 		<div class="items field is-horizontal">
 			<div class="field-body">
 				<div class="field">

@@ -154,10 +154,6 @@
 	);
 </script>
 
-<svelte:head>
-	<title>Home Page | CoreProject</title>
-</svelte:head>
-
 <nav class="navbar container is-clipped is-fixed-top">
 	<div class="navbar-brand is-clipped">
 		<a class="navbar-item is-clickable" href="https://bulma.io">

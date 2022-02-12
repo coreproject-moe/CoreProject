@@ -1,7 +1,7 @@
 <script lang="ts">
 	// Import Swiper Svelte components
 	import { Swiper, SwiperSlide } from 'swiper/svelte';
-
+	import { projectName } from '$lib/constants/frontend/projectName';
 
 	import { responsiveMode } from '$lib/store/responsive';
 	import { goto } from '$app/navigation';
@@ -24,6 +24,10 @@
 			break;
 	}
 </script>
+
+<svelte:head>
+	<title>AnimeCore | {projectName}</title>
+</svelte:head>
 
 <div class="container">
 	<p class="title is-size-5 pt-6 has-text-white">
