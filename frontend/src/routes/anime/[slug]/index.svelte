@@ -27,7 +27,7 @@
 				${$responsiveMode === 'desktop' ? 'is-3' : ''}`}
 			>
 				<table
-					class={`table is-bordered has-text-white has-background-black ${
+					class={`table is-bordered has-text-white has-background-black is-font-face-ubuntu ${
 						$responsiveMode === 'desktop' ? 'is-position-fixed' : ''
 					}`}
 					style={$responsiveMode === 'desktop' ? 'top: 5em;' : 'width: 80%;'}
@@ -108,7 +108,12 @@
 
 					<div class="grid-container">
 						{#each Array(100) as _, i}
-							<div class="grid-item is-size-6 has-border-white is-clickable">{i}</div>
+							<a
+								href={`/anime/${params}/episode/${i}`}
+								class="grid-item is-size-6 has-border-white is-clickable is-font-face-roboto has-text-white"
+							>
+								{i}
+							</a>
 						{/each}
 					</div>
 				</div>
