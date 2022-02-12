@@ -20,6 +20,18 @@
 
 $tippy-border-color: rgba(255, 255, 255, 0.9);
 
+// Special Class ( inspired by bulma )
+.has-border-white {
+	border: 1px solid white;
+}
+
+.is-position-fixed {
+	position: fixed !important;
+}
+.is-borderless {
+	border: 0 !important;
+}
+
 // Some defaults
 :root {
 	--html-color: black;
