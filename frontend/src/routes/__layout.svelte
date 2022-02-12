@@ -109,7 +109,7 @@
 				userInfo?.username
 			}<br/>  <b>Email</b> : ${userInfo?.email}<br/><b>Date Joined</b> : ${dayjs(
 				userInfo?.date_joined
-			).format('YYYY-MM-DD [at] HH:mm:ss')}<br/>
+			)}<br/>
 			<b>Last Active</b> : ${dayjs(userInfo?.last_login)}`,
 			theme: 'black',
 			allowHTML: true
