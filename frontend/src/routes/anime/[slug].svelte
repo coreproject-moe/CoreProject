@@ -90,7 +90,7 @@
 			<div
 				class={`column is-7 is-flex ${$responsiveMode === 'desktop' ? '' : 'is-align-self-center'}`}
 			>
-				<div class="content  has-text-white">
+				<div class="content has-text-white">
 					<h1 class="has-text-white">Hello World</h1>
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan, metus ultrices
@@ -98,6 +98,58 @@
 						vulputate semper dui. Fusce erat odio, sollicitudin vel erat vel, interdum mattis neque.
 						Sub<sub>script</sub> works as well!
 					</p>
+					<h1 class="has-text-white">Episodes :</h1>
+					<div class="table-container">
+						<table class="table is-bordered has-text-white" style="background-color:black">
+							<tr>
+								<td> 1 </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+							</tr>
+							<tr>
+								<td> 2 </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+							</tr><tr>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+							</tr><tr>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+							</tr><tr>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+								<td> Hello world </td>
+							</tr>
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
