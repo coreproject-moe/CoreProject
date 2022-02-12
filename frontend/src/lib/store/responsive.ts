@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 import { browser } from '$app/env';
 
-function handleWindowChange(e) {
+function handleWindowChange(e: MediaQueryList) {
 	// Check if the media query is true
 	return e.matches;
 }
