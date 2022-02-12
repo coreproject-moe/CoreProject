@@ -5,6 +5,7 @@
 <svelte:head>
 	<title>Home Page | {projectName}</title>
 </svelte:head>
+
 <section class="hero is-fullheight-with-navbar">
 	<div class="hero-body is-flex-direction-column">
 		<div class="container has-text-centered">
