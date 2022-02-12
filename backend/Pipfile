@@ -14,8 +14,7 @@ djangorestframework-simplejwt = "*"
 # Webserver
 uvicorn = {version = "*", markers = "sys_platform != 'win32'", extras = ["standard"]}
 gunicorn = {version = "*", markers = "sys_platform != 'win32'", extras = ["gevent","setproctitle"]} # To serve Gunicorn
-# Extra python library
-libravatar-py = "*"
+
 # Pillow stuff
 pillow = "*"
 pillow-avif-plugin = "*"
