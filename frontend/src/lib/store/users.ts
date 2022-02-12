@@ -1,22 +1,12 @@
 import { browser } from '$app/env';
-import { writable } from 'svelte/store';
+import { get, writable } from 'svelte/store';
 import { tokenRefreshUrl } from '$lib/constants/backend/restEndpoints';
-
-const getUserState = () => {
-	// Try catch block to get value
-	try {
-		const data = browser && localStorage.getItem('tokens');
-		return JSON.parse(data).access !== undefined;
-	} catch {
-		return false;
-	}
-};
-
-export const isUserAuthenticated = writable(getUserState());
 
 export const userToken = writable(
 	(browser && JSON.parse(localStorage.getItem('tokens'))) || { refresh: '', access: '' }
 );
+
+export const isUserAuthenticated = writable(get(userToken).access);
 
 // Monitor changes and set it to localStorage
 userToken.subscribe((change: { access: string; refresh: string }) => {
