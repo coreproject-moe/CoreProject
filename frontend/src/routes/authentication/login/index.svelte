@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte';
 	import anime from 'animejs';
 	import { trapFocus } from '$lib/functions/trapFocus';
-	import { tokenObtainUrl } from '$lib/constants/backend/restEndpoints';
+	import { tokenObtainUrl } from '$lib/constants/backend/urls/restEndpoints';
 	import { isUserAuthenticated, userToken } from '$lib/store/users';
 	import { page } from '$app/stores';
 	import { browser } from '$app/env';
