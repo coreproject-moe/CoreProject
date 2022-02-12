@@ -7,7 +7,7 @@ const getUserState = () => {
 	try {
 		const data = browser && localStorage.getItem('tokens');
 		return JSON.parse(data).access !== undefined;
-	} catch (e) {
+	} catch {
 		return false;
 	}
 };
@@ -15,12 +15,12 @@ const getUserState = () => {
 export const isUserAuthenticated = writable(getUserState());
 
 export const userToken = writable(
-	(browser && JSON.parse(localStorage?.getItem('tokens'))) || { refresh: '', access: '' }
+	(browser && JSON.parse(localStorage.getItem('tokens'))) || { refresh: '', access: '' }
 );
 
 // Monitor changes and set it to localStorage
 userToken.subscribe((change: { access: string; refresh: string }) => {
-	browser && localStorage?.setItem('tokens', JSON.stringify(change));
+	browser && localStorage.setItem('tokens', JSON.stringify(change));
 });
 
 // Custom function to refresh tokens
@@ -28,7 +28,7 @@ userToken.subscribe((change: { access: string; refresh: string }) => {
 setInterval(async () => {
 	if (browser && localStorage.getItem('tokens')) {
 		const tokenObj: { access: string; refresh: string } = JSON.parse(
-			localStorage?.getItem('tokens')
+			localStorage.getItem('tokens')
 		);
 		const res = await fetch(tokenRefreshUrl, {
 			method: 'POST',

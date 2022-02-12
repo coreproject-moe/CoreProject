@@ -15,10 +15,10 @@
 					'Content-Type': 'application/json',
 					Authorization: `Bearer ${JSON.parse(localStorage.getItem('tokens')).access}`
 				})
-			}).catch((e) => {
+			}).catch(async () => {
 				localStorage.removeItem('tokens');
 				userToken.set({ refresh: '', access: '' });
-				console.error(`Can't fetch from backend | Flushing Tokens | Reason : ${e}`);
+				console.error("Can't fetch from backend | Flushing Tokens");
 			});
 			const data = await res.json();
 
