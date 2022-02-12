@@ -2,8 +2,9 @@ import { browser } from '$app/env';
 import { get, writable } from 'svelte/store';
 import { tokenRefreshUrl } from '$lib/constants/backend/restEndpoints';
 
-export const userToken =
-	browser && writable(JSON.parse(localStorage.getItem('tokens')) || { refresh: '', access: '' });
+export const userToken = writable(
+	(browser && JSON.parse(localStorage.getItem('tokens'))) || { refresh: '', access: '' }
+);
 
 export const isUserAuthenticated = writable(get(userToken).access);
 

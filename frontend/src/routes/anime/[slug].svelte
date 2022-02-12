@@ -128,5 +128,11 @@
 		background-color: black;
 		padding: 1.2em;
 		text-align: center;
+		transition: 0.1s;
+
+		&:hover {
+			background-color: hsl(0, 0%, 15%);
+			// border: 1px solid black;
+		}
 	}
 </style>
