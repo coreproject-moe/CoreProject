@@ -1,32 +1,30 @@
 <script>
 	import { page } from '$app/stores';
 	import { responsiveMode } from '$lib/store/responsive';
-	{
-		$page.params.slug;
-	}
+	const params = $page.params.slug;
 </script>
 
+<svelte:head />
 <section class="hero is-fullheight-with-navbar">
 	<div class="hero-body is-flex-direction-column">
 		<div
-			class={`columns is-mobile container ${
+			class={`columns is-desktop container ${
 				$responsiveMode === 'mobile' ? 'is-flex-direction-column' : 'is-flex-direction-row'
 			}`}
 		>
 			<div
-				class={`column is-align-self-center is-flex is-justify-content-center ${
-					$responsiveMode === 'mobile' ? 'is-10' : ''
-				}
-			${$responsiveMode === 'tablet' ? 'is-5' : ''}
-			${$responsiveMode === 'desktop' ? 'is-3' : ''}`}
+				class={`column is-align-self-center is-flex is-justify-content-center 
+				${$responsiveMode === 'desktop' ? 'is-3' : ''}`}
 			>
-				<table class="table is-bordered has-text-white" style="background-color:black; ">
+				<table
+					class={`table is-bordered has-text-white has-background-black ${
+						$responsiveMode === 'desktop' ? 'is-position-fixed' : ''
+					}`}
+					style={$responsiveMode === 'desktop' ? 'top: 5em;' : 'width: 80%;'}
+				>
 					<tbody>
 						<tr>
-							<td
-								colspan="2"
-								style="border: none;padding-top: 0;padding-bottom: 0;padding-right: 0;padding-left: 0;"
-							>
+							<td colspan="2" class="pb-0 pt-0 pr-0 pl-0 is-borderless">
 								<div class="is-align-self-center is-flex is-justify-content-center pb-1">
 									<div
 										class="progressive replace"
@@ -87,9 +85,7 @@
 					</tbody>
 				</table>
 			</div>
-			<div
-				class={`column is-7 is-flex ${$responsiveMode === 'desktop' ? '' : 'is-align-self-center'}`}
-			>
+			<div class={`column is-flex ${$responsiveMode === 'desktop' ? '' : 'is-align-self-center'}`}>
 				<div class="content has-text-white">
 					<h1 class="has-text-white">Hello World</h1>
 					<p>
@@ -99,59 +95,28 @@
 						Sub<sub>script</sub> works as well!
 					</p>
 					<h1 class="has-text-white">Episodes :</h1>
-					<div class="table-container">
-						<table class="table is-bordered has-text-white" style="background-color:black">
-							<tr>
-								<td> 1 </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-							</tr>
-							<tr>
-								<td> 2 </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-							</tr><tr>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-							</tr><tr>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-							</tr><tr>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-								<td> Hello world </td>
-							</tr>
-						</table>
+
+					<div class="grid-container">
+						{#each Array(100) as _, i}
+							<div class="grid-item is-size-6 has-border-white is-clickable">{i}</div>
+						{/each}
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
+
+<style lang="scss">
+	.grid-container {
+		display: grid;
+		align-items: center;
+		grid-template-columns: repeat(auto-fit, minmax(4em, 1fr));
+		background-color: black;
+	}
+	.grid-item {
+		background-color: black;
+		padding: 1.2em;
+		text-align: center;
+	}
+</style>
