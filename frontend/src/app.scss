@@ -4,9 +4,9 @@
 @import url('https://cdn.jsdelivr.net/npm/progressive-image.js/dist/progressive-image.css');
 
 // Fonts import
-@import 'typeface-ubuntu/index.css';
-@import 'typeface-roboto/index.css';
-@import 'typeface-cantarell/index.css';
+@import url('https://cdn.jsdelivr.net/npm/typeface-cantarell@1.1.13/index.min.css');
+@import url('https://cdn.jsdelivr.net/npm/typeface-roboto@1.1.13/index.min.css');
+@import url('https://cdn.jsdelivr.net/npm/typeface-ubuntu@1.1.13/index.min.css');
 
 // Import Swiper styles
 @import 'swiper/scss';
@@ -20,6 +20,21 @@
 
 $tippy-border-color: rgba(255, 255, 255, 0.9);
 
+// Special Class ( inspired by bulma )
+.has-border-white {
+	border: 1px solid white;
+}
+
+.is-position-fixed {
+	position: fixed !important;
+}
+.is-borderless {
+	border: 0 !important;
+}
+// @Override
+.has-background-black {
+	background-color: black !important;
+}
 // Some defaults
 :root {
 	--html-color: black;
