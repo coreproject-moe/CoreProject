@@ -1,18 +1,14 @@
-<script>
+<script lang="ts">
 	import { page } from '$app/stores';
 	import { projectName } from '$lib/constants/frontend/projectName';
+	import { snakeCaseToTitleCase } from '$lib/functions/snakeCaseToTitleCase';
 	import { responsiveMode } from '$lib/store/responsive';
-	const params = $page.params.slug;
+
+	const anime_name = $page.params.anime_name;
 </script>
 
 <svelte:head>
-	<title
-		>{params
-			.split('_')
-			.filter((x) => x.length > 0)
-			.map((x) => x.charAt(0).toUpperCase() + x.slice(1))
-			.join(' ')} | {projectName}</title
-	>
+	<title>{snakeCaseToTitleCase(anime_name)} | {projectName}</title>
 </svelte:head>
 
 <section class="hero is-fullheight-with-navbar">
@@ -109,7 +105,7 @@
 					<div class="grid-container">
 						{#each Array(100) as _, i}
 							<a
-								href={`/anime/${params}/episode/${i}`}
+								href={`/anime/${anime_name}/episode/${i}`}
 								class="grid-item is-size-6 has-border-white is-clickable is-font-face-roboto has-text-white"
 							>
 								{i}
