@@ -1,6 +1,8 @@
 <script context="module" lang="ts">
 	import { browser } from '$app/env';
+
 	import { userToken } from '$lib/store/users';
+
 	import { get } from 'svelte/store';
 
 	export async function load({ fetch }) {
@@ -59,7 +61,6 @@
 
 	// Constants
 	import { signupPageUrl, userEditInfoPageUrl } from '$lib/constants/backend/urls/pageUrlEndpoints';
-	import { avatarUrl } from '$lib/constants/backend/urls/restEndpoints';
 
 	// Handle Icons
 	import { onMount } from 'svelte';
