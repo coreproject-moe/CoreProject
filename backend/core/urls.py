@@ -40,6 +40,7 @@ urlpatterns = [
     ),
     # Rest endpoints
     path("api/v1/users/", include("api.v1._user.urls")),
+    path("api/v1/capture/", include("api.v1.capture.urls")),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

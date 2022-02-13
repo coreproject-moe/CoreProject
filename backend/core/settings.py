@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "pages.authentication",
     # Rest stuff
     "api.v1._user",
+    "api.v1.capture",
 ]
 
 MIDDLEWARE = [
