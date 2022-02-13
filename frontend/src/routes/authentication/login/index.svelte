@@ -9,7 +9,6 @@
 	import { isUserAuthenticated, userToken } from '$lib/store/users';
 	import { projectName } from '$lib/constants/frontend/projectName';
 	import { tokenObtainUrl } from '$lib/constants/backend/urls/restEndpoints';
-	
 
 	onMount(async () => {
 		anime({
@@ -40,33 +39,37 @@
 	};
 
 	const handleFormSubmit = async () => {
-		const res = await fetch(tokenObtainUrl, {
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json'
-			},
-			method: 'POST',
-			body: JSON.stringify({
-				username: username,
-				password: password
-			})
-		});
-		const data = await res.json();
+		try {
+			const res = await fetch(tokenObtainUrl, {
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json'
+				},
+				method: 'POST',
+				body: JSON.stringify({
+					username: username,
+					password: password
+				})
+			});
+			const data = await res.json();
 
-		if (res?.ok) {
-			userToken.set(data);
+			if (res?.ok) {
+				userToken.set(data);
 
-			const next = $page.url.searchParams.get('next');
+				const next = $page.url.searchParams.get('next');
 
-			// Goto Next page if it exists.
-			if (browser) {
-				if (next) window.location.href = next;
+				// Goto Next page if it exists.
+				if (browser) {
+					if (next) window.location.href = next;
 
-				window.location.href = '/home/';
+					window.location.href = '/home/';
+				}
 			}
-		}
 
-		errorMessage = data.detail;
+			errorMessage = data.detail;
+		} catch {
+			errorMessage = 'Cannot POST to Backend | Is backend down ? 🤔';
+		}
 	};
 </script>
 
