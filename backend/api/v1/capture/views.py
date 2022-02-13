@@ -22,12 +22,12 @@ class CaptureView(APIView):
     ]
     serializer_class = CaptureSerializer
 
-    def get(self, request: HttpResponse):
+    def get(self, request: HttpResponse) -> Response:
         data, _ = CaptureModel.objects.get_or_create(user=request.user)
         serializer = CaptureSerializer(data, many=False)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def patch(self, request: HttpResponse):
+    def patch(self, request: HttpResponse) -> Response:
         instance, _ = CaptureModel.objects.get_or_create(user=request.user)
         serializer = CaptureSerializer(
             data=request.data,
