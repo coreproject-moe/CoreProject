@@ -24,9 +24,6 @@
 			swiperSpacesBetween = 30;
 			swiperSlidesPerView = 5;
 			break;
-			swiperSpacesBetween = 30;
-			swiperSlidesPerView = 5;
-			break;
 	}
 </script>
 

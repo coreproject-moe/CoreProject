@@ -29,3 +29,9 @@ export const tokenBlacklistUrl = `${baseUrl}/api/v1/token/blacklist/`;
     Example = http://127.0.0.1:8000/api/v1/users/info/
 */
 export const userInfoUrl = `${baseUrl}/api/v1/users/info/`;
+/*
+    Capture Endpoint (JSON)
+    Example = http://127.0.0.1:8000/api/v1/capture/
+
+*/
+export const captureEndpoint = `${baseUrl}/api/v1/capture/`;
