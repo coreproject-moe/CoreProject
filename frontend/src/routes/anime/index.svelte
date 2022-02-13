@@ -18,7 +18,12 @@
 			swiperSpacesBetween = 20;
 			swiperSlidesPerView = 3;
 			break;
+		case 'widescreen':
 		case 'desktop':
+		case 'fullhd':
+			swiperSpacesBetween = 30;
+			swiperSlidesPerView = 5;
+			break;
 			swiperSpacesBetween = 30;
 			swiperSlidesPerView = 5;
 			break;

@@ -20,13 +20,31 @@
 		>
 			<div
 				class={`column is-align-self-center is-flex is-justify-content-center 
-				${$responsiveMode === 'desktop' ? 'is-3' : ''}`}
+				${
+					$responsiveMode === 'desktop' ||
+					$responsiveMode === 'widescreen' ||
+					$responsiveMode === 'fullhd'
+						? 'is-3'
+						: ''
+				}`}
 			>
 				<table
 					class={`table is-bordered has-text-white has-background-black is-font-face-ubuntu ${
-						$responsiveMode === 'desktop' ? 'is-position-fixed' : ''
+						$responsiveMode === 'desktop' ||
+						$responsiveMode === 'widescreen' ||
+						$responsiveMode === 'fullhd'
+							? 'is-position-fixed'
+							: ''
 					}`}
-					style={$responsiveMode === 'desktop' ? 'top: 5em;' : 'width: 80%;'}
+					style={`${
+						$responsiveMode === 'desktop' ||
+						$responsiveMode === 'widescreen' ||
+						$responsiveMode === 'fullhd'
+							? 'top: 5em;'
+							: 'width: 80%;'
+					} ${$responsiveMode === 'desktop' ? 'font-size:12px;' : ''} ${
+						$responsiveMode === 'widescreen' ? 'font-size:13px;' : ''
+					}`}
 				>
 					<tbody>
 						<tr>
@@ -91,7 +109,15 @@
 					</tbody>
 				</table>
 			</div>
-			<div class={`column is-flex ${$responsiveMode === 'desktop' ? '' : 'is-align-self-center'}`}>
+			<div
+				class={`column is-flex ${
+					$responsiveMode === 'desktop' ||
+					$responsiveMode === 'widescreen' ||
+					$responsiveMode === 'fullhd'
+						? ''
+						: 'is-align-self-center'
+				}`}
+			>
 				<div class="content has-text-white">
 					<h1 class="has-text-white">Hello World</h1>
 					<p>
