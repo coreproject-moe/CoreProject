@@ -155,7 +155,11 @@
 	);
 </script>
 
-<nav class="navbar container is-clipped is-fixed-top">
+<nav
+	class={`navbar is-clipped is-fixed-top ${
+		$responsiveMode === 'widescreen' ? '' : 'container'
+	}`}
+>
 	<div class="navbar-brand is-clipped">
 		<a class="navbar-item is-clickable" href="https://bulma.io">
 			<img src="/logo.avif" alt="logo" width="112" height="28" />
@@ -186,7 +190,7 @@
 				}`}
 			>
 				<button
-					class={`navbar-item button is-ghost is-rounded is-unselectable ${
+					class={`navbar-item button is-ghost is-rounded is-unselectable  ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('home') ? 'hover' : ''}
 					`}
@@ -208,9 +212,12 @@
 				>
 					<ion-icon name="home-sharp" class="animejs__home__icon" />
 					<p
-						class={$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
-							? 'pt-2 nav-icon-button'
-							: ''}
+						class={`${
+							$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
+								? 'pt-2 nav-icon-button'
+								: ''
+						}
+						${$responsiveMode === 'widescreen' ? 'is-size-7' : ''}`}
 					>
 						<span class="is-hidden-touch">&nbsp;</span> Home
 					</p>
@@ -238,9 +245,11 @@
 				>
 					<ion-icon name="film-outline" class="animejs__anime__icon" />
 					<p
-						class={$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
-							? 'pt-2 nav-icon-button'
-							: ''}
+						class={`${
+							$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
+								? 'pt-2 nav-icon-button'
+								: ''
+						} ${$responsiveMode === 'widescreen' ? 'is-size-7' : ''}`}
 					>
 						<span class="is-hidden-touch">&nbsp;</span>
 						Anime
@@ -268,9 +277,11 @@
 				>
 					<ion-icon name="images-outline" class="animejs__manga__icon" />
 					<p
-						class={$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
-							? 'pt-2 nav-icon-button'
-							: ''}
+						class={`${
+							$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
+								? 'pt-2 nav-icon-button'
+								: ''
+						} ${$responsiveMode === 'widescreen' ? 'is-size-7' : ''}`}
 					>
 						<span class="is-hidden-touch">&nbsp;</span> Manga
 					</p>
@@ -297,9 +308,11 @@
 				>
 					<ion-icon name="musical-note-outline" class="animejs__music__icon" />
 					<p
-						class={$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
-							? 'pt-2 nav-icon-button'
-							: ''}
+						class={`${
+							$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
+								? 'pt-2 nav-icon-button'
+								: ''
+						} ${$responsiveMode === 'widescreen' ? 'is-size-7' : ''}`}
 					>
 						<span class="is-hidden-touch">&nbsp;</span>
 						Soundcore
@@ -327,9 +340,11 @@
 				>
 					<ion-icon name="aperture-outline" class="animejs__shots__icon" />
 					<p
-						class={$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
-							? 'pt-2 nav-icon-button'
-							: ''}
+						class={`${
+							$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
+								? 'pt-2 nav-icon-button'
+								: ''
+						} ${$responsiveMode === 'widescreen' ? 'is-size-7' : ''}`}
 					>
 						<span class="is-hidden-touch">&nbsp;</span>
 						Shots
