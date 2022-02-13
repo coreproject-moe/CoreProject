@@ -71,6 +71,7 @@
 	import tippy from 'tippy.js';
 	import dayjs from 'dayjs';
 	import md5 from 'md5';
+
 	onMount(async () => {
 		// https://bulma.io/documentation/components/navbar/#fixed-navbar
 		const HTMLTAG = browser && document.getElementsByTagName('html')[0]; // '0' to assign the first (and only `HTML` tag)
