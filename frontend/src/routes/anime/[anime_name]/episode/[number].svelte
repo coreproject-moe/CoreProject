@@ -7,6 +7,10 @@
 	import { snakeCaseToTitleCase } from '$lib/functions/snakeCaseToTitleCase';
 
 	import { onMount } from 'svelte';
+	import { captureEndpoint } from '$lib/constants/backend/urls/restEndpoints';
+
+	import { userToken } from '$lib/store/users';
+	import { get } from 'svelte/store';
 
 	const episode_number = $page.params.number;
 	const anime_name = $page.params.anime_name;
@@ -29,8 +33,20 @@
 		() => [player]
 	);
 
-	const onVolumeChange = () => {
+	const onVolumeChange = async () => {
 		browser && localStorage.setItem('vimejs-volume', JSON.stringify(player?.volume));
+
+		fetch(captureEndpoint, {
+			method: 'PATCH',
+			headers: new Headers({
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${get(userToken).access}`
+			}),
+			body: JSON.stringify({
+				video_volume: player?.volume
+			})
+		});
 	};
 </script>
 

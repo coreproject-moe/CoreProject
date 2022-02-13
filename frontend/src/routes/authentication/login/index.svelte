@@ -60,9 +60,11 @@
 
 				// Goto Next page if it exists.
 				if (browser) {
-					if (next) window.location.href = next;
-
-					window.location.href = '/home/';
+					if (next) {
+						window.location.href = next;
+					} else {
+						window.location.href = '/home/';
+					}
 				}
 			}
 
