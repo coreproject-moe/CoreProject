@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { browser } from '$app/env';
 	import { page } from '$app/stores';
+
+	import { useEffect } from '$lib/hooks/useEffect';
 	import { projectName } from '$lib/constants/frontend/projectName';
 	import { snakeCaseToTitleCase } from '$lib/functions/snakeCaseToTitleCase';
 
-	import { useEffect } from '$lib/hooks/useEffect';
 	import { onMount } from 'svelte';
 
 	const episode_number = $page.params.number;
