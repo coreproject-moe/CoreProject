@@ -35,6 +35,8 @@
 						$responsiveMode === 'fullhd'
 							? 'is-position-fixed'
 							: ''
+					} ${
+						$responsiveMode === 'desktop' || $responsiveMode === 'widescreen' ? 'is-size-7' : ''
 					}`}
 					style={`${
 						$responsiveMode === 'desktop' ||
@@ -42,8 +44,6 @@
 						$responsiveMode === 'fullhd'
 							? 'top: 5em;'
 							: 'width: 80%;'
-					} ${$responsiveMode === 'desktop' ? 'font-size:12px;' : ''} ${
-						$responsiveMode === 'widescreen' ? 'font-size:13px;' : ''
 					}`}
 				>
 					<tbody>
