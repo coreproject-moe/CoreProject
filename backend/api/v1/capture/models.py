@@ -16,3 +16,9 @@ class CaptureModel(models.Model):
             MinValueValidator(0),
         ],
     )
+
+    def __str__(self) -> str:
+        return f"User = {self.user.username} | Video Volume = {self.video_volume}"
+
+    class Meta:
+        verbose_name = "User Info Capture Model"
