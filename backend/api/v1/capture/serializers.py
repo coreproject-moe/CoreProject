@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from api.v1._user.serializers import UserSerializer
+from .._user.serializers import UserSerializer
 from .models import CaptureModel
 
 
