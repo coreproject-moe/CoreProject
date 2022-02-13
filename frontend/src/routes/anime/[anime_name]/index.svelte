@@ -43,8 +43,12 @@
 						$responsiveMode === 'widescreen' ||
 						$responsiveMode === 'fullhd'
 							? 'top: 5em;'
-							: 'width: 80%;'
-					}`}
+							: ''
+					}
+					${$responsiveMode === 'mobile' ? 'width: 90%;' : ''} ${
+						$responsiveMode === 'tablet' ? 'width:80%' : ''
+					}
+					`}
 				>
 					<tbody>
 						<tr>
