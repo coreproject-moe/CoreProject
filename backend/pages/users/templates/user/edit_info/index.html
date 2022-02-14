@@ -92,7 +92,7 @@ Change info for {{ request.user }}
                                 {% if request.user.avatar %}
                                     $el.href = `{{ request.user.avatar.url|escapejs }}`
                                 {% else %}
-                                    $el.href = `https://seccdn.libravatar.org/avatar/${MD5("{{ request.user.email|escapejs }}")}?s=96`
+                                    $el.href = `https://seccdn.libravatar.org/avatar/${MD5("{{ request.user.email | escapejs }}")}?s=96`
                                 {% endif %}
                         }
                     '
