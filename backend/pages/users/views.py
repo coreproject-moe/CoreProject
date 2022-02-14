@@ -13,12 +13,13 @@ from .forms import UserEditInfoForm
 def user_edit_info_page(request):
     instance = get_user_model().objects.get(id=request.user.id)
     form = UserEditInfoForm(
-        data=request.POST or None,
-        files=request.FILES or None,
+        request.POST or None,
+        request.FILES or None,
         instance=instance,
     )
 
     if request.method == "POST":
+
         if form.is_valid():
             form.save()
             return redirect(reverse("user_edit_info_page"))
