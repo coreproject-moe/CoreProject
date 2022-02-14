@@ -28,6 +28,14 @@ Change info for {{ request.user }}
     .select-items option {
         appearance: none;
     }
+    .avatar-preview {
+        position: absolute;
+        top: -9999px;
+        bottom: -9999px;
+        left: -9999px;
+        right: -9999px;
+        margin: auto;
+    }
 </style>
 <div class="icon-box box">
     {% if form.errors %}
@@ -97,7 +105,7 @@ Change info for {{ request.user }}
                         }
                     '
                     class="progressive replace"
-                    style="border-radius: 9999px"
+                    style="border-radius: 9999px; height: 96px; margin: auto"
                 >
                     <img
                         class="is-rounded preview avatar-preview"
