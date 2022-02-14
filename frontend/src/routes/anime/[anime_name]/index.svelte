@@ -161,7 +161,6 @@
 
 		&:hover {
 			background-color: hsl(0, 0%, 15%);
-			// border: 1px solid black;
 		}
 	}
 </style>
