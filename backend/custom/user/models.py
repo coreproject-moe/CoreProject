@@ -1,21 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.core.files import File
 
-from io import BytesIO
-from PIL import Image
-import pillow_avif
+from .mixins.resize import ResizeImageMixin
 
 
-class CustomUser(AbstractUser):
+class CustomUser(AbstractUser, ResizeImageMixin):
     avatar = models.ImageField(upload_to="avatars", default=None, blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        im = Image.open(self.avatar)
-
-        in_memory = BytesIO()
-        im.save(in_memory, format="avif")
-
-        self.avatar = File(in_memory)
+        if self.id:
+            file = self.resize(self.avatar)
+            self.avatar.save(f"{self.id}.avif", file, save=False)
 
         super(CustomUser, self).save(*args, **kwargs)
