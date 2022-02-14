@@ -97,7 +97,7 @@
 			</div>
 			<div
 				class={`column is-flex ${
-					$responsiveMode === ('desktop' || 'widescreen' || 'fullhd') ? '' : 'is-align-self-center'
+					$responsiveMode === 'desktop' || 'widescreen' || 'fullhd' ? '' : 'is-align-self-center'
 				}`}
 			>
 				<div class="content has-text-white">
