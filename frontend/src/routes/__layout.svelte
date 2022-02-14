@@ -160,7 +160,9 @@
 </script>
 
 <nav
-	class={`navbar is-clipped is-fixed-top ${$responsiveMode === 'widescreen' ? '' : 'container'}`}
+	class={`navbar is-clipped is-transparent is-fixed-top ${
+		$responsiveMode === 'widescreen' ? '' : 'container'
+	}`}
 >
 	<div class="navbar-brand is-clipped">
 		<a class="navbar-item is-clickable" href="https://bulma.io">
@@ -191,7 +193,9 @@
 						: ''
 				}`}
 			>
-				<button
+				<a
+					href="/home"
+					sveltekit:prefetch
 					class={`navbar-item button is-ghost is-rounded is-unselectable  ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('home') ? 'hover' : ''}
@@ -208,9 +212,6 @@
 							color: '#d9d9d9'
 						});
 					}}
-					on:click|preventDefault={async () => {
-						goto('/home');
-					}}
 				>
 					<ion-icon name="home-sharp" class="animejs__home__icon" />
 					<p
@@ -223,8 +224,10 @@
 					>
 						<span class="is-hidden-touch">&nbsp;</span> Home
 					</p>
-				</button>
-				<button
+				</a>
+				<a
+					href="/anime"
+					sveltekit:prefetch
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('anime') ? 'hover' : ''}
@@ -241,9 +244,6 @@
 							color: '#d9d9d9'
 						});
 					}}
-					on:click|preventDefault={async () => {
-						goto('/anime');
-					}}
 				>
 					<ion-icon name="film-outline" class="animejs__anime__icon" />
 					<p
@@ -256,8 +256,10 @@
 						<span class="is-hidden-touch">&nbsp;</span>
 						Anime
 					</p>
-				</button>
-				<button
+				</a>
+				<a
+					href="/manga"
+					sveltekit:prefetch
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('manga') ? 'hover' : ''}`}
@@ -273,9 +275,6 @@
 							color: '#d9d9d9'
 						});
 					}}
-					on:click|preventDefault={async () => {
-						goto('/manga');
-					}}
 				>
 					<ion-icon name="images-outline" class="animejs__manga__icon" />
 					<p
@@ -287,8 +286,10 @@
 					>
 						<span class="is-hidden-touch">&nbsp;</span> Manga
 					</p>
-				</button>
-				<button
+				</a>
+				<a
+					sveltekit:prefetch
+					href="/soundcore"
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('soundcore') ? 'hover' : ''}`}
@@ -304,9 +305,6 @@
 							color: '#d9d9d9'
 						});
 					}}
-					on:click|preventDefault={async () => {
-						goto('/soundcore');
-					}}
 				>
 					<ion-icon name="musical-note-outline" class="animejs__music__icon" />
 					<p
@@ -319,8 +317,10 @@
 						<span class="is-hidden-touch">&nbsp;</span>
 						Soundcore
 					</p>
-				</button>
-				<button
+				</a>
+				<a
+					sveltekit:prefetch
+					href="/shots"
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('shots') ? 'hover' : ''}`}
@@ -336,9 +336,6 @@
 							color: '#d9d9d9'
 						});
 					}}
-					on:click|preventDefault={async () => {
-						goto('/shots');
-					}}
 				>
 					<ion-icon name="aperture-outline" class="animejs__shots__icon" />
 					<p
@@ -351,7 +348,7 @@
 						<span class="is-hidden-touch">&nbsp;</span>
 						Shots
 					</p>
-				</button>
+				</a>
 				<div class="control has-icons-left mt-3 ml-4 is-hidden-touch">
 					<input
 						class="input has-background-black has-text-white search__input"
@@ -465,6 +462,7 @@
 				<figure class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture">
 					<a
 						href={userEditInfoPageUrl}
+						rel="external"
 						data-href={userInfo?.avatar
 							? `${baseUrl}${userInfo?.avatar}`
 							: `https://seccdn.libravatar.org/avatar/${md5(userInfo.email)}/?s=64`}
@@ -527,22 +525,20 @@
 					<div class="columns is-mobile is-centered">
 						<div class="column is-narrow">
 							<div class="buttons">
-								<button
+								<a
 									class="button is-ghost is-rounded"
-									on:click={async () => {
-										goto(`/authentication/login?next=${$page?.url?.pathname}`);
-									}}
+									href={`/authentication/login?next=${$page?.url?.pathname}`}
+									sveltekit:prefetch
 								>
 									Log in
-								</button>
-								<button
+								</a>
+								<a
 									class="button is-ghost is-rounded"
-									on:click={async () => {
-										goto(`${signupPageUrl}?next=${$page?.url?.pathname}`);
-									}}
+									href={`${signupPageUrl}?next=${$page?.url?.pathname}`}
+									sveltekit:prefetch
 								>
 									Sign Up
-								</button>
+								</a>
 							</div>
 						</div>
 					</div>

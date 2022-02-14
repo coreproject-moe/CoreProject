@@ -17,6 +17,7 @@
 
 	let showPlayer = false;
 	let player: HTMLVmPlayerElement;
+	let timer = 0;
 
 	onMount(async () => {
 		const { defineCustomElements } = await import('@vime/core');
@@ -52,6 +53,8 @@
 
 <svelte:head>
 	<title>{snakeCaseToTitleCase(anime_name)} | Episode : {episode_number} | {projectName}</title>
+	<!-- VimeJS import -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@vime/core@^5/themes/default.css" />
 </svelte:head>
 
 <div class="container pt-5">
@@ -80,7 +83,3 @@
 		<div />
 	</div>
 </nav>
-
-<style lang="scss">
-	@import url('https://cdn.jsdelivr.net/npm/@vime/core@^5/themes/default.css');
-</style>

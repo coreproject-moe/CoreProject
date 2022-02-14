@@ -133,6 +133,7 @@
 					<div class="grid-container">
 						{#each Array(100) as _, i}
 							<a
+								sveltekit:prefetch
 								href={`/anime/${anime_name}/episode/${i}`}
 								class="grid-item is-size-6 has-border-white is-clickable is-font-face-roboto has-text-white"
 							>
