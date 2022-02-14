@@ -29,17 +29,6 @@ class UserEditInfoForm(forms.ModelForm):
             },
         ),
     )
-    avatar = forms.ImageField(
-        label="",
-        required=False,
-        widget=forms.FileInput(
-            attrs={
-                "class": "file-input is-clickable",
-                "placeholder": "Upload avatar",
-                "style": "z-index:1000000;",
-            }
-        ),
-    )
 
     class Meta:
         model = CustomUser
@@ -48,6 +37,7 @@ class UserEditInfoForm(forms.ModelForm):
             "last_name",
             "username",
             "password",
+            "avatar",
         ]
 
         widgets = {
@@ -71,6 +61,13 @@ class UserEditInfoForm(forms.ModelForm):
                     "placeholder": "Username",
                     "autocomplete": "off",
                 },
+            ),
+            "avatar": forms.FileInput(
+                attrs={
+                    "class": "file-input is-clickable",
+                    "placeholder": "Upload avatar",
+                    "style": "z-index:1000000;",
+                }
             ),
         }
 
