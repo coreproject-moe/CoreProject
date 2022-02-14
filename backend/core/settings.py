@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt.token_blacklist",
     # 3rd party stuff
     "corsheaders",
+    "django_cleanup.apps.CleanupConfig",
     # Custom Stuff
     "custom.user",
     # Pages
@@ -52,8 +53,6 @@ INSTALLED_APPS = [
     # Rest stuff
     "api.v1._user",
     "api.v1.capture",
-    # Custom app
-    "django_cleanup.apps.CleanupConfig",
 ]
 
 MIDDLEWARE = [
