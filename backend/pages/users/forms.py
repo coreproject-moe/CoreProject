@@ -71,6 +71,17 @@ class UserEditInfoForm(forms.ModelForm):
             ),
         }
 
+    # def clean_avatar(self):
+    #     cleaned_data = super(UserEditInfoForm, self).clean()
+    #     img = cleaned_data.get("avatar")
+    #     if not img:
+    #         return img
+
+    #     from PIL import Image
+    #     from io import BytesIO
+
+    #     print(img)
+
     def clean(self):
         cleaned_data = super(UserEditInfoForm, self).clean()
         password = cleaned_data.get("password")
