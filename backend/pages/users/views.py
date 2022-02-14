@@ -12,11 +12,13 @@ from .forms import UserEditInfoForm
 @login_required()
 def user_edit_info_page(request):
     instance = CustomUser.objects.get(id=request.user.id)
-    form = UserEditInfoForm(request.POST or None, instance=instance)
+    form = UserEditInfoForm(request.POST, request.FILES or None, instance=instance)
 
     if request.method == "POST":
         if form.is_valid():
             form.save()
             return redirect(reverse("user_edit_info_page"))
+        print(form.is_valid())
+        print(form.errors)
 
     return render(request, "user/edit_info/index.html", {"form": form})

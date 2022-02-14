@@ -14,6 +14,7 @@ class UserEditInfoForm(forms.ModelForm):
                 "class": "input ",
                 "value": "",
                 "placeholder": "Password",
+                "autocomplete": "new-password",
             },
         ),
     )
@@ -24,7 +25,19 @@ class UserEditInfoForm(forms.ModelForm):
                 "class": "input ",
                 "value": "",
                 "placeholder": "Confirm Password",
+                "autocomplete": "new-password",
             },
+        ),
+    )
+    avatar = forms.ImageField(
+        label="",
+        required=False,
+        widget=forms.FileInput(
+            attrs={
+                "class": "file-input is-clickable",
+                "placeholder": "Upload avatar",
+                "style": "z-index:1000000;",
+            }
         ),
     )
 
@@ -42,18 +55,21 @@ class UserEditInfoForm(forms.ModelForm):
                 attrs={
                     "class": "input",
                     "placeholder": "First Name",
+                    "autocomplete": "off",
                 },
             ),
             "last_name": forms.TextInput(
                 attrs={
                     "class": "input",
                     "placeholder": "Last Name",
+                    "autocomplete": "off",
                 },
             ),
             "username": forms.TextInput(
                 attrs={
                     "class": "input",
                     "placeholder": "Username",
+                    "autocomplete": "off",
                 },
             ),
         }
