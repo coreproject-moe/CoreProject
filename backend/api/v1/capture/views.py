@@ -1,5 +1,6 @@
 from rest_framework import status
-from rest_framework.views import APIView
+from rest_framework import generics
+from rest_framework import mixins
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
 from rest_framework.authentication import SessionAuthentication
@@ -13,8 +14,16 @@ from django.http.response import HttpResponse
 # Create your views here.
 
 
-class CaptureView(APIView):
-    """Captures Video volume, Sound Volume for seamless experience"""
+class CaptureView(
+    generics.GenericAPIView,
+    mixins.UpdateModelMixin,
+    mixins.ListModelMixin,
+):
+    """
+    Captures
+        * AnimeCore (video player) volume
+        * SoundCore (music player) Volume
+    """
 
     parser_classes = [JSONParser]
     authentication_classes = [
