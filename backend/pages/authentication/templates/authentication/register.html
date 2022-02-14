@@ -12,18 +12,19 @@ Register
     method="POST"
     enctype="multipart/form-data"
     x-trap="true"
-    x-init="$watch('password_shown', (value) => {
-        const elementOne = document.querySelector('#id_password_1') 
-
-        switch (value) {
-            case true:
-                elementOne.type = 'text';
-                break;
-            case false:
-                elementOne.type = 'password';
-                break;
+    x-init="
+        $watch('password_shown', (value) => {
+            const elementOne = document.querySelector('#id_password_1');
+        
+            switch (value) {
+                case true:
+                    elementOne.type = 'text';
+                    break;
+                case false:
+                    elementOne.type = 'password';
+                    break;
             }
-        })
+        });
     "
 >
     {% csrf_token %}
@@ -36,27 +37,27 @@ Register
         <label
             class="file-label"
             x-init="
-            () => {
-                const element = document.querySelector('.file-input');
-                element.onchange = function() {
-                    const file = element.files[0];
-                    if (file) {
-                        const reader = new FileReader();
-                        reader.onload = function() {
-                            let dataURL = reader.result;
-                            const output = document.querySelector('.avatar-preview');
-                            output.width = '50';
-                            output.height = '40';
-                            output.src = dataURL;
+                () => {
+                    const element = document.querySelector('.file-input');
+                    element.onchange = function() {
+                        const file = element.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function() {
+                                let dataURL = reader.result;
+                                const output = document.querySelector('.avatar-preview');
+                                output.width = '50';
+                                output.height = '40';
+                                output.src = dataURL;
 
-                            const fileIconDiv = document.querySelector('.file-icon')
-                            fileIconDiv.classList.add('is-hidden')
+                                const fileIconDiv = document.querySelector('.file-icon')
+                                fileIconDiv.classList.add('is-hidden')
+                            }
+                            reader.readAsDataURL(file);
                         }
-                        reader.readAsDataURL(file);
                     }
                 }
-            }
-        "
+            "
         >
             {{ form.avatar }}
             <span class="file-cta" style="background-color: black">
