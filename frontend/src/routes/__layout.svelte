@@ -1,9 +1,8 @@
 <script context="module" lang="ts">
 	import { browser } from '$app/env';
-
-	import { userToken } from '$lib/store/users';
-
 	import { get } from 'svelte/store';
+	import { userToken } from '$lib/store/users';
+	import { userInfoUrl } from '$lib/constants/backend/urls/restEndpoints';
 
 	export async function load({ fetch }) {
 		// For the love of GOD.
@@ -39,8 +38,6 @@
 </script>
 
 <script lang="ts">
-	import { userInfoUrl } from '$lib/constants/backend/urls/restEndpoints';
-
 	export let userInfo: {
 		first_name: string;
 		last_name: string;
@@ -51,6 +48,7 @@
 		last_login: string;
 		avatar: string;
 	};
+
 	// Main SCSS import
 	import '../app.scss';
 
@@ -100,7 +98,6 @@
 		});
 
 		// TippyJS
-
 		tippy('.animejs__github__button', {
 			content: 'Github',
 			theme: 'black'
@@ -124,9 +121,8 @@
 	let navbarBurgerClosed = false;
 	// Auto close the navbar Buger to close if its on Mobile or Tablet
 	$: navbarBurgerClosed = $responsiveMode === ('mobile' || 'tablet');
-
 	// Listen to changes on arrow button
-	useEffect(
+	$: useEffect(
 		() => {
 			switch (arrowButtonTurned) {
 				case true: {
