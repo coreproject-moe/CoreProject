@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     # Rest stuff
     "api.v1._user",
     "api.v1.capture",
+    # Custom app
+    "django_cleanup.apps.CleanupConfig",
 ]
 
 MIDDLEWARE = [
