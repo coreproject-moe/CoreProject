@@ -8,7 +8,24 @@ Register
 
 <!-- We Write HTML here-->
 {% block form %}
-<form method="POST" enctype="multipart/form-data" x-trap="true">
+<form
+    method="POST"
+    enctype="multipart/form-data"
+    x-trap="true"
+    x-init="$watch('password_shown', (value) => {
+        const elementOne = document.querySelector('#id_password_1') 
+
+        switch (value) {
+            case true:
+                elementOne.type = 'text';
+                break;
+            case false:
+                elementOne.type = 'password';
+                break;
+            }
+        })
+    "
+>
     {% csrf_token %}
     <div
         class="is-flex is-justify-content-center has-text-white is-size-5 has-text-centered"
@@ -165,8 +182,18 @@ Register
     <div class="items field is-horizontal">
         <div class="field-body">
             <div class="field">
-                <p class="control is-expanded has-icons-left">
+                <p class="control is-expanded has-icons-left has-icons-right">
                     {{ form.password_1 }}
+                    <span
+                        class="icon is-small is-right is-clickable is-unselectable"
+                        @click="
+                            () => {
+                                password_shown =! password_shown
+                            }
+                        "
+                    >
+                        👀
+                    </span>
                     <span class="icon is-small is-left">
                         <ion-icon
                             class="animejs__password__one__icon"
