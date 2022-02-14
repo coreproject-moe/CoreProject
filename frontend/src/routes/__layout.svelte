@@ -123,8 +123,8 @@
 
 	let navbarBurgerClosed = false;
 	// Auto close the navbar Buger to close if its on Mobile or Tablet
-	$: navbarBurgerClosed = $responsiveMode === ('mobile' || 'tablet');
-
+	$: navbarBurgerClosed = $responsiveMode === 'mobile' || $responsiveMode === 'tablet';
+	
 	// Listen to changes on arrow button
 	useEffect(
 		() => {
@@ -184,14 +184,14 @@
 		<div>
 			<div
 				class={`navbar-start mb-3 ${
-					$responsiveMode === ('mobile' || 'tablet')
+					$responsiveMode === 'mobile' || 'tablet'
 						? 'is-flex is-flex-direction-row is-justify-content-center'
 						: ''
 				}`}
 			>
 				<button
 					class={`navbar-item button is-ghost is-rounded is-unselectable  ${
-						$responsiveMode === ('mobile' || 'tablet') ? 'pl-2 pr-2' : 'ml-2'
+						$responsiveMode === 'mobile' || 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('home') ? 'hover' : ''}
 					`}
 					on:mouseenter={async () => {
@@ -212,7 +212,7 @@
 				>
 					<ion-icon name="home-sharp" class="animejs__home__icon" />
 					<p
-						class={`${$responsiveMode === ('mobile' || 'tablet') ? 'pt-2 nav-icon-button' : ''}
+						class={`${$responsiveMode === 'mobile' || 'tablet' ? 'pt-2 nav-icon-button' : ''}
 						${$responsiveMode === 'widescreen' ? 'is-size-7' : ''}`}
 					>
 						<span class="is-hidden-touch">&nbsp;</span> Home
@@ -220,7 +220,7 @@
 				</button>
 				<button
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
-						$responsiveMode === ('mobile' || 'tablet') ? 'pl-2 pr-2' : 'ml-2'
+						$responsiveMode === 'mobile' || 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('anime') ? 'hover' : ''}
 					`}
 					on:mouseenter={async () => {
@@ -241,7 +241,7 @@
 				>
 					<ion-icon name="film-outline" class="animejs__anime__icon" />
 					<p
-						class={`${$responsiveMode === ('mobile' || 'tablet') ? 'pt-2 nav-icon-button' : ''} ${
+						class={`${$responsiveMode === 'mobile' || 'tablet' ? 'pt-2 nav-icon-button' : ''} ${
 							$responsiveMode === 'widescreen' ? 'is-size-7' : ''
 						}`}
 					>
@@ -251,7 +251,7 @@
 				</button>
 				<button
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
-						$responsiveMode === ('mobile' || 'tablet') ? 'pl-2 pr-2' : 'ml-2'
+						$responsiveMode === 'mobile' || 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('manga') ? 'hover' : ''}`}
 					on:mouseenter={async () => {
 						anime({
@@ -271,7 +271,7 @@
 				>
 					<ion-icon name="images-outline" class="animejs__manga__icon" />
 					<p
-						class={`${$responsiveMode === ('mobile' || 'tablet') ? 'pt-2 nav-icon-button' : ''} ${
+						class={`${$responsiveMode === 'mobile' || 'tablet' ? 'pt-2 nav-icon-button' : ''} ${
 							$responsiveMode === 'widescreen' ? 'is-size-7' : ''
 						}`}
 					>
@@ -280,7 +280,7 @@
 				</button>
 				<button
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
-						$responsiveMode === ('mobile' || 'tablet') ? 'pl-2 pr-2' : 'ml-2'
+						$responsiveMode === 'mobile' || 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('soundcore') ? 'hover' : ''}`}
 					on:mouseenter={async () => {
 						anime({
@@ -300,7 +300,7 @@
 				>
 					<ion-icon name="musical-note-outline" class="animejs__music__icon" />
 					<p
-						class={`${$responsiveMode === ('mobile' || 'tablet') ? 'pt-2 nav-icon-button' : ''} ${
+						class={`${$responsiveMode === 'mobile' || 'tablet' ? 'pt-2 nav-icon-button' : ''} ${
 							$responsiveMode === 'widescreen' ? 'is-size-7' : ''
 						}`}
 					>
@@ -310,7 +310,7 @@
 				</button>
 				<button
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
-						$responsiveMode === ('mobile' || 'tablet') ? 'pl-2 pr-2' : 'ml-2'
+						$responsiveMode === 'mobile' || 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('shots') ? 'hover' : ''}`}
 					on:mouseenter={async () => {
 						anime({
@@ -330,7 +330,7 @@
 				>
 					<ion-icon name="aperture-outline" class="animejs__shots__icon" />
 					<p
-						class={`${$responsiveMode === ('mobile' || 'tablet') ? 'pt-2 nav-icon-button' : ''} ${
+						class={`${$responsiveMode === 'mobile' || 'tablet' ? 'pt-2 nav-icon-button' : ''} ${
 							$responsiveMode === 'widescreen' ? 'is-size-7' : ''
 						}`}
 					>
@@ -361,7 +361,7 @@
 			>
 				<button
 					class={`is-rounded is-dark animejs__github__button is-clickable ${
-						$responsiveMode === ('mobile' || 'tablet') ? 'is-hidden ' : ''
+						$responsiveMode === 'mobile' || 'tablet' ? 'is-hidden ' : ''
 					}`}
 					on:mouseenter={async () => {
 						anime({
@@ -397,7 +397,7 @@
 				<button
 					style="z-index: 1000000"
 					class={`is-rounded is-dark animejs__arrow__button is-clickable ${
-						$responsiveMode === ('mobile' || 'tablet') ? 'is-hidden' : ''
+						$responsiveMode === 'mobile' || 'tablet' ? 'is-hidden' : ''
 					}`}
 					on:mouseenter={async () => {
 						anime({
@@ -464,6 +464,50 @@
 						/>
 					</a>
 				</figure>
+				<!-- 
+					@TODO
+					Remove this garbage
+				 -->
+				<div class="column is-narrow has-text-white is-hidden-desktop">
+					<div class="columns is-flex-direction-column is-mobile is-gapless">
+						<div class="column">
+							<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
+								<b>First Name</b> :
+								{userInfo?.first_name}
+							</span>
+						</div>
+						<div class="column">
+							<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
+								<b>Last Name</b> :
+								{userInfo?.last_name}
+							</span>
+						</div>
+						<div class="column">
+							<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
+								<b>Username</b> :
+								{userInfo?.username}
+							</span>
+						</div>
+						<div class="column">
+							<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
+								<b>Email</b> :
+								{userInfo?.email}
+							</span>
+						</div>
+						<div class="column">
+							<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
+								<b>Date Joined</b> :
+								{userInfo?.date_joined}
+							</span>
+						</div>
+						<div class="column">
+							<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
+								<b>Date Joined</b> :
+								{userInfo?.last_login}
+							</span>
+						</div>
+					</div>
+				</div>
 			{:else}
 				<div class="navbar-item">
 					<div class="columns is-mobile is-centered">
@@ -581,11 +625,11 @@
 			right: -9999px;
 			margin: auto;
 		}
-	}
 
-	// .mobile__friendly__avatar__stats {
-	// 	max-width: 10em;
-	// 	white-space: nowrap;
-	// 	text-overflow: ellipsis;
-	// }
+		.mobile__friendly__avatar__stats {
+			max-width: 20em;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+	}
 </style>
