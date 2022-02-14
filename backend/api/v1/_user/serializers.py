@@ -14,10 +14,12 @@ class UserSerializer(serializers.ModelSerializer):
             "user_permissions",
             "date_joined",
             "last_login",
+            "avatar",
         )
         read_only_fields = [
             "id",
             "user_permissions",
             "date_joined",
             "last_login",
+            "avatar",
         ]

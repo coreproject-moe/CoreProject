@@ -49,6 +49,7 @@
 		username: string;
 		id: number;
 		last_login: string;
+		avatar: string;
 	};
 	// Main SCSS import
 	import '../app.scss';
@@ -72,6 +73,7 @@
 	import tippy from 'tippy.js';
 	import dayjs from 'dayjs';
 	import md5 from 'md5';
+	import { baseUrl } from '$lib/constants/backend/urls/baseUrl';
 
 	onMount(async () => {
 		// https://bulma.io/documentation/components/navbar/#fixed-navbar
@@ -156,9 +158,7 @@
 </script>
 
 <nav
-	class={`navbar is-clipped is-fixed-top ${
-		$responsiveMode === 'widescreen' ? '' : 'container'
-	}`}
+	class={`navbar is-clipped is-fixed-top ${$responsiveMode === 'widescreen' ? '' : 'container'}`}
 >
 	<div class="navbar-brand is-clipped">
 		<a class="navbar-item is-clickable" href="https://bulma.io">
@@ -463,11 +463,17 @@
 				<figure class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture">
 					<a
 						href={userEditInfoPageUrl}
-						data-href={`https://seccdn.libravatar.org/avatar/${md5(userInfo.email)}/?s=64`}
+						data-href={userInfo?.avatar
+							? `${baseUrl}${userInfo?.avatar}`
+							: `https://seccdn.libravatar.org/avatar/${md5(userInfo.email)}/?s=64`}
 						class="progressive replace"
-						style="border-radius: 9999px"
+						style="border-radius: 9999px; height:40px; width:40px; z-index: 1000000;margin: auto;"
 					>
-						<img class="is-rounded preview" alt="logo" src="/placeholder-64x64.avif" />
+						<img
+							class="is-rounded preview avatar-preview"
+							alt="logo"
+							src="/placeholder-64x64.avif"
+						/>
 					</a>
 				</figure>
 			{:else}
@@ -586,6 +592,15 @@
 	.search__input:focus {
 		border-color: rgb(175, 7, 7);
 		box-shadow: 0 0 0 0.125em rgba(158, 13, 13, 0.76);
+	}
+
+	.avatar-preview {
+		position: absolute;
+		top: -9999px;
+		bottom: -9999px;
+		left: -9999px;
+		right: -9999px;
+		margin: auto;
 	}
 
 	// .mobile__friendly__avatar__stats {
