@@ -16,9 +16,7 @@ from .services import (
     get_user_by_id,
     send_mail_function,
 )
-from rest_framework.authtoken.models import Token
 
-from asgiref.sync import sync_to_async
 
 # Create your views here.
 
@@ -74,7 +72,7 @@ async def register_page(request) -> HttpResponse:
     """
     A Simple User Register Form
     """
-    form = RegisterForm(request.POST or None)
+    form = RegisterForm(request.POST, request.FILES or None)
 
     if request.method == "POST":
         if form.is_valid():
@@ -84,6 +82,7 @@ async def register_page(request) -> HttpResponse:
             email: str = form.cleaned_data["email"]
             password: str = form.cleaned_data["password_1"]
             confirm_password: str = form.cleaned_data["password_2"]
+            avatar = form.cleaned_data["avatar"]
 
             response_is_valid = await check_register_form_validity(
                 request=request,
@@ -94,7 +93,14 @@ async def register_page(request) -> HttpResponse:
             )
 
             if response_is_valid:
-                await create_new_user(username, email, password, first_name, last_name)
+                await create_new_user(
+                    username,
+                    email,
+                    password,
+                    avatar or None,  # Is optional
+                    first_name,
+                    last_name,
+                )
 
                 # Auth the user
                 user = await get_user_for_auth(username, password)
@@ -145,5 +151,7 @@ async def forget_password_form(request) -> HttpResponse:
                 )
 
                 return render(request, "authentication/forget.html")
+
+        print(form.errors)
 
     return render(request, "accounts/forget/index.html", {"form": form})
