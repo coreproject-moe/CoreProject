@@ -1,3 +1,4 @@
+from uuid import uuid4
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -10,6 +11,6 @@ class CustomUser(AbstractUser, ResizeImageMixin):
     def save(self, *args, **kwargs):
         if self.id:
             file = self.resize(self.avatar)
-            self.avatar.save(f"{self.id}.avif", file, save=False)
+            self.avatar.save(f"{self.id}-{uuid4()}.avif", file, save=False)
 
         super(CustomUser, self).save(*args, **kwargs)
