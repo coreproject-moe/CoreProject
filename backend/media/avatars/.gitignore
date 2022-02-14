@@ -61,3 +61,6 @@
 # 3D Images
 *.3dm
 *.max
+
+# AV1 Image File Format
+*.avif
