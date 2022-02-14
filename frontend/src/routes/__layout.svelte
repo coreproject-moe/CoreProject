@@ -103,7 +103,8 @@
 
 		tippy('.animejs__github__button', {
 			content: 'Github',
-			theme: 'black'
+			theme: 'black',
+			touch: false
 		});
 		tippy('.tippyjs__avatar__picture', {
 			content: `<b>ID</b> : ${userInfo?.id} <br /> <b>First Name</b> : ${
@@ -115,7 +116,8 @@
 			)}<br/>
 			<b>Last Active</b> : ${dayjs(userInfo?.last_login)}`,
 			theme: 'black',
-			allowHTML: true
+			allowHTML: true,
+			touch: false
 		});
 	});
 
@@ -124,7 +126,7 @@
 	let navbarBurgerClosed = false;
 	// Auto close the navbar Buger to close if its on Mobile or Tablet
 	$: navbarBurgerClosed = $responsiveMode === 'mobile' || $responsiveMode === 'tablet';
-	
+
 	// Listen to changes on arrow button
 	useEffect(
 		() => {
@@ -184,14 +186,14 @@
 		<div>
 			<div
 				class={`navbar-start mb-3 ${
-					$responsiveMode === 'mobile' || 'tablet'
+					$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
 						? 'is-flex is-flex-direction-row is-justify-content-center'
 						: ''
 				}`}
 			>
 				<button
 					class={`navbar-item button is-ghost is-rounded is-unselectable  ${
-						$responsiveMode === 'mobile' || 'tablet' ? 'pl-2 pr-2' : 'ml-2'
+						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('home') ? 'hover' : ''}
 					`}
 					on:mouseenter={async () => {
@@ -212,7 +214,11 @@
 				>
 					<ion-icon name="home-sharp" class="animejs__home__icon" />
 					<p
-						class={`${$responsiveMode === 'mobile' || 'tablet' ? 'pt-2 nav-icon-button' : ''}
+						class={`${
+							$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
+								? 'pt-2 nav-icon-button'
+								: ''
+						}
 						${$responsiveMode === 'widescreen' ? 'is-size-7' : ''}`}
 					>
 						<span class="is-hidden-touch">&nbsp;</span> Home
@@ -220,7 +226,7 @@
 				</button>
 				<button
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
-						$responsiveMode === 'mobile' || 'tablet' ? 'pl-2 pr-2' : 'ml-2'
+						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('anime') ? 'hover' : ''}
 					`}
 					on:mouseenter={async () => {
@@ -241,9 +247,11 @@
 				>
 					<ion-icon name="film-outline" class="animejs__anime__icon" />
 					<p
-						class={`${$responsiveMode === 'mobile' || 'tablet' ? 'pt-2 nav-icon-button' : ''} ${
-							$responsiveMode === 'widescreen' ? 'is-size-7' : ''
-						}`}
+						class={`${
+							$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
+								? 'pt-2 nav-icon-button'
+								: ''
+						} ${$responsiveMode === 'widescreen' ? 'is-size-7' : ''}`}
 					>
 						<span class="is-hidden-touch">&nbsp;</span>
 						Anime
@@ -251,7 +259,7 @@
 				</button>
 				<button
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
-						$responsiveMode === 'mobile' || 'tablet' ? 'pl-2 pr-2' : 'ml-2'
+						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('manga') ? 'hover' : ''}`}
 					on:mouseenter={async () => {
 						anime({
@@ -271,16 +279,18 @@
 				>
 					<ion-icon name="images-outline" class="animejs__manga__icon" />
 					<p
-						class={`${$responsiveMode === 'mobile' || 'tablet' ? 'pt-2 nav-icon-button' : ''} ${
-							$responsiveMode === 'widescreen' ? 'is-size-7' : ''
-						}`}
+						class={`${
+							$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
+								? 'pt-2 nav-icon-button'
+								: ''
+						} ${$responsiveMode === 'widescreen' ? 'is-size-7' : ''}`}
 					>
 						<span class="is-hidden-touch">&nbsp;</span> Manga
 					</p>
 				</button>
 				<button
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
-						$responsiveMode === 'mobile' || 'tablet' ? 'pl-2 pr-2' : 'ml-2'
+						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('soundcore') ? 'hover' : ''}`}
 					on:mouseenter={async () => {
 						anime({
@@ -300,9 +310,11 @@
 				>
 					<ion-icon name="musical-note-outline" class="animejs__music__icon" />
 					<p
-						class={`${$responsiveMode === 'mobile' || 'tablet' ? 'pt-2 nav-icon-button' : ''} ${
-							$responsiveMode === 'widescreen' ? 'is-size-7' : ''
-						}`}
+						class={`${
+							$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
+								? 'pt-2 nav-icon-button'
+								: ''
+						} ${$responsiveMode === 'widescreen' ? 'is-size-7' : ''}`}
 					>
 						<span class="is-hidden-touch">&nbsp;</span>
 						Soundcore
@@ -310,7 +322,7 @@
 				</button>
 				<button
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
-						$responsiveMode === 'mobile' || 'tablet' ? 'pl-2 pr-2' : 'ml-2'
+						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('shots') ? 'hover' : ''}`}
 					on:mouseenter={async () => {
 						anime({
@@ -330,9 +342,11 @@
 				>
 					<ion-icon name="aperture-outline" class="animejs__shots__icon" />
 					<p
-						class={`${$responsiveMode === 'mobile' || 'tablet' ? 'pt-2 nav-icon-button' : ''} ${
-							$responsiveMode === 'widescreen' ? 'is-size-7' : ''
-						}`}
+						class={`${
+							$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
+								? 'pt-2 nav-icon-button'
+								: ''
+						} ${$responsiveMode === 'widescreen' ? 'is-size-7' : ''}`}
 					>
 						<span class="is-hidden-touch">&nbsp;</span>
 						Shots
@@ -361,7 +375,7 @@
 			>
 				<button
 					class={`is-rounded is-dark animejs__github__button is-clickable ${
-						$responsiveMode === 'mobile' || 'tablet' ? 'is-hidden ' : ''
+						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'is-hidden ' : ''
 					}`}
 					on:mouseenter={async () => {
 						anime({
@@ -397,7 +411,7 @@
 				<button
 					style="z-index: 1000000"
 					class={`is-rounded is-dark animejs__arrow__button is-clickable ${
-						$responsiveMode === 'mobile' || 'tablet' ? 'is-hidden' : ''
+						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'is-hidden' : ''
 					}`}
 					on:mouseenter={async () => {
 						anime({
