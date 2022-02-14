@@ -549,10 +549,6 @@
 			}
 		}
 
-		.animejs__facebook__button {
-			transform: translateX(76px);
-			opacity: 0;
-		}
 		.animejs__github__button {
 			transform: translateX(38px);
 			opacity: 0;
