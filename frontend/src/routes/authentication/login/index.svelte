@@ -9,6 +9,7 @@
 	import { isUserAuthenticated, userToken } from '$lib/store/users';
 	import { projectName } from '$lib/constants/frontend/projectName';
 	import { tokenObtainUrl } from '$lib/constants/backend/urls/restEndpoints';
+	import { signupPageUrl } from '$lib/constants/backend/urls/pageUrlEndpoints';
 
 	onMount(async () => {
 		anime({
@@ -56,21 +57,17 @@
 			if (res?.ok) {
 				userToken.set(data);
 
+				// Goto Next page if it exists else redirect to home.
 				const next = $page.url.searchParams.get('next');
-
-				// Goto Next page if it exists.
-				if (browser) {
-					if (next) {
-						window.location.href = next;
-					} else {
-						window.location.href = '/home/';
-					}
-				}
+				browser && next ? (window.location.href = next) : (window.location.href = '/home/');
 			}
-
 			errorMessage = data.detail;
-		} catch {
-			errorMessage = 'Cannot POST to Backend | Is backend down ? 🤔';
+		} catch (err) {
+			if (err instanceof Error) {
+				userToken.set({ refresh: '', access: '' });
+				errorMessage = 'Cannot POST to Backend | Is backend down ? 🤔';
+				console.error(`Can't POST to backend | Reason : ${err.message}`);
+			}
 		}
 	};
 </script>
@@ -152,7 +149,7 @@
 		<div class="level-left">
 			<div class="level-item is-size-7">
 				<span class="has-text-link">
-					<a class="has-text-white" href="/authentication/forget_password/"> Forgot password? </a>
+					<a class="has-text-white" rel="external" href="/"> Forgot password? </a>
 				</span>
 			</div>
 		</div>
@@ -161,7 +158,7 @@
 				<p class="new_here_tag">
 					New here?
 					<span class="has-text-link">
-						<a class="has-text-white" href="/authentication/register/"> Register an account </a>
+						<a class="has-text-white" rel="external" href={signupPageUrl}> Register an account </a>
 					</span>
 				</p>
 			</div>

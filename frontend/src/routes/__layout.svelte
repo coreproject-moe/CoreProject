@@ -24,9 +24,11 @@
 						userInfo: data
 					}
 				};
-			} catch {
-				userToken.set({ refresh: '', access: '' });
-				console.error("Can't fetch from backend | Flushing Tokens");
+			} catch (err) {
+				if (err instanceof Error) {
+					userToken.set({ refresh: '', access: '' });
+					console.error(`Can't fetch from backend | Flushing Tokens | Reason : ${err.message}`);
+				}
 			}
 		}
 		return {
