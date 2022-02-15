@@ -11,9 +11,10 @@
 
 	import { userToken } from '$lib/store/users';
 	import { get } from 'svelte/store';
+	import anime from 'animejs';
 
-	const episode_number = $page.params.number;
-	const anime_name = $page.params.anime_name;
+	$: episode_number = $page.params.number;
+	$: anime_name = snakeCaseToTitleCase($page.params.anime_name);
 
 	let showPlayer = false;
 	let player: HTMLVmPlayerElement;
@@ -22,6 +23,13 @@
 		const { defineCustomElements } = await import('@vime/core');
 		defineCustomElements();
 		showPlayer = true;
+
+		// Icon control
+
+		anime({
+			targets: '.animejs__arrow__forward',
+			color: '#FFFFFF'
+		});
 	});
 
 	useEffect(
@@ -34,24 +42,32 @@
 	);
 
 	const onVolumeChange = async () => {
-		browser && localStorage.setItem('vimejs-volume', JSON.stringify(player?.volume));
+		if (browser) {
+			localStorage.setItem('vimejs-volume', JSON.stringify(player?.volume));
 
-		fetch(captureEndpoint, {
-			method: 'PATCH',
-			headers: new Headers({
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${get(userToken).access}`
-			}),
-			body: JSON.stringify({
-				video_volume: player?.volume
-			})
-		});
+			try {
+				fetch(captureEndpoint, {
+					method: 'PATCH',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${get(userToken).access}`
+					},
+					body: JSON.stringify({
+						video_volume: ~~player?.volume
+					})
+				});
+			} catch {
+				console.error(`POST to ${captureEndpoint} Failed`);
+			}
+		}
 	};
 </script>
 
 <svelte:head>
-	<title>{snakeCaseToTitleCase(anime_name)} | Episode : {episode_number} | {projectName}</title>
+	<title>{anime_name} | Episode : {episode_number} | {projectName}</title>
+	<!-- VimeJS import -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@vime/core@^5/themes/default.css" />
 </svelte:head>
 
 <div class="container pt-5">
@@ -65,22 +81,33 @@
 		</vm-player>
 	{/if}
 </div>
-
-<nav class="level is-mobile pt-5">
-	<div class="level-item has-text-centered">
-		<div />
-	</div>
-	<div class="level-item has-text-centered">
-		<div>
-			<p class="title has-text-white">{`<--`} Episode : {episode_number} {`-->`}</p>
+<div class="container pt-5">
+	<!-- Main container -->
+	<nav class="level is-mobile">
+		<!-- Left side -->
+		<div class="level-left">
+			<div class="level-item">
+				<p class="subtitle is-5">
+					<strong>123</strong> posts
+				</p>
+			</div>
 		</div>
-	</div>
 
-	<div class="level-item has-text-centered">
-		<div />
-	</div>
-</nav>
+		<!-- Middle side -->
+		<div class="level-item">
+			<p class="has-text-white is-size-4">
+				Anime Name : {anime_name} | Episode :
+				{episode_number}
+			</p>
+		</div>
 
-<style lang="scss">
-	@import url('https://cdn.jsdelivr.net/npm/@vime/core@^5/themes/default.css');
-</style>
+		<!-- Right side -->
+		<div class="level-right">
+			<p class="level-item">
+				<a href={`/anime/${$page.params.anime_name}/episode/${episode_number + 1}`}>
+					<ion-icon name="arrow-forward-outline" class="animejs__arrow__forward" />
+				</a>
+			</p>
+		</div>
+	</nav>
+</div>
