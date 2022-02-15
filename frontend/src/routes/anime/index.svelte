@@ -4,7 +4,6 @@
 	import { projectName } from '$lib/constants/frontend/projectName';
 
 	import { responsiveMode } from '$lib/store/responsive';
-	import { goto } from '$app/navigation';
 
 	let swiperSpacesBetween: number;
 	let swiperSlidesPerView: number;
@@ -42,12 +41,11 @@
 		<Swiper spaceBetween={swiperSpacesBetween} slidesPerView={swiperSlidesPerView}>
 			{#each Array(12) as _}
 				<SwiperSlide>
-					<div
-						class="card is-clickable"
+					<a
+						sveltekit:prefetch
+						href="/anime/one_piece"
+						class="card"
 						style="background-color: black !important;"
-						on:click={async () => {
-							goto('/anime/one_piece');
-						}}
 					>
 						<div class="card-image has-background-black">
 							<figure class="image">
@@ -90,7 +88,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</a>
 				</SwiperSlide>
 			{/each}
 		</Swiper>

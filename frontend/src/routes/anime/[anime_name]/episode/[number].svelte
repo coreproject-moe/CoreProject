@@ -5,8 +5,8 @@
 
 	import { browser } from '$app/env';
 	import { page } from '$app/stores';
-
-	import { useEffect } from '$lib/hooks/useEffect';
+  
+	import { useEffect } from '$hooks/useEffect';
 	import { responsiveMode } from '$lib/store/responsive';
 	import { projectName } from '$lib/constants/frontend/projectName';
 	import { snakeCaseToTitleCase } from '$lib/functions/snakeCaseToTitleCase';
@@ -70,6 +70,7 @@
 
 <svelte:head>
 	<title>{anime_name} | Episode : {episode_number} | {projectName}</title>
+
 	<!-- VimeJS import -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@vime/core@^5/themes/default.css" />
 </svelte:head>
@@ -123,3 +124,4 @@
 		</div>
 	</nav>
 </div>
+

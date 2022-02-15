@@ -8,13 +8,13 @@ django = {extras = ["argon2"], version = "*"}
 # 3rd Party
 whitenoise = {extras = ["brotli"], version = "*"}
 django-cors-headers = "*"
+django-cleanup = "*"
 # Rest framework
 djangorestframework = "*"
 djangorestframework-simplejwt = "*"
 # Webserver
 uvicorn = {version = "*", markers = "sys_platform != 'win32'", extras = ["standard"]}
 gunicorn = {version = "*", markers = "sys_platform != 'win32'", extras = ["gevent","setproctitle"]} # To serve Gunicorn
-
 # Pillow stuff
 pillow = "*"
 pillow-avif-plugin = "*"

@@ -93,6 +93,16 @@ class RegisterForm(forms.Form):
             }
         ),
     )
+    avatar = forms.ImageField(
+        label="",
+        required=False,
+        widget=forms.FileInput(
+            attrs={
+                "class": "file-input",
+                "placeholder": "Upload avatar",
+            }
+        ),
+    )
 
 
 class ForgetPasswordForm(forms.Form):

@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 
-from custom.user.models import CustomUser
+from django.contrib.auth import get_user_model
 
 from .forms import UserEditInfoForm
 
@@ -11,10 +11,15 @@ from .forms import UserEditInfoForm
 
 @login_required()
 def user_edit_info_page(request):
-    instance = CustomUser.objects.get(id=request.user.id)
-    form = UserEditInfoForm(request.POST or None, instance=instance)
+    instance = get_user_model().objects.get(id=request.user.id)
+    form = UserEditInfoForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=instance,
+    )
 
     if request.method == "POST":
+
         if form.is_valid():
             form.save()
             return redirect(reverse("user_edit_info_page"))

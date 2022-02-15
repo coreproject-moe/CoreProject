@@ -1,7 +1,7 @@
 import { browser } from '$app/env';
 import { get, writable } from 'svelte/store';
 import { tokenRefreshUrl } from '$lib/constants/backend/urls/restEndpoints';
-import { jwtRefresh } from '$lib/constants/backend/jwt/Refresh';
+import { jwtRefresh } from '$lib/constants/backend/jwt/refresh';
 
 export const userToken = writable(
 	(browser && JSON.parse(localStorage.getItem('tokens'))) || { refresh: '', access: '' }

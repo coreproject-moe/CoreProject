@@ -8,8 +8,78 @@ Register
 
 <!-- We Write HTML here-->
 {% block form %}
-<form method="POST" x-trap="true">
+<form
+    method="POST"
+    enctype="multipart/form-data"
+    x-trap="true"
+    x-init="
+        $watch('password_shown', (value) => {
+            const elementOne = document.querySelector('#id_password_1');
+        
+            switch (value) {
+                case true:
+                    elementOne.type = 'text';
+                    break;
+                case false:
+                    elementOne.type = 'password';
+                    break;
+            }
+        });
+    "
+>
     {% csrf_token %}
+    <div
+        class="is-flex is-justify-content-center has-text-white is-size-5 has-text-centered"
+    >
+        <p>&#8595;&nbsp; Avatar &nbsp;&#8595;</p>
+    </div>
+    <div class="file is-large is-flex is-justify-content-center pb-3">
+        <label
+            class="file-label"
+            x-init="
+                () => {
+                    const element = document.querySelector('.file-input');
+                    element.onchange = function() {
+                        const file = element.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function() {
+                                let dataURL = reader.result;
+                                const output = document.querySelector('.avatar-preview');
+                                output.width = '50';
+                                output.height = '40';
+                                output.src = dataURL;
+
+                                const fileIconDiv = document.querySelector('.file-icon')
+                                fileIconDiv.classList.add('is-hidden')
+                            }
+                            reader.readAsDataURL(file);
+                        }
+                    }
+                }
+            "
+        >
+            {{ form.avatar }}
+            <span class="file-cta" style="background-color: black">
+                <img class="avatar-preview" style="border-radius: 99999px" />
+                <span class="file-icon mr-0">
+                    <ion-icon
+                        name="cloud-upload-outline"
+                        class="animejs__upload__icon"
+                        x-init="
+                            () => {
+                                anime({
+                                    targets: '.animejs__upload__icon',
+                                    scale: 1.6,
+                                    color: '#FFFFFF',
+                                });
+                            }
+                    "
+                    ></ion-icon>
+                </span>
+            </span>
+        </label>
+    </div>
     <div class="items field is-horizontal">
         <div class="field-body">
             <div class="field">
@@ -113,8 +183,18 @@ Register
     <div class="items field is-horizontal">
         <div class="field-body">
             <div class="field">
-                <p class="control is-expanded has-icons-left">
+                <p class="control is-expanded has-icons-left has-icons-right">
                     {{ form.password_1 }}
+                    <span
+                        class="icon is-small is-right is-clickable is-unselectable"
+                        @click="
+                            () => {
+                                password_shown =! password_shown
+                            }
+                        "
+                    >
+                        👀
+                    </span>
                     <span class="icon is-small is-left">
                         <ion-icon
                             class="animejs__password__one__icon"

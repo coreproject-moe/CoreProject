@@ -35,9 +35,7 @@
 						$responsiveMode === 'fullhd'
 							? 'is-position-fixed'
 							: ''
-					} ${
-						$responsiveMode === 'desktop' || $responsiveMode === 'widescreen' ? 'is-size-7' : ''
-					}`}
+					} ${$responsiveMode === ('desktop' || 'widescreen') ? 'is-size-7' : ''}`}
 					style={`${
 						$responsiveMode === 'desktop' ||
 						$responsiveMode === 'widescreen' ||
@@ -135,6 +133,7 @@
 					<div class="grid-container">
 						{#each Array(100) as _, i}
 							<a
+								sveltekit:prefetch
 								href={`/anime/${anime_name}/episode/${i}`}
 								class="grid-item is-size-6 has-border-white is-clickable is-font-face-roboto has-text-white"
 							>
@@ -163,7 +162,6 @@
 
 		&:hover {
 			background-color: hsl(0, 0%, 15%);
-			// border: 1px solid black;
 		}
 	}
 </style>
