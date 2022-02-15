@@ -3,6 +3,7 @@ from rest_framework import generics
 from rest_framework import mixins
 from rest_framework.response import Response
 from rest_framework.parsers import JSONParser
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
@@ -26,11 +27,12 @@ class CaptureView(
     """
 
     parser_classes = [JSONParser]
+    serializer_class = [CaptureSerializer]
+    permission_classes = [IsAuthenticated]
     authentication_classes = [
         SessionAuthentication,
         JWTAuthentication,
     ]
-    serializer_class = CaptureSerializer
 
     def get(self, request: HttpResponse) -> Response:
         data, _ = CaptureModel.objects.get_or_create(user=request.user)

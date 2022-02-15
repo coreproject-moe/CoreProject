@@ -1,5 +1,6 @@
 from rest_framework import generics
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
@@ -21,6 +22,7 @@ class UserInfo(generics.ListAPIView):
         JWTAuthentication,
     ]
     serializer_class = [UserSerializer]
+    permission_classes = [IsAuthenticated]
 
     def list(self, request: HttpResponse):
         data = get_user_model().objects.get(id=request.user.id)
