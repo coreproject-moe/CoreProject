@@ -87,6 +87,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "core.wsgi.application"
 
+# Override the login url
+# https://stackoverflow.com/questions/49532708/custom-login-url-in-django#49532812
+LOGIN_URL = "login_page"
+
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -159,6 +163,7 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -166,18 +171,20 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Rest framework auth
 # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html#installation
+# https://www.django-rest-framework.org/api-guide/parsers/#setting-the-parsers
+
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
-        "rest_framework.authentication.BasicAuthentication",
         "rest_framework.authentication.SessionAuthentication",
-    )
+    ),
+    "DEFAULT_PARSER_CLASSES": [
+        "rest_framework.parsers.JSONParser",
+    ],
 }
 
-# Override the login url
-# https://stackoverflow.com/questions/49532708/custom-login-url-in-django#49532812
-LOGIN_URL = "login_page"
-
+# django-cors-headers settings
+# https://pypi.org/project/django-cors-headers/
 
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
