@@ -10,26 +10,27 @@
 		// Run this only in Browser.
 		// Wasted 2+ hours debugging this stupid shit.
 		if (browser && get(isUserAuthenticated)) {
-			const res = await fetch(userInfoUrl, {
-				method: 'GET',
-				headers: new Headers({
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${get(userToken).access}`
-				})
-			}).catch(async () => {
+			try {
+				const res = await fetch(userInfoUrl, {
+					method: 'GET',
+					headers: new Headers({
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${get(userToken).access}`
+					})
+				});
+				const data = await res.json();
+
+				return {
+					props: {
+						userInfo: data
+					}
+				};
+			} catch {
 				userToken.set({ refresh: '', access: '' });
 				console.error("Can't fetch from backend | Flushing Tokens");
-			});
-			const data = await res.json();
-
-			return {
-				props: {
-					userInfo: data
-				}
-			};
+			}
 		}
-
 		return {
 			props: {
 				userInfo: {}
