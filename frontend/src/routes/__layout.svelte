@@ -58,7 +58,7 @@
 	import { responsiveMode } from '$lib/store/responsive';
 	import { isUserAuthenticated } from '$lib/store/users';
 
-	import { useEffect } from '$lib/hooks/useEffect';
+	import { useEffect } from '$hooks/useEffect';
 
 	// Constants
 	import { signupPageUrl, userEditInfoPageUrl } from '$lib/constants/backend/urls/pageUrlEndpoints';
