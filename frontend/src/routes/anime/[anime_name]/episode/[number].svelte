@@ -1,19 +1,20 @@
 <script lang="ts">
-	import { browser } from '$app/env';
-	import { page } from '$app/stores';
-
-	import { useEffect } from '$hooks/useEffect';
-	import { projectName } from '$lib/constants/frontend/projectName';
-	import { snakeCaseToTitleCase } from '$lib/functions/snakeCaseToTitleCase';
-
+	import anime from 'animejs';
 	import { onMount } from 'svelte';
-	import { captureEndpoint } from '$lib/constants/backend/urls/restEndpoints';
-
-	import { userToken } from '$lib/store/users';
 	import { get } from 'svelte/store';
 
-	const episode_number = $page.params.number;
-	const anime_name = $page.params.anime_name;
+	import { browser } from '$app/env';
+	import { page } from '$app/stores';
+  
+	import { useEffect } from '$hooks/useEffect';
+	import { responsiveMode } from '$lib/store/responsive';
+	import { projectName } from '$lib/constants/frontend/projectName';
+	import { snakeCaseToTitleCase } from '$lib/functions/snakeCaseToTitleCase';
+	import { captureEndpoint } from '$lib/constants/backend/urls/restEndpoints';
+	import { isUserAuthenticated, userToken } from '$lib/store/users';
+
+	$: episode_number = parseInt($page.params.number);
+	$: anime_name = snakeCaseToTitleCase($page.params.anime_name);
 
 	let showPlayer = false;
 	let player: HTMLVmPlayerElement;
@@ -22,6 +23,17 @@
 		const { defineCustomElements } = await import('@vime/core');
 		defineCustomElements();
 		showPlayer = true;
+
+		// Icon control
+
+		anime({
+			targets: '.animejs__arrow__forward',
+			color: '#FFFFFF'
+		});
+		anime({
+			targets: '.animejs__arrow__backward',
+			color: '#FFFFFFF'
+		});
 	});
 
 	useEffect(
@@ -34,24 +46,31 @@
 	);
 
 	const onVolumeChange = async () => {
-		browser && localStorage.setItem('vimejs-volume', JSON.stringify(player?.volume));
+		if (browser && isUserAuthenticated) {
+			localStorage.setItem('vimejs-volume', JSON.stringify(player?.volume));
 
-		fetch(captureEndpoint, {
-			method: 'PATCH',
-			headers: new Headers({
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${get(userToken).access}`
-			}),
-			body: JSON.stringify({
-				video_volume: player?.volume
-			})
-		});
+			try {
+				fetch(captureEndpoint, {
+					method: 'PATCH',
+					headers: {
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${get(userToken).access}`
+					},
+					body: JSON.stringify({
+						video_volume: ~~player?.volume
+					})
+				});
+			} catch {
+				console.error(`POST to ${captureEndpoint} Failed`);
+			}
+		}
 	};
 </script>
 
 <svelte:head>
-	<title>{snakeCaseToTitleCase(anime_name)} | Episode : {episode_number} | {projectName}</title>
+	<title>{anime_name} | Episode : {episode_number} | {projectName}</title>
+
 	<!-- VimeJS import -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@vime/core@^5/themes/default.css" />
 </svelte:head>
@@ -67,18 +86,42 @@
 		</vm-player>
 	{/if}
 </div>
-
-<nav class="level is-mobile pt-5">
-	<div class="level-item has-text-centered">
-		<div />
-	</div>
-	<div class="level-item has-text-centered">
-		<div>
-			<p class="title has-text-white">{`<--`} Episode : {episode_number} {`-->`}</p>
+<div class="container pt-5">
+	<!-- Main container -->
+	<nav class="level is-mobile">
+		<!-- Left side -->
+		<div class={`level-left ${$responsiveMode === 'mobile' ? 'is-size-6' : 'is-size-4'}`}>
+			<div class="level-item">
+				<a
+					href={`/anime/${$page.params.anime_name}/episode/${episode_number - 1}`}
+					sveltekit:prefetch
+					sveltekit:noscroll
+				>
+					<ion-icon name="arrow-back-outline" class="animejs__arrow__backward" />
+				</a>
+			</div>
 		</div>
-	</div>
 
-	<div class="level-item has-text-centered">
-		<div />
-	</div>
-</nav>
+		<!-- Middle side -->
+		<div class="level-item">
+			<p class={`has-text-white ${$responsiveMode === 'mobile' ? 'is-size-6' : 'is-size-4'}`}>
+				Anime Name : {anime_name} | Episode :
+				{episode_number}
+			</p>
+		</div>
+
+		<!-- Right side -->
+		<div class={`level-right ${$responsiveMode === 'mobile' ? 'is-size-6' : 'is-size-4'}`}>
+			<p class="level-item">
+				<a
+					href={`/anime/${$page.params.anime_name}/episode/${episode_number + 1}`}
+					sveltekit:prefetch
+					sveltekit:noscroll
+				>
+					<ion-icon name="arrow-forward-outline" class="animejs__arrow__forward" />
+				</a>
+			</p>
+		</div>
+	</nav>
+</div>
+
