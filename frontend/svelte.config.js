@@ -1,5 +1,6 @@
 import preprocess from 'svelte-preprocess';
 import adapter from '@sveltejs/adapter-static';
+import path from 'path';
 
 const dev = process.env.NODE_ENV === 'development';
 
@@ -13,14 +14,23 @@ const config = {
 			postcss: true
 		})
 	],
+
 	kit: {
 		adapter: adapter({
 			// precompress: 'br',
 			fallback: 'app.html'
-		})
+		}),
 		// paths: {
 		// 	base: dev ? '' : '/static'
 		// }
+		vite: {
+			resolve: {
+				alias: {
+					// these are the aliases and paths to them
+					$hooks: path.resolve('./src/hooks')
+				}
+			}
+		}
 	}
 };
 
