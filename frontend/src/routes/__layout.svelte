@@ -41,15 +41,15 @@
 <script lang="ts">
 	import { userInfoUrl } from '$lib/constants/backend/urls/restEndpoints';
 
-	export let userInfo: {
-		first_name: string;
-		last_name: string;
-		email: string;
-		date_joined: string;
-		username: string;
-		id: number;
-		last_login: string;
-		avatar: string;
+	export let userInfo = {
+		first_name: '',
+		last_name: '',
+		email: '',
+		date_joined: '',
+		username: '',
+		id: 0,
+		last_login: '',
+		avatar: ''
 	};
 	// Main SCSS import
 	import '../app.scss';
