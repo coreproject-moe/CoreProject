@@ -4,7 +4,6 @@
 	import { projectName } from '$lib/constants/frontend/projectName';
 
 	import { responsiveMode } from '$lib/store/responsive';
-	import { goto } from '$app/navigation';
 
 	let swiperSpacesBetween: number;
 	let swiperSlidesPerView: number;

@@ -2,7 +2,7 @@
 	import { browser } from '$app/env';
 	import { page } from '$app/stores';
 
-	import { useEffect } from '$lib/hooks/useEffect';
+	import { useEffect } from '$hooks/useEffect';
 	import { projectName } from '$lib/constants/frontend/projectName';
 	import { snakeCaseToTitleCase } from '$lib/functions/snakeCaseToTitleCase';
 
@@ -17,7 +17,6 @@
 
 	let showPlayer = false;
 	let player: HTMLVmPlayerElement;
-	let timer = 0;
 
 	onMount(async () => {
 		const { defineCustomElements } = await import('@vime/core');
