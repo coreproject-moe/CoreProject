@@ -17,8 +17,8 @@
 					<div class="icon-box box">
 						<div class="columns is-mobile is-centered">
 							<div class="column is-narrow">
-								<a
-									href="/placeholder-96x96.avif"
+								<div
+									data-href="/placeholder-96x96.avif"
 									class="progressive replace"
 									style="border-radius: 9999px"
 								>
@@ -29,7 +29,7 @@
 										height="40"
 										alt=""
 									/>
-								</a>
+								</div>
 							</div>
 						</div>
 					</div>

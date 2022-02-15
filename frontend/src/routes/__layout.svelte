@@ -1,35 +1,34 @@
 <script context="module" lang="ts">
-	import { browser } from '$app/env';
-
-	import { userToken } from '$lib/store/users';
-
 	import { get } from 'svelte/store';
+	import { browser } from '$app/env';
+	import { userToken } from '$lib/store/users';
 
 	export async function load({ fetch }) {
 		// For the love of GOD.
 		// Run this only in Browser.
 		// Wasted 2+ hours debugging this stupid shit.
 		if (browser && get(isUserAuthenticated)) {
-			const res = await fetch(userInfoUrl, {
-				method: 'GET',
-				headers: new Headers({
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-					Authorization: `Bearer ${get(userToken).access}`
-				})
-			}).catch(async () => {
+			try {
+				const res = await fetch(userInfoUrl, {
+					method: 'GET',
+					headers: new Headers({
+						Accept: 'application/json',
+						'Content-Type': 'application/json',
+						Authorization: `Bearer ${get(userToken).access}`
+					})
+				});
+				const data = await res.json();
+
+				return {
+					props: {
+						userInfo: data
+					}
+				};
+			} catch {
 				userToken.set({ refresh: '', access: '' });
 				console.error("Can't fetch from backend | Flushing Tokens");
-			});
-			const data = await res.json();
-
-			return {
-				props: {
-					userInfo: data
-				}
-			};
+			}
 		}
-
 		return {
 			props: {
 				userInfo: {}
@@ -39,16 +38,15 @@
 </script>
 
 <script lang="ts">
-	import { userInfoUrl } from '$lib/constants/backend/urls/restEndpoints';
-
-	export let userInfo: {
-		first_name: string;
-		last_name: string;
-		email: string;
-		date_joined: string;
-		username: string;
-		id: number;
-		last_login: string;
+	export let userInfo = {
+		first_name: '',
+		last_name: '',
+		email: '',
+		date_joined: '',
+		username: '',
+		id: 0,
+		last_login: '',
+		avatar: ''
 	};
 	// Main SCSS import
 	import '../app.scss';
@@ -57,9 +55,11 @@
 	import { responsiveMode } from '$lib/store/responsive';
 	import { isUserAuthenticated } from '$lib/store/users';
 
-	import { useEffect } from '$lib/hooks/useEffect';
+	import { useEffect } from '$hooks/useEffect';
 
 	// Constants
+	import { baseUrl } from '$lib/constants/backend/urls/baseUrl';
+	import { userInfoUrl } from '$lib/constants/backend/urls/restEndpoints';
 	import { signupPageUrl, userEditInfoPageUrl } from '$lib/constants/backend/urls/pageUrlEndpoints';
 
 	// Handle Icons
@@ -101,7 +101,8 @@
 
 		tippy('.animejs__github__button', {
 			content: 'Github',
-			theme: 'black'
+			theme: 'black',
+			touch: false
 		});
 		tippy('.tippyjs__avatar__picture', {
 			content: `<b>ID</b> : ${userInfo?.id} <br /> <b>First Name</b> : ${
@@ -113,7 +114,8 @@
 			)}<br/>
 			<b>Last Active</b> : ${dayjs(userInfo?.last_login)}`,
 			theme: 'black',
-			allowHTML: true
+			allowHTML: true,
+			touch: false
 		});
 	});
 
@@ -156,7 +158,7 @@
 </script>
 
 <nav
-	class={`navbar is-clipped is-fixed-top ${
+	class={`navbar is-clipped is-transparent is-fixed-top ${
 		$responsiveMode === 'widescreen' ? '' : 'container'
 	}`}
 >
@@ -189,7 +191,9 @@
 						: ''
 				}`}
 			>
-				<button
+				<a
+					href="/home"
+					sveltekit:prefetch
 					class={`navbar-item button is-ghost is-rounded is-unselectable  ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('home') ? 'hover' : ''}
@@ -206,9 +210,6 @@
 							color: '#d9d9d9'
 						});
 					}}
-					on:click|preventDefault={async () => {
-						goto('/home');
-					}}
 				>
 					<ion-icon name="home-sharp" class="animejs__home__icon" />
 					<p
@@ -221,8 +222,10 @@
 					>
 						<span class="is-hidden-touch">&nbsp;</span> Home
 					</p>
-				</button>
-				<button
+				</a>
+				<a
+					href="/anime"
+					sveltekit:prefetch
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('anime') ? 'hover' : ''}
@@ -239,9 +242,6 @@
 							color: '#d9d9d9'
 						});
 					}}
-					on:click|preventDefault={async () => {
-						goto('/anime');
-					}}
 				>
 					<ion-icon name="film-outline" class="animejs__anime__icon" />
 					<p
@@ -254,8 +254,10 @@
 						<span class="is-hidden-touch">&nbsp;</span>
 						Anime
 					</p>
-				</button>
-				<button
+				</a>
+				<a
+					href="/manga"
+					sveltekit:prefetch
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('manga') ? 'hover' : ''}`}
@@ -271,9 +273,6 @@
 							color: '#d9d9d9'
 						});
 					}}
-					on:click|preventDefault={async () => {
-						goto('/manga');
-					}}
 				>
 					<ion-icon name="images-outline" class="animejs__manga__icon" />
 					<p
@@ -285,8 +284,10 @@
 					>
 						<span class="is-hidden-touch">&nbsp;</span> Manga
 					</p>
-				</button>
-				<button
+				</a>
+				<a
+					sveltekit:prefetch
+					href="/soundcore"
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('soundcore') ? 'hover' : ''}`}
@@ -302,9 +303,6 @@
 							color: '#d9d9d9'
 						});
 					}}
-					on:click|preventDefault={async () => {
-						goto('/soundcore');
-					}}
 				>
 					<ion-icon name="musical-note-outline" class="animejs__music__icon" />
 					<p
@@ -317,8 +315,10 @@
 						<span class="is-hidden-touch">&nbsp;</span>
 						Soundcore
 					</p>
-				</button>
-				<button
+				</a>
+				<a
+					sveltekit:prefetch
+					href="/shots"
 					class={`navbar-item button is-ghost is-rounded is-unselectable ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('shots') ? 'hover' : ''}`}
@@ -334,9 +334,6 @@
 							color: '#d9d9d9'
 						});
 					}}
-					on:click|preventDefault={async () => {
-						goto('/shots');
-					}}
 				>
 					<ion-icon name="aperture-outline" class="animejs__shots__icon" />
 					<p
@@ -349,7 +346,7 @@
 						<span class="is-hidden-touch">&nbsp;</span>
 						Shots
 					</p>
-				</button>
+				</a>
 				<div class="control has-icons-left mt-3 ml-4 is-hidden-touch">
 					<input
 						class="input has-background-black has-text-white search__input"
@@ -463,34 +460,83 @@
 				<figure class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture">
 					<a
 						href={userEditInfoPageUrl}
-						data-href={`https://seccdn.libravatar.org/avatar/${md5(userInfo.email)}/?s=64`}
+						rel="external"
+						data-href={userInfo?.avatar
+							? `${baseUrl}${userInfo?.avatar}`
+							: `https://seccdn.libravatar.org/avatar/${md5(userInfo.email)}/?s=64`}
 						class="progressive replace"
-						style="border-radius: 9999px"
+						style="border-radius: 9999px; height:40px; width:40px; z-index: 1000000;margin: auto;"
 					>
-						<img class="is-rounded preview" alt="logo" src="/placeholder-64x64.avif" />
+						<img
+							class="is-rounded preview avatar-preview"
+							alt="logo"
+							src="/placeholder-64x64.avif"
+						/>
 					</a>
 				</figure>
+				<!-- 
+					@TODO
+					Remove this garbage
+				 -->
+				<div class="column is-narrow has-text-white is-hidden-desktop">
+					<div class="columns is-flex-direction-column is-mobile is-gapless">
+						<div class="column">
+							<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
+								<b>First Name</b> :
+								{userInfo?.first_name}
+							</span>
+						</div>
+						<div class="column">
+							<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
+								<b>Last Name</b> :
+								{userInfo?.last_name}
+							</span>
+						</div>
+						<div class="column">
+							<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
+								<b>Username</b> :
+								{userInfo?.username}
+							</span>
+						</div>
+						<div class="column">
+							<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
+								<b>Email</b> :
+								{userInfo?.email}
+							</span>
+						</div>
+						<div class="column">
+							<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
+								<b>Date Joined</b> :
+								{userInfo?.date_joined}
+							</span>
+						</div>
+						<div class="column">
+							<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
+								<b>Date Joined</b> :
+								{userInfo?.last_login}
+							</span>
+						</div>
+					</div>
+				</div>
 			{:else}
 				<div class="navbar-item">
 					<div class="columns is-mobile is-centered">
 						<div class="column is-narrow">
 							<div class="buttons">
-								<button
+								<a
 									class="button is-ghost is-rounded"
-									on:click={async () => {
-										goto(`/authentication/login?next=${$page?.url?.pathname}`);
-									}}
+									href={`/authentication/login?next=${$page?.url?.pathname}`}
+									sveltekit:prefetch
 								>
 									Log in
-								</button>
-								<button
+								</a>
+								<a
 									class="button is-ghost is-rounded"
-									on:click={async () => {
-										goto(`${signupPageUrl}?next=${$page?.url?.pathname}`);
-									}}
+									href={`${signupPageUrl}?next=${$page?.url?.pathname}`}
+									sveltekit:prefetch
 								>
 									Sign Up
-								</button>
+								</a>
 							</div>
 						</div>
 					</div>
@@ -514,83 +560,84 @@
 				margin-bottom: 0.5em;
 			}
 		}
-	}
+		.navbar-start .button,
+		.navbar-burger {
+			transition: 0.2s;
+			transform: translateY(10px);
+			text-decoration: none !important;
+			color: hsl(0, 0%, 85%) !important;
+		}
 
-	.navbar-start .button,
-	.navbar-burger {
-		transition: 0.2s;
-		transform: translateY(10px);
-		text-decoration: none !important;
-		color: hsl(0, 0%, 85%) !important;
-	}
+		.navbar-start > .navbar-item:hover,
+		.navbar-start > .navbar-item.hover,
+		.navbar-burger:hover {
+			color: hsl(0, 0%, 100%) !important;
+			background-color: hsl(0, 0%, 7.8%) !important;
+		}
+		.navbar-item > button {
+			width: 25px;
+			height: 25px;
+			margin-left: 1em !important;
+			border-radius: 9999px;
+			border-width: 1.8px;
+			border-color: hsl(0, 0%, 20%) !important;
+			background-color: hsl(0, 0%, 10%) !important;
+			transition: 0.2s;
 
-	.navbar-start > .navbar-item:hover,
-	.navbar-start > .navbar-item.hover,
-	.navbar-burger:hover {
-		color: hsl(0, 0%, 100%) !important;
-		background-color: hsl(0, 0%, 7.8%) !important;
-	}
+			&:hover {
+				background-color: hsl(0, 0%, 20%) !important;
+			}
+		}
 
-	.navbar-item > button {
-		width: 25px;
-		height: 25px;
-		margin-left: 1em !important;
-		border-radius: 9999px;
-		border-width: 1.8px;
-		border-color: hsl(0, 0%, 20%) !important;
-		background-color: hsl(0, 0%, 10%) !important;
-		transition: 0.2s;
-	}
-	.navbar-item > button:hover {
-		background-color: hsl(0, 0%, 20%) !important;
-	}
+		.animejs__github__button {
+			transform: translateX(38px);
+			opacity: 0;
+		}
+		.animejs__arrow__button {
+			height: 25px !important;
+			width: 25px !important;
+		}
 
-	.animejs__facebook__button {
-		transform: translateX(76px);
-		opacity: 0;
-	}
-	.animejs__github__button {
-		transform: translateX(38px);
-		opacity: 0;
-	}
+		.search__input {
+			&::placeholder {
+				color: white !important;
+			}
+			&:active,
+			&:focus {
+				border-color: rgb(175, 7, 7);
+				box-shadow: 0 0 0 0.125em rgba(158, 13, 13, 0.76);
+			}
+		}
+		.buttons .button {
+			border-color: var(--button-border-color) !important;
+			border-width: 1.8px;
+			text-decoration: none;
+			color: hsl(0, 0%, 85%) !important;
+			transition: 0.2s;
 
-	.buttons .button {
-		border-color: var(--button-border-color) !important;
-		border-width: 1.8px;
-		text-decoration: none;
-		color: hsl(0, 0%, 85%) !important;
-		transition: 0.2s;
-	}
+			&:hover {
+				background-color: var(--button-color-hover) !important;
+			}
+			&:focus {
+				box-shadow: 0 0 0 0.125em rgba(199, 72, 72, 0.3) !important;
+			}
+			.centered_button {
+				width: 50% !important;
+			}
+		}
+		.avatar-preview {
+			position: absolute;
+			top: -9999px;
+			bottom: -9999px;
+			left: -9999px;
+			right: -9999px;
+			margin: auto;
+		}
 
-	.buttons .button:hover {
-		background-color: var(--button-color-hover) !important;
+		.mobile__friendly__avatar__stats {
+			max-width: 20em;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
 	}
-
-	.buttons .button:focus {
-		box-shadow: 0 0 0 0.125em rgba(199, 72, 72, 0.3) !important;
-	}
-
-	.centered_button {
-		width: 50% !important;
-	}
-
-	.animejs__arrow__button {
-		height: 25px !important;
-		width: 25px !important;
-	}
-
-	.search__input::placeholder {
-		color: white !important;
-	}
-	.search__input:active,
-	.search__input:focus {
-		border-color: rgb(175, 7, 7);
-		box-shadow: 0 0 0 0.125em rgba(158, 13, 13, 0.76);
-	}
-
-	// .mobile__friendly__avatar__stats {
-	// 	max-width: 10em;
-	// 	white-space: nowrap;
-	// 	text-overflow: ellipsis;
-	// }
 </style>

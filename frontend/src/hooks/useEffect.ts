@@ -7,7 +7,7 @@ export async function useEffect(cb: CallableFunction, deps: CallableFunction) {
 		if (cleanup) {
 			await cleanup();
 		}
-		cleanup = cb();
+		cleanup = await cb();
 	}
 
 	if (deps) {

@@ -5,7 +5,21 @@ Login
 {% endblock %}
 <!--prettier-ignore-->
 {% block form %}
-<form method="POST" x-trap="true">
+<form
+    method="POST"
+    x-trap="true"
+    x-init="$watch('password_shown', (value) => {
+    const element = document.querySelector('#id_password')
+        switch (value){
+            case true:
+                element.type = 'text';
+                break;
+            case false:
+                element.type = 'password';
+                break;
+        }
+    })"
+>
     {% csrf_token %}
     <div class="items field is-horizontal">
         <div class="field-body">

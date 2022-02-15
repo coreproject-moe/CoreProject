@@ -96,17 +96,6 @@
                     <div
                         class="box form-box"
                         x-data=" { password_shown : false }"
-                        x-init="$watch('password_shown', (value) => {
-                            const element = document.querySelector('#id_password')
-                            switch (value){
-                                case true:
-                                    element.type = 'text';
-                                    break;
-                                case false:
-                                    element.type = 'password';
-                                    break;
-                            }
-                        })"
                     >
                         {#<!--prettier-ignore-->#}
                         {% if messages %}

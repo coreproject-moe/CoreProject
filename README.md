@@ -1,7 +1,3 @@
-# On Hiatus:
-
-Recoping with life.
-
 
 # WIP
 

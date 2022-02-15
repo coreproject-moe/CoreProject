@@ -38,10 +38,11 @@ urlpatterns = [
     path(
         "api/v1/token/blacklist/", TokenBlacklistView.as_view(), name="token_blacklist"
     ),
-    # Rest endpoints
+    # Rest endpoints ( Note that theres an 'underscore' before every route )
     path("api/v1/users/", include("api.v1._user.urls")),
-    path("api/v1/capture/", include("api.v1.capture.urls")),
+    path("api/v1/capture/", include("api.v1._capture.urls")),
 ]
+
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

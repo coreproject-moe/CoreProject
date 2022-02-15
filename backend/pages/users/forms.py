@@ -14,6 +14,7 @@ class UserEditInfoForm(forms.ModelForm):
                 "class": "input ",
                 "value": "",
                 "placeholder": "Password",
+                "autocomplete": "new-password",
             },
         ),
     )
@@ -24,6 +25,7 @@ class UserEditInfoForm(forms.ModelForm):
                 "class": "input ",
                 "value": "",
                 "placeholder": "Confirm Password",
+                "autocomplete": "new-password",
             },
         ),
     )
@@ -35,6 +37,7 @@ class UserEditInfoForm(forms.ModelForm):
             "last_name",
             "username",
             "password",
+            "avatar",
         ]
 
         widgets = {
@@ -42,21 +45,42 @@ class UserEditInfoForm(forms.ModelForm):
                 attrs={
                     "class": "input",
                     "placeholder": "First Name",
+                    "autocomplete": "off",
                 },
             ),
             "last_name": forms.TextInput(
                 attrs={
                     "class": "input",
                     "placeholder": "Last Name",
+                    "autocomplete": "off",
                 },
             ),
             "username": forms.TextInput(
                 attrs={
                     "class": "input",
                     "placeholder": "Username",
+                    "autocomplete": "off",
                 },
             ),
+            "avatar": forms.FileInput(
+                attrs={
+                    "class": "file-input is-clickable",
+                    "placeholder": "Upload avatar",
+                    "style": "z-index:1000000;",
+                }
+            ),
         }
+
+    # def clean_avatar(self):
+    #     cleaned_data = super(UserEditInfoForm, self).clean()
+    #     img = cleaned_data.get("avatar")
+    #     if not img:
+    #         return img
+
+    #     from PIL import Image
+    #     from io import BytesIO
+
+    #     print(img)
 
     def clean(self):
         cleaned_data = super(UserEditInfoForm, self).clean()
