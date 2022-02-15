@@ -1,9 +1,7 @@
 <script context="module" lang="ts">
-	import { browser } from '$app/env';
-
-	import { userToken } from '$lib/store/users';
-
 	import { get } from 'svelte/store';
+	import { browser } from '$app/env';
+	import { userToken } from '$lib/store/users';
 
 	export async function load({ fetch }) {
 		// For the love of GOD.
@@ -40,8 +38,6 @@
 </script>
 
 <script lang="ts">
-	import { userInfoUrl } from '$lib/constants/backend/urls/restEndpoints';
-
 	export let userInfo = {
 		first_name: '',
 		last_name: '',
@@ -62,6 +58,8 @@
 	import { useEffect } from '$hooks/useEffect';
 
 	// Constants
+	import { baseUrl } from '$lib/constants/backend/urls/baseUrl';
+	import { userInfoUrl } from '$lib/constants/backend/urls/restEndpoints';
 	import { signupPageUrl, userEditInfoPageUrl } from '$lib/constants/backend/urls/pageUrlEndpoints';
 
 	// Handle Icons
@@ -74,7 +72,6 @@
 	import tippy from 'tippy.js';
 	import dayjs from 'dayjs';
 	import md5 from 'md5';
-	import { baseUrl } from '$lib/constants/backend/urls/baseUrl';
 
 	onMount(async () => {
 		// https://bulma.io/documentation/components/navbar/#fixed-navbar
