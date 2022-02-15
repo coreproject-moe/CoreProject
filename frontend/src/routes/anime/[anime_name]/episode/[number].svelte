@@ -1,19 +1,19 @@
 <script lang="ts">
+	import anime from 'animejs';
+	import { onMount } from 'svelte';
+	import { get } from 'svelte/store';
+
 	import { browser } from '$app/env';
 	import { page } from '$app/stores';
 
 	import { useEffect } from '$lib/hooks/useEffect';
+	import { responsiveMode } from '$lib/store/responsive';
 	import { projectName } from '$lib/constants/frontend/projectName';
 	import { snakeCaseToTitleCase } from '$lib/functions/snakeCaseToTitleCase';
-
-	import { onMount } from 'svelte';
 	import { captureEndpoint } from '$lib/constants/backend/urls/restEndpoints';
+	import { isUserAuthenticated, userToken } from '$lib/store/users';
 
-	import { userToken } from '$lib/store/users';
-	import { get } from 'svelte/store';
-	import anime from 'animejs';
-
-	$: episode_number = $page.params.number;
+	$: episode_number = parseInt($page.params.number);
 	$: anime_name = snakeCaseToTitleCase($page.params.anime_name);
 
 	let showPlayer = false;
@@ -30,6 +30,10 @@
 			targets: '.animejs__arrow__forward',
 			color: '#FFFFFF'
 		});
+		anime({
+			targets: '.animejs__arrow__backward',
+			color: '#FFFFFFF'
+		});
 	});
 
 	useEffect(
@@ -42,7 +46,7 @@
 	);
 
 	const onVolumeChange = async () => {
-		if (browser) {
+		if (browser && isUserAuthenticated) {
 			localStorage.setItem('vimejs-volume', JSON.stringify(player?.volume));
 
 			try {
@@ -85,26 +89,34 @@
 	<!-- Main container -->
 	<nav class="level is-mobile">
 		<!-- Left side -->
-		<div class="level-left">
+		<div class={`level-left ${$responsiveMode === 'mobile' ? 'is-size-6' : 'is-size-4'}`}>
 			<div class="level-item">
-				<p class="subtitle is-5">
-					<strong>123</strong> posts
-				</p>
+				<a
+					href={`/anime/${$page.params.anime_name}/episode/${episode_number - 1}`}
+					sveltekit:prefetch
+					sveltekit:noscroll
+				>
+					<ion-icon name="arrow-back-outline" class="animejs__arrow__backward" />
+				</a>
 			</div>
 		</div>
 
 		<!-- Middle side -->
 		<div class="level-item">
-			<p class="has-text-white is-size-4">
+			<p class={`has-text-white ${$responsiveMode === 'mobile' ? 'is-size-6' : 'is-size-4'}`}>
 				Anime Name : {anime_name} | Episode :
 				{episode_number}
 			</p>
 		</div>
 
 		<!-- Right side -->
-		<div class="level-right">
+		<div class={`level-right ${$responsiveMode === 'mobile' ? 'is-size-6' : 'is-size-4'}`}>
 			<p class="level-item">
-				<a href={`/anime/${$page.params.anime_name}/episode/${episode_number + 1}`}>
+				<a
+					href={`/anime/${$page.params.anime_name}/episode/${episode_number + 1}`}
+					sveltekit:prefetch
+					sveltekit:noscroll
+				>
 					<ion-icon name="arrow-forward-outline" class="animejs__arrow__forward" />
 				</a>
 			</p>
