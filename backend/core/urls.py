@@ -41,6 +41,7 @@ urlpatterns = [
     # Rest endpoints ( Note that theres an 'underscore' before every route )
     path("api/v1/users/", include("api.v1._user.urls")),
     path("api/v1/capture/", include("api.v1._capture.urls")),
+    path("api/v1/proxy/", include("api.v1._proxy.urls")),
 ]
 
 if settings.DEBUG:

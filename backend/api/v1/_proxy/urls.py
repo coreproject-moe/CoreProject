@@ -1,4 +1,6 @@
-from django.urls import path
+from django.urls import re_path
 from .views import proxy_view
 
-urlpatterns = [path("", proxy_view, name="api_proxy")]
+urlpatterns = [
+    re_path("(?P<url>.*)/", proxy_view, name="api_proxy"),
+]
