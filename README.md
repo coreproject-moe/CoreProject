@@ -1,7 +1,7 @@
 
 # WIP
 
-# If you like this project please answer some questions in the issue tab :P
+# If you like this project and have some time, please answer some questions in the issue tab :P
 
  an example :
 ![1](https://user-images.githubusercontent.com/61817579/149992480-f29a561d-2a9e-47f2-8bc0-ff5df7cbc748.PNG)
