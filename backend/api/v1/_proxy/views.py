@@ -1,8 +1,16 @@
 # https://github.com/mjumbewu/django-proxy/blob/master/proxy/views.py
 
-import requests
 from django.http import HttpResponse
 from django.http import QueryDict
+
+from platform import python_version
+
+import requests
+import requests_cache
+
+# https://requests-cache.readthedocs.io/en/stable/user_guide/general.html#patching
+requests_cache.install_cache()
+
 
 from .services.get_headers import get_headers
 from .services.make_absolute_location import make_absolute_location
@@ -44,7 +52,13 @@ def proxy_view(request, url, requests_args=None):
 
     response = requests.request(request.method, url, **requests_args)
 
-    proxy_response = HttpResponse(response.content, status=response.status_code)
+    proxy_response = HttpResponse(
+        response.content,
+        status=response.status_code,
+        headers={
+            "server": f"Python/{python_version()} Requests/{requests.__version__}",
+        },
+    )
 
     excluded_headers = set(
         [
@@ -61,6 +75,8 @@ def proxy_view(request, url, requests_args=None):
             "trailers",
             "transfer-encoding",
             "upgrade",
+            # We dont want the origin server url
+            "server",
             # Although content-encoding is not listed among the hop-by-hop headers,
             # it can cause trouble as well.  Just let the server set the value as
             # it should be.
