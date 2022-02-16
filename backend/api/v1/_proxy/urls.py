@@ -1,6 +1,6 @@
-from django.urls import re_path
+from django.urls import path
 from .views import proxy_view
 
 urlpatterns = [
-    re_path("(?P<url>.*)/", proxy_view, name="api_proxy"),
+    path("<str:secret_id>/", proxy_view, name="api_proxy"),
 ]

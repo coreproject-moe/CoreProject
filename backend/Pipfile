@@ -18,9 +18,8 @@ gunicorn = {version = "*", markers = "sys_platform != 'win32'", extras = ["geven
 # Pillow stuff
 pillow = "*"
 pillow-avif-plugin = "*"
-# Requests Stuff
-requests = {extras = ["security"], version = "*"}
-requests-cache = "*"
+# HTTP Client
+httpx = {extras = ["http2"], version = "*"}
 
 [dev-packages]
 black = "*"
