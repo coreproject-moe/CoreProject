@@ -45,12 +45,8 @@ async def login_page(request) -> HttpResponse:
             next_url = request.GET.get("next", None)
 
             # Redirect to root if theres no next query
-
             if user:
-                if next_url:
-                    response = redirect(next_url)
-                else:
-                    response = redirect("/")
+                response = redirect(next_url if next_url else "/")
 
     return response
 
@@ -58,12 +54,8 @@ async def login_page(request) -> HttpResponse:
 async def logout(request) -> HttpResponse:
     await auth_logout(request)
 
-    response = redirect("/")
     next_url = request.GET.get("next", None)
-
-    # If theres next url redirect there
-    if next_url:
-        response = redirect(next_url)
+    response = redirect(next_url if next_url else "/")
 
     return response
 
@@ -118,7 +110,6 @@ async def register_page(request) -> HttpResponse:
 
 
 async def forget_password_form(request) -> HttpResponse:
-
     form = ForgetPasswordForm(request.POST or None)
     if request.method == "POST":
         if form.is_valid():

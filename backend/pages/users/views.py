@@ -19,7 +19,6 @@ def user_edit_info_page(request):
     )
 
     if request.method == "POST":
-
         if form.is_valid():
             form.save()
             return redirect(reverse("user_edit_info_page"))
