@@ -5,7 +5,7 @@
 
 	import { browser } from '$app/env';
 	import { page } from '$app/stores';
-  
+
 	import { useEffect } from '$hooks/useEffect';
 	import { responsiveMode } from '$lib/store/responsive';
 	import { projectName } from '$lib/constants/frontend/projectName';
@@ -46,7 +46,7 @@
 	);
 
 	const onVolumeChange = async () => {
-		if (browser && isUserAuthenticated) {
+		if (browser && $isUserAuthenticated) {
 			localStorage.setItem('vimejs-volume', JSON.stringify(player?.volume));
 
 			try {
@@ -124,4 +124,3 @@
 		</div>
 	</nav>
 </div>
-
