@@ -6,10 +6,6 @@ from django.http import QueryDict
 from platform import python_version
 
 import requests
-import requests_cache
-
-# https://requests-cache.readthedocs.io/en/stable/user_guide/general.html#patching
-requests_cache.install_cache()
 
 
 from .services.get_headers import get_headers
