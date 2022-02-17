@@ -80,9 +80,5 @@
 		.error-list::marker {
 			color: #b02a2a;
 		}
-		a.has-text-white {
-			text-decoration-line: underline;
-			text-underline-offset: 4px;
-		}
 	}
 </style>

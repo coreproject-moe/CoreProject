@@ -158,7 +158,9 @@
 				<p class="has-text-white is-font-face-ubuntu">
 					New here?
 					<span class="has-text-link">
-						<a class="has-text-white" rel="external" href={signupPageUrl}> Register an account </a>
+						<a class="has-text-white is-underlined" rel="external" href={signupPageUrl}>
+							Register an account
+						</a>
 					</span>
 				</p>
 			</div>
