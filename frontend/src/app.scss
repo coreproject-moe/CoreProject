@@ -19,6 +19,13 @@ $black: black !default;
 	text-underline-offset: 5px;
 }
 
+.has-text-white {
+	// Why doesn't bulma style placeholders ? 🤔
+	&::placeholder {
+		color: $white !important;
+	}
+}
+
 // Special Class ( inspired by bulma )
 .has-border-white {
 	border: 1px solid white;
@@ -44,8 +51,6 @@ $black: black !default;
 // Tippy theme
 @import 'tippy.js/dist/tippy.css';
 @import 'tippy.js/animations/scale.css';
-
-$tippy-border-color: rgba(255, 255, 255, 0.9);
 
 // Import Swiper styles
 @import 'swiper/scss';
@@ -79,28 +84,28 @@ html {
 		&[data-placement^='top'] {
 			.tippy-arrow {
 				&::before {
-					border-top-color: $tippy-border-color;
+					border-top-color: $white;
 				}
 			}
 		}
 		&[data-placement^='bottom'] {
 			.tippy-arrow {
 				&::before {
-					border-bottom-color: $tippy-border-color;
+					border-bottom-color: $white;
 				}
 			}
 		}
 		&[data-placement^='left'] {
 			.tippy-arrow {
 				&::before {
-					border-left-color: $tippy-border-color;
+					border-left-color: $white;
 				}
 			}
 		}
 		&[data-placement^='right'] {
 			.tippy-arrow {
 				&::before {
-					border-right-color: $tippy-border-color;
+					border-right-color: $white;
 				}
 			}
 		}
