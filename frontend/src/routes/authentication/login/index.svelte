@@ -1,7 +1,4 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import anime from 'animejs';
-
 	import { page } from '$app/stores';
 	import { browser } from '$app/env';
 
@@ -10,17 +7,6 @@
 	import { projectName } from '$lib/constants/frontend/projectName';
 	import { tokenObtainUrl } from '$lib/constants/backend/urls/restEndpoints';
 	import { signupPageUrl } from '$lib/constants/backend/urls/pageUrlEndpoints';
-
-	onMount(async () => {
-		anime({
-			targets: '.animejs__password__icon',
-			color: '#FFFFFF'
-		});
-		anime({
-			targets: '.animejs__account__icon',
-			color: '#FFFFFF'
-		});
-	});
 
 	// Bind it to show or hide passwords
 	let passwordShown = false;
@@ -102,7 +88,7 @@
 							bind:value={username}
 						/>
 						<span class="icon is-small is-left">
-							<ion-icon class="animejs__account__icon is-size-4" name="person-circle-outline" />
+							<ion-icon class="has-text-white is-size-4" name="person-circle-outline" />
 						</span>
 					</p>
 				</div>
@@ -131,7 +117,7 @@
 							👀
 						</span>
 						<span class="icon is-small is-left">
-							<ion-icon class="animejs__password__icon is-size-4" name="lock-closed-outline" />
+							<ion-icon class="has-text-white is-size-4" name="lock-closed-outline" />
 						</span>
 					</p>
 				</div>
