@@ -50,7 +50,6 @@
 			border: 1px solid var(--border-color);
 
 			&::placeholder {
-				color: white !important;
 				opacity: 0.75;
 			}
 		}
@@ -76,9 +75,12 @@
 
 		.error {
 			color: var(--error-message-color);
-		}
-		.error-list::marker {
-			color: #b02a2a;
+
+			.error-list {
+				&::marker {
+					color: #b02a2a;
+				}
+			}
 		}
 	}
 </style>
