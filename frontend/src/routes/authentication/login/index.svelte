@@ -90,14 +90,14 @@
 	</div>
 {:else}
 	<form on:submit|preventDefault={handleFormSubmit} method="POST" use:trapFocus>
-		<div class="items field is-horizontal">
+		<div class="items field is-horizontal pt-3">
 			<div class="field-body">
 				<div class="field">
 					<p class="control is-expanded has-icons-left">
 						<input
 							type="text"
 							name="username"
-							class="input"
+							class="input is-font-face-ubuntu has-text-white has-background-black"
 							placeholder="Username"
 							maxlength={50}
 							required={true}
@@ -110,14 +110,14 @@
 				</div>
 			</div>
 		</div>
-		<div class="items field is-horizontal">
+		<div class="items field is-horizontal pt-3">
 			<div class="field-body">
 				<div class="field">
 					<p class="control is-expanded has-icons-left has-icons-right">
 						<input
 							type={passwordShown ? 'text' : 'password'}
 							name="password"
-							class="input"
+							class="input is-font-face-ubuntu has-text-white has-background-black"
 							placeholder="Password"
 							maxlength={1024}
 							minlength={8}
@@ -139,9 +139,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="items columns is-mobile is-centered">
+		<div class="items columns is-mobile is-centered pt-3">
 			<div class="column is-narrow">
-				<button id="button" class="button is-rounded is-centered is-ghost"> Sign in </button>
+				<button class="button is-rounded is-centered is-ghost has-text-white"> Sign in </button>
 			</div>
 		</div>
 	</form>
@@ -155,7 +155,7 @@
 		</div>
 		<div class="level-right">
 			<div class="level-item is-size-7">
-				<p class="new_here_tag">
+				<p class="has-text-white is-font-face-ubuntu">
 					New here?
 					<span class="has-text-link">
 						<a class="has-text-white" rel="external" href={signupPageUrl}> Register an account </a>

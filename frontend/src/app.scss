@@ -8,17 +8,11 @@
 @import url('https://cdn.jsdelivr.net/npm/typeface-roboto@1.1.13/index.min.css');
 @import url('https://cdn.jsdelivr.net/npm/typeface-ubuntu@1.1.13/index.min.css');
 
-// Import Swiper styles
-@import 'swiper/scss';
+// Bulma Varibales override
+$black: black !default;
 
 // Bulma import
 @import 'bulma/bulma.sass';
-
-// Tippy theme
-@import 'tippy.js/dist/tippy.css';
-@import 'tippy.js/animations/scale.css';
-
-$tippy-border-color: rgba(255, 255, 255, 0.9);
 
 // Special Class ( inspired by bulma )
 .has-border-white {
@@ -31,10 +25,7 @@ $tippy-border-color: rgba(255, 255, 255, 0.9);
 .is-borderless {
 	border: 0 !important;
 }
-// @Override
-.has-background-black {
-	background-color: black !important;
-}
+
 .is-font-face-cantarell {
 	font-family: 'Cantarell';
 }
@@ -44,6 +35,16 @@ $tippy-border-color: rgba(255, 255, 255, 0.9);
 .is-font-face-ubuntu {
 	font-family: 'Ubuntu';
 }
+
+// Tippy theme
+@import 'tippy.js/dist/tippy.css';
+@import 'tippy.js/animations/scale.css';
+
+$tippy-border-color: rgba(255, 255, 255, 0.9);
+
+// Import Swiper styles
+@import 'swiper/scss';
+
 // Some defaults
 :root {
 	--html-color: black;
