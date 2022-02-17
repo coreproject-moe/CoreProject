@@ -113,8 +113,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# I dont want pipenv.lock
-Pipfile.lock
 
 # requests-cache file
 http_cache.sqlite
