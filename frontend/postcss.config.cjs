@@ -14,7 +14,7 @@ const config = {
 				defaultExtractor: (content) => content.match(/[A-Za-z0-9-_:/]+/g) || [],
 				safelist: {
 					deep: [],
-					greedy: [/swiper/, /svelte/, /tippy/]
+					greedy: [/swiper/, /svelte/, /tippy/, /vm-player/]
 				}
 			}),
 		!dev &&
