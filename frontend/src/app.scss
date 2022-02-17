@@ -14,6 +14,11 @@ $black: black !default;
 // Bulma import
 @import 'bulma/bulma.sass';
 
+// @Override
+.is-underlined {
+	text-underline-offset: 5px;
+}
+
 // Special Class ( inspired by bulma )
 .has-border-white {
 	border: 1px solid white;
@@ -27,13 +32,13 @@ $black: black !default;
 }
 
 .is-font-face-cantarell {
-	font-family: 'Cantarell';
+	font-family: 'Cantarell' !important;
 }
 .is-font-face-roboto {
-	font-family: 'Roboto';
+	font-family: 'Roboto' !important;
 }
 .is-font-face-ubuntu {
-	font-family: 'Ubuntu';
+	font-family: 'Ubuntu' !important;
 }
 
 // Tippy theme
@@ -54,6 +59,7 @@ $tippy-border-color: rgba(255, 255, 255, 0.9);
 	--button-color-hover: hsl(0, 0%, 5%);
 	--error-message-color: #f00;
 }
+
 html {
 	background-color: var(--html-color) !important;
 	scrollbar-width: thin;
@@ -67,7 +73,6 @@ html {
 	}
 
 	.tippy-box[data-theme~='black'] {
-		color: white !important;
 		background-color: black !important;
 		border: 1px solid #ffffffcf !important;
 
