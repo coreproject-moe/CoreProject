@@ -33,7 +33,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="box form-box has-background-black">
+					<div class="box has-background-black has-border-gray">
 						<slot />
 					</div>
 				</div>
@@ -44,8 +44,6 @@
 
 <style global lang="scss">
 	.form-box {
-		border: 1.95px solid var(--border-color);
-
 		.input {
 			border: 1px solid var(--border-color);
 
