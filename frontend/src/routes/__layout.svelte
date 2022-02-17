@@ -50,8 +50,15 @@
 		last_login: '',
 		avatar: ''
 	};
+
 	// Main SCSS import
 	import '../app.scss';
+
+	// Import JS libraries
+	import anime from 'animejs';
+	import tippy from 'tippy.js';
+	import dayjs from 'dayjs';
+	import md5 from 'md5';
 
 	// Responsive helper
 	import { responsiveMode } from '$lib/store/responsive';
@@ -69,11 +76,6 @@
 
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-
-	import anime from 'animejs';
-	import tippy from 'tippy.js';
-	import dayjs from 'dayjs';
-	import md5 from 'md5';
 
 	onMount(async () => {
 		// https://bulma.io/documentation/components/navbar/#fixed-navbar
@@ -185,7 +187,7 @@
 				<a
 					href="/home"
 					sveltekit:prefetch
-					class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black  ${
+					class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('home') ? 'hover' : ''}
 					`}
@@ -217,7 +219,7 @@
 				<a
 					href="/anime"
 					sveltekit:prefetch
-					class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black  ${
+					class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('anime') ? 'hover' : ''}
 					`}
@@ -249,7 +251,7 @@
 				<a
 					href="/manga"
 					sveltekit:prefetch
-					class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black ${
+					class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('manga') ? 'hover' : ''}`}
 					on:mouseenter={async () => {
@@ -279,7 +281,7 @@
 				<a
 					sveltekit:prefetch
 					href="/soundcore"
-					class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black ${
+					class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('soundcore') ? 'hover' : ''}`}
 					on:mouseenter={async () => {
@@ -310,7 +312,7 @@
 				<a
 					sveltekit:prefetch
 					href="/shots"
-					class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black ${
+					class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('shots') ? 'hover' : ''}`}
 					on:mouseenter={async () => {
@@ -540,14 +542,15 @@
 
 <style lang="scss">
 	.navbar {
-		border-bottom: 1px solid var(--border-color);
+		// @TODO Fix this
+		// border-bottom: 1px solid var(--border-color);
 
 		.navbar-menu {
-			background-color: var(--navbar-color) !important;
-
-			.navbar-start > .button {
-				margin-left: 0.3em;
-				margin-bottom: 0.5em;
+			.navbar-start {
+				.button {
+					margin-left: 0.3em;
+					margin-bottom: 0.5em;
+				}
 			}
 		}
 
@@ -581,14 +584,6 @@
 				}
 			}
 		}
-		.animejs__github__button {
-			transform: translateX(38px);
-			opacity: 0;
-		}
-		.animejs__arrow__button {
-			height: 25px !important;
-			width: 25px !important;
-		}
 
 		.search__input {
 			&:active,
@@ -610,6 +605,7 @@
 				&:focus {
 					box-shadow: 0 0 0 0.125em rgba(199, 72, 72, 0.3) !important;
 				}
+
 				.centered_button {
 					width: 50% !important;
 				}
