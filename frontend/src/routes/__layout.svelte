@@ -85,18 +85,7 @@
 			targets: '.animejs__arrow__back',
 			easing: 'linear',
 			duration: 100,
-			color: 'hsl(0, 0%, 80%)',
-			scale: 1
-		});
-		anime({
-			targets: '.animejs__search__icon',
-			scale: 1.6,
-			color: '#ffffff'
-		});
-		anime({
-			targets: '.animejs__logo__github',
-			color: 'hsl(0, 0%, 80%)',
-			scale: 1
+			color: 'hsl(0, 0%, 80%)'
 		});
 
 		// TippyJS
@@ -170,7 +159,7 @@
 		</a>
 
 		<button
-			class={`navbar-burger is-clickable ${navbarBurgerClosed ? '' : 'is-active'}`}
+			class={`navbar-burger has-text-white is-clickable ${navbarBurgerClosed ? '' : 'is-active'}`}
 			style="margin-top: -0.5em"
 			aria-label="menu"
 			aria-expanded="false"
@@ -178,9 +167,9 @@
 				navbarBurgerClosed = !navbarBurgerClosed;
 			}}
 		>
-			<span aria-hidden="true" />
-			<span aria-hidden="true" />
-			<span aria-hidden="true" />
+			<span class="has-text-white" aria-hidden="true" />
+			<span class="has-text-white" aria-hidden="true" />
+			<span class="has-text-white" aria-hidden="true" />
 		</button>
 	</div>
 
@@ -196,7 +185,7 @@
 				<a
 					href="/home"
 					sveltekit:prefetch
-					class={`navbar-item button is-ghost is-rounded is-unselectable  ${
+					class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black  ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('home') ? 'hover' : ''}
 					`}
@@ -228,7 +217,7 @@
 				<a
 					href="/anime"
 					sveltekit:prefetch
-					class={`navbar-item button is-ghost is-rounded is-unselectable ${
+					class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black  ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('anime') ? 'hover' : ''}
 					`}
@@ -260,7 +249,7 @@
 				<a
 					href="/manga"
 					sveltekit:prefetch
-					class={`navbar-item button is-ghost is-rounded is-unselectable ${
+					class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('manga') ? 'hover' : ''}`}
 					on:mouseenter={async () => {
@@ -290,7 +279,7 @@
 				<a
 					sveltekit:prefetch
 					href="/soundcore"
-					class={`navbar-item button is-ghost is-rounded is-unselectable ${
+					class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('soundcore') ? 'hover' : ''}`}
 					on:mouseenter={async () => {
@@ -321,7 +310,7 @@
 				<a
 					sveltekit:prefetch
 					href="/shots"
-					class={`navbar-item button is-ghost is-rounded is-unselectable ${
+					class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'pl-2 pr-2' : 'ml-2'
 					} ${$page.url.pathname.includes('shots') ? 'hover' : ''}`}
 					on:mouseenter={async () => {
@@ -356,7 +345,7 @@
 						placeholder="Search Away"
 					/>
 					<span class="icon is-small is-left">
-						<ion-icon name="search-outline" class="animejs__search__icon" />
+						<ion-icon name="search-outline" class="has-text-white is-size-4" />
 					</span>
 				</div>
 			</div>
@@ -399,8 +388,8 @@
 					}}
 				>
 					<ion-icon
-						class="animejs__logo__github"
-						style="width: 100%; height: 100%; "
+						class="animejs__logo__github has-text-white"
+						style="width: 100%; height: 100%;"
 						name="logo-github"
 					/>
 				</button>
@@ -567,13 +556,11 @@
 			transition: 0.2s;
 			transform: translateY(10px);
 			text-decoration: none !important;
-			color: hsl(0, 0%, 85%) !important;
 		}
 
 		.navbar-start > .navbar-item:hover,
 		.navbar-start > .navbar-item.hover,
 		.navbar-burger:hover {
-			color: hsl(0, 0%, 100%) !important;
 			background-color: hsl(0, 0%, 7.8%) !important;
 		}
 		.navbar-item > button {
@@ -601,9 +588,6 @@
 		}
 
 		.search__input {
-			&::placeholder {
-				color: white !important;
-			}
 			&:active,
 			&:focus {
 				border-color: rgb(175, 7, 7);
