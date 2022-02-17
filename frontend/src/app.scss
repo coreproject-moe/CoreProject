@@ -31,6 +31,9 @@ $black: black !default;
 .has-border-white {
 	border: 1px solid white;
 }
+.has-no-text-decoration {
+	text-decoration: none !important;
+}
 
 .has-border-gray {
 	border: 1px solid #353333 !important;
@@ -62,16 +65,12 @@ $black: black !default;
 
 // Some defaults
 :root {
-	--html-color: black;
-	--navbar-color: black;
-
 	--button-border-color: hsl(0, 0%, 20%);
 	--button-color-hover: hsl(0, 0%, 5%);
 	--error-message-color: #f00;
 }
 
 html {
-	background-color: var(--html-color) !important;
 	scrollbar-width: thin;
 
 	ion-icon {

@@ -21,6 +21,8 @@
 
 	onMount(async () => {
 		const { defineCustomElements } = await import('@vime/core');
+		await import('@vime/core/themes/default.css');
+
 		defineCustomElements();
 		showPlayer = true;
 
@@ -70,9 +72,6 @@
 
 <svelte:head>
 	<title>{anime_name} | Episode : {episode_number} | {projectName}</title>
-
-	<!-- VimeJS import -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@vime/core@^5/themes/default.css" />
 </svelte:head>
 
 <div class="container pt-5">
