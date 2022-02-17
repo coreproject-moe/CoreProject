@@ -125,15 +125,13 @@
 		</div>
 		<div class="items columns is-mobile is-centered pt-3">
 			<div class="column is-narrow">
-				<button
-					class="button is-rounded is-centered has-text-white has-border-gray has-background-black"
-				>
+				<button class="button is-rounded is-centered has-text-white has-border-gray is-black">
 					Sign in
 				</button>
 			</div>
 		</div>
 	</form>
-	<div class="level">
+	<div class="level is-mobile pt-4">
 		<div class="level-left">
 			<div class="level-item is-size-7">
 				<a class="has-text-white" rel="external" href="/"> Forgot password? </a>
