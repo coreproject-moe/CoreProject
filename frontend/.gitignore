@@ -6,4 +6,4 @@ node_modules
 .env
 .env.*
 !.env.example
-.package-lock.json
+package-lock.json
