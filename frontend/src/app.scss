@@ -21,6 +21,7 @@ $black: black !default;
 
 .has-text-white {
 	// Why doesn't bulma style placeholders ? 🤔
+	&:visited,
 	&::placeholder {
 		color: $white !important;
 	}
