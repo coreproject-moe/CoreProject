@@ -1,5 +1,4 @@
 <script lang="ts">
-	import anime from 'animejs';
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
 
@@ -25,17 +24,6 @@
 
 		defineCustomElements();
 		showPlayer = true;
-
-		// Icon control
-
-		anime({
-			targets: '.animejs__arrow__forward',
-			color: '#FFFFFF'
-		});
-		anime({
-			targets: '.animejs__arrow__backward',
-			color: '#FFFFFFF'
-		});
 	});
 
 	useEffect(
@@ -96,7 +84,7 @@
 					sveltekit:prefetch
 					sveltekit:noscroll
 				>
-					<ion-icon name="arrow-back-outline" class="animejs__arrow__backward" />
+					<ion-icon name="arrow-back-outline" class="has-text-white" />
 				</a>
 			</div>
 		</div>
@@ -117,7 +105,7 @@
 					sveltekit:prefetch
 					sveltekit:noscroll
 				>
-					<ion-icon name="arrow-forward-outline" class="animejs__arrow__forward" />
+					<ion-icon name="arrow-forward-outline" class="has-text-white" />
 				</a>
 			</p>
 		</div>
