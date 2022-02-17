@@ -149,7 +149,7 @@
 </script>
 
 <nav
-	class={`navbar is-clipped is-transparent is-fixed-top ${
+	class={`navbar is-clipped has-background-black is-fixed-top ${
 		$responsiveMode === 'widescreen' ? '' : 'container'
 	}`}
 >
@@ -176,7 +176,7 @@
 	<div class={`navbar-menu ${navbarBurgerClosed ? '' : 'is-active'}`}>
 		<div>
 			<div
-				class={`navbar-start mb-3 ${
+				class={`navbar-start mt-3 ${
 					$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
 						? 'is-flex is-flex-direction-row is-justify-content-center'
 						: ''
@@ -338,7 +338,7 @@
 						Shots
 					</p>
 				</a>
-				<div class="control has-icons-left mt-3 ml-4 is-hidden-touch">
+				<div class="control has-icons-left  ml-4 is-hidden-touch">
 					<input
 						class="input has-background-black has-text-white search__input"
 						type="text"
@@ -360,7 +360,7 @@
 				}`}
 			>
 				<button
-					class={`is-rounded is-dark animejs__github__button is-clickable ${
+					class={`is-rounded is-dark animejs__github__button has-background-black-bis is-clickable ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'is-hidden ' : ''
 					}`}
 					on:mouseenter={async () => {
@@ -396,7 +396,7 @@
 
 				<button
 					style="z-index: 1000000"
-					class={`is-rounded is-dark animejs__arrow__button is-clickable ${
+					class={`is-rounded is-dark animejs__arrow__button has-background-black-bis is-clickable ${
 						$responsiveMode === 'mobile' || $responsiveMode === 'tablet' ? 'is-hidden' : ''
 					}`}
 					on:mouseenter={async () => {
@@ -515,14 +515,14 @@
 						<div class="column is-narrow">
 							<div class="buttons">
 								<a
-									class="button is-ghost is-rounded"
+									class="button has-text-white is-black has-border-gray is-rounded"
 									href={`/authentication/login?next=${$page?.url?.pathname}`}
 									sveltekit:prefetch
 								>
 									Log in
 								</a>
 								<a
-									class="button is-ghost is-rounded"
+									class="button has-text-white is-black has-border-gray is-rounded"
 									href={`${signupPageUrl}?next=${$page?.url?.pathname}`}
 									sveltekit:prefetch
 								>
@@ -540,7 +540,6 @@
 
 <style lang="scss">
 	.navbar {
-		background-color: var(--navbar-color) !important;
 		border-bottom: 1px solid var(--border-color);
 
 		.navbar-menu {
@@ -551,33 +550,37 @@
 				margin-bottom: 0.5em;
 			}
 		}
-		.navbar-start .button,
+
 		.navbar-burger {
 			transition: 0.2s;
 			transform: translateY(10px);
 			text-decoration: none !important;
 		}
 
-		.navbar-start > .navbar-item:hover,
-		.navbar-start > .navbar-item.hover,
-		.navbar-burger:hover {
-			background-color: hsl(0, 0%, 7.8%) !important;
-		}
-		.navbar-item > button {
-			width: 25px;
-			height: 25px;
-			margin-left: 1em !important;
-			border-radius: 9999px;
-			border-width: 1.8px;
-			border-color: hsl(0, 0%, 20%) !important;
-			background-color: hsl(0, 0%, 10%) !important;
-			transition: 0.2s;
-
-			&:hover {
-				background-color: hsl(0, 0%, 20%) !important;
+		.navbar-start {
+			.navbar-item {
+				&.hover,
+				&:hover {
+					background-color: hsl(0, 0%, 7.8%) !important;
+				}
 			}
 		}
 
+		.navbar-item {
+			button {
+				width: 25px;
+				height: 25px;
+				margin-left: 1em !important;
+				border-radius: 9999px;
+				border-width: 1.8px;
+				border-color: hsl(0, 0%, 20%) !important;
+				transition: 0.2s;
+
+				&:hover {
+					background-color: hsl(0, 0%, 20%) !important;
+				}
+			}
+		}
 		.animejs__github__button {
 			transform: translateX(38px);
 			opacity: 0;
@@ -594,21 +597,22 @@
 				box-shadow: 0 0 0 0.125em rgba(158, 13, 13, 0.76);
 			}
 		}
-		.buttons .button {
-			border-color: var(--button-border-color) !important;
-			border-width: 1.8px;
-			text-decoration: none;
-			color: hsl(0, 0%, 85%) !important;
-			transition: 0.2s;
+		.buttons {
+			.button {
+				border-color: var(--button-border-color) !important;
+				border-width: 1.8px;
+				text-decoration: none;
+				transition: 0.2s;
 
-			&:hover {
-				background-color: var(--button-color-hover) !important;
-			}
-			&:focus {
-				box-shadow: 0 0 0 0.125em rgba(199, 72, 72, 0.3) !important;
-			}
-			.centered_button {
-				width: 50% !important;
+				&:hover {
+					background-color: var(--button-color-hover) !important;
+				}
+				&:focus {
+					box-shadow: 0 0 0 0.125em rgba(199, 72, 72, 0.3) !important;
+				}
+				.centered_button {
+					width: 50% !important;
+				}
 			}
 		}
 		.avatar-preview {

@@ -33,7 +33,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="box has-background-black has-border-gray">
+					<div class="box form-box has-background-black has-border-gray">
 						<slot />
 					</div>
 				</div>
@@ -53,10 +53,8 @@
 		}
 
 		.button {
-			border: 1.8px solid var(--button-border-color) !important;
-			text-decoration: none !important;
 			transition: 0.2s;
-			opacity: 0.9;
+			opacity: 0.85;
 
 			&:hover {
 				background-color: var(--button-color-hover) !important;
