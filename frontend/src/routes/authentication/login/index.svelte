@@ -14,13 +14,11 @@
 	onMount(async () => {
 		anime({
 			targets: '.animejs__password__icon',
-			color: '#FFFFFF',
-			scale: 1.5
+			color: '#FFFFFF'
 		});
 		anime({
 			targets: '.animejs__account__icon',
-			color: '#FFFFFF',
-			scale: 1.5
+			color: '#FFFFFF'
 		});
 	});
 
@@ -97,14 +95,14 @@
 						<input
 							type="text"
 							name="username"
-							class="input is-font-face-ubuntu has-text-white has-background-black"
+							class="input is-font-face-ubuntu has-text-white has-background-black has-border-gray"
 							placeholder="Username"
 							maxlength={50}
 							required={true}
 							bind:value={username}
 						/>
 						<span class="icon is-small is-left">
-							<ion-icon class="animejs__account__icon" name="person-circle-outline" />
+							<ion-icon class="animejs__account__icon is-size-4" name="person-circle-outline" />
 						</span>
 					</p>
 				</div>
@@ -117,7 +115,7 @@
 						<input
 							type={passwordShown ? 'text' : 'password'}
 							name="password"
-							class="input is-font-face-ubuntu has-text-white has-background-black"
+							class="input is-font-face-ubuntu has-text-white has-background-black has-border-gray"
 							placeholder="Password"
 							maxlength={1024}
 							minlength={8}
@@ -133,7 +131,7 @@
 							👀
 						</span>
 						<span class="icon is-small is-left">
-							<ion-icon class="animejs__password__icon" name="lock-closed-outline" />
+							<ion-icon class="animejs__password__icon is-size-4" name="lock-closed-outline" />
 						</span>
 					</p>
 				</div>
@@ -141,16 +139,18 @@
 		</div>
 		<div class="items columns is-mobile is-centered pt-3">
 			<div class="column is-narrow">
-				<button class="button is-rounded is-centered is-ghost has-text-white"> Sign in </button>
+				<button
+					class="button is-rounded is-centered has-text-white has-border-gray has-background-black"
+				>
+					Sign in
+				</button>
 			</div>
 		</div>
 	</form>
 	<div class="level">
 		<div class="level-left">
 			<div class="level-item is-size-7">
-				<span class="has-text-link">
-					<a class="has-text-white" rel="external" href="/"> Forgot password? </a>
-				</span>
+				<a class="has-text-white" rel="external" href="/"> Forgot password? </a>
 			</div>
 		</div>
 		<div class="level-right">

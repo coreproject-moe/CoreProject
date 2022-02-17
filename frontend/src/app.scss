@@ -31,6 +31,10 @@ $black: black !default;
 	border: 1px solid white;
 }
 
+.has-border-gray {
+	border: 1px solid #353333 !important;
+}
+
 .is-position-fixed {
 	position: fixed !important;
 }
@@ -59,7 +63,7 @@ $black: black !default;
 :root {
 	--html-color: black;
 	--navbar-color: black;
-	--border-color: #353333;
+
 	--button-border-color: hsl(0, 0%, 20%);
 	--button-color-hover: hsl(0, 0%, 5%);
 	--error-message-color: #f00;
