@@ -155,7 +155,7 @@
 	class={`navbar is-clipped has-background-black is-fixed-top ${
 		$responsiveMode === "widescreen" ? "" : "container"
 	}`}
-	style="z-index:1000000;"
+	style="z-index:100;"
 >
 	<div class="navbar-brand is-clipped">
 		<a class="navbar-item is-clickable" href="https://bulma.io">

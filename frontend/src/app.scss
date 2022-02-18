@@ -61,6 +61,9 @@ $black: black !default;
 // Import Swiper styles
 @import "swiper/scss";
 
+// Import VimeJS
+@import "@vime/core/themes/default.css";
+
 // Some defaults
 :root {
 	--button-border-color: hsl(0, 0%, 20%);
