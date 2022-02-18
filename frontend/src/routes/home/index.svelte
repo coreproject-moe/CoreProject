@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { projectName } from '$lib/constants/frontend/projectName';
+	import { projectName } from "$lib/constants/frontend/projectName";
 </script>
 
 <svelte:head>

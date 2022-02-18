@@ -1,8 +1,8 @@
-const cssnano = require('cssnano');
-const autoprefixer = require('autoprefixer');
-const purgecss = require('@fullhuman/postcss-purgecss');
+const cssnano = require("cssnano");
+const autoprefixer = require("autoprefixer");
+const purgecss = require("@fullhuman/postcss-purgecss");
 
-const dev = process.env.NODE_ENV === 'development';
+const dev = process.env.NODE_ENV === "development";
 
 const config = {
 	plugins: [
@@ -10,7 +10,7 @@ const config = {
 		// Run on buld
 		!dev &&
 			purgecss({
-				content: ['./src/**/**/*.{svelte,html,js,ts}'],
+				content: ["./src/**/**/*.{svelte,html,js,ts}"],
 				defaultExtractor: (content) => content.match(/[A-Za-z0-9-_:/]+/g) || [],
 				safelist: {
 					deep: [],
@@ -19,7 +19,7 @@ const config = {
 			}),
 		!dev &&
 			cssnano({
-				preset: 'default'
+				preset: "default"
 			})
 	]
 };

@@ -1,16 +1,16 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { get } from 'svelte/store';
+	import { onMount } from "svelte";
+	import { get } from "svelte/store";
 
-	import { browser } from '$app/env';
-	import { page } from '$app/stores';
+	import { browser } from "$app/env";
+	import { page } from "$app/stores";
 
-	import { useEffect } from '$hooks/useEffect';
-	import { responsiveMode } from '$lib/store/responsive';
-	import { projectName } from '$lib/constants/frontend/projectName';
-	import { snakeCaseToTitleCase } from '$lib/functions/snakeCaseToTitleCase';
-	import { captureEndpoint } from '$lib/constants/backend/urls/restEndpoints';
-	import { isUserAuthenticated, userToken } from '$lib/store/users';
+	import { useEffect } from "$hooks/useEffect";
+	import { responsiveMode } from "$lib/store/responsive";
+	import { projectName } from "$lib/constants/frontend/projectName";
+	import { snakeCaseToTitleCase } from "$lib/functions/snakeCaseToTitleCase";
+	import { captureEndpoint } from "$lib/constants/backend/urls/restEndpoints";
+	import { isUserAuthenticated, userToken } from "$lib/store/users";
 
 	$: episode_number = parseInt($page.params.number);
 	$: anime_name = snakeCaseToTitleCase($page.params.anime_name);
@@ -19,8 +19,8 @@
 	let player: HTMLVmPlayerElement;
 
 	onMount(async () => {
-		const { defineCustomElements } = await import('@vime/core');
-		await import('@vime/core/themes/default.css');
+		const { defineCustomElements } = await import("@vime/core");
+		await import("@vime/core/themes/default.css");
 
 		defineCustomElements();
 		showPlayer = true;
@@ -29,7 +29,7 @@
 	useEffect(
 		() => {
 			const localStorageVideoVolume =
-				parseInt(browser && localStorage.getItem('vimejs-volume')) || 100;
+				parseInt(browser && localStorage.getItem("vimejs-volume")) || 100;
 			player.volume = localStorageVideoVolume;
 		},
 		() => [player]
@@ -37,14 +37,14 @@
 
 	const onVolumeChange = async () => {
 		if (browser && $isUserAuthenticated) {
-			localStorage.setItem('vimejs-volume', JSON.stringify(player?.volume));
+			localStorage.setItem("vimejs-volume", JSON.stringify(player?.volume));
 
 			try {
 				fetch(captureEndpoint, {
-					method: 'PATCH',
+					method: "PATCH",
 					headers: {
-						Accept: 'application/json',
-						'Content-Type': 'application/json',
+						Accept: "application/json",
+						"Content-Type": "application/json",
 						Authorization: `Bearer ${get(userToken).access}`
 					},
 					body: JSON.stringify({
@@ -77,7 +77,7 @@
 	<!-- Main container -->
 	<nav class="level is-mobile">
 		<!-- Left side -->
-		<div class={`level-left ${$responsiveMode === 'mobile' ? 'is-size-6' : 'is-size-4'}`}>
+		<div class={`level-left ${$responsiveMode === "mobile" ? "is-size-6" : "is-size-4"}`}>
 			<div class="level-item">
 				<a
 					href={`/anime/${$page.params.anime_name}/episode/${episode_number - 1}`}
@@ -91,14 +91,14 @@
 
 		<!-- Middle side -->
 		<div class="level-item">
-			<p class={`has-text-white ${$responsiveMode === 'mobile' ? 'is-size-6' : 'is-size-4'}`}>
+			<p class={`has-text-white ${$responsiveMode === "mobile" ? "is-size-6" : "is-size-4"}`}>
 				Anime Name : {anime_name} | Episode :
 				{episode_number}
 			</p>
 		</div>
 
 		<!-- Right side -->
-		<div class={`level-right ${$responsiveMode === 'mobile' ? 'is-size-6' : 'is-size-4'}`}>
+		<div class={`level-right ${$responsiveMode === "mobile" ? "is-size-6" : "is-size-4"}`}>
 			<p class="level-item">
 				<a
 					href={`/anime/${$page.params.anime_name}/episode/${episode_number + 1}`}

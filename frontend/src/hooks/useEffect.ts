@@ -1,4 +1,4 @@
-import { afterUpdate, onDestroy } from 'svelte';
+import { afterUpdate, onDestroy } from "svelte";
 
 export async function useEffect(cb: CallableFunction, deps: CallableFunction) {
 	let cleanup: CallableFunction;

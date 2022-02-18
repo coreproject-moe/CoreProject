@@ -1,25 +1,25 @@
 <script lang="ts">
 	// Import Swiper Svelte components
-	import { Swiper, SwiperSlide } from 'swiper/svelte';
-	import { projectName } from '$lib/constants/frontend/projectName';
+	import { Swiper, SwiperSlide } from "swiper/svelte";
+	import { projectName } from "$lib/constants/frontend/projectName";
 
-	import { responsiveMode } from '$lib/store/responsive';
+	import { responsiveMode } from "$lib/store/responsive";
 
 	let swiperSpacesBetween: number;
 	let swiperSlidesPerView: number;
 
 	$: switch ($responsiveMode) {
-		case 'mobile':
+		case "mobile":
 			swiperSpacesBetween = 10;
 			swiperSlidesPerView = 2;
 			break;
-		case 'tablet':
+		case "tablet":
 			swiperSpacesBetween = 20;
 			swiperSlidesPerView = 3;
 			break;
-		case 'widescreen':
-		case 'desktop':
-		case 'fullhd':
+		case "widescreen":
+		case "desktop":
+		case "fullhd":
 			swiperSpacesBetween = 30;
 			swiperSlidesPerView = 5;
 			break;
