@@ -1,7 +1,7 @@
 // Copied from
 // https://gist.github.com/JulienPradet/20dbb7ca06cbd9e2ec499bb2206aab55
 
-import { browser } from '$app/env';
+import { browser } from "$app/env";
 
 let trapFocusList: HTMLElement[] = [];
 
@@ -21,7 +21,7 @@ const trapFocusListener = (event: KeyboardEvent) => {
 	}
 
 	const focusable: NodeListOf<HTMLElement> = parentNode.querySelectorAll(
-		'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]'
+		"a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, *[tabindex], *[contenteditable]"
 	);
 	const first = focusable[0];
 	const last = focusable[focusable.length - 1];
@@ -34,7 +34,7 @@ const trapFocusListener = (event: KeyboardEvent) => {
 	}
 };
 
-browser && document?.addEventListener('keydown', trapFocusListener);
+browser && document?.addEventListener("keydown", trapFocusListener);
 
 export const trapFocus = (node: HTMLElement) => {
 	trapFocusList.push(node);

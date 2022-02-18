@@ -1,17 +1,17 @@
 <script context="module" lang="ts">
-	import { browser } from '$app/env';
+	import { browser } from "$app/env";
 
-	import { tokenBlacklistUrl } from '$lib/constants/backend/urls/restEndpoints';
-	import { isUserAuthenticated, userToken } from '$lib/store/users';
-	import { get } from 'svelte/store';
+	import { tokenBlacklistUrl } from "$lib/constants/backend/urls/restEndpoints";
+	import { isUserAuthenticated, userToken } from "$lib/store/users";
+	import { get } from "svelte/store";
 
 	export async function load({ fetch }) {
 		if (browser && get(isUserAuthenticated)) {
 			const res = await fetch(tokenBlacklistUrl, {
-				method: 'POST',
+				method: "POST",
 				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json'
+					Accept: "application/json",
+					"Content-Type": "application/json"
 				},
 				body: JSON.stringify({
 					refresh: get(userToken).refresh

@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { projectName } from '$lib/constants/frontend/projectName';
-	import { snakeCaseToTitleCase } from '$lib/functions/snakeCaseToTitleCase';
-	import { responsiveMode } from '$lib/store/responsive';
+	import { page } from "$app/stores";
+	import { projectName } from "$lib/constants/frontend/projectName";
+	import { snakeCaseToTitleCase } from "$lib/functions/snakeCaseToTitleCase";
+	import { responsiveMode } from "$lib/store/responsive";
 
 	const anime_name = $page.params.anime_name;
 </script>
@@ -15,36 +15,36 @@
 	<div class="hero-body is-flex-direction-column">
 		<div
 			class={`columns is-desktop container ${
-				$responsiveMode === 'mobile' ? 'is-flex-direction-column' : 'is-flex-direction-row'
+				$responsiveMode === "mobile" ? "is-flex-direction-column" : "is-flex-direction-row"
 			}`}
 		>
 			<div
 				class={`column is-align-self-center is-flex is-justify-content-center 
 				${
-					$responsiveMode === 'desktop' ||
-					$responsiveMode === 'widescreen' ||
-					$responsiveMode === 'fullhd'
-						? 'is-3'
-						: ''
+					$responsiveMode === "desktop" ||
+					$responsiveMode === "widescreen" ||
+					$responsiveMode === "fullhd"
+						? "is-3"
+						: ""
 				}`}
 			>
 				<table
 					class={`table is-bordered has-text-white has-background-black is-font-face-ubuntu ${
-						$responsiveMode === 'desktop' ||
-						$responsiveMode === 'widescreen' ||
-						$responsiveMode === 'fullhd'
-							? 'is-position-fixed'
-							: ''
-					} ${$responsiveMode === ('desktop' || 'widescreen') ? 'is-size-7' : ''}`}
+						$responsiveMode === "desktop" ||
+						$responsiveMode === "widescreen" ||
+						$responsiveMode === "fullhd"
+							? "is-position-fixed"
+							: ""
+					} ${$responsiveMode === ("desktop" || "widescreen") ? "is-size-7" : ""}`}
 					style={`${
-						$responsiveMode === 'desktop' ||
-						$responsiveMode === 'widescreen' ||
-						$responsiveMode === 'fullhd'
-							? 'top: 5em;'
-							: ''
+						$responsiveMode === "desktop" ||
+						$responsiveMode === "widescreen" ||
+						$responsiveMode === "fullhd"
+							? "top: 5em;"
+							: ""
 					}
-					${$responsiveMode === 'mobile' ? 'width: 90%;' : ''} ${
-						$responsiveMode === 'tablet' ? 'width:80%' : ''
+					${$responsiveMode === "mobile" ? "width: 90%;" : ""} ${
+						$responsiveMode === "tablet" ? "width:80%" : ""
 					}
 					`}
 				>
@@ -113,11 +113,11 @@
 			</div>
 			<div
 				class={`column is-flex ${
-					$responsiveMode === 'desktop' ||
-					$responsiveMode === 'widescreen' ||
-					$responsiveMode === 'fullhd'
-						? ''
-						: 'is-align-self-center'
+					$responsiveMode === "desktop" ||
+					$responsiveMode === "widescreen" ||
+					$responsiveMode === "fullhd"
+						? ""
+						: "is-align-self-center"
 				}`}
 			>
 				<div class="content has-text-white">

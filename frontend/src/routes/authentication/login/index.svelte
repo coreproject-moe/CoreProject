@@ -1,22 +1,22 @@
 <script lang="ts">
-	import { page } from '$app/stores';
-	import { browser } from '$app/env';
+	import { page } from "$app/stores";
+	import { browser } from "$app/env";
 
-	import { trapFocus } from '$lib/functions/trapFocus';
-	import { isUserAuthenticated, userToken } from '$lib/store/users';
-	import { projectName } from '$lib/constants/frontend/projectName';
-	import { tokenObtainUrl } from '$lib/constants/backend/urls/restEndpoints';
-	import { signupPageUrl } from '$lib/constants/backend/urls/pageUrlEndpoints';
+	import { trapFocus } from "$lib/functions/trapFocus";
+	import { isUserAuthenticated, userToken } from "$lib/store/users";
+	import { projectName } from "$lib/constants/frontend/projectName";
+	import { tokenObtainUrl } from "$lib/constants/backend/urls/restEndpoints";
+	import { signupPageUrl } from "$lib/constants/backend/urls/pageUrlEndpoints";
 
 	// Bind it to show or hide passwords
 	let passwordShown = false;
 
 	// Bindable variables.
-	let username = '';
-	let password = '';
+	let username = "";
+	let password = "";
 
 	// Show error message if theres an error.
-	let errorMessage = '';
+	let errorMessage = "";
 
 	const handlePasswordInput = async (e: Event) => {
 		const target = e.target as HTMLInputElement;
@@ -27,10 +27,10 @@
 		try {
 			const res = await fetch(tokenObtainUrl, {
 				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json'
+					Accept: "application/json",
+					"Content-Type": "application/json"
 				},
-				method: 'POST',
+				method: "POST",
 				body: JSON.stringify({
 					username: username,
 					password: password
@@ -42,14 +42,14 @@
 				userToken.set(data);
 
 				// Goto Next page if it exists else redirect to home.
-				const next = $page.url.searchParams.get('next');
-				browser && next ? (window.location.href = next) : (window.location.href = '/home/');
+				const next = $page.url.searchParams.get("next");
+				browser && next ? (window.location.href = next) : (window.location.href = "/home/");
 			}
 			errorMessage = data.detail;
 		} catch (err) {
 			if (err instanceof Error) {
-				userToken.set({ refresh: '', access: '' });
-				errorMessage = 'Cannot POST to Backend | Is backend down ? 🤔';
+				userToken.set({ refresh: "", access: "" });
+				errorMessage = "Cannot POST to Backend | Is backend down ? 🤔";
 				console.error(`Can't POST to backend | Reason : ${err.message}`);
 			}
 		}
@@ -99,7 +99,7 @@
 				<div class="field">
 					<p class="control is-expanded has-icons-left has-icons-right">
 						<input
-							type={passwordShown ? 'text' : 'password'}
+							type={passwordShown ? "text" : "password"}
 							name="password"
 							class="input is-font-face-ubuntu has-text-white has-background-black has-border-gray"
 							placeholder="Password"

@@ -1,18 +1,16 @@
-@charset "utf-16";
-
 // Import progressive-image.css
-@import url('https://cdn.jsdelivr.net/npm/progressive-image.js/dist/progressive-image.css');
+@import url("https://cdn.jsdelivr.net/npm/progressive-image.js/dist/progressive-image.css");
 
 // Fonts import
-@import url('https://cdn.jsdelivr.net/npm/typeface-cantarell@1.1.13/index.min.css');
-@import url('https://cdn.jsdelivr.net/npm/typeface-roboto@1.1.13/index.min.css');
-@import url('https://cdn.jsdelivr.net/npm/typeface-ubuntu@1.1.13/index.min.css');
+@import url("https://cdn.jsdelivr.net/npm/typeface-cantarell@1.1.13/index.min.css");
+@import url("https://cdn.jsdelivr.net/npm/typeface-roboto@1.1.13/index.min.css");
+@import url("https://cdn.jsdelivr.net/npm/typeface-ubuntu@1.1.13/index.min.css");
 
 // Bulma Varibales override
 $black: black !default;
 
 // Bulma import
-@import 'bulma/bulma.sass';
+@import "bulma/bulma.sass";
 
 // @Override
 .is-underlined {
@@ -47,21 +45,21 @@ $black: black !default;
 }
 
 .is-font-face-cantarell {
-	font-family: 'Cantarell' !important;
+	font-family: "Cantarell" !important;
 }
 .is-font-face-roboto {
-	font-family: 'Roboto' !important;
+	font-family: "Roboto" !important;
 }
 .is-font-face-ubuntu {
-	font-family: 'Ubuntu' !important;
+	font-family: "Ubuntu" !important;
 }
 
 // Tippy theme
-@import 'tippy.js/dist/tippy.css';
-@import 'tippy.js/animations/scale.css';
+@import "tippy.js/dist/tippy.css";
+@import "tippy.js/animations/scale.css";
 
 // Import Swiper styles
-@import 'swiper/scss';
+@import "swiper/scss";
 
 // Some defaults
 :root {
@@ -81,32 +79,32 @@ html {
 		overflow-x: hidden;
 	}
 
-	.tippy-box[data-theme~='black'] {
+	.tippy-box[data-theme~="black"] {
 		background-color: black !important;
 		border: 1px solid #ffffffcf !important;
 
-		&[data-placement^='top'] {
+		&[data-placement^="top"] {
 			.tippy-arrow {
 				&::before {
 					border-top-color: $white;
 				}
 			}
 		}
-		&[data-placement^='bottom'] {
+		&[data-placement^="bottom"] {
 			.tippy-arrow {
 				&::before {
 					border-bottom-color: $white;
 				}
 			}
 		}
-		&[data-placement^='left'] {
+		&[data-placement^="left"] {
 			.tippy-arrow {
 				&::before {
 					border-left-color: $white;
 				}
 			}
 		}
-		&[data-placement^='right'] {
+		&[data-placement^="right"] {
 			.tippy-arrow {
 				&::before {
 					border-right-color: $white;
