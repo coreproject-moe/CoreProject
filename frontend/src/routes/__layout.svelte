@@ -50,6 +50,8 @@
 		last_login: "",
 		avatar: ""
 	};
+	// Main SCSS import
+	import "../app.scss";
 
 	// Import JS libraries
 	import anime from "animejs";
@@ -76,9 +78,6 @@
 	import { page } from "$app/stores";
 
 	onMount(async () => {
-		// Main SCSS import
-		await import("../app.scss");
-
 		// https://bulma.io/documentation/components/navbar/#fixed-navbar
 		const HTMLTAG = browser && document.getElementsByTagName("html")[0]; // '0' to assign the first (and only `HTML` tag)
 		browser && HTMLTAG.classList.add("has-navbar-fixed-top");
