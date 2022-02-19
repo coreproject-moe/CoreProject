@@ -9,7 +9,7 @@ class CustomUser(AbstractUser, ResizeImageMixin):
     avatar = models.ImageField(upload_to="avatars", default=None, blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        if self.id:
+        if self.avatar:
             file = self.resize(self.avatar)
             self.avatar.save(f"{self.id}-{uuid4()}.avif", file, save=False)
 
