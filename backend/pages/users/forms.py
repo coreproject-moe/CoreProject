@@ -71,7 +71,6 @@ class UserEditInfoForm(forms.ModelForm):
             ),
         }
 
-
     def clean(self):
         cleaned_data = super(UserEditInfoForm, self).clean()
         password = cleaned_data.get("password")
@@ -79,7 +78,8 @@ class UserEditInfoForm(forms.ModelForm):
 
         if password != confirm_password:
             self.add_error(
-                "confirm_password", """'Password' and 'Confirm Password' does not match."""
+                "confirm_password",
+                """'Password' and 'Confirm Password' does not match.""",
             )
 
         if not password and not confirm_password:
