@@ -157,7 +157,7 @@
 >
 	<div class="navbar-brand is-clipped">
 		<a class="navbar-item is-clickable" href="https://bulma.io">
-			<img src="/logo.avif" alt="logo" width="112" height="28" />
+			<img src="/logo.avif" alt="logo" width={112} height={28} />
 		</a>
 
 		<button
