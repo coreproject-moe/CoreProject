@@ -176,364 +176,358 @@
 	</div>
 
 	<div class={`navbar-menu has-background-black ${navbarBurgerClosed ? "" : "is-active"}`}>
-		<div>
-			<div
-				class={`navbar-start mt-3 ${
-					$responsiveMode === "mobile" || $responsiveMode === "tablet"
-						? "is-flex is-flex-direction-row is-justify-content-center"
-						: ""
-				}`}
+		<div
+			class={`navbar-start mt-3 ${
+				$responsiveMode === "mobile" || $responsiveMode === "tablet"
+					? "is-flex is-flex-direction-row is-justify-content-center"
+					: ""
+			}`}
+		>
+			<a
+				href="/home"
+				sveltekit:prefetch
+				class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration ${
+					$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "pl-2 pr-2" : "ml-2"
+				} ${$page.url.pathname.includes("home") ? "hover" : ""}
+					`}
+				on:mouseenter={async () => {
+					anime({
+						targets: ".animejs__home__icon",
+						color: "#e50000"
+					});
+				}}
+				on:mouseleave={async () => {
+					anime({
+						targets: ".animejs__home__icon",
+						color: "#d9d9d9"
+					});
+				}}
 			>
-				<a
-					href="/home"
-					sveltekit:prefetch
-					class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration ${
-						$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "pl-2 pr-2" : "ml-2"
-					} ${$page.url.pathname.includes("home") ? "hover" : ""}
-					`}
-					on:mouseenter={async () => {
-						anime({
-							targets: ".animejs__home__icon",
-							color: "#e50000"
-						});
-					}}
-					on:mouseleave={async () => {
-						anime({
-							targets: ".animejs__home__icon",
-							color: "#d9d9d9"
-						});
-					}}
-				>
-					<ion-icon name="home-sharp" class="animejs__home__icon" />
-					<p
-						class={`${
-							$responsiveMode === "mobile" || $responsiveMode === "tablet"
-								? "pt-2 nav-icon-button"
-								: ""
-						}
+				<ion-icon name="home-sharp" class="animejs__home__icon" />
+				<p
+					class={`${
+						$responsiveMode === "mobile" || $responsiveMode === "tablet"
+							? "pt-2 nav-icon-button"
+							: ""
+					}
 						${$responsiveMode === "widescreen" ? "is-size-7" : ""}`}
-					>
-						<span class="is-hidden-touch">&nbsp;</span> Home
-					</p>
-				</a>
-				<a
-					href="/anime"
-					sveltekit:prefetch
-					class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration ${
-						$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "pl-2 pr-2" : "ml-2"
-					} ${$page.url.pathname.includes("anime") ? "hover" : ""}
+				>
+					<span class="is-hidden-touch">&nbsp;</span> Home
+				</p>
+			</a>
+			<a
+				href="/anime"
+				sveltekit:prefetch
+				class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration ${
+					$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "pl-2 pr-2" : "ml-2"
+				} ${$page.url.pathname.includes("anime") ? "hover" : ""}
 					`}
-					on:mouseenter={async () => {
-						anime({
-							targets: ".animejs__anime__icon",
-							color: "#e50000"
-						});
-					}}
-					on:mouseleave={async () => {
-						anime({
-							targets: ".animejs__anime__icon",
-							color: "#d9d9d9"
-						});
-					}}
+				on:mouseenter={async () => {
+					anime({
+						targets: ".animejs__anime__icon",
+						color: "#e50000"
+					});
+				}}
+				on:mouseleave={async () => {
+					anime({
+						targets: ".animejs__anime__icon",
+						color: "#d9d9d9"
+					});
+				}}
+			>
+				<ion-icon name="film-outline" class="animejs__anime__icon" />
+				<p
+					class={`${
+						$responsiveMode === "mobile" || $responsiveMode === "tablet"
+							? "pt-2 nav-icon-button"
+							: ""
+					} ${$responsiveMode === "widescreen" ? "is-size-7" : ""}`}
 				>
-					<ion-icon name="film-outline" class="animejs__anime__icon" />
-					<p
-						class={`${
-							$responsiveMode === "mobile" || $responsiveMode === "tablet"
-								? "pt-2 nav-icon-button"
-								: ""
-						} ${$responsiveMode === "widescreen" ? "is-size-7" : ""}`}
-					>
-						<span class="is-hidden-touch">&nbsp;</span>
-						Anime
-					</p>
-				</a>
-				<a
-					href="/manga"
-					sveltekit:prefetch
-					class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration ${
-						$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "pl-2 pr-2" : "ml-2"
-					} ${$page.url.pathname.includes("manga") ? "hover" : ""}`}
-					on:mouseenter={async () => {
-						anime({
-							targets: ".animejs__manga__icon",
-							color: "#e50000"
-						});
-					}}
-					on:mouseleave={async () => {
-						anime({
-							targets: ".animejs__manga__icon",
-							color: "#d9d9d9"
-						});
-					}}
+					<span class="is-hidden-touch">&nbsp;</span>
+					Anime
+				</p>
+			</a>
+			<a
+				href="/manga"
+				sveltekit:prefetch
+				class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration ${
+					$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "pl-2 pr-2" : "ml-2"
+				} ${$page.url.pathname.includes("manga") ? "hover" : ""}`}
+				on:mouseenter={async () => {
+					anime({
+						targets: ".animejs__manga__icon",
+						color: "#e50000"
+					});
+				}}
+				on:mouseleave={async () => {
+					anime({
+						targets: ".animejs__manga__icon",
+						color: "#d9d9d9"
+					});
+				}}
+			>
+				<ion-icon name="images-outline" class="animejs__manga__icon" />
+				<p
+					class={`${
+						$responsiveMode === "mobile" || $responsiveMode === "tablet"
+							? "pt-2 nav-icon-button"
+							: ""
+					} ${$responsiveMode === "widescreen" ? "is-size-7" : ""}`}
 				>
-					<ion-icon name="images-outline" class="animejs__manga__icon" />
-					<p
-						class={`${
-							$responsiveMode === "mobile" || $responsiveMode === "tablet"
-								? "pt-2 nav-icon-button"
-								: ""
-						} ${$responsiveMode === "widescreen" ? "is-size-7" : ""}`}
-					>
-						<span class="is-hidden-touch">&nbsp;</span> Manga
-					</p>
-				</a>
-				<a
-					sveltekit:prefetch
-					href="/soundcore"
-					class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration ${
-						$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "pl-2 pr-2" : "ml-2"
-					} ${$page.url.pathname.includes("soundcore") ? "hover" : ""}`}
-					on:mouseenter={async () => {
-						anime({
-							targets: ".animejs__music__icon",
-							color: "#e50000"
-						});
-					}}
-					on:mouseleave={async () => {
-						anime({
-							targets: ".animejs__music__icon",
-							color: "#d9d9d9"
-						});
-					}}
+					<span class="is-hidden-touch">&nbsp;</span> Manga
+				</p>
+			</a>
+			<a
+				sveltekit:prefetch
+				href="/soundcore"
+				class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration ${
+					$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "pl-2 pr-2" : "ml-2"
+				} ${$page.url.pathname.includes("soundcore") ? "hover" : ""}`}
+				on:mouseenter={async () => {
+					anime({
+						targets: ".animejs__music__icon",
+						color: "#e50000"
+					});
+				}}
+				on:mouseleave={async () => {
+					anime({
+						targets: ".animejs__music__icon",
+						color: "#d9d9d9"
+					});
+				}}
+			>
+				<ion-icon name="musical-note-outline" class="animejs__music__icon" />
+				<p
+					class={`${
+						$responsiveMode === "mobile" || $responsiveMode === "tablet"
+							? "pt-2 nav-icon-button"
+							: ""
+					} ${$responsiveMode === "widescreen" ? "is-size-7" : ""}`}
 				>
-					<ion-icon name="musical-note-outline" class="animejs__music__icon" />
-					<p
-						class={`${
-							$responsiveMode === "mobile" || $responsiveMode === "tablet"
-								? "pt-2 nav-icon-button"
-								: ""
-						} ${$responsiveMode === "widescreen" ? "is-size-7" : ""}`}
-					>
-						<span class="is-hidden-touch">&nbsp;</span>
-						Soundcore
-					</p>
-				</a>
-				<a
-					sveltekit:prefetch
-					href="/shots"
-					class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration ${
-						$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "pl-2 pr-2" : "ml-2"
-					} ${$page.url.pathname.includes("shots") ? "hover" : ""}`}
-					on:mouseenter={async () => {
-						anime({
-							targets: ".animejs__shots__icon",
-							color: "#e50000"
-						});
-					}}
-					on:mouseleave={async () => {
-						anime({
-							targets: ".animejs__shots__icon",
-							color: "#d9d9d9"
-						});
-					}}
+					<span class="is-hidden-touch">&nbsp;</span>
+					Soundcore
+				</p>
+			</a>
+			<a
+				sveltekit:prefetch
+				href="/shots"
+				class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration ${
+					$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "pl-2 pr-2" : "ml-2"
+				} ${$page.url.pathname.includes("shots") ? "hover" : ""}`}
+				on:mouseenter={async () => {
+					anime({
+						targets: ".animejs__shots__icon",
+						color: "#e50000"
+					});
+				}}
+				on:mouseleave={async () => {
+					anime({
+						targets: ".animejs__shots__icon",
+						color: "#d9d9d9"
+					});
+				}}
+			>
+				<ion-icon name="aperture-outline" class="animejs__shots__icon" />
+				<p
+					class={`${
+						$responsiveMode === "mobile" || $responsiveMode === "tablet"
+							? "pt-2 nav-icon-button"
+							: ""
+					} ${$responsiveMode === "widescreen" ? "is-size-7" : ""}`}
 				>
-					<ion-icon name="aperture-outline" class="animejs__shots__icon" />
-					<p
-						class={`${
-							$responsiveMode === "mobile" || $responsiveMode === "tablet"
-								? "pt-2 nav-icon-button"
-								: ""
-						} ${$responsiveMode === "widescreen" ? "is-size-7" : ""}`}
-					>
-						<span class="is-hidden-touch">&nbsp;</span>
-						Shots
-					</p>
-				</a>
-				<div class="control has-icons-left  ml-4 is-hidden-touch">
-					<input
-						class="input has-background-black has-text-white search__input"
-						type="text"
-						placeholder="Search Away"
-					/>
-					<span class="icon is-small is-left">
-						<ion-icon name="search-outline" class="has-text-white is-size-4" />
-					</span>
-				</div>
+					<span class="is-hidden-touch">&nbsp;</span>
+					Shots
+				</p>
+			</a>
+			<div class="control has-icons-left  ml-4 is-hidden-touch">
+				<input
+					class="input has-background-black has-text-white search__input"
+					type="text"
+					placeholder="Search Away"
+				/>
+				<span class="icon is-small is-left">
+					<ion-icon name="search-outline" class="has-text-white is-size-4" />
+				</span>
 			</div>
 		</div>
+	</div>
 
-		<div class="navbar-end is-clipped">
-			<div
-				class={`navbar-item ${
-					$responsiveMode === "mobile"
-						? "is-flex is-flex-direction-row is-justify-content-center pt-6"
-						: ""
+	<div class="navbar-end is-clipped">
+		<div
+			class={`navbar-item ${
+				$responsiveMode === "mobile"
+					? "is-flex is-flex-direction-row is-justify-content-center pt-6"
+					: ""
+			}`}
+		>
+			<button
+				class={`is-rounded is-dark animejs__github__button has-background-black-bis is-clickable ${
+					$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "is-hidden " : ""
 				}`}
+				on:mouseenter={async () => {
+					anime({
+						targets: ".animejs__logo__github",
+						color: "hsl(0, 0%, 100%)"
+					});
+					anime({
+						targets: ".animejs__github__button",
+						scale: 1.3
+					});
+				}}
+				on:mouseleave={async () => {
+					anime({
+						targets: ".animejs__logo__github",
+						color: "hsl(0, 0%, 80%)"
+					});
+					anime({
+						targets: ".animejs__github__button",
+						scale: 1
+					});
+				}}
+				on:click={async () => {
+					goto("https://github.com/baseplate-admin/CoreProject");
+				}}
 			>
-				<button
-					class={`is-rounded is-dark animejs__github__button has-background-black-bis is-clickable ${
-						$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "is-hidden " : ""
-					}`}
-					on:mouseenter={async () => {
-						anime({
-							targets: ".animejs__logo__github",
-							color: "hsl(0, 0%, 100%)"
-						});
-						anime({
-							targets: ".animejs__github__button",
-							scale: 1.3
-						});
-					}}
-					on:mouseleave={async () => {
-						anime({
-							targets: ".animejs__logo__github",
-							color: "hsl(0, 0%, 80%)"
-						});
-						anime({
-							targets: ".animejs__github__button",
-							scale: 1
-						});
-					}}
-					on:click={async () => {
-						goto("https://github.com/baseplate-admin/CoreProject");
-					}}
-				>
-					<ion-icon
-						class="animejs__logo__github has-text-white"
-						style="width: 100%; height: 100%;"
-						name="logo-github"
-					/>
-				</button>
+				<ion-icon
+					class="animejs__logo__github has-text-white"
+					style="width: 100%; height: 100%;"
+					name="logo-github"
+				/>
+			</button>
 
-				<button
-					style="z-index: 1000000"
-					class={`is-rounded is-dark animejs__arrow__button has-background-black-bis is-clickable ${
-						$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "is-hidden" : ""
-					}`}
-					on:mouseenter={async () => {
-						anime({
-							targets: ".animejs__arrow__back",
-							color: "#e50000"
-						});
-						anime({
-							targets: ".animejs__arrow__button",
-							scale: 1.2
-						});
-					}}
-					on:mouseleave={async () => {
-						anime({
-							targets: ".animejs__arrow__back",
-							color: "hsl(0, 0%, 80%)"
-						});
-						anime({
-							targets: ".animejs__arrow__button",
-							scale: 1
-						});
-					}}
-					on:click|preventDefault={async () => {
-						arrowButtonTurned = !arrowButtonTurned;
+			<button
+				style="z-index: 1000000"
+				class={`is-rounded is-dark animejs__arrow__button has-background-black-bis is-clickable ${
+					$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "is-hidden" : ""
+				}`}
+				on:mouseenter={async () => {
+					anime({
+						targets: ".animejs__arrow__back",
+						color: "#e50000"
+					});
+					anime({
+						targets: ".animejs__arrow__button",
+						scale: 1.2
+					});
+				}}
+				on:mouseleave={async () => {
+					anime({
+						targets: ".animejs__arrow__back",
+						color: "hsl(0, 0%, 80%)"
+					});
+					anime({
+						targets: ".animejs__arrow__button",
+						scale: 1
+					});
+				}}
+				on:click|preventDefault={async () => {
+					arrowButtonTurned = !arrowButtonTurned;
 
-						switch (arrowButtonTurned) {
-							case true: {
-								anime({
-									targets: ".animejs__arrow__back",
-									rotate: [0, 180]
-								});
-								break;
-							}
-							case false: {
-								anime({
-									targets: ".animejs__arrow__back",
-									rotate: [180, 360]
-								});
-								break;
-							}
+					switch (arrowButtonTurned) {
+						case true: {
+							anime({
+								targets: ".animejs__arrow__back",
+								rotate: [0, 180]
+							});
+							break;
 						}
-					}}
+						case false: {
+							anime({
+								targets: ".animejs__arrow__back",
+								rotate: [180, 360]
+							});
+							break;
+						}
+					}
+				}}
+			>
+				<ion-icon
+					class="animejs__arrow__back"
+					name="arrow-back-outline"
+					style="width: 100%; height: 100%;"
+				/>
+			</button>
+		</div>
+		{#if $isUserAuthenticated}
+			<figure class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture">
+				<a
+					href={userEditInfoPageUrl}
+					rel="external"
+					data-href={userInfo?.avatar
+						? `${baseUrl}${userInfo?.avatar}`
+						: `https://seccdn.libravatar.org/avatar/${md5(userInfo.email)}/?s=64`}
+					class="progressive replace"
+					style="border-radius: 9999px; height:40px; width:40px; z-index: 1000000;margin: auto;"
 				>
-					<ion-icon
-						class="animejs__arrow__back"
-						name="arrow-back-outline"
-						style="width: 100%; height: 100%;"
-					/>
-				</button>
-			</div>
-			{#if $isUserAuthenticated}
-				<figure class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture">
-					<a
-						href={userEditInfoPageUrl}
-						rel="external"
-						data-href={userInfo?.avatar
-							? `${baseUrl}${userInfo?.avatar}`
-							: `https://seccdn.libravatar.org/avatar/${md5(userInfo.email)}/?s=64`}
-						class="progressive replace"
-						style="border-radius: 9999px; height:40px; width:40px; z-index: 1000000;margin: auto;"
-					>
-						<img
-							class="is-rounded preview avatar-preview"
-							alt="logo"
-							src="/placeholder-64x64.avif"
-						/>
-					</a>
-				</figure>
-				<!-- 
+					<img class="is-rounded preview avatar-preview" alt="logo" src="/placeholder-64x64.avif" />
+				</a>
+			</figure>
+			<!-- 
 					@TODO
 					Remove this garbage
 				 -->
-				<div class="column is-narrow has-text-white is-hidden-desktop">
-					<div class="columns is-flex-direction-column is-mobile is-gapless">
-						<div class="column">
-							<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
-								<b>First Name</b> :
-								{userInfo?.first_name}
-							</span>
-						</div>
-						<div class="column">
-							<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
-								<b>Last Name</b> :
-								{userInfo?.last_name}
-							</span>
-						</div>
-						<div class="column">
-							<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
-								<b>Username</b> :
-								{userInfo?.username}
-							</span>
-						</div>
-						<div class="column">
-							<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
-								<b>Email</b> :
-								{userInfo?.email}
-							</span>
-						</div>
-						<div class="column">
-							<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
-								<b>Date Joined</b> :
-								{userInfo?.date_joined}
-							</span>
-						</div>
-						<div class="column">
-							<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
-								<b>Date Joined</b> :
-								{userInfo?.last_login}
-							</span>
+			<div class="column is-narrow has-text-white is-hidden-desktop">
+				<div class="columns is-flex-direction-column is-mobile is-gapless">
+					<div class="column">
+						<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
+							<b>First Name</b> :
+							{userInfo?.first_name}
+						</span>
+					</div>
+					<div class="column">
+						<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
+							<b>Last Name</b> :
+							{userInfo?.last_name}
+						</span>
+					</div>
+					<div class="column">
+						<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
+							<b>Username</b> :
+							{userInfo?.username}
+						</span>
+					</div>
+					<div class="column">
+						<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
+							<b>Email</b> :
+							{userInfo?.email}
+						</span>
+					</div>
+					<div class="column">
+						<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
+							<b>Date Joined</b> :
+							{userInfo?.date_joined}
+						</span>
+					</div>
+					<div class="column">
+						<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
+							<b>Date Joined</b> :
+							{userInfo?.last_login}
+						</span>
+					</div>
+				</div>
+			</div>
+		{:else}
+			<div class="navbar-item">
+				<div class="columns is-mobile is-centered">
+					<div class="column is-narrow">
+						<div class="buttons">
+							<a
+								class="button has-text-white is-black has-border-gray is-rounded"
+								href={`/authentication/login?next=${$page?.url?.pathname}`}
+							>
+								Log in
+							</a>
+							<a
+								class="button has-text-white is-black has-border-gray is-rounded"
+								href={`${signupPageUrl}?next=${$page?.url?.pathname}`}
+							>
+								Sign Up
+							</a>
 						</div>
 					</div>
 				</div>
-			{:else}
-				<div class="navbar-item">
-					<div class="columns is-mobile is-centered">
-						<div class="column is-narrow">
-							<div class="buttons">
-								<a
-									class="button has-text-white is-black has-border-gray is-rounded"
-									href={`/authentication/login?next=${$page?.url?.pathname}`}
-								>
-									Log in
-								</a>
-								<a
-									class="button has-text-white is-black has-border-gray is-rounded"
-									href={`${signupPageUrl}?next=${$page?.url?.pathname}`}
-								>
-									Sign Up
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			{/if}
-		</div>
+			</div>
+		{/if}
 	</div>
 </nav>
 <slot />
