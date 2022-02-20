@@ -37,7 +37,24 @@ Change info for {{ request.user }}
         margin: auto;
     }
 </style>
-<form enctype="multipart/form-data" method="post">
+
+<form
+    enctype="multipart/form-data"
+    method="post"
+    x-init="$watch('password_shown', (value) => {
+    const element = document.querySelector('#id_password')
+
+        switch (value){
+            case true:
+                element.type = 'text';
+                break;
+            case false:
+                element.type = 'password';
+
+                break;
+        }
+    })"
+>
     {% csrf_token %}
 
     <div class="icon-box box">
@@ -135,24 +152,7 @@ Change info for {{ request.user }}
         </div>
         <div class="field-body">
             <div class="field">
-                <p
-                    class="control is-expanded has-icons-left"
-                    x-init="
-                        async () => {
-                            for (let i = 0; i < $el.childNodes.length; i++) {
-                                const element = $el.childNodes[i];
-
-                                try {
-                                    if (element.tagName.toLowerCase() === 'input') {
-                                        element.value = '{{ request.user.first_name }}'
-                                    } 
-                                } catch (e) {
-                                    // If i dont do this theres a error saying cant access element.tagName
-                                }
-                            }
-                        }
-                    "
-                >
+                <p class="control is-expanded has-icons-left">
                     {{ form.first_name }}
                     <span class="icon is-small is-left">
                         <ion-icon
@@ -175,6 +175,7 @@ Change info for {{ request.user }}
             </div>
         </div>
     </div>
+
     <div class="items field is-horizontal">
         <div class="field-label is-normal is-hidden-desktop">
             <label class="label has-text-white is-unselectable"
@@ -183,24 +184,7 @@ Change info for {{ request.user }}
         </div>
         <div class="field-body">
             <div class="field">
-                <p
-                    class="control is-expanded has-icons-left"
-                    x-init="
-                        async () => {
-                            for (let i = 0; i < $el.childNodes.length; i++) {
-                                const element = $el.childNodes[i];
-
-                                try {
-                                    if (element.tagName.toLowerCase() === 'input') {
-                                        element.value = '{{ request.user.last_name }}'
-                                    } 
-                                } catch (e) {
-                                    // If i dont do this theres a error saying cant access element.tagName
-                                }
-                            }
-                        }
-                    "
-                >
+                <p class="control is-expanded has-icons-left">
                     {{ form.last_name }}
                     <span class="icon is-small is-left">
                         <ion-icon
@@ -232,24 +216,7 @@ Change info for {{ request.user }}
         </div>
         <div class="field-body">
             <div class="field">
-                <p
-                    class="control is-expanded has-icons-left"
-                    x-init="
-                        async () => {
-                            for (let i = 0; i < $el.childNodes.length; i++) {
-                                const element = $el.childNodes[i];
-
-                                try {
-                                    if (element.tagName.toLowerCase() === 'input') {
-                                        element.value = '{{ request.user.username }}'
-                                    } 
-                                } catch (e) {
-                                    // If i dont do this theres a error saying cant access element.tagName
-                                }
-                            }
-                        }
-                    "
-                >
+                <p class="control is-expanded has-icons-left">
                     {{ form.username }}
                     <span class="icon is-small is-left">
                         <ion-icon
@@ -272,6 +239,7 @@ Change info for {{ request.user }}
             </div>
         </div>
     </div>
+
     <div class="items field is-horizontal">
         <div class="field-label is-normal is-hidden-desktop">
             <label class="label has-text-white is-unselectable"
