@@ -71,16 +71,6 @@ class UserEditInfoForm(forms.ModelForm):
             ),
         }
 
-    # def clean_avatar(self):
-    #     cleaned_data = super(UserEditInfoForm, self).clean()
-    #     img = cleaned_data.get("avatar")
-    #     if not img:
-    #         return img
-
-    #     from PIL import Image
-    #     from io import BytesIO
-
-    #     print(img)
 
     def clean(self):
         cleaned_data = super(UserEditInfoForm, self).clean()
@@ -89,10 +79,10 @@ class UserEditInfoForm(forms.ModelForm):
 
         if password != confirm_password:
             self.add_error(
-                "confirm_password", "'Password' and 'Confirm Password' does not match."
+                "confirm_password", """'Password' and 'Confirm Password' does not match."""
             )
 
-        if password == "":
+        if not password and not confirm_password:
             cleaned_data.pop("password")
             cleaned_data.pop("confirm_password")
 
