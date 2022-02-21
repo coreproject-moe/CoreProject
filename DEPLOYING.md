@@ -34,5 +34,3 @@ pipenv run sync
 pipenv run dev
 ```
 
-
-If you want login create a superuser.
