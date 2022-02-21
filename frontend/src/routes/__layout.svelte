@@ -149,7 +149,9 @@
 			touch: false,
 			placement: "bottom",
 			trigger: get(responsiveMode) === "mobile" ? "click" : "mouseenter focus",
-			triggerTarget: get(responsiveMode) === "mobile" ? navbarBurger : null
+			triggerTarget: get(responsiveMode) === "mobile" ? navbarBurger : null,
+			interactive: get(responsiveMode) === "mobile" ? true : false,
+			appendTo: () => document.body
 		});
 	});
 </script>
