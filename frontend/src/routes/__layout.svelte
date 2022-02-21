@@ -76,43 +76,9 @@
 	import { goto } from "$app/navigation";
 	import { page } from "$app/stores";
 
-	onMount(async () => {
-		// https://bulma.io/documentation/components/navbar/#fixed-navbar
-		const HTMLTAG = browser && document.getElementsByTagName("html")[0]; // '0' to assign the first (and only `HTML` tag)
-		browser && HTMLTAG.classList.add("has-navbar-fixed-top");
-
-		// AnimeJS
-		anime({
-			targets: ".animejs__arrow__back",
-			easing: "linear",
-			duration: 100,
-			color: "hsl(0, 0%, 80%)"
-		});
-
-		// TippyJS
-
-		tippy(".animejs__github__button", {
-			content: "Github",
-			theme: "black",
-			touch: false
-		});
-		tippy(".tippyjs__avatar__picture", {
-			content: `<b>ID</b> : ${userInfo?.id} <br /> <b>First Name</b> : ${
-				userInfo?.first_name
-			}<br/> <b>Last Name</b> : ${userInfo?.last_name}<br/> <b>Username</b> : ${
-				userInfo?.username
-			}<br/>  <b>Email</b> : ${userInfo?.email}<br/><b>Date Joined</b> : ${dayjs(
-				userInfo?.date_joined
-			)}<br/>
-			<b>Last Active</b> : ${dayjs(userInfo?.last_login)}`,
-			theme: "black",
-			allowHTML: true,
-			touch: false
-		});
-	});
-
 	let arrowButtonTurned = false;
 
+	let navbarBurger: HTMLElement;
 	let navbarBurgerClosed = false;
 	// Auto close the navbar Buger to close if its on Mobile or Tablet
 	$: navbarBurgerClosed = $responsiveMode === "mobile" || $responsiveMode === "tablet";
@@ -147,6 +113,45 @@
 		},
 		() => [arrowButtonTurned]
 	);
+
+	onMount(async () => {
+		// https://bulma.io/documentation/components/navbar/#fixed-navbar
+		const HTMLTAG = browser && document.getElementsByTagName("html")[0]; // '0' to assign the first (and only `HTML` tag)
+		browser && HTMLTAG.classList.add("has-navbar-fixed-top");
+
+		// AnimeJS
+		anime({
+			targets: ".animejs__arrow__back",
+			easing: "linear",
+			duration: 100,
+			color: "hsl(0, 0%, 80%)"
+		});
+
+		// TippyJS
+
+		tippy(".animejs__github__button", {
+			content: "Github",
+			theme: "black",
+			touch: false
+		});
+
+		tippy(".tippyjs__avatar__picture", {
+			content: `<b>ID</b> : ${userInfo?.id} <br /> <b>First Name</b> : ${
+				userInfo?.first_name
+			}<br/> <b>Last Name</b> : ${userInfo?.last_name}<br/> <b>Username</b> : ${
+				userInfo?.username
+			}<br/>  <b>Email</b> : ${userInfo?.email}<br/><b>Date Joined</b> : ${dayjs(
+				userInfo?.date_joined
+			)}<br/>
+			<b>Last Active</b> : ${dayjs(userInfo?.last_login)}`,
+			theme: "black",
+			allowHTML: true,
+			touch: false,
+			placement: "bottom",
+			trigger: get(responsiveMode) === "mobile" ? "click" : "mouseenter focus",
+			triggerTarget: get(responsiveMode) === "mobile" ? navbarBurger : null
+		});
+	});
 </script>
 
 <nav
@@ -162,6 +167,7 @@
 
 		<button
 			class={`navbar-burger has-text-white is-clickable ${navbarBurgerClosed ? "" : "is-active"}`}
+			bind:this={navbarBurger}
 			style="margin-top: -0.5em"
 			aria-label="menu"
 			aria-expanded="false"
@@ -350,184 +356,147 @@
 				</span>
 			</div>
 		</div>
-	</div>
-
-	<div class="navbar-end is-clipped">
-		<div
-			class={`navbar-item ${
-				$responsiveMode === "mobile"
-					? "is-flex is-flex-direction-row is-justify-content-center pt-6"
-					: ""
-			}`}
-		>
-			<button
-				class={`is-rounded is-dark animejs__github__button has-background-black-bis is-clickable ${
-					$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "is-hidden " : ""
+		<div class="navbar-end is-clipped">
+			<div
+				class={`navbar-item ${
+					$responsiveMode === "mobile"
+						? "is-flex is-flex-direction-row is-justify-content-center pt-6"
+						: ""
 				}`}
-				on:mouseenter={async () => {
-					anime({
-						targets: ".animejs__logo__github",
-						color: "hsl(0, 0%, 100%)"
-					});
-					anime({
-						targets: ".animejs__github__button",
-						scale: 1.3
-					});
-				}}
-				on:mouseleave={async () => {
-					anime({
-						targets: ".animejs__logo__github",
-						color: "hsl(0, 0%, 80%)"
-					});
-					anime({
-						targets: ".animejs__github__button",
-						scale: 1
-					});
-				}}
-				on:click={async () => {
-					goto("https://github.com/baseplate-admin/CoreProject");
-				}}
 			>
-				<ion-icon
-					class="animejs__logo__github has-text-white"
-					style="width: 100%; height: 100%;"
-					name="logo-github"
-				/>
-			</button>
-
-			<button
-				style="z-index: 1000000"
-				class={`is-rounded is-dark animejs__arrow__button has-background-black-bis is-clickable ${
-					$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "is-hidden" : ""
-				}`}
-				on:mouseenter={async () => {
-					anime({
-						targets: ".animejs__arrow__back",
-						color: "#e50000"
-					});
-					anime({
-						targets: ".animejs__arrow__button",
-						scale: 1.2
-					});
-				}}
-				on:mouseleave={async () => {
-					anime({
-						targets: ".animejs__arrow__back",
-						color: "hsl(0, 0%, 80%)"
-					});
-					anime({
-						targets: ".animejs__arrow__button",
-						scale: 1
-					});
-				}}
-				on:click|preventDefault={async () => {
-					arrowButtonTurned = !arrowButtonTurned;
-
-					switch (arrowButtonTurned) {
-						case true: {
-							anime({
-								targets: ".animejs__arrow__back",
-								rotate: [0, 180]
-							});
-							break;
-						}
-						case false: {
-							anime({
-								targets: ".animejs__arrow__back",
-								rotate: [180, 360]
-							});
-							break;
-						}
-					}
-				}}
-			>
-				<ion-icon
-					class="animejs__arrow__back"
-					name="arrow-back-outline"
-					style="width: 100%; height: 100%;"
-				/>
-			</button>
-		</div>
-		{#if $isUserAuthenticated}
-			<figure class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture">
-				<a
-					href={userEditInfoPageUrl}
-					rel="external"
-					data-href={userInfo?.avatar
-						? `${baseUrl}${userInfo?.avatar}`
-						: `https://seccdn.libravatar.org/avatar/${md5(userInfo.email)}/?s=64`}
-					class="progressive replace"
-					style="border-radius: 9999px; height:40px; width:40px; z-index: 1000000;margin: auto;"
+				<button
+					class={`is-rounded is-dark animejs__github__button has-background-black-bis is-clickable ${
+						$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "is-hidden " : ""
+					}`}
+					on:mouseenter={async () => {
+						anime({
+							targets: ".animejs__logo__github",
+							color: "hsl(0, 0%, 100%)"
+						});
+						anime({
+							targets: ".animejs__github__button",
+							scale: 1.3
+						});
+					}}
+					on:mouseleave={async () => {
+						anime({
+							targets: ".animejs__logo__github",
+							color: "hsl(0, 0%, 80%)"
+						});
+						anime({
+							targets: ".animejs__github__button",
+							scale: 1
+						});
+					}}
+					on:click={async () => {
+						goto("https://github.com/baseplate-admin/CoreProject");
+					}}
 				>
-					<img class="is-rounded preview avatar-preview" alt="logo" src="/placeholder-64x64.avif" />
-				</a>
-			</figure>
-			<!-- 
-					@TODO
-					Remove this garbage
-				 -->
-			<div class="column is-narrow has-text-white is-hidden-desktop">
-				<div class="columns is-flex-direction-column is-mobile is-gapless">
-					<div class="column">
-						<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
-							<b>First Name</b> :
-							{userInfo?.first_name}
-						</span>
-					</div>
-					<div class="column">
-						<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
-							<b>Last Name</b> :
-							{userInfo?.last_name}
-						</span>
-					</div>
-					<div class="column">
-						<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
-							<b>Username</b> :
-							{userInfo?.username}
-						</span>
-					</div>
-					<div class="column">
-						<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
-							<b>Email</b> :
-							{userInfo?.email}
-						</span>
-					</div>
-					<div class="column">
-						<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
-							<b>Date Joined</b> :
-							{userInfo?.date_joined}
-						</span>
-					</div>
-					<div class="column">
-						<span class="mobile__friendly__avatar__stats is-clipped is-inline-block">
-							<b>Date Joined</b> :
-							{userInfo?.last_login}
-						</span>
-					</div>
-				</div>
+					<ion-icon
+						class="animejs__logo__github has-text-white"
+						style="width: 100%; height: 100%;"
+						name="logo-github"
+					/>
+				</button>
+
+				<button
+					style="z-index: 1000000"
+					class={`is-rounded is-dark animejs__arrow__button has-background-black-bis is-clickable ${
+						$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "is-hidden" : ""
+					}`}
+					on:mouseenter={async () => {
+						anime({
+							targets: ".animejs__arrow__back",
+							color: "#e50000"
+						});
+						anime({
+							targets: ".animejs__arrow__button",
+							scale: 1.2
+						});
+					}}
+					on:mouseleave={async () => {
+						anime({
+							targets: ".animejs__arrow__back",
+							color: "hsl(0, 0%, 80%)"
+						});
+						anime({
+							targets: ".animejs__arrow__button",
+							scale: 1
+						});
+					}}
+					on:click|preventDefault={async () => {
+						arrowButtonTurned = !arrowButtonTurned;
+
+						switch (arrowButtonTurned) {
+							case true: {
+								anime({
+									targets: ".animejs__arrow__back",
+									rotate: [0, 180]
+								});
+								break;
+							}
+							case false: {
+								anime({
+									targets: ".animejs__arrow__back",
+									rotate: [180, 360]
+								});
+								break;
+							}
+						}
+					}}
+				>
+					<ion-icon
+						class="animejs__arrow__back"
+						name="arrow-back-outline"
+						style="width: 100%; height: 100%;"
+					/>
+				</button>
 			</div>
-		{:else}
-			<div class="navbar-item">
+			{#if $isUserAuthenticated}
 				<div class="columns is-mobile is-centered">
 					<div class="column is-narrow">
-						<div class="buttons">
+						<figure class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture">
 							<a
-								class="button has-text-white is-black has-border-gray is-rounded"
-								href={`/authentication/login?next=${$page?.url?.pathname}`}
+								href={userEditInfoPageUrl}
+								rel="external"
+								data-href={userInfo?.avatar
+									? `${baseUrl}${userInfo?.avatar}`
+									: `https://seccdn.libravatar.org/avatar/${md5(userInfo.email)}/?s=64`}
+								class="progressive replace"
+								style="border-radius: 9999px; height:40px; width:40px; z-index: 1000000;margin: auto;"
 							>
-								Log in
+								<img
+									class="is-rounded preview avatar-preview"
+									alt="logo"
+									src="/placeholder-64x64.avif"
+								/>
 							</a>
-							<a
-								class="button has-text-white is-black has-border-gray is-rounded"
-								href={`${signupPageUrl}?next=${$page?.url?.pathname}`}
-							>
-								Sign Up
-							</a>
+						</figure>
+					</div>
+				</div>
+			{:else}
+				<div class="navbar-item">
+					<div class="columns is-mobile is-centered">
+						<div class="column is-narrow">
+							<div class="buttons">
+								<a
+									class="button has-text-white is-black has-border-gray is-rounded"
+									href={`/authentication/login?next=${$page?.url?.pathname}`}
+								>
+									Log in
+								</a>
+								<a
+									class="button has-text-white is-black has-border-gray is-rounded"
+									href={`${signupPageUrl}?next=${$page?.url?.pathname}`}
+								>
+									Sign Up
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		{/if}
+			{/if}
+		</div>
 	</div>
 </nav>
 <slot />
