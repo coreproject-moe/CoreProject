@@ -149,6 +149,7 @@
 			touch: false,
 			placement: "bottom",
 			trigger: get(responsiveMode) === "mobile" ? "click" : "mouseenter focus",
+			hideOnClick: get(responsiveMode) === "mobile" ? "toggle" : false,
 			triggerTarget: get(responsiveMode) === "mobile" ? navbarBurger : null,
 			interactive: get(responsiveMode) === "mobile" ? true : false,
 			appendTo: () => document.body
