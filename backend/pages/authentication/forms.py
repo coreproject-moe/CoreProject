@@ -1,7 +1,8 @@
 from django import forms
 
 from django.contrib.auth import get_user_model
-from django.contrib.auth.hashers import make_password
+
+from custom.forms.mixins.validate_password import ValidatePasswordMixin
 
 
 class LoginForm(forms.Form):
@@ -29,12 +30,12 @@ class LoginForm(forms.Form):
     )
 
 
-class RegisterForm(forms.ModelForm):
+class RegisterForm(forms.ModelForm, ValidatePasswordMixin):
     confirm_password = forms.CharField(
         required=True,
         widget=forms.PasswordInput(
             attrs={
-                "class": "input ",
+                "class": "input",
                 "value": "",
                 "placeholder": "Confirm Password",
                 "autocomplete": "new-password",
@@ -91,7 +92,7 @@ class RegisterForm(forms.ModelForm):
             ),
             "password": forms.PasswordInput(
                 attrs={
-                    "class": "input ",
+                    "class": "input",
                     "value": "",
                     "placeholder": "Password",
                     "autocomplete": "new-password",
@@ -100,23 +101,7 @@ class RegisterForm(forms.ModelForm):
         }
 
     def clean(self):
-        cleaned_data = super(RegisterForm, self).clean()
-        password = cleaned_data.get("password")
-        confirm_password = cleaned_data.get("confirm_password")
-
-        if password != confirm_password:
-            self.add_error(
-                "confirm_password",
-                """'Password' and 'Confirm Password' does not match.""",
-            )
-
-        if not password and not confirm_password:
-            cleaned_data.pop("password")
-            cleaned_data.pop("confirm_password")
-
-        else:
-            hashed_password = make_password(password)
-            cleaned_data["password"] = hashed_password
-            cleaned_data["confirm_password"] = hashed_password
+        cleaned_data = super().clean()
+        self.validate_password(cleaned_data)
 
         return cleaned_data
