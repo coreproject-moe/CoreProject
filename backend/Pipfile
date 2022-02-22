@@ -6,9 +6,9 @@ name = "pypi"
 [packages]
 django = {extras = ["argon2"], version = "*"}
 # 3rd Party
-whitenoise = {extras = ["brotli"], version = "*"}
-django-cors-headers = "*"
 django-cleanup = "*"
+django-cors-headers = "*"
+whitenoise = {extras = ["brotli"], version = "*"}
 # Rest framework
 djangorestframework = "*"
 djangorestframework-simplejwt = "*"
