@@ -247,10 +247,7 @@
             "version": "==5.0.0"
         },
         "gunicorn": {
-            "extras": [
-                "gevent",
-                "setproctitle"
-            ],
+            "extras": [],
             "hashes": [
                 "sha256:9dcc4547dbb1cb284accfb15ab5667a0e5d1881cc443e0677b4882a4067a807e",
                 "sha256:e0a968b5ba15f8a328fdfd7ab1fcb5af4470c28aaf7e55df02a99bc13138e6e8"
@@ -459,9 +456,7 @@
             "version": "==2021.5"
         },
         "uvicorn": {
-            "extras": [
-                "standard"
-            ],
+            "extras": [],
             "hashes": [
                 "sha256:8adddf629b79857b48b999ae1b14d6c92c95d4d7840bd86461f09bee75f1653e",
                 "sha256:c04a9c069111489c324f427501b3840d306c6b91a77b00affc136a840a3f45f1"
@@ -543,11 +538,11 @@
         },
         "platformdirs": {
             "hashes": [
-                "sha256:30671902352e97b1eafd74ade8e4a694782bd3471685e78c32d0fdfd3aa7e7bb",
-                "sha256:8ec11dfba28ecc0715eb5fb0147a87b1bf325f349f3da9aab2cd6b50b96b692b"
+                "sha256:7535e70dfa32e84d4b34996ea99c5e432fa29a708d0f4e394bbcb2a8faa4f16d",
+                "sha256:bcae7cab893c2d310a711b70b24efb93334febe65f8de776ee320b517471e227"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==2.5.0"
+            "version": "==2.5.1"
         },
         "tomli": {
             "hashes": [
