@@ -31,5 +31,5 @@ python_version = "3.10"
 dev = 'python manage.py runserver'
 sync = 'python manage.py migrate'
 mksync = 'python manage.py makemigrations'
-prod = "gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
 collectstatic = 'python .\manage.py collectstatic'
+prod = "gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
