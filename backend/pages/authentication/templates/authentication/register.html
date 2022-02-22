@@ -6,8 +6,10 @@
 Register
 {% endblock %}
 
-{% block form %} {% if request.user.is_authenticated %}
+{% block form %} 
 {#<!--prettier-ignore-->#}
+{% if request.user.is_authenticated %}
+
 <p class="has-text-white has-text-centered">
     How can a man be registered twice ? 🤔
 </p>
@@ -257,4 +259,7 @@ Register
         </div>
     </div>
 </form>
-{% endif %} {% endblock %}
+{#<!--prettier-ignore-->#}
+{% endif %} 
+
+{% endblock %}
