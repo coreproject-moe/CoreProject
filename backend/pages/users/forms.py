@@ -1,23 +1,11 @@
 from django import forms
 
-from custom.user.models import CustomUser
-from django.contrib.auth.hashers import (
-    make_password,
-)
+from django.contrib.auth import get_user_model
+from django.contrib.auth.hashers import make_password
 
 
 class UserEditInfoForm(forms.ModelForm):
-    password = forms.CharField(
-        required=False,
-        widget=forms.PasswordInput(
-            attrs={
-                "class": "input ",
-                "value": "",
-                "placeholder": "Password",
-                "autocomplete": "new-password",
-            },
-        ),
-    )
+
     confirm_password = forms.CharField(
         required=False,
         widget=forms.PasswordInput(
@@ -31,7 +19,7 @@ class UserEditInfoForm(forms.ModelForm):
     )
 
     class Meta:
-        model = CustomUser
+        model = get_user_model()
         fields = [
             "first_name",
             "last_name",
@@ -68,6 +56,14 @@ class UserEditInfoForm(forms.ModelForm):
                     "placeholder": "Upload avatar",
                     "style": "z-index:1000000;",
                 }
+            ),
+            "password": forms.PasswordInput(
+                attrs={
+                    "class": "input ",
+                    "value": "",
+                    "placeholder": "Password",
+                    "autocomplete": "new-password",
+                },
             ),
         }
 

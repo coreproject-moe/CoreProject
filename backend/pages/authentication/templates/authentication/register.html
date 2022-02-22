@@ -6,8 +6,16 @@
 Register
 {% endblock %}
 
-<!-- We Write HTML here-->
-{% block form %}
+{% block form %} {% if request.user.is_authenticated %}
+{#<!--prettier-ignore-->#}
+<p class="has-text-white has-text-centered">
+    How can a man be registered twice ? 🤔
+</p>
+<p class="has-text-white has-text-centered">
+    Thats a question for the wise. 🧙‍♂️
+</p>
+
+{% else %}
 <form
     method="POST"
     enctype="multipart/form-data"
@@ -184,7 +192,7 @@ Register
         <div class="field-body">
             <div class="field">
                 <p class="control is-expanded has-icons-left has-icons-right">
-                    {{ form.password_1 }}
+                    {{ form.password }}
                     <span
                         class="icon is-small is-right is-clickable is-unselectable"
                         @click="
@@ -219,7 +227,7 @@ Register
         <div class="field-body">
             <div class="field">
                 <p class="control is-expanded has-icons-left">
-                    {{ form.password_2 }}
+                    {{ form.confirm_password }}
                     <span class="icon is-small is-left">
                         <ion-icon
                             class="animejs__password__two__icon"
@@ -249,4 +257,4 @@ Register
         </div>
     </div>
 </form>
-{% endblock %}
+{% endif %} {% endblock %}

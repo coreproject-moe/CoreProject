@@ -1,148 +1,79 @@
-from django.http.response import HttpResponse
-from django.urls import reverse
 from django.contrib import messages
+from django.contrib.auth import login, logout
+from django.contrib.auth import authenticate
+from django.http.request import HttpRequest
+from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
-from django.conf import settings
 
-from .forms import ForgetPasswordForm, LoginForm, RegisterForm
-from .services import (
-    auth_login,
-    auth_logout,
-    check_if_username_exist,
-    check_register_form_validity,
-    create_new_reset_database,
-    create_new_user,
-    get_user_for_auth,
-    get_user_by_id,
-    send_mail_function,
-)
+from .forms import LoginForm, RegisterForm
 
 
-# Create your views here.
+# Create your views here
 
 
-async def login_page(request) -> HttpResponse:
+def login_page(request: HttpRequest) -> HttpResponse:
     """
-    A Simple Login Form to authenticate users.
+    This is a simple login page built with django forms.
     """
     form = LoginForm(request.POST or None)
-
-    # Declare response at top to add cookie
-    response = render(request, "authentication/login.html", {"form": form})
 
     if request.method == "POST":
         if form.is_valid():
             username: str = form.cleaned_data["username"]
             password: str = form.cleaned_data["password"]
 
-            user = await get_user_for_auth(username, password)
+            user = authenticate(username=username, password=password)
 
             try:
-                await auth_login(request, user)
+                login(request, user)
             except AttributeError:
                 messages.warning(request, "No such user exists")
 
             next_url = request.GET.get("next", None)
 
-            # Redirect to root if theres no next query
             if user:
-                response = redirect(next_url if next_url else "/")
+                # Redirect to root if theres no next query
+                return redirect(next_url if next_url else "/")
 
-    return response
+    return render(request, "authentication/login.html", {"form": form})
 
 
-async def logout(request) -> HttpResponse:
-    await auth_logout(request)
+def logout_page(request: HttpRequest) -> HttpResponse:
+    """
+    Simple Logout page
+    """
+    logout(request)
 
     next_url = request.GET.get("next", None)
-    response = redirect(next_url if next_url else "/")
-
-    return response
+    return redirect(next_url if next_url else "/")
 
 
-async def register_page(request) -> HttpResponse:
+def register_page(request: HttpRequest) -> HttpResponse:
     """
-    A Simple User Register Form
+    A simple user register page built with django ModelForm.
+
+    Works Like this.
+                                        Redirect to root if it doesn't exist
+                                                        🠕
+        Create the user ➞ Authenticate the user ➞ Check if next url exists
+                                                        🠗
+                                                Redirect there if it exists
+
     """
-    form = RegisterForm(request.POST, request.FILES or None)
+    form = RegisterForm(data=request.POST or None, files=request.FILES or None)
 
     if request.method == "POST":
         if form.is_valid():
-            first_name: str = form.cleaned_data["first_name"]
-            last_name: str = form.cleaned_data["last_name"]
+            # Create the user.
+            form.save()
+            # Get Username and password
             username: str = form.cleaned_data["username"]
-            email: str = form.cleaned_data["email"]
-            password: str = form.cleaned_data["password_1"]
-            confirm_password: str = form.cleaned_data["password_2"]
-            avatar = form.cleaned_data["avatar"]
-
-            response_is_valid = await check_register_form_validity(
-                request=request,
-                username=username,
-                email=email,
-                password=password,
-                confirm_password=confirm_password,
-            )
-
-            if response_is_valid:
-                await create_new_user(
-                    username,
-                    email,
-                    password,
-                    avatar or None,  # Is optional
-                    first_name,
-                    last_name,
-                )
-
-                # Auth the user
-                user = await get_user_for_auth(username, password)
-                await auth_login(request, user)
-
-                # Redirect to home
-                next_url = request.GET.get("next", None)
-                # If theres next url redirect there
-                if next_url:
-                    return redirect(next_url)
-
-                return redirect(reverse("home_page"))
+            password: str = form.cleaned_data["password"]
+            # Authenticate the user.
+            authenticate(username=username, password=password)
+            # Get next url from request query
+            next_url = request.GET.get("next", None)
+            # Final redirect.
+            return redirect(next_url if next_url else "/")
 
     return render(request, "authentication/register.html", {"form": form})
-
-
-async def forget_password_form(request) -> HttpResponse:
-    form = ForgetPasswordForm(request.POST or None)
-    if request.method == "POST":
-        if form.is_valid():
-            username = form.cleaned_data["username"]
-
-            is_user_actually_there = await check_if_username_exist(username)
-            if not is_user_actually_there:
-                messages.warning(request, "Did you enter the correct username?")
-
-            elif is_user_actually_there:
-                user = await get_user_by_id(username)
-
-                reset_database = create_new_reset_database(user=user)
-                password_reset_url = reset_database.url
-
-                subject = "Reset Password!"
-
-                reset_message = f"""Hello, 
-                This is an automated message. 
-                You are getting this message because someone requested a password accounts_reset on your account.
-                Click  https://127.0.0.1/accounts/reset/{password_reset_url}/ to accounts_reset your password."""
-
-                sender_email = settings.EMAIL_HOST_USER
-                receiver_email = user.email
-                await send_mail_function(
-                    email_subject=subject,
-                    email_reset_message=reset_message,
-                    from_sender=sender_email,
-                    to_receiver=receiver_email,
-                )
-
-                return render(request, "authentication/forget.html")
-
-        print(form.errors)
-
-    return render(request, "accounts/forget/index.html", {"form": form})
