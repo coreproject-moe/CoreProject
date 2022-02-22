@@ -9,7 +9,7 @@ class UserEditInfoForm(forms.ModelForm):
         required=False,
         widget=forms.PasswordInput(
             attrs={
-                "class": "input ",
+                "class": "input",
                 "value": "",
                 "placeholder": "Confirm Password",
                 "autocomplete": "new-password",
@@ -58,7 +58,7 @@ class UserEditInfoForm(forms.ModelForm):
             ),
             "password": forms.PasswordInput(
                 attrs={
-                    "class": "input ",
+                    "class": "input",
                     "value": "",
                     "placeholder": "Password",
                     "autocomplete": "new-password",
@@ -73,8 +73,9 @@ class UserEditInfoForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        password = cleaned_data.get("password")
-        confirm_password = cleaned_data.get("confirm_password")
+
+        password: str = cleaned_data.get("password")
+        confirm_password: str = cleaned_data.get("confirm_password")
 
         if password != confirm_password:
             self.add_error(
