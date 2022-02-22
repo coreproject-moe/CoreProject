@@ -68,6 +68,7 @@ class UserEditInfoForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         # Disable Password field.
         self.fields["password"].required = False
 
@@ -83,13 +84,13 @@ class UserEditInfoForm(forms.ModelForm):
                 """'Password' and 'Confirm Password' does not match.""",
             )
 
-        if not password and not confirm_password:
-            cleaned_data.pop("password")
-            cleaned_data.pop("confirm_password")
-
-        else:
+        if password and confirm_password:
             hashed_password = make_password(password)
             cleaned_data["password"] = hashed_password
             cleaned_data["confirm_password"] = hashed_password
+
+        else:
+            cleaned_data.pop("password")
+            cleaned_data.pop("confirm_password")
 
         return cleaned_data
