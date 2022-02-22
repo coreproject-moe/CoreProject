@@ -5,7 +5,6 @@ from django.contrib.auth.hashers import make_password
 
 
 class UserEditInfoForm(forms.ModelForm):
-
     confirm_password = forms.CharField(
         required=False,
         widget=forms.PasswordInput(
@@ -67,8 +66,13 @@ class UserEditInfoForm(forms.ModelForm):
             ),
         }
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Disable Password field.
+        self.fields["password"].required = False
+
     def clean(self):
-        cleaned_data = super(UserEditInfoForm, self).clean()
+        cleaned_data = super().clean()
         password = cleaned_data.get("password")
         confirm_password = cleaned_data.get("confirm_password")
 
