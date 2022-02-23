@@ -21,7 +21,6 @@
 	onMount(async () => {
 		const { defineCustomElements } = await import("@vime/core");
 
-
 		defineCustomElements();
 		showPlayer = true;
 	});
