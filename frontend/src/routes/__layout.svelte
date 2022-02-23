@@ -158,9 +158,9 @@
 </script>
 
 <nav
-	class={`navbar is-clipped has-background-black is-fixed-top ${
-		$responsiveMode === "widescreen" ? "" : "container"
-	}`}
+	class="navbar is-clipped has-background-black is-fixed-top {$responsiveMode === 'widescreen'
+		? ''
+		: 'container'}"
 	style="z-index:100;"
 >
 	<div class="navbar-brand is-clipped">
@@ -169,7 +169,7 @@
 		</a>
 
 		<button
-			class={`navbar-burger has-text-white is-clickable ${navbarBurgerClosed ? "" : "is-active"}`}
+			class="navbar-burger has-text-white is-clickable {navbarBurgerClosed ? '' : 'is-active'}"
 			bind:this={navbarBurger}
 			style="margin-top: -0.5em"
 			aria-label="menu"
@@ -184,21 +184,20 @@
 		</button>
 	</div>
 
-	<div class={`navbar-menu has-background-black ${navbarBurgerClosed ? "" : "is-active"}`}>
+	<div class="navbar-menu has-background-black {navbarBurgerClosed ? '' : 'is-active'}">
 		<div
-			class={`navbar-start mt-3 ${
-				$responsiveMode === "mobile" || $responsiveMode === "tablet"
-					? "is-flex is-flex-direction-row is-justify-content-center"
-					: ""
-			}`}
+			class="navbar-start mt-3 {$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
+				? 'is-flex is-flex-direction-row is-justify-content-center'
+				: ''}"
 		>
 			<a
 				href="/home"
 				sveltekit:prefetch
-				class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration ${
-					$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "pl-2 pr-2" : "ml-2"
-				} ${$page.url.pathname.includes("home") ? "hover" : ""}
-					`}
+				class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration {$responsiveMode ===
+					'mobile' || $responsiveMode === 'tablet'
+					? 'pl-2 pr-2'
+					: 'ml-2'} {$page.url.pathname.includes('home') ? 'hover' : ''}
+					"
 				on:mouseenter={async () => {
 					anime({
 						targets: ".animejs__home__icon",
@@ -214,12 +213,9 @@
 			>
 				<ion-icon name="home-sharp" class="animejs__home__icon" />
 				<p
-					class={`${
-						$responsiveMode === "mobile" || $responsiveMode === "tablet"
-							? "pt-2 nav-icon-button"
-							: ""
-					}
-						${$responsiveMode === "widescreen" ? "is-size-7" : ""}`}
+					class="{$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
+						? 'pt-2 nav-icon-button'
+						: ''} {$responsiveMode === 'widescreen' ? 'is-size-7' : ''}"
 				>
 					<span class="is-hidden-touch">&nbsp;</span> Home
 				</p>
@@ -227,10 +223,11 @@
 			<a
 				href="/anime"
 				sveltekit:prefetch
-				class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration ${
-					$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "pl-2 pr-2" : "ml-2"
-				} ${$page.url.pathname.includes("anime") ? "hover" : ""}
-					`}
+				class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration {$responsiveMode ===
+					'mobile' || $responsiveMode === 'tablet'
+					? 'pl-2 pr-2'
+					: 'ml-2'} {$page.url.pathname.includes('anime') ? 'hover' : ''}
+					"
 				on:mouseenter={async () => {
 					anime({
 						targets: ".animejs__anime__icon",
@@ -246,11 +243,9 @@
 			>
 				<ion-icon name="film-outline" class="animejs__anime__icon" />
 				<p
-					class={`${
-						$responsiveMode === "mobile" || $responsiveMode === "tablet"
-							? "pt-2 nav-icon-button"
-							: ""
-					} ${$responsiveMode === "widescreen" ? "is-size-7" : ""}`}
+					class="{$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
+						? 'pt-2 nav-icon-button'
+						: ''} {$responsiveMode === 'widescreen' ? 'is-size-7' : ''}"
 				>
 					<span class="is-hidden-touch">&nbsp;</span>
 					Anime
@@ -259,9 +254,10 @@
 			<a
 				href="/manga"
 				sveltekit:prefetch
-				class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration ${
-					$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "pl-2 pr-2" : "ml-2"
-				} ${$page.url.pathname.includes("manga") ? "hover" : ""}`}
+				class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration {$responsiveMode ===
+					'mobile' || $responsiveMode === 'tablet'
+					? 'pl-2 pr-2'
+					: 'ml-2'} {$page.url.pathname.includes('manga') ? 'hover' : ''}"
 				on:mouseenter={async () => {
 					anime({
 						targets: ".animejs__manga__icon",
@@ -277,11 +273,9 @@
 			>
 				<ion-icon name="images-outline" class="animejs__manga__icon" />
 				<p
-					class={`${
-						$responsiveMode === "mobile" || $responsiveMode === "tablet"
-							? "pt-2 nav-icon-button"
-							: ""
-					} ${$responsiveMode === "widescreen" ? "is-size-7" : ""}`}
+					class="{$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
+						? 'pt-2 nav-icon-button'
+						: ''} {$responsiveMode === 'widescreen' ? 'is-size-7' : ''}"
 				>
 					<span class="is-hidden-touch">&nbsp;</span> Manga
 				</p>
@@ -289,9 +283,10 @@
 			<a
 				sveltekit:prefetch
 				href="/soundcore"
-				class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration ${
-					$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "pl-2 pr-2" : "ml-2"
-				} ${$page.url.pathname.includes("soundcore") ? "hover" : ""}`}
+				class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration {$responsiveMode ===
+					'mobile' || $responsiveMode === 'tablet'
+					? 'pl-2 pr-2'
+					: 'ml-2'} {$page.url.pathname.includes('soundcore') ? 'hover' : ''}"
 				on:mouseenter={async () => {
 					anime({
 						targets: ".animejs__music__icon",
@@ -307,11 +302,9 @@
 			>
 				<ion-icon name="musical-note-outline" class="animejs__music__icon" />
 				<p
-					class={`${
-						$responsiveMode === "mobile" || $responsiveMode === "tablet"
-							? "pt-2 nav-icon-button"
-							: ""
-					} ${$responsiveMode === "widescreen" ? "is-size-7" : ""}`}
+					class="{$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
+						? 'pt-2 nav-icon-button'
+						: ''} {$responsiveMode === 'widescreen' ? 'is-size-7' : ''}"
 				>
 					<span class="is-hidden-touch">&nbsp;</span>
 					Soundcore
@@ -320,9 +313,10 @@
 			<a
 				sveltekit:prefetch
 				href="/shots"
-				class={`navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration ${
-					$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "pl-2 pr-2" : "ml-2"
-				} ${$page.url.pathname.includes("shots") ? "hover" : ""}`}
+				class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration {$responsiveMode ===
+					'mobile' || $responsiveMode === 'tablet'
+					? 'pl-2 pr-2'
+					: 'ml-2'} {$page.url.pathname.includes('shots') ? 'hover' : ''}"
 				on:mouseenter={async () => {
 					anime({
 						targets: ".animejs__shots__icon",
@@ -338,11 +332,9 @@
 			>
 				<ion-icon name="aperture-outline" class="animejs__shots__icon" />
 				<p
-					class={`${
-						$responsiveMode === "mobile" || $responsiveMode === "tablet"
-							? "pt-2 nav-icon-button"
-							: ""
-					} ${$responsiveMode === "widescreen" ? "is-size-7" : ""}`}
+					class="{$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
+						? 'pt-2 nav-icon-button'
+						: ''} {$responsiveMode === 'widescreen' ? 'is-size-7' : ''}"
 				>
 					<span class="is-hidden-touch">&nbsp;</span>
 					Shots
@@ -361,16 +353,15 @@
 		</div>
 		<div class="navbar-end is-clipped">
 			<div
-				class={`navbar-item ${
-					$responsiveMode === "mobile"
-						? "is-flex is-flex-direction-row is-justify-content-center pt-6"
-						: ""
-				}`}
+				class="navbar-item {$responsiveMode === 'mobile'
+					? 'is-flex is-flex-direction-row is-justify-content-center pt-6'
+					: ''}"
 			>
 				<button
-					class={`is-rounded is-dark animejs__github__button has-background-black-bis is-clickable ${
-						$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "is-hidden " : ""
-					}`}
+					class="is-rounded is-dark animejs__github__button has-background-black-bis is-clickable {$responsiveMode ===
+						'mobile' || $responsiveMode === 'tablet'
+						? 'is-hidden '
+						: ''}"
 					on:mouseenter={async () => {
 						anime({
 							targets: ".animejs__logo__github",
@@ -404,9 +395,10 @@
 
 				<button
 					style="z-index: 1000000"
-					class={`is-rounded is-dark animejs__arrow__button has-background-black-bis is-clickable ${
-						$responsiveMode === "mobile" || $responsiveMode === "tablet" ? "is-hidden" : ""
-					}`}
+					class="is-rounded is-dark animejs__arrow__button has-background-black-bis is-clickable {$responsiveMode ===
+						'mobile' || $responsiveMode === 'tablet'
+						? 'is-hidden'
+						: ''}"
 					on:mouseenter={async () => {
 						anime({
 							targets: ".animejs__arrow__back",
@@ -464,13 +456,13 @@
 								rel="external"
 								data-href={userInfo?.avatar
 									? `${baseUrl}${userInfo?.avatar}`
-									: `https://seccdn.libravatar.org/avatar/${md5(userInfo.email)}/?s=64`}
+									: `https://seccdn.libravatar.org/avatar/${md5(userInfo?.email)}/?s=64`}
 								class="progressive replace"
 								style="border-radius: 9999px; height:40px; width:40px; z-index: 1000000;margin: auto;"
 							>
 								<img
 									class="is-rounded preview avatar-preview"
-									alt="logo"
+									alt={userInfo?.username}
 									src="/placeholder-64x64.avif"
 								/>
 							</a>
@@ -484,13 +476,13 @@
 							<div class="buttons">
 								<a
 									class="button has-text-white is-black has-border-gray is-rounded"
-									href={`/authentication/login?next=${$page?.url?.pathname}`}
+									href="/authentication/login?next={$page?.url?.pathname}"
 								>
 									Log in
 								</a>
 								<a
 									class="button has-text-white is-black has-border-gray is-rounded"
-									href={`${signupPageUrl}?next=${$page?.url?.pathname}`}
+									href="{signupPageUrl}?next={$page?.url?.pathname}"
 								>
 									Sign Up
 								</a>
@@ -569,10 +561,6 @@
 				&:focus {
 					box-shadow: 0 0 0 0.125em rgba(199, 72, 72, 0.3) !important;
 				}
-
-				.centered_button {
-					width: 50% !important;
-				}
 			}
 		}
 		.avatar-preview {
@@ -582,12 +570,6 @@
 			left: -9999px;
 			right: -9999px;
 			margin: auto;
-		}
-
-		.mobile__friendly__avatar__stats {
-			max-width: 20em;
-			white-space: nowrap;
-			text-overflow: ellipsis;
 		}
 	}
 </style>
