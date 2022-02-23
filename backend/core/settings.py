@@ -40,9 +40,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Rest Framework
     "rest_framework",
-    "rest_framework_simplejwt.token_blacklist",
-    # 3rd party stuff
+    # 3rd party rest framework stuff
     "corsheaders",
+    "rest_framework_simplejwt.token_blacklist",
+    # 3rd party Django stuff
     "django_cleanup.apps.CleanupConfig",
     # Custom Stuff
     "custom.user",
