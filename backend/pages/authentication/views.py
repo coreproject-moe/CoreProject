@@ -88,7 +88,7 @@ class RegisterPageView(View):
                 # Final redirect.
                 return redirect(next_url if next_url else "/")
 
-        return render(request, "authentication/register.html", {"form": form})
+        return render(request, self.template_name, {"form": form})
 
 
 def logout_page(request: HttpRequest) -> HttpResponse:
