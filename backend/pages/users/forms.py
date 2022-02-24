@@ -16,6 +16,7 @@ class UserEditInfoForm(forms.ModelForm, ValidatePasswordMixin):
             },
         ),
     )
+    clear_image = forms.BooleanField(required=False)
 
     class Meta:
         model = get_user_model()
@@ -75,5 +76,8 @@ class UserEditInfoForm(forms.ModelForm, ValidatePasswordMixin):
     def clean(self):
         cleaned_data = super().clean()
         self.validate_password(cleaned_data)
+
+        if cleaned_data.get("clear_image"):
+            self.instance.avatar.delete()
 
         return cleaned_data

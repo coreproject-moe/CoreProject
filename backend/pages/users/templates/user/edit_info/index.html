@@ -113,7 +113,10 @@ Change info for {{ request.user }}
                         }
                     "
                 >
-                    {{ form.avatar }} {% if request.user.avatar %}
+                    {#<!--prettier-ignore-->#}
+                    {{ form.avatar }} 
+
+                    {% if request.user.avatar %}
 
                     <a
                         href="{{ request.user.avatar.url }}"
@@ -148,6 +151,17 @@ Change info for {{ request.user }}
                 </figure>
             </div>
         </div>
+
+        {% if request.user.avatar %}
+        <div class="columns is-mobile is-centered">
+            <div class="column is-narrow">
+                <div class="subtitle is-size-7 has-text-white is-unselectable">
+                    {{ form.clear_image }}
+                    <span class="pl-3"> Clear image </span>
+                </div>
+            </div>
+        </div>
+        {% endif %}
 
         <div class="columns is-mobile is-centered">
             <div class="column is-narrow">
