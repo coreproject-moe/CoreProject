@@ -118,7 +118,7 @@ Change info for {{ request.user }}
 
                     {% if request.user.avatar %}
                     <a
-                        href="{{ request.user.avatar.url|escapejs }}"
+                        href="{{ request.user.avatar.url }}"
                         class="progressive replace"
                         style="
                             border-radius: 9999px;
