@@ -13,8 +13,8 @@ from .forms import UserEditInfoForm
 def user_edit_info_page(request):
     instance = get_user_model().objects.get(id=request.user.id)
     form = UserEditInfoForm(
-        request.POST or None,
-        request.FILES or None,
+        data=request.POST or None,
+        files=request.FILES or None,
         instance=instance,
     )
 
