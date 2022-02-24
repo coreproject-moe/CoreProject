@@ -113,10 +113,8 @@ Change info for {{ request.user }}
                         }
                     "
                 >
-                    {#<!--prettier-ignore-->#}
-                    {{ form.avatar }} 
+                    {{ form.avatar }} {% if request.user.avatar %}
 
-                    {% if request.user.avatar %}
                     <a
                         href="{{ request.user.avatar.url }}"
                         class="progressive replace"
@@ -133,7 +131,7 @@ Change info for {{ request.user }}
                     </a>
                     {% else %}
                     <a
-                        href="{% static 'images/placeholder/deadbeef.png' %}"
+                        href="https://seccdn.libravatar.org/avatar/{{ request.user.email_md5 }}?s=96"
                         class="progressive replace"
                         style="
                             border-radius: 9999px;
@@ -148,6 +146,20 @@ Change info for {{ request.user }}
                     </a>
                     {% endif %}
                 </figure>
+            </div>
+        </div>
+
+        <div class="columns is-mobile is-centered">
+            <div class="column is-narrow">
+                <div class="title is-size-4 has-text-white is-unselectable">
+                    {#<!--prettier-ignore-->#}
+                    Currently serving avatar 
+                    {% if request.user.avatar %}
+                        locally
+                    {% else %}
+                        from libravatar
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
@@ -169,7 +181,8 @@ Change info for {{ request.user }}
                             x-init="
                                 async () => {
                                     anime({
-                                        targets: '.animejs__a__z__icon',
+                                        targets:
+                                            '.animejs__a__z__icon',
                                         color: '#FFFFFF',
                                         scale: 1.5,
                                     });
