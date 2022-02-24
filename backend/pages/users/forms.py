@@ -77,6 +77,7 @@ class UserEditInfoForm(forms.ModelForm, ValidatePasswordMixin):
         cleaned_data = super().clean()
         self.validate_password(cleaned_data)
 
+        # Delete the images if a user wishes to do so.
         if cleaned_data.get("clear_image"):
             self.instance.avatar.delete()
 
