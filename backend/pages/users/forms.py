@@ -16,7 +16,6 @@ class UserEditInfoForm(forms.ModelForm, ValidatePasswordMixin):
             },
         ),
     )
-    clear_image = forms.BooleanField(required=False)
 
     class Meta:
         model = get_user_model()
@@ -70,8 +69,12 @@ class UserEditInfoForm(forms.ModelForm, ValidatePasswordMixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # Disable Password field.
+        # Disable requirement on Password field.
         self.fields["password"].required = False
+
+        # Conditionally add this field
+        if self.instance.avatar:
+            self.fields["clear_image"] = forms.BooleanField(required=False)
 
     def clean(self):
         cleaned_data = super().clean()
