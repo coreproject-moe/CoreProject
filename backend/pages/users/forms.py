@@ -1,3 +1,4 @@
+import email
 from django import forms
 from django.contrib.auth import get_user_model
 
@@ -25,6 +26,12 @@ class UserEditInfoForm(forms.ModelForm, ValidatePasswordMixin):
             "username",
             "password",
             "avatar",
+            "email",
+            "date_joined",
+        ]
+
+        readonly_fields = [
+            "email",
         ]
 
         widgets = {
@@ -49,6 +56,15 @@ class UserEditInfoForm(forms.ModelForm, ValidatePasswordMixin):
                     "autocomplete": "off",
                 },
             ),
+            "email": forms.TextInput(
+                attrs={
+                    "class": "input is-unselectable",
+                    "style": "background-color:black; border:1px solid var(--border-color); color:white !important;",
+                    "placeholder": "Email",
+                    "readonly": True,
+                    "disabled": True,
+                },
+            ),
             "avatar": forms.FileInput(
                 attrs={
                     "class": "file-input is-clickable",
@@ -62,6 +78,14 @@ class UserEditInfoForm(forms.ModelForm, ValidatePasswordMixin):
                     "value": "",
                     "placeholder": "Password",
                     "autocomplete": "new-password",
+                },
+            ),
+            "date_joined": forms.DateInput(
+                attrs={
+                    "class": "input is-static is-unselectable",
+                    "placeholder": "",
+                    "readonly": True,
+                    "disabled": True,
                 },
             ),
         }
@@ -79,6 +103,10 @@ class UserEditInfoForm(forms.ModelForm, ValidatePasswordMixin):
     def clean(self):
         cleaned_data = super().clean()
         self.validate_password(cleaned_data)
+
+        # Remove dangerous fields
+        cleaned_data.pop("email")
+        cleaned_data.pop("date_joined")
 
         # Delete the images if a user wishes to do so.
         if cleaned_data.get("clear_image"):

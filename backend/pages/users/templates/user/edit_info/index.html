@@ -277,6 +277,37 @@ Change info for {{ request.user }}
     <div class="items field is-horizontal">
         <div class="field-label is-normal is-hidden-desktop">
             <label class="label has-text-white is-unselectable"
+                >Username :</label
+            >
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <p class="control is-expanded has-icons-left">
+                    {{ form.email }}
+                    <span class="icon is-small is-left">
+                        <ion-icon
+                            class="animejs__email__icon"
+                            name="mail-outline"
+                            x-init="
+                                async () => {
+                                    anime({
+                                        targets: '.animejs__email__icon',
+                                        color: '#FFFFFF',
+                                        scale: 1.5,
+                                    });
+                                }
+                            "
+                        >
+                        </ion-icon>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="items field is-horizontal">
+        <div class="field-label is-normal is-hidden-desktop">
+            <label class="label has-text-white is-unselectable"
                 >Password :</label
             >
         </div>
@@ -355,12 +386,8 @@ Change info for {{ request.user }}
                     >
                 </div>
                 <p class="control is-expanded has-icons-left">
-                    <input
-                        type="text"
-                        class="is-static input is-unselectable"
-                        readonly
-                        value="{{ request.user.date_joined }}"
-                    />
+                    {{ form.date_joined }}
+
                     <span
                         class="icon is-small is-left is-clickable tippyjs__date__joined"
                         x-init="
