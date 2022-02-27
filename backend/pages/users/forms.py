@@ -20,6 +20,7 @@ class UserEditInfoForm(forms.ModelForm, ValidatePasswordMixin):
 
     class Meta:
         model = get_user_model()
+
         fields = [
             "first_name",
             "last_name",
@@ -30,11 +31,14 @@ class UserEditInfoForm(forms.ModelForm, ValidatePasswordMixin):
             "date_joined",
         ]
 
-        readonly_fields = [
-            "email",
-        ]
-
         widgets = {
+            "avatar": forms.FileInput(
+                attrs={
+                    "class": "file-input is-clickable",
+                    "placeholder": "Upload avatar",
+                    "style": "z-index:1000000;",
+                }
+            ),
             "first_name": forms.TextInput(
                 attrs={
                     "class": "input",
@@ -64,13 +68,6 @@ class UserEditInfoForm(forms.ModelForm, ValidatePasswordMixin):
                     "readonly": True,
                     "disabled": True,
                 },
-            ),
-            "avatar": forms.FileInput(
-                attrs={
-                    "class": "file-input is-clickable",
-                    "placeholder": "Upload avatar",
-                    "style": "z-index:1000000;",
-                }
             ),
             "password": forms.PasswordInput(
                 attrs={
