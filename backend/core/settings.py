@@ -48,11 +48,12 @@ INSTALLED_APPS = [
     # Custom Stuff
     "custom.user",
     # Pages
-    "pages.users",
     "pages.authentication",
+    "pages.upload",
+    "pages.users",
     # Rest stuff
-    "api.v1._user",
     "api.v1._capture",
+    "api.v1._user",
 ]
 
 MIDDLEWARE = [

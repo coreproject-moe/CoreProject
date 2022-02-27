@@ -27,11 +27,16 @@ from rest_framework_simplejwt.views import (
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    # Pages
+    #    Pages
+    # ============
     path("user/", include("pages.users.urls")),
-    # Special Underscore case
-    path("_authentication/", include("pages.authentication.urls")),
-    # Api
+    path(
+        # Special Underscore case
+        "_authentication/",
+        include("pages.authentication.urls"),
+    ),
+    #   Api
+    # ========
     # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html#installation
     path("api/v1/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/v1/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
