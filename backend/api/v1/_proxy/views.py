@@ -18,7 +18,7 @@ async def proxy_view(request, secret_id: str) -> HttpResponse:
     url = f"https://docs.google.com/uc?export=download&id={secret_id}"
     res = await client.get(url)
     await client.aclose()
-    
+
     return HttpResponse(
         await res.aread(),
         content_type="video/mp4",
