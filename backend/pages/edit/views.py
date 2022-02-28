@@ -23,4 +23,4 @@ def user_edit_info_page(request):
             form.save()
             return redirect(reverse("user_edit_info_page"))
 
-    return render(request, "user/edit_info/index.html", {"form": form})
+    return render(request, "edit/user_info/index.html", {"form": form})
