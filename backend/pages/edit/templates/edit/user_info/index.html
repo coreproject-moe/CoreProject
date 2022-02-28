@@ -28,14 +28,6 @@ Change info for {{ request.user }}
     .select-items option {
         appearance: none;
     }
-    {% comment %} .avatar-preview {
-        position: absolute;
-        top: -9999px;
-        bottom: -9999px;
-        left: -9999px;
-        right: -9999px;
-        margin: auto;
-    } {% endcomment %}
 </style>
 
 <form
@@ -105,6 +97,7 @@ Change info for {{ request.user }}
                                     reader.onload = function() {
                                         let dataURL = reader.result;
                                         const output = document.querySelector('.avatar-preview');
+                                        output.style.cssText += 'position: absolute;top: -9999px;bottom: -9999px;left: -9999px;right: -9999px;margin: auto;'
                                         output.src = dataURL;
                                     }
                                     reader.readAsDataURL(file);
