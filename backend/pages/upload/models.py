@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 
-class AnimeNameModel(models.Model):
+class AnimeInfoModel(models.Model):
     anime_name = models.CharField(max_length=1024)
     anime_cover = models.ImageField(
         upload_to="anime", default=None, blank=True, null=True
@@ -21,5 +21,5 @@ class EpisodeModel(models.Model):
     )
     # Many to one relationship
     anime_name = models.ForeignKey(
-        AnimeNameModel, on_delete=models.CASCADE, default=None
+        AnimeInfoModel, on_delete=models.CASCADE, default=None
     )

@@ -1,7 +1,7 @@
-import email
 from django import forms
 from django.contrib.auth import get_user_model
 
+from ..upload.models import AnimeInfoModel
 from custom.forms.mixins.validate_password import ValidatePasswordMixin
 
 
@@ -110,3 +110,13 @@ class UserEditInfoForm(forms.ModelForm, ValidatePasswordMixin):
             self.instance.avatar.delete()
 
         return cleaned_data
+
+
+class AnimeInfoEditForm(forms.ModelForm):
+    class Meta:
+        model = AnimeInfoModel
+        fields = "__all__"
+
+
+class AnimeEpisodeEditForm(forms.ModelForm):
+    pass
