@@ -1,8 +1,9 @@
 from django.urls import reverse
+from django.http.request import HttpRequest
+from django.http.response import HttpResponse
 from django.shortcuts import redirect, render
-from django.contrib.auth.decorators import login_required
-
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 
 from .forms import UserEditInfoForm
 
@@ -10,7 +11,7 @@ from .forms import UserEditInfoForm
 
 
 @login_required()
-def user_edit_info_page(request):
+def user_edit_info_page(request: HttpRequest) -> HttpResponse:
     instance = get_user_model().objects.get(id=request.user.id)
     form = UserEditInfoForm(
         data=request.POST or None,
