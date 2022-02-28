@@ -31,8 +31,8 @@ class CaptureView(
     serializer_class = [CaptureSerializer]
     permission_classes = [IsAuthenticated]
     authentication_classes = [
-        SessionAuthentication,
         JWTAuthentication,
+        SessionAuthentication,
     ]
 
     @method_decorator(cache_page(60 * 60 * 2))
