@@ -18,17 +18,24 @@ class ResizeImageMixin(object):
         base_image = Image.open(image)
         width, height = base_image.size
 
-        cropped_image = base_image.crop(
-            (
-                (width - CROP_WIDTH) // 2,  # left
-                (height - CROP_HEIGHT) // 2,  # upper
-                (width + CROP_WIDTH) // 2,  # right
-                (height + CROP_HEIGHT) // 2,  # lower
-            )
-        )
-        resized_image = cropped_image.resize((128, 128), Image.ANTIALIAS)
-
         in_memory = BytesIO()
-        resized_image.save(in_memory, format="avif")
+
+        # Square image, so just resize it?
+        if width == height:
+            resized_image = base_image.resize((128, 128), Image.ANTIALIAS)
+            resized_image.save(in_memory, format="avif")
+
+        else:
+            cropped_image = base_image.crop(
+                (
+                    (width - CROP_WIDTH) // 2,  # left
+                    (height - CROP_HEIGHT) // 2,  # upper
+                    (width + CROP_WIDTH) // 2,  # right
+                    (height + CROP_HEIGHT) // 2,  # lower
+                )
+            )
+            resized_image = cropped_image.resize((128, 128), Image.ANTIALIAS)
+
+            resized_image.save(in_memory, format="avif")
 
         return File(in_memory)
