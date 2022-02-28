@@ -35,7 +35,7 @@ def anime_info_edit_page(
     request: HttpRequest,
     primary_key: int,
 ) -> HttpResponse:
-    instance = AnimeInfoModel.object.get(id=primary_key)
+    instance = AnimeInfoModel.objects.get(id=primary_key)
     form = AnimeInfoEditForm(
         data=request.POST or None,
         files=request.FILES or None,
@@ -45,6 +45,13 @@ def anime_info_edit_page(
     if request.method == "POST":
         if form.is_valid():
             form.save()
-            return redirect(reverse("anime_info_edit_page"))
+            return redirect(
+                reverse(
+                    "anime_info_edit_page",
+                    kwargs={
+                        "primary_key": primary_key,
+                    },
+                )
+            )
 
     return render(request, "edit/anime_info/index.html", {"form": form})
