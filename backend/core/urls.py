@@ -29,13 +29,13 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     #    Pages
     # ============
-    path("user/", include("pages.users.urls")),
+    path("edit/", include("pages.edit.urls")),
     path(
         # Special Underscore case
         "_authentication/",
         include("pages.authentication.urls"),
     ),
-    path("upload", include("pages.upload.urls")),
+    path("upload/", include("pages.upload.urls")),
     #   Api
     # ========
     # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html#installation

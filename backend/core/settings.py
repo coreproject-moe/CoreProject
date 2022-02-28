@@ -49,8 +49,8 @@ INSTALLED_APPS = [
     "custom.user",
     # Pages
     "pages.authentication",
+    "pages.edit",
     "pages.upload",
-    "pages.users",
     # Rest stuff
     "api.v1._capture",
     "api.v1._user",
