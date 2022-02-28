@@ -28,14 +28,14 @@ Change info for {{ request.user }}
     .select-items option {
         appearance: none;
     }
-    .avatar-preview {
+    {% comment %} .avatar-preview {
         position: absolute;
         top: -9999px;
         bottom: -9999px;
         left: -9999px;
         right: -9999px;
         margin: auto;
-    }
+    } {% endcomment %}
 </style>
 
 <form
@@ -152,7 +152,7 @@ Change info for {{ request.user }}
             </div>
         </div>
 
-        {% if request.user.avatar %}
+        {% if form.clear_image %}
         <div class="columns is-mobile is-centered">
             <div class="column is-narrow">
                 <div class="subtitle is-size-7 has-text-white is-unselectable">

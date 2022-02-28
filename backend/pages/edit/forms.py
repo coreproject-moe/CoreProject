@@ -80,7 +80,7 @@ class UserEditInfoForm(forms.ModelForm, ValidatePasswordMixin):
             "date_joined": forms.DateInput(
                 attrs={
                     "class": "input is-static is-unselectable",
-                    "placeholder": "",
+                    "placeholder": "Date Joined",
                     "readonly": True,
                     "disabled": True,
                 },
@@ -90,8 +90,9 @@ class UserEditInfoForm(forms.ModelForm, ValidatePasswordMixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # Disable requirement on Password field.
+        # Disable requirement on `Password` and `Date Joined` field.
         self.fields["password"].required = False
+        self.fields["date_joined"].required = False
 
         # Conditionally add this field
         if self.instance.avatar:
@@ -103,7 +104,6 @@ class UserEditInfoForm(forms.ModelForm, ValidatePasswordMixin):
 
         # Remove dangerous fields
         cleaned_data.pop("email")
-        cleaned_data.pop("date_joined")
 
         # Delete the images if a user wishes to do so.
         if cleaned_data.get("clear_image"):
@@ -115,7 +115,18 @@ class UserEditInfoForm(forms.ModelForm, ValidatePasswordMixin):
 class AnimeInfoEditForm(forms.ModelForm):
     class Meta:
         model = AnimeInfoModel
-        fields = "__all__"
+        fields = [
+            "anime_name",
+        ]
+
+        widgets = {
+            "anime_name": forms.TextInput(
+                attrs={
+                    "class": "input",
+                    "placeholder": "Anime Name",
+                },
+            ),
+        }
 
 
 class AnimeEpisodeEditForm(forms.ModelForm):

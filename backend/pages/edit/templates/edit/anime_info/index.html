@@ -1,0 +1,128 @@
+{% extends 'components/form_box.html' %}
+<!--prettier-ignore-->
+{% load static %}
+<!--prettier-ignore-->
+
+{% block title %}
+Change info for {{ request.user }}
+{% endblock %}
+
+<!--prettier-ignore-->
+{% block form %}
+<style>
+    .select:hover::after {
+        border-color: white !important;
+    }
+    .select::after {
+        border-color: #ffffffd1 !important;
+    }
+
+    .select-items {
+        background-color: black !important;
+        color: white !important;
+        border-color: var(--button-border-color) !important;
+    }
+    .select-items:hover {
+        border-color: #b5b5b5 !important;
+    }
+    .select-items option {
+        appearance: none;
+    }
+    .avatar-preview {
+        position: absolute;
+        top: -9999px;
+        bottom: -9999px;
+        left: -9999px;
+        right: -9999px;
+        margin: auto;
+    }
+</style>
+
+<form enctype="multipart/form-data" method="post">
+    {% csrf_token %}
+
+    <div class="icon-box box">
+        {% if form.errors %}
+        <div
+            class="box"
+            style="background-color: black; border: 1px dotted red"
+        >
+            <p class="has-text-centered error">
+                Oh No 😵 !! There's seems to be an error 🥺
+            </p>
+            <p class="has-text-left error">Please take a look at these :</p>
+            {#<!--prettier-ignore-->#}
+
+            <div class="pl-5">
+                <li class="error-list">
+                    {% for field in form %} {% for error in field.errors %} {#<!--prettier-ignore-->#}
+
+                    <ol>
+                        <p class="error">
+                            {{ field.name }} &#x2192; {{ error | escape }}
+                        </p>
+                    </ol>
+
+                    {% endfor %} {% endfor %}
+                </li>
+            </div>
+        </div>
+        {% endif %}
+        <div class="columns is-mobile is-centered">
+            <div class="column is-narrow">
+                <div class="title is-size-4 has-text-white is-unselectable">
+                    Hi there, {{ request.user }} 👋
+                </div>
+            </div>
+        </div>
+        <div class="columns is-mobile is-centered">
+            <div class="column is-narrow">
+                <div class="title is-size-6 has-text-white is-unselectable">
+                    ⛩️ Editing info for, {{ form.anime_name.value }} ⛩️
+                </div>
+            </div>
+        </div>
+
+
+    <div class="items field is-horizontal">
+        <div class="field-label is-normal is-hidden-desktop">
+            <label class="label has-text-white is-unselectable"
+                >Anime Name :</label
+            >
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <p class="control is-expanded has-icons-left">
+                    {{ form.anime_name }}
+                    <span class="icon is-small is-left">
+                        <ion-icon
+                            class="animejs__a__z__icon"
+                            name="alert-circle-outline"
+                            x-init="
+                                async () => {
+                                    anime({
+                                        targets:
+                                            '.animejs__a__z__icon',
+                                        color: '#FFFFFF',
+                                        scale: 1.5,
+                                    });
+                                }
+                            "
+                        >
+                        </ion-icon>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="items columns is-mobile is-centered">
+        <div class="column is-narrow">
+            <button id="button" class="button is-rounded is-centered is-ghost">
+                Change
+            </button>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
