@@ -31,7 +31,10 @@ def user_info_edit_page(request: HttpRequest) -> HttpResponse:
 
 
 @staff_member_required
-def anime_info_edit_page(request: HttpRequest, primary_key: int) -> HttpResponse:
+def anime_info_edit_page(
+    request: HttpRequest,
+    primary_key: int,
+) -> HttpResponse:
     instance = AnimeInfoModel.object.get(id=primary_key)
     form = AnimeInfoEditForm(
         data=request.POST or None,
