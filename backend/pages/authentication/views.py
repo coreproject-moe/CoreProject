@@ -6,6 +6,7 @@ from django.http.request import HttpRequest
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 
+from rest_framework_simplejwt.tokens import RefreshToken
 from .forms import LoginForm, RegisterForm
 
 # Create your views here
@@ -17,7 +18,16 @@ class LoginPageView(View):
     """
 
     form_class = LoginForm
-    template_name = "authentication/login.html"
+    template_name = "authentication/login/index.html"
+
+    @staticmethod
+    def get_tokens_for_user(user):
+        refresh = RefreshToken.for_user(user)
+
+        return {
+            "refresh": str(refresh),
+            "access": str(refresh.access_token),
+        }
 
     def get(self, request: HttpRequest) -> HttpResponse:
         form = self.form_class()
@@ -38,11 +48,12 @@ class LoginPageView(View):
             except AttributeError:
                 messages.warning(request, "No such user exists")
 
-            next_url = request.GET.get("next", None)
-
             if user:
-                # Redirect to root if theres no next query
-                return redirect(next_url if next_url else "/")
+                return render(
+                    request,
+                    "authentication/login/success.html",
+                    {"token": self.get_tokens_for_user(request.user)},
+                )
 
         return render(request, self.template_name, {"form": form})
 

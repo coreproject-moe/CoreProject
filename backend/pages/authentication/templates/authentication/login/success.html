@@ -1,0 +1,41 @@
+{% extends 'components/form_box.html' %}
+<!--prettier-ignore-->
+{% block title %}
+Login
+{% endblock %}
+<!--prettier-ignore-->
+{% block form %}
+<div
+    x-data="{ timeout: 5 }"
+    x-init="
+    async () => {
+        setInterval(()=>{
+            timeout = timeout - 1
+        }, 1000)
+
+        setTimeout(()=>{
+            const params = new URLSearchParams(window.location.search);
+            location.href = params.get('next') || '/'
+        }, timeout*1000 )
+    }
+"
+>
+    <div class="has-text-white has-text-centered">Login Successful 🥳</div>
+    <div class="has-text-white has-text-centered">
+        Redirecting to &#8594;
+        <span x-text="getUrlParams"></span>
+        &#8594; in
+        <span x-text="timeout"></span>
+        s
+    </div>
+</div>
+
+<script>
+    const getUrlParams = async () => {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('next') || '/';
+    };
+    const token = '{{ token|escapejs }}';
+    localStorage.setItem('token', token);
+</script>
+{% endblock %} z
