@@ -1,3 +1,18 @@
 localhost {
-    reverse_proxy 
+   
+    handle /admin/* {
+        reverse_proxy 127.0.0.1:8000
+    }
+    handle /edit/* {
+        reverse_proxy 127.0.0.1:8000
+    }
+    handle /upload/* {
+        reverse_proxy 127.0.0.1:8000
+    }
+    handle /api/* {
+        reverse_proxy 127.0.0.1:8000
+    }
+    handle /* {
+        reverse_proxy localhost:3000
+    }
 }
