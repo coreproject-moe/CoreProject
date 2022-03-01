@@ -55,6 +55,7 @@
 
 	// Import JS libraries
 	import anime from "animejs";
+	import tippy from "tippy.js";
 	import dayjs from "dayjs";
 	import md5 from "md5";
 
@@ -75,7 +76,6 @@
 
 	let arrowButtonTurned = false;
 
-	let navbarBurger: HTMLElement;
 	let navbarBurgerClosed = false;
 	// Auto close the navbar Buger to close if its on Mobile or Tablet
 	$: navbarBurgerClosed = $responsiveMode === "mobile" || $responsiveMode === "tablet";
@@ -109,6 +109,7 @@
 			}
 		}
 	}
+
 	onMount(async () => {
 		// https://bulma.io/documentation/components/navbar/#fixed-navbar
 		const HTMLTAG = browser && document.getElementsByTagName("html")[0]; // '0' to assign the first (and only `HTML` tag)
@@ -120,6 +121,28 @@
 			easing: "linear",
 			duration: 100,
 			color: "hsl(0, 0%, 80%)"
+		});
+		// TippyJS
+
+		tippy(".animejs__github__button", {
+			content: "Github",
+			theme: "black",
+			touch: false
+		});
+
+		tippy(".tippyjs__avatar__picture", {
+			content: `<b>ID</b> : ${userInfo?.id} <br /> <b>First Name</b> : ${
+				userInfo?.first_name
+			}<br/> <b>Last Name</b> : ${userInfo?.last_name}<br/> <b>Username</b> : ${
+				userInfo?.username
+			}<br/>  <b>Email</b> : ${userInfo?.email}<br/><b>Date Joined</b> : ${dayjs(
+				userInfo?.date_joined
+			).format("MMMM D, YYYY - h:mm A")}<br/>
+			<b>Last Active</b> : ${dayjs(userInfo?.last_login).format("MMMM D, YYYY - h:mm A")}`,
+			theme: "black",
+			allowHTML: true,
+			placement: "bottom",
+			appendTo: () => document.body
 		});
 	});
 </script>
@@ -137,7 +160,6 @@
 
 		<button
 			class="navbar-burger has-text-white is-clickable {navbarBurgerClosed ? '' : 'is-active'}"
-			bind:this={navbarBurger}
 			style="margin-top: -0.5em"
 			aria-label="menu"
 			aria-expanded="false"
@@ -358,7 +380,7 @@
 			{#if $isUserAuthenticated}
 				<div class="columns is-mobile is-centered">
 					<div class="column is-narrow">
-						<figure class="image is-48x48 pt-2 pl-2">
+						<figure class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture">
 							<a
 								href={userEditInfoPageUrl}
 								rel="external"
@@ -377,6 +399,42 @@
 						</figure>
 					</div>
 				</div>
+				{#if $responsiveMode === "mobile" || $responsiveMode === "tablet"}
+					<div class="columns is-mobile is-centered">
+						<div class="column is-narrow">
+							<table
+								class="table is-bordered has-text-white has-background-black is-font-face-ubuntu"
+							>
+								<tbody>
+									<tr>
+										<td><p class="is-size-7">ID :</p></td>
+										<td>{userInfo?.id}</td>
+									</tr>
+									<tr>
+										<td><p class="is-size-7">First Name :</p></td>
+										<td>{userInfo?.first_name}</td>
+									</tr>
+									<tr>
+										<td><p class="is-size-7">Last Name :</p></td>
+										<td>{userInfo?.last_name}</td>
+									</tr>
+									<tr>
+										<td><p class="is-size-7">Email :</p></td>
+										<td>{userInfo?.email}</td>
+									</tr>
+									<tr>
+										<td><p class="is-size-7">Date Joined :</p></td>
+										<td>{dayjs(userInfo?.date_joined).format("MMMM D, YYYY - h:mm A")}</td>
+									</tr>
+									<tr>
+										<td><p class="is-size-7">Last Active :</p></td>
+										<td>{dayjs(userInfo?.last_login).format("MMMM D, YYYY - h:mm A")}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				{/if}
 			{:else}
 				<div class="navbar-item">
 					<div class="columns is-mobile is-centered">
