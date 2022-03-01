@@ -14,8 +14,11 @@ Login
         }, 1000)
 
         setTimeout(()=>{
+            const token = '{{ token|escapejs }}';
+            localStorage.setItem('token', token);
+
             const params = new URLSearchParams(window.location.search);
-            location.href = params.get('next') || '/'
+            location.href = params.get('next') || '/';
         }, timeout * 1000 )
     }
 "
@@ -35,7 +38,5 @@ Login
         const params = new URLSearchParams(window.location.search);
         return params.get('next') || '/';
     };
-    const token = '{{ token|escapejs }}';
-    localStorage.setItem('token', token);
 </script>
 {% endblock %}
