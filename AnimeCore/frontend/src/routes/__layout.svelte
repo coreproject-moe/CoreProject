@@ -55,7 +55,6 @@
 
 	// Import JS libraries
 	import anime from "animejs";
-	import tippy from "tippy.js";
 	import dayjs from "dayjs";
 	import md5 from "md5";
 
@@ -125,34 +124,6 @@
 			easing: "linear",
 			duration: 100,
 			color: "hsl(0, 0%, 80%)"
-		});
-
-		// TippyJS
-
-		tippy(".animejs__github__button", {
-			content: "Github",
-			theme: "black",
-			touch: false
-		});
-
-		tippy(".tippyjs__avatar__picture", {
-			content: `<b>ID</b> : ${userInfo?.id} <br /> <b>First Name</b> : ${
-				userInfo?.first_name
-			}<br/> <b>Last Name</b> : ${userInfo?.last_name}<br/> <b>Username</b> : ${
-				userInfo?.username
-			}<br/>  <b>Email</b> : ${userInfo?.email}<br/><b>Date Joined</b> : ${dayjs(
-				userInfo?.date_joined
-			)}<br/>
-			<b>Last Active</b> : ${dayjs(userInfo?.last_login)}`,
-			theme: "black",
-			allowHTML: true,
-			touch: false,
-			placement: "bottom",
-			trigger: get(responsiveMode) === "mobile" ? "click" : "mouseenter focus",
-			hideOnClick: get(responsiveMode) === "mobile" ? "toggle" : false,
-			triggerTarget: get(responsiveMode) === "mobile" ? navbarBurger : null,
-			interactive: get(responsiveMode) === "mobile" ? true : false,
-			appendTo: () => document.body
 		});
 	});
 </script>
@@ -402,7 +373,7 @@
 								style="border-radius: 9999px; height:40px; width:40px; z-index: 1000000;margin: auto;"
 							>
 								<img
-									class="is-rounded preview avatar-preview"
+									class="is-rounded preview"
 									alt={userInfo?.username}
 									src="/placeholder-64x64.avif"
 								/>
@@ -503,14 +474,6 @@
 					box-shadow: 0 0 0 0.125em rgba(199, 72, 72, 0.3) !important;
 				}
 			}
-		}
-		.avatar-preview {
-			position: absolute;
-			top: -9999px;
-			bottom: -9999px;
-			left: -9999px;
-			right: -9999px;
-			margin: auto;
 		}
 	}
 </style>
