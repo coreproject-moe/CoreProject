@@ -71,10 +71,14 @@
 	// Constants
 	import { baseUrl } from "$lib/constants/backend/urls/baseUrl";
 	import { userInfoUrl } from "$lib/constants/backend/urls/restEndpoints";
-	import { signupPageUrl, userEditInfoPageUrl } from "$lib/constants/backend/urls/pageUrlEndpoints";
+	import {
+		loginPageUrl,
+		signupPageUrl,
+		userEditInfoPageUrl
+	} from "$lib/constants/backend/urls/pageUrlEndpoints";
 
-	import { goto } from "$app/navigation";
 	import { page } from "$app/stores";
+	import { goto } from "$app/navigation";
 
 	let arrowButtonTurned = false;
 
@@ -155,6 +159,8 @@
 			appendTo: () => document.body
 		});
 	});
+
+	console.log($page.url);
 </script>
 
 <nav
@@ -476,13 +482,13 @@
 							<div class="buttons">
 								<a
 									class="button has-text-white is-black has-border-gray is-rounded"
-									href="/authentication/login?next={$page?.url?.pathname}"
+									href="{loginPageUrl}?next={$page?.url?.href}"
 								>
 									Log in
 								</a>
 								<a
 									class="button has-text-white is-black has-border-gray is-rounded"
-									href="{signupPageUrl}?next={$page?.url?.pathname}"
+									href="{signupPageUrl}?next={$page?.url?.href}"
 								>
 									Sign Up
 								</a>
