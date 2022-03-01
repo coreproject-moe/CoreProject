@@ -221,8 +221,7 @@
 				</p>
 			</a>
 			<a
-				href="/anime"
-				sveltekit:prefetch
+				href="#"
 				class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration {$responsiveMode ===
 					'mobile' || $responsiveMode === 'tablet'
 					? 'pl-2 pr-2'
@@ -230,25 +229,25 @@
 					"
 				on:mouseenter={async () => {
 					anime({
-						targets: ".animejs__anime__icon",
+						targets: ".animejs__request__icon",
 						color: "#e50000"
 					});
 				}}
 				on:mouseleave={async () => {
 					anime({
-						targets: ".animejs__anime__icon",
+						targets: ".animejs__request__icon",
 						color: "#d9d9d9"
 					});
 				}}
 			>
-				<ion-icon name="film-outline" class="animejs__anime__icon" />
+				<ion-icon name="cloud-upload-outline" class="animejs__request__icon is-size-5" />
 				<p
 					class="{$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
 						? 'pt-2 nav-icon-button'
 						: ''} {$responsiveMode === 'widescreen' ? 'is-size-7' : ''}"
 				>
 					<span class="is-hidden-touch">&nbsp;</span>
-					Anime
+					Request
 				</p>
 			</a>
 
