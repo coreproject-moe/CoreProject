@@ -191,12 +191,12 @@
 				: ''}"
 		>
 			<a
-				href="/home"
+				href="/"
 				sveltekit:prefetch
 				class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration {$responsiveMode ===
 					'mobile' || $responsiveMode === 'tablet'
 					? 'pl-2 pr-2'
-					: 'ml-2'} {$page.url.pathname.includes('home') ? 'hover' : ''}
+					: 'ml-2'} {$page.url.pathname === '/' ? 'hover' : ''}
 					"
 				on:mouseenter={async () => {
 					anime({
@@ -251,105 +251,47 @@
 					Anime
 				</p>
 			</a>
+
 			<a
-				href="/manga"
 				sveltekit:prefetch
+				href="/faq"
 				class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration {$responsiveMode ===
 					'mobile' || $responsiveMode === 'tablet'
 					? 'pl-2 pr-2'
-					: 'ml-2'} {$page.url.pathname.includes('manga') ? 'hover' : ''}"
+					: 'ml-2'} {$page.url.pathname.includes('faq') ? 'hover' : ''}"
 				on:mouseenter={async () => {
 					anime({
-						targets: ".animejs__manga__icon",
+						targets: ".animejs__faq__icon",
 						color: "#e50000"
 					});
 				}}
 				on:mouseleave={async () => {
 					anime({
-						targets: ".animejs__manga__icon",
+						targets: ".animejs__faq__icon",
 						color: "#d9d9d9"
 					});
 				}}
 			>
-				<ion-icon name="images-outline" class="animejs__manga__icon" />
-				<p
-					class="{$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
-						? 'pt-2 nav-icon-button'
-						: ''} {$responsiveMode === 'widescreen' ? 'is-size-7' : ''}"
-				>
-					<span class="is-hidden-touch">&nbsp;</span> Manga
-				</p>
-			</a>
-			<a
-				sveltekit:prefetch
-				href="/soundcore"
-				class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration {$responsiveMode ===
-					'mobile' || $responsiveMode === 'tablet'
-					? 'pl-2 pr-2'
-					: 'ml-2'} {$page.url.pathname.includes('soundcore') ? 'hover' : ''}"
-				on:mouseenter={async () => {
-					anime({
-						targets: ".animejs__music__icon",
-						color: "#e50000"
-					});
-				}}
-				on:mouseleave={async () => {
-					anime({
-						targets: ".animejs__music__icon",
-						color: "#d9d9d9"
-					});
-				}}
-			>
-				<ion-icon name="musical-note-outline" class="animejs__music__icon" />
+				<ion-icon name="help-circle-outline" class="animejs__faq__icon is-size-5" />
 				<p
 					class="{$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
 						? 'pt-2 nav-icon-button'
 						: ''} {$responsiveMode === 'widescreen' ? 'is-size-7' : ''}"
 				>
 					<span class="is-hidden-touch">&nbsp;</span>
-					Soundcore
+					FAQ
 				</p>
 			</a>
-			<a
-				sveltekit:prefetch
-				href="/shots"
-				class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration {$responsiveMode ===
-					'mobile' || $responsiveMode === 'tablet'
-					? 'pl-2 pr-2'
-					: 'ml-2'} {$page.url.pathname.includes('shots') ? 'hover' : ''}"
-				on:mouseenter={async () => {
-					anime({
-						targets: ".animejs__shots__icon",
-						color: "#e50000"
-					});
-				}}
-				on:mouseleave={async () => {
-					anime({
-						targets: ".animejs__shots__icon",
-						color: "#d9d9d9"
-					});
-				}}
-			>
-				<ion-icon name="aperture-outline" class="animejs__shots__icon" />
-				<p
-					class="{$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
-						? 'pt-2 nav-icon-button'
-						: ''} {$responsiveMode === 'widescreen' ? 'is-size-7' : ''}"
-				>
-					<span class="is-hidden-touch">&nbsp;</span>
-					Shots
-				</p>
-			</a>
-			<div class="control has-icons-left  ml-4 is-hidden-touch">
-				<input
-					class="input has-background-black has-text-white search__input"
-					type="text"
-					placeholder="Search Away"
-				/>
-				<span class="icon is-small is-left">
-					<ion-icon name="search-outline" class="has-text-white is-size-4" />
-				</span>
-			</div>
+		</div>
+		<div class="control has-icons-left mt-4 is-hidden-touch">
+			<input
+				class="input has-background-black has-text-white search__input"
+				type="text"
+				placeholder="Search Away"
+			/>
+			<span class="icon is-small is-left">
+				<ion-icon name="search-outline" class="has-text-white is-size-4" />
+			</span>
 		</div>
 		<div class="navbar-end is-clipped">
 			<div

@@ -25,22 +25,10 @@
 					href="https://github.com/baseplate-admin/CoreProject/tree/main/pages/anime">AnimeCore.</a
 				>
 				<br />
-				The modern full stack anime streaming program.
+				The modern full stack anime streaming Software.
 			</p>
 		</div>
-		<div class="container pt-6">
-			<p class="title has-text-centered has-text-white">Manga</p>
-		</div>
-		<div class="container pt-6">
-			<p class="title has-text-centered has-text-white">OST</p>
-			<p class="subtitle has-text-centered has-text-white">
-				Powered by SoundCore.<br />
-				The modern Single Page music streaming program.
-			</p>
-		</div>
-		<div class="container pt-6">
-			<p class="title has-text-centered has-text-white">Shots</p>
-		</div>
+
 		<div class="container pt-6">
 			<div class="content">
 				<h2 class="has-text-white has-text-centered">FAQ</h2>

@@ -79,7 +79,7 @@
 		<div class={`level-left ${$responsiveMode === "mobile" ? "is-size-6" : "is-size-4"}`}>
 			<div class="level-item">
 				<a
-					href={`/anime/${$page.params.anime_name}/episode/${episode_number - 1}`}
+					href={`/${$page.params.anime_name}/episode/${episode_number - 1}`}
 					sveltekit:prefetch
 					sveltekit:noscroll
 				>
@@ -100,7 +100,7 @@
 		<div class={`level-right ${$responsiveMode === "mobile" ? "is-size-6" : "is-size-4"}`}>
 			<p class="level-item">
 				<a
-					href={`/anime/${$page.params.anime_name}/episode/${episode_number + 1}`}
+					href={`/${$page.params.anime_name}/episode/${episode_number + 1}`}
 					sveltekit:prefetch
 					sveltekit:noscroll
 				>
