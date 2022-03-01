@@ -25,15 +25,6 @@
 		showPlayer = true;
 	});
 
-	useEffect(
-		() => {
-			const localStorageVideoVolume =
-				parseInt(browser && localStorage.getItem("vimejs-volume")) || 100;
-			player.volume = localStorageVideoVolume;
-		},
-		() => [player]
-	);
-
 	const onVolumeChange = async () => {
 		if (browser && $isUserAuthenticated) {
 			localStorage.setItem("vimejs-volume", JSON.stringify(player?.volume));
