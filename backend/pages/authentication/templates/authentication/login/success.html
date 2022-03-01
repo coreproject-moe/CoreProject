@@ -14,8 +14,8 @@ Login
         }, 1000)
 
         setTimeout(()=>{
-            const token = '{{ token|escapejs }}';
-            localStorage.setItem('token', token);
+            const tokens = '{{ tokens|escapejs }}';
+            localStorage.setItem('tokens', tokens);
 
             const params = new URLSearchParams(window.location.search);
             location.href = params.get('next') || '/';

@@ -55,7 +55,7 @@ class LoginPageView(View):
                 return render(
                     request,
                     "authentication/login/success.html",
-                    {"token": self.get_tokens_for_user(request.user)},
+                    {"tokens": self.get_tokens_for_user(request.user)},
                 )
 
         return render(request, self.template_name, {"form": form})
