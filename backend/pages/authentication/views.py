@@ -1,3 +1,5 @@
+from ast import literal_eval
+
 from django.views import View
 from django.contrib import messages
 from django.contrib.auth import login, logout
@@ -6,7 +8,8 @@ from django.http.request import HttpRequest
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.tokens import RefreshToken, BlacklistMixin
+
 from .forms import LoginForm, RegisterForm
 
 # Create your views here
@@ -102,11 +105,16 @@ class RegisterPageView(View):
         return render(request, self.template_name, {"form": form})
 
 
-def logout_page(request: HttpRequest) -> HttpResponse:
-    """
-    Simple Logout page
-    """
-    logout(request)
+class LogoutPageView(View, BlacklistMixin):
+    template_name = "authentication/logout.html"
 
-    next_url = request.GET.get("next", None)
-    return redirect(next_url if next_url else "/")
+    def get(self, request: HttpRequest) -> HttpResponse:
+        token = request.GET.get("token", None)
+
+        if token:
+            # Safely convert string to dict.
+            token_dict = literal_eval(token)
+            self.blacklist(token_dict.get("refresh"))
+
+        logout(request)
+        return render(request, self.template_name)

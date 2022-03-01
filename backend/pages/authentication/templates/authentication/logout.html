@@ -14,13 +14,16 @@ Login
         }, 1000)
 
         setTimeout(()=>{
+            localStorage.removeItem('token')
             const params = new URLSearchParams(window.location.search);
             location.href = params.get('next') || '/'
-        }, timeout * 1000 )
+        }, timeout*1000 )
     }
 "
 >
-    <div class="has-text-white has-text-centered">Login Successful 🥳</div>
+    <div class="has-text-white has-text-centered">
+        Logout Successful 👋. See you again
+    </div>
     <div class="has-text-white has-text-centered">
         Redirecting to &#8594;
         <span x-text="getUrlParams"></span>
@@ -38,4 +41,4 @@ Login
     const token = '{{ token|escapejs }}';
     localStorage.setItem('token', token);
 </script>
-{% endblock %}
+{% endblock %} z
