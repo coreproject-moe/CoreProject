@@ -65,8 +65,6 @@
 	import { responsiveMode } from "$lib/store/responsive";
 	import { isUserAuthenticated } from "$lib/store/users";
 
-	import { useEffect } from "$hooks/useEffect";
-
 	// Constants
 	import { baseUrl } from "$lib/constants/backend/urls/baseUrl";
 	import { userInfoUrl } from "$lib/constants/backend/urls/restEndpoints";
@@ -83,36 +81,34 @@
 	$: navbarBurgerClosed = $responsiveMode === "mobile" || $responsiveMode === "tablet";
 
 	// Listen to changes on arrow button
-	useEffect(
-		() => {
-			switch (arrowButtonTurned) {
-				case true: {
-					anime({
-						targets: ".animejs__github__button",
-						translateX: 0,
-						easing: "easeOutSine",
-						duration: 50,
-						opacity: 1,
-						scale: 1
-					});
-					break;
-				}
-				case false: {
-					anime({
-						targets: ".animejs__github__button",
-						translateX: 40,
-						easing: "easeOutSine",
-						duration: 50,
-						opacity: 0,
-						scale: 0.2
-					});
-					break;
-				}
+	$: switch (arrowButtonTurned) {
+		case true: {
+			if (browser) {
+				anime({
+					targets: ".animejs__github__button",
+					translateX: 0,
+					easing: "easeOutSine",
+					duration: 50,
+					opacity: 1,
+					scale: 1
+				});
+				break;
 			}
-		},
-		() => [arrowButtonTurned]
-	);
-
+		}
+		case false: {
+			if (browser) {
+				anime({
+					targets: ".animejs__github__button",
+					translateX: 40,
+					easing: "easeOutSine",
+					duration: 50,
+					opacity: 0,
+					scale: 0.2
+				});
+				break;
+			}
+		}
+	}
 	onMount(async () => {
 		// https://bulma.io/documentation/components/navbar/#fixed-navbar
 		const HTMLTAG = browser && document.getElementsByTagName("html")[0]; // '0' to assign the first (and only `HTML` tag)
