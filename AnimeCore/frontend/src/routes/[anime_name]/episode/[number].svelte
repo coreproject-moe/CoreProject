@@ -5,7 +5,6 @@
 	import { browser } from "$app/env";
 	import { page } from "$app/stores";
 
-	import { useEffect } from "$hooks/useEffect";
 	import { responsiveMode } from "$lib/store/responsive";
 	import { projectName } from "$lib/constants/frontend/projectName";
 	import { snakeCaseToTitleCase } from "$lib/functions/snakeCaseToTitleCase";
@@ -25,24 +24,35 @@
 		showPlayer = true;
 	});
 
-	const onVolumeChange = async () => {
-		if (browser && $isUserAuthenticated) {
-			localStorage.setItem("vimejs-volume", JSON.stringify(player?.volume));
+	// PLayer hooks
+	$: {
+		if (player) {
+			const localStorageVideoVolume =
+				parseInt(browser && localStorage.getItem("vimejs-volume")) || 100;
+			player.volume = localStorageVideoVolume;
+		}
+	}
 
-			try {
-				fetch(captureEndpoint, {
-					method: "PATCH",
-					headers: {
-						Accept: "application/json",
-						"Content-Type": "application/json",
-						Authorization: `Bearer ${get(userToken).access}`
-					},
-					body: JSON.stringify({
-						video_volume: ~~player?.volume
-					})
-				});
-			} catch {
-				console.error(`POST to ${captureEndpoint} Failed`);
+	const onVolumeChange = async () => {
+		if (browser) {
+			localStorage.setItem("vimejs-volume", JSON.stringify(~~player?.volume));
+
+			if ($isUserAuthenticated) {
+				try {
+					fetch(captureEndpoint, {
+						method: "PATCH",
+						headers: {
+							Accept: "application/json",
+							"Content-Type": "application/json",
+							Authorization: `Bearer ${get(userToken).access}`
+						},
+						body: JSON.stringify({
+							video_volume: ~~player?.volume
+						})
+					});
+				} catch {
+					console.error(`POST to ${captureEndpoint} Failed`);
+				}
 			}
 		}
 	};
