@@ -141,6 +141,7 @@
 			<b>Last Active</b> : ${dayjs(userInfo?.last_login).format("MMMM D, YYYY - h:mm A")}`,
 			theme: "black",
 			allowHTML: true,
+			touch: false,
 			placement: "bottom",
 			appendTo: () => document.body
 		});
