@@ -1,4 +1,6 @@
 
+# EVERYTHING IS BROKEN RIGHT NOW. IF YOU WANNA TEST THIS SOFTWARE USE THIS [BRANCH](https://github.com/baseplate-admin/CoreProject/tree/e0215a1f77f180b2ca9b5de5e9b8dd01edaf009f) 
+
 # WIP
 
 # If you like this project and have some time, please answer some questions in the issue tab :P
