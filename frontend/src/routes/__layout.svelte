@@ -159,8 +159,6 @@
 			appendTo: () => document.body
 		});
 	});
-
-	console.log($page.url);
 </script>
 
 <nav
