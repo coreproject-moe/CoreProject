@@ -12,6 +12,13 @@ localhost {
     handle /api/* {
         reverse_proxy 127.0.0.1:8000
     }
+    handle /_authentication/* {
+        reverse_proxy 127.0.0.1:8000
+    }
+    handle /static/* {
+        reverse_proxy 127.0.0.1:8000
+    }
+
     handle /* {
         reverse_proxy localhost:3000
     }
