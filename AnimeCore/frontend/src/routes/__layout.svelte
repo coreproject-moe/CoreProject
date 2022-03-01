@@ -362,7 +362,7 @@
 			{#if $isUserAuthenticated}
 				<div class="columns is-mobile is-centered">
 					<div class="column is-narrow">
-						<figure class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture">
+						<figure class="image is-48x48 pt-2 pl-2">
 							<a
 								href={userEditInfoPageUrl}
 								rel="external"
