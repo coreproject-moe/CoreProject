@@ -23,7 +23,7 @@
 		"animejs": "^3.2.1",
 		"autoprefixer": "^10.4.2",
 		"bulma": "https://github.com/jgthms/bulma/tarball/master",
-		"cssnano": "^5.0.17",
+		"cssnano": "^5.1.0",
 		"dayjs": "^1.10.8",
 		"eslint": "^8.10.0",
 		"eslint-config-prettier": "^8.4.0",
