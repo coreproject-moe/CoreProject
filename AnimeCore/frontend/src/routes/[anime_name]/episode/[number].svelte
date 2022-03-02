@@ -1,4 +1,43 @@
+<script context="module" lang="ts">
+	export async function load({ fetch }) {
+		if (browser && get(isUserAuthenticated)) {
+			try {
+				const res = await fetch(captureEndpoint, {
+					method: "GET",
+					headers: new Headers({
+						Accept: "application/json",
+						"Content-Type": "application/json",
+						Authorization: `Bearer ${get(userToken).access}`
+					})
+				});
+				const data = await res.json();
+				return {
+					props: {
+						backendVimeVolume: data.video_volume
+					}
+				};
+			} catch (err) {
+				if (err instanceof Error) {
+					userToken.set({ refresh: "", access: "" });
+					console.error(`Can't fetch from backend | Flushing Tokens | Reason : ${err.message}`);
+				}
+			}
+		}
+		return {
+			props: {
+				backendVimeVolume: 0
+			}
+		};
+	}
+</script>
+
 <script lang="ts">
+	export let backendVimeVolume: number;
+	$: {
+		if (backendVimeVolume !== 0 && backendVimeVolume) {
+			browser && localStorage.setItem("vimejs-volume", JSON.stringify(~~backendVimeVolume));
+		}
+	}
 	import { onMount } from "svelte";
 	import { get } from "svelte/store";
 
