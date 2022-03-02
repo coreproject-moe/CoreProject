@@ -63,6 +63,11 @@ $black: black !default;
 
 // Import VimeJS
 @import "@vime/core/themes/default.css";
+vm-player {
+	// VIMEJS
+	--vm-menu-bg: rgb(14, 13, 13) !important;
+	--vm-color-dark: rgb(14, 13, 13) !important;
+}
 
 // Some defaults
 :root {
