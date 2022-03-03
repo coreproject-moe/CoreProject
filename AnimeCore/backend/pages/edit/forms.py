@@ -79,7 +79,7 @@ class UserEditInfoForm(forms.ModelForm, ValidatePasswordMixin):
             ),
             "date_joined": forms.DateInput(
                 attrs={
-                    "class": "input is-static is-unselectable",
+                    "class": "input is-static is-unselectable has-text-white",
                     "placeholder": "Date Joined",
                     "readonly": True,
                     "disabled": True,
@@ -117,6 +117,7 @@ class AnimeInfoEditForm(forms.ModelForm):
         model = AnimeInfoModel
         fields = [
             "anime_name",
+            "anime_cover",
         ]
 
         widgets = {
