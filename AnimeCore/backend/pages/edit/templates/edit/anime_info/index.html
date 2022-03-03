@@ -9,34 +9,6 @@ Change info for {{ request.user }}
 
 <!--prettier-ignore-->
 {% block form %}
-<style>
-    .select:hover::after {
-        border-color: white !important;
-    }
-    .select::after {
-        border-color: #ffffffd1 !important;
-    }
-
-    .select-items {
-        background-color: black !important;
-        color: white !important;
-        border-color: var(--button-border-color) !important;
-    }
-    .select-items:hover {
-        border-color: #b5b5b5 !important;
-    }
-    .select-items option {
-        appearance: none;
-    }
-    .avatar-preview {
-        position: absolute;
-        top: -9999px;
-        bottom: -9999px;
-        left: -9999px;
-        right: -9999px;
-        margin: auto;
-    }
-</style>
 
 <form enctype="multipart/form-data" method="post">
     {% csrf_token %}
