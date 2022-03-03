@@ -181,12 +181,12 @@
 				: ''}"
 		>
 			<a
-				href="/"
+				href="/anime"
 				sveltekit:prefetch
 				class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration {$responsiveMode ===
 					'mobile' || $responsiveMode === 'tablet'
 					? 'pl-2 pr-2'
-					: 'ml-2'} {$page.url.pathname === '/' ? 'hover' : ''}
+					: 'ml-2'} {$page.url.pathname.includes('anime') ? 'hover' : ''}
 					"
 				on:mouseenter={async () => {
 					anime({
@@ -215,8 +215,7 @@
 				class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration {$responsiveMode ===
 					'mobile' || $responsiveMode === 'tablet'
 					? 'pl-2 pr-2'
-					: 'ml-2'} {$page.url.pathname.includes('anime') ? 'hover' : ''}
-					"
+					: 'ml-2'}"
 				on:mouseenter={async () => {
 					anime({
 						targets: ".animejs__request__icon",

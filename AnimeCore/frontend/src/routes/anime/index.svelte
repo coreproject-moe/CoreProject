@@ -43,7 +43,7 @@
 				<SwiperSlide>
 					<a
 						sveltekit:prefetch
-						href="/one_piece"
+						href="/anime/one_piece"
 						class="card"
 						style="background-color: black !important;"
 					>
