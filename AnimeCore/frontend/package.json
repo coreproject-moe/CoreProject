@@ -14,7 +14,7 @@
 	"devDependencies": {
 		"@fullhuman/postcss-purgecss": "^4.1.3",
 		"@sveltejs/adapter-static": "^1.0.0-next.28",
-		"@sveltejs/kit": "^1.0.0-next.288",
+		"@sveltejs/kit": "^1.0.0-next.289",
 		"@types/animejs": "^3.1.4",
 		"@types/md5": "^2.3.2",
 		"@typescript-eslint/eslint-plugin": "^5.13.0",
