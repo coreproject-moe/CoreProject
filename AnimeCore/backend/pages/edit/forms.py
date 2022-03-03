@@ -62,8 +62,8 @@ class UserEditInfoForm(forms.ModelForm, ValidatePasswordMixin):
             ),
             "email": forms.TextInput(
                 attrs={
-                    "class": "input is-unselectable",
-                    "style": "background-color:black; border:1px solid var(--border-color); color:white !important;",
+                    "class": "input is-unselectable has-text-white",
+                    "style": "background-color:black; border:1px solid var(--border-color);",
                     "placeholder": "Email",
                     "readonly": True,
                     "disabled": True,
