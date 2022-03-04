@@ -12,6 +12,9 @@
 		"update": "npx npm-check-updates -u && npm install"
 	},
 	"devDependencies": {
+		"@fontsource/cantarell": "^4.5.2",
+		"@fontsource/roboto": "^4.5.3",
+		"@fontsource/ubuntu": "^4.5.3",
 		"@fullhuman/postcss-purgecss": "^4.1.3",
 		"@sveltejs/adapter-static": "^1.0.0-next.28",
 		"@sveltejs/kit": "^1.0.0-next.291",
