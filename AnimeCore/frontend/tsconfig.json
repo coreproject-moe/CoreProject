@@ -29,8 +29,15 @@
 		"allowJs": true,
 		"checkJs": true,
 		"paths": {
+			// Svelte defined
 			"$lib": ["src/lib"],
 			"$lib/*": ["src/lib/*"],
+			// Stores
+			"$store": ["src/lib/store"],
+			"$store/*": ["src/lib/store/*"],
+			// Urls
+			"$urls": ["src/lib/constants/backend/urls"],
+			"$urls/*": ["src/lib/constants/backend/urls/*"],
 		}
 	},
 	"include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.ts", "src/**/*.svelte"]
