@@ -63,13 +63,13 @@
 	import { onMount } from "svelte";
 
 	// Responsive helper
-	import { responsiveMode } from "$lib/store/responsive";
-	import { isUserAuthenticated } from "$lib/store/users";
+	import { responsiveMode } from "$store/responsive";
+	import { isUserAuthenticated } from "$store/users";
 
 	// Constants
-	import { baseUrl } from "$lib/constants/backend/urls/baseUrl";
-	import { userInfoUrl } from "$lib/constants/backend/urls/restEndpoints";
-	import { signupPageUrl, userEditInfoPageUrl } from "$lib/constants/backend/urls/pageUrlEndpoints";
+	import { baseUrl } from "$urls/baseUrl";
+	import { userInfoUrl } from "$urls/restEndpoints";
+	import { signupPageUrl, userEditInfoPageUrl } from "$urls/pageUrlEndpoints";
 
 	import { goto } from "$app/navigation";
 	import { page } from "$app/stores";

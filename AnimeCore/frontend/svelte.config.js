@@ -27,7 +27,8 @@ const config = {
 			resolve: {
 				alias: {
 					// these are the aliases and paths to them
-					$hooks: path.resolve("./src/hooks")
+					$store: path.resolve("./src/lib/store"),
+					$urls: path.resolve("./src/lib/constants/backend/urls")
 				}
 			}
 		}
