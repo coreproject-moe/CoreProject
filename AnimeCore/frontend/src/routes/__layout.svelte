@@ -1,7 +1,7 @@
 <script context="module" lang="ts">
 	import { get } from "svelte/store";
+	import { browser } from "$app/env";
 	import { userToken } from "$lib/store/users";
-	import { userInfoUrl } from "$lib/constants/backend/urls/restEndpoints";
 
 	export async function load({ fetch }) {
 		// For the love of GOD.
@@ -62,24 +62,23 @@
 	// Svelte Import
 	import { onMount } from "svelte";
 
-	// Store imports
+	// Responsive helper
 	import { responsiveMode } from "$lib/store/responsive";
 	import { isUserAuthenticated } from "$lib/store/users";
 
 	// Constants
 	import { baseUrl } from "$lib/constants/backend/urls/baseUrl";
+	import { userInfoUrl } from "$lib/constants/backend/urls/restEndpoints";
 	import { signupPageUrl, userEditInfoPageUrl } from "$lib/constants/backend/urls/pageUrlEndpoints";
 
 	import { goto } from "$app/navigation";
 	import { page } from "$app/stores";
-	import { browser } from "$app/env";
 
-	// Navbar burger controls
 	let arrowButtonTurned = false;
-	let navbarBurgerClosed = false;
 
+	let navbarBurgerClosed = false;
 	// Auto close the navbar Buger to close if its on Mobile or Tablet
-	$: navbarBurgerClosed = $responsiveMode in ["mobile", "tablet"];
+	$: navbarBurgerClosed = $responsiveMode === "mobile" || $responsiveMode === "tablet";
 
 	// Listen to changes on arrow button
 	$: switch (arrowButtonTurned) {
@@ -177,15 +176,15 @@
 
 	<div class="navbar-menu has-background-black {navbarBurgerClosed ? '' : 'is-active'}">
 		<div
-			class="navbar-start mt-3 {$responsiveMode in ['mobile', 'tablet']
+			class="navbar-start mt-3 {$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
 				? 'is-flex is-flex-direction-row is-justify-content-center'
 				: ''}"
 		>
 			<a
 				href="/anime"
 				sveltekit:prefetch
-				class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration {$responsiveMode in
-				['mobile', 'tablet']
+				class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration {$responsiveMode ===
+					'mobile' || $responsiveMode === 'tablet'
 					? 'pl-2 pr-2'
 					: 'ml-2'} {$page.url.pathname.includes('anime') ? 'hover' : ''}
 					"
@@ -204,7 +203,7 @@
 			>
 				<ion-icon name="home-sharp" class="animejs__home__icon" />
 				<p
-					class="{$responsiveMode in ['mobile', 'tablet']
+					class="{$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
 						? 'pt-2 nav-icon-button'
 						: ''} {$responsiveMode === 'widescreen' ? 'is-size-7' : ''}"
 				>
@@ -213,8 +212,8 @@
 			</a>
 			<a
 				href="#"
-				class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration {$responsiveMode in
-				['mobile', 'tablet']
+				class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration {$responsiveMode ===
+					'mobile' || $responsiveMode === 'tablet'
 					? 'pl-2 pr-2'
 					: 'ml-2'}"
 				on:mouseenter={async () => {
@@ -232,7 +231,7 @@
 			>
 				<ion-icon name="cloud-upload-outline" class="animejs__request__icon is-size-5" />
 				<p
-					class="{$responsiveMode in ['mobile', 'tablet']
+					class="{$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
 						? 'pt-2 nav-icon-button'
 						: ''} {$responsiveMode === 'widescreen' ? 'is-size-7' : ''}"
 				>
@@ -244,8 +243,8 @@
 			<a
 				sveltekit:prefetch
 				href="/faq"
-				class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration {$responsiveMode in
-				['mobile', 'tablet']
+				class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration {$responsiveMode ===
+					'mobile' || $responsiveMode === 'tablet'
 					? 'pl-2 pr-2'
 					: 'ml-2'} {$page.url.pathname.includes('faq') ? 'hover' : ''}"
 				on:mouseenter={async () => {
@@ -263,7 +262,7 @@
 			>
 				<ion-icon name="help-circle-outline" class="animejs__faq__icon is-size-5" />
 				<p
-					class="{$responsiveMode in ['mobile', 'tablet']
+					class="{$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
 						? 'pt-2 nav-icon-button'
 						: ''} {$responsiveMode === 'widescreen' ? 'is-size-7' : ''}"
 				>
@@ -289,8 +288,8 @@
 					: ''}"
 			>
 				<button
-					class="is-rounded is-dark animejs__github__button has-background-black-bis is-clickable {$responsiveMode in
-					['mobile', 'tablet']
+					class="is-rounded is-dark animejs__github__button has-background-black-bis is-clickable {$responsiveMode ===
+						'mobile' || $responsiveMode === 'tablet'
 						? 'is-hidden '
 						: ''}"
 					on:mouseenter={async () => {
@@ -326,8 +325,8 @@
 
 				<button
 					style="z-index: 1000000"
-					class="is-rounded is-dark animejs__arrow__button has-background-black-bis is-clickable {$responsiveMode in
-					['mobile', 'tablet']
+					class="is-rounded is-dark animejs__arrow__button has-background-black-bis is-clickable {$responsiveMode ===
+						'mobile' || $responsiveMode === 'tablet'
 						? 'is-hidden'
 						: ''}"
 					on:mouseenter={async () => {
@@ -400,7 +399,7 @@
 						</figure>
 					</div>
 				</div>
-				{#if $responsiveMode in ["mobile", "tablet"]}
+				{#if $responsiveMode === "mobile" || $responsiveMode === "tablet"}
 					<div class="columns is-mobile is-centered">
 						<div class="column is-narrow">
 							<table
