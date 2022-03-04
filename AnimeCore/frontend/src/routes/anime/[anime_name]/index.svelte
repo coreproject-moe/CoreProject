@@ -20,14 +20,22 @@
 		>
 			<div
 				class="column is-align-self-center is-flex is-justify-content-center 
-				{$responsiveMode in ['desktop', 'widescreen', 'fullhd'] ? 'is-3' : ''}"
+				{$responsiveMode === 'desktop' || $responsiveMode === 'widescreen' || $responsiveMode === 'fullhd'
+					? 'is-3'
+					: ''}"
 			>
 				<table
-					class="table is-bordered has-text-white has-background-black is-font-face-ubuntu {$responsiveMode in
-					['desktop', 'widescreen', 'fullhd']
+					class="table is-bordered has-text-white has-background-black is-font-face-ubuntu {$responsiveMode ===
+						'desktop' ||
+					$responsiveMode === 'widescreen' ||
+					$responsiveMode === 'fullhd'
 						? 'is-position-fixed'
-						: ''} {$responsiveMode in ['desktop', 'widescreen'] ? 'is-size-7' : ''}"
-					style="{$responsiveMode in ['desktop', 'widescreen', 'fullhd'] ? 'top: 5em;' : ''}
+						: ''} {$responsiveMode === ('desktop' || 'widescreen') ? 'is-size-7' : ''}"
+					style="{$responsiveMode === 'desktop' ||
+					$responsiveMode === 'widescreen' ||
+					$responsiveMode === 'fullhd'
+						? 'top: 5em;'
+						: ''}
 					{$responsiveMode === 'mobile' ? 'width: 90%;' : ''} {$responsiveMode === 'tablet'
 						? 'width:80%'
 						: ''}
@@ -97,7 +105,9 @@
 				</table>
 			</div>
 			<div
-				class="column is-flex {$responsiveMode in ['desktop', 'widescreen', 'fullhd']
+				class="column is-flex {$responsiveMode === 'desktop' ||
+				$responsiveMode === 'widescreen' ||
+				$responsiveMode === 'fullhd'
 					? ''
 					: 'is-align-self-center'}"
 			>
