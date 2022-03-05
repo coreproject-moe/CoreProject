@@ -22,6 +22,11 @@ npm run preview
 # Running backend :
 
 ```python
+cd backend
+```
+
+
+```python
 pipenv install --dev
 ```
 
