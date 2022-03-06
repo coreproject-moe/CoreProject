@@ -30,3 +30,5 @@ sync = 'python manage.py migrate'
 mksync = 'python manage.py makemigrations'
 collectstatic = 'python .\manage.py collectstatic'
 prod = "gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
+# Optimize bulma ( Purge CSS )
+optimize_bulma = "npx purgecss --css static/vendor/bulma/bulma.min.css --content **/*.html **/*.js --output staticfiles/vendor/bulma/bulma.min.css"
