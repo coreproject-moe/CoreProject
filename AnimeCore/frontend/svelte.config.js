@@ -33,6 +33,7 @@ const config = {
 				}
 			},
 			build: {
+				chunkSizeWarningLimit: 1024,
 				rollupOptions: {
 					output: {
 						manualChunks: {
