@@ -116,3 +116,5 @@ dmypy.json
 
 # requests-cache file
 http_cache.sqlite
+
+staticfiles
