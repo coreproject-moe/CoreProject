@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "django_cleanup.apps.CleanupConfig",
     # Custom Stuff
     "custom.user",
+    'custom.commands',
     # Pages
     "pages.authentication",
     "pages.edit",
