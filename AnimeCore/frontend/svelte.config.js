@@ -30,6 +30,21 @@ const config = {
 					$store: path.resolve("./src/lib/store"),
 					$urls: path.resolve("./src/lib/constants/backend/urls")
 				}
+			},
+			build: {
+				chunkSizeWarningLimit: 1024,
+				rollupOptions: {
+					output: {
+						manualChunks: {
+							md5: ["md5"],
+							anime: ["animejs"],
+							dayjs: ["dayjs"],
+							swiper: ["swiper"],
+							"tippy.js": ["tippy.js"]
+							
+						}
+					}
+				}
 			}
 		}
 	}
