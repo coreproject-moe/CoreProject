@@ -23,7 +23,6 @@ const config = {
 		// paths: {
 		// 	base: dev ? '' : '/static'
 		// }
-
 		vite: {
 			resolve: {
 				alias: {
@@ -41,10 +40,8 @@ const config = {
 							anime: ["animejs"],
 							dayjs: ["dayjs"],
 							swiper: ["swiper"],
-							"tippy.js": ["tippy.js"],
-							// VideoJs specific
-							"video.js": ["video.js"],
-							"videojs-vtt.js": ["videojs-vtt.js"]
+							"tippy.js": ["tippy.js"]
+							
 						}
 					}
 				}
