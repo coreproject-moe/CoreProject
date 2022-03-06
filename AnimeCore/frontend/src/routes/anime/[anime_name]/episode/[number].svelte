@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<!-- <script context="module" lang="ts">
 	export async function load({ fetch }) {
 		if (browser && get(isUserAuthenticated)) {
 			try {
@@ -29,8 +29,7 @@
 			}
 		};
 	}
-</script>
-
+</script> -->
 <script lang="ts">
 	export let backendVimeVolume: number;
 	$: {
@@ -38,8 +37,11 @@
 			browser && localStorage.setItem("vimejs-volume", JSON.stringify(~~backendVimeVolume));
 		}
 	}
-	import { onMount } from "svelte";
-	import { get } from "svelte/store";
+
+	import videojs from "video.js";
+	import "video.js/dist/video-js.css";
+
+	import { onDestroy } from "svelte";
 
 	import { browser } from "$app/env";
 	import { page } from "$app/stores";
@@ -53,48 +55,22 @@
 	$: episode_number = parseInt($page.params.number);
 	$: anime_name = snakeCaseToTitleCase($page.params.anime_name);
 
-	let showPlayer = false;
-	let player: HTMLVmPlayerElement;
+	let videoElement: HTMLVideoElement & { dispose?: () => void };
 
-	onMount(async () => {
-		const { defineCustomElements } = await import("@vime/core");
+	const onVolumeChange = async () => {};
 
-		defineCustomElements();
-		showPlayer = true;
-	});
-
-	// PLayer hooks
 	$: {
-		if (player) {
-			const localStorageVideoVolume =
-				parseInt(browser && localStorage.getItem("vimejs-volume")) || 100;
-			player.volume = localStorageVideoVolume;
+		if (videoElement) {
+			videojs(videoElement, {}, () => {
+				console.log("player is ready");
+			});
 		}
 	}
-
-	const onVolumeChange = async () => {
-		if (browser) {
-			localStorage.setItem("vimejs-volume", JSON.stringify(~~player?.volume));
-
-			if ($isUserAuthenticated) {
-				try {
-					fetch(captureEndpoint, {
-						method: "PATCH",
-						headers: {
-							Accept: "application/json",
-							"Content-Type": "application/json",
-							Authorization: `Bearer ${get(userToken).access}`
-						},
-						body: JSON.stringify({
-							video_volume: ~~player?.volume
-						})
-					});
-				} catch {
-					console.error(`POST to ${captureEndpoint} Failed`);
-				}
-			}
+	onDestroy(async () => {
+		if (videoElement) {
+			videoElement.dispose();
 		}
-	};
+	});
 </script>
 
 <svelte:head>
@@ -102,15 +78,11 @@
 </svelte:head>
 
 <div class="container pt-5">
-	{#if showPlayer}
-		<vm-player autoplay bind:this={player} on:vmVolumeChange={onVolumeChange}>
-			<vm-video poster="https://media.vimejs.com/poster.png" cross-origin>
-				<source data-src="https://media.vimejs.com/720p.mp4" type="video/mp4" />
-				<track default kind="subtitles" src="/media/subs/en.vtt" srclang="en" label="English" />
-			</vm-video>
-			<vm-default-ui />
-		</vm-player>
-	{/if}
+	<!-- svelte-ignore a11y-media-has-caption -->
+	<video controls preload="auto" bind:this={videoElement} class="video-js vjs-big-play-centered">
+		<source src="//vjs.zencdn.net/v/oceans.mp4" type="video/mp4" />
+		<source src="//vjs.zencdn.net/v/oceans.webm" type="video/webm" />
+	</video>
 </div>
 <div class="container pt-5">
 	<!-- Main container -->
