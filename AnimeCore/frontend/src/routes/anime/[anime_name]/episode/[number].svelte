@@ -40,27 +40,24 @@
 	}
 	import { onMount } from "svelte";
 	import { get } from "svelte/store";
+	import { defineCustomElements } from "@vime/core";
 
 	import { browser } from "$app/env";
 	import { page } from "$app/stores";
 
+	import { captureEndpoint } from "$urls/restEndpoints";
 	import { responsiveMode } from "$lib/store/responsive";
 	import { projectName } from "$lib/constants/frontend/projectName";
-	import { snakeCaseToTitleCase } from "$lib/functions/snakeCaseToTitleCase";
-	import { captureEndpoint } from "$lib/constants/backend/urls/restEndpoints";
 	import { isUserAuthenticated, userToken } from "$lib/store/users";
+	import { snakeCaseToTitleCase } from "$lib/functions/snakeCaseToTitleCase";
 
 	$: episode_number = parseInt($page.params.number);
 	$: anime_name = snakeCaseToTitleCase($page.params.anime_name);
 
-	let showPlayer = false;
 	let player: HTMLVmPlayerElement;
 
-	onMount(async () => {
-		const { defineCustomElements } = await import("@vime/core");
-
+	onMount(() => {
 		defineCustomElements();
-		showPlayer = true;
 	});
 
 	// PLayer hooks
@@ -102,15 +99,13 @@
 </svelte:head>
 
 <div class="container pt-5">
-	{#if showPlayer}
-		<vm-player autoplay bind:this={player} on:vmVolumeChange={onVolumeChange}>
-			<vm-video poster="https://media.vimejs.com/poster.png" cross-origin>
-				<source data-src="https://media.vimejs.com/720p.mp4" type="video/mp4" />
-				<track default kind="subtitles" src="/media/subs/en.vtt" srclang="en" label="English" />
-			</vm-video>
-			<vm-default-ui />
-		</vm-player>
-	{/if}
+	<vm-player autoplay bind:this={player} on:vmVolumeChange={onVolumeChange}>
+		<vm-video poster="https://media.vimejs.com/poster.png" cross-origin>
+			<source data-src="https://media.vimejs.com/720p.mp4" type="video/mp4" />
+			<track default kind="subtitles" src="/media/subs/en.vtt" srclang="en" label="English" />
+		</vm-video>
+		<vm-default-ui />
+	</vm-player>
 </div>
 <div class="container pt-5">
 	<!-- Main container -->
