@@ -3,10 +3,12 @@
 	import { browser } from "$app/env";
 
 	import { trapFocus } from "$lib/functions/trapFocus";
-	import { isUserAuthenticated, userToken } from "$lib/store/users";
+	import { isUserAuthenticated, userToken } from "$store/users";
+
+	import { tokenObtainUrl } from "$urls/restEndpoints";
+	import { signupPageUrl } from "$urls/pageUrlEndpoints";
+
 	import { projectName } from "$lib/constants/frontend/projectName";
-	import { tokenObtainUrl } from "$lib/constants/backend/urls/restEndpoints";
-	import { signupPageUrl } from "$lib/constants/backend/urls/pageUrlEndpoints";
 
 	// Bind it to show or hide passwords
 	let passwordShown = false;

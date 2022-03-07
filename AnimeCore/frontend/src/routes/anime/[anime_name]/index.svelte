@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { page } from "$app/stores";
+	import { responsiveMode } from "$store/responsive";
+
 	import { projectName } from "$lib/constants/frontend/projectName";
 	import { snakeCaseToTitleCase } from "$lib/functions/snakeCaseToTitleCase";
-	import { responsiveMode } from "$lib/store/responsive";
 
 	const anime_name = $page.params.anime_name;
 </script>
