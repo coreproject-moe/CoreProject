@@ -40,8 +40,7 @@ const config = {
 							anime: ["animejs"],
 							dayjs: ["dayjs"],
 							swiper: ["swiper"],
-							"tippy.js": ["tippy.js"],
-							"@vime/core": ["@vime/core"]
+							"tippy.js": ["tippy.js"]
 						}
 					}
 				}
