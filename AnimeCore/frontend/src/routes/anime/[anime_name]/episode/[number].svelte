@@ -55,6 +55,7 @@
 
 	let player: HTMLVmPlayerElement;
 	let showPlayer = false;
+	let captionEnabled = true;
 
 	onMount(async () => {
 		const { defineCustomElements } = await import("@vime/core");
@@ -94,8 +95,62 @@
 			}
 		}
 	};
+
+	const handleKeydown = async (event: KeyboardEvent) => {
+		/*
+			Maps Keys to vimejs control
+
+				* Space | K 	= 	Play / Pause
+				* M 			= 	Mute / Unmute
+				* C				= 	Captions
+				* ArrowRight 	= 	Seek Forward 5 sec
+				* ArrowLeft 	= 	Seek Backward 5 sec
+				* F				= 	Enter / Exit FullScreen
+		
+		*/
+
+		switch (event.key.toLowerCase()) {
+			case " ":
+			case "k": {
+				player?.paused ? player?.play() : player?.pause();
+				break;
+			}
+			case "m": {
+				player.muted ? player.removeAttribute("muted") : player.setAttribute("muted", "");
+				break;
+			}
+			case "c": {
+				switch (captionEnabled) {
+					case true: {
+						await player.setTextTrackVisibility(false);
+						captionEnabled = false;
+						break;
+					}
+					case false: {
+						await player.setTextTrackVisibility(true);
+						captionEnabled = true;
+						break;
+					}
+				}
+				break;
+			}
+			case "arrowright": {
+				player.currentTime += 5;
+				break;
+			}
+			case "arrowleft": {
+				player.currentTime -= 5;
+				break;
+			}
+			case "f": {
+				player.isFullscreenActive ? player.exitFullscreen() : player.enterFullscreen();
+				break;
+			}
+		}
+	};
 </script>
 
+<svelte:window on:keydown={handleKeydown} />
 <svelte:head>
 	<title>{anime_name} | Episode : {episode_number} | {projectName}</title>
 </svelte:head>
