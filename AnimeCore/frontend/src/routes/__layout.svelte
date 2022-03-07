@@ -74,7 +74,7 @@
 	import { goto } from "$app/navigation";
 	import { page } from "$app/stores";
 
-	let arrowButtonTurned = false;
+	let arrowButtonTurned: boolean;
 
 	let navbarBurgerClosed = false;
 	// Auto close the navbar Buger to close if its on Mobile or Tablet
@@ -84,6 +84,8 @@
 		// https://bulma.io/documentation/components/navbar/#fixed-navbar
 		const HTMLTAG = browser && document.getElementsByTagName("html")[0]; // '0' to assign the first (and only `HTML` tag)
 		browser && HTMLTAG.classList.add("has-navbar-fixed-top");
+
+		arrowButtonTurned = false;
 
 		// AnimeJS
 		anime({
