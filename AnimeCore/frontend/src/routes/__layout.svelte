@@ -1,7 +1,7 @@
 <script context="module" lang="ts">
 	import { get } from "svelte/store";
 	import { browser } from "$app/env";
-	import { userToken } from "$lib/store/users";
+	import { userToken } from "$store/users";
 
 	export async function load({ fetch }) {
 		// For the love of GOD.
