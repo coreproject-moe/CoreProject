@@ -38,6 +38,7 @@
 			browser && localStorage.setItem("vimejs-volume", JSON.stringify(~~backendVimeVolume));
 		}
 	}
+
 	import { onMount } from "svelte";
 	import { get } from "svelte/store";
 
@@ -45,9 +46,9 @@
 	import { page } from "$app/stores";
 
 	import { captureEndpoint } from "$urls/restEndpoints";
-	import { responsiveMode } from "$lib/store/responsive";
+	import { responsiveMode } from "$store/responsive";
 	import { projectName } from "$lib/constants/frontend/projectName";
-	import { isUserAuthenticated, userToken } from "$lib/store/users";
+	import { isUserAuthenticated, userToken } from "$store/users";
 	import { snakeCaseToTitleCase } from "$lib/functions/snakeCaseToTitleCase";
 
 	$: episode_number = parseInt($page.params.number);
@@ -109,25 +110,25 @@
 		
 		*/
 
-		switch (event.key.toLowerCase()) {
+		switch (event?.key?.toLowerCase()) {
 			case " ":
 			case "k": {
 				player?.paused ? player?.play() : player?.pause();
 				break;
 			}
 			case "m": {
-				player.muted ? player.removeAttribute("muted") : player.setAttribute("muted", "");
+				player?.muted ? player?.removeAttribute("muted") : player?.setAttribute("muted", "");
 				break;
 			}
 			case "c": {
 				switch (captionEnabled) {
 					case true: {
-						await player.setTextTrackVisibility(false);
+						await player?.setTextTrackVisibility(false);
 						captionEnabled = false;
 						break;
 					}
 					case false: {
-						await player.setTextTrackVisibility(true);
+						await player?.setTextTrackVisibility(true);
 						captionEnabled = true;
 						break;
 					}
@@ -143,7 +144,7 @@
 				break;
 			}
 			case "f": {
-				player.isFullscreenActive ? player.exitFullscreen() : player.enterFullscreen();
+				player?.isFullscreenActive ? player?.exitFullscreen() : player?.enterFullscreen();
 				break;
 			}
 		}
@@ -151,6 +152,7 @@
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
+
 <svelte:head>
 	<title>{anime_name} | Episode : {episode_number} | {projectName}</title>
 </svelte:head>

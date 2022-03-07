@@ -80,36 +80,6 @@
 	// Auto close the navbar Buger to close if its on Mobile or Tablet
 	$: navbarBurgerClosed = $responsiveMode === "mobile" || $responsiveMode === "tablet";
 
-	// Listen to changes on arrow button
-	$: switch (arrowButtonTurned) {
-		case true: {
-			if (browser) {
-				anime({
-					targets: ".animejs__github__button",
-					translateX: 0,
-					easing: "easeOutSine",
-					duration: 50,
-					opacity: 1,
-					scale: 1
-				});
-				break;
-			}
-		}
-		case false: {
-			if (browser) {
-				anime({
-					targets: ".animejs__github__button",
-					translateX: 40,
-					easing: "easeOutSine",
-					duration: 50,
-					opacity: 0,
-					scale: 0.2
-				});
-				break;
-			}
-		}
-	}
-
 	onMount(async () => {
 		// https://bulma.io/documentation/components/navbar/#fixed-navbar
 		const HTMLTAG = browser && document.getElementsByTagName("html")[0]; // '0' to assign the first (and only `HTML` tag)
@@ -292,6 +262,7 @@
 						'mobile' || $responsiveMode === 'tablet'
 						? 'is-hidden '
 						: ''}"
+					style="transform:translateX(40px);scale(0.1);"
 					on:mouseenter={async () => {
 						anime({
 							targets: ".animejs__logo__github",
@@ -358,12 +329,28 @@
 									targets: ".animejs__arrow__back",
 									rotate: [0, 180]
 								});
+								anime({
+									targets: ".animejs__github__button",
+									translateX: 0,
+									easing: "easeOutSine",
+									duration: 50,
+									opacity: 1,
+									scale: 1
+								});
 								break;
 							}
 							case false: {
 								anime({
 									targets: ".animejs__arrow__back",
 									rotate: [180, 360]
+								});
+								anime({
+									targets: ".animejs__github__button",
+									translateX: 40,
+									easing: "easeOutSine",
+									duration: 50,
+									opacity: 0,
+									scale: 0.2
 								});
 								break;
 							}
