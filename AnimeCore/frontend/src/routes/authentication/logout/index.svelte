@@ -1,9 +1,10 @@
 <script context="module" lang="ts">
 	import { browser } from "$app/env";
+	
+	import { get } from "svelte/store";
 
 	import { tokenBlacklistUrl } from "$lib/constants/backend/urls/restEndpoints";
-	import { isUserAuthenticated, userToken } from "$lib/store/users";
-	import { get } from "svelte/store";
+	import { isUserAuthenticated, userToken } from "$store/users";
 
 	export async function load({ fetch }) {
 		if (browser && get(isUserAuthenticated)) {
