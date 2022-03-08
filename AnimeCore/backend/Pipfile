@@ -15,8 +15,6 @@ djangorestframework-simplejwt = "*"
 # Pillow stuff
 pillow = "*"
 pillow-avif-plugin = "*"
-# HTTP Client
-httpx = {extras = ["http2"], version = "*"}
 
 [dev-packages]
 black = "*"
