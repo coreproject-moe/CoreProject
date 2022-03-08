@@ -54,10 +54,10 @@
 	import "../app.scss";
 
 	// Import JS libraries
+	import md5 from "md5";
+	import dayjs from "dayjs";
 	import anime from "animejs";
 	import tippy from "tippy.js";
-	import dayjs from "dayjs";
-	import md5 from "md5";
 
 	// Svelte Import
 	import { onMount } from "svelte";
