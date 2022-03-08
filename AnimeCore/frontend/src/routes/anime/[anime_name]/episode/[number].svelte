@@ -44,6 +44,7 @@
 	import { projectName } from "$lib/constants/frontend/projectName";
 	import { isUserAuthenticated, userToken } from "$store/users";
 	import { snakeCaseToTitleCase } from "$lib/functions/snakeCaseToTitleCase";
+	import { goto } from "$app/navigation";
 
 	$: episode_number = parseInt($page.params.number);
 	$: anime_name = snakeCaseToTitleCase($page.params.anime_name);
@@ -213,6 +214,13 @@
 				});
 			}
 	}
+	let episodeSelectOption: HTMLSelectElement;
+
+	$: {
+		if (episodeSelectOption) {
+			episodeSelectOption.value = `Episode ${episode_number}`;
+		}
+	}
 </script>
 
 <svelte:window on:keydown={handleKeydown} />
@@ -258,22 +266,24 @@
 <div class="container pt-5">
 	<!-- Main container -->
 	<nav class="level is-mobile">
-		<!-- Left side -->
-		<div
-			class="level-left {$responsiveMode === 'mobile'
-				? 'is-size-6'
-				: 'is-size-4'} {$responsiveMode === 'mobile' ? 'pl-4' : ''}"
-		>
-			<div class="level-item">
-				<a
-					href="/anime/{$page.params.anime_name}/episode/{episode_number - 1}"
-					sveltekit:prefetch
-					sveltekit:noscroll
-				>
-					<ion-icon name="arrow-back-outline" class="has-text-white" />
-				</a>
+		{#if episode_number > 0}
+			<!-- Left side -->
+			<div
+				class="level-left {$responsiveMode === 'mobile'
+					? 'is-size-6'
+					: 'is-size-4'} {$responsiveMode === 'mobile' ? 'pl-4' : ''}"
+			>
+				<div class="level-item">
+					<a
+						href="/anime/{$page.params.anime_name}/episode/{episode_number - 1}"
+						sveltekit:prefetch
+						sveltekit:noscroll
+					>
+						<ion-icon name="arrow-back-outline" class="has-text-white" />
+					</a>
+				</div>
 			</div>
-		</div>
+		{/if}
 
 		<!-- Middle side -->
 		<div class="level-item">
@@ -281,31 +291,38 @@
 				Anime Name : {anime_name} | Episode :
 
 				<div class="select is-small mt-1">
-					<select class="select-items">
+					<select class="select-items" bind:this={episodeSelectOption}>
 						{#each Array(100) as _, i}
-							<option class="pd-2">Episode {i}</option>
+							<option
+								class="pd-2"
+								on:click={() => {
+									goto(`/anime/${$page.params.anime_name}/episode/${i}`);
+								}}>Episode {i}</option
+							>
 						{/each}
 					</select>
 				</div>
 			</div>
 		</div>
 
-		<!-- Right side -->
-		<div
-			class="level-right {$responsiveMode === 'mobile'
-				? 'is-size-6'
-				: 'is-size-4'} {$responsiveMode === 'mobile' ? 'pr-4' : ''}"
-		>
-			<p class="level-item">
-				<a
-					href="/anime/{$page.params.anime_name}/episode/{episode_number + 1}"
-					sveltekit:prefetch
-					sveltekit:noscroll
-				>
-					<ion-icon name="arrow-forward-outline" class="has-text-white" />
-				</a>
-			</p>
-		</div>
+		{#if episode_number < 99}
+			<!-- Right side -->
+			<div
+				class="level-right {$responsiveMode === 'mobile'
+					? 'is-size-6'
+					: 'is-size-4'} {$responsiveMode === 'mobile' ? 'pr-4' : ''}"
+			>
+				<p class="level-item">
+					<a
+						href="/anime/{$page.params.anime_name}/episode/{episode_number + 1}"
+						sveltekit:prefetch
+						sveltekit:noscroll
+					>
+						<ion-icon name="arrow-forward-outline" class="has-text-white" />
+					</a>
+				</p>
+			</div>
+		{/if}
 	</nav>
 </div>
 <div class="container">
