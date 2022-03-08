@@ -88,11 +88,30 @@
 		arrowButtonTurned = false;
 	});
 
-	let tippyJsAvatar: HTMLElement;
+	// AnimeJs Bindings
+	let animeJsArrowBack: HTMLElement;
+	let animejsArrowButton: HTMLElement;
+	let animeJsGithubButton: HTMLElement;
+	// Icons
+	let animeJsHomeIcon: HTMLElement;
+	let animeJsRequestIcon: HTMLElement;
+	let animeJsFaqIcon: HTMLElement;
+	let animeJsGithubIcon: HTMLElement;
 
 	$: {
-		// TippyJS
+		if (animeJsArrowBack) {
+			anime({
+				targets: [animeJsArrowBack],
+				easing: "linear",
+				duration: 100,
+				color: "hsl(0, 0%, 80%)"
+			});
+		}
+	}
 
+	// TippyJS
+	let tippyJsAvatar: HTMLElement;
+	$: {
 		if (browser) {
 			if (animeJsGithubButton) {
 				tippy(animeJsGithubButton, {
@@ -119,26 +138,6 @@
 					appendTo: () => document.body
 				});
 			}
-		}
-	}
-
-	let animeJsArrowBack: HTMLElement;
-	let animejsArrowButton: HTMLElement;
-	let animeJsGithubButton: HTMLElement;
-	// Icons
-	let animeJsHomeIcon: HTMLElement;
-	let animeJsRequestIcon: HTMLElement;
-	let animeJsFaqIcon: HTMLElement;
-	let animeJsGithubIcon: HTMLElement;
-
-	$: {
-		if (animeJsArrowBack) {
-			anime({
-				targets: [animeJsArrowBack],
-				easing: "linear",
-				duration: 100,
-				color: "hsl(0, 0%, 80%)"
-			});
 		}
 	}
 </script>
@@ -415,40 +414,46 @@
 					</div>
 				</div>
 				{#if $responsiveMode === "mobile" || $responsiveMode === "tablet"}
-					<div class="columns is-mobile is-centered">
-						<div class="column is-narrow">
-							<table
-								class="table is-bordered has-text-white has-background-black is-font-face-ubuntu"
-							>
-								<tbody>
-									<tr>
-										<td><p class="is-size-7">ID :</p></td>
-										<td>{userInfo?.id}</td>
-									</tr>
-									<tr>
-										<td><p class="is-size-7">First Name :</p></td>
-										<td>{userInfo?.first_name}</td>
-									</tr>
-									<tr>
-										<td><p class="is-size-7">Last Name :</p></td>
-										<td>{userInfo?.last_name}</td>
-									</tr>
-									<tr>
-										<td><p class="is-size-7">Email :</p></td>
-										<td>{userInfo?.email}</td>
-									</tr>
-									<tr>
-										<td><p class="is-size-7">Date Joined :</p></td>
-										<td>{dayjs(userInfo?.date_joined).format("MMMM D, YYYY - h:mm A")}</td>
-									</tr>
-									<tr>
-										<td><p class="is-size-7">Last Active :</p></td>
-										<td>{dayjs(userInfo?.last_login).format("MMMM D, YYYY - h:mm A")}</td>
-									</tr>
-								</tbody>
-							</table>
+					{#if userInfo}
+						<div class="columns is-mobile is-centered">
+							<div class="column is-narrow">
+								<table
+									class="table is-bordered has-text-white has-background-black is-font-face-ubuntu"
+								>
+									<tbody>
+										<tr>
+											<td><p class="is-size-7">ID :</p></td>
+											<td>{userInfo?.id}</td>
+										</tr>
+										<tr>
+											<td><p class="is-size-7">First Name :</p></td>
+											<td>{userInfo?.first_name}</td>
+										</tr>
+										<tr>
+											<td><p class="is-size-7">Last Name :</p></td>
+											<td>{userInfo?.last_name}</td>
+										</tr>
+										<tr>
+											<td><p class="is-size-7">Email :</p></td>
+											<td>{userInfo?.email}</td>
+										</tr>
+										<tr>
+											<td><p class="is-size-7">Date Joined :</p></td>
+											<td>{dayjs(userInfo?.date_joined).format("MMMM D, YYYY - h:mm A")}</td>
+										</tr>
+										<tr>
+											<td><p class="is-size-7">Last Active :</p></td>
+											<td>{dayjs(userInfo?.last_login).format("MMMM D, YYYY - h:mm A")}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 						</div>
-					</div>
+					{:else}
+						<div class="has-text-centered">
+							<button class="button is-ghost is-loading is-size-2" />
+						</div>
+					{/if}
 				{/if}
 			{:else}
 				<div class="navbar-item">
