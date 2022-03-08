@@ -84,7 +84,7 @@
 							type="text"
 							name="username"
 							class="input is-font-face-ubuntu has-text-white has-background-black has-border-gray"
-							placeholder="Username"
+							placeholder="Username / Email"
 							maxlength={50}
 							required={true}
 							bind:value={username}
