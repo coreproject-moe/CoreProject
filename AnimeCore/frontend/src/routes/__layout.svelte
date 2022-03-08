@@ -86,40 +86,58 @@
 		browser && HTMLTAG.classList.add("has-navbar-fixed-top");
 
 		arrowButtonTurned = false;
-
-		// AnimeJS
-		anime({
-			targets: ".animejs__arrow__back",
-			easing: "linear",
-			duration: 100,
-			color: "hsl(0, 0%, 80%)"
-		});
 	});
-	
+
+	let tippyJsAvatar: HTMLElement;
+
 	$: {
 		// TippyJS
 
 		if (browser) {
-			tippy(".animejs__github__button", {
-				content: "Github",
-				theme: "black",
-				touch: false
-			});
-			
-			tippy(".tippyjs__avatar__picture", {
-				content: `<b>ID</b> : ${userInfo?.id} <br /> <b>First Name</b> : ${
-					userInfo?.first_name
-				}<br/> <b>Last Name</b> : ${userInfo?.last_name}<br/> <b>Username</b> : ${
-					userInfo?.username
-				}<br/>  <b>Email</b> : ${userInfo?.email}<br/><b>Date Joined</b> : ${dayjs(
-					userInfo?.date_joined
-				).format("MMMM D, YYYY - h:mm A")}<br/>
-			<b>Last Active</b> : ${dayjs(userInfo?.last_login).format("MMMM D, YYYY - h:mm A")}`,
-				theme: "black",
-				allowHTML: true,
-				touch: false,
-				placement: "bottom",
-				appendTo: () => document.body
+			if (animeJsGithubButton) {
+				tippy(animeJsGithubButton, {
+					content: "Github",
+					theme: "black",
+					touch: false
+				});
+			}
+			if (tippyJsAvatar) {
+				tippy(tippyJsAvatar, {
+					content: `<b>ID</b> : ${userInfo?.id} <br /> <b>First Name</b> : ${
+						userInfo?.first_name
+					}<br/> <b>Last Name</b> : ${userInfo?.last_name}<br/> <b>Username</b> : ${
+						userInfo?.username
+					}<br/>  <b>Email</b> : ${userInfo?.email}<br/><b>Date Joined</b> : ${dayjs(
+						userInfo?.date_joined
+					).format("MMMM D, YYYY - h:mm A")}<br/><b>Last Active</b> : ${dayjs(
+						userInfo?.last_login
+					).format("MMMM D, YYYY - h:mm A")}`,
+					theme: "black",
+					allowHTML: true,
+					touch: false,
+					placement: "bottom",
+					appendTo: () => document.body
+				});
+			}
+		}
+	}
+
+	let animeJsArrowBack: HTMLElement;
+	let animejsArrowButton: HTMLElement;
+	let animeJsGithubButton: HTMLElement;
+	// Icons
+	let animeJsHomeIcon: HTMLElement;
+	let animeJsRequestIcon: HTMLElement;
+	let animeJsFaqIcon: HTMLElement;
+	let animeJsGithubIcon: HTMLElement;
+
+	$: {
+		if (animeJsArrowBack) {
+			anime({
+				targets: [animeJsArrowBack],
+				easing: "linear",
+				duration: 100,
+				color: "hsl(0, 0%, 80%)"
 			});
 		}
 	}
@@ -167,18 +185,18 @@
 					"
 				on:mouseenter={async () => {
 					anime({
-						targets: ".animejs__home__icon",
+						targets: [animeJsHomeIcon],
 						color: "#e50000"
 					});
 				}}
 				on:mouseleave={async () => {
 					anime({
-						targets: ".animejs__home__icon",
+						targets: [animeJsHomeIcon],
 						color: "#d9d9d9"
 					});
 				}}
 			>
-				<ion-icon name="home-sharp" class="animejs__home__icon" />
+				<ion-icon name="home-sharp" bind:this={animeJsHomeIcon} />
 				<p
 					class="{$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
 						? 'pt-2 nav-icon-button'
@@ -195,18 +213,18 @@
 					: 'ml-2'}"
 				on:mouseenter={async () => {
 					anime({
-						targets: ".animejs__request__icon",
+						targets: [animeJsRequestIcon],
 						color: "#e50000"
 					});
 				}}
 				on:mouseleave={async () => {
 					anime({
-						targets: ".animejs__request__icon",
+						targets: [animeJsRequestIcon],
 						color: "#d9d9d9"
 					});
 				}}
 			>
-				<ion-icon name="cloud-upload-outline" class="animejs__request__icon is-size-5" />
+				<ion-icon name="cloud-upload-outline" class="is-size-5" bind:this={animeJsRequestIcon} />
 				<p
 					class="{$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
 						? 'pt-2 nav-icon-button'
@@ -226,18 +244,18 @@
 					: 'ml-2'} {$page.url.pathname.includes('faq') ? 'hover' : ''}"
 				on:mouseenter={async () => {
 					anime({
-						targets: ".animejs__faq__icon",
+						targets: [animeJsFaqIcon],
 						color: "#e50000"
 					});
 				}}
 				on:mouseleave={async () => {
 					anime({
-						targets: ".animejs__faq__icon",
+						targets: [animeJsFaqIcon],
 						color: "#d9d9d9"
 					});
 				}}
 			>
-				<ion-icon name="help-circle-outline" class="animejs__faq__icon is-size-5" />
+				<ion-icon name="help-circle-outline" class="is-size-5" bind:this={animeJsFaqIcon} />
 				<p
 					class="{$responsiveMode === 'mobile' || $responsiveMode === 'tablet'
 						? 'pt-2 nav-icon-button'
@@ -265,28 +283,29 @@
 					: ''}"
 			>
 				<button
-					class="is-rounded is-dark animejs__github__button has-background-black-bis is-clickable {$responsiveMode ===
+					class="is-rounded is-dark has-background-black-bis is-clickable {$responsiveMode ===
 						'mobile' || $responsiveMode === 'tablet'
 						? 'is-hidden '
 						: ''}"
+					bind:this={animeJsGithubButton}
 					style="transform:translateX(40px);scale(0.1);"
 					on:mouseenter={async () => {
 						anime({
-							targets: ".animejs__logo__github",
+							targets: [animeJsGithubIcon],
 							color: "hsl(0, 0%, 100%)"
 						});
 						anime({
-							targets: ".animejs__github__button",
+							targets: [animeJsGithubButton],
 							scale: 1.3
 						});
 					}}
 					on:mouseleave={async () => {
 						anime({
-							targets: ".animejs__logo__github",
+							targets: [animeJsGithubIcon],
 							color: "hsl(0, 0%, 80%)"
 						});
 						anime({
-							targets: ".animejs__github__button",
+							targets: [animeJsGithubButton],
 							scale: 1
 						});
 					}}
@@ -295,7 +314,8 @@
 					}}
 				>
 					<ion-icon
-						class="animejs__logo__github has-text-white"
+						class="has-text-white"
+						bind:this={animeJsGithubIcon}
 						style="width: 100%; height: 100%;"
 						name="logo-github"
 					/>
@@ -303,27 +323,28 @@
 
 				<button
 					style="z-index: 1000000"
-					class="is-rounded is-dark animejs__arrow__button has-background-black-bis is-clickable {$responsiveMode ===
+					class="is-rounded is-dark has-background-black-bis is-clickable {$responsiveMode ===
 						'mobile' || $responsiveMode === 'tablet'
 						? 'is-hidden'
 						: ''}"
+					bind:this={animejsArrowButton}
 					on:mouseenter={async () => {
 						anime({
-							targets: ".animejs__arrow__back",
+							targets: [animeJsArrowBack],
 							color: "#e50000"
 						});
 						anime({
-							targets: ".animejs__arrow__button",
+							targets: [animejsArrowButton],
 							scale: 1.2
 						});
 					}}
 					on:mouseleave={async () => {
 						anime({
-							targets: ".animejs__arrow__back",
+							targets: [animeJsArrowBack],
 							color: "hsl(0, 0%, 80%)"
 						});
 						anime({
-							targets: ".animejs__arrow__button",
+							targets: [animejsArrowButton],
 							scale: 1
 						});
 					}}
@@ -333,11 +354,11 @@
 						switch (arrowButtonTurned) {
 							case true: {
 								anime({
-									targets: ".animejs__arrow__back",
+									targets: [animeJsArrowBack],
 									rotate: [0, 180]
 								});
 								anime({
-									targets: ".animejs__github__button",
+									targets: [animeJsGithubButton],
 									translateX: 0,
 									easing: "easeOutSine",
 									duration: 50,
@@ -348,11 +369,11 @@
 							}
 							case false: {
 								anime({
-									targets: ".animejs__arrow__back",
+									targets: [animeJsArrowBack],
 									rotate: [180, 360]
 								});
 								anime({
-									targets: ".animejs__github__button",
+									targets: [animeJsGithubButton],
 									translateX: 40,
 									easing: "easeOutSine",
 									duration: 50,
@@ -365,7 +386,7 @@
 					}}
 				>
 					<ion-icon
-						class="animejs__arrow__back"
+						bind:this={animeJsArrowBack}
 						name="arrow-back-outline"
 						style="width: 100%; height: 100%;"
 					/>
@@ -374,7 +395,7 @@
 			{#if $isUserAuthenticated}
 				<div class="columns is-mobile is-centered">
 					<div class="column is-narrow">
-						<figure class="image is-48x48 pt-2 pl-2 tippyjs__avatar__picture">
+						<figure class="image is-48x48 pt-2 pl-2" bind:this={tippyJsAvatar}>
 							<a
 								href={userEditInfoPageUrl}
 								rel="external"
