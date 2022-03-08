@@ -277,10 +277,17 @@
 
 		<!-- Middle side -->
 		<div class="level-item">
-			<p class="has-text-white {$responsiveMode === 'mobile' ? 'is-size-6' : 'is-size-4'}">
+			<div class="has-text-white {$responsiveMode === 'mobile' ? 'is-size-6' : 'is-size-4'}">
 				Anime Name : {anime_name} | Episode :
-				{episode_number}
-			</p>
+
+				<div class="select is-small mt-1">
+					<select class="select-items">
+						{#each Array(100) as _, i}
+							<option class="pd-2">Episode {i}</option>
+						{/each}
+					</select>
+				</div>
+			</div>
 		</div>
 
 		<!-- Right side -->
@@ -335,3 +342,30 @@
 		</div>
 	</div>
 </div>
+
+<style lang="scss">
+	.select {
+		&::after {
+			border-color: #ffffffd1 !important;
+		}
+		&:hover {
+			&::after {
+				border-color: white !important;
+			}
+		}
+		.select-items {
+			background-color: black !important;
+			color: white !important;
+			border-color: var(--button-border-color) !important;
+			scrollbar-width: thin;
+
+			&:hover {
+				border-color: #b5b5b5 !important;
+			}
+
+			option {
+				appearance: none;
+			}
+		}
+	}
+</style>
