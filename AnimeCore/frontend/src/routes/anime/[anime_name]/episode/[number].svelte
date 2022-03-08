@@ -332,7 +332,16 @@ Neque convallis a cras semper auctor. Mi sit amet mauris commodo quis imperdiet.
 				<source data-src="https://media.vimejs.com/720p.mp4" type="video/mp4" />
 				<track default kind="subtitles" src="/media/subs/en.vtt" srclang="en" label="English" />
 			</vm-video>
-			<vm-default-ui />
+			<vm-ui>
+				<vm-click-to-play />
+				<vm-dbl-click-fullscreen />
+				<vm-captions style="--vm-controls-height: 63px;" />
+				<vm-poster />
+				<vm-spinner />
+				<vm-loading-screen />
+				<vm-default-controls />
+				<vm-default-settings pin="bottomRight" />
+			</vm-ui>
 		</vm-player>
 	{:else}
 		<section class="hero is-large">
@@ -399,7 +408,7 @@ Neque convallis a cras semper auctor. Mi sit amet mauris commodo quis imperdiet.
 			: 'is-align-self-center'}"
 	>
 		<div class="content has-text-white">
-			<h1 class="has-text-white">Synopsis :</h1>
+			<h1 class="has-text-white pt-3">Synopsis :</h1>
 			<p bind:this={textContentParagraph} class="is-clipped has-text-justified">
 				{textContent}
 			</p>
