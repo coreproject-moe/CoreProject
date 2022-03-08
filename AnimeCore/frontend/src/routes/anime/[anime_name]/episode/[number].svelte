@@ -295,8 +295,8 @@
 						{#each Array(100) as _, i}
 							<option
 								class="pd-2"
-								on:click={() => {
-									goto(`/anime/${$page.params.anime_name}/episode/${i}`);
+								on:click={async () => {
+									goto(`/anime/${$page.params.anime_name}/episode/${i}`, { replaceState: true });
 								}}>Episode {i}</option
 							>
 						{/each}
