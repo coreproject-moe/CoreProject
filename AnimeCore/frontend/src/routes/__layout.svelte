@@ -94,30 +94,35 @@
 			duration: 100,
 			color: "hsl(0, 0%, 80%)"
 		});
+	});
+	
+	$: {
 		// TippyJS
 
-		tippy(".animejs__github__button", {
-			content: "Github",
-			theme: "black",
-			touch: false
-		});
-
-		tippy(".tippyjs__avatar__picture", {
-			content: `<b>ID</b> : ${userInfo?.id} <br /> <b>First Name</b> : ${
-				userInfo?.first_name
-			}<br/> <b>Last Name</b> : ${userInfo?.last_name}<br/> <b>Username</b> : ${
-				userInfo?.username
-			}<br/>  <b>Email</b> : ${userInfo?.email}<br/><b>Date Joined</b> : ${dayjs(
-				userInfo?.date_joined
-			).format("MMMM D, YYYY - h:mm A")}<br/>
+		if (browser) {
+			tippy(".animejs__github__button", {
+				content: "Github",
+				theme: "black",
+				touch: false
+			});
+			
+			tippy(".tippyjs__avatar__picture", {
+				content: `<b>ID</b> : ${userInfo?.id} <br /> <b>First Name</b> : ${
+					userInfo?.first_name
+				}<br/> <b>Last Name</b> : ${userInfo?.last_name}<br/> <b>Username</b> : ${
+					userInfo?.username
+				}<br/>  <b>Email</b> : ${userInfo?.email}<br/><b>Date Joined</b> : ${dayjs(
+					userInfo?.date_joined
+				).format("MMMM D, YYYY - h:mm A")}<br/>
 			<b>Last Active</b> : ${dayjs(userInfo?.last_login).format("MMMM D, YYYY - h:mm A")}`,
-			theme: "black",
-			allowHTML: true,
-			touch: false,
-			placement: "bottom",
-			appendTo: () => document.body
-		});
-	});
+				theme: "black",
+				allowHTML: true,
+				touch: false,
+				placement: "bottom",
+				appendTo: () => document.body
+			});
+		}
+	}
 </script>
 
 <nav
