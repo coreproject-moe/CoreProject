@@ -71,15 +71,12 @@
 {/if}
 
 {#if $isUserAuthenticated}
-
     <div class="columns is-mobile is-centered">
         <div class="column is-narrow">
             <p class="has-text-white">You are already logged in 😕</p>
         </div>
     </div>
-
 {:else}
-
     <form on:submit|preventDefault={handleFormSubmit} method="POST" use:trapFocus>
         <div class="items field is-horizontal pt-3">
             <div class="field-body">
@@ -162,5 +159,4 @@
             </div>
         </div>
     </div>
-    
 {/if}
