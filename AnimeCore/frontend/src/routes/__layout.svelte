@@ -1,57 +1,7 @@
 <script context="module" lang="ts">
-    import { get } from "svelte/store";
-    import { browser } from "$app/env";
-    import { userToken } from "$store/users";
-
-    export async function load({ fetch }) {
-        // For the love of GOD.
-        // Run this only in Browser.
-        // Wasted 2+ hours debugging this stupid shit.
-        if (browser && get(isUserAuthenticated)) {
-            try {
-                const res = await fetch(userInfoUrl, {
-                    method: "GET",
-                    headers: new Headers({
-                        Accept: "application/json",
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${get(userToken).access}`
-                    })
-                });
-                const data = await res.json();
-
-                return {
-                    props: {
-                        userInfo: data
-                    }
-                };
-            } catch (err) {
-                if (err instanceof Error) {
-                    userToken.set({ refresh: "", access: "" });
-                    console.error(
-                        `Can't fetch from backend | Flushing Tokens | Reason : ${err.message}`
-                    );
-                }
-            }
-        }
-        return {
-            props: {
-                userInfo: {}
-            }
-        };
-    }
 </script>
 
 <script lang="ts">
-    export let userInfo = {
-        first_name: "",
-        last_name: "",
-        email: "",
-        date_joined: "",
-        username: "",
-        id: 0,
-        last_login: "",
-        avatar: ""
-    };
     // Main SCSS import
     import "../app.scss";
 
@@ -65,16 +15,17 @@
     import { onMount } from "svelte";
 
     // Responsive helper
+    import { userInfo } from "$store/userInfo";
     import { responsiveMode } from "$store/responsive";
     import { isUserAuthenticated } from "$store/users";
 
     // Constants
     import { baseUrl } from "$urls/baseUrl";
-    import { userInfoUrl } from "$urls/restEndpoints";
     import { signupPageUrl, userEditInfoPageUrl } from "$urls/pageUrlEndpoints";
 
     import { goto } from "$app/navigation";
     import { page } from "$app/stores";
+    import { browser } from "$app/env";
 
     let arrowButtonTurned: boolean;
 
@@ -124,14 +75,14 @@
             }
             if (tippyJsAvatar) {
                 tippy(tippyJsAvatar, {
-                    content: `<b>ID</b> : ${userInfo?.id} <br /> <b>First Name</b> : ${
-                        userInfo?.first_name
-                    }<br/> <b>Last Name</b> : ${userInfo?.last_name}<br/> <b>Username</b> : ${
-                        userInfo?.username
-                    }<br/>  <b>Email</b> : ${userInfo?.email}<br/><b>Date Joined</b> : ${dayjs(
-                        userInfo?.date_joined
+                    content: `<b>ID</b> : ${$userInfo?.id} <br /> <b>First Name</b> : ${
+                        $userInfo?.first_name
+                    }<br/> <b>Last Name</b> : ${$userInfo?.last_name}<br/> <b>Username</b> : ${
+                        $userInfo?.username
+                    }<br/>  <b>Email</b> : ${$userInfo?.email}<br/><b>Date Joined</b> : ${dayjs(
+                        $userInfo?.date_joined
                     ).format("MMMM D, YYYY - h:mm A")}<br/><b>Last Active</b> : ${dayjs(
-                        userInfo?.last_login
+                        $userInfo?.last_login
                     ).format("MMMM D, YYYY - h:mm A")}`,
                     theme: "black",
                     allowHTML: true,
@@ -406,17 +357,17 @@
                             <a
                                 href={userEditInfoPageUrl}
                                 rel="external"
-                                data-href={userInfo?.avatar
-                                    ? `${baseUrl}${userInfo?.avatar}`
+                                data-href={$userInfo?.avatar
+                                    ? `${baseUrl}${$userInfo?.avatar}`
                                     : `https://seccdn.libravatar.org/avatar/${md5(
-                                          userInfo?.email
+                                          $userInfo?.email
                                       )}/?s=64`}
                                 class="progressive replace"
                                 style="border-radius: 9999px; height:40px; width:40px; z-index: 1000000;margin: auto;"
                             >
                                 <img
                                     class="is-rounded preview"
-                                    alt={userInfo?.username}
+                                    alt={$userInfo?.username}
                                     src="/placeholder-64x64.avif"
                                 />
                             </a>
@@ -433,24 +384,24 @@
                                     <tbody>
                                         <tr>
                                             <td><p class="is-size-7">ID :</p></td>
-                                            <td>{userInfo?.id}</td>
+                                            <td>{$userInfo?.id}</td>
                                         </tr>
                                         <tr>
                                             <td><p class="is-size-7">First Name :</p></td>
-                                            <td>{userInfo?.first_name}</td>
+                                            <td>{$userInfo?.first_name}</td>
                                         </tr>
                                         <tr>
                                             <td><p class="is-size-7">Last Name :</p></td>
-                                            <td>{userInfo?.last_name}</td>
+                                            <td>{$userInfo?.last_name}</td>
                                         </tr>
                                         <tr>
                                             <td><p class="is-size-7">Email :</p></td>
-                                            <td>{userInfo?.email}</td>
+                                            <td>{$userInfo?.email}</td>
                                         </tr>
                                         <tr>
                                             <td><p class="is-size-7">Date Joined :</p></td>
                                             <td
-                                                >{dayjs(userInfo?.date_joined).format(
+                                                >{dayjs($userInfo?.date_joined).format(
                                                     "MMMM D, YYYY - h:mm A"
                                                 )}</td
                                             >
@@ -458,7 +409,7 @@
                                         <tr>
                                             <td><p class="is-size-7">Last Active :</p></td>
                                             <td
-                                                >{dayjs(userInfo?.last_login).format(
+                                                >{dayjs($userInfo?.last_login).format(
                                                     "MMMM D, YYYY - h:mm A"
                                                 )}</td
                                             >
