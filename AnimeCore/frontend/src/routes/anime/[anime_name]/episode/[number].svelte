@@ -32,10 +32,11 @@
 </script>
 
 <script lang="ts">
+    let textContent = "";
     export let backendVimeVolume: number;
 
     import anime from "animejs";
-    import { onMount } from "svelte";
+    import { onMount, beforeUpdate } from "svelte";
     import { get } from "svelte/store";
 
     import { browser } from "$app/env";
@@ -54,6 +55,13 @@
     let player: HTMLVmPlayerElement;
     let showPlayer = false;
     let captionEnabled = true;
+
+    // Get height before dom is updated
+    beforeUpdate(async () => {
+        if (textContentParagraph?.clientHeight > textContentParagraphHeight) {
+            textContentParagraphHeight = textContentParagraph?.clientHeight;
+        }
+    });
 
     onMount(async () => {
         const { defineCustomElements } = await import("@vime/core");
@@ -155,7 +163,6 @@
             }
         }
     };
-    let textContent = "";
     let showMore = false;
     let chevronOne: HTMLElement;
     let chevronTwo: HTMLElement;
@@ -163,28 +170,21 @@
     let textContentParagraph: HTMLParagraphElement;
     let textContentParagraphHeight = 0;
 
-    $: {
-        let height = textContentParagraph?.clientHeight;
-        if (height > textContentParagraphHeight) {
-            textContentParagraphHeight = height;
-        }
-    }
-
     $: switch (showMore) {
         case true:
             if (browser && chevronOne && chevronTwo && textContentParagraph) {
                 anime({
                     targets: [chevronOne],
                     rotate: [0, 180],
-                    easing: "easeOutSine",
-                    duration: 500
+                    easing: "linear",
+                    duration: 250
                 });
 
                 anime({
                     targets: [chevronTwo],
                     rotate: [0, -180],
-                    easing: "easeOutSine",
-                    duration: 500
+                    easing: "linear",
+                    duration: 250
                 });
 
                 anime({
@@ -200,15 +200,15 @@
                 anime({
                     targets: [chevronOne, chevronTwo],
                     rotate: [180, 0],
-                    easing: "easeOutSine",
-                    duration: 500
+                    easing: "linear",
+                    duration: 250
                 });
 
                 anime({
                     targets: [chevronTwo],
                     rotate: [-180, 0],
-                    easing: "easeOutSine",
-                    duration: 500
+                    easing: "linear",
+                    duration: 250
                 });
 
                 anime({
@@ -342,10 +342,14 @@
     >
         <div class="content has-text-white">
             <h1 class="has-text-white pt-3">Synopsis :</h1>
-            <p bind:this={textContentParagraph} class="is-clipped has-text-justified">
+            <p
+                bind:this={textContentParagraph}
+                style={textContentParagraphHeight >= 100 ? "height:100px" : ""}
+                class="is-clipped has-text-justified"
+            >
                 {textContent}
             </p>
-            {#if textContent?.length > 950}
+            {#if textContentParagraphHeight > 100}
                 <!-- Main container -->
                 <nav class="level is-mobile">
                     <!-- Middle side -->
