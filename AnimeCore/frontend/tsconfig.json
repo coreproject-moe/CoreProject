@@ -5,13 +5,15 @@
             // Urls
             "$urls": ["src/lib/constants/backend/urls"],
             "$urls/*": ["src/lib/constants/backend/urls/*"],
-
-            // Svelte Defined
-            "$lib": ["src/lib"],
-            "$lib/*": ["src/lib/*"],
             // Stores
             "$store": ["src/store"],
-            "$store/*": ["src/store/*"]
+            "$store/*": ["src/store/*"],
+            // Hooks
+            "$hooks": ["src/hooks"],
+            "$hooks/*": ["src/hooks/*"],
+            // Svelte Defined
+            "$lib": ["src/lib"],
+            "$lib/*": ["src/lib/*"]
         }
     }
 }

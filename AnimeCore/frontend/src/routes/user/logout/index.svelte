@@ -3,7 +3,7 @@
 
     import { get } from "svelte/store";
 
-    import { tokenBlacklistUrl } from "$lib/constants/backend/urls/restEndpoints";
+    import { tokenBlacklistUrl } from "$urls/restEndpoints";
     import { isUserAuthenticated, userToken } from "$store/users";
 
     export async function load({ fetch }) {

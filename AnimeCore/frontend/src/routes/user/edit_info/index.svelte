@@ -13,10 +13,10 @@
     import { page } from "$app/stores";
 
     import { baseUrl } from "$urls/baseUrl";
+    import { logoutUser } from "$hooks/users/logout";
     import { userInfoUrl } from "$urls/restEndpoints";
     import { trapFocus } from "$lib/functions/trapFocus";
-    import { isUserAuthenticated, userInfo, userToken } from "src/store/users";
-    import { empty } from "svelte/internal";
+    import { isUserAuthenticated, userInfo, userToken } from "$store/users";
 
     let avatarShown = false;
     let avatarElement: HTMLElement & { _tippy?: Instance };
@@ -147,15 +147,14 @@
                         Authorization: `Bearer ${$userToken.access}`
                     }),
                     body: JSON.stringify(data)
-                }).then((res) => {
+                }).then(() => {
                     if (data["password"]) {
-                        
+                        logoutUser(`/user/login?next=${$page?.url?.pathname}`);
                     }
                 });
-                console.log(data);
             } catch (err) {
                 if (err instanceof Error) {
-                    console.error(`Cannot POST data to backend | Reason ${err}`);
+                    console.error(`Cannot POST data to ${userInfoUrl} | Reason ${err}`);
                 }
             }
         }
