@@ -1,18 +1,17 @@
 <script lang="ts">
     let textContent = "";
-
     import anime from "animejs";
     import { onMount, beforeUpdate } from "svelte";
-    import { get } from "svelte/store";
 
     import { browser } from "$app/env";
     import { page } from "$app/stores";
 
+    import { vimeJSVolume } from "$store/vimeJs";
     import { responsiveMode } from "$store/responsive";
+
     import { projectName } from "$lib/constants/frontend/projectName";
     import { snakeCaseToTitleCase } from "$lib/functions/snakeCaseToTitleCase";
     import { goto } from "$app/navigation";
-    import { vimeJSVolume } from "$lib/store/vimeJs";
 
     $: episode_number = parseInt($page.params.number);
     $: anime_name = snakeCaseToTitleCase($page.params.anime_name);

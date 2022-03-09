@@ -2,7 +2,6 @@
     import md5 from "md5";
     import dayjs from "dayjs";
 
-    import { onMount } from "svelte";
     import * as yup from "yup";
     import { createForm } from "felte";
     import tippy, { sticky, type Instance } from "tippy.js";
