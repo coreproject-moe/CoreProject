@@ -8,26 +8,9 @@ from django.contrib.admin.views.decorators import staff_member_required
 
 
 from ..upload.models import AnimeInfoModel
-from .forms import UserEditInfoForm, AnimeInfoEditForm
+from .forms import AnimeInfoEditForm
 
 # Create your views here.
-
-
-@login_required()
-def user_info_edit_page(request: HttpRequest) -> HttpResponse:
-    instance = get_user_model().objects.get(id=request.user.id)
-    form = UserEditInfoForm(
-        data=request.POST or None,
-        files=request.FILES or None,
-        instance=instance,
-    )
-
-    if request.method == "POST":
-        if form.is_valid():
-            form.save()
-            return redirect(reverse("user_info_edit_page"))
-
-    return render(request, "edit/user_info/index.html", {"form": form})
 
 
 @staff_member_required
