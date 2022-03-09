@@ -63,7 +63,6 @@
 
     // Svelte Import
     import { onMount } from "svelte";
-    import { LazyImage } from "svelte-lazy-image";
 
     // Responsive helper
     import { responsiveMode } from "$store/responsive";
@@ -86,7 +85,7 @@
     onMount(async () => {
         // https://bulma.io/documentation/components/navbar/#fixed-navbar
         const HTMLTAG = browser && document.getElementsByTagName("html")[0]; // '0' to assign the first (and only `HTML` tag)
-        HTMLTAG?.classList.add("has-navbar-fixed-top");
+        browser && HTMLTAG.classList.add("has-navbar-fixed-top");
 
         arrowButtonTurned = false;
     });
@@ -95,7 +94,6 @@
     let animeJsArrowBack: HTMLElement;
     let animejsArrowButton: HTMLElement;
     let animeJsGithubButton: HTMLElement;
-
     // Icons
     let animeJsHomeIcon: HTMLElement;
     let animeJsRequestIcon: HTMLElement;
@@ -405,17 +403,21 @@
                 <div class="columns is-mobile is-centered">
                     <div class="column is-narrow">
                         <figure class="image is-48x48 pt-2 pl-2" bind:this={tippyJsAvatar}>
-                            <a href={userEditInfoPageUrl}>
-                                <LazyImage
-                                    src={userInfo?.avatar
-                                        ? `${baseUrl}${userInfo?.avatar}`
-                                        : `https://seccdn.libravatar.org/avatar/${md5(
-                                              userInfo?.email
-                                          )}/?s=64`}
-                                    class="is-rounded"
-                                    placeholder="/placeholder-64x64.avif"
+                            <a
+                                href={userEditInfoPageUrl}
+                                rel="external"
+                                data-href={userInfo?.avatar
+                                    ? `${baseUrl}${userInfo?.avatar}`
+                                    : `https://seccdn.libravatar.org/avatar/${md5(
+                                          userInfo?.email
+                                      )}/?s=64`}
+                                class="progressive replace"
+                                style="border-radius: 9999px; height:40px; width:40px; z-index: 1000000;margin: auto;"
+                            >
+                                <img
+                                    class="is-rounded preview"
                                     alt={userInfo?.username}
-                                    style="z-index: 1000000; margin: auto;"
+                                    src="/placeholder-64x64.avif"
                                 />
                             </a>
                         </figure>

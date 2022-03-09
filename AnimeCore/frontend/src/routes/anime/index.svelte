@@ -3,8 +3,6 @@
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import { projectName } from "$lib/constants/frontend/projectName";
 
-    import { LazyImage } from "svelte-lazy-image";
-
     import { responsiveMode } from "$store/responsive";
 
     let swiperSpacesBetween: number;
@@ -51,17 +49,25 @@
                     >
                         <div class="card-image has-background-black">
                             <figure class="image">
-                                <LazyImage
-                                    src="https://cdn.myanimelist.net/images/anime/6/73245.jpg"
-                                    placeholder="/placeholder-225x350.avif"
-                                    style="border-top-left-radius: 10px;border-top-right-radius: 10px;"
-                                    alt=""
-                                />
+                                <div
+                                    style="
+                                        border-top-left-radius: 10px;
+                                        border-top-right-radius: 10px;
+										
+                                    "
+                                    data-href="https://cdn.myanimelist.net/images/anime/6/73245.jpg"
+                                    class="progressive replace"
+                                >
+                                    <img src="/placeholder-225x350.avif" class="preview" alt="" />
+                                </div>
                             </figure>
                         </div>
                         <div
                             class="card-content has-background-black-bis"
-                            style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;"
+                            style="
+                                border-bottom-left-radius: 10px;
+                                border-bottom-right-radius: 10px;
+                            "
                         >
                             <div class="media">
                                 <div class="media-content is-clipped">
