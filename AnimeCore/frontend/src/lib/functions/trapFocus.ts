@@ -15,7 +15,7 @@ const trapFocusListener = (event: KeyboardEvent) => {
 
     const eventTarget = event.target as unknown as Element;
 
-    const parentNode = trapFocusList.find(node => node.contains(eventTarget));
+    const parentNode = trapFocusList.find((node) => node.contains(eventTarget));
     if (!parentNode) {
         return;
     }
@@ -40,7 +40,7 @@ export const trapFocus = (node: HTMLElement) => {
     trapFocusList.push(node);
     return {
         destroy() {
-            trapFocusList = trapFocusList.filter(element => element !== node);
+            trapFocusList = trapFocusList.filter((element) => element !== node);
         }
     };
 };

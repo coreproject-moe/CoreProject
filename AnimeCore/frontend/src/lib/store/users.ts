@@ -1,10 +1,10 @@
 import { browser } from "$app/env";
 import { get, writable } from "svelte/store";
-import { tokenRefreshUrl } from "$urls/restEndpoints";
 import { jwtRefresh } from "$lib/constants/backend/jwt/refresh";
+import { tokenRefreshUrl, userInfoUrl } from "$urls/restEndpoints";
 
 export const userToken = writable(
-    (browser && JSON.parse(localStorage.getItem("tokens"))) || { refresh: "", access: "" }
+    (browser && JSON.parse(localStorage.getItem("tokens"))) ?? { refresh: "", access: "" }
 );
 
 export const isUserAuthenticated = writable(get(userToken).access);
@@ -15,7 +15,6 @@ userToken.subscribe((change: { access: string; refresh: string }) => {
 });
 
 // Custom function to refresh tokens
-
 browser && // Is browser
     get(isUserAuthenticated) && // User is authenticated
     localStorage.getItem("tokens") && // Item exists
@@ -33,3 +32,38 @@ browser && // Is browser
         const data = await res.json();
         userToken.set({ refresh: get(userToken).refresh, access: data?.access });
     }, jwtRefresh);
+
+// User Info Store
+
+export const userInfo = writable({
+    first_name: "",
+    last_name: "",
+    email: "",
+    date_joined: "",
+    username: "",
+    id: 0,
+    last_login: "",
+    avatar: ""
+});
+
+// Async Callback to fetch data
+
+get(isUserAuthenticated) && // User Must be authenticated
+    (async () => {
+        try {
+            const res = await fetch(userInfoUrl, {
+                method: "GET",
+                headers: new Headers({
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${get(userToken).access}`
+                })
+            });
+            const data = await res.json();
+            userInfo.set(data);
+        } catch (e) {
+            if (e instanceof Error) {
+                console.log(`Cannot get user data | Reason : ${e?.message}`);
+            }
+        }
+    })();

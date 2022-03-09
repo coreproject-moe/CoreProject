@@ -1,6 +1,3 @@
-<script context="module" lang="ts">
-</script>
-
 <script lang="ts">
     // Main SCSS import
     import "../app.scss";
@@ -15,9 +12,8 @@
     import { onMount } from "svelte";
 
     // Responsive helper
-    import { userInfo } from "$store/userInfo";
     import { responsiveMode } from "$store/responsive";
-    import { isUserAuthenticated } from "$store/users";
+    import { isUserAuthenticated, userInfo } from "$store/users";
 
     // Constants
     import { baseUrl } from "$urls/baseUrl";
@@ -61,7 +57,6 @@
             });
         }
     }
-
     // TippyJS
     let tippyJsAvatar: HTMLElement;
     $: {
@@ -354,23 +349,37 @@
                 <div class="columns is-mobile is-centered">
                     <div class="column is-narrow">
                         <figure class="image is-48x48 pt-2 pl-2" bind:this={tippyJsAvatar}>
-                            <a
-                                href={userEditInfoPageUrl}
-                                rel="external"
-                                data-href={$userInfo?.avatar
-                                    ? `${baseUrl}${$userInfo?.avatar}`
-                                    : `https://seccdn.libravatar.org/avatar/${md5(
-                                          $userInfo?.email
-                                      )}/?s=64`}
-                                class="progressive replace"
-                                style="border-radius: 9999px; height:40px; width:40px; z-index: 1000000;margin: auto;"
-                            >
-                                <img
-                                    class="is-rounded preview"
-                                    alt={$userInfo?.username}
-                                    src="/placeholder-64x64.avif"
-                                />
-                            </a>
+                            {#if $userInfo?.avatar}
+                                <a
+                                    href={userEditInfoPageUrl}
+                                    rel="external"
+                                    data-href={`${baseUrl}${$userInfo?.avatar}`}
+                                    class="progressive replace"
+                                    style="border-radius: 9999px; height:40px; width:40px; z-index: 1000000;margin: auto;"
+                                >
+                                    <img
+                                        class="is-rounded preview"
+                                        alt={$userInfo?.username}
+                                        src="/placeholder-64x64.avif"
+                                    />
+                                </a>
+                            {:else}
+                                <a
+                                    href={userEditInfoPageUrl}
+                                    rel="external"
+                                    data-href={`https://seccdn.libravatar.org/avatar/${md5(
+                                        $userInfo?.email
+                                    )}/?s=64`}
+                                    class="progressive replace"
+                                    style="border-radius: 9999px; height:40px; width:40px; z-index: 1000000;margin: auto;"
+                                >
+                                    <img
+                                        class="is-rounded preview"
+                                        alt={$userInfo?.username}
+                                        src="/placeholder-64x64.avif"
+                                    />
+                                </a>
+                            {/if}
                         </figure>
                     </div>
                 </div>

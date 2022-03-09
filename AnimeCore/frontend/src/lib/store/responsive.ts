@@ -36,6 +36,7 @@ const checkMode = () => {
 export const responsiveMode = writable(checkMode());
 
 // Final event listener to handle changes
+
 browser &&
     window?.addEventListener("resize", async () => {
         responsiveMode.update(checkMode);
