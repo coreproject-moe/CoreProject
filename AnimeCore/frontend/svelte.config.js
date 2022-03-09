@@ -32,15 +32,16 @@ const config = {
                 }
             },
             build: {
-                chunkSizeWarningLimit: 1024,
+                // sourcemap: "hidden",
+                // chunkSizeWarningLimit: 512,
                 rollupOptions: {
                     output: {
                         manualChunks: {
-                            md5: ["md5"],
-                            anime: ["animejs"],
-                            dayjs: ["dayjs"],
-                            swiper: ["swiper"],
-                            "tippy.js": ["tippy.js"]
+                            // md5: ["md5"],
+                            // anime: ["animejs"],
+                            // dayjs: ["dayjs"],
+                            // swiper: ["swiper"],
+                            // "tippy.js": ["tippy.js"],
                         }
                     }
                 }
