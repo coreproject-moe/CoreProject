@@ -5,7 +5,7 @@ import { isUserAuthenticated, userToken } from "./users";
 
 export const vimeJSVolume = writable(100, function start(set) {
     if (get(isUserAuthenticated)) {
-        (async (set) => {
+        (async (__set) => {
             try {
                 const res = await fetch(captureEndpoint, {
                     method: "GET",
@@ -16,7 +16,7 @@ export const vimeJSVolume = writable(100, function start(set) {
                     })
                 });
                 const data = await res.json();
-                set(data?.video_volume);
+                __set(data?.video_volume);
             } catch (err) {
                 if (err instanceof Error) {
                     console.error(
