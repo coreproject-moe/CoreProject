@@ -119,6 +119,7 @@
         onSubmit: async (values) => {
             // Consider this the empty dictionary which will have promised values
             const data = {};
+
             if (values?.first_name) {
                 data["first_name"] = values?.first_name;
             }
@@ -134,9 +135,21 @@
                     data["password"] = values?.password;
                 }
             }
-            if (values?.avatar) {
-                data["avatar"] = values?.avatar;
-            }
+            // if (values?.avatar) {
+            //     function getBase64(file: File) {
+            //         var reader = new FileReader();
+            //         reader.readAsDataURL(file);
+            //         reader.onload = function () {
+            //             data["avatar"] = reader?.result;
+            //         };
+            //         reader.onerror = function (error) {
+            //             console.log("Error: ", error);
+            //         };
+            //     }
+
+            //     const avatar = values?.avatar as File;
+            //     getBase64(avatar);
+            // }
 
             try {
                 fetch(userInfoUrl, {
@@ -152,6 +165,7 @@
                         logoutUser(`/user/login?next=${$page?.url?.pathname}`);
                     }
                 });
+                console.log(data);
             } catch (err) {
                 if (err instanceof Error) {
                     console.error(`Cannot POST data to ${userInfoUrl} | Reason ${err}`);
