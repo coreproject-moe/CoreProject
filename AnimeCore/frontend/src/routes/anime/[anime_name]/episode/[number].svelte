@@ -1,39 +1,5 @@
-<script context="module" lang="ts">
-    export async function load({ fetch }) {
-        if (browser && get(isUserAuthenticated)) {
-            try {
-                const res = await fetch(captureEndpoint, {
-                    method: "GET",
-                    headers: new Headers({
-                        Accept: "application/json",
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${get(userToken).access}`
-                    })
-                });
-                const data = await res.json();
-                return {
-                    props: {
-                        backendVimeVolume: data.video_volume
-                    }
-                };
-            } catch (err) {
-                if (err instanceof Error) {
-                    userToken.set({ refresh: "", access: "" });
-                    console.error(
-                        `Can't fetch from backend | Flushing Tokens | Reason : ${err.message}`
-                    );
-                }
-            }
-        }
-        return {
-            props: {}
-        };
-    }
-</script>
-
 <script lang="ts">
     let textContent = "";
-    export let backendVimeVolume: number;
 
     import anime from "animejs";
     import { onMount, beforeUpdate } from "svelte";
@@ -42,12 +8,11 @@
     import { browser } from "$app/env";
     import { page } from "$app/stores";
 
-    import { captureEndpoint } from "$urls/restEndpoints";
     import { responsiveMode } from "$store/responsive";
     import { projectName } from "$lib/constants/frontend/projectName";
-    import { isUserAuthenticated, userToken } from "$store/users";
     import { snakeCaseToTitleCase } from "$lib/functions/snakeCaseToTitleCase";
     import { goto } from "$app/navigation";
+    import { vimeJSVolume } from "$lib/store/vimeJs";
 
     $: episode_number = parseInt($page.params.number);
     $: anime_name = snakeCaseToTitleCase($page.params.anime_name);
@@ -69,45 +34,16 @@
         showPlayer = true;
     });
 
+    const onVolumeChange = async () => {
+        $vimeJSVolume = player?.volume;
+    };
+
+    // First book for player
     $: {
-        if (browser) {
-            const volume =
-                backendVimeVolume ??
-                parseInt(localStorage.getItem("vimejs-volume") ?? JSON.stringify(100));
-
-            // Set to localstorage
-            localStorage.setItem("vimejs-volume", JSON.stringify(~~volume));
-
-            // Set player volume
-            if (player) {
-                player.volume = volume;
-            }
+        if (player) {
+            player.volume = $vimeJSVolume;
         }
     }
-
-    const onVolumeChange = async () => {
-        if (browser) {
-            localStorage.setItem("vimejs-volume", JSON.stringify(~~player?.volume));
-
-            if ($isUserAuthenticated) {
-                try {
-                    fetch(captureEndpoint, {
-                        method: "PATCH",
-                        headers: {
-                            Accept: "application/json",
-                            "Content-Type": "application/json",
-                            Authorization: `Bearer ${get(userToken).access}`
-                        },
-                        body: JSON.stringify({
-                            video_volume: ~~player?.volume
-                        })
-                    });
-                } catch {
-                    console.error(`POST to ${captureEndpoint} Failed`);
-                }
-            }
-        }
-    };
 
     const handleKeydown = async (event: KeyboardEvent) => {
         /*
