@@ -1,16 +1,16 @@
 {
-	"extends": "./.svelte-kit/tsconfig.json",
-	"compilerOptions": {
-		"paths": {
-			// Svelte Defined
-			"$lib": ["src/lib"],
-			"$lib/*": ["src/lib/*"],
-			// Stores
-			"$store": ["src/lib/store"],
-			"$store/*": ["src/lib/store/*"],
-			// Urls
-			"$urls": ["src/lib/constants/backend/urls"],
-			"$urls/*": ["src/lib/constants/backend/urls/*"]
-		}
-	}
+    "extends": "./.svelte-kit/tsconfig.json",
+    "compilerOptions": {
+        "paths": {
+            // Svelte Defined
+            "$lib": ["src/lib"],
+            "$lib/*": ["src/lib/*"],
+            // Stores
+            "$store": ["src/lib/store"],
+            "$store/*": ["src/lib/store/*"],
+            // Urls
+            "$urls": ["src/lib/constants/backend/urls"],
+            "$urls/*": ["src/lib/constants/backend/urls/*"]
+        }
+    }
 }

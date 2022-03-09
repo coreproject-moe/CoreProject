@@ -14,44 +14,44 @@ $black: black !default;
 
 // @Override
 .is-underlined {
-	text-underline-offset: 5px;
+    text-underline-offset: 5px;
 }
 
 .has-text-white {
-	// Why doesn't bulma style placeholders ? 🤔
-	&:visited,
-	&::placeholder {
-		color: $white !important;
-	}
+    // Why doesn't bulma style placeholders ? 🤔
+    &:visited,
+    &::placeholder {
+        color: $white !important;
+    }
 }
 
 // Special Class ( inspired by bulma )
 .has-border-white {
-	border: 1px solid white;
+    border: 1px solid white;
 }
 .has-no-text-decoration {
-	text-decoration: none !important;
+    text-decoration: none !important;
 }
 
 .has-border-gray {
-	border: 1px solid #353333 !important;
+    border: 1px solid #353333 !important;
 }
 
 .is-position-fixed {
-	position: fixed !important;
+    position: fixed !important;
 }
 .is-borderless {
-	border: 0 !important;
+    border: 0 !important;
 }
 
 .is-font-face-cantarell {
-	font-family: "Cantarell" !important;
+    font-family: "Cantarell" !important;
 }
 .is-font-face-roboto {
-	font-family: "Roboto" !important;
+    font-family: "Roboto" !important;
 }
 .is-font-face-ubuntu {
-	font-family: "Ubuntu" !important;
+    font-family: "Ubuntu" !important;
 }
 
 // Import Swiper styles
@@ -65,59 +65,59 @@ $black: black !default;
 @import "@vime/core/themes/default.css";
 
 vm-player {
-	// VIMEJS
-	--vm-menu-bg: rgb(14, 13, 13) !important;
-	--vm-color-dark: rgb(14, 13, 13) !important;
+    // VIMEJS
+    --vm-menu-bg: rgb(14, 13, 13) !important;
+    --vm-color-dark: rgb(14, 13, 13) !important;
 }
 
 // Some defaults
 :root {
-	--button-border-color: hsl(0, 0%, 20%);
-	--button-color-hover: hsl(0, 0%, 5%);
-	--error-message-color: #f00;
+    --button-border-color: hsl(0, 0%, 20%);
+    --button-color-hover: hsl(0, 0%, 5%);
+    --error-message-color: #f00;
 }
 
 html {
-	scrollbar-width: thin;
+    scrollbar-width: thin;
 
-	ion-icon {
-		visibility: inherit !important;
-		pointer-events: none;
-	}
-	body {
-		overflow-x: hidden;
-	}
-	.tippy-box[data-theme~="black"] {
-		background-color: black !important;
-		border: 1px solid #ffffffcf !important;
+    ion-icon {
+        visibility: inherit !important;
+        pointer-events: none;
+    }
+    body {
+        overflow-x: hidden;
+    }
+    .tippy-box[data-theme~="black"] {
+        background-color: black !important;
+        border: 1px solid #ffffffcf !important;
 
-		&[data-placement^="top"] {
-			.tippy-arrow {
-				&::before {
-					border-top-color: $white;
-				}
-			}
-		}
-		&[data-placement^="bottom"] {
-			.tippy-arrow {
-				&::before {
-					border-bottom-color: $white;
-				}
-			}
-		}
-		&[data-placement^="left"] {
-			.tippy-arrow {
-				&::before {
-					border-left-color: $white;
-				}
-			}
-		}
-		&[data-placement^="right"] {
-			.tippy-arrow {
-				&::before {
-					border-right-color: $white;
-				}
-			}
-		}
-	}
+        &[data-placement^="top"] {
+            .tippy-arrow {
+                &::before {
+                    border-top-color: $white;
+                }
+            }
+        }
+        &[data-placement^="bottom"] {
+            .tippy-arrow {
+                &::before {
+                    border-bottom-color: $white;
+                }
+            }
+        }
+        &[data-placement^="left"] {
+            .tippy-arrow {
+                &::before {
+                    border-left-color: $white;
+                }
+            }
+        }
+        &[data-placement^="right"] {
+            .tippy-arrow {
+                &::before {
+                    border-right-color: $white;
+                }
+            }
+        }
+    }
 }
