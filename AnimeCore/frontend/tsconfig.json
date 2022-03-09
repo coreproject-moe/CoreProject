@@ -10,8 +10,8 @@
             "$lib": ["src/lib"],
             "$lib/*": ["src/lib/*"],
             // Stores
-            "$store": ["src/lib/store"],
-            "$store/*": ["src/lib/store/*"]
+            "$store": ["src/store"],
+            "$store/*": ["src/store/*"]
         }
     }
 }

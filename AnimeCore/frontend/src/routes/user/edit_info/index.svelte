@@ -13,14 +13,16 @@
     import { page } from "$app/stores";
 
     import { baseUrl } from "$urls/baseUrl";
+    import { userInfoUrl } from "$urls/restEndpoints";
     import { trapFocus } from "$lib/functions/trapFocus";
-    import { isUserAuthenticated, userInfo } from "$store/users";
+    import { isUserAuthenticated, userInfo, userToken } from "src/store/users";
+    import { empty } from "svelte/internal";
 
     let avatarShown = false;
     let avatarElement: HTMLElement & { _tippy?: Instance };
     let avatarSrc = "";
     $: {
-        if ($userInfo.avatar) {
+        if ($userInfo?.avatar) {
             avatarSrc = `${baseUrl}${$userInfo?.avatar}`;
             avatarShown = true;
             avatarElement?._tippy.show();
@@ -48,31 +50,38 @@
             ?.max(50, "<b>User Name</b> must be less than <b>50 Characters</b>"),
         password: yup
             ?.string()
-            ?.min(8, "<b>Password</b> must be more than <b>8 Characters</b>")
             ?.notRequired()
-            ?.matches(
-                /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+            ?.test(
+                "password",
                 `<b>Password</b> must contain at least <b>8 Characters</b> with the following <b>attributes</b> :
-                <br/>
-                <br/>
-                <ul>
-                    <li>1 Uppercase <i>( eg : ABCD )</i></li>
-                    <li>1 Lowercase <i>( eg : abcd )</i></li> 
-                    <li>1 Number <i>( eg : 1234 )</i></li>
-                    <li>1 Special Character <i>( eg : @%^& )</i></li>
-                </ul>
-                <br/>
-                A valid password = <b>Ex@mple1234</b>`
+                    <br/>
+                    <br/>
+                    <ul>
+                        <li>1 Uppercase <i>( eg : ABCD )</i></li>
+                        <li>1 Lowercase <i>( eg : abcd )</i></li>
+                        <li>1 Number <i>( eg : 1234 )</i></li>
+                        <li>1 Special Character <i>( eg : @%^& )</i></li>
+                    </ul>
+                    <br/>
+                A valid password = <b>Ex@mple1234</b>`,
+                async (value) => {
+                    if (value?.length > 0) {
+                        return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(
+                            value
+                        );
+                    }
+                    return true;
+                }
             )
             ?.notOneOf(["Ex@mple1234"], "Did you actually use <b>Ex@mple1234</b> as password ?")
             ?.max(1024, "<b>Password</b> must be less than <b>1024 Characters<b/>"),
         confirm_password: yup
             ?.string()
-            ?.notRequired()
             ?.oneOf(
                 [yup.ref("password"), null],
                 "<b>Password</b> and <b>Confirm Password</b> are not the same"
             ),
+
         avatar: yup
             ?.mixed()
             ?.notRequired()
@@ -107,10 +116,49 @@
                 }
             })
         ],
-        onSubmit: (values) => {
-            console.log(values);
+        onSubmit: async (values) => {
+            // Consider this the empty dictionary which will have promised values
+            const data = {};
+            if (values?.first_name) {
+                data["first_name"] = values?.first_name;
+            }
+            if (values?.last_name) {
+                data["last_name"] = values?.last_name;
+            }
+            if (values?.password && values?.confirm_password) {
+                if (
+                    values?.password === values?.confirm_password && // Why are you not same ?
+                    values?.password !== "" && // Must not be empty. Will cause a massacare at backend
+                    values?.password !== "Ex@mple1234" // Are you joking ? How did you escape Yup ?
+                ) {
+                    data["password"] = values?.password;
+                }
+            }
+            if (values?.avatar) {
+                data["avatar"] = values?.avatar;
+            }
+
+            try {
+                fetch(userInfoUrl, {
+                    method: "POST",
+                    headers: new Headers({
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${$userToken.access}`
+                    }),
+                    body: JSON.stringify(data)
+                }).then((res) => {
+                    if (data["password"]) {
+                        
+                    }
+                });
+                console.log(data);
+            } catch (err) {
+                if (err instanceof Error) {
+                    console.error(`Cannot POST data to backend | Reason ${err}`);
+                }
+            }
         }
-        // ...
     });
 
     // Tippyjs Declarations
@@ -166,6 +214,7 @@
             avatarShown = true;
         }, 10);
     };
+
     const handleImageInput = (e: Event) => {
         const target = e.target as HTMLInputElement;
         const file = target.files[0];
@@ -335,7 +384,7 @@
                         <p class="control is-expanded has-icons-left">
                             <input
                                 type="text"
-                                value={$userInfo.email}
+                                value={$userInfo?.email}
                                 class="input is-font-face-ubuntu is-unselectable has-text-white has-background-black has-border-gray"
                                 placeholder="Email"
                                 autocomplete="off"
