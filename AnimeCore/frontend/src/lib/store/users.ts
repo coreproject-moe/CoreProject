@@ -35,35 +35,36 @@ browser && // Is browser
 
 // User Info Store
 
-export const userInfo = writable({
-    first_name: "",
-    last_name: "",
-    email: "",
-    date_joined: "",
-    username: "",
-    id: 0,
-    last_login: "",
-    avatar: ""
-});
-
-// Async Callback to fetch data
-
-get(isUserAuthenticated) && // User Must be authenticated
-    (async () => {
-        try {
-            const res = await fetch(userInfoUrl, {
-                method: "GET",
-                headers: new Headers({
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${get(userToken).access}`
-                })
-            });
-            const data = await res.json();
-            userInfo.set(data);
-        } catch (e) {
-            if (e instanceof Error) {
-                console.log(`Cannot get user data | Reason : ${e?.message}`);
+export const userInfo = writable(
+    {
+        first_name: "",
+        last_name: "",
+        email: "",
+        date_joined: "",
+        username: "",
+        id: 0,
+        last_login: "",
+        avatar: ""
+    },
+    function start(set) {
+        // Async Callback to fetch data
+        (async (__set) => {
+            try {
+                const res = await fetch(userInfoUrl, {
+                    method: "GET",
+                    headers: new Headers({
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${get(userToken).access}`
+                    })
+                });
+                const data = await res.json();
+                __set(data);
+            } catch (e) {
+                if (e instanceof Error) {
+                    console.log(`Cannot get user data | Reason : ${e?.message}`);
+                }
             }
-        }
-    })();
+        })(set);
+    }
+);

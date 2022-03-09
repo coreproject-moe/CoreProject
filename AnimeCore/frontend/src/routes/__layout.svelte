@@ -348,11 +348,19 @@
             {#if $isUserAuthenticated}
                 <div class="columns is-mobile is-centered">
                     <div class="column is-narrow">
-                        <figure class="image is-48x48 pt-2 pl-2" bind:this={tippyJsAvatar}>
-                            {#if $userInfo?.avatar}
+                        <figure class="image is-48x48 pt-2 pl-2">
+                            <!--
+                                Please dont change this if else statement  
+                                Because the store state will change as we are doing lazy fetching.
+                                To reflect that change, we need to do optimistic update,
+                                which this if else statement is doing down.
+                            -->
+
+                            {#if $userInfo.avatar}
                                 <a
                                     href={userEditInfoPageUrl}
                                     rel="external"
+                                    bind:this={tippyJsAvatar}
                                     data-href={`${baseUrl}${$userInfo?.avatar}`}
                                     class="progressive replace"
                                     style="border-radius: 9999px; height:40px; width:40px; z-index: 1000000;margin: auto;"
@@ -368,8 +376,9 @@
                                     href={userEditInfoPageUrl}
                                     rel="external"
                                     data-href={`https://seccdn.libravatar.org/avatar/${md5(
-                                        $userInfo?.email
+                                        $userInfo?.email ?? ""
                                     )}/?s=64`}
+                                    bind:this={tippyJsAvatar}
                                     class="progressive replace"
                                     style="border-radius: 9999px; height:40px; width:40px; z-index: 1000000;margin: auto;"
                                 >
@@ -378,8 +387,7 @@
                                         alt={$userInfo?.username}
                                         src="/placeholder-64x64.avif"
                                     />
-                                </a>
-                            {/if}
+                                </a>{/if}
                         </figure>
                     </div>
                 </div>
