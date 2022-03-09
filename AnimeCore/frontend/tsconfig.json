@@ -2,15 +2,16 @@
     "extends": "./.svelte-kit/tsconfig.json",
     "compilerOptions": {
         "paths": {
+            // Urls
+            "$urls": ["src/lib/constants/backend/urls"],
+            "$urls/*": ["src/lib/constants/backend/urls/*"],
+
             // Svelte Defined
             "$lib": ["src/lib"],
             "$lib/*": ["src/lib/*"],
             // Stores
             "$store": ["src/lib/store"],
-            "$store/*": ["src/lib/store/*"],
-            // Urls
-            "$urls": ["src/lib/constants/backend/urls"],
-            "$urls/*": ["src/lib/constants/backend/urls/*"]
+            "$store/*": ["src/lib/store/*"]
         }
     }
 }
