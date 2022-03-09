@@ -3,7 +3,7 @@ import { captureEndpoint } from "$urls/restEndpoints";
 import { get, writable } from "svelte/store";
 import { isUserAuthenticated, userToken } from "./users";
 
-export const vimeJSVolume = writable(50, function start(set) {
+export const vimeJSVolume = writable(100, function start(set) {
     if (get(isUserAuthenticated)) {
         (async (set) => {
             try {
@@ -38,19 +38,21 @@ vimeJSVolume.subscribe((change: number) => {
     browser && localStorage.setItem("vimejs-volume", JSON.stringify(~~change));
 
     // Backend update
-    try {
-        fetch(captureEndpoint, {
-            method: "PATCH",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${get(userToken).access}`
-            },
-            body: JSON.stringify({
-                video_volume: ~~change
-            })
-        });
-    } catch {
-        console.error(`POST to ${captureEndpoint} Failed`);
+    if (get(isUserAuthenticated)) {
+        try {
+            fetch(captureEndpoint, {
+                method: "PATCH",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${get(userToken).access}`
+                },
+                body: JSON.stringify({
+                    video_volume: ~~change
+                })
+            });
+        } catch {
+            console.error(`POST to ${captureEndpoint} Failed`);
+        }
     }
 });
