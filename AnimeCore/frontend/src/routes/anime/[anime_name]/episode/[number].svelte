@@ -34,9 +34,16 @@
         showPlayer = true;
     });
 
-    const onVolumeChange = async () => {};
-    
-    $: console.log($vimeJSVolume);
+    const onVolumeChange = async () => {
+        $vimeJSVolume = player?.volume;
+    };
+
+    // First book for player
+    $: {
+        if (player) {
+            player.volume = $vimeJSVolume;
+        }
+    }
 
     const handleKeydown = async (event: KeyboardEvent) => {
         /*
