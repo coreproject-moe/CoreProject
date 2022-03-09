@@ -448,7 +448,7 @@
                             <div class="buttons">
                                 <a
                                     class="button has-text-white is-black has-border-gray is-rounded"
-                                    href="/authentication/login?next={$page?.url?.pathname}"
+                                    href="/user/login?next={$page?.url?.pathname}"
                                 >
                                     Log in
                                 </a>

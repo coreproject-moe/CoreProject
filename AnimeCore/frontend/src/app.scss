@@ -88,8 +88,8 @@ html {
         overflow-x: hidden;
     }
     .tippy-box[data-theme~="black"] {
-        background-color: black !important;
-        border: 1px solid #ffffffcf !important;
+        background-color: $black !important;
+        border: 1px solid $white !important;
 
         &[data-placement^="top"] {
             .tippy-arrow {
