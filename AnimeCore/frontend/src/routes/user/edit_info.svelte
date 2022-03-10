@@ -21,12 +21,17 @@
 
     onDestroy(async () => {
         // Cleanup
+        lastLogin?._tippy?.destroy();
+        dateJoined?._tippy?.destroy();
         avatarElement?._tippy?.destroy();
     });
 
-    let imageCleared: boolean = false;
+    let passwordShown = false;
+    let imageCleared = false;
     let avatarShown: boolean;
     let avatarElement: HTMLElement & { _tippy?: Instance };
+    let dateJoined: HTMLElement & { _tippy?: Instance };
+    let lastLogin: HTMLElement & { _tippy?: Instance };
     let avatarSrc = "";
     $: {
         if ($userInfo?.avatar) {
@@ -44,10 +49,6 @@
             avatarShown = true;
         }
     }
-
-    let passwordShown = false;
-    let dateJoined: HTMLElement;
-    let lastLogin: HTMLElement;
 
     const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/gif", "image/png"];
 
