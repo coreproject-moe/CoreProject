@@ -25,7 +25,7 @@ $black: black !default;
     }
 }
 
-// Special Class ( inspired by bulma )
+// Special Classes ( inspired by bulma )
 .has-border-white {
     border: 1px solid white;
 }
@@ -35,6 +35,11 @@ $black: black !default;
 
 .has-border-gray {
     border: 1px solid #353333 !important;
+}
+.has-hover-gray {
+    &:hover {
+        background-color: hsl(0, 0%, 7.8%) !important;
+    }
 }
 
 .is-position-fixed {
@@ -86,36 +91,38 @@ html {
     }
     body {
         overflow-x: hidden;
-    }
-    .tippy-box[data-theme~="black"] {
-        background-color: $black !important;
-        border: 1px solid $white !important;
 
-        &[data-placement^="top"] {
-            .tippy-arrow {
-                &::before {
-                    border-top-color: $white;
+        // Tippy JS theme Black
+        .tippy-box[data-theme~="black"] {
+            background-color: $black !important;
+            border: 1px solid $white !important;
+
+            &[data-placement^="top"] {
+                .tippy-arrow {
+                    &::before {
+                        border-top-color: $white;
+                    }
                 }
             }
-        }
-        &[data-placement^="bottom"] {
-            .tippy-arrow {
-                &::before {
-                    border-bottom-color: $white;
+            &[data-placement^="bottom"] {
+                .tippy-arrow {
+                    &::before {
+                        border-bottom-color: $white;
+                    }
                 }
             }
-        }
-        &[data-placement^="left"] {
-            .tippy-arrow {
-                &::before {
-                    border-left-color: $white;
+            &[data-placement^="left"] {
+                .tippy-arrow {
+                    &::before {
+                        border-left-color: $white;
+                    }
                 }
             }
-        }
-        &[data-placement^="right"] {
-            .tippy-arrow {
-                &::before {
-                    border-right-color: $white;
+            &[data-placement^="right"] {
+                .tippy-arrow {
+                    &::before {
+                        border-right-color: $white;
+                    }
                 }
             }
         }
