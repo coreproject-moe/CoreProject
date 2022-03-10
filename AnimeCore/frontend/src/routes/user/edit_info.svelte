@@ -11,13 +11,14 @@
 
     import { browser } from "$app/env";
     import { page } from "$app/stores";
+    import { goto } from "$app/navigation";
 
     import { baseUrl } from "$urls/baseUrl";
     import { userInfoUrl } from "$urls/restEndpoints";
     import { trapFocus } from "$lib/functions/trapFocus";
     import { isUserAuthenticated, userInfo, userToken } from "$store/users";
-    import { goto } from "$app/navigation";
 
+    let imageCleared: boolean = false;
     let avatarShown: boolean;
     let avatarElement: HTMLElement & { _tippy?: Instance };
     let avatarSrc = "";
@@ -57,15 +58,15 @@
             ?.test(
                 "password",
                 `<b>Password</b> must contain at least <b>8 Characters</b> with the following <b>attributes</b> :
-                    <br/>
-                    <br/>
-                    <ul>
-                        <li>1 Uppercase <i>( eg : ABCD )</i></li>
-                        <li>1 Lowercase <i>( eg : abcd )</i></li>
-                        <li>1 Number <i>( eg : 1234 )</i></li>
-                        <li>1 Special Character <i>( eg : @%^& )</i></li>
-                    </ul>
-                    <br/>
+                <br/>
+                <br/>
+                <ul>
+                    <li>1 Uppercase <i>( eg : ABCD )</i></li>
+                    <li>1 Lowercase <i>( eg : abcd )</i></li>
+                    <li>1 Number <i>( eg : 1234 )</i></li>
+                    <li>1 Special Character <i>( eg : @%^& )</i></li>
+                </ul>
+                <br/>
                 A valid password = <b>Ex@mple1234</b>`,
                 async (value) => {
                     if (value?.length > 0) {
@@ -142,9 +143,13 @@
                 const avatar = values?.avatar as File;
                 data.append("avatar", avatar);
             } else {
-                // Thanks random guy from stackoverflow
-                // https://stackoverflow.com/questions/48676365/how-can-i-clear-an-image-with-django-rest-framework
-                data.append("avatar", new File([], ""));
+                if (imageCleared) {
+                    // Thanks random guy from stackoverflow
+                    // https://stackoverflow.com/questions/48676365/how-can-i-clear-an-image-with-django-rest-framework
+                    data.append("avatar", new File([], ""));
+                    // Reset this value
+                    imageCleared = false;
+                }
             }
 
             try {
@@ -214,6 +219,9 @@
     }
 
     const handleClearImageClick = () => {
+        // Set this to true because we want to bind this to ensure we can clear backend image too.
+        imageCleared = true;
+
         avatarShown = false;
         avatarElement?._tippy.hide();
         avatarSrc = `https://seccdn.libravatar.org/avatar/${md5($userInfo?.email ?? "")}/?s=64`;
