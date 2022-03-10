@@ -520,8 +520,9 @@
 {:else}
     <div class="has-text-white">
         <p class="has-text-centered">
-            How can one edit one's info without <a href="/user/login?next={$page?.url?.pathname}"
-                >logging in?</a
+            How can one edit one's info without <a
+                class="has-text-white is-underlined"
+                href="/user/login?next={$page?.url?.pathname}">logging in?</a
             >
         </p>
     </div>
