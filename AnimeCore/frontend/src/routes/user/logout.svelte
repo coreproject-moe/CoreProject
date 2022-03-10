@@ -7,8 +7,9 @@
     import { browser } from "$app/env";
     import { page } from "$app/stores";
 
-    import { userToken } from "$store/users";
+    import { isUserAuthenticated, userToken } from "$store/users";
     import { tokenBlacklistUrl } from "$urls/restEndpoints";
+    import { goto } from "$app/navigation";
 
     let errorMessage: string;
     let logoutState: boolean = false;
@@ -60,7 +61,8 @@
     $: {
         if (browser) {
             if (logoutState && timeout === 0) {
-                window.location.href = loginpage ? `/user/login?next=${next}` : next;
+                $isUserAuthenticated = false;
+                goto(loginpage ? `/user/login?next=${next}` : next);
             }
         }
     }
