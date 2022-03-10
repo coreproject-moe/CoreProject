@@ -18,16 +18,19 @@
     import { isUserAuthenticated, userInfo, userToken } from "$store/users";
     import { goto } from "$app/navigation";
 
-    let avatarShown = false;
+    let avatarShown: boolean;
     let avatarElement: HTMLElement & { _tippy?: Instance };
     let avatarSrc = "";
     $: {
         if ($userInfo?.avatar) {
+            avatarShown = false;
             avatarSrc = `${baseUrl}${$userInfo?.avatar}`;
-            avatarShown = true;
             avatarElement?._tippy.show();
-        } else {
+            avatarShown = true;
+        } else if ($userInfo?.email) {
+            avatarShown = false;
             avatarSrc = `https://seccdn.libravatar.org/avatar/${md5($userInfo?.email ?? "")}/?s=64`;
+            avatarShown = true;
         }
     }
 
