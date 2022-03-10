@@ -175,7 +175,7 @@
         <div class="is-flex is-justify-content-center has-text-white is-size-5 has-text-centered">
             <p>↓&nbsp; Avatar &nbsp;↓</p>
         </div>
-        <div class="columns is-mobile is-centered py-5">
+        <div class="columns is-mobile is-centered pb-5 pt-3">
             <div class="column is-narrow">
                 <figure class="image is-96x96" bind:this={avatarElement}>
                     <input
@@ -198,6 +198,11 @@
                         >
                             <img src="/placeholder-96x96.avif" class="is-rounded preview" alt="" />
                         </div>
+                    {:else}
+                        <div
+                            class="progressive replace"
+                            style="border-radius: 9999px; height: 96px; margin: auto; cursor: default;border:2px solid white"
+                        />
                     {/if}
                 </figure>
             </div>
