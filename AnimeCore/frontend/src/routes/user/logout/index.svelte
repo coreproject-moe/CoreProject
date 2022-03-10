@@ -2,12 +2,13 @@
     // This constant is very useful. PLease stay at top
     const homePage = "/anime";
 
+    import { onMount } from "svelte";
+
     import { browser } from "$app/env";
     import { page } from "$app/stores";
 
     import { userToken } from "$store/users";
     import { tokenBlacklistUrl } from "$urls/restEndpoints";
-    import { onMount } from "svelte";
 
     let errorMessage: string;
     let logoutState: boolean = false;

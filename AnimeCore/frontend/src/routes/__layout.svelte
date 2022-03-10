@@ -6,7 +6,7 @@
     import md5 from "md5";
     import dayjs from "dayjs";
     import anime from "animejs";
-    import tippy from "tippy.js";
+    import tippy, { sticky, type Instance } from "tippy.js";
 
     // Svelte Import
     import { onMount } from "svelte";
@@ -58,7 +58,8 @@
         }
     }
     // TippyJS
-    let tippyJsAvatar: HTMLElement;
+    let tippyJsAvatar: HTMLElement & { _tippy?: Instance };
+
     $: {
         if (browser) {
             if (animeJsGithubButton) {
@@ -70,19 +71,64 @@
             }
             if (tippyJsAvatar) {
                 tippy(tippyJsAvatar, {
-                    content: `<b>ID</b> : ${$userInfo?.id} <br /> <b>First Name</b> : ${
-                        $userInfo?.first_name
-                    }<br/> <b>Last Name</b> : ${$userInfo?.last_name}<br/> <b>Username</b> : ${
-                        $userInfo?.username
-                    }<br/>  <b>Email</b> : ${$userInfo?.email}<br/><b>Date Joined</b> : ${dayjs(
-                        $userInfo?.date_joined
-                    ).format("MMMM D, YYYY - h:mm A")}<br/><b>Last Active</b> : ${dayjs(
-                        $userInfo?.last_login
-                    ).format("MMMM D, YYYY - h:mm A")}`,
+                    content: `
+                    <table class="has-text-white has-background-black is-font-face-ubuntu" style='border-collapse:separate; border-spacing: 7px;'>
+                        <tbody>
+                            <tr>
+                                <td><b>ID :</b></td>
+                                <td>${$userInfo?.id}</td>
+                            </tr>
+                            <tr>
+                                <td><b>First Name :</b></td>
+                                <td>${$userInfo?.first_name}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Last Name :</b></td>
+                                <td>${$userInfo?.last_name}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Email :</b></td>
+                                <td>${$userInfo?.email}</td>
+                            </tr>
+                            <tr>
+                                <td><b>Date Joined :</b></td>
+                                <td
+                                    >${dayjs($userInfo?.date_joined).format(
+                                        "MMMM D, YYYY - h:mm A"
+                                    )}</td
+                                >
+                            </tr>
+                            <tr>
+                                <td><b>Last Active :</b></td>
+                                <td
+                                    >${dayjs($userInfo?.last_login).format(
+                                        "MMMM D, YYYY - h:mm A"
+                                    )}</td
+                                >
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a rel='external' class="mt-3 mb-3 button has-text-white is-black has-border-gray is-rounded is-size-7" href="/user/logout?next=${
+                                        $page?.url?.pathname
+                                    }">
+                                        Log Out
+                                    </a>
+                                </td>
+                                <td style='float:right;'>
+                                    <a rel='external' class="mt-3 mb-3 ml-3 button has-text-white is-black has-border-gray is-rounded is-size-7" href="/user/edit_info">
+                                        Edit Info
+                                    </a>   
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>`.trim(),
                     theme: "black",
+                    trigger: "click",
                     allowHTML: true,
-                    touch: false,
+                    interactive: true,
+                    sticky: true,
                     placement: "bottom",
+                    plugins: [sticky],
                     appendTo: () => document.body
                 });
             }
@@ -357,9 +403,7 @@
                             -->
 
                             {#if $userInfo.avatar}
-                                <a
-                                    href={userEditInfoPageUrl}
-                                    rel="external"
+                                <div
                                     bind:this={tippyJsAvatar}
                                     data-href={`${baseUrl}${$userInfo?.avatar}`}
                                     class="progressive replace"
@@ -370,7 +414,7 @@
                                         alt={$userInfo?.username}
                                         src="/placeholder-64x64.avif"
                                     />
-                                </a>
+                                </div>
                             {:else}
                                 <a
                                     href={userEditInfoPageUrl}
@@ -391,56 +435,6 @@
                         </figure>
                     </div>
                 </div>
-                {#if $responsiveMode === "mobile" || $responsiveMode === "tablet"}
-                    {#if userInfo}
-                        <div class="columns is-mobile is-centered">
-                            <div class="column is-narrow">
-                                <table
-                                    class="table is-bordered has-text-white has-background-black is-font-face-ubuntu"
-                                >
-                                    <tbody>
-                                        <tr>
-                                            <td><p class="is-size-7">ID :</p></td>
-                                            <td>{$userInfo?.id}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><p class="is-size-7">First Name :</p></td>
-                                            <td>{$userInfo?.first_name}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><p class="is-size-7">Last Name :</p></td>
-                                            <td>{$userInfo?.last_name}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><p class="is-size-7">Email :</p></td>
-                                            <td>{$userInfo?.email}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><p class="is-size-7">Date Joined :</p></td>
-                                            <td
-                                                >{dayjs($userInfo?.date_joined).format(
-                                                    "MMMM D, YYYY - h:mm A"
-                                                )}</td
-                                            >
-                                        </tr>
-                                        <tr>
-                                            <td><p class="is-size-7">Last Active :</p></td>
-                                            <td
-                                                >{dayjs($userInfo?.last_login).format(
-                                                    "MMMM D, YYYY - h:mm A"
-                                                )}</td
-                                            >
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    {:else}
-                        <div class="has-text-centered">
-                            <button class="button is-ghost is-loading is-size-2" />
-                        </div>
-                    {/if}
-                {/if}
             {:else}
                 <div class="navbar-item">
                     <div class="columns is-mobile is-centered">
