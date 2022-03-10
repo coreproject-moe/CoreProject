@@ -7,7 +7,7 @@ from django.views.decorators.vary import vary_on_headers
 from rest_framework.response import Response
 from rest_framework import status, generics, mixins
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.parsers import FormParser, FileUploadParser, JSONParser
+from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.authentication import SessionAuthentication
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
@@ -34,7 +34,8 @@ class UserInfo(
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
     parser_classes = [
-        JSONParser,
+        FormParser,
+        MultiPartParser,
     ]
 
     @method_decorator(cache_page(60 * 60 * 2))
