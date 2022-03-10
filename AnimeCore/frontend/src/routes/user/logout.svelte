@@ -2,12 +2,12 @@
     // This constant is very useful. PLease stay at top
     const homePage = "/anime";
 
-    import { onMount } from "svelte";
+    import { onDestroy, onMount } from "svelte";
 
     import { browser } from "$app/env";
     import { page } from "$app/stores";
 
-    import { isUserAuthenticated, userToken } from "$store/users";
+    import { isUserAuthenticated, userInfo, userToken } from "$store/users";
     import { tokenBlacklistUrl } from "$urls/restEndpoints";
     import { goto } from "$app/navigation";
 
@@ -20,6 +20,22 @@
 
     onMount(async () => {
         timeout = 3000;
+    });
+
+    onDestroy(async () => {
+        // CLeanup
+        $userToken = { refresh: "", access: "" };
+        $isUserAuthenticated = false;
+        $userInfo = {
+            first_name: "",
+            last_name: "",
+            email: "",
+            date_joined: "",
+            username: "",
+            id: 0,
+            last_login: "",
+            avatar: ""
+        };
     });
 
     setInterval(async () => {
@@ -61,7 +77,6 @@
     $: {
         if (browser) {
             if (logoutState && timeout === 0) {
-                $isUserAuthenticated = false;
                 goto(loginpage ? `/user/login?next=${next}` : next);
             }
         }
