@@ -17,7 +17,7 @@
 
     // Constants
     import { baseUrl } from "$urls/baseUrl";
-    import { signupPageUrl, userEditInfoPageUrl } from "$urls/pageUrlEndpoints";
+    import { signupPageUrl } from "$urls/pageUrlEndpoints";
 
     import { goto } from "$app/navigation";
     import { page } from "$app/stores";
@@ -82,7 +82,7 @@
                         $userInfo?.last_login
                     )?.format(
                         "MMMM D, YYYY - h:mm A"
-                    )}<br/><a rel='external' class='is-size-7 has-text-white has-background-black button is-ghost has-no-text-decoration is-rounded has-hover-gray' style='transition:0.2s' href="/user/edit_info"><ion-icon class='pr-2 is-size-5' name="create-outline"></ion-icon>Edit Info</a><a rel='external' class='is-size-7 has-text-white has-background-black button is-ghost has-no-text-decoration is-rounded has-hover-gray' style='transition:0.2s; float:right' href="/user/logout?next=${
+                    )}<br/><a rel='external' class='is-size-7 has-text-white has-background-black button is-ghost has-no-text-decoration is-rounded has-hover-gray' sveltekit:prefetch style='transition:0.2s' href="/user/edit_info"><ion-icon class='pr-2 is-size-5' name="create-outline"></ion-icon>Edit Info</a><a rel='external' class='is-size-7 has-text-white has-background-black button is-ghost has-no-text-decoration is-rounded has-hover-gray' style='transition:0.2s; float:right' sveltekit:prefetch href="/user/logout?next=${
                         $page?.url?.pathname
                     }"><ion-icon class='pr-2 is-size-5' name="log-out-outline"></ion-icon>Log Out</a><br/>`,
                     theme: "black",
