@@ -13,10 +13,10 @@
     import { page } from "$app/stores";
 
     import { baseUrl } from "$urls/baseUrl";
-    import { logoutUser } from "$hooks/users/logout";
     import { userInfoUrl } from "$urls/restEndpoints";
     import { trapFocus } from "$lib/functions/trapFocus";
     import { isUserAuthenticated, userInfo, userToken } from "$store/users";
+    import { goto } from "$app/navigation";
 
     let avatarShown = false;
     let avatarElement: HTMLElement & { _tippy?: Instance };
@@ -141,18 +141,23 @@
             }
 
             try {
-                fetch(userInfoUrl, {
+                await fetch(userInfoUrl, {
                     method: "POST",
                     headers: new Headers({
                         Authorization: `Bearer ${$userToken.access}`
                     }),
                     body: data
-                }).then(() => {
-                    if (data["password"]) {
-                        logoutUser(`/user/login?next=${$page?.url?.pathname}`);
-                    }
+                }).then(async (res) => {
+                    avatarShown = false;
+                    userInfo.set(await res.json());
+                    setTimeout(() => {
+                        avatarShown = true;
+                    }, 10);
+
+                    // if (data["password"]) {
+                    //     goto(`/user/logout?next=${$page?.url?.pathname}&login_page=true`);
+                    // }
                 });
-                console.log(data);
             } catch (err) {
                 if (err instanceof Error) {
                     console.error(`Cannot POST data to ${userInfoUrl} | Reason ${err}`);
@@ -291,9 +296,9 @@
                 <div class="column is-narrow">
                     <div class="title is-size-6 has-text-white is-unselectable">
                         {#if avatarSrc?.includes("https://seccdn.libravatar.org")}
-                            Serving avatar from libravatar.
+                            <p>Serving avatar from libravatar.</p>
                         {:else}
-                            Currently serving avatar locally
+                            <p>Currently serving avatar locally</p>
                         {/if}
                     </div>
                 </div>
