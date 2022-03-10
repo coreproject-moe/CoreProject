@@ -81,7 +81,7 @@
         confirm_password: yup
             ?.string()
             ?.oneOf(
-                [yup.ref("password"), null],
+                [yup?.ref("password"), null],
                 "<b>Password</b> and <b>Confirm Password</b> are not the same"
             ),
 
@@ -141,6 +141,10 @@
             if (values?.avatar) {
                 const avatar = values?.avatar as File;
                 data.append("avatar", avatar);
+            } else {
+                // Thanks random guy from stackoverflow
+                // https://stackoverflow.com/questions/48676365/how-can-i-clear-an-image-with-django-rest-framework
+                data.append("avatar", new File([], ""));
             }
 
             try {
