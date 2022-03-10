@@ -13,7 +13,7 @@
     },
     "devDependencies": {
         "@felte/reporter-tippy": "^1.0.2",
-        "@felte/validator-yup": "^1.0.2",
+        "@felte/validator-yup": "^1.0.1",
         "@fontsource/cantarell": "^4.5.2",
         "@fontsource/roboto": "^4.5.3",
         "@fontsource/ubuntu": "^4.5.3",
