@@ -18,6 +18,8 @@ class UserSerializer(serializers.ModelSerializer):
             "user_permissions",
             "date_joined",
             "last_login",
+            "is_superuser",
+            "is_staff",
             "avatar",
         )
         read_only_fields = [
@@ -27,6 +29,8 @@ class UserSerializer(serializers.ModelSerializer):
             "user_permissions",
             "date_joined",
             "last_login",
+            "is_superuser",
+            "is_staff",
         ]
 
     def validate(self, cleaned_data):
