@@ -118,13 +118,13 @@
         ],
         onSubmit: async (values) => {
             // Consider this the empty dictionary which will have promised values
-            const data = {};
+            const data = new FormData();
 
             if (values?.first_name) {
-                data["first_name"] = values?.first_name;
+                data.append("first_name", values?.first_name);
             }
             if (values?.last_name) {
-                data["last_name"] = values?.last_name;
+                data.append("last_name", values?.last_name);
             }
             if (values?.password && values?.confirm_password) {
                 if (
@@ -132,34 +132,21 @@
                     values?.password !== "" && // Must not be empty. Will cause a massacare at backend
                     values?.password !== "Ex@mple1234" // Are you joking ? How did you escape Yup ?
                 ) {
-                    data["password"] = values?.password;
+                    data.append("password", values?.password);
                 }
             }
-            // if (values?.avatar) {
-            //     function getBase64(file: File) {
-            //         var reader = new FileReader();
-            //         reader.readAsDataURL(file);
-            //         reader.onload = function () {
-            //             data["avatar"] = reader?.result;
-            //         };
-            //         reader.onerror = function (error) {
-            //             console.log("Error: ", error);
-            //         };
-            //     }
-
-            //     const avatar = values?.avatar as File;
-            //     getBase64(avatar);
-            // }
+            if (values?.avatar) {
+                const avatar = values?.avatar as File;
+                data.append("avatar", avatar);
+            }
 
             try {
                 fetch(userInfoUrl, {
                     method: "POST",
                     headers: new Headers({
-                        Accept: "application/json",
-                        "Content-Type": "application/json",
                         Authorization: `Bearer ${$userToken.access}`
                     }),
-                    body: JSON.stringify(data)
+                    body: data
                 }).then(() => {
                     if (data["password"]) {
                         logoutUser(`/user/login?next=${$page?.url?.pathname}`);
