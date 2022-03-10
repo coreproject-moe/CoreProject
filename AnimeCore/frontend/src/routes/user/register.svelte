@@ -2,6 +2,7 @@
     import { browser } from "$app/env";
 
     import * as yup from "yup";
+    import { onDestroy } from "svelte";
     import { createForm } from "felte";
     import tippy, { sticky, type Instance } from "tippy.js";
 
@@ -10,6 +11,11 @@
 
     import { isUserAuthenticated } from "$store/users";
     import { trapFocus } from "$lib/functions/trapFocus";
+
+    onDestroy(async () => {
+        // Cleanup
+        avatarElement?._tippy?.destroy();
+    });
 
     let avatarSrc = "";
     let passwordShown = false;
@@ -171,6 +177,9 @@
 </script>
 
 {#if $isUserAuthenticated}
+    <p class="has-text-white has-text-centered">How can a man be registered twice ? 🤔</p>
+    <p class="has-text-white has-text-centered">Thats a question for the wise. 🧙‍♂️</p>
+{:else}
     <form use:form use:trapFocus>
         <div class="is-flex is-justify-content-center has-text-white is-size-5 has-text-centered">
             <p>↓&nbsp; Avatar &nbsp;↓</p>
@@ -348,7 +357,4 @@
             </div>
         </div>
     </form>
-{:else}
-    <p class="has-text-white has-text-centered">How can a man be registered twice ? 🤔</p>
-    <p class="has-text-white has-text-centered">Thats a question for the wise. 🧙‍♂️</p>
 {/if}

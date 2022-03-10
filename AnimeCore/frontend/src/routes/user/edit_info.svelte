@@ -4,6 +4,7 @@
 
     import * as yup from "yup";
     import { createForm } from "felte";
+    import { onDestroy } from "svelte";
     import tippy, { sticky, type Instance } from "tippy.js";
 
     import reporter from "@felte/reporter-tippy";
@@ -18,6 +19,11 @@
     import { trapFocus } from "$lib/functions/trapFocus";
     import { isUserAuthenticated, userInfo, userToken } from "$store/users";
 
+    onDestroy(async () => {
+        // Cleanup
+        avatarElement?._tippy?.destroy();
+    });
+
     let imageCleared: boolean = false;
     let avatarShown: boolean;
     let avatarElement: HTMLElement & { _tippy?: Instance };
@@ -26,8 +32,12 @@
         if ($userInfo?.avatar) {
             avatarShown = false;
             avatarSrc = `${baseUrl}${$userInfo?.avatar}`;
-            avatarElement?._tippy.show();
             avatarShown = true;
+
+            // Set a timeout because the element is not initialized
+            setTimeout(async () => {
+                avatarElement?._tippy?.show();
+            }, 100);
         } else if ($userInfo?.email) {
             avatarShown = false;
             avatarSrc = `https://seccdn.libravatar.org/avatar/${md5($userInfo?.email ?? "")}/?s=64`;
