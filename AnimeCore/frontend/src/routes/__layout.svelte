@@ -17,7 +17,6 @@
 
     // Constants
     import { baseUrl } from "$urls/baseUrl";
-    import { signupPageUrl } from "$urls/pageUrlEndpoints";
 
     import { goto } from "$app/navigation";
     import { page } from "$app/stores";
@@ -40,12 +39,13 @@
     onDestroy(async () => {
         // Cleanup
         tippyJsAvatar?._tippy?.destroy();
+        animeJsGithubButton?._tippy?.destroy();
     });
 
     // AnimeJs Bindings
     let animeJsArrowBack: HTMLElement;
     let animejsArrowButton: HTMLElement;
-    let animeJsGithubButton: HTMLElement;
+    let animeJsGithubButton: HTMLElement & { _tippy?: Instance };
     // Icons
     let animeJsHomeIcon: HTMLElement;
     let animeJsRequestIcon: HTMLElement;
