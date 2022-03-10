@@ -154,9 +154,9 @@
                         avatarShown = true;
                     }, 10);
 
-                    // if (data["password"]) {
-                    //     goto(`/user/logout?next=${$page?.url?.pathname}&login_page=true`);
-                    // }
+                    if (data.get("password")) {
+                        goto(`/user/logout?next=${$page?.url?.pathname}&login_page=true`);
+                    }
                 });
             } catch (err) {
                 if (err instanceof Error) {

@@ -12,7 +12,8 @@
     let errorMessage: string;
     let logoutState: boolean = false;
     let timeout: number;
-    const loginpage = $page.url.searchParams.get("login_page");
+
+    const loginpage = $page.url.searchParams.get("login_page") ?? false;
     const next = $page.url.searchParams.get("next") ?? homePage;
 
     onMount(async () => {
@@ -41,6 +42,7 @@
                 userToken.set({ refresh: "", access: "" });
                 browser && localStorage.removeItem("tokens");
 
+                // Control the timer. Control the Flow
                 timeout = 3000;
                 logoutState = true;
             })
@@ -74,7 +76,9 @@
         </p>
         <br />
         <p class="has-text-white">
-            If no option is picked we'll redirect to "{next}" {timeout / 1000}s
+            If no option is picked we'll redirect to "{loginpage
+                ? `/user/login?next=${next}`
+                : next}" {timeout / 1000}s
         </p>
     </div>
 {:else}
