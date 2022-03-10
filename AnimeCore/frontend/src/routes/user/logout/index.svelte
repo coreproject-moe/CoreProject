@@ -7,17 +7,21 @@
 
     import { userToken } from "$store/users";
     import { tokenBlacklistUrl } from "$urls/restEndpoints";
-    import { onMount } from "svelte";
+    import { onDestroy, onMount } from "svelte";
 
     let errorMessage: string;
     let logoutState: boolean;
-    let timeout = 3000;
+    let timeout: number;
     let interval: NodeJS.Timer;
-
+    const loginpage = $page.url.searchParams.get("login_page");
     const next = $page.url.searchParams.get("next") ?? homePage;
 
     onMount(async () => {
+        timeout = 3000;
         logoutState = false;
+    });
+    onDestroy(async () => {
+        clearInterval(interval);
     });
 
     setTimeout(async () => {
@@ -38,12 +42,13 @@
                 userToken.set({ refresh: "", access: "" });
                 browser && localStorage.removeItem("tokens");
 
+                timeout = 3000;
                 logoutState = true;
             })
             .catch((error) => {
                 if (typeof error.json === "function") {
-                    error.json().then((jsonError: { detail: string }) => {
-                        errorMessage = jsonError.detail;
+                    error.json().then((jsonError: unknown) => {
+                        errorMessage = JSON.stringify(jsonError);
                     });
                 }
             });
@@ -62,7 +67,6 @@
 
     $: {
         if (logoutState) {
-            timeout = 3000;
             interval = setInterval(async () => {
                 timeout = timeout - 1000;
                 if (timeout <= 0) {
@@ -72,7 +76,13 @@
         }
     }
     // Goto Next page if it exists else redirect to home.
-    $: browser && logoutState && timeout === 0 ? (window.location.href = next) : null;
+    $: {
+        if (browser) {
+            if (logoutState && timeout === 0) {
+                window.location.href = loginpage ? `/user/login?next=${next}` : next;
+            }
+        }
+    }
 </script>
 
 {#if logoutState}
