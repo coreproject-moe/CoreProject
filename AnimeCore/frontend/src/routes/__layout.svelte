@@ -36,7 +36,7 @@
 
         arrowButtonTurned = false;
     });
-    
+
     onDestroy(async () => {
         // Cleanup
         tippyJsAvatar?._tippy?.destroy();
@@ -75,7 +75,7 @@
                 });
             }
 
-            if (tippyJsAvatar) {
+            if (tippyJsAvatar && !tippyJsAvatar?._tippy) {
                 tippy(tippyJsAvatar, {
                     content: `<b>ID</b> : ${$userInfo?.id} <br /> <b>First Name</b> : ${
                         $userInfo?.first_name
