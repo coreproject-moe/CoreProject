@@ -6,7 +6,6 @@
     import { isUserAuthenticated, userToken } from "$store/users";
 
     import { tokenObtainUrl } from "$urls/restEndpoints";
-    import { signupPageUrl } from "$urls/pageUrlEndpoints";
 
     import { projectName } from "$lib/constants/frontend/projectName";
 
@@ -151,7 +150,11 @@
                 <p class="has-text-white is-font-face-ubuntu">
                     New here?
                     <span class="has-text-link">
-                        <a class="has-text-white is-underlined" rel="external" href={signupPageUrl}>
+                        <a
+                            class="has-text-white is-underlined"
+                            sveltekit:prefetch
+                            href="/user/register"
+                        >
                             Register an account
                         </a>
                     </span>
