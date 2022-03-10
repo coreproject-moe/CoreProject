@@ -7,13 +7,13 @@
     import { browser } from "$app/env";
     import { page } from "$app/stores";
 
-    import { isUserAuthenticated, userInfo, userToken } from "$store/users";
-    import { tokenBlacklistUrl } from "$urls/restEndpoints";
     import { goto } from "$app/navigation";
+    import { tokenBlacklistUrl } from "$urls/restEndpoints";
+    import { isUserAuthenticated, userInfo, userToken } from "$store/users";
 
-    let errorMessage: string;
-    let logoutState: boolean = false;
     let timeout: number;
+    let logoutState = false;
+    let errorMessage: string;
 
     const loginpage = $page.url.searchParams.get("login_page") ?? false;
     const next = $page.url.searchParams.get("next") ?? homePage;
