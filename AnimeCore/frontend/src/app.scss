@@ -90,8 +90,6 @@ html {
         pointer-events: none;
     }
     body {
-        overflow-x: hidden;
-
         // Tippy JS theme Black
         .tippy-box[data-theme~="black"] {
             background-color: $black !important;
