@@ -154,7 +154,7 @@
                         avatarShown = true;
                     }, 10);
 
-                    if (data.get("password")) {
+                    if (data.get("password") || data.get("username")) {
                         goto(`/user/logout?next=${$page?.url?.pathname}&login_page=true`);
                     }
                 });
