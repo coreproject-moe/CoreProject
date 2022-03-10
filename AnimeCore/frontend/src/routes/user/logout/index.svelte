@@ -7,22 +7,21 @@
 
     import { userToken } from "$store/users";
     import { tokenBlacklistUrl } from "$urls/restEndpoints";
-    import { onDestroy, onMount } from "svelte";
+    import { onMount } from "svelte";
 
     let errorMessage: string;
-    let logoutState: boolean;
+    let logoutState: boolean = false;
     let timeout: number;
-    let interval: NodeJS.Timer;
     const loginpage = $page.url.searchParams.get("login_page");
     const next = $page.url.searchParams.get("next") ?? homePage;
 
     onMount(async () => {
         timeout = 3000;
-        logoutState = false;
     });
-    onDestroy(async () => {
-        clearInterval(interval);
-    });
+
+    setInterval(async () => {
+        timeout = timeout - 1000;
+    }, 1000);
 
     setTimeout(async () => {
         await fetch(tokenBlacklistUrl, {
@@ -54,27 +53,6 @@
             });
     }, 3000);
 
-    $: {
-        if (!logoutState) {
-            interval = setInterval(async () => {
-                timeout = timeout - 1000;
-                if (timeout <= 0) {
-                    clearInterval(interval);
-                }
-            }, 1000);
-        }
-    }
-
-    $: {
-        if (logoutState) {
-            interval = setInterval(async () => {
-                timeout = timeout - 1000;
-                if (timeout <= 0) {
-                    clearInterval(timeout);
-                }
-            }, 1000);
-        }
-    }
     // Goto Next page if it exists else redirect to home.
     $: {
         if (browser) {
