@@ -1,5 +1,6 @@
 from rest_framework import generics
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 
 from django.http.request import HttpRequest
 from django.views.decorators.cache import cache_page
@@ -13,6 +14,9 @@ from .serializers import AnimeInfoSerializer
 
 class AnimeInfoView(generics.ListCreateAPIView):
     serializer_class = AnimeInfoSerializer
+    permission_class = [
+        AllowAny,
+    ]
 
     @method_decorator(cache_page(60 * 60 * 2))
     def get(self, request: HttpRequest, pk: int) -> Response:
