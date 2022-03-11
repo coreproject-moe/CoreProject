@@ -28,7 +28,7 @@ class CaptureView(
         * SoundCore (music player) Volume
     """
 
-    serializer_class = [CaptureSerializer]
+    serializer_class = CaptureSerializer
     permission_classes = [IsAuthenticated]
     authentication_classes = [
         JWTAuthentication,
@@ -43,7 +43,7 @@ class CaptureView(
     )
     def get(self, request: HttpResponse) -> Response:
         data, _ = CaptureModel.objects.get_or_create(user=request.user)
-        serializer = CaptureSerializer(data, many=False)
+        serializer = self.get_serializer(data, many=False)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def patch(self, request: HttpResponse) -> Response:
