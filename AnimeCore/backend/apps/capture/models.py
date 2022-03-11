@@ -5,7 +5,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
 
 
-class CaptureModel(models.Model):
+class CaptureVideoVolumeModel(models.Model):
     user = models.ForeignKey(
         get_user_model(), related_name="user", on_delete=models.CASCADE
     )

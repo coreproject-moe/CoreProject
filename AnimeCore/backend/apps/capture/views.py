@@ -11,8 +11,8 @@ from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
 from django.views.decorators.vary import vary_on_headers
 
-from .models import CaptureModel
-from .serializers import CaptureSerializer
+from .models import CaptureVideoVolumeModel
+from .serializers import CaptureVideoVolumeSerializer
 
 # Create your views here.
 
@@ -25,10 +25,9 @@ class CaptureVolumeView(
     """
     Captures
         * AnimeCore (video player) volume
-        * SoundCore (music player) Volume
     """
 
-    serializer_class = CaptureSerializer
+    serializer_class = CaptureVideoVolumeSerializer
     permission_classes = [IsAuthenticated]
     authentication_classes = [
         JWTAuthentication,
@@ -42,12 +41,12 @@ class CaptureVolumeView(
         )
     )
     def get(self, request: HttpResponse) -> Response:
-        data, _ = CaptureModel.objects.get_or_create(user=request.user)
+        data, _ = CaptureVideoVolumeModel.objects.get_or_create(user=request.user)
         serializer = self.get_serializer(data, many=False)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def patch(self, request: HttpResponse) -> Response:
-        instance, _ = CaptureModel.objects.get_or_create(user=request.user)
+        instance, _ = CaptureVideoVolumeModel.objects.get_or_create(user=request.user)
         serializer = CaptureSerializer(
             data=request.data,
             instance=instance,

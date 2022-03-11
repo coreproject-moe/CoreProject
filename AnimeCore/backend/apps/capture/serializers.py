@@ -1,11 +1,11 @@
 from rest_framework import serializers
 
-from .models import CaptureModel
+from .models import CaptureVideoVolumeModel
 
 
-class CaptureSerializer(serializers.ModelSerializer):
+class CaptureVideoVolumeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CaptureModel
+        model = CaptureVideoVolumeModel
         fields = (
             "video_volume",
             # "user",
