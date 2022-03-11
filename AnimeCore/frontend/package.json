@@ -14,7 +14,7 @@
     "devDependencies": {
         "@felte/reporter-tippy": "^1.0.3",
         "@felte/validator-yup": "^1.0.2",
-        "@fontsource/cantarell": "^4.5.2",
+        "@fontsource/cantarell": "^4.5.3",
         "@fontsource/roboto": "^4.5.3",
         "@fontsource/ubuntu": "^4.5.3",
         "@fullhuman/postcss-purgecss": "^4.1.3",
