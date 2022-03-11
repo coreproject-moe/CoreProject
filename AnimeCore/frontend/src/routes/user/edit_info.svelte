@@ -179,7 +179,7 @@
                         avatarShown = true;
                     }, 10);
 
-                    if (data.get("password") || data.get("username")) {
+                    if (data.get("password") || data.get("username") !== $userInfo?.username) {
                         goto(`/user/logout?next=${$page?.url?.pathname}&login_page=true`);
                     }
                 });
@@ -450,7 +450,7 @@
                             />
                             <span
                                 class="icon is-small is-right is-clickable is-unselectable"
-                                on:click={() => {
+                                on:click|preventDefault={() => {
                                     passwordShown = !passwordShown;
                                 }}
                             >

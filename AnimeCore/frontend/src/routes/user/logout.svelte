@@ -22,22 +22,6 @@
         timeout = 3000;
     });
 
-    onDestroy(async () => {
-        // CLeanup
-        $userToken = { refresh: "", access: "" };
-        $isUserAuthenticated = false;
-        $userInfo = {
-            first_name: "",
-            last_name: "",
-            email: "",
-            date_joined: "",
-            username: "",
-            id: 0,
-            last_login: "",
-            avatar: ""
-        };
-    });
-
     setInterval(async () => {
         timeout = timeout - 1000;
     }, 1000);
@@ -77,6 +61,20 @@
     $: {
         if (browser) {
             if (logoutState && timeout === 0) {
+                // CLeanup
+                $userToken = { refresh: "", access: "" };
+                $isUserAuthenticated = false;
+                $userInfo = {
+                    first_name: "",
+                    last_name: "",
+                    email: "",
+                    date_joined: "",
+                    username: "",
+                    id: 0,
+                    last_login: "",
+                    avatar: ""
+                };
+                // Redirect to login page
                 goto(loginpage ? `/user/login?next=${next}` : next);
             }
         }

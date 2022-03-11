@@ -116,7 +116,7 @@
                         />
                         <span
                             class="icon is-small is-right is-clickable is-unselectable"
-                            on:click={async () => {
+                            on:click|preventDefault={async () => {
                                 passwordShown = !passwordShown;
                             }}
                         >
