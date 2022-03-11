@@ -6,9 +6,9 @@ from django.views.decorators.vary import vary_on_headers
 
 from rest_framework.response import Response
 from rest_framework import status, generics, mixins
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.authentication import SessionAuthentication
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
 
@@ -61,10 +61,17 @@ class UserInfo(
 
 
 class Register(generics.CreateAPIView):
+    """
+    * Allows a user to be registered
+    """
+
     serializer_class = UserSerializer
     parser_classes = [
         FormParser,
         MultiPartParser,
+    ]
+    permission_classes = [
+        AllowAny,
     ]
 
     def post(self, request: HttpRequest) -> Response:
@@ -72,6 +79,6 @@ class Register(generics.CreateAPIView):
 
         if serializer.is_valid():
             get_user_model().objects.create_user(**serializer.validated_data)
-            return Response(serializer.validated_data, status=status.HTTP_202_ACCEPTED)
+            return Response(status=status.HTTP_202_ACCEPTED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
