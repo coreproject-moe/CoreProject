@@ -9,8 +9,10 @@
     import reporter from "@felte/reporter-tippy";
     import { validator } from "@felte/validator-yup";
 
-    import { isUserAuthenticated } from "$store/users";
+    import { isUserAuthenticated, userToken } from "$store/users";
     import { trapFocus } from "$lib/functions/trapFocus";
+    import { registerEndpoint } from "$urls/restEndpoints";
+    import { goto } from "$app/navigation";
 
     onDestroy(async () => {
         // Cleanup
@@ -123,7 +125,41 @@
             })
         ],
         onSubmit: async (values) => {
-            console.log(values);
+            const data = new FormData();
+
+            data.append("first_name", values?.first_name);
+            data.append("last_name", values?.last_name);
+            data.append("username", values?.username);
+            data.append("email", values?.email);
+            data.append("avatar", values?.avatar);
+
+            if (
+                values?.password === values?.confirm_password && // Why are you not same ?
+                values?.password !== "" && // Must not be empty. Will cause a massacare at backend
+                values?.password !== "Ex@mple1234" // Are you joking ? How did you escape Yup ?
+            ) {
+                data.append("password", values?.password);
+            } else {
+                console.error(
+                    "Confirm Password and Password are not same. Some guy tried to bypass yup"
+                );
+                return;
+            }
+
+            try {
+                await fetch(registerEndpoint, {
+                    method: "POST",
+                    body: data
+                }).then(async (res) => {
+                    if (res?.ok) {
+                        goto("/user/login");
+                    }
+                });
+            } catch (err) {
+                if (err instanceof Error) {
+                    console.error(`Cannot POST data to ${registerEndpoint} | Reason ${err}`);
+                }
+            }
         }
     });
 
