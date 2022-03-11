@@ -47,7 +47,7 @@ class CaptureVolumeView(
 
     def patch(self, request: HttpResponse) -> Response:
         instance, _ = CaptureVideoVolumeModel.objects.get_or_create(user=request.user)
-        serializer = CaptureSerializer(
+        serializer = self.get_serializer(
             data=request.data,
             instance=instance,
         )
