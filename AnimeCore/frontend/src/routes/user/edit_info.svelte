@@ -198,14 +198,18 @@
                 tippy(dateJoined, {
                     content: "Date joined",
                     placement: "top",
-                    theme: "black"
+                    theme: "black",
+                    hideOnClick: false,
+                    appendTo: () => document.body
                 });
             }
             if (lastLogin) {
                 tippy(lastLogin, {
                     content: "Last Login",
                     placement: "top",
-                    theme: "black"
+                    theme: "black",
+                    hideOnClick: false,
+                    appendTo: () => document.body
                 });
             }
             if (avatarElement) {
@@ -224,8 +228,8 @@
                     interactive: true,
                     hideOnClick: false,
                     trigger: "manual",
-                    appendTo: () => document.body,
-                    plugins: [sticky]
+                    plugins: [sticky],
+                    appendTo: () => document.body
                 });
             }
         }
