@@ -85,11 +85,18 @@
                         $userInfo?.date_joined
                     )?.format("MMMM D, YYYY - h:mm A")}<br/><b>Last Active</b> : ${dayjs(
                         $userInfo?.last_login
-                    )?.format(
-                        "MMMM D, YYYY - h:mm A"
-                    )}<br/><div class='pt-2'><a class='is-size-7 has-text-white has-background-black button is-ghost has-no-text-decoration is-rounded has-hover-gray' sveltekit:prefetch style='transition:0.2s' href="/user/edit_info"><ion-icon class='pr-2 is-size-5' name="create-outline"></ion-icon>Edit Info</a><a class='is-size-7 has-text-white has-background-black button is-ghost has-no-text-decoration is-rounded has-hover-gray' style='transition:0.2s; float:right' sveltekit:prefetch href="/user/logout?next=${
-                        $page?.url?.pathname
-                    }"><ion-icon class='pr-2 is-size-5' name="log-out-outline"></ion-icon>Log Out</a><br/></div>`,
+                    )?.format("MMMM D, YYYY - h:mm A")}<br/>
+                    <div class='pt-2'>
+                        <a class='is-size-7 has-text-white has-background-black button is-ghost has-no-text-decoration is-rounded has-hover-gray' sveltekit:prefetch style='transition:0.2s' href="/user/edit_info">
+                            <ion-icon class='pr-2 is-size-5' name="create-outline" />Edit Info
+                        </a>
+                        <a class='is-size-7 has-text-white has-background-black button is-ghost has-no-text-decoration is-rounded has-hover-gray' style='transition:0.2s; float:right' sveltekit:prefetch href="/user/logout?next=${
+                            $page?.url?.pathname
+                        }">
+                            <ion-icon class='pr-2 is-size-5' name="log-out-outline" />Log Out
+                        </a>
+                    </div>
+                    <br/>`,
                     theme: "black",
                     trigger: "click",
                     allowHTML: true,
