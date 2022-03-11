@@ -6,7 +6,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class CaptureVideoVolumeModel(models.Model):
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         get_user_model(), related_name="user", on_delete=models.CASCADE
     )
     video_volume = models.IntegerField(
@@ -22,3 +22,7 @@ class CaptureVideoVolumeModel(models.Model):
 
     class Meta:
         verbose_name = "User Info Capture Model"
+
+
+class CaptureVideoTimeStampModel(models.Model):
+    pass
