@@ -1,7 +1,7 @@
 <script lang="ts">
     // Import Swiper Svelte components
     import { Swiper, SwiperSlide } from "swiper/svelte";
-    import { projectName } from "$lib/constants/frontend/projectName";
+    import { projectName } from "$lib/constants/frontend/project";
 
     import { responsiveMode } from "$store/responsive";
 

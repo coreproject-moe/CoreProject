@@ -9,7 +9,7 @@
     import { vimeJSVolume } from "$store/vimeJs";
     import { responsiveMode } from "$store/responsive";
 
-    import { projectName } from "$lib/constants/frontend/projectName";
+    import { projectName } from "$lib/constants/frontend/project";
     import { snakeCaseToTitleCase } from "$lib/functions/snakeCaseToTitleCase";
     import { goto } from "$app/navigation";
 

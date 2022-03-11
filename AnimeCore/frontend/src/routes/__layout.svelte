@@ -17,10 +17,11 @@
 
     // Constants
     import { baseUrl } from "$urls/baseUrl";
+    import { githubUrl } from "$lib/constants/frontend/project";
 
-    import { goto } from "$app/navigation";
     import { page } from "$app/stores";
     import { browser } from "$app/env";
+    import { goto } from "$app/navigation";
 
     let arrowButtonTurned: boolean;
 
@@ -284,7 +285,7 @@
                         });
                     }}
                     on:click={async () => {
-                        goto("https://github.com/baseplate-admin/CoreProject");
+                        goto(githubUrl);
                     }}
                 >
                     <ion-icon

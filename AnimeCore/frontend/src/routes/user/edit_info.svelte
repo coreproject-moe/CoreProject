@@ -18,7 +18,7 @@
     import { userInfoUrl } from "$urls/restEndpoints";
     import { trapFocus } from "$lib/functions/trapFocus";
     import { isUserAuthenticated, userInfo, userToken } from "$store/users";
-    import { projectName } from "$lib/constants/frontend/projectName";
+    import { projectName } from "$lib/constants/frontend/project";
 
     onDestroy(async () => {
         // Cleanup
