@@ -19,8 +19,8 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     #    Pages
     # ============
-    path("edit/", include("pages.edit.urls")),
-    path("upload/", include("pages.upload.urls")),
+    path("edit/", include("apps.edit.urls")),
+    path("upload/", include("apps.upload.urls")),
     #   Api
     # ========
     # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html#installation
@@ -30,6 +30,6 @@ urlpatterns = [
         "api/v1/token/blacklist/", TokenBlacklistView.as_view(), name="token_blacklist"
     ),
     # Rest endpoints ( Note that theres an 'underscore' before every route )
-    path("api/v1/user/", include("api.v1.user.urls")),
-    path("api/v1/capture/", include("api.v1.capture.urls")),
+    path("api/v1/user/", include("apps.user.urls")),
+    path("api/v1/capture/", include("apps.capture.urls")),
 ]
