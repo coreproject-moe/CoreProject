@@ -13,11 +13,11 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.urls import path
 from django.urls import include
-from django.conf.urls.static import static
 from django.conf import settings
+from django.contrib import admin
+from django.conf.urls.static import static
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -30,11 +30,6 @@ urlpatterns = [
     #    Pages
     # ============
     path("edit/", include("pages.edit.urls")),
-    path(
-        # Special Underscore case
-        "_authentication/",
-        include("pages.authentication.urls"),
-    ),
     path("upload/", include("pages.upload.urls")),
     #   Api
     # ========
@@ -45,8 +40,8 @@ urlpatterns = [
         "api/v1/token/blacklist/", TokenBlacklistView.as_view(), name="token_blacklist"
     ),
     # Rest endpoints ( Note that theres an 'underscore' before every route )
-    path("api/v1/users/", include("api.v1._user.urls")),
-    path("api/v1/capture/", include("api.v1._capture.urls")),
+    path("api/v1/users/", include("api.v1.user.urls")),
+    path("api/v1/capture/", include("api.v1.capture.urls")),
 ]
 
 if settings.DEBUG:

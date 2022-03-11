@@ -11,7 +11,6 @@ from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.authentication import SessionAuthentication
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-
 from .serializers import UserSerializer
 
 # Create your views here.

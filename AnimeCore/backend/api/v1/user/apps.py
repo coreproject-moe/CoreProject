@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class CaptureConfig(AppConfig):
+class UsersConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "api.v1._capture"
+    name = "api.v1.user"
