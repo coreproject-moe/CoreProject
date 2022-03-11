@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class CaptureConfig(AppConfig):
+class UploadConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "api.v1.capture"
+    name = "apps.upload"

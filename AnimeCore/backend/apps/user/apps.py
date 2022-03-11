@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class UploadConfig(AppConfig):
+class UsersConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "pages.upload"
+    name = "apps.user"

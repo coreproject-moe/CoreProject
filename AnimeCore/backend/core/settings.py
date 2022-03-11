@@ -48,11 +48,11 @@ INSTALLED_APPS = [
     "custom.users",
     "custom.commands",
     # Pages
-    "pages.edit",
-    "pages.upload",
+    "apps.edit",
+    "apps.upload",
     # Rest stuff
-    "api.v1.capture",
-    "api.v1.user",
+    "apps.capture",
+    "apps.user",
 ]
 
 MIDDLEWARE = [
