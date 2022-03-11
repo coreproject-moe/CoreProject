@@ -70,7 +70,6 @@ class CaptureVideoSerializer(serializers.ModelSerializer):
                                 "episode_name"
                             )
                         )
-                        capture_episode_model_created = False
 
                     except ObjectDoesNotExist:
                         capture_episode_model = CaptureEpisodeModel.objects.create(
@@ -79,14 +78,14 @@ class CaptureVideoSerializer(serializers.ModelSerializer):
                             ),
                             user=get_user_model().objects.get(username=user),
                         )
-                        capture_episode_model_created = True
+
+                        # Save it so we can add it to episode list.
+                        capture_episode_model.save()
+                        capture_anime_model.episodes.add(capture_episode_model)
 
                     finally:
                         capture_episode_model.timestamp = i.get("timestamp")
                         capture_episode_model.save()
-
-                        if capture_episode_model_created:
-                            capture_anime_model.episodes.add(capture_episode_model)
 
         if video_volume:
             instance.video_volume = video_volume
