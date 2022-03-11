@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from .models import CaptureVideoVolumeModel
+from .models import CaptureVideoModel
 
 # Register your models here.
 
-admin.site.register(CaptureVideoVolumeModel)
+admin.site.register(CaptureVideoModel)

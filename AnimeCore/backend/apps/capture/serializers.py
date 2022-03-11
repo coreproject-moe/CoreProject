@@ -1,18 +1,13 @@
 from rest_framework import serializers
 
-from .models import CaptureVideoVolumeModel, CaptureVideoTimeStampModel
+from .models import CaptureVideoModel
 
 
-class CaptureVideoVolumeSerializer(serializers.ModelSerializer):
+class CaptureVideoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = CaptureVideoVolumeModel
+        model = CaptureVideoModel
         fields = (
             "video_volume",
+            "video_timestamp"
             # "user",
         )
-
-
-class CaptureVideoTimeStampSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CaptureVideoTimeStampModel
-        fields = ("video_timestamp",)
