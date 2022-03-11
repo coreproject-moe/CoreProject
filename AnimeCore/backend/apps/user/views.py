@@ -17,7 +17,7 @@ from .serializers import UserSerializer
 # Create your views here.
 
 
-class UserInfo(generics.ListCreateAPIView):
+class UserInfoView(generics.ListCreateAPIView):
     """
     * Shows User Info.
     * Accpets User Info changes.
@@ -56,7 +56,7 @@ class UserInfo(generics.ListCreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class Register(generics.CreateAPIView):
+class RegisterView(generics.CreateAPIView):
     """
     * Allows a user to be registered
     """

@@ -11,7 +11,7 @@ from .serializers import AnimeInfoSerializer
 # Create your views here.
 
 
-class AnimeInfo(generics.ListCreateAPIView):
+class AnimeInfoView(generics.ListCreateAPIView):
     serializer_class = AnimeInfoSerializer
 
     @method_decorator(cache_page(60 * 60 * 2))

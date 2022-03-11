@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import CaptureView
+from .views import CaptureVolumeView
 
 urlpatterns = [
-    path("", CaptureView.as_view(), name="api_capture"),
+    path("video_volume/", CaptureVolumeView.as_view(), name="api_capture_video_volume"),
 ]

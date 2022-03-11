@@ -1,7 +1,7 @@
 from django.urls import path
 
-from .views import AnimeInfo
+from .views import AnimeInfoView
 
 urlpatterns = [
-    path("anime/<int:pk>/", AnimeInfo.as_view(), name="api_anime_info"),
+    path("anime/<int:pk>/", AnimeInfoView.as_view(), name="api_anime_info"),
 ]

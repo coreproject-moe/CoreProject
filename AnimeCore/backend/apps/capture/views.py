@@ -17,7 +17,7 @@ from .serializers import CaptureSerializer
 # Create your views here.
 
 
-class CaptureView(
+class CaptureVolumeView(
     generics.GenericAPIView,
     mixins.UpdateModelMixin,
     mixins.ListModelMixin,
