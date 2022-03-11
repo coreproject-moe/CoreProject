@@ -23,7 +23,7 @@ class CaptureEpisodeModel(models.Model):
 class CaptureAnimeNameModel(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     anime = models.ForeignKey(AnimeInfoModel, on_delete=models.CASCADE)
-    episdoes = models.ManyToManyField(CaptureEpisodeModel)
+    episodes = models.ManyToManyField(CaptureEpisodeModel)
 
     def __str__(self) -> str:
         return f"Anime : {self.anime} | User : {self.user.username}"
@@ -39,7 +39,7 @@ class CaptureVideoModel(models.Model):
         ],
     )
 
-    timestamp = models.ManyToManyField(CaptureAnimeNameModel)
+    timestamps = models.ManyToManyField(CaptureAnimeNameModel)
 
     def __str__(self) -> str:
         return f"User = {self.user.username} | Video Volume = {self.video_volume}"
