@@ -89,7 +89,7 @@
         <p class="has-text-white">Where do you wanna go?</p>
         <br />
         <p class="has-text-white">
-            <a class="has-text-white is-underlined" href="user/login">Login Page</a> |
+            <a class="has-text-white is-underlined" href="/user/login">Login Page</a> |
             <a class="has-text-white is-underlined" href={homePage}>Home Page</a>
         </p>
         <br />
