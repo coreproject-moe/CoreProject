@@ -7,7 +7,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 # Create your models here.
 
 
-class CaptureVideoVolumeModel(models.Model):
+class CaptureVideoModel(models.Model):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
     video_volume = models.IntegerField(
         default=50,
@@ -16,16 +16,6 @@ class CaptureVideoVolumeModel(models.Model):
             MinValueValidator(0),
         ],
     )
-
-    def __str__(self) -> str:
-        return f"User = {self.user.username} | Video Volume = {self.video_volume}"
-
-    class Meta:
-        verbose_name = "User Video Volume Capture Model"
-
-
-class CaptureVideoTimeStampModel(models.Model):
-    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
     video_timestamp = models.IntegerField(
         default=0,
         validators=[
@@ -34,7 +24,7 @@ class CaptureVideoTimeStampModel(models.Model):
     )
 
     def __str__(self) -> str:
-        return f"User = {self.user.username} | Video Time stamp = {datetime.timedelta(self.video_volume)}"
+        return f"User = {self.user.username} | Video Volume = {self.video_volume} | Video Time stamp = {datetime.timedelta(self.video_volume)}"
 
     class Meta:
-        verbose_name = "User Video Timestamp Capture Model"
+        verbose_name = "User Video Capture Model"
