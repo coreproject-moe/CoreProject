@@ -135,6 +135,7 @@
             // Consider this the empty dictionary which will have promised values
             const data = new FormData();
 
+            data.append("username", $userInfo?.username);
             if (values?.first_name) {
                 data.append("first_name", values?.first_name);
             }
