@@ -11,6 +11,7 @@ from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.authentication import SessionAuthentication
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
+
 from .serializers import UserSerializer
 
 # Create your views here.
@@ -19,7 +20,7 @@ from .serializers import UserSerializer
 class UserInfo(
     generics.GenericAPIView,
     mixins.UpdateModelMixin,
-    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
 ):
     """
     * Shows User Info.
@@ -27,8 +28,8 @@ class UserInfo(
     """
 
     authentication_classes = [
-        SessionAuthentication,
         JWTAuthentication,
+        SessionAuthentication,
     ]
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
@@ -45,15 +46,32 @@ class UserInfo(
     )
     def get(self, request: HttpRequest) -> Response:
         data = get_user_model().objects.get(id=request.user.id)
-        serializer = UserSerializer(data)
+        serializer = self.get_serializer(data)
         return Response(serializer.data)
 
     def post(self, request: HttpRequest) -> Response:
         instance = get_user_model().objects.get(id=request.user.id)
-        serializer = UserSerializer(data=request.data, instance=instance)
+        serializer = self.get_serializer(data=request.data, instance=instance)
 
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class Register(generics.CreateAPIView):
+    serializer_class = UserSerializer
+    parser_classes = [
+        FormParser,
+        MultiPartParser,
+    ]
+
+    def post(self, request: HttpRequest) -> Response:
+        serializer = self.get_serializer(data=request.data)
+
+        if serializer.is_valid():
+            get_user_model().objects.create_user(**serializer.validated_data)
+            return Response(serializer.validated_data, status=status.HTTP_202_ACCEPTED)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
