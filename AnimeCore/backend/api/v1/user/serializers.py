@@ -15,7 +15,7 @@ class UserSerializer(serializers.ModelSerializer):
             "username",
             "email",
             "password",
-            # "user_permissions",
+            "user_permissions",
             "date_joined",
             "last_login",
             "is_superuser",
@@ -24,19 +24,12 @@ class UserSerializer(serializers.ModelSerializer):
         )
         read_only_fields = [
             "id",
-            # "user_permissions",
+            "user_permissions",
             "date_joined",
             "last_login",
             "is_superuser",
             "is_staff",
         ]
-
-    def validate_password(self, cleaned_data):
-        if cleaned_data == "":
-            return ""
-
-        hashed_password = make_password(cleaned_data)
-        return hashed_password
 
     def validate_email(self, cleaned_data):
         # If email exists whats the point of adding another user to it ?
@@ -45,5 +38,13 @@ class UserSerializer(serializers.ModelSerializer):
 
         return cleaned_data
 
-    def create(self, validated_data):
-        return super().create(validated_data)
+    def validate(self, cleaned_data):
+        password: str = cleaned_data.get("password", None)
+
+        if password:
+            hashed_password = make_password(password)
+            cleaned_data["password"] = hashed_password
+        else:
+            cleaned_data.pop("password", None)
+
+        return cleaned_data
