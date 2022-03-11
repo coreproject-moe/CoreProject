@@ -67,47 +67,45 @@
     let tippyJsAvatar: HTMLElement & { _tippy?: Instance };
 
     $: {
-        if (browser) {
-            if (animeJsGithubButton) {
-                tippy(animeJsGithubButton, {
-                    content: "Github",
-                    theme: "black",
-                    touch: false
-                });
-            }
+        if (animeJsGithubButton) {
+            tippy(animeJsGithubButton, {
+                content: "Github",
+                theme: "black",
+                touch: false
+            });
+        }
 
-            if (tippyJsAvatar && !tippyJsAvatar?._tippy) {
-                tippy(tippyJsAvatar, {
-                    content: `<b>ID</b> : ${$userInfo?.id} <br /> <b>First Name</b> : ${
-                        $userInfo?.first_name
-                    }<br/> <b>Last Name</b> : ${$userInfo?.last_name}<br/> <b>Username</b> : ${
-                        $userInfo?.username
-                    }<br/> <b>Email</b> : ${$userInfo?.email}<br/><b>Date Joined</b> : ${dayjs(
-                        $userInfo?.date_joined
-                    )?.format("MMMM D, YYYY - h:mm A")}<br/><b>Last Active</b> : ${dayjs(
-                        $userInfo?.last_login
-                    )?.format("MMMM D, YYYY - h:mm A")}<br/>
+        if (tippyJsAvatar && !tippyJsAvatar?._tippy) {
+            tippy(tippyJsAvatar, {
+                content: `<b>ID</b> : ${$userInfo?.id} <br /> <b>First Name</b> : ${
+                    $userInfo?.first_name
+                }<br/> <b>Last Name</b> : ${$userInfo?.last_name}<br/> <b>Username</b> : ${
+                    $userInfo?.username
+                }<br/> <b>Email</b> : ${$userInfo?.email}<br/><b>Date Joined</b> : ${dayjs(
+                    $userInfo?.date_joined
+                )?.format("MMMM D, YYYY - h:mm A")}<br/><b>Last Active</b> : ${dayjs(
+                    $userInfo?.last_login
+                )?.format("MMMM D, YYYY - h:mm A")}<br/>
                     <div class='pt-2'>
                         <a class='is-size-7 has-text-white has-background-black button is-ghost has-no-text-decoration is-rounded has-hover-gray' sveltekit:prefetch style='transition:0.2s' href="/user/edit_info">
-                            <ion-icon class='pr-2 is-size-5' name="create-outline" />Edit Info
+                            <ion-icon class='pr-2 is-size-5' name="create-outline"></ion-icon>Edit Info
                         </a>
                         <a class='is-size-7 has-text-white has-background-black button is-ghost has-no-text-decoration is-rounded has-hover-gray' style='transition:0.2s; float:right' sveltekit:prefetch href="/user/logout?next=${
                             $page?.url?.pathname
                         }">
-                            <ion-icon class='pr-2 is-size-5' name="log-out-outline" />Log Out
+                            <ion-icon class='pr-2 is-size-5' name="log-out-outline"></ion-icon>Log Out
                         </a>
                     </div>
                     <br/>`,
-                    theme: "black",
-                    trigger: "click",
-                    allowHTML: true,
-                    interactive: true,
-                    sticky: true,
-                    placement: "bottom",
-                    plugins: [sticky],
-                    appendTo: () => document.body
-                });
-            }
+                theme: "black",
+                trigger: "click",
+                allowHTML: true,
+                interactive: true,
+                sticky: true,
+                placement: "bottom",
+                plugins: [sticky],
+                appendTo: () => browser && document.body
+            });
         }
     }
 </script>
@@ -154,13 +152,13 @@
                     ? 'pl-2 pr-2'
                     : 'ml-2'} {$page.url.pathname === '/anime' ? 'hover' : ''}
 					"
-                on:mouseenter={async () => {
+                on:mouseenter|preventDefault={async () => {
                     anime({
                         targets: [animeJsHomeIcon],
                         color: "#e50000"
                     });
                 }}
-                on:mouseleave={async () => {
+                on:mouseleave|preventDefault={async () => {
                     anime({
                         targets: [animeJsHomeIcon],
                         color: "#d9d9d9"
@@ -182,13 +180,13 @@
                     'mobile' || $responsiveMode === 'tablet'
                     ? 'pl-2 pr-2'
                     : 'ml-2'}"
-                on:mouseenter={async () => {
+                on:mouseenter|preventDefault={async () => {
                     anime({
                         targets: [animeJsRequestIcon],
                         color: "#e50000"
                     });
                 }}
-                on:mouseleave={async () => {
+                on:mouseleave|preventDefault={async () => {
                     anime({
                         targets: [animeJsRequestIcon],
                         color: "#d9d9d9"
@@ -217,13 +215,13 @@
                     'mobile' || $responsiveMode === 'tablet'
                     ? 'pl-2 pr-2'
                     : 'ml-2'} {$page.url.pathname.includes('faq') ? 'hover' : ''}"
-                on:mouseenter={async () => {
+                on:mouseenter|preventDefault={async () => {
                     anime({
                         targets: [animeJsFaqIcon],
                         color: "#e50000"
                     });
                 }}
-                on:mouseleave={async () => {
+                on:mouseleave|preventDefault={async () => {
                     anime({
                         targets: [animeJsFaqIcon],
                         color: "#d9d9d9"
@@ -264,7 +262,7 @@
                         : ''}"
                     bind:this={animeJsGithubButton}
                     style="transform:translateX(40px);scale(0.1);"
-                    on:mouseenter={async () => {
+                    on:mouseenter|preventDefault={async () => {
                         anime({
                             targets: [animeJsGithubIcon],
                             color: "hsl(0, 0%, 100%)"
@@ -274,7 +272,7 @@
                             scale: 1.3
                         });
                     }}
-                    on:mouseleave={async () => {
+                    on:mouseleave|preventDefault={async () => {
                         anime({
                             targets: [animeJsGithubIcon],
                             color: "hsl(0, 0%, 80%)"
@@ -284,7 +282,7 @@
                             scale: 1
                         });
                     }}
-                    on:click={async () => {
+                    on:click|preventDefault={async () => {
                         goto(githubUrl);
                     }}
                 >
@@ -303,7 +301,7 @@
                         ? 'is-hidden'
                         : ''}"
                     bind:this={animejsArrowButton}
-                    on:mouseenter={async () => {
+                    on:mouseenter|preventDefault={async () => {
                         anime({
                             targets: [animeJsArrowBack],
                             color: "#e50000"
@@ -313,7 +311,7 @@
                             scale: 1.2
                         });
                     }}
-                    on:mouseleave={async () => {
+                    on:mouseleave|preventDefault={async () => {
                         anime({
                             targets: [animeJsArrowBack],
                             color: "hsl(0, 0%, 80%)"
@@ -367,7 +365,8 @@
                     />
                 </button>
             </div>
-            {#if $isUserAuthenticated}
+            <!-- Username is the most unique thing to listen to -->
+            {#if $isUserAuthenticated && $userInfo?.username}
                 <div class="columns is-mobile is-centered">
                     <div class="column is-narrow">
                         <figure class="image is-48x48 pt-2 pl-2">
@@ -377,7 +376,6 @@
                                 To reflect that change, we need to do optimistic update,
                                 which this if else statement is doing down.
                             -->
-
                             {#if $userInfo.avatar}
                                 <div
                                     bind:this={tippyJsAvatar}
@@ -405,7 +403,8 @@
                                         alt={$userInfo?.username}
                                         src="/placeholder-64x64.avif"
                                     />
-                                </div>{/if}
+                                </div>
+                            {/if}
                         </figure>
                     </div>
                 </div>
