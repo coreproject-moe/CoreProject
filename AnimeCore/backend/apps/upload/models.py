@@ -12,24 +12,14 @@ class FileField:
 
     @staticmethod
     def episode_cover(instance, filename) -> str:
-        return Path("episode_cover", instance.anime.anime_name, filename)
+        return Path("episode_cover", filename)
 
     @staticmethod
     def episode_upload(instance, filename) -> str:
-        return Path("episode", instance.anime.anime_name, filename)
+        return Path("episode", filename)
 
 
 # Create your models here.
-
-
-class AnimeInfoModel(models.Model):
-    anime_name = models.CharField(max_length=1024)
-    anime_cover = models.ImageField(
-        upload_to=FileField.anime_cover, default=None, blank=True, null=True
-    )
-
-    def __str__(self) -> str:
-        return f"{self.anime_name}"
 
 
 class EpisodeModel(models.Model):
@@ -42,8 +32,17 @@ class EpisodeModel(models.Model):
         upload_to=FileField.episode_upload, default=None, blank=True, null=True
     )
     episode_summary = models.TextField(default="", blank=True, null=True)
-    # Many to one relationship
-    anime = models.ForeignKey(AnimeInfoModel, on_delete=models.CASCADE, default=None)
 
     def __str__(self) -> str:
         return f"{self.episode_number}. {self.episode_name}"
+
+
+class AnimeInfoModel(models.Model):
+    anime_name = models.CharField(max_length=1024)
+    anime_cover = models.ImageField(
+        upload_to=FileField.anime_cover, default=None, blank=True, null=True
+    )
+    episodes = models.ManyToManyField(EpisodeModel)
+
+    def __str__(self) -> str:
+        return f"{self.anime_name}"
