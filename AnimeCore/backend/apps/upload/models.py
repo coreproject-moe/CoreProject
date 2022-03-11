@@ -41,7 +41,7 @@ class EpisodeModel(models.Model):
     episode_file = models.FileField(
         upload_to=FileField.episode_upload, default=None, blank=True, null=True
     )
-
+    episode_summary = models.TextField(default="", blank=True, null=True)
     # Many to one relationship
     anime = models.ForeignKey(AnimeInfoModel, on_delete=models.CASCADE, default=None)
 
