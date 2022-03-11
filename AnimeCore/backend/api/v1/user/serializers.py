@@ -4,8 +4,6 @@ from django.contrib.auth.hashers import make_password
 
 
 class UserSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(required=False, write_only=True)
-
     class Meta:
         model = get_user_model()
         fields = (
@@ -30,6 +28,12 @@ class UserSerializer(serializers.ModelSerializer):
             "is_superuser",
             "is_staff",
         ]
+        extra_kwargs = {
+            "password": {
+                "required": False,
+                "write_only": True,
+            }
+        }
 
     def validate_email(self, cleaned_data):
         # If email exists whats the point of adding another user to it ?
