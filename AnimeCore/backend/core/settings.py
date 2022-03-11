@@ -139,7 +139,7 @@ AUTH_USER_MODEL = "users.CustomUser"
 # Username or Email backend
 # https://stackoverflow.com/questions/25316765/log-in-user-using-either-email-address-or-username-in-django#35836674
 
-AUTHENTICATION_BACKENDS = ["custom.user.backends.EmailOrUsernameModelBackend"]
+AUTHENTICATION_BACKENDS = ["custom.users.backends.EmailOrUsernameModelBackend"]
 
 # Password hashers
 # https://docs.djangoproject.com/en/3.2/topics/auth/passwords/#using-argon2-with-django
@@ -196,6 +196,10 @@ REST_FRAMEWORK = {
     "DEFAULT_PARSER_CLASSES": [
         "rest_framework.parsers.JSONParser",
     ],
+}
+
+SIMPLE_JWT = {
+    "UPDATE_LAST_LOGIN": True,
 }
 
 # django-cors-headers settings
