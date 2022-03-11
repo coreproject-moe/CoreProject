@@ -1,5 +1,6 @@
 <script lang="ts">
     import { browser } from "$app/env";
+    import { goto } from "$app/navigation";
 
     import * as yup from "yup";
     import { onDestroy } from "svelte";
@@ -9,10 +10,10 @@
     import reporter from "@felte/reporter-tippy";
     import { validator } from "@felte/validator-yup";
 
-    import { isUserAuthenticated, userToken } from "$store/users";
+    import { isUserAuthenticated } from "$store/users";
     import { trapFocus } from "$lib/functions/trapFocus";
     import { registerEndpoint } from "$urls/restEndpoints";
-    import { goto } from "$app/navigation";
+    import { projectName } from "$lib/constants/frontend/projectName";
 
     onDestroy(async () => {
         // Cleanup
@@ -211,6 +212,10 @@
         }
     }
 </script>
+
+<svelte:head>
+    <title>Register Page | {projectName}</title>
+</svelte:head>
 
 {#if $isUserAuthenticated}
     <p class="has-text-white has-text-centered">How can a man be registered twice ? 🤔</p>

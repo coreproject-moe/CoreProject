@@ -18,6 +18,7 @@
     import { userInfoUrl } from "$urls/restEndpoints";
     import { trapFocus } from "$lib/functions/trapFocus";
     import { isUserAuthenticated, userInfo, userToken } from "$store/users";
+    import { projectName } from "$lib/constants/frontend/projectName";
 
     onDestroy(async () => {
         // Cleanup
@@ -270,6 +271,10 @@
         }
     };
 </script>
+
+<svelte:head>
+    <title>Editing info for {$userInfo?.username} | {projectName}</title>
+</svelte:head>
 
 {#if $isUserAuthenticated}
     <form use:form use:trapFocus>
