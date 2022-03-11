@@ -2,7 +2,7 @@
     import { page } from "$app/stores";
     import { responsiveMode } from "$store/responsive";
 
-    import { projectName } from "$lib/constants/frontend/projectName";
+    import { projectName } from "$lib/constants/frontend/project";
     import { snakeCaseToTitleCase } from "$lib/functions/snakeCaseToTitleCase";
 
     const anime_name = $page.params.anime_name;

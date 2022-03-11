@@ -7,7 +7,7 @@
 
     import { tokenObtainUrl } from "$urls/restEndpoints";
 
-    import { projectName } from "$lib/constants/frontend/projectName";
+    import { projectName } from "$lib/constants/frontend/project";
 
     // Bind it to show or hide passwords
     let passwordShown = false;

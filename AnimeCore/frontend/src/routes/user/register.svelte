@@ -13,7 +13,7 @@
     import { isUserAuthenticated } from "$store/users";
     import { trapFocus } from "$lib/functions/trapFocus";
     import { registerEndpoint } from "$urls/restEndpoints";
-    import { projectName } from "$lib/constants/frontend/projectName";
+    import { projectName } from "$lib/constants/frontend/project";
 
     onDestroy(async () => {
         // Cleanup
@@ -141,9 +141,7 @@
             ) {
                 data.append("password", values?.password);
             } else {
-                console.error(
-                    "Confirm Password and Password are not same. Some guy tried to bypass yup"
-                );
+                console.error(`Mom bring the gun. We need to find and eliminate this guy`);
                 return;
             }
 
