@@ -1,6 +1,10 @@
 from django.contrib import admin
 
-from .models import CaptureVideoModel, CaptureEpisodeModel, CaptureAnimeNameModel
+from .models import (
+    CaptureVideoModel,
+    CaptureEpisodeModel,
+    CaptureAnimeNameModel,
+)
 
 # Register your models here.
 
