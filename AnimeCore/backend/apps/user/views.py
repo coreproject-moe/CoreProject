@@ -5,7 +5,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.vary import vary_on_headers
 
 from rest_framework.response import Response
-from rest_framework import status, generics, mixins
+from rest_framework import status, generics
 from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -17,11 +17,7 @@ from .serializers import UserSerializer
 # Create your views here.
 
 
-class UserInfo(
-    generics.GenericAPIView,
-    mixins.UpdateModelMixin,
-    mixins.RetrieveModelMixin,
-):
+class UserInfo(generics.ListCreateAPIView):
     """
     * Shows User Info.
     * Accpets User Info changes.
