@@ -46,15 +46,14 @@ INSTALLED_APPS = [
     # 3rd party Django stuff
     "django_cleanup.apps.CleanupConfig",
     # Custom Stuff
-    "custom.user",
-    'custom.commands',
+    "custom.users",
+    "custom.commands",
     # Pages
-    "pages.authentication",
     "pages.edit",
     "pages.upload",
     # Rest stuff
-    "api.v1._capture",
-    "api.v1._user",
+    "api.v1.capture",
+    "api.v1.user",
 ]
 
 MIDDLEWARE = [
@@ -135,7 +134,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Custom user model
 # https://testdriven.io/blog/django-custom-user-model/
 
-AUTH_USER_MODEL = "user.CustomUser"
+AUTH_USER_MODEL = "users.CustomUser"
 
 # Username or Email backend
 # https://stackoverflow.com/questions/25316765/log-in-user-using-either-email-address-or-username-in-django#35836674
