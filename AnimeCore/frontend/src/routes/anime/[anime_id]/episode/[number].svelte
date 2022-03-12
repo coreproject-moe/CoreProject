@@ -14,7 +14,7 @@
     import { goto } from "$app/navigation";
 
     $: episode_number = parseInt($page.params.number);
-    $: anime_name = snakeCaseToTitleCase($page.params.anime_name);
+    $: anime_name = "";
 
     let player: HTMLVmPlayerElement;
     let showPlayer = false;
@@ -291,7 +291,7 @@
                     <div class="level-item">
                         <div
                             class="has-text-white is-clickable"
-                            on:click={() => {
+                            on:click|preventDefault={() => {
                                 showMore = !showMore;
                             }}
                         >
