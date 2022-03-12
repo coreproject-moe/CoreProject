@@ -2,12 +2,12 @@
     // This constant is very useful. PLease stay at top
     const homePage = "/anime";
 
-    import { onDestroy, onMount } from "svelte";
+    import { onMount } from "svelte";
 
     import { browser } from "$app/env";
     import { page } from "$app/stores";
-
     import { goto } from "$app/navigation";
+
     import { tokenBlacklistUrl } from "$urls/restEndpoints";
     import { isUserAuthenticated, userInfo, userToken } from "$store/users";
 
@@ -38,19 +38,17 @@
             })
         })
             .then((response) => {
-                if (!response.ok) {
+                if (!response?.ok) {
                     throw response;
                 }
-                userToken.set({ refresh: "", access: "" });
-                browser && localStorage.removeItem("tokens");
 
                 // Control the timer. Control the Flow
                 timeout = 3000;
                 logoutState = true;
             })
             .catch((error) => {
-                if (typeof error.json === "function") {
-                    error.json().then((jsonError: unknown) => {
+                if (typeof error?.json === "function") {
+                    error?.json()?.then((jsonError: unknown) => {
                         errorMessage = JSON.stringify(jsonError);
                     });
                 }

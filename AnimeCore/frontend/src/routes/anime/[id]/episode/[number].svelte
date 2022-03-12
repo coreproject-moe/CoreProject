@@ -1,9 +1,8 @@
 <script lang="ts">
     let textContent = "";
     import anime from "animejs";
-    
-    import { onMount, beforeUpdate } from "svelte";
-    import { fade } from "svelte/transition";
+
+    import { onMount, beforeUpdate, onDestroy } from "svelte";
 
     import { browser } from "$app/env";
     import { page } from "$app/stores";
@@ -18,7 +17,7 @@
     $: episode_number = parseInt($page.params.number);
     $: anime_name = "";
 
-    let player: HTMLVmPlayerElement;
+    let player: HTMLVmPlayerElement = null;
     let showPlayer = false;
     let captionEnabled = true;
 
@@ -32,7 +31,11 @@
     onMount(async () => {
         const { defineCustomElements } = await import("@vime/core");
         defineCustomElements();
+
         showPlayer = true;
+    });
+    onDestroy(async () => {
+        showPlayer = false;
     });
 
     const onVolumeChange = async () => {
@@ -173,7 +176,7 @@
 
 <div class="container pt-5">
     {#if showPlayer}
-        <vm-player autoplay bind:this={player} on:vmVolumeChange={onVolumeChange} transition:fade>
+        <vm-player autoplay bind:this={player} on:vmVolumeChange={onVolumeChange}>
             <vm-video poster="https://media.vimejs.com/poster.png" cross-origin>
                 <source data-src="https://media.vimejs.com/720p.mp4" type="video/mp4" />
                 <track

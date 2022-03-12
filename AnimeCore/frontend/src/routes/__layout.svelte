@@ -10,7 +10,7 @@
 
     // Svelte Import
     import { onDestroy, onMount } from "svelte";
-    import { fade, fly } from "svelte/transition";
+    import { fly } from "svelte/transition";
 
     // Responsive helper
     import { responsiveMode } from "$store/responsive";

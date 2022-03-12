@@ -2,14 +2,13 @@
     import { fade } from "svelte/transition";
 
     import { page } from "$app/stores";
-    import { browser } from "$app/env";
+    import { goto } from "$app/navigation";
 
     import { trapFocus } from "$lib/functions/trapFocus";
+    import { projectName } from "$lib/constants/frontend/project";
     import { isUserAuthenticated, userToken } from "$store/users";
 
     import { tokenObtainUrl } from "$urls/restEndpoints";
-
-    import { projectName } from "$lib/constants/frontend/project";
 
     // Bind it to show or hide passwords
     let passwordShown = false;
@@ -42,16 +41,17 @@
             const data = await res.json();
 
             if (res?.ok) {
-                userToken.set(data);
+                $userToken = data;
+                $isUserAuthenticated = true;
 
                 // Goto Next page if it exists else redirect to home.
                 const next = $page.url.searchParams.get("next");
-                browser && next ? (window.location.href = next) : (window.location.href = "/home/");
+                goto(next ? next : "/anime");
             }
             errorMessage = data.detail;
         } catch (err) {
             if (err instanceof Error) {
-                userToken.set({ refresh: "", access: "" });
+                $userToken = { refresh: "", access: "" };
                 errorMessage = "Cannot POST to Backend | Is backend down ? 🤔";
                 console.error(`Can't POST to backend | Reason : ${err.message}`);
             }
@@ -64,7 +64,7 @@
 </svelte:head>
 
 {#if errorMessage}
-    <div class="columns is-mobile is-centered">
+    <div class="columns is-mobile is-centered" transition:fade>
         <div class="column is-narrow">
             <p class="error">{errorMessage}</p>
         </div>
@@ -72,10 +72,13 @@
 {/if}
 
 {#if $isUserAuthenticated}
-    <div class="columns is-mobile is-centered" transition:fade>
-        <div class="column is-narrow">
-            <p class="has-text-white">You are already logged in 😕</p>
-        </div>
+    <div transition:fade>
+        <p class="has-text-white has-text-centered">You are already logged in 😕</p>
+        <p class="has-text-white has-text-centered">
+            Do you plan on <a class="has-text-white is-underlined" href="/user/logout"
+                >Logging out?
+            </a>👀
+        </p>
     </div>
 {:else}
     <form on:submit|preventDefault={handleFormSubmit} method="POST" use:trapFocus transition:fade>
