@@ -26,7 +26,7 @@ class CaptureInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CaptureInfoModel
-        fields = "__all__"
+        exclude = ("id",)
 
     def update(self, instance: CaptureInfoModel, validated_data):
         user = validated_data["user"]
