@@ -6,13 +6,13 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('capture', '0012_alter_captureanimenamemodel_anime_and_more'),
+        ("capture", "0012_alter_captureanimenamemodel_anime_and_more"),
     ]
 
     operations = [
         migrations.RenameField(
-            model_name='capturevideomodel',
-            old_name='timestamps',
-            new_name='video_timestamps',
+            model_name="capturevideomodel",
+            old_name="timestamps",
+            new_name="video_timestamps",
         ),
     ]

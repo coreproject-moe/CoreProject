@@ -1,4 +1,4 @@
-# Thanks Random guy from here :
+# Thanks Random guy
 # https://note.nkmk.me/en/python-pillow-image-crop-trimming/
 
 import pillow_avif

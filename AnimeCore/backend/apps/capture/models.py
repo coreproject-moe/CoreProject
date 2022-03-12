@@ -12,7 +12,7 @@ from apps.upload.models import EpisodeModel, AnimeInfoModel
 
 class CaptureEpisodeModel(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    episode = models.ForeignKey(EpisodeModel, on_delete=models.CASCADE)
+    episode = models.OneToOneField(EpisodeModel, on_delete=models.CASCADE)
     timestamp = models.PositiveIntegerField(
         default=0,
     )
@@ -21,27 +21,27 @@ class CaptureEpisodeModel(models.Model):
         return f"Episode No : {self.episode.episode_number} | Time stamp = {datetime.timedelta(seconds=self.timestamp)} | User : {self.user.username}"
 
     class Meta:
-        verbose_name = "Episode Model"
+        verbose_name = "Episode"
         ordering = ("id",)
 
 
 class CaptureAnimeNameModel(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    anime = models.ForeignKey(AnimeInfoModel, on_delete=models.CASCADE)
+    anime = models.OneToOneField(AnimeInfoModel, on_delete=models.CASCADE)
     episodes = models.ManyToManyField(CaptureEpisodeModel)
 
     def __str__(self) -> str:
         return f"Anime : {self.anime} | User : {self.user.username}"
 
     class Meta:
-        verbose_name = "Anime Model"
+        verbose_name = "Anime"
         ordering = ("id",)
 
 
 class CaptureInfoModel(models.Model):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
     video_volume = models.PositiveIntegerField(
-        default=50,
+        default=100,
         validators=[
             MaxValueValidator(100),
         ],
@@ -53,5 +53,5 @@ class CaptureInfoModel(models.Model):
         return f"User = {self.user.username} | Volume = {self.video_volume} | Total Stamps = {self.video_timestamps.all().count()}"
 
     class Meta:
-        verbose_name = "Main Model"
+        verbose_name = "Master"
         ordering = ("user",)
