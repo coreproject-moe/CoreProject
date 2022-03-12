@@ -1,7 +1,6 @@
 import datetime
 
 from django.db import models
-from django.db.models import Count
 from django.contrib.auth import get_user_model
 from django.core.validators import MaxValueValidator
 
@@ -28,7 +27,7 @@ class CaptureEpisodeModel(models.Model):
 class CaptureAnimeNameModel(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     anime = models.OneToOneField(AnimeInfoModel, on_delete=models.CASCADE)
-    episodes = models.ManyToManyField(CaptureEpisodeModel)
+    episodes = models.ManyToManyField(CaptureEpisodeModel, blank=True)
 
     def __str__(self) -> str:
         return f"Anime : {self.anime} | User : {self.user.username}"
@@ -47,7 +46,7 @@ class CaptureInfoModel(models.Model):
         ],
     )
 
-    video_timestamps = models.ManyToManyField(CaptureAnimeNameModel)
+    video_timestamps = models.ManyToManyField(CaptureAnimeNameModel, blank=True)
 
     def __str__(self) -> str:
         return f"User = {self.user.username} | Volume = {self.video_volume} | Total Stamps = {self.video_timestamps.all().count()}"
