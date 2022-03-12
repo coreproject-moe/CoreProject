@@ -97,6 +97,19 @@ WSGI_APPLICATION = "core.wsgi.application"
 # https://stackoverflow.com/questions/49532708/custom-login-url-in-django#49532812
 LOGIN_URL = "login_page"
 
+# Cache
+# https://docs.djangoproject.com/en/4.0/topics/cache/#filesystem-caching
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
+        "LOCATION": Path(BASE_DIR, "cache"),
+        "TIMEOUT": 60,
+        "OPTIONS": {
+            "MAX_ENTRIES": 1000,
+        },
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
