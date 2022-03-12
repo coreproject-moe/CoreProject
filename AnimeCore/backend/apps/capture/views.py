@@ -23,8 +23,10 @@ class CaptureVideoView(
     mixins.ListModelMixin,
 ):
     """
-    Captures
-        * AnimeCore (video player) volume
+    AnimeCore (video player)
+        ⦿   Volume
+        ⦿   Timestamps
+
     """
 
     serializer_class = CaptureVideoSerializer
