@@ -38,21 +38,19 @@ class CaptureVideoSerializer(serializers.ModelSerializer):
             instance.video_volume = video_volume
 
         timestamps = validated_data.get("timestamps", None)
-        for anime in timestamps:
-            anime_id = anime["anime"]
-
-            if anime_id:
+        if timestamps:
+            for items in timestamps:
                 (
                     capture_anime_model,
                     capture_anime_model_created,
                 ) = instance.timestamps.update_or_create(
-                    anime=anime_id,
+                    anime=items["anime"],
                     user=user,
                 )
                 if capture_anime_model_created:
                     instance.timestamps.add(capture_anime_model)
 
-                episodes = anime["episodes"]
+                episodes = items["episodes"]
 
                 for episode in episodes:
                     (
@@ -60,8 +58,10 @@ class CaptureVideoSerializer(serializers.ModelSerializer):
                         capture_episode_model_created,
                     ) = CaptureEpisodeModel.objects.update_or_create(
                         episode=episode["episode"],
-                        timestamp=episode["timestamp"],
                         user=user,
+                        defaults={
+                            "timestamp": episode["timestamp"],
+                        },
                     )
                     capture_episode_model.save()
 
