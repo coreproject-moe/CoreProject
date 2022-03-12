@@ -19,16 +19,18 @@ from .serializers import UserSerializer
 
 class UserInfoView(generics.ListCreateAPIView):
     """
-    * Shows User Info.
-    * Accpets User Info changes.
+    ⦿  Shows User Info.
+    ⦿  Accpets User Info changes.
     """
 
+    serializer_class = UserSerializer
     authentication_classes = [
         JWTAuthentication,
         SessionAuthentication,
     ]
-    serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [
+        IsAuthenticated,
+    ]
     parser_classes = [
         FormParser,
         MultiPartParser,
@@ -58,7 +60,7 @@ class UserInfoView(generics.ListCreateAPIView):
 
 class RegisterView(generics.CreateAPIView):
     """
-    * Allows a user to be registered
+    ⦿ User Registration Endpoint
     """
 
     serializer_class = UserSerializer

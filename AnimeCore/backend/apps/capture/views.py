@@ -30,7 +30,9 @@ class CaptureInfoView(
     """
 
     serializer_class = CaptureInfoSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [
+        IsAuthenticated,
+    ]
     authentication_classes = [
         JWTAuthentication,
         SessionAuthentication,
