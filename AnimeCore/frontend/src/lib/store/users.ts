@@ -63,6 +63,7 @@ export const userInfo = writable(
             } catch (e) {
                 if (e instanceof Error) {
                     console.log(`Cannot get user data | Reason : ${e?.message}`);
+                    browser && localStorage.removeItem("tokens"); // Clear the database
                 }
             }
         })(set);

@@ -6,8 +6,8 @@
             "$urls": ["src/lib/constants/backend/urls"],
             "$urls/*": ["src/lib/constants/backend/urls/*"],
             // Stores
-            "$store": ["src/store"],
-            "$store/*": ["src/store/*"],
+            "$store": ["src/lib/store"],
+            "$store/*": ["src/lib/store/*"],
             // Hooks
             "$hooks": ["src/hooks"],
             "$hooks/*": ["src/hooks/*"],
