@@ -3,7 +3,7 @@ from rest_framework import serializers
 from .models import (
     CaptureAnimeNameModel,
     CaptureEpisodeModel,
-    CaptureVideoModel,
+    CaptureInfoModel,
 )
 
 
@@ -21,23 +21,21 @@ class CaptureAnimeNameSerializer(serializers.ModelSerializer):
         exclude = ("id", "user")
 
 
-class CaptureVideoSerializer(serializers.ModelSerializer):
-    timestamps = CaptureAnimeNameSerializer(many=True)
+class CaptureInfoSerializer(serializers.ModelSerializer):
+    video_timestamps = CaptureAnimeNameSerializer(many=True)
 
     class Meta:
-        model = CaptureVideoModel
+        model = CaptureInfoModel
         fields = "__all__"
 
-    def update(self, instance: CaptureVideoModel, validated_data):
+    def update(self, instance: CaptureInfoModel, validated_data):
         user = validated_data["user"]
-        if not user:
-            return
 
         video_volume = validated_data.get("video_volume", None)
         if video_volume:
             instance.video_volume = video_volume
 
-        timestamps = validated_data.get("timestamps", None)
+        timestamps = validated_data.get("video_timestamps", None)
         if timestamps:
             for items in timestamps:
                 (

@@ -1,10 +1,10 @@
 from django.urls import path
-from .views import CaptureVideoView
+from .views import CaptureInfoView
 
 urlpatterns = [
     path(
         "",
-        CaptureVideoView.as_view(),
+        CaptureInfoView.as_view(),
         name="api_capture_video",
     ),
 ]

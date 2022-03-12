@@ -44,9 +44,6 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt.token_blacklist",
     # 3rd party Django stuff
     "django_cleanup.apps.CleanupConfig",
-    # Custom Stuff
-    "custom.users",
-    "custom.commands",
     # Pages
     "apps.edit",
     "apps.upload",
@@ -133,12 +130,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # Custom user model
 # https://testdriven.io/blog/django-custom-user-model/
 
-AUTH_USER_MODEL = "users.CustomUser"
+AUTH_USER_MODEL = "user.User"
 
 # Username or Email backend
 # https://stackoverflow.com/questions/25316765/log-in-user-using-either-email-address-or-username-in-django#35836674
 
-AUTHENTICATION_BACKENDS = ["custom.users.backends.EmailOrUsernameModelBackend"]
+AUTHENTICATION_BACKENDS = ["apps.user.backends.EmailOrUsernameModelBackend"]
 
 # Password hashers
 # https://docs.djangoproject.com/en/3.2/topics/auth/passwords/#using-argon2-with-django
