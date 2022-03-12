@@ -6,10 +6,11 @@
     import md5 from "md5";
     import dayjs from "dayjs";
     import anime from "animejs";
-    import tippy, { sticky, type Instance } from "tippy.js";
+    import tippy, { sticky, followCursor, type Instance } from "tippy.js";
 
     // Svelte Import
     import { onDestroy, onMount } from "svelte";
+    import { fade, fly } from "svelte/transition";
 
     // Responsive helper
     import { responsiveMode } from "$store/responsive";
@@ -71,7 +72,9 @@
             tippy(animeJsGithubButton, {
                 content: "Github",
                 theme: "black",
-                touch: false
+                touch: false,
+                followCursor: "horizontal",
+                plugins: [followCursor]
             });
         }
 
@@ -251,48 +254,48 @@
         </div>
         <div class="navbar-end is-clipped">
             <div
-                class="navbar-item {$responsiveMode === 'mobile'
+                class="navbar-item is-justify-content-flex-end {$responsiveMode === 'mobile'
                     ? 'is-flex is-flex-direction-row is-justify-content-center pt-6'
                     : ''}"
+                style="width:100px"
             >
-                <button
-                    class="is-rounded is-dark has-background-black-bis is-clickable {$responsiveMode ===
-                        'mobile' || $responsiveMode === 'tablet'
-                        ? 'is-hidden '
-                        : ''}"
-                    bind:this={animeJsGithubButton}
-                    style="transform:translateX(40px);scale(0.1);"
-                    on:mouseenter|preventDefault={async () => {
-                        anime({
-                            targets: [animeJsGithubIcon],
-                            color: "hsl(0, 0%, 100%)"
-                        });
-                        anime({
-                            targets: [animeJsGithubButton],
-                            scale: 1.3
-                        });
-                    }}
-                    on:mouseleave|preventDefault={async () => {
-                        anime({
-                            targets: [animeJsGithubIcon],
-                            color: "hsl(0, 0%, 80%)"
-                        });
-                        anime({
-                            targets: [animeJsGithubButton],
-                            scale: 1
-                        });
-                    }}
-                    on:click|preventDefault={async () => {
-                        goto(githubUrl);
-                    }}
-                >
-                    <ion-icon
-                        class="has-text-white"
-                        bind:this={animeJsGithubIcon}
-                        style="width: 100%; height: 100%;"
-                        name="logo-github"
-                    />
-                </button>
+                {#if arrowButtonTurned}
+                    <button
+                        class="is-rounded is-dark has-background-black-bis is-clickable is-hidden-touch"
+                        bind:this={animeJsGithubButton}
+                        transition:fly={{ x: 40, duration: 500 }}
+                        on:mouseenter|preventDefault={async () => {
+                            anime({
+                                targets: [animeJsGithubIcon],
+                                color: "hsl(0, 0%, 100%)"
+                            });
+                            anime({
+                                targets: [animeJsGithubButton],
+                                scale: 1.3
+                            });
+                        }}
+                        on:mouseleave|preventDefault={async () => {
+                            anime({
+                                targets: [animeJsGithubIcon],
+                                color: "hsl(0, 0%, 80%)"
+                            });
+                            anime({
+                                targets: [animeJsGithubButton],
+                                scale: 1
+                            });
+                        }}
+                        on:click|preventDefault={async () => {
+                            goto(githubUrl);
+                        }}
+                    >
+                        <ion-icon
+                            class="has-text-white"
+                            bind:this={animeJsGithubIcon}
+                            style="width: 100%; height: 100%;"
+                            name="logo-github"
+                        />
+                    </button>
+                {/if}
 
                 <button
                     style="z-index: 1000000"
@@ -330,28 +333,12 @@
                                     targets: [animeJsArrowBack],
                                     rotate: [0, 180]
                                 });
-                                anime({
-                                    targets: [animeJsGithubButton],
-                                    translateX: 0,
-                                    easing: "easeOutSine",
-                                    duration: 50,
-                                    opacity: 1,
-                                    scale: 1
-                                });
                                 break;
                             }
                             case false: {
                                 anime({
                                     targets: [animeJsArrowBack],
                                     rotate: [180, 360]
-                                });
-                                anime({
-                                    targets: [animeJsGithubButton],
-                                    translateX: 40,
-                                    easing: "easeOutSine",
-                                    duration: 50,
-                                    opacity: 0,
-                                    scale: 0.2
                                 });
                                 break;
                             }

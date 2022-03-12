@@ -2,8 +2,10 @@
     import { browser } from "$app/env";
     import { goto } from "$app/navigation";
 
-    import * as yup from "yup";
     import { onDestroy } from "svelte";
+    import { fade } from "svelte/transition";
+
+    import * as yup from "yup";
     import { createForm } from "felte";
     import tippy, { sticky, type Instance } from "tippy.js";
 
@@ -216,10 +218,12 @@
 </svelte:head>
 
 {#if $isUserAuthenticated}
-    <p class="has-text-white has-text-centered">How can a man be registered twice ? 🤔</p>
-    <p class="has-text-white has-text-centered">Thats a question for the wise. 🧙‍♂️</p>
+    <div transition:fade>
+        <p class="has-text-white has-text-centered">How can a man be registered twice ? 🤔</p>
+        <p class="has-text-white has-text-centered">Thats a question for the wise. 🧙‍♂️</p>
+    </div>
 {:else}
-    <form use:form use:trapFocus>
+    <form use:form use:trapFocus transition:fade>
         <div class="is-flex is-justify-content-center has-text-white is-size-5 has-text-centered">
             <p>↓&nbsp; Avatar &nbsp;↓</p>
         </div>
