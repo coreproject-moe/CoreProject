@@ -1,6 +1,7 @@
 <script lang="ts">
     let textContent = "";
     import anime from "animejs";
+    
     import { onMount, beforeUpdate } from "svelte";
     import { fade } from "svelte/transition";
 

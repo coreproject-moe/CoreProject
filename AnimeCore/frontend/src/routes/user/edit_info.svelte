@@ -1,10 +1,11 @@
 <script lang="ts">
     import md5 from "md5";
     import dayjs from "dayjs";
-
     import * as yup from "yup";
+    
     import { createForm } from "felte";
     import { onDestroy } from "svelte";
+    import { fade } from "svelte/transition";
     import tippy, { sticky, type Instance } from "tippy.js";
 
     import reporter from "@felte/reporter-tippy";
@@ -281,7 +282,7 @@
 </svelte:head>
 
 {#if $isUserAuthenticated}
-    <form use:form use:trapFocus>
+    <form use:form use:trapFocus transition:fade>
         <div class="box has-background-black">
             <div class="columns is-mobile is-centered">
                 <div class="column is-narrow">
@@ -554,7 +555,7 @@
         </div>
     </form>
 {:else}
-    <div class="has-text-white">
+    <div class="has-text-white" transition:fade>
         <p class="has-text-centered">
             How can one edit one's info without <a
                 class="has-text-white is-underlined"
