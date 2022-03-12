@@ -2,6 +2,7 @@
     let textContent = "";
     import anime from "animejs";
     import { onMount, beforeUpdate } from "svelte";
+    import { fade } from "svelte/transition";
 
     import { browser } from "$app/env";
     import { page } from "$app/stores";
@@ -171,7 +172,7 @@
 
 <div class="container pt-5">
     {#if showPlayer}
-        <vm-player autoplay bind:this={player} on:vmVolumeChange={onVolumeChange}>
+        <vm-player autoplay bind:this={player} on:vmVolumeChange={onVolumeChange} transition:fade>
             <vm-video poster="https://media.vimejs.com/poster.png" cross-origin>
                 <source data-src="https://media.vimejs.com/720p.mp4" type="video/mp4" />
                 <track
