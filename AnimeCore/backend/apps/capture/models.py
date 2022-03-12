@@ -11,7 +11,7 @@ from apps.upload.models import EpisodeModel, AnimeInfoModel
 
 class CaptureEpisodeModel(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    episode = models.ForeignKey(EpisodeModel, on_delete=models.CASCADE)
+    episode = models.OneToOneField(EpisodeModel, on_delete=models.CASCADE)
     timestamp = models.PositiveIntegerField(
         default=0,
     )
@@ -22,7 +22,7 @@ class CaptureEpisodeModel(models.Model):
 
 class CaptureAnimeNameModel(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    anime = models.ForeignKey(AnimeInfoModel, on_delete=models.CASCADE)
+    anime = models.OneToOneField(AnimeInfoModel, on_delete=models.CASCADE)
     episodes = models.ManyToManyField(CaptureEpisodeModel)
 
     def __str__(self) -> str:
@@ -31,11 +31,10 @@ class CaptureAnimeNameModel(models.Model):
 
 class CaptureVideoModel(models.Model):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
-    video_volume = models.IntegerField(
+    video_volume = models.PositiveIntegerField(
         default=50,
         validators=[
             MaxValueValidator(100),
-            MinValueValidator(0),
         ],
     )
 
