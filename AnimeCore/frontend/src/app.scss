@@ -2,13 +2,13 @@
 @import url("https://cdn.jsdelivr.net/npm/progressive-image.js/dist/progressive-image.css");
 
 // Fonts import
-@import "@fontsource/roboto";
-@import "@fontsource/ubuntu";
-@import "@fontsource/cantarell";
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/roboto/index.min.css");
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/ubuntu/index.min.css");
+@import url("https://cdn.jsdelivr.net/npm/@fontsource/cantarell/index.min.css");
 
 // Bulma Varibales override
 $black: black !default;
-
+$family-sans-serif: "Roboto", "Cantarell", "Ubuntu";
 // Bulma import
 @import "bulma/bulma.sass";
 

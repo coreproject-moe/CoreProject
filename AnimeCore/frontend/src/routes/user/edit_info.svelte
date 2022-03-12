@@ -2,7 +2,7 @@
     import md5 from "md5";
     import dayjs from "dayjs";
     import * as yup from "yup";
-    
+
     import { createForm } from "felte";
     import { onDestroy } from "svelte";
     import { fade } from "svelte/transition";
