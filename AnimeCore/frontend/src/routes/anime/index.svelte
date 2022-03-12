@@ -39,11 +39,11 @@
     </p>
     <div class="box" style="background-color: black; border: 1px dotted white">
         <Swiper spaceBetween={swiperSpacesBetween} slidesPerView={swiperSlidesPerView}>
-            {#each Array(12) as _}
+            {#each Array(12) as _, i}
                 <SwiperSlide>
                     <a
                         sveltekit:prefetch
-                        href="/anime/one_piece"
+                        href="/anime/{i}"
                         class="card"
                         style="background-color: black !important;"
                     >

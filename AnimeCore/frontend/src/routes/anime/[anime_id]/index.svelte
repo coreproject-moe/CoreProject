@@ -5,7 +5,7 @@
     import { projectName } from "$lib/constants/frontend/project";
     import { snakeCaseToTitleCase } from "$lib/functions/snakeCaseToTitleCase";
 
-    const anime_name = $page.params.anime_name;
+    $: anime_name = "";
 </script>
 
 <svelte:head>
@@ -132,7 +132,7 @@
                         {#each Array(100) as _, i}
                             <a
                                 sveltekit:prefetch
-                                href={`/anime/${anime_name}/episode/${i}`}
+                                href={`/anime/${$page?.params?.anime_id}/episode/${i}`}
                                 class="grid-item is-size-6 has-border-white is-clickable is-font-face-roboto has-text-white"
                             >
                                 {i}
