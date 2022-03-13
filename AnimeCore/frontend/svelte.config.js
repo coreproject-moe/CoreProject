@@ -29,7 +29,8 @@ const config = {
                     // these are the aliases and paths to them
                     $store: path.resolve("./src/lib/store"),
                     $urls: path.resolve("./src/lib/constants/backend/urls"),
-                    $hooks: path.resolve("./src/hooks")
+                    $hooks: path.resolve("./src/hooks"),
+                    $components: path.resolve("./src/lib/components")
                 }
             },
             build: {

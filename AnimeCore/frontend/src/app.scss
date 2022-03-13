@@ -13,6 +13,7 @@ $family-sans-serif: "Roboto", "Cantarell", "Ubuntu";
 @import "bulma/bulma.sass";
 
 // @Override
+
 .is-underlined {
     text-underline-offset: 5px;
 }
@@ -26,6 +27,7 @@ $family-sans-serif: "Roboto", "Cantarell", "Ubuntu";
 }
 
 // Special Classes ( inspired by bulma )
+
 .has-border-white {
     border: 1px solid white;
 }
@@ -37,6 +39,8 @@ $family-sans-serif: "Roboto", "Cantarell", "Ubuntu";
     border: 1px solid #353333 !important;
 }
 .has-hover-gray {
+    transition: 0.2s;
+
     &:hover {
         background-color: hsl(0, 0%, 7.8%) !important;
     }
@@ -65,6 +69,8 @@ $family-sans-serif: "Roboto", "Cantarell", "Ubuntu";
 // Tippy theme
 @import "tippy.js/dist/tippy.css";
 @import "tippy.js/animations/scale.css";
+@import "tippy.js/dist/backdrop.css";
+@import "tippy.js/animations/shift-away.css";
 
 // Import VimeJS
 @import "@vime/core/themes/default.css";
