@@ -18,7 +18,9 @@
     let animeJSEditInfoIcon: HTMLElement;
     let animeJSLogOutIcon: HTMLElement;
 
+    // Magic
     let parentElement: HTMLElement;
+
     // TippyJS bindings
     let tippyIdElement: HTMLElement & { _tippy?: Instance };
     let tippyFirstNameElement: HTMLElement & { _tippy?: Instance };

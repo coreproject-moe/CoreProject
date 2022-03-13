@@ -17,9 +17,11 @@
 
     import { baseUrl } from "$urls/baseUrl";
     import { userInfoUrl } from "$urls/restEndpoints";
+
     import { trapFocus } from "$lib/functions/trapFocus";
-    import { isUserAuthenticated, userInfo, userToken } from "$store/users";
     import { projectName } from "$lib/constants/frontend/project";
+
+    import { isUserAuthenticated, userInfo, userToken } from "$store/users";
 
     onDestroy(async () => {
         // Cleanup
@@ -500,7 +502,9 @@
                 <div class="field-body">
                     <div class="field">
                         <div class="field-label is-normal is-hidden-desktop">
-                            <div class="label has-text-white is-unselectable">Date Joined :</div>
+                            <div class="label has-text-white is-unselectable is-flex">
+                                Date Joined :
+                            </div>
                         </div>
                         <p class="control is-expanded has-icons-left">
                             <input
@@ -524,7 +528,9 @@
                     </div>
                     <div class="field">
                         <div class="field-label is-normal is-hidden-desktop">
-                            <div class="label has-text-white is-unselectable">Last Login :</div>
+                            <div class="label has-text-white is-unselectable is-flex">
+                                Last Login :
+                            </div>
                         </div>
                         <p class="control is-expanded has-icons-left">
                             <input
