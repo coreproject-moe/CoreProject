@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { browser } from "$app/env";
     import { goto } from "$app/navigation";
 
     import { onDestroy } from "svelte";
@@ -13,8 +12,9 @@
     import { validator } from "@felte/validator-yup";
 
     import { isUserAuthenticated } from "$store/users";
-    import { trapFocus } from "$lib/functions/trapFocus";
     import { registerEndpoint } from "$urls/restEndpoints";
+
+    import { trapFocus } from "$lib/functions/trapFocus";
     import { projectName } from "$lib/constants/frontend/project";
 
     onDestroy(async () => {
