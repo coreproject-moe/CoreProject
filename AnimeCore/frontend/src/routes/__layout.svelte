@@ -4,13 +4,12 @@
 
     // Import JS libraries
     import md5 from "md5";
-    import dayjs from "dayjs";
     import anime from "animejs";
     import tippy, { sticky, followCursor, type Instance } from "tippy.js";
 
     // Svelte Import
-    import { onDestroy, onMount } from "svelte";
     import { fly } from "svelte/transition";
+    import { onDestroy, onMount } from "svelte";
 
     // Responsive helper
     import { responsiveMode } from "$store/responsive";
@@ -23,6 +22,7 @@
     import { page } from "$app/stores";
     import { browser } from "$app/env";
     import { goto } from "$app/navigation";
+    import Avatar from "$components/tippy.js/Avatar.svelte";
 
     let arrowButtonTurned: boolean;
 
@@ -80,26 +80,6 @@
 
         if (tippyJsAvatar && !tippyJsAvatar?._tippy) {
             tippy(tippyJsAvatar, {
-                content: `<b>ID</b> : ${$userInfo?.id} <br /> <b>First Name</b> : ${
-                    $userInfo?.first_name
-                }<br/> <b>Last Name</b> : ${$userInfo?.last_name}<br/> <b>Username</b> : ${
-                    $userInfo?.username
-                }<br/> <b>Email</b> : ${$userInfo?.email}<br/><b>Date Joined</b> : ${dayjs(
-                    $userInfo?.date_joined
-                )?.format("MMMM D, YYYY - h:mm A")}<br/><b>Last Active</b> : ${dayjs(
-                    $userInfo?.last_login
-                )?.format("MMMM D, YYYY - h:mm A")}<br/>
-                    <div class='pt-2'>
-                        <a class='is-size-7 has-text-white has-background-black button is-ghost has-no-text-decoration is-rounded has-hover-gray' sveltekit:prefetch style='transition:0.2s' href="/user/edit_info">
-                            <ion-icon class='pr-2 is-size-5' name="create-outline"></ion-icon>Edit Info
-                        </a>
-                        <a class='is-size-7 has-text-white has-background-black button is-ghost has-no-text-decoration is-rounded has-hover-gray' style='transition:0.2s; float:right' sveltekit:prefetch href="/user/logout?next=${
-                            $page?.url?.pathname
-                        }">
-                            <ion-icon class='pr-2 is-size-5' name="log-out-outline"></ion-icon>Log Out
-                        </a>
-                    </div>
-                    <br/>`,
                 theme: "black",
                 trigger: "click",
                 allowHTML: true,
@@ -107,7 +87,16 @@
                 sticky: true,
                 placement: "bottom",
                 plugins: [sticky],
-                appendTo: () => browser && document.body
+                appendTo: () => browser && document.body,
+                onTrigger: async (instance) => {
+                    const node = document.createElement("div");
+                    new Avatar({
+                        target: node,
+                        props: { userInfo: $userInfo, nextPage: $page.url.pathname }
+                    });
+
+                    instance.setContent(node);
+                }
             });
         }
     }
@@ -150,7 +139,7 @@
             <a
                 href="/anime"
                 sveltekit:prefetch
-                class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration {$responsiveMode ===
+                class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration has-hover-gray {$responsiveMode ===
                     'mobile' || $responsiveMode === 'tablet'
                     ? 'pl-2 pr-2'
                     : 'ml-2'} {$page.url.pathname === '/anime' ? 'hover' : ''}
@@ -179,7 +168,7 @@
             </a>
             <a
                 href="#"
-                class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration {$responsiveMode ===
+                class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration has-hover-gray {$responsiveMode ===
                     'mobile' || $responsiveMode === 'tablet'
                     ? 'pl-2 pr-2'
                     : 'ml-2'}"
@@ -214,7 +203,7 @@
             <a
                 sveltekit:prefetch
                 href="/faq"
-                class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration {$responsiveMode ===
+                class="navbar-item button is-ghost is-rounded is-unselectable has-text-white has-background-black has-no-text-decoration has-hover-gray {$responsiveMode ===
                     'mobile' || $responsiveMode === 'tablet'
                     ? 'pl-2 pr-2'
                     : 'ml-2'} {$page.url.pathname.includes('faq') ? 'hover' : ''}"
@@ -442,15 +431,6 @@
             transition: 0.2s;
             transform: translateY(10px);
             text-decoration: none !important;
-        }
-
-        .navbar-start {
-            .navbar-item {
-                &.hover,
-                &:hover {
-                    background-color: hsl(0, 0%, 7.8%) !important;
-                }
-            }
         }
 
         .navbar-item {
