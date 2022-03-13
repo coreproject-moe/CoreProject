@@ -20,11 +20,6 @@
     // Show error message if theres an error.
     let errorMessage = "";
 
-    const handlePasswordInput = async (e: Event) => {
-        const target = e.target as HTMLInputElement;
-        password = target?.value;
-    };
-
     const handleFormSubmit = async () => {
         try {
             const res = await fetch(tokenObtainUrl, {
@@ -117,7 +112,9 @@
                             maxlength={1024}
                             minlength={8}
                             required={true}
-                            on:input={handlePasswordInput}
+                            on:input|capture={(e) => {
+                                password = e?.currentTarget?.value;
+                            }}
                         />
                         <span
                             class="icon is-small is-right is-clickable is-unselectable"

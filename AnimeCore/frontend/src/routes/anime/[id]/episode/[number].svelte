@@ -6,13 +6,13 @@
 
     import { browser } from "$app/env";
     import { page } from "$app/stores";
+    import { goto } from "$app/navigation";
 
     import { vimeJSVolume } from "$store/vimeJs";
     import { responsiveMode } from "$store/responsive";
 
     import { projectName } from "$lib/constants/frontend/project";
     import { snakeCaseToTitleCase } from "$lib/functions/snakeCaseToTitleCase";
-    import { goto } from "$app/navigation";
 
     $: episode_number = parseInt($page.params.number);
     $: anime_name = "";

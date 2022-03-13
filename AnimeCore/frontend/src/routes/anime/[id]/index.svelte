@@ -31,7 +31,7 @@
                     $responsiveMode === 'widescreen' ||
                     $responsiveMode === 'fullhd'
                         ? 'is-position-fixed'
-                        : ''} {$responsiveMode === ('desktop' || 'widescreen') ? 'is-size-7' : ''}"
+                        : ''}"
                     style="{$responsiveMode === 'desktop' ||
                     $responsiveMode === 'widescreen' ||
                     $responsiveMode === 'fullhd'
@@ -51,7 +51,7 @@
                                     <div
                                         class="progressive replace"
                                         data-href="https://cdn.myanimelist.net/images/anime/6/73245.jpg"
-                                        style="border-top-left-radius: 10px;border-top-right-radius: 10px;"
+                                        style="border-radius: 10px;"
                                     >
                                         <img
                                             alt=""
@@ -134,6 +134,12 @@
                                 sveltekit:prefetch
                                 href={`/anime/${$page?.params?.id}/episode/${i}`}
                                 class="grid-item is-size-6 has-border-white is-clickable is-font-face-roboto has-text-white"
+                                on:mouseenter|capture={(e) => {
+                                    e?.currentTarget?.classList?.add("grid-item-hover");
+                                }}
+                                on:mouseleave|capture={(e) => {
+                                    e?.currentTarget?.classList?.remove("grid-item-hover");
+                                }}
                             >
                                 {i}
                             </a>
@@ -154,12 +160,12 @@
     }
     .grid-item {
         background-color: black;
-        padding: 1.2em;
+        padding: 0.8em;
         text-align: center;
-        transition: 0.1s;
+        transition: 0.2s;
 
-        &:hover {
-            background-color: hsl(0, 0%, 15%);
+        &:global(.grid-item-hover) {
+            background-color: hsl(0, 0%, 15%) !important;
         }
     }
 </style>
