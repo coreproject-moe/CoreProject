@@ -273,7 +273,7 @@
             </span>
         </p>
     </div>
-    <div class="column pt-1">
+    <div class="column pt-3 pb-5">
         <!-- Main container -->
         <nav class="level is-mobile">
             <!-- Left side -->

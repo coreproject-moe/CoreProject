@@ -11,6 +11,9 @@
     import { fly } from "svelte/transition";
     import { onDestroy, onMount } from "svelte";
 
+    // Custom Component
+    import Avatar from "$components/tippy.js/Avatar.svelte";
+
     // Responsive helper
     import { responsiveMode } from "$store/responsive";
     import { isUserAuthenticated, userInfo } from "$store/users";
@@ -22,7 +25,6 @@
     import { page } from "$app/stores";
     import { browser } from "$app/env";
     import { goto } from "$app/navigation";
-    import Avatar from "$components/tippy.js/Avatar.svelte";
 
     let arrowButtonTurned: boolean;
 
