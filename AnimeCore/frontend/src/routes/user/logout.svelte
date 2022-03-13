@@ -45,6 +45,20 @@
                 // Control the timer. Control the Flow
                 timeout = 3000;
                 logoutState = true;
+
+                // CLeanup
+                $userToken = { refresh: "", access: "" };
+                $isUserAuthenticated = false;
+                $userInfo = {
+                    first_name: "",
+                    last_name: "",
+                    email: "",
+                    date_joined: "",
+                    username: "",
+                    id: 0,
+                    last_login: "",
+                    avatar: ""
+                };
             })
             .catch((error) => {
                 if (typeof error?.json === "function") {
@@ -59,19 +73,6 @@
     $: {
         if (browser) {
             if (logoutState && timeout === 0) {
-                // CLeanup
-                $userToken = { refresh: "", access: "" };
-                $isUserAuthenticated = false;
-                $userInfo = {
-                    first_name: "",
-                    last_name: "",
-                    email: "",
-                    date_joined: "",
-                    username: "",
-                    id: 0,
-                    last_login: "",
-                    avatar: ""
-                };
                 // Redirect to login page
                 goto(loginpage ? `/user/login?next=${next}` : next);
             }

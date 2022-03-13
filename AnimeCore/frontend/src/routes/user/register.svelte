@@ -194,21 +194,19 @@
         }
     };
     $: {
-        if (browser) {
-            if (avatarElement) {
-                tippy(avatarElement, {
-                    content: avatarSrc === "" ? "Wow such empty 😺" : "Wow nice pic ! 😻",
-                    theme: "black",
-                    placement: "bottom",
-                    showOnCreate: true,
-                    sticky: true,
-                    interactive: true,
-                    hideOnClick: false,
-                    trigger: "manual",
-                    appendTo: () => document?.body,
-                    plugins: [sticky]
-                });
-            }
+        if (avatarElement) {
+            tippy(avatarElement, {
+                content: avatarSrc === "" ? "Wow such empty 😺" : "Wow nice pic ! 😻",
+                theme: "black",
+                placement: "bottom",
+                showOnCreate: true,
+                sticky: true,
+                interactive: true,
+                hideOnClick: false,
+                trigger: "manual",
+                appendTo: () => document?.body,
+                plugins: [sticky]
+            });
         }
     }
 </script>

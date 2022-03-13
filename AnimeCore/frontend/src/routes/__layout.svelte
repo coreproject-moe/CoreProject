@@ -317,23 +317,10 @@
                     }}
                     on:click|preventDefault={async () => {
                         arrowButtonTurned = !arrowButtonTurned;
-
-                        switch (arrowButtonTurned) {
-                            case true: {
-                                anime({
-                                    targets: [animeJsArrowBack],
-                                    rotate: [0, 180]
-                                });
-                                break;
-                            }
-                            case false: {
-                                anime({
-                                    targets: [animeJsArrowBack],
-                                    rotate: [180, 360]
-                                });
-                                break;
-                            }
-                        }
+                        anime({
+                            targets: [animeJsArrowBack],
+                            rotate: arrowButtonTurned ? [0, 180] : [180, 360]
+                        });
                     }}
                 >
                     <ion-icon
@@ -417,9 +404,6 @@
 
 <style lang="scss">
     .navbar {
-        // @TODO Fix this
-        // border-bottom: 1px solid var(--border-color);
-
         .navbar-menu {
             .navbar-start {
                 .button {
