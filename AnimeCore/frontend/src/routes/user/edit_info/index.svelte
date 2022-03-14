@@ -11,7 +11,6 @@
     import reporter from "@felte/reporter-tippy";
     import { validator } from "@felte/validator-yup";
 
-    import { browser } from "$app/env";
     import { page } from "$app/stores";
     import { goto } from "$app/navigation";
 
@@ -101,10 +100,9 @@
 
     $: {
         if (
-            browser &&
-            ($responsiveMode === "desktop" ||
-                $responsiveMode === "widescreen" ||
-                $responsiveMode === "fullhd")
+            $responsiveMode === "desktop" ||
+            $responsiveMode === "widescreen" ||
+            $responsiveMode === "fullhd"
         ) {
             if (tippyJsFirstNameIcon) {
                 tippy(tippyJsFirstNameIcon, {
@@ -212,15 +210,6 @@
                     plugins: [animateFill, sticky]
                 });
             }
-        } else {
-            tippyJsFirstNameIcon?._tippy?.destroy();
-            tippyJsLastNameIcon?._tippy?.destroy();
-            tippyJsUserNameIcon?._tippy?.destroy();
-            tippyJsEmailIcon?._tippy?.destroy();
-            tippyJsPasswordIcon?._tippy?.destroy();
-            tippyJsConfirmPasswordIcon?._tippy?.destroy();
-            tippyJsDateJoinedIcon?._tippy?.destroy();
-            tippyJsLastLoginIcon?._tippy?.destroy();
         }
     }
 
