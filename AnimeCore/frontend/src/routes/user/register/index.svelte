@@ -46,7 +46,8 @@
             ?.email(
                 `
                 <b>Email</b> must be valid.
-                <br/> For example : <b>SomeOne@example.com</b>`
+                <br/>
+                For example : <b>SomeOne@example.com</b>`
             )
             ?.required("Did you type your <b>Email</b> ? 🤔")
             ?.test(
@@ -257,7 +258,7 @@
                 </figure>
             </div>
         </div>
-        <div class="items field is-horizontal py-1">
+        <div class="field is-horizontal py-1">
             <div class="field-body">
                 <div class="field">
                     <p class="control is-expanded has-icons-left">
@@ -279,7 +280,7 @@
                 </div>
             </div>
         </div>
-        <div class="items field is-horizontal py-1">
+        <div class="field is-horizontal py-1">
             <div class="field-body">
                 <div class="field">
                     <p class="control is-expanded has-icons-left">
@@ -301,7 +302,7 @@
                 </div>
             </div>
         </div>
-        <div class="items field is-horizontal py-1">
+        <div class="field is-horizontal py-1">
             <div class="field-body">
                 <div class="field">
                     <p class="control is-expanded has-icons-left">
@@ -322,7 +323,7 @@
             </div>
         </div>
 
-        <div class="items field is-horizontal py-1">
+        <div class="field is-horizontal py-1">
             <div class="field-body">
                 <div class="field">
                     <p class="control is-expanded has-icons-left">
@@ -340,7 +341,7 @@
             </div>
         </div>
 
-        <div class="items field is-horizontal py-1">
+        <div class="field is-horizontal py-1">
             <div class="field-body">
                 <div class="field">
                     <p class="control is-expanded has-icons-left has-icons-right">
@@ -366,7 +367,7 @@
                 </div>
             </div>
         </div>
-        <div class="items field is-horizontal py-1">
+        <div class="field is-horizontal py-1">
             <div class="field-body">
                 <div class="field">
                     <p class="control is-expanded has-icons-left">
@@ -388,7 +389,7 @@
             </div>
         </div>
 
-        <div class="items columns is-mobile is-centered pt-3">
+        <div class="columns is-mobile is-centered pt-3">
             <div class="column is-narrow">
                 <button
                     type="submit"

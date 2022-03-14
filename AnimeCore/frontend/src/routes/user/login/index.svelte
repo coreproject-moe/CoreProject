@@ -98,7 +98,7 @@
     </div>
 {:else}
     <form method="POST" use:form use:trapFocus transition:fade>
-        <div class="items field is-horizontal pt-3">
+        <div class="field is-horizontal pt-3">
             <div class="field-body">
                 <div class="field">
                     <p class="control is-expanded has-icons-left">
@@ -118,7 +118,7 @@
                 </div>
             </div>
         </div>
-        <div class="items field is-horizontal pt-3">
+        <div class="field is-horizontal pt-3">
             <div class="field-body">
                 <div class="field">
                     <p class="control is-expanded has-icons-left has-icons-right">
@@ -143,7 +143,7 @@
                 </div>
             </div>
         </div>
-        <div class="items columns is-mobile is-centered pt-3">
+        <div class="columns is-mobile is-centered pt-3">
             <div class="column is-narrow">
                 <button
                     class="button is-rounded is-centered has-text-white has-border-gray is-black"

@@ -6,7 +6,7 @@
     import { createForm } from "felte";
     import { onDestroy } from "svelte";
     import { fade } from "svelte/transition";
-    import tippy, { sticky, type Instance } from "tippy.js";
+    import tippy, { animateFill, sticky, type Instance } from "tippy.js";
 
     import reporter from "@felte/reporter-tippy";
     import { validator } from "@felte/validator-yup";
@@ -22,21 +22,188 @@
     import { projectName } from "$lib/constants/frontend/project";
 
     import { isUserAuthenticated, userInfo, userToken } from "$store/users";
+    import { responsiveMode } from "$store/responsive";
 
     onDestroy(async () => {
+        avatarElementIcon?._tippy?.destroy();
+
         // Cleanup
-        lastLogin?._tippy?.destroy();
-        dateJoined?._tippy?.destroy();
-        avatarElement?._tippy?.destroy();
+        tippyJsFirstNameIcon?._tippy?.destroy();
+        tippyJsLastNameIcon?._tippy?.destroy();
+        tippyJsUserNameIcon?._tippy?.destroy();
+        tippyJsEmailIcon?._tippy?.destroy();
+        tippyJsPasswordIcon?._tippy?.destroy();
+        tippyJsConfirmPasswordIcon?._tippy?.destroy();
+        tippyJsDateJoinedIcon?._tippy?.destroy();
+        tippyJsLastLoginIcon?._tippy?.destroy();
     });
 
     let passwordShown = false;
     let imageCleared = false;
     let avatarShown: boolean;
-    let avatarElement: HTMLElement & { _tippy?: Instance };
-    let dateJoined: HTMLElement & { _tippy?: Instance };
-    let lastLogin: HTMLElement & { _tippy?: Instance };
     let avatarSrc = "";
+
+    // TippyJs icon declarations
+    let avatarElementIcon: HTMLElement & { _tippy?: Instance };
+    // Icons
+    let tippyJsFirstNameIcon: HTMLElement & { _tippy?: Instance };
+    let tippyJsLastNameIcon: HTMLElement & { _tippy?: Instance };
+    let tippyJsUserNameIcon: HTMLElement & { _tippy?: Instance };
+    let tippyJsEmailIcon: HTMLElement & { _tippy?: Instance };
+    let tippyJsPasswordIcon: HTMLElement & { _tippy?: Instance };
+    let tippyJsConfirmPasswordIcon: HTMLElement & { _tippy?: Instance };
+    let tippyJsDateJoinedIcon: HTMLElement & { _tippy?: Instance };
+    let tippyJsLastLoginIcon: HTMLElement & { _tippy?: Instance };
+
+    // Tippyjs Declarations
+    $: {
+        if (browser) {
+            if (avatarElementIcon) {
+                tippy(avatarElementIcon, {
+                    content() {
+                        const element = document.createElement("p");
+                        element.innerText = "Clear Image";
+                        element.classList.add("is-clickable", "has-text-white");
+                        element.addEventListener("click", handleClearImageClick);
+                        return element;
+                    },
+                    placement: "bottom",
+                    theme: "black",
+                    allowHTML: true,
+                    sticky: true,
+                    interactive: true,
+                    hideOnClick: false,
+                    trigger: "manual",
+                    plugins: [sticky],
+                    appendTo: () => document.body
+                });
+            }
+        }
+    }
+    // Desktop only declaration
+    $: {
+        if (
+            $responsiveMode === "desktop" ||
+            $responsiveMode === "widescreen" ||
+            $responsiveMode === "fullhd"
+        ) {
+            if (tippyJsFirstNameIcon) {
+                tippy(tippyJsFirstNameIcon, {
+                    content: "First Name",
+                    hideOnClick: false,
+                    theme: "black",
+                    placement: "left",
+                    animateFill: true,
+                    trigger: "manual",
+                    showOnCreate: true,
+                    sticky: true,
+                    plugins: [animateFill, sticky]
+                });
+            }
+            if (tippyJsLastNameIcon) {
+                tippy(tippyJsLastNameIcon, {
+                    content: "Last Name",
+                    hideOnClick: false,
+                    theme: "black",
+                    placement: "left",
+                    animateFill: true,
+                    trigger: "manual",
+                    showOnCreate: true,
+                    sticky: true,
+                    plugins: [animateFill, sticky]
+                });
+            }
+            if (tippyJsUserNameIcon) {
+                tippy(tippyJsUserNameIcon, {
+                    content: "Username",
+                    hideOnClick: false,
+                    theme: "black",
+                    placement: "left",
+                    animateFill: true,
+                    trigger: "manual",
+                    showOnCreate: true,
+                    sticky: true,
+                    plugins: [animateFill, sticky]
+                });
+            }
+            if (tippyJsEmailIcon) {
+                tippy(tippyJsEmailIcon, {
+                    content: "Email",
+                    hideOnClick: false,
+                    theme: "black",
+                    placement: "left",
+                    animateFill: true,
+                    trigger: "manual",
+                    showOnCreate: true,
+                    sticky: true,
+                    plugins: [animateFill, sticky]
+                });
+            }
+            if (tippyJsPasswordIcon) {
+                tippy(tippyJsPasswordIcon, {
+                    content: "Password",
+                    hideOnClick: false,
+                    theme: "black",
+                    placement: "left",
+                    animateFill: true,
+                    trigger: "manual",
+                    showOnCreate: true,
+                    sticky: true,
+                    plugins: [animateFill, sticky]
+                });
+            }
+            if (tippyJsConfirmPasswordIcon) {
+                tippy(tippyJsConfirmPasswordIcon, {
+                    content: "Confirm Password",
+                    hideOnClick: false,
+                    theme: "black",
+                    placement: "left",
+                    animateFill: true,
+                    trigger: "manual",
+                    showOnCreate: true,
+                    sticky: true,
+                    plugins: [animateFill, sticky]
+                });
+            }
+            if (tippyJsDateJoinedIcon) {
+                tippy(tippyJsDateJoinedIcon, {
+                    content: "Date joined",
+                    hideOnClick: false,
+                    theme: "black",
+                    placement: "top",
+                    offset: [0, -10],
+                    animateFill: true,
+                    trigger: "manual",
+                    showOnCreate: true,
+                    sticky: true,
+                    plugins: [animateFill, sticky]
+                });
+            }
+            if (tippyJsLastLoginIcon) {
+                tippy(tippyJsLastLoginIcon, {
+                    content: "Last Login",
+                    hideOnClick: false,
+                    theme: "black",
+                    placement: "top",
+                    offset: [0, -10],
+                    animateFill: true,
+                    trigger: "manual",
+                    showOnCreate: true,
+                    sticky: true,
+                    plugins: [animateFill, sticky]
+                });
+            }
+        } else {
+            tippyJsFirstNameIcon?._tippy?.destroy();
+            tippyJsLastNameIcon?._tippy?.destroy();
+            tippyJsUserNameIcon?._tippy?.destroy();
+            tippyJsEmailIcon?._tippy?.destroy();
+            tippyJsPasswordIcon?._tippy?.destroy();
+            tippyJsConfirmPasswordIcon?._tippy?.destroy();
+            tippyJsDateJoinedIcon?._tippy?.destroy();
+            tippyJsLastLoginIcon?._tippy?.destroy();
+        }
+    }
     $: {
         if ($userInfo?.avatar) {
             avatarShown = false;
@@ -45,7 +212,7 @@
 
             // Set a timeout because the element is not initialized
             setTimeout(async () => {
-                avatarElement?._tippy?.show();
+                avatarElementIcon?._tippy?.show();
             }, 100);
         } else if ($userInfo?.email) {
             avatarShown = false;
@@ -194,56 +361,12 @@
         }
     });
 
-    // Tippyjs Declarations
-    $: {
-        if (browser) {
-            if (dateJoined) {
-                tippy(dateJoined, {
-                    content: "Date joined",
-                    placement: "top",
-                    theme: "black",
-                    hideOnClick: false,
-                    appendTo: () => document.body
-                });
-            }
-            if (lastLogin) {
-                tippy(lastLogin, {
-                    content: "Last Login",
-                    placement: "top",
-                    theme: "black",
-                    hideOnClick: false,
-                    appendTo: () => document.body
-                });
-            }
-            if (avatarElement) {
-                tippy(avatarElement, {
-                    content() {
-                        const element = document.createElement("p");
-                        element.innerText = "Clear Image";
-                        element.classList.add("is-clickable", "has-text-white");
-                        element.addEventListener("click", handleClearImageClick);
-                        return element;
-                    },
-                    placement: "bottom",
-                    theme: "black",
-                    allowHTML: true,
-                    sticky: true,
-                    interactive: true,
-                    hideOnClick: false,
-                    trigger: "manual",
-                    plugins: [sticky],
-                    appendTo: () => document.body
-                });
-            }
-        }
-    }
-
     const handleClearImageClick = () => {
         // Set this to true because we want to bind this to ensure we can clear backend image too.
         imageCleared = true;
 
         avatarShown = false;
-        avatarElement?._tippy.hide();
+        avatarElementIcon?._tippy.hide();
         avatarSrc = `https://seccdn.libravatar.org/avatar/${md5($userInfo?.email ?? "")}/?s=64`;
 
         // Setting timeout is the best way to remount.
@@ -271,7 +394,7 @@
 
                 setTimeout(() => {
                     avatarShown = true;
-                    avatarElement?._tippy.show();
+                    avatarElementIcon?._tippy.show();
                 }, 10);
             };
             reader.readAsDataURL(file);
@@ -295,7 +418,7 @@
             </div>
             <div class="columns is-mobile is-centered">
                 <div class="column is-narrow">
-                    <figure class="image is-96x96" bind:this={avatarElement}>
+                    <figure class="image is-96x96" bind:this={avatarElementIcon}>
                         <input
                             type="file"
                             name="avatar"
@@ -343,7 +466,7 @@
                 </div>
             </div>
 
-            <div class="items field is-horizontal py-1">
+            <div class="field is-horizontal py-1">
                 <div class="field-label is-normal is-hidden-desktop">
                     <div class="label has-text-white is-unselectable">First Name :</div>
                 </div>
@@ -358,7 +481,7 @@
                                 placeholder="First Name"
                                 autocomplete="off"
                             />
-                            <span class="icon is-small is-left">
+                            <span class="icon is-small is-left" bind:this={tippyJsFirstNameIcon}>
                                 <ion-icon
                                     class="is-size-4 has-text-white"
                                     name="alert-circle-outline"
@@ -369,7 +492,7 @@
                 </div>
             </div>
 
-            <div class="items field is-horizontal py-1">
+            <div class="field is-horizontal py-1">
                 <div class="field-label is-normal is-hidden-desktop">
                     <div class="label has-text-white is-unselectable">Last Name :</div>
                 </div>
@@ -384,7 +507,7 @@
                                 placeholder="Last Name"
                                 autocomplete="off"
                             />
-                            <span class="icon is-small is-left">
+                            <span class="icon is-small is-left" bind:this={tippyJsLastNameIcon}>
                                 <ion-icon
                                     class="is-size-4 has-text-white"
                                     name="alert-circle-outline"
@@ -394,7 +517,8 @@
                     </div>
                 </div>
             </div>
-            <div class="items field is-horizontal py-1">
+
+            <div class="field is-horizontal py-1">
                 <div class="field-label is-normal is-hidden-desktop">
                     <div class="label has-text-white is-unselectable">User Name :</div>
                 </div>
@@ -409,7 +533,7 @@
                                 placeholder="Username"
                                 autocomplete="off"
                             />
-                            <span class="icon is-small is-left">
+                            <span class="icon is-small is-left" bind:this={tippyJsUserNameIcon}>
                                 <ion-icon
                                     class="is-size-4 has-text-white"
                                     name="person-circle-outline"
@@ -419,7 +543,7 @@
                     </div>
                 </div>
             </div>
-            <div class="items field is-horizontal py-1">
+            <div class="field is-horizontal py-1">
                 <div class="field-label is-normal is-hidden-desktop">
                     <div class="label has-text-white is-unselectable">Email :</div>
                 </div>
@@ -434,14 +558,14 @@
                                 autocomplete="off"
                                 disabled
                             />
-                            <span class="icon is-small is-left">
+                            <span class="icon is-small is-left" bind:this={tippyJsEmailIcon}>
                                 <ion-icon class="is-size-4 has-text-white" name="mail-outline" />
                             </span>
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="items field is-horizontal py-1">
+            <div class="field is-horizontal py-1">
                 <div class="field-label is-normal is-hidden-desktop">
                     <div class="label has-text-white is-unselectable">Password :</div>
                 </div>
@@ -463,7 +587,7 @@
                             >
                                 👀
                             </span>
-                            <span class="icon is-small is-left">
+                            <span class="icon is-small is-left" bind:this={tippyJsPasswordIcon}>
                                 <ion-icon
                                     class="is-size-4 has-text-white"
                                     name="document-outline"
@@ -473,7 +597,7 @@
                     </div>
                 </div>
             </div>
-            <div class="items field is-horizontal py-1">
+            <div class="field is-horizontal py-1">
                 <div class="field-label is-normal is-hidden-desktop">
                     <div class="label has-text-white is-unselectable">Confirm Password :</div>
                 </div>
@@ -488,7 +612,10 @@
                                 placeholder="Confirm Password"
                                 autocomplete="new-password"
                             />
-                            <span class="icon is-small is-left">
+                            <span
+                                class="icon is-small is-left"
+                                bind:this={tippyJsConfirmPasswordIcon}
+                            >
                                 <ion-icon
                                     class="is-size-4 has-text-white"
                                     name="document-lock-outline"
@@ -498,7 +625,7 @@
                     </div>
                 </div>
             </div>
-            <div class="items field is-horizontal py-1">
+            <div class="field is-horizontal py-1">
                 <div class="field-body">
                     <div class="field">
                         <div class="field-label is-normal is-hidden-desktop">
@@ -518,7 +645,10 @@
                                 disabled={true}
                             />
 
-                            <span class="icon is-small is-left is-clickable" bind:this={dateJoined}>
+                            <span
+                                class="icon is-small is-left is-clickable"
+                                bind:this={tippyJsDateJoinedIcon}
+                            >
                                 <ion-icon
                                     class="is-size-4 has-text-white"
                                     name="calendar-outline"
@@ -542,14 +672,17 @@
                                 disabled={true}
                             />
 
-                            <span class="icon is-small is-left is-clickable" bind:this={lastLogin}>
+                            <span
+                                class="icon is-small is-left is-clickable"
+                                bind:this={tippyJsLastLoginIcon}
+                            >
                                 <ion-icon class="is-size-4 has-text-white" name="today-outline" />
                             </span>
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="items columns is-mobile is-centered pt-3">
+            <div class="columns is-mobile is-centered pt-3">
                 <div class="column is-narrow">
                     <button
                         type="submit"

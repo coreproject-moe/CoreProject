@@ -37,13 +37,16 @@ browser && // Is browser
 
 export const userInfo = writable(
     {
+        id: 0,
         first_name: "",
         last_name: "",
-        email: "",
-        date_joined: "",
         username: "",
-        id: 0,
+        email: "",
+        user_permission: [],
+        date_joined: "",
         last_login: "",
+        is_superuser: false,
+        is_staff: false,
         avatar: ""
     },
     function start(set) {
