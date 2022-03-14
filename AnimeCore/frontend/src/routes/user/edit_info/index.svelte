@@ -271,13 +271,13 @@
                 <br/>
                 <br/>
                 <ul>
-                    ${SUPPORTED_FORMATS.map((items) => {
+                    ${SUPPORTED_FORMATS?.map((items) => {
                         return `<li><b>${items}</b></li>`;
                     }).join(" ")}
                 </ul>`,
                 async (value: File) => {
                     if (value?.size > 0) {
-                        return SUPPORTED_FORMATS.includes(value?.type);
+                        return SUPPORTED_FORMATS?.includes(value?.type);
                     }
                     return true;
                 }
@@ -625,7 +625,7 @@
                         <p class="control is-expanded has-icons-left">
                             <input
                                 type="text"
-                                value={dayjs($userInfo?.date_joined).format(
+                                value={dayjs($userInfo?.date_joined)?.format(
                                     "MMMM D, YYYY - h:mm A"
                                 )}
                                 class="input is-static is-font-face-ubuntu is-unselectable has-text-white has-background-black"
@@ -654,7 +654,9 @@
                         <p class="control is-expanded has-icons-left">
                             <input
                                 type="text"
-                                value={dayjs($userInfo?.last_login).format("MMMM D, YYYY - h:mm A")}
+                                value={dayjs($userInfo?.last_login)?.format(
+                                    "MMMM D, YYYY - h:mm A"
+                                )}
                                 class="input is-static is-font-face-ubuntu is-unselectable has-text-white has-background-black"
                                 placeholder="Date Joined"
                                 readonly={true}
