@@ -1,8 +1,10 @@
 <script lang="ts">
+    import { onDestroy } from "svelte";
     import { fade } from "svelte/transition";
 
     import * as yup from "yup";
     import { createForm } from "felte";
+    import tippy, { animateFill, sticky, type Instance } from "tippy.js";
 
     import reporter from "@felte/reporter-tippy";
     import { validator } from "@felte/validator-yup";
@@ -15,13 +17,52 @@
 
     import { tokenObtainUrl } from "$urls/restEndpoints";
     import { isUserAuthenticated, userToken } from "$store/users";
+    import { responsiveMode } from "$store/responsive";
 
     // Bind it to show or hide passwords
     let passwordShown = false;
 
     // Show error message if theres an error.
-
     let errorMessage = "";
+
+    // TippyJS Icons
+    let tippyJsUserNameIcon: HTMLElement & { _tippy?: Instance };
+    let tippyJsPasswordIcon: HTMLElement & { _tippy?: Instance };
+
+    $: {
+        if (
+            $responsiveMode === "desktop" ||
+            $responsiveMode === "widescreen" ||
+            $responsiveMode === "fullhd"
+        ) {
+            if (tippyJsUserNameIcon) {
+                tippy(tippyJsUserNameIcon, {
+                    content: "Username / Email",
+                    hideOnClick: false,
+                    theme: "black",
+                    placement: "left",
+                    animateFill: true,
+                    trigger: "manual",
+                    showOnCreate: true,
+                    sticky: true,
+                    plugins: [animateFill, sticky]
+                });
+            }
+            if (tippyJsPasswordIcon) {
+                tippy(tippyJsPasswordIcon, {
+                    content: "Password",
+                    hideOnClick: false,
+                    theme: "black",
+                    placement: "left",
+                    animateFill: true,
+                    trigger: "manual",
+                    showOnCreate: true,
+                    sticky: true,
+                    plugins: [animateFill, sticky]
+                });
+            }
+        }
+    }
 
     const schema = yup.object({
         username_or_email: yup
@@ -32,6 +73,7 @@
             ?.required("How can <b>one</b> create <b>ones</b> account without <b>Password</b> ? 🤔")
             ?.max(1024, "<b>Password</b> must be less than <b>1024 Characters<b/>")
     });
+
     const { form } = createForm<yup.InferType<typeof schema>>({
         extend: [
             validator({ schema }),
@@ -73,6 +115,11 @@
             }
         }
     });
+
+    onDestroy(async () => {
+        tippyJsUserNameIcon?._tippy?.destroy();
+        tippyJsPasswordIcon?._tippy?.destroy();
+    });
 </script>
 
 <svelte:head>
@@ -108,7 +155,7 @@
                             class="input is-font-face-ubuntu has-text-white has-background-black has-border-gray"
                             placeholder="Username / Email"
                         />
-                        <span class="icon is-small is-left">
+                        <span class="icon is-small is-left" bind:this={tippyJsUserNameIcon}>
                             <ion-icon
                                 class="has-text-white is-size-4"
                                 name="person-circle-outline"
@@ -136,7 +183,7 @@
                         >
                             👀
                         </span>
-                        <span class="icon is-small is-left">
+                        <span class="icon is-small is-left" bind:this={tippyJsPasswordIcon}>
                             <ion-icon class="has-text-white is-size-4" name="lock-closed-outline" />
                         </span>
                     </p>

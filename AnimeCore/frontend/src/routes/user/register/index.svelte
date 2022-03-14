@@ -1,16 +1,17 @@
 <script lang="ts">
-    import { goto } from "$app/navigation";
-
     import { onDestroy } from "svelte";
     import { fade } from "svelte/transition";
 
     import * as yup from "yup";
     import { createForm } from "felte";
-    import tippy, { sticky, type Instance } from "tippy.js";
+    import tippy, { animateFill, sticky, type Instance } from "tippy.js";
 
     import reporter from "@felte/reporter-tippy";
     import { validator } from "@felte/validator-yup";
 
+    import { goto } from "$app/navigation";
+
+    import { responsiveMode } from "$store/responsive";
     import { isUserAuthenticated } from "$store/users";
     import { registerEndpoint } from "$urls/restEndpoints";
 
@@ -20,12 +21,116 @@
     onDestroy(async () => {
         // Cleanup
         avatarElement?._tippy?.destroy();
+
+        tippyJsFirstNameIcon?._tippy?.destroy();
+        tippyJsLastNameIcon?._tippy?.destroy();
+        tippyJsUserNameIcon?._tippy?.destroy();
+        tippyJsEmailIcon?._tippy?.destroy();
+        tippyJsPasswordIcon?._tippy?.destroy();
+        tippyJsConfirmPasswordIcon?._tippy?.destroy();
     });
 
     let avatarSrc = "";
     let passwordShown = false;
     let avatarShown: boolean;
+
+    // Tippyjs Declarations
     let avatarElement: HTMLElement & { _tippy?: Instance };
+
+    let tippyJsFirstNameIcon: HTMLElement & { _tippy?: Instance };
+    let tippyJsLastNameIcon: HTMLElement & { _tippy?: Instance };
+    let tippyJsUserNameIcon: HTMLElement & { _tippy?: Instance };
+    let tippyJsEmailIcon: HTMLElement & { _tippy?: Instance };
+    let tippyJsPasswordIcon: HTMLElement & { _tippy?: Instance };
+    let tippyJsConfirmPasswordIcon: HTMLElement & { _tippy?: Instance };
+
+    // Desktop only declaration
+    $: {
+        if (
+            $responsiveMode === "desktop" ||
+            $responsiveMode === "widescreen" ||
+            $responsiveMode === "fullhd"
+        ) {
+            if (tippyJsFirstNameIcon) {
+                tippy(tippyJsFirstNameIcon, {
+                    content: "First Name",
+                    hideOnClick: false,
+                    theme: "black",
+                    placement: "left",
+                    animateFill: true,
+                    trigger: "manual",
+                    showOnCreate: true,
+                    sticky: true,
+                    plugins: [animateFill, sticky]
+                });
+            }
+            if (tippyJsLastNameIcon) {
+                tippy(tippyJsLastNameIcon, {
+                    content: "Last Name",
+                    hideOnClick: false,
+                    theme: "black",
+                    placement: "left",
+                    animateFill: true,
+                    trigger: "manual",
+                    showOnCreate: true,
+                    sticky: true,
+                    plugins: [animateFill, sticky]
+                });
+            }
+            if (tippyJsUserNameIcon) {
+                tippy(tippyJsUserNameIcon, {
+                    content: "Username",
+                    hideOnClick: false,
+                    theme: "black",
+                    placement: "left",
+                    animateFill: true,
+                    trigger: "manual",
+                    showOnCreate: true,
+                    sticky: true,
+                    plugins: [animateFill, sticky]
+                });
+            }
+            if (tippyJsEmailIcon) {
+                tippy(tippyJsEmailIcon, {
+                    content: "Email",
+                    hideOnClick: false,
+                    theme: "black",
+                    placement: "left",
+                    animateFill: true,
+                    trigger: "manual",
+                    showOnCreate: true,
+                    sticky: true,
+                    plugins: [animateFill, sticky]
+                });
+            }
+            if (tippyJsPasswordIcon) {
+                tippy(tippyJsPasswordIcon, {
+                    content: "Password",
+                    hideOnClick: false,
+                    theme: "black",
+                    placement: "left",
+                    animateFill: true,
+                    trigger: "manual",
+                    showOnCreate: true,
+                    sticky: true,
+                    plugins: [animateFill, sticky]
+                });
+            }
+            if (tippyJsConfirmPasswordIcon) {
+                tippy(tippyJsConfirmPasswordIcon, {
+                    content: "Confirm Password",
+                    hideOnClick: false,
+                    theme: "black",
+                    placement: "left",
+                    animateFill: true,
+                    trigger: "manual",
+                    showOnCreate: true,
+                    sticky: true,
+                    plugins: [animateFill, sticky]
+                });
+            }
+        }
+    }
 
     const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/gif", "image/png"];
 
@@ -268,7 +373,7 @@
                             class="input is-font-face-ubuntu has-text-white has-background-black has-border-gray"
                             placeholder="First Name"
                         />
-                        <span class="icon is-small is-left">
+                        <span class="icon is-small is-left" bind:this={tippyJsFirstNameIcon}>
                             <img
                                 alt=""
                                 class="is-size-7"
@@ -290,7 +395,7 @@
                             class="input is-font-face-ubuntu has-text-white has-background-black has-border-gray"
                             placeholder="Last Name"
                         />
-                        <span class="icon is-small is-left">
+                        <span class="icon is-small is-left" bind:this={tippyJsLastNameIcon}>
                             <img
                                 alt=""
                                 class="is-size-7"
@@ -312,7 +417,7 @@
                             class="input is-font-face-ubuntu has-text-white has-background-black has-border-gray"
                             placeholder="Username"
                         />
-                        <span class="icon is-small is-left">
+                        <span class="icon is-small is-left" bind:this={tippyJsUserNameIcon}>
                             <ion-icon
                                 class="is-size-4 has-text-white"
                                 name="person-circle-outline"
@@ -333,7 +438,7 @@
                             class="input is-font-face-ubuntu has-text-white has-background-black has-border-gray"
                             placeholder="Email"
                         />
-                        <span class="icon is-small is-left">
+                        <span class="icon is-small is-left" bind:this={tippyJsEmailIcon}>
                             <ion-icon class="is-size-4 has-text-white" name="mail-outline" />
                         </span>
                     </p>
@@ -360,7 +465,7 @@
                         >
                             👀
                         </span>
-                        <span class="icon is-small is-left">
+                        <span class="icon is-small is-left" bind:this={tippyJsPasswordIcon}>
                             <ion-icon class="is-size-4 has-text-white" name="lock-closed-outline" />
                         </span>
                     </p>
@@ -378,7 +483,7 @@
                             placeholder="Confirm Password"
                             autocomplete="new-password"
                         />
-                        <span class="icon is-small is-left">
+                        <span class="icon is-small is-left" bind:this={tippyJsConfirmPasswordIcon}>
                             <ion-icon
                                 class="is-size-4 has-text-white"
                                 name="document-lock-outline"
