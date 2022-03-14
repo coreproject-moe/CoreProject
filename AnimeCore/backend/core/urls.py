@@ -8,6 +8,8 @@ The `urlpatterns` list routes URLs to views. For more information please see:
 from django.urls import path
 from django.urls import include
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
@@ -34,3 +36,6 @@ urlpatterns = [
     path("api/v1/capture/", include("apps.capture.apis")),
     path("api/v1/upload/", include("apps.upload.apis")),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
