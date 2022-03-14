@@ -14,10 +14,10 @@
     import { projectName } from "$lib/constants/frontend/project";
     import { snakeCaseToTitleCase } from "$lib/functions/snakeCaseToTitleCase";
 
-    $: episode_number = parseInt($page.params.number);
+    $: episode_number = parseInt($page?.params?.number as string);
     $: anime_name = "";
 
-    let player: HTMLVmPlayerElement = null;
+    let player: HTMLVmPlayerElement;
     let showPlayer = false;
     let captionEnabled = true;
 

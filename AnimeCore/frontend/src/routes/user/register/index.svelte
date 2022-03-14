@@ -181,7 +181,7 @@
                 <br/>
                 A valid password = <b>Ex@mple1234</b>`,
                 async (value) => {
-                    if (value?.length > 0) {
+                    if (value && value?.length > 0) {
                         return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(
                             value
                         );
@@ -235,8 +235,8 @@
         onSubmit: async (values) => {
             const data = new FormData();
 
-            data.append("first_name", values?.first_name);
-            data.append("last_name", values?.last_name);
+            data.append("first_name", values?.first_name as string);
+            data.append("last_name", values?.last_name as string);
             data.append("username", values?.username);
             data.append("email", values?.email);
             data.append("avatar", values?.avatar);
@@ -271,7 +271,8 @@
 
     const handleImageInput = (e: Event) => {
         const target = e?.target as HTMLInputElement;
-        const file = target.files[0];
+        const file = target.files instanceof FileList ? target.files[0] : null;
+
         if (file) {
             const reader = new FileReader();
             reader.onload = function () {
