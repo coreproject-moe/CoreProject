@@ -4,7 +4,7 @@ import { jwtRefresh } from "$lib/constants/backend/jwt/refresh";
 import { tokenRefreshUrl, userInfoUrl } from "$urls/restEndpoints";
 
 export const userToken = writable(
-    browser && JSON.parse(localStorage.getItem("tokens") ?? '{ refresh: "", access: "" }')
+    browser && JSON.parse(localStorage.getItem("tokens") ?? '{ "refresh": "", "access": "" }')
 );
 
 export const isUserAuthenticated = writable(get(userToken).access);
