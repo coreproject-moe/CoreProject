@@ -12,7 +12,7 @@
     import { userInfo } from "$store/users";
     import { browser } from "$app/env";
 
-    let animePoster: File;
+    // let animePoster: File;
     let animePosterSrc = "";
 
     let tippyJsAnimePoster: HTMLElement & { _tippy?: Instance };
@@ -101,7 +101,7 @@
 
     const handleImageInput = (e: Event) => {
         const target = e?.target as HTMLInputElement;
-        const file = target.files[0];
+        const file = target.files instanceof FileList ? target.files[0] : null;
         tippyJsAnimePoster?._tippy?.destroy();
 
         if (file) {

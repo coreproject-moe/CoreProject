@@ -26,9 +26,10 @@ export const vimeJSVolume = writable(100, function start(set) {
             }
         })(set);
     } else {
-        const volume =
-            browser && parseInt(localStorage.getItem("vimejs-volume") ?? JSON.stringify(100));
-        set(volume);
+        if (browser) {
+            const volume = parseInt(localStorage.getItem("vimejs-volume") ?? JSON.stringify(100));
+            set(volume);
+        }
     }
 });
 

@@ -4,8 +4,8 @@
 
     onMount(async () => {
         // https://bulma.io/documentation/components/navbar/#fixed-navbar
-        const HTMLTAG = browser && document.getElementsByTagName("html")[0]; // '0' to assign the first (and only `HTML` tag)
-        browser && HTMLTAG.classList.remove("has-navbar-fixed-top");
+        browser &&
+            document.getElementsByTagName("html")[0]?.classList.remove("has-navbar-fixed-top"); // '0' to assign the first (and only `HTML` tag)
     });
 </script>
 

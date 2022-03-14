@@ -27,10 +27,10 @@ const trapFocusListener = (event: KeyboardEvent) => {
     const last = focusable[focusable.length - 1];
     if (isNext(event) && event.target === last) {
         event.preventDefault();
-        first.focus();
+        first?.focus();
     } else if (isPrevious(event) && event.target === first) {
         event.preventDefault();
-        last.focus();
+        last?.focus();
     }
 };
 

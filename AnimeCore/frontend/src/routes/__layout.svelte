@@ -34,8 +34,7 @@
 
     onMount(async () => {
         // https://bulma.io/documentation/components/navbar/#fixed-navbar
-        const HTMLTAG = browser && document.getElementsByTagName("html")[0]; // '0' to assign the first (and only `HTML` tag)
-        browser && HTMLTAG.classList.add("has-navbar-fixed-top");
+        browser && document.getElementsByTagName("html")[0]?.classList.add("has-navbar-fixed-top"); // '0' to assign the first (and only `HTML` tag)
 
         arrowButtonTurned = false;
     });
@@ -80,7 +79,7 @@
             });
         }
 
-        if (tippyJsAvatar && !tippyJsAvatar?._tippy) {
+        if (tippyJsAvatar && !tippyJsAvatar._tippy && browser) {
             tippy(tippyJsAvatar, {
                 theme: "black",
                 trigger: "click",
@@ -89,7 +88,7 @@
                 sticky: true,
                 placement: "bottom",
                 plugins: [sticky],
-                appendTo: () => browser && document.body,
+                appendTo: () => document.body,
                 onTrigger: async (instance) => {
                     const node = document.createElement("div");
                     new Avatar({
@@ -341,7 +340,7 @@
                                 To reflect that change, we need to do optimistic update,
                                 which this if else statement is doing down.
                             -->
-                            {#if $userInfo.avatar}
+                            {#if $userInfo?.avatar}
                                 <div
                                     bind:this={tippyJsAvatar}
                                     data-href={`${baseUrl}${$userInfo?.avatar}`}

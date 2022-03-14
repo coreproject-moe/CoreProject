@@ -70,7 +70,7 @@
                         imageCleared = true;
 
                         avatarShown = false;
-                        avatarElementIcon?._tippy.hide();
+                        avatarElementIcon?._tippy?.hide();
                         avatarSrc = `https://seccdn.libravatar.org/avatar/${md5(
                             $userInfo?.email ?? ""
                         )}/?s=64`;
@@ -243,7 +243,7 @@
                 <br/>
                 A valid password = <b>Ex@mple1234</b>`,
                 async (value) => {
-                    if (value?.length > 0) {
+                    if (value && value?.length > 0) {
                         return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(
                             value
                         );
@@ -355,7 +355,8 @@
 
     const handleImageInput = (e: Event) => {
         const target = e.target as HTMLInputElement;
-        const file = target.files[0];
+        const file = target.files instanceof FileList ? target.files[0] : null;
+
         if (file) {
             const reader = new FileReader();
             reader.onload = function () {
@@ -369,7 +370,7 @@
 
                 setTimeout(() => {
                     avatarShown = true;
-                    avatarElementIcon?._tippy.show();
+                    avatarElementIcon?._tippy?.show();
                 }, 10);
             };
             reader.readAsDataURL(file);
