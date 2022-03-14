@@ -43,7 +43,7 @@ class UserSerializer(serializers.ModelSerializer):
         return cleaned_data
 
     def validate(self, cleaned_data):
-        password: str = cleaned_data.get("password", None)
+        password = cleaned_data.get("password", None)
 
         if password:
             hashed_password = make_password(password)
