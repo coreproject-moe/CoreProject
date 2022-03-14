@@ -19,7 +19,6 @@
     import { isUserAuthenticated, userInfo } from "$store/users";
 
     // Constants
-    import { baseUrl } from "$urls/baseUrl";
     import { githubUrl } from "$lib/constants/frontend/project";
 
     import { page } from "$app/stores";
@@ -343,7 +342,7 @@
                             {#if $userInfo?.avatar}
                                 <div
                                     bind:this={tippyJsAvatar}
-                                    data-href={`${baseUrl}${$userInfo?.avatar}`}
+                                    data-href={$userInfo?.avatar}
                                     class="progressive replace"
                                     style="border-radius: 9999px; height:40px; width:40px; z-index: 1000000;margin: auto;"
                                 >

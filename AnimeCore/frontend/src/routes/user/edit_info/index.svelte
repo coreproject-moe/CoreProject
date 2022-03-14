@@ -17,16 +17,14 @@
     import { trapFocus } from "$lib/functions/trapFocus";
     import { projectName } from "$lib/constants/frontend/project";
 
-    import { baseUrl } from "$urls/baseUrl";
     import { userInfoUrl } from "$urls/restEndpoints";
 
     import { responsiveMode } from "$store/responsive";
-
     import { isUserAuthenticated, userInfo, userToken } from "$store/users";
     $: {
         if ($userInfo?.avatar) {
             avatarShown = false;
-            avatarSrc = `${baseUrl}${$userInfo?.avatar}`;
+            avatarSrc = `${$userInfo?.avatar}`;
             avatarShown = true;
 
             // Set a timeout because the element is not initialized
@@ -39,7 +37,6 @@
             avatarShown = true;
         }
     }
-
     let passwordShown = false;
     let imageCleared = false;
     let avatarShown: boolean;
