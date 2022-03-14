@@ -15,28 +15,31 @@
     import { page } from "$app/stores";
     import { goto } from "$app/navigation";
 
-    import { baseUrl } from "$urls/baseUrl";
-    import { userInfoUrl } from "$urls/restEndpoints";
-
     import { trapFocus } from "$lib/functions/trapFocus";
     import { projectName } from "$lib/constants/frontend/project";
 
-    import { isUserAuthenticated, userInfo, userToken } from "$store/users";
     import { responsiveMode } from "$store/responsive";
 
-    onDestroy(async () => {
-        avatarElementIcon?._tippy?.destroy();
+    import { baseUrl } from "$urls/baseUrl";
+    import { userInfoUrl } from "$urls/restEndpoints";
 
-        // Cleanup
-        tippyJsFirstNameIcon?._tippy?.destroy();
-        tippyJsLastNameIcon?._tippy?.destroy();
-        tippyJsUserNameIcon?._tippy?.destroy();
-        tippyJsEmailIcon?._tippy?.destroy();
-        tippyJsPasswordIcon?._tippy?.destroy();
-        tippyJsConfirmPasswordIcon?._tippy?.destroy();
-        tippyJsDateJoinedIcon?._tippy?.destroy();
-        tippyJsLastLoginIcon?._tippy?.destroy();
-    });
+    import { isUserAuthenticated, userInfo, userToken } from "$store/users";
+    $: {
+        if ($userInfo?.avatar) {
+            avatarShown = false;
+            avatarSrc = `${baseUrl}${$userInfo?.avatar}`;
+            avatarShown = true;
+
+            // Set a timeout because the element is not initialized
+            setTimeout(async () => {
+                avatarElementIcon?._tippy?.show();
+            }, 100);
+        } else if ($userInfo?.email) {
+            avatarShown = false;
+            avatarSrc = `https://seccdn.libravatar.org/avatar/${md5($userInfo?.email ?? "")}/?s=64`;
+            avatarShown = true;
+        }
+    }
 
     let passwordShown = false;
     let imageCleared = false;
@@ -57,35 +60,51 @@
 
     // Tippyjs Declarations
     $: {
-        if (browser) {
-            if (avatarElementIcon) {
-                tippy(avatarElementIcon, {
-                    content() {
-                        const element = document.createElement("p");
-                        element.innerText = "Clear Image";
-                        element.classList.add("is-clickable", "has-text-white");
-                        element.addEventListener("click", handleClearImageClick);
-                        return element;
-                    },
-                    placement: "bottom",
-                    theme: "black",
-                    allowHTML: true,
-                    sticky: true,
-                    interactive: true,
-                    hideOnClick: false,
-                    trigger: "manual",
-                    plugins: [sticky],
-                    appendTo: () => document.body
-                });
-            }
+        if (avatarElementIcon) {
+            tippy(avatarElementIcon, {
+                content() {
+                    const element = document.createElement("p");
+                    element.innerText = "Clear Image";
+                    element.classList.add("is-clickable", "has-text-white");
+                    element.addEventListener("click", async () => {
+                        // Set this to true because we want to bind this to ensure we can clear backend image too.
+                        imageCleared = true;
+
+                        avatarShown = false;
+                        avatarElementIcon?._tippy.hide();
+                        avatarSrc = `https://seccdn.libravatar.org/avatar/${md5(
+                            $userInfo?.email ?? ""
+                        )}/?s=64`;
+
+                        // Setting timeout is the best way to remount.
+                        // Please don't change this logic.
+                        // This will only make it harder
+
+                        setTimeout(async () => {
+                            avatarShown = true;
+                        }, 10);
+                    });
+                    return element;
+                },
+                placement: "bottom",
+                theme: "black",
+                allowHTML: true,
+                sticky: true,
+                interactive: true,
+                hideOnClick: false,
+                trigger: "manual",
+                plugins: [sticky]
+            });
         }
     }
     // Desktop only declaration
+
     $: {
         if (
-            $responsiveMode === "desktop" ||
-            $responsiveMode === "widescreen" ||
-            $responsiveMode === "fullhd"
+            browser &&
+            ($responsiveMode === "desktop" ||
+                $responsiveMode === "widescreen" ||
+                $responsiveMode === "fullhd")
         ) {
             if (tippyJsFirstNameIcon) {
                 tippy(tippyJsFirstNameIcon, {
@@ -202,22 +221,6 @@
             tippyJsConfirmPasswordIcon?._tippy?.destroy();
             tippyJsDateJoinedIcon?._tippy?.destroy();
             tippyJsLastLoginIcon?._tippy?.destroy();
-        }
-    }
-    $: {
-        if ($userInfo?.avatar) {
-            avatarShown = false;
-            avatarSrc = `${baseUrl}${$userInfo?.avatar}`;
-            avatarShown = true;
-
-            // Set a timeout because the element is not initialized
-            setTimeout(async () => {
-                avatarElementIcon?._tippy?.show();
-            }, 100);
-        } else if ($userInfo?.email) {
-            avatarShown = false;
-            avatarSrc = `https://seccdn.libravatar.org/avatar/${md5($userInfo?.email ?? "")}/?s=64`;
-            avatarShown = true;
         }
     }
 
@@ -361,23 +364,6 @@
         }
     });
 
-    const handleClearImageClick = () => {
-        // Set this to true because we want to bind this to ensure we can clear backend image too.
-        imageCleared = true;
-
-        avatarShown = false;
-        avatarElementIcon?._tippy.hide();
-        avatarSrc = `https://seccdn.libravatar.org/avatar/${md5($userInfo?.email ?? "")}/?s=64`;
-
-        // Setting timeout is the best way to remount.
-        // Please don't change this logic.
-        // This will only make it harder
-
-        setTimeout(() => {
-            avatarShown = true;
-        }, 10);
-    };
-
     const handleImageInput = (e: Event) => {
         const target = e.target as HTMLInputElement;
         const file = target.files[0];
@@ -400,6 +386,20 @@
             reader.readAsDataURL(file);
         }
     };
+
+    onDestroy(async () => {
+        avatarElementIcon?._tippy?.destroy();
+
+        // Cleanup
+        tippyJsFirstNameIcon?._tippy?.destroy();
+        tippyJsLastNameIcon?._tippy?.destroy();
+        tippyJsUserNameIcon?._tippy?.destroy();
+        tippyJsEmailIcon?._tippy?.destroy();
+        tippyJsPasswordIcon?._tippy?.destroy();
+        tippyJsConfirmPasswordIcon?._tippy?.destroy();
+        tippyJsDateJoinedIcon?._tippy?.destroy();
+        tippyJsLastLoginIcon?._tippy?.destroy();
+    });
 </script>
 
 <svelte:head>
