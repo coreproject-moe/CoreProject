@@ -10,7 +10,6 @@
     import { validator } from "@felte/validator-yup";
 
     import { goto } from "$app/navigation";
-
     import { responsiveMode } from "$store/responsive";
     import { isUserAuthenticated } from "$store/users";
     import { registerEndpoint } from "$urls/restEndpoints";
