@@ -17,10 +17,10 @@
     import { trapFocus } from "$lib/functions/trapFocus";
     import { projectName } from "$lib/constants/frontend/project";
 
-    import { responsiveMode } from "$store/responsive";
-
     import { baseUrl } from "$urls/baseUrl";
     import { userInfoUrl } from "$urls/restEndpoints";
+
+    import { responsiveMode } from "$store/responsive";
 
     import { isUserAuthenticated, userInfo, userToken } from "$store/users";
     $: {
