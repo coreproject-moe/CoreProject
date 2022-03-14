@@ -19,10 +19,6 @@ from rest_framework_simplejwt.views import (
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    #    Pages
-    # ============
-    path("edit/", include("apps.edit.urls")),
-    path("upload/", include("apps.upload.urls")),
     #   Api
     # ========
     # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html#installation
