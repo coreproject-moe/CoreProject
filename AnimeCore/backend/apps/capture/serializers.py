@@ -22,14 +22,17 @@ class CaptureAnimeNameSerializer(serializers.ModelSerializer):
 
 
 class CaptureInfoSerializer(serializers.ModelSerializer):
-    video_timestamps = CaptureAnimeNameSerializer(many=True)
+    video_timestamps = CaptureAnimeNameSerializer(many=True, required=False)
 
     class Meta:
         model = CaptureInfoModel
-        exclude = ("id",)
+        exclude = (
+            "id",
+            "user",
+        )
 
     def update(self, instance: CaptureInfoModel, validated_data):
-        user = validated_data["user"]
+        user = self.context.get("user")
 
         video_volume = validated_data.get("video_volume", None)
         if video_volume:
