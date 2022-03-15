@@ -1,7 +1,7 @@
 <script lang="ts">
     import dayjs from "dayjs";
     import * as yup from "yup";
-    import { Md5 } from "ts-md5/dist/md5";
+    import { Md5 } from "ts-md5";
 
     import { createForm } from "felte";
     import { fade } from "svelte/transition";

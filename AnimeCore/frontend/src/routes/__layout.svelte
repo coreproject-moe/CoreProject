@@ -3,7 +3,7 @@
     import "../app.scss";
 
     // Import JS libraries
-    import { Md5 } from "ts-md5/dist/md5";
+    import { Md5 } from "ts-md5";
     import anime from "animejs";
     import tippy, { sticky, followCursor, type Instance } from "tippy.js";
 
