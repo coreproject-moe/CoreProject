@@ -8,6 +8,8 @@
     import { onDestroy, onMount } from "svelte";
     import tippy, { followCursor, animateFill, type Instance } from "tippy.js";
 
+    let parentElement: HTMLElement;
+    // TippyJS declarations
     let tippyJsAnimeNumberElement: HTMLElement & { _tippy?: Instance };
     let tippyJsAnimeNameElement: HTMLElement & { _tippy?: Instance };
     let tippyJsSubElement: HTMLElement & { _tippy?: Instance };
@@ -20,54 +22,48 @@
                 allowHTML: true,
                 theme: "black",
                 offset: [0, -5],
-                maxWidth: 130,
                 placement: "top",
                 animateFill: true,
                 followCursor: "horizontal",
-                plugins: [followCursor, animateFill]
+                plugins: [followCursor, animateFill],
+                appendTo: parentElement
             });
         }
         tippy(tippyJsAnimeNameElement, {
             content: `<p class='is-size-7'>${animeName}</p>`,
             allowHTML: true,
             theme: "black",
-            maxWidth: 150,
             placement: "top",
             animateFill: true,
             followCursor: "horizontal",
-            plugins: [followCursor, animateFill]
+            plugins: [followCursor, animateFill],
+            appendTo: parentElement
         });
         tippy(tippyJsSubElement, {
             content: "<p class='is-size-7'>This anime has English <b>Subtitles</b>🥳</p>",
             allowHTML: true,
             theme: "black",
-            maxWidth: 140,
             placement: "top",
             animateFill: true,
             followCursor: "horizontal",
-            plugins: [followCursor, animateFill]
+            plugins: [followCursor, animateFill],
+            appendTo: parentElement
         });
         tippy(tippyJsDubElement, {
             content: "<p class='is-size-7'>This anime has English <b>Audio</b>🥳</p>",
             allowHTML: true,
             theme: "black",
-            maxWidth: 120,
             placement: "top",
             animateFill: true,
             followCursor: "horizontal",
-            plugins: [followCursor, animateFill]
+            plugins: [followCursor, animateFill],
+            appendTo: parentElement
         });
-    });
-    onDestroy(async () => {
-        tippyJsAnimeNumberElement?._tippy?.destroy();
-        tippyJsAnimeNameElement?._tippy?.destroy();
-        tippyJsDubElement?._tippy?.destroy();
-        tippyJsSubElement?._tippy?.destroy();
     });
 </script>
 
 <SwiperSlide>
-    <a sveltekit:prefetch href="/anime/{animeNumber}" class="card">
+    <a sveltekit:prefetch href="/anime/{animeNumber}" class="card" bind:this={parentElement}>
         <div class="card-image has-background-black">
             <figure class="image">
                 <div
