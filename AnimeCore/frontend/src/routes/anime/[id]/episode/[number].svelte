@@ -18,7 +18,6 @@
     $: anime_name = "";
 
     let player: HTMLVmPlayerElement;
-    let showPlayer = false;
     let captionEnabled = true;
 
     // Get height before dom is updated
@@ -28,15 +27,10 @@
         }
     });
 
-    onMount(async () => {
+    async function loadPlayer() {
         const { defineCustomElements } = await import("@vime/core");
         defineCustomElements();
-
-        showPlayer = true;
-    });
-    onDestroy(async () => {
-        showPlayer = false;
-    });
+    }
 
     const onVolumeChange = async () => {
         $vimeJSVolume = player?.volume;
@@ -175,7 +169,15 @@
 </svelte:head>
 
 <div class="container pt-5">
-    {#if showPlayer}
+    {#await loadPlayer()}
+        <section class="hero is-large">
+            <div class="hero-body">
+                <div class="has-text-centered">
+                    <button class="button is-ghost is-loading is-size-2" />
+                </div>
+            </div>
+        </section>
+    {:then _}
         <vm-player autoplay bind:this={player} on:vmVolumeChange={onVolumeChange}>
             <vm-video poster="https://media.vimejs.com/poster.png" cross-origin>
                 <source data-src="https://media.vimejs.com/720p.mp4" type="video/mp4" />
@@ -198,15 +200,7 @@
                 <vm-default-settings pin="bottomRight" />
             </vm-ui>
         </vm-player>
-    {:else}
-        <section class="hero is-large">
-            <div class="hero-body">
-                <div class="has-text-centered">
-                    <button class="button is-ghost is-loading is-size-2" />
-                </div>
-            </div>
-        </section>
-    {/if}
+    {/await}
 </div>
 <div class="container pt-5">
     <!-- Main container -->
