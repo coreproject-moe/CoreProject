@@ -16,14 +16,10 @@
     import tippy, { sticky, animateFill, type Instance } from "tippy.js";
 
     let animeJSEditInfoIcon: HTMLElement;
-    let animeJSEditInfoText: HTMLElement;
-
-    let animeJSLogOutText: HTMLElement;
     let animeJSLogOutIcon: HTMLElement;
 
     // Magic
     let parentElement: HTMLElement;
-
     // TippyJS bindings
     let tippyIdElement: HTMLElement & { _tippy?: Instance };
     let tippyFirstNameElement: HTMLElement & { _tippy?: Instance };
@@ -291,13 +287,13 @@
                     href="/user/edit_info"
                     on:mouseenter|preventDefault={async () => {
                         anime({
-                            targets: [animeJSEditInfoIcon, animeJSEditInfoText],
+                            targets: [animeJSEditInfoIcon],
                             color: "#03B35A" // Springgreen ( Darker Shade )
                         });
                     }}
                     on:mouseleave|preventDefault={async () => {
                         anime({
-                            targets: [animeJSEditInfoIcon, animeJSEditInfoText],
+                            targets: [animeJSEditInfoIcon],
                             color: "#d9d9d9"
                         });
                     }}
@@ -307,7 +303,7 @@
                         name="create-outline"
                         bind:this={animeJSEditInfoIcon}
                     />
-                    <span style="color:#d9d9d9" bind:this={animeJSEditInfoText}>Edit Info</span>
+                    <span style="color:#d9d9d9">Edit Info</span>
                 </a>
             </div>
 
@@ -320,13 +316,13 @@
                     href="/user/logout?next=${nextPage}"
                     on:mouseenter|preventDefault={async () => {
                         anime({
-                            targets: [animeJSLogOutIcon, animeJSLogOutText],
+                            targets: [animeJSLogOutIcon],
                             color: "#e50000"
                         });
                     }}
                     on:mouseleave|preventDefault={async () => {
                         anime({
-                            targets: [animeJSLogOutIcon, animeJSLogOutText],
+                            targets: [animeJSLogOutIcon],
                             color: "#d9d9d9"
                         });
                     }}
@@ -336,7 +332,7 @@
                         name="log-out-outline"
                         bind:this={animeJSLogOutIcon}
                     />
-                    <span style="color:#d9d9d9" bind:this={animeJSLogOutText}>Log Out</span>
+                    <span style="color:#d9d9d9">Log Out</span>
                 </a>
             </div>
         </nav>
