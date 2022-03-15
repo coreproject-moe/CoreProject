@@ -121,6 +121,15 @@
                     appendTo: parentElement
                 });
             }
+        } else {
+            // Cleanup
+
+            tippyJsFirstNameIcon?._tippy?.destroy();
+            tippyJsLastNameIcon?._tippy?.destroy();
+            tippyJsUserNameIcon?._tippy?.destroy();
+            tippyJsEmailIcon?._tippy?.destroy();
+            tippyJsPasswordIcon?._tippy?.destroy();
+            tippyJsConfirmPasswordIcon?._tippy?.destroy();
         }
     }
 

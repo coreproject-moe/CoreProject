@@ -3,7 +3,7 @@
     import "../app.scss";
 
     // Import JS libraries
-    import md5 from "md5";
+    import { Md5 } from "ts-md5/dist/md5";
     import anime from "animejs";
     import tippy, { sticky, followCursor, type Instance } from "tippy.js";
 
@@ -354,7 +354,7 @@
                                 </div>
                             {:else}
                                 <div
-                                    data-href={`https://seccdn.libravatar.org/avatar/${md5(
+                                    data-href={`https://seccdn.libravatar.org/avatar/${Md5.hashStr(
                                         $userInfo?.email ?? ""
                                     )}/?s=64`}
                                     bind:this={tippyJsAvatar}

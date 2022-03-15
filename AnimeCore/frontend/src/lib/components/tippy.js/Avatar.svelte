@@ -16,6 +16,9 @@
     import tippy, { sticky, animateFill, type Instance } from "tippy.js";
 
     let animeJSEditInfoIcon: HTMLElement;
+    let animeJSEditInfoText: HTMLElement;
+
+    let animeJSLogOutText: HTMLElement;
     let animeJSLogOutIcon: HTMLElement;
 
     // Magic
@@ -288,13 +291,13 @@
                     href="/user/edit_info"
                     on:mouseenter|preventDefault={async () => {
                         anime({
-                            targets: [animeJSEditInfoIcon],
-                            color: "#03B35A" // Springgreen
+                            targets: [animeJSEditInfoIcon, animeJSEditInfoText],
+                            color: "#03B35A" // Springgreen ( Darker Shade )
                         });
                     }}
                     on:mouseleave|preventDefault={async () => {
                         anime({
-                            targets: [animeJSEditInfoIcon],
+                            targets: [animeJSEditInfoIcon, animeJSEditInfoText],
                             color: "#d9d9d9"
                         });
                     }}
@@ -304,7 +307,7 @@
                         name="create-outline"
                         bind:this={animeJSEditInfoIcon}
                     />
-                    Edit Info
+                    <span style="color:#d9d9d9" bind:this={animeJSEditInfoText}>Edit Info</span>
                 </a>
             </div>
 
@@ -317,13 +320,13 @@
                     href="/user/logout?next=${nextPage}"
                     on:mouseenter|preventDefault={async () => {
                         anime({
-                            targets: [animeJSLogOutIcon],
+                            targets: [animeJSLogOutIcon, animeJSLogOutText],
                             color: "#e50000"
                         });
                     }}
                     on:mouseleave|preventDefault={async () => {
                         anime({
-                            targets: [animeJSLogOutIcon],
+                            targets: [animeJSLogOutIcon, animeJSLogOutText],
                             color: "#d9d9d9"
                         });
                     }}
@@ -333,7 +336,7 @@
                         name="log-out-outline"
                         bind:this={animeJSLogOutIcon}
                     />
-                    Log Out
+                    <span style="color:#d9d9d9" bind:this={animeJSLogOutText}>Log Out</span>
                 </a>
             </div>
         </nav>

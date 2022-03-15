@@ -4,8 +4,8 @@ import { get, writable } from "svelte/store";
 import { isUserAuthenticated, userToken } from "./users";
 
 export const vimeJSVolume = writable(100, function start(set) {
-    if (get(isUserAuthenticated)) {
-        (async (__set) => {
+    (async (__set) => {
+        if (get(isUserAuthenticated)) {
             try {
                 const res = await fetch(captureEndpoint, {
                     method: "GET",
@@ -24,13 +24,15 @@ export const vimeJSVolume = writable(100, function start(set) {
                     );
                 }
             }
-        })(set);
-    } else {
-        if (browser) {
-            const volume = parseInt(localStorage.getItem("vimejs-volume") ?? JSON.stringify(100));
-            set(volume);
+        } else {
+            if (browser) {
+                const volume = parseInt(
+                    localStorage.getItem("vimejs-volume") ?? JSON.stringify(100)
+                );
+                set(volume);
+            }
         }
-    }
+    })(set);
 });
 
 // On change update the backend and localstorage.

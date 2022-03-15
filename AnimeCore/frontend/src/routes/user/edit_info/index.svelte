@@ -1,7 +1,7 @@
 <script lang="ts">
-    import md5 from "md5";
     import dayjs from "dayjs";
     import * as yup from "yup";
+    import { Md5 } from "ts-md5/dist/md5";
 
     import { createForm } from "felte";
     import { fade } from "svelte/transition";
@@ -32,7 +32,9 @@
             }, 100);
         } else if ($userInfo?.email) {
             avatarShown = false;
-            avatarSrc = `https://seccdn.libravatar.org/avatar/${md5($userInfo?.email ?? "")}/?s=64`;
+            avatarSrc = `https://seccdn.libravatar.org/avatar/${Md5.hashStr(
+                $userInfo?.email ?? ""
+            )}/?s=64`;
             avatarShown = true;
         }
     }
@@ -68,7 +70,7 @@
 
                         avatarShown = false;
                         avatarElementIcon?._tippy?.hide();
-                        avatarSrc = `https://seccdn.libravatar.org/avatar/${md5(
+                        avatarSrc = `https://seccdn.libravatar.org/avatar/${Md5.hashStr(
                             $userInfo?.email ?? ""
                         )}/?s=64`;
 
@@ -224,6 +226,15 @@
                     appendTo: parentElement
                 });
             }
+        } else {
+            tippyJsFirstNameIcon?._tippy?.destroy();
+            tippyJsLastNameIcon?._tippy?.destroy();
+            tippyJsUserNameIcon?._tippy?.destroy();
+            tippyJsEmailIcon?._tippy?.destroy();
+            tippyJsPasswordIcon?._tippy?.destroy();
+            tippyJsConfirmPasswordIcon?._tippy?.destroy();
+            tippyJsDateJoinedIcon?._tippy?.destroy();
+            tippyJsLastLoginIcon?._tippy?.destroy();
         }
     }
 

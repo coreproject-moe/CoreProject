@@ -63,6 +63,10 @@
                     appendTo: parentElement
                 });
             }
+        } else {
+            // Cleanup
+            tippyJsUserNameIcon?._tippy?.destroy();
+            tippyJsPasswordIcon?._tippy?.destroy();
         }
     }
 
@@ -187,7 +191,7 @@
                 </div>
             </div>
         </div>
-        <div class="columns is-mobile is-centered pt-3">
+        <div class="columns is-mobile is-centered mb-0">
             <div class="column is-narrow">
                 <button
                     class="button is-rounded is-centered has-text-white has-border-gray is-black"
@@ -197,7 +201,7 @@
             </div>
         </div>
     </form>
-    <div class="level is-mobile pt-4">
+    <div class="level is-mobile">
         <div class="level-left">
             <div class="level-item is-size-7">
                 <a class="has-text-white" href="/"> Forgot password? </a>
