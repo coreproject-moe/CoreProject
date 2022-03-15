@@ -4,7 +4,6 @@
     import * as yup from "yup";
 
     import { createForm } from "felte";
-    import { onDestroy } from "svelte";
     import { fade } from "svelte/transition";
     import tippy, { animateFill, sticky, type Instance } from "tippy.js";
 
@@ -42,6 +41,7 @@
     let avatarShown: boolean;
     let avatarSrc = "";
 
+    let parentElement: HTMLElement;
     // TippyJs icon declarations
     let avatarElementIcon: HTMLElement & { _tippy?: Instance };
     // Icons
@@ -89,12 +89,13 @@
                 interactive: true,
                 hideOnClick: false,
                 trigger: "manual",
-                plugins: [sticky]
+                plugins: [sticky],
+                appendTo: parentElement
             });
         }
     }
-    // Desktop only declaration
 
+    // Desktop only declaration
     $: {
         if (
             $responsiveMode === "desktop" ||
@@ -103,7 +104,8 @@
         ) {
             if (tippyJsFirstNameIcon) {
                 tippy(tippyJsFirstNameIcon, {
-                    content: "First Name",
+                    content: "<p class='is-size-7'>First Name</p>",
+                    allowHTML: true,
                     hideOnClick: false,
                     theme: "black",
                     placement: "left",
@@ -111,12 +113,14 @@
                     trigger: "manual",
                     showOnCreate: true,
                     sticky: true,
-                    plugins: [animateFill, sticky]
+                    plugins: [animateFill, sticky],
+                    appendTo: parentElement
                 });
             }
             if (tippyJsLastNameIcon) {
                 tippy(tippyJsLastNameIcon, {
-                    content: "Last Name",
+                    content: "<p class='is-size-7'>Last Name</p>",
+                    allowHTML: true,
                     hideOnClick: false,
                     theme: "black",
                     placement: "left",
@@ -124,12 +128,14 @@
                     trigger: "manual",
                     showOnCreate: true,
                     sticky: true,
-                    plugins: [animateFill, sticky]
+                    plugins: [animateFill, sticky],
+                    appendTo: parentElement
                 });
             }
             if (tippyJsUserNameIcon) {
                 tippy(tippyJsUserNameIcon, {
-                    content: "Username",
+                    content: "<p class='is-size-7'>Username</p>",
+                    allowHTML: true,
                     hideOnClick: false,
                     theme: "black",
                     placement: "left",
@@ -137,12 +143,14 @@
                     trigger: "manual",
                     showOnCreate: true,
                     sticky: true,
-                    plugins: [animateFill, sticky]
+                    plugins: [animateFill, sticky],
+                    appendTo: parentElement
                 });
             }
             if (tippyJsEmailIcon) {
                 tippy(tippyJsEmailIcon, {
-                    content: "Email",
+                    content: "<p class='is-size-7'>Email</p>",
+                    allowHTML: true,
                     hideOnClick: false,
                     theme: "black",
                     placement: "left",
@@ -150,12 +158,14 @@
                     trigger: "manual",
                     showOnCreate: true,
                     sticky: true,
-                    plugins: [animateFill, sticky]
+                    plugins: [animateFill, sticky],
+                    appendTo: parentElement
                 });
             }
             if (tippyJsPasswordIcon) {
                 tippy(tippyJsPasswordIcon, {
-                    content: "Password",
+                    content: "<p class='is-size-7'>Password</p>",
+                    allowHTML: true,
                     hideOnClick: false,
                     theme: "black",
                     placement: "left",
@@ -163,12 +173,14 @@
                     trigger: "manual",
                     showOnCreate: true,
                     sticky: true,
-                    plugins: [animateFill, sticky]
+                    plugins: [animateFill, sticky],
+                    appendTo: parentElement
                 });
             }
             if (tippyJsConfirmPasswordIcon) {
                 tippy(tippyJsConfirmPasswordIcon, {
-                    content: "Confirm Password",
+                    content: "<p class='is-size-7'>Confirm Password</p>",
+                    allowHTML: true,
                     hideOnClick: false,
                     theme: "black",
                     placement: "left",
@@ -176,12 +188,14 @@
                     trigger: "manual",
                     showOnCreate: true,
                     sticky: true,
-                    plugins: [animateFill, sticky]
+                    plugins: [animateFill, sticky],
+                    appendTo: parentElement
                 });
             }
             if (tippyJsDateJoinedIcon) {
                 tippy(tippyJsDateJoinedIcon, {
-                    content: "Date joined",
+                    content: "<p class='is-size-7'>Date joined</p>",
+                    allowHTML: true,
                     hideOnClick: false,
                     theme: "black",
                     placement: "top",
@@ -190,12 +204,14 @@
                     trigger: "manual",
                     showOnCreate: true,
                     sticky: true,
-                    plugins: [animateFill, sticky]
+                    plugins: [animateFill, sticky],
+                    appendTo: parentElement
                 });
             }
             if (tippyJsLastLoginIcon) {
                 tippy(tippyJsLastLoginIcon, {
-                    content: "Last Login",
+                    content: "<p class='is-size-7'>Last Login</p>",
+                    allowHTML: true,
                     hideOnClick: false,
                     theme: "black",
                     placement: "top",
@@ -204,7 +220,8 @@
                     trigger: "manual",
                     showOnCreate: true,
                     sticky: true,
-                    plugins: [animateFill, sticky]
+                    plugins: [animateFill, sticky],
+                    appendTo: parentElement
                 });
             }
         }
@@ -373,20 +390,6 @@
             reader.readAsDataURL(file);
         }
     };
-
-    onDestroy(async () => {
-        avatarElementIcon?._tippy?.destroy();
-
-        // Cleanup
-        tippyJsFirstNameIcon?._tippy?.destroy();
-        tippyJsLastNameIcon?._tippy?.destroy();
-        tippyJsUserNameIcon?._tippy?.destroy();
-        tippyJsEmailIcon?._tippy?.destroy();
-        tippyJsPasswordIcon?._tippy?.destroy();
-        tippyJsConfirmPasswordIcon?._tippy?.destroy();
-        tippyJsDateJoinedIcon?._tippy?.destroy();
-        tippyJsLastLoginIcon?._tippy?.destroy();
-    });
 </script>
 
 <svelte:head>
@@ -394,7 +397,7 @@
 </svelte:head>
 
 {#if $isUserAuthenticated}
-    <form use:form use:trapFocus transition:fade>
+    <form use:form use:trapFocus transition:fade bind:this={parentElement}>
         <div class="box has-background-black">
             <div class="columns is-mobile is-centered">
                 <div class="column is-narrow">

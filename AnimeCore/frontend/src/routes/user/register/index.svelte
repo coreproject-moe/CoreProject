@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { onDestroy } from "svelte";
     import { fade } from "svelte/transition";
 
     import * as yup from "yup";
@@ -17,22 +16,11 @@
     import { trapFocus } from "$lib/functions/trapFocus";
     import { projectName } from "$lib/constants/frontend/project";
 
-    onDestroy(async () => {
-        // Cleanup
-        avatarElement?._tippy?.destroy();
-
-        tippyJsFirstNameIcon?._tippy?.destroy();
-        tippyJsLastNameIcon?._tippy?.destroy();
-        tippyJsUserNameIcon?._tippy?.destroy();
-        tippyJsEmailIcon?._tippy?.destroy();
-        tippyJsPasswordIcon?._tippy?.destroy();
-        tippyJsConfirmPasswordIcon?._tippy?.destroy();
-    });
-
     let avatarSrc = "";
     let passwordShown = false;
     let avatarShown: boolean;
 
+    let parentElement: HTMLElement;
     // Tippyjs Declarations
     let avatarElement: HTMLElement & { _tippy?: Instance };
 
@@ -60,7 +48,8 @@
                     trigger: "manual",
                     showOnCreate: true,
                     sticky: true,
-                    plugins: [animateFill, sticky]
+                    plugins: [animateFill, sticky],
+                    appendTo: parentElement
                 });
             }
             if (tippyJsLastNameIcon) {
@@ -86,7 +75,8 @@
                     trigger: "manual",
                     showOnCreate: true,
                     sticky: true,
-                    plugins: [animateFill, sticky]
+                    plugins: [animateFill, sticky],
+                    appendTo: parentElement
                 });
             }
             if (tippyJsEmailIcon) {
@@ -99,7 +89,8 @@
                     trigger: "manual",
                     showOnCreate: true,
                     sticky: true,
-                    plugins: [animateFill, sticky]
+                    plugins: [animateFill, sticky],
+                    appendTo: parentElement
                 });
             }
             if (tippyJsPasswordIcon) {
@@ -112,7 +103,8 @@
                     trigger: "manual",
                     showOnCreate: true,
                     sticky: true,
-                    plugins: [animateFill, sticky]
+                    plugins: [animateFill, sticky],
+                    appendTo: parentElement
                 });
             }
             if (tippyJsConfirmPasswordIcon) {
@@ -125,7 +117,8 @@
                     trigger: "manual",
                     showOnCreate: true,
                     sticky: true,
-                    plugins: [animateFill, sticky]
+                    plugins: [animateFill, sticky],
+                    appendTo: parentElement
                 });
             }
         }
@@ -239,7 +232,7 @@
             data.append("last_name", values?.last_name as string);
             data.append("username", values?.username);
             data.append("email", values?.email);
-            data.append("avatar", values?.avatar);
+            data.append("avatar", values?.avatar ?? new File([], ""));
 
             if (
                 values?.password === values?.confirm_password && // Why are you not same ?
@@ -310,7 +303,7 @@
                 interactive: true,
                 hideOnClick: false,
                 trigger: "manual",
-                appendTo: () => document?.body,
+                appendTo: () => parentElement,
                 plugins: [sticky]
             });
         }
@@ -327,7 +320,7 @@
         <p class="has-text-white has-text-centered">Thats a question for the wise. 🧙‍♂️</p>
     </div>
 {:else}
-    <form use:form use:trapFocus transition:fade>
+    <form use:form use:trapFocus transition:fade bind:this={parentElement}>
         <div class="is-flex is-justify-content-center has-text-white is-size-5 has-text-centered">
             <p>↓&nbsp; Avatar &nbsp;↓</p>
         </div>

@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { onDestroy } from "svelte";
     import { fade } from "svelte/transition";
 
     import * as yup from "yup";
@@ -25,6 +24,7 @@
     // Show error message if theres an error.
     let errorMessage = "";
 
+    let parentElement: HTMLElement;
     // TippyJS Icons
     let tippyJsUserNameIcon: HTMLElement & { _tippy?: Instance };
     let tippyJsPasswordIcon: HTMLElement & { _tippy?: Instance };
@@ -45,7 +45,8 @@
                     trigger: "manual",
                     showOnCreate: true,
                     sticky: true,
-                    plugins: [animateFill, sticky]
+                    plugins: [animateFill, sticky],
+                    appendTo: parentElement
                 });
             }
             if (tippyJsPasswordIcon) {
@@ -58,7 +59,8 @@
                     trigger: "manual",
                     showOnCreate: true,
                     sticky: true,
-                    plugins: [animateFill, sticky]
+                    plugins: [animateFill, sticky],
+                    appendTo: parentElement
                 });
             }
         }
@@ -115,11 +117,6 @@
             }
         }
     });
-
-    onDestroy(async () => {
-        tippyJsUserNameIcon?._tippy?.destroy();
-        tippyJsPasswordIcon?._tippy?.destroy();
-    });
 </script>
 
 <svelte:head>
@@ -144,7 +141,7 @@
         </p>
     </div>
 {:else}
-    <form method="POST" use:form use:trapFocus transition:fade>
+    <form method="POST" use:form use:trapFocus transition:fade bind:this={parentElement}>
         <div class="field is-horizontal pt-3">
             <div class="field-body">
                 <div class="field">
