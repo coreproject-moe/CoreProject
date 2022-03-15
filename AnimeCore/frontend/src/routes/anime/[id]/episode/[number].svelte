@@ -2,7 +2,7 @@
     let textContent = "";
     import anime from "animejs";
 
-    import { onMount, beforeUpdate, onDestroy } from "svelte";
+    import { beforeUpdate } from "svelte";
 
     import { browser } from "$app/env";
     import { page } from "$app/stores";

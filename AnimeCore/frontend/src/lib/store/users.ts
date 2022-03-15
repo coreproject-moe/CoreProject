@@ -52,21 +52,23 @@ export const userInfo = writable(
     function start(set) {
         // Async Callback to fetch data
         (async (__set) => {
-            try {
-                const res = await fetch(userInfoUrl, {
-                    method: "GET",
-                    headers: new Headers({
-                        Accept: "application/json",
-                        "Content-Type": "application/json",
-                        Authorization: `Bearer ${get(userToken).access}`
-                    })
-                });
-                const data = await res.json();
-                __set(data);
-            } catch (e) {
-                if (e instanceof Error) {
-                    console.log(`Cannot get user data | Reason : ${e?.message}`);
-                    browser && localStorage.removeItem("tokens"); // Clear the database
+            if (get(isUserAuthenticated)) {
+                try {
+                    const res = await fetch(userInfoUrl, {
+                        method: "GET",
+                        headers: new Headers({
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${get(userToken).access}`
+                        })
+                    });
+                    const data = await res.json();
+                    __set(data);
+                } catch (e) {
+                    if (e instanceof Error) {
+                        console.log(`Cannot get user data | Reason : ${e?.message}`);
+                        browser && localStorage.removeItem("tokens"); // Clear the database
+                    }
                 }
             }
         })(set);
