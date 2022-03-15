@@ -8,7 +8,6 @@ django = {extras = ["argon2"], version = "*"}
 # 3rd Party
 django-cleanup = "*"
 django-cors-headers = "*"
-whitenoise = {extras = ["brotli"], version = "*"}
 # Rest framework
 djangorestframework = "*"
 djangorestframework-simplejwt = "*"
