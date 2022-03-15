@@ -26,7 +26,6 @@ urlpatterns = [
     path(
         "api/v1/token/blacklist/", TokenBlacklistView.as_view(), name="token_blacklist"
     ),
-    # Rest endpoints ( Note that theres an 'underscore' before every route )
     path("api/v1/user/", include("apps.user.apis")),
     path("api/v1/capture/", include("apps.capture.apis")),
     path("api/v1/upload/", include("apps.upload.apis")),
