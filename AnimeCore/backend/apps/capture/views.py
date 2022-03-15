@@ -54,6 +54,9 @@ class CaptureInfoView(
         serializer = self.get_serializer(
             data=request.data,
             instance=instance,
+            context={
+                "user": request.user,
+            },
         )
 
         if serializer.is_valid():
