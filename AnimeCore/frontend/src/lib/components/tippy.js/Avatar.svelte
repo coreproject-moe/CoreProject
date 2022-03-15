@@ -65,6 +65,7 @@
                 plugins: [animateFill, sticky],
                 appendTo: () => parentElement
             });
+
             if (!userInfo?.first_name) {
                 tippy(tippyFirstNameElement, {
                     content: "<p class='is-size-7'>Its a bird</p>",
@@ -279,15 +280,16 @@
         <!-- Main container -->
         <nav class="level is-mobile">
             <!-- Left side -->
-            <div class="level-left">
+            <div class="level-left pr-2">
                 <a
                     sveltekit:prefetch
+                    style="box-shadow: 0.2px 0.2px 0.2px 0.2px springgreen inset,0.2px 0.2px 0.2px 0.2px springgreen ;border:1px solid springgreen"
                     class="is-size-7 has-text-white has-background-black button is-ghost has-no-text-decoration is-rounded has-hover-gray"
                     href="/user/edit_info"
                     on:mouseenter|preventDefault={async () => {
                         anime({
                             targets: [animeJSEditInfoIcon],
-                            color: "#e50000"
+                            color: "#03B35A" // Springgreen
                         });
                     }}
                     on:mouseleave|preventDefault={async () => {
@@ -307,10 +309,11 @@
             </div>
 
             <!-- Right side -->
-            <div class="level-right">
+            <div class="level-right pl-2">
                 <a
                     sveltekit:prefetch
                     class="is-size-7 has-text-white has-background-black button is-ghost has-no-text-decoration is-rounded has-hover-gray"
+                    style="box-shadow: 0.2px 0.2px 0.2px 0.2px red inset,0.2px 0.2px 0.2px 0.2px red;border:1px solid red"
                     href="/user/logout?next=${nextPage}"
                     on:mouseenter|preventDefault={async () => {
                         anime({
