@@ -1,5 +1,5 @@
 <script lang="ts">
-    import FormBox from "$components/forms/FormBox.svelte";
+    import FormBox from "$components/custom/forms/FormBox.svelte";
 </script>
 
 <FormBox>
