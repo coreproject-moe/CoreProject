@@ -1,16 +1,17 @@
 <script lang="ts">
     import * as yup from "yup";
     import { createForm } from "felte";
+    import { onDestroy } from "svelte";
+    import tippy, { animateFill, type Instance } from "tippy.js";
 
     import reporter from "@felte/reporter-tippy";
     import { validator } from "@felte/validator-yup";
 
+    import { browser } from "$app/env";
+    import { userInfo } from "$store/users";
+
     import { trapFocus } from "$lib/functions/trapFocus";
     import { projectName } from "$lib/constants/frontend/project";
-    import tippy, { animateFill, type Instance } from "tippy.js";
-    import { onDestroy } from "svelte";
-    import { userInfo } from "$store/users";
-    import { browser } from "$app/env";
 
     // let animePoster: File;
     let animePosterSrc = "";
@@ -180,6 +181,9 @@
             </div>
         </div>
     </div>
+
+  
+
     <div class="columns is-mobile is-centered pt-3">
         <div class="column is-narrow">
             <button
