@@ -52,7 +52,7 @@
     let animeJsHomeIcon: HTMLElement;
     let animeJsRequestIcon: HTMLElement;
     let animeJsFaqIcon: HTMLElement;
-    let animeJsGithubIcon: HTMLElement;
+    let animeJsDiscordIcon: HTMLElement;
 
     $: {
         if (animeJsArrowBack) {
@@ -70,7 +70,7 @@
     $: {
         if (animeJsGithubButton) {
             tippy(animeJsGithubButton, {
-                content: "Github",
+                content: "Discord",
                 theme: "black",
                 touch: false,
                 followCursor: "horizontal",
@@ -255,7 +255,7 @@
                         transition:fly={{ x: 40, duration: 500 }}
                         on:mouseenter|preventDefault={async () => {
                             anime({
-                                targets: [animeJsGithubIcon],
+                                targets: [animeJsDiscordIcon],
                                 color: "hsl(0, 0%, 100%)"
                             });
                             anime({
@@ -265,7 +265,7 @@
                         }}
                         on:mouseleave|preventDefault={async () => {
                             anime({
-                                targets: [animeJsGithubIcon],
+                                targets: [animeJsDiscordIcon],
                                 color: "hsl(0, 0%, 80%)"
                             });
                             anime({
@@ -279,9 +279,9 @@
                     >
                         <ion-icon
                             class="has-text-white"
-                            bind:this={animeJsGithubIcon}
+                            bind:this={animeJsDiscordIcon}
                             style="width: 100%; height: 100%;"
-                            name="logo-github"
+                            name="logo-discord"
                         />
                     </button>
                 {/if}
