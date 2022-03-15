@@ -32,7 +32,7 @@ class CaptureInfoSerializer(serializers.ModelSerializer):
         )
 
     def update(self, instance: CaptureInfoModel, validated_data):
-        user = self.context.get("user")
+        user = self.context["user"]  # Dont use get here. Fail if theres nothing.
 
         video_volume = validated_data.get("video_volume", None)
         if video_volume:
