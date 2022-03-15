@@ -28,7 +28,7 @@ export const userInfoUrl = `${baseUrl}/api/v1/user/info/`;
     Example = http://127.0.0.1:8000/api/v1/capture/
 
 */
-export const captureEndpoint = `${baseUrl}/api/v1/capture/video_volume/`;
+export const captureEndpoint = `${baseUrl}/api/v1/capture/`;
 
 /*
     Capture Endpoint (JSON)
