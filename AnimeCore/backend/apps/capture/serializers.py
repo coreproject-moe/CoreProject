@@ -44,12 +44,13 @@ class CaptureInfoSerializer(serializers.ModelSerializer):
                 (
                     capture_anime_model,
                     capture_anime_model_created,
-                ) = instance.timestamps.update_or_create(
+                ) = instance.video_timestamps.get_or_create(
                     anime=items["anime"],
                     user=user,
                 )
+
                 if capture_anime_model_created:
-                    instance.timestamps.add(capture_anime_model)
+                    instance.video_timestamps.add(capture_anime_model)
 
                 episodes = items["episodes"]
 

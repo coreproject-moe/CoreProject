@@ -50,6 +50,12 @@ INSTALLED_APPS = [
     "apps.capture",
     "apps.user",
 ]
+if DEBUG:
+    INSTALLED_APPS.append(
+        # https://github.com/django-extensions/django-extensions#installing-it
+        "django_extensions",
+    )
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
