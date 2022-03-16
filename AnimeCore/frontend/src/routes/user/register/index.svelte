@@ -138,9 +138,11 @@
     const schema = yup.object({
         first_name: yup
             ?.string()
+            ?.required("Did you type your <b>First Name</b> ? 🤔")
             ?.max(20, "<b>First Name</b> must be less than <b>20 Characters</b>"),
         last_name: yup
             ?.string()
+            ?.required("Did you type your <b>Last Name</b> ? 🤔")
             ?.max(20, "<b>Last Name</b> must be less than <b>20 Characters</b>"),
         username: yup
             ?.string()
