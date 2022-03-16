@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from .models import AnimeInfoModel, EpisodeModel
+from .models import AnimeInfoModel, EpisodeModel, EpisodeCommentModel
 
 # Register your models here.
 
-admin.site.register(EpisodeModel)
-admin.site.register(AnimeInfoModel)
+
+admin.site.register([AnimeInfoModel, EpisodeModel, EpisodeCommentModel])

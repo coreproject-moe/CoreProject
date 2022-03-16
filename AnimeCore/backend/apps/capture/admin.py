@@ -8,6 +8,4 @@ from .models import (
 
 # Register your models here.
 
-admin.site.register(CaptureInfoModel)
-admin.site.register(CaptureEpisodeModel)
-admin.site.register(CaptureAnimeNameModel)
+admin.site.register([CaptureInfoModel, CaptureEpisodeModel, CaptureAnimeNameModel])
