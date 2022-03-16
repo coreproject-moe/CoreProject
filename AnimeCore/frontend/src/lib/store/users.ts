@@ -33,7 +33,6 @@ browser && // Is browser
         userToken.set({ refresh: get(userToken).refresh, access: data?.access });
     }, jwtRefresh);
 
-    
 // User Info Store
 export const userInfo = writable(
     {
