@@ -104,13 +104,11 @@
                         <div class="control">
                             <div class="tags has-addons">
                                 <span
-                                    class="tag is-black"
-                                    style="border:1px solid cornflowerblue"
+                                    class="tag is-black has-border-blue"
                                     bind:this={tippyJsSubElement}>Sub</span
                                 >
                                 <span
-                                    class="tag is-black"
-                                    style="border:1px solid springgreen"
+                                    class="tag is-black has-border-green"
                                     bind:this={tippyJsDubElement}>Dub</span
                                 >
                             </div>

@@ -282,8 +282,7 @@
             <div class="level-left pr-2">
                 <a
                     sveltekit:prefetch
-                    style="box-shadow: 0.2px 0.2px 0.2px 0.2px springgreen inset,0.2px 0.2px 0.2px 0.2px springgreen ;border:1px solid springgreen"
-                    class="is-size-7 has-text-white has-background-black button is-ghost has-no-text-decoration is-rounded has-hover-gray"
+                    class="is-size-7 has-text-white has-background-black button is-ghost has-no-text-decoration is-rounded has-hover-gray has-border-green"
                     href="/user/edit_info"
                     on:mouseenter|preventDefault={async () => {
                         anime({
@@ -311,8 +310,7 @@
             <div class="level-right pl-2">
                 <a
                     sveltekit:prefetch
-                    class="is-size-7 has-text-white has-background-black button is-ghost has-no-text-decoration is-rounded has-hover-gray"
-                    style="box-shadow: 0.2px 0.2px 0.2px 0.2px red inset,0.2px 0.2px 0.2px 0.2px red;border:1px solid red"
+                    class="is-size-7 has-text-white has-background-black button is-ghost has-no-text-decoration is-rounded has-hover-gray has-border-red"
                     href="/user/logout?next=${nextPage}"
                     on:mouseenter|preventDefault={async () => {
                         anime({
