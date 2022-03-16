@@ -39,6 +39,18 @@ $family-sans-serif: "Roboto", "Cantarell", "Ubuntu";
 .has-border-gray {
     border: 1px solid #353333 !important;
 }
+.has-border-green {
+    border: 1px solid springgreen !important;
+    box-shadow: springgreen 0.2px 0.2px 0.2px 0.2px inset, springgreen 0.2px 0.2px 0.2px 0.2px;
+}
+.has-border-blue {
+    border: 1px solid cornflowerblue !important;
+    box-shadow: cornflowerblue 0.2px 0.2px 0.2px 0.2px inset, cornflowerblue 0.2px 0.2px 0.2px 0.2px;
+}
+.has-border-red {
+    border: 1px solid red !important;
+    box-shadow: red 0.2px 0.2px 0.2px 0.2px inset, red 0.2px 0.2px 0.2px 0.2px;
+}
 .has-hover-gray {
     transition: 0.2s;
 

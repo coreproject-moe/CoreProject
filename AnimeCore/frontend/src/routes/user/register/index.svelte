@@ -162,10 +162,7 @@
                 "email",
                 `Did you actually use <b>SomeOne@example.com</b> as your email?`,
                 async (value) => {
-                    if (value === "SomeOne@example.com") {
-                        return false;
-                    }
-                    return true;
+                    return value === "SomeOne@example.com" ? false : true;
                 }
             ),
         password: yup
