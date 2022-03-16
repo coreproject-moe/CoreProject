@@ -80,7 +80,7 @@
             ?.max(1024, "<b>Password</b> must be less than <b>1024 Characters<b/>")
     });
 
-    const { form } = createForm<yup.InferType<typeof schema>>({
+    const { form, isSubmitting, isDirty } = createForm<yup.InferType<typeof schema>>({
         extend: [
             validator({ schema }),
             reporter({
@@ -111,7 +111,7 @@
                     const next = $page.url.searchParams.get("next");
                     goto(next ? next : "/anime");
                 }
-                errorMessage = data.detail;
+                errorMessage = data?.detail;
             } catch (err) {
                 if (err instanceof Error) {
                     $userToken = { refresh: "", access: "" };
@@ -135,93 +135,105 @@
     </div>
 {/if}
 
-{#if $isUserAuthenticated}
-    <div transition:fade>
-        <p class="has-text-white has-text-centered">You are already logged in 😕</p>
-        <p class="has-text-white has-text-centered">
-            Do you plan on <a class="has-text-white is-underlined" href="/user/logout"
-                >Logging out?
-            </a>👀
-        </p>
+{#if $isSubmitting && $isDirty}
+    <div class="has-text-centered" transition:fade>
+        <button class="button is-ghost is-loading is-size-2" />
     </div>
 {:else}
-    <form method="POST" use:form use:trapFocus transition:fade bind:this={parentElement}>
-        <div class="field is-horizontal pt-3">
-            <div class="field-body">
-                <div class="field">
-                    <p class="control is-expanded has-icons-left">
-                        <input
-                            type="text"
-                            name="username_or_email"
-                            class="input is-font-face-ubuntu has-text-white has-background-black has-border-gray"
-                            placeholder="Username / Email"
-                        />
-                        <span class="icon is-small is-left" bind:this={tippyJsUserNameIcon}>
-                            <ion-icon
-                                class="has-text-white is-size-4"
-                                name="person-circle-outline"
+    <!-- Very weird bug -->
+    <!-- prettier-ignore -->
+
+    {#if $isUserAuthenticated}
+        <div transition:fade>
+            <p class="has-text-white has-text-centered">You are already logged in 😕</p>
+            <p class="has-text-white has-text-centered">
+                Do you plan on <a class="has-text-white is-underlined" href="/user/logout"
+                    >Logging out?
+                </a>👀
+            </p>
+        </div>
+        {:else}
+        <form method="POST" use:form use:trapFocus bind:this={parentElement}>
+            <div class="field is-horizontal pt-3">
+                <div class="field-body">
+                    <div class="field">
+                        <p class="control is-expanded has-icons-left">
+                            <input
+                                type="text"
+                                name="username_or_email"
+                                class="input is-font-face-ubuntu has-text-white has-background-black has-border-gray"
+                                placeholder="Username / Email"
                             />
+                            <span class="icon is-small is-left" bind:this={tippyJsUserNameIcon}>
+                                <ion-icon
+                                    class="has-text-white is-size-4"
+                                    name="person-circle-outline"
+                                />
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal pt-3">
+                <div class="field-body">
+                    <div class="field">
+                        <p class="control is-expanded has-icons-left has-icons-right">
+                            <input
+                                type={passwordShown ? "text" : "password"}
+                                name="password"
+                                class="input is-font-face-ubuntu has-text-white has-background-black has-border-gray"
+                                placeholder="Password"
+                            />
+                            <span
+                                class="icon is-small is-right is-clickable is-unselectable"
+                                on:click|preventDefault={async () => {
+                                    passwordShown = !passwordShown;
+                                }}
+                            >
+                                👀
+                            </span>
+                            <span class="icon is-small is-left" bind:this={tippyJsPasswordIcon}>
+                                <ion-icon
+                                    class="has-text-white is-size-4"
+                                    name="lock-closed-outline"
+                                />
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="columns is-mobile is-centered mb-0">
+                <div class="column is-narrow">
+                    <button
+                        class="button is-rounded is-centered has-text-white has-border-gray is-black"
+                    >
+                        Sign in
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div class="level is-mobile">
+            <div class="level-left">
+                <div class="level-item is-size-7">
+                    <a class="has-text-white" href="/"> Forgot password? </a>
+                </div>
+            </div>
+            <div class="level-right">
+                <div class="level-item is-size-7">
+                    <p class="has-text-white is-font-face-ubuntu">
+                        New here?
+                        <span class="has-text-link">
+                            <a
+                                class="has-text-white is-underlined"
+                                sveltekit:prefetch
+                                href="/user/register"
+                            >
+                                Register an account
+                            </a>
                         </span>
                     </p>
                 </div>
             </div>
         </div>
-        <div class="field is-horizontal pt-3">
-            <div class="field-body">
-                <div class="field">
-                    <p class="control is-expanded has-icons-left has-icons-right">
-                        <input
-                            type={passwordShown ? "text" : "password"}
-                            name="password"
-                            class="input is-font-face-ubuntu has-text-white has-background-black has-border-gray"
-                            placeholder="Password"
-                        />
-                        <span
-                            class="icon is-small is-right is-clickable is-unselectable"
-                            on:click|preventDefault={async () => {
-                                passwordShown = !passwordShown;
-                            }}
-                        >
-                            👀
-                        </span>
-                        <span class="icon is-small is-left" bind:this={tippyJsPasswordIcon}>
-                            <ion-icon class="has-text-white is-size-4" name="lock-closed-outline" />
-                        </span>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="columns is-mobile is-centered mb-0">
-            <div class="column is-narrow">
-                <button
-                    class="button is-rounded is-centered has-text-white has-border-gray is-black"
-                >
-                    Sign in
-                </button>
-            </div>
-        </div>
-    </form>
-    <div class="level is-mobile">
-        <div class="level-left">
-            <div class="level-item is-size-7">
-                <a class="has-text-white" href="/"> Forgot password? </a>
-            </div>
-        </div>
-        <div class="level-right">
-            <div class="level-item is-size-7">
-                <p class="has-text-white is-font-face-ubuntu">
-                    New here?
-                    <span class="has-text-link">
-                        <a
-                            class="has-text-white is-underlined"
-                            sveltekit:prefetch
-                            href="/user/register"
-                        >
-                            Register an account
-                        </a>
-                    </span>
-                </p>
-            </div>
-        </div>
-    </div>
+    {/if}
 {/if}
