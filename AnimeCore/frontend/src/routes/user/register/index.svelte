@@ -9,9 +9,10 @@
     import { validator } from "@felte/validator-yup";
 
     import { goto } from "$app/navigation";
+    import { registerEndpoint } from "$urls/restEndpoints";
+    
     import { responsiveMode } from "$store/responsive";
     import { isUserAuthenticated } from "$store/users";
-    import { registerEndpoint } from "$urls/restEndpoints";
 
     import { trapFocus } from "$lib/functions/trapFocus";
     import { projectName } from "$lib/constants/frontend/project";
@@ -38,98 +39,20 @@
             $responsiveMode === "widescreen" ||
             $responsiveMode === "fullhd"
         ) {
-            if (tippyJsFirstNameIcon) {
-                tippy(tippyJsFirstNameIcon, {
-                    content: "First Name",
-                    hideOnClick: false,
-                    theme: "black",
-                    placement: "left",
-                    animateFill: true,
-                    trigger: "manual",
-                    showOnCreate: true,
-                    sticky: true,
-                    plugins: [animateFill, sticky],
-                    appendTo: parentElement
-                });
-            }
-            if (tippyJsLastNameIcon) {
-                tippy(tippyJsLastNameIcon, {
-                    content: "Last Name",
-                    hideOnClick: false,
-                    theme: "black",
-                    placement: "left",
-                    animateFill: true,
-                    trigger: "manual",
-                    showOnCreate: true,
-                    sticky: true,
-                    plugins: [animateFill, sticky]
-                });
-            }
-            if (tippyJsUserNameIcon) {
-                tippy(tippyJsUserNameIcon, {
-                    content: "Username",
-                    hideOnClick: false,
-                    theme: "black",
-                    placement: "left",
-                    animateFill: true,
-                    trigger: "manual",
-                    showOnCreate: true,
-                    sticky: true,
-                    plugins: [animateFill, sticky],
-                    appendTo: parentElement
-                });
-            }
-            if (tippyJsEmailIcon) {
-                tippy(tippyJsEmailIcon, {
-                    content: "Email",
-                    hideOnClick: false,
-                    theme: "black",
-                    placement: "left",
-                    animateFill: true,
-                    trigger: "manual",
-                    showOnCreate: true,
-                    sticky: true,
-                    plugins: [animateFill, sticky],
-                    appendTo: parentElement
-                });
-            }
-            if (tippyJsPasswordIcon) {
-                tippy(tippyJsPasswordIcon, {
-                    content: "Password",
-                    hideOnClick: false,
-                    theme: "black",
-                    placement: "left",
-                    animateFill: true,
-                    trigger: "manual",
-                    showOnCreate: true,
-                    sticky: true,
-                    plugins: [animateFill, sticky],
-                    appendTo: parentElement
-                });
-            }
-            if (tippyJsConfirmPasswordIcon) {
-                tippy(tippyJsConfirmPasswordIcon, {
-                    content: "Confirm Password",
-                    hideOnClick: false,
-                    theme: "black",
-                    placement: "left",
-                    animateFill: true,
-                    trigger: "manual",
-                    showOnCreate: true,
-                    sticky: true,
-                    plugins: [animateFill, sticky],
-                    appendTo: parentElement
-                });
-            }
+            tippyJsFirstNameIcon?._tippy?.show();
+            tippyJsLastNameIcon?._tippy?.show();
+            tippyJsUserNameIcon?._tippy?.show();
+            tippyJsEmailIcon?._tippy?.show();
+            tippyJsPasswordIcon?._tippy?.show();
+            tippyJsConfirmPasswordIcon?._tippy?.show();
         } else {
             // Cleanup
-
-            tippyJsFirstNameIcon?._tippy?.destroy();
-            tippyJsLastNameIcon?._tippy?.destroy();
-            tippyJsUserNameIcon?._tippy?.destroy();
-            tippyJsEmailIcon?._tippy?.destroy();
-            tippyJsPasswordIcon?._tippy?.destroy();
-            tippyJsConfirmPasswordIcon?._tippy?.destroy();
+            tippyJsFirstNameIcon?._tippy?.hide();
+            tippyJsLastNameIcon?._tippy?.hide();
+            tippyJsUserNameIcon?._tippy?.hide();
+            tippyJsEmailIcon?._tippy?.hide();
+            tippyJsPasswordIcon?._tippy?.hide();
+            tippyJsConfirmPasswordIcon?._tippy?.hide();
         }
     }
 
@@ -374,7 +297,21 @@
                             class="input is-font-face-ubuntu has-text-white has-background-black has-border-gray"
                             placeholder="First Name"
                         />
-                        <span class="icon is-small is-left" bind:this={tippyJsFirstNameIcon}>
+                        <span
+                            class="icon is-small is-left"
+                            bind:this={tippyJsFirstNameIcon}
+                            use:tippy={{
+                                content: "First Name",
+                                hideOnClick: false,
+                                theme: "black",
+                                placement: "left",
+                                animateFill: true,
+                                trigger: "manual",
+                                showOnCreate: true,
+                                sticky: true,
+                                plugins: [animateFill, sticky]
+                            }}
+                        >
                             <img
                                 alt=""
                                 class="is-size-7"
@@ -396,7 +333,21 @@
                             class="input is-font-face-ubuntu has-text-white has-background-black has-border-gray"
                             placeholder="Last Name"
                         />
-                        <span class="icon is-small is-left" bind:this={tippyJsLastNameIcon}>
+                        <span
+                            class="icon is-small is-left"
+                            bind:this={tippyJsLastNameIcon}
+                            use:tippy={{
+                                content: "Last Name",
+                                hideOnClick: false,
+                                theme: "black",
+                                placement: "left",
+                                animateFill: true,
+                                trigger: "manual",
+                                showOnCreate: true,
+                                sticky: true,
+                                plugins: [animateFill, sticky]
+                            }}
+                        >
                             <img
                                 alt=""
                                 class="is-size-7"
@@ -418,7 +369,21 @@
                             class="input is-font-face-ubuntu has-text-white has-background-black has-border-gray"
                             placeholder="Username"
                         />
-                        <span class="icon is-small is-left" bind:this={tippyJsUserNameIcon}>
+                        <span
+                            class="icon is-small is-left"
+                            bind:this={tippyJsUserNameIcon}
+                            use:tippy={{
+                                content: "Username",
+                                hideOnClick: false,
+                                theme: "black",
+                                placement: "left",
+                                animateFill: true,
+                                trigger: "manual",
+                                showOnCreate: true,
+                                sticky: true,
+                                plugins: [animateFill, sticky]
+                            }}
+                        >
                             <ion-icon
                                 class="is-size-4 has-text-white"
                                 name="person-circle-outline"
@@ -439,7 +404,21 @@
                             class="input is-font-face-ubuntu has-text-white has-background-black has-border-gray"
                             placeholder="Email"
                         />
-                        <span class="icon is-small is-left" bind:this={tippyJsEmailIcon}>
+                        <span
+                            class="icon is-small is-left"
+                            bind:this={tippyJsEmailIcon}
+                            use:tippy={{
+                                content: "Email",
+                                hideOnClick: false,
+                                theme: "black",
+                                placement: "left",
+                                animateFill: true,
+                                trigger: "manual",
+                                showOnCreate: true,
+                                sticky: true,
+                                plugins: [animateFill, sticky]
+                            }}
+                        >
                             <ion-icon class="is-size-4 has-text-white" name="mail-outline" />
                         </span>
                     </p>
@@ -466,7 +445,21 @@
                         >
                             👀
                         </span>
-                        <span class="icon is-small is-left" bind:this={tippyJsPasswordIcon}>
+                        <span
+                            class="icon is-small is-left"
+                            bind:this={tippyJsPasswordIcon}
+                            use:tippy={{
+                                content: "Password",
+                                hideOnClick: false,
+                                theme: "black",
+                                placement: "left",
+                                animateFill: true,
+                                trigger: "manual",
+                                showOnCreate: true,
+                                sticky: true,
+                                plugins: [animateFill, sticky]
+                            }}
+                        >
                             <ion-icon class="is-size-4 has-text-white" name="lock-closed-outline" />
                         </span>
                     </p>
@@ -484,7 +477,21 @@
                             placeholder="Confirm Password"
                             autocomplete="new-password"
                         />
-                        <span class="icon is-small is-left" bind:this={tippyJsConfirmPasswordIcon}>
+                        <span
+                            class="icon is-small is-left"
+                            bind:this={tippyJsConfirmPasswordIcon}
+                            use:tippy={{
+                                content: "Confirm Password",
+                                hideOnClick: false,
+                                theme: "black",
+                                placement: "left",
+                                animateFill: true,
+                                trigger: "manual",
+                                showOnCreate: true,
+                                sticky: true,
+                                plugins: [animateFill, sticky]
+                            }}
+                        >
                             <ion-icon
                                 class="is-size-4 has-text-white"
                                 name="document-lock-outline"

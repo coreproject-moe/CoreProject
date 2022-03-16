@@ -182,8 +182,6 @@
         </div>
     </div>
 
-  
-
     <div class="columns is-mobile is-centered pt-3">
         <div class="column is-narrow">
             <button

@@ -18,13 +18,6 @@
     import { isUserAuthenticated, userToken } from "$store/users";
     import { responsiveMode } from "$store/responsive";
 
-    // Bind it to show or hide passwords
-    let passwordShown = false;
-
-    // Show error message if theres an error.
-    let errorMessage = "";
-
-    let parentElement: HTMLElement;
     // TippyJS Icons
     let tippyJsUserNameIcon: HTMLElement & { _tippy?: Instance };
     let tippyJsPasswordIcon: HTMLElement & { _tippy?: Instance };
@@ -35,40 +28,20 @@
             $responsiveMode === "widescreen" ||
             $responsiveMode === "fullhd"
         ) {
-            if (tippyJsUserNameIcon) {
-                tippy(tippyJsUserNameIcon, {
-                    content: "Username / Email",
-                    hideOnClick: false,
-                    theme: "black",
-                    placement: "left",
-                    animateFill: true,
-                    trigger: "manual",
-                    showOnCreate: true,
-                    sticky: true,
-                    plugins: [animateFill, sticky],
-                    appendTo: parentElement
-                });
-            }
-            if (tippyJsPasswordIcon) {
-                tippy(tippyJsPasswordIcon, {
-                    content: "Password",
-                    hideOnClick: false,
-                    theme: "black",
-                    placement: "left",
-                    animateFill: true,
-                    trigger: "manual",
-                    showOnCreate: true,
-                    sticky: true,
-                    plugins: [animateFill, sticky],
-                    appendTo: parentElement
-                });
-            }
+            tippyJsUserNameIcon?._tippy?.show();
+            tippyJsPasswordIcon?._tippy?.show();
         } else {
             // Cleanup
-            tippyJsUserNameIcon?._tippy?.destroy();
-            tippyJsPasswordIcon?._tippy?.destroy();
+            tippyJsUserNameIcon?._tippy?.hide();
+            tippyJsPasswordIcon?._tippy?.hide();
         }
     }
+
+    // Bind it to show or hide passwords
+    let passwordShown = false;
+
+    // Show error message if theres an error.
+    let errorMessage = "";
 
     const schema = yup.object({
         username_or_email: yup
@@ -153,7 +126,7 @@
             </p>
         </div>
         {:else}
-        <form method="POST" use:form use:trapFocus bind:this={parentElement}>
+        <form method="POST" use:form use:trapFocus>
             <div class="field is-horizontal pt-3">
                 <div class="field-body">
                     <div class="field">
@@ -164,7 +137,16 @@
                                 class="input is-font-face-ubuntu has-text-white has-background-black has-border-gray"
                                 placeholder="Username / Email"
                             />
-                            <span class="icon is-small is-left" bind:this={tippyJsUserNameIcon}>
+                            <span class="icon is-small is-left" bind:this={tippyJsUserNameIcon} use:tippy={{
+                                content: "Username / Email",
+                                hideOnClick: false,
+                                theme: "black",
+                                placement: "left",
+                                animateFill: true,
+                                showOnCreate: true,
+                                sticky: true,
+                                plugins: [animateFill, sticky],
+                            }}>
                                 <ion-icon
                                     class="has-text-white is-size-4"
                                     name="person-circle-outline"
@@ -192,7 +174,17 @@
                             >
                                 👀
                             </span>
-                            <span class="icon is-small is-left" bind:this={tippyJsPasswordIcon}>
+                            <span class="icon is-small is-left" bind:this={tippyJsPasswordIcon}  use:tippy={ {
+                                content: "Password",
+                                hideOnClick: false,
+                                theme: "black",
+                                placement: "left",
+                                animateFill: true,
+                                showOnCreate: true,
+                                sticky: true,
+                                plugins: [animateFill, sticky],
+                            
+                            }}>
                                 <ion-icon
                                     class="has-text-white is-size-4"
                                     name="lock-closed-outline"
