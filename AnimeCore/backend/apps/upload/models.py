@@ -1,5 +1,5 @@
 from pathlib import Path
-from uuid import uuid4
+from django.contrib.auth import get_user_model
 from django.db import models
 
 
@@ -22,8 +22,22 @@ class FileField:
 # Create your models here.
 
 
+class EpisodeCommentModel(models.Model):
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    comment_added = models.DateTimeField(auto_now=True)
+    text = models.TextField()
+
+    def __str__(self) -> str:
+        return f"{self.user}"
+
+    class Meta:
+        verbose_name = "User comment"
+        # Sort by newest first
+        ordering = ("-comment_added",)
+
+
 class EpisodeModel(models.Model):
-    episode_number = models.BigAutoField(primary_key=True)
+    episode_number = models.BigIntegerField(default=0)
     episode_name = models.CharField(max_length=1024)
     episode_cover = models.ImageField(
         upload_to=FileField.episode_cover, default=None, blank=True, null=True
@@ -32,9 +46,13 @@ class EpisodeModel(models.Model):
         upload_to=FileField.episode_upload, default=None, blank=True, null=True
     )
     episode_summary = models.TextField(default="", blank=True, null=True)
+    episode_comments = models.ManyToManyField(EpisodeCommentModel, blank=True)
 
     def __str__(self) -> str:
         return f"{self.episode_number}. {self.episode_name}"
+
+    class Meta:
+        verbose_name = "Episode info"
 
 
 class AnimeInfoModel(models.Model):
@@ -46,3 +64,6 @@ class AnimeInfoModel(models.Model):
 
     def __str__(self) -> str:
         return f"{self.anime_name}"
+
+    class Meta:
+        verbose_name = "Anime info"
