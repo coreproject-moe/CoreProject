@@ -18,6 +18,8 @@ from rest_framework_simplejwt.views import (
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    #   Pages
+    # ========
     #   Api
     # ========
     # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html#installation
