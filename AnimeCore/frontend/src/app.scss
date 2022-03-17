@@ -40,15 +40,18 @@ $family-sans-serif: "Roboto", "Cantarell", "Ubuntu";
     border: 1px solid #353333 !important;
 }
 .has-border-green {
-    border: 1px solid springgreen !important;
+    border-color: springgreen !important;
+    border: 1px solid;
     box-shadow: springgreen 0.2px 0.2px 0.2px 0.2px inset, springgreen 0.2px 0.2px 0.2px 0.2px;
 }
 .has-border-blue {
-    border: 1px solid cornflowerblue !important;
+    border-color: cornflowerblue !important;
+    border: 1px solid;
     box-shadow: cornflowerblue 0.2px 0.2px 0.2px 0.2px inset, cornflowerblue 0.2px 0.2px 0.2px 0.2px;
 }
 .has-border-red {
-    border: 1px solid red !important;
+    border-color: red !important;
+    border: 1px solid;
     box-shadow: red 0.2px 0.2px 0.2px 0.2px inset, red 0.2px 0.2px 0.2px 0.2px;
 }
 .has-hover-gray {
