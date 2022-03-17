@@ -53,6 +53,7 @@ class EpisodeModel(models.Model):
 
     class Meta:
         verbose_name = "Episode info"
+        ordering = ("id",)
 
 
 class AnimeInfoModel(models.Model):
@@ -67,3 +68,4 @@ class AnimeInfoModel(models.Model):
 
     class Meta:
         verbose_name = "Anime info"
+        ordering = ("-id",)

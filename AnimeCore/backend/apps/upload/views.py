@@ -1,6 +1,11 @@
+from pprint import pprint
+from rest_framework import status
 from rest_framework import generics
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import IsAdminUser
+from rest_framework.decorators import permission_classes
+from rest_framework.parsers import FormParser, MultiPartParser
+
 from django.http.request import HttpRequest
 
 from .models import AnimeInfoModel
@@ -11,9 +16,6 @@ from .serializers import AnimeInfoSerializer
 
 class AnimeInfoView(generics.ListCreateAPIView):
     serializer_class = AnimeInfoSerializer
-    permission_class = [
-        AllowAny,
-    ]
 
     def get(self, request: HttpRequest, pk: int) -> Response:
         data = AnimeInfoModel.objects.get(id=pk)
