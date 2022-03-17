@@ -1,70 +1,37 @@
+<script lang="ts" context="module">
+    import { animeInfoEndpoint } from "$urls/restEndpoints";
+    import type { Load } from "@sveltejs/kit";
+
+    export const load: Load = async ({ params }) => {
+        const res = await fetch(`${animeInfoEndpoint}${params?.id}`, {
+            method: "GET"
+        });
+        const data = res.ok && (await res.json());
+        return {
+            props: {
+                animeName: data.anime_name
+            }
+        };
+    };
+</script>
+
 <script lang="ts">
+    export let animeName: string;
+    import { trapFocus } from "$lib/functions/trapFocus";
+
     import * as yup from "yup";
     import { createForm } from "felte";
-    import { onDestroy } from "svelte";
-
-    import tippy, { animateFill, type Instance } from "tippy.js";
 
     import reporter from "@felte/reporter-tippy";
     import { validator } from "@felte/validator-yup";
 
-    import { browser } from "$app/env";
-    import { userInfo } from "$store/users";
-
-    import { trapFocus } from "$lib/functions/trapFocus";
-    import { projectName } from "$lib/constants/frontend/project";
-
-    // let animePoster: File;
-    let animePosterSrc = "";
-
-    let tippyJsAnimePoster: HTMLElement & { _tippy?: Instance };
-    let tippyJsUploadElement: HTMLElement & { _tippy?: Instance };
-
-    $: {
-        if (browser) {
-            if (animePosterSrc) {
-                tippy(tippyJsAnimePoster, {
-                    content: "Anime Poster",
-                    theme: "black",
-                    showOnCreate: true,
-                    trigger: "manual",
-                    delay: 50,
-                    hideOnClick: false,
-                    animateFill: true,
-                    plugins: [animateFill]
-                });
-            }
-
-            if (tippyJsUploadElement) {
-                if (!$userInfo?.is_staff) {
-                    tippy(tippyJsUploadElement, {
-                        content: `<center>You are not a <b>Staff</b>😕${
-                            $userInfo?.is_superuser ? "nor a <b>SuperUser</b>" : ""
-                        }</center>But do see how we handle the upload.🧐`,
-                        theme: "black",
-                        allowHTML: true,
-                        animateFill: true,
-                        plugins: [animateFill]
-                    });
-                } else {
-                    tippyJsUploadElement?._tippy?.destroy();
-                }
-            }
-        }
-    }
-    onDestroy(async () => {
-        // Cleanup
-        tippyJsAnimePoster?._tippy?.destroy();
-        tippyJsUploadElement?._tippy?.destroy();
-    });
-
-    const SUPPORTED_IMAGE_FORMATS = ["image/jpg", "image/jpeg", "image/gif", "image/png"];
+    const SUPPORTED_IMAGE_FORMATS = ["video/mp4", "video/x-matroska"];
 
     const schema = yup.object({
-        anime_name: yup?.string()?.required("Did you enter <b>Anime Name</b>? 🤔"),
-        anime_poster: yup
+        episode_name: yup?.string()?.required("Did you enter <b>Episode Name</b>? 🤔"),
+        episode_file: yup
             ?.mixed()
-            ?.required("<b>Anime Poster</b> please ? 🥺")
+            ?.required("<b>Episode</b> please ? 🥺")
             ?.test(
                 "fileType",
                 `Unsupported <b>File</b> format.
@@ -83,7 +50,8 @@
                     }
                     return true;
                 }
-            )
+            ),
+        episode_summary: yup?.string()?.required("Please enter the <b>Episode Summary</b>")
     });
 
     const { form } = createForm<yup.InferType<typeof schema>>({
@@ -101,46 +69,28 @@
         }
     });
 
-    const handleImageInput = (e: Event) => {
-        const target = e?.target as HTMLInputElement;
-        const file = target.files instanceof FileList ? target.files[0] : null;
-        tippyJsAnimePoster?._tippy?.destroy();
-
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = async function () {
-                let dataURL = reader.result as string;
-                animePosterSrc = dataURL;
-            };
-            reader.readAsDataURL(file);
-        }
-    };
+    let animePosterSrc = "";
 </script>
-
-<svelte:head>
-    <title>Upload Anime | {projectName}</title>
-</svelte:head>
 
 <form use:trapFocus use:form>
     <div class="columns is-mobile is-centered">
         <div class="column is-narrrow">
             <div class="title is-size-4 has-text-white is-unselectable has-text-centered">
-                ⛩️ Upload Anime ⛩️
+                ⛩️ Upload Episode for {animeName} ⛩️
             </div>
         </div>
     </div>
 
     <div class="columns is-mobile is-centered">
         <div class="column is-narrow">
-            <figure class="image" style="width:12em" bind:this={tippyJsAnimePoster}>
+            <figure class="image" style="width:12em">
                 <input
                     type="file"
-                    name="anime_poster"
+                    name="episode_file"
                     class="file-input is-clickable"
                     placeholder="Upload avatar"
                     style="z-index:1000000;"
-                    accept="image/*"
-                    on:input={handleImageInput}
+                    accept="video/mp4,video/x-matroska"
                 />
                 {#if animePosterSrc}
                     <img src={animePosterSrc} alt="" />
@@ -163,16 +113,16 @@
 
     <div class="field is-horizontal py-1">
         <div class="field-label is-normal is-hidden-desktop">
-            <div class="label has-text-white is-unselectable">Anime Name :</div>
+            <div class="label has-text-white is-unselectable">Episode Name :</div>
         </div>
         <div class="field-body">
             <div class="field">
                 <p class="control is-expanded has-icons-left">
                     <input
                         type="text"
-                        name="anime_name"
+                        name="episode_name"
                         class="input is-font-face-ubuntu has-text-white has-background-black has-border-gray"
-                        placeholder="Anime Name"
+                        placeholder="Episode Name"
                         autocomplete="off"
                     />
                     <span class="icon is-small is-left">
@@ -183,11 +133,27 @@
         </div>
     </div>
 
+    <div class="field is-horizontal py-1">
+        <div class="field-label is-normal is-hidden-desktop">
+            <div class="label has-text-white is-unselectable">Episode Name :</div>
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <p class="control is-expanded has-icons-left">
+                    <textarea
+                        name="episode_summary"
+                        class="textarea is-font-face-ubuntu has-text-white has-background-black has-border-gray"
+                        placeholder="Episode Summary"
+                    />
+                </p>
+            </div>
+        </div>
+    </div>
+
     <div class="columns is-mobile is-centered pt-3">
         <div class="column is-narrow">
             <button
                 type="submit"
-                bind:this={tippyJsUploadElement}
                 class="button is-rounded is-centered has-text-white has-border-gray is-black"
                 >Upload</button
             >
