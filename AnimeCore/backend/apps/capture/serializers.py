@@ -1,10 +1,9 @@
 from rest_framework import serializers
-from apps.upload.serializers import AnimeInfoSerializer
 
 from .models import (
+    CaptureTimeStampModel,
     CaptureAnimeNameModel,
     CaptureEpisodeModel,
-    CaptureInfoModel,
 )
 
 
@@ -16,29 +15,24 @@ class CaptureEpisodeSerializer(serializers.ModelSerializer):
 
 class CaptureAnimeNameSerializer(serializers.ModelSerializer):
     episodes = CaptureEpisodeSerializer(many=True)
-    
 
     class Meta:
         model = CaptureAnimeNameModel
         exclude = ("id", "user")
 
 
-class CaptureInfoSerializer(serializers.ModelSerializer):
+class CaptureTimeStampSerializer(serializers.ModelSerializer):
     video_timestamps = CaptureAnimeNameSerializer(many=True, required=False)
 
     class Meta:
-        model = CaptureInfoModel
+        model = CaptureTimeStampModel
         exclude = (
             "id",
             "user",
         )
 
-    def update(self, instance: CaptureInfoModel, validated_data):
+    def update(self, instance: CaptureTimeStampModel, validated_data):
         user = self.context["user"]  # Dont use get here. Fail if theres nothing.
-
-        video_volume = validated_data.get("video_volume", None)
-        if video_volume:
-            instance.video_volume = video_volume
 
         timestamps = validated_data.get("video_timestamps", None)
         if timestamps:

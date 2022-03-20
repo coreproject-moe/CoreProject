@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('upload', '0024_alter_animeinfomodel_options_and_more'),
+        ("upload", "0024_alter_animeinfomodel_options_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='animeinfomodel',
-            name='episodes',
-            field=models.ManyToManyField(blank=True, to='upload.episodemodel'),
+            model_name="animeinfomodel",
+            name="episodes",
+            field=models.ManyToManyField(blank=True, to="upload.episodemodel"),
         ),
     ]

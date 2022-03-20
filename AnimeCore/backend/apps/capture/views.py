@@ -1,35 +1,29 @@
-from rest_framework import status
-from rest_framework import generics
-from rest_framework import mixins
+from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import SessionAuthentication
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from django.http.response import HttpResponse
+
+from django.http.request import HttpRequest
+from django.shortcuts import get_object_or_404
 from django.views.decorators.cache import cache_page
 from django.utils.decorators import method_decorator
 from django.views.decorators.vary import vary_on_headers
 
-from .models import CaptureInfoModel
-from .serializers import CaptureInfoSerializer
+from .models import CaptureTimeStampModel
+from .serializers import CaptureTimeStampSerializer
 
 # Create your views here.
 
 
-class CaptureInfoView(
-    generics.GenericAPIView,
-    mixins.UpdateModelMixin,
-    mixins.ListModelMixin,
-):
+class CaptureTimeStampView(viewsets.ViewSet):
     """
     AnimeCore (video player)
-    ⦿   Volume
     ⦿   Timestamps
 
     """
 
-    serializer_class = CaptureInfoSerializer
     permission_classes = [
         IsAuthenticated,
     ]
@@ -44,23 +38,13 @@ class CaptureInfoView(
             "Authorization",
         )
     )
-    def get(self, request: HttpResponse) -> Response:
-        data, _ = CaptureInfoModel.objects.get_or_create(user=request.user)
-        serializer = self.get_serializer(data, many=False)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    def list(self, request: HttpRequest) -> Response:
+        queryset = CaptureTimeStampModel.objects.all()
+        serializer = CaptureTimeStampSerializer(queryset, many=True)
+        return Response(serializer.data)
 
-    def patch(self, request: HttpResponse) -> Response:
-        instance, _ = CaptureInfoModel.objects.get_or_create(user=request.user)
-        serializer = self.get_serializer(
-            data=request.data,
-            instance=instance,
-            context={
-                "user": request.user,
-            },
-        )
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    def retrieve(self, request: HttpRequest, pk: int) -> Response:
+        queryset = CaptureTimeStampModel.objects.all()
+        user = get_object_or_404(queryset, pk=pk)
+        serializer = CaptureTimeStampSerializer(user)
+        return Response(serializer.data)

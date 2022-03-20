@@ -11,6 +11,10 @@ from .serializers import AnimeInfoSerializer
 
 
 class AnimeInfoView(viewsets.ViewSet):
+    """
+    Returns all uploaded animes and their detailed view
+    """
+
     def list(self, request: HttpRequest) -> Response:
         queryset = AnimeInfoModel.objects.all()
         serializer = AnimeInfoSerializer(queryset, many=True)
