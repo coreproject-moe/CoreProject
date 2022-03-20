@@ -25,14 +25,14 @@ export const tokenBlacklistUrl = `${baseUrl}/api/v1/token/blacklist/`;
 export const userInfoUrl = `${baseUrl}/api/v1/user/info/`;
 /*
     Capture Endpoint (JSON)
-    Example = http://127.0.0.1:8000/api/v1/capture/
+    Example = http://127.0.0.1:8000/api/v1/capture/volume
 
 */
-export const captureEndpoint = `${baseUrl}/api/v1/capture/`;
+export const captureVolumeEndpoint = `${baseUrl}/api/v1/capture/volume/`;
 
 /*
     Capture Endpoint (JSON)
-    Example = http://127.0.0.1:8000/api/v1/capture/
+    Example = http://127.0.0.1:8000/api/v1/register/
 
 */
 export const registerEndpoint = `${baseUrl}/api/v1/user/register/`;
