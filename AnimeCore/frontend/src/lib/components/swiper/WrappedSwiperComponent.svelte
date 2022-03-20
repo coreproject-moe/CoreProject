@@ -5,8 +5,7 @@
     export let animePosterImage = "https://cdn.myanimelist.net/images/anime/6/73245.jpg";
 
     import { SwiperSlide } from "swiper/svelte";
-    import { onDestroy, onMount } from "svelte";
-    import tippy, { followCursor, animateFill, type Instance } from "tippy.js";
+    import tippy, { followCursor, animateFill } from "tippy.js";
 </script>
 
 <SwiperSlide>
@@ -27,7 +26,7 @@
             style="border-bottom-left-radius: 10px;border-bottom-right-radius: 10px;"
         >
             <div class="media">
-                <div class="media-content">
+                <div class="media-content is-clipped">
                     <p class="is-size-5 has-text-white">
                         <span
                             class="anime_name"
@@ -46,7 +45,37 @@
                         </span>
                     </p>
                     <p class="subtitle has-text-white mb-0">
-                        <span class="is-size-7">Episodes :</span>
+                        <span class="is-size-7"
+                            ><ion-icon
+                                name="tv-outline"
+                                class="is-size-5"
+                                style="color:firebrick;transform:translateY(5px)"
+                            />
+                        </span>
+                        <span
+                            class="is-size-5"
+                            use:tippy={{
+                                content: "<p class='is-size-7'>No End Reached 😱</p>",
+                                allowHTML: true,
+                                theme: "black",
+                                offset: [0, -5],
+                                maxWidth: 130,
+                                placement: "top",
+                                animateFill: true,
+                                followCursor: "horizontal",
+                                plugins: [followCursor, animateFill]
+                            }}
+                        >
+                            {animeNumber}
+                        </span>
+
+                        <span class="is-size-7"
+                            ><ion-icon
+                                name="star-outline"
+                                class="is-size-5"
+                                style="color:yellow;transform:translateY(5px)"
+                            />
+                        </span>
                         <span
                             class="is-size-5"
                             use:tippy={{
