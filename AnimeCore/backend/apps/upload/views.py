@@ -22,6 +22,6 @@ class AnimeInfoView(viewsets.ViewSet):
 
     def retrieve(self, request: HttpRequest, pk: int) -> Response:
         queryset = AnimeInfoModel.objects.all()
-        user = get_object_or_404(queryset, pk=pk)
-        serializer = AnimeInfoSerializer(user)
+        animes = get_object_or_404(queryset, pk=pk)
+        serializer = AnimeInfoSerializer(animes)
         return Response(serializer.data)

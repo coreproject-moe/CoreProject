@@ -4,8 +4,16 @@ from .models import (
     CaptureTimeStampModel,
     CaptureEpisodeModel,
     CaptureAnimeNameModel,
+    CaptureVolumeModel,
 )
 
 # Register your models here.
 
-admin.site.register([CaptureTimeStampModel, CaptureEpisodeModel, CaptureAnimeNameModel])
+admin.site.register(
+    [
+        CaptureTimeStampModel,
+        CaptureEpisodeModel,
+        CaptureAnimeNameModel,
+        CaptureVolumeModel,
+    ]
+)

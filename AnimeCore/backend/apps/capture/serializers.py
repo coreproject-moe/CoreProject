@@ -4,6 +4,7 @@ from .models import (
     CaptureTimeStampModel,
     CaptureAnimeNameModel,
     CaptureEpisodeModel,
+    CaptureVolumeModel,
 )
 
 
@@ -68,3 +69,10 @@ class CaptureTimeStampSerializer(serializers.ModelSerializer):
 
         instance.save()
         return validated_data
+
+
+class CaptureVolumeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CaptureVolumeModel
+        fields = "__all__"
+        read_only_fields = ("user",)
