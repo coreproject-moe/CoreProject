@@ -1,3 +1,4 @@
+from rest_framework import mixins
 from rest_framework import status
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -56,13 +57,15 @@ class CaptureVolumeView(viewsets.ViewSet):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class CaptureTimeStampView(viewsets.ViewSet):
+class CaptureTimeStampView(viewsets.GenericViewSet):
     """
     AnimeCore (video player)
     ⦿   Timestamps
 
     """
 
+    queryset = CaptureTimeStampModel.objects.all()
+    serializer_class = CaptureTimeStampSerializer
     permission_classes = [
         IsAuthenticated,
     ]
@@ -78,8 +81,8 @@ class CaptureTimeStampView(viewsets.ViewSet):
         )
     )
     def list(self, request: HttpRequest) -> Response:
-        queryset = CaptureTimeStampModel.objects.all()
-        serializer = CaptureTimeStampSerializer(queryset, many=True)
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
     @method_decorator(cache_page(5))
@@ -89,7 +92,11 @@ class CaptureTimeStampView(viewsets.ViewSet):
         )
     )
     def retrieve(self, request: HttpRequest, pk: int) -> Response:
-        queryset = CaptureTimeStampModel.objects.all()
+        queryset = self.get_queryset()
         timestamps = get_object_or_404(queryset, pk=pk)
-        serializer = CaptureTimeStampSerializer(timestamps)
+        serializer = self.get_serializer(timestamps)
         return Response(serializer.data)
+
+    def partial_update(self, request: HttpRequest, pk=None):
+        # This doesn't work
+        pass
