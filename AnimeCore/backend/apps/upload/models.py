@@ -61,7 +61,7 @@ class AnimeInfoModel(models.Model):
     anime_cover = models.ImageField(
         upload_to=FileField.anime_cover, default=None, blank=True, null=True
     )
-    episodes = models.ManyToManyField(EpisodeModel)
+    episodes = models.ManyToManyField(EpisodeModel, blank=True)
 
     def __str__(self) -> str:
         return f"{self.anime_name}"
