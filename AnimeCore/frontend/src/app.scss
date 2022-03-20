@@ -26,7 +26,14 @@ $family-sans-serif: "Roboto", "Cantarell", "Ubuntu";
         color: $white !important;
     }
 }
+.has-text-red {
+    color: red;
 
+    &:visited,
+    &::placeholder {
+        color: red !important;
+    }
+}
 // Special Classes ( inspired by bulma )
 
 .has-border-white {
@@ -42,12 +49,19 @@ $family-sans-serif: "Roboto", "Cantarell", "Ubuntu";
 .has-border-green {
     border-color: springgreen !important;
     border: 1px solid;
-    box-shadow: springgreen 0.2px 0.2px 0.2px 0.2px inset, springgreen 0.2px 0.2px 0.2px 0.2px;
+
+    &:not(.tag) {
+        box-shadow: springgreen 0.2px 0.2px 0.2px 0.2px inset, springgreen 0.2px 0.2px 0.2px 0.2px;
+    }
 }
 .has-border-blue {
     border-color: cornflowerblue !important;
     border: 1px solid;
-    box-shadow: cornflowerblue 0.2px 0.2px 0.2px 0.2px inset, cornflowerblue 0.2px 0.2px 0.2px 0.2px;
+
+    &:not(.tag) {
+        box-shadow: cornflowerblue 0.2px 0.2px 0.2px 0.2px inset,
+            cornflowerblue 0.2px 0.2px 0.2px 0.2px;
+    }
 }
 .has-border-red {
     border-color: red !important;

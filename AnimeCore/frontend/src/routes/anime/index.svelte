@@ -13,7 +13,7 @@
 
     $: switch ($responsiveMode) {
         case "mobile":
-            swiperSpacesBetween = 10;
+            swiperSpacesBetween = 15;
             swiperSlidesPerView = 2;
             break;
         case "tablet":
@@ -46,6 +46,7 @@
             grabCursor={true}
             centeredSlides={true}
             loop={true}
+            speed={50}
             coverflowEffect={{
                 rotate: 15,
                 stretch: 0,
