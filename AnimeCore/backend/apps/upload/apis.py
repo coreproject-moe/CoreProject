@@ -1,7 +1,7 @@
-from django.urls import path
+from rest_framework.routers import DefaultRouter
 
 from .views import AnimeInfoView
 
-urlpatterns = [
-    path("anime/<int:pk>/", AnimeInfoView.as_view(), name="api_anime_info"),
-]
+router = DefaultRouter()
+router.register(r"anime", AnimeInfoView, basename="anime_info")
+urlpatterns = router.urls

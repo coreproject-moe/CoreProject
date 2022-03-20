@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from apps.upload.serializers import AnimeInfoSerializer
 
 from .models import (
     CaptureAnimeNameModel,
@@ -15,6 +16,7 @@ class CaptureEpisodeSerializer(serializers.ModelSerializer):
 
 class CaptureAnimeNameSerializer(serializers.ModelSerializer):
     episodes = CaptureEpisodeSerializer(many=True)
+    
 
     class Meta:
         model = CaptureAnimeNameModel

@@ -1,12 +1,8 @@
-from pprint import pprint
-from rest_framework import status
-from rest_framework import generics
+from rest_framework import viewsets
 from rest_framework.response import Response
-from rest_framework.permissions import IsAdminUser
-from rest_framework.decorators import permission_classes
-from rest_framework.parsers import FormParser, MultiPartParser
 
 from django.http.request import HttpRequest
+from django.shortcuts import get_object_or_404
 
 from .models import AnimeInfoModel
 from .serializers import AnimeInfoSerializer
@@ -14,10 +10,14 @@ from .serializers import AnimeInfoSerializer
 # Create your views here.
 
 
-class AnimeInfoView(generics.ListCreateAPIView):
-    serializer_class = AnimeInfoSerializer
+class AnimeInfoView(viewsets.ViewSet):
+    def list(self, request: HttpRequest) -> Response:
+        queryset = AnimeInfoModel.objects.all()
+        serializer = AnimeInfoSerializer(queryset, many=True)
+        return Response(serializer.data)
 
-    def get(self, request: HttpRequest, pk: int) -> Response:
-        data = AnimeInfoModel.objects.get(id=pk)
-        serializer = self.get_serializer(data)
+    def retrieve(self, request: HttpRequest, pk: int) -> Response:
+        queryset = AnimeInfoModel.objects.all()
+        user = get_object_or_404(queryset, pk=pk)
+        serializer = AnimeInfoSerializer(user)
         return Response(serializer.data)
