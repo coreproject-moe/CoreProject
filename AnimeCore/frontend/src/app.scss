@@ -81,7 +81,8 @@ $family-sans-serif: "Roboto", "Cantarell", "Ubuntu";
 
 // Import Swiper styles
 @import "swiper/scss";
-
+@import "swiper/css/effect-coverflow";
+@import "swiper/css/pagination";
 // Tippy theme
 @import "tippy.js/dist/tippy.css";
 @import "tippy.js/animations/scale.css";

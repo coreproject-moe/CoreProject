@@ -3,7 +3,7 @@ import { captureVolumeEndpoint } from "$urls/restEndpoints";
 import { get, writable } from "svelte/store";
 import { isUserAuthenticated, userToken } from "./users";
 
-export const vimeJSVolume = writable(null || 0, function start(set) {
+export const vimeJSVolume = writable(0, function start(set) {
     (async () => {
         if (get(isUserAuthenticated)) {
             try {
