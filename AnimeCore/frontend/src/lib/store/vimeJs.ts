@@ -1,13 +1,13 @@
 import { browser } from "$app/env";
-import { captureEndpoint } from "$urls/restEndpoints";
+import { captureVolumeEndpoint } from "$urls/restEndpoints";
 import { get, writable } from "svelte/store";
 import { isUserAuthenticated, userToken } from "./users";
 
-export const vimeJSVolume = writable(100, function start(set) {
-    (async (__set) => {
+export const vimeJSVolume = writable(null || 0, function start(set) {
+    (async () => {
         if (get(isUserAuthenticated)) {
             try {
-                const res = await fetch(captureEndpoint, {
+                const res = await fetch(captureVolumeEndpoint, {
                     method: "GET",
                     headers: new Headers({
                         Accept: "application/json",
@@ -16,12 +16,10 @@ export const vimeJSVolume = writable(100, function start(set) {
                     })
                 });
                 const data = await res.json();
-                __set(data?.video_volume);
+                set(data?.video_volume);
             } catch (err) {
                 if (err instanceof Error) {
-                    console.error(
-                        `Can't fetch from backend | Flushing Tokens | Reason : ${err?.message}`
-                    );
+                    console.error(`Can't GET from backend |  Reason : ${err?.message}`);
                 }
             }
         } else {
@@ -32,7 +30,7 @@ export const vimeJSVolume = writable(100, function start(set) {
                 set(volume);
             }
         }
-    })(set);
+    })();
 });
 
 // On change update the backend and localstorage.
@@ -43,8 +41,8 @@ vimeJSVolume.subscribe((change: number) => {
     // Backend update
     if (get(isUserAuthenticated)) {
         try {
-            fetch(captureEndpoint, {
-                method: "PATCH",
+            fetch(captureVolumeEndpoint, {
+                method: "POST",
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json",
@@ -55,7 +53,7 @@ vimeJSVolume.subscribe((change: number) => {
                 })
             });
         } catch {
-            console.error(`POST to ${captureEndpoint} Failed`);
+            console.error(`POST to ${captureVolumeEndpoint} Failed`);
         }
     }
 });
