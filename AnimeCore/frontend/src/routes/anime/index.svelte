@@ -1,6 +1,8 @@
 <script lang="ts">
     // Import Swiper Svelte components
     import { Swiper } from "swiper/svelte";
+    import { EffectCoverflow, Pagination } from "swiper";
+
     import { projectName } from "$lib/constants/frontend/project";
 
     import { responsiveMode } from "$store/responsive";
@@ -39,7 +41,22 @@
         Recent Uploads :
     </p>
     <div class="box" style="background-color: black; border: 1px dotted white">
-        <Swiper spaceBetween={swiperSpacesBetween} slidesPerView={swiperSlidesPerView}>
+        <Swiper
+            effect={"coverflow"}
+            grabCursor={true}
+            centeredSlides={true}
+            loop={true}
+            coverflowEffect={{
+                rotate: 15,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true
+            }}
+            modules={[EffectCoverflow, Pagination]}
+            spaceBetween={swiperSpacesBetween}
+            slidesPerView={swiperSlidesPerView}
+        >
             {#each Array(12) as _}
                 <WrappedSwiperComponent />
             {/each}
