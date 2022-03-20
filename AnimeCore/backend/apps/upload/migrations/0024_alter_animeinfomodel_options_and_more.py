@@ -6,16 +6,16 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('upload', '0023_alter_episodemodel_options'),
+        ("upload", "0023_alter_episodemodel_options"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='animeinfomodel',
-            options={'ordering': ('-id',), 'verbose_name': 'Anime info'},
+            name="animeinfomodel",
+            options={"ordering": ("-id",), "verbose_name": "Anime info"},
         ),
         migrations.AlterModelOptions(
-            name='episodemodel',
-            options={'ordering': ('id',), 'verbose_name': 'Episode info'},
+            name="episodemodel",
+            options={"ordering": ("id",), "verbose_name": "Episode info"},
         ),
     ]

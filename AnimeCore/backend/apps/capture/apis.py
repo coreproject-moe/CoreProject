@@ -1,6 +1,7 @@
-from django.urls import path
-from .views import CaptureInfoView
+from rest_framework.routers import DefaultRouter
 
-urlpatterns = [
-    path("", CaptureInfoView.as_view(), name="api_capture_video"),
-]
+from .views import CaptureTimeStampView
+
+router = DefaultRouter()
+router.register(r"anime", CaptureTimeStampView, basename="capture_timestamp")
+urlpatterns = router.urls

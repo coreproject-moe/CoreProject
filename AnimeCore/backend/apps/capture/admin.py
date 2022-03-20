@@ -1,11 +1,11 @@
 from django.contrib import admin
 
 from .models import (
-    CaptureInfoModel,
+    CaptureTimeStampModel,
     CaptureEpisodeModel,
     CaptureAnimeNameModel,
 )
 
 # Register your models here.
 
-admin.site.register([CaptureInfoModel, CaptureEpisodeModel, CaptureAnimeNameModel])
+admin.site.register([CaptureTimeStampModel, CaptureEpisodeModel, CaptureAnimeNameModel])
