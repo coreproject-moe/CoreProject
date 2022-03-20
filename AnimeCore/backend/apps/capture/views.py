@@ -17,6 +17,8 @@ from .models import CaptureTimeStampModel, CaptureVolumeModel
 from .serializers import CaptureTimeStampSerializer, CaptureVolumeSerializer
 
 # Create your views here.
+
+
 class CaptureVolumeView(viewsets.ViewSet):
     """
     AnimeCore (video player)
@@ -98,5 +100,18 @@ class CaptureTimeStampView(viewsets.GenericViewSet):
         return Response(serializer.data)
 
     def partial_update(self, request: HttpRequest, pk=None):
-        # This doesn't work
-        pass
+        queryset = self.get_queryset()
+        timestamps = get_object_or_404(queryset, pk=pk)
+        serializer = self.get_serializer(
+            instance=timestamps,
+            data=request.data,
+            partial=True,
+            context={
+                "user": request.user,
+            },
+        )
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+
+        return Response(serializer.errors)
