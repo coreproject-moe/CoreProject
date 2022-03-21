@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     # Rest Framework
     "rest_framework",
     # 3rd party rest framework stuff
+    "django_filters",
     "corsheaders",
     "rest_framework_simplejwt.token_blacklist",
     # 3rd party Django stuff
@@ -190,6 +191,9 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
         "rest_framework.authentication.SessionAuthentication",
     ),
+    "DEFAULT_FILTER_BACKENDS": [
+        "django_filters.rest_framework.DjangoFilterBackend",
+    ],
     "DEFAULT_PARSER_CLASSES": [
         "rest_framework.parsers.JSONParser",
     ],
