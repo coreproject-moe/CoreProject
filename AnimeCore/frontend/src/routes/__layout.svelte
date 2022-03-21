@@ -427,6 +427,7 @@
                 border-color: hsl(0, 0%, 20%) !important;
                 transition: 0.2s;
 
+                // Arrow Icon
                 &:hover {
                     background-color: hsl(0, 0%, 20%) !important;
                 }
