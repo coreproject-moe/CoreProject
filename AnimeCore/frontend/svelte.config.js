@@ -33,20 +33,28 @@ const config = {
                     $components: path.resolve("./src/lib/components")
                 }
             },
+            esbuild: {
+                legalComments: "none",
+                charset: "utf8"
+            },
             build: {
-                // sourcemap: "hidden",
-                // chunkSizeWarningLimit: 512,
-                rollupOptions: {
-                    output: {
-                        manualChunks: {
-                            // md5: ["md5"],
-                            // anime: ["animejs"],
-                            // dayjs: ["dayjs"],
-                            // swiper: ["swiper"],
-                            // "tippy.js": ["tippy.js"],
-                        }
-                    }
-                }
+                // minify: "terser",
+                // terserOptions: {
+                //     format: {
+                //         comments: false
+                //     }
+                // },
+                // rollupOptions: {
+                //     output: {
+                //         manualChunks: {
+                //             // md5: ["md5"],
+                //             // anime: ["animejs"],
+                //             // dayjs: ["dayjs"],
+                //             // swiper: ["swiper"],
+                //             // "tippy.js": ["tippy.js"],
+                //         }
+                //     }
+                // }
             }
         }
     }
