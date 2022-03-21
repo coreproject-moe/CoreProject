@@ -19,6 +19,15 @@ $family-sans-serif: "Roboto", "Cantarell", "Ubuntu";
     text-underline-offset: 5px;
 }
 
+// Special Classes ( inspired by bulma )
+
+.has-no-text-decoration {
+    text-decoration: none !important;
+}
+
+/*            Font Colors            */
+/* ================================ */
+
 .has-text-white {
     // Why doesn't bulma style placeholders ? 🤔
     &:visited,
@@ -62,15 +71,13 @@ $family-sans-serif: "Roboto", "Cantarell", "Ubuntu";
         color: red !important;
     }
 }
-// Special Classes ( inspired by bulma )
+
+/*              Borders             */
+/* ================================ */
 
 .has-border-white {
     border: 1px solid white;
 }
-.has-no-text-decoration {
-    text-decoration: none !important;
-}
-
 .has-border-gray {
     border: 1px solid #353333 !important;
 }
@@ -106,12 +113,18 @@ $family-sans-serif: "Roboto", "Cantarell", "Ubuntu";
     }
 }
 
+/*      Position Based Changes      */
+/* ================================ */
+
 .is-position-fixed {
     position: fixed !important;
 }
 .is-borderless {
     border: 0 !important;
 }
+
+/*      Font Based Changes      */
+/* ================================ */
 
 .is-font-face-cantarell {
     font-family: "Cantarell" !important;
