@@ -1,4 +1,37 @@
+<script context="module" lang="ts">
+    import { animeInfoEndpoint } from "$urls/restEndpoints";
+    import type { Load } from "@sveltejs/kit";
+
+    export const load: Load = async ({ fetch }) => {
+        const res = await fetch(animeInfoEndpoint);
+        return {
+            props: {
+                animes: await res?.json()
+            }
+        };
+    };
+</script>
+
 <script lang="ts">
+    // @ts-ignore
+    export let animes = [
+        {
+            episodes: [
+                {
+                    episode_comments: [],
+                    episode_number: 1,
+                    episode_name: "",
+                    episode_cover: null,
+                    episode_file: "",
+                    episode_summary: ""
+                }
+            ],
+            anime_name: "",
+            mal_id: 0,
+            updated: ""
+        }
+    ];
+
     import anime from "animejs";
 
     // Import Swiper Svelte components

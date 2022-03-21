@@ -50,7 +50,7 @@ export const userInfo = writable(
     },
     function start(set) {
         // Async Callback to fetch data
-        (async (__set) => {
+        (async () => {
             if (get(isUserAuthenticated)) {
                 try {
                     const res = await fetch(userInfoUrl, {
@@ -62,7 +62,7 @@ export const userInfo = writable(
                         })
                     });
                     const data = await res.json();
-                    __set(data);
+                    set(data);
                 } catch (e) {
                     if (e instanceof Error) {
                         console.log(`Cannot get user data | Reason : ${e?.message}`);
@@ -70,6 +70,6 @@ export const userInfo = writable(
                     }
                 }
             }
-        })(set);
+        })();
     }
 );

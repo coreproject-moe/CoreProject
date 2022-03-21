@@ -6,7 +6,7 @@
         const res = await fetch(`https://api.jikan.moe/v4/anime/${params.id}`);
         return {
             props: {
-                animeData: await res.json()
+                animeData: await res?.json()
             }
         };
     };
@@ -273,7 +273,12 @@
                         <div class="column">
                             <div class="columns is-mobile">
                                 <div class="column">Genres :</div>
-                                <div class="column">{animeGenres?.toString()}</div>
+                                <div
+                                    class="column"
+                                    style="display: inline;overflow: hidden;text-overflow: ellipsis;width:0px"
+                                >
+                                    {animeGenres?.toString()}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -281,7 +286,12 @@
                         <div class="column">
                             <div class="columns is-mobile">
                                 <div class="column">Theme :</div>
-                                <div class="column">{animeTheme?.toString()}</div>
+                                <div
+                                    class="column"
+                                    style="display: inline;overflow: hidden;text-overflow: ellipsis;width:0px"
+                                >
+                                    {animeTheme?.toString()}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -290,14 +300,6 @@
                             <div class="columns is-mobile">
                                 <div class="column">Duration :</div>
                                 <div class="column">{animeData?.data?.duration}</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="columns mb-0">
-                        <div class="column">
-                            <div class="columns is-mobile">
-                                <div class="column">Rating :</div>
-                                <div class="column">anime.rating</div>
                             </div>
                         </div>
                     </div>
@@ -310,13 +312,9 @@
                         : 'is-align-self-center'}"
                 >
                     <div class="content has-text-white">
-                        <h1 class="has-text-white">Hello World</h1>
+                        <h1 class="has-text-white">Synopsis</h1>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla accumsan,
-                            metus ultrices eleifend gravida, nulla nunc varius lectus, nec rutrum
-                            justo nibh eu lectus. Ut vulputate semper dui. Fusce erat odio,
-                            sollicitudin vel erat vel, interdum mattis neque. Sub<sub>script</sub> works
-                            as well!
+                            {animeData?.data?.synopsis}
                         </p>
                         <h1 class="has-text-white">Episodes :</h1>
 
