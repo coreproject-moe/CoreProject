@@ -26,6 +26,34 @@ $family-sans-serif: "Roboto", "Cantarell", "Ubuntu";
         color: $white !important;
     }
 }
+
+.has-text-blue {
+    color: cornflowerblue;
+
+    &:visited,
+    &::placeholder {
+        color: cornflowerblue !important;
+    }
+}
+
+.has-text-green {
+    color: springgreen;
+
+    &:visited,
+    &::placeholder {
+        color: springgreen !important;
+    }
+}
+
+.has-text-yellow {
+    color: yellow;
+
+    &:visited,
+    &::placeholder {
+        color: yellow !important;
+    }
+}
+
 .has-text-red {
     color: red;
 
@@ -68,10 +96,12 @@ $family-sans-serif: "Roboto", "Cantarell", "Ubuntu";
     border: 1px solid;
     box-shadow: red 0.2px 0.2px 0.2px 0.2px inset, red 0.2px 0.2px 0.2px 0.2px;
 }
+
 .has-hover-gray {
     transition: 0.2s;
 
-    &:hover {
+    &:hover,
+    &.hover {
         background-color: hsl(0, 0%, 7.8%) !important;
     }
 }
