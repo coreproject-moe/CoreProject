@@ -9,6 +9,7 @@
     import { projectName } from "$lib/constants/frontend/project";
 
     import WrappedSwiperComponent from "$components/swiper/WrappedSwiperComponent.svelte";
+    import AnimeCard from "$components/cards/AnimeCard.svelte";
 
     let animeJSHeartIcon: HTMLElement;
     let animeJSRocketIcon: HTMLElement;
@@ -17,7 +18,7 @@
     let swiperSpacesBetween: number;
     let swiperSlidesPerView: number;
 
-    let activeTab: "trending" | "popular" | "favorite";
+    let activeTab: "trending" | "popular" | "favorite" = "trending";
 
     $: switch ($responsiveMode) {
         case "mobile":
@@ -69,7 +70,13 @@
 </div>
 <div class="container">
     <span
-        class="tag is-black is-rounded has-hover-gray is-size-6 is-clickable is-unselectable"
+        class="tag is-black is-rounded has-hover-gray is-size-6 is-clickable is-unselectable {activeTab ===
+        'trending'
+            ? 'hover'
+            : ''}"
+        on:click|preventDefault={() => {
+            activeTab = "trending";
+        }}
         on:mouseenter|preventDefault={() => {
             anime({
                 targets: [animeJSRocketIcon],
@@ -86,7 +93,13 @@
         <ion-icon name="rocket-outline" class="pr-2" bind:this={animeJSRocketIcon} />Trending
     </span>
     <span
-        class="tag is-black is-rounded has-hover-gray is-size-6 is-clickable is-unselectable"
+        class="tag is-black is-rounded has-hover-gray is-size-6 is-clickable is-unselectable {activeTab ===
+        'popular'
+            ? 'hover'
+            : ''}"
+        on:click|preventDefault={() => {
+            activeTab = "popular";
+        }}
         on:mouseenter|preventDefault={() => {
             anime({
                 targets: [animeJSSparkleIcon],
@@ -103,7 +116,13 @@
         <ion-icon name="sparkles-outline" class="pr-2" bind:this={animeJSSparkleIcon} /> Popular
     </span>
     <span
-        class="tag is-black is-rounded has-hover-gray is-size-6 is-clickable is-unselectable"
+        class="tag is-black is-rounded has-hover-gray is-size-6 is-clickable is-unselectable {activeTab ===
+        'favorite'
+            ? 'hover'
+            : ''}"
+        on:click|preventDefault={() => {
+            activeTab = "favorite";
+        }}
         on:mouseenter|preventDefault={() => {
             anime({
                 targets: [animeJSHeartIcon],
@@ -119,45 +138,27 @@
         ><ion-icon name="heart-outline" bind:this={animeJSHeartIcon} class="pr-2" /> Favorite
     </span>
 </div>
-<div class="container">
+<div class="container pt-3">
     <div class="grid-container">
-        {#each Array(20) as _, i}
-            <div class="grid-item">
-                <div class="card">
-                    <div class="card-image has-background-black">
-                        <figure class="image is-3by5">
-                            <img
-                                src="https://cdn.myanimelist.net/images/anime/6/73245.jpg"
-                                alt="Placeholder_image"
-                                style="border-radius:20px"
-                            />
-                        </figure>
-                    </div>
-                    <div class="card-content has-background-black">
-                        <div class="content">
-                            <p class="subtitle has-text-white mb-0">
-                                <span class="is-size-7">
-                                    <ion-icon
-                                        class="is-size-5"
-                                        style="color: firebrick; transform: translateY(5px);"
-                                        name="tv-outline"
-                                    />
-                                </span>
-                                <span class="is-size-5">∞</span>
-                                <span class="is-size-7">
-                                    <ion-icon
-                                        class="is-size-5"
-                                        style="color: yellow; transform: translateY(5px);"
-                                        name="star-outline"
-                                    />
-                                </span>
-                                <span class="is-size-5">∞</span>
-                            </p>
-                        </div>
-                    </div>
+        {#if activeTab === "trending"}
+            {#each Array(20) as _}
+                <div class="grid-item">
+                    <AnimeCard />
                 </div>
-            </div>
-        {/each}
+            {/each}
+        {:else if activeTab === "favorite"}
+            {#each Array(40) as _}
+                <div class="grid-item">
+                    <AnimeCard />
+                </div>
+            {/each}
+        {:else if activeTab === "popular"}
+            {#each Array(60) as _}
+                <div class="grid-item">
+                    <AnimeCard />
+                </div>
+            {/each}
+        {/if}
     </div>
 </div>
 
@@ -165,12 +166,11 @@
     .grid-container {
         display: grid;
         align-items: center;
-        gap: 2em;
-        grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
+        gap: 1em;
+        grid-template-columns: repeat(auto-fit, minmax(13em, 1fr));
         background-color: black;
     }
     .grid-item {
-        background-color: black;
         padding: 0.8em;
         text-align: center;
         transition: 0.2s;
