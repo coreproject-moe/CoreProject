@@ -124,20 +124,35 @@
         {#each Array(20) as _, i}
             <div class="grid-item">
                 <div class="card">
-                    <div class="card-image">
-                        <figure class="image is-4by3">
+                    <div class="card-image has-background-black">
+                        <figure class="image is-3by5">
                             <img
-                                src="https://bulma.io/images/placeholders/1280x960.png"
-                                alt="Placeholder image"
+                                src="https://cdn.myanimelist.net/images/anime/6/73245.jpg"
+                                alt="Placeholder_image"
+                                style="border-radius:20px"
                             />
                         </figure>
                     </div>
-                    <div class="card-content">
+                    <div class="card-content has-background-black">
                         <div class="content">
-                            Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros.
-                            Donec id elit non mi porta gravida at eget metus. Cum sociis natoque
-                            penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras
-                            mattis consectetur purus sit amet fermentum.
+                            <p class="subtitle has-text-white mb-0">
+                                <span class="is-size-7">
+                                    <ion-icon
+                                        class="is-size-5"
+                                        style="color: firebrick; transform: translateY(5px);"
+                                        name="tv-outline"
+                                    />
+                                </span>
+                                <span class="is-size-5">∞</span>
+                                <span class="is-size-7">
+                                    <ion-icon
+                                        class="is-size-5"
+                                        style="color: yellow; transform: translateY(5px);"
+                                        name="star-outline"
+                                    />
+                                </span>
+                                <span class="is-size-5">∞</span>
+                            </p>
                         </div>
                     </div>
                 </div>
