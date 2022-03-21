@@ -41,7 +41,15 @@
                 if (!response?.ok) {
                     throw response;
                 }
-
+            })
+            .catch((error) => {
+                if (typeof error?.json === "function") {
+                    error?.json()?.then((jsonError: unknown) => {
+                        errorMessage = JSON.stringify(jsonError);
+                    });
+                }
+            })
+            .finally(() => {
                 // Control the timer. Control the Flow
                 timeout = 3000;
                 logoutState = true;
@@ -62,13 +70,6 @@
                     is_staff: false,
                     avatar: ""
                 };
-            })
-            .catch((error) => {
-                if (typeof error?.json === "function") {
-                    error?.json()?.then((jsonError: unknown) => {
-                        errorMessage = JSON.stringify(jsonError);
-                    });
-                }
             });
     }, 3000);
 
