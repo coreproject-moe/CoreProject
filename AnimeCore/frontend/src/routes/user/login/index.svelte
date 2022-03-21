@@ -138,7 +138,8 @@
                                 placeholder="Username / Email"
                             />
                             <span class="icon is-small is-left" bind:this={tippyJsUserNameIcon} use:tippy={{
-                                content: "Username / Email",
+                                content: "<p class='is-size-7'>Username / Email</p>",
+                                allowHTML:true,
                                 hideOnClick: false,
                                 theme: "black",
                                 placement: "left",
@@ -175,7 +176,8 @@
                                 👀
                             </span>
                             <span class="icon is-small is-left" bind:this={tippyJsPasswordIcon}  use:tippy={ {
-                                content: "Password",
+                                content: "<p class='is-size-7'>Password</p>",
+                                allowHTML:true,
                                 hideOnClick: false,
                                 theme: "black",
                                 placement: "left",

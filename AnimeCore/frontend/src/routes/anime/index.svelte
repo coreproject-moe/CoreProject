@@ -5,9 +5,9 @@
     import { Swiper } from "swiper/svelte";
     import { EffectCoverflow, Pagination } from "swiper";
 
+    import { responsiveMode } from "$store/responsive";
     import { projectName } from "$lib/constants/frontend/project";
 
-    import { responsiveMode } from "$store/responsive";
     import WrappedSwiperComponent from "$components/swiper/WrappedSwiperComponent.svelte";
 
     let animeJSHeartIcon: HTMLElement;
@@ -16,6 +16,8 @@
 
     let swiperSpacesBetween: number;
     let swiperSlidesPerView: number;
+
+    let activeTab: "trending" | "popular" | "favorite";
 
     $: switch ($responsiveMode) {
         case "mobile":
@@ -111,9 +113,51 @@
         on:mouseleave|preventDefault={() => {
             anime({
                 targets: [animeJSHeartIcon],
-                color: "#fffffff"
+                color: "#ffffff"
             });
         }}
-        ><ion-icon name="heart-outline" bind:this={animeJSHeartIcon} class="pr-2" /> Trending
+        ><ion-icon name="heart-outline" bind:this={animeJSHeartIcon} class="pr-2" /> Favorite
     </span>
 </div>
+<div class="container">
+    <div class="grid-container">
+        {#each Array(20) as _, i}
+            <div class="grid-item">
+                <div class="card">
+                    <div class="card-image">
+                        <figure class="image is-4by3">
+                            <img
+                                src="https://bulma.io/images/placeholders/1280x960.png"
+                                alt="Placeholder image"
+                            />
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="content">
+                            Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros.
+                            Donec id elit non mi porta gravida at eget metus. Cum sociis natoque
+                            penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras
+                            mattis consectetur purus sit amet fermentum.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {/each}
+    </div>
+</div>
+
+<style lang="scss">
+    .grid-container {
+        display: grid;
+        align-items: center;
+        gap: 2em;
+        grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
+        background-color: black;
+    }
+    .grid-item {
+        background-color: black;
+        padding: 0.8em;
+        text-align: center;
+        transition: 0.2s;
+    }
+</style>
