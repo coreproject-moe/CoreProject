@@ -24,7 +24,7 @@
         "animejs": "^3.2.1",
         "autoprefixer": "^10.4.4",
         "bulma": "^0.9.3",
-        "cssnano": "^5.1.4",
+        "cssnano": "^5.1.5",
         "dayjs": "^1.11.0",
         "eslint": "^8.11.0",
         "eslint-config-prettier": "^8.5.0",
