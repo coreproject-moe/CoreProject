@@ -20,96 +20,102 @@
                 : 'is-flex-direction-row'}"
         >
             <div
-                class="column is-align-self-center is-flex is-justify-content-center 
+                class="column is-align-self-center has-text-white is-flex is-justify-content-center is-flex-direction-column
 				{$responsiveMode === 'desktop' || $responsiveMode === 'widescreen' || $responsiveMode === 'fullhd'
                     ? 'is-3'
                     : ''}"
             >
-                <table
-                    class="table is-bordered has-text-white has-background-black is-font-face-ubuntu {$responsiveMode ===
-                        'desktop' ||
-                    $responsiveMode === 'widescreen' ||
-                    $responsiveMode === 'fullhd'
-                        ? 'is-position-fixed'
-                        : ''}"
-                    style="{$responsiveMode === 'desktop' ||
-                    $responsiveMode === 'widescreen' ||
-                    $responsiveMode === 'fullhd'
-                        ? 'top: 5em;'
-                        : ''}
-					{$responsiveMode === 'mobile' ? 'width: 90%;' : ''} {$responsiveMode === 'tablet'
-                        ? 'width:80%'
-                        : ''}
-					"
-                >
-                    <tbody>
-                        <tr>
-                            <td colspan="2" class="pb-0 pt-0 pr-0 pl-0 is-borderless">
-                                <div
-                                    class="is-align-self-center is-flex is-justify-content-center pb-1"
-                                >
-                                    <div
-                                        class="progressive replace"
-                                        data-href="https://cdn.myanimelist.net/images/anime/6/73245.jpg"
-                                        style="border-radius: 10px;"
-                                    >
-                                        <img
-                                            alt=""
-                                            src="/placeholder-225x350.avif"
-                                            class="preview"
-                                        />
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><p class="is-size-7">Name :</p></td>
-                            <td>anime.name</td>
-                        </tr>
-                        <tr>
-                            <td><p class="is-size-7">Score :</p></td>
-                            <td> anime.score</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p class="is-size-7">Episodes :</p>
-                            </td>
-                            <td>anime.episodes</td>
-                        </tr>
-                        <tr>
-                            <td><p class="is-size-7">Aired :</p></td>
-                            <td>anime.aired_from</td>
-                        </tr>
-                        <tr>
-                            <td><p class="is-size-7">Producers:</p></td>
-                            <td>anime.producers</td>
-                        </tr>
-                        <tr>
-                            <td><p class="is-size-7">Studios :</p></td>
-                            <td>anime.studios</td>
-                        </tr>
-                        <tr>
-                            <td><p class="is-size-7">Source :</p></td>
-                            <td>anime.source</td>
-                        </tr>
-                        <tr>
-                            <td><p class="is-size-7">Genres :</p></td>
-                            <td>anime.genres</td>
-                        </tr>
-                        <tr>
-                            <td><p class="is-size-7">Theme :</p></td>
-                            <td>anime.theme</td>
-                        </tr>
-                        <tr>
-                            <td><p class="is-size-7">Duration :</p></td>
-                            <td>anime.duration</td>
-                        </tr>
-                        <tr>
-                            <td><p class="is-size-7">Rating :</p></td>
-                            <td>anime.rating</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="columns is-mobile is-centered">
+                    <div class="column is-narrow">
+                        <div
+                            class="progressive replace"
+                            data-href="https://cdn.myanimelist.net/images/anime/6/73245.jpg"
+                            style="border-radius: 10px;"
+                        >
+                            <img alt="" src="/placeholder-225x350.avif" class="preview" />
+                        </div>
+                    </div>
+                </div>
+                <div class="columns mb-0">
+                    <div class="column">
+                        <div class="columns is-mobile">
+                            <div class="column">Name :</div>
+                            <div class="column">anime.name</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns mb-0">
+                    <div class="column">
+                        <div class="columns is-mobile">
+                            <div class="column">Score :</div>
+                            <div class="column">anime.score</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns mb-0">
+                    <div class="column">
+                        <div class="columns is-mobile">
+                            <div class="column">Episodes :</div>
+                            <div class="column">anime.episodes</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns mb-0">
+                    <div class="column">
+                        <div class="columns is-mobile">
+                            <div class="column">Aired :</div>
+                            <div class="column">anime.aired</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns mb-0">
+                    <div class="column">
+                        <div class="columns is-mobile">
+                            <div class="column">Studios :</div>
+                            <div class="column">anime.studios</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns mb-0">
+                    <div class="column">
+                        <div class="columns is-mobile">
+                            <div class="column">Source :</div>
+                            <div class="column">anime.source</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns mb-0">
+                    <div class="column">
+                        <div class="columns is-mobile">
+                            <div class="column">Genres :</div>
+                            <div class="column">anime.genres</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns mb-0">
+                    <div class="column">
+                        <div class="columns is-mobile">
+                            <div class="column">Theme :</div>
+                            <div class="column">anime.theme</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns mb-0">
+                    <div class="column">
+                        <div class="columns is-mobile">
+                            <div class="column">Duration :</div>
+                            <div class="column">anime.duration</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns mb-0">
+                    <div class="column">
+                        <div class="columns is-mobile">
+                            <div class="column">Rating :</div>
+                            <div class="column">anime.rating</div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div
                 class="column is-flex {$responsiveMode === 'desktop' ||
