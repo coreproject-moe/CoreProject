@@ -62,10 +62,12 @@ class AnimeInfoModel(models.Model):
         upload_to=FileField.anime_cover, default=None, blank=True, null=True
     )
     episodes = models.ManyToManyField(EpisodeModel, blank=True)
+    mal_id = models.IntegerField(unique=True, blank=False, null=False)
+    updated = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
         return f"{self.anime_name}"
 
     class Meta:
         verbose_name = "Anime info"
-        ordering = ("-id",)
+        ordering = ("-mal_id",)
