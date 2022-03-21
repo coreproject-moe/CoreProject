@@ -7,10 +7,6 @@ class FileField:
     # Thanks Stackoverflow
     # https://stackoverflow.com/questions/1190697/django-filefield-with-upload-to-determined-at-runtime
     @staticmethod
-    def anime_cover(instance, filename) -> str:
-        return Path("anime", instance.anime_name, filename)
-
-    @staticmethod
     def episode_cover(instance, filename) -> str:
         return Path("episode_cover", filename)
 
@@ -58,9 +54,6 @@ class EpisodeModel(models.Model):
 
 class AnimeInfoModel(models.Model):
     anime_name = models.CharField(max_length=1024)
-    anime_cover = models.ImageField(
-        upload_to=FileField.anime_cover, default=None, blank=True, null=True
-    )
     episodes = models.ManyToManyField(EpisodeModel, blank=True)
     mal_id = models.IntegerField(unique=True, blank=False, null=False)
     updated = models.DateTimeField(auto_now_add=True)
@@ -69,5 +62,5 @@ class AnimeInfoModel(models.Model):
         return f"{self.anime_name}"
 
     class Meta:
-        verbose_name = "Anime info"
+        verbose_name = "Animes"
         ordering = ("-mal_id",)

@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 blank=True,
                 default=None,
                 null=True,
-                upload_to=apps.upload.models.FileField.anime_cover,
+                upload_to="",
             ),
         ),
     ]
