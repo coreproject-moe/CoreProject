@@ -13,9 +13,13 @@
                     }
                 };
             }
-            return {};
+            return {
+                status: 400
+            };
         } catch {
-            return {};
+            return {
+                status: 400
+            };
         }
     };
 </script>
@@ -76,7 +80,6 @@
             swiperSlidesPerView = 6;
             break;
     }
-    $: console.log(animes?.length);
 </script>
 
 <svelte:head>
@@ -85,30 +88,36 @@
 
 <div class="container">
     <p class="title is-size-5 pt-2 has-text-white" />
-    <div class="box has-background-black">
+    {#if animes?.length}
         <Swiper
             effect={"coverflow"}
             centeredSlides={true}
-            loop={true}
-            speed={50}
+            speed={100}
             coverflowEffect={{
                 rotate: 15,
                 stretch: 0,
                 depth: 100,
-                modifier: 1,
-                slideShadows: true
+                modifier: 1
             }}
             modules={[EffectCoverflow, Pagination]}
             spaceBetween={swiperSpacesBetween}
             slidesPerView={swiperSlidesPerView}
         >
-            {#if animes?.length}
-                {#each animes as { anime_name, mal_id }, i}
-                    <WrappedSwiperComponent animeName={anime_name} animeNumber={mal_id} />
-                {/each}
-            {/if}
+            {#each animes as { anime_name, mal_id }, i}
+                <WrappedSwiperComponent animeName={anime_name} animeNumber={mal_id} />
+            {/each}
         </Swiper>
-    </div>
+    {:else}
+        <section class="hero is-medium">
+            <div class="hero-body">
+                <div class="columns is-mobile is-centered">
+                    <div class="column is-narrow">
+                        <button class="button is-loading is-large has-background-black is-ghost" />
+                    </div>
+                </div>
+            </div>
+        </section>
+    {/if}
 </div>
 <div class="container">
     <span
