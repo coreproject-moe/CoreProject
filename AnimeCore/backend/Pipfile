@@ -14,7 +14,6 @@ djangorestframework-simplejwt = "*"
 # Pillow stuff
 pillow = "*"
 pillow-avif-plugin = "*"
-django-filter = "*"
 
 [dev-packages]
 black = "*"
