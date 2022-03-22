@@ -62,5 +62,5 @@ class AnimeInfoModel(models.Model):
         return f"{self.anime_name}"
 
     class Meta:
-        verbose_name = "Animes"
+        verbose_name = "Anime"
         ordering = ("-mal_id",)

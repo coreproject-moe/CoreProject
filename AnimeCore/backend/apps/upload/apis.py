@@ -1,7 +1,18 @@
 from django.urls import path
+from rest_framework.routers import DefaultRouter
 
 from .views import AnimeInfoView
 
+router = DefaultRouter()
+router.register(r"anime", AnimeInfoView, basename="anime_info")
+
+
+# https://stackoverflow.com/questions/51823331/django-rest-framework-define-extra-arguments-using-the-action-decorator
 urlpatterns = [
-    path("anime/", AnimeInfoView.as_view(), name="anime_info"),
+    path(
+        "anime/<int:pk>/episode/<int:episode_number>/",
+        AnimeInfoView.as_view({"get": "episode"}),
+    ),
 ]
+
+urlpatterns += router.urls

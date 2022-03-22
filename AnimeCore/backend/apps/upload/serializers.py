@@ -23,6 +23,3 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = AnimeInfoModel
         exclude = ("id",)
-
-    def update(self, instance: AnimeInfoModel, validated_data):
-        print(validated_data)
