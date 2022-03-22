@@ -13,128 +13,128 @@
 </script>
 
 <script lang="ts">
-    export let animeData = {
+    export let animeData: {
         data: {
-            mal_id: 0,
-            url: "",
+            mal_id: number;
+            url: string;
             images: {
                 jpg: {
-                    image_url: "",
-                    small_image_url: "",
-                    large_image_url: ""
-                },
+                    image_url: string;
+                    small_image_url: string;
+                    large_image_url: "";
+                };
                 webp: {
-                    image_url: "",
-                    small_image_url: "",
-                    large_image_url: ""
-                }
-            },
+                    image_url: string;
+                    small_image_url: string;
+                    large_image_url: "";
+                };
+            };
             trailer: {
-                youtube_id: "",
-                url: "",
-                embed_url: ""
-            },
-            title: "",
-            title_english: "",
-            title_japanese: "",
-            title_synonyms: [""],
-            type: "TV",
-            source: "",
-            episodes: 0,
-            status: "Finished Airing",
-            airing: true,
+                youtube_id: string;
+                url: string;
+                embed_url: "";
+            };
+            title: string;
+            title_english: string;
+            title_japanese: string;
+            title_synonyms: [""];
+            type: string;
+            source: string;
+            episodes: number;
+            status: string;
+            airing: true;
             aired: {
-                from: "",
-                to: "",
+                from: string;
+                to: string;
                 prop: {
                     from: {
-                        day: 0,
-                        month: 0,
-                        year: 0
-                    },
+                        day: number;
+                        month: number;
+                        year: number;
+                    };
                     to: {
-                        day: 0,
-                        month: 0,
-                        year: 0
-                    },
-                    string: ""
-                }
-            },
-            duration: "",
-            rating: "G - All Ages",
-            score: 0,
-            scored_by: 0,
-            rank: 0,
-            popularity: 0,
-            members: 0,
-            favorites: 0,
-            synopsis: "",
-            background: "",
-            season: "Summer",
-            year: 0,
+                        day: number;
+                        month: number;
+                        year: number;
+                    };
+                    string: "";
+                };
+            };
+            duration: string;
+            rating: string;
+            score: number;
+            scored_by: number;
+            rank: number;
+            popularity: number;
+            members: number;
+            favorites: number;
+            synopsis: string;
+            background: string;
+            season: string;
+            year: number;
             broadcast: {
-                day: "",
-                time: "",
-                timezone: "",
-                string: ""
-            },
+                day: string;
+                time: string;
+                timezone: string;
+                string: "";
+            };
             producers: [
                 {
-                    mal_id: 0,
-                    type: "",
-                    name: "",
-                    url: ""
+                    mal_id: number;
+                    type: string;
+                    name: string;
+                    url: "";
                 }
-            ],
+            ];
             licensors: [
                 {
-                    mal_id: 0,
-                    type: "",
-                    name: "",
-                    url: ""
+                    mal_id: number;
+                    type: string;
+                    name: string;
+                    url: "";
                 }
-            ],
+            ];
             studios: [
                 {
-                    mal_id: 0,
-                    type: "",
-                    name: "",
-                    url: ""
+                    mal_id: number;
+                    type: string;
+                    name: string;
+                    url: "";
                 }
-            ],
+            ];
             genres: [
                 {
-                    mal_id: 0,
-                    type: "",
-                    name: "",
-                    url: ""
+                    mal_id: number;
+                    type: string;
+                    name: string;
+                    url: "";
                 }
-            ],
+            ];
             explicit_genres: [
                 {
-                    mal_id: 0,
-                    type: "",
-                    name: "",
-                    url: ""
+                    mal_id: number;
+                    type: string;
+                    name: string;
+                    url: "";
                 }
-            ],
+            ];
             themes: [
                 {
-                    mal_id: 0,
-                    type: "",
-                    name: "",
-                    url: ""
+                    mal_id: number;
+                    type: string;
+                    name: string;
+                    url: "";
                 }
-            ],
+            ];
             demographics: [
                 {
-                    mal_id: 0,
-                    type: "",
-                    name: "",
-                    url: ""
+                    mal_id: number;
+                    type: string;
+                    name: string;
+                    url: "";
                 }
-            ]
-        }
+            ];
+        };
     };
     import dayjs from "dayjs";
 

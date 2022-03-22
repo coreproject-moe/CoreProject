@@ -41,13 +41,13 @@
     onDestroy(async () => {
         // Cleanup
         tippyJsAvatar?._tippy?.destroy();
-        animeJsGithubButton?._tippy?.destroy();
+        animeJsDiscordButton?._tippy?.destroy();
     });
 
     // AnimeJs Bindings
     let animeJsArrowBack: HTMLElement;
     let animejsArrowButton: HTMLElement;
-    let animeJsGithubButton: HTMLElement & { _tippy?: Instance };
+    let animeJsDiscordButton: HTMLElement & { _tippy?: Instance };
     // Icons
     let animeJsHomeIcon: HTMLElement;
     let animeJsRequestIcon: HTMLElement;
@@ -68,8 +68,8 @@
     let tippyJsAvatar: HTMLElement & { _tippy?: Instance };
 
     $: {
-        if (animeJsGithubButton) {
-            tippy(animeJsGithubButton, {
+        if (animeJsDiscordButton) {
+            tippy(animeJsDiscordButton, {
                 content: "Discord",
                 theme: "black",
                 touch: false,
@@ -251,7 +251,7 @@
                 {#if arrowButtonTurned}
                     <button
                         class="is-rounded is-dark has-background-black-bis is-clickable is-hidden-touch"
-                        bind:this={animeJsGithubButton}
+                        bind:this={animeJsDiscordButton}
                         transition:fly={{ x: 40, duration: 500 }}
                         on:mouseenter|preventDefault={async () => {
                             anime({
@@ -259,17 +259,17 @@
                                 color: "hsl(0, 0%, 100%)"
                             });
                             anime({
-                                targets: [animeJsGithubButton],
+                                targets: [animeJsDiscordButton],
                                 scale: 1.3
                             });
                         }}
                         on:mouseleave|preventDefault={async () => {
                             anime({
-                                targets: [animeJsDiscordIcon],
+                                targets: [animeJsDiscordButton],
                                 color: "hsl(0, 0%, 80%)"
                             });
                             anime({
-                                targets: [animeJsGithubButton],
+                                targets: [animeJsDiscordButton],
                                 scale: 1
                             });
                         }}
