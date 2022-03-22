@@ -2,6 +2,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.filters import OrderingFilter
 from rest_framework.viewsets import GenericViewSet
+from rest_framework.mixins import CreateModelMixin
 
 from django.http.request import HttpRequest
 from django.shortcuts import get_object_or_404
@@ -15,7 +16,7 @@ from .serializers import (
 # Create your views here.
 
 
-class AnimeInfoView(GenericViewSet):
+class AnimeInfoView(GenericViewSet, CreateModelMixin):
     """
     Returns :
         - All uploaded animes
@@ -37,6 +38,15 @@ class AnimeInfoView(GenericViewSet):
         queryset = get_object_or_404(self.get_queryset(), id=pk)
         serializer = self.get_serializer(queryset)
         return Response(serializer.data)
+
+    def post(self, request: HttpRequest) -> Response:
+        serializer = self.get_serializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+
+        return Response(serializer.errors)
 
     @action(detail=True)
     def episode(self, request, pk: int, episode_number: int = None) -> Response:
