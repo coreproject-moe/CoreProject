@@ -23,3 +23,24 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = AnimeInfoModel
         exclude = ("id",)
+
+    def create(self, validated_data):
+        """
+        {
+            "episodes": [],
+            "mal_id": 91328,
+            "anime_name": "Gintama",
+            "anime_name_japanese": "dsadas",
+            "anime_source": "dsaasd",
+            "anime_aired_from": "2022-03-22T18:55:17.825914Z",
+            "anime_aired_to": "2022-03-22T18:55:17.843866Z",
+            "anime_cover": null,
+            "updated": "2022-03-21T20:24:48.661105Z"
+        }
+        """
+        validated_data.pop("episodes")  # ignore
+
+        data = AnimeInfoModel(**validated_data)
+        data.save()
+
+        return data
