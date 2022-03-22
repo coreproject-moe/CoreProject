@@ -3,35 +3,41 @@
     import type { Load } from "@sveltejs/kit";
 
     export const load: Load = async ({ fetch }) => {
-        const res = await fetch(animeInfoEndpoint);
-        return {
-            props: {
-                animes: await res?.json()
+        try {
+            if (browser) {
+                const res = await fetch(animeInfoEndpoint);
+                return {
+                    status: res?.status,
+                    props: {
+                        animes: await res?.json()
+                    }
+                };
             }
-        };
+            return {};
+        } catch {
+            return {};
+        }
     };
 </script>
 
 <script lang="ts">
-    // @ts-ignore
-    export let animes = [
+    export let animes: [
         {
             episodes: [
                 {
-                    episode_comments: [],
-                    episode_number: 1,
-                    episode_name: "",
-                    episode_cover: null,
-                    episode_file: "",
-                    episode_summary: ""
+                    episode_comments: [];
+                    episode_number: number;
+                    episode_name: string;
+                    episode_cover: null;
+                    episode_file: string;
+                    episode_summary: string;
                 }
-            ],
-            anime_name: "",
-            mal_id: 0,
-            updated: ""
+            ];
+            anime_name: string;
+            mal_id: number;
+            updated: string;
         }
     ];
-
     import anime from "animejs";
 
     // Import Swiper Svelte components
@@ -43,6 +49,7 @@
 
     import WrappedSwiperComponent from "$components/swiper/WrappedSwiperComponent.svelte";
     import AnimeCard from "$components/cards/AnimeCard.svelte";
+    import { browser } from "$app/env";
 
     let animeJSHeartIcon: HTMLElement;
     let animeJSRocketIcon: HTMLElement;
@@ -69,6 +76,7 @@
             swiperSlidesPerView = 6;
             break;
     }
+    $: console.log(animes?.length);
 </script>
 
 <svelte:head>
@@ -80,7 +88,6 @@
     <div class="box has-background-black">
         <Swiper
             effect={"coverflow"}
-            grabCursor={true}
             centeredSlides={true}
             loop={true}
             speed={50}
@@ -95,9 +102,11 @@
             spaceBetween={swiperSpacesBetween}
             slidesPerView={swiperSlidesPerView}
         >
-            {#each Array(12) as _}
-                <WrappedSwiperComponent />
-            {/each}
+            {#if animes?.length}
+                {#each animes as { anime_name, mal_id }, i}
+                    <WrappedSwiperComponent animeName={anime_name} animeNumber={mal_id} />
+                {/each}
+            {/if}
         </Swiper>
     </div>
 </div>

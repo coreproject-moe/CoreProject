@@ -1,7 +1,6 @@
 <script lang="ts">
-    export let animeNumber: number | string = "∞";
-    export let animeName =
-        "One Piece Hello world Hdassad fafdsa One Piece Hello world Hdassad fafdsa One Piece Hello world Hdassad fafdsa";
+    export let animeNumber: number;
+    export let animeName: string;
     export let animePosterImage = "https://cdn.myanimelist.net/images/anime/6/73245.jpg";
 
     import { SwiperSlide } from "swiper/svelte";
@@ -9,7 +8,7 @@
 </script>
 
 <SwiperSlide>
-    <a sveltekit:prefetch href="/anime/{animeNumber}" class="card">
+    <a sveltekit:prefetch href="/anime/{animeNumber}" style="z-index:999999" class="card">
         <div class="card-image has-background-black">
             <figure class="image">
                 <div
@@ -66,7 +65,7 @@
                                 plugins: [followCursor, animateFill]
                             }}
                         >
-                            {animeNumber}
+                            ∞
                         </span>
 
                         <span class="is-size-7"
@@ -90,7 +89,7 @@
                                 plugins: [followCursor, animateFill]
                             }}
                         >
-                            {animeNumber}
+                            ∞
                         </span>
                     </p>
                     <br />
