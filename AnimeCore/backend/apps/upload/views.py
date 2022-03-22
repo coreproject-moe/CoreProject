@@ -1,17 +1,21 @@
-from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from rest_framework.filters import OrderingFilter
+from rest_framework.viewsets import GenericViewSet
 
 from django.http.request import HttpRequest
 from django.shortcuts import get_object_or_404
 
 from .models import AnimeInfoModel
-from .serializers import AnimeInfoSerializer, EpisodeSerializer
+from .serializers import (
+    AnimeInfoSerializer,
+    EpisodeSerializer,
+)
 
 # Create your views here.
 
 
-class AnimeInfoView(viewsets.GenericViewSet):
+class AnimeInfoView(GenericViewSet):
     """
     Returns :
         - All uploaded animes
@@ -21,9 +25,11 @@ class AnimeInfoView(viewsets.GenericViewSet):
 
     queryset = AnimeInfoModel.objects.all()
     serializer_class = AnimeInfoSerializer
+    filter_backends = [OrderingFilter]
+    ordering_fields = ["updated"]
 
     def list(self, request: HttpRequest) -> Response:
-        queryset = self.get_queryset()
+        queryset = self.filter_queryset(self.get_queryset())
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
@@ -32,7 +38,7 @@ class AnimeInfoView(viewsets.GenericViewSet):
         serializer = self.get_serializer(queryset)
         return Response(serializer.data)
 
-    @action(detail=True, methods=["GET"])
+    @action(detail=True)
     def episode(self, request, pk: int, episode_number: int = None) -> Response:
         queryset = get_object_or_404(self.get_queryset(), id=pk)
 
