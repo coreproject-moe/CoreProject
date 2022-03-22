@@ -1,4 +1,5 @@
 from pathlib import Path
+from re import A
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -6,6 +7,10 @@ from django.db import models
 class FileField:
     # Thanks Stackoverflow
     # https://stackoverflow.com/questions/1190697/django-filefield-with-upload-to-determined-at-runtime
+    @staticmethod
+    def anime_cover(instance, filename) -> str:
+        return Path("anime_cover", filename)
+
     @staticmethod
     def episode_cover(instance, filename) -> str:
         return Path("episode_cover", filename)
@@ -53,9 +58,18 @@ class EpisodeModel(models.Model):
 
 
 class AnimeInfoModel(models.Model):
-    anime_name = models.CharField(max_length=1024)
-    episodes = models.ManyToManyField(EpisodeModel, blank=True)
     mal_id = models.IntegerField(unique=True, blank=False, null=False)
+    anime_name = models.CharField(max_length=1024)
+    anime_name_japanese = models.CharField(max_length=1024)
+    anime_source = models.CharField(max_length=128)
+    anime_aired_from = models.DateTimeField()
+    anime_aired_to = models.DateTimeField()
+    anime_cover = models.ImageField(
+        upload_to=FileField.anime_cover, default=None, blank=True, null=True
+    )
+    # anime_rating = models.CharField(max_length=128)
+    # genres = models.ManyToManyField(blank=True)
+    episodes = models.ManyToManyField(EpisodeModel, blank=True)
     updated = models.DateTimeField(auto_now_add=True)
 
     def __str__(self) -> str:
