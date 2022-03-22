@@ -19,7 +19,7 @@
     import { isUserAuthenticated, userInfo } from "$store/users";
 
     // Constants
-    import { githubUrl } from "$lib/constants/frontend/project";
+    import { discordUrl } from "$lib/constants/frontend/project";
 
     import { page } from "$app/stores";
     import { browser } from "$app/env";
@@ -274,7 +274,7 @@
                             });
                         }}
                         on:click|preventDefault={async () => {
-                            goto(githubUrl);
+                            goto(discordUrl);
                         }}
                     >
                         <ion-icon

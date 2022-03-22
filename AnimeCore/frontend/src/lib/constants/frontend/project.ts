@@ -1,3 +1,3 @@
 export const projectName = "CoreProject";
 
-export const githubUrl = "https://github.com/baseplate-admin/CoreProject";
+export const discordUrl = "https://discord.com/invite/uYe6k3f8";
