@@ -13,10 +13,7 @@ from .serializers import AnimeInfoSerializer, EpisodeSerializer
 
 class AnimeInfoView(viewsets.GenericViewSet):
     """
-    Returns :
-        - All uploaded animes
-        - Detailed info on uploaded animes
-        - Detailed Episodes info
+    Returns all uploaded animes and their detailed view
     """
 
     queryset = AnimeInfoModel.objects.all()
@@ -32,19 +29,11 @@ class AnimeInfoView(viewsets.GenericViewSet):
         serializer = self.get_serializer(queryset)
         return Response(serializer.data)
 
-    @action(detail=True, url_name="episode")
-    def episode(self, request, pk: int) -> Response:
-        queryset = get_object_or_404(self.get_queryset(), id=pk).episodes.all()
-        serializer = EpisodeSerializer(queryset, many=True)
-        return Response(data=serializer.data)
-
-    @action(detail=True, url_name="episode_info")
-    def episode_list(
-        self, request, pk: int = None, episode_number: int = None
-    ) -> Response:
+    @action(detail=True, methods=["GET"])
+    def episode(self, request, pk: int, episode_number: int = None) -> Response:
         queryset = get_object_or_404(self.get_queryset(), id=pk).episodes.get(
             episode_number=episode_number
         )
 
-        serializer = EpisodeSerializer(queryset)
+        serializer = EpisodeSerializer(queryset, many=False)
         return Response(data=serializer.data)
