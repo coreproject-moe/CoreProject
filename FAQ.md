@@ -1,7 +1,7 @@
 <details>
 	<summary>How do you plan to fund this site?</summary>
 	<p>
-		=> I don't know. For now at least But I have made the site to be as cost effective as possible.
+		=> I don't know, for now at least. But I have made the site to be as cost effective as possible.
 		I plan to have a patreon at some point.
 	</p>
 </details>
