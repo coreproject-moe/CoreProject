@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+		.wrapper {
+			display: flex
+		}
+
+		#circle {
+			height: 100px;
+			width: 100px;
+			border: 20px solid green;
+			border-radius: 100px;
+			position: relative;
+		}
+
+		#circle:after {
+			content: "";
+			position: absolute;
+			border-top: 100px solid transparent;
+			top: -35px;
+		}
+
+		.circle1:after {
+			border-left: 140px solid white;
+			left: -50px;
+			top: -35px;
+		}
+
+		.circle2:after {
+			border-right: 140px solid white;
+			right: -50px;
+		}
+
+		.circle1:before {
+			content: "";
+			height: 20px;
+			width: 276px;
+			position: absolute;
+			background: green;
+			left: -18px;
+			top: 45px;
+			z-index: 1;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="wrapper">
+		<div id="circle" class="circle1"></div>
+		<div id="circle" class="circle2"></div>
+	</div>
+</body>
+
+</html>
