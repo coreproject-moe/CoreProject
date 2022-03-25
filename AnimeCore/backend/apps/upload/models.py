@@ -70,7 +70,7 @@ class AnimeInfoModel(models.Model):
     )
     anime_synopsis = models.TextField(blank=True, null=True)
     anime_background = models.TextField(blank=True, null=True)
-    anime_rating = models.CharField(max_length=20, blank=True, null=True)
+    anime_rating = models.CharField(max_length=50, blank=True, null=True)
 
     episodes = models.ManyToManyField(EpisodeModel, blank=True)
     updated = models.DateTimeField(auto_now_add=True)
