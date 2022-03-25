@@ -111,6 +111,10 @@ DATABASES = {
     }
 }
 
+# Allow more fields to be deleted at once
+# https://stackoverflow.com/questions/47585583/the-number-of-get-post-parameters-exceeded-settings-data-upload-max-number-field
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 50000
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -194,9 +198,12 @@ REST_FRAMEWORK = {
     "DEFAULT_PARSER_CLASSES": [
         "rest_framework.parsers.JSONParser",
     ],
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    "PAGE_SIZE": 100,
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    # "PAGE_SIZE": 100,
 }
+
+# Settings override
+# https://github.com/jazzband/djangorestframework-simplejwt/blob/3fc9110c7d0e5641b6eccb6dca321f44189bba01/rest_framework_simplejwt/settings.py#L12
 
 SIMPLE_JWT = {
     "UPDATE_LAST_LOGIN": True,
@@ -211,7 +218,3 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:8000",
 ]
-
-# https://stackoverflow.com/questions/47585583/the-number-of-get-post-parameters-exceeded-settings-data-upload-max-number-field
-
-DATA_UPLOAD_MAX_NUMBER_FIELDS = 50000  # higher than the count of fields

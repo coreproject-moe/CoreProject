@@ -1,7 +1,7 @@
 <script lang="ts">
     export let animeNumber: number;
     export let animeName: string;
-    export let animePosterImage = "https://cdn.myanimelist.net/images/anime/6/73245.jpg";
+    export let animePosterImage: string;
 
     import { SwiperSlide } from "swiper/svelte";
     import tippy, { followCursor, animateFill } from "tippy.js";

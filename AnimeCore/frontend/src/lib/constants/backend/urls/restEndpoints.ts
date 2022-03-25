@@ -42,3 +42,10 @@ export const registerEndpoint = `${baseUrl}/api/v1/user/register/`;
     Example = http://127.0.0.1:8000/api/v1/upload/anime/1/    
 */
 export const animeInfoEndpoint = `${baseUrl}/api/v1/upload/anime/`;
+
+/*
+    Anime Info Endpoint (JSON)
+    Example = http://127.0.0.1:8000/api/v1/upload/anime/random
+        Query = Limit  
+*/
+export const randomAnimeInfoEndpoint = `${baseUrl}/api/v1/upload/anime/random/`;

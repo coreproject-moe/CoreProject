@@ -1,47 +1,4 @@
-<script context="module" lang="ts">
-    import { animeInfoEndpoint } from "$urls/restEndpoints";
-    import type { Load } from "@sveltejs/kit";
-
-    export const load: Load = async ({ fetch }) => {
-        try {
-            if (browser) {
-                const res = await fetch(animeInfoEndpoint);
-                return {
-                    status: res?.status,
-                    props: {
-                        animes: await res?.json()
-                    }
-                };
-            }
-            return {
-                status: 400
-            };
-        } catch {
-            return {
-                status: 404
-            };
-        }
-    };
-</script>
-
 <script lang="ts">
-    export let animes: [
-        {
-            episodes: [
-                {
-                    episode_comments: [];
-                    episode_number: number;
-                    episode_name: string;
-                    episode_cover: null;
-                    episode_file: string;
-                    episode_summary: string;
-                }
-            ];
-            anime_name: string;
-            mal_id: number;
-            updated: string;
-        }
-    ];
     import anime from "animejs";
 
     // Import Swiper Svelte components
@@ -53,7 +10,7 @@
 
     import WrappedSwiperComponent from "$components/swiper/WrappedSwiperComponent.svelte";
     import AnimeCard from "$components/cards/AnimeCard.svelte";
-    import { browser } from "$app/env";
+    import { animeInfoEndpoint, randomAnimeInfoEndpoint } from "$urls/restEndpoints";
 
     let animeJSHeartIcon: HTMLElement;
     let animeJSRocketIcon: HTMLElement;
@@ -80,6 +37,13 @@
             swiperSlidesPerView = 6;
             break;
     }
+
+    const fetchRandomAnime = async () => {
+        const res = await fetch(`${randomAnimeInfoEndpoint}?limit=20`);
+        if (res.ok) {
+            return res.json();
+        }
+    };
 </script>
 
 <svelte:head>
@@ -88,7 +52,17 @@
 
 <div class="container">
     <p class="title is-size-5 pt-2 has-text-white" />
-    {#if animes?.length}
+    {#await fetchRandomAnime()}
+        <section class="hero is-medium">
+            <div class="hero-body">
+                <div class="columns is-mobile is-centered">
+                    <div class="column is-narrow">
+                        <button class="button is-loading is-large has-background-black is-ghost" />
+                    </div>
+                </div>
+            </div>
+        </section>
+    {:then res}
         <Swiper
             effect={"coverflow"}
             centeredSlides={true}
@@ -103,21 +77,15 @@
             spaceBetween={swiperSpacesBetween}
             slidesPerView={swiperSlidesPerView}
         >
-            {#each animes as { anime_name, mal_id }, i}
-                <WrappedSwiperComponent animeName={anime_name} animeNumber={mal_id} />
+            {#each res as { anime_name, mal_id, anime_cover }}
+                <WrappedSwiperComponent
+                    animeName={anime_name}
+                    animeNumber={mal_id}
+                    animePosterImage={anime_cover}
+                />
             {/each}
         </Swiper>
-    {:else}
-        <section class="hero is-medium">
-            <div class="hero-body">
-                <div class="columns is-mobile is-centered">
-                    <div class="column is-narrow">
-                        <button class="button is-loading is-large has-background-black is-ghost" />
-                    </div>
-                </div>
-            </div>
-        </section>
-    {/if}
+    {/await}
 </div>
 <div class="container">
     <span
