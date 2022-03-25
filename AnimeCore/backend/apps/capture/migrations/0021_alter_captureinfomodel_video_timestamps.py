@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('capture', '0020_alter_captureanimenamemodel_anime_and_more'),
+        ("capture", "0020_alter_captureanimenamemodel_anime_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='captureinfomodel',
-            name='video_timestamps',
-            field=models.ManyToManyField(blank=True, null=True, to='capture.captureanimenamemodel'),
+            model_name="captureinfomodel",
+            name="video_timestamps",
+            field=models.ManyToManyField(
+                blank=True, null=True, to="capture.captureanimenamemodel"
+            ),
         ),
     ]

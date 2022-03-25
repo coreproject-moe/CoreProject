@@ -59,7 +59,7 @@ class EpisodeModel(models.Model):
 
 
 class AnimeInfoModel(models.Model):
-    mal_id = models.IntegerField(unique=True, blank=False, null=False)
+    mal_id = models.IntegerField(unique=True, blank=False, null=False, primary_key=True)
     anime_name = models.CharField(max_length=1024)
     anime_name_japanese = models.CharField(max_length=1024, null=True)
     anime_source = models.CharField(max_length=128, blank=True, null=True)
