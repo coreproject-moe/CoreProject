@@ -2,7 +2,6 @@
     import type { Load } from "@sveltejs/kit";
 
     export const load: Load = async ({ fetch, params }) => {
-        console.log(params.id);
         const res = await fetch(`https://api.jikan.moe/v4/anime/${params.id}`);
         return {
             props: {
@@ -160,7 +159,6 @@
     $: animeData?.data?.themes?.forEach((items) => {
         animeTheme.push(items.name ?? "");
     });
-    console.log(animeData.data === undefined);
 </script>
 
 <svelte:head>
@@ -340,12 +338,10 @@
     .grid-container {
         display: grid;
         align-items: center;
-        grid-template-columns: repeat(auto-fit, minmax(4em, 1fr));
-        background-color: black;
+        grid-template-columns: repeat(auto-fit, minmax(3em, 1fr));
     }
     .grid-item {
         background-color: black;
-        padding: 0.8em;
         text-align: center;
         transition: 0.2s;
     }
