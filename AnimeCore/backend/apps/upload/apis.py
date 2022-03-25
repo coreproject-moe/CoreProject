@@ -13,6 +13,7 @@ urlpatterns = [
         "anime/<int:pk>/episode/<int:episode_number>/",
         AnimeInfoView.as_view({"get": "episode"}),
     ),
+    path("anime/random/", AnimeInfoView.as_view({"get": "random"})),
 ]
 
 urlpatterns += router.urls

@@ -30,7 +30,7 @@
         anime_source: string;
         anime_aired_from: Date;
         anime_aired_to: Date;
-        anime_cover: string;
+        anime_cover: string; // Image
         anime_synopsis: string;
         anime_background: string;
         anime_rating: string;
@@ -91,7 +91,7 @@
                     : 'is-flex-direction-row'}"
             >
                 <div
-                    class="column is-align-self-flex-start has-text-white is-flex is-justify-content-center is-flex-direction-column
+                    class="column is-justify-content-start has-text-white is-flex is-justify-content-center is-flex-direction-column
 				{$responsiveMode === 'desktop' || $responsiveMode === 'widescreen' || $responsiveMode === 'fullhd'
                         ? 'is-3'
                         : ''}"
@@ -225,7 +225,7 @@
                     </div>
                 </div>
                 <div
-                    class="column is-flex {$responsiveMode === 'desktop' ||
+                    class="column is-flex is-justify-content-end {$responsiveMode === 'desktop' ||
                     $responsiveMode === 'widescreen' ||
                     $responsiveMode === 'fullhd'
                         ? ''

@@ -60,3 +60,11 @@ class AnimeInfoView(
             serializer = EpisodeSerializer(queryset, many=True)
 
         return Response(data=serializer.data)
+
+    @action(detail=True)
+    def random(self, request: HttpRequest) -> Response:
+        limit = request.GET.get("limit")
+        queryset = self.get_queryset().order_by("?")[: int(limit)]
+        serializer = self.get_serializer(queryset, many=True)
+
+        return Response(data=serializer.data)
