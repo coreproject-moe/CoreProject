@@ -61,21 +61,25 @@ class EpisodeModel(models.Model):
 class AnimeInfoModel(models.Model):
     mal_id = models.IntegerField(unique=True, blank=False, null=False)
     anime_name = models.CharField(max_length=1024)
-    anime_name_japanese = models.CharField(max_length=1024)
+    anime_name_japanese = models.CharField(max_length=1024, null=True)
     anime_source = models.CharField(max_length=128, blank=True, null=True)
     anime_aired_from = models.DateTimeField(blank=True, null=True)
     anime_aired_to = models.DateTimeField(blank=True, null=True)
     anime_cover = models.ImageField(
         upload_to=FileField.anime_cover, default=None, blank=True, null=True
     )
-    # anime_rating = models.CharField(max_length=128)
-    # genres = models.ManyToManyField(blank=True)
+    anime_synopsis = models.TextField(blank=True, null=True)
+    anime_background = models.TextField(blank=True, null=True)
+    anime_rating = models.CharField(max_length=20, blank=True, null=True)
+
     episodes = models.ManyToManyField(EpisodeModel, blank=True)
     updated = models.DateTimeField(auto_now_add=True)
 
+    # anime_rating = models.CharField(max_length=128)
+    # genres = models.ManyToManyField(blank=True)
     def __str__(self) -> str:
         return f"{self.anime_name}"
 
     class Meta:
         verbose_name = "Anime"
-        ordering = ("-mal_id",)
+        ordering = ("mal_id",)
