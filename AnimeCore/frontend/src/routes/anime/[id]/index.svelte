@@ -321,15 +321,9 @@
                         <div class="grid-container">
                             {#each Array(100) as _, i}
                                 <a
-                                    sveltekit:prefetch
                                     href={`/anime/${$page?.params?.id}/episode/${i}`}
-                                    class="grid-item is-size-6 has-border-white is-clickable is-font-face-roboto has-text-white"
-                                    on:mouseenter|capture={(e) => {
-                                        e?.currentTarget?.classList?.add("grid-item-hover");
-                                    }}
-                                    on:mouseleave|capture={(e) => {
-                                        e?.currentTarget?.classList?.remove("grid-item-hover");
-                                    }}
+                                    sveltekit:prefetch
+                                    class="button has-text-white is-black has-border-gray has-hover-gray is-rounded mx-3 my-1"
                                 >
                                     {i}
                                 </a>
@@ -354,9 +348,5 @@
         padding: 0.8em;
         text-align: center;
         transition: 0.2s;
-
-        &:global(.grid-item-hover) {
-            background-color: hsl(0, 0%, 15%) !important;
-        }
     }
 </style>
