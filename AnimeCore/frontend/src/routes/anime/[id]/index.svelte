@@ -75,7 +75,7 @@
             <div class="">
                 <div class="columns is-mobile is-centered">
                     <div class="column is-narrow">
-                        <img src="/crying_raiden.png" alt="crying_raiden" width={150} />
+                        <img src="/images/crying_raiden.png" alt="crying_raiden" width={150} />
                     </div>
                 </div>
                 <p class="subtitle has-text-white has-text-centered">This anime is unavailable</p>
@@ -104,7 +104,21 @@
                     <div class="columns mb-0">
                         <div class="column">
                             <div class="columns is-mobile">
-                                <div class="column">Name :</div>
+                                <div class="column">MyAnimeList:</div>
+                                <div class="column">
+                                    <a
+                                        class="has-text-white is-underlined"
+                                        href="https://myanimelist.net/anime/{animeData?.mal_id}"
+                                        >{animeData?.mal_id}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns mb-0">
+                        <div class="column">
+                            <div class="columns is-mobile">
+                                <div class="column">Name:</div>
                                 <div class="column">{animeData?.anime_name}</div>
                             </div>
                         </div>
@@ -112,7 +126,15 @@
                     <div class="columns mb-0">
                         <div class="column">
                             <div class="columns is-mobile">
-                                <div class="column">Score :</div>
+                                <div class="column">Japanese Name:</div>
+                                <div class="column">{animeData?.anime_name_japanese}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="columns mb-0">
+                        <div class="column">
+                            <div class="columns is-mobile">
+                                <div class="column">Score:</div>
                                 <div class="column">{"Score"}</div>
                             </div>
                         </div>
@@ -120,7 +142,7 @@
                     <div class="columns mb-0">
                         <div class="column">
                             <div class="columns is-mobile">
-                                <div class="column">Episodes :</div>
+                                <div class="column">Episodes:</div>
                                 <div class="column">{animeData?.episodes}</div>
                             </div>
                         </div>
@@ -128,7 +150,7 @@
                     <div class="columns mb-0">
                         <div class="column">
                             <div class="columns is-mobile">
-                                <div class="column">Aired From :</div>
+                                <div class="column">Aired From:</div>
                                 <div class="column">
                                     {dayjs(animeData?.anime_aired_from)?.format(
                                         "MMMM D, YYYY - h:mm A"
@@ -140,7 +162,7 @@
                     <div class="columns mb-0">
                         <div class="column">
                             <div class="columns is-mobile">
-                                <div class="column">Aired To :</div>
+                                <div class="column">Aired To:</div>
                                 <div class="column">
                                     {dayjs(animeData?.anime_aired_to)?.format(
                                         "MMMM D, YYYY - h:mm A"
@@ -152,7 +174,7 @@
                     <div class="columns mb-0">
                         <div class="column">
                             <div class="columns is-mobile">
-                                <div class="column">Studios :</div>
+                                <div class="column">Studios:</div>
                                 <div class="column">
                                     {animeStudios?.toString()}
                                 </div>
@@ -162,7 +184,7 @@
                     <div class="columns mb-0">
                         <div class="column">
                             <div class="columns is-mobile">
-                                <div class="column">Source :</div>
+                                <div class="column">Source:</div>
                                 <div class="column">{animeData?.anime_source}</div>
                             </div>
                         </div>
@@ -170,7 +192,7 @@
                     <div class="columns mb-0">
                         <div class="column">
                             <div class="columns is-mobile">
-                                <div class="column">Genres :</div>
+                                <div class="column">Genres:</div>
                                 <div
                                     class="column"
                                     style="display: inline;overflow: hidden;text-overflow: ellipsis;width:0px"
@@ -183,7 +205,7 @@
                     <div class="columns mb-0">
                         <div class="column">
                             <div class="columns is-mobile">
-                                <div class="column">Theme :</div>
+                                <div class="column">Theme:</div>
                                 <div
                                     class="column"
                                     style="display: inline;overflow: hidden;text-overflow: ellipsis;width:0px"
@@ -196,7 +218,7 @@
                     <div class="columns mb-0">
                         <div class="column">
                             <div class="columns is-mobile">
-                                <div class="column">Duration :</div>
+                                <div class="column">Duration:</div>
                                 <div class="column">{"animeData?.duration"}</div>
                             </div>
                         </div>
@@ -214,18 +236,47 @@
                         <p>
                             {animeData?.anime_synopsis}
                         </p>
-                        <h1 class="has-text-white">Episodes :</h1>
+
+                        {#if animeData?.anime_background}
+                            <h1 class="has-text-white">Background</h1>
+                            <p>
+                                {animeData?.anime_background}
+                            </p>
+                        {/if}
+
+                        <h1 class="has-text-white">Episodes</h1>
 
                         <div class="grid-container">
-                            {#each Array(100) as _, i}
-                                <a
-                                    href={`/anime/${$page?.params?.id}/episode/${i}`}
-                                    sveltekit:prefetch
-                                    class="button has-text-white is-black has-border-gray has-hover-gray is-rounded mx-3 my-1"
-                                >
-                                    {i}
-                                </a>
-                            {/each}
+                            {#if animeData?.episodes?.length !== 0}
+                                {#each animeData?.episodes as _, i}
+                                    <a
+                                        href={`/anime/${$page?.params?.id}/episode/${i}`}
+                                        sveltekit:prefetch
+                                        class="button has-text-white is-black has-border-gray has-hover-gray is-rounded mx-3 my-1"
+                                    >
+                                        {i}
+                                    </a>
+                                {/each}
+                            {:else}
+                                <div style="justify-self:center">
+                                    <div
+                                        class="columns is-mobile is-centered is-flex-direction-column"
+                                    >
+                                        <div
+                                            class="column is-narrow is-flex is-justify-content-center"
+                                        >
+                                            <img
+                                                src="/images/crying_raiden_2.png"
+                                                alt="crying_raiden"
+                                                width={150}
+                                            />
+                                        </div>
+                                        <div class="column is-narrow">
+                                            There are no episodes available for this anime
+                                        </div>
+                                    </div>
+                                </div>
+                            {/if}
                         </div>
                     </div>
                 </div>
