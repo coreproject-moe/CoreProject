@@ -22,7 +22,7 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AnimeInfoModel
-        exclude = ("id",)
+        fields = "__all__"
 
     def create(self, validated_data):
         """
