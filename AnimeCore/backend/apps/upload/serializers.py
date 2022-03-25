@@ -18,7 +18,7 @@ class EpisodeSerializer(serializers.ModelSerializer):
 
 
 class AnimeInfoSerializer(serializers.ModelSerializer):
-    episodes = EpisodeSerializer(many=True)
+    episodes = EpisodeSerializer(many=True, required=False)
 
     class Meta:
         model = AnimeInfoModel
@@ -38,7 +38,7 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
             "updated": "2022-03-21T20:24:48.661105Z"
         }
         """
-        validated_data.pop("episodes")  # ignore
+        validated_data.pop("episodes", None)  # ignore
 
         data = AnimeInfoModel(**validated_data)
         data.save()

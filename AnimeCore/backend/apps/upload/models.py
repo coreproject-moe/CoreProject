@@ -1,7 +1,8 @@
 from pathlib import Path
-from re import A
-from django.contrib.auth import get_user_model
+
+
 from django.db import models
+from django.contrib.auth import get_user_model
 
 
 class FileField:
@@ -61,9 +62,9 @@ class AnimeInfoModel(models.Model):
     mal_id = models.IntegerField(unique=True, blank=False, null=False)
     anime_name = models.CharField(max_length=1024)
     anime_name_japanese = models.CharField(max_length=1024)
-    anime_source = models.CharField(max_length=128)
-    anime_aired_from = models.DateTimeField()
-    anime_aired_to = models.DateTimeField()
+    anime_source = models.CharField(max_length=128, blank=True, null=True)
+    anime_aired_from = models.DateTimeField(blank=True, null=True)
+    anime_aired_to = models.DateTimeField(blank=True, null=True)
     anime_cover = models.ImageField(
         upload_to=FileField.anime_cover, default=None, blank=True, null=True
     )
