@@ -18,7 +18,7 @@
             };
         } catch {
             return {
-                status: 400
+                status: 404
             };
         }
     };
