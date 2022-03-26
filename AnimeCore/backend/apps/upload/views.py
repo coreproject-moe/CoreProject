@@ -74,6 +74,7 @@ class EpisodeView(
     queryset = EpisodeModel.objects.all()
     serializer_class = EpisodeSerializer
     permission_classes = [IsAuthenticated]
+    lookup_field = "episode_number"  # https://stackoverflow.com/questions/61452449/how-to-change-lookup-field-in-model-viewset-to-other-unique-parameter-in-django
 
     def get_serializer_context(self):
         # Thanks StackOverFlow
