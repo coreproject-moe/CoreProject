@@ -8,6 +8,7 @@ class CustomUserAdmin(UserAdmin):
     model = get_user_model()
 
     list_display = (
+        "username",
         "email",
         "first_name",
         "last_name",
@@ -63,6 +64,12 @@ class CustomUserAdmin(UserAdmin):
                     "date_joined",
                     "last_login",
                 )
+            },
+        ),
+        (
+            _("Customization"),
+            {
+                "fields": ("video_volume",),
             },
         ),
     )

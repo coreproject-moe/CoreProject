@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     "apps.edit",
     "apps.upload",
     # Rest stuff
-    "apps.capture",
     "apps.user",
 ]
 
