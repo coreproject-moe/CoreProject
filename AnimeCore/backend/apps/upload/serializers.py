@@ -29,12 +29,19 @@ class EpisodeSerializer(serializers.ModelSerializer):
         exclude = ("id",)
 
     def to_representation(self, instance):
-        episode = super().to_representation(instance)
-        episode["episode_timestamps"] = EpisodeTimestampSerializer(
-            data=instance.episode_timestamps.get(user=self.context["request"].user),
-            many=False,
-        )
-        return episode
+        serializer = super().to_representation(instance)
+        try:
+            timestamp_query = instance.episode_timestamps.get(
+                user=self.context["request"].user
+            )
+            serializer["episode_timestamps"] = EpisodeCommentSerializer(
+                timestamp_query
+            ).data
+        except instance.episode_timestamps.model.DoesNotExist:
+            pass
+
+        finally:
+            return serializer
 
 
 class AnimeInfoSerializer(serializers.ModelSerializer):
