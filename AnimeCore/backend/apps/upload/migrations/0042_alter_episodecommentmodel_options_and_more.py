@@ -9,23 +9,37 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('upload', '0041_alter_episodemodel_options'),
+        ("upload", "0041_alter_episodemodel_options"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='episodecommentmodel',
-            options={'ordering': ('-comment_added',), 'verbose_name': 'User Comment'},
+            name="episodecommentmodel",
+            options={"ordering": ("-comment_added",), "verbose_name": "User Comment"},
         ),
         migrations.CreateModel(
-            name='EpisodeTimeStampModel',
+            name="EpisodeTimeStampModel",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('timestamp', models.IntegerField(default=0)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("timestamp", models.IntegerField(default=0)),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'User TimeStamp',
+                "verbose_name": "User TimeStamp",
             },
         ),
     ]
