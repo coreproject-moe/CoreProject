@@ -8,7 +8,6 @@
     import { page } from "$app/stores";
     import { goto } from "$app/navigation";
 
-    import { vimeJSVolume } from "$store/vimeJs";
     import { responsiveMode } from "$store/responsive";
 
     import { projectName } from "$lib/constants/frontend/project";
@@ -33,13 +32,13 @@
     }
 
     const onVolumeChange = async () => {
-        $vimeJSVolume = player?.volume;
+        // $vimeJSVolume = player?.volume;
     };
 
     // First book for player
     $: {
         if (player) {
-            player.volume = $vimeJSVolume;
+            //         player.volume = $vimeJSVolume;
         }
     }
 
