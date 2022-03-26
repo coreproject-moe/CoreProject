@@ -6,23 +6,23 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('upload', '0045_remove_episodemodel_episode_timestamps_and_more'),
+        ("upload", "0045_remove_episodemodel_episode_timestamps_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='episodetimestampmodel',
-            name='episode_number',
+            model_name="episodetimestampmodel",
+            name="episode_number",
             field=models.IntegerField(default=0),
             preserve_default=False,
         ),
         migrations.RemoveField(
-            model_name='episodemodel',
-            name='episode_timestamps',
+            model_name="episodemodel",
+            name="episode_timestamps",
         ),
         migrations.AddField(
-            model_name='episodemodel',
-            name='episode_timestamps',
-            field=models.ManyToManyField(blank=True, to='upload.episodetimestampmodel'),
+            model_name="episodemodel",
+            name="episode_timestamps",
+            field=models.ManyToManyField(blank=True, to="upload.episodetimestampmodel"),
         ),
     ]

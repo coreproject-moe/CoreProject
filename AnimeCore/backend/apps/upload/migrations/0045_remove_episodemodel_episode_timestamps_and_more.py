@@ -7,17 +7,21 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('upload', '0044_alter_episodetimestampmodel_options'),
+        ("upload", "0044_alter_episodetimestampmodel_options"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='episodemodel',
-            name='episode_timestamps',
+            model_name="episodemodel",
+            name="episode_timestamps",
         ),
         migrations.AddField(
-            model_name='episodemodel',
-            name='episode_timestamps',
-            field=models.OneToOneField(null=True, on_delete=django.db.models.deletion.CASCADE, to='upload.episodetimestampmodel'),
+            model_name="episodemodel",
+            name="episode_timestamps",
+            field=models.OneToOneField(
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="upload.episodetimestampmodel",
+            ),
         ),
     ]
