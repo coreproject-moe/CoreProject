@@ -1,8 +1,5 @@
 from django.http.request import HttpRequest
 from django.contrib.auth import get_user_model
-from django.views.decorators.cache import cache_page
-from django.utils.decorators import method_decorator
-from django.views.decorators.vary import vary_on_headers
 
 from rest_framework.response import Response
 from rest_framework import status, generics
@@ -36,15 +33,9 @@ class UserInfoView(generics.ListCreateAPIView):
         MultiPartParser,
     ]
 
-    @method_decorator(cache_page(60 * 60 * 2))
-    @method_decorator(
-        vary_on_headers(
-            "Authorization",
-        )
-    )
     def get(self, request: HttpRequest) -> Response:
         data = get_user_model().objects.get(id=request.user.id)
-        serializer = self.get_serializer(data)
+        serializer = self.get_serializer(instance=data)
         return Response(serializer.data)
 
     def post(self, request: HttpRequest) -> Response:
