@@ -27,6 +27,13 @@ class EpisodeSerializer(serializers.ModelSerializer):
     class Meta:
         model = EpisodeModel
         exclude = ("id",)
+        read_only_fields = (
+            "episode_number",
+            "episode_name",
+            "episode_cover",
+            "episode_file",
+            "episode_summary",
+        )
 
     def to_representation(self, instance):
         serializer = super().to_representation(instance)
@@ -34,9 +41,11 @@ class EpisodeSerializer(serializers.ModelSerializer):
             timestamp_query = instance.episode_timestamps.get(
                 user=self.context["request"].user
             )
-            serializer["episode_timestamps"] = EpisodeCommentSerializer(
-                timestamp_query
+            serializer["episode_timestamps"] = EpisodeTimestampSerializer(
+                timestamp_query,
+                many=False,
             ).data
+
         except instance.episode_timestamps.model.DoesNotExist:
             pass
 
