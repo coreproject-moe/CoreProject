@@ -250,8 +250,8 @@
 
                         <h1 class="has-text-white">Episodes</h1>
 
-                        <div class="grid-container">
-                            {#if animeData?.episodes?.length}
+                        {#if animeData?.episodes?.length}
+                            <div class="grid-container">
                                 {#each animeData?.episodes as i}
                                     <a
                                         href={`/anime/${$page?.params?.id}/episode/${i?.episode_number}`}
@@ -262,27 +262,23 @@
                                         {i?.episode_number}
                                     </a>
                                 {/each}
-                            {:else}
-                                <div style="justify-self:center">
-                                    <div
-                                        class="columns is-mobile is-centered is-flex-direction-column"
-                                    >
-                                        <div
-                                            class="column is-narrow is-flex is-justify-content-center"
-                                        >
-                                            <img
-                                                src="/images/crying_raiden_2.png"
-                                                alt="crying_raiden"
-                                                width={150}
-                                            />
-                                        </div>
-                                        <div class="column is-narrow">
-                                            There are no episodes available for this anime
-                                        </div>
+                            </div>
+                        {:else}
+                            <div>
+                                <div class="columns is-mobile is-centered is-flex-direction-column">
+                                    <div class="column is-narrow is-flex is-justify-content-center">
+                                        <img
+                                            src="/images/crying_raiden_2.png"
+                                            alt="crying_raiden"
+                                            width={150}
+                                        />
+                                    </div>
+                                    <div class="column is-narrow has-text-centered">
+                                        There are no episodes available for this anime
                                     </div>
                                 </div>
-                            {/if}
-                        </div>
+                            </div>
+                        {/if}
                     </div>
                 </div>
             </div>
