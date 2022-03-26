@@ -50,6 +50,10 @@ INSTALLED_APPS = [
     # Rest stuff
     "apps.user",
 ]
+# Debug Toolbar Add
+# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install-the-app
+if DEBUG:
+    INSTALLED_APPS += ("debug_toolbar",)
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -61,6 +65,19 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
+
+# Debug Toolbar Middleware
+# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#add-the-middleware
+if DEBUG:
+    MIDDLEWARE += ("debug_toolbar.middleware.DebugToolbarMiddleware",)
+
+
+# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#configure-internal-ips
+if DEBUG:
+    INTERNAL_IPS = [
+        "127.0.0.1",
+    ]
+
 
 ROOT_URLCONF = "core.urls"
 
