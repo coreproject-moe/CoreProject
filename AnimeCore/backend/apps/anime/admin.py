@@ -5,11 +5,18 @@ from .models import (
     EpisodeModel,
     EpisodeCommentModel,
     EpisodeTimestampModel,
+    AnimeGenres,
 )
 
 # Register your models here.
 
 
 admin.site.register(
-    [AnimeInfoModel, EpisodeModel, EpisodeCommentModel, EpisodeTimestampModel]
+    [
+        AnimeInfoModel,
+        EpisodeModel,
+        EpisodeCommentModel,
+        EpisodeTimestampModel,
+        AnimeGenres,
+    ]
 )
