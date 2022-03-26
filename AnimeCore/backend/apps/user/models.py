@@ -1,7 +1,6 @@
 from django.db import models
 
 # Create your models here.
-from uuid import uuid4
 from typing import NoReturn
 
 from django.db import models
@@ -16,6 +15,6 @@ class User(AbstractUser, ResizeImageMixin):
     def save(self, *args, **kwargs) -> NoReturn:
         if self.avatar:
             file = self.resize(self.avatar)
-            self.avatar.save(f"{uuid4()}.avif", file, save=False)
+            self.avatar.save(f"{self.username}.avif", file, save=False)
 
         super().save(*args, **kwargs)

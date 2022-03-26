@@ -33,9 +33,20 @@ class EpisodeCommentModel(models.Model):
         return f"{self.user}"
 
     class Meta:
-        verbose_name = "User comment"
+        verbose_name = "User Comment"
         # Sort by newest first
         ordering = ("-comment_added",)
+
+
+class EpisodeTimestampModel(models.Model):
+    timestamp = models.IntegerField(default=0)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return f"{self.user} | {self.timestamp}"
+
+    class Meta:
+        verbose_name = "User Timestamp"
 
 
 class EpisodeModel(models.Model):
@@ -49,12 +60,13 @@ class EpisodeModel(models.Model):
     )
     episode_summary = models.TextField(default="", blank=True, null=True)
     episode_comments = models.ManyToManyField(EpisodeCommentModel, blank=True)
+    episode_timestamps = models.ManyToManyField(EpisodeTimestampModel, blank=True)
 
     def __str__(self) -> str:
         return f"{self.episode_number}. {self.episode_name}"
 
     class Meta:
-        verbose_name = "Episode info"
+        verbose_name = "Episode"
         ordering = ("id",)
 
 
