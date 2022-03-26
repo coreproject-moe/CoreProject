@@ -1,6 +1,17 @@
 from rest_framework import serializers
 
-from .models import AnimeInfoModel, EpisodeCommentModel, EpisodeModel
+from .models import (
+    AnimeInfoModel,
+    EpisodeCommentModel,
+    EpisodeModel,
+    EpisodeTimestampModel,
+)
+
+
+class EpisodeTimestampSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = EpisodeTimestampModel
+        exclude = ("id",)
 
 
 class EpisodeCommentSerializer(serializers.ModelSerializer):
@@ -11,6 +22,7 @@ class EpisodeCommentSerializer(serializers.ModelSerializer):
 
 class EpisodeSerializer(serializers.ModelSerializer):
     episode_comments = EpisodeCommentSerializer(many=True)
+    episode_timestamps = EpisodeTimestampSerializer(many=True)
 
     class Meta:
         model = EpisodeModel
