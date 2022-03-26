@@ -11,6 +11,7 @@ django-cors-headers = "*"
 # Rest framework
 djangorestframework = "*"
 djangorestframework-simplejwt = "*"
+drf-nested-routers = "*"
 # Pillow stuff
 pillow = "*"
 pillow-avif-plugin = "*"
