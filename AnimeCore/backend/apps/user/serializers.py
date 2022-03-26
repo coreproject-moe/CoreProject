@@ -19,6 +19,7 @@ class UserSerializer(serializers.ModelSerializer):
             "is_superuser",
             "is_staff",
             "avatar",
+            "video_volume",
         )
         read_only_fields = [
             "id",
@@ -32,7 +33,13 @@ class UserSerializer(serializers.ModelSerializer):
             "password": {
                 "required": False,
                 "write_only": True,
-            }
+            },
+            "username": {
+                "required": False,
+            },
+            "email": {
+                "required": False,
+            },
         }
 
     def validate_email(self, cleaned_data):
