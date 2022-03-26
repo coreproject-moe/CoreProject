@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     "django_cleanup.apps.CleanupConfig",
     # Pages
     "apps.edit",
-    "apps.upload",
+    "apps.anime",
     # Rest stuff
     "apps.user",
 ]
