@@ -1,6 +1,5 @@
 from django.http.request import HttpRequest
 
-
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.filters import OrderingFilter
@@ -43,10 +42,18 @@ class AnimeInfoView(
 
     queryset = AnimeInfoModel.objects.all()
     serializer_class = AnimeInfoSerializer
-    filter_backends = [OrderingFilter]
+    filter_backends = [
+        OrderingFilter,
+    ]
     ordering_fields = ["updated"]
-    parser_classes = [FormParser, MultiPartParser, JSONParser]
-    permission_classes = [IsSuperUserOrReadOnly]
+    parser_classes = [
+        FormParser,
+        MultiPartParser,
+        JSONParser,
+    ]
+    permission_classes = [
+        IsSuperUserOrReadOnly,
+    ]
 
     @action(detail=True)
     def random(self, request: HttpRequest) -> Response:
