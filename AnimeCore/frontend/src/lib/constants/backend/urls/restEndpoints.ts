@@ -42,4 +42,4 @@ export const animeInfoEndpoint = `${baseUrl}/api/v1/upload/anime/`;
     Example = http://127.0.0.1:8000/api/v1/upload/anime/random
         Query = Limit  
 */
-export const randomAnimeInfoEndpoint = `${baseUrl}/api/v1/upload/anime/random/`;
+export const randomAnimeInfoEndpoint = `${animeInfoEndpoint}random/`;
