@@ -46,12 +46,7 @@ class EpisodeSerializer(serializers.ModelSerializer):
                 "timestamp": 10800,
                 "episode_number": 1,
                 "user": 1
-            }],
-            "episode_number": 1,
-            "episode_name": "I'm Luffy! The Man Who Will Become the Pirate King!",
-            "episode_cover": null,
-            "episode_file": "http://127.0.0.1:8000/media/episode/AnimeRG_One_Piece_-_001_Special_Edition_HD_Widescreen_Dual-Audio_720p_x265_pseudo.mkv",
-            "episode_summary": ""
+            }]
         }
         """
         user = self.context["request"].user

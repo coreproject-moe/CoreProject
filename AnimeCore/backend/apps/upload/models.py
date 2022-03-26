@@ -44,7 +44,7 @@ class EpisodeTimestampModel(models.Model):
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return f"{self.user} | {self.timestamp}"
+        return f"{self.episode_number}. {self.user}"
 
     class Meta:
         verbose_name = "User Timestamp"
