@@ -28,6 +28,14 @@ class EpisodeSerializer(serializers.ModelSerializer):
         model = EpisodeModel
         exclude = ("id",)
 
+    def to_representation(self, instance):
+        episode = super().to_representation(instance)
+        episode["episode_timestamps"] = EpisodeTimestampSerializer(
+            data=instance.episode_timestamps.get(user=self.context["request"].user),
+            many=False,
+        )
+        return episode
+
 
 class AnimeInfoSerializer(serializers.ModelSerializer):
     episodes = EpisodeSerializer(many=True, required=False)

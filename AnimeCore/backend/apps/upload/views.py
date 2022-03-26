@@ -1,14 +1,16 @@
 from django.http.request import HttpRequest
-from django.shortcuts import get_object_or_404
+
 
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.filters import OrderingFilter
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.mixins import (
     CreateModelMixin,
     ListModelMixin,
     RetrieveModelMixin,
+    UpdateModelMixin,
 )
 from rest_framework.parsers import (
     FormParser,
@@ -17,7 +19,7 @@ from rest_framework.parsers import (
 )
 
 from .permissions import IsSuperUserOrReadOnly
-from .models import AnimeInfoModel
+from .models import AnimeInfoModel, EpisodeModel
 from .serializers import (
     AnimeInfoSerializer,
     EpisodeSerializer,
@@ -47,24 +49,35 @@ class AnimeInfoView(
     permission_classes = [IsSuperUserOrReadOnly]
 
     @action(detail=True)
-    def episode(
-        self, request: HttpRequest, pk: int, episode_number: int = None
-    ) -> Response:
-        queryset = get_object_or_404(self.get_queryset(), pk=pk)
-
-        if episode_number:
-            queryset = queryset.episodes.get(episode_number=episode_number)
-            serializer = EpisodeSerializer(queryset, many=False)
-        else:
-            queryset = queryset.episodes.all()
-            serializer = EpisodeSerializer(queryset, many=True)
-
-        return Response(data=serializer.data)
-
-    @action(detail=True)
     def random(self, request: HttpRequest) -> Response:
         limit = request.GET.get("limit")
         queryset = self.get_queryset().order_by("?")[: int(limit)]
         serializer = self.get_serializer(queryset, many=True)
 
         return Response(data=serializer.data)
+
+
+class EpisodeView(
+    CreateModelMixin,
+    RetrieveModelMixin,
+    UpdateModelMixin,
+    ListModelMixin,
+    GenericViewSet,
+):
+    """
+    Returns :
+        - All uploaded animes
+        - Detailed info on uploaded animes
+        - Detailed Episodes info
+    """
+
+    queryset = EpisodeModel.objects.all()
+    serializer_class = EpisodeSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_serializer_context(self):
+        # Thanks StackOverFlow
+        # https://stackoverflow.com/questions/31038742/pass-request-context-to-serializer-from-viewset-in-django-rest-framework
+        context = super().get_serializer_context()
+        context.update({"request": self.request})
+        return context
