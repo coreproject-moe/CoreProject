@@ -143,7 +143,7 @@
                         <div class="column">
                             <div class="columns is-mobile">
                                 <div class="column">Episodes:</div>
-                                <div class="column">{animeData?.episodes}</div>
+                                <div class="column">{animeData?.episodes?.length}</div>
                             </div>
                         </div>
                     </div>
@@ -248,13 +248,14 @@
 
                         <div class="grid-container">
                             {#if animeData?.episodes?.length !== 0}
-                                {#each animeData?.episodes as _, i}
+                                {#each Array(5) as i, _}
                                     <a
                                         href={`/anime/${$page?.params?.id}/episode/${i}`}
                                         sveltekit:prefetch
+                                        style="width:30px"
                                         class="button has-text-white is-black has-border-gray has-hover-gray is-rounded mx-3 my-1"
                                     >
-                                        {i}
+                                        {_}
                                     </a>
                                 {/each}
                             {:else}
@@ -289,6 +290,6 @@
     .grid-container {
         display: grid;
         align-items: center;
-        grid-template-columns: repeat(auto-fit, minmax(3em, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(3em, 1fr));
     }
 </style>
