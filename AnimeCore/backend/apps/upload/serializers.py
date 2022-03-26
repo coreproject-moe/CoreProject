@@ -11,7 +11,10 @@ from .models import (
 class EpisodeTimestampSerializer(serializers.ModelSerializer):
     class Meta:
         model = EpisodeTimestampModel
-        exclude = ("id",)
+        exclude = (
+            "id",
+            "episode_number",
+        )
 
 
 class EpisodeCommentSerializer(serializers.ModelSerializer):
@@ -27,6 +30,68 @@ class EpisodeSerializer(serializers.ModelSerializer):
     class Meta:
         model = EpisodeModel
         exclude = ("id",)
+        read_only_fields = (
+            "episode_number",
+            "episode_name",
+            "episode_cover",
+            "episode_file",
+            "episode_summary",
+        )
+
+    def update(self, instance: EpisodeModel, validated_data) -> dict:
+        """
+        {
+            "episode_comments": [],
+            "episode_timestamps": [{
+                "timestamp": 10800,
+                "episode_number": 1,
+                "user": 1
+            }],
+            "episode_number": 1,
+            "episode_name": "I'm Luffy! The Man Who Will Become the Pirate King!",
+            "episode_cover": null,
+            "episode_file": "http://127.0.0.1:8000/media/episode/AnimeRG_One_Piece_-_001_Special_Edition_HD_Widescreen_Dual-Audio_720p_x265_pseudo.mkv",
+            "episode_summary": ""
+        }
+        """
+        user = self.context["request"].user
+
+        episode_timestamps = validated_data.get("episode_timestamps", None)
+        if episode_timestamps:
+            for item in episode_timestamps:
+                (
+                    timestamp_model,
+                    timestamp_model_created,
+                ) = EpisodeTimestampModel.objects.update_or_create(
+                    user=user,
+                    defaults={
+                        "episode_number": instance.episode_number,
+                        "timestamp": item["timestamp"],
+                    },
+                )
+                timestamp_model.save()
+
+                if timestamp_model_created:
+                    instance.episode_timestamps.add(timestamp_model)
+
+        return validated_data
+
+    def to_representation(self, instance):
+        serializer = super().to_representation(instance)
+        try:
+            timestamp_query = instance.episode_timestamps.get(
+                user=self.context["request"].user
+            )
+            serializer["episode_timestamps"] = EpisodeTimestampSerializer(
+                timestamp_query,
+                many=True,
+            ).data
+
+        except instance.episode_timestamps.model.DoesNotExist:
+            pass
+
+        finally:
+            return serializer
 
 
 class AnimeInfoSerializer(serializers.ModelSerializer):

@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('upload', '0043_episodemodel_episode_timestamps'),
+        ("upload", "0043_episodemodel_episode_timestamps"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='episodetimestampmodel',
-            options={'verbose_name': 'User Timestamp'},
+            name="episodetimestampmodel",
+            options={"verbose_name": "User Timestamp"},
         ),
     ]
