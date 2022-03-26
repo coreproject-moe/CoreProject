@@ -13,7 +13,7 @@
             <figure class="image">
                 <img
                     src={animePosterImage}
-                    style="border-top-left-radius: 10px;border-top-right-radius: 10px;height: 20vh;width: 100%;object-fit: cover;"
+                    style="border-top-left-radius: 10px;border-top-right-radius: 10px;height: 25vh;width: 100%;object-fit: cover;"
                     alt=""
                 />
             </figure>
