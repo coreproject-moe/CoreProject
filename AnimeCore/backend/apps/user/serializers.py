@@ -28,6 +28,7 @@ class UserSerializer(serializers.ModelSerializer):
             "last_login",
             "is_superuser",
             "is_staff",
+            "email",
         ]
         extra_kwargs = {
             "password": {

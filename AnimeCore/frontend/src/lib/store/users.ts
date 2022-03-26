@@ -46,7 +46,8 @@ export const userInfo = writable(
         last_login: "",
         is_superuser: false,
         is_staff: false,
-        avatar: ""
+        avatar: "",
+        video_volume: 0
     },
     function start(set) {
         // Async Callback to fetch data

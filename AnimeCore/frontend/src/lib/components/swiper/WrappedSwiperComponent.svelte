@@ -11,13 +11,11 @@
     <a sveltekit:prefetch href="/anime/{animeNumber}" style="z-index:999999" class="card">
         <div class="card-image has-background-black">
             <figure class="image">
-                <div
-                    style="border-top-left-radius: 10px;border-top-right-radius: 10px;"
-                    data-href={animePosterImage}
-                    class="progressive replace"
-                >
-                    <img src="/placeholder-225x350.avif" class="preview" alt="" />
-                </div>
+                <img
+                    src={animePosterImage}
+                    style="border-top-left-radius: 10px;border-top-right-radius: 10px;height: 20vh;width: 100%;object-fit: cover;"
+                    alt=""
+                />
             </figure>
         </div>
         <div
