@@ -24,7 +24,11 @@
 <script lang="ts">
     export let animeData: {
         mal_id: number;
-        episodes: [];
+        episodes: [
+            {
+                episode_number: number;
+            }
+        ];
         anime_name: string;
         anime_name_japanese: string;
         anime_source: string;
@@ -247,15 +251,15 @@
                         <h1 class="has-text-white">Episodes</h1>
 
                         <div class="grid-container">
-                            {#if animeData?.episodes?.length !== 0}
-                                {#each Array(5) as i, _}
+                            {#if animeData?.episodes?.length}
+                                {#each animeData?.episodes as i}
                                     <a
-                                        href={`/anime/${$page?.params?.id}/episode/${i}`}
+                                        href={`/anime/${$page?.params?.id}/episode/${i?.episode_number}`}
                                         sveltekit:prefetch
                                         style="width:30px"
                                         class="button has-text-white is-black has-border-gray has-hover-gray is-rounded mx-3 my-1"
                                     >
-                                        {_}
+                                        {i?.episode_number}
                                     </a>
                                 {/each}
                             {:else}
