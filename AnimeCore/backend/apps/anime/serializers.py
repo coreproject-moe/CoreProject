@@ -115,9 +115,33 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
             for item in genres:
                 anime_genre_model, _ = AnimeGenreModel.objects.get_or_create(
                     mal_id=item["mal_id"],
-                    name=item["name"],
-                    type=item["type"],
+                    defaults={
+                        "name": item["name"],
+                        "type": item["type"],
+                    },
                 )
                 anime.genres.add(anime_genre_model)
 
         return anime
+
+    def update(self, instance: AnimeInfoModel, validated_data):
+        validated_data.pop("episodes", None)  # ignore
+
+        genres = validated_data.pop("genres", None)
+        if genres:
+            for item in genres:
+                anime_genre_model, _ = AnimeGenreModel.objects.get_or_create(
+                    mal_id=item["mal_id"],
+                    defaults={
+                        "name": item["name"],
+                        "type": item["type"],
+                    },
+                )
+                instance.genres.add(anime_genre_model)
+
+        # https://stackoverflow.com/questions/53779723/django-rest-framework-update-with-kwargs-from-validated-data
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+
+        return instance
