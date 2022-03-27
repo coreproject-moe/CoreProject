@@ -6,6 +6,9 @@ from .models import (
     EpisodeCommentModel,
     EpisodeTimestampModel,
     AnimeGenreModel,
+    AnimeThemeModel,
+    AnimeStudioModel,
+    AnimeProducerModel,
 )
 
 # Register your models here.
@@ -18,5 +21,8 @@ admin.site.register(
         EpisodeCommentModel,
         EpisodeTimestampModel,
         AnimeGenreModel,
+        AnimeThemeModel,
+        AnimeStudioModel,
+        AnimeProducerModel,
     ]
 )

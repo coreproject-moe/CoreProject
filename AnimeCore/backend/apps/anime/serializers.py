@@ -2,6 +2,9 @@ from rest_framework import serializers
 
 from .models import (
     AnimeInfoModel,
+    AnimeProducerModel,
+    AnimeStudioModel,
+    AnimeThemeModel,
     EpisodeCommentModel,
     EpisodeModel,
     EpisodeTimestampModel,
@@ -9,7 +12,7 @@ from .models import (
 )
 
 
-class AnimeGenreSerializer(serializers.Serializer):
+class AnimeGenericSerializer(serializers.Serializer):
     mal_id = serializers.IntegerField()
     name = serializers.CharField()
     type = serializers.CharField()
@@ -46,16 +49,6 @@ class EpisodeSerializer(serializers.ModelSerializer):
         )
 
     def update(self, instance: EpisodeModel, validated_data) -> dict:
-        """
-        {
-            "episode_comments": [],
-            "episode_timestamps": [{
-                "timestamp": 10800,
-                "episode_number": 1,
-                "user": 1
-            }]
-        }
-        """
         user = self.context["request"].user
 
         episode_timestamps = validated_data.get("episode_timestamps", None)
@@ -97,8 +90,11 @@ class EpisodeSerializer(serializers.ModelSerializer):
 
 
 class AnimeInfoSerializer(serializers.ModelSerializer):
-    episodes = EpisodeSerializer(many=True, required=False)
-    genres = AnimeGenreSerializer(many=True, required=False)
+    anime_episodes = EpisodeSerializer(many=True, required=False)
+    anime_genres = AnimeGenericSerializer(many=True, required=False)
+    anime_themes = AnimeGenericSerializer(many=True, required=False)
+    anime_studios = AnimeGenericSerializer(many=True, required=False)
+    anime_producers = AnimeGenericSerializer(many=True, required=False)
 
     class Meta:
         model = AnimeInfoModel
@@ -106,11 +102,13 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """https://www.django-rest-framework.org/api-guide/relations/#writable-nested-serializers"""
-        validated_data.pop("episodes", None)  # ignore
-        genres = validated_data.pop("genres", None)
+        validated_data.pop("anime_episodes", None)  # ignore
+        genres = validated_data.pop("anime_genres", None)
+        themes = validated_data.pop("anime_themes", None)
+        studios = validated_data.pop("anime_studios", None)
+        producers = validated_data.pop("anime_producers", None)
 
         anime = AnimeInfoModel.objects.create(**validated_data)
-
         if genres:
             for item in genres:
                 anime_genre_model, _ = AnimeGenreModel.objects.get_or_create(
@@ -120,24 +118,100 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
                         "type": item["type"],
                     },
                 )
-                anime.genres.add(anime_genre_model)
+                anime.anime_genres.add(anime_genre_model)
+
+        if themes:
+            for item in themes:
+                anime_theme_model, _ = AnimeThemeModel.objects.get_or_create(
+                    mal_id=item["mal_id"],
+                    defaults={
+                        "name": item["name"],
+                        "type": item["type"],
+                    },
+                )
+                anime.anime_themes.add(anime_theme_model)
+
+        if studios:
+            for item in studios:
+                anime_studio_model, _ = AnimeStudioModel.objects.get_or_create(
+                    mal_id=item["mal_id"],
+                    defaults={
+                        "name": item["name"],
+                        "type": item["type"],
+                    },
+                )
+                anime.anime_studios.add(anime_studio_model)
+
+        if producers:
+            for item in producers:
+                anime_producer_model, _ = AnimeProducerModel.objects.get_or_create(
+                    mal_id=item["mal_id"],
+                    defaults={
+                        "name": item["name"],
+                        "type": item["type"],
+                    },
+                )
+                anime.anime_producers.add(anime_producer_model)
 
         return anime
 
     def update(self, instance: AnimeInfoModel, validated_data):
-        validated_data.pop("episodes", None)  # ignore
+        validated_data.pop("anime_episodes", None)  # ignore
 
-        genres = validated_data.pop("genres", None)
+        genres = validated_data.pop("anime_genres", None)
+        themes = validated_data.pop("anime_themes", None)
+        studios = validated_data.pop("anime_studios", None)
+        producers = validated_data.pop("anime_producers", None)
+
         if genres:
             for item in genres:
-                anime_genre_model, _ = AnimeGenreModel.objects.get_or_create(
+                anime_genre_model, created = AnimeGenreModel.objects.get_or_create(
                     mal_id=item["mal_id"],
                     defaults={
                         "name": item["name"],
                         "type": item["type"],
                     },
                 )
-                instance.genres.add(anime_genre_model)
+                if created:
+                    instance.anime_genres.add(anime_genre_model)
+        if themes:
+            for item in themes:
+                anime_theme_model, created = AnimeThemeModel.objects.get_or_create(
+                    mal_id=item["mal_id"],
+                    defaults={
+                        "name": item["name"],
+                        "type": item["type"],
+                    },
+                )
+                if created:
+                    instance.anime_themes.add(anime_theme_model)
+
+        if studios:
+            for item in studios:
+                anime_studio_model, created = AnimeStudioModel.objects.get_or_create(
+                    mal_id=item["mal_id"],
+                    defaults={
+                        "name": item["name"],
+                        "type": item["type"],
+                    },
+                )
+                if created:
+                    instance.anime_studios.add(anime_studio_model)
+
+        if producers:
+            for item in producers:
+                (
+                    anime_producer_model,
+                    created,
+                ) = AnimeProducerModel.objects.get_or_create(
+                    mal_id=item["mal_id"],
+                    defaults={
+                        "name": item["name"],
+                        "type": item["type"],
+                    },
+                )
+                if created:
+                    instance.anime_producers.add(anime_producer_model)
 
         # https://stackoverflow.com/questions/53779723/django-rest-framework-update-with-kwargs-from-validated-data
         for attr, value in validated_data.items():

@@ -71,6 +71,51 @@ class EpisodeModel(models.Model):
         ordering = ("id",)
 
 
+class AnimeProducerModel(models.Model):
+    mal_id = models.IntegerField(unique=True, blank=False, null=False, primary_key=True)
+    name = models.CharField(
+        unique=True, max_length=50, default="", null=False, blank=False
+    )
+    type = models.CharField(max_length=50, default="", null=False, blank=False)
+
+    def __str__(self) -> str:
+        return f"{self.mal_id}. {self.name} ({self.type})"
+
+    class Meta:
+        verbose_name = "Anime Producer"
+        ordering = ("mal_id",)
+
+
+class AnimeStudioModel(models.Model):
+    mal_id = models.IntegerField(unique=True, blank=False, null=False, primary_key=True)
+    name = models.CharField(
+        unique=True, max_length=50, default="", null=False, blank=False
+    )
+    type = models.CharField(max_length=50, default="", null=False, blank=False)
+
+    def __str__(self) -> str:
+        return f"{self.mal_id}. {self.name} ({self.type})"
+
+    class Meta:
+        verbose_name = "Anime Studio"
+        ordering = ("mal_id",)
+
+
+class AnimeThemeModel(models.Model):
+    mal_id = models.IntegerField(unique=True, blank=False, null=False, primary_key=True)
+    name = models.CharField(
+        unique=True, max_length=50, default="", null=False, blank=False
+    )
+    type = models.CharField(max_length=50, default="", null=False, blank=False)
+
+    def __str__(self) -> str:
+        return f"{self.mal_id}. {self.name} ({self.type})"
+
+    class Meta:
+        verbose_name = "Anime Theme"
+        ordering = ("mal_id",)
+
+
 class AnimeGenreModel(models.Model):
     mal_id = models.IntegerField(unique=True, blank=False, null=False, primary_key=True)
     name = models.CharField(
@@ -100,8 +145,12 @@ class AnimeInfoModel(models.Model):
     anime_background = models.TextField(blank=True, null=True)
     anime_rating = models.CharField(max_length=50, blank=True, null=True)
 
-    genres = models.ManyToManyField(AnimeGenreModel, blank=True)
-    episodes = models.ManyToManyField(EpisodeModel, blank=True)
+    anime_genres = models.ManyToManyField(AnimeGenreModel, blank=True)
+    anime_themes = models.ManyToManyField(AnimeThemeModel, blank=True)
+    anime_studios = models.ManyToManyField(AnimeStudioModel, blank=True)
+    anime_producers = models.ManyToManyField(AnimeProducerModel, blank=True)
+
+    anime_episodes = models.ManyToManyField(EpisodeModel, blank=True)
     updated = models.DateTimeField(auto_now_add=True)
 
     # anime_rating = models.CharField(max_length=128)
