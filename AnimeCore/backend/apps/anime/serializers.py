@@ -5,7 +5,14 @@ from .models import (
     EpisodeCommentModel,
     EpisodeModel,
     EpisodeTimestampModel,
+    AnimeGenreModel,
 )
+
+
+class AnimeGenreSerializer(serializers.Serializer):
+    mal_id = serializers.IntegerField()
+    name = serializers.CharField()
+    type = serializers.CharField()
 
 
 class EpisodeTimestampSerializer(serializers.ModelSerializer):
@@ -91,28 +98,50 @@ class EpisodeSerializer(serializers.ModelSerializer):
 
 class AnimeInfoSerializer(serializers.ModelSerializer):
     episodes = EpisodeSerializer(many=True, required=False)
+    genres = AnimeGenreSerializer(many=True, required=False)
 
     class Meta:
         model = AnimeInfoModel
         fields = "__all__"
 
     def create(self, validated_data):
-        """
-        {
-            "episodes": [],
-            "mal_id": 91328,
-            "anime_name": "Gintama",
-            "anime_name_japanese": "dsadas",
-            "anime_source": "dsaasd",
-            "anime_aired_from": "2022-03-22T18:55:17.825914Z",
-            "anime_aired_to": "2022-03-22T18:55:17.843866Z",
-            "anime_cover": null,
-            "updated": "2022-03-21T20:24:48.661105Z"
-        }
-        """
+        """https://www.django-rest-framework.org/api-guide/relations/#writable-nested-serializers"""
+        validated_data.pop("episodes", None)  # ignore
+        genres = validated_data.pop("genres", None)
+
+        anime = AnimeInfoModel.objects.create(**validated_data)
+
+        if genres:
+            for item in genres:
+                anime_genre_model, _ = AnimeGenreModel.objects.get_or_create(
+                    mal_id=item["mal_id"],
+                    defaults={
+                        "name": item["name"],
+                        "type": item["type"],
+                    },
+                )
+                anime.genres.add(anime_genre_model)
+
+        return anime
+
+    def update(self, instance: AnimeInfoModel, validated_data):
         validated_data.pop("episodes", None)  # ignore
 
-        data = AnimeInfoModel(**validated_data)
-        data.save()
+        genres = validated_data.pop("genres", None)
+        if genres:
+            for item in genres:
+                anime_genre_model, _ = AnimeGenreModel.objects.get_or_create(
+                    mal_id=item["mal_id"],
+                    defaults={
+                        "name": item["name"],
+                        "type": item["type"],
+                    },
+                )
+                instance.genres.add(anime_genre_model)
 
-        return data
+        # https://stackoverflow.com/questions/53779723/django-rest-framework-update-with-kwargs-from-validated-data
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+
+        return instance
