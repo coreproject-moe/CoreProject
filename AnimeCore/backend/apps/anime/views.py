@@ -32,6 +32,7 @@ class AnimeInfoView(
     CreateModelMixin,
     ListModelMixin,
     RetrieveModelMixin,
+    UpdateModelMixin,
 ):
     """
     Returns :
