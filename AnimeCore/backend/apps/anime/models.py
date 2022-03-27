@@ -33,7 +33,7 @@ class EpisodeCommentModel(models.Model):
         return f"{self.user}"
 
     class Meta:
-        verbose_name = "User Comment"
+        verbose_name = "Episode Comment"
         # Sort by newest first
         ordering = ("-comment_added",)
 
@@ -47,7 +47,7 @@ class EpisodeTimestampModel(models.Model):
         return f"{self.episode_number}. {self.user}"
 
     class Meta:
-        verbose_name = "User Timestamp"
+        verbose_name = "Episode Timestamp"
 
 
 class EpisodeModel(models.Model):
