@@ -9,10 +9,10 @@ from .models import (
 )
 
 
-class AnimeGenreSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AnimeGenreModel
-        fields = "__all__"
+class AnimeGenreSerializer(serializers.Serializer):
+    mal_id = serializers.IntegerField()
+    name = serializers.CharField()
+    type = serializers.CharField()
 
 
 class EpisodeTimestampSerializer(serializers.ModelSerializer):
