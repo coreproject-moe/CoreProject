@@ -32,6 +32,7 @@ class AnimeInfoView(
     CreateModelMixin,
     ListModelMixin,
     RetrieveModelMixin,
+    UpdateModelMixin,
 ):
     """
     Returns :
@@ -47,8 +48,8 @@ class AnimeInfoView(
     ]
     ordering_fields = ["updated"]
     parser_classes = [
-        FormParser,
-        MultiPartParser,
+        # FormParser,
+        # MultiPartParser,
         JSONParser,
     ]
     permission_classes = [
