@@ -71,12 +71,14 @@ class EpisodeModel(models.Model):
         ordering = ("id",)
 
 
-class AnimeGenres(models.Model):
-    genre = models.CharField(max_length=50, default="", null=False, blank=False)
+class AnimeGenreModel(models.Model):
+    mal_id = models.IntegerField(unique=True, blank=False, null=False, primary_key=True)
+    name = models.CharField(max_length=50, default="", null=False, blank=False)
+    type = models.CharField(max_length=50, default="", null=False, blank=False)
 
     class Meta:
         verbose_name = "Anime Genre"
-        ordering = ("id",)
+        ordering = ("mal_id",)
 
 
 class AnimeInfoModel(models.Model):
@@ -93,12 +95,12 @@ class AnimeInfoModel(models.Model):
     anime_background = models.TextField(blank=True, null=True)
     anime_rating = models.CharField(max_length=50, blank=True, null=True)
 
-    genres = models.ManyToManyField(AnimeGenres, blank=True)
+    genres = models.ManyToManyField(AnimeGenreModel, blank=True)
     episodes = models.ManyToManyField(EpisodeModel, blank=True)
     updated = models.DateTimeField(auto_now_add=True)
 
     # anime_rating = models.CharField(max_length=128)
-    # genres = models.ManyToManyField(blank=True)
+
     def __str__(self) -> str:
         return f"{self.anime_name}"
 
