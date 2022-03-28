@@ -134,7 +134,7 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
                     },
                 )
                 items.append(anime_theme_model)
-            print(items)
+
             anime.anime_themes.set(items) if items else None
 
         if studios:
@@ -149,7 +149,7 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
                 )
                 items.append(anime_studio_model)
 
-            anime.anime_studios.set(anime_studio_model) if items else None
+            anime.anime_studios.set(items) if items else None
 
         if producers:
             items = []
