@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('anime', '0017_animeinfomodel_anime_genres'),
+        ("anime", "0017_animeinfomodel_anime_genres"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='animeinfomodel',
-            name='anime_themes',
+            model_name="animeinfomodel",
+            name="anime_themes",
         ),
     ]

@@ -6,19 +6,25 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('anime', '0014_rename_episodes_animeinfomodel_anime_episodes_and_more'),
+        ("anime", "0014_rename_episodes_animeinfomodel_anime_episodes_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='animeinfomodel',
-            name='id',
-            field=models.BigAutoField(auto_created=True, default=0, primary_key=True, serialize=False, verbose_name='ID'),
+            model_name="animeinfomodel",
+            name="id",
+            field=models.BigAutoField(
+                auto_created=True,
+                default=0,
+                primary_key=True,
+                serialize=False,
+                verbose_name="ID",
+            ),
             preserve_default=False,
         ),
         migrations.AlterField(
-            model_name='animeinfomodel',
-            name='mal_id',
+            model_name="animeinfomodel",
+            name="mal_id",
             field=models.IntegerField(unique=True),
         ),
     ]
