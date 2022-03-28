@@ -110,6 +110,7 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
 
         anime = AnimeInfoModel.objects.create(**validated_data)
         if genres:
+            items = []
             for item in genres:
                 anime_genre_model, _ = AnimeGenreModel.objects.get_or_create(
                     mal_id=item["mal_id"],
@@ -118,9 +119,12 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
                         "type": item["type"],
                     },
                 )
-                anime.anime_genres.add(anime_genre_model)
+                items.append(anime_genre_model)
+
+            anime.anime_genres.set(items) if items else None
 
         if themes:
+            items = []
             for item in themes:
                 anime_theme_model, _ = AnimeThemeModel.objects.get_or_create(
                     mal_id=item["mal_id"],
@@ -129,9 +133,12 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
                         "type": item["type"],
                     },
                 )
-                anime.anime_themes.add(anime_theme_model)
+                items.append(anime_theme_model)
+
+            anime.anime_themes.set(items) if items else None
 
         if studios:
+            items = []
             for item in studios:
                 anime_studio_model, _ = AnimeStudioModel.objects.get_or_create(
                     mal_id=item["mal_id"],
@@ -140,9 +147,12 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
                         "type": item["type"],
                     },
                 )
-                anime.anime_studios.add(anime_studio_model)
+                items.append(anime_studio_model)
+
+            anime.anime_studios.set(items) if items else None
 
         if producers:
+            items = []
             for item in producers:
                 anime_producer_model, _ = AnimeProducerModel.objects.get_or_create(
                     mal_id=item["mal_id"],
@@ -151,7 +161,9 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
                         "type": item["type"],
                     },
                 )
-                anime.anime_producers.add(anime_producer_model)
+                items.append(anime_producer_model)
+
+            anime.anime_producers.set(items) if items else None
 
         return anime
 
