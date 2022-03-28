@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('anime', '0018_remove_animeinfomodel_anime_themes'),
+        ("anime", "0018_remove_animeinfomodel_anime_themes"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='animeinfomodel',
-            name='anime_themes',
-            field=models.ManyToManyField(blank=True, to='anime.animethememodel'),
+            model_name="animeinfomodel",
+            name="anime_themes",
+            field=models.ManyToManyField(blank=True, to="anime.animethememodel"),
         ),
     ]
