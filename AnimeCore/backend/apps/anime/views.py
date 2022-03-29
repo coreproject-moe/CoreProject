@@ -2,9 +2,12 @@ from django.http.request import HttpRequest
 
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from rest_framework.filters import OrderingFilter
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import GenericViewSet
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.filters import (
+    OrderingFilter,
+    SearchFilter,
+)
 from rest_framework.mixins import (
     CreateModelMixin,
     ListModelMixin,
@@ -44,6 +47,7 @@ class AnimeInfoView(
     queryset = AnimeInfoModel.objects.all()
     serializer_class = AnimeInfoSerializer
     filter_backends = [
+        SearchFilter,
         OrderingFilter,
     ]
     ordering_fields = ["updated"]
@@ -55,6 +59,7 @@ class AnimeInfoView(
     permission_classes = [
         IsSuperUserOrReadOnly,
     ]
+    search_fields = ["anime_name", "anime_name_japanese"]
 
     @action(detail=True)
     def random(self, request: HttpRequest) -> Response:
