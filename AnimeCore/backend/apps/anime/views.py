@@ -1,4 +1,5 @@
 from django.http.request import HttpRequest
+from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -20,6 +21,7 @@ from rest_framework.parsers import (
     JSONParser,
 )
 
+from .filters import AnimeInfoFilter
 from .permissions import IsSuperUserOrReadOnly
 from .models import AnimeInfoModel, EpisodeModel
 from .serializers import (
@@ -46,10 +48,7 @@ class AnimeInfoView(
 
     queryset = AnimeInfoModel.objects.all()
     serializer_class = AnimeInfoSerializer
-    filter_backends = [
-        SearchFilter,
-        OrderingFilter,
-    ]
+
     ordering_fields = ["updated"]
     parser_classes = [
         FormParser,
@@ -59,7 +58,13 @@ class AnimeInfoView(
     permission_classes = [
         IsSuperUserOrReadOnly,
     ]
-    search_fields = ["anime_name", "anime_name_japanese"]
+    filter_backends = [
+        # SearchFilter,
+        # OrderingFilter,
+        DjangoFilterBackend,
+    ]
+    filter_class = AnimeInfoFilter
+    # search_fields = ["anime_name", "anime_name_japanese"]
 
     @action(detail=True)
     def random(self, request: HttpRequest) -> Response:

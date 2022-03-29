@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework_simplejwt.token_blacklist",
     # 3rd party Django stuff
+    "django_filters",
     "django_cleanup.apps.CleanupConfig",
     # Pages
     "apps.edit",
