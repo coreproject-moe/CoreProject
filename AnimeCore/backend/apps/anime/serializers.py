@@ -1,3 +1,4 @@
+from email.policy import default
 from rest_framework import serializers
 
 from .models import (
@@ -9,13 +10,14 @@ from .models import (
     EpisodeModel,
     EpisodeTimestampModel,
     AnimeGenreModel,
+    AnimeSynonymModel,
 )
 
 
 class AnimeGenericSerializer(serializers.Serializer):
-    mal_id = serializers.IntegerField()
-    name = serializers.CharField()
-    type = serializers.CharField()
+    mal_id = serializers.IntegerField(required=False)
+    name = serializers.CharField(required=True)
+    type = serializers.CharField(required=False)
 
 
 class EpisodeTimestampSerializer(serializers.ModelSerializer):
@@ -95,6 +97,7 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
     anime_themes = AnimeGenericSerializer(many=True, required=False)
     anime_studios = AnimeGenericSerializer(many=True, required=False)
     anime_producers = AnimeGenericSerializer(many=True, required=False)
+    anime_name_synonyms = AnimeGenericSerializer(many=True, required=False)
 
     class Meta:
         model = AnimeInfoModel
@@ -107,6 +110,7 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
         themes = validated_data.pop("anime_themes", None)
         studios = validated_data.pop("anime_studios", None)
         producers = validated_data.pop("anime_producers", None)
+        synonyms = validated_data.pop("anime_name_synonyms", None)
 
         anime = AnimeInfoModel.objects.create(**validated_data)
         if genres:
@@ -165,6 +169,15 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
 
             anime.anime_producers.set(items) if items else None
 
+        if synonyms:
+            items = []
+            for item in synonyms:
+                anime_synonym_model, _ = AnimeSynonymModel.objects.get_or_create(
+                    name=item["name"]
+                )
+                items.append(anime_synonym_model)
+            anime.anime_name_synonyms.set(items) if items else None
+
         return anime
 
     def update(self, instance: AnimeInfoModel, validated_data):
@@ -174,6 +187,7 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
         themes = validated_data.pop("anime_themes", None)
         studios = validated_data.pop("anime_studios", None)
         producers = validated_data.pop("anime_producers", None)
+        synonyms = validated_data.pop("anime_name_synonyms", None)
 
         if genres:
             for item in genres:
@@ -224,6 +238,14 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
                 )
                 if created:
                     instance.anime_producers.add(anime_producer_model)
+        if synonyms:
+            for item in synonyms:
+                anime_synonym_model, created = AnimeSynonymModel.objects.get_or_create(
+                    name=item.name
+                )
+
+                if created:
+                    instance.anime_name_synonyms.add(anime_synonym_model)
 
         # https://stackoverflow.com/questions/53779723/django-rest-framework-update-with-kwargs-from-validated-data
         for attr, value in validated_data.items():
