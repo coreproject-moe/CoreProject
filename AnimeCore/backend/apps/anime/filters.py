@@ -16,7 +16,9 @@ class AnimeInfoFilter(filters.FilterSet):
 
     def anime_filter(self, queryset, name, value):
         return queryset.filter(
-            Q(anime_name_japanese__icontains=value) | Q(anime_name__icontains=value)
+            Q(anime_name_japanese__icontains=value)
+            | Q(anime_name__icontains=value)
+            | Q(anime_name_synonyms__name__icontains=value)
         )
 
     def genre_filter(self, queryset, name, value):

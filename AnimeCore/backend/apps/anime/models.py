@@ -1,4 +1,5 @@
 from pathlib import Path
+from tabnanny import verbose
 
 
 from django.db import models
@@ -131,6 +132,17 @@ class AnimeGenreModel(models.Model):
         ordering = ("mal_id",)
 
 
+class AnimeSynonymModel(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self) -> str:
+        return f"{self.name}"
+
+    class Meta:
+        verbose_name = "Anime Synonym"
+        ordering = ("-id",)
+
+
 class AnimeInfoModel(models.Model):
     mal_id = models.IntegerField(unique=True, blank=False, null=False)
     # anilist_id = models.IntegerField(unique=True, blank=False, null=False)
@@ -150,6 +162,7 @@ class AnimeInfoModel(models.Model):
     anime_themes = models.ManyToManyField(AnimeThemeModel, blank=True)
     anime_studios = models.ManyToManyField(AnimeStudioModel, blank=True)
     anime_producers = models.ManyToManyField(AnimeProducerModel, blank=True)
+    anime_name_synonyms = models.ManyToManyField(AnimeSynonymModel, blank=True)
 
     anime_episodes = models.ManyToManyField(EpisodeModel, blank=True)
     updated = models.DateTimeField(auto_now_add=True)
