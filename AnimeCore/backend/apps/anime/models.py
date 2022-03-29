@@ -1,5 +1,4 @@
 from pathlib import Path
-from tabnanny import verbose
 
 
 from django.db import models
@@ -75,7 +74,7 @@ class EpisodeModel(models.Model):
 class AnimeProducerModel(models.Model):
     mal_id = models.IntegerField(unique=True, blank=False, null=False, primary_key=True)
     name = models.CharField(
-        unique=True, max_length=50, default="", null=False, blank=False
+        unique=True, max_length=50, default="", null=False, blank=False, db_index=True
     )
     type = models.CharField(max_length=50, default="", null=False, blank=False)
 
@@ -90,7 +89,7 @@ class AnimeProducerModel(models.Model):
 class AnimeStudioModel(models.Model):
     mal_id = models.IntegerField(unique=True, blank=False, null=False, primary_key=True)
     name = models.CharField(
-        unique=True, max_length=50, default="", null=False, blank=False
+        unique=True, max_length=50, default="", null=False, blank=False, db_index=True
     )
     type = models.CharField(max_length=50, default="", null=False, blank=False)
 
@@ -105,7 +104,7 @@ class AnimeStudioModel(models.Model):
 class AnimeThemeModel(models.Model):
     mal_id = models.IntegerField(unique=True, blank=False, null=False, primary_key=True)
     name = models.CharField(
-        unique=True, max_length=50, default="", null=False, blank=False
+        unique=True, max_length=50, default="", null=False, blank=False, db_index=True
     )
     type = models.CharField(max_length=50, default="", null=False, blank=False)
 
@@ -120,7 +119,7 @@ class AnimeThemeModel(models.Model):
 class AnimeGenreModel(models.Model):
     mal_id = models.IntegerField(unique=True, blank=False, null=False, primary_key=True)
     name = models.CharField(
-        unique=True, max_length=50, default="", null=False, blank=False
+        unique=True, max_length=50, default="", null=False, blank=False, db_index=True
     )
     type = models.CharField(max_length=50, default="", null=False, blank=False)
 
