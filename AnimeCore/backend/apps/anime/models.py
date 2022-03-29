@@ -133,7 +133,7 @@ class AnimeGenreModel(models.Model):
 
 
 class AnimeSynonymModel(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100, unique=True, db_index=True)
 
     def __str__(self) -> str:
         return f"{self.name}"
@@ -146,8 +146,8 @@ class AnimeSynonymModel(models.Model):
 class AnimeInfoModel(models.Model):
     mal_id = models.IntegerField(unique=True, blank=False, null=False)
     # anilist_id = models.IntegerField(unique=True, blank=False, null=False)
-    anime_name = models.CharField(max_length=1024)
-    anime_name_japanese = models.CharField(max_length=1024, null=True)
+    anime_name = models.CharField(max_length=1024, db_index=True)
+    anime_name_japanese = models.CharField(max_length=1024, null=True, db_index=True)
     anime_source = models.CharField(max_length=128, blank=True, null=True)
     anime_aired_from = models.DateTimeField(blank=True, null=True)
     anime_aired_to = models.DateTimeField(blank=True, null=True)
