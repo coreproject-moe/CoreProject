@@ -7,15 +7,19 @@ name = "pypi"
 django = {extras = ["argon2"], version = "*"}
 # 3rd Party
 django-cleanup = "*"
+django-filter = "*"
 django-cors-headers = "*"
+django-crispy-forms = "*"
+# WhiteNoise
+whitenoise = {extras = ["brotli"], version = "*"}
 # Rest framework
 djangorestframework = "*"
-djangorestframework-simplejwt = "*"
+# 3rd party
 drf-nested-routers = "*"
+djangorestframework-simplejwt = "*"
 # Pillow stuff
 pillow = "*"
 pillow-avif-plugin = "*"
-django-filter = "*"
 
 [dev-packages]
 black = "*"
@@ -27,8 +31,7 @@ python_version = "3.10"
 [scripts]
 dev = 'python manage.py runserver'
 sync = 'python manage.py migrate'
-mksync = 'python manage.py makemigrations'
-collectstatic = 'python .\manage.py collectstatic'
+mksync = 'python manage.py makemigrations' 
+collectstatic = 'python .\manage.py collectstatic --clear --link' # Dont copy files all around.
 prod = "gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
 # Optimize bulma ( Purge CSS )
-optimize_bulma = "npx purgecss --css static/vendor/bulma/bulma.min.css --content **/*.html **/*.js --output staticfiles/vendor/bulma/bulma.min.css"

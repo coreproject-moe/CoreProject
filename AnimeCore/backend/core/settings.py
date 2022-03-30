@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-mn19l@e%r^s&a^pa9%(bf173v-0c54^@3s(pb!ts_yuts0$+6p"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 
 # Application definition
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    # Whitenoise
     "django.contrib.staticfiles",
     # Rest Framework
     "rest_framework",
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework_simplejwt.token_blacklist",
     # 3rd party Django stuff
+    "crispy_forms",
     "django_filters",
     "django_cleanup.apps.CleanupConfig",
     # Pages
@@ -58,7 +60,10 @@ if DEBUG:
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    # Whitenoise
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    # Cors headers
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.cache.UpdateCacheMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -70,8 +75,7 @@ MIDDLEWARE = [
 ]
 
 # https://docs.djangoproject.com/en/4.0/topics/cache/#the-per-site-cache-1
-CACHE_MIDDLEWARE_SECONDS = 5
-
+CACHE_MIDDLEWARE_SECONDS = 0
 # Debug Toolbar Middleware
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#add-the-middleware
 if DEBUG:
@@ -132,7 +136,6 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
 # Allow more fields to be deleted at once
 # https://stackoverflow.com/questions/47585583/the-number-of-get-post-parameters-exceeded-settings-data-upload-max-number-field
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 50000
@@ -199,6 +202,7 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = Path(BASE_DIR, "staticfiles")
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = Path(BASE_DIR, "media")
