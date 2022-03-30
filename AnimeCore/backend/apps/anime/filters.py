@@ -12,7 +12,10 @@ class AnimeInfoFilter(filters.FilterSet):
 
     class Meta:
         model = AnimeInfoModel
-        fields = ["anime"]
+        fields = [
+            "mal_id",
+            "anime_genres__mal_id",
+        ]
 
     def anime_filter(self, queryset, name, value):
         return queryset.filter(
