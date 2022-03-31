@@ -3,10 +3,10 @@
 <br/>
 <div align="center">
   <a href="https://github.com/baseplate-admin/CoreProject#gh-dark-mode-only">
-    <img src="https://files.catbox.moe/4g29bm.png" alt="Logo" width="300" height="180">
+    <img src="https://user-images.githubusercontent.com/61817579/161123729-44ae9010-6282-44e5-ba68-adaac71f33be.png" alt="Logo" width="300" height="180">
   </a>
 	 <a href="https://github.com/baseplate-admin/CoreProject#gh-light-mode-only">
-    <img src="https://files.catbox.moe/e8ipgi.png" alt="Logo" width="300" height="180">
+    <img src="https://user-images.githubusercontent.com/61817579/161123650-176e7dfe-f622-49a6-acd8-b336f9d01a2b.png" alt="Logo" width="300" height="180">
   </a>
  
  
