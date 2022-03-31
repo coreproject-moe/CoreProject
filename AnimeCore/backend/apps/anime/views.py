@@ -63,6 +63,13 @@ class AnimeInfoView(
     filter_class = AnimeInfoFilter
     # search_fields = ["anime_name", "anime_name_japanese"]
 
+    def get_serializer_context(self):
+        # Thanks StackOverFlow
+        # https://stackoverflow.com/questions/31038742/pass-request-context-to-serializer-from-viewset-in-django-rest-framework
+        context = super().get_serializer_context()
+        context.update({"request": self.request})
+        return context
+
     @action(detail=True)
     def random(self, request: HttpRequest) -> Response:
         limit = request.GET.get("limit")
@@ -80,8 +87,6 @@ class EpisodeView(
 ):
     """
     Returns :
-        - All uploaded animes
-        - Detailed info on uploaded animes
         - Detailed Episodes info
     """
 

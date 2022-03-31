@@ -102,6 +102,12 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
         model = AnimeInfoModel
         fields = "__all__"
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # https://stackoverflow.com/questions/38316321/change-a-field-in-a-django-rest-framework-modelserializer-based-on-the-request-t
+        if self.context["request"].method in ["GET"]:
+            self.fields["anime_episodes"] = serializers.StringRelatedField(many=True)
+
     def create(self, validated_data):
         """https://www.django-rest-framework.org/api-guide/relations/#writable-nested-serializers"""
         validated_data.pop("anime_episodes", None)  # ignore
