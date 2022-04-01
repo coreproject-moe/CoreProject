@@ -41,7 +41,6 @@ class AnimeInfoView(
     Returns :
         - All uploaded animes
         - Detailed info on uploaded animes
-        - Detailed Episodes info
     """
 
     queryset = AnimeInfoModel.objects.all()
@@ -62,7 +61,8 @@ class AnimeInfoView(
         DjangoFilterBackend,
     ]
     filter_class = AnimeInfoFilter
-    lookup_field = "id"  # https://stackoverflow.com/questions/61452449/how-to-change-lookup-field-in-model-viewset-to-other-unique-parameter-in-django
+    # https://stackoverflow.com/questions/61452449/how-to-change-lookup-field-in-model-viewset-to-other-unique-parameter-in-django
+    lookup_field = "id"
 
     def get_serializer_context(self):
         # Thanks StackOverFlow
@@ -93,7 +93,8 @@ class EpisodeView(
 
     serializer_class = EpisodeSerializer
     permission_classes = [IsSuperUserOrReadOnly]
-    lookup_field = "episode_number"  # https://stackoverflow.com/questions/61452449/how-to-change-lookup-field-in-model-viewset-to-other-unique-parameter-in-django
+    # https://stackoverflow.com/questions/61452449/how-to-change-lookup-field-in-model-viewset-to-other-unique-parameter-in-django
+    lookup_field = "episode_number"
 
     def get_queryset(self):
         instance = AnimeInfoModel.objects.all()
@@ -107,5 +108,7 @@ class EpisodeView(
         # Thanks StackOverFlow
         # https://stackoverflow.com/questions/31038742/pass-request-context-to-serializer-from-viewset-in-django-rest-framework
         context = super().get_serializer_context()
-        context.update({"request": self.request})
+        context.update(
+            {"request": self.request},
+        )
         return context
