@@ -1,4 +1,5 @@
 from django.http.request import HttpRequest
+from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework.response import Response
@@ -61,7 +62,7 @@ class AnimeInfoView(
         DjangoFilterBackend,
     ]
     filter_class = AnimeInfoFilter
-    # search_fields = ["anime_name", "anime_name_japanese"]
+    lookup_field = "id"  # https://stackoverflow.com/questions/61452449/how-to-change-lookup-field-in-model-viewset-to-other-unique-parameter-in-django
 
     def get_serializer_context(self):
         # Thanks StackOverFlow
@@ -90,10 +91,17 @@ class EpisodeView(
         - Detailed Episodes info
     """
 
-    queryset = EpisodeModel.objects.all()
     serializer_class = EpisodeSerializer
     permission_classes = [IsSuperUserOrReadOnly]
     lookup_field = "episode_number"  # https://stackoverflow.com/questions/61452449/how-to-change-lookup-field-in-model-viewset-to-other-unique-parameter-in-django
+
+    def get_queryset(self):
+        instance = AnimeInfoModel.objects.all()
+        queryset = get_object_or_404(
+            instance, pk=self.kwargs["anime_id"]
+        ).anime_episodes.all()
+
+        return queryset
 
     def get_serializer_context(self):
         # Thanks StackOverFlow
