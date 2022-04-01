@@ -32,3 +32,9 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += (path("__debug__/", include("debug_toolbar.urls")),)
+
+
+# from django.urls import get_resolver
+# from pprint import pprint
+
+# pprint(get_resolver().reverse_dict.keys())
