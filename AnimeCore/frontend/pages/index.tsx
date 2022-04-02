@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { NextPage } from 'next';
 import { Navbar } from '../components/Navbar';
 
@@ -13,10 +14,10 @@ const Home: NextPage = () => {
                     backgroundSize: 'cover',
                     boxShadow: `
                         inset 0 4px 1800px #070519,
-                        inset 0 -50vh 140px 2px rgba(7, 5, 25, 0.9),
-                        inset 0 -25vh 140px 2px rgba(7, 5, 25, 0.7),
-                        inset 0 -10vh 140px 2px rgba(7, 5, 25, 0.4),
-                        inset 0 -5vh 140px 2px rgba(7, 5, 25, 0.2)
+                        inset 0 -40vh 140px 2px rgba(7, 5, 25, 0.9),
+                        inset 0 -15vh 140px 2px rgba(7, 5, 25, 0.7),
+                        inset 0 -5vh 140px 2px rgba(7, 5, 25, 0.4),
+                        inset 0 -2vh 140px 2px rgba(7, 5, 25, 0.2)
                     `,
                 }}
             >
@@ -24,16 +25,16 @@ const Home: NextPage = () => {
                     <Navbar />
                 </div>
 
-                <div className="hero-body">
+                <div className="hero-body is-align-items-self-end">
                     <div className="container">
-                        <div className="title has-text-yellow is-size-4">
+                        <div className="title has-text-warning is-size-4">
                             Featured <span className="is-bold">——</span>
                         </div>
-                        <div className="title is-size-1 has-text-white">
+                        <div className="title is-size-1 has-text-white is-bold">
                             Hyouka
                         </div>
                         <div
-                            className="subtitle is-size-6 has-text-white"
+                            className="subtitle is-size-6 has-text-white pt-5"
                             style={{
                                 width: '60%',
                             }}
@@ -45,36 +46,94 @@ const Home: NextPage = () => {
                             deep-rooted the club's history really is.
                             Begrudgingly, Oreki is dragged into an...
                         </div>
-                        <span className="tag is-size-6 mx-1">Mystery</span>
-                        <span className="tag is-size-6 mx-1">
-                            Slice of Life
-                        </span>
+                        <div className="subtitle">
+                            <span className="tag is-size-6 mx-1 is-bold is-black">
+                                Mystery
+                            </span>
+                            <span className="tag is-size-6 mx-1 is-bold is-black">
+                                Slice of Life
+                            </span>
+                        </div>
+                        <div className="subtitle">
+                            <div className="buttons">
+                                <button
+                                    className="button is-warning has-border-transparent mx-3"
+                                    style={{
+                                        borderRadius: 12,
+                                    }}
+                                >
+                                    <span className="icon is-small">
+                                        <Image
+                                            src="/icons/play.svg"
+                                            height={24}
+                                            width={24}
+                                        />
+                                    </span>
+                                </button>
+                                <button
+                                    className="button is-warning is-outlined"
+                                    style={{
+                                        borderRadius: 16,
+                                        borderWidth: 3,
+                                    }}
+                                >
+                                    <span className="is-bold">Detailes</span>
+                                    <Image
+                                        src="/icons/chevrons-right.svg"
+                                        height={24}
+                                        width={24}
+                                    />
+                                </button>
+                                <button
+                                    className="button is-warning is-outlined"
+                                    style={{
+                                        borderRadius: 16,
+                                        borderWidth: 3,
+                                    }}
+                                >
+                                    <span className="icon is-small">
+                                        <Image
+                                            src="/icons/chevron-left.svg"
+                                            height={24}
+                                            width={24}
+                                        />
+                                    </span>
+                                </button>
+                                <button
+                                    className="button is-warning is-outlined"
+                                    style={{
+                                        borderRadius: 16,
+                                        borderWidth: 3,
+                                    }}
+                                >
+                                    <span className="icon is-small">
+                                        <Image
+                                            src="/icons/chevron-right.svg"
+                                            height={24}
+                                            width={24}
+                                        />
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
                 <div className="hero-foot">
                     <nav className="tabs">
-                        <div className="container">
-                            <ul>
-                                <li className="is-active">
-                                    <a>Overview</a>
-                                </li>
-                                <li>
-                                    <a>Modifiers</a>
-                                </li>
-                                <li>
-                                    <a>Grid</a>
-                                </li>
-                                <li>
-                                    <a>Elements</a>
-                                </li>
-                                <li>
-                                    <a>Components</a>
-                                </li>
-                                <li>
-                                    <a>Layout</a>
-                                </li>
-                            </ul>
+                        <div className="container has-text-white">
+                            <div className="columns is-mobile is-centered">
+                                <div className="column is-narrow px-1">
+                                    <Image
+                                        src="/icons/arrow-down.svg"
+                                        height={24}
+                                        width={24}
+                                    />
+                                </div>
+                                <div className="column is-narrow px-1">
+                                    scroll below
+                                </div>
+                            </div>
                         </div>
                     </nav>
                 </div>
