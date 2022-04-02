@@ -11,8 +11,13 @@ const Home: NextPage = () => {
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',
                     backgroundSize: 'cover',
-                    boxShadow:
-                        'inset 0 4px 140px 100px #070519, 0 -100px 140px 100px #070519',
+                    boxShadow: `
+                        inset 0 4px 1800px #070519,
+                        inset 0 -50vh 140px 2px rgba(7, 5, 25, 0.9),
+                        inset 0 -25vh 140px 2px rgba(7, 5, 25, 0.7),
+                        inset 0 -10vh 140px 2px rgba(7, 5, 25, 0.4),
+                        inset 0 -5vh 140px 2px rgba(7, 5, 25, 0.2)
+                    `,
                 }}
             >
                 <div className="hero-head">
