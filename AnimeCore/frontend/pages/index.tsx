@@ -1,7 +1,60 @@
 import type { NextPage } from 'next';
+import { Navbar } from '../components/Navbar';
 
 const Home: NextPage = () => {
-    return <h1 className="text-3xl font-bold underline">Hello world!</h1>;
+    return (
+        <>
+            <section
+                className="hero is-fullheight has-background-black"
+                style={{
+                    backgroundImage: `url(${'/images/Hyouka-poster.png'})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                    boxShadow:
+                        'inset 0 4px 140px 100px #070519, 0 -100px 140px 100px #070519',
+                }}
+            >
+                <div className="hero-head">
+                    <Navbar />
+                </div>
+
+                <div className="hero-body">
+                    <div className="container has-text-centered">
+                        <p className="title">Title</p>
+                        <p className="subtitle">Subtitle</p>
+                    </div>
+                </div>
+
+                <div className="hero-foot">
+                    <nav className="tabs">
+                        <div className="container">
+                            <ul>
+                                <li className="is-active">
+                                    <a>Overview</a>
+                                </li>
+                                <li>
+                                    <a>Modifiers</a>
+                                </li>
+                                <li>
+                                    <a>Grid</a>
+                                </li>
+                                <li>
+                                    <a>Elements</a>
+                                </li>
+                                <li>
+                                    <a>Components</a>
+                                </li>
+                                <li>
+                                    <a>Layout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </section>
+        </>
+    );
 };
 
 export default Home;
