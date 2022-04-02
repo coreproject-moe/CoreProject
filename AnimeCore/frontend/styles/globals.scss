@@ -5,6 +5,13 @@ $black : black;
 @import 'bulma/bulma.sass';
 
 
+// Swiper Import
+@import "swiper/scss";
+@import "swiper/scss/effect-fade";
+@import "swiper/scss/navigation";
+@import "swiper/scss/pagination";
+
+
 html{
     scrollbar-width: none;
 

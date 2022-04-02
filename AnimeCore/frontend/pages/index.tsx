@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import type { NextPage } from 'next';
-import { Navbar } from '../components/Navbar';
+import { Navbar } from '@/components/Navbar';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 const Home: NextPage = () => {
     return (
@@ -42,8 +43,8 @@ const Home: NextPage = () => {
                             Energy-conservative high school student Houtarou
                             Oreki ends up with more than he bargained for when
                             he signs up for the Classic Literature Club at his
-                            sister's behest—especially when he realizes how
-                            deep-rooted the club's history really is.
+                            sister&apos;s behest—especially when he realizes how
+                            deep-rooted the club&apos;s history really is.
                             Begrudgingly, Oreki is dragged into an...
                         </div>
                         <div className="subtitle">
