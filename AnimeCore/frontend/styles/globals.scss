@@ -1,5 +1,13 @@
+
+$tag-background-color :#070519;
+$tag-color : white;
 @import 'bulma/bulma.sass';
 
 html{
     scrollbar-width: none;
+
+    .has-text-yellow{
+        color:#E3BD49;
+    }
+
 }

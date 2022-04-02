@@ -24,21 +24,22 @@ export const Navbar = () => {
                 <div id="navbarMenuHeroA" className="navbar-menu">
                     <div className="navbar-end">
                         <span className="navbar-item">
-                            <a className="button is-ghost px-0">
-                                <img
+                            <a className="button is-ghost">
+                                <Image
                                     src="/icons/search.svg"
-                                    width={36}
-                                    height={36}
+                                    width={32}
+                                    height={32}
+                                    layout="fixed"
                                 />
                             </a>
                         </span>
                         <span className="navbar-item px-0">
-                            <img
-                                className="pt-2"
+                            <Image
                                 style={{ maxHeight: '100%' }}
                                 src="/images/placeholder.png"
                                 width={60}
                                 height={60}
+                                layout="fixed"
                             />
                         </span>
                     </div>
