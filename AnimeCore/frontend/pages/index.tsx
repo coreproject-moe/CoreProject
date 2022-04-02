@@ -25,9 +25,30 @@ const Home: NextPage = () => {
                 </div>
 
                 <div className="hero-body">
-                    <div className="container has-text-centered">
-                        <p className="title">Title</p>
-                        <p className="subtitle">Subtitle</p>
+                    <div className="container">
+                        <div className="title has-text-yellow is-size-4">
+                            Featured <span className="is-bold">——</span>
+                        </div>
+                        <div className="title is-size-1 has-text-white">
+                            Hyouka
+                        </div>
+                        <div
+                            className="subtitle is-size-6 has-text-white"
+                            style={{
+                                width: '60%',
+                            }}
+                        >
+                            Energy-conservative high school student Houtarou
+                            Oreki ends up with more than he bargained for when
+                            he signs up for the Classic Literature Club at his
+                            sister's behest—especially when he realizes how
+                            deep-rooted the club's history really is.
+                            Begrudgingly, Oreki is dragged into an...
+                        </div>
+                        <span className="tag is-size-6 mx-1">Mystery</span>
+                        <span className="tag is-size-6 mx-1">
+                            Slice of Life
+                        </span>
                     </div>
                 </div>
 
