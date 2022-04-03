@@ -94,7 +94,7 @@ class EpisodeSerializer(serializers.ModelSerializer):
 
 
 class AnimeInfoSerializer(serializers.ModelSerializer):
-    anime_episodes = serializers.SerializerMethodField()
+    anime_episodes = EpisodeSerializer(many=True, required=False)
     # Everything is generic
     anime_genres = AnimeGenericSerializer(many=True, required=False)
     anime_themes = AnimeGenericSerializer(many=True, required=False)
@@ -111,6 +111,7 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
         # https://stackoverflow.com/questions/38316321/change-a-field-in-a-django-rest-framework-modelserializer-based-on-the-request-t
 
         if self.context["request"].method in ["GET"]:
+            self.fields["anime_episodes"] = serializers.SerializerMethodField()
             self.fields["anime_name_synonyms"] = serializers.StringRelatedField(
                 many=True
             )
