@@ -35,8 +35,8 @@ class EpisodeCommentSerializer(serializers.ModelSerializer):
 
 
 class EpisodeSerializer(serializers.ModelSerializer):
-    episode_comments = EpisodeCommentSerializer(many=True)
     episode_timestamps = EpisodeTimestampSerializer(many=True)
+    episode_comments = serializers.SerializerMethodField()
 
     class Meta:
         model = EpisodeModel
@@ -48,6 +48,9 @@ class EpisodeSerializer(serializers.ModelSerializer):
             "episode_file",
             "episode_summary",
         )
+
+    def get_episode_comments(self, instance):
+        return instance.episode_comments.all().count()
 
     def update(self, instance: EpisodeModel, validated_data) -> dict:
         user = self.context["request"].user
@@ -91,7 +94,7 @@ class EpisodeSerializer(serializers.ModelSerializer):
 
 
 class AnimeInfoSerializer(serializers.ModelSerializer):
-    anime_episodes = serializers.StringRelatedField(many=True)
+    anime_episodes = serializers.SerializerMethodField()
     # Everything is generic
     anime_genres = AnimeGenericSerializer(many=True, required=False)
     anime_themes = AnimeGenericSerializer(many=True, required=False)
@@ -111,6 +114,9 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
             self.fields["anime_name_synonyms"] = serializers.StringRelatedField(
                 many=True
             )
+
+    def get_anime_episodes(self, instance):
+        return instance.anime_episodes.all().count()
 
     def create(self, validated_data):
         """https://www.django-rest-framework.org/api-guide/relations/#writable-nested-serializers"""
@@ -185,6 +191,7 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
                     name=item["name"]
                 )
                 items.append(anime_synonym_model)
+
             anime.anime_name_synonyms.set(items) if items else None
 
         return anime

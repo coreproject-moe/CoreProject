@@ -13,6 +13,10 @@ class FileField:
         return Path("anime_cover", filename)
 
     @staticmethod
+    def anime_charater(instance, filename) -> str:
+        return Path("anime_characters", filename)
+
+    @staticmethod
     def episode_cover(instance, filename) -> str:
         return Path("episode_cover", filename)
 
@@ -41,7 +45,7 @@ class EpisodeCommentModel(models.Model):
 class EpisodeTimestampModel(models.Model):
     timestamp = models.IntegerField(default=0)
     episode_number = models.IntegerField(null=False)
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, db_index=True)
 
     def __str__(self) -> str:
         return f"{self.episode_number}. {self.user}"
@@ -52,7 +56,7 @@ class EpisodeTimestampModel(models.Model):
 
 class EpisodeModel(models.Model):
     episode_number = models.BigIntegerField(default=0)
-    episode_name = models.CharField(max_length=1024)
+    episode_name = models.CharField(max_length=1024, db_index=True)
     episode_cover = models.ImageField(
         upload_to=FileField.episode_cover, default=None, blank=True, null=True
     )
@@ -72,7 +76,9 @@ class EpisodeModel(models.Model):
 
 
 class AnimeProducerModel(models.Model):
-    mal_id = models.IntegerField(unique=True, blank=False, null=False, primary_key=True)
+    mal_id = models.IntegerField(
+        unique=True, blank=False, null=False, primary_key=True, db_index=True
+    )
     name = models.CharField(
         unique=True, max_length=50, default="", null=False, blank=False, db_index=True
     )
@@ -87,11 +93,15 @@ class AnimeProducerModel(models.Model):
 
 
 class AnimeStudioModel(models.Model):
-    mal_id = models.IntegerField(unique=True, blank=False, null=False, primary_key=True)
+    mal_id = models.IntegerField(
+        unique=True, blank=False, null=False, primary_key=True, db_index=True
+    )
     name = models.CharField(
         unique=True, max_length=50, default="", null=False, blank=False, db_index=True
     )
-    type = models.CharField(max_length=50, default="", null=False, blank=False)
+    type = models.CharField(
+        max_length=50, default="", null=False, blank=False, db_index=True
+    )
 
     def __str__(self) -> str:
         return f"{self.mal_id}. {self.name} ({self.type})"
@@ -102,11 +112,15 @@ class AnimeStudioModel(models.Model):
 
 
 class AnimeThemeModel(models.Model):
-    mal_id = models.IntegerField(unique=True, blank=False, null=False, primary_key=True)
+    mal_id = models.IntegerField(
+        unique=True, blank=False, null=False, primary_key=True, db_index=True
+    )
     name = models.CharField(
         unique=True, max_length=50, default="", null=False, blank=False, db_index=True
     )
-    type = models.CharField(max_length=50, default="", null=False, blank=False)
+    type = models.CharField(
+        max_length=50, default="", null=False, blank=False, db_index=True
+    )
 
     def __str__(self) -> str:
         return f"{self.mal_id}. {self.name} ({self.type})"
@@ -117,11 +131,15 @@ class AnimeThemeModel(models.Model):
 
 
 class AnimeGenreModel(models.Model):
-    mal_id = models.IntegerField(unique=True, blank=False, null=False, primary_key=True)
+    mal_id = models.IntegerField(
+        unique=True, blank=False, null=False, primary_key=True, db_index=True
+    )
     name = models.CharField(
         unique=True, max_length=50, default="", null=False, blank=False, db_index=True
     )
-    type = models.CharField(max_length=50, default="", null=False, blank=False)
+    type = models.CharField(
+        max_length=50, default="", null=False, blank=False, db_index=True
+    )
 
     def __str__(self) -> str:
         return f"{self.mal_id}. {self.name} ({self.type})"
@@ -140,6 +158,25 @@ class AnimeSynonymModel(models.Model):
     class Meta:
         verbose_name = "Anime Synonym"
         ordering = ("-id",)
+
+
+class AnimeCharacterModel(models.Model):
+    mal_id = models.IntegerField(unique=True, db_index=True)
+    name = models.CharField(max_length=1024, unique=True, db_index=True)
+    character_image = models.ImageField(
+        upload_to=FileField.anime_charater, default=None, blank=True, null=True
+    )
+
+    class Meta:
+        ordering = ("mal_id",)
+
+
+class AnimeRecommendationModel(models.Model):
+    mal_id = models.IntegerField(unique=True, db_index=True)
+    mal_url = models.URLField(unique=True)
+
+    class Meta:
+        ordering = ("mal_id",)
 
 
 class AnimeInfoModel(models.Model):
@@ -162,8 +199,9 @@ class AnimeInfoModel(models.Model):
     anime_studios = models.ManyToManyField(AnimeStudioModel, blank=True)
     anime_producers = models.ManyToManyField(AnimeProducerModel, blank=True)
     anime_name_synonyms = models.ManyToManyField(AnimeSynonymModel, blank=True)
-
+    anime_recommendations = models.ManyToManyField(AnimeRecommendationModel, blank=True)
     anime_episodes = models.ManyToManyField(EpisodeModel, blank=True)
+    
     updated = models.DateTimeField(auto_now_add=True)
 
     # anime_rating = models.CharField(max_length=128)
