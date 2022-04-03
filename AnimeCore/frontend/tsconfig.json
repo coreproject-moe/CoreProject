@@ -1,34 +1,31 @@
 {
-  "compilerOptions": {
-    "baseUrl": ".",
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": true,       
-    "noImplicitAny": true,        
-    "allowUnreachableCode": false,
-    "exactOptionalPropertyTypes": true,
-    "paths": {
-      // Urls
-      "@/components/*": ["components/*"],
-    
-  }
-  },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": ["node_modules"]
+    "extends": "./.svelte-kit/tsconfig.json",
+    "compilerOptions": {
+        "strict": true,
+        "allowUnreachableCode": false,
+        "exactOptionalPropertyTypes": true,
+        "noImplicitAny": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUncheckedIndexedAccess": true,
+        "paths": {
+            // Urls
+            "$urls": ["src/lib/constants/backend/urls"],
+            "$urls/*": ["src/lib/constants/backend/urls/*"],
+            // Stores
+            "$store": ["src/lib/store"],
+            "$store/*": ["src/lib/store/*"],
+            // Hooks
+            "$hooks": ["src/hooks"],
+            "$hooks/*": ["src/hooks/*"],
+            // Components
+            "$components": ["src/lib/components"],
+            "$components/*": ["src/lib/components/*"],
+            // Svelte Defined
+            "$lib": ["src/lib"],
+            "$lib/*": ["src/lib/*"]
+        }
+    }
 }
