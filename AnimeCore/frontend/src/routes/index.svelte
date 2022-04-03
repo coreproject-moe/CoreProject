@@ -65,7 +65,7 @@
             <div class="subtitle is-size-6 has-text-white pt-5" style="width: 60%;">
                 Energy-conservative high school student Houtarou Oreki ends up with more than he
                 bargained for when he signs up for the Classic Literature Club at his sister&apos;s
-                behest—especially when he realizes how deep-rooted the club&apos;s history really
+                behest especially when he realizes how deep-rooted the club&apos;s history really
                 is. Begrudgingly, Oreki is dragged into an...
             </div>
             <div class="subtitle">
@@ -75,7 +75,7 @@
             <div class="subtitle">
                 <div class="buttons">
                     <button
-                        class="button is-warning has-border-transparent mx-3"
+                        class="button is-warning has-border-transparent mx-2"
                         style="border-radius: 12px"
                     >
                         <span class="icon is-small">
