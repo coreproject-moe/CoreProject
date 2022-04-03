@@ -91,7 +91,7 @@ class EpisodeSerializer(serializers.ModelSerializer):
 
 
 class AnimeInfoSerializer(serializers.ModelSerializer):
-    anime_episodes = serializers.StringRelatedField(many=True, required=False)
+    anime_episodes = serializers.StringRelatedField(many=True)
     # Everything is generic
     anime_genres = AnimeGenericSerializer(many=True, required=False)
     anime_themes = AnimeGenericSerializer(many=True, required=False)
