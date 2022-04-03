@@ -10,6 +10,7 @@ from .models import (
     AnimeStudioModel,
     AnimeProducerModel,
     AnimeSynonymModel,
+    AnimeRecommendationModel,
 )
 
 # Register your models here.
@@ -26,5 +27,6 @@ admin.site.register(
         AnimeStudioModel,
         AnimeProducerModel,
         AnimeSynonymModel,
+        AnimeRecommendationModel,
     ]
 )

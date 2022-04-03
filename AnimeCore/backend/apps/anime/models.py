@@ -72,7 +72,6 @@ class EpisodeModel(models.Model):
 
     class Meta:
         verbose_name = "Episode"
-        ordering = ("id",)
 
 
 class AnimeProducerModel(models.Model):
@@ -89,7 +88,6 @@ class AnimeProducerModel(models.Model):
 
     class Meta:
         verbose_name = "Anime Producer"
-        ordering = ("mal_id",)
 
 
 class AnimeStudioModel(models.Model):
@@ -108,7 +106,6 @@ class AnimeStudioModel(models.Model):
 
     class Meta:
         verbose_name = "Anime Studio"
-        ordering = ("mal_id",)
 
 
 class AnimeThemeModel(models.Model):
@@ -127,7 +124,6 @@ class AnimeThemeModel(models.Model):
 
     class Meta:
         verbose_name = "Anime Theme"
-        ordering = ("mal_id",)
 
 
 class AnimeGenreModel(models.Model):
@@ -146,7 +142,6 @@ class AnimeGenreModel(models.Model):
 
     class Meta:
         verbose_name = "Anime Genre"
-        ordering = ("mal_id",)
 
 
 class AnimeSynonymModel(models.Model):
@@ -157,7 +152,6 @@ class AnimeSynonymModel(models.Model):
 
     class Meta:
         verbose_name = "Anime Synonym"
-        ordering = ("-id",)
 
 
 class AnimeCharacterModel(models.Model):
@@ -168,15 +162,20 @@ class AnimeCharacterModel(models.Model):
     )
 
     class Meta:
-        ordering = ("mal_id",)
+        verbose_name = "Anime Characters"
 
 
 class AnimeRecommendationModel(models.Model):
-    mal_id = models.IntegerField(unique=True, db_index=True)
+    entry = models.ForeignKey(
+        to="AnimeInfoModel", on_delete=models.PROTECT, null=True, blank=True
+    )
     mal_url = models.URLField(unique=True)
 
+    def __str__(self) -> str:
+        return f"{self.entry}"
+
     class Meta:
-        ordering = ("mal_id",)
+        verbose_name = "Anime Recommendations"
 
 
 class AnimeInfoModel(models.Model):
@@ -201,7 +200,7 @@ class AnimeInfoModel(models.Model):
     anime_name_synonyms = models.ManyToManyField(AnimeSynonymModel, blank=True)
     anime_recommendations = models.ManyToManyField(AnimeRecommendationModel, blank=True)
     anime_episodes = models.ManyToManyField(EpisodeModel, blank=True)
-    
+
     updated = models.DateTimeField(auto_now_add=True)
 
     # anime_rating = models.CharField(max_length=128)
@@ -211,4 +210,3 @@ class AnimeInfoModel(models.Model):
 
     class Meta:
         verbose_name = "Anime"
-        ordering = ("mal_id",)
