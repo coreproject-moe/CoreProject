@@ -18,7 +18,9 @@ html{
     scrollbar-width: none;
 
     // Bulma inspired classes
- 
+    .has-warning-light{
+        color:#EDD68D
+    }
     .has-border-transparent {
         border-color: transparent !important;
     }
