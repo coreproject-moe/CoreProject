@@ -103,6 +103,7 @@ class AnimeRecommendationSerializer(serializers.ModelSerializer):
     def to_representation(self, instance):
         ret = super().to_representation(instance)
 
+        # https://stackoverflow.com/questions/61752042/exclude-fields-when-nesting-serializer-django-rest-framework
         # Remove some fields
         ret["entry"].pop("id", None)
         ret["entry"].pop("anime_aired_from", None)
