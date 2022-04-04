@@ -1,10 +1,22 @@
 from django.urls import path, include
 from rest_framework_nested import routers
 
-from .views import AnimeInfoView, EpisodeView, EpisodeCommentView
+from .views import (
+    AnimeInfoView,
+    EpisodeView,
+    EpisodeCommentView,
+    AnimeRecommendationView,
+)
 
 router = routers.SimpleRouter()
 router.register(r"anime", AnimeInfoView, basename="anime_info")
+
+anime_recommendation_router = routers.NestedSimpleRouter(
+    router, r"anime", lookup="anime"
+)
+anime_recommendation_router.register(
+    r"recommendations", AnimeRecommendationView, basename="recommendations"
+)
 
 episode_router = routers.NestedSimpleRouter(router, r"anime", lookup="anime")
 episode_router.register(r"episodes", EpisodeView, basename="episodes")
@@ -20,6 +32,7 @@ episode_comment_router.register(
 urlpatterns = [
     path("anime/random/", AnimeInfoView.as_view({"get": "random"})),
     path("", include(router.urls)),
+    path("", include(anime_recommendation_router.urls)),
     path("", include(episode_router.urls)),
     path("", include(episode_comment_router.urls)),
 ]

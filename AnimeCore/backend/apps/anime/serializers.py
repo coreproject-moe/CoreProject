@@ -94,39 +94,8 @@ class EpisodeSerializer(serializers.ModelSerializer):
             return serializer
 
 
-class AnimeRecommendationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AnimeRecommendationModel
-        depth = 1
-        fields = "__all__"
-
-    def to_representation(self, instance):
-        ret = super().to_representation(instance)
-
-        # https://stackoverflow.com/questions/61752042/exclude-fields-when-nesting-serializer-django-rest-framework
-        # Remove some fields
-        ret["entry"].pop("id", None)
-        ret["entry"].pop("anime_aired_from", None)
-        ret["entry"].pop("anime_aired_to", None)
-        ret["entry"].pop("anime_synopsis", None)
-        ret["entry"].pop("anime_background", None)
-        ret["entry"].pop("anime_rating", None)
-        ret["entry"].pop("updated", None)
-        ret["entry"].pop("anime_genres", None)
-        ret["entry"].pop("anime_source", None)
-        ret["entry"].pop("anime_themes", None)
-        ret["entry"].pop("anime_studios", None)
-        ret["entry"].pop("anime_producers", None)
-        ret["entry"].pop("anime_name_synonyms", None)
-        ret["entry"].pop("anime_recommendations", None)
-        ret["entry"].pop("anime_episodes", None)
-
-        return ret
-
-
 class AnimeInfoSerializer(serializers.ModelSerializer):
     anime_episodes = EpisodeSerializer(many=True, required=False)
-    anime_recommendations = AnimeRecommendationSerializer(many=True, required=False)
     # Everything is generic
     anime_genres = AnimeGenericSerializer(many=True, required=False)
     anime_themes = AnimeGenericSerializer(many=True, required=False)
@@ -302,3 +271,32 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
         instance.save()
 
         return instance
+
+
+class AnimeRecommendationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AnimeRecommendationModel
+        fields = "__all__"
+
+    def to_representation(self, instance):
+        ret = super().to_representation(instance)
+
+        # https://stackoverflow.com/questions/61752042/exclude-fields-when-nesting-serializer-django-rest-framework
+        # Remove some fields
+        ret["entry"].pop("id", None)
+        ret["entry"].pop("anime_aired_from", None)
+        ret["entry"].pop("anime_aired_to", None)
+        ret["entry"].pop("anime_synopsis", None)
+        ret["entry"].pop("anime_background", None)
+        ret["entry"].pop("anime_rating", None)
+        ret["entry"].pop("updated", None)
+        ret["entry"].pop("anime_genres", None)
+        ret["entry"].pop("anime_source", None)
+        ret["entry"].pop("anime_themes", None)
+        ret["entry"].pop("anime_studios", None)
+        ret["entry"].pop("anime_producers", None)
+        ret["entry"].pop("anime_name_synonyms", None)
+        ret["entry"].pop("anime_recommendations", None)
+        ret["entry"].pop("anime_episodes", None)
+
+        return ret
