@@ -105,7 +105,7 @@ class AnimeRecommendationView(
         # https://stackoverflow.com/questions/31038742/pass-request-context-to-serializer-from-viewset-in-django-rest-framework
         context = super().get_serializer_context()
         context.update(
-            {"request": self.request},
+            {"anime_id": self.kwargs["anime_id"]},
         )
         return context
 
