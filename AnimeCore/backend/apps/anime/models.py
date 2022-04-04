@@ -165,19 +165,6 @@ class AnimeCharacterModel(models.Model):
         verbose_name = "Anime Characters"
 
 
-class AnimeRecommendationModel(models.Model):
-    entry = models.ForeignKey(
-        to="AnimeInfoModel", on_delete=models.PROTECT, null=True, blank=True
-    )
-    mal_url = models.URLField(unique=True)
-
-    def __str__(self) -> str:
-        return f"{self.entry}"
-
-    class Meta:
-        verbose_name = "Anime Recommendations"
-
-
 class AnimeInfoModel(models.Model):
     mal_id = models.IntegerField(unique=True, blank=False, null=False)
     # anilist_id = models.IntegerField(unique=True, blank=False, null=False)
@@ -198,7 +185,6 @@ class AnimeInfoModel(models.Model):
     anime_studios = models.ManyToManyField(AnimeStudioModel, blank=True)
     anime_producers = models.ManyToManyField(AnimeProducerModel, blank=True)
     anime_name_synonyms = models.ManyToManyField(AnimeSynonymModel, blank=True)
-    anime_recommendations = models.ManyToManyField(AnimeRecommendationModel, blank=True)
     anime_episodes = models.ManyToManyField(EpisodeModel, blank=True)
 
     updated = models.DateTimeField(auto_now_add=True)
@@ -210,3 +196,16 @@ class AnimeInfoModel(models.Model):
 
     class Meta:
         verbose_name = "Anime"
+
+
+class AnimeRecommendationModel(models.Model):
+    entry = models.ForeignKey(
+        to=AnimeInfoModel, on_delete=models.PROTECT, null=True, blank=True
+    )
+    mal_url = models.URLField(unique=True)
+
+    def __str__(self) -> str:
+        return f"{self.entry}"
+
+    class Meta:
+        verbose_name = "Anime Recommendations"

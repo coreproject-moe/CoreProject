@@ -20,9 +20,10 @@ from rest_framework.parsers import (
 
 from .filters import AnimeInfoFilter
 from .permissions import IsSuperUserOrReadOnly
-from .models import AnimeInfoModel
+from .models import AnimeInfoModel, AnimeRecommendationModel
 from .serializers import (
     AnimeInfoSerializer,
+    AnimeRecommendationSerializer,
     EpisodeCommentSerializer,
     EpisodeSerializer,
 )
@@ -78,6 +79,33 @@ class AnimeInfoView(
         serializer = self.get_serializer(queryset, many=True)
 
         return Response(data=serializer.data)
+
+
+class AnimeRecommendationView(
+    ListModelMixin,
+    GenericViewSet,
+):
+    """
+    Returns :
+        - Comments
+    """
+
+    serializer_class = AnimeRecommendationSerializer
+    permission_classes = [IsSuperUserOrReadOnly]
+
+    def get_queryset(self):
+        instance = AnimeRecommendationModel.objects.all()
+        queryset = get_object_or_404(instance, entry__id__in=self.kwargs["anime_id"])
+        return queryset
+
+    def get_serializer_context(self):
+        # Thanks StackOverFlow
+        # https://stackoverflow.com/questions/31038742/pass-request-context-to-serializer-from-viewset-in-django-rest-framework
+        context = super().get_serializer_context()
+        context.update(
+            {"request": self.request},
+        )
+        return context
 
 
 class EpisodeView(
