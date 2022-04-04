@@ -202,7 +202,7 @@ class AnimeRecommendationModel(models.Model):
     entry = models.ForeignKey(
         to=AnimeInfoModel, on_delete=models.SET_NULL, null=True, blank=True
     )
-    anime_id = models.IntegerField(db_index=True)
+    anime = models.IntegerField(db_index=True)
     mal_url = models.URLField(unique=True)
 
     def __str__(self) -> str:
