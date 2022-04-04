@@ -110,12 +110,12 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # https://stackoverflow.com/questions/38316321/change-a-field-in-a-django-rest-framework-modelserializer-based-on-the-request-t
-
-        if self.context["request"].method in ["GET"]:
-            self.fields["anime_episodes"] = serializers.SerializerMethodField()
-            self.fields["anime_name_synonyms"] = serializers.StringRelatedField(
-                many=True
-            )
+        if self.context.get("request", None):
+            if self.context["request"].method in ["GET"]:
+                self.fields["anime_episodes"] = serializers.SerializerMethodField()
+                self.fields["anime_name_synonyms"] = serializers.StringRelatedField(
+                    many=True
+                )
 
     def get_anime_episodes(self, instance):
         return instance.anime_episodes.all().count()
@@ -273,31 +273,15 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
         return instance
 
 
+class AnimeRecommendationEntrySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AnimeInfoModel
+        fields = ("mal_id", "anime_name", "anime_cover")
+
+
 class AnimeRecommendationSerializer(serializers.ModelSerializer):
+    entry = AnimeRecommendationEntrySerializer(many=False)
+
     class Meta:
         model = AnimeRecommendationModel
-        depth = 1
         fields = "__all__"
-
-    def to_representation(self, instance):
-        ret = super().to_representation(instance)
-
-        # https://stackoverflow.com/questions/61752042/exclude-fields-when-nesting-serializer-django-rest-framework
-        # Remove some fields
-        ret["entry"].pop("id", None)
-        ret["entry"].pop("anime_aired_from", None)
-        ret["entry"].pop("anime_aired_to", None)
-        ret["entry"].pop("anime_synopsis", None)
-        ret["entry"].pop("anime_background", None)
-        ret["entry"].pop("anime_rating", None)
-        ret["entry"].pop("updated", None)
-        ret["entry"].pop("anime_genres", None)
-        ret["entry"].pop("anime_source", None)
-        ret["entry"].pop("anime_themes", None)
-        ret["entry"].pop("anime_studios", None)
-        ret["entry"].pop("anime_producers", None)
-        ret["entry"].pop("anime_name_synonyms", None)
-        ret["entry"].pop("anime_recommendations", None)
-        ret["entry"].pop("anime_episodes", None)
-
-        return ret
