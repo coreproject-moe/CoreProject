@@ -276,6 +276,7 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
 class AnimeRecommendationSerializer(serializers.ModelSerializer):
     class Meta:
         model = AnimeRecommendationModel
+        depth = 1
         fields = "__all__"
 
     def to_representation(self, instance):
