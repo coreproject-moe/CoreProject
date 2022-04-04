@@ -7,23 +7,28 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('anime', '0012_remove_animerecommendationmodel_entry_and_more'),
+        ("anime", "0012_remove_animerecommendationmodel_entry_and_more"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='animerecommendationmodel',
-            name='mal_id',
+            model_name="animerecommendationmodel",
+            name="mal_id",
             field=models.IntegerField(db_index=True, default=0),
             preserve_default=False,
         ),
         migrations.RemoveField(
-            model_name='animerecommendationmodel',
-            name='entry',
+            model_name="animerecommendationmodel",
+            name="entry",
         ),
         migrations.AddField(
-            model_name='animerecommendationmodel',
-            name='entry',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='anime.animeinfomodel'),
+            model_name="animerecommendationmodel",
+            name="entry",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                to="anime.animeinfomodel",
+            ),
         ),
     ]

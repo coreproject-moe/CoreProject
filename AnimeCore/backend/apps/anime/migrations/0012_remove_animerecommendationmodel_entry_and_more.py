@@ -6,17 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('anime', '0011_remove_animeinfomodel_anime_recommendations'),
+        ("anime", "0011_remove_animeinfomodel_anime_recommendations"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='animerecommendationmodel',
-            name='entry',
+            model_name="animerecommendationmodel",
+            name="entry",
         ),
         migrations.AddField(
-            model_name='animerecommendationmodel',
-            name='entry',
-            field=models.ManyToManyField(blank=True, to='anime.animeinfomodel'),
+            model_name="animerecommendationmodel",
+            name="entry",
+            field=models.ManyToManyField(blank=True, to="anime.animeinfomodel"),
         ),
     ]

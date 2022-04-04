@@ -14,7 +14,11 @@ from .models import (
 )
 
 # Register your models here.
+class AnimeRecommendationAdmin(admin.ModelAdmin):
+    raw_id_fields = ("entry",)
 
+
+admin.site.register(AnimeRecommendationModel, AnimeRecommendationAdmin)
 
 admin.site.register(
     [
@@ -27,6 +31,5 @@ admin.site.register(
         AnimeStudioModel,
         AnimeProducerModel,
         AnimeSynonymModel,
-        AnimeRecommendationModel,
     ]
 )
