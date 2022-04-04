@@ -83,6 +83,7 @@ class AnimeInfoView(
 
 class AnimeRecommendationView(
     ListModelMixin,
+    CreateModelMixin,
     GenericViewSet,
 ):
     """
@@ -94,8 +95,9 @@ class AnimeRecommendationView(
     permission_classes = [IsSuperUserOrReadOnly]
 
     def get_queryset(self):
-        instance = AnimeRecommendationModel.objects.all()
-        queryset = get_object_or_404(instance, entry__id__in=self.kwargs["anime_id"])
+        queryset = AnimeRecommendationModel.objects.filter(
+            anime_id=self.kwargs["anime_id"]
+        )
         return queryset
 
     def get_serializer_context(self):
