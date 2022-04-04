@@ -75,6 +75,7 @@ MIDDLEWARE = [
 
 # https://docs.djangoproject.com/en/4.0/topics/cache/#the-per-site-cache-1
 CACHE_MIDDLEWARE_SECONDS = 0
+
 # Debug Toolbar Middleware
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#add-the-middleware
 if DEBUG:
