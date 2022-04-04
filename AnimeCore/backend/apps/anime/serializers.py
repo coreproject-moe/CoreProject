@@ -14,12 +14,6 @@ from .models import (
 )
 
 
-class AnimeGenericSerializer(serializers.Serializer):
-    mal_id = serializers.IntegerField(required=False)
-    name = serializers.CharField(required=True)
-    type = serializers.CharField(required=False)
-
-
 class EpisodeTimestampSerializer(serializers.ModelSerializer):
     class Meta:
         model = EpisodeTimestampModel
@@ -94,6 +88,12 @@ class EpisodeSerializer(serializers.ModelSerializer):
             return serializer
 
 
+class AnimeGenericSerializer(serializers.Serializer):
+    mal_id = serializers.IntegerField(required=False)
+    name = serializers.CharField(required=True)
+    type = serializers.CharField(required=False)
+
+
 class AnimeInfoSerializer(serializers.ModelSerializer):
     anime_episodes = EpisodeSerializer(many=True, required=False)
     # Everything is generic
@@ -110,12 +110,11 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # https://stackoverflow.com/questions/38316321/change-a-field-in-a-django-rest-framework-modelserializer-based-on-the-request-t
-        if self.context.get("request", None):
-            if self.context["request"].method in ["GET"]:
-                self.fields["anime_episodes"] = serializers.SerializerMethodField()
-                self.fields["anime_name_synonyms"] = serializers.StringRelatedField(
-                    many=True
-                )
+        if self.context["request"].method in ["GET"]:
+            self.fields["anime_episodes"] = serializers.SerializerMethodField()
+            self.fields["anime_name_synonyms"] = serializers.StringRelatedField(
+                many=True
+            )
 
     def get_anime_episodes(self, instance):
         return instance.anime_episodes.all().count()
@@ -130,6 +129,7 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
         synonyms = validated_data.pop("anime_name_synonyms", None)
 
         anime = AnimeInfoModel.objects.create(**validated_data)
+
         if genres:
             items = []
             for item in genres:
@@ -273,10 +273,11 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
         return instance
 
 
-class AnimeRecommendationEntrySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AnimeInfoModel
-        fields = ("mal_id", "anime_name", "anime_cover")
+class AnimeRecommendationEntrySerializer(serializers.Serializer):
+    id = serializers.IntegerField(read_only=True)
+    mal_id = serializers.IntegerField()
+    anime_name = serializers.CharField(read_only=True)
+    anime_cover = serializers.CharField(read_only=True)
 
 
 class AnimeRecommendationSerializer(serializers.ModelSerializer):
@@ -284,4 +285,12 @@ class AnimeRecommendationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AnimeRecommendationModel
-        fields = "__all__"
+        exclude = ("anime",)
+
+    def create(self, validated_data):
+        instance, _ = AnimeRecommendationModel.objects.get_or_create(
+            entry=AnimeInfoModel.objects.get(mal_id=validated_data["entry"]["mal_id"]),
+            anime=self.context["anime_id"],
+            mal_url=validated_data["mal_url"],
+        )
+        return instance
