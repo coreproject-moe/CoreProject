@@ -17,7 +17,7 @@
         "@sveltejs/kit": "^1.0.0-next.311",
         "@types/animejs": "^3.1.4",
         "@typescript-eslint/eslint-plugin": "^5.18.0",
-        "@typescript-eslint/parser": "^5.18.0",
+        "@typescript-eslint/parser": "^5.19.0",
         "animejs": "^3.2.1",
         "autoprefixer": "^10.4.4",
         "bulma": "^0.9.3",
