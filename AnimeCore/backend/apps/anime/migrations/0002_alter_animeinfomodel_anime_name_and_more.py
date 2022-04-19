@@ -6,28 +6,30 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('anime', '0001_initial_squashed_0046_episodetimestampmodel_episode_number_and_more_squashed_0027_alter_animeinfomodel_anime_name_and_more'),
+        ("anime", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='animeinfomodel',
-            name='anime_name',
+            model_name="animeinfomodel",
+            name="anime_name",
             field=models.CharField(max_length=1024),
         ),
         migrations.AlterField(
-            model_name='animeinfomodel',
-            name='anime_name_japanese',
+            model_name="animeinfomodel",
+            name="anime_name_japanese",
             field=models.CharField(max_length=1024, null=True),
         ),
         migrations.AlterField(
-            model_name='animeinfomodel',
-            name='id',
-            field=models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID'),
+            model_name="animeinfomodel",
+            name="id",
+            field=models.BigAutoField(
+                auto_created=True, primary_key=True, serialize=False, verbose_name="ID"
+            ),
         ),
         migrations.AlterField(
-            model_name='animesynonymmodel',
-            name='name',
+            model_name="animesynonymmodel",
+            name="name",
             field=models.CharField(max_length=100, unique=True),
         ),
     ]
