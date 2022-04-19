@@ -84,39 +84,18 @@
                             <img alt="" src="/icons/play.svg" height={24} width={24} />
                         </span>
                     </button>
-                    <button
-                        class="button is-warning is-outlined mx-3"
-                        style="border-radius: 16px; border-width: 3px"
-                    >
+                    <button class="button is-warning is-outlined mx-3">
                         <span class="is-bold">Details</span>
                         <img alt="" src="/icons/chevrons-right.svg" height={24} width={24} />
                     </button>
-                    <button
-                        class="button is-warning is-outlined mx-2"
-                        style="border-radius: 16px; border-width: 3px"
-                    >
+                    <button class="button is-warning is-outlined mx-2" on:click={onBackClick}>
                         <span class="icon is-small">
-                            <img
-                                alt=""
-                                src="/icons/chevron-left.svg"
-                                on:click={onBackClick}
-                                height={24}
-                                width={24}
-                            />
+                            <img alt="" src="/icons/chevron-left.svg" height={24} width={24} />
                         </span>
                     </button>
-                    <button
-                        class="button is-warning is-outlined mx-1"
-                        style="border-radius: 16px;border-width: 3px"
-                    >
+                    <button class="button is-warning is-outlined mx-1" on:click={onForwardClick}>
                         <span class="icon is-small">
-                            <img
-                                alt=""
-                                src="/icons/chevron-right.svg"
-                                on:click={onForwardClick}
-                                height={24}
-                                width={24}
-                            />
+                            <img alt="" src="/icons/chevron-right.svg" height={24} width={24} />
                         </span>
                     </button>
                 </div>
@@ -138,3 +117,11 @@
         </nav>
     </div>
 </section>
+
+<style>
+    .button {
+        border-radius: 16px;
+        border-width: 3px;
+        height: 24px;
+    }
+</style>
