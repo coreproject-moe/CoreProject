@@ -26,7 +26,6 @@ class AnimeInfoView(
     GenericViewSet,
     CreateModelMixin,
     ListModelMixin,
-    
     RetrieveModelMixin,
     UpdateModelMixin,
 ):
