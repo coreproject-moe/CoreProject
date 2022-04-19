@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Swiper, SwiperSlide } from "swiper/svelte";
 
-    import { Controller, EffectFade, Navigation, Pagination } from "swiper";
+    import { EffectFade, Parallax } from "swiper";
     import MainHero from "$components/swiper/MainHero.svelte";
 
     let mainSlide = 0;
@@ -23,15 +23,22 @@
     };
 </script>
 
-<Swiper modules={[EffectFade, Controller]} effect="fade" on:swiper={onSwiper}>
-    {#each Array(100) as f, i}
+<div>
+    <Swiper speed={600} parallax={true} direction="vertical" modules={[Parallax]} autoHeight={true}>
         <SwiperSlide>
-            <MainHero
-                backgroundImageUrl={"/images/Hyouka-poster.png"}
-                animeName="Hyouka {i}"
-                onBackClick={onSwiperBackward}
-                onForwardClick={onSwiperForward}
-            />
+            <Swiper modules={[EffectFade]} effect="fade" on:swiper={onSwiper}>
+                {#each Array(100) as f, i}
+                    <SwiperSlide>
+                        <MainHero
+                            backgroundImageUrl={"/images/Hyouka-poster.png"}
+                            animeName="Hyouka {i}"
+                            onBackClick={onSwiperBackward}
+                            onForwardClick={onSwiperForward}
+                        />
+                    </SwiperSlide>
+                {/each}
+            </Swiper>
         </SwiperSlide>
-    {/each}
-</Swiper>
+        <SwiperSlide>Hello world</SwiperSlide>
+    </Swiper>
+</div>
