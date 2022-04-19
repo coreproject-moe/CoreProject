@@ -2,6 +2,8 @@ from django.db import models
 
 from .anime_info import AnimeInfoModel
 
+# Create your models here.
+
 
 class AnimeRecommendationModel(models.Model):
     entry = models.ForeignKey(

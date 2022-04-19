@@ -10,6 +10,9 @@ class FileField:
         return Path("anime_characters", filename)
 
 
+# Create your models here.
+
+
 class AnimeCharacterModel(models.Model):
     mal_id = models.IntegerField(unique=True, db_index=True)
     name = models.CharField(max_length=1024, unique=True, db_index=True)
