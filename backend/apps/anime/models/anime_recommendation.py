@@ -16,4 +16,4 @@ class AnimeRecommendationModel(models.Model):
         return f"{self.entry}"
 
     class Meta:
-        verbose_name = "Anime Recommendations"
+        verbose_name = "Anime Recommendation"
