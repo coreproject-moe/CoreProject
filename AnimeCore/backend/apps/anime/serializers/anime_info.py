@@ -11,7 +11,7 @@ from ..models import (
 )
 
 
-class AnimeGenericSerializer(serializers.Serializer):
+class AnimeeInfoGenericSerializer(serializers.Serializer):
     mal_id = serializers.IntegerField(required=False)
     name = serializers.CharField(required=True)
     type = serializers.CharField(required=False)
@@ -19,12 +19,13 @@ class AnimeGenericSerializer(serializers.Serializer):
 
 class AnimeInfoSerializer(serializers.ModelSerializer):
     anime_episodes = EpisodeSerializer(many=True, required=False)
+
     # Everything is generic
-    anime_genres = AnimeGenericSerializer(many=True, required=False)
-    anime_themes = AnimeGenericSerializer(many=True, required=False)
-    anime_studios = AnimeGenericSerializer(many=True, required=False)
-    anime_producers = AnimeGenericSerializer(many=True, required=False)
-    anime_name_synonyms = AnimeGenericSerializer(many=True, required=False)
+    anime_genres = AnimeeInfoGenericSerializer(many=True, required=False)
+    anime_themes = AnimeeInfoGenericSerializer(many=True, required=False)
+    anime_studios = AnimeeInfoGenericSerializer(many=True, required=False)
+    anime_producers = AnimeeInfoGenericSerializer(many=True, required=False)
+    anime_name_synonyms = AnimeeInfoGenericSerializer(many=True, required=False)
 
     class Meta:
         model = AnimeInfoModel
