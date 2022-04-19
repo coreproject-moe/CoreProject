@@ -1,5 +1,7 @@
 from django.db import models
 
+# Create your models here.
+
 
 class AnimeStudioModel(models.Model):
     mal_id = models.IntegerField(

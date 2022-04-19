@@ -17,6 +17,9 @@ class FileField:
         return Path("episode", filename)
 
 
+# Create your models here.
+
+
 class EpisodeModel(models.Model):
     episode_number = models.BigIntegerField(default=0)
     episode_name = models.CharField(max_length=1024, db_index=True)

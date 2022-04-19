@@ -21,6 +21,9 @@ class FileField:
         return Path("anime_characters", filename)
 
 
+# Create your models here.
+
+
 class AnimeInfoModel(models.Model):
     mal_id = models.IntegerField(unique=True, blank=False, null=False)
     # anilist_id = models.IntegerField(unique=True, blank=False, null=False)
