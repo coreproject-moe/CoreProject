@@ -6,11 +6,11 @@
 version: 2
 updates:
     - package-ecosystem: 'pip' # See documentation for possible values
-      directory: '/AnimeCore/backend/' # Location of package manifests
+      directory: '/backend/' # Location of package manifests
       schedule:
           interval: 'daily'
 
     - package-ecosystem: 'npm' # See documentation for possible values
-      directory: '/AnimeCore/frontend/' # Location of package manifests
+      directory: '/frontend/AnimeCore/' # Location of package manifests
       schedule:
           interval: 'daily'
