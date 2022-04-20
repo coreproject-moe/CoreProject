@@ -41,15 +41,4 @@
     <SwiperSlide>Hello world</SwiperSlide>
 </Swiper>
 
-<style global>
-    html,
-    body {
-        position: relative;
-        height: 100%;
-    }
 
-    .swiper {
-        width: 100%;
-        height: 100%;
-    }
-</style>
