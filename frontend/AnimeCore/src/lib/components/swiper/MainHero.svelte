@@ -60,8 +60,14 @@
     <!-- Hero content: will be in the middle -->
     <div class="hero-body is-align-items-self-end">
         <div class="container">
-            <div class="title has-text-warning is-size-4">
-                Featured <span class="is-bold">——</span>
+            <div class="title has-text-warning is-size-4 container">
+                <div class="is-flex">
+                    <span class="pr-2">Featured</span>
+                    <div
+                        class="is-align-self-center"
+                        style="display: inline-block;width: 4em;border-top: 6px solid;"
+                    />
+                </div>
             </div>
             <div class="title is-size-1 has-text-white is-bold">{animeName}</div>
             <div class="subtitle is-size-6 has-text-white pt-5" style="width: 60%;">
@@ -118,7 +124,7 @@
     </div>
 </section>
 
-<style>
+<style lang="scss">
     .button {
         border-radius: 16px;
         border-width: 3px;
