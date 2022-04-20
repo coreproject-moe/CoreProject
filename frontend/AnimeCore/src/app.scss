@@ -2,6 +2,7 @@ $tag-color : white;
 
 $warning : #E3BD49;
 $black : black;
+$white : #F2F2F2;
 
 @import 'bulma/bulma.sass';
 
@@ -14,6 +15,7 @@ $black : black;
 
 html{
     scrollbar-width: none;
+    background-color:#070519;
     
     // Swiper Override
     &, body {

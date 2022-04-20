@@ -62,7 +62,7 @@
         <div class="container">
             <div class="title has-text-warning is-size-4 container">
                 <div class="is-flex">
-                    <span class="pr-2">Featured</span>
+                    <span class="pr-2 is-align-self-center">Featured</span>
                     <div
                         class="is-align-self-center"
                         style="display: inline-block;width: 4em;border-top: 6px solid;"
