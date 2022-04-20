@@ -16,7 +16,16 @@ html{
     scrollbar-width: none;
     
     // Swiper Override
+    &, body {
+        position: relative;
+        height: 100%;
+    }
+    
     #app {
+        height: 100%;
+    }
+    .swiper {
+        width: 100%;
         height: 100%;
     }
 
