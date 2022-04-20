@@ -10,12 +10,15 @@ $black : black;
 @import "swiper/scss";
 
 @import "swiper/scss/effect-fade";
-@import "swiper/scss/navigation";
-@import "swiper/scss/pagination";
-
+@import 'swiper/scss/mousewheel';
 
 html{
     scrollbar-width: none;
+    
+    // Swiper Override
+    #app {
+        height: 100%;
+    }
 
     // Bulma inspired classes
     .has-warning-light{
