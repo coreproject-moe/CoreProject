@@ -3,6 +3,7 @@
 
     import { EffectFade, Mousewheel } from "swiper";
     import MainHero from "$components/swiper/MainHero.svelte";
+    import TrendingHero from "$components/swiper/TrendingHero.svelte";
 
     let mainSlide = 0;
     let swiper: Swiper;
@@ -30,7 +31,7 @@
     modules={[Mousewheel]}
     mousewheel={{ sensitivity: 0.001 }}
 >
-    <SwiperSlide>
+    <!-- <SwiperSlide>
         <Swiper modules={[EffectFade]} effect="fade" on:swiper={onSwiper}>
             {#each Array(100) as f, i}
                 <SwiperSlide>
@@ -43,29 +44,10 @@
                 </SwiperSlide>
             {/each}
         </Swiper>
-    </SwiperSlide>
+    </SwiperSlide> -->
     <SwiperSlide>
-        <section class="hero is-fullheight">
-            <div class="hero-body is-align-self-center">
-                <div>
-                    <div class="title pb-5 is-size-2 has-text-white">
-                        <div class="is-flex">
-                            <span class="pr-5 is-align-self-center"> TRENDING </span>
-                            <div
-                                class="is-align-self-center"
-                                style="display: inline-block;width: 26em;border-top: 10px solid;"
-                            />
-                        </div>
-                    </div>
-                    <figure class="image is-16by9">
-                        <img
-                            alt=""
-                            style="border-radius:18px"
-                            src="https://bulma.io/images/placeholders/256x256.png"
-                        />
-                    </figure>
-                </div>
-            </div>
-        </section>
+        {#each Array(5) as f, i}
+            <TrendingHero />
+        {/each}
     </SwiperSlide>
 </Swiper>
