@@ -5,13 +5,12 @@ from ..models import (
     AnimeInfoModel,
     AnimeProducerModel,
     AnimeStudioModel,
-    AnimeThemeModel,
     AnimeGenreModel,
     AnimeSynonymModel,
 )
 
 
-class AnimeeInfoGenericSerializer(serializers.Serializer):
+class AnimeInfoGenericSerializer(serializers.Serializer):
     mal_id = serializers.IntegerField(required=False)
     name = serializers.CharField(required=True)
     type = serializers.CharField(required=False)
@@ -21,11 +20,16 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
     anime_episodes = EpisodeSerializer(many=True, required=False)
 
     # Everything is generic
-    anime_genres = AnimeeInfoGenericSerializer(many=True, required=False)
-    anime_themes = AnimeeInfoGenericSerializer(many=True, required=False)
-    anime_studios = AnimeeInfoGenericSerializer(many=True, required=False)
-    anime_producers = AnimeeInfoGenericSerializer(many=True, required=False)
-    anime_name_synonyms = AnimeeInfoGenericSerializer(many=True, required=False)
+    anime_genres = AnimeInfoGenericSerializer(many=True, required=False)
+    anime_studios = AnimeInfoGenericSerializer(
+        many=True, required=False, write_only=True
+    )
+    anime_producers = AnimeInfoGenericSerializer(
+        many=True, required=False, write_only=True
+    )
+    anime_name_synonyms = AnimeInfoGenericSerializer(
+        many=True, required=False, write_only=True
+    )
 
     class Meta:
         model = AnimeInfoModel
@@ -47,7 +51,6 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
         """https://www.django-rest-framework.org/api-guide/relations/#writable-nested-serializers"""
         validated_data.pop("anime_episodes", None)  # ignore
         genres = validated_data.pop("anime_genres", None)
-        themes = validated_data.pop("anime_themes", None)
         studios = validated_data.pop("anime_studios", None)
         producers = validated_data.pop("anime_producers", None)
         synonyms = validated_data.pop("anime_name_synonyms", None)
@@ -67,20 +70,6 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
                 items.append(anime_genre_model)
 
             anime.anime_genres.set(items) if items else None
-
-        if themes:
-            items = []
-            for item in themes:
-                anime_theme_model, _ = AnimeThemeModel.objects.get_or_create(
-                    mal_id=item["mal_id"],
-                    defaults={
-                        "name": item["name"],
-                        "type": item["type"],
-                    },
-                )
-                items.append(anime_theme_model)
-
-            anime.anime_themes.set(items) if items else None
 
         if studios:
             items = []
@@ -126,7 +115,6 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
         validated_data.pop("anime_episodes", None)  # ignore
 
         genres = validated_data.pop("anime_genres", None)
-        themes = validated_data.pop("anime_themes", None)
         studios = validated_data.pop("anime_studios", None)
         producers = validated_data.pop("anime_producers", None)
         synonyms = validated_data.pop("anime_name_synonyms", None)
@@ -142,17 +130,6 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
                 )
                 if created:
                     instance.anime_genres.add(anime_genre_model)
-        if themes:
-            for item in themes:
-                anime_theme_model, created = AnimeThemeModel.objects.get_or_create(
-                    mal_id=item["mal_id"],
-                    defaults={
-                        "name": item["name"],
-                        "type": item["type"],
-                    },
-                )
-                if created:
-                    instance.anime_themes.add(anime_theme_model)
 
         if studios:
             for item in studios:
