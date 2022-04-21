@@ -4,23 +4,31 @@
     import { EffectFade, Mousewheel } from "swiper";
     import MainHero from "$components/swiper/MainHero.svelte";
     import TrendingHero from "$components/swiper/TrendingHero.svelte";
+    import { responsiveMode } from "$store/responsive";
 
     let mainSlide = 0;
+
     let swiper: Swiper;
+    let mainSwiper: Swiper;
 
     const onSwiper = (e: any) => {
-        const [__swiper] = e.detail;
+        const [__swiper] = e?.detail;
         swiper = __swiper;
+    };
+
+    const onMainSwiper = (e: any) => {
+        const [__swiper] = e.detail;
+        mainSwiper = __swiper;
     };
 
     const onSwiperBackward = () => {
         mainSlide = mainSlide - 1;
-        swiper?.slideTo(mainSlide);
+        mainSwiper?.slideTo(mainSlide);
     };
 
     const onSwiperForward = () => {
         mainSlide = mainSlide + 1;
-        swiper?.slideTo(mainSlide);
+        mainSwiper?.slideTo(mainSlide);
     };
 </script>
 
@@ -28,10 +36,11 @@
     speed={600}
     spaceBetween={0}
     direction="vertical"
+    slidesPerView="auto"
     modules={[Mousewheel]}
     mousewheel={{ sensitivity: 0.001 }}
 >
-    <!-- <SwiperSlide>
+    <SwiperSlide>
         <Swiper modules={[EffectFade]} effect="fade" on:swiper={onSwiper}>
             {#each Array(100) as f, i}
                 <SwiperSlide>
@@ -44,10 +53,8 @@
                 </SwiperSlide>
             {/each}
         </Swiper>
-    </SwiperSlide> -->
+    </SwiperSlide>
     <SwiperSlide>
-        {#each Array(5) as f, i}
-            <TrendingHero />
-        {/each}
+        <TrendingHero />
     </SwiperSlide>
 </Swiper>

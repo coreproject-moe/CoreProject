@@ -30,6 +30,12 @@ html{
         width: 100%;
         height: 100%;
     }
+    
+    @media screen and (max-width: ($tablet - 1px)) {
+        .swiper-slide {
+            height: auto !important;
+        }
+    }
 
     // Bulma inspired classes
     .has-warning-light{
