@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { responsiveMode } from "$store/responsive";
+
     export let backgroundImageUrl: string;
     export let animeName: string;
 
@@ -7,7 +9,7 @@
 </script>
 
 <section
-    class="hero is-success is-fullheight"
+    class="hero is-success {$responsiveMode === 'mobile' ? 'is-small' : 'is-fullheight'}"
     style="
     background-image: url({backgroundImageUrl});
     background-repeat: no-repeat;
