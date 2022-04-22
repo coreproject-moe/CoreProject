@@ -25,6 +25,7 @@
   <a href="https://github.com/baseplate-admin/CoreProject/stargazers" alt="Stars"><img src="https://img.shields.io/github/stars/baseplate-admin/CoreProject.svg?style=for-the-badge"></a>
   <a href="https://github.com/baseplate-admin/CoreProject/issues" alt="Issues"><img src="https://img.shields.io/github/issues/baseplate-admin/CoreProject.svg?style=for-the-badge"></a>
   <a href="https://github.com/baseplate-admin/CoreProject/blob/v2/LICENSE" alt="License - AGPL-3.0"><img src="https://img.shields.io/github/license/baseplate-admin/CoreProject.svg?style=for-the-badge"></a>
+<a href="https://codeclimate.com/github/baseplate-admin/CoreProject/maintainability"><img src="https://api.codeclimate.com/v1/badges/481c978a5f364941db34/maintainability" /></a>
 </p>
 
 
