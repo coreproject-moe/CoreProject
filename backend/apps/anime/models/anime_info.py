@@ -1,3 +1,4 @@
+from email.policy import default
 from pathlib import Path
 from django.db import models
 
@@ -13,12 +14,16 @@ class FileField:
     # Thanks Stackoverflow
     # https://stackoverflow.com/questions/1190697/django-filefield-with-upload-to-determined-at-runtime
     @staticmethod
-    def anime_cover(instance, filename) -> str:
+    def anime_cover(instance, filename: str) -> str:
         return Path("anime_cover", filename)
 
     @staticmethod
-    def anime_charater(instance, filename) -> str:
+    def anime_charater(instance, filename: str) -> str:
         return Path("anime_characters", filename)
+
+    @staticmethod
+    def anime_banner(instance, filename: str) -> str:
+        return Path("anime_banner", filename)
 
 
 # Create your models here.
@@ -32,6 +37,9 @@ class AnimeInfoModel(models.Model):
     anime_source = models.CharField(max_length=128, blank=True, null=True)
     anime_aired_from = models.DateTimeField(blank=True, null=True)
     anime_aired_to = models.DateTimeField(blank=True, null=True)
+    anime_banner = models.ImageField(
+        upload_to=FileField.anime_banner, default=None, blank=True, null=True
+    )
     anime_cover = models.ImageField(
         upload_to=FileField.anime_cover, default=None, blank=True, null=True
     )
