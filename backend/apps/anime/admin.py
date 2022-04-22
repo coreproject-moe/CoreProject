@@ -33,6 +33,12 @@ class AnimeInfoAdmin(admin.ModelAdmin):
         "anime_episodes",
     ]
     search_fields = ["anime_name"]
+    list_filter = [
+        "anime_genres",
+        "anime_themes",
+        "anime_studios",
+        "anime_producers",
+    ]
 
 
 @admin.register(AnimeGenreModel)
