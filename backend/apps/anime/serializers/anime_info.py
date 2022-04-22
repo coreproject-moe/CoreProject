@@ -3,8 +3,6 @@ from rest_framework import serializers
 from .episode import EpisodeSerializer
 from ..models import (
     AnimeInfoModel,
-    AnimeProducerModel,
-    AnimeStudioModel,
     AnimeGenreModel,
     AnimeSynonymModel,
 )
@@ -21,19 +19,18 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
 
     # Everything is generic
     anime_genres = AnimeInfoGenericSerializer(many=True, required=False)
-    anime_studios = AnimeInfoGenericSerializer(
-        many=True, required=False, write_only=True
-    )
-    anime_producers = AnimeInfoGenericSerializer(
-        many=True, required=False, write_only=True
-    )
+
     anime_name_synonyms = AnimeInfoGenericSerializer(
         many=True, required=False, write_only=True
     )
 
     class Meta:
         model = AnimeInfoModel
-        fields = "__all__"
+        exclude = (
+            "anime_themes",
+            "anime_studios",
+            "anime_producers",
+        )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -51,8 +48,6 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
         """https://www.django-rest-framework.org/api-guide/relations/#writable-nested-serializers"""
         validated_data.pop("anime_episodes", None)  # ignore
         genres = validated_data.pop("anime_genres", None)
-        studios = validated_data.pop("anime_studios", None)
-        producers = validated_data.pop("anime_producers", None)
         synonyms = validated_data.pop("anime_name_synonyms", None)
 
         anime = AnimeInfoModel.objects.create(**validated_data)
@@ -71,34 +66,6 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
 
             anime.anime_genres.set(items) if items else None
 
-        if studios:
-            items = []
-            for item in studios:
-                anime_studio_model, _ = AnimeStudioModel.objects.get_or_create(
-                    mal_id=item["mal_id"],
-                    defaults={
-                        "name": item["name"],
-                        "type": item["type"],
-                    },
-                )
-                items.append(anime_studio_model)
-
-            anime.anime_studios.set(items) if items else None
-
-        if producers:
-            items = []
-            for item in producers:
-                anime_producer_model, _ = AnimeProducerModel.objects.get_or_create(
-                    mal_id=item["mal_id"],
-                    defaults={
-                        "name": item["name"],
-                        "type": item["type"],
-                    },
-                )
-                items.append(anime_producer_model)
-
-            anime.anime_producers.set(items) if items else None
-
         if synonyms:
             items = []
             for item in synonyms:
@@ -115,8 +82,6 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
         validated_data.pop("anime_episodes", None)  # ignore
 
         genres = validated_data.pop("anime_genres", None)
-        studios = validated_data.pop("anime_studios", None)
-        producers = validated_data.pop("anime_producers", None)
         synonyms = validated_data.pop("anime_name_synonyms", None)
 
         if genres:
@@ -131,32 +96,6 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
                 if created:
                     instance.anime_genres.add(anime_genre_model)
 
-        if studios:
-            for item in studios:
-                anime_studio_model, created = AnimeStudioModel.objects.get_or_create(
-                    mal_id=item["mal_id"],
-                    defaults={
-                        "name": item["name"],
-                        "type": item["type"],
-                    },
-                )
-                if created:
-                    instance.anime_studios.add(anime_studio_model)
-
-        if producers:
-            for item in producers:
-                (
-                    anime_producer_model,
-                    created,
-                ) = AnimeProducerModel.objects.get_or_create(
-                    mal_id=item["mal_id"],
-                    defaults={
-                        "name": item["name"],
-                        "type": item["type"],
-                    },
-                )
-                if created:
-                    instance.anime_producers.add(anime_producer_model)
         if synonyms:
             for item in synonyms:
                 anime_synonym_model, created = AnimeSynonymModel.objects.get_or_create(

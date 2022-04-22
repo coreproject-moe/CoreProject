@@ -1,31 +1,35 @@
+from django.shortcuts import get_object_or_404
+
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.mixins import (
     CreateModelMixin,
     ListModelMixin,
 )
 
-from ..models import AnimeRecommendationModel
+from ..models import AnimeInfoModel
 from ..permissions import IsSuperUserOrReadOnly
-from ..serializers import AnimeRecommendationSerializer
+from ..serializers import AnimeStudioSerializer
 
 
-class AnimeRecommendationView(
+class AnimeStudioView(
     ListModelMixin,
     CreateModelMixin,
     GenericViewSet,
 ):
     """
     Returns :
-        - Recommendations
+        - Studios
     """
 
-    serializer_class = AnimeRecommendationSerializer
+    serializer_class = AnimeStudioSerializer
     permission_classes = [IsSuperUserOrReadOnly]
 
     def get_queryset(self):
-        queryset = AnimeRecommendationModel.objects.filter(
-            anime=self.kwargs["anime_id"]
-        )
+        instance = AnimeInfoModel.objects.all()
+        queryset = get_object_or_404(
+            instance, pk=self.kwargs["anime_id"]
+        ).anime_studios.all()
+
         return queryset
 
     def get_serializer_context(self):

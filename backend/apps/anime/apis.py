@@ -4,6 +4,8 @@ from rest_framework_nested import routers
 from .views import (
     AnimeInfoView,
     AnimeThemeView,
+    AnimeStudioView,
+    AnimeProducerView,
     AnimeRecommendationView,
     EpisodeView,
     EpisodeCommentView,
@@ -11,22 +13,20 @@ from .views import (
 
 router = routers.SimpleRouter()
 router.register(r"anime", AnimeInfoView, basename="anime_info")
+base_router = routers.NestedSimpleRouter(router, r"anime", lookup="anime")
 
-anime_theme_router = routers.NestedSimpleRouter(router, r"anime", lookup="anime")
-anime_theme_router.register(r"themes", AnimeThemeView, basename="themes")
 
-anime_recommendation_router = routers.NestedSimpleRouter(
-    router, r"anime", lookup="anime"
-)
-anime_recommendation_router.register(
+base_router.register(r"themes", AnimeThemeView, basename="themes")
+base_router.register(
     r"recommendations", AnimeRecommendationView, basename="recommendations"
 )
+base_router.register(r"episodes", EpisodeView, basename="episodes")
+base_router.register(r"studios", AnimeStudioView, basename="studios")
+base_router.register(r"producers", AnimeProducerView, basename="producers")
 
-episode_router = routers.NestedSimpleRouter(router, r"anime", lookup="anime")
-episode_router.register(r"episodes", EpisodeView, basename="episodes")
 
 episode_comment_router = routers.NestedSimpleRouter(
-    episode_router, r"episodes", lookup="episodes"
+    base_router, r"episodes", lookup="episodes"
 )
 episode_comment_router.register(
     r"comments", EpisodeCommentView, basename="episode_comments"
@@ -36,8 +36,6 @@ episode_comment_router.register(
 urlpatterns = [
     path("anime/random/", AnimeInfoView.as_view({"get": "random"})),
     path("", include(router.urls)),
-    path("", include(anime_recommendation_router.urls)),
-    path("", include(anime_theme_router.urls)),
-    path("", include(episode_router.urls)),
+    path("", include(base_router.urls)),
     path("", include(episode_comment_router.urls)),
 ]
