@@ -24,7 +24,7 @@ class AnimeRecommendationView(
 
     def get_queryset(self):
         queryset = AnimeRecommendationModel.objects.filter(
-            anime=self.kwargs["anime_id"]
+            anime__id=self.kwargs["anime_id"]
         )
         return queryset
 
