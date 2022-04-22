@@ -4,8 +4,8 @@
 from PIL import Image
 from io import BytesIO
 
-from django.db.models import ImageField
 from django.core.files import File
+from django.db.models import ImageField
 
 # Image height and width in pixel
 CROP_WIDTH = 512
@@ -22,7 +22,6 @@ class ResizeImageMixin(object):
         # Square image, so just resize it?
         if width == height:
             resized_image = base_image.resize((128, 128), Image.ANTIALIAS)
-            resized_image.save(in_memory, format="avif")
 
         else:
             cropped_image = base_image.crop(
@@ -35,6 +34,6 @@ class ResizeImageMixin(object):
             )
             resized_image = cropped_image.resize((128, 128), Image.ANTIALIAS)
 
-            resized_image.save(in_memory, format="avif")
+        resized_image.save(in_memory)
 
         return File(in_memory)

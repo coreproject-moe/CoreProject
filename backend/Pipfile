@@ -19,7 +19,6 @@ drf-nested-routers = "*"
 djangorestframework-simplejwt = "*"
 # Pillow stuff
 pillow = "*"
-pillow-avif-plugin = "*"
 
 [dev-packages]
 black = "*"
