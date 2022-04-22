@@ -20,14 +20,25 @@
 </div>
 
 <p align="center">
-  <a href="https://github.com/baseplate-admin/CoreProject/graphs/contributors" alt="Contributors"><img src="https://img.shields.io/github/contributors/baseplate-admin/CoreProject.svg?style=for-the-badge" ></a>
-  <a href="https://github.com/baseplate-admin/CoreProject/network/members" alt="Forks"><img src="https://img.shields.io/github/forks/baseplate-admin/CoreProject.svg?style=for-the-badge"></a>
-  <a href="https://github.com/baseplate-admin/CoreProject/stargazers" alt="Stars"><img src="https://img.shields.io/github/stars/baseplate-admin/CoreProject.svg?style=for-the-badge"></a>
-  <a href="https://github.com/baseplate-admin/CoreProject/issues" alt="Issues"><img src="https://img.shields.io/github/issues/baseplate-admin/CoreProject.svg?style=for-the-badge"></a>
-  <a href="https://github.com/baseplate-admin/CoreProject/blob/v2/LICENSE" alt="License - AGPL-3.0"><img src="https://img.shields.io/github/license/baseplate-admin/CoreProject.svg?style=for-the-badge"></a>
-<a href="https://codeclimate.com/github/baseplate-admin/CoreProject/maintainability"><img src="https://img.shields.io/codeclimate/maintainability/baseplate-admin/CoreProject?style=for-the-badge" /></a>
+  <a href="https://github.com/baseplate-admin/CoreProject/graphs/contributors" alt="Contributors">
+    <img src="https://img.shields.io/github/contributors/baseplate-admin/CoreProject.svg?style=for-the-badge" >
+  </a>
+  <a href="https://github.com/baseplate-admin/CoreProject/network/members" alt="Forks">
+    <img src="https://img.shields.io/github/forks/baseplate-admin/CoreProject.svg?style=for-the-badge">
+  </a>
+  <a href="https://github.com/baseplate-admin/CoreProject/stargazers" alt="Stars">
+    <img src="https://img.shields.io/github/stars/baseplate-admin/CoreProject.svg?style=for-the-badge">
+  </a>
+  <a href="https://github.com/baseplate-admin/CoreProject/issues" alt="Issues">
+    <img src="https://img.shields.io/github/issues/baseplate-admin/CoreProject.svg?style=for-the-badge">
+  </a>
+  <a href="https://github.com/baseplate-admin/CoreProject/blob/v2/LICENSE" alt="License - AGPL-3.0">
+    <img src="https://img.shields.io/github/license/baseplate-admin/CoreProject.svg?style=for-the-badge">
+  </a>
+  <a href="https://codeclimate.com/github/baseplate-admin/CoreProject/maintainability">
+    <img src="https://img.shields.io/codeclimate/maintainability/baseplate-admin/CoreProject?style=for-the-badge" />
+  </a>
 </p>
-
 
 ## Screenshots
 
@@ -40,62 +51,54 @@
   <img src="https://user-images.githubusercontent.com/41228366/161114183-f9744421-2137-4a9b-b6b6-0f64e5b7a329.png" alt="Anime Info Page Mockup" width=49.5%>
 </p>
 
-
 ## (Upcoming) Features
-
 
 Core Project is a collection of several projects - animecore, mangacore & soundcore. Overall, it aims to becomes a site where you can get all your anime, manga and songs for free and without any ads.
 
-* Home Page recommendations & Continue watching
-* Watch Progress
-* Account feature for cross-platform playing
-* Mobile support
-* No Ads
-* Next gen Player
-* Search
-* Clean & feature-rich UI
-* MAL-sync support
-* and more!
+-   Home Page recommendations & Continue watching
+-   Watch Progress
+-   Account feature for cross-platform playing
+-   Mobile support
+-   No Ads
+-   Next gen Player
+-   Search
+-   Clean & feature-rich UI
+-   MAL-sync support
+-   and more!
 
 All features are under development.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
 ### Built with
 
-* [.](https://example.com)
-* [..](https://example.com)
-* [...](https://example.com)
+-   [.](https://example.com)
+-   [..](https://example.com)
+-   [...](https://example.com)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
 ## Roadmap
 
-- [x] Backend
-- [x] Logo & Design system
-- [ ] Mockups (All pages)
-- [ ] Frontend
-- [ ] Misc stuff
+-   [x] Backend
+-   [x] Logo & Design system
+-   [ ] Mockups (All pages)
+-   [ ] Frontend
+-   [ ] Misc stuff
 
 See the [open issues](https://github.com/baseplate-admin/CoreProject/issues) and [projects](https://github.com/baseplate-admin/CoreProject/projects?) for a full list of features we're working on (and need help with).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
 ## Contributing
 
-- If you have a suggestion/idea that would make this project better, please create a pull request. All pull requests will be reviewed by us, and adjusted.
+-   If you have a suggestion/idea that would make this project better, please create a pull request. All pull requests will be reviewed by us, and adjusted.
 
-- You can also [open a new issue](https://github.com/baseplate-admin/CoreProject/issues/new/choose) or [help us with an existing one](https://github.com/baseplate-admin/CoreProject/issues).
+-   You can also [open a new issue](https://github.com/baseplate-admin/CoreProject/issues/new/choose) or [help us with an existing one](https://github.com/baseplate-admin/CoreProject/issues).
 
 Other than that, you can also help the project by giving it a star! Your help is extremely appreciated :)
 
-
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 ## License
 
