@@ -226,7 +226,7 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 10,
-    "MAX_PAGINATE_BY": 50,
+    "MAX_PAGINATE_BY": 100,
 }
 
 # Settings override
