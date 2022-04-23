@@ -38,6 +38,7 @@
   <a href="https://codeclimate.com/github/baseplate-admin/CoreProject/maintainability">
     <img src="https://img.shields.io/codeclimate/maintainability/baseplate-admin/CoreProject?style=for-the-badge" />
   </a>
+  <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/baseplate-admin/coreproject?style=for-the-badge">
 </p>
 
 ## Screenshots
