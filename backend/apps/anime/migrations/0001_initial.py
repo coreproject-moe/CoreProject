@@ -7,19 +7,28 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='AnimeThemeModel',
+            name="AnimeThemeModel",
             fields=[
-                ('mal_id', models.IntegerField(db_index=True, primary_key=True, serialize=False, unique=True)),
-                ('name', models.CharField(db_index=True, default='', max_length=50, unique=True)),
-                ('type', models.CharField(db_index=True, default='', max_length=50)),
+                (
+                    "mal_id",
+                    models.IntegerField(
+                        db_index=True, primary_key=True, serialize=False, unique=True
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        db_index=True, default="", max_length=50, unique=True
+                    ),
+                ),
+                ("type", models.CharField(db_index=True, default="", max_length=50)),
             ],
             options={
-                'verbose_name': 'Anime Theme',
+                "verbose_name": "Anime Theme",
             },
         ),
     ]

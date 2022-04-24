@@ -7,20 +7,36 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('anime', '0005_animeproducermodel'),
+        ("anime", "0005_animeproducermodel"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='AnimeCharacterModel',
+            name="AnimeCharacterModel",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('mal_id', models.IntegerField(db_index=True, unique=True)),
-                ('name', models.CharField(db_index=True, max_length=1024, unique=True)),
-                ('character_image', models.ImageField(blank=True, default=None, null=True, upload_to=apps.anime.models.anime_character.FileField.anime_charater)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("mal_id", models.IntegerField(db_index=True, unique=True)),
+                ("name", models.CharField(db_index=True, max_length=1024, unique=True)),
+                (
+                    "character_image",
+                    models.ImageField(
+                        blank=True,
+                        default=None,
+                        null=True,
+                        upload_to=apps.anime.models.anime_character.FileField.anime_charater,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Anime Characters',
+                "verbose_name": "Anime Characters",
             },
         ),
     ]
