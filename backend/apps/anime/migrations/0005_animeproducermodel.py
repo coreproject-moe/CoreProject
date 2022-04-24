@@ -6,19 +6,29 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('anime', '0004_animestudiomodel'),
+        ("anime", "0004_animestudiomodel"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='AnimeProducerModel',
+            name="AnimeProducerModel",
             fields=[
-                ('mal_id', models.IntegerField(db_index=True, primary_key=True, serialize=False, unique=True)),
-                ('name', models.CharField(db_index=True, default='', max_length=50, unique=True)),
-                ('type', models.CharField(default='', max_length=50)),
+                (
+                    "mal_id",
+                    models.IntegerField(
+                        db_index=True, primary_key=True, serialize=False, unique=True
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        db_index=True, default="", max_length=50, unique=True
+                    ),
+                ),
+                ("type", models.CharField(default="", max_length=50)),
             ],
             options={
-                'verbose_name': 'Anime Producer',
+                "verbose_name": "Anime Producer",
             },
         ),
     ]

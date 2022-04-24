@@ -9,21 +9,35 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('anime', '0006_animecharactermodel'),
+        ("anime", "0006_animecharactermodel"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='EpisodeCommentModel',
+            name="EpisodeCommentModel",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('comment_added', models.DateTimeField(auto_now=True)),
-                ('text', models.TextField()),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("comment_added", models.DateTimeField(auto_now=True)),
+                ("text", models.TextField()),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Episode Comment',
-                'ordering': ('-comment_added',),
+                "verbose_name": "Episode Comment",
+                "ordering": ("-comment_added",),
             },
         ),
     ]

@@ -6,18 +6,26 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('anime', '0002_animegenremodel'),
+        ("anime", "0002_animegenremodel"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='AnimeSynonymModel',
+            name="AnimeSynonymModel",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(db_index=True, max_length=100, unique=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(db_index=True, max_length=100, unique=True)),
             ],
             options={
-                'verbose_name': 'Anime Synonym',
+                "verbose_name": "Anime Synonym",
             },
         ),
     ]

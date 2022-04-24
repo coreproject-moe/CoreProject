@@ -7,20 +7,46 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('anime', '0010_animeinfomodel'),
+        ("anime", "0010_animeinfomodel"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='AnimeRecommendationModel',
+            name="AnimeRecommendationModel",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('mal_url', models.URLField(unique=True)),
-                ('anime', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='anime', to='anime.animeinfomodel')),
-                ('entry', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='entry', to='anime.animeinfomodel')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("mal_url", models.URLField(unique=True)),
+                (
+                    "anime",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.DO_NOTHING,
+                        related_name="anime",
+                        to="anime.animeinfomodel",
+                    ),
+                ),
+                (
+                    "entry",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.DO_NOTHING,
+                        related_name="entry",
+                        to="anime.animeinfomodel",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Anime Recommendation',
+                "verbose_name": "Anime Recommendation",
             },
         ),
     ]
