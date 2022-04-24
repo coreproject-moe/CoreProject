@@ -3,7 +3,7 @@
 Run these commands in these order :
 
 ```bash
-cd frontend
+cd frontend/AnimeCore
 ```
 
 ```bash
