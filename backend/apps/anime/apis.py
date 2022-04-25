@@ -36,6 +36,10 @@ episode_router.register(
 # https://stackoverflow.com/questions/51823331/django-rest-framework-define-extra-arguments-using-the-action-decorator
 urlpatterns = [
     path("anime/random/", AnimeInfoView.as_view({"get": "random"})),
+    path(
+        "anime/<str:anime_id>/episodes/<str:episode_number>/timestamps/total_watchtime/",
+        EpisodeTimestampView.as_view({"get": "total_watchtime"}),
+    ),
     path("", include(router.urls)),
     path("", include(base_router.urls)),
     path("", include(episode_router.urls)),

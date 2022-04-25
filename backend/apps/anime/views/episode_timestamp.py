@@ -1,5 +1,9 @@
+from django.db.models import Avg
+from django.http.request import HttpRequest
 from django.shortcuts import get_object_or_404
 
+from rest_framework.response import Response
+from rest_framework.decorators import action
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
@@ -50,3 +54,17 @@ class EpisodeTimestampView(ModelViewSet):
         serializer.save(
             user=self.request.user,
         )
+
+    @action(detail=True)
+    def total_watchtime(
+        self,
+        *args,
+        **kwargs,
+    ) -> Response:
+        queryset = (
+            AnimeInfoModel.objects.get(pk=kwargs["anime_id"])
+            .anime_episodes.get(episode_number__in=kwargs["episode_number"])
+            .episode_timestamps.all()
+            .aggregate(Avg("timestamp"))
+        )
+        return Response(data=queryset)
