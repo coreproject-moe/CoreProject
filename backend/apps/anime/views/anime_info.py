@@ -1,4 +1,3 @@
-from django_filters.rest_framework import DjangoFilterBackend
 from django.http.request import HttpRequest
 
 from rest_framework.response import Response
@@ -15,6 +14,8 @@ from rest_framework.mixins import (
     RetrieveModelMixin,
     UpdateModelMixin,
 )
+
+from django_filters.rest_framework import DjangoFilterBackend
 
 from ..models import AnimeInfoModel
 from ..filters import AnimeInfoFilter
