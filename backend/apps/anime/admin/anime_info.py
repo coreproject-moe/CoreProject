@@ -7,18 +7,25 @@ from ..models import AnimeInfoModel
 
 @admin.register(AnimeInfoModel)
 class AnimeInfoAdmin(admin.ModelAdmin):
+    autocomplete_fields = []
+
     filter_horizontal = [
         "anime_genres",
         "anime_themes",
         "anime_studios",
+        "anime_episodes",
         "anime_producers",
         "anime_name_synonyms",
-        "anime_episodes",
+        "anime_recommendation",
     ]
-    search_fields = ["anime_name"]
+
     list_filter = [
         "anime_genres",
         "anime_themes",
         "anime_studios",
         "anime_producers",
+    ]
+
+    search_fields = [
+        "anime_name",
     ]

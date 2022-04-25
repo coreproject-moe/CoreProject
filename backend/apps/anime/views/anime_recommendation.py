@@ -4,7 +4,6 @@ from rest_framework.mixins import (
     ListModelMixin,
 )
 
-from ..models import AnimeRecommendationModel
 from ..permissions import IsSuperUserOrReadOnly
 from ..serializers import AnimeRecommendationSerializer
 
