@@ -18,7 +18,7 @@ class EpisodeTimestampView(ModelViewSet):
 
     serializer_class = EpisodeTimestampSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
-    pagination_class = None
+    lookup_field = "user__username"
 
     def get_queryset(self):
         instance = AnimeInfoModel.objects.all()
@@ -30,7 +30,7 @@ class EpisodeTimestampView(ModelViewSet):
             .anime_episodes.get(
                 episode_number__in=self.kwargs["episodes_episode_number"]
             )
-            .episode_timestamps.filter(user=self.request.user)
+            .episode_timestamps.all()
         )
         return queryset
 
