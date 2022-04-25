@@ -7,13 +7,18 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('anime', '0022_remove_episodetimestampmodel_episode_number_and_more'),
+        ("anime", "0022_remove_episodetimestampmodel_episode_number_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='episodetimestampmodel',
-            name='episode',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='anime.episodemodel'),
+            model_name="episodetimestampmodel",
+            name="episode",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="anime.episodemodel",
+            ),
         ),
     ]
