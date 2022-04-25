@@ -7,4 +7,5 @@ from ..models import EpisodeTimestampModel
 
 @admin.register(EpisodeTimestampModel)
 class EpisodeTimestampAdmin(admin.ModelAdmin):
+    autocomplete_fields = ["user"]
     list_filter = ["user", "episode_number"]
