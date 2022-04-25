@@ -1,6 +1,5 @@
 from rest_framework import serializers
 
-from .episode import EpisodeSerializer
 from ..models import (
     AnimeInfoModel,
     AnimeGenreModel,
@@ -15,14 +14,10 @@ class AnimeInfoGenericSerializer(serializers.Serializer):
 
 
 class AnimeInfoSerializer(serializers.ModelSerializer):
-    anime_episodes = EpisodeSerializer(many=True, required=False)
-
     # Everything is generic
     anime_genres = AnimeInfoGenericSerializer(many=True, required=False)
 
-    anime_name_synonyms = AnimeInfoGenericSerializer(
-        many=True, required=False, write_only=True
-    )
+    anime_name_synonyms = AnimeInfoGenericSerializer(many=True, required=False)
 
     class Meta:
         model = AnimeInfoModel
@@ -31,13 +26,13 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
             "anime_studios",
             "anime_producers",
             "anime_recommendation",
+            "anime_episodes",
         )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # https://stackoverflow.com/questions/38316321/change-a-field-in-a-django-rest-framework-modelserializer-based-on-the-request-t
         if self.context["request"].method in ["GET"]:
-            self.fields["anime_episodes"] = serializers.SerializerMethodField()
             self.fields["anime_name_synonyms"] = serializers.StringRelatedField(
                 many=True
             )
