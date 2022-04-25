@@ -18,8 +18,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name="animeinfomodel",
             name="anime_name_japanese",
-            field=models.CharField(
-                db_index=True, max_length=1024, null=True
-            ),
+            field=models.CharField(db_index=True, max_length=1024, null=True),
         ),
     ]

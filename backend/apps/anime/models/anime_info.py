@@ -32,9 +32,7 @@ class AnimeInfoModel(models.Model):
     mal_id = models.IntegerField(unique=True, blank=False, null=False)
     # anilist_id = models.IntegerField(unique=True, blank=False, null=False)
     anime_name = models.CharField(unique=True, max_length=1024, db_index=True)
-    anime_name_japanese = models.CharField(
-        max_length=1024, null=True, db_index=True
-    )
+    anime_name_japanese = models.CharField(max_length=1024, null=True, db_index=True)
     anime_source = models.CharField(max_length=128, blank=True, null=True)
     anime_aired_from = models.DateTimeField(blank=True, null=True)
     anime_aired_to = models.DateTimeField(blank=True, null=True)

@@ -31,7 +31,8 @@ class EpisodeView(
     def get_queryset(self):
         instance = AnimeInfoModel.objects.all()
         queryset = get_object_or_404(
-            instance, pk=self.kwargs["anime_id"]
+            instance,
+            pk=self.kwargs["anime_id"],
         ).anime_episodes.all()
 
         return queryset

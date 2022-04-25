@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 
 
 class EpisodeCommentModel(models.Model):
-    user = models.ForeignKey(get_user_model(), on_delete=models.DO_NOTHING)
+    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     text = models.TextField()
 
     comment_added = models.DateTimeField(auto_now=True)
