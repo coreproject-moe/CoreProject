@@ -21,4 +21,4 @@ class AnimeCharacterModel(models.Model):
     )
 
     class Meta:
-        verbose_name = "Anime Characters"
+        verbose_name = "Anime Character"

@@ -5,8 +5,9 @@ from .episode import EpisodeModel
 from .anime_genre import AnimeGenreModel
 from .anime_theme import AnimeThemeModel
 from .anime_studio import AnimeStudioModel
-from .anime_producer import AnimeProducerModel
 from .anime_synonym import AnimeSynonymModel
+from .anime_producer import AnimeProducerModel
+from .anime_character import AnimeCharacterModel
 
 
 class FileField:
@@ -15,10 +16,6 @@ class FileField:
     @staticmethod
     def anime_cover(instance, filename: str) -> str:
         return Path("anime_cover", filename)
-
-    @staticmethod
-    def anime_charater(instance, filename: str) -> str:
-        return Path("anime_characters", filename)
 
     @staticmethod
     def anime_banner(instance, filename: str) -> str:
@@ -53,6 +50,8 @@ class AnimeInfoModel(models.Model):
     anime_name_synonyms = models.ManyToManyField(AnimeSynonymModel, blank=True)
     anime_episodes = models.ManyToManyField(EpisodeModel, blank=True)
     anime_recommendation = models.ManyToManyField("AnimeInfoModel", blank=True)
+
+    anime_characters = models.ManyToManyField(AnimeCharacterModel, blank=True)
 
     updated = models.DateTimeField(auto_now_add=True)
 
