@@ -5,9 +5,10 @@ from django.contrib.auth import get_user_model
 
 
 class EpisodeCommentModel(models.Model):
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
-    comment_added = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(get_user_model(), on_delete=models.DO_NOTHING)
     text = models.TextField()
+
+    comment_added = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
         return f"{self.user}"
