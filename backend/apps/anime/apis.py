@@ -1,6 +1,7 @@
 from django.urls import path, include
 from rest_framework_nested import routers
 
+
 from .views import (
     AnimeInfoView,
     AnimeThemeView,
@@ -9,6 +10,7 @@ from .views import (
     AnimeRecommendationView,
     EpisodeView,
     EpisodeCommentView,
+    EpisodeTimestampView,
 )
 
 router = routers.SimpleRouter()
@@ -25,11 +27,10 @@ base_router.register(r"studios", AnimeStudioView, basename="studios")
 base_router.register(r"producers", AnimeProducerView, basename="producers")
 
 
-episode_comment_router = routers.NestedSimpleRouter(
-    base_router, r"episodes", lookup="episodes"
-)
-episode_comment_router.register(
-    r"comments", EpisodeCommentView, basename="episode_comments"
+episode_router = routers.NestedSimpleRouter(base_router, r"episodes", lookup="episodes")
+episode_router.register(r"comments", EpisodeCommentView, basename="episode_comments")
+episode_router.register(
+    r"timestamps", EpisodeTimestampView, basename="episode_timestamp"
 )
 
 # https://stackoverflow.com/questions/51823331/django-rest-framework-define-extra-arguments-using-the-action-decorator
@@ -37,5 +38,5 @@ urlpatterns = [
     path("anime/random/", AnimeInfoView.as_view({"get": "random"})),
     path("", include(router.urls)),
     path("", include(base_router.urls)),
-    path("", include(episode_comment_router.urls)),
+    path("", include(episode_router.urls)),
 ]

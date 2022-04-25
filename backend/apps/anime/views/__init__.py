@@ -7,3 +7,4 @@ from .anime_recommendation import AnimeRecommendationView
 
 from .episode import EpisodeView
 from .episode_comment import EpisodeCommentView
+from .episode_timestamp import EpisodeTimestampView
