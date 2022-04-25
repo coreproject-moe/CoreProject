@@ -1,12 +1,15 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 
+
 # Create your models here.
 
 
 class EpisodeTimestampModel(models.Model):
     timestamp = models.IntegerField(default=0)
-    episode_number = models.IntegerField(null=False)
+    episode = models.ForeignKey(
+        to="EpisodeModel", on_delete=models.DO_NOTHING, db_index=True
+    )
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, db_index=True)
 
     def __str__(self) -> str:

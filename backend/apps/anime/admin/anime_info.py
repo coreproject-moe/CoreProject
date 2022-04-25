@@ -7,8 +7,6 @@ from ..models import AnimeInfoModel
 
 @admin.register(AnimeInfoModel)
 class AnimeInfoAdmin(admin.ModelAdmin):
-    autocomplete_fields = []
-
     filter_horizontal = [
         "anime_genres",
         "anime_themes",
