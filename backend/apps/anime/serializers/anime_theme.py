@@ -3,7 +3,7 @@ from rest_framework import serializers
 from ..models import AnimeThemeModel, AnimeInfoModel
 
 
-class AnimeThemeSerializer(serializers.ModelSerializer):
+class AnimeThemeSerializer(serializers.Serializer):
     mal_id = serializers.IntegerField()
     name = serializers.CharField()
     type = serializers.CharField()
