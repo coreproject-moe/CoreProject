@@ -13,11 +13,12 @@ from ..serializers import EpisodeTimestampSerializer
 class EpisodeTimestampView(ModelViewSet):
     """
     Returns :
-        - Comments
+        - Timestamps
     """
 
     serializer_class = EpisodeTimestampSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    pagination_class = None
 
     def get_queryset(self):
         instance = AnimeInfoModel.objects.all()
@@ -29,7 +30,7 @@ class EpisodeTimestampView(ModelViewSet):
             .anime_episodes.get(
                 episode_number__in=self.kwargs["episodes_episode_number"]
             )
-            .episode_timestamps.all()
+            .episode_timestamps.filter(user=self.request.user)
         )
         return queryset
 
@@ -48,5 +49,4 @@ class EpisodeTimestampView(ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(
             user=self.request.user,
-            episode_number=self.kwargs["episodes_episode_number"],
         )
