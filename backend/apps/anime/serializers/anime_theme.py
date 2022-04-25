@@ -1,9 +1,22 @@
 from rest_framework import serializers
 
-from ..models import AnimeThemeModel
+from ..models import AnimeThemeModel, AnimeInfoModel
 
 
 class AnimeThemeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = AnimeThemeModel
-        fields = "__all__"
+    mal_id = serializers.IntegerField()
+    name = serializers.CharField()
+    type = serializers.CharField()
+
+    def create(self, validated_data):
+        instance, created = AnimeThemeModel.objects.get_or_create(
+            mal_id=validated_data["mal_id"],
+            name=validated_data["name"],
+            type=validated_data["type"],
+        )
+
+        AnimeInfoModel.objects.get(pk=self.context["anime_id"]).anime_themes.add(
+            instance
+        )
+
+        return instance
