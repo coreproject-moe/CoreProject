@@ -1,9 +1,12 @@
+from django.shortcuts import get_object_or_404
+
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.mixins import (
     CreateModelMixin,
     ListModelMixin,
 )
 
+from ..models import AnimeInfoModel
 from ..permissions import IsSuperUserOrReadOnly
 from ..serializers import AnimeRecommendationSerializer
 
@@ -22,9 +25,11 @@ class AnimeRecommendationView(
     permission_classes = [IsSuperUserOrReadOnly]
 
     def get_queryset(self):
-        queryset = AnimeRecommendationModel.objects.filter(
-            anime__id=self.kwargs["anime_id"]
-        )
+        instance = AnimeInfoModel.objects.all()
+        queryset = get_object_or_404(
+            instance, pk=self.kwargs["anime_id"]
+        ).anime_recommendation.all()
+
         return queryset
 
     def get_serializer_context(self):
