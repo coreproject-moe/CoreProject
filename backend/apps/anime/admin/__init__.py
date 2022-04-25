@@ -5,11 +5,10 @@
 from .anime_genre import AnimeGenreAdmin
 from .anime_info import AnimeInfoAdmin
 from .anime_producer import AnimeProducerAdmin
-from .anime_recommendation import AnimeRecommendationAdmin
 from .anime_studio import AnimeStudioAdmin
 from .anime_synonym import AnimeSynonymAdmin
 
 
+from .episode import EpisodeAdmin
 from .episode_comment import EpisodeCommentAdmin
 from .episode_timestamp import EpisodeTimestampAdmin
-from .episode import EpisodeAdmin

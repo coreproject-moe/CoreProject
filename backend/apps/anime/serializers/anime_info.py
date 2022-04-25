@@ -30,6 +30,7 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
             "anime_themes",
             "anime_studios",
             "anime_producers",
+            "anime_recommendation",
         )
 
     def __init__(self, *args, **kwargs):

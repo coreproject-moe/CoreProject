@@ -6,4 +6,4 @@ from ..models import EpisodeModel
 
 @admin.register(EpisodeModel)
 class EpisodeAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ["episode_name"]

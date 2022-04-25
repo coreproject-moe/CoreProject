@@ -53,6 +53,7 @@ class AnimeInfoModel(models.Model):
     anime_producers = models.ManyToManyField(AnimeProducerModel, blank=True)
     anime_name_synonyms = models.ManyToManyField(AnimeSynonymModel, blank=True)
     anime_episodes = models.ManyToManyField(EpisodeModel, blank=True)
+    anime_recommendation = models.ManyToManyField("AnimeInfoModel", blank=True)
 
     updated = models.DateTimeField(auto_now_add=True)
 
