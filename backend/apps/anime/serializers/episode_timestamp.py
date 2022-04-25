@@ -1,18 +1,19 @@
 from rest_framework import serializers
-from ..models import EpisodeTimestampModel, AnimeInfoModel
+from ..models import EpisodeTimestampModel, AnimeInfoModel, EpisodeModel
 
 
 class EpisodeTimestampSerializer(serializers.ModelSerializer):
     user = serializers.StringRelatedField(read_only=True)
-    episode_number = serializers.StringRelatedField(read_only=True)
 
     class Meta:
         model = EpisodeTimestampModel
-        fields = "__all__"
+        exclude = ("episode",)
 
     def create(self, validated_data):
         data, created = EpisodeTimestampModel.objects.update_or_create(
-            episode_number=validated_data["episode_number"],
+            episode=EpisodeModel.objects.get(
+                episode_number=self.context["episode_number"]
+            ),
             user=validated_data["user"],
             defaults={
                 "timestamp": validated_data["timestamp"],

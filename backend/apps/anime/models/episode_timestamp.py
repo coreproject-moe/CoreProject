@@ -8,11 +8,17 @@ from django.contrib.auth import get_user_model
 class EpisodeTimestampModel(models.Model):
     timestamp = models.IntegerField(default=0)
 
-    episode_number = models.PositiveBigIntegerField(null=True, db_index=True)
+    episode = models.ForeignKey(
+        to="EpisodeModel",
+        on_delete=models.CASCADE,
+        db_index=True,
+        blank=True,
+        null=True,
+    )
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, db_index=True)
 
     def __str__(self) -> str:
-        return f"{self.episode_number}. {self.user}"
+        return f"{self.episode}. {self.user}"
 
     class Meta:
         verbose_name = "Episode Timestamp"
