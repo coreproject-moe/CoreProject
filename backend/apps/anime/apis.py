@@ -7,6 +7,7 @@ from .views import (
     AnimeThemeView,
     AnimeStudioView,
     AnimeProducerView,
+    AnimeCharacterView,
     AnimeRecommendationView,
     EpisodeView,
     EpisodeCommentView,
@@ -25,7 +26,7 @@ base_router.register(
 base_router.register(r"episodes", EpisodeView, basename="episodes")
 base_router.register(r"studios", AnimeStudioView, basename="studios")
 base_router.register(r"producers", AnimeProducerView, basename="producers")
-
+base_router.register(r"characters", AnimeCharacterView, basename="characters")
 
 episode_router = routers.NestedSimpleRouter(base_router, r"episodes", lookup="episodes")
 episode_router.register(r"comments", EpisodeCommentView, basename="episode_comments")

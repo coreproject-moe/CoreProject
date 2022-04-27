@@ -12,6 +12,7 @@ class AnimeInfoAdmin(admin.ModelAdmin):
         "anime_themes",
         "anime_studios",
         "anime_producers",
+        "anime_characters",
         "anime_name_synonyms",
         "anime_recommendation",
         "anime_episodes",
@@ -22,6 +23,7 @@ class AnimeInfoAdmin(admin.ModelAdmin):
         "anime_themes",
         "anime_studios",
         "anime_producers",
+        "anime_characters",
     ]
 
     search_fields = [
@@ -85,6 +87,7 @@ class AnimeInfoAdmin(admin.ModelAdmin):
                     "anime_themes",
                     "anime_studios",
                     "anime_producers",
+                    "anime_characters",
                     "anime_name_synonyms",
                     "anime_recommendation",
                 )
