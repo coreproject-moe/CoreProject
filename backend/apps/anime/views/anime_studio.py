@@ -37,6 +37,6 @@ class AnimeStudioView(
         # https://stackoverflow.com/questions/31038742/pass-request-context-to-serializer-from-viewset-in-django-rest-framework
         context = super().get_serializer_context()
         context.update(
-            {"anime_id": self.kwargs["anime_id"]},
+            {"anime_id": self.kwargs.get("anime_id")},
         )
         return context

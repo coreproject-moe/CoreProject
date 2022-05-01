@@ -9,15 +9,18 @@ django = {extras = ["argon2"], version = "*"}
 django-cleanup = "*"
 django-filter = "*"
 django-cors-headers = "*"
-django-crispy-forms = "*"
-# WhiteNoise
+django-crispy-forms = "*" 
+# 3rd Party ( WhiteNoise )
 whitenoise = {extras = ["brotli"], version = "*"}
 # Rest framework
 djangorestframework = "*"
+# 3rd party ( schema )
+pyyaml = "*"
+uritemplate = "*"
 # 3rd party
 drf-nested-routers = "*"
 djangorestframework-simplejwt = "*"
-# Pillow stuff
+# Pillow 
 pillow = "*"
 
 [dev-packages]

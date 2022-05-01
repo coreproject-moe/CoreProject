@@ -32,7 +32,9 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # https://stackoverflow.com/questions/38316321/change-a-field-in-a-django-rest-framework-modelserializer-based-on-the-request-t
-        if self.context["request"].method in ["GET"]:
+        request = self.context.get("request")
+
+        if request and request.method in ["GET"]:
             self.fields["anime_name_synonyms"] = serializers.StringRelatedField(
                 many=True
             )
