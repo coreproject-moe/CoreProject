@@ -44,8 +44,8 @@ class EpisodeTimestampView(ModelViewSet):
         context = super().get_serializer_context()
         context.update(
             {
-                "anime_id": self.kwargs["anime_id"],
-                "episode_number": self.kwargs["episodes_episode_number"],
+                "anime_id": self.kwargs.get("anime_id"),
+                "episode_number": self.kwargs.get("episodes_episode_number"),
             }
         )
         return context
