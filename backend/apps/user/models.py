@@ -1,13 +1,12 @@
-from django.db import models
-from django.core.validators import MinValueValidator, MaxValueValidator
-
-# Create your models here.
 from typing import NoReturn
 
-from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MaxValueValidator
+from django.core.validators import MinValueValidator
+from django.db import models
 
 from .mixins.resize import ResizeImageMixin
+# Create your models here.
 
 
 class User(AbstractUser, ResizeImageMixin):

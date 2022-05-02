@@ -1,26 +1,20 @@
 from django.http.request import HttpRequest
-
-from rest_framework.response import Response
-from rest_framework.decorators import action
-from rest_framework.viewsets import GenericViewSet
-from rest_framework.parsers import (
-    FormParser,
-    MultiPartParser,
-    JSONParser,
-)
-from rest_framework.mixins import (
-    CreateModelMixin,
-    ListModelMixin,
-    RetrieveModelMixin,
-    UpdateModelMixin,
-)
-
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.decorators import action
+from rest_framework.mixins import CreateModelMixin
+from rest_framework.mixins import ListModelMixin
+from rest_framework.mixins import RetrieveModelMixin
+from rest_framework.mixins import UpdateModelMixin
+from rest_framework.parsers import FormParser
+from rest_framework.parsers import JSONParser
+from rest_framework.parsers import MultiPartParser
+from rest_framework.response import Response
+from rest_framework.viewsets import GenericViewSet
 
-from ..models import AnimeInfoModel
 from ..filters import AnimeInfoFilter
-from ..serializers import AnimeInfoSerializer
+from ..models import AnimeInfoModel
 from ..permissions import IsSuperUserOrReadOnly
+from ..serializers import AnimeInfoSerializer
 
 
 class AnimeInfoView(
