@@ -6,8 +6,8 @@ name = "pypi"
 [packages]
 django = {extras = ["argon2"], version = "*"}
 # 3rd Party
-django-cleanup = "*"
 django-filter = "*"
+django-cleanup = "*"
 django-cors-headers = "*"
 django-crispy-forms = "*" 
 # 3rd Party ( WhiteNoise )
