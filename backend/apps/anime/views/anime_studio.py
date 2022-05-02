@@ -1,10 +1,7 @@
 from django.shortcuts import get_object_or_404
-
+from rest_framework.mixins import CreateModelMixin
+from rest_framework.mixins import ListModelMixin
 from rest_framework.viewsets import GenericViewSet
-from rest_framework.mixins import (
-    CreateModelMixin,
-    ListModelMixin,
-)
 
 from ..models import AnimeInfoModel
 from ..permissions import IsSuperUserOrReadOnly

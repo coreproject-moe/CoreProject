@@ -1,18 +1,16 @@
-from django.urls import path, include
+from django.urls import include
+from django.urls import path
 from rest_framework_nested import routers
 
-
-from .views import (
-    AnimeInfoView,
-    AnimeThemeView,
-    AnimeStudioView,
-    AnimeProducerView,
-    AnimeCharacterView,
-    AnimeRecommendationView,
-    EpisodeView,
-    EpisodeCommentView,
-    EpisodeTimestampView,
-)
+from .views import AnimeCharacterView
+from .views import AnimeInfoView
+from .views import AnimeProducerView
+from .views import AnimeRecommendationView
+from .views import AnimeStudioView
+from .views import AnimeThemeView
+from .views import EpisodeCommentView
+from .views import EpisodeTimestampView
+from .views import EpisodeView
 
 router = routers.SimpleRouter()
 router.register(r"anime", AnimeInfoView, basename="anime_info")

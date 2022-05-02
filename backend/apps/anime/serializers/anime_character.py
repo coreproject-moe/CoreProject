@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from ..models import AnimeCharacterModel, AnimeInfoModel
+from ..models import AnimeCharacterModel
+from ..models import AnimeInfoModel
 
 
 class AnimeCharacterSerializer(serializers.Serializer):

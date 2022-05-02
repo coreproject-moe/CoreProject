@@ -1,11 +1,10 @@
 # Thanks Random guy
 # https://note.nkmk.me/en/python-pillow-image-crop-trimming/
-
-from PIL import Image
 from io import BytesIO
 
 from django.core.files import File
 from django.db.models import ImageField
+from PIL import Image
 
 # Image height and width in pixel
 CROP_WIDTH = 512

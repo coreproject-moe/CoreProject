@@ -1,10 +1,8 @@
 from rest_framework import serializers
 
-from ..models import (
-    AnimeInfoModel,
-    AnimeGenreModel,
-    AnimeSynonymModel,
-)
+from ..models import AnimeGenreModel
+from ..models import AnimeInfoModel
+from ..models import AnimeSynonymModel
 
 
 class AnimeInfoGenericSerializer(serializers.Serializer):
