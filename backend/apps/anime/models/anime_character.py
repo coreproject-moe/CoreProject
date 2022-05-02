@@ -1,4 +1,5 @@
 from pathlib import Path
+
 from django.db import models
 
 

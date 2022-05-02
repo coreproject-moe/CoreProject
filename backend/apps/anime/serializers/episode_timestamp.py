@@ -1,5 +1,8 @@
 from rest_framework import serializers
-from ..models import EpisodeTimestampModel, AnimeInfoModel, EpisodeModel
+
+from ..models import AnimeInfoModel
+from ..models import EpisodeModel
+from ..models import EpisodeTimestampModel
 
 
 class EpisodeTimestampSerializer(serializers.ModelSerializer):

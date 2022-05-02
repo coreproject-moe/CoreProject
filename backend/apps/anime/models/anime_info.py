@@ -1,13 +1,14 @@
 from pathlib import Path
+
 from django.db import models
 
-from .episode import EpisodeModel
+from .anime_character import AnimeCharacterModel
 from .anime_genre import AnimeGenreModel
-from .anime_theme import AnimeThemeModel
+from .anime_producer import AnimeProducerModel
 from .anime_studio import AnimeStudioModel
 from .anime_synonym import AnimeSynonymModel
-from .anime_producer import AnimeProducerModel
-from .anime_character import AnimeCharacterModel
+from .anime_theme import AnimeThemeModel
+from .episode import EpisodeModel
 
 
 class FileField:
