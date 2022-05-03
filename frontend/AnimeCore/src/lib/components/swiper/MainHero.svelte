@@ -15,7 +15,7 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    box-shadow: 
+    box-shadow:
         inset 0 4px 1800px #070519,
         inset 0 -40vh 140px 2px rgba(7, 5, 25, 0.9),
         inset 0 -15vh 140px 2px rgba(7, 5, 25, 0.7),

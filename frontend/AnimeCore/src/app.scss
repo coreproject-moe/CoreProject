@@ -16,13 +16,13 @@ $white : #F2F2F2;
 html{
     scrollbar-width: none;
     background-color:#070519;
-    
+
     // Swiper Override
     &, body {
         position: relative;
         height: 100%;
     }
-    
+
     #app {
         height: 100%;
     }
@@ -30,7 +30,7 @@ html{
         width: 100%;
         height: 100%;
     }
-    
+
     @media screen and (max-width: ($tablet - 1px)) {
         .swiper-slide {
             height: auto !important;

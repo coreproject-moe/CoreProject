@@ -9,7 +9,7 @@ django = {extras = ["argon2"], version = "*"}
 django-filter = "*"
 django-cleanup = "*"
 django-cors-headers = "*"
-django-crispy-forms = "*" 
+django-crispy-forms = "*"
 # 3rd Party ( WhiteNoise )
 whitenoise = {extras = ["brotli"], version = "*"}
 # Rest framework
@@ -20,7 +20,7 @@ uritemplate = "*"
 # 3rd party
 drf-nested-routers = "*"
 djangorestframework-simplejwt = "*"
-# Pillow 
+# Pillow
 pillow = "*"
 
 [dev-packages]
@@ -33,6 +33,6 @@ python_version = "3.10"
 [scripts]
 dev = 'python manage.py runserver'
 sync = 'python manage.py migrate'
-mksync = 'python manage.py makemigrations' 
+mksync = 'python manage.py makemigrations'
 collectstatic = 'python .\manage.py collectstatic --clear --link' # Dont duplicate copy files.
 prod = "gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only

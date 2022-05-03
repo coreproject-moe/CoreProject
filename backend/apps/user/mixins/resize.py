@@ -11,7 +11,7 @@ CROP_WIDTH = 512
 CROP_HEIGHT = 512
 
 
-class ResizeImageMixin(object):
+class ResizeImageMixin:
     def resize(self, image: ImageField) -> File:
         base_image = Image.open(image)
         width, height = base_image.size

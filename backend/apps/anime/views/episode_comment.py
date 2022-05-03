@@ -3,9 +3,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import ModelViewSet
 
 from ..models import AnimeInfoModel
-from ..serializers import (
-    EpisodeCommentSerializer,
-)
+from ..serializers import EpisodeCommentSerializer
 
 # Create your views here.
 
