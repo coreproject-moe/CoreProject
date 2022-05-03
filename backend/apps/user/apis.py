@@ -1,7 +1,6 @@
 from django.urls import path
 
-from .views import RegisterView
-from .views import UserInfoView
+from .views import RegisterView, UserInfoView
 
 urlpatterns = [
     path("info/", UserInfoView.as_view(), name="api_user_info"),

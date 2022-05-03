@@ -24,16 +24,16 @@
         <section
             class="hero is-large"
             style="
-                width: 100%;        
+                width: 100%;
                 border-radius:18px;
                 border-color: #070519;
                 background-image:url({backgroundImageUrl});
                 background-repeat: no-repeat;
                 background-position: center;
                 background-size: cover;
-                box-shadow: 
+                box-shadow:
                     inset 5em 0 4em 1em #070519;
-                    
+
             "
         >
             <div class="hero-body">

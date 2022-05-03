@@ -38,4 +38,3 @@ pipenv run sync
 ```python
 pipenv run dev
 ```
-
