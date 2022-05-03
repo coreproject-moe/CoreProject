@@ -8,8 +8,8 @@
 	 <a href="https://github.com/baseplate-admin/CoreProject#gh-light-mode-only">
     <img src="https://user-images.githubusercontent.com/61817579/161123650-176e7dfe-f622-49a6-acd8-b336f9d01a2b.png" alt="Logo" width="300" height="180">
   </a>
- 
- 
+
+
   <h2 align="center">Core Project</h2>
 
   <p align="center">

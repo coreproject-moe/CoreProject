@@ -1,7 +1,6 @@
 from rest_framework import serializers
 
-from ..models import AnimeInfoModel
-from ..models import EpisodeCommentModel
+from ..models import AnimeInfoModel, EpisodeCommentModel
 
 
 class EpisodeCommentSerializer(serializers.ModelSerializer):
