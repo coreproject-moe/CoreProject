@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
-from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, UpdateModelMixin
+from rest_framework.mixins import (ListModelMixin, RetrieveModelMixin,
+                                   UpdateModelMixin)
 from rest_framework.viewsets import GenericViewSet
 
 from ..models import AnimeInfoModel
