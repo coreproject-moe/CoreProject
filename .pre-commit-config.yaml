@@ -13,6 +13,7 @@ repos:
       rev: v2.6.2
       hooks:
         -   id: prettier
+            types_or: [javascript, css, typescript, svelte]
 
     - repo: https://github.com/pre-commit/pre-commit-hooks
       rev: v4.0.1
