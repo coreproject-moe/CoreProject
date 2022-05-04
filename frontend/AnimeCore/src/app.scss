@@ -1,24 +1,24 @@
-$tag-color : white;
+$tag-color: white;
 
-$warning : #E3BD49;
-$black : black;
-$white : #F2F2F2;
+$warning: #e3bd49;
+$black: black;
+$white: #f2f2f2;
 
-@import 'bulma/bulma.sass';
-
+@import "bulma/bulma.sass";
 
 // Swiper Import
 @import "swiper/scss";
 
 @import "swiper/scss/effect-fade";
-@import 'swiper/scss/mousewheel';
+@import "swiper/scss/mousewheel";
 
-html{
+html {
     scrollbar-width: none;
-    background-color:#070519;
+    background-color: #070519;
 
     // Swiper Override
-    &, body {
+    &,
+    body {
         position: relative;
         height: 100%;
     }
@@ -38,11 +38,10 @@ html{
     }
 
     // Bulma inspired classes
-    .has-warning-light{
-        color:#EDD68D
+    .has-warning-light {
+        color: #edd68d;
     }
     .has-border-transparent {
         border-color: transparent !important;
     }
-
 }
