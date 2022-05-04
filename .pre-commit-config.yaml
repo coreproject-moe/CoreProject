@@ -10,7 +10,7 @@ repos:
           - id: end-of-file-fixer
           - id: trailing-whitespace
           - id: pretty-format-json
-            args: ['--autofix']
+            args: ['--autofix', 'true', '--indent', '4']
 
     - repo: https://github.com/PyCQA/isort
       rev: 5.10.1
