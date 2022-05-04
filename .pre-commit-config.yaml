@@ -1,9 +1,4 @@
 repos:
-    - repo: https://github.com/asottile/dead
-      rev: v1.4.0
-      hooks:
-          - id: dead
-          
     - repo: https://github.com/psf/black
       rev: 22.3.0
       hooks:
