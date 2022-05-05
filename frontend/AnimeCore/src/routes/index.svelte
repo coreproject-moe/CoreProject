@@ -14,12 +14,12 @@
         mainSwiper = __swiper;
     };
 
-    const onSwiperBackward = () => {
+    const onMainSwiperBackward = () => {
         mainSlide = mainSlide - 1;
         mainSwiper?.slideTo(mainSlide);
     };
 
-    const onSwiperForward = () => {
+    const onMainSwiperForward = () => {
         mainSlide = mainSlide + 1;
         mainSwiper?.slideTo(mainSlide);
     };
@@ -40,8 +40,8 @@
                     <MainHero
                         backgroundImageUrl={"/images/Hyouka-poster.png"}
                         animeName="Hyouka {i}"
-                        onBackClick={onSwiperBackward}
-                        onForwardClick={onSwiperForward}
+                        onBackClick={onMainSwiperBackward}
+                        onForwardClick={onMainSwiperForward}
                     />
                 </SwiperSlide>
             {/each}

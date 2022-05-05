@@ -4,8 +4,8 @@
     export let backgroundImageUrl: string;
     export let animeName: string;
 
-    export let onBackClick: any;
-    export let onForwardClick: any;
+    export let onBackClick: () => void;
+    export let onForwardClick: () => void;
 </script>
 
 <section
