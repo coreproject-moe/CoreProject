@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Swiper, SwiperSlide } from "swiper/svelte";
 
-    import { EffectFade, Mousewheel } from "swiper";
+    import { EffectFade, Mousewheel, Navigation, Pagination } from "swiper";
     import MainHero from "$components/swiper/MainHero.svelte";
     import TrendingHero from "$components/swiper/TrendingHero.svelte";
     import { responsiveMode } from "$store/responsive";
@@ -71,13 +71,16 @@
         <Swiper
             slidesPerView={$responsiveMode === "mobile" ? 3 : 1}
             on:swiper={onTrendingSwiper}
-            modules={$responsiveMode === "mobile" ? [] : [EffectFade]}
+            pagination={{
+                el: ".trending__pagination__element"
+            }}
+            modules={$responsiveMode === "mobile" ? [] : [EffectFade, Pagination]}
             effect={$responsiveMode === "mobile" ? "slide" : "fade"}
         >
-            {#each Array(10) as _, i}
+            {#each Array(11) as _, i}
                 <SwiperSlide>
                     <TrendingHero
-                        slideNumber={JSON.stringify(i)}
+                        slideNumber={String(i).padStart(2, "0")}
                         on:backClick={onTrendingSwiperBackward}
                         on:forwardClick={onTrendingSwiperForward}
                     />

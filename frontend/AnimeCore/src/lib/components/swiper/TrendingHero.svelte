@@ -142,7 +142,12 @@
                     </div>
                 </div>
             </section>
-            <div class="pt-6">
+            <div class="columns is-mobile is-centered pt-5 pb-1 mb-0">
+                <div class="column is-narrow py-0">
+                    <div class="trending__pagination__element" />
+                </div>
+            </div>
+            <div>
                 <div class="field is-grouped ">
                     <button
                         class="button is-medium has-border-warning-light is-warning is-outlined mx-5"
