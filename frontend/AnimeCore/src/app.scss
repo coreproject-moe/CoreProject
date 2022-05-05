@@ -7,26 +7,25 @@ $white: #f2f2f2;
 @import "bulma/bulma.sass";
 
 // Swiper Import
-$themeColor : #EDD68D;
+$themeColor: #edd68d;
 
 @import "swiper/scss";
 
 @import "swiper/scss/mousewheel";
-@import 'swiper/scss/pagination';
+@import "swiper/scss/pagination";
 @import "swiper/scss/effect-fade";
 
-
-:root{
+:root {
     --swiper-pagination-bullet-size: 18px;
     --swiper-pagination-bullet-horizontal-gap: 10px;
-    --swiper-pagination-bullet-inactive-color :#070519;
+    --swiper-pagination-bullet-inactive-color: #070519;
 }
 html {
     scrollbar-width: none;
     background-color: #070519;
 
     // Swiper Override
-    
+
     &,
     body {
         position: relative;
