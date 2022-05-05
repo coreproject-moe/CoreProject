@@ -68,7 +68,12 @@
         </Swiper>
     </SwiperSlide>
     <SwiperSlide>
-        <Swiper slidesPerView={$responsiveMode === "mobile" ? 3 : 1} on:swiper={onTrendingSwiper}>
+        <Swiper
+            slidesPerView={$responsiveMode === "mobile" ? 3 : 1}
+            on:swiper={onTrendingSwiper}
+            modules={$responsiveMode === "mobile" ? [] : [EffectFade]}
+            effect={$responsiveMode === "mobile" ? "" : "fade"}
+        >
             {#each Array(10) as _, i}
                 <SwiperSlide>
                     <TrendingHero
