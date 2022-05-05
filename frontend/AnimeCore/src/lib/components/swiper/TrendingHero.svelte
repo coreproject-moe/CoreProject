@@ -1,57 +1,72 @@
 <script lang="ts">
+    import { createEventDispatcher } from "svelte";
+
     import { responsiveMode } from "$store/responsive";
 
     export let backgroundImageUrl = "/images/Sono Bisque Doll.jpg";
     export let bannerImageUrl = "/images/sono bisque doll banner.jpeg";
     export let slideNumber = "01";
     export let animeName = "My Dress Up Darling";
+
+    const dispatch = createEventDispatcher();
+
+    const onBackClick = () => {
+        dispatch("backClick", {});
+    };
+
+    const onForwardClick = () => {
+        dispatch("forwardClick", {});
+    };
 </script>
 
-<section class="hero is-fullheight">
-    <div class="hero-body is-align-self-center is-flex-direction-column">
-        <div class="title pb-5 is-size-2 has-text-white">
-            <div class="columns is-mobile" style="width:90vw">
-                <div class="column is-narrow">
-                    <span class="is-align-self-center"> TRENDING </span>
-                </div>
-                <div class="column is-flex">
-                    <div
-                        class="is-align-self-center"
-                        style="
+{#if $responsiveMode === "mobile"}
+    <div class="box" style="background-color:transparent">
+        <div
+            class="box is-flex my-0"
+            style="
+                height:150px;
+                width:100px;
+                background-size: cover;
+                background-image:url('{bannerImageUrl}');
+                box-shadow:
+                    inset 0px -65px 25px -20px rgba(7, 5, 25, 1),
+                    inset 0px -70px 75px -20px rgba(7, 5, 25, .8),
+                    inset 0px -75px 75px -20px rgba(7, 5, 25, .7)
+            ;
+    "
+        >
+            <div
+                class="is-size-7 has-text-white is-align-self-flex-end has-text-weight-semibold"
+                style="width: 100px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"
+            >
+                {animeName}
+            </div>
+        </div>
+        <div class="has-text-white has-text-weight-bold has-text-centered">
+            {slideNumber}
+        </div>
+    </div>
+{:else}
+    <section class="hero is-fullheight" style="min-width:100vw;">
+        <div class="hero-body is-align-self-center is-flex-direction-column">
+            <div class="title pb-5 is-size-2 has-text-white">
+                <div class="columns is-mobile" style="width:90vw">
+                    <div class="column is-narrow">
+                        <span class="is-align-self-center"> TRENDING </span>
+                    </div>
+                    <div class="column is-flex">
+                        <div
+                            class="is-align-self-center"
+                            style="
                             width: 100%;
                             display: inline-block;
                             border-top: 10px solid;
                         "
-                    />
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
-        {#if $responsiveMode === "mobile"}
-            <div
-                class="box is-flex my-0"
-                style="
-                    height:150px;
-                    width:100px;
-                    background-size: cover;
-                    background-image:url('{bannerImageUrl}');
-                    box-shadow:
-                        inset 0px -65px 25px -20px rgba(7, 5, 25, 1),
-                        inset 0px -70px 75px -20px rgba(7, 5, 25, .8),
-                        inset 0px -75px 75px -20px rgba(7, 5, 25, .7)
-                    ;
-                "
-            >
-                <div
-                    class="is-size-7 has-text-white is-align-self-flex-end has-text-weight-semibold"
-                    style="width: 100px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"
-                >
-                    {animeName}
-                </div>
-            </div>
-            <div class="has-text-white has-text-weight-bold">
-                {slideNumber}
-            </div>
-        {:else}
+
             <section
                 class="hero is-large"
                 style="
@@ -131,6 +146,7 @@
                 <div class="field is-grouped ">
                     <button
                         class="button is-medium has-border-warning-light is-warning is-outlined mx-5"
+                        on:click={onBackClick}
                     >
                         <span class="icon is-small">
                             <img alt="" src="/icons/chevron-left.svg" height={24} width={24} />
@@ -145,6 +161,7 @@
 
                     <button
                         class="button is-medium has-border-warning-light is-warning is-outlined mx-5"
+                        on:click={onForwardClick}
                     >
                         <span class="icon is-small">
                             <img alt="" src="/icons/chevron-right.svg" height={24} width={24} />
@@ -152,9 +169,9 @@
                     </button>
                 </div>
             </div>
-        {/if}
-    </div>
-</section>
+        </div>
+    </section>
+{/if}
 
 <style lang="scss">
     .button {

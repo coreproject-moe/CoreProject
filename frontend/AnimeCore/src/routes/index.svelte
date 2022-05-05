@@ -23,6 +23,24 @@
         mainSlide = mainSlide + 1;
         mainSwiper?.slideTo(mainSlide);
     };
+
+    let trendingSwiper: Swiper;
+
+    let trendingSlide = 0;
+
+    const onTrendingSwiper = (e: CustomEvent<any>) => {
+        const [__swiper] = e.detail;
+        trendingSwiper = __swiper;
+    };
+    const onTrendingSwiperBackward = () => {
+        trendingSlide = trendingSlide - 1;
+        trendingSwiper?.slideTo(trendingSlide);
+    };
+
+    const onTrendingSwiperForward = () => {
+        trendingSlide = trendingSlide + 1;
+        trendingSwiper?.slideTo(trendingSlide);
+    };
 </script>
 
 <Swiper
@@ -48,18 +66,13 @@
         </Swiper>
     </SwiperSlide>
     <SwiperSlide>
-        <Swiper
-            speed={600}
-            spaceBetween={0}
-            slidesPerView="auto"
-            direction="horizontal"
-            effect="fade"
-            modules={[Mousewheel, EffectFade]}
-            mousewheel={{ sensitivity: 0.001 }}
-            autoplay={true}
-        >
+        <Swiper modules={[EffectFade]} effect="fade" on:swiper={onTrendingSwiper}>
             {#each Array(10) as _, i}
-                <TrendingHero slideNumber={JSON.stringify(i)} />
+                <TrendingHero
+                    slideNumber={JSON.stringify(i)}
+                    on:backClick={onTrendingSwiperBackward}
+                    on:forwardClick={onTrendingSwiperForward}
+                />
             {/each}
         </Swiper>
     </SwiperSlide>

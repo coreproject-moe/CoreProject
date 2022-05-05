@@ -134,7 +134,7 @@
 
     <!-- Hero footer: will stick at the bottom -->
     <div class="hero-foot">
-        <nav class="tabs">
+        <nav class="tabs is-clipped">
             <div class="container has-text-white">
                 <div class="columns is-mobile is-centered">
                     <div class="column is-narrow px-1">
