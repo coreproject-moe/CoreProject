@@ -10,7 +10,7 @@
     const onBackClick = () => {
         dispatch("backClick", {});
     };
-    
+
     const onForwardClick = () => {
         dispatch("forwardClick", {});
     };
