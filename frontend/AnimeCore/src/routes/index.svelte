@@ -9,7 +9,7 @@
 
     let mainSwiper: Swiper;
 
-    const onMainSwiper = (e: any) => {
+    const onMainSwiper = (e: CustomEvent<any>) => {
         const [__swiper] = e.detail;
         mainSwiper = __swiper;
     };
@@ -40,8 +40,8 @@
                     <MainHero
                         backgroundImageUrl={"/images/Hyouka-poster.png"}
                         animeName="Hyouka {i}"
-                        onBackClick={onMainSwiperBackward}
-                        onForwardClick={onMainSwiperForward}
+                        on:backClick={onMainSwiperBackward}
+                        on:forwardClick={onMainSwiperForward}
                     />
                 </SwiperSlide>
             {/each}

@@ -1,11 +1,19 @@
 <script lang="ts">
+    import { createEventDispatcher } from "svelte";
     import { responsiveMode } from "$store/responsive";
 
     export let backgroundImageUrl: string;
     export let animeName: string;
 
-    export let onBackClick: () => void;
-    export let onForwardClick: () => void;
+    const dispatch = createEventDispatcher();
+
+    const onBackClick = () => {
+        dispatch("backClick", {});
+    };
+    
+    const onForwardClick = () => {
+        dispatch("forwardClick", {});
+    };
 </script>
 
 <section
