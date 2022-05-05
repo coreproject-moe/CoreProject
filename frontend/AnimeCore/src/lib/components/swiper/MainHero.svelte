@@ -112,7 +112,7 @@
                         />
                     </button>
                     <button
-                        class="button has-border-warning-light is-warning is-outlined mx-4"
+                        class="button has-border-warning-light is-warning is-outlined mx-4 is-hidden-mobile"
                         on:click={onBackClick}
                     >
                         <span class="icon is-small">
@@ -120,7 +120,7 @@
                         </span>
                     </button>
                     <button
-                        class="button has-border-warning-light is-warning is-outlined mx-1"
+                        class="button has-border-warning-light is-warning is-outlined mx-1 is-hidden-mobile"
                         on:click={onForwardClick}
                     >
                         <span class="icon is-small">
