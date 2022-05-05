@@ -1,5 +1,8 @@
 <script lang="ts">
-    export let backgroundImageUrl = "'https://bulma.io/images/placeholders/128x128.png'";
+    import { responsiveMode } from "$store/responsive";
+
+    export let backgroundImageUrl = "'/images/Sono Bisque Doll.jpg'";
+    export let bannerImageUrl = "/images/sono bisque doll banner.jpeg";
 </script>
 
 <section class="hero is-fullheight">
@@ -32,21 +35,25 @@
                 background-position: center;
                 background-size: cover;
                 box-shadow:
-                    inset 5em 0 4em 1em #070519;
+                    inset 5vw 0px 10px -20px rgba(7, 5, 25, 1),
+                    inset 10vw 0px 100px -20px rgba(7, 5, 25, .9),
+                    inset 25vw 0px 100px -20px rgba(7, 5, 25, .7),
+                    inset 35vw 0px 100px -20px rgba(7, 5, 25, .6),
+                    inset 50vw 0px 100px -20px rgba(7, 5, 25, .4)
+                ;
 
             "
         >
-            <div class="hero-body is-flex-direction-row py-6 px-6">
+            <div
+                class="hero-body is-flex-direction-row px-6"
+                style="padding-top:7.5rem !important; padding-bottom:7.5rem !important;"
+            >
                 <div style="width:18em" class="px-5">
                     <figure class="image is-2by3">
-                        <img
-                            alt=""
-                            style="border-radius:16px"
-                            src="https://bulma.io/images/placeholders/256x256.png"
-                        />
+                        <img alt="" style="border-radius:16px" src={bannerImageUrl} />
                     </figure>
                 </div>
-                <div class="px-5">
+                <div class="px-5 {$responsiveMode === 'mobile' ? 'is-hidden' : ''}">
                     <div class="content">
                         <div class="has-text-warning is-size-6">
                             <div class="columns is-mobile">
@@ -61,60 +68,69 @@
                                 </div>
                             </div>
                         </div>
-                        <h1 class="has-text-white is-size-2">My Dress Up Darling</h1>
+                        <h1 class="has-text-white is-size-2 my-2">My Dress Up Darling</h1>
                         <p style="width:70%" class="has-text-white">
                             High schooler Wakana Gojou cares about one thing: making Hina dolls.
                             With nobody to share his obsession, he has trouble finding friends—or
                             even holding conversation. But after the school's most popular girl,
                             Marin Kitagawa, reveals...
                         </p>
-                        <div class="buttons">
+                        <div class="buttons are-medium">
                             <button
                                 class="button is-warning has-border-transparent mx-2"
                                 style="border-radius: 12px"
-                                ><span class="icon is-small"
-                                    ><img
-                                        alt=""
-                                        src="/icons/play.svg"
-                                        width="24"
-                                        height="24"
-                                    /></span
-                                ></button
                             >
-                            <button class="button is-warning is-outlined mx-3"
-                                ><span class="is-bold">Details</span>
+                                <span class="icon is-small">
+                                    <img alt="" src="/icons/play.svg" width="24" height="24" />
+                                </span>
+                            </button>
+                            <button class="button is-warning is-outlined mx-4 is-flex">
+                                <span class="has-text-weight-semibold">Details</span>
                                 <img
+                                    class="is-align-self-flex-end"
                                     alt=""
                                     src="/icons/chevrons-right.svg"
-                                    class="s-o8_aYdz83WJL"
-                                    width="24"
-                                    height="24"
-                                /></button
-                            >
-                            <button class="button is-warning is-outlined mx-2"
-                                ><span class="icon is-small"
-                                    ><img
-                                        alt=""
-                                        src="/icons/chevron-left.svg"
-                                        width="24"
-                                        height="24"
-                                    /></span
-                                ></button
-                            >
-                            <button class="button is-warning is-outlined mx-1"
-                                ><span class="icon is-small"
-                                    ><img
-                                        alt=""
-                                        src="/icons/chevron-right.svg"
-                                        width="24"
-                                        height="24"
-                                    /></span
-                                ></button
-                            >
+                                    height={26}
+                                    width={26}
+                                />
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <div class="pt-6 {$responsiveMode === 'mobile' ? 'is-hidden' : ''}">
+            <div class="field is-grouped ">
+                <button
+                    class="button is-medium has-border-warning-light is-warning is-outlined mx-5"
+                >
+                    <span class="icon is-small">
+                        <img alt="" src="/icons/chevron-left.svg" height={24} width={24} />
+                    </span>
+                </button>
+
+                <button
+                    class="button is-medium is-warning has-text-white mx-0 has-text-weight-medium"
+                >
+                    03
+                </button>
+
+                <button
+                    class="button is-medium has-border-warning-light is-warning is-outlined mx-5"
+                >
+                    <span class="icon is-small">
+                        <img alt="" src="/icons/chevron-right.svg" height={24} width={24} />
+                    </span>
+                </button>
+            </div>
+        </div>
     </div>
 </section>
+
+<style lang="scss">
+    .button {
+        border-radius: 16px;
+        border-width: 5px;
+        height: 32px;
+    }
+</style>

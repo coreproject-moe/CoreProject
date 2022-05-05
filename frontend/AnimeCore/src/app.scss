@@ -38,9 +38,14 @@ html {
     }
 
     // Bulma inspired classes
+    // Yellow Color
     .has-warning-light {
-        color: #edd68d;
+        color: #EDD68D;
     }
+    .has-border-warning-light {
+        border-color: #EDD68D !important;
+    }
+    // Transparent Color
     .has-border-transparent {
         border-color: transparent !important;
     }

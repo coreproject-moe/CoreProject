@@ -40,7 +40,7 @@
     modules={[Mousewheel]}
     mousewheel={{ sensitivity: 0.001 }}
 >
-    <SwiperSlide>
+    <!-- <SwiperSlide>
         <Swiper modules={[EffectFade]} effect="fade" on:swiper={onSwiper}>
             {#each Array(100) as f, i}
                 <SwiperSlide>
@@ -53,7 +53,7 @@
                 </SwiperSlide>
             {/each}
         </Swiper>
-    </SwiperSlide>
+    </SwiperSlide> -->
     <SwiperSlide>
         <TrendingHero />
     </SwiperSlide>
