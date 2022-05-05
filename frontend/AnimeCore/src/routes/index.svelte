@@ -1,34 +1,47 @@
 <script lang="ts">
     import { Swiper, SwiperSlide } from "swiper/svelte";
 
-    import { EffectFade, Mousewheel } from "swiper";
+    import { EffectFade, Mousewheel, Navigation, Pagination } from "swiper";
     import MainHero from "$components/swiper/MainHero.svelte";
     import TrendingHero from "$components/swiper/TrendingHero.svelte";
     import { responsiveMode } from "$store/responsive";
 
     let mainSlide = 0;
 
-    let swiper: Swiper;
     let mainSwiper: Swiper;
 
-    const onSwiper = (e: any) => {
-        const [__swiper] = e?.detail;
-        swiper = __swiper;
-    };
-
-    const onMainSwiper = (e: any) => {
+    const onMainSwiper = (e: CustomEvent<any>) => {
         const [__swiper] = e.detail;
         mainSwiper = __swiper;
     };
 
-    const onSwiperBackward = () => {
+    const onMainSwiperBackward = () => {
         mainSlide = mainSlide - 1;
         mainSwiper?.slideTo(mainSlide);
     };
 
-    const onSwiperForward = () => {
+    const onMainSwiperForward = () => {
         mainSlide = mainSlide + 1;
         mainSwiper?.slideTo(mainSlide);
+    };
+
+    let trendingSwiper: Swiper;
+
+    let trendingSlide = 0;
+
+    const onTrendingSwiper = (e: CustomEvent<any>) => {
+        const [__swiper] = e.detail;
+        trendingSwiper = __swiper;
+    };
+    const onTrendingSwiperBackward = () => {
+        trendingSlide = trendingSlide - 1;
+        trendingSwiper?.slideTo(trendingSlide);
+    };
+
+    const onTrendingSwiperForward = () => {
+        trendingSlide = trendingSlide + 1;
+        console.log(trendingSwiper);
+        trendingSwiper?.slideTo(trendingSlide);
     };
 </script>
 
@@ -41,20 +54,57 @@
     mousewheel={{ sensitivity: 0.001 }}
 >
     <SwiperSlide>
-        <Swiper modules={[EffectFade]} effect="fade" on:swiper={onSwiper}>
+        <Swiper modules={[EffectFade]} effect="fade" on:swiper={onMainSwiper}>
             {#each Array(100) as f, i}
                 <SwiperSlide>
                     <MainHero
                         backgroundImageUrl={"/images/Hyouka-poster.png"}
                         animeName="Hyouka {i}"
-                        onBackClick={onSwiperBackward}
-                        onForwardClick={onSwiperForward}
+                        on:backClick={onMainSwiperBackward}
+                        on:forwardClick={onMainSwiperForward}
                     />
                 </SwiperSlide>
             {/each}
         </Swiper>
     </SwiperSlide>
     <SwiperSlide>
-        <TrendingHero />
+        <div class="container pt-6 px-4">
+            <div class="title is-size-2 has-text-white">
+                <div class="columns is-mobile">
+                    <div class="column is-narrow">
+                        <span class="is-align-self-center"> TRENDING </span>
+                    </div>
+                    <div class="column is-flex">
+                        <div
+                            class="is-align-self-center"
+                            style="
+                            width: 100%;
+                            display: inline-block;
+                            border-top: 10px solid;
+                        "
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <Swiper
+            slidesPerView={$responsiveMode === "mobile" ? 3 : 1}
+            on:swiper={onTrendingSwiper}
+            pagination={{
+                el: ".trending__pagination__element"
+            }}
+            modules={$responsiveMode === "mobile" ? [] : [EffectFade, Pagination]}
+            effect={$responsiveMode === "mobile" ? "slide" : "fade"}
+        >
+            {#each Array(11) as _, i}
+                <SwiperSlide>
+                    <TrendingHero
+                        slideNumber={String(i).padStart(2, "0")}
+                        on:backClick={onTrendingSwiperBackward}
+                        on:forwardClick={onTrendingSwiperForward}
+                    />
+                </SwiperSlide>
+            {/each}
+        </Swiper>
     </SwiperSlide>
 </Swiper>
