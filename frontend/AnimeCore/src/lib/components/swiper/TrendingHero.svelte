@@ -1,8 +1,10 @@
 <script lang="ts">
     import { responsiveMode } from "$store/responsive";
 
-    export let backgroundImageUrl = "'/images/Sono Bisque Doll.jpg'";
+    export let backgroundImageUrl = "/images/Sono Bisque Doll.jpg";
     export let bannerImageUrl = "/images/sono bisque doll banner.jpeg";
+    export let slideNumber = "01";
+    export let animeName = "My Dress Up Darling";
 </script>
 
 <section class="hero is-fullheight">
@@ -25,60 +27,50 @@
             </div>
         </div>
         {#if $responsiveMode === "mobile"}
-            <div class="card">
-                <div class="card-image">
-                    <figure class="image is-4by3">
-                        <img
-                            src="https://bulma.io/images/placeholders/1280x960.png"
-                            alt="Placeholder image"
-                        />
-                    </figure>
+            <div
+                class="box is-flex my-0"
+                style="
+                    height:150px;
+                    width:100px;
+                    background-size: cover;
+                    background-image:url('{bannerImageUrl}');
+                    box-shadow:
+                        inset 0px -65px 25px -20px rgba(7, 5, 25, 1),
+                        inset 0px -70px 75px -20px rgba(7, 5, 25, .8),
+                        inset 0px -75px 75px -20px rgba(7, 5, 25, .7)
+                    ;
+                "
+            >
+                <div
+                    class="is-size-7 has-text-white is-align-self-flex-end has-text-weight-semibold"
+                    style="width: 100px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"
+                >
+                    {animeName}
                 </div>
-                <div class="card-content">
-                    <div class="media">
-                        <div class="media-left">
-                            <figure class="image is-48x48">
-                                <img
-                                    src="https://bulma.io/images/placeholders/96x96.png"
-                                    alt="Placeholder image"
-                                />
-                            </figure>
-                        </div>
-                        <div class="media-content">
-                            <p class="title is-4">John Smith</p>
-                            <p class="subtitle is-6">@johnsmith</p>
-                        </div>
-                    </div>
-
-                    <div class="content">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec
-                        iaculis mauris. <a>@bulmaio</a>.
-                        <a href="#">#css</a> <a href="#">#responsive</a>
-                        <br />
-                        <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-                    </div>
-                </div>
+            </div>
+            <div class="has-text-white has-text-weight-bold">
+                {slideNumber}
             </div>
         {:else}
             <section
                 class="hero is-large"
                 style="
-           width: 100%;
-           border-radius:18px;
-           border-color: #070519;
-           background-image:url({backgroundImageUrl});
-           background-repeat: no-repeat;
-           background-position: center;
-           background-size: cover;
-           box-shadow:
-               inset 5vw 0px 10px -20px rgba(7, 5, 25, 1),
-               inset 10vw 0px 100px -20px rgba(7, 5, 25, .9),
-               inset 25vw 0px 100px -20px rgba(7, 5, 25, .7),
-               inset 35vw 0px 100px -20px rgba(7, 5, 25, .6),
-               inset 50vw 0px 100px -20px rgba(7, 5, 25, .4)
-           ;
+                    width: 100%;
+                    border-radius:18px;
+                    border-color: #070519;
+                    background-image:url('{backgroundImageUrl}');
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: cover;
+                    box-shadow:
+                        inset 5vw 0px 10px -20px rgba(7, 5, 25, 1),
+                        inset 10vw 0px 100px -20px rgba(7, 5, 25, .9),
+                        inset 25vw 0px 100px -20px rgba(7, 5, 25, .7),
+                        inset 35vw 0px 100px -20px rgba(7, 5, 25, .6),
+                        inset 50vw 0px 100px -20px rgba(7, 5, 25, .4)
+                    ;
 
-       "
+            "
             >
                 <div
                     class="hero-body is-flex-direction-row px-6"
@@ -104,7 +96,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <h1 class="has-text-white is-size-2 my-2">My Dress Up Darling</h1>
+                            <h1 class="has-text-white is-size-2 my-2">{animeName}</h1>
                             <p style="width:70%" class="has-text-white">
                                 High schooler Wakana Gojou cares about one thing: making Hina dolls.
                                 With nobody to share his obsession, he has trouble finding
@@ -148,7 +140,7 @@
                     <button
                         class="button is-medium is-warning has-text-white mx-0 has-text-weight-medium"
                     >
-                        03
+                        {slideNumber}
                     </button>
 
                     <button
