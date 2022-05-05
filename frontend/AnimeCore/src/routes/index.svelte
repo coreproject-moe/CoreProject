@@ -68,6 +68,25 @@
         </Swiper>
     </SwiperSlide>
     <SwiperSlide>
+        <div class="pt-6 px-6">
+            <div class="title is-size-2 has-text-white">
+                <div class="columns is-mobile">
+                    <div class="column is-narrow">
+                        <span class="is-align-self-center"> TRENDING </span>
+                    </div>
+                    <div class="column is-flex">
+                        <div
+                            class="is-align-self-center"
+                            style="
+                            width: 100%;
+                            display: inline-block;
+                            border-top: 10px solid;
+                        "
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
         <Swiper
             slidesPerView={$responsiveMode === "mobile" ? 3 : 1}
             on:swiper={onTrendingSwiper}
