@@ -4,17 +4,10 @@
     import { EffectFade, Mousewheel } from "swiper";
     import MainHero from "$components/swiper/MainHero.svelte";
     import TrendingHero from "$components/swiper/TrendingHero.svelte";
-    import { responsiveMode } from "$store/responsive";
 
     let mainSlide = 0;
 
-    let swiper: Swiper;
     let mainSwiper: Swiper;
-
-    const onSwiper = (e: any) => {
-        const [__swiper] = e?.detail;
-        swiper = __swiper;
-    };
 
     const onMainSwiper = (e: any) => {
         const [__swiper] = e.detail;
@@ -40,8 +33,8 @@
     modules={[Mousewheel]}
     mousewheel={{ sensitivity: 0.001 }}
 >
-    <!-- <SwiperSlide>
-        <Swiper modules={[EffectFade]} effect="fade" on:swiper={onSwiper}>
+    <SwiperSlide>
+        <Swiper modules={[EffectFade]} effect="fade" on:swiper={onMainSwiper}>
             {#each Array(100) as f, i}
                 <SwiperSlide>
                     <MainHero
@@ -53,8 +46,21 @@
                 </SwiperSlide>
             {/each}
         </Swiper>
-    </SwiperSlide> -->
+    </SwiperSlide>
     <SwiperSlide>
-        <TrendingHero />
+        <Swiper
+            speed={600}
+            spaceBetween={0}
+            slidesPerView="auto"
+            direction="horizontal"
+            effect="fade"
+            modules={[Mousewheel, EffectFade]}
+            mousewheel={{ sensitivity: 0.001 }}
+            autoplay={true}
+        >
+            {#each Array(10) as _, i}
+                <TrendingHero slideNumber={JSON.stringify(i)} />
+            {/each}
+        </Swiper>
     </SwiperSlide>
 </Swiper>
