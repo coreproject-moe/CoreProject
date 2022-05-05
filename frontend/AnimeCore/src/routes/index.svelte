@@ -4,6 +4,7 @@
     import { EffectFade, Mousewheel } from "swiper";
     import MainHero from "$components/swiper/MainHero.svelte";
     import TrendingHero from "$components/swiper/TrendingHero.svelte";
+    import { responsiveMode } from "$store/responsive";
 
     let mainSlide = 0;
 
@@ -39,6 +40,7 @@
 
     const onTrendingSwiperForward = () => {
         trendingSlide = trendingSlide + 1;
+        console.log(trendingSwiper);
         trendingSwiper?.slideTo(trendingSlide);
     };
 </script>
@@ -66,13 +68,15 @@
         </Swiper>
     </SwiperSlide>
     <SwiperSlide>
-        <Swiper modules={[EffectFade]} effect="fade" on:swiper={onTrendingSwiper}>
+        <Swiper slidesPerView={$responsiveMode === "mobile" ? 3 : 1} on:swiper={onTrendingSwiper}>
             {#each Array(10) as _, i}
-                <TrendingHero
-                    slideNumber={JSON.stringify(i)}
-                    on:backClick={onTrendingSwiperBackward}
-                    on:forwardClick={onTrendingSwiperForward}
-                />
+                <SwiperSlide>
+                    <TrendingHero
+                        slideNumber={JSON.stringify(i)}
+                        on:backClick={onTrendingSwiperBackward}
+                        on:forwardClick={onTrendingSwiperForward}
+                    />
+                </SwiperSlide>
             {/each}
         </Swiper>
     </SwiperSlide>
