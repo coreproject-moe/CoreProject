@@ -38,9 +38,10 @@
   <a href="https://codeclimate.com/github/baseplate-admin/CoreProject/maintainability">
     <img src="https://img.shields.io/codeclimate/maintainability/baseplate-admin/CoreProject?style=for-the-badge" />
   </a>
-<a href="https://results.pre-commit.ci/latest/github/baseplate-admin/CoreProject/v3"><img src="https://results.pre-commit.ci/badge/github/baseplate-admin/CoreProject/v3.svg" alt="pre-commit.ci status"></a>
+
   <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/baseplate-admin/coreproject?style=for-the-badge">
   <img alt="Lines of code" src="https://img.shields.io/tokei/lines/github/baseplate-admin/coreproject?style=for-the-badge">
+  <a href="https://results.pre-commit.ci/latest/github/baseplate-admin/CoreProject/v3"><img src="https://results.pre-commit.ci/badge/github/baseplate-admin/CoreProject/v3.svg" alt="pre-commit.ci status"></a>
 </p>
 
 ## Screenshots
