@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Swiper, SwiperSlide } from "swiper/svelte";
 
-    import { EffectFade, Mousewheel, Navigation, Pagination } from "swiper";
+    import { Autoplay, EffectFade, Mousewheel, Navigation, Pagination } from "swiper";
     import MainHero from "$components/swiper/MainHero.svelte";
     import TrendingHero from "$components/swiper/TrendingHero.svelte";
     import { responsiveMode } from "$store/responsive";
@@ -54,7 +54,12 @@
     mousewheel={{ sensitivity: 0.001 }}
 >
     <SwiperSlide>
-        <Swiper modules={[EffectFade]} effect="fade" on:swiper={onMainSwiper}>
+        <Swiper
+            autoplay={true}
+            modules={[EffectFade, Autoplay]}
+            effect="fade"
+            on:swiper={onMainSwiper}
+        >
             {#each Array(100) as f, i}
                 <SwiperSlide>
                     <MainHero
