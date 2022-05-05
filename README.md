@@ -85,7 +85,7 @@ All features are under development.
 
 -   [x] Backend
 -   [x] Logo & Design system
--   [ ] Mockups (All pages)
+-   [ ] [Mockups](https://www.figma.com/file/knyOkHUChnJpsAsmuILhOk/Core-Project) (All pages)
 -   [ ] Frontend
 -   [ ] Misc stuff
 
