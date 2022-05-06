@@ -73,7 +73,7 @@
         </Swiper>
     </SwiperSlide>
     <SwiperSlide>
-        <div class="container pt-6 px-4" style="max-width:90vw">
+        <div class="container pt-6 px-4" style="max-width:95vw">
             <div class="title is-size-2 has-text-white">
                 <div class="columns is-mobile">
                     <div class="column is-narrow">
