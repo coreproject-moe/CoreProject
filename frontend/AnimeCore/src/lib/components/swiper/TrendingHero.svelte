@@ -13,7 +13,8 @@
         <div class="box is-flex is-flex-direction-column" style="background-color:transparent;">
             <div
                 class="box is-flex is-align-self-center mb-0"
-                style="
+                style="                
+                    border-radius: 1em;
                     height: 14vh;
                     width: 15vw;
                     background-size: cover;

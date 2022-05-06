@@ -24,7 +24,7 @@
             "
         >
             <div
-                class="is-size-5 has-text-white is-align-self-flex-end has-text-weight-semibold"
+                class="is-size-7 has-text-white is-align-self-flex-end has-text-weight-semibold"
                 style="width: 15vw; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"
             >
                 {animeName}
