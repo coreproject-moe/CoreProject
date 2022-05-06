@@ -5,24 +5,23 @@
 
     export let backgroundImageUrl: string;
     export let animeName: string;
+    export let backgroundBannerUrl: string =
+        "https://media.kitsu.io/anime/poster_images/6686/large.jpg";
 </script>
 
 <SwiperSlide>
     <section
-        class="hero {$responsiveMode === 'mobile' ? 'is-halfheight' : 'is-fullheight'}"
+        class="hero {$responsiveMode === 'mobile'
+            ? 'is-halfheight mobile-shadow'
+            : 'is-fullheight desktop-shadow'}"
         style="
-            background-image: url({backgroundImageUrl});
+            background-image: url({$responsiveMode === 'mobile'
+            ? backgroundBannerUrl
+            : backgroundImageUrl});
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
-            box-shadow:
-                inset 0 4px 1800px rgb(7, 5, 25),
-                inset 0 -40vh 140px 2px rgba(7, 5, 25, 0.9),
-                inset 0 -15vh 140px 2px rgba(7, 5, 25, 0.7),
-                inset 0 -5vh 140px 2px rgba(7, 5, 25, 0.4),
-                inset 0 -2vh 140px 2px rgba(7, 5, 25, 0.2)
-            ;
-"
+        "
     >
         <!-- Hero head: will stick at the top -->
         <div class="hero-head">
@@ -128,5 +127,14 @@
         border-radius: 16px !important;
         border-width: 5px;
         height: 32px;
+    }
+    .desktop-shadow {
+        box-shadow: inset 0 4px 1800px rgb(7, 5, 25), inset 0 -40vh 140px 2px rgba(7, 5, 25, 0.9),
+            inset 0 -15vh 140px 2px rgba(7, 5, 25, 0.7), inset 0 -5vh 140px 2px rgba(7, 5, 25, 0.4),
+            inset 0 -2vh 140px 2px rgba(7, 5, 25, 0.2);
+    }
+    .mobile-shadow {
+        box-shadow: inset 0px -30px 12px -2px rgba(7, 5, 25, 0.95),
+            inset 0 -40vh 140px 2px rgba(7, 5, 25, 0.8), inset 0 -2vh 140px 2px rgba(7, 5, 25, 0.2);
     }
 </style>

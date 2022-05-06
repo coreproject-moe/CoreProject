@@ -38,7 +38,6 @@
 >
     <SwiperSlide>
         <Swiper
-            autoplay={true}
             modules={[EffectFade, Autoplay, Navigation]}
             navigation={{
                 nextEl: ".mainhero__next__el",
