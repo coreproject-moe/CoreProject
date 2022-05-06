@@ -11,8 +11,9 @@
         <div
             class="box is-flex is-align-self-center"
             style="
-                height: {$responsiveMode === 'mobile' ? '14vh' : '32vh'};
-                width: 15vw;
+                border-radius: 1em;
+                height: {$responsiveMode === 'mobile' ? '14vh' : '35vh'};
+                width: 14vw;
                 background-size: cover;
                 background-image: url('{bannerImageUrl}');
                 box-shadow:
