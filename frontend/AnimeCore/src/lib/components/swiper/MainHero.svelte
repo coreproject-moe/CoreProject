@@ -121,12 +121,13 @@
 
 <style lang="scss">
     .button {
-        border-radius: 8px !important;
+        border-radius: 16px !important;
         border-width: 5px;
         height: 32px;
 
         @media screen and (max-width: 768px) {
             border-width: 3px;
+            border-radius: 8px !important;
         }
     }
     .desktop-shadow {

@@ -43,18 +43,18 @@ const config = {
                     format: {
                         comments: false
                     }
+                },
+                rollupOptions: {
+                    output: {
+                        manualChunks: {
+                            // md5: ["md5"],
+                            // anime: ["animejs"],
+                            // dayjs: ["dayjs"],
+                            // swiper: ["swiper"],
+                            // "tippy.js": ["tippy.js"],
+                        }
+                    }
                 }
-                // rollupOptions: {
-                //     output: {
-                //         manualChunks: {
-                //             // md5: ["md5"],
-                //             // anime: ["animejs"],
-                //             // dayjs: ["dayjs"],
-                //             // swiper: ["swiper"],
-                //             // "tippy.js": ["tippy.js"],
-                //         }
-                //     }
-                // }
             }
         }
     }
