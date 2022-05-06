@@ -29,9 +29,9 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     #   Errors
     # ===========
-    # path("400/", TemplateView.as_view(template_name="400.html")),
-    # path("403/", TemplateView.as_view(template_name="403.html")),
-    # path("404/", TemplateView.as_view(template_name="404.html")),
+    path("400/", TemplateView.as_view(template_name="400.html")),
+    path("403/", TemplateView.as_view(template_name="403.html")),
+    path("404/", TemplateView.as_view(template_name="404.html")),
     #   OpenAPI
     # ============
     path(
