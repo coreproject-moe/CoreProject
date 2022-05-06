@@ -1,10 +1,18 @@
 <script lang="ts">
     import { Swiper, SwiperSlide } from "swiper/svelte";
 
-    import { Autoplay, EffectFade, Mousewheel, Navigation, Pagination } from "swiper";
+    import {
+        Autoplay,
+        Mousewheel,
+        Navigation,
+        Pagination,
+        EffectFade,
+        EffectCoverflow
+    } from "swiper";
     import MainHero from "$components/swiper/MainHero.svelte";
     import TrendingHero from "$components/swiper/TrendingHero.svelte";
     import { responsiveMode } from "$store/responsive";
+    import FromYourList from "$components/swiper/FromYourList.svelte";
 
     let mainSlide = 0;
 
@@ -53,7 +61,7 @@
     modules={[Mousewheel]}
     mousewheel={{ sensitivity: 0.001 }}
 >
-    <SwiperSlide>
+    <!-- <SwiperSlide>
         <Swiper
             autoplay={true}
             modules={[EffectFade, Autoplay]}
@@ -111,5 +119,84 @@
                 </SwiperSlide>
             {/each}
         </Swiper>
+    </SwiperSlide> -->
+    <SwiperSlide>
+        <div class="container pt-6 px-4" style="max-width:95vw">
+            <div class="title is-size-2 has-text-white">
+                <div class="columns is-mobile">
+                    <div class="column is-narrow">
+                        <span class="is-align-self-center"> FROM YOUR LIST </span>
+                    </div>
+                    <div class="column is-flex">
+                        <div
+                            class="is-align-self-center"
+                            style="
+                            width: 100%;
+                            display: inline-block;
+                            border-top: 10px solid;
+                        "
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="hero is-halfheight py-5">
+            <div class="hero-body">
+                <Swiper
+                    modules={[EffectCoverflow]}
+                    grabCursor={true}
+                    centeredSlides={true}
+                    slidesPerView={"auto"}
+                    loop={true}
+                    coverflowEffect={{
+                        rotate: 50,
+                        stretch: 0,
+                        depth: 100,
+                        modifier: 1,
+                        slideShadows: true
+                    }}
+                >
+                    {#each Array(12) as _, i}
+                        <SwiperSlide>
+                            <FromYourList />
+                        </SwiperSlide>
+                    {/each}
+                </Swiper>
+            </div>
+        </section>
+        <div class="columns is-mobile is-centered">
+            <div class="column is-narrow">
+                <div class="buttons are-medium">
+                    <button
+                        class="button has-border-warning-light is-warning is-outlined mx-4 is-hidden-mobile"
+                    >
+                        <span class="icon is-small">
+                            <img alt="" src="/icons/chevron-left.svg" height={24} width={24} />
+                        </span>
+                    </button>
+                    <button
+                        class="button is-warning has-border-transparent mx-5"
+                        style="border-radius: 12px"
+                    >
+                        <span class="has-text-white"> 01 </span>
+                    </button>
+                    <button
+                        class="button has-border-warning-light is-warning is-outlined mx-4 is-hidden-mobile"
+                    >
+                        <span class="icon is-small">
+                            <img alt="" src="/icons/chevron-right.svg" height={24} width={24} />
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
     </SwiperSlide>
 </Swiper>
+
+<style lang="scss">
+    .button {
+        border-radius: 16px;
+        border-width: 5px;
+        height: 32px;
+    }
+</style>

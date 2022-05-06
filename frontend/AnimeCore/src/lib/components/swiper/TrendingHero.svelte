@@ -47,7 +47,7 @@
         </div>
     </div>
 {:else}
-    <section class="hero is-fullheight" style="min-width:100vw;min-height:90vh !important">
+    <section class="hero is-fullheight" style="min-width:100vw; min-height:90vh !important">
         <div class="hero-body is-align-self-center is-flex-direction-column">
             <section
                 class="hero is-large my-4"
