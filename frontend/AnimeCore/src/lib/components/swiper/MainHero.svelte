@@ -11,17 +11,17 @@
     <section
         class="hero is-success {$responsiveMode === 'mobile' ? 'is-small' : 'is-fullheight'}"
         style="
-    background-image: url({backgroundImageUrl});
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    box-shadow:
-        inset 0 4px 1800px rgb(7, 5, 25),
-        inset 0 -40vh 140px 2px rgba(7, 5, 25, 0.9),
-        inset 0 -15vh 140px 2px rgba(7, 5, 25, 0.7),
-        inset 0 -5vh 140px 2px rgba(7, 5, 25, 0.4),
-        inset 0 -2vh 140px 2px rgba(7, 5, 25, 0.2)
-    ;
+            background-image: url({backgroundImageUrl});
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            box-shadow:
+                inset 0 4px 1800px rgb(7, 5, 25),
+                inset 0 -40vh 140px 2px rgba(7, 5, 25, 0.9),
+                inset 0 -15vh 140px 2px rgba(7, 5, 25, 0.7),
+                inset 0 -5vh 140px 2px rgba(7, 5, 25, 0.4),
+                inset 0 -2vh 140px 2px rgba(7, 5, 25, 0.2)
+            ;
 "
     >
         <!-- Hero head: will stick at the top -->

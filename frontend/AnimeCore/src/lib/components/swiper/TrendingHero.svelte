@@ -39,7 +39,7 @@
         </div>
     {:else}
         <section
-            class="hero is-large my-4"
+            class="hero is-halfheight my-4"
             style="
             width: 100%;
             border-radius:18px;
@@ -112,11 +112,6 @@
                 </div>
             </div>
         </section>
-        <div class="columns is-mobile is-centered pt-5 pb-4 mb-0">
-            <div class="column is-narrow py-0">
-                <div class="trending__pagination__element" />
-            </div>
-        </div>
     {/if}
 </SwiperSlide>
 

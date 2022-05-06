@@ -99,6 +99,11 @@
             </div>
 
             <div class="hero-foot is-hidden-mobile">
+                <div class="columns is-mobile is-centered mb-0">
+                    <div class="column is-narrow py-0">
+                        <div class="trending__pagination__element" />
+                    </div>
+                </div>
                 <div class="py-6">
                     <div class="field is-grouped is-justify-content-center">
                         <button
