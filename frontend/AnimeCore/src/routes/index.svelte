@@ -1,6 +1,7 @@
 <script lang="ts">
     import { Swiper, SwiperSlide } from "swiper/svelte";
 
+
     import {
         Autoplay,
         Mousewheel,
@@ -9,6 +10,7 @@
         EffectFade,
         EffectCoverflow
     } from "swiper";
+
     import MainHero from "$components/swiper/MainHero.svelte";
     import TrendingHero from "$components/swiper/TrendingHero.svelte";
     import { responsiveMode } from "$store/responsive";

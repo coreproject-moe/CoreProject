@@ -1,6 +1,7 @@
 @import "/static/fonts/Kokoro/stylesheet.scss";
 
 $family-sans-serif: 'Kokoro';
+
 $tag-color: white;
 
 $warning: #e3bd49;
@@ -18,6 +19,7 @@ $themeColor: #edd68d;
 @import "swiper/scss/mousewheel";
 @import "swiper/scss/pagination";
 @import "swiper/scss/effect-fade";
+@import "swiper/scss/autoplay";
 
 :root {
     --swiper-pagination-bullet-size: 18px;
