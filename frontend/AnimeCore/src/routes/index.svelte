@@ -1,7 +1,6 @@
 <script lang="ts">
     import { Swiper, SwiperSlide } from "swiper/svelte";
 
-
     import {
         Autoplay,
         Mousewheel,
@@ -174,7 +173,11 @@
             <!-- Hero content: will be in the middle -->
             <div class="hero-body">
                 <Swiper
-                    modules={[EffectCoverflow]}
+                    navigation={{
+                        nextEl: ".fromyourlist__next__el",
+                        prevEl: ".fromyourlist__previous__el"
+                    }}
+                    modules={[EffectCoverflow, Navigation]}
                     grabCursor={true}
                     slidesPerView={$responsiveMode === "mobile" ? 3 : 5}
                     spaceBetween={$responsiveMode === "mobile" ? 10 : 40}
@@ -197,7 +200,7 @@
                 <div class="py-6">
                     <div class="field is-grouped is-justify-content-center">
                         <button
-                            class="button is-medium has-border-warning-light is-warning is-outlined mx-5 trending__previous__el"
+                            class="button is-medium has-border-warning-light is-warning is-outlined mx-5 fromyourlist__previous__el"
                         >
                             <span class="icon is-small">
                                 <img alt="" src="/icons/chevron-left.svg" height={24} width={24} />
@@ -211,7 +214,7 @@
                         </button>
 
                         <button
-                            class="button is-medium has-border-warning-light is-warning is-outlined mx-5 trending__next__el"
+                            class="button is-medium has-border-warning-light is-warning is-outlined mx-5 fromyourlist__next__el"
                         >
                             <span class="icon is-small">
                                 <img alt="" src="/icons/chevron-right.svg" height={24} width={24} />
