@@ -17,7 +17,7 @@
                 background-size: cover;
                 background-image: url('{bannerImageUrl}');
                 box-shadow:
-                    inset 0px -65px 25px -20px rgba(7, 5, 25, 1),
+                    inset 0px -65px 25px -20px rgba(7, 5, 25, .9),
                     inset 0px -70px 75px -20px rgba(7, 5, 25, .8),
                     inset 0px -75px 75px -20px rgba(7, 5, 25, .7)
                 ;
