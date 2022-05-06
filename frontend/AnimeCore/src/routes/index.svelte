@@ -15,28 +15,16 @@
     import { responsiveMode } from "$store/responsive";
     import FromYourList from "$components/swiper/FromYourList.svelte";
 
-    let mainSlide = 0;
     let trendingSlide = 0;
+    let fromyourlistSlide = 0;
 
-    let mainSwiper: Swiper;
-
-    const onMainSwiper = (e: CustomEvent<any>) => {
-        const [__swiper] = e.detail;
-        mainSwiper = __swiper;
-    };
-
-    const onMainSwiperBackward = () => {
-        mainSlide = mainSlide - 1;
-        mainSwiper?.slideTo(mainSlide);
-    };
-
-    const onMainSwiperForward = () => {
-        mainSlide = mainSlide + 1;
-        mainSwiper?.slideTo(mainSlide);
-    };
     const onTrendingSlideChange = (e: any) => {
         const [swiper] = e.detail[0];
         trendingSlide = swiper?.activeIndex;
+    };
+    const onFromYourListSlideChange = (e: any) => {
+        const [swiper] = e.detail[0];
+        fromyourlistSlide = swiper?.activeIndex;
     };
 </script>
 
@@ -57,15 +45,9 @@
                 prevEl: ".mainhero__previous__el"
             }}
             effect="fade"
-            on:swiper={onMainSwiper}
         >
             {#each Array(100) as f, i}
-                <MainHero
-                    backgroundImageUrl={"/images/Hyouka-poster.png"}
-                    animeName="Hyouka {i}"
-                    on:backClick={onMainSwiperBackward}
-                    on:forwardClick={onMainSwiperForward}
-                />
+                <MainHero backgroundImageUrl={"/images/Hyouka-poster.png"} animeName="Hyouka {i}" />
             {/each}
         </Swiper>
     </SwiperSlide>
@@ -130,7 +112,7 @@
                         <button
                             class="button is-medium is-warning has-text-white mx-0 has-text-weight-medium"
                         >
-                            {trendingSlide}
+                            {String(trendingSlide).padStart(2, "0")}
                         </button>
 
                         <button
@@ -188,6 +170,7 @@
                         modifier: 1,
                         slideShadows: true
                     }}
+                    on:slideChange={onFromYourListSlideChange}
                 >
                     {#each Array(12) as _, i}
                         <FromYourList />
@@ -210,7 +193,7 @@
                         <button
                             class="button is-medium is-warning has-text-white mx-0 has-text-weight-medium"
                         >
-                            {trendingSlide}
+                            {String(fromyourlistSlide)?.padStart(2, "0")}
                         </button>
 
                         <button
