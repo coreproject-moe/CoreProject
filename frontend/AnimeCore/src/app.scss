@@ -14,10 +14,10 @@ $themeColor: #edd68d;
 
 @import "swiper/scss";
 
+@import 'swiper/scss/autoplay';
 @import "swiper/scss/mousewheel";
 @import "swiper/scss/pagination";
 @import "swiper/scss/effect-fade";
-@import 'swiper/scss/autoplay';
 
 :root {
     --swiper-pagination-bullet-size: 18px;
