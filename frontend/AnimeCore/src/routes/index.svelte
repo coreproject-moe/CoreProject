@@ -59,14 +59,12 @@
             on:swiper={onMainSwiper}
         >
             {#each Array(100) as f, i}
-                <SwiperSlide>
-                    <MainHero
-                        backgroundImageUrl={"/images/Hyouka-poster.png"}
-                        animeName="Hyouka {i}"
-                        on:backClick={onMainSwiperBackward}
-                        on:forwardClick={onMainSwiperForward}
-                    />
-                </SwiperSlide>
+                <MainHero
+                    backgroundImageUrl={"/images/Hyouka-poster.png"}
+                    animeName="Hyouka {i}"
+                    on:backClick={onMainSwiperBackward}
+                    on:forwardClick={onMainSwiperForward}
+                />
             {/each}
         </Swiper>
     </SwiperSlide>
@@ -111,9 +109,7 @@
                     effect={$responsiveMode === "mobile" ? "slide" : "fade"}
                 >
                     {#each Array(11) as _, i}
-                        <SwiperSlide>
-                            <TrendingHero slideNumber={String(i).padStart(2, "0")} />
-                        </SwiperSlide>
+                        <TrendingHero slideNumber={String(i).padStart(2, "0")} />
                     {/each}
                 </Swiper>
             </div>
@@ -148,7 +144,68 @@
         </section>
     </SwiperSlide>
     <SwiperSlide>
-      
+        <section class="hero {$responsiveMode === 'mobile' ? 'is-small' : 'is-fullheight'}">
+            <!-- Hero head: will stick at the top -->
+            <div class="hero-head">
+                <div class="container pt-6 px-4" style="max-width:95vw">
+                    <div class="title is-size-2 has-text-white">
+                        <div class="columns is-mobile">
+                            <div class="column is-narrow">
+                                <span class="is-align-self-center"> FROM YOUR LIST </span>
+                            </div>
+                            <div class="column is-flex">
+                                <div
+                                    class="is-align-self-center"
+                                    style="
+                                        width: 100%;
+                                        display: inline-block;
+                                        border-top: 10px solid;
+                                    "
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero content: will be in the middle -->
+            <div class="hero-body">
+                <Swiper
+                    modules={[EffectCoverflow]}
+                    grabCursor={true}
+                    centeredSlides={true}
+                    slidesPerView={5}
+                    loop={true}
+                    coverflowEffect={{
+                        rotate: 50,
+                        stretch: 0,
+                        depth: 100,
+                        modifier: 1,
+                        slideShadows: true
+                    }}
+                >
+                    {#each Array(12) as _, i}
+                        <FromYourList />
+                    {/each}
+                </Swiper>
+            </div>
+
+            <!-- Hero footer: will stick at the bottom -->
+            <div class="hero-foot">
+                <nav class="tabs is-boxed is-fullwidth">
+                    <div class="container">
+                        <ul>
+                            <li class="is-active"><a>Overview</a></li>
+                            <li><a>Modifiers</a></li>
+                            <li><a>Grid</a></li>
+                            <li><a>Elements</a></li>
+                            <li><a>Components</a></li>
+                            <li><a>Layout</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+        </section>
     </SwiperSlide>
 </Swiper>
 
