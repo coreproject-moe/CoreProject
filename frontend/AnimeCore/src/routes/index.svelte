@@ -95,6 +95,7 @@
             <div class="hero-body">
                 <Swiper
                     slidesPerView={$responsiveMode === "mobile" ? 3 : 1}
+                    spaceBetween={$responsiveMode === "mobile" ? 10 : 40}
                     on:slideChange={onTrendingSlideChange}
                     pagination={{
                         el: ".trending__pagination__element"
@@ -173,9 +174,8 @@
                 <Swiper
                     modules={[EffectCoverflow]}
                     grabCursor={true}
-                    centeredSlides={true}
-                    slidesPerView={5}
-                    loop={true}
+                    slidesPerView={$responsiveMode === "mobile" ? 3 : 5}
+                    spaceBetween={$responsiveMode === "mobile" ? 10 : 40}
                     coverflowEffect={{
                         rotate: 50,
                         stretch: 0,
@@ -191,19 +191,32 @@
             </div>
 
             <!-- Hero footer: will stick at the bottom -->
-            <div class="hero-foot">
-                <nav class="tabs is-boxed is-fullwidth">
-                    <div class="container">
-                        <ul>
-                            <li class="is-active"><a>Overview</a></li>
-                            <li><a>Modifiers</a></li>
-                            <li><a>Grid</a></li>
-                            <li><a>Elements</a></li>
-                            <li><a>Components</a></li>
-                            <li><a>Layout</a></li>
-                        </ul>
+            <div class="hero-foot is-hidden-mobile">
+                <div class="py-6">
+                    <div class="field is-grouped is-justify-content-center">
+                        <button
+                            class="button is-medium has-border-warning-light is-warning is-outlined mx-5 trending__previous__el"
+                        >
+                            <span class="icon is-small">
+                                <img alt="" src="/icons/chevron-left.svg" height={24} width={24} />
+                            </span>
+                        </button>
+
+                        <button
+                            class="button is-medium is-warning has-text-white mx-0 has-text-weight-medium"
+                        >
+                            {trendingSlide}
+                        </button>
+
+                        <button
+                            class="button is-medium has-border-warning-light is-warning is-outlined mx-5 trending__next__el"
+                        >
+                            <span class="icon is-small">
+                                <img alt="" src="/icons/chevron-right.svg" height={24} width={24} />
+                            </span>
+                        </button>
                     </div>
-                </nav>
+                </div>
             </div>
         </section>
     </SwiperSlide>

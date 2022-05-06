@@ -1,31 +1,20 @@
 <script lang="ts">
-    import { createEventDispatcher } from "svelte";
     import { responsiveMode } from "$store/responsive";
     import { SwiperSlide } from "swiper/svelte";
 
-    export let backgroundImageUrl = "/images/Sono Bisque Doll.jpg";
     export let bannerImageUrl = "/images/sono bisque doll banner.jpeg";
-    export let slideNumber = "01";
     export let animeName = "My Dress Up Darling";
-
-    const dispatch = createEventDispatcher();
-
-    const onBackClick = () => {
-        dispatch("backClick", {});
-    };
-
-    const onForwardClick = () => {
-        dispatch("forwardClick", {});
-    };
 </script>
 
 <SwiperSlide>
-    <div class="box" style="background-color:transparent;">
+    <div class="box is-flex is-flex-direction-column" style="background-color:transparent;">
         <div
-            class="box is-flex"
+            class="box is-flex is-align-self-center"
             style="
+                height: {$responsiveMode === 'mobile' ? '14vh' : '32vh'};
+                width:15vw;
                 background-size: cover;
-                background-image:url('{bannerImageUrl}');
+                background-image: url('{bannerImageUrl}');
                 box-shadow:
                     inset 0px -65px 25px -20px rgba(7, 5, 25, 1),
                     inset 0px -70px 75px -20px rgba(7, 5, 25, .8),
@@ -39,9 +28,6 @@
             >
                 {animeName}
             </div>
-        </div>
-        <div class="has-text-white has-text-weight-bold has-text-centered">
-            {slideNumber}
         </div>
     </div>
 </SwiperSlide>
