@@ -54,8 +54,8 @@
                 inset 25vw 0px 100px -20px rgba(7, 5, 25, .7),
                 inset 35vw 0px 100px -20px rgba(7, 5, 25, .6),
                 inset 50vw 0px 100px -20px rgba(7, 5, 25, .4)
-            ; 
-            
+            ;
+
         "
         >
             <div
