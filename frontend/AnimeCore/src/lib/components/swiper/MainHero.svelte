@@ -9,7 +9,7 @@
 
 <SwiperSlide>
     <section
-        class="hero is-success {$responsiveMode === 'mobile' ? 'is-small' : 'is-fullheight'}"
+        class="hero {$responsiveMode === 'mobile' ? 'is-halfheight' : 'is-fullheight'}"
         style="
             background-image: url({backgroundImageUrl});
             background-repeat: no-repeat;
@@ -32,7 +32,11 @@
         <!-- Hero content: will be in the middle -->
         <div class="hero-body is-align-items-self-end">
             <div class="container">
-                <div class="title has-text-warning is-size-4 container">
+                <div
+                    class="title has-text-warning  container mb-0 {$responsiveMode === 'mobile'
+                        ? 'is-size-7'
+                        : 'is-size-4'}"
+                >
                     <div class="is-flex">
                         <span class="pr-2 is-align-self-center">Featured</span>
                         <div
@@ -41,35 +45,47 @@
                         />
                     </div>
                 </div>
-                <div class="title is-size-1 has-text-white is-bold">{animeName}</div>
-                <div class="subtitle is-size-6 has-text-white pt-5" style="width: 60%;">
+                <div
+                    class="title has-text-white is-bold mb-0 {$responsiveMode === 'mobile'
+                        ? 'is-size-2'
+                        : 'is-size-1'}"
+                >
+                    {animeName}
+                </div>
+                <div
+                    class="subtitle has-text-white pt-5 {$responsiveMode === 'mobile'
+                        ? 'is-size-7'
+                        : 'is-size-6'}"
+                    style={$responsiveMode === "mobile" ? "width: 100%;" : "width: 60%;"}
+                >
                     Energy-conservative high school student Houtarou Oreki ends up with more than he
                     bargained for when he signs up for the Classic Literature Club at his
                     sister&apos;s behest especially when he realizes how deep-rooted the club&apos;s
                     history really is. Begrudgingly, Oreki is dragged into an...
                 </div>
-                <div class="subtitle">
+                <!-- Tags -->
+                <div class="subtitle is-hidden-mobile">
                     <span class="tag is-size-6 mx-1 is-bold is-black"> Mystery </span>
                     <span class="tag is-size-6 mx-1 is-bold is-black"> Slice of Life </span>
                 </div>
+
                 <div class="subtitle">
                     <div class="buttons are-medium">
                         <button
                             class="button is-warning has-border-transparent mx-3"
                             style="border-radius: 12px"
                         >
-                            <span class="icon is-small">
-                                <img alt="" src="/icons/play.svg" height={24} width={24} />
-                            </span>
+                            <img alt="" src="/icons/play.svg" />
+                            <span class="has-text-weight-bold is-size-6 is-hidden-desktop mx-1"
+                                >Watch</span
+                            >
                         </button>
                         <button class="button is-warning is-outlined mx-4 is-flex">
-                            <span class="has-text-weight-semibold">Details</span>
+                            <span class="has-text-weight-semibold mx-1">Details</span>
                             <img
-                                class="is-align-self-flex-end"
+                                class="is-align-self-flex-center"
                                 alt=""
                                 src="/icons/chevrons-right.svg"
-                                height={26}
-                                width={26}
                             />
                         </button>
                         <button
@@ -109,7 +125,7 @@
 
 <style lang="scss">
     .button {
-        border-radius: 16px;
+        border-radius: 16px !important;
         border-width: 5px;
         height: 32px;
     }
