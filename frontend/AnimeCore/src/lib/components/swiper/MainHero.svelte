@@ -1,20 +1,9 @@
 <script lang="ts">
-    import { createEventDispatcher } from "svelte";
     import { responsiveMode } from "$store/responsive";
     import Navbar from "$components/common/Navbar.svelte";
 
     export let backgroundImageUrl: string;
     export let animeName: string;
-
-    const dispatch = createEventDispatcher();
-
-    const onBackClick = () => {
-        dispatch("backClick", {});
-    };
-
-    const onForwardClick = () => {
-        dispatch("forwardClick", {});
-    };
 </script>
 
 <section
@@ -82,16 +71,15 @@
                         />
                     </button>
                     <button
-                        class="button has-border-warning-light is-warning is-outlined mx-4 is-hidden-mobile"
-                        on:click={onBackClick}
+                        class="button has-border-warning-light is-warning is-outlined mx-4 is-hidden-mobile mainhero__previous__el"
+                 
                     >
                         <span class="icon is-small">
                             <img alt="" src="/icons/chevron-left.svg" height={24} width={24} />
                         </span>
                     </button>
                     <button
-                        class="button has-border-warning-light is-warning is-outlined mx-1 is-hidden-mobile"
-                        on:click={onForwardClick}
+                        class="button has-border-warning-light is-warning is-outlined mx-1 is-hidden-mobile mainhero__next__el"
                     >
                         <span class="icon is-small">
                             <img alt="" src="/icons/chevron-right.svg" height={24} width={24} />
