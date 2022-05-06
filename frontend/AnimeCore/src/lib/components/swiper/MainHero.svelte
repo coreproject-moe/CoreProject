@@ -2,11 +2,13 @@
     import { responsiveMode } from "$store/responsive";
     import Navbar from "$components/common/Navbar.svelte";
     import { SwiperSlide } from "swiper/svelte";
+    import { truncateString } from "$lib/functions/truncateText";
 
     export let backgroundImageUrl: string;
     export let animeName: string;
     export let backgroundBannerUrl: string =
         "https://media.kitsu.io/anime/poster_images/6686/large.jpg";
+    export let animeSummary: string = `Energy-conservative high school student Houtarou Oreki ends up with more than he bargained for when he signs up for the Classic Literature Club at his sister&apos;s behest especially when he realizes how deep-rooted the club&apos;s history really is. Begrudgingly, Oreki is dragged into an...`;
 </script>
 
 <SwiperSlide>
@@ -57,10 +59,7 @@
                         : 'is-size-6'}"
                     style={$responsiveMode === "mobile" ? "width: 100%;" : "width: 60%;"}
                 >
-                    Energy-conservative high school student Houtarou Oreki ends up with more than he
-                    bargained for when he signs up for the Classic Literature Club at his
-                    sister&apos;s behest especially when he realizes how deep-rooted the club&apos;s
-                    history really is. Begrudgingly, Oreki is dragged into an...
+                    {truncateString(animeSummary, 100)}
                 </div>
                 <!-- Tags -->
                 <div class="subtitle is-hidden-mobile">
@@ -68,40 +67,38 @@
                     <span class="tag is-size-6 mx-1 is-bold is-black"> Slice of Life </span>
                 </div>
 
-                <div class="subtitle">
-                    <div class="buttons are-medium">
-                        <button
-                            class="button is-warning has-border-transparent mx-3"
-                            style="border-radius: 12px"
+                <div class="buttons {$responsiveMode === 'mobile' ? 'are-small' : 'are-medium'}">
+                    <button
+                        class="button is-warning has-border-transparent mx-3"
+                        style="border-radius: 12px"
+                    >
+                        <img alt="" src="/icons/play.svg" />
+                        <span class="has-text-weight-bold is-size-6 is-hidden-desktop mx-1"
+                            >Watch</span
                         >
-                            <img alt="" src="/icons/play.svg" />
-                            <span class="has-text-weight-bold is-size-6 is-hidden-desktop mx-1"
-                                >Watch</span
-                            >
-                        </button>
-                        <button class="button is-warning is-outlined mx-4 is-flex">
-                            <span class="has-text-weight-semibold mx-1">Details</span>
-                            <img
-                                class="is-align-self-flex-center"
-                                alt=""
-                                src="/icons/chevrons-right.svg"
-                            />
-                        </button>
-                        <button
-                            class="button has-border-warning-light is-warning is-outlined mx-4 is-hidden-mobile mainhero__previous__el"
-                        >
-                            <span class="icon is-small">
-                                <img alt="" src="/icons/chevron-left.svg" height={24} width={24} />
-                            </span>
-                        </button>
-                        <button
-                            class="button has-border-warning-light is-warning is-outlined mx-1 is-hidden-mobile mainhero__next__el"
-                        >
-                            <span class="icon is-small">
-                                <img alt="" src="/icons/chevron-right.svg" height={24} width={24} />
-                            </span>
-                        </button>
-                    </div>
+                    </button>
+                    <button class="button is-warning is-outlined mx-4 is-flex">
+                        <span class="has-text-weight-semibold mx-1">Details</span>
+                        <img
+                            class="is-align-self-flex-center"
+                            alt=""
+                            src="/icons/chevrons-right.svg"
+                        />
+                    </button>
+                    <button
+                        class="button has-border-warning-light is-warning is-outlined mx-4 is-hidden-mobile mainhero__previous__el"
+                    >
+                        <span class="icon is-small">
+                            <img alt="" src="/icons/chevron-left.svg" height={24} width={24} />
+                        </span>
+                    </button>
+                    <button
+                        class="button has-border-warning-light is-warning is-outlined mx-1 is-hidden-mobile mainhero__next__el"
+                    >
+                        <span class="icon is-small">
+                            <img alt="" src="/icons/chevron-right.svg" height={24} width={24} />
+                        </span>
+                    </button>
                 </div>
             </div>
         </div>
