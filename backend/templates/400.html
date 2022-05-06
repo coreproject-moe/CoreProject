@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+<!--prettier-ignore-->
+{% load static %}
+
+{% block body %}
+
+<section class="hero is-fullheight" style="background-color: #070519">
+    <div class="hero-body">
+        <div
+            class="columns is-mobile is-align-self-flex-start is-flex-direction-column"
+        >
+            <div class="column py-6">
+                <div class="columns">
+                    <div class="column is-justify-content-center is-flex">
+                        <img src="{% static 'images/kaomoji/dumbface.svg' %}" />
+                    </div>
+                    <div class="column is-justify-content-center is-flex">
+                        <img
+                            src="{% static 'images/kaomoji/frustrated.svg' %}"
+                        />
+                    </div>
+                    <div class="column is-justify-content-center is-flex">
+                        <img
+                            src="{% static 'images/kaomoji/happy_cry.svg' %}"
+                        />
+                    </div>
+                </div>
+            </div>
+            <div class="column py-6">
+                <div class="columns">
+                    <div class="column is-justify-content-center is-flex">
+                        <img src="{% static 'images/kaomoji/sad.svg' %}" />
+                    </div>
+                    <div class="column is-justify-content-center is-flex">
+                        <img
+                            src="{% static 'images/kaomoji/how_could_you_do_it.svg' %}"
+                        />
+                    </div>
+                    <div class="column is-justify-content-center is-flex">
+                        <img src="{% static 'images/kaomoji/oh_no.svg' %}" />
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <section class="hero is-medium">
+                    <div class="hero-body">
+                        <div class="columns">
+                            <div
+                                class="column is-narrow px-6 is-align-self-center is-size-3 has-text-weight-bold"
+                                style="color: #7569e1"
+                            >
+                                400 - bad request
+                            </div>
+                            <div
+                                class="column is-align-self-center has-text-centered has-text-weight-semibold"
+                                style="color: #bdbdbd"
+                            >
+                                Our hardworking kokoro-chan was unable to find
+                                that page. While she collects more data on it,
+                                why don’t you go back home, explore some random
+                                anime, browse the forums or come say hi!
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
