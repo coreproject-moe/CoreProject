@@ -11,7 +11,7 @@
 {% block kaomoji %}
 
 <div class="column is-justify-content-center is-flex">
-  <img src="{% static 'images/kaomoji/sad.svg' %}" />
+    <img src="{% static 'images/kaomoji/sad.svg' %}" />
 </div>
 
 {% endblock %}
@@ -19,39 +19,39 @@
 <!--prettier-ignore-->
 {% block error %}
 <div class="column">
-  <section class="hero is-medium">
-    <div class="hero-body is-justify-content-center">
-      <div
-        class="columns is-flex-direction-column has-text-centered"
-        :class="$store.responsiveMode === 'mobile' ? 'mobile__vw' : 'desktop__vw'"
-      >
-        <div
-          class="column is-narrow px-6 is-align-self-center is-size-3 has-text-weight-bold"
-          :class="$store.responsiveMode === 'mobile' ? 'is-size-5' : 'is-size-3'"
-          style="color: #7569e1"
-        >
-          500 - server error
+    <section class="hero is-medium">
+        <div class="hero-body is-justify-content-center">
+            <div
+                class="columns is-flex-direction-column has-text-centered"
+                :class="$store.responsiveMode === 'mobile' ? 'mobile__vw' : 'desktop__vw'"
+            >
+                <div
+                    class="column is-narrow px-6 is-align-self-center is-size-3 has-text-weight-bold"
+                    :class="$store.responsiveMode === 'mobile' ? 'is-size-5' : 'is-size-3'"
+                    style="color: #7569e1"
+                >
+                    500 - server error
+                </div>
+                <div
+                    class="column is-align-self-center has-text-centered has-text-weight-semibold"
+                    :class="$store.responsiveMode === 'mobile' ? 'is-size-6' : 'is-size-4'"
+                    style="color: #bdbdbd"
+                >
+                    Our hardworking
+                    <span class="has-text-white">k</span
+                    ><span class="has-text-warning">o</span
+                    ><span class="has-text-white">k</span
+                    ><span class="has-text-warning">o</span
+                    ><span class="has-text-white">r</span
+                    ><span class="has-text-warning">o</span
+                    ><span class="has-text-white">-chan</span>
+                    was unable to find that page. While she collects more data
+                    on it, why don’t you go back home, explore some random
+                    anime, browse the forums or come say hi!
+                </div>
+            </div>
         </div>
-        <div
-          class="column is-align-self-center has-text-centered has-text-weight-semibold"
-          :class="$store.responsiveMode === 'mobile' ? 'is-size-6' : 'is-size-4'"
-          style="color: #bdbdbd"
-        >
-          Our hardworking
-          <span class="has-text-white">k</span
-          ><span class="has-text-warning">o</span
-          ><span class="has-text-white">k</span
-          ><span class="has-text-warning">o</span
-          ><span class="has-text-white">r</span
-          ><span class="has-text-warning">o</span
-          ><span class="has-text-white">-chan</span>
-          was unable to find that page. While she collects more data on it, why
-          don’t you go back home, explore some random anime, browse the forums
-          or come say hi!
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 </div>
 
 {%endblock%}
