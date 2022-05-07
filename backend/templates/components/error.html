@@ -5,46 +5,40 @@
 {% block body %}
 
 <section class="hero is-fullheight" style="background-color: #070519">
-    <div class="hero-body is-justify-content-center">
-        <div
-            class="columns is-mobile is-align-self-flex-start is-flex-direction-column"
-            style="min-width: 100vw"
-        >
-            <div class="column py-6">
-                <div class="columns">
-                    <div class="column is-justify-content-center is-flex">
-                        <img src="{% static 'images/kaomoji/dumbface.svg' %}" />
-                    </div>
-                    <div class="column is-justify-content-center is-flex">
-                        <img
-                            src="{% static 'images/kaomoji/frustrated.svg' %}"
-                        />
-                    </div>
-                    <div class="column is-justify-content-center is-flex">
-                        <img
-                            src="{% static 'images/kaomoji/happy_cry.svg' %}"
-                        />
-                    </div>
-                </div>
-            </div>
-            <div class="column py-6">
-                <div class="columns">
-                    <div class="column is-justify-content-center is-flex">
-                        <img src="{% static 'images/kaomoji/sad.svg' %}" />
-                    </div>
-                    <div class="column is-justify-content-center is-flex">
-                        <img
-                            src="{% static 'images/kaomoji/how_could_you_do_it.svg' %}"
-                        />
-                    </div>
-                    <div class="column is-justify-content-center is-flex">
-                        <img src="{% static 'images/kaomoji/oh_no.svg' %}" />
-                    </div>
-                </div>
-            </div>
-            {% block error %} {% endblock %}
+  <div class="hero-body is-justify-content-center">
+    <div
+      class="columns is-mobile is-align-self-flex-start is-flex-direction-column"
+      style="min-width: 100vw"
+    >
+      <div class="column py-6">
+        <div class="columns">
+          <div class="column is-justify-content-center is-flex">
+            <img src="{% static 'images/kaomoji/dumbface.svg' %}" />
+          </div>
+          <div class="column is-justify-content-center is-flex">
+            <img src="{% static 'images/kaomoji/frustrated.svg' %}" />
+          </div>
+          <div class="column is-justify-content-center is-flex">
+            <img src="{% static 'images/kaomoji/happy_cry.svg' %}" />
+          </div>
         </div>
+      </div>
+      <div class="column py-6">
+        <div class="columns">
+          <div class="column is-justify-content-center is-flex">
+            <img src="{% static 'images/kaomoji/sad.svg' %}" />
+          </div>
+          <div class="column is-justify-content-center is-flex">
+            <img src="{% static 'images/kaomoji/how_could_you_do_it.svg' %}" />
+          </div>
+          <div class="column is-justify-content-center is-flex">
+            <img src="{% static 'images/kaomoji/oh_no.svg' %}" />
+          </div>
+        </div>
+      </div>
+      {% block error %} {% endblock %}
     </div>
+  </div>
 </section>
 
 {% endblock %}
