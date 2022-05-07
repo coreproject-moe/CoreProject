@@ -9,6 +9,20 @@
     export let backgroundBannerUrl: string =
         "https://media.kitsu.io/anime/poster_images/6686/large.jpg";
     export let animeSummary: string = `Energy-conservative high school student Houtarou Oreki ends up with more than he bargained for when he signs up for the Classic Literature Club at his sister&apos;s behest especially when he realizes how deep-rooted the club&apos;s history really is. Begrudgingly, Oreki is dragged into an...`;
+
+    let wordCount: number;
+
+    $: switch ($responsiveMode) {
+        case "mobile":
+            wordCount = 100;
+            break;
+        case "tablet":
+            wordCount = 350;
+            break;
+        case "desktop":
+            wordCount = 500;
+            break;
+    }
 </script>
 
 <SwiperSlide>
@@ -59,7 +73,7 @@
                         : 'is-size-6'}"
                     style={$responsiveMode === "mobile" ? "width: 100%;" : "width: 60%;"}
                 >
-                    {truncateString(animeSummary, 100)}
+                    {truncateString(animeSummary, wordCount)}
                 </div>
                 <!-- Tags -->
                 <div class="subtitle is-hidden-mobile">
