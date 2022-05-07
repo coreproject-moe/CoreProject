@@ -48,8 +48,8 @@
         <div class="hero-body is-align-items-self-end">
             <div class="container">
                 <div
-                    class="title has-text-warning  container mb-0 {$responsiveMode === 'mobile'
-                        ? 'is-size-7'
+                    class="title has-text-warning  container {$responsiveMode === 'mobile'
+                        ? 'is-size-7 mb-0'
                         : 'is-size-4'}"
                 >
                     <div class="is-flex">
@@ -61,8 +61,8 @@
                     </div>
                 </div>
                 <div
-                    class="title has-text-white is-bold mb-0 {$responsiveMode === 'mobile'
-                        ? 'is-size-2'
+                    class="title has-text-white is-bold {$responsiveMode === 'mobile'
+                        ? 'is-size-2 mb-0'
                         : 'is-size-1'}"
                 >
                     {animeName}
