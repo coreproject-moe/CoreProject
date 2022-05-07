@@ -1,24 +1,30 @@
-{%extends 'components/error.html'%}
+{% extends 'components/error.html' %}
 <!--prettier-ignore-->
-{%block error%}
+
+{% block head %}
+<title>400 | bad request</title>
+{% endblock %}
+
+<!--prettier-ignore-->
+{% block error %}
 <div class="column">
-  <section class="hero is-medium">
-    <div class="hero-body">
-      <div class="columns">
-        <div
-          class="column is-narrow px-6 is-align-self-center is-size-3 has-text-weight-bold"
-          style="color: #7569e1"
-        >
-          400 - bad request
+    <section class="hero is-medium">
+        <div class="hero-body">
+            <div class="columns">
+                <div
+                    class="column is-narrow px-6 is-align-self-center is-size-3 has-text-weight-bold"
+                    style="color: #7569e1"
+                >
+                    400 - bad request
+                </div>
+                <div
+                    class="column is-align-self-center has-text-centered has-text-weight-semibold is-size-4"
+                    style="color: #bdbdbd"
+                >
+                    HH
+                </div>
+            </div>
         </div>
-        <div
-          class="column is-align-self-center has-text-centered has-text-weight-semibold is-size-4"
-          style="color: #bdbdbd"
-        >
-          HH
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 </div>
 {%endblock%}
