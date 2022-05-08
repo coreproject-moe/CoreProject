@@ -46,6 +46,10 @@ html {
         height: 100%;
     }
 
+    .swiper-wrapper {
+        box-sizing: inherit !important;
+    }
+
     @media screen and (max-width: ($tablet - 1px)) {
         .swiper-slide {
             height: auto !important;

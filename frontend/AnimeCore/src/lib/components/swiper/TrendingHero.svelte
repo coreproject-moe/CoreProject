@@ -120,6 +120,5 @@
     .button {
         border-radius: 16px;
         border-width: 5px;
-        height: 32px;
     }
 </style>
