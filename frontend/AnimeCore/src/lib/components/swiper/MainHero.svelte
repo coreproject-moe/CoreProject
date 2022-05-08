@@ -12,16 +12,20 @@
 
     let wordCount: number;
 
-    $: switch ($responsiveMode) {
-        case "mobile":
-            wordCount = 100;
-            break;
-        case "tablet":
-            wordCount = 350;
-            break;
-        case "desktop":
-            wordCount = 500;
-            break;
+    $: {
+        switch ($responsiveMode) {
+            case "mobile":
+                wordCount = 100;
+                break;
+            case "tablet":
+                wordCount = 350;
+                break;
+            case "desktop":
+                wordCount = 500;
+                break;
+            default:
+                break;
+        }
     }
 </script>
 

@@ -52,6 +52,9 @@ html {
     }
 
     @media screen and (max-width: ($tablet - 1px)) {
+        .swiper-wrapper {
+            box-sizing: content-box !important;
+        }
         .swiper-slide {
             height: auto !important;
         }
