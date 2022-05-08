@@ -3,7 +3,6 @@
 $warning: #e3bd49;
 $warning-light: lighten($warning, 15%);
 
-
 @use "bulma/bulma.sass" as bulma
     with(
         $family-sans-serif: "Kokoro",
