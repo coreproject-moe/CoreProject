@@ -3,18 +3,18 @@ $warning-light: lighten($warning, 15%);
 
 @use "/static/fonts/Kokoro/stylesheet.scss";
 
-
-@use "bulma/bulma.sass" as bulma with(
-    $family-sans-serif: "Kokoro",
-    $tag-color: white,
-    $warning: $warning,
-    $black: black,
-    $white: #f2f2f2,
-);
+@use "bulma/bulma.sass" as bulma
+    with(
+        $family-sans-serif: "Kokoro",
+        $tag-color: white,
+        $warning: $warning,
+        $black: black,
+        $white: #f2f2f2
+    );
 
 // Swiper Import
 @use "swiper/scss" with (
-    $themeColor:$warning-light,
+    $themeColor: $warning-light
 );
 
 @use "swiper/scss/autoplay";
