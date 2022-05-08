@@ -1,7 +1,8 @@
+@use "/static/fonts/Kokoro/stylesheet.scss";
+
 $warning: #e3bd49;
 $warning-light: lighten($warning, 15%);
 
-@use "/static/fonts/Kokoro/stylesheet.scss";
 
 @use "bulma/bulma.sass" as bulma
     with(
