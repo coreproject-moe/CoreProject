@@ -1,6 +1,5 @@
 {
     "devDependencies": {
-        "@creativebulma/bulma-divider": "^1.1.0",
         "@fullhuman/postcss-purgecss": "^4.1.3",
         "@sveltejs/adapter-static": "^1.0.0-next.29",
         "@sveltejs/kit": "^1.0.0-next.326",
