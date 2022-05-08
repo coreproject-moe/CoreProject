@@ -131,9 +131,8 @@
             </div>
         </section>
     </SwiperSlide>
-    <SwiperSlide>
+    <!-- <SwiperSlide>
         <section class="hero {$responsiveMode === 'mobile' ? 'is-small' : 'is-fullheight'}">
-            <!-- Hero head: will stick at the top -->
             <div class="hero-head">
                 <div class="container pt-6 px-4" style="max-width:95vw">
                     <div class="title is-size-2 has-text-white">
@@ -156,8 +155,28 @@
                 </div>
             </div>
 
-            <!-- Hero content: will be in the middle -->
-            <div class="hero-body">
+            <div class="hero-body is-flex-direction-column is-justify-content-center">
+                <div class="dropdown pb-4">
+                    <div class="dropdown-trigger">
+                        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                            <span>Dropdown button</span>
+                            <span class="icon is-small">
+                                <i class="fas fa-angle-down" aria-hidden="true" />
+                            </span>
+                        </button>
+                    </div>
+                    <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                        <div class="dropdown-content">
+                            <a href="#" class="dropdown-item"> Dropdown item </a>
+                            <a class="dropdown-item"> Other dropdown item </a>
+                            <a href="#" class="dropdown-item is-active"> Active dropdown item </a>
+                            <a href="#" class="dropdown-item"> Other dropdown item </a>
+                            <hr class="dropdown-divider" />
+                            <a href="#" class="dropdown-item"> With a divider </a>
+                        </div>
+                    </div>
+                </div>
+
                 <Swiper
                     navigation={{
                         nextEl: ".fromyourlist__next__el",
@@ -182,7 +201,6 @@
                 </Swiper>
             </div>
 
-            <!-- Hero footer: will stick at the bottom -->
             <div class="hero-foot is-hidden-mobile">
                 <div class="py-6">
                     <div class="field is-grouped is-justify-content-center">
@@ -211,7 +229,7 @@
                 </div>
             </div>
         </section>
-    </SwiperSlide>
+    </SwiperSlide> -->
 </Swiper>
 
 <style lang="scss">
