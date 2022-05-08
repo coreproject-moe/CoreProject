@@ -1,25 +1,26 @@
-@import "/static/fonts/Kokoro/stylesheet.scss";
-
-$family-sans-serif: "Kokoro";
-
-$tag-color: white;
-
 $warning: #e3bd49;
-$black: black;
-$white: #f2f2f2;
+$warning-light: lighten($warning, 15%);
 
-@import "bulma/bulma.sass";
+@use "/static/fonts/Kokoro/stylesheet.scss";
+
+
+@use "bulma/bulma.sass" as bulma with(
+    $family-sans-serif: "Kokoro",
+    $tag-color: white,
+    $warning: $warning,
+    $black: black,
+    $white: #f2f2f2,
+);
 
 // Swiper Import
-$themeColor: #edd68d;
+@use "swiper/scss" with (
+    $themeColor:$warning-light,
+);
 
-@import "swiper/scss";
-
-@import "swiper/scss/autoplay";
-@import "swiper/scss/mousewheel";
-@import "swiper/scss/pagination";
-@import "swiper/scss/effect-fade";
-@import "swiper/scss/autoplay";
+@use "swiper/scss/autoplay";
+@use "swiper/scss/mousewheel";
+@use "swiper/scss/pagination";
+@use "swiper/scss/effect-fade";
 
 :root {
     --swiper-pagination-bullet-size: 18px;
@@ -31,7 +32,6 @@ html {
     background-color: #070519;
 
     // Swiper Override
-
     &,
     body {
         position: relative;
@@ -51,7 +51,7 @@ html {
         box-sizing: inherit !important;
     }
 
-    @media screen and (max-width: ($tablet - 1px)) {
+    @media screen and (max-width: (bulma.$tablet - 1px)) {
         .swiper-wrapper {
             box-sizing: content-box !important;
         }
@@ -63,10 +63,10 @@ html {
     // Bulma inspired classes
     // Yellow Color
     .has-warning-light {
-        color: #edd68d;
+        color: $warning-light;
     }
     .has-border-warning-light {
-        border-color: #edd68d !important;
+        border-color: $warning-light !important;
     }
     // Transparent Color
     .has-border-transparent {
