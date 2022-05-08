@@ -8,7 +8,7 @@
     export let animeName: string;
     export let backgroundBannerUrl: string =
         "https://media.kitsu.io/anime/poster_images/6686/large.jpg";
-    export let animeSummary: string = `Energy-conservative high school student Houtarou Oreki ends up with more than he bargained for when he signs up for the Classic Literature Club at his sister&apos;s behest especially when he realizes how deep-rooted the club&apos;s history really is. Begrudgingly, Oreki is dragged into an...`;
+    export let animeSummary: string = `High school freshman Houtarou Oreki has but one goal: to lead a gray life while conserving as much energy as he can. Unfortunately, his peaceful days come to an end when his older sister, Tomoe, forces him to save the memberless Classics Club from disbandment. Luckily, Oreki's predicament seems to be over when he heads to the clubroom and discovers that his fellow first-year, Eru Chitanda, has already become a member. However, despite his obligation being fulfilled, Oreki finds himself entangled by Chitanda's curious and bubbly personality, soon joining the club of his own volition. Hyouka follows the four members of the Classics Club—including Oreki's friends Satoshi Fukube and Mayaka Ibara—as they, driven by Chitanda's insatiable curiosity, solve the trivial yet intriguing mysteries that permeate their daily lives.`;
 
     let wordCount: number;
 
@@ -20,7 +20,10 @@
             case "tablet":
                 wordCount = 350;
                 break;
+
             case "desktop":
+            case "widescreen":
+            case "fullhd":
                 wordCount = 500;
                 break;
             default:
@@ -50,7 +53,7 @@
 
         <!-- Hero content: will be in the middle -->
         <div class="hero-body is-align-items-self-end">
-            <div class="container">
+            <div class="container pb-6">
                 <div
                     class="title has-text-warning  container {$responsiveMode === 'mobile'
                         ? 'is-size-7 mb-0'
@@ -75,7 +78,7 @@
                     class="subtitle has-text-white pt-5 {$responsiveMode === 'mobile'
                         ? 'is-size-7'
                         : 'is-size-6'}"
-                    style={$responsiveMode === "mobile" ? "width: 100%;" : "width: 60%;"}
+                    style={$responsiveMode === "mobile" ? "width: 100%;" : "width: 70%;"}
                 >
                     {truncateString(animeSummary, wordCount)}
                 </div>
