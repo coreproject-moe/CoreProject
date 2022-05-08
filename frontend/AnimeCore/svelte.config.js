@@ -33,17 +33,17 @@ const config = {
                     $urls: path.resolve("./src/lib/constants/backend/urls")
                 }
             },
-            // esbuild: {
-            //     legalComments: "none",
-            //     charset: "utf8"
-            // },
+            esbuild: {
+                legalComments: "none",
+                charset: "utf8"
+            },
             build: {
-                minify: "terser",
-                terserOptions: {
-                    format: {
-                        comments: false
-                    }
-                },
+                // minify: "terser",
+                // terserOptions: {
+                //     format: {
+                //         comments: false
+                //     }
+                // },
                 rollupOptions: {
                     output: {
                         manualChunks: {

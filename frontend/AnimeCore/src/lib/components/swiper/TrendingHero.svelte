@@ -39,24 +39,24 @@
         </div>
     {:else}
         <section
-            class="hero is-halfheight my-4"
+            class="hero"
             style="
-            width: 100%;
-            border-radius:18px;
-            border-color: #070519;
-            background-image:url('{backgroundImageUrl}');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-            box-shadow:
-                inset 5vw 0px 10px -20px rgba(7, 5, 25, 1),
-                inset 10vw 0px 100px -20px rgba(7, 5, 25, .9),
-                inset 25vw 0px 100px -20px rgba(7, 5, 25, .7),
-                inset 35vw 0px 100px -20px rgba(7, 5, 25, .6),
-                inset 50vw 0px 100px -20px rgba(7, 5, 25, .4)
-            ;
-
-        "
+                min-height: 60vh;
+                width: 100%;
+                border-radius:18px;
+                border-color: #070519;
+                background-image:url('{backgroundImageUrl}');
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: cover;
+                box-shadow:
+                    inset 5vw 0px 10px -20px rgba(7, 5, 25, 1),
+                    inset 10vw 0px 100px -20px rgba(7, 5, 25, .9),
+                    inset 25vw 0px 100px -20px rgba(7, 5, 25, .7),
+                    inset 35vw 0px 100px -20px rgba(7, 5, 25, .6),
+                    inset 50vw 0px 100px -20px rgba(7, 5, 25, .4)
+                ;
+            "
         >
             <div
                 class="hero-body is-flex-direction-row px-6"

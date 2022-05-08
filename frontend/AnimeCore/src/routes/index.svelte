@@ -74,7 +74,7 @@
                 </div>
             </div>
 
-            <div class="hero-body">
+            <div class="hero-body py-0">
                 <Swiper
                     slidesPerView={$responsiveMode === "mobile" ? 3 : 1}
                     spaceBetween={$responsiveMode === "mobile" ? 10 : 40}
