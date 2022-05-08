@@ -1,5 +1,3 @@
-@use "/static/fonts/Kokoro/stylesheet.scss";
-
 $warning: #e3bd49;
 $warning-light: lighten($warning, 15%);
 
@@ -27,6 +25,7 @@ $warning-light: lighten($warning, 15%);
     --swiper-pagination-bullet-horizontal-gap: 10px;
     --swiper-pagination-bullet-inactive-color: #070519;
 }
+
 html {
     scrollbar-width: none;
     background-color: #070519;
@@ -72,4 +71,53 @@ html {
     .has-border-transparent {
         border-color: transparent !important;
     }
+}
+
+// Fonts
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-SemiBoldItalic.woff2") format("woff2");
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-SemiBold.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-BoldItalic.woff2") format("woff2");
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-Italic.woff2") format("woff2");
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-Bold.woff2") format("woff2");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
 }
