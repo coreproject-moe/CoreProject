@@ -9,6 +9,7 @@
         "animejs": "^3.2.1",
         "autoprefixer": "^10.4.7",
         "bulma": "^0.9.3",
+        "bulma-modal-fx": "^1.1.1",
         "cssnano": "^5.1.7",
         "eslint": "^8.15.0",
         "eslint-config-prettier": "^8.5.0",
