@@ -12,8 +12,8 @@ $warning-light: lighten($warning, 15%);
         $white: #f2f2f2
     );
 
-@use 'bulma-modal-fx/dist/css/modal-fx' ;
-    
+@use "bulma-modal-fx/dist/css/modal-fx";
+
 // Swiper Import
 @use "swiper/scss" with (
     $themeColor: $warning-light
