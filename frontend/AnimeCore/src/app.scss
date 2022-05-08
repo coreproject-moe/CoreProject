@@ -12,9 +12,8 @@ $warning-light: lighten($warning, 15%);
         $white: #f2f2f2
     );
 
-
 // Extensions
-@use 'bulma-modal-fx/dist/css/modal-fx' ;
+@use "bulma-modal-fx/dist/css/modal-fx";
 
 // Swiper Import
 @use "swiper/scss" with (
@@ -25,7 +24,6 @@ $warning-light: lighten($warning, 15%);
 @use "swiper/scss/mousewheel";
 @use "swiper/scss/pagination";
 @use "swiper/scss/effect-fade";
-
 
 :root {
     --swiper-pagination-bullet-size: 18px;
@@ -83,7 +81,6 @@ $warning-light: lighten($warning, 15%);
     font-display: swap;
 }
 
-
 html {
     scrollbar-width: none;
     background-color: #070519;
@@ -133,5 +130,5 @@ html {
 
 // Extensions
 
-@import 'bulma/sass/utilities/_all.sass';
+@import "bulma/sass/utilities/_all.sass";
 @import "@creativebulma/bulma-divider";
