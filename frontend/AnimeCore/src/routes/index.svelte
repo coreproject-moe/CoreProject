@@ -32,13 +32,16 @@
             case "mobile":
                 slidesPerView = 3;
                 break;
-            case "desktop":
-            case "widescreen":
+
             case "tablet":
                 slidesPerView = 4;
                 break;
-            case "fullhd":
+            case "desktop":
+            case "widescreen":
                 slidesPerView = 5;
+                break;
+            case "fullhd":
+                slidesPerView = 6;
                 break;
             default:
                 break;
@@ -176,7 +179,7 @@
             <div class="hero-body is-flex-direction-column">
                 <nav class="level is-mobile" style="min-width:90vw">
                     <p
-                        class="level-item has-text-centered is-hidden-mobile has-text-white has-text-weight-bold is-justify-content-flex-start pb-6"
+                        class="level-item has-text-centered is-hidden-touch has-text-white has-text-weight-bold is-justify-content-flex-start pb-6"
                     >
                         <span class="pr-2"> Watching 13 anime. AniList </span>
                         <span class="icon is-small">
