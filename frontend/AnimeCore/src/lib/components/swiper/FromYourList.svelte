@@ -14,7 +14,7 @@
             style="
                 border-radius: 1em;
                 height: {$responsiveMode === 'mobile' ? '14vh' : '35vh'};
-                width: 14vw;
+                width:  {$responsiveMode === 'mobile' ? '14vw' : '200px'};
                 background-size: cover;
                 background-image: url('{bannerImageUrl}');
                 box-shadow:

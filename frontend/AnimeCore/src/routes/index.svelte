@@ -44,6 +44,7 @@
                 break;
         }
     }
+    $: console.log($responsiveMode);
 </script>
 
 <Swiper
