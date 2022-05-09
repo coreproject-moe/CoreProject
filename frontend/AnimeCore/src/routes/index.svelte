@@ -161,15 +161,15 @@
                         <div class="dropdown is-active">
                             <div class="dropdown-trigger">
                                 <button class="button is-info mx-4 is-flex">
-                                    <span class="icon"
-                                        ><img
+                                    <span class="icon">
+                                        <img
                                             class="is-align-self-flex-start"
                                             src="/icons/settings.svg"
                                             alt=""
                                             height={24}
                                             width={24}
-                                        /></span
-                                    >
+                                        />
+                                    </span>
                                     <span class="has-text-weight-semibold">Options</span>
                                 </button>
                             </div>
@@ -188,16 +188,45 @@
                         </div>
                     </div>
 
-                    <p class="level-item has-text-centered">
+                    <div class="level-item has-text-centered">
+                        <div class="dropdown is-active">
+                            <div class="dropdown-trigger">
+                                <button class="button is-warning mx-4 is-flex">
+                                    <span class="has-text-weight-semibold has-text-white"
+                                        >Watching</span
+                                    >
+                                    <span class="icon">
+                                        <img
+                                            class="is-align-self-flex-start"
+                                            src="/icons/chevron-down.svg"
+                                            alt=""
+                                            height={24}
+                                            width={24}
+                                        />
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                <div class="dropdown-content">
+                                    <a href="#" class="dropdown-item"> Dropdown item </a>
+                                    <a class="dropdown-item"> Other dropdown item </a>
+                                    <a href="#" class="dropdown-item is-active">
+                                        Active dropdown item
+                                    </a>
+                                    <a href="#" class="dropdown-item"> Other dropdown item </a>
+                                    <hr class="dropdown-divider" />
+                                    <a href="#" class="dropdown-item"> With a divider </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="level-item has-text-centered is-hidden-mobile">
                         <img
                             src="https://bulma.io/images/bulma-type.png"
                             alt=""
                             style="height: 30px;"
                         />
-                    </p>
-
-                    <p class="level-item has-text-centered">
-                        <a class="link is-info">Contact</a>
                     </p>
                 </nav>
 
