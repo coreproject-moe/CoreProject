@@ -177,9 +177,9 @@
             </div>
 
             <div class="hero-body is-flex-direction-column">
-                <nav class="level is-mobile" style="min-width:90vw">
+                <nav class="level is-mobile pb-6" style="min-width:90vw">
                     <p
-                        class="level-item has-text-centered is-hidden-touch has-text-white has-text-weight-bold is-justify-content-flex-start pb-6"
+                        class="level-item has-text-centered is-hidden-touch has-text-white has-text-weight-bold is-justify-content-flex-start"
                     >
                         <span class="pr-2"> Watching 13 anime. AniList </span>
                         <span class="icon is-small">
