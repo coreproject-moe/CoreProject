@@ -8,7 +8,7 @@
         Pagination
     } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
-    
+
     import FromYourList from "$components/swiper/FromYourList.svelte";
     import MainHero from "$components/swiper/MainHero.svelte";
     import TrendingHero from "$components/swiper/TrendingHero.svelte";
