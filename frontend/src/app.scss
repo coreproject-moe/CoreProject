@@ -1,0 +1,128 @@
+$warning: #e3bd49;
+$warning-light: lighten($warning, 15%);
+
+// Bulma
+
+@use "bulma/bulma.sass" as bulma
+    with(
+        $family-sans-serif: "Kokoro",
+        $tag-color: white,
+        $warning: $warning,
+        $black: black,
+        $white: #f2f2f2,
+        $info: #7569e1
+    );
+
+@use "bulma-modal-fx/dist/css/modal-fx";
+
+// Swiper Import
+@use "swiper/scss" with (
+    $themeColor: $warning-light
+);
+
+@use "swiper/scss/autoplay";
+@use "swiper/scss/mousewheel";
+@use "swiper/scss/pagination";
+@use "swiper/scss/effect-fade";
+
+:root {
+    --swiper-pagination-bullet-size: 18px;
+    --swiper-pagination-bullet-horizontal-gap: 10px;
+    --swiper-pagination-bullet-inactive-color: #070519;
+}
+
+html {
+    scrollbar-width: none;
+    background-color: #070519;
+
+    // Swiper Override
+    &,
+    body {
+        position: relative;
+        height: 100%;
+    }
+
+    .swiper {
+        width: 100%;
+        height: 100%;
+    }
+
+    // DONT EVER CHANGE THIS
+    .swiper-wrapper {
+        box-sizing: inherit !important;
+    }
+
+    @media screen and (max-width: (bulma.$tablet - 1px)) {
+        .swiper-wrapper {
+            box-sizing: content-box !important;
+        }
+        .swiper-slide {
+            height: auto !important;
+        }
+    }
+
+    // Bulma inspired classes
+    // Yellow Color
+    .has-warning-light {
+        color: $warning-light;
+    }
+    .has-border-warning-light {
+        border-color: $warning-light !important;
+    }
+    .has-background-warning-light {
+        background-color: $warning-light !important;
+    }
+    // Transparent Color
+    .has-border-transparent {
+        border-color: transparent !important;
+    }
+}
+
+// Fonts
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-SemiBoldItalic.woff2") format("woff2");
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-SemiBold.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-BoldItalic.woff2") format("woff2");
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-Italic.woff2") format("woff2");
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-Bold.woff2") format("woff2");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
