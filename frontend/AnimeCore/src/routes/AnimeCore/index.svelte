@@ -1,12 +1,5 @@
 <script lang="ts">
-    import {
-        Autoplay,
-        EffectCoverflow,
-        EffectFade,
-        Mousewheel,
-        Navigation,
-        Pagination
-    } from "swiper";
+    import { Autoplay, EffectFade, Mousewheel, Navigation, Pagination } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
 
     import FromYourList from "$components/swiper/FromYourList.svelte";
@@ -57,7 +50,7 @@
     modules={[Mousewheel]}
     mousewheel={{ sensitivity: 0.001 }}
 >
-    <!-- <SwiperSlide>
+    <SwiperSlide>
         <Swiper
             modules={[EffectFade, Autoplay, Navigation]}
             navigation={{
@@ -151,7 +144,7 @@
                 </div>
             </div>
         </section>
-    </SwiperSlide> -->
+    </SwiperSlide>
     <SwiperSlide>
         <section class="hero {$responsiveMode === 'mobile' ? 'is-small' : 'is-fullheight'}">
             <div class="hero-head">
@@ -301,7 +294,7 @@
                         <button
                             class="button is-medium is-warning has-text-white mx-0 has-text-weight-medium"
                         >
-                            {String(fromyourlistSlide)?.padStart(2, "0")}
+                            {String(fromyourlistSlide / slidesPerView)?.padStart(2, "0")}
                         </button>
 
                         <button
