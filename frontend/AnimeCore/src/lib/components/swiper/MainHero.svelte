@@ -142,7 +142,7 @@
 
 <style lang="scss">
     .button {
-        border-radius: 16px !important;
+        border-radius: 10px !important;
         border-width: 5px;
 
         @media screen and (max-width: 768px) {
