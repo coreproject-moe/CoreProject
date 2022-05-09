@@ -9,7 +9,8 @@ $warning-light: lighten($warning, 15%);
         $tag-color: white,
         $warning: $warning,
         $black: black,
-        $white: #f2f2f2
+        $white: #f2f2f2,
+        $info: #7569E1,
     );
 
 @use "bulma-modal-fx/dist/css/modal-fx";

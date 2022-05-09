@@ -36,7 +36,7 @@
     modules={[Mousewheel]}
     mousewheel={{ sensitivity: 0.001 }}
 >
-    <SwiperSlide>
+    <!-- <SwiperSlide>
         <Swiper
             modules={[EffectFade, Autoplay, Navigation]}
             navigation={{
@@ -130,8 +130,8 @@
                 </div>
             </div>
         </section>
-    </SwiperSlide>
-    <!-- <SwiperSlide>
+    </SwiperSlide> -->
+    <SwiperSlide>
         <section class="hero {$responsiveMode === 'mobile' ? 'is-small' : 'is-fullheight'}">
             <div class="hero-head">
                 <div class="container pt-6 px-4" style="max-width:95vw">
@@ -156,26 +156,50 @@
             </div>
 
             <div class="hero-body is-flex-direction-column is-justify-content-center">
-                <div class="dropdown pb-4">
-                    <div class="dropdown-trigger">
-                        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                            <span>Dropdown button</span>
-                            <span class="icon is-small">
-                                <i class="fas fa-angle-down" aria-hidden="true" />
-                            </span>
-                        </button>
-                    </div>
-                    <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                        <div class="dropdown-content">
-                            <a href="#" class="dropdown-item"> Dropdown item </a>
-                            <a class="dropdown-item"> Other dropdown item </a>
-                            <a href="#" class="dropdown-item is-active"> Active dropdown item </a>
-                            <a href="#" class="dropdown-item"> Other dropdown item </a>
-                            <hr class="dropdown-divider" />
-                            <a href="#" class="dropdown-item"> With a divider </a>
+                <nav class="level is-mobile" style="min-width:100vw">
+                    <div class="level-item has-text-centered">
+                        <div class="dropdown is-active">
+                            <div class="dropdown-trigger">
+                                <button class="button is-info mx-4 is-flex">
+                                    <span class="icon"
+                                        ><img
+                                            class="is-align-self-flex-start"
+                                            src="/icons/settings.svg"
+                                            alt=""
+                                            height={24}
+                                            width={24}
+                                        /></span
+                                    >
+                                    <span class="has-text-weight-semibold">Options</span>
+                                </button>
+                            </div>
+                            <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                <div class="dropdown-content">
+                                    <a href="#" class="dropdown-item"> Dropdown item </a>
+                                    <a class="dropdown-item"> Other dropdown item </a>
+                                    <a href="#" class="dropdown-item is-active">
+                                        Active dropdown item
+                                    </a>
+                                    <a href="#" class="dropdown-item"> Other dropdown item </a>
+                                    <hr class="dropdown-divider" />
+                                    <a href="#" class="dropdown-item"> With a divider </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+
+                    <p class="level-item has-text-centered">
+                        <img
+                            src="https://bulma.io/images/bulma-type.png"
+                            alt=""
+                            style="height: 30px;"
+                        />
+                    </p>
+
+                    <p class="level-item has-text-centered">
+                        <a class="link is-info">Contact</a>
+                    </p>
+                </nav>
 
                 <Swiper
                     navigation={{
@@ -229,7 +253,7 @@
                 </div>
             </div>
         </section>
-    </SwiperSlide> -->
+    </SwiperSlide>
 </Swiper>
 
 <style lang="scss">
