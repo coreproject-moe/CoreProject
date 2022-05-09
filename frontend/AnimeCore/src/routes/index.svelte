@@ -14,6 +14,7 @@
     import TrendingHero from "$components/swiper/TrendingHero.svelte";
     import { responsiveMode } from "$store/responsive";
 
+    let slidesPerView: number;
     let trendingSlide = 0;
     let fromyourlistSlide = 0;
 
@@ -25,6 +26,24 @@
         const [swiper] = e.detail[0];
         fromyourlistSlide = swiper?.activeIndex;
     };
+
+    $: {
+        switch ($responsiveMode) {
+            case "mobile":
+                slidesPerView = 3;
+                break;
+            case "desktop":
+            case "widescreen":
+            case "tablet":
+                slidesPerView = 4;
+                break;
+            case "fullhd":
+                slidesPerView = 5;
+                break;
+            default:
+                break;
+        }
+    }
 </script>
 
 <Swiper
@@ -243,7 +262,7 @@
                     }}
                     modules={[EffectCoverflow, Navigation]}
                     grabCursor={true}
-                    slidesPerView={$responsiveMode === "mobile" ? 3 : 5}
+                    {slidesPerView}
                     spaceBetween={$responsiveMode === "mobile" ? 10 : 40}
                     coverflowEffect={{
                         rotate: 50,
