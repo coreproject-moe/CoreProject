@@ -1,9 +1,10 @@
+from ckeditor.widgets import CKEditorWidget
 from django.contrib import admin
-from django.db import models
 from django.contrib.flatpages.admin import FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
+from django.db import models
 from django.utils.translation import gettext_lazy as _
-from ckeditor.widgets import CKEditorWidget
+
 
 # Define a new FlatPageAdmin
 class FlatPageAdmin(FlatPageAdmin):
