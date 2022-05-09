@@ -154,10 +154,10 @@
                 </div>
             </div>
 
-            <div class="hero-body is-flex-direction-column is-justify-content-center">
+            <div class="hero-body is-flex-direction-column">
                 <nav class="level is-mobile" style="min-width:90vw">
                     <p
-                        class="level-item has-text-centered is-hidden-mobile has-text-white has-text-weight-bold is-justify-content-flex-start"
+                        class="level-item has-text-centered is-hidden-mobile has-text-white has-text-weight-bold is-justify-content-flex-start pb-6"
                     >
                         <span class="pr-2"> Watching 13 anime. AniList </span>
                         <span class="icon is-small">
@@ -172,7 +172,7 @@
                     </p>
 
                     <div class="level-item has-text-centered">
-                        <div class="dropdown is-active">
+                        <div class="dropdown">
                             <div class="dropdown-trigger">
                                 <button class="button is-warning mx-4 is-flex">
                                     <span class="has-text-weight-semibold has-text-white"
@@ -205,7 +205,7 @@
                     </div>
 
                     <div class="level-item has-text-centered is-justify-content-flex-end">
-                        <div class="dropdown is-active">
+                        <div class="dropdown is-right">
                             <div class="dropdown-trigger">
                                 <button class="button is-info mx-4 is-flex">
                                     <span class="icon">

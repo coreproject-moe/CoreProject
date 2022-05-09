@@ -8,7 +8,7 @@
 </script>
 
 <SwiperSlide>
-    <div class="box is-flex is-flex-direction-column" style="background-color:transparent;">
+    <div class="box is-flex is-flex-direction-column pt-6" style="background-color:transparent;">
         <div
             class="box is-flex is-align-self-center"
             style="
