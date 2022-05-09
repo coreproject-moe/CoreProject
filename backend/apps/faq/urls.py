@@ -1,4 +1,5 @@
 from django.urls import include, path
+
 from .views import faq_page
 
 urlpatterns = [

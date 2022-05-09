@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('anime', '0024_animeinfomodel_anime_characters'),
+        ("anime", "0024_animeinfomodel_anime_characters"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='animecharactermodel',
-            options={'verbose_name': 'Anime Character'},
+            name="animecharactermodel",
+            options={"verbose_name": "Anime Character"},
         ),
     ]
