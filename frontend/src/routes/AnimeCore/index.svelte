@@ -215,7 +215,9 @@
                                     >
                                     <span class="icon">
                                         <img
-                                            src="/icons/chevron-down.svg"
+                                            src={dropdownPickStateOpen
+                                                ? "/icons/chevron-up.svg"
+                                                : "/icons/chevron-down.svg"}
                                             alt=""
                                             height={24}
                                             width={24}
