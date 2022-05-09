@@ -44,7 +44,6 @@
                 break;
         }
     }
-    $: console.log($responsiveMode);
 </script>
 
 <Swiper
@@ -191,16 +190,24 @@
                         </span>
                     </p>
 
-                    <div class="level-item has-text-centered">
+                    <div
+                        class="level-item has-text-centered {$responsiveMode === 'mobile'
+                            ? 'is-justify-content-flex-start'
+                            : ''}"
+                    >
                         <div class="dropdown">
                             <div class="dropdown-trigger">
-                                <button class="button is-warning mx-4 is-flex">
+                                <button
+                                    class="button is-warning mx-4 is-flex {$responsiveMode ===
+                                    'mobile'
+                                        ? 'is-small'
+                                        : 'is-medium'}"
+                                >
                                     <span class="has-text-weight-semibold has-text-white"
                                         >Watching</span
                                     >
                                     <span class="icon">
                                         <img
-                                            class="is-align-self-flex-start"
                                             src="/icons/chevron-down.svg"
                                             alt=""
                                             height={24}
@@ -227,10 +234,13 @@
                     <div class="level-item has-text-centered is-justify-content-flex-end">
                         <div class="dropdown is-right">
                             <div class="dropdown-trigger">
-                                <button class="button is-info mx-4 is-flex">
+                                <button
+                                    class="button is-info mx-4 is-flex {$responsiveMode === 'mobile'
+                                        ? 'is-small'
+                                        : 'is-medium'}"
+                                >
                                     <span class="icon">
                                         <img
-                                            class="is-align-self-flex-start"
                                             src="/icons/settings.svg"
                                             alt=""
                                             height={24}
@@ -261,17 +271,11 @@
                         nextEl: ".fromyourlist__next__el",
                         prevEl: ".fromyourlist__previous__el"
                     }}
-                    modules={[EffectCoverflow, Navigation]}
+                    modules={[Navigation]}
                     grabCursor={true}
                     {slidesPerView}
+                    slidesPerGroup={slidesPerView}
                     spaceBetween={$responsiveMode === "mobile" ? 10 : 40}
-                    coverflowEffect={{
-                        rotate: 50,
-                        stretch: 0,
-                        depth: 100,
-                        modifier: 1,
-                        slideShadows: true
-                    }}
                     on:slideChange={onFromYourListSlideChange}
                 >
                     {#each Array(12) as _, i}
@@ -313,7 +317,7 @@
 
 <style lang="scss">
     .button {
-        border-radius: 16px;
+        border-radius: 16px !important;
         border-width: 5px;
     }
 </style>
