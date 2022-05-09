@@ -1,19 +1,18 @@
 <script lang="ts">
-    import { Swiper, SwiperSlide } from "swiper/svelte";
-
     import {
         Autoplay,
+        EffectCoverflow,
+        EffectFade,
         Mousewheel,
         Navigation,
-        Pagination,
-        EffectFade,
-        EffectCoverflow
+        Pagination
     } from "swiper";
-
+    import { Swiper, SwiperSlide } from "swiper/svelte";
+    
+    import FromYourList from "$components/swiper/FromYourList.svelte";
     import MainHero from "$components/swiper/MainHero.svelte";
     import TrendingHero from "$components/swiper/TrendingHero.svelte";
     import { responsiveMode } from "$store/responsive";
-    import FromYourList from "$components/swiper/FromYourList.svelte";
 
     let trendingSlide = 0;
     let fromyourlistSlide = 0;

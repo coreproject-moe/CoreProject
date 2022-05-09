@@ -1,14 +1,14 @@
 <script lang="ts">
-    import { responsiveMode } from "$store/responsive";
-    import Navbar from "$components/common/Navbar.svelte";
     import { SwiperSlide } from "swiper/svelte";
+    
+    import Navbar from "$components/common/Navbar.svelte";
     import { truncateString } from "$lib/functions/truncateText";
+    import { responsiveMode } from "$store/responsive";
 
     export let backgroundImageUrl: string;
     export let animeName: string;
-    export let backgroundBannerUrl: string =
-        "https://media.kitsu.io/anime/poster_images/6686/large.jpg";
-    export let animeSummary: string = `High school freshman Houtarou Oreki has but one goal: to lead a gray life while conserving as much energy as he can. Unfortunately, his peaceful days come to an end when his older sister, Tomoe, forces him to save the memberless Classics Club from disbandment. Luckily, Oreki's predicament seems to be over when he heads to the clubroom and discovers that his fellow first-year, Eru Chitanda, has already become a member. However, despite his obligation being fulfilled, Oreki finds himself entangled by Chitanda's curious and bubbly personality, soon joining the club of his own volition. Hyouka follows the four members of the Classics Club—including Oreki's friends Satoshi Fukube and Mayaka Ibara—as they, driven by Chitanda's insatiable curiosity, solve the trivial yet intriguing mysteries that permeate their daily lives.`;
+    export let backgroundBannerUrl = "https://media.kitsu.io/anime/poster_images/6686/large.jpg";
+    export let animeSummary = `High school freshman Houtarou Oreki has but one goal: to lead a gray life while conserving as much energy as he can. Unfortunately, his peaceful days come to an end when his older sister, Tomoe, forces him to save the memberless Classics Club from disbandment. Luckily, Oreki's predicament seems to be over when he heads to the clubroom and discovers that his fellow first-year, Eru Chitanda, has already become a member. However, despite his obligation being fulfilled, Oreki finds himself entangled by Chitanda's curious and bubbly personality, soon joining the club of his own volition. Hyouka follows the four members of the Classics Club—including Oreki's friends Satoshi Fukube and Mayaka Ibara—as they, driven by Chitanda's insatiable curiosity, solve the trivial yet intriguing mysteries that permeate their daily lives.`;
 
     let wordCount: number;
 

@@ -1,5 +1,6 @@
-import { browser } from "$app/env";
 import { get, writable } from "svelte/store";
+
+import { browser } from "$app/env";
 import { jwtRefresh } from "$lib/constants/backend/jwt/refresh";
 import { tokenRefreshUrl, userInfoUrl } from "$urls/restEndpoints";
 
