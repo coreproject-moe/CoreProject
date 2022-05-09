@@ -25,6 +25,7 @@ drf-nested-routers = "*"
 djangorestframework-simplejwt = "*"
 # Pillow
 pillow = "*"
+django-ckeditor = "*"
 
 [dev-packages]
 black = "*"
@@ -37,7 +38,7 @@ python_version = "3.10"
 dev = 'python manage.py runserver'
 sync = 'python manage.py migrate'
 mksync = 'python manage.py makemigrations'
-collectstatic = 'python .\manage.py collectstatic --clear --link' # Dont duplicate copy files.
+collectstatic = 'python manage.py collectstatic --clear --link' # Dont duplicate copy files.
 prod = "gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
 celery = """
 python -c

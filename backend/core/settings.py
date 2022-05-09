@@ -36,12 +36,18 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     # Whitenoise
     "django.contrib.staticfiles",
+    # Sites
+    "django.contrib.sites",
+    # Flatpages
+    "django.contrib.flatpages",
     # Rest Framework
     "rest_framework",
     # 3rd party rest framework stuff
     "corsheaders",
     "rest_framework_simplejwt.token_blacklist",
     # 3rd party Django stuff
+    "ckeditor",
+    "ckeditor_uploader",
     "crispy_forms",
     "django_filters",
     "django_cleanup.apps.CleanupConfig",
@@ -49,6 +55,8 @@ INSTALLED_APPS = [
     "apps.anime",
     # Rest stuff
     "apps.user",
+    # Flatpages
+    "apps._flatpages",
 ]
 # Debug Toolbar Add
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install-the-app
@@ -69,6 +77,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # Flatpages
+    "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware",
 ]
 
 # https://docs.djangoproject.com/en/4.0/topics/cache/#the-per-site-cache-1
@@ -205,6 +215,7 @@ STATIC_ROOT = Path(BASE_DIR, "staticfiles")
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = Path(BASE_DIR, "media")
+CKEDITOR_UPLOAD_PATH = Path(BASE_DIR, "media", "upload")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
