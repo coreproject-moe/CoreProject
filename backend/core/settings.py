@@ -36,6 +36,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     # Whitenoise
     "django.contrib.staticfiles",
+    # Sites
+    "django.contrib.sites",
+    # Flatpages
+    "django.contrib.flatpages",
     # Rest Framework
     "rest_framework",
     # 3rd party rest framework stuff
@@ -49,9 +53,10 @@ INSTALLED_APPS = [
     "django_cleanup.apps.CleanupConfig",
     # Pages
     "apps.anime",
-    "apps.faq",
     # Rest stuff
     "apps.user",
+    # Flatpages
+    "apps._flatpages",
 ]
 # Debug Toolbar Add
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install-the-app
@@ -72,6 +77,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # Flatpages
+    "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware",
 ]
 
 # https://docs.djangoproject.com/en/4.0/topics/cache/#the-per-site-cache-1
