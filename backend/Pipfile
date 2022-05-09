@@ -25,6 +25,7 @@ drf-nested-routers = "*"
 djangorestframework-simplejwt = "*"
 # Pillow
 pillow = "*"
+django-ckeditor = "*"
 
 [dev-packages]
 black = "*"

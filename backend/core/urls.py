@@ -25,6 +25,12 @@ urlpatterns = [
     #   Admin
     # ==========
     path("admin/", admin.site.urls),
+    #   ckEditor
+    # ==============
+    path("ckeditor/", include("ckeditor_uploader.urls")),
+    #   FAQ
+    # ========
+    path("", include("apps.faq.urls")),
     #   Errors
     # ===========
     path("400/", TemplateView.as_view(template_name="400.html")),

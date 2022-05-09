@@ -42,11 +42,14 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework_simplejwt.token_blacklist",
     # 3rd party Django stuff
+    "ckeditor",
+    "ckeditor_uploader",
     "crispy_forms",
     "django_filters",
     "django_cleanup.apps.CleanupConfig",
     # Pages
     "apps.anime",
+    "apps.faq",
     # Rest stuff
     "apps.user",
 ]
@@ -205,6 +208,7 @@ STATIC_ROOT = Path(BASE_DIR, "staticfiles")
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = Path(BASE_DIR, "media")
+CKEDITOR_UPLOAD_PATH = Path(BASE_DIR, "media", "upload")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
