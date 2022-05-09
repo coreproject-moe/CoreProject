@@ -11,6 +11,12 @@
     let trendingSlide = 0;
     let fromyourlistSlide = 0;
 
+    let pickSlideOption = "watching";
+
+    // Dropdown Bool
+    let dropdownPickStateOpen = false;
+    let dropdownOptionStateOpen = false;
+
     const onTrendingSlideChange = (e: any) => {
         const [swiper] = e.detail[0];
         trendingSlide = swiper?.activeIndex;
@@ -40,6 +46,8 @@
                 break;
         }
     }
+
+    $: console.log(dropdownPickStateOpen);
 </script>
 
 <Swiper
@@ -191,13 +199,16 @@
                             ? 'is-justify-content-flex-start'
                             : ''}"
                     >
-                        <div class="dropdown">
+                        <div class="dropdown {dropdownPickStateOpen ? 'is-active' : ''}">
                             <div class="dropdown-trigger">
                                 <button
                                     class="button is-warning mx-4 is-flex {$responsiveMode ===
                                     'mobile'
                                         ? 'is-small'
                                         : 'is-medium'}"
+                                    on:click={() => {
+                                        dropdownPickStateOpen = !dropdownPickStateOpen;
+                                    }}
                                 >
                                     <span class="has-text-weight-semibold has-text-white"
                                         >Watching</span
@@ -213,7 +224,7 @@
                                 </button>
                             </div>
                             <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                                <div class="dropdown-content">
+                                <div class="dropdown-content has-background-warning-light">
                                     <a href="#" class="dropdown-item"> Dropdown item </a>
                                     <a class="dropdown-item"> Other dropdown item </a>
                                     <a href="#" class="dropdown-item is-active">
