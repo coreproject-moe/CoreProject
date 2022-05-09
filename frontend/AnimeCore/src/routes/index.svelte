@@ -155,37 +155,21 @@
             </div>
 
             <div class="hero-body is-flex-direction-column is-justify-content-center">
-                <nav class="level is-mobile" style="min-width:100vw">
-                    <div class="level-item has-text-centered">
-                        <div class="dropdown is-active">
-                            <div class="dropdown-trigger">
-                                <button class="button is-info mx-4 is-flex">
-                                    <span class="icon">
-                                        <img
-                                            class="is-align-self-flex-start"
-                                            src="/icons/settings.svg"
-                                            alt=""
-                                            height={24}
-                                            width={24}
-                                        />
-                                    </span>
-                                    <span class="has-text-weight-semibold">Options</span>
-                                </button>
-                            </div>
-                            <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                                <div class="dropdown-content">
-                                    <a href="#" class="dropdown-item"> Dropdown item </a>
-                                    <a class="dropdown-item"> Other dropdown item </a>
-                                    <a href="#" class="dropdown-item is-active">
-                                        Active dropdown item
-                                    </a>
-                                    <a href="#" class="dropdown-item"> Other dropdown item </a>
-                                    <hr class="dropdown-divider" />
-                                    <a href="#" class="dropdown-item"> With a divider </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <nav class="level is-mobile" style="min-width:90vw">
+                    <p
+                        class="level-item has-text-centered is-hidden-mobile has-text-white has-text-weight-bold is-justify-content-flex-start"
+                    >
+                        <span class="pr-2"> Watching 13 anime. AniList </span>
+                        <span class="icon is-small">
+                            <img
+                                class="is-align-self-flex-start"
+                                src="/icons/external-link.svg"
+                                alt=""
+                                height={24}
+                                width={24}
+                            />
+                        </span>
+                    </p>
 
                     <div class="level-item has-text-centered">
                         <div class="dropdown is-active">
@@ -220,13 +204,36 @@
                         </div>
                     </div>
 
-                    <p class="level-item has-text-centered is-hidden-mobile">
-                        <img
-                            src="https://bulma.io/images/bulma-type.png"
-                            alt=""
-                            style="height: 30px;"
-                        />
-                    </p>
+                    <div class="level-item has-text-centered is-justify-content-flex-end">
+                        <div class="dropdown is-active">
+                            <div class="dropdown-trigger">
+                                <button class="button is-info mx-4 is-flex">
+                                    <span class="icon">
+                                        <img
+                                            class="is-align-self-flex-start"
+                                            src="/icons/settings.svg"
+                                            alt=""
+                                            height={24}
+                                            width={24}
+                                        />
+                                    </span>
+                                    <span class="has-text-weight-semibold">Options</span>
+                                </button>
+                            </div>
+                            <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                <div class="dropdown-content">
+                                    <a href="#" class="dropdown-item"> Dropdown item </a>
+                                    <a class="dropdown-item"> Other dropdown item </a>
+                                    <a href="#" class="dropdown-item is-active">
+                                        Active dropdown item
+                                    </a>
+                                    <a href="#" class="dropdown-item"> Other dropdown item </a>
+                                    <hr class="dropdown-divider" />
+                                    <a href="#" class="dropdown-item"> With a divider </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </nav>
 
                 <Swiper
