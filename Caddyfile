@@ -1,0 +1,37 @@
+127.0.0.1 {
+    # Django staticassets
+    handle_path /static* {
+        file_server {
+            root ./backend/staticfiles
+            browse
+        }
+    }
+    
+    # Django Rest API
+    handle /api* {
+        reverse_proxy localhost:8000
+    }
+
+    # Django FAQ 
+    # This will work if we add the correct path in Django Admin
+    # Think of it as 2 way verification
+    handle /faq* {
+        reverse_proxy localhost:8000
+    }
+
+
+    # Svelte app working
+    handle_path /anime* {
+        rewrite * /AnimeCore{uri}
+
+        reverse_proxy localhost:3000
+    }
+
+    handle * {
+        file_server {
+            root ./frontend/build
+            browse
+        }
+    }
+    
+}

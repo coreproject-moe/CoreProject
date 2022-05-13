@@ -47,7 +47,7 @@
         }
     }
 
-    $: console.log(dropdownPickStateOpen);
+
 </script>
 
 <Swiper
