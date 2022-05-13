@@ -22,32 +22,33 @@
 
     # Svelte app working
     handle_path /anime* {
-        rewrite * /AnimeCore{uri}
-        # hOW TO FIX ?
-        # https://caddy.community/t/caddy-v2-single-page-app-help-example-rewrites-are-being-weird/9178/12
+        rewrite * /AnimeCore
+        try_files {path} ./frontend/build/app.html
+        file_server
+        #doesn't capture path 
     }
 
     handle /_app* {
         file_server {
-            root ./frontend/build/_app
+            root ./frontend/build/
             browse
         }
     }
     handle /fonts* {
         file_server {
-            root ./frontend/build/fonts
+            root ./frontend/build/
             browse
         }
     }
     handle /icons* {
         file_server {
-            root ./frontend/build/icons
+            root ./frontend/build/
             browse
         }
     }
     handle /images* {
         file_server {
-            root ./frontend/build/images
+            root ./frontend/build/
             browse
         }
     }
