@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+<!--prettier-ignore-->
+{% load static %}
+
+{% block head %}<title>{{ flatpage.title }}</title>{% endblock %}
+
+<!--prettier-ignore-->
+{% block body %}
+
+<style>
+    .desktop__vw {
+        max-width: 60vw;
+    }
+    .mobile__vw {
+        max-width: 100vw;
+    }
+</style>
+
+<section class="hero is-fullheight" style="background-color: #070519">
+    <div class="hero-body is-justify-content-center">
+        <div
+            class="columns is-mobile is-flex-direction-column"
+            style="min-width: 100vw"
+        >
+            {{ flatpage.content|safe }}
+        </div>
+    </div>
+</section>
+
+{% endblock %}
