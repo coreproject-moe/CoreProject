@@ -5,15 +5,21 @@ The `urlpatterns` list routes URLs to views. For more information please see:
 
 """
 from django.conf import settings
-from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from django.views.generic import TemplateView
+
 from rest_framework.schemas import get_schema_view
 from rest_framework_simplejwt.views import (
     TokenBlacklistView,
     TokenObtainPairView,
     TokenRefreshView,
 )
+
+handler400 = TemplateView.as_view(template_name="400.html")
+handler403 = TemplateView.as_view(template_name="403.html")
+handler404 = TemplateView.as_view(template_name="404.html")
+handler500 = TemplateView.as_view(template_name="500.html")
 
 urlpatterns = [
     #   Admin
@@ -24,10 +30,10 @@ urlpatterns = [
     path("ckeditor/", include("ckeditor_uploader.urls")),
     #   Errors
     # ===========
-    path("400/", TemplateView.as_view(template_name="400.html")),
-    path("403/", TemplateView.as_view(template_name="403.html")),
-    path("404/", TemplateView.as_view(template_name="404.html")),
-    path("500/", TemplateView.as_view(template_name="500.html")),
+    path("400/", handler400),
+    path("403/", handler403),
+    path("404/", handler404),
+    path("500/", handler500),
     #   OpenAPI
     # ============
     path(
@@ -39,14 +45,14 @@ urlpatterns = [
     ),
     #   Api
     # ========
+    path("api/v1/", include("apps.anime.apis")),
+    path("api/v1/user/", include("apps.user.apis")),
     # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html#installation
     path("api/v1/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/v1/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path(
         "api/v1/token/blacklist/", TokenBlacklistView.as_view(), name="token_blacklist"
     ),
-    path("api/v1/user/", include("apps.user.apis")),
-    path("api/v1/", include("apps.anime.apis")),
     #   Flatpages
     # ===============
     path("", include("apps._flatpages.urls")),
