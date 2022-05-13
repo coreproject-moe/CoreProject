@@ -21,8 +21,8 @@
 
 
     # Svelte app working
-    handle_path /anime* {
-        rewrite * /AnimeCore
+    handle_path /* {
+        # rewrite * /AnimeCore
         try_files {path} ./frontend/build/app.html
         file_server
         #doesn't capture path 
@@ -52,5 +52,10 @@
             browse
         }
     }
-    
+    handle /logos* {
+        file_server {
+            root ./frontend/build/
+            browse
+        }
+    }
 }

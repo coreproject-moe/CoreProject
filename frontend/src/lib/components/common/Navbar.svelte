@@ -2,7 +2,7 @@
     <div class="container">
         <div class="navbar-brand">
             <div class="navbar-item">
-                <img alt="" src="/animecore_logo.svg" width={164} height={25} />
+                <img alt="" src="/logos/animecore_logo.svg" width={164} height={25} />
             </div>
             <span class="navbar-burger" data-target="navbarMenuHeroA">
                 <span />

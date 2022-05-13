@@ -46,8 +46,6 @@
                 break;
         }
     }
-
-
 </script>
 
 <Swiper
