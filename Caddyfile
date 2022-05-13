@@ -23,13 +23,31 @@
     # Svelte app working
     handle_path /anime* {
         rewrite * /AnimeCore{uri}
-
-        reverse_proxy localhost:3000
+        # hOW TO FIX ?
+        # https://caddy.community/t/caddy-v2-single-page-app-help-example-rewrites-are-being-weird/9178/12
     }
 
-    handle * {
+    handle /_app* {
         file_server {
-            root ./frontend/build
+            root ./frontend/build/_app
+            browse
+        }
+    }
+    handle /fonts* {
+        file_server {
+            root ./frontend/build/fonts
+            browse
+        }
+    }
+    handle /icons* {
+        file_server {
+            root ./frontend/build/icons
+            browse
+        }
+    }
+    handle /images* {
+        file_server {
+            root ./frontend/build/images
             browse
         }
     }

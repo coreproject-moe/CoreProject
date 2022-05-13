@@ -20,6 +20,7 @@ const config = {
             // precompress: 'br',
             fallback: "app.html"
         }),
+        // appDir: "static", // Defaults to _app
         // paths: {
         // 	base: dev ? '' : '/static'
         // }
