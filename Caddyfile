@@ -21,11 +21,9 @@
 
 
     # Svelte app working
-    handle_path /* {
-        # rewrite * /AnimeCore
-        try_files {path} ./frontend/build/app.html
-        file_server
-        #doesn't capture path 
+    handle_path /anime* {
+        rewrite * /AnimeCore
+        reverse_proxy localhost:3000
     }
 
     handle /_app* {
