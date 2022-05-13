@@ -23,7 +23,7 @@ SECRET_KEY = "django-insecure-mn19l@e%r^s&a^pa9%(bf173v-0c54^@3s(pb!ts_yuts0$+6p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 
 # Application definition
@@ -63,6 +63,7 @@ INSTALLED_APPS = [
 if DEBUG:
     INSTALLED_APPS += ("debug_toolbar",)
 
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     # Whitenoise
@@ -72,11 +73,11 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.cache.UpdateCacheMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.cache.FetchFromCacheMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.cache.FetchFromCacheMiddleware",
     # Flatpages
     "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware",
 ]
@@ -95,7 +96,11 @@ if DEBUG:
     INTERNAL_IPS = [
         "127.0.0.1",
     ]
-
+# Cookie override
+CSRF_COOKIE_SAMESITE = "Strict"
+SESSION_COOKIE_SAMESITE = "Strict"
+CSRF_COOKIE_HTTPONLY = True
+SESSION_COOKIE_HTTPONLY = True
 
 ROOT_URLCONF = "core.urls"
 
@@ -115,7 +120,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "core.wsgi.application"
+ASGI_APPLICATION = "core.asgi.application"
 
 # Override the login url
 # https://stackoverflow.com/questions/49532708/custom-login-url-in-django#49532812
@@ -215,7 +220,7 @@ STATIC_ROOT = Path(BASE_DIR, "staticfiles")
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = Path(BASE_DIR, "media")
-CKEDITOR_UPLOAD_PATH = Path(BASE_DIR, "media", "upload")
+CKEDITOR_UPLOAD_PATH = Path(MEDIA_ROOT, "upload")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
