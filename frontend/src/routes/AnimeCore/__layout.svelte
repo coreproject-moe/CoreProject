@@ -1,5 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import OptionModal from "$components/modals/OptionModal.svelte";
 
     import { browser } from "$app/env";
 
@@ -13,5 +14,6 @@
 </svelte:head>
 
 <div style="height:100%">
+    <OptionModal />
     <slot />
 </div>

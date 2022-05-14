@@ -15,7 +15,6 @@
 
     // Dropdown Bool
     let dropdownPickStateOpen = false;
-    let dropdownOptionStateOpen = false;
 
     const onTrendingSlideChange = (e: any) => {
         const [swiper] = e.detail[0];
@@ -55,8 +54,9 @@
     slidesPerView="auto"
     modules={[Mousewheel]}
     mousewheel={{ sensitivity: 0.001 }}
+    simulateTouch={false}
 >
-    <SwiperSlide>
+    <!-- <SwiperSlide>
         <Swiper
             modules={[EffectFade, Autoplay, Navigation]}
             navigation={{
@@ -150,7 +150,7 @@
                 </div>
             </div>
         </section>
-    </SwiperSlide>
+    </SwiperSlide> -->
     <SwiperSlide>
         <section class="hero {$responsiveMode === 'mobile' ? 'is-small' : 'is-fullheight'}">
             <div class="hero-head">
@@ -239,37 +239,19 @@
                     </div>
 
                     <div class="level-item has-text-centered is-justify-content-flex-end">
-                        <div class="dropdown is-right">
-                            <div class="dropdown-trigger">
-                                <button
-                                    class="button is-info mx-4 is-flex {$responsiveMode === 'mobile'
-                                        ? 'is-small'
-                                        : 'is-medium'}"
-                                >
-                                    <span class="icon">
-                                        <img
-                                            src="/icons/settings.svg"
-                                            alt=""
-                                            height={24}
-                                            width={24}
-                                        />
-                                    </span>
-                                    <span class="has-text-weight-semibold">Options</span>
-                                </button>
-                            </div>
-                            <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                                <div class="dropdown-content">
-                                    <a href="#" class="dropdown-item"> Dropdown item </a>
-                                    <a class="dropdown-item"> Other dropdown item </a>
-                                    <a href="#" class="dropdown-item is-active">
-                                        Active dropdown item
-                                    </a>
-                                    <a href="#" class="dropdown-item"> Other dropdown item </a>
-                                    <hr class="dropdown-divider" />
-                                    <a href="#" class="dropdown-item"> With a divider </a>
-                                </div>
-                            </div>
-                        </div>
+                        <button
+                            class="button is-info mx-4 is-flex {$responsiveMode === 'mobile'
+                                ? 'is-small'
+                                : 'is-medium'}"
+                        >
+                            <span class="icon">
+                                <img src="/icons/settings.svg" alt="" height={24} width={24} />
+                            </span>
+                            <span
+                                class="has-text-weight-semibold modal-button"
+                                data-target="option-modal">Options</span
+                            >
+                        </button>
                     </div>
                 </nav>
 
