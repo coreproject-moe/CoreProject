@@ -262,11 +262,11 @@
     },
     "django-ckeditor": {
       "hashes": [
-        "sha256:30b7d1d8cfa37524f9283ccc0dbb86f98edc952b47d38abbccfda21f966f185d",
-        "sha256:b1755e1e654c72383f8682de86a98b7ede144de36d82f3566ad45da8f7aa5185"
+        "sha256:53f6489bfdfc98c2bafd312636db24db8f7964e16178a59153422200ac602de7",
+        "sha256:59130740564fe258fb50ea51ed7daff556129118ed282dc5ce831e0689662826"
       ],
       "index": "pypi",
-      "version": "==6.4.0"
+      "version": "==6.4.1"
     },
     "django-cleanup": {
       "hashes": [
