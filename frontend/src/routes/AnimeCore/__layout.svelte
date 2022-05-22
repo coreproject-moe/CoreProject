@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    
+
     import { browser } from "$app/env";
     import OptionModal from "$components/modals/OptionModal.svelte";
 

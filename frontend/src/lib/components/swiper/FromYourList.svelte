@@ -1,6 +1,6 @@
 <script lang="ts">
     import { SwiperSlide } from "swiper/svelte";
-    
+
     import { responsiveMode } from "$store/responsive";
 
     export let bannerImageUrl = "/images/sono bisque doll banner.jpeg";

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { SwiperSlide } from "swiper/svelte";
-    
+
     import { responsiveMode } from "$store/responsive";
 
     export let backgroundImageUrl = "/images/Sono Bisque Doll.jpg";
