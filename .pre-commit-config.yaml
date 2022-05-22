@@ -51,13 +51,14 @@ repos:
       rev: v8.16.0
       hooks:
           - id: eslint
+            args: ['./frontend', '--fix']
+
             # parser: '@typescript-eslint/parser'
             # rules:
             #     'simple-import-sort/imports':
             #         - error
             #     'simple-import-sort/exports':
             #         - error
-            # args: ['--fix']
             # extends:
             #     - 'eslint:recommended'
             #     - 'plugin:@typescript-eslint/recommended'
