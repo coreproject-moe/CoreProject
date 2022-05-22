@@ -240,17 +240,16 @@
 
                     <div class="level-item has-text-centered is-justify-content-flex-end">
                         <button
-                            class="button is-info mx-4 is-flex {$responsiveMode === 'mobile'
+                            data-target="option-modal"
+                            class="button is-info mx-4 is-flex modal-button {$responsiveMode ===
+                            'mobile'
                                 ? 'is-small'
                                 : 'is-medium'}"
                         >
                             <span class="icon">
                                 <img src="/icons/settings.svg" alt="" height={24} width={24} />
                             </span>
-                            <span
-                                class="has-text-weight-semibold modal-button"
-                                data-target="option-modal">Options</span
-                            >
+                            <span class="has-text-weight-semibold">Options</span>
                         </button>
                     </div>
                 </nav>
