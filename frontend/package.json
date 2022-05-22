@@ -13,6 +13,7 @@
         "cssnano": "^5.1.9",
         "eslint": "^8.16.0",
         "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-import": "^2.26.0",
         "eslint-plugin-simple-import-sort": "^7.0.0",
         "eslint-plugin-svelte3": "^4.0.0",
         "postcss": "^8.4.14",
@@ -37,6 +38,7 @@
         "check": "svelte-check --tsconfig ./tsconfig.json",
         "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
         "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
+        "format-fix": "eslint --fix  --ignore-path .gitignore .",
         "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
         "update": "npx npm-check-updates -u && npm install"
     },

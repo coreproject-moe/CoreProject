@@ -2,7 +2,7 @@ module.exports = {
     root: true,
     parser: "@typescript-eslint/parser",
     extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
-    plugins: ["svelte3", "@typescript-eslint", "simple-import-sort"],
+    plugins: ["svelte3", "@typescript-eslint", "simple-import-sort", "import"],
     ignorePatterns: ["*.cjs"],
     overrides: [{ files: ["*.svelte"], processor: "svelte3/svelte3" }],
     settings: {
@@ -13,12 +13,15 @@ module.exports = {
         ecmaVersion: 2020
     },
     rules: {
+        "simple-import-sort/imports": "error",
         "simple-import-sort/exports": "error",
-        "simple-import-sort/imports": "error"
+        "import/first": "error",
+        "import/newline-after-import": "error",
     },
     env: {
         browser: true,
         es2017: true,
-        node: true
+        node: true,
+        es6: true
     }
 };
