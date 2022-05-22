@@ -17,8 +17,8 @@ repos:
             files: \.(js|jsx|ts|tsx|css|sass|scss|svelte|html|lock|json)$
             args: ['--ignore-path', './backend/static/**/*', './backend/staticfiles/**/*']
             additional_dependencies:
-                -  prettier@2.6.2
-                -  'prettier-plugin-svelte@2.7.0'
+                - prettier@2.6.2
+                - 'prettier-plugin-svelte@2.7.0'
 
     - repo: https://github.com/pre-commit/pre-commit-hooks
       rev: v4.2.0
