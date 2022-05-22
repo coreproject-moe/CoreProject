@@ -2,7 +2,7 @@ module.exports = {
     root: true,
     parser: "@typescript-eslint/parser",
     extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended", "prettier"],
-    plugins: ["svelte3", "@typescript-eslint", "simple-import-sort", "import"],
+    plugins: ["svelte3", "@typescript-eslint", "simple-import-sort"],
     ignorePatterns: ["*.cjs"],
     overrides: [{ files: ["*.svelte"], processor: "svelte3/svelte3" }],
     settings: {
@@ -14,9 +14,7 @@ module.exports = {
     },
     rules: {
         "simple-import-sort/imports": "error",
-        "simple-import-sort/exports": "error",
-        "import/first": "error",
-        "import/newline-after-import": "error",
+        "simple-import-sort/exports": "error"
     },
     env: {
         browser: true,

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { SwiperSlide } from "swiper/svelte";
-
+    
     import Navbar from "$components/common/Navbar.svelte";
     import { truncateString } from "$lib/functions/truncateText";
     import { responsiveMode } from "$store/responsive";
