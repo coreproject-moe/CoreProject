@@ -22,7 +22,7 @@ repos:
       hooks:
           - id: prettier
             files: \.(jsx|ts|tsx|sass|scss|svelte|html|lock|json)$
-            args: ['--tab-width', '4']
+            args: ['--tab-width', '4', '--use-tabs', 'false']
             additional_dependencies:
                 - 'prettier@2.6.2'
                 - 'prettier-plugin-svelte@2.7.0'
