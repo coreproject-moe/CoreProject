@@ -15,8 +15,8 @@ repos:
       rev: v2.6.2
       hooks:
           - id: prettier
-            #files: \.(js|jsx|ts|tsx|css|sass|scss|svelte|html|lock|json)$
-            args: ['!./backend/static/**/*']
+            files: \.(js|jsx|ts|tsx|css|sass|scss|svelte|html|lock|json)$
+            # args: ['!./backend/static/**/*']
             additional_dependencies:
                 - 'prettier@2.6.2'
                 - 'prettier-plugin-svelte@2.7.0'
@@ -40,5 +40,5 @@ repos:
       rev: v2.32.1
       hooks:
           - id: pyupgrade
-            args: [--py311-plus]
+            args: [--py310-plus]
 
