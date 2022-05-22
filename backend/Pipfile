@@ -27,7 +27,7 @@ uritemplate = "*"
 # 3rd party
 drf-nested-routers = "*"
 djangorestframework-simplejwt = "*"
-# Pillow ( may be removed ) 
+# Pillow ( may be removed )
 pillow = "*"
 
 [dev-packages]
