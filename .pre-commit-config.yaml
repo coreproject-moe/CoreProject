@@ -48,7 +48,7 @@ repos:
             args: [--py311-plus]
 
     - repo: https://github.com/pre-commit/mirrors-eslint
-      rev: 8.16.0
+      rev: v8.16.0
       hooks:
           - id: eslint
             # parser: '@typescript-eslint/parser'
