@@ -22,8 +22,8 @@ repos:
       hooks:
           - id: prettier
             files: \.(lock|json|yaml|yml|md)$
-            files: /backend/\.(html)$
-            files: /frontend/\.(js|jsx|ts|tsx|css|sass|scss|svelte|html)$
+            files: ./backend/\.(html)$
+            files: ./frontend/\.(js|jsx|ts|tsx|css|sass|scss|svelte|html)$
             args:
                 [
                     --tab-width,
