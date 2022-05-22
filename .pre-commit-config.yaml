@@ -21,8 +21,8 @@ repos:
       rev: v2.6.2
       hooks:
           - id: prettier
-            files: \.(lock|json|yaml|yml|md)
-            files: ./backend/\.(html)
+            files: \.(lock|json|yaml|yml|md)$
+            files: ./backend/\.(html)$
             files: ./frontend/\.(js|jsx|ts|tsx|css|sass|scss|svelte|html)$
             args:
                 [
