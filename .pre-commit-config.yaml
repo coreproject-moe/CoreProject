@@ -80,5 +80,6 @@ repos:
             additional_dependencies:
                 - 'eslint@8.16.0'
                 - 'eslint-config-prettier@8.5.0'
+                - 'eslint-plugin-svelte3@4.0.0'
                 - '@typescript-eslint/eslint-plugin@5.25.0'
                 - 'eslint-plugin-simple-import-sort@7.0.0'
