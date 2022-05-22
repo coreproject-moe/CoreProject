@@ -68,9 +68,9 @@ repos:
                 - '@typescript-eslint/parser@5.25.0'
                 - 'eslint-plugin-simple-import-sort@7.0.0'
                 - 'typescript@4.6.4'
-                
+
     - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
       rev: v2.3.0
       hooks:
-          - id: pretty-format-yaml
-                args: [--autofix, --indent, '4']
+          - id: 'pretty-format-yaml'
+            args: ['--autofix', '--indent', '4']
