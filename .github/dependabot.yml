@@ -5,12 +5,12 @@
 
 version: 2
 updates:
-    - package-ecosystem: 'pip' # See documentation for possible values
-      directory: '/backend/' # Location of package manifests
-      schedule:
-          interval: 'daily'
+  - package-ecosystem: "pip" # See documentation for possible values
+    directory: "/backend/" # Location of package manifests
+    schedule:
+      interval: "daily"
 
-    - package-ecosystem: 'npm' # See documentation for possible values
-      directory: '/frontend/' # Location of package manifests
-      schedule:
-          interval: 'daily'
+  - package-ecosystem: "npm" # See documentation for possible values
+    directory: "/frontend/" # Location of package manifests
+    schedule:
+      interval: "daily"
