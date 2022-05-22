@@ -78,5 +78,6 @@ repos:
             #     es6: true
 
             additional_dependencies:
+                - 'eslint@8.16.0'
                 - '@typescript-eslint/eslint-plugin@5.25.0'
                 - 'eslint-plugin-simple-import-sort@7.0.0'
