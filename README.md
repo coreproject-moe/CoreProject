@@ -58,16 +58,16 @@
 
 Core Project is a collection of several projects - animecore, mangacore & soundcore. Overall, it aims to becomes a site where you can get all your anime, manga and songs for free and without any ads.
 
-- Home Page recommendations & Continue watching
-- Watch Progress
-- Account feature for cross-platform playing
-- Mobile support
-- No Ads
-- Next gen Player
-- Search
-- Clean & feature-rich UI
-- MAL-sync support
-- and more!
+-   Home Page recommendations & Continue watching
+-   Watch Progress
+-   Account feature for cross-platform playing
+-   Mobile support
+-   No Ads
+-   Next gen Player
+-   Search
+-   Clean & feature-rich UI
+-   MAL-sync support
+-   and more!
 
 All features are under development.
 
@@ -75,19 +75,19 @@ All features are under development.
 
 ### Built with
 
-- [.](https://example.com)
-- [..](https://example.com)
-- [...](https://example.com)
+-   [.](https://example.com)
+-   [..](https://example.com)
+-   [...](https://example.com)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Roadmap
 
-- [x] Backend
-- [x] Logo & Design system
-- [ ] [Mockups](https://www.figma.com/file/knyOkHUChnJpsAsmuILhOk/Core-Project) (All pages)
-- [ ] Frontend
-- [ ] Misc stuff
+-   [x] Backend
+-   [x] Logo & Design system
+-   [ ] [Mockups](https://www.figma.com/file/knyOkHUChnJpsAsmuILhOk/Core-Project) (All pages)
+-   [ ] Frontend
+-   [ ] Misc stuff
 
 See the [open issues](https://github.com/baseplate-admin/CoreProject/issues) and [projects](https://github.com/baseplate-admin/CoreProject/projects?) for a full list of features we're working on (and need help with).
 
@@ -95,9 +95,9 @@ See the [open issues](https://github.com/baseplate-admin/CoreProject/issues) and
 
 ## Contributing
 
-- If you have a suggestion/idea that would make this project better, please create a pull request. All pull requests will be reviewed by us, and adjusted.
+-   If you have a suggestion/idea that would make this project better, please create a pull request. All pull requests will be reviewed by us, and adjusted.
 
-- You can also [open a new issue](https://github.com/baseplate-admin/CoreProject/issues/new/choose) or [help us with an existing one](https://github.com/baseplate-admin/CoreProject/issues).
+-   You can also [open a new issue](https://github.com/baseplate-admin/CoreProject/issues/new/choose) or [help us with an existing one](https://github.com/baseplate-admin/CoreProject/issues).
 
 Other than that, you can also help the project by giving it a star! Your help is extremely appreciated :)
 
