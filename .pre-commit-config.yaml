@@ -51,7 +51,7 @@ repos:
       rev: v8.16.0
       hooks:
           - id: eslint
-            args: ['/frontend','--config','/frontend/.eslintrc.cjs','--ignore-pattern','/backend/static/*', '--fix']
+            args: ['/frontend','--config','./frontend/.eslintrc.cjs','--ignore-pattern','/backend/static/*', '--fix']
 
             # parser: '@typescript-eslint/parser'
             # rules:
