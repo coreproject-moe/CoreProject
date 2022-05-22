@@ -46,3 +46,37 @@ repos:
       hooks:
           - id: pyupgrade
             args: [--py311-plus]
+
+    - repo: https://github.com/pre-commit/mirrors-eslint
+      rev: 8.16.0
+      hooks:
+          - id: eslint
+            # parser: '@typescript-eslint/parser'
+            # rules:
+            #     'simple-import-sort/imports':
+            #         - error
+            #     'simple-import-sort/exports':
+            #         - error
+            # args: ['--fix']
+            # extends:
+            #     - 'eslint:recommended'
+            #     - 'plugin:@typescript-eslint/recommended'
+            #     - 'prettier'
+            # plugins:
+            #     - 'svelte3'
+            #     - '@typescript-eslint'
+            #     - 'simple-import-sort'
+            # ignorePatterns: ['*.cjs']
+            # overrides:
+            #     - files:
+            #           - '*.svelte':
+            #                 processor: svelte3/svelte3
+            # env:
+            #     browser: true
+            #     es2017: true
+            #     node: true
+            #     es6: true
+
+            additional_dependencies:
+                - '@typescript-eslint@5.25.0'
+                - 'eslint-plugin-simple-import-sort@7.0.0'
