@@ -15,7 +15,7 @@ repos:
       hooks:
           - id: prettier
             files: \.(js|jsx|ts|tsx|css|sass|scss|svelte|html|lock|json)$
-            args: ['!backend/static/**/*.{js|css}']
+            args: ['!/backend/static/**/*.{js|css}']
             additional_dependencies:
                 - prettier@2.6.2
                 - 'prettier-plugin-svelte@2.7.0'
