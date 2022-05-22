@@ -21,7 +21,7 @@ repos:
       rev: v2.6.2
       hooks:
           - id: prettier
-            files: \.(js|jsx|ts|tsx|css|sass|scss|svelte|html|lock|json)$
+            files: \.(jsx|ts|tsx|sass|scss|svelte|html|lock|json)$
             args:
                 [
                     '--tab-width',
