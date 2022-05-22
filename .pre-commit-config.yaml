@@ -49,7 +49,6 @@ repos:
           - id: pyupgrade
             args: [--py311-plus]
 
-
     - repo: https://github.com/pre-commit/mirrors-eslint
       rev: v8.16.0
       hooks:
