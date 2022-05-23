@@ -4,7 +4,7 @@
         "module": "es2015",
         "strict": true,
         "allowUnreachableCode": false,
-        "allowSyntheticDefaultImports" :true,
+        "allowSyntheticDefaultImports": true,
         "exactOptionalPropertyTypes": true,
         "noImplicitAny": true,
         "noImplicitOverride": true,

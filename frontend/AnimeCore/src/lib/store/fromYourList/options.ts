@@ -1,5 +1,6 @@
-import { browser } from "$app/env";
 import { get, writable } from "svelte/store";
+
+import { browser } from "$app/env";
 
 export const fromYourListOption = writable({ state: "", opened: false }, function start(set) {
     if (browser) {
