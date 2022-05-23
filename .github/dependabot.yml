@@ -11,6 +11,6 @@ updates:
           interval: daily
 
     - package-ecosystem: npm # See documentation for possible values
-      directory: /frontend/ # Location of package manifests
+      directory: /frontend/AnimeCore/ # Location of package manifests
       schedule:
           interval: daily
