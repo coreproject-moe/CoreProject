@@ -30,7 +30,7 @@
         "typescript": "~4.6.4",
         "voca": "^1.4.0"
     },
-    "name": "frontend",
+    "name": "animecore-frontend",
     "scripts": {
         "dev": "svelte-kit dev --port 3000",
         "build": "svelte-kit build",
