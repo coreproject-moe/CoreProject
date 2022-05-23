@@ -1,12 +1,10 @@
 <script lang="ts">
     import { getContext } from "svelte";
-
-    import OptionModal from "$components/modals/OptionModal.svelte";
-    const { open } = getContext("simple-modal");
     import { Autoplay, EffectFade, Mousewheel, Navigation, Pagination } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import voca from "voca";
 
+    import OptionModal from "$components/modals/OptionModal.svelte";
     import FromYourList from "$components/swiper/FromYourList.svelte";
     import MainHero from "$components/swiper/MainHero.svelte";
     import TrendingHero from "$components/swiper/TrendingHero.svelte";
@@ -16,6 +14,8 @@
     let slidesPerView: number;
     let trendingSlide = 0;
     let fromyourlistSlide = 0;
+
+    const { open } = getContext("simple-modal");
 
     const onTrendingSlideChange = (e: any) => {
         const [swiper] = e.detail[0];
@@ -243,7 +243,17 @@
                     <div class="level-item has-text-centered is-justify-content-flex-end">
                         <button
                             on:click={() => {
-                                open(OptionModal);
+                                open(
+                                    OptionModal,
+                                    {},
+                                    {
+                                        closeButton: false,
+                                        styleWindow: {
+                                            backgroundColor: "transparent !important",
+                                            width: "80vw"
+                                        }
+                                    }
+                                );
                             }}
                             class="button is-info mx-4 is-flex {$responsiveMode === 'mobile'
                                 ? 'is-small'
