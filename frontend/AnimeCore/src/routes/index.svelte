@@ -224,15 +224,38 @@
                                     </span>
                                 </button>
                             </div>
-                            <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                                <div class="dropdown-content has-background-warning-light">
+                            <div class="dropdown-menu">
+                                <div
+                                    class="dropdown-content has-background-warning-light"
+                                    style="border-radius:16px"
+                                >
                                     {#each ["watching", "planning", "completed", "rewatching", "pause", "dropped"] as i}
                                         <div
-                                            class="dropdown-item {i === $fromYourListOption.state
-                                                ? 'is-active'
-                                                : ''}"
+                                            class="dropdown-item is-clickable"
+                                            on:click={() => {
+                                                $fromYourListOption.state = i;
+                                            }}
                                         >
-                                            {voca.capitalize(i)}
+                                            <div
+                                                class="is-flex is-flex-direction-row is-justify-content-center"
+                                            >
+                                                <div
+                                                    class="has-text-weight-bold is-size-5 pr-2 {i ===
+                                                    $fromYourListOption.state
+                                                        ? 'is-active has-text-black'
+                                                        : 'has-text-white'}"
+                                                >
+                                                    {voca.capitalize(i)}
+                                                </div>
+                                                {#if $fromYourListOption.state === i}
+                                                    <img
+                                                        src="/icons/tick.svg"
+                                                        width={16}
+                                                        height={8.75}
+                                                        alt=""
+                                                    />
+                                                {/if}
+                                            </div>
                                         </div>
                                     {/each}
                                 </div>
