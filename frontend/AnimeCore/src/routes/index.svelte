@@ -1,17 +1,17 @@
 <script lang="ts">
-    import OptionModal from "$components/modals/OptionModal.svelte";
-
     import { getContext } from "svelte";
+    
+    import OptionModal from "$components/modals/OptionModal.svelte";
     const { open } = getContext("simple-modal");
-    import voca from "voca";
     import { Autoplay, EffectFade, Mousewheel, Navigation, Pagination } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
-
+    import voca from "voca";
+    
     import FromYourList from "$components/swiper/FromYourList.svelte";
     import MainHero from "$components/swiper/MainHero.svelte";
     import TrendingHero from "$components/swiper/TrendingHero.svelte";
-    import { responsiveMode } from "$store/responsive";
     import { fromYourListOption } from "$store/fromYourList/options";
+    import { responsiveMode } from "$store/responsive";
 
     let slidesPerView: number;
     let trendingSlide = 0;
