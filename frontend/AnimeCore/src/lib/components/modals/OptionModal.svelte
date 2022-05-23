@@ -1,4 +1,12 @@
-<div id="option-modal" class="modal modal-fx-fadeInScale is-active">
+<script lang="ts">
+    import { activeModal } from "$store/modals";
+</script>
+
+<div
+    class="modal animate__animated {$activeModal.option
+        ? 'is-active animate__fadeInUp'
+        : 'animate__fadeInDown'}"
+>
     <div class="modal-background" />
     <div class="modal-content">
         <section class="hero is-medium">
@@ -24,6 +32,9 @@
                                 <button
                                     class="button is-medium has-border-warning-light is-warning is-outlined px-2 py-4 modal-button-close"
                                     style="border-width:6px;border-radius:12px;"
+                                    on:click={() => {
+                                        $activeModal.option = false;
+                                    }}
                                 >
                                     <button
                                         class="delete is-large"
@@ -67,5 +78,8 @@
     .hero {
         border-radius: 25px;
         background-color: #070519;
+    }
+    .animate__animated.animate__fadeInUp {
+        --animate-duration: 0.2s;
     }
 </style>

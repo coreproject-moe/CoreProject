@@ -15,8 +15,6 @@ $warning-light: lighten($warning, 15%);
         $modal-content-width: 75vw
     );
 
-@use "bulma-modal-fx/dist/css/modal-fx";
-
 // Swiper Import
 @use "swiper/scss" with (
     $themeColor: $warning-light
@@ -32,6 +30,7 @@ $warning-light: lighten($warning, 15%);
     --swiper-pagination-bullet-horizontal-gap: 10px;
     --swiper-pagination-bullet-inactive-color: #070519;
 }
+
 
 html {
     scrollbar-width: none;
