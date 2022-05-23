@@ -12,7 +12,6 @@
     let fromyourlistSlide = 0;
 
 
-
     // Dropdown Bool
     let dropdownPickStateOpen = false;
 
