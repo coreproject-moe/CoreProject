@@ -103,6 +103,7 @@ Other than that, you can also help the project by giving it a star! Your help is
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+
 ## License
 
 Distributed under the AGPL-3.0 License. See [`LICENSE`](https://github.com/baseplate-admin/CoreProject/blob/v2/LICENSE) for more information.
