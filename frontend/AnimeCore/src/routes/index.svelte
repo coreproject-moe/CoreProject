@@ -11,7 +11,7 @@
     let trendingSlide = 0;
     let fromyourlistSlide = 0;
 
-    let pickSlideOption = "watching";
+
 
     // Dropdown Bool
     let dropdownPickStateOpen = false;
@@ -224,16 +224,7 @@
                                 </button>
                             </div>
                             <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                                <div class="dropdown-content has-background-warning-light">
-                                    <a href="#" class="dropdown-item"> Dropdown item </a>
-                                    <a class="dropdown-item"> Other dropdown item </a>
-                                    <a href="#" class="dropdown-item is-active">
-                                        Active dropdown item
-                                    </a>
-                                    <a href="#" class="dropdown-item"> Other dropdown item </a>
-                                    <hr class="dropdown-divider" />
-                                    <a href="#" class="dropdown-item"> With a divider </a>
-                                </div>
+                                <div class="dropdown-content has-background-warning-light" />
                             </div>
                         </div>
                     </div>
