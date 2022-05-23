@@ -40,8 +40,7 @@
         "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
         "format:fix": "eslint --fix --ignore-path .gitignore .",
         "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
-        "update": "npx npm-check-updates -u && npm install",
-        "build:exe": "svelte-kit build && npx pkg ./build/index.js"
+        "update": "npx npm-check-updates -u && npm install"
     },
     "type": "module",
     "version": "0.1.0",
