@@ -41,5 +41,10 @@
         "update": "npx npm-check-updates -u && npm install"
     },
     "type": "module",
-    "version": "0.1.0"
+    "version": "0.1.0",
+    "dependencies": {
+        "@types/voca": "^1.4.2",
+        "svelte-simple-modal": "^1.3.3",
+        "voca": "^1.4.0"
+    }
 }
