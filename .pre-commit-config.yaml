@@ -56,8 +56,8 @@ repos:
             args:
                 [
                     ./frontend,
-                    --config,
-                    ./frontend/AnimeCore/.eslintrc.cjs,
+                   # --config,
+                   # ./frontend/AnimeCore/.eslintrc.cjs,
                     --ignore-pattern,
                     /backend/static/*,
                     --fix,
