@@ -57,7 +57,7 @@
     mousewheel={{ sensitivity: 0.001 }}
     simulateTouch={false}
 >
-    <!-- <SwiperSlide>
+    <SwiperSlide>
         <Swiper
             modules={[EffectFade, Autoplay, Navigation]}
             navigation={{
@@ -151,7 +151,7 @@
                 </div>
             </div>
         </section>
-    </SwiperSlide> -->
+    </SwiperSlide>
     <SwiperSlide>
         <section class="hero {$responsiveMode === 'mobile' ? 'is-small' : 'is-fullheight'}">
             <div class="hero-head">
