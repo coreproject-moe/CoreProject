@@ -1,15 +1,14 @@
 <script lang="ts">
-    import { clickOutside } from "$functions/clickOutside";
     import { getContext } from "svelte";
     import { Autoplay, EffectFade, Mousewheel, Navigation, Pagination } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
-
     import voca from "voca";
-
+    
     import OptionModal from "$components/modals/OptionModal.svelte";
     import FromYourList from "$components/swiper/FromYourList.svelte";
     import MainHero from "$components/swiper/MainHero.svelte";
     import TrendingHero from "$components/swiper/TrendingHero.svelte";
+    import { clickOutside } from "$functions/clickOutside";
     import { fromYourListOption } from "$store/fromYourList/options";
     import { responsiveMode } from "$store/responsive";
 
