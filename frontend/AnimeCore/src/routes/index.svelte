@@ -6,7 +6,6 @@
     import MainHero from "$components/swiper/MainHero.svelte";
     import TrendingHero from "$components/swiper/TrendingHero.svelte";
     import { responsiveMode } from "$store/responsive";
-    import { activeModal } from "$store/modals";
 
     let slidesPerView: number;
     let trendingSlide = 0;
@@ -241,13 +240,11 @@
 
                     <div class="level-item has-text-centered is-justify-content-flex-end">
                         <button
+                            data-target="option-modal"
                             class="button is-info mx-4 is-flex modal-button {$responsiveMode ===
                             'mobile'
                                 ? 'is-small'
                                 : 'is-medium'}"
-                            on:click={() => {
-                                $activeModal.option = true;
-                            }}
                         >
                             <span class="icon">
                                 <img src="/icons/settings.svg" alt="" height={24} width={24} />

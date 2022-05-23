@@ -8,6 +8,7 @@
         "@typescript-eslint/parser": "^5.25.0",
         "autoprefixer": "^10.4.7",
         "bulma": "^0.9.4",
+        "bulma-modal-fx": "^1.1.1",
         "cssnano": "^5.1.9",
         "eslint": "^8.16.0",
         "eslint-config-prettier": "^8.5.0",
@@ -40,8 +41,5 @@
         "update": "npx npm-check-updates -u && npm install"
     },
     "type": "module",
-    "version": "0.1.0",
-    "dependencies": {
-        "animate.css": "^4.1.1"
-    }
+    "version": "0.1.0"
 }
