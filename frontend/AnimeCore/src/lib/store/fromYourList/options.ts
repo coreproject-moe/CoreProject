@@ -6,9 +6,9 @@ export const fromYourListOption = writable({ state: "", opened: false }, functio
     if (browser) {
         const option = localStorage.getItem("fromYourListOption");
         if (option && option !== null) {
-            set({ state: option, opened: get(fromYourListOption).opened });
+            set({ state: option, opened: false });
         } else {
-            set({ state: "watching", opened: get(fromYourListOption).opened });
+            set({ state: "watching", opened: false });
         }
     }
 });

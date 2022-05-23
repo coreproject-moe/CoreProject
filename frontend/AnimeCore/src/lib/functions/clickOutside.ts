@@ -1,6 +1,6 @@
 export function clickOutside(element: HTMLElement, callbackFunction: CallableFunction) {
     function onClick(event: Event) {
-        if (!element.contains(event?.target as HTMLElement)) {
+        if (!element?.contains(event?.target as HTMLElement)) {
             callbackFunction();
         }
     }

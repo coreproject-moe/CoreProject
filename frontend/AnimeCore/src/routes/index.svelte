@@ -251,7 +251,7 @@
                                                     class="has-text-weight-bold is-size-5 pr-2 {i ===
                                                     $fromYourListOption.state
                                                         ? 'is-active has-text-black'
-                                                        : 'has-text-white'}"
+                                                        : 'has-text-grey-dark'}"
                                                 >
                                                     {voca.capitalize(i)}
                                                 </div>
