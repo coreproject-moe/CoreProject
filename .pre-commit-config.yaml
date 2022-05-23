@@ -53,11 +53,10 @@ repos:
       rev: v8.16.0
       hooks:
           - id: eslint
-            args:
-                [
+            args: [
                     ./frontend,
-                   # --config,
-                   # ./frontend/AnimeCore/.eslintrc.cjs,
+                    # --config,
+                    # ./frontend/AnimeCore/.eslintrc.cjs,
                     --ignore-pattern,
                     /backend/static/*,
                     --fix,
