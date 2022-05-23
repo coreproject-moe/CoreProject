@@ -1,14 +1,7 @@
 <script lang="ts">
     import "../app.scss";
 
-    import { onMount } from "svelte";
-
-    import { browser } from "$app/env";
-    import OptionModal from "$components/modals/OptionModal.svelte";
-
-    onMount(async () => {
-        browser && (await import("bulma-modal-fx/dist/js/modal-fx.js"));
-    });
+    import Modal from "svelte-simple-modal";
 </script>
 
 <svelte:head>
@@ -16,6 +9,7 @@
 </svelte:head>
 
 <div style="height:100%">
-    <OptionModal />
-    <slot />
+    <Modal>
+        <slot />
+    </Modal>
 </div>

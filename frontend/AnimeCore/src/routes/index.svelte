@@ -1,4 +1,9 @@
 <script lang="ts">
+    import OptionModal from "$components/modals/OptionModal.svelte";
+
+    import { getContext } from "svelte";
+    const { open } = getContext("simple-modal");
+    import voca from "voca";
     import { Autoplay, EffectFade, Mousewheel, Navigation, Pagination } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
 
@@ -6,14 +11,11 @@
     import MainHero from "$components/swiper/MainHero.svelte";
     import TrendingHero from "$components/swiper/TrendingHero.svelte";
     import { responsiveMode } from "$store/responsive";
+    import { fromYourListOption } from "$store/fromYourList/options";
 
     let slidesPerView: number;
     let trendingSlide = 0;
     let fromyourlistSlide = 0;
-
-
-    // Dropdown Bool
-    let dropdownPickStateOpen = false;
 
     const onTrendingSlideChange = (e: any) => {
         const [swiper] = e.detail[0];
@@ -196,7 +198,7 @@
                             ? 'is-justify-content-flex-start'
                             : ''}"
                     >
-                        <div class="dropdown {dropdownPickStateOpen ? 'is-active' : ''}">
+                        <div class="dropdown {$fromYourListOption.opened ? 'is-active' : ''}">
                             <div class="dropdown-trigger">
                                 <button
                                     class="button is-warning mx-4 is-flex {$responsiveMode ===
@@ -204,15 +206,15 @@
                                         ? 'is-small'
                                         : 'is-medium'}"
                                     on:click={() => {
-                                        dropdownPickStateOpen = !dropdownPickStateOpen;
+                                        $fromYourListOption.opened = !$fromYourListOption.opened;
                                     }}
                                 >
                                     <span class="has-text-weight-semibold has-text-white"
-                                        >Watching</span
+                                        >{voca.capitalize($fromYourListOption.state)}</span
                                     >
                                     <span class="icon">
                                         <img
-                                            src={dropdownPickStateOpen
+                                            src={$fromYourListOption.opened
                                                 ? "/icons/chevron-up.svg"
                                                 : "/icons/chevron-down.svg"}
                                             alt=""
@@ -223,16 +225,27 @@
                                 </button>
                             </div>
                             <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                                <div class="dropdown-content has-background-warning-light" />
+                                <div class="dropdown-content has-background-warning-light">
+                                    {#each ["watching", "planning", "completed", "rewatching", "pause", "dropped"] as i}
+                                        <div
+                                            class="dropdown-item {i === $fromYourListOption.state
+                                                ? 'is-active'
+                                                : ''}"
+                                        >
+                                            {voca.capitalize(i)}
+                                        </div>
+                                    {/each}
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     <div class="level-item has-text-centered is-justify-content-flex-end">
                         <button
-                            data-target="option-modal"
-                            class="button is-info mx-4 is-flex modal-button {$responsiveMode ===
-                            'mobile'
+                            on:click={() => {
+                                open(OptionModal);
+                            }}
+                            class="button is-info mx-4 is-flex {$responsiveMode === 'mobile'
                                 ? 'is-small'
                                 : 'is-medium'}"
                         >
