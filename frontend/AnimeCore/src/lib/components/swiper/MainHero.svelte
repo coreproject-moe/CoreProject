@@ -1,8 +1,8 @@
 <script lang="ts">
     import { SwiperSlide } from "swiper/svelte";
-
+    import voca from "voca";
+    
     import Navbar from "$components/common/Navbar.svelte";
-    import { truncateString } from "$lib/functions/truncateText";
     import { responsiveMode } from "$store/responsive";
 
     export let backgroundImageUrl: string;
@@ -80,7 +80,7 @@
                         : 'is-size-6'}"
                     style={$responsiveMode === "mobile" ? "width: 100%;" : "width: 70%;"}
                 >
-                    {truncateString(animeSummary, wordCount)}
+                    {voca.truncate(animeSummary, wordCount)}
                 </div>
                 <!-- Tags -->
                 <div class="subtitle is-hidden-mobile">
