@@ -1,7 +1,7 @@
 <script lang="ts">
     import { SwiperSlide } from "swiper/svelte";
     import voca from "voca";
-    
+
     import Navbar from "$components/common/Navbar.svelte";
     import { responsiveMode } from "$store/responsive";
 
