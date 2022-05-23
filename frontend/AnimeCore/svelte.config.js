@@ -31,7 +31,8 @@ const config = {
                     $store: path.resolve("./src/lib/store"),
                     $hooks: path.resolve("./src/hooks"),
                     $components: path.resolve("./src/lib/components"),
-                    $urls: path.resolve("./src/lib/constants/backend/urls")
+                    $urls: path.resolve("./src/lib/constants/backend/urls"),
+                    $functions: path.resolve("./src/lib/functions")
                 }
             },
             esbuild: {

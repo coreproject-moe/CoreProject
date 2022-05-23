@@ -1,7 +1,9 @@
 <script lang="ts">
+    import { clickOutside } from "$functions/clickOutside";
     import { getContext } from "svelte";
     import { Autoplay, EffectFade, Mousewheel, Navigation, Pagination } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
+
     import voca from "voca";
 
     import OptionModal from "$components/modals/OptionModal.svelte";
@@ -198,7 +200,14 @@
                             ? 'is-justify-content-flex-start'
                             : ''}"
                     >
-                        <div class="dropdown {$fromYourListOption.opened ? 'is-active' : ''}">
+                        <div
+                            use:clickOutside={() => {
+                                if ($fromYourListOption.opened) {
+                                    $fromYourListOption.opened = false;
+                                }
+                            }}
+                            class="dropdown {$fromYourListOption.opened ? 'is-active' : ''}"
+                        >
                             <div class="dropdown-trigger">
                                 <button
                                     class="button is-warning mx-4 is-flex {$responsiveMode ===

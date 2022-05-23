@@ -13,6 +13,9 @@
         "noFallthroughCasesInSwitch": true,
         "noUncheckedIndexedAccess": true,
         "paths": {
+            // Functions
+            "$functions": ["src/lib/functions"],
+            "$functions/*" : ["src/lib/functions/*"],
             // Urls
             "$urls": ["src/lib/constants/backend/urls"],
             "$urls/*": ["src/lib/constants/backend/urls/*"],
