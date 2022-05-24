@@ -4,16 +4,16 @@ $warning-light: lighten($warning, 15%);
 // Bulma
 
 @use "bulma/bulma.sass" as bulma
-    with(
-        $family-sans-serif: "Kokoro",
-        $tag-color: white,
-        $warning: $warning,
-        $black: black,
-        $white: #f2f2f2,
-        $info: #7569e1,
-        // Modal Override
-        $modal-content-width: 75vw
-    );
+with(
+    $family-sans-serif: "Kokoro",
+    $tag-color: white,
+    $warning: $warning,
+    $black: black,
+    $white: #f2f2f2,
+    $info: #7569e1,
+    // Modal Override
+    $modal-content-width: 75vw
+);
 
 @use "bulma-modal-fx/dist/css/modal-fx";
 

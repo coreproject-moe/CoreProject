@@ -2,7 +2,7 @@
     import "../app.scss";
 
     import Modal from "svelte-simple-modal";
-    
+
     import NProgress from 'nprogress';
 	import { navigating } from '$app/stores';
 
