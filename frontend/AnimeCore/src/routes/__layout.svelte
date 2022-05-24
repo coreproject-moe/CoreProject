@@ -1,13 +1,12 @@
 <script lang="ts">
     import "../app.scss";
-
-    import Modal from "svelte-simple-modal";
-
-    import NProgress from "nprogress";
-    import { navigating } from "$app/stores";
-
-    // NProgress css
+// NProgress css
     import "nprogress/nprogress.css";
+    
+    import NProgress from "nprogress";
+    import Modal from "svelte-simple-modal";
+    
+    import { navigating } from "$app/stores";
 
     NProgress.configure({
         // Full list: https://github.com/rstacruz/nprogress#configuration
