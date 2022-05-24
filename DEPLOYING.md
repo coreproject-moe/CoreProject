@@ -18,13 +18,11 @@ npm run build
 npm run preview
 ```
 
-
 # Running backend :
 
 ```python
 cd backend
 ```
-
 
 ```python
 pipenv install --dev
@@ -33,7 +31,6 @@ pipenv install --dev
 ```python
 pipenv run sync
 ```
-
 
 ```python
 pipenv run dev
