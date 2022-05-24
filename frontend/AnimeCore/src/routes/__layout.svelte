@@ -2,10 +2,10 @@
     import "../app.scss";
 // NProgress css
     import "nprogress/nprogress.css";
-    
+
     import NProgress from "nprogress";
     import Modal from "svelte-simple-modal";
-    
+
     import { navigating } from "$app/stores";
 
     NProgress.configure({
