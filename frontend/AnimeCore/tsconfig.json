@@ -1,0 +1,36 @@
+{
+    "extends": "./.svelte-kit/tsconfig.json",
+    "compilerOptions": {
+        "module": "es2015",
+        "strict": true,
+        "allowUnreachableCode": false,
+        "allowSyntheticDefaultImports": true,
+        "exactOptionalPropertyTypes": true,
+        "noImplicitAny": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUncheckedIndexedAccess": true,
+        "paths": {
+            // Functions
+            "$functions": ["src/lib/functions"],
+            "$functions/*": ["src/lib/functions/*"],
+            // Urls
+            "$urls": ["src/lib/constants/backend/urls"],
+            "$urls/*": ["src/lib/constants/backend/urls/*"],
+            // Stores
+            "$store": ["src/lib/store"],
+            "$store/*": ["src/lib/store/*"],
+            // Hooks
+            "$hooks": ["src/hooks"],
+            "$hooks/*": ["src/hooks/*"],
+            // Components
+            "$components": ["src/lib/components"],
+            "$components/*": ["src/lib/components/*"],
+            // Svelte Defined
+            "$lib": ["src/lib"],
+            "$lib/*": ["src/lib/*"]
+        }
+    }
+}
