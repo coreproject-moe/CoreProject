@@ -3,11 +3,11 @@ repos:
       rev: v1.5.0
       hooks:
           - id: djhtml
-            files: ./backend/*/templates/.*\.html$
+            files: .*/templates/.*\.html$
           - id: djcss
-            files: ./backend/*/static/.*\.css$
+            files: .*/static/.*\.css$
           - id: djjs
-            files: ./backend/*/static/.*\.js$
+            files: .*/static/.*\.js$
 
     - repo: https://github.com/psf/black
       rev: 22.3.0
