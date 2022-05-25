@@ -149,7 +149,9 @@
             "version": "==1.0.9"
         },
         "celery": {
-            "extras": ["redis"],
+            "extras": [
+                "redis"
+            ],
             "hashes": [
                 "sha256:d1398cadf30f576266b34370e28e880306ec55f7a4b6307549b0ae9c15663481",
                 "sha256:da31f8eae7607b1582e5ee2d3f2d6f58450585afd23379491e3d9229d08102d0"
@@ -252,7 +254,9 @@
             "version": "==1.2.13"
         },
         "django": {
-            "extras": ["argon2"],
+            "extras": [
+                "argon2"
+            ],
             "hashes": [
                 "sha256:07c8638e7a7f548dc0acaaa7825d84b7bd42b10e8d22268b3d572946f1e9b687",
                 "sha256:4e8177858524417563cc0430f29ea249946d831eacb0068a1455686587df40b5"
@@ -318,11 +322,11 @@
         },
         "djangorestframework-simplejwt": {
             "hashes": [
-                "sha256:75323528a7b910843b879194746f0ebc3481c4ad9f354de2dd162160662fb95a",
-                "sha256:cd3ee3aabdc98de104957c136e74ba2a16571b151c88ecd97421fce171a03ea4"
+                "sha256:a60b09afb27d91ad1d7ac904cc632bd52cecead8f389f0fa1532ceb0fb757a74",
+                "sha256:bcc4cb74dcb637ca1e17eed35276bd618ab19491f8c53e65dee6271177c355e8"
             ],
             "index": "pypi",
-            "version": "==5.1.0"
+            "version": "==5.2.0"
         },
         "drf-nested-routers": {
             "hashes": [
@@ -555,7 +559,9 @@
             "version": "==0.2.5"
         },
         "whitenoise": {
-            "extras": ["brotli"],
+            "extras": [
+                "brotli"
+            ],
             "hashes": [
                 "sha256:2067fe9008a3cd7d0d75f75c9240b54f5f59996ca285cbeab18fc1e89949e30d",
                 "sha256:6ccc6d1ad6fb688a398ea65d97db47f018ea0be7da75e146e8f2e837a04ba590"
@@ -681,7 +687,9 @@
             "version": "==8.1.3"
         },
         "django": {
-            "extras": ["argon2"],
+            "extras": [
+                "argon2"
+            ],
             "hashes": [
                 "sha256:07c8638e7a7f548dc0acaaa7825d84b7bd42b10e8d22268b3d572946f1e9b687",
                 "sha256:4e8177858524417563cc0430f29ea249946d831eacb0068a1455686587df40b5"
