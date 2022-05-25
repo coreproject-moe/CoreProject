@@ -20,9 +20,6 @@ class UserSerializer(serializers.ModelSerializer):
             "is_staff",
             "avatar",
             "video_volume",
-            # Show only some
-            "myanimelist",
-            "kitsu",
         )
         read_only_fields = [
             "id",
