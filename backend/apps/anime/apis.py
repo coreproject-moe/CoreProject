@@ -6,7 +6,7 @@ from apps.anime.views.anime_producer import AnimeProducerView
 from .views.anime_info import AnimeInfoView
 
 router = routers.SimpleRouter()
-router.register(r"anime", AnimeInfoView, basename="anime-info")
+router.register(r"anime", AnimeInfoView, basename="anime_info")
 
 base_router = routers.NestedSimpleRouter(router, r"anime", lookup="anime")
 base_router.register(r"producers", AnimeProducerView, basename="anime_producers")
