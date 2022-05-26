@@ -6,13 +6,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('user', '0003_user_kitsu_user_mal_token'),
+        ("user", "0003_user_kitsu_user_mal_token"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='user',
-            name='kitsu',
-            field=models.JSONField(default={'access_token': '', 'created_at': 0, 'expires_in': 0, 'refresh_token': ''}),
+            model_name="user",
+            name="kitsu",
+            field=models.JSONField(
+                default={
+                    "access_token": "",
+                    "created_at": 0,
+                    "expires_in": 0,
+                    "refresh_token": "",
+                }
+            ),
         ),
     ]
