@@ -1,7 +1,6 @@
+from apps.anime.views.anime_producer import AnimeProducerView
 from django.urls import include, path
 from rest_framework_nested import routers
-
-from apps.anime.views.anime_producer import AnimeProducerView
 
 from .views.anime_info import AnimeInfoView
 
