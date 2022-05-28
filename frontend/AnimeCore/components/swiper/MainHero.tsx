@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStyles, Container, Title, Text, Button } from '@mantine/core';
 import { Navbar } from '../common/Navbar';
+import { useMediaQuery } from '@mantine/hooks';
 
 const useStyles = createStyles((theme) => ({
     root: {
@@ -98,11 +99,16 @@ const useStyles = createStyles((theme) => ({
 
 export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
     const { classes } = useStyles();
+    const mobile = useMediaQuery('(min-width: 500px)');
 
     return (
         <div
             className={classes.root}
-            style={{ backgroundImage: `url(${backgroundImage})` }}
+            style={{
+                backgroundImage: `url(${
+                    mobile ? backgroundImage : backgroundBanner
+                })`,
+            }}
         >
             <Navbar />
 
