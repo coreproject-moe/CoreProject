@@ -72,15 +72,6 @@ class CustomUserAdmin(UserAdmin):
                 "fields": ("video_volume",),
             },
         ),
-        (
-            _("Trackers"),
-            {
-                "fields": (
-                    "myanimelist",
-                    "kitsu",
-                ),
-            },
-        ),
     )
 
 
