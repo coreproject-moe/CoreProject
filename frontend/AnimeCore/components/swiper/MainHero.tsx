@@ -1,5 +1,6 @@
 import React from 'react';
 import { createStyles, Container, Title, Text, Button } from '@mantine/core';
+import { Navbar } from '../common/Navbar';
 
 const useStyles = createStyles((theme) => ({
     root: {
@@ -8,14 +9,22 @@ const useStyles = createStyles((theme) => ({
         backgroundColor: '#11284b',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        backgroundImage:
-            'linear-gradient(250deg, rgba(130, 201, 30, 0) 0%, #062343 70%), url(https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1080&q=80)',
         paddingTop: theme.spacing.xl * 2,
         paddingBottom: theme.spacing.xl * 2,
         minHeight: '100vh',
+        boxShadow: `
+            inset 0 4px 1800px rgb(7, 5, 25),
+            inset 0 -40vh 140px 2px rgba(7, 5, 25, 0.9),
+            inset 0 -15vh 140px 2px rgba(7, 5, 25, 0.7),
+            inset 0 -5vh 140px 2px rgba(7, 5, 25, 0.4),
+            inset 0 -2vh 140px 2px rgba(7, 5, 25, 0.2)`,
 
         [theme.fn.smallerThan('md')]: {
             minHeight: '60vh',
+            boxShadow: `
+                inset 0px -30px 12px -2px rgba(7, 5, 25, 0.95),
+                inset 0 -40vh 140px 2px rgba(7, 5, 25, 0.8),
+                inset 0 -2vh 140px 2px rgba(7, 5, 25, 0.2)`,
         },
     },
 
@@ -87,11 +96,15 @@ const useStyles = createStyles((theme) => ({
     },
 }));
 
-export function MainHero() {
+export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
     const { classes } = useStyles();
+
     return (
-        <div className={classes.root}>
-            <Container>Default container</Container>
+        <div
+            className={classes.root}
+            style={{ backgroundImage: `url(${backgroundImage})` }}
+        >
+            <Navbar />
 
             <Container size="lg" className={classes.container}>
                 <div className={classes.inner}>
@@ -130,4 +143,4 @@ export function MainHero() {
             </Container>
         </div>
     );
-}
+};

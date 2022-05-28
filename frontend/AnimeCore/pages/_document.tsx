@@ -5,7 +5,7 @@ export default class _Document extends Document {
         return (
             <Html>
                 <Head>
-                    <link rel="icon" href="/favicon.svg" />{' '}
+                    <link rel="icon" href="/logo/favicon.svg" />{' '}
                 </Head>
                 <body>
                     <Main />

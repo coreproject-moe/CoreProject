@@ -23,13 +23,14 @@ const Home: NextPage = () => {
                     }}
                     effect="fade"
                     direction="horizontal"
+                    simulateTouch={false}
                 >
                     {Array(10)
                         .fill(1)
                         .map((el, i) => {
                             return (
                                 <SwiperSlide key={i}>
-                                    <MainHero />
+                                    <MainHero backgroundImage="/images/Hyouka-poster.png" />
                                 </SwiperSlide>
                             );
                         })}

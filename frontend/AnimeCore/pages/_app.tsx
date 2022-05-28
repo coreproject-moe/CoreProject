@@ -23,6 +23,8 @@ export default function App(props: AppProps) {
                 theme={{
                     /** Put your mantine theme override here */
                     colorScheme: 'dark',
+                    /** Font Family */
+                    fontFamily: 'Kokoro',
                 }}
             >
                 <Component {...pageProps} />
