@@ -2,7 +2,8 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 
-from .models import MalModel, KitsuModel, AnilistModel
+from .models import AnilistModel, KitsuModel, MalModel
+
 
 
 class UserSerializer(serializers.ModelSerializer):
