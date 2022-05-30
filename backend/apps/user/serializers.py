@@ -5,7 +5,6 @@ from rest_framework import serializers
 from .models import AnilistModel, KitsuModel, MalModel
 
 
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
@@ -81,4 +80,3 @@ class AnilistSerializer(serializers.ModelSerializer):
     class Meta:
         model = AnilistModel
         fields = "__all__"
-

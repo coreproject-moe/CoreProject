@@ -1,8 +1,6 @@
 from django.urls import path
 
-
 from .views import AnilistView, KitsuView, MalView, RegisterView, UserInfoView
-
 
 urlpatterns = [
     path("info/", UserInfoView.as_view(), name="api_user_info"),
