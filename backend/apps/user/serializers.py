@@ -80,3 +80,4 @@ class AnilistSerializer(serializers.ModelSerializer):
     class Meta:
         model = AnilistModel
         fields = "__all__"
+

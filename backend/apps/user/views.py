@@ -86,10 +86,11 @@ class MalView(generics.GenericAPIView, mixins.CreateModelMixin):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        queryset = MalModel.objects.filter(user=self.request.user)
+        instance = MalModel.objects.filter(user=self.request.user)
+        queryset = get_object_or_404(instance, user=self.request.user)
         return queryset
 
-    def list(self):
+    def get(self, request):
         queryset = self.filter_queryset(self.get_queryset())
         serializer = self.get_serializer(queryset, many=False)
         return Response(serializer.data)
@@ -103,10 +104,11 @@ class KitsuView(generics.GenericAPIView, mixins.CreateModelMixin):
     pagination_class = None
 
     def get_queryset(self):
-        queryset = KitsuModel.objects.filter(user=self.request.user)
+        instance = KitsuModel.objects.all()
+        queryset = get_object_or_404(instance, user=self.request.user)
         return queryset
 
-    def list(self):
+    def get(self, request):
         queryset = self.filter_queryset(self.get_queryset())
         serializer = self.get_serializer(queryset, many=False)
         return Response(serializer.data)
@@ -117,13 +119,13 @@ class AnilistView(generics.GenericAPIView, mixins.CreateModelMixin):
 
     serializer_class = AnilistSerializer
     permission_classes = [IsAuthenticated]
-    pagination_class = None
 
     def get_queryset(self):
-        queryset = AnilistModel.objects.filter(user=self.request.user)
+        instance = AnilistModel.objects.all()
+        queryset = get_object_or_404(instance, user=self.request.user)
         return queryset
 
-    def list(self):
-        queryset = self.filter_queryset(self.get_queryset())
-        serializer = self.get_serializer(queryset, many=False)
+    def get(self, request):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset)
         return Response(serializer.data)
