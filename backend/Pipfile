@@ -8,6 +8,8 @@ django = {extras = ["argon2"], version = "*"}
 # 3rd Party
 django-cleanup = "*"
 django-cors-headers = "*"
+# 3rd Party ( Model related )
+django-unixdatetimefield = "*"
 # 3rd Party ( Editor )
 django-ckeditor = "*"
 # 3rd Party ( WhiteNoise )
@@ -29,6 +31,7 @@ drf-nested-routers = "*"
 djangorestframework-simplejwt = "*"
 # Pillow
 pillow = "*"
+
 
 [dev-packages]
 black = "*"
