@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "django_filters",
     "django_cleanup.apps.CleanupConfig",
+    "huey.contrib.djhuey",
     # Pages
     "apps.anime",
     # Rest stuff
@@ -257,3 +258,12 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://localhost:8000",
 ]
+
+# settings.py -- alternative configuration method
+# https://huey.readthedocs.io/en/latest/contrib.html#setting-things-up
+
+from huey import RedisHuey
+from redis import ConnectionPool
+
+pool = ConnectionPool(host="localhost", port=6379, max_connections=20)
+HUEY = RedisHuey("my-app", connection_pool=pool)

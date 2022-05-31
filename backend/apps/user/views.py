@@ -8,6 +8,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
+from apps.user.tasks import count_beans
+
 from .models import AnilistModel, KitsuModel, MalModel
 from .serializers import (
     AnilistSerializer,
