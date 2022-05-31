@@ -1,3 +1,4 @@
+from apps.user.tasks import count_beans
 from django.contrib.auth import get_user_model
 from django.http.request import HttpRequest
 from django.shortcuts import get_object_or_404
@@ -7,8 +8,6 @@ from rest_framework.parsers import FormParser, MultiPartParser
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
-
-from apps.user.tasks import count_beans
 
 from .models import AnilistModel, KitsuModel, MalModel
 from .serializers import (
