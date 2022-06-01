@@ -223,13 +223,11 @@
         "django": {
             "extras": ["argon2"],
             "hashes": [
-
                 "sha256:502ae42b6ab1b612c933fb50d5ff850facf858a4c212f76946ecd8ea5b3bf2d9",
                 "sha256:f7431a5de7277966f3785557c3928433347d998c1e6459324501378a291e5aab"
             ],
             "index": "pypi",
             "version": "==4.0.5"
-
         },
         "django-ckeditor": {
             "hashes": [
@@ -663,13 +661,11 @@
         "django": {
             "extras": ["argon2"],
             "hashes": [
-
                 "sha256:502ae42b6ab1b612c933fb50d5ff850facf858a4c212f76946ecd8ea5b3bf2d9",
                 "sha256:f7431a5de7277966f3785557c3928433347d998c1e6459324501378a291e5aab"
             ],
             "index": "pypi",
             "version": "==4.0.5"
-
         },
         "django-debug-toolbar": {
             "hashes": [
