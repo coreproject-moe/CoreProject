@@ -262,8 +262,13 @@ CORS_ALLOWED_ORIGINS = [
 # settings.py -- alternative configuration method
 # https://huey.readthedocs.io/en/latest/contrib.html#setting-things-up
 
-from huey import RedisHuey
+from huey import PriorityRedisHuey
 from redis import ConnectionPool
 
 pool = ConnectionPool(host="localhost", port=6379, max_connections=20)
-HUEY = RedisHuey("my-app", connection_pool=pool)
+HUEY = PriorityRedisHuey(
+    "my-app",
+    use_zlib=True,
+    compression=True,
+    connection_pool=pool,
+)

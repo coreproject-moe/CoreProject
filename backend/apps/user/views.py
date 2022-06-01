@@ -79,8 +79,6 @@ class RegisterView(generics.CreateAPIView):
 
 
 class MalView(generics.GenericAPIView, mixins.CreateModelMixin):
-    """"""
-
     serializer_class = MalSerializer
     permission_classes = [IsAuthenticated]
 
@@ -96,8 +94,6 @@ class MalView(generics.GenericAPIView, mixins.CreateModelMixin):
 
 
 class KitsuView(generics.GenericAPIView, mixins.CreateModelMixin):
-    """"""
-
     serializer_class = KitsuSerializer
     permission_classes = [IsAuthenticated]
     pagination_class = None
@@ -114,8 +110,6 @@ class KitsuView(generics.GenericAPIView, mixins.CreateModelMixin):
 
 
 class AnilistView(generics.GenericAPIView, mixins.CreateModelMixin):
-    """"""
-
     serializer_class = AnilistSerializer
     permission_classes = [IsAuthenticated]
 
