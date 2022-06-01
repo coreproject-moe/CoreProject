@@ -1,10 +1,12 @@
-from ..models import KitsuModel
-from huey.contrib.djhuey import periodic_task
-from huey import crontab
+import logging
 from datetime import datetime
+
 import httpx
 from django.utils import timezone
-import logging
+from huey import crontab
+from huey.contrib.djhuey import periodic_task
+
+from ..models import KitsuModel
 
 logger = logging.getLogger("huey")
 
