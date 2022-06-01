@@ -1,11 +1,10 @@
-from datetime import datetime
 import logging
+from datetime import datetime
 
 import httpx
 import pytz
-from django.utils import timezone
 from django.db.models import F
-
+from django.utils import timezone
 from huey import crontab
 from huey.contrib.djhuey import periodic_task
 
