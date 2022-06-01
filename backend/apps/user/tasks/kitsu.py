@@ -1,8 +1,11 @@
-import logging
 from datetime import datetime
+import logging
 
 import httpx
+import pytz
 from django.utils import timezone
+from django.db.models import F
+
 from huey import crontab
 from huey.contrib.djhuey import periodic_task
 
@@ -11,46 +14,49 @@ from ..models import KitsuModel
 logger = logging.getLogger("huey")
 
 
-@periodic_task(crontab(day="*/1"))
+@periodic_task(crontab(minute="*/1"))
 def refresh_kitsu_jwt():
 
-    models = KitsuModel.objects.all()
+    models = KitsuModel.objects.annotate(
+        expiry_date=F("created_at") + F("expires_in")
+    ).filter(expiry_date__lte=timezone.now())
 
     for object in models:
         # We are adding the timestamp as directed by kitsu
         # Essentially what we are doing is we are taking the datetime object and 1 month to it
-        expires_in = object.created_at + timezone.timedelta(seconds=object.expires_in)
+        # expires_in = object.created_at + timezone.timedelta(seconds=object.expires_in)
 
-        if timezone.now() >= expires_in:
-            res = httpx.post(
-                "https://kitsu.io/api/oauth/token",
-                json={
-                    "grant_type": "refresh_token",
-                    "refresh_token": object.refresh_token,
-                },
+        res = httpx.post(
+            "https://kitsu.io/api/oauth/token",
+            json={
+                "grant_type": "refresh_token",
+                "refresh_token": object.refresh_token,
+            },
+        )
+
+        data = res.json()
+        """
+            The Data structure looks like this
+            {
+                "access_token":
+                "token_type":
+                "expires_in":
+                "refresh_token":
+                "scope":
+                "created_at":
+            }
+        """
+
+        if res.status_code == 200:
+            object.access_token = data["access_token"]
+            object.expires_in = timezone.timedelta(seconds=data["expires_in"])
+            object.refresh_token = data["refresh_token"]
+            object.created_at = datetime.fromtimestamp(
+                data["created_at"], tzinfo=pytz.UTC
             )
+            object.save()
 
-            data = res.json()
-            """
-                The Data structure looks like this
-                {
-                    "access_token":
-                    "token_type":
-                    "expires_in":
-                    "refresh_token":
-                    "scope":
-                    "created_at":
-                }
-            """
+        else:
+            object.delete()
 
-            if res.status_code == 200:
-                object.access_token = data["access_token"]
-                object.expires_in = data["expires_in"]
-                object.refresh_token = data["refresh_token"]
-                object.created_at = datetime.fromtimestamp(data["created_at"])
-                object.save()
-
-            else:
-                object.delete()
-
-            logger.info(f"Refreshed Token | Kitsu | {object.user}")
+        logger.info(f"Refreshed Token | Kitsu | {object.user}")

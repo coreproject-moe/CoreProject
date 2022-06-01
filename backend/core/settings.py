@@ -82,7 +82,7 @@ MIDDLEWARE = [
     # Flatpages
     "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware",
 ]
-
+SITE_ID = 1
 # https://docs.djangoproject.com/en/4.0/topics/cache/#the-per-site-cache-1
 CACHE_MIDDLEWARE_SECONDS = 0
 
