@@ -4,6 +4,9 @@ from huey import crontab
 from datetime import datetime
 import httpx
 from django.utils import timezone
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 @periodic_task(crontab(minute="*/1"))
@@ -12,9 +15,11 @@ def refresh_kitsu_jwt():
     models = KitsuModel.objects.all()
 
     for object in models:
-        expires_in = object.created_at + timezone.timedelta(seconds=object.expires_in)
+        # We are adding the timestamp as directed by kitsu
+        # Essentially what we are doing is we are taking the datetime object and 1 month to it
+        expires_in = timezone.now()
 
-        if timezone.now() > expires_in:
+        if timezone.now() >= expires_in:
             res = httpx.post(
                 "https://kitsu.io/api/oauth/token",
                 json={
@@ -44,4 +49,4 @@ def refresh_kitsu_jwt():
             else:
                 object.delete()
 
-            print(f"Refreshed Token | Kitsu | {object.user}")
+            logger.info(f"Refreshed Token | Kitsu | {object.user}")
