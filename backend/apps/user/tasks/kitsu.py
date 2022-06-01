@@ -1,4 +1,4 @@
-from .models import KitsuModel
+from ..models import KitsuModel
 from huey.contrib.djhuey import periodic_task
 from huey import crontab
 from datetime import datetime
@@ -6,7 +6,7 @@ import httpx
 from django.utils import timezone
 import logging
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("huey")
 
 
 @periodic_task(crontab(minute="*/1"))
@@ -48,5 +48,4 @@ def refresh_kitsu_jwt():
                 object.save()
             else:
                 object.delete()
-
             logger.info(f"Refreshed Token | Kitsu | {object.user}")
