@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = {extras = ["argon2"], version = "*"}
+django = {version = ">=4.1a1", extras = ["argon2"]}
 # 3rd Party
 django-cleanup = "*"
 django-cors-headers = "*"
@@ -31,7 +31,8 @@ drf-nested-routers = "*"
 djangorestframework-simplejwt = "*"
 # Pillow
 pillow = "*"
-httpx = "*"
+# Http Client
+httpx = {extras = ["brotli", "http2"], version = "*"}
 
 [dev-packages]
 black = "*"

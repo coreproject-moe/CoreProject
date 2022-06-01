@@ -9,7 +9,7 @@ import logging
 logger = logging.getLogger("huey")
 
 
-@periodic_task(crontab(minute="*/1"))
+@periodic_task(crontab(day="*/1"))
 def refresh_kitsu_jwt():
 
     models = KitsuModel.objects.all()
@@ -17,7 +17,7 @@ def refresh_kitsu_jwt():
     for object in models:
         # We are adding the timestamp as directed by kitsu
         # Essentially what we are doing is we are taking the datetime object and 1 month to it
-        expires_in = timezone.now()
+        expires_in = object.created_at + timezone.timedelta(seconds=object.expires_in)
 
         if timezone.now() >= expires_in:
             res = httpx.post(
@@ -27,6 +27,7 @@ def refresh_kitsu_jwt():
                     "refresh_token": object.refresh_token,
                 },
             )
+
             data = res.json()
             """
                 The Data structure looks like this
@@ -37,7 +38,7 @@ def refresh_kitsu_jwt():
                     "refresh_token":
                     "scope":
                     "created_at":
-                }    
+                }
             """
 
             if res.status_code == 200:
@@ -46,6 +47,8 @@ def refresh_kitsu_jwt():
                 object.refresh_token = data["refresh_token"]
                 object.created_at = datetime.fromtimestamp(data["created_at"])
                 object.save()
+
             else:
                 object.delete()
+
             logger.info(f"Refreshed Token | Kitsu | {object.user}")
