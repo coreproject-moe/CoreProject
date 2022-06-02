@@ -14,11 +14,19 @@ logger = logging.getLogger("huey")
 
 
 @periodic_task(crontab(minute="*/1"))
-def refresh_kitsu_jwt():
+def refresh_jwt():
 
-    models = KitsuModel.objects.annotate(
+    models = []
+    mal_models = MalModel.objects.annotate( expiry_date=F("created_at") + F("expires_in")
+    ).filter(expiry_date__lte=timezone.now())    
+    anilist_models = AnilistModel.objects.annotate(expiry_date=F("created_at") + F("expires_in")
+    ).filter(expiry_date__lte=timezone.now())
+    kitsu_models = KitsuModel.objects.annotate(
         expiry_date=F("created_at") + F("expires_in")
     ).filter(expiry_date__lte=timezone.now())
+    models.extend(mal_models)
+    models.extend(anilist_models)
+    models.extend(kitsu_models)
 
     for object in models:
         # We are adding the timestamp as directed by kitsu
