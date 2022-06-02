@@ -6,14 +6,14 @@ import pytz
 from django.db.models import F
 from django.utils import timezone
 from huey import crontab
-from huey.contrib.djhuey import periodic_task
+from huey.contrib.djhuey import db_periodic_task
 
 from ..models import KitsuModel
 
 logger = logging.getLogger("huey")
 
 
-@periodic_task(crontab(minute="*/1"))
+@db_periodic_task(crontab(minute="*/1"))
 def refresh_kitsu_jwt():
     models = KitsuModel.objects.annotate(
         expiry_date=F("created_at") + F("expires_in")
