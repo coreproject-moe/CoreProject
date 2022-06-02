@@ -17,9 +17,11 @@ logger = logging.getLogger("huey")
 def refresh_jwt():
 
     models = []
-    mal_models = MalModel.objects.annotate( expiry_date=F("created_at") + F("expires_in")
-    ).filter(expiry_date__lte=timezone.now())    
-    anilist_models = AnilistModel.objects.annotate(expiry_date=F("created_at") + F("expires_in")
+    mal_models = MalModel.objects.annotate(
+        expiry_date=F("created_at") + F("expires_in")
+    ).filter(expiry_date__lte=timezone.now())
+    anilist_models = AnilistModel.objects.annotate(
+        expiry_date=F("created_at") + F("expires_in")
     ).filter(expiry_date__lte=timezone.now())
     kitsu_models = KitsuModel.objects.annotate(
         expiry_date=F("created_at") + F("expires_in")
