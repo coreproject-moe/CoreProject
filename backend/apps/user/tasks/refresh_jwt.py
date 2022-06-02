@@ -26,6 +26,7 @@ def refresh_jwt():
     kitsu_models = KitsuModel.objects.annotate(
         expiry_date=F("created_at") + F("expires_in")
     ).filter(expiry_date__lte=timezone.now())
+
     models.extend(mal_models)
     models.extend(anilist_models)
     models.extend(kitsu_models)
