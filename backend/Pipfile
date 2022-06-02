@@ -47,7 +47,7 @@ sync = 'python manage.py migrate'
 mksync = 'python manage.py makemigrations'
 collectstatic = 'python .\manage.py collectstatic --clear --link' # Dont duplicate copy files.
 prod = "gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
-huey = "python manage.py run_huey --huey-verbose"
+huey = "python manage.py run_huey"
 
 [pipenv]
 allow_prereleases = true
