@@ -14,8 +14,8 @@ logger = logging.getLogger("huey")
 
 
 @periodic_task(crontab(minute="*/1"))
-def refresh_jwt():
-    models = MalModel.objects.annotate(
+def refresh_kitsu_jwt():
+    models = KitsuModel.objects.annotate(
         expiry_date=F("created_at") + F("expires_in")
     ).filter(expiry_date__lte=timezone.now())
 
@@ -27,7 +27,7 @@ def refresh_jwt():
         res = httpx.post(
             "https://kitsu.io/api/oauth/token",
             json={
-                "grant_type": "refresh_token",
+                "grant_type": "refresh_tokens",
                 "refresh_token": object.refresh_token,
             },
         )
