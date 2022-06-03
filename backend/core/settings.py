@@ -9,7 +9,12 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+import os
 from pathlib import Path
+
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,6 +29,9 @@ SECRET_KEY = "django-insecure-mn19l@e%r^s&a^pa9%(bf173v-0c54^@3s(pb!ts_yuts0$+6p
 DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+
+MAL_CLIENT_ID = os.environ.get("MAL_CLIENT_ID")
+MAL_CLIENT_SECRET = os.environ.get("MAL_CLIENT_SECRET")
 
 
 # Application definition
@@ -46,6 +54,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework_simplejwt.token_blacklist",
     # 3rd party Django stuff
+    "dbbackup",  # django-dbbackup
     "ckeditor",
     "ckeditor_uploader",
     "crispy_forms",
@@ -82,7 +91,7 @@ MIDDLEWARE = [
     # Flatpages
     "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware",
 ]
-
+SITE_ID = 1
 # https://docs.djangoproject.com/en/4.0/topics/cache/#the-per-site-cache-1
 CACHE_MIDDLEWARE_SECONDS = 0
 
@@ -262,8 +271,16 @@ CORS_ALLOWED_ORIGINS = [
 # settings.py -- alternative configuration method
 # https://huey.readthedocs.io/en/latest/contrib.html#setting-things-up
 
-from huey import RedisHuey
+from huey import PriorityRedisHuey
 from redis import ConnectionPool
 
 pool = ConnectionPool(host="localhost", port=6379, max_connections=20)
-HUEY = RedisHuey("my-app", connection_pool=pool)
+HUEY = PriorityRedisHuey(
+    "my-app",
+    use_zlib=True,
+    compression=True,
+    connection_pool=pool,
+)
+
+DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage"
+DBBACKUP_STORAGE_OPTIONS = {"location": os.path.join(BASE_DIR, "backup")}

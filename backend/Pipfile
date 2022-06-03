@@ -4,12 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = {extras = ["argon2"], version = "*"}
+django = {version = ">=4.1a1", extras = ["argon2"]}
 # 3rd Party
 django-cleanup = "*"
 django-cors-headers = "*"
-# 3rd Party ( Model related )
-django-unixdatetimefield = "*"
+# 3rd Party ( ENV )
+python-dotenv = "*"
 # 3rd Party ( Editor )
 django-ckeditor = "*"
 # 3rd Party ( WhiteNoise )
@@ -31,6 +31,9 @@ drf-nested-routers = "*"
 djangorestframework-simplejwt = "*"
 # Pillow
 pillow = "*"
+# Http Client
+httpx = {extras = ["brotli", "http2"], version = "*"}
+
 
 [dev-packages]
 black = "*"
@@ -45,4 +48,7 @@ sync = 'python manage.py migrate'
 mksync = 'python manage.py makemigrations'
 collectstatic = 'python .\manage.py collectstatic --clear --link' # Dont duplicate copy files.
 prod = "gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
-huey = "python manage.py run_huey --huey-verbose"
+huey = "python manage.py run_huey"
+
+[pipenv]
+allow_prereleases = true
