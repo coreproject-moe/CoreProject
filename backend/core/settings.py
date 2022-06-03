@@ -141,12 +141,8 @@ LOGIN_URL = "login_page"
 
 CACHES = {
     "default": {
-        "BACKEND": "django.core.cache.backends.filebased.FileBasedCache",
-        "LOCATION": Path(BASE_DIR, "cache"),
-        "TIMEOUT": 60,
-        "OPTIONS": {
-            "MAX_ENTRIES": 10,
-        },
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
     }
 }
 
