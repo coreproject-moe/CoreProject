@@ -209,7 +209,7 @@
                 "sha256:2857e29ff0d34db842cd7ca3230549d1a697f96ee6d3fb071cfa6c7393832597",
                 "sha256:6881edbebdb17b39b4eaaa821b438bf6eddffb4468cf344f09f89def34a8b1df"
             ],
-            "markers": "python_full_version >= '3.5.0'",
+            "markers": "python_version >= '3.5'",
             "version": "==2.0.12"
         },
         "deprecated": {
@@ -221,7 +221,9 @@
             "version": "==1.2.13"
         },
         "django": {
-            "extras": ["argon2"],
+            "extras": [
+                "argon2"
+            ],
             "hashes": [
                 "sha256:815b1c3e1c1379cca1c54cc7202ee86df006f52b94560b46ea0b19f162c9474a",
                 "sha256:91980d3b327e38e44c2bef0af86d624a57adbd5f1c96f43acf150396770caf01"
@@ -340,7 +342,10 @@
             "version": "==0.13.7"
         },
         "httpx": {
-            "extras": ["brotli", "http2"],
+            "extras": [
+                "brotli",
+                "http2"
+            ],
             "hashes": [
                 "sha256:2f57e72cee80879eaccde550fd1192d827d26662c6f3a65b89acdaaba03a4c89",
                 "sha256:78bf0260283a9c10682b1dc2d6d753f154eb876df669518f18dfa8a0e8700dc5"
@@ -368,7 +373,7 @@
                 "sha256:84d9dd047ffa80596e0f246e2eab0b391788b0503584e8945f2368256d2735ff",
                 "sha256:9d643ff0a55b762d5cdb124b8eaa99c66322e2157b69160bc32796e824360e6d"
             ],
-            "markers": "python_full_version >= '3.5.0'",
+            "markers": "python_version >= '3.5'",
             "version": "==3.3"
         },
         "packaging": {
@@ -509,7 +514,9 @@
             "version": "==4.3.3"
         },
         "rfc3986": {
-            "extras": ["idna2008"],
+            "extras": [
+                "idna2008"
+            ],
             "hashes": [
                 "sha256:270aaf10d87d0d4e095063c65bf3ddbc6ee3d0b226328ce21e036f946e421835",
                 "sha256:a86d6e1f5b1dc238b218b012df0aa79409667bb209e58da56d0b94704e712a97"
@@ -521,7 +528,7 @@
                 "sha256:471b71698eac1c2112a40ce2752bb2f4a4814c22a54a3eed3676bc0f5ca9f663",
                 "sha256:c4666eecec1d3f50960c6bdf61ab7bc350648da6c126e3cf6898d8cd4ddcd3de"
             ],
-            "markers": "python_full_version >= '3.5.0'",
+            "markers": "python_version >= '3.5'",
             "version": "==1.2.0"
         },
         "sqlparse": {
@@ -529,7 +536,7 @@
                 "sha256:0c00730c74263a94e5a9919ade150dfc3b19c574389985446148402998287dae",
                 "sha256:48719e356bb8b42991bdbb1e8b83223757b93789c00910a616a071910ca4a64d"
             ],
-            "markers": "python_full_version >= '3.5.0'",
+            "markers": "python_version >= '3.5'",
             "version": "==0.4.2"
         },
         "tzdata": {
@@ -549,7 +556,9 @@
             "version": "==4.1.1"
         },
         "whitenoise": {
-            "extras": ["brotli"],
+            "extras": [
+                "brotli"
+            ],
             "hashes": [
                 "sha256:2067fe9008a3cd7d0d75f75c9240b54f5f59996ca285cbeab18fc1e89949e30d",
                 "sha256:6ccc6d1ad6fb688a398ea65d97db47f018ea0be7da75e146e8f2e837a04ba590"
@@ -683,7 +692,9 @@
             "version": "==0.4.4"
         },
         "django": {
-            "extras": ["argon2"],
+            "extras": [
+                "argon2"
+            ],
             "hashes": [
                 "sha256:815b1c3e1c1379cca1c54cc7202ee86df006f52b94560b46ea0b19f162c9474a",
                 "sha256:91980d3b327e38e44c2bef0af86d624a57adbd5f1c96f43acf150396770caf01"
@@ -726,7 +737,7 @@
                 "sha256:0c00730c74263a94e5a9919ade150dfc3b19c574389985446148402998287dae",
                 "sha256:48719e356bb8b42991bdbb1e8b83223757b93789c00910a616a071910ca4a64d"
             ],
-            "markers": "python_full_version >= '3.5.0'",
+            "markers": "python_version >= '3.5'",
             "version": "==0.4.2"
         },
         "tomli": {
