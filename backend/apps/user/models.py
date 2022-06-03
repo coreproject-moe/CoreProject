@@ -30,9 +30,9 @@ class User(AbstractUser, ResizeImageMixin):
 
 class MalModel(models.Model):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
-    access_token = models.CharField(max_length=64, null=True, blank=True)
+    access_token = models.CharField(max_length=1024, null=True, blank=True)
     expires_in = models.DurationField(null=True, blank=True)
-    refresh_token = models.CharField(max_length=64, null=True, blank=True)
+    refresh_token = models.CharField(max_length=1024, null=True, blank=True)
     created_at = models.DateTimeField(null=True, blank=True)
 
 

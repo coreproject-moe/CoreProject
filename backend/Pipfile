@@ -33,6 +33,7 @@ djangorestframework-simplejwt = "*"
 pillow = "*"
 # Http Client
 httpx = {extras = ["brotli", "http2"], version = "*"}
+python-dotenv = "*"
 
 [dev-packages]
 black = "*"

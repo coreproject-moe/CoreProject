@@ -4,12 +4,14 @@ from datetime import datetime
 import httpx
 from django.db.models import F
 from django.utils import timezone
+from django.conf import settings
 from huey import crontab
 from huey.contrib.djhuey import db_periodic_task
 
 from ..models import KitsuModel, MalModel
 
 logger = logging.getLogger("huey")
+session = httpx.Client(http2=True)
 
 
 @db_periodic_task(crontab(minute="*/1"))
@@ -23,7 +25,7 @@ def refresh_kitsu_jwt():
         # Essentially what we are doing is we are taking the datetime object and 1 month to it
         # expires_in = object.created_at + timezone.timedelta(seconds=object.expires_in)
 
-        res = httpx.post(
+        res = session.post(
             "https://kitsu.io/api/oauth/token",
             json={
                 "grant_type": "refresh_token",
@@ -72,12 +74,13 @@ def refresh_mal_jwt():
         # We are adding the timestamp as directed by kitsu
         # Essentially what we are doing is we are taking the datetime object and 1 month to it
         # expires_in = object.created_at + timezone.timedelta(seconds=object.expires_in)
-
-        res = httpx.post(
+        res = session.post(
             "https://myanimelist.net/v1/oauth2/token",
             data={
-                "refresh_token": object.refresh_token,
                 "grant_type": "refresh_token",
+                "client_id": settings.MAL_CLIENT_ID,
+                "client_secret": settings.MAL_CLIENT_SECRET,
+                "refresh_token": object.refresh_token,
             },
         )
 
@@ -85,12 +88,10 @@ def refresh_mal_jwt():
         """
             The Data structure looks like this
             {
-                "access_token":
                 "token_type":
                 "expires_in":
+                "access_token":
                 "refresh_token":
-                "scope":
-                "created_at":
             }
         """
 
@@ -107,4 +108,4 @@ def refresh_mal_jwt():
             logger.error(
                 f"Cannot Refresh Token | MyAnimeList : {object.user} | Reason : {res.text}"
             )
-            object.delete()
+            # object.delete()
