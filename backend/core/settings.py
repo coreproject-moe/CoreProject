@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework_simplejwt.token_blacklist",
     # 3rd party Django stuff
+    "dbbackup",  # django-dbbackup
     "ckeditor",
     "ckeditor_uploader",
     "crispy_forms",
@@ -280,3 +281,6 @@ HUEY = PriorityRedisHuey(
     compression=True,
     connection_pool=pool,
 )
+
+DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage"
+DBBACKUP_STORAGE_OPTIONS = {"location": os.path.join(BASE_DIR,'backup')}
