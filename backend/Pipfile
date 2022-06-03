@@ -10,8 +10,6 @@ django-cleanup = "*"
 django-cors-headers = "*"
 # 3rd Party ( ENV )
 python-dotenv = "*"
-# 3rd Party ( Model related )
-django-unixdatetimefield = "*"
 # 3rd Party ( Editor )
 django-ckeditor = "*"
 # 3rd Party ( WhiteNoise )
