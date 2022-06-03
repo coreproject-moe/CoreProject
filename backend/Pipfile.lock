@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "bd6c3436dd53786a4b05f706ffa073803dda79aec379f1c9033de263ac1e35f6"
+            "sha256": "eb6cedd84224d299daa634713656f7a4cdbcec8e26d37e338479522a9c2c8eeb"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -221,7 +221,9 @@
             "version": "==1.2.13"
         },
         "django": {
-            "extras": ["argon2"],
+            "extras": [
+                "argon2"
+            ],
             "hashes": [
                 "sha256:815b1c3e1c1379cca1c54cc7202ee86df006f52b94560b46ea0b19f162c9474a",
                 "sha256:91980d3b327e38e44c2bef0af86d624a57adbd5f1c96f43acf150396770caf01"
@@ -276,13 +278,6 @@
             ],
             "markers": "python_version >= '3.6'",
             "version": "==2.0.0"
-        },
-        "django-unixdatetimefield": {
-            "hashes": [
-                "sha256:809614c3b65caf3f0cbb40ec3d5efab13ccd01c556e00426dc01b67f03fcbf9d"
-            ],
-            "index": "pypi",
-            "version": "==1.2.0"
         },
         "djangorestframework": {
             "hashes": [
@@ -340,7 +335,10 @@
             "version": "==0.13.7"
         },
         "httpx": {
-            "extras": ["brotli", "http2"],
+            "extras": [
+                "brotli",
+                "http2"
+            ],
             "hashes": [
                 "sha256:2f57e72cee80879eaccde550fd1192d827d26662c6f3a65b89acdaaba03a4c89",
                 "sha256:78bf0260283a9c10682b1dc2d6d753f154eb876df669518f18dfa8a0e8700dc5"
@@ -509,7 +507,9 @@
             "version": "==4.3.3"
         },
         "rfc3986": {
-            "extras": ["idna2008"],
+            "extras": [
+                "idna2008"
+            ],
             "hashes": [
                 "sha256:270aaf10d87d0d4e095063c65bf3ddbc6ee3d0b226328ce21e036f946e421835",
                 "sha256:a86d6e1f5b1dc238b218b012df0aa79409667bb209e58da56d0b94704e712a97"
@@ -549,7 +549,9 @@
             "version": "==4.1.1"
         },
         "whitenoise": {
-            "extras": ["brotli"],
+            "extras": [
+                "brotli"
+            ],
             "hashes": [
                 "sha256:2067fe9008a3cd7d0d75f75c9240b54f5f59996ca285cbeab18fc1e89949e30d",
                 "sha256:6ccc6d1ad6fb688a398ea65d97db47f018ea0be7da75e146e8f2e837a04ba590"
@@ -683,7 +685,9 @@
             "version": "==0.4.4"
         },
         "django": {
-            "extras": ["argon2"],
+            "extras": [
+                "argon2"
+            ],
             "hashes": [
                 "sha256:815b1c3e1c1379cca1c54cc7202ee86df006f52b94560b46ea0b19f162c9474a",
                 "sha256:91980d3b327e38e44c2bef0af86d624a57adbd5f1c96f43acf150396770caf01"
