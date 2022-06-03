@@ -2,9 +2,9 @@ import logging
 from datetime import datetime
 
 import httpx
+from django.conf import settings
 from django.db.models import F
 from django.utils import timezone
-from django.conf import settings
 from huey import crontab
 from huey.contrib.djhuey import db_periodic_task
 
