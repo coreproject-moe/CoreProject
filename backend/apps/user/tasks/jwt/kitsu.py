@@ -6,9 +6,9 @@ from django.utils import timezone
 from huey import crontab
 from huey.contrib.djhuey import db_periodic_task
 
+from ...models import KitsuModel, MalModel
 from ..__client__ import client
 from ..__logger__ import logger
-from ...models import KitsuModel, MalModel
 
 
 @db_periodic_task(crontab(minute="*/1"))
