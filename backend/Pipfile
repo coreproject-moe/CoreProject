@@ -17,6 +17,7 @@ whitenoise = {extras = ["brotli"], version = "*"}
 # 3rd Party ( Tasks )
 huey = "*"
 redis = "*"
+hiredis = {version="*", markers="sys_platform != 'win32'"}
 # Rest framework
 djangorestframework = "*"
 # 3rd Party ( Filtering )
