@@ -1,12 +1,17 @@
 from rest_framework import serializers
+from rest_framework_nested.serializers import NestedHyperlinkedModelSerializer
 
 from ..models import AnimeInfoModel, AnimeStudioModel
 
 
-class AnimeStudioSerializer(serializers.Serializer):
-    mal_id = serializers.IntegerField()
-    name = serializers.CharField()
-    type = serializers.CharField()
+class AnimeStudioSerializer(NestedHyperlinkedModelSerializer):
+    parent_lookup_kwargs = {
+        "anime__id": "anime__id",
+    }
+
+    class Meta:
+        model = AnimeStudioModel
+        fields = ["url", "mal_id", "name", "type"]
 
     def create(self, validated_data):
         instance, created = AnimeStudioModel.objects.get_or_create(

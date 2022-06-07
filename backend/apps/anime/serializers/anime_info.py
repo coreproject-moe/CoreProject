@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from ..models import AnimeGenreModel, AnimeInfoModel, AnimeSynonymModel
+from rest_framework_nested.relations import NestedHyperlinkedRelatedField
 
 
 class AnimeInfoGenericSerializer(serializers.Serializer):
@@ -12,14 +13,19 @@ class AnimeInfoGenericSerializer(serializers.Serializer):
 class AnimeInfoSerializer(serializers.ModelSerializer):
     # Everything is generic
     anime_genres = AnimeInfoGenericSerializer(many=True, required=False)
-
     anime_name_synonyms = AnimeInfoGenericSerializer(many=True, required=False)
+
+    anime_studios = NestedHyperlinkedRelatedField(
+        many=True,
+        read_only=True,
+        view_name="studios-detail",
+        parent_lookup_kwargs={"anime_id": "anime_id"},
+    )
 
     class Meta:
         model = AnimeInfoModel
         exclude = (
             "anime_themes",
-            "anime_studios",
             "anime_producers",
             "anime_recommendation",
             "anime_episodes",

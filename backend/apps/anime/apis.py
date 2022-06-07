@@ -23,7 +23,7 @@ anime_info_router.register(
     r"recommendations", AnimeRecommendationView, basename="recommendations"
 )
 anime_info_router.register(r"episodes", EpisodeView, basename="episodes")
-anime_info_router.register(r"studios", AnimeStudioView, basename="studios")
+anime_info_router.register(r"studios", AnimeStudioView, basename="animestudiomodel")
 anime_info_router.register(r"producers", AnimeProducerView, basename="producers")
 anime_info_router.register(r"characters", AnimeCharacterView, basename="characters")
 
