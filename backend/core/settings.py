@@ -66,7 +66,7 @@ INSTALLED_APPS = [
     # Rest stuff
     "apps.user",
     # Flatpages
-    "apps._flatpages",
+    "apps.__flatpages__",
 ]
 # Debug Toolbar Add
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install-the-app

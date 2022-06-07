@@ -54,7 +54,7 @@ urlpatterns = [
     ),
     #   Flatpages
     # ===============
-    path("", include("apps._flatpages.urls")),
+    path("", include("apps.__flatpages__.urls")),
 ]
 
 if settings.DEBUG:
