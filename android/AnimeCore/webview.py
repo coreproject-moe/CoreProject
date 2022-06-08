@@ -42,6 +42,7 @@ Environment = autoclass("android.os.Environment")
 Context = autoclass("android.content.Context")
 PythonActivity = autoclass("org.kivy.android.PythonActivity")
 Color = autoclass("android.graphics.Color")
+View = autoclass("android.view.View")
 
 
 class DownloadListener(PythonJavaClass):
@@ -117,9 +118,9 @@ class WebView(ModalView):
         webview.getSettings().setCacheMode(
             WebSettings.LOAD_CACHE_ELSE_NETWORK
         )  # Enable Cache
-        webview.getSettings().setRenderPriority(
-            WebSettings.RenderPriority.HIGH
-        )  # Enable render priority
+        webview.setLayerType(
+            View.LAYER_TYPE_HARDWARE, None
+        )  # Enable hardware acceleration
         layout = LinearLayout(mActivity)
         layout.setOrientation(LinearLayout.VERTICAL)
         layout.addView(webview, self.width, self.height)
