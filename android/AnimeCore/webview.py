@@ -30,6 +30,7 @@ from kivy.uix.modalview import ModalView
 
 WebViewA = autoclass("android.webkit.WebView")
 WebViewClient = autoclass("android.webkit.WebViewClient")
+WebSettings = autoclass("android.webkit.WebSettings")
 LayoutParams = autoclass("android.view.ViewGroup$LayoutParams")
 LinearLayout = autoclass("android.widget.LinearLayout")
 KeyEvent = autoclass("android.view.KeyEvent")
@@ -113,6 +114,9 @@ class WebView(ModalView):
         webview.getSettings().setBuiltInZoomControls(self.enable_zoom)
         webview.getSettings().setDisplayZoomControls(False)
         webview.getSettings().setAllowFileAccess(True)  # default False api>29
+        webview.getSettings().setCacheMode(
+            WebSettings.LOAD_CACHE_ELSE_NETWORK
+        )  # Enable Cache
         layout = LinearLayout(mActivity)
         layout.setOrientation(LinearLayout.VERTICAL)
         layout.addView(webview, self.width, self.height)
