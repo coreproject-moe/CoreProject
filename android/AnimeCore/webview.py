@@ -23,10 +23,10 @@
 #
 # Source https://github.com/Android-for-Python/Webview-Example
 
-from kivy.uix.modalview import ModalView
-from kivy.clock import Clock
 from android.runnable import run_on_ui_thread
-from jnius import autoclass, cast, PythonJavaClass, java_method
+from jnius import PythonJavaClass, autoclass, cast, java_method
+from kivy.clock import Clock
+from kivy.uix.modalview import ModalView
 
 WebViewA = autoclass("android.webkit.WebView")
 WebViewClient = autoclass("android.webkit.WebViewClient")

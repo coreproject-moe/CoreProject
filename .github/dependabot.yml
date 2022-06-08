@@ -12,8 +12,8 @@ updates:
 
     - package-ecosystem: pip
       directory: /android/AnimeCore/
-      schedule: 
-           interval: daily
+      schedule:
+          interval: daily
 
     - package-ecosystem: npm # See documentation for possible values
       directory: /frontend/AnimeCore/ # Location of package manifests
