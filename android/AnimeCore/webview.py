@@ -117,6 +117,9 @@ class WebView(ModalView):
         webview.getSettings().setCacheMode(
             WebSettings.LOAD_CACHE_ELSE_NETWORK
         )  # Enable Cache
+        webview.getSettings().setRenderPriority(
+            WebSettings.RenderPriority.HIGH
+        )  # Enable render priority
         layout = LinearLayout(mActivity)
         layout.setOrientation(LinearLayout.VERTICAL)
         layout.addView(webview, self.width, self.height)
