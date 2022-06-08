@@ -9,6 +9,10 @@ updates:
       directory: /backend/ # Location of package manifests
       schedule:
           interval: daily
+    - package-ecosystem: pip
+      directory: /android/AnimeCore/
+      schedule: 
+           interval: daily
 
     - package-ecosystem: npm # See documentation for possible values
       directory: /frontend/AnimeCore/ # Location of package manifests
