@@ -1,4 +1,4 @@
 from .anilist_serializer import AnilistSerializer
-from .mal_serializer import MalSerializer
 from .kitsu_serializer import KitsuSerializer
+from .mal_serializer import MalSerializer
 from .update_episode_serializer import UpdateEpisodeSerializer

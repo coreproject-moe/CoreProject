@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
-from ..models import  KitsuModel
+from ..models import KitsuModel
+
 
 class KitsuSerializer(serializers.ModelSerializer):
     class Meta:
