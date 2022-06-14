@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import MalView, KitsuView, AnilistView
+from .views import AnilistView, KitsuView, MalView
 
 urlpatterns = [
     path("mal/", MalView.as_view(), name="mal"),
