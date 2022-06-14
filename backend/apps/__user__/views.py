@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
 from django.http.request import HttpRequest
-
 from rest_framework import generics, status
 from rest_framework.authentication import SessionAuthentication
 from rest_framework.parsers import FormParser, MultiPartParser
@@ -8,9 +7,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from .serializers import (
-    UserSerializer,
-)
+from .serializers import UserSerializer
 
 # Create your views here.
 

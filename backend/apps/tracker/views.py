@@ -1,9 +1,10 @@
-from .models import AnilistModel, KitsuModel, MalModel
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, mixins
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from .serializers import MalSerializer, KitsuSerializer, AnilistSerializer
+
+from .models import AnilistModel, KitsuModel, MalModel
+from .serializers import AnilistSerializer, KitsuSerializer, MalSerializer
 
 # Create your views here.
 

@@ -3,7 +3,6 @@ from django.contrib.auth.hashers import make_password
 from rest_framework import serializers
 
 
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
@@ -61,4 +60,3 @@ class UserSerializer(serializers.ModelSerializer):
             cleaned_data.pop("password", None)
 
         return cleaned_data
-
