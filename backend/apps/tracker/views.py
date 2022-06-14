@@ -4,9 +4,20 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 from .models import AnilistModel, KitsuModel, MalModel
-from .serializers import AnilistSerializer, KitsuSerializer, MalSerializer
+from .serializers import (
+    AnilistSerializer,
+    KitsuSerializer,
+    MalSerializer,
+    UpdateEpisodeSerializer,
+)
 
 # Create your views here.
+class UpdateEpisodeView(generics.GenericAPIView):
+    serializer_class = UpdateEpisodeSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return super().get_queryset()
 
 
 class MalView(generics.GenericAPIView, mixins.CreateModelMixin):
