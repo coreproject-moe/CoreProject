@@ -46,6 +46,7 @@ urlpatterns = [
     # ========
     path("api/v1/", include("apps.anime.apis")),
     path("api/v1/user/", include("apps.__user__.apis")),
+    path("api/v1/tracker/", include("apps.tracker.apis")),
     # https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html#installation
     path("api/v1/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/v1/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),

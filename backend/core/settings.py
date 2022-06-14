@@ -67,6 +67,8 @@ INSTALLED_APPS = [
     "apps.__user__",
     # Flatpages
     "apps.__flatpages__",
+    # Trackers
+    "apps.tracker",
 ]
 # Debug Toolbar Add
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install-the-app
@@ -187,7 +189,7 @@ AUTH_USER_MODEL = "__user__.User"
 # Username or Email backend
 # https://stackoverflow.com/questions/25316765/log-in-user-using-either-email-address-or-username-in-django#35836674
 
-AUTHENTICATION_BACKENDS = ["apps.user.backends.EmailOrUsernameModelBackend"]
+AUTHENTICATION_BACKENDS = ["apps.__user__.backends.EmailOrUsernameModelBackend"]
 
 # Password hashers
 # https://docs.djangoproject.com/en/3.2/topics/auth/passwords/#using-argon2-with-django
