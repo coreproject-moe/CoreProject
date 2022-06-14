@@ -1,23 +1,22 @@
 from datetime import datetime
 
+from core.__requests_session__ import CachedLimiterSession
 from django.db.models import F
 from django.utils import timezone
 from huey import crontab
 from huey.contrib.djhuey import db_periodic_task
+from requests_cache import RedisCache
+from requests_ratelimiter import RedisBucket
 
 from ...models import KitsuModel
 from ..__logger__ import logger
-
-
-from core.__requests_session__ import CachedLimiterSession
-from requests_cache import RedisCache
-from requests_ratelimiter import RedisBucket
 
 session = CachedLimiterSession(
     per_minute=90,
     bucket_class=RedisBucket,
     backend=RedisCache(),
 )
+
 
 @db_periodic_task(crontab(minute="*/1"))
 def refresh_kitsu_jwt():

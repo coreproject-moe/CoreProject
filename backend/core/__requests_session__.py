@@ -8,5 +8,3 @@ class CachedLimiterSession(CacheMixin, LimiterMixin, Session):
     Session class with caching and rate-limiting behavior. Accepts arguments for both
     LimiterSession and CachedSession.
     """
-
-
