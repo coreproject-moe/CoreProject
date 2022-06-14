@@ -5,8 +5,17 @@ from huey import crontab
 from huey.contrib.djhuey import db_periodic_task
 
 from ...models import MalModel
-from ..__client__ import client
 from ..__logger__ import logger
+
+from core.__requests_session__ import CachedLimiterSession
+from requests_cache import RedisCache
+from requests_ratelimiter import RedisBucket
+
+session = CachedLimiterSession(
+    per_minute=90,
+    bucket_class=RedisBucket,
+    backend=RedisCache(),
+)
 
 
 @db_periodic_task(crontab(minute="*/1"))
@@ -19,7 +28,7 @@ def refresh_mal_jwt():
         # We are adding the timestamp as directed by kitsu
         # Essentially what we are doing is we are taking the datetime object and 1 month to it
         # expires_in = object.created_at + timezone.timedelta(seconds=object.expires_in)
-        res = client.post(
+        res = session.post(
             "https://myanimelist.net/v1/oauth2/token",
             data={
                 "grant_type": "refresh_token",
