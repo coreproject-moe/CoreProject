@@ -4,6 +4,10 @@ const useStyles = createStyles((theme) => ({
     grid: {
         paddingLeft: theme.spacing.xl * 3,
         paddingRight: theme.spacing.xl * 2,
+
+        [theme.fn.smallerThan('md')]: {
+            paddingLeft: theme.spacing.xl * 2,
+        },
     },
     profile: {
         display: 'flex',
