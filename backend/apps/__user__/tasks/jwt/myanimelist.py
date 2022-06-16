@@ -1,5 +1,4 @@
 from core.__requests_session__ import CachedLimiterSession
-
 from django.conf import settings
 from django.db.models import F
 from django.utils import timezone
@@ -18,8 +17,6 @@ session = CachedLimiterSession(
 )
 
 
-
-
 @db_periodic_task(crontab(minute="*/1"))
 def refresh_mal_jwt():
     models = MalModel.objects.annotate(
@@ -31,7 +28,6 @@ def refresh_mal_jwt():
         # Essentially what we are doing is we are taking the datetime object and 1 month to it
         # expires_in = object.created_at + timezone.timedelta(seconds=object.expires_in)
         res = session.post(
-
             "https://myanimelist.net/v1/oauth2/token",
             data={
                 "grant_type": "refresh_token",

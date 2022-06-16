@@ -1,8 +1,6 @@
-
 from datetime import datetime
 
 from core.__requests_session__ import CachedLimiterSession
-
 from django.db.models import F
 from django.utils import timezone
 from huey import crontab
@@ -32,7 +30,6 @@ def refresh_kitsu_jwt():
         # expires_in = object.created_at + timezone.timedelta(seconds=object.expires_in)
 
         res = session.post(
-
             "https://kitsu.io/api/oauth/token",
             json={
                 "grant_type": "refresh_token",
