@@ -64,7 +64,7 @@ INSTALLED_APPS = [
     # Pages
     "apps.anime",
     # Rest stuff
-    "apps.user",
+    "apps.__user__",
     # Flatpages
     "apps.__flatpages__",
 ]
@@ -182,7 +182,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Custom user model
 # https://testdriven.io/blog/django-custom-user-model/
 
-AUTH_USER_MODEL = "user.User"
+AUTH_USER_MODEL = "__user__.User"
 
 # Username or Email backend
 # https://stackoverflow.com/questions/25316765/log-in-user-using-either-email-address-or-username-in-django#35836674
