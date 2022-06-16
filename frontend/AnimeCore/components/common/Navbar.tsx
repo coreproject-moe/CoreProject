@@ -18,6 +18,9 @@ const useStyles = createStyles((theme) => ({
     },
 
     search: {
+        display: 'flex',
+        alignItems: 'center',
+
         [theme.fn.smallerThan('md')]: {
             display: 'none',
         },
@@ -28,14 +31,8 @@ export const Navbar = () => {
     const { classes } = useStyles();
     return (
         <Grid justify="space-between" className={classes.grid} grow>
-            <Grid.Col span={4}>
-                <img
-                    className={classes.search}
-                    alt=""
-                    src="/icons/search.svg"
-                    width={30}
-                    height={30}
-                />
+            <Grid.Col span={4} className={classes.search}>
+                <img alt="" src="/icons/search.svg" width={30} height={30} />
             </Grid.Col>
             <Grid.Col span={4} className={classes.logo}>
                 <img
@@ -43,6 +40,16 @@ export const Navbar = () => {
                     src="/logos/animecore_logo.svg"
                     width={158}
                     height={22}
+                />
+                <img
+                    style={{
+                        transform: 'translateY(5px)',
+                        color: '#AFAFAF',
+                    }}
+                    alt=""
+                    src="/icons/chevron-down.svg"
+                    width={20}
+                    height={20}
                 />
             </Grid.Col>
             <Grid.Col span={4} className={classes.profile}>
