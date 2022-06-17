@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from rest_framework_nested.relations import NestedHyperlinkedRelatedField
 
+
 from ..models import AnimeGenreModel, AnimeInfoModel, AnimeSynonymModel
 
 
@@ -15,11 +16,8 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
     anime_genres = AnimeInfoGenericSerializer(many=True, required=False)
     anime_name_synonyms = AnimeInfoGenericSerializer(many=True, required=False)
 
-    anime_studios = NestedHyperlinkedRelatedField(
-        many=True,
-        read_only=True,
-        view_name="studios-detail",
-        parent_lookup_kwargs={"anime_id": "anime_id"},
+    anime_studios = serializers.HyperlinkedIdentityField(
+        view_name="animestudiomodel-list", lookup_url_kwarg="anime_id"
     )
 
     class Meta:
@@ -33,6 +31,7 @@ class AnimeInfoSerializer(serializers.ModelSerializer):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
         # https://stackoverflow.com/questions/38316321/change-a-field-in-a-django-rest-framework-modelserializer-based-on-the-request-t
         request = self.context.get("request")
 

@@ -187,7 +187,7 @@ AUTH_USER_MODEL = "__user__.User"
 # Username or Email backend
 # https://stackoverflow.com/questions/25316765/log-in-user-using-either-email-address-or-username-in-django#35836674
 
-AUTHENTICATION_BACKENDS = ["apps.user.backends.EmailOrUsernameModelBackend"]
+AUTHENTICATION_BACKENDS = ["apps.__user__.backends.EmailOrUsernameModelBackend"]
 
 # Password hashers
 # https://docs.djangoproject.com/en/3.2/topics/auth/passwords/#using-argon2-with-django

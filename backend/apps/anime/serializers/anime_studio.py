@@ -1,4 +1,3 @@
-from rest_framework import serializers
 from rest_framework_nested.serializers import NestedHyperlinkedModelSerializer
 
 from ..models import AnimeInfoModel, AnimeStudioModel
@@ -6,7 +5,7 @@ from ..models import AnimeInfoModel, AnimeStudioModel
 
 class AnimeStudioSerializer(NestedHyperlinkedModelSerializer):
     parent_lookup_kwargs = {
-        "anime__id": "anime__id",
+        "anime_id": "anime__id",
     }
 
     class Meta:

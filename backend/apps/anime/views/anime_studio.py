@@ -19,7 +19,6 @@ class AnimeStudioView(
 
     serializer_class = AnimeStudioSerializer
     permission_classes = [IsSuperUserOrReadOnly]
-    lookup_field = "pk"
 
     def get_queryset(self):
         instance = AnimeInfoModel.objects.all()
