@@ -33,9 +33,12 @@ djangorestframework-simplejwt = "*"
 # Pillow
 pillow = "*"
 # Http Client
-httpx = {extras = ["brotli", "http2"], version = "*"}
+requests = "*"
+requests-cache = "*"
+requests-ratelimiter = "*"
 # Web servers
 uwsgi = "*"
+
 
 [dev-packages]
 black = "*"
