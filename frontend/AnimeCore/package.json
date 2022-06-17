@@ -20,7 +20,7 @@
         "swiper": "^8.2.4"
     },
     "devDependencies": {
-        "@types/node": "17.0.44",
+        "@types/node": "18.0.0",
         "@types/react": "18.0.12",
         "@types/react-dom": "18.0.5",
         "eslint": "8.17.0",
