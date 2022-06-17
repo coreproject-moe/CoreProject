@@ -1,14 +1,21 @@
-import logging
 from datetime import datetime
 
+from core.__requests_session__ import CachedLimiterSession
 from django.db.models import F
 from django.utils import timezone
 from huey import crontab
 from huey.contrib.djhuey import db_periodic_task
+from requests_cache import RedisCache
+from requests_ratelimiter import RedisBucket
 
-from ...models import KitsuModel, MalModel
-from ..__client__ import client
+from ...models import KitsuModel
 from ..__logger__ import logger
+
+session = CachedLimiterSession(
+    per_minute=90,
+    bucket_class=RedisBucket,
+    backend=RedisCache(),
+)
 
 
 @db_periodic_task(crontab(minute="*/1"))
@@ -22,7 +29,7 @@ def refresh_kitsu_jwt():
         # Essentially what we are doing is we are taking the datetime object and 1 month to it
         # expires_in = object.created_at + timezone.timedelta(seconds=object.expires_in)
 
-        res = client.post(
+        res = session.post(
             "https://kitsu.io/api/oauth/token",
             json={
                 "grant_type": "refresh_token",
