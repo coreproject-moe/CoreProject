@@ -1,5 +1,13 @@
 import React from 'react';
-import { createStyles, Container, Title, Text, Button } from '@mantine/core';
+import {
+    createStyles,
+    Container,
+    Title,
+    Text,
+    Grid,
+    Space,
+    Badge,
+} from '@mantine/core';
 import { Navbar } from '../common/Navbar';
 import { useMediaQuery } from '@mantine/hooks';
 
@@ -98,7 +106,6 @@ const useStyles = createStyles((theme) => ({
     },
 
     line: {
-        marginLeft: theme.spacing.xs * 1,
         color: theme.colors.yellow[0],
     },
 }));
@@ -132,6 +139,7 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                             >
                                 Featured
                             </Text>
+                            <Space w="sm" />
                             <div
                                 className={classes.line}
                                 style={{
@@ -168,14 +176,44 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                                 Kyoto Animations
                             </Text>
                         </Title>
-                        <Text color="white">
-                            Energy-conservative high school student Houtarou
-                            Oreki ends up with more than he bargained for when
-                            he signs up for the Classic Literature Club at his
-                            sister&apos;s behest—especially when he realizes how
-                            deep-rooted the club&apos;s history really is.
-                            Begrudgingly, Oreki is dragged into an...
-                        </Text>
+                        <>
+                            <Text color="white">
+                                Energy-conservative high school student Houtarou
+                                Oreki ends up with more than he bargained for
+                                when he signs up for the Classic Literature Club
+                                at his sister&apos;s behest—especially when he
+                                realizes how deep-rooted the club&apos;s history
+                                really is. Begrudgingly, Oreki is dragged into
+                                an...
+                            </Text>
+                        </>
+                        <Space h="sm"></Space>
+                        <>
+                            <Badge
+                                component="span"
+                                size="lg"
+                                radius="sm"
+                                variant="filled"
+                                mr="md"
+                                sx={(theme) => ({
+                                    backgroundColor: theme.colors.dark[9],
+                                })}
+                            >
+                                Mystery
+                            </Badge>
+                            <Badge
+                                component="span"
+                                size="lg"
+                                radius="sm"
+                                variant="filled"
+                                mr="md"
+                                sx={(theme) => ({
+                                    backgroundColor: theme.colors.dark[9],
+                                })}
+                            >
+                                Slice of Life
+                            </Badge>
+                        </>
                     </div>
                 </div>
             </Container>
