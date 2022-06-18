@@ -15,7 +15,6 @@ const useStyles = createStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: '#11284b',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         paddingTop: theme.spacing.xl * 2,
