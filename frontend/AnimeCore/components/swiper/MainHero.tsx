@@ -172,8 +172,8 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                             Energy-conservative high school student Houtarou
                             Oreki ends up with more than he bargained for when
                             he signs up for the Classic Literature Club at his
-                            sister's behest—especially when he realizes how
-                            deep-rooted the club's history really is.
+                            sister&apos;s behest—especially when he realizes how
+                            deep-rooted the club&apos;s history really is.
                             Begrudgingly, Oreki is dragged into an...
                         </Text>
                     </div>
