@@ -62,11 +62,12 @@ const useStyles = createStyles((theme) => ({
     },
 
     title: {
-        color: theme.white,
         fontWeight: 900,
         lineHeight: 1.05,
         maxWidth: 500,
         fontSize: 48,
+        display: 'flex',
+        alignItems: 'center',
 
         [theme.fn.smallerThan('md')]: {
             maxWidth: '100%',
@@ -95,6 +96,11 @@ const useStyles = createStyles((theme) => ({
             width: '100%',
         },
     },
+
+    line: {
+        marginLeft: theme.spacing.xs * 1,
+        color: theme.colors.yellow[0],
+    },
 }));
 
 export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
@@ -105,7 +111,9 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
         <div
             className={classes.root}
             style={{
-                backgroundImage: `url('${backgroundImage}')`,
+                backgroundImage: `url('${
+                    mobile ? backgroundBanner : backgroundImage
+                }')`,
             }}
         >
             <Navbar />
@@ -114,34 +122,60 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                 <div className={classes.inner}>
                     <div className={classes.content}>
                         <Title className={classes.title}>
-                            A{' '}
                             <Text
                                 component="span"
-                                inherit
-                                variant="gradient"
-                                gradient={{ from: 'pink', to: 'yellow' }}
+                                size="xl"
+                                weight="bold"
+                                sx={(theme) => ({
+                                    color: theme.colors.yellow[0],
+                                })}
                             >
-                                fully featured
-                            </Text>{' '}
-                            React components library
+                                Featured
+                            </Text>
+                            <div
+                                className={classes.line}
+                                style={{
+                                    display: 'inline-block',
+                                    width: '60px',
+                                    borderTop: '4px solid',
+                                    borderRadius: 10,
+                                }}
+                            />
                         </Title>
-
-                        <Text className={classes.description} mt={30}>
-                            Build fully functional accessible web applications
-                            with ease – Mantine includes more than 100
-                            customizable components and hooks to cover you in
-                            any situation
+                        <Title order={1}>
+                            <Text color="white" inherit>
+                                Hyouka
+                            </Text>
+                        </Title>
+                        <Title>
+                            <Text component="span" color="white">
+                                TV
+                            </Text>
+                            <Text component="span"> ▪ </Text>
+                            <Text component="span" color="white">
+                                22 eps
+                            </Text>
+                            <Text component="span"> ▪ </Text>
+                            <Text component="span" color="white">
+                                Completed
+                            </Text>
+                            <Text component="span"> ▪ </Text>
+                            <Text component="span" color="white">
+                                Spring 2012
+                            </Text>
+                            <Text component="span"> ▪ </Text>
+                            <Text component="span" color="white">
+                                Kyoto Animations
+                            </Text>
+                        </Title>
+                        <Text color="white">
+                            Energy-conservative high school student Houtarou
+                            Oreki ends up with more than he bargained for when
+                            he signs up for the Classic Literature Club at his
+                            sister's behest—especially when he realizes how
+                            deep-rooted the club's history really is.
+                            Begrudgingly, Oreki is dragged into an...
                         </Text>
-
-                        <Button
-                            variant="gradient"
-                            gradient={{ from: 'pink', to: 'yellow' }}
-                            size="xl"
-                            className={classes.control}
-                            mt={40}
-                        >
-                            Get started
-                        </Button>
                     </div>
                 </div>
             </Container>

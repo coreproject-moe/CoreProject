@@ -25,6 +25,10 @@ export default function App(props: AppProps) {
                     colorScheme: 'dark',
                     /** Font Family */
                     fontFamily: 'Kokoro',
+                    //** Color */
+                    colors: {
+                        yellow: ['#E3BD49'],
+                    },
                 }}
             >
                 <Component {...pageProps} />
