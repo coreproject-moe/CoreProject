@@ -118,9 +118,11 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
         <div
             className={classes.root}
             style={{
+
                 backgroundImage: `url('${
                     mobile ? backgroundBanner : backgroundImage
                 }')`,
+
             }}
         >
             <Navbar />
