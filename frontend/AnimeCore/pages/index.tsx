@@ -67,14 +67,14 @@ const Home: NextPage = () => {
                 })}
             >
                 <Grid
-                    sx={(theme) => ({
+                    sx={() => ({
                         width: '100%',
                     })}
                 >
                     <Grid.Col
                         span={3}
                         offset={3}
-                        sx={(theme) => ({
+                        sx={() => ({
                             display: 'grid',
                             justifyContent: 'flex-end',
                             alignItems: 'center',
@@ -85,7 +85,7 @@ const Home: NextPage = () => {
                     <Grid.Col
                         span={3}
                         offset={3}
-                        sx={(theme) => ({
+                        sx={() => ({
                             display: 'flex',
                             justifyContent: 'flex-end',
                             alignItems: 'center',
