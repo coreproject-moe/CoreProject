@@ -248,7 +248,7 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                                 Slice of Life
                             </Badge>
                         </div>
-                        <Space h="xl"></Space>
+                        <Space h="xl" />
                         <div className={classes.buttonContainer}>
                             <Button
                                 color="yellow"
