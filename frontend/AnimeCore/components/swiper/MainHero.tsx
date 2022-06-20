@@ -107,13 +107,16 @@ const useStyles = createStyles((theme) => ({
     },
 
     line: {
-        color: theme.colors.yellow[0],
+        color: theme.colors.yellow[6],
     },
 
     info: {
         ':after': {
             content: '" ▪ "',
         },
+    },
+    buttonContainer: {
+        display: 'flex',
     },
 }));
 
@@ -140,9 +143,7 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                                 component="span"
                                 size="xl"
                                 weight="bold"
-                                sx={(theme) => ({
-                                    color: theme.colors.yellow[0],
-                                })}
+                                color="yellow"
                             >
                                 Featured
                             </Text>
@@ -234,13 +235,39 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                             </Badge>
                         </>
                         <Space h="xl"></Space>
-                        <>
+                        <div className={classes.buttonContainer}>
                             <Button
-
+                                color="yellow"
+                                sx={() => ({
+                                    width: 60,
+                                    height: 60,
+                                    borderRadius: 16,
+                                })}
                             >
-                                Settings
+                                <img
+                                    src="/icons/play.svg"
+                                    width={24}
+                                    height={24}
+                                />
                             </Button>
-                        </>
+                            <Button
+                                ml="xl"
+                                color="yellow"
+                                variant="outline"
+                                sx={() => ({
+                                    borderWidth: 4,
+                                    height: 60,
+                                    borderRadius: 16,
+                                })}
+                                rightIcon={
+                                    <img src="/icons/chevrons-right.svg" />
+                                }
+                            >
+                                <Text weight={700} size="lg" color="yellow">
+                                    Details
+                                </Text>
+                            </Button>
+                        </div>
                     </div>
                 </div>
             </Container>
