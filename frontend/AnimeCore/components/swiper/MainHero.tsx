@@ -255,8 +255,8 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                                 sx={() => ({
                                     width: 60,
                                     height: 60,
-                                    borderRadius: 16,
                                 })}
+                                radius="lg"
                             >
                                 <img
                                     src="/icons/play.svg"
@@ -271,8 +271,8 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                                 sx={() => ({
                                     borderWidth: 4,
                                     height: 60,
-                                    borderRadius: 16,
                                 })}
+                                radius="lg"
                                 rightIcon={
                                     <img src="/icons/chevrons-right.svg" />
                                 }

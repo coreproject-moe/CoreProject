@@ -8,7 +8,7 @@ import {
     Navigation,
     Pagination as SwiperPagination,
 } from 'swiper';
-import { Grid, Title, Text } from '@mantine/core';
+import { Grid, Title, Text, Button } from '@mantine/core';
 
 const Home: NextPage = () => {
     return (
@@ -30,7 +30,9 @@ const Home: NextPage = () => {
                             Navigation,
                             SwiperPagination,
                         ]}
-                        autoplay={true}
+                        autoplay={{
+                            delay: 10 * 1000, // 10 secs ( 1000 to convert it to ms )
+                        }}
                         navigation={{
                             nextEl: '.mainhero__next__el',
                             prevEl: '.mainhero__previous__el',
@@ -75,12 +77,23 @@ const Home: NextPage = () => {
                         span={3}
                         offset={3}
                         sx={() => ({
-                            display: 'grid',
+                            display: 'flex',
                             justifyContent: 'flex-end',
                             alignItems: 'center',
                         })}
                     >
                         <div className="swiper__mainhero__pagination"></div>
+                        <Button
+                            color="yellow"
+                            radius="lg"
+                            size="sm"
+                            sx={() => ({
+                                height: 62,
+                                width: 62,
+                            })}
+                        >
+                            <img src="/icons/play.svg" width={24} height={24} />
+                        </Button>
                     </Grid.Col>
                     <Grid.Col
                         span={3}
