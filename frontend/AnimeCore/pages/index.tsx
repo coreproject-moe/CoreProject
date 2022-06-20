@@ -83,7 +83,6 @@ const Home: NextPage = () => {
                     </Grid.Col>
                     <Grid.Col
                         span={3}
-                        offset={3}
                         sx={(theme) => ({
                             display: 'flex',
                             justifyContent: 'flex-end',
