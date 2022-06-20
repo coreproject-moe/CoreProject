@@ -4,7 +4,6 @@ import {
     Container,
     Title,
     Text,
-    Grid,
     Space,
     Badge,
 } from '@mantine/core';
@@ -15,6 +14,7 @@ const useStyles = createStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
+        backgroundColor: 'black',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         paddingTop: theme.spacing.xl * 2,
@@ -108,6 +108,12 @@ const useStyles = createStyles((theme) => ({
     line: {
         color: theme.colors.yellow[0],
     },
+
+    info: {
+        ':after': {
+            content: '" ▪ "',
+        },
+    },
 }));
 
 export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
@@ -118,11 +124,9 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
         <div
             className={classes.root}
             style={{
-
                 backgroundImage: `url('${
                     mobile ? backgroundBanner : backgroundImage
                 }')`,
-
             }}
         >
             <Navbar />
@@ -158,22 +162,34 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                             </Text>
                         </Title>
                         <Title>
-                            <Text component="span" color="white">
+                            <Text
+                                className={classes.info}
+                                component="span"
+                                color="white"
+                            >
                                 TV
                             </Text>
-                            <Text component="span"> ▪ </Text>
-                            <Text component="span" color="white">
+                            <Text
+                                className={classes.info}
+                                component="span"
+                                color="white"
+                            >
                                 22 eps
                             </Text>
-                            <Text component="span"> ▪ </Text>
-                            <Text component="span" color="white">
+                            <Text
+                                className={classes.info}
+                                component="span"
+                                color="white"
+                            >
                                 Completed
                             </Text>
-                            <Text component="span"> ▪ </Text>
-                            <Text component="span" color="white">
+                            <Text
+                                className={classes.info}
+                                component="span"
+                                color="white"
+                            >
                                 Spring 2012
                             </Text>
-                            <Text component="span"> ▪ </Text>
                             <Text component="span" color="white">
                                 Kyoto Animations
                             </Text>
