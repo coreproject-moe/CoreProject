@@ -39,6 +39,18 @@ export default function App(props: AppProps) {
                             '#FAD050',
                             '#E3BD49',
                         ],
+                        blue: [
+                            '#F0EEFF',
+                            '#DCD9F7',
+                            '#AAA4E2',
+                            '#7569E1',
+                            '#4133BA',
+                            '#3325BO',
+                            '#2D209B',
+                            '#23197D',
+                            '#100D33',
+                            '#070519',
+                        ],
                     },
                 }}
             >
