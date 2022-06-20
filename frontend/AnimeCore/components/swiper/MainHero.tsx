@@ -236,7 +236,7 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                         <Space h="xl"></Space>
                         <>
                             <Button
-                              
+
                             >
                                 Settings
                             </Button>
