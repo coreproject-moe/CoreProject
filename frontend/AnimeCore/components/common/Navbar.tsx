@@ -6,7 +6,8 @@ const useStyles = createStyles((theme) => ({
         paddingRight: theme.spacing.xl * 2,
 
         [theme.fn.smallerThan('md')]: {
-            paddingLeft: theme.spacing.xl * 2,
+            paddingLeft: theme.spacing.sm * 2,
+            paddingRight: theme.spacing.sm * 2,
         },
     },
     profile: {
