@@ -19,7 +19,7 @@ const useStyles = createStyles((theme) => ({
         backgroundPosition: 'center',
         paddingTop: theme.spacing.xl * 2,
         paddingBottom: theme.spacing.xl * 2,
-        minHeight: '100vh',
+        minHeight: '90vh',
         boxShadow: `
             inset 0 4px 1800px rgb(7, 5, 25),
             inset 0 -40vh 140px 2px rgba(7, 5, 25, 0.9),
