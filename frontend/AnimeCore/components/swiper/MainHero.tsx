@@ -117,6 +117,20 @@ const useStyles = createStyles((theme) => ({
     },
     buttonContainer: {
         display: 'flex',
+
+        [theme.fn.smallerThan('md')]: {
+            display: 'none',
+        },
+    },
+    tagContainer: {
+        [theme.fn.smallerThan('md')]: {
+            display: 'none',
+        },
+    },
+    infoContainer: {
+        [theme.fn.smallerThan('md')]: {
+            display: 'none',
+        },
     },
 }));
 
@@ -163,7 +177,7 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                                 Hyouka
                             </Text>
                         </Title>
-                        <Title>
+                        <Title className={classes.infoContainer}>
                             <Text
                                 className={classes.info}
                                 component="span"
@@ -208,7 +222,7 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                             </Text>
                         </>
                         <Space h="xl"></Space>
-                        <>
+                        <div className={classes.tagContainer}>
                             <Badge
                                 component="span"
                                 size="lg"
@@ -233,7 +247,7 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                             >
                                 Slice of Life
                             </Badge>
-                        </>
+                        </div>
                         <Space h="xl"></Space>
                         <div className={classes.buttonContainer}>
                             <Button
