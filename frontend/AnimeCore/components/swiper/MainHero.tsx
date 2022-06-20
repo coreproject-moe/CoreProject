@@ -6,6 +6,7 @@ import {
     Text,
     Space,
     Badge,
+    Button,
 } from '@mantine/core';
 import { Navbar } from '../common/Navbar';
 import { useMediaQuery } from '@mantine/hooks';
@@ -205,7 +206,7 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                                 an...
                             </Text>
                         </>
-                        <Space h="sm"></Space>
+                        <Space h="xl"></Space>
                         <>
                             <Badge
                                 component="span"
@@ -231,6 +232,14 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                             >
                                 Slice of Life
                             </Badge>
+                        </>
+                        <Space h="xl"></Space>
+                        <>
+                            <Button
+                              
+                            >
+                                Settings
+                            </Button>
                         </>
                     </div>
                 </div>

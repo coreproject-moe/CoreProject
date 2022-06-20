@@ -8,7 +8,7 @@ import {
     Navigation,
     Pagination as SwiperPagination,
 } from 'swiper';
-import { Grid, Title } from '@mantine/core';
+import { Grid, Title, Text } from '@mantine/core';
 
 const Home: NextPage = () => {
     return (
@@ -56,7 +56,7 @@ const Home: NextPage = () => {
             </Swiper>
             <Title
                 sx={(theme) => ({
-                    minHeight: '10vh',
+                    minHeight: '9vh',
                     backgroundColor: 'rgb(7, 5, 25)',
                     display: 'flex',
 
@@ -77,12 +77,24 @@ const Home: NextPage = () => {
                         sx={(theme) => ({
                             display: 'grid',
                             justifyContent: 'flex-end',
+                            alignItems: 'center',
                         })}
                     >
                         <div className="swiper__mainhero__pagination"></div>
                     </Grid.Col>
-                    <Grid.Col span={3} offset={3}>
-                        2
+                    <Grid.Col
+                        span={3}
+                        offset={3}
+                        sx={(theme) => ({
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                            alignItems: 'center',
+                        })}
+                    >
+                        <img width={24} height={24} src="/icons/mouse.svg" />
+                        <Text px="xl" color="white">
+                            scroll below
+                        </Text>
                     </Grid.Col>
                 </Grid>
             </Title>
