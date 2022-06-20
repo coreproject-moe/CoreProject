@@ -94,7 +94,13 @@ const Home: NextPage = () => {
                         })}
                     >
                         <img width={24} height={24} src="/icons/mouse.svg" />
-                        <Text px="xl" color="white">
+                        <Text
+                            px="xl"
+                            color="white"
+                            sx={() => ({
+                                opacity: 0.6,
+                            })}
+                        >
                             scroll below
                         </Text>
                     </Grid.Col>

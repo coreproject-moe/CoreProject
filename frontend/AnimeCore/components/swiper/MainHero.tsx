@@ -230,7 +230,7 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                                 variant="filled"
                                 mr="md"
                                 sx={(theme) => ({
-                                    backgroundColor: theme.colors.dark[9],
+                                    backgroundColor: theme.colors.blue[9],
                                 })}
                             >
                                 Mystery
@@ -242,7 +242,7 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                                 variant="filled"
                                 mr="md"
                                 sx={(theme) => ({
-                                    backgroundColor: theme.colors.dark[9],
+                                    backgroundColor: theme.colors.blue[9],
                                 })}
                             >
                                 Slice of Life
