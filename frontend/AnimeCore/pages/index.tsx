@@ -55,29 +55,28 @@ const Home: NextPage = () => {
                 </SwiperSlide>
             </Swiper>
             <Title
-                sx={(theme) => ({
+                sx={() => ({
                     minHeight: '9vh',
                     backgroundColor: 'rgb(7, 5, 25)',
                     display: 'flex',
-
-                    [theme.fn.smallerThan('md')]: {
-                        minHeight: '0vh',
-                        display: 'none',
-                    },
                 })}
             >
                 <Grid
+                    grow
                     sx={() => ({
                         width: '100%',
                     })}
                 >
                     <Grid.Col
                         span={3}
-                        offset={3}
-                        sx={() => ({
+                        sx={(theme) => ({
                             display: 'grid',
                             justifyContent: 'flex-end',
                             alignItems: 'center',
+
+                            [theme.fn.smallerThan('md')]: {
+                                justifyContent: 'center',
+                            },
                         })}
                     >
                         <div className="swiper__mainhero__pagination"></div>
@@ -85,10 +84,14 @@ const Home: NextPage = () => {
                     <Grid.Col
                         span={3}
                         offset={3}
-                        sx={() => ({
+                        sx={(theme) => ({
                             display: 'flex',
                             justifyContent: 'flex-end',
                             alignItems: 'center',
+
+                            [theme.fn.smallerThan('md')]: {
+                                display: 'none',
+                            },
                         })}
                     >
                         <img width={24} height={24} src="/icons/mouse.svg" />
