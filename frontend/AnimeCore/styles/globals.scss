@@ -5,6 +5,11 @@
 @use "swiper/scss/pagination";
 @use "swiper/scss/effect-fade";
 
+:root{
+    --swiper-pagination-color:#E3BD49;
+    --swiper-pagination-bullet-inactive-color:#EDD68D;
+    --swiper-pagination-bullet-inactive-opacity: .3
+}
 // Fonts
 @font-face {
     font-family: "Kokoro";
