@@ -25,6 +25,17 @@ export default function App(props: AppProps) {
                     colorScheme: 'dark',
                     /** Font Family */
                     fontFamily: 'Kokoro',
+                    /** Heading */
+                    headings: {
+                        sizes: {
+                            h1: { fontSize: 60 },
+                            h2: { fontSize: 40 },
+                            h3: { fontSize: 32 },
+                            h4: { fontSize: 24 },
+                            h5: { fontSize: 20 },
+                            h6: { fontSize: 16 },
+                        },
+                    },
                     //** Color */
                     colors: {
                         yellow: [
