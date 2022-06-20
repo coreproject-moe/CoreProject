@@ -1,5 +1,13 @@
 import React from 'react';
-import { createStyles, Container, Title, Text, Button } from '@mantine/core';
+import {
+    createStyles,
+    Container,
+    Title,
+    Text,
+    Space,
+    Badge,
+    Button,
+} from '@mantine/core';
 import { Navbar } from '../common/Navbar';
 import { useMediaQuery } from '@mantine/hooks';
 
@@ -7,12 +15,12 @@ const useStyles = createStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: '#11284b',
+        backgroundColor: 'black',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         paddingTop: theme.spacing.xl * 2,
         paddingBottom: theme.spacing.xl * 2,
-        minHeight: '100vh',
+        minHeight: '90vh',
         boxShadow: `
             inset 0 4px 1800px rgb(7, 5, 25),
             inset 0 -40vh 140px 2px rgba(7, 5, 25, 0.9),
@@ -48,7 +56,8 @@ const useStyles = createStyles((theme) => ({
         paddingLeft: theme.spacing.xl * 4,
 
         [theme.fn.smallerThan('md')]: {
-            paddingLeft: theme.spacing.xl * 2,
+            paddingLeft: theme.spacing.sm * 2,
+            paddingRight: theme.spacing.sm * 2,
         },
     },
     content: {
@@ -62,11 +71,12 @@ const useStyles = createStyles((theme) => ({
     },
 
     title: {
-        color: theme.white,
         fontWeight: 900,
         lineHeight: 1.05,
         maxWidth: 500,
         fontSize: 48,
+        display: 'flex',
+        alignItems: 'center',
 
         [theme.fn.smallerThan('md')]: {
             maxWidth: '100%',
@@ -95,6 +105,16 @@ const useStyles = createStyles((theme) => ({
             width: '100%',
         },
     },
+
+    line: {
+        color: theme.colors.yellow[0],
+    },
+
+    info: {
+        ':after': {
+            content: '" ▪ "',
+        },
+    },
 }));
 
 export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
@@ -105,7 +125,9 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
         <div
             className={classes.root}
             style={{
-                backgroundImage: `url('${backgroundImage}')`,
+                backgroundImage: `url('${
+                    mobile ? backgroundBanner : backgroundImage
+                }')`,
             }}
         >
             <Navbar />
@@ -114,34 +136,111 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                 <div className={classes.inner}>
                     <div className={classes.content}>
                         <Title className={classes.title}>
-                            A{' '}
                             <Text
                                 component="span"
-                                inherit
-                                variant="gradient"
-                                gradient={{ from: 'pink', to: 'yellow' }}
+                                size="xl"
+                                weight="bold"
+                                sx={(theme) => ({
+                                    color: theme.colors.yellow[0],
+                                })}
                             >
-                                fully featured
-                            </Text>{' '}
-                            React components library
+                                Featured
+                            </Text>
+                            <Space w="sm" />
+                            <div
+                                className={classes.line}
+                                style={{
+                                    display: 'inline-block',
+                                    width: '60px',
+                                    borderTop: '4px solid',
+                                    borderRadius: 10,
+                                }}
+                            />
                         </Title>
+                        <Title order={1}>
+                            <Text color="white" inherit>
+                                Hyouka
+                            </Text>
+                        </Title>
+                        <Title>
+                            <Text
+                                className={classes.info}
+                                component="span"
+                                color="white"
+                            >
+                                TV
+                            </Text>
+                            <Text
+                                className={classes.info}
+                                component="span"
+                                color="white"
+                            >
+                                22 eps
+                            </Text>
+                            <Text
+                                className={classes.info}
+                                component="span"
+                                color="white"
+                            >
+                                Completed
+                            </Text>
+                            <Text
+                                className={classes.info}
+                                component="span"
+                                color="white"
+                            >
+                                Spring 2012
+                            </Text>
+                            <Text component="span" color="white">
+                                Kyoto Animations
+                            </Text>
+                        </Title>
+                        <>
+                            <Text color="white">
+                                Energy-conservative high school student Houtarou
+                                Oreki ends up with more than he bargained for
+                                when he signs up for the Classic Literature Club
+                                at his sister&apos;s behest—especially when he
+                                realizes how deep-rooted the club&apos;s history
+                                really is. Begrudgingly, Oreki is dragged into
+                                an...
+                            </Text>
+                        </>
+                        <Space h="xl"></Space>
+                        <>
+                            <Badge
+                                component="span"
+                                size="lg"
+                                radius="sm"
+                                variant="filled"
+                                mr="md"
+                                sx={(theme) => ({
+                                    backgroundColor: theme.colors.dark[9],
+                                })}
+                            >
+                                Mystery
+                            </Badge>
+                            <Badge
+                                component="span"
+                                size="lg"
+                                radius="sm"
+                                variant="filled"
+                                mr="md"
+                                sx={(theme) => ({
+                                    backgroundColor: theme.colors.dark[9],
+                                })}
+                            >
+                                Slice of Life
+                            </Badge>
+                        </>
+                        <Space h="xl"></Space>
+                        <>
+                            <Button
 
-                        <Text className={classes.description} mt={30}>
-                            Build fully functional accessible web applications
-                            with ease – Mantine includes more than 100
-                            customizable components and hooks to cover you in
-                            any situation
-                        </Text>
-
-                        <Button
-                            variant="gradient"
-                            gradient={{ from: 'pink', to: 'yellow' }}
-                            size="xl"
-                            className={classes.control}
-                            mt={40}
-                        >
-                            Get started
-                        </Button>
+                            >
+                                Settings
+                            </Button>
+                        </>
                     </div>
                 </div>
             </Container>

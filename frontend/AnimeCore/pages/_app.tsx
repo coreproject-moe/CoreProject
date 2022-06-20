@@ -27,7 +27,7 @@ export default function App(props: AppProps) {
                     fontFamily: 'Kokoro',
                     //** Color */
                     colors: {
-                        yellow: [
+ yellow: [
                             '#FFF2CA',
                             '#F5E6B7',
                             '#F8E5AB',
