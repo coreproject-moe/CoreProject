@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     createStyles,
     Container,
@@ -10,6 +10,7 @@ import {
 } from '@mantine/core';
 import { Navbar } from '../common/Navbar';
 import { useMediaQuery } from '@mantine/hooks';
+import * as voca from 'voca';
 
 const useStyles = createStyles((theme) => ({
     root: {
@@ -133,7 +134,21 @@ const useStyles = createStyles((theme) => ({
 
 export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
     const { classes } = useStyles();
-    const mobile = useMediaQuery('(min-width: 500px)');
+    const [wordCount, setWordCount] = useState(0);
+
+    const mobile = useMediaQuery('(min-width: 576px)');
+    const tablet = useMediaQuery('(min-width: 768px)');
+    const fullhd = useMediaQuery('(min-width: 992px)');
+
+    useEffect(() => {
+        if (fullhd) {
+            setWordCount(500);
+        } else if (tablet) {
+            setWordCount(350);
+        } else if (mobile) {
+            setWordCount(100);
+        }
+    });
 
     return (
         <div
@@ -210,13 +225,10 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                         <Space h="md" />
                         <>
                             <Text color="gray">
-                                Energy-conservative high school student Houtarou
-                                Oreki ends up with more than he bargained for
-                                when he signs up for the Classic Literature Club
-                                at his sister&apos;s behest—especially when he
-                                realizes how deep-rooted the club&apos;s history
-                                really is. Begrudgingly, Oreki is dragged into
-                                an...
+                                {voca.truncate(
+                                    `Energy-conservative high school student Houtarou Oreki ends up with more than he bargained for when he signs up for the Classic Literature Club at his sister&apos;s behest—especially when he realizes how deep-rooted the club&apos;s history really is. Begrudgingly, Oreki is dragged into an...`,
+                                    wordCount
+                                )}
                             </Text>
                         </>
                         <Space h="xl" />
