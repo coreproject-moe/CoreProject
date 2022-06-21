@@ -29,7 +29,8 @@ const useStyles = createStyles((theme) => ({
             inset 0 -2vh 140px 2px rgba(7, 5, 25, 0.2)`,
 
         [theme.fn.smallerThan('md')]: {
-            minHeight: '40vh',
+            minHeight: '30vh',
+            maxHeight: '60vh',
             boxShadow: `
                 inset 0px -30px 12px -2px rgba(7, 5, 25, 0.95),
                 inset 0 -40vh 140px 2px rgba(7, 5, 25, 0.8),
