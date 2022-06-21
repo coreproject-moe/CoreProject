@@ -29,7 +29,8 @@ const useStyles = createStyles((theme) => ({
             inset 0 -2vh 140px 2px rgba(7, 5, 25, 0.2)`,
 
         [theme.fn.smallerThan('md')]: {
-            minHeight: '40vh',
+            minHeight: '30vh',
+            maxHeight: '60vh',
             boxShadow: `
                 inset 0px -30px 12px -2px rgba(7, 5, 25, 0.95),
                 inset 0 -40vh 140px 2px rgba(7, 5, 25, 0.8),
@@ -117,10 +118,6 @@ const useStyles = createStyles((theme) => ({
     },
     buttonContainer: {
         display: 'flex',
-
-        [theme.fn.smallerThan('md')]: {
-            display: 'none',
-        },
     },
     tagContainer: {
         [theme.fn.smallerThan('md')]: {
@@ -210,6 +207,7 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                                 Kyoto Animations
                             </Text>
                         </Title>
+                        <Space h="md" />
                         <>
                             <Text color="gray">
                                 Energy-conservative high school student Houtarou
@@ -221,7 +219,7 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                                 an...
                             </Text>
                         </>
-                        <Space h="xl"></Space>
+                        <Space h="xl" />
                         <div className={classes.tagContainer}>
                             <Badge
                                 component="span"

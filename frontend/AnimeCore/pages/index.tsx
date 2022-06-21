@@ -82,7 +82,7 @@ const Home: NextPage = () => {
                         <div className="swiper__mainhero__pagination"></div>
                     </Grid.Col>
                     <Grid.Col
-                        span={2}
+                        span={1}
                         sx={(theme) => ({
                             display: 'flex',
                             justifyContent: 'flex-end',
