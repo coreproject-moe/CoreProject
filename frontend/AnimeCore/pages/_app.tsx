@@ -27,6 +27,7 @@ export default function App(props: AppProps) {
                     fontFamily: 'Kokoro',
                     /** Heading */
                     headings: {
+                        fontFamily: 'Kokoro',
                         sizes: {
                             h1: { fontSize: 60 },
                             h2: { fontSize: 40 },
