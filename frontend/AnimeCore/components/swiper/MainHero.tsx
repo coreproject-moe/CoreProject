@@ -117,10 +117,6 @@ const useStyles = createStyles((theme) => ({
     },
     buttonContainer: {
         display: 'flex',
-
-        [theme.fn.smallerThan('md')]: {
-            display: 'none',
-        },
     },
     tagContainer: {
         [theme.fn.smallerThan('md')]: {
@@ -210,6 +206,7 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                                 Kyoto Animations
                             </Text>
                         </Title>
+                        <Space h="md" />
                         <>
                             <Text color="white">
                                 Energy-conservative high school student Houtarou
@@ -221,7 +218,7 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                                 an...
                             </Text>
                         </>
-                        <Space h="xl"></Space>
+                        <Space h="xl" />
                         <div className={classes.tagContainer}>
                             <Badge
                                 component="span"
