@@ -175,6 +175,11 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                                 size="xl"
                                 weight="bold"
                                 color="yellow"
+                                sx={(theme) => ({
+                                    [theme.fn.smallerThan('sm')]: {
+                                        fontSize: theme.fontSizes.sm,
+                                    },
+                                })}
                             >
                                 Featured
                             </Text>
@@ -190,7 +195,16 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                             />
                         </Title>
                         <Title order={1}>
-                            <Text color="white" inherit>
+                            <Text
+                                size="lg"
+                                color="white"
+                                inherit
+                                sx={(theme) => ({
+                                    [theme.fn.smallerThan('sm')]: {
+                                        fontSize: 30,
+                                    },
+                                })}
+                            >
                                 Hyouka
                             </Text>
                         </Title>
@@ -271,7 +285,9 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                                     backgroundColor: theme.colors.yellow[9],
                                     height: 60,
 
-                                    [theme.fn.largerThan('sm')]: { width: 60 },
+                                    [theme.fn.largerThan('sm')]: {
+                                        width: 60,
+                                    },
                                 })}
                                 radius="lg"
                             >
