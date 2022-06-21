@@ -148,7 +148,7 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
         } else if (mobile) {
             setWordCount(100);
         }
-    });
+    }, [fullhd, tablet, mobile]);
 
     return (
         <div
