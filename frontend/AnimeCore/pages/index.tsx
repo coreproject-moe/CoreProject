@@ -47,7 +47,10 @@ const Home: NextPage = () => {
                             .map((el, i) => {
                                 return (
                                     <SwiperSlide key={i}>
-                                        <MainHero backgroundImage="/images/Hyouka-poster.png" />
+                                        <MainHero
+                                            backgroundImage="/images/Hyouka-poster.png"
+                                            backgroundBanner="https://media.kitsu.io/anime/poster_images/6686/large.jpg"
+                                        />
                                     </SwiperSlide>
                                 );
                             })}
