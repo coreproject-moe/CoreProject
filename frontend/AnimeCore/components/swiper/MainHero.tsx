@@ -261,10 +261,11 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                         <Space h="xl" />
                         <div className={classes.buttonContainer}>
                             <Button
-                                color="yellow"
-                                sx={() => ({
-                                    width: 60,
+                                sx={(theme) => ({
+                                    backgroundColor: theme.colors.yellow[9],
                                     height: 60,
+
+                                    [theme.fn.largerThan('sm')]: { width: 60 },
                                 })}
                                 radius="lg"
                             >
@@ -273,14 +274,18 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                                     width={24}
                                     height={24}
                                 />
+                                <Text color="dark" weight={700}>
+                                    Watch
+                                </Text>
                             </Button>
                             <Button
                                 ml="xl"
                                 color="yellow"
                                 variant="outline"
-                                sx={() => ({
+                                sx={(theme) => ({
                                     borderWidth: 4,
                                     height: 60,
+                                    borderColor: theme.colors.yellow[9],
                                 })}
                                 radius="lg"
                                 rightIcon={
