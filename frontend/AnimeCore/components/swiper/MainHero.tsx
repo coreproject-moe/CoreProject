@@ -211,7 +211,7 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                             </Text>
                         </Title>
                         <>
-                            <Text color="white">
+                            <Text color="gray">
                                 Energy-conservative high school student Houtarou
                                 Oreki ends up with more than he bargained for
                                 when he signs up for the Classic Literature Club
