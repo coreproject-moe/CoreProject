@@ -266,6 +266,7 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                         <Space h="xl" />
                         <div className={classes.buttonContainer}>
                             <Button
+                                color="yellow"
                                 sx={(theme) => ({
                                     backgroundColor: theme.colors.yellow[9],
                                     height: 60,
