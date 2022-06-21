@@ -5,7 +5,8 @@ export default class _Document extends Document {
         return (
             <Html>
                 <Head>
-                    <link rel="icon" href="/logos/favicon.svg" />{' '}
+                    <link rel="icon" href="/logos/favicon.svg" />
+                    <meta name="darkreader" content="someUIDhere"></meta>
                 </Head>
                 <body>
                     <Main />
