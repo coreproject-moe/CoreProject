@@ -30,7 +30,9 @@ const Home: NextPage = () => {
                             Navigation,
                             SwiperPagination,
                         ]}
-                        autoplay={true}
+                        autoplay={{
+                            delay: 10 * 1000, // 10 secs
+                        }}
                         navigation={{
                             nextEl: '.mainhero__next__el',
                             prevEl: '.mainhero__previous__el',
