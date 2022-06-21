@@ -1,4 +1,5 @@
 import Document, { Head, Html, Main, NextScript } from 'next/document';
+import 'no-darkreader';
 
 export default class _Document extends Document {
     render() {
@@ -6,7 +7,7 @@ export default class _Document extends Document {
             <Html>
                 <Head>
                     <link rel="icon" href="/logos/favicon.svg" />
-                    <meta name="darkreader" content="someUIDhere"></meta>
+                    <meta name="darkreader" content="NO-DARKREADER-PLUGIN" />
                 </Head>
                 <body>
                     <Main />
