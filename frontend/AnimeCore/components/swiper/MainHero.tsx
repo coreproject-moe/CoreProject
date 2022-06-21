@@ -136,9 +136,9 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
     const { classes } = useStyles();
     const [wordCount, setWordCount] = useState(0);
 
-    const mobile = useMediaQuery('(min-width: 576px)');
-    const tablet = useMediaQuery('(min-width: 768px)');
-    const fullhd = useMediaQuery('(min-width: 992px)');
+    const mobile = useMediaQuery('(min-width: 0px) and (max-width: 576px)');
+    const tablet = useMediaQuery('(min-width: 577px) and (max-width: 768px)');
+    const fullhd = useMediaQuery('(min-width: 769px) and (max-width: 992px)');
 
     useEffect(() => {
         if (fullhd) {
