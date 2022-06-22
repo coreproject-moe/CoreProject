@@ -231,11 +231,11 @@
         "django": {
             "extras": ["argon2"],
             "hashes": [
-                "sha256:815b1c3e1c1379cca1c54cc7202ee86df006f52b94560b46ea0b19f162c9474a",
-                "sha256:91980d3b327e38e44c2bef0af86d624a57adbd5f1c96f43acf150396770caf01"
+                "sha256:55ea3e07df2eb3994b7261d743c111e4c27a56ca1285eb762dba07432ebe4039",
+                "sha256:ec22c3e909af402281ef1dea69cbbc42b43b9ac9379df2914e0a7b85597242d6"
             ],
             "index": "pypi",
-            "version": "==4.1a1"
+            "version": "==4.1b1"
         },
         "django-ckeditor": {
             "hashes": [
@@ -732,11 +732,11 @@
         "django": {
             "extras": ["argon2"],
             "hashes": [
-                "sha256:815b1c3e1c1379cca1c54cc7202ee86df006f52b94560b46ea0b19f162c9474a",
-                "sha256:91980d3b327e38e44c2bef0af86d624a57adbd5f1c96f43acf150396770caf01"
+                "sha256:55ea3e07df2eb3994b7261d743c111e4c27a56ca1285eb762dba07432ebe4039",
+                "sha256:ec22c3e909af402281ef1dea69cbbc42b43b9ac9379df2914e0a7b85597242d6"
             ],
             "index": "pypi",
-            "version": "==4.1a1"
+            "version": "==4.1b1"
         },
         "django-dbbackup": {
             "hashes": [
