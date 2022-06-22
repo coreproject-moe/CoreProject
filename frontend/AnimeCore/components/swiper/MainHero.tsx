@@ -135,18 +135,25 @@ const useStyles = createStyles((theme) => ({
 export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
     const { classes } = useStyles();
     const [wordCount, setWordCount] = useState(0);
+    const [heroBackgroundImage, setHeroBackgroundImage] = useState('');
 
-    const mobile = useMediaQuery('(min-width: 576px)');
-    const tablet = useMediaQuery('(min-width: 768px)');
-    const fullhd = useMediaQuery('(min-width: 992px)');
+    const mobile = useMediaQuery('(min-width: 0px) and (max-width: 576px)');
+    const tablet = useMediaQuery('(min-width: 577px) and (max-width: 768px)');
+    const fullhd = useMediaQuery('(min-width: 769px) and (max-width: 992px)');
 
     useEffect(() => {
         if (fullhd) {
             setWordCount(500);
+            setHeroBackgroundImage(backgroundImage);
         } else if (tablet) {
             setWordCount(350);
+            setHeroBackgroundImage(backgroundImage);
         } else if (mobile) {
             setWordCount(100);
+            setHeroBackgroundImage(backgroundBanner);
+        } else {
+            setWordCount(500); // fallback
+            setHeroBackgroundImage(backgroundImage); // fallback
         }
     }, [fullhd, tablet, mobile]);
 
@@ -154,9 +161,7 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
         <div
             className={classes.root}
             style={{
-                backgroundImage: `url('${
-                    mobile ? backgroundBanner : backgroundImage
-                }')`,
+                backgroundImage: `url('${heroBackgroundImage}')`,
             }}
         >
             <Navbar />
@@ -170,6 +175,11 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                                 size="xl"
                                 weight="bold"
                                 color="yellow"
+                                sx={(theme) => ({
+                                    [theme.fn.smallerThan('sm')]: {
+                                        fontSize: theme.fontSizes.sm,
+                                    },
+                                })}
                             >
                                 Featured
                             </Text>
@@ -185,7 +195,16 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                             />
                         </Title>
                         <Title order={1}>
-                            <Text color="white" inherit>
+                            <Text
+                                size="lg"
+                                color="white"
+                                inherit
+                                sx={(theme) => ({
+                                    [theme.fn.smallerThan('sm')]: {
+                                        fontSize: 30,
+                                    },
+                                })}
+                            >
                                 Hyouka
                             </Text>
                         </Title>
@@ -261,11 +280,14 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                         <Space h="xl" />
                         <div className={classes.buttonContainer}>
                             <Button
+                                color="yellow"
                                 sx={(theme) => ({
                                     backgroundColor: theme.colors.yellow[9],
                                     height: 60,
 
-                                    [theme.fn.largerThan('sm')]: { width: 60 },
+                                    [theme.fn.largerThan('sm')]: {
+                                        width: 60,
+                                    },
                                 })}
                                 radius="lg"
                             >

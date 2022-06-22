@@ -30,7 +30,9 @@ const Home: NextPage = () => {
                             Navigation,
                             SwiperPagination,
                         ]}
-                        autoplay={true}
+                        autoplay={{
+                            delay: 10 * 1000, // 10 secs
+                        }}
                         navigation={{
                             nextEl: '.mainhero__next__el',
                             prevEl: '.mainhero__previous__el',
@@ -47,7 +49,10 @@ const Home: NextPage = () => {
                             .map((el, i) => {
                                 return (
                                     <SwiperSlide key={i}>
-                                        <MainHero backgroundImage="/images/Hyouka-poster.png" />
+                                        <MainHero
+                                            backgroundImage="/images/Hyouka-poster.png"
+                                            backgroundBanner="https://media.kitsu.io/anime/poster_images/6686/large.jpg"
+                                        />
                                     </SwiperSlide>
                                 );
                             })}
