@@ -298,45 +298,49 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                         </div>
                         <Space h="xl" />
                         <div className={classes.buttonContainer}>
-                            <Button
-                                color="yellow"
-                                sx={(theme) => ({
-                                    backgroundColor: theme.colors.yellow[9],
-                                    height: 60,
+                            <Skeleton width="60px" visible={isLoading}>
+                                <Button
+                                    color="yellow"
+                                    sx={(theme) => ({
+                                        backgroundColor: theme.colors.yellow[9],
+                                        height: 60,
 
-                                    [theme.fn.largerThan('sm')]: {
-                                        width: 60,
-                                    },
-                                })}
-                                radius="lg"
-                            >
-                                <img
-                                    src="/icons/play.svg"
-                                    width={24}
-                                    height={24}
-                                />
-                                <Text color="dark" weight={700}>
-                                    Watch
-                                </Text>
-                            </Button>
-                            <Button
-                                ml="xl"
-                                color="yellow"
-                                variant="outline"
-                                sx={(theme) => ({
-                                    borderWidth: 4,
-                                    height: 60,
-                                    borderColor: theme.colors.yellow[9],
-                                })}
-                                radius="lg"
-                                rightIcon={
-                                    <img src="/icons/chevrons-right.svg" />
-                                }
-                            >
-                                <Text weight={700} size="lg" color="yellow">
-                                    Details
-                                </Text>
-                            </Button>
+                                        [theme.fn.largerThan('sm')]: {
+                                            width: 60,
+                                        },
+                                    })}
+                                    radius="lg"
+                                >
+                                    <img
+                                        src="/icons/play.svg"
+                                        width={24}
+                                        height={24}
+                                    />
+                                    <Text color="dark" weight={700}>
+                                        Watch
+                                    </Text>
+                                </Button>
+                            </Skeleton>
+                            <Skeleton ml="xl" width="60px" visible={isLoading}>
+                                <Button
+                                    ml="xl"
+                                    color="yellow"
+                                    variant="outline"
+                                    sx={(theme) => ({
+                                        borderWidth: 4,
+                                        height: 60,
+                                        borderColor: theme.colors.yellow[9],
+                                    })}
+                                    radius="lg"
+                                    rightIcon={
+                                        <img src="/icons/chevrons-right.svg" />
+                                    }
+                                >
+                                    <Text weight={700} size="lg" color="yellow">
+                                        Details
+                                    </Text>
+                                </Button>
+                            </Skeleton>
                         </div>
                     </div>
                 </div>
