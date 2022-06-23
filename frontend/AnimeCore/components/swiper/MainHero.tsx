@@ -7,6 +7,7 @@ import {
     Space,
     Badge,
     Button,
+    Skeleton,
 } from '@mantine/core';
 import { Navbar } from '../common/Navbar';
 import { useMediaQuery } from '@mantine/hooks';
@@ -157,6 +158,8 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
         }
     }, [fullhd, tablet, mobile]);
 
+    const isLoading = true;
+
     return (
         <div
             className={classes.root}
@@ -181,18 +184,26 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                                     },
                                 })}
                             >
-                                Featured
+                                <Skeleton height={20} visible={isLoading}>
+                                    Featured
+                                </Skeleton>
                             </Text>
                             <Space w="sm" />
-                            <div
-                                className={classes.line}
-                                style={{
-                                    display: 'inline-block',
-                                    width: '60px',
-                                    borderTop: '4px solid',
-                                    borderRadius: 10,
-                                }}
-                            />
+                            <Skeleton
+                                height={20}
+                                width="60px"
+                                visible={isLoading}
+                            >
+                                <div
+                                    className={classes.line}
+                                    style={{
+                                        display: 'inline-block',
+                                        width: '60px',
+                                        borderTop: '4px solid',
+                                        borderRadius: 10,
+                                    }}
+                                />
+                            </Skeleton>
                         </Title>
                         <Title order={1}>
                             <Text
@@ -205,77 +216,85 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                                     },
                                 })}
                             >
-                                Hyouka
+                                <Skeleton mt="lg" width="20%">
+                                    Hyouka
+                                </Skeleton>
                             </Text>
                         </Title>
                         <Title className={classes.infoContainer}>
-                            <Text
-                                className={classes.info}
-                                component="span"
-                                color="white"
-                            >
-                                TV
-                            </Text>
-                            <Text
-                                className={classes.info}
-                                component="span"
-                                color="white"
-                            >
-                                22 eps
-                            </Text>
-                            <Text
-                                className={classes.info}
-                                component="span"
-                                color="white"
-                            >
-                                Completed
-                            </Text>
-                            <Text
-                                className={classes.info}
-                                component="span"
-                                color="white"
-                            >
-                                Spring 2012
-                            </Text>
-                            <Text component="span" color="white">
-                                Kyoto Animations
-                            </Text>
+                            <Skeleton mt="lg" height="20px" visible={isLoading}>
+                                <Text
+                                    className={classes.info}
+                                    component="span"
+                                    color="white"
+                                >
+                                    TV
+                                </Text>
+                                <Text
+                                    className={classes.info}
+                                    component="span"
+                                    color="white"
+                                >
+                                    22 eps
+                                </Text>
+                                <Text
+                                    className={classes.info}
+                                    component="span"
+                                    color="white"
+                                >
+                                    Completed
+                                </Text>
+                                <Text
+                                    className={classes.info}
+                                    component="span"
+                                    color="white"
+                                >
+                                    Spring 2012
+                                </Text>
+                                <Text component="span" color="white">
+                                    Kyoto Animations
+                                </Text>
+                            </Skeleton>
                         </Title>
                         <Space h="md" />
                         <>
                             <Text color="gray">
-                                {voca.truncate(
-                                    `Energy-conservative high school student Houtarou Oreki ends up with more than he bargained for when he signs up for the Classic Literature Club at his sister's behest—especially when he realizes how deep-rooted the club's history really is. Begrudgingly, Oreki is dragged into an...`,
-                                    wordCount
-                                )}
+                                <Skeleton mt="sm" visible={isLoading}>
+                                    {voca.truncate(
+                                        `Energy-conservative high school student Houtarou Oreki ends up with more than he bargained for when he signs up for the Classic Literature Club at his sister's behest—especially when he realizes how deep-rooted the club's history really is. Begrudgingly, Oreki is dragged into an...`,
+                                        wordCount
+                                    )}
+                                </Skeleton>
                             </Text>
                         </>
                         <Space h="xl" />
                         <div className={classes.tagContainer}>
-                            <Badge
-                                component="span"
-                                size="lg"
-                                radius="sm"
-                                variant="filled"
-                                mr="md"
-                                sx={(theme) => ({
-                                    backgroundColor: theme.colors.blue[9],
-                                })}
-                            >
-                                Mystery
-                            </Badge>
-                            <Badge
-                                component="span"
-                                size="lg"
-                                radius="sm"
-                                variant="filled"
-                                mr="md"
-                                sx={(theme) => ({
-                                    backgroundColor: theme.colors.blue[9],
-                                })}
-                            >
-                                Slice of Life
-                            </Badge>
+                            <Skeleton height="20px" visible={isLoading}>
+                                <Badge
+                                    component="span"
+                                    size="lg"
+                                    radius="sm"
+                                    variant="filled"
+                                    mr="md"
+                                    sx={(theme) => ({
+                                        backgroundColor: theme.colors.blue[9],
+                                    })}
+                                >
+                                    Mystery
+                                </Badge>
+                                <Badge
+                                    component="span"
+                                    size="lg"
+                                    radius="sm"
+                                    variant="filled"
+                                    mr="md"
+                                    sx={(theme) => ({
+                                        backgroundColor: theme.colors.blue[9],
+                                    })}
+                                >
+                                    Slice of Life
+                                </Badge>
+                            </Skeleton>
                         </div>
                         <Space h="xl" />
                         <div className={classes.buttonContainer}>
