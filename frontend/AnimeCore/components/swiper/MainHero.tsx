@@ -201,7 +201,7 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                                 inherit
                                 sx={(theme) => ({
                                     [theme.fn.smallerThan('sm')]: {
-                                        fontSize: 30,
+                                        fontSize: 30, // Fix Me
                                     },
                                 })}
                             >
