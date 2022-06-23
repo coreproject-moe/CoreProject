@@ -13,11 +13,13 @@
         "@mantine/core": "^4.2.10",
         "@mantine/hooks": "^4.2.6",
         "@mantine/next": "^4.2.10",
+        "@mantine/rte": "^4.2.10",
         "next": "12.1.6",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "sass": "^1.52.3",
         "swiper": "^8.2.4",
+        "swr": "^1.3.0",
         "voca": "^1.4.0"
     },
     "devDependencies": {
