@@ -158,7 +158,11 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
         }
     }, [fullhd, tablet, mobile]);
 
-    const isLoading = true;
+    const [isLoading, setIsLoading] = useState(true);
+    
+    setTimeout(()=>{
+       setIsLoading(false);
+    },2000)
 
     return (
         <div
