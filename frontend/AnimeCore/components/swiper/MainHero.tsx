@@ -153,12 +153,16 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
             setWordCount(100);
             setHeroBackgroundImage(backgroundBanner);
         } else {
-            setWordCount(500); // fallback
-            setHeroBackgroundImage(backgroundImage); // fallback
+            setWordCount(500); // This is the normal one
+            setHeroBackgroundImage(backgroundImage); // This is the normal one
         }
-    }, [fullhd, tablet, mobile]);
+    }, [fullhd, tablet, mobile, backgroundBanner, backgroundImage]);
 
-    const isLoading = true;
+    const [isLoading, setIsLoading] = useState(true);
+
+    setTimeout(() => {
+        setIsLoading(false);
+    }, 1000);
 
     return (
         <div
@@ -173,174 +177,233 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                 <div className={classes.inner}>
                     <div className={classes.content}>
                         <Title className={classes.title}>
-                            <Text
-                                component="span"
-                                size="xl"
-                                weight="bold"
-                                color="yellow"
-                                sx={(theme) => ({
-                                    [theme.fn.smallerThan('sm')]: {
-                                        fontSize: theme.fontSizes.sm,
-                                    },
-                                })}
-                            >
-                                <Skeleton height={20} visible={isLoading}>
-                                    Featured
-                                </Skeleton>
-                            </Text>
+                            {isLoading ? (
+                                <>
+                                    <Skeleton
+                                        height={20}
+                                        width={120}
+                                    ></Skeleton>
+                                </>
+                            ) : (
+                                <>
+                                    <Text
+                                        component="span"
+                                        size="xl"
+                                        weight="bold"
+                                        color="yellow"
+                                        sx={(theme) => ({
+                                            [theme.fn.smallerThan('sm')]: {
+                                                fontSize: theme.fontSizes.sm,
+                                            },
+                                        })}
+                                    >
+                                        Featured
+                                    </Text>
+                                </>
+                            )}
+
                             <Space w="sm" />
-                            <Skeleton
-                                height={20}
-                                width="60px"
-                                visible={isLoading}
-                            >
-                                <div
-                                    className={classes.line}
-                                    style={{
-                                        display: 'inline-block',
-                                        width: '60px',
-                                        borderTop: '4px solid',
-                                        borderRadius: 10,
-                                    }}
-                                />
-                            </Skeleton>
+                            {isLoading ? (
+                                <>
+                                    <Skeleton height={20} width={60}></Skeleton>
+                                </>
+                            ) : (
+                                <>
+                                    <div
+                                        className={classes.line}
+                                        style={{
+                                            display: 'inline-block',
+                                            width: '60px',
+                                            borderTop: '4px solid',
+                                            borderRadius: 10,
+                                        }}
+                                    />
+                                </>
+                            )}
                         </Title>
                         <Title order={1}>
-                            <Text
-                                size="lg"
-                                color="white"
-                                inherit
-                                sx={(theme) => ({
-                                    [theme.fn.smallerThan('sm')]: {
-                                        fontSize: 30, // Fix Me
-                                    },
-                                })}
-                            >
-                                <Skeleton mt="lg" width="20%">
-                                    Hyouka
-                                </Skeleton>
-                            </Text>
+                            {isLoading ? (
+                                <>
+                                    <Skeleton mt="lg" width={180} height={50} />
+                                </>
+                            ) : (
+                                <>
+                                    <Text
+                                        size="lg"
+                                        color="white"
+                                        inherit
+                                        sx={(theme) => ({
+                                            [theme.fn.smallerThan('sm')]: {
+                                                fontSize: 30, // Fix Me
+                                            },
+                                        })}
+                                    >
+                                        Hyouka
+                                    </Text>
+                                </>
+                            )}
                         </Title>
                         <Title className={classes.infoContainer}>
-                            <Skeleton mt="lg" height="20px" visible={isLoading}>
-                                <Text
-                                    className={classes.info}
-                                    component="span"
-                                    color="white"
-                                >
-                                    TV
-                                </Text>
-                                <Text
-                                    className={classes.info}
-                                    component="span"
-                                    color="white"
-                                >
-                                    22 eps
-                                </Text>
-                                <Text
-                                    className={classes.info}
-                                    component="span"
-                                    color="white"
-                                >
-                                    Completed
-                                </Text>
-                                <Text
-                                    className={classes.info}
-                                    component="span"
-                                    color="white"
-                                >
-                                    Spring 2012
-                                </Text>
-                                <Text component="span" color="white">
-                                    Kyoto Animations
-                                </Text>
-                            </Skeleton>
+                            {isLoading ? (
+                                <>
+                                    <Skeleton mt="lg" width={270} height={20} />
+                                </>
+                            ) : (
+                                <>
+                                    <Text
+                                        className={classes.info}
+                                        component="span"
+                                        color="white"
+                                    >
+                                        TV
+                                    </Text>
+                                    <Text
+                                        className={classes.info}
+                                        component="span"
+                                        color="white"
+                                    >
+                                        22 eps
+                                    </Text>
+                                    <Text
+                                        className={classes.info}
+                                        component="span"
+                                        color="white"
+                                    >
+                                        Completed
+                                    </Text>
+                                    <Text
+                                        className={classes.info}
+                                        component="span"
+                                        color="white"
+                                    >
+                                        Spring 2012
+                                    </Text>
+                                    <Text component="span" color="white">
+                                        Kyoto Animations
+                                    </Text>
+                                </>
+                            )}
                         </Title>
                         <Space h="md" />
                         <>
-                            <Text color="gray">
-                                <Skeleton mt="sm" visible={isLoading}>
-                                    {voca.truncate(
-                                        `Energy-conservative high school student Houtarou Oreki ends up with more than he bargained for when he signs up for the Classic Literature Club at his sister's behest—especially when he realizes how deep-rooted the club's history really is. Begrudgingly, Oreki is dragged into an...`,
-                                        wordCount
-                                    )}
-                                </Skeleton>
-                            </Text>
+                            {isLoading ? (
+                                <>
+                                    <Skeleton
+                                        mt="sm"
+                                        width="60vw"
+                                        height={60}
+                                    />
+                                </>
+                            ) : (
+                                <>
+                                    <Text color="gray">
+                                        {voca.truncate(
+                                            `Energy-conservative high school student Houtarou Oreki ends up with more than he bargained for when he signs up for the Classic Literature Club at his sister's behest—especially when he realizes how deep-rooted the club's history really is. Begrudgingly, Oreki is dragged into an...`,
+                                            wordCount
+                                        )}
+                                    </Text>
+                                </>
+                            )}
                         </>
                         <Space h="xl" />
                         <div className={classes.tagContainer}>
-                            <Skeleton height="20px" visible={isLoading}>
-                                <Badge
-                                    component="span"
-                                    size="lg"
-                                    radius="sm"
-                                    variant="filled"
-                                    mr="md"
-                                    sx={(theme) => ({
-                                        backgroundColor: theme.colors.blue[9],
-                                    })}
-                                >
-                                    Mystery
-                                </Badge>
-                                <Badge
-                                    component="span"
-                                    size="lg"
-                                    radius="sm"
-                                    variant="filled"
-                                    mr="md"
-                                    sx={(theme) => ({
-                                        backgroundColor: theme.colors.blue[9],
-                                    })}
-                                >
-                                    Slice of Life
-                                </Badge>
-                            </Skeleton>
+                            {isLoading ? (
+                                <>
+                                    <Skeleton height={24} width="50vw" />
+                                </>
+                            ) : (
+                                <>
+                                    <Badge
+                                        component="span"
+                                        size="lg"
+                                        radius="sm"
+                                        variant="filled"
+                                        mr="md"
+                                        sx={(theme) => ({
+                                            backgroundColor:
+                                                theme.colors.blue[9],
+                                        })}
+                                    >
+                                        Mystery
+                                    </Badge>
+                                    <Badge
+                                        component="span"
+                                        size="lg"
+                                        radius="sm"
+                                        variant="filled"
+                                        mr="md"
+                                        sx={(theme) => ({
+                                            backgroundColor:
+                                                theme.colors.blue[9],
+                                        })}
+                                    >
+                                        Slice of Life
+                                    </Badge>
+                                </>
+                            )}
                         </div>
                         <Space h="xl" />
                         <div className={classes.buttonContainer}>
-                            <Skeleton width="60px" visible={isLoading}>
-                                <Button
-                                    color="yellow"
-                                    sx={(theme) => ({
-                                        backgroundColor: theme.colors.yellow[9],
-                                        height: 60,
+                            {isLoading ? (
+                                <>
+                                    <Skeleton width="60px" />
+                                </>
+                            ) : (
+                                <>
+                                    <Button
+                                        color="yellow"
+                                        sx={(theme) => ({
+                                            backgroundColor:
+                                                theme.colors.yellow[9],
+                                            height: 60,
 
-                                        [theme.fn.largerThan('sm')]: {
-                                            width: 60,
-                                        },
-                                    })}
-                                    radius="lg"
-                                >
-                                    <img
-                                        src="/icons/play.svg"
-                                        width={24}
-                                        height={24}
-                                    />
-                                    <Text color="dark" weight={700}>
-                                        Watch
-                                    </Text>
-                                </Button>
-                            </Skeleton>
-                            <Skeleton ml="xl" width="60px" visible={isLoading}>
-                                <Button
-                                    ml="xl"
-                                    color="yellow"
-                                    variant="outline"
-                                    sx={(theme) => ({
-                                        borderWidth: 4,
-                                        height: 60,
-                                        borderColor: theme.colors.yellow[9],
-                                    })}
-                                    radius="lg"
-                                    rightIcon={
-                                        <img src="/icons/chevrons-right.svg" />
-                                    }
-                                >
-                                    <Text weight={700} size="lg" color="yellow">
-                                        Details
-                                    </Text>
-                                </Button>
-                            </Skeleton>
+                                            [theme.fn.largerThan('sm')]: {
+                                                width: 60,
+                                            },
+                                        })}
+                                        radius="lg"
+                                    >
+                                        <img
+                                            src="/icons/play.svg"
+                                            width={24}
+                                            height={24}
+                                        />
+                                        <Text color="dark" weight={700}>
+                                            Watch
+                                        </Text>
+                                    </Button>
+                                </>
+                            )}
+                            {isLoading ? (
+                                <>
+                                    <Skeleton ml="xl" height={60} width={120} />
+                                </>
+                            ) : (
+                                <>
+                                    <Button
+                                        ml="xl"
+                                        color="yellow"
+                                        variant="outline"
+                                        sx={(theme) => ({
+                                            borderWidth: 4,
+                                            height: 60,
+                                            borderColor: theme.colors.yellow[9],
+                                        })}
+                                        radius="lg"
+                                        rightIcon={
+                                            <img src="/icons/chevrons-right.svg" />
+                                        }
+                                    >
+                                        <Text
+                                            weight={700}
+                                            size="lg"
+                                            color="yellow"
+                                        >
+                                            Details
+                                        </Text>
+                                    </Button>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>
