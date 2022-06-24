@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useLayoutEffect } from 'react';
 import {
     createStyles,
     Container,
@@ -135,25 +135,29 @@ const useStyles = createStyles((theme) => ({
 
 export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
     const { classes } = useStyles();
-    const [wordCount, setWordCount] = useState(0);
+    const [animeSummaryContent, setAnimeSummaryContent] = useState('');
     const [heroBackgroundImage, setHeroBackgroundImage] = useState('');
 
     const mobile = useMediaQuery('(min-width: 0px) and (max-width: 576px)');
     const tablet = useMediaQuery('(min-width: 577px) and (max-width: 768px)');
     const fullhd = useMediaQuery('(min-width: 769px) and (max-width: 992px)');
 
+    // Props please replace me
+    const animeTitle = 'Hyouka';
+    const animeSummary = `Energy-conservative high school student Houtarou Oreki ends up with more than he bargained for when he signs up for the Classic Literature Club at his sister's behest—especially when he realizes how deep-rooted the club's history really is. Begrudgingly, Oreki is dragged into an...`;
+
     useEffect(() => {
-        if (fullhd) {
-            setWordCount(500);
-            setHeroBackgroundImage(backgroundImage);
-        } else if (tablet) {
-            setWordCount(350);
-            setHeroBackgroundImage(backgroundImage);
-        } else if (mobile) {
-            setWordCount(200);
+        if (mobile) {
+            setAnimeSummaryContent(voca.truncate(animeSummary, 200)); // 200 words max
             setHeroBackgroundImage(backgroundBanner);
+        } else if (tablet) {
+            setAnimeSummaryContent(voca.truncate(animeSummary, 350)); // 350 words max
+            setHeroBackgroundImage(backgroundImage);
+        } else if (fullhd) {
+            setAnimeSummaryContent(voca.truncate(animeSummary, 500)); // 500 words max
+            setHeroBackgroundImage(backgroundImage);
         } else {
-            setWordCount(500); // This is the normal one
+            setAnimeSummaryContent(voca.truncate(animeSummary, 500)); // This is the normal one
             setHeroBackgroundImage(backgroundImage); // This is the normal one
         }
     }, [fullhd, tablet, mobile, backgroundBanner, backgroundImage]);
@@ -162,9 +166,9 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
 
     setTimeout(() => {
         if (isLoading) {
-            // setIsLoading(false);
+            setIsLoading(false);
         }
-    }, 10000);
+    }, 2000);
 
     return (
         <div
@@ -240,7 +244,7 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                                             },
                                         })}
                                     >
-                                        Hyouka
+                                        {animeTitle}
                                     </Text>
                                 </>
                             )}
@@ -299,10 +303,7 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
                             ) : (
                                 <>
                                     <Text color="gray">
-                                        {voca.truncate(
-                                            `Energy-conservative high school student Houtarou Oreki ends up with more than he bargained for when he signs up for the Classic Literature Club at his sister's behest—especially when he realizes how deep-rooted the club's history really is. Begrudgingly, Oreki is dragged into an...`,
-                                            wordCount
-                                        )}
+                                        {animeSummaryContent}
                                     </Text>
                                 </>
                             )}
