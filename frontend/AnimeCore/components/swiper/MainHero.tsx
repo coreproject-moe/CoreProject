@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, RefObject } from 'react';
 import {
     createStyles,
     Container,
@@ -133,8 +133,15 @@ const useStyles = createStyles((theme) => ({
     },
 }));
 
-export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
+interface IProps {
+    backgroundImage: string;
+    backgroundBanner: string;
+    parentRef?: RefObject<HTMLDivElement>;
+}
+
+export const MainHero = (props: IProps) => {
     const { classes } = useStyles();
+
     const [animeSummaryContent, setAnimeSummaryContent] = useState('');
     const [heroBackgroundImage, setHeroBackgroundImage] = useState('');
 
@@ -149,26 +156,20 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
     useEffect(() => {
         if (mobile) {
             setAnimeSummaryContent(voca.truncate(animeSummary, 200)); // 200 words max
-            setHeroBackgroundImage(backgroundBanner);
+            setHeroBackgroundImage(props.backgroundBanner);
         } else if (tablet) {
             setAnimeSummaryContent(voca.truncate(animeSummary, 350)); // 350 words max
-            setHeroBackgroundImage(backgroundImage);
+            setHeroBackgroundImage(props.backgroundImage);
         } else if (fullhd) {
             setAnimeSummaryContent(voca.truncate(animeSummary, 500)); // 500 words max
-            setHeroBackgroundImage(backgroundImage);
+            setHeroBackgroundImage(props.backgroundImage);
         } else {
             setAnimeSummaryContent(voca.truncate(animeSummary, 500)); // This is the normal one
-            setHeroBackgroundImage(backgroundImage); // This is the normal one
+            setHeroBackgroundImage(props.backgroundImage); // This is the normal one
         }
-    }, [fullhd, tablet, mobile, backgroundBanner, backgroundImage]);
+    }, [fullhd, tablet, mobile, props.backgroundBanner, props.backgroundImage]);
 
     const [isLoading, setIsLoading] = useState(true);
-
-    setTimeout(() => {
-        if (isLoading) {
-            setIsLoading(false);
-        }
-    }, 2000);
 
     return (
         <div
