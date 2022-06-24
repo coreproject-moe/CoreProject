@@ -173,6 +173,12 @@ export const MainHero = (props: IProps) => {
 
     const [isLoading, setIsLoading] = useState(true);
 
+    setTimeout(() => {
+        if (isLoading) {
+            setIsLoading(false);
+        }
+    }, 400);
+
     return (
         <div
             className={classes.root}

@@ -48,7 +48,7 @@ const Home: NextPage = () => {
                             .fill(1)
                             .map((el, i) => {
                                 return (
-                                    <SwiperSlide>
+                                    <SwiperSlide key={i}>
                                         <MainHero
                                             key={i}
                                             backgroundImage="/images/Hyouka-poster.png"
