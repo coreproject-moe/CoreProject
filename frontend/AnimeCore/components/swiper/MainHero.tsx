@@ -150,7 +150,7 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
             setWordCount(350);
             setHeroBackgroundImage(backgroundImage);
         } else if (mobile) {
-            setWordCount(100);
+            setWordCount(200);
             setHeroBackgroundImage(backgroundBanner);
         } else {
             setWordCount(500); // This is the normal one
@@ -161,8 +161,10 @@ export const MainHero = ({ backgroundImage = '', backgroundBanner = '' }) => {
     const [isLoading, setIsLoading] = useState(true);
 
     setTimeout(() => {
-        setIsLoading(false);
-    }, 1000);
+        if (isLoading) {
+            // setIsLoading(false);
+        }
+    }, 10000);
 
     return (
         <div
