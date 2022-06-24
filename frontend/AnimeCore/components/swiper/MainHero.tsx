@@ -134,6 +134,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface IProps {
+    key: number;
     backgroundImage: string;
     backgroundBanner: string;
     parentRef?: RefObject<HTMLDivElement>;
@@ -149,7 +150,8 @@ export const MainHero = (props: IProps) => {
     const tablet = useMediaQuery('(min-width: 577px) and (max-width: 768px)');
     const fullhd = useMediaQuery('(min-width: 769px) and (max-width: 992px)');
 
-    // Props please replace me
+    // Use SWR to fetch data from backend
+    // Use (props.key) to get id.
     const animeTitle = 'Hyouka';
     const animeSummary = `High school freshman Houtarou Oreki has but one goal: to lead a gray life while conserving as much energy as he can. Unfortunately, his peaceful days come to an end when his older sister, Tomoe, forces him to save the memberless Classics Club from disbandment. Luckily, Oreki's predicament seems to be over when he heads to the clubroom and discovers that his fellow first-year, Eru Chitanda, has already become a member. However, despite his obligation being fulfilled, Oreki finds himself entangled by Chitanda's curious and bubbly personality, soon joining the club of his own volition. Hyouka follows the four members of the Classics Club—including Oreki's friends Satoshi Fukube and Mayaka Ibara—as they, driven by Chitanda's insatiable curiosity, solve the trivial yet intriguing mysteries that permeate their daily lives.`;
 
