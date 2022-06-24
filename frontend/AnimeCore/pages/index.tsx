@@ -44,7 +44,7 @@ const Home: NextPage = () => {
                         effect="fade"
                         direction="horizontal"
                     >
-                        {Array(1)
+                        {Array(10)
                             .fill(1)
                             .map((el, i) => {
                                 return (
