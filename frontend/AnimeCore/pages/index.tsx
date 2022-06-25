@@ -62,40 +62,50 @@ const Home: NextPage = () => {
             </Swiper>
             <Title
                 sx={() => ({
-                    minHeight: '9vh',
+                    minHeight: '10vh',
                     backgroundColor: 'rgb(7, 5, 25)',
                     display: 'flex',
                 })}
             >
                 <Grid
                     grow
+                    justify="space-between"
+                    align="center"
                     sx={() => ({
+                        height: '100%',
                         width: '100%',
                     })}
                 >
                     <Grid.Col
-                        span={3}
+                        span={4}
                         sx={(theme) => ({
-                            display: 'grid',
-                            justifyContent: 'flex-end',
-                            alignItems: 'center',
-
                             [theme.fn.smallerThan('md')]: {
-                                justifyContent: 'center',
+                                display: 'none',
                             },
+                        })}
+                    />
+                    <Grid.Col
+                        span={4}
+                        sx={() => ({
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            height: '10vh',
                         })}
                     >
                         <div
-                            style={{ display: 'flex' }}
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                            }}
                             className="swiper__mainhero__pagination"
                         ></div>
                     </Grid.Col>
                     <Grid.Col
-                        span={1}
+                        span={4}
                         sx={(theme) => ({
                             display: 'flex',
                             justifyContent: 'flex-end',
-                            alignItems: 'center',
 
                             [theme.fn.smallerThan('md')]: {
                                 display: 'none',

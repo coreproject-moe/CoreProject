@@ -177,7 +177,7 @@ export const MainHero = (props: IProps) => {
         if (isLoading) {
             setIsLoading(false);
         }
-    }, 10000);
+    }, 400);
 
     return (
         <div
