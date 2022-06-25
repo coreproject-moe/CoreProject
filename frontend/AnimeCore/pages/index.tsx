@@ -85,7 +85,10 @@ const Home: NextPage = () => {
                             },
                         })}
                     >
-                        <div className="swiper__mainhero__pagination"></div>
+                        <div
+                            style={{ display: 'flex' }}
+                            className="swiper__mainhero__pagination"
+                        ></div>
                     </Grid.Col>
                     <Grid.Col
                         span={1}
