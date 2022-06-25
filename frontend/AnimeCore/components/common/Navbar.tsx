@@ -1,5 +1,6 @@
 import { createStyles, Grid } from '@mantine/core';
-import { memo } from 'react';
+import AnimeCoreLogo from '/public/logos/animecore_logo.svg';
+import ChevronDown from '/public/icons/chevron-down.svg';
 
 const useStyles = createStyles((theme) => ({
     grid: {
@@ -42,21 +43,15 @@ const Navbar = () => {
                 <img alt="" src="/icons/search.svg" width={30} height={30} />
             </Grid.Col>
             <Grid.Col span={4} className={classes.logo}>
-                <img
-                    alt=""
-                    src={'/logos/animecore_logo.svg'}
-                    width={158}
-                    height={22}
-                />
-                <img
-                    style={{
-                        transform: 'translateY(5px)',
-                        color: '#AFAFAF',
-                    }}
-                    alt=""
-                    src="/icons/chevron-down.svg"
+                <AnimeCoreLogo width={165} height={30} />
+                <ChevronDown
                     width={20}
                     height={20}
+                    color="#AFAFAF"
+                    style={{
+                        marginLeft: 10,
+                        transform: 'translateY(5px)',
+                    }}
                 />
             </Grid.Col>
             <Grid.Col span={4} className={classes.profile}>
