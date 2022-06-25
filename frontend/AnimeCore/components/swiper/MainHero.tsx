@@ -177,7 +177,7 @@ export const MainHero = (props: IProps) => {
         if (isLoading) {
             setIsLoading(false);
         }
-    }, 400);
+    }, 10000);
 
     return (
         <div
@@ -358,10 +358,7 @@ export const MainHero = (props: IProps) => {
                         <div className={classes.buttonContainer}>
                             {isLoading ? (
                                 <>
-                                    <Skeleton
-                                        width="60px"
-                                        height={mobile ? 50 : 60}
-                                    />
+                                    <Skeleton width="60px" height={50} />
                                 </>
                             ) : (
                                 <>
@@ -392,11 +389,7 @@ export const MainHero = (props: IProps) => {
                             )}
                             {isLoading ? (
                                 <>
-                                    <Skeleton
-                                        ml="xl"
-                                        height={mobile ? 50 : 60}
-                                        width={120}
-                                    />
+                                    <Skeleton ml="xl" height={50} width={120} />
                                 </>
                             ) : (
                                 <>
