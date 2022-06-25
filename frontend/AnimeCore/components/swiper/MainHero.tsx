@@ -21,7 +21,7 @@ const useStyles = createStyles((theme) => ({
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         paddingTop: theme.spacing.xl * 2,
-        paddingBottom: theme.spacing.xl * 2,
+        paddingBottom: theme.spacing.sm * 2,
         minHeight: '90vh',
         boxShadow: `
             inset 0 4px 1800px rgb(7, 5, 25),
@@ -358,7 +358,10 @@ export const MainHero = (props: IProps) => {
                         <div className={classes.buttonContainer}>
                             {isLoading ? (
                                 <>
-                                    <Skeleton width="60px" />
+                                    <Skeleton
+                                        width="60px"
+                                        height={mobile ? 45 : 60}
+                                    />
                                 </>
                             ) : (
                                 <>
@@ -367,10 +370,11 @@ export const MainHero = (props: IProps) => {
                                         sx={(theme) => ({
                                             backgroundColor:
                                                 theme.colors.yellow[9],
-                                            height: 60,
+                                            height: 45,
 
                                             [theme.fn.largerThan('sm')]: {
                                                 width: 60,
+                                                height: 60,
                                             },
                                         })}
                                         radius="lg"
@@ -388,18 +392,27 @@ export const MainHero = (props: IProps) => {
                             )}
                             {isLoading ? (
                                 <>
-                                    <Skeleton ml="xl" height={60} width={120} />
+                                    <Skeleton
+                                        ml="xl"
+                                        height={mobile ? 45 : 60}
+                                        width={120}
+                                    />
                                 </>
                             ) : (
                                 <>
                                     <Button
                                         ml="xl"
+                                        size={mobile ? 'sm' : 'md'}
                                         color="yellow"
                                         variant="outline"
                                         sx={(theme) => ({
                                             borderWidth: 4,
-                                            height: 60,
                                             borderColor: theme.colors.yellow[9],
+                                            height: 45,
+
+                                            [theme.fn.largerThan('sm')]: {
+                                                height: 60,
+                                            },
                                         })}
                                         radius="lg"
                                         rightIcon={
