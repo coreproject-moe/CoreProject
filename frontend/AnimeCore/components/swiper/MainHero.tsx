@@ -360,7 +360,7 @@ export const MainHero = (props: IProps) => {
                                 <>
                                     <Skeleton
                                         width="60px"
-                                        height={mobile ? 45 : 60}
+                                        height={mobile ? 50 : 60}
                                     />
                                 </>
                             ) : (
@@ -370,7 +370,7 @@ export const MainHero = (props: IProps) => {
                                         sx={(theme) => ({
                                             backgroundColor:
                                                 theme.colors.yellow[9],
-                                            height: 45,
+                                            height: 50,
 
                                             [theme.fn.largerThan('sm')]: {
                                                 width: 60,
@@ -394,7 +394,7 @@ export const MainHero = (props: IProps) => {
                                 <>
                                     <Skeleton
                                         ml="xl"
-                                        height={mobile ? 45 : 60}
+                                        height={mobile ? 50 : 60}
                                         width={120}
                                     />
                                 </>
@@ -402,13 +402,12 @@ export const MainHero = (props: IProps) => {
                                 <>
                                     <Button
                                         ml="xl"
-                                        size={mobile ? 'sm' : 'md'}
                                         color="yellow"
                                         variant="outline"
                                         sx={(theme) => ({
                                             borderWidth: 4,
                                             borderColor: theme.colors.yellow[9],
-                                            height: 45,
+                                            height: 50,
 
                                             [theme.fn.largerThan('sm')]: {
                                                 height: 60,
