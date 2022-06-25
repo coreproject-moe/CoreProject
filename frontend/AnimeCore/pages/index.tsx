@@ -8,7 +8,7 @@ import {
     Navigation,
     Pagination as SwiperPagination,
 } from 'swiper';
-import { Grid, Title, Text } from '@mantine/core';
+import { Progress, Grid, Title, Text, ActionIcon } from '@mantine/core';
 
 const Home: NextPage = () => {
     return (
@@ -91,15 +91,39 @@ const Home: NextPage = () => {
                             justifyContent: 'center',
                             alignItems: 'center',
                             height: '10vh',
+                            flexDirection: 'row',
                         })}
                     >
+                        <Progress
+                            sx={() => ({ width: 100 })}
+                            color="yellow"
+                            value={50}
+                        />
                         <div
                             style={{
                                 display: 'flex',
                                 justifyContent: 'center',
+                                width: 270,
                             }}
                             className="swiper__mainhero__pagination"
                         ></div>
+                        <ActionIcon
+                            color="yellow"
+                            size="lg"
+                            radius="xl"
+                            variant="filled"
+                        >
+                            <img src="icons/chevron-left-black.svg" />
+                        </ActionIcon>
+                        <ActionIcon
+                            color="yellow"
+                            size="lg"
+                            radius="xl"
+                            variant="filled"
+                            ml="xl"
+                        >
+                            <img src="icons/chevron-right-black.svg" />
+                        </ActionIcon>
                     </Grid.Col>
                     <Grid.Col
                         span={4}
