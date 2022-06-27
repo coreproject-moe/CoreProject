@@ -303,11 +303,7 @@ export const MainHero = (props: IProps) => {
                         <>
                             {isLoading ? (
                                 <>
-                                    <Skeleton
-                                        mt="sm"
-                                        width="68vw"
-                                        height={100}
-                                    />
+                                    <Skeleton mt="sm" mb="sm" height={100} />
                                 </>
                             ) : (
                                 <>
