@@ -18,7 +18,6 @@ import {
     ActionIcon,
 } from '@mantine/core';
 import { useState } from 'react';
-import { useMediaQuery } from '@mantine/hooks';
 
 const useStyles = createStyles((theme) => ({
     swiper__mainhero__pagination: {
