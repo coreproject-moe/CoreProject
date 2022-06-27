@@ -145,7 +145,7 @@ interface IProps {
 export const MainHero = (props: IProps) => {
     const { classes } = useStyles();
 
-    const [heroBackgroundImage, setHeroBackgroundImage] = useState('');
+    const [heroBackgroundImage, setHeroBackgroundImage] = useState<string>('');
 
     const mobile = useMediaQuery('(min-width: 0px) and (max-width: 576px)');
     const tablet = useMediaQuery('(min-width: 577px) and (max-width: 768px)');
