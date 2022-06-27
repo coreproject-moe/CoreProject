@@ -1,6 +1,6 @@
 repos:
     - repo: https://github.com/rtts/djhtml
-      rev: 'v1.5.0' # replace with the latest tag on GitHub
+      rev: "v1.5.0" # replace with the latest tag on GitHub
       hooks:
           - id: djhtml
           - id: djcss
@@ -15,7 +15,7 @@ repos:
       rev: 1.7.0
       hooks:
           - id: django-upgrade
-            args: [--target-version, '4.0']
+            args: [--target-version, "4.0"]
 
     - repo: https://github.com/pre-commit/pre-commit-hooks
       rev: v4.3.0
@@ -32,13 +32,13 @@ repos:
             args:
                 [
                     --tab-width,
-                    '4',
+                    "4",
                     --use-tabs,
-                    'false',
+                    "false",
                     --bracket-same-line,
-                    'false',
-                    '--single-quote',
-                    'false',
+                    "false",
+                    "--single-quote",
+                    "false",
                 ]
             additional_dependencies:
                 - prettier@2.6.2
