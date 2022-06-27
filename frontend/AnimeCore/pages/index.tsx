@@ -9,8 +9,30 @@ import {
     Navigation,
     Pagination as SwiperPagination,
 } from 'swiper';
-import { Progress, Grid, Title, Text, ActionIcon } from '@mantine/core';
+import {
+    createStyles,
+    Progress,
+    Grid,
+    Title,
+    Text,
+    ActionIcon,
+} from '@mantine/core';
 import { useState } from 'react';
+import { useMediaQuery } from '@mantine/hooks';
+
+const useStyles = createStyles((theme) => ({
+    swiper__mainhero__pagination: {
+        display: 'flex',
+        justifyContent: 'center',
+
+        [theme.fn.smallerThan('md')]: {
+            width: 143,
+        },
+        [theme.fn.largerThan('md')]: {
+            width: 270,
+        },
+    },
+}));
 
 const Home: NextPage = () => {
     const [swiper, setSwiper] = useState<SwiperType | null>(null);
@@ -19,6 +41,8 @@ const Home: NextPage = () => {
     );
     const [mainHeroSwiperActiveIndex, setMainHeroSwiperActiveIndex] =
         useState<number>(0);
+
+    const { classes } = useStyles();
 
     return (
         <>
@@ -92,7 +116,7 @@ const Home: NextPage = () => {
                     })}
                 >
                     <Grid.Col
-                        span={4}
+                        span={3}
                         sx={(theme) => ({
                             [theme.fn.smallerThan('md')]: {
                                 display: 'none',
@@ -100,7 +124,7 @@ const Home: NextPage = () => {
                         })}
                     />
                     <Grid.Col
-                        span={4}
+                        span={3}
                         sx={() => ({
                             display: 'flex',
                             justifyContent: 'center',
@@ -112,6 +136,7 @@ const Home: NextPage = () => {
                     >
                         <Progress
                             sx={() => ({ width: 100 })}
+                            mr="xl"
                             color="yellow"
                             value={
                                 (100 / (mainHeroSwiper?.slides?.length ?? 0) +
@@ -119,14 +144,15 @@ const Home: NextPage = () => {
                                 mainHeroSwiperActiveIndex
                             }
                         />
-                        <div
-                            style={{
-                                display: 'flex',
-                                justifyContent: 'center',
-                                width: 270,
-                            }}
-                            className="swiper__mainhero__pagination"
-                        ></div>
+                        <div className={classes.swiper__mainhero__pagination}>
+                            <div
+                                style={{
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                }}
+                                className="swiper__mainhero__pagination"
+                            ></div>
+                        </div>
                         <ActionIcon
                             color="yellow"
                             size="lg"
@@ -162,7 +188,7 @@ const Home: NextPage = () => {
                         </ActionIcon>
                     </Grid.Col>
                     <Grid.Col
-                        span={4}
+                        span={3}
                         sx={(theme) => ({
                             display: 'flex',
                             justifyContent: 'flex-end',
