@@ -311,10 +311,10 @@ export const MainHero = (props: IProps) => {
                                     <ScrollArea
                                         style={{ height: 100 }}
                                         onMouseEnter={() => {
-                                            props.swiper?.mousewheel.disable();
+                                            props.swiper?.mousewheel?.disable();
                                         }}
                                         onMouseLeave={() => {
-                                            props.swiper?.mousewheel.enable();
+                                            props.swiper?.mousewheel?.enable();
                                         }}
                                     >
                                         <Text color="gray">{animeSummary}</Text>
