@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import { MainHero } from '../components/swiper/MainHero';
+import type { Swiper as SwiperType } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {
     Autoplay,
@@ -9,8 +10,13 @@ import {
     Pagination as SwiperPagination,
 } from 'swiper';
 import { Progress, Grid, Title, Text, ActionIcon } from '@mantine/core';
+import { useState } from 'react';
 
 const Home: NextPage = () => {
+    const [mainHeroSwiper, setMainHeroSwiper] = useState<SwiperType>();
+    const [mainHeroSwiperActiveIndex, setMainHeroSwiperActiveIndex] =
+        useState<number>(0);
+
     return (
         <>
             <Swiper
@@ -30,6 +36,8 @@ const Home: NextPage = () => {
                             Navigation,
                             SwiperPagination,
                         ]}
+                        effect="fade"
+                        direction="horizontal"
                         autoplay={{
                             delay: 10 * 1000, // 10 secs
                         }}
@@ -41,8 +49,10 @@ const Home: NextPage = () => {
                             enabled: true,
                             el: '.swiper__mainhero__pagination',
                         }}
-                        effect="fade"
-                        direction="horizontal"
+                        onSwiper={setMainHeroSwiper}
+                        onSlideChange={(swiper) => {
+                            setMainHeroSwiperActiveIndex(swiper.realIndex);
+                        }}
                     >
                         {Array(10)
                             .fill(1)
@@ -97,7 +107,11 @@ const Home: NextPage = () => {
                         <Progress
                             sx={() => ({ width: 100 })}
                             color="yellow"
-                            value={50}
+                            value={
+                                (100 / (mainHeroSwiper?.slides?.length ?? 0) +
+                                    1) *
+                                mainHeroSwiperActiveIndex
+                            }
                         />
                         <div
                             style={{
@@ -112,6 +126,9 @@ const Home: NextPage = () => {
                             size="lg"
                             radius="xl"
                             variant="filled"
+                            onClick={() => {
+                                mainHeroSwiper?.slidePrev();
+                            }}
                         >
                             <img src="icons/chevron-left-black.svg" />
                         </ActionIcon>
@@ -121,6 +138,9 @@ const Home: NextPage = () => {
                             radius="xl"
                             variant="filled"
                             ml="xl"
+                            onClick={() => {
+                                mainHeroSwiper?.slideNext();
+                            }}
                         >
                             <img src="icons/chevron-right-black.svg" />
                         </ActionIcon>
