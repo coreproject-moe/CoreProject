@@ -25,7 +25,7 @@ const useStyles = createStyles((theme) => ({
         justifyContent: 'center',
 
         [theme.fn.smallerThan('md')]: {
-            width: 143,
+            width: 150,
         },
         [theme.fn.largerThan('md')]: {
             width: 270,
