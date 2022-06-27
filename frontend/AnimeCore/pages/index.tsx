@@ -106,6 +106,7 @@ const Home: NextPage = () => {
                             justifyContent: 'center',
                             alignItems: 'center',
                             height: '10vh',
+                            maxWidth: '100vw',
                             flexDirection: 'row',
                         })}
                     >
@@ -129,23 +130,33 @@ const Home: NextPage = () => {
                         <ActionIcon
                             color="yellow"
                             size="lg"
-                            radius="xl"
+                            radius="md"
                             variant="filled"
                             onClick={() => {
                                 mainHeroSwiper?.slidePrev();
                             }}
+                            sx={(theme) => ({
+                                [theme.fn.smallerThan('md')]: {
+                                    display: 'none',
+                                },
+                            })}
                         >
                             <img src="icons/chevron-left-black.svg" />
                         </ActionIcon>
                         <ActionIcon
                             color="yellow"
                             size="lg"
-                            radius="xl"
+                            radius="md"
                             variant="filled"
                             ml="xl"
                             onClick={() => {
                                 mainHeroSwiper?.slideNext();
                             }}
+                            sx={(theme) => ({
+                                [theme.fn.smallerThan('md')]: {
+                                    display: 'none',
+                                },
+                            })}
                         >
                             <img src="icons/chevron-right-black.svg" />
                         </ActionIcon>
