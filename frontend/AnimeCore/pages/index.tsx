@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import { MainHero } from '../components/swiper/MainHero';
+import { MainHero } from '@/components/swiper/MainHero';
 import type { Swiper as SwiperType } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import {

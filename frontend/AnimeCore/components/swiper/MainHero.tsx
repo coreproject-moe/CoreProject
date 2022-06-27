@@ -10,7 +10,7 @@ import {
     Skeleton,
     ScrollArea,
 } from '@mantine/core';
-import { Navbar } from '../common/Navbar';
+import { Navbar } from '@/components/common/Navbar';
 import { useMediaQuery } from '@mantine/hooks';
 import type { Swiper as SwiperType } from 'swiper';
 
