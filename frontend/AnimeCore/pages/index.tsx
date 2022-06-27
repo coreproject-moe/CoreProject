@@ -1,7 +1,14 @@
+import {
+    ActionIcon,
+    createStyles,
+    Grid,
+    Progress,
+    Text,
+    Title,
+} from '@mantine/core';
 import type { NextPage } from 'next';
-import { MainHero } from '@/components/swiper/MainHero';
+import { useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
-import { Swiper, SwiperSlide } from 'swiper/react';
 import {
     Autoplay,
     EffectFade,
@@ -9,15 +16,9 @@ import {
     Navigation,
     Pagination as SwiperPagination,
 } from 'swiper';
-import {
-    createStyles,
-    Progress,
-    Grid,
-    Title,
-    Text,
-    ActionIcon,
-} from '@mantine/core';
-import { useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import { MainHero } from '@/components/swiper/MainHero';
 
 const useStyles = createStyles((theme) => ({
     swiper__mainhero__pagination: {
@@ -89,6 +90,8 @@ const Home: NextPage = () => {
                                         <MainHero
                                             key={i}
                                             swiper={swiper}
+                                            animeTitle="Hyouka"
+                                            animeSummary={`High school freshman Houtarou Oreki has but one goal:High school freshman Houtarou Oreki has but one goal: to lead a gray life while conserving as much energy as he can. Unfortunately, his peaceful days come to an end when his older sister, Tomoe, forces him to save the memberless Classics Club from disbandment.\n\nLuckily, Oreki's predicament seems to be over when he heads to the clubroom and discovers that his fellow first-year, Eru Chitanda, has already become a member. However, despite his obligation being fulfilled, Oreki finds himself entangled by Chitanda's curious and bubbly personality, soon joining the club of his own volition.\n\nHyouka follows the four members of the Classics Club—including Oreki's friends Satoshi Fukube and Mayaka Ibara—as they, driven by Chitanda's insatiable curiosity, solve the trivial yet intriguing mysteries that permeate their daily lives.`}
                                             backgroundImage="/images/Hyouka-poster.png"
                                             backgroundBanner="https://media.kitsu.io/anime/poster_images/6686/large.jpg"
                                         />
