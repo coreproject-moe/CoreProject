@@ -22,7 +22,7 @@ const useStyles = createStyles((theme) => ({
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         paddingTop: theme.spacing.xl * 2,
-        paddingBottom: theme.spacing.sm * 2,
+        paddingBottom: theme.spacing.xl * 2,
         minHeight: '90vh',
         boxShadow: `
             inset 0 4px 1800px rgb(7, 5, 25),
@@ -32,6 +32,8 @@ const useStyles = createStyles((theme) => ({
             inset 0 -2vh 140px 2px rgba(7, 5, 25, 0.2)`,
 
         [theme.fn.smallerThan('md')]: {
+            paddingBottom: 20, // Hard Value
+
             minHeight: '30vh',
             maxHeight: '60vh',
             boxShadow: `
@@ -363,7 +365,7 @@ export const MainHero = (props: IProps) => {
                         <div className={classes.buttonContainer}>
                             {isLoading ? (
                                 <>
-                                    <Skeleton width="60px" height={50} />
+                                    <Skeleton width="60px" height={60} />
                                 </>
                             ) : (
                                 <>
@@ -372,11 +374,10 @@ export const MainHero = (props: IProps) => {
                                         sx={(theme) => ({
                                             backgroundColor:
                                                 theme.colors.yellow[9],
-                                            height: 50,
+                                            height: 60,
 
                                             [theme.fn.largerThan('sm')]: {
                                                 width: 60,
-                                                height: 60,
                                             },
                                         })}
                                         radius="lg"
@@ -394,7 +395,7 @@ export const MainHero = (props: IProps) => {
                             )}
                             {isLoading ? (
                                 <>
-                                    <Skeleton ml="xl" height={50} width={120} />
+                                    <Skeleton ml="xl" height={60} width={120} />
                                 </>
                             ) : (
                                 <>
@@ -405,11 +406,7 @@ export const MainHero = (props: IProps) => {
                                         sx={(theme) => ({
                                             borderWidth: 4,
                                             borderColor: theme.colors.yellow[9],
-                                            height: 50,
-
-                                            [theme.fn.largerThan('sm')]: {
-                                                height: 60,
-                                            },
+                                            height: 60,
                                         })}
                                         radius="lg"
                                         rightIcon={
