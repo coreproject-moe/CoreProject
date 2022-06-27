@@ -140,7 +140,7 @@ interface IProps {
     key: number;
     backgroundImage: string;
     backgroundBanner: string;
-    swiper: SwiperType | null;
+    swiper: Partial<SwiperType> | null;
     parentRef?: RefObject<HTMLDivElement>;
 }
 
