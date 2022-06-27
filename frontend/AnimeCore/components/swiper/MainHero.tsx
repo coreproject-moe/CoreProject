@@ -8,10 +8,11 @@ import {
     Badge,
     Button,
     Skeleton,
+    ScrollArea,
 } from '@mantine/core';
 import { Navbar } from '../common/Navbar';
 import { useMediaQuery } from '@mantine/hooks';
-import * as voca from 'voca';
+import type { Swiper as SwiperType } from 'swiper';
 
 const useStyles = createStyles((theme) => ({
     root: {
@@ -137,13 +138,13 @@ interface IProps {
     key: number;
     backgroundImage: string;
     backgroundBanner: string;
+    swiper: SwiperType | null;
     parentRef?: RefObject<HTMLDivElement>;
 }
 
 export const MainHero = (props: IProps) => {
     const { classes } = useStyles();
 
-    const [animeSummaryContent, setAnimeSummaryContent] = useState('');
     const [heroBackgroundImage, setHeroBackgroundImage] = useState('');
 
     const mobile = useMediaQuery('(min-width: 0px) and (max-width: 576px)');
@@ -157,16 +158,12 @@ export const MainHero = (props: IProps) => {
 
     useEffect(() => {
         if (mobile) {
-            setAnimeSummaryContent(voca.truncate(animeSummary, 200)); // 200 words max
             setHeroBackgroundImage(props.backgroundBanner);
         } else if (tablet) {
-            setAnimeSummaryContent(voca.truncate(animeSummary, 350)); // 350 words max
             setHeroBackgroundImage(props.backgroundImage);
         } else if (fullhd) {
-            setAnimeSummaryContent(voca.truncate(animeSummary, 500)); // 500 words max
             setHeroBackgroundImage(props.backgroundImage);
         } else {
-            setAnimeSummaryContent(voca.truncate(animeSummary, 500)); // This is the normal one
             setHeroBackgroundImage(props.backgroundImage); // This is the normal one
         }
     }, [fullhd, tablet, mobile, props.backgroundBanner, props.backgroundImage]);
@@ -311,9 +308,17 @@ export const MainHero = (props: IProps) => {
                                 </>
                             ) : (
                                 <>
-                                    <Text color="gray">
-                                        {animeSummaryContent}
-                                    </Text>
+                                    <ScrollArea
+                                        style={{ height: 100 }}
+                                        onMouseEnter={() => {
+                                            props.swiper?.mousewheel.disable();
+                                        }}
+                                        onMouseLeave={() => {
+                                            props.swiper?.mousewheel.enable();
+                                        }}
+                                    >
+                                        <Text color="gray">{animeSummary}</Text>
+                                    </ScrollArea>
                                 </>
                             )}
                         </>

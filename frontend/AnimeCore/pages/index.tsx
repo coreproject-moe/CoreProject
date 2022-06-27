@@ -13,7 +13,10 @@ import { Progress, Grid, Title, Text, ActionIcon } from '@mantine/core';
 import { useState } from 'react';
 
 const Home: NextPage = () => {
-    const [mainHeroSwiper, setMainHeroSwiper] = useState<SwiperType>();
+    const [swiper, setSwiper] = useState<SwiperType | null>(null);
+    const [mainHeroSwiper, setMainHeroSwiper] = useState<SwiperType | null>(
+        null
+    );
     const [mainHeroSwiperActiveIndex, setMainHeroSwiperActiveIndex] =
         useState<number>(0);
 
@@ -27,6 +30,7 @@ const Home: NextPage = () => {
                 modules={[Mousewheel]}
                 mousewheel={{ sensitivity: 0.001 }}
                 simulateTouch={false}
+                onSwiper={setSwiper}
             >
                 <SwiperSlide>
                     <Swiper
@@ -61,6 +65,7 @@ const Home: NextPage = () => {
                                     <SwiperSlide key={i}>
                                         <MainHero
                                             key={i}
+                                            swiper={swiper}
                                             backgroundImage="/images/Hyouka-poster.png"
                                             backgroundBanner="https://media.kitsu.io/anime/poster_images/6686/large.jpg"
                                         />
