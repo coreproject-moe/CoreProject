@@ -1,6 +1,6 @@
 repos:
     - repo: https://github.com/rtts/djhtml
-      rev: "v1.5.0" # replace with the latest tag on GitHub
+      rev: "v1.5.1" # replace with the latest tag on GitHub
       hooks:
           - id: djhtml
           - id: djcss
@@ -25,7 +25,7 @@ repos:
           - id: check-ast
 
     - repo: https://github.com/pre-commit/mirrors-prettier
-      rev: v2.6.2
+      rev: v2.7.1
       hooks:
           - id: prettier
             files: \.(lock|json|yaml|yml|md)$|./backend/\.(html)$|./frontend/\.(js|jsx|ts|tsx|css|sass|scss|svelte|html)$
@@ -71,9 +71,10 @@ repos:
     #         additional_dependencies:
     #             - eslint@8.16.0
     #             - eslint-config-prettier@8.5.0
-    #             - "@next/eslint-plugin-next@12.1.6"
-    #             - "eslint-config-next@12.1.6"
-    #             - "@typescript-eslint/eslint-plugin@5.25.0"
-    #             - "@typescript-eslint/parser@5.25.0"
+    #             - '@babel/eslint-parser@7.18.2'
+    #             - '@next/eslint-plugin-next@12.1.6'
+    #             - 'eslint-config-next@12.1.6'
+    #             - '@typescript-eslint/eslint-plugin@5.25.0'
+    #             - '@typescript-eslint/parser@5.25.0'
     #             - eslint-plugin-simple-import-sort@7.0.0
     #             - typescript@4.6.4
