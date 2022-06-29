@@ -10,7 +10,7 @@ import {
     Title,
 } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import React, { RefObject,useEffect, useState } from 'react';
+import React, { RefObject, useEffect, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 
 import { Navbar } from '@/components/common/Navbar';
@@ -173,13 +173,11 @@ export const MainHero = (props: IProps) => {
 
     const [isLoading, setIsLoading] = useState(true);
 
-
     setTimeout(() => {
         if (isLoading) {
             setIsLoading(false);
         }
     }, 400);
-
 
     return (
         <div
@@ -390,6 +388,7 @@ export const MainHero = (props: IProps) => {
                                         radius="lg"
                                     >
                                         <img
+                                            alt=""
                                             src="/icons/play.svg"
                                             width={24}
                                             height={24}
@@ -417,7 +416,10 @@ export const MainHero = (props: IProps) => {
                                         })}
                                         radius="lg"
                                         rightIcon={
-                                            <img src="/icons/chevrons-right.svg" />
+                                            <img
+                                                alt=""
+                                                src="/icons/chevrons-right.svg"
+                                            />
                                         }
                                     >
                                         <Text
