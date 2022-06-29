@@ -47,9 +47,12 @@ const Home: NextPage = () => {
 
     useEffect(() => {
         console.log(
-            showNotification({
-                title: 'This site is still WIP',
-                message: `You can check the repository over at <a href="https://github.com/baseplate-admin/CoreProject">Github</a>`,
+            setTimeout(() => {
+                showNotification({
+                
+                    title: 'This site is still WIP',
+                    message: `You can check the repository over at <a href="https://github.com/baseplate-admin/CoreProject">Github</a>`,
+                });
             })
         );
     }, []);
