@@ -18,7 +18,7 @@ import {
     Pagination as SwiperPagination,
 } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-
+import { showNotification } from '@mantine/notifications';
 import { MainHero } from '@/components/swiper/MainHero';
 
 const useStyles = createStyles((theme) => ({
@@ -46,6 +46,12 @@ const Home: NextPage = () => {
     const { classes } = useStyles();
 
     useEffect(() => {}, [mainHeroSwiperActiveIndex, mainHeroSwiperActiveIndex]);
+
+    typeof window !== undefined ??
+        showNotification({
+            title: 'This site is still WIP',
+            message: `You can check the repository over at <a href="https://github.com/baseplate-admin/CoreProject">Github</a>`,
+        });
 
     return (
         <>
