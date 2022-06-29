@@ -70,12 +70,6 @@ repos:
                 ]
             additional_dependencies:
                 - eslint@8.16.0
-                - eslint-config-prettier@8.5.0
-                - '@babel/eslint-parser@7.18.2'
-                - '@next/eslint-plugin-next@12.1.6'
                 - 'next@12.2.0'
-                - 'eslint-config-next@12.1.6'
-                - '@typescript-eslint/eslint-plugin@5.25.0'
-                - '@typescript-eslint/parser@5.25.0'
                 - eslint-plugin-simple-import-sort@7.0.0
                 - typescript@4.6.4
