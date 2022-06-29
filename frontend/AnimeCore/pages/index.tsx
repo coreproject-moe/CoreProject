@@ -169,7 +169,7 @@ const Home: NextPage = () => {
                                 },
                             })}
                         >
-                            <img src="icons/chevron-left-black.svg" />
+                            <img src="icons/chevron-left-black.svg" alt="" />
                         </ActionIcon>
                         <ActionIcon
                             color="yellow"
@@ -186,7 +186,7 @@ const Home: NextPage = () => {
                                 },
                             })}
                         >
-                            <img src="icons/chevron-right-black.svg" />
+                            <img src="icons/chevron-right-black.svg" alt="" />
                         </ActionIcon>
                     </Grid.Col>
                     <Grid.Col
@@ -200,7 +200,12 @@ const Home: NextPage = () => {
                             },
                         })}
                     >
-                        <img width={24} height={24} src="/icons/mouse.svg" />
+                        <img
+                            width={24}
+                            height={24}
+                            src="/icons/mouse.svg"
+                            alt=""
+                        />
                         <Text px="xl" color="gray">
                             scroll below
                         </Text>
