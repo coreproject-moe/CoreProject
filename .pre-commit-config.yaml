@@ -1,6 +1,6 @@
 repos:
     - repo: https://github.com/rtts/djhtml
-      rev: 'v1.5.1' # replace with the latest tag on GitHub
+      rev: "v1.5.1" # replace with the latest tag on GitHub
       hooks:
           - id: djhtml
           - id: djcss
@@ -15,7 +15,7 @@ repos:
       rev: 1.7.0
       hooks:
           - id: django-upgrade
-            args: [--target-version, '4.0']
+            args: [--target-version, "4.0"]
 
     - repo: https://github.com/pre-commit/pre-commit-hooks
       rev: v4.3.0
@@ -32,13 +32,13 @@ repos:
             args:
                 [
                     --tab-width,
-                    '4',
+                    "4",
                     --use-tabs,
-                    'false',
+                    "false",
                     --bracket-same-line,
-                    'false',
-                    '--single-quote',
-                    'false',
+                    "false",
+                    "--single-quote",
+                    "false",
                 ]
             additional_dependencies:
                 - prettier@2.6.2
@@ -70,12 +70,7 @@ repos:
                 ]
             additional_dependencies:
                 - eslint@8.16.0
-                - eslint-config-prettier@8.5.0
-                - '@babel/eslint-parser@7.18.2'
-                - '@next/eslint-plugin-next@12.1.6'
-                - 'next@12.2.0'
-                - 'eslint-config-next@12.1.6'
-                - '@typescript-eslint/eslint-plugin@5.25.0'
-                - '@typescript-eslint/parser@5.25.0'
+                - "next@12.2.0"
+                - "eslint-config-next@12.1.6"
                 - eslint-plugin-simple-import-sort@7.0.0
                 - typescript@4.6.4
