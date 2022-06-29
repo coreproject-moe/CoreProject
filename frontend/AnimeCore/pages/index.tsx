@@ -5,6 +5,7 @@ import {
     Progress,
     Text,
     Title,
+    Notification,
 } from '@mantine/core';
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
@@ -48,6 +49,13 @@ const Home: NextPage = () => {
 
     return (
         <>
+            <Notification title="This site is still WIP">
+                You can check the repository over at
+                <a href="https://github.com/baseplate-admin/CoreProject">
+                    Github
+                </a>
+                
+            </Notification>
             <Swiper
                 speed={600}
                 spaceBetween={0}
