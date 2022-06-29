@@ -148,6 +148,9 @@ interface IProps {
     key?: number;
     animeTitle: string;
     animeSummary: string;
+    animeEpisodeCount: number;
+    animeStudio: string;
+    animeAirTime: string;
     backgroundImage: string;
     backgroundBanner: string;
     swiper: Partial<SwiperType> | null;
@@ -298,7 +301,7 @@ export const MainHero = (props: IProps) => {
                                             component="span"
                                             color="white"
                                         >
-                                            22 eps
+                                            {props.animeEpisodeCount} eps
                                         </Text>
                                         <Text
                                             className={classes.info}
@@ -312,10 +315,10 @@ export const MainHero = (props: IProps) => {
                                             component="span"
                                             color="white"
                                         >
-                                            Spring 2012
+                                            {props.animeAirTime}
                                         </Text>
                                         <Text component="span" color="white">
-                                            Kyoto Animations
+                                            {props.animeStudio}
                                         </Text>
                                     </>
                                 )}
