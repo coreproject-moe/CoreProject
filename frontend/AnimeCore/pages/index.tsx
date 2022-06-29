@@ -6,6 +6,7 @@ import {
     Text,
     Title,
 } from '@mantine/core';
+import { showNotification } from '@mantine/notifications';
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
@@ -17,7 +18,7 @@ import {
     Pagination as SwiperPagination,
 } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { showNotification } from '@mantine/notifications';
+
 import { MainHero } from '@/components/swiper/MainHero';
 
 const useStyles = createStyles((theme) => ({
