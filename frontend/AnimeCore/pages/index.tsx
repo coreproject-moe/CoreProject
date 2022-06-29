@@ -2,6 +2,7 @@ import {
     ActionIcon,
     createStyles,
     Grid,
+    Notification,
     Progress,
     Text,
     Title,
@@ -48,12 +49,6 @@ const Home: NextPage = () => {
 
     return (
         <>
-            <Notification title="This site is still WIP">
-                You can check the repository over at
-                <a href="https://github.com/baseplate-admin/CoreProject">
-                    Github
-                </a>
-            </Notification>
             <Swiper
                 speed={600}
                 spaceBetween={0}
