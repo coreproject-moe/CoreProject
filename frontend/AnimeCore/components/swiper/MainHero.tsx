@@ -145,7 +145,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface IProps {
-    key: number;
+    key?: number;
     animeTitle: string;
     animeSummary: string;
     backgroundImage: string;

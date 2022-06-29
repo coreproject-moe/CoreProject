@@ -82,22 +82,24 @@ const Home: NextPage = () => {
                             setMainHeroSwiperActiveIndex(swiper.realIndex);
                         }}
                     >
-                        {Array(10)
-                            .fill(1)
-                            .map((el, i) => {
-                                return (
-                                    <SwiperSlide key={i}>
-                                        <MainHero
-                                            key={i}
-                                            swiper={swiper}
-                                            animeTitle="Hyouka"
-                                            animeSummary={`High school freshman Houtarou Oreki has but one goal:High school freshman Houtarou Oreki has but one goal: to lead a gray life while conserving as much energy as he can. Unfortunately, his peaceful days come to an end when his older sister, Tomoe, forces him to save the memberless Classics Club from disbandment.\n\nLuckily, Oreki's predicament seems to be over when he heads to the clubroom and discovers that his fellow first-year, Eru Chitanda, has already become a member. However, despite his obligation being fulfilled, Oreki finds himself entangled by Chitanda's curious and bubbly personality, soon joining the club of his own volition.\n\nHyouka follows the four members of the Classics Club—including Oreki's friends Satoshi Fukube and Mayaka Ibara—as they, driven by Chitanda's insatiable curiosity, solve the trivial yet intriguing mysteries that permeate their daily lives.`}
-                                            backgroundImage="/images/Hyouka-poster.png"
-                                            backgroundBanner="https://media.kitsu.io/anime/poster_images/6686/large.jpg"
-                                        />
-                                    </SwiperSlide>
-                                );
-                            })}
+                        <SwiperSlide>
+                            <MainHero
+                                swiper={swiper}
+                                animeTitle="Hyouka"
+                                animeSummary={`High school freshman Houtarou Oreki has but one goal:High school freshman Houtarou Oreki has but one goal: to lead a gray life while conserving as much energy as he can. Unfortunately, his peaceful days come to an end when his older sister, Tomoe, forces him to save the memberless Classics Club from disbandment.\n\nLuckily, Oreki's predicament seems to be over when he heads to the clubroom and discovers that his fellow first-year, Eru Chitanda, has already become a member. However, despite his obligation being fulfilled, Oreki finds himself entangled by Chitanda's curious and bubbly personality, soon joining the club of his own volition.\n\nHyouka follows the four members of the Classics Club—including Oreki's friends Satoshi Fukube and Mayaka Ibara—as they, driven by Chitanda's insatiable curiosity, solve the trivial yet intriguing mysteries that permeate their daily lives.`}
+                                backgroundImage="/images/Hyouka-poster.png"
+                                backgroundBanner="https://media.kitsu.io/anime/poster_images/6686/large.jpg"
+                            />
+                        </SwiperSlide>
+                        <SwiperSlide>
+                            <MainHero
+                                swiper={swiper}
+                                animeTitle="KonoSuba"
+                                animeSummary={`After dying a laughable and pathetic death on his way back from buying a game, high school student and recluse Kazuma Satou finds himself sitting before a beautiful but obnoxious goddess named Aqua. She provides the NEET with two options: continue on to heaven or reincarnate in every gamer's dream—a real fantasy world! Choosing to start a new life, Kazuma is quickly tasked with defeating a Demon King who is terrorizing villages. But before he goes, he can choose one item of any kind to aid him in his quest, and the future hero selects Aqua. But Kazuma has made a grave mistake—Aqua is completely useless!\n\nUnfortunately, their troubles don't end here; it turns out that living in such a world is far different from how it plays out in a game. Instead of going on a thrilling adventure, the duo must first work to pay for their living expenses. Indeed, their misfortunes have only just begun!`}
+                                backgroundImage="/images/Konosuba-poster.jpg"
+                                backgroundBanner="https://media.kitsu.io/anime/poster_images/10941/large.jpg"
+                            />
+                        </SwiperSlide>
                     </Swiper>
                 </SwiperSlide>
             </Swiper>
