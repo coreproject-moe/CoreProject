@@ -7,7 +7,7 @@ import {
     Title,
 } from '@mantine/core';
 import type { NextPage } from 'next';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 import {
     Autoplay,
@@ -43,6 +43,8 @@ const Home: NextPage = () => {
         useState<number>(0);
 
     const { classes } = useStyles();
+
+    useEffect(() => {}, [mainHeroSwiperActiveIndex, mainHeroSwiperActiveIndex]);
 
     return (
         <>
@@ -154,9 +156,9 @@ const Home: NextPage = () => {
                             mr="xl"
                             color="yellow"
                             value={
-                                (100 / (mainHeroSwiper?.slides?.length ?? 0) +
-                                    1) *
-                                mainHeroSwiperActiveIndex
+                                ((mainHeroSwiperActiveIndex + 1) /
+                                    (mainHeroSwiper?.slides?.length ?? 0)) *
+                                100
                             }
                         />
                         <div className={classes.swiper__mainhero__pagination}>
