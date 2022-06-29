@@ -91,6 +91,7 @@ const Home: NextPage = () => {
                                 backgroundBanner="https://media.kitsu.io/anime/poster_images/6686/large.jpg"
                             />
                         </SwiperSlide>
+
                         <SwiperSlide>
                             <MainHero
                                 swiper={swiper}
@@ -98,6 +99,16 @@ const Home: NextPage = () => {
                                 animeSummary={`After dying a laughable and pathetic death on his way back from buying a game, high school student and recluse Kazuma Satou finds himself sitting before a beautiful but obnoxious goddess named Aqua. She provides the NEET with two options: continue on to heaven or reincarnate in every gamer's dream—a real fantasy world! Choosing to start a new life, Kazuma is quickly tasked with defeating a Demon King who is terrorizing villages. But before he goes, he can choose one item of any kind to aid him in his quest, and the future hero selects Aqua. But Kazuma has made a grave mistake—Aqua is completely useless!\n\nUnfortunately, their troubles don't end here; it turns out that living in such a world is far different from how it plays out in a game. Instead of going on a thrilling adventure, the duo must first work to pay for their living expenses. Indeed, their misfortunes have only just begun!`}
                                 backgroundImage="/images/Konosuba-poster.jpg"
                                 backgroundBanner="https://media.kitsu.io/anime/poster_images/10941/large.jpg"
+                            />
+                        </SwiperSlide>
+
+                        <SwiperSlide>
+                            <MainHero
+                                swiper={swiper}
+                                animeTitle="Ajin"
+                                animeSummary={`Mysterious immortal humans known as "Ajin" first appeared 17 years ago in Africa. Upon their discovery, they were labeled as a threat to mankind, as they might use their powers for evil and were incapable of being destroyed. Since then, whenever an Ajin is found within society, they are to be arrested and taken into custody immediately.\n\nStudying hard to become a doctor, Kei Nagai is a high schooler who knows very little about Ajin, only having seen them appear in the news every now and then. Students are taught that these creatures are not considered to be human, but Kei doesn't pay much attention in class. As a result, his perilously little grasp on this subject proves to be completely irrelevant when he survives an accident that was supposed to claim his life, signaling his rebirth as an Ajin and the start of his days of torment. However, as he finds himself alone on the run from the entire world, Kei soon realizes that more of his species may be a lot closer than he thinks.`}
+                                backgroundImage="/images/Ajin-poster.jpg"
+                                backgroundBanner="https://media.kitsu.io/anime/poster_images/11368/large.jpg"
                             />
                         </SwiperSlide>
                     </Swiper>

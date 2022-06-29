@@ -14,6 +14,7 @@ import {
 import { useMediaQuery } from '@mantine/hooks';
 import React, { RefObject, useEffect, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
+import { SwiperSlide } from 'swiper/react';
 
 import { Navbar } from '@/components/common/Navbar';
 
