@@ -2,10 +2,10 @@ import {
     ActionIcon,
     createStyles,
     Grid,
+    Notification,
     Progress,
     Text,
     Title,
-    Notification,
 } from '@mantine/core';
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
@@ -54,7 +54,7 @@ const Home: NextPage = () => {
                 <a href="https://github.com/baseplate-admin/CoreProject">
                     Github
                 </a>
-                
+
             </Notification>
             <Swiper
                 speed={600}
