@@ -2,7 +2,6 @@ import {
     ActionIcon,
     createStyles,
     Grid,
-    Notification,
     Progress,
     Text,
     Title,

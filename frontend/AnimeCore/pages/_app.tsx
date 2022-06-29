@@ -2,9 +2,9 @@ import '../styles/globals.scss';
 
 import { MantineProvider } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
+import { NotificationsProvider } from '@mantine/notifications';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
-import { NotificationsProvider } from '@mantine/notifications';
 
 export default function App(props: AppProps) {
     const { Component, pageProps } = props;
