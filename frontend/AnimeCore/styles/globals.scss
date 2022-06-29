@@ -19,6 +19,10 @@
     }
 }
 
+body{
+    overscroll-behavior: contain;
+}
+
 // Fonts
 @font-face {
     font-family: "Kokoro";
