@@ -341,13 +341,15 @@ export const MainHero = (props: IProps) => {
                                                 props.swiper?.mousewheel?.disable();
                                             }}
                                             onTouchStart={() => {
-                                                props.swiper?.mousewheel?.disable();
+                                                props.swiper?.allowTouchMove =
+                                                    false;
                                             }}
                                             onMouseLeave={() => {
                                                 props.swiper?.mousewheel?.enable();
                                             }}
                                             onTouchEnd={() => {
-                                                props.swiper?.mousewheel?.enable();
+                                                props.swiper?.allowTouchMove =
+                                                    true;
                                             }}
                                             offsetScrollbars={true}
                                         >
