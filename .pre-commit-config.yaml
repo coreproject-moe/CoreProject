@@ -74,4 +74,4 @@ repos:
                 - "eslint-config-next@12.1.6"
                 - eslint-plugin-simple-import-sort@7.0.0
                 - typescript@4.7.4
-                - '@emotion/eslint-plugin@11.7.0'
+                - "@emotion/eslint-plugin@11.7.0"

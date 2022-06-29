@@ -1,6 +1,6 @@
 {
     "extends": ["next/core-web-vitals"],
-    "plugins": ["simple-import-sort","@emotion"],
+    "plugins": ["simple-import-sort", "@emotion"],
     "rules": {
         "simple-import-sort/imports": "error",
         "simple-import-sort/exports": "error",
