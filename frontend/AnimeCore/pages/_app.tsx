@@ -1,6 +1,7 @@
 import '../styles/globals.scss';
 
 import { MantineProvider } from '@mantine/core';
+import { ModalsProvider } from '@mantine/modals';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 
@@ -66,7 +67,9 @@ export default function App(props: AppProps) {
                     },
                 }}
             >
-                <Component {...pageProps} />
+                <ModalsProvider>
+                    <Component {...pageProps} />
+                </ModalsProvider>
             </MantineProvider>
         </>
     );

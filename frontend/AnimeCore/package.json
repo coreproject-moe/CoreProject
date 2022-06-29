@@ -12,6 +12,7 @@
     "dependencies": {
         "@mantine/core": "^4.2.11",
         "@mantine/hooks": "^4.2.6",
+        "@mantine/modals": "^4.2.11",
         "@mantine/next": "^4.2.11",
         "@mantine/rte": "^4.2.11",
         "next": "12.2.0",
