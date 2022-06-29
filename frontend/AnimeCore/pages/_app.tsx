@@ -68,11 +68,11 @@ export default function App(props: AppProps) {
                     },
                 }}
             >
-                <NotificationsProvider>
-                    <ModalsProvider>
+                <ModalsProvider>
+                    <NotificationsProvider>
                         <Component {...pageProps} />
-                    </ModalsProvider>
-                </NotificationsProvider>
+                    </NotificationsProvider>
+                </ModalsProvider>
             </MantineProvider>
         </>
     );
