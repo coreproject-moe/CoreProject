@@ -15,6 +15,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { MainHero } from '@/components/swiper/MainHero';
 
 const Home: NextPage = () => {
+    const SWIPER_DELAY = 10 * 1000; // Miliseconds
+
     const [swiper, setSwiper] = useState<SwiperType | null>(null);
     const [mainHeroSwiper, setMainHeroSwiper] = useState<SwiperType | null>(
         null
@@ -23,11 +25,10 @@ const Home: NextPage = () => {
 
     // Expire after 10 seconds
     const time = new Date();
-    time.setSeconds(time.getSeconds() + 10);
+    time.setSeconds(time.getSeconds() + SWIPER_DELAY / 1000);
 
     const { seconds, restart, start } = useTimer({
         expiryTimestamp: time,
-        autoStart: true,
         onExpire: () => {
             swiper?.slideNext(); // Hack to get swiper slide to next
         },
@@ -69,7 +70,7 @@ const Home: NextPage = () => {
                         effect="fade"
                         direction="horizontal"
                         autoplay={{
-                            delay: 10 * 1000, // 10 secs
+                            delay: SWIPER_DELAY,
                         }}
                         navigation={{
                             nextEl: '.mainhero__next__el',
