@@ -1,6 +1,7 @@
 import { showNotification } from '@mantine/notifications';
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
+import { useTimer } from 'react-timer-hook';
 import type { Swiper as SwiperType } from 'swiper';
 import {
     Autoplay,
@@ -18,9 +19,23 @@ const Home: NextPage = () => {
     const [mainHeroSwiper, setMainHeroSwiper] = useState<SwiperType | null>(
         null
     );
+    const [sliderProgress, setSliderProgress] = useState<number>(0);
 
     const [mainHeroSwiperActiveIndex, setMainHeroSwiperActiveIndex] =
         useState<number>(0);
+
+    // Expire after 10 seconds
+    const time = new Date();
+    time.setSeconds(time.getSeconds() + 10);
+
+    const { seconds, restart, start } = useTimer({
+        expiryTimestamp: time,
+        autoStart: true,
+    });
+
+    useEffect(() => {
+        setSliderProgress((100 / 10) * (10 - seconds));
+    }, [seconds]);
 
     useEffect(() => {
         setTimeout(() => {
@@ -64,8 +79,12 @@ const Home: NextPage = () => {
                             enabled: true,
                             el: '.swiper__mainhero__pagination',
                         }}
+                        onInit={() => {
+                            start();
+                        }}
                         onSwiper={setMainHeroSwiper}
                         onSlideChange={(swiper) => {
+                            restart(time, true);
                             setMainHeroSwiperActiveIndex(swiper.realIndex);
                         }}
                     >
@@ -73,6 +92,7 @@ const Home: NextPage = () => {
                             <MainHero
                                 swiper={swiper}
                                 mainHeroSwiper={mainHeroSwiper}
+                                sliderProgress={sliderProgress}
                                 animeEpisodeCount={22}
                                 animeStudio="Kyoto Animations"
                                 animeTitle="Hyouka"
@@ -86,6 +106,7 @@ const Home: NextPage = () => {
                         <SwiperSlide>
                             <MainHero
                                 swiper={swiper}
+                                sliderProgress={sliderProgress}
                                 mainHeroSwiper={mainHeroSwiper}
                                 animeEpisodeCount={10}
                                 animeStudio="Studio DEEN"
@@ -100,6 +121,7 @@ const Home: NextPage = () => {
                         <SwiperSlide>
                             <MainHero
                                 swiper={swiper}
+                                sliderProgress={sliderProgress}
                                 mainHeroSwiper={mainHeroSwiper}
                                 animeEpisodeCount={13}
                                 animeStudio="Polygon Pictures"

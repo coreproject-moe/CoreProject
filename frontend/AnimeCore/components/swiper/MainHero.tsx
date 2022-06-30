@@ -19,7 +19,6 @@ import React, { RefObject, useEffect, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 
 import { Navbar } from '@/components/common/Navbar';
-
 const useStyles = createStyles((theme) => ({
     box: {
         minHeight: '100Vh',
@@ -169,6 +168,7 @@ interface IProps {
     backgroundBanner: string;
     swiper: Partial<SwiperType> | null;
     mainHeroSwiper: SwiperType | null; // Parent Swiper component ( replace with hook if possible )
+    sliderProgress: number;
     parentRef?: RefObject<HTMLDivElement>;
 }
 
@@ -183,6 +183,8 @@ export const MainHero = (props: IProps) => {
 
     // Use SWR to fetch data from backend
     // Use (props.key) to get id.
+
+    // Hook to update slider progress
 
     useEffect(() => {
         if (mobile) {
@@ -529,7 +531,7 @@ export const MainHero = (props: IProps) => {
                                 sx={() => ({ width: 100 })}
                                 mr="xl"
                                 color="yellow"
-                                value={1}
+                                value={props?.sliderProgress}
                             />
                             <div
                                 className={classes.swiper__mainhero__pagination}
