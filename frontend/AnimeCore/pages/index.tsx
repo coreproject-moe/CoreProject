@@ -1,11 +1,3 @@
-import {
-    ActionIcon,
-    createStyles,
-    Grid,
-    Progress,
-    Text,
-    Title,
-} from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
@@ -21,29 +13,14 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { MainHero } from '@/components/swiper/MainHero';
 
-const useStyles = createStyles((theme) => ({
-    swiper__mainhero__pagination: {
-        display: 'flex',
-        justifyContent: 'center',
-
-        [theme.fn.smallerThan('md')]: {
-            width: 150,
-        },
-        [theme.fn.largerThan('md')]: {
-            width: 270,
-        },
-    },
-}));
-
 const Home: NextPage = () => {
     const [swiper, setSwiper] = useState<SwiperType | null>(null);
     const [mainHeroSwiper, setMainHeroSwiper] = useState<SwiperType | null>(
         null
     );
+
     const [mainHeroSwiperActiveIndex, setMainHeroSwiperActiveIndex] =
         useState<number>(0);
-
-    const { classes } = useStyles();
 
     useEffect(() => {
         setTimeout(() => {
@@ -95,6 +72,7 @@ const Home: NextPage = () => {
                         <SwiperSlide>
                             <MainHero
                                 swiper={swiper}
+                                mainHeroSwiper={mainHeroSwiper}
                                 animeEpisodeCount={22}
                                 animeStudio="Kyoto Animations"
                                 animeTitle="Hyouka"
@@ -108,6 +86,7 @@ const Home: NextPage = () => {
                         <SwiperSlide>
                             <MainHero
                                 swiper={swiper}
+                                mainHeroSwiper={mainHeroSwiper}
                                 animeEpisodeCount={10}
                                 animeStudio="Studio DEEN"
                                 animeTitle="KonoSuba"
@@ -121,6 +100,7 @@ const Home: NextPage = () => {
                         <SwiperSlide>
                             <MainHero
                                 swiper={swiper}
+                                mainHeroSwiper={mainHeroSwiper}
                                 animeEpisodeCount={13}
                                 animeStudio="Polygon Pictures"
                                 animeAirTime="Winter 2016"
@@ -133,117 +113,6 @@ const Home: NextPage = () => {
                     </Swiper>
                 </SwiperSlide>
             </Swiper>
-            <Title
-                sx={() => ({
-                    minHeight: '10vh',
-                    backgroundColor: 'rgb(7, 5, 25)',
-                    display: 'flex',
-                })}
-            >
-                <Grid
-                    grow
-                    justify="space-between"
-                    align="center"
-                    sx={() => ({
-                        height: '100%',
-                        width: '100%',
-                    })}
-                >
-                    <Grid.Col
-                        span={3}
-                        sx={(theme) => ({
-                            [theme.fn.smallerThan('md')]: {
-                                display: 'none',
-                            },
-                        })}
-                    />
-                    <Grid.Col
-                        span={3}
-                        sx={() => ({
-                            display: 'flex',
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            height: '10vh',
-                            maxWidth: '100vw',
-                            flexDirection: 'row',
-                        })}
-                    >
-                        <Progress
-                            sx={() => ({ width: 100 })}
-                            mr="xl"
-                            color="yellow"
-                            value={
-                                ((mainHeroSwiperActiveIndex + 1) /
-                                    (mainHeroSwiper?.slides?.length ?? 0)) *
-                                100
-                            }
-                        />
-                        <div className={classes.swiper__mainhero__pagination}>
-                            <div
-                                style={{
-                                    display: 'flex',
-                                    justifyContent: 'center',
-                                }}
-                                className="swiper__mainhero__pagination"
-                            ></div>
-                        </div>
-                        <ActionIcon
-                            color="yellow"
-                            size="lg"
-                            radius="md"
-                            variant="filled"
-                            onClick={() => {
-                                mainHeroSwiper?.slidePrev();
-                            }}
-                            sx={(theme) => ({
-                                [theme.fn.smallerThan('md')]: {
-                                    display: 'none',
-                                },
-                            })}
-                        >
-                            <img src="icons/chevron-left-black.svg" alt="" />
-                        </ActionIcon>
-                        <ActionIcon
-                            color="yellow"
-                            size="lg"
-                            radius="md"
-                            variant="filled"
-                            ml="xl"
-                            onClick={() => {
-                                mainHeroSwiper?.slideNext();
-                            }}
-                            sx={(theme) => ({
-                                [theme.fn.smallerThan('md')]: {
-                                    display: 'none',
-                                },
-                            })}
-                        >
-                            <img src="icons/chevron-right-black.svg" alt="" />
-                        </ActionIcon>
-                    </Grid.Col>
-                    <Grid.Col
-                        span={3}
-                        sx={(theme) => ({
-                            display: 'flex',
-                            justifyContent: 'flex-end',
-
-                            [theme.fn.smallerThan('md')]: {
-                                display: 'none',
-                            },
-                        })}
-                    >
-                        <img
-                            width={24}
-                            height={24}
-                            src="/icons/mouse.svg"
-                            alt=""
-                        />
-                        <Text px="xl" color="gray">
-                            scroll below
-                        </Text>
-                    </Grid.Col>
-                </Grid>
-            </Title>
         </>
     );
 };
