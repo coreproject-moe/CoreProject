@@ -21,9 +21,6 @@ const Home: NextPage = () => {
     );
     const [sliderProgress, setSliderProgress] = useState<number>(0);
 
-    const [mainHeroSwiperActiveIndex, setMainHeroSwiperActiveIndex] =
-        useState<number>(0);
-
     // Expire after 10 seconds
     const time = new Date();
     time.setSeconds(time.getSeconds() + 10);
@@ -83,9 +80,8 @@ const Home: NextPage = () => {
                             start();
                         }}
                         onSwiper={setMainHeroSwiper}
-                        onSlideChange={(swiper) => {
+                        onSlideChange={() => {
                             restart(time, true);
-                            setMainHeroSwiperActiveIndex(swiper.realIndex);
                         }}
                     >
                         <SwiperSlide>
