@@ -29,7 +29,7 @@ const Home: NextPage = () => {
         expiryTimestamp: time,
         autoStart: true,
         onExpire: () => {
-            swiper?.slideNext();
+            swiper?.slideNext(); // Hack to get swiper slide to next
         },
     });
 
