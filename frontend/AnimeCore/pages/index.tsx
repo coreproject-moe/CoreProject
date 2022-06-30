@@ -28,6 +28,9 @@ const Home: NextPage = () => {
     const { seconds, restart, start } = useTimer({
         expiryTimestamp: time,
         autoStart: true,
+        onExpire: () => {
+            swiper?.slideNext();
+        },
     });
 
     useEffect(() => {
