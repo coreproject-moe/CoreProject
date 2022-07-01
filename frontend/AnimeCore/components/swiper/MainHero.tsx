@@ -31,7 +31,6 @@ const useStyles = createStyles((theme) => ({
     },
     root: {
         flexDirection: 'column',
-        backgroundColor: 'black',
         paddingTop: theme.spacing.xl * 2,
         paddingBottom: theme.spacing.xl * 2,
         height: 'inherit',
@@ -212,6 +211,7 @@ export const MainHero = (props: IProps) => {
                 src={heroBackgroundImage}
                 style={{
                     display: 'flex', // This is a weird hack to make the items align properly
+                    backgroundColor: 'black', // Stupid Mantine
                 }}
             >
                 <Navbar />
