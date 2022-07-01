@@ -1,7 +1,6 @@
 import { showNotification } from '@mantine/notifications';
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
-import { useTimer } from 'react-timer-hook';
 import type { Swiper as SwiperType } from 'swiper';
 import {
     Autoplay,
@@ -11,6 +10,7 @@ import {
     Pagination as SwiperPagination,
 } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useCountdownTimer } from 'use-countdown-timer';
 
 import { MainHero } from '@/components/swiper/MainHero';
 
@@ -24,19 +24,9 @@ const Home: NextPage = () => {
     const [sliderProgress, setSliderProgress] = useState<number>(0);
 
     // Expire after 10 seconds
-    const time = new Date();
-    time.setSeconds(time.getSeconds() + SWIPER_DELAY / 1000);
-
-    const { seconds, restart, start } = useTimer({
-        expiryTimestamp: time,
-        onExpire: () => {
-            swiper?.slideNext(); // Hack to get swiper slide to next
-        },
+    const { countdown, start, reset } = useCountdownTimer({
+        timer: SWIPER_DELAY,
     });
-
-    useEffect(() => {
-        setSliderProgress((100 / 10) * (10 - seconds));
-    }, [seconds]);
 
     useEffect(() => {
         setTimeout(() => {
@@ -86,11 +76,13 @@ const Home: NextPage = () => {
                             el: '.swiper__mainhero__pagination',
                         }}
                         onInit={() => {
+                            // Start
                             start();
                         }}
                         onSwiper={setMainHeroSwiper}
                         onSlideChange={() => {
-                            restart(time, true);
+                            // Restart
+                            reset();
                         }}
                     >
                         <SwiperSlide>
