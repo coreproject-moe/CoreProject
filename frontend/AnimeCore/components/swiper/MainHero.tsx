@@ -29,12 +29,12 @@ const useStyles = createStyles((theme) => ({
             maxHeight: '70vh',
         },
     },
-
     root: {
         flexDirection: 'column',
         paddingTop: theme.spacing.xl * 2,
         paddingBottom: theme.spacing.xl * 2,
         height: 'inherit',
+        color: 'black',
 
         boxShadow: `
             inset 0 4px calc(10vh + 1800px) rgb(7, 5, 25),
@@ -207,12 +207,12 @@ export const MainHero = (props: IProps) => {
 
     return (
         <Box className={classes.box}>
-            <div
+            <BackgroundImage
                 className={classes.root}
+                src={heroBackgroundImage}
                 style={{
                     display: 'flex', // This is a weird hack to make the items align properly
                     backgroundColor: 'black', // Stupid Mantine
-                    backgroundImage: `url(${heroBackgroundImage})`,
                 }}
             >
                 <Navbar />
@@ -607,7 +607,7 @@ export const MainHero = (props: IProps) => {
                         </Grid.Col>
                     </Grid>
                 </Title>
-            </div>
+            </BackgroundImage>
         </Box>
     );
 };
