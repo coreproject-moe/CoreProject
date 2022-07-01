@@ -1,9 +1,24 @@
 {
     "extends": ["next/core-web-vitals"],
-    "plugins": ["simple-import-sort", "@emotion"],
+    "plugins": ["simple-import-sort", "unused-imports", "@emotion"],
     "rules": {
+        /** Disable stupid warning */
+        "@next/next/no-img-element": "off",
+        /** Sort imports */
         "simple-import-sort/imports": "error",
         "simple-import-sort/exports": "error",
-        "@next/next/no-img-element": "off"
+
+        /** Remove unused imports */
+        "no-unused-vars": "off", // or "@typescript-eslint/no-unused-vars": "off",
+        "unused-imports/no-unused-imports": "warn",
+        "unused-imports/no-unused-vars": [
+            "warn",
+            {
+                "vars": "all",
+                "varsIgnorePattern": "^_",
+                "args": "after-used",
+                "argsIgnorePattern": "^_"
+            }
+        ]
     }
 }
