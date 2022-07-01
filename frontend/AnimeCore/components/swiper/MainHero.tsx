@@ -166,8 +166,10 @@ interface IProps {
     animeAirTime: string;
     backgroundImage: string;
     backgroundBanner: string;
-    swiper: Partial<SwiperType> | null;
-    mainHeroSwiper: SwiperType | null; // Parent Swiper component ( replace with hook if possible )
+    swiper: Partial<SwiperType>;
+    mainHeroSwiper: Partial<SwiperType>; // Parent Swiper component ( replace with hook if possible )
+    pause?: () => void;
+    resume?: () => void;
     sliderProgress: number;
 }
 
@@ -550,7 +552,7 @@ export const MainHero = (props: IProps) => {
                                 radius="md"
                                 variant="filled"
                                 onClick={() => {
-                                    props.mainHeroSwiper?.slidePrev();
+                                    props.mainHeroSwiper?.slidePrev!();
                                 }}
                                 sx={(theme) => ({
                                     [theme.fn.smallerThan('md')]: {
@@ -570,7 +572,7 @@ export const MainHero = (props: IProps) => {
                                 variant="filled"
                                 ml="xl"
                                 onClick={() => {
-                                    props.mainHeroSwiper?.slideNext();
+                                    props.mainHeroSwiper?.slideNext!();
                                 }}
                                 sx={(theme) => ({
                                     [theme.fn.smallerThan('md')]: {
