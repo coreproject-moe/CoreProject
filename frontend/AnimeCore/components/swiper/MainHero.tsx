@@ -34,6 +34,7 @@ const useStyles = createStyles((theme) => ({
         paddingTop: theme.spacing.xl * 2,
         paddingBottom: theme.spacing.xl * 2,
         height: 'inherit',
+        color: 'black',
 
         boxShadow: `
             inset 0 4px calc(10vh + 1800px) rgb(7, 5, 25),
