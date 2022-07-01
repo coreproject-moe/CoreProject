@@ -23,7 +23,7 @@ export const useAuth = () => {
         }
 
         const token = getCookie('csrftoken');
-        return token;
+        return token!.length === 0;
     };
 
     return [IsLoggedIn];
