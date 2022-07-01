@@ -528,10 +528,7 @@ export const MainHero = (props: IProps) => {
                             })}
                         >
                             <Progress
-                                sx={() => ({
-                                    width: 100,
-                                    transition: '0.3s',
-                                })}
+                                sx={() => ({ width: 100 })}
                                 mr="xl"
                                 color="yellow"
                                 value={props?.sliderProgress}
