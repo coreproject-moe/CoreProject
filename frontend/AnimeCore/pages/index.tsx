@@ -42,7 +42,12 @@ const Home: NextPage = () => {
         setTimeout(() => {
             showNotification({
                 title: 'This site is still WIP',
-                message: `You can check the repository over at <a href="https://github.com/baseplate-admin/CoreProject">Github</a>`,
+                message: `Thanks for visiting AnimeCore.This site is still a work in-progress,so there's quite a bit of limited functionality.Feel free to check us over at Github - https://github.com/baseplate-admin/coreProject`,
+                styles: (theme) => ({
+                    root: {
+                        '&::before': { backgroundColor: theme.colors.blue[4] },
+                    },
+                }),
             });
         });
     }, []);

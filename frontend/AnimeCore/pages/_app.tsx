@@ -69,7 +69,7 @@ export default function App(props: AppProps) {
                 }}
             >
                 <ModalsProvider>
-                    <NotificationsProvider>
+                    <NotificationsProvider position="top-right">
                         <Component {...pageProps} />
                     </NotificationsProvider>
                 </ModalsProvider>
