@@ -26,7 +26,7 @@ const Home: NextPage = () => {
     // Expire after 10 seconds
     const { countdown, start, reset } = useCountdownTimer({
         timer: SWIPER_DELAY,
-        interval: 200,
+        interval: 100,
         autostart: true,
         onExpire: () => {
             mainHeroSwiper?.slideNext();
