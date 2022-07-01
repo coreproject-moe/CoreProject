@@ -21,14 +21,9 @@ import type { Swiper as SwiperType } from 'swiper';
 import { Navbar } from '@/components/common/Navbar';
 const useStyles = createStyles((theme) => ({
     box: {
-        minHeight: '100Vh',
         display: 'flex',
-
-        [theme.fn.smallerThan('md')]: {
-            minHeight: '30vh',
-            maxHeight: '70vh',
-        },
     },
+
     root: {
         flexDirection: 'column',
         paddingTop: theme.spacing.xl * 2,
@@ -208,7 +203,7 @@ export const MainHero = (props: IProps) => {
     }, 400);
 
     return (
-        <Box className={classes.box}>
+        <Box className={`${classes.box} hero`}>
             <BackgroundImage
                 className={classes.root}
                 src={heroBackgroundImage}

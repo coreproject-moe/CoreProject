@@ -147,6 +147,11 @@ const Home: NextPage = () => {
                         </SwiperSlide>
                     </Swiper>
                 </SwiperSlide>
+                {/* <SwiperSlide>
+                    <div className="hero">
+
+                    </div>
+                </SwiperSlide> */}
             </Swiper>
         </>
     );
