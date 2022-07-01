@@ -15,7 +15,7 @@ import {
     Title,
 } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import React, { RefObject, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 
 import { Navbar } from '@/components/common/Navbar';
@@ -169,7 +169,6 @@ interface IProps {
     swiper: Partial<SwiperType> | null;
     mainHeroSwiper: SwiperType | null; // Parent Swiper component ( replace with hook if possible )
     sliderProgress: number;
-    parentRef?: RefObject<HTMLDivElement>;
 }
 
 export const MainHero = (props: IProps) => {
