@@ -1,5 +1,6 @@
 import {
     ActionIcon,
+    BackgroundImage,
     Badge,
     Box,
     Button,
