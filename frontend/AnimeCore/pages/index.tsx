@@ -87,6 +87,7 @@ const Home: NextPage = () => {
                             // Start
                             start();
                         }}
+                        loop
                         onSwiper={setMainHeroSwiper}
                         onSlideChange={() => {
                             // Restart
