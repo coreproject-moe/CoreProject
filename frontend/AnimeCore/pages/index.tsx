@@ -15,7 +15,7 @@ import { useCountdownTimer } from 'use-countdown-timer';
 import { MainHero } from '@/components/swiper/MainHero';
 
 const Home: NextPage = () => {
-    const SWIPER_DELAY = 10 * 1000; // Miliseconds
+    const SWIPER_DELAY = 8 * 1000; // Miliseconds
 
     const [swiper, setSwiper] = useState<SwiperType | null>(null);
     const [mainHeroSwiper, setMainHeroSwiper] = useState<SwiperType | null>(
@@ -34,7 +34,7 @@ const Home: NextPage = () => {
     });
     useEffect(() => {
         const value = Math.round(
-            (100 / (10 * 1000)) * (SWIPER_DELAY - countdown)
+ (100 / SWIPER_DELAY) * (SWIPER_DELAY - countdown)
         );
         setSliderProgress(value);
     }, [SWIPER_DELAY, countdown]);
