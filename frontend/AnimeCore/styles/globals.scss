@@ -19,6 +19,10 @@
     }
 }
 
+html, body {
+    overscroll-behavior-y: contain; // Disable Rubber Band
+}
+
 // Fonts
 @font-face {
     font-family: "Kokoro";
