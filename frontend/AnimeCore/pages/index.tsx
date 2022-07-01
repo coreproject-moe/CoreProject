@@ -15,7 +15,7 @@ import { useCountdownTimer } from 'use-countdown-timer';
 import { MainHero } from '@/components/swiper/MainHero';
 
 const Home: NextPage = () => {
-    const SWIPER_DELAY = 8 * 1000; // Miliseconds
+    const SWIPER_DELAY = 5 * 1000; // Miliseconds
 
     const [swiper, setSwiper] = useState<SwiperType | null>(null);
     const [mainHeroSwiper, setMainHeroSwiper] = useState<SwiperType | null>(
@@ -24,7 +24,7 @@ const Home: NextPage = () => {
     const [sliderProgress, setSliderProgress] = useState<number>(0);
 
     // Expire after 10 seconds
-    const { countdown, start, reset } = useCountdownTimer({
+    const { countdown, start, reset, pause } = useCountdownTimer({
         timer: SWIPER_DELAY,
         interval: 200,
         autostart: true,
@@ -97,6 +97,8 @@ const Home: NextPage = () => {
                     >
                         <SwiperSlide>
                             <MainHero
+                                pause={pause}
+                                start={start}
                                 swiper={swiper}
                                 mainHeroSwiper={mainHeroSwiper}
                                 sliderProgress={sliderProgress}
@@ -112,6 +114,8 @@ const Home: NextPage = () => {
 
                         <SwiperSlide>
                             <MainHero
+                                pause={pause}
+                                start={start}
                                 swiper={swiper}
                                 sliderProgress={sliderProgress}
                                 mainHeroSwiper={mainHeroSwiper}
@@ -127,6 +131,8 @@ const Home: NextPage = () => {
 
                         <SwiperSlide>
                             <MainHero
+                                pause={pause}
+                                start={start}
                                 swiper={swiper}
                                 sliderProgress={sliderProgress}
                                 mainHeroSwiper={mainHeroSwiper}

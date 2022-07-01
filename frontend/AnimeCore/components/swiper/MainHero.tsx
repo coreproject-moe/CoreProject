@@ -166,10 +166,10 @@ interface IProps {
     animeAirTime: string;
     backgroundImage: string;
     backgroundBanner: string;
-    swiper: Partial<SwiperType>;
-    mainHeroSwiper: Partial<SwiperType>; // Parent Swiper component ( replace with hook if possible )
+    swiper: Partial<SwiperType> | null;
+    mainHeroSwiper: Partial<SwiperType> | null; // Parent Swiper component ( replace with hook if possible )
     pause?: () => void;
-    resume?: () => void;
+    start?: () => void;
     sliderProgress: number;
 }
 
@@ -356,16 +356,24 @@ export const MainHero = (props: IProps) => {
                                         <ScrollArea
                                             style={{ height: 100 }}
                                             onMouseEnter={() => {
+                                                props.pause!();
+
                                                 props.swiper?.mousewheel?.disable();
                                             }}
                                             onTouchStart={() => {
+                                                props.pause!();
+
                                                 props.swiper!.allowTouchMove =
                                                     false;
                                             }}
                                             onMouseLeave={() => {
+                                                props.start!();
+
                                                 props.swiper?.mousewheel?.enable();
                                             }}
                                             onTouchEnd={() => {
+                                                props.start!();
+
                                                 props.swiper!.allowTouchMove =
                                                     true;
                                             }}
