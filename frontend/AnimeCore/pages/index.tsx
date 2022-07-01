@@ -26,7 +26,18 @@ const Home: NextPage = () => {
     // Expire after 10 seconds
     const { countdown, start, reset } = useCountdownTimer({
         timer: SWIPER_DELAY,
+        interval: 200,
+        autostart: true,
+        onExpire: () => {
+            mainHeroSwiper?.slideNext();
+        },
     });
+    useEffect(() => {
+        const value = Math.round(
+            (100 / (10 * 1000)) * (SWIPER_DELAY - countdown)
+        );
+        setSliderProgress(value);
+    }, [SWIPER_DELAY, countdown]);
 
     useEffect(() => {
         setTimeout(() => {
@@ -64,9 +75,6 @@ const Home: NextPage = () => {
                         ]}
                         effect="fade"
                         direction="horizontal"
-                        autoplay={{
-                            delay: SWIPER_DELAY,
-                        }}
                         navigation={{
                             nextEl: '.mainhero__next__el',
                             prevEl: '.mainhero__previous__el',
@@ -83,6 +91,7 @@ const Home: NextPage = () => {
                         onSlideChange={() => {
                             // Restart
                             reset();
+                            start();
                         }}
                     >
                         <SwiperSlide>
