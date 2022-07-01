@@ -34,7 +34,7 @@ const Home: NextPage = () => {
     });
     useEffect(() => {
         const value = Math.round(
-            (100 / SWIPER_DELAY) * (SWIPER_DELAY - countdown)
+ (100 / SWIPER_DELAY) * (SWIPER_DELAY - countdown)
         );
         setSliderProgress(value);
     }, [SWIPER_DELAY, countdown]);
