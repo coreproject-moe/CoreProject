@@ -276,18 +276,47 @@ export const MainHero = (props: IProps) => {
                                     </>
                                 ) : (
                                     <>
-                                        <Text
-                                            size="lg"
-                                            color="white"
-                                            inherit
-                                            sx={(theme) => ({
-                                                [theme.fn.smallerThan('sm')]: {
-                                                    fontSize: 30, // Fix Me
-                                                },
-                                            })}
+                                        <ScrollArea
+                                            style={{ height: 40 }}
+                                            onMouseEnter={() => {
+                                                props.pause!();
+
+                                                props.swiper?.mousewheel?.disable();
+                                            }}
+                                            onTouchStart={() => {
+                                                props.pause!();
+
+                                                props.swiper!.allowTouchMove =
+                                                    false;
+                                            }}
+                                            onMouseLeave={() => {
+                                                props.start!();
+
+                                                props.swiper?.mousewheel?.enable();
+                                            }}
+                                            onTouchEnd={() => {
+                                                props.start!();
+
+                                                props.swiper!.allowTouchMove =
+                                                    true;
+                                            }}
+                                            offsetScrollbars={true}
                                         >
-                                            {props.animeTitle}
-                                        </Text>
+                                            <Text
+                                                size="lg"
+                                                color="white"
+                                                inherit
+                                                sx={(theme) => ({
+                                                    [theme.fn.smallerThan(
+                                                        'sm'
+                                                    )]: {
+                                                        fontSize: 30, // Fix Me
+                                                    },
+                                                })}
+                                            >
+                                                {props.animeTitle}
+                                            </Text>
+                                        </ScrollArea>
                                     </>
                                 )}
                             </Title>
