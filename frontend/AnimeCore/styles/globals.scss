@@ -39,7 +39,7 @@ html{
     body {
         overscroll-behavior-y: contain; // Disable Rubber Band
         height: 100%; // Full Height ( LINK )
-        
+
     }
 
     .swiper {
@@ -47,16 +47,16 @@ html{
         height:100%;  // Full Height ( LINK )
         @extend .hero;
     }
-    
+
     // This might be removed in the future
     .swiper-slide{
         height:100%;  // Full Height ( LINK )
-        
+
         @media screen and (min-width:0px) and (max-width : 992px){
             height:90%;
         }
     }
-    
+
     #__next {
         height:100%; // Full Height ( LINK )
     }
