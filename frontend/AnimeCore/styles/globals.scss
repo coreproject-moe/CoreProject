@@ -30,8 +30,24 @@
 
 }
 
-html, body {
-    overscroll-behavior-y: contain; // Disable Rubber Band
+html{
+    scrollbar-width: none;
+    background-color: black;
+
+    &,
+    body {
+        overscroll-behavior-y: contain; // Disable Rubber Band
+        height: 100%; // Full Height ( LINK )
+    }
+
+    .swiper {
+        width: 100%;
+        height: 100%; // Full Height ( LINK )
+    }
+
+    #__next {
+        height:100%; // Full Height ( LINK )
+    }
 }
 
 // Fonts
