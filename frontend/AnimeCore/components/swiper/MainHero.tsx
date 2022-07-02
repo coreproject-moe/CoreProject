@@ -21,20 +21,15 @@ import type { Swiper as SwiperType } from 'swiper';
 import { Navbar } from '@/components/common/Navbar';
 const useStyles = createStyles((theme) => ({
     box: {
-        minHeight: '100Vh',
         display: 'flex',
-
-        [theme.fn.smallerThan('md')]: {
-            minHeight: '30vh',
-            maxHeight: '70vh',
-        },
     },
+
     root: {
         flexDirection: 'column',
-        backgroundColor: 'black',
         paddingTop: theme.spacing.xl * 2,
         paddingBottom: theme.spacing.xl * 2,
         height: 'inherit',
+        color: 'black',
 
         boxShadow: `
             inset 0 4px calc(10vh + 1800px) rgb(7, 5, 25),
@@ -167,7 +162,9 @@ interface IProps {
     backgroundImage: string;
     backgroundBanner: string;
     swiper: Partial<SwiperType> | null;
-    mainHeroSwiper: SwiperType | null; // Parent Swiper component ( replace with hook if possible )
+    mainHeroSwiper: Partial<SwiperType> | null; // Parent Swiper component ( replace with hook if possible )
+    pause?: () => void;
+    start?: () => void;
     sliderProgress: number;
 }
 
@@ -206,12 +203,13 @@ export const MainHero = (props: IProps) => {
     }, 400);
 
     return (
-        <Box className={classes.box}>
+        <Box className={`${classes.box} hero`}>
             <BackgroundImage
                 className={classes.root}
                 src={heroBackgroundImage}
                 style={{
                     display: 'flex', // This is a weird hack to make the items align properly
+                    backgroundColor: 'black', // Stupid Mantine
                 }}
             >
                 <Navbar />
@@ -353,16 +351,24 @@ export const MainHero = (props: IProps) => {
                                         <ScrollArea
                                             style={{ height: 100 }}
                                             onMouseEnter={() => {
+                                                props.pause!();
+
                                                 props.swiper?.mousewheel?.disable();
                                             }}
                                             onTouchStart={() => {
+                                                props.pause!();
+
                                                 props.swiper!.allowTouchMove =
                                                     false;
                                             }}
                                             onMouseLeave={() => {
+                                                props.start!();
+
                                                 props.swiper?.mousewheel?.enable();
                                             }}
                                             onTouchEnd={() => {
+                                                props.start!();
+
                                                 props.swiper!.allowTouchMove =
                                                     true;
                                             }}
@@ -549,7 +555,7 @@ export const MainHero = (props: IProps) => {
                                 radius="md"
                                 variant="filled"
                                 onClick={() => {
-                                    props.mainHeroSwiper?.slidePrev();
+                                    props.mainHeroSwiper?.slidePrev!();
                                 }}
                                 sx={(theme) => ({
                                     [theme.fn.smallerThan('md')]: {
@@ -569,7 +575,7 @@ export const MainHero = (props: IProps) => {
                                 variant="filled"
                                 ml="xl"
                                 onClick={() => {
-                                    props.mainHeroSwiper?.slideNext();
+                                    props.mainHeroSwiper?.slideNext!();
                                 }}
                                 sx={(theme) => ({
                                     [theme.fn.smallerThan('md')]: {

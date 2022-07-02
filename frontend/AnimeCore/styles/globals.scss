@@ -19,6 +19,17 @@
     }
 }
 
+
+.hero {
+    min-height: 100Vh;
+
+    @media screen and (min-width:0px) and (max-width : 992px){
+        min-height: 30vh;
+        max-height: 70vh;
+    }
+
+}
+
 html, body {
     overscroll-behavior-y: contain; // Disable Rubber Band
 }
