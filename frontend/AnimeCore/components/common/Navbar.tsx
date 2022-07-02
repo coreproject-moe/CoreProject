@@ -1,4 +1,4 @@
-import { createStyles,Grid } from '@mantine/core';
+import { createStyles, Grid } from '@mantine/core';
 
 const useStyles = createStyles((theme) => ({
     grid: {
@@ -61,7 +61,7 @@ export const Navbar = () => {
                 <img
                     className={classes.avatar}
                     alt=""
-                    src="/images/placeholder.png"
+                    src="/images/(Avatar)-placeholder.png"
                     width={50}
                     height={50}
                 />
