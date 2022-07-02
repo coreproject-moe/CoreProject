@@ -43,8 +43,8 @@ html{
 
     .swiper {
         width: 100%;
-        height:100%;
-        @extend .hero
+        height:100%;  // Full Height ( LINK )
+        @extend .hero;
     }
 
     #__next {
