@@ -38,11 +38,13 @@ html{
     body {
         overscroll-behavior-y: contain; // Disable Rubber Band
         height: 100%; // Full Height ( LINK )
+        
     }
 
     .swiper {
         width: 100%;
-        height: 100%; // Full Height ( LINK )
+        height:100%;
+        @extend .hero
     }
 
     #__next {
