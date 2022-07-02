@@ -124,6 +124,36 @@ const Home: NextPage = () => {
             backgroundBanner:
                 'https://media.kitsu.io/anime/43691/poster_image/large-6fff692359faff490ba00d72fb48b9a3.jpeg',
         },
+        {
+            animeEpisodeCount: 12,
+            animeStudio: 'MAPPA',
+            animeAirTime: 'Fall 2014',
+            animeTitle: 'Shingeki no Bahamut: GENESIS',
+            animeSummary: `Thousands of years ago, the ancient dragon Bahamut wrought havoc upon the land of Mistarcia, a world where both gods and demons live amongst mankind. Working together to prevent the world's destruction, the rival deities barely managed to seal Bahamut, agreeing to split the key between them so that the dragon would remain eternally imprisoned.\n\nWith the world safe from the destruction of Bahamut, it is business as usual for bounty hunters like Favaro Leone. Living a laid-back, self-serving lifestyle, the amoral Favaro goes about his work while on the run from fellow bounty hunter Kaisar Lidfard, a righteous man who swears vengeance upon Favaro. However, Favaro's carefree life is thrown into chaos when he meets Amira, a mysterious woman who holds half of the key to the world's fragile peace.\n\nShingeki no Bahamut: Genesis tells the story of a group of unlikely heroes who find themselves caught in the middle of an epic clash between gods and demons, forced to carve their own path in the face of the imminent storm.`,
+            backgroundImage: '/images/Shingeki-No-Basamut-poster.jpg',
+            backgroundBanner:
+                'https://media.kitsu.io/anime/poster_images/13013/large.jpg',
+        },
+        {
+            animeEpisodeCount: 12,
+            animeStudio: 'A1-Pictures',
+            animeAirTime: 'Winter 2016',
+            animeTitle: 'Boku dake ga Inai Machi',
+            animeSummary: `When tragedy is about to strike, Satoru Fujinuma finds himself sent back several minutes before the accident occurs. The detached, 29-year-old manga artist has taken advantage of this powerful yet mysterious phenomenon, which he calls "Revival," to save many lives.\n\nHowever, when he is wrongfully accused of murdering someone close to him, Satoru is sent back to the past once again, but this time to 1988, 18 years in the past. Soon, he realizes that the murder may be connected to the abduction and killing of one of his classmates, the solitary and mysterious Kayo Hinazuki, that took place when he was a child. This is his chance to make things right.\n\nBoku dake ga Inai Machi follows Satoru in his mission to uncover what truly transpired 18 years ago and prevent the death of his classmate while protecting those he cares about in the present.`,
+            backgroundImage: '/images/Boku-dake-ga-inai-machi-poster.jpg',
+            backgroundBanner:
+                'https://media.kitsu.io/anime/poster_images/11110/large.jpg',
+        },
+        {
+            animeEpisodeCount: 12,
+            animeStudio: 'bones',
+            animeAirTime: 'Spring 2016',
+            animeTitle: 'Bungou Stray Dogs',
+            animeSummary: `For weeks, Atsushi Nakajima's orphanage has been plagued by a mystical tiger that only he seems to be unaware of. Suspected to be behind the strange incidents, the 18-year-old is abruptly kicked out of the orphanage and left hungry, homeless, and wandering through the city.\n\nWhile starving on a riverbank, Atsushi saves a rather eccentric man named Osamu Dazai from drowning. Whimsical suicide enthusiast and supernatural detective, Dazai has been investigating the same tiger that has been terrorizing the boy. Together with Dazai's partner Doppo Kunikida, they solve the mystery, but its resolution leaves Atsushi in a tight spot. As various odd events take place, Atsushi is coerced into joining their firm of supernatural investigators, taking on unusual cases the police cannot handle, alongside his numerous enigmatic co-workers.`,
+            backgroundImage: '/images/Bungou-Stray-Dogs-poster.jpg',
+            backgroundBanner:
+                'https://media.kitsu.io/anime/poster_images/11339/large.jpg',
+        },
     ];
 
     return (
