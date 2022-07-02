@@ -202,6 +202,30 @@ export const MainHero = (props: IProps) => {
         }
     }, 400);
 
+    const mouseEntersScrollArea = () => {
+        props.pause!();
+
+        props.swiper?.mousewheel?.disable();
+    };
+
+    const mouseLeavesScrollArea = () => {
+        props.start!();
+
+        props.swiper?.mousewheel?.enable();
+    };
+
+    const touchEntersScrollArea = () => {
+        props.pause!();
+
+        props.swiper!.allowTouchMove = false;
+    };
+
+    const touchLeavesScrollArea = () => {
+        props.start!();
+
+        props.swiper!.allowTouchMove = true;
+    };
+
     return (
         <Box className={`${classes.box} hero`}>
             <BackgroundImage
@@ -283,29 +307,11 @@ export const MainHero = (props: IProps) => {
                                                     height: 40,
                                                 },
                                             })}
-                                            onMouseEnter={() => {
-                                                props.pause!();
-
-                                                props.swiper?.mousewheel?.disable();
-                                            }}
-                                            onTouchStart={() => {
-                                                props.pause!();
-
-                                                props.swiper!.allowTouchMove =
-                                                    false;
-                                            }}
-                                            onMouseLeave={() => {
-                                                props.start!();
-
-                                                props.swiper?.mousewheel?.enable();
-                                            }}
-                                            onTouchEnd={() => {
-                                                props.start!();
-
-                                                props.swiper!.allowTouchMove =
-                                                    true;
-                                            }}
-                                            offsetScrollbars={true}
+                                            onMouseEnter={mouseEntersScrollArea}
+                                            onTouchStart={touchEntersScrollArea}
+                                            onMouseLeave={mouseLeavesScrollArea}
+                                            onTouchEnd={touchLeavesScrollArea}
+                                            offsetScrollbars
                                         >
                                             <Text
                                                 size="lg"
@@ -384,29 +390,11 @@ export const MainHero = (props: IProps) => {
                                     <>
                                         <ScrollArea
                                             style={{ height: 100 }}
-                                            onMouseEnter={() => {
-                                                props.pause!();
-
-                                                props.swiper?.mousewheel?.disable();
-                                            }}
-                                            onTouchStart={() => {
-                                                props.pause!();
-
-                                                props.swiper!.allowTouchMove =
-                                                    false;
-                                            }}
-                                            onMouseLeave={() => {
-                                                props.start!();
-
-                                                props.swiper?.mousewheel?.enable();
-                                            }}
-                                            onTouchEnd={() => {
-                                                props.start!();
-
-                                                props.swiper!.allowTouchMove =
-                                                    true;
-                                            }}
-                                            offsetScrollbars={true}
+                                            onMouseEnter={mouseEntersScrollArea}
+                                            onTouchStart={touchEntersScrollArea}
+                                            onMouseLeave={mouseLeavesScrollArea}
+                                            onTouchEnd={touchLeavesScrollArea}
+                                            offsetScrollbars
                                         >
                                             <Text
                                                 color="gray"
