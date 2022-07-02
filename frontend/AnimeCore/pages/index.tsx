@@ -114,6 +114,16 @@ const Home: NextPage = () => {
             backgroundBanner:
                 'https://media.kitsu.io/anime/poster_images/13593/large.jpg',
         },
+        {
+            animeEpisodeCount: 13,
+            animeStudio: 'A1-Pictures',
+            animeAirTime: 'Spring 2022',
+            animeTitle: 'Kaguya-sama: Ultra Romantic',
+            animeSummary: `The elite members of Shuchiin Academy's student council continue their competitive day-to-day antics. Council president Miyuki Shirogane clashes daily against vice-president Kaguya Shinomiya, each fighting tooth and nail to trick the other into confessing their romantic love. Kaguya struggles within the strict confines of her wealthy, uptight family, rebelling against her cold default demeanor as she warms to Shirogane and the rest of her friends.\n\nMeanwhile, council treasurer Yuu Ishigami suffers under the weight of his hopeless crush on Tsubame Koyasu, a popular upperclassman who helps to instill a new confidence in him. Miko Iino, the newest student council member, grows closer to the rule-breaking Ishigami while striving to overcome her own authoritarian moral code.\n\nAs love further blooms at Shuchiin Academy, the student council officers drag their outsider friends into increasingly comedic conflicts.`,
+            backgroundImage: '/images/Kaguya-Sama-Ultra-Romantic-poster.jpg',
+            backgroundBanner:
+                'https://media.kitsu.io/anime/43691/poster_image/large-6fff692359faff490ba00d72fb48b9a3.jpeg',
+        },
     ];
 
     return (
