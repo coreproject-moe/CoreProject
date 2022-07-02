@@ -173,6 +173,7 @@ const Home: NextPage = () => {
                                 <>
                                     <SwiperSlide key={index}>
                                         <MainHero
+                                            key={index}
                                             animeTitle={item.animeTitle}
                                             animeSummary={item.animeSummary}
                                             animeEpisodeCount={
