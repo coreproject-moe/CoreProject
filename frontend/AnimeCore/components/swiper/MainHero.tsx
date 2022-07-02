@@ -277,7 +277,12 @@ export const MainHero = (props: IProps) => {
                                 ) : (
                                     <>
                                         <ScrollArea
-                                            style={{ height: 40 }}
+                                            sx={(theme) => ({
+                                                height: 80,
+                                                [theme.fn.smallerThan('md')]: {
+                                                    height: 40,
+                                                },
+                                            })}
                                             onMouseEnter={() => {
                                                 props.pause!();
 
