@@ -202,28 +202,34 @@ export const MainHero = (props: IProps) => {
         }
     }, 400);
 
-    const mouseEntersScrollArea = () => {
-        props.pause!();
+    /** Events to handle scrollbox area */
 
-        props.swiper?.mousewheel?.disable();
+    const mouseEntersScrollArea = (event: React.MouseEvent<HTMLDivElement>) => {
+        if (event) {
+            props.pause!();
+            props.swiper?.mousewheel?.disable();
+        }
     };
 
-    const mouseLeavesScrollArea = () => {
-        props.start!();
-
-        props.swiper?.mousewheel?.enable();
+    const mouseLeavesScrollArea = (event: React.MouseEvent<HTMLDivElement>) => {
+        if (event) {
+            props.start!();
+            props.swiper?.mousewheel?.enable();
+        }
     };
 
-    const touchEntersScrollArea = () => {
-        props.pause!();
-
-        props.swiper!.allowTouchMove = false;
+    const touchEntersScrollArea = (event: React.TouchEvent<HTMLDivElement>) => {
+        if (event) {
+            props.pause!();
+            props.swiper!.allowTouchMove = false;
+        }
     };
 
-    const touchLeavesScrollArea = () => {
-        props.start!();
-
-        props.swiper!.allowTouchMove = true;
+    const touchLeavesScrollArea = (event: React.TouchEvent<HTMLDivElement>) => {
+        if (event) {
+            props.start!();
+            props.swiper!.allowTouchMove = true;
+        }
     };
 
     return (
@@ -308,8 +314,8 @@ export const MainHero = (props: IProps) => {
                                                 },
                                             })}
                                             onMouseEnter={mouseEntersScrollArea}
-                                            onTouchStart={touchEntersScrollArea}
                                             onMouseLeave={mouseLeavesScrollArea}
+                                            onTouchStart={touchEntersScrollArea}
                                             onTouchEnd={touchLeavesScrollArea}
                                             offsetScrollbars
                                         >
@@ -391,8 +397,8 @@ export const MainHero = (props: IProps) => {
                                         <ScrollArea
                                             style={{ height: 100 }}
                                             onMouseEnter={mouseEntersScrollArea}
-                                            onTouchStart={touchEntersScrollArea}
                                             onMouseLeave={mouseLeavesScrollArea}
+                                            onTouchStart={touchEntersScrollArea}
                                             onTouchEnd={touchLeavesScrollArea}
                                             offsetScrollbars
                                         >
