@@ -168,7 +168,7 @@ interface IProps {
     sliderProgress: number;
 }
 
-export const MainHero = (props: IProps) => {
+const MainHeroSlide = (props: IProps) => {
     const { classes } = useStyles();
 
     const [heroBackgroundImage, setHeroBackgroundImage] = useState<string>('');
@@ -647,3 +647,5 @@ export const MainHero = (props: IProps) => {
         </Box>
     );
 };
+
+export default MainHeroSlide;
