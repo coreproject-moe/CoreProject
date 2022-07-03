@@ -193,6 +193,7 @@ const Home: NextPage = () => {
                             start();
                         }}
                         loop
+                        lazy
                         onSwiper={setMainHeroSwiper}
                         onSlideChange={() => {
                             // Restart
