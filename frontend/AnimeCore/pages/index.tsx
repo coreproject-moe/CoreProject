@@ -13,7 +13,8 @@ import {
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useCountdownTimer } from 'use-countdown-timer';
 
-import { MainHero } from '@/components/swiper/MainHero';
+import MainHeroSlide from '@/components/swiper/MainHeroSlide';
+import GenreSlide from '@/components/swiper/GenreSlide';
 
 const Home: NextPage = () => {
     const SWIPER_DELAY = 5 * 1000; // Miliseconds
@@ -205,7 +206,7 @@ const Home: NextPage = () => {
                         {data.map((item, index) => {
                             return (
                                 <SwiperSlide key={index}>
-                                    <MainHero
+                                    <MainHeroSlide
                                         animeTitle={item.animeTitle}
                                         animeSummary={item.animeSummary}
                                         animeEpisodeCount={
@@ -226,10 +227,8 @@ const Home: NextPage = () => {
                         })}
                     </Swiper>
                 </SwiperSlide>
-              <SwiperSlide>
-                    <div className="hero">
-
-                    </div>
+                <SwiperSlide>
+                    <GenreSlide />
                 </SwiperSlide>
             </Swiper>
         </>
