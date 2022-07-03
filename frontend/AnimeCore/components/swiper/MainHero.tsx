@@ -509,6 +509,8 @@ export const MainHero = (props: IProps) => {
                                                 <img
                                                     alt=""
                                                     src="/icons/chevrons-right.svg"
+                                                    width={24}
+                                                    height={24}
                                                 />
                                             }
                                         >
