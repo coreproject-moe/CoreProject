@@ -5,6 +5,7 @@ import type { Swiper as SwiperType } from 'swiper';
 import {
     Autoplay,
     EffectFade,
+    Lazy,
     Mousewheel,
     Navigation,
     Pagination as SwiperPagination,
@@ -173,6 +174,7 @@ const Home: NextPage = () => {
                         modules={[
                             EffectFade,
                             Autoplay,
+                            Lazy,
                             Navigation,
                             SwiperPagination,
                         ]}

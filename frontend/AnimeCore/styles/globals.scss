@@ -5,6 +5,8 @@
 @use "swiper/scss/pagination";
 @use "swiper/scss/effect-fade";
 
+$swiper-height-mobile: 570px;
+
 :root{
     --swiper-pagination-color:#E3BD49;
     --swiper-pagination-bullet-inactive-color:#EDD68D;
@@ -25,7 +27,7 @@
 
     @media screen and (min-width:0px) and (max-width : 992px){
         min-height: 30vh;
-        max-height: 70vh;
+        max-height: $swiper-height-mobile;
     }
 
 }
@@ -53,7 +55,7 @@ html{
         height:100%;  // Full Height ( LINK )
 
         @media screen and (min-width:0px) and (max-width : 992px){
-            height:90%;
+            height:$swiper-height-mobile;
         }
     }
 
