@@ -8,7 +8,7 @@ import {
     Lazy,
     Mousewheel,
     Navigation,
-    Pagination as SwiperPagination,
+    Virtual,
 } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useCountdownTimer } from 'use-countdown-timer';
@@ -176,7 +176,7 @@ const Home: NextPage = () => {
                             Autoplay,
                             Lazy,
                             Navigation,
-                            SwiperPagination,
+                            Virtual,
                         ]}
                         effect="fade"
                         direction="horizontal"
@@ -184,16 +184,13 @@ const Home: NextPage = () => {
                             nextEl: '.mainhero__next__el',
                             prevEl: '.mainhero__previous__el',
                         }}
-                        pagination={{
-                            enabled: true,
-                            el: '.swiper__mainhero__pagination',
-                        }}
                         onInit={() => {
                             // Start
                             start();
                         }}
                         loop
                         lazy
+                        virtual
                         preloadImages={false}
                         onSwiper={setMainHeroSwiper}
                         onSlideChange={() => {
@@ -204,7 +201,7 @@ const Home: NextPage = () => {
                     >
                         {data.map((item, index) => {
                             return (
-                                <SwiperSlide key={index}>
+                                <SwiperSlide key={index} virtualIndex={index}>
                                     <MainHero
                                         animeTitle={item.animeTitle}
                                         animeSummary={item.animeSummary}
