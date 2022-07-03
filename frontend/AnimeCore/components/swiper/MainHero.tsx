@@ -233,7 +233,7 @@ export const MainHero = (props: IProps) => {
     };
 
     return (
-        <Box className={`${classes.box} hero`}>
+        <Box className={`${classes.box} hero swiper-lazy`}>
             <BackgroundImage
                 className={classes.root}
                 src={heroBackgroundImage}
