@@ -226,11 +226,11 @@ const Home: NextPage = () => {
                         })}
                     </Swiper>
                 </SwiperSlide>
-                {/* <SwiperSlide>
+              <SwiperSlide>
                     <div className="hero">
 
                     </div>
-                </SwiperSlide> */}
+                </SwiperSlide>
             </Swiper>
         </>
     );
