@@ -1,7 +1,6 @@
 import { showNotification } from '@mantine/notifications';
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
-import { Suspense } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 import {
     Autoplay,
