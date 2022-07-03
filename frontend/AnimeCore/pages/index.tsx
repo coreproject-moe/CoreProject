@@ -1,6 +1,7 @@
 import { showNotification } from '@mantine/notifications';
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
+import { Suspense } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 import {
     Autoplay,
@@ -203,31 +204,24 @@ const Home: NextPage = () => {
                     >
                         {data.map((item, index) => {
                             return (
-                                <>
-                                    <SwiperSlide key={index}>
-                                        <MainHero
-                                            key={index}
-                                            animeTitle={item.animeTitle}
-                                            animeSummary={item.animeSummary}
-                                            animeEpisodeCount={
-                                                item.animeEpisodeCount
-                                            }
-                                            animeStudio={item.animeStudio}
-                                            animeAirTime={item.animeAirTime}
-                                            backgroundImage={
-                                                item.backgroundImage
-                                            }
-                                            backgroundBanner={
-                                                item.backgroundBanner
-                                            }
-                                            pause={pause}
-                                            start={start}
-                                            swiper={swiper}
-                                            sliderProgress={sliderProgress}
-                                            mainHeroSwiper={mainHeroSwiper}
-                                        />
-                                    </SwiperSlide>
-                                </>
+                                <SwiperSlide key={index}>
+                                    <MainHero
+                                        animeTitle={item.animeTitle}
+                                        animeSummary={item.animeSummary}
+                                        animeEpisodeCount={
+                                            item.animeEpisodeCount
+                                        }
+                                        animeStudio={item.animeStudio}
+                                        animeAirTime={item.animeAirTime}
+                                        backgroundImage={item.backgroundImage}
+                                        backgroundBanner={item.backgroundBanner}
+                                        pause={pause}
+                                        start={start}
+                                        swiper={swiper}
+                                        sliderProgress={sliderProgress}
+                                        mainHeroSwiper={mainHeroSwiper}
+                                    />
+                                </SwiperSlide>
                             );
                         })}
                     </Swiper>
