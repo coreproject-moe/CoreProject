@@ -19,6 +19,7 @@ import React, { useEffect, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 
 import { Navbar } from '@/components/common/Navbar';
+import { start } from 'repl';
 const useStyles = createStyles((theme) => ({
     box: {
         display: 'flex',
@@ -233,9 +234,9 @@ export const MainHero = (props: IProps) => {
     };
 
     return (
-        <Box className={`${classes.box} hero swiper-lazy`}>
+        <Box className={`${classes.box} hero`}>
             <BackgroundImage
-                className={classes.root}
+                className={`${classes.root} swiper-slide swiper-lazy`}
                 src={heroBackgroundImage}
                 style={{
                     display: 'flex', // This is a weird hack to make the items align properly
@@ -414,7 +415,6 @@ export const MainHero = (props: IProps) => {
                                     </>
                                 )}
                             </>
-                            <Space h="xl" />
                             <div className={classes.tagContainer}>
                                 {isLoading ? (
                                     <>
@@ -422,6 +422,8 @@ export const MainHero = (props: IProps) => {
                                     </>
                                 ) : (
                                     <>
+                                        <Space h="xl" />
+
                                         <Badge
                                             component="span"
                                             size="lg"

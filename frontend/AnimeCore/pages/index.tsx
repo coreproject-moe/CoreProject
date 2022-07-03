@@ -194,6 +194,7 @@ const Home: NextPage = () => {
                         }}
                         loop
                         lazy
+                        preloadImages={false}
                         onSwiper={setMainHeroSwiper}
                         onSlideChange={() => {
                             // Restart
