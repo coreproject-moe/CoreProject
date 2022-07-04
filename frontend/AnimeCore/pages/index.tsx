@@ -202,7 +202,7 @@ const Home: NextPage = () => {
                     >
                         {data.map((item, index) => {
                             return (
-                                <SwiperSlide key={index} virtualIndex={index}>
+                                <SwiperSlide key={index}>
                                     <MainHero
                                         animeTitle={item.animeTitle}
                                         animeSummary={item.animeSummary}
