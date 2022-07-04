@@ -19,15 +19,13 @@ import { useSwiperSlide } from 'swiper/react';
 import { Navbar } from '@/components/common/Navbar';
 
 const useStyles = createStyles((theme) => ({
-    box: {
-        display: 'flex',
-    },
-
     root: {
+        display: 'flex',
+        minHeight: '90vh',
+        height: '100%',
         flexDirection: 'column',
         paddingTop: theme.spacing.xl * 2,
         paddingBottom: theme.spacing.xl * 2,
-        height: 'inherit',
         color: 'black',
 
         boxShadow: `
@@ -226,7 +224,7 @@ const MainHeroSlide = (props: IProps) => {
     };
 
     return (
-        <Box className={`${classes.box} hero`}>
+        <Box>
             <BackgroundImage
                 className={`${classes.root} swiper-lazy`}
                 src={heroBackgroundImage}
