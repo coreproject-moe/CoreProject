@@ -17,6 +17,7 @@ import {
 import { useMediaQuery } from '@mantine/hooks';
 import React, { useEffect, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
+import { useSwiperSlide } from 'swiper/react';
 
 import { Navbar } from '@/components/common/Navbar';
 const useStyles = createStyles((theme) => ({
@@ -67,8 +68,8 @@ const useStyles = createStyles((theme) => ({
         paddingLeft: theme.spacing.xl * 4,
 
         [theme.fn.smallerThan('md')]: {
-            paddingLeft: theme.spacing.sm * 2,
-            paddingRight: theme.spacing.sm * 2,
+            paddingLeft: 20,
+            paddingRight: 20,
         },
     },
     content: {
@@ -195,13 +196,14 @@ export const MainHero = (props: IProps) => {
     }, [fullhd, tablet, mobile, props.backgroundBanner, props.backgroundImage]);
 
     const [isLoading, setIsLoading] = useState(true);
+    const swiperSlide = useSwiperSlide();
 
     setTimeout(() => {
         if (isLoading) {
             setIsLoading(false);
         }
     }, 400);
-
+    console.log(swiperSlide);
     /** Events to handle scrollbox area */
 
     const mouseEntersScrollArea = (event: React.MouseEvent<HTMLDivElement>) => {

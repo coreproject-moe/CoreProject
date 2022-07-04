@@ -33,6 +33,7 @@ const Home: NextPage = () => {
             mainHeroSwiper?.slideNext();
         },
     });
+
     useEffect(() => {
         const value = Math.round(
             (100 / SWIPER_DELAY) * (SWIPER_DELAY - countdown)
