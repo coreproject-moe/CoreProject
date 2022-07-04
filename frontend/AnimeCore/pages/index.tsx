@@ -13,8 +13,8 @@ import {
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useCountdownTimer } from 'use-countdown-timer';
 
-import MainHeroSlide from '@/components/swiper/MainHeroSlide';
 import GenreSlide from '@/components/swiper/GenreSlide';
+import MainHeroSlide from '@/components/swiper/MainHeroSlide';
 
 const Home: NextPage = () => {
     const SWIPER_DELAY = 5 * 1000; // Miliseconds
@@ -202,6 +202,7 @@ const Home: NextPage = () => {
                             reset();
                             start();
                         }}
+                        className="swiper-custom"
                     >
                         {data.map((item, index) => {
                             return (
