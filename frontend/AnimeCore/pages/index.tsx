@@ -1,3 +1,11 @@
+import {
+    ActionIcon,
+    createStyles,
+    Grid,
+    Progress,
+    Text,
+    Title,
+} from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
@@ -15,9 +23,23 @@ import { useCountdownTimer } from 'use-countdown-timer';
 
 import GenreSlide from '@/components/swiper/GenreSlide';
 import MainHeroSlide from '@/components/swiper/MainHeroSlide';
+const useStyles = createStyles((theme) => ({
+    swiper__mainhero__pagination: {
+        display: 'flex',
+        justifyContent: 'center',
 
+        [theme.fn.smallerThan('md')]: {
+            width: 150,
+        },
+        [theme.fn.largerThan('md')]: {
+            width: 270,
+        },
+    },
+}));
 const Home: NextPage = () => {
     const SWIPER_DELAY = 5 * 1000; // Miliseconds
+
+    const { classes } = useStyles();
 
     const [swiper, setSwiper] = useState<SwiperType | null>(null);
     const [mainHeroSwiper, setMainHeroSwiper] = useState<SwiperType | null>(
@@ -201,28 +223,149 @@ const Home: NextPage = () => {
                         }}
                         className="swiper-custom"
                     >
-                        {data.map((item, index) => {
-                            return (
-                                <SwiperSlide key={index}>
-                                    <MainHeroSlide
-                                        animeTitle={item.animeTitle}
-                                        animeSummary={item.animeSummary}
-                                        animeEpisodeCount={
-                                            item.animeEpisodeCount
-                                        }
-                                        animeStudio={item.animeStudio}
-                                        animeAirTime={item.animeAirTime}
-                                        backgroundImage={item.backgroundImage}
-                                        backgroundBanner={item.backgroundBanner}
-                                        pause={pause}
-                                        start={start}
-                                        swiper={swiper}
-                                        sliderProgress={sliderProgress}
-                                        mainHeroSwiper={mainHeroSwiper}
+                        <>
+                            {data.map((item, index) => {
+                                return (
+                                    <SwiperSlide key={index}>
+                                        <MainHeroSlide
+                                            animeTitle={item.animeTitle}
+                                            animeSummary={item.animeSummary}
+                                            animeEpisodeCount={
+                                                item.animeEpisodeCount
+                                            }
+                                            animeStudio={item.animeStudio}
+                                            animeAirTime={item.animeAirTime}
+                                            backgroundImage={
+                                                item.backgroundImage
+                                            }
+                                            backgroundBanner={
+                                                item.backgroundBanner
+                                            }
+                                            pause={pause}
+                                            start={start}
+                                            swiper={swiper}
+                                            sliderProgress={sliderProgress}
+                                            mainHeroSwiper={mainHeroSwiper}
+                                        />
+                                    </SwiperSlide>
+                                );
+                            })}
+                            <Title
+                                sx={() => ({
+                                    display: 'flex',
+                                })}
+                            >
+                                <Grid
+                                    grow
+                                    justify="space-between"
+                                    align="center"
+                                    sx={() => ({
+                                        height: '100%',
+                                        width: '100%',
+                                    })}
+                                >
+                                    <Grid.Col
+                                        span={3}
+                                        sx={(theme) => ({
+                                            [theme.fn.smallerThan('md')]: {
+                                                display: 'none',
+                                            },
+                                        })}
                                     />
-                                </SwiperSlide>
-                            );
-                        })}
+                                    <Grid.Col
+                                        span={3}
+                                        sx={() => ({
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                            height: '10vh',
+                                            maxWidth: '100vw',
+                                            flexDirection: 'row',
+                                        })}
+                                    >
+                                        <Progress
+                                            sx={() => ({ width: 100 })}
+                                            mr="xl"
+                                            color="yellow"
+                                            value={sliderProgress}
+                                        />
+                                        <div
+                                            className={
+                                                classes.swiper__mainhero__pagination
+                                            }
+                                        >
+                                            <div
+                                                style={{
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                }}
+                                                className="swiper__mainhero__pagination"
+                                            ></div>
+                                        </div>
+                                        <ActionIcon
+                                            color="yellow"
+                                            size="lg"
+                                            radius="md"
+                                            variant="filled"
+                                            onClick={() => {
+                                                mainHeroSwiper?.slidePrev!();
+                                            }}
+                                            sx={(theme) => ({
+                                                [theme.fn.smallerThan('md')]: {
+                                                    display: 'none',
+                                                },
+                                            })}
+                                        >
+                                            <img
+                                                src="icons/chevron-left-black.svg"
+                                                alt=""
+                                            />
+                                        </ActionIcon>
+                                        <ActionIcon
+                                            color="yellow"
+                                            size="lg"
+                                            radius="md"
+                                            variant="filled"
+                                            ml="xl"
+                                            onClick={() => {
+                                                mainHeroSwiper?.slideNext!();
+                                            }}
+                                            sx={(theme) => ({
+                                                [theme.fn.smallerThan('md')]: {
+                                                    display: 'none',
+                                                },
+                                            })}
+                                        >
+                                            <img
+                                                src="icons/chevron-right-black.svg"
+                                                alt=""
+                                            />
+                                        </ActionIcon>
+                                    </Grid.Col>
+                                    <Grid.Col
+                                        span={3}
+                                        sx={(theme) => ({
+                                            display: 'flex',
+                                            justifyContent: 'flex-end',
+
+                                            [theme.fn.smallerThan('md')]: {
+                                                display: 'none',
+                                            },
+                                        })}
+                                    >
+                                        <img
+                                            width={24}
+                                            height={24}
+                                            src="/icons/mouse.svg"
+                                            alt=""
+                                        />
+                                        <Text px="xl" color="gray">
+                                            scroll below
+                                        </Text>
+                                    </Grid.Col>
+                                </Grid>
+                            </Title>
+                        </>
                     </Swiper>
                 </SwiperSlide>
                 <SwiperSlide>
