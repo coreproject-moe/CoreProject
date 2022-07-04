@@ -225,24 +225,30 @@ const Home: NextPage = () => {
                     >
                         {data.map((item, index) => {
                             return (
-                                <SwiperSlide key={index}>
-                                    <MainHeroSlide
-                                        animeTitle={item.animeTitle}
-                                        animeSummary={item.animeSummary}
-                                        animeEpisodeCount={
-                                            item.animeEpisodeCount
-                                        }
-                                        animeStudio={item.animeStudio}
-                                        animeAirTime={item.animeAirTime}
-                                        backgroundImage={item.backgroundImage}
-                                        backgroundBanner={item.backgroundBanner}
-                                        pause={pause}
-                                        start={start}
-                                        swiper={swiper}
-                                        sliderProgress={sliderProgress}
-                                        mainHeroSwiper={mainHeroSwiper}
-                                    />
-                                </SwiperSlide>
+                                <div style={{ maxHeight: '90vh' }} key={index}>
+                                    <SwiperSlide>
+                                        <MainHeroSlide
+                                            animeTitle={item.animeTitle}
+                                            animeSummary={item.animeSummary}
+                                            animeEpisodeCount={
+                                                item.animeEpisodeCount
+                                            }
+                                            animeStudio={item.animeStudio}
+                                            animeAirTime={item.animeAirTime}
+                                            backgroundImage={
+                                                item.backgroundImage
+                                            }
+                                            backgroundBanner={
+                                                item.backgroundBanner
+                                            }
+                                            pause={pause}
+                                            start={start}
+                                            swiper={swiper}
+                                            sliderProgress={sliderProgress}
+                                            mainHeroSwiper={mainHeroSwiper}
+                                        />
+                                    </SwiperSlide>
+                                </div>
                             );
                         })}
                         <Title
