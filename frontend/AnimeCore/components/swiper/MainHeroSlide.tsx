@@ -19,6 +19,7 @@ import React, { useEffect, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 
 import { Navbar } from '@/components/common/Navbar';
+
 const useStyles = createStyles((theme) => ({
     box: {
         display: 'flex',
