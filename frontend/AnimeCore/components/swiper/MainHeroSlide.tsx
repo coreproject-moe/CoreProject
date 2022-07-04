@@ -15,7 +15,7 @@ import {
     Title,
 } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import React, { memo,useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 import { useSwiperSlide } from 'swiper/react';
 
@@ -199,11 +199,15 @@ const MainHeroSlide = (props: IProps) => {
     const [isLoading, setIsLoading] = useState(true);
     const swiperSlide = useSwiperSlide();
 
-    setTimeout(() => {
-        if (isLoading) {
-            setIsLoading(false);
+    useEffect(() => {
+        if (swiperSlide.isActive) {
+            if (isLoading) {
+                setIsLoading(false);
+            }
+        } else {
+            setIsLoading(true);
         }
-    }, 400);
+    });
     console.log(swiperSlide);
 
     /** Events to handle scrollbox area */
