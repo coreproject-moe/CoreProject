@@ -15,7 +15,7 @@ import {
     Title,
 } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import React, { useEffect, useState } from 'react';
+import React, { memo,useEffect, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 import { useSwiperSlide } from 'swiper/react';
 
@@ -652,4 +652,4 @@ const MainHeroSlide = (props: IProps) => {
     );
 };
 
-export default MainHeroSlide;
+export default memo(MainHeroSlide);
