@@ -20,6 +20,7 @@ import type { Swiper as SwiperType } from 'swiper';
 import { useSwiperSlide } from 'swiper/react';
 
 import { Navbar } from '@/components/common/Navbar';
+
 const useStyles = createStyles((theme) => ({
     box: {
         display: 'flex',
@@ -169,7 +170,7 @@ interface IProps {
     sliderProgress: number;
 }
 
-export const MainHero = (props: IProps) => {
+const MainHeroSlide = (props: IProps) => {
     const { classes } = useStyles();
 
     const [heroBackgroundImage, setHeroBackgroundImage] = useState<string>('');
@@ -650,3 +651,5 @@ export const MainHero = (props: IProps) => {
         </Box>
     );
 };
+
+export default MainHeroSlide;

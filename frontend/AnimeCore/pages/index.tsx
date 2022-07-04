@@ -6,7 +6,8 @@ import { Autoplay, EffectFade, Lazy, Mousewheel, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useCountdownTimer } from 'use-countdown-timer';
 
-import { MainHero } from '@/components/swiper/MainHero';
+import GenreSlide from '@/components/swiper/GenreSlide';
+import MainHeroSlide from '@/components/swiper/MainHeroSlide';
 
 const Home: NextPage = () => {
     const SWIPER_DELAY = 5 * 1000; // Miliseconds
@@ -185,11 +186,12 @@ const Home: NextPage = () => {
                             reset();
                             start();
                         }}
+                        className="swiper-custom"
                     >
                         {data.map((item, index) => {
                             return (
                                 <SwiperSlide key={index}>
-                                    <MainHero
+                                    <MainHeroSlide
                                         animeTitle={item.animeTitle}
                                         animeSummary={item.animeSummary}
                                         animeEpisodeCount={
@@ -210,11 +212,9 @@ const Home: NextPage = () => {
                         })}
                     </Swiper>
                 </SwiperSlide>
-                {/* <SwiperSlide>
-                    <div className="hero">
-
-                    </div>
-                </SwiperSlide> */}
+                <SwiperSlide>
+                    <GenreSlide />
+                </SwiperSlide>
             </Swiper>
         </>
     );
