@@ -235,7 +235,7 @@ const MainHeroSlide = (props: IProps) => {
     return (
         <Box className={`${classes.box} hero`}>
             <BackgroundImage
-                className={`${classes.root} swiper-slide swiper-lazy`}
+                className={`${classes.root} swiper-lazy`}
                 src={heroBackgroundImage}
                 style={{
                     display: 'flex', // This is a weird hack to make the items align properly
