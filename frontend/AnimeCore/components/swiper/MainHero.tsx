@@ -202,10 +202,40 @@ export const MainHero = (props: IProps) => {
         }
     }, 400);
 
+    /** Events to handle scrollbox area */
+
+    const mouseEntersScrollArea = (event: React.MouseEvent<HTMLDivElement>) => {
+        if (event) {
+            props.pause!();
+            props.swiper?.mousewheel?.disable();
+        }
+    };
+
+    const mouseLeavesScrollArea = (event: React.MouseEvent<HTMLDivElement>) => {
+        if (event) {
+            props.start!();
+            props.swiper?.mousewheel?.enable();
+        }
+    };
+
+    const touchEntersScrollArea = (event: React.TouchEvent<HTMLDivElement>) => {
+        if (event) {
+            props.pause!();
+            props.swiper!.allowTouchMove = false;
+        }
+    };
+
+    const touchLeavesScrollArea = (event: React.TouchEvent<HTMLDivElement>) => {
+        if (event) {
+            props.start!();
+            props.swiper!.allowTouchMove = true;
+        }
+    };
+
     return (
         <Box className={`${classes.box} hero`}>
             <BackgroundImage
-                className={classes.root}
+                className={`${classes.root} swiper-lazy`}
                 src={heroBackgroundImage}
                 style={{
                     display: 'flex', // This is a weird hack to make the items align properly
@@ -276,18 +306,34 @@ export const MainHero = (props: IProps) => {
                                     </>
                                 ) : (
                                     <>
-                                        <Text
-                                            size="lg"
-                                            color="white"
-                                            inherit
+                                        <ScrollArea
                                             sx={(theme) => ({
-                                                [theme.fn.smallerThan('sm')]: {
-                                                    fontSize: 30, // Fix Me
+                                                height: 80,
+                                                [theme.fn.smallerThan('md')]: {
+                                                    height: 40,
                                                 },
                                             })}
+                                            onMouseEnter={mouseEntersScrollArea}
+                                            onMouseLeave={mouseLeavesScrollArea}
+                                            onTouchStart={touchEntersScrollArea}
+                                            onTouchEnd={touchLeavesScrollArea}
+                                            offsetScrollbars
                                         >
-                                            {props.animeTitle}
-                                        </Text>
+                                            <Text
+                                                size="lg"
+                                                color="white"
+                                                inherit
+                                                sx={(theme) => ({
+                                                    [theme.fn.smallerThan(
+                                                        'sm'
+                                                    )]: {
+                                                        fontSize: 30, // Fix Me
+                                                    },
+                                                })}
+                                            >
+                                                {props.animeTitle}
+                                            </Text>
+                                        </ScrollArea>
                                     </>
                                 )}
                             </Title>
@@ -350,29 +396,11 @@ export const MainHero = (props: IProps) => {
                                     <>
                                         <ScrollArea
                                             style={{ height: 100 }}
-                                            onMouseEnter={() => {
-                                                props.pause!();
-
-                                                props.swiper?.mousewheel?.disable();
-                                            }}
-                                            onTouchStart={() => {
-                                                props.pause!();
-
-                                                props.swiper!.allowTouchMove =
-                                                    false;
-                                            }}
-                                            onMouseLeave={() => {
-                                                props.start!();
-
-                                                props.swiper?.mousewheel?.enable();
-                                            }}
-                                            onTouchEnd={() => {
-                                                props.start!();
-
-                                                props.swiper!.allowTouchMove =
-                                                    true;
-                                            }}
-                                            offsetScrollbars={true}
+                                            onMouseEnter={mouseEntersScrollArea}
+                                            onMouseLeave={mouseLeavesScrollArea}
+                                            onTouchStart={touchEntersScrollArea}
+                                            onTouchEnd={touchLeavesScrollArea}
+                                            offsetScrollbars
                                         >
                                             <Text
                                                 color="gray"
@@ -386,7 +414,6 @@ export const MainHero = (props: IProps) => {
                                     </>
                                 )}
                             </>
-                            <Space h="xl" />
                             <div className={classes.tagContainer}>
                                 {isLoading ? (
                                     <>
@@ -394,6 +421,8 @@ export const MainHero = (props: IProps) => {
                                     </>
                                 ) : (
                                     <>
+                                        <Space h="xl" />
+
                                         <Badge
                                             component="span"
                                             size="lg"
@@ -481,6 +510,8 @@ export const MainHero = (props: IProps) => {
                                                 <img
                                                     alt=""
                                                     src="/icons/chevrons-right.svg"
+                                                    width={24}
+                                                    height={24}
                                                 />
                                             }
                                         >
