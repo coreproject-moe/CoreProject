@@ -204,35 +204,6 @@ export const MainHero = (props: IProps) => {
         }
     }, 400);
     console.log(swiperSlide);
-    /** Events to handle scrollbox area */
-
-    const mouseEntersScrollArea = (event: React.MouseEvent<HTMLDivElement>) => {
-        if (event) {
-            props.pause!();
-            props.swiper?.mousewheel?.disable();
-        }
-    };
-
-    const mouseLeavesScrollArea = (event: React.MouseEvent<HTMLDivElement>) => {
-        if (event) {
-            props.start!();
-            props.swiper?.mousewheel?.enable();
-        }
-    };
-
-    const touchEntersScrollArea = (event: React.TouchEvent<HTMLDivElement>) => {
-        if (event) {
-            props.pause!();
-            props.swiper!.allowTouchMove = false;
-        }
-    };
-
-    const touchLeavesScrollArea = (event: React.TouchEvent<HTMLDivElement>) => {
-        if (event) {
-            props.start!();
-            props.swiper!.allowTouchMove = true;
-        }
-    };
 
     /** Events to handle scrollbox area */
 
