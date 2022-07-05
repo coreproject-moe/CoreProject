@@ -15,7 +15,7 @@
         "@mantine/modals": "^4.2.11",
         "@mantine/next": "^4.2.12",
         "@mantine/notifications": "^4.2.11",
-        "@mantine/rte": "^4.2.11",
+        "@mantine/rte": "^4.2.12",
         "next": "^12.2.1-canary.2",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
