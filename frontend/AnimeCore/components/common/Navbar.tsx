@@ -1,4 +1,5 @@
 import { createStyles, Grid } from '@mantine/core';
+import { memo } from 'react';
 
 const useStyles = createStyles((theme) => ({
     grid: {
@@ -32,7 +33,7 @@ const useStyles = createStyles((theme) => ({
     },
 }));
 
-export const Navbar = () => {
+const Navbar = () => {
     const { classes } = useStyles();
     return (
         <Grid justify="space-between" className={classes.grid} grow>
@@ -69,3 +70,4 @@ export const Navbar = () => {
         </Grid>
     );
 };
+export default memo(Navbar);

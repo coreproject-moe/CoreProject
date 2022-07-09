@@ -195,14 +195,12 @@ const Home: NextPage = () => {
                         }}
                         loop
                         lazy
-                        preloadImages={false}
                         onSwiper={setMainHeroSwiper}
                         onSlideChange={() => {
                             // Restart
                             reset();
                             start();
                         }}
-                        className="swiper-custom"
                     >
                         {data.map((item, index) => {
                             return (
@@ -221,7 +219,6 @@ const Home: NextPage = () => {
                                         start={start}
                                         swiper={swiper}
                                         sliderProgress={sliderProgress}
-                                        mainHeroSwiper={mainHeroSwiper}
                                     />
                                 </SwiperSlide>
                             );
