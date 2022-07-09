@@ -239,7 +239,7 @@ const MainHeroSlide = (props: IProps) => {
     return (
         <Box className={`${classes.box} hero`}>
             <BackgroundImage
-                className={`${classes.root} swiper-lazy`}
+                className={`${classes.root}`}
                 src={heroBackgroundImage}
                 style={{
                     display: 'flex', // This is a weird hack to make the items align properly
@@ -634,8 +634,8 @@ const MainHeroSlide = (props: IProps) => {
                                         size="lg"
                                         radius="md"
                                         variant="filled"
-                                        onClick={() => {
-                                            swiper.slidePrev!();
+                                        onClick={async () => {
+                                            swiper.slidePrev();
                                         }}
                                         sx={(theme) => ({
                                             [theme.fn.smallerThan('md')]: {
@@ -654,8 +654,8 @@ const MainHeroSlide = (props: IProps) => {
                                         radius="md"
                                         variant="filled"
                                         ml="xl"
-                                        onClick={() => {
-                                            swiper.slideNext!();
+                                        onClick={async () => {
+                                            swiper.slideNext();
                                         }}
                                         sx={(theme) => ({
                                             [theme.fn.smallerThan('md')]: {
