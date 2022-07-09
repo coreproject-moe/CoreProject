@@ -9,7 +9,7 @@ import { useCountdownTimer } from 'use-countdown-timer';
 import { MainHero } from '@/components/swiper/MainHero';
 
 const Home: NextPage = () => {
-    const SWIPER_DELAY = 5 * 1000; // Miliseconds
+    const SWIPER_DELAY = 1000 * 1000; // Miliseconds
 
     const [swiper, setSwiper] = useState<SwiperType | null>(null);
     const [mainHeroSwiper, setMainHeroSwiper] = useState<SwiperType | null>(
