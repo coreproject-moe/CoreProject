@@ -47,6 +47,10 @@ const Home: NextPage = () => {
         });
     }, []);
 
+    useEffect(() => {
+        swiper?.activeIndex === 0 ? null : (reset(), start()); // This is an optimization :D
+    }, [swiper?.activeIndex, start, reset]);
+
     const data = [
         {
             animeStudio: 'Kyoto Animations',
