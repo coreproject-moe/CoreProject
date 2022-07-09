@@ -1,10 +1,5 @@
 import {
-    ActionIcon,
     createStyles,
-    Grid,
-    Progress,
-    Text,
-    Title,
 } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import type { NextPage } from 'next';
@@ -21,7 +16,6 @@ import {
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useCountdownTimer } from 'use-countdown-timer';
 
-import GenreSlide from '@/components/swiper/GenreSlide';
 import MainHeroSlide from '@/components/swiper/MainHeroSlide';
 const useStyles = createStyles((theme) => ({
     swiper__mainhero__pagination: {
