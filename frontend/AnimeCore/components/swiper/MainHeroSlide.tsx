@@ -28,20 +28,20 @@ const useStyles = createStyles((theme) => ({
         paddingBottom: theme.spacing.xl * 2,
         color: 'black',
 
-        boxShadow: `
-            inset 0 4px 1800px rgb(7, 5, 25),
-            inset 0 -40vh 140px 2px rgba(7, 5, 25, 0.9),
-            inset 0 -15vh 140px 2px rgba(7, 5, 25, 0.7),
-            inset 0 -5vh 140px 2px rgba(7, 5, 25, 0.4),
-            inset 0 -2vh 140px 2px rgba(7, 5, 25, 0.2)`,
+        boxShadow:
+            'inset 0 4px 1800px rgb(7, 5, 25),' +
+            'inset 0 -40vh 140px 2px rgba(7, 5, 25, 0.9),' + // Higher
+            'inset 0 -15vh 140px 2px rgba(7, 5, 25, 0.7),' + // Medium
+            'inset 0 -5vh 140px 2px rgba(7, 5, 25, 0.80),' + // High
+            'inset 0 -2vh 140px 2px rgba(7, 5, 25, 0.99)', // Highest
 
         [theme.fn.smallerThan('md')]: {
             paddingBottom: theme.spacing.xs * 2,
 
-            boxShadow: `
-                inset 0px -30px 12px -2px rgba(7, 5, 25, 0.85),
-                inset 0 -40vh 140px 2px rgba(7, 5, 25, 0.8),
-                inset 0 -2vh 140px 2px rgba(7, 5, 25, 0.2)`,
+            boxShadow:
+                'inset 0px -30px 12px -2px rgba(7, 5, 25, 0.85),' +
+                'inset 0 -40vh 140px 2px rgba(7, 5, 25, 0.8),' +
+                'inset 0 -2vh 140px 2px rgba(7, 5, 25, 0.2)',
         },
     },
 
