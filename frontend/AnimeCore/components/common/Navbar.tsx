@@ -42,29 +42,29 @@ const Navbar = () => {
             </Grid.Col>
             <Grid.Col span={4} className={classes.logo}>
                 <img
-                    alt=""
-                    src="/logos/animecore_logo.svg"
-                    width={158}
-                    height={22}
+                  alt=""
+                  src="/logos/animecore_logo.svg"
+                  width={158}
+                  height={22}
                 />
                 <img
-                    style={{
+                  style={{
                         transform: 'translateY(5px)',
                         color: '#AFAFAF',
                     }}
-                    alt=""
-                    src="/icons/chevron-down.svg"
-                    width={20}
-                    height={20}
+                  alt=""
+                  src="/icons/chevron-down.svg"
+                  width={20}
+                  height={20}
                 />
             </Grid.Col>
             <Grid.Col span={4} className={classes.profile}>
                 <img
-                    className={classes.avatar}
-                    alt=""
-                    src="/images/(Avatar)-placeholder.png"
-                    width={50}
-                    height={50}
+                  className={classes.avatar}
+                  alt=""
+                  src="/images/(Avatar)-placeholder.png"
+                  width={50}
+                  height={50}
                 />
             </Grid.Col>
         </Grid>

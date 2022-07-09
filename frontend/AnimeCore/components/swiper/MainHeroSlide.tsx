@@ -243,9 +243,9 @@ const MainHeroSlide = (props: IProps) => {
     return (
         <Box className={`${classes.box} hero`}>
             <BackgroundImage
-                className={`${classes.root}`}
-                src={heroBackgroundImage}
-                style={{
+              className={`${classes.root}`}
+              src={heroBackgroundImage}
+              style={{
                     display: 'flex', // This is a weird hack to make the items align properly
                     backgroundColor: 'black', // Stupid Mantine
                 }}
@@ -260,18 +260,18 @@ const MainHeroSlide = (props: IProps) => {
                                         {isLoading ? (
                                             <>
                                                 <Skeleton
-                                                    height={20}
-                                                    width={120}
-                                                ></Skeleton>
+                                                  height={20}
+                                                  width={120}
+                                                />
                                             </>
                                         ) : (
                                             <>
                                                 <Text
-                                                    component="span"
-                                                    size="xl"
-                                                    weight="bold"
-                                                    color="yellow"
-                                                    sx={(theme) => ({
+                                                  component="span"
+                                                  size="xl"
+                                                  weight="bold"
+                                                  color="yellow"
+                                                  sx={(theme) => ({
                                                         [theme.fn.smallerThan(
                                                             'sm'
                                                         )]: {
@@ -290,15 +290,15 @@ const MainHeroSlide = (props: IProps) => {
                                         {isLoading ? (
                                             <>
                                                 <Skeleton
-                                                    height={20}
-                                                    width={60}
-                                                ></Skeleton>
+                                                  height={20}
+                                                  width={60}
+                                                />
                                             </>
                                         ) : (
                                             <>
                                                 <div
-                                                    className={classes.line}
-                                                    style={{
+                                                  className={classes.line}
+                                                  style={{
                                                         display: 'inline-block',
                                                         width: '60px',
                                                         borderTop: '4px solid',
@@ -312,15 +312,15 @@ const MainHeroSlide = (props: IProps) => {
                                         {isLoading ? (
                                             <>
                                                 <Skeleton
-                                                    mt="lg"
-                                                    width={180}
-                                                    height={50}
+                                                  mt="lg"
+                                                  width={180}
+                                                  height={50}
                                                 />
                                             </>
                                         ) : (
                                             <>
                                                 <ScrollArea
-                                                    sx={(theme) => ({
+                                                  sx={(theme) => ({
                                                         height: 80,
                                                         [theme.fn.smallerThan(
                                                             'md'
@@ -328,25 +328,25 @@ const MainHeroSlide = (props: IProps) => {
                                                             height: 40,
                                                         },
                                                     })}
-                                                    onMouseEnter={
+                                                  onMouseEnter={
                                                         mouseEntersScrollArea
                                                     }
-                                                    onMouseLeave={
+                                                  onMouseLeave={
                                                         mouseLeavesScrollArea
                                                     }
-                                                    onTouchStart={
+                                                  onTouchStart={
                                                         touchEntersScrollArea
                                                     }
-                                                    onTouchEnd={
+                                                  onTouchEnd={
                                                         touchLeavesScrollArea
                                                     }
-                                                    offsetScrollbars
+                                                  offsetScrollbars
                                                 >
                                                     <Text
-                                                        size="lg"
-                                                        color="white"
-                                                        inherit
-                                                        sx={(theme) => ({
+                                                      size="lg"
+                                                      color="white"
+                                                      inherit
+                                                      sx={(theme) => ({
                                                             [theme.fn.smallerThan(
                                                                 'sm'
                                                             )]: {
@@ -364,45 +364,45 @@ const MainHeroSlide = (props: IProps) => {
                                         {isLoading ? (
                                             <>
                                                 <Skeleton
-                                                    mt="lg"
-                                                    width={270}
-                                                    height={20}
+                                                  mt="lg"
+                                                  width={270}
+                                                  height={20}
                                                 />
                                             </>
                                         ) : (
                                             <>
                                                 <Text
-                                                    className={classes.info}
-                                                    component="span"
-                                                    color="white"
+                                                  className={classes.info}
+                                                  component="span"
+                                                  color="white"
                                                 >
                                                     TV
                                                 </Text>
                                                 <Text
-                                                    className={classes.info}
-                                                    component="span"
-                                                    color="white"
+                                                  className={classes.info}
+                                                  component="span"
+                                                  color="white"
                                                 >
                                                     {props.animeEpisodeCount}{' '}
                                                     eps
                                                 </Text>
                                                 <Text
-                                                    className={classes.info}
-                                                    component="span"
-                                                    color="white"
+                                                  className={classes.info}
+                                                  component="span"
+                                                  color="white"
                                                 >
                                                     Completed
                                                 </Text>
                                                 <Text
-                                                    className={classes.info}
-                                                    component="span"
-                                                    color="white"
+                                                  className={classes.info}
+                                                  component="span"
+                                                  color="white"
                                                 >
                                                     {props.animeAirTime}
                                                 </Text>
                                                 <Text
-                                                    component="span"
-                                                    color="white"
+                                                  component="span"
+                                                  color="white"
                                                 >
                                                     {props.animeStudio}
                                                 </Text>
@@ -414,32 +414,32 @@ const MainHeroSlide = (props: IProps) => {
                                         {isLoading ? (
                                             <>
                                                 <Skeleton
-                                                    mt="sm"
-                                                    mb="sm"
-                                                    height={100}
+                                                  mt="sm"
+                                                  mb="sm"
+                                                  height={100}
                                                 />
                                             </>
                                         ) : (
                                             <>
                                                 <ScrollArea
-                                                    style={{ height: 100 }}
-                                                    onMouseEnter={
+                                                  style={{ height: 100 }}
+                                                  onMouseEnter={
                                                         mouseEntersScrollArea
                                                     }
-                                                    onMouseLeave={
+                                                  onMouseLeave={
                                                         mouseLeavesScrollArea
                                                     }
-                                                    onTouchStart={
+                                                  onTouchStart={
                                                         touchEntersScrollArea
                                                     }
-                                                    onTouchEnd={
+                                                  onTouchEnd={
                                                         touchLeavesScrollArea
                                                     }
-                                                    offsetScrollbars
+                                                  offsetScrollbars
                                                 >
                                                     <Text
-                                                        color="gray"
-                                                        sx={() => ({
+                                                      color="gray"
+                                                      sx={() => ({
                                                             whiteSpace:
                                                                 'pre-line',
                                                         })}
@@ -454,8 +454,8 @@ const MainHeroSlide = (props: IProps) => {
                                         {isLoading ? (
                                             <>
                                                 <Skeleton
-                                                    height={24}
-                                                    width="50vw"
+                                                  height={24}
+                                                  width="50vw"
                                                 />
                                             </>
                                         ) : (
@@ -463,12 +463,12 @@ const MainHeroSlide = (props: IProps) => {
                                                 <Space h="xl" />
 
                                                 <Badge
-                                                    component="span"
-                                                    size="lg"
-                                                    radius="sm"
-                                                    variant="filled"
-                                                    mr="md"
-                                                    sx={(theme) => ({
+                                                  component="span"
+                                                  size="lg"
+                                                  radius="sm"
+                                                  variant="filled"
+                                                  mr="md"
+                                                  sx={(theme) => ({
                                                         backgroundColor:
                                                             theme.colors
                                                                 .blue[9],
@@ -477,12 +477,12 @@ const MainHeroSlide = (props: IProps) => {
                                                     Mystery
                                                 </Badge>
                                                 <Badge
-                                                    component="span"
-                                                    size="lg"
-                                                    radius="sm"
-                                                    variant="filled"
-                                                    mr="md"
-                                                    sx={(theme) => ({
+                                                  component="span"
+                                                  size="lg"
+                                                  radius="sm"
+                                                  variant="filled"
+                                                  mr="md"
+                                                  sx={(theme) => ({
                                                         backgroundColor:
                                                             theme.colors
                                                                 .blue[9],
@@ -498,15 +498,15 @@ const MainHeroSlide = (props: IProps) => {
                                         {isLoading ? (
                                             <>
                                                 <Skeleton
-                                                    width="60px"
-                                                    height={60}
+                                                  width="60px"
+                                                  height={60}
                                                 />
                                             </>
                                         ) : (
                                             <>
                                                 <Button
-                                                    color="yellow"
-                                                    sx={(theme) => ({
+                                                  color="yellow"
+                                                  sx={(theme) => ({
                                                         backgroundColor:
                                                             theme.colors
                                                                 .yellow[9],
@@ -518,17 +518,17 @@ const MainHeroSlide = (props: IProps) => {
                                                             width: 60,
                                                         },
                                                     })}
-                                                    radius="lg"
+                                                  radius="lg"
                                                 >
                                                     <img
-                                                        alt=""
-                                                        src="/icons/play.svg"
-                                                        width={24}
-                                                        height={24}
+                                                      alt=""
+                                                      src="/icons/play.svg"
+                                                      width={24}
+                                                      height={24}
                                                     />
                                                     <Text
-                                                        color="dark"
-                                                        weight={700}
+                                                      color="dark"
+                                                      weight={700}
                                                     >
                                                         Watch
                                                     </Text>
@@ -538,38 +538,38 @@ const MainHeroSlide = (props: IProps) => {
                                         {isLoading ? (
                                             <>
                                                 <Skeleton
-                                                    ml="xl"
-                                                    height={60}
-                                                    width={120}
+                                                  ml="xl"
+                                                  height={60}
+                                                  width={120}
                                                 />
                                             </>
                                         ) : (
                                             <>
                                                 <Button
-                                                    ml="xl"
-                                                    color="yellow"
-                                                    variant="outline"
-                                                    sx={(theme) => ({
+                                                  ml="xl"
+                                                  color="yellow"
+                                                  variant="outline"
+                                                  sx={(theme) => ({
                                                         borderWidth: 4,
                                                         borderColor:
                                                             theme.colors
                                                                 .yellow[9],
                                                         height: 60,
                                                     })}
-                                                    radius="lg"
-                                                    rightIcon={
+                                                  radius="lg"
+                                                  rightIcon={
                                                         <img
-                                                            alt=""
-                                                            src="/icons/chevrons-right.svg"
-                                                            width={24}
-                                                            height={24}
+                                                          alt=""
+                                                          src="/icons/chevrons-right.svg"
+                                                          width={24}
+                                                          height={24}
                                                         />
                                                     }
                                                 >
                                                     <Text
-                                                        weight={700}
-                                                        size="lg"
-                                                        color="yellow"
+                                                      weight={700}
+                                                      size="lg"
+                                                      color="yellow"
                                                     >
                                                         Details
                                                     </Text>
@@ -581,31 +581,31 @@ const MainHeroSlide = (props: IProps) => {
                             </div>
                         </Container>
                         <Title
-                            sx={() => ({
+                          sx={() => ({
                                 backgroundColor: '',
                                 display: 'flex',
                             })}
                         >
                             <Grid
-                                grow
-                                justify="space-between"
-                                align="center"
-                                sx={() => ({
+                              grow
+                              justify="space-between"
+                              align="center"
+                              sx={() => ({
                                     height: '100%',
                                     width: '100%',
                                 })}
                             >
                                 <Grid.Col
-                                    span={3}
-                                    sx={(theme) => ({
+                                  span={3}
+                                  sx={(theme) => ({
                                         [theme.fn.smallerThan('md')]: {
                                             display: 'none',
                                         },
                                     })}
                                 />
                                 <Grid.Col
-                                    span={3}
-                                    sx={() => ({
+                                  span={3}
+                                  sx={() => ({
                                         display: 'flex',
                                         justifyContent: 'center',
                                         alignItems: 'center',
@@ -615,18 +615,18 @@ const MainHeroSlide = (props: IProps) => {
                                     })}
                                 >
                                     <Progress
-                                        sx={() => ({ width: 100 })}
-                                        mr="xl"
-                                        color="yellow"
-                                        value={props?.sliderProgress}
+                                      sx={() => ({ width: 100 })}
+                                      mr="xl"
+                                      color="yellow"
+                                      value={props?.sliderProgress}
                                     />
                                     <div
-                                        className={
+                                      className={
                                             classes.swiper__mainhero__pagination
                                         }
                                     >
                                         <div
-                                            style={{
+                                          style={{
                                                 display: 'flex',
                                                 flexDirection: 'row',
                                                 justifyContent: 'center',
@@ -634,11 +634,10 @@ const MainHeroSlide = (props: IProps) => {
                                         >
                                             {Array(swiper?.slides.length - 2) // Loop count | See : https://github.com/nolimits4web/swiper/issues/456
                                                 .fill(0)
-                                                .map((_, index) => {
-                                                    return (
+                                                .map((_, index) => (
                                                         <span
-                                                            key={index}
-                                                            style={{
+                                                          key={index}
+                                                          style={{
                                                                 color:
                                                                     swiper?.realIndex ===
                                                                     index
@@ -655,53 +654,52 @@ const MainHeroSlide = (props: IProps) => {
                                                         >
                                                             ·
                                                         </span>
-                                                    );
-                                                })}
+                                                    ))}
                                         </div>
                                     </div>
                                     <ActionIcon
-                                        color="yellow"
-                                        size="lg"
-                                        radius="md"
-                                        variant="filled"
-                                        onClick={async () => {
+                                      color="yellow"
+                                      size="lg"
+                                      radius="md"
+                                      variant="filled"
+                                      onClick={async () => {
                                             swiper.slidePrev();
                                         }}
-                                        sx={(theme) => ({
+                                      sx={(theme) => ({
                                             [theme.fn.smallerThan('md')]: {
                                                 display: 'none',
                                             },
                                         })}
                                     >
                                         <img
-                                            src="icons/chevron-left-black.svg"
-                                            alt=""
+                                          src="icons/chevron-left-black.svg"
+                                          alt=""
                                         />
                                     </ActionIcon>
                                     <ActionIcon
-                                        color="yellow"
-                                        size="lg"
-                                        radius="md"
-                                        variant="filled"
-                                        ml="xl"
-                                        onClick={async () => {
+                                      color="yellow"
+                                      size="lg"
+                                      radius="md"
+                                      variant="filled"
+                                      ml="xl"
+                                      onClick={async () => {
                                             swiper.slideNext();
                                         }}
-                                        sx={(theme) => ({
+                                      sx={(theme) => ({
                                             [theme.fn.smallerThan('md')]: {
                                                 display: 'none',
                                             },
                                         })}
                                     >
                                         <img
-                                            src="icons/chevron-right-black.svg"
-                                            alt=""
+                                          src="icons/chevron-right-black.svg"
+                                          alt=""
                                         />
                                     </ActionIcon>
                                 </Grid.Col>
                                 <Grid.Col
-                                    span={3}
-                                    sx={(theme) => ({
+                                  span={3}
+                                  sx={(theme) => ({
                                         display: 'flex',
                                         justifyContent: 'flex-end',
 
@@ -711,10 +709,10 @@ const MainHeroSlide = (props: IProps) => {
                                     })}
                                 >
                                     <img
-                                        width={24}
-                                        height={24}
-                                        src="/icons/mouse.svg"
-                                        alt=""
+                                      width={24}
+                                      height={24}
+                                      src="/icons/mouse.svg"
+                                      alt=""
                                     />
                                     <Text px="xl" color="gray">
                                         scroll below
