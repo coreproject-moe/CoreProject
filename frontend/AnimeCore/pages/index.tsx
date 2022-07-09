@@ -2,14 +2,7 @@ import { showNotification } from '@mantine/notifications';
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
-import {
-    Autoplay,
-    EffectFade,
-    Lazy,
-    Mousewheel,
-    Navigation,
-    Pagination as SwiperPagination,
-} from 'swiper';
+import { Autoplay, EffectFade, Lazy, Mousewheel, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useCountdownTimer } from 'use-countdown-timer';
 
@@ -172,13 +165,7 @@ const Home: NextPage = () => {
             >
                 <SwiperSlide>
                     <Swiper
-                        modules={[
-                            EffectFade,
-                            Autoplay,
-                            Lazy,
-                            Navigation,
-                            SwiperPagination,
-                        ]}
+                        modules={[EffectFade, Autoplay, Lazy, Navigation]}
                         effect="fade"
                         direction="horizontal"
                         navigation={{
