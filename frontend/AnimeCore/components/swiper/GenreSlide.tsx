@@ -1,28 +1,34 @@
 import {
-    Button,
     Container,
     createStyles,
+    Divider,
+    Input,
     Text,
     Title,
+    SimpleGrid,
     useMantineTheme,
+    Badge,
+    Group,
 } from '@mantine/core';
 import React from 'react';
 
 const useStyles = createStyles((theme) => ({
     wrapper: {
-        position: 'relative',
-        paddingTop: 120,
-        paddingBottom: 80,
+        paddingTop: theme.spacing.xl * 3,
+        paddingLeft: theme.spacing.xl * 4,
+        paddingRight: theme.spacing.xl * 4,
 
-        '@media (max-width: 755px)': {
-            paddingTop: 80,
-            paddingBottom: 60,
+        [theme.fn.smallerThan('md')]: {
+            paddingLeft: theme.spacing.sm * 2,
+            paddingRight: theme.spacing.sm * 2,
         },
     },
 
     inner: {
-        position: 'relative',
-        zIndex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 
     dots: {
@@ -91,6 +97,11 @@ const useStyles = createStyles((theme) => ({
             },
         },
     },
+    badges: {
+        cursor: 'pointer',
+        textTransform: 'capitalize',
+        height: 45,
+    },
 }));
 
 const GenreSlide = () => {
@@ -98,46 +109,290 @@ const GenreSlide = () => {
     const theme = useMantineTheme();
 
     return (
-        <div className="hero">
+        <div className="hero" style={{ backgroundColor: theme.colors.blue[9] }}>
             <Container className={classes.wrapper} size={1400}>
                 <div className={classes.inner}>
-                    <Title className={classes.title}>
-                        Automated AI
-                        <Text
-                            component="span"
-                            color={theme.primaryColor}
-                            inherit
+                    <Input
+                        width={600}
+                        styles={{
+                            wrapper: {
+                                width: '80vh',
+                            },
+                            input: {
+                                height: 80,
+                                borderRadius: 14,
+                                borderColor: '#FF7081',
+                                borderWidth: 4,
+                                alignSelf: 'center',
+                                backgroundColor: 'white',
+                            },
+                        }}
+                        icon={
+                            <img
+                                src="/icons/search-red.svg"
+                                alt=""
+                                height={36}
+                                width={36}
+                            />
+                        }
+                        variant="unstyled"
+                        placeholder="Search for anything"
+                        radius="lg"
+                        size="xl"
+                    />
+
+                    <Divider
+                        mt="xl"
+                        label={<Text size="sm">or search by genres</Text>}
+                        labelPosition="center"
+                        size="md"
+                        sx={{ width: 300 }}
+                    />
+                    <SimpleGrid
+                        mt="xl"
+                        cols={6}
+                        spacing={40}
+                        sx={{ justifyItems: 'center' }}
+                    >
+                        <Badge
+                            className={classes.badges}
+                            size="xl"
+                            sx={(theme) => ({
+                                backgroundColor: theme.colors.blue[4],
+                            })}
+                            variant="filled"
+                            radius="md"
                         >
-                            code reviews
-                        </Text>
-                        for any stack
+                            <Text color={theme.black}>Action</Text>
+                        </Badge>
+                        <Badge
+                            className={classes.badges}
+                            size="xl"
+                            sx={(theme) => ({
+                                backgroundColor: theme.colors.red[4],
+                            })}
+                            variant="filled"
+                            radius="md"
+                        >
+                            <Text color={theme.black}>Adventure</Text>
+                        </Badge>
+                        <Badge
+                            className={classes.badges}
+                            size="xl"
+                            sx={(theme) => ({
+                                backgroundColor: theme.colors.yellow[6],
+                            })}
+                            variant="filled"
+                            radius="md"
+                        >
+                            <Text color={theme.black}>Comedy</Text>
+                        </Badge>
+                        <Badge
+                            className={classes.badges}
+                            size="xl"
+                            sx={(theme) => ({
+                                backgroundColor: theme.colors.green[5],
+                            })}
+                            variant="filled"
+                            radius="md"
+                        >
+                            <Text color={theme.black}>Drama</Text>
+                        </Badge>
+                        <Badge
+                            className={classes.badges}
+                            size="xl"
+                            sx={(theme) => ({
+                                backgroundColor: theme.colors.green[5],
+                            })}
+                            variant="filled"
+                            radius="md"
+                        >
+                            <Text color={theme.black}>Ecchi</Text>
+                        </Badge>
+                        <Badge
+                            className={classes.badges}
+                            size="xl"
+                            sx={(theme) => ({
+                                backgroundColor: theme.colors.blue[4],
+                            })}
+                            variant="filled"
+                            radius="md"
+                        >
+                            <Text color={theme.black}>Fantasy</Text>
+                        </Badge>
+                        <Badge
+                            className={classes.badges}
+                            size="xl"
+                            sx={(theme) => ({
+                                backgroundColor: theme.colors.red[4],
+                            })}
+                            variant="filled"
+                            radius="md"
+                        >
+                            <Text color={theme.black}>Horror</Text>
+                        </Badge>
+                        <Badge
+                            className={classes.badges}
+                            size="xl"
+                            sx={(theme) => ({
+                                backgroundColor: theme.colors.red[3],
+                            })}
+                            variant="filled"
+                            radius="md"
+                        >
+                            <Text color={theme.black}>Mahou Shoujo</Text>
+                        </Badge>
+                        <Badge
+                            className={classes.badges}
+                            size="xl"
+                            sx={(theme) => ({
+                                backgroundColor: theme.colors.orange[3],
+                            })}
+                            variant="filled"
+                            radius="md"
+                        >
+                            <Text color={theme.black}>Mecha</Text>
+                        </Badge>
+                        <Badge
+                            className={classes.badges}
+                            size="xl"
+                            sx={(theme) => ({
+                                backgroundColor: theme.colors.cyan[5],
+                            })}
+                            variant="filled"
+                            radius="md"
+                        >
+                            <Text color={theme.black}>Music</Text>
+                        </Badge>
+                        <Badge
+                            className={classes.badges}
+                            size="xl"
+                            sx={(theme) => ({
+                                backgroundColor: theme.colors.yellow[5],
+                            })}
+                            variant="filled"
+                            radius="md"
+                        >
+                            <Text color={theme.black}>Mystery</Text>
+                        </Badge>
+                        <Badge
+                            className={classes.badges}
+                            size="xl"
+                            sx={(theme) => ({
+                                backgroundColor: theme.colors.red[6],
+                            })}
+                            variant="filled"
+                            radius="md"
+                        >
+                            <Text color={theme.black}>Psychological</Text>
+                        </Badge>
+                        <Badge
+                            className={classes.badges}
+                            size="xl"
+                            sx={(theme) => ({
+                                backgroundColor: theme.colors.red[5],
+                            })}
+                            variant="filled"
+                            radius="md"
+                        >
+                            <Text color={theme.black}>Romance</Text>
+                        </Badge>
+                        <Badge
+                            className={classes.badges}
+                            size="xl"
+                            sx={(theme) => ({
+                                backgroundColor: theme.colors.green[5],
+                            })}
+                            variant="filled"
+                            radius="md"
+                        >
+                            <Text color={theme.black}>Sci-Fi</Text>
+                        </Badge>
+                        <Badge
+                            className={classes.badges}
+                            size="xl"
+                            sx={(theme) => ({
+                                backgroundColor: theme.colors.yellow[5],
+                            })}
+                            variant="filled"
+                            radius="md"
+                        >
+                            <Text color={theme.black}>Slice of Life</Text>
+                        </Badge>
+                        <Badge
+                            className={classes.badges}
+                            size="xl"
+                            sx={(theme) => ({
+                                backgroundColor: theme.colors.red[8],
+                            })}
+                            variant="filled"
+                            radius="md"
+                        >
+                            <Text color={theme.black}>Sports</Text>
+                        </Badge>
+                        <Badge
+                            className={classes.badges}
+                            size="xl"
+                            sx={(theme) => ({
+                                backgroundColor: theme.colors.cyan[8],
+                            })}
+                            variant="filled"
+                            radius="md"
+                        >
+                            <Text color={theme.black}>Supernatural</Text>
+                        </Badge>
+                        <Badge
+                            className={classes.badges}
+                            size="xl"
+                            sx={(theme) => ({
+                                backgroundColor: theme.colors.green[5],
+                            })}
+                            variant="filled"
+                            radius="md"
+                        >
+                            <Text color={theme.black}>Thriller</Text>
+                        </Badge>
+                    </SimpleGrid>
+                    <Title mt="lg" order={3}>
+                        Choose your preferences
                     </Title>
-
-                    <Container p={0} size={600}>
-                        <Text
+                    <Text align="center" sx={{ maxWidth: 528 }}>
+                        Choose some options to customize your experience. You
+                        can change them anytime by clicking the profile icon and
+                        going to Settings
+                    </Text>
+                    <Group mt="lg">
+                        <Text>Label</Text>
+                        <Divider
+                            sx={{ height: '24px' }}
+                            orientation="vertical"
+                        />
+                        <Text>Label</Text>
+                        <Divider
+                            sx={{ height: '24px' }}
+                            size="sm"
+                            orientation="vertical"
+                        />
+                        <Text>Label</Text>
+                        <Divider
+                            sx={{ height: '24px' }}
+                            size="md"
+                            orientation="vertical"
+                        />
+                        <Text>Label</Text>
+                        <Divider
+                            sx={{ height: '24px' }}
                             size="lg"
-                            color="dimmed"
-                            className={classes.description}
-                        >
-                            Build more reliable software with AI companion. AI
-                            is also trained to detect lazy developers who do
-                            nothing and just complain on Twitter.
-                        </Text>
-                    </Container>
-
-                    <div className={classes.controls}>
-                        <Button
-                            className={classes.control}
-                            size="lg"
-                            variant="default"
-                            color="gray"
-                        >
-                            Book a demo
-                        </Button>
-                        <Button className={classes.control} size="lg">
-                            Purchase a license
-                        </Button>
-                    </div>
+                            orientation="vertical"
+                        />
+                        <Text>Label</Text>
+                        <Divider
+                            sx={{ height: '24px' }}
+                            size="xl"
+                            orientation="vertical"
+                        />
+                        <Text>Label</Text>
+                    </Group>
                 </div>
             </Container>
         </div>
