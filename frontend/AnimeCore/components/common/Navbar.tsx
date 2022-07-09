@@ -1,4 +1,5 @@
 import { createStyles, Grid } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { memo } from 'react';
 
 const useStyles = createStyles((theme) => ({
@@ -35,6 +36,8 @@ const useStyles = createStyles((theme) => ({
 
 const Navbar = () => {
     const { classes } = useStyles();
+    const mobile = useMediaQuery('(min-width: 0px) and (max-width: 576px)');
+
     return (
         <Grid justify="space-between" className={classes.grid} grow>
             <Grid.Col span={4} className={classes.search}>
@@ -42,29 +45,33 @@ const Navbar = () => {
             </Grid.Col>
             <Grid.Col span={4} className={classes.logo}>
                 <img
-                  alt=""
-                  src="/logos/animecore_logo.svg"
-                  width={158}
-                  height={22}
+                    alt=""
+                    src={
+                        mobile
+                            ? '/logos/animecore_logo-black.svg'
+                            : '/logos/animecore_logo.svg'
+                    }
+                    width={158}
+                    height={22}
                 />
                 <img
-                  style={{
+                    style={{
                         transform: 'translateY(5px)',
                         color: '#AFAFAF',
                     }}
-                  alt=""
-                  src="/icons/chevron-down.svg"
-                  width={20}
-                  height={20}
+                    alt=""
+                    src="/icons/chevron-down.svg"
+                    width={20}
+                    height={20}
                 />
             </Grid.Col>
             <Grid.Col span={4} className={classes.profile}>
                 <img
-                  className={classes.avatar}
-                  alt=""
-                  src="/images/(Avatar)-placeholder.png"
-                  width={50}
-                  height={50}
+                    className={classes.avatar}
+                    alt=""
+                    src="/images/(Avatar)-placeholder.png"
+                    width={50}
+                    height={50}
                 />
             </Grid.Col>
         </Grid>
