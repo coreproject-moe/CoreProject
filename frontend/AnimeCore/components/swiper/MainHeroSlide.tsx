@@ -624,10 +624,36 @@ const MainHeroSlide = (props: IProps) => {
                                         <div
                                             style={{
                                                 display: 'flex',
+                                                flexDirection: 'row',
                                                 justifyContent: 'center',
                                             }}
-                                            className="swiper__mainhero__pagination"
-                                        ></div>
+                                        >
+                                            {Array(swiper?.slides.length - 2) // Loop count | See : https://github.com/nolimits4web/swiper/issues/456
+                                                .fill(0)
+                                                .map((_, index) => {
+                                                    return (
+                                                        <span
+                                                            key={index}
+                                                            style={{
+                                                                color:
+                                                                    swiper?.realIndex ===
+                                                                    index
+                                                                        ? 'var(--swiper-pagination-bullet-inactive-color)'
+                                                                        : '',
+                                                                opacity:
+                                                                    swiper?.realIndex ===
+                                                                    index
+                                                                        ? 1
+                                                                        : 'var(--swiper-pagination-bullet-inactive-opacity)',
+                                                                padding:
+                                                                    '0px calc(var(--swiper-pagination-bullet-horizontal-gap) / 2) 0px',
+                                                            }}
+                                                        >
+                                                            ·
+                                                        </span>
+                                                    );
+                                                })}
+                                        </div>
                                     </div>
                                     <ActionIcon
                                         color="yellow"
