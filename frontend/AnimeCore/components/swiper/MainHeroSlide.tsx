@@ -170,6 +170,9 @@ interface IProps {
 }
 
 const MainHeroSlide = (props: IProps) => {
+    const swiper = useSwiper();
+    const swiperSlide = useSwiperSlide();
+
     const { classes } = useStyles();
 
     const [heroBackgroundImage, setHeroBackgroundImage] = useState<string>('');
@@ -197,11 +200,15 @@ const MainHeroSlide = (props: IProps) => {
 
     const [isLoading, setIsLoading] = useState(true);
 
-    setTimeout(() => {
-        if (isLoading) {
-            setIsLoading(false);
-        }
-    }, 400);
+    useEffect(() => {
+        setTimeout(() => {
+            if (swiperSlide.isActive) {
+                setIsLoading(false);
+            } else {
+                setIsLoading(true);
+            }
+        }, 400);
+    }, [swiperSlide.isActive]);
 
     /** Events to handle scrollbox area */
 
@@ -232,9 +239,6 @@ const MainHeroSlide = (props: IProps) => {
             props.swiper!.allowTouchMove = true;
         }
     };
-
-    const swiper = useSwiper();
-    const swiperSlide = useSwiperSlide();
 
     return (
         <Box className={`${classes.box} hero`}>
