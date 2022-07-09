@@ -194,7 +194,6 @@ const Home: NextPage = () => {
                         }}
                         loop
                         lazy
-                        preloadImages={false}
                         onSwiper={setMainHeroSwiper}
                         onSlideChange={() => {
                             // Restart
@@ -219,7 +218,6 @@ const Home: NextPage = () => {
                                         start={start}
                                         swiper={swiper}
                                         sliderProgress={sliderProgress}
-                                        mainHeroSwiper={mainHeroSwiper}
                                     />
                                 </SwiperSlide>
                             );
