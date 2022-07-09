@@ -1,14 +1,14 @@
 import {
+    Badge,
     Container,
     createStyles,
     Divider,
+    Group,
     Input,
+    SimpleGrid,
     Text,
     Title,
-    SimpleGrid,
     useMantineTheme,
-    Badge,
-    Group,
 } from '@mantine/core';
 import React from 'react';
 
