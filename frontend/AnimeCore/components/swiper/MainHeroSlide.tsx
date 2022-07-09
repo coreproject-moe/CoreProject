@@ -21,9 +21,8 @@ import { Navbar } from '@/components/common/Navbar';
 const useStyles = createStyles((theme) => ({
     root: {
         display: 'flex',
-        minHeight: '90vh',
-        height: '100%',
         flexDirection: 'column',
+        height: 'inherit',
         paddingTop: theme.spacing.xl * 2,
         paddingBottom: theme.spacing.xl * 2,
         color: 'black',
@@ -224,13 +223,14 @@ const MainHeroSlide = (props: IProps) => {
     };
 
     return (
-        <Box>
+        <Box className="swiper-lazy">
             <BackgroundImage
-                className={`${classes.root} swiper-lazy`}
+                className={`${classes.root}`}
                 src={heroBackgroundImage}
                 style={{
                     display: 'flex', // This is a weird hack to make the items align properly
                     backgroundColor: 'black', // Stupid Mantine
+                    backgroundRepeat: 'no-repeat', // Come on
                 }}
             >
                 <Navbar />
