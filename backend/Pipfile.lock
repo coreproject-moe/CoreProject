@@ -243,9 +243,7 @@
             "version": "==1.2.13"
         },
         "django": {
-            "extras": [
-                "argon2"
-            ],
+            "extras": ["argon2"],
             "hashes": [
                 "sha256:55ea3e07df2eb3994b7261d743c111e4c27a56ca1285eb762dba07432ebe4039",
                 "sha256:ec22c3e909af402281ef1dea69cbbc42b43b9ac9379df2914e0a7b85597242d6"
@@ -647,9 +645,7 @@
             "version": "==2.0.20"
         },
         "whitenoise": {
-            "extras": [
-                "brotli"
-            ],
+            "extras": ["brotli"],
             "hashes": [
                 "sha256:8e9c600a5c18bd17655ef668ad55b5edf6c24ce9bdca5bf607649ca4b1e8e2c2",
                 "sha256:8fa943c6d4cd9e27673b70c21a07b0aa120873901e099cd46cab40f7cc96d567"
@@ -783,9 +779,7 @@
             "version": "==0.4.5"
         },
         "django": {
-            "extras": [
-                "argon2"
-            ],
+            "extras": ["argon2"],
             "hashes": [
                 "sha256:55ea3e07df2eb3994b7261d743c111e4c27a56ca1285eb762dba07432ebe4039",
                 "sha256:ec22c3e909af402281ef1dea69cbbc42b43b9ac9379df2914e0a7b85597242d6"
