@@ -201,13 +201,13 @@ const MainHeroSlide = (props: IProps) => {
 
     useEffect(() => {
         setTimeout(() => {
-            if (swiperSlide.isActive) {
+            if (swiperSlide.isVisible && swiperSlide.isActive) {
                 setIsLoading(false);
             } else {
                 setIsLoading(true);
             }
         }, 400);
-    }, [swiperSlide.isActive]);
+    }, [swiperSlide]);
 
     /** Events to handle scrollbox area */
 
@@ -236,17 +236,22 @@ const MainHeroSlide = (props: IProps) => {
             props.swiper!.allowTouchMove = true;
         }
     };
+    console.log(swiperSlide.isVisible);
     return (
         <Box className={`${classes.box} hero`}>
             <BackgroundImage
                 className={`${classes.root}`}
-                src={swiperSlide.isActive ? heroBackgroundImage : ''}
+                src={
+                    swiperSlide.isVisible && swiperSlide.isActive
+                        ? heroBackgroundImage
+                        : ''
+                }
                 style={{
                     display: 'flex', // This is a weird hack to make the items align properly
                     backgroundColor: 'black', // Stupid Mantine
                 }}
             >
-                {swiperSlide.isActive ? (
+                {swiperSlide.isVisible && swiperSlide.isActive ? (
                     <>
                         <Navbar />
                         <Container size="lg" className={classes.container}>
