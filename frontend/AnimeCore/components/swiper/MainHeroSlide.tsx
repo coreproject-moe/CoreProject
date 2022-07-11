@@ -166,7 +166,6 @@ interface IProps {
     swiper: Partial<SwiperType> | null;
     pause?: () => void;
     start?: () => void;
-    sliderProgress: number;
 }
 
 const MainHeroSlide = (props: IProps) => {
@@ -198,7 +197,7 @@ const MainHeroSlide = (props: IProps) => {
         }
     }, [fullhd, tablet, mobile, props.backgroundBanner, props.backgroundImage]);
 
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
         setTimeout(() => {
@@ -214,32 +213,29 @@ const MainHeroSlide = (props: IProps) => {
 
     const mouseEntersScrollArea = (event: React.MouseEvent<HTMLDivElement>) => {
         if (event) {
-            props.pause!();
             props.swiper?.mousewheel?.disable();
         }
     };
 
     const mouseLeavesScrollArea = (event: React.MouseEvent<HTMLDivElement>) => {
         if (event) {
-            props.start!();
             props.swiper?.mousewheel?.enable();
         }
     };
 
     const touchEntersScrollArea = (event: React.TouchEvent<HTMLDivElement>) => {
         if (event) {
-            props.pause!();
             props.swiper!.allowTouchMove = false;
         }
     };
 
     const touchLeavesScrollArea = (event: React.TouchEvent<HTMLDivElement>) => {
         if (event) {
-            props.start!();
+            swiper.autoplay.start();
+
             props.swiper!.allowTouchMove = true;
         }
     };
-
     return (
         <Box className={`${classes.box} hero`}>
             <BackgroundImage
@@ -618,7 +614,10 @@ const MainHeroSlide = (props: IProps) => {
                                         sx={() => ({ width: 100 })}
                                         mr="xl"
                                         color="yellow"
-                                        value={props?.sliderProgress}
+                                        value={
+                                            (100 / (swiper.slides.length - 2)) *
+                                            (swiper.realIndex + 1)
+                                        }
                                     />
                                     <div
                                         className={
