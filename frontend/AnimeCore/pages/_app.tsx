@@ -14,15 +14,52 @@ export default function App(props: AppProps) {
             <Head>
                 <title>AnimeCore</title>
                 <meta
-                  name="viewport"
-                  content="minimum-scale=1, initial-scale=1, width=device-width"
+                    name="viewport"
+                    content="minimum-scale=1, initial-scale=1, width=device-width"
+                />
+                <link
+                    rel="preload"
+                    href="/fonts/Kokoro/Kokoro-SemiBoldItalic.woff2"
+                    as="font"
+                    type="font/woff2"
+                    crossOrigin="anonymous"
+                />
+                <link
+                    rel="preload"
+                    href="/fonts/Kokoro/Kokoro-BoldItalic.woff2"
+                    as="font"
+                    type="font/woff2"
+                    crossOrigin="anonymous"
+                />
+
+                <link
+                    rel="preload"
+                    href="/fonts/Kokoro/Kokoro-Italic.woff2"
+                    as="font"
+                    type="font/woff2"
+                    crossOrigin="anonymous"
+                />
+
+                <link
+                    rel="preload"
+                    href="/fonts/Kokoro/Kokoro-Regular.woff2"
+                    as="font"
+                    type="font/woff2"
+                    crossOrigin="anonymous"
+                />
+                <link
+                    rel="preload"
+                    href="/fonts/Kokoro/Kokoro-Bold.woff2"
+                    as="font"
+                    type="font/woff2"
+                    crossOrigin="anonymous"
                 />
             </Head>
 
             <MantineProvider
-              withGlobalStyles
-              withNormalizeCSS
-              theme={{
+                withGlobalStyles
+                withNormalizeCSS
+                theme={{
                     /** Put your mantine theme override here */
                     colorScheme: 'dark',
                     /** Font Family */
