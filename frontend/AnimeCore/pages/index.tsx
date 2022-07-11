@@ -1,7 +1,7 @@
 import { showNotification } from '@mantine/notifications';
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
-import type { Swiper as SwiperType } from 'swiper';
+import { Autoplay, Swiper as SwiperType } from 'swiper';
 import { EffectFade, Lazy, Mousewheel, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -83,7 +83,7 @@ const Home: NextPage = () => {
             animeTitle: 'Hamefura',
             animeSummary:
                 "Most people would prefer being the protagonist of a world full of adventure, be it in a game or in another world. But, unfortunately, a certain girl is not so lucky. Regaining the memories of her past life, she realizes that she was reborn in the world of Fortune Lover—one of the games she used to play.\n\nUnfortunately, the character she was reincarnated into—Catarina Claes—is the game's main antagonist, who faces utter doom in every ending. Using her extensive knowledge of the game, she takes it upon herself to escape from the chains of this accursed destiny.\n\nHowever, this will not be an easy feat, especially since she needs to be cautious as to not set off death flags that may speed up the impending doom she is trying to avoid. Even so, to make a change that will affect the lives of everyone around her, she strives—not as the heroine—but as the villainess.",
-            backgroundImage: '/images/Hamefura-poster.jpg',
+            backgroundImage: '/images/Hamefura-poster.avif',
             backgroundBanner:
                 'https://media.kitsu.io/anime/poster_images/43238/large.jpg',
         },
@@ -158,12 +158,15 @@ const Home: NextPage = () => {
             >
                 <SwiperSlide>
                     <Swiper
-                        modules={[EffectFade, Lazy, Navigation]}
+                        modules={[EffectFade, Lazy, Navigation, Autoplay]}
                         effect="fade"
                         direction="horizontal"
                         navigation={{
                             nextEl: '.mainhero__next__el',
                             prevEl: '.mainhero__previous__el',
+                        }}
+                        autoplay={{
+                            delay: SWIPER_DELAY,
                         }}
                         pagination={{
                             enabled: true,
