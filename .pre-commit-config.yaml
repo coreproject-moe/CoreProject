@@ -51,7 +51,7 @@ repos:
             args: [--profile, black]
 
     - repo: https://github.com/asottile/pyupgrade
-      rev: v2.34.0
+      rev: v2.37.1
       hooks:
           - id: pyupgrade
             args: [--py311-plus]
