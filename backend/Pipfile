@@ -37,7 +37,7 @@ requests = "*"
 requests-cache = "*"
 requests-ratelimiter = "*"
 # Web servers
-uwsgi = "*"
+uwsgi = {version="*", markers="sys_platform != 'win32'"}
 
 
 [dev-packages]

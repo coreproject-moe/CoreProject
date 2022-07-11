@@ -14,6 +14,8 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from django.urls import re_path
+from django.contrib.flatpages import views
 
 handler400 = TemplateView.as_view(template_name="400.html")
 handler403 = TemplateView.as_view(template_name="403.html")
@@ -54,7 +56,7 @@ urlpatterns = [
     ),
     #   Flatpages
     # ===============
-    path("", include("apps.__flatpages__.urls")),
+    re_path(r"^(?P<url>.*/)$", views.flatpage),
 ]
 
 if settings.DEBUG:
