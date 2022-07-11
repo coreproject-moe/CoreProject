@@ -37,7 +37,7 @@ MAL_CLIENT_SECRET = os.environ.get("MAL_CLIENT_SECRET")
 # Application definition
 
 INSTALLED_APPS = [
-    'core',
+    "core",
     # Django stuff
     "django.contrib.admin",
     "django.contrib.auth",

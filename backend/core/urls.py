@@ -6,7 +6,8 @@ The `urlpatterns` list routes URLs to views. For more information please see:
 """
 from django.conf import settings
 from django.contrib import admin
-from django.urls import include, path
+from django.contrib.flatpages import views
+from django.urls import include, path, re_path
 from django.views.generic import TemplateView
 from rest_framework.schemas import get_schema_view
 from rest_framework_simplejwt.views import (
@@ -14,8 +15,6 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
-from django.urls import re_path
-from django.contrib.flatpages import views
 
 handler400 = TemplateView.as_view(template_name="400.html")
 handler403 = TemplateView.as_view(template_name="403.html")
