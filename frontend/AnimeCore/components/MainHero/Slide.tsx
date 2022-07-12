@@ -244,9 +244,13 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
 
     props.swiper?.on?.('slideChange', () => {
         if (props.swiper?.activeIndex !== 0) {
-            progress.current?.reset();
+            setTimeout(() => {
+                progress.current?.reset();
+            }, 100);
         } else {
-            progress.current?.start();
+            setTimeout(() => {
+                progress?.current?.start();
+            }, 500);
         }
     });
 
