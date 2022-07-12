@@ -9,7 +9,7 @@ const MainHeroProgress = forwardRef(function MainHeroProgress(props, ref) {
 
     const { countdown, start, reset, pause } = useCountdownTimer({
         timer: SWIPER_DELAY,
-        interval: 400,
+        interval: 800,
         autostart: true,
         onExpire: () => {
             swiper?.slideNext();

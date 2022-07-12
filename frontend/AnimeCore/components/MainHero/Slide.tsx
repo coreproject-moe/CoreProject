@@ -233,7 +233,7 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
     useEffect(() => {
         setTimeout(() => {
             progress?.current?.start();
-        }, 1000);
+        }, 2000);
     }, []);
 
     swiper.on('slideChange', () => {
@@ -246,11 +246,11 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
         if (props.swiper?.activeIndex !== 0) {
             setTimeout(() => {
                 progress.current?.reset();
-            }, 1000);
+            }, 2000);
         } else {
             setTimeout(() => {
                 progress?.current?.start();
-            }, 1000);
+            }, 2000);
         }
     });
 
