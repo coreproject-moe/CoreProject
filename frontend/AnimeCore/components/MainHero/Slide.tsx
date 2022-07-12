@@ -239,7 +239,7 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
     swiper.on('slideChange', () => {
         setTimeout(() => {
             progress?.current?.start();
-        }, 1000);
+        }, 2000);
     });
 
     props.swiper?.on?.('slideChange', () => {
