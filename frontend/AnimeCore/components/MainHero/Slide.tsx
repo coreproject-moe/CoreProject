@@ -259,6 +259,7 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
     const mouseEntersScrollArea = (event: React.MouseEvent<HTMLDivElement>) => {
         if (event) {
             progress.current?.pause();
+
             props.swiper?.mousewheel?.disable();
         }
     };
@@ -273,7 +274,7 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
 
     const touchEntersScrollArea = (event: React.TouchEvent<HTMLDivElement>) => {
         if (event) {
-            progress?.current?.start();
+            progress?.current?.pause();
 
             props.swiper!.allowTouchMove = false;
         }
@@ -282,6 +283,7 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
     const touchLeavesScrollArea = (event: React.TouchEvent<HTMLDivElement>) => {
         if (event) {
             progress?.current?.start();
+
             props.swiper!.allowTouchMove = true;
         }
     };
@@ -799,6 +801,11 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
                                         ml="xl"
                                         radius="md"
                                         variant="filled"
+                                        sx={(theme) => ({
+                                            [theme.fn.smallerThan('md')]: {
+                                                display: 'none',
+                                            },
+                                        })}
                                         onClick={async () => {
                                             swiper.slidePrev();
                                         }}
@@ -817,6 +824,11 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
                                         onClick={async () => {
                                             swiper.slideNext();
                                         }}
+                                        sx={(theme) => ({
+                                            [theme.fn.smallerThan('md')]: {
+                                                display: 'none',
+                                            },
+                                        })}
                                     >
                                         <img
                                             src="icons/chevron-right-black.svg"
