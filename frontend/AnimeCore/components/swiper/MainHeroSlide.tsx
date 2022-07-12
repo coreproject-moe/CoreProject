@@ -222,18 +222,24 @@ const MainHeroSlide = (props: IProps) => {
 
     const mouseEntersScrollArea = (event: React.MouseEvent<HTMLDivElement>) => {
         if (event) {
+            swiper.autoplay.stop();
+
             props.swiper?.mousewheel?.disable();
         }
     };
 
     const mouseLeavesScrollArea = (event: React.MouseEvent<HTMLDivElement>) => {
         if (event) {
+            swiper.autoplay.start();
+
             props.swiper?.mousewheel?.enable();
         }
     };
 
     const touchEntersScrollArea = (event: React.TouchEvent<HTMLDivElement>) => {
         if (event) {
+            swiper.autoplay.stop();
+
             props.swiper!.allowTouchMove = false;
         }
     };
@@ -256,481 +262,536 @@ const MainHeroSlide = (props: IProps) => {
                     backgroundColor: 'black', // Stupid Mantine
                 }}
             >
-                <Navbar />
-                <Container size="lg" className={classes.container}>
-                    <div className={classes.inner}>
-                        <div className={classes.content}>
-                            <Title className={classes.title}>
-                                {isLoading ? (
-                                    <>
-                                        <Skeleton height={20} width={120} />
-                                    </>
-                                ) : (
-                                    <>
-                                        <Text
-                                            component="span"
-                                            size="xl"
-                                            weight="bold"
-                                            color="yellow"
-                                            sx={(theme) => ({
-                                                [theme.fn.smallerThan('sm')]: {
-                                                    fontSize:
-                                                        theme.fontSizes.sm,
-                                                },
-                                            })}
-                                        >
-                                            Featured
-                                        </Text>
-                                    </>
-                                )}
-
-                                <Space w="sm" />
-                                {isLoading ? (
-                                    <>
-                                        <Skeleton height={20} width={60} />
-                                    </>
-                                ) : (
-                                    <>
-                                        <div
-                                            className={classes.line}
-                                            style={{
-                                                display: 'inline-block',
-                                                width: '60px',
-                                                borderTop: '4px solid',
-                                                borderRadius: 10,
-                                            }}
-                                        />
-                                    </>
-                                )}
-                            </Title>
-                            <Title order={1}>
-                                {isLoading ? (
-                                    <>
-                                        {mobile ? (
+                {swiperSlide.isActive ? (
+                    <>
+                        <Navbar />
+                        <Container size="lg" className={classes.container}>
+                            <div className={classes.inner}>
+                                <div className={classes.content}>
+                                    <Title className={classes.title}>
+                                        {isLoading ? (
                                             <>
-                                                <Skeleton height={40} mt="sm" />
+                                                <Skeleton
+                                                    height={20}
+                                                    width={120}
+                                                />
                                             </>
                                         ) : (
                                             <>
+                                                <Text
+                                                    component="span"
+                                                    size="xl"
+                                                    weight="bold"
+                                                    color="yellow"
+                                                    sx={(theme) => ({
+                                                        [theme.fn.smallerThan(
+                                                            'sm'
+                                                        )]: {
+                                                            fontSize:
+                                                                theme.fontSizes
+                                                                    .sm,
+                                                        },
+                                                    })}
+                                                >
+                                                    Featured
+                                                </Text>
+                                            </>
+                                        )}
+
+                                        <Space w="sm" />
+                                        {isLoading ? (
+                                            <>
                                                 <Skeleton
-                                                    mt="xl"
-                                                    height={100}
-                                                    mb="xl"
+                                                    height={20}
+                                                    width={60}
+                                                />
+                                            </>
+                                        ) : (
+                                            <>
+                                                <div
+                                                    className={classes.line}
+                                                    style={{
+                                                        display: 'inline-block',
+                                                        width: '60px',
+                                                        borderTop: '4px solid',
+                                                        borderRadius: 10,
+                                                    }}
                                                 />
                                             </>
                                         )}
-                                    </>
-                                ) : (
-                                    <>
-                                        <ScrollArea
-                                            sx={(theme) => ({
-                                                height: 80,
-                                                [theme.fn.smallerThan('md')]: {
-                                                    height: 40,
-                                                },
-                                            })}
-                                            onMouseEnter={mouseEntersScrollArea}
-                                            onMouseLeave={mouseLeavesScrollArea}
-                                            onTouchStart={touchEntersScrollArea}
-                                            onTouchEnd={touchLeavesScrollArea}
-                                            offsetScrollbars
-                                        >
-                                            <Text
-                                                size="lg"
-                                                color="white"
-                                                inherit
-                                                sx={(theme) => ({
-                                                    [theme.fn.smallerThan(
-                                                        'sm'
-                                                    )]: {
-                                                        fontSize: 30, // Fix Me
-                                                    },
-                                                })}
-                                            >
-                                                {props.animeTitle}
-                                            </Text>
-                                        </ScrollArea>
-                                    </>
-                                )}
-                            </Title>
-                            <Title className={classes.infoContainer}>
-                                {isLoading ? (
-                                    <>
-                                        <Skeleton
-                                            mt="lg"
-                                            width={270}
-                                            height={20}
-                                        />
-                                    </>
-                                ) : (
-                                    <>
-                                        <Text
-                                            className={classes.info}
-                                            component="span"
-                                            color="white"
-                                        >
-                                            TV
-                                        </Text>
-                                        <Text
-                                            className={classes.info}
-                                            component="span"
-                                            color="white"
-                                        >
-                                            {props.animeEpisodeCount} eps
-                                        </Text>
-                                        <Text
-                                            className={classes.info}
-                                            component="span"
-                                            color="white"
-                                        >
-                                            Completed
-                                        </Text>
-                                        <Text
-                                            className={classes.info}
-                                            component="span"
-                                            color="white"
-                                        >
-                                            {props.animeAirTime}
-                                        </Text>
-                                        <Text component="span" color="white">
-                                            {props.animeStudio}
-                                        </Text>
-                                        <Space h="md" />
-                                    </>
-                                )}
-                            </Title>
-                            <>
-                                {isLoading ? (
-                                    <>
-                                        {mobile ? (
-                                            <>
-                                                <Skeleton
-                                                    height={100}
-                                                    width="80vw"
-                                                    mt="sm"
-                                                />
-                                            </>
-                                        ) : (
+                                    </Title>
+                                    <Title order={1}>
+                                        {isLoading ? (
                                             <>
                                                 {mobile ? (
                                                     <>
                                                         <Skeleton
+                                                            height={40}
                                                             mt="sm"
-                                                            mb="md"
-                                                            height={100}
-                                                            width="80vw"
                                                         />
                                                     </>
                                                 ) : (
                                                     <>
                                                         <Skeleton
-                                                            mt="sm"
-                                                            mb="md"
-                                                            height={115}
-                                                            width="80vw"
+                                                            mt="xl"
+                                                            height={100}
+                                                            mb="xl"
                                                         />
                                                     </>
                                                 )}
                                             </>
+                                        ) : (
+                                            <>
+                                                <ScrollArea
+                                                    sx={(theme) => ({
+                                                        height: 80,
+                                                        [theme.fn.smallerThan(
+                                                            'md'
+                                                        )]: {
+                                                            height: 40,
+                                                        },
+                                                    })}
+                                                    onMouseEnter={
+                                                        mouseEntersScrollArea
+                                                    }
+                                                    onMouseLeave={
+                                                        mouseLeavesScrollArea
+                                                    }
+                                                    onTouchStart={
+                                                        touchEntersScrollArea
+                                                    }
+                                                    onTouchEnd={
+                                                        touchLeavesScrollArea
+                                                    }
+                                                    offsetScrollbars
+                                                >
+                                                    <Text
+                                                        size="lg"
+                                                        color="white"
+                                                        inherit
+                                                        sx={(theme) => ({
+                                                            [theme.fn.smallerThan(
+                                                                'sm'
+                                                            )]: {
+                                                                fontSize: 30, // Fix Me
+                                                            },
+                                                        })}
+                                                    >
+                                                        {props.animeTitle}
+                                                    </Text>
+                                                </ScrollArea>
+                                            </>
                                         )}
-                                    </>
-                                ) : (
-                                    <>
-                                        <ScrollArea
-                                            style={{ height: 100 }}
-                                            onMouseEnter={mouseEntersScrollArea}
-                                            onMouseLeave={mouseLeavesScrollArea}
-                                            onTouchStart={touchEntersScrollArea}
-                                            onTouchEnd={touchLeavesScrollArea}
-                                            offsetScrollbars
-                                        >
-                                            <Text
-                                                color="gray"
-                                                sx={() => ({
-                                                    whiteSpace: 'pre-line',
-                                                })}
-                                            >
-                                                {props.animeSummary}
-                                            </Text>
-                                        </ScrollArea>
-                                    </>
-                                )}
-                            </>
-                            <div className={classes.tagContainer}>
-                                {isLoading ? (
-                                    <>
-                                        <Skeleton height={25} width="50vw" />
-                                    </>
-                                ) : (
-                                    <>
-                                        <Space h="xl" />
-
-                                        <Badge
-                                            component="span"
-                                            size="lg"
-                                            radius="sm"
-                                            variant="filled"
-                                            mr="md"
-                                            sx={(theme) => ({
-                                                backgroundColor:
-                                                    theme.colors.blue[9],
-                                            })}
-                                        >
-                                            Mystery
-                                        </Badge>
-                                        <Badge
-                                            component="span"
-                                            size="lg"
-                                            radius="sm"
-                                            variant="filled"
-                                            mr="md"
-                                            sx={(theme) => ({
-                                                backgroundColor:
-                                                    theme.colors.blue[9],
-                                            })}
-                                        >
-                                            Slice of Life
-                                        </Badge>
-                                    </>
-                                )}
-                            </div>
-
-                            <div className={classes.buttonContainer}>
-                                {isLoading ? (
-                                    <>
-                                        {mobile ? (
+                                    </Title>
+                                    <Title className={classes.infoContainer}>
+                                        {isLoading ? (
                                             <>
                                                 <Skeleton
-                                                    mt="xl"
-                                                    width={110}
-                                                    height={60}
+                                                    mt="lg"
+                                                    width={270}
+                                                    height={20}
                                                 />
                                             </>
                                         ) : (
                                             <>
-                                                <Skeleton
-                                                    mt="xl"
-                                                    width={60}
-                                                    height={60}
-                                                />
+                                                <Text
+                                                    className={classes.info}
+                                                    component="span"
+                                                    color="white"
+                                                >
+                                                    TV
+                                                </Text>
+                                                <Text
+                                                    className={classes.info}
+                                                    component="span"
+                                                    color="white"
+                                                >
+                                                    {props.animeEpisodeCount}{' '}
+                                                    eps
+                                                </Text>
+                                                <Text
+                                                    className={classes.info}
+                                                    component="span"
+                                                    color="white"
+                                                >
+                                                    Completed
+                                                </Text>
+                                                <Text
+                                                    className={classes.info}
+                                                    component="span"
+                                                    color="white"
+                                                >
+                                                    {props.animeAirTime}
+                                                </Text>
+                                                <Text
+                                                    component="span"
+                                                    color="white"
+                                                >
+                                                    {props.animeStudio}
+                                                </Text>
+                                                <Space h="md" />
+                                            </>
+                                        )}
+                                    </Title>
+                                    <>
+                                        {isLoading ? (
+                                            <>
+                                                {mobile ? (
+                                                    <>
+                                                        <Skeleton
+                                                            height={100}
+                                                            width="80vw"
+                                                            mt="sm"
+                                                        />
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        {mobile ? (
+                                                            <>
+                                                                <Skeleton
+                                                                    mt="sm"
+                                                                    mb="md"
+                                                                    height={100}
+                                                                    width="80vw"
+                                                                />
+                                                            </>
+                                                        ) : (
+                                                            <>
+                                                                <Skeleton
+                                                                    mt="sm"
+                                                                    mb="md"
+                                                                    height={115}
+                                                                    width="80vw"
+                                                                />
+                                                            </>
+                                                        )}
+                                                    </>
+                                                )}
+                                            </>
+                                        ) : (
+                                            <>
+                                                <ScrollArea
+                                                    style={{ height: 100 }}
+                                                    onMouseEnter={
+                                                        mouseEntersScrollArea
+                                                    }
+                                                    onMouseLeave={
+                                                        mouseLeavesScrollArea
+                                                    }
+                                                    onTouchStart={
+                                                        touchEntersScrollArea
+                                                    }
+                                                    onTouchEnd={
+                                                        touchLeavesScrollArea
+                                                    }
+                                                    offsetScrollbars
+                                                >
+                                                    <Text
+                                                        color="gray"
+                                                        sx={() => ({
+                                                            whiteSpace:
+                                                                'pre-line',
+                                                        })}
+                                                    >
+                                                        {props.animeSummary}
+                                                    </Text>
+                                                </ScrollArea>
                                             </>
                                         )}
                                     </>
-                                ) : (
-                                    <>
-                                        <Button
-                                            mt="xl"
-                                            color="yellow"
-                                            sx={(theme) => ({
-                                                backgroundColor:
-                                                    theme.colors.yellow[9],
-                                                height: 60,
-
-                                                [theme.fn.largerThan('sm')]: {
-                                                    width: 60,
-                                                },
-                                            })}
-                                            radius="lg"
-                                        >
-                                            <img
-                                                alt=""
-                                                src="/icons/play.svg"
-                                                width={24}
-                                                height={24}
-                                            />
-                                            <Text color="dark" weight={700}>
-                                                Watch
-                                            </Text>
-                                        </Button>
-                                    </>
-                                )}
-                                {isLoading ? (
-                                    <>
-                                        <Skeleton
-                                            ml="xl"
-                                            mt="xl"
-                                            height={60}
-                                            width={120}
-                                        />
-                                    </>
-                                ) : (
-                                    <>
-                                        <Button
-                                            ml="xl"
-                                            mt="xl"
-                                            color="yellow"
-                                            variant="outline"
-                                            sx={(theme) => ({
-                                                borderWidth: 4,
-                                                borderColor:
-                                                    theme.colors.yellow[9],
-                                                height: 60,
-                                            })}
-                                            radius="lg"
-                                            rightIcon={
-                                                <img
-                                                    alt=""
-                                                    src="/icons/chevrons-right.svg"
-                                                    width={24}
-                                                    height={24}
+                                    <div className={classes.tagContainer}>
+                                        {isLoading ? (
+                                            <>
+                                                <Skeleton
+                                                    height={25}
+                                                    width="50vw"
                                                 />
-                                            }
-                                        >
-                                            <Text
-                                                weight={700}
-                                                size="lg"
-                                                color="yellow"
-                                            >
-                                                Details
-                                            </Text>
-                                        </Button>
-                                    </>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                </Container>
-                <Title
-                    sx={() => ({
-                        backgroundColor: '',
-                        display: 'flex',
-                    })}
-                >
-                    <Grid
-                        grow
-                        justify="space-between"
-                        align="center"
-                        sx={() => ({
-                            height: '100%',
-                            width: '100%',
-                        })}
-                    >
-                        <Grid.Col
-                            span={3}
-                            sx={(theme) => ({
-                                [theme.fn.smallerThan('md')]: {
-                                    display: 'none',
-                                },
-                            })}
-                        />
-                        <Grid.Col
-                            span={3}
-                            sx={() => ({
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                height: '10vh',
-                                maxWidth: '100vw',
-                                flexDirection: 'row',
-                            })}
-                        >
-                            <Progress
-                                sx={() => ({ width: 100 })}
-                                mr="xl"
-                                color="yellow"
-                                value={
-                                    (100 / (swiper.slides.length - 2)) *
-                                    (swiper.realIndex + 1)
-                                }
-                            />
-                            <div
-                                className={classes.swiper__mainhero__pagination}
-                            >
-                                <div
-                                    style={{
-                                        display: 'flex',
-                                        flexDirection: 'row',
-                                        justifyContent: 'center',
-                                    }}
-                                >
-                                    {Array(10) // This is a hard fixed value :|
-                                        .fill(0)
-                                        .map((item, index) => (
-                                            <span
-                                                key={index}
-                                                style={{
-                                                    color:
-                                                        swiper?.realIndex ===
-                                                        index
-                                                            ? 'var(--swiper-pagination-bullet-inactive-color)'
-                                                            : '',
-                                                    opacity:
-                                                        swiper?.realIndex ===
-                                                        index
-                                                            ? 1
-                                                            : 'var(--swiper-pagination-bullet-inactive-opacity)',
-                                                    padding:
-                                                        '0px calc(var(--swiper-pagination-bullet-horizontal-gap) / 2) 0px',
-                                                }}
-                                            >
-                                                ·
-                                            </span>
-                                        ))}
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Space h="xl" />
+
+                                                <Badge
+                                                    component="span"
+                                                    size="lg"
+                                                    radius="sm"
+                                                    variant="filled"
+                                                    mr="md"
+                                                    sx={(theme) => ({
+                                                        backgroundColor:
+                                                            theme.colors
+                                                                .blue[9],
+                                                    })}
+                                                >
+                                                    Mystery
+                                                </Badge>
+                                                <Badge
+                                                    component="span"
+                                                    size="lg"
+                                                    radius="sm"
+                                                    variant="filled"
+                                                    mr="md"
+                                                    sx={(theme) => ({
+                                                        backgroundColor:
+                                                            theme.colors
+                                                                .blue[9],
+                                                    })}
+                                                >
+                                                    Slice of Life
+                                                </Badge>
+                                            </>
+                                        )}
+                                    </div>
+
+                                    <div className={classes.buttonContainer}>
+                                        {isLoading ? (
+                                            <>
+                                                {mobile ? (
+                                                    <>
+                                                        <Skeleton
+                                                            mt="xl"
+                                                            width={110}
+                                                            height={60}
+                                                        />
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <Skeleton
+                                                            mt="xl"
+                                                            width={60}
+                                                            height={60}
+                                                        />
+                                                    </>
+                                                )}
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Button
+                                                    mt="xl"
+                                                    color="yellow"
+                                                    sx={(theme) => ({
+                                                        backgroundColor:
+                                                            theme.colors
+                                                                .yellow[9],
+                                                        height: 60,
+
+                                                        [theme.fn.largerThan(
+                                                            'sm'
+                                                        )]: {
+                                                            width: 60,
+                                                        },
+                                                    })}
+                                                    radius="lg"
+                                                >
+                                                    <img
+                                                        alt=""
+                                                        src="/icons/play.svg"
+                                                        width={24}
+                                                        height={24}
+                                                    />
+                                                    <Text
+                                                        color="dark"
+                                                        weight={700}
+                                                    >
+                                                        Watch
+                                                    </Text>
+                                                </Button>
+                                            </>
+                                        )}
+                                        {isLoading ? (
+                                            <>
+                                                <Skeleton
+                                                    ml="xl"
+                                                    mt="xl"
+                                                    height={60}
+                                                    width={120}
+                                                />
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Button
+                                                    ml="xl"
+                                                    mt="xl"
+                                                    color="yellow"
+                                                    variant="outline"
+                                                    sx={(theme) => ({
+                                                        borderWidth: 4,
+                                                        borderColor:
+                                                            theme.colors
+                                                                .yellow[9],
+                                                        height: 60,
+                                                    })}
+                                                    radius="lg"
+                                                    rightIcon={
+                                                        <img
+                                                            alt=""
+                                                            src="/icons/chevrons-right.svg"
+                                                            width={24}
+                                                            height={24}
+                                                        />
+                                                    }
+                                                >
+                                                    <Text
+                                                        weight={700}
+                                                        size="lg"
+                                                        color="yellow"
+                                                    >
+                                                        Details
+                                                    </Text>
+                                                </Button>
+                                            </>
+                                        )}
+                                    </div>
                                 </div>
                             </div>
-                            <ActionIcon
-                                color="yellow"
-                                size="lg"
-                                radius="md"
-                                variant="filled"
-                                onClick={async () => {
-                                    swiper.slidePrev();
-                                }}
-                                sx={(theme) => ({
-                                    [theme.fn.smallerThan('md')]: {
-                                        display: 'none',
-                                    },
-                                })}
-                            >
-                                <img
-                                    src="icons/chevron-left-black.svg"
-                                    alt=""
-                                />
-                            </ActionIcon>
-                            <ActionIcon
-                                color="yellow"
-                                size="lg"
-                                radius="md"
-                                variant="filled"
-                                ml="xl"
-                                onClick={async () => {
-                                    swiper.slideNext();
-                                }}
-                                sx={(theme) => ({
-                                    [theme.fn.smallerThan('md')]: {
-                                        display: 'none',
-                                    },
-                                })}
-                            >
-                                <img
-                                    src="icons/chevron-right-black.svg"
-                                    alt=""
-                                />
-                            </ActionIcon>
-                        </Grid.Col>
-                        <Grid.Col
-                            span={3}
-                            sx={(theme) => ({
+                        </Container>
+                        <Title
+                            sx={() => ({
+                                backgroundColor: '',
                                 display: 'flex',
-                                justifyContent: 'flex-end',
-
-                                [theme.fn.smallerThan('md')]: {
-                                    display: 'none',
-                                },
                             })}
                         >
-                            <img
-                                width={24}
-                                height={24}
-                                src="/icons/mouse.svg"
-                                alt=""
-                            />
-                            <Text px="xl" color="gray">
-                                scroll below
-                            </Text>
-                        </Grid.Col>
-                    </Grid>
-                </Title>
+                            <Grid
+                                grow
+                                justify="space-between"
+                                align="center"
+                                sx={() => ({
+                                    height: '100%',
+                                    width: '100%',
+                                })}
+                            >
+                                <Grid.Col
+                                    span={3}
+                                    sx={(theme) => ({
+                                        [theme.fn.smallerThan('md')]: {
+                                            display: 'none',
+                                        },
+                                    })}
+                                />
+                                <Grid.Col
+                                    span={3}
+                                    sx={() => ({
+                                        display: 'flex',
+                                        justifyContent: 'center',
+                                        alignItems: 'center',
+                                        height: '10vh',
+                                        maxWidth: '100vw',
+                                        flexDirection: 'row',
+                                    })}
+                                >
+                                    <Progress
+                                        sx={() => ({ width: 100 })}
+                                        mr="xl"
+                                        color="yellow"
+                                        value={
+                                            (100 / (swiper.slides.length - 2)) *
+                                            (swiper.realIndex + 1)
+                                        }
+                                    />
+                                    <div
+                                        className={
+                                            classes.swiper__mainhero__pagination
+                                        }
+                                    >
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                flexDirection: 'row',
+                                                justifyContent: 'center',
+                                            }}
+                                        >
+                                            {Array(10) // This is a hard fixed value :|
+                                                .fill(0)
+                                                .map((item, index) => (
+                                                    <span
+                                                        key={index}
+                                                        style={{
+                                                            color:
+                                                                swiper?.realIndex ===
+                                                                index
+                                                                    ? 'var(--swiper-pagination-bullet-inactive-color)'
+                                                                    : '',
+                                                            opacity:
+                                                                swiper?.realIndex ===
+                                                                index
+                                                                    ? 1
+                                                                    : 'var(--swiper-pagination-bullet-inactive-opacity)',
+                                                            padding:
+                                                                '0px calc(var(--swiper-pagination-bullet-horizontal-gap) / 2) 0px',
+                                                        }}
+                                                    >
+                                                        ·
+                                                    </span>
+                                                ))}
+                                        </div>
+                                    </div>
+                                    <ActionIcon
+                                        color="yellow"
+                                        size="lg"
+                                        radius="md"
+                                        variant="filled"
+                                        onClick={async () => {
+                                            swiper.slidePrev();
+                                        }}
+                                        sx={(theme) => ({
+                                            [theme.fn.smallerThan('md')]: {
+                                                display: 'none',
+                                            },
+                                        })}
+                                    >
+                                        <img
+                                            src="icons/chevron-left-black.svg"
+                                            alt=""
+                                        />
+                                    </ActionIcon>
+                                    <ActionIcon
+                                        color="yellow"
+                                        size="lg"
+                                        radius="md"
+                                        variant="filled"
+                                        ml="xl"
+                                        onClick={async () => {
+                                            swiper.slideNext();
+                                        }}
+                                        sx={(theme) => ({
+                                            [theme.fn.smallerThan('md')]: {
+                                                display: 'none',
+                                            },
+                                        })}
+                                    >
+                                        <img
+                                            src="icons/chevron-right-black.svg"
+                                            alt=""
+                                        />
+                                    </ActionIcon>
+                                </Grid.Col>
+                                <Grid.Col
+                                    span={3}
+                                    sx={(theme) => ({
+                                        display: 'flex',
+                                        justifyContent: 'flex-end',
+
+                                        [theme.fn.smallerThan('md')]: {
+                                            display: 'none',
+                                        },
+                                    })}
+                                >
+                                    <img
+                                        width={24}
+                                        height={24}
+                                        src="/icons/mouse.svg"
+                                        alt=""
+                                    />
+                                    <Text px="xl" color="gray">
+                                        scroll below
+                                    </Text>
+                                </Grid.Col>
+                            </Grid>
+                        </Title>
+                    </>
+                ) : (
+                    <></>
+                )}
             </BackgroundImage>
         </Box>
     );
