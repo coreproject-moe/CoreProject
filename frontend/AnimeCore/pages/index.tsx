@@ -12,9 +12,6 @@ const Home: NextPage = () => {
     const SWIPER_DELAY = 100 * 1000; // Miliseconds
 
     const [swiper, setSwiper] = useState<SwiperType | null>(null);
-    const [mainHeroSwiper, setMainHeroSwiper] = useState<SwiperType | null>(
-        null
-    );
 
     useEffect(() => {
         setTimeout(() => {
@@ -152,9 +149,9 @@ const Home: NextPage = () => {
                 direction="vertical"
                 slidesPerView="auto"
                 modules={[Mousewheel]}
-                mousewheel={{ sensitivity: 0.001 }}
                 simulateTouch={false}
                 onSwiper={setSwiper}
+                mousewheel
             >
                 <SwiperSlide>
                     <Swiper
@@ -174,7 +171,6 @@ const Home: NextPage = () => {
                         }}
                         loop
                         lazy
-                        onSwiper={setMainHeroSwiper}
                     >
                         {data.map((item, index) => (
                             <SwiperSlide key={index}>

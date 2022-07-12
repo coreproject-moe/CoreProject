@@ -7,6 +7,7 @@ import {
     Container,
     createStyles,
     Grid,
+    Input,
     Progress,
     ScrollArea,
     Skeleton,
@@ -261,7 +262,42 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
             >
                 {swiperSlide.isActive ? (
                     <>
-                        <Navbar />
+                        {mobile ? (
+                            <>
+                                <Input
+                                    icon={
+                                        <img
+                                            src="/icons/search.svg"
+                                            alt=""
+                                            width={18}
+                                            height={18}
+                                        />
+                                    }
+                                    mr="xl"
+                                    ml="xl"
+                                    variant="filled"
+                                    radius="md"
+                                    size="md"
+                                    rightSectionWidth={42}
+                                    styles={{
+                                        rightSection: { pointerEvents: 'none' },
+                                    }}
+                                    rightSection={
+                                        <img
+                                            src="icons/more-vertical.svg"
+                                            alt=""
+                                            width={18}
+                                            height={18}
+                                        />
+                                    }
+                                    placeholder="Search for anything"
+                                />
+                            </>
+                        ) : (
+                            <>
+                                <Navbar />
+                            </>
+                        )}
                         <Container size="lg" className={classes.container}>
                             <div className={classes.inner}>
                                 <div className={classes.content}>
