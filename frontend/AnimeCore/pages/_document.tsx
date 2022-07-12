@@ -6,6 +6,10 @@ export default class _Document extends Document {
             <Html>
                 <Head>
                     <link rel="icon" href="/logos/favicon.svg" />
+                    <meta
+                        name="viewport"
+                        content="width=device-width, initial-scale=1.0"
+                    />
                 </Head>
                 <body>
                     <Main />
