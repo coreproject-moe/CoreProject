@@ -233,20 +233,20 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
     useEffect(() => {
         setTimeout(() => {
             progress?.current?.start();
-        }, 100);
+        }, 1000);
     }, []);
 
     swiper.on('slideChange', () => {
         setTimeout(() => {
             progress?.current?.start();
-        }, 100);
+        }, 1000);
     });
 
     props.swiper?.on?.('slideChange', () => {
         if (props.swiper?.activeIndex !== 0) {
             setTimeout(() => {
                 progress.current?.reset();
-            }, 100);
+            }, 1000);
         } else {
             setTimeout(() => {
                 progress?.current?.start();
