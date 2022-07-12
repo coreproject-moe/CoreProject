@@ -24,13 +24,13 @@
 
 
 html{
-    scrollbar-width: none;
-    background-color: black;
-
     &,
     body {
         overscroll-behavior-y: contain; // Disable Rubber Band
         height: 100%; // Full Height ( LINK )
+        overflow:hidden;
+        scrollbar-width: none;
+        background-color: black;
     }
 
 
