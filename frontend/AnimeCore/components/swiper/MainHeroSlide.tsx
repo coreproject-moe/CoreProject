@@ -412,12 +412,25 @@ const MainHeroSlide = (props: IProps) => {
                                             </>
                                         ) : (
                                             <>
-                                                <Skeleton
-                                                    mt="sm"
-                                                    mb="md"
-                                                    height={100}
-                                                    width="80vw"
-                                                />
+                                                {mobile ? (
+                                                    <>
+                                                        <Skeleton
+                                                            mt="sm"
+                                                            mb="md"
+                                                            height={100}
+                                                            width="80vw"
+                                                        />
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <Skeleton
+                                                            mt="sm"
+                                                            mb="md"
+                                                            height={115}
+                                                            width="80vw"
+                                                        />
+                                                    </>
+                                                )}
                                             </>
                                         )}
                                     </>
