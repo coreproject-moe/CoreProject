@@ -9,7 +9,7 @@ import GenreSlide from '@/components/swiper/GenreSlide';
 import MainHeroSlide from '@/components/swiper/MainHeroSlide';
 
 const Home: NextPage = () => {
-    const SWIPER_DELAY = 10 * 1000; // Miliseconds
+    const SWIPER_DELAY = 100 * 1000; // Miliseconds
 
     const [swiper, setSwiper] = useState<SwiperType | null>(null);
     const [mainHeroSwiper, setMainHeroSwiper] = useState<SwiperType | null>(
