@@ -22,6 +22,15 @@ import { useSwiper, useSwiperSlide } from 'swiper/react';
 import Navbar from '@/components/common/Navbar';
 
 const useStyles = createStyles((theme) => ({
+    base: {
+        minHeight: '100vh',
+
+        [theme.fn.smallerThan('md')]: {
+            minHeight: '30vh',
+            maxHeight: '570px', // Fix Me
+        },
+    },
+
     box: {
         display: 'flex',
     },
@@ -236,7 +245,7 @@ const MainHeroSlide = (props: IProps) => {
             props.swiper!.allowTouchMove = true;
         }
     };
-    console.log(swiperSlide.isVisible);
+
     return (
         <Box className={`${classes.box} hero`}>
             <BackgroundImage
@@ -313,9 +322,10 @@ const MainHeroSlide = (props: IProps) => {
                                         {isLoading ? (
                                             <>
                                                 <Skeleton
-                                                    mt="lg"
+                                                    mt="xl"
                                                     width={180}
-                                                    height={50}
+                                                    height={100}
+                                                    mb="xl"
                                                 />
                                             </>
                                         ) : (
@@ -416,7 +426,7 @@ const MainHeroSlide = (props: IProps) => {
                                             <>
                                                 <Skeleton
                                                     mt="sm"
-                                                    mb="sm"
+                                                    mb="md"
                                                     height={100}
                                                 />
                                             </>
@@ -455,7 +465,7 @@ const MainHeroSlide = (props: IProps) => {
                                         {isLoading ? (
                                             <>
                                                 <Skeleton
-                                                    height={24}
+                                                    height={25}
                                                     width="50vw"
                                                 />
                                             </>
@@ -491,15 +501,16 @@ const MainHeroSlide = (props: IProps) => {
                                                 >
                                                     Slice of Life
                                                 </Badge>
+                                                <Space h="xl" />
                                             </>
                                         )}
                                     </div>
-                                    <Space h="xl" />
                                     <div className={classes.buttonContainer}>
                                         {isLoading ? (
                                             <>
                                                 <Skeleton
-                                                    width="60px"
+                                                    mt="xl"
+                                                    width={60}
                                                     height={60}
                                                 />
                                             </>
@@ -540,6 +551,7 @@ const MainHeroSlide = (props: IProps) => {
                                             <>
                                                 <Skeleton
                                                     ml="xl"
+                                                    mt="xl"
                                                     height={60}
                                                     width={120}
                                                 />
