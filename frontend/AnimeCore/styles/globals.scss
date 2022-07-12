@@ -6,7 +6,6 @@
 @use "swiper/scss/effect-fade";
 @use 'swiper/scss/lazy';
 
-$swiper-height-mobile: 570px;
 
 :root{
     --swiper-pagination-color:#E3BD49;
@@ -22,16 +21,6 @@ $swiper-height-mobile: 570px;
     }
 }
 
-
-.hero {
-    min-height: 100Vh;
-
-    @media screen and (min-width:0px) and (max-width : 992px){
-        min-height: 30vh;
-        max-height: $swiper-height-mobile;
-    }
-
-}
 
 
 html{
