@@ -15,7 +15,7 @@ import {
     Title,
 } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import React, { useEffect, useState } from 'react';
+import React, { memo,useEffect, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 import { useSwiper, useSwiperSlide } from 'swiper/react';
 
@@ -164,7 +164,6 @@ const useStyles = createStyles((theme) => ({
 }));
 
 interface IProps {
-    key?: number;
     animeTitle: string;
     animeSummary: string;
     animeEpisodeCount: number;
@@ -173,8 +172,6 @@ interface IProps {
     backgroundImage: string;
     backgroundBanner: string;
     swiper: Partial<SwiperType> | null;
-    pause?: () => void;
-    start?: () => void;
 }
 
 const MainHeroSlide = (props: IProps) => {
@@ -797,4 +794,4 @@ const MainHeroSlide = (props: IProps) => {
     );
 };
 
-export default MainHeroSlide;
+export default memo(MainHeroSlide);
