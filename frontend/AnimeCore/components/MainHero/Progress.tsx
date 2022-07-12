@@ -1,5 +1,5 @@
 import { Progress } from '@mantine/core';
-import { forwardRef, useEffect, useImperativeHandle } from 'react';
+import { forwardRef, memo, useEffect, useImperativeHandle } from 'react';
 import { useSwiper } from 'swiper/react';
 import { useCountdownTimer } from 'use-countdown-timer';
 
@@ -9,7 +9,7 @@ const MainHeroProgress = forwardRef(function MainHeroProgress(props, ref) {
 
     const { countdown, start, reset, pause } = useCountdownTimer({
         timer: SWIPER_DELAY,
-        interval: 200,
+        interval: 400,
         autostart: true,
         onExpire: () => {
             swiper?.slideNext();
@@ -43,4 +43,4 @@ const MainHeroProgress = forwardRef(function MainHeroProgress(props, ref) {
     );
 });
 
-export default MainHeroProgress;
+export default memo(MainHeroProgress);
