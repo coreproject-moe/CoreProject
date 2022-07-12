@@ -112,7 +112,7 @@ const useStyles = createStyles((theme) => ({
     },
 }));
 
-const GenreSlide = () => {
+const GenreSlide = memo(function GenreSlider() {
     const { classes } = useStyles();
     const theme = useMantineTheme();
 
@@ -136,7 +136,7 @@ const GenreSlide = () => {
         { name: 'Supernatural', color: theme.colors.cyan[8] },
         { name: 'Thriller', color: theme.colors.green[5] },
     ];
-    
+
     return (
         <div
             className={classes.root}
@@ -248,6 +248,6 @@ const GenreSlide = () => {
             </Container>
         </div>
     );
-};
+});
 
-export default memo(GenreSlide);
+export default GenreSlide;
