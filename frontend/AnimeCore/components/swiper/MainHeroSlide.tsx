@@ -250,11 +250,7 @@ const MainHeroSlide = (props: IProps) => {
         <Box className={`${classes.box} hero`}>
             <BackgroundImage
                 className={`${classes.root}`}
-                src={
-                    swiperSlide.isActive && swiperSlide.isVisible
-                        ? heroBackgroundImage
-                        : ''
-                }
+                src={swiperSlide.isVisible ? heroBackgroundImage : ''}
                 style={{
                     display: 'flex', // This is a weird hack to make the items align properly
                     backgroundColor: 'black', // Stupid Mantine
@@ -312,7 +308,6 @@ const MainHeroSlide = (props: IProps) => {
                                     <>
                                         <Skeleton
                                             mt="xl"
-                                            width={180}
                                             height={100}
                                             mb="xl"
                                         />
@@ -403,6 +398,7 @@ const MainHeroSlide = (props: IProps) => {
                                             mt="sm"
                                             mb="md"
                                             height={100}
+                                            width='80vw'
                                         />
                                     </>
                                 ) : (

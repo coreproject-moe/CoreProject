@@ -13,6 +13,14 @@ import {
 import React from 'react';
 
 const useStyles = createStyles((theme) => ({
+    root: {
+        minHeight: '100vh',
+
+        [theme.fn.smallerThan('md')]: {
+            minHeight: '30vh',
+        },
+    },
+
     wrapper: {
         paddingTop: theme.spacing.xl * 3,
         paddingLeft: theme.spacing.xl * 4,
@@ -109,7 +117,10 @@ const GenreSlide = () => {
     const theme = useMantineTheme();
 
     return (
-        <div className="hero" style={{ backgroundColor: theme.colors.blue[9] }}>
+        <div
+            className={classes.root}
+            style={{ backgroundColor: theme.colors.blue[9] }}
+        >
             <Container className={classes.wrapper} size={1400}>
                 <div className={classes.inner}>
                     <Input
