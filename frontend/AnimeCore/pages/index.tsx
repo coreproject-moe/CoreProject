@@ -1,16 +1,14 @@
 import { showNotification } from '@mantine/notifications';
 import type { NextPage } from 'next';
 import { useEffect, useState } from 'react';
-import { Autoplay, Swiper as SwiperType } from 'swiper';
+import { Swiper as SwiperType } from 'swiper';
 import { EffectFade, Lazy, Mousewheel, Navigation } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import GenreSlide from '@/components/swiper/GenreSlide';
-import MainHeroSlide from '@/components/swiper/MainHeroSlide';
+import GenreSlide from '@/components/Genre/Slide';
+import MainHeroSlide from '@/components/MainHero/Slide';
 
 const Home: NextPage = () => {
-    const SWIPER_DELAY = 100 * 1000; // Miliseconds
-
     const [swiper, setSwiper] = useState<SwiperType | null>(null);
 
     useEffect(() => {
@@ -155,15 +153,12 @@ const Home: NextPage = () => {
             >
                 <SwiperSlide>
                     <Swiper
-                        modules={[EffectFade, Lazy, Navigation, Autoplay]}
+                        modules={[EffectFade, Lazy, Navigation]}
                         effect="fade"
                         direction="horizontal"
                         navigation={{
                             nextEl: '.mainhero__next__el',
                             prevEl: '.mainhero__previous__el',
-                        }}
-                        autoplay={{
-                            delay: SWIPER_DELAY,
                         }}
                         pagination={{
                             enabled: true,

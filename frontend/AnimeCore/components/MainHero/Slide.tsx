@@ -8,7 +8,6 @@ import {
     createStyles,
     Grid,
     Input,
-    Progress,
     ScrollArea,
     Skeleton,
     Space,
@@ -16,11 +15,12 @@ import {
     Title,
 } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useEffect, useRef, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 import { useSwiper, useSwiperSlide } from 'swiper/react';
 
 import Navbar from '@/components/common/Navbar';
+import MainHeroProgress from '@/components/MainHero/Progress';
 
 const useStyles = createStyles((theme) => ({
     base: {
@@ -121,7 +121,6 @@ const useStyles = createStyles((theme) => ({
     control: {
         paddingLeft: 50,
         paddingRight: 50,
-        fontFamily: `Greycliff CF, ${theme.fontFamily}`,
         fontSize: 22,
 
         [theme.fn.smallerThan('md')]: {
@@ -154,6 +153,8 @@ const useStyles = createStyles((theme) => ({
     swiper__mainhero__pagination: {
         display: 'flex',
         justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
 
         [theme.fn.smallerThan('md')]: {
             width: 150,
@@ -161,6 +162,16 @@ const useStyles = createStyles((theme) => ({
         [theme.fn.largerThan('md')]: {
             width: 270,
         },
+    },
+    swiper__bullet: {
+        height: 22,
+        lineHeight: 0.5,
+        fontSize: 60,
+        padding:
+            '0px calc(var(--swiper-pagination-bullet-horizontal-gap) / 2) 0px',
+        cursor: 'pointer',
+
+        overflow: 'hidden',
     },
 }));
 
@@ -180,6 +191,7 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
     const swiperSlide = useSwiperSlide();
 
     const { classes } = useStyles();
+    const progress = useRef<any>();
 
     const [heroBackgroundImage, setHeroBackgroundImage] = useState<string>('');
 
@@ -202,7 +214,7 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
         } else {
             setHeroBackgroundImage(props.backgroundImage); // This is the normal one
         }
-    }, [fullhd, tablet, mobile, props.backgroundBanner, props.backgroundImage]);
+    }, [fullhd, tablet, mobile, props]);
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -216,19 +228,40 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
         }, 400);
     }, [swiperSlide]);
 
+    /** Start the swiper */
+
+    useEffect(() => {
+        setTimeout(() => {
+            progress?.current?.start();
+        }, 100);
+    }, []);
+
+    swiper.on('slideChange', () => {
+        setTimeout(() => {
+            progress?.current?.start();
+        }, 100);
+    });
+
+    props.swiper?.on?.('slideChange', () => {
+        if (props.swiper?.activeIndex !== 0) {
+            progress.current?.reset();
+        } else {
+            progress.current?.start();
+        }
+    });
+
     /** Events to handle scrollbox area */
 
     const mouseEntersScrollArea = (event: React.MouseEvent<HTMLDivElement>) => {
         if (event) {
-            swiper.autoplay.stop();
-
+            progress.current?.pause();
             props.swiper?.mousewheel?.disable();
         }
     };
 
     const mouseLeavesScrollArea = (event: React.MouseEvent<HTMLDivElement>) => {
         if (event) {
-            swiper.autoplay.start();
+            progress.current?.start();
 
             props.swiper?.mousewheel?.enable();
         }
@@ -236,7 +269,7 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
 
     const touchEntersScrollArea = (event: React.TouchEvent<HTMLDivElement>) => {
         if (event) {
-            swiper.autoplay.stop();
+            progress?.current?.start();
 
             props.swiper!.allowTouchMove = false;
         }
@@ -244,8 +277,7 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
 
     const touchLeavesScrollArea = (event: React.TouchEvent<HTMLDivElement>) => {
         if (event) {
-            swiper.autoplay.start();
-
+            progress?.current?.start();
             props.swiper!.allowTouchMove = true;
         }
     };
@@ -280,7 +312,10 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
                                     size="md"
                                     rightSectionWidth={42}
                                     styles={{
-                                        rightSection: { pointerEvents: 'none' },
+                                        rightSection: {
+                                            pointerEvents: 'none',
+                                            cursor: 'pointer',
+                                        },
                                     }}
                                     rightSection={
                                         <img
@@ -712,65 +747,57 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
                                         flexDirection: 'row',
                                     })}
                                 >
-                                    <Progress
-                                        sx={() => ({ width: 100 })}
-                                        mr="xl"
-                                        color="yellow"
-                                        value={
-                                            (100 / (swiper.slides.length - 2)) *
-                                            (swiper.realIndex + 1)
-                                        }
-                                    />
+                                    {swiperSlide.isActive ? (
+                                        <>
+                                            <MainHeroProgress ref={progress} />
+                                        </>
+                                    ) : (
+                                        <></>
+                                    )}
                                     <div
                                         className={
                                             classes.swiper__mainhero__pagination
                                         }
                                     >
-                                        <div
-                                            style={{
-                                                display: 'flex',
-                                                flexDirection: 'row',
-                                                justifyContent: 'center',
-                                            }}
-                                        >
-                                            {Array(10) // This is a hard fixed value :|
-                                                .fill(0)
-                                                .map((item, index) => (
-                                                    <span
-                                                        key={index}
-                                                        style={{
-                                                            color:
-                                                                swiper?.realIndex ===
-                                                                index
-                                                                    ? 'var(--swiper-pagination-bullet-inactive-color)'
-                                                                    : '',
-                                                            opacity:
-                                                                swiper?.realIndex ===
-                                                                index
-                                                                    ? 1
-                                                                    : 'var(--swiper-pagination-bullet-inactive-opacity)',
-                                                            padding:
-                                                                '0px calc(var(--swiper-pagination-bullet-horizontal-gap) / 2) 0px',
-                                                        }}
-                                                    >
-                                                        ·
-                                                    </span>
-                                                ))}
-                                        </div>
+                                        {Array(swiper?.slides.length - 2)
+                                            .fill(0)
+                                            .map((__, index) => (
+                                                <div
+                                                    key={index}
+                                                    className={
+                                                        classes.swiper__bullet
+                                                    }
+                                                    style={{
+                                                        color:
+                                                            swiper?.realIndex ===
+                                                            index
+                                                                ? 'var(--swiper-pagination-bullet-inactive-color)'
+                                                                : '',
+                                                        opacity:
+                                                            swiper?.realIndex ===
+                                                            index
+                                                                ? 1
+                                                                : 'var(--swiper-pagination-bullet-inactive-opacity)',
+                                                    }}
+                                                    onClick={async () => {
+                                                        swiper.slideTo(
+                                                            index + 1
+                                                        );
+                                                    }}
+                                                >
+                                                    ·
+                                                </div>
+                                            ))}
                                     </div>
                                     <ActionIcon
                                         color="yellow"
                                         size="lg"
+                                        ml="xl"
                                         radius="md"
                                         variant="filled"
                                         onClick={async () => {
                                             swiper.slidePrev();
                                         }}
-                                        sx={(theme) => ({
-                                            [theme.fn.smallerThan('md')]: {
-                                                display: 'none',
-                                            },
-                                        })}
                                     >
                                         <img
                                             src="icons/chevron-left-black.svg"
@@ -786,11 +813,6 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
                                         onClick={async () => {
                                             swiper.slideNext();
                                         }}
-                                        sx={(theme) => ({
-                                            [theme.fn.smallerThan('md')]: {
-                                                display: 'none',
-                                            },
-                                        })}
                                     >
                                         <img
                                             src="icons/chevron-right-black.svg"
@@ -831,3 +853,71 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
 });
 
 export default MainHeroSlide;
+// {
+//     Array(10) // This is a hard fixed value :|
+//         .fill(0)
+//         .map((item, index) => (
+//             <div
+//                 key={index}
+//                 style={{
+//                     display: 'flex',
+//                     height: 22,
+//                     alignItems: 'ceneter',
+//                     justifyContent: 'center',
+
+//                     padding:
+//                         '0px calc(var(--swiper-pagination-bullet-horizontal-gap) / 2) 0px',
+//                 }}
+//             >
+//                 <span
+//                     style={{
+//                         cursor: 'pointer',
+//                         color:
+//                             swiper?.realIndex === index
+//                                 ? 'var(--swiper-pagination-bullet-inactive-color)'
+//                                 : '',
+//                         opacity:
+//                             swiper?.realIndex === index
+//                                 ? 1
+//                                 : 'var(--swiper-pagination-bullet-inactive-opacity)',
+//                     }}
+//                 >
+//                     ·
+//                 </span>
+//             </div>
+//         ));
+// }
+// {
+//     Array(10) // This is a hard fixed value :|
+//         .fill(0)
+//         .map((item, index) => (
+//             <div
+//                 key={index}
+//                 style={{
+//                     display: 'flex',
+//                     height: 22,
+//                     alignItems: 'ceneter',
+//                     justifyContent: 'center',
+
+//                     padding:
+//                         '0px calc(var(--swiper-pagination-bullet-horizontal-gap) / 2) 0px',
+//                 }}
+//             >
+//                 <span
+//                     style={{
+//                         cursor: 'pointer',
+//                         color:
+//                             swiper?.realIndex === index
+//                                 ? 'var(--swiper-pagination-bullet-inactive-color)'
+//                                 : '',
+//                         opacity:
+//                             swiper?.realIndex === index
+//                                 ? 1
+//                                 : 'var(--swiper-pagination-bullet-inactive-opacity)',
+//                     }}
+//                 >
+//                     ·
+//                 </span>
+//             </div>
+//         ));
+// }
