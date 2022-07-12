@@ -250,7 +250,7 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
         } else {
             setTimeout(() => {
                 progress?.current?.start();
-            }, 500);
+            }, 1000);
         }
     });
 
