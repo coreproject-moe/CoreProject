@@ -10,14 +10,13 @@ import {
     Title,
     useMantineTheme,
 } from '@mantine/core';
-import React from 'react';
 
 const useStyles = createStyles((theme) => ({
     root: {
         minHeight: '100vh',
 
         [theme.fn.smallerThan('md')]: {
-            minHeight: '30vh',
+            display: 'none',
         },
     },
 

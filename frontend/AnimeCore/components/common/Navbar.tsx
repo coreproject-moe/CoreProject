@@ -1,5 +1,4 @@
 import { createStyles, Grid } from '@mantine/core';
-import { useMediaQuery } from '@mantine/hooks';
 import { memo } from 'react';
 
 const useStyles = createStyles((theme) => ({
@@ -36,7 +35,6 @@ const useStyles = createStyles((theme) => ({
 
 const Navbar = () => {
     const { classes } = useStyles();
-    const mobile = useMediaQuery('(min-width: 0px) and (max-width: 576px)');
 
     return (
         <Grid justify="space-between" className={classes.grid} grow>
@@ -46,11 +44,7 @@ const Navbar = () => {
             <Grid.Col span={4} className={classes.logo}>
                 <img
                     alt=""
-                    src={
-                        mobile
-                            ? '/logos/animecore_logo-black.svg'
-                            : '/logos/animecore_logo.svg'
-                    }
+                    src={'/logos/animecore_logo.svg'}
                     width={158}
                     height={22}
                 />
