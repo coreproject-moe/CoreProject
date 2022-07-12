@@ -26,8 +26,8 @@ const useStyles = createStyles((theme) => ({
         minHeight: '100vh',
 
         [theme.fn.smallerThan('md')]: {
-            minHeight: '30vh',
-            maxHeight: '570px', // Fix Me
+            minHeight: 600,
+            maxHeight: 600, // Fix Me
         },
     },
 
@@ -247,7 +247,7 @@ const MainHeroSlide = (props: IProps) => {
     };
 
     return (
-        <Box className={`${classes.box} hero`}>
+        <Box className={`${classes.box} ${classes.base}`}>
             <BackgroundImage
                 className={`${classes.root}`}
                 src={swiperSlide.isVisible ? heroBackgroundImage : ''}
@@ -306,11 +306,19 @@ const MainHeroSlide = (props: IProps) => {
                             <Title order={1}>
                                 {isLoading ? (
                                     <>
-                                        <Skeleton
-                                            mt="xl"
-                                            height={100}
-                                            mb="xl"
-                                        />
+                                        {mobile ? (
+                                            <>
+                                                <Skeleton height={40} mt="sm" />
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Skeleton
+                                                    mt="xl"
+                                                    height={100}
+                                                    mb="xl"
+                                                />
+                                            </>
+                                        )}
                                     </>
                                 ) : (
                                     <>
@@ -387,19 +395,31 @@ const MainHeroSlide = (props: IProps) => {
                                         <Text component="span" color="white">
                                             {props.animeStudio}
                                         </Text>
+                                        <Space h="md" />
                                     </>
                                 )}
                             </Title>
-                            <Space h="md" />
                             <>
                                 {isLoading ? (
                                     <>
-                                        <Skeleton
-                                            mt="sm"
-                                            mb="md"
-                                            height={100}
-                                            width='80vw'
-                                        />
+                                        {mobile ? (
+                                            <>
+                                                <Skeleton
+                                                    height={100}
+                                                    width="80vw"
+                                                    mt="sm"
+                                                />
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Skeleton
+                                                    mt="sm"
+                                                    mb="md"
+                                                    height={100}
+                                                    width="80vw"
+                                                />
+                                            </>
+                                        )}
                                     </>
                                 ) : (
                                     <>
@@ -458,22 +478,35 @@ const MainHeroSlide = (props: IProps) => {
                                         >
                                             Slice of Life
                                         </Badge>
-                                        <Space h="xl" />
                                     </>
                                 )}
                             </div>
+
                             <div className={classes.buttonContainer}>
                                 {isLoading ? (
                                     <>
-                                        <Skeleton
-                                            mt="xl"
-                                            width={60}
-                                            height={60}
-                                        />
+                                        {mobile ? (
+                                            <>
+                                                <Skeleton
+                                                    mt="xl"
+                                                    width={110}
+                                                    height={60}
+                                                />
+                                            </>
+                                        ) : (
+                                            <>
+                                                <Skeleton
+                                                    mt="xl"
+                                                    width={60}
+                                                    height={60}
+                                                />
+                                            </>
+                                        )}
                                     </>
                                 ) : (
                                     <>
                                         <Button
+                                            mt="xl"
                                             color="yellow"
                                             sx={(theme) => ({
                                                 backgroundColor:
@@ -511,6 +544,7 @@ const MainHeroSlide = (props: IProps) => {
                                     <>
                                         <Button
                                             ml="xl"
+                                            mt="xl"
                                             color="yellow"
                                             variant="outline"
                                             sx={(theme) => ({
