@@ -186,7 +186,7 @@ interface IProps {
     backgroundImage: string;
     backgroundBanner: string;
     tags: string[];
-    swiper: Partial<SwiperType>;
+    swiper: Partial<SwiperType> | Null | Undefined;
 }
 
 const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
