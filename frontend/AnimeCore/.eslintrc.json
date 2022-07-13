@@ -5,6 +5,7 @@
     "rules": {
         /** Disable stupid warning */
         "@next/next/no-img-element": "off",
+        
         /** Sort imports */
         "simple-import-sort/imports": "warn",
         "simple-import-sort/exports": "warn",

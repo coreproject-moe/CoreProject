@@ -1,6 +1,5 @@
 import {
     ActionIcon,
-    Autocomplete,
     BackgroundImage,
     Badge,
     Box,
@@ -8,7 +7,6 @@ import {
     Container,
     createStyles,
     Grid,
-    Loader,
     ScrollArea,
     Skeleton,
     Space,
@@ -23,6 +21,8 @@ import { useSwiper, useSwiperSlide } from 'swiper/react';
 
 import Navbar from '@/components/common/Navbar';
 import MainHeroProgress from '@/components/MainHero/Progress';
+
+import AutoComplete from './AutoComplete';
 
 const useStyles = createStyles((theme) => ({
     base: {
@@ -186,7 +186,7 @@ interface IProps {
     backgroundImage: string;
     backgroundBanner: string;
     tags: string[];
-    swiper: Partial<SwiperType> | null;
+    swiper: Partial<SwiperType>;
 }
 
 const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
@@ -293,30 +293,6 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
     /** Handle Search inputs */
     /** Copied from https://ui.mantine.dev/component/autocomplete-loading */
 
-    const timeoutRef = useRef<number>(-1);
-    const [value, setValue] = useState('');
-    const [loading, setLoading] = useState(false);
-    const [data, setData] = useState<string[]>([]);
-
-    const handleSearchInput = (value: string) => {
-        window.clearTimeout(timeoutRef.current);
-        setValue(value);
-        setData([]);
-
-        if (value.trim().length === 0) {
-            setLoading(false);
-        } else {
-            setLoading(true);
-            timeoutRef.current = window.setTimeout(() => {
-                setLoading(false);
-                setData(
-                    ['gmail.com', 'outlook.com', 'yahoo.com'].map(
-                        (provider) => `${value}@${provider}`
-                    )
-                );
-            }, 1000);
-        }
-    };
     return (
         <Box className={`${classes.box} ${classes.base}`}>
             <BackgroundImage
@@ -331,15 +307,12 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
                     <>
                         {mobile ? (
                             <>
-                                <Autocomplete
+                                <AutoComplete
                                     mr="xl"
                                     ml="xl"
                                     variant="filled"
                                     radius="md"
                                     size="md"
-                                    value={value}
-                                    data={data}
-                                    onChange={handleSearchInput}
                                     icon={
                                         <img
                                             src="/icons/search.svg"
@@ -347,9 +320,6 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
                                             width={18}
                                             height={18}
                                         />
-                                    }
-                                    rightSection={
-                                        loading ? <Loader size={16} /> : null
                                     }
                                     aria-label="Search Image"
                                     placeholder="Search for anything"
