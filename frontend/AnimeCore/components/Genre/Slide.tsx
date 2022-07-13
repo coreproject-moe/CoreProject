@@ -22,7 +22,7 @@ const useStyles = createStyles((theme) => ({
     },
 
     wrapper: {
-        paddingTop: theme.spacing.xl * 3,
+        paddingTop: 30,
         paddingLeft: theme.spacing.xl * 4,
         paddingRight: theme.spacing.xl * 4,
 
@@ -175,7 +175,7 @@ const GenreSlide = memo(function GenreSlider() {
                     />
 
                     <Divider
-                        mt="xl"
+                        mt={50}
                         label={<Text size="sm">or search by genres</Text>}
                         labelPosition="center"
                         size="md"
@@ -204,7 +204,7 @@ const GenreSlide = memo(function GenreSlider() {
                             );
                         })}
                     </SimpleGrid>
-                    <Title mt="lg" order={3}>
+                    <Title mt={100} order={3}>
                         Choose your preferences
                     </Title>
                     <Text align="center" sx={{ maxWidth: 528 }}>
