@@ -4,8 +4,8 @@ import { MantineProvider } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
 import { NotificationsProvider } from '@mantine/notifications';
 import { AppProps } from 'next/app';
-import NextNProgress from 'nextjs-progressbar';
 import Head from 'next/head';
+import NextNProgress from 'nextjs-progressbar';
 
 export default function App(props: AppProps) {
     const { Component, pageProps } = props;
