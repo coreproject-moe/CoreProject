@@ -4,6 +4,7 @@ import { MantineProvider } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
 import { NotificationsProvider } from '@mantine/notifications';
 import { AppProps } from 'next/app';
+import NextNProgress from 'nextjs-progressbar';
 import Head from 'next/head';
 
 export default function App(props: AppProps) {
@@ -107,6 +108,7 @@ export default function App(props: AppProps) {
             >
                 <ModalsProvider>
                     <NotificationsProvider position="top-right">
+                        <NextNProgress />
                         <Component {...pageProps} />
                     </NotificationsProvider>
                 </ModalsProvider>
