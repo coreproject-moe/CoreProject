@@ -37,6 +37,7 @@ const Home: NextPage = () => {
             backgroundImage: '/images/Hyouka-poster.jpg',
             backgroundBanner:
                 'https://media.kitsu.io/anime/poster_images/6686/large.jpg',
+            tags: ['Mystery', 'Slice of Life'],
         },
         {
             animeStudio: 'Studio DEEN',
@@ -48,6 +49,7 @@ const Home: NextPage = () => {
             backgroundImage: '/images/Konosuba-poster.jpg',
             backgroundBanner:
                 'https://media.kitsu.io/anime/poster_images/10941/large.jpg',
+            tags: ['Adventure', 'Comedy', 'Ecchi', 'Fantasy'],
         },
         {
             animeEpisodeCount: 13,
@@ -59,6 +61,7 @@ const Home: NextPage = () => {
             backgroundImage: '/images/Ajin-poster.jpg',
             backgroundBanner:
                 'https://media.kitsu.io/anime/poster_images/11368/large.jpg',
+            tags: ['Action', 'Horror', 'Mystery', 'Supernatural'],
         },
         {
             animeEpisodeCount: 24,
@@ -70,6 +73,7 @@ const Home: NextPage = () => {
             backgroundImage: '/images/Jujutsu-Kaisen-poster.jpg',
             backgroundBanner:
                 'https://media.kitsu.io/manga/40815/poster_image/large-236780bcf03f1ae4155741f0b7f2910e.jpeg',
+            tags: ['Action', 'Drama', 'Supernatural'],
         },
         {
             animeEpisodeCount: 12,
@@ -81,6 +85,7 @@ const Home: NextPage = () => {
             backgroundImage: '/images/Hamefura-poster.jpg',
             backgroundBanner:
                 'https://media.kitsu.io/anime/poster_images/43238/large.jpg',
+            tags: ['Comedy', 'Fantasy', 'Romance', 'Slice of Life'],
         },
         {
             animeEpisodeCount: 25,
@@ -92,6 +97,7 @@ const Home: NextPage = () => {
             backgroundImage: '/images/Tate-No-Yuusha-No-Nariagari-poster.jpg',
             backgroundBanner:
                 'https://media.kitsu.io/anime/poster_images/13593/large.jpg',
+            tags: ['Action', 'Adventure', 'Fantasy'],
         },
         {
             animeEpisodeCount: 13,
@@ -103,7 +109,9 @@ const Home: NextPage = () => {
             backgroundImage: '/images/Kaguya-Sama-Ultra-Romantic-poster.jpg',
             backgroundBanner:
                 'https://media.kitsu.io/anime/43691/poster_image/large-6fff692359faff490ba00d72fb48b9a3.jpeg',
+            tags: ['Comedy', 'Psychological', 'Romance', 'Slice of Life'],
         },
+
         {
             animeEpisodeCount: 12,
             animeStudio: 'MAPPA',
@@ -114,6 +122,7 @@ const Home: NextPage = () => {
             backgroundImage: '/images/Shingeki-No-Basamut-poster.jpg',
             backgroundBanner:
                 'https://media.kitsu.io/anime/poster_images/13013/large.jpg',
+            tags: ['Action', 'Adventure', 'Fantasy', 'Supernatural'],
         },
         {
             animeEpisodeCount: 12,
@@ -125,6 +134,7 @@ const Home: NextPage = () => {
             backgroundImage: '/images/Boku-dake-ga-inai-machi-poster.jpg',
             backgroundBanner:
                 'https://media.kitsu.io/anime/poster_images/11110/large.jpg',
+            tags: ['Comedy', 'Psychological', 'Romance', 'Slice of Life'],
         },
         {
             animeEpisodeCount: 12,
@@ -136,6 +146,7 @@ const Home: NextPage = () => {
             backgroundImage: '/images/Bungou-Stray-Dogs-poster.jpg',
             backgroundBanner:
                 'https://media.kitsu.io/anime/poster_images/11339/large.jpg',
+            tags: ['Action', 'Comedy', 'Mystery', 'Supernatural'],
         },
     ];
 
@@ -177,6 +188,7 @@ const Home: NextPage = () => {
                                     animeAirTime={item.animeAirTime}
                                     backgroundImage={item.backgroundImage}
                                     backgroundBanner={item.backgroundBanner}
+                                    tags={item.tags}
                                     swiper={swiper}
                                 />
                             </SwiperSlide>
