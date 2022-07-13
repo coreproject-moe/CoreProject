@@ -23,7 +23,6 @@ import { useSwiper, useSwiperSlide } from 'swiper/react';
 
 import Navbar from '@/components/common/Navbar';
 import MainHeroProgress from '@/components/MainHero/Progress';
-import MouseIcon from '/public/icons/mouse.svg';
 
 const useStyles = createStyles((theme) => ({
     base: {
