@@ -19,7 +19,7 @@
         "@mantine/rte": "^4.2.12",
         "next": "^12.2.2",
         "nextjs-progressbar": "^0.0.14",
-        "react": "^18.2.0",
+        "react": "^18.3.0-next-e225fa43a-20220711",
         "react-dom": "^18.2.0",
         "sass": "^1.53.0",
         "swiper": "^8.3.0",
@@ -37,5 +37,10 @@
         "eslint-plugin-unused-imports": "^2.0.0",
         "typescript": "4.7.4"
     },
-    "browserslist": [">0.3%", "not ie 11", "not dead", "not op_mini all"]
+    "browserslist": [
+        ">0.3%",
+        "not ie 11",
+        "not dead",
+        "not op_mini all"
+    ]
 }
