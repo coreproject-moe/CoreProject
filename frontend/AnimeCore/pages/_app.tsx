@@ -55,7 +55,7 @@ const App = (props: AppProps) => {
                     type="font/woff2"
                     crossOrigin="anonymous"
                 />
-            </Head> 
+            </Head>
 
             <style global jsx>{`
                 @font-face {
