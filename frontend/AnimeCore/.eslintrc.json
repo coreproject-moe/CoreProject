@@ -1,7 +1,7 @@
 {
     "extends": ["next/core-web-vitals"],
     "plugins": ["simple-import-sort", "unused-imports", "@emotion"],
-    "settings": {"import/core-modules": ["styled-jsx/css"] },
+    "settings": { "import/core-modules": ["styled-jsx/css"] },
     "rules": {
         /** Disable stupid warning */
         "@next/next/no-img-element": "off",
