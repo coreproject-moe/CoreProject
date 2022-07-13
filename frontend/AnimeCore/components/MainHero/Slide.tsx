@@ -186,7 +186,7 @@ interface IProps {
     backgroundImage: string;
     backgroundBanner: string;
     tags: string[];
-    swiper: Partial<SwiperType> | Null | Undefined;
+    swiper: Partial<SwiperType> | null;
 }
 
 const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
@@ -290,8 +290,7 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
             props.swiper!.allowTouchMove = true;
         }
     };
-    /** Handle Search inputs */
-    /** Copied from https://ui.mantine.dev/component/autocomplete-loading */
+ 
 
     return (
         <Box className={`${classes.box} ${classes.base}`}>

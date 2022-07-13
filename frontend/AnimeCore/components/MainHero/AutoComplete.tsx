@@ -1,5 +1,5 @@
 import { Autocomplete, AutocompleteProps, Loader } from '@mantine/core';
-import { memo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 interface IProps
     extends Omit<
@@ -8,6 +8,9 @@ interface IProps
     > {}
 
 const AutoComplete = (props: IProps) => {
+    /** Handle Search inputs */
+    /** Copied from https://ui.mantine.dev/component/autocomplete-loading */
+
     const timeoutRef = useRef<number>(-1);
     const [value, setValue] = useState('');
     const [loading, setLoading] = useState(false);
@@ -42,4 +45,4 @@ const AutoComplete = (props: IProps) => {
         />
     );
 };
-export default memo(AutoComplete);
+export default AutoComplete;
