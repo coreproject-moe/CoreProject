@@ -13,6 +13,7 @@ import {
     Space,
     Text,
     Title,
+    useMantineTheme,
 } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
 import React, { memo, useEffect, useRef, useState } from 'react';
@@ -183,6 +184,7 @@ interface IProps {
     animeAirTime: string;
     backgroundImage: string;
     backgroundBanner: string;
+    tags: string[];
     swiper: Partial<SwiperType> | null;
 }
 
@@ -191,6 +193,8 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
     const swiperSlide = useSwiperSlide();
 
     const { classes } = useStyles();
+    const theme = useMantineTheme();
+
     const progress = useRef<any>();
 
     const [heroBackgroundImage, setHeroBackgroundImage] = useState<string>('');
@@ -585,34 +589,28 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
                                             <>
                                                 <Space h="xl" />
 
-                                                <Badge
-                                                    component="span"
-                                                    size="lg"
-                                                    radius="sm"
-                                                    variant="filled"
-                                                    mr="md"
-                                                    sx={(theme) => ({
-                                                        backgroundColor:
-                                                            theme.colors
-                                                                .blue[9],
-                                                    })}
-                                                >
-                                                    Mystery
-                                                </Badge>
-                                                <Badge
-                                                    component="span"
-                                                    size="lg"
-                                                    radius="sm"
-                                                    variant="filled"
-                                                    mr="md"
-                                                    sx={(theme) => ({
-                                                        backgroundColor:
-                                                            theme.colors
-                                                                .blue[9],
-                                                    })}
-                                                >
-                                                    Slice of Life
-                                                </Badge>
+                                                {props.tags.map(
+                                                    (item, index) => {
+                                                        return (
+                                                            <Badge
+                                                                key={index}
+                                                                component="span"
+                                                                size="lg"
+                                                                radius="sm"
+                                                                variant="filled"
+                                                                mr="md"
+                                                                style={{
+                                                                    backgroundColor:
+                                                                        theme
+                                                                            .colors
+                                                                            .blue[9],
+                                                                }}
+                                                            >
+                                                                {item}
+                                                            </Badge>
+                                                        );
+                                                    }
+                                                )}
                                             </>
                                         )}
                                     </div>
@@ -643,10 +641,12 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
                                                 <Button
                                                     mt="xl"
                                                     color="yellow"
-                                                    sx={(theme) => ({
+                                                    style={{
                                                         backgroundColor:
                                                             theme.colors
                                                                 .yellow[9],
+                                                    }}
+                                                    sx={(theme) => ({
                                                         height: 60,
 
                                                         [theme.fn.largerThan(
@@ -688,13 +688,13 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
                                                     mt="xl"
                                                     color="yellow"
                                                     variant="outline"
-                                                    sx={(theme) => ({
+                                                    style={{
                                                         borderWidth: 4,
                                                         borderColor:
                                                             theme.colors
                                                                 .yellow[9],
                                                         height: 60,
-                                                    })}
+                                                    }}
                                                     radius="lg"
                                                     rightIcon={
                                                         <img
@@ -869,71 +869,3 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
 });
 
 export default MainHeroSlide;
-// {
-//     Array(10) // This is a hard fixed value :|
-//         .fill(0)
-//         .map((item, index) => (
-//             <div
-//                 key={index}
-//                 style={{
-//                     display: 'flex',
-//                     height: 22,
-//                     alignItems: 'ceneter',
-//                     justifyContent: 'center',
-
-//                     padding:
-//                         '0px calc(var(--swiper-pagination-bullet-horizontal-gap) / 2) 0px',
-//                 }}
-//             >
-//                 <span
-//                     style={{
-//                         cursor: 'pointer',
-//                         color:
-//                             swiper?.realIndex === index
-//                                 ? 'var(--swiper-pagination-bullet-inactive-color)'
-//                                 : '',
-//                         opacity:
-//                             swiper?.realIndex === index
-//                                 ? 1
-//                                 : 'var(--swiper-pagination-bullet-inactive-opacity)',
-//                     }}
-//                 >
-//                     ·
-//                 </span>
-//             </div>
-//         ));
-// }
-// {
-//     Array(10) // This is a hard fixed value :|
-//         .fill(0)
-//         .map((item, index) => (
-//             <div
-//                 key={index}
-//                 style={{
-//                     display: 'flex',
-//                     height: 22,
-//                     alignItems: 'ceneter',
-//                     justifyContent: 'center',
-
-//                     padding:
-//                         '0px calc(var(--swiper-pagination-bullet-horizontal-gap) / 2) 0px',
-//                 }}
-//             >
-//                 <span
-//                     style={{
-//                         cursor: 'pointer',
-//                         color:
-//                             swiper?.realIndex === index
-//                                 ? 'var(--swiper-pagination-bullet-inactive-color)'
-//                                 : '',
-//                         opacity:
-//                             swiper?.realIndex === index
-//                                 ? 1
-//                                 : 'var(--swiper-pagination-bullet-inactive-opacity)',
-//                     }}
-//                 >
-//                     ·
-//                 </span>
-//             </div>
-//         ));
-// }
