@@ -867,12 +867,8 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
                                         },
                                     })}
                                 >
-                                    <img
-                                        width={24}
-                                        height={24}
-                                        src="/icons/mouse.svg"
-                                        alt=""
-                                    />
+                                    <MouseIcon width={24} height={24} alt="" />
+
                                     <Text px="xl" color="gray">
                                         scroll below
                                     </Text>

@@ -1,6 +1,7 @@
 import { createStyles, Grid } from '@mantine/core';
-import AnimeCoreLogo from '/public/logos/animecore_logo.svg';
+
 import ChevronDown from '/public/icons/chevron-down.svg';
+import AnimeCoreLogo from '/public/logos/animecore_logo.svg';
 
 const useStyles = createStyles((theme) => ({
     grid: {

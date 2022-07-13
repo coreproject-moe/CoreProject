@@ -1,17 +1,18 @@
-import React, { useEffect, useState, RefObject } from 'react';
 import {
-    createStyles,
-    Container,
-    Title,
-    Text,
-    Space,
     Badge,
     Button,
+    Container,
+    createStyles,
     Skeleton,
+    Space,
+    Text,
+    Title,
 } from '@mantine/core';
-import { Navbar } from '../common/Navbar';
 import { useMediaQuery } from '@mantine/hooks';
+import React, { RefObject,useEffect, useState } from 'react';
 import * as voca from 'voca';
+
+import { Navbar } from '../common/Navbar';
 
 const useStyles = createStyles((theme) => ({
     root: {
