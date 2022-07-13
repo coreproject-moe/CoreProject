@@ -213,36 +213,57 @@ const GenreSlide = memo(function GenreSlider() {
                         going to Settings
                     </Text>
                     <Group mt="lg">
-                        <Text>Label</Text>
+                        <Text>
+                            Romaji Naming{' '}
+                            <img
+                                src="/icons/chevron-down.svg"
+                                alt=""
+                                width={30}
+                                height={30}
+                            />
+                        </Text>
                         <Divider
-                            sx={{ height: '24px' }}
-                            orientation="vertical"
-                        />
-                        <Text>Label</Text>
-                        <Divider
-                            sx={{ height: '24px' }}
+                            sx={{ height: 50 }}
                             size="sm"
                             orientation="vertical"
                         />
-                        <Text>Label</Text>
+                        <Text>
+                            10 point scoring system{' '}
+                            <img
+                                src="/icons/chevron-down.svg"
+                                alt=""
+                                width={30}
+                                height={30}
+                            />
+                        </Text>
                         <Divider
-                            sx={{ height: '24px' }}
-                            size="md"
+                            sx={{ height: 50 }}
+                            size="sm"
                             orientation="vertical"
                         />
-                        <Text>Label</Text>
+                        <Text>
+                            2 trackers added{' '}
+                            <img
+                                src="/icons/chevron-down.svg"
+                                alt=""
+                                width={30}
+                                height={30}
+                            />
+                        </Text>
                         <Divider
-                            sx={{ height: '24px' }}
-                            size="lg"
+                            sx={{ height: 50 }}
+                            size="sm"
                             orientation="vertical"
                         />
-                        <Text>Label</Text>
-                        <Divider
-                            sx={{ height: '24px' }}
-                            size="xl"
-                            orientation="vertical"
-                        />
-                        <Text>Label</Text>
+                        <Text>
+                            Show 18+ content{' '}
+                            <img
+                                src="/icons/chevron-down.svg"
+                                alt=""
+                                width={30}
+                                height={30}
+                            />
+                        </Text>
                     </Group>
                 </div>
             </Container>
