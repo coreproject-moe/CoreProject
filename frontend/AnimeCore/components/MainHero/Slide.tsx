@@ -290,7 +290,7 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
             props.swiper!.allowTouchMove = true;
         }
     };
- 
+
 
     return (
         <Box className={`${classes.box} ${classes.base}`}>
