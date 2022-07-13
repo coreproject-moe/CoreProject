@@ -1,5 +1,6 @@
 import {
     ActionIcon,
+    Autocomplete,
     BackgroundImage,
     Badge,
     Box,
@@ -7,7 +8,7 @@ import {
     Container,
     createStyles,
     Grid,
-    Input,
+    Loader,
     ScrollArea,
     Skeleton,
     Space,
@@ -291,7 +292,33 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
             props.swiper!.allowTouchMove = true;
         }
     };
+    /** Handle Search inputs */
+    /** Copied from https://ui.mantine.dev/component/autocomplete-loading */
 
+    const timeoutRef = useRef<number>(-1);
+    const [value, setValue] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [data, setData] = useState<string[]>([]);
+
+    const handleSearchInput = (value: string) => {
+        window.clearTimeout(timeoutRef.current);
+        setValue(value);
+        setData([]);
+
+        if (value.trim().length === 0) {
+            setLoading(false);
+        } else {
+            setLoading(true);
+            timeoutRef.current = window.setTimeout(() => {
+                setLoading(false);
+                setData(
+                    ['gmail.com', 'outlook.com', 'yahoo.com'].map(
+                        (provider) => `${value}@${provider}`
+                    )
+                );
+            }, 1000);
+        }
+    };
     return (
         <Box className={`${classes.box} ${classes.base}`}>
             <BackgroundImage
@@ -306,7 +333,15 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
                     <>
                         {mobile ? (
                             <>
-                                <Input
+                                <Autocomplete
+                                    mr="xl"
+                                    ml="xl"
+                                    variant="filled"
+                                    radius="md"
+                                    size="md"
+                                    value={value}
+                                    data={data}
+                                    onChange={handleSearchInput}
                                     icon={
                                         <img
                                             src="/icons/search.svg"
@@ -315,26 +350,10 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
                                             height={18}
                                         />
                                     }
-                                    mr="xl"
-                                    ml="xl"
-                                    variant="filled"
-                                    radius="md"
-                                    size="md"
-                                    rightSectionWidth={42}
-                                    styles={{
-                                        rightSection: {
-                                            pointerEvents: 'none',
-                                            cursor: 'pointer',
-                                        },
-                                    }}
                                     rightSection={
-                                        <img
-                                            src="icons/more-vertical.svg"
-                                            alt=""
-                                            width={18}
-                                            height={18}
-                                        />
+                                        loading ? <Loader size={16} /> : null
                                     }
+                                    aria-label="Search Image"
                                     placeholder="Search for anything"
                                 />
                             </>
