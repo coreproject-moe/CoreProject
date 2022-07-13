@@ -17,7 +17,7 @@ import {
     useMantineTheme,
 } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import React, { memo, useEffect, useRef, useState } from 'react';
+import React, { ElementRef, memo, useEffect, useRef, useState } from 'react';
 import type { Swiper as SwiperType } from 'swiper';
 import { useSwiper, useSwiperSlide } from 'swiper/react';
 
@@ -196,16 +196,14 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
     const { classes } = useStyles();
     const theme = useMantineTheme();
 
-    const progress = useRef<any>();
+    type ProgressHandle = ElementRef<typeof MainHeroProgress>;
+    const progress = useRef<ProgressHandle>(null);
 
     const [heroBackgroundImage, setHeroBackgroundImage] = useState<string>('');
 
     const mobile = useMediaQuery('(min-width: 0px) and (max-width: 576px)');
     const tablet = useMediaQuery('(min-width: 577px) and (max-width: 768px)');
     const fullhd = useMediaQuery('(min-width: 769px) and (max-width: 992px)');
-
-    // Use SWR to fetch data from backend
-    // Use (props.key) to get id.
 
     // Hook to update slider progress
 

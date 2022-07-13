@@ -1,9 +1,29 @@
 import { Progress } from '@mantine/core';
-import { forwardRef, memo, useEffect, useImperativeHandle } from 'react';
+import {
+    forwardRef,
+    ForwardRefRenderFunction,
+    memo,
+    useEffect,
+    useImperativeHandle,
+} from 'react';
 import { useSwiper } from 'swiper/react';
 import { useCountdownTimer } from 'use-countdown-timer';
 
-const MainHeroProgress = forwardRef(function MainHeroProgress(props, ref) {
+// Thanks Stackoverflow
+// https://stackoverflow.com/questions/62210286/declare-type-with-react-useimperativehandle
+
+type MainHeroProgressProps = {};
+
+type MainHeroProgressHandle = {
+    pause: () => Promise<void>;
+    start: () => Promise<void>;
+    reset: () => Promise<void>;
+};
+
+const MainHeroProgress: ForwardRefRenderFunction<
+    MainHeroProgressHandle,
+    MainHeroProgressProps
+> = (props, ref) => {
     const SWIPER_DELAY = 10 * 1000;
     const swiper = useSwiper();
 
@@ -41,6 +61,6 @@ const MainHeroProgress = forwardRef(function MainHeroProgress(props, ref) {
             value={(100 / SWIPER_DELAY) * (SWIPER_DELAY - countdown)}
         />
     );
-});
+};
 
-export default memo(MainHeroProgress);
+export default memo(forwardRef(MainHeroProgress));
