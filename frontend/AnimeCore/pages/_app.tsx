@@ -1,4 +1,4 @@
-import '../styles/globals.scss';
+import '@/styles/globals.scss';
 
 import { MantineProvider } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
@@ -7,7 +7,7 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import NextNProgress from 'nextjs-progressbar';
 
-export default function App(props: AppProps) {
+const App = (props: AppProps) => {
     const { Component, pageProps } = props;
 
     return (
@@ -55,7 +55,7 @@ export default function App(props: AppProps) {
                     type="font/woff2"
                     crossOrigin="anonymous"
                 />
-            </Head>
+            </Head> 
 
             <style global jsx>{`
                 @font-face {
@@ -170,4 +170,6 @@ export default function App(props: AppProps) {
             </MantineProvider>
         </>
     );
-}
+};
+
+export default App;

@@ -36,5 +36,6 @@
         "eslint-plugin-simple-import-sort": "^7.0.0",
         "eslint-plugin-unused-imports": "^2.0.0",
         "typescript": "4.7.4"
-    }
+    },
+    "browserslist": [">0.3%", "not ie 11", "not dead", "not op_mini all"]
 }
