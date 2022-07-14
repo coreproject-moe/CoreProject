@@ -233,9 +233,7 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
 
     /** Start the swiper */
 
-    useEffect(() => {
-        progress?.current?.start();
-    }, []);
+    progress?.current?.start();
 
     swiper.on('slideChange', () => {
         progress?.current?.start();
