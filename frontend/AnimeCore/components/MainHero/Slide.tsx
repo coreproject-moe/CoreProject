@@ -305,6 +305,12 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
                                     variant="filled"
                                     radius="md"
                                     size="md"
+                                    onFocus={() => {
+                                        progress?.current?.pause();
+                                    }}
+                                    onBlur={() => {
+                                        progress?.current?.start();
+                                    }}
                                     icon={
                                         <img
                                             src="/icons/search.svg"
