@@ -180,17 +180,21 @@ const Home: NextPage = () => {
                     >
                         {data.map((item, index) => (
                             <SwiperSlide key={index}>
-                                <MainHeroSlide
-                                    animeTitle={item.animeTitle}
-                                    animeSummary={item.animeSummary}
-                                    animeEpisodeCount={item.animeEpisodeCount}
-                                    animeStudio={item.animeStudio}
-                                    animeAirTime={item.animeAirTime}
-                                    backgroundImage={item.backgroundImage}
-                                    backgroundBanner={item.backgroundBanner}
-                                    tags={item.tags}
-                                    swiper={swiper}
-                                />
+                                <div>
+                                    <MainHeroSlide
+                                        animeTitle={item.animeTitle}
+                                        animeSummary={item.animeSummary}
+                                        animeEpisodeCount={
+                                            item.animeEpisodeCount
+                                        }
+                                        animeStudio={item.animeStudio}
+                                        animeAirTime={item.animeAirTime}
+                                        backgroundImage={item.backgroundImage}
+                                        backgroundBanner={item.backgroundBanner}
+                                        tags={item.tags}
+                                        swiper={swiper}
+                                    />
+                                </div>
                             </SwiperSlide>
                         ))}
                     </Swiper>

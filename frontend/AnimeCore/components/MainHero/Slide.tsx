@@ -234,26 +234,18 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
     /** Start the swiper */
 
     useEffect(() => {
-        setTimeout(() => {
-            progress?.current?.start();
-        }, 2000);
+        progress?.current?.start();
     }, []);
 
     swiper.on('slideChange', () => {
-        setTimeout(() => {
-            progress?.current?.start();
-        }, 2000);
+        progress?.current?.start();
     });
 
     props.swiper?.on?.('slideChange', () => {
         if (props.swiper?.activeIndex !== 0) {
-            setTimeout(() => {
-                progress.current?.reset();
-            }, 2000);
+            progress.current?.reset();
         } else {
-            setTimeout(() => {
-                progress?.current?.start();
-            }, 2000);
+            progress?.current?.start();
         }
     });
 
@@ -291,12 +283,13 @@ const MainHeroSlide = memo(function MainHeroSlide(props: IProps) {
         }
     };
 
-
     return (
         <Box className={`${classes.box} ${classes.base}`}>
             <BackgroundImage
                 className={`${classes.root}`}
-                src={swiperSlide.isVisible ? heroBackgroundImage : ''}
+                src={
+                    props?.swiper?.activeIndex === 0 ? heroBackgroundImage : ''
+                }
                 style={{
                     display: 'flex', // This is a weird hack to make the items align properly
                     backgroundColor: 'black', // Stupid Mantine

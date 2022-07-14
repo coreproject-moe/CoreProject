@@ -41,7 +41,7 @@ const AutoComplete = (props: IProps) => {
             value={value}
             data={data}
             onChange={handleSearchInput}
-            rightSection={loading ? <Loader size={16} /> : null}
+            rightSection={loading ? <Loader color="dark" size={16} /> : null}
         />
     );
 };
