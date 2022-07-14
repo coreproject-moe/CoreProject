@@ -27,7 +27,7 @@ const MainHeroProgress: ForwardRefRenderFunction<
     const SWIPER_DELAY = 10 * 1000;
     const swiper = useSwiper();
 
-    const { countdown, start, reset, pause } = useCountdownTimer({
+    const { countdown, isRunning, start, reset, pause } = useCountdownTimer({
         timer: SWIPER_DELAY,
         interval: 800,
         autostart: true,
@@ -48,8 +48,11 @@ const MainHeroProgress: ForwardRefRenderFunction<
         },
         start: async () => {
             setTimeout(() => {
+                if (isRunning) {
+                    return;
+                }
                 start();
-            }, 2000);
+            }, 1000);
         },
 
         reset: async () => {
