@@ -42,10 +42,14 @@ const MainHeroProgress: ForwardRefRenderFunction<
 
     useImperativeHandle(ref, () => ({
         pause: async () => {
-            pause();
+            setTimeout(() => {
+                pause();
+            }, 100);
         },
         start: async () => {
-            start();
+            setTimeout(() => {
+                start();
+            }, 2000);
         },
 
         reset: async () => {
