@@ -1,12 +1,13 @@
-import '../styles/globals.scss';
+import '@/styles/globals.scss';
 
 import { MantineProvider } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
 import { NotificationsProvider } from '@mantine/notifications';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import NextNProgress from 'nextjs-progressbar';
 
-export default function App(props: AppProps) {
+const App = (props: AppProps) => {
     const { Component, pageProps } = props;
 
     return (
@@ -18,6 +19,61 @@ export default function App(props: AppProps) {
                     content="minimum-scale=1, initial-scale=1, width=device-width"
                 />
             </Head>
+
+            <style global jsx>{`
+                @font-face {
+                    font-family: 'Kokoro';
+                    src: url('/fonts/Kokoro/Kokoro-SemiBoldItalic.woff2')
+                        format('woff2');
+                    font-weight: 600;
+                    font-style: italic;
+                    font-display: swap;
+                }
+
+                @font-face {
+                    font-family: 'Kokoro';
+                    src: url('/fonts/Kokoro/Kokoro-SemiBold.woff2')
+                        format('woff2');
+                    font-weight: 600;
+                    font-style: normal;
+                    font-display: swap;
+                }
+
+                @font-face {
+                    font-family: 'Kokoro';
+                    src: url('/fonts/Kokoro/Kokoro-BoldItalic.woff2')
+                        format('woff2');
+                    font-weight: bold;
+                    font-style: italic;
+                    font-display: swap;
+                }
+
+                @font-face {
+                    font-family: 'Kokoro';
+                    src: url('/fonts/Kokoro/Kokoro-Italic.woff2')
+                        format('woff2');
+                    font-weight: normal;
+                    font-style: italic;
+                    font-display: swap;
+                }
+
+                @font-face {
+                    font-family: 'Kokoro';
+                    src: url('/fonts/Kokoro/Kokoro-Regular.woff2')
+                        format('woff2');
+                    font-weight: normal;
+                    font-style: normal;
+                    font-display: swap;
+                }
+
+                @font-face {
+                    font-family: 'Kokoro';
+                    src: url('/fonts/Kokoro/Kokoro-Bold.woff2') format('woff2');
+                    font-weight: bold;
+                    font-style: normal;
+                    font-display: swap;
+                }
+            `}</style>
 
             <MantineProvider
                 withGlobalStyles
@@ -70,10 +126,13 @@ export default function App(props: AppProps) {
             >
                 <ModalsProvider>
                     <NotificationsProvider position="top-right">
+                        <NextNProgress />
                         <Component {...pageProps} />
                     </NotificationsProvider>
                 </ModalsProvider>
             </MantineProvider>
         </>
     );
-}
+};
+
+export default App;

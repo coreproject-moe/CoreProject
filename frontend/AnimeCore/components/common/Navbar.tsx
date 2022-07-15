@@ -1,4 +1,5 @@
 import { createStyles, Grid } from '@mantine/core';
+import { memo } from 'react';
 
 const useStyles = createStyles((theme) => ({
     grid: {
@@ -32,8 +33,9 @@ const useStyles = createStyles((theme) => ({
     },
 }));
 
-export const Navbar = () => {
+const Navbar = () => {
     const { classes } = useStyles();
+
     return (
         <Grid justify="space-between" className={classes.grid} grow>
             <Grid.Col span={4} className={classes.search}>
@@ -42,7 +44,7 @@ export const Navbar = () => {
             <Grid.Col span={4} className={classes.logo}>
                 <img
                     alt=""
-                    src="/logos/animecore_logo.svg"
+                    src={'/logos/animecore_logo.svg'}
                     width={158}
                     height={22}
                 />
@@ -69,3 +71,4 @@ export const Navbar = () => {
         </Grid>
     );
 };
+export default memo(Navbar);

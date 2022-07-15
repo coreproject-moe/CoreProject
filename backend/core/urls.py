@@ -6,7 +6,8 @@ The `urlpatterns` list routes URLs to views. For more information please see:
 """
 from django.conf import settings
 from django.contrib import admin
-from django.urls import include, path
+from django.contrib.flatpages import views
+from django.urls import include, path, re_path
 from django.views.generic import TemplateView
 from rest_framework.schemas import get_schema_view
 from rest_framework_simplejwt.views import (
@@ -54,7 +55,7 @@ urlpatterns = [
     ),
     #   Flatpages
     # ===============
-    path("", include("apps.__flatpages__.urls")),
+    re_path(r"^(?P<url>.*/)$", views.flatpage),
 ]
 
 if settings.DEBUG:
