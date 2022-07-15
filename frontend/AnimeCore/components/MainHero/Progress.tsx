@@ -62,6 +62,7 @@ const MainHeroProgress: ForwardRefRenderFunction<
 
     return (
         <Progress
+            aria-label="Next slide progress"
             sx={() => ({ width: 100 })}
             mr="xl"
             color="yellow"
