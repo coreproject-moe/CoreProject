@@ -12,8 +12,8 @@ const AutoComplete = (props: IProps) => {
     /** Copied from https://ui.mantine.dev/component/autocomplete-loading */
 
     const timeoutRef = useRef<number>(-1);
-    const [value, setValue] = useState('');
-    const [loading, setLoading] = useState(false);
+    const [value, setValue] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
     const [data, setData] = useState<string[]>([]);
 
     const handleSearchInput = (value: string) => {
