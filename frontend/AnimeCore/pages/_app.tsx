@@ -18,43 +18,6 @@ const App = (props: AppProps) => {
                     name="viewport"
                     content="minimum-scale=1, initial-scale=1, width=device-width"
                 />
-                <link
-                    rel="preload"
-                    href="/fonts/Kokoro/Kokoro-SemiBoldItalic.woff2"
-                    as="font"
-                    type="font/woff2"
-                    crossOrigin="anonymous"
-                />
-                <link
-                    rel="preload"
-                    href="/fonts/Kokoro/Kokoro-BoldItalic.woff2"
-                    as="font"
-                    type="font/woff2"
-                    crossOrigin="anonymous"
-                />
-
-                <link
-                    rel="preload"
-                    href="/fonts/Kokoro/Kokoro-Italic.woff2"
-                    as="font"
-                    type="font/woff2"
-                    crossOrigin="anonymous"
-                />
-
-                <link
-                    rel="preload"
-                    href="/fonts/Kokoro/Kokoro-Regular.woff2"
-                    as="font"
-                    type="font/woff2"
-                    crossOrigin="anonymous"
-                />
-                <link
-                    rel="preload"
-                    href="/fonts/Kokoro/Kokoro-Bold.woff2"
-                    as="font"
-                    type="font/woff2"
-                    crossOrigin="anonymous"
-                />
             </Head>
 
             <style global jsx>{`
