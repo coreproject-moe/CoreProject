@@ -11,8 +11,8 @@ export default class _Document extends Document {
             >
                 <Head>
                     <link rel="icon" href="/logos/favicon.svg" />
-
                 </Head>
+
                 <body>
                     <Main />
                     <NextScript />
