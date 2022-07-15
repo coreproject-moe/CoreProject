@@ -3,12 +3,11 @@ import {
     forwardRef,
     ForwardRefRenderFunction,
     memo,
-    useEffect,
     useImperativeHandle,
     useState,
 } from 'react';
-import { useSwiper } from 'swiper/react';
 import { useTimer } from 'react-timer-hook';
+import { useSwiper } from 'swiper/react';
 
 // Thanks Stackoverflow
 // https://stackoverflow.com/questions/62210286/declare-type-with-react-useimperativehandle
