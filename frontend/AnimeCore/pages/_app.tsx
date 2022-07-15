@@ -112,6 +112,7 @@ const App = (props: AppProps) => {
                     font-display: swap;
                 }
             `}</style>
+
             <Suspense>
                 <MantineProvider
                     withGlobalStyles
