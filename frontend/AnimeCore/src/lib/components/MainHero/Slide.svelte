@@ -23,11 +23,12 @@
     <div class="pl-[48px] hero-content text-neutral-content text-white justify-self-start">
         <div class="max-w-prose">
             <div class="text-secondary text-lg font-bold pb-2">
-               <div>
-                Featured <span
-                style="display: inline-block; width: 60px; border-top: 4px solid; border-radius: 10px;"
-            />
-               </div>
+                Featured
+                <span>
+                    <span
+                    style="display: inline-block; width: 60px; border-top: 4px solid; border-radius: 10px;"
+                />
+                </span>
             </div>
             <h1 class="mb-5 text-5xl font-bold">{animeTitle}</h1>
             <h1 class='font-bold py-8 hidden md:flex'>
