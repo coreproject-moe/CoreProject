@@ -5,10 +5,12 @@ module.exports = {
         fontFamily: {
             sans: [`Kokoro`, "sans-serif"]
         },
+
         extend: {}
     },
 
     plugins: [require("@tailwindcss/typography"), require("daisyui")],
+
     daisyui: {
         themes: [
             {
