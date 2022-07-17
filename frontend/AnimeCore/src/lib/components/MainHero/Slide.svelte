@@ -1,7 +1,7 @@
 <script lang="ts">
     import Navbar from "$components/common/Navbar.svelte";
     import type { Swiper as SwiperType } from 'swiper';
-    
+
     export let isVisible:boolean;
     export let isDuplicate:boolean;
     export let isActive:boolean;

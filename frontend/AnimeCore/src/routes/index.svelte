@@ -158,7 +158,7 @@
             }}
             loop
             lazy
-            
+
         >
             {#each data as item}
                 <SwiperSlide let:data='{{isActive, isDuplicate,isVisible}}'>
