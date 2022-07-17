@@ -3,7 +3,6 @@ const postcss_preset_env = require("postcss-preset-env");
 const purgecss = require("@fullhuman/postcss-purgecss");
 const tailwindcss = require("tailwindcss");
 const autoprefixer = require("autoprefixer");
-W
 const dev = process.env.NODE_ENV === "development";
 
 const config = {
