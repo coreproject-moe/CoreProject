@@ -8,8 +8,6 @@ const dev = process.env.NODE_ENV === "development";
 
 const config = {
     plugins: [
-        tailwindcss({}),
-        autoprefixer({}),
         postcss_preset_env({
             stage: 0,
             autoprefixer: {
@@ -29,7 +27,9 @@ const config = {
                     deep: [],
                     greedy: [/swiper/, /svelte/, /data-theme$/]
                 }
-            })
+            }),
+        tailwindcss({}),
+        autoprefixer({})
     ]
 };
 
