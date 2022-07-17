@@ -7,11 +7,12 @@ module.exports = {
         },
         extend: {}
     },
+
     plugins: [require("@tailwindcss/typography"), require("daisyui")],
     daisyui: {
         themes: [
             {
-                Kokoro: {
+                kokoro: {
                     primary: "#7569E1",
                     secondary: "#E3BD49",
                     accent: "#FFF7F8",

@@ -15,7 +15,7 @@
     class="hero min-h-[60vh] md:min-h-screen bg-center bg-no-repeat"
     style="background-image: url('{backgroundImage}');"
 >
-    <div class="hero-overlay bg-opacity-60 bg-gradient-to-t from-indigo-900">
+    <div class="hero-overlay bg-opacity-60 bg-gradient-to-t from-base-100">
         <div class="pt-8 pr-[72px] pl-[48px] pb-0">
             <Navbar />
         </div>
