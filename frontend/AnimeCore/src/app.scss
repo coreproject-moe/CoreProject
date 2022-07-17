@@ -7,23 +7,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-    .scrollbar {
-        scrollbar-color: var(--color-black) var(--color-white);
-        scrollbar-width: thin;
-
-        &::-webkit-scrollbar {
-            width: 2px;
-        }
-        &::-webkit-scrollbar-track {
-            background-color: var(--color-white);
-        }
-        &::-webkit-scrollbar-thumb {
-            background-color: var(--color-black);
-        }
-    }
-}
-
 .swiper {
     height: 100%;
     width: 100%;
