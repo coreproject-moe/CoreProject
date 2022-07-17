@@ -1,18 +1,18 @@
-# SolidStart
+# create-svelte
 
-Everything you need to build a Solid project, powered by [`solid-start`](https://github.com/ryansolid/solid-start/tree/master/packages/solid-start);
+Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
 
 ## Creating a project
 
+If you're seeing this, you've probably already done this step. Congrats!
+
 ```bash
 # create a new project in the current directory
-npm init solid@next
+npm init svelte
 
 # create a new project in my-app
-npm init solid@next my-app
+npm init svelte my-app
 ```
-
-> Note: the `@next` is temporary
 
 ## Developing
 
@@ -27,6 +27,12 @@ npm run dev -- --open
 
 ## Building
 
-Solid apps are built with _adapters_, which optimise your project for deployment to different environments.
+To create a production version of your app:
 
-By default, `npm run build` will generate a Node app that you can run with `node build`. To use a different adapter, add it to the `devDependencies` in `package.json` and specify in your `vite.config.js`.
+```bash
+npm run build
+```
+
+You can preview the production build with `npm run preview`.
+
+> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
