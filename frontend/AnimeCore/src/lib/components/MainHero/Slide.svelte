@@ -36,7 +36,7 @@
                 ><span class="items pr-2">Completed</span><span
                     class="items pr-2">{animeAirTime}</span
                 ><span>{animeStudio}</span>
-                
+
             </h1>
             <div class="mb-5 max-h-24 text-ellipsis overflow-y-auto">
                 <div class="pr-3 font-normal text-gray-400">{animeSummary}</div>
