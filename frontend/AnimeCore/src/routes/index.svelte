@@ -10,7 +10,7 @@
         const [swiper] = e.detail;
         rootSwiper = swiper
     }
-    
+
 
     const data = [
         {
