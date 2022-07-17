@@ -12,7 +12,7 @@
     export let backgroundImage: string;
     export let backgroundBanner: string;
     export let tags: string[];
-    
+
     const disableScroll = () => {
         rootSwiper.mousewheel.disable();
         rootSwiper.allowTouchMove = false;
