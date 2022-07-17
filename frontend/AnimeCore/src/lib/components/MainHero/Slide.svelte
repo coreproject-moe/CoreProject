@@ -22,9 +22,9 @@
     </div>
     <div class="pl-[48px] hero-content text-neutral-content text-white justify-self-start">
         <div class="max-w-prose">
-            <div class="text-secondary text-lg font-bold pb-2">
+            <div class="text-secondary text-lg font-bold pb-2 flex gap-2">
                 Featured
-                <span>
+                <span class='flex items-center' >
                     <span
                     style="display: inline-block; width: 60px; border-top: 4px solid; border-radius: 10px;"
                 />
