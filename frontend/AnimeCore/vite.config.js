@@ -4,6 +4,9 @@ import path from "path";
 /** @type {import('vite').UserConfig} */
 const config = {
     plugins: [sveltekit()],
+    optimizeDeps: {
+        exclude: ["swiper"]
+    },
     resolve: {
         alias: {
             // these are the aliases and paths to them
@@ -11,29 +14,6 @@ const config = {
             $hooks: path.resolve("./src/hooks"),
             $components: path.resolve("./src/lib/components"),
             $functions: path.resolve("./src/lib/functions")
-        }
-    },
-    esbuild: {
-        legalComments: "none",
-        charset: "utf8"
-    },
-    build: {
-        // minify: "terser",
-        // terserOptions: {
-        //     format: {
-        //         comments: false
-        //     }
-        // },
-        rollupOptions: {
-            output: {
-                manualChunks: {
-                    // md5: ["md5"],
-                    // anime: ["animejs"],
-                    // dayjs: ["dayjs"],
-                    // swiper: ["swiper"],
-                    // "tippy.js": ["tippy.js"],
-                }
-            }
         }
     }
 };
