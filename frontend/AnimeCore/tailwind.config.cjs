@@ -2,7 +2,10 @@
 module.exports = {
     content: ['./src/**/*.{html,js,svelte,ts}'],
     theme: {
+        fontFamily: {
+            sans: [`Kokoro`, 'sans-serif']
+        },
         extend: {}
     },
-    plugins: []
+    plugins: [require('@tailwindcss/typography'), require('daisyui')]
 };
