@@ -1,8 +1,11 @@
 <script lang="ts">
     import Navbar from "$components/common/Navbar.svelte";
     import type { Swiper as SwiperType } from 'swiper';
-
+    
+    export let isVisible:boolean;
+    export let isDuplicate:boolean;
     export let isActive:boolean;
+
     export let rootSwiper : SwiperType;
     export let animeTitle: string;
     export let animeSummary: string;
@@ -23,7 +26,6 @@
 
     }
 </script>
-{#if isActive }
 <div
     class="hero min-h-[60vh] md:min-h-screen bg-center bg-no-repeat"
     style="background-image: url('{backgroundImage}');"
@@ -33,6 +35,7 @@
             <Navbar />
         </div>
     </div>
+    {#if rootSwiper?.activeIndex === 0}
     <div class="pl-24 hero-content text-neutral-content text-white justify-self-start">
         <div class="max-w-prose">
             <div class="text-secondary text-lg font-bold pb-3 flex gap-2">
@@ -43,7 +46,7 @@
                 />
                 </span>
             </div>
-            <h1 class="mb-4 text-6xl font-bold max-h-16 h-20 overflow-y-auto">{animeTitle}</h1>
+            <h1 class="mb-4 text-6xl font-bold max-h-16 h-20 overflow-hidden hover:overflow-y-auto ">{animeTitle}</h1>
             <h1 class='font-bold py-8 hidden md:flex'>
                 <span class="items pr-2">TV</span><span
                     class="items pr-2">{animeEpisodeCount} eps</span
@@ -52,7 +55,7 @@
                 ><span>{animeStudio}</span>
 
             </h1>
-            <div class="mb-5 max-h-24 text-ellipsis overflow-y-auto" on:mouseenter={disableScroll} on:mouseleave={enableScroll}  >
+            <div class="mb-5 max-h-24 text-ellipsis overflow-hidden hover:overflow-y-auto" on:mouseenter={disableScroll} on:mouseleave={enableScroll}  >
                 <div class="pr-3 font-normal text-gray-400">{animeSummary}</div>
             </div>
             <div class='flex gap-4 pt-3'>
@@ -74,10 +77,10 @@
             </div>
         </div>
     </div>
+    {:else}
+        <div></div>
+    {/if}
 </div>
-{:else}
-    <div></div>
-{/if}
 
 <style lang="scss">
     .items {
