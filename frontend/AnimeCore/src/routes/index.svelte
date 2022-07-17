@@ -2,6 +2,15 @@
     import MainHeroSlide from "$components/MainHero/Slide.svelte";
     import { EffectFade, Lazy, Mousewheel, Navigation } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
+    import type { Swiper as SwiperType } from 'swiper';
+
+    let rootSwiper:SwiperType;
+
+    const onRootSwiper = (e:CustomEvent) => {
+        const [swiper] = e.detail;
+        rootSwiper = swiper
+    }
+    
 
     const data = [
         {
@@ -132,6 +141,7 @@
     modules={[Mousewheel]}
     simulateTouch={false}
     mousewheel
+    on:swiper={onRootSwiper}
 >
     <SwiperSlide>
         <Swiper
@@ -150,8 +160,10 @@
             lazy
         >
             {#each data as item}
-                <SwiperSlide>
+                <SwiperSlide let:data='{{isActive}}'>
                     <MainHeroSlide
+                        isActive={isActive}
+                        rootSwiper = {rootSwiper}
                         animeTitle={item.animeTitle}
                         animeSummary={item.animeSummary}
                         animeEpisodeCount={item.animeEpisodeCount}
