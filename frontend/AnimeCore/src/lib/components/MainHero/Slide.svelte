@@ -46,7 +46,7 @@
                     />
                     </span>
                 </div>
-                <h1 class="mb-4 text-6xl font-bold max-h-16 h-20 overflow-hidden hover:overflow-y-auto ">{animeTitle}</h1>
+                <h1 class="mb-4 text-6xl font-bold max-h-16 h-20 overflow-hidden hover:overflow-y-auto scrollbar">{animeTitle}</h1>
                 <h1 class='font-bold py-8 hidden md:flex'>
                     <span class="items pr-2">TV</span><span
                         class="items pr-2">{animeEpisodeCount} eps</span
@@ -55,7 +55,7 @@
                     ><span>{animeStudio}</span>
 
                 </h1>
-                <div class="mb-5 max-h-24 text-ellipsis overflow-hidden hover:overflow-y-auto" on:mouseenter={disableScroll} on:mouseleave={enableScroll}  >
+                <div class="mb-5 max-h-24 text-ellipsis overflow-hidden hover:overflow-y-auto scrollbar" on:mouseenter={disableScroll} on:mouseleave={enableScroll}  >
                     <div class="pr-3 font-normal text-gray-400">{animeSummary}</div>
                 </div>
                 <div class='flex gap-4 pt-3'>
