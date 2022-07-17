@@ -1,7 +1,7 @@
 <script lang="ts">
     import MainHeroSlide from "$components/MainHero/Slide.svelte";
     import { EffectFade, Lazy, Mousewheel, Navigation } from "swiper";
-    import { Swiper, SwiperSlide } from 'swiper/svelte';
+    import { Swiper, SwiperSlide } from "swiper/svelte";
 
     const data = [
         {
@@ -124,45 +124,45 @@
     <title>AnimeCore</title>
 </svelte:head>
 
-    <Swiper
-        speed={600}
-        spaceBetween={0}
-        direction="vertical"
-        slidesPerView="auto"
-        modules={[Mousewheel]}
-        simulateTouch={false}
-        mousewheel
-    >
-        <SwiperSlide>
-            <Swiper
-                modules={[EffectFade, Lazy, Navigation]}
-                effect="fade"
-                direction="horizontal"
-                navigation={{
-                    nextEl: ".mainhero__next__el",
-                    prevEl: ".mainhero__previous__el"
-                }}
-                pagination={{
-                    enabled: true,
-                    el: ".swiper__mainhero__pagination"
-                }}
-                loop
-                lazy
-            >
-                {#each data as item}
-                    <SwiperSlide>
-                            <MainHeroSlide
-                                animeTitle={item.animeTitle}
-                                animeSummary={item.animeSummary}
-                                animeEpisodeCount={item.animeEpisodeCount}
-                                animeStudio={item.animeStudio}
-                                animeAirTime={item.animeAirTime}
-                                backgroundImage={item.backgroundImage}
-                                backgroundBanner={item.backgroundBanner}
-                                tags={item.tags}
-                            />
-                    </SwiperSlide>
-                {/each}
-            </Swiper>
-        </SwiperSlide>
-    </Swiper>
+<Swiper
+    speed={600}
+    spaceBetween={0}
+    direction="vertical"
+    slidesPerView="auto"
+    modules={[Mousewheel]}
+    simulateTouch={false}
+    mousewheel
+>
+    <SwiperSlide>
+        <Swiper
+            modules={[EffectFade, Lazy, Navigation]}
+            effect="fade"
+            direction="horizontal"
+            navigation={{
+                nextEl: ".mainhero__next__el",
+                prevEl: ".mainhero__previous__el"
+            }}
+            pagination={{
+                enabled: true,
+                el: ".swiper__mainhero__pagination"
+            }}
+            loop
+            lazy
+        >
+            {#each data as item}
+                <SwiperSlide>
+                    <MainHeroSlide
+                        animeTitle={item.animeTitle}
+                        animeSummary={item.animeSummary}
+                        animeEpisodeCount={item.animeEpisodeCount}
+                        animeStudio={item.animeStudio}
+                        animeAirTime={item.animeAirTime}
+                        backgroundImage={item.backgroundImage}
+                        backgroundBanner={item.backgroundBanner}
+                        tags={item.tags}
+                    />
+                </SwiperSlide>
+            {/each}
+        </Swiper>
+    </SwiperSlide>
+</Swiper>
