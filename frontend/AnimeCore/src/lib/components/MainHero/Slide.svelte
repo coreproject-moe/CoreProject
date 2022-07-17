@@ -1,6 +1,9 @@
 <script lang="ts">
     import Navbar from "$components/common/Navbar.svelte";
+    import type { Swiper as SwiperType } from 'swiper';
 
+    export let isActive:boolean;
+    export let rootSwiper : SwiperType;
     export let animeTitle: string;
     export let animeSummary: string;
     export let animeEpisodeCount: number;
@@ -9,8 +12,18 @@
     export let backgroundImage: string;
     export let backgroundBanner: string;
     export let tags: string[];
-</script>
+    
+    const disableScroll = () => {
+        rootSwiper.mousewheel.disable();
+        rootSwiper.allowTouchMove = false;
+    }
+    const enableScroll = () => {
+        rootSwiper.mousewheel.enable()
+        rootSwiper.allowTouchMove = true;
 
+    }
+</script>
+{#if true }
 <div
     class="hero min-h-[60vh] md:min-h-screen bg-center bg-no-repeat"
     style="background-image: url('{backgroundImage}');"
@@ -39,7 +52,7 @@
                 ><span>{animeStudio}</span>
 
             </h1>
-            <div class="mb-5 max-h-24 text-ellipsis overflow-y-auto">
+            <div class="mb-5 max-h-24 text-ellipsis overflow-y-auto" on:mouseenter={disableScroll} on:mouseleave={enableScroll}  >
                 <div class="pr-3 font-normal text-gray-400">{animeSummary}</div>
             </div>
             <div class='flex gap-4 pt-3'>
@@ -62,7 +75,9 @@
         </div>
     </div>
 </div>
-
+{:else}
+    <div></div>
+{/if}
 
 <style lang="scss">
     .items {
