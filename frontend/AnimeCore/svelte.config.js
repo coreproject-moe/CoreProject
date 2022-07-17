@@ -1,5 +1,5 @@
-import preprocess from 'svelte-preprocess';
-import vercel from '@sveltejs/adapter-vercel';
+import preprocess from "svelte-preprocess";
+import vercel from "@sveltejs/adapter-vercel";
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -7,6 +7,7 @@ const config = {
     // for more information about preprocessors
     preprocess: [
         preprocess({
+            style: "postcss",
             postcss: true
         })
     ],
