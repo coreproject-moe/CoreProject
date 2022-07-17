@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Navbar from "$components/common/Navbar.svelte";
+    import MainHeroSlide from "$components/MainHero/Slide.svelte";
 
     const data = [
         {
@@ -122,6 +122,4 @@
     <title>AnimeCore</title>
 </svelte:head>
 
-<Navbar />
-
-<h1 class="text-3xl font-bold underline">Hello world!</h1>
+<MainHeroSlide />
