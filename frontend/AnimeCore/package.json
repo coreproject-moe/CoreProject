@@ -13,7 +13,6 @@
         "format": "prettier --write --plugin-search-dir=. ."
     },
     "devDependencies": {
-        "@sveltejs/adapter-vercel": "^1.0.0-next.63",
         "@sveltejs/adapter-static": "^1.0.0-next.32",
         "@sveltejs/kit": "next",
         "@tailwindcss/typography": "^0.5.4",

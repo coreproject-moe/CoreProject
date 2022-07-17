@@ -1,12 +1,10 @@
+import { defineConfig } from "vite";
 import { sveltekit } from "@sveltejs/kit/vite";
 import path from "path";
 
-/** @type {import('vite').UserConfig} */
-const config = {
+export default defineConfig({
     plugins: [sveltekit()],
-    optimizeDeps: {
-        exclude: ["swiper"]
-    },
+    legacy: { buildSsrCjsExternalHeuristics: true }, // https://github.com/sveltejs/kit/issues/5549
     resolve: {
         alias: {
             // these are the aliases and paths to them
@@ -16,6 +14,4 @@ const config = {
             $functions: path.resolve("./src/lib/functions")
         }
     }
-};
-
-export default config;
+});
