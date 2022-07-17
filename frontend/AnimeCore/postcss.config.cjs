@@ -22,14 +22,14 @@ const config = {
         }),
         // Run on buld
         !dev &&
-            purgecss({
-                content: ["./src/**/**/*.{svelte,html,js,ts}"],
-                defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
-                safelist: {
-                    deep: [],
-                    greedy: [/swiper/, /svelte/, /data-theme$/]
-                }
-            })
+        purgecss({
+            content: ["./src/**/**/*.{svelte,html,js,ts}"],
+            defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
+            safelist: {
+                deep: [],
+                greedy: [/swiper/, /svelte/, /data-theme$/]
+            }
+        })
     ]
 };
 
