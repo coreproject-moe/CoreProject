@@ -30,7 +30,7 @@
                 />
                 </span>
             </div>
-            <h1 class="mb-5 text-6xl font-bold">{animeTitle}</h1>
+            <h1 class="mb-4 text-6xl font-bold max-h-16 h-20 overflow-y-auto">{animeTitle}</h1>
             <h1 class='font-bold py-8 hidden md:flex'>
                 <span class="items pr-2">TV</span><span
                     class="items pr-2">{animeEpisodeCount} eps</span
