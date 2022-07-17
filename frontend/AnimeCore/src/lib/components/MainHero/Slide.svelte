@@ -48,9 +48,9 @@
                 {/each}
             </div>
             <div class='mt-6 flex gap-4'>
-                <button class="btn btn-lg btn-secondary rounded-[16px] px-5"><img alt="" src="/icons/play.svg" width="24" height="24"></button>
+                <button class="btn btn-lg btn-secondary rounded-[16px] px-5 "><img alt="" src="/icons/play.svg" width="24" height="24"></button>
                 <button class="btn btn-secondary btn-lg btn-outline border-4 rounded-[16px]">
-                    <div class="text-secondary text-lg font-bold flex gap-2">
+                    <div class="text-lg font-bold flex gap-2">
                         Details
                         <span class='flex items-center' >
                             <img alt="" src="/icons/chevrons-right.svg" width="24" height="24"/>
