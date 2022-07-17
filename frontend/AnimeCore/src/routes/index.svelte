@@ -2,7 +2,7 @@
     import MainHeroSlide from "$components/MainHero/Slide.svelte";
     import { EffectFade, Lazy, Mousewheel, Navigation } from "swiper";
     import { Swiper, SwiperSlide } from 'swiper/svelte';
-    
+
     const data = [
         {
             animeStudio: "Kyoto Animations",
