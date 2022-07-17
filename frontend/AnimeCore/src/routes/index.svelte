@@ -1,6 +1,8 @@
 <script lang="ts">
     import MainHeroSlide from "$components/MainHero/Slide.svelte";
-
+    import { EffectFade, Lazy, Mousewheel, Navigation } from "swiper";
+    import { Swiper, SwiperSlide } from 'swiper/svelte';
+    
     const data = [
         {
             animeStudio: "Kyoto Animations",
@@ -122,4 +124,50 @@
     <title>AnimeCore</title>
 </svelte:head>
 
-<MainHeroSlide />
+{#each data as item, _}
+    <Swiper
+        speed={600}
+        spaceBetween={0}
+        direction="vertical"
+        slidesPerView="auto"
+        modules={[Mousewheel]}
+        simulateTouch={false}
+        mousewheel
+    >
+        <SwiperSlide>
+            <Swiper
+                modules={[EffectFade, Lazy, Navigation]}
+                effect="fade"
+                direction="horizontal"
+                navigation={{
+                    nextEl: ".mainhero__next__el",
+                    prevEl: ".mainhero__previous__el"
+                }}
+                pagination={{
+                    enabled: true,
+                    el: ".swiper__mainhero__pagination"
+                }}
+                loop
+                lazy
+            >
+                {#each data as item}
+                    <SwiperSlide>
+                        <div>
+                            <MainHeroSlide
+                                animeTitle={item.animeTitle}
+                                animeSummary={item.animeSummary}
+                                animeEpisodeCount={item.animeEpisodeCount}
+                                animeStudio={item.animeStudio}
+                                animeAirTime={item.animeAirTime}
+                                backgroundImage={item.backgroundImage}
+                                backgroundBanner={item.backgroundBanner}
+                                tags={item.tags}
+                            />
+                        </div>
+                    </SwiperSlide>
+                {/each}
+            </Swiper>
+        </SwiperSlide>
+        <SwiperSlide />
+    </Swiper>
+{/each}

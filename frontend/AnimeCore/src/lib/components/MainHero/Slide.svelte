@@ -1,9 +1,21 @@
 <script lang="ts">
     import Navbar from "$components/common/Navbar.svelte";
+
+    export let animeTitle: string;
+    export let animeSummary: string;
+    export let animeEpisodeCount:number;
+    export let animeStudio:string;
+    export let animeAirTime:string;
+    export let backgroundImage:string;
+    export let backgroundBanner:string;
+    export let tags:string[];
 </script>
 
-<div class="hero min-h-[60vh] md:min-h-screen" style="background-image: url(https://placeimg.com/1000/800/arch);">
-    <div class="hero-overlay bg-opacity-60 ">
+<div
+    class="hero min-h-[60vh] md:min-h-screen bg-center bg-no-repeat"
+    style="background-image: url(https://placeimg.com/1000/800/arch);"
+>
+    <div class="hero-overlay bg-opacity-60">
         <div class="pt-8 pr-[72px] pl-[48px] pb-0">
             <Navbar />
         </div>
