@@ -23,7 +23,7 @@
 
     }
 </script>
-{#if true }
+{#if isActive }
 <div
     class="hero min-h-[60vh] md:min-h-screen bg-center bg-no-repeat"
     style="background-image: url('{backgroundImage}');"
