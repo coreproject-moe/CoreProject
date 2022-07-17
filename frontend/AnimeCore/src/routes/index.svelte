@@ -158,11 +158,14 @@
             }}
             loop
             lazy
+            
         >
             {#each data as item}
-                <SwiperSlide let:data='{{isActive}}'>
+                <SwiperSlide let:data='{{isActive, isDuplicate,isVisible}}'>
                     <MainHeroSlide
                         isActive={isActive}
+                        isDuplicate ={isDuplicate}
+                        isVisible={isVisible}
                         rootSwiper = {rootSwiper}
                         animeTitle={item.animeTitle}
                         animeSummary={item.animeSummary}
