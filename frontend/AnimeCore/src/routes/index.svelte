@@ -124,7 +124,6 @@
     <title>AnimeCore</title>
 </svelte:head>
 
-{#each data as item, _}
     <Swiper
         speed={600}
         spaceBetween={0}
@@ -152,7 +151,6 @@
             >
                 {#each data as item}
                     <SwiperSlide>
-                        <div>
                             <MainHeroSlide
                                 animeTitle={item.animeTitle}
                                 animeSummary={item.animeSummary}
@@ -163,11 +161,8 @@
                                 backgroundBanner={item.backgroundBanner}
                                 tags={item.tags}
                             />
-                        </div>
                     </SwiperSlide>
                 {/each}
             </Swiper>
         </SwiperSlide>
-        <SwiperSlide />
     </Swiper>
-{/each}
