@@ -102,7 +102,7 @@
             </ScrollArea>
             <div class="flex gap-4 pt-3">
                 {#each tags as tag}
-                    <span class="badge bg-base-100 badge-lg rounded-md text-white uppercase"
+                    <span class="badge bg-base-100 badge-lg rounded-md text-white uppercase border-transparent"
                         >{tag}</span
                     >
                 {/each}
