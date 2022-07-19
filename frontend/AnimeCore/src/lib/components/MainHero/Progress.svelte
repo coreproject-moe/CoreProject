@@ -2,7 +2,7 @@
     import { onMount,onDestroy } from "svelte";
     import { createEventDispatcher } from 'svelte';
     import Timer from "easytimer.js";
- 
+
 	const dispatch = createEventDispatcher();
 
     let progressValue = 0
@@ -13,7 +13,7 @@
         },
         precision:'secondTenths',
     });
-    
+
     timer.on('targetAchieved',()=>{
         dispatch('targetAchieved')
     })

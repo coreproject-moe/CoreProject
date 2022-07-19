@@ -4,7 +4,7 @@
     export let parentClass = "";
     export { klass as class };
     export let offsetScrollbar = false;
-    
+
 </script>
 
 <div on:mouseenter on:mouseleave {style} class="{parentClass} {offsetScrollbar ? 'pr-2':''} scrollbar overflow-y-scroll">
