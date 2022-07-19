@@ -1,6 +1,4 @@
 <script lang="ts">
-    import { onMount } from "svelte";
-
     let klass = "";
     export let style = "";
     export let parentClass = "";
