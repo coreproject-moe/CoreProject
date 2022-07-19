@@ -45,7 +45,7 @@
     class="hero min-h-[60vh] md:min-h-screen bg-center bg-no-repeat"
     style="background-image: url('{backgroundImage}');"
 >
-    <div class="hero-overlay bg-opacity-60 bg-gradient-to-t from-base-100 via-base-100/[.45] grid">
+    <div class="hero-overlay bg-opacity-60 bg-gradient-to-t from-base-100 via-base-100/[.6] grid">
         <div class="pt-8 pr-[72px] pl-16 pb-0">
             <Navbar />
         </div>
@@ -59,7 +59,7 @@
                     <progress class="progress progress-secondary w-40" value=0 max=100/>
                 {/if}
 
-                <div class="swiper__mainhero__pagination w-40" />
+                <div class="swiper__mainhero__pagination w-40 flex justify-center" />
             </div>
             <div class='hidden md:flex'>03</div>
         </div>
