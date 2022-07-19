@@ -7,7 +7,7 @@
 
 </script>
 
-<div on:mouseenter on:mouseleave {style} class="{parentClass} {offsetScrollbar ? 'pr-2':''} scrollbar overflow-y-scroll">
+<div on:mouseenter on:mouseleave {style} class="{parentClass} {offsetScrollbar ? 'pr-3':''} scrollbar overflow-y-scroll">
     <div class='{klass} whitespace-pre-line'>
         <slot />
     </div>

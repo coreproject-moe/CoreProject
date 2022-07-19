@@ -1,74 +1,74 @@
-// @font-face {
-//     font-family: "Kokoro";
-//     src: url("/fonts/Kokoro/Kokoro-SemiBoldItalic.woff2") format("woff2");
-//     font-weight: 600;
-//     font-style: italic;
-//     font-display: swap;
-// }
-// @font-face {
-//     font-family: "Kokoro";
-//     src: url("/fonts/Kokoro/Kokoro-SemiBold.woff2") format("woff2");
-//     font-weight: 600;
-//     font-style: normal;
-//     font-display: swap;
-// }
-// @font-face {
-//     font-family: "Kokoro";
-//     src: url("/fonts/Kokoro/Kokoro-BoldItalic.woff2") format("woff2");
-//     font-weight: bold;
-//     font-style: italic;
-//     font-display: swap;
-// }
-// @font-face {
-//     font-family: "Kokoro";
-//     src: url("/fonts/Kokoro/Kokoro-Italic.woff2") format("woff2");
-//     font-weight: normal;
-//     font-style: italic;
-//     font-display: swap;
-// }
-// @font-face {
-//     font-family: "Kokoro";
-//     src: url("/fonts/Kokoro/Kokoro-Regular.woff2") format("woff2");
-//     font-weight: normal;
-//     font-style: normal;
-//     font-display: swap;
-// }
-// @font-face {
-//     font-family: "Kokoro";
-//     src: url("/fonts/Kokoro/Kokoro-Bold.woff2") format("woff2");
-//     font-weight: bold;
-//     font-style: normal;
-//     font-display: swap;
-// }
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-SemiBoldItalic.woff2") format("woff2");
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-SemiBold.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-BoldItalic.woff2") format("woff2");
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-Italic.woff2") format("woff2");
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-Bold.woff2") format("woff2");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
 
-// @import "swiper/css";
-// @import "swiper/css/pagination";
-// @import "swiper/css/effect-fade";
-// @import "swiper/css/lazy";
+@import "swiper/css";
+@import "swiper/css/pagination";
+@import "swiper/css/effect-fade";
+@import "swiper/css/lazy";
 
-// @tailwind base;
-// @tailwind components;
-// @tailwind utilities;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-// :root{
-//     --swiper-pagination-color:#E3BD49;
-//     --swiper-pagination-bullet-inactive-color:#EDD68D;
-//     --swiper-pagination-bullet-inactive-opacity: .3;
-//     --swiper-pagination-bullet-horizontal-gap: 7px;
-//     --swiper-pagination-bullet-size: 10px;
-// }
+:root{
+    --swiper-pagination-color:#E3BD49;
+    --swiper-pagination-bullet-inactive-color:#EDD68D;
+    --swiper-pagination-bullet-inactive-opacity: .3;
+    --swiper-pagination-bullet-horizontal-gap: 7px;
+    --swiper-pagination-bullet-size: 10px;
+}
 
-// .swiper {
-//     height: 100%;
-//     width: 100%;
-// }
+.swiper {
+    height: 100%;
+    width: 100%;
+}
 
-// /* This is the hack we are looking for */
-// .swiper-slide {
-//     height: auto;
-// }
+/* This is the hack we are looking for */
+.swiper-slide {
+    height: auto;
+}
 
-// body {
-//     overscroll-behavior-y: contain;
-//     scrollbar-width: none;
-// }
+body {
+    overscroll-behavior-y: contain;
+    scrollbar-width: none;
+}
