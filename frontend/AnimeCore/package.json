@@ -22,6 +22,7 @@
         "autoprefixer": "^10.4.7",
         "cssnano": "^5.1.12",
         "daisyui": "^2.19.0",
+        "easytimer.js": "^4.5.3",
         "eslint": "^8.16.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-svelte3": "^4.0.0",
