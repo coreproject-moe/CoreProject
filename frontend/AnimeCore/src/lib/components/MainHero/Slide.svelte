@@ -41,19 +41,11 @@
     }
 </script>
 
-<svelte:window on:focus={()=>{
-    console.log('start')
-    progress.start?.()
-}} on:blur={()=>{
-    console.log('stop')
-    progress.stop?.()
-}} />
-
 <div
     class="hero min-h-[60vh] md:min-h-screen bg-center bg-no-repeat"
     style="background-image: url('{backgroundImage}');"
 >
-    <div class="hero-overlay bg-opacity-60 bg-gradient-to-t from-base-100 via-base-100/[.45] grid">
+    <div class="hero-overlay grid">
         <div class="pt-8 pr-[72px] pl-16 pb-0">
             <Navbar />
         </div>
@@ -135,6 +127,22 @@
 </div>
 
 <style lang="scss">
+    .hero-overlay {
+        box-shadow: inset 0px -30px 12px -2px rgba(7, 5, 25, 0.85),
+                inset 0 -40vh 140px 2px rgba(7, 5, 25, 0.8),
+                inset 0 -2vh 140px 2px rgba(7, 5, 25, 0.2);
+
+        @media screen and (min-width:768px){
+                    box-shadow: 
+inset 0 4px calc(10vh + 1800px) rgb(7, 5, 25),
+            inset 0 -40vh calc(10vh + 140px) 2px rgba(7, 5, 25, 0.9),
+            inset 0 -15vh calc(10vh + 140px) 2px rgba(7, 5, 25, 0.7),
+            inset 0 -5vh calc(10vh + 140px) 2px rgba(7, 5, 25, 0.4),
+            inset 0 -2vh calc(10vh + 140px) 2px rgba(7, 5, 25, 0.2);
+
+        }
+    }
+
     .items {
         &::after {
             content: " ▪ ";
