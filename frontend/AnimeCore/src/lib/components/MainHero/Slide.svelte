@@ -47,8 +47,9 @@
                         />
                     </span>
                 </div>
-                <ScrollArea style="height:72px" class="text-6xl font-bold max-h-[3.75rem] h-[3.75rem]"
-                    >{animeTitle}</ScrollArea
+                <ScrollArea
+                    style="height:72px"
+                    class="text-6xl font-bold max-h-[3.75rem] h-[3.75rem]">{animeTitle}</ScrollArea
                 >
 
                 <h1 class="font-bold mt-4 py-8 hidden md:flex">
@@ -59,11 +60,11 @@
                     ><span>{animeStudio}</span>
                 </h1>
                 <ScrollArea
-                    parentClass='mb-5'     
+                    parentClass="mb-5"
                     class="max-h-24 font-normal text-gray-400"
                     on:mouseenter={disableScroll}
                     on:mouseleave={enableScroll}
-                    offsetScrollbar   
+                    offsetScrollbar
                 >
                     {animeSummary}
                 </ScrollArea>
