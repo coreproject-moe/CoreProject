@@ -133,7 +133,7 @@
                 inset 0 -2vh 140px 2px rgba(7, 5, 25, 0.2);
 
         @media screen and (min-width:768px){
-                    box-shadow: 
+                    box-shadow:
 inset 0 4px calc(10vh + 1800px) rgb(7, 5, 25),
             inset 0 -40vh calc(10vh + 140px) 2px rgba(7, 5, 25, 0.9),
             inset 0 -15vh calc(10vh + 140px) 2px rgba(7, 5, 25, 0.7),
