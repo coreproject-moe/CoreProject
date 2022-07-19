@@ -49,10 +49,10 @@
                 </div>
                 <ScrollArea
                     style="height:72px"
-                    class="text-6xl font-bold max-h-[3.75rem] h-[3.75rem]">{animeTitle}</ScrollArea
+                    class="text-6xl font-bold">{animeTitle}</ScrollArea
                 >
 
-                <h1 class="font-bold mt-4 py-8 hidden md:flex">
+                <h1 class="font-bold py-8 hidden md:flex">
                     <span class="items pr-2">TV</span><span class="items pr-2"
                         >{animeEpisodeCount} eps</span
                     ><span class="items pr-2">Completed</span><span class="items pr-2"
