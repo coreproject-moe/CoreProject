@@ -2,15 +2,14 @@
     import MainHeroSlide from "$components/MainHero/Slide.svelte";
     import { EffectFade, Lazy, Mousewheel, Navigation } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
-    import type { Swiper as SwiperType } from 'swiper';
+    import type { Swiper as SwiperType } from "swiper";
 
-    let rootSwiper:SwiperType;
+    let rootSwiper: SwiperType;
 
-    const onRootSwiper = (e:CustomEvent) => {
+    const onRootSwiper = (e: CustomEvent) => {
         const [swiper] = e.detail;
-        rootSwiper = swiper
-    }
-
+        rootSwiper = swiper;
+    };
 
     const data = [
         {
@@ -158,15 +157,14 @@
             }}
             loop
             lazy
-
         >
             {#each data as item}
-                <SwiperSlide let:data='{{isActive, isDuplicate,isVisible}}'>
+                <SwiperSlide let:data={{ isActive, isDuplicate, isVisible }}>
                     <MainHeroSlide
-                        isActive={isActive}
-                        isDuplicate ={isDuplicate}
-                        isVisible={isVisible}
-                        rootSwiper = {rootSwiper}
+                        {isActive}
+                        {isDuplicate}
+                        {isVisible}
+                        {rootSwiper}
                         animeTitle={item.animeTitle}
                         animeSummary={item.animeSummary}
                         animeEpisodeCount={item.animeEpisodeCount}
