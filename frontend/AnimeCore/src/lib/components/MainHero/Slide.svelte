@@ -63,7 +63,7 @@
                 {#if isActive}
                     <Progress bind:this={progress} on:targetAchieved={timerEnded}/>
                 {/if}
-                <div class="swiper__mainhero__pagination w-40" /> 
+                <div class="swiper__mainhero__pagination w-40" />
             </div>
             <div class='hidden md:flex'>03</div>
         </div>
@@ -126,7 +126,7 @@
                 </button>
             </div>
         </div>
-      
+
     </div>
 </div>
 
