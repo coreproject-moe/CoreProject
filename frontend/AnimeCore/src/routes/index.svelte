@@ -1,6 +1,6 @@
 <script lang="ts">
     import MainHeroSlide from "$components/MainHero/Slide.svelte";
-    import { EffectFade, Lazy, Mousewheel, Navigation } from "swiper";
+    import { EffectFade, Lazy, Mousewheel, Navigation,Pagination } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import type { Swiper as SwiperType } from "swiper";
 
@@ -136,6 +136,7 @@
     <title>AnimeCore</title>
 </svelte:head>
 
+
 <Swiper
     speed={600}
     spaceBetween={0}
@@ -148,7 +149,7 @@
 >
     <SwiperSlide>
         <Swiper
-            modules={[EffectFade, Lazy, Navigation]}
+            modules={[EffectFade, Lazy, Navigation,Pagination]}
             effect="fade"
             direction="horizontal"
             navigation={{
@@ -157,10 +158,10 @@
             }}
             pagination={{
                 enabled: true,
-                el: ".swiper__mainhero__pagination"
+                el: ".swiper__mainhero__pagination",
+                clickable:true,
             }}
             on:swiper={onMainHeroSwiper}
-
             loop
             lazy
         >

@@ -20,13 +20,13 @@
     })
 
     onMount(()=>{
-        timer.start({
-            callback:()=>{
-                const time = timer.getTotalTimeValues().secondTenths
-                const value = (100 / SWIPER_DELAY) * (time/10)
-                progressValue = value
-            }
-        })
+        // timer.start({
+        //     callback:()=>{
+        //         const time = timer.getTotalTimeValues().secondTenths
+        //         const value = (100 / SWIPER_DELAY) * (time/10)
+        //         progressValue = value
+        //     }
+        // })
     })
 
     onDestroy(()=>{
@@ -38,8 +38,8 @@
     }
 
     export const start = () => {
-        timer.start()
+        // timer.start()
     }
 </script>
 
-<progress class="progress progress-secondary w-50 transition-[width] delay-1000" value={progressValue} max="100"/>
+<progress class="progress progress-secondary w-40 transition-[width] delay-1000"  value={progressValue} max="100"/>

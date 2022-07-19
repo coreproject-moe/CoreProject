@@ -50,6 +50,14 @@
 @tailwind components;
 @tailwind utilities;
 
+:root{
+    --swiper-pagination-color:#E3BD49;
+    --swiper-pagination-bullet-inactive-color:#EDD68D;
+    --swiper-pagination-bullet-inactive-opacity: .3;
+    --swiper-pagination-bullet-horizontal-gap: 7px;
+    --swiper-pagination-bullet-size: 10px;
+}
+
 .swiper {
     height: 100%;
     width: 100%;
