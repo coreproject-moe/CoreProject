@@ -47,10 +47,11 @@
                         />
                     </span>
                 </div>
-                <ScrollArea class="mb-4 text-6xl font-bold max-h-[3.75rem] h-[3.75rem]"
+                <ScrollArea style="height:72px" class="text-6xl font-bold max-h-[3.75rem] h-[3.75rem]"
                     >{animeTitle}</ScrollArea
                 >
-                <h1 class="font-bold py-8 hidden md:flex">
+
+                <h1 class="font-bold mt-4 py-8 hidden md:flex">
                     <span class="items pr-2">TV</span><span class="items pr-2"
                         >{animeEpisodeCount} eps</span
                     ><span class="items pr-2">Completed</span><span class="items pr-2"
@@ -58,9 +59,11 @@
                     ><span>{animeStudio}</span>
                 </h1>
                 <ScrollArea
-                    class="mb-5 max-h-24 pr-3 font-normal text-gray-400"
+                    parentClass='mb-5'     
+                    class="max-h-24 font-normal text-gray-400"
                     on:mouseenter={disableScroll}
                     on:mouseleave={enableScroll}
+                    offsetScrollbar   
                 >
                     {animeSummary}
                 </ScrollArea>
