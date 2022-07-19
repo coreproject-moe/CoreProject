@@ -3,11 +3,7 @@
     export { klass as class };
 </script>
 
-<div
-    on:mouseenter
-    on:mouseleave
-    class="{klass} scrollbar overflow-y-scroll"
->
+<div on:mouseenter on:mouseleave class="{klass} scrollbar overflow-y-scroll">
     <slot />
 </div>
 
@@ -22,11 +18,11 @@
         height: 100%;
 
         /* set to some transparent color */
-        border-color: rgba(255, 255, 255, 0.0);
+        border-color: rgba(255, 255, 255, 0);
         /* here we make the color transition */
         transition: border-color 0.2s linear;
 
-        &:hover{
+        &:hover {
             /* the color we want the scrollbar on hover */
             border-color: rgba(255, 255, 255, 0.12);
         }
@@ -42,7 +38,6 @@
             border-right-width: calc(100vw + 100vh);
             /* inherit border-color to inherit transitions */
             border-color: inherit;
-
         }
     }
 </style>
