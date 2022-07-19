@@ -9,7 +9,7 @@
 </script>
 
 <div on:mouseenter on:mouseleave {style} class="{parentClass} scrollbar overflow-y-scroll">
-    <div class={klass}>
+    <div class='{klass} whitespace-pre-line'>
         <slot />
     </div>
 </div>
