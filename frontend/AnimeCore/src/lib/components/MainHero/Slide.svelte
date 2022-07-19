@@ -3,12 +3,15 @@
     import ScrollArea from "$components/common/ScrollArea.svelte";
     import type { Swiper as SwiperType } from "swiper";
     import Progress from "./Progress.svelte";
+    import type Timer from "easytimer.js";
+    import type { SvelteComponent } from "svelte";
 
+    export let rootSwiper: SwiperType;
+    export let mainHeroSwiper:SwiperType;
     export let isVisible: boolean;
     export let isDuplicate: boolean;
     export let isActive: boolean;
 
-    export let rootSwiper: SwiperType;
     export let animeTitle: string;
     export let animeSummary: string;
     export let animeEpisodeCount: number;
@@ -18,14 +21,24 @@
     export let backgroundBanner: string;
     export let tags: string[];
 
+    interface IProgress extends SvelteComponent,Partial<Timer>{}
+    let progress :IProgress;
+
     const disableScroll = () => {
         rootSwiper.mousewheel.disable();
         rootSwiper.allowTouchMove = false;
+        progress.pause?.()
     };
     const enableScroll = () => {
         rootSwiper.mousewheel.enable();
         rootSwiper.allowTouchMove = true;
+
+        progress.start?.()
     };
+
+    const timerEnded = () => {
+        mainHeroSwiper.slideNext()
+    }
 </script>
 
 <div
@@ -98,7 +111,7 @@
                     <div class='hidden md:flex'></div>
                     <div class='flex'>
                         {#if isActive}
-                            <Progress/>
+                            <Progress bind:this={progress} on:targetAchieved={timerEnded}/>
                         {/if}
                     </div>
                     <div class='hidden md:flex'>03</div>
