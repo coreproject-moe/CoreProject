@@ -2,7 +2,7 @@
     let klass = "";
     export { klass as class };
 
-  
+
 </script>
 
 <div
@@ -32,7 +32,7 @@
         /* the color we want the scrollbar on hover */
         border-color: rgba(255, 255, 255, 0.12);
     }
-    
+
     &::-webkit-scrollbar,
     &::-webkit-scrollbar-corner,
     &::-webkit-scrollbar-thumb {
