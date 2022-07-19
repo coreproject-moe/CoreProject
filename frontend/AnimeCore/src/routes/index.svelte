@@ -5,12 +5,16 @@
     import type { Swiper as SwiperType } from "swiper";
 
     let rootSwiper: SwiperType;
+    let mainHeroSwiper:SwiperType;
 
     const onRootSwiper = (e: CustomEvent) => {
         const [swiper] = e.detail;
         rootSwiper = swiper;
     };
-
+    const onMainHeroSwiper = (e:CustomEvent) => {
+        const [swiper] = e.detail;
+        mainHeroSwiper = swiper
+    }
     const data = [
         {
             animeStudio: "Kyoto Animations",
@@ -155,6 +159,8 @@
                 enabled: true,
                 el: ".swiper__mainhero__pagination"
             }}
+            on:swiper={onMainHeroSwiper}
+
             loop
             lazy
         >
@@ -165,6 +171,7 @@
                         {isDuplicate}
                         {isVisible}
                         {rootSwiper}
+                        {mainHeroSwiper}
                         animeTitle={item.animeTitle}
                         animeSummary={item.animeSummary}
                         animeEpisodeCount={item.animeEpisodeCount}
