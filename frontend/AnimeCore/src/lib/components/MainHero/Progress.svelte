@@ -10,7 +10,7 @@
 
     let timer = new Timer({
         target:{
-            seconds: SWIPER_DELAY 
+            seconds: SWIPER_DELAY
         },
         precision:'secondTenths',
     });
