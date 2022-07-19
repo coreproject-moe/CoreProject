@@ -2,6 +2,7 @@
     import Navbar from "$components/common/Navbar.svelte";
     import ScrollArea from "$components/common/ScrollArea.svelte";
     import type { Swiper as SwiperType } from "swiper";
+    import Progress from "./Progress.svelte";
 
     export let isVisible: boolean;
     export let isDuplicate: boolean;
@@ -36,7 +37,7 @@
             <Navbar />
         </div>
     </div>
-    {#if rootSwiper?.activeIndex === 0}
+
         <div class="pl-10 md:pl-24 hero-content text-neutral-content text-white justify-self-start">
             <div class="max-w-[80vw]">
                 <div class="text-secondary text-lg font-bold pb-3 flex gap-2">
@@ -93,11 +94,17 @@
                         </div>
                     </button>
                 </div>
+                <div class="grid grid-flow-col auto-cols-max justify-between pt-14">
+                    <div class='hidden md:flex'></div>
+                    <div class='flex'>
+                        {#if isActive}
+                            <Progress/>
+                        {/if}
+                    </div>
+                    <div class='hidden md:flex'>03</div>
+                  </div>
             </div>
         </div>
-    {:else}
-        <div />
-    {/if}
 </div>
 
 <style lang="scss">
