@@ -1,12 +1,19 @@
 <script lang="ts">
+import { onMount } from "svelte";
+
+
     let klass = "";
+    export let style = ''
+    export let parentClass='';
     export { klass as class };
+    export let offsetScrollbar = false;
+
+parentClass =    offsetScrollbar ? parentClass.concat(' ', ' pr-2 ') : ''
 </script>
 
-<div on:mouseenter on:mouseleave class="scrollbar overflow-y-scroll">
+<div on:mouseenter on:mouseleave style={style} class="{parentClass} scrollbar overflow-y-scroll">
     <div class={klass}>
         <slot />
-
     </div>
 </div>
 
