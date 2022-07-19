@@ -45,7 +45,7 @@
     class="hero min-h-[60vh] md:min-h-screen bg-center bg-no-repeat"
     style="background-image: url('{backgroundImage}');"
 >
-    <div class="hero-overlay grid">
+    <div class="hero-overlay from-base-100 via-base-100/[.0001] grid" style='--tw-bg-opacity:0'>
         <div class="pt-8 pr-[72px] pl-16 pb-0">
             <Navbar />
         </div>
@@ -59,7 +59,7 @@
                     <progress class="progress progress-secondary w-40" value=0 max=100/>
                 {/if}
 
-                <div class="swiper__mainhero__pagination w-40" />
+                <div class="swiper__mainhero__pagination w-40 flex justify-center" />
             </div>
             <div class='hidden md:flex'>03</div>
         </div>
@@ -127,22 +127,13 @@
 </div>
 
 <style lang="scss">
-    .hero-overlay {
-        box-shadow: inset 0px -30px 12px -2px rgba(7, 5, 25, 0.85),
-                inset 0 -40vh 140px 2px rgba(7, 5, 25, 0.8),
-                inset 0 -2vh 140px 2px rgba(7, 5, 25, 0.2);
-
-        @media screen and (min-width:768px){
-                    box-shadow:
-inset 0 4px calc(10vh + 1800px) rgb(7, 5, 25),
-            inset 0 -40vh calc(10vh + 140px) 2px rgba(7, 5, 25, 0.9),
-            inset 0 -15vh calc(10vh + 140px) 2px rgba(7, 5, 25, 0.7),
-            inset 0 -5vh calc(10vh + 140px) 2px rgba(7, 5, 25, 0.4),
-            inset 0 -2vh calc(10vh + 140px) 2px rgba(7, 5, 25, 0.2);
-
-        }
+    .hero-overlay{
+        background-image: 
+            linear-gradient(to top, var(--tw-gradient-stops)),
+            linear-gradient(to left, var(--tw-gradient-stops)),
+            linear-gradient(to right, var(--tw-gradient-stops))
+            ;
     }
-
     .items {
         &::after {
             content: " ▪ ";
