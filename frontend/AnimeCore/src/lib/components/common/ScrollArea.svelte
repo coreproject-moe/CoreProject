@@ -3,8 +3,11 @@
     export { klass as class };
 </script>
 
-<div on:mouseenter on:mouseleave class="{klass} scrollbar overflow-y-scroll">
-    <slot />
+<div on:mouseenter on:mouseleave class="scrollbar overflow-y-scroll">
+    <div class={klass}>
+        <slot />
+
+    </div>
 </div>
 
 <style lang="scss">
