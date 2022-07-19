@@ -62,7 +62,11 @@
             <div class='flex items-center gap-4'>
                 {#if isActive}
                     <Progress bind:this={progress} on:targetAchieved={timerEnded}/>
+                {:else}
+                    <!-- Placeholder to prevent layout shift -->
+                    <progress class="progress progress-secondary w-40" value=0 max=100/>
                 {/if}
+
                 <div class="swiper__mainhero__pagination w-40" />
             </div>
             <div class='hidden md:flex'>03</div>
