@@ -5,7 +5,7 @@
     import Progress from "./Progress.svelte";
     import type Timer from "easytimer.js";
     import type { SvelteComponent } from "svelte";
-    import { responsiveMode } from "$store/responsive";
+    import { responsiveMode } from "$store/Responsive";
 
     export let rootSwiper: SwiperType;
     export let mainHeroSwiper: SwiperType;
