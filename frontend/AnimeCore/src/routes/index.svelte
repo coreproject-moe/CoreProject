@@ -1,8 +1,9 @@
 <script lang="ts">
-    import MainHeroSlide from "$components/MainHero/Slide.svelte";
+    import type { Swiper as SwiperType } from "swiper";
     import { EffectFade, Lazy, Mousewheel, Navigation, Pagination } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
-    import type { Swiper as SwiperType } from "swiper";
+    
+    import MainHeroSlide from "$components/MainHero/Slide.svelte";
 
     let rootSwiper: SwiperType;
     let mainHeroSwiper: SwiperType;
