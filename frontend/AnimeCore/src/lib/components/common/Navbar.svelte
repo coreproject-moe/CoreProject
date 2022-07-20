@@ -3,7 +3,7 @@
         <img alt="" src="/icons/search.svg" width="30" height="30" />
     </div>
     <div class="navbar-center">
-        <img alt="" src="/logos/animecore_logo.svg" width="158" height="22" />
+        <img alt="" src="/logos/animecore_logo-black.svg" width="158" height="22" />
     </div>
     <div class="navbar-end">
         <img

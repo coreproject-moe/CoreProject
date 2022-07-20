@@ -1,6 +1,6 @@
 <script lang="ts">
     import Timer from "easytimer.js";
-    import { onDestroy,onMount } from "svelte";
+    import { onDestroy, onMount } from "svelte";
     import { createEventDispatcher } from "svelte";
 
     const SWIPER_DELAY = 10;
@@ -16,7 +16,7 @@
     });
 
     timer.on("targetAchieved", () => {
-        dispatch("targetAchieved");
+        // dispatch("targetAchieved");
     });
 
     onMount(() => {

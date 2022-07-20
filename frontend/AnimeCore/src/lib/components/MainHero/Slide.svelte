@@ -66,87 +66,101 @@
     };
 </script>
 
-<div
-    class="hero min-h-[60vh] md:min-h-screen bg-center bg-no-repeat"
-    style="background-image: url('{background}');"
->
+{#if isActive}
     <div
-        class="hero-overlay from-base-100 via-base-100/[.8] md:via-base-100/[.0001] grid"
-        style="--tw-bg-opacity:0"
+        class="hero min-h-[60vh] md:min-h-screen bg-center bg-no-repeat"
+        style="background-image: url('{background}');"
     >
-        <div class="pt-8 pr-[72px] pl-16 pb-0">
-            <Navbar />
-        </div>
-        <div class="grid grid-flow-col auto-cols-max justify-between min-w-full content-end pb-8">
-            <div class="hidden md:flex" />
-            <div class="flex items-center gap-4">
-                {#if isActive}
-                    <Progress bind:this={progress} on:targetAchieved={timerEnded} />
-                {:else}
-                    <!-- Placeholder to prevent layout shift -->
-                    <progress class="progress progress-secondary w-40" value="0" max="100" />
-                {/if}
-
-                <div class="swiper__mainhero__pagination w-40 flex justify-center" />
+        <div
+            class="hero-overlay from-base-100 via-base-100/[.8] md:via-base-100/[.0001] grid"
+            style="--tw-bg-opacity:0"
+        >
+            <div class="pt-8 pr-[72px] pl-16 pb-0">
+                <Navbar />
             </div>
-            <div class="hidden md:flex">03</div>
-        </div>
-    </div>
-
-    <div
-        class="pl-10 md:pl-24 hero-content flex-col text-neutral-content text-white justify-self-start"
-    >
-        <div class="max-w-[80vw]">
-            <div class="text-secondary text-lg font-bold pb-3 flex gap-2">
-                Featured
-                <span class="flex items-center">
-                    <span
-                        style="display: inline-block; width: 60px; border-top: 4px solid; border-radius: 10px;"
-                    />
-                </span>
-            </div>
-            <ScrollArea style="height:72px" class="text-6xl font-bold">{animeTitle}</ScrollArea>
-
-            <h1 class="font-bold py-8 hidden md:flex">
-                <span class="items pr-2">TV</span><span class="items pr-2"
-                    >{animeEpisodeCount} eps</span
-                ><span class="items pr-2">Completed</span><span class="items pr-2"
-                    >{animeAirTime}</span
-                ><span>{animeStudio}</span>
-            </h1>
-            <ScrollArea
-                parentClass="mb-5"
-                class="max-h-24 font-normal text-gray-400"
-                on:mouseenter={disableScroll}
-                on:mouseleave={enableScroll}
-                offsetScrollbar
+            <div
+                class="grid grid-flow-col auto-cols-max justify-between min-w-full content-end pb-8"
             >
-                {animeSummary}
-            </ScrollArea>
-            <div class="flex gap-4 pt-3">
-                {#each tags as tag}
-                    <span
-                        class="badge bg-base-100 badge-lg rounded-md text-white uppercase border-transparent"
-                        >{tag}</span
-                    >
-                {/each}
+                <div class="hidden md:flex" />
+                <div class="flex items-center gap-4">
+                    {#if isActive}
+                        <Progress bind:this={progress} on:targetAchieved={timerEnded} />
+                    {:else}
+                        <!-- Placeholder to prevent layout shift -->
+                        <progress class="progress progress-secondary w-40" value="0" max="100" />
+                    {/if}
+
+                    <div class="swiper__mainhero__pagination w-40 flex justify-center" />
+                </div>
+                <div class="hidden md:flex">03</div>
             </div>
-            <div class="mt-6 flex gap-4">
-                <button class="btn btn-lg btn-secondary rounded-[16px] px-5 "
-                    ><img alt="" src="/icons/play.svg" width="24" height="24" /></button
+        </div>
+
+        <div
+            class="pl-10 md:pl-24 hero-content flex-col text-neutral-content text-white justify-self-start"
+        >
+            <div class="max-w-[80vw]">
+                <div class="text-secondary text-lg font-bold pb-3 flex gap-2">
+                    Featured
+                    <span class="flex items-center">
+                        <span
+                            style="display: inline-block; width: 60px; border-top: 4px solid; border-radius: 10px;"
+                        />
+                    </span>
+                </div>
+                <ScrollArea
+                    style="height:67px"
+                    class="text-6xl font-bold leading-[4rem]"
+                    on:mouseenter={disableScroll}
+                    on:mouseleave={enableScroll}>{animeTitle}</ScrollArea
                 >
-                <button class="btn btn-secondary btn-lg btn-outline border-4 rounded-[16px]">
-                    <div class="text-lg font-bold flex gap-2">
-                        Details
-                        <span class="flex items-center">
-                            <img alt="" src="/icons/chevrons-right.svg" width="24" height="24" />
-                        </span>
-                    </div>
-                </button>
+
+                <h1 class="font-bold py-8 hidden md:flex">
+                    <span class="items pr-2">TV</span><span class="items pr-2"
+                        >{animeEpisodeCount} eps</span
+                    ><span class="items pr-2">Completed</span><span class="items pr-2"
+                        >{animeAirTime}</span
+                    ><span>{animeStudio}</span>
+                </h1>
+                <ScrollArea
+                    parentClass="mb-5"
+                    class="max-h-24 font-normal text-gray-400"
+                    on:mouseenter={disableScroll}
+                    on:mouseleave={enableScroll}
+                    offsetScrollbar
+                >
+                    {animeSummary}
+                </ScrollArea>
+                <div class="flex gap-4 pt-3">
+                    {#each tags as tag}
+                        <span
+                            class="badge bg-base-100 badge-lg rounded-md text-white uppercase border-transparent"
+                            >{tag}</span
+                        >
+                    {/each}
+                </div>
+                <div class="mt-6 flex gap-4">
+                    <button class="btn btn-lg btn-secondary rounded-[16px] px-5 "
+                        ><img alt="" src="/icons/play.svg" width="24" height="24" /></button
+                    >
+                    <button class="btn btn-secondary btn-lg btn-outline border-4 rounded-[16px]">
+                        <div class="text-lg font-bold flex gap-2">
+                            Details
+                            <span class="flex items-center">
+                                <img
+                                    alt=""
+                                    src="/icons/chevrons-right.svg"
+                                    width="24"
+                                    height="24"
+                                />
+                            </span>
+                        </div>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+{/if}
 
 <style lang="scss">
     .hero-overlay {
