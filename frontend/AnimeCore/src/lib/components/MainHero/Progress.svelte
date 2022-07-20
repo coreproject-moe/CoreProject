@@ -30,6 +30,7 @@
     });
 
     onDestroy(() => {
+        timer.reset();
         timer.stop();
     });
 
