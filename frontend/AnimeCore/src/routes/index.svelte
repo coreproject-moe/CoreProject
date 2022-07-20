@@ -4,7 +4,8 @@
     import { Swiper, SwiperSlide } from "swiper/svelte";
 
     import MainHeroSlide from "$components/MainHero/Slide.svelte";
-import Layout from "./__layout.svelte";
+
+    import Layout from "./__layout.svelte";
 
     let rootSwiper: SwiperType;
     let mainHeroSwiper: SwiperType;
