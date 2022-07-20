@@ -4,6 +4,7 @@
     import { Swiper, SwiperSlide } from "swiper/svelte";
 
     import MainHeroSlide from "$components/MainHero/Slide.svelte";
+import Layout from "./__layout.svelte";
 
     let rootSwiper: SwiperType;
     let mainHeroSwiper: SwiperType;
@@ -161,8 +162,10 @@
             lazy
         >
             {#each data as item}
-                <SwiperSlide let:data={{ isActive, isDuplicate, isVisible }}>
+                <SwiperSlide let:data={{ isActive, isDuplicate, isVisible, isPrev, isNext }}>
                     <MainHeroSlide
+                        {isPrev}
+                        {isNext}
                         {isActive}
                         {isDuplicate}
                         {isVisible}
