@@ -144,7 +144,7 @@
 
 <style lang="scss">
     .hero-overlay {
-        background-image: 
+        background-image:
             linear-gradient(to top, var(--tw-gradient-stops));
 
 
