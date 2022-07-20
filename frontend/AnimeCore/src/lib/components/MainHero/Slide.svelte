@@ -98,7 +98,7 @@
                                 class="swiper-pagination-bullet {mainHeroSwiper?.realIndex === index
                                     ? 'swiper-pagination-bullet-active'
                                     : ''}"
-                                    
+
                                 on:click={() => {
                                     mainHeroSwiper?.slideTo?.(index + 1);
                                 }}
