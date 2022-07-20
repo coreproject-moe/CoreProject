@@ -67,7 +67,10 @@
     class="hero min-h-[60vh] md:min-h-screen bg-center bg-no-repeat"
     style="background-image: url('{background}');"
 >
-    <div class="hero-overlay from-base-100 via-base-100/[.8] md:via-base-100/[.0001] grid" style="--tw-bg-opacity:0">
+    <div
+        class="hero-overlay from-base-100 via-base-100/[.8] md:via-base-100/[.0001] grid"
+        style="--tw-bg-opacity:0"
+    >
         <div class="pt-8 pr-[72px] pl-16 pb-0">
             <Navbar />
         </div>
@@ -144,13 +147,10 @@
 
 <style lang="scss">
     .hero-overlay {
-        background-image:
-            linear-gradient(to top, var(--tw-gradient-stops));
+        background-image: linear-gradient(to top, var(--tw-gradient-stops));
 
-
-        @media screen and (min-width:768px) {
-            background-image:
-                linear-gradient(to top, var(--tw-gradient-stops)),
+        @media screen and (min-width: 768px) {
+            background-image: linear-gradient(to top, var(--tw-gradient-stops)),
                 linear-gradient(to left, var(--tw-gradient-stops)),
                 linear-gradient(to right, var(--tw-gradient-stops));
         }

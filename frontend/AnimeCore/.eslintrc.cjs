@@ -12,6 +12,11 @@ module.exports = {
         sourceType: "module",
         ecmaVersion: 2020
     },
+    rules: {
+        /** Sort imports */
+        "simple-import-sort/imports": "warn",
+        "simple-import-sort/exports": "warn"
+    },
     env: {
         browser: true,
         es2017: true,
