@@ -149,17 +149,12 @@
 >
     <SwiperSlide>
         <Swiper
-            modules={[EffectFade, Lazy, Navigation, Pagination]}
+            modules={[EffectFade, Lazy, Navigation]}
             effect="fade"
             direction="horizontal"
             navigation={{
                 nextEl: ".mainhero__next__el",
                 prevEl: ".mainhero__previous__el"
-            }}
-            pagination={{
-                enabled: true,
-                el: ".swiper__mainhero__pagination",
-                clickable: true
             }}
             on:swiper={onMainHeroSwiper}
             loop
