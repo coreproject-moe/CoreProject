@@ -109,8 +109,8 @@
                     </span>
                 </div>
                 <ScrollArea
-                    style="height:67px"
-                    class="text-6xl font-bold leading-[4rem]"
+                    style="height:70px"
+                    class="text-6xl font-bold leading-[4.25rem]"
                     on:mouseenter={disableScroll}
                     on:mouseleave={enableScroll}>{animeTitle}</ScrollArea
                 >
