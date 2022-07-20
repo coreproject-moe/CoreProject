@@ -4,11 +4,15 @@
     export let parentClass = "";
     export { klass as class };
     export let offsetScrollbar = false;
-
 </script>
 
-<div on:mouseenter on:mouseleave {style} class="{parentClass} {offsetScrollbar ? 'pr-3':''} scrollbar overflow-y-scroll">
-    <div class='{klass} whitespace-pre-line'>
+<div
+    on:mouseenter
+    on:mouseleave
+    {style}
+    class="{parentClass} {offsetScrollbar ? 'pr-3' : ''} scrollbar overflow-y-scroll"
+>
+    <div class="{klass} whitespace-pre-line">
         <slot />
     </div>
 </div>

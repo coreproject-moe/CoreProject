@@ -1,45 +1,49 @@
 <script lang="ts">
-    import { onMount,onDestroy } from "svelte";
-    import { createEventDispatcher } from 'svelte';
+    import { onMount, onDestroy } from "svelte";
+    import { createEventDispatcher } from "svelte";
     import Timer from "easytimer.js";
 
-    const SWIPER_DELAY = 10
-	const dispatch = createEventDispatcher();
+    const SWIPER_DELAY = 10;
+    const dispatch = createEventDispatcher();
 
-    let progressValue = 0
+    let progressValue = 0;
 
     let timer = new Timer({
-        target:{
+        target: {
             seconds: SWIPER_DELAY
         },
-        precision:'secondTenths',
+        precision: "secondTenths"
     });
 
-    timer.on('targetAchieved',()=>{
-        dispatch('targetAchieved')
-    })
+    timer.on("targetAchieved", () => {
+        dispatch("targetAchieved");
+    });
 
-    onMount(()=>{
+    onMount(() => {
         timer.start({
-            callback:()=>{
-                const time = timer.getTotalTimeValues().secondTenths
-                const value = (100 / SWIPER_DELAY) * (time/10)
-                progressValue = value
+            callback: () => {
+                const time = timer.getTotalTimeValues().secondTenths;
+                const value = (100 / SWIPER_DELAY) * (time / 10);
+                progressValue = value;
             }
-        })
-    })
+        });
+    });
 
-    onDestroy(()=>{
-        timer.stop()
-    })
+    onDestroy(() => {
+        timer.stop();
+    });
 
-    export const pause  = () =>{
-        timer.pause()
-    }
+    export const pause = () => {
+        timer.pause();
+    };
 
     export const start = () => {
-        timer.start()
-    }
+        timer.start();
+    };
 </script>
 
-<progress class="progress progress-secondary w-40 transition-[width] delay-1000"  value={progressValue} max="100"/>
+<progress
+    class="progress progress-secondary w-40 transition-[width] delay-1000"
+    value={progressValue}
+    max="100"
+/>
