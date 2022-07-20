@@ -36,6 +36,7 @@
     $: mobile = $responsiveMode === "mobile";
 
     let background: string;
+    
     $: {
         if (mobile) {
             background = backgroundBanner;
