@@ -1,11 +1,13 @@
 <script lang="ts">
-    import Navbar from "$components/common/Navbar.svelte";
-    import ScrollArea from "$components/common/ScrollArea.svelte";
-    import type { Swiper as SwiperType } from "swiper";
-    import Progress from "./Progress.svelte";
     import type Timer from "easytimer.js";
     import type { SvelteComponent } from "svelte";
+    import type { Swiper as SwiperType } from "swiper";
+    
+    import Navbar from "$components/common/Navbar.svelte";
+    import ScrollArea from "$components/common/ScrollArea.svelte";
     import { responsiveMode } from "$store/Responsive";
+    
+    import Progress from "./Progress.svelte";
 
     export let rootSwiper: SwiperType;
     export let mainHeroSwiper: SwiperType;

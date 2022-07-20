@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { onMount, onDestroy } from "svelte";
-    import { createEventDispatcher } from "svelte";
     import Timer from "easytimer.js";
+    import { onDestroy,onMount } from "svelte";
+    import { createEventDispatcher } from "svelte";
 
     const SWIPER_DELAY = 10;
     const dispatch = createEventDispatcher();
