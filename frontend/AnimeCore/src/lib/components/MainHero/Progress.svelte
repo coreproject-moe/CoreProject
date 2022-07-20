@@ -16,7 +16,7 @@
     });
 
     timer.on("targetAchieved", () => {
-        // dispatch("targetAchieved");
+        dispatch("targetAchieved");
     });
 
     onMount(() => {
