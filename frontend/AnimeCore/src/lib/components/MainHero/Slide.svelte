@@ -10,7 +10,7 @@
     import Progress from "./Progress.svelte";
 
     export let rootSwiper: Partial<SwiperType>;
-    export let mainHeroSwiper: Partial<SwiperType>;
+    export let mainHeroSwiper: SwiperType;
     export let isVisible: boolean;
     export let isDuplicate: boolean;
     export let isActive: boolean;
@@ -90,7 +90,21 @@
                         <progress class="progress progress-secondary w-40" value="0" max="100" />
                     {/if}
 
-                    <div class="swiper__mainhero__pagination w-40 flex justify-center" />
+                    <div
+                        class="w-40 flex justify-center swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"
+                    >
+                        {#each Array(10) as _, index}
+                            <span
+                                class="swiper-pagination-bullet {mainHeroSwiper?.realIndex === index
+                                    ? 'swiper-pagination-bullet-active'
+                                    : ''}"
+                                    
+                                on:click={() => {
+                                    mainHeroSwiper?.slideTo?.(index + 1);
+                                }}
+                            />
+                        {/each}
+                    </div>
                 </div>
                 <div class="hidden md:flex">03</div>
             </div>
