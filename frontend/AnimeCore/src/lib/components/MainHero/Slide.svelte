@@ -9,8 +9,8 @@
 
     import Progress from "./Progress.svelte";
 
-    export let rootSwiper: SwiperType;
-    export let mainHeroSwiper: SwiperType;
+    export let rootSwiper: Partial<SwiperType>;
+    export let mainHeroSwiper: Partial<SwiperType>;
     export let isVisible: boolean;
     export let isDuplicate: boolean;
     export let isActive: boolean;
@@ -50,19 +50,19 @@
     }
 
     const disableScroll = () => {
-        rootSwiper.mousewheel.disable();
+        rootSwiper.mousewheel?.disable();
         rootSwiper.allowTouchMove = false;
         progress.pause?.();
     };
     const enableScroll = () => {
-        rootSwiper.mousewheel.enable();
+        rootSwiper.mousewheel?.enable();
         rootSwiper.allowTouchMove = true;
 
         progress.start?.();
     };
 
     const timerEnded = () => {
-        mainHeroSwiper.slideNext();
+        mainHeroSwiper.slideNext?.();
     };
 </script>
 
