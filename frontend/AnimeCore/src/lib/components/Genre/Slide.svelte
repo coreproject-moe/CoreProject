@@ -1,6 +1,7 @@
 <script lang="ts">
+    import Typeahead from "svelte-typeahead";
+    
     import AutoComplete from "$components/common/AutoComplete.svelte";
-import Typeahead from "svelte-typeahead";
 
     const badgeData = [
         { name: "Action", color: "theme.colors.blue[4]" },
