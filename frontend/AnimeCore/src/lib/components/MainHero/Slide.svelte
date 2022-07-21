@@ -4,10 +4,15 @@
 
     import Navbar from "$components/common/Navbar.svelte";
     import ScrollArea from "$components/common/ScrollArea.svelte";
-    import ChevronsRight from "$components/Icons/Chevrons-Right.svelte";
-import { responsiveMode } from "$store/Responsive";
+    import ChevronsRight from "$icons/Chevrons-Right.svelte";
+
+    import { responsiveMode } from "$store/Responsive";
 
     import Progress from "./Progress.svelte";
+    import ChevronLeft from "$icons/Chevron-Left.svelte";
+    import ChevronRight from "$icons/Chevron-Right.svelte";
+    import Mouse from "$icons/Mouse.svelte";
+import Play from "$icons/Play.svelte";
 
     export let rootSwiper: Partial<SwiperType>;
     export let mainHeroSwiper: Partial<SwiperType>;
@@ -28,7 +33,7 @@ import { responsiveMode } from "$store/Responsive";
     export let tags: string[];
 
     // Event listener to reset the timer on slide change
-    rootSwiper?.on?.("slideChange", () => {
+    $: rootSwiper?.on?.("slideChange", () => {
         if (rootSwiper?.realIndex === 0) {
             progress?.reset?.();
             progress?.start?.();
@@ -128,7 +133,7 @@ import { responsiveMode } from "$store/Responsive";
                             mainHeroSwiper?.slidePrev?.();
                         }}
                     >
-                        <img src="icons/chevron-left-black.svg" alt="" height={24} width={24} />
+                        <ChevronLeft height={24} width={24} color="black" />
                     </button>
                     <button
                         class="btn btn-secondary btn-sm btn-square"
@@ -136,12 +141,12 @@ import { responsiveMode } from "$store/Responsive";
                             mainHeroSwiper?.slideNext?.();
                         }}
                     >
-                        <img src="icons/chevron-right-black.svg" alt="" height={24} width={24} />
+                        <ChevronRight height={24} width={24} color="black" />
                     </button>
                 </div>
             </div>
             <div class="hidden md:flex items-center animate-bounce">
-                <img src="/icons/mouse.svg" alt="" width={24} height={24} />
+                <Mouse width={24} height={24} color="white" />
                 <div class="px-3">scroll below</div>
             </div>
         </div>
@@ -193,7 +198,7 @@ import { responsiveMode } from "$store/Responsive";
             </div>
             <div class="mt-6 flex gap-4">
                 <button class="btn btn-md md:btn-lg btn-secondary rounded-[16px] px-5 "
-                    ><img alt="" src="/icons/play.svg" width={24} height={24} /></button
+                    ><Play  width={24} height={24} /></button
                 >
                 <button
                     class="btn btn-secondary btn-md md:btn-lg btn-outline border-4 rounded-[16px]"
@@ -201,7 +206,7 @@ import { responsiveMode } from "$store/Responsive";
                     <div class="text-lg font-bold flex gap-2">
                         Details
                         <span class="flex items-center">
-                            <ChevronsRight height={24} width={24}/>
+                            <ChevronsRight height={24} width={24} />
                         </span>
                     </div>
                 </button>
