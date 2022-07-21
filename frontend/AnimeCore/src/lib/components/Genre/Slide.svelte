@@ -2,35 +2,37 @@
     import AutoComplete from "$components/Genre/AutoComplete.svelte";
 
     const badgeData = [
-        { name: "Action", color: "theme.colors.blue[4]" },
-        { name: "Adventure", color: "theme.colors.red[4]" },
-        { name: "Comedy", color: "theme.colors.yellow[6]" },
-        { name: "Drama", color: "theme.colors.green[5]" },
-        { name: "Ecchi", color: "theme.colors.green[5]" },
-        { name: "Fantasy", color: "theme.colors.blue[4]" },
-        { name: "Horror", color: "theme.colors.red[4]" },
-        { name: "Mahou Shoujo", color: "theme.colors.red[3]" },
-        { name: "Mecha", color: "theme.colors.orange[3]" },
-        { name: "Music", color: "theme.colors.cyan[5]" },
-        { name: "Mystery", color: "theme.colors.yellow[5]" },
-        { name: "Psychological", color: "theme.colors.red[6]" },
-        { name: "Romance", color: "theme.colors.red[5]" },
-        { name: "Sci-Fi", color: "theme.colors.green[5]" },
-        { name: "Slice of Life", color: "theme.colors.yellow[5]" },
-        { name: "Sports", color: "theme.colors.red[8]" },
-        { name: "Supernatural", color: "theme.colors.cyan[8]" },
-        { name: "Thriller", color: "theme.colors.green[5]" }
+        { name: "Action", class:'bg-indigo-700 hover:bg-indigo-900' },
+        { name: "Adventure", class: "bg-red-500 hover:bg-red-700" },
+        { name: "Comedy", class: "bg-amber-300 hover:bg-amber-500" },
+        { name: "Drama", class: "bg-green-500 hover:bg-green-700" },
+        { name: "Ecchi", class: "bg-green-400 hover:bg-green-600" },
+        { name: "Fantasy", class: "bg-indigo-400 hover:bg-indigo-600" },
+        { name: "Horror", class: "bg-red-400 hover:bg-red-600" },
+        { name: "Mahou Shoujo", class: "bg-red-300 hover:bg-red-500" },
+        { name: "Mecha", class: "theme.colors.orange[3]" },
+        { name: "Music", class: "theme.colors.cyan[5]" },
+        { name: "Mystery", class: "theme.colors.yellow[5]" },
+        { name: "Psychological", class: "theme.colors.red[6]" },
+        { name: "Romance", class: "theme.colors.red[5]" },
+        { name: "Sci-Fi", class: "theme.colors.green[5]" },
+        { name: "Slice of Life", class: "theme.colors.yellow[5]" },
+        { name: "Sports", class: "theme.colors.red[8]" },
+        { name: "Supernatural", class: "theme.colors.cyan[8]" },
+        { name: "Thriller", class: "theme.colors.green[5]" }
     ];
 </script>
 
 <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
-    <div class="hero-content text-center">
+    <div class="hero-content text-center pt-8 px-24">
         <div>
             <AutoComplete />
-            <p class="py-6">
-                Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
-                exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.
-            </p>
+            <div class="divider w-80 mx-auto mt-12">or search by genres</div>
+            <div class='grid grid-cols-6 gap-10'>
+                {#each badgeData as item}
+                    <div class='btn font-bold text-black {item.class}'>{item.name}</div>
+                {/each}
+            </div>
             <button class="btn btn-primary">Get Started</button>
         </div>
     </div>
