@@ -10,7 +10,9 @@
 
     import Progress from "./Progress.svelte";
     import ChevronLeft from "$icons/Chevron-Left.svelte";
-import ChevronRight from "$icons/Chevron-Right.svelte";
+    import ChevronRight from "$icons/Chevron-Right.svelte";
+    import Mouse from "$icons/Mouse.svelte";
+import Play from "$icons/Play.svelte";
 
     export let rootSwiper: Partial<SwiperType>;
     export let mainHeroSwiper: Partial<SwiperType>;
@@ -139,12 +141,12 @@ import ChevronRight from "$icons/Chevron-Right.svelte";
                             mainHeroSwiper?.slideNext?.();
                         }}
                     >
-                        <ChevronRight height={24} width={24} color='black' />
-                </button>
+                        <ChevronRight height={24} width={24} color="black" />
+                    </button>
                 </div>
             </div>
             <div class="hidden md:flex items-center animate-bounce">
-                <img src="/icons/mouse.svg" alt="" width={24} height={24} />
+                <Mouse width={24} height={24} color="white" />
                 <div class="px-3">scroll below</div>
             </div>
         </div>
@@ -196,7 +198,7 @@ import ChevronRight from "$icons/Chevron-Right.svelte";
             </div>
             <div class="mt-6 flex gap-4">
                 <button class="btn btn-md md:btn-lg btn-secondary rounded-[16px] px-5 "
-                    ><img alt="" src="/icons/play.svg" width={24} height={24} /></button
+                    ><Play  width={24} height={24} /></button
                 >
                 <button
                     class="btn btn-secondary btn-md md:btn-lg btn-outline border-4 rounded-[16px]"
