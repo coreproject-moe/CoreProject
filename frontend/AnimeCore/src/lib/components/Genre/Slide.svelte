@@ -1,4 +1,7 @@
 <script lang="ts">
+    import AutoComplete from "$components/common/AutoComplete.svelte";
+import Typeahead from "svelte-typeahead";
+
     const badgeData = [
         { name: "Action", color: "theme.colors.blue[4]" },
         { name: "Adventure", color: "theme.colors.red[4]" },
@@ -19,12 +22,27 @@
         { name: "Supernatural", color: "theme.colors.cyan[8]" },
         { name: "Thriller", color: "theme.colors.green[5]" }
     ];
+
+    const data = [
+        { state: "California" },
+        { state: "North Carolina" },
+        { state: "North Dakota" },
+        { state: "South Carolina" },
+        { state: "South Dakota" },
+        { state: "Michigan" },
+        { state: "Tennessee" },
+        { state: "Nevada" },
+        { state: "New Hampshire" },
+        { state: "New Jersey" }
+    ];
+
+    const extract = (item: any) => item.state;
 </script>
 
-<div class="hero min-h-screen bg-base-200">
+<div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
     <div class="hero-content text-center">
         <div class="max-w-md">
-            <h1 class="text-5xl font-bold">Hello there</h1>
+            <AutoComplete />
             <p class="py-6">
                 Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
                 exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.

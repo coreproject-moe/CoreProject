@@ -1,6 +1,4 @@
 <script lang="ts">
-
-
     import Timer from "easytimer.js";
     import { onDestroy, onMount } from "svelte";
     import { createEventDispatcher } from "svelte";
@@ -40,8 +38,8 @@
         timer.pause();
     };
     export const reset = () => {
-        timer.reset()
-    }
+        timer.reset();
+    };
     export const start = () => {
         timer.start();
     };
