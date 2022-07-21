@@ -21,5 +21,3 @@
             { name: 'Thriller', color: 'theme.colors.green[5]' },
     ];
 </script>
-
-
