@@ -4,6 +4,8 @@
 
     import Navbar from "$components/common/Navbar.svelte";
     import ScrollArea from "$components/common/ScrollArea.svelte";
+    import ChevronsRight from "$components/Icons/Chevrons-Right.svelte";
+
     import { responsiveMode } from "$store/Responsive";
 
     import Progress from "./Progress.svelte";
@@ -26,6 +28,16 @@
     export let backgroundBanner: string;
     export let tags: string[];
 
+    // Event listener to reset the timer on slide change
+    rootSwiper?.on?.("slideChange", () => {
+        if (rootSwiper?.realIndex === 0) {
+            progress?.reset?.();
+            progress?.start?.();
+        } else {
+            progress?.pause?.();
+        }
+    });
+
     interface IProgress extends SvelteComponent {
         start: () => void;
         reset: () => void;
@@ -33,14 +45,6 @@
     }
 
     let progress: IProgress;
-    $: {
-        if (rootSwiper?.realIndex === 0) {
-            progress?.reset?.();
-            progress?.start?.();
-        } else {
-            progress?.pause?.();
-        }
-    }
 
     let mobile: boolean;
     let tablet: boolean;
@@ -173,7 +177,7 @@
             <ScrollArea
                 parentClass="mb-5"
                 style="min-height:110px"
-                class="max-h-24 font-normal text-gray-400 prose [text-shadow:-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000,1px_1px_0_#000]"
+                class="max-h-24 font-normal text-gray-400 prose [text-shadow:-1px_-1px_0_#0000009e,1px_-1px_0_#0000008c,0px_1px_0_#0000009e,1px_0px_0_#00000061]"
                 on:mouseenter={disableScroll}
                 on:mouseleave={enableScroll}
                 offsetScrollbar
@@ -183,7 +187,7 @@
             <div class="gap-4 pt-3 hidden md:flex">
                 {#each tags as tag}
                     <span
-                        class="badge bg-base-100 badge-lg rounded-md text-white uppercase border-transparent"
+                        class="badge bg-base-100 badge-lg rounded-md text-white uppercase border-transparent leading-6 text-sm font-bold"
                         >{tag}</span
                     >
                 {/each}
@@ -198,7 +202,7 @@
                     <div class="text-lg font-bold flex gap-2">
                         Details
                         <span class="flex items-center">
-                            <img alt="" src="/icons/chevrons-right.svg" width={24} height={24} />
+                            <ChevronsRight height={24} width={24}/>
                         </span>
                     </div>
                 </button>
