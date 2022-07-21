@@ -119,7 +119,7 @@
                     </button>
                 </div>
             </div>
-            <div class="hidden md:flex items-center">
+            <div class="hidden md:flex items-center animate-bounce">
                 <img src="/icons/mouse.svg" alt="" width="24" height="24" />
                 <div class="px-3">scroll below</div>
             </div>
@@ -162,7 +162,7 @@
             >
                 {animeSummary}
             </ScrollArea>
-            <div class="flex gap-4 pt-3">
+            <div class="gap-4 pt-3 hidden md:flex">
                 {#each tags as tag}
                     <span
                         class="badge bg-base-100 badge-lg rounded-md text-white uppercase border-transparent"
