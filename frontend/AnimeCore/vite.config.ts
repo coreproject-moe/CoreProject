@@ -14,5 +14,8 @@ export default defineConfig({
             $icons: path.resolve("./src/lib/icons"),
             $functions: path.resolve("./src/lib/functions")
         }
+    },
+    optimizeDeps: {
+        include: ["swiper"]
     }
 });
