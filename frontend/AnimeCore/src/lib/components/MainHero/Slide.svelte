@@ -10,7 +10,7 @@
     import Progress from "./Progress.svelte";
 
     export let rootSwiper: Partial<SwiperType>;
-    export let mainHeroSwiper: SwiperType;
+    export let mainHeroSwiper: Partial<SwiperType>;
 
     export let isPrev: boolean;
     export let isNext: boolean;
@@ -67,7 +67,6 @@
     const timerEnded = () => {
         mainHeroSwiper.slideNext?.();
     };
-
 </script>
 
 <div
@@ -81,11 +80,9 @@
         <div class="pt-8 pr-[72px] pl-16 pb-0">
             <Navbar />
         </div>
-        <div
-            class="grid grid-flow-col auto-cols-max justify-between min-w-full content-end pb-8"
-        >
+        <div class="grid grid-flow-col auto-cols-max justify-between min-w-full content-end pb-8">
             <div class="hidden md:flex" />
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-3">
                 {#if isActive}
                     <Progress bind:this={progress} on:targetAchieved={timerEnded} />
                 {:else}
@@ -107,8 +104,25 @@
                         />
                     {/each}
                 </div>
+                <div>
+                    <button class="btn btn-secondary btn-sm btn-square" on:click={()=>{
+                        mainHeroSwiper?.slidePrev?.()
+                    }}>
+                        <img src="icons/chevron-left-black.svg" alt="" height={24} width={24} />
+                    </button>
+                </div>
+                <div>
+                    <button class="btn btn-secondary btn-sm btn-square" on:click={()=>{
+                        mainHeroSwiper?.slideNext?.()
+                    }}>
+                        <img src="icons/chevron-right-black.svg"  alt="" height={24} width={24} />
+                    </button>
+                </div>
             </div>
-            <div class="hidden md:flex">03</div>
+            <div class="hidden md:flex items-center">
+                <img src="/icons/mouse.svg" alt="" width="24" height="24" />
+                <div class="px-3">scroll below</div>
+            </div>
         </div>
     </div>
 
@@ -125,7 +139,7 @@
                 </span>
             </div>
             <ScrollArea
-                style="height:70px"
+                style="height:72px"
                 class="text-6xl font-bold leading-[4.25rem]"
                 on:mouseenter={disableScroll}
                 on:mouseleave={enableScroll}>{animeTitle}</ScrollArea
@@ -140,7 +154,7 @@
             </h1>
             <ScrollArea
                 parentClass="mb-5"
-                class="max-h-24 font-normal text-gray-400"
+                class="max-h-24 font-normal text-gray-400 prose text-shadow"
                 on:mouseenter={disableScroll}
                 on:mouseleave={enableScroll}
                 offsetScrollbar
@@ -163,12 +177,7 @@
                     <div class="text-lg font-bold flex gap-2">
                         Details
                         <span class="flex items-center">
-                            <img
-                                alt=""
-                                src="/icons/chevrons-right.svg"
-                                width="24"
-                                height="24"
-                            />
+                            <img alt="" src="/icons/chevrons-right.svg" width="24" height="24" />
                         </span>
                     </div>
                 </button>
@@ -192,4 +201,6 @@
             content: " ▪ ";
         }
     }
+
+.text-shadow {text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;}
 </style>
