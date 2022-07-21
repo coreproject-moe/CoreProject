@@ -27,18 +27,18 @@
     export let tags: string[];
 
     interface IProgress extends SvelteComponent {
-        start : () => void;
-        reset : () => void;
-        pause : () => void;
-    };
+        start: () => void;
+        reset: () => void;
+        pause: () => void;
+    }
 
     let progress: IProgress;
-    $:{
-        if (rootSwiper?.realIndex === 0 ){
-            progress?.reset?.()
-            progress?.start?.()
-        } else{
-            progress?.pause?.()
+    $: {
+        if (rootSwiper?.realIndex === 0) {
+            progress?.reset?.();
+            progress?.start?.();
+        } else {
+            progress?.pause?.();
         }
     }
 
