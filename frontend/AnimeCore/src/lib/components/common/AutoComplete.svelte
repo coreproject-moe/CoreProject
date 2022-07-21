@@ -2,7 +2,7 @@
     import Typeahead from "svelte-typeahead";
 
     let searchIndex = [
-        
+
     ];
 </script>
 
