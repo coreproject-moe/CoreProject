@@ -138,7 +138,7 @@
             </div>
             <ScrollArea
                 style="height:72px"
-                class="font-bold leading-[4.25rem] text-4xl md:text-6xl"
+                class="font-bold leading-8 md:leading-[4.25rem] text-4xl md:text-6xl"
                 on:mouseenter={disableScroll}
                 on:mouseleave={enableScroll}>{animeTitle}</ScrollArea
             >
