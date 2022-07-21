@@ -154,7 +154,7 @@
             </h1>
             <ScrollArea
                 parentClass="mb-5"
-                class="max-h-24 font-normal text-gray-400 prose text-shadow"
+                class="max-h-24 font-normal text-gray-400 prose [text-shadow:-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000,1px_1px_0_#000]"
                 on:mouseenter={disableScroll}
                 on:mouseleave={enableScroll}
                 offsetScrollbar
@@ -201,6 +201,4 @@
             content: " ▪ ";
         }
     }
-
-.text-shadow {text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;}
 </style>
