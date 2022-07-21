@@ -1,6 +1,6 @@
 <script lang="ts">
     const onFocus = () => {
-        console.log(1)
+        console.log(1);
     };
 </script>
 

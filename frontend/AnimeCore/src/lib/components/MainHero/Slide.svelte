@@ -10,7 +10,7 @@
     import Mouse from "$icons/Mouse.svelte";
     import Play from "$icons/Play.svelte";
     import { responsiveMode } from "$store/Responsive";
-    
+
     import Progress from "./Progress.svelte";
 
     export let rootSwiper: Partial<SwiperType>;
@@ -197,7 +197,7 @@
             </div>
             <div class="mt-6 flex gap-4">
                 <button class="btn btn-md md:btn-lg btn-secondary rounded-[16px] px-5 "
-                    ><Play  width={24} height={24} /></button
+                    ><Play width={24} height={24} /></button
                 >
                 <button
                     class="btn btn-secondary btn-md md:btn-lg btn-outline border-4 rounded-[16px]"
