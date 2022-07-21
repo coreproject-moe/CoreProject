@@ -9,6 +9,7 @@
 
     import Progress from "./Progress.svelte";
 
+
     export let rootSwiper: Partial<SwiperType>;
     export let mainHeroSwiper: Partial<SwiperType>;
 
@@ -27,8 +28,21 @@
     export let backgroundBanner: string;
     export let tags: string[];
 
-    interface IProgress extends SvelteComponent, Partial<Timer> {}
+    interface IProgress extends SvelteComponent {
+        start : () => void;
+        reset : () => void;
+        pause : () => void;
+    };
+
     let progress: IProgress;
+    $:{
+        if (rootSwiper?.realIndex === 0 ){
+            progress?.reset?.()
+            progress?.start?.()
+        } else{
+            progress?.pause?.()
+        }
+    }
 
     let mobile: boolean;
     let tablet: boolean;
@@ -80,7 +94,9 @@
         <div class="pt-8 pr-[72px] pl-16 pb-0">
             <Navbar />
         </div>
-        <div class="grid grid-flow-col auto-cols-max min-w-full content-end pb-8  justify-center md:justify-between">
+        <div
+            class="grid grid-flow-col auto-cols-max min-w-full content-end pb-8  justify-center md:justify-between"
+        >
             <div class="hidden md:flex" />
             <div class="flex items-center gap-3">
                 {#if isActive}
@@ -104,16 +120,22 @@
                         />
                     {/each}
                 </div>
-                <div class='gap-4 hidden md:flex'>
-                    <button class="btn btn-secondary btn-sm btn-square" on:click={()=>{
-                        mainHeroSwiper?.slidePrev?.()
-                    }}>
+                <div class="gap-4 hidden md:flex">
+                    <button
+                        class="btn btn-secondary btn-sm btn-square"
+                        on:click={() => {
+                            mainHeroSwiper?.slidePrev?.();
+                        }}
+                    >
                         <img src="icons/chevron-left-black.svg" alt="" height={24} width={24} />
                     </button>
-                    <button class="btn btn-secondary btn-sm btn-square" on:click={()=>{
-                        mainHeroSwiper?.slideNext?.()
-                    }}>
-                        <img src="icons/chevron-right-black.svg"  alt="" height={24} width={24} />
+                    <button
+                        class="btn btn-secondary btn-sm btn-square"
+                        on:click={() => {
+                            mainHeroSwiper?.slideNext?.();
+                        }}
+                    >
+                        <img src="icons/chevron-right-black.svg" alt="" height={24} width={24} />
                     </button>
                 </div>
             </div>
@@ -152,7 +174,7 @@
             </h1>
             <ScrollArea
                 parentClass="mb-5"
-                style='min-height:110px'
+                style="min-height:110px"
                 class="max-h-24 font-normal text-gray-400 prose [text-shadow:-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000,1px_1px_0_#000]"
                 on:mouseenter={disableScroll}
                 on:mouseleave={enableScroll}
@@ -172,7 +194,9 @@
                 <button class="btn btn-md md:btn-lg btn-secondary rounded-[16px] px-5 "
                     ><img alt="" src="/icons/play.svg" width="24" height="24" /></button
                 >
-                <button class="btn btn-secondary btn-md md:btn-lg btn-outline border-4 rounded-[16px]">
+                <button
+                    class="btn btn-secondary btn-md md:btn-lg btn-outline border-4 rounded-[16px]"
+                >
                     <div class="text-lg font-bold flex gap-2">
                         Details
                         <span class="flex items-center">
