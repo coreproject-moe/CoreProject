@@ -11,6 +11,7 @@ export default defineConfig({
             $store: path.resolve("./src/lib/store"),
             $hooks: path.resolve("./src/hooks"),
             $components: path.resolve("./src/lib/components"),
+            $icons: path.resolve("./src/lib/icons"),
             $functions: path.resolve("./src/lib/functions")
         }
     }

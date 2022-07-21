@@ -4,11 +4,13 @@
 
     import Navbar from "$components/common/Navbar.svelte";
     import ScrollArea from "$components/common/ScrollArea.svelte";
-    import ChevronsRight from "$components/Icons/Chevrons-Right.svelte";
+    import ChevronsRight from "$icons/Chevrons-Right.svelte";
 
     import { responsiveMode } from "$store/Responsive";
 
     import Progress from "./Progress.svelte";
+    import ChevronLeft from "$icons/Chevron-Left.svelte";
+import ChevronRight from "$icons/Chevron-Right.svelte";
 
     export let rootSwiper: Partial<SwiperType>;
     export let mainHeroSwiper: Partial<SwiperType>;
@@ -29,7 +31,7 @@
     export let tags: string[];
 
     // Event listener to reset the timer on slide change
-    rootSwiper?.on?.("slideChange", () => {
+    $: rootSwiper?.on?.("slideChange", () => {
         if (rootSwiper?.realIndex === 0) {
             progress?.reset?.();
             progress?.start?.();
@@ -129,7 +131,7 @@
                             mainHeroSwiper?.slidePrev?.();
                         }}
                     >
-                        <img src="icons/chevron-left-black.svg" alt="" height={24} width={24} />
+                        <ChevronLeft height={24} width={24} color="black" />
                     </button>
                     <button
                         class="btn btn-secondary btn-sm btn-square"
@@ -137,8 +139,8 @@
                             mainHeroSwiper?.slideNext?.();
                         }}
                     >
-                        <img src="icons/chevron-right-black.svg" alt="" height={24} width={24} />
-                    </button>
+                        <ChevronRight height={24} width={24} color='black' />
+                </button>
                 </div>
             </div>
             <div class="hidden md:flex items-center animate-bounce">
@@ -202,7 +204,7 @@
                     <div class="text-lg font-bold flex gap-2">
                         Details
                         <span class="flex items-center">
-                            <ChevronsRight height={24} width={24}/>
+                            <ChevronsRight height={24} width={24} />
                         </span>
                     </div>
                 </button>

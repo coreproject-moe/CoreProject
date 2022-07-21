@@ -21,6 +21,8 @@
             "$hooks/*": ["src/hooks/*"],
             // Components
             "$components/*": ["src/lib/components/*"],
+            // Icons
+            "$icons/*": ["src/lib/icons/*"],
             // Svelte Defined
             "$lib": ["src/lib"],
             "$lib/*": ["src/lib/*"]
