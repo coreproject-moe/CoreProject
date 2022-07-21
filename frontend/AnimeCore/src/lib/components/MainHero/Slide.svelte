@@ -4,15 +4,14 @@
 
     import Navbar from "$components/common/Navbar.svelte";
     import ScrollArea from "$components/common/ScrollArea.svelte";
-    import ChevronsRight from "$icons/Chevrons-Right.svelte";
-
-    import { responsiveMode } from "$store/Responsive";
-
-    import Progress from "./Progress.svelte";
     import ChevronLeft from "$icons/Chevron-Left.svelte";
     import ChevronRight from "$icons/Chevron-Right.svelte";
+    import ChevronsRight from "$icons/Chevrons-Right.svelte";
     import Mouse from "$icons/Mouse.svelte";
-import Play from "$icons/Play.svelte";
+    import Play from "$icons/Play.svelte";
+    import { responsiveMode } from "$store/Responsive";
+    
+    import Progress from "./Progress.svelte";
 
     export let rootSwiper: Partial<SwiperType>;
     export let mainHeroSwiper: Partial<SwiperType>;
