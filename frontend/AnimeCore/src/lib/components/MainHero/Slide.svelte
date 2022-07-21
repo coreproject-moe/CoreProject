@@ -175,7 +175,7 @@
                     >{animeEpisodeCount} eps</span
                 ><span class="items pr-2">Completed</span><span class="items pr-2"
                     >{animeAirTime}</span
-                ><span>{animeStudio}</span>
+                ><span class='items'>{animeStudio}</span>
             </h1>
             <ScrollArea
                 parentClass="mb-5"
@@ -225,7 +225,7 @@
         }
     }
     .items {
-        &::after {
+        &:not(:last-child)::after {
             content: " ▪ ";
         }
     }
