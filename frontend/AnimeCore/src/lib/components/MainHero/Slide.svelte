@@ -140,7 +140,7 @@
             </div>
             <ScrollArea
                 style="height:72px"
-                class="text-6xl font-bold leading-[4.25rem]"
+                class="font-bold leading-[4.25rem] text-4xl md:text-6xl"
                 on:mouseenter={disableScroll}
                 on:mouseleave={enableScroll}>{animeTitle}</ScrollArea
             >
@@ -154,6 +154,7 @@
             </h1>
             <ScrollArea
                 parentClass="mb-5"
+                style='min-height:110px'
                 class="max-h-24 font-normal text-gray-400 prose [text-shadow:-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000,1px_1px_0_#000]"
                 on:mouseenter={disableScroll}
                 on:mouseleave={enableScroll}
