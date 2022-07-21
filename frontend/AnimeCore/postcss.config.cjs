@@ -24,14 +24,14 @@ const config = {
             preset: ["default"]
         }),
         !dev &&
-            purgecss({
-                content: ["./src/**/**/*.{svelte,html,js,ts}"],
-                defaultExtractor: (content) => content.match(/[\w\-:./\[\]\#\,\(\)]+(?<!:)/g) || [],
-                safelist: {
-                    deep: [],
-                    greedy: [/swiper/, /svelte/]
-                }
-            })
+        purgecss({
+            content: ["./src/**/**/*.{svelte,html,js,ts}"],
+            defaultExtractor: (content) => content.match(/[\w\-:./\[\]\#\,\(\)]+(?<!:)/g) || [],
+            safelist: {
+                deep: [],
+                greedy: [/swiper/, /svelte/]
+            }
+        })
     ]
 };
 
