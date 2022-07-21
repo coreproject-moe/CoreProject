@@ -167,15 +167,17 @@
                 style="height:72px"
                 class="font-bold leading-8 md:leading-[4.25rem] text-3xl md:text-6xl"
                 on:mouseenter={disableScroll}
-                on:mouseleave={enableScroll}>{animeTitle}</ScrollArea
+                on:mouseleave={enableScroll}
             >
+                {animeTitle}
+            </ScrollArea>
 
             <h1 class="font-bold py-8 hidden md:flex">
-                <span class="items pr-2">TV</span><span class="items pr-2"
-                    >{animeEpisodeCount} eps</span
-                ><span class="items pr-2">Completed</span><span class="items pr-2"
-                    >{animeAirTime}</span
-                ><span class="items">{animeStudio}</span>
+                <span class="items pr-2">TV</span>
+                <span class="items pr-2">{animeEpisodeCount} eps</span>
+                <span class="items pr-2">Completed</span>
+                <span class="items pr-2">{animeAirTime}</span>
+                <span class="items">{animeStudio}</span>
             </h1>
             <ScrollArea
                 parentClass="mb-5"
@@ -191,14 +193,15 @@
                 {#each tags as tag}
                     <span
                         class="badge bg-base-100 badge-lg rounded-md text-white uppercase border-transparent leading-6 text-sm font-bold"
-                        >{tag}</span
                     >
+                        {tag}
+                    </span>
                 {/each}
             </div>
             <div class="mt-6 flex gap-4">
-                <button class="btn btn-md md:btn-lg btn-secondary rounded-[16px] px-5 "
-                    ><Play width={24} height={24} /></button
-                >
+                <button class="btn btn-md md:btn-lg btn-secondary rounded-[16px] px-5 ">
+                    <Play width={24} height={24} />
+                </button>
                 <button
                     class="btn btn-secondary btn-md md:btn-lg btn-outline border-4 rounded-[16px]"
                 >
