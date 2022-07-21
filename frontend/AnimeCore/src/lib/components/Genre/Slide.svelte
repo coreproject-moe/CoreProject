@@ -1,5 +1,5 @@
 <script lang="ts">
-    import AutoComplete from "$components/common/AutoComplete.svelte";
+    import AutoComplete from "$components/Genre/AutoComplete.svelte";
 
     const badgeData = [
         { name: "Action", color: "theme.colors.blue[4]" },
@@ -25,7 +25,7 @@
 
 <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
     <div class="hero-content text-center">
-        <div class="max-w-md">
+        <div>
             <AutoComplete />
             <p class="py-6">
                 Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
