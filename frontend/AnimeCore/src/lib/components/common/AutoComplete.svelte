@@ -1,5 +1,7 @@
 <script lang="ts">
-    const onFocus = () => {};
+    const onFocus = () => {
+        console.log(1)
+    };
 </script>
 
 <div class="dropdown dropdown-open">
