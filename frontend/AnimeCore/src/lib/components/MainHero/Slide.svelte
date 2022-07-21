@@ -5,8 +5,7 @@
     import Navbar from "$components/common/Navbar.svelte";
     import ScrollArea from "$components/common/ScrollArea.svelte";
     import ChevronsRight from "$components/Icons/Chevrons-Right.svelte";
-
-    import { responsiveMode } from "$store/Responsive";
+import { responsiveMode } from "$store/Responsive";
 
     import Progress from "./Progress.svelte";
 
