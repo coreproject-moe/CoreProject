@@ -36,7 +36,7 @@ const checkMode = () => {
             return null;
         }
     } else {
-        return undefined;
+        return "";
     }
 };
 
@@ -46,5 +46,5 @@ export const responsiveMode = writable(checkMode());
 
 browser &&
     window?.addEventListener("resize", async () => {
-        responsiveMode.set(checkMode() as string);
+        responsiveMode.set(checkMode());
     });
