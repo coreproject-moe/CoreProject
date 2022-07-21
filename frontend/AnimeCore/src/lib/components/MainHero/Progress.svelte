@@ -17,7 +17,7 @@
 
     timer.on("targetAchieved", () => {
         // dispatch("targetAchieved");
-        timer.reset()
+        timer.reset();
     });
 
     onMount(() => {
@@ -46,8 +46,4 @@
     };
 </script>
 
-<progress
-    class="progress progress-secondary w-40"
-    value={progressValue}
-    max="100"
-/>
+<progress class="progress progress-secondary w-40" value={progressValue} max="100" />
