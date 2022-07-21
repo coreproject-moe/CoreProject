@@ -138,7 +138,7 @@
             </div>
             <ScrollArea
                 style="height:72px"
-                class="font-bold leading-8 md:leading-[4.25rem] text-4xl md:text-6xl"
+                class="font-bold leading-8 md:leading-[4.25rem] text-3xl md:text-6xl"
                 on:mouseenter={disableScroll}
                 on:mouseleave={enableScroll}>{animeTitle}</ScrollArea
             >
@@ -169,10 +169,10 @@
                 {/each}
             </div>
             <div class="mt-6 flex gap-4">
-                <button class="btn btn-lg btn-secondary rounded-[16px] px-5 "
+                <button class="btn btn-md md:btn-lg btn-secondary rounded-[16px] px-5 "
                     ><img alt="" src="/icons/play.svg" width="24" height="24" /></button
                 >
-                <button class="btn btn-secondary btn-lg btn-outline border-4 rounded-[16px]">
+                <button class="btn btn-secondary btn-md md:btn-lg btn-outline border-4 rounded-[16px]">
                     <div class="text-lg font-bold flex gap-2">
                         Details
                         <span class="flex items-center">
