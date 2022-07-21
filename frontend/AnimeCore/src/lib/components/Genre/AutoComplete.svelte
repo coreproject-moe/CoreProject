@@ -34,7 +34,7 @@ import Search from "$icons/Search.svelte";
         class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 items-center inset-x-0 mx-auto pt-6"
     >
         {#if data.length !== 0}
-            {#each data as item}
+            {#each Array(10) as item}
                 <li>{item}</li>
             {/each}
         {:else}
