@@ -10,7 +10,7 @@
     import Mouse from "$icons/Mouse.svelte";
     import Play from "$icons/Play.svelte";
     import { responsiveMode } from "$store/Responsive";
-    
+
     import Progress from "./Progress.svelte";
 
     export let rootSwiper: Partial<SwiperType>;
