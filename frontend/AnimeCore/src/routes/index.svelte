@@ -3,8 +3,8 @@
     import { EffectFade, Lazy, Mousewheel, Navigation } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
 
-    import MainHeroSlide from "$components/MainHero/Slide.svelte";
     import GenreSlide from "$components/Genre/Slide.svelte";
+    import MainHeroSlide from "$components/MainHero/Slide.svelte";
 
     let rootSwiper: SwiperType;
     let mainHeroSwiper: SwiperType;
