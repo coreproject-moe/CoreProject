@@ -4,13 +4,10 @@
 
     import Navbar from "$components/common/Navbar.svelte";
     import ScrollArea from "$components/common/ScrollArea.svelte";
-    import ChevronsRight from "$icons/Chevrons-Right.svelte";
-
-    import { responsiveMode } from "$store/Responsive";
+    import ChevronsRight from "$components/Icons/Chevrons-Right.svelte";
+import { responsiveMode } from "$store/Responsive";
 
     import Progress from "./Progress.svelte";
-    import ChevronLeft from "$icons/Chevron-Left.svelte";
-import ChevronRight from "$icons/Chevron-Right.svelte";
 
     export let rootSwiper: Partial<SwiperType>;
     export let mainHeroSwiper: Partial<SwiperType>;
@@ -31,7 +28,7 @@ import ChevronRight from "$icons/Chevron-Right.svelte";
     export let tags: string[];
 
     // Event listener to reset the timer on slide change
-    $: rootSwiper?.on?.("slideChange", () => {
+    rootSwiper?.on?.("slideChange", () => {
         if (rootSwiper?.realIndex === 0) {
             progress?.reset?.();
             progress?.start?.();
@@ -131,7 +128,7 @@ import ChevronRight from "$icons/Chevron-Right.svelte";
                             mainHeroSwiper?.slidePrev?.();
                         }}
                     >
-                        <ChevronLeft height={24} width={24} color="black" />
+                        <img src="icons/chevron-left-black.svg" alt="" height={24} width={24} />
                     </button>
                     <button
                         class="btn btn-secondary btn-sm btn-square"
@@ -139,8 +136,8 @@ import ChevronRight from "$icons/Chevron-Right.svelte";
                             mainHeroSwiper?.slideNext?.();
                         }}
                     >
-                        <ChevronRight height={24} width={24} color='black' />
-                </button>
+                        <img src="icons/chevron-right-black.svg" alt="" height={24} width={24} />
+                    </button>
                 </div>
             </div>
             <div class="hidden md:flex items-center animate-bounce">
@@ -204,7 +201,7 @@ import ChevronRight from "$icons/Chevron-Right.svelte";
                     <div class="text-lg font-bold flex gap-2">
                         Details
                         <span class="flex items-center">
-                            <ChevronsRight height={24} width={24} />
+                            <ChevronsRight height={24} width={24}/>
                         </span>
                     </div>
                 </button>
