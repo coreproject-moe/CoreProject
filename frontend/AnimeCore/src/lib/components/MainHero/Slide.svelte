@@ -80,7 +80,7 @@
         <div class="pt-8 pr-[72px] pl-16 pb-0">
             <Navbar />
         </div>
-        <div class="grid grid-flow-col auto-cols-max justify-between min-w-full content-end pb-8">
+        <div class="grid grid-flow-col auto-cols-max min-w-full content-end pb-8  justify-center md:justify-between">
             <div class="hidden md:flex" />
             <div class="flex items-center gap-3">
                 {#if isActive}
@@ -104,14 +104,12 @@
                         />
                     {/each}
                 </div>
-                <div>
+                <div class='gap-4 hidden md:flex'>
                     <button class="btn btn-secondary btn-sm btn-square" on:click={()=>{
                         mainHeroSwiper?.slidePrev?.()
                     }}>
                         <img src="icons/chevron-left-black.svg" alt="" height={24} width={24} />
                     </button>
-                </div>
-                <div>
                     <button class="btn btn-secondary btn-sm btn-square" on:click={()=>{
                         mainHeroSwiper?.slideNext?.()
                     }}>
