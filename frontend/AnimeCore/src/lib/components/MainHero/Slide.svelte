@@ -1,5 +1,4 @@
 <script lang="ts">
-    import type Timer from "easytimer.js";
     import type { SvelteComponent } from "svelte";
     import type { Swiper as SwiperType } from "swiper";
 
@@ -8,7 +7,6 @@
     import { responsiveMode } from "$store/Responsive";
 
     import Progress from "./Progress.svelte";
-
 
     export let rootSwiper: Partial<SwiperType>;
     export let mainHeroSwiper: Partial<SwiperType>;
@@ -62,7 +60,7 @@
         } else if (fullhd) {
             background = backgroundImage;
         } else {
-            background = backgroundImage; // This is the normal one
+            background = backgroundImage; // This is the default one
         }
     }
 
@@ -103,7 +101,7 @@
                     <Progress bind:this={progress} on:targetAchieved={timerEnded} />
                 {:else}
                     <!-- Placeholder to prevent layout shift -->
-                    <progress class="progress progress-secondary w-40" value="0" max="100" />
+                    <progress class="progress progress-secondary w-40" value={0} max={100} />
                 {/if}
 
                 <div
@@ -140,7 +138,7 @@
                 </div>
             </div>
             <div class="hidden md:flex items-center animate-bounce">
-                <img src="/icons/mouse.svg" alt="" width="24" height="24" />
+                <img src="/icons/mouse.svg" alt="" width={24} height={24} />
                 <div class="px-3">scroll below</div>
             </div>
         </div>
@@ -192,7 +190,7 @@
             </div>
             <div class="mt-6 flex gap-4">
                 <button class="btn btn-md md:btn-lg btn-secondary rounded-[16px] px-5 "
-                    ><img alt="" src="/icons/play.svg" width="24" height="24" /></button
+                    ><img alt="" src="/icons/play.svg" width={24} height={24} /></button
                 >
                 <button
                     class="btn btn-secondary btn-md md:btn-lg btn-outline border-4 rounded-[16px]"
@@ -200,7 +198,7 @@
                     <div class="text-lg font-bold flex gap-2">
                         Details
                         <span class="flex items-center">
-                            <img alt="" src="/icons/chevrons-right.svg" width="24" height="24" />
+                            <img alt="" src="/icons/chevrons-right.svg" width={24} height={24} />
                         </span>
                     </div>
                 </button>
