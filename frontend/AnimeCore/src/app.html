@@ -158,7 +158,16 @@
     <body>
         <div
             id="loader"
-            style="height: 100vh; display: flex; justify-content: center; align-items: center"
+            style="
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                left: 0;
+                right: 0;
+                z-index: -100000;
+            "
         >
             <div class="loader">
                 <svg viewBox="0 0 80 80">
@@ -171,6 +180,11 @@
                 </svg>
             </div>
         </div>
-        <div style="height: 100vh">%sveltekit.body%</div>
+        <div
+            class="root"
+            style="display: none"
+        >
+            <div style="height: 100vh">%sveltekit.body%</div>
+        </div>
     </body>
 </html>
