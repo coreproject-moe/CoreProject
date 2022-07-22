@@ -5,6 +5,7 @@
 
     import GenreSlide from "$components/Genre/Slide.svelte";
     import MainHeroSlide from "$components/MainHero/Slide.svelte";
+    import PersonalizedSlide from "$components/Personalized/Slide.svelte";
 
     let rootSwiper: SwiperType;
     let mainHeroSwiper: SwiperType;
@@ -186,5 +187,8 @@
     </SwiperSlide>
     <SwiperSlide>
         <GenreSlide />
+    </SwiperSlide>
+    <SwiperSlide>
+        <PersonalizedSlide />
     </SwiperSlide>
 </Swiper>
