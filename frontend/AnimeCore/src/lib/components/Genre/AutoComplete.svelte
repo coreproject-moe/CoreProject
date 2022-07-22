@@ -3,11 +3,6 @@
     import { responsiveMode } from "$store/Responsive";
 
     let mobile: boolean;
-    let tablet: boolean;
-    let fullhd: boolean;
-
-    $: fullhd = $responsiveMode === "fullhd";
-    $: tablet = $responsiveMode === "tablet";
     $: mobile = $responsiveMode === "mobile";
 
     let dropDownElement: HTMLDivElement;
@@ -26,7 +21,7 @@
     <div tabindex="0" class="m-1">
         <div class="relative text-gray-600 focus-within:text-gray-400">
             <span class="absolute w-16 h-full flex justify-center items-center">
-                <Search color="red" height={mobile?18:36} width={mobile?18:36} />
+                <Search color="red" height={mobile ? 22 : 36} width={mobile ? 22 : 36} />
             </span>
             <input
                 on:focus={onFocus}
