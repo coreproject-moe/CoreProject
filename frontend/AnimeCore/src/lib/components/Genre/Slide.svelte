@@ -1,6 +1,7 @@
 <script lang="ts">
     import AutoComplete from "$components/Genre/AutoComplete.svelte";
     import ChevronDown from "$icons/Chevron-Down.svelte";
+import ChevronUpDown from "$icons/Chevron-Up-Down.svelte";
 
     const badgeData = [
         { name: "Action", class: "bg-indigo-700 hover:bg-indigo-900" },
@@ -30,17 +31,20 @@
             <AutoComplete />
             <!-- Mobile Version  -->
             <div class="block md:hidden">
-                <div class="dropdown dropdown-end">
-                    <div tabindex="0" class="btn m-1">Search by genre</div>
-                    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-                      {#each badgeData as item}
-                        <li>{item.name}</li>
-                      {/each}
+                <div class="dropdown mt-5">
+                    <div tabindex="0" class="m-1 btn normal-case">or search by genres <ChevronUpDown color='#D8D8D8' height={18} width={18} /></div>
+                    <ul
+                        tabindex="0"
+                        class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 items-center inset-x-0 mx-auto pt-6"
+                    >
+                        {#each badgeData as item}
+                            <li>{item.name}</li>
+                        {/each}
                     </ul>
-                  </div>
+                </div>
             </div>
             <!-- Desktop Version -->
-            <div class='hidden md:block'>
+            <div class="hidden md:block">
                 <div class="divider w-80 mx-auto mt-12 mb-6">or search by genres</div>
                 <div class="grid grid-cols-6 gap-x-10 gap-y-5 justify-items-center">
                     {#each badgeData as item}
