@@ -29,7 +29,7 @@
         <div>
             <AutoComplete />
             <div class="divider w-80 mx-auto mt-12 mb-6">or search by genres</div>
-            <div class="grid grid-cols-6 gap-x-3 gap-y-5 justify-items-center">
+            <div class="grid grid-cols-6 gap-x-10 gap-y-5 justify-items-center">
                 {#each badgeData as item}
                     <div class="btn font-bold text-black w-fit whitespace-nowrap {item.class}">
                         {item.name}
