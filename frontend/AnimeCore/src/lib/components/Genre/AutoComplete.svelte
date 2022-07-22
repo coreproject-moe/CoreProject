@@ -1,5 +1,14 @@
 <script lang="ts">
     import Search from "$icons/Search.svelte";
+    import { responsiveMode } from "$store/Responsive";
+
+    let mobile: boolean;
+    let tablet: boolean;
+    let fullhd: boolean;
+
+    $: fullhd = $responsiveMode === "fullhd";
+    $: tablet = $responsiveMode === "tablet";
+    $: mobile = $responsiveMode === "mobile";
 
     let dropDownElement: HTMLDivElement;
     let data = [];
@@ -17,13 +26,13 @@
     <div tabindex="0" class="m-1">
         <div class="relative text-gray-600 focus-within:text-gray-400">
             <span class="absolute w-16 h-full flex justify-center items-center">
-                <Search color="red" height={36} width={36} />
+                <Search color="red" height={mobile?18:36} width={mobile?18:36} />
             </span>
             <input
                 on:focus={onFocus}
                 on:blur={onBlur}
                 type="Search"
-                class="py-2 text-gray-900 placeholder-gray-600 bg-white rounded-[16px] pl-16 h-20 w-[65vw] md:w-[40vw] text-xl outline-none focus:border-4 focus:border-red-800"
+                class="py-2 text-gray-900 placeholder-gray-600 bg-white rounded-[8px] md:rounded-[16px] pl-16 h-12 md:h-20 w-[65vw] md:w-[40vw] text-sm md:text-xl outline-none focus:border-4 focus:border-red-800"
                 placeholder="Search for anything"
                 autocomplete="off"
             />
