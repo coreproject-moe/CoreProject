@@ -154,7 +154,7 @@
             modules={[EffectFade, Lazy]}
             effect="fade"
             direction="horizontal"
-           
+
             slidesPerView={1}
             on:swiper={onMainHeroSwiper}
             loop
