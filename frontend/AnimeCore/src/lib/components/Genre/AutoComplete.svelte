@@ -1,5 +1,5 @@
 <script lang="ts">
-import Search from "$icons/Search.svelte";
+    import Search from "$icons/Search.svelte";
 
     let dropDownElement: HTMLDivElement;
     let data = [];
@@ -17,13 +17,13 @@ import Search from "$icons/Search.svelte";
     <div tabindex="0" class="m-1">
         <div class="relative text-gray-600 focus-within:text-gray-400">
             <span class="absolute w-16 h-full flex justify-center items-center">
-                <Search color='red' height={36} width={36} />
+                <Search color="red" height={36} width={36} />
             </span>
             <input
                 on:focus={onFocus}
                 on:blur={onBlur}
                 type="Search"
-                class="py-2 text-gray-900 bg-white rounded-[16px] pl-16 h-20 w-[40vh] md:w-[75vh] text-xl outline-none focus:border-4 focus:border-red-800"
+                class="py-2 text-gray-900 placeholder-gray-600 bg-white rounded-[16px] pl-16 h-20 w-[65vw] md:w-[40vw] text-xl outline-none focus:border-4 focus:border-red-800"
                 placeholder="Search for anything"
                 autocomplete="off"
             />
