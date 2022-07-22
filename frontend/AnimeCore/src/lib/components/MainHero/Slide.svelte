@@ -88,6 +88,15 @@
     };
 </script>
 
+<svelte:window
+    on:focus={()=>{
+        progress?.start?.()
+    }}
+    on:blur={()=>{
+        progress?.pause?.()
+    }}
+/>
+
 <div
     class="hero min-h-[60vh] md:min-h-screen bg-center bg-no-repeat"
     style="background-image: url('{background}');"
