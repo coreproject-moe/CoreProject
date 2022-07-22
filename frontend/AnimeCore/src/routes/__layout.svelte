@@ -5,7 +5,7 @@ import { onMount } from "svelte";
 
     onMount(()=>{
         setTimeout(()=>{
-            document?.querySelectorAll("#loader").forEach(e=>e.remove())
+            document?.querySelectorAll("#loader").forEach(e => e.remove())
             const root =  document.querySelector<HTMLElement>('.root')
             if (root){
                 root.style.display = 'block'

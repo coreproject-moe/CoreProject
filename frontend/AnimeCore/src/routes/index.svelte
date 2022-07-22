@@ -1,10 +1,10 @@
 <script lang="ts">
     import type { Swiper as SwiperType } from "swiper";
-    import { EffectFade, Lazy, Mousewheel, Navigation } from "swiper";
+    import { EffectFade, Lazy, Mousewheel } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
 
     import GenreSlide from "$components/Genre/Slide.svelte";
-    import PersonalizedSlide from "$components/Library/Slide.svelte";
+    import LibrarySlide from "$components/Library/Slide.svelte";
     import MainHeroSlide from "$components/MainHero/Slide.svelte";
 
     let rootSwiper: SwiperType;
@@ -151,13 +151,11 @@
 >
     <SwiperSlide>
         <Swiper
-            modules={[EffectFade, Lazy, Navigation]}
+            modules={[EffectFade, Lazy]}
             effect="fade"
             direction="horizontal"
-            navigation={{
-                nextEl: ".mainhero__next__el",
-                prevEl: ".mainhero__previous__el"
-            }}
+           
+            slidesPerView={1}
             on:swiper={onMainHeroSwiper}
             loop
             lazy
@@ -189,6 +187,6 @@
         <GenreSlide />
     </SwiperSlide>
     <SwiperSlide>
-        <PersonalizedSlide />
+        <LibrarySlide />
     </SwiperSlide>
 </Swiper>

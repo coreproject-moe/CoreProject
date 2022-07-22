@@ -125,7 +125,7 @@
                 >
                     {#each Array(10) as _, index}
                         <span
-                            class="swiper-pagination-bullet {mainHeroSwiper?.realIndex === index
+                            class="swiper-pagination-bullet {mainHeroSwiper?.activeIndex === index+1
                                 ? 'swiper-pagination-bullet-active'
                                 : ''}"
                             on:click={() => {
