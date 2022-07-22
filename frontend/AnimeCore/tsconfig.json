@@ -1,26 +1,31 @@
 {
+    "extends": "./.svelte-kit/tsconfig.json",
     "compilerOptions": {
-        "target": "es5",
-        "lib": ["dom", "dom.iterable", "esnext"],
-        "allowJs": false,
-        "skipLibCheck": true,
+        "module": "es2015",
         "strict": true,
-        "forceConsistentCasingInFileNames": true,
-        "noEmit": true,
-        "esModuleInterop": true,
-        "module": "esnext",
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "isolatedModules": true,
-        "jsx": "preserve",
-        "incremental": true,
-        "baseUrl": ".",
+        "allowUnreachableCode": false,
+        "allowSyntheticDefaultImports": true,
+        "exactOptionalPropertyTypes": true,
+        "noImplicitAny": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUncheckedIndexedAccess": true,
         "paths": {
-            "@/components/*": ["components/*"],
-            "@/hooks/*": ["hooks/*"],
-            "@/styles/*": ["styles/*"]
+            // Functions
+            "$functions/*": ["src/lib/functions/*"],
+            // Stores
+            "$store/*": ["src/lib/store/*"],
+            // Hooks
+            "$hooks/*": ["src/hooks/*"],
+            // Components
+            "$components/*": ["src/lib/components/*"],
+            // Icons
+            "$icons/*": ["src/lib/icons/*"],
+            // Svelte Defined
+            "$lib": ["src/lib"],
+            "$lib/*": ["src/lib/*"]
         }
-    },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next.config.mjs"],
-    "exclude": ["node_modules"]
+    }
 }

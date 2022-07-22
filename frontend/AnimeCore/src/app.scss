@@ -1,0 +1,80 @@
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-SemiBoldItalic.woff2") format("woff2");
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-SemiBold.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-BoldItalic.woff2") format("woff2");
+    font-weight: bold;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-Italic.woff2") format("woff2");
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-Regular.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Kokoro";
+    src: url("/fonts/Kokoro/Kokoro-Bold.woff2") format("woff2");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@import "swiper/css";
+@import "swiper/css/pagination";
+@import "swiper/css/effect-fade";
+@import "swiper/css/lazy";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --swiper-pagination-color: #e3bd49;
+    --swiper-pagination-bullet-inactive-color: #edd68d;
+    --swiper-pagination-bullet-inactive-opacity: 0.3;
+    --swiper-pagination-bullet-horizontal-gap: 7px;
+    --swiper-pagination-bullet-size: 10px;
+}
+
+@media screen and (min-width: 0px) and (max-width: 992px) {
+    :root {
+        --swiper-pagination-bullet-horizontal-gap: 3px;
+    }
+}
+
+.swiper {
+    height: 100%;
+    width: 100%;
+}
+
+/* This is the hack we are looking for */
+.swiper-slide {
+    height: auto;
+}
+
+body {
+    overscroll-behavior-y: contain;
+    scrollbar-width: none;
+}
