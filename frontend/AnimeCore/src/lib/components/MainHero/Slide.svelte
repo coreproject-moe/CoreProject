@@ -105,7 +105,7 @@
         class="hero-overlay from-base-100 via-base-100/[.8] md:via-base-100/[.0001] grid"
         style="--tw-bg-opacity:0"
     >
-        <div class="pt-8 pr-[72px] pl-16 pb-0">
+        <div class="pt-8 md:pr-[72px] pl-6 md:pl-20 pb-0">
             <Navbar />
         </div>
         <div

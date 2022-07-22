@@ -3,7 +3,7 @@
 </script>
 
 <div class="navbar bg-transparent">
-    <div class="navbar-start">
+    <div class="navbar-start hidden md:block">
         <Search height={30} width={30} />
     </div>
     <div class="navbar-center">
