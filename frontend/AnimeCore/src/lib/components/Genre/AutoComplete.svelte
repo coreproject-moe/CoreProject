@@ -27,7 +27,7 @@
                 on:focus={onFocus}
                 on:blur={onBlur}
                 type="Search"
-                class="py-2 text-gray-900 placeholder-gray-600 bg-white rounded-[8px] md:rounded-[16px] pl-16 h-12 md:h-20 w-[65vw] md:w-[40vw] text-sm md:text-xl outline-none focus:border-4 focus:border-red-800"
+                class="py-2 text-gray-900 placeholder-gray-600 bg-white rounded-[8px] md:rounded-[16px] pl-16 h-12 md:h-20 w-[65vw] md:w-[40vw] text-sm md:text-xl outline-none focus:border-4 focus:border-red-400"
                 placeholder="Search for anything"
                 autocomplete="off"
             />
