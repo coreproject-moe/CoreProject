@@ -19,7 +19,7 @@ import Play from "$icons/Play.svelte";
                         <Play width={20} height={20} />
                     </button>
                 </div>
-            {/each} 
+            {/each}
             <div class="btn-group justify-center">
                 <button class="btn">1</button>
                 <button class="btn">2</button>
@@ -28,28 +28,28 @@ import Play from "$icons/Play.svelte";
                 <button class="btn">100</button>
               </div>
         </div>
-        <div class="divider lg:divider-horizontal"></div> 
+        <div class="divider lg:divider-horizontal"></div>
         <div class="flex flex-col">
             <p class='font-bold text-3xl'>Continue Watching</p>
             <div class="carousel carousel-center rounded-box">
                 <div class="carousel-item">
                   <img src="https://placeimg.com/400/300/arch" alt="Pizza" />
-                </div> 
+                </div>
                 <div class="carousel-item">
                   <img src="https://placeimg.com/400/300/arch" alt="Pizza" />
-                </div> 
+                </div>
                 <div class="carousel-item">
                   <img src="https://placeimg.com/400/300/arch" alt="Pizza" />
-                </div> 
+                </div>
                 <div class="carousel-item">
                   <img src="https://placeimg.com/400/300/arch" alt="Pizza" />
-                </div> 
+                </div>
                 <div class="carousel-item">
                   <img src="https://placeimg.com/400/300/arch" alt="Pizza" />
-                </div> 
+                </div>
                 <div class="carousel-item">
                   <img src="https://placeimg.com/400/300/arch" alt="Pizza" />
-                </div> 
+                </div>
                 <div class="carousel-item">
                   <img src="https://placeimg.com/400/300/arch" alt="Pizza" />
                 </div>
