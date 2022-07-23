@@ -174,6 +174,7 @@
             </div>
             <ScrollArea
                 style="height:72px"
+                parentClass='overscroll-contain'
                 class="font-bold leading-8 md:leading-[4.25rem] text-3xl md:text-6xl"
                 on:mouseenter={disableScroll}
                 on:mouseleave={enableScroll}
@@ -189,7 +190,7 @@
                 <span class="items">{animeStudio}</span>
             </h1>
             <ScrollArea
-                parentClass="mb-5"
+                parentClass="mb-5 overscroll-contain"
                 style="min-height:110px"
                 class="max-h-24 font-normal text-gray-400 prose [text-shadow:-1px_-1px_0_#0000009e,1px_-1px_0_#0000008c,0px_1px_0_#0000009e,1px_0px_0_#00000061]"
                 on:mouseenter={disableScroll}
