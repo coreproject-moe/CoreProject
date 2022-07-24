@@ -147,7 +147,9 @@
     slidesPerView="auto"
     modules={[Mousewheel]}
     simulateTouch={false}
-    mousewheel
+    mousewheel={{
+        sensitivity: 0.001
+    }}
     on:swiper={onRootSwiper}
 >
     <SwiperSlide>
