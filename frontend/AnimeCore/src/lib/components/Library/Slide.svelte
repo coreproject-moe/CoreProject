@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Swiper, SwiperSlide } from "swiper/svelte";
+    import {Mousewheel} from 'swiper';
 
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import Play from "$icons/Play.svelte";
@@ -15,7 +16,7 @@
             <p class="text-xl font-bold flex">Latest Episode</p>
             <p class="flex gap-2">show from my list only <ChevronDown height={25} width={25} /></p>
             <div class="h-24 md:h-[520px]">
-                <Swiper direction={mobile?'horizontal':"vertical"} slidesPerView={mobile ?1: 5 }>
+                <Swiper direction={mobile?'horizontal':"vertical"} modules={[Mousewheel]} slidesPerView={mobile ?1: 5 }>
                     {#each Array(10) as item, index}
                         <SwiperSlide>
                             <div
