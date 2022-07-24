@@ -76,7 +76,7 @@
             <p class="font-bold text-3xl">Continue Watching</p>
             <Swiper>
                 <SwiperSlide>
-                    
+
                 </SwiperSlide>
             </Swiper>
             <div class="flex flex-col">
