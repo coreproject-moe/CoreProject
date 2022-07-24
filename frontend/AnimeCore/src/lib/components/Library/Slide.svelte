@@ -55,7 +55,7 @@
                                     <p>Ep 06</p>
                                 </div>
 
-                                <button class="btn btn-circle btn-md btn-warning">
+                                <button class="btn btn-circle btn-md btn-warning" aria-label='play'>
                                     <Play width={20} height={20} />
                                 </button>
                             </div>
