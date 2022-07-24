@@ -1,6 +1,9 @@
 <script lang="ts">
+    export let rootSwiper:SwiperType
+
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import {Mousewheel} from 'swiper';
+    import type { Swiper as SwiperType } from "swiper";
 
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import Play from "$icons/Play.svelte";
@@ -8,6 +11,15 @@
 
     let mobile:boolean;
     $: mobile = $responsiveMode === "mobile";
+
+    const disableRootSwiperScroll = () => {
+        rootSwiper?.mousewheel?.disable()
+        rootSwiper.allowTouchMove = false;
+    }
+    const enableRootSwiperScroll = () => {
+        rootSwiper?.mousewheel?.enable()
+        rootSwiper.allowTouchMove = true;
+    }
 </script>
 
 <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
@@ -15,8 +27,8 @@
         <div class="flex flex-col gap-3">
             <p class="text-xl font-bold flex">Latest Episode</p>
             <p class="flex gap-2">show from my list only <ChevronDown height={25} width={25} /></p>
-            <div class="h-24 md:h-[520px]">
-                <Swiper direction={mobile?'horizontal':"vertical"} modules={[Mousewheel]} slidesPerView={mobile ?1: 5 }>
+            <div class="h-24 md:h-[520px]" on:mouseenter={disableRootSwiperScroll} on:touchstart={disableRootSwiperScroll} on:mouseleave="{enableRootSwiperScroll}" on:touchend={enableRootSwiperScroll}>
+                <Swiper direction={mobile?'horizontal':"vertical"} modules={[Mousewheel]} slidesPerView={mobile ?1: 5 } mousewheel>
                     {#each Array(10) as item, index}
                         <SwiperSlide>
                             <div
