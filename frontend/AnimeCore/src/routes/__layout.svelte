@@ -1,9 +1,9 @@
 <script lang="ts">
     import "../app.scss";
 
-    import { onMount } from "svelte";
+    import { afterUpdate } from "svelte";
 
-    onMount(() => {
+    afterUpdate(() => {
         setTimeout(() => {
             document?.querySelectorAll("#loader").forEach((e) => e.remove());
             const root = document.querySelector<HTMLElement>(".root");
