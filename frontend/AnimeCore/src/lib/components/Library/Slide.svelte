@@ -40,7 +40,7 @@
                     slidesPerView={mobile ? 1 : 5}
                     spaceBetween={14}
                     mousewheel
-                    
+
                 >
                     {#each Array(10) as item, index}
                         <SwiperSlide>
@@ -73,7 +73,7 @@
             <p class="font-bold text-3xl">Continue Watching</p>
             <Swiper>
                 <SwiperSlide>
-                    
+
                 </SwiperSlide>
             </Swiper>
             <div class="flex flex-col">
@@ -103,6 +103,6 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 </div>
