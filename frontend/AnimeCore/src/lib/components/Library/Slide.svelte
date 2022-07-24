@@ -20,13 +20,15 @@
         rootSwiper?.mousewheel?.enable();
         rootSwiper.allowTouchMove = true;
     };
+
+    const latestEpisodes = [{ name: "Spy X Family", episode: 6, backgroundImage: "" }];
 </script>
 
 <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
     <div class="hero-content text-center flex-col md:flex-row">
         <div class="flex flex-col gap-3">
-            <p class="text-xl font-bold flex">Latest Episode</p>
-            <p class="flex gap-2">show from my list only <ChevronDown height={25} width={25} /></p>
+            <p class="text-xl font-bold flex text-white">Latest Episode</p>
+            <p class="flex gap-2 text-white">show from my list only <ChevronDown height={25} width={25} /></p>
             <div
                 class="h-28 md:h-[530px] w-96 md:w-80"
                 on:mouseenter={disableRootSwiperScroll}
@@ -41,9 +43,8 @@
                     slidesPerView={mobile ? 1 : 5}
                     spaceBetween={14}
                     mousewheel={{
-                        sensitivity:.001
+                        sensitivity: 0.001
                     }}
-
                 >
                     {#each Array(10) as item, index}
                         <SwiperSlide>
@@ -55,7 +56,7 @@
                                     <p>Ep 06</p>
                                 </div>
 
-                                <button class="btn btn-circle btn-md btn-warning" aria-label='play'>
+                                <button class="btn btn-circle btn-md btn-warning" aria-label="play">
                                     <Play width={20} height={20} />
                                 </button>
                             </div>
@@ -71,41 +72,43 @@
                 <button class="btn">100</button>
             </div>
         </div>
-        <div class="divider lg:divider-horizontal hidden md:flex" />
+        <div class="divider lg:divider-horizontal hidden md:flex before:bg-white after:bg-white" />
         <div class="flex flex-col">
-            <p class="font-bold text-3xl">Continue Watching</p>
-            <Swiper>
-                <SwiperSlide>
+            <p class="font-bold text-3xl items-start flex pb-4 text-white">Continue Watching</p>
+            <div
+                class="h-28 md:h-[200px] w-96 md:w-[60vw]"
+                on:mouseenter={disableRootSwiperScroll}
+                on:touchstart={disableRootSwiperScroll}
+                on:mouseleave={enableRootSwiperScroll}
+                on:touchend={enableRootSwiperScroll}
+            >
+                <Swiper direction="horizontal" spaceBetween={14}>
+                    {#each Array(10) as item}
+                        <SwiperSlide>
+                            <div
+                                class="h-28 md:h-full md:w-full rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-around"
+                            >
+                                <div class="flex flex-col items-start">
+                                    <p class="font-bold">Spy x Family</p>
+                                    <p>Ep 06</p>
+                                </div>
 
-                </SwiperSlide>
-            </Swiper>
+                                <button class="btn btn-circle btn-md btn-warning" aria-label="play">
+                                    <Play width={20} height={20} />
+                                </button>
+                            </div>
+                        </SwiperSlide>
+                    {/each}
+                </Swiper>
+            </div>
+            <div class="divider hidden md:flex before:bg-white after:bg-white" />
+
             <div class="flex flex-col">
-                <p class="font-bold text-3xl">Continue Watching</p>
-                <div class="carousel carousel-center rounded-box">
-                    <div class="carousel-item">
-                        <img src="https://placeimg.com/400/300/arch" alt="Pizza" />
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://placeimg.com/400/300/arch" alt="Pizza" />
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://placeimg.com/400/300/arch" alt="Pizza" />
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://placeimg.com/400/300/arch" alt="Pizza" />
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://placeimg.com/400/300/arch" alt="Pizza" />
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://placeimg.com/400/300/arch" alt="Pizza" />
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://placeimg.com/400/300/arch" alt="Pizza" />
-                    </div>
+                <div class='pb-3'>
+                    <p class="font-bold text-3xl flex items-start text-white">My List</p>
                 </div>
+              
             </div>
         </div>
-
     </div>
 </div>

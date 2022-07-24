@@ -47,7 +47,7 @@
             </div>
             <!-- Desktop Version -->
             <div class="hidden md:block">
-                <div class="divider w-80 mx-auto mt-12 mb-6">or search by genres</div>
+                <div class="divider w-80 mx-auto mt-12 mb-6 before:bg-white after:bg-white" >or search by genres</div>
                 <div class="grid grid-cols-6 gap-x-10 gap-y-5 justify-items-center">
                     {#each badgeData as item}
                         <div class="btn font-bold text-black w-fit whitespace-nowrap {item.class}">
@@ -57,26 +57,26 @@
                 </div>
                 <div class="mt-24 flex flex-col items-center">
                     <div class="w-[500px]">
-                        <h1 class="font-bold text-3xl mb-2">Choose your preferences</h1>
+                        <h1 class="font-bold text-3xl mb-2 text-white">Choose your preferences</h1>
                         <p>
                             Choose some options to customize your experience. You can change them
                             anytime by clicking the profile icon and going to Settings
                         </p>
                     </div>
                 </div>
-                <div class="flex flex-col w-full lg:flex-row justify-center mt-8">
+                <div class="flex flex-col w-full lg:flex-row justify-center mt-8 text-white">
                     <div class="flex flex-row align-center">
                         Romaji Naming <ChevronDown height={30} width={30} />
                     </div>
-                    <div class="divider lg:divider-horizontal" />
+                    <div class="divider lg:divider-horizontal before:bg-white after:bg-white" />
                     <div class="flex flex-row align-center">
                         10 point scoring system <ChevronDown height={30} width={30} />
                     </div>
-                    <div class="divider lg:divider-horizontal" />
+                    <div class="divider lg:divider-horizontal before:bg-white after:bg-white" />
                     <div class="flex flex-row align-center">
                         2 trackers added <ChevronDown height={30} width={30} />
                     </div>
-                    <div class="divider lg:divider-horizontal" />
+                    <div class="divider lg:divider-horizontal before:bg-white after:bg-white" />
                     <div class="flex flex-row align-center">
                         Show 18+ content <ChevronDown height={30} width={30} />
                     </div>
