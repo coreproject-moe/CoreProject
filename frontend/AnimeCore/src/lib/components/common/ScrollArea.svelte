@@ -9,6 +9,8 @@
 <div
     on:mouseenter
     on:mouseleave
+    on:touchstart
+    on:touchend
     {style}
     class="{parentClass} {offsetScrollbar ? 'pr-3' : ''} scrollbar overflow-y-scroll"
 >

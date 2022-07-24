@@ -89,11 +89,11 @@
 </script>
 
 <svelte:window
-    on:focus={()=>{
-        progress?.start?.()
+    on:focus={() => {
+        progress?.start?.();
     }}
-    on:blur={()=>{
-        progress?.pause?.()
+    on:blur={() => {
+        progress?.pause?.();
     }}
 />
 
@@ -125,7 +125,8 @@
                 >
                     {#each Array(10) as _, index}
                         <span
-                            class="swiper-pagination-bullet {mainHeroSwiper?.activeIndex === index+1
+                            class="swiper-pagination-bullet {mainHeroSwiper?.activeIndex ===
+                            index + 1
                                 ? 'swiper-pagination-bullet-active'
                                 : ''}"
                             on:click={() => {
@@ -177,6 +178,8 @@
                 class="font-bold leading-8 md:leading-[4.25rem] text-3xl md:text-6xl"
                 on:mouseenter={disableScroll}
                 on:mouseleave={enableScroll}
+                on:touchstart={disableScroll}
+                on:touchend={enableScroll}
             >
                 {animeTitle}
             </ScrollArea>
@@ -194,6 +197,8 @@
                 class="max-h-24 font-normal text-gray-400 prose [text-shadow:-1px_-1px_0_#0000009e,1px_-1px_0_#0000008c,0px_1px_0_#0000009e,1px_0px_0_#00000061]"
                 on:mouseenter={disableScroll}
                 on:mouseleave={enableScroll}
+                on:touchstart={disableScroll}
+                on:touchend={enableScroll}
                 offsetScrollbar
             >
                 {animeSummary}

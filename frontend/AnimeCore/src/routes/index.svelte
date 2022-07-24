@@ -18,6 +18,7 @@
         const [swiper] = e.detail;
         mainHeroSwiper = swiper;
     };
+
     const data = [
         {
             animeStudio: "Kyoto Animations",
@@ -154,7 +155,6 @@
             modules={[EffectFade, Lazy]}
             effect="fade"
             direction="horizontal"
-
             slidesPerView={1}
             on:swiper={onMainHeroSwiper}
             loop

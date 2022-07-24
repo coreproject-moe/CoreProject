@@ -1,7 +1,7 @@
 <script lang="ts">
     import AutoComplete from "$components/Genre/AutoComplete.svelte";
     import ChevronDown from "$icons/Chevron-Down.svelte";
-import ChevronUpDown from "$icons/Chevron-Up-Down.svelte";
+    import ChevronUpDown from "$icons/Chevron-Up-Down.svelte";
 
     const badgeData = [
         { name: "Action", class: "bg-indigo-700 hover:bg-indigo-900" },
@@ -32,7 +32,9 @@ import ChevronUpDown from "$icons/Chevron-Up-Down.svelte";
             <!-- Mobile Version  -->
             <div class="block md:hidden">
                 <div class="dropdown mt-5">
-                    <div tabindex="0" class="m-1 btn normal-case">or search by genres <ChevronUpDown color='#D8D8D8' height={18} width={18} /></div>
+                    <div tabindex="0" class="m-1 btn normal-case">
+                        or search by genres <ChevronUpDown color="#D8D8D8" height={18} width={18} />
+                    </div>
                     <ul
                         tabindex="0"
                         class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 items-center inset-x-0 mx-auto pt-6"
