@@ -1,8 +1,8 @@
 <script lang="ts">
+    import { Swiper, SwiperSlide } from "swiper/svelte";
+    
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import Play from "$icons/Play.svelte";
-    import { Swiper, SwiperSlide } from "swiper/svelte";
-
     import { responsiveMode } from "$store/Responsive";
 
     let mobile:boolean;
