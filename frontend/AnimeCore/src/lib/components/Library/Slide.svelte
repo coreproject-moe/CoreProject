@@ -14,8 +14,8 @@
         <div class="flex flex-col gap-3">
             <p class="text-xl font-bold flex">Latest Episode</p>
             <p class="flex gap-2">show from my list only <ChevronDown height={25} width={25} /></p>
-            <div class="h-[500px]">
-                <Swiper direction="vertical" slidesPerView={5}>
+            <div class="h-24 md:h-[520px]">
+                <Swiper direction={mobile?'horizontal':"vertical"} slidesPerView={mobile ?1: 5 }>
                     {#each Array(10) as item, index}
                         <SwiperSlide>
                             <div
