@@ -107,7 +107,7 @@
                 <div class='pb-3'>
                     <p class="font-bold text-3xl flex items-start text-white">My List</p>
                 </div>
-              
+
             </div>
         </div>
     </div>
