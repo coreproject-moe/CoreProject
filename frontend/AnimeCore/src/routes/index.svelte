@@ -187,6 +187,6 @@
         <GenreSlide />
     </SwiperSlide>
     <SwiperSlide>
-        <LibrarySlide {rootSwiper}/>
+        <LibrarySlide {rootSwiper} />
     </SwiperSlide>
 </Swiper>
