@@ -213,7 +213,7 @@
                 {/each}
             </div>
             <div class="mt-6 flex gap-4">
-                <button class="btn btn-md md:btn-lg btn-secondary rounded-[16px] px-5 ">
+                <button aria-label="Play" class="btn btn-md md:btn-lg btn-secondary rounded-[16px] px-5 ">
                     <Play width={24} height={24} />
                 </button>
                 <button

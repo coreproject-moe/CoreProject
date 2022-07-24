@@ -35,11 +35,14 @@
                 on:touchend={enableRootSwiperScroll}
             >
                 <Swiper
+                    speed={600}
                     direction={mobile ? "horizontal" : "vertical"}
                     modules={[Mousewheel]}
                     slidesPerView={mobile ? 1 : 5}
                     spaceBetween={14}
-                    mousewheel
+                    mousewheel={{
+                        sensitivity:.001
+                    }}
 
                 >
                     {#each Array(10) as item, index}
@@ -73,7 +76,7 @@
             <p class="font-bold text-3xl">Continue Watching</p>
             <Swiper>
                 <SwiperSlide>
-
+                    
                 </SwiperSlide>
             </Swiper>
             <div class="flex flex-col">
