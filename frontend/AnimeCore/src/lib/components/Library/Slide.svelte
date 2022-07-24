@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { Swiper, SwiperSlide } from "swiper/svelte";
     import {Mousewheel} from 'swiper';
+    import { Swiper, SwiperSlide } from "swiper/svelte";
 
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import Play from "$icons/Play.svelte";
