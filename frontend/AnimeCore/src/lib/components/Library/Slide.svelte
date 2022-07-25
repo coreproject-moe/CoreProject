@@ -78,31 +78,42 @@
         <div class="flex flex-col">
             <p class="font-bold text-3xl items-start flex pb-4 text-white">Continue Watching</p>
             <div
-                class="h-28 md:h-[200px] w-96 md:w-[70vw] carousel gap-5"
+                class="h-28 md:h-[200px] w-96 md:w-[70vw]"
                 on:mouseenter={disableRootSwiperScroll}
                 on:touchstart={disableRootSwiperScroll}
                 on:mouseleave={enableRootSwiperScroll}
                 on:touchend={enableRootSwiperScroll}
             >
-                {#each Array(10) as item}
-                    <div class="carousel-item">
-                        <div
-                            class="h-28 md:h-full w-96 md:w-[650px] rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 flex justify-between"
-                        >
-                            <div class="flex flex-col pl-8 items-start pt-5 gap-5">
-                                    <p class="font-bold">Tate no Yuusha no Nariagari Season 2</p>
-                                    <p> Continue from Episode 5 </p>
-                            </div>
-                            <div class='flex pr-8 items-end pb-6'>
+                <Swiper
+                    speed={600}
+                    direction="horizontal"
+                    slidesPerView={"auto"}
+                    spaceBetween={30}
+                    modules={[Mousewheel]}
+                    mousewheel={{
+                        sensitivity: 0.001
+                    }}
+                >
+                    {#each Array(10) as item}
+                        <SwiperSlide>
+                            <div
+                                class="h-28 md:h-full md:w-[650px] rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-around"
+                            >
+                                <div class="flex flex-col items-start">
+                                    <p class="font-bold">Spy x Family</p>
+                                    <p>Ep 06</p>
+                                </div>
+
                                 <button class="btn btn-circle btn-md btn-warning" aria-label="play">
                                     <Play width={20} height={20} />
                                 </button>
                             </div>
-                        </div>
-                    </div>
-                {/each}
+                        </SwiperSlide>
+                    {/each}
+                </Swiper>
             </div>
             <div class="divider hidden md:flex before:bg-white after:bg-white" />
+
             <div class="flex flex-col">
                 <div class="pb-3">
                     <p class="font-bold text-3xl flex items-start text-white">My List</p>
@@ -110,5 +121,4 @@
             </div>
         </div>
     </div>
-
 </div>
