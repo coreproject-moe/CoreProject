@@ -8,6 +8,7 @@
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import Play from "$icons/Play.svelte";
     import { responsiveMode } from "$store/Responsive";
+    import Pagination from "$components/common/Pagination.svelte";
 
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
@@ -66,13 +67,7 @@
                     {/each}
                 </Swiper>
             </div>
-            <div class="btn-group justify-center">
-                <button class="btn">1</button>
-                <button class="btn">2</button>
-                <button class="btn btn-disabled">...</button>
-                <button class="btn">99</button>
-                <button class="btn">100</button>
-            </div>
+            <Pagination />
         </div>
         <div class="divider lg:divider-horizontal hidden md:flex before:bg-white after:bg-white" />
         <div class="flex flex-col">
