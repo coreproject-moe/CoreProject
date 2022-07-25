@@ -97,7 +97,7 @@
                     {#each Array(10) as item}
                         <SwiperSlide>
                             <div
-                                class="h-28 md:h-full md:w-[650px] rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-around"
+                                class="h-28 md:h-full w-96 md:w-[650px] rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-around"
                             >
                                 <div class="flex flex-col items-start">
                                     <p class="font-bold">Spy x Family</p>
