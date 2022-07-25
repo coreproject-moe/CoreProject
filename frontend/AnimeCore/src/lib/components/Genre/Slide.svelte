@@ -47,7 +47,9 @@
             </div>
             <!-- Desktop Version -->
             <div class="hidden md:block">
-                <div class="divider w-80 mx-auto mt-12 mb-6 before:bg-white after:bg-white" >or search by genres</div>
+                <div class="divider w-80 mx-auto mt-12 mb-6 before:bg-white after:bg-white">
+                    or search by genres
+                </div>
                 <div class="grid grid-cols-6 gap-x-10 gap-y-5 justify-items-center">
                     {#each badgeData as item}
                         <div class="btn font-bold text-black w-fit whitespace-nowrap {item.class}">
