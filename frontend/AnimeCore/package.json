@@ -21,7 +21,7 @@
         "@sveltejs/kit": "1.0.0-next.392",
         "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
         "@tailwindcss/typography": "^0.5.4",
-        "@typescript-eslint/eslint-plugin": "^5.30.7",
+        "@typescript-eslint/eslint-plugin": "^5.31.0",
         "@typescript-eslint/parser": "^5.30.7",
         "autoprefixer": "^10.4.7",
         "cssnano": "^5.1.12",
