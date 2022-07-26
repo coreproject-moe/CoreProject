@@ -5,10 +5,10 @@
     import { Mousewheel, Pagination } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
 
+    import { truncate } from "$functions/Truncate";
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import Play from "$icons/Play.svelte";
     import { responsiveMode } from "$store/Responsive";
-    import { truncate } from "$functions/Truncate";
 
     // We might control it in future :D
     let lastestEpisodeNameWordCount: number;
