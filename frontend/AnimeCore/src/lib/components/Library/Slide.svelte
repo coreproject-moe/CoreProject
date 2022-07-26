@@ -90,6 +90,7 @@
                     mousewheel={{
                         sensitivity: 0.001
                     }}
+                    rewind
                 >
                     {#each Array(10) as item}
                         <SwiperSlide>
