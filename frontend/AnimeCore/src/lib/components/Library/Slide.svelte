@@ -1,14 +1,12 @@
 <script lang="ts">
     export let rootSwiper: SwiperType;
-
     import type { Swiper as SwiperType } from "swiper";
-    import { Mousewheel } from "swiper";
+    import { Mousewheel, Pagination } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
 
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import Play from "$icons/Play.svelte";
     import { responsiveMode } from "$store/Responsive";
-    import Pagination from "$components/common/Pagination.svelte";
 
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
@@ -42,14 +40,18 @@
                 <Swiper
                     speed={600}
                     direction={mobile ? "horizontal" : "vertical"}
-                    modules={[Mousewheel]}
+                    modules={[Mousewheel, Pagination]}
+                    pagination={{
+                        el: ".latestEpisodesPaginationElement",
+                        clickable: true
+                    }}
                     slidesPerView={mobile ? 1 : 5}
                     spaceBetween={14}
                     mousewheel={{
                         sensitivity: 0.001
                     }}
                 >
-                    {#each Array(10) as item, index}
+                    {#each Array(20) as item, index}
                         <SwiperSlide>
                             <div
                                 class="w-96 md:w-80 h-28 md:h-24 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-around"
@@ -67,7 +69,7 @@
                     {/each}
                 </Swiper>
             </div>
-            <Pagination />
+            <div class="latestEpisodesPaginationElement flex justify-around pt-5" />
         </div>
         <div class="divider lg:divider-horizontal hidden md:flex before:bg-white after:bg-white" />
         <div class="flex flex-col">
