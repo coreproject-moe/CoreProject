@@ -20,7 +20,14 @@
         rootSwiper.allowTouchMove = true;
     };
 
-    const latestEpisodes = [{ name: "Spy X Family", episode: 6, backgroundImage: "" }];
+    const latestEpisodes = [
+        {
+            name: "Spy X Family",
+            episode: 6,
+            backgroundImage:
+                "https://media.kitsu.io/manga/54448/cover_image/1c96f626f68456220ba41096a1942eee.png"
+        }
+    ];
 </script>
 
 <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
@@ -51,14 +58,15 @@
                         sensitivity: 0.001
                     }}
                 >
-                    {#each Array(20) as item, index}
+                    {#each latestEpisodes as item}
                         <SwiperSlide>
                             <div
-                                class="w-96 md:w-80 h-28 md:h-24 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-around"
+                                class="w-96 md:w-80 h-28 md:h-24 rounded-xl flex items-center justify-around bg-center bg-no-repeat bg-cover"
+                                style="background-image:url('{item.backgroundImage}')"
                             >
-                                <div class="flex flex-col items-start">
-                                    <p class="font-bold">Spy x Family -{index}</p>
-                                    <p>Ep 06</p>
+                                <div class="flex flex-col items-start text-white">
+                                    <p class="font-bold">{item.name}</p>
+                                    <p>Ep {item.episode}</p>
                                 </div>
 
                                 <button class="btn btn-circle btn-md btn-warning" aria-label="play">

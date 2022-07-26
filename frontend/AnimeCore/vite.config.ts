@@ -4,7 +4,6 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
     plugins: [sveltekit()],
-    legacy: { buildSsrCjsExternalHeuristics: true }, // https://github.com/sveltejs/kit/issues/5549
     resolve: {
         alias: {
             $store: path.resolve("./src/lib/store"),
