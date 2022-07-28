@@ -23,7 +23,7 @@
 
     // We might control it in future :D
     let lastestEpisodeNameWordCount: number;
-    lastestEpisodeNameWordCount = 27;
+    lastestEpisodeNameWordCount = 28;
 
     const disableRootSwiperScroll = () => {
         rootSwiper?.mousewheel?.disable();
@@ -50,7 +50,6 @@
                 on:touchend={enableRootSwiperScroll}
             >
                 <Swiper
-                    speed={600}
                     direction={mobile ? "horizontal" : "vertical"}
                     modules={[Mousewheel, Pagination]}
                     pagination={{
@@ -67,29 +66,27 @@
                     {#each latestEpisodes as item}
                         <SwiperSlide>
                             <div
-                                class="w-96 md:w-80 h-28 md:h-24 rounded-xl bg-center bg-no-repeat bg-cover"
-                                style="background-image:url('{item.background_image.trim()}')"
+                                class="w-96 md:w-80 h-28 md:h-24 bg-center rounded-xl border border-base-100 bg-no-repeat bg-cover flex items-center justify-between p-5"
+                                style="
+                                    background-image:
+                                        linear-gradient(90deg, rgb(7 5 25 / 92%) -1.41%, rgba(7, 5, 25, 0.1) 100%),
+                                        linear-gradient(180deg, rgba(7, 5, 25, 0) -16%, rgb(7 5 25 / 90%) 95.81%),
+                                        url('{item.background_image.trim()}');
+                                "
                             >
-                                <div
-                                    class="flex items-center justify-between hero-overlay bg-opacity-60 rounded-xl p-5"
-                                >
-                                    <div class="flex flex-col items-start">
-                                        <p class="font-bold" style="display: block ruby">
-                                            {voca
-                                                .chain(item.name)
-                                                .trim()
-                                                .truncate(lastestEpisodeNameWordCount, " ...")}
-                                        </p>
-                                        <p>Ep {voca.padLeft(String(item.episode), 2, String(0))}</p>
-                                    </div>
-
-                                    <button
-                                        class="btn btn-circle btn-md btn-warning"
-                                        aria-label="play"
-                                    >
-                                        <Play width={20} height={20} />
-                                    </button>
+                                <div class="flex flex-col items-start">
+                                    <p class="font-bold" style="display: block ruby">
+                                        {voca
+                                            .chain(item.name)
+                                            .trim()
+                                            .truncate(lastestEpisodeNameWordCount, " ...")}
+                                    </p>
+                                    <p>Ep {voca.padLeft(String(item.episode), 2, String(0))}</p>
                                 </div>
+
+                                <button class="btn btn-circle btn-md btn-warning" aria-label="play">
+                                    <Play width={20} height={20} />
+                                </button>
                             </div>
                         </SwiperSlide>
                     {/each}
@@ -121,7 +118,13 @@
                     {#each Array(10) as item}
                         <SwiperSlide>
                             <div
-                                class="h-28 md:h-full w-96 md:w-[50vw] rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-around"
+                                class="h-28 md:h-full w-96 md:w-[30vw] rounded-xl flex items-center justify-around"
+                                style="
+                                background-image: 
+                                    linear-gradient(90deg, rgb(7 5 25 / 92%) -1.41%, rgba(7, 5, 25, 0.1) 100%),
+                                    linear-gradient(180deg, rgba(7, 5, 25, 0) -16%, rgb(7 5 25 / 90%) 95.81%),
+                                    url(poster_url.format);
+                                "
                             >
                                 <div class="flex flex-col items-start">
                                     <p class="font-bold">Spy x Family</p>
