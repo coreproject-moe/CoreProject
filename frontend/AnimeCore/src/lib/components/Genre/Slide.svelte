@@ -1,6 +1,6 @@
 <script lang="ts">
     import AutoComplete from "$components/Genre/AutoComplete.svelte";
-    import badgeData from "$data/badge_data.json";
+    import badgeData from "$data/components/badge_data.json";
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import ChevronUpDown from "$icons/Chevron-Up-Down.svelte";
 </script>

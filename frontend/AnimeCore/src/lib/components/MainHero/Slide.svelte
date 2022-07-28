@@ -56,7 +56,6 @@
     }
     let progress: IProgress;
 
-
     let background: string;
     $: {
         if (mobile) {
