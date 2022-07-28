@@ -48,19 +48,19 @@
                 </div>
                 <div class="flex flex-col w-full lg:flex-row justify-center mt-8">
                     <div class="flex flex-row align-center">
-                        Romaji Naming <ChevronDown height={30} width={30} />
+                        Romaji Naming <ChevronDown color="white" height={30} width={30} />
                     </div>
                     <div class="divider lg:divider-horizontal before:bg-white after:bg-white" />
                     <div class="flex flex-row align-center">
-                        10 point scoring system <ChevronDown height={30} width={30} />
+                        10 point scoring system <ChevronDown color="white" height={30} width={30} />
                     </div>
                     <div class="divider lg:divider-horizontal before:bg-white after:bg-white" />
                     <div class="flex flex-row align-center">
-                        2 trackers added <ChevronDown height={30} width={30} />
+                        2 trackers added <ChevronDown color="white" height={30} width={30} />
                     </div>
                     <div class="divider lg:divider-horizontal before:bg-white after:bg-white" />
                     <div class="flex flex-row align-center">
-                        Show 18+ content <ChevronDown height={30} width={30} />
+                        Show 18+ content <ChevronDown color="white" height={30} width={30} />
                     </div>
                 </div>
             </div>
