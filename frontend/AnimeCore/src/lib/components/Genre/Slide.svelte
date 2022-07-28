@@ -59,14 +59,14 @@
                 </div>
                 <div class="mt-24 flex flex-col items-center">
                     <div class="w-[500px]">
-                        <h1 class="font-bold text-3xl mb-2 text-white">Choose your preferences</h1>
+                        <h1 class="font-bold text-3xl mb-2">Choose your preferences</h1>
                         <p>
                             Choose some options to customize your experience. You can change them
                             anytime by clicking the profile icon and going to Settings
                         </p>
                     </div>
                 </div>
-                <div class="flex flex-col w-full lg:flex-row justify-center mt-8 text-white">
+                <div class="flex flex-col w-full lg:flex-row justify-center mt-8">
                     <div class="flex flex-row align-center">
                         Romaji Naming <ChevronDown height={30} width={30} />
                     </div>

@@ -78,8 +78,8 @@
 <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
     <div class="hero-content text-center flex-col md:flex-row">
         <div class="flex flex-col gap-3">
-            <p class="text-xl font-bold flex text-white">Latest Episode</p>
-            <p class="flex gap-2 text-white">
+            <p class="text-xl font-bold flex">Latest Episode</p>
+            <p class="flex gap-2">
                 show from my list only <ChevronDown height={25} width={25} />
             </p>
             <div
@@ -100,7 +100,8 @@
                     slidesPerView={mobile ? 1 : 5}
                     spaceBetween={14}
                     mousewheel={{
-                        sensitivity: 0.001
+                        sensitivity: 0.001,
+                        forceToAxis: true
                     }}
                 >
                     {#each latestEpisodes as item}
@@ -112,7 +113,7 @@
                                 <div
                                     class="flex items-center justify-around hero-overlay bg-opacity-60 rounded-xl"
                                 >
-                                    <div class="flex flex-col items-start text-white">
+                                    <div class="flex flex-col items-start">
                                         <p class="font-bold">
                                             {voca
                                                 .chain(item.name)
@@ -138,7 +139,7 @@
         </div>
         <div class="divider lg:divider-horizontal hidden md:flex before:bg-white after:bg-white" />
         <div class="flex flex-col">
-            <p class="font-bold text-3xl items-start flex pb-4 text-white">Continue Watching</p>
+            <p class="font-bold text-3xl items-start flex pb-4">Continue Watching</p>
             <div
                 class="h-28 md:h-[200px] w-96 md:w-[70vw]"
                 on:mouseenter={disableRootSwiperScroll}
@@ -153,9 +154,9 @@
                     spaceBetween={30}
                     modules={[Mousewheel]}
                     mousewheel={{
-                        sensitivity: 0.001
+                        sensitivity: 0.001,
+                        forceToAxis: true
                     }}
-                    rewind
                 >
                     {#each Array(10) as item}
                         <SwiperSlide>
@@ -179,7 +180,7 @@
 
             <div class="flex flex-col">
                 <div class="pb-3">
-                    <p class="font-bold text-3xl flex items-start text-white">My List</p>
+                    <p class="font-bold text-3xl flex items-start">My List</p>
                 </div>
             </div>
         </div>

@@ -30,7 +30,7 @@
     export let backgroundImage: string;
     export let backgroundBanner: string;
     export let tags: string[];
-    
+
     let mobile: boolean;
     let tablet: boolean;
     let fullhd: boolean;
@@ -57,7 +57,6 @@
 
     let progress: IProgress;
 
-   
     let background: string;
 
     $: {
@@ -162,9 +161,7 @@
         </div>
     </div>
 
-    <div
-        class="pl-10 md:pl-24 hero-content flex-col text-neutral-content text-white justify-self-start"
-    >
+    <div class="pl-10 md:pl-24 hero-content flex-col justify-self-start">
         <div class="max-w-[80vw]">
             <div class="text-secondary text-lg font-bold pb-3 flex gap-2">
                 Featured
@@ -207,7 +204,7 @@
             <div class="gap-4 pt-3 hidden md:flex">
                 {#each tags as tag}
                     <span
-                        class="badge bg-base-100 badge-lg rounded-md text-white uppercase border-transparent leading-6 text-sm font-bold"
+                        class="badge text-white bg-base-100 badge-lg rounded-md uppercase border-transparent leading-6 text-sm font-bold"
                     >
                         {tag}
                     </span>
