@@ -4,18 +4,25 @@
     import type { Swiper as SwiperType } from "swiper";
     import { Mousewheel, Pagination } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
+    import voca from "voca";
 
-    import { truncate } from "$functions/Truncate";
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import Play from "$icons/Play.svelte";
     import { responsiveMode } from "$store/Responsive";
 
+    // Responsive switches
+
+    let mobile: boolean;
+    let tablet: boolean;
+    let fullhd: boolean;
+
+    $: fullhd = $responsiveMode === "fullhd";
+    $: tablet = $responsiveMode === "tablet";
+    $: mobile = $responsiveMode === "mobile";
+
     // We might control it in future :D
     let lastestEpisodeNameWordCount: number;
     lastestEpisodeNameWordCount = 19;
-
-    let mobile: boolean;
-    $: mobile = $responsiveMode === "mobile";
 
     const disableRootSwiperScroll = () => {
         rootSwiper?.mousewheel?.disable();
@@ -53,6 +60,17 @@
             episode: 7,
             backgroundImage:
                 "https://kitsu.io/images/default_cover-22e5f56b17aeced6dc7f69c8d422a1ab.png"
+        },
+        {
+            name: "Fullmetal Alchemist: Brotherhood",
+            episode: 15,
+            backgroundImage: "https://media.kitsu.io/anime/cover_images/3936/original.jpg"
+        },
+        {
+            name: "Kimetsu no Yaiba",
+            episode: 20,
+            backgroundImage:
+                "https://media.kitsu.io/anime/41370/cover_image/7958f9c01b57c980636386d124553791.jpg"
         }
     ];
 </script>
@@ -96,12 +114,12 @@
                                 >
                                     <div class="flex flex-col items-start text-white">
                                         <p class="font-bold">
-                                            {truncate(
-                                                item.name.trim(),
-                                                lastestEpisodeNameWordCount
-                                            )}
+                                            {voca
+                                                .chain(item.name)
+                                                .trim()
+                                                .truncate(lastestEpisodeNameWordCount)}
                                         </p>
-                                        <p>Ep {("0" + item.episode).slice(-2)}</p>
+                                        <p>Ep {voca.padLeft(String(item.episode), 2, String(0))}</p>
                                     </div>
 
                                     <button
@@ -116,7 +134,7 @@
                     {/each}
                 </Swiper>
             </div>
-            <div class="latestEpisodesPaginationElement flex justify-around pt-5" />
+            <div class="latestEpisodesPaginationElement flex justify-center gap-3 pt-5" />
         </div>
         <div class="divider lg:divider-horizontal hidden md:flex before:bg-white after:bg-white" />
         <div class="flex flex-col">

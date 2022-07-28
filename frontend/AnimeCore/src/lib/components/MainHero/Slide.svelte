@@ -30,6 +30,14 @@
     export let backgroundImage: string;
     export let backgroundBanner: string;
     export let tags: string[];
+    
+    let mobile: boolean;
+    let tablet: boolean;
+    let fullhd: boolean;
+
+    $: fullhd = $responsiveMode === "fullhd";
+    $: tablet = $responsiveMode === "tablet";
+    $: mobile = $responsiveMode === "mobile";
 
     // Event listener to reset the timer on slide change
     $: rootSwiper?.on?.("slideChange", () => {
@@ -49,14 +57,7 @@
 
     let progress: IProgress;
 
-    let mobile: boolean;
-    let tablet: boolean;
-    let fullhd: boolean;
-
-    $: fullhd = $responsiveMode === "fullhd";
-    $: tablet = $responsiveMode === "tablet";
-    $: mobile = $responsiveMode === "mobile";
-
+   
     let background: string;
 
     $: {
