@@ -23,7 +23,7 @@
 
     // We might control it in future :D
     let lastestEpisodeNameWordCount: number;
-    lastestEpisodeNameWordCount = 25;
+    lastestEpisodeNameWordCount = 27;
 
     const disableRootSwiperScroll = () => {
         rootSwiper?.mousewheel?.disable();
@@ -74,11 +74,11 @@
                                     class="flex items-center justify-between hero-overlay bg-opacity-60 rounded-xl p-5"
                                 >
                                     <div class="flex flex-col items-start">
-                                        <p class="font-bold" style="display:ruby">
+                                        <p class="font-bold" style="display: block ruby">
                                             {voca
                                                 .chain(item.name)
                                                 .trim()
-                                                .truncate(lastestEpisodeNameWordCount)}
+                                                .truncate(lastestEpisodeNameWordCount, " ...")}
                                         </p>
                                         <p>Ep {voca.padLeft(String(item.episode), 2, String(0))}</p>
                                     </div>
