@@ -30,7 +30,7 @@
     export let backgroundImage: string;
     export let backgroundBanner: string;
     export let tags: string[];
-    
+
     let mobile: boolean;
     let tablet: boolean;
     let fullhd: boolean;
@@ -57,7 +57,7 @@
 
     let progress: IProgress;
 
-   
+
     let background: string;
 
     $: {
