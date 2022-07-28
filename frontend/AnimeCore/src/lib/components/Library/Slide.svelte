@@ -120,7 +120,7 @@
                             <div
                                 class="h-28 md:h-full w-96 md:w-[30vw] rounded-xl flex items-center justify-around"
                                 style="
-                                background-image: 
+                                background-image:
                                     linear-gradient(90deg, rgb(7 5 25 / 92%) -1.41%, rgba(7, 5, 25, 0.1) 100%),
                                     linear-gradient(180deg, rgba(7, 5, 25, 0) -16%, rgb(7 5 25 / 90%) 95.81%),
                                     url(poster_url.format);
