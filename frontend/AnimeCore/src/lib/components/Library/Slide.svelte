@@ -38,7 +38,7 @@
 <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
     <div class="hero-content text-center flex-col md:flex-row">
         <div class="flex flex-col gap-3">
-            <p class="text-xl font-bold flex">Latest Episode</p>
+            <p class="text-3xl font-bold flex">Latest Episode</p>
             <p class="flex gap-2">
                 show from my list only <ChevronDown height={25} width={25} />
             </p>
@@ -66,7 +66,7 @@
                     {#each latestEpisodes as item}
                         <SwiperSlide>
                             <div
-                                class="w-96 md:w-80 h-28 md:h-24 bg-center rounded-xl border border-base-100 bg-no-repeat bg-cover flex items-center justify-between p-5"
+                                class="w-96 md:w-80 h-28 md:h-24 bg-center rounded-xl bg-no-repeat bg-cover flex items-center justify-between p-5"
                                 style="
                                     background-image:
                                         linear-gradient(90deg, rgb(7 5 25 / 92%) -1.41%, rgba(7, 5, 25, 0.1) 100%),
