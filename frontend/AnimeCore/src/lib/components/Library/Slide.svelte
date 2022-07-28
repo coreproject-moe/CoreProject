@@ -23,7 +23,7 @@
 
     // We might control it in future :D
     let lastestEpisodeNameWordCount: number;
-    lastestEpisodeNameWordCount = 19;
+    lastestEpisodeNameWordCount = 25;
 
     const disableRootSwiperScroll = () => {
         rootSwiper?.mousewheel?.disable();
@@ -68,13 +68,13 @@
                         <SwiperSlide>
                             <div
                                 class="w-96 md:w-80 h-28 md:h-24 rounded-xl bg-center bg-no-repeat bg-cover"
-                                style="background-image:url('{item.backgroundImage.trim()}')"
+                                style="background-image:url('{item.background_image.trim()}')"
                             >
                                 <div
-                                    class="flex items-center justify-around hero-overlay bg-opacity-60 rounded-xl"
+                                    class="flex items-center justify-between hero-overlay bg-opacity-60 rounded-xl p-5"
                                 >
                                     <div class="flex flex-col items-start">
-                                        <p class="font-bold">
+                                        <p class="font-bold" style="display:ruby">
                                             {voca
                                                 .chain(item.name)
                                                 .trim()
