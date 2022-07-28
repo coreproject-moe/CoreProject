@@ -6,7 +6,7 @@
     import GenreSlide from "$components/Genre/Slide.svelte";
     import LibrarySlide from "$components/Library/Slide.svelte";
     import MainHeroSlide from "$components/MainHero/Slide.svelte";
-    import data from "$data/main_hero_data.json";
+    import data from "$data/mock/main_hero_data.json";
 
     let rootSwiper: SwiperType;
     let mainHeroSwiper: SwiperType;

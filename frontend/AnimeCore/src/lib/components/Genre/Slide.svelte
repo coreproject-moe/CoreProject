@@ -2,27 +2,7 @@
     import AutoComplete from "$components/Genre/AutoComplete.svelte";
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import ChevronUpDown from "$icons/Chevron-Up-Down.svelte";
-
-    const badgeData = [
-        { name: "Action", class: "bg-indigo-700 hover:bg-indigo-900" },
-        { name: "Adventure", class: "bg-red-500 hover:bg-red-700" },
-        { name: "Comedy", class: "bg-amber-300 hover:bg-amber-500" },
-        { name: "Drama", class: "bg-green-500 hover:bg-green-700" },
-        { name: "Ecchi", class: "bg-green-400 hover:bg-green-600" },
-        { name: "Fantasy", class: "bg-indigo-400 hover:bg-indigo-600" },
-        { name: "Horror", class: "bg-red-400 hover:bg-red-600" },
-        { name: "Mahou Shoujo", class: "bg-red-300 hover:bg-red-500" },
-        { name: "Mecha", class: "bg-orange-300 hover:bg-orange-500" },
-        { name: "Music", class: "bg-cyan-500 hover:bg-cyan-700" },
-        { name: "Mystery", class: "bg-amber-300 hover:bg-amber-500" },
-        { name: "Psychological", class: "bg-red-500 hover:bg-red-700" },
-        { name: "Romance", class: "bg-red-300 hover:bg-red-500" },
-        { name: "Sci-Fi", class: "bg-green-400 hover:bg-green-600" },
-        { name: "Slice of Life", class: "bg-amber-300 hover:bg-amber-500" },
-        { name: "Sports", class: "bg-red-500 hover:bg-red-700" },
-        { name: "Supernatural", class: "bg-cyan-500 hover:bg-cyan-700" },
-        { name: "Thriller", class: "bg-green-400 hover:bg-green-600" }
-    ];
+    import badgeData from "$data/badge_data.json";
 </script>
 
 <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
