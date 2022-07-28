@@ -88,5 +88,10 @@
         "name": "Code Geass: Lelouch of the Rebellion R2",
         "episode": 21,
         "background_image": "https://media.kitsu.io/anime/cover_images/2634/original.jpg"
+    },
+    {
+        "name": "Naruto",
+        "episode": 212,
+        "background_image": "https://media.kitsu.io/anime/cover_images/11/original.jpg"
     }
 ]
