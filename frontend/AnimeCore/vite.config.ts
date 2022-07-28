@@ -10,6 +10,7 @@ export default defineConfig({
             $hooks: path.resolve("./src/hooks"),
             $components: path.resolve("./src/lib/components"),
             $icons: path.resolve("./src/lib/icons"),
+            $data: path.resolve("./src/lib/data"),
             $functions: path.resolve("./src/lib/functions")
         }
     }

@@ -6,6 +6,7 @@
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import voca from "voca";
 
+    import latestEpisodes from "$data/latest_episode.json";
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import Play from "$icons/Play.svelte";
     import { responsiveMode } from "$store/Responsive";
@@ -32,47 +33,6 @@
         rootSwiper?.mousewheel?.enable();
         rootSwiper.allowTouchMove = true;
     };
-
-    const latestEpisodes = [
-        {
-            name: "Spy X Family",
-            episode: 6,
-            backgroundImage:
-                "https://media.kitsu.io/manga/54448/cover_image/1c96f626f68456220ba41096a1942eee.png"
-        },
-        {
-            name: "Attack on Titan",
-            episode: 4,
-            backgroundImage: "https://media.kitsu.io/anime/cover_images/7442/original.png"
-        },
-        {
-            name: " Kaguya-sama wa Kokurasetai: Tensai-tachi no Renai Zunousen",
-            episode: 5,
-            backgroundImage: "https://media.kitsu.io/anime/cover_images/41373/original.jpg"
-        },
-        {
-            name: " Aharen-san wa Hakarenai",
-            episode: 9,
-            backgroundImage: "https://media.kitsu.io/anime/cover_images/44944/original.jpg"
-        },
-        {
-            name: "Summer Time Rendering",
-            episode: 7,
-            backgroundImage:
-                "https://kitsu.io/images/default_cover-22e5f56b17aeced6dc7f69c8d422a1ab.png"
-        },
-        {
-            name: "Fullmetal Alchemist: Brotherhood",
-            episode: 15,
-            backgroundImage: "https://media.kitsu.io/anime/cover_images/3936/original.jpg"
-        },
-        {
-            name: "Kimetsu no Yaiba",
-            episode: 20,
-            backgroundImage:
-                "https://media.kitsu.io/anime/41370/cover_image/7958f9c01b57c980636386d124553791.jpg"
-        }
-    ];
 </script>
 
 <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
@@ -108,7 +68,7 @@
                         <SwiperSlide>
                             <div
                                 class="w-96 md:w-80 h-28 md:h-24 rounded-xl bg-center bg-no-repeat bg-cover"
-                                style="background-image:url('{item.backgroundImage}')"
+                                style="background-image:url('{item.backgroundImage.trim()}')"
                             >
                                 <div
                                     class="flex items-center justify-around hero-overlay bg-opacity-60 rounded-xl"

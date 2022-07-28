@@ -10,6 +10,7 @@
         "noImplicitOverride": true,
         "noImplicitReturns": true,
         "noImplicitThis": true,
+        "resolveJsonModule": true,
         "noFallthroughCasesInSwitch": true,
         "noUncheckedIndexedAccess": true,
         "paths": {
@@ -23,6 +24,8 @@
             "$components/*": ["src/lib/components/*"],
             // Icons
             "$icons/*": ["src/lib/icons/*"],
+            // Data
+            "$data/*": ["src/lib/data/*"],
             // Svelte Defined
             "$lib": ["src/lib"],
             "$lib/*": ["src/lib/*"]

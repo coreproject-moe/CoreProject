@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { SvelteComponent } from "svelte";
     import type { Swiper as SwiperType } from "swiper";
-
+    
     import Navbar from "$components/common/Navbar.svelte";
     import ScrollArea from "$components/common/ScrollArea.svelte";
     import ChevronLeft from "$icons/Chevron-Left.svelte";
@@ -10,7 +10,7 @@
     import Mouse from "$icons/Mouse.svelte";
     import Play from "$icons/Play.svelte";
     import { responsiveMode } from "$store/Responsive";
-
+    
     import Progress from "./Progress.svelte";
 
     export let rootSwiper: Partial<SwiperType>;
@@ -54,11 +54,10 @@
         reset: () => void;
         pause: () => void;
     }
-
     let progress: IProgress;
 
+    
     let background: string;
-
     $: {
         if (mobile) {
             background = backgroundBanner;
