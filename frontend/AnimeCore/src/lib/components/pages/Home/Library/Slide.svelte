@@ -2,7 +2,7 @@
     export let rootSwiper: SwiperType;
 
     import type { Swiper as SwiperType } from "swiper";
-    import { Mousewheel, Pagination, FreeMode } from "swiper";
+    import { FreeMode,Mousewheel, Pagination } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import voca from "voca";
 
