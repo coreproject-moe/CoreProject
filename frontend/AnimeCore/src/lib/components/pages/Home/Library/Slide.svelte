@@ -1,5 +1,5 @@
 <script lang="ts">
-    export let rootSwiper: SwiperType;
+    export let rootSwiper: Partial<SwiperType>;
 
     import type { Swiper as SwiperType } from "swiper";
     import { FreeMode, Mousewheel, Pagination } from "swiper";
