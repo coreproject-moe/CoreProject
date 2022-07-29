@@ -2,7 +2,7 @@
     export let rootSwiper: SwiperType;
 
     import type { Swiper as SwiperType } from "swiper";
-    import { FreeMode,Mousewheel, Pagination } from "swiper";
+    import { FreeMode, Mousewheel, Pagination } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import voca from "voca";
 
@@ -61,7 +61,10 @@
                     mousewheel={{
                         forceToAxis: true
                     }}
-                    freeMode
+                    freeMode={{
+                        enabled: true,
+                        sticky: true
+                    }}
                 >
                     {#each latestEpisodes as item}
                         <SwiperSlide>
