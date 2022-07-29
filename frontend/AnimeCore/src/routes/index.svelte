@@ -3,9 +3,9 @@
     import { EffectFade, Lazy, Mousewheel } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
 
-    import GenreSlide from "$components/Genre/Slide.svelte";
-    import LibrarySlide from "$components/Library/Slide.svelte";
-    import MainHeroSlide from "$components/MainHero/Slide.svelte";
+    import GenreSlide from "$components/pages/Home/Genre/Slide.svelte";
+    import LibrarySlide from "$components/pages/Home/Library/Slide.svelte";
+    import MainHeroSlide from "$components/pages/Home/MainHero/Slide.svelte";
     import data from "$data/mock/main_hero_data.json";
 
     let rootSwiper: SwiperType;

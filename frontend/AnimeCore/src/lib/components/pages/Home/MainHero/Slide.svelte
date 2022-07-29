@@ -2,8 +2,8 @@
     import type { SvelteComponent } from "svelte";
     import type { Swiper as SwiperType } from "swiper";
 
-    import Navbar from "$components/common/Navbar.svelte";
-    import ScrollArea from "$components/common/ScrollArea.svelte";
+    import Navbar from "$components/shared/Navbar.svelte";
+    import ScrollArea from "$components/shared/ScrollArea.svelte";
     import ChevronLeft from "$icons/Chevron-Left.svelte";
     import ChevronRight from "$icons/Chevron-Right.svelte";
     import ChevronsRight from "$icons/Chevrons-Right.svelte";

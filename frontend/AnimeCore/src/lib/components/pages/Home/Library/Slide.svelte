@@ -2,7 +2,7 @@
     export let rootSwiper: SwiperType;
 
     import type { Swiper as SwiperType } from "swiper";
-    import { Mousewheel, Pagination } from "swiper";
+    import { Mousewheel, Pagination, FreeMode } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import voca from "voca";
 
@@ -51,7 +51,7 @@
             >
                 <Swiper
                     direction={mobile ? "horizontal" : "vertical"}
-                    modules={[Mousewheel, Pagination]}
+                    modules={[Mousewheel, Pagination, FreeMode]}
                     pagination={{
                         el: ".latestEpisodesPaginationElement",
                         clickable: true
@@ -59,9 +59,9 @@
                     slidesPerView={mobile ? 1 : 5}
                     spaceBetween={14}
                     mousewheel={{
-                        sensitivity: 0.001,
                         forceToAxis: true
                     }}
+                    freeMode
                 >
                     {#each latestEpisodes as item}
                         <SwiperSlide>
