@@ -26,9 +26,8 @@
             "$icons/*": ["src/lib/icons/*"],
             // Data
             "$data/*": ["src/lib/data/*"],
-            // Svelte Defined
-            "$lib": ["src/lib"],
-            "$lib/*": ["src/lib/*"]
+            // kaomoji
+            "$kaomoji/*": ["src/lib/kaomoji/*"]
         }
     }
 }

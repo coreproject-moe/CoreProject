@@ -11,6 +11,7 @@ export default defineConfig({
             $components: path.resolve("./src/lib/components"),
             $icons: path.resolve("./src/lib/icons"),
             $data: path.resolve("./src/lib/data"),
+            $kaomoji: path.resolve("./src/lib/kaomoji"),
             $functions: path.resolve("./src/lib/functions")
         }
     }
