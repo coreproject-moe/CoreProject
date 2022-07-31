@@ -1,3 +1,15 @@
+<script context="module" lang="ts">
+    import type { Load } from "@sveltejs/kit";
+
+    export const load: Load = ({ session }) => {
+        return {
+            props: {
+                logged_in: session.authenticated
+            }
+        };
+    };
+</script>
+
 <script lang="ts">
     import Logo from "$icons/Logo.svelte";
     import Search from "$icons/Search.svelte";

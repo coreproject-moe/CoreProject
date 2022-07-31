@@ -8,7 +8,6 @@ function handleWindowChange(e: MediaQueryList) {
 }
 
 // Callback function to handle changes
-
 const checkMode = () => {
     if (browser) {
         /*

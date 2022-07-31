@@ -13,8 +13,8 @@
 <script lang="ts">
     import CryFace from "$kaomoji/CryFace.svelte";
 
-    const kokoro_word_color_map: {
-        [key: string]: string;
+    const KokoroColorWOrdMap: {
+        [key: string]: string | undefined;
     } = {
         "-": "white",
         a: "white",
@@ -26,25 +26,33 @@
         r: "white"
     };
 
-    const tailwind_color_map: {
-        [key: string]: string;
+    const TailwindColorMap: {
+        [key: string]: string | undefined;
     } = {
         white: "text-white",
         yellow: "text-warning"
     };
 </script>
 
+<svelte:head>
+    <tlte>CoreProject</tlte>
+</svelte:head>
+
 <div class="flex items-center justify-center h-screen flex-col text-center gap-12">
     <CryFace width={414} height={123} />
     <h1 class="text-indigo-700 text-3xl">
         <b>{$$props.status}</b>
         -
-        <b>{$$props.error?.message}</b>
+        <b>{$$props.error.message}</b>
     </h1>
     <p class="w-[70vw] font-bold">
         Our hardworking
         {#each "kokoro-chan".split("") as word}
-            <span class="inline-flex {tailwind_color_map[kokoro_word_color_map[word] ?? '']}">
+            <span
+                class="inline-flex {TailwindColorMap[
+                    KokoroColorWOrdMap[word] ?? 'white' //default to white
+                ]}"
+            >
                 {word}
             </span>
         {/each}
