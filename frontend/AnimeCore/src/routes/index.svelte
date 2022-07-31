@@ -8,8 +8,8 @@
     import MainHeroSlide from "$components/pages/Home/MainHero/Slide.svelte";
     import data from "$data/mock/main_hero_data.json";
 
-    let rootSwiper: SwiperType;
-    let mainHeroSwiper: SwiperType;
+    let rootSwiper: Partial<SwiperType>;
+    let mainHeroSwiper: Partial<SwiperType>;
 
     const onRootSwiper = (e: CustomEvent) => {
         const [swiper] = e.detail;
