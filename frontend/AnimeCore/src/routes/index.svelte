@@ -23,6 +23,7 @@
 
 <svelte:head>
     <title>AnimeCore</title>
+    
 </svelte:head>
 
 <Swiper
@@ -35,6 +36,7 @@
     mousewheel={{
         sensitivity: 0.001
     }}
+    class="text-white"
     on:swiper={onRootSwiper}
 >
     <SwiperSlide>

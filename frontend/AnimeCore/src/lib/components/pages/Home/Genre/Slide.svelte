@@ -3,14 +3,18 @@
     import badgeData from "$data/components/badge_data.json";
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import ChevronUpDown from "$icons/Chevron-Up-Down.svelte";
+    import { responsiveMode } from "$store/Responsive";
+
+    let mobile: boolean;
+    $: mobile = $responsiveMode === "mobile";
 </script>
 
 <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
     <div class="hero-content text-center p-0">
         <div>
             <AutoComplete />
-            <!-- Mobile Version  -->
-            <div class="block md:hidden">
+
+            {#if mobile}
                 <div class="dropdown mt-5">
                     <div tabindex="0" class="m-1 btn normal-case">
                         or search by genres <ChevronUpDown color="#D8D8D8" height={18} width={18} />
@@ -24,9 +28,7 @@
                         {/each}
                     </ul>
                 </div>
-            </div>
-            <!-- Desktop Version -->
-            <div class="hidden md:block">
+            {:else}
                 <div class="divider w-80 mx-auto mt-12 mb-6 before:bg-white after:bg-white">
                     or search by genres
                 </div>
@@ -63,7 +65,7 @@
                         Show 18+ content <ChevronDown color="white" height={30} width={30} />
                     </div>
                 </div>
-            </div>
+            {/if}
         </div>
     </div>
 </div>

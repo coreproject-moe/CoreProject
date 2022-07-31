@@ -14,11 +14,6 @@
     // Responsive switches
 
     let mobile: boolean;
-    let tablet: boolean;
-    let fullhd: boolean;
-
-    $: fullhd = $responsiveMode === "fullhd";
-    $: tablet = $responsiveMode === "tablet";
     $: mobile = $responsiveMode === "mobile";
 
     // We might control it in future :D
@@ -27,11 +22,11 @@
 
     const disableRootSwiperScroll = () => {
         rootSwiper?.mousewheel?.disable();
-        rootSwiper.allowTouchMove = false;
+        if (rootSwiper) rootSwiper.allowTouchMove = false;
     };
     const enableRootSwiperScroll = () => {
         rootSwiper?.mousewheel?.enable();
-        rootSwiper.allowTouchMove = true;
+        if (rootSwiper) rootSwiper.allowTouchMove = true;
     };
 </script>
 
@@ -84,7 +79,9 @@
                                             .trim()
                                             .truncate(lastestEpisodeNameWordCount, " ...")}
                                     </p>
-                                    <p>Ep {voca.padLeft(String(item.episode), 2, String(0))}</p>
+                                    <p>
+                                        Ep {voca.chain(String(item.episode)).padLeft(2, String(0))}
+                                    </p>
                                 </div>
 
                                 <button class="btn btn-circle btn-md btn-warning" aria-label="play">

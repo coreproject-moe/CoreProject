@@ -88,10 +88,10 @@
 
 <svelte:window
     on:focus={() => {
-        progress?.start?.();
+        if (isActive) progress?.start?.();
     }}
     on:blur={() => {
-        progress?.pause?.();
+        if (isActive) progress?.pause?.();
     }}
 />
 
