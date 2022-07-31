@@ -12,13 +12,12 @@
     import { responsiveMode } from "$store/Responsive";
 
     // Responsive switches
-
     let mobile: boolean;
-    $: mobile = $responsiveMode === "mobile";
+    $: mobile ??= $responsiveMode === "mobile";
 
     // We might control it in future :D
     let lastestEpisodeNameWordCount: number;
-    lastestEpisodeNameWordCount = 28;
+    lastestEpisodeNameWordCount ??= 28;
 
     const disableRootSwiperScroll = () => {
         rootSwiper?.mousewheel?.disable();
@@ -46,11 +45,7 @@
             >
                 <Swiper
                     direction={mobile ? "horizontal" : "vertical"}
-                    modules={[Mousewheel, Pagination, FreeMode]}
-                    pagination={{
-                        el: ".latestEpisodesPaginationElement",
-                        clickable: true
-                    }}
+                    modules={[Mousewheel, FreeMode]}
                     slidesPerView={mobile ? 1 : 5}
                     spaceBetween={14}
                     mousewheel={{
@@ -64,7 +59,7 @@
                     {#each latestEpisodes as item}
                         <SwiperSlide>
                             <div
-                                class="w-96 md:w-80 h-28 md:h-24 bg-center rounded-xl bg-no-repeat bg-cover flex items-center justify-between p-5"
+                                class="w-96 md:w-80 h-28 md:h-24 bg-center rounded-xl bg-no-repeat bg-cover flex items-center justify-between p-8"
                                 style="
                                     background-image:
                                         linear-gradient(90deg, rgb(7 5 25 / 92%) -1.41%, rgba(7, 5, 25, 0.1) 100%),
@@ -92,7 +87,6 @@
                     {/each}
                 </Swiper>
             </div>
-            <div class="latestEpisodesPaginationElement flex justify-center gap-3 pt-5" />
         </div>
         <div class="divider lg:divider-horizontal hidden md:flex before:bg-white after:bg-white" />
         <div class="flex flex-col">

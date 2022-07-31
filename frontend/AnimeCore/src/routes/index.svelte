@@ -23,7 +23,6 @@
 
 <svelte:head>
     <title>AnimeCore</title>
-    
 </svelte:head>
 
 <Swiper
