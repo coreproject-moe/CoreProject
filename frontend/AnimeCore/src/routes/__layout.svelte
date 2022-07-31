@@ -33,7 +33,6 @@
 </script>
 
 <svelte:head>
-    <title>CoreProject</title>
     <meta name="robots" content="index,follow" />
     <meta name="googlebot" content="index,follow" />
     <meta
