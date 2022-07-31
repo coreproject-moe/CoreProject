@@ -2,7 +2,7 @@
     export let rootSwiper: Partial<SwiperType>;
 
     import type { Swiper as SwiperType } from "swiper";
-    import { FreeMode, Mousewheel, Pagination } from "swiper";
+    import { FreeMode, Mousewheel } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import voca from "voca";
 
@@ -13,7 +13,7 @@
 
     // Responsive switches
     let mobile: boolean;
-    $: mobile ??= $responsiveMode === "mobile";
+    $: mobile = $responsiveMode === "mobile";
 
     // We might control it in future :D
     let lastestEpisodeNameWordCount: number;
