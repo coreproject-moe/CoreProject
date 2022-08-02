@@ -12,27 +12,6 @@
         "noImplicitThis": true,
         "resolveJsonModule": true,
         "noFallthroughCasesInSwitch": true,
-        "noUncheckedIndexedAccess": true,
-        "paths": {
-            // Functions
-            "$functions/*": ["src/lib/functions/*"],
-            // Stores
-            "$store/*": ["src/lib/store/*"],
-            // Hooks
-            "$hooks/*": ["src/hooks/*"],
-            // Components
-            "$components/*": ["src/lib/components/*"],
-            // Icons
-            "$icons/*": ["src/lib/icons/*"],
-            // Data
-            "$data/*": ["src/lib/data/*"],
-            // Errors
-            "$errors/*": ["src/lib/components/errors/*"],
-            // kaomoji
-            "$kaomoji/*": ["src/lib/kaomoji/*"],
-            // Svelte defined
-            "$lib": ["src/lib"],
-            "$lib/*": ["src/lib/*"]
-        }
+        "noUncheckedIndexedAccess": true
     }
 }
