@@ -4,9 +4,12 @@
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import ChevronUpDown from "$icons/Chevron-Up-Down.svelte";
     import { responsiveMode } from "$store/Responsive";
+    import { remove } from "nprogress";
 
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
+
+    let dropdownGenreElementActive = false;
 </script>
 
 <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
@@ -15,8 +18,18 @@
             <AutoComplete />
 
             {#if mobile}
-                <div class="dropdown mt-5">
-                    <div tabindex="0" class="m-1 btn normal-case">
+                <div
+                    class="dropdown mt-5 dropdown-top {dropdownGenreElementActive
+                        ? 'dropdown-open'
+                        : ''}"
+                >
+                    <div
+                        tabindex="0"
+                        class="m-1 btn normal-case"
+                        on:click={() => {
+                            dropdownGenreElementActive = !dropdownGenreElementActive;
+                        }}
+                    >
                         or search by genres <ChevronUpDown color="#D8D8D8" height={18} width={18} />
                     </div>
                     <ul

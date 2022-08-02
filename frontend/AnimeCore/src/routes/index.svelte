@@ -32,7 +32,6 @@
         direction="vertical"
         slidesPerView="auto"
         modules={[Mousewheel]}
-        simulateTouch={false}
         mousewheel
         class="text-white"
         on:swiper={onRootSwiper}
