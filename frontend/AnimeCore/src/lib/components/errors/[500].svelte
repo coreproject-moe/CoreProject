@@ -3,7 +3,7 @@
     export let errorMessage: string;
     export let errorText: string;
 
-    import OverWorked from "$kaomoji/OverWorked.svelte";
+    import OverWorked from "$kaomoji/Overworked.svelte";
 </script>
 
 <div class="flex items-center justify-center h-screen flex-col text-center gap-12">
