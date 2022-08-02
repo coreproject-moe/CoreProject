@@ -26,6 +26,8 @@
             "$icons/*": ["src/lib/icons/*"],
             // Data
             "$data/*": ["src/lib/data/*"],
+            // Errors
+            "$errors/*": ["src/lib/components/errors/*"],
             // kaomoji
             "$kaomoji/*": ["src/lib/kaomoji/*"]
         }

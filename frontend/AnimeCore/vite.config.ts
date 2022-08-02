@@ -12,6 +12,7 @@ export default defineConfig({
             $icons: path.resolve("./src/lib/icons"),
             $data: path.resolve("./src/lib/data"),
             $kaomoji: path.resolve("./src/lib/kaomoji"),
+            $error: path.resolve("./src/lib/components/errors"),
             $functions: path.resolve("./src/lib/functions")
         }
     }

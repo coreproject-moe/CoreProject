@@ -14,8 +14,8 @@
     export let status: number;
     export let error: { message: string };
 
-    import Confused from "$kaomoji/Confused.svelte";
-    import Overworked from "$kaomoji/Overworked.svelte";
+    import FourZeroFour from "$components/errors/[404].svelte";
+    import FiveZeroZero from "$components/errors/[500].svelte";
 
     const KokoroColorWOrdMap: {
         [key: string]: string | undefined;
@@ -54,43 +54,41 @@
                 }"
                 >
                     ${word}
-            </span>`;
+            </span>`
+                .replace(/\s+/g, " ")
+                .trim();
         });
         input = input.replaceAll(kokoroRegex, coloredWrappedWords.join("").toString());
         return input;
     }
+
+    const errorPages = [
+        {
+            status: 404,
+            text: formatKokoroColor(
+                `Our hardworking kokoro-chan was unable to find that page. While she collects more data on it, why don’t you go back home, explore some random anime, browse the forums or come say hi!`
+            ),
+            component: FourZeroFour
+        },
+        {
+            status: 500,
+            text: formatKokoroColor(
+                `Uh-oh, looks like our cute kokoro-chan worked really hard for the past few days and has now fallen asleep. You can wait for her to wake up by looking at the status page, or come say hi to other fellow kokoro-chan worshippers! ah- also let’s wish her sweet dreams!`
+            ),
+            component: FiveZeroZero
+        }
+    ];
+
+    let errorPage = errorPages.find((item) => item.status === status);
 </script>
 
 <svelte:head>
     <title>CoreProject</title>
 </svelte:head>
 
-{#if status === 404}
-    <div class="flex items-center justify-center h-screen flex-col text-center gap-12">
-        <Confused width={414} height={123} />
-        <h1 class="text-indigo-700 text-3xl">
-            <b>{status}</b>
-            -
-            <b>{error.message}</b>
-        </h1>
-        <p class="w-[70vw] font-bold">
-            {@html formatKokoroColor(
-                `Our hardworking kokoro-chan was unable to find that page. While she collects more data on it, why don’t you go back home, explore some random anime, browse the forums or come say hi!`
-            )}
-        </p>
-    </div>
-{:else if status === 500}
-    <div class="flex items-center justify-center h-screen flex-col text-center gap-12">
-        <Overworked width="387" height="114" />
-        <h1 class="text-indigo-700 text-3xl">
-            <b>{status}</b>
-            -
-            <b>{error.message}</b>
-        </h1>
-        <p class="w-[70vw] font-bold">
-            {@html formatKokoroColor(
-                `Uh-oh, looks like our cute kokoro-chan worked really hard for the past few days and has now fallen asleep. You can wait for her to wake up by looking at the status page, or come say hi to other fellow kokoro-chan worshippers! ah- also let’s wish her sweet dreams!`
-            )}
-        </p>
-    </div>
-{/if}
+<svelte:component
+    this={errorPage?.component}
+    {status}
+    errorMessage={error?.message}
+    errorText={errorPage?.text}
+/>
