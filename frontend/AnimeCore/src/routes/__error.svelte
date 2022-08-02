@@ -1,5 +1,6 @@
 <script context="module" lang="ts">
     import type { Load } from "@sveltejs/kit";
+
     export const load: Load = ({ error, status }) => {
         return {
             props: {
@@ -14,6 +15,8 @@
     export let status: number;
     export let error: { message: string };
 
+    // Odd nameing ?
+    // Svelte doesnt allow us to name components like 404 ( maybe its JS thing )
     import FourZeroFour from "$components/errors/[404].svelte";
     import FiveZeroZero from "$components/errors/[500].svelte";
 
