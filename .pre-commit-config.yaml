@@ -51,13 +51,13 @@ repos:
             args: [--profile, black]
 
     - repo: https://github.com/asottile/pyupgrade
-      rev: v2.37.2
+      rev: v2.37.3
       hooks:
           - id: pyupgrade
             args: [--py311-plus]
 
     - repo: https://github.com/pre-commit/mirrors-eslint
-      rev: v8.20.0
+      rev: v8.21.0
       hooks:
           - id: eslint
             args: [
