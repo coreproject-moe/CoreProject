@@ -49,17 +49,11 @@
         }
 
         const coloredWrappedWords = "kokoro-chan".split("").map((word) => {
-            return `<span
-                class="inline-flex ${
-                    TailwindColorMap[
-                        KokoroColorWOrdMap[word] ?? "white" //default to white
-                    ]
-                }"
-                >
-                    ${word}
-            </span>`
-                .replace(/\s+/g, " ")
-                .trim();
+            return `<span class="inline-flex ${
+                TailwindColorMap[
+                    KokoroColorWOrdMap[word] ?? "white" //default to white
+                ]
+            }">${word}</span>`;
         });
         input = input.replaceAll(kokoroRegex, coloredWrappedWords.join("").toString());
         return input;
