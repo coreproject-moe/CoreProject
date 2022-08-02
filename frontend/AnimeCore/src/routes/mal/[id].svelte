@@ -10,8 +10,8 @@
 
         return {
             props: {
-                animeData: data.status === 200 && response.ok && data.data,
-                error: data.status === 404 && response.ok && data.message
+                animeData: data.status === 200 && data.data,
+                error: data.status === 404 && data.message
             }
         };
     };
