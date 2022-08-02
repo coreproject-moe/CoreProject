@@ -29,7 +29,10 @@
             // Errors
             "$errors/*": ["src/lib/components/errors/*"],
             // kaomoji
-            "$kaomoji/*": ["src/lib/kaomoji/*"]
+            "$kaomoji/*": ["src/lib/kaomoji/*"],
+            // Svelte defined
+            "$lib": ["src/lib"],
+            "$lib/*": ["src/lib/*"]
         }
     }
 }

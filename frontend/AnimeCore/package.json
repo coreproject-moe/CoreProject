@@ -28,6 +28,7 @@
         "autoprefixer": "^10.4.8",
         "cssnano": "^5.1.12",
         "daisyui": "^2.20.0",
+        "dayjs": "^1.11.4",
         "easytimer.js": "^4.5.3",
         "eslint": "^8.21.0",
         "eslint-config-prettier": "^8.5.0",
