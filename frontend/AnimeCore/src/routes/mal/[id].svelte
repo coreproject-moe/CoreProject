@@ -1,7 +1,8 @@
 <script context="module" lang="ts">
     import type { Load } from "@sveltejs/kit";
 
-    export const load: Load = async ({ fetch, params }) => {
+    // If we want SSR just add fetch here
+    export const load: Load = async ({ params }) => {
         const id = params.id;
         const url = `https://api.jikan.moe/v4/anime/${id}/full`;
 
