@@ -15,7 +15,7 @@
     export let status: number;
     export let error: { message: string };
 
-    // Odd nameing ?
+    // Odd naming ?
     // Svelte doesnt allow us to name components like 404 ( maybe its JS thing )
     import FourZeroFour from "$components/errors/[404].svelte";
     import FiveZeroZero from "$components/errors/[500].svelte";
@@ -55,7 +55,10 @@
                 ]
             }">${word}</span>`;
         });
+
+        // Color the font.
         input = input.replaceAll(kokoroRegex, coloredWrappedWords.join("").toString());
+        // Hyperlink the home
         return input;
     }
 
@@ -80,7 +83,7 @@
 </script>
 
 <svelte:head>
-    <title>CoreProject</title>
+    <title>CoreProject | {status} </title>
 </svelte:head>
 
 <svelte:component
