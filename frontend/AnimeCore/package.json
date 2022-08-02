@@ -33,6 +33,7 @@
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-simple-import-sort": "^7.0.0",
         "eslint-plugin-svelte3": "^4.0.0",
+        "eslint-plugin-unused-imports": "^2.0.0",
         "nprogress": "^0.2.0",
         "postcss": "^8.4.14",
         "postcss-load-config": "4.0.1",

@@ -1,6 +1,4 @@
 <script lang="ts">
-    import { remove } from "nprogress";
-
     import AutoComplete from "$components/pages/Home/Genre/AutoComplete.svelte";
     import badgeData from "$data/components/badge_data.json";
     import ChevronDown from "$icons/Chevron-Down.svelte";
