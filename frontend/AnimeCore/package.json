@@ -22,7 +22,7 @@
         "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
         "@tailwindcss/typography": "^0.5.4",
         "@typescript-eslint/eslint-plugin": "^5.31.0",
-        "@typescript-eslint/parser": "^5.31.0",
+        "@typescript-eslint/parser": "^5.32.0",
         "autoprefixer": "^10.4.8",
         "cssnano": "^5.1.12",
         "daisyui": "^2.20.0",
