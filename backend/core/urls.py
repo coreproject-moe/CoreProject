@@ -40,6 +40,7 @@ urlpatterns = [
     #   Api
     # ========
     path("api/v1/anime/", include("apps.api.v1.anime.urls")),
+    path("api/v1/bearer/", include("apps.__user__.urls")),
 ]
 if settings.DEBUG:
     urlpatterns += (path("__debug__/", include("debug_toolbar.urls")),)
