@@ -8,6 +8,8 @@
 
     import continueWatching from "$data/mock/continue_watching.json";
     import latestEpisodes from "$data/mock/latest_episode.json";
+    import myList from "$data/mock/my_list.json";
+
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import Play from "$icons/Play.svelte";
     import { responsiveMode } from "$store/Responsive";
@@ -18,7 +20,10 @@
 
     // We might control it in future :D
     let lastestEpisodeNameWordCount: number;
-    lastestEpisodeNameWordCount ??= 28;
+    lastestEpisodeNameWordCount ??= 25;
+
+    let mylistAnimeNameWordCount: number;
+    mylistAnimeNameWordCount ??= 25;
 
     const disableRootSwiperScroll = () => {
         rootSwiper?.mousewheel?.disable();
@@ -73,7 +78,7 @@
                                         {voca
                                             .chain(item.name)
                                             .trim()
-                                            .truncate(lastestEpisodeNameWordCount, " ...")}
+                                            .truncate(lastestEpisodeNameWordCount + 3, " ...")}
                                     </p>
                                     <p>
                                         Ep {voca.chain(String(item.episode)).padLeft(2, String(0))}
@@ -139,8 +144,13 @@
                 </Swiper>
             </div>
             <div class="divider hidden md:flex before:bg-white after:bg-white" />
+            <div class="flex items-center pb-3 gap-2">
+                <p class="font-bold text-3xl items-start">My List</p>
+                <p class="text-3xl">•</p>
+                <p class="text-xl">Watching</p>
+                <ChevronDown color="white" height="24" width="24" />
+            </div>
 
-            <div class="pb-3 font-bold text-3xl flex items-start">My List</div>
             <div
                 class="w-96 md:w-[70vw]"
                 on:mouseenter={disableRootSwiperScroll}
@@ -159,16 +169,19 @@
                         forceToAxis: true
                     }}
                 >
-                    {#each Array(10) as item}
+                    {#each myList as item}
                         <SwiperSlide>
-                            <div class="card w-36 h-52 bg-base-100 shadow-xl image-full">
+                            <div class="card w-36 h-52 bg-base-100 image-full before:!opacity-60">
                                 <figure>
-                                    <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
+                                    <img src={item.background_image} alt={item.name} />
                                 </figure>
                                 <div class="card-body justify-between items-center">
-                                    <h2 class="card-title">Azur Lane</h2>
-
-                                    <div class="card-actions">1/2</div>
+                                    <h2 class="card-title">
+                                        {voca
+                                            .chain(item.name)
+                                            .truncate(mylistAnimeNameWordCount + 3)}
+                                    </h2>
+                                    <div class="card-actions">{item.current}/{item.total}</div>
                                 </div>
                             </div>
                         </SwiperSlide>
