@@ -141,7 +141,13 @@
             <div class="divider hidden md:flex before:bg-white after:bg-white" />
 
             <div class="pb-3 font-bold text-3xl flex items-start">My List</div>
-            <div class="w-96 md:w-[70vw]">
+            <div
+                class="w-96 md:w-[70vw]"
+                on:mouseenter={disableRootSwiperScroll}
+                on:touchstart={disableRootSwiperScroll}
+                on:mouseleave={enableRootSwiperScroll}
+                on:touchend={enableRootSwiperScroll}
+            >
                 <Swiper
                     speed={600}
                     direction="horizontal"
@@ -155,16 +161,14 @@
                 >
                     {#each Array(10) as item}
                         <SwiperSlide>
-                            <div class="card w-96 bg-base-100 shadow-xl image-full">
+                            <div class="card w-36 h-52 bg-base-100 shadow-xl image-full">
                                 <figure>
                                     <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
                                 </figure>
-                                <div class="card-body">
-                                    <h2 class="card-title">Shoes!</h2>
-                                    <p>If a dog chews shoes whose shoes does he choose?</p>
-                                    <div class="card-actions justify-end">
-                                        <button class="btn btn-primary">Buy Now</button>
-                                    </div>
+                                <div class="card-body justify-between items-center">
+                                    <h2 class="card-title">Azur Lane</h2>
+
+                                    <div class="card-actions">1/2</div>
                                 </div>
                             </div>
                         </SwiperSlide>
