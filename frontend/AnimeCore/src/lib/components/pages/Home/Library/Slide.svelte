@@ -6,8 +6,8 @@
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import voca from "voca";
 
-    import latestEpisodes from "$data/mock/latest_episode.json";
     import continueWatching from "$data/mock/continue_watching.json";
+    import latestEpisodes from "$data/mock/latest_episode.json";
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import Play from "$icons/Play.svelte";
     import { responsiveMode } from "$store/Responsive";
@@ -140,10 +140,36 @@
             </div>
             <div class="divider hidden md:flex before:bg-white after:bg-white" />
 
-            <div class="flex flex-col">
-                <div class="pb-3">
-                    <p class="font-bold text-3xl flex items-start">My List</p>
-                </div>
+            <div class="pb-3 font-bold text-3xl flex items-start">My List</div>
+            <div class="w-96 md:w-[70vw]">
+                <Swiper
+                    speed={600}
+                    direction="horizontal"
+                    slidesPerView={"auto"}
+                    spaceBetween={30}
+                    modules={[Mousewheel]}
+                    mousewheel={{
+                        sensitivity: 0.001,
+                        forceToAxis: true
+                    }}
+                >
+                    {#each Array(10) as item}
+                        <SwiperSlide>
+                            <div class="card w-96 bg-base-100 shadow-xl image-full">
+                                <figure>
+                                    <img src="https://placeimg.com/400/225/arch" alt="Shoes" />
+                                </figure>
+                                <div class="card-body">
+                                    <h2 class="card-title">Shoes!</h2>
+                                    <p>If a dog chews shoes whose shoes does he choose?</p>
+                                    <div class="card-actions justify-end">
+                                        <button class="btn btn-primary">Buy Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </SwiperSlide>
+                    {/each}
+                </Swiper>
             </div>
         </div>
     </div>

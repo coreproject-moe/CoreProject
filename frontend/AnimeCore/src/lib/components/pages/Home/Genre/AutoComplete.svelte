@@ -5,7 +5,7 @@
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
 
-    let dropDownElement: Partial<HTMLDivElement>;
+    let dropDownElement: Partial<HTMLDivElement> | undefined = undefined;
     let data = [];
 
     const onFocus = () => {

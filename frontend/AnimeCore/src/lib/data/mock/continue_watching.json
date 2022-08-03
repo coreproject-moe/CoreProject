@@ -3,5 +3,20 @@
         "name": " One Piece ",
         "background_image": "https://media.kitsu.io/anime/12/cover_image/21ecb556255bd46b95aea4779d19789f.jpg",
         "current_episode": 14
+    },
+    {
+        "name": "Boruto: Naruto Next Generations",
+        "background_image": "https://media.kitsu.io/anime/13051/cover_image/fbc2a96681124b54663b34d414b748c8.jpg",
+        "current_episode": 167
+    },
+    {
+        "name": " Kimetsu no Yaiba ",
+        "background_image": "https://media.kitsu.io/anime/41370/cover_image/7958f9c01b57c980636386d124553791.jpg",
+        "current_episode": 23
+    },
+    {
+        "name": "Death Note",
+        "background_image": "https://media.kitsu.io/anime/cover_images/1376/original.jpg",
+        "current_episode": 37
     }
 ]
