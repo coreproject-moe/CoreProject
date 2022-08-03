@@ -16,7 +16,6 @@ Including another URLconf
 from apps.__user__.api import router as user_router
 from apps.api.v1.anime.api import router as anime_router
 from django.conf import settings
-from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
