@@ -1,5 +1,5 @@
-from ninja.security import HttpBearer
 from ninja import Router
+from ninja.security import HttpBearer
 
 router = Router()
 
