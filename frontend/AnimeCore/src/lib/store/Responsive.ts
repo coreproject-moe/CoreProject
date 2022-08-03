@@ -8,7 +8,6 @@ function handleWindowChange(e: MediaQueryList) {
 }
 
 // Callback function to handle changes
-
 const checkMode = () => {
     if (browser) {
         /*
@@ -43,8 +42,7 @@ const checkMode = () => {
 export const responsiveMode = writable(checkMode());
 
 // Final event listener to handle changes
-
 browser &&
-    window?.addEventListener("resize", async () => {
+    window.addEventListener("resize", async () => {
         responsiveMode.set(checkMode());
     });

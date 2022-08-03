@@ -7,25 +7,12 @@
         "allowSyntheticDefaultImports": true,
         "exactOptionalPropertyTypes": true,
         "noImplicitAny": true,
+        "strictNullChecks": true,
         "noImplicitOverride": true,
         "noImplicitReturns": true,
         "noImplicitThis": true,
+        "resolveJsonModule": true,
         "noFallthroughCasesInSwitch": true,
-        "noUncheckedIndexedAccess": true,
-        "paths": {
-            // Functions
-            "$functions/*": ["src/lib/functions/*"],
-            // Stores
-            "$store/*": ["src/lib/store/*"],
-            // Hooks
-            "$hooks/*": ["src/hooks/*"],
-            // Components
-            "$components/*": ["src/lib/components/*"],
-            // Icons
-            "$icons/*": ["src/lib/icons/*"],
-            // Svelte Defined
-            "$lib": ["src/lib"],
-            "$lib/*": ["src/lib/*"]
-        }
+        "noUncheckedIndexedAccess": true
     }
 }

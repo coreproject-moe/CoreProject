@@ -5,15 +5,15 @@
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
 
-    let dropDownElement: HTMLDivElement;
+    let dropDownElement: Partial<HTMLDivElement> | undefined = undefined;
     let data = [];
 
     const onFocus = () => {
-        dropDownElement.classList.add("dropdown-open");
+        dropDownElement?.classList?.add("dropdown-open");
     };
 
     const onBlur = () => {
-        dropDownElement.classList.remove("dropdown-open");
+        dropDownElement?.classList?.remove("dropdown-open");
     };
 </script>
 

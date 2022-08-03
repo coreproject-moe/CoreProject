@@ -72,9 +72,10 @@
 /* This is the hack we are looking for */
 .swiper-slide {
     height: auto;
+    width: auto;
 }
 
 body {
-    overscroll-behavior-y: contain;
+    overscroll-behavior: contain;
     scrollbar-width: none;
 }

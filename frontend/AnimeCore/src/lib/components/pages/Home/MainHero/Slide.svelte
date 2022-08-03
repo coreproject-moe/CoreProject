@@ -2,8 +2,8 @@
     import type { SvelteComponent } from "svelte";
     import type { Swiper as SwiperType } from "swiper";
 
-    import Navbar from "$components/common/Navbar.svelte";
-    import ScrollArea from "$components/common/ScrollArea.svelte";
+    import Navbar from "$components/shared/Navbar.svelte";
+    import ScrollArea from "$components/shared/ScrollArea.svelte";
     import ChevronLeft from "$icons/Chevron-Left.svelte";
     import ChevronRight from "$icons/Chevron-Right.svelte";
     import ChevronsRight from "$icons/Chevrons-Right.svelte";
@@ -31,6 +31,14 @@
     export let backgroundBanner: string;
     export let tags: string[];
 
+    let mobile: boolean;
+    let tablet: boolean;
+    let fullhd: boolean;
+
+    $: fullhd = $responsiveMode === "fullhd";
+    $: tablet = $responsiveMode === "tablet";
+    $: mobile = $responsiveMode === "mobile";
+
     // Event listener to reset the timer on slide change
     $: rootSwiper?.on?.("slideChange", () => {
         if (rootSwiper?.realIndex === 0) {
@@ -46,19 +54,9 @@
         reset: () => void;
         pause: () => void;
     }
-
     let progress: IProgress;
 
-    let mobile: boolean;
-    let tablet: boolean;
-    let fullhd: boolean;
-
-    $: fullhd = $responsiveMode === "fullhd";
-    $: tablet = $responsiveMode === "tablet";
-    $: mobile = $responsiveMode === "mobile";
-
     let background: string;
-
     $: {
         if (mobile) {
             background = backgroundBanner;
@@ -89,11 +87,11 @@
 </script>
 
 <svelte:window
-    on:focus={()=>{
-        progress?.start?.()
+    on:focus={() => {
+        if (isActive) progress?.start?.();
     }}
-    on:blur={()=>{
-        progress?.pause?.()
+    on:blur={() => {
+        if (isActive) progress?.pause?.();
     }}
 />
 
@@ -125,7 +123,8 @@
                 >
                     {#each Array(10) as _, index}
                         <span
-                            class="swiper-pagination-bullet {mainHeroSwiper?.realIndex === index
+                            class="swiper-pagination-bullet {mainHeroSwiper?.activeIndex ===
+                            index + 1
                                 ? 'swiper-pagination-bullet-active'
                                 : ''}"
                             on:click={() => {
@@ -160,9 +159,7 @@
         </div>
     </div>
 
-    <div
-        class="pl-10 md:pl-24 hero-content flex-col text-neutral-content text-white justify-self-start"
-    >
+    <div class="pl-10 md:pl-24 hero-content flex-col justify-self-start">
         <div class="max-w-[80vw]">
             <div class="text-secondary text-lg font-bold pb-3 flex gap-2">
                 Featured
@@ -177,6 +174,8 @@
                 class="font-bold leading-8 md:leading-[4.25rem] text-3xl md:text-6xl"
                 on:mouseenter={disableScroll}
                 on:mouseleave={enableScroll}
+                on:touchstart={disableScroll}
+                on:touchend={enableScroll}
             >
                 {animeTitle}
             </ScrollArea>
@@ -194,6 +193,8 @@
                 class="max-h-24 font-normal text-gray-400 prose [text-shadow:-1px_-1px_0_#0000009e,1px_-1px_0_#0000008c,0px_1px_0_#0000009e,1px_0px_0_#00000061]"
                 on:mouseenter={disableScroll}
                 on:mouseleave={enableScroll}
+                on:touchstart={disableScroll}
+                on:touchend={enableScroll}
                 offsetScrollbar
             >
                 {animeSummary}
@@ -201,14 +202,17 @@
             <div class="gap-4 pt-3 hidden md:flex">
                 {#each tags as tag}
                     <span
-                        class="badge bg-base-100 badge-lg rounded-md text-white uppercase border-transparent leading-6 text-sm font-bold"
+                        class="badge text-white bg-base-100 badge-lg rounded-md uppercase border-transparent leading-6 text-sm font-bold"
                     >
                         {tag}
                     </span>
                 {/each}
             </div>
             <div class="mt-6 flex gap-4">
-                <button class="btn btn-md md:btn-lg btn-secondary rounded-[16px] px-5 ">
+                <button
+                    aria-label="Play"
+                    class="btn btn-md md:btn-lg btn-secondary rounded-[16px] px-5 "
+                >
                     <Play width={24} height={24} />
                 </button>
                 <button

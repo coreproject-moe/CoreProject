@@ -1,17 +1,45 @@
 <script lang="ts">
     import "../app.scss";
+    // NProgress css
+    import "nprogress/nprogress.css";
 
-import { onMount } from "svelte";
+    import NProgress from "nprogress";
+    import { afterUpdate } from "svelte";
 
-    onMount(()=>{
-        setTimeout(()=>{
-            document?.querySelectorAll("#loader").forEach(e=>e.remove())
-            const root =  document.querySelector<HTMLElement>('.root')
-            if (root){
-                root.style.display = 'block'
-            }
-        },1000)
-    })
+    import { navigating } from "$app/stores";
+
+    NProgress.configure({
+        // Full list: https://github.com/rstacruz/nprogress#configuration
+        minimum: 0.16
+    });
+
+    $: {
+        if ($navigating) {
+            NProgress.start();
+        }
+        if (!$navigating) {
+            NProgress.done();
+        }
+    }
+
+    afterUpdate(() => {
+        setTimeout(() => {
+            document
+                .querySelectorAll<HTMLDivElement | HTMLStyleElement>("#loader")
+                .forEach((e) => e.remove());
+            document.querySelector<HTMLElement>(".root")?.style.removeProperty("display");
+        }, 1000);
+    });
 </script>
+
+<svelte:head>
+    <meta name="robots" content="index,follow" />
+    <meta name="googlebot" content="index,follow" />
+    <meta
+        name="description"
+        content="Bridging the gap between streaming & torrenting sevices, with a modern and clean interface"
+    />
+    <!-- <meta name="author" content="baseplate-admin,akindworld" /> -->
+</svelte:head>
 
 <slot />

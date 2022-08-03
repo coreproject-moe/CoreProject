@@ -1,6 +1,6 @@
 from requests import Session
-from requests_cache import CacheMixin, RedisCache
-from requests_ratelimiter import LimiterMixin, RedisBucket
+from requests_cache import CacheMixin
+from requests_ratelimiter import LimiterMixin
 
 
 class CachedLimiterSession(CacheMixin, LimiterMixin, Session):
