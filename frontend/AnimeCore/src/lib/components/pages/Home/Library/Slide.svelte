@@ -175,7 +175,7 @@
                                 <figure>
                                     <img src={item.background_image} alt={item.name} />
                                 </figure>
-                                <div class="card-body justify-between items-center">
+                                <div class="card-body justify-between items-center !text-white">
                                     <h2 class="card-title">
                                         {voca
                                             .chain(item.name)
