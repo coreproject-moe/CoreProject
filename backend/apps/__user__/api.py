@@ -1,7 +1,7 @@
 from ninja.security import HttpBearer
-from ninja import NinjaAPI
+from ninja import Router
 
-api = NinjaAPI()
+router = Router()
 
 
 class AuthBearer(HttpBearer):
@@ -10,6 +10,6 @@ class AuthBearer(HttpBearer):
             return token
 
 
-@api.get("/bearer", auth=AuthBearer())
+@router.get("/bearer", auth=AuthBearer())
 def bearer(request):
     return {"token": request.auth}

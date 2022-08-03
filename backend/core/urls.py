@@ -19,7 +19,13 @@ from django.urls import include
 from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import TemplateView
+from ninja import NinjaAPI
+from apps.api.v1.anime.api import router as anime_router
+from apps.__user__.api import router as user_router
 
+api = NinjaAPI()
+api.add_router("/anime", anime_router)
+api.add_router("/user", user_router)
 
 handler400 = TemplateView.as_view(template_name="400.html")
 handler403 = TemplateView.as_view(template_name="403.html")
@@ -39,8 +45,7 @@ urlpatterns = [
     path("500/", handler500),
     #   Api
     # ========
-    path("api/v1/anime/", include("apps.api.v1.anime.urls")),
-    path("api/v1/bearer/", include("apps.__user__.urls")),
+    path("api/v1/", api.urls),
 ]
 if settings.DEBUG:
     urlpatterns += (path("__debug__/", include("debug_toolbar.urls")),)

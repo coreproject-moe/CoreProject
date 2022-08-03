@@ -1,8 +1,10 @@
 from ninja import NinjaAPI
 
-api = NinjaAPI()
+from ninja import Router
+
+router = Router()
 
 
-@api.get("/hello")
+@router.get("/hello")
 def hello(request):
     return "Hello world"
