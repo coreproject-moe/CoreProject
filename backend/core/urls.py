@@ -18,6 +18,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
+
 from .api import api
 
 handler400 = TemplateView.as_view(template_name="400.html")
