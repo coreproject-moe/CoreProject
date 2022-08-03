@@ -9,8 +9,7 @@
     import continueWatching from "$data/mock/continue_watching.json";
     import latestEpisodes from "$data/mock/latest_episode.json";
     import myList from "$data/mock/my_list.json";
-
-    import ChevronDown from "$icons/Chevron-Down.svelte";
+import ChevronDown from "$icons/Chevron-Down.svelte";
     import Play from "$icons/Play.svelte";
     import { responsiveMode } from "$store/Responsive";
 
