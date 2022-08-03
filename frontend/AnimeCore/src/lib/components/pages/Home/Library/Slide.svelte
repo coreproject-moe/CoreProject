@@ -6,8 +6,8 @@
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import voca from "voca";
 
-    import latestEpisodes from "$data/mock/latest_episode.json";
     import continueWatching from "$data/mock/continue_watching.json";
+    import latestEpisodes from "$data/mock/latest_episode.json";
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import Play from "$icons/Play.svelte";
     import { responsiveMode } from "$store/Responsive";
