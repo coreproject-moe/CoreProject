@@ -26,7 +26,7 @@ const config = {
 
             // if true, will split your app into multiple functions
             // instead of creating a single one for the entire app
-            split: false
+            split: true
         }),
         trailingSlash: "always",
         alias: {
