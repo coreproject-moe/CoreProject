@@ -13,17 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from apps.__user__.api import router as user_router
-from apps.api.v1.anime.api import router as anime_router
+
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
-from ninja import NinjaAPI
-
-api = NinjaAPI()
-api.add_router("/anime", anime_router)
-api.add_router("/user", user_router)
+from .api import api
 
 handler400 = TemplateView.as_view(template_name="400.html")
 handler403 = TemplateView.as_view(template_name="403.html")
