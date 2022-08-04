@@ -2,10 +2,14 @@ from ninja import ModelSchema
 
 from ..models import AnimeInfoModel
 from typing import Optional
+from pydantic import AnyUrl
+
+from django.shortcuts import resolve_url
+from django.conf import settings
 
 
 class AnimeInfoSchema(ModelSchema):
-    anime_genres: Optional[str]
+    anime_genres: Optional[AnyUrl]
 
     class Config:
         model = AnimeInfoModel
@@ -28,4 +32,5 @@ class AnimeInfoSchema(ModelSchema):
     # 1/anime_genres
     @staticmethod
     def resolve_anime_genres(obj):
-        return f"{obj.id}/anime_genres"
+        url = resolve_url("api-1.0.0:get_individual_anime_genre_info", anime_id=obj.id)
+        return f"{settings.HOSTNAME}{url}"

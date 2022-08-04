@@ -5,6 +5,7 @@ from ninja import NinjaAPI
 from ninja.security import django_auth
 
 api = NinjaAPI(csrf=True, title="CoreProjectAPI")
+
 api.add_router("/anime", anime_router)
 api.add_router("/user", user_router, auth=django_auth)
 api.add_router("/trackers", tracker_router, auth=django_auth)

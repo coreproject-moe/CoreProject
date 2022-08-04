@@ -33,6 +33,8 @@ ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 MAL_CLIENT_ID = os.environ.get("MAL_CLIENT_ID")
 MAL_CLIENT_SECRET = os.environ.get("MAL_CLIENT_SECRET")
 
+# We are using this to hyperlink model relations
+HOSTNAME = "http://127.0.0.1:8000"
 
 # Application definition
 
