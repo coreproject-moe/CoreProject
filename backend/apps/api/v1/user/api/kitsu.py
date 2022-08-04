@@ -1,7 +1,8 @@
 from apps.__user__.models import KitsuModel
 from django.shortcuts import get_object_or_404
-from ninja import Router
 from django.utils import timezone
+from ninja import Router
+
 from ..schemas import KitsuGETSchema, KitsuPOSTSchema
 
 router = Router()

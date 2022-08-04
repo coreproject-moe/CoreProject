@@ -1,5 +1,6 @@
-from ..models import AnimeInfoModel
 from ninja import ModelSchema
+
+from ..models import AnimeInfoModel
 
 
 class AnimeInfoSchema(ModelSchema):

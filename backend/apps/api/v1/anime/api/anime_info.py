@@ -1,13 +1,15 @@
-from ninja import Router
-from ..schemas import AnimeInfoSchema
-from ..models import AnimeInfoModel
 from typing import List
+
 from django.shortcuts import get_object_or_404
+from ninja import Router
+
+from ..models import AnimeInfoModel
+from ..schemas import AnimeInfoSchema
 
 router = Router()
 
 
-@router.get("/info", response=List[AnimeInfoSchema])
+@router.get("/info", response=list[AnimeInfoSchema])
 def get_anime_info(request):
     return AnimeInfoModel.objects.all()
 
