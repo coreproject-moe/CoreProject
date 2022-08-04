@@ -1,5 +1,6 @@
-from ..models import MalModel
 from ninja import ModelSchema
+
+from ..models import MalModel
 
 
 class MALGETSchema(ModelSchema):

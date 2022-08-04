@@ -1,5 +1,6 @@
-from ..models import KitsuModel
 from ninja import ModelSchema
+
+from ..models import KitsuModel
 
 
 class KitsuGETSchema(ModelSchema):

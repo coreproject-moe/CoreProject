@@ -1,8 +1,8 @@
-from ..models import MalModel
 from django.shortcuts import get_object_or_404
-from ninja import Router
 from django.utils import timezone
+from ninja import Router
 
+from ..models import MalModel
 from ..schemas import MALGETSchema, MALPOSTSchema
 
 router = Router()
