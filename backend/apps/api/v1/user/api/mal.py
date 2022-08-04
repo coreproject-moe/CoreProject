@@ -1,8 +1,8 @@
-from ..schemas import *
+from apps.__user__.models import MalModel
 from django.shortcuts import get_object_or_404
 from ninja import Router
 
-from apps.__user__.models import MalModel
+from ..schemas import *
 
 router = Router()
 
