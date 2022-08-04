@@ -1,15 +1,15 @@
-from ninja import ModelSchema
-
-from ..models import AnimeInfoModel
 from typing import Optional
+
+from django.conf import settings
+from django.shortcuts import resolve_url
+from ninja import ModelSchema
 from pydantic import AnyUrl
 
-from django.shortcuts import resolve_url
-from django.conf import settings
+from ..models import AnimeInfoModel
 
 
 class AnimeInfoSchema(ModelSchema):
-    anime_genres: Optional[AnyUrl]
+    anime_genres: AnyUrl | None
 
     class Config:
         model = AnimeInfoModel
