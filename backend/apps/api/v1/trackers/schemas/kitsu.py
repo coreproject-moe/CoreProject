@@ -1,4 +1,4 @@
-from apps.__user__.models import KitsuModel
+from ..models import KitsuModel
 from ninja import ModelSchema
 
 

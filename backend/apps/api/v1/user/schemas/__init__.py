@@ -1,3 +1,1 @@
-from .kitsu import KitsuGETSchema, KitsuPOSTSchema
-from .mal import MALSchema
-from .user import UserSchema
+from .user_info import UserSchema

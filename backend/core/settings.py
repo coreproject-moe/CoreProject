@@ -58,8 +58,9 @@ INSTALLED_APPS = [
     "ckeditor_uploader",
     "django_cleanup.apps.CleanupConfig",
     "huey.contrib.djhuey",
-    # Pages
+    # APIS
     "apps.api.v1.anime",
+    "apps.api.v1.trackers",
     # Rest stuff
     "apps.__user__",
 ]
