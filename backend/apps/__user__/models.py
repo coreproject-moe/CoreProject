@@ -20,8 +20,8 @@ class User(AbstractUser, ResizeImageMixin):
     )
 
     def save(self, *args, **kwargs) -> NoReturn:
-        if self.avatar:
-            file = self.resize(self.avatar)
-            self.avatar.save(f"{self.username}.avif", file, save=False)
+        # if self.avatar:
+        #     file = self.resize(self.avatar)
+        #     self.avatar.save(f"{self.username}.avif", file, save=False)
 
         super().save(*args, **kwargs)

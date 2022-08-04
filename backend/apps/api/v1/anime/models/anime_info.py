@@ -51,7 +51,6 @@ class AnimeInfoModel(models.Model):
     anime_name_synonyms = models.ManyToManyField(AnimeSynonymModel, blank=True)
     anime_episodes = models.ManyToManyField(EpisodeModel, blank=True)
     anime_recommendation = models.ManyToManyField("AnimeInfoModel", blank=True)
-
     anime_characters = models.ManyToManyField(AnimeCharacterModel, blank=True)
 
     updated = models.DateTimeField(auto_now_add=True)

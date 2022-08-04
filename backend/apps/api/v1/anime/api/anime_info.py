@@ -14,7 +14,7 @@ def get_anime_info(request):
     return AnimeInfoModel.objects.all()
 
 
-@router.get("/info/{anime_id}", response=AnimeInfoSchema)
+@router.get("/info/{int:anime_id}", response=AnimeInfoSchema)
 def get_individual_anime_info(request, anime_id: int):
     query = get_object_or_404(AnimeInfoModel, id=anime_id)
     return query
