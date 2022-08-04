@@ -62,4 +62,4 @@ class AnimeInfoModel(models.Model):
         return f"{self.anime_name}"
 
     class Meta:
-        verbose_name = "Anime"
+        verbose_name = "Anime Info"
