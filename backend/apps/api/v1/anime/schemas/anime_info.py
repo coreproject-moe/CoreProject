@@ -1,11 +1,12 @@
+from typing import Optional
+
 from ninja import ModelSchema
 
 from ..models import AnimeInfoModel
-from typing import Optional
 
 
 class AnimeInfoSchema(ModelSchema):
-    anime_genres: Optional[str]
+    anime_genres: str | None
 
     class Config:
         model = AnimeInfoModel

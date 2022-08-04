@@ -4,7 +4,6 @@ from django.db import models
 # Create your models here.
 
 
-
 class MalModel(models.Model):
     user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
     access_token = models.CharField(max_length=1024, null=True, blank=True)
