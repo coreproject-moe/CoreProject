@@ -1,6 +1,7 @@
-from ninja import Router
-from .schemas import UserSchema
 from django.contrib.auth import get_user_model
+from ninja import Router
+
+from .schemas import UserSchema
 
 router = Router()
 

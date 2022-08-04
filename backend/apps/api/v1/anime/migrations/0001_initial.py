@@ -3,9 +3,9 @@
 import apps.api.v1.anime.models.anime_character
 import apps.api.v1.anime.models.anime_info
 import apps.api.v1.anime.models.episode
+import django.db.models.deletion
 from django.conf import settings
 from django.db import migrations, models
-import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
