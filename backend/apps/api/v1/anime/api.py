@@ -1,4 +1,4 @@
-from ninja import NinjaAPI, Router
+from ninja import Router
 
 router = Router()
 
