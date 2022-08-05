@@ -1,10 +1,10 @@
-from django.shortcuts import get_object_or_404, get_list_or_404
 from django.db.models import Q
-from ninja import Router, Query
+from django.shortcuts import get_list_or_404, get_object_or_404
+from ninja import Query, Router
 
+from ..filters import AnimeInfoFilters
 from ..models import AnimeInfoModel
 from ..schemas import AnimeInfoSchema
-from ..filters import AnimeInfoFilters
 
 router = Router()
 
