@@ -5,6 +5,8 @@ name = "pypi"
 
 [packages]
 django = {version = "*", extras = ["argon2"]}
+# Postgres
+psycopg2 = "*"
 # 3rd Party
 django-cleanup = "*"
 django-cors-headers = "*"
