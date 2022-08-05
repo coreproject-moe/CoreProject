@@ -13,6 +13,7 @@ class AnimeInfoSchema(ModelSchema):
     anime_studios: AnyUrl
     anime_characters: AnyUrl
     anime_name_synonyms: list[AnimeSynonymSchema] = None
+    anime_theme: AnyUrl
 
     class Config:
         model = AnimeInfoModel
@@ -54,4 +55,9 @@ class AnimeInfoSchema(ModelSchema):
         url = resolve_url(
             "api-1.0.0:get_individual_anime_character_info", anime_id=obj.id
         )
+        return f"{settings.HOSTNAME}{url}"
+
+    @staticmethod
+    def resolve_anime_theme(obj):
+        url = resolve_url("api-1.0.0:get_individual_anime_theme_info", anime_id=obj.id)
         return f"{settings.HOSTNAME}{url}"
