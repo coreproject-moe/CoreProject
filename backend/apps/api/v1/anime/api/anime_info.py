@@ -9,7 +9,7 @@ from ..schemas import AnimeInfoSchema
 router = Router()
 
 
-@router.get("/info", response=List[AnimeInfoSchema])
+@router.get("/info", response=list[AnimeInfoSchema])
 def get_anime_info(request):
     return AnimeInfoModel.objects.all()
 

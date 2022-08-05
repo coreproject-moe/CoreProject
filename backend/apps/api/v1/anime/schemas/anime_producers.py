@@ -1,6 +1,6 @@
-from ..models import AnimeProducerModel
-
 from ninja import ModelSchema
+
+from ..models import AnimeProducerModel
 
 
 class AnimeProducerSchema(ModelSchema):
