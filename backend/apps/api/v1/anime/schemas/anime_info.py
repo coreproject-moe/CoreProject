@@ -3,12 +3,15 @@ from django.shortcuts import resolve_url
 from ninja import ModelSchema
 from pydantic import AnyUrl
 
+from ..schemas.anime_synonym import AnimeSynonymSchema
 from ..models import AnimeInfoModel
 
 
 class AnimeInfoSchema(ModelSchema):
     anime_genres: AnyUrl
     anime_producers: AnyUrl
+    anime_studios: AnyUrl
+    anime_name_synonyms: list[AnimeSynonymSchema] = None
 
     class Config:
         model = AnimeInfoModel
@@ -25,6 +28,7 @@ class AnimeInfoSchema(ModelSchema):
             "anime_background",
             "anime_rating",
             "updated",
+            "anime_name_synonyms",
         ]
 
     @staticmethod
@@ -37,4 +41,9 @@ class AnimeInfoSchema(ModelSchema):
         url = resolve_url(
             "api-1.0.0:get_individual_anime_producer_info", anime_id=obj.id
         )
+        return f"{settings.HOSTNAME}{url}"
+
+    @staticmethod
+    def resolve_anime_studios(obj):
+        url = resolve_url("api-1.0.0:get_individual_anime_studio_info", anime_id=obj.id)
         return f"{settings.HOSTNAME}{url}"
