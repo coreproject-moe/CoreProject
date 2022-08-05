@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, get_list_or_404
-from django.db.models import Q
 from ninja import Router, Query
 
+from django.db.models import Q
+from django.http import Http404
 from ..models import AnimeInfoModel
 from ..schemas import AnimeInfoSchema
 from ..filters import AnimeInfoFilters
@@ -11,21 +12,29 @@ router = Router()
 
 @router.get("/info", response=list[AnimeInfoSchema])
 def get_anime_info(request, filters: AnimeInfoFilters = Query(...)):
-    anime_genres = filters.dict(exclude_none=True).get("anime_genres", "").split(",")
-    anime_themes = filters.dict(exclude_none=True).get("anime_themes", "").split(",")
+    query_dict = filters.dict(exclude_none=True)
+    query_object = Q()
 
-    query = get_list_or_404(
-        AnimeInfoModel,
-        Q(anime_genres__name__in=[anime_genres][0]),
-        Q(anime_themes__name__in=[anime_themes][0]),
-        Q(
-            **{
-                i: filters.dict(exclude_none=True)[i]
-                for i in filters.dict(exclude_none=True)
-                if i != "anime_genres" and i != "anime_themes"
-            }
-        ),
-    )
+    anime_name = query_dict.pop("anime_name", None)
+    if anime_name:
+        query_object &= (
+            Q(anime_name_japanese__icontains=anime_name)
+            | Q(anime_name__icontains=anime_name)
+            | Q(anime_name_synonyms__name__icontains=anime_name)
+        )
+    # Django filters anyone?
+    anime_genres = query_dict.pop("anime_genres", None)
+    if anime_genres:
+        query_object &= Q(anime_genres__name__in=anime_genres.split(","))
+
+    anime_themes = query_dict.pop("anime_themes", None)
+    if anime_themes:
+        query_object &= Q(anime_themes__name__in=anime_themes.split(","))
+
+    query = AnimeInfoModel.objects.filter(query_object, **query_dict).distinct()
+    if not query:
+        raise Http404("No %s matches the given query." % query.model._meta.object_name)
+
     return query
 
 
