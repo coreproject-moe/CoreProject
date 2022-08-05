@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, get_list_or_404
+from django.shortcuts import get_object_or_404
 from ninja import Router, Query
 
 from django.db.models import Q
