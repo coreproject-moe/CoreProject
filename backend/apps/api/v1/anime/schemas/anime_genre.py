@@ -1,6 +1,6 @@
 from ninja import ModelSchema
 
-from ..models.anime_genre import AnimeGenreModel
+from ..models import AnimeGenreModel
 
 
 class AnimeGenreSchema(ModelSchema):
