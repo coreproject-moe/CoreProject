@@ -16,3 +16,7 @@ router.add_router("", anime_producer_router)
 router.add_router("", anime_studio_router)
 router.add_router("", anime_character_router)
 router.add_router("", anime_theme_router)
+
+from .episode import router as episode_router
+
+router.add_router("", episode_router)
