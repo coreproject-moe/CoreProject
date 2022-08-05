@@ -54,7 +54,8 @@ def get_anime_info(request, filters: AnimeInfoFilters = Query(...)):
             query |= Q(anime_producer__name__icontains=position)
         query_object &= query
 
-    query = AnimeInfoModel.objects.filter(query_object)
+    # Maybe someday remove distinct
+    query = AnimeInfoModel.objects.filter(query_object).distinct()
     if not query:
         raise Http404("No %s matches the given query." % query.model._meta.object_name)
 
