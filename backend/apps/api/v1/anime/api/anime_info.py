@@ -21,8 +21,8 @@ def get_anime_info(request, filters: AnimeInfoFilters = Query(...)):
     anime_name = query_dict.get("anime_name", None)
     if anime_name:
         query_object &= (
-            Q(anime_name_japanese__icontains=anime_name)
-            | Q(anime_name__icontains=anime_name)
+            Q(anime_name__icontains=anime_name)
+            | Q(anime_name_japanese__icontains=anime_name)
             | Q(anime_name_synonyms__name__icontains=anime_name)
         )
 
@@ -51,7 +51,7 @@ def get_anime_info(request, filters: AnimeInfoFilters = Query(...)):
     if anime_producer:
         query = Q()
         for position in anime_themes.split(","):
-            query |= Q(anime_producer__name__icontains=position)
+            query |= Q(anime_producers__name__icontains=position)
         query_object &= query
 
     # 2 Step get query
