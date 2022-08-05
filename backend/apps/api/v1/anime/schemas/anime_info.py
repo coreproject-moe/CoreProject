@@ -3,8 +3,8 @@ from django.shortcuts import resolve_url
 from ninja import ModelSchema
 from pydantic import AnyUrl
 
-from ..schemas.anime_synonym import AnimeSynonymSchema
 from ..models import AnimeInfoModel
+from ..schemas.anime_synonym import AnimeSynonymSchema
 
 
 class AnimeInfoSchema(ModelSchema):
