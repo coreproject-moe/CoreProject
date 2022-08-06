@@ -18,7 +18,7 @@ def get_anime_info(request: HttpRequest, filters: AnimeInfoFilters = Query(...))
     query_object = Q()
 
     # Django filters anyone?
-    anime_name = query_dict.get("anime_name", None)
+    anime_name = query_dict.pop("anime_name", None)
     if anime_name:
         query_object &= (
             Q(anime_name__icontains=anime_name)
@@ -26,32 +26,11 @@ def get_anime_info(request: HttpRequest, filters: AnimeInfoFilters = Query(...))
             | Q(anime_name_synonyms__name__icontains=anime_name)
         )
 
-    anime_genres = query_dict.get("anime_genres", None)
-    if anime_genres:
+    # Dictionary unpacking at finest
+    for item in query_dict:
         query = Q()
-        for position in anime_genres.split(","):
-            query |= Q(anime_genres__name__icontains=position)
-        query_object &= query
-
-    anime_themes = query_dict.get("anime_themes", None)
-    if anime_themes:
-        query = Q()
-        for position in anime_themes.split(","):
-            query |= Q(anime_themes__name__icontains=position)
-        query_object &= query
-
-    anime_studios = query_dict.get("anime_studios", None)
-    if anime_studios:
-        query = Q()
-        for position in anime_themes.split(","):
-            query |= Q(anime_studios__name__icontains=position)
-        query_object &= query
-
-    anime_producer = query_dict.get("anime_producer", None)
-    if anime_producer:
-        query = Q()
-        for position in anime_themes.split(","):
-            query |= Q(anime_producers__name__icontains=position)
+        for position in query_dict[item].split(","):
+            query |= Q(**{f"{item}__name__icontains": position})
         query_object &= query
 
     # 2 Step get query
