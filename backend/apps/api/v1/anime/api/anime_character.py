@@ -2,7 +2,7 @@ from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
 from ninja import Router
 
-from ..models import AnimeInfoModel, AnimeCharacterModel
+from ..models import AnimeCharacterModel, AnimeInfoModel
 from ..schemas import AnimeCharacterSchema
 
 router = Router()
