@@ -7,3 +7,7 @@ class AnimeInfoFilters(Schema):
     anime_themes: str = None
     anime_studios: str = None
     anime_producers: str = None
+
+    # Map as closely to model fields as possible.
+    # So we can do something like
+    # anime_genres__name__icontains

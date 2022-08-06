@@ -17,7 +17,7 @@ def get_anime_info(request: HttpRequest, filters: AnimeInfoFilters = Query(...))
     query_dict = filters.dict(exclude_none=True)
     query_object = Q()
 
-    # Django filters anyone?
+    # We must pop this to filter other fields on the later stage
     anime_name = query_dict.pop("anime_name", None)
     if anime_name:
         query_object &= (
