@@ -18,7 +18,7 @@ def get_individual_anime_episode_timestamp_info(
     query = get_list_or_404(
         get_object_or_404(AnimeInfoModel, pk=anime_id)
         .anime_episodes.get(episode_number__in=[episode_number])
-        .episode_timestamps.all()
+        .episode_timestamps.filter(user=request.user)
     )
     return query
 
