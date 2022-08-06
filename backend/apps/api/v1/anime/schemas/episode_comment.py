@@ -9,3 +9,11 @@ class EpisodeCommentGETSchema(ModelSchema):
     class Config:
         model = EpisodeCommentModel
         model_fields = "__all__"
+
+
+class EpisodeCommentPOSTSchema(ModelSchema):
+    class Config:
+        model = EpisodeCommentModel
+        model_fields = [
+            "text",
+        ]

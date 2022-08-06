@@ -5,5 +5,5 @@ from .anime_producers import AnimeProducerSchema
 from .anime_studios import AnimeStudioSchema
 from .anime_theme import AnimeThemeSchema
 from .episode import EpisodeGETSchema, EpisodePOSTSchema
-from .episode_comment import EpisodeCommentGETSchema
+from .episode_comment import EpisodeCommentGETSchema,EpisodeCommentPOSTSchema
 from .episode_timestamp import EpisodeTimestampGETSchema, EpisodeTimestampPOSTSchema
