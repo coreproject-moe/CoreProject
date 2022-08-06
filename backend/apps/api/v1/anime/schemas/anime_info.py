@@ -7,7 +7,7 @@ from ..models import AnimeInfoModel
 from ..schemas.anime_synonym import AnimeSynonymSchema
 
 
-class AnimeInfoSchema(ModelSchema):
+class AnimeInfoGETSchema(ModelSchema):
     anime_genres: AnyUrl
     anime_producers: AnyUrl
     anime_studios: AnyUrl
@@ -67,3 +67,23 @@ class AnimeInfoSchema(ModelSchema):
     def resolve_episode(obj):
         url = resolve_url("api-1.0.0:get_individual_anime_episodes", anime_id=obj.id)
         return f"{settings.HOSTNAME}{url}"
+
+
+class AnimeInfoPOSTSchema(ModelSchema):
+    class Config:
+        model = AnimeInfoModel
+        model_fields = [
+            "mal_id",
+            "anime_name",
+            "anime_name_japanese",
+            "anime_source",
+            "anime_aired_from",
+            "anime_aired_to",
+            "anime_banner",
+            "anime_cover",
+            "anime_synopsis",
+            "anime_background",
+            "anime_rating",
+            "updated",
+            "anime_name_synonyms",
+        ]

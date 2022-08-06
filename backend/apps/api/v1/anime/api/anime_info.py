@@ -6,12 +6,12 @@ from ninja.pagination import paginate
 
 from ..filters import AnimeInfoFilters
 from ..models import AnimeInfoModel
-from ..schemas import AnimeInfoSchema
+from ..schemas import AnimeInfoPOSTSchema, AnimeInfoGETSchema
 
 router = Router()
 
 
-@router.get("/info", response=list[AnimeInfoSchema])
+@router.get("/info", response=list[AnimeInfoGETSchema])
 @paginate
 def get_anime_info(request: HttpRequest, filters: AnimeInfoFilters = Query(...)):
     query_dict = filters.dict(exclude_none=True)
@@ -71,7 +71,14 @@ def get_anime_info(request: HttpRequest, filters: AnimeInfoFilters = Query(...))
     return query
 
 
-@router.get("/info/{int:anime_id}", response=AnimeInfoSchema)
+@router.get("/info/{int:anime_id}", response=AnimeInfoGETSchema)
 def get_individual_anime_info(request: HttpRequest, anime_id: int):
     query = get_object_or_404(AnimeInfoModel, id=anime_id)
     return query
+
+
+@router.post("/info/{int:anime_id}", response=AnimeInfoGETSchema)
+def post_individual_anime_info(
+    request: HttpRequest, anime_id: int, payload: AnimeInfoPOSTSchema
+):
+    pass
