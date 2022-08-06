@@ -1,5 +1,6 @@
+from ninja import Field, ModelSchema
+
 from ..models import EpisodeTimestampModel
-from ninja import ModelSchema, Field
 
 
 class EpisodeTimestampGETSchema(ModelSchema):
