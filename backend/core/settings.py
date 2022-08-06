@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     # Flatpages
     "django.contrib.flatpages",
     # Rest Framework
+    "ninja",
     # 3rd party rest framework stuff
     "corsheaders",
     # 3rd party Django stuff

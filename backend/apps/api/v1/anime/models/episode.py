@@ -31,6 +31,7 @@ class EpisodeModel(models.Model):
         upload_to=FileField.episode_upload, default=None, blank=True, null=True
     )
     episode_summary = models.TextField(default="", blank=True, null=True)
+
     episode_comments = models.ManyToManyField(EpisodeCommentModel, blank=True)
     episode_timestamps = models.ManyToManyField(EpisodeTimestampModel, blank=True)
 
