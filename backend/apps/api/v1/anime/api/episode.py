@@ -2,7 +2,7 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 from ninja import Router
 
 from ..models import AnimeInfoModel, EpisodeModel
-from ..schemas import EpisodePOSTSchema, EpisodeGETSchema
+from ..schemas import EpisodeGETSchema, EpisodePOSTSchema
 
 router = Router()
 
