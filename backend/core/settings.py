@@ -149,25 +149,25 @@ CACHES = {
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 
 # POSTGRES
 # https://www.enterprisedb.com/postgres-tutorials/how-use-postgresql-django
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "django",
-        "USER": "postgres",
-        "PASSWORD": "123456",
-        "HOST": "",
-        "PORT": "",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql_psycopg2",
+#         "NAME": "django",
+#         "USER": "postgres",
+#         "PASSWORD": "123456",
+#         "HOST": "",
+#         "PORT": "",
+#     }
+# }
 
 # Allow more fields to be deleted at once
 # https://stackoverflow.com/questions/47585583/the-number-of-get-post-parameters-exceeded-settings-data-upload-max-number-field

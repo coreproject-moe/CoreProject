@@ -55,6 +55,8 @@ def get_anime_info(request, filters: AnimeInfoFilters = Query(...)):
         query_object &= query
 
     # 2 Step get query
+    # There wont be a performance hit if we do all().filter()
+    # https://docs.djangoproject.com/en/4.0/topics/db/queries/#retrieving-specific-objects-with-filters
     query = AnimeInfoModel.objects.all()
 
     # This can be (AND: )
@@ -66,7 +68,6 @@ def get_anime_info(request, filters: AnimeInfoFilters = Query(...)):
         raise Http404(
             f"No {query.model._meta.object_name} matches the given query with {query_object}"
         )
-
     return query
 
 
