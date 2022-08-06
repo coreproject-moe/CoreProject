@@ -3,6 +3,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404
 from ninja import Query, Router
 from ninja.pagination import paginate
+from django.http import HttpRequest
 
 from ..filters import AnimeInfoFilters
 from ..models import AnimeInfoModel
@@ -13,7 +14,7 @@ router = Router()
 
 @router.get("/info", response=list[AnimeInfoSchema])
 @paginate
-def get_anime_info(request, filters: AnimeInfoFilters = Query(...)):
+def get_anime_info(request: HttpRequest, filters: AnimeInfoFilters = Query(...)):
     query_dict = filters.dict(exclude_none=True)
     query_object = Q()
 
@@ -72,6 +73,6 @@ def get_anime_info(request, filters: AnimeInfoFilters = Query(...)):
 
 
 @router.get("/info/{int:anime_id}", response=AnimeInfoSchema)
-def get_individual_anime_info(request, anime_id: int):
+def get_individual_anime_info(request: HttpRequest, anime_id: int):
     query = get_object_or_404(AnimeInfoModel, id=anime_id)
     return query
