@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
-from ninja import Router
 from django.http import HttpRequest
+from ninja import Router
 
 from ..schemas import *
 
