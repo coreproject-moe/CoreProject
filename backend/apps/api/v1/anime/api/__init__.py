@@ -19,8 +19,8 @@ router.add_router("", anime_theme_router, tags=["anime_info"])
 
 
 from .episode import router as episode_router
-from .episode_timestamp import router as episode_timestamp_router
 from .episode_comment import router as episode_comment_router
+from .episode_timestamp import router as episode_timestamp_router
 
 router.add_router("", episode_router, tags=["anime_episodes"])
 router.add_router("", episode_timestamp_router, tags=["anime_episodes"])
