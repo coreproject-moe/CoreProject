@@ -6,7 +6,7 @@ from ninja.pagination import paginate
 
 from ..filters import AnimeInfoFilters
 from ..models import AnimeInfoModel
-from ..schemas import AnimeInfoPOSTSchema, AnimeInfoGETSchema
+from ..schemas import AnimeInfoGETSchema, AnimeInfoPOSTSchema
 
 router = Router()
 
