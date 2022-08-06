@@ -12,7 +12,7 @@ class AnimeInfoGETSchema(ModelSchema):
     anime_producers: AnyUrl
     anime_studios: AnyUrl
     anime_characters: AnyUrl
-    anime_name_synonyms: list[AnimeSynonymSchema] = None
+    anime_name_synonyms: list[AnimeSynonymSchema] = []
     anime_theme: AnyUrl
     episode: AnyUrl
 
@@ -72,18 +72,13 @@ class AnimeInfoGETSchema(ModelSchema):
 class AnimeInfoPOSTSchema(ModelSchema):
     class Config:
         model = AnimeInfoModel
-        model_fields = [
-            "mal_id",
-            "anime_name",
-            "anime_name_japanese",
-            "anime_source",
-            "anime_aired_from",
-            "anime_aired_to",
-            "anime_banner",
-            "anime_cover",
-            "anime_synopsis",
-            "anime_background",
-            "anime_rating",
-            "updated",
+        model_exclude = [
+            "anime_genres",
+            "anime_themes",
+            "anime_studios",
+            "anime_producers",
             "anime_name_synonyms",
+            "anime_episodes",
+            "anime_recommendation",
+            "anime_characters",
         ]
