@@ -71,14 +71,13 @@ def get_anime_info(request: HttpRequest, filters: AnimeInfoFilters = Query(...))
     return query
 
 
+@router.post("/info", response=AnimeInfoGETSchema)
+def post_anime_info(request: HttpRequest, payload: AnimeInfoPOSTSchema):
+    instance = AnimeInfoModel.objects.create(**payload.dict())
+    return instance
+
+
 @router.get("/info/{int:anime_id}", response=AnimeInfoGETSchema)
 def get_individual_anime_info(request: HttpRequest, anime_id: int):
     query = get_object_or_404(AnimeInfoModel, id=anime_id)
     return query
-
-
-@router.post("/info/{int:anime_id}", response=AnimeInfoGETSchema)
-def post_individual_anime_info(
-    request: HttpRequest, anime_id: int, payload: AnimeInfoPOSTSchema
-):
-    pass

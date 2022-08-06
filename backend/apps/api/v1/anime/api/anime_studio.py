@@ -21,9 +21,13 @@ def get_individual_anime_studio_info(request: HttpRequest, anime_id: int):
 def post_individual_anime_studio_info(
     request: HttpRequest, anime_id: int, payload: AnimeStudioSchema
 ):
+    # Set this at top
+    # Because if there is no anime_info_model with corresponding query theres no point in  continuing
+    anime_info_model = get_object_or_404(AnimeInfoModel, pk=anime_id)
+
     instance, created = AnimeStudioModel.objects.get_or_create(
         **payload.dict(),
     )
-    AnimeInfoModel.objects.get(pk=anime_id).anime_studios.add(instance)
+    anime_info_model.anime_studios.add(instance)
 
     return instance
