@@ -4,7 +4,7 @@ from django.db.models import CharField, Value
 from django.db.models.functions import Cast, Concat, LPad
 from django.http import HttpRequest
 from ninja import Router
-
+from django.shortcuts import get_object_or_404
 from ..schemas import UserSchema
 
 router = Router()
@@ -12,15 +12,14 @@ router = Router()
 
 @router.get("/", response=UserSchema, tags=["user_info"])
 def get_user_info(request: HttpRequest):
-    user = get_user_model().objects.get(username=request.user)
+    user = get_user_model().objects.get(id=request.user.id)
     return user
 
 
 @router.get("/{str:username}/", response=UserSchema, tags=["user_info"])
 def get_individual_user_info(request: HttpRequest, username: str):
-    user = (
-        get_user_model()
-        .objects.annotate(
+    user = get_object_or_404(
+        get_user_model().objects.annotate(
             username_discriminator_as_string=Cast(
                 "username_discriminator", output_field=CharField()
             ),
@@ -34,8 +33,8 @@ def get_individual_user_info(request: HttpRequest, username: str):
                 ),
                 output_field=CharField(),
             ),
-        )
-        .get(username_with_discriminator=username)
+        ),
+        username_with_discriminator=username,
     )
 
     return user
