@@ -5,7 +5,6 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 from .mixins.resize import ResizeImageMixin
-from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 
