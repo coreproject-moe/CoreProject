@@ -11,7 +11,7 @@ from django.db.models.functions import Cast, Concat, LPad
 class EpisodeCommentAdmin(admin.ModelAdmin):
     autocomplete_fields = ["user"]
     list_filters = ["user"]
-    search_fields = ["user__username"]
+    search_fields = ["user__username", "text"]
 
     def get_search_results(self, request, queryset, search_term):
         queryset, may_have_duplicates = super().get_search_results(
@@ -19,7 +19,7 @@ class EpisodeCommentAdmin(admin.ModelAdmin):
             queryset,
             search_term,
         )
-        if search_term:
+        if "#" in search_term:
             queryset = (
                 self.model.objects.annotate(
                     username_discriminator_as_string=Cast(
