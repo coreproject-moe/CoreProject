@@ -1,6 +1,5 @@
 from ninja import Router
 
-router = Router()
 
 from django.db.models import Q
 from django.http import Http404, HttpRequest
@@ -11,6 +10,8 @@ from ninja.pagination import paginate
 from ..filters import AnimeInfoFilters
 from ..models import AnimeInfoModel
 from ..schemas import AnimeInfoGETSchema, AnimeInfoPOSTSchema
+
+router = Router()
 
 
 @router.get("", response=list[AnimeInfoGETSchema], tags=["anime_info"])
