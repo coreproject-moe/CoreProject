@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
-from django.db.models import Q
 from django.core.exceptions import ValidationError
+from django.db.models import Q
 
 
 class EmailOrUsernameModelBackend(ModelBackend):
