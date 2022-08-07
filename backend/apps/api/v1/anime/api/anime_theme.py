@@ -10,7 +10,9 @@ router = Router()
 
 @router.get("/{int:anime_id}/themes", response=list[AnimeThemeSchema])
 def get_individual_anime_theme_info(request: HttpRequest, anime_id: int):
-    query = get_list_or_404(get_object_or_404(AnimeInfoModel, id=anime_id).anime_themes)
+    query = get_list_or_404(
+        get_object_or_404(AnimeInfoModel, id=anime_id).anime_themes,
+    )
     return query
 
 

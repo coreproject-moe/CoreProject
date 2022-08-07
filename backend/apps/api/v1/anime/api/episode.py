@@ -10,7 +10,7 @@ router = Router()
 @router.get("/{int:anime_id}/episodes", response=list[EpisodeGETSchema])
 def get_individual_anime_episodes(request, anime_id: int):
     query = get_list_or_404(
-        get_object_or_404(AnimeInfoModel, id=anime_id).anime_episodes
+        get_object_or_404(AnimeInfoModel, id=anime_id).anime_episodes,
     )
     return query
 

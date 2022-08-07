@@ -11,7 +11,7 @@ router = Router()
 @router.get("/{int:anime_id}/producers", response=list[AnimeProducerSchema])
 def get_individual_anime_producer_info(request: HttpRequest, anime_id: int):
     query = get_list_or_404(
-        get_object_or_404(AnimeInfoModel, id=anime_id).anime_producers
+        get_object_or_404(AnimeInfoModel, id=anime_id).anime_producers,
     )
     return query
 
