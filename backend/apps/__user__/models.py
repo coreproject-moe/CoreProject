@@ -1,8 +1,13 @@
 from typing import NoReturn
 
 from django.contrib.auth.models import AbstractUser
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import (
+    MaxLengthValidator,
+    MinValueValidator,
+    MaxValueValidator,
+)
 from django.db import models
+from django.conf import settings
 
 from .mixins.resize import ResizeImageMixin
 
@@ -22,7 +27,7 @@ class User(AbstractUser, ResizeImageMixin):
         blank=False,
         null=False,
         validators=[
-            MaxValueValidator(9999),  # Allow upto 4 Digits
+            MaxLengthValidator(settings.USERNAME_DISCRIMINATOR_LENGTH),
             MinValueValidator(1),  # Same thing but remove negative digits
         ],
     )
@@ -38,6 +43,9 @@ class User(AbstractUser, ResizeImageMixin):
     @property
     def get_username_and_discriminator(self) -> str:
         return f"{self.username}#{str(self.username_discriminator).zfill(4)}"
+
+    def __str__(self) -> str:
+        return self.get_username_and_discriminator
 
     def save(self, *args, **kwargs) -> NoReturn:
         # if self.avatar:

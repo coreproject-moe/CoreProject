@@ -28,13 +28,18 @@ SECRET_KEY = "django-insecure-mn19l@e%r^s&a^pa9%(bf173v-0c54^@3s(pb!ts_yuts0$+6p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+# Increase this in future
+# If you increase this make sure to run `mksync`
+USERNAME_DISCRIMINATOR_LENGTH = 4
 
 MAL_CLIENT_ID = os.environ.get("MAL_CLIENT_ID")
 MAL_CLIENT_SECRET = os.environ.get("MAL_CLIENT_SECRET")
 
+# HOST configurations
 # We are using this to hyperlink model relations
 HOSTNAME = "http://127.0.0.1:8000"
+
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 # Application definition
 
@@ -100,7 +105,10 @@ CACHE_MIDDLEWARE_SECONDS = 0
 # Debug Toolbar Middleware
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#add-the-middleware
 if DEBUG:
-    MIDDLEWARE += ("debug_toolbar.middleware.DebugToolbarMiddleware",)
+    MIDDLEWARE += (
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
+        "django_cprofile_middleware.middleware.ProfilerMiddleware",
+    )
 
 
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#configure-internal-ips
