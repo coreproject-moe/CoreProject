@@ -8,10 +8,10 @@ from ..filters import AnimeInfoFilters
 from ..models import AnimeInfoModel
 from ..schemas import AnimeInfoGETSchema, AnimeInfoPOSTSchema
 
-router = Router()
+router = Router(tags=["anime_info"])
 
 
-@router.get("", response=list[AnimeInfoGETSchema], tags=["anime_info"])
+@router.get("", response=list[AnimeInfoGETSchema])
 @paginate
 def get_anime_info(request: HttpRequest, filters: AnimeInfoFilters = Query(...)):
     query_dict = filters.dict(exclude_none=True)
@@ -50,13 +50,13 @@ def get_anime_info(request: HttpRequest, filters: AnimeInfoFilters = Query(...))
     return query
 
 
-@router.post("", response=AnimeInfoGETSchema, tags=["anime_info"])
+@router.post("", response=AnimeInfoGETSchema)
 def post_anime_info(request: HttpRequest, payload: AnimeInfoPOSTSchema):
     instance = AnimeInfoModel.objects.create(**payload.dict())
     return instance
 
 
-@router.get("/{int:anime_id}", response=AnimeInfoGETSchema, tags=["anime_info"])
+@router.get("/{int:anime_id}", response=AnimeInfoGETSchema)
 def get_individual_anime_info(request: HttpRequest, anime_id: int):
     query = get_object_or_404(AnimeInfoModel, id=anime_id)
     return query
