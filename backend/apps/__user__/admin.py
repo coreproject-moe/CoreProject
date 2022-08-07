@@ -1,4 +1,5 @@
-from django.db.models import F, CharField, Value
+from django.db.models import CharField, Value, IntegerField
+from django.db.models.functions import LPad, Cast
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
@@ -88,15 +89,18 @@ class CustomUserAdmin(UserAdmin):
             search_term,
         )
 
-        queryset = self.model.objects.annotate(
-            username_with_discriminator=Concat(
-                "username",
-                Value("#"),
-                "username_discriminator",
-                output_field=CharField(),
-            ),
-        ).filter(username_with_discriminator__in=["baseplate-admin#1"])
-        print(queryset.query)
+        if search_term:
+            queryset = self.model.objects.annotate(
+                username_discriminator_as_string=Cast(
+                    "username_discriminator", output_field=CharField()
+                ),
+                username_with_discriminator=Concat(
+                    "username",
+                    Value("#"),
+                    LPad("username_discriminator_as_string", 4, Value("0")),
+                    output_field=CharField(),
+                ),
+            ).filter(username_with_discriminator__in=search_term.split(","))
         return queryset, may_have_duplicates
 
 
