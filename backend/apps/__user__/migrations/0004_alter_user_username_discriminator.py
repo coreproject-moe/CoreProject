@@ -18,9 +18,7 @@ class Migration(migrations.Migration):
             field=models.IntegerField(
                 default=1,
                 validators=[
-                    django.core.validators.MaxLengthValidator(
-                        settings.USERNAME_DISCRIMINATOR_LENGTH
-                    ),
+                    django.core.validators.MaxLengthValidator(4),
                     django.core.validators.MinValueValidator(1),
                 ],
             ),
