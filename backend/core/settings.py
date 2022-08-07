@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     # APIS
     "apps.api.v1.anime",
     "apps.api.v1.trackers",
+    "apps.api.v1.characters",
     # Rest stuff
     "apps.__user__",
 ]

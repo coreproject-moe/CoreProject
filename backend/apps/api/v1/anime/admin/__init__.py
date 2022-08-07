@@ -1,7 +1,6 @@
 # https://stackoverflow.com/questions/49293901/hide-model-from-main-admin-list-but-allow-creation-in-inline-editor
 # def has_module_permission(self, request):
 #     return False
-from .anime_character import AnimeCharacterAdmin
 from .anime_genre import AnimeGenreAdmin
 from .anime_info import AnimeInfoAdmin
 from .anime_producer import AnimeProducerAdmin

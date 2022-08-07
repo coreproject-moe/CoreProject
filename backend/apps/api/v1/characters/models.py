@@ -14,7 +14,7 @@ class FileField:
 # Create your models here.
 
 
-class AnimeCharacterModel(models.Model):
+class CharacterModel(models.Model):
     mal_id = models.IntegerField(unique=True, db_index=True)
     name = models.CharField(max_length=1024, unique=True, db_index=True)
     character_image = models.ImageField(
