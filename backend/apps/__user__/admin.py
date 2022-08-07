@@ -9,6 +9,7 @@ class CustomUserAdmin(UserAdmin):
 
     list_display = (
         "username",
+        "username_discriminator",
         "email",
         "first_name",
         "last_name",
@@ -30,6 +31,7 @@ class CustomUserAdmin(UserAdmin):
             {
                 "fields": (
                     "username",
+                    "username_discriminator",
                     "password",
                 )
             },
