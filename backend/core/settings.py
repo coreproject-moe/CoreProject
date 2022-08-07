@@ -29,7 +29,7 @@ SECRET_KEY = "django-insecure-mn19l@e%r^s&a^pa9%(bf173v-0c54^@3s(pb!ts_yuts0$+6p
 DEBUG = True
 
 # Increase this in future
-# If you increase this make sure to run `mksync`
+# If you increase this make sure to run `migrations`
 USERNAME_DISCRIMINATOR_LENGTH = 4
 
 MAL_CLIENT_ID = os.environ.get("MAL_CLIENT_ID")
