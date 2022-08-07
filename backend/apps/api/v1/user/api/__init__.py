@@ -8,16 +8,16 @@ from ninja import Router
 
 from ..schemas import UserSchema
 
-router = Router()
+router = Router(tags=["user_info"])
 
 
-@router.get("/", response=UserSchema, tags=["user_info"])
+@router.get("/", response=UserSchema)
 def get_user_info(request: HttpRequest):
     user = get_user_model().objects.get(id=request.user.id)
     return user
 
 
-@router.get("/{str:username}/", response=UserSchema, tags=["user_info"])
+@router.get("/{str:username}/", response=UserSchema)
 def get_individual_user_info(request: HttpRequest, username: str):
     user = get_object_or_404(
         get_user_model().objects.annotate(
