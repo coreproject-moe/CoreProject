@@ -1,11 +1,11 @@
 from django.contrib import admin
 
-from ..models import AnimeInfoModel
+from ..models import AnimeModel
 
 # Register your models here.
 
 
-@admin.register(AnimeInfoModel)
+@admin.register(AnimeModel)
 class AnimeInfoAdmin(admin.ModelAdmin):
     filter_horizontal = [
         "anime_genres",

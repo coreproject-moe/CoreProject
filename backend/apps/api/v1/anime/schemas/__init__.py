@@ -3,7 +3,7 @@ from django.shortcuts import resolve_url
 from ninja import ModelSchema
 from pydantic import AnyUrl
 
-from ..models import AnimeInfoModel
+from ..models import AnimeModel
 from ..schemas.anime_synonym import AnimeSynonymSchema
 
 
@@ -17,7 +17,7 @@ class AnimeInfoGETSchema(ModelSchema):
     episode: AnyUrl
 
     class Config:
-        model = AnimeInfoModel
+        model = AnimeModel
         model_fields = [
             "mal_id",
             "anime_name",
@@ -71,7 +71,7 @@ class AnimeInfoGETSchema(ModelSchema):
 
 class AnimeInfoPOSTSchema(ModelSchema):
     class Config:
-        model = AnimeInfoModel
+        model = AnimeModel
         model_exclude = [
             "anime_genres",
             "anime_themes",

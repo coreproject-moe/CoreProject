@@ -26,7 +26,7 @@ class FileField:
 # Create your models here.
 
 
-class AnimeInfoModel(models.Model):
+class AnimeModel(models.Model):
     mal_id = models.IntegerField(unique=True, blank=False, null=False)
     # anilist_id = models.IntegerField(unique=True, blank=False, null=False)
     anime_name = models.CharField(unique=True, max_length=1024, db_index=True)
@@ -50,7 +50,7 @@ class AnimeInfoModel(models.Model):
     anime_producers = models.ManyToManyField(AnimeProducerModel, blank=True)
     anime_name_synonyms = models.ManyToManyField(AnimeSynonymModel, blank=True)
     anime_episodes = models.ManyToManyField(EpisodeModel, blank=True)
-    anime_recommendation = models.ManyToManyField("AnimeInfoModel", blank=True)
+    anime_recommendation = models.ManyToManyField("self", blank=True)
     anime_characters = models.ManyToManyField(CharacterModel, blank=True)
 
     updated = models.DateTimeField(auto_now_add=True)
@@ -61,7 +61,7 @@ class AnimeInfoModel(models.Model):
         return f"{self.anime_name}"
 
     class Meta:
-        verbose_name = "Anime Info"
+        verbose_name = "Anime"
 
 
 # Extra imports

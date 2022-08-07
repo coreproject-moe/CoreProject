@@ -2,7 +2,7 @@ from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
 from ninja import Router
 
-from ..models import AnimeInfoModel, EpisodeCommentModel
+from ..models import AnimeModel, EpisodeCommentModel
 from ..schemas import EpisodeCommentGETSchema, EpisodeCommentPOSTSchema
 
 router = Router()
@@ -17,7 +17,7 @@ def get_individual_anime_episode_comments(
 ):
     query = get_list_or_404(
         get_object_or_404(
-            AnimeInfoModel,
+            AnimeModel,
             pk=anime_id,
         )
         .anime_episodes.get(episode_number__in=[episode_number])
@@ -38,7 +38,7 @@ def post_individual_anime_episode_comment(
 ):
     data = EpisodeCommentModel.objects.create(user=request.user, **payload.dict())
 
-    AnimeInfoModel.objects.get(pk=anime_id).anime_episodes.get(
+    AnimeModel.objects.get(pk=anime_id).anime_episodes.get(
         episode_number__in=[episode_number]
     ).episode_comments.add(data)
 

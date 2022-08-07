@@ -2,6 +2,7 @@
 
 import django.core.validators
 from django.db import migrations, models
+from django.conf import settings
 
 
 class Migration(migrations.Migration):
@@ -17,7 +18,9 @@ class Migration(migrations.Migration):
             field=models.IntegerField(
                 default=1,
                 validators=[
-                    django.core.validators.MaxLengthValidator(4),
+                    django.core.validators.MaxLengthValidator(
+                        settings.USERNAME_DISCRIMINATOR_LENGTH
+                    ),
                     django.core.validators.MinValueValidator(1),
                 ],
             ),

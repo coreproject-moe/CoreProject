@@ -5,7 +5,7 @@ from ninja import Query, Router
 from ninja.pagination import paginate
 
 from ..filters import AnimeInfoFilters
-from ..models import AnimeInfoModel
+from ..models import AnimeModel
 from ..schemas import AnimeInfoGETSchema, AnimeInfoPOSTSchema
 
 router = Router(tags=["anime_info"])
@@ -36,7 +36,7 @@ def get_anime_info(request: HttpRequest, filters: AnimeInfoFilters = Query(...))
     # 2 Step get query
     # There wont be a performance hit if we do all().filter()
     # https://docs.djangoproject.com/en/4.0/topics/db/queries/#retrieving-specific-objects-with-filters
-    query = AnimeInfoModel.objects.all()
+    query = AnimeModel.objects.all()
 
     # This can be (AND: )
     # This means it is empty
@@ -52,13 +52,13 @@ def get_anime_info(request: HttpRequest, filters: AnimeInfoFilters = Query(...))
 
 @router.post("", response=AnimeInfoGETSchema)
 def post_anime_info(request: HttpRequest, payload: AnimeInfoPOSTSchema):
-    instance = AnimeInfoModel.objects.create(**payload.dict())
+    instance = AnimeModel.objects.create(**payload.dict())
     return instance
 
 
 @router.get("/{int:anime_id}", response=AnimeInfoGETSchema)
 def get_individual_anime_info(request: HttpRequest, anime_id: int):
-    query = get_object_or_404(AnimeInfoModel, id=anime_id)
+    query = get_object_or_404(AnimeModel, id=anime_id)
     return query
 
 
