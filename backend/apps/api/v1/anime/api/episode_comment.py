@@ -9,7 +9,7 @@ router = Router()
 
 
 @router.get(
-    "/info/{int:anime_id}/episodes/{str:episode_number}/comments",
+    "/{int:anime_id}/episodes/{str:episode_number}/comments",
     response=list[EpisodeCommentGETSchema],
 )
 def get_individual_anime_episode_comments(
@@ -27,7 +27,7 @@ def get_individual_anime_episode_comments(
 
 
 @router.post(
-    "/info/{int:anime_id}/episodes/{str:episode_number}/comments",
+    "/{int:anime_id}/episodes/{str:episode_number}/comments",
     response=EpisodeCommentGETSchema,
 )
 def post_individual_anime_episode_comment(

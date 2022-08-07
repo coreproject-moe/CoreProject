@@ -8,7 +8,7 @@ from ..schemas import AnimeStudioSchema
 router = Router()
 
 
-@router.get("/info/{int:anime_id}/studios", response=list[AnimeStudioSchema])
+@router.get("/{int:anime_id}/studios", response=list[AnimeStudioSchema])
 def get_individual_anime_studio_info(request: HttpRequest, anime_id: int):
     query = get_list_or_404(
         get_object_or_404(AnimeInfoModel, id=anime_id).anime_studios
@@ -17,7 +17,7 @@ def get_individual_anime_studio_info(request: HttpRequest, anime_id: int):
     return query
 
 
-@router.post("/info/{int:anime_id}/studios", response=AnimeStudioSchema)
+@router.post("/{int:anime_id}/studios", response=AnimeStudioSchema)
 def post_individual_anime_studio_info(
     request: HttpRequest, anime_id: int, payload: AnimeStudioSchema
 ):

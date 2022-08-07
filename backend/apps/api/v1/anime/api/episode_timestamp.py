@@ -14,7 +14,7 @@ router = Router()
 
 
 @router.get(
-    "/info/{int:anime_id}/episodes/{str:episode_number}/total_watchtime",
+    "/{int:anime_id}/episodes/{str:episode_number}/total_watchtime",
     response=EpisodeTimestampTotalTimestampSchema,
 )
 def get_individual_anime_episode_total_timestamp_info(
@@ -30,7 +30,7 @@ def get_individual_anime_episode_total_timestamp_info(
 
 
 @router.get(
-    "/info/{int:anime_id}/episodes/{str:episode_number}/timestamps",
+    "/{int:anime_id}/episodes/{str:episode_number}/timestamps",
     response=list[EpisodeTimestampGETSchema],
 )
 def get_individual_anime_episode_timestamp_info(
@@ -45,7 +45,7 @@ def get_individual_anime_episode_timestamp_info(
 
 
 @router.post(
-    "/info/{int:anime_id}/episodes/{str:episode_number}/timestamps",
+    "/{int:anime_id}/episodes/{str:episode_number}/timestamps",
     response=EpisodeTimestampGETSchema,
 )
 def post_individual_anime_episode_timestamp_info(

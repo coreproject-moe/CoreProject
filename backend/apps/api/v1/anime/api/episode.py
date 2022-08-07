@@ -7,7 +7,7 @@ from ..schemas import EpisodeGETSchema, EpisodePOSTSchema
 router = Router()
 
 
-@router.get("/info/{int:anime_id}/episodes", response=list[EpisodeGETSchema])
+@router.get("/{int:anime_id}/episodes", response=list[EpisodeGETSchema])
 def get_individual_anime_episodes(request, anime_id: int):
     query = get_list_or_404(
         get_object_or_404(AnimeInfoModel, id=anime_id).anime_episodes
@@ -19,7 +19,7 @@ def get_individual_anime_episodes(request, anime_id: int):
 # File upload is broken
 # https://github.com/vitalik/django-ninja/issues/371
 # https://django-ninja.rest-framework.com/tutorial/file-params/
-@router.post("/info/{int:anime_id}/episodes", response=EpisodeGETSchema)
+@router.post("/{int:anime_id}/episodes", response=EpisodeGETSchema)
 def post_individual_anime_episodes(request, anime_id: int, payload: EpisodePOSTSchema):
     # Set this at top
     # Because if there is no anime_info_model with corresponding query theres no point in  continuing

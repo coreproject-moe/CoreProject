@@ -9,7 +9,7 @@ from ..models import AnimeInfoModel
 router = Router()
 
 
-@router.get("/info/{int:anime_id}/character", response=list[CharacterSchema])
+@router.get("/{int:anime_id}/character", response=list[CharacterSchema])
 def get_individual_anime_character_info(request: HttpRequest, anime_id: int):
     query = get_list_or_404(
         get_object_or_404(AnimeInfoModel, id=anime_id).anime_characters
@@ -18,7 +18,7 @@ def get_individual_anime_character_info(request: HttpRequest, anime_id: int):
     return query
 
 
-@router.post("/info/{int:anime_id}/character", response=list[CharacterSchema])
+@router.post("/{int:anime_id}/character", response=list[CharacterSchema])
 def post_individual_anime_character_info(
     request: HttpRequest, anime_id: int, payload: CharacterSchema
 ):
