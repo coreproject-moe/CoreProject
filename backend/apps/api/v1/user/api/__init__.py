@@ -3,8 +3,9 @@ from django.contrib.auth import get_user_model
 from django.db.models import CharField, Value
 from django.db.models.functions import Cast, Concat, LPad
 from django.http import HttpRequest
-from ninja import Router
 from django.shortcuts import get_object_or_404
+from ninja import Router
+
 from ..schemas import UserSchema
 
 router = Router()
