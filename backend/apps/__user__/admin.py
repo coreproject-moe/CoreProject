@@ -1,10 +1,9 @@
-from django.db.models import CharField, Value, IntegerField
-from django.db.models.functions import LPad, Cast
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
+from django.db.models import CharField, IntegerField, Value
+from django.db.models.functions import Cast, Concat, LPad
 from django.utils.translation import gettext_lazy as _
-from django.db.models.functions import Concat
 
 
 class CustomUserAdmin(UserAdmin):
