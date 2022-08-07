@@ -23,3 +23,6 @@ class CharacterModel(models.Model):
 
     class Meta:
         verbose_name = "Anime Character"
+
+    def __str__(self) -> str:
+        return f"{self.mal_id}. {self.name}"

@@ -3,7 +3,7 @@ from typing import NoReturn
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import (
-    MaxLengthValidator,
+    RegexValidator,
     MaxValueValidator,
     MinValueValidator,
 )
@@ -27,7 +27,12 @@ class User(AbstractUser, ResizeImageMixin):
         blank=False,
         null=False,
         validators=[
-            MaxLengthValidator(settings.USERNAME_DISCRIMINATOR_LENGTH),
+            RegexValidator(
+                regex="^(?=[\S\s]{1,%d}$)[\S\s]*"
+                % settings.USERNAME_DISCRIMINATOR_LENGTH,
+                message="Length has to be 4",
+                code="nomatch",
+            ),
             MinValueValidator(1),  # Same thing but remove negative digits
         ],
     )

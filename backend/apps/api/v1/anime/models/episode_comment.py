@@ -11,7 +11,7 @@ class EpisodeCommentModel(models.Model):
     comment_added = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
-        return f"{self.user}"
+        return f"{self.user} | {self.text}"
 
     class Meta:
         verbose_name = "Episode Comment"
