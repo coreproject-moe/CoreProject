@@ -1,7 +1,8 @@
-from ninja import Router
-from ninja.pagination import paginate
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
+from ninja import Router
+from ninja.pagination import paginate
+
 from .models import CharacterModel
 from .schemas import CharacterSchema
 
