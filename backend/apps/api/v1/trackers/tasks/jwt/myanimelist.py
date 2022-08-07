@@ -1,4 +1,4 @@
-from core.__requests_session__ import CachedLimiterSession
+from core.requests import CachedLimiterSession
 from django.conf import settings
 from django.db.models import F
 from django.utils import timezone
@@ -39,7 +39,7 @@ def refresh_mal_jwt():
 
         data = res.json()
         """
-            The Data structure looks like this
+        The Data structure looks like this
             {
                 "token_type":
                 "expires_in":

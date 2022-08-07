@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from core.__requests_session__ import CachedLimiterSession
+from core.requests import CachedLimiterSession
 from django.db.models import F
 from django.utils import timezone
 from huey import crontab
@@ -39,7 +39,7 @@ def refresh_kitsu_jwt():
 
         data = res.json()
         """
-            The Data structure looks like this
+        The Data structure looks like this
             {
                 "access_token":
                 "token_type":
