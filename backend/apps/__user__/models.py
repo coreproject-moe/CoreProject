@@ -35,6 +35,10 @@ class User(AbstractUser, ResizeImageMixin):
         ],
     )
 
+    @property
+    def get_username_and_discriminator(self) -> str:
+        return f"{self.username}#{str(self.username_discriminator).zfill(4)}"
+
     def save(self, *args, **kwargs) -> NoReturn:
         # if self.avatar:
         #     file = self.resize(self.avatar)
