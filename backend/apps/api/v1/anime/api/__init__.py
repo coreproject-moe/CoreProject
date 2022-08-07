@@ -1,6 +1,3 @@
-from ninja import Router
-
-
 from django.db.models import Q
 from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
