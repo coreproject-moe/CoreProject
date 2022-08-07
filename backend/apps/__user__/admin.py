@@ -1,3 +1,4 @@
+from pprint import pprint
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
@@ -8,8 +9,7 @@ class CustomUserAdmin(UserAdmin):
     model = get_user_model()
 
     list_display = (
-        "username",
-        "username_discriminator",
+        "get_username",
         "email",
         "first_name",
         "last_name",
@@ -75,6 +75,11 @@ class CustomUserAdmin(UserAdmin):
             },
         ),
     )
+
+    @admin.display(description="username")
+    def get_username(self, obj, *args, **kwargs):
+        # Obj is a reference to user model
+        return f"{obj.username}#{str(obj.username_discriminator).zfill(4)}"
 
 
 admin.site.register(get_user_model(), CustomUserAdmin)
