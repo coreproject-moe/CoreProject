@@ -7,13 +7,13 @@ from ..schemas import UserSchema
 router = Router()
 
 
-@router.get("/", response=UserSchema)
+@router.get("/", response=UserSchema, tags=["user_info"])
 def get_user_info(request: HttpRequest):
     user = get_user_model().objects.get(username=request.user)
     return user
 
 
-@router.get("/{str:username}/", response=UserSchema)
+@router.get("/{str:username}/", response=UserSchema, tags=["user_info"])
 def get_individual_user_info(request: HttpRequest, username: str):
     user = get_user_model().objects.get(username=username)
     return user
