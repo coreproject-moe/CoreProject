@@ -2,11 +2,7 @@ from typing import NoReturn
 
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
-from django.core.validators import (
-    RegexValidator,
-    MaxValueValidator,
-    MinValueValidator,
-)
+from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 from django.db import models
 
 from .mixins.resize import ResizeImageMixin
@@ -28,7 +24,7 @@ class User(AbstractUser, ResizeImageMixin):
         null=False,
         validators=[
             RegexValidator(
-                regex="^(?=[\S\s]{1,%d}$)[\S\s]*"
+                regex=r"^(?=[\S\s]{1,%d}$)[\S\s]*"
                 % settings.USERNAME_DISCRIMINATOR_LENGTH,
                 message="Length has to be 4",
                 code="nomatch",
