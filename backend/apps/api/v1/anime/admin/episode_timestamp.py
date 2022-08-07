@@ -1,10 +1,9 @@
+from django.conf import settings
 from django.contrib import admin
-
-from ..models import EpisodeTimestampModel
-
 from django.db.models import CharField, Value
 from django.db.models.functions import Cast, Concat, LPad
-from django.conf import settings
+
+from ..models import EpisodeTimestampModel
 
 # Register your models here.
 
