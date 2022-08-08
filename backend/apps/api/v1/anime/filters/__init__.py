@@ -19,6 +19,7 @@ class AnimeInfoFilters(Schema):
     anime_themes: str = None
     anime_studios: str = None
     anime_producers: str = None
+    anime_characters: str = None
 
 
 # Extra imports
