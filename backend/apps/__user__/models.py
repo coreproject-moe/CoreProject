@@ -18,6 +18,9 @@ class User(AbstractUser, ResizeImageMixin):
         self._meta.get_field("username")._unique = False
         self._meta.get_field("username")._validators = []
 
+        # But we want unique emails
+        self._meta.get_field("email")._unique = True
+
     username_discriminator = models.IntegerField(
         default=1,
         blank=False,

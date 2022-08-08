@@ -2,6 +2,7 @@
 
 import django.core.validators
 from django.db import migrations, models
+from django.conf import settings
 
 
 class Migration(migrations.Migration):
@@ -20,7 +21,8 @@ class Migration(migrations.Migration):
                     django.core.validators.RegexValidator(
                         code="nomatch",
                         message="Length has to be 4",
-                        regex="^(?=[\\S\\s]{1,4}$)[\\S\\s]*",
+                        regex="^(?=[\S\s]{1,%d}$)[\S\s]*"
+                        % settings.USERNAME_DISCRIMINATOR_LENGTH,
                     ),
                     django.core.validators.MinValueValidator(1),
                 ],
