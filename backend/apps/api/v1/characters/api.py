@@ -1,11 +1,11 @@
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
-from ninja import Router, Query
+from ninja import Query, Router
 from ninja.pagination import paginate
 
+from .filters import CharacterFilter
 from .models import CharacterModel
 from .schemas import CharacterSchema
-from .filters import CharacterFilter
 
 router = Router(tags=["characters"])
 
