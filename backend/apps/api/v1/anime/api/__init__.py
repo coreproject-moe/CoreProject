@@ -26,12 +26,25 @@ def get_anime_info(request: HttpRequest, filters: AnimeInfoFilters = Query(...))
             | Q(anime_name_synonyms__name__icontains=anime_name)
         )
 
-    # Dictionary unpacking at finest
-    for item in query_dict:
-        query = Q()
-        for position in query_dict[item].split(","):
-            query |= Q(**{f"{item}__name__icontains": position})
-        query_object &= query
+    # Same here but with ids
+    anime_lookups = ("mal_id", "kitsu_id", "anilist_id")
+    for item in anime_lookups:
+        value = query_dict.pop(item, None)
+        if value:
+            query = Q()
+            for position in value.split(","):
+                query |= Q(**{f"{item}": int(position.strip())})
+            query_object &= query
+
+    # Many to many lookups
+    m2m_lookups = ("anime_genres", "anime_themes", "anime_studios", "anime_producers")
+    for item in m2m_lookups:
+        value = query_dict.pop(item, None)
+        if value:
+            query = Q()
+            for position in value.split(","):
+                query |= Q(**{f"{item}__name__icontains": position.strip()})
+            query_object &= query
 
     # 2 Step get query
     # There wont be a performance hit if we do all().filter()
