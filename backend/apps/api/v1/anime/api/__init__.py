@@ -53,7 +53,7 @@ def get_anime_info(request: HttpRequest, filters: AnimeInfoFilters = Query(...))
         if value:
             query = Q()
             for position in value.split(","):
-                query |= Q(**{f"{item}__name__icontains": position.strip()})
+                query &= Q(**{f"{item}__name__icontains": position.strip()})
             query_object &= query
 
     # 2 Step get query

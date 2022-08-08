@@ -1,17 +1,18 @@
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
-from ninja import Router
+from ninja import Router, Query
 from ninja.pagination import paginate
 
 from .models import CharacterModel
 from .schemas import CharacterSchema
+from .filters import CharacterFilter
 
 router = Router(tags=["characters"])
 
 
 @router.get("", response=list[CharacterSchema])
 @paginate
-def get_character_info(request: HttpRequest):
+def get_character_info(request: HttpRequest, filter: CharacterFilter = Query(...)):
     query = CharacterModel.objects.all()
     return query
 
