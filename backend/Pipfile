@@ -29,6 +29,7 @@ requests-ratelimiter = "*"
 uwsgi = {version="*", markers="sys_platform != 'win32'"}
 pillow = "*"
 
+
 [dev-packages]
 black = "*"
 django-debug-toolbar = "*"
