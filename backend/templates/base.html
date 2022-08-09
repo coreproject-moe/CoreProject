@@ -17,7 +17,7 @@
         />
         <link
             rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"
+            href="https://cdn.jsdelivr.net/npm/bulma@0.x.x/css/bulma.min.css"
             integrity="sha256-rTpdO0HXBCNpreAHcu6tB2Ppg515Vo+5GtYSsnNLz+8="
             crossorigin="anonymous"
         />
@@ -32,7 +32,7 @@
             }
 
             body {
-                font-family: "Kokoro" !important;
+                font-family: 'Kokoro' !important;
             }
         </style>
         {%block head%} {%endblock%}
@@ -50,40 +50,40 @@
                     https://bulma.io/documentation/helpers/visibility-helpers/
                 */
 
-                const MOBILE = window.matchMedia("(max-width: 768px)");
+                const MOBILE = window.matchMedia('(max-width: 768px)');
                 const TABLET = window.matchMedia(
-                    "(min-width: 769px) and (max-width: 1023px)"
+                    '(min-width: 769px) and (max-width: 1023px)'
                 );
                 const DESKTOP = window.matchMedia(
-                    "(min-width: 1024px) and (max-width: 1215px)"
+                    '(min-width: 1024px) and (max-width: 1215px)'
                 );
                 const WIDESCREEN = window.matchMedia(
-                    "(min-width: 1216px) and (max-width: 1407px)"
+                    '(min-width: 1216px) and (max-width: 1407px)'
                 );
-                const FULLHD = window.matchMedia("(min-width: 1408px )");
+                const FULLHD = window.matchMedia('(min-width: 1408px )');
 
                 if (handleWindowChange(MOBILE)) {
-                    return "mobile";
+                    return 'mobile';
                 } else if (handleWindowChange(TABLET)) {
-                    return "tablet";
+                    return 'tablet';
                 } else if (handleWindowChange(DESKTOP)) {
-                    return "desktop";
+                    return 'desktop';
                 } else if (handleWindowChange(WIDESCREEN)) {
-                    return "widescreen";
+                    return 'widescreen';
                 } else if (handleWindowChange(FULLHD)) {
-                    return "fullhd";
+                    return 'fullhd';
                 } else {
                     return null;
                 }
             };
 
-            document.addEventListener("alpine:init", () => {
+            document.addEventListener('alpine:init', () => {
                 // Change the store's value
-                window.addEventListener("resize", () => {
-                    Alpine.store("responsiveMode", checkMode());
+                window.addEventListener('resize', () => {
+                    Alpine.store('responsiveMode', checkMode());
                 });
                 // Init the store.
-                Alpine.store("responsiveMode", checkMode());
+                Alpine.store('responsiveMode', checkMode());
             });
         </script>
     </body>

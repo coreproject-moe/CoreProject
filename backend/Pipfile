@@ -4,7 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = {version = ">=4.1b1", extras = ["argon2"]}
+django = {version = "*", extras = ["argon2"]}
+# Postgres
+psycopg2 = "*"
 # 3rd Party
 django-cleanup = "*"
 django-cors-headers = "*"
@@ -19,31 +21,19 @@ huey = "*"
 redis = "*"
 hiredis = {version="*", markers="sys_platform != 'win32'"}
 # Rest framework
-djangorestframework = "*"
-# 3rd Party ( Filtering )
-django-filter = "*"
-# 3rd Party ( Better Forms )
-django-crispy-forms = "*"
-# 3rd party ( schema )
-pyyaml = "*"
-uritemplate = "*"
-# 3rd party
-drf-nested-routers = "*"
-djangorestframework-simplejwt = "*"
-# Pillow
-pillow = "*"
-# Http Client
+django-ninja = "*"
 requests = "*"
 requests-cache = "*"
 requests-ratelimiter = "*"
 # Web servers
 uwsgi = {version="*", markers="sys_platform != 'win32'"}
-
+pillow = "*"
 
 [dev-packages]
 black = "*"
 django-debug-toolbar = "*"
 django-dbbackup = "*"
+django-cprofile-middleware = "*"
 
 [requires]
 python_version = "3.10"
