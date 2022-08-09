@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
+from django.core.exceptions import ValidationError
 from django.db.models import Q
 
 
@@ -12,25 +13,34 @@ class EmailOrUsernameModelBackend(ModelBackend):
     """
 
     def authenticate(self, request, username=None, password=None, **kwargs):
-        # n.b. Django <2.1 does not pass the `request`
-
         user_model = get_user_model()
 
-        if username is None:
-            username = kwargs.get(user_model.USERNAME_FIELD)
+        # So `username` is something like baseplate-admin#0001
+        # we need to split to get the username and discriminator
+        try:
+            _username_ = username.split("#")
+            username = _username_[0]
+            username_discriminator = _username_[1]
+        except IndexError:
+            raise ValidationError(
+                "Please enter the correct username and discriminator. Eg: someone#0001"
+            )
 
         # The `username` field is allows to contain `@` characters so
         # technically a given email address could be present in either field,
         # possibly even for different users, so we'll query for all matching
         # records and test each one.
         users = user_model._default_manager.filter(
-            Q(**{user_model.USERNAME_FIELD: username}) | Q(email__iexact=username)
+            Q(**{user_model.USERNAME_FIELD: username})
+            & Q(username_discriminator=username_discriminator)
+            | Q(email__iexact=username)
         )
 
         # Test whether any matched user has the provided password:
         for user in users:
             if user.check_password(password):
                 return user
+
         if not users:
             # Run the default password hasher once to reduce the timing
             # difference between an existing and a non-existing user (see

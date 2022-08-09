@@ -28,16 +28,22 @@ SECRET_KEY = "django-insecure-mn19l@e%r^s&a^pa9%(bf173v-0c54^@3s(pb!ts_yuts0$+6p
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+# Increase this in future
+# If you increase this make sure to run `migrations`
+USERNAME_DISCRIMINATOR_LENGTH = 4
 
 MAL_CLIENT_ID = os.environ.get("MAL_CLIENT_ID")
 MAL_CLIENT_SECRET = os.environ.get("MAL_CLIENT_SECRET")
 
+# HOST configurations
+# We are using this to hyperlink model relations
+HOSTNAME = "http://127.0.0.1:8000"
+
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 # Application definition
 
 INSTALLED_APPS = [
-    "core",
     # Django stuff
     "django.contrib.admin",
     "django.contrib.auth",
@@ -51,27 +57,28 @@ INSTALLED_APPS = [
     # Flatpages
     "django.contrib.flatpages",
     # Rest Framework
-    "rest_framework",
+    "ninja",
     # 3rd party rest framework stuff
     "corsheaders",
-    "rest_framework_simplejwt.token_blacklist",
     # 3rd party Django stuff
-    "dbbackup",  # django-dbbackup
     "ckeditor",
     "ckeditor_uploader",
-    "crispy_forms",
-    "django_filters",
     "django_cleanup.apps.CleanupConfig",
     "huey.contrib.djhuey",
-    # Pages
-    "apps.anime",
+    # APIS
+    "apps.api.v1.anime",
+    "apps.api.v1.trackers",
+    "apps.api.v1.characters",
     # Rest stuff
     "apps.__user__",
 ]
 # Debug Toolbar Add
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install-the-app
 if DEBUG:
-    INSTALLED_APPS += ("debug_toolbar",)
+    INSTALLED_APPS += (
+        "debug_toolbar",
+        "dbbackup",  # django-dbbackup
+    )
 
 
 MIDDLEWARE = [
@@ -98,7 +105,10 @@ CACHE_MIDDLEWARE_SECONDS = 0
 # Debug Toolbar Middleware
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#add-the-middleware
 if DEBUG:
-    MIDDLEWARE += ("debug_toolbar.middleware.DebugToolbarMiddleware",)
+    MIDDLEWARE += (
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
+        "django_cprofile_middleware.middleware.ProfilerMiddleware",
+    )
 
 
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#configure-internal-ips
@@ -155,6 +165,19 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+# POSTGRES
+# https://www.enterprisedb.com/postgres-tutorials/how-use-postgresql-django
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql_psycopg2",
+#         "NAME": "django",
+#         "USER": "postgres",
+#         "PASSWORD": "123456",
+#         "HOST": "",
+#         "PORT": "",
+#     }
+# }
 
 # Allow more fields to be deleted at once
 # https://stackoverflow.com/questions/47585583/the-number-of-get-post-parameters-exceeded-settings-data-upload-max-number-field
@@ -233,26 +256,6 @@ CKEDITOR_UPLOAD_PATH = Path(MEDIA_ROOT, "upload")
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-# Rest framework auth
-# https://django-rest-framework-simplejwt.readthedocs.io/en/latest/getting_started.html#installation
-# https://www.django-rest-framework.org/api-guide/parsers/#setting-the-parsers
-
-REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
-        "rest_framework.authentication.SessionAuthentication",
-    ),
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
-    "PAGE_SIZE": 10,
-    "MAX_PAGINATE_BY": 100,
-}
-
-# Settings override
-# https://github.com/jazzband/djangorestframework-simplejwt/blob/3fc9110c7d0e5641b6eccb6dca321f44189bba01/rest_framework_simplejwt/settings.py#L12
-
-SIMPLE_JWT = {
-    "UPDATE_LAST_LOGIN": True,
-}
 
 # django-cors-headers settings
 # https://pypi.org/project/django-cors-headers/
