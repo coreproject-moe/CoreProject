@@ -1,1 +1,1 @@
-# Django-Template
+The backend is a monolithic `django` server.
