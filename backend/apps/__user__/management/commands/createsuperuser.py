@@ -20,6 +20,8 @@ from ...models import User
 
 
 class Command(SuperUserCommand):
+    help = "Used to create a superuser. (overridden)"
+
     def handle(self, *args: Any, **options: Any) -> str | None:
         username = options[self.UserModel.USERNAME_FIELD]
         database = options["database"]

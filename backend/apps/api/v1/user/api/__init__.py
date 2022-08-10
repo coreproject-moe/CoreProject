@@ -8,7 +8,7 @@ from ninja import Router
 
 from ..schemas import UserSchema
 
-router = Router(tags=["user_info"])
+router = Router(tags=["user"])
 
 
 @router.get("/", response=UserSchema)
@@ -39,3 +39,11 @@ def get_individual_user_info(request: HttpRequest, username: str):
     )
 
     return user
+
+
+# Router Configuration
+# __ DO NOT MODIFY __
+
+from .signup import router as signup_router
+
+router.add_router("", signup_router, tags=["user"])

@@ -22,7 +22,7 @@ class User(AbstractUser, ResizeImageMixin):
         # We also (don't) want unique emails | Hours wasted : 0.1
         self._meta.get_field("username")._unique = False
         self._meta.get_field("username")._validators = [username_validator]
-        self._meta.get_field("username")._error_messages
+        self._meta.get_field("username")._error_messages = None
 
     username_discriminator = models.IntegerField(
         blank=True,
@@ -38,13 +38,6 @@ class User(AbstractUser, ResizeImageMixin):
         ],
     )
     avatar = models.ImageField(upload_to="avatars", default=None, blank=True, null=True)
-    video_volume = models.PositiveIntegerField(
-        default=100,
-        validators=[
-            MinValueValidator(0),
-            MaxValueValidator(100),
-        ],
-    )
 
     def get_username_with_discriminator(self) -> str:
         return f"{self.username}#{str(self.username_discriminator).zfill(4)}"
