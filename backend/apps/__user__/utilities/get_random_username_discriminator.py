@@ -7,7 +7,7 @@ from ..models import User
 
 def get_random_username_discriminator(username) -> int:
     # https://www.reddit.com/r/learnpython/comments/e1hmpm/comment/f8p6htr/
-    exclude = list(
+    exclude = set(
         User.objects.filter(username=username)
         .values_list("username_discriminator", flat=True)
         .distinct()
