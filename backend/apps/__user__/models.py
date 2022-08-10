@@ -5,9 +5,8 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 from django.db import models
 
-from .validators import username_validator
-
 from .mixins.resize import ResizeImageMixin
+from .validators import username_validator
 
 # Create your models here.
 

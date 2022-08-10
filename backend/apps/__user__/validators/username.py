@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import NoReturn
-from django.core.exceptions import ValidationError
 
+from django.core.exceptions import ValidationError
 
 BASE_DIR = Path(__file__).resolve()
 

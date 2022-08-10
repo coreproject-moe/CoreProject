@@ -1,7 +1,8 @@
-from ..models import User
 import random
 
 from django.conf import settings
+
+from ..models import User
 
 
 def get_random_username_discriminator(username) -> int:

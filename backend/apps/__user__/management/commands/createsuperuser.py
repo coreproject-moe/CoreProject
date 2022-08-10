@@ -1,14 +1,16 @@
-from django.contrib.auth.management.commands.createsuperuser import (
-    Command as SuperUserCommand,
-    PASSWORD_FIELD,
-    NotRunningInTTYException,
-)
-from typing import Any, Optional
 import getpass
 import os
 import sys
+from typing import Any, Optional
 
 from django.contrib.auth.management import get_default_username
+from django.contrib.auth.management.commands.createsuperuser import PASSWORD_FIELD
+from django.contrib.auth.management.commands.createsuperuser import (
+    Command as SuperUserCommand,
+)
+from django.contrib.auth.management.commands.createsuperuser import (
+    NotRunningInTTYException,
+)
 from django.contrib.auth.password_validation import validate_password
 from django.core import exceptions
 from django.core.management.base import CommandError
@@ -18,7 +20,7 @@ from ...models import User
 
 
 class Command(SuperUserCommand):
-    def handle(self, *args: Any, **options: Any) -> Optional[str]:
+    def handle(self, *args: Any, **options: Any) -> str | None:
         username = options[self.UserModel.USERNAME_FIELD]
         database = options["database"]
         user_data = {}
