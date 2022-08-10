@@ -253,11 +253,11 @@
         },
         "django-ckeditor": {
             "hashes": [
-                "sha256:3f1e963376e0d79c0db8d1b44e649d394565e3a71c16c212dcc85647e529ce1b",
-                "sha256:db40bf9958a3f5a3e6053ff8d034a320b08050d5a385e5bd4defd6956d27e77e"
+                "sha256:e8c37b694a852a9134c26598d6532db8eb98df183e32db04a7a6daa9d98e21f1",
+                "sha256:efb4e9b75e28be948c21342d6742b3201100b40589e94de13c6eecf9ba0daa8e"
             ],
             "index": "pypi",
-            "version": "==6.4.2"
+            "version": "==6.5.0"
         },
         "django-cleanup": {
             "hashes": [
@@ -518,7 +518,8 @@
             "hashes": [
                 "sha256:0741b7db4b3facdce60bd836e0fcc43911bc52c443f674f924afba7e02e79c18"
             ],
-            "markers": "python_full_version >= '3.6.2' and python_version < '4'",
+
+            "markers": "python_version < '4' and python_full_version >= '3.6.2'",
             "version": "==2.8.1"
         },
         "python-dotenv": {
