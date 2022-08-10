@@ -22,6 +22,7 @@ class User(AbstractUser, ResizeImageMixin):
         # We also (don't) want unique emails | Hours wasted : 0.1
         self._meta.get_field("username")._unique = False
         self._meta.get_field("username")._validators = [username_validator]
+        self._meta.get_field("username")._error_messages
 
     username_discriminator = models.IntegerField(
         blank=True,
