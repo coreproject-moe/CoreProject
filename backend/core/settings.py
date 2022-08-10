@@ -44,6 +44,8 @@ ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 # Application definition
 
 INSTALLED_APPS = [
+    # __user__ must be above auth
+    "apps.__user__",
     # Django stuff
     "django.contrib.admin",
     "django.contrib.auth",
@@ -69,8 +71,6 @@ INSTALLED_APPS = [
     "apps.api.v1.anime",
     "apps.api.v1.trackers",
     "apps.api.v1.characters",
-    # Rest stuff
-    "apps.__user__",
 ]
 # Debug Toolbar Add
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install-the-app

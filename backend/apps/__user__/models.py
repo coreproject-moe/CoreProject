@@ -5,9 +5,13 @@ from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 from django.db import models
 
+from .validators import username_validator
+
 from .mixins.resize import ResizeImageMixin
 
 # Create your models here.
+
+# Modify it with AbstractBaseUser
 
 
 class User(AbstractUser, ResizeImageMixin):
@@ -15,16 +19,13 @@ class User(AbstractUser, ResizeImageMixin):
         super().__init__(*args, **kwargs)
 
         # We dont want unique usernames
+        # We also (don't) want unique emails | Hours wasted : 0.1
         self._meta.get_field("username")._unique = False
-        self._meta.get_field("username")._validators = []
-
-        # But we want unique emails
-        self._meta.get_field("email")._unique = True
+        self._meta.get_field("username")._validators = [username_validator]
 
     username_discriminator = models.IntegerField(
-        default=1,
-        blank=False,
-        null=False,
+        blank=True,
+        null=True,
         validators=[
             RegexValidator(
                 regex=r"^(?=[\S\s]{1,%d}$)[\S\s]*"
@@ -44,12 +45,8 @@ class User(AbstractUser, ResizeImageMixin):
         ],
     )
 
-    @property
-    def get_username_and_discriminator(self) -> str:
+    def get_username_with_discriminator(self) -> str:
         return f"{self.username}#{str(self.username_discriminator).zfill(4)}"
-
-    def __str__(self) -> str:
-        return self.get_username_and_discriminator
 
     def save(self, *args, **kwargs) -> NoReturn:
         # if self.avatar:
@@ -57,6 +54,9 @@ class User(AbstractUser, ResizeImageMixin):
         #     self.avatar.save(f"{self.username}.avif", file, save=False)
 
         super().save(*args, **kwargs)
+
+    def __str__(self) -> str:
+        return self.get_username_with_discriminator()
 
     class Meta:
         unique_together = ("username", "username_discriminator")
