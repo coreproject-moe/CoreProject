@@ -1,6 +1,8 @@
 from typing import NoReturn
 
 from django.conf import settings
+# @todo
+# Modify it with AbstractBaseUser
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator, RegexValidator
 from django.db import models
@@ -9,8 +11,6 @@ from .mixins.resize import ResizeImageMixin
 from .validators import username_validator
 
 # Create your models here.
-
-# Modify it with AbstractBaseUser
 
 
 class User(AbstractUser, ResizeImageMixin):

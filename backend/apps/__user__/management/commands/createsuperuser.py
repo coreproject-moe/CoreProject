@@ -1,7 +1,7 @@
 import getpass
 import os
 import sys
-from typing import Any, Optional
+from typing import Any
 
 from django.contrib.auth.management import get_default_username
 from django.contrib.auth.management.commands.createsuperuser import PASSWORD_FIELD
@@ -169,7 +169,7 @@ class Command(SuperUserCommand):
             if options["verbosity"] >= 1:
                 # Hack here
                 self.stdout.write(
-                    "Created",
+                    "Created user with\n"
                     f"Username:{database.username}#{database.username_discriminator}",
                 )
                 self.stdout.write("Superuser created successfully.")
