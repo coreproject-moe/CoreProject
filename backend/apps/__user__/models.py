@@ -1,6 +1,7 @@
 from typing import NoReturn
 
 from django.conf import settings
+
 # @todo
 # Modify it with AbstractBaseUser
 from django.contrib.auth.models import AbstractUser
