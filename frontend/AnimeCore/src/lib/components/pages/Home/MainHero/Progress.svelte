@@ -1,13 +1,14 @@
 <script lang="ts">
-    import Timer from "easytimer.js";
-    import { createEventDispatcher,onDestroy, onMount } from "svelte";
+    // This is the first time i had to rename imports
+    import { Timer as EasyTimer } from "easytimer.js";
+    import { createEventDispatcher, onDestroy, onMount } from "svelte";
 
     const SWIPER_DELAY = 10;
     const dispatch = createEventDispatcher();
 
     let progressValue = 0;
 
-    let timer = new Timer({
+    let timer = new EasyTimer({
         target: {
             seconds: SWIPER_DELAY
         },
