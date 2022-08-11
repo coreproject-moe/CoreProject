@@ -59,5 +59,5 @@
     <!--
     <div class="carousel-item h-auto w-auto">
         <LibrarySlide />
-    </div> -->
+    </div>
 </div>
