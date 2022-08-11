@@ -20,7 +20,7 @@
     <title>AnimeCore</title>
 </svelte:head>
 
-<div class="h-screen carousel carousel-vertical">
+<div class="h-screen carousel carousel-vertical overscroll-auto">
     <div class="carousel-item h-auto w-auto">
         <Swiper
             modules={[EffectFade, Lazy]}
