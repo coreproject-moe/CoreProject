@@ -44,7 +44,8 @@ ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 # Application definition
 
 INSTALLED_APPS = [
-    # __user__ must be above auth
+    # Overridden apps
+    "apps.__flatpages__",
     "apps.__user__",
     # Django stuff
     "django.contrib.admin",
@@ -286,3 +287,11 @@ HUEY = PriorityRedisHuey(
 
 DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage"
 DBBACKUP_STORAGE_OPTIONS = {"location": os.path.join(BASE_DIR, "backup")}
+
+# CkEditor
+# https://github.com/django-ckeditor/django-ckeditor/issues/670
+CKEDITOR_CONFIGS = {
+    "default": {
+        "skin": "moono-dark",
+    }
+}
