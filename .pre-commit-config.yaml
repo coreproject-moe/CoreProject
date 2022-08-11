@@ -12,7 +12,6 @@ repos:
           - id: autoflake
             args:
                 [
-                    'autoflake',
                     '-i',
                     '--remove-all-unused-imports',
                     '--recursive',
