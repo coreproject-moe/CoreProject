@@ -1,4 +1,6 @@
 from django.http import HttpRequest
+from django.db.models import Q  
+
 from django.shortcuts import get_object_or_404
 from ninja import Query, Router
 from ninja.pagination import paginate
@@ -12,8 +14,22 @@ router = Router(tags=["characters"])
 
 @router.get("", response=list[CharacterSchema])
 @paginate
-def get_character_info(request: HttpRequest, filter: CharacterFilter = Query(...)):
+def get_character_info(request: HttpRequest, filters: CharacterFilter = Query(...)):
+    query_object = Q()
+    query_dict = filters.dict(exclude_none=True)
+
+    character_name = query_dict.pop("name", None)
+    if character_name:
+        query = Q()
+        for position in character_name.split(","):
+            query |= Q(**{f"name__icontains": position.strip()})
+        query_object &= query
+
     query = CharacterModel.objects.all()
+
+    if query_object:
+        query = query.filter(query_object).distinct()
+
     return query
 
 
