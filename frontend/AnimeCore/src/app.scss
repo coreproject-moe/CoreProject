@@ -67,6 +67,7 @@
 .swiper {
     height: 100%;
     width: 100%;
+    overscroll-behavior-y: contain;
 }
 
 /* This is the hack we are looking for */
