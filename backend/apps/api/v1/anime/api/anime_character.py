@@ -14,7 +14,6 @@ def get_individual_anime_character_info(request: HttpRequest, anime_id: int):
     query = get_list_or_404(
         get_object_or_404(AnimeModel, id=anime_id).anime_characters,
     )
-
     return query
 
 

@@ -71,6 +71,8 @@ INSTALLED_APPS = [
     "apps.api.v1.anime",
     "apps.api.v1.trackers",
     "apps.api.v1.characters",
+    "apps.api.v1.producers",
+    "apps.api.v1.studios",
 ]
 # Debug Toolbar Add
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install-the-app

@@ -1,6 +1,5 @@
 from django.contrib import admin
-
-from ..models import AnimeProducerModel
+from .models import AnimeProducerModel
 
 # Register your models here.
 

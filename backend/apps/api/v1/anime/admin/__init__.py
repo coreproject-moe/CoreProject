@@ -112,8 +112,6 @@ class AnimeInfoAdmin(admin.ModelAdmin):
 
 
 from .anime_genre import AnimeGenreAdmin
-from .anime_producer import AnimeProducerAdmin
-from .anime_studio import AnimeStudioAdmin
 from .anime_synonym import AnimeSynonymAdmin
 from .episode import EpisodeAdmin
 from .episode_comment import EpisodeCommentAdmin

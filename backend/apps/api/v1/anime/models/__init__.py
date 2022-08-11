@@ -3,9 +3,9 @@ from pathlib import Path
 from django.db import models
 
 from ...characters.models import CharacterModel
+from ...producers.models import AnimeProducerModel
 from .anime_genre import AnimeGenreModel
-from .anime_producer import AnimeProducerModel
-from .anime_studio import AnimeStudioModel
+from ...studios.models import AnimeStudioModel
 from .anime_synonym import AnimeSynonymModel
 from .anime_theme import AnimeThemeModel
 from .episode import EpisodeModel
@@ -68,11 +68,5 @@ class AnimeModel(models.Model):
 # Extra imports
 # __ DO NOT MODIFY __
 
-from .anime_genre import AnimeGenreModel
-from .anime_producer import AnimeProducerModel
-from .anime_studio import AnimeStudioModel
-from .anime_synonym import AnimeSynonymModel
-from .anime_theme import AnimeThemeModel
-from .episode import EpisodeModel
 from .episode_comment import EpisodeCommentModel
 from .episode_timestamp import EpisodeTimestampModel
