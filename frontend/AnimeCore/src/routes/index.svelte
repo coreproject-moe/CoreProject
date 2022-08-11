@@ -14,7 +14,7 @@
 </svelte:head>
 
 <div
-    class="text-white h-screen w-screen carousel carousel-vertical snap-none md:snap-x md:snap-mandatory"
+    class="h-screen w-screen carousel carousel-vertical text-white"
 >
     <div class="carousel-item h-auto w-auto inline-grid">
         {#each data as item, index}
