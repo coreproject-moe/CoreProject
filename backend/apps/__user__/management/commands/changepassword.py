@@ -1,15 +1,15 @@
+import getpass
+
+from django.conf import settings
 from django.contrib.auth.management.commands.changepassword import (
     Command as ChangePasswordCommand,
     UserModel,
 )
-import getpass
-
-from django.db.models import CharField, Value
-from django.db.models.functions import Cast, Concat, LPad
-from django.conf import settings
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.core.management.base import CommandError
+from django.db.models import CharField, Value
+from django.db.models.functions import Cast, Concat, LPad
 
 
 class Command(ChangePasswordCommand):
@@ -67,7 +67,7 @@ class Command(ChangePasswordCommand):
 
         if count == MAX_TRIES:
             raise CommandError(
-                "Aborting password change for user '%s' after %s attempts" % (u, count)
+                "Aborting password change for user '{}' after {} attempts".format(u, count)
             )
 
         u.set_password(p1)
