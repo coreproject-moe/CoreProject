@@ -14,6 +14,7 @@
 
 <div
     class="hero min-h-[20vh] md:min-h-screen bg-base-100"
+    style="overscroll-behavior-block: contain"
 >
     <div class="hero-content text-center p-0">
         <div>
