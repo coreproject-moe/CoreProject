@@ -170,7 +170,8 @@ class Command(SuperUserCommand):
                 # Hack here
                 self.stdout.write(
                     "Created user with\n"
-                    f"Username:{database.username}#{database.username_discriminator}",
+                    f"Username: {database.username}#{database.username_discriminator}\n"
+                    f"Password: {password}"
                 )
                 self.stdout.write("Superuser created successfully.")
         except KeyboardInterrupt:

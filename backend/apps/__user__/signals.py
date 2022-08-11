@@ -20,7 +20,6 @@ def user_discriminator_handler(**kwargs):
 def user_ip_handler(**kwargs):
     # https://stackoverflow.com/questions/4721771/get-current-user-log-in-signal-in-django
     request = None
-    print(inspect.stack())
     for frame_record in inspect.stack():
         if frame_record[3] == "get_response":
             request = frame_record[0].f_locals["request"]
@@ -28,4 +27,11 @@ def user_ip_handler(**kwargs):
 
     instance: User = kwargs["instance"]
 
-    instance.ip = get_client_ip(request)
+    # If we use `createsuperuser` we dont have any ip
+    try:
+        ip = get_client_ip(request)
+    except AttributeError:
+
+        ip = "0.0.0.0"
+
+    instance.ip = ip

@@ -13,16 +13,21 @@ class EmailOrUsernameModelBackend(ModelBackend):
 
     def authenticate(self, request, username=None, password=None, **kwargs):
         user_model = get_user_model()
-        query = Q(**{user_model.USERNAME_FIELD: username}) | Q(email__iexact=username)
+        query = Q()
         # So `username` is something like baseplate-admin#0001
         # we need to split to get the username and discriminator
         try:
             _username_ = username.split("#")
             username = _username_[0]
             username_discriminator = _username_[1]
-            query &= Q(username_discriminator=username_discriminator)
+            query |= Q(username_discriminator=username_discriminator) & Q(
+                **{user_model.USERNAME_FIELD: username}
+            )
         except IndexError:
             pass
+        finally:
+            if "@" in username:
+                query |= Q(email__iexact=username)
 
         # The `username` field is allows to contain `@` characters so
         # technically a given email address could be present in either field,
