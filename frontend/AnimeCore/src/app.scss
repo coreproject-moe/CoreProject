@@ -74,7 +74,11 @@
     height: auto;
     width: auto;
 }
-
+html {
+    // DO NOT REMOVE
+    // I wasted 2 hours of my life fixing this
+    overscroll-behavior-block: contain;
+}
 body {
     overscroll-behavior: contain;
     scrollbar-width: none;
