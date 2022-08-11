@@ -1,7 +1,7 @@
-from ninja import Router
 from django.http import HttpRequest
+from ninja import Router
 
-from ..schemas import TrackerSchema, TrackerDeleteSchema
+from ..schemas import TrackerDeleteSchema, TrackerSchema
 
 router = Router(tags=["trackers"])
 
