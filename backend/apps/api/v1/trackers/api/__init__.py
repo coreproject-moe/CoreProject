@@ -1,6 +1,20 @@
 from ninja import Router
+from django.http import HttpRequest
 
-router = Router()
+from ..schemas import TrackerSchema, TrackerDeleteSchema
+
+router = Router(tags=["trackers"])
+
+
+@router.post("", response=TrackerSchema)
+def update_user_tracker_info(request: HttpRequest, payload: TrackerSchema):
+    pass
+
+
+@router.delete("", response=TrackerDeleteSchema)
+def delete_user_tracker_info(request: HttpRequest, payload: TrackerDeleteSchema):
+    pass
+
 
 from .anilist import router as anilist_router
 from .kitsu import router as kitsu_router
