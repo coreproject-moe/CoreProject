@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { FreeMode, Mousewheel } from "swiper";
+    import { Mousewheel } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import voca from "voca";
 
