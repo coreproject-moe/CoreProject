@@ -30,7 +30,7 @@
                 show from my list only <ChevronDown height={25} width={25} />
             </p>
             <div
-                class="h-28 md:h-[530px] w-96 md:w-80 carousel gap-6 carousel-center md:carousel-vertical"
+                class="h-28 md:h-[530px] w-96 md:w-80 carousel gap-6 overscroll-y-contain carousel-center md:carousel-vertical"
             >
                 {#each latestEpisodes as item}
                     <div
