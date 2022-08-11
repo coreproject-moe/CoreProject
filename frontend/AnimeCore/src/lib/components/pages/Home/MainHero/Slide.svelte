@@ -166,6 +166,18 @@
             <ScrollArea
                 style="height:72px"
                 class="font-bold leading-8 md:leading-[4.25rem] text-3xl md:text-6xl"
+                on:mouseenter={() => {
+                    progress.pause();
+                }}
+                on:mouseleave={() => {
+                    progress.start();
+                }}
+                on:touchstart={() => {
+                    progress.pause();
+                }}
+                on:touchend={() => {
+                    progress.start();
+                }}
             >
                 {animeTitle}
             </ScrollArea>
@@ -182,6 +194,18 @@
                 style="min-height:110px"
                 class="max-h-24 font-normal text-gray-400 prose [text-shadow:-1px_-1px_0_#0000009e,1px_-1px_0_#0000008c,0px_1px_0_#0000009e,1px_0px_0_#00000061]"
                 offsetScrollbar
+                on:mouseenter={() => {
+                    progress.pause();
+                }}
+                on:mouseleave={() => {
+                    progress.start();
+                }}
+                on:touchstart={() => {
+                    progress.pause();
+                }}
+                on:touchend={() => {
+                    progress.start();
+                }}
             >
                 {animeSummary}
             </ScrollArea>
