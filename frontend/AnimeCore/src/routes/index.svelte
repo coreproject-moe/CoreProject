@@ -8,13 +8,8 @@
     import MainHeroSlide from "$components/pages/Home/MainHero/Slide.svelte";
     import data from "$data/mock/main_hero_data.json";
 
-    let rootSwiper: Partial<SwiperType>;
     let mainHeroSwiper: Partial<SwiperType>;
 
-    const onRootSwiper = (e: CustomEvent) => {
-        const [swiper] = e.detail;
-        rootSwiper = swiper;
-    };
     const onMainHeroSwiper = (e: CustomEvent) => {
         const [swiper] = e.detail;
         mainHeroSwiper = swiper;
@@ -25,55 +20,43 @@
     <title>AnimeCore</title>
 </svelte:head>
 
-<div class="h-screen">
-    <Swiper
-        speed={600}
-        spaceBetween={0}
-        direction="vertical"
-        slidesPerView="auto"
-        modules={[Mousewheel]}
-        mousewheel
-        class="text-white"
-        on:swiper={onRootSwiper}
-    >
-        <SwiperSlide>
-            <Swiper
-                modules={[EffectFade, Lazy]}
-                effect="fade"
-                direction="horizontal"
-                slidesPerView={1}
-                on:swiper={onMainHeroSwiper}
-                loop
-                lazy
-            >
-                {#each data as item}
-                    <SwiperSlide let:data={{ isActive, isDuplicate, isVisible, isPrev, isNext }}>
-                        <MainHeroSlide
-                            {isPrev}
-                            {isNext}
-                            {isActive}
-                            {isDuplicate}
-                            {isVisible}
-                            {rootSwiper}
-                            {mainHeroSwiper}
-                            animeTitle={item.animeTitle}
-                            animeSummary={item.animeSummary}
-                            animeEpisodeCount={item.animeEpisodeCount}
-                            animeStudio={item.animeStudio}
-                            animeAirTime={item.animeAirTime}
-                            backgroundImage={item.backgroundImage}
-                            backgroundBanner={item.backgroundBanner}
-                            tags={item.tags}
-                        />
-                    </SwiperSlide>
-                {/each}
-            </Swiper>
-        </SwiperSlide>
-        <SwiperSlide>
-            <GenreSlide />
-        </SwiperSlide>
-        <SwiperSlide>
-            <LibrarySlide {rootSwiper} />
-        </SwiperSlide>
-    </Swiper>
+<div class="h-screen carousel carousel-vertical">
+    <div class="carousel-item h-auto w-auto">
+        <Swiper
+            modules={[EffectFade, Lazy]}
+            effect="fade"
+            direction="horizontal"
+            slidesPerView={1}
+            on:swiper={onMainHeroSwiper}
+            loop
+            lazy
+        >
+            {#each data as item}
+                <SwiperSlide let:data={{ isActive, isDuplicate, isVisible, isPrev, isNext }}>
+                    <MainHeroSlide
+                        {isPrev}
+                        {isNext}
+                        {isActive}
+                        {isDuplicate}
+                        {isVisible}
+                        {mainHeroSwiper}
+                        animeTitle={item.animeTitle}
+                        animeSummary={item.animeSummary}
+                        animeEpisodeCount={item.animeEpisodeCount}
+                        animeStudio={item.animeStudio}
+                        animeAirTime={item.animeAirTime}
+                        backgroundImage={item.backgroundImage}
+                        backgroundBanner={item.backgroundBanner}
+                        tags={item.tags}
+                    />
+                </SwiperSlide>
+            {/each}
+        </Swiper>
+    </div>
+    <div class="carousel-item h-auto w-auto">
+        <GenreSlide />
+    </div>
+    <div class="carousel-item h-auto w-auto">
+        <LibrarySlide />
+    </div>
 </div>

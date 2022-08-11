@@ -13,7 +13,6 @@
 
     import Progress from "./Progress.svelte";
 
-    export let rootSwiper: Partial<SwiperType>;
     export let mainHeroSwiper: Partial<SwiperType>;
 
     export let isPrev: boolean;
@@ -39,16 +38,6 @@
     $: tablet = $responsiveMode === "tablet";
     $: mobile = $responsiveMode === "mobile";
 
-    // Event listener to reset the timer on slide change
-    $: rootSwiper?.on?.("slideChange", () => {
-        if (rootSwiper?.realIndex === 0) {
-            progress?.reset?.();
-            progress?.start?.();
-        } else {
-            progress?.pause?.();
-        }
-    });
-
     interface IProgress extends SvelteComponent {
         start: () => void;
         reset: () => void;
@@ -68,18 +57,6 @@
             background = backgroundImage; // This is the default one
         }
     }
-
-    const disableScroll = () => {
-        rootSwiper.mousewheel?.disable();
-        rootSwiper.allowTouchMove = false;
-        progress.pause?.();
-    };
-    const enableScroll = () => {
-        rootSwiper.mousewheel?.enable();
-        rootSwiper.allowTouchMove = true;
-
-        progress.start?.();
-    };
 
     const timerEnded = () => {
         mainHeroSwiper.slideNext?.();
@@ -172,10 +149,6 @@
             <ScrollArea
                 style="height:72px"
                 class="font-bold leading-8 md:leading-[4.25rem] text-3xl md:text-6xl"
-                on:mouseenter={disableScroll}
-                on:mouseleave={enableScroll}
-                on:touchstart={disableScroll}
-                on:touchend={enableScroll}
             >
                 {animeTitle}
             </ScrollArea>
@@ -191,10 +164,6 @@
                 parentClass="mb-5"
                 style="min-height:110px"
                 class="max-h-24 font-normal text-gray-400 prose [text-shadow:-1px_-1px_0_#0000009e,1px_-1px_0_#0000008c,0px_1px_0_#0000009e,1px_0px_0_#00000061]"
-                on:mouseenter={disableScroll}
-                on:mouseleave={enableScroll}
-                on:touchstart={disableScroll}
-                on:touchend={enableScroll}
                 offsetScrollbar
             >
                 {animeSummary}
