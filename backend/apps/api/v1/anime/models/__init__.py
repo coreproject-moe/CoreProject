@@ -4,8 +4,8 @@ from django.db import models
 
 from ...characters.models import CharacterModel
 from ...producers.models import AnimeProducerModel
-from .anime_genre import AnimeGenreModel
 from ...studios.models import AnimeStudioModel
+from .anime_genre import AnimeGenreModel
 from .anime_synonym import AnimeSynonymModel
 from .anime_theme import AnimeThemeModel
 from .episode import EpisodeModel
