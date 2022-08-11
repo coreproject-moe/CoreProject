@@ -22,7 +22,10 @@
     mylistAnimeNameWordCount ??= 25;
 </script>
 
-<div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
+<div
+    class="hero min-h-[20vh] md:min-h-screen bg-base-100"
+    style="overscroll-behavior-block: contain"
+>
     <div class="hero-content text-center flex-col md:flex-row">
         <div class="flex flex-col gap-3">
             <p class="text-3xl font-bold flex">Latest Episode</p>
