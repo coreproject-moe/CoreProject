@@ -25,7 +25,6 @@
 
 from android.runnable import run_on_ui_thread
 from jnius import PythonJavaClass, autoclass, cast, java_method
-from kivy.clock import Clock
 from kivy.uix.modalview import ModalView
 
 WebViewA = autoclass("android.webkit.WebView")

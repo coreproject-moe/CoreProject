@@ -1,5 +1,4 @@
 from kivy.app import App
-from kivy.core.window import Window
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
@@ -59,7 +58,6 @@ class BrowserApp(App):
     def on_resume(self):
         if self.browser:
             self.browser.resume()
-        pass
 
 
 BrowserApp().run()
