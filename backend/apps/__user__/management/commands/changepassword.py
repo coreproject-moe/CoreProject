@@ -67,7 +67,9 @@ class Command(ChangePasswordCommand):
 
         if count == MAX_TRIES:
             raise CommandError(
-                "Aborting password change for user '{}' after {} attempts".format(u, count)
+                "Aborting password change for user '{}' after {} attempts".format(
+                    u, count
+                )
             )
 
         u.set_password(p1)
