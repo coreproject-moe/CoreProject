@@ -13,7 +13,9 @@
     <title>AnimeCore</title>
 </svelte:head>
 
-<div class="h-screen w-screen carousel carousel-vertical text-white">
+<div
+    class="h-screen w-screen carousel carousel-vertical snap-none md:snap-y md:snap-mandatory text-white"
+>
     <div class="carousel-item h-auto w-auto inline-grid">
         {#each data as item, index}
             {#if index === mainHeroSlideActiveIndex}
