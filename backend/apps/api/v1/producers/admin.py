@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from .models import AnimeProducerModel
+from .models import ProducerModel
 
 # Register your models here.
 
 
-@admin.register(AnimeProducerModel)
-class AnimeProducerAdmin(admin.ModelAdmin):
+@admin.register(ProducerModel)
+class ProducerAdmin(admin.ModelAdmin):
     search_fields = ["name"]

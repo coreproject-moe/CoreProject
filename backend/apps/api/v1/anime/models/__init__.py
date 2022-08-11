@@ -3,7 +3,7 @@ from pathlib import Path
 from django.db import models
 
 from ...characters.models import CharacterModel
-from ...producers.models import AnimeProducerModel
+from ...producers.models import ProducerModel
 from ...studios.models import AnimeStudioModel
 from .anime_genre import AnimeGenreModel
 from .anime_synonym import AnimeSynonymModel
@@ -49,7 +49,7 @@ class AnimeModel(models.Model):
     anime_genres = models.ManyToManyField(AnimeGenreModel, blank=True)
     anime_themes = models.ManyToManyField(AnimeThemeModel, blank=True)
     anime_studios = models.ManyToManyField(AnimeStudioModel, blank=True)
-    anime_producers = models.ManyToManyField(AnimeProducerModel, blank=True)
+    anime_producers = models.ManyToManyField(ProducerModel, blank=True)
     anime_name_synonyms = models.ManyToManyField(AnimeSynonymModel, blank=True)
     anime_episodes = models.ManyToManyField(EpisodeModel, blank=True)
     anime_recommendation = models.ManyToManyField("self", blank=True)
