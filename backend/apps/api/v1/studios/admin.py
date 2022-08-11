@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from .models import AnimeStudioModel
+from .models import StudioModel
 
 # Register your models here.
 
 
-@admin.register(AnimeStudioModel)
-class AnimeStudioAdmin(admin.ModelAdmin):
+@admin.register(StudioModel)
+class StudioAdmin(admin.ModelAdmin):
     search_fields = ["name"]

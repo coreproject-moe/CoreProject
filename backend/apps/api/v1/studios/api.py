@@ -4,16 +4,16 @@ from django.shortcuts import get_object_or_404
 from ninja import Query, Router
 from ninja.pagination import paginate
 
-from .filters import ProducerFilter
-from .models import ProducerModel
-from .schemas import ProducerSchema
+from .filters import StudioFilter
+from .models import StudioModel
+from .schemas import StudioSchema
 
-router = Router(tags=["producers"])
+router = Router(tags=["studios"])
 
 
-@router.get("", response=list[ProducerSchema])
+@router.get("", response=list[StudioSchema])
 @paginate
-def get_producer_info(request: HttpRequest, filters: ProducerFilter = Query(...)):
+def get_studio_info(request: HttpRequest, filters: StudioFilter = Query(...)):
     query_object = Q()
     query_dict = filters.dict(exclude_none=True)
 
@@ -24,7 +24,7 @@ def get_producer_info(request: HttpRequest, filters: ProducerFilter = Query(...)
             query |= Q(**{f"name__icontains": position.strip()})
         query_object &= query
 
-    query = ProducerModel.objects.all()
+    query = StudioModel.objects.all()
 
     if query_object:
         query = query.filter(query_object).distinct()
@@ -32,7 +32,7 @@ def get_producer_info(request: HttpRequest, filters: ProducerFilter = Query(...)
     return query
 
 
-@router.get("/{str:producer_id}/", response=ProducerSchema)
-def get_individual_producer_info(request: HttpRequest, producer_id: str):
-    queryset = get_object_or_404(ProducerModel, id=producer_id)
+@router.get("/{str:studio_id}/", response=StudioSchema)
+def get_individual_studio_info(request: HttpRequest, studio_id: str):
+    queryset = get_object_or_404(StudioModel, id=studio_id)
     return queryset

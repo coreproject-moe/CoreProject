@@ -88,7 +88,6 @@ class AnimeInfoPOSTSchema(ModelSchema):
 
 
 from .anime_genre import AnimeGenreSchema
-from .anime_studios import AnimeStudioSchema
 from .anime_theme import AnimeThemeSchema
 from .episode import EpisodeGETSchema, EpisodePOSTSchema
 from .episode_comment import EpisodeCommentGETSchema, EpisodeCommentPOSTSchema
