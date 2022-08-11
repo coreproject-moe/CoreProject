@@ -53,10 +53,9 @@
             {/each}
         </Swiper>
     </div>
-    <div class="carousel-item h-auto w-auto">
+    <!-- <div class="carousel-item h-auto w-auto">
         <GenreSlide />
     </div>
-    <!--
     <div class="carousel-item h-auto w-auto">
         <LibrarySlide />
     </div>
