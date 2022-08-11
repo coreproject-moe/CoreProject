@@ -1,6 +1,4 @@
 <script lang="ts">
-    export let rootSwiper: Partial<SwiperType>;
-
     import type { Swiper as SwiperType } from "swiper";
     import { FreeMode, Mousewheel } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
@@ -9,7 +7,7 @@
     import continueWatching from "$data/mock/continue_watching.json";
     import latestEpisodes from "$data/mock/latest_episode.json";
     import myList from "$data/mock/my_list.json";
-import ChevronDown from "$icons/Chevron-Down.svelte";
+    import ChevronDown from "$icons/Chevron-Down.svelte";
     import Play from "$icons/Play.svelte";
     import { responsiveMode } from "$store/Responsive";
 
@@ -23,15 +21,6 @@ import ChevronDown from "$icons/Chevron-Down.svelte";
 
     let mylistAnimeNameWordCount: number;
     mylistAnimeNameWordCount ??= 25;
-
-    const disableRootSwiperScroll = () => {
-        rootSwiper?.mousewheel?.disable();
-        if (rootSwiper) rootSwiper.allowTouchMove = false;
-    };
-    const enableRootSwiperScroll = () => {
-        rootSwiper?.mousewheel?.enable();
-        if (rootSwiper) rootSwiper.allowTouchMove = true;
-    };
 </script>
 
 <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
@@ -41,13 +30,7 @@ import ChevronDown from "$icons/Chevron-Down.svelte";
             <p class="flex gap-2">
                 show from my list only <ChevronDown height={25} width={25} />
             </p>
-            <div
-                class="h-28 md:h-[530px] w-96 md:w-80"
-                on:mouseenter={disableRootSwiperScroll}
-                on:touchstart={disableRootSwiperScroll}
-                on:mouseleave={enableRootSwiperScroll}
-                on:touchend={enableRootSwiperScroll}
-            >
+            <div class="h-28 md:h-[530px] w-96 md:w-80">
                 <Swiper
                     direction={mobile ? "horizontal" : "vertical"}
                     modules={[Mousewheel, FreeMode]}
@@ -96,13 +79,7 @@ import ChevronDown from "$icons/Chevron-Down.svelte";
         <div class="divider lg:divider-horizontal hidden md:flex before:bg-white after:bg-white" />
         <div class="flex flex-col">
             <p class="font-bold text-3xl items-start flex pb-4">Continue Watching</p>
-            <div
-                class="h-28 md:h-[200px] w-96 md:w-[70vw]"
-                on:mouseenter={disableRootSwiperScroll}
-                on:touchstart={disableRootSwiperScroll}
-                on:mouseleave={enableRootSwiperScroll}
-                on:touchend={enableRootSwiperScroll}
-            >
+            <div class="h-28 md:h-[200px] w-96 md:w-[70vw]">
                 <Swiper
                     speed={600}
                     direction="horizontal"
@@ -150,13 +127,7 @@ import ChevronDown from "$icons/Chevron-Down.svelte";
                 <ChevronDown color="white" height="24" width="24" />
             </div>
 
-            <div
-                class="w-96 md:w-[70vw]"
-                on:mouseenter={disableRootSwiperScroll}
-                on:touchstart={disableRootSwiperScroll}
-                on:mouseleave={enableRootSwiperScroll}
-                on:touchend={enableRootSwiperScroll}
-            >
+            <div class="w-96 md:w-[70vw]">
                 <Swiper
                     speed={600}
                     direction="horizontal"

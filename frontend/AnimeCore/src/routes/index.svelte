@@ -1,6 +1,6 @@
 <script lang="ts">
     import type { Swiper as SwiperType } from "swiper";
-    import { EffectFade, Lazy } from "swiper";
+    import { EffectFade, Lazy, Mousewheel } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
 
     import GenreSlide from "$components/pages/Home/Genre/Slide.svelte";
