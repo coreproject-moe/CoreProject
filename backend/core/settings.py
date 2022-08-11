@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     # __user__ must be above auth
     "apps.__user__",
     # Django stuff
-    "django.contrib.admin",
+    "core.apps.CoreProjectAdminConfig",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",

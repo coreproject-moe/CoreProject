@@ -1,5 +1,7 @@
 from django.conf import settings
 from django.contrib import admin
+from core.admin import site
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin
 from django.db.models import CharField, Value
@@ -109,4 +111,4 @@ class CustomUserAdmin(UserAdmin):
         return queryset, may_have_duplicates
 
 
-admin.site.register(get_user_model(), CustomUserAdmin)
+site.register(get_user_model(), CustomUserAdmin)

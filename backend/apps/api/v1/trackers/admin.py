@@ -1,7 +1,7 @@
-from django.contrib import admin
+from core.admin import site
 
 from .models import AnilistModel, KitsuModel, MalModel
 
 # Register your models here.
 
-admin.site.register([AnilistModel, MalModel, KitsuModel])
+site.register([AnilistModel, MalModel, KitsuModel])
