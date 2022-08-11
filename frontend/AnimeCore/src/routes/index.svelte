@@ -1,26 +1,43 @@
 <script lang="ts">
-    import { blur } from "svelte/transition";
+    import type { Swiper as SwiperType } from "swiper";
+    import { EffectFade, Lazy } from "swiper";
+    import { Swiper, SwiperSlide } from "swiper/svelte";
 
-    import GenreSlide from "$components/pages/Home/Genre/Slide.svelte";
-    import LibrarySlide from "$components/pages/Home/Library/Slide.svelte";
     import MainHeroSlide from "$components/pages/Home/MainHero/Slide.svelte";
     import data from "$data/mock/main_hero_data.json";
 
-    let mainHeroSlideActiveIndex = 0;
+    let mainHeroSwiper: Partial<SwiperType>;
+
+    const onMainHeroSwiper = (e: CustomEvent) => {
+        const [swiper] = e.detail;
+        mainHeroSwiper = swiper;
+    };
 </script>
 
 <svelte:head>
     <title>AnimeCore</title>
 </svelte:head>
 
-<div class="h-screen w-screen carousel carousel-vertical text-white">
-    <div class="carousel-item h-auto w-auto inline-grid">
-        {#each data as item, index}
-            {#if index === mainHeroSlideActiveIndex}
-                <div transition:blur|local style="grid-area: 1 / 1 / 2 / 2">
+<div class="h-screen carousel carousel-vertical overscroll-auto">
+    <div class="carousel-item h-auto w-auto">
+        <Swiper
+            modules={[EffectFade, Lazy]}
+            effect="fade"
+            direction="horizontal"
+            slidesPerView={1}
+            on:swiper={onMainHeroSwiper}
+            loop
+            lazy
+        >
+            {#each data as item}
+                <SwiperSlide let:data={{ isActive, isDuplicate, isVisible, isPrev, isNext }}>
                     <MainHeroSlide
-                        bind:mainHeroSlideActiveIndex
-                        {data}
+                        {isPrev}
+                        {isNext}
+                        {isActive}
+                        {isDuplicate}
+                        {isVisible}
+                        {mainHeroSwiper}
                         animeTitle={item.animeTitle}
                         animeSummary={item.animeSummary}
                         animeEpisodeCount={item.animeEpisodeCount}
@@ -30,14 +47,15 @@
                         backgroundBanner={item.backgroundBanner}
                         tags={item.tags}
                     />
-                </div>
-            {/if}
-        {/each}
+                </SwiperSlide>
+            {/each}
+        </Swiper>
     </div>
     <div class="carousel-item h-auto w-auto">
         <GenreSlide />
     </div>
+    <!--
     <div class="carousel-item h-auto w-auto">
         <LibrarySlide />
-    </div>
+    </div> -->
 </div>

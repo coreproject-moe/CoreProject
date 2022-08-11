@@ -1,5 +1,6 @@
 <script lang="ts">
     import type { SvelteComponent } from "svelte";
+    import type { Swiper as SwiperType } from "swiper";
 
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
@@ -12,8 +13,14 @@
 
     import Progress from "./Progress.svelte";
 
-    export let data: string[];
-    export let mainHeroSlideActiveIndex: number;
+    export let mainHeroSwiper: Partial<SwiperType>;
+
+    export let isPrev: boolean;
+    export let isNext: boolean;
+    export let isVisible: boolean;
+    export let isDuplicate: boolean;
+    export let isActive: boolean;
+
     export let animeTitle: string;
     export let animeSummary: string;
     export let animeEpisodeCount: number;
@@ -38,10 +45,6 @@
     }
     let progress: IProgress;
 
-    const timerEnded = () => {
-        addOneToMainHeroSlideActiveIndex();
-    };
-
     let background: string;
     $: {
         if (mobile) {
@@ -55,34 +58,22 @@
         }
     }
 
-    const addOneToMainHeroSlideActiveIndex = () => {
-        if (mainHeroSlideActiveIndex + 1 === data.length) {
-            mainHeroSlideActiveIndex = 0;
-            return;
-        }
-        mainHeroSlideActiveIndex += 1;
-    };
-
-    const minusOneToMainHeroSlideActiveIndex = () => {
-        if (mainHeroSlideActiveIndex === 0) {
-            mainHeroSlideActiveIndex = data.length - 1;
-            return;
-        }
-        mainHeroSlideActiveIndex -= 1;
+    const timerEnded = () => {
+        mainHeroSwiper.slideNext?.();
     };
 </script>
 
 <svelte:window
     on:focus={() => {
-        progress?.start?.();
+        if (isActive) progress?.start?.();
     }}
     on:blur={() => {
-        progress?.pause?.();
+        if (isActive) progress?.pause?.();
     }}
 />
 
 <div
-    class="hero min-h-[60vh] md:min-h-screen w-screen bg-center bg-no-repeat"
+    class="hero min-h-[60vh] md:min-h-screen bg-center bg-no-repeat"
     style="background-image: url('{background}');"
 >
     <div
@@ -97,20 +88,33 @@
         >
             <div class="hidden md:flex" />
             <div class="flex items-center gap-3">
-                <Progress bind:this={progress} on:targetAchieved={timerEnded} />
+                {#if isActive}
+                    <Progress bind:this={progress} on:targetAchieved={timerEnded} />
+                {:else}
+                    <!-- Placeholder to prevent layout shift -->
+                    <progress class="progress progress-secondary w-40" value={0} max={100} />
+                {/if}
 
                 <div
                     class="w-40 flex justify-center swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"
                 >
                     {#each Array(10) as _, index}
-                        <!-- Pagination Logic -->
+                        <span
+                            class="swiper-pagination-bullet {mainHeroSwiper?.activeIndex ===
+                            index + 1
+                                ? 'swiper-pagination-bullet-active'
+                                : ''}"
+                            on:click={() => {
+                                mainHeroSwiper?.slideTo?.(index + 1);
+                            }}
+                        />
                     {/each}
                 </div>
                 <div class="gap-4 hidden md:flex">
                     <button
                         class="btn btn-secondary btn-sm btn-square"
                         on:click={() => {
-                            minusOneToMainHeroSlideActiveIndex();
+                            mainHeroSwiper?.slidePrev?.();
                         }}
                     >
                         <ChevronLeft height={24} width={24} color="black" />
@@ -118,7 +122,7 @@
                     <button
                         class="btn btn-secondary btn-sm btn-square"
                         on:click={() => {
-                            addOneToMainHeroSlideActiveIndex();
+                            mainHeroSwiper?.slideNext?.();
                         }}
                     >
                         <ChevronRight height={24} width={24} color="black" />
