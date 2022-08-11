@@ -16,6 +16,7 @@ repos:
                     "--remove-all-unused-imports",
                     "--recursive",
                     "--ignore-init-module-imports",
+                    "--expand-star-imports"
                 ]
 
     - repo: https://github.com/psf/black
