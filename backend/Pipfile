@@ -22,6 +22,7 @@ redis = "*"
 hiredis = {version="*", markers="sys_platform != 'win32'"}
 # Rest framework
 django-ninja = "*"
+# HTTP Client
 requests = "*"
 requests-cache = "*"
 requests-ratelimiter = "*"
@@ -29,12 +30,13 @@ requests-ratelimiter = "*"
 uwsgi = {version="*", markers="sys_platform != 'win32'"}
 pillow = "*"
 
-
 [dev-packages]
-black = "*"
 django-debug-toolbar = "*"
 django-dbbackup = "*"
 django-cprofile-middleware = "*"
+# Code formatting
+autoflake = "*"
+black = "*"
 
 [requires]
 python_version = "3.10"
