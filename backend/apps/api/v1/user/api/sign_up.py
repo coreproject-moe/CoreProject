@@ -8,6 +8,6 @@ from ..schemas import SignupSchema, UserSchema
 router = Router()
 
 
-@router.post("/signup", response=UserSchema)
+@router.post("/sign_up", response=UserSchema)
 def post_user_signup_info(request: HttpRequest, payload: SignupSchema):
-    return user
+    return get_user_model().objects.create(**payload.dict(exclude_none=True))

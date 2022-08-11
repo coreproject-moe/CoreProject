@@ -6,8 +6,9 @@ from .utilities import get_random_username_discriminator
 
 
 @receiver(pre_save, sender=User)
-def user_handler(sender, **kwargs):
+def user_discriminator_handler(**kwargs):
     instance = kwargs["instance"]
-    instance.username_discriminator = get_random_username_discriminator(
-        username=instance.username
-    )
+    if not instance.username_discriminator:
+        instance.username_discriminator = get_random_username_discriminator(
+            username=instance.username
+        )
