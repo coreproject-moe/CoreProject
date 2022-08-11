@@ -1,7 +1,7 @@
-from core.admin import site as admin
+from django.contrib import admin
 
 from .models import CharacterModel
 
 # Register your models here.
 
-admin.register([CharacterModel])
+admin.site.register([CharacterModel])

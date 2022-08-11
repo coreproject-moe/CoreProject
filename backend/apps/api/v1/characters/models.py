@@ -21,8 +21,9 @@ class CharacterModel(models.Model):
         upload_to=FileField.anime_charater, default=None, blank=True, null=True
     )
 
-    class Meta:
-        verbose_name = "Anime Character"
-
     def __str__(self) -> str:
         return f"{self.mal_id}. {self.name}"
+
+    class Meta:
+        app_label = "anime"
+        verbose_name = "Anime Character"

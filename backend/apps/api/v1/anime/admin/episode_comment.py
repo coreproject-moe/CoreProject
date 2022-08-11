@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.contrib import admin
-from core.admin import site
 from django.db.models import CharField, Value
 from django.db.models.functions import Cast, Concat, LPad
 
@@ -9,6 +8,7 @@ from ..models import EpisodeCommentModel
 # Register your models here.
 
 
+@admin.register(EpisodeCommentModel)
 class EpisodeCommentAdmin(admin.ModelAdmin):
     autocomplete_fields = ["user"]
     list_filters = ["user"]
@@ -42,6 +42,3 @@ class EpisodeCommentAdmin(admin.ModelAdmin):
             )
 
         return queryset, may_have_duplicates
-
-
-site.register(EpisodeCommentModel, EpisodeCommentAdmin)

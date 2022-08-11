@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.contrib import admin
-from core.admin import site
 from django.db.models import CharField, Value
 from django.db.models.functions import Cast, Concat, LPad
 
@@ -9,6 +8,7 @@ from ..models import EpisodeTimestampModel
 # Register your models here.
 
 
+@admin.register(EpisodeTimestampModel)
 class EpisodeTimestampAdmin(admin.ModelAdmin):
     autocomplete_fields = ["user", "episode"]
     list_filter = ["user", "episode"]
@@ -42,6 +42,3 @@ class EpisodeTimestampAdmin(admin.ModelAdmin):
             )
 
         return queryset, may_have_duplicates
-
-
-site.register(EpisodeTimestampModel, EpisodeTimestampAdmin)

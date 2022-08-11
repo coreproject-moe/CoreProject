@@ -1,10 +1,10 @@
 from django.contrib import admin
 from ..models import AnimeModel
-from core.admin import site
 
 # Register your models here.
 
 
+@admin.register(AnimeModel)
 class AnimeInfoAdmin(admin.ModelAdmin):
     filter_horizontal = [
         "anime_genres",
@@ -100,8 +100,13 @@ class AnimeInfoAdmin(admin.ModelAdmin):
         ),
     )
 
+    def get_app_list():
+        x = super().get_app_list()
 
-site.register(AnimeModel, AnimeInfoAdmin)
+        print(x)
+        return x
+
+
 # https://stackoverflow.com/questions/49293901/hide-model-from-main-admin-list-but-allow-creation-in-inline-editor
 # def has_module_permission(self, request):
 #     return False

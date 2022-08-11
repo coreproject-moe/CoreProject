@@ -20,7 +20,6 @@ from django.urls import include, path
 from django.views.generic import TemplateView
 
 from .api import api
-from .admin import site
 
 handler400 = TemplateView.as_view(template_name="400.html")
 handler403 = TemplateView.as_view(template_name="403.html")
@@ -28,7 +27,7 @@ handler404 = TemplateView.as_view(template_name="404.html")
 handler500 = TemplateView.as_view(template_name="500.html")
 
 urlpatterns = [
-    path("admin/", site.urls),
+    path("admin/", admin.site.urls),
     #   ckEditor
     # ==============
     path("ckeditor/", include("ckeditor_uploader.urls")),
