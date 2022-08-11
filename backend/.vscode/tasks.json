@@ -1,0 +1,28 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "autoflake.removeUnusedImports",
+            "command": "${command:python.interpreterPath}", //or "${command:python.interpreterPath}\\..\\Activate.ps1\r\n",
+            "args": [
+                "-m",
+                "autoflake",
+                "-i",
+                "--remove-all-unused-imports",
+                "--recursive",
+                "${workspaceFolder}"
+            ],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "dedicated",
+                "showReuseMessage": false,
+                "clear": false,
+                "close": false
+            },
+            "problemMatcher": []
+        }
+    ]
+}
