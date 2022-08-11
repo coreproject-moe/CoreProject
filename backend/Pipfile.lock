@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "fa12d04ae06c4a4adadfd3b802d609217368472e3146ed5d6ffb7d6884ec2f59"
+            "sha256": "ff75a630dc5605b34fd2b3f3fb592fe7c82aeb480cfeb07e1ed24d785127b4c4"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -243,7 +243,9 @@
             "version": "==1.2.13"
         },
         "django": {
-            "extras": ["argon2"],
+            "extras": [
+                "argon2"
+            ],
             "hashes": [
                 "sha256:031ccb717782f6af83a0063a1957686e87cb4581ea61b47b3e9addf60687989a",
                 "sha256:032f8a6fc7cf05ccd1214e4a2e21dfcd6a23b9d575c6573cacc8c67828dbe642"
@@ -617,7 +619,9 @@
             "version": "==2.0.20"
         },
         "whitenoise": {
-            "extras": ["brotli"],
+            "extras": [
+                "brotli"
+            ],
             "hashes": [
                 "sha256:8e9c600a5c18bd17655ef668ad55b5edf6c24ce9bdca5bf607649ca4b1e8e2c2",
                 "sha256:8fa943c6d4cd9e27673b70c21a07b0aa120873901e099cd46cab40f7cc96d567"
@@ -705,13 +709,6 @@
             "markers": "python_version >= '3.7'",
             "version": "==3.5.2"
         },
-        "autoflake": {
-            "hashes": [
-                "sha256:61a353012cff6ab94ca062823d1fb2f692c4acda51c76ff83a8d77915fba51ea"
-            ],
-            "index": "pypi",
-            "version": "==1.4"
-        },
         "black": {
             "hashes": [
                 "sha256:074458dc2f6e0d3dab7928d4417bb6957bb834434516f21514138437accdbe90",
@@ -758,7 +755,9 @@
             "version": "==0.4.5"
         },
         "django": {
-            "extras": ["argon2"],
+            "extras": [
+                "argon2"
+            ],
             "hashes": [
                 "sha256:031ccb717782f6af83a0063a1957686e87cb4581ea61b47b3e9addf60687989a",
                 "sha256:032f8a6fc7cf05ccd1214e4a2e21dfcd6a23b9d575c6573cacc8c67828dbe642"
@@ -810,14 +809,6 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==2.5.2"
-        },
-        "pyflakes": {
-            "hashes": [
-                "sha256:4579f67d887f804e67edb544428f264b7b24f435b263c4614f384135cea553d2",
-                "sha256:491feb020dca48ccc562a8c0cbe8df07ee13078df59813b83959cbdada312ea3"
-            ],
-            "markers": "python_version >= '3.6'",
-            "version": "==2.5.0"
         },
         "pytz": {
             "hashes": [

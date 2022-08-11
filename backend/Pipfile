@@ -35,7 +35,6 @@ django-debug-toolbar = "*"
 django-dbbackup = "*"
 django-cprofile-middleware = "*"
 # Code formatting
-autoflake = "*"
 black = "*"
 
 [requires]
