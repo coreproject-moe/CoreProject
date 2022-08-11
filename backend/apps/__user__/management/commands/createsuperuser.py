@@ -4,11 +4,9 @@ import sys
 from typing import Any
 
 from django.contrib.auth.management import get_default_username
-from django.contrib.auth.management.commands.createsuperuser import PASSWORD_FIELD
 from django.contrib.auth.management.commands.createsuperuser import (
+    PASSWORD_FIELD,
     Command as SuperUserCommand,
-)
-from django.contrib.auth.management.commands.createsuperuser import (
     NotRunningInTTYException,
 )
 from django.contrib.auth.password_validation import validate_password
