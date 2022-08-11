@@ -38,6 +38,7 @@ class User(AbstractUser, ResizeImageMixin):
         ],
     )
     avatar = models.ImageField(upload_to="avatars", default=None, blank=True, null=True)
+    ip = models.GenericIPAddressField(null=False, blank=False)
 
     def get_username_with_discriminator(self) -> str:
         return f"{self.username}#{str(self.username_discriminator).zfill(4)}"

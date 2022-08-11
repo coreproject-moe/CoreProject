@@ -18,6 +18,7 @@ class CustomUserAdmin(UserAdmin):
         "is_staff",
     )
     list_filter = (
+        "ip",
         "email",
         "is_staff",
         "is_active",
@@ -44,6 +45,7 @@ class CustomUserAdmin(UserAdmin):
                 "fields": (
                     "first_name",
                     "last_name",
+                    "ip",
                     "email",
                     "avatar",
                 )
