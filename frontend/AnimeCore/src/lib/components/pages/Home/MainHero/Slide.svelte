@@ -102,9 +102,30 @@
                 <div
                     class="w-40 flex justify-center swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"
                 >
-                    {#each Array(10) as _, index}
-                        <!-- Pagination Logic -->
-                    {/each}
+                    <div class="flex flex-row gap-3">
+                        {#each Array(data.length) as _, index}
+                            <svg
+                                height="10"
+                                width="10"
+                                class="cursor-pointer"
+                                on:click={() => {
+                                    mainHeroSlideActiveIndex = index;
+                                }}
+                            >
+                                <circle
+                                    cx="5"
+                                    cy="5"
+                                    r="5"
+                                    style="fill:{index === mainHeroSlideActiveIndex
+                                        ? 'var(--swiper-pagination-color)'
+                                        : 'var(--swiper-pagination-bullet-inactive-color)'};
+                                        opacity:{index === mainHeroSlideActiveIndex
+                                        ? '1'
+                                        : 'var(--swiper-pagination-bullet-inactive-opacity)'}"
+                                />
+                            </svg>
+                        {/each}
+                    </div>
                 </div>
                 <div class="gap-4 hidden md:flex">
                     <button
