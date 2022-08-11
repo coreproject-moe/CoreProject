@@ -67,14 +67,14 @@
 .swiper {
     height: 100%;
     width: 100%;
-    overscroll-behavior-y: contain;
+    overscroll-behavior-y: auto;
 }
 
 /* This is the hack we are looking for */
 .swiper-slide {
     height: auto;
     width: auto;
-    overscroll-behavior-y: contain;
+    overscroll-behavior-y: auto;
 }
 html {
     // DO NOT REMOVE
