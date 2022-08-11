@@ -12,7 +12,7 @@
 
     import Progress from "./Progress.svelte";
 
-    export let data: any[];
+    export let data: string[];
     export let mainHeroSlideActiveIndex: number;
     export let animeTitle: string;
     export let animeSummary: string;

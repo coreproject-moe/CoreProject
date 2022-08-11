@@ -13,7 +13,7 @@
     <title>AnimeCore</title>
 </svelte:head>
 
-<div class="h-screen w-screen carousel carousel-vertical text-white overscroll-y-contain">
+<div class="h-screen w-screen carousel carousel-vertical text-white">
     <div class="carousel-item h-auto w-auto inline-grid">
         {#each data as item, index}
             {#if index === mainHeroSlideActiveIndex}
@@ -37,7 +37,7 @@
     <div class="carousel-item h-auto w-auto">
         <GenreSlide />
     </div>
-    <!-- <div class="carousel-item h-auto w-auto">
+    <div class="carousel-item h-auto w-auto">
         <LibrarySlide />
-    </div> -->
+    </div>
 </div>
