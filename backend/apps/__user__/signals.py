@@ -1,9 +1,10 @@
-from django.db.models.signals import pre_save
-from django.dispatch import receiver
 import inspect
 
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
+
 from .models import User
-from .utilities import get_random_username_discriminator, get_client_ip
+from .utilities import get_client_ip, get_random_username_discriminator
 
 
 @receiver(pre_save, sender=User)
