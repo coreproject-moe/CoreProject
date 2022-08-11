@@ -11,6 +11,7 @@
                 "-i",
                 "--remove-all-unused-imports",
                 "--recursive",
+                "--ignore-init-module-imports",
                 "${workspaceFolder}"
             ],
             "presentation": {

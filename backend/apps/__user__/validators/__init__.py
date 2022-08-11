@@ -1,1 +1,1 @@
-from .username import username_validator  # noqa
+from .username import username_validator
