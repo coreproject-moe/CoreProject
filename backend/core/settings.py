@@ -44,8 +44,7 @@ ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 # Application definition
 
 INSTALLED_APPS = [
-    # Overridden apps
-    "apps.__flatpages__",
+    # __user__ must be above auth
     "apps.__user__",
     # Django stuff
     "django.contrib.admin",
@@ -55,10 +54,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     # Whitenoise
     "django.contrib.staticfiles",
-    # Sites
-    "django.contrib.sites",
-    # Flatpages
-    "django.contrib.flatpages",
     # Rest Framework
     "ninja",
     # 3rd party rest framework stuff
@@ -98,10 +93,8 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.cache.FetchFromCacheMiddleware",
-    # Flatpages
-    "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware",
 ]
-SITE_ID = 1
+
 # https://docs.djangoproject.com/en/4.0/topics/cache/#the-per-site-cache-1
 CACHE_MIDDLEWARE_SECONDS = 0
 
@@ -287,11 +280,3 @@ HUEY = PriorityRedisHuey(
 
 DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage"
 DBBACKUP_STORAGE_OPTIONS = {"location": os.path.join(BASE_DIR, "backup")}
-
-# CkEditor
-# https://github.com/django-ckeditor/django-ckeditor/issues/670
-CKEDITOR_CONFIGS = {
-    "default": {
-        "skin": "moono-dark",
-    }
-}
