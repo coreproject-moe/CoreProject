@@ -70,12 +70,12 @@ class CustomUserAdmin(UserAdmin):
                 )
             },
         ),
-        (
-            _("Customization"),
-            {
-                "fields": ("video_volume",),
-            },
-        ),
+        # (
+        #     _("Customization"),
+        #     {
+        #
+        #     },
+        # ),
     )
 
     @admin.display(description="username")
