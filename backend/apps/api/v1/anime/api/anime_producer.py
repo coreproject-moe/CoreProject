@@ -2,9 +2,9 @@ from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
 from ninja import Router
 
-from ..models import AnimeModel
 from ...producers.models import ProducerModel
 from ...producers.schemas import ProducerSchema
+from ..models import AnimeModel
 
 router = Router()
 
