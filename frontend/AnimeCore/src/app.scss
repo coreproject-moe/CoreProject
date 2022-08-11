@@ -54,8 +54,8 @@
     --swiper-pagination-color: #e3bd49;
     --swiper-pagination-bullet-inactive-color: #edd68d;
     --swiper-pagination-bullet-inactive-opacity: 0.3;
-    --swiper-pagination-bullet-horizontal-gap: 7px;
-    --swiper-pagination-bullet-size: 10px;
+    // --swiper-pagination-bullet-horizontal-gap: 7px;
+    // --swiper-pagination-bullet-size: 10px;
 }
 
 @media screen and (min-width: 0px) and (max-width: 992px) {
@@ -67,12 +67,14 @@
 .swiper {
     height: 100%;
     width: 100%;
+    overscroll-behavior-y: auto;
 }
 
 /* This is the hack we are looking for */
 .swiper-slide {
     height: auto;
     width: auto;
+    overscroll-behavior-y: auto;
 }
 html {
     // DO NOT REMOVE
@@ -80,6 +82,5 @@ html {
     overscroll-behavior-block: contain;
 }
 body {
-    overscroll-behavior: contain;
     scrollbar-width: none;
 }

@@ -12,7 +12,9 @@
     let dropdownGenreElementActive = false;
 </script>
 
-<div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
+<div
+    class="hero min-h-[20vh] md:min-h-screen bg-base-100"
+>
     <div class="hero-content text-center p-0">
         <div>
             <AutoComplete />

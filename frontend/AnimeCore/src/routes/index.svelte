@@ -1,79 +1,45 @@
 <script lang="ts">
-    import type { Swiper as SwiperType } from "swiper";
-    import { EffectFade, Lazy, Mousewheel } from "swiper";
-    import { Swiper, SwiperSlide } from "swiper/svelte";
+    import { blur } from "svelte/transition";
 
     import GenreSlide from "$components/pages/Home/Genre/Slide.svelte";
     import LibrarySlide from "$components/pages/Home/Library/Slide.svelte";
     import MainHeroSlide from "$components/pages/Home/MainHero/Slide.svelte";
     import data from "$data/mock/main_hero_data.json";
 
-    let rootSwiper: Partial<SwiperType>;
-    let mainHeroSwiper: Partial<SwiperType>;
-
-    const onRootSwiper = (e: CustomEvent) => {
-        const [swiper] = e.detail;
-        rootSwiper = swiper;
-    };
-    const onMainHeroSwiper = (e: CustomEvent) => {
-        const [swiper] = e.detail;
-        mainHeroSwiper = swiper;
-    };
+    let mainHeroSlideActiveIndex = 0;
 </script>
 
 <svelte:head>
     <title>AnimeCore</title>
 </svelte:head>
 
-<div class="h-screen">
-    <Swiper
-        speed={600}
-        spaceBetween={0}
-        direction="vertical"
-        slidesPerView="auto"
-        modules={[Mousewheel]}
-        mousewheel
-        class="text-white"
-        on:swiper={onRootSwiper}
-    >
-        <SwiperSlide>
-            <Swiper
-                modules={[EffectFade, Lazy]}
-                effect="fade"
-                direction="horizontal"
-                slidesPerView={1}
-                on:swiper={onMainHeroSwiper}
-                loop
-                lazy
-            >
-                {#each data as item}
-                    <SwiperSlide let:data={{ isActive, isDuplicate, isVisible, isPrev, isNext }}>
-                        <MainHeroSlide
-                            {isPrev}
-                            {isNext}
-                            {isActive}
-                            {isDuplicate}
-                            {isVisible}
-                            {rootSwiper}
-                            {mainHeroSwiper}
-                            animeTitle={item.animeTitle}
-                            animeSummary={item.animeSummary}
-                            animeEpisodeCount={item.animeEpisodeCount}
-                            animeStudio={item.animeStudio}
-                            animeAirTime={item.animeAirTime}
-                            backgroundImage={item.backgroundImage}
-                            backgroundBanner={item.backgroundBanner}
-                            tags={item.tags}
-                        />
-                    </SwiperSlide>
-                {/each}
-            </Swiper>
-        </SwiperSlide>
-        <SwiperSlide>
-            <GenreSlide />
-        </SwiperSlide>
-        <SwiperSlide>
-            <LibrarySlide {rootSwiper} />
-        </SwiperSlide>
-    </Swiper>
+<div
+    class="text-white h-screen w-screen carousel carousel-vertical snap-none md:snap-x md:snap-mandatory"
+>
+    <div class="carousel-item h-auto w-auto inline-grid">
+        {#each data as item, index}
+            {#if index === mainHeroSlideActiveIndex}
+                <div transition:blur|local style="grid-area: 1 / 1 / 2 / 2">
+                    <MainHeroSlide
+                        bind:mainHeroSlideActiveIndex
+                        {data}
+                        animeTitle={item.animeTitle}
+                        animeSummary={item.animeSummary}
+                        animeEpisodeCount={item.animeEpisodeCount}
+                        animeStudio={item.animeStudio}
+                        animeAirTime={item.animeAirTime}
+                        backgroundImage={item.backgroundImage}
+                        backgroundBanner={item.backgroundBanner}
+                        tags={item.tags}
+                    />
+                </div>
+            {/if}
+        {/each}
+    </div>
+    <div class="carousel-item h-auto w-auto">
+        <GenreSlide />
+    </div>
+    <div class="carousel-item h-auto w-auto">
+        <LibrarySlide />
+    </div>
 </div>
