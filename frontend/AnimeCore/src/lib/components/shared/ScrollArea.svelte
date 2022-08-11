@@ -12,7 +12,7 @@
     on:touchstart
     on:touchend
     {style}
-    class="{parentClass} {offsetScrollbar ? 'pr-3' : ''} scrollbar overflow-y-scroll overscroll-y-contain"
+    class="{parentClass} {offsetScrollbar ? 'pr-3' : ''} scrollbar overflow-y-scroll"
 >
     <div class="{klass} whitespace-pre-line">
         <slot />
