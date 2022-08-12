@@ -41,11 +41,6 @@
     font-display: swap;
 }
 
-@import "swiper/css";
-@import "swiper/css/pagination";
-@import "swiper/css/effect-fade";
-@import "swiper/css/lazy";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -58,24 +53,6 @@
     // --swiper-pagination-bullet-size: 10px;
 }
 
-@media screen and (min-width: 0px) and (max-width: 992px) {
-    :root {
-        --swiper-pagination-bullet-horizontal-gap: 3px;
-    }
-}
-
-.swiper {
-    height: 100%;
-    width: 100%;
-    overscroll-behavior-y: auto;
-}
-
-/* This is the hack we are looking for */
-.swiper-slide {
-    height: auto;
-    width: auto;
-    overscroll-behavior-y: auto;
-}
 html {
     // DO NOT REMOVE
     // I wasted 2 hours of my life fixing this

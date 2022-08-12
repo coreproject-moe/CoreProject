@@ -1,6 +1,4 @@
 <script lang="ts">
-    import { Mousewheel } from "swiper";
-    import { Swiper, SwiperSlide } from "swiper/svelte";
     import voca from "voca";
 
     import continueWatching from "$data/mock/continue_watching.json";
@@ -9,6 +7,10 @@
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import Play from "$icons/Play.svelte";
     import { responsiveMode } from "$store/Responsive";
+
+    // bind
+    let myListElement: HTMLDivElement;
+    let continueWatchingElement: HTMLDivElement;
 
     // Responsive switches
     let mobile: boolean;
@@ -20,11 +22,16 @@
 
     let mylistAnimeNameWordCount: number;
     mylistAnimeNameWordCount ??= 25;
+
+    const scrollHorizontally = (e: WheelEvent, element: HTMLElement) => {
+        if (e.deltaY) {
+            e.preventDefault();
+        }
+        element.scrollLeft += Math.round(e.deltaY * 100);
+    };
 </script>
 
-<div
-    class="hero min-h-[20vh] md:min-h-screen bg-base-100"
->
+<div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
     <div class="hero-content text-center flex-col md:flex-row">
         <div class="flex flex-col gap-3">
             <p class="text-3xl font-bold flex">Latest Episode</p>
@@ -65,7 +72,13 @@
         <div class="divider lg:divider-horizontal hidden md:flex before:bg-white after:bg-white" />
         <div class="flex flex-col">
             <p class="font-bold text-3xl items-start flex pb-4">Continue Watching</p>
-            <div class="h-28 md:h-[200px] w-96 md:w-[70vw] carousel gap-3">
+            <div
+                class="h-28 md:h-[200px] w-96 md:w-[60vw] carousel gap-6"
+                bind:this={continueWatchingElement}
+                on:wheel={(e) => {
+                    scrollHorizontally(e, continueWatchingElement);
+                }}
+            >
                 {#each continueWatching as item}
                     <div
                         class="carousel-item w-96 md:w-[30vw] rounded-xl flex items-center justify-around"
@@ -95,36 +108,28 @@
                 <ChevronDown color="white" height="24" width="24" />
             </div>
 
-            <div class="w-96 md:w-[70vw]">
-                <Swiper
-                    speed={600}
-                    direction="horizontal"
-                    slidesPerView={"auto"}
-                    spaceBetween={30}
-                    modules={[Mousewheel]}
-                    mousewheel={{
-                        sensitivity: 0.001,
-                        forceToAxis: true
-                    }}
-                >
-                    {#each myList as item}
-                        <SwiperSlide>
-                            <div class="card w-36 h-52 bg-base-100 image-full before:!opacity-60">
-                                <figure>
-                                    <img src={item.background_image} alt={item.name} />
-                                </figure>
-                                <div class="card-body justify-between items-center !text-white">
-                                    <h2 class="card-title">
-                                        {voca
-                                            .chain(item.name)
-                                            .truncate(mylistAnimeNameWordCount + 3)}
-                                    </h2>
-                                    <div class="card-actions">{item.current}/{item.total}</div>
-                                </div>
-                            </div>
-                        </SwiperSlide>
-                    {/each}
-                </Swiper>
+            <div
+                class="w-96 md:w-[60vw] carousel gap-5"
+                on:wheel={(e) => {
+                    scrollHorizontally(e, myListElement);
+                }}
+                bind:this={myListElement}
+            >
+                {#each myList as item}
+                    <div
+                        class="carousel-item card w-36 h-52 bg-base-100 image-full before:!opacity-60"
+                    >
+                        <figure>
+                            <img src={item.background_image} alt={item.name} />
+                        </figure>
+                        <div class="card-body justify-between items-center !text-white">
+                            <h2 class="card-title">
+                                {voca.chain(item.name).truncate(mylistAnimeNameWordCount + 3)}
+                            </h2>
+                            <div class="card-actions">{item.current}/{item.total}</div>
+                        </div>
+                    </div>
+                {/each}
             </div>
         </div>
     </div>
