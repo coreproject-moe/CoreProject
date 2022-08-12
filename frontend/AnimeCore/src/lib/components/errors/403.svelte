@@ -3,6 +3,11 @@
     export let errorMessage: string;
     export let errorText: string;
 
+    <script lang="ts">
+    export let status: string;
+    export let errorMessage: string;
+    export let errorText: string;
+
     import Alone from "$kaomoji/Alone.svelte";
 </script>
 
