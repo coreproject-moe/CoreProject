@@ -16,7 +16,7 @@ class FileField:
 
 class CharacterModel(models.Model):
     mal_id = models.IntegerField(unique=True, db_index=True)
-    name = models.CharField(max_length=1024, unique=True, db_index=True)
+    name = models.CharField(max_length=1024, db_index=True)
     name_kanji = models.CharField(max_length=1024, null=True, blank=True, db_index=True)
     character_image = models.ImageField(
         upload_to=FileField.anime_charater, default=None, blank=True, null=True
