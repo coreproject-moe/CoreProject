@@ -39,7 +39,6 @@
     };
     export let error: string;
     console.log(animeData);
-    console.log(error);
 </script>
 
 <svelte:head>
