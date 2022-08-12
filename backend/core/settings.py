@@ -45,6 +45,7 @@ ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 INSTALLED_APPS = [
     # __user__ must be above auth
+    "apps.__anime__",
     "apps.__user__",
     # Django stuff
     "django.contrib.admin",

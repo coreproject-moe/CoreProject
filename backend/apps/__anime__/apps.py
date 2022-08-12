@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class FlatpagesConfig(AppConfig):
+class AnimeConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "apps.__flatpages__"
+    name = "apps.__anime__"
