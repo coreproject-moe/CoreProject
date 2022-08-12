@@ -5,11 +5,11 @@ from apps.api.v1.anime.models import CharacterModel
 from core.requests import CachedLimiterSession
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
+from django.db import IntegrityError
 from requests.adapters import HTTPAdapter
 from requests_cache import RedisCache
 from requests_ratelimiter import RedisBucket
 from urllib3.util import Retry
-from django.db import IntegrityError
 
 retry_strategy = Retry(
     total=3,
@@ -52,7 +52,7 @@ class Command(BaseCommand):
             help="Specifies the stopping number for character.",
         )
 
-    def get_character_data_from_jikan(self) -> Dict[str, str]:
+    def get_character_data_from_jikan(self) -> dict[str, str]:
         res = self.session.get(
             f"https://api.jikan.moe/v4/characters/{self.character_number}"
         )
