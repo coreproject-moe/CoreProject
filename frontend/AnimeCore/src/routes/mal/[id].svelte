@@ -11,7 +11,7 @@
 
         return {
             props: {
-                animeData: data.status === 200 && data.data,
+                animeData: data.data,
                 error: data.status === 404 && data.message
             }
         };
@@ -26,8 +26,8 @@
                 episode_number: number;
             }
         ];
-        anime_name: string;
-        anime_name_japanese: string;
+        title_english: string;
+        title_japanese: string;
         anime_source: string;
         anime_aired_from: Date;
         anime_aired_to: Date;
@@ -38,5 +38,10 @@
         updated: Date;
     };
     export let error: string;
+    console.log(animeData);
     console.log(error);
 </script>
+
+<svelte:head>
+    <title>{animeData.title_english}</title>
+</svelte:head>
