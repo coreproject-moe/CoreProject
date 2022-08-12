@@ -1,4 +1,3 @@
-from email.mime import image
 from io import BytesIO
 from typing import Dict
 
@@ -74,16 +73,6 @@ class Command(BaseCommand):
 
         return data
 
-    def after_populate_anime_characters(self) -> None:
-        self.character_number += 1
-        if self.character_number > self.character_number_end:
-            import sys
-
-            sys.exit(0)
-
-        # Restart Function
-        self.populate_anime_characters()
-
     def populate_anime_characters(self) -> None:
         DATA = self.get_character_data_from_jikan()
         if not DATA:
@@ -112,6 +101,16 @@ class Command(BaseCommand):
 
         finally:
             self.after_populate_anime_characters()
+
+    def after_populate_anime_characters(self) -> None:
+        self.character_number += 1
+        if self.character_number > self.character_number_end:
+            import sys
+
+            sys.exit(0)
+
+        # Restart Function
+        self.populate_anime_characters()
 
     def handle(self, *args, **options):
         self.character_number = options["character-number-start"]
