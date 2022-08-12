@@ -1,5 +1,4 @@
 from io import BytesIO
-from typing import Dict
 
 from apps.api.v1.anime.models import CharacterModel
 from core.requests import CachedLimiterSession
