@@ -37,8 +37,10 @@ class Command(BaseCommand):
             bucket_kwargs={"bucket_name": "jikan_api"},
             backend=RedisCache(),
             # https://docs.api.jikan.moe/#section/Information/Rate-Limiting
-            per_minute=55,
-            per_second=1,
+            per_minute=60,
+            per_second=3,
+            # https://requests-cache.readthedocs.io/en/stable/user_guide/expiration.html
+            expire_after=360,
         )
         self.session.mount("https://", adapter)
         self.session.mount("http://", adapter)
@@ -67,7 +69,7 @@ class Command(BaseCommand):
             CharacterModel.objects.create(
                 mal_id=self.character_number,
                 name=DATA["name"],
-                name_kanji=DATA["name_kanji"],
+                name_kanji=DATA.get("name_kanji", None),
                 character_image=ContentFile(
                     BytesIO(character_image.content).read(),
                     f"{self.character_number}.{image_url.split('.')[-1]}",

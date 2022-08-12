@@ -17,11 +17,14 @@ class FileField:
 class CharacterModel(models.Model):
     mal_id = models.IntegerField(unique=True, db_index=True)
     name = models.CharField(max_length=1024, unique=True, db_index=True)
-    name_kanji = models.CharField(max_length=1024, unique=True, db_index=True)
+    name_kanji = models.CharField(max_length=1024, null=True, blank=True, db_index=True)
     character_image = models.ImageField(
         upload_to=FileField.anime_charater, default=None, blank=True, null=True
     )
-    about = models.TextField()
+    about = models.TextField(
+        null=True,
+        blank=True,
+    )
 
     def __str__(self) -> str:
         return f"{self.mal_id}. {self.name}"
