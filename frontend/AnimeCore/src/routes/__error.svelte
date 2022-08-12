@@ -17,8 +17,10 @@
 
     // Odd naming ?
     // Svelte doesnt allow us to name components like 404 ( maybe its JS thing )
-    import FourZeroFour from "$components/errors/[404].svelte";
-    import FiveZeroZero from "$components/errors/[500].svelte";
+    import FourZeroThree from "$components/errors/403.svelte";
+    import FourZeroFour from "$components/errors/404.svelte";
+    import FourOneEight from "$components/errors/418.svelte";
+    import FiveZeroZero from "$components/errors/500.svelte";
 
     const KokoroColorWOrdMap: {
         [key: string]: string | undefined;
@@ -64,11 +66,25 @@
 
     const errorPages = [
         {
+            status: 403,
+            text: formatKokoroColor(
+                `Even to her precious user-kun, kokoro-chan has some secrets that she wants to hide. Well, since there’s nothing you can do about that, you can go back home, browse the forums or come say hi!`
+            ),
+            component: FourZeroThree
+        },
+        {
             status: 404,
             text: formatKokoroColor(
                 `Our hardworking kokoro-chan was unable to find that page. While she collects more data on it, why don’t you go back home, explore some random anime, browse the forums or come say hi!`
             ),
             component: FourZeroFour
+        },
+        {
+            status: 418,
+            text: formatKokoroColor(
+                `kokoro-chan refuses to brew coffee with a teapot. While she buys an electric coffee maker, why don’t you go back home, explore some random anime, browse the forums or come say hi!`
+            ),
+            component: FourOneEight
         },
         {
             status: 500,
@@ -83,7 +99,7 @@
 </script>
 
 <svelte:head>
-    <title>CoreProject | {status} </title>
+    <title>CoreProject | {status}</title>
 </svelte:head>
 
 <svelte:component
