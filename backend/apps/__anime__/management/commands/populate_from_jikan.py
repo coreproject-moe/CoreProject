@@ -172,7 +172,7 @@ class Command(BaseCommand):
                 continue
 
             try:
-                database = CharacterModel.objects.get_or_create(
+                database = CharacterModel.objects.create(
                     mal_id=self.character_number,
                     name=self.character_name,
                     name_kanji=self.character_name_kanji,
