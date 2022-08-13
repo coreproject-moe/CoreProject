@@ -106,12 +106,21 @@ class Command(BaseCommand):
 
         data = res.json()
         if res.status_code == 200:
-            print(f"Got Character Info for {self.character_number} | Kitsu")
+            try:
+                data = data["data"][0]
+                self.kitsu_id = data["id"]
+                if not self.character_name_kanji:
+                    self.character_name_kanji = data["attributes"]["names"]["ja_jp"]
 
-            data = data["data"][0]
-            self.kitsu_id = data["id"]
-            if not self.character_name_kanji:
-                self.character_name_kanji = data["attributes"]["names"]["ja_jp"]
+                print(f"Got Character Info for {self.character_number} | Kitsu")
+
+            except IndexError:
+                print(f"Entry for {self.character_name} doesn't exist | Kitsu")
+
+                # Write the number to a file so that we can deal with it later
+                f = open("kitsu.txt", "a")
+                f.write(f"{str(self.character_name)}\n")
+                f.close()
 
         else:
             print(f"Missed info for {self.character_number} | Kitsu")
@@ -154,6 +163,7 @@ class Command(BaseCommand):
             # Remove files which will be necessary for logging failed request
             os.path.exists("skipped.txt") and os.remove("skipped.txt")
             os.path.exists("anilist.txt") and os.remove("anilist.txt")
+            os.path.exists("kitsu.txt") and os.remove("kitsu.txt")
 
         while self.character_number < self.character_number_end:
             DATA = self.get_character_data_from_jikan()
@@ -162,7 +172,7 @@ class Command(BaseCommand):
                 continue
 
             try:
-                database = CharacterModel.objects.create(
+                database = CharacterModel.objects.get_or_create(
                     mal_id=self.character_number,
                     name=self.character_name,
                     name_kanji=self.character_name_kanji,
@@ -180,6 +190,7 @@ class Command(BaseCommand):
                 database.anilist_id = self.anilist_id
 
                 database.save()
+
             except IntegrityError:
                 print(f"Entry exists : {self.character_number}")
 
