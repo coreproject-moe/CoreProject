@@ -1,8 +1,6 @@
 import os
 from io import BytesIO
 
-from apps.api.v1.anime.models import CharacterModel
-from core.requests import CachedLimiterSession
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError
@@ -10,6 +8,9 @@ from requests.adapters import HTTPAdapter
 from requests_cache import RedisCache
 from requests_ratelimiter import RedisBucket
 from urllib3.util import Retry
+
+from apps.api.v1.anime.models import CharacterModel  # pylint: disable=import-error
+from core.requests import CachedLimiterSession  # pylint: disable=import-error
 
 retry_strategy = Retry(
     total=3,
@@ -19,10 +20,27 @@ adapter = HTTPAdapter(max_retries=retry_strategy)
 
 
 class Command(BaseCommand):
-    help = "Populates the character database from https://jikan.moe"
+    """Populates the character database from https://jikan.moe"""
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
+
+        # Help string
+        Command.help = self.__doc__
+
+        # Define variables
+        self.character_number: int
+        self.character_number_end: int
+
+        self.anilist_id: str | None = ""
+        self.kitsu_id: str | None = ""
+
+        self.character_name: str = ""
+        self.character_name_kanji: str = ""
+        self.character_image: BytesIO
+
+        self.character_about: str = ""
+        self.image_url = ""
 
         self.session = CachedLimiterSession(
             bucket_class=RedisBucket,
@@ -60,12 +78,7 @@ class Command(BaseCommand):
         )
         data = res.json()
 
-        if (
-            res.status_code == 200
-            and data.get("status", None) != 404
-            and data.get("status", None) != 408
-            and data.get("status", None) != "429"
-        ):
+        if res.status_code == 200 and data.get("status", None) not in [404, 408, "429"]:
             print(f"Got Character Info for {self.character_number} | Jikan")
             data = data["data"]
             self.character_name = data["name"]
@@ -77,15 +90,16 @@ class Command(BaseCommand):
             except KeyError:
                 self.image_url = data["images"]["jpg"]["image_url"]
             finally:
-                self.character_image = self.session.get(self.image_url)
+                image = self.session.get(self.image_url)
+                self.character_image = BytesIO(image.content)
 
         elif data.get("status", None) == 408:
             print(f"Mal is Rate-Limiting us | {self.character_number}")
 
             # Write the number to a file so that we can deal with it later
-            f = open("skipped.txt", "a")
-            f.write(f"{str(self.character_number)}\n")
-            f.close()
+            file = open("skipped.txt", "a", encoding="utf-8")
+            file.write(f"{str(self.character_number)}\n")
+            file.close()
 
             # We need to return None as data
             data = None
@@ -95,104 +109,151 @@ class Command(BaseCommand):
 
         return data
 
-    def get_data_from_kitsu(self) -> None:
-        if not self.character_name:
-            print(f"Skipping | Kitsu")
-            return
-
-        res = self.session.get(
-            f"https://kitsu.io/api/edge/characters?filter[name]={self.character_name}"
+    def get_data_from_kitsu(
+        self,
+        character_name: str,
+        character_number: int,
+        session: CachedLimiterSession,
+    ) -> str | None:
+        res = session.get(
+            f"https://kitsu.io/api/edge/characters?filter[name]={character_name}"
         )
-
         data = res.json()
+        kitsu_id = None
+
         if res.status_code == 200:
             try:
                 data = data["data"][0]
-                self.kitsu_id = data["id"]
+
+                # Side Effect
                 if not self.character_name_kanji:
                     self.character_name_kanji = data["attributes"]["names"]["ja_jp"]
 
-                print(f"Got Character Info for {self.character_number} | Kitsu")
+                kitsu_id = data["id"]
+                print(f"Got Character Info for {character_number} | Kitsu")
 
             except IndexError:
-                print(f"Entry for {self.character_name} doesn't exist | Kitsu")
+                print(f"Entry for {character_name} doesn't exist | Kitsu")
 
                 # Write the number to a file so that we can deal with it later
-                f = open("kitsu.txt", "a")
-                f.write(f"{str(self.character_name)}\n")
-                f.close()
+                file = open("kitsu.txt", "a", encoding="utf-8")
+                file.write(f"{str(character_name)}\n")
+                file.close()
 
         else:
-            print(f"Missed info for {self.character_number} | Kitsu")
+            print(f"Missed info for {character_number} | Kitsu")
 
-    def get_data_from_anilist(self) -> None:
-        if not self.character_name:
-            print(f"Skipping | Anilist")
-            return
+        return kitsu_id
 
+    @staticmethod
+    def get_data_from_anilist(
+        character_name: str,
+        character_number: int,
+        session: CachedLimiterSession,
+    ) -> str | None:
+        """
+        :params:
+        """
         query = {
-            "query": "query($page:Int = 1 $id:Int $search:String $isBirthday:Boolean $sort:[CharacterSort]=[FAVOURITES_DESC]){Page(page:$page,perPage:20){pageInfo{total perPage currentPage lastPage hasNextPage}characters(id:$id search:$search isBirthday:$isBirthday sort:$sort){id name{userPreferred}image{large}}}}",
+            "query": """query(
+                $page:Int = 1
+                $id:Int
+                $search:String
+                $isBirthday:Boolean
+                $sort:[CharacterSort]=[FAVOURITES_DESC])
+            {
+                Page(page:$page,perPage:20){
+                    pageInfo{
+                        total
+                        perPage
+                        currentPage
+                        lastPage
+                        hasNextPage
+                    }
+                    characters(id:$id search:$search isBirthday:$isBirthday sort:$sort){
+                        id
+                        name
+                        {userPreferred}
+                        image
+                        {large}
+                    }
+                }
+            }""",
             "variables": {
                 "page": 1,
                 "type": "CHARACTERS",
-                "search": self.character_name,
+                "search": character_name,
                 "sort": "SEARCH_MATCH",
             },
         }
-        res = self.session.post(url="https://graphql.anilist.co/", json=query)
+        res = session.post(url="https://graphql.anilist.co/", json=query)
         data = res.json()["data"]
+
+        anilist_id = None
 
         if data and res.status_code == 200:
             try:
-                print(f"Got Character Info for {self.character_number} | Anilist")
-                self.anilist_id = data["Page"]["characters"][0]["id"]
+                print(f"Got Character Info for {character_number} | Anilist")
+                anilist_id = data["Page"]["characters"][0]["id"]
 
             except IndexError:
-                print(f"Entry for {self.character_name} doesn't exist | Anilist")
+                print(f"Entry for {character_name} doesn't exist | Anilist")
 
                 # Write the number to a file so that we can deal with it later
-                f = open("anilist.txt", "a")
-                f.write(f"{str(self.character_name)}\n")
-                f.close()
+                file = open("anilist.txt", "a", encoding="utf-8")
+                file.write(f"{str(character_name)}\n")
+                file.close()
 
         else:
-            print(f"Missed info for {self.character_number} | Anilist")
+            print(f"Missed info for {character_number} | Anilist")
+
+        return anilist_id
 
     def populate_anime_characters(self) -> None:
         if self.character_number == 1:
             # Remove files which will be necessary for logging failed request
-            os.path.exists("skipped.txt") and os.remove("skipped.txt")
-            os.path.exists("anilist.txt") and os.remove("anilist.txt")
-            os.path.exists("kitsu.txt") and os.remove("kitsu.txt")
+            if os.path.exists("skipped.txt"):
+                os.remove("skipped.txt")
+            if os.path.exists("anilist.txt"):
+                os.remove("anilist.txt")
+            if os.path.exists("kitsu.txt"):
+                os.remove("kitsu.txt")
 
         while self.character_number < self.character_number_end:
-            DATA = self.get_character_data_from_jikan()
-            if not DATA:
-                self.after_populate_anime_characters()
-                continue
+            data = self.get_character_data_from_jikan()
 
-            try:
-                database = CharacterModel.objects.create(
-                    mal_id=self.character_number,
-                    name=self.character_name,
-                    name_kanji=self.character_name_kanji,
-                    character_image=ContentFile(
-                        BytesIO(self.character_image.content).read(),
-                        f"{self.character_number}.{self.image_url.split('.')[-1]}",
-                    ),
-                    about=self.character_about,
-                )
-                # Lazy query
-                self.get_data_from_kitsu()
-                self.get_data_from_anilist()
+            if data:
+                try:
+                    database = CharacterModel.objects.create(
+                        mal_id=self.character_number,
+                        name=self.character_name,
+                        name_kanji=self.character_name_kanji,
+                        character_image=ContentFile(
+                            self.character_image.read(),
+                            f"{self.character_number}.{self.image_url.split('.')[-1]}",
+                        ),
+                        about=self.character_about,
+                    )
 
-                database.kitsu_id = self.kitsu_id
-                database.anilist_id = self.anilist_id
+                    # Lazy query
+                    self.kitsu_id = self.get_data_from_kitsu(
+                        self.character_name,
+                        self.character_number,
+                        self.session,
+                    )
+                    self.anilist_id = self.get_data_from_anilist(
+                        self.character_name,
+                        self.character_number,
+                        self.session,
+                    )
 
-                database.save()
+                    database.kitsu_id = self.kitsu_id
+                    database.anilist_id = self.anilist_id
 
-            except IntegrityError:
-                print(f"Entry exists : {self.character_number}")
+                    database.save()
+
+                except IntegrityError:
+                    print(f"Entry exists : {self.character_number}")
 
             self.after_populate_anime_characters()
 
@@ -200,10 +261,10 @@ class Command(BaseCommand):
         self.kitsu_id = None
         self.anilist_id = None
 
-        self.character_name = None
-        self.character_name_kanji = None
-        self.chatacter_about = None
-        self.character_image = None
+        self.character_name = ""
+        self.character_name_kanji = ""
+        self.character_about = ""
+        self.character_image.truncate(0)
 
         self.character_number += 1
 
