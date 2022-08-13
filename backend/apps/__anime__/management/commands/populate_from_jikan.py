@@ -71,6 +71,11 @@ class Command(BaseCommand):
             help="Specifies the stopping number for character.",
         )
 
+    def handle(self, *args, **options) -> None:
+        self.character_number = options["character-number-start"]
+        self.character_number_end = options["character_number_end"]
+        self.populate_anime_characters()
+
     def get_character_data_from_jikan(self) -> dict[str, str]:
         res = self.session.get(
             f"https://api.jikan.moe/v4/characters/{self.character_number}"
@@ -266,8 +271,3 @@ class Command(BaseCommand):
         self.character_image.truncate(0)
 
         self.character_number += 1
-
-    def handle(self, *args, **options):
-        self.character_number = options["character-number-start"]
-        self.character_number_end = options["character_number_end"]
-        self.populate_anime_characters()
