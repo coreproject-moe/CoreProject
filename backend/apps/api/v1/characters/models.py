@@ -17,8 +17,8 @@ class FileField:
 class CharacterModel(models.Model):
     mal_id = models.IntegerField(unique=True, db_index=True)
     kitsu_id = models.IntegerField(unique=True, null=True, db_index=True)
-    anilist_id = models.IntegerField(unique=True,null=True, db_index=True)
-    
+    anilist_id = models.IntegerField(unique=True, null=True, db_index=True)
+
     name = models.CharField(max_length=1024, db_index=True)
     name_kanji = models.CharField(max_length=1024, null=True, blank=True, db_index=True)
     character_image = models.ImageField(
