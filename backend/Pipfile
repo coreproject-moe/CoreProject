@@ -39,7 +39,7 @@ black = "*"
 pylint = "*"
 mypy = "*"
 types-requests = "*"
-
+pylint-django = "*"
 
 [requires]
 python_version = "3.10"

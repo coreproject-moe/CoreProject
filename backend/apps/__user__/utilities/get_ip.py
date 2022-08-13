@@ -1,4 +1,4 @@
-def get_client_ip(request):
+def get_client_ip(request) -> str:
     x_forwarded_for = request.headers.get("X-Forwarded-For")
     if x_forwarded_for:
         ip = x_forwarded_for.split(",")[0]

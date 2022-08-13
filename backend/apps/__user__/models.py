@@ -1,5 +1,3 @@
-from typing import NoReturn
-
 from django.conf import settings
 
 # @todo
@@ -43,7 +41,7 @@ class User(AbstractUser, ResizeImageMixin):
     def get_username_with_discriminator(self) -> str:
         return f"{self.username}#{str(self.username_discriminator).zfill(4)}"
 
-    def save(self, *args, **kwargs) -> NoReturn:
+    def save(self, *args, **kwargs) -> None:
         # if self.avatar:
         #     file = self.resize(self.avatar)
         #     self.avatar.save(f"{self.username}.avif", file, save=False)
