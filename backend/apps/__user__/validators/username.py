@@ -1,5 +1,3 @@
-from typing import NoReturn
-
 from django.core.exceptions import ValidationError
 
 RESERVED_USERNAME = [
