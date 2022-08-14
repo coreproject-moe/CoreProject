@@ -31,9 +31,6 @@ class Command(BaseCommand):
         self.character_number: int
         self.character_number_end: int
 
-        self.anilist_id: str | None = ""
-        self.kitsu_id: str | None = ""
-
         self.character_name: str = ""
         self.character_name_kanji: str = ""
         self.character_image: BytesIO = BytesIO()
@@ -158,13 +155,14 @@ class Command(BaseCommand):
         :params:
         """
         query = {
-            "query": """query(
+            "query": """
+            query (
                 $page:Int = 1
                 $id:Int
                 $search:String
                 $isBirthday:Boolean
-                $sort:[CharacterSort]=[FAVOURITES_DESC])
-            {
+                $sort:[CharacterSort]=[FAVOURITES_DESC]
+            ) {
                 Page(page:$page,perPage:20){
                     pageInfo{
                         total
@@ -190,14 +188,14 @@ class Command(BaseCommand):
             },
         }
         res = session.post(url="https://graphql.anilist.co/", json=query)
-        data = res.json()["data"]
-
+        data = res.json()
         anilist_id = None
 
         if data and res.status_code == 200:
+
             try:
+                anilist_id = data["data"]["Page"]["characters"][0]["id"]
                 print(f"Got Character Info for {character_number} | Anilist")
-                anilist_id = data["Page"]["characters"][0]["id"]
 
             except IndexError:
                 print(f"Entry for {character_name} doesn't exist | Anilist")
@@ -239,20 +237,16 @@ class Command(BaseCommand):
                     )
 
                     # Lazy query
-                    self.kitsu_id = self.get_data_from_kitsu(
+                    database.kitsu_id = self.get_data_from_kitsu(
                         self.character_name,
                         self.character_number,
                         self.session,
                     )
-                    self.anilist_id = self.get_data_from_anilist(
+                    database.anilist_id = self.get_data_from_anilist(
                         self.character_name,
                         self.character_number,
                         self.session,
                     )
-
-                    database.kitsu_id = self.kitsu_id
-                    database.anilist_id = self.anilist_id
-
                     database.save()
 
                 except IntegrityError:
@@ -261,9 +255,6 @@ class Command(BaseCommand):
             self.after_populate_anime_characters()
 
     def after_populate_anime_characters(self) -> None:
-        self.kitsu_id = None
-        self.anilist_id = None
-
         self.character_name = ""
         self.character_name_kanji = ""
         self.character_about = ""
