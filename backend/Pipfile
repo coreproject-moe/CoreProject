@@ -36,10 +36,13 @@ django-dbbackup = "*"
 django-cprofile-middleware = "*"
 # Code formatting
 black = "*"
+# Pylint specific
 pylint = "*"
-mypy = "*"
-types-requests = "*"
 pylint-django = "*"
+mypy = "*"
+# Mypy Stubs
+types-requests = "*"
+types-redis = "*"
 django-stubs = {extras = ["compatible-mypy"], version = "*"}
 
 [requires]

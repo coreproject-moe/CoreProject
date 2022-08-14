@@ -3,9 +3,9 @@
     "python.linting.enabled": true,
     "python.linting.mypyEnabled": true,
     "python.linting.pylintArgs": [
-        "--disable=C0111", // missing docstring
-        "--load-plugins=pylint_django",
-        "--load-plugins=pylint_django.checkers.migrations",
-        "--django-settings-module=core.settings"
+        "--load-plugins",
+        "pylint_django",
+        "--django-settings-module",
+        "core.settings"
     ]
 }
