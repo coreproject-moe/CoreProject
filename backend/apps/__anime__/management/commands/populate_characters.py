@@ -34,17 +34,21 @@ class Command(BaseCommand):
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
+        # logging file names
+        self.mal_rate_limit_file_name = "mal_ratelimit.txt"
+        self.kitsu_not_found_file_name = "kitsu_not_found.txt"
+        self.anilist_not_found_file_name = "anilist_not_found.txt"
 
         # Define variables
         self.character_number: int
         self.character_number_end: int
 
-        self.character_name: str = ""
-        self.character_name_kanji: str = ""
+        self.character_name: str
+        self.character_name_kanji: str
         self.character_image: BytesIO = BytesIO()
 
-        self.character_about: str = ""
-        self.image_url = ""
+        self.character_about: str
+        self.image_url: str
 
         self.session = CachedLimiterSession(
             bucket_class=RedisBucket,
@@ -77,19 +81,26 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options) -> None:
+        """Starting point for our application"""
         self.character_number = options["character-number-start"]
         self.character_number_end = options["character_number_end"]
         self.populate_anime_characters()
 
-    def get_character_data_from_jikan(self) -> dict[str, str] | None:
-        res = self.session.get(
-            f"https://api.jikan.moe/v4/characters/{self.character_number}"
-        )
+    def get_character_data_from_jikan(
+        self,
+        character_number: int,
+        session: CachedLimiterSession,
+    ) -> dict[str, str] | None:
+        """
+        :param character_number: The id of character
+        :param session: Requests instance to get data
+        """
+        res = session.get(f"https://api.jikan.moe/v4/characters/{character_number}")
         data = res.json()
         return_data = None
 
         if res.status_code == 200 and data.get("status", None) not in [404, 408, "429"]:
-            self.stdout.write(f"Got Character Info for {self.character_number} | Jikan")
+            self.stdout.write(f"Got Character Info for {character_number} | Jikan")
             data = data["data"]
             self.character_name = data["name"]
             self.character_name_kanji = data.get("name_kanji", None)
@@ -105,15 +116,15 @@ class Command(BaseCommand):
                 return_data = data
 
         elif data.get("status", None) == 408:
-            self.stdout.write(f"Mal is Rate-Limiting us | {self.character_number}")
+            self.stdout.write(f"Mal is Rate-Limiting us | {character_number}")
 
             # Write the number to a file so that we can deal with it later
-            file = open("skipped.txt", "a", encoding="utf-8")
-            file.write(f"{str(self.character_number)}\n")
+            file = open(self.mal_rate_limit_file_name, "a", encoding="utf-8")
+            file.write(f"{str(character_number)}\n")
             file.close()
 
         else:
-            self.stdout.write(f"Missed info for {self.character_number} | Jikan")
+            self.stdout.write(f"Missed info for {character_number} | Jikan")
 
         return return_data
 
@@ -123,6 +134,12 @@ class Command(BaseCommand):
         character_number: int,
         session: CachedLimiterSession,
     ) -> str | None:
+        """
+        :param character_name: The name of the character
+        :param character_number: The id of character
+        :param session: Requests instance to get data
+        """
+
         res = session.get(
             f"https://kitsu.io/api/edge/characters?filter[name]={character_name}"
         )
@@ -144,7 +161,7 @@ class Command(BaseCommand):
                 self.stdout.write(f"Entry for {character_name} doesn't exist | Kitsu")
 
                 # Write the number to a file so that we can deal with it later
-                file = open("kitsu.txt", "a", encoding="utf-8")
+                file = open(self.kitsu_not_found_file_name, "a", encoding="utf-8")
                 file.write(f"{str(character_name)}\n")
                 file.close()
 
@@ -160,8 +177,11 @@ class Command(BaseCommand):
         session: CachedLimiterSession,
     ) -> str | None:
         """
-        :params:
+        :param character_name: The name of the character
+        :param character_number: The id of character
+        :param session: Requests instance to get data
         """
+
         query = {
             "query": """
             query (
@@ -210,7 +230,7 @@ class Command(BaseCommand):
                 self.stdout.write(f"Entry for {character_name} doesn't exist | Anilist")
 
                 # Write the number to a file so that we can deal with it later
-                file = open("anilist.txt", "a", encoding="utf-8")
+                file = open(self.anilist_not_found_file_name, "a", encoding="utf-8")
                 file.write(f"{str(character_name)}\n")
                 file.close()
 
@@ -220,17 +240,30 @@ class Command(BaseCommand):
         return anilist_id
 
     def populate_anime_characters(self) -> None:
+        """
+        Function's purpose :
+            1. Request the data from `https://api.jikan.moe/v4`
+            2. Using the `character_name` from data(jikan) get `kitsu_id` from kitsu
+            3. Using the `character_name` from data(jikan) get `anilist_id` from anilist
+            4. Save everything to `CharacterModel`
+        """
+
         if self.character_number == 1:
-            # Remove files which will be necessary for logging failed request
-            if os.path.exists("skipped.txt"):
-                os.remove("skipped.txt")
-            if os.path.exists("anilist.txt"):
-                os.remove("anilist.txt")
-            if os.path.exists("kitsu.txt"):
-                os.remove("kitsu.txt")
+            # If user starts from 0 remove files which are necessary for logging failed request
+            files_to_remove = [
+                self.mal_rate_limit_file_name,
+                self.anilist_not_found_file_name,
+                self.kitsu_not_found_file_name,
+            ]
+            for file in files_to_remove:
+                if os.path.exists(file):
+                    os.remove(file)
 
         while self.character_number < self.character_number_end:
-            data = self.get_character_data_from_jikan()
+            data = self.get_character_data_from_jikan(
+                self.character_number,
+                session=self.session,
+            )
 
             if data:
                 try:
