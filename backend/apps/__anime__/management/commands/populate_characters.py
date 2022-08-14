@@ -1,6 +1,7 @@
 import os
 from io import BytesIO
 
+
 from apps.api.v1.anime.models import CharacterModel  # pylint: disable=import-error
 from core.requests import CachedLimiterSession  # pylint: disable=import-error
 from django.core.files.base import ContentFile
@@ -19,13 +20,21 @@ adapter = HTTPAdapter(max_retries=retry_strategy)
 
 
 class Command(BaseCommand):
-    """Populates the character database from https://jikan.moe"""
+    """
+    Populates the character database
+        How does it achieve this?
+        First we are taking `self.character_number` as a command line argument.
+            Then using a while loop :
+                1. Requesting the data from `https://api.jikan.moe/v4`
+                2. Using the `character_name` from data(jikan) we are getting `kitsu_id` from kitsu
+                3. Using the `character_name` from data(jikan) we are getting `anilist_id` from anilist
+                4. Saving everything to `CharacterModel`
+    """
+
+    help = "Seeds the character database"
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
-
-        # Help string
-        Command.help = self.__doc__
 
         # Define variables
         self.character_number: int
