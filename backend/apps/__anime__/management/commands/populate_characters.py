@@ -1,7 +1,6 @@
 import os
 from io import BytesIO
 
-
 from apps.api.v1.anime.models import CharacterModel  # pylint: disable=import-error
 from core.requests import CachedLimiterSession  # pylint: disable=import-error
 from django.core.files.base import ContentFile
