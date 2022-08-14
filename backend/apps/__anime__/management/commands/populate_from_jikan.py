@@ -81,7 +81,7 @@ class Command(BaseCommand):
         return_data = None
 
         if res.status_code == 200 and data.get("status", None) not in [404, 408, "429"]:
-            print(f"Got Character Info for {self.character_number} | Jikan")
+            self.stdout.write(f"Got Character Info for {self.character_number} | Jikan")
             data = data["data"]
             self.character_name = data["name"]
             self.character_name_kanji = data.get("name_kanji", None)
@@ -97,7 +97,7 @@ class Command(BaseCommand):
                 return_data = data
 
         elif data.get("status", None) == 408:
-            print(f"Mal is Rate-Limiting us | {self.character_number}")
+            self.stdout.write(f"Mal is Rate-Limiting us | {self.character_number}")
 
             # Write the number to a file so that we can deal with it later
             file = open("skipped.txt", "a", encoding="utf-8")
@@ -105,7 +105,7 @@ class Command(BaseCommand):
             file.close()
 
         else:
-            print(f"Missed info for {self.character_number} | Jikan")
+            self.stdout.write(f"Missed info for {self.character_number} | Jikan")
 
         return return_data
 
@@ -130,10 +130,10 @@ class Command(BaseCommand):
                     self.character_name_kanji = data["attributes"]["names"]["ja_jp"]
 
                 kitsu_id = data["id"]
-                print(f"Got Character Info for {character_number} | Kitsu")
+                self.stdout.write(f"Got Character Info for {character_number} | Kitsu")
 
             except IndexError:
-                print(f"Entry for {character_name} doesn't exist | Kitsu")
+                self.stdout.write(f"Entry for {character_name} doesn't exist | Kitsu")
 
                 # Write the number to a file so that we can deal with it later
                 file = open("kitsu.txt", "a", encoding="utf-8")
@@ -141,12 +141,12 @@ class Command(BaseCommand):
                 file.close()
 
         else:
-            print(f"Missed info for {character_number} | Kitsu")
+            self.stdout.write(f"Missed info for {character_number} | Kitsu")
 
         return kitsu_id
 
-    @staticmethod
     def get_data_from_anilist(
+        self,
         character_name: str,
         character_number: int,
         session: CachedLimiterSession,
@@ -192,13 +192,14 @@ class Command(BaseCommand):
         anilist_id = None
 
         if data and res.status_code == 200:
-
             try:
                 anilist_id = data["data"]["Page"]["characters"][0]["id"]
-                print(f"Got Character Info for {character_number} | Anilist")
+                self.stdout.write(
+                    f"Got Character Info for {character_number} | Anilist"
+                )
 
             except IndexError:
-                print(f"Entry for {character_name} doesn't exist | Anilist")
+                self.stdout.write(f"Entry for {character_name} doesn't exist | Anilist")
 
                 # Write the number to a file so that we can deal with it later
                 file = open("anilist.txt", "a", encoding="utf-8")
@@ -206,7 +207,7 @@ class Command(BaseCommand):
                 file.close()
 
         else:
-            print(f"Missed info for {character_number} | Anilist")
+            self.stdout.write(f"Missed info for {character_number} | Anilist")
 
         return anilist_id
 
@@ -250,7 +251,7 @@ class Command(BaseCommand):
                     database.save()
 
                 except IntegrityError:
-                    print(f"Entry exists : {self.character_number}")
+                    self.stdout.write(f"Entry exists : {self.character_number}")
 
             self.after_populate_anime_characters()
 
