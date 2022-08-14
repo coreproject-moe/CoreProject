@@ -68,5 +68,5 @@ class AnimeModel(models.Model):
 # Extra imports
 # __ DO NOT MODIFY __
 
-from .episode_comment import EpisodeCommentModel
-from .episode_timestamp import EpisodeTimestampModel
+from .episode_comment import EpisodeCommentModel  # pylint: disable=import-error
+from .episode_timestamp import EpisodeTimestampModel  # pylint: disable=import-error
