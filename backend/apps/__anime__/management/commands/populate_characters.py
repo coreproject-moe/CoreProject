@@ -1,8 +1,6 @@
-import os
 from io import BytesIO
+import os
 
-from apps.api.v1.anime.models import CharacterModel  # pylint: disable=import-error
-from core.requests import CachedLimiterSession  # pylint: disable=import-error
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError
@@ -10,6 +8,9 @@ from requests.adapters import HTTPAdapter
 from requests_cache import RedisCache
 from requests_ratelimiter import RedisBucket
 from urllib3.util import Retry
+
+from apps.api.v1.anime.models import CharacterModel  # pylint: disable=import-error
+from core.requests import CachedLimiterSession  # pylint: disable=import-error
 
 retry_strategy = Retry(
     total=3,
