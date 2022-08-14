@@ -20,6 +20,8 @@ whitenoise = {extras = ["brotli"], version = "*"}
 huey = "*"
 redis = "*"
 hiredis = {version="*", markers="sys_platform != 'win32'"}
+# 3rd party ( admin )
+django-modeladmin-reorder = "*"
 # Rest framework
 django-ninja = "*"
 # HTTP Client
@@ -29,16 +31,20 @@ requests-ratelimiter = "*"
 # Web servers
 uwsgi = {version="*", markers="sys_platform != 'win32'"}
 pillow = "*"
+"discord.py" = {extras = ["voice"], version = "*"}
 
 [dev-packages]
+# Profilers
 django-debug-toolbar = "*"
 django-dbbackup = "*"
 django-cprofile-middleware = "*"
 # Code formatting
 black = "*"
-# Pylint specific
+# Pylint
 pylint = "*"
+# Pylint Specific
 pylint-django = "*"
+# Mypy
 mypy = "*"
 # Mypy Stubs
 types-requests = "*"

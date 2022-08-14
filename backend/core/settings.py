@@ -47,6 +47,9 @@ INSTALLED_APPS = [
     # __user__ must be above auth
     "apps.__anime__",
     "apps.__user__",
+    "apps.__discord__",
+    # Reorder Admin
+    "admin_reorder",
     # Django stuff
     "django.contrib.admin",
     "django.contrib.auth",
@@ -71,6 +74,7 @@ INSTALLED_APPS = [
     "apps.api.v1.producers",
     "apps.api.v1.studios",
 ]
+
 # Debug Toolbar Add
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install-the-app
 if DEBUG:
@@ -81,6 +85,9 @@ if DEBUG:
 
 
 MIDDLEWARE = [
+    # Reorder admin
+    "admin_reorder.middleware.ModelAdminReorder",
+    # Django Specific
     "django.middleware.security.SecurityMiddleware",
     # Whitenoise
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -95,6 +102,15 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.cache.FetchFromCacheMiddleware",
 ]
+
+# ADMIN_REORDER = (
+#     # Keep original label and models
+#     "sites",
+#     # Rename app
+#     {"app": "auth", "label": "Authorisation"},
+#     # Reorder app models
+#     {"app": "auth", "models": ("auth.User", "auth.Group")},
+# )
 
 # https://docs.djangoproject.com/en/4.0/topics/cache/#the-per-site-cache-1
 CACHE_MIDDLEWARE_SECONDS = 0
