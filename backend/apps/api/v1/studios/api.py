@@ -24,7 +24,7 @@ def get_studio_info(request: HttpRequest, filters: StudioFilter = Query(...)):
             query |= Q(**{f"name__icontains": position.strip()})
         query_object &= query
 
-    query = StudioModel.objects.all()
+    query = StudioModel.objects.all().filter()
 
     if query_object:
         query = query.filter(query_object).distinct()

@@ -101,7 +101,7 @@ class AnimeInfoAdmin(admin.ModelAdmin):
         ),
     )
 
-    def get_app_list():
+    def get_app_list(*args, **kwargs):
         x = super().get_app_list()
 
         print(x)

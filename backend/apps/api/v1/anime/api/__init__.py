@@ -35,10 +35,10 @@ def get_anime_info(request: HttpRequest, filters: AnimeInfoFilters = Query(...))
     for item in anime_lookups:
         value = query_dict.pop(item, None)
         if value:
-            query = Q()
+            _query_ = Q()
             for position in value.split(","):
-                query |= Q(**{f"{item}": int(position.strip())})
-            query_object &= query
+                _query_ |= Q(**{f"{item}": int(position.strip())})
+            query_object &= _query_
 
     # Many to many lookups
     m2m_lookups = (
@@ -51,10 +51,10 @@ def get_anime_info(request: HttpRequest, filters: AnimeInfoFilters = Query(...))
     for item in m2m_lookups:
         value = query_dict.pop(item, None)
         if value:
-            query = Q()
+            _query_ = Q()
             for position in value.split(","):
-                query &= Q(**{f"{item}__name__icontains": position.strip()})
-            query_object &= query
+                _query_ &= Q(**{f"{item}__name__icontains": position.strip()})
+            query_object &= _query_
 
     # 2 Step get query
     # There wont be a performance hit if we do all().filter()

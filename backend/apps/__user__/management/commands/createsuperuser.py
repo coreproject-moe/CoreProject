@@ -5,7 +5,6 @@ from typing import Any
 
 from django.contrib.auth.management import get_default_username
 from django.contrib.auth.management.commands.createsuperuser import (
-    PASSWORD_FIELD,
     Command as SuperUserCommand,
     NotRunningInTTYException,
 )
@@ -15,6 +14,8 @@ from django.core.management.base import CommandError
 from django.utils.text import capfirst
 
 from ...models import User
+
+PASSWORD_FIELD = "password"
 
 
 class Command(SuperUserCommand):

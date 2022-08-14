@@ -7,7 +7,7 @@ class FileField:
     # Thanks Stackoverflow
     # https://stackoverflow.com/questions/1190697/django-filefield-with-upload-to-determined-at-runtime
     @staticmethod
-    def anime_charater(instance, filename) -> str:
+    def anime_charater(instance, filename) -> Path:
         return Path("anime_characters", filename)
 
 

@@ -2,10 +2,10 @@ from ninja import Schema
 
 
 class CharacterFilter(Schema):
-    mal_id: str = None
+    mal_id: str | None = None
 
     # icontains based search
     #   Allowed :
-    #       Sora Amamiya, Natsukawa Shiina
+    #       Sora Amamiya, Natsukawa Shiina, Momo Asakura
     #       Sora Amamiya
-    name: str = None
+    name: str | None = None
