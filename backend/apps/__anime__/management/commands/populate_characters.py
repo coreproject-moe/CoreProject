@@ -34,6 +34,7 @@ class Command(BaseCommand):
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
+
         # logging file names
         self.mal_rate_limit_file_name = "mal_ratelimit.txt"
         self.kitsu_not_found_file_name = "kitsu_not_found.txt"
@@ -267,31 +268,31 @@ class Command(BaseCommand):
 
             if data:
                 try:
-                    database: CharacterModel = CharacterModel.objects.create(
+                    CharacterModel.objects.update_or_create(
                         mal_id=self.character_number,
-                        name=self.character_name,
-                        name_kanji=self.character_name_kanji,
-                        character_image=ContentFile(
-                            self.character_image.read(),
-                            f"{self.character_number}.{self.image_url.split('.')[-1]}",
-                        ),
-                        about=self.character_about,
+                        defaults={
+                            "kitsu_id": self.get_data_from_kitsu(
+                                self.character_name,
+                                self.character_number,
+                                self.session,
+                            ),
+                            "anilist_id": self.get_data_from_anilist(
+                                self.character_name,
+                                self.character_number,
+                                self.session,
+                            ),
+                            "name": self.character_name,
+                            "name_kanji": self.character_name_kanji,
+                            "character_image": ContentFile(
+                                self.character_image.read(),
+                                f"{self.character_number}.{self.image_url.split('.')[-1]}",
+                            ),
+                            "about": self.character_about,
+                        },
                     )
 
-                    # Lazy query
-                    database.kitsu_id = self.get_data_from_kitsu(
-                        self.character_name,
-                        self.character_number,
-                        self.session,
-                    )
-                    database.anilist_id = self.get_data_from_anilist(
-                        self.character_name,
-                        self.character_number,
-                        self.session,
-                    )
-                    database.save()
-
-                except IntegrityError:
+                except IntegrityError as e:
+                    print(e)
                     self.stdout.write(f"Entry exists : {self.character_number}")
 
             self.after_populate_anime_characters()
