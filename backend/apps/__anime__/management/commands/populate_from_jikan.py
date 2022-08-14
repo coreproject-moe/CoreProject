@@ -36,7 +36,7 @@ class Command(BaseCommand):
 
         self.character_name: str = ""
         self.character_name_kanji: str = ""
-        self.character_image: BytesIO
+        self.character_image: BytesIO = BytesIO()
 
         self.character_about: str = ""
         self.image_url = ""
@@ -76,11 +76,12 @@ class Command(BaseCommand):
         self.character_number_end = options["character_number_end"]
         self.populate_anime_characters()
 
-    def get_character_data_from_jikan(self) -> dict[str, str]:
+    def get_character_data_from_jikan(self) -> dict[str, str] | None:
         res = self.session.get(
             f"https://api.jikan.moe/v4/characters/{self.character_number}"
         )
         data = res.json()
+        return_data = None
 
         if res.status_code == 200 and data.get("status", None) not in [404, 408, "429"]:
             print(f"Got Character Info for {self.character_number} | Jikan")
@@ -96,6 +97,7 @@ class Command(BaseCommand):
             finally:
                 image = self.session.get(self.image_url)
                 self.character_image = BytesIO(image.content)
+                return_data = data
 
         elif data.get("status", None) == 408:
             print(f"Mal is Rate-Limiting us | {self.character_number}")
@@ -105,13 +107,10 @@ class Command(BaseCommand):
             file.write(f"{str(self.character_number)}\n")
             file.close()
 
-            # We need to return None as data
-            data = None
         else:
             print(f"Missed info for {self.character_number} | Jikan")
-            data = None
 
-        return data
+        return return_data
 
     def get_data_from_kitsu(
         self,
