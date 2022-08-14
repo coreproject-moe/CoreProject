@@ -25,6 +25,7 @@ django-ninja = "*"
 # HTTP Client
 requests = "*"
 requests-cache = "*"
+platformdirs = "*" # Required by requests-cache
 requests-ratelimiter = "*"
 # Web servers
 uwsgi = {version="*", markers="sys_platform != 'win32'"}

@@ -36,12 +36,10 @@ class Command(BaseCommand):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
-        # logging file names
         self.mal_rate_limit_file_name = "mal_ratelimit.txt"
         self.kitsu_not_found_file_name = "kitsu_not_found.txt"
         self.anilist_not_found_file_name = "anilist_not_found.txt"
 
-        # Define variables
         self.character_number: int
         self.character_number_end: int
 
@@ -294,6 +292,13 @@ class Command(BaseCommand):
 
                 except IntegrityError as e:
                     print(e)
+                    print(
+                        self.get_data_from_anilist(
+                            self.character_name,
+                            self.character_number,
+                            self.session,
+                        )
+                    )
                     self.stdout.write(f"Entry exists : {self.character_number}")
 
             self.after_populate_anime_characters()

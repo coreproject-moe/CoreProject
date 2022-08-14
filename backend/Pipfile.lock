@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "67f6b02f09dc212e513f2e190558da7a3b33437fe41a11e27e0fee6f1fbd6208"
+            "sha256": "878632a8cf79f4f760abf1b20c6c6b95bf73120e935b527ec93179af904856ee"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -146,7 +146,7 @@
                 "sha256:94b67b64cf92c994f8784c40c082177dc916e0489a73a9a36b24eb18a9db40c6",
                 "sha256:d55c477b4672f93606e992049f15d526dc7867e6c756cd6256d4af92e2b1e364"
             ],
-            "markers": "python_version >= '3.7' and python_version < '4'",
+            "markers": "python_version >= '3.7' and python_full_version < '4.0.0'",
             "version": "==22.1.0"
         },
         "certifi": {
@@ -440,7 +440,7 @@
                 "sha256:027d8e83a2d7de06bbac4e5ef7e023c02b863d7ea5d079477e722bb41ab25788",
                 "sha256:58c8abb07dcb441e6ee4b11d8df0ac856038f944ab98b7be6b27b2a3c7feef19"
             ],
-            "markers": "python_version >= '3.7'",
+            "index": "pypi",
             "version": "==2.5.2"
         },
         "psycopg2": {
@@ -520,7 +520,7 @@
             "hashes": [
                 "sha256:0741b7db4b3facdce60bd836e0fcc43911bc52c443f674f924afba7e02e79c18"
             ],
-            "markers": "python_version < '4' and python_full_version >= '3.6.2'",
+            "markers": "python_full_version >= '3.6.2' and python_full_version < '4.0.0'",
             "version": "==2.8.1"
         },
         "python-dotenv": {
@@ -608,7 +608,7 @@
                 "sha256:c33ccba33c819596124764c23a97d25f32b28433ba0dedeb77d873a38722c9bc",
                 "sha256:ea6e8fb210b19d950fab93b60c9009226c63a28808bc8386e05301e25883ac0a"
             ],
-            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4, 3.5' and python_version < '4'",
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4, 3.5' and python_full_version < '4.0.0'",
             "version": "==1.26.11"
         },
         "uwsgi": {
@@ -930,7 +930,7 @@
                 "sha256:027d8e83a2d7de06bbac4e5ef7e023c02b863d7ea5d079477e722bb41ab25788",
                 "sha256:58c8abb07dcb441e6ee4b11d8df0ac856038f944ab98b7be6b27b2a3c7feef19"
             ],
-            "markers": "python_version >= '3.7'",
+            "index": "pypi",
             "version": "==2.5.2"
         },
         "pylint": {
@@ -985,7 +985,7 @@
                 "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc",
                 "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"
             ],
-            "markers": "python_version >= '3.7'",
+            "markers": "python_full_version < '3.11.0a7'",
             "version": "==2.0.1"
         },
         "tomlkit": {
