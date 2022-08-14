@@ -1,5 +1,4 @@
 from django.apps import AppConfig
-from threading import Thread
 
 
 class DiscordConfig(AppConfig):

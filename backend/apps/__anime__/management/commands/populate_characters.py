@@ -1,5 +1,6 @@
 from io import BytesIO
 import os
+from typing import TYPE_CHECKING
 
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
@@ -9,10 +10,9 @@ from apps.api.v1.anime.models import CharacterModel  # pylint: disable=import-er
 
 from ._session_ import SESSION
 
-from typing import TYPE_CHECKING
-
 if TYPE_CHECKING:
     from core.requests import CachedLimiterSession  # pylint: disable=import-error
+
 
 class Command(BaseCommand):
     """
