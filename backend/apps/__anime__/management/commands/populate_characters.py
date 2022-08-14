@@ -31,7 +31,7 @@ class Command(BaseCommand):
                 4. Saving everything to `CharacterModel`
     """
 
-    help = "Seeds the character database"
+    help = "Populates the character database"
 
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
