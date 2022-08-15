@@ -30,7 +30,7 @@
         "daisyui": "^2.22.0",
         "dayjs": "^1.11.5",
         "easytimer.js": "^4.5.3",
-        "eslint": "^8.21.0",
+        "eslint": "^8.22.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-simple-import-sort": "^7.0.0",
         "eslint-plugin-svelte3": "^4.0.0",
