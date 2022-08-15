@@ -24,7 +24,9 @@ from ..schemas.anime_synonym import AnimeSynonymSchema
 def get_url_from_requests() -> str:
     # https://stackoverflow.com/questions/4721771/get-current-user-log-in-signal-in-django
     request: HttpRequest | None = None
-    for frame_record in inspect.stack():
+    # Reversed is better than not doing reverse
+    # Source : Trust me bro
+    for frame_record in reversed(inspect.stack()):
         if frame_record[3] == "get_response":
             request = frame_record[0].f_locals["request"]
             break
