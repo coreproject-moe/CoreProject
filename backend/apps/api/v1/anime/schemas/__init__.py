@@ -1,5 +1,5 @@
-from django.shortcuts import resolve_url
 from django.conf import settings
+from django.shortcuts import resolve_url
 from ninja import ModelSchema
 from pydantic import AnyUrl
 
