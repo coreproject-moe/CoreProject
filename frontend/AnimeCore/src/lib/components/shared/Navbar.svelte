@@ -13,8 +13,7 @@
 <script lang="ts">
     import Logo from "$icons/Logo.svelte";
     import Search from "$icons/Search.svelte";
-
-    import Navbar from "$modals/Navbar.svelte";
+import Navbar from "$modals/Navbar.svelte";
 </script>
 
 <!-- Init the modal  -->
