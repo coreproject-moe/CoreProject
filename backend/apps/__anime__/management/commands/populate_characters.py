@@ -1,17 +1,22 @@
 from io import BytesIO
 import os
-from typing import TYPE_CHECKING
 
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError
+from requests.adapters import HTTPAdapter
+from requests_cache import RedisCache
+from requests_ratelimiter import RedisBucket
+from urllib3.util import Retry
 
 from apps.api.v1.anime.models import CharacterModel  # pylint: disable=import-error
+from core.requests import CachedLimiterSession  # pylint: disable=import-error
 
-from ._session_ import SESSION
-
-if TYPE_CHECKING:
-    from core.requests import CachedLimiterSession  # pylint: disable=import-error
+retry_strategy = Retry(
+    total=3,
+    status_forcelist=[408, 429, 500, 502, 503, 504],
+)
+adapter = HTTPAdapter(max_retries=retry_strategy)
 
 
 class Command(BaseCommand):
@@ -45,7 +50,21 @@ class Command(BaseCommand):
         self.character_about: str
         self.image_url: str
 
-        self.session = SESSION
+        # Tried to implement Facade pattern
+        self.session = CachedLimiterSession(
+            bucket_class=RedisBucket,
+            # Undocumented
+            bucket_kwargs={"bucket_name": "_populate_"},
+            backend=RedisCache(),
+            # https://docs.api.jikan.moe/#section/Information/Rate-Limiting
+            per_minute=60,
+            per_second=1,
+            # https://requests-cache.readthedocs.io/en/stable/user_guide/expiration.html
+            expire_after=360,
+        )
+
+        self.session.mount("https://", adapter)
+        self.session.mount("http://", adapter)
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -139,7 +158,7 @@ class Command(BaseCommand):
                 kitsu_id = data["id"]
                 self.stdout.write(f"Got Character Info for {character_number} | Kitsu")
 
-            except IndexError:
+            except KeyError:
                 self.stdout.write(f"Entry for {character_name} doesn't exist | Kitsu")
 
                 # Write the number to a file so that we can deal with it later
@@ -208,7 +227,7 @@ class Command(BaseCommand):
                     f"Got Character Info for {character_number} | Anilist"
                 )
 
-            except IndexError:
+            except KeyError:
                 self.stdout.write(f"Entry for {character_name} doesn't exist | Anilist")
 
                 # Write the number to a file so that we can deal with it later
