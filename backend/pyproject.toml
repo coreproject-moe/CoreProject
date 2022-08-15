@@ -36,7 +36,10 @@ uwsgi = {version="*", markers="sys_platform != 'win32'"}
 pillow = "*"
 "discord.py" = {extras = ["voice"], version = "*"}
 
+
 [tool.poetry.dev-dependencies]
+# Task runner
+poethepoet = "^0.16.0"
 # Profilers
 django-debug-toolbar = "*"
 django-dbbackup = "*"
@@ -53,8 +56,6 @@ mypy = "*"
 types-requests = "*"
 types-redis = "*"
 django-stubs = {extras = ["compatible-mypy"], version = "*"}
-# Task runner
-poethepoet = "^0.16.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
