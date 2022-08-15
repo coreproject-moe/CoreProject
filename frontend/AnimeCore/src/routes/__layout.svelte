@@ -1,5 +1,6 @@
 <script lang="ts">
     import "../app.scss";
+
     // NProgress css
     import "nprogress/nprogress.css";
 

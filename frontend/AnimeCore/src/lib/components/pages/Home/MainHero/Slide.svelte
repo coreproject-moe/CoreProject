@@ -97,10 +97,14 @@
         >
             <div class="hidden md:flex" />
             <div class="flex items-center gap-3">
-                <Progress bind:this={progress} on:targetAchieved={timerEnded} />
+                <Progress
+                    class="w-24 md:w-36"
+                    bind:this={progress}
+                    on:targetAchieved={timerEnded}
+                />
 
                 <div
-                    class="w-40 flex justify-center swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"
+                    class="w-56 flex justify-center swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"
                 >
                     <div class="flex flex-row gap-3">
                         {#each Array(data.length) as _, index}

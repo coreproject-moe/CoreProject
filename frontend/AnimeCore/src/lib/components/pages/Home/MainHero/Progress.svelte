@@ -1,4 +1,6 @@
 <script lang="ts">
+    let klass = "";
+    export { klass as class };
     // This is the first time i had to rename imports
     import { Timer as EasyTimer } from "easytimer.js";
     import { createEventDispatcher, onDestroy, onMount } from "svelte";
@@ -45,4 +47,4 @@
     };
 </script>
 
-<progress class="progress progress-secondary w-40" value={progressValue} max="100" />
+<progress class="progress progress-secondary {klass}" value={progressValue} max="100" />
