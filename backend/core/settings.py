@@ -35,10 +35,6 @@ USERNAME_DISCRIMINATOR_LENGTH = 4
 MAL_CLIENT_ID = os.environ.get("MAL_CLIENT_ID")
 MAL_CLIENT_SECRET = os.environ.get("MAL_CLIENT_SECRET")
 
-# HOST configurations
-# We are using this to hyperlink model relations
-HOSTNAME = "http://127.0.0.1:8000"
-
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 # Application definition
@@ -94,23 +90,19 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     # Cors headers
     "corsheaders.middleware.CorsMiddleware",
-    "django.middleware.cache.UpdateCacheMiddleware",
+    "django.middleware.cache.UpdateCacheMiddleware",  # Cache
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "django.middleware.cache.FetchFromCacheMiddleware",
+    "django.middleware.cache.FetchFromCacheMiddleware",  # Cache
 ]
 
-# ADMIN_REORDER = (
-#     # Keep original label and models
-#     "sites",
-#     # Rename app
-#     {"app": "auth", "label": "Authorisation"},
-#     # Reorder app models
-#     {"app": "auth", "models": ("auth.User", "auth.Group")},
-# )
+ADMIN_REORDER = (
+    # Keep original label and models
+    "sites",
+)
 
 # https://docs.djangoproject.com/en/4.0/topics/cache/#the-per-site-cache-1
 CACHE_MIDDLEWARE_SECONDS = 0

@@ -35,6 +35,7 @@ requests-ratelimiter = "*"
 uwsgi = {version="*", markers="sys_platform != 'win32'"}
 pillow = "*"
 "discord.py" = {extras = ["voice"], version = "*"}
+django-cache-memoize = "^0.1.10"
 
 
 [tool.poetry.dev-dependencies]

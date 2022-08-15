@@ -293,13 +293,6 @@ class Command(BaseCommand):
 
                 except IntegrityError as e:
                     print(e)
-                    print(
-                        self.get_data_from_anilist(
-                            self.character_name,
-                            self.character_number,
-                            self.session,
-                        )
-                    )
                     self.stdout.write(f"Entry exists : {self.character_number}")
 
             self.after_populate_anime_characters()
