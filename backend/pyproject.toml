@@ -1,3 +1,65 @@
+[tool.poetry]
+name = "core-backend"
+version = "0.1.0"
+description = "A modern backend powering the the world's most modern anime site"
+authors = ["baseplate-admin"]
+license = "AGPL-3.0-only"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = {version = "*", extras = ["argon2"]}
+# Postgres
+psycopg2 = "*"
+# 3rd Party
+django-cleanup = "*"
+django-cors-headers = "*"
+# 3rd Party ( ENV )
+python-dotenv = "*"
+# 3rd Party ( Editor )
+django-ckeditor = "*"
+# 3rd Party ( WhiteNoise )
+whitenoise = {extras = ["brotli"], version = "*"}
+# 3rd Party ( Tasks )
+huey = "*"
+redis = "*"
+hiredis = {version="*", markers="sys_platform != 'win32'"}
+# 3rd party ( admin )
+django-modeladmin-reorder = "*"
+# Rest framework
+django-ninja = "*"
+# HTTP Client
+requests = "*"
+requests-cache = "*"
+requests-ratelimiter = "*"
+# Web servers
+uwsgi = {version="*", markers="sys_platform != 'win32'"}
+pillow = "*"
+"discord.py" = {extras = ["voice"], version = "*"}
+
+[tool.poetry.dev-dependencies]
+# Profilers
+django-debug-toolbar = "*"
+django-dbbackup = "*"
+django-cprofile-middleware = "*"
+# Code formatting
+black = "*"
+# Pylint
+pylint = "*"
+# Pylint Specific
+pylint-django = "*"
+# Mypy
+mypy = "*"
+# Mypy Stubs
+types-requests = "*"
+types-redis = "*"
+django-stubs = {extras = ["compatible-mypy"], version = "*"}
+# Task runner
+poethepoet = "^0.16.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.mypy]
 ignore_missing_imports = true
 plugins = ["mypy_django_plugin.main"]
@@ -11,3 +73,11 @@ django_settings_module = "core.settings"
 profile = "black"
 force_sort_within_sections = true
 combine_as_imports = true
+
+[tool.poe.tasks]
+dev = 'python manage.py runserver'
+sync = 'python manage.py migrate'
+mksync = 'python manage.py makemigrations'
+collectstatic = 'python manage.py collectstatic --clear --link' # Dont duplicate copy files.
+prod = "gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
+huey = "python manage.py run_huey"
