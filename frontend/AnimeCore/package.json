@@ -23,7 +23,7 @@
         "@tailwindcss/typography": "^0.5.4",
         "@types/nprogress": "^0.2.0",
         "@types/voca": "^1.4.2",
-        "@typescript-eslint/eslint-plugin": "^5.32.0",
+        "@typescript-eslint/eslint-plugin": "^5.33.1",
         "@typescript-eslint/parser": "^5.32.0",
         "autoprefixer": "^10.4.8",
         "cssnano": "^5.1.13",
