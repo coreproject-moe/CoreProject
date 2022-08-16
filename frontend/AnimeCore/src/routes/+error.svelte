@@ -1,14 +1,16 @@
 <script context="module" lang="ts">
-    import type { Load } from "@sveltejs/kit";
+    throw new Error("@migration task: Replace error load function (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3293209)");
 
-    export const load: Load = ({ error, status }) => {
-        return {
-            props: {
-                status: status,
-                error: error
-            }
-        };
-    };
+    // import type { Load } from "@sveltejs/kit";
+
+    // export const load: Load = ({ error, status }) => {
+    //     return {
+    //         props: {
+    //             status: status,
+    //             error: error
+    //         }
+    //     };
+    // };
 </script>
 
 <script lang="ts">

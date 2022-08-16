@@ -1,24 +1,6 @@
-<script context="module" lang="ts">
-    import type { Load } from "@sveltejs/kit";
-
-    // https://kit.svelte.dev/docs/hooks#externalfetch
-    export const load: Load = async ({ params }) => {
-        const id = params.id;
-        const url = `https://api.jikan.moe/v4/anime/${id}/full`;
-
-        const response = await fetch(url);
-        const data = await response?.json();
-
-        return {
-            props: {
-                animeData: data.data,
-                error: data.status === 404 && data.message
-            }
-        };
-    };
-</script>
-
 <script lang="ts">
+    throw new Error("@migration task: Add data prop (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3292707)");
+
     export let animeData: {
         mal_id: number;
         episodes: [
