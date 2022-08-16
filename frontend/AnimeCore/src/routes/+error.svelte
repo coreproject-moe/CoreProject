@@ -1,22 +1,5 @@
-<script context="module" lang="ts">
-    throw new Error("@migration task: Replace error load function (https://github.com/sveltejs/kit/discussions/5774#discussioncomment-3293209)");
-
-    // import type { Load } from "@sveltejs/kit";
-
-    // export const load: Load = ({ error, status }) => {
-    //     return {
-    //         props: {
-    //             status: status,
-    //             error: error
-    //         }
-    //     };
-    // };
-</script>
-
 <script lang="ts">
-    export let status: number;
-    export let error: { message: string };
-
+    import { page } from "$app/stores";
     // Odd naming ?
     // Svelte doesnt allow us to name components like 404 ( maybe its JS thing )
     import FourZeroThree from "$components/errors/403.svelte";
@@ -97,16 +80,16 @@
         }
     ];
 
-    let errorPage = errorPages.find((item) => item.status === status);
+    let errorPage = errorPages.find((item) => item.status === $page.status);
 </script>
 
 <svelte:head>
-    <title>CoreProject | {status}</title>
+    <title>CoreProject | {$page.status}</title>
 </svelte:head>
 
 <svelte:component
     this={errorPage?.component}
-    {status}
-    errorMessage={error?.message}
+    status={$page.status}
+    errorMessage={$page.error?.message}
     errorText={errorPage?.text}
 />
