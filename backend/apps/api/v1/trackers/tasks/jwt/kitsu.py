@@ -7,7 +7,7 @@ from huey.contrib.djhuey import db_periodic_task
 from requests_cache import RedisCache
 from requests_ratelimiter import RedisBucket
 
-from core.requests import CachedLimiterSession
+from core.utilities.CachedLimiterSession import CachedLimiterSession
 
 from ...models import KitsuModel
 from ..__logger__ import logger
