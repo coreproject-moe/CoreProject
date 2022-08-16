@@ -9,7 +9,7 @@ export const load: PageLoad = async ({ params }) => {
     const data = await response?.json();
 
     return {
-    animeData: data.data,
-    error: data.status === 404 && data.message
-};
+        animeData: data.data,
+        error: data.status === 404 && data.message
+    };
 };

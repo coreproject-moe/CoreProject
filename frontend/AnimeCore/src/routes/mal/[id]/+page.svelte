@@ -1,7 +1,7 @@
 <script lang="ts">
     /** @type {import('./$types').PageData} */
     export let data;
-    
+
     export let animeData: {
         mal_id: number;
         episodes: [
