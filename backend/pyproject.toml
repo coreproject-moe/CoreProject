@@ -82,3 +82,4 @@ mksync = 'python manage.py makemigrations'
 collectstatic = 'python manage.py collectstatic --clear --link' # Dont duplicate copy files.
 prod = "gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
 huey = "python manage.py run_huey"
+populate_characters = 'python manage.py populate_characters'
