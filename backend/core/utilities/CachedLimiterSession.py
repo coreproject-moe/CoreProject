@@ -1,8 +1,8 @@
 from requests import Session
+from requests.structures import CaseInsensitiveDict
+from requests.utils import default_headers
 from requests_cache import CacheMixin
 from requests_ratelimiter import LimiterMixin
-from requests.utils import default_headers
-from requests.structures import CaseInsensitiveDict
 
 
 class CachedLimiterSession(CacheMixin, LimiterMixin, Session):
