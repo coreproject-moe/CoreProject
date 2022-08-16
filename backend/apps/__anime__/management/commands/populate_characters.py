@@ -10,9 +10,9 @@ from requests_ratelimiter import RedisBucket
 from urllib3.util import Retry
 
 from apps.api.v1.anime.models import CharacterModel  # pylint: disable=import-error
-from core.utilities.CachedLimiterSession import (
+from core.utilities.CachedLimiterSession import (  # pylint: disable=import-error
     CachedLimiterSession,
-)  # pylint: disable=import-error
+)
 
 retry_strategy = Retry(
     total=3,
