@@ -229,7 +229,7 @@ class Command(BaseCommand):
                     f"Got Character Info for {character_number} | Anilist"
                 )
 
-            except KeyError:
+            except IndexError:
                 self.stdout.write(f"Entry for {character_name} doesn't exist | Anilist")
 
                 # Write the number to a file so that we can deal with it later
