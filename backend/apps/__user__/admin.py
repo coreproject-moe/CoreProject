@@ -1,18 +1,15 @@
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth import get_user_model
-from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.db.models import CharField, Value
 from django.db.models.functions import Cast, Concat, LPad
 from django.utils.translation import gettext_lazy as _
 
-from .forms import UserChangeForm, UserCreationForm
 
 
-class CustomUserAdmin(UserAdmin):
+class UserAdmin(DjangoUserAdmin):
     model = get_user_model()
-    add_form = UserCreationForm
-    form = UserChangeForm
 
     list_display = (
         "get_username",
@@ -86,6 +83,7 @@ class CustomUserAdmin(UserAdmin):
 
     @admin.display(description="username")
     def get_username(self, obj, *args, **kwargs):
+        print(CustomUserAdmin.form)
         return obj
 
     def get_search_results(self, request, queryset, search_term):
@@ -115,4 +113,4 @@ class CustomUserAdmin(UserAdmin):
         return queryset, may_have_duplicates
 
 
-admin.site.register(get_user_model(), CustomUserAdmin)
+admin.site.register(get_user_model(), UserAdmin)

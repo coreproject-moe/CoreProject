@@ -61,9 +61,13 @@ class User(AbstractBaseUser, PermissionsMixin, ResizeImageMixin):
     objects = UserManager()
 
     USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = [
+        "username",
+        "username_discriminator",
+    ]
 
     def get_username_with_discriminator(self) -> str:
-        return f"{self.username}#{str(self.username_discriminator).zfill(4)}"
+        return f"{self.username}#{str(self.username_discriminator).zfill(settings.USERNAME_DISCRIMINATOR_LENGTH)}"
 
     def save(self, *args, **kwargs) -> None:
         # if self.avatar:
