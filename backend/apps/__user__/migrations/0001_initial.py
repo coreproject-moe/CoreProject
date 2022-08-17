@@ -100,7 +100,7 @@ class Migration(migrations.Migration):
                     "username_discriminator",
                     models.IntegerField(
                         blank=True,
-                        help_text="Optional.4 characters or fewer.If not provided a random `username_discriminator` will be selected",
+                        help_text="Optional. 4 characters or fewer. If not provided a random `username_discriminator` will be selected.",
                         null=True,
                         validators=[
                             django.core.validators.RegexValidator(

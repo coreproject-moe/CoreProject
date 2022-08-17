@@ -49,9 +49,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, ResizeImageMixin):
         blank=True,
         null=True,
         help_text=(
-            "Optional."
-            f"{settings.USERNAME_DISCRIMINATOR_LENGTH} characters or fewer."
-            "If not provided a random `username_discriminator` will be selected"
+            "Optional. "
+            f"{settings.USERNAME_DISCRIMINATOR_LENGTH} characters or fewer. "
+            "If not provided a random `username_discriminator` will be selected."
         ),
         validators=[
             RegexValidator(
