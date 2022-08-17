@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.db.models import CharField, Value
 from django.db.models.functions import Cast, Concat, LPad
 from django.utils.translation import gettext_lazy as _
-
+from django.db.models import Q
 from .forms import CustomUserChangeForm, CustomUserCreationForm
 
 
@@ -128,7 +128,10 @@ class CustomUserAdmin(DjangoUserAdmin):
                     ),
                     output_field=CharField(),
                 ),
-            ).filter(username_with_discriminator__in=search_term.split(","))
+            ).filter(
+                Q(username_with_discriminator__in=search_term.split(","))
+                | Q(email__in=search_term.split(","))
+            )
 
         return queryset, may_have_duplicates
 
