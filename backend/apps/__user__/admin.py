@@ -6,10 +6,13 @@ from django.db.models import CharField, Value
 from django.db.models.functions import Cast, Concat, LPad
 from django.utils.translation import gettext_lazy as _
 
+from .forms import CustomUserChangeForm, CustomUserCreationForm
 
 
 class CustomUserAdmin(DjangoUserAdmin):
     model = get_user_model()
+    add_form = CustomUserCreationForm
+    form = CustomUserChangeForm
 
     list_display = (
         "get_username",
@@ -79,6 +82,24 @@ class CustomUserAdmin(DjangoUserAdmin):
         #
         #     },
         # ),
+    )
+
+    # Needed to invoke forms
+    # Hours wasted 0.5
+    add_fieldsets = (
+        (
+            None,
+            {
+                "classes": ("wide",),
+                "fields": (
+                    "username",
+                    "username_discriminator",
+                    "email",
+                    "password1",
+                    "password2",
+                ),
+            },
+        ),
     )
 
     @admin.display(description="username")
