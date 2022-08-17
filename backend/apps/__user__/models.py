@@ -48,6 +48,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, ResizeImageMixin):
     username_discriminator = models.IntegerField(
         blank=True,
         null=True,
+        help_text=(
+            "Optional."
+            f"{settings.USERNAME_DISCRIMINATOR_LENGTH} characters or fewer."
+            "If not provided a random `username_discriminator` will be selected"
+        ),
         validators=[
             RegexValidator(
                 regex=r"^(?=[\S\s]{1,%d}$)[\S\s]*"
