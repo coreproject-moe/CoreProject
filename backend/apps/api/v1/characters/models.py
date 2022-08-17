@@ -33,5 +33,5 @@ class CharacterModel(models.Model):
         return f"{self.mal_id}. {self.name}"
 
     class Meta:
-        app_label = "anime"
-        verbose_name = "Anime Character"
+        verbose_name = "Character"
+        verbose_name_plural = "Characters"

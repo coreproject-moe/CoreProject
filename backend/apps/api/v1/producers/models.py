@@ -14,5 +14,5 @@ class ProducerModel(models.Model):
         return f"{self.mal_id}. {self.name} ({self.type})"
 
     class Meta:
-        app_label = "anime"
-        verbose_name = "Anime Producer"
+        verbose_name = "Producer"
+        verbose_name_plural = "Producers"
