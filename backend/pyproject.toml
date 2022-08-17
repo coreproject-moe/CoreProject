@@ -24,6 +24,7 @@ huey = "*"
 redis = "*"
 hiredis = {version="*", markers="sys_platform != 'win32'"}
 # 3rd party ( admin )
+# Unused
 django-modeladmin-reorder = "*"
 # Rest framework
 django-ninja = "*"
