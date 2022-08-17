@@ -6,6 +6,7 @@ from django.db.models import CharField, Value
 from django.db.models.functions import Cast, Concat, LPad
 from django.utils.translation import gettext_lazy as _
 
+from .forms import CustomUserCreationForm
 
 
 class UserAdmin(DjangoUserAdmin):
@@ -83,7 +84,6 @@ class UserAdmin(DjangoUserAdmin):
 
     @admin.display(description="username")
     def get_username(self, obj, *args, **kwargs):
-        print(CustomUserAdmin.form)
         return obj
 
     def get_search_results(self, request, queryset, search_term):

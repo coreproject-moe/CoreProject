@@ -211,7 +211,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Custom user model
 # https://testdriven.io/blog/django-custom-user-model/
 
-AUTH_USER_MODEL = "__user__.User"
+AUTH_USER_MODEL = "__user__.CustomUser"
 
 # Username or Email backend
 # https://stackoverflow.com/questions/25316765/log-in-user-using-either-email-address-or-username-in-django#35836674

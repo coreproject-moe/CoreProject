@@ -12,7 +12,7 @@ from .validators import username_validator
 # Create your models here.
 
 
-class User(AbstractBaseUser, PermissionsMixin, ResizeImageMixin):
+class CustomUser(AbstractBaseUser, PermissionsMixin, ResizeImageMixin):
     username = models.CharField(
         _("username"),
         max_length=150,
