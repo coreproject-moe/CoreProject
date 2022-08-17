@@ -7,7 +7,6 @@ from django.db.models.functions import Cast, Concat, LPad
 from django.utils.translation import gettext_lazy as _
 
 
-
 class CustomUserAdmin(DjangoUserAdmin):
     model = get_user_model()
 
