@@ -1,14 +1,14 @@
 from django.db import models
 
 # Create your models here.
-class PeopleAlternateNameModel(models.Model):
+class StaffAlternateNameModel(models.Model):
     name = models.CharField(max_length=1024, unique=True)
 
     def __str__(self) -> str:
         return f"{self.name}"
 
 
-class PeopleModel(models.Model):
+class StaffModel(models.Model):
     mal_id = models.IntegerField(unique=True, db_index=True)
     kitsu_id = models.IntegerField(unique=True, null=True, db_index=True)
     anilist_id = models.IntegerField(unique=True, null=True, db_index=True)

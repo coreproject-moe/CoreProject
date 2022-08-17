@@ -144,7 +144,7 @@ class Command(BaseCommand):
         """
 
         res = session.get(
-            f"https://kitsu.io/api/edge/characters?filter[name]={character_name}"
+            f"https://kitsu.io/api/edge/people?filter[name]={character_name}"
         )
         data = res.json()
         kitsu_id = None
@@ -173,51 +173,54 @@ class Command(BaseCommand):
 
         return kitsu_id
 
+    # Finished
     def get_data_from_anilist(
         self,
-        character_name: str,
-        character_number: int,
+        staff_name: str,
+        staff_number: int,
         session: CachedLimiterSession,
     ) -> str | None:
         """
-        :param character_name: The name of the character
+        :param staff_name: The name of the character
         :param character_number: The id of character
         :param session: Requests instance to get data
         """
 
         query = {
             "query": """
-            query (
+            query ( 
                 $page:Int = 1
-                $id:Int
+                $id:Int 
                 $search:String
                 $isBirthday:Boolean
-                $sort:[CharacterSort]=[FAVOURITES_DESC]
+                $sort:[StaffSort]=[FAVOURITES_DESC]
             ) {
-                Page (
+                Page(
                     page:$page,
                     perPage:20
                 ) {
-                    pageInfo{
-                        total
+                    pageInfo {
+                        total 
                         perPage
-                        currentPage
-                        lastPage
+                        currentPage 
+                        lastPage 
                         hasNextPage
                     }
-                    characters(id:$id search:$search isBirthday:$isBirthday sort:$sort){
-                        id
-                        name
-                        {userPreferred}
-                        image
-                        {large}
+                    staff (
+                        id:$id
+                        search:$search
+                        isBirthday:$isBirthday 
+                        sort:$sort
+                    ) {
+                        id name{userPreferred}
+                        image{large}
                     }
                 }
             }""",
             "variables": {
                 "page": 1,
-                "type": "CHARACTERS",
-                "search": character_name,
+                "type": "STAFF",
+                "search": {staff_name},
                 "sort": "SEARCH_MATCH",
             },
         }
@@ -228,20 +231,18 @@ class Command(BaseCommand):
         if data and res.status_code == 200:
             try:
                 anilist_id = data["data"]["Page"]["characters"][0]["id"]
-                self.stdout.write(
-                    f"Got Character Info for {character_number} | Anilist"
-                )
+                self.stdout.write(f"Got Staff Info for {staff_number} | Anilist")
 
             except IndexError:
-                self.stdout.write(f"Entry for {character_name} doesn't exist | Anilist")
+                self.stdout.write(f"Entry for {staff_name} doesn't exist | Anilist")
 
                 # Write the number to a file so that we can deal with it later
                 file = open(self.anilist_not_found_file_name, "a", encoding="utf-8")
-                file.write(f"{str(character_name)}\n")
+                file.write(f"{str(staff_name)}\n")
                 file.close()
 
         else:
-            self.stdout.write(f"Missed info for {character_number} | Anilist")
+            self.stdout.write(f"Missed info for {staff_number} | Anilist")
 
         return anilist_id
 
