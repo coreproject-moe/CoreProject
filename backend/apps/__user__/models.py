@@ -1,14 +1,13 @@
 from django.conf import settings
-
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.core.validators import MinValueValidator, RegexValidator
-from django.utils.translation import gettext_lazy as _
 from django.db import models
 from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
+from .managers import UserManager
 from .mixins.resize import ResizeImageMixin
 from .validators import username_validator
-from .managers import UserManager
 
 # Create your models here.
 
