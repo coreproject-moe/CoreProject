@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import StaffModel, StaffAlternateNameModel
+
+from .models import StaffAlternateNameModel, StaffModel
 
 # Register your models here.
 

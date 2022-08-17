@@ -1,7 +1,6 @@
 from io import BytesIO
 import os
 
-from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError
 from requests.adapters import HTTPAdapter
@@ -104,9 +103,9 @@ class Command(BaseCommand):
 
         query = {
             "query": """
-            query ( 
+            query (
                 $page:Int = 1
-                $id:Int 
+                $id:Int
                 $search:String
                 $isBirthday:Boolean
                 $sort:[StaffSort]=[FAVOURITES_DESC]
@@ -116,16 +115,16 @@ class Command(BaseCommand):
                     perPage:20
                 ) {
                     pageInfo {
-                        total 
+                        total
                         perPage
-                        currentPage 
-                        lastPage 
+                        currentPage
+                        lastPage
                         hasNextPage
                     }
                     staff (
                         id:$id
                         search:$search
-                        isBirthday:$isBirthday 
+                        isBirthday:$isBirthday
                         sort:$sort
                     ) {
                         id name{userPreferred}
