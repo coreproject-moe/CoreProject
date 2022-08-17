@@ -6,9 +6,13 @@ from django.db.models import CharField, Value
 from django.db.models.functions import Cast, Concat, LPad
 from django.utils.translation import gettext_lazy as _
 
+from .forms import UserCreationForm, UserChangeForm
+
 
 class CustomUserAdmin(UserAdmin):
     model = get_user_model()
+    add_form = UserCreationForm
+    form = UserChangeForm
 
     list_display = (
         "get_username",

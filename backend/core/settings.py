@@ -52,8 +52,6 @@ INSTALLED_APPS = [
     "apps.__anime__",
     "apps.__user__",
     "apps.__discord__",
-    # Reorder Admin
-    "admin_reorder",
     # Django stuff
     "django.contrib.admin",
     "django.contrib.auth",
@@ -89,8 +87,6 @@ if DEBUG:
 
 
 MIDDLEWARE = [
-    # Reorder admin
-    "admin_reorder.middleware.ModelAdminReorder",
     # Django Specific
     "django.middleware.security.SecurityMiddleware",
     # Whitenoise
@@ -107,10 +103,6 @@ MIDDLEWARE = [
     "django.middleware.cache.FetchFromCacheMiddleware",  # Cache
 ]
 
-ADMIN_REORDER = (
-    # Keep original label and models
-    "sites",
-)
 
 # https://docs.djangoproject.com/en/4.0/topics/cache/#the-per-site-cache-1
 CACHE_MIDDLEWARE_SECONDS = 0

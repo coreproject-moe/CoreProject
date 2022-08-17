@@ -8,7 +8,7 @@ from django.utils import timezone
 
 from .mixins.resize import ResizeImageMixin
 from .validators import username_validator
-from .manager import UserManager
+from .managers import UserManager
 
 # Create your models here.
 
