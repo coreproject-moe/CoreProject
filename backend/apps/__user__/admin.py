@@ -6,10 +6,9 @@ from django.db.models import CharField, Value
 from django.db.models.functions import Cast, Concat, LPad
 from django.utils.translation import gettext_lazy as _
 
-from .forms import CustomUserCreationForm
 
 
-class UserAdmin(DjangoUserAdmin):
+class CustomUserAdmin(DjangoUserAdmin):
     model = get_user_model()
 
     list_display = (
@@ -113,4 +112,4 @@ class UserAdmin(DjangoUserAdmin):
         return queryset, may_have_duplicates
 
 
-admin.site.register(get_user_model(), UserAdmin)
+admin.site.register(get_user_model(), CustomUserAdmin)
