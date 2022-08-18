@@ -6,8 +6,8 @@
     import ChevronsRight from "$icons/Chevrons-Right.svelte";
     import Mouse from "$icons/Mouse.svelte";
     import Play from "$icons/Play.svelte";
-    import { timer as timerStore } from "$store/Timer";
     import { responsiveMode } from "$store/Responsive";
+    import { timer as timerStore } from "$store/Timer";
 
     import Progress from "./Progress.svelte";
 
