@@ -13,11 +13,11 @@
 <script lang="ts">
     import Logo from "$icons/Logo.svelte";
     import Search from "$icons/Search.svelte";
-import Navbar from "$modals/Navbar.svelte";
+    import NavbarModal from "$modals/Navbar.svelte";
 </script>
 
 <!-- Init the modal  -->
-<svelte:component this={Navbar} />
+<svelte:component this={NavbarModal} />
 
 <div class="navbar bg-transparent">
     <div class="navbar-start hidden md:block">

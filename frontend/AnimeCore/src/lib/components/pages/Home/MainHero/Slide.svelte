@@ -1,6 +1,4 @@
 <script lang="ts">
-    import type { SvelteComponent } from "svelte";
-
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
     import ChevronLeft from "$icons/Chevron-Left.svelte";
@@ -8,6 +6,7 @@
     import ChevronsRight from "$icons/Chevrons-Right.svelte";
     import Mouse from "$icons/Mouse.svelte";
     import Play from "$icons/Play.svelte";
+    import { timer as timerStore } from "$store/Timer";
     import { responsiveMode } from "$store/Responsive";
 
     import Progress from "./Progress.svelte";
@@ -30,13 +29,6 @@
     $: fullhd = $responsiveMode === "fullhd";
     $: tablet = $responsiveMode === "tablet";
     $: mobile = $responsiveMode === "mobile";
-
-    interface IProgress extends SvelteComponent {
-        start: () => void;
-        reset: () => void;
-        pause: () => void;
-    }
-    let progress: IProgress;
 
     const timerEnded = () => {
         addOneToMainHeroSlideActiveIndex();
@@ -74,10 +66,10 @@
 
 <svelte:window
     on:focus={() => {
-        progress?.start?.();
+        $timerStore = "start";
     }}
     on:blur={() => {
-        progress?.pause?.();
+        $timerStore = "pause";
     }}
 />
 
@@ -97,11 +89,7 @@
         >
             <div class="hidden md:flex" />
             <div class="flex items-center gap-3">
-                <Progress
-                    class="w-24 md:w-36"
-                    bind:this={progress}
-                    on:targetAchieved={timerEnded}
-                />
+                <Progress class="w-24 md:w-36" on:targetAchieved={timerEnded} />
 
                 <div
                     class="w-56 flex justify-center swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"
@@ -171,16 +159,16 @@
                 style="height:72px"
                 class="font-bold leading-8 md:leading-[4.25rem] text-3xl md:text-6xl"
                 on:mouseenter={() => {
-                    progress.pause();
+                    $timerStore = "pause";
                 }}
                 on:mouseleave={() => {
-                    progress.start();
+                    $timerStore = "start";
                 }}
                 on:touchstart={() => {
-                    progress.pause();
+                    $timerStore = "pause";
                 }}
                 on:touchend={() => {
-                    progress.start();
+                    $timerStore = "start";
                 }}
             >
                 {animeTitle}
@@ -199,16 +187,16 @@
                 class="max-h-24 font-normal text-gray-400 prose [text-shadow:-1px_-1px_0_#0000009e,1px_-1px_0_#0000008c,0px_1px_0_#0000009e,1px_0px_0_#00000061]"
                 offsetScrollbar
                 on:mouseenter={() => {
-                    progress.pause();
+                    $timerStore = "pause";
                 }}
                 on:mouseleave={() => {
-                    progress.start();
+                    $timerStore = "start";
                 }}
                 on:touchstart={() => {
-                    progress.pause();
+                    $timerStore = "pause";
                 }}
                 on:touchend={() => {
-                    progress.start();
+                    $timerStore = "start";
                 }}
             >
                 {animeSummary}

@@ -35,11 +35,13 @@ const checkMode = () => {
             return null;
         }
     } else {
-        return "";
+        return null;
     }
 };
 
-export const responsiveMode = writable(checkMode());
+export const responsiveMode = writable<
+    "mobile" | "tablet" | "desktop" | "widescreen" | "fullhd" | null | undefined
+>(checkMode());
 
 // Final event listener to handle changes
 browser &&
