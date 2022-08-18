@@ -2,7 +2,7 @@ name: Update dependencies
 
 on:
     schedule:
-        - cron: "0 0 * * *"
+        - cron: '0 0 * * *'
 
 jobs:
     update-dependencies:
@@ -10,8 +10,7 @@ jobs:
         steps:
             - uses: actions/checkout@v3
               name: Setup Python
-              run: |
-                  cd backend
+              working-directory: ./backend
 
             - name: Update dependencies
               uses: pdm-project/update-deps-action@v1
