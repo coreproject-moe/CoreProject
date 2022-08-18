@@ -1,10 +1,11 @@
 <script lang="ts">
     let klass = "";
     export { klass as class };
+
     // This is the first time i had to rename imports
     import { Timer as EasyTimer } from "easytimer.js";
     import { createEventDispatcher, onDestroy } from "svelte";
-    
+
     import { timer as timerStore } from "$store/Timer";
 
     const SWIPER_DELAY = 10;
