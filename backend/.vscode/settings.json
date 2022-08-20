@@ -1,13 +1,12 @@
 {
-  "python.linting.enabled": true,
-  "python.linting.mypyEnabled": false,
-  "python.linting.flake8Enabled": true,
-  "python.linting.pylintEnabled": true,
-  "python.linting.pylintArgs": [
-    "--load-plugins",
-    "pylint_django",
-    "--django-settings-module",
-    "core.settings"
-  ],
-
+    "python.linting.enabled": true,
+    "python.linting.mypyEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.pylintArgs": [
+        "--load-plugins",
+        "pylint_django",
+        "--django-settings-module",
+        "core.settings"
+    ]
 }

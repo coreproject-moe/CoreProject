@@ -11,9 +11,7 @@ from urllib3.util import Retry
 
 # pylint: disable=import-error
 from apps.api.v1.anime.models import CharacterModel
-from core.utilities.CachedLimiterSession import (
-    CachedLimiterSession,
-)
+from core.utilities.CachedLimiterSession import CachedLimiterSession
 
 retry_strategy = Retry(
     total=3,
