@@ -9,8 +9,9 @@ from requests_cache import RedisCache
 from requests_ratelimiter import RedisBucket
 from urllib3.util import Retry
 
-from apps.api.v1.anime.models import CharacterModel  # pylint: disable=import-error
-from core.utilities.CachedLimiterSession import (  # pylint: disable=import-error
+# pylint: disable=import-error
+from apps.api.v1.anime.models import CharacterModel
+from core.utilities.CachedLimiterSession import (
     CachedLimiterSession,
 )
 
@@ -24,13 +25,13 @@ adapter = HTTPAdapter(max_retries=retry_strategy)
 class Command(BaseCommand):
     """
     Populates the character database
-        How does it achieve this?
-        First we are taking `self.character_number` as a command line argument.
-            Then using a while loop :
-                1. Requesting the data from `https://api.jikan.moe/v4`
-                2. Using the `character_name` from data(jikan) we are getting `kitsu_id` from kitsu
-                3. Using the `character_name` from data(jikan) we are getting `anilist_id` from anilist
-                4. Saving everything to `CharacterModel`
+    How does it achieve this?
+    First we are taking `self.character_number` as a command line argument.
+    Then using a while loop :
+    1. Requesting the data from `https://api.jikan.moe/v4`
+    2. Using the `character_name` we are getting `kitsu_id`
+    3. Using the `character_name` we are getting `anilist_id`
+    4. Saving everything to `CharacterModel`
     """
 
     help = "Populates the character database"
@@ -255,7 +256,8 @@ class Command(BaseCommand):
         """
 
         if self.character_number == 1:
-            # If user starts from 0 remove files which are necessary for logging failed request
+            # If user starts from 0 remove files
+            # which are necessary for logging failed request
             files_to_remove = [
                 self.mal_rate_limit_file_name,
                 self.anilist_not_found_file_name,
