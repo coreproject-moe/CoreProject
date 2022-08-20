@@ -41,11 +41,6 @@
     font-display: swap;
 }
 
-@import "swiper/css";
-@import "swiper/css/pagination";
-@import "swiper/css/effect-fade";
-@import "swiper/css/lazy";
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -54,28 +49,15 @@
     --swiper-pagination-color: #e3bd49;
     --swiper-pagination-bullet-inactive-color: #edd68d;
     --swiper-pagination-bullet-inactive-opacity: 0.3;
-    --swiper-pagination-bullet-horizontal-gap: 7px;
-    --swiper-pagination-bullet-size: 10px;
+    // --swiper-pagination-bullet-horizontal-gap: 7px;
+    // --swiper-pagination-bullet-size: 10px;
 }
 
-@media screen and (min-width: 0px) and (max-width: 992px) {
-    :root {
-        --swiper-pagination-bullet-horizontal-gap: 3px;
-    }
+html {
+    // DO NOT REMOVE
+    // I wasted 2 hours of my life fixing this
+    overscroll-behavior-block: contain;
 }
-
-.swiper {
-    height: 100%;
-    width: 100%;
-}
-
-/* This is the hack we are looking for */
-.swiper-slide {
-    height: auto;
-    width: auto;
-}
-
 body {
-    overscroll-behavior: contain;
     scrollbar-width: none;
 }

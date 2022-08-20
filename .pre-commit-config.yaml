@@ -10,6 +10,15 @@ repos:
       rev: "v1.4"
       hooks:
           - id: autoflake
+            args:
+                [
+                    "-i",
+                    "--remove-all-unused-imports",
+                    "--recursive",
+                    "--ignore-init-module-imports",
+                    "--expand-star-imports",
+                    "--remove-unused-variables",
+                ]
 
     - repo: https://github.com/psf/black
       rev: 22.6.0
@@ -43,8 +52,6 @@ repos:
                     "false",
                     --bracket-same-line,
                     "false",
-                    "--single-quote",
-                    "false",
                 ]
             additional_dependencies:
                 - prettier@2.6.2
@@ -54,7 +61,7 @@ repos:
       rev: 5.10.1
       hooks:
           - id: isort
-            args: [--profile, black]
+            args: [--profile, black, --ca, --cs]
 
     - repo: https://github.com/asottile/pyupgrade
       rev: v2.37.3

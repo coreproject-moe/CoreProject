@@ -1,52 +1,95 @@
-from typing import NoReturn
-
-from django.contrib.auth import get_user_model
-from django.contrib.auth.models import AbstractUser
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.conf import settings
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.core.validators import MinValueValidator, RegexValidator
 from django.db import models
+from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
 
+from .managers import UserManager
 from .mixins.resize import ResizeImageMixin
+from .validators import username_validator
 
 # Create your models here.
 
 
-class User(AbstractUser, ResizeImageMixin):
-    avatar = models.ImageField(upload_to="avatars", default=None, blank=True, null=True)
-    video_volume = models.PositiveIntegerField(
-        default=100,
+class CustomUser(AbstractBaseUser, PermissionsMixin, ResizeImageMixin):
+    username = models.CharField(
+        _("username"),
+        max_length=150,
+        help_text=_(
+            "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
+        ),
+        validators=[username_validator],
+        error_messages={
+            "unique": _("A user with that username already exists."),
+        },
+    )
+    first_name = models.CharField(_("first name"), max_length=150, blank=True)
+    last_name = models.CharField(_("last name"), max_length=150, blank=True)
+    email = models.EmailField(
+        _("email address"),
+        blank=True,
+        unique=True,
+        help_text=_("Required. A valid email with a valid domain"),
+    )
+    is_staff = models.BooleanField(
+        _("staff status"),
+        default=False,
+        help_text=_("Designates whether the user can log into this admin site."),
+    )
+    is_active = models.BooleanField(
+        _("active"),
+        default=True,
+        help_text=_(
+            "Designates whether this user should be treated as active. "
+            "Unselect this instead of deleting accounts."
+        ),
+    )
+    username_discriminator = models.IntegerField(
+        blank=True,
+        null=True,
+        help_text=(
+            "Optional. "
+            f"{settings.USERNAME_DISCRIMINATOR_LENGTH} characters or fewer. "
+            "If not provided a random `username_discriminator` will be selected."
+        ),
         validators=[
-            MinValueValidator(0),
-            MaxValueValidator(100),
+            RegexValidator(
+                regex=r"^(?=[\S\s]{1,%d}$)[\S\s]*"
+                % settings.USERNAME_DISCRIMINATOR_LENGTH,
+                message="Length has to be 4",
+                code="nomatch",
+            ),
+            MinValueValidator(1),  # Same thing but remove negative digits
         ],
     )
+    avatar = models.ImageField(upload_to="avatars", default=None, blank=True, null=True)
+    ip = models.GenericIPAddressField(null=False, blank=False)
 
-    def save(self, *args, **kwargs) -> NoReturn:
-        if self.avatar:
-            file = self.resize(self.avatar)
-            self.avatar.save(f"{self.username}.avif", file, save=False)
+    date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
+
+    objects = UserManager()
+
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = [
+        "username",
+        "username_discriminator",
+    ]
+
+    def get_username_with_discriminator(self) -> str:
+        return f"{self.username}#{str(self.username_discriminator).zfill(settings.USERNAME_DISCRIMINATOR_LENGTH)}"
+
+    def save(self, *args, **kwargs) -> None:
+        # if self.avatar:
+        #     file = self.resize(self.avatar)
+        #     self.avatar.save(f"{self.username}.avif", file, save=False)
 
         super().save(*args, **kwargs)
 
+    def __str__(self) -> str:
+        return self.get_username_with_discriminator()
 
-class MalModel(models.Model):
-    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
-    access_token = models.CharField(max_length=1024, null=True, blank=True)
-    expires_in = models.DurationField(null=True, blank=True)
-    refresh_token = models.CharField(max_length=1024, null=True, blank=True)
-    created_at = models.DateTimeField(null=True, blank=True)
-
-
-class KitsuModel(models.Model):
-    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
-    access_token = models.CharField(max_length=64, null=True, blank=True)
-    expires_in = models.DurationField(null=True, blank=True)
-    refresh_token = models.CharField(max_length=64, null=True, blank=True)
-    created_at = models.DateTimeField(null=True, blank=True)
-
-
-class AnilistModel(models.Model):
-    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
-    access_token = models.CharField(max_length=64, null=True, blank=True)
-    expires_in = models.DurationField(null=True, blank=True)
-    refresh_token = models.CharField(max_length=64, null=True, blank=True)
-    created_at = models.DateTimeField(null=True, blank=True)
+    class Meta:
+        verbose_name = _("user")
+        verbose_name_plural = _("users")
+        unique_together = ("username", "username_discriminator")

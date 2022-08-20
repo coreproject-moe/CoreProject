@@ -1,7 +1,4 @@
 <script lang="ts">
-    import type { SvelteComponent } from "svelte";
-    import type { Swiper as SwiperType } from "swiper";
-
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
     import ChevronLeft from "$icons/Chevron-Left.svelte";
@@ -10,18 +7,12 @@
     import Mouse from "$icons/Mouse.svelte";
     import Play from "$icons/Play.svelte";
     import { responsiveMode } from "$store/Responsive";
+    import { timer as timerStore } from "$store/Timer";
 
     import Progress from "./Progress.svelte";
 
-    export let rootSwiper: Partial<SwiperType>;
-    export let mainHeroSwiper: Partial<SwiperType>;
-
-    export let isPrev: boolean;
-    export let isNext: boolean;
-    export let isVisible: boolean;
-    export let isDuplicate: boolean;
-    export let isActive: boolean;
-
+    export let data: any[];
+    export let mainHeroSlideActiveIndex: number;
     export let animeTitle: string;
     export let animeSummary: string;
     export let animeEpisodeCount: number;
@@ -39,22 +30,9 @@
     $: tablet = $responsiveMode === "tablet";
     $: mobile = $responsiveMode === "mobile";
 
-    // Event listener to reset the timer on slide change
-    $: rootSwiper?.on?.("slideChange", () => {
-        if (rootSwiper?.realIndex === 0) {
-            progress?.reset?.();
-            progress?.start?.();
-        } else {
-            progress?.pause?.();
-        }
-    });
-
-    interface IProgress extends SvelteComponent {
-        start: () => void;
-        reset: () => void;
-        pause: () => void;
-    }
-    let progress: IProgress;
+    const timerEnded = () => {
+        addOneToMainHeroSlideActiveIndex();
+    };
 
     let background: string;
     $: {
@@ -69,34 +47,34 @@
         }
     }
 
-    const disableScroll = () => {
-        rootSwiper.mousewheel?.disable();
-        rootSwiper.allowTouchMove = false;
-        progress.pause?.();
-    };
-    const enableScroll = () => {
-        rootSwiper.mousewheel?.enable();
-        rootSwiper.allowTouchMove = true;
-
-        progress.start?.();
+    const addOneToMainHeroSlideActiveIndex = () => {
+        if (mainHeroSlideActiveIndex + 1 === data.length) {
+            mainHeroSlideActiveIndex = 0;
+            return;
+        }
+        mainHeroSlideActiveIndex += 1;
     };
 
-    const timerEnded = () => {
-        mainHeroSwiper.slideNext?.();
+    const minusOneToMainHeroSlideActiveIndex = () => {
+        if (mainHeroSlideActiveIndex === 0) {
+            mainHeroSlideActiveIndex = data.length - 1;
+            return;
+        }
+        mainHeroSlideActiveIndex -= 1;
     };
 </script>
 
 <svelte:window
     on:focus={() => {
-        if (isActive) progress?.start?.();
+        $timerStore = "start";
     }}
     on:blur={() => {
-        if (isActive) progress?.pause?.();
+        $timerStore = "pause";
     }}
 />
 
 <div
-    class="hero min-h-[60vh] md:min-h-screen bg-center bg-no-repeat"
+    class="hero min-h-[60vh] md:min-h-screen w-screen bg-center bg-no-repeat"
     style="background-image: url('{background}');"
 >
     <div
@@ -111,33 +89,41 @@
         >
             <div class="hidden md:flex" />
             <div class="flex items-center gap-3">
-                {#if isActive}
-                    <Progress bind:this={progress} on:targetAchieved={timerEnded} />
-                {:else}
-                    <!-- Placeholder to prevent layout shift -->
-                    <progress class="progress progress-secondary w-40" value={0} max={100} />
-                {/if}
+                <Progress class="w-24 md:w-36" on:targetAchieved={timerEnded} />
 
                 <div
-                    class="w-40 flex justify-center swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"
+                    class="w-56 flex justify-center swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"
                 >
-                    {#each Array(10) as _, index}
-                        <span
-                            class="swiper-pagination-bullet {mainHeroSwiper?.activeIndex ===
-                            index + 1
-                                ? 'swiper-pagination-bullet-active'
-                                : ''}"
-                            on:click={() => {
-                                mainHeroSwiper?.slideTo?.(index + 1);
-                            }}
-                        />
-                    {/each}
+                    <div class="flex flex-row gap-3">
+                        {#each Array(data.length) as _, index}
+                            <svg
+                                height="10"
+                                width="10"
+                                class="cursor-pointer"
+                                on:click={() => {
+                                    mainHeroSlideActiveIndex = index;
+                                }}
+                            >
+                                <circle
+                                    cx="5"
+                                    cy="5"
+                                    r="5"
+                                    style="fill:{index === mainHeroSlideActiveIndex
+                                        ? 'var(--swiper-pagination-color)'
+                                        : 'var(--swiper-pagination-bullet-inactive-color)'};
+                                        opacity:{index === mainHeroSlideActiveIndex
+                                        ? '1'
+                                        : 'var(--swiper-pagination-bullet-inactive-opacity)'}"
+                                />
+                            </svg>
+                        {/each}
+                    </div>
                 </div>
                 <div class="gap-4 hidden md:flex">
                     <button
                         class="btn btn-secondary btn-sm btn-square"
                         on:click={() => {
-                            mainHeroSwiper?.slidePrev?.();
+                            minusOneToMainHeroSlideActiveIndex();
                         }}
                     >
                         <ChevronLeft height={24} width={24} color="black" />
@@ -145,7 +131,7 @@
                     <button
                         class="btn btn-secondary btn-sm btn-square"
                         on:click={() => {
-                            mainHeroSwiper?.slideNext?.();
+                            addOneToMainHeroSlideActiveIndex();
                         }}
                     >
                         <ChevronRight height={24} width={24} color="black" />
@@ -172,10 +158,18 @@
             <ScrollArea
                 style="height:72px"
                 class="font-bold leading-8 md:leading-[4.25rem] text-3xl md:text-6xl"
-                on:mouseenter={disableScroll}
-                on:mouseleave={enableScroll}
-                on:touchstart={disableScroll}
-                on:touchend={enableScroll}
+                on:mouseenter={() => {
+                    $timerStore = "pause";
+                }}
+                on:mouseleave={() => {
+                    $timerStore = "start";
+                }}
+                on:touchstart={() => {
+                    $timerStore = "pause";
+                }}
+                on:touchend={() => {
+                    $timerStore = "start";
+                }}
             >
                 {animeTitle}
             </ScrollArea>
@@ -191,11 +185,19 @@
                 parentClass="mb-5"
                 style="min-height:110px"
                 class="max-h-24 font-normal text-gray-400 prose [text-shadow:-1px_-1px_0_#0000009e,1px_-1px_0_#0000008c,0px_1px_0_#0000009e,1px_0px_0_#00000061]"
-                on:mouseenter={disableScroll}
-                on:mouseleave={enableScroll}
-                on:touchstart={disableScroll}
-                on:touchend={enableScroll}
                 offsetScrollbar
+                on:mouseenter={() => {
+                    $timerStore = "pause";
+                }}
+                on:mouseleave={() => {
+                    $timerStore = "start";
+                }}
+                on:touchstart={() => {
+                    $timerStore = "pause";
+                }}
+                on:touchend={() => {
+                    $timerStore = "start";
+                }}
             >
                 {animeSummary}
             </ScrollArea>

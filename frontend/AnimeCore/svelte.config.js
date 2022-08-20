@@ -37,7 +37,8 @@ const config = {
             $data: path.resolve("./src/lib/data"),
             $kaomoji: path.resolve("./src/lib/kaomoji"),
             $error: path.resolve("./src/lib/components/errors"),
-            $functions: path.resolve("./src/lib/functions")
+            $functions: path.resolve("./src/lib/functions"),
+            $modals: path.resolve("./src/lib/components/modals")
         }
     }
 };

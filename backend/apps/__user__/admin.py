@@ -1,22 +1,28 @@
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.auth import get_user_model
-from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
+from django.db.models import CharField, Q, Value
+from django.db.models.functions import Cast, Concat, LPad
 from django.utils.translation import gettext_lazy as _
 
-from .models import AnilistModel, KitsuModel, MalModel
+from .forms import CustomUserChangeForm, CustomUserCreationForm
 
 
-class CustomUserAdmin(UserAdmin):
+class CustomUserAdmin(DjangoUserAdmin):
     model = get_user_model()
+    add_form = CustomUserCreationForm
+    form = CustomUserChangeForm
 
     list_display = (
-        "username",
+        "get_username",
         "email",
         "first_name",
         "last_name",
         "is_staff",
     )
     list_filter = (
+        "ip",
         "email",
         "is_staff",
         "is_active",
@@ -32,6 +38,7 @@ class CustomUserAdmin(UserAdmin):
             {
                 "fields": (
                     "username",
+                    "username_discriminator",
                     "password",
                 )
             },
@@ -42,6 +49,7 @@ class CustomUserAdmin(UserAdmin):
                 "fields": (
                     "first_name",
                     "last_name",
+                    "ip",
                     "email",
                     "avatar",
                 )
@@ -68,14 +76,64 @@ class CustomUserAdmin(UserAdmin):
                 )
             },
         ),
+        # (
+        #     _("Customization"),
+        #     {
+        #
+        #     },
+        # ),
+    )
+
+    # Needed to invoke forms
+    # Hours wasted 0.5
+    add_fieldsets = (
         (
-            _("Customization"),
+            None,
             {
-                "fields": ("video_volume",),
+                "classes": ("wide",),
+                "fields": (
+                    "username",
+                    "username_discriminator",
+                    "email",
+                    "password1",
+                    "password2",
+                ),
             },
         ),
     )
 
+    @admin.display(description="username")
+    def get_username(self, obj, *args, **kwargs):
+        return obj
+
+    def get_search_results(self, request, queryset, search_term):
+        queryset, may_have_duplicates = super().get_search_results(
+            request,
+            queryset,
+            search_term,
+        )
+
+        if search_term:
+            queryset = self.model.objects.annotate(
+                username_discriminator_as_string=Cast(
+                    "username_discriminator", output_field=CharField()
+                ),
+                username_with_discriminator=Concat(
+                    "username",
+                    Value("#"),
+                    LPad(
+                        "username_discriminator_as_string",
+                        int(settings.USERNAME_DISCRIMINATOR_LENGTH),
+                        Value("0"),
+                    ),
+                    output_field=CharField(),
+                ),
+            ).filter(
+                Q(username_with_discriminator__in=search_term.split(","))
+                | Q(email__in=search_term.split(","))
+            )
+
+        return queryset, may_have_duplicates
+
 
 admin.site.register(get_user_model(), CustomUserAdmin)
-admin.site.register([AnilistModel, MalModel, KitsuModel])

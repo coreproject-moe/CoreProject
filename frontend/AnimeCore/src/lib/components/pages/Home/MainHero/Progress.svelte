@@ -1,14 +1,19 @@
 <script lang="ts">
-    import Timer from "easytimer.js";
-    import { onDestroy, onMount } from "svelte";
-    import { createEventDispatcher } from "svelte";
+    let klass = "";
+    export { klass as class };
+
+    // This is the first time i had to rename imports
+    import { Timer as EasyTimer } from "easytimer.js";
+    import { createEventDispatcher, onDestroy } from "svelte";
+
+    import { timer as timerStore } from "$store/Timer";
 
     const SWIPER_DELAY = 10;
     const dispatch = createEventDispatcher();
 
     let progressValue = 0;
 
-    let timer = new Timer({
+    let timer = new EasyTimer({
         target: {
             seconds: SWIPER_DELAY
         },
@@ -19,30 +24,29 @@
         dispatch("targetAchieved");
     });
 
-    onMount(() => {
-        timer.start({
-            callback: () => {
-                const time = timer.getTotalTimeValues().secondTenths;
-                const value = (100 / SWIPER_DELAY) * (time / 10);
-                progressValue = value;
-            }
-        });
+    timer.on("secondTenthsUpdated", () => {
+        const time = timer.getTotalTimeValues().secondTenths;
+        const value = (100 / SWIPER_DELAY) * (time / 10);
+        progressValue = value;
     });
 
+    $: {
+        switch ($timerStore) {
+            case "start":
+                timer?.start();
+                break;
+            case "pause":
+                timer?.pause();
+                break;
+            case "reset":
+                timer?.reset();
+                break;
+        }
+    }
     onDestroy(() => {
         timer.reset();
         timer.stop();
     });
-
-    export const pause = () => {
-        timer.pause();
-    };
-    export const reset = () => {
-        timer.reset();
-    };
-    export const start = () => {
-        timer.start();
-    };
 </script>
 
-<progress class="progress progress-secondary w-40" value={progressValue} max="100" />
+<progress class="progress progress-secondary {klass}" value={progressValue} max="100" />
