@@ -1,4 +1,5 @@
 from typing import TYPE_CHECKING
+
 from requests import Session
 from requests.structures import CaseInsensitiveDict
 from requests.utils import DEFAULT_ACCEPT_ENCODING
