@@ -1,7 +1,7 @@
 from typing import TYPE_CHECKING
 from requests import Session
 from requests.structures import CaseInsensitiveDict
-from requests.utils import default_headers
+from requests.utils import DEFAULT_ACCEPT_ENCODING
 from requests_cache import CacheMixin
 from requests_ratelimiter import LimiterMixin
 
@@ -20,7 +20,13 @@ class CachedLimiterSession(CacheMixin, LimiterMixin, Session):
         self.headers = self.default_headers()
 
     def default_headers(self) -> CaseInsensitiveDict[str | bytes]:
-        """Remove user agent | Why does requests do this?"""
-        previous_dict = default_headers()
-        del previous_dict["User-Agent"]
-        return CaseInsensitiveDict(previous_dict)
+        """
+        :rtype: requests.structures.CaseInsensitiveDict
+        """
+        return CaseInsensitiveDict(
+            {
+                "Accept-Encoding": DEFAULT_ACCEPT_ENCODING,
+                "Accept": "*/*",
+                "Connection": "keep-alive",
+            }
+        )
