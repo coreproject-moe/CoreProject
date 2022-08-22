@@ -203,14 +203,19 @@ class Command(BaseCommand):
                     page:$page,
                     perPage:20
                 ) {
-                    pageInfo{
+                    pageInfo {
                         total
                         perPage
                         currentPage
                         lastPage
                         hasNextPage
                     }
-                    characters(id:$id search:$search isBirthday:$isBirthday sort:$sort){
+                    characters (
+                        id:$id
+                        search:$search
+                        isBirthday:$isBirthday
+                        sort:$sort
+                    ) {
                         id
                         name
                         {userPreferred}

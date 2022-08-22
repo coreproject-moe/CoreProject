@@ -4,7 +4,7 @@ import os
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError
 from requests.adapters import HTTPAdapter
-from requests_cache import RedisCache
+from requests_cache import RedisCache # type: ignore
 from requests_ratelimiter import RedisBucket
 from urllib3.util import Retry
 
