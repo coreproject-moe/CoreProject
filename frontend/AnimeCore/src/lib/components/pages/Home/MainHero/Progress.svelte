@@ -40,6 +40,7 @@
                 break;
             case "reset":
                 timer?.reset();
+                timer?.start();
                 break;
         }
     }

@@ -11,6 +11,8 @@
 
     import Progress from "./Progress.svelte";
 
+    export let rootElement: HTMLElement | null;
+
     export let data: any[];
     export let mainHeroSlideActiveIndex: number;
     export let animeTitle: string;
@@ -62,14 +64,9 @@
         }
         mainHeroSlideActiveIndex -= 1;
     };
-    let y: number;
-    $: {
-        console.log(y);
-    }
 </script>
 
 <svelte:window
-    bind:scrollY={y}
     on:focus={() => {
         $timerStore = "start";
     }}
@@ -79,6 +76,7 @@
 />
 
 <div
+    bind:this={rootElement}
     class="hero min-h-[60vh] md:min-h-screen w-screen bg-center bg-no-repeat"
     style="background-image: url('{background}');"
 >
