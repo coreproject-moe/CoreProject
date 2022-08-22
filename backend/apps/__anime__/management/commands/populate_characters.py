@@ -1,5 +1,6 @@
 from io import BytesIO
 import os
+from typing import TYPE_CHECKING
 
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
@@ -12,6 +13,11 @@ from urllib3.util import Retry
 # pylint: disable=import-error
 from apps.api.v1.anime.models import CharacterModel
 from core.utilities.CachedLimiterSession import CachedLimiterSession
+
+if TYPE_CHECKING:
+    from argparse import ArgumentParser
+    from typing import Any
+
 
 retry_strategy = Retry(
     total=3,
@@ -34,7 +40,7 @@ class Command(BaseCommand):
 
     help = "Populates the character database"
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
 
         self.mal_rate_limit_file_name = "mal_ratelimit.txt"
@@ -67,7 +73,7 @@ class Command(BaseCommand):
         self.session.mount("https://", adapter)
         self.session.mount("http://", adapter)
 
-    def add_arguments(self, parser) -> None:
+    def add_arguments(self, parser: ArgumentParser) -> None:
         parser.add_argument(
             "character-number-start",
             nargs="?",
@@ -82,7 +88,7 @@ class Command(BaseCommand):
             help="Specifies the stopping number for character.",
         )
 
-    def handle(self, *args, **options) -> None:
+    def handle(self, *args: Any, **options: Any) -> None:
         """Starting point for our application"""
         self.character_number = options["character-number-start"]
         self.character_number_end = options["character_number_end"]
