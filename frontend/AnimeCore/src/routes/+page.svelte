@@ -8,7 +8,7 @@
     import { timer as timerStore } from "$store/Timer";
 
     let mainHeroSlideActiveIndex = 0;
-    let mainHeroRootElement: HTMLElement | null;
+    let mainHeroRootElement: HTMLElement;
 </script>
 
 <svelte:head>
@@ -18,6 +18,7 @@
 <div
     class="h-screen w-screen carousel carousel-vertical snap-none md:snap-y md:snap-mandatory text-white"
     on:scroll={() => {
+        console.log(mainHeroRootElement);
         if (
             Number(mainHeroRootElement?.getBoundingClientRect().top) < -140
             // Number(mainHeroRootElement?.getBoundingClientRect().
@@ -29,12 +30,11 @@
     }}
 >
     <div class="carousel-item h-auto w-auto">
-        <div class="inline-grid">
+        <div class="inline-grid" bind:this={mainHeroRootElement}>
             {#each data as item, index}
                 {#if index === mainHeroSlideActiveIndex}
                     <div transition:blur|local style="grid-area: 1 / 1 / 2 / 2">
                         <MainHeroSlide
-                            bind:rootElement={mainHeroRootElement}
                             bind:mainHeroSlideActiveIndex
                             {data}
                             animeTitle={item.animeTitle}
