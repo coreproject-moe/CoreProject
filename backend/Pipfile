@@ -48,6 +48,8 @@ mypy = "*"
 types-requests = "*"
 types-redis = "*"
 django-stubs = {extras = ["compatible-mypy"], version = "*"}
+# Backporting Types
+typing-extensions = "*"
 
 [requires]
 python_version = "3.10"

@@ -67,7 +67,7 @@ class Command(BaseCommand):
         self.session.mount("https://", adapter)
         self.session.mount("http://", adapter)
 
-    def add_arguments(self, parser):
+    def add_arguments(self, parser) -> None:
         parser.add_argument(
             "character-number-start",
             nargs="?",
