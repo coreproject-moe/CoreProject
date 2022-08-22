@@ -1319,7 +1319,6 @@
         },
         "types-redis": {
             "hashes": [
-
                 "sha256:03b023c08acf344f4f0821cc1c7e4dbecb7b17bc5483927c3e73d80f7fe1768e",
                 "sha256:a34c4e7aafa4b2fb9090d3a7f3ad0ac969089c7b4a05c21dff593a0c37405916"
             ],
