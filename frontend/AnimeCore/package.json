@@ -18,7 +18,7 @@
         "@fullhuman/postcss-purgecss": "^4.1.3",
         "@sveltejs/adapter-static": "^1.0.0-next.39",
         "@sveltejs/adapter-vercel": "^1.0.0-next.67",
-        "@sveltejs/kit": "1.0.0-next.428",
+        "@sveltejs/kit": "1.0.0-next.430",
         "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
         "@tailwindcss/typography": "^0.5.4",
         "@types/nprogress": "^0.2.0",
