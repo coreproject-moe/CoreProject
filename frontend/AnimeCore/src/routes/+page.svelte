@@ -31,7 +31,7 @@
         }
     }}
 >
-    <div class="carousel-item h-auto w-auto">
+    <div class="carousel-item h-auto w-auto snap-always">
         <div class="inline-grid" bind:this={mainHeroRootElement}>
             {#each data as item, index}
                 {#if index === mainHeroSlideActiveIndex}
@@ -53,10 +53,10 @@
             {/each}
         </div>
     </div>
-    <div class="carousel-item h-auto w-auto">
+    <div class="carousel-item h-auto w-auto snap-always">
         <GenreSlide />
     </div>
-    <div class="carousel-item h-auto">
+    <div class="carousel-item h-auto snap-always">
         <LibrarySlide />
     </div>
 </div>
