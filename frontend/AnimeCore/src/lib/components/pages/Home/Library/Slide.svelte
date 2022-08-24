@@ -8,6 +8,8 @@
     import Play from "$icons/Play.svelte";
     import { responsiveMode } from "$store/Responsive";
 
+    import { browser } from "$app/env";
+
     // bind
     let myListElement: HTMLDivElement;
     let continueWatchingElement: HTMLDivElement;
@@ -18,7 +20,25 @@
 
     // We might control it in future :D
     let lastestEpisodeNameWordCount: number;
-    lastestEpisodeNameWordCount ??= 25;
+    $: {
+        switch (true) {
+            case $responsiveMode === "mobile":
+                lastestEpisodeNameWordCount = 25;
+                break;
+            case $responsiveMode === "tablet":
+                lastestEpisodeNameWordCount = 16;
+                break;
+            case $responsiveMode === "desktop":
+                lastestEpisodeNameWordCount = 19;
+                break;
+            case $responsiveMode === "widescreen":
+                lastestEpisodeNameWordCount = 21;
+                break;
+            case $responsiveMode === "fullhd":
+                lastestEpisodeNameWordCount = 22;
+                break;
+        }
+    }
 
     let mylistAnimeNameWordCount: number;
     mylistAnimeNameWordCount ??= 25;
@@ -109,7 +129,7 @@
             </div>
 
             <div
-                class="w-96 md:w-[60vw] carousel gap-5"
+                class="w-96 md:w-[60vw] carousel gap-8"
                 on:wheel={(e) => {
                     scrollHorizontally(e, myListElement);
                 }}
