@@ -53,7 +53,7 @@
             {/each}
         </div>
     </div>
-    <div class="carousel-item h-auto w-auto snap-always">
+    <div class="carousel-item h-auto snap-always">
         <GenreSlide />
     </div>
     <div class="carousel-item h-auto snap-always">
