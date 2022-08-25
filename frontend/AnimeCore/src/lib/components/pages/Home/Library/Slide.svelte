@@ -129,7 +129,7 @@
             </div>
 
             <div
-                class="w-96 md:w-[60vw] carousel gap-8"
+                class="w-96 md:w-[60vw] carousel gap-6"
                 on:wheel={(e) => {
                     scrollHorizontally(e, myListElement);
                 }}
@@ -143,7 +143,7 @@
                             <img src={item.background_image} alt={item.name} />
                         </figure>
                         <div class="card-body justify-between items-center !text-white">
-                            <h2 class="card-title">
+                            <h2 class="card-title text-sm">
                                 {voca.chain(item.name).truncate(mylistAnimeNameWordCount + 3)}
                             </h2>
                             <div class="card-actions">{item.current}/{item.total}</div>
