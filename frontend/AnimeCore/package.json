@@ -24,7 +24,7 @@
         "@types/nprogress": "^0.2.0",
         "@types/voca": "^1.4.2",
         "@typescript-eslint/eslint-plugin": "^5.34.0",
-        "@typescript-eslint/parser": "^5.34.0",
+        "@typescript-eslint/parser": "^5.35.1",
         "autoprefixer": "^10.4.8",
         "cssnano": "^5.1.13",
         "daisyui": "^2.24.0",
