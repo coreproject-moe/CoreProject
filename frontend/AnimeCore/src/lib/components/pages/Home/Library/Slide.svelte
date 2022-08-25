@@ -8,8 +8,6 @@
     import Play from "$icons/Play.svelte";
     import { responsiveMode } from "$store/Responsive";
 
-    import { browser } from "$app/env";
-
     // bind
     let myListElement: HTMLDivElement;
     let continueWatchingElement: HTMLDivElement;
