@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 
-import { browser } from "$app/env";
+import { browser } from "$app/environment";
 
 // Callback function to handle changes
 const checkMode = () => {
