@@ -41,7 +41,7 @@
         "postcss-preset-env": "^7.8.0",
         "prettier": "^2.7.1",
         "prettier-plugin-svelte": "^2.7.0",
-        "sass": "^1.54.5",
+        "sass": "^1.54.6",
         "svelte": "^3.49.0",
         "svelte-check": "^2.9.0",
         "svelte-preprocess": "^4.10.7",
