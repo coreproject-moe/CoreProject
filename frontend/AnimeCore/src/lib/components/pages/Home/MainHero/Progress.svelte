@@ -4,7 +4,7 @@
 
     // This is the first time i had to rename imports
     import { Timer as EasyTimer } from "easytimer.js";
-    import { createEventDispatcher, onDestroy } from "svelte";
+    import { createEventDispatcher, onDestroy, onMount } from "svelte";
 
     import { timer as timerStore } from "$store/Timer";
 
@@ -40,9 +40,13 @@
                 break;
             case "reset":
                 timer?.reset();
+                timer?.start();
                 break;
         }
     }
+    onMount(() => {
+        $timerStore = "start";
+    });
     onDestroy(() => {
         timer.reset();
         timer.stop();

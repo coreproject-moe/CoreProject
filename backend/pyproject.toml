@@ -13,8 +13,12 @@ license = {text = "AGPL-3.0-only"}
 max-line-length = "92"
 
 [tool.mypy]
+show_error_codes = true
+warn_unreachable = true
+strict = true
 ignore_missing_imports = true
 plugins = ["mypy_django_plugin.main"]
+
 
 [tool.django-stubs]
 django_settings_module = "core.settings"

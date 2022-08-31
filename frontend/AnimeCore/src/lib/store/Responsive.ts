@@ -1,47 +1,39 @@
 import { writable } from "svelte/store";
 
-import { browser } from "$app/env";
-
-function handleWindowChange(e: MediaQueryList) {
-    // Check if the media query is true
-    return e.matches;
-}
+import { browser } from "$app/environment";
 
 // Callback function to handle changes
 const checkMode = () => {
-    if (browser) {
-        /*
-            Mapped from here
-            https://bulma.io/documentation/helpers/visibility-helpers/
-        */
+    /*
+        Mapped from here
+        https://bulma.io/documentation/helpers/visibility-helpers/
+    */
 
-        const MOBILE = window.matchMedia("(max-width: 768px)");
-        const TABLET = window.matchMedia("(min-width: 769px) and (max-width: 1023px)");
-        const DESKTOP = window.matchMedia("(min-width: 1024px) and (max-width: 1215px)");
-        const WIDESCREEN = window.matchMedia("(min-width: 1216px) and (max-width: 1407px)");
-        const FULLHD = window.matchMedia("(min-width: 1408px )");
+    const MOBILE = window.matchMedia("(max-width: 768px)");
+    const TABLET = window.matchMedia("(min-width: 769px) and (max-width: 1023px)");
+    const DESKTOP = window.matchMedia("(min-width: 1024px) and (max-width: 1215px)");
+    const WIDESCREEN = window.matchMedia("(min-width: 1216px) and (max-width: 1407px)");
+    const FULLHD = window.matchMedia("(min-width: 1408px )");
 
-        if (handleWindowChange(MOBILE)) {
+    switch (true) {
+        case MOBILE.matches:
             return "mobile";
-        } else if (handleWindowChange(TABLET)) {
+        case TABLET.matches:
             return "tablet";
-        } else if (handleWindowChange(DESKTOP)) {
+        case DESKTOP.matches:
             return "desktop";
-        } else if (handleWindowChange(WIDESCREEN)) {
+        case WIDESCREEN.matches:
             return "widescreen";
-        } else if (handleWindowChange(FULLHD)) {
+        case FULLHD.matches:
             return "fullhd";
-        } else {
+        default:
             return null;
-        }
-    } else {
-        return null;
     }
 };
 
 export const responsiveMode = writable<
-    "mobile" | "tablet" | "desktop" | "widescreen" | "fullhd" | null | undefined
->(checkMode());
+    "mobile" | "tablet" | "desktop" | "widescreen" | "fullhd" | null | false
+>(browser && checkMode());
 
 // Final event listener to handle changes
 browser &&

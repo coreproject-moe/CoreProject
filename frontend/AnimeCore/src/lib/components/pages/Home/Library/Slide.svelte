@@ -18,7 +18,25 @@
 
     // We might control it in future :D
     let lastestEpisodeNameWordCount: number;
-    lastestEpisodeNameWordCount ??= 25;
+    $: {
+        switch (true) {
+            case $responsiveMode === "mobile":
+                lastestEpisodeNameWordCount = 25;
+                break;
+            case $responsiveMode === "tablet":
+                lastestEpisodeNameWordCount = 16;
+                break;
+            case $responsiveMode === "desktop":
+                lastestEpisodeNameWordCount = 19;
+                break;
+            case $responsiveMode === "widescreen":
+                lastestEpisodeNameWordCount = 21;
+                break;
+            case $responsiveMode === "fullhd":
+                lastestEpisodeNameWordCount = 22;
+                break;
+        }
+    }
 
     let mylistAnimeNameWordCount: number;
     mylistAnimeNameWordCount ??= 25;
@@ -109,7 +127,7 @@
             </div>
 
             <div
-                class="w-96 md:w-[60vw] carousel gap-5"
+                class="w-96 md:w-[60vw] carousel gap-6"
                 on:wheel={(e) => {
                     scrollHorizontally(e, myListElement);
                 }}
@@ -123,7 +141,7 @@
                             <img src={item.background_image} alt={item.name} />
                         </figure>
                         <div class="card-body justify-between items-center !text-white">
-                            <h2 class="card-title">
+                            <h2 class="card-title text-sm">
                                 {voca.chain(item.name).truncate(mylistAnimeNameWordCount + 3)}
                             </h2>
                             <div class="card-actions">{item.current}/{item.total}</div>

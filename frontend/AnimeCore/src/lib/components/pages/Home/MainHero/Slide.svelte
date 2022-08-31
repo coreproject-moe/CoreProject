@@ -30,10 +30,6 @@
     $: tablet = $responsiveMode === "tablet";
     $: mobile = $responsiveMode === "mobile";
 
-    const timerEnded = () => {
-        addOneToMainHeroSlideActiveIndex();
-    };
-
     let background: string;
     $: {
         if (mobile) {
@@ -46,6 +42,10 @@
             background = backgroundImage; // This is the default one
         }
     }
+
+    const timerEnded = () => {
+        addOneToMainHeroSlideActiveIndex();
+    };
 
     const addOneToMainHeroSlideActiveIndex = () => {
         if (mainHeroSlideActiveIndex + 1 === data.length) {
