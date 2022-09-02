@@ -329,9 +329,7 @@
             "version": "==1.2.13"
         },
         "discord.py": {
-            "extras": [
-                "voice"
-            ],
+            "extras": ["voice"],
             "hashes": [
                 "sha256:309146476e986cb8faf038cd5d604d4b3834ef15c2d34df697ce5064bf5cd779",
                 "sha256:aeb186348bf011708b085b2715cf92bbb72c692eb4f59c4c0b488130cc4c4b7e"
@@ -340,9 +338,7 @@
             "version": "==2.0.1"
         },
         "django": {
-            "extras": [
-                "argon2"
-            ],
+            "extras": ["argon2"],
             "hashes": [
                 "sha256:031ccb717782f6af83a0063a1957686e87cb4581ea61b47b3e9addf60687989a",
                 "sha256:032f8a6fc7cf05ccd1214e4a2e21dfcd6a23b9d575c6573cacc8c67828dbe642"
@@ -858,9 +854,7 @@
             "version": "==2.0.20"
         },
         "whitenoise": {
-            "extras": [
-                "brotli"
-            ],
+            "extras": ["brotli"],
             "hashes": [
                 "sha256:8e9c600a5c18bd17655ef668ad55b5edf6c24ce9bdca5bf607649ca4b1e8e2c2",
                 "sha256:8fa943c6d4cd9e27673b70c21a07b0aa120873901e099cd46cab40f7cc96d567"
@@ -1067,9 +1061,7 @@
             "version": "==0.3.5.1"
         },
         "django": {
-            "extras": [
-                "argon2"
-            ],
+            "extras": ["argon2"],
             "hashes": [
                 "sha256:031ccb717782f6af83a0063a1957686e87cb4581ea61b47b3e9addf60687989a",
                 "sha256:032f8a6fc7cf05ccd1214e4a2e21dfcd6a23b9d575c6573cacc8c67828dbe642"
@@ -1101,9 +1093,7 @@
             "version": "==3.6.0"
         },
         "django-stubs": {
-            "extras": [
-                "compatible-mypy"
-            ],
+            "extras": ["compatible-mypy"],
             "hashes": [
                 "sha256:0dff8ec0ba3abe046450b3d8a29ce9e72629893d2c1ef679189cc2bfdb6d2f64",
                 "sha256:ea8b35d0da49f7b2ee99a79125f1943e033431dd114726d6643cc35de619230e"
