@@ -1,6 +1,9 @@
 from io import BytesIO
 import os
-from typing import TYPE_CHECKING
+
+# Type checking
+from typing import Any
+from argparse import ArgumentParser
 
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
@@ -13,10 +16,6 @@ from urllib3.util import Retry
 # pylint: disable=import-error
 from apps.anime.models import CharacterModel
 from core.utilities.CachedLimiterSession import CachedLimiterSession
-
-if TYPE_CHECKING:
-    from argparse import ArgumentParser
-    from typing import Any
 
 
 retry_strategy = Retry(
@@ -70,6 +69,11 @@ class Command(BaseCommand):
             expire_after=360,
         )
 
+        # A list to keep items
+        self.success_list: list[str] = []
+        self.error_list: list[str] = []
+        self.warning_list: list[str] = []
+
         self.session.mount("https://", adapter)
         self.session.mount("http://", adapter)
 
@@ -108,7 +112,6 @@ class Command(BaseCommand):
         return_data = None
 
         if res.status_code == 200 and data.get("status", None) not in [404, 408, "429"]:
-            self.stdout.write(f"Got Character Info for {character_number} | Jikan")
             data = data["data"]
             self.character_name = data["name"]
             self.character_name_kanji = data.get("name_kanji", None)
@@ -123,8 +126,10 @@ class Command(BaseCommand):
                 self.character_image = BytesIO(image.content)
                 return_data = data
 
+                self.success_list.append(self.style.SUCCESS("Jikan"))
+
         elif data.get("status", None) == 408:
-            self.stdout.write(f"Mal is Rate-Limiting us | {character_number}")
+            self.warning_list.append(self.style.WARNING("Jikan"))
 
             # Write the number to a file so that we can deal with it later
             file = open(self.mal_rate_limit_file_name, "a", encoding="utf-8")
@@ -132,19 +137,17 @@ class Command(BaseCommand):
             file.close()
 
         else:
-            self.stdout.write(f"Missed info for {character_number} | Jikan")
+            self.error_list.append(self.style.ERROR("Jikan"))
 
         return return_data
 
     def get_data_from_kitsu(
         self,
         character_name: str,
-        character_number: int,
         session: CachedLimiterSession,
     ) -> str | None:
         """
         :param character_name: The name of the character
-        :param character_number: The id of character
         :param session: Requests instance to get data
         """
 
@@ -163,10 +166,10 @@ class Command(BaseCommand):
                     self.character_name_kanji = data["attributes"]["names"]["ja_jp"]
 
                 kitsu_id = data["id"]
-                self.stdout.write(f"Got Character Info for {character_number} | Kitsu")
+                self.success_list.append(self.style.SUCCESS("Kitsu"))
 
             except KeyError:
-                self.stdout.write(f"Entry for {character_name} doesn't exist | Kitsu")
+                self.warning_list.append(self.style.WARNING("Kitsu"))
 
                 # Write the number to a file so that we can deal with it later
                 file = open(self.kitsu_not_found_file_name, "a", encoding="utf-8")
@@ -174,19 +177,17 @@ class Command(BaseCommand):
                 file.close()
 
         else:
-            self.stdout.write(f"Missed info for {character_number} | Kitsu")
+            self.error_list.append(self.style.ERROR("Kitsu"))
 
         return kitsu_id
 
     def get_data_from_anilist(
         self,
         character_name: str,
-        character_number: int,
         session: CachedLimiterSession,
     ) -> str | None:
         """
         :param character_name: The name of the character
-        :param character_number: The id of character
         :param session: Requests instance to get data
         """
 
@@ -238,12 +239,10 @@ class Command(BaseCommand):
         if data and res.status_code == 200:
             try:
                 anilist_id = data["data"]["Page"]["characters"][0]["id"]
-                self.stdout.write(
-                    f"Got Character Info for {character_number} | Anilist"
-                )
+                self.success_list.append(self.style.SUCCESS("Anilist"))
 
             except IndexError:
-                self.stdout.write(f"Entry for {character_name} doesn't exist | Anilist")
+                self.warning_list.append(self.style.WARNING("Anilist"))
 
                 # Write the number to a file so that we can deal with it later
                 file = open(self.anilist_not_found_file_name, "a", encoding="utf-8")
@@ -251,7 +250,7 @@ class Command(BaseCommand):
                 file.close()
 
         else:
-            self.stdout.write(f"Missed info for {character_number} | Anilist")
+            self.error_list.append(self.style.WARNING("Anilist"))
 
         return anilist_id
 
@@ -278,24 +277,29 @@ class Command(BaseCommand):
 
         while self.character_number < self.character_number_end:
             data = self.get_character_data_from_jikan(
-                self.character_number,
+                character_number=self.character_number,
                 session=self.session,
             )
 
             if data:
+                success_error_warnings = set(
+                    self.success_list + self.error_list + self.warning_list
+                )
+                self.stdout.write(
+                    f"Requested info for {self.character_number} | [{' '.join(success_error_warnings)}]"
+                )
+
                 try:
                     CharacterModel.objects.update_or_create(
                         mal_id=self.character_number,
                         defaults={
                             "kitsu_id": self.get_data_from_kitsu(
-                                self.character_name,
-                                self.character_number,
-                                self.session,
+                                character_name=self.character_name,
+                                session=self.session,
                             ),
                             "anilist_id": self.get_data_from_anilist(
-                                self.character_name,
-                                self.character_number,
-                                self.session,
+                                character_name=self.character_name,
+                                session=self.session,
                             ),
                             "name": self.character_name,
                             "name_kanji": self.character_name_kanji,
@@ -318,5 +322,9 @@ class Command(BaseCommand):
         self.character_name_kanji = ""
         self.character_about = ""
         self.character_image.truncate(0)
+
+        self.success_list.clear()
+        self.error_list.clear()
+        self.warning_list.clear()
 
         self.character_number += 1

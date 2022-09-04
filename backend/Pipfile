@@ -7,13 +7,11 @@ name = "pypi"
 django = {version = "*", extras = ["argon2"]}
 # Postgres
 psycopg2 = "*"
-# 3rd Party
+# 3rd Party ( Middlewares )
 django-cleanup = "*"
 django-cors-headers = "*"
 # 3rd Party ( ENV )
 python-dotenv = "*"
-# 3rd Party ( Editor )
-django-ckeditor = "*"
 # 3rd Party ( WhiteNoise )
 whitenoise = {extras = ["brotli"], version = "*"}
 # 3rd Party ( Tasks )
@@ -22,17 +20,23 @@ redis = "*"
 hiredis = {version="*", markers="sys_platform != 'win32'"}
 # Rest framework
 django-ninja = "*"
+# Nice CLI's
+django-click = "*"
 # HTTP Client
 requests = "*"
 requests-cache = "*"
 requests-ratelimiter = "*"
 # Web servers
+gunicorn = '*'
+# Image processing
 pillow = "*"
+# Discord API
 "discord.py" = {extras = ["voice"], version = "*"}
 # Celery
 celery = {extras = ["gevent", "redis"], version = "*"}
 django-celery-beat = '*'
 django-celery-results = "*"
+
 
 [dev-packages]
 django-debug-toolbar = "*"
