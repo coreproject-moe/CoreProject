@@ -48,7 +48,7 @@ HOSTNAME = "http://127.0.0.1:8000"
 # Application definition
 
 INSTALLED_APPS = [
-    # __user__ must be above auth
+    # user must be above auth
     "apps.user",
     "apps.__discord__",
     # Django stuff
@@ -211,12 +211,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # Custom user model
 # https://testdriven.io/blog/django-custom-user-model/
 
-AUTH_USER_MODEL = "__user__.CustomUser"
+AUTH_USER_MODEL = "user.CustomUser"
 
 # Username or Email backend
 # https://stackoverflow.com/questions/25316765/log-in-user-using-either-email-address-or-username-in-django#35836674
 
-AUTHENTICATION_BACKENDS = ["apps.__user__.backends.EmailOrUsernameModelBackend"]
+AUTHENTICATION_BACKENDS = ["apps.user.backends.EmailOrUsernameModelBackend"]
 
 # Password hashers
 # https://docs.djangoproject.com/en/3.2/topics/auth/passwords/#using-argon2-with-django
