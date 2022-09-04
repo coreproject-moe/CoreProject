@@ -3,7 +3,6 @@ from io import BytesIO
 import os
 from typing import Any  # Type checking
 
-
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError
