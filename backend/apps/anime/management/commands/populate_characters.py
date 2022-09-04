@@ -1,9 +1,8 @@
-from argparse import ArgumentParser
+from argparse import ArgumentParser  # Type checking
 from io import BytesIO
 import os
+from typing import Any  # Type checking
 
-# Type checking
-from typing import Any
 
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
@@ -167,7 +166,7 @@ class Command(BaseCommand):
                 kitsu_id = data["id"]
                 self.success_list.append(self.style.SUCCESS("Kitsu"))
 
-            except KeyError:
+            except IndexError:
                 self.warning_list.append(self.style.WARNING("Kitsu"))
 
                 # Write the number to a file so that we can deal with it later
@@ -189,7 +188,6 @@ class Command(BaseCommand):
         :param character_name: The name of the character
         :param session: Requests instance to get data
         """
-
         query = {
             "query": """
             query (
@@ -281,26 +279,21 @@ class Command(BaseCommand):
             )
 
             if data:
-                success_error_warnings = set(
-                    self.success_list + self.error_list + self.warning_list
+                kitsu_id = self.get_data_from_kitsu(
+                    character_name=self.character_name,
+                    session=self.session,
                 )
-                print(success_error_warnings)
-                self.stdout.write(
-                    f"Requested info for {self.character_number} | [{' '.join(success_error_warnings)}]"
+                anilist_id = self.get_data_from_anilist(
+                    character_name=self.character_name,
+                    session=self.session,
                 )
 
                 try:
                     CharacterModel.objects.update_or_create(
                         mal_id=self.character_number,
                         defaults={
-                            "kitsu_id": self.get_data_from_kitsu(
-                                character_name=self.character_name,
-                                session=self.session,
-                            ),
-                            "anilist_id": self.get_data_from_anilist(
-                                character_name=self.character_name,
-                                session=self.session,
-                            ),
+                            "kitsu_id": kitsu_id,
+                            "anilist_id": anilist_id,
                             "name": self.character_name,
                             "name_kanji": self.character_name_kanji,
                             "character_image": ContentFile(
@@ -315,6 +308,12 @@ class Command(BaseCommand):
                     print(e)
                     self.stdout.write(f"Entry exists : {self.character_number}")
 
+            success_error_warnings = (
+                self.success_list + self.error_list + self.warning_list
+            )
+            self.stdout.write(
+                f"Requested info for {self.character_number} | [{', '.join(success_error_warnings)}]"
+            )
             self.after_populate_anime_characters()
 
     def after_populate_anime_characters(self) -> None:
