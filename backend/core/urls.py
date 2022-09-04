@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
 
-from .api import api
+from .api_v1 import api
 
 handler400 = TemplateView.as_view(template_name="400.html")
 handler403 = TemplateView.as_view(template_name="403.html")
@@ -36,7 +36,7 @@ urlpatterns = [
     path("500/", handler500),
     #   Api
     # ========
-    path("api/", api.urls),
+    path("api/v1/", api.urls),
 ]
 if settings.DEBUG:
     urlpatterns += (path("__debug__/", include("debug_toolbar.urls")),)
