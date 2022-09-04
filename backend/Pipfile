@@ -27,9 +27,12 @@ requests = "*"
 requests-cache = "*"
 requests-ratelimiter = "*"
 # Web servers
-uwsgi = {version="*", markers="sys_platform != 'win32'"}
 pillow = "*"
 "discord.py" = {extras = ["voice"], version = "*"}
+# Celery
+celery = {extras = ["gevent", "redis"], version = "*"}
+django-celery-beat = '*'
+django-celery-results = "*"
 
 [dev-packages]
 django-debug-toolbar = "*"
@@ -58,7 +61,8 @@ sync = 'python manage.py migrate'
 mksync = 'python manage.py makemigrations'
 collectstatic = 'python manage.py collectstatic --clear --link' # Dont duplicate copy files.
 prod = "gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
-huey = "python manage.py run_huey"
+celery = 'celery -A core worker -P gevent --loglevel=INFO'
+celery-beat = 'celery -A core beat'
 
 [pipenv]
 allow_prereleases = true

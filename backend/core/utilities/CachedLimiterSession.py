@@ -1,4 +1,3 @@
-from typing import TYPE_CHECKING
 
 from requests import Session
 from requests.structures import CaseInsensitiveDict
@@ -6,8 +5,7 @@ from requests.utils import DEFAULT_ACCEPT_ENCODING
 from requests_cache import CacheMixin
 from requests_ratelimiter import LimiterMixin
 
-if TYPE_CHECKING:
-    from typing import Any
+from typing import Any
 
 
 class CachedLimiterSession(CacheMixin, LimiterMixin, Session):

@@ -67,7 +67,9 @@ INSTALLED_APPS = [
     "ckeditor",
     "ckeditor_uploader",
     "django_cleanup.apps.CleanupConfig",
-    "huey.contrib.djhuey",
+    # Celery stuff
+    "django_celery_beat",
+    "django_celery_results",
     # APIS
     "apps.anime",
     "apps.trackers",
@@ -187,7 +189,7 @@ DATABASES = {
 
 # Allow more fields to be deleted at once
 # https://stackoverflow.com/questions/47585583/the-number-of-get-post-parameters-exceeded-settings-data-upload-max-number-field
-DATA_UPLOAD_MAX_NUMBER_FIELDS = 50000
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 50_000
 
 
 # Password validation
@@ -272,19 +274,15 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
 ]
 
-# settings.py -- alternative configuration method
-# https://huey.readthedocs.io/en/latest/contrib.html#setting-things-up
+# Celery configuration
+# https://www.codingforentrepreneurs.com/blog/celery-redis-django/
 
-from huey import PriorityRedisHuey
-from redis import ConnectionPool
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_RESULT_BACKEND = "redis://localhost:6379/1"
+CELERY_RESULT_BACKEND = "django-db"
+CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers.DatabaseScheduler"
 
-pool = ConnectionPool(host="localhost", port=6379, max_connections=20)
-HUEY = PriorityRedisHuey(
-    "my-app",
-    use_zlib=True,
-    compression=True,
-    connection_pool=pool,
-)
+# Django DB backup
 
 DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage"
 DBBACKUP_STORAGE_OPTIONS = {"location": os.path.join(BASE_DIR, "backup")}
