@@ -61,7 +61,7 @@ sync = 'python manage.py migrate'
 mksync = 'python manage.py makemigrations'
 collectstatic = 'python manage.py collectstatic --clear --link' # Dont duplicate copy files.
 prod = "gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
-celery = 'celery -A core worker -P gevent --loglevel=INFO'
+celery = 'celery -A core worker -P gevent -l info'
 celery-beat = 'celery -A core beat'
 
 [pipenv]

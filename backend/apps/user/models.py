@@ -64,7 +64,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, ResizeImageMixin):
         ],
     )
     avatar = models.ImageField(upload_to="avatars", default=None, blank=True, null=True)
-    ip = models.GenericIPAddressField(null=False, blank=False)
+    ip = models.GenericIPAddressField(null=True, blank=True)
 
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
 
