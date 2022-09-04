@@ -1,9 +1,9 @@
+from argparse import ArgumentParser
 from io import BytesIO
 import os
 
 # Type checking
 from typing import Any
-from argparse import ArgumentParser
 
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
@@ -16,7 +16,6 @@ from urllib3.util import Retry
 # pylint: disable=import-error
 from apps.anime.models import CharacterModel
 from core.utilities.CachedLimiterSession import CachedLimiterSession
-
 
 retry_strategy = Retry(
     total=3,
