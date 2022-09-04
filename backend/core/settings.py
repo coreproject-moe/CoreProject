@@ -49,8 +49,7 @@ HOSTNAME = "http://127.0.0.1:8000"
 
 INSTALLED_APPS = [
     # __user__ must be above auth
-    "apps.__anime__",
-    "apps.__user__",
+    "apps.user",
     "apps.__discord__",
     # Django stuff
     "django.contrib.admin",
@@ -70,12 +69,12 @@ INSTALLED_APPS = [
     "django_cleanup.apps.CleanupConfig",
     "huey.contrib.djhuey",
     # APIS
-    "apps.api.v1.anime",
-    "apps.api.v1.trackers",
-    "apps.api.v1.characters",
-    "apps.api.v1.producers",
-    "apps.api.v1.studios",
-    "apps.api.v1.staff",
+    "apps.anime",
+    "apps.trackers",
+    "apps.characters",
+    "apps.producers",
+    "apps.studios",
+    "apps.staff",
 ]
 
 # Debug Toolbar Add

@@ -4,9 +4,9 @@ from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion
 
-import apps.api.v1.anime.models
-import apps.api.v1.anime.models.episode
-import apps.api.v1.characters.models
+import apps.anime.models
+import apps.anime.models.episode
+import apps.characters.models
 
 
 class Migration(migrations.Migration):
@@ -114,7 +114,7 @@ class Migration(migrations.Migration):
                         blank=True,
                         default=None,
                         null=True,
-                        upload_to=apps.api.v1.characters.models.FileField.anime_charater,
+                        upload_to=apps.characters.models.FileField.anime_charater,
                     ),
                 ),
                 ("about", models.TextField(blank=True, null=True)),
@@ -170,7 +170,7 @@ class Migration(migrations.Migration):
                         blank=True,
                         default=None,
                         null=True,
-                        upload_to=apps.api.v1.anime.models.episode.FileField.episode_cover,
+                        upload_to=apps.anime.models.episode.FileField.episode_cover,
                     ),
                 ),
                 (
@@ -179,7 +179,7 @@ class Migration(migrations.Migration):
                         blank=True,
                         default=None,
                         null=True,
-                        upload_to=apps.api.v1.anime.models.episode.FileField.episode_upload,
+                        upload_to=apps.anime.models.episode.FileField.episode_upload,
                     ),
                 ),
                 (
@@ -269,7 +269,7 @@ class Migration(migrations.Migration):
                         blank=True,
                         default=None,
                         null=True,
-                        upload_to=apps.api.v1.anime.models.FileField.anime_banner,
+                        upload_to=apps.anime.models.FileField.anime_banner,
                     ),
                 ),
                 (
@@ -278,7 +278,7 @@ class Migration(migrations.Migration):
                         blank=True,
                         default=None,
                         null=True,
-                        upload_to=apps.api.v1.anime.models.FileField.anime_cover,
+                        upload_to=apps.anime.models.FileField.anime_cover,
                     ),
                 ),
                 ("anime_synopsis", models.TextField(blank=True, null=True)),

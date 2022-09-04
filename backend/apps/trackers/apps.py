@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class AnimeConfig(AppConfig):
+class TrackersConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "apps.__anime__"
+    name = "apps.trackers"

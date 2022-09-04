@@ -8,7 +8,7 @@ from requests_cache import RedisCache  # type: ignore
 from requests_ratelimiter import RedisBucket
 from urllib3.util import Retry
 
-from apps.api.v1.anime.models import CharacterModel  # pylint: disable=import-error
+from apps.anime.models import CharacterModel  # pylint: disable=import-error
 from core.utilities.CachedLimiterSession import (  # pylint: disable=import-error
     CachedLimiterSession,
 )

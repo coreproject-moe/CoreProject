@@ -11,7 +11,7 @@ from requests_ratelimiter import RedisBucket
 from urllib3.util import Retry
 
 # pylint: disable=import-error
-from apps.api.v1.anime.models import CharacterModel
+from apps.anime.models import CharacterModel
 from core.utilities.CachedLimiterSession import CachedLimiterSession
 
 if TYPE_CHECKING:

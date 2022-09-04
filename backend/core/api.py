@@ -7,12 +7,12 @@ api = NinjaAPI(csrf=True, title="CoreProjectAPI")
 # ___ DO NOT MODIFY ____
 
 
-from apps.api.v1.anime.api import router as anime_router
-from apps.api.v1.characters.api import router as character_router
-from apps.api.v1.producers.api import router as producer_router
-from apps.api.v1.studios.api import router as studio_router
-from apps.api.v1.trackers.api import router as tracker_router
-from apps.api.v1.user.api import router as user_router
+from apps.anime.api import router as anime_router
+from apps.characters.api import router as character_router
+from apps.producers.api import router as producer_router
+from apps.studios.api import router as studio_router
+from apps.trackers.api import router as tracker_router
+from apps.user.api import router as user_router
 
 api.add_router("/anime", anime_router)
 api.add_router("/user", user_router, auth=django_auth)

@@ -2,7 +2,7 @@
 
 from django.db import migrations, models
 
-import apps.api.v1.characters.models
+import apps.characters.models
 
 
 class Migration(migrations.Migration):
@@ -46,7 +46,7 @@ class Migration(migrations.Migration):
                         blank=True,
                         default=None,
                         null=True,
-                        upload_to=apps.api.v1.characters.models.FileField.anime_charater,
+                        upload_to=apps.characters.models.FileField.anime_charater,
                     ),
                 ),
                 ("about", models.TextField(blank=True, null=True)),
