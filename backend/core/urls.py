@@ -28,9 +28,6 @@ handler500 = TemplateView.as_view(template_name="500.html")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    #   ckEditor
-    # ==============
-    path("ckeditor/", include("ckeditor_uploader.urls")),
     #   Errors
     # ===========
     path("400/", handler400),
