@@ -36,7 +36,7 @@ urlpatterns = [
     path("500/", handler500),
     #   Api
     # ========
-    path("api/v1/", api.urls),
+    path("api/", api.urls),
 ]
 if settings.DEBUG:
     urlpatterns += (path("__debug__/", include("debug_toolbar.urls")),)

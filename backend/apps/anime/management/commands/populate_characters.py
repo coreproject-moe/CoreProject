@@ -284,6 +284,7 @@ class Command(BaseCommand):
                 success_error_warnings = set(
                     self.success_list + self.error_list + self.warning_list
                 )
+                print(success_error_warnings)
                 self.stdout.write(
                     f"Requested info for {self.character_number} | [{' '.join(success_error_warnings)}]"
                 )
