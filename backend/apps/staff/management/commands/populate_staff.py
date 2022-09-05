@@ -94,7 +94,7 @@ class Command(BaseCommand):
                             round(
                                 self.staff_number_end / settings.MAX_REQUESTS_PER_MINUTE
                             )
-                        ) + 'minutes'
+                        ) + ' minutes'
                     )
                 }
                 """

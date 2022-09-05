@@ -106,7 +106,7 @@ class Command(BaseCommand):
                             round(
                                 self.character_number_end / settings.MAX_REQUESTS_PER_MINUTE
                             )
-                        ) + 'minutes'
+                        ) + ' minutes'
                     )
                 }
                 """
