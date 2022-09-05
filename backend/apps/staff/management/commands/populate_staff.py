@@ -11,10 +11,9 @@ from requests_cache import RedisCache  # type: ignore
 from requests_ratelimiter import RedisBucket
 from urllib3.util import Retry
 
+# pylint: disable=import-error
 from apps.staff.models import StaffAlternateNameModel, StaffModel
-from core.utilities.CachedLimiterSession import (  # pylint: disable=import-error
-    CachedLimiterSession,
-)
+from core.utilities.CachedLimiterSession import CachedLimiterSession
 
 retry_strategy = Retry(
     total=3,
