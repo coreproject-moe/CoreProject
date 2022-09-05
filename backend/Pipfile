@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = {version = "*", extras = ["argon2"]}
+django = {version = "~=4.1", extras = ["argon2"]}
 # Postgres
 psycopg2 = "*"
 # 3rd Party ( Middlewares )
