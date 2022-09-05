@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Any
 
 from django.db import models
 
@@ -15,11 +16,11 @@ class FileField:
     # Thanks Stackoverflow
     # https://stackoverflow.com/questions/1190697/django-filefield-with-upload-to-determined-at-runtime
     @staticmethod
-    def anime_cover(instance, filename: str) -> Path:
+    def anime_cover(instance: Any, filename: str) -> Path:
         return Path("anime_cover", filename)
 
     @staticmethod
-    def anime_banner(instance, filename: str) -> Path:
+    def anime_banner(instance: Any, filename: str) -> Path:
         return Path("anime_banner", filename)
 
 
@@ -68,5 +69,6 @@ class AnimeModel(models.Model):
 # Extra imports
 # __ DO NOT MODIFY __
 
-from .episode_comment import EpisodeCommentModel  # pylint: disable=import-error
-from .episode_timestamp import EpisodeTimestampModel  # pylint: disable=import-error
+# pylint: disable=import-error 
+from .episode_comment import EpisodeCommentModel
+from .episode_timestamp import EpisodeTimestampModel
