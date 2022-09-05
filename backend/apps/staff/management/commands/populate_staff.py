@@ -29,9 +29,9 @@ class Command(BaseCommand):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
 
-        self.mal_rate_limit_file_name = "mal_ratelimit.txt"
-        self.kitsu_not_found_file_name = "kitsu_not_found.txt"
-        self.anilist_not_found_file_name = "anilist_not_found.txt"
+        self.mal_not_found_file_name = "(Staff)_mal_not_found.txt"
+        self.kitsu_not_found_file_name = "(Staff)_kitsu_not_found.txt"
+        self.anilist_not_found_file_name = "(Staff)_anilist_not_found.txt"
 
         self.staff_number: int
         self.staff_number_end: int
@@ -217,7 +217,7 @@ class Command(BaseCommand):
             except IndexError:
                 self.warning_list.append(self.style.WARNING("Jikan"))
                 # Write the number to a file so that we can deal with it later
-                file = open(self.mal_rate_limit_file_name, "a", encoding="utf-8")
+                file = open(self.mal_not_found_file_name, "a", encoding="utf-8")
                 file.write(f"{str(self.staff_number)}\n")
                 file.close()
 
@@ -230,7 +230,7 @@ class Command(BaseCommand):
         if self.staff_number == 1:
             # If user starts from 0 remove files which are necessary for logging failed request
             files_to_remove = [
-                self.mal_rate_limit_file_name,
+                self.mal_not_found_file_name,
                 self.anilist_not_found_file_name,
                 self.kitsu_not_found_file_name,
             ]
@@ -288,6 +288,12 @@ class Command(BaseCommand):
                     print(e)
                     self.stdout.write(f"Entry exists : {self.staff_number}")
 
+            success_error_warnings = (
+                self.success_list + self.error_list + self.warning_list
+            )
+            self.stdout.write(
+                f"Requested info for {self.staff_number} | [{', '.join(success_error_warnings)}]"
+            )
             self.after_populate_anime_staff()
 
     def after_populate_anime_staff(self) -> None:
@@ -295,5 +301,9 @@ class Command(BaseCommand):
         self.staff_name_kanji = ""
         self.staff_about = ""
         self.staff_image.truncate(0)
+
+        self.success_list.clear()
+        self.error_list.clear()
+        self.warning_list.clear()
 
         self.staff_number += 1
