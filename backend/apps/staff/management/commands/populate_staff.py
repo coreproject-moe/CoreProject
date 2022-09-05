@@ -88,6 +88,7 @@ class Command(BaseCommand):
         self.stdout.write(
             textwrap.dedent(
                 f"""
+
                 Starting Number : {
                     self.style.SUCCESS(
                         str(
@@ -115,7 +116,11 @@ class Command(BaseCommand):
                                 timedelta(
                                     minutes=
                                         round(
-                                            self.staff_number_end
+                                            (
+                                                self.staff_number_end
+                                                -
+                                                self.staff_number
+                                            )
                                             /
                                             settings.MAX_REQUESTS_PER_MINUTE
                                     )
@@ -124,6 +129,7 @@ class Command(BaseCommand):
                         )
                     )
                 }
+
                 """
             )
         )
