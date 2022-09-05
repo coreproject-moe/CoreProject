@@ -66,13 +66,13 @@ class Command(BaseCommand):
             expire_after=360,
         )
 
+        self.session.mount("https://", adapter)
+        self.session.mount("http://", adapter)
+
         # A list to keep items
         self.success_list: list[str] = []
         self.error_list: list[str] = []
         self.warning_list: list[str] = []
-
-        self.session.mount("https://", adapter)
-        self.session.mount("http://", adapter)
 
     def add_arguments(self, parser: ArgumentParser) -> None:
         parser.add_argument(
@@ -123,7 +123,7 @@ class Command(BaseCommand):
                 self.character_image = BytesIO(image.content)
                 returnable_data = data
 
-                self.success_list.append(self.style.SUCCESS("Jikan"))
+            self.success_list.append(self.style.SUCCESS("Jikan"))
 
         elif data.get("status", None) == 408:
             self.warning_list.append(self.style.WARNING("Jikan"))

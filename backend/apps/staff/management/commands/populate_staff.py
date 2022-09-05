@@ -24,18 +24,7 @@ adapter = HTTPAdapter(max_retries=retry_strategy)
 
 
 class Command(BaseCommand):
-    """
-    Populates the character database
-        How does it achieve this?
-        First we are taking `self.staff_number` as a command line argument.
-            Then using a while loop :
-                1. Requesting the data from `https://api.jikan.moe/v4`
-                2. Using the `staff_name` from data(jikan) we are getting `kitsu_id` from kitsu
-                3. Using the `staff_name` from data(jikan) we are getting `anilist_id` from anilist
-                4. Saving everything to `CharacterModel`
-    """
-
-    help = "Populates the people database"
+    help = "Populates the staff(people) database"
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
@@ -69,6 +58,11 @@ class Command(BaseCommand):
 
         self.session.mount("https://", adapter)
         self.session.mount("http://", adapter)
+
+        # A list to keep items
+        self.success_list: list[str] = []
+        self.error_list: list[str] = []
+        self.warning_list: list[str] = []
 
     def add_arguments(self, parser: ArgumentParser) -> None:
         parser.add_argument(
@@ -104,8 +98,18 @@ class Command(BaseCommand):
             try:
                 data = data["data"]
                 staff_name = data["attributes"]["name"]
+                self.success_list.append(self.style.SUCCESS("Kitsu"))
+
             except IndexError:
-                pass
+                self.warning_list.append(self.style.WARNING("Kitsu"))
+
+                # Write the number to a file so that we can deal with it later
+                file = open(self.kitsu_not_found_file_name, "a", encoding="utf-8")
+                file.write(f"{str(staff_number)}\n")
+                file.close()
+
+        else:
+            self.error_list.append(self.style.ERROR("Kitsu"))
 
         return staff_name
 
@@ -167,19 +171,18 @@ class Command(BaseCommand):
             try:
                 data = res.json()
                 anilist_id = data["data"]["Page"]["staff"][0]["id"]
-                # self.stdout.write(f"Got Staff Info for {staff_number} | Anilist")
+                self.success_list.append(self.style.SUCCESS("Anilist"))
 
             except (IndexError, KeyError):
-                self.stdout.write(f"Entry for {staff_name} doesn't exist | Anilist")
+                self.warning_list.append(self.style.WARNING("Anilist"))
 
                 # Write the number to a file so that we can deal with it later
                 file = open(self.anilist_not_found_file_name, "a", encoding="utf-8")
-                file.write(f"{str(staff_name)}\n")
+                file.write(f"{str(self.staff_number)}\n")
                 file.close()
 
         else:
-            pass
-            # self.stdout.write(f"Missed info for {staff_number} | Anilist")
+            self.error_list.append(self.style.WARNING("Anilist"))
 
         return anilist_id
 
@@ -209,21 +212,21 @@ class Command(BaseCommand):
             try:
                 data = data["data"][0]
                 returnable_data = data
+                self.success_list.append(self.style.SUCCESS("Jikan"))
 
             except IndexError:
-                pass
+                self.warning_list.append(self.style.WARNING("Jikan"))
+                # Write the number to a file so that we can deal with it later
+                file = open(self.mal_rate_limit_file_name, "a", encoding="utf-8")
+                file.write(f"{str(self.staff_number)}\n")
+                file.close()
+
+        else:
+            self.error_list.append(self.style.ERROR("Jikan"))
 
         return returnable_data
 
     def populate_anime_staff(self) -> None:
-        """
-        Function's purpose :
-            1. Request the data from `https://api.jikan.moe/v4`
-            2. Using the `staff_name` from data(jikan) get `kitsu_id` from kitsu
-            3. Using the `staff_name` from data(jikan) get `anilist_id` from anilist
-            4. Save everything to `CharacterModel`
-        """
-
         if self.staff_number == 1:
             # If user starts from 0 remove files which are necessary for logging failed request
             files_to_remove = [
