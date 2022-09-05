@@ -1,11 +1,12 @@
 from argparse import ArgumentParser
+from datetime import datetime, timedelta
 from io import BytesIO
 import os
 import textwrap
 from typing import Any
 
 from django.conf import settings
-from django.contrib.humanize.templatetags.humanize import intcomma
+from django.contrib.humanize.templatetags.humanize import intcomma, naturaltime
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError
@@ -108,12 +109,19 @@ class Command(BaseCommand):
                 Time to finish : {
                     self.style.SUCCESS(
                         str(
-                            intcomma(
-                                round(
-                                    self.staff_number_end / settings.MAX_REQUESTS_PER_MINUTE
+                           naturaltime(
+                                datetime.now()
+                                +
+                                timedelta(
+                                    minutes=
+                                        round(
+                                            self.staff_number_end
+                                            /
+                                            settings.MAX_REQUESTS_PER_MINUTE
+                                    )
                                 )
-                            )
-                        ) + ' minutes'
+                           )
+                        )
                     )
                 }
                 """
