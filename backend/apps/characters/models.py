@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import Any
 
 from django.db import models
+from core.storages import OverwriteStorage
 
 
 class FileField:
@@ -16,14 +17,18 @@ class FileField:
 
 
 class CharacterModel(models.Model):
-    mal_id = models.IntegerField(unique=True, db_index=True)
+    mal_id = models.IntegerField(unique=True, null=True, db_index=True)
     kitsu_id = models.IntegerField(unique=True, null=True, db_index=True)
     anilist_id = models.IntegerField(unique=True, null=True, db_index=True)
 
     name = models.CharField(max_length=1024, db_index=True)
     name_kanji = models.CharField(max_length=1024, null=True, blank=True, db_index=True)
     character_image = models.ImageField(
-        upload_to=FileField.anime_charater, default=None, blank=True, null=True
+        upload_to=FileField.anime_charater,
+        storage=OverwriteStorage(),
+        default=None,
+        blank=True,
+        null=True,
     )
     about = models.TextField(
         null=True,

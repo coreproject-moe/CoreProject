@@ -3,6 +3,8 @@ from typing import Any
 
 from django.db import models
 
+from core.storages import OverwriteStorage
+
 
 class FileField:
     # Thanks Stackoverflow
@@ -21,7 +23,7 @@ class StaffAlternateNameModel(models.Model):
 
 
 class StaffModel(models.Model):
-    mal_id = models.IntegerField(unique=True, db_index=True)
+    mal_id = models.IntegerField(unique=True, null=True, db_index=True)
     kitsu_id = models.IntegerField(unique=True, null=True, db_index=True)
     anilist_id = models.IntegerField(unique=True, null=True, db_index=True)
 
@@ -30,7 +32,11 @@ class StaffModel(models.Model):
     family_name = models.CharField(max_length=1024, null=True)
 
     staff_image = models.ImageField(
-        upload_to=FileField.staff, default=None, blank=True, null=True
+        storage=OverwriteStorage,
+        upload_to=FileField.staff,
+        default=None,
+        blank=True,
+        null=True,
     )
     about = models.TextField(null=True)
     alternate_names = models.ManyToManyField(StaffAlternateNameModel)
