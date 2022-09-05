@@ -32,10 +32,10 @@ class Command(BaseCommand):
     How does it achieve this?
     First we are taking `self.character_number` as a command line argument.
     Then using a while loop :
-    1. Requesting the data from `https://api.jikan.moe/v4`
-    2. Using the `character_name` we are getting `kitsu_id`
-    3. Using the `character_name` we are getting `anilist_id`
-    4. Saving everything to `CharacterModel`
+        1. Requesting the data from `https://api.jikan.moe/v4`
+        2. Using the `character_name` we are getting `kitsu_id`
+        3. Using the `character_name` we are getting `anilist_id`
+        4. Saving everything to `CharacterModel`
     """
 
     help = "Populates the character database"

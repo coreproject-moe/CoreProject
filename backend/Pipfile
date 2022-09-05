@@ -20,8 +20,6 @@ redis = "*"
 hiredis = {version="*", markers="sys_platform != 'win32'"}
 # Rest framework
 django_ninja = "*"
-# Nice CLI's
-django_click = "*"
 # HTTP Client
 requests = "*"
 requests_cache = "*"
