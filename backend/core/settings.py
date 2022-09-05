@@ -35,6 +35,12 @@ USERNAME_DISCRIMINATOR_LENGTH = 4
 MAL_CLIENT_ID = os.environ.get("MAL_CLIENT_ID")
 MAL_CLIENT_SECRET = os.environ.get("MAL_CLIENT_SECRET")
 
+# Max retires for request
+MAX_RETRY = 10
+KITSU_MAX_REQUESTS_PER_MINUTE = 55
+REQUEST_STATUS_CODES_TO_RETRY = [408, 429, 500, 502, 503, 504]
+BUCKET_NAME = "coreproject"
+
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
@@ -162,30 +168,30 @@ CACHES = {
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "CONN_MAX_AGE": None,
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
-# POSTGRES
-# https://www.enterprisedb.com/postgres-tutorials/how-use-postgresql-django
 # DATABASES = {
 #     "default": {
-#         "ENGINE": "django.db.backends.postgresql_psycopg2",
-#         "NAME": "django",
-#         "USER": "postgres",
-#         "PASSWORD": "123456",
-#         "HOST": "",
-#         "PORT": "",
+#         "CONN_MAX_AGE": None,
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
 #     }
 # }
 
+# POSTGRES
+# https://www.enterprisedb.com/postgres-tutorials/how-use-postgresql-django
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "django",
+        "USER": "postgres",
+        "PASSWORD": "supersecretpassword",
+        "HOST": "",
+        "PORT": "",
+    }
+}
+
 # Allow more fields to be deleted at once
 # https://stackoverflow.com/questions/47585583/the-number-of-get-post-parameters-exceeded-settings-data-upload-max-number-field
-DATA_UPLOAD_MAX_NUMBER_FIELDS = 50000
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 50_000
 
 
 # Password validation
@@ -276,7 +282,7 @@ from redis import ConnectionPool
 
 pool = ConnectionPool(host="localhost", port=6379, max_connections=20)
 HUEY = PriorityRedisHuey(
-    "my-app",
+    "coreproject_huey",
     use_zlib=True,
     compression=True,
     connection_pool=pool,

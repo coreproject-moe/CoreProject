@@ -6,6 +6,7 @@ from typing import Any
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError
+from django.conf import settings
 from requests.adapters import HTTPAdapter
 from requests_cache import RedisCache  # type: ignore
 from requests_ratelimiter import RedisBucket
@@ -16,8 +17,8 @@ from apps.staff.models import StaffAlternateNameModel, StaffModel
 from core.utilities.CachedLimiterSession import CachedLimiterSession
 
 retry_strategy = Retry(
-    total=3,
-    status_forcelist=[408, 429, 500, 502, 503, 504],
+    total=settings.MAX_RETRY,
+    status_forcelist=settings.REQUEST_STATUS_CODES_TO_RETRY,
 )
 adapter = HTTPAdapter(max_retries=retry_strategy)
 
@@ -37,7 +38,6 @@ class Command(BaseCommand):
 
         self.staff_name: str
         self.staff_name_kanji: str
-        self.staff_image: BytesIO = BytesIO()
 
         self.staff_about: str
         self.image_url: str
@@ -45,11 +45,11 @@ class Command(BaseCommand):
         # Tried to implement Facade pattern
         self.session = CachedLimiterSession(
             bucket_class=RedisBucket,
-            # Undocumented
-            bucket_kwargs={"bucket_name": "_populate_"},
             backend=RedisCache(),
+            # Undocumented ( pyrate-limiter )
+            bucket_kwargs={"bucket_name": settings.BUCKET_NAME},
             # https://docs.api.jikan.moe/#section/Information/Rate-Limiting
-            per_minute=60,
+            per_minute=settings.MAX_REQUESTS_PER_MINUTE,
             per_second=1,
             # https://requests-cache.readthedocs.io/en/stable/user_guide/expiration.html
             expire_after=360,
@@ -265,18 +265,19 @@ class Command(BaseCommand):
 
                 if data:
                     try:
-                        self.image_url = data["images"]["webp"]["image_url"]
+                        image_url = data["images"]["webp"]["image_url"]
                     except KeyError:
-                        self.image_url = data["images"]["jpg"]["image_url"]
+                        image_url = data["images"]["jpg"]["image_url"]
                     finally:
-                        image = self.session.get(self.image_url)
-                        self.staff_image = BytesIO(image.content)
-                        database.staff_image = (
+                        image = self.session.get(image_url)
+
+                        database.staff_image.save(
+                            f"{self.staff_number}.{image_url.split('.')[-1]}",
                             ContentFile(
-                                self.staff_image.read(),
-                                f"{self.staff_number}.{self.image_url.split('.')[-1]}",
+                                BytesIO(image.content).read(),
                             ),
                         )
+                        database.save()
 
                 for name in data.get("alternate_names", []):
                     (
@@ -302,7 +303,6 @@ class Command(BaseCommand):
         self.staff_name = ""
         self.staff_name_kanji = ""
         self.staff_about = ""
-        self.staff_image.truncate(0)
 
         self.success_list.clear()
         self.error_list.clear()
