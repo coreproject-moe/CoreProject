@@ -1,9 +1,9 @@
 from argparse import ArgumentParser
+from datetime import datetime, timedelta
 from io import BytesIO
 import os
 import textwrap
 from typing import Any
-from datetime import datetime, timedelta
 
 from django.conf import settings
 from django.contrib.humanize.templatetags.humanize import intcomma, naturaltime
