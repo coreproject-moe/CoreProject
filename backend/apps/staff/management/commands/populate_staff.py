@@ -96,7 +96,7 @@ class Command(BaseCommand):
                         )
                     )
                 }
-                Total `characters` to get :  {
+                Total `staff` to get :  {
                     self.style.SUCCESS(
                         str(
                             intcomma(
