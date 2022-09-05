@@ -92,7 +92,7 @@ class Command(BaseCommand):
 
     def get_staff_data_from_kitsu(
         self,
-        staff_number: str,
+        staff_number: int,
         session: CachedLimiterSession,
     ) -> str | None:
         res = session.get(f"https://kitsu.io/api/edge/people/{staff_number}")
@@ -110,15 +110,16 @@ class Command(BaseCommand):
 
     def get_staff_data_from_anilist(
         self,
-        staff_name: str,
-        staff_number: int,
+        staff_name: str | None,
         session: CachedLimiterSession,
     ) -> str | None:
         """
         :param staff_name: The name of the character
-        :param staff_number: The id of character
         :param session: Requests instance to get data
         """
+        anilist_id = None
+        if not staff_name:
+            return anilist_id
 
         query = {
             "query": """
@@ -161,12 +162,11 @@ class Command(BaseCommand):
         }
         res = session.post(url="https://graphql.anilist.co/", json=query)
         data = res.json()
-        anilist_id = None
 
         if data and res.status_code == 200:
             try:
                 anilist_id = data["data"]["Page"]["characters"][0]["id"]
-                self.stdout.write(f"Got Staff Info for {staff_number} | Anilist")
+                # self.stdout.write(f"Got Staff Info for {staff_number} | Anilist")
 
             except IndexError:
                 self.stdout.write(f"Entry for {staff_name} doesn't exist | Anilist")
@@ -177,19 +177,24 @@ class Command(BaseCommand):
                 file.close()
 
         else:
-            self.stdout.write(f"Missed info for {staff_number} | Anilist")
+            pass
+            # self.stdout.write(f"Missed info for {staff_number} | Anilist")
 
         return anilist_id
 
     def get_staff_data_from_jikan(
         self,
-        staff_name: str,
+        staff_name: str | None,
         session: CachedLimiterSession,
     ) -> Dict[str, str | List[str]] | None:
         """
         :param staff_name: The name of the staff
         :param session: Requests instance to get data
         """
+        returnable_data = None
+        if not staff_name:
+            return returnable_data
+
         # In jikan staff = people
         res = session.get(
             "https://api.jikan.moe/v4/people",
@@ -198,7 +203,6 @@ class Command(BaseCommand):
             },
         )
         data = res.json()
-        returnable_data = None
 
         if res.status_code == 200:
             try:
@@ -231,13 +235,39 @@ class Command(BaseCommand):
                     os.remove(file)
 
         while self.staff_number < self.staff_number_end:
+            staff_name = self.get_staff_data_from_kitsu(
+                staff_number=self.staff_number,
+                session=self.session,
+            )
             data = self.get_staff_data_from_jikan(
+                staff_name=staff_name,
                 session=self.session,
             )
 
             if data:
+
                 try:
-                    pass
+                    database = StaffModel.objects.update_or_create(
+                        kitsu_id=self.staff_number,
+                        name=staff_name,
+                        defaults={
+                            "mal_id": data.get("mal_id"),
+                            "anilist_id": self.get_staff_data_from_anilist(
+                                staff_name,
+                                session=self.session,
+                            ),
+                            "given_name": data.get("given_name"),
+                            "family_name": data.get("family_name"),
+                            "about": data.get("about"),
+                        },
+                    )
+
+                    for name in data.get("alternate_names", []):
+                        (
+                            instance,
+                            created,
+                        ) = StaffAlternateNameModel.objects.get_or_create(name)
+                        database.alternate_names.add(instance)
                 # Add
                 except IntegrityError as e:
                     print(e)

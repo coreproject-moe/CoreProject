@@ -19,6 +19,7 @@ class StaffModel(models.Model):
     family_name = models.CharField(max_length=1024, db_index=True)
 
     about = models.TextField()
+    alternate_names = models.ManyToManyField(StaffAlternateNameModel)
 
     def __str__(self) -> str:
         return f"{self.name}"
