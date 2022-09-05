@@ -27,7 +27,7 @@
         "@typescript-eslint/parser": "^5.36.1",
         "autoprefixer": "^10.4.8",
         "cssnano": "^5.1.13",
-        "daisyui": "^2.24.0",
+        "daisyui": "^2.24.2",
         "dayjs": "^1.11.5",
         "easytimer.js": "^4.5.4",
         "eslint": "^8.23.0",
