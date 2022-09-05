@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 from io import BytesIO
 import os
-from typing import Any, Dict, List
+from typing import Any
 
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError
