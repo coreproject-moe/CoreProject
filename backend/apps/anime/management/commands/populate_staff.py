@@ -13,7 +13,6 @@ from urllib3.util import Retry
 from core.utilities.CachedLimiterSession import (  # pylint: disable=import-error
     CachedLimiterSession,
 )
-from apps.staff.models import StaffAlternateNameModel, StaffModel
 
 retry_strategy = Retry(
     total=3,
@@ -186,7 +185,7 @@ class Command(BaseCommand):
         self,
         staff_name: str | None,
         session: CachedLimiterSession,
-    ) -> Dict[str, str | List[str]] | None:
+    ) -> dict[str, str | list[str]] | None:
         """
         :param staff_name: The name of the staff
         :param session: Requests instance to get data
