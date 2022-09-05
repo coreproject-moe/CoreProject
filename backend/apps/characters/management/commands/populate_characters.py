@@ -375,6 +375,7 @@ class Command(BaseCommand):
         self.character_name_kanji = ""
         self.character_about = ""
         self.character_image.truncate(0)
+        self.image_url = ""
 
         self.success_list.clear()
         self.error_list.clear()
