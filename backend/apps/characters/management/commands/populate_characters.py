@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 from io import BytesIO
 import os
+import textwrap
 from typing import Any
 
 from django.conf import settings
@@ -94,6 +95,23 @@ class Command(BaseCommand):
         """Starting point for our application"""
         self.character_number = options["character-number-start"]
         self.character_number_end = options["character_number_end"]
+        self.stdout.write(
+            textwrap.dedent(
+                f"""
+                Starting Number : {self.style.SUCCESS(str(self.character_number))}
+                Total `characters` to get : {self.style.SUCCESS(str(self.character_number_end))}
+                Time to finish : {
+                    self.style.SUCCESS(
+                        str(
+                            round(
+                                self.character_number_end / settings.MAX_REQUESTS_PER_MINUTE
+                            )
+                        ) + 'minutes'
+                    )
+                }
+                """
+            )
+        )
         self.populate_anime_characters()
 
     def get_character_data_from_jikan(
@@ -313,7 +331,9 @@ class Command(BaseCommand):
                 self.success_list + self.error_list + self.warning_list
             )
             self.stdout.write(
-                f"Requested `character_info` for {self.character_number} | [{', '.join(success_error_warnings)}]"
+                f"Requested `character_info` for {self.character_number}"
+                " | "
+                f"[{', '.join(success_error_warnings)}]"
             )
             self.after_populate_anime_characters()
 

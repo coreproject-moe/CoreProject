@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 from io import BytesIO
 import os
+import textwrap
 from typing import Any
 
 from django.conf import settings
@@ -82,6 +83,23 @@ class Command(BaseCommand):
         """Starting point for our application"""
         self.staff_number = options["staff-number-start"]
         self.staff_number_end = options["staff_number_end"]
+        self.stdout.write(
+            textwrap.dedent(
+                f"""
+                Starting Number : {self.style.SUCCESS(str(self.staff_number))}
+                Total `characters` to get : {self.style.SUCCESS(str(self.staff_number_end))}
+                Time to finish : {
+                    self.style.SUCCESS(
+                        str(
+                            round(
+                                self.staff_number_end / settings.MAX_REQUESTS_PER_MINUTE
+                            )
+                        ) + 'minutes'
+                    )
+                }
+                """
+            )
+        )
         self.populate_anime_staff()
 
     def get_staff_data_from_kitsu(
@@ -295,7 +313,9 @@ class Command(BaseCommand):
                     self.success_list + self.error_list + self.warning_list
                 )
                 self.stdout.write(
-                    f"Requested `staff_info` for {self.staff_number} | [{', '.join(success_error_warnings)}]"
+                    f"Requested `staff_info` for {self.staff_number}"
+                    " | "
+                    f"[{', '.join(success_error_warnings)}]"
                 )
                 self.after_populate_anime_staff()
 
