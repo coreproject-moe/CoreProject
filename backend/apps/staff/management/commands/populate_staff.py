@@ -248,15 +248,7 @@ class Command(BaseCommand):
             )
 
             try:
-                self.image_url = data["images"]["webp"]["image_url"]
-            except KeyError:
-                self.image_url = data["images"]["jpg"]["image_url"]
-            finally:
-                image = self.session.get(self.image_url)
-                self.staff_image = BytesIO(image.content)
-
-            try:
-                database, _ = StaffModel.objects.update_or_create(
+                (database, _) = StaffModel.objects.update_or_create(
                     kitsu_id=self.staff_number,
                     name=staff_name,
                     defaults={
@@ -267,13 +259,24 @@ class Command(BaseCommand):
                         ),
                         "given_name": data.get("given_name"),
                         "family_name": data.get("family_name"),
-                        "staff_image": ContentFile(
-                            self.staff_image.read(),
-                            f"{self.staff_number}.{self.image_url.split('.')[-1]}",
-                        ),
                         "about": data.get("about"),
                     },
                 )
+
+                if data:
+                    try:
+                        self.image_url = data["images"]["webp"]["image_url"]
+                    except KeyError:
+                        self.image_url = data["images"]["jpg"]["image_url"]
+                    finally:
+                        image = self.session.get(self.image_url)
+                        self.staff_image = BytesIO(image.content)
+                        database.staff_image = (
+                            ContentFile(
+                                self.staff_image.read(),
+                                f"{self.staff_number}.{self.image_url.split('.')[-1]}",
+                            ),
+                        )
 
                 for name in data.get("alternate_names", []):
                     (
