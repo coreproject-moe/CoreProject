@@ -3,10 +3,10 @@ from io import BytesIO
 import os
 from typing import Any
 
+from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError
-from django.conf import settings
 from requests.adapters import HTTPAdapter
 from requests_cache import RedisCache  # type: ignore
 from requests_ratelimiter import RedisBucket
