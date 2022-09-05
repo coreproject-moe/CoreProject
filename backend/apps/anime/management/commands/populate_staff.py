@@ -13,6 +13,7 @@ from urllib3.util import Retry
 from core.utilities.CachedLimiterSession import (  # pylint: disable=import-error
     CachedLimiterSession,
 )
+from apps.staff.models import StaffAlternateNameModel, StaffModel
 
 retry_strategy = Retry(
     total=3,
@@ -155,19 +156,19 @@ class Command(BaseCommand):
             "variables": {
                 "page": 1,
                 "type": "STAFF",
-                "search": {staff_name},
+                "search": staff_name,
                 "sort": "SEARCH_MATCH",
             },
         }
         res = session.post(url="https://graphql.anilist.co/", json=query)
-        data = res.json()
 
-        if data and res.status_code == 200:
+        if res.status_code == 200:
             try:
-                anilist_id = data["data"]["Page"]["characters"][0]["id"]
+                data = res.json()
+                anilist_id = data["data"]["Page"]["staff"][0]["id"]
                 # self.stdout.write(f"Got Staff Info for {staff_number} | Anilist")
 
-            except IndexError:
+            except (IndexError, KeyError):
                 self.stdout.write(f"Entry for {staff_name} doesn't exist | Anilist")
 
                 # Write the number to a file so that we can deal with it later
@@ -185,7 +186,7 @@ class Command(BaseCommand):
         self,
         staff_name: str | None,
         session: CachedLimiterSession,
-    ) -> dict[str, str | list[str]] | None:
+    ) -> Dict[str, str | List[str]] | None:
         """
         :param staff_name: The name of the staff
         :param session: Requests instance to get data
@@ -246,7 +247,7 @@ class Command(BaseCommand):
             if data:
 
                 try:
-                    database = StaffModel.objects.update_or_create(
+                    database, _ = StaffModel.objects.update_or_create(
                         kitsu_id=self.staff_number,
                         name=staff_name,
                         defaults={
@@ -265,7 +266,7 @@ class Command(BaseCommand):
                         (
                             instance,
                             created,
-                        ) = StaffAlternateNameModel.objects.get_or_create(name)
+                        ) = StaffAlternateNameModel.objects.get_or_create(name=name)
                         database.alternate_names.add(instance)
                 # Add
                 except IntegrityError as e:
