@@ -295,7 +295,7 @@ class Command(BaseCommand):
                     self.success_list + self.error_list + self.warning_list
                 )
                 self.stdout.write(
-                    f"Requested info for {self.staff_number} | [{', '.join(success_error_warnings)}]"
+                    f"Requested `staff_info` for {self.staff_number} | [{', '.join(success_error_warnings)}]"
                 )
                 self.after_populate_anime_staff()
 
