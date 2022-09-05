@@ -988,7 +988,6 @@
                 "sha256:f84fbc98b019fef2ee9a1cb3ce93e3187a6df0b2538a651bfb890254ba9f90b5"
             ],
             "version": "==6.0"
-
         },
         "redis": {
             "hashes": [
