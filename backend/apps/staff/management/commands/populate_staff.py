@@ -3,6 +3,7 @@ from io import BytesIO
 import os
 from typing import Any
 
+from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError
 from requests.adapters import HTTPAdapter
@@ -186,7 +187,7 @@ class Command(BaseCommand):
         self,
         staff_name: str | None,
         session: CachedLimiterSession,
-    ) -> dict[str, str | list[str]] | None:
+    ) -> dict[Any, Any] | None:
         """
         :param staff_name: The name of the staff
         :param session: Requests instance to get data
@@ -245,6 +246,13 @@ class Command(BaseCommand):
             )
 
             if data:
+                try:
+                    self.image_url = data["images"]["webp"]["image_url"]
+                except KeyError:
+                    self.image_url = data["images"]["jpg"]["image_url"]
+                finally:
+                    image = self.session.get(self.image_url)
+                    self.staff_image = BytesIO(image.content)
 
                 try:
                     database, _ = StaffModel.objects.update_or_create(
@@ -258,6 +266,10 @@ class Command(BaseCommand):
                             ),
                             "given_name": data.get("given_name"),
                             "family_name": data.get("family_name"),
+                            "staff_image": ContentFile(
+                                self.staff_image.read(),
+                                f"{self.staff_number}.{self.image_url.split('.')[-1]}",
+                            ),
                             "about": data.get("about"),
                         },
                     )

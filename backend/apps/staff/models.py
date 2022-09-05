@@ -1,4 +1,15 @@
+from pathlib import Path
+from typing import Any
+
 from django.db import models
+
+
+class FileField:
+    # Thanks Stackoverflow
+    # https://stackoverflow.com/questions/1190697/django-filefield-with-upload-to-determined-at-runtime
+    @staticmethod
+    def staff(instance: Any, filename: str) -> Path:
+        return Path("staff", filename)
 
 
 # Create your models here.
@@ -18,6 +29,9 @@ class StaffModel(models.Model):
     given_name = models.CharField(max_length=1024, null=True)
     family_name = models.CharField(max_length=1024, null=True)
 
+    staff_image = models.ImageField(
+        upload_to=FileField.staff, default=None, blank=True, null=True
+    )
     about = models.TextField(null=True)
     alternate_names = models.ManyToManyField(StaffAlternateNameModel)
 

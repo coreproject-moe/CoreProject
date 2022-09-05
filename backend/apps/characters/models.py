@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Any
 
 from django.db import models
 
@@ -7,7 +8,7 @@ class FileField:
     # Thanks Stackoverflow
     # https://stackoverflow.com/questions/1190697/django-filefield-with-upload-to-determined-at-runtime
     @staticmethod
-    def anime_charater(instance, filename) -> Path:
+    def anime_charater(instance: Any, filename: str) -> Path:
         return Path("anime_characters", filename)
 
 
