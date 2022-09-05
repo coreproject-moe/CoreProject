@@ -190,12 +190,12 @@ class Command(BaseCommand):
         self,
         staff_name: str | None,
         session: CachedLimiterSession,
-    ) -> dict[Any, Any] | None:
+    ) -> dict[Any, Any]:
         """
         :param staff_name: The name of the staff
         :param session: Requests instance to get data
         """
-        returnable_data = None
+        returnable_data: dict[Any, Any] = {}
         if not staff_name:
             return returnable_data
 
@@ -248,53 +248,53 @@ class Command(BaseCommand):
                 session=self.session,
             )
 
-            if data:
-                try:
-                    self.image_url = data["images"]["webp"]["image_url"]
-                except KeyError:
-                    self.image_url = data["images"]["jpg"]["image_url"]
-                finally:
-                    image = self.session.get(self.image_url)
-                    self.staff_image = BytesIO(image.content)
+            try:
+                self.image_url = data["images"]["webp"]["image_url"]
+            except KeyError:
+                self.image_url = data["images"]["jpg"]["image_url"]
+            finally:
+                image = self.session.get(self.image_url)
+                self.staff_image = BytesIO(image.content)
 
-                try:
-                    database, _ = StaffModel.objects.update_or_create(
-                        kitsu_id=self.staff_number,
-                        name=staff_name,
-                        defaults={
-                            "mal_id": data.get("mal_id"),
-                            "anilist_id": self.get_staff_data_from_anilist(
-                                staff_name,
-                                session=self.session,
-                            ),
-                            "given_name": data.get("given_name"),
-                            "family_name": data.get("family_name"),
-                            "staff_image": ContentFile(
-                                self.staff_image.read(),
-                                f"{self.staff_number}.{self.image_url.split('.')[-1]}",
-                            ),
-                            "about": data.get("about"),
-                        },
-                    )
+            try:
+                database, _ = StaffModel.objects.update_or_create(
+                    kitsu_id=self.staff_number,
+                    name=staff_name,
+                    defaults={
+                        "mal_id": data.get("mal_id"),
+                        "anilist_id": self.get_staff_data_from_anilist(
+                            staff_name,
+                            session=self.session,
+                        ),
+                        "given_name": data.get("given_name"),
+                        "family_name": data.get("family_name"),
+                        "staff_image": ContentFile(
+                            self.staff_image.read(),
+                            f"{self.staff_number}.{self.image_url.split('.')[-1]}",
+                        ),
+                        "about": data.get("about"),
+                    },
+                )
 
-                    for name in data.get("alternate_names", []):
-                        (
-                            instance,
-                            created,
-                        ) = StaffAlternateNameModel.objects.get_or_create(name=name)
-                        database.alternate_names.add(instance)
-                # Add
-                except IntegrityError as e:
-                    print(e)
-                    self.stdout.write(f"Entry exists : {self.staff_number}")
+                for name in data.get("alternate_names", []):
+                    (
+                        instance,
+                        _,
+                    ) = StaffAlternateNameModel.objects.get_or_create(name=name)
+                    database.alternate_names.add(instance)
 
-            success_error_warnings = (
-                self.success_list + self.error_list + self.warning_list
-            )
-            self.stdout.write(
-                f"Requested info for {self.staff_number} | [{', '.join(success_error_warnings)}]"
-            )
-            self.after_populate_anime_staff()
+            except IntegrityError as e:
+                print(e)
+                self.stdout.write(f"Entry exists : {self.staff_number}")
+
+            finally:
+                success_error_warnings = (
+                    self.success_list + self.error_list + self.warning_list
+                )
+                self.stdout.write(
+                    f"Requested info for {self.staff_number} | [{', '.join(success_error_warnings)}]"
+                )
+                self.after_populate_anime_staff()
 
     def after_populate_anime_staff(self) -> None:
         self.staff_name = ""
