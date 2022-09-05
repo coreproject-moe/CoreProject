@@ -1,7 +1,7 @@
-from argparse import ArgumentParser  # Type checking
+from argparse import ArgumentParser
 from io import BytesIO
 import os
-from typing import Any  # Type checking
+from typing import Any
 
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
@@ -39,9 +39,9 @@ class Command(BaseCommand):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
 
-        self.mal_rate_limit_file_name = "mal_ratelimit.txt"
-        self.kitsu_not_found_file_name = "kitsu_not_found.txt"
-        self.anilist_not_found_file_name = "anilist_not_found.txt"
+        self.mal_rate_limit_file_name = "(Character)_mal_ratelimit.txt"
+        self.kitsu_not_found_file_name = "(Character)_kitsu_not_found.txt"
+        self.anilist_not_found_file_name = "(Character)_anilist_not_found.txt"
 
         self.character_number: int
         self.character_number_end: int
@@ -106,7 +106,7 @@ class Command(BaseCommand):
         """
         res = session.get(f"https://api.jikan.moe/v4/characters/{character_number}")
         data = res.json()
-        return_data = None
+        returnable_data = None
 
         if res.status_code == 200 and data.get("status", None) not in [404, 408, "429"]:
             data = data["data"]
@@ -121,7 +121,7 @@ class Command(BaseCommand):
             finally:
                 image = self.session.get(self.image_url)
                 self.character_image = BytesIO(image.content)
-                return_data = data
+                returnable_data = data
 
                 self.success_list.append(self.style.SUCCESS("Jikan"))
 
@@ -136,9 +136,9 @@ class Command(BaseCommand):
         else:
             self.error_list.append(self.style.ERROR("Jikan"))
 
-        return return_data
+        return returnable_data
 
-    def get_data_from_kitsu(
+    def get_character_data_from_kitsu(
         self,
         character_name: str,
         session: CachedLimiterSession,
@@ -149,7 +149,10 @@ class Command(BaseCommand):
         """
 
         res = session.get(
-            f"https://kitsu.io/api/edge/characters?filter[name]={character_name}"
+            "https://kitsu.io/api/edge/characters",
+            params={
+                "filter[name]": {character_name},
+            },
         )
         data = res.json()
         kitsu_id = None
@@ -178,7 +181,7 @@ class Command(BaseCommand):
 
         return kitsu_id
 
-    def get_data_from_anilist(
+    def get_character_data_from_anilist(
         self,
         character_name: str,
         session: CachedLimiterSession,
@@ -220,7 +223,8 @@ class Command(BaseCommand):
                         {large}
                     }
                 }
-            }""",
+            }
+            """,
             "variables": {
                 "page": 1,
                 "type": "CHARACTERS",
@@ -278,21 +282,18 @@ class Command(BaseCommand):
             )
 
             if data:
-                kitsu_id = self.get_data_from_kitsu(
-                    character_name=self.character_name,
-                    session=self.session,
-                )
-                anilist_id = self.get_data_from_anilist(
-                    character_name=self.character_name,
-                    session=self.session,
-                )
-
                 try:
                     CharacterModel.objects.update_or_create(
                         mal_id=self.character_number,
                         defaults={
-                            "kitsu_id": kitsu_id,
-                            "anilist_id": anilist_id,
+                            "kitsu_id": self.get_character_data_from_kitsu(
+                                character_name=self.character_name,
+                                session=self.session,
+                            ),
+                            "anilist_id": self.get_character_data_from_anilist(
+                                character_name=self.character_name,
+                                session=self.session,
+                            ),
                             "name": self.character_name,
                             "name_kanji": self.character_name_kanji,
                             "character_image": ContentFile(

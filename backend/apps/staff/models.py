@@ -24,5 +24,5 @@ class StaffModel(models.Model):
         return f"{self.name}"
 
     class Meta:
-        verbose_name = "People"
-        verbose_name_plural = "Peoples"
+        verbose_name = "Staff | People"
+        verbose_name_plural = "Staffs | Peoples"

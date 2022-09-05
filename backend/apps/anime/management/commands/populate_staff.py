@@ -1,5 +1,7 @@
+from argparse import ArgumentParser
 from io import BytesIO
 import os
+from typing import Any, Dict, List
 
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError
@@ -8,10 +10,10 @@ from requests_cache import RedisCache  # type: ignore
 from requests_ratelimiter import RedisBucket
 from urllib3.util import Retry
 
-from apps.anime.models import CharacterModel  # pylint: disable=import-error
 from core.utilities.CachedLimiterSession import (  # pylint: disable=import-error
     CachedLimiterSession,
 )
+from apps.staff.models import StaffAlternateNameModel, StaffModel
 
 retry_strategy = Retry(
     total=3,
@@ -32,9 +34,9 @@ class Command(BaseCommand):
                 4. Saving everything to `CharacterModel`
     """
 
-    help = "Populates the character database"
+    help = "Populates the people database"
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
 
         self.mal_rate_limit_file_name = "mal_ratelimit.txt"
@@ -67,7 +69,7 @@ class Command(BaseCommand):
         self.session.mount("https://", adapter)
         self.session.mount("http://", adapter)
 
-    def add_arguments(self, parser):
+    def add_arguments(self, parser: ArgumentParser) -> None:
         parser.add_argument(
             "staff-number-start",
             nargs="?",
@@ -82,14 +84,31 @@ class Command(BaseCommand):
             help="Specifies the stopping number for staff.",
         )
 
-    def handle(self, *args, **options) -> None:
+    def handle(self, *args: Any, **options: Any) -> None:
         """Starting point for our application"""
         self.staff_number = options["staff-number-start"]
         self.staff_number_end = options["staff_number_end"]
         self.populate_anime_staff()
 
-    # Finished
-    def get_data_from_anilist(
+    def get_staff_data_from_kitsu(
+        self,
+        staff_number: str,
+        session: CachedLimiterSession,
+    ) -> str | None:
+        res = session.get(f"https://kitsu.io/api/edge/people/{staff_number}")
+        data = res.json()
+        staff_name = None
+
+        if data:
+            try:
+                data = data["data"]
+                staff_name = data["attributes"]["name"]
+            except IndexError:
+                pass
+
+        return staff_name
+
+    def get_staff_data_from_anilist(
         self,
         staff_name: str,
         staff_number: int,
@@ -131,7 +150,8 @@ class Command(BaseCommand):
                         image{large}
                     }
                 }
-            }""",
+            }
+            """,
             "variables": {
                 "page": 1,
                 "type": "STAFF",
@@ -161,6 +181,35 @@ class Command(BaseCommand):
 
         return anilist_id
 
+    def get_staff_data_from_jikan(
+        self,
+        staff_name: str,
+        session: CachedLimiterSession,
+    ) -> Dict[str, str | List[str]] | None:
+        """
+        :param staff_name: The name of the staff
+        :param session: Requests instance to get data
+        """
+        # In jikan staff = people
+        res = session.get(
+            "https://api.jikan.moe/v4/people",
+            params={
+                "q": staff_name,
+            },
+        )
+        data = res.json()
+        returnable_data = None
+
+        if res.status_code == 200:
+            try:
+                data = data["data"][0]
+                returnable_data = data
+
+            except IndexError:
+                pass
+
+        return returnable_data
+
     def populate_anime_staff(self) -> None:
         """
         Function's purpose :
@@ -182,8 +231,7 @@ class Command(BaseCommand):
                     os.remove(file)
 
         while self.staff_number < self.staff_number_end:
-            data = self.get_character_data_from_jikan(
-                self.staff_number,
+            data = self.get_staff_data_from_jikan(
                 session=self.session,
             )
 
