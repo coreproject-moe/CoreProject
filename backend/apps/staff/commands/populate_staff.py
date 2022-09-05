@@ -186,7 +186,7 @@ class Command(BaseCommand):
         self,
         staff_name: str | None,
         session: CachedLimiterSession,
-    ) -> Dict[str, str | List[str]] | None:
+    ) -> dict[str, str | list[str]] | None:
         """
         :param staff_name: The name of the staff
         :param session: Requests instance to get data
