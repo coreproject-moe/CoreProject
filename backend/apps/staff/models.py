@@ -15,8 +15,8 @@ class StaffModel(models.Model):
     anilist_id = models.IntegerField(unique=True, null=True, db_index=True)
 
     name = models.CharField(max_length=1024, db_index=True)
-    given_name = models.CharField(max_length=1024, db_index=True)
-    family_name = models.CharField(max_length=1024, db_index=True)
+    given_name = models.CharField(max_length=1024, null=True)
+    family_name = models.CharField(max_length=1024, null=True)
 
     about = models.TextField(null=True)
     alternate_names = models.ManyToManyField(StaffAlternateNameModel)
