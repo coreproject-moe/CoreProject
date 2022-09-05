@@ -7,6 +7,7 @@ from typing import Any
 from django.conf import settings
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
+from django.contrib.humanize.templatetags.humanize import intcomma
 from django.db import IntegrityError
 from requests.adapters import HTTPAdapter
 from requests_cache import RedisCache  # type: ignore
@@ -98,13 +99,31 @@ class Command(BaseCommand):
         self.stdout.write(
             textwrap.dedent(
                 f"""
-                Starting Number : {self.style.SUCCESS(str(self.character_number))}
-                Total `characters` to get : {self.style.SUCCESS(str(self.character_number_end))}
+                Starting Number : {
+                    self.style.SUCCESS(
+                        str(
+                            intcomma(
+                                self.character_number
+                            )
+                        )
+                    )
+                }
+                Total `characters` to get : {
+                    self.style.SUCCESS(
+                        str(
+                            intcomma(
+                                self.character_number_end
+                            )
+                        )
+                    )
+                }
                 Time to finish : {
                     self.style.SUCCESS(
                         str(
-                            round(
-                                self.character_number_end / settings.MAX_REQUESTS_PER_MINUTE
+                            intcomma(
+                                round(
+                                    self.character_number_end / settings.MAX_REQUESTS_PER_MINUTE
+                                )
                             )
                         ) + ' minutes'
                     )
