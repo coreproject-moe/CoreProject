@@ -41,14 +41,13 @@ class Command(BaseCommand):
 
         self.staff_name: str
         self.staff_name_kanji: str
-
         self.staff_about: str
-        self.image_url: str
 
         # Tried to implement Facade pattern
         self.session = CachedLimiterSession(
             bucket_class=RedisBucket,
-            backend=RedisCache(),
+            backend=RedisCache(
+            ),
             # Undocumented ( pyrate-limiter )
             bucket_kwargs={"bucket_name": settings.BUCKET_NAME},
             # https://docs.api.jikan.moe/#section/Information/Rate-Limiting
