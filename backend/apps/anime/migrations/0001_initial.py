@@ -31,7 +31,9 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "name",
-                    models.CharField(db_index=True, default="", max_length=50, unique=True),
+                    models.CharField(
+                        db_index=True, default="", max_length=50, unique=True
+                    ),
                 ),
                 ("type", models.CharField(db_index=True, default="", max_length=50)),
             ],
@@ -68,7 +70,9 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "name",
-                    models.CharField(db_index=True, default="", max_length=50, unique=True),
+                    models.CharField(
+                        db_index=True, default="", max_length=50, unique=True
+                    ),
                 ),
                 ("type", models.CharField(db_index=True, default="", max_length=50)),
             ],
@@ -100,7 +104,9 @@ class Migration(migrations.Migration):
                 ("name", models.CharField(db_index=True, max_length=1024)),
                 (
                     "name_kanji",
-                    models.CharField(blank=True, db_index=True, max_length=1024, null=True),
+                    models.CharField(
+                        blank=True, db_index=True, max_length=1024, null=True
+                    ),
                 ),
                 (
                     "character_image",
