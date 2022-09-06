@@ -144,7 +144,7 @@ class Command(BaseCommand):
         data = res.json()
         staff_name = None
 
-        if data:
+        if res.status_code == 200 and data:
             try:
                 data = data["data"]
                 staff_name = data["attributes"]["name"]
@@ -293,64 +293,65 @@ class Command(BaseCommand):
                 staff_number=self.staff_number,
                 session=self.session,
             )
-            data = self.get_staff_data_from_jikan(
-                staff_name=staff_name,
-                session=self.session,
-            )
 
-            try:
-                (database, _) = StaffModel.objects.update_or_create(
-                    kitsu_id=self.staff_number,
-                    name=staff_name,
-                    defaults={
-                        "mal_id": data.get("mal_id"),
-                        "anilist_id": self.get_staff_data_from_anilist(
-                            staff_name,
-                            session=self.session,
-                        ),
-                        "given_name": data.get("given_name"),
-                        "family_name": data.get("family_name"),
-                        "about": data.get("about"),
-                    },
+            if staff_name:
+                data = self.get_staff_data_from_jikan(
+                    staff_name=staff_name,
+                    session=self.session,
                 )
 
-                if data:
-                    try:
-                        image_url = data["images"]["webp"]["image_url"]
-                    except KeyError:
-                        image_url = data["images"]["jpg"]["image_url"]
-                    finally:
-                        image = self.session.get(image_url)
-
-                        database.staff_image.save(
-                            f"{self.staff_number}.{image_url.split('.')[-1]}",
-                            ContentFile(
-                                BytesIO(image.content).read(),
+                try:
+                    (database, _) = StaffModel.objects.update_or_create(
+                        kitsu_id=self.staff_number,
+                        name=staff_name,
+                        defaults={
+                            "mal_id": data.get("mal_id"),
+                            "anilist_id": self.get_staff_data_from_anilist(
+                                staff_name,
+                                session=self.session,
                             ),
-                        )
-                        database.save()
+                            "given_name": data.get("given_name"),
+                            "family_name": data.get("family_name"),
+                            "about": data.get("about"),
+                        },
+                    )
 
-                for name in data.get("alternate_names", []):
-                    (
-                        instance,
-                        _,
-                    ) = StaffAlternateNameModel.objects.get_or_create(name=name)
-                    database.alternate_names.add(instance)
+                    if data:
+                        try:
+                            image_url = data["images"]["webp"]["image_url"]
+                        except KeyError:
+                            image_url = data["images"]["jpg"]["image_url"]
+                        finally:
+                            image = self.session.get(image_url)
 
-            except IntegrityError as e:
-                print(e)
-                self.stdout.write(f"Entry exists : {self.staff_number}")
+                            database.staff_image.save(
+                                f"{self.staff_number}.{image_url.split('.')[-1]}",
+                                ContentFile(
+                                    BytesIO(image.content).read(),
+                                ),
+                            )
+                            database.save()
 
-            finally:
-                success_error_warnings = (
-                    self.success_list + self.error_list + self.warning_list
-                )
-                self.stdout.write(
-                    f"Requested `staff_info` for {self.staff_number}"
-                    " | "
-                    f"[{', '.join(success_error_warnings)}]"
-                )
-                self.after_populate_anime_staff()
+                    for name in data.get("alternate_names", []):
+                        (
+                            instance,
+                            _,
+                        ) = StaffAlternateNameModel.objects.get_or_create(name=name)
+                        database.alternate_names.add(instance)
+
+                except IntegrityError as e:
+                    print(e)
+                    self.stdout.write(f"Entry exists : {self.staff_number}")
+
+            success_error_warnings = (
+                self.success_list + self.error_list + self.warning_list
+            )
+            self.stdout.write(
+                f"Requested `staff_info` for {self.staff_number}"
+                " | "
+                f"[{', '.join(success_error_warnings)}]"
+            )
+            self.after_populate_anime_staff()
 
     def after_populate_anime_staff(self) -> None:
         self.staff_name = ""
