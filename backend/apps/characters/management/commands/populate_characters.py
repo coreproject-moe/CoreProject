@@ -52,7 +52,7 @@ class Command(BaseCommand):
 
         self.character_name: str
         self.character_name_kanji: str
-        self.character_image: BytesIO = BytesIO()
+        self.character_image: BytesIO
 
         self.character_about: str
         self.image_url: str
@@ -372,9 +372,7 @@ class Command(BaseCommand):
                     print(e)
                     self.stdout.write(f"Entry exists : {self.character_number}")
 
-            success_error_warnings = (
-                self.success_list + self.error_list + self.warning_list
-            )
+            success_error_warnings = self.success_list + self.error_list + self.warning_list
             self.stdout.write(
                 f"Requested `character_info` for {self.character_number}"
                 " | "

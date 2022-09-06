@@ -51,9 +51,7 @@ class AnimeInfoGETSchema(ModelSchema):
 
     @staticmethod
     def resolve_anime_producers(obj) -> str:
-        url = resolve_url(
-            "api-1.0.0:get_individual_anime_producer_info", anime_id=obj.id
-        )
+        url = resolve_url("api-1.0.0:get_individual_anime_producer_info", anime_id=obj.id)
         return f"{settings.HOSTNAME}{url}"
 
     @staticmethod
@@ -63,9 +61,7 @@ class AnimeInfoGETSchema(ModelSchema):
 
     @staticmethod
     def resolve_anime_characters(obj) -> str:
-        url = resolve_url(
-            "api-1.0.0:get_individual_anime_character_info", anime_id=obj.id
-        )
+        url = resolve_url("api-1.0.0:get_individual_anime_character_info", anime_id=obj.id)
         return f"{settings.HOSTNAME}{url}"
 
     @staticmethod

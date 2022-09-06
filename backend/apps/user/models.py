@@ -55,8 +55,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, ResizeImageMixin):
         ),
         validators=[
             RegexValidator(
-                regex=r"^(?=[\S\s]{1,%d}$)[\S\s]*"
-                % settings.USERNAME_DISCRIMINATOR_LENGTH,
+                regex=r"^(?=[\S\s]{1,%d}$)[\S\s]*" % settings.USERNAME_DISCRIMINATOR_LENGTH,
                 message="Length has to be 4",
                 code="nomatch",
             ),
