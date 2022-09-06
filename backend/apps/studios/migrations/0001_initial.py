@@ -25,9 +25,7 @@ class Migration(migrations.Migration):
                 ("mal_id", models.IntegerField(db_index=True, unique=True)),
                 (
                     "name",
-                    models.CharField(
-                        db_index=True, default="", max_length=50, unique=True
-                    ),
+                    models.CharField(db_index=True, default="", max_length=50, unique=True),
                 ),
                 ("type", models.CharField(db_index=True, default="", max_length=50)),
             ],
