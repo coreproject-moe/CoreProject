@@ -288,7 +288,8 @@ class Command(BaseCommand):
 
     def populate_anime_staff(self) -> None:
         if self.staff_number == 1:
-            # If user starts from 0 remove files which are necessary for logging failed request
+            # If user starts from 0 remove files
+            # which are necessary for logging failed request
             files_to_remove = [
                 self.mal_not_found_file_name,
                 self.anilist_not_found_file_name,
