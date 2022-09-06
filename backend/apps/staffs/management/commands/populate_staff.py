@@ -16,7 +16,7 @@ from requests_ratelimiter import RedisBucket
 from urllib3.util import Retry
 
 # pylint: disable=import-error
-from apps.staff.models import StaffAlternateNameModel, StaffModel
+from apps.staffs.models import StaffAlternateNameModel, StaffModel
 from core.utilities.CachedLimiterSession import CachedLimiterSession
 
 retry_strategy = Retry(
@@ -216,11 +216,17 @@ class Command(BaseCommand):
             },
         }
         res = session.post(url="https://graphql.anilist.co/", json=query)
+        data = res.json()
 
         if res.status_code == 200:
             try:
-                data = res.json()
-                anilist_id = data["data"]["Page"]["staff"][0]["id"]
+                for item in data["data"]["Page"]["staff"]:
+                    # If the Anilist ID exists in database
+                    # Skip to next iteration
+                    if StaffModel.objects.filter(anilist_id=item["id"]).exists():
+                        continue
+                    anilist_id = item["id"]
+
                 self.success_list.append(self.style.SUCCESS("Anilist"))
 
             except (IndexError, KeyError):
@@ -260,8 +266,14 @@ class Command(BaseCommand):
 
         if res.status_code == 200:
             try:
-                data = data["data"][0]
-                returnable_data = data
+                for item in data["data"]:
+                    # If the MyAnimeList ID exists in database
+                    # Skip to next iteration
+                    if StaffModel.objects.filter(mal_id=item["mal_id"]).exists():
+                        continue
+
+                    returnable_data = item
+
                 self.success_list.append(self.style.SUCCESS("Jikan"))
 
             except IndexError:
@@ -317,6 +329,8 @@ class Command(BaseCommand):
                     )
 
                     if data:
+                        # Try to get webp image first
+                        # If that fails get jpg image
                         try:
                             image_url = data["images"]["webp"]["image_url"]
                         except KeyError:
@@ -343,7 +357,7 @@ class Command(BaseCommand):
                     print(e)
                     self.stdout.write(f"Entry exists : {self.staff_number}")
 
-            success_error_warnings = (
+            success_error_warnings = set(
                 self.success_list + self.error_list + self.warning_list
             )
             self.stdout.write(
@@ -351,6 +365,8 @@ class Command(BaseCommand):
                 " | "
                 f"[{', '.join(success_error_warnings)}]"
             )
+
+            # Cleanup
             self.after_populate_anime_staff()
 
     def after_populate_anime_staff(self) -> None:

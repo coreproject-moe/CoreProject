@@ -166,6 +166,8 @@ class Command(BaseCommand):
             self.character_name_kanji = data.get("name_kanji", None)
             self.character_about = data.get("about", None)
 
+            # Try to get webp image first
+            # If that fails get jpg image
             try:
                 self.image_url = data["images"]["webp"]["image_url"]
             except KeyError:
@@ -211,13 +213,17 @@ class Command(BaseCommand):
 
         if res.status_code == 200:
             try:
-                data = data["data"][0]
+                for item in data["data"]:
+                    # If the Kitsu ID exists in database
+                    # Skip to next iteration
+                    if CharacterModel.objects.filter(kitsu_id=item["id"]).exists():
+                        continue
 
-                # Side Effect
-                if not self.character_name_kanji:
-                    self.character_name_kanji = data["attributes"]["names"]["ja_jp"]
+                    # Side Effect
+                    if not self.character_name_kanji:
+                        self.character_name_kanji = item["attributes"]["names"]["ja_jp"]
 
-                kitsu_id = data["id"]
+                    kitsu_id = item["id"]
                 self.success_list.append(self.style.SUCCESS("Kitsu"))
 
             except IndexError:
@@ -290,7 +296,13 @@ class Command(BaseCommand):
 
         if data and res.status_code == 200:
             try:
-                anilist_id = data["data"]["Page"]["characters"][0]["id"]
+                for item in data["data"]["Page"]["characters"]:
+                    # If the Anilist ID exists in database
+                    # Skip to next iteration
+                    if CharacterModel.objects.filter(anilist_id=item["id"]).exists():
+                        continue
+
+                    anilist_id = item["id"]
                 self.success_list.append(self.style.SUCCESS("Anilist"))
 
             except IndexError:
