@@ -41,25 +41,6 @@ class Command(BaseCommand):
         self.stdout.write(
             textwrap.dedent(
                 f"""
-
-                Starting Number : {
-                    self.style.SUCCESS(
-                        str(
-                            intcomma(
-                                self.character_number
-                            )
-                        )
-                    )
-                }
-                Total `characters` to get : {
-                    self.style.SUCCESS(
-                        str(
-                            intcomma(
-                                self.character_number_end
-                            )
-                        )
-                    )
-                }
                 Time to finish : {
                     self.style.SUCCESS(
                         str(
