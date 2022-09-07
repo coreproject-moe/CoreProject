@@ -214,16 +214,16 @@ class Command(BaseCommand):
             },
         }
         res = session.post(url="https://graphql.anilist.co/", json=query)
-        data = res.json()
+        res_data = res.json()
 
         if res.status_code == 200:
             try:
-                for item in data["data"]["Page"]["staff"]:
+                for data in res_data["data"]["Page"]["staff"]:
                     # If the Anilist ID exists in database
                     # Skip to next iteration
-                    if StaffModel.objects.filter(anilist_id=item["id"]).exists():
+                    if StaffModel.objects.filter(anilist_id=data["id"]).exists():
                         continue
-                    anilist_id = item["id"]
+                    anilist_id = data["id"]
 
                 self.success_list.append(self.style.SUCCESS("Anilist"))
 
@@ -260,17 +260,17 @@ class Command(BaseCommand):
                 "q": staff_name,
             },
         )
-        data = res.json()
+        res_data = res.json()
 
         if res.status_code == 200:
             try:
-                for item in data["data"]:
+                for data in res_data["data"]:
                     # If the MyAnimeList ID exists in database
                     # Skip to next iteration
-                    if StaffModel.objects.filter(mal_id=item["mal_id"]).exists():
+                    if StaffModel.objects.filter(mal_id=data["mal_id"]).exists():
                         continue
 
-                    returnable_data = item
+                    returnable_data = data
 
                 self.success_list.append(self.style.SUCCESS("Jikan"))
 

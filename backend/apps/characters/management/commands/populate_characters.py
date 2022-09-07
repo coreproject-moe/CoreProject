@@ -161,23 +161,22 @@ class Command(BaseCommand):
         returnable_data = None
 
         if res.status_code == 200 and data.get("status", None) not in [404, 408, "429"]:
-            data = data["data"]
-            self.character_name = data["name"]
-            self.character_name_kanji = data.get("name_kanji", None)
-            self.character_about = data.get("about", None)
+            self.success_list.append(self.style.SUCCESS("Jikan"))
+
+            returnable_data = data["data"]
+            self.character_name = returnable_data["name"]
+            self.character_name_kanji = returnable_data.get("name_kanji", None)
+            self.character_about = returnable_data.get("about", None)
 
             # Try to get webp image first
             # If that fails get jpg image
             try:
-                self.image_url = data["images"]["webp"]["image_url"]
+                self.image_url = returnable_data["images"]["webp"]["image_url"]
             except KeyError:
-                self.image_url = data["images"]["jpg"]["image_url"]
+                self.image_url = returnable_data["images"]["jpg"]["image_url"]
             finally:
                 image = self.session.get(self.image_url)
                 self.character_image = BytesIO(image.content)
-                returnable_data = data
-
-            self.success_list.append(self.style.SUCCESS("Jikan"))
 
         elif data.get("status", None) == 408:
             self.warning_list.append(self.style.WARNING("Jikan"))
@@ -208,22 +207,22 @@ class Command(BaseCommand):
                 "filter[name]": {character_name},
             },
         )
-        data = res.json()
+        res_data = res.json()
         kitsu_id = None
 
         if res.status_code == 200:
             try:
-                for item in data["data"]:
+                for data in res_data["data"]:
                     # If the Kitsu ID exists in database
                     # Skip to next iteration
-                    if CharacterModel.objects.filter(kitsu_id=item["id"]).exists():
+                    if CharacterModel.objects.filter(kitsu_id=data["id"]).exists():
                         continue
 
                     # Side Effect
                     if not self.character_name_kanji:
-                        self.character_name_kanji = item["attributes"]["names"]["ja_jp"]
+                        self.character_name_kanji = data["attributes"]["names"]["ja_jp"]
 
-                    kitsu_id = item["id"]
+                    kitsu_id = data["id"]
                 self.success_list.append(self.style.SUCCESS("Kitsu"))
 
             except IndexError:
@@ -291,18 +290,18 @@ class Command(BaseCommand):
             },
         }
         res = session.post(url="https://graphql.anilist.co/", json=query)
-        data = res.json()
+        res_data = res.json()
         anilist_id = None
 
-        if data and res.status_code == 200:
+        if res_data and res.status_code == 200:
             try:
-                for item in data["data"]["Page"]["characters"]:
+                for data in res_data["data"]["Page"]["characters"]:
                     # If the Anilist ID exists in database
                     # Skip to next iteration
-                    if CharacterModel.objects.filter(anilist_id=item["id"]).exists():
+                    if CharacterModel.objects.filter(anilist_id=data["id"]).exists():
                         continue
 
-                    anilist_id = item["id"]
+                    anilist_id = data["id"]
                 self.success_list.append(self.style.SUCCESS("Anilist"))
 
             except IndexError:
