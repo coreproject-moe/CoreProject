@@ -1,4 +1,5 @@
 from typing import List
+
 from ninja import ModelSchema
 
 from .models import StaffAlternateNameModel, StaffModel
@@ -21,5 +22,5 @@ class StaffSchema(ModelSchema):
         ]
 
     @staticmethod
-    def resolve_alternate_names(obj: StaffModel) -> List[str]:
+    def resolve_alternate_names(obj: StaffModel) -> list[str]:
         return [i.name for i in obj.alternate_names.all()]
