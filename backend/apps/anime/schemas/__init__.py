@@ -45,33 +45,33 @@ class AnimeInfoGETSchema(ModelSchema):
         ]
 
     @staticmethod
-    def resolve_anime_genres(obj) -> str:
-        url = resolve_url("api-1.0.0:get_individual_anime_genre_info", anime_id=obj.id)
+    def resolve_anime_genres(obj: AnimeModel) -> str:
+        url = resolve_url("api-1.0.0:get_individual_anime_genre_info", anime_id=obj.pk)
         return f"{settings.HOSTNAME}{url}"
 
     @staticmethod
-    def resolve_anime_producers(obj) -> str:
-        url = resolve_url("api-1.0.0:get_individual_anime_producer_info", anime_id=obj.id)
+    def resolve_anime_producers(obj: AnimeModel) -> str:
+        url = resolve_url("api-1.0.0:get_individual_anime_producer_info", anime_id=obj.pk)
         return f"{settings.HOSTNAME}{url}"
 
     @staticmethod
-    def resolve_anime_studios(obj) -> str:
-        url = resolve_url("api-1.0.0:get_individual_anime_studio_info", anime_id=obj.id)
+    def resolve_anime_studios(obj: AnimeModel) -> str:
+        url = resolve_url("api-1.0.0:get_individual_anime_studio_info", anime_id=obj.pk)
         return f"{settings.HOSTNAME}{url}"
 
     @staticmethod
-    def resolve_anime_characters(obj) -> str:
-        url = resolve_url("api-1.0.0:get_individual_anime_character_info", anime_id=obj.id)
+    def resolve_anime_characters(obj: AnimeModel) -> str:
+        url = resolve_url("api-1.0.0:get_individual_anime_character_info", anime_id=obj.pk)
         return f"{settings.HOSTNAME}{url}"
 
     @staticmethod
-    def resolve_anime_theme(obj) -> str:
-        url = resolve_url("api-1.0.0:get_individual_anime_theme_info", anime_id=obj.id)
+    def resolve_anime_theme(obj: AnimeModel) -> str:
+        url = resolve_url("api-1.0.0:get_individual_anime_theme_info", anime_id=obj.pk)
         return f"{settings.HOSTNAME}{url}"
 
     @staticmethod
-    def resolve_episode(obj) -> str:
-        url = resolve_url("api-1.0.0:get_individual_anime_episodes", anime_id=obj.id)
+    def resolve_episode(obj: AnimeModel) -> str:
+        url = resolve_url("api-1.0.0:get_individual_anime_episodes", anime_id=obj.pk)
         return f"{settings.HOSTNAME}{url}"
 
 
@@ -91,7 +91,7 @@ class AnimeInfoPOSTSchema(ModelSchema):
 
 
 # Extra imports
-
+# __DO_NOT_MODIFY__
 
 from .anime_genre import AnimeGenreSchema
 from .anime_theme import AnimeThemeSchema
