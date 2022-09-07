@@ -19,10 +19,24 @@ def get_character_info(request: HttpRequest, filters: CharacterFilter = Query(..
 
     character_name = query_dict.pop("name", None)
     if character_name:
-        query = Q()
+        _query_ = Q()
         for position in character_name.split(","):
-            query |= Q(**{"name__icontains": position.strip()})
-        query_object &= query
+            _query_ |= Q(**{"name__icontains": position.strip()})
+        query_object &= _query_
+
+    # Same here but with ids
+    id_lookups = [
+        "mal_id",
+        "kitsu_id",
+        "anilist_id",
+    ]
+    for id in id_lookups:
+        value = query_dict.pop(id, None)
+        if value:
+            _query_ = Q()
+            for position in value.split(","):
+                _query_ |= Q(**{f"{id}": int(position.strip())})
+            query_object &= _query_
 
     query = CharacterModel.objects.all()
 

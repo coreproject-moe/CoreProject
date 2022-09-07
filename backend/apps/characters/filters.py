@@ -3,6 +3,8 @@ from ninja import Schema
 
 class CharacterFilter(Schema):
     mal_id: str | None = None
+    kitsu_id: str | None = None
+    anilist_id: str | None = None
 
     # icontains based search
     #   Allowed :

@@ -27,27 +27,27 @@ def get_anime_info(request: HttpRequest, filters: AnimeInfoFilters = Query(...))
         )
 
     # Same here but with ids
-    anime_lookups = (
+    id_lookups = [
         "mal_id",
         "kitsu_id",
         "anilist_id",
-    )
-    for item in anime_lookups:
-        value = query_dict.pop(item, None)
+    ]
+    for id in id_lookups:
+        value = query_dict.pop(id, None)
         if value:
             _query_ = Q()
             for position in value.split(","):
-                _query_ |= Q(**{f"{item}": int(position.strip())})
+                _query_ |= Q(**{f"{id}": int(position.strip())})
             query_object &= _query_
 
     # Many to many lookups
-    m2m_lookups = (
+    m2m_lookups = [
         "anime_genres",
         "anime_themes",
         "anime_studios",
         "anime_producers",
         "anime_characters",
-    )
+    ]
     for item in m2m_lookups:
         value = query_dict.pop(item, None)
         if value:
