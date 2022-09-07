@@ -1,12 +1,11 @@
-from django.db.models import Q
+from django.db.models import Q, QuerySet
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
-from django.db.models import QuerySet
 from ninja import Query, Router
 from ninja.pagination import paginate
 
-from .models import StaffModel
 from .filters import StaffFilter
+from .models import StaffModel
 from .schemas import StaffSchema
 
 router = Router(tags=["staffs"])
