@@ -2,6 +2,7 @@ from argparse import ArgumentParser
 from datetime import datetime, timedelta
 from io import BytesIO
 import os
+from pprint import pprint
 import textwrap
 from typing import Any
 
@@ -220,7 +221,7 @@ class Command(BaseCommand):
 
                     # Side Effect
                     if not self.character_name_kanji:
-                        self.character_name_kanji = data["attributes"]["names"]["ja_jp"]
+                        self.character_name_kanji = data["attributes"]["names"].get("ja_jp")
 
                     kitsu_id = data["id"]
                 self.success_list.append(self.style.SUCCESS("Kitsu"))
