@@ -1,7 +1,8 @@
 from typing import List
-from ninja import ModelSchema, Field
 
-from .models import StaffModel, StaffAlternateNameModel
+from ninja import ModelSchema
+
+from .models import StaffAlternateNameModel, StaffModel
 
 
 class StaffAlternateNameSchema(ModelSchema):
@@ -11,7 +12,7 @@ class StaffAlternateNameSchema(ModelSchema):
 
 
 class StaffSchema(ModelSchema):
-    alternate_names: List[str] | None
+    alternate_names: list[str] | None
 
     class Config:
         model = StaffModel
