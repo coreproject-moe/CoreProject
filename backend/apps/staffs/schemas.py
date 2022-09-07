@@ -1,5 +1,3 @@
-from typing import List
-
 from ninja import ModelSchema
 
 from .models import StaffAlternateNameModel, StaffModel
