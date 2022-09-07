@@ -25,7 +25,7 @@ def get_character_info(
     if character_name:
         _query_ = Q()
         for position in character_name.split(","):
-            _query_ |= Q(**{"name__icontains": position.strip()})
+            _query_ &= Q(**{"name__icontains": position.strip()}) | Q()
         query_object &= _query_
 
     # Same here but with ids

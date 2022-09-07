@@ -11,3 +11,6 @@ class StaffFilter(Schema):
     #       Sora Amamiya, Natsukawa Shiina, Momo Asakura
     #       Sora Amamiya
     name: str | None = None
+
+    given_name: str | None = None
+    family_name: str | None = None

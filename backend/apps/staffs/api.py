@@ -26,8 +26,23 @@ def get_staff_info(
         _query_ = Q()
         # Modify this
         for position in staff_name.split(","):
-            _query_ |= Q(**{"name__icontains": position.strip()})
+            _query_ |= Q(**{"name__icontains": position.strip()}) | Q(
+                **{"alternate_names__name__icontains": position.strip()}
+            )
         query_object &= _query_
+
+    # Specilized lookups
+    specialized_name_lookups = [
+        "given_name",
+        "family_name",
+    ]
+    for specialized_name in specialized_name_lookups:
+        value = query_dict.pop(specialized_name, None)
+        if value:
+            _query_ = Q()
+            for position in value.split(","):
+                _query_ |= Q(**{f"{specialized_name}__icontains": int(position.strip())})
+            query_object &= _query_
 
     # Same here but with ids
     id_lookups = [
