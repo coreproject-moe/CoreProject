@@ -43,20 +43,6 @@ class Command(BaseCommand):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
 
-        self.mal_rate_limit_file_name = "(Character)_mal_ratelimit.txt"
-        self.kitsu_not_found_file_name = "(Character)_kitsu_not_found.txt"
-        self.anilist_not_found_file_name = "(Character)_anilist_not_found.txt"
-
-        self.character_number: int
-        self.character_number_end: int
-
-        self.character_name: str
-        self.character_name_kanji: str
-        self.character_image: BytesIO
-
-        self.character_about: str
-        self.image_url: str
-
         # Tried to implement Facade pattern
         self.session = CachedLimiterSession(
             bucket_class=RedisBucket,
@@ -73,6 +59,22 @@ class Command(BaseCommand):
         self.session.mount("https://", adapter)
         self.session.mount("http://", adapter)
 
+        # FIles
+        self.mal_rate_limit_file_name = "(Character)_mal_ratelimit.txt"
+        self.kitsu_not_found_file_name = "(Character)_kitsu_not_found.txt"
+        self.anilist_not_found_file_name = "(Character)_anilist_not_found.txt"
+
+        self.character_number: int
+        self.starting_number: int
+        self.ending_number = self.get_ending_number()
+
+        self.character_name: str
+        self.character_name_kanji: str
+        self.character_image: BytesIO
+
+        self.character_about: str
+        self.image_url: str
+
         # A list to keep items
         self.success_list: list[str] = []
         self.error_list: list[str] = []
@@ -86,17 +88,10 @@ class Command(BaseCommand):
             default=1,
             help="Specifies the starting number for character.",
         )
-        parser.add_argument(
-            "--character-number-end",
-            type=int,
-            default=100_000,
-            help="Specifies the stopping number for character.",
-        )
 
     def handle(self, *args: Any, **options: Any) -> None:
         """Starting point for our application"""
-        self.character_number = options["character-number-start"]
-        self.character_number_end = options["character_number_end"]
+        self.character_number = self.starting_number = options["character-number-start"]
         self.stdout.write(
             textwrap.dedent(
                 f"""
@@ -114,7 +109,7 @@ class Command(BaseCommand):
                     self.style.SUCCESS(
                         str(
                             intcomma(
-                                self.character_number_end
+                                self.ending_number
                             )
                         )
                     )
@@ -129,7 +124,7 @@ class Command(BaseCommand):
                                     minutes=
                                         round(
                                             (
-                                                self.character_number_end
+                                                self.ending_number
                                                 -
                                                 self.character_number
                                             )
@@ -146,6 +141,11 @@ class Command(BaseCommand):
             )
         )
         self.populate_anime_characters()
+
+    def get_ending_number(self) -> int:
+        res = self.session.get("https://api.jikan.moe/v4/characters")
+        data = res.json()
+        return int(data["pagination"]["items"]["total"])
 
     def get_character_data_from_jikan(
         self,
@@ -338,7 +338,7 @@ class Command(BaseCommand):
                 if os.path.exists(file):
                     os.remove(file)
 
-        while self.character_number < self.character_number_end:
+        while self.starting_number <= self.ending_number:
             data = self.get_character_data_from_jikan(
                 character_number=self.character_number,
                 session=self.session,
@@ -370,6 +370,9 @@ class Command(BaseCommand):
                 except IntegrityError as e:
                     print(e)
                     self.stdout.write(f"Entry exists : {self.character_number}")
+
+                # Add 1 to `starting_number` on every successful request
+                self.starting_number += 1
 
             success_error_warnings = self.success_list + self.error_list + self.warning_list
             self.stdout.write(
