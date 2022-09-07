@@ -10,7 +10,10 @@ router = Router()
 
 
 @router.get("/{int:anime_id}/character", response=list[CharacterSchema])
-def get_individual_anime_character_info(request: HttpRequest, anime_id: int):
+def get_individual_anime_character_info(
+    request: HttpRequest,
+    anime_id: int,
+):
     query = get_list_or_404(
         get_object_or_404(AnimeModel, id=anime_id).anime_characters,
     )
@@ -19,7 +22,9 @@ def get_individual_anime_character_info(request: HttpRequest, anime_id: int):
 
 @router.post("/{int:anime_id}/character", response=list[CharacterSchema])
 def post_individual_anime_character_info(
-    request: HttpRequest, anime_id: int, payload: CharacterSchema
+    request: HttpRequest,
+    anime_id: int,
+    payload: CharacterSchema,
 ):
     # Set this at top
     # Because if there is no anime_info_model with corresponding query theres no point in  continuing

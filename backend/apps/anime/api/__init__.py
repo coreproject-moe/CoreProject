@@ -1,5 +1,6 @@
 from django.db.models import Q
 from django.http import Http404, HttpRequest
+from django.db.models import QuerySet
 from django.shortcuts import get_object_or_404
 from ninja import Query, Router
 from ninja.pagination import paginate
@@ -13,7 +14,10 @@ router = Router(tags=["anime_info"])
 
 @router.get("", response=list[AnimeInfoGETSchema])
 @paginate
-def get_anime_info(request: HttpRequest, filters: AnimeInfoFilters = Query(...)):
+def get_anime_info(
+    request: HttpRequest,
+    filters: AnimeInfoFilters = Query(...),
+) -> QuerySet[AnimeModel]:
     query_dict = filters.dict(exclude_none=True)
     query_object = Q()
 
@@ -68,19 +72,28 @@ def get_anime_info(request: HttpRequest, filters: AnimeInfoFilters = Query(...))
 
     if not query:
         raise Http404(
-            f"No {query.model._meta.object_name} matches the given query with {query_object}"
+            "No {} matches the given query with {}".format(
+                query.model._meta.object_name,
+                query_object,
+            )
         )
     return query
 
 
 @router.post("", response=AnimeInfoGETSchema)
-def post_anime_info(request: HttpRequest, payload: AnimeInfoPOSTSchema):
+def post_anime_info(
+    request: HttpRequest,
+    payload: AnimeInfoPOSTSchema,
+):
     instance = AnimeModel.objects.create(**payload.dict())
     return instance
 
 
 @router.get("/{int:anime_id}", response=AnimeInfoGETSchema)
-def get_individual_anime_info(request: HttpRequest, anime_id: int):
+def get_individual_anime_info(
+    request: HttpRequest,
+    anime_id: int,
+):
     query = get_object_or_404(AnimeModel, id=anime_id)
     return query
 
