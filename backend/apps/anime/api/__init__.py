@@ -1,6 +1,5 @@
-from django.db.models import Q
+from django.db.models import Q, QuerySet
 from django.http import Http404, HttpRequest
-from django.db.models import QuerySet
 from django.shortcuts import get_object_or_404
 from ninja import Query, Router
 from ninja.pagination import paginate
