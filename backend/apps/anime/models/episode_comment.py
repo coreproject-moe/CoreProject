@@ -15,5 +15,3 @@ class EpisodeCommentModel(models.Model):
 
     class Meta:
         verbose_name = "Episode Comment"
-        # Sort by newest first
-        ordering = ("-comment_added",)
