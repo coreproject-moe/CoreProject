@@ -82,16 +82,24 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser: ArgumentParser) -> None:
         parser.add_argument(
-            "character-number-start",
-            nargs="?",
+            "-cn",
+            "--character-number-start",
             type=int,
             default=1,
             help="Specifies the starting number for character.",
         )
+        parser.add_argument(
+            "-sn",
+            "--starting-number",
+            type=int,
+            default=1,
+            help="Specifies the starting number for while loop.",
+        )
 
     def handle(self, *args: Any, **options: Any) -> None:
         """Starting point for our application"""
-        self.character_number = self.starting_number = options["character-number-start"]
+        self.character_number = options["character_number_start"]
+        self.starting_number = options["starting_number"]
         self.stdout.write(
             textwrap.dedent(
                 f"""
@@ -374,11 +382,15 @@ class Command(BaseCommand):
                 # Add 1 to `starting_number` on every successful request
                 self.starting_number += 1
 
-            success_error_warnings = self.success_list + self.error_list + self.warning_list
             self.stdout.write(
                 f"Requested `character_info` for {self.character_number}"
                 " | "
-                f"[{', '.join(success_error_warnings)}]"
+                f"""`starting_number` {
+                    self.starting_number - 1
+                    if data else self.starting_number
+                }"""
+                " | "
+                f"[{', '.join(self.success_list + self.error_list + self.warning_list)}]"
             )
             self.after_populate_anime_characters()
 
