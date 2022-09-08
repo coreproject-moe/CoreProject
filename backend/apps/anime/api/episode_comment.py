@@ -4,7 +4,6 @@ from ninja import Router
 
 from ..models import AnimeModel
 from ..models.episode_comment import EpisodeCommentModel
-
 from ..schemas.episode_comment import EpisodeCommentGETSchema, EpisodeCommentPOSTSchema
 
 router = Router()

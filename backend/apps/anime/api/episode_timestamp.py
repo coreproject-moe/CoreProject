@@ -5,7 +5,6 @@ from ninja import Router
 
 from ..models import AnimeModel
 from ..models.episode_timestamp import EpisodeTimestampModel
-
 from ..schemas.episode_timestamp import (
     EpisodeTimestampGETSchema,
     EpisodeTimestampPOSTSchema,
