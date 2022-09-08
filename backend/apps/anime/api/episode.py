@@ -4,7 +4,6 @@ from ninja import Router
 
 from ..models import AnimeModel
 from ..models.episode import EpisodeModel
-
 from ..schemas.episode import EpisodeGETSchema, EpisodePOSTSchema
 
 router = Router()

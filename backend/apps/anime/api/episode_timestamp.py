@@ -66,7 +66,7 @@ def post_individual_anime_episode_timestamp_info(
             "timestamp": payload.dict().get("timestamp"),
         },
     )
-    
+
     data: EpisodeTimestampModel = query[0]
     created = query[1]
 
