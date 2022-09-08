@@ -1,7 +1,10 @@
-from ninja import NinjaAPI
 from ninja.security import django_auth
 
+from ninja_jwt.controller import NinjaJWTDefaultController
+from ninja_extra import NinjaExtraAPI as NinjaAPI
+
 api = NinjaAPI(csrf=True, title="CoreProjectAPI")
+api.register_controllers(NinjaJWTDefaultController)
 
 # Router Configurations
 # ___ DO NOT MODIFY ____

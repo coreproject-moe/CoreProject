@@ -20,6 +20,10 @@ redis = "*"
 hiredis = {version="*", markers="sys_platform != 'win32'"}
 # Rest framework
 django_ninja = "*"
+# Remove when 
+# https://github.com/vitalik/django-ninja/issues/305
+django-ninja-jwt = "*"
+
 # HTTP Client
 requests = "*"
 requests_cache = "*"

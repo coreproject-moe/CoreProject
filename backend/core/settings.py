@@ -67,6 +67,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Rest Framework
     "ninja",
+    # Auth
+    "ninja_jwt",
+    "ninja_jwt.token_blacklist",
     # 3rd party rest framework stuff
     "corsheaders",
     # 3rd party Django stuff

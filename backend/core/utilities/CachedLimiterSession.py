@@ -23,6 +23,7 @@ class CachedLimiterSession(CacheMixin, LimiterMixin, Session):
         """
         return CaseInsensitiveDict(
             {
+                "User-Agent": "CoreProject",
                 "Accept-Encoding": DEFAULT_ACCEPT_ENCODING,
                 "Accept": "*/*",
                 "Connection": "keep-alive",
