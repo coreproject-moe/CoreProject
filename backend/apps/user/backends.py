@@ -1,6 +1,9 @@
+from typing import Any, MutableMapping
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q
+from django.http import HttpRequest
+from apps.user.models import CustomUser
 
 
 class EmailOrUsernameModelBackend(ModelBackend):
@@ -11,23 +14,30 @@ class EmailOrUsernameModelBackend(ModelBackend):
     Source: https://stackoverflow.com/a/35836674/59984
     """
 
-    def authenticate(self, request, username=None, password=None, **kwargs):
+    def authenticate(
+        self,
+        request: HttpRequest | None,
+        username: str | None = None,
+        password: str | None = None,
+        **kwargs: Any,
+    ) -> CustomUser:
         user_model = get_user_model()
         query = Q()
         # So `username` is something like baseplate-admin#0001
         # we need to split to get the username and discriminator
-        try:
-            _username_ = username.split("#")
-            username = _username_[0]
-            username_discriminator = _username_[1]
-            query |= Q(username_discriminator=username_discriminator) & Q(
-                **{user_model.USERNAME_FIELD: username}
-            )
-        except IndexError:
-            pass
-        finally:
-            if "@" in username:
-                query |= Q(email__iexact=username)
+        if username:
+            try:
+                _username_ = username.split("#")
+                username = _username_[0]
+                username_discriminator = _username_[1]
+                query |= Q(username_discriminator=username_discriminator) & Q(
+                    **{user_model.USERNAME_FIELD: username}
+                )
+            except IndexError:
+                pass
+            finally:
+                if "@" in username:
+                    query |= Q(email__iexact=username)
 
         # The `username` field is allows to contain `@` characters so
         # technically a given email address could be present in either field,

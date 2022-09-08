@@ -21,7 +21,7 @@ def get_studio_info(request: HttpRequest, filters: StudioFilter = Query(...)):
     if character_name:
         query = Q()
         for position in character_name.split(","):
-            query |= Q(**{f"name__icontains": position.strip()})
+            query |= Q(**{"name__icontains": position.strip()})
         query_object &= query
 
     query = StudioModel.objects.all().filter()

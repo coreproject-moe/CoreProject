@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from ..models import EpisodeModel
+from ..models.episode import EpisodeModel
 
 # Register your models here.
 

@@ -40,7 +40,9 @@ def post_individual_anime_episode_comment(
     episode_number: str,
     payload: EpisodeCommentPOSTSchema,
 ) -> EpisodeCommentModel:
-    data = EpisodeCommentModel.objects.create(user=request.user, **payload.dict())
+    data: EpisodeCommentModel = EpisodeCommentModel.objects.create(
+        user=request.user, **payload.dict()
+    )
 
     AnimeModel.objects.get(pk=anime_id).anime_episodes.get(
         episode_number__in=[episode_number]

@@ -60,13 +60,16 @@ def post_individual_anime_episode_timestamp_info(
     episode_number: str,
     payload: EpisodeTimestampPOSTSchema,
 ) -> EpisodeTimestampModel:
-    data, created = EpisodeTimestampModel.objects.update_or_create(
+    query = EpisodeTimestampModel.objects.update_or_create(
         episode__episode_number__in=[episode_number],
         user=request.user,
         defaults={
             "timestamp": payload.dict().get("timestamp"),
         },
     )
+    
+    data: EpisodeTimestampModel = query[0]
+    created = query[1]
 
     if created:
         AnimeModel.objects.get(pk=anime_id).anime_episodes.get(

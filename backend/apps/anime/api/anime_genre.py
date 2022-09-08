@@ -31,9 +31,11 @@ def post_individual_anime_genre_info(
     # theres no point in continuing
     anime_info_model = get_object_or_404(AnimeModel, pk=anime_id)
 
-    instance, created = AnimeGenreModel.objects.get_or_create(
+    query = AnimeGenreModel.objects.get_or_create(
         **payload.dict(),
     )
+
+    instance: AnimeGenreModel = query[0]
     anime_info_model.anime_genres.add(instance)
 
     return instance

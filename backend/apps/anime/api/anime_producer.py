@@ -31,9 +31,11 @@ def post_individual_anime_producer_info(
     # theres no point in continuing
     anime_info_model = get_object_or_404(AnimeModel, pk=anime_id)
 
-    instance, created = ProducerModel.objects.get_or_create(
+    query = ProducerModel.objects.get_or_create(
         **payload.dict(),
     )
+
+    instance: ProducerModel = query[0]
     anime_info_model.anime_producers.add(instance)
 
     return instance

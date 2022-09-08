@@ -19,7 +19,7 @@ session = CachedLimiterSession(
 
 
 @db_periodic_task(crontab(minute="*/1"))
-def refresh_mal_jwt():
+def refresh_mal_jwt() -> None:
     models = MalModel.objects.annotate(
         expiry_date=F("created_at") + F("expires_in")
     ).filter(expiry_date__lte=timezone.now())

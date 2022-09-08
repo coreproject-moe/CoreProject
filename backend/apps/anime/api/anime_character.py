@@ -31,9 +31,10 @@ def post_individual_anime_character_info(
     # theres no point in continuing
     anime_info_model = get_object_or_404(AnimeModel, pk=anime_id)
 
-    instance, created = CharacterModel.objects.get_or_create(
+    query = CharacterModel.objects.get_or_create(
         **payload.dict(),
     )
+    instance: CharacterModel = query[0]
     anime_info_model.anime_characters.add(instance)
 
     return instance

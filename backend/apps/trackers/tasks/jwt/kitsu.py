@@ -20,7 +20,7 @@ session = CachedLimiterSession(
 
 
 @db_periodic_task(crontab(minute="*/1"))
-def refresh_kitsu_jwt():
+def refresh_kitsu_jwt() -> None:
     models = KitsuModel.objects.annotate(
         expiry_date=F("created_at") + F("expires_in")
     ).filter(expiry_date__lte=timezone.now())

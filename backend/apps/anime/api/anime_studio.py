@@ -32,9 +32,11 @@ def post_individual_anime_studio_info(
     # theres no point in continuing
     anime_info_model = get_object_or_404(AnimeModel, pk=anime_id)
 
-    instance, created = StudioModel.objects.get_or_create(
+    query = StudioModel.objects.get_or_create(
         **payload.dict(),
     )
+
+    instance: StudioModel = query[0]
     anime_info_model.anime_studios.add(instance)
 
     return instance

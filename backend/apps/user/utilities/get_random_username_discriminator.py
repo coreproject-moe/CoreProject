@@ -4,7 +4,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 
 
-def get_random_username_discriminator(username) -> int:
+def get_random_username_discriminator(username: str) -> int:
     # https://www.reddit.com/r/learnpython/comments/e1hmpm/comment/f8p6htr/
     exclude = set(
         get_user_model()
