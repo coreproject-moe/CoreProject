@@ -3,8 +3,8 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 from ninja import Router
 
 from ..models import AnimeModel
-from ..schemas.anime_genre import AnimeGenreSchema
 from ..models.anime_genre import AnimeGenreModel
+from ..schemas.anime_genre import AnimeGenreSchema
 
 router = Router()
 
