@@ -88,17 +88,3 @@ class AnimeInfoPOSTSchema(ModelSchema):
             "anime_recommendation",
             "anime_characters",
         ]
-
-
-# Extra imports
-# __DO_NOT_MODIFY__
-
-from .anime_genre import AnimeGenreSchema
-from .anime_theme import AnimeThemeSchema
-from .episode import EpisodeGETSchema, EpisodePOSTSchema
-from .episode_comment import EpisodeCommentGETSchema, EpisodeCommentPOSTSchema
-from .episode_timestamp import (
-    EpisodeTimestampGETSchema,
-    EpisodeTimestampPOSTSchema,
-    EpisodeTimestampTotalTimestampSchema,
-)

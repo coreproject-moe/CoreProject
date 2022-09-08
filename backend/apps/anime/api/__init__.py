@@ -83,7 +83,7 @@ def get_anime_info(
 def post_anime_info(
     request: HttpRequest,
     payload: AnimeInfoPOSTSchema,
-):
+) -> AnimeModel:
     instance = AnimeModel.objects.create(**payload.dict())
     return instance
 
@@ -92,7 +92,7 @@ def post_anime_info(
 def get_individual_anime_info(
     request: HttpRequest,
     anime_id: int,
-):
+) -> AnimeModel:
     query = get_object_or_404(AnimeModel, id=anime_id)
     return query
 

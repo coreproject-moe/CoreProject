@@ -3,8 +3,10 @@ from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
 from ninja import Router
 
-from ..models import AnimeModel, EpisodeTimestampModel
-from ..schemas import (
+from ..models import AnimeModel
+from ..models.episode_timestamp import EpisodeTimestampModel
+
+from ..schemas.episode_timestamp import (
     EpisodeTimestampGETSchema,
     EpisodeTimestampPOSTSchema,
     EpisodeTimestampTotalTimestampSchema,
@@ -18,8 +20,10 @@ router = Router()
     response=EpisodeTimestampTotalTimestampSchema,
 )
 def get_individual_anime_episode_total_timestamp_info(
-    request: HttpRequest, anime_id: int, episode_number: str
-):
+    request: HttpRequest,
+    anime_id: int,
+    episode_number: str,
+) -> dict[str, str]:
     query = (
         get_object_or_404(AnimeModel, pk=anime_id)
         .anime_episodes.get(episode_number__in=[episode_number])
@@ -34,8 +38,10 @@ def get_individual_anime_episode_total_timestamp_info(
     response=list[EpisodeTimestampGETSchema],
 )
 def get_individual_anime_episode_timestamp_info(
-    request: HttpRequest, anime_id: int, episode_number: str
-):
+    request: HttpRequest,
+    anime_id: int,
+    episode_number: str,
+) -> list[EpisodeTimestampModel]:
     query = get_list_or_404(
         get_object_or_404(AnimeModel, pk=anime_id)
         .anime_episodes.get(episode_number__in=[episode_number])
@@ -53,7 +59,7 @@ def post_individual_anime_episode_timestamp_info(
     anime_id: int,
     episode_number: str,
     payload: EpisodeTimestampPOSTSchema,
-):
+) -> EpisodeTimestampModel:
     data, created = EpisodeTimestampModel.objects.update_or_create(
         episode__episode_number__in=[episode_number],
         user=request.user,

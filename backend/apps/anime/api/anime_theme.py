@@ -2,8 +2,9 @@ from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
 from ninja import Router
 
-from ..models import AnimeModel, AnimeThemeModel
-from ..schemas import AnimeThemeSchema
+from ..models import AnimeModel
+from ..models.anime_theme import AnimeThemeModel
+from ..schemas.anime_theme import AnimeThemeSchema
 
 router = Router()
 
@@ -12,7 +13,7 @@ router = Router()
 def get_individual_anime_theme_info(
     request: HttpRequest,
     anime_id: int,
-):
+) -> list[AnimeThemeModel]:
     query = get_list_or_404(
         get_object_or_404(AnimeModel, id=anime_id).anime_themes,
     )
@@ -24,7 +25,7 @@ def post_individual_anime_theme_info(
     request: HttpRequest,
     anime_id: int,
     payload: AnimeThemeSchema,
-):
+) -> AnimeThemeModel:
     # Set this at top
     # Because if there is no anime_info_model with corresponding query
     # theres no point in  continuing

@@ -13,7 +13,7 @@ router = Router()
 def get_individual_anime_producer_info(
     request: HttpRequest,
     anime_id: int,
-):
+) -> list[ProducerModel]:
     query = get_list_or_404(
         get_object_or_404(AnimeModel, id=anime_id).anime_producers,
     )
@@ -25,9 +25,10 @@ def post_individual_anime_producer_info(
     request: HttpRequest,
     anime_id: int,
     payload: ProducerSchema,
-):
+) -> ProducerModel:
     # Set this at top
-    # Because if there is no anime_info_model with corresponding query theres no point in  continuing
+    # Because if there is no anime_info_model with corresponding query
+    # theres no point in continuing
     anime_info_model = get_object_or_404(AnimeModel, pk=anime_id)
 
     instance, created = ProducerModel.objects.get_or_create(

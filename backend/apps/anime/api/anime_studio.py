@@ -13,7 +13,7 @@ router = Router()
 def get_individual_anime_studio_info(
     request: HttpRequest,
     anime_id: int,
-):
+) -> list[StudioModel]:
     query = get_list_or_404(
         get_object_or_404(AnimeModel, id=anime_id).anime_studios,
     )
@@ -26,7 +26,7 @@ def post_individual_anime_studio_info(
     request: HttpRequest,
     anime_id: int,
     payload: StudioSchema,
-):
+) -> StudioModel:
     # Set this at top
     # Because if there is no anime_info_model with corresponding query
     # theres no point in continuing
