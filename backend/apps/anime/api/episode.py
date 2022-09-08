@@ -26,7 +26,7 @@ def get_individual_anime_episodes(
 # https://django-ninja.rest-framework.com/tutorial/file-params/
 @router.post("/{int:anime_id}/episodes", response=EpisodeGETSchema)
 def post_individual_anime_episodes(
-    request,
+    request: HttpRequest,
     anime_id: int,
     payload: EpisodePOSTSchema,
 ) -> EpisodeModel:
