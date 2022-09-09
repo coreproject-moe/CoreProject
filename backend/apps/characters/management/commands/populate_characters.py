@@ -4,6 +4,7 @@ from io import BytesIO
 import os
 import textwrap
 from typing import Any
+import json
 
 from django.conf import settings
 from django.contrib.humanize.templatetags.humanize import intcomma, naturaltime
@@ -60,9 +61,10 @@ class Command(BaseCommand):
         self.session.mount("http://", adapter)
 
         # FIles
-        self.mal_rate_limit_file_name = "(Character)_mal_ratelimit.txt"
-        self.kitsu_not_found_file_name = "(Character)_kitsu_not_found.txt"
-        self.anilist_not_found_file_name = "(Character)_anilist_not_found.txt"
+        self.MAL_RATE_LIMIT_FILE_NAME = "(Character)_mal_ratelimit.txt"
+        self.KITSU_NOT_FOUND_FILE_NAME = "(Character)_kitsu_not_found.txt"
+        self.ANILIST_NOT_FOUND_FILE_NAME = "(Character)_anilist_not_found.txt"
+        self.CHARACTER_LOCK_FILE_NAME = "Character.lock"
 
         self.character_number: int
         self.starting_number: int
@@ -168,7 +170,11 @@ class Command(BaseCommand):
         data = res.json()
         returnable_data = None
 
-        if res.status_code == 200 and data.get("status", None) not in [404, 408, "429"]:
+        if res.status_code == 200 and str(data.get("status", None)) not in [
+            "404",
+            "408",
+            "429",
+        ]:
             self.success_list.append(self.style.SUCCESS("Jikan"))
 
             returnable_data = data["data"]
@@ -190,7 +196,7 @@ class Command(BaseCommand):
             self.warning_list.append(self.style.WARNING("Jikan"))
 
             # Write the number to a file so that we can deal with it later
-            file = open(self.mal_rate_limit_file_name, "a", encoding="utf-8")
+            file = open(self.MAL_RATE_LIMIT_FILE_NAME, "a", encoding="utf-8")
             file.write(f"{str(character_number)}\n")
             file.close()
 
@@ -237,7 +243,7 @@ class Command(BaseCommand):
                 self.warning_list.append(self.style.WARNING("Kitsu"))
 
                 # Write the number to a file so that we can deal with it later
-                file = open(self.kitsu_not_found_file_name, "a", encoding="utf-8")
+                file = open(self.KITSU_NOT_FOUND_FILE_NAME, "a", encoding="utf-8")
                 file.write(f"{str(character_name)}\n")
                 file.close()
 
@@ -316,7 +322,7 @@ class Command(BaseCommand):
                 self.warning_list.append(self.style.WARNING("Anilist"))
 
                 # Write the number to a file so that we can deal with it later
-                file = open(self.anilist_not_found_file_name, "a", encoding="utf-8")
+                file = open(self.ANILIST_NOT_FOUND_FILE_NAME, "a", encoding="utf-8")
                 file.write(f"{str(character_name)}\n")
                 file.close()
 
@@ -333,14 +339,23 @@ class Command(BaseCommand):
             3. Using the `character_name` from data(jikan) get `anilist_id` from anilist
             4. Save everything to `CharacterModel`
         """
+        # Load JSON file and get data from it
+        if os.path.exists(self.CHARACTER_LOCK_FILE_NAME):
+            ask_if_overwrite = input("Lock file found. Do you want to use it? ")
+
+            if "y" in ask_if_overwrite.lower():
+                data = json.load(open(self.CHARACTER_LOCK_FILE_NAME, encoding="utf-8"))
+                self.starting_number = data.get("STARTING_NUMBER", self.starting_number)
+                self.character_number = data.get("CHARACTER_NUMBER", self.character_number)
 
         if self.character_number == 1:
-            # If user starts from 0 remove files
-            # which are necessary for logging failed request
             files_to_remove = [
-                self.mal_rate_limit_file_name,
-                self.anilist_not_found_file_name,
-                self.kitsu_not_found_file_name,
+                # Error Files
+                self.MAL_RATE_LIMIT_FILE_NAME,
+                self.ANILIST_NOT_FOUND_FILE_NAME,
+                self.KITSU_NOT_FOUND_FILE_NAME,
+                # Lock files
+                self.CHARACTER_LOCK_FILE_NAME,
             ]
             for file in files_to_remove:
                 if os.path.exists(file):
@@ -394,6 +409,9 @@ class Command(BaseCommand):
             )
             self.after_populate_anime_characters()
 
+        # Remove lock file
+        os.remove(self.CHARACTER_LOCK_FILE_NAME)
+
     def after_populate_anime_characters(self) -> None:
         self.character_name = ""
         self.character_name_kanji = ""
@@ -406,3 +424,12 @@ class Command(BaseCommand):
         self.warning_list.clear()
 
         self.character_number += 1
+
+        # Log the data to a `.lock` file
+        json.dump(
+            {
+                "CHARACTER_NUMBER": self.character_number,
+                "STARTING_NUMBER": self.starting_number,
+            },
+            open(self.CHARACTER_LOCK_FILE_NAME, "w", encoding="utf-8"),
+        )
