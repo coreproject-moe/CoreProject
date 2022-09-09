@@ -1,10 +1,10 @@
 from argparse import ArgumentParser
 from datetime import datetime, timedelta
 from io import BytesIO
+import json
 import os
 import textwrap
 from typing import Any
-import json
 
 from django.conf import settings
 from django.contrib.humanize.templatetags.humanize import intcomma, naturaltime
