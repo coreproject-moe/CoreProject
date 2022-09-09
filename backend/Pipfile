@@ -4,16 +4,14 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = {version = "*", extras = ["argon2"]}
+django = {version = "~=4.1", extras = ["argon2"]}
 # Postgres
 psycopg2 = "*"
-# 3rd Party
-django-cleanup = "*"
-django-cors-headers = "*"
+# 3rd Party ( Middlewares )
+django_cleanup = "*"
+django_cors_headers = "*"
 # 3rd Party ( ENV )
-python-dotenv = "*"
-# 3rd Party ( Editor )
-django-ckeditor = "*"
+python_dotenv = "*"
 # 3rd Party ( WhiteNoise )
 whitenoise = {extras = ["brotli"], version = "*"}
 # 3rd Party ( Tasks )
@@ -21,44 +19,55 @@ huey = "*"
 redis = "*"
 hiredis = {version="*", markers="sys_platform != 'win32'"}
 # Rest framework
-django-ninja = "*"
+django_ninja = "*"
+# Remove when
+# https://github.com/vitalik/django-ninja/issues/305
+django-ninja-jwt = "*"
+
 # HTTP Client
 requests = "*"
-requests-cache = "*"
-requests-ratelimiter = "*"
+requests_cache = "*"
+requests_ratelimiter = "*"
 # Web servers
-uwsgi = {version="*", markers="sys_platform != 'win32'"}
+gunicorn = {extras = ["setproctile"], version = "*"}
+uvicorn = {extras = ["standard"], version = "*"}
+# Image processing
 pillow = "*"
-"discord.py" = {extras = ["voice"], version = "*"}
+# Discord API
+"discord.py" = {extras = ["voice","speed"], version = "*"}
 
-[dev-packages]
-django-debug-toolbar = "*"
-django-dbbackup = "*"
-django-cprofile-middleware = "*"
-# Code formatting
+[dev_packages]
+django_debug_toolbar = "*"
+django_dbbackup = "*"
+django_cprofile_middleware = "*"
+## Code formatting
 # Black
 black = "*"
 # Flake8
 flake8 = "*"
 # Pylint
 pylint = "*"
-pylint-django = "*"
+pylint_django = "*"
 # Mypy
 mypy = "*"
-types-requests = "*"
-types-redis = "*"
-django-stubs = {extras = ["compatible-mypy"], version = "*"}
+types_requests = "*"
+types_redis = "*"
+django_stubs = {extras = ["compatible_mypy"], version = "*"}
 
 [requires]
 python_version = "3.10"
 
 [scripts]
-dev = 'python manage.py runserver'
-sync = 'python manage.py migrate'
-mksync = 'python manage.py makemigrations'
-collectstatic = 'python manage.py collectstatic --clear --link' # Dont duplicate copy files.
+##  Server
+dev = "python manage.py runserver"
 prod = "gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
+##  Migrations
+sync = "python manage.py migrate"
+mksync = "python manage.py makemigrations"
+## Task queue
 huey = "python manage.py run_huey"
+## Staticfiles
+collectstatic = "python manage.py collectstatic --clear --link" # Dont duplicate copy files.
 
 [pipenv]
 allow_prereleases = true
