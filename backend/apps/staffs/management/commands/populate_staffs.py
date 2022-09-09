@@ -1,3 +1,7 @@
+## NEEDS REWRITE
+## WHILE IT WORKS I DONT LIKE THE CURRENT IMPLEMENTATION
+## THIS WONT RECEIVE ANY UPDATES
+
 from argparse import ArgumentParser
 from datetime import datetime, timedelta
 from io import BytesIO
@@ -27,14 +31,16 @@ adapter = HTTPAdapter(max_retries=retry_strategy)
 
 
 class Command(BaseCommand):
-    help = "Populates the staff(people) database"
+    help = "Populates the staff (people) database"
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
 
-        self.mal_not_found_file_name = "(Staff)_mal_not_found.txt"
-        self.kitsu_not_found_file_name = "(Staff)_kitsu_not_found.txt"
-        self.anilist_not_found_file_name = "(Staff)_anilist_not_found.txt"
+        # FIles
+        self.MAL_RATE_LIMIT_FILE_NAME = "(Staff)_mal_not_found.txt"
+        self.KITSU_NOT_FOUND_FILE_NAME = "(Staff)_kitsu_not_found.txt"
+        self.CHARACTER_LOCK_FILE_NAME = "(Staff)_anilist_not_found.txt"
+        self.STAFF_LOCK_FILE_NAME = "Staff.lock"
 
         self.staff_number: int
         self.staff_number_end: int
@@ -152,7 +158,7 @@ class Command(BaseCommand):
                 self.warning_list.append(self.style.WARNING("Kitsu"))
 
                 # Write the number to a file so that we can deal with it later
-                file = open(self.kitsu_not_found_file_name, "a", encoding="utf-8")
+                file = open(self.KITSU_NOT_FOUND_FILE_NAME, "a", encoding="utf-8")
                 file.write(f"{str(staff_number)}\n")
                 file.close()
 
@@ -217,21 +223,19 @@ class Command(BaseCommand):
         res_data = res.json()
 
         if res.status_code == 200:
-            try:
-                for data in res_data["data"]["Page"]["staff"]:
-                    # If the Anilist ID exists in database
-                    # Skip to next iteration
-                    if StaffModel.objects.filter(anilist_id=data["id"]).exists():
-                        continue
-                    anilist_id = data["id"]
-
+            for data in res_data["data"]["Page"]["staff"]:
+                # If the Anilist ID exists in database
+                # Skip to next iteration
+                if StaffModel.objects.filter(anilist_id=data["id"]).exists():
+                    continue
+                anilist_id = data["id"]
+            if anilist_id:
                 self.success_list.append(self.style.SUCCESS("Anilist"))
-
-            except (IndexError, KeyError):
+            else:
                 self.warning_list.append(self.style.WARNING("Anilist"))
 
                 # Write the number to a file so that we can deal with it later
-                file = open(self.anilist_not_found_file_name, "a", encoding="utf-8")
+                file = open(self.CHARACTER_LOCK_FILE_NAME, "a", encoding="utf-8")
                 file.write(f"{str(self.staff_number)}\n")
                 file.close()
 
@@ -263,21 +267,22 @@ class Command(BaseCommand):
         res_data = res.json()
 
         if res.status_code == 200:
-            try:
-                for data in res_data["data"]:
-                    # If the MyAnimeList ID exists in database
-                    # Skip to next iteration
-                    if StaffModel.objects.filter(mal_id=data["mal_id"]).exists():
-                        continue
 
-                    returnable_data = data
+            for data in res_data["data"]:
+                # If the MyAnimeList ID exists in database
+                # Skip to next iteration
+                if StaffModel.objects.filter(mal_id=data["mal_id"]).exists():
+                    continue
 
+                returnable_data = data
+
+            if returnable_data:
                 self.success_list.append(self.style.SUCCESS("Jikan"))
 
-            except IndexError:
+            else:
                 self.warning_list.append(self.style.WARNING("Jikan"))
                 # Write the number to a file so that we can deal with it later
-                file = open(self.mal_not_found_file_name, "a", encoding="utf-8")
+                file = open(self.MAL_RATE_LIMIT_FILE_NAME, "a", encoding="utf-8")
                 file.write(f"{str(self.staff_number)}\n")
                 file.close()
 
@@ -291,9 +296,9 @@ class Command(BaseCommand):
             # If user starts from 0 remove files
             # which are necessary for logging failed request
             files_to_remove = [
-                self.mal_not_found_file_name,
-                self.anilist_not_found_file_name,
-                self.kitsu_not_found_file_name,
+                self.MAL_RATE_LIMIT_FILE_NAME,
+                self.CHARACTER_LOCK_FILE_NAME,
+                self.KITSU_NOT_FOUND_FILE_NAME,
             ]
             for file in files_to_remove:
                 if os.path.exists(file):

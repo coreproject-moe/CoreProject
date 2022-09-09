@@ -225,21 +225,22 @@ class Command(BaseCommand):
         kitsu_id = None
 
         if res.status_code == 200:
-            try:
-                for data in res_data["data"]:
-                    # If the Kitsu ID exists in database
-                    # Skip to next iteration
-                    if CharacterModel.objects.filter(kitsu_id=data["id"]).exists():
-                        continue
+            for data in res_data["data"]:
+                # If the Kitsu ID exists in database
+                # Skip to next iteration
+                if CharacterModel.objects.filter(kitsu_id=data["id"]).exists():
+                    continue
 
-                    # Side Effect
-                    if not self.character_name_kanji:
-                        self.character_name_kanji = data["attributes"]["names"].get("ja_jp")
+                # Side Effect
+                if not self.character_name_kanji:
+                    self.character_name_kanji = data["attributes"]["names"].get("ja_jp")
 
-                    kitsu_id = data["id"]
+                kitsu_id = data["id"]
+
+            if kitsu_id:
                 self.success_list.append(self.style.SUCCESS("Kitsu"))
 
-            except IndexError:
+            else:
                 self.warning_list.append(self.style.WARNING("Kitsu"))
 
                 # Write the number to a file so that we can deal with it later
@@ -308,17 +309,18 @@ class Command(BaseCommand):
         anilist_id = None
 
         if res_data and res.status_code == 200:
-            try:
-                for data in res_data["data"]["Page"]["characters"]:
-                    # If the Anilist ID exists in database
-                    # Skip to next iteration
-                    if CharacterModel.objects.filter(anilist_id=data["id"]).exists():
-                        continue
+            for data in res_data["data"]["Page"]["characters"]:
+                # If the Anilist ID exists in database
+                # Skip to next iteration
+                if CharacterModel.objects.filter(anilist_id=data["id"]).exists():
+                    continue
 
-                    anilist_id = data["id"]
+                anilist_id = data["id"]
+
+            if anilist_id:
                 self.success_list.append(self.style.SUCCESS("Anilist"))
 
-            except IndexError:
+            else:
                 self.warning_list.append(self.style.WARNING("Anilist"))
 
                 # Write the number to a file so that we can deal with it later
@@ -341,12 +343,20 @@ class Command(BaseCommand):
         """
         # Load JSON file and get data from it
         if os.path.exists(self.CHARACTER_LOCK_FILE_NAME):
-            ask_if_overwrite = input("Lock file found. Do you want to use it? ")
+            self.stdout.write("Lock file found. Do you want to use it?")
 
-            if "y" in ask_if_overwrite.lower():
-                data = json.load(open(self.CHARACTER_LOCK_FILE_NAME, encoding="utf-8"))
-                self.starting_number = data.get("STARTING_NUMBER", self.starting_number)
-                self.character_number = data.get("CHARACTER_NUMBER", self.character_number)
+            # While loop to ask for data
+            while True:
+                answer = input().lower()
+                if "y" in answer:
+                    data = json.load(open(self.CHARACTER_LOCK_FILE_NAME, encoding="utf-8"))
+                    self.starting_number = data.get("STARTING_NUMBER", self.starting_number)
+                    self.character_number = data.get(
+                        "CHARACTER_NUMBER", self.character_number
+                    )
+                    break
+                elif "n" in answer:
+                    break
 
         if self.character_number == 1:
             files_to_remove = [
@@ -354,8 +364,6 @@ class Command(BaseCommand):
                 self.MAL_RATE_LIMIT_FILE_NAME,
                 self.ANILIST_NOT_FOUND_FILE_NAME,
                 self.KITSU_NOT_FOUND_FILE_NAME,
-                # Lock files
-                self.CHARACTER_LOCK_FILE_NAME,
             ]
             for file in files_to_remove:
                 if os.path.exists(file):
