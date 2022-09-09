@@ -3,8 +3,7 @@ name = "core-backend"
 version = "0.1.0"
 description = "A modern backend powering the the world's most modern anime site"
 authors = [
-    {name = "", email = ""},
-    {name = "baseplate-admin"},
+    {name = "baseplate-admin", email = "61817579+baseplate-admin@users.noreply.github.com"},
 ]
 requires-python = ">=3.10,<4.0"
 license = {text = "AGPL-3.0-only"}
