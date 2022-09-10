@@ -119,4 +119,4 @@ dmypy.json
 # Lock file ignore
 *.lock
 # But not Pipfile
-!Pipfile.lock 
+!Pipfile.lock
