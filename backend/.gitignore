@@ -115,3 +115,8 @@ dmypy.json
 
 # Texts
 *.txt
+
+# Lock file ignore
+*.lock
+# But not Pipfile
+!Pipfile.lock 
