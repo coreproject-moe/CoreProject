@@ -1,7 +1,3 @@
-## NEEDS REWRITE
-## WHILE IT WORKS I DONT LIKE THE CURRENT IMPLEMENTATION
-## THIS WONT RECEIVE ANY UPDATES
-
 from argparse import ArgumentParser
 from datetime import datetime, timedelta
 from io import BytesIO
@@ -10,7 +6,10 @@ import textwrap
 from typing import Any
 
 from django.conf import settings
-from django.contrib.humanize.templatetags.humanize import intcomma, naturaltime
+from django.contrib.humanize.templatetags.humanize import (
+    intcomma,
+    naturaltime,
+)
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError
@@ -36,19 +35,6 @@ class Command(BaseCommand):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
 
-        # FIles
-        self.MAL_RATE_LIMIT_FILE_NAME = "(Staff)_mal_not_found.txt"
-        self.KITSU_NOT_FOUND_FILE_NAME = "(Staff)_kitsu_not_found.txt"
-        self.CHARACTER_LOCK_FILE_NAME = "(Staff)_anilist_not_found.txt"
-        self.STAFF_LOCK_FILE_NAME = "Staff.lock"
-
-        self.staff_number: int
-        self.staff_number_end: int
-
-        self.staff_name: str
-        self.staff_name_kanji: str
-        self.staff_about: str
-
         # Tried to implement Facade pattern
         self.session = CachedLimiterSession(
             bucket_class=RedisBucket,
@@ -65,6 +51,20 @@ class Command(BaseCommand):
         self.session.mount("https://", adapter)
         self.session.mount("http://", adapter)
 
+        # FIles
+        self.MAL_RATE_LIMIT_FILE_NAME = "(Staff)_mal_not_found.txt"
+        self.KITSU_NOT_FOUND_FILE_NAME = "(Staff)_kitsu_not_found.txt"
+        self.CHARACTER_LOCK_FILE_NAME = "(Staff)_anilist_not_found.txt"
+        self.STAFF_LOCK_FILE_NAME = "Staff.lock"
+
+        self.staff_number: int
+        self.starting_number: int
+        self.ending_number = self.get_ending_number()
+
+        self.staff_name: str
+        self.staff_name_kanji: str
+        self.staff_about: str
+
         # A list to keep items
         self.success_list: list[str] = []
         self.error_list: list[str] = []
@@ -72,23 +72,25 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser: ArgumentParser) -> None:
         parser.add_argument(
-            "staff-number-start",
-            nargs="?",
+            "-sn",  # Character Number
+            "--staff-number-start",
             type=int,
             default=1,
-            help="Specifies the starting number for staff.",
+            help="Specifies the starting number for character.",
         )
+
         parser.add_argument(
-            "--staff-number-end",
+            "-wsn",  # While starting number
+            "--starting-number",
             type=int,
-            default=100_000,
-            help="Specifies the stopping number for staff.",
+            default=1,
+            help="Specifies the starting number for while loop.",
         )
 
     def handle(self, *args: Any, **options: Any) -> None:
         """Starting point for our application"""
-        self.staff_number = options["staff-number-start"]
-        self.staff_number_end = options["staff_number_end"]
+        self.staff_number = options["staff_number_start"]
+        self.starting_number = options["starting_number"]
         self.stdout.write(
             textwrap.dedent(
                 f"""
@@ -106,7 +108,7 @@ class Command(BaseCommand):
                     self.style.SUCCESS(
                         str(
                             intcomma(
-                                self.staff_number_end
+                                self.ending_number
                             )
                         )
                     )
@@ -121,7 +123,7 @@ class Command(BaseCommand):
                                     minutes=
                                         round(
                                             (
-                                                self.staff_number_end
+                                                self.ending_number
                                                 -
                                                 self.staff_number
                                             )
@@ -138,6 +140,11 @@ class Command(BaseCommand):
             )
         )
         self.populate_anime_staff()
+
+    def get_ending_number(self) -> int:
+        res = self.session.get("https://kitsu.io/api/edge/people/")
+        data = res.json()
+        return int(data["meta"]["count"])
 
     def get_staff_data_from_kitsu(
         self,
@@ -304,7 +311,7 @@ class Command(BaseCommand):
                 if os.path.exists(file):
                     os.remove(file)
 
-        while self.staff_number < self.staff_number_end:
+        while self.staff_number < self.ending_number:
             staff_name = self.get_staff_data_from_kitsu(
                 staff_number=self.staff_number,
                 session=self.session,

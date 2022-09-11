@@ -7,7 +7,10 @@ import textwrap
 from typing import Any
 
 from django.conf import settings
-from django.contrib.humanize.templatetags.humanize import intcomma, naturaltime
+from django.contrib.humanize.templatetags.humanize import (
+    intcomma,
+    naturaltime,
+)
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError
@@ -84,14 +87,14 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser: ArgumentParser) -> None:
         parser.add_argument(
-            "-cn",
+            "-cn",  # Character Number
             "--character-number-start",
             type=int,
             default=1,
             help="Specifies the starting number for character.",
         )
         parser.add_argument(
-            "-sn",
+            "-wsn",  # While starting number
             "--starting-number",
             type=int,
             default=1,
