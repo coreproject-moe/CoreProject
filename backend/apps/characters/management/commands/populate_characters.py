@@ -75,7 +75,7 @@ class Command(BaseCommand):
 
         self.character_name: str
         self.character_name_kanji: str
-        self.character_image: BytesIO = BytesIO()
+        self.character_image: BytesIO
 
         self.character_about: str
         self.image_url: str
@@ -427,7 +427,6 @@ class Command(BaseCommand):
         self.character_name = ""
         self.character_name_kanji = ""
         self.character_about = ""
-        self.character_image.truncate(0)
         self.image_url = ""
 
         self.success_list.clear()
