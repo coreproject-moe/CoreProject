@@ -18,6 +18,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
+from django.views import debug
 
 from .api_v1 import api
 
@@ -27,6 +28,9 @@ handler404 = TemplateView.as_view(template_name="404.html")
 handler500 = TemplateView.as_view(template_name="500.html")
 
 urlpatterns = [
+    path("", debug.default_urlconf),
+    #   Admin Site
+    # ================
     path("admin/", admin.site.urls),
     #   Errors
     # ===========
