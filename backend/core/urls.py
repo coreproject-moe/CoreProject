@@ -22,10 +22,10 @@ from django.views import debug
 
 from .api_v1 import api
 
-handler400 = TemplateView.as_view(template_name="400.html")
-handler403 = TemplateView.as_view(template_name="403.html")
-handler404 = TemplateView.as_view(template_name="404.html")
-handler500 = TemplateView.as_view(template_name="500.html")
+handler400 = TemplateView.as_view(template_name="errors/400.html")
+handler403 = TemplateView.as_view(template_name="errors/403.html")
+handler404 = TemplateView.as_view(template_name="errors/404.html")
+handler500 = TemplateView.as_view(template_name="errors/500.html")
 
 urlpatterns = [
     path("", debug.default_urlconf),

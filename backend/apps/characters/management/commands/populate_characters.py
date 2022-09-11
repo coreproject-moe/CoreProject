@@ -72,7 +72,7 @@ class Command(BaseCommand):
 
         self.character_name: str
         self.character_name_kanji: str
-        self.character_image: BytesIO
+        self.character_image: BytesIO = BytesIO()
 
         self.character_about: str
         self.image_url: str
