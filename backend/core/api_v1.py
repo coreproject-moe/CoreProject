@@ -1,5 +1,5 @@
-from ninja.security import django_auth
 from ninja import NinjaAPI
+from ninja.security import django_auth
 
 api = NinjaAPI(csrf=True, title="CoreProjectAPI")
 

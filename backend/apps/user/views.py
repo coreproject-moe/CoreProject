@@ -1,12 +1,14 @@
-from typing import IO, Generator
-from django.http import HttpRequest, StreamingHttpResponse
-from .models import CustomUser
-from django.contrib.auth import get_user_model
 import hashlib
+import mimetypes
+from typing import IO
+from collections.abc import Generator
+
+from django.contrib.auth import get_user_model
+from django.http import HttpRequest, StreamingHttpResponse
 import requests
 from requests.utils import default_user_agent
 
-import mimetypes
+from .models import CustomUser
 
 SESSION = requests.session()
 
