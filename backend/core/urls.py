@@ -38,6 +38,9 @@ urlpatterns = [
     path("403/", handler403),
     path("404/", handler404),
     path("500/", handler500),
+    #   HTTP
+    # =========
+    path("user/", include("apps.user.urls")),
     #   Api
     # ========
     path("api/v1/", api.urls),

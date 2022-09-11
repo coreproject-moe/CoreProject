@@ -83,7 +83,7 @@ INSTALLED_APPS = [
     "apps.studios",
     "apps.staffs",
 ]
-
+FILE_UPLOAD_MAX_MEMORY_SIZE = int("9" * 1000)
 # Debug Toolbar Add
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install-the-app
 if DEBUG:
