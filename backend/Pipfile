@@ -12,8 +12,6 @@ django_cleanup = "*"
 django_cors_headers = "*"
 # 3rd Party ( ENV )
 python_dotenv = "*"
-# 3rd Party ( Template )
-django-sekizai = "*"
 # 3rd Party ( WhiteNoise )
 whitenoise = {extras = ["brotli"], version = "*"}
 # 3rd Party ( Tasks )
