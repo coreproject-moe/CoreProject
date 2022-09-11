@@ -17,8 +17,8 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
-from django.views.generic import TemplateView
 from django.views import debug
+from django.views.generic import TemplateView
 
 from .api_v1 import api
 
