@@ -1,7 +1,6 @@
 import hashlib
 import mimetypes
-from typing import IO
-from collections.abc import Generator
+from typing import IO, Generator
 
 from django.contrib.auth import get_user_model
 from django.http import HttpRequest, StreamingHttpResponse
@@ -11,24 +10,29 @@ from requests.utils import default_user_agent
 from .models import CustomUser
 
 SESSION = requests.session()
+CHUNK_SIZE = 512  # 512 bytes
 
 
 def read_files_in_chunks(
     file_object: IO[bytes],
-    chunkSize: int = 512,
+    chunk_size: int = CHUNK_SIZE,
 ) -> Generator[bytes, None, None]:
     """
     Lazy function to read a file piece by piece.
-    Default chunk size: 512bytes.
     """
     while True:
-        data = file_object.read(chunkSize)
+        data = file_object.read(chunk_size)
         if not data:
             break
         yield data
 
+    file_object.close()
 
-def avatar_view(request: HttpRequest, user_id: int) -> StreamingHttpResponse:
+
+def avatar_view(
+    request: HttpRequest,
+    user_id: int,
+) -> StreamingHttpResponse:
     response: StreamingHttpResponse
     user: CustomUser = get_user_model().objects.get(id=user_id)
 
@@ -47,16 +51,22 @@ def avatar_view(request: HttpRequest, user_id: int) -> StreamingHttpResponse:
     else:
         # Proxy from Libravatar / Gravatar
         url = f"""https://seccdn.libravatar.org/avatar/{
-            hashlib.md5(
+            hashlib
+            .md5(
                 user.
                 email.
                 strip().
                 lower().
                 encode()
             )
-            .hexdigest()}
+            .hexdigest()
+        }
         """
-        res = SESSION.get(url, stream=True)
+        res = SESSION.get(
+            url,
+            stream=True,
+            params=dict(request.GET),
+        )
 
         response = StreamingHttpResponse(
             streaming_content=res,
