@@ -9,7 +9,7 @@ async def hello(
     request: web.BaseRequest,
 ) -> web.StreamResponse:
     response = web.StreamResponse()
-    user_id = request.match_info.get("user_id")
+    request.match_info.get("user_id")
 
     url = "https://eoimages.gsfc.nasa.gov/images/imagerecords/73000/73751/world.topo.bathy.200407.3x21600x21600.B1.png"
     async with aiohttp.ClientSession(raise_for_status=True) as session:
