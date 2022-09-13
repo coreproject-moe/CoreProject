@@ -35,17 +35,17 @@ async def avatar(
         url = str(
             URL(
                 f"""https://seccdn.libravatar.org/avatar/{
-                hashlib
-                .md5(
-                    user_model.
-                    email.
-                    strip().
-                    lower().
-                    encode()
-                )
-                .hexdigest()
-            }
-            """
+                    hashlib
+                    .md5(
+                        user_model.
+                        email.
+                        strip().
+                        lower().
+                        encode()
+                    )
+                    .hexdigest()
+                }
+                """
             ).with_query(
                 request.rel_url.query,
             ),

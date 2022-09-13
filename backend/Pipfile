@@ -24,11 +24,12 @@ django_ninja = "*"
 # https://github.com/vitalik/django-ninja/issues/305
 django-ninja-jwt = "*"
 # HTTP Client
+aiohttp = '*'
 requests = "*"
 requests_cache = "*"
 requests_ratelimiter = "*"
 # Web servers
-
+gunicorn = {extras = ["setproctile"], version = "*"}
 uvicorn = {extras = ["standard"], version = "*"}
 # Image processing
 pillow = "*"

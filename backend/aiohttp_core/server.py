@@ -7,7 +7,13 @@ import django
 # Goes to the directory where pipfile is present
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-sys.path.append(str(Path(BASE_DIR.joinpath("django_core"))))
+sys.path.append(
+    str(
+        Path(
+            BASE_DIR.joinpath("django_core"),
+        )
+    )
+)
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings")
 django.setup()
 
