@@ -32,9 +32,11 @@ uvicorn = {extras = ["standard"], version = "*"}
 # Image processing
 pillow = "*"
 # Discord API
-"discord.py" = {extras = ["voice"], version = "*"}
+"discord.py" = {extras = ["voice",'speed'], version = "*"}
+# Async File
+aiofiles = "*"
 
-[dev_packages]
+[dev-packages]
 django_debug_toolbar = "*"
 django_dbbackup = "*"
 django_cprofile_middleware = "*"
@@ -57,10 +59,11 @@ python_version = "3.10"
 
 [scripts]
 ##  Server
-dev = "python ./django/manage.py runserver"
+dev_django = "python ./django/manage.py runserver"
+dev_aiohttp = 'python ./media/server.py'
+## Prod servers
 prod_uvicorn = "gunicorn django.core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
-# We want to run this without any proxy or anything
-prod_aiohttp = "gunicorn aiohttp.server:aiohttp_app -w 4 --bind localhost:8001 --worker-class aiohttp.GunicornUVLoopWebWorker"
+prod_aiohttp = "gunicorn aiohttp.server:aiohttp_app -w 4 --bind localhost:8001 --worker-class aiohttp.GunicornUVLoopWebWorker" # We want to run this without any proxy or anything
 ##  Migrations
 sync = "python ./django/manage.py migrate"
 mksync = "python ./django/manage.py makemigrations"
