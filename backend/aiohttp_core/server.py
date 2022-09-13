@@ -13,12 +13,12 @@ django.setup()
 
 
 from aiohttp import web
-from user.avatar import avatar
+from user.avatar import app as avatar_app
 
 
 async def aiohttp_app() -> web.Application:
     app = web.Application()
-    app.add_subapp("/user", avatar)
+    app.add_subapp("/user", avatar_app)
     return app
 
 
