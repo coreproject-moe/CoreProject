@@ -28,12 +28,11 @@ requests = "*"
 requests_cache = "*"
 requests_ratelimiter = "*"
 # Web servers
-gunicorn = {extras = ["setproctile"], version = "*"}
 uvicorn = {extras = ["standard"], version = "*"}
 # Image processing
 pillow = "*"
 # Discord API
-"discord.py" = {extras = ["voice","speed"], version = "*"}
+"discord.py" = {extras = ["voice"], version = "*"}
 
 [dev_packages]
 django_debug_toolbar = "*"
@@ -58,15 +57,17 @@ python_version = "3.10"
 
 [scripts]
 ##  Server
-dev = "python manage.py runserver"
-prod = "gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
+dev = "python ./django/manage.py runserver"
+prod_uvicorn = "gunicorn django.core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
+# We want to run this without any proxy or anything
+prod_aiohttp = "gunicorn aiohttp.server:aiohttp_app -w 4 --bind localhost:8001 --worker-class aiohttp.GunicornUVLoopWebWorker"
 ##  Migrations
-sync = "python manage.py migrate"
-mksync = "python manage.py makemigrations"
+sync = "python ./django/manage.py migrate"
+mksync = "python ./django/manage.py makemigrations"
 ## Task queue
-huey = "python manage.py run_huey"
+huey = "python ./django/manage.py run_huey"
 ## Staticfiles
-collectstatic = "python manage.py collectstatic --clear --link" # Dont duplicate copy files.
+collectstatic = "python ./django/manage.py collectstatic --clear --link" # Dont duplicate copy files.
 
 [pipenv]
 allow_prereleases = true
