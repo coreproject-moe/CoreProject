@@ -1,13 +1,10 @@
-from typing import TYPE_CHECKING
+from typing import Any
 
 from requests import Session
 from requests.structures import CaseInsensitiveDict
 from requests.utils import DEFAULT_ACCEPT_ENCODING
 from requests_cache import CacheMixin
 from requests_ratelimiter import LimiterMixin
-
-if TYPE_CHECKING:
-    from typing import Any
 
 
 class CachedLimiterSession(CacheMixin, LimiterMixin, Session):
@@ -26,6 +23,7 @@ class CachedLimiterSession(CacheMixin, LimiterMixin, Session):
         """
         return CaseInsensitiveDict(
             {
+                "User-Agent": "CoreProject",
                 "Accept-Encoding": DEFAULT_ACCEPT_ENCODING,
                 "Accept": "*/*",
                 "Connection": "keep-alive",

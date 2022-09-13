@@ -52,9 +52,7 @@ class DownloadListener(PythonJavaClass):
     @java_method(
         "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;J)V"
     )
-    def onDownloadStart(
-        self, url, userAgent, contentDisposition, mimetype, contentLength
-    ):
+    def onDownloadStart(self, url, userAgent, contentDisposition, mimetype, contentLength):
         mActivity = PythonActivity.mActivity
         context = mActivity.getApplicationContext()
         visibility = DownloadManagerRequest.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
@@ -78,10 +76,7 @@ class KeyListener(PythonJavaClass):
 
     @java_method("(Landroid/view/View;ILandroid/view/KeyEvent;)Z")
     def onKey(self, v, key_code, event):
-        if (
-            event.getAction() == KeyEvent.ACTION_DOWN
-            and key_code == KeyEvent.KEYCODE_BACK
-        ):
+        if event.getAction() == KeyEvent.ACTION_DOWN and key_code == KeyEvent.KEYCODE_BACK:
             return self.listener()
 
 
@@ -94,7 +89,7 @@ class WebView(ModalView):
         enable_javascript=False,
         enable_downloads=False,
         enable_zoom=False,
-        **kwargs
+        **kwargs,
     ):
         super().__init__(**kwargs)
         self.url = url
@@ -117,9 +112,7 @@ class WebView(ModalView):
         webview.getSettings().setCacheMode(
             WebSettings.LOAD_CACHE_ELSE_NETWORK
         )  # Enable Cache
-        webview.setLayerType(
-            View.LAYER_TYPE_HARDWARE, None
-        )  # Enable hardware acceleration
+        webview.setLayerType(View.LAYER_TYPE_HARDWARE, None)  # Enable hardware acceleration
         layout = LinearLayout(mActivity)
         layout.setOrientation(LinearLayout.VERTICAL)
         layout.addView(webview, self.width, self.height)

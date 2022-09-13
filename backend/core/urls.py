@@ -17,26 +17,30 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
+from django.views import debug
 from django.views.generic import TemplateView
 
-from .api import api
+from .api_v1 import api
 
-handler400 = TemplateView.as_view(template_name="400.html")
-handler403 = TemplateView.as_view(template_name="403.html")
-handler404 = TemplateView.as_view(template_name="404.html")
-handler500 = TemplateView.as_view(template_name="500.html")
+handler400 = TemplateView.as_view(template_name="errors/400.html")
+handler403 = TemplateView.as_view(template_name="errors/403.html")
+handler404 = TemplateView.as_view(template_name="errors/404.html")
+handler500 = TemplateView.as_view(template_name="errors/500.html")
 
 urlpatterns = [
+    path("", debug.default_urlconf),
+    #   Admin Site
+    # ================
     path("admin/", admin.site.urls),
-    #   ckEditor
-    # ==============
-    path("ckeditor/", include("ckeditor_uploader.urls")),
     #   Errors
     # ===========
     path("400/", handler400),
     path("403/", handler403),
     path("404/", handler404),
     path("500/", handler500),
+    #   HTTP
+    # =========
+    path("user/", include("apps.user.urls")),
     #   Api
     # ========
     path("api/v1/", api.urls),
