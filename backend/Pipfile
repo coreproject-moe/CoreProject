@@ -25,6 +25,9 @@ django_ninja = "*"
 django-ninja-jwt = "*"
 # HTTP Client
 aiohttp = '*'
+# aiohttp fails 
+async-timeout = ">=4.0.0a3"
+# Will replace requests with aiohttp
 requests = "*"
 requests_cache = "*"
 requests_ratelimiter = "*"
@@ -35,8 +38,6 @@ uvicorn = {extras = ["standard"], version = "*"}
 pillow = "*"
 # Discord API
 "discord.py" = {extras = ["voice",'speed'], version = "*"}
-# Async File
-aiofiles = "*"
 
 [dev-packages]
 django_debug_toolbar = "*"
