@@ -1,9 +1,9 @@
 import hashlib
 
 import aiohttp
-from yarl import URL
 from aiohttp import web
 from django.contrib.auth import get_user_model
+from yarl import URL
 
 routes = web.RouteTableDef()
 

@@ -2,9 +2,12 @@ import os
 from pathlib import Path
 import sys
 
+import aiohttp
+from aiohttp import web
 import django
 from django.conf import settings
-
+from django.template import Context, Template
+from user.avatar import app as avatar_app
 
 # Goes to the directory where pipfile is present
 BASE_DIR = Path(__file__).resolve().parent
@@ -12,25 +15,20 @@ TEMPLATE_DIRS = str(
     BASE_DIR.joinpath("templates"),
 )
 
-sys.path.append(
-    str(
-        Path(
-            BASE_DIR.parent.joinpath("django_core"),
+routes = web.RouteTableDef()
+
+
+async def on_startup(app):
+    sys.path.append(
+        str(
+            Path(
+                BASE_DIR.parent.joinpath("django_core"),
+            )
         )
     )
-)
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings")
-settings.DEBUG = False
-django.setup()
-
-import aiohttp
-from aiohttp import web
-from user.avatar import app as avatar_app
-from django.template import Template, Context
-from django.template.loader import get_template
-
-
-routes = web.RouteTableDef()
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings")
+    settings.DEBUG = False
+    django.setup()
 
 
 @routes.get("/")
@@ -57,6 +55,7 @@ async def home(
 
 async def aiohttp_app() -> web.Application:
     app = web.Application()
+    app.on_startup.append(on_startup)
     app.add_routes(routes)
     app.add_subapp("/user", avatar_app)
     return app
