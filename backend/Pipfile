@@ -62,18 +62,18 @@ python_version = "3.10"
 
 [scripts]
 ##  Server
-dev_django = "python ./django_core/manage.py runserver"
-dev_aiohttp = 'python ./aiohttp_core/server.py'
+dev_django = "python ./manage.py runserver"
+dev_aiohttp = 'python ./server/server.py'
 ## Prod servers
-prod_uvicorn = "gunicorn django_core.core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
-prod_aiohttp = "gunicorn aiohttp_core.server:aiohttp_app -w 4 --bind localhost:8001 --worker-class aiohttp.GunicornUVLoopWebWorker" # We want to run this without any proxy or anything
+prod_uvicorn = "gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
+prod_aiohttp = "gunicorn server.server:aiohttp_app -w 4 --bind localhost:8001 --worker-class aiohttp.GunicornUVLoopWebWorker" # We want to run this without any proxy or anything
 ##  Migrations
-sync = "python ./django_core/manage.py migrate"
-mksync = "python ./django_core/manage.py makemigrations"
+sync = "python ./manage.py migrate"
+mksync = "python ./manage.py makemigrations"
 ## Task queue
-huey = "python ./django_core/manage.py run_huey"
+huey = "python ./manage.py run_huey"
 ## Staticfiles
-collectstatic = "python ./django_core/manage.py collectstatic --clear --link" # Dont duplicate copy files.
+collectstatic = "python ./manage.py collectstatic --clear --link" # Dont duplicate copy files.
 
 [pipenv]
 allow_prereleases = true
