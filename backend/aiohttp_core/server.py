@@ -18,7 +18,7 @@ TEMPLATE_DIRS = str(
 routes = web.RouteTableDef()
 
 
-async def on_startup(app):
+async def on_startup(app: web.Application) -> None:
     sys.path.append(
         str(
             Path(

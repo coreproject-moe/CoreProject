@@ -17,6 +17,8 @@ async def avatar(
     user_model = await get_user_model().objects.aget(
         pk=user_id,
     )
+    # Explicitly declare type
+    response: web.StreamResponse | web.FileResponse
 
     if user_model.avatar:
         response = web.FileResponse(
