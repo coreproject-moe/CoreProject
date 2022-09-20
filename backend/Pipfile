@@ -56,6 +56,7 @@ mypy = "*"
 types_requests = "*"
 types_redis = "*"
 django_stubs = {extras = ["compatible_mypy"], version = "*"}
+aiohttp-devtools = "*"
 
 [requires]
 python_version = "3.10"
@@ -63,7 +64,7 @@ python_version = "3.10"
 [scripts]
 ##  Server
 dev_django = "python ./django_core/manage.py runserver"
-dev_aiohttp = 'python ./aiohttp_core/server.py'
+dev_aiohttp = 'aiohttp-devserver runserver ./aiohttp_core/server.py'
 ## Prod servers
 prod_uvicorn = "gunicorn django_core/core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
 prod_aiohttp = "gunicorn aiohttp_core.server:aiohttp_app -w 4 --bind localhost:8001 --worker-class aiohttp.GunicornUVLoopWebWorker" # We want to run this without any proxy or anything

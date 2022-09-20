@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.shortcuts import resolve_url
 from ninja import ModelSchema
 from pydantic import AnyUrl
 
@@ -20,11 +19,11 @@ class UserSchema(ModelSchema):
 
     @staticmethod
     def resolve_anime_genres(obj: CustomUser) -> str:
-        url = resolve_url("avatar-view", user_id=obj.pk)
-        return f"{settings.HOSTNAME}{url}"
+        url = settings.AIOHTTP_AVATAR_URL + obj.pk
+        return f"{url}"
 
 
 # Extra Imports
 # __ DO NOT MODIFY __
 
-from .sign_up import SignupSchema
+from .sign_up import SignupSchema as SignupSchema

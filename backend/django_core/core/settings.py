@@ -293,3 +293,7 @@ HUEY = PriorityRedisHuey(
 
 DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage"
 DBBACKUP_STORAGE_OPTIONS = {"location": os.path.join(BASE_DIR, "backup")}
+
+# Mappings from AIOHTTP
+BASE_AIOHTTP_URL = ""
+AIOHTTP_AVATAR_URL = f"{BASE_AIOHTTP_URL}/user/avatar/"  # /id
