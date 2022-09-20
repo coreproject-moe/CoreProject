@@ -7,6 +7,6 @@
         "--load-plugins",
         "pylint_django",
         "--django-settings-module",
-        "django_core.core.settings"
+        "core.settings"
     ]
 }

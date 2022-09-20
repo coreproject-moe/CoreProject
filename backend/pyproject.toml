@@ -31,13 +31,17 @@ warn_redundant_casts = true
 warn_unused_ignores = true
 warn_unused_configs = true
 check_untyped_defs = true
+follow_imports = 'silent'
 plugins = ["mypy_django_plugin.main"]
 exclude = [
     "migrations"
 ]
+mypy_path = 'django_core,aiohttp_core'
+namespace_packages = true
+explicit_package_bases = true
 
 [tool.django-stubs]
-django_settings_module = "django_core.core.settings"
+django_settings_module = "core.settings"
 
 
 [tool.isort]
