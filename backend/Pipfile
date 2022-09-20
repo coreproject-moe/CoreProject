@@ -63,7 +63,7 @@ python_version = "3.10"
 
 [scripts]
 ## Dev Servers
-dev_django = "python ./django_core/manage.py runserver"
+dev_django = "python ./django_core/manage.py runserver  0.0.0.0:8003"
 dev_aiohttp = 'adev runserver ./aiohttp_core/server.py --app-factory=aiohttp_app'
 ## Prod servers
 prod_uvicorn = "gunicorn django_core/core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
