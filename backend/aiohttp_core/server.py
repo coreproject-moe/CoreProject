@@ -7,7 +7,7 @@ from aiohttp import web
 import django
 from django.conf import settings
 from django.template import Context, Template
-from user.avatar import app as avatar_app
+from .user.avatar import app as avatar_app
 
 # Goes to the directory where pipfile is present
 BASE_DIR = Path(__file__).resolve().parent
