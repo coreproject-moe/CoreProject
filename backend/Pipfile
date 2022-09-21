@@ -25,6 +25,7 @@ django_ninja = "*"
 django-ninja-jwt = "*"
 # HTTP Client
 aiohttp = '*'
+sqlalchemy = {extras = ["postgresql_asyncpg"], version = "*"}
 # aiohttp fails 
 async-timeout = ">=4.0.0a3"
 # Will replace requests with aiohttp
@@ -38,7 +39,6 @@ uvicorn = {extras = ["standard"], version = "*"}
 pillow = "*"
 # Discord API
 "discord.py" = {extras = ["voice",'speed'], version = "*"}
-sqlalchemy = {extras = ["postgresql_asyncpg"], version = "*"}
 
 [dev-packages]
 django_debug_toolbar = "*"
