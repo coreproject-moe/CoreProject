@@ -54,7 +54,3 @@ async def avatar(
                     await response.write(line)
 
     return response
-
-
-app = web.Application()
-app.add_routes(routes)
