@@ -38,6 +38,7 @@ uvicorn = {extras = ["standard"], version = "*"}
 pillow = "*"
 # Discord API
 "discord.py" = {extras = ["voice",'speed'], version = "*"}
+sqlalchemy = {extras = ["postgresql_asyncpg"], version = "*"}
 
 [dev-packages]
 django_debug_toolbar = "*"
@@ -56,6 +57,7 @@ mypy = "*"
 types_requests = "*"
 types_redis = "*"
 django_stubs = {extras = ["compatible_mypy"], version = "*"}
+# Aiohttp
 aiohttp-devtools = "*"
 
 [requires]

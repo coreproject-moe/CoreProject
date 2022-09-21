@@ -2,30 +2,28 @@ import hashlib
 
 import aiohttp
 from aiohttp import web
-from django.contrib.auth import get_user_model
 from yarl import URL
+
+from ...models.user import User
+from ...settings import DJANGO_MEDIA_DIR
 
 routes = web.RouteTableDef()
 
 
-@routes.get("/avatar/{user_id}")
+@routes.get("/user/avatar/{user_id}")
 async def avatar(
     request: web.BaseRequest,
 ) -> web.StreamResponse | web.FileResponse:
-
+    session = request.app["db"]
     user_id = request.match_info.get("user_id")
-    user_model = await get_user_model().objects.aget(
-        pk=user_id,
-    )
-    # Explicitly declare type
+    user_model = await session.get(User, 1)
     response: web.StreamResponse | web.FileResponse
 
     if user_model.avatar:
         response = web.FileResponse(
-            path=user_model.avatar.path,
+            path=str(DJANGO_MEDIA_DIR) + "\\" + str(user_model.avatar),
             chunk_size=512,
         )
-
     else:
         response = web.StreamResponse()
 

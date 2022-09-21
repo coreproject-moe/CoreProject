@@ -1,63 +1,34 @@
-from pathlib import Path
-import sys
-import os
-
-import aiohttp
 from aiohttp import web
-import django
-from django.conf import settings
-from django.template import Context, Template
-from .user.avatar import app as avatar_app
+from typing import AsyncGenerator
 
-# Goes to the directory where pipfile is present
-BASE_DIR = Path(__file__).resolve().parent
-TEMPLATE_DIRS = str(
-    BASE_DIR.joinpath("templates"),
-)
+from .views.user.avatar import routes as avatar_routes
+
+
+from .database import SessionLocal, engine
 
 routes = web.RouteTableDef()
 
 
-async def on_startup(app: web.Application) -> None:
-    sys.path.append(
-        str(
-            Path(
-                BASE_DIR.parent.joinpath("django_core"),
-            )
-        )
-    )
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings")
-    settings.DEBUG = False
-    django.setup()
+async def db_context(
+    app: web.Application,
+) -> AsyncGenerator[None, None]:
+    app["db"] = SessionLocal(bind=engine)
+    yield
+    await engine.dispose()
 
 
 @routes.get("/")
 async def home(
     request: web.BaseRequest,
 ) -> web.Response:
-    # Load template
-    template_file = open(TEMPLATE_DIRS + "/index.html")
-    template = Template(template_file.read())
-    context = Context(
-        {
-            "server_name": "server",  # Change this in future
-            "aiohttp_version": aiohttp.__version__,
-            "django_version": django.__version__,
-        }
-    )
-
-    response = web.Response(
-        text=template.render(context),
-        headers={"Content-Type": "text/html"},
-    )
-    return response
+    pass
 
 
 async def aiohttp_app() -> web.Application:
     app = web.Application()
-    app.on_startup.append(on_startup)
+    app.cleanup_ctx.append(db_context)
     app.add_routes(routes)
-    app.add_subapp("/user", avatar_app)
+    app.add_routes(avatar_routes)
     return app
 
 
