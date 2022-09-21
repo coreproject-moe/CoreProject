@@ -1,10 +1,9 @@
-from aiohttp import web
 from typing import AsyncGenerator
 
-from .views.user.avatar import routes as avatar_routes
-
+from aiohttp import web
 
 from .database import SessionLocal, engine
+from .views.user.avatar import routes as avatar_routes
 
 routes = web.RouteTableDef()
 
