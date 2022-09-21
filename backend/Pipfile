@@ -20,11 +20,11 @@ redis = "*"
 hiredis = {version="*", markers="sys_platform != 'win32'"}
 # Rest framework
 django_ninja = "*"
-# Remove when
 # https://github.com/vitalik/django-ninja/issues/305
-django-ninja-jwt = "*"
+# ===================================================
 # HTTP Client
 aiohttp = '*'
+aiohttp_jinja2 = '*'
 sqlalchemy = {extras = ["postgresql_asyncpg"], version = "*"}
 # Will replace requests with aiohttp
 requests = "*"

@@ -1,8 +1,10 @@
 import hashlib
+from typing import Any
 
 import aiohttp
 from aiohttp import web
 from yarl import URL
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from ...models.user import User
 from ...settings import DJANGO_MEDIA_DIR
@@ -12,11 +14,14 @@ routes = web.RouteTableDef()
 
 @routes.get("/user/avatar/{user_id}")
 async def avatar(
-    request: web.BaseRequest,
+    request: Any,
 ) -> web.StreamResponse | web.FileResponse:
     session = request.app["db"]
     user_id = request.match_info.get("user_id")
-    user_model = await session.get(User, 1)
+    user_model: AsyncSession = await session.get(
+        User,
+        {"id": int(user_id)},
+    )
     response: web.StreamResponse | web.FileResponse
 
     if user_model.avatar:
