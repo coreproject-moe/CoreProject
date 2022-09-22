@@ -10,6 +10,8 @@ psycopg2 = "*"
 # 3rd Party ( Middlewares )
 django_cleanup = "*"
 django_cors_headers = "*"
+# 3rd party ( Management )
+django_click = "*"
 # 3rd Party ( ENV )
 python_dotenv = "*"
 # 3rd Party ( WhiteNoise )
@@ -26,6 +28,10 @@ django_ninja = "*"
 aiohttp = '*'
 aiohttp_jinja2 = '*'
 sqlalchemy = {extras = ["postgresql_asyncpg"], version = "*"}
+# HTTP Client Enhancements
+aiohttp_client_cache = '*'
+aiohttp_retry = "*"
+aiometer = "==0.3.*"
 # Will replace requests with aiohttp
 requests = "*"
 requests_cache = "*"
