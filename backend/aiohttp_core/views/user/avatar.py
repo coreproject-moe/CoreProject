@@ -9,7 +9,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from ...models.user import User
 from ...settings import DJANGO_MEDIA_DIR
 
-
 routes = web.RouteTableDef()
 
 
@@ -32,25 +31,17 @@ async def avatar(
         )
     else:
         response = web.StreamResponse()
-        avatar_provider = user_model.avatar_provider
-
-        if avatar_provider.name == "GRAVATAR":
-            hashing_algorithm = hashlib.md5
-
-        elif avatar_provider.name == "LIBRAVATAR":
-            hashing_algorithm = hashlib.sha256
 
         url = str(
             URL(
-                f"""{avatar_provider.value}/{
-                    (
-                       hashing_algorithm(
-                            user_model
-                            .email
-                            .strip()
-                            .lower()
-                            .encode()
-                        )
+                f"""https://seccdn.libravatar.org/avatar/{
+                    hashlib
+                    .md5(
+                        user_model.
+                        email.
+                        strip().
+                        lower().
+                        encode()
                     )
                     .hexdigest()
                 }
@@ -66,4 +57,5 @@ async def avatar(
 
                 async for line in r.content:
                     await response.write(line)
+
     return response
