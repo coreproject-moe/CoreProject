@@ -12,7 +12,11 @@ from .validators import username_validator
 # Create your models here.
 
 
-class CustomUser(AbstractBaseUser, PermissionsMixin, ResizeImageMixin):
+class CustomUser(
+    AbstractBaseUser,
+    PermissionsMixin,
+    ResizeImageMixin,
+):
     username = models.CharField(
         _("username"),
         max_length=150,
@@ -91,4 +95,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, ResizeImageMixin):
     class Meta:
         verbose_name = _("user")
         verbose_name_plural = _("users")
-        unique_together = ("username", "username_discriminator")
+        unique_together = [
+            ("username", "username_discriminator"),
+        ]
