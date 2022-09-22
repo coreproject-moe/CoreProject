@@ -4,6 +4,7 @@ import functools
 from io import BytesIO
 import json
 import os
+import pprint
 import textwrap
 
 from aiohttp_client_cache.backends.redis import RedisBackend
@@ -17,15 +18,18 @@ from django.db import IntegrityError
 import djclick as click
 from pyrate_limiter import Duration, Limiter, RedisBucket, RequestRate
 
+
 from ...models import CharacterModel
 
-MAL_RATE_LIMIT_FILE_NAME = "(Character)_mal_ratelimit.txt"
-KITSU_NOT_FOUND_FILE_NAME = "(Character)_kitsu_not_found.txt"
-ANILIST_NOT_FOUND_FILE_NAME = "(Character)_anilist_not_found.txt"
 CHARACTER_LOCK_FILE_NAME = "Character.lock"
 
 CACHE_NAME = settings.BUCKET_NAME
 RETRY_STATUSES = settings.REQUEST_STATUS_CODES_TO_RETRY
+
+JIKAN_RATE_LIMIT_LIST: list[int] = []
+KITSU_NOT_FOUND_LIST: list[dict[int, str]] = []
+ANILIST_NOT_FOUND_LIST: list[dict[int, str]] = []
+
 
 SUCCESS_LIST = []
 WARNING_LIST = []
@@ -83,6 +87,13 @@ async def command() -> None:
                 data = json.load(open(CHARACTER_LOCK_FILE_NAME, encoding="utf-8"))
                 starting_number = int(data.get("STARTING_NUMBER", starting_number))
                 character_number = int(data.get("CHARACTER_NUMBER", character_number))
+                # Load Lists
+                global JIKAN_RATE_LIMIT_LIST, KITSU_NOT_FOUND_LIST, ANILIST_NOT_FOUND_LIST
+                JIKAN_RATE_LIMIT_LIST = data.get("JIKAN_RATE_LIMIT", JIKAN_RATE_LIMIT_LIST)
+                KITSU_NOT_FOUND_LIST = data.get("KITSU_NOT_FOUND", KITSU_NOT_FOUND_LIST)
+                ANILIST_NOT_FOUND_LIST = data.get(
+                    "ANILIST_NOT_FOUND", ANILIST_NOT_FOUND_LIST
+                )
                 break
             elif "n" in answer:
 
@@ -200,10 +211,7 @@ async def get_character_data_from_jikan(
     elif data.get("status", None) == 408:
         WARNING_LIST.append(style.WARNING("Jikan"))
 
-        # Write the number to a file so that we can deal with it later
-        file = open(MAL_RATE_LIMIT_FILE_NAME, "a", encoding="utf-8")
-        file.write(f"{str(character_number)}\n")
-        file.close()
+        JIKAN_RATE_LIMIT_LIST.append(character_number)
 
     else:
         ERROR_LIST.append(style.ERROR("Jikan"))
@@ -214,6 +222,7 @@ async def get_character_data_from_jikan(
 
 @limiter.ratelimit("kitsu", delay=True)
 async def get_character_data_from_kitsu(
+    character_number: int,
     character_name: str,
     session: CachedSession | RetryClient,
 ) -> dict[str, str | None] | None:
@@ -248,11 +257,9 @@ async def get_character_data_from_kitsu(
         else:
             WARNING_LIST.append(style.WARNING("Kitsu"))
 
-            # Write the number to a file so that we can deal with it later
-            file = open(KITSU_NOT_FOUND_FILE_NAME, "a", encoding="utf-8")
-            file.write(f"{str(character_name)}\n")
-            file.close()
-
+            KITSU_NOT_FOUND_LIST.append(
+                {character_number: character_name},
+            )
     else:
         ERROR_LIST.append(style.ERROR("Kitsu"))
 
@@ -261,6 +268,7 @@ async def get_character_data_from_kitsu(
 
 @limiter.ratelimit("kitsu", delay=True)
 async def get_character_data_from_anilist(
+    character_number: int,
     character_name: str,
     session: CachedSession | RetryClient,
 ) -> dict[str, str | None] | None:
@@ -334,10 +342,9 @@ async def get_character_data_from_anilist(
         else:
             WARNING_LIST.append(style.WARNING("Anilist"))
 
-            # Write the number to a file so that we can deal with it later
-            file = open(ANILIST_NOT_FOUND_FILE_NAME, "a", encoding="utf-8")
-            file.write(f"{str(character_name)}\n")
-            file.close()
+            ANILIST_NOT_FOUND_LIST.append(
+                {character_number: character_name},
+            )
 
     else:
         ERROR_LIST.append(style.WARNING("Anilist"))
@@ -361,10 +368,12 @@ async def populate_database(
         if jikan_data:
             try:
                 kitsu_data = await get_character_data_from_kitsu(
+                    character_number=character_number,
                     character_name=jikan_data["character_name"],
                     session=session,
                 )
                 anilist_data = await get_character_data_from_anilist(
+                    character_number=character_number,
                     character_name=jikan_data["character_name"],
                     session=session,
                 )
@@ -398,7 +407,7 @@ async def populate_database(
             f"""`starting_number` {
                     starting_number - 1
                     if jikan_data else starting_number
-                }"""
+            }"""
             " | "
             f"[{', '.join(sorted(SUCCESS_LIST + ERROR_LIST + WARNING_LIST))}]"
         )
@@ -415,6 +424,10 @@ async def populate_database(
             {
                 "CHARACTER_NUMBER": character_number,
                 "STARTING_NUMBER": starting_number,
+                "JIKAN_RATE_LIMIT": JIKAN_RATE_LIMIT_LIST,
+                "KITSU_NOT_FOUND": KITSU_NOT_FOUND_LIST,
+                "ANILIST_NOT_FOUND": ANILIST_NOT_FOUND_LIST,
             },
             open(CHARACTER_LOCK_FILE_NAME, "w", encoding="utf-8"),
+            indent=2,
         )
