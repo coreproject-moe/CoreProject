@@ -115,6 +115,7 @@ class CustomUserAdmin(DjangoUserAdmin):
         )
 
         if search_term:
+            search_term = search_term.strip()
             queryset = self.model.objects.get_username_with_discriminator().filter(
                 Q(username_with_discriminator__in=search_term.split(","))
                 | Q(email__in=search_term.split(","))

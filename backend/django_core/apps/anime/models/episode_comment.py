@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+from apps.user.managers import UsernameWithDiscriminatorManager
 
 # Create your models here.
 
@@ -9,6 +10,8 @@ class EpisodeCommentModel(models.Model):
     text = models.TextField()
 
     comment_added = models.DateTimeField(auto_now=True)
+
+    objects = UsernameWithDiscriminatorManager()
 
     def __str__(self) -> str:
         return f"{self.user} | {self.text}"

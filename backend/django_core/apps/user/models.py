@@ -5,7 +5,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from .managers import UserManager
+from .managers import UserManager, UsernameWithDiscriminatorManager
 from .mixins.resize import ResizeImageMixin
 from .validators import username_validator
 

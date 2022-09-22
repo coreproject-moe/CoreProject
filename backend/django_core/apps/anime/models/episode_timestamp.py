@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from apps.user.managers import UsernameWithDiscriminatorManager
+
 # Create your models here.
 
 
@@ -19,6 +21,8 @@ class EpisodeTimestampModel(models.Model):
         on_delete=models.CASCADE,
         db_index=True,
     )
+
+    objects = UsernameWithDiscriminatorManager()
 
     def __str__(self) -> str:
         return f"{self.episode}. {self.user}"

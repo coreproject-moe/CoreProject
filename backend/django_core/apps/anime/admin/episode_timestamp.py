@@ -1,7 +1,4 @@
-from django.conf import settings
 from django.contrib import admin
-from django.db.models import CharField, Value
-from django.db.models.functions import Cast, Concat, LPad
 
 from ..models import EpisodeTimestampModel
 
@@ -22,21 +19,7 @@ class EpisodeTimestampAdmin(admin.ModelAdmin):
         )
         if "#" in search_term:
             queryset = (
-                self.model.objects.annotate(
-                    username_discriminator_as_string=Cast(
-                        "user__username_discriminator", output_field=CharField()
-                    ),
-                    username_with_discriminator=Concat(
-                        "user__username",
-                        Value("#"),
-                        LPad(
-                            "username_discriminator_as_string",
-                            int(settings.USERNAME_DISCRIMINATOR_LENGTH),
-                            Value("0"),
-                        ),
-                        output_field=CharField(),
-                    ),
-                )
+                self.model.objects.get_username_with_discriminator(prefix="user")
                 .filter(username_with_discriminator__in=search_term.strip().split(","))
                 .distinct()
             )

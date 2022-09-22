@@ -5,12 +5,33 @@ from django.utils.translation import gettext_lazy as _
 from django.db.models import CharField, Value
 from django.db.models.functions import Cast, Concat, LPad
 from django.conf import settings
+from django.db import models
 
 if TYPE_CHECKING:
     from .models import CustomUser
 
 
-class UserManager(BaseUserManager):
+class UsernameWithDiscriminatorManager(models.Manager):
+    def get_username_with_discriminator(self, prefix: str = "") -> Any:
+        prefix = prefix + "__" if prefix else ""
+        return self.annotate(
+            username_discriminator_as_string=Cast(
+                f"{prefix}username_discriminator", output_field=CharField()
+            ),
+            username_with_discriminator=Concat(
+                f"{prefix}username",
+                Value("#"),
+                LPad(
+                    "username_discriminator_as_string",
+                    int(settings.USERNAME_DISCRIMINATOR_LENGTH),
+                    Value("0"),
+                ),
+                output_field=CharField(),
+            ),
+        )
+
+
+class UserManager(BaseUserManager, UsernameWithDiscriminatorManager):
     """
     Custom user model manager where email is the unique identifiers
     for authentication instead of usernames.
@@ -52,20 +73,3 @@ class UserManager(BaseUserManager):
             raise ValueError(_("Superuser must have is_superuser=True."))
 
         return self.create_user(email, password, **extra_fields)
-
-    def get_username_with_discriminator(self) -> Any:
-        return self.annotate(
-            username_discriminator_as_string=Cast(
-                "username_discriminator", output_field=CharField()
-            ),
-            username_with_discriminator=Concat(
-                "username",
-                Value("#"),
-                LPad(
-                    "username_discriminator_as_string",
-                    int(settings.USERNAME_DISCRIMINATOR_LENGTH),
-                    Value("0"),
-                ),
-                output_field=CharField(),
-            ),
-        )
