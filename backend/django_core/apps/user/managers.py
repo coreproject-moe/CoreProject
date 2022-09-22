@@ -5,7 +5,6 @@ from django.utils.translation import gettext_lazy as _
 from django.db.models import CharField, Value
 from django.db.models.functions import Cast, Concat, LPad
 from django.conf import settings
-from django.db.models.query import QuerySet
 
 if TYPE_CHECKING:
     from .models import CustomUser
@@ -54,7 +53,7 @@ class UserManager(BaseUserManager):
 
         return self.create_user(email, password, **extra_fields)
 
-    def get_username_with_discriminator(self) -> QuerySet["CustomUser"]:
+    def get_username_with_discriminator(self) -> Any:
         return self.annotate(
             username_discriminator_as_string=Cast(
                 "username_discriminator", output_field=CharField()
