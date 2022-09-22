@@ -52,6 +52,7 @@ class CustomUserAdmin(DjangoUserAdmin):
                     "ip",
                     "email",
                     "avatar",
+                    "avatar_provider",
                 )
             },
         ),
@@ -114,21 +115,7 @@ class CustomUserAdmin(DjangoUserAdmin):
         )
 
         if search_term:
-            queryset = self.model.objects.annotate(
-                username_discriminator_as_string=Cast(
-                    "username_discriminator", output_field=CharField()
-                ),
-                username_with_discriminator=Concat(
-                    "username",
-                    Value("#"),
-                    LPad(
-                        "username_discriminator_as_string",
-                        int(settings.USERNAME_DISCRIMINATOR_LENGTH),
-                        Value("0"),
-                    ),
-                    output_field=CharField(),
-                ),
-            ).filter(
+            queryset = self.model.objects.get_username_with_discriminator().filter(
                 Q(username_with_discriminator__in=search_term.split(","))
                 | Q(email__in=search_term.split(","))
             )

@@ -37,7 +37,7 @@ class EpisodeTimestampAdmin(admin.ModelAdmin):
                         output_field=CharField(),
                     ),
                 )
-                .filter(username_with_discriminator__in=search_term.split(","))
+                .filter(username_with_discriminator__in=search_term.strip().split(","))
                 .distinct()
             )
 

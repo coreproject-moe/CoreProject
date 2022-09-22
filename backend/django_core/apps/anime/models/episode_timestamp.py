@@ -14,7 +14,11 @@ class EpisodeTimestampModel(models.Model):
         blank=True,
         null=True,
     )
-    user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, db_index=True)
+    user = models.ForeignKey(
+        get_user_model(),
+        on_delete=models.CASCADE,
+        db_index=True,
+    )
 
     def __str__(self) -> str:
         return f"{self.episode}. {self.user}"

@@ -20,21 +20,7 @@ def get_user_info(request: HttpRequest):
 @router.get("/{str:username}/", response=UserSchema)
 def get_individual_user_info(request: HttpRequest, username: str):
     user = get_object_or_404(
-        get_user_model().objects.annotate(
-            username_discriminator_as_string=Cast(
-                "username_discriminator", output_field=CharField()
-            ),
-            username_with_discriminator=Concat(
-                "username",
-                Value("#"),
-                LPad(
-                    "username_discriminator_as_string",
-                    int(settings.USERNAME_DISCRIMINATOR_LENGTH),
-                    Value("0"),
-                ),
-                output_field=CharField(),
-            ),
-        ),
+        get_user_model().objects.get_username_with_discriminator(),
         username_with_discriminator=username,
     )
 
