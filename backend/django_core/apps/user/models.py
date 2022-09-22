@@ -5,7 +5,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from .managers import UserManager, UsernameWithDiscriminatorManager
+from .managers import UserManager
 from .mixins.resize import ResizeImageMixin
 from .validators import username_validator
 
@@ -80,7 +80,18 @@ class CustomUser(
     ]
 
     def get_username_with_discriminator(self) -> str:
-        return f"{self.username}#{str(self.username_discriminator).zfill(settings.USERNAME_DISCRIMINATOR_LENGTH)}"
+        return f"""{
+                self
+                .username
+            }#{
+                str(
+                    self
+                    .username_discriminator
+                )
+                .zfill(
+                    settings.USERNAME_DISCRIMINATOR_LENGTH
+                )
+            }"""
 
     def save(self, *args, **kwargs) -> None:
         # if self.avatar:

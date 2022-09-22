@@ -1,16 +1,18 @@
-from django.conf import settings
+from typing import Any
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
-from django.db.models import CharField, Q, Value
-from django.db.models.functions import Cast, Concat, LPad
+from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
+from .models import CustomUser
 from .forms import CustomUserChangeForm, CustomUserCreationForm
+
+USER_MODEL: CustomUser = get_user_model()
 
 
 class CustomUserAdmin(DjangoUserAdmin):
-    model = get_user_model()
+    model = USER_MODEL
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
 
@@ -104,7 +106,7 @@ class CustomUserAdmin(DjangoUserAdmin):
     )
 
     @admin.display(description="username")
-    def get_username(self, obj, *args, **kwargs):
+    def get_username(self, obj: USER_MODEL, *args: Any, **kwargs: Any) -> USER_MODEL:
         return obj
 
     def get_search_results(self, request, queryset, search_term):
@@ -115,10 +117,17 @@ class CustomUserAdmin(DjangoUserAdmin):
         )
 
         if search_term:
-            search_term = search_term.strip()
+            search_term = [
+                # Remove trailing whitespace
+                # We might have something like
+                # user = ['baseplate-admin ', ' baseplate-foot']
+                # make it
+                # user = ['baseplate-admin','baseplate-foot']
+                item.strip()
+                for item in search_term.split(",")
+            ]
             queryset = self.model.objects.get_username_with_discriminator().filter(
-                Q(username_with_discriminator__in=search_term.split(","))
-                | Q(email__in=search_term.split(","))
+                Q(username_with_discriminator__in=search_term) | Q(email__in=search_term)
             )
 
         return queryset, may_have_duplicates

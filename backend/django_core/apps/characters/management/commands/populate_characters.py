@@ -1,3 +1,4 @@
+from io import BytesIO
 import djclick as click
 import functools
 import asyncio
@@ -12,10 +13,16 @@ from aiohttp_client_cache.backends.redis import RedisBackend
 from aiohttp_retry import RetryClient, ExponentialRetry
 from pyrate_limiter import Limiter, RequestRate, Duration, RedisBucket
 
+MAL_RATE_LIMIT_FILE_NAME = ""
 
-style = color_style()
 CACHE_NAME = settings.BUCKET_NAME
 RETRY_STATUSES = settings.REQUEST_STATUS_CODES_TO_RETRY
+
+SUCCESS_LIST = []
+WARNING_LIST = []
+ERROR_LIST = []
+
+style = color_style()
 limiter = Limiter(
     RequestRate(1, Duration.SECOND),
     RequestRate(60, Duration.MINUTE),
@@ -115,7 +122,7 @@ async def get_ending_number(session: CachedSession | RetryClient) -> int:
 async def get_character_data_from_jikan(
     character_number: int,
     session: CachedSession | RetryClient,
-) -> dict[str, str] | None:
+) -> dict[str, str | None | BytesIO] | None:
     """
     :param character_number: The id of character
     :param session: Requests instance to get data
@@ -129,33 +136,37 @@ async def get_character_data_from_jikan(
         "408",
         "429",
     ]:
-        ############################################################################################################
-        success_list.append(style.SUCCESS("Jikan"))
+        SUCCESS_LIST.append(style.SUCCESS("Jikan"))
 
-        returnable_data = data["data"]
-        self.character_name = returnable_data["name"]
-        self.character_name_kanji = returnable_data.get("name_kanji", None)
-        self.character_about = returnable_data.get("about", None)
+        data = data["data"]
 
         # Try to get webp image first
         # If that fails get jpg image
         try:
-            self.image_url = returnable_data["images"]["webp"]["image_url"]
+            image_url = data["images"]["webp"]["image_url"]
         except KeyError:
-            self.image_url = returnable_data["images"]["jpg"]["image_url"]
+            image_url = data["images"]["jpg"]["image_url"]
         finally:
-            image = self.session.get(self.image_url)
-            self.character_image = BytesIO(image.content)
+            image = await session.get(image_url)
+
+        returnable_data = {
+            "character_name": data["name"],
+            "character_name_kanji": data.get("name_kanji", None),
+            "character_about": data.get("about", None),
+            "character_image": BytesIO(
+                await image.read(),
+            ),
+        }
 
     elif data.get("status", None) == 408:
-        self.warning_list.append(self.style.WARNING("Jikan"))
+        WARNING_LIST.append(style.WARNING("Jikan"))
 
         # Write the number to a file so that we can deal with it later
-        file = open(self.MAL_RATE_LIMIT_FILE_NAME, "a", encoding="utf-8")
+        file = open(MAL_RATE_LIMIT_FILE_NAME, "a", encoding="utf-8")
         file.write(f"{str(character_number)}\n")
         file.close()
 
     else:
-        self.error_list.append(self.style.ERROR("Jikan"))
+        ERROR_LIST.append(style.ERROR("Jikan"))
 
     return returnable_data
