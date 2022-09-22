@@ -3,8 +3,8 @@ from typing import Any
 
 import aiohttp
 from aiohttp import web
-from yarl import URL
 from sqlalchemy.ext.asyncio import AsyncSession
+from yarl import URL
 
 from ...models.user import User
 from ...settings import DJANGO_MEDIA_DIR

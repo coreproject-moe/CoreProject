@@ -1,7 +1,9 @@
 from typing import Tuple
+
 from django.contrib import admin
-from django.http import HttpRequest
 from django.db.models.query import QuerySet
+from django.http import HttpRequest
+
 from ..models import EpisodeTimestampModel
 
 # Register your models here.

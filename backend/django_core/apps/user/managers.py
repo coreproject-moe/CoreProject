@@ -1,11 +1,11 @@
 from typing import TYPE_CHECKING, Any
 
+from django.conf import settings
 from django.contrib.auth.base_user import BaseUserManager
-from django.utils.translation import gettext_lazy as _
+from django.db import models
 from django.db.models import CharField, Value
 from django.db.models.functions import Cast, Concat, LPad
-from django.conf import settings
-from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 if TYPE_CHECKING:
     from .models import CustomUser

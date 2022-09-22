@@ -1,12 +1,13 @@
 from typing import Any
+
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
-from .models import CustomUser
 from .forms import CustomUserChangeForm, CustomUserCreationForm
+from .models import CustomUser
 
 USER_MODEL: CustomUser = get_user_model()
 

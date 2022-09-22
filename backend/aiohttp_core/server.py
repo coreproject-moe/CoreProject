@@ -5,9 +5,9 @@ import aiohttp_jinja2
 import jinja2
 
 from .database import SessionLocal, engine
-from .views.user.avatar import routes as avatar_routes
 from .settings import TEMPLATE_DIRS
 from .views.index import routes as index_routes
+from .views.user.avatar import routes as avatar_routes
 
 routes = web.RouteTableDef()
 

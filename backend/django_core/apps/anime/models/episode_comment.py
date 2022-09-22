@@ -1,6 +1,6 @@
+from apps.user.managers import UsernameWithDiscriminatorManager
 from django.contrib.auth import get_user_model
 from django.db import models
-from apps.user.managers import UsernameWithDiscriminatorManager
 
 # Create your models here.
 

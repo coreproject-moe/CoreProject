@@ -58,7 +58,6 @@ pylint = "*"
 pylint_django = "*"
 # Mypy
 mypy = "*"
-types_requests = "*"
 types_redis = "*"
 django_stubs = {extras = ["compatible_mypy"], version = "*"}
 # Aiohttp
