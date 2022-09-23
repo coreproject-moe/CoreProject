@@ -462,7 +462,17 @@ async def populate_database(
                     if jikan_data else starting_number
             }"""
             " | "
-            f"[{', '.join(sorted(SUCCESS_LIST + ERROR_LIST + WARNING_LIST))}]"
+            f"""[{', '.join(
+                sorted(
+                    (
+                        SUCCESS_LIST +
+                        ERROR_LIST +
+                        WARNING_LIST
+                    ),
+                    key=lambda string: string[10],
+                    )
+                )
+            }]"""
         )
 
         # Reset the list

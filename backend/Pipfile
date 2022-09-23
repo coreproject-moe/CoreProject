@@ -25,7 +25,7 @@ django_ninja = "*"
 # https://github.com/vitalik/django-ninja/issues/305
 # ===================================================
 # HTTP Client
-aiohttp = {version=">=3.8", extras=['speedups']}
+aiohttp = {version=">=3.8,<4", extras=['speedups']}
 aiohttp_jinja2 = '*'
 sqlalchemy = {extras = ["postgresql_asyncpg"], version = "*"}
 # HTTP Client Enhancements
@@ -59,7 +59,6 @@ pylint_django = "*"
 mypy = "*"
 types_redis = "*"
 django_stubs = {extras = ["compatible_mypy"], version = "*"}
-
 
 [requires]
 python_version = "3.10"

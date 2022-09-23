@@ -5,6 +5,7 @@ from io import BytesIO
 import json
 import os
 from pathlib import Path
+from pprint import pprint
 import textwrap
 from typing import Any, Callable, TypeVar, cast
 
@@ -281,7 +282,7 @@ async def get_staff_data_from_jikan(
             SUCCESS_LIST.append(style.SUCCESS("Jikan"))
 
         else:
-            WARNING_LIST.append(style.WARNING("JIKAN"))
+            WARNING_LIST.append(style.WARNING("Jikan"))
             dictionary = JIKAN.setdefault("error", [])
             dictionary.append(
                 {staff_number: staff_name},
@@ -472,13 +473,18 @@ async def populate_database(
             # Add 1 to `starting_number` on every successful request
             starting_number += 1
 
-        success_error_warnings = sorted(set(SUCCESS_LIST + ERROR_LIST + WARNING_LIST))
+        success_error_warnings = sorted(
+            set(SUCCESS_LIST + ERROR_LIST + WARNING_LIST),
+            key=lambda string: string[10],  #  colors are usually 10 digits
+        )
+
         click.echo(
             f"Requested `staff_info` for {staff_number}"
             " | "
             f"""`starting_number` {
-                    starting_number - 1
-                    if jikan_data else starting_number
+                starting_number - 1
+                if jikan_data 
+                else starting_number
             }"""
             " | "
             f"[{', '.join(success_error_warnings)}]"
