@@ -13,11 +13,11 @@ class FileField:
     # Thanks Stackoverflow
     # https://stackoverflow.com/questions/1190697/django-filefield-with-upload-to-determined-at-runtime
     @staticmethod
-    def episode_cover(instance: Any, filename: str) -> Path:
+    def episode_cover(instance: "EpisodeModel", filename: str) -> Path:
         return Path("episode_cover", filename)
 
     @staticmethod
-    def episode_upload(instance: Any, filename: str) -> Path:
+    def episode_upload(instance: "EpisodeModel", filename: str) -> Path:
         return Path("episode", filename)
 
 

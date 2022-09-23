@@ -1,5 +1,4 @@
 from pathlib import Path
-from typing import Any
 
 from core.storages import OverwriteStorage
 
@@ -10,7 +9,7 @@ class FileField:
     # Thanks Stackoverflow
     # https://stackoverflow.com/questions/1190697/django-filefield-with-upload-to-determined-at-runtime
     @staticmethod
-    def anime_charater(instance: Any, filename: str) -> Path:
+    def anime_charater(instance: "CharacterModel", filename: str) -> Path:
         return Path("anime_characters", filename)
 
 

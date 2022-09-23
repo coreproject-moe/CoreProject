@@ -1,3 +1,4 @@
+from typing import Any
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.core.validators import MinValueValidator, RegexValidator
@@ -5,9 +6,20 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
+from pathlib import Path
+
 from .managers import UserManager
 from .mixins.resize import ResizeImageMixin
 from .validators import username_validator
+
+
+class FileField:
+    # Thanks Stackoverflow
+    # https://stackoverflow.com/questions/1190697/django-filefield-with-upload-to-determined-at-runtime
+    @staticmethod
+    def avatar(instance: "CustomUser", filename: str) -> Path:
+        return Path("avatar", str(instance.pk), filename)
+
 
 # Create your models here.
 
@@ -66,7 +78,9 @@ class CustomUser(
             MinValueValidator(1),  # Same thing but remove negative digits
         ],
     )
-    avatar = models.ImageField(upload_to="avatars", default=None, blank=True, null=True)
+    avatar = models.ImageField(
+        upload_to=FileField.avatar, default=None, blank=True, null=True
+    )
     ip = models.GenericIPAddressField(null=True, blank=True)
 
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
@@ -93,7 +107,7 @@ class CustomUser(
                 )
             }"""
 
-    def save(self, *args, **kwargs) -> None:
+    def save(self, *args: Any, **kwargs: Any) -> None:
         # if self.avatar:
         #     file = self.resize(self.avatar)
         #     self.avatar.save(f"{self.username}.avif", file, save=False)
