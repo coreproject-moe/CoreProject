@@ -8,15 +8,16 @@ from typing import Any
 # pylint: disable=import-error
 from apps.staffs.models import StaffAlternateNameModel, StaffModel
 from core.utilities.CachedLimiterSession import CachedLimiterSession
+from requests.adapters import HTTPAdapter
+from requests_cache import RedisCache  # type: ignore
+from requests_ratelimiter import RedisBucket
+from urllib3.util import Retry
+
 from django.conf import settings
 from django.contrib.humanize.templatetags.humanize import intcomma, naturaltime
 from django.core.files.base import ContentFile
 from django.core.management.base import BaseCommand
 from django.db import IntegrityError
-from requests.adapters import HTTPAdapter
-from requests_cache import RedisCache  # type: ignore
-from requests_ratelimiter import RedisBucket
-from urllib3.util import Retry
 
 retry_strategy = Retry(
     total=settings.MAX_RETRY,

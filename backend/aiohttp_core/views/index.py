@@ -1,10 +1,11 @@
 import aiohttp
 from aiohttp import web
 import aiohttp_jinja2
-import django
 import gunicorn
 import jinja2
 import sqlalchemy
+
+import django
 
 routes = web.RouteTableDef()
 

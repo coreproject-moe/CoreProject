@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import Any
 
 from core.storages import OverwriteStorage
+
 from django.db import models
 
 

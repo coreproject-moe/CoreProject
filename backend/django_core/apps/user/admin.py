@@ -80,12 +80,6 @@ class CustomUserAdmin(DjangoUserAdmin):
                 )
             },
         ),
-        # (
-        #     _("Customization"),
-        #     {
-        #
-        #     },
-        # ),
     )
 
     # Needed to invoke forms

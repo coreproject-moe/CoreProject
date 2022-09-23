@@ -2,6 +2,7 @@
 
 import apps.characters.models
 import core.storages
+
 from django.db import migrations, models
 
 

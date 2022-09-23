@@ -1,5 +1,6 @@
-from django.contrib.auth import get_user_model
 from ninja import ModelSchema
+
+from django.contrib.auth import get_user_model
 
 
 class SignupSchema(ModelSchema):

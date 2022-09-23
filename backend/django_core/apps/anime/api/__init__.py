@@ -1,8 +1,9 @@
+from ninja import Query, Router
+from ninja.pagination import paginate
+
 from django.db.models import Q, QuerySet
 from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
-from ninja import Query, Router
-from ninja.pagination import paginate
 
 from ..filters import AnimeInfoFilters
 from ..models import AnimeModel

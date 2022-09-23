@@ -1,6 +1,7 @@
+from ninja import Router
+
 from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
-from ninja import Router
 
 from ..models import AnimeModel
 from ..models.episode import EpisodeModel

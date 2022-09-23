@@ -1,6 +1,7 @@
 from typing import Any
 
 from apps.user.models import CustomUser
+
 from django.contrib.auth import get_user_model
 from django.contrib.auth.backends import ModelBackend
 from django.db.models import Q

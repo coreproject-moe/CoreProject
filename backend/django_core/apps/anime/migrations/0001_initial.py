@@ -3,6 +3,7 @@
 import apps.anime.models
 import apps.anime.models.episode
 import apps.characters.models
+
 from django.conf import settings
 from django.db import migrations, models
 import django.db.models.deletion

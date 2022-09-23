@@ -4,20 +4,21 @@ import functools
 from io import BytesIO
 import json
 import os
-import pprint
 import textwrap
+from typing import Any, Callable, TypeVar, cast
 
+import aiohttp
 from aiohttp_client_cache.backends.redis import RedisBackend
 from aiohttp_client_cache.session import CachedSession
 from aiohttp_retry import ExponentialRetry, RetryClient
+import djclick as click
+from pyrate_limiter import Duration, Limiter, RedisBucket, RequestRate
+
 from django.conf import settings
 from django.contrib.humanize.templatetags.humanize import intcomma, naturaltime
 from django.core.files.base import ContentFile
 from django.core.management.color import color_style
-from django.db import IntegrityError
-import djclick as click
-from pyrate_limiter import Duration, Limiter, RedisBucket, RequestRate
-
+from django.db import IntegrityError, connection
 
 from ...models import CharacterModel
 
@@ -45,24 +46,30 @@ limiter = Limiter(
     },
 )
 
+# https://stackoverflow.com/questions/43013083/typing-decorator-with-parameters-in-mypy-with-typevar-yields-expected-uninhabite
+FuncT = TypeVar("FuncT", bound=Callable[..., Any])
+
 
 # https://github.com/pallets/click/issues/2033#issue-960810534
-def make_sync(func):
+def make_sync(func: FuncT) -> FuncT:
     @functools.wraps(func)
-    def wrapper(*args, **kwargs):
+    def wrapper(*args: Any, **kwargs: Any) -> Any:
         return asyncio.run(func(*args, **kwargs))
 
-    return wrapper
+    return cast(FuncT, wrapper)
 
 
 @click.command()
 @make_sync
 async def command() -> None:
-    session = RetryClient(
+    retry_client = RetryClient(
         client_session=CachedSession(
             cache=RedisBackend(
                 CACHE_NAME,
-                allowed_methods=["GET", "POST"],  # Cache requests with these HTTP methods
+                allowed_methods=[
+                    "GET",
+                    "POST",
+                ],  # Cache requests with these HTTP methods
             )
         ),
         retry_options=ExponentialRetry(
@@ -71,6 +78,8 @@ async def command() -> None:
             statuses=set(RETRY_STATUSES),
         ),
     )
+
+    session = cast(aiohttp.ClientSession, retry_client)
 
     starting_number = 1
     character_number = 1
@@ -83,10 +92,12 @@ async def command() -> None:
         # While loop to ask for data
         while True:
             answer = input("\r").lower()
+
             if "y" in answer:
                 data = json.load(open(CHARACTER_LOCK_FILE_NAME, encoding="utf-8"))
                 starting_number = int(data.get("STARTING_NUMBER", starting_number))
                 character_number = int(data.get("CHARACTER_NUMBER", character_number))
+
                 # Load Lists
                 global JIKAN_RATE_LIMIT_LIST, KITSU_NOT_FOUND_LIST, ANILIST_NOT_FOUND_LIST
                 JIKAN_RATE_LIMIT_LIST = data.get("JIKAN_RATE_LIMIT", JIKAN_RATE_LIMIT_LIST)
@@ -95,9 +106,15 @@ async def command() -> None:
                     "ANILIST_NOT_FOUND", ANILIST_NOT_FOUND_LIST
                 )
                 break
-            elif "n" in answer:
 
+            elif "n" in answer:
                 break
+
+    # Everything is new
+    if starting_number == 1:
+        await CharacterModel.objects.all().adelete()
+        # Reset SQL Sequence
+        connection.ops.sequence_reset_sql(color_style(), [CharacterModel])
 
     welcome_message = textwrap.dedent(
         f"""
@@ -160,7 +177,9 @@ async def command() -> None:
 
 
 @limiter.ratelimit("ending", delay=True)
-async def get_ending_number(session: CachedSession | RetryClient) -> int:
+async def get_ending_number(
+    session: aiohttp.ClientSession,
+) -> int:
     res = await session.get("https://api.jikan.moe/v4/characters")
     data = await res.json()
     return int(data["pagination"]["items"]["total"])
@@ -169,7 +188,7 @@ async def get_ending_number(session: CachedSession | RetryClient) -> int:
 @limiter.ratelimit("jikan", delay=True)
 async def get_character_data_from_jikan(
     character_number: int,
-    session: CachedSession | RetryClient,
+    session: aiohttp.ClientSession,
 ) -> dict[str, str | None | BytesIO] | None:
     """
     :param character_number: The id of character
@@ -224,7 +243,7 @@ async def get_character_data_from_jikan(
 async def get_character_data_from_kitsu(
     character_number: int,
     character_name: str,
-    session: CachedSession | RetryClient,
+    session: aiohttp.ClientSession,
 ) -> dict[str, str | None] | None:
     """
     :param character_name: The name of the character
@@ -241,9 +260,10 @@ async def get_character_data_from_kitsu(
         for data in res_data["data"]:
             # If the Kitsu ID exists in database
             # Skip to next iteration
-            if await CharacterModel.objects.filter(
+            character_kitsu_entry_exists: bool = await CharacterModel.objects.filter(
                 kitsu_id=data["id"],
-            ).aexists():
+            ).aexists()
+            if character_kitsu_entry_exists:
                 continue
 
             returnable_data = {
@@ -270,7 +290,7 @@ async def get_character_data_from_kitsu(
 async def get_character_data_from_anilist(
     character_number: int,
     character_name: str,
-    session: CachedSession | RetryClient,
+    session: aiohttp.ClientSession,
 ) -> dict[str, str | None] | None:
     """
     :param character_name: The name of the character
@@ -327,9 +347,10 @@ async def get_character_data_from_anilist(
         for data in res_data["data"]["Page"]["characters"]:
             # If the Anilist ID exists in database
             # Skip to next iteration
-            if await CharacterModel.objects.filter(
+            character_anilist_entry_exists: bool = await CharacterModel.objects.filter(
                 anilist_id=data["id"],
-            ).aexists():
+            ).aexists()
+            if character_anilist_entry_exists:
                 continue
 
             returnable_data = {
@@ -354,7 +375,7 @@ async def get_character_data_from_anilist(
 
 
 async def populate_database(
-    session: CachedSession | RetryClient,
+    session: aiohttp.ClientSession,
     character_number: int,
     starting_number: int,
     ending_number: int,
