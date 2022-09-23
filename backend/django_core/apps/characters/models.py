@@ -30,10 +30,7 @@ class CharacterModel(models.Model):
         blank=True,
         null=True,
     )
-    about = models.TextField(
-        null=True,
-        blank=True,
-    )
+    about = models.TextField(null=True, blank=True)
 
     def __str__(self) -> str:
         return f"{self.pk}. {self.name}"

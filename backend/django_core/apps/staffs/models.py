@@ -22,13 +22,13 @@ class StaffAlternateNameModel(models.Model):
 
 
 class StaffModel(models.Model):
-    mal_id = models.IntegerField(unique=True, null=True, db_index=True)
-    kitsu_id = models.IntegerField(unique=True, null=True, db_index=True)
-    anilist_id = models.IntegerField(unique=True, null=True, db_index=True)
+    mal_id = models.IntegerField(unique=True, null=True, blank=True, db_index=True)
+    kitsu_id = models.IntegerField(unique=True, null=True, blank=True, db_index=True)
+    anilist_id = models.IntegerField(unique=True, null=True, blank=True, db_index=True)
 
     name = models.CharField(max_length=1024, db_index=True)
-    given_name = models.CharField(max_length=1024, null=True)
-    family_name = models.CharField(max_length=1024, null=True)
+    given_name = models.CharField(max_length=1024, null=True, blank=True)
+    family_name = models.CharField(max_length=1024, null=True, blank=True)
 
     staff_image = models.ImageField(
         storage=OverwriteStorage,
@@ -37,7 +37,7 @@ class StaffModel(models.Model):
         blank=True,
         null=True,
     )
-    about = models.TextField(null=True)
+    about = models.TextField(null=True, blank=True)
     alternate_names = models.ManyToManyField(StaffAlternateNameModel)
 
     def __str__(self) -> str:
