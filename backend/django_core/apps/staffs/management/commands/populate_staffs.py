@@ -22,7 +22,7 @@ from aiohttp_client_cache.backends.redis import RedisBackend
 from aiohttp_client_cache.session import CachedSession
 from aiohttp_retry import ExponentialRetry, RetryClient
 
-
+from core import settings as base_settings
 from ...models import StaffModel, StaffAlternateNameModel
 
 try:
@@ -35,8 +35,8 @@ except ImportError:
 
 STAFF_LOCK_FILE_NAME = Path(settings.BASE_DIR, "Staff.lock")
 
-CACHE_NAME = settings.BUCKET_NAME
-RETRY_STATUSES = settings.REQUEST_STATUS_CODES_TO_RETRY
+CACHE_NAME: base_settings = settings.BUCKET_NAME
+RETRY_STATUSES: base_settings = settings.REQUEST_STATUS_CODES_TO_RETRY
 
 JIKAN: dict[str, list[dict[int, str]]] = {}
 KITSU: dict[str, list[int]] = {}
