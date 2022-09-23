@@ -41,7 +41,7 @@ class StaffModel(models.Model):
     alternate_names = models.ManyToManyField(StaffAlternateNameModel)
 
     def __str__(self) -> str:
-        return f"{self.name}"
+        return f"{self.pk}. {self.name}"
 
     class Meta:
         verbose_name = "Staff | People"

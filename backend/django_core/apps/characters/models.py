@@ -36,7 +36,7 @@ class CharacterModel(models.Model):
     )
 
     def __str__(self) -> str:
-        return f"{self.mal_id}. {self.name}"
+        return f"{self.pk}. {self.name}"
 
     class Meta:
         verbose_name = "Character"

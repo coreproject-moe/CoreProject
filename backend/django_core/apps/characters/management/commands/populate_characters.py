@@ -8,12 +8,14 @@ from pathlib import Path
 import textwrap
 from typing import Any, Callable, TypeVar, cast
 
+from asgiref.sync import sync_to_async
+from core import settings as base_settings
 from pyrate_limiter import Duration, Limiter, RedisBucket, RequestRate
 
 from django.conf import settings
 from django.contrib.humanize.templatetags.humanize import intcomma, naturaltime
 from django.core.files.base import ContentFile
-from django.core.management.color import color_style
+from django.core.management.color import color_style, no_style as django_no_style
 from django.db import IntegrityError, connection
 import djclick as click
 
@@ -22,7 +24,6 @@ from aiohttp_client_cache.backends.redis import RedisBackend
 from aiohttp_client_cache.session import CachedSession
 from aiohttp_retry import ExponentialRetry, RetryClient
 
-from core import settings as base_settings
 from ...models import CharacterModel
 
 try:
@@ -48,6 +49,7 @@ WARNING_LIST = []
 ERROR_LIST = []
 
 style = color_style()
+no_style = django_no_style()
 limiter = Limiter(
     RequestRate(1, Duration.SECOND),
     RequestRate(60, Duration.MINUTE),
@@ -119,8 +121,21 @@ async def command() -> None:
     # Everything is new
     if starting_number == 1:
         await CharacterModel.objects.all().adelete()
+
         # Reset SQL Sequence
-        connection.ops.sequence_reset_sql(color_style(), [CharacterModel])
+        @sync_to_async
+        def reset_sql_sequence() -> None:
+            sequence_sql = connection.ops.sequence_reset_sql(
+                no_style,
+                [
+                    CharacterModel,
+                ],
+            )
+            with connection.cursor() as cursor:
+                for sql in sequence_sql:
+                    cursor.execute(sql)
+
+        await reset_sql_sequence()
 
     welcome_message = textwrap.dedent(
         f"""
