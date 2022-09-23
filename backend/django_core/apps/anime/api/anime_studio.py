@@ -2,7 +2,9 @@ from ninja import Router
 
 from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
+from django.contrib.auth.decorators import login_required, user_passes_test
 
+from core.permissions import is_superuser
 from ...studios.models import StudioModel
 from ...studios.schemas import StudioSchema
 from ..models import AnimeModel
@@ -23,6 +25,8 @@ def get_individual_anime_studio_info(
 
 
 @router.post("/{int:anime_id}/studios", response=StudioSchema)
+@login_required
+@user_passes_test(is_superuser)
 def post_individual_anime_studio_info(
     request: HttpRequest,
     anime_id: int,

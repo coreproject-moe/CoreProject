@@ -3,6 +3,7 @@ from ninja import Router
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
 from ..models import MalModel
 from ..schemas import MALGETSchema, MALPOSTSchema
@@ -17,6 +18,7 @@ def get_mal_info(request: HttpRequest):
 
 
 @router.post("/mal", response=MALGETSchema)
+@login_required
 def post_mal_info(request: HttpRequest, payload: MALPOSTSchema):
     instance, created = MalModel.objects.update_or_create(
         user=request.user,

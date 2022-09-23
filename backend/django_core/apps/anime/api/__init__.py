@@ -4,7 +4,9 @@ from ninja.pagination import paginate
 from django.db.models import Q, QuerySet
 from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required, user_passes_test
 
+from core.permissions import is_superuser
 from ..filters import AnimeInfoFilters
 from ..models import AnimeModel
 from ..schemas import AnimeInfoGETSchema, AnimeInfoPOSTSchema
@@ -81,6 +83,8 @@ def get_anime_info(
 
 
 @router.post("", response=AnimeInfoGETSchema)
+@login_required
+@user_passes_test(is_superuser)
 def post_anime_info(
     request: HttpRequest,
     payload: AnimeInfoPOSTSchema,

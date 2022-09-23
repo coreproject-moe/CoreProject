@@ -2,7 +2,9 @@ from ninja import Router
 
 from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
+from django.contrib.auth.decorators import login_required, user_passes_test
 
+from core.permissions import is_superuser
 from ..models import AnimeModel
 from ..models.anime_genre import AnimeGenreModel
 from ..schemas.anime_genre import AnimeGenreSchema
@@ -22,6 +24,8 @@ def get_individual_anime_genre_info(
 
 
 @router.post("/{int:anime_id}/genres", response=AnimeGenreSchema)
+@login_required
+@user_passes_test(is_superuser)
 def post_individual_anime_genre_info(
     request: HttpRequest,
     anime_id: int,
@@ -32,6 +36,7 @@ def post_individual_anime_genre_info(
     # theres no point in continuing
     anime_info_model = get_object_or_404(AnimeModel, pk=anime_id)
 
+    # query is a tuple of ( QuerySet,bool )
     query = AnimeGenreModel.objects.get_or_create(
         **payload.dict(),
     )

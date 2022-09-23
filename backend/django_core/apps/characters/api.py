@@ -4,7 +4,9 @@ from ninja.pagination import paginate
 from django.db.models import Q, QuerySet
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required, user_passes_test
 
+from core.permissions import is_superuser
 from .filters import CharacterFilter
 from .models import CharacterModel
 from .schemas import CharacterSchema
@@ -51,6 +53,8 @@ def get_character_info(
 
 
 @router.get("/{str:character_id}/", response=CharacterSchema)
+@login_required
+@user_passes_test(is_superuser)
 def get_individual_character_info(
     request: HttpRequest,
     character_id: str,

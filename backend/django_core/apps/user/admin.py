@@ -55,7 +55,6 @@ class CustomUserAdmin(DjangoUserAdmin):
                     "ip",
                     "email",
                     "avatar",
-                    "avatar_provider",
                 )
             },
         ),
@@ -129,3 +128,9 @@ class CustomUserAdmin(DjangoUserAdmin):
 
 
 admin.site.register(get_user_model(), CustomUserAdmin)
+
+# MoneyPatch
+# https://stackoverflow.com/questions/6191662/django-admin-login-form-overriding-max-length-failing
+from django.contrib.auth.forms import AuthenticationForm
+
+AuthenticationForm.base_fields["username"].label = "Email | Username (with discriminator) "

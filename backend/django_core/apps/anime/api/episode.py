@@ -2,7 +2,9 @@ from ninja import Router
 
 from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
+from django.contrib.auth.decorators import login_required, user_passes_test
 
+from core.permissions import is_superuser
 from ..models import AnimeModel
 from ..models.episode import EpisodeModel
 from ..schemas.episode import EpisodeGETSchema, EpisodePOSTSchema
@@ -26,6 +28,8 @@ def get_individual_anime_episodes(
 # https://github.com/vitalik/django-ninja/issues/371
 # https://django-ninja.rest-framework.com/tutorial/file-params/
 @router.post("/{int:anime_id}/episodes", response=EpisodeGETSchema)
+@login_required
+@user_passes_test(is_superuser)
 def post_individual_anime_episodes(
     request: HttpRequest,
     anime_id: int,

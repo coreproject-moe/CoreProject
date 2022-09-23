@@ -2,7 +2,9 @@ from ninja import Router
 
 from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
+from django.contrib.auth.decorators import login_required, user_passes_test
 
+from core.permissions import is_superuser
 from ..models import AnimeModel
 from ..models.anime_theme import AnimeThemeModel
 from ..schemas.anime_theme import AnimeThemeSchema
@@ -22,6 +24,8 @@ def get_individual_anime_theme_info(
 
 
 @router.post("/{int:anime_id}/themes", response=AnimeThemeSchema)
+@login_required
+@user_passes_test(is_superuser)
 def post_individual_anime_theme_info(
     request: HttpRequest,
     anime_id: int,
