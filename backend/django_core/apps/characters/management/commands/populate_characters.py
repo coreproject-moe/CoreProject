@@ -22,7 +22,16 @@ from aiohttp_client_cache.backends.redis import RedisBackend
 from aiohttp_client_cache.session import CachedSession
 from aiohttp_retry import ExponentialRetry, RetryClient
 
+
 from ...models import CharacterModel
+
+try:
+    import uvloop
+
+    asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+except ImportError:
+    pass
+
 
 CHARACTER_LOCK_FILE_NAME = Path(settings.BASE_DIR, "Character.lock")
 
@@ -68,10 +77,6 @@ async def command() -> None:
         client_session=CachedSession(
             cache=RedisBackend(
                 CACHE_NAME,
-                allowed_methods=[
-                    "GET",
-                    "POST",
-                ],  # Cache requests with these HTTP methods
             )
         ),
         retry_options=ExponentialRetry(
@@ -181,6 +186,9 @@ async def command() -> None:
 async def get_ending_number(
     session: aiohttp.ClientSession,
 ) -> int:
+    """
+    :param session: `aiohttp.Client` instance to get data
+    """
     res = await session.get("https://api.jikan.moe/v4/characters")
     data = await res.json()
     return int(data["pagination"]["items"]["total"])
@@ -232,18 +240,20 @@ async def get_character_data_from_jikan(
     elif data.get("status", None) == 408:
         dictionary = JIKAN.setdefault(408, [])
         dictionary.append(character_number)
+
         WARNING_LIST.append(style.WARNING("Jikan"))
 
     elif data.get("status", None) == 500:
         dictionary = JIKAN.setdefault(500, [])
         dictionary.append(character_number)
+
         ERROR_LIST.append(style.WARNING("Jikan"))
 
     else:
         ERROR_LIST.append(style.ERROR("Jikan"))
 
     # We need none as output if theres no data
-    return returnable_data if returnable_data else None
+    return returnable_data
 
 
 @limiter.ratelimit("kitsu", delay=True)
@@ -378,7 +388,6 @@ async def get_character_data_from_anilist(
     else:
         ERROR_LIST.append(style.WARNING("Anilist"))
 
-    # We need none as output if theres no data
     return returnable_data
 
 
