@@ -4,10 +4,10 @@ import functools
 from io import BytesIO
 import json
 import os
+from pathlib import Path
 import textwrap
 from typing import Any, Callable, TypeVar, cast
 
-import djclick as click
 from pyrate_limiter import Duration, Limiter, RedisBucket, RequestRate
 
 from django.conf import settings
@@ -15,6 +15,7 @@ from django.contrib.humanize.templatetags.humanize import intcomma, naturaltime
 from django.core.files.base import ContentFile
 from django.core.management.color import color_style
 from django.db import IntegrityError, connection
+import djclick as click
 
 import aiohttp
 from aiohttp_client_cache.backends.redis import RedisBackend
@@ -23,7 +24,7 @@ from aiohttp_retry import ExponentialRetry, RetryClient
 
 from ...models import CharacterModel
 
-CHARACTER_LOCK_FILE_NAME = "Character.lock"
+CHARACTER_LOCK_FILE_NAME = Path(settings.BASE_DIR, "Character.lock")
 
 CACHE_NAME = settings.BUCKET_NAME
 RETRY_STATUSES = settings.REQUEST_STATUS_CODES_TO_RETRY
@@ -337,7 +338,7 @@ async def get_character_data_from_anilist(
                     }
                 }
             }
-            """,
+        """,
         "variables": {
             "page": 1,
             "type": "CHARACTERS",
