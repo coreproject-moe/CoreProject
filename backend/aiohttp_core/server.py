@@ -1,8 +1,9 @@
 from typing import AsyncGenerator
 
+import jinja2
+
 from aiohttp import web
 import aiohttp_jinja2
-import jinja2
 
 from .database import SessionLocal, engine
 from .settings import TEMPLATE_DIRS

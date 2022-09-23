@@ -1,10 +1,11 @@
 import hashlib
 from typing import Any
 
-import aiohttp
-from aiohttp import web
 from sqlalchemy.ext.asyncio import AsyncSession
 from yarl import URL
+
+import aiohttp
+from aiohttp import web
 
 from ...models.user import User
 from ...settings import DJANGO_MEDIA_DIR

@@ -1,12 +1,12 @@
+from pathlib import Path
 from typing import Any
+
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.core.validators import MinValueValidator, RegexValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
-
-from pathlib import Path
 
 from .managers import UserManager
 from .mixins.resize import ResizeImageMixin

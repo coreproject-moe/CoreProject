@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = {version = "~=4.1", extras = ["argon2"]}
+django = {version = ">=4.1", extras = ["argon2"]}
 # Postgres
 psycopg2 = "*"
 # 3rd Party ( Middlewares )
@@ -18,20 +18,20 @@ python_dotenv = "*"
 whitenoise = {extras = ["brotli"], version = "*"}
 # 3rd Party ( Tasks )
 huey = "*"
-redis = "*"
+redis = ">=4"
 hiredis = {version="*", markers="sys_platform != 'win32'"}
 # Rest framework
 django_ninja = "*"
 # https://github.com/vitalik/django-ninja/issues/305
 # ===================================================
 # HTTP Client
-aiohttp = '*'
+aiohttp = ">=3.8"
 aiohttp_jinja2 = '*'
 sqlalchemy = {extras = ["postgresql_asyncpg"], version = "*"}
 # HTTP Client Enhancements
-aiohttp_client_cache = '*'
 aiohttp_retry = "*"
-aiometer = "==0.3.*"
+aiohttp_client_cache = {extras = ["redis"], version = "*"}
+pyrate-limiter = {extras = ["redis"], version = "*"}
 # Will replace requests with aiohttp
 requests = "*"
 requests_cache = "*"
@@ -42,9 +42,12 @@ uvicorn = {extras = ["standard"], version = "*"}
 # Image processing
 pillow = "*"
 # Discord API
-"discord.py" = {extras = ["voice","speed"], version = "*"}
+"discord.py" = {extras = ["voice", "speed"], version = "*"}
 
 [dev-packages]
+# Aiohttp
+aiohttp-devtools = "*"
+# Django
 django_debug_toolbar = "*"
 django_dbbackup = "*"
 django_cprofile_middleware = "*"
@@ -60,8 +63,7 @@ pylint_django = "*"
 mypy = "*"
 types_redis = "*"
 django_stubs = {extras = ["compatible_mypy"], version = "*"}
-# Aiohttp
-aiohttp-devtools = "*"
+
 
 [requires]
 python_version = "3.10"

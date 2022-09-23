@@ -7,10 +7,6 @@ import os
 import textwrap
 from typing import Any, Callable, TypeVar, cast
 
-import aiohttp
-from aiohttp_client_cache.backends.redis import RedisBackend
-from aiohttp_client_cache.session import CachedSession
-from aiohttp_retry import ExponentialRetry, RetryClient
 import djclick as click
 from pyrate_limiter import Duration, Limiter, RedisBucket, RequestRate
 
@@ -19,6 +15,11 @@ from django.contrib.humanize.templatetags.humanize import intcomma, naturaltime
 from django.core.files.base import ContentFile
 from django.core.management.color import color_style
 from django.db import IntegrityError, connection
+
+import aiohttp
+from aiohttp_client_cache.backends.redis import RedisBackend
+from aiohttp_client_cache.session import CachedSession
+from aiohttp_retry import ExponentialRetry, RetryClient
 
 from ...models import CharacterModel
 
