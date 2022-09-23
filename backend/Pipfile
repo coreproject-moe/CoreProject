@@ -25,7 +25,7 @@ django_ninja = "*"
 # https://github.com/vitalik/django-ninja/issues/305
 # ===================================================
 # HTTP Client
-aiohttp = ">=3.8"
+aiohttp = {version=">=3.8", extras=['speedups']}
 aiohttp_jinja2 = '*'
 sqlalchemy = {extras = ["postgresql_asyncpg"], version = "*"}
 # HTTP Client Enhancements
