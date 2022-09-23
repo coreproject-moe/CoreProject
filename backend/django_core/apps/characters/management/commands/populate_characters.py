@@ -28,9 +28,9 @@ CHARACTER_LOCK_FILE_NAME = "Character.lock"
 CACHE_NAME = settings.BUCKET_NAME
 RETRY_STATUSES = settings.REQUEST_STATUS_CODES_TO_RETRY
 
-JIKAN_RATE_LIMIT_LIST: list[int] = []
-KITSU_NOT_FOUND_LIST: list[dict[int, str]] = []
-ANILIST_NOT_FOUND_LIST: list[dict[int, str]] = []
+JIKAN: dict[int, list[int]] = {}
+KITSU: dict[str, list[dict[int, str]]] = {}
+ANILIST: dict[str, list[dict[int, str]]] = {}
 
 
 SUCCESS_LIST = []
@@ -100,12 +100,11 @@ async def command() -> None:
                 character_number = int(data.get("CHARACTER_NUMBER", character_number))
 
                 # Load Lists
-                global JIKAN_RATE_LIMIT_LIST, KITSU_NOT_FOUND_LIST, ANILIST_NOT_FOUND_LIST
-                JIKAN_RATE_LIMIT_LIST = data.get("JIKAN_RATE_LIMIT", JIKAN_RATE_LIMIT_LIST)
-                KITSU_NOT_FOUND_LIST = data.get("KITSU_NOT_FOUND", KITSU_NOT_FOUND_LIST)
-                ANILIST_NOT_FOUND_LIST = data.get(
-                    "ANILIST_NOT_FOUND", ANILIST_NOT_FOUND_LIST
-                )
+                global JIKAN, KITSU, ANILIST
+                JIKAN = data.get("JIKAN", JIKAN)
+                KITSU = data.get("KITSU", KITSU)
+                ANILIST = data.get("ANILIST", ANILIST)
+
                 break
 
             elif "n" in answer:
@@ -204,6 +203,7 @@ async def get_character_data_from_jikan(
         "404",
         "408",
         "429",
+        "500",
     ]:
         SUCCESS_LIST.append(style.SUCCESS("Jikan"))
 
@@ -229,9 +229,14 @@ async def get_character_data_from_jikan(
         }
 
     elif data.get("status", None) == 408:
+        dictionary = JIKAN.setdefault(408, [])
+        dictionary.append(character_number)
         WARNING_LIST.append(style.WARNING("Jikan"))
 
-        JIKAN_RATE_LIMIT_LIST.append(character_number)
+    elif data.get("status", None) == 500:
+        dictionary = JIKAN.setdefault(500, [])
+        dictionary.append(character_number)
+        ERROR_LIST.append(style.WARNING("Jikan"))
 
     else:
         ERROR_LIST.append(style.ERROR("Jikan"))
@@ -277,10 +282,11 @@ async def get_character_data_from_kitsu(
 
         else:
             WARNING_LIST.append(style.WARNING("Kitsu"))
-
-            KITSU_NOT_FOUND_LIST.append(
+            dictionary = KITSU.setdefault("error", [])
+            dictionary.append(
                 {character_number: character_name},
             )
+
     else:
         ERROR_LIST.append(style.ERROR("Kitsu"))
 
@@ -363,8 +369,8 @@ async def get_character_data_from_anilist(
 
         else:
             WARNING_LIST.append(style.WARNING("Anilist"))
-
-            ANILIST_NOT_FOUND_LIST.append(
+            dictionary = ANILIST.setdefault("error", [])
+            dictionary.append(
                 {character_number: character_name},
             )
 
@@ -417,7 +423,7 @@ async def populate_database(
                 )
 
             except IntegrityError as e:
-                print(e)
+                click.echo(e)
                 click.echo(f"Entry exists : {character_number}")
 
             # Add 1 to `starting_number` on every successful request
@@ -446,9 +452,9 @@ async def populate_database(
             {
                 "CHARACTER_NUMBER": character_number,
                 "STARTING_NUMBER": starting_number,
-                "JIKAN_RATE_LIMIT": JIKAN_RATE_LIMIT_LIST,
-                "KITSU_NOT_FOUND": KITSU_NOT_FOUND_LIST,
-                "ANILIST_NOT_FOUND": ANILIST_NOT_FOUND_LIST,
+                "JIKAN": JIKAN,
+                "KITSU": KITSU,
+                "ANILIST": ANILIST,
             },
             open(CHARACTER_LOCK_FILE_NAME, "w", encoding="utf-8"),
             indent=2,

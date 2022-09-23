@@ -1,7 +1,7 @@
 [project]
 name = "core-backend"
 version = "0.1.0"
-description = "A modern backend powering the the world's most modern anime site"
+description = "A modern backend powering the the world's most advanced anime site"
 authors = [
     {name = "baseplate-admin", email = "61817579+baseplate-admin@users.noreply.github.com"},
 ]
@@ -13,7 +13,7 @@ max-line-length = "92"
 
 [tool.black]
 line-length = 92
-target-version = ['py311']
+target-version = ["py311"]
 
 [tool.mypy]
 show_error_codes = true
@@ -31,17 +31,17 @@ warn_redundant_casts = true
 warn_unused_ignores = true
 warn_unused_configs = true
 check_untyped_defs = true
-follow_imports = 'silent'
+follow_imports = "silent"
 plugins = ["mypy_django_plugin.main"]
 exclude = [
     "migrations"
 ]
-mypy_path = 'django_core,aiohttp_core'
+mypy_path = "django_core,aiohttp_core"
 namespace_packages = true
 explicit_package_bases = true
 
 [tool.django-stubs]
-django_settings_module = "core.settings"
+django_settings_module = "django_project.core.settings"
 
 
 [tool.isort]
@@ -54,16 +54,16 @@ known_first_party = [
     "django"
 ]
 sections = [
-    'FUTURE',
-    'STDLIB',
-    'THIRDPARTY',
-    'FIRSTPARTY',
-    'AIOHTTP',
-    'LOCALFOLDER'
+    "FUTURE",
+    "STDLIB",
+    "THIRDPARTY",
+    "FIRSTPARTY",
+    "AIOHTTP",
+    "LOCALFOLDER"
 ]
 known_aiohttp = [
-    'aiohttp',
-    'aiohttp_client_cache',
-    'aiohttp_retry',
-    'aiohttp_jinja2'
+    "aiohttp",
+    "aiohttp_client_cache",
+    "aiohttp_retry",
+    "aiohttp_jinja2"
 ]
