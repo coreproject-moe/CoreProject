@@ -35,5 +35,4 @@ def user_ip_handler(**kwargs):
         ip = get_client_ip(request)
     except AttributeError:
         ip = "0.0.0.0"
-    print(ip)
     instance.ip = ip

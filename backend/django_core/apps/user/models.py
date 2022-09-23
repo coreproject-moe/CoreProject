@@ -1,9 +1,10 @@
 from pathlib import Path
 from typing import Any
+import uuid
 
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
-from django.core.validators import MinValueValidator, RegexValidator
+from django.core.validators import MaxLengthValidator, MinValueValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -17,8 +18,8 @@ class FileField:
     # Thanks Stackoverflow
     # https://stackoverflow.com/questions/1190697/django-filefield-with-upload-to-determined-at-runtime
     @staticmethod
-    def avatar(instance: "CustomUser", filename: str) -> Path:
-        return Path("avatar", str(instance.pk), filename)
+    def avatar(*args, **kwargs) -> Path:
+        return Path("avatar", str(uuid.uuid4()))
 
 
 # Create your models here.
@@ -61,7 +62,7 @@ class CustomUser(
             "Unselect this instead of deleting accounts."
         ),
     )
-    username_discriminator = models.IntegerField(
+    username_discriminator = models.BigIntegerField(
         blank=True,
         null=True,
         help_text=(
@@ -70,11 +71,7 @@ class CustomUser(
             "If not provided a random `username_discriminator` will be selected."
         ),
         validators=[
-            RegexValidator(
-                regex=r"^(?=[\S\s]{1,%d}$)[\S\s]*" % settings.USERNAME_DISCRIMINATOR_LENGTH,
-                message="Length has to be 4",
-                code="nomatch",
-            ),
+            MaxLengthValidator(settings.USERNAME_DISCRIMINATOR_LENGTH),
             MinValueValidator(1),  # Same thing but remove negative digits
         ],
     )

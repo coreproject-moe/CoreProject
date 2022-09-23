@@ -20,7 +20,6 @@ class UserSchema(ModelSchema):
 
     @staticmethod
     def resolve_avatar(obj: CustomUser) -> str:
-        print(settings.AIOHTTP_AVATAR_URL)
         url = settings.AIOHTTP_AVATAR_URL + str(obj.pk)
         return f"{url}"
 

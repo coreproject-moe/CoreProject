@@ -15,4 +15,6 @@ class SignupSchema(ModelSchema):
             "date_joined",
             "user_permissions",
             "groups",
+            "ip",
+            "avatar",
         ]

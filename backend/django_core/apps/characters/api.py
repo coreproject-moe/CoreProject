@@ -1,12 +1,12 @@
+from core.permissions import is_superuser
 from ninja import Query, Router
 from ninja.pagination import paginate
 
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db.models import Q, QuerySet
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
-from django.contrib.auth.decorators import login_required, user_passes_test
 
-from core.permissions import is_superuser
 from .filters import CharacterFilter
 from .models import CharacterModel
 from .schemas import CharacterSchema
