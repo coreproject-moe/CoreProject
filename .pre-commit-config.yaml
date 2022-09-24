@@ -6,8 +6,8 @@ repos:
           - id: djcss
           - id: djjs
 
-    - repo: https://github.com/myint/autoflake
-      rev: "v1.5.3"
+    - repo: https://github.com/PyCQA/autoflake
+      rev: "v1.6.0"
       hooks:
           - id: autoflake
             args:
@@ -27,7 +27,7 @@ repos:
             args: ["--line-length", "92", "--target-version", "py311"]
 
     - repo: https://github.com/adamchainz/django-upgrade
-      rev: 1.9.0
+      rev: 1.10.0
       hooks:
           - id: django-upgrade
             args: [--target-version, "4.1"]
@@ -65,13 +65,13 @@ repos:
             args: [--profile, black, --ca, --cs]
 
     - repo: https://github.com/asottile/pyupgrade
-      rev: v2.37.3
+      rev: v2.38.0
       hooks:
           - id: pyupgrade
             args: [--py311-plus]
 
     - repo: https://github.com/pre-commit/mirrors-eslint
-      rev: v8.23.0
+      rev: v8.23.1
       hooks:
           - id: eslint
             args: [
