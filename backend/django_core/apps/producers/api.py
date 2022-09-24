@@ -14,7 +14,10 @@ router = Router(tags=["producers"])
 
 @router.get("", response=list[ProducerSchema])
 @paginate
-def get_producer_info(request: HttpRequest, filters: ProducerFilter = Query(...)):
+def get_producer_info(
+    request: HttpRequest,
+    filters: ProducerFilter = Query(...),
+):
     query_object = Q()
     query_dict = filters.dict(exclude_none=True)
 
@@ -34,6 +37,9 @@ def get_producer_info(request: HttpRequest, filters: ProducerFilter = Query(...)
 
 
 @router.get("/{str:producer_id}/", response=ProducerSchema)
-def get_individual_producer_info(request: HttpRequest, producer_id: str):
+def get_individual_producer_info(
+    request: HttpRequest,
+    producer_id: str,
+):
     queryset = get_object_or_404(ProducerModel, id=producer_id)
     return queryset

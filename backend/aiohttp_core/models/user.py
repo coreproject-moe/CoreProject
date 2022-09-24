@@ -5,7 +5,7 @@ from ..database import BASE
 
 
 class User(BASE):
-    __tablename__ = "user_customuser"  # Match with django
+    __tablename__ = "user"  # Match with django
     id = db.Column(db.BigInteger(), primary_key=True)
     # password
     last_login = db.Column(db.DateTime())

@@ -76,11 +76,17 @@ class CustomUser(
         ],
     )
     avatar = models.ImageField(
-        upload_to=FileField.avatar, default=None, blank=True, null=True
+        upload_to=FileField.avatar,
+        default=None,
+        blank=True,
+        null=True,
     )
     ip = models.GenericIPAddressField(null=True, blank=True)
 
-    date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
+    date_joined = models.DateTimeField(
+        _("date joined"),
+        default=timezone.now,
+    )
 
     objects = UserManager()
 
@@ -115,6 +121,7 @@ class CustomUser(
         return self.get_username_with_discriminator()
 
     class Meta:
+        db_table = "user"
         verbose_name = _("user")
         verbose_name_plural = _("users")
         unique_together = [
