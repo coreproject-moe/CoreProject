@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db.models import Q, QuerySet
 from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
+from django.contrib.postgres.search import SearchQuery, SearchVector, SearchRank
 
 from ..filters import AnimeInfoFilters
 from ..models import AnimeModel
@@ -22,15 +23,26 @@ def get_anime_info(
 ) -> QuerySet[AnimeModel]:
     query_dict = filters.dict(exclude_none=True)
     query_object = Q()
+    # 2 Step get query
+    # There wont be a performance hit if we do all().filter()
+    # https://docs.djangoproject.com/en/4.0/topics/db/queries/#retrieving-specific-objects-with-filters
+    query = AnimeModel.objects.all()
 
     # We must pop this to filter other fields on the later stage
     anime_name = query_dict.pop("anime_name", None)
     if anime_name:
-        query_object &= (
-            Q(anime_name__icontains=anime_name)
-            | Q(anime_name_japanese__icontains=anime_name)
-            | Q(anime_name_synonyms__name__icontains=anime_name)
+        _vector_ = SearchVector(
+            "anime_name",
+            "anime_name_japanese",
+            "anime_name_synonyms__name",
         )
+        _query_ = SearchQuery(anime_name)
+        query = query.annotate(
+            rank=SearchRank(
+                _vector_,
+                _query_,
+            )
+        ).order_by("-rank")
 
     # Same here but with ids
     id_lookups = [
@@ -43,7 +55,9 @@ def get_anime_info(
         if value:
             _query_ = Q()
             for position in value.split(","):
-                _query_ |= Q(**{f"{id}": int(position.strip())})
+                _query_ |= Q(
+                    **{f"{id}": int(position.strip())},
+                )
             query_object &= _query_
 
     # Many to many lookups
@@ -59,13 +73,10 @@ def get_anime_info(
         if value:
             _query_ = Q()
             for position in value.split(","):
-                _query_ &= Q(**{f"{item}__name__icontains": position.strip()})
+                _query_ &= Q(
+                    **{f"{item}__name__icontains": position.strip()},
+                )
             query_object &= _query_
-
-    # 2 Step get query
-    # There wont be a performance hit if we do all().filter()
-    # https://docs.djangoproject.com/en/4.0/topics/db/queries/#retrieving-specific-objects-with-filters
-    query = AnimeModel.objects.all()
 
     # This can be (AND: )
     # This means it is empty
@@ -79,6 +90,8 @@ def get_anime_info(
                 query_object,
             )
         )
+
+    print(query.query)
     return query
 
 

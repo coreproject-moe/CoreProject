@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.db.models import Q, QuerySet
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
+from django.contrib.postgres.search import SearchQuery, SearchVector, SearchRank
 
 from .filters import CharacterFilter
 from .models import CharacterModel
@@ -22,13 +23,18 @@ def get_character_info(
 ) -> QuerySet[CharacterModel]:
     query_object = Q()
     query_dict = filters.dict(exclude_none=True)
+    query = CharacterModel.objects.all()
 
     character_name = query_dict.pop("name", None)
     if character_name:
-        _query_ = Q()
-        for position in character_name.split(","):
-            _query_ &= Q(**{"name__icontains": position.strip()}) | Q()
-        query_object &= _query_
+        _vector_ = SearchVector("name", "about")
+        _query_ = SearchQuery(character_name)
+        query = query.annotate(
+            rank=SearchRank(
+                _vector_,
+                _query_,
+            )
+        ).order_by("-rank")
 
     # Same here but with ids
     id_lookups = [
@@ -43,8 +49,6 @@ def get_character_info(
             for position in value.split(","):
                 _query_ |= Q(**{f"{id}": int(position.strip())})
             query_object &= _query_
-
-    query = CharacterModel.objects.all()
 
     if query_object:
         query = query.filter(query_object).distinct()

@@ -21,10 +21,17 @@ class EmailOrUsernameModelBackend(ModelBackend):
         username: str | None = None,
         password: str | None = None,
         **kwargs: Any,
-    ) -> CustomUser:
+    ) -> CustomUser | None:
         user_model = CustomUser
         # So `username` is something like baseplate-admin#0001
         # we need to split to get the username and discriminator
-        return user_model.objects.get_username_with_discriminator().get(
-            Q(username_with_discriminator=username) | Q(email__iexact=username)
-        )
+        try:
+            query = user_model.objects.get_username_with_discriminator().get(
+                Q(username_with_discriminator=username) | Q(email__iexact=username)
+            )
+
+        except CustomUser.DoesNotExist:
+            query = None
+
+        finally:
+            return query
