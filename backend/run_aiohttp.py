@@ -1,4 +1,4 @@
-from aiohttp_core.server import aiohttp_app
+from butler.server import aiohttp_app
 
 from aiohttp import web
 

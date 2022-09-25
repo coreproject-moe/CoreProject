@@ -76,4 +76,3 @@ remove-all-unused-imports = true
 recursive = true
 ignore-init-module-imports = true
 expand-star-imports = true
-remove-unused-variables = true
