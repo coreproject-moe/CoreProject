@@ -36,7 +36,7 @@ plugins = ["mypy_django_plugin.main"]
 exclude = [
     "migrations"
 ]
-mypy_path = "django_core,aiohttp_core"
+mypy_path = "django_core,butler"
 namespace_packages = true
 explicit_package_bases = true
 
@@ -70,3 +70,10 @@ known_django = [
     'django',
     'djclick'
 ]
+
+[tool.autoflake]
+remove-all-unused-imports = true
+recursive = true
+ignore-init-module-imports = true
+expand-star-imports = true
+remove-unused-variables = true

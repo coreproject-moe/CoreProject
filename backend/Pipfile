@@ -52,6 +52,8 @@ django_cprofile_middleware = "*"
 black = "*"
 # Flake8
 flake8 = "*"
+# AutoFlake
+autoflake = "*"
 # Pylint
 pylint = "*"
 pylint_django = "*"
