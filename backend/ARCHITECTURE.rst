@@ -3,6 +3,9 @@
 
     *   - Codebase
         - Description
-    *   - Butler
+    *   - `Butler`_
         - AioHTTP ( Proxy | Media ) 
     
+
+
+.. _Butler: https://github.com/baseplate-admin/CoreProject/tree/master/backend/butler
