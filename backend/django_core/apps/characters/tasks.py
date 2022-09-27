@@ -1,4 +1,5 @@
 from huey.contrib.djhuey import task
+
 from django.core.management import call_command
 
 
