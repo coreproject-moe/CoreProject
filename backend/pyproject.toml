@@ -36,7 +36,7 @@ plugins = ["mypy_django_plugin.main"]
 exclude = [
     "migrations"
 ]
-mypy_path = "django_core,barista"
+mypy_path = "django_core,tsukaeru"
 namespace_packages = true
 explicit_package_bases = true
 

@@ -68,10 +68,10 @@ python_version = "3.10"
 [scripts]
 ## Dev Servers
 dev_django = "python ./django_core/manage.py runserver  0.0.0.0:8003"
-dev_aiohttp = 'adev runserver ./barista/server.py --app-factory=aiohttp_app'
+dev_aiohttp = 'adev runserver ./tsukaeru/server.py --app-factory=aiohttp_app'
 ## Prod servers
 prod_uvicorn = "gunicorn django_core/core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
-prod_aiohttp = "gunicorn barista.server:aiohttp_app -w 4 --bind localhost:8001 --worker-class aiohttp.GunicornUVLoopWebWorker" # We want to run this without any proxy or anything
+prod_aiohttp = "gunicorn tsukaeru.server:aiohttp_app -w 4 --bind localhost:8001 --worker-class aiohttp.GunicornUVLoopWebWorker" # We want to run this without any proxy or anything
 ##  Migrations
 sync = "python ./django_core/manage.py migrate"
 mksync = "python ./django_core/manage.py makemigrations"
