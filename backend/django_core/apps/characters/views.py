@@ -1,10 +1,9 @@
-import json
-from .tasks import call_command
-from django.shortcuts import render
-from .forms import CharacterManagementForm
-
 from django.http import JsonResponse
+from django.shortcuts import render
+
+from .forms import CharacterManagementForm
 from .models import CharacterLogModel
+from .tasks import call_command
 
 
 async def manage_characters(request):
