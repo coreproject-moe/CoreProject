@@ -8,7 +8,7 @@ from ..database import BASE
 class User(BASE):
     __tablename__ = "user"  # Match with django
     id = db.Column(db.BigInteger(), primary_key=True)
-    # password
+    # password = db.Column(db.String())
     last_login = db.Column(db.DateTime())
     is_superuser = db.Column(db.Boolean())
     username = db.Column(db.String(150))
