@@ -4,8 +4,8 @@
     *   - Codebase
         - Description
     *   - `Tsukaeru`_
-        - AioHTTP ( Proxy | Media ) 
-    
+        - AioHTTP ( Proxy | Media )
+
 
 
 .. _Tsukaeru: https://github.com/baseplate-admin/CoreProject/tree/master/backend/tsukaeru

@@ -1,4 +1,5 @@
 import asyncio
+from collections.abc import Callable
 from datetime import datetime, timedelta
 import functools
 from io import BytesIO
@@ -7,7 +8,6 @@ import os
 from pathlib import Path
 import textwrap
 from typing import Any, TypeVar, cast
-from collections.abc import Callable
 
 from asgiref.sync import sync_to_async
 from core import settings as base_settings
