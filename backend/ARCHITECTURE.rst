@@ -3,9 +3,9 @@
 
     *   - Codebase
         - Description
-    *   - `Butler`_
+    *   - `Barista`_
         - AioHTTP ( Proxy | Media ) 
     
 
 
-.. _Butler: https://github.com/baseplate-admin/CoreProject/tree/master/backend/butler
+.. _Barista: https://github.com/baseplate-admin/CoreProject/tree/master/backend/butler

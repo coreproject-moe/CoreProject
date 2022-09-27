@@ -55,6 +55,7 @@ class CustomUserAdmin(DjangoUserAdmin):
                     "ip",
                     "email",
                     "avatar",
+                    "avatar_provider",
                 )
             },
         ),

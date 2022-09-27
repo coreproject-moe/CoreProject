@@ -81,8 +81,11 @@ class CustomUser(
         blank=True,
         null=True,
     )
-    ip = models.GenericIPAddressField(null=True, blank=True)
+    avatar_provider = models.URLField(
+        default="https://seccdn.libravatar.org/avatar/{EMAIL}?s=512"
+    )
 
+    ip = models.GenericIPAddressField(null=True, blank=True)
     date_joined = models.DateTimeField(
         _("date joined"),
         default=timezone.now,

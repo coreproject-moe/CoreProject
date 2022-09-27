@@ -18,5 +18,6 @@ class User(BASE):
     is_active = db.Column(db.Boolean())
     username_discriminator = db.Column(db.Integer())
     avatar = db.Column(db.String(150))
+    avatar_provider = db.Column(db.String())
     ip = db.Column(INET())
     date_joined = db.Column(db.DateTime())

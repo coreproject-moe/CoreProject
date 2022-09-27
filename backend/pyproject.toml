@@ -36,7 +36,7 @@ plugins = ["mypy_django_plugin.main"]
 exclude = [
     "migrations"
 ]
-mypy_path = "django_core,butler"
+mypy_path = "django_core,barista"
 namespace_packages = true
 explicit_package_bases = true
 

@@ -1,4 +1,4 @@
-from butler.server import aiohttp_app
+from barista.server import aiohttp_app
 
 from aiohttp import web
 
