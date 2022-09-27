@@ -6,7 +6,8 @@ import json
 import os
 from pathlib import Path
 import textwrap
-from typing import Any, Callable, TypeVar, cast
+from typing import Any, TypeVar, cast
+from collections.abc import Callable
 
 from asgiref.sync import sync_to_async
 from core import settings as base_settings
@@ -482,7 +483,7 @@ async def populate_database(
             " | "
             f"""`starting_number` {
                 starting_number - 1
-                if jikan_data 
+                if jikan_data
                 else starting_number
             }"""
             " | "

@@ -3,10 +3,10 @@ from ninja import Query, Router
 from ninja.pagination import paginate
 
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.db.models import Q, QuerySet
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
-from django.contrib.postgres.search import SearchQuery, SearchVector, SearchRank
 
 from .filters import CharacterFilter
 from .models import CharacterModel

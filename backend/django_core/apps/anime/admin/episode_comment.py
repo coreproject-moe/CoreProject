@@ -20,7 +20,7 @@ class EpisodeCommentAdmin(admin.ModelAdmin):
         request: HttpRequest,
         queryset: QuerySet[EpisodeCommentModel],
         search_term: str,
-    ) -> Tuple[QuerySet[EpisodeCommentModel], bool]:
+    ) -> tuple[QuerySet[EpisodeCommentModel], bool]:
         queryset, may_have_duplicates = super().get_search_results(
             request,
             queryset,
