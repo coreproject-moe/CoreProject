@@ -3,11 +3,9 @@ from collections.abc import AsyncGenerator
 import jinja2
 
 from aiohttp import web
-import aiohttp_jinja2
-
-
 from aiohttp_client_cache.backends.redis import RedisBackend
 from aiohttp_client_cache.session import CachedSession
+import aiohttp_jinja2
 
 from .database import SessionLocal, engine
 from .settings import TEMPLATE_DIRS
