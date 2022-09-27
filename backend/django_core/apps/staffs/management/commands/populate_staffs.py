@@ -80,6 +80,7 @@ async def command() -> None:
         client_session=CachedSession(
             cache=RedisBackend(
                 CACHE_NAME,
+                expire_after=settings.CACHE_MIDDLEWARE_SECONDS,
             )
         ),
         retry_options=ExponentialRetry(

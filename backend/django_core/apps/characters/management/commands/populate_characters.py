@@ -76,10 +76,11 @@ def make_sync(func: FuncT) -> FuncT:
 @click.command()
 @make_sync
 async def command() -> None:
-    retry_client = RetryClient(
-        client_session=CachedSession(
+    retry_client = RetryClient(  # aiohttp-retry
+        client_session=CachedSession(  # aiohttp-client-cache
             cache=RedisBackend(
                 CACHE_NAME,
+                expire_after=settings.CACHE_MIDDLEWARE_SECONDS,
             )
         ),
         retry_options=ExponentialRetry(

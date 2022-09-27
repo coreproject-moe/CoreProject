@@ -1,5 +1,6 @@
 import sqlalchemy as db
-from sqlalchemy.dialects.postgresql import INET
+
+# from sqlalchemy.dialects.postgresql import INET
 
 from ..database import BASE
 
@@ -19,5 +20,5 @@ class User(BASE):
     username_discriminator = db.Column(db.Integer())
     avatar = db.Column(db.String(150))
     avatar_provider = db.Column(db.String())
-    ip = db.Column(INET())
+    # ip = db.Column(INET())
     date_joined = db.Column(db.DateTime())

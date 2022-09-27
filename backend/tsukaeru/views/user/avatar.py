@@ -1,6 +1,7 @@
 import hashlib
 from typing import Any
 
+
 from sqlalchemy.ext.asyncio import AsyncSession
 from yarl import URL
 
@@ -20,10 +21,11 @@ async def avatar(
 ) -> web.StreamResponse | web.FileResponse | web.Response:
     response: web.StreamResponse | web.FileResponse | web.Response
 
-    session = request.app["db"]
+    db_session = request.app["db"]
+    client_session: aiohttp.ClientSession = request.app["client_session"]
     user_id = request.match_info.get("user_id")
 
-    user_model: AsyncSession = await session.get(
+    user_model: AsyncSession = await db_session.get(
         User,
         {"id": int(user_id)},
     )
@@ -52,13 +54,13 @@ async def avatar(
                 )
             ),
         )
-        async with aiohttp.ClientSession(raise_for_status=True) as session:
-            async with session.get(url, allow_redirects=True) as r:
-                response.content_type = r.headers["content-type"]
-                await response.prepare(request)
 
-                async for line in r.content:
-                    await response.write(line)
+        async with client_session.get(url, allow_redirects=True) as r:
+            response.content_type = r.headers["content-type"]
+            await response.prepare(request)
+
+            async for line in r.content:
+                await response.write(line)
 
     # Lets confuse peoples
     return response
