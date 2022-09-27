@@ -20,7 +20,7 @@ class EpisodeTimestampAdmin(admin.ModelAdmin):
         request: HttpRequest,
         queryset: QuerySet[EpisodeTimestampModel],
         search_term: str,
-    ) -> Tuple[QuerySet[EpisodeTimestampModel], bool]:
+    ) -> tuple[QuerySet[EpisodeTimestampModel], bool]:
         queryset, may_have_duplicates = super().get_search_results(
             request,
             queryset,
