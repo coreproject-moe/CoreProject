@@ -1,5 +1,3 @@
-from collections.abc import AsyncGenerator
-
 import jinja2
 
 from aiohttp import web
@@ -29,7 +27,7 @@ async def session_context(app: web.Application) -> None:
 
 async def db_context(
     app: web.Application,
-) -> AsyncGenerator[None, None]:
+) -> None:
     app["db"] = SessionLocal(bind=engine)
     yield
     await engine.dispose()

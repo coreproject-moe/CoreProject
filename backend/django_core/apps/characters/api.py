@@ -30,11 +30,11 @@ def get_character_info(
         _vector_ = SearchVector("name", "about")
         _query_ = SearchQuery(character_name)
         query = query.annotate(
-            rank=SearchRank(
+            character_rank=SearchRank(
                 _vector_,
                 _query_,
             )
-        ).order_by("-rank")
+        ).order_by("-character_rank")
 
     # Same here but with ids
     id_lookups = [

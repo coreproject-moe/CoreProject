@@ -38,11 +38,11 @@ def get_anime_info(
         )
         _query_ = SearchQuery(anime_name)
         query = query.annotate(
-            rank=SearchRank(
+            anime_name_rank=SearchRank(
                 _vector_,
                 _query_,
             )
-        ).order_by("-rank")
+        ).order_by("-anime_name_rank")
 
     # Same here but with ids
     id_lookups = [
