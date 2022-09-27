@@ -25,7 +25,7 @@ from aiohttp_client_cache.backends.redis import RedisBackend
 from aiohttp_client_cache.session import CachedSession
 from aiohttp_retry import ExponentialRetry, RetryClient
 
-from ...models import CharacterModel
+from ...models import CharacterModel, CharacterLogModel
 
 try:
     import uvloop
@@ -40,10 +40,10 @@ CHARACTER_LOCK_FILE_NAME = Path(settings.BASE_DIR, "Character.lock")
 CACHE_NAME: base_settings = settings.BUCKET_NAME
 RETRY_STATUSES: base_settings = settings.REQUEST_STATUS_CODES_TO_RETRY
 
+DATABASE_ID: int | None = None
 JIKAN: dict[int, list[int]] = {}
 KITSU: dict[str, list[dict[int, str]]] = {}
 ANILIST: dict[str, list[dict[int, str]]] = {}
-
 
 SUCCESS_LIST = []
 WARNING_LIST = []
@@ -74,8 +74,13 @@ def make_sync(func: FuncT) -> FuncT:
 
 
 @click.command()
+@click.argument("no_input", required=False, default=False)
+@click.argument("headless", required=False, default=False)
+@click.argument("reset", required=False, default=False)
 @make_sync
-async def command() -> None:
+async def command(no_input: bool, headless: bool, reset: bool) -> None:
+    global JIKAN, KITSU, ANILIST, DATABASE_ID
+
     retry_client = RetryClient(  # aiohttp-retry
         client_session=CachedSession(  # aiohttp-client-cache
             cache=RedisBackend(
@@ -96,37 +101,57 @@ async def command() -> None:
     character_number = 1
     ending_number: int = await get_ending_number(session)
 
-    # Load JSON file and get data from it
-    if os.path.exists(CHARACTER_LOCK_FILE_NAME):
-        click.echo("Lock file found. Do you want to use it?")
+    if headless:
+        database: CharacterLogModel = await CharacterLogModel.objects.alast()
+        database_starting_number = database.log_dictionary.get("STARTING_NUMBER")
 
-        # While loop to ask for data
-        while True:
-            answer = input("\r").lower()
+        # get the last item from database and get data from it
+        if not database_starting_number == ending_number and not reset:
+            data = database.log_dictionary
+            starting_number = int(data.get("STARTING_NUMBER", starting_number))
+            character_number = int(data.get("CHARACTER_NUMBER", character_number))
 
-            if "y" in answer:
-                data = json.load(open(CHARACTER_LOCK_FILE_NAME, encoding="utf-8"))
-                starting_number = int(data.get("STARTING_NUMBER", starting_number))
-                character_number = int(data.get("CHARACTER_NUMBER", character_number))
+            JIKAN = data.get("JIKAN", JIKAN)
+            KITSU = data.get("KITSU", KITSU)
+            ANILIST = data.get("ANILIST", ANILIST)
 
-                # Load Lists
-                global JIKAN, KITSU, ANILIST
-                JIKAN = data.get("JIKAN", JIKAN)
-                KITSU = data.get("KITSU", KITSU)
-                ANILIST = data.get("ANILIST", ANILIST)
+        else:
+            database = await CharacterLogModel.objects.acreate(
+                log_dictionary={},
+                logs="",
+            )
 
-                break
+        DATABASE_ID = database.pk
 
-            elif "n" in answer:
-                break
+    else:
+        # Load JSON file and get data from it
+        if os.path.exists(CHARACTER_LOCK_FILE_NAME) and no_input:
+            click.echo("Lock file found. Do you want to use it?")
+
+            # While loop to ask for data
+            while True:
+                answer = input("\r").lower()
+
+                if "y" in answer:
+                    data = json.load(open(CHARACTER_LOCK_FILE_NAME, encoding="utf-8"))
+                    starting_number = int(data.get("STARTING_NUMBER", starting_number))
+                    character_number = int(data.get("CHARACTER_NUMBER", character_number))
+
+                    JIKAN = data.get("JIKAN", JIKAN)
+                    KITSU = data.get("KITSU", KITSU)
+                    ANILIST = data.get("ANILIST", ANILIST)
+
+                    break
+
+                elif "n" in answer:
+                    break
 
     # Everything is new
     if starting_number == 1:
-        await CharacterModel.objects.all().adelete()
-
         # Reset SQL Sequence
         @sync_to_async
         def reset_sql_sequence() -> None:
+            CharacterModel.objects.all().delete()
             sequence_sql = connection.ops.sequence_reset_sql(
                 no_style,
                 [
@@ -191,6 +216,7 @@ async def command() -> None:
         starting_number=starting_number,
         character_number=character_number,
         ending_number=ending_number,
+        headless=headless,
     )
 
     await session.close()
@@ -413,6 +439,7 @@ async def populate_database(
     character_number: int,
     starting_number: int,
     ending_number: int,
+    headless: bool,
 ) -> None:
     while starting_number <= ending_number:
         jikan_data = await get_character_data_from_jikan(
@@ -456,7 +483,7 @@ async def populate_database(
             # Add 1 to `starting_number` on every successful request
             starting_number += 1
 
-        click.echo(
+        message = (
             f"Requested `character_info` for {character_number}"
             " | "
             f"""`starting_number` {
@@ -476,23 +503,37 @@ async def populate_database(
                 )
             }]"""
         )
-
         # Reset the list
         SUCCESS_LIST.clear()
         ERROR_LIST.clear()
         WARNING_LIST.clear()
 
         character_number += 1
+        log_dictionary = {
+            "CHARACTER_NUMBER": character_number,
+            "STARTING_NUMBER": starting_number,
+            "JIKAN": JIKAN,
+            "KITSU": KITSU,
+            "ANILIST": ANILIST,
+        }
+
+        if headless:
+
+            @sync_to_async
+            def save_to_db():
+                database = CharacterLogModel.objects.get(pk=DATABASE_ID)
+                database.log_dictionary = log_dictionary
+                database.logs += "\n" + message
+                database.save()
+
+            await save_to_db()
 
         # Log the data to a `.lock` file
-        json.dump(
-            {
-                "CHARACTER_NUMBER": character_number,
-                "STARTING_NUMBER": starting_number,
-                "JIKAN": JIKAN,
-                "KITSU": KITSU,
-                "ANILIST": ANILIST,
-            },
-            open(CHARACTER_LOCK_FILE_NAME, "w", encoding="utf-8"),
-            indent=2,
-        )
+        else:
+            json.dump(
+                log_dictionary,
+                open(CHARACTER_LOCK_FILE_NAME, "w", encoding="utf-8"),
+                indent=2,
+            )
+
+        click.secho(message)

@@ -38,3 +38,8 @@ class CharacterModel(models.Model):
     class Meta:
         verbose_name = "Character"
         verbose_name_plural = "Characters"
+
+
+class CharacterLogModel(models.Model):
+    log_dictionary = models.JSONField()
+    logs = models.TextField()
