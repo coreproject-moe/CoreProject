@@ -5,7 +5,6 @@ from ..database import BASE
 # from sqlalchemy.dialects.postgresql import INET
 
 
-
 class User(BASE):
     __tablename__ = "user"  # Match with django
     id = db.Column(db.BigInteger(), primary_key=True)
