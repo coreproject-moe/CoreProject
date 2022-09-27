@@ -103,7 +103,11 @@ async def command(no_input: bool, headless: bool, reset: bool) -> None:
 
     if headless:
         database: CharacterLogModel = await CharacterLogModel.objects.alast()
-        database_starting_number = database.log_dictionary.get("STARTING_NUMBER")
+        try:
+            database_starting_number = database.log_dictionary.get("STARTING_NUMBER")
+
+        except AttributeError:
+            database_starting_number = None
 
         # get the last item from database and get data from it
         if not database_starting_number == ending_number and not reset:
