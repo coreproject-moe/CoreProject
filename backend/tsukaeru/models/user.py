@@ -1,8 +1,9 @@
 import sqlalchemy as db
 
+from ..database import BASE
+
 # from sqlalchemy.dialects.postgresql import INET
 
-from ..database import BASE
 
 
 class User(BASE):

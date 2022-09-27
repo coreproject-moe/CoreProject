@@ -1,7 +1,6 @@
 import hashlib
 from typing import Any
 
-
 from sqlalchemy.ext.asyncio import AsyncSession
 from yarl import URL
 
