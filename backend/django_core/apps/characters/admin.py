@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import CharacterModel, CharacterLogModel
+from .models import CharacterLogModel, CharacterModel
 
 # Register your models here.
 
