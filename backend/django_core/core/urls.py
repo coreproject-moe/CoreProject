@@ -41,7 +41,7 @@ urlpatterns = [
     #   HTTP
     # =========
     path("user/", include("apps.user.urls")),
-    path("characters/", include("apps.characters.urls")),
+    path("management/", include("apps.management.urls")),
     #   Api
     # ========
     path("api/v1/", api.urls),

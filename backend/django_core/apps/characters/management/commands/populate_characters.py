@@ -25,7 +25,8 @@ from aiohttp_client_cache.backends.redis import RedisBackend
 from aiohttp_client_cache.session import CachedSession
 from aiohttp_retry import ExponentialRetry, RetryClient
 
-from ...models import CharacterLogModel, CharacterModel
+from apps.management.models import CharacterLogModel
+from ...models import  CharacterModel
 
 try:
     import uvloop
