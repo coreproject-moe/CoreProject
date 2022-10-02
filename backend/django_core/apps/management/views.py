@@ -15,7 +15,14 @@ def manage_characters_sync_call(request: HttpRequest) -> HttpResponse:
         if form.is_valid():
             call_character_management_command(form.cleaned_data["reset"])
 
-    return render(request, "management/character.html", {"form": form, "models": models})
+    return render(
+        request,
+        "management/character.html",
+        context={
+            "form": form,
+            "models": models,
+        },
+    )
 
 
 async def manage_individual_characeters_sync_call(request, id: int):
@@ -25,7 +32,7 @@ async def manage_individual_characeters_sync_call(request, id: int):
 async def get_individual_character_sync_call_log(request, id: int) -> JsonResponse:
     database = await CharacterLogModel.objects.aget(pk=id)
     return JsonResponse(
-        {
+        context={
             "logs": database.logs,
             "log_dictionary": database.log_dictionary,
         },
