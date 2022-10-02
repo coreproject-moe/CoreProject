@@ -882,6 +882,7 @@
             ],
             "version": "==3.8.0"
         },
+
         "packaging": {
             "hashes": [
                 "sha256:dd47c42927d89ab911e606518907cc2d3a1f38bbd026385970643f9c5b8ecfeb",
@@ -1089,14 +1090,6 @@
             ],
             "version": "==1.5.0"
         },
-        "pyparsing": {
-            "hashes": [
-                "sha256:2b020ecf7d21b687f219b71ecad3631f644a47f01403fa1d1036b0c6416d70fb",
-                "sha256:5026bae9a10eeaefb61dab2f09052b9f4307d44aee4eda64b309723d8d206bbc"
-            ],
-            "markers": "python_full_version >= '3.6.8'",
-            "version": "==3.0.9"
-        },
         "pyrate-limiter": {
             "extras": ["redis"],
             "hashes": [
@@ -1166,11 +1159,11 @@
         },
         "redis": {
             "hashes": [
-                "sha256:0b82ad83f37b89b25cca2d18592eee379dabdfe8550e80b34d852acf2d9fb015",
-                "sha256:b538a9ab71441ce5aff06552a6e0383c9720c29d7073082bd691a0b3dcbb7ac3"
+                "sha256:cebdedc740a3f8dc5814e6452fa36a92baf4d112feeacb3cf69d9b41dc273a63",
+                "sha256:fb6c1f7b19ba3241e7d2ec0208703be0504882cae6e4a757566261b67ebc844f"
             ],
             "index": "pypi",
-            "version": "==4.4.0rc1"
+            "version": "==4.4.0rc2"
         },
         "setuptools": {
             "hashes": [
