@@ -79,8 +79,7 @@ INSTALLED_APPS = [
     "apps.producers",
     "apps.studios",
     "apps.staffs",
-    'apps.management'
-
+    "apps.management",
 ]
 
 # Debug Toolbar Add

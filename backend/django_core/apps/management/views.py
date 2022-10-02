@@ -1,9 +1,10 @@
 # Create your views here.
 from apps.characters.tasks import call_character_management_command
-from django.shortcuts import render
-from .forms import CharacterManagementForm
 
-from django.http import JsonResponse, HttpResponse, HttpRequest
+from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.shortcuts import render
+
+from .forms import CharacterManagementForm
 from .models import CharacterLogModel
 
 

@@ -9,6 +9,7 @@ from pathlib import Path
 import textwrap
 from typing import Any, TypeVar, cast
 
+from apps.management.models import CharacterLogModel
 from asgiref.sync import sync_to_async
 from core import settings as base_settings
 from pyrate_limiter import Duration, Limiter, RedisBucket, RequestRate
@@ -25,9 +26,7 @@ from aiohttp_client_cache.backends.redis import RedisBackend
 from aiohttp_client_cache.session import CachedSession
 from aiohttp_retry import ExponentialRetry, RetryClient
 
-from apps.management.models import CharacterLogModel
-from ...models import  CharacterModel
-
+from ...models import CharacterModel
 
 try:
     import uvloop
