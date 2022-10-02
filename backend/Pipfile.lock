@@ -882,6 +882,15 @@
             ],
             "version": "==3.8.0"
         },
+
+        "packaging": {
+            "hashes": [
+                "sha256:dd47c42927d89ab911e606518907cc2d3a1f38bbd026385970643f9c5b8ecfeb",
+                "sha256:ef103e05f519cdc783ae24ea4e2e0f508a9c99b2d4969652eed6a2e1ea5bd522"
+            ],
+            "markers": "python_full_version >= '3.6.0'",
+            "version": "==21.3"
+        },
         "pillow": {
             "hashes": [
                 "sha256:0030fdbd926fb85844b8b92e2f9449ba89607231d3dd597a21ae72dc7fe26927",
@@ -1753,11 +1762,11 @@
         },
         "django-dbbackup": {
             "hashes": [
-                "sha256:5762039354f2f9c996c008a9eaf3a8e59aa809a1ea594c07d1de5a5e4cd36fa3",
-                "sha256:c2f17877f44ce0d2315e5c3b2ac5f39f1fdf9be49b7fcd0c96e389ddb19ed141"
+                "sha256:1874d684abc22260972a67668a6db3331b24d7e1e8af89eaffdcd61eb27dbc2a",
+                "sha256:3ccde831f1a8268fb031b37a8e7e2de3abb556623023af1e859cd7104c09ea2a"
             ],
             "index": "pypi",
-            "version": "==4.0.1"
+            "version": "==4.0.2"
         },
         "django-debug-toolbar": {
             "hashes": [
