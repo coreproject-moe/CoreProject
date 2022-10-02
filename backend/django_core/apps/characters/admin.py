@@ -5,3 +5,4 @@ from .models import CharacterModel
 # Register your models here.
 
 admin.site.register([CharacterModel])
+

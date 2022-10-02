@@ -80,6 +80,7 @@ INSTALLED_APPS = [
     "apps.studios",
     "apps.staffs",
     'apps.management'
+
 ]
 
 # Debug Toolbar Add
