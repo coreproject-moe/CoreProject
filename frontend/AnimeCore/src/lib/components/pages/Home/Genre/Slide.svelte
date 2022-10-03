@@ -14,15 +14,16 @@
 </script>
 
 <!-- Modals  -->
-<GenreModal />
+<GenreModal id="genre-modal" />
 
 <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
     <div class="hero-content text-center p-0">
-        <div>
+        <div class="flex lg:block flex-col">
             <AutoComplete />
-
             {#if mobile}
-                <label for="my-modal-6" class="btn modal-button">open modal</label>
+                <label for="genre-modal" class="btn modal-button mt-6 flex gap-5">
+                    or search by genres <ChevronUpDown color="#D8D8D8" height={18} width={18} />
+                </label>
             {:else}
                 <div class="divider w-80 mx-auto mt-12 mb-6 before:bg-white after:bg-white">
                     or search by genres

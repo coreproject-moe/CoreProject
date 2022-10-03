@@ -1,5 +1,19 @@
-<input type="checkbox" id="my-modal-6" class="modal-toggle" />
-<div class="modal modal-bottom">
+<script lang="ts">
+    import { timer as timerStore } from "$store/Timer";
+    let value: boolean;
+
+    $: switch (value) {
+        case true:
+            $timerStore = "pause";
+            break;
+        case false:
+            $timerStore = "start";
+            break;
+    }
+</script>
+
+<input bind:checked={value} type="checkbox" id={$$props.id} class="modal-toggle" />
+<label class="modal modal-bottom" for={$$props.id}>
     <div class="modal-box">
         <h3 class="font-bold text-lg">Congratulations random Internet user!</h3>
         <p class="py-4">
@@ -7,7 +21,7 @@
             free!
         </p>
         <div class="modal-action">
-            <label for="my-modal-6" class="btn">Yay!</label>
+            <label for={$$props.id} class="btn">Yay!</label>
         </div>
     </div>
-</div>
+</label>
