@@ -1,4 +1,5 @@
 <script lang="ts">
+    import GenreModal from "$components/modals/Genre.svelte";
     import badgeData from "$data/components/badge_data.json";
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import ChevronUpDown from "$icons/Chevron-Up-Down.svelte";
@@ -12,35 +13,16 @@
     let dropdownGenreElementActive = false;
 </script>
 
+<!-- Modals  -->
+<GenreModal />
+
 <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
     <div class="hero-content text-center p-0">
         <div>
             <AutoComplete />
 
             {#if mobile}
-                <div
-                    class="dropdown mt-5 dropdown-top {dropdownGenreElementActive
-                        ? 'dropdown-open'
-                        : ''}"
-                >
-                    <div
-                        tabindex="0"
-                        class="m-1 btn normal-case"
-                        on:click={() => {
-                            dropdownGenreElementActive = !dropdownGenreElementActive;
-                        }}
-                    >
-                        or search by genres <ChevronUpDown color="#D8D8D8" height={18} width={18} />
-                    </div>
-                    <ul
-                        tabindex="0"
-                        class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 items-center inset-x-0 mx-auto pt-6"
-                    >
-                        {#each badgeData as item}
-                            <li>{item.name}</li>
-                        {/each}
-                    </ul>
-                </div>
+                <label for="my-modal-6" class="btn modal-button">open modal</label>
             {:else}
                 <div class="divider w-80 mx-auto mt-12 mb-6 before:bg-white after:bg-white">
                     or search by genres
