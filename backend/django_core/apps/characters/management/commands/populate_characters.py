@@ -1,4 +1,5 @@
 import asyncio
+import math
 from collections.abc import Callable
 from datetime import datetime, timedelta
 import functools
@@ -40,6 +41,8 @@ CHARACTER_LOCK_FILE_NAME = Path(settings.BASE_DIR, "Character.lock")
 CACHE_NAME: base_settings = settings.BUCKET_NAME
 RETRY_STATUSES: base_settings = settings.REQUEST_STATUS_CODES_TO_RETRY
 
+EXECUTION_TIME: int = 0
+
 JIKAN: dict[int, list[int]] = {}
 KITSU: dict[str, list[dict[int, str]]] = {}
 ANILIST: dict[str, list[dict[int, str]]] = {}
@@ -76,7 +79,7 @@ def make_sync(func: FuncT) -> FuncT:
 @click.argument("no_input", required=False, default=False)
 @make_sync
 async def command(no_input: bool) -> None:
-    global JIKAN, KITSU, ANILIST, DATABASE_ID
+    global JIKAN, KITSU, ANILIST, DATABASE_ID, EXECUTION_TIME
 
     retry_client = RetryClient(  # aiohttp-retry
         client_session=CachedSession(  # aiohttp-client-cache
@@ -99,7 +102,7 @@ async def command(no_input: bool) -> None:
     ending_number: int = await get_ending_number(session)
 
     # Load JSON file and get data from it
-    if os.path.exists(CHARACTER_LOCK_FILE_NAME) and no_input:
+    if os.path.exists(CHARACTER_LOCK_FILE_NAME) and not no_input:
         click.echo("Lock file found. Do you want to use it?")
 
         # While loop to ask for data
@@ -114,6 +117,7 @@ async def command(no_input: bool) -> None:
                 JIKAN = data.get("JIKAN", JIKAN)
                 KITSU = data.get("KITSU", KITSU)
                 ANILIST = data.get("ANILIST", ANILIST)
+                EXECUTION_TIME = data.get("EXECUTION_TIME", EXECUTION_TIME)
 
                 break
 
@@ -413,7 +417,12 @@ async def populate_database(
     starting_number: int,
     ending_number: int,
 ) -> None:
+    global EXECUTION_TIME
+
     while starting_number <= ending_number:
+        start_time = datetime.now()
+
+        # Actual work is being done here
         jikan_data = await get_character_data_from_jikan(
             character_number=character_number,
             session=session,
@@ -455,7 +464,13 @@ async def populate_database(
             # Add 1 to `starting_number` on every successful request
             starting_number += 1
 
+        # Profile Execution of this function
+        end_time = datetime.now()
+        EXECUTION_TIME += (end_time - start_time).total_seconds()
+
         message = (
+            f"[{round(EXECUTION_TIME, 2)}]"
+            " "
             f"Requested `character_info` for {character_number}"
             " | "
             f"""`starting_number` {
@@ -487,6 +502,7 @@ async def populate_database(
             "JIKAN": JIKAN,
             "KITSU": KITSU,
             "ANILIST": ANILIST,
+            "EXECUTION_TIME": EXECUTION_TIME,
         }
 
         # Log the data to a `.lock` file
