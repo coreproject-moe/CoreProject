@@ -1,17 +1,19 @@
+from collections.abc import Generator
 import hashlib
+from io import BytesIO
 import mimetypes
 from typing import IO
-from collections.abc import Generator
 
-from django.contrib.auth import get_user_model
-from django.http import HttpRequest, StreamingHttpResponse, Http404
-import requests
-from requests.utils import default_user_agent
-
-from .models import CustomUser
 from yarl import URL
 
-SESSION = requests.session()
+from django.conf import settings
+from django.contrib.auth import get_user_model
+from django.http import Http404, HttpRequest, HttpResponse, StreamingHttpResponse
+
+from aiohttp_client_cache import CachedSession, RedisBackend
+
+from .models import CustomUser
+
 CHUNK_SIZE = 512  # 512 bytes
 
 
@@ -34,7 +36,7 @@ def read_files_in_chunks(
 async def avatar_view(
     request: HttpRequest,
     user_id: int,
-) -> StreamingHttpResponse:
+) -> StreamingHttpResponse | HttpResponse:
     response: StreamingHttpResponse
 
     try:
@@ -63,19 +65,18 @@ async def avatar_view(
                 )
             ),
         )
-
-        res = SESSION.get(
-            url,
-            stream=True,
-            params=dict(request.GET),
-        )
-
-        response = StreamingHttpResponse(
-            streaming_content=res.iter_content(
-                CHUNK_SIZE,
+        async with CachedSession(  # aiohttp-client-cache
+            cache=RedisBackend(
+                "avatar",
+                expire_after=settings.CACHE_MIDDLEWARE_SECONDS,
             )
-        )
-        response["content-type"] = res.headers["content-type"]
-        response["server"] = default_user_agent()
+        ) as session:
+            async with session.get(url, allow_redirects=True) as r:
+                response = HttpResponse(
+                    BytesIO(await r.read()),
+                    headers={
+                        "content-type": r.headers["content-type"],
+                    },
+                )
 
     return response
