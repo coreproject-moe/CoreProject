@@ -1,9 +1,9 @@
 from ninja import ModelSchema
 from pydantic import AnyUrl
 
-from django.conf import settings
 from django.contrib.auth import get_user_model
-
+from django.urls import reverse_lazy
+from django.conf import settings
 from ..models import CustomUser
 
 
@@ -20,8 +20,13 @@ class UserSchema(ModelSchema):
 
     @staticmethod
     def resolve_avatar(obj: CustomUser) -> str:
-        url = settings.AIOHTTP_AVATAR_URL + str(obj.pk)
-        return f"{url}"
+        url = reverse_lazy(
+            "avatar_view",
+            kwargs={
+                "user_id": obj.id,
+            },
+        )
+        return f"{settings.HOSTNAME}{url}"
 
 
 # Extra Imports

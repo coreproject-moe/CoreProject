@@ -7,6 +7,7 @@ from django.shortcuts import resolve_url
 from ..models import AnimeModel
 from ..schemas.anime_synonym import AnimeSynonymSchema
 
+## Observations from getting request from stack trace
 # So initial ovservation is that our code call was reduced from
 #  1.     0.256s -> 0.020s ( Normal LRU Cache / Settings.py | Not persistant | Not Applicable for our use case / If we want to have a static url )
 #  2.     0.256s -> 0.025s ( redis-lru / But it restarts on interpreter shutdown | Saves to Redis | Not applicable for our use case )
