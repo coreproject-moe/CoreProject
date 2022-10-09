@@ -1,15 +1,18 @@
+from collections.abc import Generator
 import hashlib
 from io import BytesIO
 import mimetypes
-from django.conf import settings
 from typing import IO
-from collections.abc import Generator
-from aiohttp_client_cache import CachedSession, RedisBackend
+
+from yarl import URL
+
+from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.http import HttpRequest, StreamingHttpResponse, Http404, HttpResponse
+from django.http import Http404, HttpRequest, HttpResponse, StreamingHttpResponse
+
+from aiohttp_client_cache import CachedSession, RedisBackend
 
 from .models import CustomUser
-from yarl import URL
 
 CHUNK_SIZE = 512  # 512 bytes
 
