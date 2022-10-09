@@ -10,7 +10,8 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.http import Http404, HttpRequest, HttpResponse, StreamingHttpResponse
 
-from aiohttp_client_cache import CachedSession, RedisBackend
+from aiohttp_client_cache.session import CachedSession
+from aiohttp_client_cache.backends import RedisBackend
 
 from .models import CustomUser
 
@@ -65,7 +66,7 @@ async def avatar_view(
                 )
             ),
         )
-        async with CachedSession(  # aiohttp-client-cache
+        async with CachedSession(
             cache=RedisBackend(
                 "avatar",
                 expire_after=settings.CACHE_MIDDLEWARE_SECONDS,
