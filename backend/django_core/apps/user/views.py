@@ -10,8 +10,8 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.http import Http404, HttpRequest, HttpResponse, StreamingHttpResponse
 
-from aiohttp_client_cache.session import CachedSession
 from aiohttp_client_cache.backends import RedisBackend
+from aiohttp_client_cache.session import CachedSession
 
 from .models import CustomUser
 
