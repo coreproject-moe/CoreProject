@@ -1,5 +1,5 @@
 <script lang="ts">
-    export let id = "nabar__modal";
+    export let id: string;
     import { timer as timerStore } from "$store/Timer";
     let value: boolean;
 

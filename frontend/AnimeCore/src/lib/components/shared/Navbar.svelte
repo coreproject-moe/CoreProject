@@ -17,7 +17,7 @@
 </script>
 
 <!-- Init the modal  -->
-<svelte:component this={NavbarModal} id="navbar-modal" />
+<svelte:component this={NavbarModal} id="nabar__modal" />
 
 <div class="navbar bg-transparent">
     <div class="navbar-start hidden md:block">
@@ -28,7 +28,7 @@
     </div>
     <div class="navbar-end">
         <label
-            for="my-modal-4"
+            for="nabar__modal"
             class="btn modal-button bg-transparent hover:bg-transparent px-0 border-transparent"
         >
             <img
