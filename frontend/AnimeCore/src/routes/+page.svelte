@@ -1,5 +1,6 @@
 <script lang="ts">
     import { blur } from "svelte/transition";
+    import { swipe } from "svelte-gestures";
 
     import GenreSlide from "$components/pages/Home/Genre/Slide.svelte";
     import LibrarySlide from "$components/pages/Home/Library/Slide.svelte";
@@ -9,6 +10,15 @@
 
     let mainHeroSlideActiveIndex = 0;
     let mainHeroRootElement: HTMLElement;
+
+    const swipeHandler = (event: CustomEvent) => {
+        const direction = event.detail.direction;
+        if (direction === "left") {
+            mainHeroSlideActiveIndex += mainHeroSlideActiveIndex - 1;
+        } else if (direction === "right") {
+            mainHeroSlideActiveIndex += mainHeroSlideActiveIndex + 1;
+        }
+    };
 </script>
 
 <svelte:head>
@@ -31,7 +41,11 @@
         }
     }}
 >
-    <div class="carousel-item h-auto w-auto snap-always">
+    <div
+        class="carousel-item h-auto w-auto snap-always"
+        use:swipe={{ timeframe: 300, minSwipeDistance: 100, touchAction: "pan-y" }}
+        on:swipe={swipeHandler}
+    >
         <div class="inline-grid" bind:this={mainHeroRootElement}>
             {#each data as item, index}
                 {#if index === mainHeroSlideActiveIndex}

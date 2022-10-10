@@ -17,7 +17,7 @@
 </script>
 
 <!-- Init the modal  -->
-<svelte:component this={NavbarModal} />
+<svelte:component this={NavbarModal} id="navbar-modal" />
 
 <div class="navbar bg-transparent">
     <div class="navbar-start hidden md:block">
