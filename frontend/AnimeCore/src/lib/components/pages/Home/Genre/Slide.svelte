@@ -21,7 +21,7 @@
         <div class="flex lg:block flex-col">
             <AutoComplete />
             {#if mobile}
-                <label for="genre-modal" class="btn modal-button mt-6 flex gap-5">
+                <label for="genre-modal" class="btn modal-button mt-6 flex gap-5 white">
                     or search by genres <ChevronUpDown color="#D8D8D8" height={18} width={18} />
                 </label>
             {:else}
