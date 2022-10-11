@@ -1,5 +1,6 @@
 <script lang="ts">
     import { blur } from "svelte/transition";
+    import { swipe } from "svelte-gestures";
 
     import GenreSlide from "$components/pages/Home/Genre/Slide.svelte";
     import LibrarySlide from "$components/pages/Home/Library/Slide.svelte";
@@ -9,6 +10,31 @@
 
     let mainHeroSlideActiveIndex = 0;
     let mainHeroRootElement: HTMLElement;
+
+    const addOneToMainHeroSlideActiveIndex = () => {
+        if (mainHeroSlideActiveIndex + 1 === data.length) {
+            mainHeroSlideActiveIndex = 0;
+            return;
+        }
+        mainHeroSlideActiveIndex += 1;
+    };
+
+    const minusOneToMainHeroSlideActiveIndex = () => {
+        if (mainHeroSlideActiveIndex === 0) {
+            mainHeroSlideActiveIndex = data.length - 1;
+            return;
+        }
+        mainHeroSlideActiveIndex -= 1;
+    };
+
+    const swipeHandler = (event: CustomEvent) => {
+        const direction = event.detail.direction;
+        if (direction === "left") {
+            addOneToMainHeroSlideActiveIndex();
+        } else if (direction === "right") {
+            minusOneToMainHeroSlideActiveIndex();
+        }
+    };
 </script>
 
 <svelte:head>
@@ -32,13 +58,20 @@
     }}
 >
     <div class="carousel-item h-auto w-auto snap-always">
-        <div class="inline-grid" bind:this={mainHeroRootElement}>
+        <div
+            class="inline-grid"
+            bind:this={mainHeroRootElement}
+            use:swipe={{ timeframe: 300, minSwipeDistance: 100, touchAction: "pan-y" }}
+            on:swipe={swipeHandler}
+        >
             {#each data as item, index}
                 {#if index === mainHeroSlideActiveIndex}
                     <div transition:blur|local style="grid-area: 1 / 1 / 2 / 2">
                         <MainHeroSlide
                             bind:mainHeroSlideActiveIndex
                             {data}
+                            {addOneToMainHeroSlideActiveIndex}
+                            {minusOneToMainHeroSlideActiveIndex}
                             animeTitle={item.animeTitle}
                             animeSummary={item.animeSummary}
                             animeEpisodeCount={item.animeEpisodeCount}

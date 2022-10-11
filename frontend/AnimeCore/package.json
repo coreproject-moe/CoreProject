@@ -2,7 +2,7 @@
     "name": "animecore",
     "version": "0.0.1",
     "scripts": {
-        "dev": "vite dev",
+        "dev": "vite dev --host",
         "build": "vite build",
         "package": "svelte-kit package",
         "preview": "vite preview",
@@ -51,5 +51,8 @@
         "vite": "^3.1.7",
         "voca": "^1.4.0"
     },
-    "type": "module"
+    "type": "module",
+    "dependencies": {
+        "svelte-gestures": "^1.4.1"
+    }
 }

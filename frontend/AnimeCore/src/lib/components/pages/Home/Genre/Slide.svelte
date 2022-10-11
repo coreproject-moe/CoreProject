@@ -14,14 +14,14 @@
 </script>
 
 <!-- Modals  -->
-<GenreModal id="genre-modal" />
+<svelte:component this={GenreModal} id="genre-modal" />
 
 <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
     <div class="hero-content text-center p-0">
         <div class="flex lg:block flex-col">
             <AutoComplete />
             {#if mobile}
-                <label for="genre-modal" class="btn modal-button mt-6 flex gap-5">
+                <label for="genre-modal" class="btn modal-button mt-6 flex gap-5 white">
                     or search by genres <ChevronUpDown color="#D8D8D8" height={18} width={18} />
                 </label>
             {:else}

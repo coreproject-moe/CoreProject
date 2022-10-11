@@ -22,6 +22,9 @@
     export let backgroundBanner: string;
     export let tags: string[];
 
+    export let addOneToMainHeroSlideActiveIndex: () => void;
+    export let minusOneToMainHeroSlideActiveIndex: () => void;
+
     let mobile: boolean;
     let tablet: boolean;
     let fullhd: boolean;
@@ -45,22 +48,6 @@
 
     const timerEnded = () => {
         addOneToMainHeroSlideActiveIndex();
-    };
-
-    const addOneToMainHeroSlideActiveIndex = () => {
-        if (mainHeroSlideActiveIndex + 1 === data.length) {
-            mainHeroSlideActiveIndex = 0;
-            return;
-        }
-        mainHeroSlideActiveIndex += 1;
-    };
-
-    const minusOneToMainHeroSlideActiveIndex = () => {
-        if (mainHeroSlideActiveIndex === 0) {
-            mainHeroSlideActiveIndex = data.length - 1;
-            return;
-        }
-        mainHeroSlideActiveIndex -= 1;
     };
 </script>
 
