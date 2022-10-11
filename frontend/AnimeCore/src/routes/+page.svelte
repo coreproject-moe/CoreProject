@@ -11,12 +11,28 @@
     let mainHeroSlideActiveIndex = 0;
     let mainHeroRootElement: HTMLElement;
 
+    const addOneToMainHeroSlideActiveIndex = () => {
+        if (mainHeroSlideActiveIndex + 1 === data.length) {
+            mainHeroSlideActiveIndex = 0;
+            return;
+        }
+        mainHeroSlideActiveIndex += 1;
+    };
+
+    const minusOneToMainHeroSlideActiveIndex = () => {
+        if (mainHeroSlideActiveIndex === 0) {
+            mainHeroSlideActiveIndex = data.length - 1;
+            return;
+        }
+        mainHeroSlideActiveIndex -= 1;
+    };
+
     const swipeHandler = (event: CustomEvent) => {
         const direction = event.detail.direction;
         if (direction === "left") {
-            mainHeroSlideActiveIndex += mainHeroSlideActiveIndex - 1;
+            addOneToMainHeroSlideActiveIndex();
         } else if (direction === "right") {
-            mainHeroSlideActiveIndex += mainHeroSlideActiveIndex + 1;
+            minusOneToMainHeroSlideActiveIndex();
         }
     };
 </script>
@@ -41,18 +57,21 @@
         }
     }}
 >
-    <div
-        class="carousel-item h-auto w-auto snap-always"
-        use:swipe={{ timeframe: 300, minSwipeDistance: 100, touchAction: "pan-y" }}
-        on:swipe={swipeHandler}
-    >
-        <div class="inline-grid" bind:this={mainHeroRootElement}>
+    <div class="carousel-item h-auto w-auto snap-always">
+        <div
+            class="inline-grid"
+            bind:this={mainHeroRootElement}
+            use:swipe={{ timeframe: 300, minSwipeDistance: 100, touchAction: "pan-y" }}
+            on:swipe={swipeHandler}
+        >
             {#each data as item, index}
                 {#if index === mainHeroSlideActiveIndex}
                     <div transition:blur|local style="grid-area: 1 / 1 / 2 / 2">
                         <MainHeroSlide
                             bind:mainHeroSlideActiveIndex
                             {data}
+                            {addOneToMainHeroSlideActiveIndex}
+                            {minusOneToMainHeroSlideActiveIndex}
                             animeTitle={item.animeTitle}
                             animeSummary={item.animeSummary}
                             animeEpisodeCount={item.animeEpisodeCount}
