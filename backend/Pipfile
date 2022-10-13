@@ -6,11 +6,20 @@ name = "pypi"
 [packages]
 fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
+sqlalchemy = {extras = ["asyncpg"], version = "*"}
+alembic = "*"
 
 [dev-packages]
+sqlalchemy = {extras = ["aiosqlite"], version = "*"}
+black = "*"
 
 [requires]
 python_version = "3.10"
 
 [scripts]
 dev = 'uvicorn main:app --reload'
+makemigrations = 'alembic revision --autogenerate'
+migrate = 'alembic upgrade head'
+
+[pipenv]
+allow_prereleases = true
