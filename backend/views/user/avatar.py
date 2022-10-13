@@ -2,16 +2,12 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi.responses import StreamingResponse, FileResponse
 from fastapi import Request
-from database import get_db
-from models.user import User
 
 router = APIRouter()
 
 
 @router.get("/avatar/{user_id:str}")
-async def get_avatar(
-    request: Request, db: AsyncSession = Depends(get_db), user_id: str | None = None
-):
+async def get_avatar(request: Request, user_id: str | None = None):
     user_model: AsyncSession = await db.get(
         User,
         {"id": int(user_id)},
