@@ -1,5 +1,0 @@
-
-*.pyc
-*.sqlite3-shm
-*.sqlite3-wal
-backend/db.sqlite3
