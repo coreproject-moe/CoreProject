@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from sqlalchemy.ext.asyncio import AsyncSession
+from models.user import User
 from fastapi.responses import StreamingResponse, FileResponse
 from fastapi import Request
 
@@ -8,17 +8,9 @@ router = APIRouter()
 
 @router.get("/avatar/{user_id:str}")
 async def get_avatar(request: Request, user_id: str | None = None):
-    user_model: AsyncSession = await db.get(
-        User,
-        {"id": int(user_id)},
-    )
-
+    user_model: User = User.get(id=user_id)
     if user_model.avatar:
-        response = web.FileResponse(
-            path=str(DJANGO_MEDIA_DIR) + "\\" + str(user_model.avatar),
-            chunk_size=512,
-        )
-
+        response = FileResponse(user_model.avatar)
     else:
         response = web.StreamResponse()
 

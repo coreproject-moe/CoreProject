@@ -1,14 +1,19 @@
+DATABASE_URL = "sqlite://db.sqlite3"
+MODELS = [
+    "models.user",
+]
+
 TORTOISE_ORM = {
     "connections": {
-        "default": "sqlite://db.sqlite3",
+        "default": DATABASE_URL,
     },
     "apps": {
         "models": {
             "models": [
                 "aerich.models",
                 # User models
-                "models.user",
-            ],
+            ]
+            + MODELS,
             "default_connection": "default",
         },
     },

@@ -1,17 +1,5 @@
-from pydantic import BaseModel
+from tortoise.contrib.pydantic import pydantic_model_creator
+from models.user import User
 
-
-class UserBase(BaseModel):
-    email: str
-
-
-class UserCreate(UserBase):
-    password: str
-
-
-class User(UserBase):
-    id: int
-    is_active: bool
-
-    class Config:
-        orm_mode = True
+User_Pydantic = pydantic_model_creator(User, name="User")
+UserIn_Pydantic = pydantic_model_creator(User, name="UserIn", exclude_readonly=True)
