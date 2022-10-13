@@ -4,13 +4,31 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+# Web server
 fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
+# Orm
 tortoise-orm = {extras = ["asyncpg",'accel'], version = "*"}
 aerich = "*"
+# Auth tools
+python-jose = {extras = ["cryptography"], version = "*"}
+passlib = {extras = ["argon2"], version = "*"}
+# Redis
+redis = ">=4"
+hiredis = {version="*", markers="sys_platform != 'win32'"}
+# HTTP Client
+aiohttp = {version=">=3.8,<4", extras=['speedups']}
+# HTTP Client Enhancements
+aiohttp_retry = "*"
+aiohttp_client_cache = {extras = ["redis"], version = "*"}
+pyrate-limiter = {extras = ["redis"], version = "*"}
 
 [dev-packages]
+mypy = "*"
 black = "*"
+pylint = "*"
+flake8 = "*"
+isort = "*"
 
 [requires]
 python_version = "3.10"

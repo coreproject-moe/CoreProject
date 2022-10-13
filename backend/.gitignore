@@ -61,6 +61,10 @@ local_settings.py
 db.sqlite3
 db.sqlite3-journal
 
+# Tortoise
+*.sqlite3-shm 
+*.sqlite3-wal
+
 # Flask stuff:
 instance/
 .webassets-cache

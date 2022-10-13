@@ -1,7 +1,4 @@
-DATABASE_URL = "sqlite://db.sqlite3"
-MODELS = [
-    "models.user",
-]
+from settings import MODELS, DATABASE_URL
 
 TORTOISE_ORM = {
     "connections": {

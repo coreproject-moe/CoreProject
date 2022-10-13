@@ -1,16 +1,18 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Request
+from fastapi.responses import FileResponse
+
 from models.user import User
-from fastapi.responses import StreamingResponse, FileResponse
-from fastapi import Request
 
 router = APIRouter()
 
 
 @router.get("/avatar/{user_id:str}")
 async def get_avatar(request: Request, user_id: str | None = None):
-    user_model: User = User.get(id=user_id)
+    user_model: User = await User.get(id=user_id)
+
     if user_model.avatar:
         response = FileResponse(user_model.avatar)
+
     else:
         response = web.StreamResponse()
 
