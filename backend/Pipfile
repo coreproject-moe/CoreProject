@@ -10,6 +10,8 @@ uvicorn = {extras = ["standard"], version = "*"}
 # Orm
 tortoise-orm = {extras = ["asyncpg",'accel'], version = "*"}
 aerich = "*"
+# Templating
+jinja2 = '*'
 # Auth tools
 python-jose = {extras = ["cryptography"], version = "*"}
 passlib = {extras = ["argon2"], version = "*"}

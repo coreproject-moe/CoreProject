@@ -3,8 +3,9 @@ from fastapi.staticfiles import StaticFiles
 from tortoise.contrib.fastapi import register_tortoise
 
 from api import router as api_router
-from database import DATABASE_URL, MODELS
-from views import router as view_router
+from settings import DATABASE_URL, MODELS
+
+from .views import router as view_router
 
 app = FastAPI()
 

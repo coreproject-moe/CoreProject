@@ -5,7 +5,7 @@ from tortoise.validators import MaxValueValidator, MinValueValidator
 import settings
 
 
-class User(Model):
+class UserModel(Model):
     id = fields.UUIDField(pk=True, unique=True)
     email = fields.CharField(max_length=512)  # Maybe modify this
     username = fields.CharField(max_length=512)
@@ -33,8 +33,16 @@ class User(Model):
     last_login = fields.DatetimeField()
     date_joined = fields.DatetimeField(auto_now_add=True)
 
-    def username_with_discriminator(self):
-        return f"{self.username}#{str(self.username_discriminator).zfill(settings.USERNAME_DISCRIMINATOR_LENGTH)}"
+    def username_with_discriminator(self) -> str:
+        return f"""{
+            self.username
+            }#{
+                str(
+                    self.username_discriminator
+                ).zfill(
+                    settings.USERNAME_DISCRIMINATOR_LENGTH
+                )
+            }"""
 
     class PydanticMeta:
         computed = ["username_with_discriminator"]
