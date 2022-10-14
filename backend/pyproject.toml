@@ -13,7 +13,10 @@ tortoise_orm = "database.TORTOISE_ORM"
 location = "./migrations"
 src_folder = "./."
 
-
+[tool.pylint.MAIN]
+load-plugins = [
+'tortoise.contrib.pylint'
+]
 [tool.pylint.format]
 max-line-length = "92"
 
