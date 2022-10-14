@@ -1,4 +1,4 @@
-from settings import DATABASE_URL, MODELS
+from settings.settings import DATABASE_URL, MODELS
 
 TORTOISE_ORM = {
     "connections": {

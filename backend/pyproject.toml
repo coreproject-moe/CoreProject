@@ -9,7 +9,7 @@ requires-python = ">=3.10,<4.0"
 license = {text = "AGPL-3.0-only"}
 
 [tool.aerich]
-tortoise_orm = "database.TORTOISE_ORM"
+tortoise_orm = "settings.database.TORTOISE_ORM"
 location = "./migrations"
 src_folder = "./."
 

@@ -4,7 +4,7 @@ import aiohttp
 from aiohttp_client_cache.backends.redis import RedisBackend
 from aiohttp_client_cache.session import CachedSession
 
-import settings
+import settings.settings as settings
 
 client_session: aiohttp.ClientSession = CachedSession(  # aiohttp-client-cache
     cache=RedisBackend(

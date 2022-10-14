@@ -7,13 +7,19 @@ name = "pypi"
 # Web server
 fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
+# Data validation
+pydantic = {extras = ["email"], version = "*"}
+# JSON Enhancements
+orjson = '*'
 # Orm
-tortoise-orm = {extras = ["asyncpg",'accel'], version = "*"}
+tortoise_orm = {extras = ["asyncpg",'accel'], version = "*"}
 aerich = "*"
+# Caching
+fastapi_cache2 = {extras = ['redis'], version = "*"}
 # Templating
 jinja2 = '*'
 # Auth tools
-python-jose = {extras = ["cryptography"], version = "*"}
+python_jose = {extras = ["cryptography"], version = "*"}
 passlib = {extras = ["argon2"], version = "*"}
 # Redis
 redis = ">=4"
@@ -23,14 +29,22 @@ aiohttp = {version=">=3.8,<4", extras=['speedups']}
 # HTTP Client Enhancements
 aiohttp_retry = "*"
 aiohttp_client_cache = {extras = ["redis"], version = "*"}
-pyrate-limiter = {extras = ["redis"], version = "*"}
+pyrate_limiter = {extras = ["redis"], version = "*"}
 
 [dev-packages]
-mypy = "*"
 black = "*"
 pylint = "*"
-flake8 = "*"
 isort = "*"
+# Flake8
+flake8 = "*"
+flake8-bugbear = '*'
+flake8-logging-format="*"
+# Mypy
+mypy = "*"
+types_redis = '*'
+types_python_jose = '*'
+types_cryptography = "*"
+
 
 [requires]
 python_version = "3.10"

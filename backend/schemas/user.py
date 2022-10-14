@@ -2,8 +2,8 @@ from tortoise.contrib.pydantic.creator import pydantic_model_creator
 
 from models.user import UserModel
 
-User_Pydantic = pydantic_model_creator(UserModel, name="User")
-UserIn_Pydantic = pydantic_model_creator(
+UserSchema = pydantic_model_creator(UserModel, name="User")
+UserInSchema = pydantic_model_creator(
     UserModel,
     name="UserIn",
     include=(

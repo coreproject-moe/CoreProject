@@ -2,7 +2,7 @@ from tortoise import fields
 from tortoise.models import Model
 from tortoise.validators import MaxValueValidator, MinValueValidator
 
-import settings
+import settings.settings as settings
 
 
 class UserModel(Model):
