@@ -4,81 +4,56 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = {version = ">=4.1", extras = ["argon2"]}
-# Postgres
-psycopg2 = "*"
-# 3rd Party ( Middlewares )
-django_cleanup = "*"
-django_cors_headers = "*"
-# 3rd party ( Management )
-django_click = "*"
-# 3rd Party ( ENV )
-python_dotenv = "*"
-# 3rd Party ( WhiteNoise )
-whitenoise = {extras = ["brotli"], version = "*"}
-# 3rd Party ( Tasks )
-huey = "*"
+# Web server
+fastapi = "*"
+uvicorn = {extras = ["standard"], version = "*"}
+# Data validation
+pydantic = {extras = ["email"], version = "*"}
+# JSON Enhancements
+orjson = '*'
+# Orm
+tortoise_orm = {extras = ["asyncpg",'accel'], version = "*"}
+aerich = "*"
+# Caching
+fastapi_cache2 = {extras = ['redis'], version = "*"}
+# Templating
+jinja2 = '*'
+# Auth tools
+python_jose = {extras = ["cryptography"], version = "*"}
+passlib = {extras = ["argon2"], version = "*"}
+# Redis
 redis = ">=4"
 hiredis = {version="*", markers="sys_platform != 'win32'"}
-# Rest framework
-django_ninja = "*"
-# https://github.com/vitalik/django-ninja/issues/305
-# ===================================================
 # HTTP Client
 aiohttp = {version=">=3.8,<4", extras=['speedups']}
-aiohttp_jinja2 = '*'
-sqlalchemy = {extras = ["postgresql_asyncpg"], version = "*"}
 # HTTP Client Enhancements
 aiohttp_retry = "*"
 aiohttp_client_cache = {extras = ["redis"], version = "*"}
-pyrate-limiter = {extras = ["redis"], version = "*"}
-# Web servers
-gunicorn = {extras = ["setproctile"], version = "*"}
-uvicorn = {extras = ["standard"], version = "*"}
-# Image processing
-pillow = "*"
-# Discord API
-"discord.py" = {extras = ["voice", "speed"], version = "*"}
+pyrate_limiter = {extras = ["redis"], version = "*"}
 
 [dev-packages]
-# Aiohttp
-aiohttp-devtools = "*"
-# Django
-django_debug_toolbar = "*"
-django_dbbackup = "*"
-django_cprofile_middleware = "*"
-## Code formatting
-# Black
 black = "*"
+pylint = "*"
+isort = "*"
 # Flake8
 flake8 = "*"
-# AutoFlake
-autoflake = "*"
-# Pylint
-pylint = "*"
-pylint_django = "*"
+flake8-bugbear = '*'
+flake8-logging-format="*"
 # Mypy
 mypy = "*"
-types_redis = "*"
-django_stubs = {extras = ["compatible_mypy"], version = "*"}
+types_redis = '*'
+types_python_jose = '*'
+types_cryptography = "*"
+
 
 [requires]
 python_version = "3.10"
 
 [scripts]
-## Dev Servers
-dev_django = "python ./django_core/manage.py runserver  0.0.0.0:8003"
-dev_aiohttp = 'adev runserver ./tsukaeru/server.py --app-factory=aiohttp_app'
-## Prod servers
-prod_uvicorn = "gunicorn django_core/core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
-prod_aiohttp = "gunicorn tsukaeru.server:aiohttp_app -w 4 --bind localhost:8001 --worker-class aiohttp.GunicornUVLoopWebWorker" # We want to run this without any proxy or anything
-##  Migrations
-sync = "python ./django_core/manage.py migrate"
-mksync = "python ./django_core/manage.py makemigrations"
-## Task queue
-huey = "python ./django_core/manage.py run_huey"
-## Staticfiles
-collectstatic = "python ./django_core/manage.py collectstatic --clear --link" # Dont duplicate copy files.
+dev = 'uvicorn main:app --reload'
+init = 'aerich init-db'
+makemigrations = 'aerich migrate'
+migrate = 'aerich upgrade'
 
 [pipenv]
 allow_prereleases = true

@@ -5,17 +5,28 @@
 
 version: 2
 updates:
+    # Backend
+    # =======
     - package-ecosystem: pip
       directory: /backend/
       schedule:
           interval: monthly
 
+    # Android
+    # =======
     - package-ecosystem: pip
       directory: /android/AnimeCore/
       schedule:
           interval: monthly
 
-    - package-ecosystem: npm # See documentation for possible values
-      directory: /frontend/AnimeCore/ # Location of package manifests
+    # Frontend
+    # =========
+    - package-ecosystem: npm
+      directory: /frontend/AnimeCore/
+      schedule:
+          interval: monthly
+
+    - package-ecosystem: npm
+      directory: /frontend/Admin/
       schedule:
           interval: monthly

@@ -1,13 +1,6 @@
 {
+    "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
     "python.linting.mypyEnabled": true,
-    "python.linting.flake8Enabled": true,
-    "python.linting.pylintEnabled": true,
-    "python.linting.pylintArgs": [
-        "--load-plugins",
-        "pylint_django",
-        "--django-settings-module",
-        "core.settings"
-    ],
-    "restructuredtext.preview.name": "docutils"
+    "python.linting.pylintEnabled": true
 }
