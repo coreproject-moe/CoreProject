@@ -62,7 +62,7 @@ db.sqlite3
 db.sqlite3-journal
 
 # Tortoise
-*.sqlite3-shm 
+*.sqlite3-shm
 *.sqlite3-wal
 
 # Flask stuff:

@@ -1,5 +1,5 @@
 import hashlib
-from typing import AsyncGenerator
+from collections.abc import AsyncGenerator
 
 import aiohttp
 from fastapi import APIRouter, Depends

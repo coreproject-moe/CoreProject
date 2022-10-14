@@ -1,4 +1,4 @@
-from typing import AsyncGenerator
+from collections.abc import AsyncGenerator
 
 import aiohttp
 from aiohttp_client_cache.backends.redis import RedisBackend
