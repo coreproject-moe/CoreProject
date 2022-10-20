@@ -1669,11 +1669,11 @@
         },
         "autoflake": {
             "hashes": [
-                "sha256:cf251adb62f4f0ac7c945a7bd8005358523cf1d295844c2dea3d29b26259a27e",
-                "sha256:f465256141901a364fa60578d6c6d87414316ea9a79f0994792f32cdb044ca9e"
+                "sha256:9fa63cb814c1dfc02103a361b449c024226348c2130b6839cd94278c309c4a65",
+                "sha256:f2a8e107ba6c02a25e0acf2beebab247792998132e6b1f24efa7b0b7faa30cb6"
             ],
             "index": "pypi",
-            "version": "==1.7.3"
+            "version": "==1.7.6"
         },
         "black": {
             "hashes": [
