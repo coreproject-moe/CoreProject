@@ -12,7 +12,7 @@
     "dependencies": {
         "@emotion/react": "^11.10.4",
         "@mantine/core": "^5.6.0",
-        "@mantine/ds": "^5.5.5",
+        "@mantine/ds": "^5.6.0",
         "@mantine/hooks": "^5.5.5",
         "@mantine/next": "^5.6.0",
         "@tabler/icons": "^1.106.0",
