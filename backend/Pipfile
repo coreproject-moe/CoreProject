@@ -27,11 +27,12 @@ django_ninja = "*"
 # HTTP Client
 aiohttp = {version=">=3.8,<4", extras=['speedups']}
 aiohttp_jinja2 = '*'
-sqlalchemy = {extras = ["postgresql_asyncpg"], version = "*"}
 # HTTP Client Enhancements
 aiohttp_retry = "*"
 aiohttp_client_cache = {extras = ["redis"], version = "*"}
 pyrate-limiter = {extras = ["redis"], version = "*"}
+# Database Drivers
+sqlalchemy = {extras = ["postgresql_asyncpg"], version = "*"}
 # Web servers
 gunicorn = {extras = ["setproctile"], version = "*"}
 uvicorn = {extras = ["standard"], version = "*"}
