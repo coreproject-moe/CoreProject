@@ -32,9 +32,7 @@
             "version": "==3.0.0"
         },
         "aiohttp": {
-            "extras": [
-                "speedups"
-            ],
+            "extras": ["speedups"],
             "hashes": [
                 "sha256:02f9a2c72fc95d59b881cf38a4b2be9381b9527f9d328771e90f72ac76f31ad8",
                 "sha256:059a91e88f2c00fe40aed9031b3606c3f311414f86a90d696dd982e7aec48142",
@@ -128,9 +126,7 @@
             "version": "==3.8.3"
         },
         "aiohttp-client-cache": {
-            "extras": [
-                "redis"
-            ],
+            "extras": ["redis"],
             "hashes": [
                 "sha256:c7532e3763b2dc92fb32de2ab0a1dcdbda608219b1564418fd2c4cff14082929",
                 "sha256:c9757c91db9eb14765cc976574c69a8587b5597959542263eb83217dadc220a9"
@@ -487,9 +483,7 @@
             "version": "==0.85.1"
         },
         "fastapi-cache2": {
-            "extras": [
-                "redis"
-            ],
+            "extras": ["redis"],
             "hashes": [
                 "sha256:5b6f32bc8e786d9fffe4f3ef343861cab276acc64fb5d8d09077524743ad3702",
                 "sha256:816612f7b29b4ea4ed3b4e03c55b7f96b4e4d6dffce6a95e2cf5cf36a980eaaa"
@@ -856,9 +850,7 @@
             "version": "==3.8.0"
         },
         "passlib": {
-            "extras": [
-                "argon2"
-            ],
+            "extras": ["argon2"],
             "hashes": [
                 "sha256:aa6bca462b8d8bda89c70b382f0c298a20b5560af6cbfa2dce410c0a2fb669f1",
                 "sha256:defd50f72b65c5402ab2c573830a6978e5f202ad0d984793c8dde2c4152ebe04"
@@ -963,9 +955,7 @@
             "version": "==2.21"
         },
         "pydantic": {
-            "extras": [
-                "email"
-            ],
+            "extras": ["email"],
             "hashes": [
                 "sha256:05e00dbebbe810b33c7a7362f231893183bcc4251f3f2ff991c31d5c08240c42",
                 "sha256:06094d18dd5e6f2bbf93efa54991c3240964bb663b87729ac340eb5014310624",
@@ -1016,9 +1006,7 @@
             "version": "==0.1.6"
         },
         "pyrate-limiter": {
-            "extras": [
-                "redis"
-            ],
+            "extras": ["redis"],
             "hashes": [
                 "sha256:9f464ed01fa647d4d1f32ce27b8db9d594ab787847ec4ae72e1f5498756dd33d"
             ],
@@ -1047,9 +1035,7 @@
             "version": "==18.6.0"
         },
         "python-jose": {
-            "extras": [
-                "cryptography"
-            ],
+            "extras": ["cryptography"],
             "hashes": [
                 "sha256:55779b5e6ad599c6336191246e95eb2293a9ddebd555f796a65f838f07e5d78a",
                 "sha256:9b1376b023f8b298536eedd47ae1089bcdb848f1535ab30555cd92002d78923a"
@@ -1166,10 +1152,7 @@
             "version": "==0.11.5"
         },
         "tortoise-orm": {
-            "extras": [
-                "accel",
-                "asyncpg"
-            ],
+            "extras": ["accel", "asyncpg"],
             "hashes": [
                 "sha256:a99b8c9f42d5cd49493c70471b5c9a5df8ecf49cc624f2f41b9dc75bba993ac5",
                 "sha256:bff4d79abfca7fb805972bb2438e8e0cd2e6590bc2cfd7593a803518a027bbf0"
@@ -1194,9 +1177,7 @@
             "version": "==1.4.3"
         },
         "uvicorn": {
-            "extras": [
-                "standard"
-            ],
+            "extras": ["standard"],
             "hashes": [
                 "sha256:cc277f7e73435748e69e075a721841f7c4a95dba06d12a72fe9874acced16f6f",
                 "sha256:cf538f3018536edb1f4a826311137ab4944ed741d52aeb98846f52215de57f25"
