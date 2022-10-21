@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { detect } from "detect-browser";
     import { blur } from "svelte/transition";
     import { swipe } from "svelte-gestures";
 
@@ -7,8 +8,6 @@
     import MainHeroSlide from "$components/pages/Home/MainHero/Slide.svelte";
     import data from "$data/mock/main_hero_data.json";
     import { timer as timerStore } from "$store/Timer";
-
-    import { detect } from "detect-browser";
     const browser = detect();
 
     let mainHeroSlideActiveIndex = 0;
