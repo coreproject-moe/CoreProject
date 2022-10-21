@@ -8,6 +8,9 @@
     import data from "$data/mock/main_hero_data.json";
     import { timer as timerStore } from "$store/Timer";
 
+    import { detect } from "detect-browser";
+    const browser = detect();
+
     let mainHeroSlideActiveIndex = 0;
     let mainHeroRootElement: HTMLElement;
 
@@ -66,7 +69,10 @@
         >
             {#each data as item, index}
                 {#if index === mainHeroSlideActiveIndex}
-                    <div transition:blur|local style="grid-area: 1 / 1 / 2 / 2">
+                    <div
+                        transition:blur|local
+                        style="grid-area: 1 / 1 / 2 / 2"
+                    >
                         <MainHeroSlide
                             bind:mainHeroSlideActiveIndex
                             {data}
@@ -92,4 +98,13 @@
     <div class="carousel-item h-auto snap-always">
         <LibrarySlide />
     </div>
+    <!-- Show a footer for  android users -->
+    {#if ["Android OS", "iOS", null].includes(browser && browser.os)}
+        {#if browser?.name === "firefox"}
+            <div class="py-10" />
+        {:else if browser?.name.includes("chrom")}
+            <!-- Could be 'chrome','chromium','edge-chromium' -->
+            <div class="py-8" />
+        {/if}
+    {/if}
 </div>
