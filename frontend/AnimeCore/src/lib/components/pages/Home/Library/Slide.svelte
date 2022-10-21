@@ -42,18 +42,11 @@
     mylistAnimeNameWordCount ??= 25;
 
     // Check if mouse is over element
-    let mouseOverElement = false;
-    const MOUSE_OVER_DELAY = 800;
+    const MOUSE_OVER_DELAY = 1_500;
 
     const scrollHorizontally = (e: WheelEvent, element: HTMLElement) => {
-        if (e.deltaY) {
-            e.preventDefault();
-        }
-
         // const length_of_one_element = element.clientWidth / element.childNodes.length;
-        if (mouseOverElement) {
-            element.scrollLeft += Math.round(e.deltaY * 50); // No increase more than 50. Cause Jitter. Heavy pain
-        }
+        element.scrollLeft += Math.round(e.deltaY * 50); // No increase more than 50. Cause Jitter. Heavy pain
     };
 </script>
 
@@ -68,7 +61,7 @@
                 />
             </p>
             <div
-                class="h-28 md:h-[530px] w-96 md:w-80 carousel gap-6 carousel-center md:carousel-vertical"
+                class="h-28 md:h-[530px] w-96 md:w-80 carousel gap-6 carousel-center md:carousel-vertical overscroll-contain"
             >
                 {#each latestEpisodes as item}
                     <div
@@ -111,18 +104,22 @@
         <div class="flex flex-col">
             <p class="font-bold text-3xl items-start flex pb-4">Continue Watching</p>
             <div
-                class="h-28 md:h-[200px] w-96 md:w-[60vw] carousel gap-6"
+                class="h-28 md:h-[200px] w-96 md:w-[60vw] carousel gap-6 overscroll-contain overflow-hidden"
                 bind:this={continueWatchingElement}
                 on:wheel={(e) => {
-                    scrollHorizontally(e, continueWatchingElement);
+                    if (!continueWatchingElement?.classList.contains("overflow-hidden")) {
+                        scrollHorizontally(e, continueWatchingElement);
+                    }
                 }}
                 on:mouseenter={() => {
-                    setTimeout(() => {
-                        mouseOverElement = true;
-                    }, MOUSE_OVER_DELAY);
+                    if (continueWatchingElement?.offsetParent) {
+                        setTimeout(() => {
+                            continueWatchingElement?.classList.remove("overflow-hidden");
+                        }, MOUSE_OVER_DELAY);
+                    }
                 }}
                 on:mouseleave={() => {
-                    mouseOverElement = false;
+                    continueWatchingElement?.classList.add("overflow-hidden");
                 }}
             >
                 {#each continueWatching as item}
@@ -165,17 +162,21 @@
             </div>
 
             <div
-                class="w-96 md:w-[60vw] carousel gap-6"
+                class="w-96 md:w-[60vw] carousel gap-6 overscroll-contain"
                 on:wheel={(e) => {
-                    scrollHorizontally(e, myListElement);
+                    if (!myListElement?.classList.contains("overflow-hidden")) {
+                        scrollHorizontally(e, myListElement);
+                    }
                 }}
                 on:mouseenter={() => {
-                    setTimeout(() => {
-                        mouseOverElement = true;
-                    }, MOUSE_OVER_DELAY);
+                    if (myListElement?.offsetParent) {
+                        setTimeout(() => {
+                            myListElement?.classList.remove("overflow-hidden");
+                        }, MOUSE_OVER_DELAY);
+                    }
                 }}
                 on:mouseleave={() => {
-                    mouseOverElement = false;
+                    myListElement?.classList.add("overflow-hidden");
                 }}
                 bind:this={myListElement}
             >

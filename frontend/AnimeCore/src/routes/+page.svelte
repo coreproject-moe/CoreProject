@@ -48,11 +48,11 @@
     class="h-screen w-screen carousel carousel-vertical snap-none md:snap-y md:snap-mandatory text-white"
     on:scroll|passive={() => {
         if (
-            -Number(mainHeroRootElement?.getBoundingClientRect().top) >=
+            Math.abs(Number(mainHeroRootElement?.getBoundingClientRect().top)) >=
             Number(mainHeroRootElement?.getBoundingClientRect().height)
         ) {
             $timerStore = "reset";
-        } else if (-Number(mainHeroRootElement?.getBoundingClientRect().top) > 0) {
+        } else if (Math.abs(Number(mainHeroRootElement?.getBoundingClientRect().top)) > 0) {
             $timerStore = "pause";
         } else {
             $timerStore = "start";
