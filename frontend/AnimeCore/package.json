@@ -29,6 +29,7 @@
         "cssnano": "^5.1.13",
         "daisyui": "^2.33.0",
         "dayjs": "^1.11.6",
+        "detect-browser": "^5.3.0",
         "easytimer.js": "^4.5.4",
         "eslint": "^8.25.0",
         "eslint-config-prettier": "^8.5.0",
@@ -44,6 +45,7 @@
         "sass": "^1.55.0",
         "svelte": "^3.52.0",
         "svelte-check": "^2.9.2",
+        "svelte-gestures": "^1.4.1",
         "svelte-preprocess": "^4.10.7",
         "tailwindcss": "^3.2.1",
         "tslib": "^2.4.0",
@@ -52,8 +54,5 @@
         "voca": "^1.4.0"
     },
     "type": "module",
-    "dependencies": {
-        "detect-browser": "^5.3.0",
-        "svelte-gestures": "^1.4.1"
-    }
+    "dependencies": {}
 }
