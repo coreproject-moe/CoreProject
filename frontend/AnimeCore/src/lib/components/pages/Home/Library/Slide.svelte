@@ -41,11 +41,19 @@
     let mylistAnimeNameWordCount: number;
     mylistAnimeNameWordCount ??= 25;
 
+    // Check if mouse is over element
+    let mouseOverElement = false;
+    const MOUSE_OVER_DELAY = 800;
+
     const scrollHorizontally = (e: WheelEvent, element: HTMLElement) => {
         if (e.deltaY) {
             e.preventDefault();
         }
-        element.scrollLeft += Math.round(e.deltaY * 100);
+
+        // const length_of_one_element = element.clientWidth / element.childNodes.length;
+        if (mouseOverElement) {
+            element.scrollLeft += Math.round(e.deltaY * 50); // No increase more than 50. Cause Jitter. Heavy pain
+        }
     };
 </script>
 
@@ -54,7 +62,10 @@
         <div class="flex flex-col gap-3">
             <p class="text-3xl font-bold flex">Latest Episode</p>
             <p class="flex gap-2">
-                show from my list only <ChevronDown height={25} width={25} />
+                show from my list only <ChevronDown
+                    height={25}
+                    width={25}
+                />
             </p>
             <div
                 class="h-28 md:h-[530px] w-96 md:w-80 carousel gap-6 carousel-center md:carousel-vertical"
@@ -69,7 +80,10 @@
                         "
                     >
                         <div class="flex flex-col items-start">
-                            <p class="font-bold" style="display: block ruby">
+                            <p
+                                class="font-bold"
+                                style="display: block ruby"
+                            >
                                 {voca
                                     .chain(item.name)
                                     .trim()
@@ -80,8 +94,14 @@
                             </p>
                         </div>
 
-                        <button class="btn btn-circle btn-md btn-warning" aria-label="play">
-                            <Play width={20} height={20} />
+                        <button
+                            class="btn btn-circle btn-md btn-warning"
+                            aria-label="play"
+                        >
+                            <Play
+                                width={20}
+                                height={20}
+                            />
                         </button>
                     </div>
                 {/each}
@@ -95,6 +115,14 @@
                 bind:this={continueWatchingElement}
                 on:wheel={(e) => {
                     scrollHorizontally(e, continueWatchingElement);
+                }}
+                on:mouseenter={() => {
+                    setTimeout(() => {
+                        mouseOverElement = true;
+                    }, MOUSE_OVER_DELAY);
+                }}
+                on:mouseleave={() => {
+                    mouseOverElement = false;
                 }}
             >
                 {#each continueWatching as item}
@@ -112,8 +140,14 @@
                             </p>
                         </div>
 
-                        <button class="btn btn-circle btn-md btn-warning" aria-label="play">
-                            <Play width={20} height={20} />
+                        <button
+                            class="btn btn-circle btn-md btn-warning"
+                            aria-label="play"
+                        >
+                            <Play
+                                width={20}
+                                height={20}
+                            />
                         </button>
                     </div>
                 {/each}
@@ -123,13 +157,25 @@
                 <p class="font-bold text-3xl items-start">My List</p>
                 <p class="text-3xl">•</p>
                 <p class="text-xl">Watching</p>
-                <ChevronDown color="white" height="24" width="24" />
+                <ChevronDown
+                    color="white"
+                    height="24"
+                    width="24"
+                />
             </div>
 
             <div
                 class="w-96 md:w-[60vw] carousel gap-6"
                 on:wheel={(e) => {
                     scrollHorizontally(e, myListElement);
+                }}
+                on:mouseenter={() => {
+                    setTimeout(() => {
+                        mouseOverElement = true;
+                    }, MOUSE_OVER_DELAY);
+                }}
+                on:mouseleave={() => {
+                    mouseOverElement = false;
                 }}
                 bind:this={myListElement}
             >
@@ -138,7 +184,10 @@
                         class="carousel-item card w-36 h-52 bg-base-100 image-full before:!opacity-60"
                     >
                         <figure>
-                            <img src={item.background_image} alt={item.name} />
+                            <img
+                                src={item.background_image}
+                                alt={item.name}
+                            />
                         </figure>
                         <div class="card-body justify-between items-center !text-white">
                             <h2 class="card-title text-sm">
