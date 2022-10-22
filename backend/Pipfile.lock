@@ -1084,10 +1084,10 @@
         "pyrate-limiter": {
             "extras": ["redis"],
             "hashes": [
-                "sha256:083aa1732053e6b135487b8295989b7a24e7075964f076577422dfb3712be413"
+                "sha256:9f464ed01fa647d4d1f32ce27b8db9d594ab787847ec4ae72e1f5498756dd33d"
             ],
             "index": "pypi",
-            "version": "==2.8.2"
+            "version": "==2.8.3"
         },
         "python-dotenv": {
             "hashes": [
@@ -2093,11 +2093,11 @@
         },
         "types-redis": {
             "hashes": [
-                "sha256:493814829643fc04a14595eda6ccd69bdc0606477541ccda54238ce3f60bc993",
-                "sha256:65b8c842f406932218f8ce636f75e5a03cb6b382d3922cb3e5f87e127e6d434d"
+                "sha256:ab542249a47d3903b94162e6395ae6be0cc0f562fd184ed51a0a34d8a7021a39",
+                "sha256:eda5fd9e80f453143902db5547ca6506a3af44476ad080db7d18840da532ab19"
             ],
             "index": "pypi",
-            "version": "==4.3.21.1"
+            "version": "==4.3.21.2"
         },
         "typing-extensions": {
             "hashes": [
