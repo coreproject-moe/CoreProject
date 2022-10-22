@@ -16,7 +16,7 @@
     let myListElement: HTMLDivElement;
     let continueWatchingElement: HTMLDivElement;
 
-    // Helpers
+    // If rootelement is not in user viewport theres no point in making them scrollable
     $: {
         if (!rootElementIntersecting) {
             continueWatchingElement?.classList.add("overflow-hidden");
@@ -54,7 +54,7 @@
     mylistAnimeNameWordCount ??= 25;
 
     // Check if mouse is over element
-    const MOUSE_OVER_DELAY = 500;
+    const MOUSE_OVER_DELAY = 1_500;
 
     const scrollHorizontally = (e: WheelEvent, element: HTMLElement) => {
         // const length_of_one_element = element.clientWidth / element.childNodes.length;
