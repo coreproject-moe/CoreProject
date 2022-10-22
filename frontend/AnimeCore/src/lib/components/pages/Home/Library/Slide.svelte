@@ -54,7 +54,7 @@
     mylistAnimeNameWordCount ??= 25;
 
     // Check if mouse is over element
-    const MOUSE_OVER_DELAY = 1_500;
+    const MOUSE_OVER_DELAY = 500;
 
     const scrollHorizontally = (e: WheelEvent, element: HTMLElement) => {
         // const length_of_one_element = element.clientWidth / element.childNodes.length;
