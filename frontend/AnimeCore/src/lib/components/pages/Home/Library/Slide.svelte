@@ -1,5 +1,6 @@
 <script lang="ts">
     import voca from "voca";
+    import IntersectionObserver from "svelte-intersection-observer";
 
     import continueWatching from "$data/mock/continue_watching.json";
     import latestEpisodes from "$data/mock/latest_episode.json";
@@ -9,8 +10,19 @@
     import { responsiveMode } from "$store/Responsive";
 
     // bind
+    let rootElement: HTMLDivElement;
+    let rootElementIntersecting: boolean;
+
     let myListElement: HTMLDivElement;
     let continueWatchingElement: HTMLDivElement;
+
+    // Helpers
+    $: {
+        if (!rootElementIntersecting) {
+            continueWatchingElement?.classList.add("overflow-hidden");
+            myListElement?.classList.add("overflow-hidden");
+        }
+    }
 
     // Responsive switches
     let mobile: boolean;
@@ -50,155 +62,169 @@
     };
 </script>
 
-<div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
-    <div class="hero-content text-center flex-col md:flex-row">
-        <div class="flex flex-col gap-3">
-            <p class="text-3xl font-bold flex">Latest Episode</p>
-            <p class="flex gap-2">
-                show from my list only <ChevronDown
-                    height={25}
-                    width={25}
-                />
-            </p>
-            <div
-                class="h-28 md:h-[530px] w-96 md:w-80 carousel gap-6 carousel-center md:carousel-vertical overscroll-contain"
-            >
-                {#each latestEpisodes as item}
-                    <div
-                        class="w-10/12 md:w-64 carousel-item bg-center rounded-xl bg-no-repeat bg-cover flex items-center justify-between p-8"
-                        style="background-image:
+<IntersectionObserver
+    element={rootElement}
+    bind:intersecting={rootElementIntersecting}
+>
+    <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
+        <div
+            bind:this={rootElement}
+            class="hero-content text-center flex-col md:flex-row"
+        >
+            <div class="flex flex-col gap-3">
+                <p class="text-3xl font-bold flex">Latest Episode</p>
+                <p class="flex gap-2">
+                    show from my list only <ChevronDown
+                        height={25}
+                        width={25}
+                    />
+                </p>
+                <div
+                    class="h-28 md:h-[530px] w-96 md:w-80 carousel gap-6 carousel-center md:carousel-vertical overscroll-contain"
+                >
+                    {#each latestEpisodes as item}
+                        <div
+                            class="w-10/12 md:w-64 carousel-item bg-center rounded-xl bg-no-repeat bg-cover flex items-center justify-between p-8"
+                            style="background-image:
                             linear-gradient(90deg, rgb(7 5 25 / 92%) -1.41%, rgba(7, 5, 25, 0.1) 100%),
                             linear-gradient(180deg, rgba(7, 5, 25, 0) -16%, rgb(7 5 25 / 90%) 95.81%),
                             url('{item.background_image.trim()}');
                         "
-                    >
-                        <div class="flex flex-col items-start">
-                            <p
-                                class="font-bold"
-                                style="display: block ruby"
-                            >
-                                {voca
-                                    .chain(item.name)
-                                    .trim()
-                                    .truncate(lastestEpisodeNameWordCount + 3, " ...")}
-                            </p>
-                            <p>
-                                Ep {voca.chain(String(item.episode)).padLeft(2, String(0))}
-                            </p>
-                        </div>
-
-                        <button
-                            class="btn btn-circle btn-md btn-warning"
-                            aria-label="play"
                         >
-                            <Play
-                                width={20}
-                                height={20}
-                            />
-                        </button>
-                    </div>
-                {/each}
+                            <div class="flex flex-col items-start">
+                                <p
+                                    class="font-bold"
+                                    style="display: block ruby"
+                                >
+                                    {voca
+                                        .chain(item.name)
+                                        .trim()
+                                        .truncate(lastestEpisodeNameWordCount + 3, " ...")}
+                                </p>
+                                <p>
+                                    Ep {voca.chain(String(item.episode)).padLeft(2, String(0))}
+                                </p>
+                            </div>
+
+                            <button
+                                class="btn btn-circle btn-md btn-warning"
+                                aria-label="play"
+                            >
+                                <Play
+                                    width={20}
+                                    height={20}
+                                />
+                            </button>
+                        </div>
+                    {/each}
+                </div>
             </div>
-        </div>
-        <div class="divider lg:divider-horizontal hidden md:flex before:bg-white after:bg-white" />
-        <div class="flex flex-col">
-            <p class="font-bold text-3xl items-start flex pb-4">Continue Watching</p>
             <div
-                class="h-28 md:h-[200px] w-96 md:w-[60vw] carousel gap-6 overscroll-contain overflow-hidden"
-                bind:this={continueWatchingElement}
-                on:wheel={(e) => {
-                    if (!continueWatchingElement?.classList.contains("overflow-hidden")) {
-                        scrollHorizontally(e, continueWatchingElement);
-                    }
-                }}
-                on:mouseenter={() => {
-                    if (continueWatchingElement?.offsetParent) {
+                class="divider lg:divider-horizontal hidden md:flex before:bg-white after:bg-white"
+            />
+            <div class="flex flex-col">
+                <p class="font-bold text-3xl items-start flex pb-4">Continue Watching</p>
+                <div
+                    class="h-28 md:h-[200px] w-96 md:w-[60vw] carousel gap-6 overscroll-contain overflow-hidden"
+                    bind:this={continueWatchingElement}
+                    on:wheel={(e) => {
+                        if (!continueWatchingElement?.classList.contains("overflow-hidden")) {
+                            scrollHorizontally(e, continueWatchingElement);
+                        }
+                    }}
+                    on:mouseenter={() => {
                         setTimeout(() => {
                             continueWatchingElement?.classList.remove("overflow-hidden");
                         }, MOUSE_OVER_DELAY);
-                    }
-                }}
-                on:mouseleave={() => {
-                    continueWatchingElement?.classList.add("overflow-hidden");
-                }}
-            >
-                {#each continueWatching as item}
-                    <div
-                        class="carousel-item w-96 md:w-[30vw] rounded-xl flex items-center justify-around"
-                        style="background-image:
+                    }}
+                    on:mouseleave={() => {
+                        continueWatchingElement?.classList.add("overflow-hidden");
+                    }}
+                >
+                    {#each continueWatching as item}
+                        <div
+                            class="carousel-item w-96 md:w-[30vw] rounded-xl flex items-center justify-around"
+                            style="background-image:
                                 linear-gradient(90deg, rgb(7 5 25 / 92%) -1.41%, rgba(7, 5, 25, 0.1) 100%),
                                 linear-gradient(180deg, rgba(7, 5, 25, 0) -16%, rgb(7 5 25 / 90%) 95.81%),
                                 url('{item.background_image}');"
-                    >
-                        <div class="flex flex-col items-start">
-                            <p class="font-bold">{item.name}</p>
-                            <p>
-                                Ep {voca.chain(String(item.current_episode)).padLeft(2, String(0))}
-                            </p>
-                        </div>
-
-                        <button
-                            class="btn btn-circle btn-md btn-warning"
-                            aria-label="play"
                         >
-                            <Play
-                                width={20}
-                                height={20}
-                            />
-                        </button>
-                    </div>
-                {/each}
-            </div>
-            <div class="divider hidden md:flex before:bg-white after:bg-white" />
-            <div class="flex items-center pb-3 gap-2">
-                <p class="font-bold text-3xl items-start">My List</p>
-                <p class="text-3xl">•</p>
-                <p class="text-xl">Watching</p>
-                <ChevronDown
-                    color="white"
-                    height="24"
-                    width="24"
-                />
-            </div>
+                            <div class="flex flex-col items-start">
+                                <p class="font-bold">{item.name}</p>
+                                <p>
+                                    Ep {voca
+                                        .chain(String(item.current_episode))
+                                        .padLeft(2, String(0))}
+                                </p>
+                            </div>
 
-            <div
-                class="w-96 md:w-[60vw] carousel gap-6 overscroll-contain"
-                on:wheel={(e) => {
-                    if (!myListElement?.classList.contains("overflow-hidden")) {
-                        scrollHorizontally(e, myListElement);
-                    }
-                }}
-                on:mouseenter={() => {
-                    if (myListElement?.offsetParent) {
+                            <button
+                                class="btn btn-circle btn-md btn-warning"
+                                aria-label="play"
+                            >
+                                <Play
+                                    width={20}
+                                    height={20}
+                                />
+                            </button>
+                        </div>
+                    {/each}
+                </div>
+                <div
+                    class="divider hidden md:flex before:bg-white after:bg-white"
+                    on:mouseenter={() => {
+                        continueWatchingElement.classList.add("overflow-hidden");
+                        myListElement.classList.add("overflow-hidden");
+                    }}
+                />
+                <div class="flex items-center pb-3 gap-2">
+                    <p class="font-bold text-3xl items-start">My List</p>
+                    <p class="text-3xl">•</p>
+                    <p class="text-xl">Watching</p>
+                    <ChevronDown
+                        color="white"
+                        height="24"
+                        width="24"
+                    />
+                </div>
+
+                <div
+                    class="w-96 md:w-[60vw] carousel gap-6 overscroll-contain overflow-hidden"
+                    bind:this={myListElement}
+                    on:wheel={(e) => {
+                        if (!myListElement?.classList.contains("overflow-hidden")) {
+                            scrollHorizontally(e, myListElement);
+                        }
+                    }}
+                    on:mouseenter={() => {
                         setTimeout(() => {
                             myListElement?.classList.remove("overflow-hidden");
                         }, MOUSE_OVER_DELAY);
-                    }
-                }}
-                on:mouseleave={() => {
-                    myListElement?.classList.add("overflow-hidden");
-                }}
-                bind:this={myListElement}
-            >
-                {#each myList as item}
-                    <div
-                        class="carousel-item card w-36 h-52 bg-base-100 image-full before:!opacity-60"
-                    >
-                        <figure>
-                            <img
-                                src={item.background_image}
-                                alt={item.name}
-                            />
-                        </figure>
-                        <div class="card-body justify-between items-center !text-white">
-                            <h2 class="card-title text-sm">
-                                {voca.chain(item.name).truncate(mylistAnimeNameWordCount + 3)}
-                            </h2>
-                            <div class="card-actions">{item.current}/{item.total}</div>
+                    }}
+                    on:mouseleave={() => {
+                        myListElement?.classList.add("overflow-hidden");
+                    }}
+                >
+                    {#each myList as item}
+                        <div
+                            class="carousel-item card w-36 h-52 bg-base-100 image-full before:!opacity-60"
+                        >
+                            <figure>
+                                <img
+                                    src={item.background_image}
+                                    alt={item.name}
+                                />
+                            </figure>
+                            <div class="card-body justify-between items-center !text-white">
+                                <h2 class="card-title text-sm">
+                                    {voca.chain(item.name).truncate(mylistAnimeNameWordCount + 3)}
+                                </h2>
+                                <div class="card-actions">{item.current}/{item.total}</div>
+                            </div>
                         </div>
-                    </div>
-                {/each}
+                    {/each}
+                </div>
             </div>
         </div>
     </div>
-</div>
+</IntersectionObserver>
