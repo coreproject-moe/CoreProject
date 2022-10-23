@@ -80,7 +80,7 @@
                     />
                 </p>
                 <div
-                    class="h-28 md:h-[530px] w-96 md:w-80 carousel gap-6 carousel-center md:carousel-vertical overscroll-contain"
+                    class="h-28 md:h-[530px] w-96 md:w-80 carousel gap-6 carousel-center md:carousel-vertical overscroll-auto lg:overscroll-contain"
                 >
                     {#each latestEpisodes as item}
                         <div
@@ -129,7 +129,7 @@
             <div class="flex flex-col">
                 <p class="font-bold text-3xl items-start flex pb-4">Continue Watching</p>
                 <div
-                    class="h-28 md:h-[200px] w-96 md:w-[60vw] carousel gap-6 overscroll-contain overflow-y-hidden"
+                    class="h-28 md:h-[200px] w-96 md:w-[60vw] carousel gap-6 overscroll-auto lg:overscroll-contain overflow-y-hidden"
                     bind:this={continueWatchingElement}
                     on:wheel|passive={(e) => {
                         if (!continueWatchingElement?.classList.contains("overflow-y-hidden")) {
@@ -193,7 +193,7 @@
                 </div>
 
                 <div
-                    class="w-96 md:w-[60vw] carousel gap-6 overscroll-contain overflow-y-hidden"
+                    class="w-96 md:w-[60vw] carousel gap-6 overscroll-auto lg:overscroll-contain overflow-y-hidden"
                     bind:this={myListElement}
                     on:wheel={(e) => {
                         if (!myListElement?.classList.contains("overflow-y-hidden")) {
