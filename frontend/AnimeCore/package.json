@@ -4,6 +4,7 @@
     "scripts": {
         "dev": "vite dev --host",
         "build": "vite build",
+        "build:vercel": "cross-env NODE_ENV=vecel vite build",
         "package": "svelte-kit package",
         "preview": "vite preview",
         "postinstall": "svelte-kit sync",
@@ -26,9 +27,11 @@
         "@typescript-eslint/eslint-plugin": "^5.40.1",
         "@typescript-eslint/parser": "^5.40.1",
         "autoprefixer": "^10.4.12",
+        "cross-env": "^7.0.3",
         "cssnano": "^5.1.13",
         "daisyui": "^2.33.0",
         "dayjs": "^1.11.6",
+        "detect-browser": "^5.3.0",
         "easytimer.js": "^4.5.4",
         "eslint": "^8.25.0",
         "eslint-config-prettier": "^8.5.0",
@@ -44,6 +47,8 @@
         "sass": "^1.55.0",
         "svelte": "^3.52.0",
         "svelte-check": "^2.9.2",
+        "svelte-gestures": "^1.4.1",
+        "svelte-intersection-observer": "^0.10.0",
         "svelte-preprocess": "^4.10.7",
         "tailwindcss": "^3.2.1",
         "tslib": "^2.4.0",
@@ -51,9 +56,5 @@
         "vite": "^3.1.8",
         "voca": "^1.4.0"
     },
-    "type": "module",
-    "dependencies": {
-        "detect-browser": "^5.3.0",
-        "svelte-gestures": "^1.4.1"
-    }
+    "type": "module"
 }
