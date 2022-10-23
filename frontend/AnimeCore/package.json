@@ -4,6 +4,7 @@
     "scripts": {
         "dev": "vite dev --host",
         "build": "vite build",
+        "build:vercel": "cross-env NODE_ENV=vecel vite build",
         "package": "svelte-kit package",
         "preview": "vite preview",
         "postinstall": "svelte-kit sync",
@@ -26,6 +27,7 @@
         "@typescript-eslint/eslint-plugin": "^5.40.1",
         "@typescript-eslint/parser": "^5.40.1",
         "autoprefixer": "^10.4.12",
+        "cross-env": "^7.0.3",
         "cssnano": "^5.1.13",
         "daisyui": "^2.33.0",
         "dayjs": "^1.11.6",
@@ -54,6 +56,5 @@
         "vite": "^3.1.8",
         "voca": "^1.4.0"
     },
-    "type": "module",
-    "dependencies": {}
+    "type": "module"
 }
