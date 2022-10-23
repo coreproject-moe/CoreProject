@@ -8,6 +8,7 @@ from yarl import URL
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.shortcuts import render
 from django.http import Http404, HttpRequest, HttpResponse, StreamingHttpResponse
 
 from aiohttp_client_cache.backends import RedisBackend
@@ -81,3 +82,7 @@ async def avatar_view(
                 )
 
     return response
+
+
+def signup_view(request: HttpRequest) -> HttpResponse:
+    return render("")
