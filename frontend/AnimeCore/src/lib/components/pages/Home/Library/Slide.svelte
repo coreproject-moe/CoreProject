@@ -19,8 +19,8 @@
     // If rootelement is not in user viewport theres no point in making them scrollable
     $: {
         if (!rootElementIntersecting) {
-            continueWatchingElement?.classList.add("overflow-hidden");
-            myListElement?.classList.add("overflow-hidden");
+            continueWatchingElement?.classList.add("overflow-y-hidden");
+            myListElement?.classList.add("overflow-y-hidden");
         }
     }
 
@@ -121,24 +121,28 @@
             </div>
             <div
                 class="divider lg:divider-horizontal hidden md:flex before:bg-white after:bg-white"
+                on:mouseenter={async () => {
+                    continueWatchingElement.classList.add("overflow-y-hidden");
+                    myListElement.classList.add("overflow-y-hidden");
+                }}
             />
             <div class="flex flex-col">
                 <p class="font-bold text-3xl items-start flex pb-4">Continue Watching</p>
                 <div
-                    class="h-28 md:h-[200px] w-96 md:w-[60vw] carousel gap-6 overscroll-contain overflow-hidden"
+                    class="h-28 md:h-[200px] w-96 md:w-[60vw] carousel gap-6 overscroll-contain overflow-y-hidden"
                     bind:this={continueWatchingElement}
-                    on:wheel={(e) => {
-                        if (!continueWatchingElement?.classList.contains("overflow-hidden")) {
+                    on:wheel|passive={(e) => {
+                        if (!continueWatchingElement?.classList.contains("overflow-y-hidden")) {
                             scrollHorizontally(e, continueWatchingElement);
                         }
                     }}
-                    on:mouseenter={() => {
+                    on:mouseenter={async () => {
                         setTimeout(() => {
-                            continueWatchingElement?.classList.remove("overflow-hidden");
+                            continueWatchingElement?.classList.remove("overflow-y-hidden");
                         }, MOUSE_OVER_DELAY);
                     }}
-                    on:mouseleave={() => {
-                        continueWatchingElement?.classList.add("overflow-hidden");
+                    on:mouseleave={async () => {
+                        continueWatchingElement?.classList.add("overflow-y-hidden");
                     }}
                 >
                     {#each continueWatching as item}
@@ -172,9 +176,9 @@
                 </div>
                 <div
                     class="divider hidden md:flex before:bg-white after:bg-white"
-                    on:mouseenter={() => {
-                        continueWatchingElement.classList.add("overflow-hidden");
-                        myListElement.classList.add("overflow-hidden");
+                    on:mouseenter={async () => {
+                        continueWatchingElement.classList.add("overflow-y-hidden");
+                        myListElement.classList.add("overflow-y-hidden");
                     }}
                 />
                 <div class="flex items-center pb-3 gap-2">
@@ -189,20 +193,20 @@
                 </div>
 
                 <div
-                    class="w-96 md:w-[60vw] carousel gap-6 overscroll-contain overflow-hidden"
+                    class="w-96 md:w-[60vw] carousel gap-6 overscroll-contain overflow-y-hidden"
                     bind:this={myListElement}
                     on:wheel={(e) => {
-                        if (!myListElement?.classList.contains("overflow-hidden")) {
+                        if (!myListElement?.classList.contains("overflow-y-hidden")) {
                             scrollHorizontally(e, myListElement);
                         }
                     }}
-                    on:mouseenter={() => {
+                    on:mouseenter={async () => {
                         setTimeout(() => {
-                            myListElement?.classList.remove("overflow-hidden");
+                            myListElement?.classList.remove("overflow-y-hidden");
                         }, MOUSE_OVER_DELAY);
                     }}
-                    on:mouseleave={() => {
-                        myListElement?.classList.add("overflow-hidden");
+                    on:mouseleave={async () => {
+                        myListElement?.classList.add("overflow-y-hidden");
                     }}
                 >
                     {#each myList as item}
