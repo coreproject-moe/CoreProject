@@ -1,6 +1,6 @@
 <script lang="ts">
-    import voca from "voca";
     import IntersectionObserver from "svelte-intersection-observer";
+    import voca from "voca";
 
     import continueWatching from "$data/mock/continue_watching.json";
     import latestEpisodes from "$data/mock/latest_episode.json";
