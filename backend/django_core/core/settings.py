@@ -85,11 +85,12 @@ INSTALLED_APPS = [
 ]
 
 # Debug Toolbar Add
-# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install-the-app
+# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install`-the-app
 if DEBUG:
     INSTALLED_APPS += (
         "debug_toolbar",
         "dbbackup",  # django-dbbackup
+        "django_browser_reload",
     )
 
 
@@ -120,6 +121,7 @@ if DEBUG:
     MIDDLEWARE += (
         "debug_toolbar.middleware.DebugToolbarMiddleware",
         "django_cprofile_middleware.middleware.ProfilerMiddleware",
+        "django_browser_reload.middleware.BrowserReloadMiddleware",
     )
 
 

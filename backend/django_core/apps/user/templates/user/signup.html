@@ -1,7 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'user/base.html' %}
 <!--prettier-ignore-->
 {% load crispy_forms_tags %}
 
 {% block body %}
-    {% crispy form %}
+<div class="d-flex justify-content-center align-items-center text-center">
+    <div class="card" style="width: 20rem">
+        <div class="card-header">Featured</div>
+        {%crispy form%}
+    </div>
+</div>
 {% endblock body %}

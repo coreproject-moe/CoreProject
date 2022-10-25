@@ -47,6 +47,7 @@ pillow = "*"
 # Aiohttp
 aiohttp-devtools = "*"
 # Django
+django-browser-reload = '*'
 django_debug_toolbar = "*"
 django_dbbackup = "*"
 django_cprofile_middleware = "*"
