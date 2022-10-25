@@ -1,5 +1,7 @@
-{% extends 'base-bootstrap.html' %} {% block body %}
+{% extends 'base.html' %}
+<!--prettier-ignore-->
+{% load crispy_forms_tags %}
 
-<a href="/user/login">gasd</a>
-
+{% block body %}
+    {% crispy form %}
 {% endblock body %}

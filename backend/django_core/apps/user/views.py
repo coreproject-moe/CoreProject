@@ -3,6 +3,7 @@ import hashlib
 from io import BytesIO
 import mimetypes
 from typing import IO
+from .forms import UserRegistrationForm
 
 from yarl import URL
 
@@ -85,7 +86,10 @@ async def avatar_view(
 
 
 def signup_view(request: HttpRequest) -> HttpResponse:
-    return render(request, "user/signup.html")
+    form = UserRegistrationForm(request.POST or None)
 
-def login_view(request:HttpRequest) -> HttpResponse:
-    return render(request,'user/login.html')
+    return render(request, "user/signup.html",{'form':form,})
+
+
+def login_view(request: HttpRequest) -> HttpResponse:
+    return render(request, "user/login.html")

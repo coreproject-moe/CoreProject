@@ -1,18 +1,19 @@
 [[source]]
+url = "https://kivy.org/downloads/simple/"
+verify_ssl = true
+name = "kivy_nightly"
+
+
+[[source]]
 url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
 [packages]
-kivy = {extras = ["full"], version = "*"}
-buildozer = "*"
-cython = "*"
+kivymd = "*"
+cython = "==3.0.0a11"
 
 [dev-packages]
 
 [requires]
-python_version = "3.10"
-
-[scripts]
-debug = "buildozer -v android debug"
-deploy = 'buildozer -v android debug deploy'
+python_version = "3.11"
