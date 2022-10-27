@@ -1,4 +1,3 @@
-import staticAdapter from "@sveltejs/adapter-static";
 import vercel from "@sveltejs/adapter-vercel";
 import path from "path";
 import preprocess from "svelte-preprocess";
