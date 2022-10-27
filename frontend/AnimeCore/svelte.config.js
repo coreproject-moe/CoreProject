@@ -19,7 +19,7 @@ const config = {
             // if true, will deploy the app using edge functions
             // (https://vercel.com/docs/concepts/functions/edge-functions)
             // rather than serverless functions
-            edge: true,
+            edge: false,
 
             // an array of dependencies that esbuild should treat
             // as external when bundling functions
