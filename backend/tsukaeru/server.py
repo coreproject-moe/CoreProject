@@ -1,3 +1,4 @@
+from typing import AsyncGenerator
 import jinja2
 
 from aiohttp import web
@@ -13,7 +14,7 @@ from .views.user.avatar import routes as avatar_routes
 routes = web.RouteTableDef()
 
 
-async def session_context(app: web.Application) -> None:
+async def session_context(app: web.Application) -> AsyncGenerator[None, CachedSession]:
     session = CachedSession(
         cache=RedisBackend(
             "aiohttp_cache",
@@ -27,7 +28,7 @@ async def session_context(app: web.Application) -> None:
 
 async def db_context(
     app: web.Application,
-) -> None:
+) -> AsyncGenerator[None, SessionLocal]:
     app["db"] = SessionLocal(bind=engine)
     yield
     await engine.dispose()
@@ -40,6 +41,7 @@ async def aiohttp_app() -> web.Application:
     app.cleanup_ctx.append(session_context)
     app.add_routes(index_routes)
     app.add_routes(avatar_routes)
+    print(app.router._resources)
     return app
 
 

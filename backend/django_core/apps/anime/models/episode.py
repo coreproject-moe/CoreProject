@@ -1,23 +1,13 @@
-from pathlib import Path
-
 from core.storages import OverwriteStorage
+from dynamic_filenames import FilePattern
 
 from django.db import models
 
 from .episode_comment import EpisodeCommentModel
 from .episode_timestamp import EpisodeTimestampModel
 
-
-class FileField:
-    # Thanks Stackoverflow
-    # https://stackoverflow.com/questions/1190697/django-filefield-with-upload-to-determined-at-runtime
-    @staticmethod
-    def episode_cover(instance: "EpisodeModel", filename: str) -> Path:
-        return Path("episode_cover", filename)
-
-    @staticmethod
-    def episode_upload(instance: "EpisodeModel", filename: str) -> Path:
-        return Path("episode", filename)
+episode_cover = FilePattern(filename_pattern="/episode_cover{ext}")
+episode_pattern = FilePattern(filename_pattern="/episode{ext}")
 
 
 # Create your models here.
@@ -28,14 +18,14 @@ class EpisodeModel(models.Model):
     episode_name = models.CharField(max_length=1024, db_index=True)
     episode_cover = models.ImageField(
         storage=OverwriteStorage(),
-        upload_to=FileField.episode_cover,
+        upload_to=episode_cover,
         default=None,
         blank=True,
         null=True,
     )
     episode_file = models.FileField(
         storage=OverwriteStorage(),
-        upload_to=FileField.episode_upload,
+        upload_to=episode_pattern,
         default=None,
         blank=True,
         null=True,
