@@ -1,29 +1,39 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import { blur } from 'svelte/transition';
 	let CHOICES = [
 		'https://images.unsplash.com/photo-1666688090267-4858c2075629',
-		'https://placeimg.com/1000/800/arch'
+		'https://images.unsplash.com/photo-1666756272254-724e9ed61321',
+		'https://images.unsplash.com/photo-1666845266582-7885e3485303'
 	];
-	var index = Math.floor(Math.random() * CHOICES.length);
 
 	let CHOICE_NUMBER = 1;
 
 	setInterval(() => {
+		const index = Math.floor(Math.random() * CHOICES.length);
 		CHOICE_NUMBER = index;
+		console.log(index);
 	}, 1000);
 </script>
 
-<div class="grid h-screen w-screen">
+<svelte:head>
+	{#each CHOICES as image}
+		<link rel="preload" as="image" href={image} />
+	{/each}
+</svelte:head>
+
+<div class="grid h-screen w-screen" style="grid-area: 1 / 1 / 2 / 2">
 	<!-- Background Image Container -->
-	<div style="grid-area: 1 / 1 / 2 / 2">
-		{#each CHOICES as item}
-			{#if CHOICES.indexOf(item) == CHOICE_NUMBER}
+	{#each CHOICES as item}
+		{#if CHOICES.indexOf(item) == CHOICE_NUMBER}
+			<div transition:blur|local style="grid-area: 1 / 1 / 2 / 2">
 				<div
 					class="h-screen w-screen bg-no-repeat bg-center bg-cover"
 					style="background-image:url('{item}')"
 				/>
-			{/if}
-		{/each}
-	</div>
+			</div>
+		{/if}
+	{/each}
 
 	<!-- Login card  -->
 	<div style="grid-area: 1 / 1 / 2 / 2" class="inline-grid justify-center content-center">
