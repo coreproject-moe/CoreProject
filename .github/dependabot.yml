@@ -30,3 +30,8 @@ updates:
       directory: /frontend/Admin/
       schedule:
           interval: monthly
+
+    - package-ecosystem: npm
+      directory: /frontend/User/
+      schedule:
+          interval: monthly
