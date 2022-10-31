@@ -101,13 +101,13 @@ def login_view(request: HttpRequest) -> HttpResponse:
     return render(request, "user/login.html")
 
 
-def username_discriminator_endpoint(
+async def username_discriminator_endpoint(
     request: HttpRequest,
     username: str,
     username_discriminator: str,
 ) -> HttpResponse:
     if not (
-        CustomUser.objects.get_username_with_discriminator()
+        await CustomUser.objects.get_username_with_discriminator()
         .filter(
             username_with_discriminator=f"""{
                 username
@@ -119,7 +119,7 @@ def username_discriminator_endpoint(
             }
             """
         )
-        .exists()
+        .aexists()
     ):
         return HttpResponse(status_code=200)
     else:
