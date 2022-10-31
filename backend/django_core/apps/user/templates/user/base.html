@@ -7,11 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
 
-        <script
-            src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"
-            integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY="
-            crossorigin="anonymous"
-        ></script>
+        <script src="{% static 'js/anime.min.js' %}"></script>
 
         <script src="{% static 'js/popper.min.js' %}" data-reload></script>
         <script
@@ -32,6 +28,60 @@
                 log: {{ debug|yesno:"true,false" }},
                 pageTransitions: false,
             });
+        </script>
+        <script type="module">
+            const CHOICES = [
+                'https://images.unsplash.com/photo-1666688090267-4858c2075629',
+                'https://images.unsplash.com/photo-1666756272254-724e9ed61321',
+                'https://images.unsplash.com/photo-1666845266582-7885e3485303',
+            ];
+
+            CHOICES.forEach((item) => {
+                var link = document.createElement('link');
+                link.rel = 'preload';
+                link.as = 'image';
+                link.href = item;
+                document.head.appendChild(link);
+            });
+
+            const element = document.querySelector('.background____item');
+
+            const changeBackground = (background_image) => {
+                anime
+                    .timeline({
+                        targets: element,
+                        duration: 400,
+                        easing: 'easeInOutQuad',
+                    })
+                    .add({
+                        opacity: 0,
+                        complete: () => {
+                            element.innerHTML = '';
+                        },
+                    })
+                    .add({
+                        opacity: 1,
+                        begin: () => {
+                            const newElement = document.createElement('div');
+                            newElement.classList = 'vh-100 vw-100';
+                            newElement.style.backgroundImage = `url('${background_image}')`;
+                            newElement.style.filter = 'brightness(0.5)';
+                            newElement.style.backgroundRepeat = 'no-repeat';
+                            newElement.style.backgroundSize = 'cover';
+                            element.appendChild(newElement);
+                        },
+                    });
+            };
+
+            var last_known_image = '';
+            setInterval(() => {
+                const NewChoice = CHOICES.filter(
+                    (item) => item != last_known_image
+                );
+                const index = Math.floor(Math.random() * NewChoice.length);
+                last_known_image = NewChoice[index];
+                changeBackground(NewChoice[index]);
+            }, 5000);
         </script>
 
         {% block head %}{% endblock head %}
@@ -56,60 +106,5 @@
                 {% block body %}{% endblock body %}
             </div>
         </div>
-        <script type="module">
-            const CHOICES = [
-                'https://images.unsplash.com/photo-1666688090267-4858c2075629',
-                'https://images.unsplash.com/photo-1666756272254-724e9ed61321',
-                'https://images.unsplash.com/photo-1666845266582-7885e3485303',
-            ];
-
-            CHOICES.forEach((item) => {
-                var link = document.createElement('link');
-                link.rel = 'preload';
-                link.as = 'image';
-                link.href = item;
-                document.head.appendChild(link);
-            });
-
-            const element = document.querySelector('.background____item');
-
-            const changeBackground = (background_image) => {
-                anime
-                    .timeline({
-                        targets: element,
-                        duration: 400,
-                    })
-                    .add({
-                        easing: 'linear',
-                        opacity: 0,
-                        complete: () => {
-                            element.firstElementChild.remove();
-                        },
-                    })
-                    .add({
-                        easing: 'linear',
-                        opacity: 1,
-                        begin: () => {
-                            const newElement = document.createElement('div');
-                            newElement.classList = 'vh-100 vw-100';
-                            newElement.style.backgroundImage = `url('${background_image}')`;
-                            newElement.style.filter = 'brightness(0.5)';
-                            newElement.style.backgroundRepeat = 'no-repeat';
-                            newElement.style.backgroundSize = 'cover';
-                            element.appendChild(newElement);
-                        },
-                    });
-            };
-            var last_known_image = '';
-            setInterval(() => {
-                const NewChoice = CHOICES.filter(
-                    (item) => item != last_known_image
-                );
-
-                const index = Math.floor(Math.random() * NewChoice.length);
-                last_known_image = NewChoice[index];
-                changeBackground(NewChoice[index]);
-            }, 5000);
-        </script>
     </body>
 </html>
