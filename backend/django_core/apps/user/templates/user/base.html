@@ -10,10 +10,7 @@
         <script src="{% static 'js/anime.min.js' %}"></script>
 
         <script src="{% static 'js/popper.min.js' %}" data-reload></script>
-        <script
-            src="{% static 'admin/js/vendor/jquery/jquery.min.js'%}"
-            data-reload
-        ></script>
+
         <script
             defer
             src="{% static 'js/bootstrap.bundle.min.js' %}"
@@ -55,13 +52,11 @@
                     })
                     .add({
                         opacity: 0,
-                        complete: () => {
-                            element.innerHTML = '';
-                        },
                     })
                     .add({
                         opacity: 1,
                         begin: () => {
+                            element.innerHTML = '';
                             const newElement = document.createElement('div');
                             newElement.classList = 'vh-100 vw-100';
                             newElement.style.backgroundImage = `url('${background_image}')`;
