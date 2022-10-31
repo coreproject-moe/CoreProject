@@ -57,14 +57,17 @@
                     .add({
                         opacity: 1,
                         begin: () => {
-                            element.innerHTML = '';
-                            const newElement = document.createElement('div');
-                            newElement.classList = 'vh-100 vw-100';
-                            newElement.style.backgroundImage = `url('${background_image}')`;
-                            newElement.style.filter = 'brightness(0.5)';
-                            newElement.style.backgroundRepeat = 'no-repeat';
-                            newElement.style.backgroundSize = 'cover';
-                            element.appendChild(newElement);
+                            element.innerHTML = `
+                            <div
+                                class="vh-100 vw-100"
+                                style="
+                                    filter: brightness(0.5);
+                                    background-repeat: no-repeat;
+                                    background-size: cover;
+                                    background-image: url('${background_image}');
+                                "
+                            />
+                            `.trim();
                         },
                     });
             };
