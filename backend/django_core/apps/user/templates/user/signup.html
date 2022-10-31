@@ -7,4 +7,32 @@
     <div class="card-header">Featured</div>
     {%crispy form%}
 </div>
+
+<script type="module">
+    //setup before functions
+    var typingTimer; //timer identifier
+    var doneTypingInterval = 5000; //time in ms, 5 seconds for example
+    var input = $('#id_username_discriminator');
+
+    //on keyup, start the countdown
+    input.on('keyup', function () {
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(doneTyping, doneTypingInterval);
+    });
+
+    //on keydown, clear the countdown
+    input.on('keydown', function () {
+        clearTimeout(typingTimer);
+    });
+
+    //user is "finished typing," do something
+    function doneTyping() {
+        let usernameDiscriminator = input.val();
+        let username = document.querySelector('#id_username').value;
+
+        $.ajax({
+            url: '',
+        });
+    }
+</script>
 {% endblock body %}
