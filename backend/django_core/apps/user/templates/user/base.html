@@ -44,7 +44,13 @@
 
             const element = document.querySelector('.background____item');
 
-            const changeBackground = (background_image) => {
+            const changeBackground = () => {
+                const NewChoice = CHOICES.filter(
+                    (item) => item != last_known_image
+                );
+                const index = Math.floor(Math.random() * NewChoice.length);
+                last_known_image = NewChoice[index];
+
                 anime
                     .timeline({
                         targets: element,
@@ -58,46 +64,39 @@
                         opacity: 1,
                         begin: () => {
                             element.innerHTML = `
-                            <div
-                                class="vh-100 vw-100"
-                                style="
-                                    filter: brightness(0.5);
-                                    background-repeat: no-repeat;
-                                    background-size: cover;
-                                    background-image: url('${background_image}');
-                                "
-                            />
+                                <div
+                                    class="vh-100 vw-100"
+                                    style=" 
+                                        filter: brightness(0.5);
+                                        background-repeat: no-repeat;
+                                        background-size: cover;
+                                        background-image: url('${last_known_image}');
+                                    "
+                                />
                             `.trim();
                         },
                     });
             };
 
             var last_known_image = '';
-            setInterval(() => {
-                const NewChoice = CHOICES.filter(
-                    (item) => item != last_known_image
-                );
-                const index = Math.floor(Math.random() * NewChoice.length);
-                last_known_image = NewChoice[index];
-                changeBackground(NewChoice[index]);
-            }, 5000);
+
+            $(document).ready(() => {
+                changeBackground();
+
+                setInterval(() => {
+                    changeBackground();
+                }, 5000);
+            });
         </script>
 
         {% block head %}{% endblock head %}
     </head>
     <body class="bg-black">
         <div class="d-grid vh-100 vw-100" style="grid-area: 1 / 1 / 2 / 2">
-            <div style="grid-area: 1 / 1 / 2 / 2" class="background____item">
-                <div
-                    class="vh-100 vw-100"
-                    style="
-                        filter: brightness(0.5);
-                        background-repeat: no-repeat;
-                        background-size: cover;
-                        background-image: url('https://images.unsplash.com/photo-1666756272254-724e9ed61321');
-                    "
-                ></div>
-            </div>
+            <div
+                style="grid-area: 1 / 1 / 2 / 2"
+                class="background____item"
+            ></div>
             <div
                 class="justify-content-center align-content-center"
                 style="display: inline-grid; grid-area: 1 / 1 / 2 / 2"
