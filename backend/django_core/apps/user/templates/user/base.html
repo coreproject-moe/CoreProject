@@ -8,9 +8,11 @@
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
 
         <script src="{% static 'js/anime.min.js' %}"></script>
-
         <script src="{% static 'js/popper.min.js' %}" data-reload></script>
-
+        <script
+            src="{% static 'admin/js/vendor/jquery/jquery.min.js'%}"
+            data-reload
+        ></script>
         <script
             defer
             src="{% static 'js/bootstrap.bundle.min.js' %}"
@@ -101,5 +103,30 @@
                 {% block body %}{% endblock body %}
             </div>
         </div>
+        <script type="module">
+            //setup before functions
+            var typingTimer; //timer identifier
+            var doneTypingInterval = 5000; //time in ms, 5 seconds for example
+            var input = $('#id_username_discriminator');
+
+            //on keyup, start the countdown
+            input.on('keyup', function () {
+                clearTimeout(typingTimer);
+                typingTimer = setTimeout(doneTyping, doneTypingInterval);
+            });
+
+            //on keydown, clear the countdown
+            input.on('keydown', function () {
+                clearTimeout(typingTimer);
+            });
+
+            //user is "finished typing," do something
+            function doneTyping() {
+                let usernameDiscriminator = input.val();
+                let username = document.querySelector('#id_username').value;
+
+                
+            }
+        </script>
     </body>
 </html>

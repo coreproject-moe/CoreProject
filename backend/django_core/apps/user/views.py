@@ -88,8 +88,39 @@ async def avatar_view(
 def signup_view(request: HttpRequest) -> HttpResponse:
     form = UserRegistrationForm(request.POST or None)
 
-    return render(request, "user/signup.html",{'form':form,})
+    return render(
+        request,
+        "user/signup.html",
+        context={
+            "form": form,
+        },
+    )
 
 
 def login_view(request: HttpRequest) -> HttpResponse:
     return render(request, "user/login.html")
+
+
+def username_discriminator_endpoint(
+    request: HttpRequest,
+    username: str,
+    username_discriminator: str,
+) -> HttpResponse:
+    if not (
+        CustomUser.objects.get_username_with_discriminator()
+        .filter(
+            username_with_discriminator=f"""{
+                username
+            }#{
+                username_discriminator
+                .zfill(
+                    settings.USERNAME_DISCRIMINATOR_LENGTH
+                )
+            }
+            """
+        )
+        .exists()
+    ):
+        return HttpResponse(status_code=200)
+    else:
+        return HttpResponse()
