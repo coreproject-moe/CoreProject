@@ -42,6 +42,9 @@
                 <div
                     class="vh-100 vw-100"
                     style="
+                        filter: brightness(0.5);
+                        background-repeat: no-repeat;
+                        background-size: cover;
                         background-image: url('https://images.unsplash.com/photo-1666756272254-724e9ed61321');
                     "
                 ></div>
@@ -59,6 +62,7 @@
                 'https://images.unsplash.com/photo-1666756272254-724e9ed61321',
                 'https://images.unsplash.com/photo-1666845266582-7885e3485303',
             ];
+
             CHOICES.forEach((item) => {
                 var link = document.createElement('link');
                 link.rel = 'preload';
@@ -70,7 +74,6 @@
             const element = document.querySelector('.background____item');
 
             const changeBackground = (background_image) => {
-                console.log(background_image);
                 anime
                     .timeline({
                         targets: element,
@@ -97,10 +100,15 @@
                         },
                     });
             };
-
+            var last_known_image = '';
             setInterval(() => {
-                const index = Math.floor(Math.random() * CHOICES.length);
-                changeBackground(CHOICES[index]);
+                const NewChoice = CHOICES.filter(
+                    (item) => item != last_known_image
+                );
+
+                const index = Math.floor(Math.random() * NewChoice.length);
+                last_known_image = NewChoice[index];
+                changeBackground(NewChoice[index]);
             }, 5000);
         </script>
     </body>
