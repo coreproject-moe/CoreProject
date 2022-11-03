@@ -1,7 +1,7 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en" class="bg-black">
+<html lang="en" class="bg-black bg-opacity-75">
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -9,13 +9,8 @@
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
 
         <script src="{% static 'js/anime.min.js' %}"></script>
-        <script src="{% static 'js/popper.min.js' %}" data-reload></script>
         <script src="{% static 'admin/js/vendor/jquery/jquery.min.js'%}"></script>
-        <script
-            defer
-            src="{% static 'js/bootstrap.bundle.min.js' %}"
-            data-reload
-        ></script>
+        <script defer src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
         <script defer src="{% static 'js/alpine.min.js' %}"></script>
 
         <script type="module">
@@ -34,14 +29,6 @@
                 'https://images.unsplash.com/photo-1666845266582-7885e3485303',
             ];
 
-            CHOICES.forEach((item) => {
-                var link = document.createElement('link');
-                link.rel = 'preload';
-                link.as = 'image';
-                link.href = item;
-                document.head.appendChild(link);
-            });
-
             const element = document.querySelector('.background____item');
 
             const changeBackground = () => {
@@ -59,10 +46,7 @@
                     })
                     .add({
                         opacity: 0,
-                    })
-                    .add({
-                        opacity: 1,
-                        begin: () => {
+                        complete: () => {
                             element.innerHTML = `
                                 <div
                                     class="vh-100 vw-100"
@@ -75,12 +59,23 @@
                                 />
                             `.trim();
                         },
+                    })
+                    .add({
+                        opacity: 1,
                     });
             };
 
             var last_known_image = '';
 
             $(document).ready(() => {
+                CHOICES.forEach((item) => {
+                    var link = document.createElement('link');
+                    link.rel = 'preload';
+                    link.as = 'image';
+                    link.href = item;
+                    document.head.appendChild(link);
+                });
+
                 changeBackground();
 
                 setInterval(() => {
@@ -91,7 +86,7 @@
 
         {% block head %}{% endblock head %}
     </head>
-    <body class="bg-black">
+    <body class="bg-black bg-opacity-75">
         <div class="d-grid vh-100 vw-100" style="grid-area: 1 / 1 / 2 / 2">
             <div
                 style="grid-area: 1 / 1 / 2 / 2"
