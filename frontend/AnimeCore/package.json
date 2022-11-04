@@ -1,0 +1,31 @@
+{
+    "name": "admin-panel",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "build:export": "next build && next export",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "@emotion/react": "^11.10.5",
+        "@mantine/core": "^5.6.3",
+        "@mantine/ds": "^5.6.3",
+        "@mantine/hooks": "^5.5.5",
+        "@mantine/next": "^5.6.3",
+        "@tabler/icons": "^1.109.0",
+        "eslint-config-next": "^13.0.2",
+        "next": "^13.0.2",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
+    },
+    "devDependencies": {
+        "@types/node": "18.11.9",
+        "@types/react": "18.0.24",
+        "@types/react-dom": "18.0.8",
+        "eslint": "8.26.0",
+        "typescript": "4.8.4"
+    }
+}
