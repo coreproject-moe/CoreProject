@@ -199,18 +199,18 @@ export default function DoubleNavbar() {
     ));
 
     const links = linksMockdata.map((link) => (
-        <Link key={link} href="/">
-            <a
-                className={cx(classes.link, {
-                    [classes.linkActive]: activeLink === link,
-                })}
-                onClick={(event) => {
-                    event.preventDefault();
-                    setActiveLink(link);
-                }}
-            >
-                {link}
-            </a>
+        <Link
+            key={link}
+            className={cx(classes.link, {
+                [classes.linkActive]: activeLink === link,
+            })}
+            onClick={(event) => {
+                event.preventDefault();
+                setActiveLink(link);
+            }}
+            href="/"
+            legacyBehavior>
+            {link}
         </Link>
     ));
 
