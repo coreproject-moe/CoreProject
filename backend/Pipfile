@@ -42,6 +42,7 @@ uvicorn = {extras = ["standard"], version = "*"}
 pillow = "*"
 # Discord API
 "discord.py" = {extras = ["voice", "speed"], version = "*"}
+django-advanced-filters = "*"
 
 [dev-packages]
 # Aiohttp

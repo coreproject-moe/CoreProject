@@ -17,18 +17,21 @@ class EmailOrUsernameModelBackend(ModelBackend):
 
     def authenticate(
         self,
-        request: HttpRequest | None,
+        request: HttpRequest,
         username: str | None = None,
         password: str | None = None,
         **kwargs: Any,
     ) -> CustomUser | None:
-        user_model = CustomUser
         # So `username` is something like baseplate-admin#0001
         # we need to split to get the username and discriminator
+
         try:
-            query = user_model.objects.get_username_with_discriminator().get(
+            user: CustomUser = CustomUser.objects.get_username_with_discriminator().get(
                 Q(username_with_discriminator=username) | Q(email__iexact=username)
             )
+
+            if user.check_password(password):
+                query = user
 
         except CustomUser.DoesNotExist:
             query = None

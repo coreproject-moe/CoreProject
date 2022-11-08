@@ -46,6 +46,11 @@
                     })
                     .add({
                         opacity: 0,
+                    })
+                    .add({
+                        begin: () => {
+                            element.innerHTML = ``;
+                        },
                         complete: () => {
                             element.innerHTML = `
                                 <div
@@ -92,10 +97,7 @@
                 style="grid-area: 1 / 1 / 2 / 2"
                 class="background____item"
             ></div>
-            <div
-                class="justify-content-center align-content-center"
-                style="display: inline-grid; grid-area: 1 / 1 / 2 / 2"
-            >
+            <div style="display: inline-grid; grid-area: 1 / 1 / 2 / 2">
                 {% block body %}{% endblock body %}
             </div>
         </div>

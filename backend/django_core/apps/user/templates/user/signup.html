@@ -3,29 +3,36 @@
 {% load crispy_forms_tags %}
 
 {% block body %}
-<div class="card" style="width: 25rem; padding: 1em">
-    <div class="card-header">Login</div>
-    {%crispy form%}
+
+<div
+    class="card align-self-center"
+    style="width: 25rem; padding: 1em; justify-self: end"
+>
+    <div class="card-header d-flex justify-content-center">
+        Create an Account
+    </div>
+    {% crispy form %}
+    <button type="submit" class="btn btn-primary">Submit</button>
 </div>
 
 <script type="module">
-    //setup before functions
+    // setup before functions
     var typingTimer; //timer identifier
     var doneTypingInterval = 5000; //time in ms, 5 seconds for example
     var input = $('#id_username_discriminator');
 
-    //on keyup, start the countdown
+    // on keyup, start the countdown
     input.on('keyup', function () {
         clearTimeout(typingTimer);
         typingTimer = setTimeout(doneTyping, doneTypingInterval);
     });
 
-    //on keydown, clear the countdown
+    // on keydown, clear the countdown
     input.on('keydown', function () {
         clearTimeout(typingTimer);
     });
 
-    //user is "finished typing," do something
+    // user is "finished typing," do something
     function doneTyping() {
         let usernameDiscriminator = input.val();
         let username = document.querySelector('#id_username').value;

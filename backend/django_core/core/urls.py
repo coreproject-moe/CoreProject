@@ -16,7 +16,7 @@ Including another URLconf
 
 from django.conf import settings
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 from django.views import debug
 from django.views.generic import TemplateView
 
@@ -38,8 +38,10 @@ urlpatterns = [
     path("403/", handler403),
     path("404/", handler404),
     path("500/", handler500),
-    #   HTTP
-    # =========
+    # Advanced Filters
+    re_path(r"^advanced_filters/", include("advanced_filters.urls")),
+    #   HTTP ( PAGES )
+    # ================
     path("user/", include("apps.user.urls")),
     #   Api
     # ========

@@ -65,6 +65,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     # Whitenoise
     "django.contrib.staticfiles",
+    # Advanced Filters
+    "advanced_filters",
     # Form tools
     "crispy_forms",
     "crispy_bootstrap5",
