@@ -89,9 +89,56 @@
             });
         </script>
 
+        <script>
+            const checkMode = () => {
+                function handleWindowChange(e) {
+                    // Check if the media query is true
+                    return e.matches;
+                }
+                /*
+                    Mapped from here
+                    https://bulma.io/documentation/helpers/visibility-helpers/
+                */
+
+                const MOBILE = window.matchMedia('(max-width: 768px)');
+                const TABLET = window.matchMedia(
+                    '(min-width: 769px) and (max-width: 1023px)'
+                );
+                const DESKTOP = window.matchMedia(
+                    '(min-width: 1024px) and (max-width: 1215px)'
+                );
+                const WIDESCREEN = window.matchMedia(
+                    '(min-width: 1216px) and (max-width: 1407px)'
+                );
+                const FULLHD = window.matchMedia('(min-width: 1408px )');
+
+                if (handleWindowChange(MOBILE)) {
+                    return 'mobile';
+                } else if (handleWindowChange(TABLET)) {
+                    return 'tablet';
+                } else if (handleWindowChange(DESKTOP)) {
+                    return 'desktop';
+                } else if (handleWindowChange(WIDESCREEN)) {
+                    return 'widescreen';
+                } else if (handleWindowChange(FULLHD)) {
+                    return 'fullhd';
+                } else {
+                    return null;
+                }
+            };
+
+            document.addEventListener('alpine:init', () => {
+                // Change the store's value
+                window.addEventListener('resize', () => {
+                    Alpine.store('responsiveMode', checkMode());
+                });
+                // Init the store.
+                Alpine.store('responsiveMode', checkMode());
+            });
+        </script>
         {% block head %}{% endblock head %}
     </head>
-    <body class="bg-black bg-opacity-75">
+    <body class="bg-black bg-opacity-75" x-init="() => $store.responsiveMode">
         <div class="d-grid vh-100 vw-100" style="grid-area: 1 / 1 / 2 / 2">
             <div
                 style="grid-area: 1 / 1 / 2 / 2"
