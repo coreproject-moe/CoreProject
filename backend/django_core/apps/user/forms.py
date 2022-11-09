@@ -4,7 +4,7 @@ from .models import CustomUser
 
 from django import forms
 from crispy_bootstrap5.bootstrap5 import FloatingField
-from crispy_forms.layout import Layout
+from crispy_forms.layout import Layout, Submit
 from crispy_forms.helper import FormHelper
 
 
@@ -30,11 +30,12 @@ class UserRegistrationForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
-            FloatingField("first_name"),
+            FloatingField("first_name", required=True),
             FloatingField("last_name"),
-            FloatingField("email"),
-            FloatingField("username"),
-            FloatingField("username_discriminator"),
+            FloatingField("email", required=True),
+            FloatingField("username", required=True),
+            FloatingField("username_discriminator", required=True),
+            Submit("submit", "Submit", css_class="btn-primary"),
         )
 
     class Meta:

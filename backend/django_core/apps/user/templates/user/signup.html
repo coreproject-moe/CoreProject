@@ -4,16 +4,16 @@
 
 {% block body %}
 
-{% comment %} Start working on https://www.figma.com/file/knyOkHUChnJpsAsmuILhOk/Core-Project-%5BLegacy%5D?node-id=0%3A1 {% endcomment %}
+{% comment %} Start working on
+https://www.figma.com/file/knyOkHUChnJpsAsmuILhOk/Core-Project-%5BLegacy%5D?node-id=0%3A1
+{% endcomment %}
 
 <div
-    class="card align-self-center text-light bg-transparent bg-gradient rounded-0"
+    class="card align-self-center text-light bg-transparent bg-gradient rounded-3"
     style="
         width: 25rem;
         padding: 1em;
-        border-image: linear-gradient(to top, white, rgba(0, 0, 0, 0) 55%) 1;
-        border-image-width: 3px;
-        border-radius: 25px;
+        box-shadow: 0 2px 0px 2px rgba(250, 250, 250);
     "
     x-bind:class="$store.responsiveMode === 'mobile' ? 'me-0' : 'me-5'"
     x-bind:style="$store.responsiveMode === 'mobile' ? { 'justify-self' : 'center'} : { 'justify-self' : 'end'}"
@@ -22,7 +22,6 @@
         Create an Account
     </div>
     {% crispy form %}
-    <button type="submit" class="btn btn-primary">Submit</button>
 </div>
 
 <script type="module">
