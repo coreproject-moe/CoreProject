@@ -23,7 +23,7 @@
 	{/each}
 </svelte:head>
 
-<div class="grid bg-black" style="grid-area: 1 / 1 / 2 / 2">
+<div class="grid bg-black">
 	<!-- Background Image Container -->
 	{#each CHOICES as item}
 		{#if CHOICES.indexOf(item) == CHOICE_NUMBER}

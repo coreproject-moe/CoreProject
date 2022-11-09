@@ -28,8 +28,11 @@
 	});
 </script>
 
-<div style="grid-area: 1 / 1 / 2 / 2" class="inline-grid justify-center content-center">
-	<div class="card w-96 bg-base-100 shadow-xl">
-		<div class="card-body"></div>
+<div
+	style="grid-area: 1 / 1 / 2 / 2"
+	class="inline-grid justify-center md:justify-end content-center"
+>
+	<div class="card w-96 bg-base-100 shadow-xl mr-0 md:mr-6">
+		<div class="card-body" />
 	</div>
 </div>
