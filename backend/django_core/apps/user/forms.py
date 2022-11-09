@@ -27,6 +27,8 @@ class UsernameDiscriminatorForm(forms.Form):
 
 
 class UserRegistrationForm(forms.ModelForm):
+    confirm_password = forms.CharField()
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -34,6 +36,8 @@ class UserRegistrationForm(forms.ModelForm):
             FloatingField("first_name", required=True),
             FloatingField("last_name"),
             FloatingField("email", required=True),
+            FloatingField("password"),
+            FloatingField("confirm_password"),
             FloatingField("username", required=True),
             FloatingField("username_discriminator", required=True),
             FormActions(
