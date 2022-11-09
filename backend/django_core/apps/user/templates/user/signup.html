@@ -7,8 +7,14 @@
 {% comment %} Start working on https://www.figma.com/file/knyOkHUChnJpsAsmuILhOk/Core-Project-%5BLegacy%5D?node-id=0%3A1 {% endcomment %}
 
 <div
-    class="card align-self-center text-light bg-transparent bg-gradient"
-    style="width: 25rem; padding: 1em"
+    class="card align-self-center text-light bg-transparent bg-gradient rounded-0"
+    style="
+        width: 25rem;
+        padding: 1em;
+        border-image: linear-gradient(to top, white, rgba(0, 0, 0, 0) 55%) 1;
+        border-image-width: 3px;
+        border-radius: 25px;
+    "
     x-bind:class="$store.responsiveMode === 'mobile' ? 'me-0' : 'me-5'"
     x-bind:style="$store.responsiveMode === 'mobile' ? { 'justify-self' : 'center'} : { 'justify-self' : 'end'}"
 >
