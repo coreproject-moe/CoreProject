@@ -32,5 +32,3 @@ class UserSchema(ModelSchema):
 
 # Extra Imports
 # __ DO NOT MODIFY __
-
-from .sign_up import SignupSchema as SignupSchema
