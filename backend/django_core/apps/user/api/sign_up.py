@@ -1,8 +1,9 @@
 from ninja import File, Form, Router
 from ninja.files import UploadedFile
-from django.conf import settings
 
+from django.conf import settings
 from django.http import HttpRequest
+from pydantic import EmailStr, AnyUrl
 
 from ..models import CustomUser
 from ..schemas import UserSchema
@@ -17,11 +18,11 @@ def post_user_signup_info(
     first_name: str = Form(...),
     last_name: str = Form(...),
     password: str = Form(...),
-    email: str = Form(...),
+    email: EmailStr = Form(...),
     username_discriminator: int = Form(
-        gt=0, lt=int(str(settings.USERNAME_DISCRIMINATOR_LENGTH * "9"))
+        default=None, gt=0, lt=int(str(settings.USERNAME_DISCRIMINATOR_LENGTH * "9"))
     ),
-    avatar_provider: str = Form(...),
+    avatar_provider: AnyUrl = Form(...),
     avatar: UploadedFile = File(...),
 ):
     user = CustomUser.objects.create_user(
