@@ -41,6 +41,7 @@ uvicorn = {extras = ["standard"], version = "*"}
 pillow = "*"
 # Discord API
 "discord.py" = {extras = ["voice", "speed"], version = "*"}
+# Frontend Django enhancements
 user-agents = "*"
 pregex = "*"
 
