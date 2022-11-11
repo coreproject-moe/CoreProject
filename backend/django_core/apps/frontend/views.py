@@ -13,7 +13,7 @@ def animecore(request: HttpRequest) -> HttpResponse:
     user_agent_parsed = parse(request.META["HTTP_USER_AGENT"])
 
     if user_agent_parsed.is_bot:
-        """Locally import everything else load time is slow"""
+        """Locally import everything else we risk increasing the memory of our infrastructure"""
 
         from pregex import Pregex
         from pregex.core import cl, gr, op
@@ -59,6 +59,7 @@ def animecore(request: HttpRequest) -> HttpResponse:
                 "opengraph_image": anime_model.anime_banner,
                 "opengraph_url": request.build_absolute_uri(),
             }
+
         else:
             raise Resolver404()
 
