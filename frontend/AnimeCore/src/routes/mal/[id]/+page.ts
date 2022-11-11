@@ -11,7 +11,7 @@ export const load: PageLoad = async ({ params }) => {
     const response = await fetch(url);
     const data = await response?.json();
 
-    const animeData: {
+    const animeData: Partial<{
         mal_id: number;
         episodes: [
             {
@@ -28,7 +28,7 @@ export const load: PageLoad = async ({ params }) => {
         anime_background: string;
         anime_rating: string;
         updated: Date;
-    } = data.data;
+    }> = data.data;
 
     const errorMessage: string = data.status === 404 && data.message;
 

@@ -1,17 +1,9 @@
-from pathlib import Path
-
 from core.storages import OverwriteStorage
+from dynamic_filenames import FilePattern
 
 from django.db import models
 
-
-class FileField:
-    # Thanks Stackoverflow
-    # https://stackoverflow.com/questions/1190697/django-filefield-with-upload-to-determined-at-runtime
-    @staticmethod
-    def staff(instance: "StaffModel", filename: str) -> Path:
-        return Path("staff", filename)
-
+staff_pattern = FilePattern(filename_pattern="/staff{ext}")
 
 # Create your models here.
 class StaffAlternateNameModel(models.Model):
@@ -32,7 +24,7 @@ class StaffModel(models.Model):
 
     staff_image = models.ImageField(
         storage=OverwriteStorage,
-        upload_to=FileField.staff,
+        upload_to=staff_pattern,
         default=None,
         blank=True,
         null=True,

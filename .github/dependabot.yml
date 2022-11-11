@@ -34,9 +34,3 @@ updates:
       schedule:
           interval: monthly
       open-pull-requests-limit: 100
-
-    - package-ecosystem: npm
-      directory: /frontend/User/
-      schedule:
-          interval: monthly
-      open-pull-requests-limit: 100

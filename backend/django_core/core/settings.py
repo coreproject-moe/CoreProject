@@ -56,7 +56,7 @@ HOSTNAME = "http://127.0.0.1:8000"
 INSTALLED_APPS = [
     # user must be above auth
     "apps.user",
-    "apps.__discord__",
+    "apps.discord",
     # Django stuff
     "django.contrib.admin",
     "django.contrib.auth",

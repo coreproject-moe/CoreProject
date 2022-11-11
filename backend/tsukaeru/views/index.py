@@ -15,7 +15,7 @@ routes = web.RouteTableDef()
 @aiohttp_jinja2.template("index.html")
 async def home(
     request: web.BaseRequest,
-) -> web.Response:
+) -> dict[str, str]:
     return {
         "aiohttp_version": aiohttp.__version__,
         "django_version": django.__version__,
