@@ -11,6 +11,7 @@ updates:
       directory: /backend/
       schedule:
           interval: monthly
+      open-pull-requests-limit: 100
 
     # Android
     # =======
@@ -18,15 +19,19 @@ updates:
       directory: /android/AnimeCore/
       schedule:
           interval: monthly
-
+      open-pull-requests-limit: 100
+      
     # Frontend
     # =========
     - package-ecosystem: npm
       directory: /frontend/AnimeCore/
       schedule:
           interval: monthly
-
+      open-pull-requests-limit: 100
+      
     - package-ecosystem: npm
       directory: /frontend/Admin/
       schedule:
           interval: monthly
+      open-pull-requests-limit: 100
+      
