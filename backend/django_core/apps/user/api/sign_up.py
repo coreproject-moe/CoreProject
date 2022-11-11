@@ -1,9 +1,9 @@
 from ninja import File, Form, Router
 from ninja.files import UploadedFile
+from pydantic import AnyUrl, EmailStr
 
 from django.conf import settings
 from django.http import HttpRequest
-from pydantic import EmailStr, AnyUrl
 
 from ..models import CustomUser
 from ..schemas import UserSchema

@@ -1,10 +1,10 @@
-from django.shortcuts import render
-from django.http import HttpResponse, HttpRequest
 from user_agents import parse
-from django.urls import NoReverseMatch
-from ..anime.models import AnimeModel
 
-from django.shortcuts import get_object_or_404
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import get_object_or_404, render
+from django.urls import Resolver404
+
+from ..anime.models import AnimeModel
 
 # Create your views here.
 
@@ -59,8 +59,8 @@ def animecore(request: HttpRequest) -> HttpResponse:
                 "opengraph_image": anime_model.anime_banner,
                 "opengraph_url": request.build_absolute_uri(),
             }
-        else :
-            raise NoReverseMatch()
+        else:
+            raise Resolver404()
 
         return render(
             request,
