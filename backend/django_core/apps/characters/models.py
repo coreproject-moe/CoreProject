@@ -1,16 +1,9 @@
-from pathlib import Path
-
 from core.storages import OverwriteStorage
+from dynamic_filenames import FilePattern
 
 from django.db import models
 
-
-class FileField:
-    # Thanks Stackoverflow
-    # https://stackoverflow.com/questions/1190697/django-filefield-with-upload-to-determined-at-runtime
-    @staticmethod
-    def anime_charater(instance: "CharacterModel", filename: str) -> Path:
-        return Path("anime_characters", filename)
+anime_charaters = FilePattern(filename_pattern="/anime_charaters{ext}")
 
 
 # Create your models here.
@@ -24,7 +17,7 @@ class CharacterModel(models.Model):
     name = models.CharField(max_length=1024, db_index=True)
     name_kanji = models.CharField(max_length=1024, null=True, blank=True, db_index=True)
     character_image = models.ImageField(
-        upload_to=FileField.anime_charater,
+        upload_to=anime_charaters,
         storage=OverwriteStorage(),
         default=None,
         blank=True,

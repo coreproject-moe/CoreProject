@@ -5,5 +5,5 @@
 </script>
 
 <svelte:head>
-    <title>{data.animeData.title_english}</title>
+    <title>{data.animeData?.title_english}</title>
 </svelte:head>
