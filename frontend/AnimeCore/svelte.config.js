@@ -1,4 +1,4 @@
-import vercel from "@sveltejs/adapter-vercel";
+import adapter from "@sveltejs/adapter-static";
 import path from "path";
 import preprocess from "svelte-preprocess";
 
@@ -13,13 +13,8 @@ const config = {
         })
     ],
     kit: {
-        // adapter: adapter({ fallback: "app.html" })
-        adapter: vercel({
-            // an array of dependencies that esbuild should treat
-            // as external when bundling functions
-            external: [],
+        adapter: adapter({ fallback: "app.html" }),
 
-        }),
         trailingSlash: "always",
         alias: {
             $store: path.resolve("./src/lib/store"),
