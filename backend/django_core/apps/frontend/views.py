@@ -10,7 +10,7 @@ from ..anime.models import AnimeModel
 
 
 def animecore(request: HttpRequest) -> HttpResponse:
-    user_agent_parsed = parse(request.META["HTTP_USER_AGENT"])
+    user_agent_parsed = parse(request.headers["user-agent"])
 
     if user_agent_parsed.is_bot:
         """Locally import everything else we risk increasing the memory of our infrastructure"""
