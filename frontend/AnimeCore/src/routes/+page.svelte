@@ -45,7 +45,7 @@
 
 <!-- svelte-ignore redundant-event-modifier -->
 <div
-    class="h-screen w-screen carousel carousel-vertical snap-none md:snap-y md:snap-mandatory text-white"
+    class="h-screen w-screen carousel carousel-vertical snap-none md:snap-y md:snap-mandatory text-white overflow-x-hidden"
     on:scroll|passive={() => {
         if (
             Math.abs(Number(mainHeroRootElement?.getBoundingClientRect().top)) >=
