@@ -14,21 +14,31 @@
 </script>
 
 <!-- Modals  -->
-<svelte:component this={GenreModal} id="genre-modal" />
+<svelte:component
+    this={GenreModal}
+    id="genre-modal"
+/>
 
 <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
     <div class="hero-content text-center p-0">
-        <div class="flex lg:block flex-col">
+        <div class="block flex-col">
             <AutoComplete />
             {#if mobile}
-                <label for="genre-modal" class="btn modal-button mt-6 flex gap-5 white">
-                    or search by genres <ChevronUpDown color="#D8D8D8" height={18} width={18} />
+                <label
+                    for="genre-modal"
+                    class="btn modal-button mt-6 flex gap-5 white"
+                >
+                    or search by genres <ChevronUpDown
+                        color="#D8D8D8"
+                        height={18}
+                        width={18}
+                    />
                 </label>
             {:else}
                 <div class="divider w-80 mx-auto mt-12 mb-6 before:bg-white after:bg-white">
                     or search by genres
                 </div>
-                <div class="grid grid-cols-6 gap-x-10 gap-y-5 justify-items-center">
+                <div class="grid grid-cols-6 gap-x-0 lg:gap-x-5 gap-y-5 justify-items-center">
                     {#each badgeData as item}
                         <div class="btn font-bold text-black w-fit whitespace-nowrap {item.class}">
                             {item.name}
@@ -44,21 +54,37 @@
                         </p>
                     </div>
                 </div>
-                <div class="flex flex-col w-full lg:flex-row justify-center mt-8">
+                <div class="flex w-full flex-row justify-center mt-8">
                     <div class="flex flex-row align-center">
-                        Romaji Naming <ChevronDown color="white" height={30} width={30} />
+                        Romaji Naming <ChevronDown
+                            color="white"
+                            height={30}
+                            width={30}
+                        />
                     </div>
-                    <div class="divider lg:divider-horizontal before:bg-white after:bg-white" />
+                    <div class="divider divider-horizontal before:bg-white after:bg-white" />
                     <div class="flex flex-row align-center">
-                        10 point scoring system <ChevronDown color="white" height={30} width={30} />
+                        10 point scoring system <ChevronDown
+                            color="white"
+                            height={30}
+                            width={30}
+                        />
                     </div>
-                    <div class="divider lg:divider-horizontal before:bg-white after:bg-white" />
+                    <div class="divider divider-horizontal before:bg-white after:bg-white" />
                     <div class="flex flex-row align-center">
-                        2 trackers added <ChevronDown color="white" height={30} width={30} />
+                        2 trackers added <ChevronDown
+                            color="white"
+                            height={30}
+                            width={30}
+                        />
                     </div>
-                    <div class="divider lg:divider-horizontal before:bg-white after:bg-white" />
+                    <div class="divider divider-horizontal before:bg-white after:bg-white" />
                     <div class="flex flex-row align-center">
-                        Show 18+ content <ChevronDown color="white" height={30} width={30} />
+                        Show 18+ content <ChevronDown
+                            color="white"
+                            height={30}
+                            width={30}
+                        />
                     </div>
                 </div>
             {/if}

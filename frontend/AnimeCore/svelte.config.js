@@ -13,6 +13,7 @@ const config = {
         })
     ],
     kit: {
+        appDir:'svelte__animecore',
         // adapter: adapter({ fallback: "app.html" }),
         adapter: vercel({
             // an array of dependencies that esbuild should treat
