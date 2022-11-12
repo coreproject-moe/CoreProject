@@ -1,8 +1,8 @@
-import subprocess
-import os
-import shutil
-from pathlib import Path
 from distutils.dir_util import copy_tree
+import os
+from pathlib import Path
+import shutil
+import subprocess
 
 BASE_DIR = Path(__file__).resolve().parent
 
