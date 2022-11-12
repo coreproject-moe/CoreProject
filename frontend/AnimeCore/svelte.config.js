@@ -13,12 +13,11 @@ const config = {
         })
     ],
     kit: {
-        // adapter: adapter({ fallback: "app.html" })
+        // adapter: adapter({ fallback: "app.html" }),
         adapter: vercel({
             // an array of dependencies that esbuild should treat
             // as external when bundling functions
-            external: [],
-
+            external: []
         }),
         trailingSlash: "always",
         alias: {
