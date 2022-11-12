@@ -14,7 +14,7 @@
 	"devDependencies": {
 		"@felte/reporter-tippy": "^1.1.4",
 		"@felte/validator-yup": "^1.0.10",
-		"@sveltejs/adapter-node": "next",
+		"@sveltejs/adapter-static": "next",
 		"@sveltejs/kit": "next",
 		"@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
 		"@tailwindcss/typography": "^0.5.7",
