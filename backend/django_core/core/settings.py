@@ -79,7 +79,10 @@ INSTALLED_APPS = [
     "apps.producers",
     "apps.studios",
     "apps.staffs",
+    # Views ( Frontend )
+    "apps.frontend",
 ]
+
 
 # Debug Toolbar Add
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install-the-app
@@ -158,36 +161,36 @@ LOGIN_URL = "login_page"
 # Cache
 # https://docs.djangoproject.com/en/4.0/topics/cache/#filesystem-caching
 
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379",
-    }
-}
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django.core.cache.backends.redis.RedisCache",
+#         "LOCATION": "redis://127.0.0.1:6379",
+#     }
+# }
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "CONN_MAX_AGE": None,
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
+DATABASES = {
+    "default": {
+        "CONN_MAX_AGE": None,
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 
 # POSTGRES
 # https://www.enterprisedb.com/postgres-tutorials/how-use-postgresql-django
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "django",
-        "USER": "postgres",
-        "PASSWORD": "supersecretpassword",
-        "HOST": "",
-        "PORT": "",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql_psycopg2",
+#         "NAME": "django",
+#         "USER": "postgres",
+#         "PASSWORD": "supersecretpassword",
+#         "HOST": "",
+#         "PORT": "",
+#     }
+# }
 
 # Allow more fields to be deleted at once
 # https://stackoverflow.com/questions/47585583/the-number-of-get-post-parameters-exceeded-settings-data-upload-max-number-field

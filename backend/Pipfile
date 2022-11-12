@@ -24,6 +24,7 @@ redis = ">=4"
 hiredis = {version="*", markers="sys_platform != 'win32'"}
 # Rest framework
 django_ninja = "*"
+pydantic = {extras = ["email"], version = "*"}
 # https://github.com/vitalik/django-ninja/issues/305
 # ===================================================
 # HTTP Client
@@ -42,6 +43,9 @@ uvicorn = {extras = ["standard"], version = "*"}
 pillow = "*"
 # Discord API
 "discord.py" = {extras = ["voice", "speed"], version = "*"}
+# Frontend Django enhancements
+user-agents = "*"
+pregex = "*"
 
 [dev-packages]
 # Aiohttp
