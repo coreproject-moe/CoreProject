@@ -124,16 +124,41 @@
 </div>
 
 <style lang="scss">
+	$border-width: 3px;
+
 	.card {
 		border-image: linear-gradient(
 				to top,
-				transparent 0.01%,
-				white 20%,
+				transparent 0.1%,
+				white 15%,
 				transparent,
 				rgba(0, 0, 0, 0)
 			)
 			1 100%;
-		border-image-width: 3px;
+		border-image-width: $border-width;
+
+		&::before {
+			content: '';
+			position: absolute;
+			bottom: 10.5px;
+			right: 0;
+			border-left: $border-width solid white;
+			border-radius: 9999px;
+			width: 1px;
+			height: 100px;
+			background-color: white;
+		}
+		&::after {
+			content: '';
+			position: absolute;
+			bottom: 10.5px;
+			left: 0;
+			border-left: $border-width solid white;
+			border-radius: 9999px;
+			width: 1px;
+			height: 100px;
+			background-color: white;
+		}
 	}
 	.card-body {
 		z-index: 1;
@@ -145,7 +170,7 @@
 			left: 0px;
 			right: 0px;
 			z-index: -1;
-			box-shadow: inset 0 -3px 0 0 rgba(250, 250, 250, 0.9);
+			box-shadow: inset 0 $border-width * -1 0 0 rgba(250, 250, 250, 0.9);
 			content: '';
 			border-radius: 16px;
 		}
