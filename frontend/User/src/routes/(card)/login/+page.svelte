@@ -1,0 +1,130 @@
+<script lang="ts">
+	import { createForm } from 'felte';
+	import { validator } from '@felte/validator-yup';
+	import * as yup from 'yup';
+
+	let submitted;
+
+	// Creating yup schema
+	const schema = yup.object({
+		email: yup.string().email().required(),
+		password: yup.string().required(),
+		type: yup.string().required()
+	});
+
+	// Creating the form
+	const { form, data, unsetField, addField } = createForm({
+		initialValues: {
+			email: '',
+			password: ''
+		},
+		onSubmit: (values) => (submitted = values),
+		extend: [
+			validator({ schema })
+			// reporter()
+		],
+		// Debounced async validation
+		debounced: {}
+	});
+	const KokoroColorWOrdMap: {
+		[key: string]: string | undefined;
+	} = {
+		c: 'white',
+		o: 'yellow',
+		r: 'white',
+		e: 'white',
+		p: 'white',
+		j: 'white',
+		t: 'white'
+	};
+
+	const TailwindColorMap: {
+		[key: string]: string | undefined;
+	} = {
+		white: 'text-white',
+		yellow: 'text-warning'
+	};
+
+	function formatStringColor(input: string) {
+		const string = 'coreproject';
+
+		const stringRegex = new RegExp(string, 'gm');
+
+		// There is no kokoro-chan in the input ( which is odd )
+		if (!stringRegex.exec(input)) {
+			return input;
+		}
+
+		console.log(input);
+		const coloredWrappedWords = string.split('').map((word) => {
+			return `<span class="inline-flex ${
+				TailwindColorMap[
+					KokoroColorWOrdMap[word] ?? 'white' //default to white
+				]
+			}">${word}</span>`;
+		});
+
+		// Color the font.
+		input = input.replaceAll(stringRegex, coloredWrappedWords.join('').toString());
+		// Hyperlink the home
+		return input;
+	}
+</script>
+
+<div
+	style="grid-area: 1 / 1 / 2 / 2"
+	class="inline-grid justify-center md:justify-end content-center"
+>
+	<div
+		class="card w-96 bg-base-100 shadow-xl mr-0 md:mr-6 bg-transparent from-base-100 bg-gradient-to-t"
+	>
+		<div
+			class="card-body border border-white rounded-2xl"
+			style="
+				box-shadow: inset 0 -3px 0 0 rgba(250, 250, 250, 0.9);
+				border-image: linear-gradient(
+					to top,
+					transparent,
+					white 4.5%,
+					rgba(0, 0, 0, 0) 55%
+				)
+				2 100%;
+				border-image-width: 3px;
+				border-bottom:4px dotted blue;
+			"
+		>
+			<div class="flex justify-center mb-10">
+				<div class="font-bold text-4xl">
+					{@html formatStringColor('coreproject')}
+				</div>
+			</div>
+
+			<div class="grid gap-6">
+				<input
+					style="--tw-bg-opacity:0.30"
+					type="text"
+					placeholder="Username"
+					class="input w-full font-semibold max-w-xs border-[3px] border-warning"
+				/>
+				<input
+					style="--tw-bg-opacity:0.30"
+					type="text"
+					placeholder="Email"
+					class="input w-full font-semibold max-w-xs border-[3px] border-warning"
+				/>
+				<input
+					style="--tw-bg-opacity:0.30"
+					type="text"
+					placeholder="Password"
+					class="input w-full font-semibold max-w-xs border-[3px] border-warning"
+				/>
+				<input
+					style="--tw-bg-opacity:0.30"
+					type="text"
+					placeholder="Confirm Password"
+					class="input w-full font-semibold max-w-xs border-[3px] border-warning"
+				/>
+			</div>
+		</div>
+	</div>
+</div>
