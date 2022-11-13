@@ -55,7 +55,6 @@
 			return input;
 		}
 
-		console.log(input);
 		const coloredWrappedWords = string.split('').map((word) => {
 			return `<span class="inline-flex ${
 				TailwindColorMap[
@@ -71,6 +70,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>CoreProject | Login</title>
+</svelte:head>
+
 <div
 	style="grid-area: 1 / 1 / 2 / 2"
 	class="inline-grid justify-center md:justify-end content-center"
@@ -78,21 +81,7 @@
 	<div
 		class="card w-96 bg-base-100 shadow-xl mr-0 md:mr-6 bg-transparent from-base-100 bg-gradient-to-t"
 	>
-		<div
-			class="card-body border border-white rounded-2xl"
-			style="
-				box-shadow: inset 0 -3px 0 0 rgba(250, 250, 250, 0.9);
-				border-image: linear-gradient(
-					to top,
-					transparent,
-					white 4.5%,
-					rgba(0, 0, 0, 0) 55%
-				)
-				2 100%;
-				border-image-width: 3px;
-				border-bottom:4px dotted blue;
-			"
-		>
+		<div class="card-body rounded-2xl">
 			<div class="flex justify-center mb-10">
 				<div class="font-bold text-4xl">
 					{@html formatStringColor('coreproject')}
@@ -128,3 +117,21 @@
 		</div>
 	</div>
 </div>
+
+<style lang="scss">
+	.card-body {
+		z-index: 1;
+
+		&::after {
+			position: absolute;
+			top: 0px;
+			bottom: 0px;
+			left: 0px;
+			right: 0px;
+			z-index: -1;
+			box-shadow: inset 0 -3px 0 0 rgba(250, 250, 250, 0.9);
+			content: '';
+			border-radius: 16px;
+		}
+	}
+</style>
