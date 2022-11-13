@@ -1034,6 +1034,14 @@
             "index": "pypi",
             "version": "==2.3.1"
         },
+        "pregex": {
+            "hashes": [
+                "sha256:03360f13c543b8c17cd251785a0fba5578d7e318ce12be164b367cd60af6a451",
+                "sha256:41674898d80300498d28556be3264e81be32e46872d4016815dc1a239b7f5ee3"
+            ],
+            "index": "pypi",
+            "version": "==2.3.1"
+        },
         "psycopg2": {
             "hashes": [
                 "sha256:093e3894d2d3c592ab0945d9eba9d139c139664dcf83a1c440b8a7aa9bb21955",
@@ -2208,11 +2216,11 @@
         },
         "types-redis": {
             "hashes": [
-                "sha256:2e1f184056188c8754ded0b5173dc01824d2bfe41975fe318068a68beedfb62c",
-                "sha256:77ee5b8ca3a779e09807348c7f0b33c0f38a46096cd6c8a2e0176b28b3784b34"
+                "sha256:3955c5682f926a1aaee13ed5bc0a37521115b0b8ffd6cd457facf517999abe93",
+                "sha256:cf8a94ac9efbeb6459fd1aa05dbb977fc59c1022ebe8f72bc0bae57df136105d"
             ],
             "index": "pypi",
-            "version": "==4.3.21.3"
+            "version": "==4.3.21.4"
         },
         "typing-extensions": {
             "hashes": [
