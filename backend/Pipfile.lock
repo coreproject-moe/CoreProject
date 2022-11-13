@@ -24,9 +24,7 @@
             "version": "==3.0.0"
         },
         "aiohttp": {
-            "extras": [
-                "speedups"
-            ],
+            "extras": ["speedups"],
             "hashes": [
                 "sha256:02f9a2c72fc95d59b881cf38a4b2be9381b9527f9d328771e90f72ac76f31ad8",
                 "sha256:059a91e88f2c00fe40aed9031b3606c3f311414f86a90d696dd982e7aec48142",
@@ -120,9 +118,7 @@
             "version": "==3.8.3"
         },
         "aiohttp-client-cache": {
-            "extras": [
-                "redis"
-            ],
+            "extras": ["redis"],
             "hashes": [
                 "sha256:c7532e3763b2dc92fb32de2ab0a1dcdbda608219b1564418fd2c4cff14082929",
                 "sha256:c9757c91db9eb14765cc976574c69a8587b5597959542263eb83217dadc220a9"
@@ -422,10 +418,7 @@
             "version": "==1.2.13"
         },
         "discord.py": {
-            "extras": [
-                "speed",
-                "voice"
-            ],
+            "extras": ["speed", "voice"],
             "hashes": [
                 "sha256:027ccdd22b5bb66a9e19cbd8daa1bc74b49271a16a074d57e52f288fcfa208e8",
                 "sha256:a2cfa9f09e3013aaaa43600cc8dfaf67c532dd34afcb71e550f5a0dc9133a5e0"
@@ -434,9 +427,7 @@
             "version": "==2.1.0"
         },
         "django": {
-            "extras": [
-                "argon2"
-            ],
+            "extras": ["argon2"],
             "hashes": [
                 "sha256:678bbfc8604eb246ed54e2063f0765f13b321a50526bdc8cb1f943eda7fa31f1",
                 "sha256:6b1de6886cae14c7c44d188f580f8ba8da05750f544c80ae5ad43375ab293cd5"
@@ -646,9 +637,7 @@
             "version": "==2.0.1"
         },
         "gunicorn": {
-            "extras": [
-                "setproctile"
-            ],
+            "extras": ["setproctile"],
             "hashes": [
                 "sha256:9dcc4547dbb1cb284accfb15ab5667a0e5d1881cc443e0677b4882a4067a807e",
                 "sha256:e0a968b5ba15f8a328fdfd7ab1fcb5af4470c28aaf7e55df02a99bc13138e6e8"
@@ -1107,9 +1096,7 @@
             "version": "==2.21"
         },
         "pydantic": {
-            "extras": [
-                "email"
-            ],
+            "extras": ["email"],
             "hashes": [
                 "sha256:05e00dbebbe810b33c7a7362f231893183bcc4251f3f2ff991c31d5c08240c42",
                 "sha256:06094d18dd5e6f2bbf93efa54991c3240964bb663b87729ac340eb5014310624",
@@ -1167,9 +1154,7 @@
             "version": "==1.5.0"
         },
         "pyrate-limiter": {
-            "extras": [
-                "redis"
-            ],
+            "extras": ["redis"],
             "hashes": [
                 "sha256:9f464ed01fa647d4d1f32ce27b8db9d594ab787847ec4ae72e1f5498756dd33d"
             ],
@@ -1268,9 +1253,7 @@
             "version": "==1.3.0"
         },
         "sqlalchemy": {
-            "extras": [
-                "postgresql_asyncpg"
-            ],
+            "extras": ["postgresql_asyncpg"],
             "hashes": [
                 "sha256:067f39ea49d785ca5fb45ce5027132d0481dce527111521f9f75f3c08bec2890",
                 "sha256:08fcbc539b12ad25392cd2819c550bdd81c6b5838af605ff7225e13d30cdec09",
@@ -1357,9 +1340,7 @@
             "version": "==2.2.0"
         },
         "uvicorn": {
-            "extras": [
-                "standard"
-            ],
+            "extras": ["standard"],
             "hashes": [
                 "sha256:cc277f7e73435748e69e075a721841f7c4a95dba06d12a72fe9874acced16f6f",
                 "sha256:cf538f3018536edb1f4a826311137ab4944ed741d52aeb98846f52215de57f25"
@@ -1500,9 +1481,7 @@
             "version": "==10.4"
         },
         "whitenoise": {
-            "extras": [
-                "brotli"
-            ],
+            "extras": ["brotli"],
             "hashes": [
                 "sha256:8e9c600a5c18bd17655ef668ad55b5edf6c24ce9bdca5bf607649ca4b1e8e2c2",
                 "sha256:8fa943c6d4cd9e27673b70c21a07b0aa120873901e099cd46cab40f7cc96d567"
@@ -1648,9 +1627,7 @@
     },
     "develop": {
         "aiohttp": {
-            "extras": [
-                "speedups"
-            ],
+            "extras": ["speedups"],
             "hashes": [
                 "sha256:02f9a2c72fc95d59b881cf38a4b2be9381b9527f9d328771e90f72ac76f31ad8",
                 "sha256:059a91e88f2c00fe40aed9031b3606c3f311414f86a90d696dd982e7aec48142",
@@ -1865,9 +1842,7 @@
             "version": "==0.3.6"
         },
         "django": {
-            "extras": [
-                "argon2"
-            ],
+            "extras": ["argon2"],
             "hashes": [
                 "sha256:678bbfc8604eb246ed54e2063f0765f13b321a50526bdc8cb1f943eda7fa31f1",
                 "sha256:6b1de6886cae14c7c44d188f580f8ba8da05750f544c80ae5ad43375ab293cd5"
@@ -1899,9 +1874,7 @@
             "version": "==3.7.0"
         },
         "django-stubs": {
-            "extras": [
-                "compatible_mypy"
-            ],
+            "extras": ["compatible_mypy"],
             "hashes": [
                 "sha256:0dff8ec0ba3abe046450b3d8a29ce9e72629893d2c1ef679189cc2bfdb6d2f64",
                 "sha256:ea8b35d0da49f7b2ee99a79125f1943e033431dd114726d6643cc35de619230e"
