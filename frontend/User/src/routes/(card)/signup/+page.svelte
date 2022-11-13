@@ -1,3 +1,4 @@
+<!-- https://github.com/baseplate-admin/CoreProject/blob/django-patch/backend/django_core/apps/user/templates/user/signup.html -->
 <script lang="ts">
 	import { createForm } from 'felte';
 	import { validator } from '@felte/validator-yup';
@@ -65,13 +66,13 @@
 
 		// Color the font.
 		input = input.replaceAll(stringRegex, coloredWrappedWords.join('').toString());
-		// Hyperlink the home
+
 		return input;
 	}
 </script>
 
 <svelte:head>
-	<title>CoreProject | Login</title>
+	<title>CoreProject | Sign Up</title>
 </svelte:head>
 
 <div
@@ -114,11 +115,26 @@
 					class="input w-full font-semibold max-w-xs border-[3px] border-warning"
 				/>
 			</div>
+			<div class="flex justify-center mt-5 items-center gap-2">
+				<button class="btn btn-secondary font-bold text-black">Register</button>
+				or <a class="underline" href="/login">login</a>
+			</div>
 		</div>
 	</div>
 </div>
 
 <style lang="scss">
+	.card {
+		border-image: linear-gradient(
+				to top,
+				transparent 0.01%,
+				white 20%,
+				transparent,
+				rgba(0, 0, 0, 0)
+			)
+			1 100%;
+		border-image-width: 3px;
+	}
 	.card-body {
 		z-index: 1;
 
