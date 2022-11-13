@@ -5,6 +5,10 @@ name = "pypi"
 
 [packages]
 django = {version = ">=4.1", extras = ["argon2"]}
+# User Agent Parser
+user-agents = "*"
+# Regex Parser
+pregex = "*"
 # Postgres
 psycopg2 = "*"
 # 3rd Party ( Files )
@@ -43,9 +47,7 @@ uvicorn = {extras = ["standard"], version = "*"}
 pillow = "*"
 # Discord API
 "discord.py" = {extras = ["voice", "speed"], version = "*"}
-# Frontend Django enhancements
-user-agents = "*"
-pregex = "*"
+
 
 [dev-packages]
 # Aiohttp
