@@ -7,9 +7,23 @@
         <script id="django">
             window.CSRFTOKEN = '{{ csrf_token }}';
             window.IMAGE_CHOICES = [
-                'https://images.unsplash.com/photo-1666688090267-4858c2075629',
-                'https://images.unsplash.com/photo-1666756272254-724e9ed61321',
-                'https://images.unsplash.com/photo-1666845266582-7885e3485303'
+                {
+                    type: 'anime',
+                    name: 'Demon Slayer',
+                    image: '/posters/demon-slayer.webp',
+                    credit:
+                    'https://www.reddit.com/r/DemonSlayerAnime/comments/tpgpid/demon_slayer_4k_wallpaper/'
+                },
+                {
+                    type: 'anime',
+                    name: 'Attack on Titan',
+                    image: '/posters/attack-on-titan.jpg'
+                },
+                {
+                    type: 'anime',
+                    name: 'Comic Girls',
+                    image: '/posters/Comic-Girls-Image.png'
+                }
             ];
         </script>
         %sveltekit.head%
