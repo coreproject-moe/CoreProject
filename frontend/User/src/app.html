@@ -25,7 +25,8 @@
 						name: 'Comic Girls',
 						image: '/posters/Comic-Girls-Image.png'
 					}
-				]
+				],
+				USER_IS_AUTHENTICATED: Boolean("{{ request.user.is_authenticated|yesno:'true,false' }}")
 			};
 			window.DJANGO = django_object;
 		</script>

@@ -16,5 +16,6 @@ interface Window {
 			image: string;
 		}>;
 		CSRFTOKEN: string;
+		USER_IS_AUTHENTICATED: boolean;
 	};
 }
