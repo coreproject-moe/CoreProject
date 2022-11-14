@@ -3,5 +3,11 @@ import { defineConfig } from "vite";
 
 export default defineConfig({
     plugins: [sveltekit()],
-    resolve: {}
+	esbuild: {
+		legalComments: 'none'
+	},
+	build: {
+		target: 'esnext',
+		sourcemap: true
+	}
 });
