@@ -11,6 +11,6 @@
         <meta property="og:url" content="{{ opengraph_url }}" />
     </head>
     <body>
-        {{ info_dump }}
+        {%for item in info_dump%} {{ item }} {%endfor%}
     </body>
 </html>

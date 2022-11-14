@@ -1,3 +1,5 @@
+from pregex import Pregex
+from pregex.core import cl, gr, op
 from user_agents import parse
 
 from django.http import HttpRequest, HttpResponse
@@ -13,10 +15,6 @@ def animecore(request: HttpRequest) -> HttpResponse:
     user_agent_parsed = parse(request.headers["user-agent"])
 
     if user_agent_parsed.is_bot:
-        """Locally import everything else we risk increasing the memory of our infrastructure"""
-
-        from pregex import Pregex
-        from pregex.core import cl, gr, op
 
         MAL_PATH: Pregex = (
             "/animecore/"
@@ -36,6 +34,10 @@ def animecore(request: HttpRequest) -> HttpResponse:
                 "opengraph_type": "webpage",
                 "opengraph_image": anime_model.anime_banner,
                 "opengraph_url": request.build_absolute_uri(),
+                "info_dump": [
+                    anime_model.anime_background,
+                    anime_model.anime_synopsis,
+                ],
             }
 
         # /animecore/anilist/1
@@ -47,6 +49,10 @@ def animecore(request: HttpRequest) -> HttpResponse:
                 "opengraph_type": "webpage",
                 "opengraph_image": anime_model.anime_banner,
                 "opengraph_url": request.build_absolute_uri(),
+                "info_dump": [
+                    anime_model.anime_background,
+                    anime_model.anime_synopsis,
+                ],
             }
 
         # /animecore/kitsu/1
@@ -58,6 +64,10 @@ def animecore(request: HttpRequest) -> HttpResponse:
                 "opengraph_type": "webpage",
                 "opengraph_image": anime_model.anime_banner,
                 "opengraph_url": request.build_absolute_uri(),
+                "info_dump": [
+                    anime_model.anime_background,
+                    anime_model.anime_synopsis,
+                ],
             }
 
         else:
@@ -71,3 +81,7 @@ def animecore(request: HttpRequest) -> HttpResponse:
 
     else:
         return render(request, "frontend/animecore.html")
+
+
+def user(request: HttpRequest) -> HttpResponse:
+    return render(request, "frontend/user.html")
