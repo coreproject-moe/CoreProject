@@ -11,7 +11,11 @@ const config = {
             postcss: true
         })
     ],
-
+    vitePlugin: {
+        experimental: {
+          useVitePreprocess: true
+        }
+      },
     kit: {
         appDir: 'svelte__user',
         adapter: adapter({ fallback: 'app.html' }),
