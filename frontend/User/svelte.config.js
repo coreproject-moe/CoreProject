@@ -1,5 +1,6 @@
 import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
+import path from 'path';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -13,7 +14,15 @@ const config = {
 
     kit: {
         appDir: 'svelte__user',
-        adapter: adapter({ fallback: 'app.html' })
+        adapter: adapter({ fallback: 'app.html' }),
+        trailingSlash: 'always',
+        alias: {
+            $hooks: path.resolve('./src/hooks'),
+            $components: path.resolve('./src/lib/components'),
+            $icons: path.resolve('./src/lib/icons'),
+            $kaomoji: path.resolve('./src/lib/kaomoji'),
+            $error: path.resolve('./src/lib/components/errors')
+        }
     }
 };
 
