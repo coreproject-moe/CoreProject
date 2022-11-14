@@ -34,8 +34,15 @@
 			email: '',
 			password: ''
 		},
-		onSubmit: (values) => {
+		onSubmit: (values, context) => {
 			console.log(values);
+		},
+		onSuccess(response, context) {
+			// Do something with the returned value from `onSubmit`.
+		},
+		onError(err, context) {
+			// Do something with the error thrown from `onSubmit`.
+			console.log(err);
 		},
 		extend: [
 			validator({ schema })
