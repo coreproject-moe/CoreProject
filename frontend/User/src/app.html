@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" href="%sveltekit.assets%/favicon.png" />
-        <meta name="viewport" content="width=device-width" />
-        <script id="django">
-            window.CSRFTOKEN = '{{ csrf_token }}';
-            window.IMAGE_CHOICES = [
-                {
-                    type: 'anime',
-                    name: 'Demon Slayer',
-                    image: '/posters/demon-slayer.webp',
-                    credit:
-                    'https://www.reddit.com/r/DemonSlayerAnime/comments/tpgpid/demon_slayer_4k_wallpaper/'
-                },
-                {
-                    type: 'anime',
-                    name: 'Attack on Titan',
-                    image: '/posters/attack-on-titan.jpg'
-                },
-                {
-                    type: 'anime',
-                    name: 'Comic Girls',
-                    image: '/posters/Comic-Girls-Image.png'
-                }
-            ];
-        </script>
-        %sveltekit.head%
-    </head>
-    <body>
-        %sveltekit.body%
-    </body>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
+		<meta name="viewport" content="width=device-width" />
+		<script id="django">
+			window.CSRFTOKEN = '{{ csrf_token }}';
+			window.IMAGE_CHOICES = [
+				{
+					type: 'anime',
+					name: 'Demon Slayer',
+					image: '/posters/demon-slayer.webp',
+					credit:
+						'https://www.reddit.com/r/DemonSlayerAnime/comments/tpgpid/demon_slayer_4k_wallpaper/'
+				},
+				{
+					type: 'anime',
+					name: 'Attack on Titan',
+					image: '/posters/attack-on-titan.jpg'
+				},
+				{
+					type: 'anime',
+					name: 'Comic Girls',
+					image: '/posters/Comic-Girls-Image.png'
+				}
+			];
+		</script>
+		%sveltekit.head%
+	</head>
+	<body>
+		%sveltekit.body%
+	</body>
 </html>
