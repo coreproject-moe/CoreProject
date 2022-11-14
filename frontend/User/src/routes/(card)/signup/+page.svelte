@@ -4,8 +4,6 @@
 	import { validator } from '@felte/validator-yup';
 	import * as yup from 'yup';
 
-	let submitted;
-
 	// Creating yup schema
 	const schema = yup.object({
 		username: yup
@@ -36,7 +34,9 @@
 			email: '',
 			password: ''
 		},
-		onSubmit: (values) => (submitted = values),
+		onSubmit: (values) => {
+			// do something
+		},
 		extend: [
 			validator({ schema })
 			// reporter()
