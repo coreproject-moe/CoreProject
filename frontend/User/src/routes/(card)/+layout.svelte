@@ -15,14 +15,7 @@
 		}, 5000);
 	});
 
-	const formatType = (input: string) => {
-		switch (input) {
-			case 'anime':
-				return 'the anime';
-			case 'pixiv':
-				return 'the artist';
-		}
-	};
+	const formatType = (input: string) => {};
 </script>
 
 <svelte:head>
@@ -35,6 +28,15 @@
 	<!-- Background Image Container -->
 	{#each CHOICES as item}
 		{#if CHOICES.indexOf(item) == CHOICE_NUMBER}
+			{@const type = () => {
+				switch (item.type) {
+					case 'anime':
+						return 'the anime';
+					case 'pixiv':
+						return 'the artist';
+				}
+			}}
+
 			<div transition:blur|local class="bg-black h-screen fixed" style="grid-area: 1 / 1 / 2 / 2;">
 				<div
 					class="h-screen w-screen bg-no-repeat bg-center bg-cover brightness-90"
@@ -45,7 +47,7 @@
 				/>
 				<div class="absolute bottom-8 left-8">
 					<div class="flex flex-col">
-						<div class="text-secondary">Background from {formatType(item.type)}</div>
+						<div class="text-secondary">Background from {type()}</div>
 						<div class="text-white">{item.name}</div>
 					</div>
 				</div>
