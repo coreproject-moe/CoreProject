@@ -9,5 +9,9 @@ declare namespace App {
 }
 
 interface Window {
-	IMAGE_CHOICES: string[];
+	IMAGE_CHOICES: Array<{
+		type: 'pixiv' | 'anime';
+		name: string;
+		image: string;
+	}>;
 }
