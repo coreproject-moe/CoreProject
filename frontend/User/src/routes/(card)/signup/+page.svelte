@@ -32,6 +32,7 @@
 	// Creating the form
 	const { form, data, unsetField, addField } = createForm({
 		initialValues: {
+			username: '',
 			email: '',
 			password: ''
 		},
@@ -43,48 +44,6 @@
 		// Debounced async validation
 		debounced: {}
 	});
-	const KokoroColorWOrdMap: {
-		[key: string]: string | undefined;
-	} = {
-		c: 'white',
-		o: 'yellow',
-		r: 'white',
-		e: 'white',
-		p: 'white',
-		j: 'white',
-		t: 'white'
-	};
-
-	const TailwindColorMap: {
-		[key: string]: string | undefined;
-	} = {
-		white: 'text-white',
-		yellow: 'text-warning'
-	};
-
-	function formatStringColor(input: string) {
-		const string = 'coreproject';
-
-		const stringRegex = new RegExp(string, 'gm');
-
-		// There is no kokoro-chan in the input ( which is odd )
-		if (!stringRegex.exec(input)) {
-			return input;
-		}
-
-		const coloredWrappedWords = string.split('').map((word) => {
-			return `<span class="inline-flex ${
-				TailwindColorMap[
-					KokoroColorWOrdMap[word] ?? 'white' //default to white
-				]
-			}">${word}</span>`;
-		});
-
-		// Color the font.
-		input = input.replaceAll(stringRegex, coloredWrappedWords.join('').toString());
-
-		return input;
-	}
 </script>
 
 <svelte:head>
@@ -100,8 +59,18 @@
 	>
 		<div class="card-body rounded-2xl">
 			<div class="flex justify-center mb-10">
-				<div class="font-bold text-4xl">
-					{@html formatStringColor('coreproject')}
+				<div class="font-bold text-4xl select-none flex">
+					<span class="inline-flex text-white">c</span>
+					<span class="inline-flex text-warning">o</span>
+					<span class="inline-flex text-white">r</span>
+					<span class="inline-flex text-white">e</span>
+					<span class="inline-flex text-white">p</span>
+					<span class="inline-flex text-white">r</span>
+					<span class="inline-flex text-white">o</span>
+					<span class="inline-flex text-white">j</span>
+					<span class="inline-flex text-white">e</span>
+					<span class="inline-flex text-white">c</span>
+					<span class="inline-flex text-white">t</span>
 				</div>
 			</div>
 
