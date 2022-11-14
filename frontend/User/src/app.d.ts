@@ -14,4 +14,5 @@ interface Window {
 		name: string;
 		image: string;
 	}>;
+	CSRFTOKEN: string;
 }
