@@ -14,8 +14,6 @@
 			console.log(index);
 		}, 5000);
 	});
-
-	const formatType = (input: string) => {};
 </script>
 
 <svelte:head>
