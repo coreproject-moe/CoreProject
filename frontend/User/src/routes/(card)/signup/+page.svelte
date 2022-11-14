@@ -2,6 +2,7 @@
 <script lang="ts">
 	import { createForm } from 'felte';
 	import { validator } from '@felte/validator-yup';
+	import reporter from '@felte/reporter-tippy';
 	import * as yup from 'yup';
 
 	// Creating yup schema
@@ -45,9 +46,14 @@
 			console.log(err);
 		},
 		extend: [
-			validator({ schema })
-			// reporter()
+			validator({ schema }),
+			reporter({
+				tippyProps: {
+					allowHTML: true
+				}
+			})
 		],
+
 		// Debounced async validation
 		debounced: {}
 	});

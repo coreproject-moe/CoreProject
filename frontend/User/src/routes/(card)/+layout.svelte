@@ -1,4 +1,5 @@
 <script lang="ts">
+
 	import { blur } from 'svelte/transition';
 	import { browser } from '$app/environment';
 
