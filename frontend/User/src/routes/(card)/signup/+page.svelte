@@ -35,7 +35,7 @@
 			password: ''
 		},
 		onSubmit: (values) => {
-			// do something
+			console.log(values);
 		},
 		extend: [
 			validator({ schema })
@@ -58,56 +58,58 @@
 		class="card w-96 bg-base-100 shadow-xl mr-0 md:mr-6 bg-transparent from-base-100 bg-gradient-to-t"
 	>
 		<div class="card-body rounded-2xl">
-			<div class="flex justify-center mb-10">
-				<div class="font-bold text-4xl select-none flex">
-					<span class="inline-flex text-white">c</span>
-					<span class="inline-flex text-warning">o</span>
-					<span class="inline-flex text-white">r</span>
-					<span class="inline-flex text-white">e</span>
-					<span class="inline-flex text-white">p</span>
-					<span class="inline-flex text-white">r</span>
-					<span class="inline-flex text-white">o</span>
-					<span class="inline-flex text-white">j</span>
-					<span class="inline-flex text-white">e</span>
-					<span class="inline-flex text-white">c</span>
-					<span class="inline-flex text-white">t</span>
+			<form use:form>
+				<div class="flex justify-center mb-10">
+					<div class="font-bold text-4xl select-none flex">
+						<span class="inline-flex text-white">c</span>
+						<span class="inline-flex text-warning">o</span>
+						<span class="inline-flex text-white">r</span>
+						<span class="inline-flex text-white">e</span>
+						<span class="inline-flex text-white">p</span>
+						<span class="inline-flex text-white">r</span>
+						<span class="inline-flex text-white">o</span>
+						<span class="inline-flex text-white">j</span>
+						<span class="inline-flex text-white">e</span>
+						<span class="inline-flex text-white">c</span>
+						<span class="inline-flex text-white">t</span>
+					</div>
 				</div>
-			</div>
 
-			<div class="grid gap-6">
-				<input
-					style="--tw-bg-opacity:0.30"
-					type="text"
-					placeholder="Username"
-					name="username"
-					class="input w-full font-semibold max-w-xs border-[3px] border-warning"
-				/>
-				<input
-					style="--tw-bg-opacity:0.30"
-					type="text"
-					placeholder="Email"
-					name="email"
-					class="input w-full font-semibold max-w-xs border-[3px] border-warning"
-				/>
-				<input
-					style="--tw-bg-opacity:0.30"
-					type="text"
-					placeholder="Password"
-					name="password"
-					class="input w-full font-semibold max-w-xs border-[3px] border-warning"
-				/>
-				<input
-					style="--tw-bg-opacity:0.30"
-					type="text"
-					placeholder="Confirm Password"
-					name="confirm_password"
-					class="input w-full font-semibold max-w-xs border-[3px] border-warning"
-				/>
-			</div>
-			<div class="flex justify-center mt-5 items-center gap-2">
-				<button class="btn btn-secondary font-bold text-black">Register</button>
-				or <a class="underline" href="/login">login</a>
-			</div>
+				<div class="grid gap-6">
+					<input
+						style="--tw-bg-opacity:0.30"
+						type="text"
+						placeholder="Username"
+						name="username"
+						class="input w-full font-semibold max-w-xs border-[3px] border-warning"
+					/>
+					<input
+						style="--tw-bg-opacity:0.30"
+						type="text"
+						placeholder="Email"
+						name="email"
+						class="input w-full font-semibold max-w-xs border-[3px] border-warning"
+					/>
+					<input
+						style="--tw-bg-opacity:0.30"
+						type="text"
+						placeholder="Password"
+						name="password"
+						class="input w-full font-semibold max-w-xs border-[3px] border-warning"
+					/>
+					<input
+						style="--tw-bg-opacity:0.30"
+						type="text"
+						placeholder="Confirm Password"
+						name="confirm_password"
+						class="input w-full font-semibold max-w-xs border-[3px] border-warning"
+					/>
+				</div>
+				<div class="flex justify-center mt-5 items-center gap-2">
+					<button class="btn btn-secondary font-bold text-black" type="submit">Register</button>
+					or <a class="underline" href="/login">login</a>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>
