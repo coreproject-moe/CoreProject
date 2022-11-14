@@ -8,11 +8,27 @@
 
 	// Creating yup schema
 	const schema = yup.object({
-		email: yup.string().email().required(),
-		password: yup.string().required(),
-		type: yup.string().required()
+		username: yup
+			?.string()
+			?.required('Please Enter User Name')
+			?.min(0)
+			?.max(50, 'User name must be less than 50 Characters'),
+		email: yup?.string()?.email('Enter a valid Email')?.required('Please Enter Email'),
+		password: yup
+			?.string()
+			?.min(8, 'Password must be more than 8 Characters')
+			?.matches(
+				/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
+				'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
+			)
+			?.max(1024, 'Password must be less than 1024 Characters'),
+		confirm_password: yup
+			?.string()
+			?.oneOf(
+				[yup.ref('password'), null],
+				'<b>Confirm Password</b> and <b>Password</b> are not the same'
+			)
 	});
-
 	// Creating the form
 	const { form, data, unsetField, addField } = createForm({
 		initialValues: {
@@ -94,24 +110,28 @@
 					style="--tw-bg-opacity:0.30"
 					type="text"
 					placeholder="Username"
+					name="username"
 					class="input w-full font-semibold max-w-xs border-[3px] border-warning"
 				/>
 				<input
 					style="--tw-bg-opacity:0.30"
 					type="text"
 					placeholder="Email"
+					name="email"
 					class="input w-full font-semibold max-w-xs border-[3px] border-warning"
 				/>
 				<input
 					style="--tw-bg-opacity:0.30"
 					type="text"
 					placeholder="Password"
+					name="password"
 					class="input w-full font-semibold max-w-xs border-[3px] border-warning"
 				/>
 				<input
 					style="--tw-bg-opacity:0.30"
 					type="text"
 					placeholder="Confirm Password"
+					name="confirm_password"
 					class="input w-full font-semibold max-w-xs border-[3px] border-warning"
 				/>
 			</div>
