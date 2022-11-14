@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
-		<meta name="viewport" content="width=device-width" />
-		<script id="django">
-			window.CSRFTOKEN = '{{ csrf_token }}';
-			window.IMAGE_CHOICES = [
-				'https://images.unsplash.com/photo-1666688090267-4858c2075629',
-				'https://images.unsplash.com/photo-1666756272254-724e9ed61321',
-				'https://images.unsplash.com/photo-1666845266582-7885e3485303'
-			];
-		</script>
-		%sveltekit.head%
-	</head>
-	<body>
-		%sveltekit.body%
-	</body>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" href="%sveltekit.assets%/favicon.png" />
+        <meta name="viewport" content="width=device-width" />
+        <script id="django">
+            window.CSRFTOKEN = '{{ csrf_token }}';
+            window.IMAGE_CHOICES = [
+                'https://images.unsplash.com/photo-1666688090267-4858c2075629',
+                'https://images.unsplash.com/photo-1666756272254-724e9ed61321',
+                'https://images.unsplash.com/photo-1666845266582-7885e3485303'
+            ];
+        </script>
+        %sveltekit.head%
+    </head>
+    <body>
+        %sveltekit.body%
+    </body>
 </html>

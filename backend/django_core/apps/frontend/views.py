@@ -1,11 +1,10 @@
+from pregex import Pregex
+from pregex.core import cl, gr, op
 from user_agents import parse
 
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import Resolver404
-
-from pregex import Pregex
-from pregex.core import cl, gr, op
 
 from ..anime.models import AnimeModel
 
