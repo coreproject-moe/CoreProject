@@ -29,7 +29,7 @@
 			)
 	});
 	// Creating the form
-	const { form, data, unsetField, addField } = createForm({
+	const { form } = createForm({
 		initialValues: {
 			username: '',
 			email: '',
@@ -43,7 +43,6 @@
 		},
 		onError(err, context) {
 			// Do something with the error thrown from `onSubmit`.
-			console.log(err);
 		},
 		extend: [
 			validator({ schema }),
@@ -94,28 +93,28 @@
 						type="text"
 						placeholder="Username"
 						name="username"
-						class="input w-full font-semibold max-w-xs border-[3px] border-warning"
+						class="input w-full font-semibold max-w-xs border-[3px] border-warning focus:outline-0"
 					/>
 					<input
 						style="--tw-bg-opacity:0.30"
 						type="text"
 						placeholder="Email"
 						name="email"
-						class="input w-full font-semibold max-w-xs border-[3px] border-warning"
+						class="input w-full font-semibold max-w-xs border-[3px] border-warning focus:outline-0"
 					/>
 					<input
 						style="--tw-bg-opacity:0.30"
 						type="text"
 						placeholder="Password"
 						name="password"
-						class="input w-full font-semibold max-w-xs border-[3px] border-warning"
+						class="input w-full font-semibold max-w-xs border-[3px] border-warning focus:outline-0"
 					/>
 					<input
 						style="--tw-bg-opacity:0.30"
 						type="text"
 						placeholder="Confirm Password"
 						name="confirm_password"
-						class="input w-full font-semibold max-w-xs border-[3px] border-warning"
+						class="input w-full font-semibold max-w-xs border-[3px] border-warning focus:outline-0"
 					/>
 				</div>
 				<div class="flex justify-center mt-5 items-center gap-2">
