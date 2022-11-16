@@ -3,6 +3,8 @@ const nextConfig = {
     reactStrictMode: true,
     swcMinify: true,
     productionBrowserSourceMaps: true,
+    // https://nextjs.org/docs/api-reference/next.config.js/cdn-support-with-asset-prefix
+    assetPrefix: '/static',
     /* https://nextjs.org/docs/api-reference/next.config.js/basepath */
     basePath: '/animecore',
     /* https://nextjs.org/docs/api-reference/next.config.js/trailing-slash */
