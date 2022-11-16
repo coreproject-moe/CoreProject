@@ -1,11 +1,5 @@
 import { useState } from 'react';
-import {
-    createStyles,
-    Navbar,
-    UnstyledButton,
-    Tooltip,
-    Title,
-} from '@mantine/core';
+import { createStyles, Navbar, UnstyledButton, Flex } from '@mantine/core';
 import {
     IconHome2,
     IconGauge,
@@ -19,22 +13,11 @@ import { MantineLogo } from '@mantine/ds';
 import Link from 'next/link';
 
 const useStyles = createStyles((theme) => ({
-    wrapper: {
-        display: 'flex',
-    },
-
-    aside: {
-        flex: '0 0 60px',
-        backgroundColor:
-            theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
+    sideBar: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        borderRight: `1px solid ${
-            theme.colorScheme === 'dark'
-                ? theme.colors.dark[7]
-                : theme.colors.gray[3]
-        }`,
+        justifyContent: 'space-between',
     },
 
     main: {
@@ -179,57 +162,49 @@ export default function DoubleNavbar() {
     const [active, setActive] = useState('Releases');
     const [activeLink, setActiveLink] = useState('Settings');
 
-    const mainLinks = mainLinksMockdata.map((link) => (
-        <Tooltip
-            label={link.label}
-            position="right"
-            withArrow
-            transitionDuration={0}
-            key={link.label}
-        >
-            <UnstyledButton
-                onClick={() => setActive(link.label)}
-                className={cx(classes.mainLink, {
-                    [classes.mainLinkActive]: link.label === active,
-                })}
-            >
-                <link.icon stroke={1.5} />
-            </UnstyledButton>
-        </Tooltip>
-    ));
-
-    const links = linksMockdata.map((link) => (
-        <Link
-            key={link}
-            className={cx(classes.link, {
-                [classes.linkActive]: activeLink === link,
-            })}
-            onClick={(event) => {
-                event.preventDefault();
-                setActiveLink(link);
-            }}
-            href="/"
-            legacyBehavior>
-            {link}
-        </Link>
-    ));
-
     return (
-        <Navbar height={750} width={{ sm: 300 }}>
-            <Navbar.Section grow className={classes.wrapper}>
-                <div className={classes.aside}>
-                    <div className={classes.logo}>
-                        <MantineLogo type="mark" size={30} />
-                    </div>
-                    {mainLinks}
-                </div>
-                <div className={classes.main}>
-                    <Title order={4} className={classes.title}>
-                        {active}
-                    </Title>
-
-                    {links}
-                </div>
+        <Navbar height={'100vh'} width={{ md: 100 }}>
+            <Navbar.Section grow className={classes.sideBar}>
+                <Flex
+                    mih={50}
+                    gap="sm"
+                    justify="flex-end"
+                    align="center"
+                    direction="column"
+                    wrap="nowrap"
+                >
+                    HEllo
+                </Flex>
+                <Flex
+                    mih={50}
+                    gap="sm"
+                    justify="flex-end"
+                    align="center"
+                    direction="column"
+                    wrap="nowrap"
+                >
+                    {mainLinksMockdata.map((link, index) => (
+                        <UnstyledButton
+                            onClick={() => setActive(link.label)}
+                            className={cx(classes.mainLink, {
+                                [classes.mainLinkActive]: link.label === active,
+                            })}
+                            key={index}
+                        >
+                            <link.icon stroke={1.5} />
+                        </UnstyledButton>
+                    ))}
+                </Flex>
+                <Flex
+                    mih={50}
+                    gap="sm"
+                    justify="flex-end"
+                    align="center"
+                    direction="column"
+                    wrap="nowrap"
+                >
+                    HEllo
+                </Flex>
             </Navbar.Section>
         </Navbar>
     );
