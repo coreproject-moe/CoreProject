@@ -13,7 +13,7 @@
         "@emotion/react": "^11.10.5",
         "@mantine/core": "^5.6.3",
         "@mantine/ds": "^5.6.3",
-        "@mantine/hooks": "^5.5.5",
+        "@mantine/hooks": "^5.6.3",
         "@mantine/modals": "^5.6.3",
         "@mantine/next": "^5.6.3",
         "@mantine/notifications": "^5.6.3",
