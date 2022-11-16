@@ -3,6 +3,7 @@ import { ModalsProvider } from '@mantine/modals';
 import { NotificationsProvider } from '@mantine/notifications';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
+import Script from 'next/script';
 import NextNProgress from 'nextjs-progressbar';
 
 const App = (props: AppProps) => {
@@ -17,6 +18,10 @@ const App = (props: AppProps) => {
                     content="minimum-scale=1, initial-scale=1, width=device-width"
                 />
             </Head>
+
+            <Script id="django">{`
+                window.CSRFTOKEN = '{{ csrf_token }}';
+            `}</Script>
 
             <style global jsx>{`
                 @font-face {

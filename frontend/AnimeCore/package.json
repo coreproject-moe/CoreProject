@@ -1,5 +1,5 @@
 {
-    "name": "admin-panel",
+    "name": "animecore",
     "version": "0.1.0",
     "private": true,
     "scripts": {
@@ -22,9 +22,11 @@
         "next": "^13.0.2",
         "nextjs-progressbar": "^0.0.16",
         "react": "^18.2.0",
-        "react-dom": "^18.2.0"
+        "react-dom": "^18.2.0",
+        "sass": "^1.56.1"
     },
     "devDependencies": {
+        "@svgr/webpack": "^6.5.1",
         "@types/node": "18.11.9",
         "@types/react": "18.0.24",
         "@types/react-dom": "18.0.8",
