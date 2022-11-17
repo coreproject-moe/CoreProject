@@ -12,10 +12,7 @@ if TYPE_CHECKING:
 
 
 class UsernameWithDiscriminatorManager(models.Manager):
-    def get_username_with_discriminator(self, prefix: str = "") -> "UserManager":
-        """
-        Annotates with 'username_with_discriminator'
-        """
+    def get_username_with_discriminator(self, prefix: str = "") -> Any:
         prefix = prefix + "__" if prefix else ""
         return self.annotate(
             username_discriminator_as_string=Cast(

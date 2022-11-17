@@ -47,7 +47,4 @@ urlpatterns = [
     path("api/v1/", api.urls),
 ]
 if settings.DEBUG:
-    urlpatterns += (
-        path("__debug__/", include("debug_toolbar.urls")),
-        path("__reload__/", include("django_browser_reload.urls")),
-    )
+    urlpatterns += (path("__debug__/", include("debug_toolbar.urls")),)

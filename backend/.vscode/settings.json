@@ -9,4 +9,5 @@
         "--django-settings-module",
         "core.settings"
     ],
+    "restructuredtext.preview.name": "docutils"
 }

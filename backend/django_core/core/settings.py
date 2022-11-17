@@ -65,9 +65,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     # Whitenoise
     "django.contrib.staticfiles",
-    # Form tools
-    "crispy_forms",
-    "crispy_bootstrap5",
     # Rest Framework
     "ninja",
     # 3rd party rest framework stuff
@@ -88,12 +85,11 @@ INSTALLED_APPS = [
 
 
 # Debug Toolbar Add
-# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install`-the-app
+# https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install-the-app
 if DEBUG:
     INSTALLED_APPS += (
         "debug_toolbar",
         "dbbackup",  # django-dbbackup
-        "django_browser_reload",
     )
 
 
@@ -124,7 +120,6 @@ if DEBUG:
     MIDDLEWARE += (
         "debug_toolbar.middleware.DebugToolbarMiddleware",
         "django_cprofile_middleware.middleware.ProfilerMiddleware",
-        "django_browser_reload.middleware.BrowserReloadMiddleware",
     )
 
 
@@ -302,9 +297,3 @@ DBBACKUP_STORAGE_OPTIONS = {"location": os.path.join(BASE_DIR, "backup")}
 # Mappings from AIOHTTP
 BASE_AIOHTTP_URL = "http://localhost:8000"
 AIOHTTP_AVATAR_URL = f"{BASE_AIOHTTP_URL}/user/avatar/"  # /id
-
-# Crispy forms
-# https://github.com/django-crispy-forms/crispy-bootstrap5#usage
-
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-CRISPY_TEMPLATE_PACK = "bootstrap5"
