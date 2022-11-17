@@ -83,11 +83,11 @@ const Icons = {
     last: [
         {
             name: 'Settings',
-            icon: require('@static/icons/settings.svg').default,
+            icon: require('@icons/settings.svg').default,
         },
         {
             name: 'Misc.',
-            icon: require('@static/icons/help outline.svg').default,
+            icon: require('@icons/help outline.svg').default,
         },
     ],
 };
