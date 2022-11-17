@@ -34,11 +34,13 @@ const myFont = localFont({
         },
     ],
     preload: true,
-    variable: '--next-font',
+    variable:'--hello'
 });
 
 const App = (props: AppProps) => {
     const { Component, pageProps } = props;
+    
+    console.log(myFont.className);
 
     return (
         <>
@@ -58,7 +60,7 @@ const App = (props: AppProps) => {
                     /** Put your mantine theme override here */
                     colorScheme: 'dark',
                     /** Font Family */
-                    fontFamily: `var(--next-font)`,
+                    fontFamily: `${myFont.}`,
                     /** Heading */
                     headings: {
                         sizes: {
