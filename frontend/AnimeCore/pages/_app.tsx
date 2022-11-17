@@ -4,43 +4,16 @@ import { NotificationsProvider } from '@mantine/notifications';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import NextNProgress from 'nextjs-progressbar';
-import localFont from '@next/font/local';
 
-const myFont = localFont({
-    src: [
-        {
-            path: '../public/fonts/Kokoro/Kokoro-SemiBoldItalic.woff2',
-            weight: '600',
-        },
-        {
-            path: '../public/fonts/Kokoro/Kokoro-SemiBold.woff2',
-            weight: '600',
-        },
-        {
-            path: '../public/fonts/Kokoro/Kokoro-BoldItalic.woff2',
-            weight: '600',
-        },
-        {
-            path: '../public/fonts/Kokoro/Kokoro-Italic.woff2',
-            weight: '600',
-        },
-        {
-            path: '../public/fonts/Kokoro/Kokoro-Regular.woff2',
-            weight: '600',
-        },
-        {
-            path: '../public/fonts/Kokoro/Kokoro-Bold.woff2',
-            weight: '600',
-        },
-    ],
-    preload: true,
-    variable:'--hello'
-});
+import KokoroSemiBold from '@static/fonts/Kokoro/Kokoro-SemiBold.woff2';
+import KokoroItalic from '@static/fonts/Kokoro/Kokoro-Italic.woff2';
+import KokoroSemiBoldItalic from '@static/fonts/Kokoro/Kokoro-SemiBoldItalic.woff2';
+import KokoroBoldItalic from '@static/fonts/Kokoro/Kokoro-BoldItalic.woff2';
+import KokoroRegular from '@static/fonts/Kokoro/Kokoro-Regular.woff2';
+import KokoroBold from '@static/fonts/Kokoro/Kokoro-Bold.woff2';
 
 const App = (props: AppProps) => {
     const { Component, pageProps } = props;
-    
-    console.log(myFont.className);
 
     return (
         <>
@@ -51,6 +24,51 @@ const App = (props: AppProps) => {
                     content="minimum-scale=1, initial-scale=1, width=device-width"
                 />
                 <link rel="icon" href="logos/favicon.svg" />
+
+                <style global jsx>{`
+                    @font-face {
+                        font-family: 'Kokoro';
+                        src: url('${KokoroSemiBoldItalic}') format('woff2');
+                        font-weight: 600;
+                        font-style: italic;
+                        font-display: swap;
+                    }
+                    @font-face {
+                        font-family: 'Kokoro';
+                        src: url('${KokoroSemiBold}') format('woff2');
+                        font-weight: 600;
+                        font-style: normal;
+                        font-display: swap;
+                    }
+                    @font-face {
+                        font-family: 'Kokoro';
+                        src: url('${KokoroBoldItalic}') format('woff2');
+                        font-weight: bold;
+                        font-style: italic;
+                        font-display: swap;
+                    }
+                    @font-face {
+                        font-family: 'Kokoro';
+                        src: url('${KokoroItalic}') format('woff2');
+                        font-weight: normal;
+                        font-style: italic;
+                        font-display: swap;
+                    }
+                    @font-face {
+                        font-family: 'Kokoro';
+                        src: url('${KokoroRegular}') format('woff2');
+                        font-weight: normal;
+                        font-style: normal;
+                        font-display: swap;
+                    }
+                    @font-face {
+                        font-family: 'Kokoro';
+                        src: url('${KokoroBold}') format('woff2');
+                        font-weight: bold;
+                        font-style: normal;
+                        font-display: swap;
+                    }
+                `}</style>
             </Head>
 
             <MantineProvider
@@ -60,7 +78,7 @@ const App = (props: AppProps) => {
                     /** Put your mantine theme override here */
                     colorScheme: 'dark',
                     /** Font Family */
-                    fontFamily: `${myFont.}`,
+                    fontFamily: `Kokoro`,
                     /** Heading */
                     headings: {
                         sizes: {
