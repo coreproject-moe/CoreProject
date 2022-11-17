@@ -111,7 +111,13 @@ export default function DoubleNavbar() {
                     {Icons.start.map((item) => {
                         return (
                             <>
-                                <item.icon />
+                                <Flex
+                                    direction="column"
+                                    align="center"
+                                    justify="center"
+                                >
+                                    <item.icon />
+                                </Flex>
                             </>
                         );
                     })}
