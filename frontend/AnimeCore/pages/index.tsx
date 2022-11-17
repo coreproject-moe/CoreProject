@@ -8,8 +8,9 @@ import {
 } from '@mantine/core';
 import { useMantineTheme } from '@mantine/core';
 import Logo from '@static/logos/favicon.svg';
-import Settings from '@static/icons/settings.svg';
+
 import HelpOutline from '@static/icons/help outline.svg';
+import AnimeCoreLogo from '@static/logos/favicon.svg';
 
 const useStyles = createStyles((theme) => ({
     sideBar: {
@@ -74,12 +75,23 @@ const useStyles = createStyles((theme) => ({
     },
 }));
 
+const Icons = {
+    start: [{ name: 'AnimeCore', icon: AnimeCoreLogo }],
+    middle: [],
+    last: [
+        {
+            name: 'Settings',
+            icon: require('@static/icons/settings.svg').default,
+        },
+        { name: 'Misc.', icon: import('@static/icons/help outline.svg') },
+    ],
+};
+
 export default function DoubleNavbar() {
     const { classes, cx } = useStyles();
     const [active, setActive] = useState('Releases');
     const [activeLink, setActiveLink] = useState('Settings');
     const theme = useMantineTheme();
-    console.log(theme.colors);
 
     return (
         <Navbar height={'100vh'} width={{ md: 100 }}>
@@ -112,32 +124,26 @@ export default function DoubleNavbar() {
                     direction="column"
                     wrap="nowrap"
                 >
-                    <UnstyledButton className={classes.mainLink}>
-                        <Flex
-                            direction="column"
-                            align="center"
-                            justify="center"
-                            gap={4}
-                        >
-                            <Settings fill="currentColor" />
-                            <Text fw={600} fz="sm">
-                                Settings
-                            </Text>
-                        </Flex>
-                    </UnstyledButton>
-                    <UnstyledButton className={classes.mainLink}>
-                        <Flex
-                            direction="column"
-                            align="center"
-                            justify="center"
-                            gap={4}
-                        >
-                            <HelpOutline />
-                            <Text fw={600} fz="sm">
-                                Misc.
-                            </Text>
-                        </Flex>
-                    </UnstyledButton>
+                    {Icons.start.map((item, key) => {
+                        return (
+                            <>
+                                <UnstyledButton className={classes.mainLink}>
+                                    <Flex
+                                        direction="column"
+                                        align="center"
+                                        justify="center"
+                                        gap={4}
+                                        key={key}
+                                    >
+                                        <item.icon />
+                                        <Text fw={600} fz="sm">
+                                            {item.name}
+                                        </Text>
+                                    </Flex>
+                                </UnstyledButton>
+                            </>
+                        );
+                    })}
                 </Flex>
             </Navbar.Section>
         </Navbar>
