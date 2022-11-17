@@ -14,24 +14,19 @@ const nextConfig = {
     devIndicators: {
         buildActivityPosition: 'bottom-right',
     },
+    /**
+     *
+     * @param {import('webpack').Configuration} config
+     * @param {import('next/dist/server/config-shared').WebpackConfigContext} context
+     * @returns {import('webpack').Configuration}
+     */
     webpack: (config) => {
         config.module.rules.push({
             test: /\.svg$/i,
             issuer: /\.[jt]sx?$/,
             use: ['@svgr/webpack'],
         });
-        config.module.rules.push({
-            test: /\.(woff(2)?|ttf)(\?v=\d+\.\d+\.\d+)?$/,
-            use: [
-                {
-                    loader: 'file-loader',
-                    options: {
-                        name: '[name].[ext]',
-                        outputPath: 'fonts/',
-                    },
-                },
-            ],
-        });
+
         return config;
     },
 };
