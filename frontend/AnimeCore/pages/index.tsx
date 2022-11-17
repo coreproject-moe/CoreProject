@@ -5,6 +5,7 @@ import {
     UnstyledButton,
     Flex,
     Text,
+    Space,
 } from '@mantine/core';
 import { useMantineTheme } from '@mantine/core';
 
@@ -150,8 +151,8 @@ export default function DoubleNavbar() {
                                         direction="column"
                                         align="center"
                                         justify="center"
-                                        gap={4}
                                     >
+                                        <Space h="lg" />
                                         <item.icon />
                                         <Text fw={600} fz="sm">
                                             {item.name}
