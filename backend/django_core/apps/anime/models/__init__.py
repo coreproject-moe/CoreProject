@@ -1,6 +1,8 @@
 from pathlib import Path
 from typing import Any
 
+from dynamic_filenames import FilePattern
+
 from django.db import models
 
 from ...characters.models import CharacterModel
@@ -11,18 +13,8 @@ from .anime_synonym import AnimeSynonymModel
 from .anime_theme import AnimeThemeModel
 from .episode import EpisodeModel
 
-
-class FileField:
-    # Thanks Stackoverflow
-    # https://stackoverflow.com/questions/1190697/django-filefield-with-upload-to-determined-at-runtime
-    @staticmethod
-    def anime_cover(instance: Any, filename: str) -> Path:
-        return Path("anime_cover", filename)
-
-    @staticmethod
-    def anime_banner(instance: Any, filename: str) -> Path:
-        return Path("anime_banner", filename)
-
+anime_cover = FilePattern(filename_pattern="/anime_cover{ext}")
+anime_pattern = FilePattern(filename_patten="/anime_banner{ext}")
 
 # Create your models here.
 
@@ -40,10 +32,10 @@ class AnimeModel(models.Model):
     anime_aired_from = models.DateTimeField(blank=True, null=True)
     anime_aired_to = models.DateTimeField(blank=True, null=True)
     anime_banner = models.ImageField(
-        upload_to=FileField.anime_banner, default=None, blank=True, null=True
+        upload_to=anime_pattern, default=None, blank=True, null=True
     )
     anime_cover = models.ImageField(
-        upload_to=FileField.anime_cover, default=None, blank=True, null=True
+        upload_to=anime_cover, default=None, blank=True, null=True
     )
     anime_synopsis = models.TextField(blank=True, null=True)
     anime_background = models.TextField(blank=True, null=True)

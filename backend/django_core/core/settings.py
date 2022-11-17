@@ -56,7 +56,7 @@ HOSTNAME = "http://127.0.0.1:8000"
 INSTALLED_APPS = [
     # user must be above auth
     "apps.user",
-    "apps.__discord__",
+    "apps.discord",
     # Django stuff
     "django.contrib.admin",
     "django.contrib.auth",
@@ -82,7 +82,10 @@ INSTALLED_APPS = [
     "apps.producers",
     "apps.studios",
     "apps.staffs",
+    # Views ( Frontend )
+    "apps.frontend",
 ]
+
 
 # Debug Toolbar Add
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install`-the-app
@@ -163,12 +166,12 @@ LOGIN_URL = "login_page"
 # Cache
 # https://docs.djangoproject.com/en/4.0/topics/cache/#filesystem-caching
 
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379",
-    }
-}
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django.core.cache.backends.redis.RedisCache",
+#         "LOCATION": "redis://127.0.0.1:6379",
+#     }
+# }
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

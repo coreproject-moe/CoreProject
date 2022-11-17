@@ -5,15 +5,20 @@ name = "pypi"
 
 [packages]
 django = {version = ">=4.1", extras = ["argon2"]}
-# 3rd Party ( Form )
-django-crispy-forms = "*"
-crispy-bootstrap5 = "*"
+# User Agent Parser
+user-agents = "*"
+# Regex Parser
+pregex = "*"
+# Postgres
+psycopg2 = "*"
+# 3rd Party ( Files )
+django-dynamic-filenames = "*"
 # 3rd Party ( Middlewares )
 django_cleanup = "*"
 django_cors_headers = "*"
 # 3rd party ( Management )
 django_click = "*"
-# 3rd Party ( ENV ) 
+# 3rd Party ( ENV )
 python_dotenv = "*"
 # 3rd Party ( WhiteNoise )
 whitenoise = {extras = ["brotli"], version = "*"}
@@ -23,6 +28,7 @@ redis = ">=4"
 hiredis = {version="*", markers="sys_platform != 'win32'"}
 # Rest framework
 django_ninja = "*"
+pydantic = {extras = ["email"], version = "*"}
 # https://github.com/vitalik/django-ninja/issues/305
 # ===================================================
 # HTTP Client
@@ -33,8 +39,7 @@ aiohttp_retry = "*"
 aiohttp_client_cache = {extras = ["redis"], version = "*"}
 pyrate-limiter = {extras = ["redis"], version = "*"}
 # Database Drivers
-sqlalchemy = {extras = ["postgresql_asyncpg"], version = "*"}
-psycopg2 = "*"
+sqlalchemy = {extras = ["postgresql_asyncpg"], version = ">=2.0.0b2"}
 # Web servers
 gunicorn = {extras = ["setproctile"], version = "*"}
 uvicorn = {extras = ["standard"], version = "*"}
@@ -43,11 +48,11 @@ pillow = "*"
 # Discord API
 "discord.py" = {extras = ["voice", "speed"], version = "*"}
 
+
 [dev-packages]
 # Aiohttp
 aiohttp-devtools = "*"
 # Django
-django-browser-reload = '*'
 django_debug_toolbar = "*"
 django_dbbackup = "*"
 django_cprofile_middleware = "*"
