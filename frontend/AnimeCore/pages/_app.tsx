@@ -72,6 +72,7 @@ const App = (props: AppProps) => {
                             h6: { fontSize: 16 },
                         },
                     },
+
                     //** Color */
                     colors: {
                         yellow: [

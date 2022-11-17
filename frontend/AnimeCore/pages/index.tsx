@@ -66,7 +66,25 @@ const useStyles = createStyles((theme) => ({
     },
 
     linkActive: {
-        '&, &:hover': {},
+        backgroundColor: theme.colors.blue[1],
+        color: theme.black,
+
+        ':before': {
+            content: '""',
+            zIndex: 100,
+            width: 4,
+            height: 14,
+            backgroundColor: theme.colors.blue[3],
+            position: 'absolute',
+            borderRadius: theme.radius.md,
+            transform: 'translateX(-28.5px)',
+        },
+        svg: {
+            color: theme.black,
+        },
+        div: {
+            color: 'transparent',
+        },
     },
     searchButton: {
         width: 40,
@@ -133,8 +151,7 @@ const Icons = {
 
 export default function DoubleNavbar() {
     const { classes, cx } = useStyles();
-    const [active, setActive] = useState('Releases');
-    const [activeLink, setActiveLink] = useState('Settings');
+    const [active, setActive] = useState('Home');
     const theme = useMantineTheme();
 
     return (
@@ -198,7 +215,10 @@ export default function DoubleNavbar() {
                         return (
                             <UnstyledButton
                                 key={index}
-                                className={classes.mainLink}
+                                className={cx(classes.mainLink, {
+                                    [classes.linkActive]: active === item.name,
+                                })}
+                                onClick={() => setActive(item.name)}
                             >
                                 <Flex
                                     direction="column"
@@ -217,7 +237,7 @@ export default function DoubleNavbar() {
                 </Flex>
                 <Flex
                     mih={50}
-                    gap="xl"
+                    gap="sm"
                     justify="flex-start"
                     align="center"
                     direction="column"
