@@ -9,8 +9,9 @@ import {
     IconUser,
     IconSettings,
 } from '@tabler/icons';
-import { MantineLogo } from '@mantine/ds';
-import Link from 'next/link';
+import Logo from '@static/logos/favicon.svg';
+import Settings from '@static/icons/settings.svg';
+import HelpOutline from '@static/icons/help outline.svg';
 
 const useStyles = createStyles((theme) => ({
     sideBar: {
@@ -63,7 +64,6 @@ const useStyles = createStyles((theme) => ({
 
     title: {
         boxSizing: 'border-box',
-        fontFamily: `Greycliff CF, ${theme.fontFamily}`,
         marginBottom: theme.spacing.xl,
         backgroundColor:
             theme.colorScheme === 'dark' ? theme.colors.dark[7] : theme.white,
@@ -173,7 +173,7 @@ export default function DoubleNavbar() {
                     direction="column"
                     wrap="nowrap"
                 >
-                    HEllo
+                    <Logo />
                 </Flex>
                 <Flex
                     mih={50}
@@ -197,13 +197,14 @@ export default function DoubleNavbar() {
                 </Flex>
                 <Flex
                     mih={50}
-                    gap="sm"
-                    justify="flex-end"
+                    gap="xl"
+                    justify="flex-start"
                     align="center"
                     direction="column"
                     wrap="nowrap"
                 >
-                    HEllo
+                    <Settings />
+                    <HelpOutline />
                 </Flex>
             </Navbar.Section>
         </Navbar>

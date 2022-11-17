@@ -4,6 +4,38 @@ import { NotificationsProvider } from '@mantine/notifications';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import NextNProgress from 'nextjs-progressbar';
+import localFont from '@next/font/local';
+
+const myFont = localFont({
+    src: [
+        {
+            path: '../public/fonts/Kokoro/Kokoro-SemiBoldItalic.woff2',
+            weight: '600',
+        },
+        {
+            path: '../public/fonts/Kokoro/Kokoro-SemiBold.woff2',
+            weight: '600',
+        },
+        {
+            path: '../public/fonts/Kokoro/Kokoro-BoldItalic.woff2',
+            weight: '600',
+        },
+        {
+            path: '../public/fonts/Kokoro/Kokoro-Italic.woff2',
+            weight: '600',
+        },
+        {
+            path: '../public/fonts/Kokoro/Kokoro-Regular.woff2',
+            weight: '600',
+        },
+        {
+            path: '../public/fonts/Kokoro/Kokoro-Bold.woff2',
+            weight: '600',
+        },
+    ],
+    preload: true,
+    variable: '--next-font',
+});
 
 const App = (props: AppProps) => {
     const { Component, pageProps } = props;
@@ -19,61 +51,6 @@ const App = (props: AppProps) => {
                 <link rel="icon" href="logos/favicon.svg" />
             </Head>
 
-            <style global jsx>{`
-                @font-face {
-                    font-family: 'Kokoro';
-                    src: url('/fonts/Kokoro/Kokoro-SemiBoldItalic.woff2')
-                        format('woff2');
-                    font-weight: 600;
-                    font-style: italic;
-                    font-display: swap;
-                }
-
-                @font-face {
-                    font-family: 'Kokoro';
-                    src: url('/fonts/Kokoro/Kokoro-SemiBold.woff2')
-                        format('woff2');
-                    font-weight: 600;
-                    font-style: normal;
-                    font-display: swap;
-                }
-
-                @font-face {
-                    font-family: 'Kokoro';
-                    src: url('/fonts/Kokoro/Kokoro-BoldItalic.woff2')
-                        format('woff2');
-                    font-weight: bold;
-                    font-style: italic;
-                    font-display: swap;
-                }
-
-                @font-face {
-                    font-family: 'Kokoro';
-                    src: url('/fonts/Kokoro/Kokoro-Italic.woff2')
-                        format('woff2');
-                    font-weight: normal;
-                    font-style: italic;
-                    font-display: swap;
-                }
-
-                @font-face {
-                    font-family: 'Kokoro';
-                    src: url('/fonts/Kokoro/Kokoro-Regular.woff2')
-                        format('woff2');
-                    font-weight: normal;
-                    font-style: normal;
-                    font-display: swap;
-                }
-
-                @font-face {
-                    font-family: 'Kokoro';
-                    src: url('/fonts/Kokoro/Kokoro-Bold.woff2') format('woff2');
-                    font-weight: bold;
-                    font-style: normal;
-                    font-display: swap;
-                }
-            `}</style>
-
             <MantineProvider
                 withGlobalStyles
                 withNormalizeCSS
@@ -81,10 +58,9 @@ const App = (props: AppProps) => {
                     /** Put your mantine theme override here */
                     colorScheme: 'dark',
                     /** Font Family */
-                    fontFamily: 'Kokoro',
+                    fontFamily: `var(--next-font)`,
                     /** Heading */
                     headings: {
-                        fontFamily: 'Kokoro',
                         sizes: {
                             h1: { fontSize: 60 },
                             h2: { fontSize: 40 },
