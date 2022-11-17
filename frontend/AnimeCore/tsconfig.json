@@ -25,6 +25,7 @@
     "exclude": [
         "node_modules",
         // Next font handles this
-        "public/fonts"
+        "fonts",
+        "icons"
     ]
 }

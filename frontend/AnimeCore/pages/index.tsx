@@ -17,11 +17,6 @@ const useStyles = createStyles((theme) => ({
         justifyContent: 'space-between',
     },
 
-    main: {
-        flex: 1,
-        backgroundColor: theme.colors.gray[0],
-    },
-
     mainLink: {
         width: 56,
         height: 54,
@@ -37,6 +32,9 @@ const useStyles = createStyles((theme) => ({
 
             svg: {
                 color: theme.black,
+            },
+            div: {
+                color: 'transparent',
             },
         },
     },
@@ -70,6 +68,20 @@ const useStyles = createStyles((theme) => ({
     linkActive: {
         '&, &:hover': {},
     },
+    searchButton: {
+        width: 40,
+        height: 40,
+        borderRadius: theme.radius.md,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: theme.black,
+        backgroundColor: theme.colors.yellow[5],
+
+        '&:hover': {
+            backgroundColor: theme.colors.yellow[3],
+        },
+    },
 }));
 
 const Icons = {
@@ -79,7 +91,34 @@ const Icons = {
             icon: require('@static/logos/favicon.svg').default,
         },
     ],
-    middle: [],
+    search: [
+        {
+            name: 'Search',
+            icon: require('@icons/search.svg').default,
+        },
+    ],
+    middle: [
+        {
+            name: 'Home',
+            icon: require('@icons/home.svg').default,
+        },
+        {
+            name: 'Discover',
+            icon: require('@icons/explore.svg').default,
+        },
+        {
+            name: 'List',
+            icon: require('@icons/list.svg').default,
+        },
+        {
+            name: 'Schedule',
+            icon: require('@icons/calendar today.svg').default,
+        },
+        {
+            name: 'Forum',
+            icon: require('@icons/forum.svg').default,
+        },
+    ],
     last: [
         {
             name: 'Settings',
@@ -109,17 +148,16 @@ export default function DoubleNavbar() {
                     direction="column"
                     wrap="nowrap"
                 >
-                    {Icons.start.map((item) => {
+                    {Icons.start.map((item, index) => {
                         return (
-                            <>
-                                <Flex
-                                    direction="column"
-                                    align="center"
-                                    justify="center"
-                                >
-                                    <item.icon />
-                                </Flex>
-                            </>
+                            <Flex
+                                key={index}
+                                direction="column"
+                                align="center"
+                                justify="center"
+                            >
+                                <item.icon />
+                            </Flex>
                         );
                     })}
                 </Flex>
@@ -131,8 +169,50 @@ export default function DoubleNavbar() {
                     direction="column"
                     wrap="nowrap"
                 >
-                    {Icons.middle.map((item) => {
-                        return <>hello</>;
+                    {Icons.search.map((item, index) => {
+                        return (
+                            <UnstyledButton
+                                key={index}
+                                className={classes.searchButton}
+                            >
+                                <Flex
+                                    direction="column"
+                                    align="center"
+                                    justify="center"
+                                >
+                                    <item.icon></item.icon>
+                                </Flex>
+                            </UnstyledButton>
+                        );
+                    })}
+                </Flex>
+                <Flex
+                    mih={50}
+                    gap="sm"
+                    justify="flex-end"
+                    align="center"
+                    direction="column"
+                    wrap="nowrap"
+                >
+                    {Icons.middle.map((item, index) => {
+                        return (
+                            <UnstyledButton
+                                key={index}
+                                className={classes.mainLink}
+                            >
+                                <Flex
+                                    direction="column"
+                                    align="center"
+                                    justify="center"
+                                >
+                                    <Space h="lg" />
+                                    <item.icon />
+                                    <Text fw={600} fz="sm">
+                                        {item.name}
+                                    </Text>
+                                </Flex>
+                            </UnstyledButton>
+                        );
                     })}
                 </Flex>
                 <Flex
@@ -142,24 +222,26 @@ export default function DoubleNavbar() {
                     align="center"
                     direction="column"
                     wrap="nowrap"
+                    mb="xl"
                 >
-                    {Icons.last.map((item) => {
+                    {Icons.last.map((item, index) => {
                         return (
-                            <>
-                                <UnstyledButton className={classes.mainLink}>
-                                    <Flex
-                                        direction="column"
-                                        align="center"
-                                        justify="center"
-                                    >
-                                        <Space h="lg" />
-                                        <item.icon />
-                                        <Text fw={600} fz="sm">
-                                            {item.name}
-                                        </Text>
-                                    </Flex>
-                                </UnstyledButton>
-                            </>
+                            <UnstyledButton
+                                key={index}
+                                className={classes.mainLink}
+                            >
+                                <Flex
+                                    direction="column"
+                                    align="center"
+                                    justify="center"
+                                >
+                                    <Space h="lg" />
+                                    <item.icon />
+                                    <Text fw={600} fz="sm">
+                                        {item.name}
+                                    </Text>
+                                </Flex>
+                            </UnstyledButton>
                         );
                     })}
                 </Flex>
