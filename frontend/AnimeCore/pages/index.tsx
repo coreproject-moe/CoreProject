@@ -7,10 +7,6 @@ import {
     Text,
 } from '@mantine/core';
 import { useMantineTheme } from '@mantine/core';
-import Logo from '@static/logos/favicon.svg';
-
-import HelpOutline from '@static/icons/help outline.svg';
-import AnimeCoreLogo from '@static/logos/favicon.svg';
 
 const useStyles = createStyles((theme) => ({
     sideBar: {
@@ -76,14 +72,22 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const Icons = {
-    start: [{ name: 'AnimeCore', icon: AnimeCoreLogo }],
+    start: [
+        {
+            name: 'AnimeCore',
+            icon: require('@static/logos/favicon.svg').default,
+        },
+    ],
     middle: [],
     last: [
         {
             name: 'Settings',
             icon: require('@static/icons/settings.svg').default,
         },
-        { name: 'Misc.', icon: import('@static/icons/help outline.svg') },
+        {
+            name: 'Misc.',
+            icon: require('@static/icons/help outline.svg').default,
+        },
     ],
 };
 
@@ -104,7 +108,13 @@ export default function DoubleNavbar() {
                     direction="column"
                     wrap="nowrap"
                 >
-                    <Logo />
+                    {Icons.start.map((item) => {
+                        return (
+                            <>
+                                <item.icon />
+                            </>
+                        );
+                    })}
                 </Flex>
                 <Flex
                     mih={50}
@@ -114,7 +124,9 @@ export default function DoubleNavbar() {
                     direction="column"
                     wrap="nowrap"
                 >
-                    pass
+                    {Icons.middle.map((item) => {
+                        return <>hello</>;
+                    })}
                 </Flex>
                 <Flex
                     mih={50}
@@ -124,7 +136,7 @@ export default function DoubleNavbar() {
                     direction="column"
                     wrap="nowrap"
                 >
-                    {Icons.start.map((item, key) => {
+                    {Icons.last.map((item) => {
                         return (
                             <>
                                 <UnstyledButton className={classes.mainLink}>
@@ -133,7 +145,6 @@ export default function DoubleNavbar() {
                                         align="center"
                                         justify="center"
                                         gap={4}
-                                        key={key}
                                     >
                                         <item.icon />
                                         <Text fw={600} fz="sm">
