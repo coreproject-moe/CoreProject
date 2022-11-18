@@ -111,12 +111,16 @@ const useStyles = createStyles((theme) => ({
     main: {
         width: '100%',
     },
+
     mainNavbar: {
         height: 80,
         width: '100%',
         alignItems: 'center',
+        alignSelf: 'flex-start',
         justifyContent: 'center',
-        whiteSpace: 'pre',
+    },
+    mainContent: {
+        flex: 100,
     },
 }));
 
@@ -315,10 +319,11 @@ export default function DoubleNavbar() {
             </Navbar>
 
             {/* Main Contents */}
-            <Flex justify="center" className={classes.main}>
+            <Flex justify="center" direction="column" className={classes.main}>
                 <Flex className={classes.mainNavbar}>
                     <AnimeCoreLogo />
                 </Flex>
+                <Flex className={classes.mainContent}>HEllo</Flex>
             </Flex>
         </Flex>
     );
