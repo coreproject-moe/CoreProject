@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import {
     createStyles,
     Navbar,
@@ -30,15 +30,15 @@ const useStyles = createStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         color: theme.white,
-        transition: `background-color .2s ease`,
+        transition: `
+            background .2s ease,
+            color .15s ease
+        `,
 
         '&:hover': {
             backgroundColor: theme.colors.blue[2],
             color: theme.colors.blue[2],
 
-            svg: {
-                color: theme.black,
-            },
             div: {
                 color: 'transparent',
             },
@@ -101,7 +101,7 @@ const useStyles = createStyles((theme) => ({
         justifyContent: 'center',
         color: theme.black,
         backgroundColor: theme.colors.yellow[5],
-        transition: `background-color .2s ease`,
+        transition: `all .2s ease`,
 
         '&:hover': {
             backgroundColor: theme.colors.yellow[3],
@@ -177,6 +177,8 @@ export default function DoubleNavbar() {
     const theme = useMantineTheme();
     const spotlight = useSpotlight();
 
+    const animationItemRef = useRef<HTMLDivElement | null>(null);
+
     const animecoreTextColorMap = (word: string) => {
         switch (word.toLowerCase()) {
             case 'a':
@@ -203,6 +205,17 @@ export default function DoubleNavbar() {
                 width={{ md: 100 }}
             >
                 <Navbar.Section grow className={classes.sideBar}>
+                    <div
+                        ref={animationItemRef}
+                        style={{
+                            position: 'absolute',
+                            display: 'flex',
+                            background: 'black',
+                            height: 54,
+                            width: 54,
+                            transitionDuration: '150ms',
+                        }}
+                    ></div>
                     <Flex
                         mih={50}
                         gap="sm"
@@ -268,6 +281,16 @@ export default function DoubleNavbar() {
                                         [classes.linkActive]:
                                             active === item.name,
                                     })}
+                                    onMouseEnter={(item) => {
+                                        if (animationItemRef.current) {
+                                            const x =
+                                                (animationItemRef.current.style.transform = `translateY(${Math.round(
+                                                    item.currentTarget.getBoundingClientRect()
+                                                        .top
+                                                )}px)`);
+                                            console.log(x);
+                                        }
+                                    }}
                                     onClick={() => setActive(item.name)}
                                 >
                                     <Flex
