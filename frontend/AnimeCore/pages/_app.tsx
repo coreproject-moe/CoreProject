@@ -5,31 +5,6 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import NextNProgress from 'nextjs-progressbar';
 import { SpotlightProvider } from '@mantine/spotlight';
-import localFont from '@next/font/local';
-
-const kokoroFont = localFont({
-    src: [
-        {
-            path: '../fonts/Kokoro/Kokoro-SemiBoldItalic.woff2',
-        },
-        {
-            path: '../fonts/Kokoro/Kokoro-SemiBold.woff2',
-        },
-        {
-            path: '../fonts/Kokoro/Kokoro-BoldItalic.woff2',
-        },
-        {
-            path: '../fonts/Kokoro/Kokoro-Italic.woff2',
-        },
-        {
-            path: '../fonts/Kokoro/Kokoro-Bold.woff2',
-        },
-        {
-            path: '../fonts/Kokoro/Kokoro-Regular.woff2',
-        },
-    ],
-    preload: true,
-});
 
 const App = (props: AppProps) => {
     const { Component, pageProps } = props;
@@ -42,9 +17,68 @@ const App = (props: AppProps) => {
                     name="viewport"
                     content="minimum-scale=1, initial-scale=1, width=device-width"
                 />
-                <link rel="icon" href="logos/favicon.svg" />
+                <link
+                    rel="icon"
+                    href={`${process.env.assetPrefix}logos/favicon.svg`}
+                />
             </Head>
 
+            <style global jsx>{`
+                @font-face {
+                    font-family: 'Kokoro';
+                    src: url('${process.env
+                            .assetPrefix}fonts/Kokoro/Kokoro-SemiBoldItalic.woff2')
+                        format('woff2');
+                    font-weight: 600;
+                    font-style: italic;
+                    font-display: swap;
+                }
+                @font-face {
+                    font-family: 'Kokoro';
+                    src: url('${process.env
+                            .assetPrefix}fonts/Kokoro/Kokoro-SemiBold.woff2')
+                        format('woff2');
+                    font-weight: 600;
+                    font-style: normal;
+                    font-display: swap;
+                }
+                @font-face {
+                    font-family: 'Kokoro';
+                    src: url('${process.env
+                            .assetPrefix}fonts/Kokoro/Kokoro-BoldItalic.woff2')
+                        format('woff2');
+                    font-weight: bold;
+                    font-style: italic;
+                    font-display: swap;
+                }
+                @font-face {
+                    font-family: 'Kokoro';
+                    src: url('${process.env
+                            .assetPrefix}fonts/Kokoro/Kokoro-Italic.woff2')
+                        format('woff2');
+                    font-weight: normal;
+                    font-style: italic;
+                    font-display: swap;
+                }
+                @font-face {
+                    font-family: 'Kokoro';
+                    src: url('${process.env
+                            .assetPrefix}fonts/Kokoro/Kokoro-Regular.woff2')
+                        format('woff2');
+                    font-weight: normal;
+                    font-style: normal;
+                    font-display: swap;
+                }
+                @font-face {
+                    font-family: 'Kokoro';
+                    src: url('${process.env
+                            .assetPrefix}fonts/Kokoro/Kokoro-Bold.woff2')
+                        format('woff2');
+                    font-weight: bold;
+                    font-style: normal;
+                    font-display: swap;
+                }
+            `}</style>
             <MantineProvider
                 withGlobalStyles
                 withNormalizeCSS
@@ -58,7 +92,7 @@ const App = (props: AppProps) => {
                     /** Put your mantine theme override here */
                     colorScheme: 'dark',
                     /** Font Family */
-                    fontFamily: kokoroFont.style.fontFamily,
+                    fontFamily: 'Kokoro',
                     /** Heading */
                     headings: {
                         sizes: {
