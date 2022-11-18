@@ -120,7 +120,7 @@
     "regenerator-runtime": "^0.13.11",
     "ts-jest": "29",
     "typescript": "4.9.3",
-    "webpack": "5.75.0",
+    "webpack": "^4",
     "webpack-dev-server": "^4"
   },
   "resolutions": {
