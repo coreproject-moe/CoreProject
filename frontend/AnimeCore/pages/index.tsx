@@ -8,7 +8,7 @@ import {
     Space,
 } from '@mantine/core';
 import { useMantineTheme } from '@mantine/core';
-
+import { useSpotlight } from '@mantine/spotlight';
 const useStyles = createStyles((theme) => ({
     sideBar: {
         display: 'flex',
@@ -25,6 +25,7 @@ const useStyles = createStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         color: theme.white,
+        transition: `background-color .2s ease`,
 
         '&:hover': {
             backgroundColor: theme.colors.blue[2],
@@ -95,6 +96,7 @@ const useStyles = createStyles((theme) => ({
         justifyContent: 'center',
         color: theme.black,
         backgroundColor: theme.colors.yellow[5],
+        transition: `background-color .2s ease`,
 
         '&:hover': {
             backgroundColor: theme.colors.yellow[3],
@@ -153,6 +155,7 @@ export default function DoubleNavbar() {
     const { classes, cx } = useStyles();
     const [active, setActive] = useState('Home');
     const theme = useMantineTheme();
+    const spotlight = useSpotlight();
 
     return (
         <Navbar height={'100vh'} width={{ md: 100 }}>
@@ -191,6 +194,9 @@ export default function DoubleNavbar() {
                             <UnstyledButton
                                 key={index}
                                 className={classes.searchButton}
+                                onClick={() => {
+                                    spotlight.openSpotlight();
+                                }}
                             >
                                 <Flex
                                     direction="column"

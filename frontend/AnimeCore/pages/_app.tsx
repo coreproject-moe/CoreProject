@@ -4,10 +4,20 @@ import { NotificationsProvider } from '@mantine/notifications';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import NextNProgress from 'nextjs-progressbar';
-
+import { SpotlightProvider } from '@mantine/spotlight';
 import localFont from '@next/font/local';
+import type { SpotlightAction } from '@mantine/spotlight';
 
-const myFont = localFont({
+const actions: SpotlightAction[] = [
+    {
+        title: 'Home',
+        description: 'Get to home page',
+        onTrigger: () => console.log('Home'),
+        icon: <></>,
+    },
+];
+
+const kokoroFont = localFont({
     src: [
         {
             path: '../fonts/Kokoro/Kokoro-SemiBoldItalic.woff2',
@@ -44,13 +54,6 @@ const App = (props: AppProps) => {
                     content="minimum-scale=1, initial-scale=1, width=device-width"
                 />
                 <link rel="icon" href="logos/favicon.svg" />
-                <style jsx global>
-                    {`
-                        body {
-                            font-family: ${myFont.style.fontFamily} !important;
-                        }
-                    `}
-                </style>
             </Head>
 
             <MantineProvider
@@ -60,7 +63,7 @@ const App = (props: AppProps) => {
                     /** Put your mantine theme override here */
                     colorScheme: 'dark',
                     /** Font Family */
-                    fontFamily: myFont.style.fontFamily,
+                    fontFamily: kokoroFont.style.fontFamily,
                     /** Heading */
                     headings: {
                         sizes: {
@@ -103,10 +106,12 @@ const App = (props: AppProps) => {
                 }}
             >
                 <ModalsProvider>
-                    <NotificationsProvider position="top-right">
-                        <NextNProgress />
-                        <Component {...pageProps} />
-                    </NotificationsProvider>
+                    <SpotlightProvider actions={actions}>
+                        <NotificationsProvider position="top-right">
+                            <NextNProgress />
+                            <Component {...pageProps} />
+                        </NotificationsProvider>
+                    </SpotlightProvider>
                 </ModalsProvider>
             </MantineProvider>
         </>
