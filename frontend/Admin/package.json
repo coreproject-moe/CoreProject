@@ -11,7 +11,7 @@
     },
     "dependencies": {
         "@emotion/react": "^11.10.5",
-        "@mantine/core": "^5.7.2",
+        "@mantine/core": "^5.8.0",
         "@mantine/ds": "^5.7.2",
         "@mantine/hooks": "^5.5.5",
         "@mantine/next": "^5.7.2",
