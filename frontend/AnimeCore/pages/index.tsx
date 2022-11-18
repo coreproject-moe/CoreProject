@@ -9,7 +9,12 @@ import {
 } from '@mantine/core';
 import { useMantineTheme } from '@mantine/core';
 import { useSpotlight } from '@mantine/spotlight';
+import AnimeCoreLogo from '@icons/AnimeCoreLogo.svg';
+
 const useStyles = createStyles((theme) => ({
+    nav: {
+        backgroundColor: theme.colors.blue[9],
+    },
     sideBar: {
         display: 'flex',
         flexDirection: 'column',
@@ -102,13 +107,24 @@ const useStyles = createStyles((theme) => ({
             backgroundColor: theme.colors.yellow[3],
         },
     },
+
+    main: {
+        width: '100%',
+    },
+    mainNavbar: {
+        height: 80,
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        whiteSpace: 'pre',
+    },
 }));
 
 const Icons = {
     start: [
         {
             name: 'AnimeCore',
-            icon: require('@static/logos/favicon.svg').default,
+            icon: require('@icons/BlueAnimeLogo.svg').default,
         },
     ],
     search: [
@@ -157,121 +173,153 @@ export default function DoubleNavbar() {
     const theme = useMantineTheme();
     const spotlight = useSpotlight();
 
+    const animecoreTextColorMap = (word: string) => {
+        switch (word.toLowerCase()) {
+            case 'a':
+            case 'n':
+            case 'i':
+            case 'm':
+            case 'e':
+            case 'c':
+            case 'r':
+            case 'e': {
+                return theme.colors.blue[1];
+            }
+
+            case 'o': {
+                return theme.colors.yellow[9];
+            }
+        }
+    };
     return (
-        <Navbar height={'100vh'} width={{ md: 100 }}>
-            <Navbar.Section grow className={classes.sideBar}>
-                <Flex
-                    mih={50}
-                    gap="sm"
-                    justify="flex-end"
-                    align="center"
-                    direction="column"
-                    wrap="nowrap"
-                >
-                    {Icons.start.map((item, index) => {
-                        return (
-                            <Flex
-                                key={index}
-                                direction="column"
-                                align="center"
-                                justify="center"
-                            >
-                                <item.icon />
-                            </Flex>
-                        );
-                    })}
-                </Flex>
-                <Flex
-                    mih={50}
-                    gap="sm"
-                    justify="flex-end"
-                    align="center"
-                    direction="column"
-                    wrap="nowrap"
-                >
-                    {Icons.search.map((item, index) => {
-                        return (
-                            <UnstyledButton
-                                key={index}
-                                className={classes.searchButton}
-                                onClick={() => {
-                                    spotlight.openSpotlight();
-                                }}
-                            >
+        <Flex>
+            <Navbar
+                className={classes.nav}
+                height={'100vh'}
+                width={{ md: 100 }}
+            >
+                <Navbar.Section grow className={classes.sideBar}>
+                    <Flex
+                        mih={50}
+                        gap="sm"
+                        justify="flex-end"
+                        align="center"
+                        direction="column"
+                        wrap="nowrap"
+                    >
+                        {Icons.start.map((item, index) => {
+                            return (
                                 <Flex
+                                    key={index}
                                     direction="column"
                                     align="center"
                                     justify="center"
                                 >
-                                    <item.icon></item.icon>
-                                </Flex>
-                            </UnstyledButton>
-                        );
-                    })}
-                </Flex>
-                <Flex
-                    mih={50}
-                    gap="sm"
-                    justify="flex-end"
-                    align="center"
-                    direction="column"
-                    wrap="nowrap"
-                >
-                    {Icons.middle.map((item, index) => {
-                        return (
-                            <UnstyledButton
-                                key={index}
-                                className={cx(classes.mainLink, {
-                                    [classes.linkActive]: active === item.name,
-                                })}
-                                onClick={() => setActive(item.name)}
-                            >
-                                <Flex
-                                    direction="column"
-                                    align="center"
-                                    justify="center"
-                                >
-                                    <Space h="lg" />
                                     <item.icon />
-                                    <Text fw={600} fz="sm">
-                                        {item.name}
-                                    </Text>
                                 </Flex>
-                            </UnstyledButton>
-                        );
-                    })}
-                </Flex>
-                <Flex
-                    mih={50}
-                    gap="sm"
-                    justify="flex-start"
-                    align="center"
-                    direction="column"
-                    wrap="nowrap"
-                    mb="xl"
-                >
-                    {Icons.last.map((item, index) => {
-                        return (
-                            <UnstyledButton
-                                key={index}
-                                className={classes.mainLink}
-                            >
-                                <Flex
-                                    direction="column"
-                                    align="center"
-                                    justify="center"
+                            );
+                        })}
+                    </Flex>
+                    <Flex
+                        mih={50}
+                        gap="sm"
+                        justify="flex-end"
+                        align="center"
+                        direction="column"
+                        wrap="nowrap"
+                    >
+                        {Icons.search.map((item, index) => {
+                            return (
+                                <UnstyledButton
+                                    key={index}
+                                    className={classes.searchButton}
+                                    onClick={() => {
+                                        spotlight.openSpotlight();
+                                    }}
                                 >
-                                    <Space h="lg" />
-                                    <item.icon />
-                                    <Text fw={600} fz="sm">
-                                        {item.name}
-                                    </Text>
-                                </Flex>
-                            </UnstyledButton>
-                        );
-                    })}
+                                    <Flex
+                                        direction="column"
+                                        align="center"
+                                        justify="center"
+                                    >
+                                        <item.icon></item.icon>
+                                    </Flex>
+                                </UnstyledButton>
+                            );
+                        })}
+                    </Flex>
+                    <Flex
+                        mih={50}
+                        gap="sm"
+                        justify="flex-end"
+                        align="center"
+                        direction="column"
+                        wrap="nowrap"
+                    >
+                        {Icons.middle.map((item, index) => {
+                            return (
+                                <UnstyledButton
+                                    key={index}
+                                    className={cx(classes.mainLink, {
+                                        [classes.linkActive]:
+                                            active === item.name,
+                                    })}
+                                    onClick={() => setActive(item.name)}
+                                >
+                                    <Flex
+                                        direction="column"
+                                        align="center"
+                                        justify="center"
+                                    >
+                                        <Space h="lg" />
+                                        <item.icon />
+                                        <Text fw={600} fz="sm">
+                                            {item.name}
+                                        </Text>
+                                    </Flex>
+                                </UnstyledButton>
+                            );
+                        })}
+                    </Flex>
+                    <Flex
+                        mih={50}
+                        gap="sm"
+                        justify="flex-start"
+                        align="center"
+                        direction="column"
+                        wrap="nowrap"
+                        mb="xl"
+                    >
+                        {Icons.last.map((item, index) => {
+                            return (
+                                <UnstyledButton
+                                    key={index}
+                                    className={classes.mainLink}
+                                >
+                                    <Flex
+                                        direction="column"
+                                        align="center"
+                                        justify="center"
+                                    >
+                                        <Space h="lg" />
+                                        <item.icon />
+                                        <Text fw={600} fz="sm">
+                                            {item.name}
+                                        </Text>
+                                    </Flex>
+                                </UnstyledButton>
+                            );
+                        })}
+                    </Flex>
+                </Navbar.Section>
+            </Navbar>
+
+            {/* Main Contents */}
+            <Flex justify="center" className={classes.main}>
+                <Flex className={classes.mainNavbar}>
+                    <AnimeCoreLogo />
                 </Flex>
-            </Navbar.Section>
-        </Navbar>
+            </Flex>
+        </Flex>
     );
 }
