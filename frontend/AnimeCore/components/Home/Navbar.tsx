@@ -42,10 +42,6 @@ const useStyles = createStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         color: theme.white,
-        transition: `
-            background .2s ease,
-            color .15s ease
-        `,
 
         '&:hover': {
             color: theme.colors.blue[2],
@@ -283,7 +279,9 @@ export default function DoubleNavbar() {
                         wrap="nowrap"
                         ref={middleIconContainerDiv}
                         onMouseEnter={() => {
-                            animationItemRef!.current!.style.opacity = '1';
+                            setTimeout(() => {
+                                animationItemRef!.current!.style.opacity = '1';
+                            }, 150);
                         }}
                         onMouseLeave={() => {
                             animationItemRef!.current!.style.opacity = '0';
