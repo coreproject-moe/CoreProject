@@ -20,7 +20,6 @@ const config = {
             // as external when bundling functions
             external: []
         }),
-        trailingSlash: "always",
         alias: {
             $store: path.resolve("./src/lib/store"),
             $hooks: path.resolve("./src/hooks"),
