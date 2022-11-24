@@ -45,9 +45,7 @@ const useStyles = createStyles((theme) => ({
 
         '&:hover': {
             color: theme.colors.blue[2],
-            svg: {
-                color: theme.black,
-            },
+
             div: {
                 color: 'transparent',
             },
@@ -197,15 +195,23 @@ export default function DoubleNavbar() {
 
     const mouseEnterIcon = (item: React.MouseEvent) => {
         if (animationItemRef.current) {
+            const element = item.currentTarget as HTMLDivElement;
             animationItemRef.current.style.transform = `translateY(${Math.round(
-                item.currentTarget.getBoundingClientRect().top
+                element.getBoundingClientRect().top
             )}px)`;
+
+            const childElement = element.firstChild as SVGElement;
+            childElement.style.color = theme.black;
         }
     };
 
     const mouseLeaveIcon = (item: React.MouseEvent) => {
         if (animationItemRef.current) {
-            animationItemRef.current.style.opacity = '1';
+            const element = item.currentTarget as HTMLDivElement;
+            element.style.opacity = '1';
+
+            const childElement = element.firstChild as SVGElement;
+            childElement.style.color = theme.white;
         }
     };
 
@@ -278,10 +284,13 @@ export default function DoubleNavbar() {
                         direction="column"
                         wrap="nowrap"
                         ref={middleIconContainerDiv}
-                        onMouseEnter={() => {
+                        onMouseEnter={(item) => {
+                            animationItemRef!.current!.style.transform = `translateY(${Math.round(
+                                item.currentTarget.getBoundingClientRect().top
+                            )}px)`;
                             setTimeout(() => {
                                 animationItemRef!.current!.style.opacity = '1';
-                            }, 150);
+                            }, 80);
                         }}
                         onMouseLeave={() => {
                             animationItemRef!.current!.style.opacity = '0';
