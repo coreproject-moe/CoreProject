@@ -15,7 +15,6 @@ def animecore(request: HttpRequest) -> HttpResponse:
     user_agent_parsed = parse(request.headers["user-agent"])
 
     if user_agent_parsed.is_bot:
-
         MAL_PATH: Pregex = (
             "/animecore/"
             + op.Either("mal", "myanimelist")
@@ -25,7 +24,7 @@ def animecore(request: HttpRequest) -> HttpResponse:
         ANILIST_PATH: Pregex = "/animecore/anilist/" + gr.Capture(cl.AnyDigit())
         KISTU_PATH: Pregex = "/animecore/kitsu/" + gr.Capture(cl.AnyDigit())
 
-        # /animecore/mal/1
+        # /animecore/mal/<int:myanimelist_number>
         if myanimelist_path := MAL_PATH.get_captures(request.get_full_path()):
             myanimelist_number = myanimelist_path[0][0]
             anime_model = get_object_or_404(AnimeModel, mal_id=myanimelist_number)
@@ -40,7 +39,7 @@ def animecore(request: HttpRequest) -> HttpResponse:
                 ],
             }
 
-        # /animecore/anilist/1
+        # /animecore/anilist/<int:anilist_number>
         elif anilist_path := ANILIST_PATH.get_captures(request.get_full_path()):
             anilist_number = anilist_path[0][0]
             anime_model = get_object_or_404(AnimeModel, anilist_id=anilist_number)
@@ -55,7 +54,7 @@ def animecore(request: HttpRequest) -> HttpResponse:
                 ],
             }
 
-        # /animecore/kitsu/1
+        # /animecore/kitsu/<int:kitsu_number>
         elif kitsu_path := KISTU_PATH.get_captures(request.get_full_path()):
             kitsu_number = kitsu_path[0][0]
             anime_model = get_object_or_404(AnimeModel, kitsu_id=kitsu_number)
