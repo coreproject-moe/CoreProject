@@ -21,7 +21,6 @@ const useStyles = createStyles((theme) => ({
         width: 54,
         zIndex: 0,
         opacity: 0,
-        transitionDuration: '150ms',
     },
     nav: {
         backgroundColor: theme.colors.blue[9],
@@ -288,20 +287,29 @@ export default function DoubleNavbar() {
                             // Maybe fix the animation logic someday
                             // If it works dont break it
 
-                            animationItemRef!.current!.style.transform = `translateY(${Math.round(
-                                item.currentTarget.getBoundingClientRect().top
-                            )}px)`;
+                            new Promise((resolve) => {
+                                animationItemRef!.current!.style.transform = `translateY(${Math.round(
+                                    item.currentTarget.getBoundingClientRect()
+                                        .top
+                                )}px)`;
 
-                            const childElement = item.currentTarget
-                                .childNodes[0] as SVGElement;
-                            childElement.style.color = theme.white;
-
-                            setTimeout(() => {
+                                setTimeout(resolve, 75);
+                            }).then(() => {
+                                animationItemRef.current!.style.transitionDuration =
+                                    '30ms';
                                 animationItemRef!.current!.style.opacity = '1';
-                            }, 80);
+                                animationItemRef.current!.style.transitionDuration =
+                                    '150ms';
+                            });
                         }}
                         onMouseLeave={() => {
-                            animationItemRef!.current!.style.opacity = '0';
+                            new Promise((resolve) => {
+                                animationItemRef!.current!.style.opacity = '0';
+                                setTimeout(resolve, 75);
+                            }).then(() => {
+                                animationItemRef.current!.style.transitionDuration =
+                                    '0ms';
+                            });
                         }}
                     >
                         {Icons.middle.map((item, index) => {
