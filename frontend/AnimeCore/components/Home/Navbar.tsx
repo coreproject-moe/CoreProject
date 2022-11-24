@@ -285,9 +285,17 @@ export default function DoubleNavbar() {
                         wrap="nowrap"
                         ref={middleIconContainerDiv}
                         onMouseEnter={(item) => {
+                            // Maybe fix the animation logic someday
+                            // If it works dont break it
+
                             animationItemRef!.current!.style.transform = `translateY(${Math.round(
                                 item.currentTarget.getBoundingClientRect().top
                             )}px)`;
+
+                            const childElement = item.currentTarget
+                                .childNodes[0] as SVGElement;
+                            childElement.style.color = theme.white;
+
                             setTimeout(() => {
                                 animationItemRef!.current!.style.opacity = '1';
                             }, 80);
