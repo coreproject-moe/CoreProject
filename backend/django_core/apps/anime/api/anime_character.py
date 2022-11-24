@@ -1,10 +1,10 @@
+from core.permissions import is_superuser
 from ninja import Router
 
+from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
-from django.contrib.auth.decorators import user_passes_test
 
-from core.permissions import is_superuser
 from ...characters.models import CharacterModel
 from ...characters.schemas import CharacterSchema
 from ..models import AnimeModel

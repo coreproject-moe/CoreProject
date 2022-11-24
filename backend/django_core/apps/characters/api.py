@@ -65,4 +65,3 @@ def get_individual_character_info(
 ) -> QuerySet[CharacterModel]:
     queryset = get_object_or_404(CharacterModel, id=character_id)
     return queryset
-
