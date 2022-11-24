@@ -1171,10 +1171,11 @@
         "pyrate-limiter": {
             "extras": ["redis"],
             "hashes": [
-                "sha256:9f464ed01fa647d4d1f32ce27b8db9d594ab787847ec4ae72e1f5498756dd33d"
+                "sha256:142c86c07f5882dc3c7b8b7c8681f04f258a875735534baac5d8a2eab06398c6",
+                "sha256:447e8199a9a4ba55ea9f1fc3348ea77b4cee5da7735c385ee48c17f71bbb9592"
             ],
             "index": "pypi",
-            "version": "==2.8.3"
+            "version": "==2.8.4"
         },
         "python-dotenv": {
             "hashes": [
