@@ -175,6 +175,8 @@ const Icons = {
     ],
 };
 
+const ANIMATION_DURATION = 75;
+
 export default function DoubleNavbar() {
     const { classes, cx } = useStyles();
     const [active, setActive] = useState('Home');
@@ -198,7 +200,9 @@ export default function DoubleNavbar() {
             )}px)`;
 
             const childElement = element.firstChild as SVGElement;
-            childElement.style.color = theme.black;
+            setTimeout(() => {
+                childElement.style.color = theme.black;
+            }, ANIMATION_DURATION);
         }
     };
 
@@ -208,7 +212,9 @@ export default function DoubleNavbar() {
             element.style.opacity = '1';
 
             const childElement = element.firstChild as SVGElement;
-            childElement.style.color = theme.white;
+            setTimeout(() => {
+                childElement.style.color = theme.white;
+            }, ANIMATION_DURATION - 30);
         }
     };
 
@@ -216,30 +222,33 @@ export default function DoubleNavbar() {
         // Maybe fix the animation logic someday
         // If it works dont break it
 
-        new Promise((resolve) => {
-            animationItemRef!.current!.style.transform = `translateY(${Math.round(
-                item.currentTarget.getBoundingClientRect().top
-            )}px)`;
+        animationItemRef!.current!.style.transform = `translateY(${Math.round(
+            item.currentTarget.getBoundingClientRect().top
+        )}px)`;
 
-            setTimeout(resolve, 75);
-        }).then(() => {
-            animationItemRef.current!.style.transitionDuration = '30ms';
+        setTimeout(() => {
             animationItemRef!.current!.style.opacity = '1';
             animationItemRef.current!.style.transitionDuration = '150ms';
-        });
+        }, ANIMATION_DURATION);
     };
 
-    const mouseLeaveIconParent = (item: React.MouseEvent) => {
-        new Promise((resolve) => {
+    const mouseLeaveIconParent = () =>
+        // item: React.MouseEvent
+        {
             animationItemRef!.current!.style.opacity = '0';
-            setTimeout(resolve, 75);
-        }).then(() => {
-            animationItemRef.current!.style.transitionDuration = '0ms';
-        });
-    };
+            setTimeout(() => {
+                animationItemRef.current!.style.transitionDuration = '0ms';
+            }, ANIMATION_DURATION);
+        };
+
+    const mouseLeavesNavElement = () =>
+        // item: React.MouseEvent
+        {
+            animationItemRef!.current!.style.opacity = '0';
+        };
 
     return (
-        <Flex>
+        <Flex onMouseLeave={mouseLeavesNavElement}>
             <Navbar
                 className={classes.nav}
                 height={'100vh'}
