@@ -4,6 +4,7 @@ from pydantic import AnyUrl
 from django.conf import settings
 from django.shortcuts import resolve_url
 
+
 from ..models import AnimeModel
 from ..schemas.anime_synonym import AnimeSynonymSchema
 
@@ -17,6 +18,10 @@ from ..schemas.anime_synonym import AnimeSynonymSchema
 # this function will get called only once and subsequently the output is cached for the rest of the call.
 
 # All in all i am reverting to settings.py
+
+
+## future update ??
+## Take a look at issue(526)
 
 
 class AnimeInfoGETSchema(ModelSchema):
