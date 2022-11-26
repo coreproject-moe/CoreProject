@@ -19,7 +19,7 @@ const useStyles = createStyles((theme) => ({
         borderRadius: theme.radius.md,
         height: 54,
         width: 54,
-        zIndex: 0,
+        zIndex: 2,
         opacity: 0,
     },
     nav: {
@@ -43,8 +43,6 @@ const useStyles = createStyles((theme) => ({
         color: theme.white,
 
         '&:hover': {
-            color: theme.colors.blue[2],
-
             div: {
                 color: 'transparent',
             },
@@ -214,6 +212,32 @@ export default function DoubleNavbar() {
         }
     };
 
+    const mouseEnterIconParent = (item: React.MouseEvent) => {
+        // Maybe fix the animation logic someday
+        // If it works dont break it
+
+        new Promise((resolve) => {
+            animationItemRef!.current!.style.transform = `translateY(${Math.round(
+                item.currentTarget.getBoundingClientRect().top
+            )}px)`;
+
+            setTimeout(resolve, 75);
+        }).then(() => {
+            animationItemRef.current!.style.transitionDuration = '30ms';
+            animationItemRef!.current!.style.opacity = '1';
+            animationItemRef.current!.style.transitionDuration = '150ms';
+        });
+    };
+
+    const mouseLeaveIconParent = (item: React.MouseEvent) => {
+        new Promise((resolve) => {
+            animationItemRef!.current!.style.opacity = '0';
+            setTimeout(resolve, 75);
+        }).then(() => {
+            animationItemRef.current!.style.transitionDuration = '0ms';
+        });
+    };
+
     return (
         <Flex>
             <Navbar
@@ -283,34 +307,8 @@ export default function DoubleNavbar() {
                         direction="column"
                         wrap="nowrap"
                         ref={middleIconContainerDiv}
-                        onMouseEnter={(item) => {
-                            // Maybe fix the animation logic someday
-                            // If it works dont break it
-
-                            new Promise((resolve) => {
-                                animationItemRef!.current!.style.transform = `translateY(${Math.round(
-                                    item.currentTarget.getBoundingClientRect()
-                                        .top
-                                )}px)`;
-
-                                setTimeout(resolve, 75);
-                            }).then(() => {
-                                animationItemRef.current!.style.transitionDuration =
-                                    '30ms';
-                                animationItemRef!.current!.style.opacity = '1';
-                                animationItemRef.current!.style.transitionDuration =
-                                    '150ms';
-                            });
-                        }}
-                        onMouseLeave={() => {
-                            new Promise((resolve) => {
-                                animationItemRef!.current!.style.opacity = '0';
-                                setTimeout(resolve, 75);
-                            }).then(() => {
-                                animationItemRef.current!.style.transitionDuration =
-                                    '0ms';
-                            });
-                        }}
+                        onMouseEnter={mouseEnterIconParent}
+                        onMouseLeave={mouseLeaveIconParent}
                     >
                         {Icons.middle.map((item, index) => {
                             return (
@@ -347,12 +345,16 @@ export default function DoubleNavbar() {
                         direction="column"
                         wrap="nowrap"
                         mb="xl"
+                        onMouseEnter={mouseEnterIconParent}
+                        onMouseLeave={mouseLeaveIconParent}
                     >
                         {Icons.last.map((item, index) => {
                             return (
                                 <UnstyledButton
                                     key={index}
                                     className={classes.mainLink}
+                                    onMouseEnter={mouseEnterIcon}
+                                    onMouseLeave={mouseLeaveIcon}
                                 >
                                     <Flex
                                         direction="column"
