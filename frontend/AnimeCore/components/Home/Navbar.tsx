@@ -200,9 +200,7 @@ export default function DoubleNavbar() {
             )}px)`;
 
             const childElement = element.firstChild as SVGElement;
-            setTimeout(() => {
-                childElement.style.color = theme.black;
-            }, ANIMATION_DURATION);
+            childElement.style.color = theme.black;
         }
     };
 
@@ -212,9 +210,7 @@ export default function DoubleNavbar() {
             element.style.opacity = '1';
 
             const childElement = element.firstChild as SVGElement;
-            setTimeout(() => {
-                childElement.style.color = theme.white;
-            }, ANIMATION_DURATION - 30);
+            childElement.style.color = theme.white;
         }
     };
 
