@@ -5,7 +5,9 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import NextNProgress from 'nextjs-progressbar';
 import { SpotlightProvider } from '@mantine/spotlight';
-import Fonts from './_font';
+import dynamic from 'next/dynamic';
+
+const Fonts = dynamic(() => import('@components/Font'));
 
 const App = (props: AppProps) => {
     const { Component, pageProps } = props;
