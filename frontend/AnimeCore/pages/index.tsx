@@ -1,6 +1,8 @@
 import { createStyles, Flex } from '@mantine/core';
+import dynamic from 'next/dynamic';
 import AnimeCoreLogo from '@icons/AnimeCoreLogo.svg';
-import Navbar from '@components/Home/Navbar';
+
+const Navbar = dynamic(import('@components/Home/Navbar'));
 
 const useStyles = createStyles((theme) => ({
     main: {
@@ -25,6 +27,7 @@ export default function DoubleNavbar() {
     return (
         <Flex>
             <Navbar />
+
             {/* Main Contents */}
             <Flex justify="center" direction="column" className={classes.main}>
                 <Flex className={classes.mainNavbar}>
