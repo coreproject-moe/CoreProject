@@ -60,11 +60,10 @@
     // Embla Config
     const latestEpisodes_emblaConfig: { options: EmblaOptionsType; plugins: any } = {
         options: {
-            align: "start",
             loop: false,
             breakpoints: {
-                "(max-width: 768px)": { axis: "x" },
-                "(min-width: 769px)": { axis: "y" }
+                "(max-width: 768px)": { axis: "x", align: "center" },
+                "(min-width: 769px)": { axis: "y", align: "start" }
             }
         },
         plugins: []
@@ -90,50 +89,44 @@
                 </p>
 
                 <div
-                    class="embla overflow-hidden"
+                    class="overflow-hidden"
                     use:emblaCarouselSvelte={latestEpisodes_emblaConfig}
                 >
-                    <div
-                        class="embla__container h-28 md:h-[530px] w-96 md:w-80 gap-6 flex flex-col"
-                    >
+                    <div class="h-28 md:h-[530px] w-96 md:w-80 gap-6 flex flex-row md:flex-col">
                         {#each latestEpisodes as item}
-                            <div class="embla__slide cursor-grab">
-                                <div
-                                    class="w-10/12 md:w-64 carousel-item bg-center rounded-xl bg-no-repeat bg-cover flex items-center justify-between p-8"
-                                    style="
+                            <div
+                                class="cursor-grab select-none w-10/12 md:w-64 carousel-item bg-center rounded-xl bg-no-repeat bg-cover flex items-center justify-between p-8"
+                                style="
                                     background-image:
                                         linear-gradient(90deg, rgb(7 5 25 / 92%) -1.41%, rgba(7, 5, 25, 0.1) 100%),
                                         linear-gradient(180deg, rgba(7, 5, 25, 0) -16%, rgb(7 5 25 / 90%) 95.81%),
                                         url('{item.background_image.trim()}');
                                     "
-                                >
-                                    <div class="flex flex-col items-start">
-                                        <p
-                                            class="font-bold"
-                                            style="display: block ruby"
-                                        >
-                                            {voca
-                                                .chain(item.name)
-                                                .trim()
-                                                .truncate(lastestEpisodeNameWordCount + 3, " ...")}
-                                        </p>
-                                        <p>
-                                            Ep {voca
-                                                .chain(String(item.episode))
-                                                .padLeft(2, String(0))}
-                                        </p>
-                                    </div>
-
-                                    <button
-                                        class="btn btn-circle btn-md btn-warning"
-                                        aria-label="play"
+                            >
+                                <div class="flex flex-col items-start">
+                                    <p
+                                        class="font-bold"
+                                        style="display: block ruby"
                                     >
-                                        <Play
-                                            width={20}
-                                            height={20}
-                                        />
-                                    </button>
+                                        {voca
+                                            .chain(item.name)
+                                            .trim()
+                                            .truncate(lastestEpisodeNameWordCount + 3, " ...")}
+                                    </p>
+                                    <p>
+                                        Ep {voca.chain(String(item.episode)).padLeft(2, String(0))}
+                                    </p>
                                 </div>
+
+                                <button
+                                    class="btn btn-circle btn-md btn-warning"
+                                    aria-label="play"
+                                >
+                                    <Play
+                                        width={20}
+                                        height={20}
+                                    />
+                                </button>
                             </div>
                         {/each}
                     </div>
@@ -141,10 +134,6 @@
             </div>
             <div
                 class="divider lg:divider-horizontal hidden md:flex before:bg-white after:bg-white"
-                on:mouseenter={async () => {
-                    continueWatchingElement.classList.add("overflow-y-hidden");
-                    myListElement.classList.add("overflow-y-hidden");
-                }}
             />
             <div class="flex flex-col">
                 <p class="font-bold text-3xl items-start flex pb-4">Continue Watching</p>
@@ -156,10 +145,10 @@
                         <div
                             class="carousel-item w-96 md:w-[30vw] rounded-xl flex items-center justify-around"
                             style="
-                            background-image:
-                                linear-gradient(90deg, rgb(7 5 25 / 92%) -1.41%, rgba(7, 5, 25, 0.1) 100%),
-                                linear-gradient(180deg, rgba(7, 5, 25, 0) -16%, rgb(7 5 25 / 90%) 95.81%),
-                                url('{item.background_image}');
+                                background-image:
+                                    linear-gradient(90deg, rgb(7 5 25 / 92%) -1.41%, rgba(7, 5, 25, 0.1) 100%),
+                                    linear-gradient(180deg, rgba(7, 5, 25, 0) -16%, rgb(7 5 25 / 90%) 95.81%),
+                                    url('{item.background_image}');
                             "
                         >
                             <div class="flex flex-col items-start">
