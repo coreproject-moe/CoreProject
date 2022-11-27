@@ -59,7 +59,7 @@
         }
     }}
 >
-    <div class="carousel-item h-auto w-auto snap-always">
+    <!-- <div class="carousel-item h-auto w-auto snap-always">
         <div
             class="inline-grid"
             bind:this={mainHeroRootElement}
@@ -93,7 +93,7 @@
     </div>
     <div class="carousel-item h-auto snap-always">
         <GenreSlide />
-    </div>
+    </div> -->
     <div class="carousel-item h-auto snap-always">
         <LibrarySlide />
     </div>

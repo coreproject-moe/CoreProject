@@ -1,4 +1,8 @@
 <script lang="ts">
+    import emblaCarouselSvelte, {
+        type EmblaOptionsType,
+        type EmblaPluginType
+    } from "embla-carousel-svelte";
     import IntersectionObserver from "svelte-intersection-observer";
     import voca from "voca";
 
@@ -15,6 +19,15 @@
 
     let myListElement: HTMLDivElement;
     let continueWatchingElement: HTMLDivElement;
+
+    const emblaConfig: { options: EmblaOptionsType; plugins: any } = {
+        options: {
+            align: "start",
+            axis: "y",
+            loop: false
+        },
+        plugins: []
+    };
 
     // If rootelement is not in user viewport theres no point in making them scrollable
     $: {
@@ -79,44 +92,18 @@
                         width={25}
                     />
                 </p>
-                <div
-                    class="h-28 md:h-[530px] w-96 md:w-80 carousel gap-6 carousel-center md:carousel-vertical overscroll-auto lg:overscroll-contain"
-                >
-                    {#each latestEpisodes as item}
-                        <div
-                            class="w-10/12 md:w-64 carousel-item bg-center rounded-xl bg-no-repeat bg-cover flex items-center justify-between p-8"
-                            style="background-image:
-                            linear-gradient(90deg, rgb(7 5 25 / 92%) -1.41%, rgba(7, 5, 25, 0.1) 100%),
-                            linear-gradient(180deg, rgba(7, 5, 25, 0) -16%, rgb(7 5 25 / 90%) 95.81%),
-                            url('{item.background_image.trim()}');
-                        "
-                        >
-                            <div class="flex flex-col items-start">
-                                <p
-                                    class="font-bold"
-                                    style="display: block ruby"
-                                >
-                                    {voca
-                                        .chain(item.name)
-                                        .trim()
-                                        .truncate(lastestEpisodeNameWordCount + 3, " ...")}
-                                </p>
-                                <p>
-                                    Ep {voca.chain(String(item.episode)).padLeft(2, String(0))}
-                                </p>
-                            </div>
 
-                            <button
-                                class="btn btn-circle btn-md btn-warning"
-                                aria-label="play"
-                            >
-                                <Play
-                                    width={20}
-                                    height={20}
-                                />
-                            </button>
-                        </div>
-                    {/each}
+                <div
+                    class="embla overflow-hidden"
+                    use:emblaCarouselSvelte={emblaConfig}
+                >
+                    <div class="embla__container h-28 md:h-[530px] w-96 md:w-80">
+                        {#each Array(100) as item}
+                            <div class="embla__slide">
+                                {item}
+                            </div>
+                        {/each}
+                    </div>
                 </div>
             </div>
             <div
@@ -148,10 +135,12 @@
                     {#each continueWatching as item}
                         <div
                             class="carousel-item w-96 md:w-[30vw] rounded-xl flex items-center justify-around"
-                            style="background-image:
+                            style="
+                            background-image:
                                 linear-gradient(90deg, rgb(7 5 25 / 92%) -1.41%, rgba(7, 5, 25, 0.1) 100%),
                                 linear-gradient(180deg, rgba(7, 5, 25, 0) -16%, rgb(7 5 25 / 90%) 95.81%),
-                                url('{item.background_image}');"
+                                url('{item.background_image}');
+                            "
                         >
                             <div class="flex flex-col items-start">
                                 <p class="font-bold">{item.name}</p>
@@ -232,3 +221,9 @@
         </div>
     </div>
 </IntersectionObserver>
+
+<style>
+    .embla {
+        overflow: hidden;
+    }
+</style>
