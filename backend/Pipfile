@@ -42,7 +42,7 @@ pyrate-limiter = {extras = ["redis"], version = "*"}
 sqlalchemy = {extras = ["postgresql_asyncpg"], version = ">=2.0.0b2"}
 # Web servers
 gunicorn = {extras = ["setproctile"], version = "*"}
-uvicorn = {extras = ["standard"], version = "*"}
+uvicorn = {version = "*"}
 # Image processing
 pillow = "*"
 # Discord API

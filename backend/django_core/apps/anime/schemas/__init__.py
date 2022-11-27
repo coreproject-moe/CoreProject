@@ -19,6 +19,10 @@ from ..schemas.anime_synonym import AnimeSynonymSchema
 # All in all i am reverting to settings.py
 
 
+## future update ??
+## Take a look at issue(526)
+
+
 class AnimeInfoGETSchema(ModelSchema):
     anime_genres: AnyUrl
     anime_producers: AnyUrl

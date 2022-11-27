@@ -1,8 +1,6 @@
-from core.permissions import is_superuser
 from ninja import Query, Router
 from ninja.pagination import paginate
 
-from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.db.models import Q, QuerySet
 from django.http import HttpRequest
@@ -57,8 +55,6 @@ def get_character_info(
 
 
 @router.get("/{str:character_id}/", response=CharacterSchema)
-@login_required
-@user_passes_test(is_superuser)
 def get_individual_character_info(
     request: HttpRequest,
     character_id: str,
