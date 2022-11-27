@@ -1,6 +1,5 @@
 <script lang="ts">
     import emblaCarouselSvelte, {
-        type EmblaCarouselType,
         type EmblaOptionsType
     } from "embla-carousel-svelte";
     import IntersectionObserver from "svelte-intersection-observer";
