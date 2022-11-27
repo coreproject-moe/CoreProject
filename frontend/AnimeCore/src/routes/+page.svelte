@@ -1,6 +1,6 @@
 <script lang="ts">
     import { detect } from "detect-browser";
-    
+
     import LibrarySlide from "$components/pages/Home/Library/Slide.svelte";
     import data from "$data/mock/main_hero_data.json";
     import { timer as timerStore } from "$store/Timer";
