@@ -1,5 +1,6 @@
 <script lang="ts">
     import emblaCarouselSvelte, {
+        type EmblaCarouselType,
         type EmblaOptionsType
     } from "embla-carousel-svelte";
     import IntersectionObserver from "svelte-intersection-observer";
@@ -18,15 +19,6 @@
 
     let myListElement: HTMLDivElement;
     let continueWatchingElement: HTMLDivElement;
-
-    const emblaConfig: { options: EmblaOptionsType; plugins: any } = {
-        options: {
-            align: "start",
-            axis: "y",
-            loop: false
-        },
-        plugins: []
-    };
 
     // If rootelement is not in user viewport theres no point in making them scrollable
     $: {
@@ -64,6 +56,26 @@
 
     let mylistAnimeNameWordCount: number;
     mylistAnimeNameWordCount ??= 25;
+
+    // Embla Config
+    let latestEpisodesEmbla: EmblaCarouselType;
+    const latestEpisodes_emblaConfig: { options: EmblaOptionsType; plugins: any } = {
+        options: {
+            align: "start",
+            axis: "y",
+            loop: false
+        },
+        plugins: []
+    };
+    const onInit = (event: any) => {
+        latestEpisodesEmbla = event.detail; // Embla API is ready
+    };
+
+    $: {
+        if (mobile) {
+            latestEpisodesEmbla.reInit({ axis: "x" });
+        }
+    }
 </script>
 
 <IntersectionObserver
@@ -86,13 +98,14 @@
 
                 <div
                     class="embla overflow-hidden"
-                    use:emblaCarouselSvelte={emblaConfig}
+                    use:emblaCarouselSvelte={latestEpisodes_emblaConfig}
+                    on:init={onInit}
                 >
                     <div
                         class="embla__container h-28 md:h-[530px] w-96 md:w-80 gap-6 flex flex-col"
                     >
                         {#each latestEpisodes as item}
-                            <div class="embla__slide">
+                            <div class="embla__slide cursor-grab">
                                 <div
                                     class="w-10/12 md:w-64 carousel-item bg-center rounded-xl bg-no-repeat bg-cover flex items-center justify-between p-8"
                                     style="
