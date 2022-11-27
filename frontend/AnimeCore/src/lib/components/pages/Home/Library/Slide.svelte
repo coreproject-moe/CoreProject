@@ -58,24 +58,17 @@
     mylistAnimeNameWordCount ??= 25;
 
     // Embla Config
-    let latestEpisodesEmbla: EmblaCarouselType;
     const latestEpisodes_emblaConfig: { options: EmblaOptionsType; plugins: any } = {
         options: {
             align: "start",
-            axis: "y",
-            loop: false
+            loop: false,
+            breakpoints: {
+                "(max-width: 768px)": { axis: "x" },
+                "(min-width: 769px)": { axis: "y" }
+            }
         },
         plugins: []
     };
-    const onInit = (event: any) => {
-        latestEpisodesEmbla = event.detail; // Embla API is ready
-    };
-
-    $: {
-        if (mobile) {
-            latestEpisodesEmbla.reInit({ axis: "x" });
-        }
-    }
 </script>
 
 <IntersectionObserver
@@ -99,7 +92,6 @@
                 <div
                     class="embla overflow-hidden"
                     use:emblaCarouselSvelte={latestEpisodes_emblaConfig}
-                    on:init={onInit}
                 >
                     <div
                         class="embla__container h-28 md:h-[530px] w-96 md:w-80 gap-6 flex flex-col"
