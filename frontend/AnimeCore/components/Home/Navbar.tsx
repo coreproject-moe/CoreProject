@@ -21,6 +21,11 @@ const useStyles = createStyles((theme) => ({
         width: 54,
         zIndex: 2,
         opacity: 0,
+
+        [theme.fn.smallerThan('sm')]: {
+            height: 30,
+            width: 30,
+        },
     },
     nav: {
         backgroundColor: theme.colors.blue[9],
@@ -29,6 +34,7 @@ const useStyles = createStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        gap: 23,
         justifyContent: 'space-between',
     },
 
@@ -46,6 +52,10 @@ const useStyles = createStyles((theme) => ({
             div: {
                 color: 'transparent',
             },
+        },
+        [theme.fn.smallerThan('sm')]: {
+            height: 30,
+            width: 30,
         },
     },
 

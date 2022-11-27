@@ -1,40 +1,15 @@
-import { createStyles, Flex } from '@mantine/core';
+import { Flex } from '@mantine/core';
 import dynamic from 'next/dynamic';
-import AnimeCoreLogo from '@icons/AnimeCoreLogo.svg';
 
 const Navbar = dynamic(import('@components/Home/Navbar'));
-
-const useStyles = createStyles((theme) => ({
-    main: {
-        width: '100%',
-    },
-
-    mainNavbar: {
-        height: 80,
-        width: '100%',
-        alignItems: 'center',
-        alignSelf: 'flex-start',
-        justifyContent: 'center',
-    },
-    mainContent: {
-        flex: 100,
-    },
-}));
+const Main = dynamic(import('@components/Home/Main'));
 
 export default function DoubleNavbar() {
-    const { classes } = useStyles();
-
     return (
         <Flex>
             <Navbar />
-
             {/* Main Contents */}
-            <Flex justify="center" direction="column" className={classes.main}>
-                <Flex className={classes.mainNavbar}>
-                    <AnimeCoreLogo />
-                </Flex>
-                <Flex className={classes.mainContent}>HEllo</Flex>
-            </Flex>
+            <Main />
         </Flex>
     );
 }
