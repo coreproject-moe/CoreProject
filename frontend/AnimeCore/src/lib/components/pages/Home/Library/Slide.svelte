@@ -65,14 +65,6 @@
 
     let mylistAnimeNameWordCount: number;
     mylistAnimeNameWordCount ??= 25;
-
-    // Check if mouse is over element
-    const MOUSE_OVER_DELAY = 1_500;
-
-    const scrollHorizontally = (e: WheelEvent, element: HTMLElement) => {
-        // const length_of_one_element = element.clientWidth / element.childNodes.length;
-        element.scrollLeft += Math.round(e.deltaY * 50); // No increase more than 50. Cause Jitter. Heavy pain
-    };
 </script>
 
 <IntersectionObserver
@@ -155,19 +147,6 @@
                 <div
                     class="h-28 md:h-[200px] w-96 md:w-[60vw] carousel gap-6 overscroll-auto lg:overscroll-contain overflow-y-hidden"
                     bind:this={continueWatchingElement}
-                    on:wheel|passive={(e) => {
-                        if (!continueWatchingElement?.classList.contains("overflow-y-hidden")) {
-                            scrollHorizontally(e, continueWatchingElement);
-                        }
-                    }}
-                    on:mouseenter={async () => {
-                        setTimeout(() => {
-                            continueWatchingElement?.classList.remove("overflow-y-hidden");
-                        }, MOUSE_OVER_DELAY);
-                    }}
-                    on:mouseleave={async () => {
-                        continueWatchingElement?.classList.add("overflow-y-hidden");
-                    }}
                 >
                     {#each continueWatching as item}
                         <div
@@ -221,19 +200,6 @@
                 <div
                     class="w-96 md:w-[60vw] carousel gap-6 overscroll-auto lg:overscroll-contain overflow-y-hidden"
                     bind:this={myListElement}
-                    on:wheel={(e) => {
-                        if (!myListElement?.classList.contains("overflow-y-hidden")) {
-                            scrollHorizontally(e, myListElement);
-                        }
-                    }}
-                    on:mouseenter={async () => {
-                        setTimeout(() => {
-                            myListElement?.classList.remove("overflow-y-hidden");
-                        }, MOUSE_OVER_DELAY);
-                    }}
-                    on:mouseleave={async () => {
-                        myListElement?.classList.add("overflow-y-hidden");
-                    }}
                 >
                     {#each myList as item}
                         <div
