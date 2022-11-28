@@ -1,7 +1,5 @@
 <script lang="ts">
-    import emblaCarouselSvelte, {
-        type EmblaOptionsType
-    } from "embla-carousel-svelte";
+    import emblaCarouselSvelte, { type EmblaOptionsType } from "embla-carousel-svelte";
     import IntersectionObserver from "svelte-intersection-observer";
     import voca from "voca";
 
@@ -18,14 +16,6 @@
 
     let myListElement: HTMLDivElement;
     let continueWatchingElement: HTMLDivElement;
-
-    // If rootelement is not in user viewport theres no point in making them scrollable
-    $: {
-        if (!rootElementIntersecting) {
-            continueWatchingElement?.classList.add("overflow-y-hidden");
-            myListElement?.classList.add("overflow-y-hidden");
-        }
-    }
 
     // Responsive switches
     let mobile: boolean;
@@ -76,6 +66,15 @@
         },
         plugins: []
     };
+
+    const myList__emblaConfig: { options: EmblaOptionsType; plugins: any } = {
+        options: {
+            loop: false,
+            axis: "x",
+            align: "start"
+        },
+        plugins: []
+    };
 </script>
 
 <IntersectionObserver
@@ -96,13 +95,15 @@
                     />
                 </p>
 
-                <div
-                    class="overflow-hidden"
+                <embla
+                    class="overflow-hidden overscroll-auto lg:overscroll-contain overflow-y-hidden"
                     use:emblaCarouselSvelte={latestEpisodes_emblaConfig}
                 >
-                    <div class="h-28 md:h-[530px] w-96 md:w-80 gap-6 flex flex-row md:flex-col">
+                    <embla-container
+                        class="h-28 md:h-[530px] w-96 md:w-80 gap-6 flex flex-row md:flex-col"
+                    >
                         {#each latestEpisodes as item}
-                            <div
+                            <embla-slide
                                 class="cursor-grab select-none w-10/12 md:w-64 carousel-item bg-center rounded-xl bg-no-repeat bg-cover flex items-center justify-between p-8"
                                 style="
                                     background-image:
@@ -135,33 +136,33 @@
                                         height={20}
                                     />
                                 </button>
-                            </div>
+                            </embla-slide>
                         {/each}
-                    </div>
-                </div>
+                    </embla-container>
+                </embla>
             </div>
             <div
                 class="divider lg:divider-horizontal hidden md:flex before:bg-white after:bg-white"
             />
             <div class="flex flex-col">
                 <p class="font-bold text-3xl items-start flex pb-4">Continue Watching</p>
-                <div
-                    class="overflow-hidden"
+                <embla
+                    class="overflow-hidden overscroll-auto lg:overscroll-contain overflow-y-hidden"
                     use:emblaCarouselSvelte={continueWatching__emblaConfig}
                 >
-                    <div
-                        class="h-28 md:h-[200px] w-96 md:w-[60vw] gap-6 flex flex-row"
+                    <embla-container
+                        class="h-28 md:h-[200px] w-96 md:w-[60vw] flex flex-row gap-6"
                         bind:this={continueWatchingElement}
                     >
                         {#each continueWatching as item}
-                            <div
-                                class="w-96 md:w-[30vw] rounded-xl flex items-center justify-around"
+                            <embla-slide
+                                class="min-w-96 md:min-w-[30vw] rounded-xl flex items-center justify-around"
                                 style="
-                                background-image:
-                                    linear-gradient(90deg, rgb(7 5 25 / 92%) -1.41%, rgba(7, 5, 25, 0.1) 100%),
-                                    linear-gradient(180deg, rgba(7, 5, 25, 0) -16%, rgb(7 5 25 / 90%) 95.81%),
-                                    url('{item.background_image}');
-                            "
+                                    background-image:
+                                        linear-gradient(90deg, rgb(7 5 25 / 92%) -1.41%, rgba(7, 5, 25, 0.1) 100%),
+                                        linear-gradient(180deg, rgba(7, 5, 25, 0) -16%, rgb(7 5 25 / 90%) 95.81%),
+                                        url('{item.background_image}');
+                                "
                             >
                                 <div class="flex flex-col items-start">
                                     <p class="font-bold">{item.name}</p>
@@ -181,18 +182,12 @@
                                         height={20}
                                     />
                                 </button>
-                            </div>
+                            </embla-slide>
                         {/each}
-                    </div>
-                </div>
+                    </embla-container>
+                </embla>
 
-                <div
-                    class="divider hidden md:flex before:bg-white after:bg-white"
-                    on:mouseenter={async () => {
-                        continueWatchingElement.classList.add("overflow-y-hidden");
-                        myListElement.classList.add("overflow-y-hidden");
-                    }}
-                />
+                <div class="divider hidden md:flex before:bg-white after:bg-white" />
                 <div class="flex items-center pb-3 gap-2">
                     <p class="font-bold text-3xl items-start">My List</p>
                     <p class="text-3xl">•</p>
