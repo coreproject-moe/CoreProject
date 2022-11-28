@@ -15,7 +15,6 @@
         "update": "npx npm-check-updates -u && npm install"
     },
     "devDependencies": {
-        "@fullhuman/postcss-purgecss": "^5.0.0",
         "@sveltejs/adapter-static": "^1.0.0-next.48",
         "@sveltejs/adapter-vercel": "^1.0.0-next.84",
         "@sveltejs/kit": "1.0.0-next.562",
@@ -47,7 +46,6 @@
         "svelte": "^3.53.1",
         "svelte-check": "^2.9.2",
         "svelte-gestures": "^1.4.1",
-        "svelte-intersection-observer": "^0.10.0",
         "svelte-preprocess": "^4.10.7",
         "tailwindcss": "^3.2.4",
         "tslib": "^2.4.1",
