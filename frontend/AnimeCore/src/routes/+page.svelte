@@ -1,6 +1,10 @@
 <script lang="ts">
     import { detect } from "detect-browser";
+    import { blur } from "svelte/transition";
+    import { swipe } from "svelte-gestures";
 
+    import GenreSlide from "$components/pages/Home/Genre/Slide.svelte";
+    import MainHeroSlide from "$components/pages/Home/MainHero/Slide.svelte";
     import LibrarySlide from "$components/pages/Home/Library/Slide.svelte";
     import data from "$data/mock/main_hero_data.json";
     import { timer as timerStore } from "$store/Timer";
@@ -55,7 +59,7 @@
         }
     }}
 >
-    <!-- <div class="carousel-item h-auto w-auto snap-always">
+    <div class="carousel-item h-auto w-auto snap-always">
         <div
             class="inline-grid"
             bind:this={mainHeroRootElement}
@@ -89,7 +93,7 @@
     </div>
     <div class="carousel-item h-auto snap-always">
         <GenreSlide />
-    </div> -->
+    </div>
     <div class="carousel-item h-auto snap-always">
         <LibrarySlide />
     </div>
