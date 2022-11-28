@@ -78,7 +78,8 @@
         <div class="flex flex-col gap-3">
             <p class="text-3xl font-bold flex">Latest Episode</p>
             <p class="flex gap-2">
-                show from my list only <ChevronDown
+                show from my list only
+                <ChevronDown
                     height={25}
                     width={25}
                 />
@@ -186,29 +187,34 @@
                 />
             </div>
 
-            <div
-                class="w-96 md:w-[60vw] carousel gap-6 overscroll-auto lg:overscroll-contain overflow-y-hidden"
-                bind:this={myListElement}
+            <embla
+                class="overflow-hidden"
+                use:emblaCarouselSvelte={myList__emblaConfig}
             >
-                {#each myList as item}
-                    <div
-                        class="carousel-item card w-36 h-52 bg-base-100 image-full before:!opacity-60"
-                    >
-                        <figure>
-                            <img
-                                src={item.background_image}
-                                alt={item.name}
-                            />
-                        </figure>
-                        <div class="card-body justify-between items-center !text-white">
-                            <h2 class="card-title text-sm">
-                                {voca.chain(item.name).truncate(mylistAnimeNameWordCount + 3)}
-                            </h2>
-                            <div class="card-actions">{item.current}/{item.total}</div>
-                        </div>
-                    </div>
-                {/each}
-            </div>
+                <embla-container
+                    class="w-96 md:w-[60vw] gap-6 overscroll-auto lg:overscroll-contain flex flex-row"
+                    bind:this={myListElement}
+                >
+                    {#each myList as item}
+                        <embla-slide
+                            class="carousel-item card w-36 h-52 bg-base-100 image-full before:!opacity-60"
+                        >
+                            <figure>
+                                <img
+                                    src={item.background_image}
+                                    alt={item.name}
+                                />
+                            </figure>
+                            <div class="card-body justify-between items-center !text-white">
+                                <h2 class="card-title text-sm">
+                                    {voca.chain(item.name).truncate(mylistAnimeNameWordCount + 3)}
+                                </h2>
+                                <div class="card-actions">{item.current}/{item.total}</div>
+                            </div>
+                        </embla-slide>
+                    {/each}
+                </embla-container>
+            </embla>
         </div>
     </div>
 </div>
