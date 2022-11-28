@@ -67,6 +67,15 @@
         },
         plugins: []
     };
+
+    const continueWatching__emblaConfig: { options: EmblaOptionsType; plugins: any } = {
+        options: {
+            loop: false,
+            axis: "x",
+            align: "start"
+        },
+        plugins: []
+    };
 </script>
 
 <IntersectionObserver
@@ -137,40 +146,46 @@
             <div class="flex flex-col">
                 <p class="font-bold text-3xl items-start flex pb-4">Continue Watching</p>
                 <div
-                    class="h-28 md:h-[200px] w-96 md:w-[60vw] carousel gap-6 overscroll-auto lg:overscroll-contain overflow-y-hidden"
-                    bind:this={continueWatchingElement}
+                    class="overflow-hidden"
+                    use:emblaCarouselSvelte={continueWatching__emblaConfig}
                 >
-                    {#each continueWatching as item}
-                        <div
-                            class="carousel-item w-96 md:w-[30vw] rounded-xl flex items-center justify-around"
-                            style="
+                    <div
+                        class="h-28 md:h-[200px] w-96 md:w-[60vw] gap-6 flex flex-row"
+                        bind:this={continueWatchingElement}
+                    >
+                        {#each continueWatching as item}
+                            <div
+                                class="w-96 md:w-[30vw] rounded-xl flex items-center justify-around"
+                                style="
                                 background-image:
                                     linear-gradient(90deg, rgb(7 5 25 / 92%) -1.41%, rgba(7, 5, 25, 0.1) 100%),
                                     linear-gradient(180deg, rgba(7, 5, 25, 0) -16%, rgb(7 5 25 / 90%) 95.81%),
                                     url('{item.background_image}');
                             "
-                        >
-                            <div class="flex flex-col items-start">
-                                <p class="font-bold">{item.name}</p>
-                                <p>
-                                    Ep {voca
-                                        .chain(String(item.current_episode))
-                                        .padLeft(2, String(0))}
-                                </p>
-                            </div>
-
-                            <button
-                                class="btn btn-circle btn-md btn-warning"
-                                aria-label="play"
                             >
-                                <Play
-                                    width={20}
-                                    height={20}
-                                />
-                            </button>
-                        </div>
-                    {/each}
+                                <div class="flex flex-col items-start">
+                                    <p class="font-bold">{item.name}</p>
+                                    <p>
+                                        Ep {voca
+                                            .chain(String(item.current_episode))
+                                            .padLeft(2, String(0))}
+                                    </p>
+                                </div>
+
+                                <button
+                                    class="btn btn-circle btn-md btn-warning"
+                                    aria-label="play"
+                                >
+                                    <Play
+                                        width={20}
+                                        height={20}
+                                    />
+                                </button>
+                            </div>
+                        {/each}
+                    </div>
                 </div>
+
                 <div
                     class="divider hidden md:flex before:bg-white after:bg-white"
                     on:mouseenter={async () => {
