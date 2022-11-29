@@ -146,18 +146,21 @@
                         <embla-slide
                             class="cursor-grab carousel-item w-96 md:w-[30vw] rounded-xl flex items-center justify-around"
                             style="
-                                    background-image:
-                                        linear-gradient(90deg, rgb(7 5 25 / 92%) -1.41%, rgba(7, 5, 25, 0.1) 100%),
-                                        linear-gradient(180deg, rgba(7, 5, 25, 0) -16%, rgb(7 5 25 / 90%) 95.81%),
-                                        url('{item.background_image}');
-                                "
+                                background-image:
+                                    linear-gradient(90deg, rgb(7 5 25 / 92%) -1.41%, rgba(7, 5, 25, 0.1) 100%),
+                                    linear-gradient(180deg, rgba(7, 5, 25, 0) -16%, rgb(7 5 25 / 90%) 95.81%),
+                                    url('{item.background_image}');
+                            "
                         >
-                            <div class="flex flex-col items-start">
+                            <div class="flex flex-col items-start gap-2">
                                 <p class="font-bold">{item.name}</p>
                                 <p>
-                                    Ep {voca
+                                    continue from Ep {voca
                                         .chain(String(item.current_episode))
                                         .padLeft(2, String(0))}
+                                </p>
+                                <p>
+                                    {voca.chain(item.about).truncate(50)}
                                 </p>
                             </div>
 
