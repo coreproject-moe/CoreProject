@@ -139,12 +139,12 @@
                 use:emblaCarouselSvelte={continueWatching__emblaConfig}
             >
                 <embla-container
-                    class="h-28 md:h-[200px] w-96 md:w-[30vw] flex flex-row gap-6"
+                    class="h-28 md:h-[200px] w-96 md:w-[640px] flex flex-row gap-6"
                     bind:this={continueWatchingElement}
                 >
                     {#each continueWatching as item}
                         <embla-slide
-                            class="cursor-grab carousel-item w-96 md:w-[30vw] rounded-xl flex items-center justify-around"
+                            class="select-none cursor-grab carousel-item w-96 md:w-[640px] rounded-xl flex items-center justify-around"
                             style="
                                 background-image:
                                     linear-gradient(90deg, rgb(7 5 25 / 92%) -1.41%, rgba(7, 5, 25, 0.1) 100%),
@@ -152,27 +152,29 @@
                                     url('{item.background_image}');
                             "
                         >
-                            <div class="flex flex-col items-start gap-2">
+                            <div class="md:self-start flex flex-col items-start gap-2 md:pt-5">
                                 <p class="font-bold">{item.name}</p>
                                 <p>
                                     continue from Ep {voca
                                         .chain(String(item.current_episode))
                                         .padLeft(2, String(0))}
                                 </p>
-                                <p>
-                                    {voca.chain(item.about).truncate(50)}
+                                <p class="text-justify text-sm hidden md:block">
+                                    {voca.chain(item.about).truncate(60)}
                                 </p>
                             </div>
 
-                            <button
-                                class="btn btn-circle btn-md btn-warning"
-                                aria-label="play"
-                            >
-                                <Play
-                                    width={20}
-                                    height={20}
-                                />
-                            </button>
+                            <div class="md:self-end md:pb-5">
+                                <button
+                                    class="btn btn-circle btn-md btn-warning"
+                                    aria-label="play"
+                                >
+                                    <Play
+                                        width={20}
+                                        height={20}
+                                    />
+                                </button>
+                            </div>
                         </embla-slide>
                     {/each}
                 </embla-container>
@@ -200,7 +202,7 @@
                 >
                     {#each myList as item}
                         <embla-slide
-                            class="cursor-grab carousel-item card w-36 h-52 bg-base-100 image-full before:!opacity-60"
+                            class="select-none cursor-grab carousel-item card w-36 h-52 bg-base-100 image-full before:!opacity-60"
                         >
                             <figure>
                                 <img
