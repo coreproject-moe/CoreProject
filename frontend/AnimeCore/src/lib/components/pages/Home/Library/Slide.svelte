@@ -139,12 +139,12 @@
                 use:emblaCarouselSvelte={continueWatching__emblaConfig}
             >
                 <embla-container
-                    class="h-28 md:h-[200px] w-96 md:w-[60vw] flex flex-row gap-6"
+                    class="h-28 md:h-[200px] w-96 md:w-[30vw] flex flex-row gap-6"
                     bind:this={continueWatchingElement}
                 >
                     {#each continueWatching as item}
                         <embla-slide
-                            class="min-w-96 md:min-w-[30vw] rounded-xl flex items-center justify-around"
+                            class="cursor-grab carousel-item w-96 md:w-[30vw] rounded-xl flex items-center justify-around"
                             style="
                                     background-image:
                                         linear-gradient(90deg, rgb(7 5 25 / 92%) -1.41%, rgba(7, 5, 25, 0.1) 100%),
@@ -197,7 +197,7 @@
                 >
                     {#each myList as item}
                         <embla-slide
-                            class="carousel-item card w-36 h-52 bg-base-100 image-full before:!opacity-60"
+                            class="cursor-grab carousel-item card w-36 h-52 bg-base-100 image-full before:!opacity-60"
                         >
                             <figure>
                                 <img
