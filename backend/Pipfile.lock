@@ -1895,11 +1895,11 @@
         },
         "types-redis": {
             "hashes": [
-                "sha256:0eb90bb7a20fbc3c2307f71a08179e37feee23d9922f3614daa75fd3a8e7506d",
-                "sha256:4be36676840606c536fa43de0221141699962499318a9fd7c75202506d19e1d2"
+                "sha256:615e5a9142993789ffc22ee54435769b600da3e528bb51cf38430e5cd82af306",
+                "sha256:f7969f73a0f79e9e7895f053a06d8b429fb7b5d4fe1269b8ee40463388f653ad"
             ],
             "index": "pypi",
-            "version": "==4.3.21.5"
+            "version": "==4.3.21.6"
         },
         "typing-extensions": {
             "hashes": [
