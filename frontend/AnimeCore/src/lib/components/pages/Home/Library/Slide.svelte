@@ -6,7 +6,9 @@
     import latestEpisodes from "$data/mock/latest_episode.json";
     import myList from "$data/mock/my_list.json";
     import ChevronDown from "$icons/Chevron-Down.svelte";
+    import Heart from "$icons/Heart.svelte";
     import Play from "$icons/Play.svelte";
+    import Settings from "$icons/Settings.svelte";
     import { responsiveMode } from "$store/Responsive";
 
     // bind
@@ -75,7 +77,7 @@
 
 <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
     <div class="hero-content text-center flex-col md:flex-row">
-        <div class="flex flex-col gap-3">
+        <div class="flex flex-col gap-3 self-start">
             <p class="text-3xl font-bold flex">Latest Episode</p>
             <p class="flex gap-2">
                 show from my list only
@@ -181,15 +183,24 @@
             </embla>
 
             <div class="divider hidden md:flex before:bg-white after:bg-white" />
-            <div class="flex items-center pb-3 gap-2">
-                <p class="font-bold text-3xl items-start">My List</p>
-                <p class="text-3xl">•</p>
-                <p class="text-xl">Watching</p>
-                <ChevronDown
-                    color="white"
-                    height="24"
-                    width="24"
-                />
+            <div class="flex justify-between pb-3 gap-2">
+                <div class="flex items-center">
+                    <p class="font-bold text-3xl items-start">My List</p>
+                    <p class="text-3xl">•</p>
+                    <p class="text-xl">Watching</p>
+                    <ChevronDown
+                        color="white"
+                        height="24"
+                        width="24"
+                    />
+                </div>
+                <div class="flex items-center">
+                    <Settings
+                        color="white"
+                        height="24"
+                        width="24"
+                    />
+                </div>
             </div>
 
             <embla
@@ -220,6 +231,33 @@
                     {/each}
                 </embla-container>
             </embla>
+
+            <div class="gap-8 mt-16 hidden md:flex">
+                <div
+                    class="flex flex-col items-center w-32 h-20 justify-center rounded-lg bg-[#42424240]"
+                >
+                    <rectangle
+                        style="width: 20px;height: 20px;background: #DCD9F7;border-radius: 2px;"
+                    />
+                    <div class="w-32 mt-2.5">Placeholder</div>
+                </div>
+
+                <div class="text-start">
+                    <p class="font-bold text-xl">Characters, Seiyuus, Studios and lots more!</p>
+                    <p>
+                        Did you know that you can search for characters, voice actors/actresses,
+                        studios and anime staff here? You can also
+                        <Heart
+                            height={12}
+                            width={12}
+                            class="inline-block"
+                            color="#FFABB6"
+                        />
+                        your favorite ones. If you have a tracker account added, they will also be synced
+                        to your profile.
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </div>

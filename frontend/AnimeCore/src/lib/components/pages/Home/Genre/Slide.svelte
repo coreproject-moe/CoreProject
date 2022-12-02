@@ -26,9 +26,10 @@
             {#if mobile}
                 <label
                     for="genre-modal"
-                    class="btn modal-button mt-6 flex gap-5 white"
+                    class="btn modal-button mt-6 flex gap-5"
                 >
-                    or search by genres <ChevronUpDown
+                    <span class="text-white">or search by genres</span>
+                    <ChevronUpDown
                         color="#D8D8D8"
                         height={18}
                         width={18}
