@@ -1,4 +1,5 @@
 import { MAL_URL } from "$data/urls";
+
 import type { PageLoad } from "./$types";
 
 // https://kit.svelte.dev/docs/hooks#externalfetch
