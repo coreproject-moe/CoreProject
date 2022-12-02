@@ -6,10 +6,10 @@
     import latestEpisodes from "$data/mock/latest_episode.json";
     import myList from "$data/mock/my_list.json";
     import ChevronDown from "$icons/Chevron-Down.svelte";
-    import Play from "$icons/Play.svelte";
-    import { responsiveMode } from "$store/Responsive";
-    import Settings from "$icons/Settings.svelte";
     import Heart from "$icons/Heart.svelte";
+    import Play from "$icons/Play.svelte";
+    import Settings from "$icons/Settings.svelte";
+    import { responsiveMode } from "$store/Responsive";
 
     // bind
     let myListElement: HTMLDivElement;
