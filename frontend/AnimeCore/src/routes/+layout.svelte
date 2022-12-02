@@ -1,5 +1,5 @@
 <script lang="ts">
-    export const trailingSlash = 'always'
+    export const trailingSlash = "always";
 
     import "../app.scss";
     // NProgress css
@@ -34,14 +34,5 @@
     });
 </script>
 
-<svelte:head>
-    <meta name="robots" content="index,follow" />
-    <meta name="googlebot" content="index,follow" />
-    <meta
-        name="description"
-        content="Bridging the gap between streaming & torrenting sevices, with a modern and clean interface"
-    />
-    <!-- <meta name="author" content="baseplate-admin,akindworld" /> -->
-</svelte:head>
 
 <slot />
