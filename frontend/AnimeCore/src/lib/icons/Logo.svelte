@@ -7,7 +7,7 @@
 
 {#if variant === "black"}
     <svg
-        {...$$restProps}
+        {...$$props}
         viewBox="0 0 101 16"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +52,7 @@
 {:else if variant === "white"}
     <svg
         xmlns="http://www.w3.org/2000/svg"
-        {...$$restProps}
+        {...$$props}
         fill="none"
         viewBox="0 0 164 25"
     >

@@ -1,12 +1,12 @@
 <script lang="ts">
-    type $$Props = svelte.JSX.HTMLAttributes<SVGElement>
+    type $$Props = svelte.JSX.HTMLAttributes<SVGElement>;
 </script>
 
 <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 32 32"
-    {...$$restProps}
+    {...$$props}
 >
     <g
         clip-path="url(#clip0_664_442)"

@@ -1,9 +1,9 @@
 <script lang="ts">
-    type $$Props = svelte.JSX.HTMLAttributes<SVGElement>
+    type $$Props = svelte.JSX.HTMLAttributes<SVGElement>;
 </script>
 
 <svg
-    {...$$restProps}
+    {...$$props}
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
