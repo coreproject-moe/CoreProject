@@ -26,8 +26,8 @@
 
     let KokoroFont: typeof SvelteComponent | null = null;
 
-    function mountKokoroFont() {
-        import("$lib/fonts/Kokoro.svelte")
+    const mountKokoroFont = async () => {
+        await import("$lib/fonts/Kokoro.svelte")
             .then((res) => (KokoroFont = res.default))
             .then(() => {
                 document
@@ -35,10 +35,10 @@
                     ?.forEach((e) => e.remove());
                 document?.querySelector<HTMLElement>(".root")?.style.removeProperty("display");
             });
-    }
+    };
 
-    afterUpdate(() => {
-        mountKokoroFont();
+    afterUpdate(async () => {
+        await mountKokoroFont();
     });
 </script>
 
