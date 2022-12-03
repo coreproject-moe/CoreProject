@@ -1,7 +1,7 @@
 <script lang="ts">
     import emblaCarouselSvelte, { type EmblaOptionsType } from "embla-carousel-svelte";
     import voca from "voca";
-    
+
     import continueWatching from "$data/mock/continue_watching.json";
     import latestEpisodes from "$data/mock/latest_episode.json";
     import myList from "$data/mock/my_list.json";
