@@ -1,5 +1,4 @@
 <script lang="ts">
-    // eslint-disable-next-line  no-unused-vars
     interface $$Props extends svelte.JSX.HTMLAttributes<SVGElement> {
         variant: string;
     }

@@ -23,7 +23,7 @@ module.exports = {
             "warn",
             {
                 vars: "all",
-                varsIgnorePattern: "^_",
+                varsIgnorePattern: "\\$\\$Props",
                 args: "after-used",
                 argsIgnorePattern: "^_"
             }

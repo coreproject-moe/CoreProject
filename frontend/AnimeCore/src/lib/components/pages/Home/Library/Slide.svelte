@@ -132,9 +132,18 @@
                     {/each}
                 </embla-container>
             </embla>
+            <div class="hidden md:flex justify-center">
+                <div class="btn-group">
+                    <button class="btn">1</button>
+                    <button class="btn">2</button>
+                    <button class="btn btn-disabled">...</button>
+                    <button class="btn">99</button>
+                    <button class="btn">100</button>
+                </div>
+            </div>
         </div>
         <div class="divider lg:divider-horizontal hidden md:flex before:bg-white after:bg-white" />
-        <div class="flex flex-col">
+        <div class="flex flex-col mb-4 md:mb-0">
             <p class="font-bold text-3xl items-start flex pb-4">Continue Watching</p>
             <embla
                 class="overflow-hidden overscroll-auto lg:overscroll-contain overflow-y-hidden"
@@ -183,7 +192,7 @@
             </embla>
 
             <div class="divider hidden md:flex before:bg-white after:bg-white" />
-            <div class="flex justify-between pb-3 gap-2">
+            <div class="flex justify-between pb-3 gap-2 my-4 md:my-0">
                 <div class="flex items-center">
                     <p class="font-bold text-3xl items-start">My List</p>
                     <p class="text-3xl">•</p>
