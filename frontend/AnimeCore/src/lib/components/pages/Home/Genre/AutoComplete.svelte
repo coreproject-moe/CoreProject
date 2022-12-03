@@ -58,6 +58,3 @@
         {/if}
     </ul>
 </div>
-
-<style global>
-</style>

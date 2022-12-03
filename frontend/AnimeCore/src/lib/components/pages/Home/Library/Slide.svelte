@@ -70,9 +70,9 @@
 
 <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
     <div class="hero-content text-center flex-col md:flex-row">
-        <div class="flex flex-col gap-3 self-start">
+        <div class="flex flex-col gap-3 self-start pt-12 md:pt-0">
             <p class="text-3xl font-bold flex">Latest Episode</p>
-            <p class="flex gap-2">
+            <p class="flex gap-2 mt-6 mb-3 md:my-0">
                 show from my list only
                 <ChevronDown
                     height={25}
@@ -130,8 +130,10 @@
             </div>
         </div>
         <div class="divider lg:divider-horizontal hidden md:flex before:bg-white after:bg-white" />
-        <div class="flex flex-col mb-4 md:mb-0">
-            <p class="font-bold text-3xl items-start flex pb-4">Continue Watching</p>
+        <div class="flex flex-col">
+            <p class="font-bold text-3xl items-start flex pb-4 mt-10 mb-6 md:my-0">
+                Continue Watching
+            </p>
             <embla
                 class="overflow-hidden overscroll-auto lg:overscroll-contain overflow-y-hidden"
                 use:emblaCarouselSvelte={continueWatching__emblaConfig}
@@ -176,16 +178,19 @@
             </embla>
 
             <div class="divider hidden md:flex before:bg-white after:bg-white" />
-            <div class="flex justify-between pb-3 gap-2 my-4 md:my-0">
-                <div class="flex items-center">
+            <div class="flex justify-between pb-3 gap-2 mt-10 mb-3 md:my-0">
+                <div class="flex items-center flex-col md:flex-row gap-5 md:gap-0">
                     <p class="font-bold text-3xl items-start">My List</p>
-                    <p class="text-3xl">•</p>
-                    <p class="text-xl">Watching</p>
-                    <ChevronDown
-                        color="white"
-                        height="24"
-                        width="24"
-                    />
+                    <p class="text-3xl hidden md:block">•</p>
+                    <p class="text-sm md:text-xl">
+                        Watching
+                        <ChevronDown
+                            class="inline-block"
+                            color="white"
+                            height="24"
+                            width="24"
+                        />
+                    </p>
                 </div>
                 <div class="flex items-center">
                     <Settings

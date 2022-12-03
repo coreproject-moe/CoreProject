@@ -17,22 +17,24 @@
     id="genre-modal"
 />
 
-<div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
+<div class="hero min-h-[184px] mt-10 md:mt-0 md:min-h-screen bg-base-100">
     <div class="hero-content text-center p-0">
         <div class="block flex-col">
             <AutoComplete />
             {#if mobile}
-                <label
-                    for="genre-modal"
-                    class="btn modal-button mt-6 flex gap-5"
-                >
-                    <span class="text-white">or search by genres</span>
-                    <ChevronUpDown
-                        color="#D8D8D8"
-                        height={18}
-                        width={18}
-                    />
-                </label>
+                <div class="mt-10">
+                    <label
+                        for="genre-modal"
+                        class="btn modal-button flex gap-5"
+                    >
+                        <span class="text-white">or search by genres</span>
+                        <ChevronUpDown
+                            color="#D8D8D8"
+                            height={18}
+                            width={18}
+                        />
+                    </label>
+                </div>
             {:else}
                 <div class="divider w-80 mx-auto mt-12 mb-6 before:bg-white after:bg-white">
                     or search by genres
@@ -55,7 +57,8 @@
                 </div>
                 <div class="flex w-full flex-row justify-center mt-8">
                     <div class="flex flex-row align-center">
-                        Romaji Naming <ChevronDown
+                        Romaji Naming
+                        <ChevronDown
                             color="white"
                             height={30}
                             width={30}
@@ -63,7 +66,8 @@
                     </div>
                     <div class="divider divider-horizontal before:bg-white after:bg-white" />
                     <div class="flex flex-row align-center">
-                        10 point scoring system <ChevronDown
+                        10 point scoring system
+                        <ChevronDown
                             color="white"
                             height={30}
                             width={30}
@@ -71,7 +75,8 @@
                     </div>
                     <div class="divider divider-horizontal before:bg-white after:bg-white" />
                     <div class="flex flex-row align-center">
-                        2 trackers added <ChevronDown
+                        2 trackers added
+                        <ChevronDown
                             color="white"
                             height={30}
                             width={30}
@@ -79,7 +84,8 @@
                     </div>
                     <div class="divider divider-horizontal before:bg-white after:bg-white" />
                     <div class="flex flex-row align-center">
-                        Show 18+ content <ChevronDown
+                        Show 18+ content
+                        <ChevronDown
                             color="white"
                             height={30}
                             width={30}
