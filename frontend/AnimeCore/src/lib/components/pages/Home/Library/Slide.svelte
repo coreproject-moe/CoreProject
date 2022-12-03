@@ -11,13 +11,7 @@
     import Settings from "$icons/Settings.svelte";
     import { responsiveMode } from "$store/Responsive";
 
-    // bind
-    let myListElement: HTMLDivElement;
-    let continueWatchingElement: HTMLDivElement;
-
-    // Responsive switches
-    let mobile: boolean;
-    $: mobile = $responsiveMode === "mobile";
+    import Pagination from "./Pagination.svelte";
 
     // We might control it in future :D
     let lastestEpisodeNameWordCount: number;
@@ -77,9 +71,9 @@
 
 <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
     <div class="hero-content text-center flex-col md:flex-row">
-        <div class="flex flex-col gap-3 self-start">
+        <div class="flex flex-col gap-3 self-start pt-12 md:pt-0">
             <p class="text-3xl font-bold flex">Latest Episode</p>
-            <p class="flex gap-2">
+            <p class="flex gap-2 mt-6 mb-3 md:my-0">
                 show from my list only
                 <ChevronDown
                     height={25}
@@ -133,26 +127,19 @@
                 </embla-container>
             </embla>
             <div class="hidden md:flex justify-center">
-                <div class="btn-group">
-                    <button class="btn">1</button>
-                    <button class="btn">2</button>
-                    <button class="btn btn-disabled">...</button>
-                    <button class="btn">99</button>
-                    <button class="btn">100</button>
-                </div>
+                <Pagination />
             </div>
         </div>
         <div class="divider lg:divider-horizontal hidden md:flex before:bg-white after:bg-white" />
-        <div class="flex flex-col mb-4 md:mb-0">
-            <p class="font-bold text-3xl items-start flex pb-4">Continue Watching</p>
+        <div class="flex flex-col">
+            <p class="font-bold text-3xl items-start flex pb-4 mt-10 mb-6 md:my-0">
+                Continue Watching
+            </p>
             <embla
                 class="overflow-hidden overscroll-auto lg:overscroll-contain overflow-y-hidden"
                 use:emblaCarouselSvelte={continueWatching__emblaConfig}
             >
-                <embla-container
-                    class="h-28 md:h-[200px] w-96 md:w-[640px] flex flex-row gap-6"
-                    bind:this={continueWatchingElement}
-                >
+                <embla-container class="h-28 md:h-[200px] w-96 md:w-[640px] flex flex-row gap-6">
                     {#each continueWatching as item}
                         <embla-slide
                             class="select-none cursor-grab carousel-item w-96 md:w-[640px] rounded-xl flex items-center justify-around"
@@ -192,16 +179,19 @@
             </embla>
 
             <div class="divider hidden md:flex before:bg-white after:bg-white" />
-            <div class="flex justify-between pb-3 gap-2 my-4 md:my-0">
-                <div class="flex items-center">
+            <div class="flex justify-between pb-3 gap-2 mt-10 mb-3 md:my-0">
+                <div class="flex items-center flex-col md:flex-row gap-5 md:gap-0">
                     <p class="font-bold text-3xl items-start">My List</p>
-                    <p class="text-3xl">•</p>
-                    <p class="text-xl">Watching</p>
-                    <ChevronDown
-                        color="white"
-                        height="24"
-                        width="24"
-                    />
+                    <p class="text-3xl hidden md:block">•</p>
+                    <p class="text-sm md:text-xl">
+                        Watching
+                        <ChevronDown
+                            class="inline-block"
+                            color="white"
+                            height="24"
+                            width="24"
+                        />
+                    </p>
                 </div>
                 <div class="flex items-center">
                     <Settings
@@ -218,7 +208,6 @@
             >
                 <embla-container
                     class="w-96 md:w-[60vw] gap-6 overscroll-auto lg:overscroll-contain flex flex-row"
-                    bind:this={myListElement}
                 >
                     {#each myList as item}
                         <embla-slide

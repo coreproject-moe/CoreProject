@@ -76,13 +76,17 @@
         >
             <div class="hidden md:flex" />
             <div class="flex items-center gap-3">
-                <Progress class="w-24 md:w-36" on:targetAchieved={timerEnded} />
+                <Progress
+                    class="w-24 md:w-36"
+                    on:targetAchieved={timerEnded}
+                />
 
                 <div
                     class="w-56 flex justify-center swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"
                 >
                     <div class="flex flex-row gap-3">
                         {#each Array(data.length) as _, index}
+                            <!-- svelte-ignore a11y-click-events-have-key-events -->
                             <svg
                                 height="10"
                                 width="10"
@@ -113,7 +117,11 @@
                             minusOneToMainHeroSlideActiveIndex();
                         }}
                     >
-                        <ChevronLeft height={24} width={24} color="black" />
+                        <ChevronLeft
+                            height={24}
+                            width={24}
+                            color="black"
+                        />
                     </button>
                     <button
                         class="btn btn-secondary btn-sm btn-square"
@@ -121,12 +129,20 @@
                             addOneToMainHeroSlideActiveIndex();
                         }}
                     >
-                        <ChevronRight height={24} width={24} color="black" />
+                        <ChevronRight
+                            height={24}
+                            width={24}
+                            color="black"
+                        />
                     </button>
                 </div>
             </div>
             <div class="hidden md:flex items-center animate-bounce">
-                <Mouse width={24} height={24} color="white" />
+                <Mouse
+                    width={24}
+                    height={24}
+                    color="white"
+                />
                 <div class="px-3">scroll below</div>
             </div>
         </div>
@@ -202,7 +218,10 @@
                     aria-label="Play"
                     class="btn btn-md md:btn-lg btn-secondary rounded-[16px] px-5 "
                 >
-                    <Play width={24} height={24} />
+                    <Play
+                        width={24}
+                        height={24}
+                    />
                 </button>
                 <button
                     class="btn btn-secondary btn-md md:btn-lg btn-outline border-4 rounded-[16px]"
@@ -210,7 +229,10 @@
                     <div class="text-lg font-bold flex gap-2">
                         Details
                         <span class="flex items-center">
-                            <ChevronsRight height={24} width={24} />
+                            <ChevronsRight
+                                height={24}
+                                width={24}
+                            />
                         </span>
                     </div>
                 </button>

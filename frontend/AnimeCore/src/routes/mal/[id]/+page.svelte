@@ -10,4 +10,4 @@
     <title>{data.animeData?.title_english}</title>
 </svelte:head>
 
-<AnimeInfo data />
+<AnimeInfo data={data.animeData} />

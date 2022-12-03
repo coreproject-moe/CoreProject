@@ -1,15 +1,3 @@
-<script context="module" lang="ts">
-    import type { Load } from "@sveltejs/kit";
-
-    export const load: Load = ({ session }) => {
-        return {
-            props: {
-                logged_in: session.authenticated
-            }
-        };
-    };
-</script>
-
 <script lang="ts">
     import Logo from "$icons/Logo.svelte";
     import Search from "$icons/Search.svelte";
@@ -17,14 +5,24 @@
 </script>
 
 <!-- Init the modal  -->
-<svelte:component this={NavbarModal} id="nabar__modal" />
+<svelte:component
+    this={NavbarModal}
+    id="nabar__modal"
+/>
 
 <div class="navbar bg-transparent">
     <div class="navbar-start hidden md:block">
-        <Search height={30} width={30} />
+        <Search
+            height={30}
+            width={30}
+        />
     </div>
     <div class="navbar-center">
-        <Logo variant="black" width={158} height={22} />
+        <Logo
+            variant="black"
+            width={158}
+            height={22}
+        />
     </div>
     <div class="navbar-end">
         <label
