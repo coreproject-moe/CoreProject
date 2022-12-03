@@ -1,6 +1,6 @@
 <script lang="ts">
     import AnimeInfo from "$components/pages/AnimeInfo/AnimeInfo.svelte";
-    
+
     import type { PageData } from "./$types";
 
     export let data: PageData;
@@ -10,4 +10,4 @@
     <title>{data.animeData?.title_english}</title>
 </svelte:head>
 
-<AnimeInfo data />
+<AnimeInfo data={data.animeData} />
