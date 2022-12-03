@@ -1,5 +1,5 @@
 <script lang="ts">
-    interface $$Props extends svelte.JSX.HTMLAttributes<SVGElement> {}
+    type $$Props = svelte.JSX.HTMLAttributes<SVGElement>
 </script>
 
 <svg
