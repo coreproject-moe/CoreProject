@@ -14,7 +14,7 @@
         "@mantine/core": "^5.8.4",
         "@mantine/ds": "^5.9.0",
         "@mantine/hooks": "^5.5.5",
-        "@mantine/next": "^5.8.4",
+        "@mantine/next": "^5.9.0",
         "@tabler/icons": "^1.114.0",
         "next": "^13.0.6",
         "react": "18.2.0",
