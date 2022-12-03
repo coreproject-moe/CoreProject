@@ -24,23 +24,12 @@
         }
     }
 
-    let KokoroFont: typeof SvelteComponent | null = null;
-
-    const mountKokoroFont = async () => {
-        await import("$lib/fonts/Kokoro.svelte")
-            .then((res) => (KokoroFont = res.default))
-            .then(() => {
-                document
-                    ?.querySelectorAll<HTMLDivElement | HTMLStyleElement>("#loader")
-                    ?.forEach((e) => e.remove());
-                document?.querySelector<HTMLElement>(".root")?.style.removeProperty("display");
-            });
-    };
-
     afterUpdate(async () => {
-        await mountKokoroFont();
+        document
+            ?.querySelectorAll<HTMLDivElement | HTMLStyleElement>("#loader")
+            ?.forEach((e) => e.remove());
+        document?.querySelector<HTMLElement>(".root")?.style.removeProperty("display");
     });
 </script>
 
-<svelte:component this={KokoroFont} />
 <slot />
