@@ -1,4 +1,5 @@
 <script lang="ts">
+    // eslint-disable-next-line  no-unused-vars
     interface $$Props extends svelte.JSX.HTMLAttributes<SVGElement> {
         variant: string;
     }
@@ -7,7 +8,7 @@
 
 {#if variant === "black"}
     <svg
-        {...$$props}
+        {...props}
         viewBox="0 0 101 16"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +53,7 @@
 {:else if variant === "white"}
     <svg
         xmlns="http://www.w3.org/2000/svg"
-        {...$$props}
+        {...props}
         fill="none"
         viewBox="0 0 164 25"
     >
