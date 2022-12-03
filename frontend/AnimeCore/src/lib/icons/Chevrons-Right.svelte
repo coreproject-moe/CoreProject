@@ -1,4 +1,14 @@
-<svg {...$$props} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+<script lang="ts">
+    // eslint-disable-next-line  no-unused-vars
+    type $$Props = svelte.JSX.HTMLAttributes<SVGElement>;
+</script>
+
+<svg
+    {...$$props}
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+>
     <path
         stroke="currentColor"
         stroke-linecap="round"
