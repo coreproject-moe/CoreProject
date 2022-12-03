@@ -1,4 +1,13 @@
-<svg {...$$props} viewBox="0 0 321 118" fill="none" xmlns="http://www.w3.org/2000/svg">
+<script lang="ts">
+    type $$Props = svelte.JSX.HTMLAttributes<SVGElement>;
+</script>
+
+<svg
+    {...$$props}
+    viewBox="0 0 321 118"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+>
     <g filter="url(#filter0_d_517_18)">
         <path
             d="M269.781 37.2022C269.781 34.7489 270.448 33.0422 271.781 32.0822C273.115 31.0689 274.741 30.5622 276.661 30.5622C278.528 30.5622 280.128 31.0689 281.461 32.0822C282.795 33.0422 283.461 34.7489 283.461 37.2022C283.461 39.5489 282.795 41.2555 281.461 42.3222C280.128 43.3355 278.528 43.8422 276.661 43.8422C274.741 43.8422 273.115 43.3355 271.781 42.3222C270.448 41.2555 269.781 39.5489 269.781 37.2022Z"
@@ -44,13 +53,55 @@
             d="M248.389 109.836C246.926 109.836 245.958 108.316 246.561 106.983C248.04 103.715 249.126 101.111 249.82 99.1719C250.706 96.6979 251.526 93.8464 252.281 90.6172C253.036 87.388 253.596 84.3281 253.961 81.4375C254.326 78.5208 254.508 75.5391 254.508 72.4922C254.508 66.2943 253.844 60.4349 252.516 54.9141C251.349 50.0435 249.32 44.2695 246.427 37.5919C245.849 36.2588 246.818 34.7578 248.271 34.7578H251.593C252.245 34.7578 252.857 35.0743 253.224 35.6125C256.872 40.96 259.722 46.6126 261.773 52.5703C263.961 58.8464 265.055 65.2135 265.055 71.6719C265.055 77.1146 264.195 82.9479 262.477 89.1719C260.61 95.842 257.59 102.429 253.416 108.933C253.052 109.498 252.423 109.836 251.751 109.836H248.389Z"
             fill="url(#paint2_linear_517_18)"
         />
-        <ellipse cx="81.0957" cy="64.7921" rx="12.2754" ry="11.7921" fill="#AAA2EC" />
-        <circle cx="81.4825" cy="66.5318" r="7.73253" fill="#DCD9F7" fill-opacity="0.6" />
-        <circle cx="82.4505" cy="67.4983" r="2.8997" fill="#7569E1" fill-opacity="0.4" />
-        <circle cx="76.6519" cy="59.7661" r="1.93313" fill="white" fill-opacity="0.8" />
-        <ellipse cx="188.095" cy="64.79" rx="12.275" ry="11.79" fill="#23197D" />
-        <ellipse cx="186.527" cy="66.6257" rx="7.67188" ry="7.73115" fill="#7569E1" />
-        <ellipse cx="187.486" cy="67.592" rx="2.87695" ry="2.89918" fill="#23197D" />
+        <ellipse
+            cx="81.0957"
+            cy="64.7921"
+            rx="12.2754"
+            ry="11.7921"
+            fill="#AAA2EC"
+        />
+        <circle
+            cx="81.4825"
+            cy="66.5318"
+            r="7.73253"
+            fill="#DCD9F7"
+            fill-opacity="0.6"
+        />
+        <circle
+            cx="82.4505"
+            cy="67.4983"
+            r="2.8997"
+            fill="#7569E1"
+            fill-opacity="0.4"
+        />
+        <circle
+            cx="76.6519"
+            cy="59.7661"
+            r="1.93313"
+            fill="white"
+            fill-opacity="0.8"
+        />
+        <ellipse
+            cx="188.095"
+            cy="64.79"
+            rx="12.275"
+            ry="11.79"
+            fill="#23197D"
+        />
+        <ellipse
+            cx="186.527"
+            cy="66.6257"
+            rx="7.67188"
+            ry="7.73115"
+            fill="#7569E1"
+        />
+        <ellipse
+            cx="187.486"
+            cy="67.592"
+            rx="2.87695"
+            ry="2.89918"
+            fill="#23197D"
+        />
         <ellipse
             cx="181.73"
             cy="59.861"
@@ -100,7 +151,10 @@
             filterUnits="userSpaceOnUse"
             color-interpolation-filters="sRGB"
         >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood
+                flood-opacity="0"
+                result="BackgroundImageFix"
+            />
             <feColorMatrix
                 in="SourceAlpha"
                 type="matrix"
@@ -109,9 +163,19 @@
             />
             <feOffset dy="4" />
             <feGaussianBlur stdDeviation="2" />
-            <feComposite in2="hardAlpha" operator="out" />
-            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_517_18" />
+            <feComposite
+                in2="hardAlpha"
+                operator="out"
+            />
+            <feColorMatrix
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+            />
+            <feBlend
+                mode="normal"
+                in2="BackgroundImageFix"
+                result="effect1_dropShadow_517_18"
+            />
             <feBlend
                 mode="normal"
                 in="SourceGraphic"
@@ -128,7 +192,10 @@
             gradientUnits="userSpaceOnUse"
         >
             <stop stop-color="#070519" />
-            <stop offset="1" stop-color="#7569E1" />
+            <stop
+                offset="1"
+                stop-color="#7569E1"
+            />
         </linearGradient>
         <linearGradient
             id="paint1_linear_517_18"
@@ -138,8 +205,15 @@
             y2="109.836"
             gradientUnits="userSpaceOnUse"
         >
-            <stop stop-color="#DCD9F7" stop-opacity="0.6" />
-            <stop offset="1" stop-color="white" stop-opacity="0" />
+            <stop
+                stop-color="#DCD9F7"
+                stop-opacity="0.6"
+            />
+            <stop
+                offset="1"
+                stop-color="white"
+                stop-opacity="0"
+            />
         </linearGradient>
         <linearGradient
             id="paint2_linear_517_18"
@@ -149,8 +223,15 @@
             y2="109.836"
             gradientUnits="userSpaceOnUse"
         >
-            <stop stop-color="#DCD9F7" stop-opacity="0.6" />
-            <stop offset="1" stop-color="white" stop-opacity="0" />
+            <stop
+                stop-color="#DCD9F7"
+                stop-opacity="0.6"
+            />
+            <stop
+                offset="1"
+                stop-color="white"
+                stop-opacity="0"
+            />
         </linearGradient>
     </defs>
 </svg>
