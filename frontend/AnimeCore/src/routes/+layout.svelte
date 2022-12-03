@@ -24,7 +24,7 @@
         }
     }
 
-    let KokoroFont;
+    let KokoroFont: typeof SvelteComponent | null = null;
 
     function mountKokoroFont() {
         import("$lib/fonts/Kokoro.svelte")
