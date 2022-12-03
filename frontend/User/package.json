@@ -23,7 +23,7 @@
         "autoprefixer": "^10.4.13",
         "cssnano": "^5.1.14",
         "daisyui": "^2.42.1",
-        "eslint": "^8.28.0",
+        "eslint": "^8.29.0",
         "eslint-config-prettier": "^8.3.0",
         "eslint-plugin-svelte3": "^4.0.0",
         "felte": "^1.2.6",
