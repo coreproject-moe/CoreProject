@@ -9,6 +9,7 @@
     import { afterUpdate } from "svelte";
 
     import { navigating } from "$app/stores";
+    import Kokoro from "$lib/fonts/Kokoro.svelte";
 
     NProgress.configure({
         // Full list: https://github.com/rstacruz/nprogress#configuration
@@ -34,5 +35,5 @@
     });
 </script>
 
-
+<Kokoro />
 <slot />
