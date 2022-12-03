@@ -17,11 +17,22 @@
     };
 </script>
 
-<div class="dropdown" bind:this={dropDownElement}>
-    <div tabindex="0" class="m-1">
+<div
+    class="dropdown"
+    bind:this={dropDownElement}
+>
+    <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+    <div
+        tabindex="0"
+        class="m-1"
+    >
         <div class="relative text-gray-600 focus-within:text-gray-400">
             <span class="absolute w-16 h-full flex justify-center items-center">
-                <Search color="red" height={mobile ? 22 : 36} width={mobile ? 22 : 36} />
+                <Search
+                    color="red"
+                    height={mobile ? 22 : 36}
+                    width={mobile ? 22 : 36}
+                />
             </span>
             <input
                 on:focus={onFocus}
@@ -33,6 +44,7 @@
             />
         </div>
     </div>
+    <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
     <ul
         tabindex="0"
         class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 items-center inset-x-0 mx-auto pt-6"

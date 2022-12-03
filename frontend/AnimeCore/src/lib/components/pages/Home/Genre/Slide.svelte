@@ -4,13 +4,11 @@
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import ChevronUpDown from "$icons/Chevron-Up-Down.svelte";
     import { responsiveMode } from "$store/Responsive";
-    
+
     import AutoComplete from "./AutoComplete.svelte";
 
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
-
-    let dropdownGenreElementActive = false;
 </script>
 
 <!-- Modals  -->
