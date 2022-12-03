@@ -1,9 +1,12 @@
-<svg
+<script lang="ts">
+    interface $$Props extends svelte.JSX.HTMLAttributes<SVGElement> {}
+</script>
 
+<svg
     viewBox="0 0 20 20"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    {...$$props}
+    {...$$restProps}
 >
     <path
         d="M4.16675 2.5L15.8334 10L4.16675 17.5V2.5Z"
