@@ -10,6 +10,7 @@
     import Play from "$icons/Play.svelte";
     import Settings from "$icons/Settings.svelte";
     import { responsiveMode } from "$store/Responsive";
+    
     import Pagination from "./Pagination.svelte";
 
     // We might control it in future :D
