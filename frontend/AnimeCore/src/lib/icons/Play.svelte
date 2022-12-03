@@ -1,7 +1,7 @@
 <script lang="ts">
-    // eslint-disable-next-line  no-unused-vars
     type $$Props = svelte.JSX.HTMLAttributes<SVGElement>;
 </script>
+
 <svg
     viewBox="0 0 20 20"
     fill="none"
