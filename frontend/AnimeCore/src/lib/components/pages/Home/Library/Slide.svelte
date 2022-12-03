@@ -1,7 +1,7 @@
 <script lang="ts">
     import emblaCarouselSvelte, { type EmblaOptionsType } from "embla-carousel-svelte";
     import voca from "voca";
-    
+
     import continueWatching from "$data/mock/continue_watching.json";
     import latestEpisodes from "$data/mock/latest_episode.json";
     import myList from "$data/mock/my_list.json";
@@ -10,14 +10,7 @@
     import Play from "$icons/Play.svelte";
     import Settings from "$icons/Settings.svelte";
     import { responsiveMode } from "$store/Responsive";
-
-    // bind
-    let myListElement: HTMLDivElement;
-    let continueWatchingElement: HTMLDivElement;
-
-    // Responsive switches
-    let mobile: boolean;
-    $: mobile = $responsiveMode === "mobile";
+    import Pagination from "./Pagination.svelte";
 
     // We might control it in future :D
     let lastestEpisodeNameWordCount: number;
@@ -133,13 +126,7 @@
                 </embla-container>
             </embla>
             <div class="hidden md:flex justify-center">
-                <div class="btn-group">
-                    <button class="btn">1</button>
-                    <button class="btn">2</button>
-                    <button class="btn btn-disabled">...</button>
-                    <button class="btn">99</button>
-                    <button class="btn">100</button>
-                </div>
+                <Pagination />
             </div>
         </div>
         <div class="divider lg:divider-horizontal hidden md:flex before:bg-white after:bg-white" />
@@ -149,10 +136,7 @@
                 class="overflow-hidden overscroll-auto lg:overscroll-contain overflow-y-hidden"
                 use:emblaCarouselSvelte={continueWatching__emblaConfig}
             >
-                <embla-container
-                    class="h-28 md:h-[200px] w-96 md:w-[640px] flex flex-row gap-6"
-                    bind:this={continueWatchingElement}
-                >
+                <embla-container class="h-28 md:h-[200px] w-96 md:w-[640px] flex flex-row gap-6">
                     {#each continueWatching as item}
                         <embla-slide
                             class="select-none cursor-grab carousel-item w-96 md:w-[640px] rounded-xl flex items-center justify-around"
@@ -218,7 +202,6 @@
             >
                 <embla-container
                     class="w-96 md:w-[60vw] gap-6 overscroll-auto lg:overscroll-contain flex flex-row"
-                    bind:this={myListElement}
                 >
                     {#each myList as item}
                         <embla-slide
