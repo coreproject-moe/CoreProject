@@ -1,5 +1,6 @@
-import { page } from "$app/stores";
 import { get } from "svelte/store";
+
+import { page } from "$app/stores";
 export class MAL {
     private BASE_URL = `https://api.jikan.moe/v4/anime`;
 
