@@ -6,7 +6,7 @@
     import "nprogress/nprogress.css";
 
     import NProgress from "nprogress";
-    import { afterUpdate, SvelteComponent } from "svelte";
+    import { afterUpdate } from "svelte";
 
     import { navigating } from "$app/stores";
 
@@ -18,8 +18,7 @@
     $: {
         if ($navigating) {
             NProgress.start();
-        }
-        if (!$navigating) {
+        } else {
             NProgress.done();
         }
     }

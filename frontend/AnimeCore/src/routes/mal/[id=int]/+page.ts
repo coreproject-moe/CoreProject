@@ -1,17 +1,14 @@
-import { MAL_URL } from "$data/urls";
+import { MAL } from "$data/urls";
 
 import type { PageLoad } from "./$types";
 
 // https://kit.svelte.dev/docs/hooks#externalfetch
 
-// If we want SSR we should be doing
-//      export const load: PageLoad = async ({ params,fetch })
 export const load: PageLoad = async ({
     params
     // ,fetch // Use this if you want Server Side Fetch
 }) => {
-    const id = params.id;
-    const url = MAL_URL.replace("{id}", id);
+    const url = new MAL().id(params.id);
 
     const response = await fetch(url);
     const data = await response?.json();
