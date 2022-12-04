@@ -18,8 +18,7 @@
     $: {
         if ($navigating) {
             NProgress.start();
-        }
-        if (!$navigating) {
+        } else {
             NProgress.done();
         }
     }
