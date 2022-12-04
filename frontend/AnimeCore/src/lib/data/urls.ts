@@ -31,8 +31,10 @@ export class UrlMaps {
     private is_django_used_for_rendering() {
         if (this.django.DEBUG == `{{ debug|yesno:'true,false' }}`) {
             return false;
-        } else {
+        } else if (this.django.DEBUG == "true" || this.django.DEBUG == "false") {
             return true;
+        } else {
+            return null;
         }
     }
 
