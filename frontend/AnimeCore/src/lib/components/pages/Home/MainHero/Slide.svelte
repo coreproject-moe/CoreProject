@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { beforeUpdate } from "svelte";
+    import { onMount } from "svelte";
 
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
@@ -54,7 +54,7 @@
         addOneToMainHeroSlideActiveIndex();
     };
 
-    beforeUpdate(() => {
+    onMount(() => {
         getImageBrightness(background, (brightness: any) => {
             if (brightness < 120) {
                 $navbar_variant = "white";
