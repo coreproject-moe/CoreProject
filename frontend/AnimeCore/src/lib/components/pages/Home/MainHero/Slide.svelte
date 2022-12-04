@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { beforeUpdate, onMount } from "svelte";
+    import { beforeUpdate } from "svelte";
     import { get } from "svelte/store";
 
     import { page } from "$app/stores";
