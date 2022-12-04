@@ -11,7 +11,7 @@
     import { navbar_variant } from "$store/Navbar_Variant";
     import { responsiveMode } from "$store/Responsive";
     import { timer as timerStore } from "$store/Timer";
-    import { beforeUpdate } from "svelte/types/runtime/internal/lifecycle";
+    import { beforeUpdate } from "svelte";
 
     import Progress from "./Progress.svelte";
 
