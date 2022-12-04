@@ -65,25 +65,12 @@
 
         // If the server is not controlled by us theres no point in trying to fetch images
         if (backgroundImageURL.startsWith(get(page).url.origin)) {
-            backgroundImage = await deepCloneBlobUrl(backgroundImageBlobURL);
+            backgroundImage = backgroundImageBlobURL;
         } else {
             backgroundImage = backgroundImageURL;
         }
 
-        if (backgroundImageURL.startsWith(get(page).url.origin)) {
-            // Deep Clone a blob object
-            const newBlob = await deepCloneBlobUrl(backgroundImageBlobURL);
-
-            getImageBrightness(newBlob, (brightness: any) => {
-                if (brightness < 120) {
-                    $navbar_variant = "white";
-                } else {
-                    $navbar_variant = "black";
-                }
-            });
-        } else {
-            $navbar_variant = "black";
-        }
+        $navbar_variant = "black";
     });
 </script>
 

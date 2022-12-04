@@ -21,7 +21,7 @@
     });
 
     timer.on("targetAchieved", () => {
-        dispatch("targetAchieved");
+        // dispatch("targetAchieved");
     });
 
     timer.on("secondTenthsUpdated", () => {
@@ -53,4 +53,8 @@
     });
 </script>
 
-<progress class="progress progress-secondary {klass}" value={progressValue} max="100" />
+<progress
+    class="progress progress-secondary {klass}"
+    value={progressValue}
+    max="100"
+/>
