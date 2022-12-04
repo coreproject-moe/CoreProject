@@ -6,9 +6,7 @@
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
     import { UrlMaps } from "$data/urls";
-    import { deepCloneBlobUrl } from "$functions/deepCloneBlob";
     import { fetchImageAndConvertToBlob } from "$functions/fetchImage";
-    import { getImageBrightness } from "$functions/getImageBrightness";
     import ChevronLeft from "$icons/Chevron-Left.svelte";
     import ChevronRight from "$icons/Chevron-Right.svelte";
     import ChevronsRight from "$icons/Chevrons-Right.svelte";
