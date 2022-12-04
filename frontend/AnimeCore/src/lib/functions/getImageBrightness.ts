@@ -7,6 +7,7 @@
 export function getImageBrightness(imageSrc: string, callback: (brightness: number) => void): void {
     const img = document.createElement("img");
     img.src = imageSrc;
+    img.crossOrigin = "anonymous";
 
     img.style.display = "none";
     document.body.appendChild(img);
@@ -37,8 +38,5 @@ export function getImageBrightness(imageSrc: string, callback: (brightness: numb
 
         const brightness = Math.floor(colorSum / (img.width * img.height));
         callback(brightness);
-
-        // Cleanup
-        document.body.removeChild(img);
     };
 }
