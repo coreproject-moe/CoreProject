@@ -60,7 +60,7 @@
             backgroundImageURL = urls.media_url + backgroundImage; // This is the default one
         }
 
-        // If the server is not controlled by us theres no fucking point in trying to fetch images
+        // If the server is not controlled by us theres no point in trying to fetch images
         if (backgroundImageURL.startsWith(get(page).url.origin)) {
             backgroundImage = await fetchImageAndConvertToBlob(backgroundImageURL);
         } else {
@@ -68,7 +68,9 @@
         }
 
         if (backgroundImageURL.startsWith(get(page).url.origin)) {
-            getImageBrightness(backgroundImage, (brightness: any) => {
+            // Slice and dice to get a copy of the blob
+            // https://stackoverflow.com/questions/37802025/how-to-clone-a-blob-in-javascript
+            getImageBrightness(backgroundImage.slice(), (brightness: any) => {
                 if (brightness < 120) {
                     $navbar_variant = "white";
                 } else {
