@@ -18,6 +18,7 @@
     import { timer as timerStore } from "$store/Timer";
 
     import Progress from "./Progress.svelte";
+    import { deepCloneBlobUrl } from "$functions/deepCloneBlob";
 
     export let data: any[];
     export let mainHeroSlideActiveIndex: number;
@@ -60,18 +61,18 @@
             backgroundImageURL = urls.media_url + backgroundImage; // This is the default one
         }
 
+        const backgroundImageBlobURL = await fetchImageAndConvertToBlob(backgroundImageURL);
+
         // If the server is not controlled by us theres no point in trying to fetch images
         if (backgroundImageURL.startsWith(get(page).url.origin)) {
-            backgroundImage = await fetchImageAndConvertToBlob(backgroundImageURL);
+            backgroundImage = await deepCloneBlobUrl(backgroundImageBlobURL);
         } else {
             backgroundImage = backgroundImageURL;
         }
 
         if (backgroundImageURL.startsWith(get(page).url.origin)) {
             // Deep Clone a blob object
-            const newBlob = URL.createObjectURL(
-                new Blob([await fetch(backgroundImage).then((r) => r.blob())])
-            );
+            const newBlob = await deepCloneBlobUrl(backgroundImageBlobURL);
 
             getImageBrightness(newBlob, (brightness: any) => {
                 if (brightness < 120) {
