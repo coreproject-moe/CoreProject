@@ -4,10 +4,9 @@
  * @param image - The url of a image
  * @param callback - Callback function that will return a value
  */
-export function getImageBrightness(image: string, callback: (brightness: number) => void): void {
-    console.log(image);
+export function getImageBrightness(imageSrc: string, callback: (brightness: number) => void): void {
     const img = document.createElement("img");
-    img.src = image;
+    img.src = imageSrc;
 
     img.style.display = "none";
     document.body.appendChild(img);

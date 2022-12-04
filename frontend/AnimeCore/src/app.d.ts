@@ -15,6 +15,7 @@ declare namespace App {
 
 interface Window {
     django: {
+        DEBUG: string;
         MEDIA_URL: string;
         CSRFTOKEN: string;
     };
