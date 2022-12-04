@@ -1,12 +1,13 @@
 <script lang="ts">
-    import { navbar_variant } from "$store/Navbar_Variant";
-
-    type $$Props = svelte.JSX.HTMLAttributes<SVGElement>
+    interface $$Props extends svelte.JSX.HTMLAttributes<SVGElement> {
+        variant: "black" | "white";
+    }
+    const { variant, ...props } = $$props;
 </script>
 
-{#if $navbar_variant === "black"}
+{#if variant === "black"}
     <svg
-        {...$$props}
+        {...props}
         viewBox="0 0 101 16"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -48,10 +49,10 @@
             fill="white"
         />
     </svg>
-{:else if $navbar_variant === "white"}
+{:else if variant === "white"}
     <svg
         xmlns="http://www.w3.org/2000/svg"
-        {...$$props}
+        {...props}
         fill="none"
         viewBox="0 0 164 25"
     >

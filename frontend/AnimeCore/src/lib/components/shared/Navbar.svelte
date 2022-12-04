@@ -2,6 +2,8 @@
     import Logo from "$icons/Logo.svelte";
     import Search from "$icons/Search.svelte";
     import NavbarModal from "$modals/Navbar.svelte";
+    import { blur } from "svelte/transition";
+    import { navbar_variant } from "$store/Navbar_Variant";
 </script>
 
 <!-- Init the modal  -->
@@ -18,10 +20,23 @@
         />
     </div>
     <div class="navbar-center">
-        <Logo
-            width={158}
-            height={22}
-        />
+        {#if $navbar_variant == "black"}
+            <div transition:blur|local>
+                <Logo
+                    variant="black"
+                    width={158}
+                    height={22}
+                />
+            </div>
+        {:else if $navbar_variant == "white"}
+            <div transition:blur|local>
+                <Logo
+                    variant="white"
+                    width={158}
+                    height={22}
+                />
+            </div>
+        {/if}
     </div>
     <div class="navbar-end">
         <label
