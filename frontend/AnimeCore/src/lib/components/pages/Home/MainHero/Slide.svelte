@@ -1,6 +1,8 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import { get } from "svelte/store";
 
+    import { page } from "$app/stores";
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
     import { UrlMaps } from "$data/urls";
@@ -39,43 +41,43 @@
     $: tablet = $responsiveMode === "tablet";
     $: mobile = $responsiveMode === "mobile";
 
-    let background: string;
-    $: {
-        if (mobile) {
-            background = backgroundBanner;
-        } else if (tablet) {
-            background = backgroundImage;
-        } else if (fullhd) {
-            background = backgroundImage;
-        } else {
-            background = backgroundImage; // This is the default one
-        }
-    }
-
     const timerEnded = () => {
         addOneToMainHeroSlideActiveIndex();
     };
 
     onMount(async () => {
+        let backgroundImageURL: string;
+
         const urls = new UrlMaps();
 
         if (mobile) {
-            background = await fetchImageAndConvertToBlob(backgroundBanner);
+            backgroundImageURL = backgroundBanner;
         } else if (tablet) {
-            background = await fetchImageAndConvertToBlob(urls.media_url + backgroundImage);
+            backgroundImageURL = urls.media_url + backgroundImage;
         } else if (fullhd) {
-            background = await fetchImageAndConvertToBlob(urls.media_url + backgroundImage);
+            backgroundImageURL = urls.media_url + backgroundImage;
         } else {
-            background = await fetchImageAndConvertToBlob(urls.media_url + backgroundImage); // This is the default one
+            backgroundImageURL = urls.media_url + backgroundImage; // This is the default one
         }
 
-        getImageBrightness(background, (brightness: any) => {
-            if (brightness < 120) {
-                $navbar_variant = "white";
-            } else {
-                $navbar_variant = "black";
-            }
-        });
+        // If the server is not controlled by us theres no fucking point in trying to fetch images
+        if (backgroundImageURL.startsWith(get(page).url.origin)) {
+            backgroundImage = await fetchImageAndConvertToBlob(backgroundImageURL);
+        } else {
+            backgroundImage = backgroundImageURL;
+        }
+
+        if (backgroundImageURL.startsWith(get(page).url.origin)) {
+            getImageBrightness(backgroundImage, (brightness: any) => {
+                if (brightness < 120) {
+                    $navbar_variant = "white";
+                } else {
+                    $navbar_variant = "black";
+                }
+            });
+        } else {
+            $navbar_variant = "black";
+        }
     });
 </script>
 
@@ -90,7 +92,7 @@
 
 <div
     class="hero min-h-[60vh] md:min-h-screen w-screen bg-center bg-no-repeat"
-    style="background-image: url('{background}');"
+    style="background-image: url('{backgroundImage}');"
 >
     <div
         class="hero-overlay from-base-100 via-base-100/[.8] md:via-base-100/[.0001] grid"
