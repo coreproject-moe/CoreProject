@@ -53,13 +53,12 @@
     const timerEnded = () => {
         addOneToMainHeroSlideActiveIndex();
     };
+
     beforeUpdate(() => {
         getImageBrightness(background, (brightness: any) => {
             if (brightness < 120) {
-                // black one
                 $navbar_variant = "white";
             } else {
-                // white one
                 $navbar_variant = "black";
             }
         });
