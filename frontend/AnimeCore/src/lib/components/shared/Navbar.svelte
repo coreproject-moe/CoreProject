@@ -20,23 +20,13 @@
     </div>
     <div class="navbar-center">
         <div class="inline-grid">
-            {#if $navbar_variant == "black"}
-                <div style="grid-area: 1 / 1 / 2 / 2">
-                    <Logo
-                        variant="black"
-                        width={158}
-                        height={22}
-                    />
-                </div>
-            {:else if $navbar_variant == "white"}
-                <div style="grid-area: 1 / 1 / 2 / 2">
-                    <Logo
-                        variant="white"
-                        width={158}
-                        height={22}
-                    />
-                </div>
-            {/if}
+            <div style="grid-area: 1 / 1 / 2 / 2">
+                <Logo
+                    variant="black"
+                    width={158}
+                    height={22}
+                />
+            </div>
         </div>
     </div>
     <div class="navbar-end">
