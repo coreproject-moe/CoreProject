@@ -13,6 +13,7 @@
         "noImplicitThis": true,
         "resolveJsonModule": true,
         "noFallthroughCasesInSwitch": true,
-        "noUncheckedIndexedAccess": true
+        "noUncheckedIndexedAccess": true,
+        "allowJs": true
     }
 }
