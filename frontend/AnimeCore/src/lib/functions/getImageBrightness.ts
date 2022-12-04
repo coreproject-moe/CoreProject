@@ -1,10 +1,10 @@
 /**
  * Credit goes to = https://stackoverflow.com/questions/38211798/detect-if-image-is-dark-light-and-addclass-dark-light-to-parent
  *
- * @param {string} image - The url of a image
- * @param {()=>void} callback - Callback function that will return a value
+ * @param image - The url of a image
+ * @param callback - Callback function that will return a value
  */
-export function getImageBrightness(image: string, callback: (brightness: number) => void) {
+export function getImageBrightness(image: string, callback: (brightness: number) => void): void {
     const img = document.createElement("img");
     img.src = image;
 
