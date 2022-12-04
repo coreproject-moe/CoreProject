@@ -1,6 +1,6 @@
 <script lang="ts">
     import { beforeUpdate } from "svelte";
-    
+
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
     import { getImageBrightness } from "$functions/getImageBrightness";
