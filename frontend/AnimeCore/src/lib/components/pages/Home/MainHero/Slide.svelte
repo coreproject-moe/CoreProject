@@ -3,6 +3,8 @@
 
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
+    import { UrlMaps } from "$data/urls";
+    import { fetchImageAndConvertToBlob } from "$functions/fetchImage";
     import { getImageBrightness } from "$functions/getImageBrightness";
     import ChevronLeft from "$icons/Chevron-Left.svelte";
     import ChevronRight from "$icons/Chevron-Right.svelte";
@@ -54,7 +56,19 @@
         addOneToMainHeroSlideActiveIndex();
     };
 
-    onMount(() => {
+    onMount(async () => {
+        const urls = new UrlMaps();
+
+        if (mobile) {
+            background = await fetchImageAndConvertToBlob(backgroundBanner);
+        } else if (tablet) {
+            background = await fetchImageAndConvertToBlob(urls.media_url + backgroundImage);
+        } else if (fullhd) {
+            background = await fetchImageAndConvertToBlob(urls.media_url + backgroundImage);
+        } else {
+            background = await fetchImageAndConvertToBlob(urls.media_url + backgroundImage); // This is the default one
+        }
+
         getImageBrightness(background, (brightness: any) => {
             if (brightness < 120) {
                 $navbar_variant = "white";
