@@ -3,6 +3,8 @@
 
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
+    import { UrlMaps } from "$data/urls";
+    import { fetchImageAndConvertToBlob } from "$functions/fetchImage";
     import { getImageBrightness } from "$functions/getImageBrightness";
     import ChevronLeft from "$icons/Chevron-Left.svelte";
     import ChevronRight from "$icons/Chevron-Right.svelte";
@@ -12,10 +14,8 @@
     import { navbar_variant } from "$store/Navbar_Variant";
     import { responsiveMode } from "$store/Responsive";
     import { timer as timerStore } from "$store/Timer";
-
+    
     import Progress from "./Progress.svelte";
-    import { fetchImageAndConvertToBlob } from "$functions/fetchImage";
-    import { UrlMaps } from "$data/urls";
 
     export let data: any[];
     export let mainHeroSlideActiveIndex: number;
