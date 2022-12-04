@@ -1,11 +1,11 @@
 <script lang="ts">
+    import { onMount } from "svelte";
     import { fade } from "svelte/transition";
-
+    
     import Logo from "$icons/Logo.svelte";
     import Search from "$icons/Search.svelte";
     import NavbarModal from "$modals/Navbar.svelte";
     import { navbar_variant } from "$store/Navbar_Variant";
-    import { onMount } from "svelte";
 
     let ready = false;
     onMount(() => (ready = true));
