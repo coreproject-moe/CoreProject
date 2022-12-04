@@ -1,6 +1,4 @@
 <script lang="ts">
-    import { fade } from "svelte/transition";
-
     import Logo from "$icons/Logo.svelte";
     import Search from "$icons/Search.svelte";
     import NavbarModal from "$modals/Navbar.svelte";
@@ -23,10 +21,7 @@
     <div class="navbar-center">
         <div class="inline-grid">
             {#if $navbar_variant == "black"}
-                <div
-                    transition:fade
-                    style="grid-area: 1 / 1 / 2 / 2"
-                >
+                <div style="grid-area: 1 / 1 / 2 / 2">
                     <Logo
                         variant="black"
                         width={158}
@@ -34,10 +29,7 @@
                     />
                 </div>
             {:else if $navbar_variant == "white"}
-                <div
-                    transition:fade
-                    style="grid-area: 1 / 1 / 2 / 2"
-                >
+                <div style="grid-area: 1 / 1 / 2 / 2">
                     <Logo
                         variant="white"
                         width={158}
