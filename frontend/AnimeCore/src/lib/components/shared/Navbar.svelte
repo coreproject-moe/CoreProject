@@ -2,7 +2,7 @@
     import Logo from "$icons/Logo.svelte";
     import Search from "$icons/Search.svelte";
     import NavbarModal from "$modals/Navbar.svelte";
-    import { blur } from "svelte/transition";
+    import { fade } from "svelte/transition";
     import { navbar_variant } from "$store/Navbar_Variant";
 </script>
 
@@ -21,7 +21,7 @@
     </div>
     <div class="navbar-center">
         {#if $navbar_variant == "black"}
-            <div transition:blur|local>
+            <div transition:fade|local>
                 <Logo
                     variant="black"
                     width={158}
@@ -29,7 +29,7 @@
                 />
             </div>
         {:else if $navbar_variant == "white"}
-            <div transition:blur|local>
+            <div transition:fade|local>
                 <Logo
                     variant="white"
                     width={158}
