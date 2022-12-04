@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { page } from "$app/stores";
-
     import { onMount } from "svelte";
-
+    import { get } from "svelte/store";
+    
+    import { page } from "$app/stores";
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
     import { UrlMaps } from "$data/urls";
@@ -16,9 +16,8 @@
     import { navbar_variant } from "$store/Navbar_Variant";
     import { responsiveMode } from "$store/Responsive";
     import { timer as timerStore } from "$store/Timer";
-
+    
     import Progress from "./Progress.svelte";
-    import { get } from "svelte/store";
 
     export let data: any[];
     export let mainHeroSlideActiveIndex: number;
