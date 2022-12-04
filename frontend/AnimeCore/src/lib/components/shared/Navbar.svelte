@@ -19,7 +19,6 @@
     </div>
     <div class="navbar-center">
         <Logo
-            variant="black"
             width={158}
             height={22}
         />

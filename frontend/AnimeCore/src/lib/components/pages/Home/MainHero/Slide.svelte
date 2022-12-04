@@ -1,6 +1,7 @@
 <script lang="ts">
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
+    import { getImageBrightness } from "$functions/getImageBrightness";
     import ChevronLeft from "$icons/Chevron-Left.svelte";
     import ChevronRight from "$icons/Chevron-Right.svelte";
     import ChevronsRight from "$icons/Chevrons-Right.svelte";
@@ -8,8 +9,10 @@
     import Play from "$icons/Play.svelte";
     import { responsiveMode } from "$store/Responsive";
     import { timer as timerStore } from "$store/Timer";
+    import { browser } from "$app/environment";
 
     import Progress from "./Progress.svelte";
+    import { navbar_variant } from "$store/Navbar_Variant";
 
     export let data: any[];
     export let mainHeroSlideActiveIndex: number;
@@ -49,6 +52,17 @@
     const timerEnded = () => {
         addOneToMainHeroSlideActiveIndex();
     };
+
+    $: browser &&
+        getImageBrightness(background, (brightness: any) => {
+            if (brightness < 120) {
+                // black one
+                $navbar_variant = "white";
+            } else {
+                // white one
+                $navbar_variant = "black";
+            }
+        });
 </script>
 
 <svelte:window
