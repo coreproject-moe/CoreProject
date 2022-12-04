@@ -12,3 +12,10 @@ declare namespace App {
     }
     // interface Stuff {}
 }
+
+interface Window {
+    django: {
+        MEDIA_URL: string;
+        CSRFTOKEN: string;
+    };
+}

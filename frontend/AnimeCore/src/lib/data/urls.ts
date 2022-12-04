@@ -1,3 +1,5 @@
+import { page } from "$app/stores";
+import { get } from "svelte/store";
 export class MAL {
     private BASE_URL = `https://api.jikan.moe/v4/anime`;
 
@@ -20,4 +22,12 @@ export class Anilist {
     public id = () => {
         return;
     };
+}
+
+export class UrlMaps {
+    public get media_url() {
+        return process.env.NODE_ENV === "development"
+            ? get(page).url.origin
+            : window?.django.MEDIA_URL;
+    }
 }

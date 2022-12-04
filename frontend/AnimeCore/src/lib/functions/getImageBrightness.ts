@@ -5,6 +5,7 @@
  * @param callback - Callback function that will return a value
  */
 export function getImageBrightness(image: string, callback: (brightness: number) => void): void {
+    console.log(image);
     const img = document.createElement("img");
     img.src = image;
 
@@ -39,6 +40,6 @@ export function getImageBrightness(image: string, callback: (brightness: number)
         callback(brightness);
 
         // Cleanup
-        document.body.removeChild(img);
+        // document.body.removeChild(img);
     };
 }
