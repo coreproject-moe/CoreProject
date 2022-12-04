@@ -5,11 +5,6 @@
     import Search from "$icons/Search.svelte";
     import NavbarModal from "$modals/Navbar.svelte";
     import { navbar_variant } from "$store/Navbar_Variant";
-    import { onMount } from "svelte";
-
-    let ready = false;
-    onMount(() => (ready = true));
-    // https://stackoverflow.com/questions/71959607/sveltekit-flashing-element-before-transitioning
 </script>
 
 <!-- Init the modal  -->
@@ -27,31 +22,28 @@
     </div>
     <div class="navbar-center">
         <div class="inline-grid">
-            <!-- This is stupid hack  -->
-            {#if ready}
-                {#if $navbar_variant == "black"}
-                    <div
-                        transition:fade|local
-                        style="grid-area: 1 / 1 / 2 / 2"
-                    >
-                        <Logo
-                            variant="black"
-                            width={158}
-                            height={22}
-                        />
-                    </div>
-                {:else if $navbar_variant == "white"}
-                    <div
-                        transition:fade|local
-                        style="grid-area: 1 / 1 / 2 / 2"
-                    >
-                        <Logo
-                            variant="white"
-                            width={158}
-                            height={22}
-                        />
-                    </div>
-                {/if}
+            {#if $navbar_variant == "black"}
+                <div
+                    transition:fade
+                    style="grid-area: 1 / 1 / 2 / 2"
+                >
+                    <Logo
+                        variant="black"
+                        width={158}
+                        height={22}
+                    />
+                </div>
+            {:else if $navbar_variant == "white"}
+                <div
+                    transition:fade
+                    style="grid-area: 1 / 1 / 2 / 2"
+                >
+                    <Logo
+                        variant="white"
+                        width={158}
+                        height={22}
+                    />
+                </div>
             {/if}
         </div>
     </div>
