@@ -39,8 +39,6 @@ export class UrlMaps {
     }
 
     public get media_url() {
-        return process.env.NODE_ENV === "development" && !this.is_django_used_for_rendering()
-            ? get(page).url.origin
-            : this.django.MEDIA_URL;
+        return !this.is_django_used_for_rendering() ? get(page).url.origin : this.django.MEDIA_URL;
     }
 }
