@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onMount } from "svelte";
+    import { beforeUpdate, onMount } from "svelte";
     import { get } from "svelte/store";
 
     import { page } from "$app/stores";
@@ -17,7 +17,7 @@
     import { navbar_variant } from "$store/Navbar_Variant";
     import { responsiveMode } from "$store/Responsive";
     import { timer as timerStore } from "$store/Timer";
-    
+
     import Progress from "./Progress.svelte";
 
     export let data: any[];
@@ -46,7 +46,7 @@
         addOneToMainHeroSlideActiveIndex();
     };
 
-    onMount(async () => {
+    beforeUpdate(async () => {
         let backgroundImageURL: string;
 
         const urls = new UrlMaps();
