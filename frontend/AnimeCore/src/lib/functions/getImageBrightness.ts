@@ -39,6 +39,6 @@ export function getImageBrightness(imageSrc: string, callback: (brightness: numb
         callback(brightness);
 
         // Cleanup
-        // document.body.removeChild(img);
+        document.body.removeChild(img);
     };
 }
