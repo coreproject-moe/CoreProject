@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { browser } from "$app/environment";
+    import { beforeUpdate } from "svelte/types/runtime/internal/lifecycle";
+    
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
     import { getImageBrightness } from "$functions/getImageBrightness";
@@ -11,7 +12,6 @@
     import { navbar_variant } from "$store/Navbar_Variant";
     import { responsiveMode } from "$store/Responsive";
     import { timer as timerStore } from "$store/Timer";
-    import { beforeUpdate } from "svelte/types/runtime/internal/lifecycle";
 
     import Progress from "./Progress.svelte";
 
