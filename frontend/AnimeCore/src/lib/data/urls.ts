@@ -1,4 +1,5 @@
 import { get } from "svelte/store";
+
 import { page } from "$app/stores";
 
 export class MAL {
