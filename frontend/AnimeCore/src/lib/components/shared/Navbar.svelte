@@ -2,6 +2,10 @@
     import Logo from "$icons/Logo.svelte";
     import Search from "$icons/Search.svelte";
     import NavbarModal from "$modals/Navbar.svelte";
+    <script lang="ts">
+    import Logo from "$icons/Logo.svelte";
+    import Search from "$icons/Search.svelte";
+    import NavbarModal from "$modals/Navbar.svelte";
     import { navbar_variant } from "$store/Navbar_Variant";
 </script>
 
