@@ -16,9 +16,8 @@
     import { navbar_variant } from "$store/Navbar_Variant";
     import { responsiveMode } from "$store/Responsive";
     import { timer as timerStore } from "$store/Timer";
-
+    
     import Progress from "./Progress.svelte";
-    import { deepCloneBlobUrl } from "$functions/deepCloneBlob";
 
     export let data: any[];
     export let mainHeroSlideActiveIndex: number;
