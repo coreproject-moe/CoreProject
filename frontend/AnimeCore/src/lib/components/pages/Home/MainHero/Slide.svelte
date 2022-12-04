@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { beforeUpdate, onMount } from "svelte";
+    import { onMount } from "svelte";
     import { get } from "svelte/store";
 
     import { page } from "$app/stores";
@@ -7,6 +7,7 @@
     import ScrollArea from "$components/shared/ScrollArea.svelte";
     import { UrlMaps } from "$data/urls";
     import { fetchImageAndConvertToBlob } from "$functions/fetchImage";
+    import { getImageBrightness } from "$functions/getImageBrightness";
     import ChevronLeft from "$icons/Chevron-Left.svelte";
     import ChevronRight from "$icons/Chevron-Right.svelte";
     import ChevronsRight from "$icons/Chevrons-Right.svelte";
@@ -17,6 +18,7 @@
     import { timer as timerStore } from "$store/Timer";
 
     import Progress from "./Progress.svelte";
+    import { deepCloneBlobUrl } from "$functions/deepCloneBlob";
 
     export let data: any[];
     export let mainHeroSlideActiveIndex: number;
@@ -44,7 +46,7 @@
         addOneToMainHeroSlideActiveIndex();
     };
 
-    beforeUpdate(async () => {
+    onMount(async () => {
         let backgroundImageURL: string;
 
         const urls = new UrlMaps();
@@ -68,7 +70,17 @@
             backgroundImage = backgroundImageURL;
         }
 
-        $navbar_variant = "black";
+        if (backgroundImageURL.startsWith(get(page).url.origin)) {
+            getImageBrightness(backgroundImageBlobURL, (brightness: any) => {
+                if (brightness < 120) {
+                    $navbar_variant = "white";
+                } else {
+                    $navbar_variant = "black";
+                }
+            });
+        } else {
+            $navbar_variant = "black";
+        }
     });
 </script>
 
