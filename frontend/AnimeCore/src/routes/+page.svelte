@@ -2,12 +2,12 @@
     import { detect } from "detect-browser";
     import { blur } from "svelte/transition";
     import { swipe } from "svelte-gestures";
-    import { navbar_variant } from "$store/Navbar_Variant";
-
+    
     import GenreSlide from "$components/pages/Home/Genre/Slide.svelte";
     import LibrarySlide from "$components/pages/Home/Library/Slide.svelte";
     import MainHeroSlide from "$components/pages/Home/MainHero/Slide.svelte";
     import data from "$data/mock/main_hero_data.json";
+    import { navbar_variant } from "$store/Navbar_Variant";
     import { timer as timerStore } from "$store/Timer";
     const browser = detect();
 
