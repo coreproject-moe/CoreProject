@@ -11,6 +11,7 @@
     import { navbar_variant } from "$store/Navbar_Variant";
     import { responsiveMode } from "$store/Responsive";
     import { timer as timerStore } from "$store/Timer";
+    import { beforeUpdate } from "svelte/types/runtime/internal/lifecycle";
 
     import Progress from "./Progress.svelte";
 
@@ -52,8 +53,7 @@
     const timerEnded = () => {
         addOneToMainHeroSlideActiveIndex();
     };
-
-    $: browser &&
+    beforeUpdate(() => {
         getImageBrightness(background, (brightness: any) => {
             if (brightness < 120) {
                 // black one
@@ -63,6 +63,7 @@
                 $navbar_variant = "black";
             }
         });
+    });
 </script>
 
 <svelte:window
