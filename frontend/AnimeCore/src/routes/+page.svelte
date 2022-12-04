@@ -7,6 +7,7 @@
     import LibrarySlide from "$components/pages/Home/Library/Slide.svelte";
     import MainHeroSlide from "$components/pages/Home/MainHero/Slide.svelte";
     import data from "$data/mock/main_hero_data.json";
+    import { navbar_variant } from "$store/Navbar_Variant";
     import { timer as timerStore } from "$store/Timer";
     const browser = detect();
 
@@ -14,6 +15,9 @@
     let mainHeroRootElement: HTMLElement;
 
     const addOneToMainHeroSlideActiveIndex = () => {
+        // Remove the previous image
+        $navbar_variant = "";
+
         if (mainHeroSlideActiveIndex + 1 === data.length) {
             mainHeroSlideActiveIndex = 0;
             return;
@@ -22,6 +26,9 @@
     };
 
     const minusOneToMainHeroSlideActiveIndex = () => {
+        // Remove the previous image
+        $navbar_variant = "";
+
         if (mainHeroSlideActiveIndex === 0) {
             mainHeroSlideActiveIndex = data.length - 1;
             return;
