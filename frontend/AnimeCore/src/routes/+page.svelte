@@ -2,6 +2,7 @@
     import { detect } from "detect-browser";
     import { blur } from "svelte/transition";
     import { swipe } from "svelte-gestures";
+    import { navbar_variant } from "$store/Navbar_Variant";
 
     import GenreSlide from "$components/pages/Home/Genre/Slide.svelte";
     import LibrarySlide from "$components/pages/Home/Library/Slide.svelte";
@@ -14,6 +15,9 @@
     let mainHeroRootElement: HTMLElement;
 
     const addOneToMainHeroSlideActiveIndex = () => {
+        // Remove the previous image
+        $navbar_variant = "";
+
         if (mainHeroSlideActiveIndex + 1 === data.length) {
             mainHeroSlideActiveIndex = 0;
             return;
@@ -22,6 +26,9 @@
     };
 
     const minusOneToMainHeroSlideActiveIndex = () => {
+        // Remove the previous image
+        $navbar_variant = "";
+
         if (mainHeroSlideActiveIndex === 0) {
             mainHeroSlideActiveIndex = data.length - 1;
             return;

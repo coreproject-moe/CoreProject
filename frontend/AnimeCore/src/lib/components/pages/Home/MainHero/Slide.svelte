@@ -50,8 +50,6 @@
     }
 
     const timerEnded = () => {
-        // Remove the previous image
-        $navbar_variant = "";
         addOneToMainHeroSlideActiveIndex();
     };
 
