@@ -38,5 +38,8 @@ export function getImageBrightness(imageSrc: string, callback: (brightness: numb
 
         const brightness = Math.floor(colorSum / (img.width * img.height));
         callback(brightness);
+
+        // Remove
+        document.body.removeChild(img);
     };
 }
