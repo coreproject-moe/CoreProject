@@ -14,7 +14,7 @@
     import { navbar_variant } from "$store/Navbar_Variant";
     import { responsiveMode } from "$store/Responsive";
     import { timer as timerStore } from "$store/Timer";
-    
+
     import Progress from "./Progress.svelte";
 
     export let data: any[];
