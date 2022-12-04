@@ -1,8 +1,9 @@
 <script lang="ts">
+    import { blur } from "svelte/transition";
+    
     import Logo from "$icons/Logo.svelte";
     import Search from "$icons/Search.svelte";
     import NavbarModal from "$modals/Navbar.svelte";
-    import { blur } from "svelte/transition";
     import { navbar_variant } from "$store/Navbar_Variant";
 </script>
 
