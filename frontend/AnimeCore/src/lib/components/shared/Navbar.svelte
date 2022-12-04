@@ -1,6 +1,4 @@
 <script lang="ts">
-    import { fade } from "svelte/transition";
-
     import Logo from "$icons/Logo.svelte";
     import Search from "$icons/Search.svelte";
     import NavbarModal from "$modals/Navbar.svelte";
@@ -22,7 +20,7 @@
     </div>
     <div class="navbar-center">
         {#if $navbar_variant == "black"}
-            <div transition:fade|local>
+            <div>
                 <Logo
                     variant="black"
                     width={158}
@@ -30,7 +28,7 @@
                 />
             </div>
         {:else if $navbar_variant == "white"}
-            <div transition:fade|local>
+            <div>
                 <Logo
                     variant="white"
                     width={158}
