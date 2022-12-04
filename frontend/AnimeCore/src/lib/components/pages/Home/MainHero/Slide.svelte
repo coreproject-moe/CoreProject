@@ -60,7 +60,7 @@
         const urls = new UrlMaps();
 
         if (mobile) {
-            background = await fetchImageAndConvertToBlob(backgroundBanner);
+            background = backgroundBanner;
         } else if (tablet) {
             background = await fetchImageAndConvertToBlob(urls.media_url + backgroundImage);
         } else if (fullhd) {
