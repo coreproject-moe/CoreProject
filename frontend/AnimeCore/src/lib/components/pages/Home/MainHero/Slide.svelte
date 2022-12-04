@@ -68,9 +68,12 @@
         }
 
         if (backgroundImageURL.startsWith(get(page).url.origin)) {
-            // Slice and dice to get a copy of the blob
-            // https://stackoverflow.com/questions/37802025/how-to-clone-a-blob-in-javascript
-            getImageBrightness(backgroundImage.slice(), (brightness: any) => {
+            // Deep Clone a blob object
+            const newBlob = URL.createObjectURL(
+                new Blob([await fetch(backgroundImage).then((r) => r.blob())])
+            );
+
+            getImageBrightness(newBlob, (brightness: any) => {
                 if (brightness < 120) {
                     $navbar_variant = "white";
                 } else {
