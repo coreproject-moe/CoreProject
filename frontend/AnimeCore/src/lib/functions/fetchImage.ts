@@ -1,5 +1,4 @@
-export const fetchImage = async (url: string) => {
-    console.log(url);
+export const fetchImageAndConvertToBlob = async (url: string) => {
     const response = await fetch(url, {
         method: "GET",
         // https://stackoverflow.com/questions/41030425/disabling-cors-using-js-fetch

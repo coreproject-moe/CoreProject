@@ -14,8 +14,8 @@
     import { timer as timerStore } from "$store/Timer";
 
     import Progress from "./Progress.svelte";
+    import { fetchImageAndConvertToBlob } from "$functions/fetchImage";
     import { UrlMaps } from "$data/urls";
-    import { fetchImage } from "$functions/fetchImage";
 
     export let data: any[];
     export let mainHeroSlideActiveIndex: number;
@@ -39,31 +39,43 @@
     $: tablet = $responsiveMode === "tablet";
     $: mobile = $responsiveMode === "mobile";
 
-    const urls = new UrlMaps();
-
     let background: string;
+    $: {
+        if (mobile) {
+            background = backgroundBanner;
+        } else if (tablet) {
+            background = backgroundImage;
+        } else if (fullhd) {
+            background = backgroundImage;
+        } else {
+            background = backgroundImage; // This is the default one
+        }
+    }
 
     const timerEnded = () => {
         addOneToMainHeroSlideActiveIndex();
     };
 
     onMount(async () => {
-        // if (mobile) {
-        //     background = await fetchImage(backgroundBanner);
-        // } else if (tablet) {
-        //     background = await fetchImage(urls.media_url + backgroundImage);
-        // } else if (fullhd) {
-        //     background = await fetchImage(urls.media_url + backgroundImage);
-        // } else {
-        //     background = await fetchImage(urls.media_url + backgroundImage); // This is the default one
-        // }
-        // getImageBrightness(background, (brightness: any) => {
-        //     if (brightness < 120) {
-        //         $navbar_variant = "white";
-        //     } else {
-        //         $navbar_variant = "black";
-        //     }
-        // });
+        const urls = new UrlMaps();
+
+        if (mobile) {
+            background = await fetchImageAndConvertToBlob(backgroundBanner);
+        } else if (tablet) {
+            background = await fetchImageAndConvertToBlob(urls.media_url + backgroundImage);
+        } else if (fullhd) {
+            background = await fetchImageAndConvertToBlob(urls.media_url + backgroundImage);
+        } else {
+            background = await fetchImageAndConvertToBlob(urls.media_url + backgroundImage); // This is the default one
+        }
+
+        getImageBrightness(background, (brightness: any) => {
+            if (brightness < 120) {
+                $navbar_variant = "white";
+            } else {
+                $navbar_variant = "black";
+            }
+        });
     });
 </script>
 
