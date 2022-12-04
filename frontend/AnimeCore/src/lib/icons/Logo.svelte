@@ -1,7 +1,7 @@
 <script lang="ts">
     import { navbar_variant } from "$store/Navbar_Variant";
 
-    interface $$Props extends svelte.JSX.HTMLAttributes<SVGElement> {}
+    type $$Props = svelte.JSX.HTMLAttributes<SVGElement>
 </script>
 
 {#if $navbar_variant === "black"}
