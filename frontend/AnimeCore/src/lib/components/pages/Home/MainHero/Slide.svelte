@@ -46,16 +46,39 @@
         addOneToMainHeroSlideActiveIndex();
     };
 
-    const checkViewPort = async () => {
+    const checkViewPortAndMountCanvas = async () => {
         if (mobile) {
             background = await fetchImageAndConvertToBlob(backgroundBanner);
         } else {
             background = await fetchImageAndConvertToBlob(backgroundImage);
         }
+
+        // Canvas logic
+        if (!backgroundCanvasElement) {
+            return;
+        }
+
+        const img = new Image();
+        img.onload = () => {
+            const ctx = backgroundCanvasElement?.getContext("2d");
+            backgroundCanvasElement.height = img.height;
+            backgroundCanvasElement.width = img.width;
+
+            drawImageProp(
+                ctx,
+                img,
+                0,
+                0,
+                backgroundCanvasElement?.width,
+                backgroundCanvasElement?.height
+            );
+        };
+
+        img.src = background;
     };
 
     onMount(async () => {
-        await checkViewPort();
+        await checkViewPortAndMountCanvas();
         // If the server is not controlled by us theres no point in trying to fetch images
         getImageBrightness(background, (brightness) => {
             if (brightness == undefined || brightness > 120) {
@@ -65,34 +88,11 @@
             }
         });
     });
-
-    $: background &&
-        (() => {
-            if (backgroundCanvasElement) {
-                const img = new Image();
-                img.onload = () => {
-                    const ctx = backgroundCanvasElement?.getContext("2d");
-                    backgroundCanvasElement.height = img.height;
-                    backgroundCanvasElement.width = img.width;
-
-                    drawImageProp(
-                        ctx,
-                        img,
-                        0,
-                        0,
-                        backgroundCanvasElement?.width,
-                        backgroundCanvasElement?.height
-                    );
-                };
-
-                img.src = background;
-            }
-        })();
 </script>
 
 <svelte:window
     on:resize={async () => {
-        await checkViewPort();
+        await checkViewPortAndMountCanvas();
     }}
     on:focus={() => {
         $timerStore = "start";
@@ -103,13 +103,19 @@
 />
 
 <div class="inline-grid">
-    <div style="grid-area: 1 / 1 / 2 / 2">
+    <div
+        class="relative z-0"
+        style="grid-area: 1 / 1 / 2 / 2"
+    >
         <canvas
             bind:this={backgroundCanvasElement}
-            class="h-full w-full"
+            class="h-full w-full absolute inset-0"
         />
     </div>
-    <div style="grid-area: 1 / 1 / 2 / 2">
+    <div
+        class="z-10"
+        style="grid-area: 1 / 1 / 2 / 2"
+    >
         <div class="hero min-h-[60vh] md:min-h-screen w-screen bg-center bg-no-repeat">
             <div
                 class="hero-overlay from-base-100 via-base-100/[.8] md:via-base-100/[.0001] grid"
