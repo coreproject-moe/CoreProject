@@ -46,24 +46,19 @@
     };
 
     onMount(async () => {
-        let backgroundImageURL: string;
-
         if (mobile) {
-            backgroundImageURL = backgroundBanner;
+            backgroundImage = await fetchImageAndConvertToBlob(backgroundBanner);
         } else if (tablet) {
-            backgroundImageURL = backgroundImage;
+            backgroundImage = await fetchImageAndConvertToBlob(backgroundImage);
         } else if (fullhd) {
-            backgroundImageURL = backgroundImage;
+            backgroundImage = await fetchImageAndConvertToBlob(backgroundImage);
         } else {
-            backgroundImageURL = backgroundImage; // This is the default one
+            backgroundImage = await fetchImageAndConvertToBlob(backgroundImage); // This is the default one
         }
-
-        const backgroundImageBlobURL = await fetchImageAndConvertToBlob(backgroundImageURL);
 
         // If the server is not controlled by us theres no point in trying to fetch images
 
-        const newBlob = backgroundImageBlobURL;
-        getImageBrightness(newBlob, (brightness: any) => {
+        getImageBrightness(backgroundImage, (brightness: any) => {
             if (brightness == undefined || brightness > 120) {
                 $navbar_variant = "black";
             } else {
