@@ -14,7 +14,7 @@
     {style}
     class="{parentClass} {offsetScrollbar
         ? 'pr-3'
-        : ''} scrollbar overflow-y-scroll overscroll-y-contain"
+        : 'pr-0'} scrollbar overflow-y-scroll overscroll-y-contain"
 >
     <div class="{klass} whitespace-pre-line">
         <slot />
