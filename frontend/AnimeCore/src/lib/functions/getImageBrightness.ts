@@ -1,15 +1,36 @@
+import { page } from "$app/stores";
+import { UrlMaps } from "$data/urls";
+import { get } from "svelte/store";
+
 /**
  * Credit goes to = https://stackoverflow.com/questions/38211798/detect-if-image-is-dark-light-and-addclass-dark-light-to-parent
  *
  * @param image - The url of a image
  * @param callback - Callback function that will return a value
  */
-export function getImageBrightness(imageSrc: string, callback: (brightness: number) => void): void {
+export function getImageBrightness(
+    imageSrc: string,
+    callback: (brightness: number | undefined) => void
+): void {
+    const urlMap = new UrlMaps();
+
+    // If Url is
+    // "/sora_amamiya"
+    // Convert it to https://localhost:5173/sora_amamiya
+    let url;
+    if (imageSrc.startsWith("/")) {
+        url = urlMap.media_url + imageSrc;
+    }
+
+    if (!url?.startsWith(get(page).url.origin)) {
+        return callback(undefined);
+    }
+
     const img = new Image();
     let colorSum = 0;
 
     img.crossOrigin = "anonymous";
-    img.src = imageSrc;
+    img.src = String(url);
 
     img.onload = () => {
         // create canvas

@@ -48,40 +48,28 @@
     onMount(async () => {
         let backgroundImageURL: string;
 
-        const urls = new UrlMaps();
-
         if (mobile) {
             backgroundImageURL = backgroundBanner;
         } else if (tablet) {
-            backgroundImageURL = urls.media_url + backgroundImage;
+            backgroundImageURL = backgroundImage;
         } else if (fullhd) {
-            backgroundImageURL = urls.media_url + backgroundImage;
+            backgroundImageURL = backgroundImage;
         } else {
-            backgroundImageURL = urls.media_url + backgroundImage; // This is the default one
+            backgroundImageURL = backgroundImage; // This is the default one
         }
 
         const backgroundImageBlobURL = await fetchImageAndConvertToBlob(backgroundImageURL);
 
         // If the server is not controlled by us theres no point in trying to fetch images
-        if (backgroundImageURL.startsWith(get(page).url.origin)) {
-            backgroundImage = backgroundImageBlobURL;
-        } else {
-            backgroundImage = backgroundImageURL;
-        }
 
-        if (backgroundImageURL.startsWith(get(page).url.origin)) {
-            // Deep Clone a blob object
-            const newBlob = backgroundImageBlobURL;
-            getImageBrightness(newBlob, (brightness: any) => {
-                if (brightness < 120) {
-                    $navbar_variant = "white";
-                } else {
-                    $navbar_variant = "black";
-                }
-            });
-        } else {
-            $navbar_variant = "black";
-        }
+        const newBlob = backgroundImageBlobURL;
+        getImageBrightness(newBlob, (brightness: any) => {
+            if (brightness == undefined || brightness > 120) {
+                $navbar_variant = "black";
+            } else {
+                $navbar_variant = "white";
+            }
+        });
     });
 </script>
 
