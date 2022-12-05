@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { onMount } from "svelte";
+    import { onMount, afterUpdate } from "svelte";
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
     import { fetchImageAndConvertToBlob } from "$functions/fetchImage";
@@ -15,6 +15,7 @@
 
     import Progress from "./Progress.svelte";
     import { drawImageProp } from "$functions/drawToCanvas";
+    import { browser } from "$app/environment";
 
     export let data: any[];
     export let mainHeroSlideActiveIndex: number;
@@ -69,16 +70,11 @@
     $: background &&
         (() => {
             if (backgroundCanvasElement) {
-                backgroundCanvasElement.height = Number(
-                    backgroundCanvasElement.parentElement?.clientHeight
-                );
-                backgroundCanvasElement.width = Number(
-                    backgroundCanvasElement.parentElement?.clientWidth
-                );
-
                 const img = new Image();
                 img.onload = () => {
                     const ctx = backgroundCanvasElement?.getContext("2d");
+                    backgroundCanvasElement.height = img.height;
+                    backgroundCanvasElement.width = img.width;
 
                     drawImageProp(
                         ctx,
