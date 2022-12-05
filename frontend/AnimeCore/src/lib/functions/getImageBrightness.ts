@@ -8,6 +8,9 @@ export function getImageBrightness(imageSrc: string, callback: (brightness: numb
     const img = new Image();
     let colorSum = 0;
 
+    img.crossOrigin = "anonymous";
+    img.src = imageSrc;
+
     img.onload = () => {
         // create canvas
         const canvas = document.createElement("canvas");
@@ -33,6 +36,4 @@ export function getImageBrightness(imageSrc: string, callback: (brightness: numb
         const brightness = Math.floor(colorSum / (img.width * img.height));
         callback(brightness);
     };
-    img.crossOrigin = "anonymous";
-    img.src = imageSrc;
 }
