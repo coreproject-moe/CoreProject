@@ -7,10 +7,10 @@
 </script>
 
 <div
-    on:mouseenter|capture
-    on:mouseleave|capture
-    on:touchstart|capture
-    on:touchend|capture
+    on:mouseenter
+    on:mouseleave
+    on:touchstart
+    on:touchend
     {style}
     class="{parentClass} {offsetScrollbar
         ? 'pr-3'
