@@ -22,6 +22,7 @@ export function getImageBrightness(
         url = urlMap.media_url + imageSrc;
     }
 
+    // If url's domain is not controlled by us return an 'undefined' state
     if (!url?.startsWith(get(page).url.origin)) {
         return callback(undefined);
     }
