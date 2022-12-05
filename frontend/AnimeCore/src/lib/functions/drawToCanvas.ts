@@ -7,7 +7,17 @@
  *
  * If image and context are only arguments rectangle will equal canvas
  */
-export function drawImageProp(ctx, img, x, y, w, h, offsetX, offsetY) {
+
+export function drawImageProp(
+    ctx: CanvasRenderingContext2D,
+    img: HTMLImageElement,
+    x: number,
+    y: number,
+    w: number,
+    h: number,
+    offsetX?: number,
+    offsetY?: number
+) {
     if (arguments.length === 2) {
         x = y = 0;
         w = ctx.canvas.width;
@@ -24,16 +34,16 @@ export function drawImageProp(ctx, img, x, y, w, h, offsetX, offsetY) {
     if (offsetX > 1) offsetX = 1;
     if (offsetY > 1) offsetY = 1;
 
-    var iw = img.width,
-        ih = img.height,
-        r = Math.min(w / iw, h / ih),
-        nw = iw * r, // new prop. width
-        nh = ih * r, // new prop. height
-        cx,
-        cy,
-        cw,
-        ch,
-        ar = 1;
+    const iw = img.width;
+    const ih = img.height;
+    const r = Math.min(w / iw, h / ih);
+    let nw = iw * r; // new prop. width
+    let nh = ih * r; // new prop. height
+    let cx;
+    let cy;
+    let cw;
+    let ch;
+    let ar = 1;
 
     // decide which gap to fill
     if (nw < w) ar = w / nw;

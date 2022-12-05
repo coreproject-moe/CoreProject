@@ -65,7 +65,7 @@
             backgroundCanvasElement.width = img.width;
 
             drawImageProp(
-                ctx,
+                ctx!,
                 img,
                 0,
                 0,
