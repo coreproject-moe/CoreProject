@@ -3,7 +3,6 @@
 
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
-    import { drawImageProp } from "$functions/drawToCanvas";
     import { fetchImageAndConvertToBlob } from "$functions/fetchImage";
     import { getImageBrightness } from "$functions/getImageBrightness";
     import ChevronLeft from "$icons/Chevron-Left.svelte";
@@ -65,14 +64,7 @@
             backgroundCanvasElement.height = img.height;
             backgroundCanvasElement.width = img.width;
 
-            drawImageProp(
-                ctx!,
-                img,
-                0,
-                0,
-                backgroundCanvasElement?.width,
-                backgroundCanvasElement?.height
-            );
+            ctx?.drawImage(img, 0, 0);
         };
 
         img.src = background;
