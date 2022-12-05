@@ -30,6 +30,8 @@
     export let addOneToMainHeroSlideActiveIndex: () => void;
     export let minusOneToMainHeroSlideActiveIndex: () => void;
 
+    let background: string;
+
     let mobile: boolean;
     let tablet: boolean;
     let fullhd: boolean;
@@ -44,9 +46,18 @@
         addOneToMainHeroSlideActiveIndex();
     };
 
+    const checkViewPort = async () => {
+        if (mobile) {
+            background = await fetchImageAndConvertToBlob(backgroundBanner);
+        } else {
+            background = await fetchImageAndConvertToBlob(backgroundImage);
+        }
+    };
+
     onMount(async () => {
+        await checkViewPort();
         // If the server is not controlled by us theres no point in trying to fetch images
-        getImageBrightness(backgroundImage, (brightness) => {
+        getImageBrightness(background, (brightness) => {
             if (brightness == undefined || brightness > 120) {
                 $navbar_variant = "black";
             } else {
@@ -55,7 +66,7 @@
         });
     });
 
-    $: backgroundImage &&
+    $: background &&
         (() => {
             if (backgroundCanvasElement) {
                 backgroundCanvasElement.height = Number(
@@ -79,22 +90,14 @@
                     );
                 };
 
-                img.src = backgroundImage;
+                img.src = background;
             }
         })();
 </script>
 
 <svelte:window
-    on:resize|capture={async () => {
-        if (mobile) {
-            backgroundImage = await fetchImageAndConvertToBlob(backgroundBanner);
-        } else if (tablet) {
-            backgroundImage = await fetchImageAndConvertToBlob(backgroundImage);
-        } else if (fullhd) {
-            backgroundImage = await fetchImageAndConvertToBlob(backgroundImage);
-        } else {
-            backgroundImage = await fetchImageAndConvertToBlob(backgroundImage); // This is the default one
-        }
+    on:resize={async () => {
+        await checkViewPort();
     }}
     on:focus={() => {
         $timerStore = "start";
