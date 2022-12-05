@@ -79,7 +79,7 @@
 
     onMount(async () => {
         await checkViewPortAndMountCanvas();
-        // If the server is not controlled by us theres no point in trying to fetch images
+
         getImageBrightness(background, (brightness) => {
             if (brightness == undefined || brightness > 120) {
                 $navbar_variant = "black";
