@@ -1,11 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { get } from "svelte/store";
-
-    import { page } from "$app/stores";
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
-    import { UrlMaps } from "$data/urls";
     import { fetchImageAndConvertToBlob } from "$functions/fetchImage";
     import { getImageBrightness } from "$functions/getImageBrightness";
     import ChevronLeft from "$icons/Chevron-Left.svelte";
@@ -18,6 +14,7 @@
     import { timer as timerStore } from "$store/Timer";
 
     import Progress from "./Progress.svelte";
+    import { drawImageProp } from "$functions/drawToCanvas";
 
     export let data: any[];
     export let mainHeroSlideActiveIndex: number;
@@ -41,11 +38,54 @@
     $: tablet = $responsiveMode === "tablet";
     $: mobile = $responsiveMode === "mobile";
 
+    let backgroundCanvasElement: HTMLCanvasElement;
+
     const timerEnded = () => {
         addOneToMainHeroSlideActiveIndex();
     };
 
     onMount(async () => {
+        // If the server is not controlled by us theres no point in trying to fetch images
+        getImageBrightness(backgroundImage, (brightness) => {
+            if (brightness == undefined || brightness > 120) {
+                $navbar_variant = "black";
+            } else {
+                $navbar_variant = "white";
+            }
+        });
+    });
+
+    $: backgroundImage &&
+        (() => {
+            if (backgroundCanvasElement) {
+                backgroundCanvasElement.height = Number(
+                    backgroundCanvasElement.parentElement?.clientHeight
+                );
+                backgroundCanvasElement.width = Number(
+                    backgroundCanvasElement.parentElement?.clientWidth
+                );
+
+                const img = new Image();
+                img.onload = () => {
+                    const ctx = backgroundCanvasElement?.getContext("2d");
+
+                    drawImageProp(
+                        ctx,
+                        img,
+                        0,
+                        0,
+                        backgroundCanvasElement?.width,
+                        backgroundCanvasElement?.height
+                    );
+                };
+
+                img.src = backgroundImage;
+            }
+        })();
+</script>
+
+<svelte:window
+    on:resize|capture={async () => {
         if (mobile) {
             backgroundImage = await fetchImageAndConvertToBlob(backgroundBanner);
         } else if (tablet) {
@@ -55,20 +95,7 @@
         } else {
             backgroundImage = await fetchImageAndConvertToBlob(backgroundImage); // This is the default one
         }
-
-        // If the server is not controlled by us theres no point in trying to fetch images
-
-        getImageBrightness(backgroundImage, (brightness) => {
-            if (brightness == undefined || brightness > 120) {
-                $navbar_variant = "black";
-            } else {
-                $navbar_variant = "white";
-            }
-        });
-    });
-</script>
-
-<svelte:window
+    }}
     on:focus={() => {
         $timerStore = "start";
     }}
@@ -77,182 +104,189 @@
     }}
 />
 
-<div
-    class="hero min-h-[60vh] md:min-h-screen w-screen bg-center bg-no-repeat"
-    style="background-image: url('{backgroundImage}');"
->
-    <div
-        class="hero-overlay from-base-100 via-base-100/[.8] md:via-base-100/[.0001] grid"
-        style="--tw-bg-opacity:0"
-    >
-        <div class="pt-8 md:pr-[72px] pl-6 md:pl-20 pb-0">
-            <Navbar />
-        </div>
-        <div
-            class="grid grid-flow-col auto-cols-max min-w-full content-end pb-8  justify-center md:justify-between"
-        >
-            <div class="hidden md:flex" />
-            <div class="flex items-center gap-3">
-                <Progress
-                    class="w-24 md:w-36"
-                    on:targetAchieved={timerEnded}
-                />
-
+<div class="inline-grid">
+    <div style="grid-area: 1 / 1 / 2 / 2">
+        <canvas
+            bind:this={backgroundCanvasElement}
+            class="h-full w-full"
+        />
+    </div>
+    <div style="grid-area: 1 / 1 / 2 / 2">
+        <div class="hero min-h-[60vh] md:min-h-screen w-screen bg-center bg-no-repeat">
+            <div
+                class="hero-overlay from-base-100 via-base-100/[.8] md:via-base-100/[.0001] grid"
+                style="--tw-bg-opacity:0"
+            >
+                <div class="pt-8 md:pr-[72px] pl-6 md:pl-20 pb-0">
+                    <Navbar />
+                </div>
                 <div
-                    class="w-56 flex justify-center swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"
+                    class="grid grid-flow-col auto-cols-max min-w-full content-end pb-8  justify-center md:justify-between"
                 >
-                    <div class="flex flex-row gap-3">
-                        {#each Array(data.length) as _, index}
-                            <!-- svelte-ignore a11y-click-events-have-key-events -->
-                            <svg
-                                height="10"
-                                width="10"
-                                class="cursor-pointer"
+                    <div class="hidden md:flex" />
+                    <div class="flex items-center gap-3">
+                        <Progress
+                            class="w-24 md:w-36"
+                            on:targetAchieved={timerEnded}
+                        />
+
+                        <div
+                            class="w-56 flex justify-center swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"
+                        >
+                            <div class="flex flex-row gap-3">
+                                {#each Array(data.length) as _, index}
+                                    <!-- svelte-ignore a11y-click-events-have-key-events -->
+                                    <svg
+                                        height="10"
+                                        width="10"
+                                        class="cursor-pointer"
+                                        on:click={() => {
+                                            mainHeroSlideActiveIndex = index;
+                                        }}
+                                    >
+                                        <circle
+                                            cx="5"
+                                            cy="5"
+                                            r="5"
+                                            style="fill:{index === mainHeroSlideActiveIndex
+                                                ? 'var(--swiper-pagination-color)'
+                                                : 'var(--swiper-pagination-bullet-inactive-color)'};
+                                        opacity:{index === mainHeroSlideActiveIndex
+                                                ? '1'
+                                                : 'var(--swiper-pagination-bullet-inactive-opacity)'}"
+                                        />
+                                    </svg>
+                                {/each}
+                            </div>
+                        </div>
+                        <div class="gap-4 hidden md:flex">
+                            <button
+                                class="btn btn-secondary btn-sm btn-square"
                                 on:click={() => {
-                                    mainHeroSlideActiveIndex = index;
+                                    minusOneToMainHeroSlideActiveIndex();
                                 }}
                             >
-                                <circle
-                                    cx="5"
-                                    cy="5"
-                                    r="5"
-                                    style="fill:{index === mainHeroSlideActiveIndex
-                                        ? 'var(--swiper-pagination-color)'
-                                        : 'var(--swiper-pagination-bullet-inactive-color)'};
-                                        opacity:{index === mainHeroSlideActiveIndex
-                                        ? '1'
-                                        : 'var(--swiper-pagination-bullet-inactive-opacity)'}"
+                                <ChevronLeft
+                                    height={24}
+                                    width={24}
+                                    color="black"
                                 />
-                            </svg>
-                        {/each}
+                            </button>
+                            <button
+                                class="btn btn-secondary btn-sm btn-square"
+                                on:click={() => {
+                                    addOneToMainHeroSlideActiveIndex();
+                                }}
+                            >
+                                <ChevronRight
+                                    height={24}
+                                    width={24}
+                                    color="black"
+                                />
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex items-center animate-bounce">
+                        <Mouse
+                            width={24}
+                            height={24}
+                            color="white"
+                        />
+                        <div class="px-3">scroll below</div>
                     </div>
                 </div>
-                <div class="gap-4 hidden md:flex">
-                    <button
-                        class="btn btn-secondary btn-sm btn-square"
-                        on:click={() => {
-                            minusOneToMainHeroSlideActiveIndex();
-                        }}
-                    >
-                        <ChevronLeft
-                            height={24}
-                            width={24}
-                            color="black"
-                        />
-                    </button>
-                    <button
-                        class="btn btn-secondary btn-sm btn-square"
-                        on:click={() => {
-                            addOneToMainHeroSlideActiveIndex();
-                        }}
-                    >
-                        <ChevronRight
-                            height={24}
-                            width={24}
-                            color="black"
-                        />
-                    </button>
-                </div>
             </div>
-            <div class="hidden md:flex items-center animate-bounce">
-                <Mouse
-                    width={24}
-                    height={24}
-                    color="white"
-                />
-                <div class="px-3">scroll below</div>
-            </div>
-        </div>
-    </div>
 
-    <div class="pl-10 md:pl-24 hero-content flex-col justify-self-start">
-        <div class="max-w-[80vw]">
-            <div class="text-secondary text-lg font-bold pb-3 flex gap-2">
-                Featured
-                <span class="flex items-center">
-                    <span
-                        style="display: inline-block; width: 60px; border-top: 4px solid; border-radius: 10px;"
-                    />
-                </span>
-            </div>
-            <ScrollArea
-                style="height:72px"
-                class="font-bold leading-8 md:leading-[4.25rem] text-3xl md:text-6xl"
-                on:mouseenter={() => {
-                    $timerStore = "pause";
-                }}
-                on:mouseleave={() => {
-                    $timerStore = "start";
-                }}
-                on:touchstart={() => {
-                    $timerStore = "pause";
-                }}
-                on:touchend={() => {
-                    $timerStore = "start";
-                }}
-            >
-                {animeTitle}
-            </ScrollArea>
-
-            <h1 class="font-bold py-8 hidden md:flex">
-                <span class="items pr-2">TV</span>
-                <span class="items pr-2">{animeEpisodeCount} eps</span>
-                <span class="items pr-2">Completed</span>
-                <span class="items pr-2">{animeAirTime}</span>
-                <span class="items">{animeStudio}</span>
-            </h1>
-            <ScrollArea
-                parentClass="mb-5"
-                style="min-height:110px"
-                class="max-h-24 font-normal text-gray-400 prose [text-shadow:-1px_-1px_0_#0000009e,1px_-1px_0_#0000008c,0px_1px_0_#0000009e,1px_0px_0_#00000061]"
-                offsetScrollbar
-                on:mouseenter={() => {
-                    $timerStore = "pause";
-                }}
-                on:mouseleave={() => {
-                    $timerStore = "start";
-                }}
-                on:touchstart={() => {
-                    $timerStore = "pause";
-                }}
-                on:touchend={() => {
-                    $timerStore = "start";
-                }}
-            >
-                {animeSummary}
-            </ScrollArea>
-            <div class="gap-4 pt-3 hidden md:flex">
-                {#each tags as tag}
-                    <span
-                        class="badge text-white bg-base-100 badge-lg rounded-md uppercase border-transparent leading-6 text-sm font-bold"
-                    >
-                        {tag}
-                    </span>
-                {/each}
-            </div>
-            <div class="mt-6 flex gap-4">
-                <button
-                    aria-label="Play"
-                    class="btn btn-md md:btn-lg btn-secondary rounded-[16px] px-5 "
-                >
-                    <Play
-                        width={24}
-                        height={24}
-                    />
-                </button>
-                <button
-                    class="btn btn-secondary btn-md md:btn-lg btn-outline border-4 rounded-[16px]"
-                >
-                    <div class="text-lg font-bold flex gap-2">
-                        Details
+            <div class="pl-10 md:pl-24 hero-content flex-col justify-self-start">
+                <div class="max-w-[80vw]">
+                    <div class="text-secondary text-lg font-bold pb-3 flex gap-2">
+                        Featured
                         <span class="flex items-center">
-                            <ChevronsRight
-                                height={24}
-                                width={24}
+                            <span
+                                style="display: inline-block; width: 60px; border-top: 4px solid; border-radius: 10px;"
                             />
                         </span>
                     </div>
-                </button>
+                    <ScrollArea
+                        style="height:72px"
+                        class="font-bold leading-8 md:leading-[4.25rem] text-3xl md:text-6xl"
+                        on:mouseenter={() => {
+                            $timerStore = "pause";
+                        }}
+                        on:mouseleave={() => {
+                            $timerStore = "start";
+                        }}
+                        on:touchstart={() => {
+                            $timerStore = "pause";
+                        }}
+                        on:touchend={() => {
+                            $timerStore = "start";
+                        }}
+                    >
+                        {animeTitle}
+                    </ScrollArea>
+
+                    <h1 class="font-bold py-8 hidden md:flex">
+                        <span class="items pr-2">TV</span>
+                        <span class="items pr-2">{animeEpisodeCount} eps</span>
+                        <span class="items pr-2">Completed</span>
+                        <span class="items pr-2">{animeAirTime}</span>
+                        <span class="items">{animeStudio}</span>
+                    </h1>
+                    <ScrollArea
+                        parentClass="mb-5"
+                        style="min-height:110px"
+                        class="max-h-24 font-normal text-gray-400 prose [text-shadow:-1px_-1px_0_#0000009e,1px_-1px_0_#0000008c,0px_1px_0_#0000009e,1px_0px_0_#00000061]"
+                        offsetScrollbar
+                        on:mouseenter={() => {
+                            $timerStore = "pause";
+                        }}
+                        on:mouseleave={() => {
+                            $timerStore = "start";
+                        }}
+                        on:touchstart={() => {
+                            $timerStore = "pause";
+                        }}
+                        on:touchend={() => {
+                            $timerStore = "start";
+                        }}
+                    >
+                        {animeSummary}
+                    </ScrollArea>
+                    <div class="gap-4 pt-3 hidden md:flex">
+                        {#each tags as tag}
+                            <span
+                                class="badge text-white bg-base-100 badge-lg rounded-md uppercase border-transparent leading-6 text-sm font-bold"
+                            >
+                                {tag}
+                            </span>
+                        {/each}
+                    </div>
+                    <div class="mt-6 flex gap-4">
+                        <button
+                            aria-label="Play"
+                            class="btn btn-md md:btn-lg btn-secondary rounded-[16px] px-5 "
+                        >
+                            <Play
+                                width={24}
+                                height={24}
+                            />
+                        </button>
+                        <button
+                            class="btn btn-secondary btn-md md:btn-lg btn-outline border-4 rounded-[16px]"
+                        >
+                            <div class="text-lg font-bold flex gap-2">
+                                Details
+                                <span class="flex items-center">
+                                    <ChevronsRight
+                                        height={24}
+                                        width={24}
+                                    />
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
