@@ -18,7 +18,6 @@
     import { timer as timerStore } from "$store/Timer";
 
     import Progress from "./Progress.svelte";
-    import { deepCloneBlobUrl } from "$functions/deepCloneBlob";
 
     export let data: any[];
     export let mainHeroSlideActiveIndex: number;
@@ -65,15 +64,14 @@
 
         // If the server is not controlled by us theres no point in trying to fetch images
         if (backgroundImageURL.startsWith(get(page).url.origin)) {
-            backgroundImage = await deepCloneBlobUrl(backgroundImageBlobURL);
+            backgroundImage = backgroundImageBlobURL;
         } else {
             backgroundImage = backgroundImageURL;
         }
 
         if (backgroundImageURL.startsWith(get(page).url.origin)) {
             // Deep Clone a blob object
-            const newBlob = await deepCloneBlobUrl(backgroundImageBlobURL);
-
+            const newBlob = backgroundImageBlobURL;
             getImageBrightness(newBlob, (brightness: any) => {
                 if (brightness < 120) {
                     $navbar_variant = "white";
