@@ -1,5 +1,6 @@
-import { page } from "$app/stores";
 import { get } from "svelte/store";
+
+import { page } from "$app/stores";
 
 export const fetchImageAndConvertToBlob = async (url: string) => {
     // If the domain is not controlled by us we cant have control over cors

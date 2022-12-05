@@ -1,6 +1,7 @@
+import { get } from "svelte/store";
+
 import { page } from "$app/stores";
 import { UrlMaps } from "$data/urls";
-import { get } from "svelte/store";
 
 /**
  * Credit goes to = https://stackoverflow.com/questions/38211798/detect-if-image-is-dark-light-and-addclass-dark-light-to-parent
