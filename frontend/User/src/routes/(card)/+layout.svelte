@@ -1,12 +1,14 @@
 <script lang="ts">
-	import { blur } from 'svelte/transition';
 	import { onMount } from 'svelte';
+	import { blur } from 'svelte/transition';
+
+	import AnimeCore from '$icons/AnimeCore.svelte';
 
 	let CHOICE_NUMBER = 1;
-	let CHOICES: typeof window.IMAGE_CHOICES = [];
+	let CHOICES: typeof window.DJANGO.IMAGE_CHOICES = [];
 
 	onMount(() => {
-		CHOICES = window.IMAGE_CHOICES;
+		CHOICES = window.DJANGO.IMAGE_CHOICES;
 
 		setInterval(() => {
 			const index = Math.floor(Math.random() * CHOICES.length);
@@ -14,15 +16,6 @@
 			console.log(index);
 		}, 5000);
 	});
-
-	const formatType = (input: string) => {
-		switch (input) {
-			case 'anime':
-				return 'the anime';
-			case 'pixiv':
-				return 'the artist';
-		}
-	};
 </script>
 
 <svelte:head>
@@ -34,7 +27,16 @@
 <div class="grid h-screen">
 	<!-- Background Image Container -->
 	{#each CHOICES as item}
-		{#if CHOICES.indexOf(item) == CHOICE_NUMBER}]
+		{#if CHOICES.indexOf(item) == CHOICE_NUMBER}
+			{@const type = () => {
+				switch (item.type) {
+					case 'anime':
+						return 'the anime';
+					case 'pixiv':
+						return 'the artist';
+				}
+			}}
+
 			<div transition:blur|local class="bg-black h-screen fixed" style="grid-area: 1 / 1 / 2 / 2;">
 				<div
 					class="h-screen w-screen bg-no-repeat bg-center bg-cover brightness-90"
@@ -43,9 +45,15 @@
 				<div
 					class="absolute inset-0 bg-gradient-to-t from-base-100 via-base-100/[.8] md:via-base-100/[.0001]"
 				/>
+
+				<!-- Top animecore logo div  -->
+				<div class="absolute top-8 left-8">
+					<AnimeCore width="164" height="25" />
+				</div>
+				<!-- Background from anime div  -->
 				<div class="absolute bottom-8 left-8">
 					<div class="flex flex-col">
-						<div class="text-secondary">Background from {formatType(item.type)}</div>
+						<div class="text-secondary">Background from {type()}</div>
 						<div class="text-white">{item.name}</div>
 					</div>
 				</div>

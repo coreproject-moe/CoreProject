@@ -1,6 +1,6 @@
 import adapter from '@sveltejs/adapter-static';
-import preprocess from 'svelte-preprocess';
 import path from 'path';
+import preprocess from 'svelte-preprocess';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -11,7 +11,11 @@ const config = {
             postcss: true
         })
     ],
-
+    vitePlugin: {
+        experimental: {
+            useVitePreprocess: true
+        }
+    },
     kit: {
         appDir: 'svelte__user',
         adapter: adapter({ fallback: 'app.html' }),

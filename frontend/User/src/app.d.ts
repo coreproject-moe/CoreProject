@@ -9,10 +9,13 @@ declare namespace App {
 }
 
 interface Window {
-	IMAGE_CHOICES: Array<{
-		type: 'pixiv' | 'anime';
-		name: string;
-		image: string;
-	}>;
-	CSRFTOKEN: string;
+	DJANGO: {
+		IMAGE_CHOICES: Array<{
+			type: 'pixiv' | 'anime';
+			name: string;
+			image: string;
+		}>;
+		CSRFTOKEN: string;
+		USER_IS_AUTHENTICATED: boolean;
+	};
 }

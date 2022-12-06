@@ -79,17 +79,16 @@
 			component: FiveZeroZero
 		}
 	];
-
 	let errorPage = errorPages.find((item) => item.status === $page.status);
+
+	const errorMessage = $page?.error?.message as string;
+	const status = Number($page?.status).toString();
 </script>
 
 <svelte:head>
 	<title>CoreProject | {$page.status}</title>
 </svelte:head>
 
-<svelte:component
-	this={errorPage?.component}
-	status={$page.status}
-	errorMessage={$page.error?.message}
-	errorText={errorPage?.text}
-/>
+{#if errorPage}
+	<svelte:component this={errorPage.component} {status} {errorMessage} errorText={errorPage.text} />
+{/if}

@@ -1,4 +1,3 @@
-<!-- https://github.com/baseplate-admin/CoreProject/blob/django-patch/backend/django_core/apps/user/templates/user/signup.html -->
 <script lang="ts">
 	import reporter from '@felte/reporter-tippy';
 	import { validator } from '@felte/validator-yup';
@@ -12,7 +11,6 @@
 			?.required('Please Enter User Name')
 			?.min(0)
 			?.max(50, 'User name must be less than 50 Characters'),
-		email: yup?.string()?.email('Enter a valid Email')?.required('Please Enter Email'),
 		password: yup
 			?.string()
 			?.min(8, 'Password must be more than 8 Characters')
@@ -20,19 +18,12 @@
 				/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
 				'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
 			)
-			?.max(1024, 'Password must be less than 1024 Characters'),
-		confirm_password: yup
-			?.string()
-			?.oneOf(
-				[yup.ref('password'), null],
-				'<b>Confirm Password</b> and <b>Password</b> are not the same'
-			)
+			?.max(1024, 'Password must be less than 1024 Characters')
 	});
 	// Creating the form
 	const { form } = createForm({
 		initialValues: {
 			username: '',
-			email: '',
 			password: ''
 		},
 		onSubmit: (values, context) => {
@@ -59,7 +50,7 @@
 </script>
 
 <svelte:head>
-	<title>CoreProject | Sign Up</title>
+	<title>CoreProject | Login</title>
 </svelte:head>
 
 <div
@@ -92,17 +83,11 @@
 					<input
 						style="--tw-bg-opacity:0.30"
 						type="text"
-						placeholder="Username"
+						placeholder="Username or Email"
 						name="username"
 						class="input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0"
 					/>
-					<input
-						style="--tw-bg-opacity:0.30"
-						type="text"
-						placeholder="Email"
-						name="email"
-						class="input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0"
-					/>
+
 					<input
 						style="--tw-bg-opacity:0.30"
 						type="text"
@@ -110,17 +95,10 @@
 						name="password"
 						class="input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0"
 					/>
-					<input
-						style="--tw-bg-opacity:0.30"
-						type="text"
-						placeholder="Confirm Password"
-						name="confirm_password"
-						class="input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0"
-					/>
 				</div>
 				<div class="flex justify-center mt-5 items-center gap-2">
-					<button class="btn btn-secondary font-bold text-black" type="submit">Register</button>
-					or <a class="underline" href="/login">login</a>
+					<button class="btn btn-secondary font-bold text-black" type="submit">Login</button>
+					or <a class="underline" href="/signup">signup</a>
 				</div>
 			</form>
 		</div>
