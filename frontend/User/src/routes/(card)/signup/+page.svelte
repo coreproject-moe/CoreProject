@@ -1,8 +1,8 @@
 <!-- https://github.com/baseplate-admin/CoreProject/blob/django-patch/backend/django_core/apps/user/templates/user/signup.html -->
 <script lang="ts">
-	import { createForm } from 'felte';
-	import { validator } from '@felte/validator-yup';
 	import reporter from '@felte/reporter-tippy';
+	import { validator } from '@felte/validator-yup';
+	import { createForm } from 'felte';
 	import * as yup from 'yup';
 
 	// Creating yup schema
