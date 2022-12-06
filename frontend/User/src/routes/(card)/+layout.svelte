@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { blur } from 'svelte/transition';
 	import { onMount } from 'svelte';
+	import AnimeCore from '$icons/AnimeCore.svelte';
 
 	let CHOICE_NUMBER = 1;
 	let CHOICES: typeof window.DJANGO.IMAGE_CHOICES = [];
@@ -43,6 +44,12 @@
 				<div
 					class="absolute inset-0 bg-gradient-to-t from-base-100 via-base-100/[.8] md:via-base-100/[.0001]"
 				/>
+
+				<!-- Top animecore logo div  -->
+				<div class="absolute top-8 left-8">
+					<AnimeCore />
+				</div>
+				<!-- Background from anime div  -->
 				<div class="absolute bottom-8 left-8">
 					<div class="flex flex-col">
 						<div class="text-secondary">Background from {type()}</div>
