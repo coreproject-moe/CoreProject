@@ -22,7 +22,7 @@
         "@typescript-eslint/parser": "^5.42.1",
         "autoprefixer": "^10.4.13",
         "cssnano": "^5.1.14",
-        "daisyui": "^2.39.1",
+        "daisyui": "^2.42.1",
         "eslint": "^8.27.0",
         "eslint-config-prettier": "^8.5.0",
         "eslint-plugin-simple-import-sort": "^8.0.0",
