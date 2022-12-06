@@ -13,7 +13,7 @@ module.exports = {
         ecmaVersion: 2020
     },
     globals: { svelte: true },
-        rules: {
+    rules: {
         /** Sort imports */
         "simple-import-sort/imports": "warn",
         "simple-import-sort/exports": "warn",
