@@ -1,4 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" {...$$props} fill="none" viewBox="0 0 36 36">
+<script lang="ts">
+    type $$Props = svelte.JSX.HTMLAttributes<SVGElement>;
+</script>
+
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    {...$$props}
+    fill="none"
+    viewBox="0 0 36 36"
+>
     <path
         stroke="currentColor"
         stroke-linecap="round"

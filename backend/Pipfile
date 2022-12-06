@@ -42,7 +42,7 @@ pyrate-limiter = {extras = ["redis"], version = "*"}
 sqlalchemy = {extras = ["postgresql_asyncpg"], version = ">=2.0.0b2"}
 # Web servers
 gunicorn = {extras = ["setproctile"], version = "*"}
-uvicorn = {extras = ["standard"], version = "*"}
+uvicorn = {version = "*"}
 # Image processing
 pillow = "*"
 # Discord API
@@ -72,14 +72,14 @@ types_redis = "*"
 django_stubs = {extras = ["compatible_mypy"], version = "*"}
 
 [requires]
-python_version = "3.10"
+python_version = "3.11"
 
 [scripts]
 ## Dev Servers
-dev_django = "python ./django_core/manage.py runserver  0.0.0.0:8003"
+dev_django = "uvicorn --app-dir=django_core core.asgi:application --reload --port 8003"
 dev_aiohttp = 'adev runserver ./tsukaeru/server.py --app-factory=aiohttp_app'
 ## Prod servers
-prod_uvicorn = "gunicorn django_core/core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
+prod_uvicorn = "gunicorn --app-dir=django_core core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
 prod_aiohttp = "gunicorn tsukaeru.server:aiohttp_app -w 4 --bind localhost:8001 --worker-class aiohttp.GunicornUVLoopWebWorker" # We want to run this without any proxy or anything
 ##  Migrations
 sync = "python ./django_core/manage.py migrate"

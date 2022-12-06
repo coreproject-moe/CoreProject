@@ -1,13 +1,20 @@
 <script lang="ts">
+    import { UrlMaps } from "$data/urls";
+
     export let status: string;
     export let errorMessage: string;
     export let errorText: string;
 
     import Confused from "$kaomoji/Confused.svelte";
+
+    const urls = new UrlMaps();
 </script>
 
 <div class="flex items-center justify-center h-screen flex-col text-center gap-12">
-    <Confused width={414} height={123} />
+    <Confused
+        width={414}
+        height={123}
+    />
     <h1 class="text-indigo-700 text-3xl">
         <b>{status}</b>
         -

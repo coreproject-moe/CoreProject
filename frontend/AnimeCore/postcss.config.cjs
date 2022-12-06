@@ -22,16 +22,6 @@ const config = {
             autoprefixer: false,
             preset: ["default"]
         })
-        // !dev &&
-        //     purgecss({
-        //         content: ["./src/**/**/*.{svelte,html,js,ts}"],
-        //         defaultExtractor: (content) =>
-        //             content.match(/[\w\-:.\/\[\]\#\,\(\)]+(?<!:)/g) || [],
-        //         safelist: {
-        //             deep: [],
-        //             greedy: [/swiper/, /svelte/]
-        //         }
-        //     })
     ]
 };
 

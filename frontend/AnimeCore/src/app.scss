@@ -1,46 +1,3 @@
-@font-face {
-    font-family: "Kokoro";
-    src: url("/fonts/Kokoro/Kokoro-SemiBoldItalic.woff2") format("woff2");
-    font-weight: 600;
-    font-style: italic;
-    font-display: swap;
-}
-@font-face {
-    font-family: "Kokoro";
-    src: url("/fonts/Kokoro/Kokoro-SemiBold.woff2") format("woff2");
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: "Kokoro";
-    src: url("/fonts/Kokoro/Kokoro-BoldItalic.woff2") format("woff2");
-    font-weight: bold;
-    font-style: italic;
-    font-display: swap;
-}
-@font-face {
-    font-family: "Kokoro";
-    src: url("/fonts/Kokoro/Kokoro-Italic.woff2") format("woff2");
-    font-weight: normal;
-    font-style: italic;
-    font-display: swap;
-}
-@font-face {
-    font-family: "Kokoro";
-    src: url("/fonts/Kokoro/Kokoro-Regular.woff2") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
-    font-family: "Kokoro";
-    src: url("/fonts/Kokoro/Kokoro-Bold.woff2") format("woff2");
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -57,34 +14,4 @@ html {
     // DO NOT REMOVE
     // I wasted 2 hours of my life fixing this
     overscroll-behavior-block: contain;
-}
-
-
-
-// Hack from https://w3bits.com/prevent-chrome-pull-to-refresh-css/
-.body,
-.root {
-    /* Break the flow */
-    position: absolute;
-    top: 0px;
-
-    /* Give them all the available space */
-    width: 100%;
-    height: 100%;
-
-    /* Remove the margins if any */
-    margin: 0;
-
-    /* Allow them to scroll down the document */
-    overflow-y: hidden;
-}
-
-.body {
-    /* Sending body at the bottom of the stack */
-    z-index: 1;
-}
-
-.root {
-    /* Making the wrapper stack above the body */
-    z-index: 2;
 }
