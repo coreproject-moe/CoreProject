@@ -68,7 +68,7 @@ types_redis = "*"
 django_stubs = {extras = ["compatible_mypy"], version = "*"}
 
 [requires]
-python_version = "3.10"
+python_version = "3.11"
 
 [scripts]
 ## Dev Servers
