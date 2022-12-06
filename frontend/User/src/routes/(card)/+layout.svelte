@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { blur } from 'svelte/transition';
 	import { onMount } from 'svelte';
+	import { blur } from 'svelte/transition';
+	
 	import AnimeCore from '$icons/AnimeCore.svelte';
 
 	let CHOICE_NUMBER = 1;
