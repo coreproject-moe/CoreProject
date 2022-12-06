@@ -47,7 +47,7 @@
 
 				<!-- Top animecore logo div  -->
 				<div class="absolute top-8 left-8">
-					<AnimeCore />
+					<AnimeCore width="164" height="25" />
 				</div>
 				<!-- Background from anime div  -->
 				<div class="absolute bottom-8 left-8">
