@@ -1,6 +1,9 @@
 import vercel from "@sveltejs/adapter-vercel";
+import static_adapter from "@sveltejs/adapter-static";
 import path from "path";
 import preprocess from "svelte-preprocess";
+
+const is_static = process.env.BUILD_ENV ?? false;
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -13,13 +16,20 @@ const config = {
         })
     ],
     kit: {
-        appDir:'svelte__animecore',
+        appDir: "svelte__animecore",
         // adapter: adapter({ fallback: "app.html" }),
-        adapter: vercel({
-            // an array of dependencies that esbuild should treat
-            // as external when bundling functions
-            external: []
-        }),
+        adapter: is_static
+            ? static_adapter({
+                  fallback: "app.html",
+                  precompress: false,
+                  strict: true
+              })
+            : vercel({
+                  // an array of dependencies that esbuild should treat
+                  // as external when bundling functions
+                  external: []
+              }),
+
         alias: {
             $store: path.resolve("./src/lib/store"),
             $hooks: path.resolve("./src/hooks"),

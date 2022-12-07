@@ -18,4 +18,8 @@
         anime_rating: string;
         updated: Date;
     }>;
+
+    console.log(data.mal_id);
 </script>
+
+<div style="background-image: url('{data?.anime_background}')" />
