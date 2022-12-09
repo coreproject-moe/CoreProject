@@ -1,5 +1,5 @@
 import { MAL } from "$data/urls";
-
+import dayjs from "dayjs";
 import type { PageLoad } from "./$types";
 
 export const load: PageLoad = async ({
@@ -11,7 +11,7 @@ export const load: PageLoad = async ({
     const response = await fetch(url);
     const data = await response?.json();
 
-    const animeData: Partial<{
+    const jikan_data: Partial<{
         mal_id: number;
         url: string;
         images: {
@@ -169,10 +169,41 @@ export const load: PageLoad = async ({
         ];
     }> = data.data;
 
+    const jikan_remapped_to_backend: Partial<{
+        mal_id: number;
+        episodes: [
+            {
+                episode_number: number;
+            }
+        ];
+        title_english: string;
+        title_japanese: string;
+        anime_source: string;
+        anime_aired_from: Date;
+        anime_aired_to: Date;
+        anime_cover: string; // Image
+        anime_synopsis: string;
+        anime_background: string;
+        anime_rating: string;
+        updated: Date;
+    }> = {
+        mal_id: jikan_data?.mal_id ?? 0,
+        episodes: [{ episode_number: data?.episodes }],
+        title_english: jikan_data?.title_english ?? "",
+        title_japanese: jikan_data?.title_japanese ?? "",
+        anime_source: jikan_data?.source ?? "",
+        anime_aired_from: dayjs(jikan_data?.aired?.from, "YYYY-MM-DD").toDate(),
+        anime_aired_to: dayjs(jikan_data?.aired?.to, "YYYY-MM-DD").toDate(),
+        anime_cover: jikan_data?.images?.webp.image_url ?? jikan_data?.images?.jpg?.image_url ?? "",
+        anime_synopsis: jikan_data?.synopsis ?? "",
+        anime_background: jikan_data?.background ?? "",
+        updated: new Date()
+    };
+
     const errorMessage: string = data.status === 404 && data.message;
 
     return {
-        animeData: animeData,
+        animeData: jikan_remapped_to_backend,
         error: errorMessage
     };
 };
