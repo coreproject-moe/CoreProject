@@ -1,13 +1,9 @@
 <script lang="ts">
-    import { UrlMaps } from "$data/urls";
-
-    export let status: string;
+    export let status: number;
     export let errorMessage: string;
     export let errorText: string;
 
     import Confused from "$kaomoji/Confused.svelte";
-
-    const urls = new UrlMaps();
 </script>
 
 <div class="flex items-center justify-center h-screen flex-col text-center gap-12">

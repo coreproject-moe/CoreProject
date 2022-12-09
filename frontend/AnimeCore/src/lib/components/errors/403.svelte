@@ -1,6 +1,5 @@
 <script lang="ts">
-    /* eslint-disable */
-    export let status: string;
+    export let status: number;
     export let errorMessage: string;
     export let errorText: string;
 
@@ -8,7 +7,10 @@
 </script>
 
 <div class="flex items-center justify-center h-screen flex-col text-center gap-12">
-    <Alone width="321" height="118" />
+    <Alone
+        width="321"
+        height="118"
+    />
     <h1 class="text-indigo-700 text-3xl">
         <b>{status}</b>
         -

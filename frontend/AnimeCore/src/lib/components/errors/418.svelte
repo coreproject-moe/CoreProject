@@ -1,5 +1,5 @@
 <script lang="ts">
-    export let status: string;
+    export let status: number;
     export let errorMessage: string;
     export let errorText: string;
 
