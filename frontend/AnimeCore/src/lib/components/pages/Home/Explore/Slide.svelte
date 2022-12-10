@@ -63,7 +63,7 @@
             <div class="relative mt-2">
                 <span class="absolute inset-y-0 left-0 flex items-center pl-2">
                     <Search
-                        class="pl-1"
+                        class="ml-1"
                         color="white"
                         height="18"
                         width="18"
