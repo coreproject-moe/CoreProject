@@ -61,8 +61,10 @@
         const img = new Image();
         img.onload = () => {
             const ctx = backgroundCanvasElement?.getContext("2d");
-            backgroundCanvasElement.height = img.height;
-            backgroundCanvasElement.width = img.width;
+            if (backgroundCanvasElement) {
+                backgroundCanvasElement.height = img.height;
+                backgroundCanvasElement.width = img.width;
+            }
 
             ctx?.drawImage(img, 0, 0);
         };
