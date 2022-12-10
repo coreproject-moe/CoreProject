@@ -1,5 +1,7 @@
-import { MAL } from "$data/urls";
 import dayjs from "dayjs";
+
+import { MAL } from "$data/urls";
+
 import type { PageLoad } from "./$types";
 
 export const load: PageLoad = async ({
