@@ -6,6 +6,8 @@
     import GenreSlide from "$components/pages/Home/Genre/Slide.svelte";
     import LibrarySlide from "$components/pages/Home/Library/Slide.svelte";
     import MainHeroSlide from "$components/pages/Home/MainHero/Slide.svelte";
+    import ExploreSlide from "$components/pages/Home/Explore/Slide.svelte";
+
     import data from "$data/mock/main_hero_data.json";
     import { navbar_variant } from "$store/Navbar_Variant";
     import { timer as timerStore } from "$store/Timer";
@@ -103,6 +105,9 @@
     </div>
     <div class="carousel-item h-auto snap-always">
         <LibrarySlide />
+    </div>
+    <div class="carousel-item h-auto snap-always">
+        <ExploreSlide />
     </div>
     <!-- Show a footer for  android users -->
     {#if ["Android OS", "iOS", null].includes(browser && browser.os)}
