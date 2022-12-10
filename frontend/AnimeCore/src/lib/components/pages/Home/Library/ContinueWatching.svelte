@@ -4,7 +4,7 @@
 
     import continueWatching from "$data/mock/continue_watching.json";
     import Play from "$icons/Play.svelte";
-    
+
     const emblaConfig: { options: EmblaOptionsType; plugins: any } = {
         options: {
             loop: false,
