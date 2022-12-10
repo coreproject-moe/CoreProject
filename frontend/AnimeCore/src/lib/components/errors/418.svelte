@@ -7,7 +7,10 @@
 </script>
 
 <div class="flex items-center justify-center h-screen flex-col text-center gap-12">
-    <HowCouldYouDoIt width="309" height="108" />
+    <HowCouldYouDoIt
+        width="309"
+        height="108"
+    />
     <h1 class="text-indigo-700 text-3xl">
         <b>{status}</b>
         -

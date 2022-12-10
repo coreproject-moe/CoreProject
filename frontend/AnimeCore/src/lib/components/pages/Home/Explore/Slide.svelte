@@ -1,5 +1,5 @@
 <script lang="ts">
-    let selectionChoice: String = "popular";
+    let selectionChoice = "popular";
 </script>
 
 <div class="hero min-h-[60vh] md:min-h-screen w-screen bg-center bg-no-repeat">

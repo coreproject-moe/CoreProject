@@ -1,6 +1,13 @@
 <script lang="ts">
     type $$Props = svelte.JSX.HTMLAttributes<SVGElement>;
-</script><svg {...$$props} viewBox="0 0 309 108" fill="none" xmlns="http://www.w3.org/2000/svg">
+</script>
+
+<svg
+    {...$$props}
+    viewBox="0 0 309 108"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+>
     <path
         d="M18.4737 105.095C19.0689 106.427 18.1011 107.939 16.6421 107.939H13.3008C12.63 107.939 12.0022 107.604 11.639 107.04C7.94268 101.301 5.10469 95.3512 3.125 89.1894C1.04167 82.705 0 76.429 0 70.3613C0 62.8353 1.28906 55.7129 3.86719 48.9941C5.97716 43.4984 8.61877 38.4071 11.792 33.7204C12.1583 33.1794 12.7721 32.8613 13.4255 32.8613H16.7836C18.2364 32.8613 19.2052 34.3623 18.6272 35.6952C15.7315 42.3728 13.6891 48.147 12.5 53.0175C11.1719 58.5384 10.5078 64.3978 10.5078 70.5957C10.5078 74.8665 10.8984 79.2415 11.6797 83.7207C12.487 88.1998 13.5807 92.4576 14.9609 96.4941C15.6901 98.6192 16.861 101.486 18.4737 105.095Z"
         fill="url(#paint0_linear_507_333)"
@@ -31,14 +38,60 @@
         d="M281.721 14.6875C281.721 10.0521 282.945 6.44531 285.393 3.86719C287.867 1.28906 291.161 0 295.276 0C299.364 0 302.646 1.30208 305.12 3.90625C307.594 6.48438 308.831 10.0781 308.831 14.6875C308.831 19.2969 307.594 22.8906 305.12 25.4688C302.672 28.0469 299.391 29.3359 295.276 29.3359C291.161 29.3359 287.867 28.0599 285.393 25.5078C282.945 22.9297 281.721 19.3229 281.721 14.6875ZM289.963 14.7656C289.963 17.6302 290.445 19.6745 291.409 20.8984C292.372 22.0964 293.622 22.6953 295.159 22.6953C296.695 22.6953 297.945 22.0964 298.909 20.8984C299.898 19.6745 300.393 17.6302 300.393 14.7656C300.393 11.901 299.898 9.86979 298.909 8.67188C297.945 7.44792 296.695 6.83594 295.159 6.83594C293.622 6.83594 292.372 7.4349 291.409 8.63281C290.445 9.83073 289.963 11.875 289.963 14.7656Z"
         fill="url(#paint4_linear_507_333)"
     />
-    <ellipse cx="55.2914" cy="67.1" rx="6.35" ry="6.1" fill="#AAA2EC" />
-    <circle cx="55.4922" cy="68" r="4" fill="#DCD9F7" fill-opacity="0.6" />
-    <circle cx="55.9922" cy="68.5" r="1.5" fill="#7569E1" fill-opacity="0.4" />
-    <circle cx="52.9922" cy="64.5" r="1" fill="white" fill-opacity="0.8" />
-    <ellipse cx="200.861" cy="67.0502" rx="6.4" ry="6.1" fill="#23197D" />
-    <circle cx="200.043" cy="68" r="4" fill="#7569E1" />
-    <circle cx="200.543" cy="68.5" r="1.5" fill="#23197D" />
-    <circle cx="197.543" cy="64.5" r="1" fill="white" fill-opacity="0.8" />
+    <ellipse
+        cx="55.2914"
+        cy="67.1"
+        rx="6.35"
+        ry="6.1"
+        fill="#AAA2EC"
+    />
+    <circle
+        cx="55.4922"
+        cy="68"
+        r="4"
+        fill="#DCD9F7"
+        fill-opacity="0.6"
+    />
+    <circle
+        cx="55.9922"
+        cy="68.5"
+        r="1.5"
+        fill="#7569E1"
+        fill-opacity="0.4"
+    />
+    <circle
+        cx="52.9922"
+        cy="64.5"
+        r="1"
+        fill="white"
+        fill-opacity="0.8"
+    />
+    <ellipse
+        cx="200.861"
+        cy="67.0502"
+        rx="6.4"
+        ry="6.1"
+        fill="#23197D"
+    />
+    <circle
+        cx="200.043"
+        cy="68"
+        r="4"
+        fill="#7569E1"
+    />
+    <circle
+        cx="200.543"
+        cy="68.5"
+        r="1.5"
+        fill="#23197D"
+    />
+    <circle
+        cx="197.543"
+        cy="64.5"
+        r="1"
+        fill="white"
+        fill-opacity="0.8"
+    />
     <defs>
         <linearGradient
             id="paint0_linear_507_333"
@@ -48,8 +101,15 @@
             y2="107.939"
             gradientUnits="userSpaceOnUse"
         >
-            <stop stop-color="#DCD9F7" stop-opacity="0.6" />
-            <stop offset="1" stop-color="#DCD9F7" stop-opacity="0" />
+            <stop
+                stop-color="#DCD9F7"
+                stop-opacity="0.6"
+            />
+            <stop
+                offset="1"
+                stop-color="#DCD9F7"
+                stop-opacity="0"
+            />
         </linearGradient>
         <linearGradient
             id="paint1_linear_507_333"
@@ -59,8 +119,14 @@
             y2="138"
             gradientUnits="userSpaceOnUse"
         >
-            <stop offset="0.279734" stop-color="white" />
-            <stop offset="1" stop-color="#C4C4C4" />
+            <stop
+                offset="0.279734"
+                stop-color="white"
+            />
+            <stop
+                offset="1"
+                stop-color="#C4C4C4"
+            />
         </linearGradient>
         <linearGradient
             id="paint2_linear_507_333"
@@ -70,8 +136,14 @@
             y2="138"
             gradientUnits="userSpaceOnUse"
         >
-            <stop offset="0.279734" stop-color="white" />
-            <stop offset="1" stop-color="#C4C4C4" />
+            <stop
+                offset="0.279734"
+                stop-color="white"
+            />
+            <stop
+                offset="1"
+                stop-color="#C4C4C4"
+            />
         </linearGradient>
         <linearGradient
             id="paint3_linear_507_333"
@@ -81,8 +153,15 @@
             y2="107.939"
             gradientUnits="userSpaceOnUse"
         >
-            <stop stop-color="#DCD9F7" stop-opacity="0.6" />
-            <stop offset="1" stop-color="#DCD9F7" stop-opacity="0" />
+            <stop
+                stop-color="#DCD9F7"
+                stop-opacity="0.6"
+            />
+            <stop
+                offset="1"
+                stop-color="#DCD9F7"
+                stop-opacity="0"
+            />
         </linearGradient>
         <linearGradient
             id="paint4_linear_507_333"
@@ -93,7 +172,10 @@
             gradientUnits="userSpaceOnUse"
         >
             <stop stop-color="#070519" />
-            <stop offset="1" stop-color="#7569E1" />
+            <stop
+                offset="1"
+                stop-color="#7569E1"
+            />
         </linearGradient>
     </defs>
 </svg>

@@ -14,8 +14,16 @@
     }
 </script>
 
-<input bind:checked={value} type="checkbox" {id} class="modal-toggle" />
-<label class="modal modal-bottom" for={id}>
+<input
+    bind:checked={value}
+    type="checkbox"
+    {id}
+    class="modal-toggle"
+/>
+<label
+    class="modal modal-bottom"
+    for={id}
+>
     <div class="modal-box">
         <h3 class="font-bold text-lg">Congratulations random Internet user!</h3>
         <p class="py-4">
@@ -23,7 +31,12 @@
             free!
         </p>
         <div class="modal-action">
-            <label for={id} class="btn">Yay!</label>
+            <label
+                for={id}
+                class="btn"
+            >
+                Yay!
+            </label>
         </div>
     </div>
 </label>
