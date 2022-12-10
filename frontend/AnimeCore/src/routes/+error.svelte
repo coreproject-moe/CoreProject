@@ -90,6 +90,6 @@
 <svelte:component
     this={errorPage?.component}
     status={$page.status}
-    errorMessage={$page.error?.message}
-    errorText={errorPage?.text}
+    errorMessage={String($page.error?.message)}
+    errorText={String(errorPage?.text)}
 />

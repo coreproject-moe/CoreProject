@@ -3,6 +3,7 @@
     import { blur } from "svelte/transition";
     import { swipe } from "svelte-gestures";
 
+    import ExploreSlide from "$components/pages/Home/Explore/Slide.svelte";
     import GenreSlide from "$components/pages/Home/Genre/Slide.svelte";
     import LibrarySlide from "$components/pages/Home/Library/Slide.svelte";
     import MainHeroSlide from "$components/pages/Home/MainHero/Slide.svelte";
@@ -103,6 +104,9 @@
     </div>
     <div class="carousel-item h-auto snap-always">
         <LibrarySlide />
+    </div>
+    <div class="carousel-item h-auto snap-always">
+        <ExploreSlide />
     </div>
     <!-- Show a footer for  android users -->
     {#if ["Android OS", "iOS", null].includes(browser && browser.os)}

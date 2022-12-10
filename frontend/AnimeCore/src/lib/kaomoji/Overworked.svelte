@@ -1,6 +1,13 @@
 <script lang="ts">
     type $$Props = svelte.JSX.HTMLAttributes<SVGElement>;
-</script><svg {...$$props} viewBox="0 0 387 114" fill="none" xmlns="http://www.w3.org/2000/svg">
+</script>
+
+<svg
+    {...$$props}
+    viewBox="0 0 387 114"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+>
     <g filter="url(#filter0_d_507_318)">
         <path
             d="M275.602 37.2022C275.602 34.7489 276.268 33.0422 277.602 32.0822C278.935 31.0689 280.562 30.5622 282.482 30.5622C284.348 30.5622 285.948 31.0689 287.282 32.0822C288.615 33.0422 289.282 34.7489 289.282 37.2022C289.282 39.5489 288.615 41.2555 287.282 42.3222C285.948 43.3355 284.348 43.8422 282.482 43.8422C280.562 43.8422 278.935 43.3355 277.602 42.3222C276.268 41.2555 275.602 39.5489 275.602 37.2022Z"
@@ -56,7 +63,10 @@
             filterUnits="userSpaceOnUse"
             color-interpolation-filters="sRGB"
         >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood
+                flood-opacity="0"
+                result="BackgroundImageFix"
+            />
             <feColorMatrix
                 in="SourceAlpha"
                 type="matrix"
@@ -65,9 +75,19 @@
             />
             <feOffset dy="4" />
             <feGaussianBlur stdDeviation="2" />
-            <feComposite in2="hardAlpha" operator="out" />
-            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_507_318" />
+            <feComposite
+                in2="hardAlpha"
+                operator="out"
+            />
+            <feColorMatrix
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+            />
+            <feBlend
+                mode="normal"
+                in2="BackgroundImageFix"
+                result="effect1_dropShadow_507_318"
+            />
             <feBlend
                 mode="normal"
                 in="SourceGraphic"
@@ -84,7 +104,10 @@
             gradientUnits="userSpaceOnUse"
         >
             <stop stop-color="#070519" />
-            <stop offset="1" stop-color="#7569E1" />
+            <stop
+                offset="1"
+                stop-color="#7569E1"
+            />
         </linearGradient>
         <linearGradient
             id="paint1_linear_507_318"
@@ -94,8 +117,15 @@
             y2="104.836"
             gradientUnits="userSpaceOnUse"
         >
-            <stop stop-color="#DCD9F7" stop-opacity="0.6" />
-            <stop offset="1" stop-color="white" stop-opacity="0" />
+            <stop
+                stop-color="#DCD9F7"
+                stop-opacity="0.6"
+            />
+            <stop
+                offset="1"
+                stop-color="white"
+                stop-opacity="0"
+            />
         </linearGradient>
         <linearGradient
             id="paint2_linear_507_318"
@@ -105,8 +135,15 @@
             y2="104.836"
             gradientUnits="userSpaceOnUse"
         >
-            <stop stop-color="#DCD9F7" stop-opacity="0.6" />
-            <stop offset="1" stop-color="white" stop-opacity="0" />
+            <stop
+                stop-color="#DCD9F7"
+                stop-opacity="0.6"
+            />
+            <stop
+                offset="1"
+                stop-color="white"
+                stop-opacity="0"
+            />
         </linearGradient>
     </defs>
 </svg>
