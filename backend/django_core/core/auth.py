@@ -1,5 +1,6 @@
 from apps.user.models import CustomUser, Token
 from ninja.security import HttpBearer
+
 from django.shortcuts import get_object_or_404
 
 
