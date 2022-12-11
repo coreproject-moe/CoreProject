@@ -20,7 +20,7 @@ from django.urls import include, path
 from django.views import debug
 from django.views.generic import TemplateView
 
-from .api_v1 import api
+from core.api_v1 import api
 
 handler400 = TemplateView.as_view(template_name="errors/400.html")
 handler403 = TemplateView.as_view(template_name="errors/403.html")

@@ -33,9 +33,10 @@
 	// Creating the form
 	const { form } = createForm({
 		initialValues: {
-			username: '',
-			email: '',
-			password: ''
+			username: 'baseplate-admin',
+			email: 'zarifahnaf@outlook.com',
+			password: 'DX42dhrubo@',
+			confirm_password: 'DX42dhrubo@'
 		},
 		onSubmit: (values, context) => {
 			const data = new FormData();
@@ -43,8 +44,8 @@
 			data.append('email', values.email);
 			data.append('password', values.password);
 
-			fetch(urls.signup_url, {
-				method: 'POST',
+			fetch('http://127.0.0.1:8003/api/v1/user/sign_up', {
+				method: 'post',
 				body: data
 			});
 		},

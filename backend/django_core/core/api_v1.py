@@ -1,7 +1,6 @@
 from ninja import NinjaAPI
-from ninja.security import django_auth
 
-api = NinjaAPI(csrf=True, title="CoreProjectAPI")
+api = NinjaAPI(title="CoreProjectAPI")
 
 # Router Configurations
 # ___ DO NOT MODIFY ____
@@ -22,5 +21,5 @@ api.add_router("/studios", studio_router)
 api.add_router("/staffs", staff_router)
 
 # Protected Routes
-api.add_router("/trackers", tracker_router, auth=django_auth)
-api.add_router("/user", user_router, auth=django_auth)
+api.add_router("/trackers", tracker_router)
+api.add_router("/user", user_router)

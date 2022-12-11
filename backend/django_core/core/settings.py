@@ -41,10 +41,6 @@ MAX_REQUESTS_PER_MINUTE = 55
 REQUEST_STATUS_CODES_TO_RETRY = [408, 429, 500, 502, 503, 504]
 BUCKET_NAME = "coreproject"
 
-ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "localhost",
-]
 
 # HOST configurations
 # We are using this to hyperlink model relations
@@ -103,6 +99,7 @@ MIDDLEWARE = [
     "django.middleware.cache.UpdateCacheMiddleware",  # Cache
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
+    "corsheaders.middleware.CorsPostCsrfMiddleware",  # Cors headers
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
@@ -272,13 +269,23 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # django-cors-headers settings
 # https://pypi.org/project/django-cors-headers/
 
-CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:3000",
-    "http://127.0.0.1:8000",
-    "http://localhost:3000",
-    "http://localhost:8000",
+
+CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS = [
+    # Port = 5173
     "http://localhost:5173",
+    "http://127.0.0.1:5173",
 ]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+CORS_ALLOW_CREDENTIALS = True
 
 # settings.py -- alternative configuration method
 # https://huey.readthedocs.io/en/latest/contrib.html#setting-things-up

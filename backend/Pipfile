@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 django = {version = ">=4.1", extras = ["argon2"]}
+tzdata = "*"
 # User Agent Parser
 user-agents = "*"
 # Regex Parser
@@ -47,7 +48,6 @@ uvicorn = {version = "*"}
 pillow = "*"
 # Discord API
 "discord.py" = {extras = ["voice", "speed"], version = "*"}
-
 
 [dev-packages]
 # Aiohttp
