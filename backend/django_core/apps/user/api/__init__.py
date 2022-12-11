@@ -47,8 +47,6 @@ def get_individual_user_info(request: HttpRequest, username: str):
 # Router Configuration
 # __ DO NOT MODIFY __
 
-from .login import router as login_router
 from .sign_up import router as signup_router
 
 router.add_router("", signup_router, tags=["user"])
-router.add_router("", login_router, tags=["user"])
