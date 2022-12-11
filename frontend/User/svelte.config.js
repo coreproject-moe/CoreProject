@@ -6,14 +6,7 @@ import path from 'path';
 const config = {
     // Consult https://github.com/sveltejs/svelte-preprocess
     // for more information about preprocessors
-    preprocess: [
-        vitePreprocess()
-    ],
-    vitePlugin: {
-        experimental: {
-            useVitePreprocess: true
-        }
-    },
+    preprocess: [vitePreprocess()],
     kit: {
         appDir: 'svelte__user',
         adapter: adapter({ fallback: 'app.html' }),

@@ -26,4 +26,12 @@ export class UrlMaps {
 			return this.api_root + '/api/v1/user/sign_up';
 		}
 	}
+
+	public get login_url() {
+		if (this.is_django_used_for_rendering) {
+			return this.api_root + window?.django.URLS.LOGIN;
+		} else {
+			return this.api_root + '/api/v1/user/login';
+		}
+	}
 }
