@@ -13,7 +13,7 @@ router = Router()
 
 @router.get("/kitsu", response=KitsuGETSchema)
 def get_kitsu_info(request: HttpRequest):
-    response = get_object_or_404(KitsuModel, user=request.user)
+    response = get_object_or_404(KitsuModel, user=request.auth)
     return response
 
 
@@ -21,7 +21,7 @@ def get_kitsu_info(request: HttpRequest):
 @login_required
 def post_kitsu_info(request: HttpRequest, payload: KitsuPOSTSchema):
     instance, created = KitsuModel.objects.update_or_create(
-        user=request.user,
+        user=request.auth,
         defaults={
             **payload.dict(),
             "created_at": timezone.now(),

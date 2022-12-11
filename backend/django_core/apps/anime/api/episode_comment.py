@@ -43,7 +43,7 @@ def post_individual_anime_episode_comment(
     payload: EpisodeCommentPOSTSchema,
 ) -> EpisodeCommentModel:
     data: EpisodeCommentModel = EpisodeCommentModel.objects.create(
-        user=request.user, **payload.dict()
+        user=request.auth, **payload.dict()
     )
 
     AnimeModel.objects.get(pk=anime_id).anime_episodes.get(

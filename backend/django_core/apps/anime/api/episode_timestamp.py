@@ -46,7 +46,7 @@ def get_individual_anime_episode_timestamp_info(
     query = get_list_or_404(
         get_object_or_404(AnimeModel, pk=anime_id)
         .anime_episodes.get(episode_number__in=[episode_number])
-        .episode_timestamps.filter(user=request.user)
+        .episode_timestamps.filter(user=request.auth)
     )
     return query
 
@@ -64,7 +64,7 @@ def post_individual_anime_episode_timestamp_info(
 ) -> EpisodeTimestampModel:
     query = EpisodeTimestampModel.objects.update_or_create(
         episode__episode_number__in=[episode_number],
-        user=request.user,
+        user=request.auth,
         defaults={
             "timestamp": payload.dict().get("timestamp"),
         },
