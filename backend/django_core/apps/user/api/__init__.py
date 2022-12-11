@@ -1,5 +1,9 @@
 from ninja import Router
-
+from ninja import Form
+from pydantic import EmailStr
+from django.conf import settings
+from pydantic import AnyUrl
+from ninja import UploadedFile, File
 from django.contrib.auth import get_user_model
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
@@ -15,13 +19,29 @@ def get_user_info(request: HttpRequest):
     return user
 
 
+@router.patch("/", response=UserSchema)
+def patch_individual_user_info(
+    request: HttpRequest,
+    username: str = Form(...),
+    first_name: str = Form(...),
+    last_name: str = Form(...),
+    password: str = Form(...),
+    email: EmailStr = Form(...),
+    username_discriminator: int = Form(
+        default=None, gt=0, lt=int(str(settings.USERNAME_DISCRIMINATOR_LENGTH * "9"))
+    ),
+    avatar_provider: AnyUrl = Form(...),
+    avatar: UploadedFile = File(...),
+):
+    pass
+
+
 @router.get("/{str:username}/", response=UserSchema)
 def get_individual_user_info(request: HttpRequest, username: str):
     user = get_object_or_404(
         get_user_model().objects.get_username_with_discriminator(),
         username_with_discriminator=username,
     )
-
     return user
 
 
