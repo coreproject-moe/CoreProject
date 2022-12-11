@@ -7,19 +7,20 @@ from ninja import UploadedFile, File
 from django.contrib.auth import get_user_model
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
+from core.auth import AuthBearer
 
 from ..schemas import UserSchema
 
 router = Router(tags=["user"])
 
 
-@router.get("/", response=UserSchema)
+@router.get("/", response=UserSchema, auth=AuthBearer())
 def get_user_info(request: HttpRequest):
     user = get_user_model().objects.get(id=request.user.id)
     return user
 
 
-@router.patch("/", response=UserSchema)
+@router.patch("/", response=UserSchema, auth=AuthBearer())
 def patch_individual_user_info(
     request: HttpRequest,
     username: str = Form(...),
