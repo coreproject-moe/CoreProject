@@ -46,5 +46,7 @@
         "yup": "^0.32.11"
     },
     "type": "module",
-    "dependencies": {}
+    "dependencies": {
+        "js-cookie": "^3.0.1"
+    }
 }

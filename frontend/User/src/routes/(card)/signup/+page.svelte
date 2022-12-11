@@ -1,5 +1,6 @@
 <!-- https://github.com/baseplate-admin/CoreProject/blob/django-patch/backend/django_core/apps/user/templates/user/signup.html -->
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import reporter from '@felte/reporter-tippy';
 	import { validator } from '@felte/validator-yup';
 	import { createForm } from 'felte';
@@ -48,8 +49,9 @@
 				method: 'post',
 				body: data
 			});
+			
 			if (res.ok){
-				alert('Signup Successful')
+				goto('/login')
 			}
 		},
 		onSuccess(response, context) {

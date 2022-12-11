@@ -3,8 +3,9 @@
 	import { validator } from '@felte/validator-yup';
 	import { createForm } from 'felte';
 	import * as yup from 'yup';
-
+	import Cookies from 'js-cookie';
 	import { UrlMaps } from '$lib/urls';
+	import { page } from '$app/stores';
 	const urls = new UrlMaps();
 	// Creating yup schema
 	const schema = yup.object({
@@ -16,9 +17,9 @@
 		password: yup
 			?.string()
 			?.min(8, 'Password must be more than 8 Characters')
-
 			?.max(1024, 'Password must be less than 1024 Characters')
 	});
+
 	// Creating the form
 	const { form } = createForm({
 		initialValues: {
@@ -35,7 +36,8 @@
 				body: data
 			});
 			if (res.ok) {
-				alert('Login Successful');
+				const data = await res.json();
+				Cookies.set('token', data.token, { domain: $page.url.hostname });
 			}
 		},
 		onSuccess(response, context) {
