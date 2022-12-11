@@ -1,9 +1,10 @@
 <script lang="ts">
-	import { UrlMaps } from '$lib/urls';
 	import reporter from '@felte/reporter-tippy';
 	import { validator } from '@felte/validator-yup';
 	import { createForm } from 'felte';
 	import * as yup from 'yup';
+	
+	import { UrlMaps } from '$lib/urls';
 	const urls = new UrlMaps();
 	// Creating yup schema
 	const schema = yup.object({

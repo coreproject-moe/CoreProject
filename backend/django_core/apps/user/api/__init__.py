@@ -1,9 +1,7 @@
-from ninja import Router
-from ninja import Form
-from pydantic import EmailStr
+from ninja import File, Form, Router, UploadedFile
+from pydantic import AnyUrl, EmailStr
+
 from django.conf import settings
-from pydantic import AnyUrl
-from ninja import UploadedFile, File
 from django.contrib.auth import get_user_model
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
@@ -49,8 +47,8 @@ def get_individual_user_info(request: HttpRequest, username: str):
 # Router Configuration
 # __ DO NOT MODIFY __
 
-from .sign_up import router as signup_router
 from .login import router as login_router
+from .sign_up import router as signup_router
 
 router.add_router("", signup_router, tags=["user"])
 router.add_router("", login_router, tags=["user"])

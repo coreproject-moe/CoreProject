@@ -1,5 +1,6 @@
 from ninja import Form, Router
 from pydantic import EmailStr
+
 from django.contrib.auth import authenticate
 from django.http import HttpRequest
 
