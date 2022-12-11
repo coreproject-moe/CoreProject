@@ -13,7 +13,7 @@ router = Router()
 
 @router.get("/mal", response=MALGETSchema)
 def get_mal_info(request: HttpRequest):
-    response = get_object_or_404(MalModel, user=request.user)
+    response = get_object_or_404(MalModel, user=request.auth)
     return response
 
 
@@ -21,7 +21,7 @@ def get_mal_info(request: HttpRequest):
 @login_required
 def post_mal_info(request: HttpRequest, payload: MALPOSTSchema):
     instance, created = MalModel.objects.update_or_create(
-        user=request.user,
+        user=request.auth,
         defaults={
             **payload.dict(),
             "created_at": timezone.now(),

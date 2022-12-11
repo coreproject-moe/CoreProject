@@ -13,7 +13,7 @@ router = Router()
 
 @router.get("/anilist", response=AnilistGETSchema)
 def get_anilist_info(request: HttpRequest):
-    response = get_object_or_404(AnilistModel, user=request.user)
+    response = get_object_or_404(AnilistModel, user=request.auth)
     return response
 
 
@@ -21,7 +21,7 @@ def get_anilist_info(request: HttpRequest):
 @login_required
 def post_anilist_info(request: HttpRequest, payload: AnilistPOSTSchema):
     instance, created = AnilistModel.objects.update_or_create(
-        user=request.user,
+        user=request.auth,
         defaults={
             **payload.dict(),
             "created_at": timezone.now(),
