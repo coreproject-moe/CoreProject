@@ -1,4 +1,5 @@
 from ninja import NinjaAPI
+
 from .auth import AuthBearer
 
 api = NinjaAPI(title="CoreProjectAPI")

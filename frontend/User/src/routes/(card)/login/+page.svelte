@@ -3,7 +3,7 @@
 	import { validator } from '@felte/validator-yup';
 	import { createForm } from 'felte';
 	import * as yup from 'yup';
-	
+
 	import { UrlMaps } from '$lib/urls';
 	const urls = new UrlMaps();
 	// Creating yup schema
