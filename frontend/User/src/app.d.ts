@@ -9,12 +9,16 @@ declare namespace App {
 }
 
 interface Window {
-	DJANGO: {
+	django: {
 		IMAGE_CHOICES: Array<{
 			type: 'pixiv' | 'anime';
 			name: string;
 			image: string;
 		}>;
+		URLS: {
+			SIGNUP: string;
+		};
+		DEBUG: string;
 		CSRFTOKEN: string;
 		USER_IS_AUTHENTICATED: boolean;
 	};

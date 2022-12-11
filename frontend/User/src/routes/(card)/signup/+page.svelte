@@ -1,10 +1,11 @@
 <!-- https://github.com/baseplate-admin/CoreProject/blob/django-patch/backend/django_core/apps/user/templates/user/signup.html -->
 <script lang="ts">
+	import { UrlMaps } from '$lib/urls';
 	import reporter from '@felte/reporter-tippy';
 	import { validator } from '@felte/validator-yup';
 	import { createForm } from 'felte';
 	import * as yup from 'yup';
-
+	const urls = new UrlMaps();
 	// Creating yup schema
 	const schema = yup.object({
 		username: yup
@@ -28,6 +29,7 @@
 				'<b>Confirm Password</b> and <b>Password</b> are not the same'
 			)
 	});
+	console.log(urls.signup_url);
 	// Creating the form
 	const { form } = createForm({
 		initialValues: {
@@ -36,7 +38,15 @@
 			password: ''
 		},
 		onSubmit: (values, context) => {
-			console.log(values);
+			const data = new FormData();
+			data.append('username', values.username);
+			data.append('email', values.email);
+			data.append('password', values.password);
+
+			fetch(urls.signup_url, {
+				method: 'POST',
+				body: data
+			});
 		},
 		onSuccess(response, context) {
 			// Do something with the returned value from `onSubmit`.
