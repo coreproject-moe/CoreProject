@@ -17,8 +17,8 @@ def post_user_signup_info(
     email: EmailStr = Form(...),
 ):
     user = CustomUser.objects.create_user(
-        email,
-        password,
+        email=email,
+        password=password,
         username=username,
     )
     return user
