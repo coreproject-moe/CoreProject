@@ -1,5 +1,6 @@
-from django.apps import AppConfig
 from typing import NoReturn, Self
+
+from django.apps import AppConfig
 
 
 class UserConfig(AppConfig):

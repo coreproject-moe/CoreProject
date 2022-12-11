@@ -14,13 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+from core.api_v1 import api
+
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 from django.views import debug
 from django.views.generic import TemplateView
-
-from core.api_v1 import api
 
 handler400 = TemplateView.as_view(template_name="errors/400.html")
 handler403 = TemplateView.as_view(template_name="errors/403.html")
