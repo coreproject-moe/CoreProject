@@ -130,3 +130,13 @@ class CustomUser(
         unique_together = [
             ("username", "username_discriminator"),
         ]
+
+
+class Token(models.Model):
+    token = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = "user_token"
+        verbose_name = _("token")
+        verbose_name_plural = _("tokens")

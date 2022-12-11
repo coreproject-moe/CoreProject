@@ -16,19 +16,17 @@ class EmailOrUsernameModelBackend(ModelBackend):
     Source: https://stackoverflow.com/a/35836674/59984
     """
 
-    def authenticate(
-        self,
-        request: HttpRequest | None,
-        username: str | None = None,
-        password: str | None = None,
-        **kwargs: Any,
-    ) -> CustomUser | None:
+    @staticmethod
+    def get_user_given_username_and_password(
+        username_or_email: str, password: str
+    ) -> CustomUser:
         user_model = CustomUser
         # So `username` is something like baseplate-admin#0001
         # we need to split to get the username and discriminator
         try:
             user_model = user_model.objects.get_username_with_discriminator().get(
-                Q(username_with_discriminator=username) | Q(email__iexact=username)
+                Q(username_with_discriminator=username_or_email)
+                | Q(email__iexact=username_or_email)
             )
             if check_password(password, user_model.password):
                 query = user_model
@@ -38,3 +36,12 @@ class EmailOrUsernameModelBackend(ModelBackend):
 
         finally:
             return query
+
+    def authenticate(
+        self,
+        request: HttpRequest | None,
+        username: str | None = None,
+        password: str | None = None,
+        **kwargs: Any,
+    ) -> CustomUser | None:
+        return self.get_user_given_username_and_password(username, password)
