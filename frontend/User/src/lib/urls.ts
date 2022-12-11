@@ -3,7 +3,7 @@ import { browser } from '$app/environment';
 export class UrlMaps {
 	private django = browser ? window?.django : undefined;
 
-	public get is_django_used_for_rendering() {
+	private get is_django_used_for_rendering() {
 		if (!this.django) {
 			return undefined;
 		}

@@ -29,25 +29,27 @@
 				'<b>Confirm Password</b> and <b>Password</b> are not the same'
 			)
 	});
-	console.log(urls.signup_url);
 	// Creating the form
 	const { form } = createForm({
 		initialValues: {
-			username: 'baseplate-admin',
-			email: 'zarifahnaf@outlook.com',
-			password: 'DX42dhrubo@',
-			confirm_password: 'DX42dhrubo@'
+			username: '',
+			email: '',
+			password: '',
+			confirm_password: ''
 		},
-		onSubmit: (values, context) => {
+		onSubmit: async (values, context) => {
 			const data = new FormData();
 			data.append('username', values.username);
 			data.append('email', values.email);
 			data.append('password', values.password);
 
-			fetch('http://127.0.0.1:8003/api/v1/user/sign_up', {
+			const res = await fetch(urls.signup_url, {
 				method: 'post',
 				body: data
 			});
+			if (res.ok){
+				alert('Signup Successful')
+			}
 		},
 		onSuccess(response, context) {
 			// Do something with the returned value from `onSubmit`.
