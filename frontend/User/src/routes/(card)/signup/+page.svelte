@@ -5,6 +5,8 @@
 	import { createForm } from 'felte';
 	import * as yup from 'yup';
 
+	import { UrlMaps } from '$lib/urls';
+	const urls = new UrlMaps();
 	// Creating yup schema
 	const schema = yup.object({
 		username: yup
@@ -33,10 +35,22 @@
 		initialValues: {
 			username: '',
 			email: '',
-			password: ''
+			password: '',
+			confirm_password: ''
 		},
-		onSubmit: (values, context) => {
-			console.log(values);
+		onSubmit: async (values, context) => {
+			const data = new FormData();
+			data.append('username', values.username);
+			data.append('email', values.email);
+			data.append('password', values.password);
+
+			const res = await fetch(urls.signup_url, {
+				method: 'post',
+				body: data
+			});
+			if (res.ok){
+				alert('Signup Successful')
+			}
 		},
 		onSuccess(response, context) {
 			// Do something with the returned value from `onSubmit`.

@@ -49,8 +49,12 @@
             }
         </style>
         <script id="django">
-            var django_object = {
+            window.django = {
                 CSRFTOKEN: '{{ csrf_token }}',
+                DEBUG: "{{ debug|yesno:'true,false' }}",
+                URLS: {
+                    SIGNUP: "{{% url 'sign_up' %}}"
+                },
                 IMAGE_CHOICES: [
                     {
                         type: 'anime',
@@ -72,11 +76,10 @@
                 ],
                 USER_IS_AUTHENTICATED: Boolean("{{ request.user.is_authenticated|yesno:'true,false' }}")
             };
-            window.DJANGO = django_object;
         </script>
         %sveltekit.head%
     </head>
     <body>
-        %sveltekit.body%
+        <div>%sveltekit.body%</div>
     </body>
 </html>

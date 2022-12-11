@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 django = {version = ">=4.1", extras = ["argon2"]}
+tzdata = "*"
 # User Agent Parser
 user-agents = "*"
 # Regex Parser
@@ -48,7 +49,6 @@ pillow = "*"
 # Discord API
 "discord.py" = {extras = ["voice", "speed"], version = "*"}
 
-
 [dev-packages]
 # Aiohttp
 aiohttp-devtools = "*"
@@ -76,7 +76,8 @@ python_version = "3.11"
 
 [scripts]
 ## Dev Servers
-dev_django = "uvicorn --app-dir=django_core core.asgi:application --reload --port 8003"
+# dev_django = "uvicorn --app-dir=django_core core.asgi:application --reload --port 8003"
+dev_django = 'python ./django_core/manage.py runserver 127.0.0.1:8003'
 dev_aiohttp = 'adev runserver ./tsukaeru/server.py --app-factory=aiohttp_app'
 ## Prod servers
 prod_uvicorn = "gunicorn --app-dir=django_core core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only

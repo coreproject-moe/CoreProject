@@ -5,10 +5,10 @@
 	import AnimeCore from '$icons/AnimeCore.svelte';
 
 	let CHOICE_NUMBER = 1;
-	let CHOICES: typeof window.DJANGO.IMAGE_CHOICES = [];
+	let CHOICES: typeof window.django.IMAGE_CHOICES = [];
 
 	onMount(() => {
-		CHOICES = window.DJANGO.IMAGE_CHOICES;
+		CHOICES = window.django.IMAGE_CHOICES;
 
 		setInterval(() => {
 			const index = Math.floor(Math.random() * CHOICES.length);
