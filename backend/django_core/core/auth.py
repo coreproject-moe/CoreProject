@@ -1,8 +1,8 @@
-from ninja.security import HttpBasicAuth
-from django.contrib.auth import get_user_model
 from apps.user.models import CustomUser
-from django.db.models import Q
+from ninja.security import HttpBasicAuth
+
 from django.contrib.auth.hashers import check_password
+from django.db.models import Q
 
 
 class AuthBearer(HttpBasicAuth):
