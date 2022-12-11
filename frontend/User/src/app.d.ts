@@ -17,6 +17,7 @@ interface Window {
 		}>;
 		URLS: {
 			SIGNUP: string;
+			LOGIN: string;
 		};
 		DEBUG: string;
 		CSRFTOKEN: string;

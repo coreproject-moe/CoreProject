@@ -1,9 +1,10 @@
 <script lang="ts">
+	import { UrlMaps } from '$lib/urls';
 	import reporter from '@felte/reporter-tippy';
 	import { validator } from '@felte/validator-yup';
 	import { createForm } from 'felte';
 	import * as yup from 'yup';
-
+	const urls = new UrlMaps();
 	// Creating yup schema
 	const schema = yup.object({
 		username: yup
@@ -14,10 +15,7 @@
 		password: yup
 			?.string()
 			?.min(8, 'Password must be more than 8 Characters')
-			?.matches(
-				/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
-				'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character'
-			)
+
 			?.max(1024, 'Password must be less than 1024 Characters')
 	});
 	// Creating the form
@@ -26,8 +24,18 @@
 			username: '',
 			password: ''
 		},
-		onSubmit: (values, context) => {
-			console.log(values);
+		onSubmit: async (values, context) => {
+			const data = new FormData();
+			data.append('username', values.username);
+			data.append('password', values.password);
+
+			const res = await fetch(urls.login_url, {
+				method: 'post',
+				body: data
+			});
+			if (res.ok) {
+				alert('Login Successful');
+			}
 		},
 		onSuccess(response, context) {
 			// Do something with the returned value from `onSubmit`.

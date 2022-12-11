@@ -124,6 +124,7 @@ if DEBUG:
     INTERNAL_IPS = [
         "127.0.0.1",
     ]
+
 # Cookie override
 CSRF_COOKIE_SAMESITE = "Strict"
 SESSION_COOKIE_SAMESITE = "Strict"
