@@ -16,7 +16,6 @@ def post_user_login_info(
     username: str | EmailStr = Form(...),
     password: str = Form(...),
 ):
-    print(username)
     user = EmailOrUsernameModelBackend.get_user_given_username_and_password(
         username, password
     )

@@ -1,11 +1,11 @@
 <!-- https://github.com/baseplate-admin/CoreProject/blob/django-patch/backend/django_core/apps/user/templates/user/signup.html -->
 <script lang="ts">
-	import { goto } from '$app/navigation';
 	import reporter from '@felte/reporter-tippy';
 	import { validator } from '@felte/validator-yup';
 	import { createForm } from 'felte';
 	import * as yup from 'yup';
 
+	import { goto } from '$app/navigation';
 	import { UrlMaps } from '$lib/urls';
 	const urls = new UrlMaps();
 	// Creating yup schema
@@ -39,7 +39,7 @@
 			password: '',
 			confirm_password: ''
 		},
-		onSubmit: async (values, context) => {
+		onSubmit: async (values /*context*/) => {
 			const data = new FormData();
 			data.append('username', values.username);
 			data.append('email', values.email);
@@ -49,17 +49,17 @@
 				method: 'post',
 				body: data
 			});
-			
-			if (res.ok){
-				goto('/login')
+
+			if (res.ok) {
+				goto('/login');
 			}
 		},
-		onSuccess(response, context) {
-			// Do something with the returned value from `onSubmit`.
-		},
-		onError(err, context) {
-			// Do something with the error thrown from `onSubmit`.
-		},
+		// onSuccess(response, context) {
+		// 	// Do something with the returned value from `onSubmit`.
+		// },
+		// onError(err, context) {
+		// 	// Do something with the error thrown from `onSubmit`.
+		// },
 		extend: [
 			validator({ schema }),
 			reporter({
@@ -70,7 +70,7 @@
 		],
 
 		// Debounced async validation
-		debounced: {}
+		// debounced: {}
 	});
 </script>
 
