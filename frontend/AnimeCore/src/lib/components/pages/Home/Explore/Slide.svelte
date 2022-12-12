@@ -1,12 +1,13 @@
 <script lang="ts">
     import FourBoxSquares from "$icons/FourBoxSquares.svelte";
     import Search from "$icons/Search.svelte";
+    import AnimeCard from "./AnimeCard.svelte";
 
     let selectionChoice = "popular";
 </script>
 
-<div class="hero min-h-[60vh] md:min-h-screen w-screen bg-center bg-no-repeat flex flex-col">
-    <div class="flex gap-3 md:gap-32 pt-16">
+<div class="hero min-h-[60vh] md:min-h-screen w-screen flex flex-col">
+    <div class="flex gap-3 md:gap-32 pt-8">
         {#each ["popular", "trending", "top rated", "upcoming"] as item}
             <button
                 class="btn {selectionChoice.toLowerCase() === item.toLowerCase()
@@ -21,7 +22,7 @@
         {/each}
     </div>
 
-    <div class="flex gap-7 mt-11">
+    <div class="flex gap-7 mt-10">
         <div class="flex flex-col w-[135px]">
             <span>Time Range</span>
             <select class="mt-2 select w-full bg-neutral">
@@ -93,5 +94,9 @@
         </div>
     </div>
 
-    <div class="mt-[90px] grid grid-cols-3">Hello</div>
+    <div class="mt-[40px] grid gap-10 grid-cols-3">
+        {#each Array(9) as item}
+            <AnimeCard />
+        {/each}
+    </div>
 </div>
