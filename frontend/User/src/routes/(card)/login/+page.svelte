@@ -26,7 +26,7 @@
 			username: '',
 			password: ''
 		},
-		onSubmit: async (values, context) => {
+		onSubmit: async (values /*context*/) => {
 			const data = new FormData();
 			data.append('username', values.username);
 			data.append('password', values.password);
@@ -40,12 +40,12 @@
 				Cookies.set('token', data.token, { domain: $page.url.hostname });
 			}
 		},
-		onSuccess(response, context) {
-			// Do something with the returned value from `onSubmit`.
-		},
-		onError(err, context) {
-			// Do something with the error thrown from `onSubmit`.
-		},
+		// onSuccess(response, context) {
+		// 	// Do something with the returned value from `onSubmit`.
+		// },
+		// onError(err, context) {
+		// 	// Do something with the error thrown from `onSubmit`.
+		// },
 		extend: [
 			validator({ schema }),
 			reporter({
@@ -53,10 +53,10 @@
 					allowHTML: true
 				}
 			})
-		],
+		]
 
 		// Debounced async validation
-		debounced: {}
+		// debounced: {}
 	});
 </script>
 

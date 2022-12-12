@@ -20,14 +20,16 @@ class EmailOrUsernameModelBackend(ModelBackend):
     def get_user_given_username_and_password(
         username_or_email: str, password: str
     ) -> CustomUser:
-        user_model = CustomUser
         # So `username` is something like baseplate-admin#0001
         # we need to split to get the username and discriminator
         try:
-            user_model = user_model.objects.get_username_with_discriminator().get(
-                Q(username_with_discriminator=username_or_email)
-                | Q(email__iexact=username_or_email)
+            user_model: CustomUser = (
+                CustomUser.objects.get_username_with_discriminator().get(
+                    Q(username_with_discriminator=username_or_email)
+                    | Q(email__iexact=username_or_email)
+                )
             )
+            # If password matches then return user
             if check_password(password, user_model.password):
                 query = user_model
 
