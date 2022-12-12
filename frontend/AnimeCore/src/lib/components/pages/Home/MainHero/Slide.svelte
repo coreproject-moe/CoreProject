@@ -97,7 +97,7 @@
     }}
 />
 
-<div class="inline-grid">
+<div class="inline-grid min-h-[60vh] md:min-h-screen w-screen">
     <div
         class="relative z-0"
         style="grid-area: 1 / 1 / 2 / 2"
@@ -111,7 +111,7 @@
         class="z-10"
         style="grid-area: 1 / 1 / 2 / 2"
     >
-        <div class="hero min-h-[60vh] md:min-h-screen w-screen bg-center bg-no-repeat">
+        <div class="hero h-full w-full bg-center bg-no-repeat">
             <div
                 class="hero-overlay from-base-100 via-base-100/[.8] md:via-base-100/[.0001] grid"
                 style="--tw-bg-opacity:0"
