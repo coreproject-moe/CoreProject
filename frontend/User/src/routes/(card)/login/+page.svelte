@@ -2,10 +2,11 @@
 	import reporter from '@felte/reporter-tippy';
 	import { validator } from '@felte/validator-yup';
 	import { createForm } from 'felte';
-	import * as yup from 'yup';
 	import Cookies from 'js-cookie';
-	import { UrlMaps } from '$lib/urls';
+	import * as yup from 'yup';
+
 	import { page } from '$app/stores';
+	import { UrlMaps } from '$lib/urls';
 	const urls = new UrlMaps();
 	// Creating yup schema
 	const schema = yup.object({
@@ -26,7 +27,7 @@
 			username: '',
 			password: ''
 		},
-		onSubmit: async (values, context) => {
+		onSubmit: async (values /*context*/) => {
 			const data = new FormData();
 			data.append('username', values.username);
 			data.append('password', values.password);
@@ -40,12 +41,12 @@
 				Cookies.set('token', data.token, { domain: $page.url.hostname });
 			}
 		},
-		onSuccess(response, context) {
-			// Do something with the returned value from `onSubmit`.
-		},
-		onError(err, context) {
-			// Do something with the error thrown from `onSubmit`.
-		},
+		// onSuccess(response, context) {
+		// 	// Do something with the returned value from `onSubmit`.
+		// },
+		// onError(err, context) {
+		// 	// Do something with the error thrown from `onSubmit`.
+		// },
 		extend: [
 			validator({ schema }),
 			reporter({
@@ -53,10 +54,10 @@
 					allowHTML: true
 				}
 			})
-		],
+		]
 
 		// Debounced async validation
-		debounced: {}
+		// debounced: {}
 	});
 </script>
 
