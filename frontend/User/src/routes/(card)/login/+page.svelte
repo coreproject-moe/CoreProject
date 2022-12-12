@@ -4,7 +4,7 @@
 	import { createForm } from 'felte';
 	import Cookies from 'js-cookie';
 	import * as yup from 'yup';
-	
+
 	import { page } from '$app/stores';
 	import { UrlMaps } from '$lib/urls';
 	const urls = new UrlMaps();

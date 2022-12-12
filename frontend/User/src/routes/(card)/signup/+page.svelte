@@ -4,7 +4,7 @@
 	import { validator } from '@felte/validator-yup';
 	import { createForm } from 'felte';
 	import * as yup from 'yup';
-	
+
 	import { goto } from '$app/navigation';
 	import { UrlMaps } from '$lib/urls';
 	const urls = new UrlMaps();
