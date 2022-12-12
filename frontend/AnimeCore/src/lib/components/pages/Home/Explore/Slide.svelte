@@ -1,6 +1,7 @@
 <script lang="ts">
     import FourBoxSquares from "$icons/FourBoxSquares.svelte";
     import Search from "$icons/Search.svelte";
+    
     import AnimeCard from "./AnimeCard.svelte";
 
     let selectionChoice = "popular";
