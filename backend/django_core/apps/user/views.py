@@ -1,8 +1,7 @@
 from collections.abc import Generator
 import hashlib
-from io import BytesIO
-import mimetypes
 from typing import IO
+from core.utility import sendfile, sendbytes
 
 from yarl import URL
 
@@ -47,15 +46,7 @@ async def avatar_view(
 
     if user.avatar:
         avatar_file = open(user.avatar.path, "rb")
-        file_iterator = read_files_in_chunks(avatar_file)
-        response = StreamingHttpResponse(
-            streaming_content=file_iterator,
-        )
-        response["content-type"] = str(
-            mimetypes.MimeTypes().guess_type(
-                url=user.avatar.path,
-            )[0]
-        )
+        response = sendfile(avatar_file)
 
     else:
         # Proxy from Libravatar
@@ -73,11 +64,9 @@ async def avatar_view(
             )
         ) as session:
             async with session.get(url, allow_redirects=True) as r:
-                response = HttpResponse(
-                    BytesIO(await r.read()),
-                    headers={
-                        "content-type": r.headers["content-type"],
-                    },
+                response = sendbytes(
+                    await r.read(),
+                    content_type=r.headers["content-type"],
                 )
 
     return response
