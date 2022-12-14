@@ -1,10 +1,11 @@
 from collections.abc import Generator
-import mimetypes
-from django.http import HttpResponse, StreamingHttpResponse
 from io import BufferedReader, BytesIO
+import mimetypes
 from pathlib import Path
-from django.conf import settings
 from typing import IO, Optional
+
+from django.conf import settings
+from django.http import HttpResponse, StreamingHttpResponse
 
 CHUNK_SIZE = 512  # 512 bytes
 
@@ -27,7 +28,7 @@ def read_files_in_chunks(
 
 def sendfile(
     file_path: str | Path,
-    content_type: Optional[str],
+    content_type: str | None,
 ) -> HttpResponse | StreamingHttpResponse:
     file_location = f"{settings.MEDIA_ROOT}/{file_path}"
 
