@@ -2,7 +2,7 @@ from collections.abc import Generator
 from io import BufferedReader, BytesIO
 import mimetypes
 from pathlib import Path
-from typing import IO, Optional
+from typing import IO
 
 from django.conf import settings
 from django.http import HttpResponse, StreamingHttpResponse
