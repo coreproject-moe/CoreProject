@@ -1,0 +1,10 @@
+version: '3'
+services:
+    app-node:
+        image: svelte-docker-node
+        build:
+            context: .
+            dockerfile: ./frontend/AnimeCore/Dockerfile
+            target: deploy-node
+        ports:
+            - 3002:3000
