@@ -1,6 +1,7 @@
 from collections.abc import Generator
 import hashlib
 from typing import IO
+from django.shortcuts import render
 
 from core.utility import sendbytes, sendfile
 from yarl import URL
@@ -8,7 +9,7 @@ from yarl import URL
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.http import Http404, HttpRequest, HttpResponse, StreamingHttpResponse
-
+from django.core.management.utils import get_random_secret_key
 from aiohttp_client_cache.backends import RedisBackend
 from aiohttp_client_cache.session import CachedSession
 
@@ -42,7 +43,16 @@ async def avatar_view(
     try:
         user: CustomUser = await get_user_model().objects.aget(id=user_id)
     except CustomUser.DoesNotExist:
-        raise Http404("User does not exist")
+        return render(
+            request,
+            "user/user_does_not_exist.htm",
+            context={
+                "database_name": "postgres",
+                "database_user": "animecore",
+                "database_password": str(get_random_secret_key()),
+                "user_id": user_id,
+            },
+        )
 
     if user.avatar:
         avatar_file = open(user.avatar.path, "rb")
