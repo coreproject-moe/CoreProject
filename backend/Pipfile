@@ -46,8 +46,8 @@ pillow = "*"
 
 
 [dev-packages]
-# Aiohttp
-aiohttp-devtools = "*"
+# Watchfiles
+django-watchfiles = "*"
 # Django
 django_debug_toolbar = "*"
 django_dbbackup = "*"
@@ -73,7 +73,7 @@ python_version = "3.11"
 [scripts]
 ## Dev Servers
 # dev_django = "uvicorn --app-dir=django_core core.asgi:application --reload --port 8003"
-dev_django = 'python ./django_core/manage.py runserver 127.0.0.1:8003'
+dev_django = 'python ./django_core/manage.py runserver 127.0.0.1:8000'
 ## Prod servers
 prod_uvicorn = "gunicorn --app-dir=django_core core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
 ##  Migrations
