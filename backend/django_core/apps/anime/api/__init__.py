@@ -91,7 +91,6 @@ def get_anime_info(
             )
         )
 
-    print(query.query)
     return query
 
 

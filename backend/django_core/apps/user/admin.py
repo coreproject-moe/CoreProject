@@ -1,4 +1,5 @@
 from typing import Any
+from typing import Self
 
 from django.contrib import admin
 from django.contrib.auth import get_user_model
@@ -101,10 +102,13 @@ class CustomUserAdmin(DjangoUserAdmin):
     )
 
     @admin.display(description="username")
-    def get_username(self, obj: USER_MODEL, *args: Any, **kwargs: Any) -> USER_MODEL:
+    def get_username(
+        self: Self,
+        obj: USER_MODEL,
+    ) -> USER_MODEL:
         return obj
 
-    def get_search_results(self, request, queryset, search_term):
+    def get_search_results(self: Self, request, queryset, search_term):
         queryset, may_have_duplicates = super().get_search_results(
             request,
             queryset,

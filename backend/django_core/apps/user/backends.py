@@ -5,6 +5,7 @@ from django.contrib.auth.hashers import check_password
 from django.db.models import Q
 from django.http import HttpRequest
 
+from typing import Self
 
 class EmailOrUsernameModelBackend(ModelBackend):
     """
@@ -38,7 +39,7 @@ class EmailOrUsernameModelBackend(ModelBackend):
             return query
 
     def authenticate(
-        self,
+        self: Self,
         request: HttpRequest | None,
         username: str | None = None,
         password: str | None = None,
