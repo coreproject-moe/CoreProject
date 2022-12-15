@@ -14,9 +14,7 @@ def read_files_in_chunks(
     file_object: IO[bytes],
     chunk_size: int = CHUNK_SIZE,
 ) -> Generator[bytes, None, None]:
-    """
-    Lazy function to read a file piece by piece.
-    """
+    """Lazy function to read a file piece by piece."""
     while True:
         data = file_object.read(chunk_size)
         if not data:

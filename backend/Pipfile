@@ -26,7 +26,7 @@ whitenoise = {extras = ["brotli"], version = "*"}
 # 3rd Party ( Tasks )
 huey = "*"
 redis = ">=4"
-hiredis = {version="*", markers="sys_platform != 'win32'"}
+hiredis = "*"
 # Rest framework
 django_ninja = "*"
 pydantic = {extras = ["email"], version = "*"}
