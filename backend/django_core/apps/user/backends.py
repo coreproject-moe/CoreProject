@@ -1,5 +1,3 @@
-from typing import Any
-
 from apps.user.models import CustomUser
 
 from django.contrib.auth.backends import ModelBackend
@@ -44,6 +42,5 @@ class EmailOrUsernameModelBackend(ModelBackend):
         request: HttpRequest | None,
         username: str | None = None,
         password: str | None = None,
-        **kwargs: Any,
     ) -> CustomUser | None:
         return self.get_user_given_username_and_password(username, password)

@@ -34,20 +34,16 @@ pydantic = {extras = ["email"], version = "*"}
 # ===================================================
 # HTTP Client
 aiohttp = {version=">=3.8,<4", extras=['speedups']}
-aiohttp_jinja2 = '*'
 # HTTP Client Enhancements
 aiohttp_retry = "*"
 aiohttp_client_cache = {extras = ["redis"], version = "*"}
 pyrate-limiter = {extras = ["redis"], version = "*"}
-# Database Drivers
-sqlalchemy = {extras = ["postgresql_asyncpg"], version = ">=2.0.0b2"}
 # Web servers
 gunicorn = {extras = ["setproctile"], version = "*"}
 uvicorn = {version = "*"}
 # Image processing
 pillow = "*"
-# Discord API
-"discord.py" = {extras = ["voice", "speed"], version = "*"}
+
 
 [dev-packages]
 # Aiohttp
@@ -78,10 +74,8 @@ python_version = "3.11"
 ## Dev Servers
 # dev_django = "uvicorn --app-dir=django_core core.asgi:application --reload --port 8003"
 dev_django = 'python ./django_core/manage.py runserver 127.0.0.1:8003'
-dev_aiohttp = 'adev runserver ./tsukaeru/server.py --app-factory=aiohttp_app'
 ## Prod servers
 prod_uvicorn = "gunicorn --app-dir=django_core core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
-prod_aiohttp = "gunicorn tsukaeru.server:aiohttp_app -w 4 --bind localhost:8001 --worker-class aiohttp.GunicornUVLoopWebWorker" # We want to run this without any proxy or anything
 ##  Migrations
 sync = "python ./django_core/manage.py migrate"
 mksync = "python ./django_core/manage.py makemigrations"

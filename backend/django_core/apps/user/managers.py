@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, Self
 
 from django.conf import settings
 from django.contrib.auth.base_user import BaseUserManager
@@ -13,7 +13,8 @@ if TYPE_CHECKING:
 
 class UsernameWithDiscriminatorManager(models.Manager):
     def get_username_with_discriminator(
-        self, prefix: str = ""
+        self: Self,
+        prefix: str = "",
     ) -> "UsernameWithDiscriminatorManager":
         prefix = prefix + "__" if prefix else ""
         return self.annotate(
@@ -40,10 +41,10 @@ class UserManager(BaseUserManager, UsernameWithDiscriminatorManager):
     """
 
     def create_user(
-        self,
+        self: Self,
         email: str,
         password: str,
-        **extra_fields: Any,
+        **extra_fields: dict[str, Any],
     ) -> "CustomUser":
         """
         Create and save a User with the given email and password.
@@ -57,10 +58,10 @@ class UserManager(BaseUserManager, UsernameWithDiscriminatorManager):
         return user
 
     def create_superuser(
-        self,
+        self: Self,
         email: str,
         password: str,
-        **extra_fields: Any,
+        **extra_fields: dict[str, Any],
     ) -> "CustomUser":
         """
         Create and save a SuperUser with the given email and password.
