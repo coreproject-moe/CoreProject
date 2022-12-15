@@ -1,7 +1,7 @@
 version: '3'
 services:
-    app-node:
-        image: svelte-docker-node
+    AnimeCore:
+        image: AnimeCore
         build:
             context: .
             dockerfile: ./frontend/AnimeCore/Dockerfile
