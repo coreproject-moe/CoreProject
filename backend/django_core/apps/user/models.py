@@ -1,6 +1,7 @@
-from pathlib import Path
 from typing import Any, NoReturn, Self
 import uuid
+
+from dynamic_filenames import FilePattern
 
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
@@ -12,13 +13,7 @@ from django.utils.translation import gettext_lazy as _
 from .managers import UserManager
 from .validators import username_validator
 
-
-class FileField:
-    # Thanks Stackoverflow
-    # https://stackoverflow.com/questions/1190697/django-filefield-with-upload-to-determined-at-runtime
-    @staticmethod
-    def avatar(*args, **kwargs) -> Path:
-        return Path("avatar", str(uuid.uuid4()))
+avatar = FilePattern(filename_pattern="/avatar{ext}")
 
 
 # Create your models here.
@@ -74,7 +69,7 @@ class CustomUser(
         ],
     )
     avatar = models.ImageField(
-        upload_to=FileField.avatar,
+        upload_to=avatar,
         default=None,
         blank=True,
         null=True,
