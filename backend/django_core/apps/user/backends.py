@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Self
 
 from apps.user.models import CustomUser
 
@@ -40,10 +40,9 @@ class EmailOrUsernameModelBackend(ModelBackend):
             return query
 
     def authenticate(
-        self,
+        self: Self,
         request: HttpRequest | None,
         username: str | None = None,
         password: str | None = None,
-        **kwargs: Any,
     ) -> CustomUser | None:
         return self.get_user_given_username_and_password(username, password)

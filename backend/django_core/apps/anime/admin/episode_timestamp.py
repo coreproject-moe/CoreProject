@@ -1,3 +1,5 @@
+from typing import Self
+
 from django.contrib import admin
 from django.db.models.query import QuerySet
 from django.http import HttpRequest
@@ -14,7 +16,7 @@ class EpisodeTimestampAdmin(admin.ModelAdmin):
     search_fields = ["user__username"]
 
     def get_search_results(
-        self,
+        self: Self,
         request: HttpRequest,
         queryset: QuerySet[EpisodeTimestampModel],
         search_term: str,

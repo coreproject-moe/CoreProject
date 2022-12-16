@@ -1,6 +1,7 @@
-from pathlib import Path
-from typing import Any
+from typing import Any, NoReturn, Self
 import uuid
+
+from dynamic_filenames import FilePattern
 
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
@@ -10,16 +11,9 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from .managers import UserManager
-from .mixins.resize import ResizeImageMixin
 from .validators import username_validator
 
-
-class FileField:
-    # Thanks Stackoverflow
-    # https://stackoverflow.com/questions/1190697/django-filefield-with-upload-to-determined-at-runtime
-    @staticmethod
-    def avatar(*args, **kwargs) -> Path:
-        return Path("avatar", str(uuid.uuid4()))
+avatar = FilePattern(filename_pattern="/avatar{ext}")
 
 
 # Create your models here.
@@ -28,7 +22,6 @@ class FileField:
 class CustomUser(
     AbstractBaseUser,
     PermissionsMixin,
-    ResizeImageMixin,
 ):
     username = models.CharField(
         _("username"),
@@ -76,7 +69,7 @@ class CustomUser(
         ],
     )
     avatar = models.ImageField(
-        upload_to=FileField.avatar,
+        upload_to=avatar,
         default=None,
         blank=True,
         null=True,
@@ -113,11 +106,7 @@ class CustomUser(
                 )
             }"""
 
-    def save(self, *args: Any, **kwargs: Any) -> None:
-        # if self.avatar:
-        #     file = self.resize(self.avatar)
-        #     self.avatar.save(f"{self.username}.avif", file, save=False)
-
+    def save(self: Self, *args: tuple, **kwargs: dict[str, Any]) -> NoReturn:
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:

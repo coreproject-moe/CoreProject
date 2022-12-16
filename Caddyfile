@@ -9,16 +9,15 @@
 
     # Django Rest API
     handle /api* {
-        reverse_proxy localhost:8000
+        reverse_proxy localhost:8000 {
+            @sendfile header X-Sendfile *
+            handle_response @sendfile {
+                rewrite {http.reverse_proxy.header.X-Sendfile}
+                encode zstd gzip
+                file_server
+            }
+        }
     }
-
-    # Django FAQ
-    # This will work if we add the correct path in Django Admin
-    # Think of it as 2 way verification
-    handle /faq* {
-        reverse_proxy localhost:8000
-    }
-
 
     # Svelte app working
     handle_path /anime* {
