@@ -46,9 +46,8 @@ class UserManager(BaseUserManager, UsernameWithDiscriminatorManager):
         password: str,
         **extra_fields: dict[str, Any],
     ) -> "CustomUser":
-        """
-        Create and save a User with the given email and password.
-        """
+        """Create and save a User with the given email and password."""
+
         if not email:
             raise ValueError(_("The Email must be set"))
         email = self.normalize_email(email)
@@ -63,9 +62,8 @@ class UserManager(BaseUserManager, UsernameWithDiscriminatorManager):
         password: str,
         **extra_fields: dict[str, Any],
     ) -> "CustomUser":
-        """
-        Create and save a SuperUser with the given email and password.
-        """
+        """Create and save a SuperUser with the given email and password."""
+        
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
         extra_fields.setdefault("is_active", True)
