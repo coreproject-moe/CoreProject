@@ -46,8 +46,9 @@ pillow = "*"
 
 
 [dev-packages]
-# Watchfiles
-django-watchfiles = "*"
+## Watchfiles
+# https://github.com/adamchainz/django-watchfiles/issues/12
+# django-watchfiles = "*"
 # Django
 django_debug_toolbar = "*"
 django_dbbackup = "*"

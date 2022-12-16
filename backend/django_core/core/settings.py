@@ -85,7 +85,6 @@ if DEBUG:
     INSTALLED_APPS += (
         "debug_toolbar",
         "dbbackup",  # django-dbbackup
-        # "django_watchfiles",
     )
 
 
