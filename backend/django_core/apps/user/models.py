@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Any
+from typing import Any, NoReturn, Self
 import uuid
 
 from django.conf import settings
@@ -10,7 +10,6 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from .managers import UserManager
-from .mixins.resize import ResizeImageMixin
 from .validators import username_validator
 
 
@@ -28,7 +27,6 @@ class FileField:
 class CustomUser(
     AbstractBaseUser,
     PermissionsMixin,
-    ResizeImageMixin,
 ):
     username = models.CharField(
         _("username"),
@@ -113,11 +111,7 @@ class CustomUser(
                 )
             }"""
 
-    def save(self, *args: Any, **kwargs: Any) -> None:
-        # if self.avatar:
-        #     file = self.resize(self.avatar)
-        #     self.avatar.save(f"{self.username}.avif", file, save=False)
-
+    def save(self: Self, *args: tuple, **kwargs: dict[str, Any]) -> NoReturn:
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:

@@ -1,3 +1,5 @@
+from typing import Self
+
 from apps.user.models import CustomUser
 
 from django.contrib.auth.backends import ModelBackend
@@ -38,7 +40,7 @@ class EmailOrUsernameModelBackend(ModelBackend):
             return query
 
     def authenticate(
-        self,
+        self: Self,
         request: HttpRequest | None,
         username: str | None = None,
         password: str | None = None,
