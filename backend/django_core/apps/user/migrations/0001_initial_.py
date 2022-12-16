@@ -106,7 +106,7 @@ class Migration(migrations.Migration):
                         blank=True,
                         default=None,
                         null=True,
-                        upload_to=apps.user.models.FileField.avatar,
+                        upload_to=apps.user.models.avatar,
                     ),
                 ),
                 ("ip", models.GenericIPAddressField(blank=True, null=True)),
