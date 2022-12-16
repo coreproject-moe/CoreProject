@@ -1,4 +1,3 @@
-from typing import Any
 from typing import Self
 
 from django.contrib import admin

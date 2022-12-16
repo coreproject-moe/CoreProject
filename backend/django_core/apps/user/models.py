@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Self, Any, NoReturn
+from typing import Any, NoReturn, Self
 import uuid
 
 from django.conf import settings
