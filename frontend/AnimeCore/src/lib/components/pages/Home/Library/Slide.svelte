@@ -1,5 +1,4 @@
 <script lang="ts">
-    import type { Swiper as SwiperType } from "swiper";
     import { FreeMode, Mousewheel } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import voca from "voca";
