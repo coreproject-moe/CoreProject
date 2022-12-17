@@ -1,6 +1,4 @@
-from collections.abc import Generator
 import hashlib
-from typing import IO
 
 from core.utility import sendbytes, sendfile
 from yarl import URL
@@ -17,22 +15,6 @@ from aiohttp_client_cache.session import CachedSession
 from .models import CustomUser
 
 CHUNK_SIZE = 512  # 512 bytes
-
-
-def read_files_in_chunks(
-    file_object: IO[bytes],
-    chunk_size: int = CHUNK_SIZE,
-) -> Generator[bytes, None, None]:
-    """
-    Lazy function to read a file piece by piece.
-    """
-    while True:
-        data = file_object.read(chunk_size)
-        if not data:
-            break
-        yield data
-
-    file_object.close()
 
 
 async def avatar_view(

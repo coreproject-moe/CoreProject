@@ -103,7 +103,7 @@ class AnimeInfoAdmin(admin.ModelAdmin):
 
 
 # https://stackoverflow.com/questions/49293901/hide-model-from-main-admin-list-but-allow-creation-in-inline-editor
-# def has_module_permission(self, request):
+# def has_module_permission(self:Self, request):
 #     return False
 
 
