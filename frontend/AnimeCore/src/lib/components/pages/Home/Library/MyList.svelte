@@ -5,8 +5,8 @@
 
     import myList from "$data/mock/my_list.json";
     import ChevronDown from "$icons/Chevron-Down.svelte";
-    import { responsiveMode } from "$store/Responsive";
     import Settings from "$icons/Settings.svelte";
+    import { responsiveMode } from "$store/Responsive";
 
     // Responsive switches
     let mobile: boolean;
