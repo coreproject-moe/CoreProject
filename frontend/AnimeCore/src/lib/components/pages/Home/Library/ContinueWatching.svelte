@@ -19,7 +19,7 @@
     mylistAnimeNameWordCount ??= 25;
 </script>
 
-<p class="font-bold text-3xl items-start flex pb-4">Continue Watching</p>
+<p class="font-bold text-3xl items-start flex pb-4 mt-10 mb-6 md:my-0">Continue Watching</p>
 <div class="h-28 md:h-[200px] w-96 md:w-[60vw]">
     <Swiper
         speed={600}

@@ -20,7 +20,7 @@
 
 <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
     <div class="hero-content text-center flex-col md:flex-row">
-        <div class="flex flex-col gap-3">
+        <div class="flex flex-col gap-3 pt-12 md:pt-0">
             <LatestEpisode />
         </div>
         <div class="divider lg:divider-horizontal hidden md:flex before:bg-white after:bg-white" />

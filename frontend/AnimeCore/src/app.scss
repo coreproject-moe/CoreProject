@@ -4,8 +4,6 @@
 
 @import "swiper/css";
 @import "swiper/css/pagination";
-@import "swiper/css/effect-fade";
-@import "swiper/css/lazy";
 
 .swiper {
     height: 100%;
@@ -17,6 +15,7 @@
     height: auto;
     width: auto;
 }
+
 :root {
     --swiper-pagination-color: #e3bd49;
     --swiper-pagination-bullet-inactive-color: #edd68d;

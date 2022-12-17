@@ -21,7 +21,7 @@
 </script>
 
 <p class="text-3xl font-bold flex">Latest Episode</p>
-<p class="flex gap-2">
+<p class="flex gap-2 mt-6 mb-3 md:my-0">
     show from my list only
     <ChevronDown
         height={25}
