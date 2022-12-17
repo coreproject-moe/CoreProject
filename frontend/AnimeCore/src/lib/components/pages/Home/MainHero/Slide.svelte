@@ -40,13 +40,11 @@
     $: tablet = $responsiveMode === "tablet";
     $: mobile = $responsiveMode === "mobile";
 
-    let backgroundCanvasElement: HTMLCanvasElement;
-
     const timerEnded = () => {
         addOneToMainHeroSlideActiveIndex();
     };
 
-    const checkViewPortAndMountCanvas = async () => {
+    const checkViewPortAndMountChangeBackgroundImage = async () => {
         if (mobile) {
             background = await fetchImageAndConvertToBlob(backgroundBanner);
         } else {
@@ -55,7 +53,7 @@
     };
 
     onMount(async () => {
-        await checkViewPortAndMountCanvas();
+        await checkViewPortAndMountChangeBackgroundImage();
 
         getImageBrightness(background, (brightness) => {
             if (brightness == undefined || brightness > 120) {
@@ -69,7 +67,7 @@
 
 <svelte:window
     on:resize={async () => {
-        await checkViewPortAndMountCanvas();
+        await checkViewPortAndMountChangeBackgroundImage();
     }}
     on:focus={() => {
         $timerStore = "start";
