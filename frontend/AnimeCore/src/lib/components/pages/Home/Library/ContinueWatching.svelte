@@ -25,7 +25,7 @@
         speed={600}
         direction="horizontal"
         slidesPerView={"auto"}
-        spaceBetween={30}
+        spaceBetween={24}
         modules={[Mousewheel]}
         mousewheel={{
             sensitivity: 0.001,
@@ -43,22 +43,29 @@
                         url('{item.background_image}');
                     "
                 >
-                    <div class="flex flex-col items-start">
+                    <div class="md:self-start flex flex-col items-start gap-2 md:pt-5">
                         <p class="font-bold">{item.name}</p>
                         <p>
-                            Ep {voca.chain(String(item.current_episode)).padLeft(2, String(0))}
+                            continue from Ep {voca
+                                .chain(String(item.current_episode))
+                                .padLeft(2, String(0))}
+                        </p>
+                        <p class="text-justify text-sm hidden md:block">
+                            {voca.chain(item.about).truncate(60)}
                         </p>
                     </div>
 
-                    <button
-                        class="btn btn-circle btn-md btn-warning"
-                        aria-label="play"
-                    >
-                        <Play
-                            width={20}
-                            height={20}
-                        />
-                    </button>
+                    <div class="md:self-end md:pb-5">
+                        <button
+                            class="btn btn-circle btn-md btn-warning"
+                            aria-label="play"
+                        >
+                            <Play
+                                width={20}
+                                height={20}
+                            />
+                        </button>
+                    </div>
                 </div>
             </SwiperSlide>
         {/each}
