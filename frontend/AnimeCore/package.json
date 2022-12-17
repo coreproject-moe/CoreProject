@@ -4,8 +4,8 @@
     "scripts": {
         "dev": "vite dev --host",
         "build": "vite build",
-        "build:static": "cross-env STATIC_ENV=static vite build",
-        "build:node": "cross-env NODE_ENV=node vite build",
+        "build:static": "cross-env BUILD_STATIC_ENV=static vite build",
+        "build:node": "cross-env BUILD_NODE_ENV=node vite build",
         "package": "svelte-kit package",
         "preview": "vite preview",
         "postinstall": "svelte-kit sync",
