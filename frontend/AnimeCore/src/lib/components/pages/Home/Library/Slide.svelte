@@ -1,21 +1,9 @@
 <script lang="ts">
     import Heart from "$icons/Heart.svelte";
-    import { responsiveMode } from "$store/Responsive";
 
     import ContinueWatching from "./ContinueWatching.svelte";
     import LatestEpisode from "./LatestEpisode.svelte";
     import MyList from "./MyList.svelte";
-
-    // Responsive switches
-    let mobile: boolean;
-    $: mobile = $responsiveMode === "mobile";
-
-    // We might control it in future :D
-    let lastestEpisodeNameWordCount: number;
-    lastestEpisodeNameWordCount ??= 25;
-
-    let mylistAnimeNameWordCount: number;
-    mylistAnimeNameWordCount ??= 25;
 </script>
 
 <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">

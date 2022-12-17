@@ -15,16 +15,6 @@
     // We might control it in future :D
     let lastestEpisodeNameWordCount: number;
     lastestEpisodeNameWordCount ??= 25;
-
-    let mylistAnimeNameWordCount: number;
-    mylistAnimeNameWordCount ??= 25;
-
-    const pagination = {
-        clickable: true,
-        renderBullet: function (index: number, className: string) {
-            return '<span class="' + className + '">' + (index + 1) + "</span>";
-        }
-    };
 </script>
 
 <p class="text-3xl font-bold flex">Latest Episode</p>
@@ -44,7 +34,6 @@
         mousewheel={{
             forceToAxis: true
         }}
-        {pagination}
         freeMode={{
             enabled: true,
             sticky: true
