@@ -415,11 +415,11 @@
         },
         "django-ninja": {
             "hashes": [
-                "sha256:062ed2b18e357f0556bba73f14132a7c12a5a61ebb79552162b9903e4f975008",
-                "sha256:f52e6b5f25a83f7bda80398b3b97001011142911cff52a9dd711e63d711a36ab"
+                "sha256:4803a5fde51b5363d46e0d4c0b2c5829d7b91e797b25d37854f0b1a70412c6df",
+                "sha256:b5af89955583de20031cb0a81b637a838f27822f3babb173253805306269ab79"
             ],
             "index": "pypi",
-            "version": "==0.19.1"
+            "version": "==0.20.0"
         },
         "dnspython": {
             "hashes": [
