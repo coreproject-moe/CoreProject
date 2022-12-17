@@ -1,9 +1,11 @@
+import node_adapter from "@sveltejs/adapter-node";
 import static_adapter from "@sveltejs/adapter-static";
 import vercel from "@sveltejs/adapter-vercel";
 import path from "path";
 import preprocess from "svelte-preprocess";
 
-const is_static = process.env.BUILD_ENV ?? false;
+const is_static = process.env.BUILD_STATIC_ENV ?? false;
+const is_node = process.env.BUILD_NODE_ENV ?? false;
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -23,6 +25,10 @@ const config = {
             fallback: "app.html",
             precompress: false,
             strict: true
+        })
+        : is_node
+        ? node_adapter({
+            precompress: true
         })
         : vercel({
             // an array of dependencies that esbuild should treat

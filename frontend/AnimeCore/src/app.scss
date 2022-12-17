@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "swiper/css";
+@import "swiper/css/pagination";
+
+.swiper {
+    height: 100%;
+    width: 100%;
+}
+
+/* This is the hack we are looking for */
+.swiper-slide {
+    height: auto;
+    width: auto;
+}
+
 :root {
     --swiper-pagination-color: #e3bd49;
     --swiper-pagination-bullet-inactive-color: #edd68d;

@@ -1,34 +1,19 @@
 <script lang="ts">
-    import ChevronDown from "$icons/Chevron-Down.svelte";
     import Heart from "$icons/Heart.svelte";
 
     import ContinueWatching from "./ContinueWatching.svelte";
     import LatestEpisode from "./LatestEpisode.svelte";
     import MyList from "./MyList.svelte";
-    import Pagination from "./Pagination.svelte";
 </script>
 
 <div class="hero min-h-[20vh] md:min-h-screen bg-base-100">
     <div class="hero-content text-center flex-col md:flex-row">
-        <div class="flex flex-col gap-3 self-start pt-12 md:pt-0">
-            <p class="text-3xl font-bold flex">Latest Episode</p>
-            <p class="flex gap-2 mt-6 mb-3 md:my-0">
-                show from my list only
-                <ChevronDown
-                    height={25}
-                    width={25}
-                />
-            </p>
-
+        <div class="flex flex-col gap-3 pt-12 md:pt-0">
             <LatestEpisode />
-            <div class="hidden md:flex justify-center">
-                <Pagination />
-            </div>
         </div>
         <div class="divider lg:divider-horizontal hidden md:flex before:bg-white after:bg-white" />
         <div class="flex flex-col">
             <ContinueWatching />
-
             <div class="divider hidden md:flex before:bg-white after:bg-white" />
             <MyList />
 

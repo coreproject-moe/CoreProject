@@ -40,40 +40,20 @@
     $: tablet = $responsiveMode === "tablet";
     $: mobile = $responsiveMode === "mobile";
 
-    let backgroundCanvasElement: HTMLCanvasElement;
-
     const timerEnded = () => {
         addOneToMainHeroSlideActiveIndex();
     };
 
-    const checkViewPortAndMountCanvas = async () => {
+    const checkViewPortAndMountChangeBackgroundImage = async () => {
         if (mobile) {
             background = await fetchImageAndConvertToBlob(backgroundBanner);
         } else {
             background = await fetchImageAndConvertToBlob(backgroundImage);
         }
-
-        // Canvas logic
-        if (!backgroundCanvasElement) {
-            return;
-        }
-
-        const img = new Image();
-        img.onload = () => {
-            const ctx = backgroundCanvasElement?.getContext("2d");
-            if (backgroundCanvasElement) {
-                backgroundCanvasElement.height = img.height;
-                backgroundCanvasElement.width = img.width;
-            }
-
-            ctx?.drawImage(img, 0, 0);
-        };
-
-        img.src = background;
     };
 
     onMount(async () => {
-        await checkViewPortAndMountCanvas();
+        await checkViewPortAndMountChangeBackgroundImage();
 
         getImageBrightness(background, (brightness) => {
             if (brightness == undefined || brightness > 120) {
@@ -87,7 +67,7 @@
 
 <svelte:window
     on:resize={async () => {
-        await checkViewPortAndMountCanvas();
+        await checkViewPortAndMountChangeBackgroundImage();
     }}
     on:focus={() => {
         $timerStore = "start";
@@ -98,20 +78,11 @@
 />
 
 <div class="inline-grid min-h-[60vh] md:min-h-screen w-screen">
-    <div
-        class="relative z-0"
-        style="grid-area: 1 / 1 / 2 / 2"
-    >
-        <canvas
-            bind:this={backgroundCanvasElement}
-            class="h-full w-full absolute inset-0"
-        />
-    </div>
-    <div
-        class="z-10"
-        style="grid-area: 1 / 1 / 2 / 2"
-    >
-        <div class="hero h-full w-full bg-center bg-no-repeat">
+    <div style="grid-area: 1 / 1 / 2 / 2">
+        <div
+            class="hero h-full w-full bg-center bg-no-repeat"
+            style="background-image:url('{background}')"
+        >
             <div
                 class="hero-overlay from-base-100 via-base-100/[.8] md:via-base-100/[.0001] grid"
                 style="--tw-bg-opacity:0"
@@ -125,7 +96,7 @@
                     <div class="hidden md:flex" />
                     <div class="flex items-center gap-3">
                         <Progress
-                            class="w-24 md:w-36"
+                            class="w-32 md:w-48"
                             on:targetAchieved={timerEnded}
                         />
 

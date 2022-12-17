@@ -1,18 +1,20 @@
 <script lang="ts">
-    import emblaCarouselSvelte, { type EmblaOptionsType } from "embla-carousel-svelte";
+    import { Mousewheel } from "swiper";
+    import { Swiper, SwiperSlide } from "swiper/svelte";
     import voca from "voca";
 
+    import myList from "$data/mock/my_list.json";
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import Settings from "$icons/Settings.svelte";
-    const emblaConfig: { options: EmblaOptionsType; plugins: any } = {
-        options: {
-            loop: false,
-            axis: "x",
-            align: "start"
-        },
-        plugins: []
-    };
-    import myList from "$data/mock/my_list.json";
+    import { responsiveMode } from "$store/Responsive";
+
+    // Responsive switches
+    let mobile: boolean;
+    $: mobile = $responsiveMode === "mobile";
+
+    // We might control it in future :D
+    let lastestEpisodeNameWordCount: number;
+    lastestEpisodeNameWordCount ??= 25;
 
     let mylistAnimeNameWordCount: number;
     mylistAnimeNameWordCount ??= 25;
@@ -41,30 +43,35 @@
     </div>
 </div>
 
-<embla
-    class="overflow-hidden"
-    use:emblaCarouselSvelte={emblaConfig}
->
-    <embla-container
-        class="w-96 md:w-[60vw] gap-6 overscroll-auto lg:overscroll-contain flex flex-row"
+<div class="w-96 md:w-[60vw]">
+    <Swiper
+        speed={600}
+        direction="horizontal"
+        slidesPerView={"auto"}
+        spaceBetween={24}
+        modules={[Mousewheel]}
+        mousewheel={{
+            sensitivity: 0.001,
+            forceToAxis: true
+        }}
     >
         {#each myList as item}
-            <embla-slide
-                class="select-none cursor-grab carousel-item card w-36 h-52 bg-base-100 image-full before:!opacity-60"
-            >
-                <figure>
-                    <img
-                        src={item.background_image}
-                        alt={item.name}
-                    />
-                </figure>
-                <div class="card-body justify-between items-center !text-white">
-                    <h2 class="card-title text-sm">
-                        {voca.chain(item.name).truncate(mylistAnimeNameWordCount + 3)}
-                    </h2>
-                    <div class="card-actions">{item.current}/{item.total}</div>
+            <SwiperSlide>
+                <div class="card w-36 h-52 bg-base-100 image-full before:!opacity-60">
+                    <figure>
+                        <img
+                            src={item.background_image}
+                            alt={item.name}
+                        />
+                    </figure>
+                    <div class="card-body justify-between items-center !text-white">
+                        <h2 class="card-title text-sm">
+                            {voca.chain(item.name).truncate(mylistAnimeNameWordCount + 3)}
+                        </h2>
+                        <div class="card-actions">{item.current}/{item.total}</div>
+                    </div>
                 </div>
-            </embla-slide>
+            </SwiperSlide>
         {/each}
-    </embla-container>
-</embla>
+    </Swiper>
+</div>

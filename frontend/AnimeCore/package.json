@@ -4,7 +4,8 @@
     "scripts": {
         "dev": "vite dev --host",
         "build": "vite build",
-        "build:static": "cross-env BUILD_ENV=static vite build",
+        "build:static": "cross-env BUILD_STATIC_ENV=static vite build",
+        "build:node": "cross-env BUILD_NODE_ENV=node vite build",
         "package": "svelte-kit package",
         "preview": "vite preview",
         "postinstall": "svelte-kit sync",
@@ -16,10 +17,10 @@
         "update": "npx npm-check-updates -u && npm install"
     },
     "devDependencies": {
-        "@sveltejs/adapter-static": "^1.0.0-next.49",
-        "@sveltejs/adapter-node": "next",
+        "@sveltejs/adapter-node": "^1.0.0",
+        "@sveltejs/adapter-static": "^1.0.0",
         "@sveltejs/adapter-vercel": "^1.0.0",
-        "@sveltejs/kit": "1.0.0-next.578",
+        "@sveltejs/kit": "^1.0.1",
         "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
         "@tailwindcss/typography": "^0.5.8",
         "@types/nprogress": "^0.2.0",
@@ -49,14 +50,12 @@
         "svelte-check": "^2.10.2",
         "svelte-gestures": "^1.4.1",
         "svelte-preprocess": "^5.0.0",
+        "swiper": "^8.4.5",
         "tailwindcss": "^3.2.4",
         "tslib": "^2.4.1",
         "typescript": "^4.9.4",
-        "vite": "^3.2.5",
+        "vite": "4.0.1",
         "voca": "^1.4.0"
     },
-    "type": "module",
-    "dependencies": {
-        "embla-carousel-svelte": "^7.0.5"
-    }
+    "type": "module"
 }
