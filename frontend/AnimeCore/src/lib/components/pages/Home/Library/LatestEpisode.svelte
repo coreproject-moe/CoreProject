@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { FreeMode, Mousewheel } from "swiper";
+    import { FreeMode, Mousewheel, Pagination } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import voca from "voca";
 
@@ -18,6 +18,13 @@
 
     let mylistAnimeNameWordCount: number;
     mylistAnimeNameWordCount ??= 25;
+
+    const pagination = {
+        clickable: true,
+        renderBullet: function (index: number, className: string) {
+            return '<span class="' + className + '">' + (index + 1) + "</span>";
+        }
+    };
 </script>
 
 <p class="text-3xl font-bold flex">Latest Episode</p>
@@ -37,6 +44,7 @@
         mousewheel={{
             forceToAxis: true
         }}
+        {pagination}
         freeMode={{
             enabled: true,
             sticky: true

@@ -4,7 +4,8 @@
     "scripts": {
         "dev": "vite dev --host",
         "build": "vite build",
-        "build:static": "cross-env BUILD_ENV=static vite build",
+        "build:static": "cross-env STATIC_ENV=static vite build",
+        "build:node": "cross-env NODE_ENV=node vite build",
         "package": "svelte-kit package",
         "preview": "vite preview",
         "postinstall": "svelte-kit sync",
@@ -16,6 +17,7 @@
         "update": "npx npm-check-updates -u && npm install"
     },
     "devDependencies": {
+        "@sveltejs/adapter-node": "^1.0.0",
         "@sveltejs/adapter-static": "^1.0.0",
         "@sveltejs/adapter-vercel": "^1.0.0",
         "@sveltejs/kit": "^1.0.1",
@@ -55,6 +57,5 @@
         "vite": "4.0.1",
         "voca": "^1.4.0"
     },
-    "type": "module",
-    "dependencies": {}
+    "type": "module"
 }
