@@ -26,9 +26,13 @@ from aiohttp_client_cache.session import CachedSession
 from aiohttp_retry import ExponentialRetry, RetryClient
 
 from apps.characters.models import CharacterModel
+import logging
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(format="%(asctime)s - %(message)s", datefmt="%d-%b-%y %H:%M:%S")
 
 try:
-    import uvloop  # type: ignore
+    import uvloop
 
     asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 except ImportError:
@@ -419,8 +423,6 @@ async def populate_database(
     global EXECUTION_TIME
 
     while starting_number <= ending_number:
-        start_time = datetime.now()
-
         # Actual work is being done here
         jikan_data = await get_character_data_from_jikan(
             character_number=character_number,
@@ -463,32 +465,6 @@ async def populate_database(
             # Add 1 to `starting_number` on every successful request
             starting_number += 1
 
-        # Profile Execution of this function
-        end_time = datetime.now()
-        EXECUTION_TIME += (end_time - start_time).total_seconds()
-
-        message = (
-            f"[{round(EXECUTION_TIME, 2)}]"
-            " "
-            f"Requested `character_info` for {character_number}"
-            " | "
-            f"""`starting_number` {
-                    starting_number - 1
-                    if jikan_data else starting_number
-            }"""
-            " | "
-            f"""[{', '.join(
-                sorted(
-                    (
-                        SUCCESS_LIST +
-                        ERROR_LIST +
-                        WARNING_LIST
-                    ),
-                    key=lambda string: string[10],
-                    )
-                )
-            }]"""
-        )
         # Reset the list
         SUCCESS_LIST.clear()
         ERROR_LIST.clear()
@@ -511,4 +487,16 @@ async def populate_database(
             indent=2,
         )
 
-        click.secho(message)
+        logger.info(
+            "{staring_number} | {success_error_failure_list}".format(
+                staring_number={starting_number - 1 if jikan_data else starting_number},
+                success_error_failure_list={
+                    ", ".join(
+                        sorted(
+                            (SUCCESS_LIST + ERROR_LIST + WARNING_LIST),
+                            key=lambda string: string[10],
+                        )
+                    )
+                },
+            )
+        )
