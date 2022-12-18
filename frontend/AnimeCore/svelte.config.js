@@ -28,7 +28,7 @@ const config = {
         })
         : is_node
         ? node_adapter({
-            precompress: true
+            precompress: false
         })
         : vercel({
             // an array of dependencies that esbuild should treat
