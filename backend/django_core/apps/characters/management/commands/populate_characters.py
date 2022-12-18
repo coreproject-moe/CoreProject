@@ -25,10 +25,10 @@ from aiohttp_client_cache.backends.redis import RedisBackend
 from aiohttp_client_cache.session import CachedSession
 from aiohttp_retry import ExponentialRetry, RetryClient
 
-from ...models import CharacterModel
+from apps.characters.models import CharacterModel
 
 try:
-    import uvloop
+    import uvloop  # type: ignore
 
     asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
 except ImportError:

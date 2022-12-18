@@ -9,7 +9,6 @@ from django.http import HttpResponse, StreamingHttpResponse
 
 CHUNK_SIZE = 512  # 512 bytes
 
-
 def read_files_in_chunks(
     file_object: IO[bytes],
     chunk_size: int = CHUNK_SIZE,
