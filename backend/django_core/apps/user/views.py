@@ -1,20 +1,14 @@
 import hashlib
 
-from core.utility import sendbytes, sendfile
-from yarl import URL
+from core.utility import sendfile
 
-from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.core.management.utils import get_random_secret_key
 from django.http import HttpRequest, HttpResponse, StreamingHttpResponse
 from django.shortcuts import render
-
-from aiohttp_client_cache.backends import RedisBackend
-from aiohttp_client_cache.session import CachedSession
-
+from django.core.validators import URLValidator
+import httpx
 from .models import CustomUser
-
-CHUNK_SIZE = 512  # 512 bytes
 
 
 async def avatar_view(
@@ -42,24 +36,30 @@ async def avatar_view(
         response = sendfile(avatar_file)
 
     else:
-        # Proxy from Libravatar
-        url = str(
-            URL(
-                user.avatar_provider.format(
-                    EMAIL=hashlib.md5(user.email.strip().lower().encode()).hexdigest()
-                )
-            ),
-        )
-        async with CachedSession(
-            cache=RedisBackend(
-                "avatar",
-                expire_after=settings.CACHE_MIDDLEWARE_SECONDS,
+        client = httpx.AsyncClient()
+
+        try:
+            avatar_url = user.avatar_provider.format(
+                EMAIL=hashlib.md5(user.email.strip().lower().encode()).hexdigest()
             )
-        ) as session:
-            async with session.get(url, allow_redirects=True) as r:
-                response = sendbytes(
-                    await r.read(),
-                    content_type=r.headers["content-type"],
-                )
+            # Just a check Here
+            URLValidator(avatar_url)
+
+            _request_ = client.build_request("GET", avatar_url)
+            avatar_response = await client.send(_request_)
+            response = StreamingHttpResponse(
+                avatar_response.iter_bytes(),
+                content_type=avatar_response.headers["content-type"],
+            )
+        except Exception as e:
+            response = HttpResponse(
+                f"""
+                Please Check your email string.
+                <br/>
+                It is {avatar_url} which is not a valid string
+                <br />
+                Error : {e}
+                """
+            )
 
     return response

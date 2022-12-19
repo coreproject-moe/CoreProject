@@ -53,16 +53,16 @@ def sendfile(
         return response
 
 
-def sendbytes(
-    file_blob: BufferedReader,
-    content_type: str,
-) -> HttpResponse:
-    if not settings.DEBUG:
-        response = HttpResponse()
-        response["X-Sendfile"] = BytesIO(file_blob)
-        del response["content-type"]
-        return response
+# def sendbytes(
+#     file_blob: BufferedReader,
+#     content_type: str,
+# ) -> HttpResponse:
+#     if not settings.DEBUG:
+#         response = HttpResponse()
+#         response["X-Sendfile"] = BytesIO(file_blob)
+#         del response["content-type"]
+#         return response
 
-    else:
-        data = BytesIO(file_blob)
-        return HttpResponse(data, content_type=content_type)
+#     else:
+#         data = BytesIO(file_blob)
+#         return HttpResponse(data, content_type=content_type)
