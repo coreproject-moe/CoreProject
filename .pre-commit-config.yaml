@@ -1,6 +1,6 @@
 repos:
     - repo: https://github.com/pre-commit/mirrors-eslint
-      rev: v8.29.0
+      rev: v8.30.0
       hooks:
           - id: eslint
             args: [
@@ -86,7 +86,7 @@ repos:
                 - prettier-plugin-svelte@2.7.0
 
     - repo: https://github.com/PyCQA/isort
-      rev: 5.11.1
+      rev: v5.11.3
       hooks:
           - id: isort
             args: [--profile, black, --ca, --cs]
