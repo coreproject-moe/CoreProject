@@ -1,4 +1,4 @@
-from distutils.dir_util import copy_tree
+from shutil import copytree
 from multiprocessing import Process
 import os
 from pathlib import Path
@@ -13,7 +13,7 @@ def build_animecore():
 
     # NPM commands
     subprocess.check_call("npm install", shell=True)
-    subprocess.check_call("npm run build", shell=True)
+    subprocess.check_call("npm run build:static", shell=True)
 
     os.makedirs(
         os.path.dirname(
@@ -21,11 +21,11 @@ def build_animecore():
         ),
         exist_ok=True,
     )
-    shutil.copy(
+    shutil.move(
         f"{BASE_DIR}/frontend/AnimeCore/build/app.html",
         f"{BASE_DIR}/backend/django_core/apps/frontend/templates/frontend/animecore.html",
     )
-    copy_tree(
+    copytree(
         f"{BASE_DIR}/frontend/AnimeCore/build/",
         f"{BASE_DIR}/backend/django_core/static/",
     )
@@ -36,7 +36,7 @@ def build_user():
 
     # NPM commands
     subprocess.check_call("npm install", shell=True)
-    subprocess.check_call("npm run build", shell=True)
+    subprocess.check_call("npm run build:static", shell=True)
 
     os.makedirs(
         os.path.dirname(
@@ -44,11 +44,11 @@ def build_user():
         ),
         exist_ok=True,
     )
-    shutil.copy(
+    shutil.move(
         f"{BASE_DIR}/frontend/User/build/app.html",
         f"{BASE_DIR}/backend/django_core/apps/frontend/templates/frontend/user.html",
     )
-    copy_tree(
+    copytree(
         f"{BASE_DIR}/frontend/User/build/",
         f"{BASE_DIR}/backend/django_core/static/",
     )
