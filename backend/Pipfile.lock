@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "ac5431e321f46f09931bf4fb22fa32c8006df166119fb5798a32b490abbc6414"
+            "sha256": "416e881a989644bdd0f87ff4facc34766dfb042f325e4eae26c714b49d427e5a"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -333,6 +333,13 @@
             "markers": "python_version >= '3.7'",
             "version": "==0.14.0"
         },
+        "h2": {
+            "hashes": [
+                "sha256:03a46bcf682256c95b5fd9e9a99c1323584c3eec6440d379b9903d709476bc6d",
+                "sha256:a83aca08fbe7aacb79fec788c9c0bac936343560ed9ec18b82a13a12c28d2abb"
+            ],
+            "version": "==4.1.0"
+        },
         "hiredis": {
             "hashes": [
                 "sha256:0021ba034b74c5006f62e4cfdd79d04c7c720731eda256ce29d769ac6483adc3",
@@ -427,6 +434,14 @@
             "index": "pypi",
             "version": "==2.1.0"
         },
+        "hpack": {
+            "hashes": [
+                "sha256:84a076fad3dc9a9f8063ccb8041ef100867b1878b25ef0ee63847a5d53818a6c",
+                "sha256:fc41de0c63e687ebffde81187a948221294896f6bdc0ae2312708df339430095"
+            ],
+            "markers": "python_full_version >= '3.6.1'",
+            "version": "==4.0.0"
+        },
         "httpcore": {
             "hashes": [
                 "sha256:52c79095197178856724541e845f2db86d5f1527640d9254b5b8f6f6cebfdee6",
@@ -436,11 +451,16 @@
             "version": "==0.16.2"
         },
         "httpx": {
+            "extras": [
+                "brotli",
+                "http2"
+            ],
             "hashes": [
                 "sha256:0b9b1f0ee18b9978d637b0776bfd7f54e2ca278e063e3586d8f01cda89e042a8",
                 "sha256:202ae15319be24efe9a8bd4ed4360e68fde7b38bcc2ce87088d416f026667d19"
             ],
             "index": "pypi",
+            "markers": null,
             "version": "==0.23.1"
         },
         "huey": {
@@ -449,6 +469,14 @@
             ],
             "index": "pypi",
             "version": "==2.4.4"
+        },
+        "hyperframe": {
+            "hashes": [
+                "sha256:0ec6bafd80d8ad2195c4f03aacba3a8265e57bc4cff261e802bf39970ed02a15",
+                "sha256:ae510046231dc8e9ecb1a6586f63d2347bf4c8905914aa84ba585ae85f28a914"
+            ],
+            "markers": "python_full_version >= '3.6.1'",
+            "version": "==6.0.1"
         },
         "idna": {
             "hashes": [

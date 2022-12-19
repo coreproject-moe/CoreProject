@@ -30,7 +30,7 @@ django_ninja = "*"
 pydantic = {extras = ["email"], version = "*"}
 # https://github.com/vitalik/django-ninja/issues/305
 # ===================================================
-httpx = {extras=['http2'],version="*"}
+httpx = {extras=['http2','brotli'],version="*"}
 # Web servers
 gunicorn = {extras = ["setproctile"], version = "*"}
 uvicorn = '*'
