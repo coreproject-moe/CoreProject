@@ -6,8 +6,6 @@ name = "pypi"
 [packages]
 django = {version = ">=4.1", extras = ["argon2"]}
 tzdata = "*"
-# First party ( Image )
-pillow = "*"
 # User Agent Parser
 user-agents = "*"
 # Regex Parser
@@ -19,6 +17,8 @@ django-dynamic-filenames = "*"
 # 3rd Party ( Middlewares )
 django_cleanup = "*"
 django_cors_headers = "*"
+# 3rd party ( Management )
+django_click = "*"
 # 3rd Party ( ENV )
 python_dotenv = "*"
 # 3rd Party ( WhiteNoise )
@@ -32,10 +32,15 @@ django_ninja = "*"
 pydantic = {extras = ["email"], version = "*"}
 # https://github.com/vitalik/django-ninja/issues/305
 # ===================================================
-httpx = {extras=['http2','brotli'],version="*"}
+# HTTP Client
+requests = "*"
+requests_cache = "*"
+requests_ratelimiter = "*"
 # Web servers
 gunicorn = {extras = ["setproctile"], version = "*"}
-uvicorn = '*'
+uvicorn = {version = "*"}
+# Image processing
+pillow = "*"
 
 [dev-packages]
 ## Watchfiles
