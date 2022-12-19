@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 django = {version = ">=4.1", extras = ["argon2"]}
 tzdata = "*"
+# First party ( Image )
+pillow = "*"
 # User Agent Parser
 user-agents = "*"
 # Regex Parser
@@ -34,7 +36,6 @@ httpx = {extras=['http2','brotli'],version="*"}
 # Web servers
 gunicorn = {extras = ["setproctile"], version = "*"}
 uvicorn = '*'
-
 
 [dev-packages]
 ## Watchfiles
