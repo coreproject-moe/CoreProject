@@ -1,5 +1,4 @@
 from collections.abc import Generator
-from io import BufferedReader, BytesIO
 import mimetypes
 from pathlib import Path
 from typing import IO

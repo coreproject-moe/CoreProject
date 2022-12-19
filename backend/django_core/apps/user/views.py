@@ -1,13 +1,14 @@
 import hashlib
 
 from core.utility import sendfile
+import httpx
 
 from django.contrib.auth import get_user_model
 from django.core.management.utils import get_random_secret_key
+from django.core.validators import URLValidator
 from django.http import HttpRequest, HttpResponse, StreamingHttpResponse
 from django.shortcuts import render
-from django.core.validators import URLValidator
-import httpx
+
 from .models import CustomUser
 
 
