@@ -120,3 +120,11 @@ dmypy.json
 *.lock
 # But not Pipfile
 !Pipfile.lock
+
+
+# Frontend Codes
+django_core/static/svelte__animecore/
+django_core/static/svelte__user/
+
+user.html
+animecore.html
