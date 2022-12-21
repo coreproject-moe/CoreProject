@@ -1,8 +1,8 @@
-from shutil import copytree
 from multiprocessing import Process
 import os
 from pathlib import Path
 import shutil
+from shutil import copytree
 import subprocess
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -28,7 +28,7 @@ def build_animecore():
     copytree(
         f"{BASE_DIR}/frontend/AnimeCore/build/",
         f"{BASE_DIR}/backend/django_core/static/",
-        dirs_exist_ok=True
+        dirs_exist_ok=True,
     )
 
 
@@ -52,8 +52,7 @@ def build_user():
     copytree(
         f"{BASE_DIR}/frontend/User/build/",
         f"{BASE_DIR}/backend/django_core/static/",
-        dirs_exist_ok=True
-
+        dirs_exist_ok=True,
     )
 
 

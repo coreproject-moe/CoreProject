@@ -126,6 +126,5 @@ dmypy.json
 django_core/static/svelte__animecore/
 django_core/static/svelte__user/
 
-user.html 
+user.html
 animecore.html
-
