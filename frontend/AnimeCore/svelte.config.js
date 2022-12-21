@@ -4,6 +4,8 @@ import vercel from "@sveltejs/adapter-vercel";
 import path from "path";
 import preprocess from "svelte-preprocess";
 
+const dev = process.env.NODE_ENV === "development";
+
 const is_static = process.env.BUILD_STATIC_ENV ?? false;
 const is_node = process.env.BUILD_NODE_ENV ?? false;
 
@@ -18,6 +20,9 @@ const config = {
         })
     ],
     kit: {
+        paths: {
+            base: dev ? "" : "/static/svelte__animecore"
+        },
         appDir: "svelte__animecore",
         // adapter: adapter({ fallback: "app.html" }),
         adapter: is_static
