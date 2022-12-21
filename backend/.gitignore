@@ -123,8 +123,8 @@ dmypy.json
 
 
 # Frontend Codes
-static/svelte__animecore/
-static/svelte__user/
+django_core/static/svelte__animecore/
+django_core/static/svelte__user/
 
 user.html 
 animecore.html
