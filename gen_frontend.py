@@ -28,6 +28,7 @@ def build_animecore():
     copytree(
         f"{BASE_DIR}/frontend/AnimeCore/build/",
         f"{BASE_DIR}/backend/django_core/static/",
+        dirs_exist_ok=True
     )
 
 
@@ -51,6 +52,8 @@ def build_user():
     copytree(
         f"{BASE_DIR}/frontend/User/build/",
         f"{BASE_DIR}/backend/django_core/static/",
+        dirs_exist_ok=True
+
     )
 
 
