@@ -21,7 +21,7 @@ const config = {
     ],
     kit: {
         paths: {
-            base: dev ? "" : "/static/svelte__animecore"
+            base: dev ? "" : "/static"
         },
         appDir: "svelte__animecore",
         // adapter: adapter({ fallback: "app.html" }),
