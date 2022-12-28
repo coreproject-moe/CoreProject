@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = {version = ">=4.1", extras = ["argon2"]}
+django = {file = "https://github.com/django/django/archive/refs/heads/main.zip",extras=['argon2']}
 tzdata = "*"
 # First party ( Image )
 pillow = "*"
@@ -13,7 +13,7 @@ user-agents = "*"
 # Regex Parser
 pregex = "*"
 # Postgres
-psycopg2 = "*"
+psycopg = "*"
 # 3rd Party ( Files )
 django-dynamic-filenames = "*"
 # 3rd Party ( Middlewares )
