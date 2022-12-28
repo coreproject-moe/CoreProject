@@ -131,6 +131,9 @@ class Token(models.Model):
     )
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
 
+    def __str__(self) -> str:
+        return f"User : {self.user.username} | Token : {self.token}"
+
     class Meta:
         db_table = "user_token"
         verbose_name = _("token")

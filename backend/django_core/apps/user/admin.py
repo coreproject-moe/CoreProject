@@ -7,7 +7,7 @@ from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
 from .forms import CustomUserChangeForm, CustomUserCreationForm
-from .models import CustomUser
+from .models import CustomUser, Token
 
 USER_MODEL: CustomUser = get_user_model()
 
@@ -138,3 +138,5 @@ admin.site.register(get_user_model(), CustomUserAdmin)
 from django.contrib.auth.forms import AuthenticationForm  # noqa
 
 AuthenticationForm.base_fields["username"].label = "Email | Username (with discriminator) "
+
+admin.site.register(Token)
