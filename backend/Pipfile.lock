@@ -256,9 +256,7 @@
             "version": "==0.4.6"
         },
         "django": {
-            "extras": [
-                "argon2"
-            ],
+            "extras": ["argon2"],
             "file": "https://github.com/django/django/archive/refs/heads/main.zip",
             "hashes": [
                 "sha256:a2d8074ce308f7f756895c04a78ecbb2aab85947db9eba10cb2658d11be167f3"
@@ -776,9 +774,7 @@
             "version": "==0.3.6"
         },
         "django": {
-            "extras": [
-                "argon2"
-            ],
+            "extras": ["argon2"],
             "file": "https://github.com/django/django/archive/refs/heads/main.zip",
             "hashes": [
                 "sha256:a2d8074ce308f7f756895c04a78ecbb2aab85947db9eba10cb2658d11be167f3"
