@@ -1,6 +1,5 @@
-from ninja import Field, ModelSchema
-
 from apps.episodes.models import EpisodeCommentModel
+from ninja import Field, ModelSchema
 
 
 class EpisodeCommentGETSchema(ModelSchema):

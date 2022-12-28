@@ -6,12 +6,12 @@ from dynamic_filenames import FilePattern
 from django.db import models
 
 from ...characters.models import CharacterModel
+from ...episodes.models import EpisodeModel
 from ...producers.models import ProducerModel
 from ...studios.models import StudioModel
 from .anime_genre import AnimeGenreModel
 from .anime_synonym import AnimeSynonymModel
 from .anime_theme import AnimeThemeModel
-from ...episodes.models import EpisodeModel
 
 anime_cover = FilePattern(filename_pattern="/anime_cover{ext}")
 anime_pattern = FilePattern(filename_patten="/anime_banner{ext}")

@@ -1,3 +1,9 @@
+from apps.episodes.models import EpisodeTimestampModel
+from apps.episodes.schemas.episode_timestamp import (
+    EpisodeTimestampGETSchema,
+    EpisodeTimestampPOSTSchema,
+    EpisodeTimestampTotalTimestampSchema,
+)
 from ninja import Router
 
 from django.contrib.auth.decorators import login_required
@@ -6,12 +12,6 @@ from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
 
 from ..models import AnimeModel
-from apps.episodes.models import EpisodeTimestampModel
-from apps.episodes.schemas.episode_timestamp import (
-    EpisodeTimestampGETSchema,
-    EpisodeTimestampPOSTSchema,
-    EpisodeTimestampTotalTimestampSchema,
-)
 
 router = Router()
 
