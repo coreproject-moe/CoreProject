@@ -25,8 +25,7 @@ python_dotenv = "*"
 whitenoise = {extras = ["brotli"], version = "*"}
 # 3rd Party ( Tasks )
 huey = "*"
-redis = ">=4"
-hiredis = "*"
+redis = {extras=['hiredis'],version=">=4"}
 # Rest framework
 django_ninja = "*"
 pydantic = {extras = ["email"], version = "*"}
@@ -66,7 +65,7 @@ python_version = "3.11"
 [scripts]
 ## Dev Servers
 # dev_django = "uvicorn --app-dir=django_core core.asgi:application --reload --port 8003"
-dev_django = 'python ./django_core/manage.py runserver 127.0.0.1:8000'
+dev = 'python ./django_core/manage.py runserver 127.0.0.1:8000'
 ## Prod servers
 prod_uvicorn = "gunicorn --app-dir=django_core core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
 ##  Migrations

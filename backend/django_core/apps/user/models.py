@@ -9,6 +9,8 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from django.utils.crypto import get_random_string
+from functools import partial
 
 from .managers import UserManager
 from .validators import username_validator
@@ -122,7 +124,11 @@ class CustomUser(
 
 
 class Token(models.Model):
-    token = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    token = models.CharField(
+        default=partial(get_random_string, 16),
+        max_length=16,
+        editable=False,
+    )
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
 
     class Meta:
