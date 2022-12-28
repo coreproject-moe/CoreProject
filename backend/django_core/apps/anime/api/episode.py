@@ -1,3 +1,5 @@
+from apps.episodes.models import EpisodeModel
+from apps.episodes.schemas.episode import EpisodeGETSchema, EpisodePOSTSchema
 from core.permissions import is_superuser
 from ninja import Router
 
@@ -6,8 +8,6 @@ from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
 
 from ..models import AnimeModel
-from ..models.episode import EpisodeModel
-from ..schemas.episode import EpisodeGETSchema, EpisodePOSTSchema
 
 router = Router()
 

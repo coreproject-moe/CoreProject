@@ -1,3 +1,8 @@
+from apps.episodes.models import EpisodeCommentModel
+from apps.episodes.schemas.episode_comment import (
+    EpisodeCommentGETSchema,
+    EpisodeCommentPOSTSchema,
+)
 from ninja import Router
 
 from django.contrib.auth.decorators import login_required
@@ -5,8 +10,6 @@ from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
 
 from ..models import AnimeModel
-from ..models.episode_comment import EpisodeCommentModel
-from ..schemas.episode_comment import EpisodeCommentGETSchema, EpisodeCommentPOSTSchema
 
 router = Router()
 
