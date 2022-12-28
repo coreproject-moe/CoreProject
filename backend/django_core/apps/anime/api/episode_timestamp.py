@@ -6,8 +6,8 @@ from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
 
 from ..models import AnimeModel
-from ..models.episode_timestamp import EpisodeTimestampModel
-from ..schemas.episode_timestamp import (
+from apps.episodes.models import EpisodeTimestampModel
+from apps.episodes.schemas.episode_timestamp import (
     EpisodeTimestampGETSchema,
     EpisodeTimestampPOSTSchema,
     EpisodeTimestampTotalTimestampSchema,

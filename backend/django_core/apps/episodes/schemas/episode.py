@@ -1,6 +1,6 @@
 from ninja import ModelSchema
 
-from ..models import EpisodeModel
+from apps.episodes.models import EpisodeModel
 
 
 class EpisodeGETSchema(ModelSchema):

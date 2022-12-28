@@ -11,7 +11,7 @@ from ...studios.models import StudioModel
 from .anime_genre import AnimeGenreModel
 from .anime_synonym import AnimeSynonymModel
 from .anime_theme import AnimeThemeModel
-from .episode import EpisodeModel
+from ...episodes.models import EpisodeModel
 
 anime_cover = FilePattern(filename_pattern="/anime_cover{ext}")
 anime_pattern = FilePattern(filename_patten="/anime_banner{ext}")
@@ -57,11 +57,3 @@ class AnimeModel(models.Model):
 
     class Meta:
         verbose_name = "Anime"
-
-
-# Extra imports
-# __ DO NOT MODIFY __
-
-# pylint: disable=import-error
-from .episode_comment import EpisodeCommentModel as EpisodeCommentModel
-from .episode_timestamp import EpisodeTimestampModel as EpisodeTimestampModel
