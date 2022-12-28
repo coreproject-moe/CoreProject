@@ -4,7 +4,8 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = {version = ">=4.1", extras = ["argon2"]}
+# When django 4.2 releases
+django = {version = ">=4.2", extras = ["argon2"]}
 tzdata = "*"
 # First party ( Image )
 pillow = "*"
@@ -13,7 +14,7 @@ user-agents = "*"
 # Regex Parser
 pregex = "*"
 # Postgres
-psycopg2 = "*"
+psycopg = "*"
 # 3rd Party ( Files )
 django-dynamic-filenames = "*"
 # 3rd Party ( Middlewares )
@@ -25,8 +26,7 @@ python_dotenv = "*"
 whitenoise = {extras = ["brotli"], version = "*"}
 # 3rd Party ( Tasks )
 huey = "*"
-redis = ">=4"
-hiredis = "*"
+redis = {extras=['hiredis'],version=">=4"}
 # Rest framework
 django_ninja = "*"
 pydantic = {extras = ["email"], version = "*"}
@@ -66,7 +66,7 @@ python_version = "3.11"
 [scripts]
 ## Dev Servers
 # dev_django = "uvicorn --app-dir=django_core core.asgi:application --reload --port 8003"
-dev_django = 'python ./django_core/manage.py runserver 127.0.0.1:8000'
+dev = 'python ./django_core/manage.py runserver 127.0.0.1:8000'
 ## Prod servers
 prod_uvicorn = "gunicorn --app-dir=django_core core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
 ##  Migrations

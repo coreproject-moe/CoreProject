@@ -1,5 +1,5 @@
+from functools import partial
 from typing import Any, NoReturn, Self
-import uuid
 
 from dynamic_filenames import FilePattern
 
@@ -8,6 +8,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils import timezone
+from django.utils.crypto import get_random_string
 from django.utils.translation import gettext_lazy as _
 
 from .managers import UserManager
@@ -122,8 +123,15 @@ class CustomUser(
 
 
 class Token(models.Model):
-    token = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    user = models.OneToOneField("CustomUser", on_delete=models.CASCADE)
+    token = models.CharField(
+        default=partial(get_random_string, 16),
+        max_length=16,
+        editable=False,
+    )
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return f"User : {self.user.username} | Token : {self.token}"
 
     class Meta:
         db_table = "user_token"
