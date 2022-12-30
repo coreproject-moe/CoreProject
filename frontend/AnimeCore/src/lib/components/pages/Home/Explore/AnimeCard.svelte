@@ -1,37 +1,63 @@
 <script lang="ts">
     export let animeName: string;
     export let animeCoverBackgroundImage: string;
+    export let animeCardBackgroundImage: string;
+    export let animeTags: string[];
 </script>
 
-<div class="h-52 w-96 bg-base-100 rounded-2xl">
-    <div class="flex flex-row">
-        <div class="inline-grid w-[135px] h-[200px]">
-            <background-image
-                class="bg-no-repeat bg-cover bg-center h-full rounded-2xl"
-                style="
-                    background-image:url('{animeCoverBackgroundImage ?? ''}');
-                    grid-area: 1 / 1 / 2 / 2;
-                "
-            />
-            <background-image-gradient
-                class="h-full"
-                style="grid-area: 1 / 1 / 2 / 2;"
-            />
-            <background-image-text
-                class="h-full flex items-center"
-                style="grid-area: 1 / 1 / 2 / 2;"
-            >
-                <p class="px-4 text-center text-white">
-                    {animeName}
-                </p>
-            </background-image-text>
-        </div>
+<div class="inline-grid h-52 w-96 ">
+    <background-hero-image
+        class="h-full bg-no-repeat bg-cover bg-center rounded-2xl"
+        style="
+            grid-area: 1 / 1 / 2 / 2;
+            background-image:url('{animeCardBackgroundImage ?? ''}')
+        "
+    />
+    <background-hero-image-gradient
+        class="h-full rounded-2xl"
+        style="grid-area: 1 / 1 / 2 / 2;"
+    />
+    <background-hero-content
+        class="h-full"
+        style="grid-area: 1 / 1 / 2 / 2;"
+    >
+        <div class="rounded-2xl bg-no-repeat bg-cover bg-center">
+            <div class="flex flex-row">
+                <!-- Anime image cards  -->
+                <div class="inline-grid w-[135px] h-52">
+                    <background-image
+                        class="bg-no-repeat bg-cover bg-center h-full rounded-2xl"
+                        style="
+                            background-image:url('{animeCoverBackgroundImage ?? ''}');
+                            grid-area: 1 / 1 / 2 / 2;
+                        "
+                    />
+                    <background-image-gradient
+                        class="h-full rounded-2xl"
+                        style="grid-area: 1 / 1 / 2 / 2;"
+                    />
+                    <background-image-text
+                        class="h-full flex items-center"
+                        style="grid-area: 1 / 1 / 2 / 2;"
+                    >
+                        <p class="px-4 text-center text-white">
+                            {animeName}
+                        </p>
+                    </background-image-text>
+                </div>
 
-        <p>helo</p>
-    </div>
+                <!-- Anime Card Informations  -->
+                <p>helo</p>
+            </div>
+        </div>
+    </background-hero-content>
 </div>
 
 <style>
+    background-hero-image-gradient {
+        background: linear-gradient(90deg, #070519 -1.41%, rgba(7, 5, 25, 0) 100%),
+            linear-gradient(180deg, rgba(7, 5, 25, 0) -16%, rgba(7, 5, 25, 0.9) 95.81%);
+    }
     background-image-gradient {
         background: linear-gradient(90deg, rgba(7, 5, 25, 0.5) 0%, rgba(7, 5, 25, 0) 99.75%),
             linear-gradient(179.94deg, rgba(7, 5, 25, 0) 0.05%, rgba(7, 5, 25, 0.8) 98.74%);

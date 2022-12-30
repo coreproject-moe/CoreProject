@@ -101,6 +101,8 @@
             <AnimeCard
                 animeName={item.animeTitle}
                 animeCoverBackgroundImage={item.animeBackgroundCoverImage}
+                animeCardBackgroundImage={item.animeCardBackgroundImage}
+                animeTags={item.tags}
             />
         {/each}
     </div>
