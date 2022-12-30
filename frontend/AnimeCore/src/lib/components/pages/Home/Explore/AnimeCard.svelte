@@ -53,7 +53,7 @@
     </background-hero-content>
 </div>
 
-<style>
+<style lang="scss">
     background-hero-image-gradient {
         background: linear-gradient(90deg, #070519 -1.41%, rgba(7, 5, 25, 0) 100%),
             linear-gradient(180deg, rgba(7, 5, 25, 0) -16%, rgba(7, 5, 25, 0.9) 95.81%);
