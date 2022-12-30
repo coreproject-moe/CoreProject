@@ -3,6 +3,9 @@
     export let animeCoverBackgroundImage: string;
     export let animeCardBackgroundImage: string;
     export let animeTags: string[];
+    export let animeEpisodeCount: string | number;
+    export let animeAirTime: string | number;
+    export let animeStudio: string;
 </script>
 
 <div class="inline-grid h-52 w-96 ">
@@ -47,7 +50,13 @@
                 </div>
 
                 <!-- Anime Card Informations  -->
-                <p>helo</p>
+                <div class="p-3">
+                    <p class="text-sm">
+                        <span class="items">TV</span>
+                        <span class="items">{String(animeEpisodeCount)} eps</span>
+                        <span class="items">{animeAirTime}</span>
+                    </p>
+                </div>
             </div>
         </div>
     </background-hero-content>
@@ -61,5 +70,10 @@
     background-image-gradient {
         background: linear-gradient(90deg, rgba(7, 5, 25, 0.5) 0%, rgba(7, 5, 25, 0) 99.75%),
             linear-gradient(179.94deg, rgba(7, 5, 25, 0) 0.05%, rgba(7, 5, 25, 0.8) 98.74%);
+    }
+    .items {
+        &:not(:last-child)::after {
+            content: " ▪ ";
+        }
     }
 </style>

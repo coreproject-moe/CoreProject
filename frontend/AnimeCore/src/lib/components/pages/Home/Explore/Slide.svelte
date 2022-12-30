@@ -103,6 +103,8 @@
                 animeCoverBackgroundImage={item.animeBackgroundCoverImage}
                 animeCardBackgroundImage={item.animeCardBackgroundImage}
                 animeTags={item.tags}
+                animeEpisodeCount={item.animeEpisodeCount}
+                animeAirTime={item.animeAirTime}
             />
         {/each}
     </div>

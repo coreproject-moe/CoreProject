@@ -16,11 +16,11 @@
 
     import Progress from "./Progress.svelte";
 
-    export let data: any[];
+    export let data: Array<{}>;
     export let mainHeroSlideActiveIndex: number;
     export let animeTitle: string;
     export let animeSummary: string;
-    export let animeEpisodeCount: number;
+    export let animeEpisodeCount: string | number;
     export let animeStudio: string;
     export let animeAirTime: string;
     export let backgroundImage: string;
@@ -199,10 +199,10 @@
                     </ScrollArea>
 
                     <h1 class="font-bold py-8 hidden md:flex">
-                        <span class="items pr-2">TV</span>
-                        <span class="items pr-2">{animeEpisodeCount} eps</span>
-                        <span class="items pr-2">Completed</span>
-                        <span class="items pr-2">{animeAirTime}</span>
+                        <span class="items">TV</span>
+                        <span class="items">{String(animeEpisodeCount)} eps</span>
+                        <span class="items">Completed</span>
+                        <span class="items">{String(animeAirTime)}</span>
                         <span class="items">{animeStudio}</span>
                     </h1>
                     <ScrollArea
@@ -276,6 +276,7 @@
     }
     .items {
         &:not(:last-child)::after {
+            @apply pr-2;
             content: " ▪ ";
         }
     }
