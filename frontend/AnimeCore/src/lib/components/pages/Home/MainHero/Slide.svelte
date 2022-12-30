@@ -33,12 +33,12 @@
     let background: string;
 
     let mobile: boolean;
-    let tablet: boolean;
-    let fullhd: boolean;
+    // let tablet: boolean;
+    // let fullhd: boolean;
 
-    $: fullhd = $responsiveMode === "fullhd";
-    $: tablet = $responsiveMode === "tablet";
     $: mobile = $responsiveMode === "mobile";
+    // $: fullhd = $responsiveMode === "fullhd";
+    // $: tablet = $responsiveMode === "tablet";
 
     const timerEnded = () => {
         addOneToMainHeroSlideActiveIndex();
@@ -81,7 +81,7 @@
     <div style="grid-area: 1 / 1 / 2 / 2">
         <div
             class="hero h-full w-full bg-center bg-no-repeat"
-            style="background-image:url('{background}')"
+            style="background-image:url('{background ?? ''}')"
         >
             <div
                 class="hero-overlay from-base-100 via-base-100/[.8] md:via-base-100/[.0001] grid"
@@ -118,12 +118,14 @@
                                             cx="5"
                                             cy="5"
                                             r="5"
-                                            style="fill:{index === mainHeroSlideActiveIndex
+                                            style="
+                                            fill:{index === mainHeroSlideActiveIndex
                                                 ? 'var(--swiper-pagination-color)'
                                                 : 'var(--swiper-pagination-bullet-inactive-color)'};
-                                        opacity:{index === mainHeroSlideActiveIndex
+                                            opacity:{index === mainHeroSlideActiveIndex
                                                 ? '1'
-                                                : 'var(--swiper-pagination-bullet-inactive-opacity)'}"
+                                                : 'var(--swiper-pagination-bullet-inactive-opacity)'}
+                                            "
                                         />
                                     </svg>
                                 {/each}
