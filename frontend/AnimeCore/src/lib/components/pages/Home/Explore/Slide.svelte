@@ -105,6 +105,7 @@
                 animeTags={item.tags}
                 animeEpisodeCount={item.animeEpisodeCount}
                 animeAirTime={item.animeAirTime}
+                animeSummary={item.animeSummary}
             />
         {/each}
     </div>

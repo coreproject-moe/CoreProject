@@ -5,7 +5,9 @@
     export let animeTags: string[];
     export let animeEpisodeCount: string | number;
     export let animeAirTime: string | number;
-    export let animeStudio: string;
+    export let animeSummary: string;
+
+    import voca from "voca";
 </script>
 
 <div class="inline-grid h-52 w-96 ">
@@ -51,11 +53,28 @@
 
                 <!-- Anime Card Informations  -->
                 <div class="p-3">
+                    <!-- Anime Information  -->
                     <p class="text-sm">
-                        <span class="items">TV</span>
-                        <span class="items">{String(animeEpisodeCount)} eps</span>
-                        <span class="items">{animeAirTime}</span>
+                        <span class="items font-thin">TV</span>
+                        <span class="items font-thin">{String(animeEpisodeCount)} eps</span>
+                        <span class="items font-thin">{animeAirTime}</span>
                     </p>
+
+                    <!-- Tags  -->
+                    <div class="mt-2 flex gap-2">
+                        {#each animeTags as tag}
+                            <div
+                                class="badge badge-warning !rounded-md w-12 text-xs font-bold !p-0"
+                            >
+                                {tag}
+                            </div>
+                        {/each}
+                    </div>
+
+                    <!-- Anime Summary  -->
+                    <div class="text-sm">
+                        {voca.chain(animeSummary).truncate(170)}
+                    </div>
                 </div>
             </div>
         </div>
@@ -72,6 +91,8 @@
             linear-gradient(179.94deg, rgba(7, 5, 25, 0) 0.05%, rgba(7, 5, 25, 0.8) 98.74%);
     }
     .items {
+        color: #d8d8d8;
+
         &:not(:last-child)::after {
             content: " ▪ ";
         }
