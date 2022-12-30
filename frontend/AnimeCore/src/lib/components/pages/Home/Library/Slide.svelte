@@ -17,7 +17,7 @@
             <div class="divider hidden md:flex before:bg-white after:bg-white" />
             <MyList />
 
-            <div class="gap-8 mt-16 hidden md:flex">
+            <div class="gap-8 mt-14 hidden md:flex">
                 <div
                     class="flex flex-col items-center w-32 h-20 justify-center rounded-lg bg-[#42424240]"
                 >
