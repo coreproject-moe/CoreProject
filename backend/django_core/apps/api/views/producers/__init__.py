@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404
 
 from ...filters.producers import ProducerFilter
 from ....producers.models import ProducerModel
-from ...schemas.producer import ProducerSchema
+from ...schemas.producers import ProducerSchema
 
 router = Router(tags=["producers"])
 

@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 from django.utils import timezone
 
 from apps.trackers.models import AnilistModel
-from ...schemas.tracker import AnilistGETSchema, AnilistPOSTSchema
+from ...schemas.trackers import AnilistGETSchema, AnilistPOSTSchema
 
 router = Router()
 

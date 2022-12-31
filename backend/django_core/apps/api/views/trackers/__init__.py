@@ -3,7 +3,7 @@ from ninja import Router
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
 
-from ...schemas.tracker import TrackerDeleteSchema, TrackerSchema
+from ...schemas.trackers import TrackerDeleteSchema, TrackerSchema
 
 router = Router(tags=["trackers"])
 

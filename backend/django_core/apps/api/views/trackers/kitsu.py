@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 from django.utils import timezone
 
 from apps.trackers.models import KitsuModel
-from ...schemas.tracker import KitsuGETSchema, KitsuPOSTSchema
+from ...schemas.trackers import KitsuGETSchema, KitsuPOSTSchema
 
 router = Router()
 

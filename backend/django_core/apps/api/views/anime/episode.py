@@ -1,5 +1,5 @@
 from apps.episodes.models import EpisodeModel
-from ...schemas.episode import EpisodeGETSchema, EpisodePOSTSchema
+from ...schemas.episodes import EpisodeGETSchema, EpisodePOSTSchema
 from core.permissions import is_superuser
 from ninja import Router
 

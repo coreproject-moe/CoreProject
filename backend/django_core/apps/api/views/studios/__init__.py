@@ -5,9 +5,9 @@ from django.db.models import Q
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 
-from .filters import StudioFilter
-from .models import StudioModel
-from ..api.schemas.studio import StudioSchema
+from ...filters.studios import StudioFilter
+from ....studios.models import StudioModel
+from ...schemas.studios import StudioSchema
 
 router = Router(tags=["studios"])
 

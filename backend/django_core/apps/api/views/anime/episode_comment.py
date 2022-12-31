@@ -1,5 +1,5 @@
 from apps.episodes.models import EpisodeCommentModel
-from ...schemas.episode.episode_comment import (
+from ...schemas.episodes.episode_comment import (
     EpisodeCommentGETSchema,
     EpisodeCommentPOSTSchema,
 )

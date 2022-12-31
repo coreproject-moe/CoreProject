@@ -6,9 +6,9 @@ from django.db.models import Q, QuerySet
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 
-from ...filters.character import CharacterFilter
+from ...filters.characters import CharacterFilter
 from apps.characters.models import CharacterModel
-from ...schemas.character import CharacterSchema
+from ...schemas.characters import CharacterSchema
 
 router = Router(tags=["characters"])
 

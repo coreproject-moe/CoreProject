@@ -1,5 +1,5 @@
 from apps.episodes.models import EpisodeTimestampModel
-from ...schemas.episode.episode_timestamp import (
+from ...schemas.episodes.episode_timestamp import (
     EpisodeTimestampGETSchema,
     EpisodeTimestampPOSTSchema,
     EpisodeTimestampTotalTimestampSchema,

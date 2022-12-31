@@ -4,8 +4,8 @@ from pydantic import AnyUrl
 from django.conf import settings
 from django.shortcuts import resolve_url
 
-from ...models import AnimeModel
-from ...schemas.anime import AnimeSynonymSchema
+from apps.anime.models import AnimeModel
+from ...schemas.anime.anime_synonym import AnimeSynonymSchema
 
 ## Observations from getting request from stack trace
 # So initial ovservation is that our code call was reduced from

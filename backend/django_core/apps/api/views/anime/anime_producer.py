@@ -6,7 +6,7 @@ from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
 
 from apps.producers.models import ProducerModel
-from ...schemas.producer import ProducerSchema
+from ...schemas.producers import ProducerSchema
 from apps.anime.models import AnimeModel
 
 router = Router()
