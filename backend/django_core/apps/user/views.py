@@ -2,7 +2,7 @@ import hashlib
 
 from core.utility import sendfile
 import httpx
-
+import textwrap
 from django.contrib.auth import get_user_model
 from django.core.management.utils import get_random_secret_key
 from django.core.validators import URLValidator
@@ -10,6 +10,8 @@ from django.http import HttpRequest, HttpResponse, StreamingHttpResponse
 from django.shortcuts import render
 
 from .models import CustomUser
+
+CLIENT = httpx.AsyncClient()
 
 
 async def avatar_view(
@@ -19,7 +21,7 @@ async def avatar_view(
     response: StreamingHttpResponse
 
     try:
-        user: CustomUser = await get_user_model().objects.aget(id=user_id)
+        user = await CustomUser.objects.aget(id=user_id)
     except CustomUser.DoesNotExist:
         return render(
             request,
@@ -37,30 +39,31 @@ async def avatar_view(
         response = sendfile(avatar_file)
 
     else:
-        client = httpx.AsyncClient()
-
         try:
             avatar_url = user.avatar_provider.format(
                 EMAIL=hashlib.md5(user.email.strip().lower().encode()).hexdigest()
             )
             # Just a check Here
-            URLValidator(avatar_url)
+            URLValidator()(avatar_url)
 
-            _request_ = client.build_request("GET", avatar_url)
-            avatar_response = await client.send(_request_)
+            _request_ = CLIENT.build_request("GET", avatar_url)
+            avatar_response = await CLIENT.send(_request_)
             response = StreamingHttpResponse(
                 avatar_response.iter_bytes(),
                 content_type=avatar_response.headers["content-type"],
             )
         except Exception as e:
             response = HttpResponse(
-                f"""
-                Please Check your email string.
-                <br/>
-                It is {avatar_url} which is not a valid string
-                <br />
-                Error : {e}
-                """
+                textwrap.dendant(
+                    f"""
+                        Please Check your <b>email</b> string.
+                        <br/>
+                        It is |> <b>{avatar_url}</b>
+                        which is not a valid string
+                        <br />
+                        <b>Error</b> : {e}
+                    """
+                )
             )
 
     return response
