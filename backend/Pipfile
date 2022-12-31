@@ -11,8 +11,6 @@ tzdata = "*"
 pillow = "*"
 # User Agent Parser
 user-agents = "*"
-# Regex Parser
-pregex = "*"
 # Postgres
 psycopg = "*"
 # 3rd Party ( Files )
