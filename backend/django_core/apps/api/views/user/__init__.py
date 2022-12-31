@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404
 
 from ...schemas.user import UserSchema
 
-router = Router(tags=["user"])
+router = Router()
 
 
 @router.get("/", response=UserSchema, auth=AuthBearer())

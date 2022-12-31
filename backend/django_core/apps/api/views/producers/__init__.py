@@ -9,7 +9,7 @@ from ...filters.producers import ProducerFilter
 from ....producers.models import ProducerModel
 from ...schemas.producers import ProducerSchema
 
-router = Router(tags=["producers"])
+router = Router()
 
 
 @router.get("", response=list[ProducerSchema])

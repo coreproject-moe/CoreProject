@@ -9,7 +9,7 @@ from ...filters.studios import StudioFilter
 from ....studios.models import StudioModel
 from ...schemas.studios import StudioSchema
 
-router = Router(tags=["studios"])
+router = Router()
 
 
 @router.get("", response=list[StudioSchema])

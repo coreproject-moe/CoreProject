@@ -9,7 +9,7 @@ from ...filters.staffs import StaffFilter
 from ....staffs.models import StaffModel
 from ...schemas.staffs import StaffSchema
 
-router = Router(tags=["staffs"])
+router = Router()
 
 
 @router.get("", response=list[StaffSchema])

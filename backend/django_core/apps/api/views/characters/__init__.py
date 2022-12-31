@@ -10,7 +10,7 @@ from ...filters.characters import CharacterFilter
 from apps.characters.models import CharacterModel
 from ...schemas.characters import CharacterSchema
 
-router = Router(tags=["characters"])
+router = Router()
 
 
 @router.get("", response=list[CharacterSchema])
