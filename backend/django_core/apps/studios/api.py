@@ -7,7 +7,7 @@ from django.shortcuts import get_object_or_404
 
 from .filters import StudioFilter
 from .models import StudioModel
-from .schemas import StudioSchema
+from ..api.schemas.studio import StudioSchema
 
 router = Router(tags=["studios"])
 

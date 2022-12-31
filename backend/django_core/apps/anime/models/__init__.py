@@ -1,6 +1,3 @@
-from pathlib import Path
-from typing import Any
-
 from dynamic_filenames import FilePattern
 
 from django.db import models
