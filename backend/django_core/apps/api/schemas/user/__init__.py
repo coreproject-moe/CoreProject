@@ -28,7 +28,3 @@ class UserSchema(ModelSchema):
             },
         )
         return f"{settings.HOSTNAME}{url}"
-
-
-# Extra Imports
-# __ DO NOT MODIFY __

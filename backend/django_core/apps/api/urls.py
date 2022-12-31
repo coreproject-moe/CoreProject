@@ -4,7 +4,7 @@ from django.urls import path
 api = NinjaAPI(title="CoreProjectAPI")
 
 # Router Configurations
-# ___ DO NOT MODIFY ____
+
 
 # ___ ANIME ROUTER _____
 
