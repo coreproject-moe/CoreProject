@@ -32,7 +32,9 @@ anime_router.add_router(
 # Episodes
 
 anime_router.add_router(
-    "", import_string("apps.api.views.anime.episode.router"), tags=["anime_episodes"]
+    "",
+    import_string("apps.api.views.anime.episode.router"),
+    tags=["anime_episodes"],
 )
 anime_router.add_router(
     "",
@@ -100,5 +102,5 @@ user_router.add_router(
 
 
 urlpatterns = [
-    path("", api.urls),
+    path("v1/", api.urls),
 ]

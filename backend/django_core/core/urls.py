@@ -42,7 +42,7 @@ urlpatterns = [
     path("frontend/", include("apps.frontend.urls")),
     #   Api
     # ========
-    path("api/v1/", include("apps.api.urls")),
+    path("api/", include("apps.api.urls")),
 ]
 if settings.DEBUG:
     urlpatterns += (path("__debug__/", include("debug_toolbar.urls")),)
