@@ -82,6 +82,11 @@ tracker_router.add_router("", tracker_router_myanimelist_router, tags=["trackers
 # __ USER ROUTER __
 
 from .views.user import router as user_router
+from .views.user.login import router as user_router_login_router
+from .views.user.logout import router as user_router_logout_router
+
+user_router.add_router("", user_router_login_router, tags=["user"])
+user_router.add_router("", user_router_logout_router, tags=["user"])
 
 api.add_router("/user", user_router, tags=["user"])
 
