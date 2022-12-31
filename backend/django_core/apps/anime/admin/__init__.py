@@ -107,9 +107,6 @@ class AnimeInfoAdmin(admin.ModelAdmin):
 #     return False
 
 
-# Extra Imports
-# __ DO NOT REMOVE __
-
-from .anime_genre import AnimeGenreAdmin
-from .anime_synonym import AnimeSynonymAdmin
-from .anime_theme import AnimeThemeAdmin
+from .anime_genre import AnimeGenreAdmin as AnimeGenreAdmin
+from .anime_synonym import AnimeSynonymAdmin as AnimeSynonymAdmin
+from .anime_theme import AnimeThemeAdmin as AnimeThemeAdmin
