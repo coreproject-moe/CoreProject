@@ -1,6 +1,5 @@
-from ninja import ModelSchema
-
 from apps.trackers.models import AnilistModel
+from ninja import ModelSchema
 
 
 class AnilistGETSchema(ModelSchema):

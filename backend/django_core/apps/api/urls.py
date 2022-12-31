@@ -1,4 +1,5 @@
 from ninja import NinjaAPI
+
 from django.urls import path
 
 api = NinjaAPI(title="CoreProjectAPI")
@@ -9,8 +10,6 @@ api = NinjaAPI(title="CoreProjectAPI")
 # ___ ANIME ROUTER _____
 
 from .views.anime import router as anime_router
-
-
 from .views.anime.anime_character import router as anime_router_anime_character_router
 from .views.anime.anime_genre import router as anime_router_anime_genre_router
 from .views.anime.anime_producer import router as anime_router_anime_producer_router
@@ -24,7 +23,9 @@ anime_router.add_router("", anime_router_anime_studio_router, tags=["anime_info"
 anime_router.add_router("", anime_router_anime_theme_router, tags=["anime_info"])
 
 from .views.anime.episode import router as anime_router_anime_episode_router
-from .views.anime.episode_comment import router as anime_router_anime_episode_comment_router
+from .views.anime.episode_comment import (
+    router as anime_router_anime_episode_comment_router,
+)
 from .views.anime.episode_timestamp import (
     router as anime_router_anime_episode_timestamp_router,
 )

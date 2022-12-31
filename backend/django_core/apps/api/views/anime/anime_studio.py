@@ -1,3 +1,5 @@
+from apps.anime.models import AnimeModel
+from apps.studios.models import StudioModel
 from core.permissions import is_superuser
 from ninja import Router
 
@@ -5,9 +7,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
 
-from apps.studios.models import StudioModel
 from ...schemas.studios import StudioSchema
-from apps.anime.models import AnimeModel
 
 router = Router()
 

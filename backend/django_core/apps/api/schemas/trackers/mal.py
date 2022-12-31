@@ -1,6 +1,5 @@
-from ninja import ModelSchema
-
 from apps.trackers.models import MalModel
+from ninja import ModelSchema
 
 
 class MALGETSchema(ModelSchema):

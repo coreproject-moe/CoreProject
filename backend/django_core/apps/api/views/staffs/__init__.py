@@ -5,8 +5,8 @@ from django.db.models import Q, QuerySet
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 
-from ...filters.staffs import StaffFilter
 from ....staffs.models import StaffModel
+from ...filters.staffs import StaffFilter
 from ...schemas.staffs import StaffSchema
 
 router = Router()

@@ -1,9 +1,9 @@
 import hashlib
+import textwrap
 
 from core.utility import sendfile
 import httpx
-import textwrap
-from django.contrib.auth import get_user_model
+
 from django.core.management.utils import get_random_secret_key
 from django.core.validators import URLValidator
 from django.http import HttpRequest, HttpResponse, StreamingHttpResponse

@@ -1,6 +1,5 @@
-from ninja import ModelSchema
-
 from apps.anime.models import AnimeThemeModel
+from ninja import ModelSchema
 
 
 class AnimeThemeSchema(ModelSchema):

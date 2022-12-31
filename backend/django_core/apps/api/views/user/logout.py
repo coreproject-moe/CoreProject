@@ -1,9 +1,8 @@
+from apps.user.models import Token
 from core.auth import AuthBearer
 from ninja import Router
 
 from django.http import HttpRequest, HttpResponse
-
-from apps.user.models import Token
 
 router = Router()
 

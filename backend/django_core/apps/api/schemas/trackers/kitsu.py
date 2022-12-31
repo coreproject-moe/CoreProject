@@ -1,6 +1,5 @@
-from ninja import ModelSchema
-
 from apps.trackers.models import KitsuModel
+from ninja import ModelSchema
 
 
 class KitsuGETSchema(ModelSchema):

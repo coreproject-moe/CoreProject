@@ -5,8 +5,8 @@ from django.db.models import Q
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 
-from ...filters.studios import StudioFilter
 from ....studios.models import StudioModel
+from ...filters.studios import StudioFilter
 from ...schemas.studios import StudioSchema
 
 router = Router()

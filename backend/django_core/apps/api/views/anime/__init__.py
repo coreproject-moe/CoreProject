@@ -1,3 +1,5 @@
+from apps.anime.models import AnimeModel
+from apps.api.filters.anime import AnimeInfoFilters
 from core.permissions import is_superuser
 from ninja import Query, Router
 from ninja.pagination import paginate
@@ -8,8 +10,6 @@ from django.db.models import Q, QuerySet
 from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
 
-from apps.api.filters.anime import AnimeInfoFilters
-from apps.anime.models import AnimeModel
 from ...schemas.anime import AnimeInfoGETSchema, AnimeInfoPOSTSchema
 
 router = Router()

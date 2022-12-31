@@ -1,10 +1,10 @@
+from apps.user.backends import EmailOrUsernameModelBackend
+from apps.user.models import Token
 from ninja import Form, Router
 from pydantic import EmailStr
 
 from django.http import Http404, HttpRequest
 
-from apps.user.backends import EmailOrUsernameModelBackend
-from apps.user.models import Token
 from ...schemas.user.login import LoginSchema
 
 router = Router()

@@ -1,6 +1,5 @@
-from ninja import ModelSchema
-
 from apps.anime.models import AnimeSynonymModel
+from ninja import ModelSchema
 
 
 class AnimeSynonymSchema(ModelSchema):

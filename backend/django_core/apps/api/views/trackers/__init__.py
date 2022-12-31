@@ -18,4 +18,3 @@ def update_user_tracker_info(request: HttpRequest, payload: TrackerSchema):
 @login_required
 def delete_user_tracker_info(request: HttpRequest, payload: TrackerDeleteSchema):
     pass
-
