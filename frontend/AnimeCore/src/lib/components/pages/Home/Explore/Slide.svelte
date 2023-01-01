@@ -1,8 +1,8 @@
 <script lang="ts">
+    import exploreData from "$data/mock/explore.json";
     import FourBoxSquares from "$icons/FourBoxSquares.svelte";
     import Search from "$icons/Search.svelte";
 
-    import exploreData from "$data/mock/explore.json";
     import AnimeCard from "./AnimeCard.svelte";
 
     let selectionChoice = "popular";
