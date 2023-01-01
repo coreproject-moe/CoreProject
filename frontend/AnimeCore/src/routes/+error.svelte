@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-
-	import OverWorked from '$kaomoji/Overworked.svelte';
-	import HowCouldYouDoIt from '$kaomoji/HowCouldYouDoIt.svelte';
+import Alone from '$kaomoji/Alone.svelte';
 	import Confused from '$kaomoji/Confused.svelte';
-	import Alone from '$kaomoji/Alone.svelte';
+	import HowCouldYouDoIt from '$kaomoji/HowCouldYouDoIt.svelte';
+	import OverWorked from '$kaomoji/Overworked.svelte';
 
 	const KokoroColorWOrdMap: {
 		[key: string]: string | undefined;
