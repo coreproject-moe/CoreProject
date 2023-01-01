@@ -16,11 +16,20 @@
 
     import Progress from "./Progress.svelte";
 
-    export let data: any[];
+    export let data: Array<{
+        animeEpisodeCount: number;
+        animeStudio: string;
+        animeAirTime: string;
+        animeTitle: string;
+        animeSummary: string;
+        backgroundImage: string;
+        backgroundBanner: string;
+        tags: string[];
+    }>;
     export let mainHeroSlideActiveIndex: number;
     export let animeTitle: string;
     export let animeSummary: string;
-    export let animeEpisodeCount: number;
+    export let animeEpisodeCount: string | number;
     export let animeStudio: string;
     export let animeAirTime: string;
     export let backgroundImage: string;
@@ -33,12 +42,12 @@
     let background: string;
 
     let mobile: boolean;
-    let tablet: boolean;
-    let fullhd: boolean;
+    // let tablet: boolean;
+    // let fullhd: boolean;
 
-    $: fullhd = $responsiveMode === "fullhd";
-    $: tablet = $responsiveMode === "tablet";
     $: mobile = $responsiveMode === "mobile";
+    // $: fullhd = $responsiveMode === "fullhd";
+    // $: tablet = $responsiveMode === "tablet";
 
     const timerEnded = () => {
         addOneToMainHeroSlideActiveIndex();
@@ -81,7 +90,7 @@
     <div style="grid-area: 1 / 1 / 2 / 2">
         <div
             class="hero h-full w-full bg-center bg-no-repeat"
-            style="background-image:url('{background}')"
+            style="background-image:url('{background ?? ''}')"
         >
             <div
                 class="hero-overlay from-base-100 via-base-100/[.8] md:via-base-100/[.0001] grid"
@@ -118,12 +127,14 @@
                                             cx="5"
                                             cy="5"
                                             r="5"
-                                            style="fill:{index === mainHeroSlideActiveIndex
+                                            style="
+                                            fill:{index === mainHeroSlideActiveIndex
                                                 ? 'var(--swiper-pagination-color)'
                                                 : 'var(--swiper-pagination-bullet-inactive-color)'};
-                                        opacity:{index === mainHeroSlideActiveIndex
+                                            opacity:{index === mainHeroSlideActiveIndex
                                                 ? '1'
-                                                : 'var(--swiper-pagination-bullet-inactive-opacity)'}"
+                                                : 'var(--swiper-pagination-bullet-inactive-opacity)'}
+                                            "
                                         />
                                     </svg>
                                 {/each}
@@ -197,10 +208,10 @@
                     </ScrollArea>
 
                     <h1 class="font-bold py-8 hidden md:flex">
-                        <span class="items pr-2">TV</span>
-                        <span class="items pr-2">{animeEpisodeCount} eps</span>
-                        <span class="items pr-2">Completed</span>
-                        <span class="items pr-2">{animeAirTime}</span>
+                        <span class="items">TV</span>
+                        <span class="items">{String(animeEpisodeCount)} eps</span>
+                        <span class="items">Completed</span>
+                        <span class="items">{String(animeAirTime)}</span>
                         <span class="items">{animeStudio}</span>
                     </h1>
                     <ScrollArea
@@ -274,6 +285,7 @@
     }
     .items {
         &:not(:last-child)::after {
+            @apply pr-2;
             content: " ▪ ";
         }
     }

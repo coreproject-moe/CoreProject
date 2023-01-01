@@ -1,4 +1,5 @@
 <script lang="ts">
+    import exploreData from "$data/mock/explore.json";
     import FourBoxSquares from "$icons/FourBoxSquares.svelte";
     import Search from "$icons/Search.svelte";
 
@@ -23,7 +24,7 @@
         {/each}
     </div>
 
-    <div class="flex gap-7 mt-10">
+    <div class="flex gap-7 mt-8">
         <div class="flex flex-col w-[135px]">
             <span>Time Range</span>
             <select class="mt-2 select w-full bg-neutral">
@@ -96,8 +97,16 @@
     </div>
 
     <div class="mt-[40px] grid gap-10 grid-cols-3">
-        {#each Array(9) as item}
-            <AnimeCard />
+        {#each exploreData as item}
+            <AnimeCard
+                animeName={item.animeTitle}
+                animeCoverBackgroundImage={item.animeBackgroundCoverImage}
+                animeCardBackgroundImage={item.animeCardBackgroundImage}
+                animeTags={item.tags}
+                animeEpisodeCount={item.animeEpisodeCount}
+                animeAirTime={item.animeAirTime}
+                animeSummary={item.animeSummary}
+            />
         {/each}
     </div>
 </div>
