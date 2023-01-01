@@ -7,20 +7,3 @@ declare namespace App {
 	// interface Error {}
 	// interface Platform {}
 }
-
-interface Window {
-	django: {
-		IMAGE_CHOICES: Array<{
-			type: 'pixiv' | 'anime';
-			name: string;
-			image: string;
-		}>;
-		URLS: {
-			SIGNUP: string;
-			LOGIN: string;
-		};
-		DEBUG: string;
-		CSRFTOKEN: string;
-		USER_IS_AUTHENTICATED: boolean;
-	};
-}

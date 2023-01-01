@@ -77,8 +77,6 @@ INSTALLED_APPS = [
     "apps.studios",
     "apps.staffs",
     "apps.episodes",
-    # Views ( Frontend )
-    "apps.frontend",
 ]
 
 
