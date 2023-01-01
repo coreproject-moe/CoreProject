@@ -67,7 +67,9 @@ INSTALLED_APPS = [
     # 3rd party Django stuff
     "django_cleanup.apps.CleanupConfig",
     "huey.contrib.djhuey",
-    # APIS
+    # Api ( Django-Ninja )
+    "apps.api",
+    # Models
     "apps.anime",
     "apps.trackers",
     "apps.characters",
@@ -75,8 +77,6 @@ INSTALLED_APPS = [
     "apps.studios",
     "apps.staffs",
     "apps.episodes",
-    # Views ( Frontend )
-    "apps.frontend",
 ]
 
 

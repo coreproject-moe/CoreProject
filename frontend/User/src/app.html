@@ -48,35 +48,7 @@
                 font-display: swap;
             }
         </style>
-        <script id="django">
-            window.django = {
-                CSRFTOKEN: '{{ csrf_token }}',
-                DEBUG: "{{ debug|yesno:'true,false' }}",
-                URLS: {
-                    SIGNUP: "{{% url 'sign_up' %}}"
-                },
-                IMAGE_CHOICES: [
-                    {
-                        type: 'anime',
-                        name: 'Demon Slayer',
-                        image: '/posters/demon-slayer.webp',
-                        credit:
-                        'https://www.reddit.com/r/DemonSlayerAnime/comments/tpgpid/demon_slayer_4k_wallpaper/'
-                    },
-                    {
-                        type: 'anime',
-                        name: 'Attack on Titan',
-                        image: '/posters/attack-on-titan.jpg'
-                    },
-                    {
-                        type: 'anime',
-                        name: 'Comic Girls',
-                        image: '/posters/Comic-Girls-Image.png'
-                    }
-                ],
-                USER_IS_AUTHENTICATED: Boolean("{{ request.user.is_authenticated|yesno:'true,false' }}")
-            };
-        </script>
+
         %sveltekit.head%
     </head>
     <body>

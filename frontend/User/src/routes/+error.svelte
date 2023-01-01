@@ -1,11 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	// Odd naming ?
-	// Svelte doesnt allow us to name components like 404 ( maybe its JS thing )
-	import FourZeroThree from '$components/errors/403.svelte';
-	import FourZeroFour from '$components/errors/404.svelte';
-	import FourOneEight from '$components/errors/418.svelte';
-	import FiveZeroZero from '$components/errors/500.svelte';
+import Alone from '$kaomoji/Alone.svelte';
+	import Confused from '$kaomoji/Confused.svelte';
+	import HowCouldYouDoIt from '$kaomoji/HowCouldYouDoIt.svelte';
+	import OverWorked from '$kaomoji/Overworked.svelte';
 
 	const KokoroColorWOrdMap: {
 		[key: string]: string | undefined;
@@ -55,40 +53,67 @@
 			text: formatKokoroColor(
 				`Even to her precious user-kun, kokoro-chan has some secrets that she wants to hide. Well, since there’s nothing you can do about that, you can go back home, browse the forums or come say hi!`
 			),
-			component: FourZeroThree
+			kaomoji: {
+				component: Alone,
+				width: 321,
+				height: 118
+			}
 		},
 		{
 			status: 404,
 			text: formatKokoroColor(
 				`Our hardworking kokoro-chan was unable to find that page. While she collects more data on it, why don’t you go back home, explore some random anime, browse the forums or come say hi!`
 			),
-			component: FourZeroFour
+			kaomoji: {
+				component: Confused,
+				width: 414,
+				height: 123
+			}
 		},
 		{
 			status: 418,
 			text: formatKokoroColor(
 				`kokoro-chan refuses to brew coffee with a teapot. While she buys an electric coffee maker, why don’t you go back home, explore some random anime, browse the forums or come say hi!`
 			),
-			component: FourOneEight
+			kaomoji: {
+				component: HowCouldYouDoIt,
+				width: 309,
+				height: 108
+			}
 		},
 		{
 			status: 500,
 			text: formatKokoroColor(
 				`Uh-oh, looks like our cute kokoro-chan worked really hard for the past few days and has now fallen asleep. You can wait for her to wake up by looking at the status page, or come say hi to other fellow kokoro-chan worshippers! ah- also let’s wish her sweet dreams!`
 			),
-			component: FiveZeroZero
+			kaomoji: {
+				component: OverWorked,
+				width: 387,
+				height: 114
+			}
 		}
 	];
 	let errorPage = errorPages.find((item) => item.status === $page.status);
 
 	const errorMessage = $page?.error?.message as string;
-	const status = Number($page?.status).toString();
 </script>
 
 <svelte:head>
 	<title>CoreProject | {$page.status}</title>
 </svelte:head>
 
-{#if errorPage}
-	<svelte:component this={errorPage.component} {status} {errorMessage} errorText={errorPage.text} />
-{/if}
+<div class="flex items-center justify-center h-screen flex-col text-center gap-12">
+	<svelte:component
+		this={errorPage?.kaomoji.component}
+		width={errorPage?.kaomoji?.width}
+		height={errorPage?.kaomoji.height}
+	/>
+	<h1 class="text-indigo-700 text-3xl">
+		<b>{errorPage?.status}</b>
+		-
+		<b>{errorMessage}</b>
+	</h1>
+	<p class="w-[70vw] font-bold">
+		{@html errorPage?.text}
+	</p>
+</div>
