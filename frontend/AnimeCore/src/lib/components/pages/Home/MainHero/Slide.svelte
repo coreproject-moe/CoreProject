@@ -16,7 +16,16 @@
 
     import Progress from "./Progress.svelte";
 
-    export let data: Array<{}>;
+    export let data: Array<{
+        animeEpisodeCount: number;
+        animeStudio: string;
+        animeAirTime: string;
+        animeTitle: string;
+        animeSummary: string;
+        backgroundImage: string;
+        backgroundBanner: string;
+        tags: string[];
+    }>;
     export let mainHeroSlideActiveIndex: number;
     export let animeTitle: string;
     export let animeSummary: string;
