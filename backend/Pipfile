@@ -5,12 +5,10 @@ name = "pypi"
 
 [packages]
 # When django 4.2 releases
-django = {version = ">=4.2", extras = ["argon2"]}
+django = {version = ">=4.1", extras = ["argon2"]}
 tzdata = "*"
 # First party ( Image )
 pillow = "*"
-# User Agent Parser
-user-agents = "*"
 # Postgres
 psycopg = "*"
 # 3rd Party ( Files )

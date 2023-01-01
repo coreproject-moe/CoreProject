@@ -4,11 +4,33 @@
 
 	import AnimeCore from '$icons/AnimeCore.svelte';
 
-	let CHOICE_NUMBER = 1;
-	let CHOICES: typeof window.django.IMAGE_CHOICES = [];
-
+	let CHOICE_NUMBER: number;
+	let CHOICES: Array<{
+		type: string;
+		name: string;
+		image: string;
+		credit?: string;
+	}>;
 	onMount(() => {
-		CHOICES = window.django.IMAGE_CHOICES;
+		CHOICES = [
+			{
+				type: 'anime',
+				name: 'Demon Slayer',
+				image: '/posters/demon-slayer.webp',
+				credit:
+					'https://www.reddit.com/r/DemonSlayerAnime/comments/tpgpid/demon_slayer_4k_wallpaper/'
+			},
+			{
+				type: 'anime',
+				name: 'Attack on Titan',
+				image: '/posters/attack-on-titan.jpg'
+			},
+			{
+				type: 'anime',
+				name: 'Comic Girls',
+				image: '/posters/Comic-Girls-Image.png'
+			}
+		];
 
 		setInterval(() => {
 			const index = Math.floor(Math.random() * CHOICES.length);
