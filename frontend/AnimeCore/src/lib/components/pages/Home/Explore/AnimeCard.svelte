@@ -29,20 +29,20 @@
         <div class="rounded-2xl bg-no-repeat bg-cover bg-center">
             <div class="flex flex-row">
                 <!-- Anime image cards  -->
-                <div class="inline-grid w-[135px] h-52">
+                <div class="inline-grid h-52">
                     <background-image
-                        class="bg-no-repeat bg-cover bg-center h-full rounded-2xl"
+                        class="w-[135px] bg-no-repeat bg-cover bg-center h-full rounded-2xl"
                         style="
                             background-image:url('{animeCoverBackgroundImage ?? ''}');
                             grid-area: 1 / 1 / 2 / 2;
                         "
                     />
                     <background-image-gradient
-                        class="h-full rounded-2xl"
+                        class="w-[135px] rounded-2xl"
                         style="grid-area: 1 / 1 / 2 / 2;"
                     />
                     <background-image-text
-                        class="h-full flex items-center"
+                        class="w-[135px] flex items-center"
                         style="grid-area: 1 / 1 / 2 / 2;"
                     >
                         <p class="px-4 text-center text-white">
