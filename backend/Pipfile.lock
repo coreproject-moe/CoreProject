@@ -438,11 +438,11 @@
         "httpx": {
             "extras": ["brotli", "http2"],
             "hashes": [
-                "sha256:0b9b1f0ee18b9978d637b0776bfd7f54e2ca278e063e3586d8f01cda89e042a8",
-                "sha256:202ae15319be24efe9a8bd4ed4360e68fde7b38bcc2ce87088d416f026667d19"
+                "sha256:106cded342a44e443060fab70ef327139248c61939e77d73964560c8d8b57069",
+                "sha256:e824a6fa18ffaa6423c6f3a32d5096fc15bd8dff43663a223f06242fc69451a8"
             ],
             "index": "pypi",
-            "version": "==0.23.1"
+            "version": "==0.23.2"
         },
         "huey": {
             "hashes": [
