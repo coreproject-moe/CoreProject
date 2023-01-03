@@ -21,36 +21,10 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
-
-# Android/IntelliJ
-#
-build/
-.idea
-.gradle
-local.properties
-*.iml
-*.hprof
-.cxx/
-
-# node.js
-#
-node_modules/
-npm-debug.log
-yarn-error.log
-
-# BUCK
-buck-out/
-\.buckd/
-*.keystore
-!debug.keystore
+.xcode.env.local
 
 # Bundle artifacts
 *.jsbundle
 
 # CocoaPods
-/ios/Pods/
-
-# Expo
-.expo/
-web-build/
-dist/
+/Pods/
