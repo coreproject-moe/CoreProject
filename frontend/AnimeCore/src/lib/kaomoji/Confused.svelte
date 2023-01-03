@@ -1,4 +1,13 @@
-<svg {...$$props} viewBox="0 0 295 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+<script lang="ts">
+    type $$Props = svelte.JSX.HTMLAttributes<SVGElement>;
+</script>
+
+<svg
+    {...$$props}
+    viewBox="0 0 295 110"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+>
     <path
         d="M247.781 37.2022C247.781 34.7489 248.448 33.0422 249.781 32.0822C251.115 31.0689 252.741 30.5622 254.661 30.5622C256.528 30.5622 258.128 31.0689 259.461 32.0822C260.795 33.0422 261.461 34.7489 261.461 37.2022C261.461 39.5489 260.795 41.2555 259.461 42.3222C258.128 43.3355 256.528 43.8422 254.661 43.8422C252.741 43.8422 251.115 43.3355 249.781 42.3222C248.448 41.2555 247.781 39.5489 247.781 37.2022Z"
         fill="#DCD9F7"
@@ -37,7 +46,10 @@
             gradientUnits="userSpaceOnUse"
         >
             <stop stop-color="#070519" />
-            <stop offset="1" stop-color="#7569E1" />
+            <stop
+                offset="1"
+                stop-color="#7569E1"
+            />
         </linearGradient>
         <linearGradient
             id="paint1_linear_507_313"
@@ -47,8 +59,15 @@
             y2="109.258"
             gradientUnits="userSpaceOnUse"
         >
-            <stop stop-color="#DCD9F7" stop-opacity="0.6" />
-            <stop offset="1" stop-color="white" stop-opacity="0" />
+            <stop
+                stop-color="#DCD9F7"
+                stop-opacity="0.6"
+            />
+            <stop
+                offset="1"
+                stop-color="white"
+                stop-opacity="0"
+            />
         </linearGradient>
         <linearGradient
             id="paint2_linear_507_313"
@@ -59,7 +78,10 @@
             gradientUnits="userSpaceOnUse"
         >
             <stop stop-color="white" />
-            <stop offset="1" stop-color="#C5C5C5" />
+            <stop
+                offset="1"
+                stop-color="#C5C5C5"
+            />
         </linearGradient>
         <linearGradient
             id="paint3_linear_507_313"
@@ -70,7 +92,10 @@
             gradientUnits="userSpaceOnUse"
         >
             <stop stop-color="white" />
-            <stop offset="1" stop-color="#CBCBCB" />
+            <stop
+                offset="1"
+                stop-color="#CBCBCB"
+            />
         </linearGradient>
         <linearGradient
             id="paint4_linear_507_313"
@@ -80,8 +105,15 @@
             y2="109.258"
             gradientUnits="userSpaceOnUse"
         >
-            <stop stop-color="#DCD9F7" stop-opacity="0.6" />
-            <stop offset="1" stop-color="white" stop-opacity="0" />
+            <stop
+                stop-color="#DCD9F7"
+                stop-opacity="0.6"
+            />
+            <stop
+                offset="1"
+                stop-color="white"
+                stop-opacity="0"
+            />
         </linearGradient>
     </defs>
 </svg>

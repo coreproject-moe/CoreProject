@@ -1,37 +1,17 @@
-from collections.abc import Generator
 import hashlib
-from io import BytesIO
-import mimetypes
-from typing import IO
+import textwrap
 
-from yarl import URL
+from core.utility import sendfile
+import httpx
 
-from django.conf import settings
-from django.contrib.auth import get_user_model
-from django.http import Http404, HttpRequest, HttpResponse, StreamingHttpResponse
-
-from aiohttp_client_cache.backends import RedisBackend
-from aiohttp_client_cache.session import CachedSession
+from django.core.management.utils import get_random_secret_key
+from django.core.validators import URLValidator
+from django.http import HttpRequest, HttpResponse, StreamingHttpResponse
+from django.shortcuts import render
 
 from .models import CustomUser
 
-CHUNK_SIZE = 512  # 512 bytes
-
-
-def read_files_in_chunks(
-    file_object: IO[bytes],
-    chunk_size: int = CHUNK_SIZE,
-) -> Generator[bytes, None, None]:
-    """
-    Lazy function to read a file piece by piece.
-    """
-    while True:
-        data = file_object.read(chunk_size)
-        if not data:
-            break
-        yield data
-
-    file_object.close()
+CLIENT = httpx.AsyncClient()
 
 
 async def avatar_view(
@@ -41,43 +21,49 @@ async def avatar_view(
     response: StreamingHttpResponse
 
     try:
-        user: CustomUser = await get_user_model().objects.aget(id=user_id)
+        user = await CustomUser.objects.aget(id=user_id)
     except CustomUser.DoesNotExist:
-        raise Http404("User does not exist")
+        return render(
+            request,
+            "user/user_does_not_exist.htm",
+            context={
+                "database_name": "postgres",
+                "database_user": "animecore",
+                "database_password": str(get_random_secret_key()),
+                "user_id": user_id,
+            },
+        )
 
     if user.avatar:
         avatar_file = open(user.avatar.path, "rb")
-        file_iterator = read_files_in_chunks(avatar_file)
-        response = StreamingHttpResponse(
-            streaming_content=file_iterator,
-        )
-        response["content-type"] = str(
-            mimetypes.MimeTypes().guess_type(
-                url=user.avatar.path,
-            )[0]
-        )
+        response = sendfile(avatar_file)
 
     else:
-        # Proxy from Libravatar
-        url = str(
-            URL(
-                user.avatar_provider.format(
-                    EMAIL=hashlib.md5(user.email.strip().lower().encode()).hexdigest()
-                )
-            ),
-        )
-        async with CachedSession(
-            cache=RedisBackend(
-                "avatar",
-                expire_after=settings.CACHE_MIDDLEWARE_SECONDS,
+        try:
+            avatar_url = user.avatar_provider.format(
+                EMAIL=hashlib.md5(user.email.strip().lower().encode()).hexdigest()
             )
-        ) as session:
-            async with session.get(url, allow_redirects=True) as r:
-                response = HttpResponse(
-                    BytesIO(await r.read()),
-                    headers={
-                        "content-type": r.headers["content-type"],
-                    },
+            # Just a check Here
+            URLValidator()(avatar_url)
+
+            _request_ = CLIENT.build_request("GET", avatar_url)
+            avatar_response = await CLIENT.send(_request_)
+            response = StreamingHttpResponse(
+                avatar_response.iter_bytes(),
+                content_type=avatar_response.headers["content-type"],
+            )
+        except Exception as e:
+            response = HttpResponse(
+                textwrap.dendant(
+                    f"""
+                        Please Check your <b>email</b> string.
+                        <br/>
+                        It is |> <b>{avatar_url}</b>
+                        which is not a valid string
+                        <br />
+                        <b>Error</b> : {e}
+                    """
                 )
+            )
 
     return response

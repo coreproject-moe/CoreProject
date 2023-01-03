@@ -10,23 +10,33 @@ updates:
     - package-ecosystem: pip
       directory: /backend/
       schedule:
-          interval: monthly
+          interval: daily
+      open-pull-requests-limit: 100
 
     # Android
     # =======
     - package-ecosystem: pip
       directory: /android/AnimeCore/
       schedule:
-          interval: monthly
+          interval: daily
+      open-pull-requests-limit: 100
 
     # Frontend
     # =========
     - package-ecosystem: npm
       directory: /frontend/AnimeCore/
       schedule:
-          interval: monthly
+          interval: daily
+      open-pull-requests-limit: 100
 
     - package-ecosystem: npm
       directory: /frontend/Admin/
       schedule:
-          interval: monthly
+          interval: daily
+      open-pull-requests-limit: 100
+
+    - package-ecosystem: npm
+      directory: /frontend/User/
+      schedule:
+          interval: daily
+      open-pull-requests-limit: 100

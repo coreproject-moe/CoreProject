@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Self
 
 from django.contrib import admin
 from django.contrib.auth import get_user_model
@@ -7,7 +7,7 @@ from django.db.models import Q
 from django.utils.translation import gettext_lazy as _
 
 from .forms import CustomUserChangeForm, CustomUserCreationForm
-from .models import CustomUser
+from .models import CustomUser, Token
 
 USER_MODEL: CustomUser = get_user_model()
 
@@ -101,10 +101,13 @@ class CustomUserAdmin(DjangoUserAdmin):
     )
 
     @admin.display(description="username")
-    def get_username(self, obj: USER_MODEL, *args: Any, **kwargs: Any) -> USER_MODEL:
+    def get_username(
+        self: Self,
+        obj: USER_MODEL,
+    ) -> USER_MODEL:
         return obj
 
-    def get_search_results(self, request, queryset, search_term):
+    def get_search_results(self: Self, request, queryset, search_term):
         queryset, may_have_duplicates = super().get_search_results(
             request,
             queryset,
@@ -135,3 +138,5 @@ admin.site.register(get_user_model(), CustomUserAdmin)
 from django.contrib.auth.forms import AuthenticationForm  # noqa
 
 AuthenticationForm.base_fields["username"].label = "Email | Username (with discriminator) "
+
+admin.site.register(Token)

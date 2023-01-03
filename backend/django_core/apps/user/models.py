@@ -1,25 +1,20 @@
-from pathlib import Path
-from typing import Any
-import uuid
+from functools import partial
+from typing import Any, NoReturn, Self
+
+from dynamic_filenames import FilePattern
 
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils import timezone
+from django.utils.crypto import get_random_string
 from django.utils.translation import gettext_lazy as _
 
 from .managers import UserManager
-from .mixins.resize import ResizeImageMixin
 from .validators import username_validator
 
-
-class FileField:
-    # Thanks Stackoverflow
-    # https://stackoverflow.com/questions/1190697/django-filefield-with-upload-to-determined-at-runtime
-    @staticmethod
-    def avatar(*args, **kwargs) -> Path:
-        return Path("avatar", str(uuid.uuid4()))
+avatar = FilePattern(filename_pattern="/avatar{ext}")
 
 
 # Create your models here.
@@ -28,7 +23,6 @@ class FileField:
 class CustomUser(
     AbstractBaseUser,
     PermissionsMixin,
-    ResizeImageMixin,
 ):
     username = models.CharField(
         _("username"),
@@ -76,7 +70,7 @@ class CustomUser(
         ],
     )
     avatar = models.ImageField(
-        upload_to=FileField.avatar,
+        upload_to=avatar,
         default=None,
         blank=True,
         null=True,
@@ -113,11 +107,7 @@ class CustomUser(
                 )
             }"""
 
-    def save(self, *args: Any, **kwargs: Any) -> None:
-        # if self.avatar:
-        #     file = self.resize(self.avatar)
-        #     self.avatar.save(f"{self.username}.avif", file, save=False)
-
+    def save(self: Self, *args: tuple, **kwargs: dict[str, Any]) -> NoReturn:
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
@@ -130,3 +120,20 @@ class CustomUser(
         unique_together = [
             ("username", "username_discriminator"),
         ]
+
+
+class Token(models.Model):
+    token = models.CharField(
+        default=partial(get_random_string, 16),
+        max_length=16,
+        editable=False,
+    )
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return f"User : {self.user.username} | Token : {self.token}"
+
+    class Meta:
+        db_table = "user_token"
+        verbose_name = _("token")
+        verbose_name_plural = _("tokens")

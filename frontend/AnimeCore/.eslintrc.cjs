@@ -12,6 +12,7 @@ module.exports = {
         sourceType: "module",
         ecmaVersion: 2020
     },
+    globals: { svelte: true },
     rules: {
         /** Sort imports */
         "simple-import-sort/imports": "warn",
@@ -22,7 +23,7 @@ module.exports = {
             "warn",
             {
                 vars: "all",
-                varsIgnorePattern: "^_",
+                varsIgnorePattern: "\\$\\$Props",
                 args: "after-used",
                 argsIgnorePattern: "^_"
             }

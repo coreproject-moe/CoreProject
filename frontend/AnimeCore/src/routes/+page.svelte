@@ -3,10 +3,12 @@
     import { blur } from "svelte/transition";
     import { swipe } from "svelte-gestures";
 
+    import ExploreSlide from "$components/pages/Home/Explore/Slide.svelte";
     import GenreSlide from "$components/pages/Home/Genre/Slide.svelte";
     import LibrarySlide from "$components/pages/Home/Library/Slide.svelte";
     import MainHeroSlide from "$components/pages/Home/MainHero/Slide.svelte";
     import data from "$data/mock/main_hero_data.json";
+    import { navbar_variant } from "$store/Navbar_Variant";
     import { timer as timerStore } from "$store/Timer";
     const browser = detect();
 
@@ -14,6 +16,9 @@
     let mainHeroRootElement: HTMLElement;
 
     const addOneToMainHeroSlideActiveIndex = () => {
+        // Remove the previous image
+        $navbar_variant = "";
+
         if (mainHeroSlideActiveIndex + 1 === data.length) {
             mainHeroSlideActiveIndex = 0;
             return;
@@ -22,6 +27,9 @@
     };
 
     const minusOneToMainHeroSlideActiveIndex = () => {
+        // Remove the previous image
+        $navbar_variant = "";
+
         if (mainHeroSlideActiveIndex === 0) {
             mainHeroSlideActiveIndex = data.length - 1;
             return;
@@ -45,7 +53,7 @@
 
 <!-- svelte-ignore redundant-event-modifier -->
 <div
-    class="h-screen w-screen carousel carousel-vertical snap-none md:snap-y md:snap-mandatory text-white"
+    class="h-screen w-screen carousel carousel-vertical snap-none md:snap-y md:snap-mandatory text-white overflow-x-hidden"
     on:scroll|passive={() => {
         if (
             Math.abs(Number(mainHeroRootElement?.getBoundingClientRect().top)) >=
@@ -96,6 +104,9 @@
     </div>
     <div class="carousel-item h-auto snap-always">
         <LibrarySlide />
+    </div>
+    <div class="carousel-item h-auto snap-always">
+        <ExploreSlide />
     </div>
     <!-- Show a footer for  android users -->
     {#if ["Android OS", "iOS", null].includes(browser && browser.os)}

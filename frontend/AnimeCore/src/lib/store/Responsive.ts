@@ -13,7 +13,7 @@ const checkMode = () => {
     const TABLET = window.matchMedia("(min-width: 769px) and (max-width: 1023px)");
     const DESKTOP = window.matchMedia("(min-width: 1024px) and (max-width: 1215px)");
     const WIDESCREEN = window.matchMedia("(min-width: 1216px) and (max-width: 1407px)");
-    const FULLHD = window.matchMedia("(min-width: 1408px )");
+    const FULLHD = window.matchMedia("(min-width: 1408px)");
 
     switch (true) {
         case MOBILE.matches:

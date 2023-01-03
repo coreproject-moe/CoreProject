@@ -41,10 +41,6 @@ MAX_REQUESTS_PER_MINUTE = 55
 REQUEST_STATUS_CODES_TO_RETRY = [408, 429, 500, 502, 503, 504]
 BUCKET_NAME = "coreproject"
 
-ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "localhost",
-]
 
 # HOST configurations
 # We are using this to hyperlink model relations
@@ -56,7 +52,6 @@ HOSTNAME = "http://127.0.0.1:8000"
 INSTALLED_APPS = [
     # user must be above auth
     "apps.user",
-    "apps.__discord__",
     # Django stuff
     "django.contrib.admin",
     "django.contrib.auth",
@@ -72,14 +67,18 @@ INSTALLED_APPS = [
     # 3rd party Django stuff
     "django_cleanup.apps.CleanupConfig",
     "huey.contrib.djhuey",
-    # APIS
+    # Api ( Django-Ninja )
+    "apps.api",
+    # Models
     "apps.anime",
     "apps.trackers",
     "apps.characters",
     "apps.producers",
     "apps.studios",
     "apps.staffs",
+    "apps.episodes",
 ]
+
 
 # Debug Toolbar Add
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install-the-app
@@ -100,11 +99,12 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.cache.UpdateCacheMiddleware",  # Cache
     "django.middleware.common.CommonMiddleware",
+    "django.middleware.cache.FetchFromCacheMiddleware",  # Cache
     "django.middleware.csrf.CsrfViewMiddleware",
+    "corsheaders.middleware.CorsPostCsrfMiddleware",  # Cors headers
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "django.middleware.cache.FetchFromCacheMiddleware",  # Cache
 ]
 
 
@@ -125,6 +125,7 @@ if DEBUG:
     INTERNAL_IPS = [
         "127.0.0.1",
     ]
+
 # Cookie override
 CSRF_COOKIE_SAMESITE = "Strict"
 SESSION_COOKIE_SAMESITE = "Strict"
@@ -158,36 +159,39 @@ LOGIN_URL = "login_page"
 # Cache
 # https://docs.djangoproject.com/en/4.0/topics/cache/#filesystem-caching
 
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379",
-    }
-}
+# CACHES = {
+#     "default": {
+#         "BACKEND": "django.core.cache.backends.redis.RedisCache",
+#         "LOCATION": "redis://127.0.0.1:6379",
+#     }
+# }
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "CONN_MAX_AGE": None,
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+        "CONN_MAX_AGE": 60,
+        "CONN_HEALTH_CHECKS": True,
+    }
+}
 
 # POSTGRES
 # https://www.enterprisedb.com/postgres-tutorials/how-use-postgresql-django
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "django",
-        "USER": "postgres",
-        "PASSWORD": "supersecretpassword",
-        "HOST": "",
-        "PORT": "",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql_psycopg2",
+#         "NAME": "django",
+#         "USER": "postgres",
+#         "PASSWORD": "supersecretpassword",
+#         "HOST": "",
+#         "PORT": "",
+#         "CONN_MAX_AGE": 60,
+#         "CONN_HEALTH_CHECKS": True,
+#     }
+# }
 
 # Allow more fields to be deleted at once
 # https://stackoverflow.com/questions/47585583/the-number-of-get-post-parameters-exceeded-settings-data-upload-max-number-field
@@ -267,12 +271,25 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # django-cors-headers settings
 # https://pypi.org/project/django-cors-headers/
 
-CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:3000",
-    "http://127.0.0.1:8000",
-    "http://localhost:3000",
-    "http://localhost:8000",
+
+CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS = [
+    # Port = 5173
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
 ]
+
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 # settings.py -- alternative configuration method
 # https://huey.readthedocs.io/en/latest/contrib.html#setting-things-up
@@ -290,7 +307,3 @@ HUEY = PriorityRedisHuey(
 
 DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage"
 DBBACKUP_STORAGE_OPTIONS = {"location": os.path.join(BASE_DIR, "backup")}
-
-# Mappings from AIOHTTP
-BASE_AIOHTTP_URL = "http://localhost:8000"
-AIOHTTP_AVATAR_URL = f"{BASE_AIOHTTP_URL}/user/avatar/"  # /id

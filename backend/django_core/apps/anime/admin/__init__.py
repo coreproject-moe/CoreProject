@@ -103,16 +103,10 @@ class AnimeInfoAdmin(admin.ModelAdmin):
 
 
 # https://stackoverflow.com/questions/49293901/hide-model-from-main-admin-list-but-allow-creation-in-inline-editor
-# def has_module_permission(self, request):
+# def has_module_permission(self:Self, request):
 #     return False
 
 
-# Extra Imports
-# __ DO NOT REMOVE __
-
-from .anime_genre import AnimeGenreAdmin
-from .anime_synonym import AnimeSynonymAdmin
-from .anime_theme import AnimeThemeAdmin
-from .episode import EpisodeAdmin
-from .episode_comment import EpisodeCommentAdmin
-from .episode_timestamp import EpisodeTimestampAdmin
+from .anime_genre import AnimeGenreAdmin as AnimeGenreAdmin
+from .anime_synonym import AnimeSynonymAdmin as AnimeSynonymAdmin
+from .anime_theme import AnimeThemeAdmin as AnimeThemeAdmin
