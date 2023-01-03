@@ -47,9 +47,8 @@
         return input;
     }
 
-    const errorPages = [
-        {
-            status: 403,
+    const errorPages = {
+        403: {
             text: formatKokoroColor(
                 `Even to her precious user-kun, kokoro-chan has some secrets that she wants to hide. Well, since there’s nothing you can do about that, you can go back home, browse the forums or come say hi!`
             ),
@@ -59,8 +58,7 @@
                 height: 118
             }
         },
-        {
-            status: 404,
+        404: {
             text: formatKokoroColor(
                 `Our hardworking kokoro-chan was unable to find that page. While she collects more data on it, why don’t you go back home, explore some random anime, browse the forums or come say hi!`
             ),
@@ -70,8 +68,7 @@
                 height: 123
             }
         },
-        {
-            status: 418,
+        418: {
             text: formatKokoroColor(
                 `kokoro-chan refuses to brew coffee with a teapot. While she buys an electric coffee maker, why don’t you go back home, explore some random anime, browse the forums or come say hi!`
             ),
@@ -81,8 +78,7 @@
                 height: 108
             }
         },
-        {
-            status: 500,
+        500: {
             text: formatKokoroColor(
                 `Uh-oh, looks like our cute kokoro-chan worked really hard for the past few days and has now fallen asleep. You can wait for her to wake up by looking at the status page, or come say hi to other fellow kokoro-chan worshippers! ah- also let’s wish her sweet dreams!`
             ),
@@ -92,8 +88,11 @@
                 height: 114
             }
         }
-    ];
-    let errorPage = errorPages.find((item) => item.status === $page.status);
+    };
+
+    // Thanks stackoverflow
+    // https://stackoverflow.com/questions/57086672/element-implicitly-has-an-any-type-because-expression-of-type-string-cant-b
+    let errorPage = errorPages[Number($page.status) as keyof typeof errorPages] ?? undefined;
 
     const errorMessage = $page?.error?.message as string;
 </script>
@@ -109,7 +108,7 @@
         height={errorPage?.kaomoji.height}
     />
     <h1 class="text-indigo-700 text-3xl">
-        <b>{errorPage?.status}</b>
+        <b>{$page.status}</b>
         -
         <b>{errorMessage}</b>
     </h1>
