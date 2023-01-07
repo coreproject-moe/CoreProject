@@ -18,7 +18,7 @@
         "@felte/validator-yup": "^1.0.10",
         "@sveltejs/adapter-node": "^1.1.0",
         "@sveltejs/adapter-static": "^1.0.0",
-        "@sveltejs/adapter-vercel": "^1.0.0",
+        "@sveltejs/adapter-vercel": "^1.0.1",
         "@sveltejs/kit": "^1.0.7",
         "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
         "@tailwindcss/typography": "^0.5.8",
