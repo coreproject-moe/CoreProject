@@ -11,8 +11,8 @@ module.exports = {
 
     plugins: [
         require("@tailwindcss/typography"),
-        require("daisyui"),
-        require("tailwind-scrollbar-hide") /* This must be after `daisyui` */
+        require("tailwind-scrollbar-hide"),
+        require("daisyui")
     ],
 
     daisyui: {

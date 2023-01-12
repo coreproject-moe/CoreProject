@@ -85,7 +85,7 @@
                         </div>
                     </div>
                 {:else}
-                    <div class="p-3">
+                    <div class="p-3 w-[249px]">
                         <!-- Anime Information  -->
                         <p class="text-sm">
                             <span class="items font-thin">TV</span>
@@ -94,7 +94,7 @@
                         </p>
 
                         <!-- Tags  -->
-                        <div class="mt-2 flex gap-2">
+                        <div class="mt-2 flex gap-2 overflow-x-scroll scrollbar-hide">
                             {#each animeTags as tag}
                                 <div
                                     class="badge badge-warning !rounded-md text-xs font-bold !p-0 !lowercase"
