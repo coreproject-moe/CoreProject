@@ -13,39 +13,41 @@
     import voca from "voca";
 </script>
 
-<div class="inline-grid {mobile ? 'w-[300px]' : 'w-96'} {mobile ? 'h-[130px]' : 'h-52'}">
+<div class="inline-grid w-96 {mobile ? 'h-[130px]' : 'h-52'}">
     <background-hero-image
-        class="h-full bg-no-repeat bg-cover bg-center rounded-2xl"
+        class="h-full w-96 bg-no-repeat bg-cover bg-center rounded-2xl"
         style="
                 grid-area: 1 / 1 / 2 / 2;
                 background-image:url('{animeCardBackgroundImage ?? ''}')
             "
     />
     <background-hero-image-gradient
-        class="h-full rounded-2xl"
+        class="h-full w-96 rounded-2xl"
         style="grid-area: 1 / 1 / 2 / 2;"
     />
     <background-hero-content
-        class="h-full"
+        class="h-full w-96"
         style="grid-area: 1 / 1 / 2 / 2;"
     >
         <div class="rounded-2xl bg-no-repeat bg-cover bg-center">
             <div class="flex flex-row">
                 <!-- Anime image cards  -->
-                <div class="inline-grid h-52">
+                <div class="inline-grid {mobile ? 'h-[130px]' : 'h-52'}">
                     <background-image
-                        class="w-[135px] bg-no-repeat bg-cover bg-center h-full rounded-2xl"
+                        class="{mobile
+                            ? 'w-[87px]'
+                            : 'w-[135px]'} bg-no-repeat bg-cover bg-center h-full rounded-2xl"
                         style="
                             background-image:url('{animeCoverBackgroundImage ?? ''}');
                             grid-area: 1 / 1 / 2 / 2;
                         "
                     />
                     <background-image-gradient
-                        class="w-[135px] rounded-2xl"
+                        class="{mobile ? 'w-[87px]' : 'w-[135px]'} rounded-2xl"
                         style="grid-area: 1 / 1 / 2 / 2;"
                     />
                     <background-image-text
-                        class="w-[135px] flex items-center"
+                        class="{mobile ? 'w-[87px]' : 'w-[135px]'} hidden md:flex items-center"
                         style="grid-area: 1 / 1 / 2 / 2;"
                     >
                         <p class="px-4 text-center text-white">
@@ -55,30 +57,52 @@
                 </div>
 
                 <!-- Anime Card Informations  -->
-                <div class="p-3">
-                    <!-- Anime Information  -->
-                    <p class="text-sm">
-                        <span class="items font-thin">TV</span>
-                        <span class="items font-thin">{String(animeEpisodeCount)} eps</span>
-                        <span class="items font-thin">{animeAirTime}</span>
-                    </p>
+                {#if mobile}
+                    <div class="flex items-center pl-5 flex-col justify-center">
+                        <p class="text-left w-full font-bold text-white">{animeName}</p>
+                        <p class="text-sm pt-4 leading-3 w-full">
+                            <span class="items font-thin">TV</span>
+                            <span class="items font-thin">{String(animeEpisodeCount)} eps</span>
+                            <span class="items font-thin">{animeAirTime}</span>
+                        </p>
+                        <p class="text-warning pt-3 w-full font-thin">{undefined ?? "Studio"}</p>
 
-                    <!-- Tags  -->
-                    <div class="mt-2 flex gap-2">
-                        {#each animeTags as tag}
-                            <div
-                                class="badge badge-warning !rounded-md text-xs font-bold !p-0 !lowercase"
-                            >
-                                <span class="mx-[6px] my-[3px]">{tag}</span>
-                            </div>
-                        {/each}
+                        <div class="pt-3 flex gap-2 w-full overflow-y-scroll scrollbar-hide">
+                            {#each animeTags as tag}
+                                <div
+                                    class="badge badge-warning !rounded-md text-xs font-bold !p-0 !lowercase"
+                                >
+                                    <span class="mx-[6px] my-[3px]">{tag}</span>
+                                </div>
+                            {/each}
+                        </div>
                     </div>
+                {:else}
+                    <div class="p-3">
+                        <!-- Anime Information  -->
+                        <p class="text-sm">
+                            <span class="items font-thin">TV</span>
+                            <span class="items font-thin">{String(animeEpisodeCount)} eps</span>
+                            <span class="items font-thin">{animeAirTime}</span>
+                        </p>
 
-                    <!-- Anime Summary  -->
-                    <div class="text-sm mt-4">
-                        {voca.chain(animeSummary).truncate(170)}
+                        <!-- Tags  -->
+                        <div class="mt-2 flex gap-2">
+                            {#each animeTags as tag}
+                                <div
+                                    class="badge badge-warning !rounded-md text-xs font-bold !p-0 !lowercase"
+                                >
+                                    <span class="mx-[6px] my-[3px]">{tag}</span>
+                                </div>
+                            {/each}
+                        </div>
+
+                        <!-- Anime Summary  -->
+                        <div class="text-sm mt-4">
+                            {voca.chain(animeSummary).truncate(170)}
+                        </div>
                     </div>
-                </div>
+                {/if}
             </div>
         </div>
     </background-hero-content>

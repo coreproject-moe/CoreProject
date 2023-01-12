@@ -66,9 +66,9 @@
                 </button>
             </div>
         </div>
-        <div class="h-96 mt-10">
+        <div class="h-[285px] mt-10">
             <Swiper
-                spaceBetween={100}
+                spaceBetween={25}
                 slidesPerView={2}
                 direction="vertical"
             >
