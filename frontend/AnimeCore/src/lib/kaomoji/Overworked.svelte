@@ -1,5 +1,6 @@
 <script lang="ts">
-    type $$Props = svelte.JSX.HTMLAttributes<SVGElement>;
+    import type { SVGAttributes } from "svelte/elements";
+    type $$Props = SVGAttributes<SVGElement>;
 </script>
 
 <svg
