@@ -64,9 +64,9 @@
                     <div class="mt-2 flex gap-2">
                         {#each animeTags as tag}
                             <div
-                                class="badge badge-warning !rounded-md w-12 text-xs font-bold !p-0"
+                                class="badge badge-warning !rounded-md text-xs font-bold !p-0 !lowercase"
                             >
-                                {tag}
+                                <span class="mx-[6px] my-[3px]">{tag}</span>
                             </div>
                         {/each}
                     </div>
