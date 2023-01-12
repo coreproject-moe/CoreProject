@@ -34,7 +34,7 @@
         "eslint-plugin-simple-import-sort": "^8.0.0",
         "eslint-plugin-svelte3": "^4.0.0",
         "eslint-plugin-unused-imports": "^2.0.0",
-        "felte": "^1.2.6",
+        "felte": "^1.2.7",
         "js-cookie": "^3.0.1",
         "postcss": "^8.4.21",
         "postcss-load-config": "^4.0.1",
