@@ -6,17 +6,20 @@
     export let animeEpisodeCount: string | number;
     export let animeAirTime: string | number;
     export let animeSummary: string;
+    import { responsiveMode } from "$store/Responsive";
 
+    let mobile: boolean;
+    $: mobile = $responsiveMode === "mobile";
     import voca from "voca";
 </script>
 
-<div class="inline-grid h-52 w-96 ">
+<div class="inline-grid {mobile ? 'w-[300px]' : 'w-96'} {mobile ? 'h-[130px]' : 'h-52'}">
     <background-hero-image
         class="h-full bg-no-repeat bg-cover bg-center rounded-2xl"
         style="
-            grid-area: 1 / 1 / 2 / 2;
-            background-image:url('{animeCardBackgroundImage ?? ''}')
-        "
+                grid-area: 1 / 1 / 2 / 2;
+                background-image:url('{animeCardBackgroundImage ?? ''}')
+            "
     />
     <background-hero-image-gradient
         class="h-full rounded-2xl"

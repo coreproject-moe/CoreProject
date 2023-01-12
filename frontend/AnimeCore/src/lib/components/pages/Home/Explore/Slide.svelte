@@ -5,6 +5,7 @@
     import Funnel from "$icons/Funnel.svelte";
     import Search from "$icons/Search.svelte";
     import { responsiveMode } from "$store/Responsive";
+    import { Swiper, SwiperSlide } from "swiper/svelte";
 
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
@@ -13,7 +14,7 @@
     let selectionChoice = "popular";
 </script>
 
-<div class="hero min-h-[60vh] md:min-h-screen w-screen flex flex-col">
+<div class="hero min-h-[80vh] md:min-h-screen w-screen flex flex-col">
     <div
         class="flex gap-3 md:gap-32 pt-8 w-screen md:w-auto my-7 md:my-0 overflow-y-scroll scrollbar-hide"
     >
@@ -64,6 +65,27 @@
                     />
                 </button>
             </div>
+        </div>
+        <div class="h-96 mt-10">
+            <Swiper
+                spaceBetween={100}
+                slidesPerView={2}
+                direction="vertical"
+            >
+                {#each exploreData as item}
+                    <SwiperSlide>
+                        <AnimeCard
+                            animeName={item.animeTitle}
+                            animeCoverBackgroundImage={item.animeBackgroundCoverImage}
+                            animeCardBackgroundImage={item.animeCardBackgroundImage}
+                            animeTags={item.tags}
+                            animeEpisodeCount={item.animeEpisodeCount}
+                            animeAirTime={item.animeAirTime}
+                            animeSummary={item.animeSummary}
+                        />
+                    </SwiperSlide>
+                {/each}
+            </Swiper>
         </div>
     {:else}
         <div class="flex gap-7 mt-8">
