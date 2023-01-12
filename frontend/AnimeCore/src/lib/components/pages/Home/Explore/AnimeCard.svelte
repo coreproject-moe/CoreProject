@@ -6,11 +6,12 @@
     export let animeEpisodeCount: string | number;
     export let animeAirTime: string | number;
     export let animeSummary: string;
+
+    import voca from "voca";
     import { responsiveMode } from "$store/Responsive";
 
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
-    import voca from "voca";
 </script>
 
 <div class="inline-grid w-96 {mobile ? 'h-36' : 'h-52'}">
