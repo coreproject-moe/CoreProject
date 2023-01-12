@@ -15,12 +15,12 @@
 
 <div class="hero min-h-[60vh] md:min-h-screen w-screen flex flex-col">
     <div
-        class="flex gap-3 md:gap-32 pt-8 w-screen md:w-auto ml-8 md:ml-0 my-7 md:my-0 overflow-y-scroll scrollbar-hide"
+        class="flex gap-3 md:gap-32 pt-8 w-screen md:w-auto my-7 md:my-0 overflow-y-scroll scrollbar-hide"
     >
         {#each ["popular", "trending", "top rated", "upcoming"] as item}
             <button
                 class="btn {selectionChoice.toLowerCase() === item.toLowerCase() &&
-                    'btn-active'} btn-ghost text-white capitalize font-bold text-lg"
+                    'btn-active'} btn-ghost text-white capitalize font-bold text-lg first:ml-4 first:md:ml-0 last:mr-4 last:md:mr-0 "
                 on:click|capture={() => {
                     selectionChoice = item.toLowerCase();
                 }}
