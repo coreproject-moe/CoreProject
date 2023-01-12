@@ -14,7 +14,7 @@
         "format": "prettier --plugin-search-dir . --write ."
     },
     "devDependencies": {
-        "@felte/reporter-tippy": "^1.1.4",
+        "@felte/reporter-tippy": "^1.1.5",
         "@felte/validator-yup": "^1.0.11",
         "@sveltejs/adapter-node": "^1.1.0",
         "@sveltejs/adapter-static": "^1.0.1",
