@@ -10,11 +10,20 @@
     },
     {
         "animeTitle": "Kimetsu no Yaiba",
-        "animeEpisodeCount": "25",
-        "animeAirTime": "Spring 2012",
+        "animeEpisodeCount": "26",
+        "animeAirTime": "Spring 2019",
         "animeSummary": "It is the Taisho Period in Japan. Tanjiro, a kindhearted boy who sells charcoal for a living, finds his family slaughtered by a demon. To make matters worse, his younger sister Nezuko, the sole survivor, has been transformed into a demon herself. Though devastated by this grim reality, Tanjiro resolves to become a “demon slayer” so that he can turn his sister back into a human, and kill the demon that massacred his family.",
         "tags": ["Action", "Drama", "Adventure", "Fantasy"],
         "animeCardBackgroundImage": "./images/Kimetsu-No-Yaiba-Poster.jpg",
         "animeBackgroundCoverImage": "./images/Demon-Slayer-Kimetsu-no-Yaiba-Official-Poster.png"
+    },
+    {
+        "animeTitle": "Death Note",
+        "animeEpisodeCount": "37",
+        "animeAirTime": "Fall 2006",
+        "animeSummary": "Light Yagami is a genius high school student who is about to learn about life through a book of death. When a bored shinigami, a God of Death, named Ryuk drops a black notepad called a Death Note, Light receives power over life and death with the stroke of a pen. Determined to use this dark gift for the best, Light sets out to rid the world of evil… namely, the people he believes to be evil. Should anyone hold such power?",
+        "tags": ["Mystery", "Psychological", "Supernatural"],
+        "animeCardBackgroundImage": "./images/Death-Note-Poster.jpeg",
+        "animeBackgroundCoverImage": "./images/Death-Note-Banner.jpg"
     }
 ]
