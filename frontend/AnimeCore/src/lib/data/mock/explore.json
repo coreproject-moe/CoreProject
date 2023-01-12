@@ -5,7 +5,52 @@
         "animeAirTime": "Spring 2012",
         "animeSummary": "Several hundred years ago, humans were nearly exterminated by titans. Titans are typically several stories tall, seem to have no intelligence, devour human beings and, worst of all, seem to do it for the pleasure rather than as a food source. A small percentage of humanity survived by walling themselves in a city protected by extremely high walls, even taller than the biggest of titans.Flash forward to the present and the city has not seen a titan in over 100 years. Teenage boy Eren and his foster sister Mikasa witness something horrific as the city walls are destroyed by a colossal titan that appears out of thin air. As the smaller titans flood the city, the two kids watch in horror as their mother is eaten alive. Eren vows that he will murder every single titan and take revenge for all of mankind.",
         "tags": ["Action", "Drama", "Fantasy", "Mystery"],
-        "animeBackgroundCoverImage": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx16498-C6FPmWm59CyP.jpg",
-        "animeCardBackgroundImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/16498-8jpFCOcDmneX.jpg"
+        "animeCardBackgroundImage": "https://s4.anilist.co/file/anilistcdn/media/anime/banner/16498-8jpFCOcDmneX.jpg",
+        "animeBackgroundCoverImage": "https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx16498-C6FPmWm59CyP.jpg"
+    },
+    {
+        "animeTitle": "Kimetsu no Yaiba",
+        "animeEpisodeCount": "26",
+        "animeAirTime": "Spring 2019",
+        "animeSummary": "It is the Taisho Period in Japan. Tanjiro, a kindhearted boy who sells charcoal for a living, finds his family slaughtered by a demon. To make matters worse, his younger sister Nezuko, the sole survivor, has been transformed into a demon herself. Though devastated by this grim reality, Tanjiro resolves to become a “demon slayer” so that he can turn his sister back into a human, and kill the demon that massacred his family.",
+        "tags": ["Action", "Drama", "Adventure", "Fantasy"],
+        "animeCardBackgroundImage": "./images/Kimetsu-No-Yaiba-Poster.jpg",
+        "animeBackgroundCoverImage": "./images/Demon-Slayer-Kimetsu-no-Yaiba-Official-Poster.png"
+    },
+    {
+        "animeTitle": "Death Note",
+        "animeEpisodeCount": "37",
+        "animeAirTime": "Fall 2006",
+        "animeSummary": "Light Yagami is a genius high school student who is about to learn about life through a book of death. When a bored shinigami, a God of Death, named Ryuk drops a black notepad called a Death Note, Light receives power over life and death with the stroke of a pen. Determined to use this dark gift for the best, Light sets out to rid the world of evil… namely, the people he believes to be evil. Should anyone hold such power?",
+        "tags": ["Mystery", "Psychological", "Supernatural"],
+        "animeCardBackgroundImage": "./images/Death-Note-Banner.jpg",
+        "animeBackgroundCoverImage": "./images/Death-Note-Poster.jpeg"
+    },
+    {
+        "animeTitle": "Boku no Hero Academia",
+        "animeEpisodeCount": "13",
+        "animeAirTime": "Spring 2016",
+        "animeSummary": "What would the world be like if 80 percent of the population manifested extraordinary superpowers called “Quirks” at age four? Heroes and villains would be battling it out everywhere! Becoming a hero would mean learning to use your power, but where would you go to study? U.A. High's Hero Program of course! But what would you do if you were one of the 20 percent who were born Quirkless? Middle school student Izuku Midoriya wants to be a hero more than anything, but he hasn't got an ounce of power in him. With no chance of ever getting into the prestigious U.A. High School for budding heroes, his life is looking more and more like a dead end. Then an encounter with All Might, the greatest hero of them all gives him a chance to change his destiny…",
+        "tags": ["Action", "Adventure", "Comedy"],
+        "animeCardBackgroundImage": "./images/Boku-No-Hero-Academia-Banner.jpg",
+        "animeBackgroundCoverImage": "./images/Boku-No-Hero-Academia-Poster.jpg"
+    },
+    {
+        "animeTitle": "HUNTER×HUNTER (2011)",
+        "animeEpisodeCount": "148",
+        "animeAirTime": "Fall 2011",
+        "animeSummary": "A Hunter is one who travels the world doing all sorts of dangerous tasks. From capturing criminals to searching deep within uncharted lands for any lost treasures. Gon is a young boy whose father disappeared long ago, being a Hunter. He believes if he could also follow his father's path, he could one day reunite with him. After becoming 12, Gon leaves his home and takes on the task of entering the Hunter exam, notorious for its low success rate and high probability of death to become an official Hunter. He befriends the revenge-driven Kurapika, the doctor-to-be Leorio and the rebellious ex-assassin Killua in the exam, with their friendship prevailing throughout the many trials and threats they come upon taking on the dangerous career of a Hunter.",
+        "tags": ["Action", "Adventure", "Fantasy"],
+        "animeCardBackgroundImage": "./images/HUNTER×HUNTER-Banner.jpg",
+        "animeBackgroundCoverImage": "./images/HUNTER×HUNTER-Poster.png"
+    },
+    {
+        "animeTitle": "Sword Art Online",
+        "animeEpisodeCount": "25",
+        "animeAirTime": "Spring 2012",
+        "animeSummary": "A Hunter is one who travels the world doing all sorts of dangerous tasks. From capturing criminals to searching deep within uncharted lands for any lost treasures. Gon is a young boy whose father disappeared long ago, being a Hunter. He believes if he could also follow his father's path, he could one day reunite with him. After becoming 12, Gon leaves his home and takes on the task of entering the Hunter exam, notorious for its low success rate and high probability of death to become an official Hunter. He befriends the revenge-driven Kurapika, the doctor-to-be Leorio and the rebellious ex-assassin Killua in the exam, with their friendship prevailing throughout the many trials and threats they come upon taking on the dangerous career of a Hunter.",
+        "tags": ["Action", "Adventure", "Fantasy"],
+        "animeCardBackgroundImage": "./images/Sword-Art-Online-Banner.jpg",
+        "animeBackgroundCoverImage": "./images/Sword-Art-Online-Poster.jpg"
     }
 ]
