@@ -10,7 +10,7 @@ tzdata = "*"
 # First party ( Image )
 pillow = "*"
 # Postgres
-psycopg = "*"
+psycopg2 = "*"
 # 3rd Party ( Files )
 django-dynamic-filenames = "*"
 # 3rd Party ( Middlewares )
