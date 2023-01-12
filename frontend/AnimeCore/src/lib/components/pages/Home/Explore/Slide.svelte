@@ -2,6 +2,7 @@
     import exploreData from "$data/mock/explore.json";
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import FourBoxSquares from "$icons/FourBoxSquares.svelte";
+    import Funnel from "$icons/Funnel.svelte";
     import Search from "$icons/Search.svelte";
     import { responsiveMode } from "$store/Responsive";
 
@@ -29,8 +30,9 @@
         {/each}
     </div>
     {#if mobile}
-        <div class="flex w-screen">
-            <div class="self-start pl-8">
+        <div class="flex w-screen justify-between items-center">
+            <!-- All time button -->
+            <div class="pl-8">
                 All Time
                 <ChevronDown
                     class="inline-block"
@@ -38,6 +40,29 @@
                     height={18}
                     width={18}
                 />
+            </div>
+
+            <!-- Filter and square Button  -->
+            <div class="pr-6 flex gap-6">
+                <button class="btn">
+                    <div class="flex gap-1 items-center">
+                        <span>
+                            <Funnel
+                                width={18}
+                                height={18}
+                                color="white"
+                            />
+                        </span>
+                        <span class="text-white">Filter</span>
+                    </div>
+                </button>
+                <button class="btn btn-square">
+                    <FourBoxSquares
+                        height={24}
+                        width={24}
+                        color="#D9D9D9"
+                    />
+                </button>
             </div>
         </div>
     {:else}
