@@ -67,7 +67,7 @@
 					allowHTML: true
 				}
 			})
-		],
+		]
 
 		// Debounced async validation
 		// debounced: {}
