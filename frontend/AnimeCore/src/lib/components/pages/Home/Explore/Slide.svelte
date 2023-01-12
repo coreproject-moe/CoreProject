@@ -1,11 +1,12 @@
 <script lang="ts">
+    import { Swiper, SwiperSlide } from "swiper/svelte";
+    
     import exploreData from "$data/mock/explore.json";
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import FourBoxSquares from "$icons/FourBoxSquares.svelte";
     import Funnel from "$icons/Funnel.svelte";
     import Search from "$icons/Search.svelte";
     import { responsiveMode } from "$store/Responsive";
-    import { Swiper, SwiperSlide } from "swiper/svelte";
 
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";

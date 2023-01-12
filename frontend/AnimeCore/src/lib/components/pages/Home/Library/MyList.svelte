@@ -2,7 +2,7 @@
     import { Mousewheel } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import voca from "voca";
-
+    
     import myList from "$data/mock/my_list.json";
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import Settings from "$icons/Settings.svelte";

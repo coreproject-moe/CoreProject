@@ -2,7 +2,7 @@
     import { FreeMode, Mousewheel } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import voca from "voca";
-
+    
     import latestEpisodes from "$data/mock/latest_episode.json";
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import Play from "$icons/Play.svelte";

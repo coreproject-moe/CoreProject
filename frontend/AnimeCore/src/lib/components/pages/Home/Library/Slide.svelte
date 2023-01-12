@@ -1,6 +1,6 @@
 <script lang="ts">
     import Heart from "$icons/Heart.svelte";
-
+    
     import ContinueWatching from "./ContinueWatching.svelte";
     import LatestEpisode from "./LatestEpisode.svelte";
     import MyList from "./MyList.svelte";
