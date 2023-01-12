@@ -1,16 +1,16 @@
 from apps.anime.models import AnimeModel
 from apps.api.filters.anime import AnimeInfoFilters
-from core.permissions import is_superuser
-from ninja import Query, Router
+from ninja import Query, Router, Form, File
 from ninja.pagination import paginate
-
+import datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.db.models import Q, QuerySet
 from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
-
-from ...schemas.anime import AnimeInfoGETSchema, AnimeInfoPOSTSchema
+from ninja.files import UploadedFile
+from ...schemas.anime import AnimeInfoGETSchema
+from apps.anime.models.anime_synonym import AnimeSynonymModel
 
 router = Router()
 
@@ -95,14 +95,46 @@ def get_anime_info(
 
 
 @router.post("", response=AnimeInfoGETSchema)
-@login_required
-@user_passes_test(is_superuser)
 def post_anime_info(
     request: HttpRequest,
-    payload: AnimeInfoPOSTSchema,
+    mal_id: int | None = Form(default=None),
+    anilist_id: int | None = Form(default=None),
+    kitsu_id: int | None = Form(default=None),
+    anime_name: str = Form(..., max_length=1024),
+    anime_name_japanese: str | None = Form(default=None, max_length=1024),
+    anime_name_synonyms: list[str] | None = Form(default=None),
+    anime_source: str | None = Form(default=None),
+    anime_aired_from: datetime.datetime | None = Form(default=None),
+    anime_aired_to: datetime.datetime | None = Form(default=None),
+    anime_banner: UploadedFile | None = File(default=None),
+    anime_cover: UploadedFile | None = File(default=None),
+    anime_synopsis: str | None = Form(default=None),
+    anime_background: str | None = Form(default=None),
+    anime_rating: str | None = Form(default=None, max_length=50),
+    anime_genres: list[str] | None = Form(default=None),
+    anime_themes: list[str] | None = Form(default=None),
+    anime_studios: list[str] | None = Form(default=None),
+    anime_producers: list[str] | None = Form(default=None),
+    anime_characters: list[str] | None = Form(default=None),
 ) -> AnimeModel:
-    instance = AnimeModel.objects.create(**payload.dict())
-    return instance
+    kwargs = locals()
+    filtered_kwargs = {
+        key: value
+        for key, value in kwargs.items()
+        if value is not None and key != "request"
+    }
+    model_data = {}
+
+    if anime_name_synonym_list := filtered_kwargs.get("anime_name_synonyms", None):
+        for anime_name_synonym in anime_name_synonym_list:
+            instance, created = AnimeSynonymModel.objects.get_or_create(
+                name=anime_name_synonym
+            )
+            model_data["anime_name_synonyms"] = instance
+
+    print(model_data)
+
+    raise Http404
 
 
 @router.get("/{int:anime_id}", response=AnimeInfoGETSchema)
