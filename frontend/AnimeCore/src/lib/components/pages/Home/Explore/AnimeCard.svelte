@@ -72,7 +72,7 @@
                     </div>
 
                     <!-- Anime Summary  -->
-                    <div class="text-sm">
+                    <div class="text-sm mt-4">
                         {voca.chain(animeSummary).truncate(170)}
                     </div>
                 </div>
