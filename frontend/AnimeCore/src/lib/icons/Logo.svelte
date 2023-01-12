@@ -1,5 +1,6 @@
 <script lang="ts">
-    interface $$Props extends svelte.JSX.HTMLAttributes<SVGElement> {
+    import type { SVGAttributes } from "svelte/elements";
+    interface $$Props extends SVGAttributes<SVGElement> {
         variant: "black" | "white";
     }
     const { variant, ...props } = $$props;

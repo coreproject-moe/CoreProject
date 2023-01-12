@@ -7,7 +7,7 @@ export default defineConfig({
         legalComments: "none"
     },
     build: {
-        target: "es2015",
+        target: "esnext",
         sourcemap: true
     }
 });

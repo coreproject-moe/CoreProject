@@ -10,16 +10,9 @@
     xmlns="http://www.w3.org/2000/svg"
 >
     <path
-        d="M5.3999 11.25L9.1499 15L12.8999 11.25"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-    />
-    <path
-        d="M12.8999 6.75L9.1499 3L5.3999 6.75"
-        stroke="currentColor"
-        stroke-width="2"
+        d="M16.5 2.25H1.5L7.5 9.345V14.25L10.5 15.75V9.345L16.5 2.25Z"
+        stroke="white"
+        stroke-width="1.5"
         stroke-linecap="round"
         stroke-linejoin="round"
     />
