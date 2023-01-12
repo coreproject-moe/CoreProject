@@ -1,5 +1,6 @@
 <script lang="ts">
     import exploreData from "$data/mock/explore.json";
+    import ChevronDown from "$icons/Chevron-Down.svelte";
     import FourBoxSquares from "$icons/FourBoxSquares.svelte";
     import Search from "$icons/Search.svelte";
     import { responsiveMode } from "$store/Responsive";
@@ -12,10 +13,10 @@
 </script>
 
 <div class="hero min-h-[60vh] md:min-h-screen w-screen flex flex-col">
-    <div class="flex gap-3 md:gap-32 pt-8 w-screen md:w-auto ml-8 md:ml-0">
+    <div class="flex gap-3 md:gap-32 pt-8 ml-8 md:ml-0 my-7 md:my-0">
         {#each ["popular", "trending", "top rated", "upcoming"] as item}
             <button
-                class="btn {selectionChoice.toLowerCase() === item.toLowerCase() &&
+                class="btn {item.toLowerCase() === selectionChoice.toLowerCase() &&
                     'btn-active'} btn-ghost text-white capitalize font-bold text-lg"
                 on:click|capture={() => {
                     selectionChoice = item.toLowerCase();
@@ -26,7 +27,17 @@
         {/each}
     </div>
     {#if mobile}
-        <div />
+        <div class="flex w-screen">
+            <div class="self-start pl-8">
+                All Time
+                <ChevronDown
+                    class="inline-block"
+                    color="white"
+                    height={18}
+                    width={18}
+                />
+            </div>
+        </div>
     {:else}
         <div class="flex gap-7 mt-8">
             <div class="flex flex-col w-[135px]">
