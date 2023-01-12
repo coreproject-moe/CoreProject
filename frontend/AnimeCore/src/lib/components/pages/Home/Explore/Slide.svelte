@@ -12,7 +12,7 @@
 </script>
 
 <div class="hero min-h-[60vh] md:min-h-screen w-screen flex flex-col">
-    <div class="flex gap-3 md:gap-32 pt-8">
+    <div class="flex gap-3 md:gap-32 pt-8 w-screen md:w-auto ml-8 md:ml-0">
         {#each ["popular", "trending", "top rated", "upcoming"] as item}
             <button
                 class="btn {selectionChoice.toLowerCase() === item.toLowerCase() &&
