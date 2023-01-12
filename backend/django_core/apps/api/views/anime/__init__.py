@@ -4,7 +4,6 @@ from ninja import Query, Router, Form, File
 from ninja.pagination import paginate
 import contextlib
 import datetime
-from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.db.models import Q, QuerySet
 from django.http import Http404, HttpRequest
