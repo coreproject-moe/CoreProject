@@ -96,7 +96,7 @@
         </div>
     </div>
 
-    <div class="mt-[40px] grid gap-20 grid-cols-3">
+    <div class="mt-[40px] grid gap-x-20 gap-y-10 grid-cols-3">
         {#each exploreData as item}
             <AnimeCard
                 animeName={item.animeTitle}
