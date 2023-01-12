@@ -13,7 +13,7 @@
     import voca from "voca";
 </script>
 
-<div class="inline-grid w-96 {mobile ? 'h-[130px]' : 'h-52'}">
+<div class="inline-grid w-96 {mobile ? 'h-36' : 'h-52'}">
     <background-hero-image
         class="h-full w-96 bg-no-repeat bg-cover bg-center rounded-2xl"
         style="
@@ -32,7 +32,7 @@
         <div class="rounded-2xl bg-no-repeat bg-cover bg-center">
             <div class="flex flex-row">
                 <!-- Anime image cards  -->
-                <div class="inline-grid {mobile ? 'h-[130px]' : 'h-52'}">
+                <div class="inline-grid {mobile ? 'h-36' : 'h-52'}">
                     <background-image
                         class="{mobile
                             ? 'w-[87px]'
@@ -59,13 +59,18 @@
                 <!-- Anime Card Informations  -->
                 {#if mobile}
                     <div class="flex items-center pl-5 flex-col justify-center">
-                        <p class="text-left w-full font-bold text-white">{animeName}</p>
-                        <p class="text-sm pt-4 leading-3 w-full">
+                        <p class="text-left w-full font-bold text-white text-sm leading-3">
+                            {animeName}
+                        </p>
+                        <p class="text-xs pt-4 leading-3 w-full">
                             <span class="items font-thin">TV</span>
                             <span class="items font-thin">{String(animeEpisodeCount)} eps</span>
                             <span class="items font-thin">{animeAirTime}</span>
                         </p>
-                        <p class="text-warning pt-3 w-full font-thin">{undefined ?? "Studio"}</p>
+                        <p class="text-xs pt-3 w-full font-thin">
+                            <span class="!text-warning items">{undefined ?? "Studio"}</span>
+                            <span class="!text-green-500 items">85%</span>
+                        </p>
 
                         <div class="pt-3 flex gap-2 w-full overflow-y-scroll scrollbar-hide">
                             {#each animeTags as tag}
