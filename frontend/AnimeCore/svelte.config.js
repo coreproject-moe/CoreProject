@@ -21,7 +21,8 @@ const config = {
     ],
     kit: {
         paths: {
-            base: dev ? "" : "/static"
+            base: "/frontend/animecore",
+            assets: "https://127.0.0.1:8000/static/svelte_animecore"
         },
         appDir: "svelte__animecore",
         // adapter: adapter({ fallback: "app.html" }),
