@@ -5,13 +5,176 @@ import functools
 from io import BytesIO
 import json
 import os
-from pathlib import Path
 import textwrap
 from typing import Any, TypeVar, cast
 
-import httpx
+from pyrate_limiter import Duration, Limiter, RedisBucket, RequestRate
+
+from humanize import intcomma, naturaltime
+
+import aiohttp
+from aiohttp_client_cache.backends.redis import RedisBackend
+from aiohttp_client_cache.session import CachedSession
+from aiohttp_retry import ExponentialRetry, RetryClient
+
+from termcolor import colored
+
+CHARACTER_LOCK_FILE_NAME = "Character.lock"
+
+CACHE_NAME = "anime"
+RETRY_STATUSES = []
+
+EXECUTION_TIME: int = 0
+
+JIKAN: dict[int, list[int]] = {}
+KITSU: dict[str, list[dict[int, str]]] = {}
+ANILIST: dict[str, list[dict[int, str]]] = {}
+
+SUCCESSFUL_KITSU_IDS = []
+SUCCESSFUL_ANILIST_IDS = []
+
+SUCCESS_LIST = []
+WARNING_LIST = []
+ERROR_LIST = []
+
+limiter = Limiter(
+    RequestRate(1, Duration.SECOND),
+    RequestRate(60, Duration.MINUTE),
+    bucket_class=RedisBucket,
+    bucket_kwargs={
+        "bucket_name": CACHE_NAME,
+    },
+)
+
+# https://stackoverflow.com/questions/43013083/typing-decorator-with-parameters-in-mypy-with-typevar-yields-expected-uninhabite
+FuncT = TypeVar("FuncT", bound=Callable[..., Any])
 
 
+# https://github.com/pallets/click/issues/2033#issue-960810534
+def make_sync(func: FuncT) -> FuncT:
+    @functools.wraps(func)
+    def wrapper(*args: Any, **kwargs: Any) -> Any:
+        return asyncio.run(func(*args, **kwargs))
+
+    return cast(FuncT, wrapper)
+
+
+@make_sync
+async def command() -> None:
+    global JIKAN, KITSU, ANILIST, DATABASE_ID, EXECUTION_TIME, SUCCESSFUL_NAMES, SUCCESSFUL_KITSU_IDS, SUCCESSFUL_ANILIST_IDS
+
+    retry_client = RetryClient(  # aiohttp-retry
+        client_session=CachedSession(  # aiohttp-client-cache
+            cache=RedisBackend(
+                CACHE_NAME,
+                expire_after=3600,
+            )
+        ),
+        retry_options=ExponentialRetry(
+            attempts=10,
+            max_timeout=100.00,
+            statuses=set(RETRY_STATUSES),
+        ),
+    )
+
+    session = cast(aiohttp.ClientSession, retry_client)
+
+    starting_number = 1
+    character_number = 1
+    ending_number: int = await get_ending_number(session)
+
+    # Load JSON file and get data from it
+    if os.path.exists(CHARACTER_LOCK_FILE_NAME):
+        print("Lock file found. Do you want to use it?")
+
+        # While loop to ask for data
+        while True:
+            answer = input("\r").lower()
+
+            if "y" in answer:
+                data = json.load(open(CHARACTER_LOCK_FILE_NAME, encoding="utf-8"))
+                starting_number = int(data.get("STARTING_NUMBER", starting_number))
+                character_number = int(data.get("CHARACTER_NUMBER", character_number))
+
+                JIKAN = data.get("JIKAN", JIKAN)
+                KITSU = data.get("KITSU", KITSU)
+                ANILIST = data.get("ANILIST", ANILIST)
+                EXECUTION_TIME = data.get("EXECUTION_TIME", EXECUTION_TIME)
+                SUCCESSFUL_KITSU_IDS = data.get(
+                    "SUCCESSFUL_KITSU_IDS", SUCCESSFUL_KITSU_IDS
+                )
+                SUCCESSFUL_ANILIST_IDS = data.get(
+                    "SUCCESSFUL_ANILIST_IDS", SUCCESSFUL_ANILIST_IDS
+                )
+                break
+
+            elif "n" in answer:
+                break
+
+    welcome_message = textwrap.dedent(
+        f"""
+            Starting Number : {
+                colored(
+                    text=str(
+                        intcomma(
+                            character_number
+                        )
+                    ),
+                    color='green'
+                )
+            }
+            Total `characters` to get : {
+                colored(
+                    text=str(
+                        intcomma(
+                            ending_number
+                        )
+                    ),
+                    color='green'
+                )
+            }
+            Time to finish : {
+                colored(
+                    text=str(
+                        naturaltime(
+                            datetime.now()
+                            +
+                            timedelta(
+                                minutes=
+                                    round(
+                                        (
+                                            ending_number
+                                            -
+                                            character_number
+                                        )
+                                        /
+                                        60
+                                )
+                            )
+                        )
+                    ),
+                    color='green'
+                )
+            }
+        """
+    )
+    print(welcome_message)
+
+    # Magic starts here
+    await populate_database(
+        session=session,
+        starting_number=starting_number,
+        character_number=character_number,
+        ending_number=ending_number,
+    )
+
+    await session.close()
+
+    # Remove lock file
+    os.remove(CHARACTER_LOCK_FILE_NAME)
+
+
+@limiter.ratelimit("ending", delay=True)
 async def get_ending_number(
     session: aiohttp.ClientSession,
 ) -> int:
@@ -23,14 +186,16 @@ async def get_ending_number(
     return int(data["pagination"]["items"]["total"])
 
 
+@limiter.ratelimit("jikan", delay=True)
 async def get_character_data_from_jikan(
     character_number: int,
+    session: aiohttp.ClientSession,
 ) -> dict[str, str | None | BytesIO] | None:
     """
     :param character_number: The id of character
     :param session: `aiohttp.Client` instance to get data
     """
-    res = await httpx.get(f"https://api.jikan.moe/v4/characters/{character_number}")
+    res = await session.get(f"https://api.jikan.moe/v4/characters/{character_number}")
     data = await res.json()
 
     returnable_data = {}
@@ -41,7 +206,7 @@ async def get_character_data_from_jikan(
         "429",
         "500",
     ]:
-        SUCCESS_LIST.append("JIKAN")
+        SUCCESS_LIST.append(colored("Jikan", "green"))
 
         data = data["data"]
 
@@ -52,7 +217,7 @@ async def get_character_data_from_jikan(
         except KeyError:
             image_url = data["images"]["jpg"]["image_url"]
         finally:
-            image = await httpx.get(image_url)
+            image = await session.get(image_url)
 
         returnable_data = {
             "character_name": data["name"],
@@ -68,16 +233,16 @@ async def get_character_data_from_jikan(
         dictionary = JIKAN.setdefault(408, [])
         dictionary.append(character_number)
 
-        WARNING_LIST.append(style.WARNING("Jikan"))
+        WARNING_LIST.append(colored("Jikan", "yellow"))
 
     elif data.get("status", None) == 500:
         dictionary = JIKAN.setdefault(500, [])
         dictionary.append(character_number)
 
-        ERROR_LIST.append(style.WARNING("Jikan"))
+        ERROR_LIST.append(colored("Jikan", "yellow"))
 
     else:
-        ERROR_LIST.append(style.ERROR("Jikan"))
+        ERROR_LIST.append(colored("Jikan", "red"))
 
     # We need none as output if theres no data
     return returnable_data
@@ -104,10 +269,7 @@ async def get_character_data_from_kitsu(
         for data in res_data["data"]:
             # If the Kitsu ID exists in database
             # Skip to next iteration
-            character_kitsu_entry_exists: bool = await CharacterModel.objects.filter(
-                kitsu_id=data["id"],
-            ).aexists()
-            if character_kitsu_entry_exists:
+            if data["id"] in SUCCESSFUL_KITSU_IDS:
                 continue
 
             returnable_data = {
@@ -116,17 +278,17 @@ async def get_character_data_from_kitsu(
             }
 
         if returnable_data.get("kitsu_id"):
-            SUCCESS_LIST.append(style.SUCCESS("Kitsu"))
+            SUCCESS_LIST.append(colored("Kitsu", "green"))
 
         else:
-            WARNING_LIST.append(style.WARNING("Kitsu"))
+            WARNING_LIST.append(colored("Kitsu", "yellow"))
             dictionary = KITSU.setdefault("error", [])
             dictionary.append(
                 {character_number: character_name},
             )
 
     else:
-        ERROR_LIST.append(style.ERROR("Kitsu"))
+        ERROR_LIST.append(colored("Kitsu", "red"))
 
     return returnable_data
 
@@ -192,10 +354,7 @@ async def get_character_data_from_anilist(
         for data in res_data["data"]["Page"]["characters"]:
             # If the Anilist ID exists in database
             # Skip to next iteration
-            character_anilist_entry_exists: bool = await CharacterModel.objects.filter(
-                anilist_id=data["id"],
-            ).aexists()
-            if character_anilist_entry_exists:
+            if data["id"] in SUCCESSFUL_ANILIST_IDS:
                 continue
 
             returnable_data = {
@@ -203,17 +362,17 @@ async def get_character_data_from_anilist(
             }
 
         if returnable_data.get("anilist_id"):
-            SUCCESS_LIST.append(style.SUCCESS("Anilist"))
+            SUCCESS_LIST.append(colored("Anilist", "green"))
 
         else:
-            WARNING_LIST.append(style.WARNING("Anilist"))
+            WARNING_LIST.append(colored("Anilist", "yellow"))
             dictionary = ANILIST.setdefault("error", [])
             dictionary.append(
                 {character_number: character_name},
             )
 
     else:
-        ERROR_LIST.append(style.WARNING("Anilist"))
+        ERROR_LIST.append(colored("Anilist", "yellow"))
 
     return returnable_data
 
@@ -259,14 +418,13 @@ async def populate_database(
                     ),
                     "about": jikan_data["character_about"],
                 }
-                await CharacterModel.objects.aupdate_or_create(
-                    mal_id=character_number,
-                    defaults={k: v for k, v in data_dictionary.items() if v is not None},
-                )
+
+                SUCCESSFUL_KITSU_IDS.append(kitsu_data.get("kitsu_id", None))
+                SUCCESSFUL_ANILIST_IDS.append(anilist_data.get("anilist_id", None))
 
             except IntegrityError as e:
-                click.echo(e)
-                click.echo(f"Entry exists : {character_number}")
+                print(e)
+                print(f"Entry exists : {character_number}")
 
             # Add 1 to `starting_number` on every successful request
             starting_number += 1
@@ -310,6 +468,8 @@ async def populate_database(
             "KITSU": KITSU,
             "ANILIST": ANILIST,
             "EXECUTION_TIME": EXECUTION_TIME,
+            "SUCCESSFUL_KITSU_IDS": SUCCESSFUL_KITSU_IDS,
+            "SUCCESSFUL_ANILIST_IDS": SUCCESSFUL_ANILIST_IDS,
         }
 
         # Log the data to a `.lock` file
@@ -319,4 +479,8 @@ async def populate_database(
             indent=2,
         )
 
-        click.secho(message)
+        print(message)
+
+
+if __name__ == "__main__":
+    command()

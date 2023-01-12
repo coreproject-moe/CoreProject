@@ -4,9 +4,15 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-httpx = "*"
+pyrate-limiter = "*"
+aiohttp = "*"
+aiohttp-client-cache = {version="*",extras=['redis']}
+aiohttp-retry = "*"
+humanize = "*"
+termcolor = "*"
 
 [dev-packages]
+black = "*"
 
 [requires]
 python_version = "3.11"
