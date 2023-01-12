@@ -43,10 +43,9 @@ class AnimeModel(models.Model):
     anime_studios = models.ManyToManyField(StudioModel, blank=True)
     anime_producers = models.ManyToManyField(ProducerModel, blank=True)
     anime_characters = models.ManyToManyField(CharacterModel, blank=True)
-    
+
     anime_recommendation = models.ManyToManyField("self", blank=True)
     anime_episodes = models.ManyToManyField(EpisodeModel, blank=True)
-    
 
     updated = models.DateTimeField(auto_now_add=True)
     # anime_rating = models.CharField(max_length=128)

@@ -1,22 +1,24 @@
-from apps.anime.models import AnimeModel
-from apps.api.filters.anime import AnimeInfoFilters
-from ninja import Query, Router, Form, File
-from ninja.pagination import paginate
 import contextlib
 import datetime
+
+from apps.anime.models import AnimeModel
+from apps.anime.models.anime_genre import AnimeGenreModel
+from apps.anime.models.anime_synonym import AnimeSynonymModel
+from apps.anime.models.anime_theme import AnimeThemeModel
+from apps.api.filters.anime import AnimeInfoFilters
+from apps.characters.models import CharacterModel
+from apps.producers.models import ProducerModel
+from apps.studios.models import StudioModel
+from ninja import File, Form, Query, Router
+from ninja.files import UploadedFile
+from ninja.pagination import paginate
+
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.db.models import Q, QuerySet
 from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
-from ninja.files import UploadedFile
 
-from apps.producers.models import ProducerModel
-from apps.characters.models import CharacterModel
 from ...schemas.anime import AnimeInfoGETSchema
-from apps.anime.models.anime_synonym import AnimeSynonymModel
-from apps.anime.models.anime_genre import AnimeGenreModel
-from apps.anime.models.anime_theme import AnimeThemeModel
-from apps.studios.models import StudioModel
 
 router = Router()
 
