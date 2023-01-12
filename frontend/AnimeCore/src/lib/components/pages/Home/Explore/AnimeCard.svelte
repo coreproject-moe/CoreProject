@@ -8,6 +8,7 @@
     export let animeSummary: string;
 
     import voca from "voca";
+
     import { responsiveMode } from "$store/Responsive";
 
     let mobile: boolean;

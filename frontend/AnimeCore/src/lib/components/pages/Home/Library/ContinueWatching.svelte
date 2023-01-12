@@ -2,7 +2,7 @@
     import { Mousewheel } from "swiper";
     import { Swiper, SwiperSlide } from "swiper/svelte";
     import voca from "voca";
-    
+
     import continueWatching from "$data/mock/continue_watching.json";
     import Play from "$icons/Play.svelte";
     import { responsiveMode } from "$store/Responsive";

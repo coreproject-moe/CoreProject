@@ -1,6 +1,6 @@
 <script lang="ts">
     import { fade } from "svelte/transition";
-    
+
     import Logo from "$icons/Logo.svelte";
     import Search from "$icons/Search.svelte";
     import NavbarModal from "$modals/Navbar.svelte";
