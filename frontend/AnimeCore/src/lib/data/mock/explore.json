@@ -23,7 +23,7 @@
         "animeAirTime": "Fall 2006",
         "animeSummary": "Light Yagami is a genius high school student who is about to learn about life through a book of death. When a bored shinigami, a God of Death, named Ryuk drops a black notepad called a Death Note, Light receives power over life and death with the stroke of a pen. Determined to use this dark gift for the best, Light sets out to rid the world of evil… namely, the people he believes to be evil. Should anyone hold such power?",
         "tags": ["Mystery", "Psychological", "Supernatural"],
-        "animeCardBackgroundImage": "./images/Death-Note-Poster.jpeg",
-        "animeBackgroundCoverImage": "./images/Death-Note-Banner.jpg"
+        "animeCardBackgroundImage": "./images/Death-Note-Banner.jpg",
+        "animeBackgroundCoverImage": "./images/Death-Note-Poster.jpeg"
     }
 ]
