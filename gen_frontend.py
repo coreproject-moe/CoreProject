@@ -1,9 +1,9 @@
-from multiprocessing import Process
 import os
-from pathlib import Path
 import shutil
-from shutil import copytree
 import subprocess
+from multiprocessing import Process
+from pathlib import Path
+from shutil import copytree
 
 BASE_DIR = Path(__file__).resolve().parent
 

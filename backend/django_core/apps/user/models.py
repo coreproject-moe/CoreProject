@@ -1,8 +1,6 @@
 from functools import partial
 from typing import Any, NoReturn, Self
 
-from dynamic_filenames import FilePattern
-
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.core.validators import MaxValueValidator, MinValueValidator
@@ -10,6 +8,7 @@ from django.db import models
 from django.utils import timezone
 from django.utils.crypto import get_random_string
 from django.utils.translation import gettext_lazy as _
+from dynamic_filenames import FilePattern
 
 from .managers import UserManager
 from .validators import username_validator

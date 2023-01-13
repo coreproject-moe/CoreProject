@@ -1,9 +1,8 @@
 from apps.anime.models import AnimeModel
-from ninja import ModelSchema
-from pydantic import AnyUrl
-
 from django.conf import settings
 from django.shortcuts import resolve_url
+from ninja import ModelSchema
+from pydantic import AnyUrl
 
 from ...schemas.anime.anime_synonym import AnimeSynonymSchema
 
