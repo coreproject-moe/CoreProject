@@ -45,7 +45,7 @@ updates:
     # Seeder
     # =======
     - package-ecosystem: pip
-      directory: /seeder/
+      directory: /tools/seeder/
       schedule:
           interval: daily
       open-pull-requests-limit: 100
