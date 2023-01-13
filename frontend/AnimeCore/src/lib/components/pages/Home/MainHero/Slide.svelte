@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-
+    
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
     import { fetchImageAndConvertToBlob } from "$functions/fetchImage";
@@ -13,7 +13,7 @@
     import { navbar_variant } from "$store/Navbar_Variant";
     import { responsiveMode } from "$store/Responsive";
     import { timer as timerStore } from "$store/Timer";
-
+    
     import Progress from "./Progress.svelte";
 
     export let data: Array<{

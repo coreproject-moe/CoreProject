@@ -2,7 +2,7 @@
     import { detect } from "detect-browser";
     import { blur } from "svelte/transition";
     import { swipe } from "svelte-gestures";
-
+    
     import ExploreSlide from "$components/pages/Home/Explore/Slide.svelte";
     import GenreSlide from "$components/pages/Home/Genre/Slide.svelte";
     import LibrarySlide from "$components/pages/Home/Library/Slide.svelte";
