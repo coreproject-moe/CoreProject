@@ -1,6 +1,5 @@
-from dynamic_filenames import FilePattern
-
 from django.db import models
+from dynamic_filenames import FilePattern
 
 from ...characters.models import CharacterModel
 from ...episodes.models import EpisodeModel
