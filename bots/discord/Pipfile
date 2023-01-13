@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 "discord.py" = "*"
+sqlalchemy = {extras = ["postgresql_asyncpg"], version = "*"}
 
 [dev-packages]
 
