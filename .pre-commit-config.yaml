@@ -9,8 +9,6 @@ repos:
                     # ./frontend/AnimeCore/.eslintrc.cjs,
                     --ignore-pattern,
                     '/backend/static/*',
-                    --ignore-pattern,
-                    '/android/*',
                     --fix,
                 ]
             additional_dependencies:
