@@ -3,8 +3,8 @@
 <br/>
 <div align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/61817579/161123729-44ae9010-6282-44e5-ba68-adaac71f33be.png"  width="300" height="180">
-    <img alt="Text changing depending on mode. Light: 'So light!' Dark: 'So dark!'" src="https://user-images.githubusercontent.com/61817579/161123650-176e7dfe-f622-49a6-acd8-b336f9d01a2b.png"  width="300" height="180">
+    <source alt="Logo" media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/61817579/161123729-44ae9010-6282-44e5-ba68-adaac71f33be.png"  width="300" height="180">
+    <img alt="Logo" src="https://user-images.githubusercontent.com/61817579/161123650-176e7dfe-f622-49a6-acd8-b336f9d01a2b.png"  width="300" height="180">
   </picture>
 
   <h2 align="center">Core Project</h2>
