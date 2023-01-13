@@ -16,7 +16,7 @@
     "devDependencies": {
         "@felte/reporter-tippy": "^1.1.5",
         "@felte/validator-yup": "^1.0.11",
-        "@sveltejs/adapter-node": "^1.1.0",
+        "@sveltejs/adapter-node": "^1.1.1",
         "@sveltejs/adapter-static": "^1.0.1",
         "@sveltejs/adapter-vercel": "^1.0.1",
         "@sveltejs/kit": "^1.0.11",
