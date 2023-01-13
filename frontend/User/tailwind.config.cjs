@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: ['./src/**/*.{html,js,svelte,ts,json}'],
+    content: ['./App.{js,jsx,ts,tsx}', './screens/**/*.{js,jsx,ts,tsx}'],
     theme: {
         fontFamily: {
             sans: [`Kokoro`, 'sans-serif']
@@ -10,7 +10,6 @@ module.exports = {
     },
 
     plugins: [require('@tailwindcss/typography'), require('daisyui')],
-
     daisyui: {
         themes: [
             {

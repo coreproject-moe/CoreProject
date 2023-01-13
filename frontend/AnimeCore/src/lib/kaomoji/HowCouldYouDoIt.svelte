@@ -3,7 +3,6 @@
     type $$Props = SVGAttributes<SVGElement>;
 </script>
 
-
 <svg
     {...$$props}
     viewBox="0 0 309 108"
