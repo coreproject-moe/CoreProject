@@ -187,6 +187,7 @@ async def get_character_data_from_jikan(
     returnable_data = {}
 
     if res.status == 200 and str(data.get("status", None)) not in [
+        "403",
         "404",
         "408",
         "429",
@@ -214,6 +215,11 @@ async def get_character_data_from_jikan(
                 await image.read(),
             ),
         }
+    elif data.get("status", None) == 403:
+        dictionary = JIKAN.setdefault(403, [])
+        dictionary.append(character_number)
+
+        ERROR_LIST.append(colored("Jikan", "red"))
 
     elif data.get("status", None) == 408:
         dictionary = JIKAN.setdefault(408, [])
