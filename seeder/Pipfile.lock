@@ -110,9 +110,7 @@
             "version": "==3.8.3"
         },
         "aiohttp-client-cache": {
-            "extras": [
-                "redis"
-            ],
+            "extras": ["redis"],
             "hashes": [
                 "sha256:7307ab8bfefe698a0801ba967a9f56ea9fc689fcfc2f3a21b339eeed0bd4e400",
                 "sha256:abe758ae8aec14f9c367f19c177ce65e937d3c23af37c401b3e5aa83e3bbc4ff"
