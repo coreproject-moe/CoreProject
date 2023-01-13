@@ -13,6 +13,7 @@ from pyrate_limiter import Duration, Limiter, RedisBucket, RequestRate
 from humanize import intcomma, naturaltime
 
 import aiohttp
+from aiohttp import FormData
 from aiohttp_client_cache.backends.redis import RedisBackend
 from aiohttp_client_cache.session import CachedSession
 from aiohttp_retry import ExponentialRetry, RetryClient
@@ -57,6 +58,9 @@ def make_sync(func: FuncT) -> FuncT:
         return asyncio.run(func(*args, **kwargs))
 
     return cast(FuncT, wrapper)
+
+
+BACKEND_API_URL = "http://127.0.0.1:8000/api/v1/characters"
 
 
 @make_sync
@@ -395,36 +399,40 @@ async def populate_database(
         )
 
         if jikan_data:
-            try:
-                kitsu_data = await get_character_data_from_kitsu(
-                    character_number=character_number,
-                    character_name=jikan_data["character_name"],
-                    session=session,
-                )
-                anilist_data = await get_character_data_from_anilist(
-                    character_number=character_number,
-                    character_name=jikan_data["character_name"],
-                    session=session,
-                )
-                data_dictionary = {
-                    "kitsu_id": kitsu_data.get("kitsu_id", None),
-                    "anilist_id": anilist_data.get("anilist_id", None),
-                    "name": jikan_data["character_name"],
-                    "name_kanji": jikan_data.get("character_name_kanji", None)
-                    or kitsu_data.get("character_name_kanji", None),
-                    "character_image": ContentFile(
-                        jikan_data["character_image"].read(),
-                        f"{character_number}.{jikan_data['image_url'].split('.')[-1]}",
-                    ),
-                    "about": jikan_data["character_about"],
-                }
+            kitsu_data = await get_character_data_from_kitsu(
+                character_number=character_number,
+                character_name=jikan_data["character_name"],
+                session=session,
+            )
+            anilist_data = await get_character_data_from_anilist(
+                character_number=character_number,
+                character_name=jikan_data["character_name"],
+                session=session,
+            )
 
+            formdata = FormData()
+            formdata.add_field("kitsu_id", str(kitsu_data.get("kitsu_id", None)))
+            formdata.add_field("anilist_id", str(anilist_data.get("anilist_id", None)))
+            formdata.add_field("name", str(jikan_data["character_name"]))
+            formdata.add_field(
+                "name_kanji",
+                str(
+                    jikan_data.get("character_name_kanji", None)
+                    or kitsu_data.get("character_name_kanji", None)
+                ),
+            )
+            formdata.add_field(
+                "character_image",
+                BytesIO(jikan_data["character_image"].read()),
+                filename=f"{character_number}.{jikan_data['image_url'].split('.')[-1]}",
+            )
+
+            formdata.add_field("about", str(jikan_data["character_about"]))
+
+            res = await session.post(BACKEND_API_URL, data=formdata)
+            if res.status == 200:
                 SUCCESSFUL_KITSU_IDS.append(kitsu_data.get("kitsu_id", None))
                 SUCCESSFUL_ANILIST_IDS.append(anilist_data.get("anilist_id", None))
-
-            except IntegrityError as e:
-                print(e)
-                print(f"Entry exists : {character_number}")
 
             # Add 1 to `starting_number` on every successful request
             starting_number += 1
