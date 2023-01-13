@@ -409,14 +409,21 @@ async def populate_database(
             )
 
             formdata = FormData()
-            formdata.add_field("kitsu_id", str(kitsu_data.get("kitsu_id", None)))
-            formdata.add_field("anilist_id", str(anilist_data.get("anilist_id", None)))
+            if starting_number:
+                formdata.add_field("mal_id", str(starting_number))
+
+            if kitsu_id := kitsu_data.get("kitsu_id", None):
+                formdata.add_field("kitsu_id", str(kitsu_id))
+
+            if anilist_id := anilist_data.get("anilist_id", None):
+                formdata.add_field("anilist_id", str(anilist_id))
+
             formdata.add_field("name", str(jikan_data["character_name"]))
             formdata.add_field(
                 "name_kanji",
                 str(
-                    jikan_data.get("character_name_kanji", None)
-                    or kitsu_data.get("character_name_kanji", None)
+                    jikan_data.get("character_name_kanji", "")
+                    or kitsu_data.get("character_name_kanji", "")
                 ),
             )
             formdata.add_field(
@@ -431,6 +438,9 @@ async def populate_database(
             if res.status == 200:
                 SUCCESSFUL_KITSU_IDS.append(kitsu_data.get("kitsu_id", None))
                 SUCCESSFUL_ANILIST_IDS.append(anilist_data.get("anilist_id", None))
+            else:
+                print(await res.text())
+                raise Exception
 
             # Add 1 to `starting_number` on every successful request
             starting_number += 1
