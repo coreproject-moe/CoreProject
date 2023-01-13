@@ -125,15 +125,34 @@ def post_anime_info(
     anime_producers: list[str] = Form(default=None),
     anime_characters: list[str] = Form(default=None),
 ) -> AnimeModel:
-    kwargs = locals()
+    kwargs = {
+        "mal_id": mal_id,
+        "anilist_id": anilist_id,
+        "kitsu_id": kitsu_id,
+        "anime_name": anime_name,
+        "anime_name_japanese": anime_name_japanese,
+        "anime_name_synonyms": anime_name_synonyms,
+        "anime_source": anime_source,
+        "anime_aired_from": anime_aired_from,
+        "anime_aired_to": anime_aired_to,
+        "anime_banner": anime_banner,
+        "anime_cover": anime_cover,
+        "anime_synopsis": anime_synopsis,
+        "anime_background": anime_background,
+        "anime_rating": anime_rating,
+        "anime_genres": anime_genres,
+        "anime_themes": anime_themes,
+        "anime_studios": anime_studios,
+        "anime_producers": anime_producers,
+        "anime_characters": anime_characters,
+    }
 
     model_data = {
         key: value
         for key, value in kwargs.items()
         if key
         not in [
-            "request",
-            # M2M relations
+            # Ignore M2M relations
             "anime_name_synonyms",
             "anime_genres",
             "anime_themes",
@@ -148,7 +167,10 @@ def post_anime_info(
             0,
         ]
     }
-    database, _ = AnimeModel.objects.get_or_create(**model_data)
+    database, _ = AnimeModel.objects.get_or_create(
+        anime_name=kwargs["anime_name"],
+        defaults=model_data,
+    )
 
     if anime_name_synonym_list := kwargs.get("anime_name_synonyms", None):
         for anime_name_synonym in anime_name_synonym_list[0].split(","):

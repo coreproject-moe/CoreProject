@@ -1,11 +1,12 @@
-from ninja import Query, Router
+from ninja import Query, Router, Form, File
+from ninja.files import UploadedFile
 from ninja.pagination import paginate
 
 from django.db.models import Q, QuerySet
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 
-from ....staffs.models import StaffModel
+from ....staffs.models import StaffModel, StaffAlternateNameModel
 from ...filters.staffs import StaffFilter
 from ...schemas.staffs import StaffSchema
 
@@ -64,6 +65,61 @@ def get_staff_info(
         query = query.filter(query_object).distinct()
 
     return query
+
+
+@router.post("", response=StaffSchema)
+def post_staff_info(
+    request,
+    mal_id: int | None = Form(default=None),
+    kitsu_id: int | None = Form(default=None),
+    anilist_id: int | None = Form(default=None),
+    name: str = Form(..., max_length=1024),
+    given_name: str | None = Form(default=None, max_length=1024),
+    family_name: str | None = Form(default=None, max_length=1024),
+    staff_image: UploadedFile | None = File(default=None),
+    about: str | None = Form(default=None),
+    alternate_names: list[str] = Form(default=None),
+):
+    kwargs = {
+        "mal_id": mal_id,
+        "kitsu_id": kitsu_id,
+        "anilist_id": anilist_id,
+        "name": name,
+        "given_name": given_name,
+        "family_name": family_name,
+        "staff_image": staff_image,
+        "about": about,
+        "alternate_names": alternate_names,
+    }
+
+    model_data = {
+        key: value
+        for key, value in kwargs.items()
+        if key
+        not in [
+            # Ignore M2M relations
+            "alternate_names",
+        ]
+        and value
+        not in [
+            None,
+            "",  # ignore empty strings
+            0,
+        ]
+    }
+    database, _ = StaffModel.objects.get_or_create(
+        name=kwargs["name"],
+        defaults=model_data,
+    )
+
+    if alternate_names_list := kwargs.get("alternate_names", None):
+        for alternate_name in alternate_names_list[0].split(","):
+            anime_synonym_instance, _ = StaffAlternateNameModel.objects.get_or_create(
+                name=alternate_name
+            )
+            database.alternate_names.add(anime_synonym_instance)
+
+    return database
 
 
 @router.get("/{str:staff_id}/", response=StaffSchema)
