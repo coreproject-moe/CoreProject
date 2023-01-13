@@ -45,7 +45,7 @@ def get_staff_info(
                 _query_ |= Q(**{f"{specialized_name}__icontains": int(position.strip())})
             query_object &= _query_
 
-    # Same here but with ids
+    # Specialized lookups but with ids
     id_lookups = [
         "mal_id",
         "kitsu_id",
@@ -107,7 +107,7 @@ def post_staff_info(
             0,
         ]
     }
-    database, _ = StaffModel.objects.get_or_create(
+    staff_model_instance, _ = StaffModel.objects.get_or_create(
         name=kwargs["name"],
         defaults=model_data,
     )
@@ -117,9 +117,9 @@ def post_staff_info(
             anime_synonym_instance, _ = StaffAlternateNameModel.objects.get_or_create(
                 name=alternate_name
             )
-            database.alternate_names.add(anime_synonym_instance)
+            staff_model_instance.alternate_names.add(anime_synonym_instance)
 
-    return database
+    return staff_model_instance
 
 
 @router.get("/{str:staff_id}/", response=StaffSchema)
