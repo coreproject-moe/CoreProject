@@ -181,7 +181,7 @@ def post_anime_info(
             )
             anime_name_synonym_m2m_list.append(anime_synonym_instance)
 
-        anime_model_instance.anime_name_synonyms.add(anime_name_synonym_m2m_list)
+        anime_model_instance.anime_name_synonyms.add(*anime_name_synonym_m2m_list)
 
     if anime_genres_list := kwargs.get("anime_genres", None):
         anime_genre_m2m_list: list[AnimeGenreModel] = []
@@ -193,7 +193,7 @@ def post_anime_info(
                 )
                 anime_genre_m2m_list.append(anime_genre_instance)
 
-        anime_model_instance.anime_genres.add(anime_genre_m2m_list)
+        anime_model_instance.anime_genres.add(*anime_genre_m2m_list)
 
     if anime_themes_list := kwargs.get("anime_themes", None):
         anime_theme_m2m_list: list[AnimeThemeModel] = []
@@ -205,7 +205,7 @@ def post_anime_info(
                 )
                 anime_theme_m2m_list.append(anime_theme_instance)
 
-        anime_model_instance.anime_themes.add(anime_theme_m2m_list)
+        anime_model_instance.anime_themes.add(*anime_theme_m2m_list)
 
     if anime_studios_list := kwargs.get("anime_studios", None):
         anime_studio_m2m_list: list[StudioModel] = []
@@ -217,7 +217,7 @@ def post_anime_info(
                 )
                 anime_studio_m2m_list.append(anime_studio_instance)
 
-        anime_model_instance.anime_studios.add(anime_studio_m2m_list)
+        anime_model_instance.anime_studios.add(*anime_studio_m2m_list)
 
     if anime_producers_list := kwargs.get("anime_producers", None):
         anime_producer_m2m_list: list[ProducerModel] = []
@@ -229,7 +229,7 @@ def post_anime_info(
                 )
                 anime_producer_m2m_list.append(anime_producer_instance)
 
-        anime_model_instance.anime_producers.add(anime_producer_m2m_list)
+        anime_model_instance.anime_producers.add(*anime_producer_m2m_list)
 
     if anime_characters_list := kwargs.get("anime_characters", None):
         anime_characters_m2m_list: list[CharacterModel] = []
@@ -241,7 +241,7 @@ def post_anime_info(
                 )
                 anime_characters_m2m_list.append(anime_character_instance)
 
-        anime_model_instance.anime_characters.add(anime_characters_m2m_list)
+        anime_model_instance.anime_characters.add(*anime_characters_m2m_list)
 
     return anime_model_instance
 

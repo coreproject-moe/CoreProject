@@ -121,7 +121,7 @@ def post_staff_info(
             )
             alternate_name_m2m_list.append(anime_synonym_instance)
 
-        staff_model_instance.alternate_names.add(alternate_name_m2m_list)
+        staff_model_instance.alternate_names.add(*alternate_name_m2m_list)
 
     return staff_model_instance
 
