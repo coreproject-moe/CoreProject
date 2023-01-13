@@ -45,7 +45,7 @@ def get_staff_info(
                 _query_ |= Q(**{f"{specialized_name}__icontains": int(position.strip())})
             query_object &= _query_
 
-    # Same here but with ids
+    # Specialized lookups but with ids
     id_lookups = [
         "mal_id",
         "kitsu_id",
