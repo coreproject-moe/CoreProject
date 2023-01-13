@@ -1,5 +1,6 @@
 from apps.characters.models import CharacterModel
-from ninja import Query, Router
+from ninja import Query, Router, Form, File
+from ninja.files import UploadedFile
 from ninja.pagination import paginate
 
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
@@ -52,6 +53,32 @@ def get_character_info(
         query = query.filter(query_object).distinct()
 
     return query
+
+
+@router.post("", response=CharacterSchema)
+def post_character_info(
+    request: HttpRequest,
+    mal_id: int = Form(default=None),
+    kitsu_id: int | None = Form(default=None),
+    anilist_id: int | None = Form(default=None),
+    name: str = Form(..., max_length=1024),
+    name_kanji: str = Form(..., max_length=1024),
+    character_image: UploadedFile | None = File(default=None),
+    about: str | None = Form(default=None),
+) -> QuerySet[CharacterModel]:
+    kwargs = locals()
+    instance, _ = CharacterModel.objects.get_or_create(
+        name=name,
+        name_kanji=name_kanji,
+        defaults={
+            **{
+                key: value
+                for key, value in kwargs.items()
+                if key not in ["request"] and value not in [None, 0, ""]
+            }
+        },
+    )
+    return instance
 
 
 @router.get("/{str:character_id}/", response=CharacterSchema)
