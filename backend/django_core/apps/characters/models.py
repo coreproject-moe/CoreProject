@@ -1,7 +1,6 @@
 from core.storages import OverwriteStorage
-from dynamic_filenames import FilePattern
-
 from django.db import models
+from dynamic_filenames import FilePattern
 
 anime_charaters_pattern = FilePattern(filename_pattern="anime_characters/{uuid:s}{ext}")
 

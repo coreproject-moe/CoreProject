@@ -1,20 +1,19 @@
 import asyncio
-from datetime import datetime, timedelta
-from io import BytesIO
 import json
 import os
 import textwrap
+from datetime import datetime, timedelta
+from io import BytesIO
 from typing import cast
-
-from humanize import intcomma, naturaltime
-from pyrate_limiter import Duration, Limiter, RedisBucket, RequestRate
-from termcolor import colored
 
 import aiohttp
 from aiohttp import FormData
 from aiohttp_client_cache.backends.redis import RedisBackend
 from aiohttp_client_cache.session import CachedSession
 from aiohttp_retry import ExponentialRetry, RetryClient
+from humanize import intcomma, naturaltime
+from pyrate_limiter import Duration, Limiter, RedisBucket, RequestRate
+from termcolor import colored
 
 CHARACTER_LOCK_FILE_NAME = "Character.lock"
 
@@ -187,6 +186,7 @@ async def get_character_data_from_jikan(
     returnable_data = {}
 
     if res.status == 200 and str(data.get("status", None)) not in [
+        "403",
         "404",
         "408",
         "429",
@@ -214,6 +214,11 @@ async def get_character_data_from_jikan(
                 await image.read(),
             ),
         }
+    elif data.get("status", None) == 403:
+        dictionary = JIKAN.setdefault(403, [])
+        dictionary.append(character_number)
+
+        ERROR_LIST.append(colored("Jikan", "red"))
 
     elif data.get("status", None) == 408:
         dictionary = JIKAN.setdefault(408, [])

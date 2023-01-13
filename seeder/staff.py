@@ -3,21 +3,20 @@
 
 
 import asyncio
-from datetime import datetime, timedelta
-from io import BytesIO
 import json
 import os
 import textwrap
+from datetime import datetime, timedelta
+from io import BytesIO
 from typing import Any, cast
-
-from humanize import intcomma, naturaltime
-from pyrate_limiter import Duration, Limiter, RedisBucket, RequestRate
-from termcolor import colored
 
 import aiohttp
 from aiohttp_client_cache.backends.redis import RedisBackend
 from aiohttp_client_cache.session import CachedSession
 from aiohttp_retry import ExponentialRetry, RetryClient
+from humanize import intcomma, naturaltime
+from pyrate_limiter import Duration, Limiter, RedisBucket, RequestRate
+from termcolor import colored
 
 STAFF_LOCK_FILE_NAME = "Staff.lock"
 
