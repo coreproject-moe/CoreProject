@@ -1,7 +1,7 @@
 {
     "env": {
         "es2021": true,
-        "node": true,
+        "node": true
     },
     "extends": [
         "plugin:react/recommended",
@@ -17,10 +17,6 @@
         "ecmaVersion": 12,
         "sourceType": "module"
     },
-    "plugins": [
-        "react",
-        "react-native"
-    ],
-    "rules": {
-    }
+    "plugins": ["react", "react-native"],
+    "rules": {}
 }
