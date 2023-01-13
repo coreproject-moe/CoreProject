@@ -3,26 +3,21 @@
 
 
 import asyncio
-from collections.abc import Callable
 from datetime import datetime, timedelta
-import functools
-from termcolor import colored
 from io import BytesIO
 import json
 import os
-from pathlib import Path
 import textwrap
-from typing import Any, TypeVar, cast
+from typing import Any, cast
 
-from pyrate_limiter import Duration, Limiter, RedisBucket, RequestRate
 from humanize import intcomma, naturaltime
-
+from pyrate_limiter import Duration, Limiter, RedisBucket, RequestRate
+from termcolor import colored
 
 import aiohttp
 from aiohttp_client_cache.backends.redis import RedisBackend
 from aiohttp_client_cache.session import CachedSession
 from aiohttp_retry import ExponentialRetry, RetryClient
-
 
 STAFF_LOCK_FILE_NAME = "Staff.lock"
 
@@ -88,7 +83,7 @@ async def command() -> None:
                 JIKAN = data.get("JIKAN", JIKAN)
                 KITSU = data.get("KITSU", KITSU)
                 ANILIST = data.get("ANILIST", ANILIST)
-                EXECUTION_TIME = data.get("EXECUTION_TIME", EXECUTION_TIME)
+                data.get("EXECUTION_TIME", EXECUTION_TIME)
 
                 break
 
@@ -375,9 +370,7 @@ async def populate_database(
                 }
                 (instance, _) = await StaffModel.objects.aupdate_or_create(
                     kitsu_id=staff_number,
-                    defaults={
-                        k: v for k, v in data_dictionary.items() if v is not None
-                    },
+                    defaults={k: v for k, v in data_dictionary.items() if v is not None},
                 )
 
                 if jikan_data:

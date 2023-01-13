@@ -1,12 +1,10 @@
 import asyncio
-from collections.abc import Callable
 from datetime import datetime, timedelta
-import functools
 from io import BytesIO
 import json
 import os
 import textwrap
-from typing import Any, TypeVar, cast
+from typing import cast
 
 from humanize import intcomma, naturaltime
 from pyrate_limiter import Duration, Limiter, RedisBucket, RequestRate
