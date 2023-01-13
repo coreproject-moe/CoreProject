@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "69aa62f8bde37b16582ffa3e8ad39863dca14249f150bef0c805615c9002b075"
+            "sha256": "e288fdef19ddb84ab467c3e7755fd65ad249b8e72b020d4e673ce3bcabf76c75"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -110,7 +110,9 @@
             "version": "==3.8.3"
         },
         "aiohttp-client-cache": {
-            "extras": ["redis"],
+            "extras": [
+                "redis"
+            ],
             "hashes": [
                 "sha256:7307ab8bfefe698a0801ba967a9f56ea9fc689fcfc2f3a21b339eeed0bd4e400",
                 "sha256:abe758ae8aec14f9c367f19c177ce65e937d3c23af37c401b3e5aa83e3bbc4ff"
