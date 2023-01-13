@@ -20,8 +20,8 @@ from aiohttp_retry import ExponentialRetry, RetryClient
 
 CHARACTER_LOCK_FILE_NAME = "Character.lock"
 
-CACHE_NAME = "anime"
-RETRY_STATUSES = []
+CACHE_NAME = "characters"
+RETRY_STATUSES = [408, 429, 500, 502, 503, 504]
 
 EXECUTION_TIME: int = 0
 
@@ -45,23 +45,9 @@ limiter = Limiter(
     },
 )
 
-# https://stackoverflow.com/questions/43013083/typing-decorator-with-parameters-in-mypy-with-typevar-yields-expected-uninhabite
-FuncT = TypeVar("FuncT", bound=Callable[..., Any])
-
-
-# https://github.com/pallets/click/issues/2033#issue-960810534
-def make_sync(func: FuncT) -> FuncT:
-    @functools.wraps(func)
-    def wrapper(*args: Any, **kwargs: Any) -> Any:
-        return asyncio.run(func(*args, **kwargs))
-
-    return cast(FuncT, wrapper)
-
-
 BACKEND_API_URL = "http://127.0.0.1:8000/api/v1/characters"
 
 
-@make_sync
 async def command() -> None:
     global JIKAN, KITSU, ANILIST, DATABASE_ID, EXECUTION_TIME, SUCCESSFUL_NAMES, SUCCESSFUL_KITSU_IDS, SUCCESSFUL_ANILIST_IDS
 
@@ -409,8 +395,6 @@ async def populate_database(
             )
 
             formdata = FormData()
-            if starting_number:
-                formdata.add_field("mal_id", str(starting_number))
 
             if kitsu_id := kitsu_data.get("kitsu_id", None):
                 formdata.add_field("kitsu_id", str(kitsu_id))
@@ -418,6 +402,7 @@ async def populate_database(
             if anilist_id := anilist_data.get("anilist_id", None):
                 formdata.add_field("anilist_id", str(anilist_id))
 
+            formdata.add_field("mal_id", str(starting_number))
             formdata.add_field("name", str(jikan_data["character_name"]))
             formdata.add_field(
                 "name_kanji",
@@ -499,4 +484,4 @@ async def populate_database(
 
 
 if __name__ == "__main__":
-    command()
+    asyncio.run(command())
