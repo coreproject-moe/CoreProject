@@ -19,6 +19,7 @@ repos:
                 - eslint-plugin-react@latest
                 - eslint-config-airbnb@latest
                 - eslint-plugin-react-native@latest
+                - eslint-plugin-react-hooks@latest
                 # Svelte Related
                 - eslint@8.31.0
                 - eslint-config-prettier@8.6.0
