@@ -3,7 +3,7 @@ from apps.anime.models.anime_genre import AnimeGenreModel
 from core.permissions import is_superuser
 from ninja import Router
 
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
 
@@ -24,8 +24,6 @@ def get_individual_anime_genre_info(
 
 
 @router.post("/{int:anime_id}/genres", response=AnimeGenreSchema)
-@login_required
-@user_passes_test(is_superuser)
 def post_individual_anime_genre_info(
     request: HttpRequest,
     anime_id: int,
