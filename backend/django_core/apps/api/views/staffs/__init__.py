@@ -113,15 +113,11 @@ def post_staff_info(
     )
 
     if alternate_names_list := kwargs.get("alternate_names", None):
-        alternate_name_m2m_list: list[StaffAlternateNameModel] = []
-
         for alternate_name in alternate_names_list[0].split(","):
             anime_synonym_instance, _ = StaffAlternateNameModel.objects.get_or_create(
                 name=alternate_name
             )
-            alternate_name_m2m_list.append(anime_synonym_instance)
-
-        staff_model_instance.alternate_names.add(*alternate_name_m2m_list)
+            staff_model_instance.alternate_names.add(anime_synonym_instance)
 
     return staff_model_instance
 
