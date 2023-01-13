@@ -10,6 +10,7 @@ module.exports = {
         extend: {},
     },
 
+    // eslint-disable-next-line import/no-extraneous-dependencies
     plugins: [require('@tailwindcss/typography'), require('daisyui')],
     daisyui: {
         themes: [
