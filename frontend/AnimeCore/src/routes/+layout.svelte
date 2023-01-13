@@ -2,11 +2,12 @@
     export const trailingSlash = "always";
 
     import "../app.scss";
-    import navigationState from "$store/Navigation_State";
 
     import { afterUpdate } from "svelte";
     import { fade } from "svelte/transition";
+
     import NavigationBar from "$components/shared/NavigationBar.svelte";
+    import navigationState from "$store/Navigation_State";
     afterUpdate(async () => {
         document
             ?.querySelectorAll<HTMLDivElement | HTMLStyleElement>("#loader")
