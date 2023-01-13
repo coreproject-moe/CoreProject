@@ -107,19 +107,23 @@ def post_staff_info(
             0,
         ]
     }
-    database, _ = StaffModel.objects.get_or_create(
+    staff_model_instance, _ = StaffModel.objects.get_or_create(
         name=kwargs["name"],
         defaults=model_data,
     )
 
     if alternate_names_list := kwargs.get("alternate_names", None):
+        alternate_name_m2m_list: list[StaffAlternateNameModel] = []
+
         for alternate_name in alternate_names_list[0].split(","):
             anime_synonym_instance, _ = StaffAlternateNameModel.objects.get_or_create(
                 name=alternate_name
             )
-            database.alternate_names.add(anime_synonym_instance)
+            alternate_name_m2m_list.append(anime_synonym_instance)
 
-    return database
+        staff_model_instance.alternate_names.add(alternate_name_m2m_list)
+
+    return staff_model_instance
 
 
 @router.get("/{str:staff_id}/", response=StaffSchema)

@@ -167,59 +167,83 @@ def post_anime_info(
             0,
         ]
     }
-    database, _ = AnimeModel.objects.get_or_create(
+    anime_model_instance, _ = AnimeModel.objects.get_or_create(
         anime_name=kwargs["anime_name"],
         defaults=model_data,
     )
-
+    
     if anime_name_synonym_list := kwargs.get("anime_name_synonyms", None):
+        anime_name_synonym_m2m_list: list[AnimeSynonymModel] = []
+
         for anime_name_synonym in anime_name_synonym_list[0].split(","):
             anime_synonym_instance, _ = AnimeSynonymModel.objects.get_or_create(
                 name=anime_name_synonym.strip(),
             )
-            database.anime_name_synonyms.add(anime_synonym_instance)
+            anime_name_synonym_m2m_list.append(anime_synonym_instance)
+
+        anime_model_instance.anime_name_synonyms.add(anime_name_synonym_m2m_list)
 
     if anime_genres_list := kwargs.get("anime_genres", None):
+        anime_genre_m2m_list: list[AnimeGenreModel] = []
+
         for anime_genre in anime_genres_list[0].split(","):
             with contextlib.suppress(AnimeGenreModel.DoesNotExist):
                 anime_genre_instance = AnimeGenreModel.objects.get(
                     name=anime_genre.strip(),
                 )
-                database.anime_genres.add(anime_genre_instance)
+                anime_genre_m2m_list.append(anime_genre_instance)
+
+        anime_model_instance.anime_genres.add(anime_genre_m2m_list)
 
     if anime_themes_list := kwargs.get("anime_themes", None):
+        anime_theme_m2m_list: list[AnimeThemeModel] = []
+
         for anime_theme in anime_themes_list[0].split(","):
             with contextlib.suppress(AnimeThemeModel.DoesNotExist):
                 anime_theme_instance = AnimeThemeModel.objects.get(
                     name=anime_theme.strip(),
                 )
-                database.anime_themes.add(anime_theme_instance)
+                anime_theme_m2m_list.append(anime_theme_instance)
+
+        anime_model_instance.anime_themes.add(anime_theme_m2m_list)
 
     if anime_studios_list := kwargs.get("anime_studios", None):
+        anime_studio_m2m_list: list[StudioModel] = []
+
         for anime_studio in anime_studios_list[0].split(","):
             with contextlib.suppress(StudioModel.DoesNotExist):
                 anime_studio_instance = StudioModel.objects.get(
                     name=anime_studio.strip(),
                 )
-                database.anime_studios.add(anime_studio_instance)
+                anime_studio_m2m_list.append(anime_studio_instance)
+
+        anime_model_instance.anime_studios.add(anime_studio_m2m_list)
 
     if anime_producers_list := kwargs.get("anime_producers", None):
+        anime_producer_m2m_list: list[ProducerModel] = []
+
         for anime_producer in anime_producers_list[0].split(","):
             with contextlib.suppress(ProducerModel.DoesNotExist):
                 anime_producer_instance = ProducerModel.objects.get(
                     name=anime_producer.strip(),
                 )
-                database.anime_producers.add(anime_producer_instance)
+                anime_producer_m2m_list.append(anime_producer_instance)
+
+        anime_model_instance.anime_producers.add(anime_producer_m2m_list)
 
     if anime_characters_list := kwargs.get("anime_characters", None):
+        anime_characters_m2m_list: list[CharacterModel] = []
+
         for anime_character in anime_characters_list[0].split(","):
             with contextlib.suppress(CharacterModel.DoesNotExist):
                 anime_character_instance = CharacterModel.objects.get(
                     name=anime_character.strip(),
                 )
-                database.anime_characters.add(anime_character_instance)
+                anime_characters_m2m_list.append(anime_character_instance)
 
-    return database
+        anime_model_instance.anime_characters.add(anime_characters_m2m_list)
+
+    return anime_model_instance
 
 
 @router.get("/{int:anime_id}", response=AnimeInfoGETSchema)
