@@ -1,9 +1,8 @@
-from ninja import Query, Router
-from ninja.pagination import paginate
-
 from django.db.models import Q
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
+from ninja import Query, Router
+from ninja.pagination import paginate
 
 from ....studios.models import StudioModel
 from ...filters.studios import StudioFilter

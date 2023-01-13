@@ -2,27 +2,12 @@
     export const trailingSlash = "always";
 
     import "../app.scss";
-    // NProgress css
-    import "nprogress/nprogress.css";
 
-    import NProgress from "nprogress";
     import { afterUpdate } from "svelte";
+    import { fade } from "svelte/transition";
 
-    import { navigating } from "$app/stores";
-
-    NProgress.configure({
-        // Full list: https://github.com/rstacruz/nprogress#configuration
-        minimum: 0.16
-    });
-
-    $: {
-        if ($navigating) {
-            NProgress.start();
-        } else {
-            NProgress.done();
-        }
-    }
-
+    import NavigationBar from "$components/shared/NavigationBar.svelte";
+    import navigationState from "$store/Navigation_State";
     afterUpdate(async () => {
         document
             ?.querySelectorAll<HTMLDivElement | HTMLStyleElement>("#loader")
@@ -30,5 +15,20 @@
         document?.querySelector<HTMLElement>(".root")?.style.removeProperty("display");
     });
 </script>
+
+<svelte:window
+    on:sveltekit:navigation-start={() => {
+        $navigationState = "loading";
+    }}
+    on:sveltekit:navigation-end={() => {
+        $navigationState = "loaded";
+    }}
+/>
+
+{#if $navigationState === "loading"}
+    <div out:fade={{ delay: 500 }}>
+        <NavigationBar />
+    </div>
+{/if}
 
 <slot />

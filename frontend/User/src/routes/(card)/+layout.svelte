@@ -10,28 +10,26 @@
 		name: string;
 		image: string;
 		credit?: string;
-	}>;
-	onMount(() => {
-		CHOICES = [
-			{
-				type: 'anime',
-				name: 'Demon Slayer',
-				image: '/posters/demon-slayer.webp',
-				credit:
-					'https://www.reddit.com/r/DemonSlayerAnime/comments/tpgpid/demon_slayer_4k_wallpaper/'
-			},
-			{
-				type: 'anime',
-				name: 'Attack on Titan',
-				image: '/posters/attack-on-titan.jpg'
-			},
-			{
-				type: 'anime',
-				name: 'Comic Girls',
-				image: '/posters/Comic-Girls-Image.png'
-			}
-		];
+	}> = [
+		{
+			type: 'anime',
+			name: 'Demon Slayer',
+			image: '/posters/demon-slayer.webp',
+			credit: 'https://www.reddit.com/r/DemonSlayerAnime/comments/tpgpid/demon_slayer_4k_wallpaper/'
+		},
+		{
+			type: 'anime',
+			name: 'Attack on Titan',
+			image: '/posters/attack-on-titan.jpg'
+		},
+		{
+			type: 'anime',
+			name: 'Comic Girls',
+			image: '/posters/Comic-Girls-Image.png'
+		}
+	];
 
+	onMount(() => {
 		setInterval(() => {
 			const index = Math.floor(Math.random() * CHOICES.length);
 			CHOICE_NUMBER = index;

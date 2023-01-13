@@ -1,7 +1,6 @@
 from typing import Self
 
 from apps.user.models import CustomUser
-
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.hashers import check_password
 from django.db.models import Q
@@ -20,6 +19,7 @@ class EmailOrUsernameModelBackend(ModelBackend):
     def get_user_given_username_and_password(
         username_or_email: str, password: str
     ) -> CustomUser:
+        query = None
         # So `username` is something like baseplate-admin#0001
         # we need to split to get the username and discriminator
         try:
@@ -32,9 +32,6 @@ class EmailOrUsernameModelBackend(ModelBackend):
             # If password matches then return user
             if check_password(password, user_model.password):
                 query = user_model
-
-        except CustomUser.DoesNotExist:
-            query = None
 
         finally:
             return query

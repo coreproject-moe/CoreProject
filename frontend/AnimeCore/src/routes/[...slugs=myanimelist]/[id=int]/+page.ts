@@ -4,7 +4,7 @@ import { MAL } from "$data/urls";
 
 import type { PageLoad } from "./$types";
 
-export const load: PageLoad = async ({
+export const load = (async ({
     params
     // ,fetch // Use this if you want Server Side Fetch | https://kit.svelte.dev/docs/hooks#externalfetch
 }) => {
@@ -208,4 +208,4 @@ export const load: PageLoad = async ({
         animeData: jikan_remapped_to_backend,
         error: errorMessage
     };
-};
+}) satisfies PageLoad;

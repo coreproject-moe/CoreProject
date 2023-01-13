@@ -1,11 +1,8 @@
 from apps.anime.models import AnimeModel
 from apps.producers.models import ProducerModel
-from core.permissions import is_superuser
-from ninja import Router
-
-from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
+from ninja import Router
 
 from ...schemas.producers import ProducerSchema
 
@@ -24,8 +21,6 @@ def get_individual_anime_producer_info(
 
 
 @router.post("/{int:anime_id}/producers", response=ProducerSchema)
-@login_required
-@user_passes_test(is_superuser)
 def post_individual_anime_producer_info(
     request: HttpRequest,
     anime_id: int,

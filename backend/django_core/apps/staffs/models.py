@@ -1,9 +1,9 @@
 from core.storages import OverwriteStorage
+from django.db import models
 from dynamic_filenames import FilePattern
 
-from django.db import models
+staff_upload_pattern = FilePattern(filename_pattern="staffs/{uuid:s}{ext}")
 
-staff_pattern = FilePattern(filename_pattern="/staff{ext}")
 
 # Create your models here.
 class StaffAlternateNameModel(models.Model):
@@ -24,7 +24,7 @@ class StaffModel(models.Model):
 
     staff_image = models.ImageField(
         storage=OverwriteStorage,
-        upload_to=staff_pattern,
+        upload_to=staff_upload_pattern,
         default=None,
         blank=True,
         null=True,

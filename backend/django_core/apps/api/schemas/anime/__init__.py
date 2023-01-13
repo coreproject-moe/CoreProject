@@ -1,9 +1,8 @@
 from apps.anime.models import AnimeModel
-from ninja import ModelSchema
-from pydantic import AnyUrl
-
 from django.conf import settings
 from django.shortcuts import resolve_url
+from ninja import ModelSchema
+from pydantic import AnyUrl
 
 from ...schemas.anime.anime_synonym import AnimeSynonymSchema
 
@@ -79,18 +78,3 @@ class AnimeInfoGETSchema(ModelSchema):
     def resolve_episode(obj: AnimeModel) -> str:
         url = resolve_url("api-1.0.0:get_individual_anime_episodes", anime_id=obj.pk)
         return f"{settings.HOSTNAME}{url}"
-
-
-class AnimeInfoPOSTSchema(ModelSchema):
-    class Config:
-        model = AnimeModel
-        model_exclude = [
-            "anime_genres",
-            "anime_themes",
-            "anime_studios",
-            "anime_producers",
-            "anime_name_synonyms",
-            "anime_episodes",
-            "anime_recommendation",
-            "anime_characters",
-        ]
