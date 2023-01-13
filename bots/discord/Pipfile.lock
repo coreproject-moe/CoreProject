@@ -425,9 +425,7 @@
             "version": "==6.0.4"
         },
         "sqlalchemy": {
-            "extras": [
-                "postgresql_asyncpg"
-            ],
+            "extras": ["postgresql_asyncpg"],
             "hashes": [
                 "sha256:07e48cbcdda6b8bc7a59d6728bd3f5f574ffe03f2c9fb384239f3789c2d95c2e",
                 "sha256:18cafdb27834fa03569d29f571df7115812a0e59fd6a3a03ccb0d33678ec8420",
