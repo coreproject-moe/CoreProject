@@ -8,17 +8,15 @@ import os
 import textwrap
 from typing import Any, TypeVar, cast
 
-from pyrate_limiter import Duration, Limiter, RedisBucket, RequestRate
-
 from humanize import intcomma, naturaltime
+from pyrate_limiter import Duration, Limiter, RedisBucket, RequestRate
+from termcolor import colored
 
 import aiohttp
 from aiohttp import FormData
 from aiohttp_client_cache.backends.redis import RedisBackend
 from aiohttp_client_cache.session import CachedSession
 from aiohttp_retry import ExponentialRetry, RetryClient
-
-from termcolor import colored
 
 CHARACTER_LOCK_FILE_NAME = "Character.lock"
 

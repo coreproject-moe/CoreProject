@@ -1,5 +1,5 @@
 from apps.characters.models import CharacterModel
-from ninja import Query, Router, Form, File
+from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from ninja.pagination import paginate
 
