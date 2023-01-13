@@ -16,10 +16,6 @@
         "ecmaVersion": 12,
         "sourceType": "module"
     },
-    "plugins": [
-        "react",
-        "react-native"
-    ],
-    "rules": {
-    }
+    "plugins": ["react", "react-native"],
+    "rules": {}
 }
