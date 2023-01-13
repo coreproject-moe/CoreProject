@@ -17,6 +17,7 @@ repos:
                 # - react@18.2.0
                 # - "@emotion/eslint-plugin@11.7.0"
                 - eslint-plugin-react@latest
+                - eslint-config-airbnb@latest
                 # Svelte Related
                 - eslint@8.31.0
                 - eslint-config-prettier@8.6.0
