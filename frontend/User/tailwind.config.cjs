@@ -1,4 +1,4 @@
-/* eslint-disable global-require */
+/* eslint-disable */
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: ['./App.{js,jsx,ts,tsx}', './screens/**/*.{js,jsx,ts,tsx}'],
@@ -10,7 +10,6 @@ module.exports = {
 		extend: {}
 	},
 
-	// eslint-disable-next-line import/no-extraneous-dependencies
 	plugins: [require('@tailwindcss/typography'), require('daisyui')],
 	daisyui: {
 		themes: [
