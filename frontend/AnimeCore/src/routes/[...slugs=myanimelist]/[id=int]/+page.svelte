@@ -7,7 +7,7 @@
 </script>
 
 <svelte:head>
-    <title>{data.animeData?.title_english}</title>
+    <title>{data.animeData?.title_english} | CoreProject | MyAnimelist</title>
 </svelte:head>
 
 <AnimeInfo data={data.animeData} />
