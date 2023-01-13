@@ -8,7 +8,7 @@ SplashScreen.preventAutoHideAsync();
 
 export default function App() {
     const [fontsLoaded] = useFonts({
-        Kokoro: require('@assets/fonts/Kokoro/Kokoro-Regular.otf'),
+        Kokoro: require('./assets/fonts/Kokoro/Kokoro-Regular.otf'),
     });
 
     const onLayoutRootView = React.useCallback(async () => {
@@ -16,6 +16,10 @@ export default function App() {
             await SplashScreen.hideAsync();
         }
     }, [fontsLoaded]);
+
+    if (!fontsLoaded) {
+        return null;
+    }
 
     return (
         <View

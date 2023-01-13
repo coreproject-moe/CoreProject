@@ -9,6 +9,7 @@
         "web": "expo start --web"
     },
     "dependencies": {
+        "daisyui": "^2.46.1",
         "expo": "~47.0.9",
         "expo-font": "^11.0.1",
         "expo-splash-screen": "~0.17.5",
@@ -19,6 +20,7 @@
     },
     "devDependencies": {
         "@babel/core": "^7.12.9",
+        "@tailwindcss/typography": "^0.5.9",
         "@tsconfig/react-native": "^2.0.3",
         "@types/jest": "^29.2.5",
         "@types/react": "^18.0.26",
