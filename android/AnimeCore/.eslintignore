@@ -12,4 +12,6 @@ pnpm-lock.yaml
 package-lock.json
 yarn.lock
 
-tailwind.config.cjs
+tailwind.config.js
+metro.config.js
+babel.config.js
