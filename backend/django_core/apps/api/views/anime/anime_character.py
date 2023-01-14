@@ -1,8 +1,9 @@
 from apps.anime.models import AnimeModel
 from apps.characters.models import CharacterModel
+from ninja import Router
+
 from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
-from ninja import Router
 
 from ...schemas.characters import CharacterSchema
 

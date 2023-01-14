@@ -1,8 +1,9 @@
+from ninja import Query, Router
+from ninja.pagination import paginate
+
 from django.db.models import Q
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
-from ninja import Query, Router
-from ninja.pagination import paginate
 
 from ....producers.models import ProducerModel
 from ...filters.producers import ProducerFilter

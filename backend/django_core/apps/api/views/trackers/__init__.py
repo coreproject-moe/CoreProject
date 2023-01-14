@@ -1,6 +1,7 @@
+from ninja import Router
+
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
-from ninja import Router
 
 from ...schemas.trackers import TrackerDeleteSchema, TrackerSchema
 
