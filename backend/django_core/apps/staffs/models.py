@@ -14,11 +14,11 @@ class StaffAlternateNameModel(models.Model):
 
 
 class StaffModel(models.Model):
-    mal_id = models.IntegerField(unique=True, null=True, blank=True, db_index=True)
-    kitsu_id = models.IntegerField(unique=True, null=True, blank=True, db_index=True)
-    anilist_id = models.IntegerField(unique=True, null=True, blank=True, db_index=True)
+    mal_id = models.IntegerField(unique=True, null=True, blank=True)
+    kitsu_id = models.IntegerField(unique=True, null=True, blank=True)
+    anilist_id = models.IntegerField(unique=True, null=True, blank=True)
 
-    name = models.CharField(max_length=1024, db_index=True)
+    name = models.CharField(max_length=1024)
     given_name = models.CharField(max_length=1024, null=True, blank=True)
     family_name = models.CharField(max_length=1024, null=True, blank=True)
 

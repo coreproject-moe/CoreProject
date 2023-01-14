@@ -5,8 +5,8 @@ from dynamic_filenames import FilePattern
 from .episode_comment import EpisodeCommentModel
 from .episode_timestamp import EpisodeTimestampModel
 
-episode_cover = FilePattern(filename_pattern="/episode_cover{ext}")
-episode_pattern = FilePattern(filename_pattern="/episode{ext}")
+episode_cover_pattern = FilePattern(filename_pattern="/episode_cover/{uuid:s}{ext}")
+episode_pattern = FilePattern(filename_pattern="/episode/{uuid:s}{ext}")
 
 
 # Create your models here.
@@ -14,10 +14,10 @@ episode_pattern = FilePattern(filename_pattern="/episode{ext}")
 
 class EpisodeModel(models.Model):
     episode_number = models.BigIntegerField(default=0)
-    episode_name = models.CharField(max_length=1024, db_index=True)
+    episode_name = models.CharField(max_length=1024)
     episode_cover = models.ImageField(
         storage=OverwriteStorage(),
-        upload_to=episode_cover,
+        upload_to=episode_cover_pattern,
         default=None,
         blank=True,
         null=True,
@@ -39,3 +39,4 @@ class EpisodeModel(models.Model):
 
     class Meta:
         verbose_name = "Episode"
+        verbose_name_plural = "Episodes"

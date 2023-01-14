@@ -11,14 +11,12 @@ class EpisodeTimestampModel(models.Model):
     episode = models.ForeignKey(
         to="EpisodeModel",
         on_delete=models.CASCADE,
-        db_index=True,
         blank=True,
         null=True,
     )
     user = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
-        db_index=True,
     )
 
     objects = UsernameWithDiscriminatorManager()
