@@ -1,7 +1,7 @@
 from collections.abc import Generator
+from io import BufferedReader
 import mimetypes
 from pathlib import Path
-from io import BufferedReader
 
 from django.conf import settings
 from django.http import HttpResponse, StreamingHttpResponse
