@@ -1,10 +1,11 @@
 from core.auth import AuthBearer
+from ninja import File, Form, Router, UploadedFile
+from pydantic import AnyUrl, EmailStr
+
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
-from ninja import File, Form, Router, UploadedFile
-from pydantic import AnyUrl, EmailStr
 
 from ...schemas.user import UserSchema
 

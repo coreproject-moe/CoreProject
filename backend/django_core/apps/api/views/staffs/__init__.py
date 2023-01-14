@@ -1,9 +1,10 @@
-from django.db.models import Q, QuerySet
-from django.http import HttpRequest
-from django.shortcuts import get_object_or_404
 from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from ninja.pagination import paginate
+
+from django.db.models import Q, QuerySet
+from django.http import HttpRequest
+from django.shortcuts import get_object_or_404
 
 from ....staffs.models import StaffAlternateNameModel, StaffModel
 from ...filters.staffs import StaffFilter

@@ -1,6 +1,7 @@
 from core.storages import OverwriteStorage
-from django.db import models
 from dynamic_filenames import FilePattern
+
+from django.db import models
 
 staff_upload_pattern = FilePattern(filename_pattern="staffs/{uuid:s}{ext}")
 
