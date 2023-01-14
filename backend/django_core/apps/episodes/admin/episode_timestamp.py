@@ -16,7 +16,7 @@ class EpisodeTimestampAdmin(admin.ModelAdmin):
     search_fields = ["user__username"]
 
     def get_search_results(
-        self: Self,
+        self,
         request: HttpRequest,
         queryset: QuerySet[EpisodeTimestampModel],
         search_term: str,
