@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, Any, Self
+from typing import TYPE_CHECKING, Any
 
 from django.conf import settings
 from django.contrib.auth.base_user import BaseUserManager
@@ -6,16 +6,18 @@ from django.db import models
 from django.db.models import CharField, Value
 from django.db.models.functions import Cast, Concat, LPad
 from django.utils.translation import gettext_lazy as _
+from django.db import models
 
 if TYPE_CHECKING:
     from .models import CustomUser
 
 
-class UsernameWithDiscriminatorManager(models.Manager):
+class UsernameWithDiscriminatorManager(models.Manager["CustomUser"]):
+    # mypy: ignore-type
     def get_username_with_discriminator(
-        self: Self,
+        self,
         prefix: str = "",
-    ) -> "UsernameWithDiscriminatorManager":
+    ) -> models.QuerySet["CustomUser"]:
         prefix = prefix + "__" if prefix else ""
         return self.annotate(
             username_discriminator_as_string=Cast(
@@ -34,17 +36,20 @@ class UsernameWithDiscriminatorManager(models.Manager):
         )
 
 
-class UserManager(BaseUserManager, UsernameWithDiscriminatorManager):
+class UserManager(
+    BaseUserManager["CustomUser"],
+    UsernameWithDiscriminatorManager,
+):
     """
     Custom user model manager where email is the unique identifiers
     for authentication instead of usernames.
     """
 
     def create_user(
-        self: Self,
+        self,
         email: str,
         password: str,
-        **extra_fields: dict[str, Any],
+        **extra_fields: dict[str, dict[str, Any]],
     ) -> "CustomUser":
         """Create and save a User with the given email and password."""
 
@@ -57,10 +62,10 @@ class UserManager(BaseUserManager, UsernameWithDiscriminatorManager):
         return user
 
     def create_superuser(
-        self: Self,
+        self,
         email: str,
         password: str,
-        **extra_fields: dict[str, Any],
+        **extra_fields: Any,
     ) -> "CustomUser":
         """Create and save a SuperUser with the given email and password."""
 
@@ -68,9 +73,10 @@ class UserManager(BaseUserManager, UsernameWithDiscriminatorManager):
         extra_fields.setdefault("is_superuser", True)
         extra_fields.setdefault("is_active", True)
 
-        if extra_fields.get("is_staff") is not True:
+        # Sanity Check
+        if extra_fields.get("is_staff") != True:
             raise ValueError(_("Superuser must have is_staff=True."))
-        if extra_fields.get("is_superuser") is not True:
+        if extra_fields.get("is_superuser") != True:
             raise ValueError(_("Superuser must have is_superuser=True."))
 
         return self.create_user(email, password, **extra_fields)

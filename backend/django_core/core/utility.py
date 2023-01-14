@@ -36,7 +36,7 @@ def sendfile(
         return response
 
     else:
-        file_iterator = read_files_in_chunks(file_location)
+        file_iterator = read_files_in_chunks(open(file_location))
         response = StreamingHttpResponse(
             streaming_content=file_iterator,
         )

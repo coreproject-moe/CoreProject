@@ -12,7 +12,7 @@ from django.utils.crypto import get_random_string
 from django.utils.translation import gettext_lazy as _
 
 from .managers import UserManager
-from .validators import username_validator
+from .validators import username_validator as username_validator
 
 avatar = FilePattern(filename_pattern="/avatar{ext}")
 
@@ -107,7 +107,7 @@ class CustomUser(
                 )
             }"""
 
-    def save(self: Self, *args: tuple, **kwargs: dict[str, Any]) -> NoReturn:
+    def save(self, *args: Any, **kwargs: Any) -> None:
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
