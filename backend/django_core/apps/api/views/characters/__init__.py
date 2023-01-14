@@ -3,10 +3,18 @@ from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from ninja.pagination import paginate
 
-from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.db.models import Q, QuerySet
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
+
+try:
+    from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
+
+    HAS_POSTGRES = True
+except ImportError:
+    HAS_POSTGRES = False
+
+from django.http import Http404
 
 from ...filters.characters import CharacterFilter
 from ...schemas.characters import CharacterSchema
@@ -20,6 +28,9 @@ def get_character_info(
     request: HttpRequest,
     filters: CharacterFilter = Query(...),
 ) -> QuerySet[CharacterModel]:
+    if not HAS_POSTGRES:
+        raise Http404("Looksups are not supported on any other databases except Postgres")
+
     query_object = Q()
     query_dict = filters.dict(exclude_none=True)
     query = CharacterModel.objects.all()
