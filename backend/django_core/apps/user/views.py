@@ -11,14 +11,12 @@ from django.shortcuts import render
 
 from .models import CustomUser
 
-CLIENT = httpx.AsyncClient()
-
 
 async def avatar_view(
     request: HttpRequest,
     user_id: int,
 ) -> StreamingHttpResponse | HttpResponse:
-    response: StreamingHttpResponse
+    CLIENT = httpx.AsyncClient()
 
     try:
         user = await CustomUser.objects.aget(id=user_id)
@@ -54,16 +52,17 @@ async def avatar_view(
             )
         except Exception as e:
             response = HttpResponse(
-                textwrap.dendant(
+                textwrap.dedent(
                     f"""
                         Please Check your <b>email</b> string.
                         <br/>
                         It is |> <b>{avatar_url}</b>
-                        which is not a valid string
+                        which might not a valid string
                         <br />
                         <b>Error</b> : {e}
                     """
                 )
             )
 
+    await CLIENT.aclose()
     return response

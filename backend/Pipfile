@@ -4,13 +4,15 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-# When django 4.2 releases
-django = {version = ">=4.1", extras = ["argon2"]}
-tzdata = "*"
+# When django 4.2 releases remove the next line
+# django = {version = ">=4.1", extras = ["argon2"]}
+django = {file = "https://github.com/django/django/archive/master.zip", extras = ["argon2"]}
+tzdata = '*'
+colorama = '*'
 # First party ( Image )
 pillow = "*"
 # Postgres
-psycopg2 = "*"
+psycopg = "*"
 # 3rd Party ( Files )
 django-dynamic-filenames = "*"
 # 3rd Party ( Middlewares )
@@ -22,7 +24,7 @@ python_dotenv = "*"
 whitenoise = {extras = ["brotli"], version = "*"}
 # 3rd Party ( Tasks )
 huey = "*"
-redis = {extras=['hiredis'],version=">=4"}
+redis = {extras=['hiredis'], version=">=4"}
 # Rest framework
 django_ninja = "*"
 pydantic = {extras = ["email"], version = "*"}
