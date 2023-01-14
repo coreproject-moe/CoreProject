@@ -1,5 +1,3 @@
-from typing import Optional
-
 from django.core.files.storage import FileSystemStorage
 
 
