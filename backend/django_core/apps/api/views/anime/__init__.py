@@ -18,11 +18,7 @@ from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
 
 try:
-    from django.contrib.postgres.search import (
-        SearchQuery,
-        SearchRank,
-        SearchVector,
-    )
+    from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 
     HAS_POSTGRES = True
 except ImportError:
