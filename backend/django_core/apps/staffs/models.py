@@ -13,6 +13,10 @@ class StaffAlternateNameModel(models.Model):
     def __str__(self) -> str:
         return f"{self.name}"
 
+    class Meta:
+        verbose_name = "Staff Alternate Name"
+        verbose_name_plural = "Staff Alternate Names"
+
 
 class StaffModel(models.Model):
     mal_id = models.IntegerField(unique=True, null=True, blank=True)
