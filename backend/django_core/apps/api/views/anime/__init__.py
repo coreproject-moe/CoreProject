@@ -13,10 +13,20 @@ from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from ninja.pagination import paginate
 
-from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.db.models import Q, QuerySet
 from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
+
+try:
+    from django.contrib.postgres.search import (
+        SearchQuery,
+        SearchRank,
+        SearchVector,
+    )
+
+    HAS_POSTGRES = True
+except ImportError:
+    HAS_POSTGRES = False
 
 from ...schemas.anime import AnimeInfoGETSchema
 
@@ -29,6 +39,9 @@ def get_anime_info(
     request: HttpRequest,
     filters: AnimeInfoFilters = Query(...),
 ) -> QuerySet[AnimeModel]:
+    if not HAS_POSTGRES:
+        raise Http404("Looksups are not supported on any other databases except Postgres")
+
     query_dict = filters.dict(exclude_none=True)
     query_object = Q()
     # 2 Step get query
