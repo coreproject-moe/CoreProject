@@ -1,6 +1,7 @@
 from typing import Self
 
 from apps.user.models import CustomUser
+
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.hashers import check_password
 from django.db.models import Q

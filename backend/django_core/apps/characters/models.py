@@ -1,6 +1,7 @@
 from core.storages import OverwriteStorage
-from django.db import models
 from dynamic_filenames import FilePattern
+
+from django.db import models
 
 anime_charaters_pattern = FilePattern(filename_pattern="anime_characters/{uuid:s}{ext}")
 
@@ -9,12 +10,12 @@ anime_charaters_pattern = FilePattern(filename_pattern="anime_characters/{uuid:s
 
 
 class CharacterModel(models.Model):
-    mal_id = models.IntegerField(unique=True, null=True, db_index=True)
-    kitsu_id = models.IntegerField(unique=True, null=True, db_index=True)
-    anilist_id = models.IntegerField(unique=True, null=True, db_index=True)
+    mal_id = models.IntegerField(unique=True, null=True)
+    kitsu_id = models.IntegerField(unique=True, null=True)
+    anilist_id = models.IntegerField(unique=True, null=True)
 
-    name = models.CharField(max_length=1024, db_index=True)
-    name_kanji = models.CharField(max_length=1024, null=True, blank=True, db_index=True)
+    name = models.CharField(max_length=1024)
+    name_kanji = models.CharField(max_length=1024, null=True, blank=True)
     character_image = models.ImageField(
         upload_to=anime_charaters_pattern,
         storage=OverwriteStorage(),

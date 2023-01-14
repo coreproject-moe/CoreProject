@@ -4,7 +4,7 @@ from django.db import models
 
 
 class AnimeSynonymModel(models.Model):
-    name = models.CharField(max_length=100, unique=True, db_index=True)
+    name = models.CharField(max_length=100, unique=True)
 
     def __str__(self) -> str:
         return f"{self.name}"

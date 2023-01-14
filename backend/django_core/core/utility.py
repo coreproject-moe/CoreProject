@@ -1,5 +1,5 @@
-import mimetypes
 from collections.abc import Generator
+import mimetypes
 from pathlib import Path
 from typing import IO
 

@@ -1,9 +1,10 @@
 from apps.user.models import CustomUser
+from ninja import ModelSchema
+from pydantic import AnyUrl
+
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
-from ninja import ModelSchema
-from pydantic import AnyUrl
 
 
 class UserSchema(ModelSchema):

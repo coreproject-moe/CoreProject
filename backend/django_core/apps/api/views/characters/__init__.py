@@ -1,11 +1,12 @@
 from apps.characters.models import CharacterModel
+from ninja import File, Form, Query, Router
+from ninja.files import UploadedFile
+from ninja.pagination import paginate
+
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from django.db.models import Q, QuerySet
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
-from ninja import File, Form, Query, Router
-from ninja.files import UploadedFile
-from ninja.pagination import paginate
 
 from ...filters.characters import CharacterFilter
 from ...schemas.characters import CharacterSchema
