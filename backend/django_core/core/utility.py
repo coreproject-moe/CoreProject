@@ -1,7 +1,7 @@
 from collections.abc import Generator
+from io import BufferedReader
 import mimetypes
 from pathlib import Path
-from typing import IO
 
 from django.conf import settings
 from django.http import HttpResponse, StreamingHttpResponse
@@ -10,7 +10,7 @@ CHUNK_SIZE = 512  # 512 bytes
 
 
 def read_files_in_chunks(
-    file_object: IO[bytes],
+    file_object: BufferedReader,
     chunk_size: int = CHUNK_SIZE,
 ) -> Generator[bytes, None, None]:
     """Lazy function to read a file piece by piece."""
@@ -27,16 +27,17 @@ def sendfile(
     file_path: str | Path,
     content_type: str | None,
 ) -> HttpResponse | StreamingHttpResponse:
+    response: HttpResponse | StreamingHttpResponse
     file_location = f"{settings.MEDIA_ROOT}/{file_path}"
 
     if not settings.DEBUG:
         response = HttpResponse()
         response["X-Sendfile"] = file_location
         del response["content-type"]
-        return response
 
     else:
-        file_iterator = read_files_in_chunks(file_location)
+        opened_file = open(file_location, "rb")
+        file_iterator = read_files_in_chunks(opened_file)
         response = StreamingHttpResponse(
             streaming_content=file_iterator,
         )
@@ -49,7 +50,8 @@ def sendfile(
                 )[0]
             )
         )
-        return response
+
+    return response
 
 
 # def sendbytes(

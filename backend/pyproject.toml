@@ -5,7 +5,7 @@ description = "A modern backend powering the the world's most advanced anime sit
 authors = [
     {name = "baseplate-admin", email = "61817579+baseplate-admin@users.noreply.github.com"},
 ]
-requires-python = ">=3.10,<4.0"
+requires-python = ">=3.11,<4.0"
 license = {text = "AGPL-3.0-only"}
 
 [tool.pylint.format]
@@ -41,7 +41,7 @@ namespace_packages = true
 explicit_package_bases = true
 
 [tool.django-stubs]
-django_settings_module = "django_core.core.settings"
+django_settings_module = "core.settings"
 
 
 [tool.isort]

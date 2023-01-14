@@ -1,5 +1,5 @@
 from functools import partial
-from typing import Any, NoReturn, Self
+from typing import Any
 
 from dynamic_filenames import FilePattern
 
@@ -107,7 +107,7 @@ class CustomUser(
                 )
             }"""
 
-    def save(self: Self, *args: tuple, **kwargs: dict[str, Any]) -> NoReturn:
+    def save(self, *args: Any, **kwargs: Any) -> None:
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
