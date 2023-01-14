@@ -9,7 +9,7 @@ class AnimeGenreModel(models.Model):
     type = models.CharField(max_length=50, default="", null=False, blank=False)
 
     def __str__(self) -> str:
-        return f"{self.id}. {self.name} ({self.type})"
+        return f"{self.pk}. {self.name} ({self.type})"
 
     class Meta:
         verbose_name = "Anime Genre"
