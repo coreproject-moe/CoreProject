@@ -13,7 +13,6 @@ class AnimeInfoAdmin(admin.ModelAdmin):
         "anime_studios",
         "anime_producers",
         "anime_characters",
-        "anime_name_synonyms",
         "anime_recommendation",
         "anime_episodes",
     ]
@@ -108,5 +107,4 @@ class AnimeInfoAdmin(admin.ModelAdmin):
 
 
 from .anime_genre import AnimeGenreAdmin as AnimeGenreAdmin
-from .anime_synonym import AnimeSynonymAdmin as AnimeSynonymAdmin
 from .anime_theme import AnimeThemeAdmin as AnimeThemeAdmin
