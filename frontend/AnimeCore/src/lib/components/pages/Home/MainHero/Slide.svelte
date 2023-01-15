@@ -65,7 +65,6 @@
         await checkViewPortAndMountChangeBackgroundImage();
 
         getImageBrightness(background, (brightness) => {
-            console.log(brightness);
             if (brightness == undefined || brightness > 120) {
                 $navbar_variant = "black";
             } else {
