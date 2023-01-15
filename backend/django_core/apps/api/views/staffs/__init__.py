@@ -6,7 +6,7 @@ from django.db.models import Q, QuerySet
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 
-from ....staffs.models import StaffAlternateNameModel, StaffModel
+from ....staffs.models import StaffModel
 from ...filters.staffs import StaffFilter
 from ...schemas.staffs import StaffSchema
 
@@ -28,7 +28,7 @@ def get_staff_info(
         # Modify this
         for position in staff_name.split(","):
             _query_ |= Q(**{"name__icontains": position.strip()}) | Q(
-                **{"alternate_names__name__icontains": position.strip()}
+                **{"alternate_names__icontains": position.strip()}
             )
         query_object &= _query_
 
@@ -95,12 +95,7 @@ def post_staff_info(
     model_data = {
         key: value
         for key, value in kwargs.items()
-        if key
-        not in [
-            # Ignore M2M relations
-            "alternate_names",
-        ]
-        and value
+        if value
         not in [
             None,
             "",  # ignore empty strings
@@ -111,13 +106,6 @@ def post_staff_info(
         name=kwargs["name"],
         defaults=model_data,
     )
-
-    if alternate_names_list := kwargs.get("alternate_names", None):
-        for alternate_name in alternate_names_list[0].split(","):
-            anime_synonym_instance, _ = StaffAlternateNameModel.objects.get_or_create(
-                name=alternate_name
-            )
-            staff_model_instance.alternate_names.add(anime_synonym_instance)
 
     return staff_model_instance
 
