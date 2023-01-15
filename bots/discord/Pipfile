@@ -8,11 +8,15 @@ name = "pypi"
 sqlalchemy = {extras = ["postgresql_asyncpg"], version = "*"}
 install = "*"
 aiohttp-jinja2 = "*"
+aiopg = {extras = ["sa"], version = "*"}
+alembic = "*"
 
 [dev-packages]
-aiohttp-devtools = "*"
 black = "*"
-create-aio-app = "*"
+aiohttp-devtools = "*"
+mypy = "==0.920"
+flake8 = "==4.0.1"
+aiohttp-debugtoolbar = "*"
 
 [requires]
 python_version = "3.11"
