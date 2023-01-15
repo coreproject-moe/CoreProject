@@ -50,7 +50,7 @@ def get_anime_info(
         _vector_ = SearchVector(
             "anime_name",
             "anime_name_japanese",
-            "anime_name_synonyms__name",
+            "anime_name_synonyms",
         )
         _query_ = SearchQuery(anime_name)
         query = query.annotate(

@@ -9,9 +9,10 @@ from ...studios.models import StudioModel
 from .anime_genre import AnimeGenreModel
 from .anime_theme import AnimeThemeModel
 from django.contrib.postgres.fields import ArrayField
+from django.contrib.postgres.indexes import GinIndex
 
-anime_cover = FilePattern(filename_pattern="/anime_cover{ext}")
-anime_pattern = FilePattern(filename_patten="/anime_banner{ext}")
+anime_cover_upload_pattern = FilePattern(filename_pattern="/anime_cover/{uuid:s}{ext}")
+anime_banner_upload_pattern = FilePattern(filename_patten="/anime_banner/{uuid:s}{ext}")
 
 # Create your models here.
 
@@ -31,10 +32,10 @@ class AnimeModel(models.Model):
     anime_aired_from = models.DateTimeField(blank=True, null=True)
     anime_aired_to = models.DateTimeField(blank=True, null=True)
     anime_banner = models.ImageField(
-        upload_to=anime_pattern, default=None, blank=True, null=True
+        upload_to=anime_banner_upload_pattern, default=None, blank=True, null=True
     )
     anime_cover = models.ImageField(
-        upload_to=anime_cover, default=None, blank=True, null=True
+        upload_to=anime_cover_upload_pattern, default=None, blank=True, null=True
     )
     anime_synopsis = models.TextField(blank=True, null=True)
     anime_background = models.TextField(blank=True, null=True)
@@ -57,3 +58,9 @@ class AnimeModel(models.Model):
 
     class Meta:
         verbose_name = "Anime"
+        indexes = [
+            # Index for 'anime_name' , 'anime_name_japanese', 'anime_name_synonyms'
+            GinIndex(
+                fields=["anime_name", "anime_name_japanese", "anime_name_synonyms"],
+            )
+        ]
