@@ -1,5 +1,7 @@
 from dynamic_filenames import FilePattern
 
+from django.contrib.postgres.fields import ArrayField
+from django.contrib.postgres.indexes import GinIndex
 from django.db import models
 
 from ...characters.models import CharacterModel
@@ -8,8 +10,6 @@ from ...producers.models import ProducerModel
 from ...studios.models import StudioModel
 from .anime_genre import AnimeGenreModel
 from .anime_theme import AnimeThemeModel
-from django.contrib.postgres.fields import ArrayField
-from django.contrib.postgres.indexes import GinIndex
 
 anime_cover_upload_pattern = FilePattern(filename_pattern="/anime_cover/{uuid:s}{ext}")
 anime_banner_upload_pattern = FilePattern(filename_patten="/anime_banner/{uuid:s}{ext}")

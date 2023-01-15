@@ -5,7 +5,6 @@ from pydantic import AnyUrl
 from django.conf import settings
 from django.shortcuts import resolve_url
 
-
 ## Observations from getting request from stack trace
 # So initial ovservation is that our code call was reduced from
 #  1.     0.256s -> 0.020s ( Normal LRU Cache / Settings.py | Not persistant | Not Applicable for our use case / If we want to have a static url )
