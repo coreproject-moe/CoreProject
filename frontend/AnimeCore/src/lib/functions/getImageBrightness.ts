@@ -45,15 +45,15 @@ export function getImageBrightness(
 
         const imageData = ctx?.getImageData(0, 0, canvas.width, canvas.height);
         const data = imageData?.data;
-        let r, g, b, avg;
+        let red: number, green: number, blue: number, average: number;
 
         for (let x = 0, len = data?.length; x < Number(len); x += 4) {
-            r = data?.[x];
-            g = data?.[x + 1];
-            b = data?.[x + 2];
+            red = data?.[x] as number;
+            green = data?.[x + 1] as number;
+            blue = data?.[x + 2] as number;
 
-            avg = Math.floor((Number(r) + Number(g) + Number(b)) / 3);
-            colorSum += avg;
+            average = Math.floor((Number(red) + Number(green) + Number(blue)) / 3);
+            colorSum += average;
         }
 
         const brightness = Math.floor(colorSum / (img.width * img.height));
