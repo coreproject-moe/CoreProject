@@ -6,8 +6,16 @@ name = "pypi"
 [packages]
 "discord.py" = "*"
 sqlalchemy = {extras = ["postgresql_asyncpg"], version = "*"}
+install = "*"
+aiohttp-jinja2 = "*"
 
 [dev-packages]
+aiohttp-devtools = "*"
+black = "*"
+create-aio-app = "*"
 
 [requires]
 python_version = "3.11"
+
+[scripts]
+dev = 'adev runserver web/main.py'
