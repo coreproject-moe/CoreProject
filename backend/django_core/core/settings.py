@@ -169,29 +169,28 @@ LOGIN_URL = "login_page"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-        "CONN_MAX_AGE": 60,
-        "CONN_HEALTH_CHECKS": True,
-    }
-}
-
-# POSTGRES
-# https://www.enterprisedb.com/postgres-tutorials/how-use-postgresql-django
 # DATABASES = {
 #     "default": {
-#         "ENGINE": "django.db.backends.postgresql_psycopg2",
-#         "NAME": "django",
-#         "USER": "postgres",
-#         "PASSWORD": "supersecretpassword",
-#         "HOST": "",
-#         "PORT": "",
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
 #         "CONN_MAX_AGE": 60,
 #         "CONN_HEALTH_CHECKS": True,
 #     }
 # }
+
+# POSTGRES
+# https://www.enterprisedb.com/postgres-tutorials/how-use-postgresql-django
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "django",
+        "USER": "postgres",
+        "PASSWORD": "supersecretpassword",
+        "HOST": "",
+        "PORT": "",
+    }
+}
 
 # Allow more fields to be deleted at once
 # https://stackoverflow.com/questions/47585583/the-number-of-get-post-parameters-exceeded-settings-data-upload-max-number-field

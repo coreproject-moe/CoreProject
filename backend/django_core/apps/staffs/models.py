@@ -1,21 +1,10 @@
 from core.storages import OverwriteStorage
 from dynamic_filenames import FilePattern
 
+from django.contrib.postgres.fields import ArrayField
 from django.db import models
 
 staff_upload_pattern = FilePattern(filename_pattern="staffs/{uuid:s}{ext}")
-
-
-# Create your models here.
-class StaffAlternateNameModel(models.Model):
-    name = models.CharField(max_length=1024, unique=True)
-
-    def __str__(self) -> str:
-        return f"{self.name}"
-
-    class Meta:
-        verbose_name = "Staff Alternate Name"
-        verbose_name_plural = "Staff Alternate Names"
 
 
 class StaffModel(models.Model):
@@ -35,7 +24,7 @@ class StaffModel(models.Model):
         null=True,
     )
     about = models.TextField(null=True, blank=True)
-    alternate_names = models.ManyToManyField(StaffAlternateNameModel)
+    alternate_names = ArrayField(models.CharField(max_length=1024), blank=True, null=True)
 
     def __str__(self) -> str:
         return f"{self.pk}. {self.name}"
