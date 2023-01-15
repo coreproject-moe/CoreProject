@@ -66,7 +66,6 @@
 
         getImageBrightness(background, (brightness) => {
             console.log(brightness);
-            console.log($navbar_variant);
             if (brightness == undefined || brightness > 120) {
                 $navbar_variant = "black";
             } else {
