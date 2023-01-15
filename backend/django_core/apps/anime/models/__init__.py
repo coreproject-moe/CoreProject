@@ -7,8 +7,8 @@ from ...episodes.models import EpisodeModel
 from ...producers.models import ProducerModel
 from ...studios.models import StudioModel
 from .anime_genre import AnimeGenreModel
-from .anime_synonym import AnimeSynonymModel
 from .anime_theme import AnimeThemeModel
+from django.contrib.postgres.fields import ArrayField
 
 anime_cover = FilePattern(filename_pattern="/anime_cover{ext}")
 anime_pattern = FilePattern(filename_patten="/anime_banner{ext}")
@@ -23,7 +23,9 @@ class AnimeModel(models.Model):
 
     anime_name = models.CharField(unique=True, max_length=1024)
     anime_name_japanese = models.CharField(max_length=1024, null=True)
-    anime_name_synonyms = models.ManyToManyField("AnimeSynonymModel", blank=True)
+    anime_name_synonyms = ArrayField(
+        models.CharField(max_length=1024), blank=True, null=True
+    )
 
     anime_source = models.CharField(max_length=128, blank=True, null=True)
     anime_aired_from = models.DateTimeField(blank=True, null=True)

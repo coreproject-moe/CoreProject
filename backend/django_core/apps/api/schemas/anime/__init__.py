@@ -5,7 +5,6 @@ from pydantic import AnyUrl
 from django.conf import settings
 from django.shortcuts import resolve_url
 
-from ...schemas.anime.anime_synonym import AnimeSynonymSchema
 
 ## Observations from getting request from stack trace
 # So initial ovservation is that our code call was reduced from
@@ -28,7 +27,7 @@ class AnimeInfoGETSchema(ModelSchema):
     anime_producers: AnyUrl
     anime_studios: AnyUrl
     anime_characters: AnyUrl
-    anime_name_synonyms: list[AnimeSynonymSchema] = []
+    anime_name_synonyms: list[str] = []
     anime_theme: AnyUrl
     episode: AnyUrl
 
@@ -49,6 +48,11 @@ class AnimeInfoGETSchema(ModelSchema):
             "updated",
             "anime_name_synonyms",
         ]
+
+    @staticmethod
+    def resolve_anime_name_synonyms(obj: AnimeModel):
+        # Modify the list from ['hello,world'] to ['hello','world']
+        return obj.anime_name_synonyms[0].split(",")
 
     @staticmethod
     def resolve_anime_genres(obj: AnimeModel) -> str:

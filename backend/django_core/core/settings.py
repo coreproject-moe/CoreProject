@@ -307,5 +307,5 @@ HUEY = PriorityRedisHuey(
     connection_pool=pool,
 )
 
-DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage"
+DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage" if DEBUG else ""
 DBBACKUP_STORAGE_OPTIONS = {"location": os.path.join(BASE_DIR, "backup")}

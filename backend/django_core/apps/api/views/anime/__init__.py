@@ -3,7 +3,6 @@ import datetime
 
 from apps.anime.models import AnimeModel
 from apps.anime.models.anime_genre import AnimeGenreModel
-from apps.anime.models.anime_synonym import AnimeSynonymModel
 from apps.anime.models.anime_theme import AnimeThemeModel
 from apps.api.filters.anime import AnimeInfoFilters
 from apps.characters.models import CharacterModel
@@ -162,7 +161,6 @@ def post_anime_info(
         if key
         not in [
             # Ignore M2M relations
-            "anime_name_synonyms",
             "anime_genres",
             "anime_themes",
             "anime_studios",
@@ -180,13 +178,6 @@ def post_anime_info(
         anime_name=kwargs["anime_name"],
         defaults=model_data,
     )
-
-    if anime_name_synonym_list := kwargs.get("anime_name_synonyms", None):
-        for anime_name_synonym in anime_name_synonym_list[0].split(","):
-            anime_synonym_instance, _ = AnimeSynonymModel.objects.get_or_create(
-                name=anime_name_synonym.strip(),
-            )
-            database.anime_name_synonyms.add(anime_synonym_instance)
 
     if anime_genres_list := kwargs.get("anime_genres", None):
         for anime_genre in anime_genres_list[0].split(","):
