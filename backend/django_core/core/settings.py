@@ -189,6 +189,9 @@ DATABASES = {
         "PASSWORD": "supersecretpassword",
         "HOST": "",
         "PORT": "",
+        # https://stackoverflow.com/questions/23504483/django-conn-max-age-setting-error
+        "CONN_MAX_AGE": 60,
+        "CONN_HEALTH_CHECKS": True,
     }
 }
 

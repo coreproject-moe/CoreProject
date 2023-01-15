@@ -28,7 +28,7 @@ def get_staff_info(
         # Modify this
         for position in staff_name.split(","):
             _query_ |= Q(**{"name__icontains": position.strip()}) | Q(
-                **{"alternate_names__name__icontains": position.strip()}
+                **{"alternate_names__icontains": position.strip()}
             )
         query_object &= _query_
 
