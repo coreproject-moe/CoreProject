@@ -10,7 +10,6 @@ from ....staffs.models import StaffModel
 from ...filters.staffs import StaffFilter
 from ...schemas.staffs import StaffSchema
 
-
 router = Router()
 
 
