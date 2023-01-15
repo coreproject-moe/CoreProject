@@ -1,5 +1,5 @@
 from functools import partial
-from typing import Any, NoReturn, Self
+from typing import Any
 
 from dynamic_filenames import FilePattern
 
