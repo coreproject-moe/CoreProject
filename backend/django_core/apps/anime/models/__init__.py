@@ -1,6 +1,6 @@
+from django_better_admin_arrayfield.models.fields import ArrayField
 from dynamic_filenames import FilePattern
 
-from django.contrib.postgres.fields import ArrayField
 from django.contrib.postgres.indexes import GinIndex
 from django.db import models
 
@@ -61,6 +61,10 @@ class AnimeModel(models.Model):
         indexes = [
             # Index for 'anime_name' , 'anime_name_japanese', 'anime_name_synonyms'
             GinIndex(
-                fields=["anime_name", "anime_name_japanese", "anime_name_synonyms"],
+                fields=[
+                    "anime_name",
+                    "anime_name_japanese",
+                    "anime_name_synonyms",
+                ],
             )
         ]

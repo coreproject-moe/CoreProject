@@ -33,11 +33,10 @@ def get_staff_info(
         query_object &= _query_
 
     # Specilized lookups
-    specialized_name_lookups = [
+    for specialized_name in [
         "given_name",
         "family_name",
-    ]
-    for specialized_name in specialized_name_lookups:
+    ]:
         value = query_dict.pop(specialized_name, None)
         if value:
             _query_ = Q()
@@ -46,12 +45,11 @@ def get_staff_info(
             query_object &= _query_
 
     # Specialized lookups but with ids
-    id_lookups = [
+    for id in [
         "mal_id",
         "kitsu_id",
         "anilist_id",
-    ]
-    for id in id_lookups:
+    ]:
         value = query_dict.pop(id, None)
         if value:
             _query_ = Q()
@@ -89,7 +87,10 @@ def post_staff_info(
         "family_name": family_name,
         "staff_image": staff_image,
         "about": about,
-        "alternate_names": alternate_names,
+        #   Alternate names can be
+        #       like this   :   ['hello,world']
+        #   What we want is :   ['hello', 'world']
+        "alternate_names": alternate_names[0].split(",") if alternate_names else None,
     }
 
     model_data = {

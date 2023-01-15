@@ -20,7 +20,7 @@ def get_kitsu_info(request: HttpRequest):
 @router.post("/kitsu", response=KitsuGETSchema)
 @login_required
 def post_kitsu_info(request: HttpRequest, payload: KitsuPOSTSchema):
-    instance, created = KitsuModel.objects.update_or_create(
+    instance, _ = KitsuModel.objects.update_or_create(
         user=request.auth,
         defaults={
             **payload.dict(),
