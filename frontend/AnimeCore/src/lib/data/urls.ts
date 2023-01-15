@@ -28,6 +28,7 @@ export class Anilist {
 
 export class UrlMaps {
     public get media_url() {
-        return process.env.NODE_ENV === "development" ? get(page).url.origin : "/media";
+        // return process.env.NODE_ENV === "development" ? get(page).url.origin : "/media";
+        return get(page).url.origin;
     }
 }

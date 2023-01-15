@@ -2,17 +2,14 @@ import { get } from "svelte/store";
 
 import { page } from "$app/stores";
 import { UrlMaps } from "$data/urls";
-
+import { navbar_variant } from "$store/Navbar_Variant";
 /**
  * Credit goes to = https://stackoverflow.com/questions/38211798/detect-if-image-is-dark-light-and-addclass-dark-light-to-parent
  *
  * @param image - The url of a image
  * @param callback - Callback function that will return a value
  */
-export function getImageBrightness(
-    imageSrc: string,
-    callback: (brightness: number | undefined) => void
-): void {
+export function getImageBrightness(imageSrc: string): void {
     const urlMap = new UrlMaps();
 
     // If Url is
@@ -25,7 +22,7 @@ export function getImageBrightness(
 
     // If url's domain is not controlled by us return an 'undefined' state
     if (!url?.startsWith(get(page).url.origin)) {
-        return callback(undefined);
+        navbar_variant.set("black");
     }
 
     const img = new Image();
@@ -57,6 +54,10 @@ export function getImageBrightness(
         }
 
         const brightness = Math.floor(colorSum / (img.width * img.height));
-        callback(brightness);
+        if (brightness > 120) {
+            navbar_variant.set("black");
+        } else {
+            navbar_variant.set("white");
+        }
     };
 }
