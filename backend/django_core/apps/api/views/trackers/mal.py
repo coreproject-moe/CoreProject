@@ -20,7 +20,7 @@ def get_mal_info(request: HttpRequest):
 @router.post("/mal", response=MALGETSchema)
 @login_required
 def post_mal_info(request: HttpRequest, payload: MALPOSTSchema):
-    instance, created = MalModel.objects.update_or_create(
+    instance, _ = MalModel.objects.update_or_create(
         user=request.auth,
         defaults={
             **payload.dict(),

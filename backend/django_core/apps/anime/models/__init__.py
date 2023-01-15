@@ -61,6 +61,10 @@ class AnimeModel(models.Model):
         indexes = [
             # Index for 'anime_name' , 'anime_name_japanese', 'anime_name_synonyms'
             GinIndex(
-                fields=["anime_name", "anime_name_japanese", "anime_name_synonyms"],
+                fields=[
+                    "anime_name",
+                    "anime_name_japanese",
+                    "anime_name_synonyms",
+                ],
             )
         ]

@@ -20,7 +20,7 @@ def get_anilist_info(request: HttpRequest):
 @router.post("/anilist", response=AnilistGETSchema)
 @login_required
 def post_anilist_info(request: HttpRequest, payload: AnilistPOSTSchema):
-    instance, created = AnilistModel.objects.update_or_create(
+    instance, _ = AnilistModel.objects.update_or_create(
         user=request.auth,
         defaults={
             **payload.dict(),

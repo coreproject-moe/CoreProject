@@ -45,8 +45,7 @@ def get_anime_info(
     query = AnimeModel.objects.all()
 
     # We must pop this to filter other fields on the later stage
-    anime_name = query_dict.pop("anime_name", None)
-    if anime_name:
+    if anime_name := query_dict.pop("anime_name", None):
         _vector_ = SearchVector(
             "anime_name",
             "anime_name_japanese",
@@ -61,12 +60,11 @@ def get_anime_info(
         ).order_by("-anime_name_rank")
 
     # Same here but with ids
-    id_lookups = [
+    for id in [
         "mal_id",
         "kitsu_id",
         "anilist_id",
-    ]
-    for id in id_lookups:
+    ]:
         value = query_dict.pop(id, None)
         if value:
             _query_ = Q()
@@ -77,14 +75,13 @@ def get_anime_info(
             query_object &= _query_
 
     # Many to many lookups
-    m2m_lookups = [
+    for item in [
         "anime_genres",
         "anime_themes",
         "anime_studios",
         "anime_producers",
         "anime_characters",
-    ]
-    for item in m2m_lookups:
+    ]:
         value = query_dict.pop(item, None)
         if value:
             _query_ = Q()
@@ -106,7 +103,6 @@ def get_anime_info(
                 query_object,
             )
         )
-
     return query
 
 
@@ -180,40 +176,40 @@ def post_anime_info(
     )
 
     if anime_genres_list := kwargs.get("anime_genres", None):
-        for anime_genre in anime_genres_list[0].split(","):
-            with contextlib.suppress(AnimeGenreModel.DoesNotExist):
+        with contextlib.suppress(IndexError, AnimeGenreModel.DoesNotExist):
+            for anime_genre in anime_genres_list[0].split(","):
                 anime_genre_instance = AnimeGenreModel.objects.get(
                     name=anime_genre.strip(),
                 )
                 database.anime_genres.add(anime_genre_instance)
 
     if anime_themes_list := kwargs.get("anime_themes", None):
-        for anime_theme in anime_themes_list[0].split(","):
-            with contextlib.suppress(AnimeThemeModel.DoesNotExist):
+        with contextlib.suppress(IndexError, AnimeThemeModel.DoesNotExist):
+            for anime_theme in anime_themes_list[0].split(","):
                 anime_theme_instance = AnimeThemeModel.objects.get(
                     name=anime_theme.strip(),
                 )
                 database.anime_themes.add(anime_theme_instance)
 
     if anime_studios_list := kwargs.get("anime_studios", None):
-        for anime_studio in anime_studios_list[0].split(","):
-            with contextlib.suppress(StudioModel.DoesNotExist):
+        with contextlib.suppress(IndexError, StudioModel.DoesNotExist):
+            for anime_studio in anime_studios_list[0].split(","):
                 anime_studio_instance = StudioModel.objects.get(
                     name=anime_studio.strip(),
                 )
                 database.anime_studios.add(anime_studio_instance)
 
     if anime_producers_list := kwargs.get("anime_producers", None):
-        for anime_producer in anime_producers_list[0].split(","):
-            with contextlib.suppress(ProducerModel.DoesNotExist):
+        with contextlib.suppress(IndexError, ProducerModel.DoesNotExist):
+            for anime_producer in anime_producers_list[0].split(","):
                 anime_producer_instance = ProducerModel.objects.get(
                     name=anime_producer.strip(),
                 )
                 database.anime_producers.add(anime_producer_instance)
 
     if anime_characters_list := kwargs.get("anime_characters", None):
-        for anime_character in anime_characters_list[0].split(","):
-            with contextlib.suppress(CharacterModel.DoesNotExist):
+        with contextlib.suppress(IndexError, CharacterModel.DoesNotExist):
+            for anime_character in anime_characters_list[0].split(","):
                 anime_character_instance = CharacterModel.objects.get(
                     name=anime_character.strip(),
                 )
