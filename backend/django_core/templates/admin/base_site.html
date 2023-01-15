@@ -1,0 +1,12 @@
+{% extends "admin/base_site.html" %} 
+{% load static %}
+{% block footer %}
+<script type="module">
+    import flamethrower from "{% static 'js/flamethrower.js' %}";
+    const router = flamethrower({
+        prefetch: 'visible',
+        log: false,
+        pageTransitions: false,
+    });
+</script>
+{% endblock %}

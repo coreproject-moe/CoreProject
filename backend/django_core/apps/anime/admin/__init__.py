@@ -1,12 +1,12 @@
 from django.contrib import admin
-
+from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 from ..models import AnimeModel
 
 # Register your models here.
 
 
 @admin.register(AnimeModel)
-class AnimeInfoAdmin(admin.ModelAdmin):
+class AnimeInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
     filter_horizontal = [
         "anime_genres",
         "anime_themes",

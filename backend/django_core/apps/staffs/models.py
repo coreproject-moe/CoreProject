@@ -1,8 +1,8 @@
 from core.storages import OverwriteStorage
 from dynamic_filenames import FilePattern
 
-from django.contrib.postgres.fields import ArrayField
 from django.db import models
+from django_better_admin_arrayfield.models.fields import ArrayField
 
 staff_upload_pattern = FilePattern(filename_pattern="staffs/{uuid:s}{ext}")
 

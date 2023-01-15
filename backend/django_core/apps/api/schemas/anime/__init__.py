@@ -49,11 +49,6 @@ class AnimeInfoGETSchema(ModelSchema):
         ]
 
     @staticmethod
-    def resolve_anime_name_synonyms(obj: AnimeModel):
-        # Modify the list from ['hello,world'] to ['hello','world']
-        return obj.anime_name_synonyms[0].split(",")
-
-    @staticmethod
     def resolve_anime_genres(obj: AnimeModel) -> str:
         url = resolve_url("api-1.0.0:get_individual_anime_genre_info", anime_id=obj.pk)
         return f"{settings.HOSTNAME}{url}"

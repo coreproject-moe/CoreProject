@@ -67,6 +67,8 @@ INSTALLED_APPS = [
     # 3rd party Django stuff
     "django_cleanup.apps.CleanupConfig",
     "huey.contrib.djhuey",
+    # 3rd party adminpanel
+    "django_better_admin_arrayfield",
     # Api ( Django-Ninja )
     "apps.api",
     # Models

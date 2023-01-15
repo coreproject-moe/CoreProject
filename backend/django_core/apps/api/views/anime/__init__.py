@@ -135,7 +135,6 @@ def post_anime_info(
         "kitsu_id": kitsu_id,
         "anime_name": anime_name,
         "anime_name_japanese": anime_name_japanese,
-        "anime_name_synonyms": anime_name_synonyms,
         "anime_source": anime_source,
         "anime_aired_from": anime_aired_from,
         "anime_aired_to": anime_aired_to,
@@ -149,6 +148,12 @@ def post_anime_info(
         "anime_studios": anime_studios,
         "anime_producers": anime_producers,
         "anime_characters": anime_characters,
+        #   synonyms names can be
+        #       like this   :   ['hello,world']
+        #   What we want is :   ['hello', 'world']
+        "anime_name_synonyms": anime_name_synonyms[0].split(",")
+        if anime_name_synonyms
+        else None,
     }
 
     model_data = {

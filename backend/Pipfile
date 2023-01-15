@@ -22,6 +22,8 @@ whitenoise = {extras = ["brotli"], version = "*"}
 # 3rd Party ( Tasks )
 huey = "*"
 redis = {extras=['hiredis'], version=">=4"}
+# 3rd Party ( Better admin widgets )
+django-better-admin-arrayfield = "*"
 # Rest framework
 django_ninja = "*"
 pydantic = {extras = ["email"], version = "*"}
