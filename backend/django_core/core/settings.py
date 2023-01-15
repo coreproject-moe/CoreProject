@@ -183,7 +183,7 @@ LOGIN_URL = "login_page"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "ENGINE": "django.db.backends.postgresql",
         "NAME": "django",
         "USER": "postgres",
         "PASSWORD": "supersecretpassword",

@@ -6,7 +6,6 @@ from django.db import models
 from django.db.models import CharField, Value
 from django.db.models.functions import Cast, Concat, LPad
 from django.utils.translation import gettext_lazy as _
-from django.db import models
 
 if TYPE_CHECKING:
     from .models import CustomUser

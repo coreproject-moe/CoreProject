@@ -1,13 +1,12 @@
-from typing import Any, Optional, Self, cast
+from typing import Any, Optional, cast
 
 from apps.user.models import CustomUser
 
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.hashers import check_password
+from django.contrib.auth.models import AbstractBaseUser
 from django.db.models import Q
 from django.http import HttpRequest
-
-from django.contrib.auth.models import AbstractBaseUser
 
 
 class EmailOrUsernameModelBackend(ModelBackend):
@@ -45,7 +44,7 @@ class EmailOrUsernameModelBackend(ModelBackend):
 
     def authenticate(
         self,
-        request: Optional[HttpRequest],
+        request: HttpRequest | None,
         username: str | None = None,
         password: str | None = None,
         **kwargs: Any,

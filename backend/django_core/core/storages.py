@@ -1,4 +1,5 @@
-from typing import Optional, Any
+from typing import Optional
+
 from django.core.files.storage import FileSystemStorage
 
 
@@ -7,7 +8,7 @@ class OverwriteStorage(FileSystemStorage):
     def get_available_name(
         self,
         name: str,
-        max_length: Optional[int] = None,
+        max_length: int | None = None,
     ) -> str:
         self.delete(name)
         return super().get_available_name(
