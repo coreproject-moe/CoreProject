@@ -5,21 +5,18 @@ name = "pypi"
 
 [packages]
 "discord.py" = "*"
-sqlalchemy = {extras = ["postgresql_asyncpg"], version = "*"}
+sqlalchemy = {extras = ["postgresql_psycopg"], version = "*"}
 install = "*"
 aiohttp-jinja2 = "*"
-aiopg = {extras = ["sa"], version = "*"}
 alembic = "*"
 
 [dev-packages]
-black = "*"
 aiohttp-devtools = "*"
-mypy = "==0.920"
-flake8 = "==4.0.1"
-aiohttp-debugtoolbar = "*"
+black = "*"
+create-aio-app = "*"
 
 [requires]
 python_version = "3.11"
 
 [scripts]
-dev = 'adev runserver web/main.py'
+dev = 'adev runserver ./web/main.py --app-factory=aiohttp_app'
