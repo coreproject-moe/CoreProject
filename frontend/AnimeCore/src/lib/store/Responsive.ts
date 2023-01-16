@@ -14,6 +14,9 @@ const checkMode = () => {
     const DESKTOP = window.matchMedia("(min-width: 1024px) and (max-width: 1215px)");
     const WIDESCREEN = window.matchMedia("(min-width: 1216px) and (max-width: 1407px)");
     const FULLHD = window.matchMedia("(min-width: 1408px)");
+    if (!browser) {
+        return undefined;
+    }
 
     switch (true) {
         case MOBILE.matches:
@@ -32,8 +35,8 @@ const checkMode = () => {
 };
 
 export const responsiveMode = writable<
-    "mobile" | "tablet" | "desktop" | "widescreen" | "fullhd" | null | false
->(browser && checkMode());
+    "mobile" | "tablet" | "desktop" | "widescreen" | "fullhd" | null | undefined
+>(checkMode());
 
 // Final event listener to handle changes
 browser &&
