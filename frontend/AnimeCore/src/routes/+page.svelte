@@ -99,13 +99,13 @@
             {/each}
         </div>
     </div>
-    <div class="carousel-item h-auto snap-always">
+    <div class="carousel-item snap-always">
         <GenreSlide />
     </div>
-    <div class="carousel-item h-auto snap-always">
+    <div class="carousel-item snap-always">
         <LibrarySlide />
     </div>
-    <div class="carousel-item h-auto snap-always">
+    <div class="carousel-item snap-always">
         <ExploreSlide />
     </div>
     <!-- Show a footer for  android users -->
