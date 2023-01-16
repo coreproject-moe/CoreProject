@@ -32,8 +32,8 @@ const checkMode = () => {
 };
 
 export const responsiveMode = writable<
-    "mobile" | "tablet" | "desktop" | "widescreen" | "fullhd" | null | false
->(browser && checkMode());
+    "mobile" | "tablet" | "desktop" | "widescreen" | "fullhd" | null | undefined
+>(browser ? checkMode() : undefined);
 
 // Final event listener to handle changes
 browser &&
