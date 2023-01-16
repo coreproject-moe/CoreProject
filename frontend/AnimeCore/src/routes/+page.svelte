@@ -67,7 +67,7 @@
         }
     }}
 >
-    <div class="carousel-item h-auto w-auto snap-always">
+    <div class="carousel-item snap-always min-h-[60vh] md:min-h-screen w-screen">
         <div
             class="inline-grid"
             bind:this={mainHeroRootElement}
