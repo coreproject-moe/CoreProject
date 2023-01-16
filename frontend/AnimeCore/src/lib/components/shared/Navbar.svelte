@@ -20,8 +20,8 @@
             width={30}
         />
     </div>
-    <div class="navbar-center">
-        <div class="inline-grid">
+    <div class="navbar-center glass rounded-md">
+        <div class="inline-grid py-2">
             {#if $navbar_variant == "black"}
                 <div
                     transition:fade|local
