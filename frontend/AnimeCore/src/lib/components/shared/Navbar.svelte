@@ -21,7 +21,7 @@
         />
     </div>
     <div class="navbar-center glass rounded-md">
-        <div class="inline-grid py-2">
+        <div class="inline-grid py-1 md:py-2">
             {#if $navbar_variant == "black"}
                 <div
                     transition:fade|local
