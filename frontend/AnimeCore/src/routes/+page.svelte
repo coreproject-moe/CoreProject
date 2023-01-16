@@ -67,7 +67,7 @@
         }
     }}
 >
-    <div class="carousel-item h-auto w-auto snap-always">
+    <div class="carousel-item snap-always min-h-[60vh] md:min-h-screen w-screen">
         <div
             class="inline-grid"
             bind:this={mainHeroRootElement}
@@ -99,13 +99,13 @@
             {/each}
         </div>
     </div>
-    <div class="carousel-item h-auto snap-always">
+    <div class="carousel-item snap-always">
         <GenreSlide />
     </div>
-    <div class="carousel-item h-auto snap-always">
+    <div class="carousel-item snap-always">
         <LibrarySlide />
     </div>
-    <div class="carousel-item h-auto snap-always">
+    <div class="carousel-item snap-always">
         <ExploreSlide />
     </div>
     <!-- Show a footer for  android users -->
