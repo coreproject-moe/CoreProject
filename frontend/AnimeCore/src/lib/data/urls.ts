@@ -8,6 +8,10 @@ export class MAL {
     public id = (id: number | string) => {
         return `${this.BASE_URL}/${id}/full`;
     };
+
+    public pictures = (id: number | string) => {
+        return `${this.BASE_URL}/${id}/pictures`;
+    };
 }
 
 export class Kitsu {
