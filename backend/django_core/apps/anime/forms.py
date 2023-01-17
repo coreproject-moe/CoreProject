@@ -10,4 +10,4 @@ class AnimeAdminModelForm(forms.ModelForm):
 
     class Meta:
         model = AnimeModel
-        exclude = ()
+        fields = "__all__"
