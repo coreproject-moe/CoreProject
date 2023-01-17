@@ -4,8 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-# When django 4.2 releases remove the file line
-django = {version='>=4.2', extras=['argon2']}
+django = {version='>=4.2a1', extras=['argon2']}
 # First party ( Image )
 pillow = "*"
 # Postgres
