@@ -55,7 +55,7 @@ pylint_django = "*"
 # Mypy
 mypy = "*"
 django_stubs = {extras = ["compatible_mypy"], version = "*"}
-# Types 
+# Types
 types_redis = "*"
 
 [requires]

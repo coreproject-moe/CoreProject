@@ -1,5 +1,6 @@
 from django_better_admin_arrayfield.models.fields import ArrayField
 from dynamic_filenames import FilePattern
+
 from django.contrib.postgres.fields import HStoreField
 from django.contrib.postgres.indexes import GinIndex
 from django.db import models
