@@ -1,7 +1,8 @@
+from django_admin_hstore_widget.forms import HStoreFormField
+
 from django import forms
 
 from .models import AnimeModel
-from django_admin_hstore_widget.forms import HStoreFormField
 
 
 class AnimeAdminModelForm(forms.ModelForm):
