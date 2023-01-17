@@ -5,18 +5,24 @@ from django import forms
 
 from ..models import AnimeModel
 from django_admin_hstore_widget.forms import HStoreFormField
-from django.contrib.postgres.fields import HStoreField
 
 
 # Register your models here.
 
+
+class AnimeAdminModelForm(forms.ModelForm):
+    anime_theme_openings = HStoreFormField()
+    anime_theme_endings = HStoreFormField()
+
+    class Meta:
+        model = AnimeModel
+        exclude = ()
+
+
 @admin.register(AnimeModel)
 class AnimeInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
-    # https://docs.djangoproject.com/en/4.1/ref/contrib/admin/#django.contrib.admin.ModelAdmin.formfield_overrides
-    formfield_overrides = {
-        HStoreField: { 'widget':HStoreFormField}
-    }
-
+    form = AnimeAdminModelForm
+    formfield_overrides = {"hello": {"widgets": HStoreFormField}}
     filter_horizontal = [
         "anime_genres",
         "anime_themes",
@@ -109,7 +115,7 @@ class AnimeInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
             },
         ),
         (
-            ("Anime Theme"),
+            None,
             {
                 "fields": (
                     "anime_theme_openings",

@@ -5,13 +5,11 @@ name = "pypi"
 
 [packages]
 # When django 4.2 releases remove the file line
-django = {file = "https://github.com/django/django/archive/master.zip", version = "*"}
-# First Party ( Password Hasher )
-argon2-cffi = ">=19.1.0"
+django = {version='*', extras=['argon2']}
 # First party ( Image )
 pillow = "*"
 # Postgres
-psycopg = "*"
+psycopg2 = "*"
 # 3rd Party ( Files )
 django-dynamic-filenames = "*"
 # 3rd Party ( Middlewares )
