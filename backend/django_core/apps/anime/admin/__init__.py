@@ -1,28 +1,17 @@
 from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 
 from django.contrib import admin
-from django import forms
 
 from ..models import AnimeModel
-from django_admin_hstore_widget.forms import HStoreFormField
-
+from ..forms import AnimeAdminModelForm
 
 # Register your models here.
-
-
-class AnimeAdminModelForm(forms.ModelForm):
-    anime_theme_openings = HStoreFormField()
-    anime_theme_endings = HStoreFormField()
-
-    class Meta:
-        model = AnimeModel
-        exclude = ()
 
 
 @admin.register(AnimeModel)
 class AnimeInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
     form = AnimeAdminModelForm
-    formfield_overrides = {"hello": {"widgets": HStoreFormField}}
+
     filter_horizontal = [
         "anime_genres",
         "anime_themes",
