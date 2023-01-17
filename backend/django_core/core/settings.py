@@ -58,6 +58,8 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    # Postgres
+    "django.contrib.postgres",
     # Whitenoise
     "django.contrib.staticfiles",
     # Rest Framework
@@ -69,6 +71,7 @@ INSTALLED_APPS = [
     "huey.contrib.djhuey",
     # 3rd party adminpanel
     "django_better_admin_arrayfield",
+    "django_admin_hstore_widget",
     # Api ( Django-Ninja )
     "apps.api",
     # Models

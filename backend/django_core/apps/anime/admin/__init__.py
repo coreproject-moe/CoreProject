@@ -1,14 +1,22 @@
 from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 
 from django.contrib import admin
+from django import forms
 
 from ..models import AnimeModel
+from django_admin_hstore_widget.forms import HStoreFormField
+from django.contrib.postgres.fields import HStoreField
+
 
 # Register your models here.
 
-
 @admin.register(AnimeModel)
 class AnimeInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
+    # https://docs.djangoproject.com/en/4.1/ref/contrib/admin/#django.contrib.admin.ModelAdmin.formfield_overrides
+    formfield_overrides = {
+        HStoreField: { 'widget':HStoreFormField}
+    }
+
     filter_horizontal = [
         "anime_genres",
         "anime_themes",
@@ -98,6 +106,15 @@ class AnimeInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
             ("Anime Episodes"),
             {
                 "fields": ("anime_episodes",),
+            },
+        ),
+        (
+            ("Anime Theme"),
+            {
+                "fields": (
+                    "anime_theme_openings",
+                    "anime_theme_endings",
+                ),
             },
         ),
     )
