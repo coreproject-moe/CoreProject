@@ -1,6 +1,7 @@
 from django_better_admin_arrayfield.models.fields import ArrayField
 from dynamic_filenames import FilePattern
 
+from django.contrib.postgres.fields import HStoreField
 from django.contrib.postgres.indexes import GinIndex
 from django.db import models
 
@@ -50,8 +51,13 @@ class AnimeModel(models.Model):
     anime_recommendation = models.ManyToManyField("self", blank=True)
     anime_episodes = models.ManyToManyField(EpisodeModel, blank=True)
 
+    anime_rating = models.CharField(max_length=128, null=True, blank=True)
+
+    # Dict Model field
+    anime_theme_openings = HStoreField(null=True, blank=True)
+    anime_theme_endings = HStoreField(null=True, blank=True)
+
     updated = models.DateTimeField(auto_now_add=True)
-    # anime_rating = models.CharField(max_length=128)
 
     def __str__(self) -> str:
         return f"{self.anime_name}"

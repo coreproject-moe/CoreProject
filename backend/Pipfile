@@ -4,8 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-# When django 4.2 releases remove the file line
-django = {file = "https://github.com/django/django/archive/master.zip", version = ">=4.2", extras = ["argon2"]}
+django = {version='>=4.2a1', extras=['argon2']}
 # First party ( Image )
 pillow = "*"
 # Postgres
@@ -24,6 +23,7 @@ huey = "*"
 redis = {extras=['hiredis'], version=">=4"}
 # 3rd Party ( Better admin widgets )
 django-better-admin-arrayfield = "*"
+django-admin-hstore-widget = ">=1.2.1" # https://github.com/PokaInc/django-admin-hstore-widget/pull/25
 # Rest framework
 django_ninja = "*"
 pydantic = {extras = ["email"], version = "*"}
@@ -54,8 +54,9 @@ pylint = "*"
 pylint_django = "*"
 # Mypy
 mypy = "*"
-types_redis = "*"
 django_stubs = {extras = ["compatible_mypy"], version = "*"}
+# Types
+types_redis = "*"
 
 [requires]
 python_version = "3.11"

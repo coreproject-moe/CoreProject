@@ -2,6 +2,7 @@ from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 
 from django.contrib import admin
 
+from ..forms import AnimeAdminModelForm
 from ..models import AnimeModel
 
 # Register your models here.
@@ -9,6 +10,8 @@ from ..models import AnimeModel
 
 @admin.register(AnimeModel)
 class AnimeInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
+    form = AnimeAdminModelForm
+
     filter_horizontal = [
         "anime_genres",
         "anime_themes",
@@ -98,6 +101,15 @@ class AnimeInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
             ("Anime Episodes"),
             {
                 "fields": ("anime_episodes",),
+            },
+        ),
+        (
+            None,
+            {
+                "fields": (
+                    "anime_theme_openings",
+                    "anime_theme_endings",
+                ),
             },
         ),
     )
