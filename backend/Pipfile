@@ -5,11 +5,11 @@ name = "pypi"
 
 [packages]
 # When django 4.2 releases remove the file line
-django = {file = "https://github.com/django/django/archive/master.zip", version = ">=4.2", extras = ["argon2"]}
+django = {version='*', extras=['argon2']}
 # First party ( Image )
 pillow = "*"
 # Postgres
-psycopg = "*"
+psycopg2 = "*"
 # 3rd Party ( Files )
 django-dynamic-filenames = "*"
 # 3rd Party ( Middlewares )
@@ -24,6 +24,7 @@ huey = "*"
 redis = {extras=['hiredis'], version=">=4"}
 # 3rd Party ( Better admin widgets )
 django-better-admin-arrayfield = "*"
+django-admin-hstore-widget = "*"
 # Rest framework
 django_ninja = "*"
 pydantic = {extras = ["email"], version = "*"}
@@ -54,8 +55,9 @@ pylint = "*"
 pylint_django = "*"
 # Mypy
 mypy = "*"
-types_redis = "*"
 django_stubs = {extras = ["compatible_mypy"], version = "*"}
+# Types
+types_redis = "*"
 
 [requires]
 python_version = "3.11"
