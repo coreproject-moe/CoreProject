@@ -38,7 +38,11 @@ class AnimeInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
         (
             None,
             {
-                "fields": ("mal_id",),
+                "fields": (
+                    "mal_id",
+                    "kitsu_id",
+                    "anilist_id",
+                ),
             },
         ),
         (
