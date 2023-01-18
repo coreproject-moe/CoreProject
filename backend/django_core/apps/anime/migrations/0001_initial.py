@@ -8,6 +8,13 @@ from django.db import migrations, models
 import django_better_admin_arrayfield.models.fields
 import dynamic_filenames
 
+from django.contrib.postgres.operations import (
+    HStoreExtension,
+    UnaccentExtension,
+    TrigramExtension,
+    BtreeGinExtension,
+)
+
 
 class Migration(migrations.Migration):
     initial = True
@@ -20,6 +27,10 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        HStoreExtension(),
+        UnaccentExtension(),
+        TrigramExtension(),
+        BtreeGinExtension(),
         migrations.CreateModel(
             name="AnimeGenreModel",
             fields=[
