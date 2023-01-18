@@ -79,9 +79,9 @@ def post_character_info(
 ) -> QuerySet[CharacterModel]:
     instance = CharacterModel.objects.create(
         name=name,
-        mal_id=mal_id,
-        kitsu_id=kitsu_id,
-        anilist_id=anilist_id,
+        mal_pk=mal_id,
+        kitsu_pk=kitsu_id,
+        anilist_pk=anilist_id,
         name_kanji=name_kanji,
         character_image=character_image,
         about=about,
@@ -94,5 +94,5 @@ def get_individual_character_info(
     request: HttpRequest,
     character_id: str,
 ) -> QuerySet[CharacterModel]:
-    queryset = get_object_or_404(CharacterModel, id=character_id)
+    queryset = get_object_or_404(CharacterModel, pk=character_id)
     return queryset

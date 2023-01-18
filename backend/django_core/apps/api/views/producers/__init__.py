@@ -41,5 +41,5 @@ def get_individual_producer_info(
     request: HttpRequest,
     producer_id: str,
 ):
-    queryset = get_object_or_404(ProducerModel, id=producer_id)
+    queryset = get_object_or_404(ProducerModel, pk=producer_id)
     return queryset

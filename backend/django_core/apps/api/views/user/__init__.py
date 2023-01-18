@@ -14,7 +14,7 @@ router = Router()
 
 @router.get("/", response=UserSchema, auth=AuthBearer())
 def get_user_info(request: HttpRequest):
-    user = get_user_model().objects.get(id=request.auth.id)
+    user = get_user_model().objects.get(pk=request.auth.id)
     return user
 
 

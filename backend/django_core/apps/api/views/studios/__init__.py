@@ -35,5 +35,5 @@ def get_studio_info(request: HttpRequest, filters: StudioFilter = Query(...)):
 
 @router.get("/{str:studio_id}/", response=StudioSchema)
 def get_individual_studio_info(request: HttpRequest, studio_id: str):
-    queryset = get_object_or_404(StudioModel, id=studio_id)
+    queryset = get_object_or_404(StudioModel, pk=studio_id)
     return queryset
