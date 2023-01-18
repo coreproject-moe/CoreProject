@@ -31,9 +31,9 @@ class AnimeModel(models.Model):
     )
     anime_name_japanese = models.CharField(
         default="",
-        max_length=1024,
         null=False,
         blank=True,
+        max_length=1024,
     )
     anime_name_synonyms = ArrayField(
         # https://stackoverflow.com/questions/61206968/setting-arrayfield-to-null-or
@@ -68,8 +68,16 @@ class AnimeModel(models.Model):
     anime_rating = models.CharField(max_length=128, null=True, blank=True)
 
     # Dict Model field
-    anime_theme_openings = HStoreField(null=True, blank=True)
-    anime_theme_endings = HStoreField(null=True, blank=True)
+    anime_theme_openings = HStoreField(
+        default=dict,
+        null=False,
+        blank=True,
+    )
+    anime_theme_endings = HStoreField(
+        default=dict,
+        null=False,
+        blank=True,
+    )
 
     updated = models.DateTimeField(auto_now_add=True)
 
