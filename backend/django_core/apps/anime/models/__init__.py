@@ -19,14 +19,15 @@ anime_banner_upload_pattern = FilePattern(filename_patten="/anime_banner/{uuid:s
 
 
 class AnimeModel(models.Model):
-    mal_id = models.IntegerField(unique=True, blank=False, null=True)
-    anilist_id = models.IntegerField(unique=True, blank=False, null=True)
-    kitsu_id = models.IntegerField(unique=True, blank=False, null=True)
+    mal_id = models.IntegerField(unique=True, blank=True, null=True)
+    anilist_id = models.IntegerField(unique=True, blank=True, null=True)
+    kitsu_id = models.IntegerField(unique=True, blank=True, null=True)
 
+    # These 3 fields can't be null or else search vector will throw an error
     anime_name = models.CharField(unique=True, max_length=1024)
-    anime_name_japanese = models.CharField(max_length=1024, null=True)
+    anime_name_japanese = models.CharField(max_length=1024, blank=True, default="")
     anime_name_synonyms = ArrayField(
-        models.CharField(max_length=1024), blank=True, null=True
+        models.CharField(max_length=1024), blank=True, default=list
     )
 
     anime_source = models.CharField(max_length=128, blank=True, null=True)
