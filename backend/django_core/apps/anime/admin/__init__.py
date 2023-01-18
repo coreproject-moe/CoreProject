@@ -13,25 +13,25 @@ class AnimeInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
     form = AnimeAdminModelForm
 
     filter_horizontal = [
-        "anime_genres",
-        "anime_themes",
-        "anime_studios",
-        "anime_producers",
-        "anime_characters",
-        "anime_recommendation",
-        "anime_episodes",
+        "genres",
+        "themes",
+        "studios",
+        "producers",
+        "characters",
+        "recommendations",
+        "episodes",
     ]
 
     list_filter = [
-        "anime_genres",
-        "anime_themes",
-        "anime_studios",
-        "anime_producers",
-        "anime_characters",
+        "genres",
+        "themes",
+        "studios",
+        "producers",
+        "characters",
     ]
 
     search_fields = [
-        "anime_name",
+        "name",
     ]
 
     fieldsets = (
@@ -45,23 +45,23 @@ class AnimeInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
             ("Anime Names"),
             {
                 "fields": (
-                    "anime_name",
-                    "anime_name_japanese",
+                    "name",
+                    "name_japanese",
                 ),
             },
         ),
         (
             ("Anime Rating"),
             {
-                "fields": ("anime_rating",),
+                "fields": ("rating",),
             },
         ),
         (
             ("Anime Time Info"),
             {
                 "fields": (
-                    "anime_aired_from",
-                    "anime_aired_to",
+                    "aired_from",
+                    "aired_to",
                 )
             },
         ),
@@ -69,8 +69,8 @@ class AnimeInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
             ("Anime Images"),
             {
                 "fields": (
-                    "anime_cover",
-                    "anime_banner",
+                    "cover",
+                    "banner",
                 )
             },
         ),
@@ -78,8 +78,8 @@ class AnimeInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
             ("Anime Background & Summary"),
             {
                 "fields": (
-                    "anime_synopsis",
-                    "anime_background",
+                    "synopsis",
+                    "background",
                 )
             },
         ),
@@ -87,28 +87,28 @@ class AnimeInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
             ("Anime M2M Fields"),
             {
                 "fields": (
-                    "anime_genres",
-                    "anime_themes",
-                    "anime_studios",
-                    "anime_producers",
-                    "anime_characters",
-                    "anime_name_synonyms",
-                    "anime_recommendation",
+                    "genres",
+                    "themes",
+                    "studios",
+                    "producers",
+                    "characters",
+                    "name_synonyms",
+                    "recommendations",
                 )
             },
         ),
         (
             ("Anime Episodes"),
             {
-                "fields": ("anime_episodes",),
+                "fields": ("episodes",),
             },
         ),
         (
             None,
             {
                 "fields": (
-                    "anime_theme_openings",
-                    "anime_theme_endings",
+                    "theme_openings",
+                    "theme_endings",
                 ),
             },
         ),

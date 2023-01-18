@@ -116,5 +116,5 @@ def get_individual_staff_info(
     request: HttpRequest,
     staff_id: str,
 ):
-    queryset = get_object_or_404(StaffModel, id=staff_id)
+    queryset = get_object_or_404(StaffModel, pk=staff_id)
     return queryset

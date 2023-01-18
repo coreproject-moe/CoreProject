@@ -11,18 +11,18 @@ router = Router()
 
 
 @router.get("/{int:anime_id}/episodes", response=list[EpisodeGETSchema])
-def get_individual_anime_episodes(
+def get_individual_episodes(
     request: HttpRequest,
     anime_id: int,
 ) -> list[EpisodeModel]:
     query = get_list_or_404(
-        get_object_or_404(AnimeModel, id=anime_id).anime_episodes,
+        get_object_or_404(AnimeModel, pk=anime_id).episodes,
     )
     return query
 
 
 @router.post("/{int:anime_id}/episodes", response=EpisodeGETSchema)
-def post_individual_anime_episodes(
+def post_individual_episodes(
     request: HttpRequest,
     anime_id: int,
     payload: EpisodePOSTSchema,
@@ -36,6 +36,6 @@ def post_individual_anime_episodes(
     )
 
     instance: EpisodeModel = query[0]
-    anime_info_model.anime_studios.add(instance)
+    anime_info_model.studios.add(instance)
 
     return instance

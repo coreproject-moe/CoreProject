@@ -16,7 +16,7 @@ def get_individual_anime_genre_info(
     anime_id: int,
 ) -> list[AnimeGenreModel]:
     query = get_list_or_404(
-        get_object_or_404(AnimeModel, id=anime_id).anime_genres,
+        get_object_or_404(AnimeModel, pk=anime_id).genres,
     )
     return query
 
@@ -38,6 +38,6 @@ def post_individual_anime_genre_info(
     )
 
     instance: AnimeGenreModel = query[0]
-    anime_info_model.anime_genres.add(instance)
+    anime_info_model.genres.add(instance)
 
     return instance

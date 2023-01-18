@@ -15,7 +15,7 @@ def get_individual_anime_theme_info(
     anime_id: int,
 ) -> list[AnimeThemeModel]:
     query = get_list_or_404(
-        get_object_or_404(AnimeModel, id=anime_id).anime_themes,
+        get_object_or_404(AnimeModel, pk=anime_id).themes,
     )
     return query
 
@@ -36,6 +36,6 @@ def post_individual_anime_theme_info(
     )
 
     instance: AnimeThemeModel = query[0]
-    anime_info_model.anime_studios.add(instance)
+    anime_info_model.studios.add(instance)
 
     return instance

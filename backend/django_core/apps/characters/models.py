@@ -3,7 +3,7 @@ from dynamic_filenames import FilePattern
 
 from django.db import models
 
-anime_charaters_pattern = FilePattern(filename_pattern="anime_characters/{uuid:s}{ext}")
+anime_charaters_pattern = FilePattern(filename_pattern="characters/{uuid:s}{ext}")
 
 
 # Create your models here.
