@@ -23,5 +23,3 @@ class TrackerSchema(Schema):
 
 class TrackerDeleteSchema(Schema):
     anime_id: int
-
-
