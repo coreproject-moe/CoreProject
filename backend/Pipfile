@@ -33,7 +33,7 @@ httpx = {extras=['http2','brotli'],version="*"}
 # Application servers
 gunicorn = {extras = ["setproctile"], version = "*"}
 uvicorn = '*'
-# Typing support 
+# Typing support
 django-stubs-ext = "*"
 
 
@@ -48,7 +48,7 @@ django_cprofile_middleware = "*"
 ## Code formatting
 # Black
 black = "*"
-# Linting 
+# Linting
 ruff = "*"
 # Mypy
 mypy = "*"
