@@ -10,8 +10,6 @@ import dynamic_filenames
 
 from django.contrib.postgres.operations import (
     HStoreExtension,
-    UnaccentExtension,
-    TrigramExtension,
     BtreeGinExtension,
 )
 
@@ -28,8 +26,6 @@ class Migration(migrations.Migration):
 
     operations = [
         HStoreExtension(),
-        UnaccentExtension(),
-        TrigramExtension(),
         BtreeGinExtension(),
         migrations.CreateModel(
             name="AnimeGenreModel",
