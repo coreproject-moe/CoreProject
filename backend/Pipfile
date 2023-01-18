@@ -7,7 +7,7 @@ name = "pypi"
 django = {version='>=4.2a1', extras=['argon2']}
 # First party ( Image )
 pillow = "*"
-# Postgres
+# First Party ( Database )
 psycopg = "*"
 # 3rd Party ( Files )
 django-dynamic-filenames = "*"
@@ -30,9 +30,12 @@ pydantic = {extras = ["email"], version = "*"}
 # https://github.com/vitalik/django-ninja/issues/305
 # ===================================================
 httpx = {extras=['http2','brotli'],version="*"}
-# Web servers
+# Application servers
 gunicorn = {extras = ["setproctile"], version = "*"}
 uvicorn = '*'
+# Typing support
+django-stubs-ext = "*"
+
 
 [dev-packages]
 ## Watchfiles
@@ -45,13 +48,8 @@ django_cprofile_middleware = "*"
 ## Code formatting
 # Black
 black = "*"
-# Flake8
-flake8 = "*"
-# AutoFlake
-autoflake = "*"
-# Pylint
-pylint = "*"
-pylint_django = "*"
+# Linting
+ruff = "*"
 # Mypy
 mypy = "*"
 django_stubs = {extras = ["compatible_mypy"], version = "*"}
