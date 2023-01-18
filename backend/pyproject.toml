@@ -102,7 +102,7 @@ target-version = "py311"
 
 [tool.ruff.per-file-ignores]
 "*/__init__.py" = ["E402"]
-"*/settings.py" = ["E402"] 
+"*/settings.py" = ["E402"]
 "*/api_v1.py" = ["E402"]
 "*/urls.py" = ['E402']
 
