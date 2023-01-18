@@ -12,12 +12,13 @@ from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from ninja.pagination import paginate
 
+from django.db.models.functions import Greatest
 from django.db.models import Q, QuerySet
 from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
 
 try:
-    from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
+    from django.contrib.postgres.search import TrigramWordSimilarity
 
     HAS_POSTGRES = True
 except ImportError:
@@ -46,18 +47,32 @@ def get_anime_info(
 
     # We must pop this to filter other fields on the later stage
     if anime_name := query_dict.pop("anime_name", None):
-        _vector_ = SearchVector(
-            "anime_name",
-            "anime_name_japanese",
-            "anime_name_synonyms",
-        )
-        _query_ = SearchQuery(anime_name)
-        query = query.annotate(
-            anime_name_rank=SearchRank(
-                _vector_,
-                _query_,
+        # https://stackoverflow.com/questions/44007706/django-postgres-full-text-trigramsimilarity-multiple-fields
+        query = (
+            query.annotate(
+                anime_name_similiarity_greatest=Greatest(
+                    TrigramWordSimilarity(
+                        anime_name,
+                        "anime_name",
+                    ),
+                    TrigramWordSimilarity(
+                        anime_name,
+                        "anime_name_japanese",
+                    ),
+                    TrigramWordSimilarity(
+                        anime_name,
+                        "anime_name_synonyms",
+                    ),
+                )
             )
-        ).order_by("-anime_name_rank")
+            .filter(
+                Q(anime_name__unaccent__trigram_word_similar=anime_name)
+                | Q(anime_name_japanese__unaccent__trigram_word_similar=anime_name)
+                | Q(anime_name_synonyms__trigram_word_similar=anime_name),
+                anime_name_similiarity_greatest__gt=0.3,
+            )
+            .order_by("-anime_name_similiarity")
+        )
 
     # Same here but with ids
     for id in [
