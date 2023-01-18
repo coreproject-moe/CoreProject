@@ -25,7 +25,7 @@ def get_producer_info(
     if character_name:
         query = Q()
         for position in character_name.split(","):
-            query |= Q(**{"name__icontains": position.strip()})
+            query |= Q(**{f"name__icontains": position.strip()})
         query_object &= query
 
     query = ProducerModel.objects.all()
