@@ -35,17 +35,17 @@ anime_router.add_router(
 anime_router.add_router(
     "",
     import_string("apps.api.views.anime.episode.router"),
-    tags=["anime_episodes"],
+    tags=["episodes"],
 )
 anime_router.add_router(
     "",
     import_string("apps.api.views.anime.episode_comment.router"),
-    tags=["anime_episodes"],
+    tags=["episodes"],
 )
 anime_router.add_router(
     "",
     import_string("apps.api.views.anime.episode_timestamp.router"),
-    tags=["anime_episodes"],
+    tags=["episodes"],
 )
 
 

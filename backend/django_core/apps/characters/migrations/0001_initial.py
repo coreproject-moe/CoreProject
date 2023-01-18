@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
                         null=True,
                         storage=core.storages.OverwriteStorage(),
                         upload_to=dynamic_filenames.FilePattern(
-                            filename_pattern="anime_characters/{uuid:s}{ext}"
+                            filename_pattern="characters/{uuid:s}{ext}"
                         ),
                     ),
                 ),

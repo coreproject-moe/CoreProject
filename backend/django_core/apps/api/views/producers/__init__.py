@@ -25,7 +25,7 @@ def get_producer_info(
     if character_name:
         query = Q()
         for position in character_name.split(","):
-            query |= Q(**{f"name__icontains": position.strip()})
+            query |= Q(**{"name__icontains": position.strip()})
         query_object &= query
 
     query = ProducerModel.objects.all()
@@ -41,5 +41,5 @@ def get_individual_producer_info(
     request: HttpRequest,
     producer_id: str,
 ):
-    queryset = get_object_or_404(ProducerModel, id=producer_id)
+    queryset = get_object_or_404(ProducerModel, pk=producer_id)
     return queryset

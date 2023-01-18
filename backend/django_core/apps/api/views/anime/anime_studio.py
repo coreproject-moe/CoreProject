@@ -16,7 +16,7 @@ def get_individual_anime_studio_info(
     anime_id: int,
 ) -> list[StudioModel]:
     query = get_list_or_404(
-        get_object_or_404(AnimeModel, id=anime_id).anime_studios,
+        get_object_or_404(AnimeModel, pk=anime_id).studios,
     )
 
     return query
@@ -38,6 +38,6 @@ def post_individual_anime_studio_info(
     )
 
     instance: StudioModel = query[0]
-    anime_info_model.anime_studios.add(instance)
+    anime_info_model.studios.add(instance)
 
     return instance

@@ -1,9 +1,0 @@
-[flake8]
-max-line-length = 92
-extend-ignore = E203
-exclude =
-    */migrations/*
-per-file-ignores =
-    */__init__.py: F401, E402
-    */settings.py: F401, E402
-    */api_v1.py: F401, E402
