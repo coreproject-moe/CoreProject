@@ -73,9 +73,9 @@ class UserManager(
         extra_fields.setdefault("is_active", True)
 
         # Sanity Check
-        if extra_fields.get("is_staff") != True:
+        if extra_fields.get("is_staff") is not True:
             raise ValueError(_("Superuser must have is_staff=True."))
-        if extra_fields.get("is_superuser") != True:
+        if extra_fields.get("is_superuser") is not True:
             raise ValueError(_("Superuser must have is_superuser=True."))
 
         return self.create_user(email, password, **extra_fields)
