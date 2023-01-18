@@ -26,7 +26,15 @@ class AnimeModel(models.Model):
     anime_name = models.CharField(unique=True, max_length=1024)
     anime_name_japanese = models.CharField(max_length=1024, null=True)
     anime_name_synonyms = ArrayField(
-        models.CharField(max_length=1024), blank=True, null=True
+        # https://stackoverflow.com/questions/61206968/setting-arrayfield-to-null-or
+        default=list,
+        blank=True,
+        null=False,
+        base_field=models.CharField(
+            max_length=1024,
+            null=False,
+            blank=False,
+        ),
     )
 
     anime_source = models.CharField(max_length=128, blank=True, null=True)

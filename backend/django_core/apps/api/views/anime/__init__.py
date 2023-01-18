@@ -18,7 +18,8 @@ from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
 
 try:
-    from django.contrib.postgres.search import TrigramWordSimilarity
+    from django.contrib.postgres.search import TrigramSimilarity
+    from django.db.models.functions import Greatest
 
     HAS_POSTGRES = True
 except ImportError:
@@ -47,31 +48,21 @@ def get_anime_info(
 
     # We must pop this to filter other fields on the later stage
     if anime_name := query_dict.pop("anime_name", None):
-        # https://stackoverflow.com/questions/44007706/django-postgres-full-text-trigramsimilarity-multiple-fields
         query = (
             query.annotate(
-                anime_name_similiarity_greatest=Greatest(
-                    TrigramWordSimilarity(
-                        anime_name,
-                        "anime_name",
-                    ),
-                    TrigramWordSimilarity(
-                        anime_name,
-                        "anime_name_japanese",
-                    ),
-                    TrigramWordSimilarity(
-                        anime_name,
-                        "anime_name_synonyms",
-                    ),
-                )
+                similiarity=Greatest(
+                    TrigramSimilarity("anime_name", anime_name),
+                    TrigramSimilarity("anime_name_japanese", anime_name),
+                    # This line doesn't work
+                    TrigramSimilarity("anime_name_synonyms", anime_name),
+                ),
             )
             .filter(
-                Q(anime_name__unaccent__trigram_word_similar=anime_name)
-                | Q(anime_name_japanese__unaccent__trigram_word_similar=anime_name)
-                | Q(anime_name_synonyms__trigram_word_similar=anime_name),
-                anime_name_similiarity_greatest__gt=0.3,
+                Q(anime_name__unaccent__trigram_similar=anime_name)
+                | Q(anime_name_japanese__unaccent__trigram_similar=anime_name),
+                similiarity__gte=0.1,
             )
-            .order_by("-anime_name_similiarity")
+            .order_by("-similiarity")
         )
 
     # Same here but with ids
