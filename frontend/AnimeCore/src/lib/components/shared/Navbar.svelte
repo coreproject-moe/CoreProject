@@ -50,7 +50,7 @@
                     transition:fade|local
                     style="grid-area: 1 / 1 / 2 / 2;"
                 >
-                    <placeholder class="w-[388px] h-[22px] inline-block" />
+                    <placeholder class="w-[160px] h-[22px] inline-block" />
                 </div>
             {/if}
         </div>
