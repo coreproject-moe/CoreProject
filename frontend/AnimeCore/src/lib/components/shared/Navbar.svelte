@@ -48,10 +48,9 @@
                 <!-- placeholder to remove layout shift  -->
                 <div
                     transition:fade|local
-                    style="grid-area: 1 / 1 / 2 / 2;"
-                >
-                    <placeholder class="w-[170px] h-[22px] inline-block" />
-                </div>
+                    class="w-[158px] h-[22px]"
+                    style="grid-area: 1 / 1 / 2 / 2"
+                />
             {/if}
         </div>
     </div>
