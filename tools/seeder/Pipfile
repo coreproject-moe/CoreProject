@@ -16,3 +16,6 @@ black = "*"
 
 [requires]
 python_version = "3.11"
+
+[scripts]
+seed_character = 'python character.py'

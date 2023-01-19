@@ -79,9 +79,9 @@ def post_character_info(
 ) -> QuerySet[CharacterModel]:
     instance = CharacterModel.objects.create(
         name=name,
-        mal_pk=mal_id,
-        kitsu_pk=kitsu_id,
-        anilist_pk=anilist_id,
+        mal_id=mal_id,
+        kitsu_id=kitsu_id,
+        anilist_id=anilist_id,
         name_kanji=name_kanji,
         character_image=character_image,
         about=about,

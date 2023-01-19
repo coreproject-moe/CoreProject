@@ -6,7 +6,7 @@ from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 
-from ...schemas.trackers import KitsuGETSchema, KitsuPOSTSchema
+from ...schemas.trackers.kitsu import KitsuGETSchema, KitsuPOSTSchema
 
 router = Router()
 

@@ -2,7 +2,7 @@ from ninja import Schema
 
 
 class StudioFilter(Schema):
-    mal_id: str | None = None
+    mal_id: int | None = None
 
     # icontains based search
     #   Allowed :

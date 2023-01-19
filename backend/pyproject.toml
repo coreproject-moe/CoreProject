@@ -9,6 +9,10 @@ requires-python = ">=3.11,<4.0"
 license = {text = "AGPL-3.0-only"}
 
 
+[tool.black]
+line-length = 92
+target-version = ["py311"]
+
 [tool.mypy]
 show_error_codes = true
 warn_unreachable = true
