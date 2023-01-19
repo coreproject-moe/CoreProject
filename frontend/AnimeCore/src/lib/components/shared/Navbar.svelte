@@ -44,6 +44,14 @@
                         height={22}
                     />
                 </div>
+            {:else}
+                <!-- placeholder to remove layout shift  -->
+                <div
+                    transition:fade|local
+                    style="grid-area: 1 / 1 / 2 / 2;"
+                >
+                    <placeholder class="w-[158px] h-[22px] inline-block" />
+                </div>
             {/if}
         </div>
     </div>
