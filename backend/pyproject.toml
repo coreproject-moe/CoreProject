@@ -109,6 +109,7 @@ target-version = "py311"
 "*/settings.py" = ["E402"]
 "*/api_v1.py" = ["E402"]
 "*/urls.py" = ['E402']
+"*/migrations/*/**.py" = ['E501']
 
 [tool.ruff.mccabe]
 # Unlike Flake8, default to a complexity level of 10.
