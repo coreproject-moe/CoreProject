@@ -6,12 +6,14 @@
     import NavbarModal from "$modals/Navbar.svelte";
     import { modals } from "$store/Modal";
     import { navbar_variant } from "$store/Navbar_Variant";
+    import { responsiveMode } from "$store/Responsive";
+
+    let mobile: boolean;
+    $: mobile = $responsiveMode === "mobile";
 </script>
 
 <!-- Init the modal  -->
-<svelte:component
-    this={NavbarModal}
-/>
+<svelte:component this={NavbarModal} />
 
 <div class="navbar bg-transparent">
     <div class="navbar-start hidden md:block">
@@ -20,9 +22,12 @@
             width={30}
         />
     </div>
-    <div class="navbar-center glass rounded-md">
+    <div
+        class="navbar-center glass rounded-md"
+        style="--glass-reflex-degree:90;"
+    >
         <div class="inline-grid py-1 md:py-2">
-            {#if $navbar_variant == "black"}
+            {#if $navbar_variant == "black" || $navbar_variant == undefined || mobile}
                 <div
                     transition:fade|local
                     style="grid-area: 1 / 1 / 2 / 2"
@@ -33,7 +38,7 @@
                         height={22}
                     />
                 </div>
-            {:else if $navbar_variant == "white"}
+            {:else if $navbar_variant == "white" || !mobile}
                 <div
                     transition:fade|local
                     style="grid-area: 1 / 1 / 2 / 2"
