@@ -1,6 +1,5 @@
 <script lang="ts">
-    export let id = "genre__modal";
-
+    import { modals } from "$store/Modal";
     import { timer as timerStore } from "$store/Timer";
     let value: boolean;
 
@@ -17,12 +16,12 @@
 <input
     bind:checked={value}
     type="checkbox"
-    {id}
+    id={$modals.genre}
     class="modal-toggle"
 />
 <label
     class="modal modal-bottom"
-    for={id}
+    for={$modals.genre}
 >
     <div class="modal-box">
         <h3 class="font-bold text-lg">Congratulations random Internet user!</h3>
@@ -32,7 +31,7 @@
         </p>
         <div class="modal-action">
             <label
-                for={id}
+                for={$modals.genre}
                 class="btn"
             >
                 Yay!
