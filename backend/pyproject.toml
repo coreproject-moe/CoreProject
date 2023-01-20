@@ -95,8 +95,9 @@ exclude = [
     "dist",
     "node_modules",
     "venv",
+    # https://github.com/charliermarsh/ruff/blob/1b3fcd118c2e69909176baf5e28f5bc64f934db9/resources/test/src/pyproject.toml#L3
+    "**/migrations"
 ]
-
 
 # Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
@@ -104,12 +105,12 @@ dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 # Assume Python 3.11
 target-version = "py311"
 
+
 [tool.ruff.per-file-ignores]
 "*/__init__.py" = ["E402",'E501']
 "*/settings.py" = ["E402"]
 "*/api_v1.py" = ["E402"]
 "*/urls.py" = ['E402']
-"*/migrations/*/**.py" = ['E501']
 
 [tool.ruff.mccabe]
 # Unlike Flake8, default to a complexity level of 10.
