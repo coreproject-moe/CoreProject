@@ -95,8 +95,8 @@ exclude = [
     "dist",
     "node_modules",
     "venv",
-    # https://github.com/charliermarsh/ruff/blob/1b3fcd118c2e69909176baf5e28f5bc64f934db9/resources/test/src/pyproject.toml#L3
-    "**/migrations"
+    # https://github.com/charliermarsh/ruff/issues/61#issuecomment-1233497658  
+    '**/migrations/*'
 ]
 
 # Allow unused variables when underscore-prefixed.
