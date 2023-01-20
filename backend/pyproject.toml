@@ -95,7 +95,7 @@ exclude = [
     "node_modules",
     "venv",
     # https://github.com/charliermarsh/ruff/issues/61#issuecomment-1233497658
-    '**/migrations/*'
+    '**/migrations'
 ]
 
 # Allow unused variables when underscore-prefixed.
