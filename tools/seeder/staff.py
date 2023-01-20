@@ -433,7 +433,7 @@ async def populate_database(
                 sorted(
                         set(
                             SUCCESS_LIST
-                            + ERROR_LIST 
+                            + ERROR_LIST
                             + WARNING_LIST
                         ),
                         key=lambda string: string[10],
