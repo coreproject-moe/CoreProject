@@ -37,8 +37,7 @@ def get_staff_info(
         "given_name",
         "family_name",
     ]:
-        value = query_dict.pop(specialized_name, None)
-        if value:
+        if value := query_dict.pop(specialized_name, None):
             _query_ = Q()
             for position in value.split(","):
                 _query_ |= Q(**{f"{specialized_name}__icontains": int(position.strip())})
@@ -50,8 +49,7 @@ def get_staff_info(
         "kitsu_id",
         "anilist_id",
     ]:
-        value = query_dict.pop(id, None)
-        if value:
+        if value := query_dict.pop(id, None):
             _query_ = Q()
             for position in value.split(","):
                 _query_ |= Q(**{f"{id}": int(position.strip())})

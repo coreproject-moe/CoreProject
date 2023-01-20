@@ -65,8 +65,7 @@ def get_anime_info(
         "kitsu_id",
         "anilist_id",
     ]:
-        value = query_dict.pop(id, None)
-        if value:
+        if value := query_dict.pop(id, None):
             _query_ = Q()
             for position in value.split(","):
                 _query_ |= Q(
@@ -82,8 +81,7 @@ def get_anime_info(
         "producers",
         "characters",
     ]:
-        value = query_dict.pop(item, None)
-        if value:
+        if value := query_dict.pop(item, None):
             _query_ = Q()
             for position in value.split(","):
                 _query_ &= Q(
