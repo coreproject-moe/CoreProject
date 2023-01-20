@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { modals } from "$store/Modal";
+
     import GenreModal from "$components/modals/Genre.svelte";
     import badgeData from "$data/components/badge_data.json";
     import ChevronDown from "$icons/Chevron-Down.svelte";
@@ -12,10 +14,7 @@
 </script>
 
 <!-- Modals  -->
-<svelte:component
-    this={GenreModal}
-    id="genre-modal"
-/>
+<svelte:component this={GenreModal} />
 
 <div class="hero min-h-[184px] mt-10 md:mt-0 md:min-h-screen bg-base-100">
     <div class="hero-content text-center p-0">
@@ -24,7 +23,7 @@
             {#if mobile}
                 <div class="mt-10">
                     <label
-                        for="genre-modal"
+                        for={$modals.genre}
                         class="btn modal-button flex gap-5"
                     >
                         <span class="text-white">or search by genres</span>

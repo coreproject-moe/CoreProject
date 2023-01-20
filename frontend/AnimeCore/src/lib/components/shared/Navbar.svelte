@@ -5,12 +5,12 @@
     import Search from "$icons/Search.svelte";
     import NavbarModal from "$modals/Navbar.svelte";
     import { navbar_variant } from "$store/Navbar_Variant";
+    import { modals } from "$store/Modal";
 </script>
 
 <!-- Init the modal  -->
 <svelte:component
     this={NavbarModal}
-    id="nabar__modal"
 />
 
 <div class="navbar bg-transparent">
@@ -56,7 +56,7 @@
     </div>
     <div class="navbar-end">
         <label
-            for="nabar__modal"
+            for={$modals.navbar}
             class="btn modal-button bg-transparent hover:bg-transparent px-0 border-transparent"
         >
             <img

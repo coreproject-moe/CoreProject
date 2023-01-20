@@ -1,5 +1,6 @@
 <script lang="ts">
-    export let id: string;
+    import { modals } from "$store/Modal";
+
     import { timer as timerStore } from "$store/Timer";
     let value: boolean;
 
@@ -16,11 +17,11 @@
 <input
     bind:checked={value}
     type="checkbox"
-    {id}
+    id={$modals.navbar}
     class="modal-toggle"
 />
 <label
-    for={id}
+    for={$modals.navbar}
     class="modal cursor-pointer"
 >
     <label
