@@ -50,7 +50,9 @@ limiter = Limiter(
 
 
 async def command() -> None:
-    global JIKAN, KITSU, ANILIST, DATABASE_ID, EXECUTION_TIME, SUCCESSFUL_NAMES, SUCCESSFUL_JIKAN_IDS, SUCCESSFUL_ANILIST_IDS
+    global JIKAN, KITSU, ANILIST
+    global EXECUTION_TIME
+    global SUCCESSFUL_JIKAN_IDS, SUCCESSFUL_ANILIST_IDS
 
     retry_client = RetryClient(  # aiohttp-retry
         client_session=CachedSession(  # aiohttp-client-cache

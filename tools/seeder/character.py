@@ -47,7 +47,9 @@ BACKEND_API_URL = "http://127.0.0.1:8000/api/v1/characters"
 
 
 async def command() -> None:
-    global JIKAN, KITSU, ANILIST, DATABASE_ID, EXECUTION_TIME, SUCCESSFUL_NAMES, SUCCESSFUL_KITSU_IDS, SUCCESSFUL_ANILIST_IDS
+    global JIKAN, KITSU, ANILIST
+    global EXECUTION_TIME
+    global SUCCESSFUL_KITSU_IDS, SUCCESSFUL_ANILIST_IDS
 
     retry_client = RetryClient(  # aiohttp-retry
         client_session=CachedSession(  # aiohttp-client-cache
