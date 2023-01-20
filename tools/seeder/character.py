@@ -425,8 +425,8 @@ async def populate_database(
 
             res = await session.post(BACKEND_API_URL, data=formdata)
             if res.status == 200:
-                SUCCESSFUL_KITSU_IDS.append(kitsu_data.get("kitsu_id", None))
-                SUCCESSFUL_ANILIST_IDS.append(anilist_data.get("anilist_id", None))
+                SUCCESSFUL_KITSU_IDS.append(kitsu_data.get("kitsu_id"))
+                SUCCESSFUL_ANILIST_IDS.append(anilist_data.get("anilist_id"))
             else:
                 print(await res.text())
                 raise Exception

@@ -37,6 +37,7 @@ SUCCESS_LIST = []
 WARNING_LIST = []
 ERROR_LIST = []
 
+BACKEND_API_URL = "http://127.0.0.1:8000/api/v1/staffs"
 
 limiter = Limiter(
     RequestRate(1, Duration.SECOND),
@@ -343,8 +344,11 @@ async def populate_database(
     starting_number: int,
     ending_number: int,
 ) -> None:
+    global EXECUTION_TIME
 
     while staff_number < ending_number:
+        start_time = datetime.now()
+
         kitsu_data = await get_staff_data_from_kitsu(
             staff_number=staff_number,
             session=session,
@@ -364,13 +368,13 @@ async def populate_database(
 
             formdata = FormData()
             formdata.add_field("name", kitsu_data["staff_name"])
-            formdata.add_field("kitsu_id", staff_number)
+            formdata.add_field("kitsu_id", str(staff_number))
 
             if mal_id := jikan_data.get("mal_id", None):
-                formdata.add_field("mal_id", mal_id)
+                formdata.add_field("mal_id", str(mal_id))
 
             if anilist_id := anilist_data.get("anilist_id", None):
-                formdata.add_field("anilist_id", anilist_id)
+                formdata.add_field("anilist_id", str(anilist_id))
 
             if given_name := jikan_data.get("given_name", None):
                 formdata.add_field("given_name", given_name)
@@ -383,7 +387,7 @@ async def populate_database(
 
             # M2M Alternate name field
             if alternate_names := jikan_data.get("alternate_names", None):
-                formdata.add_field("alternate_names", alternate_names)
+                formdata.add_field("alternate_names", ",".join(alternate_names))
 
             if jikan_data:
                 # Try to get webp image first
@@ -400,8 +404,19 @@ async def populate_database(
                         filename=f"{staff_number}.{image_url.split('.')[-1]}",
                     )
 
+            res = await session.post(BACKEND_API_URL, data=formdata)
+            if res.status == 200:
+                SUCCESSFUL_JIKAN_IDS.append(kitsu_data.get("mal_id"))
+                SUCCESSFUL_ANILIST_IDS.append(anilist_data.get("anilist_id"))
+            else:
+                print(await res.text())
+                raise Exception
+
             # Add 1 to `starting_number` on every successful request
             starting_number += 1
+
+        end_time = datetime.now()
+        EXECUTION_TIME += (end_time - start_time).total_seconds()
 
         success_error_warnings = sorted(
             set(SUCCESS_LIST + ERROR_LIST + WARNING_LIST),
