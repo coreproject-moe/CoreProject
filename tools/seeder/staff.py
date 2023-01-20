@@ -406,7 +406,7 @@ async def populate_database(
 
             res = await session.post(BACKEND_API_URL, data=formdata)
             if res.status == 200:
-                SUCCESSFUL_JIKAN_IDS.append(kitsu_data.get("mal_id"))
+                SUCCESSFUL_JIKAN_IDS.append(jikan_data.get("mal_id"))
                 SUCCESSFUL_ANILIST_IDS.append(anilist_data.get("anilist_id"))
             else:
                 print(await res.text())
@@ -417,11 +417,6 @@ async def populate_database(
 
         end_time = datetime.now()
         EXECUTION_TIME += (end_time - start_time).total_seconds()
-
-        success_error_warnings = sorted(
-            set(SUCCESS_LIST + ERROR_LIST + WARNING_LIST),
-            key=lambda string: string[10],  #  colors are usually 10 digits
-        )
 
         print(
             f"[{EXECUTION_TIME:.2f}]"
@@ -434,7 +429,17 @@ async def populate_database(
                 else starting_number
             }"""
             " | "
-            f"[{', '.join(success_error_warnings)}]"
+            f"""[{', '.join(
+                sorted(
+                        set(
+                            SUCCESS_LIST
+                            + ERROR_LIST 
+                            + WARNING_LIST
+                        ),
+                        key=lambda string: string[10],
+                    )
+                )
+            }]"""
         )
 
         # Reset the list
