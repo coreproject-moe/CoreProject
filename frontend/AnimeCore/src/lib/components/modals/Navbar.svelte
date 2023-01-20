@@ -1,7 +1,6 @@
 <script lang="ts">
     import { modals } from "$store/Modal";
-
-    import { timer as timerStore } from "$store/Timer";
+import { timer as timerStore } from "$store/Timer";
     let value: boolean;
 
     $: switch (value) {

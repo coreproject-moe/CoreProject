@@ -1,10 +1,9 @@
 <script lang="ts">
-    import { modals } from "$store/Modal";
-
     import GenreModal from "$components/modals/Genre.svelte";
     import badgeData from "$data/components/badge_data.json";
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import ChevronUpDown from "$icons/Chevron-Up-Down.svelte";
+    import { modals } from "$store/Modal";
     import { responsiveMode } from "$store/Responsive";
 
     import AutoComplete from "./AutoComplete.svelte";
