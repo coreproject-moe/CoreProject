@@ -1,7 +1,6 @@
 # STATUS : BORKED
 # SOURCE : https://github.com/baseplate-admin/CoreProject/blob/03bbffbb911a82a9d87814b50a4c8279b539e9b7/backend/django_core/apps/staffs/management/commands/populate_staffs.py
 
-
 import asyncio
 from datetime import datetime, timedelta
 from io import BytesIO
@@ -9,6 +8,7 @@ import json
 import os
 import textwrap
 from typing import Any, cast
+from aiohttp import FormData
 
 from humanize import intcomma, naturaltime
 from pyrate_limiter import Duration, Limiter, RedisBucket, RequestRate
@@ -30,9 +30,13 @@ ANILIST: dict[str, list[dict[int, str]]] = {}
 
 EXECUTION_TIME: int = 0
 
+SUCCESSFUL_JIKAN_IDS = []
+SUCCESSFUL_ANILIST_IDS = []
+
 SUCCESS_LIST = []
 WARNING_LIST = []
 ERROR_LIST = []
+
 
 limiter = Limiter(
     RequestRate(1, Duration.SECOND),
@@ -45,11 +49,13 @@ limiter = Limiter(
 
 
 async def command() -> None:
+    global JIKAN, KITSU, ANILIST, DATABASE_ID, EXECUTION_TIME, SUCCESSFUL_NAMES, SUCCESSFUL_JIKAN_IDS, SUCCESSFUL_ANILIST_IDS
+
     retry_client = RetryClient(  # aiohttp-retry
         client_session=CachedSession(  # aiohttp-client-cache
             cache=RedisBackend(
                 CACHE_NAME,
-                expire_after=3600,
+                expire_after=10,
             )
         ),
         retry_options=ExponentialRetry(
@@ -76,15 +82,19 @@ async def command() -> None:
             if "y" in answer:
                 data = json.load(open(STAFF_LOCK_FILE_NAME, encoding="utf-8"))
                 starting_number = int(data.get("STARTING_NUMBER", starting_number))
-                staff_number = int(data.get("staff_number", staff_number))
+                staff_number = int(data.get("STAFF_NUMBER", staff_number))
 
                 # Load Lists
-                global JIKAN, KITSU, ANILIST
                 JIKAN = data.get("JIKAN", JIKAN)
                 KITSU = data.get("KITSU", KITSU)
                 ANILIST = data.get("ANILIST", ANILIST)
-                data.get("EXECUTION_TIME", EXECUTION_TIME)
-
+                EXECUTION_TIME = data.get("EXECUTION_TIME", EXECUTION_TIME)
+                SUCCESSFUL_JIKAN_IDS = data.get(
+                    "SUCCESSFUL_JIKAN_IDS", SUCCESSFUL_JIKAN_IDS
+                )
+                SUCCESSFUL_ANILIST_IDS = data.get(
+                    "SUCCESSFUL_ANILIST_IDS", SUCCESSFUL_ANILIST_IDS
+                )
                 break
 
             elif "n" in answer:
@@ -224,10 +234,7 @@ async def get_staff_data_from_jikan(
         for data in res_data["data"]:
             # If the MyAnimeList ID exists in database
             # Skip to next iteration
-            staff_mal_exists = await StaffModel.objects.filter(
-                mal_id=data["mal_id"]
-            ).aexists()
-            if staff_mal_exists:
+            if data["mal_id"] in SUCCESSFUL_JIKAN_IDS:
                 continue
 
             returnable_data = data
@@ -307,10 +314,7 @@ async def get_staff_data_from_anilist(
         for data in res_data["data"]["Page"]["staff"]:
             # If the Anilist ID exists in database
             # Skip to next iteration
-            anilist_id_exists = await StaffModel.objects.filter(
-                anilist_id=data["id"]
-            ).aexists()
-            if anilist_id_exists:
+            if data["id"] in SUCCESSFUL_ANILIST_IDS:
                 continue
 
             returnable_data = {
@@ -347,7 +351,6 @@ async def populate_database(
         )
 
         if kitsu_data:
-
             jikan_data = await get_staff_data_from_jikan(
                 staff_number=staff_number,
                 staff_name=kitsu_data["staff_name"],
@@ -359,70 +362,43 @@ async def populate_database(
                 session=session,
             )
 
-            try:
-                data_dictionary = {
-                    "name": kitsu_data["staff_name"],
-                    "mal_id": jikan_data.get("mal_id", None),
-                    "anilist_id": anilist_data.get("anilist_id", None),
-                    "given_name": jikan_data.get("given_name", None),
-                    "family_name": jikan_data.get("family_name", None),
-                    "about": jikan_data.get("about", None),
-                }
-                (instance, _) = await StaffModel.objects.aupdate_or_create(
-                    kitsu_id=staff_number,
-                    defaults={k: v for k, v in data_dictionary.items() if v is not None},
-                )
+            formdata = FormData()
+            formdata.add_field("name", kitsu_data["staff_name"])
+            formdata.add_field("kitsu_id", staff_number)
 
-                if jikan_data:
-                    # Try to get webp image first
-                    # If that fails get jpg image
-                    try:
-                        image_url = jikan_data["images"]["webp"]["image_url"]
-                    except KeyError:
-                        image_url = jikan_data["images"]["jpg"]["image_url"]
-                    finally:
-                        image = await session.get(image_url)
+            if mal_id := jikan_data.get("mal_id", None):
+                formdata.add_field("mal_id", mal_id)
 
-                        @sync_to_async
-                        def save_image_to_database(
-                            staff_database: StaffModel,
-                            staff_number: int,
-                            image_content: bytes,
-                            image_url: str,
-                        ) -> None:
-                            staff_database.staff_image.save(
-                                f"{staff_number}.{image_url.split('.')[-1]}",
-                                ContentFile(
-                                    BytesIO(image_content).read(),
-                                ),
-                            )
+            if anilist_id := anilist_data.get("anilist_id", None):
+                formdata.add_field("anilist_id", anilist_id)
 
-                        await save_image_to_database(
-                            staff_database=instance,
-                            staff_number=staff_number,
-                            image_content=await image.read(),
-                            image_url=image_url,
-                        )
+            if given_name := jikan_data.get("given_name", None):
+                formdata.add_field("given_name", given_name)
 
-                for name in jikan_data.get("alternate_names", []):
-                    (
-                        _instance_,
-                        _,
-                    ) = await StaffAlternateNameModel.objects.aget_or_create(name=name)
+            if family_name := jikan_data.get("family_name", None):
+                formdata.add_field("family_name", family_name)
 
-                    @sync_to_async
-                    def add_to_database(
-                        staff_model: StaffModel,
-                        staff_alternate_name_model: StaffAlternateNameModel,
-                    ) -> None:
-                        staff_model.alternate_names.add(staff_alternate_name_model)
+            if about := jikan_data.get("about", None):
+                formdata.add_field("about", about)
 
-                    await add_to_database(
-                        staff_model=instance, staff_alternate_name_model=_instance_
+            # M2M Alternate name field
+            if alternate_names := jikan_data.get("alternate_names", None):
+                formdata.add_field("alternate_names", alternate_names)
+
+            if jikan_data:
+                # Try to get webp image first
+                # If that fails get jpg image
+                try:
+                    image_url = jikan_data["images"]["webp"]["image_url"]
+                except KeyError:
+                    image_url = jikan_data["images"]["jpg"]["image_url"]
+                finally:
+                    image = await session.get(image_url)
+                    formdata.add_field(
+                        "staff_image",
+                        BytesIO(await image.read()).read(),
+                        filename=f"{staff_number}.{image_url.split('.')[-1]}",
                     )
-            except IntegrityError as e:
-                click.echo(e)
-                click.echo(f"Entry exists : {staff_number}")
 
             # Add 1 to `starting_number` on every successful request
             starting_number += 1
@@ -432,7 +408,9 @@ async def populate_database(
             key=lambda string: string[10],  #  colors are usually 10 digits
         )
 
-        click.echo(
+        print(
+            f"[{EXECUTION_TIME:.2f}]"
+            " "
             f"Requested `staff_info` for {staff_number}"
             " | "
             f"""`starting_number` {
@@ -450,16 +428,20 @@ async def populate_database(
         WARNING_LIST.clear()
 
         staff_number += 1
+        log_dictionary = {
+            "STAFF_NUMBER": staff_number,
+            "STARTING_NUMBER": starting_number,
+            "JIKAN": JIKAN,
+            "KITSU": KITSU,
+            "ANILIST": ANILIST,
+            "EXECUTION_TIME": EXECUTION_TIME,
+            "SUCCESSFUL_JIKAN_IDS": SUCCESSFUL_JIKAN_IDS,
+            "SUCCESSFUL_ANILIST_IDS": SUCCESSFUL_ANILIST_IDS,
+        }
 
         # Log the data to a `.lock` file
         json.dump(
-            {
-                "staff_number": staff_number,
-                "STARTING_NUMBER": starting_number,
-                "JIKAN": JIKAN,
-                "KITSU": KITSU,
-                "ANILIST": ANILIST,
-            },
+            log_dictionary,
             open(STAFF_LOCK_FILE_NAME, "w", encoding="utf-8"),
             indent=2,
         )

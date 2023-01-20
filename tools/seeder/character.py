@@ -53,7 +53,7 @@ async def command() -> None:
         client_session=CachedSession(  # aiohttp-client-cache
             cache=RedisBackend(
                 CACHE_NAME,
-                expire_after=3600,
+                expire_after=10,
             )
         ),
         retry_options=ExponentialRetry(
@@ -439,7 +439,7 @@ async def populate_database(
         EXECUTION_TIME += (end_time - start_time).total_seconds()
 
         message = (
-            f"[{round(EXECUTION_TIME, 2)}]"
+            f"[{round(EXECUTION_TIME, 2):2f}]"
             " "
             f"Requested `character_info` for {character_number}"
             " | "
