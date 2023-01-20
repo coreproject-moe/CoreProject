@@ -53,8 +53,7 @@ def get_character_info(
         "anilist_id",
     ]
     for id in id_lookups:
-        value = query_dict.pop(id, None)
-        if value:
+        if value := query_dict.pop(id, None):
             _query_ = Q()
             for position in value.split(","):
                 _query_ |= Q(**{f"{id}": int(position.strip())})

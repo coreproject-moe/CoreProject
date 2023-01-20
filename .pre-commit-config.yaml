@@ -86,8 +86,15 @@ repos:
             args: [--py311-plus]
     - repo: https://github.com/charliermarsh/ruff-pre-commit
       # Ruff version.
-      rev: "v0.0.225"
+      rev: "v0.0.227"
       hooks:
           - id: ruff
             # Respect `exclude` and `extend-exclude` settings.
-            args: ["--force-exclude"]
+            args:
+                [
+                    "--force-exclude",
+                    "--fix",
+                    "--respect-gitignore",
+                    "--exclude",
+                    "./android",
+                ]
