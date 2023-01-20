@@ -75,7 +75,6 @@ line-length = 92
 
 # Exclude a variety of commonly ignored directories.
 exclude = [
-    "migrations",
     ".bzr",
     ".direnv",
     ".eggs",
