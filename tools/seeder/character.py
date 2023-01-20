@@ -47,13 +47,15 @@ BACKEND_API_URL = "http://127.0.0.1:8000/api/v1/characters"
 
 
 async def command() -> None:
-    global JIKAN, KITSU, ANILIST, DATABASE_ID, EXECUTION_TIME, SUCCESSFUL_NAMES, SUCCESSFUL_KITSU_IDS, SUCCESSFUL_ANILIST_IDS
+    global JIKAN, KITSU, ANILIST
+    global EXECUTION_TIME
+    global SUCCESSFUL_KITSU_IDS, SUCCESSFUL_ANILIST_IDS
 
     retry_client = RetryClient(  # aiohttp-retry
         client_session=CachedSession(  # aiohttp-client-cache
             cache=RedisBackend(
                 CACHE_NAME,
-                expire_after=3600,
+                expire_after=10,
             )
         ),
         retry_options=ExponentialRetry(
@@ -425,8 +427,8 @@ async def populate_database(
 
             res = await session.post(BACKEND_API_URL, data=formdata)
             if res.status == 200:
-                SUCCESSFUL_KITSU_IDS.append(kitsu_data.get("kitsu_id", None))
-                SUCCESSFUL_ANILIST_IDS.append(anilist_data.get("anilist_id", None))
+                SUCCESSFUL_KITSU_IDS.append(kitsu_data.get("kitsu_id"))
+                SUCCESSFUL_ANILIST_IDS.append(anilist_data.get("anilist_id"))
             else:
                 print(await res.text())
                 raise Exception
@@ -439,7 +441,7 @@ async def populate_database(
         EXECUTION_TIME += (end_time - start_time).total_seconds()
 
         message = (
-            f"[{round(EXECUTION_TIME, 2)}]"
+            f"[{round(EXECUTION_TIME, 2):2f}]"
             " "
             f"Requested `character_info` for {character_number}"
             " | "
