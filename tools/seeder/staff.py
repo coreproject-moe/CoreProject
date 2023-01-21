@@ -398,8 +398,8 @@ def populate_database(
                         BytesIO(image.content).read(),
                     )
 
-            res = await session.post(BACKEND_API_URL, data=formdata)
-            if res.status == 200:
+            res = session.post(BACKEND_API_URL, data=formdata, files=file_data)
+            if res.status_code == 200:
                 if successful_mal_id := jikan_data.get("mal_id"):
                     SUCCESSFUL_JIKAN_IDS.append(successful_mal_id)
 
