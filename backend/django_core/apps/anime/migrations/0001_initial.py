@@ -6,6 +6,7 @@ import dynamic_filenames
 import django.contrib.postgres.fields.hstore
 import django.contrib.postgres.indexes
 from django.db import migrations, models
+from django.contrib.postgres.operations import HStoreExtension, BtreeGinExtension
 
 
 class Migration(migrations.Migration):
@@ -19,6 +20,8 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        HStoreExtension(),
+        BtreeGinExtension(),
         migrations.CreateModel(
             name="AnimeGenreModel",
             fields=[
@@ -31,9 +34,28 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("mal_id", models.IntegerField(unique=True)),
-                ("name", models.CharField(default="", max_length=50, unique=True)),
-                ("type", models.CharField(default="", max_length=50, unique=True)),
+                (
+                    "mal_id",
+                    models.IntegerField(
+                        unique=True,
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        default="",
+                        max_length=50,
+                        unique=True,
+                    ),
+                ),
+                (
+                    "type",
+                    models.CharField(
+                        default="",
+                        max_length=50,
+                        unique=True,
+                    ),
+                ),
             ],
             options={
                 "verbose_name": "Anime Genre",
@@ -51,9 +73,28 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("mal_id", models.IntegerField(unique=True)),
-                ("name", models.CharField(default="", max_length=50, unique=True)),
-                ("type", models.CharField(default="", max_length=50, unique=True)),
+                (
+                    "mal_id",
+                    models.IntegerField(
+                        unique=True,
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        default="",
+                        max_length=50,
+                        unique=True,
+                    ),
+                ),
+                (
+                    "type",
+                    models.CharField(
+                        default="",
+                        max_length=50,
+                        unique=True,
+                    ),
+                ),
             ],
             options={
                 "verbose_name": "Anime Theme",
@@ -71,13 +112,41 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("mal_id", models.IntegerField(null=True, unique=True)),
-                ("anilist_id", models.IntegerField(null=True, unique=True)),
-                ("kitsu_id", models.IntegerField(null=True, unique=True)),
-                ("name", models.CharField(max_length=1024, unique=True)),
+                (
+                    "mal_id",
+                    models.IntegerField(
+                        null=True,
+                        unique=True,
+                    ),
+                ),
+                (
+                    "anilist_id",
+                    models.IntegerField(
+                        null=True,
+                        unique=True,
+                    ),
+                ),
+                (
+                    "kitsu_id",
+                    models.IntegerField(
+                        null=True,
+                        unique=True,
+                    ),
+                ),
+                (
+                    "name",
+                    models.CharField(
+                        max_length=1024,
+                        unique=True,
+                    ),
+                ),
                 (
                     "name_japanese",
-                    models.CharField(blank=True, default="", max_length=1024),
+                    models.CharField(
+                        blank=True,
+                        default="",
+                        max_length=1024,
+                    ),
                 ),
                 (
                     "name_synonyms",
@@ -88,9 +157,28 @@ class Migration(migrations.Migration):
                         size=None,
                     ),
                 ),
-                ("source", models.CharField(blank=True, max_length=128, null=True)),
-                ("aired_from", models.DateTimeField(blank=True, null=True)),
-                ("aired_to", models.DateTimeField(blank=True, null=True)),
+                (
+                    "source",
+                    models.CharField(
+                        blank=True,
+                        max_length=128,
+                        null=True,
+                    ),
+                ),
+                (
+                    "aired_from",
+                    models.DateTimeField(
+                        blank=True,
+                        null=True,
+                    ),
+                ),
+                (
+                    "aired_to",
+                    models.DateTimeField(
+                        blank=True,
+                        null=True,
+                    ),
+                ),
                 (
                     "banner",
                     models.ImageField(
@@ -113,41 +201,92 @@ class Migration(migrations.Migration):
                         ),
                     ),
                 ),
-                ("synopsis", models.TextField(blank=True, null=True)),
-                ("background", models.TextField(blank=True, null=True)),
-                ("rating", models.CharField(blank=True, max_length=128, null=True)),
+                (
+                    "synopsis",
+                    models.TextField(
+                        blank=True,
+                        null=True,
+                    ),
+                ),
+                (
+                    "background",
+                    models.TextField(
+                        blank=True,
+                        null=True,
+                    ),
+                ),
+                (
+                    "rating",
+                    models.CharField(
+                        blank=True,
+                        max_length=128,
+                        null=True,
+                    ),
+                ),
                 (
                     "theme_openings",
                     django.contrib.postgres.fields.hstore.HStoreField(
-                        blank=True, default=dict
+                        blank=True,
+                        default=dict,
                     ),
                 ),
                 (
                     "theme_endings",
                     django.contrib.postgres.fields.hstore.HStoreField(
-                        blank=True, default=dict
+                        blank=True,
+                        default=dict,
                     ),
                 ),
                 ("updated", models.DateTimeField(auto_now_add=True)),
                 (
                     "characters",
-                    models.ManyToManyField(blank=True, to="characters.charactermodel"),
+                    models.ManyToManyField(
+                        blank=True,
+                        to="characters.charactermodel",
+                    ),
                 ),
                 (
                     "episodes",
-                    models.ManyToManyField(blank=True, to="episodes.episodemodel"),
+                    models.ManyToManyField(
+                        blank=True,
+                        to="episodes.episodemodel",
+                    ),
                 ),
-                ("genres", models.ManyToManyField(blank=True, to="anime.animegenremodel")),
+                (
+                    "genres",
+                    models.ManyToManyField(
+                        blank=True,
+                        to="anime.animegenremodel",
+                    ),
+                ),
                 (
                     "producers",
-                    models.ManyToManyField(blank=True, to="producers.producermodel"),
+                    models.ManyToManyField(
+                        blank=True,
+                        to="producers.producermodel",
+                    ),
                 ),
                 (
                     "recommendations",
-                    models.ManyToManyField(blank=True, to="anime.animemodel"),
+                    models.ManyToManyField(
+                        blank=True,
+                        to="anime.animemodel",
+                    ),
                 ),
-                ("studios", models.ManyToManyField(blank=True, to="studios.studiomodel")),
-                ("themes", models.ManyToManyField(blank=True, to="anime.animethememodel")),
+                (
+                    "studios",
+                    models.ManyToManyField(
+                        blank=True,
+                        to="studios.studiomodel",
+                    ),
+                ),
+                (
+                    "themes",
+                    models.ManyToManyField(
+                        blank=True,
+                        to="anime.animethememodel",
+                    ),
+                ),
             ],
             options={
                 "verbose_name": "Anime",
@@ -156,7 +295,11 @@ class Migration(migrations.Migration):
         migrations.AddIndex(
             model_name="animemodel",
             index=django.contrib.postgres.indexes.GinIndex(
-                fields=["name", "name_japanese", "name_synonyms"],
+                fields=[
+                    "name",
+                    "name_japanese",
+                    "name_synonyms",
+                ],
                 name="anime_anime_name_3b1808_gin",
             ),
         ),

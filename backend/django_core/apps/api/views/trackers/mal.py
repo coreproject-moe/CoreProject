@@ -12,14 +12,17 @@ router = Router()
 
 
 @router.get("/mal", response=MALGETSchema)
-def get_mal_info(request: HttpRequest):
+def get_mal_info(request: HttpRequest) -> MalModel:
     response = get_object_or_404(MalModel, user=request.auth)
     return response
 
 
 @router.post("/mal", response=MALGETSchema)
 @login_required
-def post_mal_info(request: HttpRequest, payload: MALPOSTSchema):
+def post_mal_info(
+    request: HttpRequest,
+    payload: MALPOSTSchema,
+) -> MalModel:
     instance, _ = MalModel.objects.update_or_create(
         user=request.auth,
         defaults={
