@@ -18,7 +18,7 @@ from aiohttp_retry import ExponentialRetry, RetryClient
 
 CHARACTER_LOCK_FILE_NAME = "Character.lock"
 
-CACHE_NAME = "characters"
+CACHE_NAME = "seeder"
 RETRY_STATUSES = [408, 429, 500, 502, 503, 504]
 
 EXECUTION_TIME: int = 0
