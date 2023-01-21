@@ -65,7 +65,7 @@ def get_staff_info(
 
 @router.post("", response=StaffSchema)
 def post_staff_info(
-    request,
+    request: HttpRequest,
     mal_id: int | None = Form(default=None),
     kitsu_id: int | None = Form(default=None),
     anilist_id: int | None = Form(default=None),

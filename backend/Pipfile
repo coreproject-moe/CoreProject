@@ -74,5 +74,6 @@ huey = "python ./django_core/manage.py run_huey"
 collectstatic = "python ./django_core/manage.py collectstatic --clear --link" # Dont duplicate copy files.
 ## Mypy
 mypy = "mypy . --enable-incomplete-feature=Unpack"
+
 [pipenv]
 allow_prereleases = true
