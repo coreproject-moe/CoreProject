@@ -1,22 +1,20 @@
-from typing import Self
-
 from django.contrib import admin
 from django.db.models.query import QuerySet
 from django.http import HttpRequest
 
-from ..models import EpisodeCommentModel
+from ..models.episode_comment import EpisodeCommentModel
 
 # Register your models here.
 
 
 @admin.register(EpisodeCommentModel)
-class EpisodeCommentAdmin(admin.ModelAdmin):
+class EpisodeCommentAdmin(admin.ModelAdmin[EpisodeCommentModel]):
     autocomplete_fields = ["user"]
     list_filters = ["user"]
     search_fields = ["user__username", "text"]
 
     def get_search_results(
-        self: Self,
+        self,
         request: HttpRequest,
         queryset: QuerySet[EpisodeCommentModel],
         search_term: str,

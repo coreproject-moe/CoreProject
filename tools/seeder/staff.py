@@ -21,7 +21,7 @@ from aiohttp_retry import ExponentialRetry, RetryClient
 
 STAFF_LOCK_FILE_NAME = "Staff.lock"
 
-CACHE_NAME = "staffs"
+CACHE_NAME = "seeder"
 RETRY_STATUSES = [408, 429, 500, 502, 503, 504]
 
 JIKAN: dict[str, list[dict[int, str]]] = {}

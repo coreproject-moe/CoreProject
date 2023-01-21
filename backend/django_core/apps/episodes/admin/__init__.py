@@ -6,7 +6,7 @@ from ..models import EpisodeModel
 
 
 @admin.register(EpisodeModel)
-class EpisodeAdmin(admin.ModelAdmin):
+class EpisodeAdmin(admin.ModelAdmin[EpisodeModel]):
     search_fields = ["episode_name"]
 
 
