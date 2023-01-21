@@ -30,7 +30,7 @@ def patch_individual_user_info(
     ),
     avatar_provider: AnyUrl = Form(...),
     avatar: UploadedFile = File(...),
-):
+) -> None:
     pass
 
 
