@@ -15,10 +15,7 @@ class AuthBearer(HttpBearer):
     ) -> CustomUser | AnonymousUser:
         try:
             token_data = Token.objects.get(token=token)
-            user: CustomUser = token_data.user
+            return token_data.user
 
         except Token.DoesNotExist:
-            user = AnonymousUser
-
-        finally:
-            return user
+            return AnonymousUser

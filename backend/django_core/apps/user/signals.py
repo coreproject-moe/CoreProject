@@ -1,5 +1,5 @@
 import inspect
-
+from typing import NoReturn
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.http import HttpRequest
@@ -9,7 +9,7 @@ from .utilities import get_client_ip, get_random_username_discriminator
 
 
 @receiver(pre_save, sender=CustomUser)
-def user_discriminator_handler(**kwargs):
+def user_discriminator_handler(**kwargs) -> NoReturn:
     instance: CustomUser = kwargs["instance"]
     if not instance.username_discriminator:
         instance.username_discriminator = get_random_username_discriminator(
@@ -18,9 +18,9 @@ def user_discriminator_handler(**kwargs):
 
 
 @receiver(pre_save, sender=CustomUser)
-def user_ip_handler(**kwargs):
+def user_ip_handler(**kwargs) -> NoReturn:
     # https://stackoverflow.com/questions/4721771/get-current-user-log-in-signal-in-django
-    request: HttpRequest = None
+    request: HttpRequest | None = None
     # Reversed is better than not doing reverse
     # Source : Trust me bro
     for frame_record in reversed(inspect.stack()):
