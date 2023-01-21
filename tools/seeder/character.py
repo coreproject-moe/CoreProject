@@ -419,7 +419,7 @@ def populate_database(
                 BytesIO(jikan_data["character_image"].read()),
             )
 
-            formdata.add_field("about", str(jikan_data["character_about"]))
+            formdata["about"] = str(jikan_data["character_about"])
 
             res = session.post(BACKEND_API_URL, data=formdata, files=file_data)
             if res.status_code == 200:
@@ -429,7 +429,7 @@ def populate_database(
                     SUCCESSFUL_ANILIST_IDS.append(successful_anilist_id)
 
             else:
-                print(res.text())
+                print(res.text)
                 raise Exception
 
             # Add 1 to `starting_number` on every successful request
