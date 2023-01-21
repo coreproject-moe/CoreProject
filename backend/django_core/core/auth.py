@@ -12,7 +12,7 @@ class AuthBearer(HttpBearer):
         self,
         request: HttpRequest,
         token: str,
-    ) -> Type[CustomUser | AnonymousUser]:
+    ) -> CustomUser | AnonymousUser:
         try:
             token_data = Token.objects.get(token=token)
             return token_data.user
