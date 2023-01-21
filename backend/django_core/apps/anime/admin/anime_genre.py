@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from ..models import AnimeGenreModel
+from ..models.anime_genre import AnimeGenreModel
 
 # Register your models here.
 

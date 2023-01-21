@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from ..models import AnimeThemeModel
+from ..models.anime_theme import AnimeThemeModel
 
 # Register your models here.
 

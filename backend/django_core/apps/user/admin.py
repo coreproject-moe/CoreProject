@@ -1,15 +1,15 @@
-from typing import Self
+from typing import Any, Type
 
 from django.contrib import admin
 from django.contrib.auth import get_user_model
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
-from django.db.models import Q
+from django.db.models import Q, QuerySet
 from django.utils.translation import gettext_lazy as _
-
+from django.http import HttpRequest
 from .forms import CustomUserChangeForm, CustomUserCreationForm
 from .models import CustomUser, Token
 
-USER_MODEL: CustomUser = get_user_model()
+USER_MODEL: Type[CustomUser] = get_user_model()
 
 
 class CustomUserAdmin(DjangoUserAdmin):
@@ -102,12 +102,17 @@ class CustomUserAdmin(DjangoUserAdmin):
 
     @admin.display(description="username")
     def get_username(
-        self: Self,
-        obj: USER_MODEL,
-    ) -> USER_MODEL:
+        self,
+        obj: CustomUser,
+    ) -> CustomUser:
         return obj
 
-    def get_search_results(self: Self, request, queryset, search_term):
+    def get_search_results(
+        self,
+        request: HttpRequest,
+        queryset: QuerySet[CustomUser],
+        search_term: str,
+    ) -> tuple[Any | QuerySet[CustomUser], bool]:
         queryset, may_have_duplicates = super().get_search_results(
             request,
             queryset,
@@ -115,7 +120,7 @@ class CustomUserAdmin(DjangoUserAdmin):
         )
 
         if search_term:
-            search_term = [
+            search_term_list = [
                 # Remove trailing whitespace
                 # We might have something like
                 # user = ['baseplate-admin ', ' baseplate-foot']
@@ -125,7 +130,8 @@ class CustomUserAdmin(DjangoUserAdmin):
                 for item in search_term.split(",")
             ]
             queryset = self.model.objects.get_username_with_discriminator().filter(
-                Q(username_with_discriminator__in=search_term) | Q(email__in=search_term)
+                Q(username_with_discriminator__in=search_term_list)
+                | Q(email__in=search_term_list)
             )
 
         return queryset, may_have_duplicates

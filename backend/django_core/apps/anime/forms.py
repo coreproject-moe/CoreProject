@@ -5,7 +5,7 @@ from django import forms
 from .models import AnimeModel
 
 
-class AnimeAdminModelForm(forms.ModelForm):
+class AnimeAdminModelForm(forms.ModelForm[AnimeModel]):
     theme_openings = HStoreFormField()
     theme_endings = HStoreFormField()
 
