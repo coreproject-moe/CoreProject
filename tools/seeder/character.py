@@ -128,15 +128,19 @@ async def command() -> None:
                             datetime.now()
                             +
                             timedelta(
-                                minutes=
+                                seconds=
                                     round(
                                         (
                                             ending_number
                                             -
                                             character_number
                                         )
-                                        /
-                                        60
+                                        *
+                                        (
+                                            EXECUTION_TIME
+                                            / 
+                                            starting_number
+                                        )
                                 )
                             )
                         )
@@ -427,8 +431,11 @@ async def populate_database(
 
             res = await session.post(BACKEND_API_URL, data=formdata)
             if res.status == 200:
-                SUCCESSFUL_KITSU_IDS.append(kitsu_data.get("kitsu_id"))
-                SUCCESSFUL_ANILIST_IDS.append(anilist_data.get("anilist_id"))
+                if successful_kitsu_id := kitsu_data.get("kitsu_id", None):
+                    SUCCESSFUL_KITSU_IDS.append(successful_kitsu_id)
+                if successful_anilist_id := anilist_data.get("anilist_id", None):
+                    SUCCESSFUL_ANILIST_IDS.append(successful_anilist_id)
+
             else:
                 print(await res.text())
                 raise Exception
