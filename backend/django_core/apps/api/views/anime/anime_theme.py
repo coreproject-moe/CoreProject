@@ -1,4 +1,4 @@
-from apps.anime.models import AnimeModel, AnimeThemeModel
+from apps.anime.models.anime_theme import AnimeModel, AnimeThemeModel
 from ninja import Router
 
 from django.http import HttpRequest

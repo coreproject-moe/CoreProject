@@ -1,4 +1,4 @@
-from apps.anime.models import AnimeThemeModel
+from apps.anime.models.anime_theme import AnimeThemeModel
 from ninja import ModelSchema
 
 

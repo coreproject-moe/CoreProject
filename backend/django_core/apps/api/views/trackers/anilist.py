@@ -12,14 +12,13 @@ router = Router()
 
 
 @router.get("/anilist", response=AnilistGETSchema)
-def get_anilist_info(request: HttpRequest):
+def get_anilist_info(request: HttpRequest) -> AnilistModel:
     response = get_object_or_404(AnilistModel, user=request.auth)
     return response
 
 
 @router.post("/anilist", response=AnilistGETSchema)
-@login_required
-def post_anilist_info(request: HttpRequest, payload: AnilistPOSTSchema):
+def post_anilist_info(request: HttpRequest, payload: AnilistPOSTSchema) -> AnilistModel:
     instance, _ = AnilistModel.objects.update_or_create(
         user=request.auth,
         defaults={
