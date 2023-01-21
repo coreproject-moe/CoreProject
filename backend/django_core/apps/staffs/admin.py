@@ -8,5 +8,5 @@ from .models import StaffModel
 
 
 @admin.register(StaffModel)
-class StaffModelAdmin(admin.ModelAdmin, DynamicArrayMixin):
+class StaffModelAdmin(admin.ModelAdmin[StaffModel], DynamicArrayMixin):
     pass

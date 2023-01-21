@@ -6,5 +6,5 @@ from ..models import AnimeGenreModel
 
 
 @admin.register(AnimeGenreModel)
-class AnimeGenreAdmin(admin.ModelAdmin):
+class AnimeGenreAdmin(admin.ModelAdmin[AnimeGenreModel]):
     search_fields = ["name"]

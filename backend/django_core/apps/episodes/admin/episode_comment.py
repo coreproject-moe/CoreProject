@@ -8,7 +8,7 @@ from ..models import EpisodeCommentModel
 
 
 @admin.register(EpisodeCommentModel)
-class EpisodeCommentAdmin(admin.ModelAdmin):
+class EpisodeCommentAdmin(admin.ModelAdmin[EpisodeCommentModel]):
     autocomplete_fields = ["user"]
     list_filters = ["user"]
     search_fields = ["user__username", "text"]

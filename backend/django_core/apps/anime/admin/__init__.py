@@ -9,7 +9,7 @@ from ..models import AnimeModel
 
 
 @admin.register(AnimeModel)
-class AnimeInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
+class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel], DynamicArrayMixin):
     form = AnimeAdminModelForm
 
     filter_horizontal = [
