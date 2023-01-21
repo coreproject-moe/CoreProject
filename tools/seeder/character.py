@@ -409,17 +409,17 @@ def populate_database(
 
             formdata["mal_id"] = str(starting_number)
             formdata["name"] = str(jikan_data["character_name"])
-            formdata["name_kanji"] = str(
-                jikan_data.get("character_name_kanji", "")
-                or kitsu_data.get("character_name_kanji", "")
-            )
+            if name_kanji := jikan_data.get(
+                "character_name_kanji", ""
+            ) or kitsu_data.get("character_name_kanji", ""):
+                formdata["name_kanji"] = name_kanji
 
             file_data["character_image"] = (
                 f"{character_number}.{jikan_data['image_url'].split('.')[-1]}",
                 BytesIO(jikan_data["character_image"].read()),
             )
-
-            formdata["about"] = str(jikan_data["character_about"])
+            if about := jikan_data.get("character_about", None):
+                formdata["about"] = about
 
             res = session.post(BACKEND_API_URL, data=formdata, files=file_data)
             if res.status_code == 200:
