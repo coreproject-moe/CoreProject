@@ -1,4 +1,3 @@
-from typing import Type
 
 from apps.user.models import CustomUser, Token
 from ninja.security import HttpBearer

@@ -1,4 +1,3 @@
-from typing import NoReturn, Self
 
 from django.apps import AppConfig
 

@@ -1,4 +1,4 @@
-from typing import Any, Type
+from typing import Any
 
 from django.contrib import admin
 from django.contrib.auth import get_user_model
@@ -9,7 +9,7 @@ from django.http import HttpRequest
 from .forms import CustomUserChangeForm, CustomUserCreationForm
 from .models import CustomUser, Token
 
-USER_MODEL: Type[CustomUser] = get_user_model()
+USER_MODEL: type[CustomUser] = get_user_model()
 
 
 class CustomUserAdmin(DjangoUserAdmin):
