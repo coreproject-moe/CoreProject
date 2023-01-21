@@ -4,7 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pyrate-limiter = {extras = ["redis"], version = "*"}
 humanize = "*"
 termcolor = "*"
 # HTTP Client
