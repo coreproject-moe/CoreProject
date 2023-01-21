@@ -13,7 +13,9 @@ class DjangoInstance(TypedDict):
 
 
 @receiver(pre_save, sender=CustomUser)
-def user_discriminator_handler(**kwargs: Unpack[DjangoInstance]) -> NoReturn:
+def user_discriminator_handler(
+    **kwargs: Unpack[DjangoInstance],
+) -> None:
     instance = kwargs["instance"]
     if not instance.username_discriminator:
         instance.username_discriminator = get_random_username_discriminator(
@@ -22,7 +24,9 @@ def user_discriminator_handler(**kwargs: Unpack[DjangoInstance]) -> NoReturn:
 
 
 @receiver(pre_save, sender=CustomUser)
-def user_ip_handler(**kwargs: Unpack[DjangoInstance]) -> NoReturn:
+def user_ip_handler(
+    **kwargs: Unpack[DjangoInstance],
+) -> None:
     # https://stackoverflow.com/questions/4721771/get-current-user-log-in-signal-in-django
     request: HttpRequest | None = None
     # Reversed is better than not doing reverse
