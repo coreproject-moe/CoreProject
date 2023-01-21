@@ -1,5 +1,5 @@
 from apps.anime.models import AnimeModel
-from apps.episodes.models import EpisodeTimestampModel
+from apps.episodes.models.episode_timestamp import EpisodeTimestampModel
 from ninja import Router
 
 from django.contrib.auth.decorators import login_required
