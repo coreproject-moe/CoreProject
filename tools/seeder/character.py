@@ -3,7 +3,6 @@ from io import BytesIO
 import json
 import os
 import textwrap
-from typing import cast
 
 from humanize import intcomma, naturaltime
 from termcolor import colored
@@ -136,7 +135,7 @@ def command() -> None:
                                         *
                                         (
                                             EXECUTION_TIME
-                                            / 
+                                            /
                                             starting_number
                                         )
                                 )
@@ -409,9 +408,9 @@ def populate_database(
 
             formdata["mal_id"] = str(starting_number)
             formdata["name"] = str(jikan_data["character_name"])
-            if name_kanji := jikan_data.get(
+            if name_kanji := jikan_data.get("character_name_kanji", "") or kitsu_data.get(
                 "character_name_kanji", ""
-            ) or kitsu_data.get("character_name_kanji", ""):
+            ):
                 formdata["name_kanji"] = name_kanji
 
             file_data["character_image"] = (

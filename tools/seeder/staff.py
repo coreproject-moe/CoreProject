@@ -1,4 +1,3 @@
-import asyncio
 from datetime import datetime, timedelta
 from io import BytesIO
 import json
@@ -136,7 +135,7 @@ def command() -> None:
                                         *
                                         (
                                             EXECUTION_TIME
-                                            / 
+                                            /
                                             starting_number
                                         )
                                 )
