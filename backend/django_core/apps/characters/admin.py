@@ -6,5 +6,5 @@ from .models import CharacterModel
 
 
 @admin.register(CharacterModel)
-class CharacterAdmin(admin.ModelAdmin):
+class CharacterAdmin(admin.ModelAdmin['CharacterModel']):
     pass
