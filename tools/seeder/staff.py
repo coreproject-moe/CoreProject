@@ -126,15 +126,19 @@ def command() -> None:
                             datetime.now()
                             +
                             timedelta(
-                                minutes=
+                                seconds=
                                     round(
                                         (
                                             ending_number
                                             -
                                             staff_number
                                         )
-                                        /
-                                        60
+                                        *
+                                        (
+                                            EXECUTION_TIME
+                                            / 
+                                            starting_number
+                                        )
                                 )
                             )
                         )
@@ -393,10 +397,15 @@ def populate_database(
                         f"{staff_number}.{image_url.split('.')[-1]}",
                         BytesIO(image.content).read(),
                     )
-            res = session.post(BACKEND_API_URL, data=formdata, files=file_data)
-            if res.status_code == 200:
-                SUCCESSFUL_JIKAN_IDS.append(jikan_data.get("mal_id"))
-                SUCCESSFUL_ANILIST_IDS.append(anilist_data.get("anilist_id"))
+
+            res = await session.post(BACKEND_API_URL, data=formdata)
+            if res.status == 200:
+                if successful_mal_id := jikan_data.get("mal_id"):
+                    SUCCESSFUL_JIKAN_IDS.append(successful_mal_id)
+
+                if successful_anilist_id := anilist_data.get("anilist_id", None):
+                    SUCCESSFUL_ANILIST_IDS.append(successful_anilist_id)
+
             else:
                 print(res.text)
                 raise Exception
