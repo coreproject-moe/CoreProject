@@ -1,7 +1,6 @@
 from apps.trackers.models import AnilistModel
 from ninja import Router
 
-from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
