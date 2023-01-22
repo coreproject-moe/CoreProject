@@ -1,7 +1,6 @@
 # BORKED
 
 from datetime import datetime, timedelta
-from io import BytesIO
 import json
 import os
 import textwrap
@@ -10,7 +9,6 @@ from humanize import intcomma, naturaltime
 from termcolor import colored
 
 
-from requests.sessions import Session
 from _session import session
 
 STUDIO_LOCK_FILE_NAME = "Studios.lock"
