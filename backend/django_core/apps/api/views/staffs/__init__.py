@@ -65,7 +65,7 @@ def get_staff_info(
 
 @router.post("", response=StaffSchema)
 def post_staff_info(
-    request,
+    request: HttpRequest,
     mal_id: int | None = Form(default=None),
     kitsu_id: int | None = Form(default=None),
     anilist_id: int | None = Form(default=None),
@@ -75,7 +75,7 @@ def post_staff_info(
     staff_image: UploadedFile | None = File(default=None),
     about: str | None = Form(default=None),
     alternate_names: list[str] = Form(default=None),
-):
+) -> StaffModel:
     kwargs = {
         "mal_id": mal_id,
         "kitsu_id": kitsu_id,
@@ -113,6 +113,6 @@ def post_staff_info(
 def get_individual_staff_info(
     request: HttpRequest,
     staff_id: str,
-):
+) -> StaffModel:
     queryset = get_object_or_404(StaffModel, pk=staff_id)
     return queryset

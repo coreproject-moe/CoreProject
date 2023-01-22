@@ -1,23 +1,19 @@
-# STATUS : BORKED
-# SOURCE : https://github.com/baseplate-admin/CoreProject/blob/03bbffbb911a82a9d87814b50a4c8279b539e9b7/backend/django_core/apps/staffs/management/commands/populate_staffs.py
-
-import asyncio
 from datetime import datetime, timedelta
 from io import BytesIO
 import json
 import os
 import textwrap
-from typing import Any, cast
-from aiohttp import FormData
+from typing import Any
 
 from humanize import intcomma, naturaltime
-from pyrate_limiter import Duration, Limiter, RedisBucket, RequestRate
 from termcolor import colored
 
-import aiohttp
-from aiohttp_client_cache.backends.redis import RedisBackend
-from aiohttp_client_cache.session import CachedSession
-from aiohttp_retry import ExponentialRetry, RetryClient
+from requests.sessions import Session
+from requests.adapters import HTTPAdapter
+from requests_cache import RedisCache  # type: ignore
+from requests_ratelimiter import RedisBucket
+from urllib3.util import Retry
+from _session import CachedLimiterSession
 
 STAFF_LOCK_FILE_NAME = "Staff.lock"
 
@@ -38,41 +34,37 @@ WARNING_LIST = []
 ERROR_LIST = []
 
 BACKEND_API_URL = "http://127.0.0.1:8000/api/v1/staffs"
-
-limiter = Limiter(
-    RequestRate(1, Duration.SECOND),
-    RequestRate(60, Duration.MINUTE),
-    bucket_class=RedisBucket,
-    bucket_kwargs={
-        "bucket_name": CACHE_NAME,
-    },
+retry_strategy = Retry(
+    total=10,
+    status_forcelist=RETRY_STATUSES,
 )
+adapter = HTTPAdapter(max_retries=retry_strategy)
 
 
-async def command() -> None:
+def command() -> None:
     global JIKAN, KITSU, ANILIST
     global EXECUTION_TIME
     global SUCCESSFUL_JIKAN_IDS, SUCCESSFUL_ANILIST_IDS
 
-    retry_client = RetryClient(  # aiohttp-retry
-        client_session=CachedSession(  # aiohttp-client-cache
-            cache=RedisBackend(
-                CACHE_NAME,
-                expire_after=10,
-            )
-        ),
-        retry_options=ExponentialRetry(
-            attempts=10,
-            max_timeout=100.00,
-            statuses=set(RETRY_STATUSES),
-        ),
+    session = CachedLimiterSession(
+        bucket_class=RedisBucket,
+        backend=RedisCache(),
+        # Undocumented ( pyrate-limiter )
+        bucket_kwargs={
+            "bucket_name": CACHE_NAME,
+        },
+        # https://docs.api.jikan.moe/#section/Information/Rate-Limiting
+        per_minute=60,
+        per_second=1,
+        # https://requests-cache.readthedocs.io/en/stable/user_guide/expiration.html
+        expire_after=360,
     )
-
-    session = cast(aiohttp.ClientSession, retry_client)
+    session.mount("http://", adapter)
+    session.mount("https://", adapter)
 
     starting_number = 1
     staff_number = 1
-    ending_number: int = await get_ending_number(session)
+    ending_number: int = get_ending_number(session)
 
     # Load JSON file and get data from it
     if os.path.exists(STAFF_LOCK_FILE_NAME):
@@ -133,15 +125,19 @@ async def command() -> None:
                             datetime.now()
                             +
                             timedelta(
-                                minutes=
+                                seconds=
                                     round(
                                         (
                                             ending_number
                                             -
                                             staff_number
                                         )
-                                        /
-                                        60
+                                        *
+                                        (
+                                            EXECUTION_TIME
+                                            /
+                                            starting_number
+                                        )
                                 )
                             )
                         )
@@ -154,46 +150,44 @@ async def command() -> None:
     print(welcome_message)
 
     # Magic starts here
-    await populate_database(
+    populate_database(
         session=session,
         starting_number=starting_number,
         staff_number=staff_number,
         ending_number=ending_number,
     )
 
-    await session.close()
+    session.close()
 
     # Remove lock file
     os.remove(STAFF_LOCK_FILE_NAME)
 
 
-@limiter.ratelimit("ending", delay=True)
-async def get_ending_number(
-    session: aiohttp.ClientSession,
+def get_ending_number(
+    session: Session,
 ) -> int:
     """
-    :param session: `aiohttp.Client` instance to get data
+    :param session: `requests.Session` instance to get data
     """
-    res = await session.get("https://kitsu.io/api/edge/people/")
-    data = await res.json()
+    res = session.get("https://kitsu.io/api/edge/people/")
+    data = res.json()
     return int(data["meta"]["count"])
 
 
-@limiter.ratelimit("kitsu", delay=True)
-async def get_staff_data_from_kitsu(
+def get_staff_data_from_kitsu(
     staff_number: int,
-    session: aiohttp.ClientSession,
+    session: Session,
 ) -> dict[str, str | None] | None:
     """
     :param staff_number: The id of the staff
-    :param session: `aiohttp.Client` instance to get data
+    :param session: `requests.Session` instance to get data
     """
-    res = await session.get(f"https://kitsu.io/api/edge/people/{staff_number}")
-    res_data = await res.json()
+    res = session.get(f"https://kitsu.io/api/edge/people/{staff_number}")
+    res_data = res.json()
 
     returnable_data = {}
 
-    if res.status == 200:
+    if res.status_code == 200:
         try:
             data = res_data["data"]
             returnable_data = {
@@ -212,28 +206,27 @@ async def get_staff_data_from_kitsu(
     return returnable_data
 
 
-@limiter.ratelimit("jikan", delay=True)
-async def get_staff_data_from_jikan(
+def get_staff_data_from_jikan(
     staff_name: int,
     staff_number: int,
-    session: aiohttp.ClientSession,
+    session: Session,
 ) -> dict[str, str | None | BytesIO] | None:
     """
     :param staff_number: The id of staff
     :param staff_name: The name of staff
-    :param session: `aiohttp.Client` instance to get data
+    :param session: `requests.Session` instance to get data
     """
     returnable_data: dict[Any, Any] = {}
     if not staff_name:
         return returnable_data
 
     # In jikan staff = people
-    res = await session.get(f"https://api.jikan.moe/v4/people/?q={staff_name}")
-    res_data = await res.json()
+    res = session.get(f"https://api.jikan.moe/v4/people/?q={staff_name}")
+    res_data = res.json()
 
     returnable_data = {}
 
-    if res.status == 200:
+    if res.status_code == 200:
         for data in res_data["data"]:
             # If the MyAnimeList ID exists in database
             # Skip to next iteration
@@ -256,16 +249,15 @@ async def get_staff_data_from_jikan(
     return returnable_data
 
 
-@limiter.ratelimit("kitsu", delay=True)
-async def get_staff_data_from_anilist(
+def get_staff_data_from_anilist(
     staff_name: str,
     staff_number: int,
-    session: aiohttp.ClientSession,
+    session: Session,
 ) -> dict[str, str | None] | None:
     """
     :param staff_number: The id of the staff
     :param staff_name: The name of the staff
-    :param session: `aiohttp.Client instance to get data
+    :param session: `requests.Session instance to get data
     """
     returnable_data = {}
     if not staff_name:
@@ -310,10 +302,10 @@ async def get_staff_data_from_anilist(
             "sort": "SEARCH_MATCH",
         },
     }
-    res = await session.post(url="https://graphql.anilist.co/", json=query)
-    res_data = await res.json()
+    res = session.post(url="https://graphql.anilist.co/", json=query)
+    res_data = res.json()
 
-    if res_data and res.status == 200:
+    if res_data and res.status_code == 200:
         for data in res_data["data"]["Page"]["staff"]:
             # If the Anilist ID exists in database
             # Skip to next iteration
@@ -340,8 +332,8 @@ async def get_staff_data_from_anilist(
     return returnable_data
 
 
-async def populate_database(
-    session: aiohttp.ClientSession,
+def populate_database(
+    session: Session,
     staff_number: int,
     starting_number: int,
     ending_number: int,
@@ -351,45 +343,45 @@ async def populate_database(
     while staff_number < ending_number:
         start_time = datetime.now()
 
-        kitsu_data = await get_staff_data_from_kitsu(
+        kitsu_data = get_staff_data_from_kitsu(
             staff_number=staff_number,
             session=session,
         )
 
         if kitsu_data:
-            jikan_data = await get_staff_data_from_jikan(
+            jikan_data = get_staff_data_from_jikan(
                 staff_number=staff_number,
                 staff_name=kitsu_data["staff_name"],
                 session=session,
             )
-            anilist_data = await get_staff_data_from_anilist(
+            anilist_data = get_staff_data_from_anilist(
                 staff_number=staff_number,
                 staff_name=kitsu_data["staff_name"],
                 session=session,
             )
 
-            formdata = FormData()
-            formdata.add_field("name", kitsu_data["staff_name"])
-            formdata.add_field("kitsu_id", str(staff_number))
-
+            formdata = {}
+            formdata["name"] = kitsu_data["staff_name"]
+            formdata["kitsu_id"] = str(staff_number)
+            file_data = {}
             if mal_id := jikan_data.get("mal_id", None):
-                formdata.add_field("mal_id", str(mal_id))
+                formdata["mal_id"] = str(mal_id)
 
             if anilist_id := anilist_data.get("anilist_id", None):
-                formdata.add_field("anilist_id", str(anilist_id))
+                formdata["anilist_id"] = str(anilist_id)
 
             if given_name := jikan_data.get("given_name", None):
-                formdata.add_field("given_name", given_name)
+                formdata["given_name"] = given_name
 
             if family_name := jikan_data.get("family_name", None):
-                formdata.add_field("family_name", family_name)
+                formdata["family_name"] = family_name
 
             if about := jikan_data.get("about", None):
-                formdata.add_field("about", about)
+                formdata["about"] = about
 
             # M2M Alternate name field
             if alternate_names := jikan_data.get("alternate_names", None):
-                formdata.add_field("alternate_names", ",".join(alternate_names))
+                formdata["alternate_names"] = ",".join(alternate_names)
 
             if jikan_data:
                 # Try to get webp image first
@@ -399,19 +391,20 @@ async def populate_database(
                 except KeyError:
                     image_url = jikan_data["images"]["jpg"]["image_url"]
                 finally:
-                    image = await session.get(image_url)
-                    formdata.add_field(
-                        "staff_image",
-                        BytesIO(await image.read()).read(),
-                        filename=f"{staff_number}.{image_url.split('.')[-1]}",
+                    image = session.get(image_url)
+                    file_data["staff_image"] = (
+                        f"{staff_number}.{image_url.split('.')[-1]}",
+                        BytesIO(image.content).read(),
                     )
+            res = session.post(BACKEND_API_URL, data=formdata, files=file_data)
+            if res.status_code == 200:
+                if jikan_id := jikan_data.get("mal_id"):
+                    SUCCESSFUL_JIKAN_IDS.append(jikan_id)
+                if anilist_id := anilist_data.get("anilist_id", None):
+                    SUCCESSFUL_ANILIST_IDS.append(anilist_id)
 
-            res = await session.post(BACKEND_API_URL, data=formdata)
-            if res.status == 200:
-                SUCCESSFUL_JIKAN_IDS.append(jikan_data.get("mal_id"))
-                SUCCESSFUL_ANILIST_IDS.append(anilist_data.get("anilist_id"))
             else:
-                print(await res.text())
+                print(res.text)
                 raise Exception
 
             # Add 1 to `starting_number` on every successful request
@@ -470,4 +463,4 @@ async def populate_database(
 
 
 if __name__ == "__main__":
-    asyncio.run(command())
+    command()

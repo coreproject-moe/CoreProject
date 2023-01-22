@@ -1,5 +1,5 @@
 from apps.anime.models import AnimeModel
-from apps.episodes.models import EpisodeCommentModel
+from apps.episodes.models.episode_comment import EpisodeCommentModel
 from ninja import Router
 
 from django.contrib.auth.decorators import login_required
