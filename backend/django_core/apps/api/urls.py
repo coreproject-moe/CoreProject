@@ -179,5 +179,8 @@ user_router.add_router(
 
 
 urlpatterns = [
-    path("v1/", api.urls),
+    path(
+        "v1/",
+        api.urls,
+    ),
 ]
