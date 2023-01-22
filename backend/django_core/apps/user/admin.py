@@ -7,11 +7,12 @@ from django.db.models import Q, QuerySet
 from django.utils.translation import gettext_lazy as _
 from django.http import HttpRequest
 from .forms import CustomUserChangeForm, CustomUserCreationForm
-from .models import CustomUser, Token
+from .models import CustomUser
 
 USER_MODEL: type[CustomUser] = get_user_model()
 
 
+@admin.register(CustomUser)
 class CustomUserAdmin(DjangoUserAdmin):
     model = USER_MODEL
     add_form = CustomUserCreationForm
@@ -137,12 +138,8 @@ class CustomUserAdmin(DjangoUserAdmin):
         return queryset, may_have_duplicates
 
 
-admin.site.register(get_user_model(), CustomUserAdmin)
-
 # MoneyPatch
 # https://stackoverflow.com/questions/6191662/django-admin-login-form-overriding-max-length-failing
 from django.contrib.auth.forms import AuthenticationForm  # noqa
 
 AuthenticationForm.base_fields["username"].label = "Email | Username (with discriminator) "
-
-admin.site.register(Token)
