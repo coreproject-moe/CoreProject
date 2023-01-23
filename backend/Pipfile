@@ -14,7 +14,7 @@ django-dynamic-filenames = "*"
 # 3rd Party ( Middlewares )
 django_cleanup = "*"
 django_cors_headers = "*"
-# 3rd Party ( ENV )
+# 3rd Party ( Environmental Variables )
 python_dotenv = "*"
 # 3rd Party ( WhiteNoise )
 whitenoise = {extras = ["brotli"], version = "*"}
@@ -24,10 +24,11 @@ redis = {extras=['hiredis'], version=">=4"}
 # 3rd Party ( Better admin widgets )
 django-better-admin-arrayfield = "*"
 django-admin-hstore-widget = ">=1.2.1" # https://github.com/PokaInc/django-admin-hstore-widget/pull/25
+# 3rd Party ( Model Fields )
+django-colorfield = "*"
 # Rest framework
 django_ninja = "*"
 pydantic = {extras = ["email"], version = "*"}
-# https://github.com/vitalik/django-ninja/issues/305
 # ===================================================
 httpx = {extras=['http2','brotli'],version="*"}
 # Application servers
@@ -35,7 +36,10 @@ gunicorn = {extras = ["setproctile"], version = "*"}
 uvicorn = '*'
 # Typing support
 django-stubs-ext = "*"
-django-colorfield = "*"
+# ===================================================
+# Machine Learning
+numpy = "*"
+scikit-learn = "*"
 
 [dev-packages]
 ## Watchfiles
