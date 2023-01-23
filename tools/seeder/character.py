@@ -378,8 +378,10 @@ def populate_database(
 
             formdata["mal_id"] = str(starting_number)
             formdata["name"] = str(jikan_data["character_name"])
-            if name_kanji := jikan_data.get("character_name_kanji", "") or kitsu_data.get(
-                "character_name_kanji", ""
+
+            if name_kanji := (
+                jikan_data.get("character_name_kanji", None)
+                or kitsu_data.get("character_name_kanji", None)
             ):
                 formdata["name_kanji"] = name_kanji
 
