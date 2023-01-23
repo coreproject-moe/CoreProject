@@ -5,6 +5,7 @@ from core.storages import OverwriteStorage
 from django.contrib.postgres.fields import HStoreField
 from django.contrib.postgres.indexes import GinIndex
 from django.db import models
+from colorfield.fields import ColorField
 
 from ...characters.models import CharacterModel
 from ...episodes.models import EpisodeModel
@@ -47,6 +48,8 @@ class AnimeModel(models.Model):
     source = models.CharField(max_length=128, blank=True, null=True)
     aired_from = models.DateTimeField(blank=True, null=True)
     aired_to = models.DateTimeField(blank=True, null=True)
+
+    # Image fields
     banner = models.ImageField(
         storage=OverwriteStorage(),
         upload_to=banner_upload_pattern,
@@ -61,6 +64,10 @@ class AnimeModel(models.Model):
         blank=True,
         null=True,
     )
+    # Image field nearest color
+    banner_background_color = ColorField(null=True, blank=True)
+    cover_background_color = ColorField(null=True, blank=True)
+
     synopsis = models.TextField(blank=True, null=True)
     background = models.TextField(blank=True, null=True)
     rating = models.CharField(max_length=50, blank=True, null=True)

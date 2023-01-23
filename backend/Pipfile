@@ -35,7 +35,7 @@ gunicorn = {extras = ["setproctile"], version = "*"}
 uvicorn = '*'
 # Typing support
 django-stubs-ext = "*"
-
+django-colorfield = "*"
 
 [dev-packages]
 ## Watchfiles

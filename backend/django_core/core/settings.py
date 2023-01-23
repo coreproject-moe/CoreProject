@@ -68,6 +68,8 @@ INSTALLED_APPS = [
     # 3rd party Django stuff
     "django_cleanup.apps.CleanupConfig",
     "huey.contrib.djhuey",
+    # 3rd Party Models
+    "colorfield",
     # 3rd party adminpanel
     "django_better_admin_arrayfield",
     "django_admin_hstore_widget",
