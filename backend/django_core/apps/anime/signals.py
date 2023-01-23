@@ -13,4 +13,4 @@ class DjangoInstance(TypedDict):
 def user_discriminator_handler(
     **kwargs: Unpack[DjangoInstance],
 ) -> None:
-    instance = kwargs["instance"]
+    kwargs["instance"]
