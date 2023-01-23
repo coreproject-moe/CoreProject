@@ -1,4 +1,4 @@
-from core.auth import AuthBearer
+from ...auth import AuthBearer
 from ninja import File, Form, Router, UploadedFile
 from pydantic import AnyUrl, EmailStr
 

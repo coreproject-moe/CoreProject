@@ -9,16 +9,10 @@ from humanize import intcomma, naturaltime
 from termcolor import colored
 
 from requests.sessions import Session
-from requests.adapters import HTTPAdapter
-from requests_cache import RedisCache  # type: ignore
-from requests_ratelimiter import RedisBucket
-from urllib3.util import Retry
-from _session import CachedLimiterSession
+
+from _session import session
 
 STAFF_LOCK_FILE_NAME = "Staff.lock"
-
-CACHE_NAME = "seeder"
-RETRY_STATUSES = [408, 429, 500, 502, 503, 504]
 
 JIKAN: dict[str, list[dict[int, str]]] = {}
 KITSU: dict[str, list[int]] = {}
@@ -34,33 +28,12 @@ WARNING_LIST = []
 ERROR_LIST = []
 
 BACKEND_API_URL = "http://127.0.0.1:8000/api/v1/staffs"
-retry_strategy = Retry(
-    total=10,
-    status_forcelist=RETRY_STATUSES,
-)
-adapter = HTTPAdapter(max_retries=retry_strategy)
 
 
 def command() -> None:
     global JIKAN, KITSU, ANILIST
     global EXECUTION_TIME
     global SUCCESSFUL_JIKAN_IDS, SUCCESSFUL_ANILIST_IDS
-
-    session = CachedLimiterSession(
-        bucket_class=RedisBucket,
-        backend=RedisCache(),
-        # Undocumented ( pyrate-limiter )
-        bucket_kwargs={
-            "bucket_name": CACHE_NAME,
-        },
-        # https://docs.api.jikan.moe/#section/Information/Rate-Limiting
-        per_minute=60,
-        per_second=1,
-        # https://requests-cache.readthedocs.io/en/stable/user_guide/expiration.html
-        expire_after=360,
-    )
-    session.mount("http://", adapter)
-    session.mount("https://", adapter)
 
     starting_number = 1
     staff_number = 1
