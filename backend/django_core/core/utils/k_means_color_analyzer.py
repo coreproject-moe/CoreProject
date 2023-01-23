@@ -127,12 +127,12 @@ class KMeansColorAnalyzer:
             plt.imshow(artwork)
 
             plt.subplot(1, 3, 2)
-            plt.title("k = {}".format(k))
+            plt.title(f"k = {k}")
             plt.axis("off")
             plt.imshow(bar)
 
             plt.subplot(1, 3, 3)
-            plt.title("Color {}".format(square[0][0]))
+            plt.title(f"Color {square[0][0]}")
             plt.axis("off")
             plt.imshow(square)
             plt.tight_layout()
