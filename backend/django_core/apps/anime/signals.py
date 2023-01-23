@@ -19,21 +19,25 @@ def banner_background_color_handler(
     instance = kwargs["instance"]
 
     # Set Background Banner Image Color
-    if instance_banner_backgroud_image := getattr(instance, "banner", None):
-        banner_background_image = Image.open(instance_banner_backgroud_image)
+    if (
+        instance_banner_background_image := getattr(instance, "banner", None)
+    ) and not instance.banner_background_color:
+        banner_background_image = Image.open(instance_banner_background_image)
         banner_background_image_numpy_array = numpy.array(banner_background_image)
         set_field_brightness(
             instance.pk,
             "banner_background_color",
             banner_background_image_numpy_array,
-        )()
+        )
 
     # Set Background Cover Image Color
-    if instance_cover_background_image := getattr(instance, "cover", None):
+    if (
+        instance_cover_background_image := getattr(instance, "cover", None)
+    ) and not instance.cover_background_color:
         cover_background_image = Image.open(instance_cover_background_image)
         cover_background_image_numpy_array = numpy.array(cover_background_image)
         set_field_brightness(
             instance.pk,
             "cover_background_color",
             cover_background_image_numpy_array,
-        )()
+        )

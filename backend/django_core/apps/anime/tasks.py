@@ -3,9 +3,6 @@ from .models import AnimeModel
 from core.utils.rgb_to_hex import rgb_to_hex
 from core.utils.k_means_color_analyzer import KMeansColorAnalyzer
 from numpy.typing import NDArray
-import logging
-
-logger = logging.getLogger(__name__)
 
 
 @db_task()
@@ -26,4 +23,4 @@ def set_field_brightness(
         ),
     )
     instance.save()
-    logger.info(f"Set color for | AnimeModel = {pk}")
+    print(f"Set color for | AnimeModel = {pk}")
