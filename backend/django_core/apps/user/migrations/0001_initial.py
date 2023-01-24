@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
                     "is_superuser",
                     models.BooleanField(
                         default=False,
-                        help_text="Designates that this user has all permissions without explicitly assigning them.",
+                        help_text="Designates that this user has all permissions without explicitly assigning them.",  # noqa
                         verbose_name="superuser status",
                     ),
                 ),
@@ -62,7 +62,7 @@ class Migration(migrations.Migration):
                         error_messages={
                             "unique": "A user with that username already exists."
                         },
-                        help_text="Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
+                        help_text="Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",  # noqa
                         max_length=150,
                         validators=[apps.user.validators.username.username_validator],
                         verbose_name="username",
@@ -80,7 +80,7 @@ class Migration(migrations.Migration):
                     "email",
                     models.EmailField(
                         blank=True,
-                        help_text="Required. A valid email with a valid domain",
+                        help_text="Required. A valid email with a valid domain",  # noqa
                         max_length=254,
                         unique=True,
                         verbose_name="email address",
