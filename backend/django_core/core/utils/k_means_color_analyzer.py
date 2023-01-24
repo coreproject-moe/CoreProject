@@ -138,7 +138,7 @@ class KMeansColorAnalyzer:
             plt.tight_layout()
 
             plt.plot()
-            plt.show(block=False)
+            plt.show(block=True)
 
         return best_color[0], best_color[1], best_color[2]
 
