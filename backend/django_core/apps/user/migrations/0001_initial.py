@@ -165,7 +165,12 @@ class Migration(migrations.Migration):
                 "verbose_name": "user",
                 "verbose_name_plural": "users",
                 "db_table": "user",
-                "unique_together": {("username", "username_discriminator")},
+                "unique_together": {
+                    (
+                        "username",
+                        "username_discriminator",
+                    ),
+                },
             },
         ),
         migrations.CreateModel(
@@ -184,7 +189,9 @@ class Migration(migrations.Migration):
                     "token",
                     models.CharField(
                         default=functools.partial(
-                            django.utils.crypto.get_random_string, *(16,), **{}
+                            django.utils.crypto.get_random_string,
+                            *(16,),
+                            **{},
                         ),
                         editable=False,
                         max_length=16,
