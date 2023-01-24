@@ -557,6 +557,25 @@ files = [
 ]
 
 [[package]]
+name = "django-advanced-filters"
+version = "2.0.0"
+description = "A Django application for advanced admin filters"
+category = "main"
+optional = false
+python-versions = ">=3.6"
+files = []
+develop = false
+
+[package.extras]
+test = ["coveralls", "factory-boy (==2.12.0)", "pycodestyle (==2.5.0)", "pytest-cov", "pytest-django (==3.9.0)"]
+
+[package.source]
+type = "git"
+url = "https://github.com/baseplate-admin/django-advanced-filters.git"
+reference = "HEAD"
+resolved_reference = "ab093651c23e35fd7e9e67202710142dc84b7297"
+
+[[package]]
 name = "django-better-admin-arrayfield"
 version = "1.4.2"
 description = "Better ArrayField widget for admin"
@@ -1938,4 +1957,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "2d65da6497b3b81889e56fcff143d0a1987afd025b5299b1198408e5a0221a61"
+content-hash = "53af1c6ddd17f974d9bf05266012767a323b771f8ca902e7ad1199bb9b392743"

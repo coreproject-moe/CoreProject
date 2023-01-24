@@ -45,6 +45,7 @@ django-stubs-ext = "*"
 # Machine Learning
 numpy = "*"
 scikit-learn = "*"
+django-advanced-filters = {git = "https://github.com/baseplate-admin/django-advanced-filters.git"}
 
 
 [tool.poetry.group.dev.dependencies]
