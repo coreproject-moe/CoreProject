@@ -24,6 +24,12 @@ updates:
     # Frontend
     # =========
     - package-ecosystem: npm
+      directory: /frontend/AnimeCore/
+      schedule:
+          interval: daily
+      open-pull-requests-limit: 100
+
+    - package-ecosystem: npm
       directory: /frontend/User/
       schedule:
           interval: daily
