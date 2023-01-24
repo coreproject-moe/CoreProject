@@ -1101,7 +1101,6 @@
         },
         "ruff": {
             "hashes": [
-
                 "sha256:089c16bdfef873361328d22e9ef0dd6fd20566962d23661db3493f7e87ca5aed",
                 "sha256:0ca593bb41c9ca363ed24c8985ae65faf483fc1f6831e9ca5dc5383f87737b2e",
                 "sha256:1aff23f080904003b664df97e301fe59714552b3c2c7e7213407547186be1618",
@@ -1121,7 +1120,6 @@
             ],
             "index": "pypi",
             "version": "==0.0.231"
-
         },
         "sqlparse": {
             "hashes": [
