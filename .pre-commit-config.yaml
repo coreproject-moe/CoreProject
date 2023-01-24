@@ -92,9 +92,10 @@ repos:
             # Respect `exclude` and `extend-exclude` settings.
             args:
                 [
-                    "--force-exclude",
                     "--fix",
                     "--respect-gitignore",
                     "--exclude",
                     "./android",
+                    "--exclude",
+                    "./tools",
                 ]
