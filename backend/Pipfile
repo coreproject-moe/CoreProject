@@ -59,6 +59,8 @@ mypy = "*"
 django_stubs = {extras = ["compatible_mypy"], version = "*"}
 # Types
 types_redis = "*"
+# MatplotLib
+matplotlib = "*"
 
 [requires]
 python_version = "3.11"

@@ -5,13 +5,16 @@ from core.utils.k_means_color_analyzer import KMeansColorAnalyzer
 from numpy.typing import NDArray
 
 
+SHOW_PLOT = False
+
+
 @db_task()
 def set_field_brightness(
     pk: int,
     field_name: str,
     image: NDArray,
 ) -> None:
-    rgb_tuple = KMeansColorAnalyzer(image).best_color()
+    rgb_tuple = KMeansColorAnalyzer(image).best_color(plot=SHOW_PLOT)
     instance = AnimeModel.objects.get(pk=pk)
     setattr(
         instance,
