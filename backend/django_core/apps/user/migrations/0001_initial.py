@@ -33,10 +33,20 @@ class Migration(migrations.Migration):
                         verbose_name="ID",
                     ),
                 ),
-                ("password", models.CharField(max_length=128, verbose_name="password")),
+                (
+                    "password",
+                    models.CharField(
+                        max_length=128,
+                        verbose_name="password",
+                    ),
+                ),
                 (
                     "last_login",
-                    models.DateTimeField(blank=True, null=True, verbose_name="last login"),
+                    models.DateTimeField(
+                        blank=True,
+                        null=True,
+                        verbose_name="last login",
+                    ),
                 ),
                 (
                     "is_superuser",
@@ -80,7 +90,7 @@ class Migration(migrations.Migration):
                     "is_staff",
                     models.BooleanField(
                         default=False,
-                        help_text="Designates whether the user can log into this admin site.",
+                        help_text="Designates whether the user can log into this admin site.",  # noqa
                         verbose_name="staff status",
                     ),
                 ),
@@ -88,7 +98,7 @@ class Migration(migrations.Migration):
                     "is_active",
                     models.BooleanField(
                         default=True,
-                        help_text="Designates whether this user should be treated as active. Unselect this instead of deleting accounts.",
+                        help_text="Designates whether this user should be treated as active. Unselect this instead of deleting accounts.",  # noqa
                         verbose_name="active",
                     ),
                 ),
@@ -96,7 +106,7 @@ class Migration(migrations.Migration):
                     "username_discriminator",
                     models.BigIntegerField(
                         blank=True,
-                        help_text="Optional. 4 characters or fewer. If not provided a random `username_discriminator` will be selected.",
+                        help_text="Optional. 4 characters or fewer. If not provided a random `username_discriminator` will be selected.",  # noqa
                         null=True,
                         validators=[
                             django.core.validators.MaxValueValidator(36),
