@@ -95,6 +95,5 @@ repos:
                     '--fix',
                     '--respect-gitignore',
                     '--exclude',
-                    './android',
-                    './tools',
+                    './android ./tools',
                 ]
