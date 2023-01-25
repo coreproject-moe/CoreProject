@@ -7,7 +7,7 @@ from colorthief import ColorThief
 
 
 @db_task()
-def set_field_brightness(
+def set_field_color(
     pk: int,
     field_name: str,
     file: BinaryIO,
