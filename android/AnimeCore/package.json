@@ -10,7 +10,7 @@
     },
     "dependencies": {
         "@tailwindcss/typography": "^0.5.9",
-        "daisyui": "^2.48.0",
+        "daisyui": "^2.49.0",
         "expo": "~47.0.13",
         "expo-font": "^11.0.1",
         "expo-splash-screen": "~0.17.5",
