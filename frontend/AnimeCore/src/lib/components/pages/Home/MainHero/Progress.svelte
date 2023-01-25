@@ -21,7 +21,7 @@
     });
 
     timer.on("targetAchieved", () => {
-        dispatch("targetAchieved");
+        // dispatch("targetAchieved");
     });
 
     timer.on("secondTenthsUpdated", () => {

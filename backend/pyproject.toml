@@ -42,9 +42,7 @@ uvicorn = '*'
 # Typing support
 django-stubs-ext = "*"
 # ===================================================
-# Machine Learning
-numpy = "*"
-scikit-learn = "*"
+colorthief = "^0.2.1"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -65,8 +63,6 @@ mypy = "*"
 django_stubs = {extras = ["compatible_mypy"], version = "*"}
 # Types
 types_redis = "*"
-# PlotLib
-matplotlib = "*"
 # Task Runner
 poethepoet = "^0.18.1"
 
