@@ -1,6 +1,5 @@
 from django_better_admin_arrayfield.models.fields import ArrayField
 from dynamic_filenames import FilePattern
-from core.storages import OverwriteStorage
 
 from django.contrib.postgres.fields import HStoreField
 from django.contrib.postgres.indexes import GinIndex
@@ -51,14 +50,12 @@ class AnimeModel(models.Model):
 
     # Image fields
     banner = models.ImageField(
-        storage=OverwriteStorage(),
         upload_to=banner_upload_pattern,
         default=None,
         blank=True,
         null=True,
     )
     cover = models.ImageField(
-        storage=OverwriteStorage(),
         upload_to=cover_upload_pattern,
         default=None,
         blank=True,

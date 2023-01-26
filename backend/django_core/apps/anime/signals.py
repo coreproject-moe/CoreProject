@@ -19,19 +19,19 @@ def banner_background_color_handler(
     # Set Background Banner Image Color
     if (
         instance_banner_background_image := getattr(instance, "banner", None)
-    ) and not hasattr(instance, "banner_background_color"):
-        set_field_color(
+    ) and not instance.banner_background_color:
+        set_field_color.delay(
             instance.pk,
             "banner_background_color",
-            instance_banner_background_image,
+            "banner",
         )
 
     # Set Background Cover Image Color
     if (
         instance_cover_background_image := getattr(instance, "cover", None)
-    ) and not hasattr(instance, "cover_background_color"):
-        set_field_color(
+    ) and not instance.cover_background_color:
+        set_field_color.delay(
             instance.pk,
             "cover_background_color",
-            instance_cover_background_image,
+            "cover",
         )
