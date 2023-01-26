@@ -1,6 +1,5 @@
 from .models import AnimeModel
 from core.utils.rgb_to_hex import rgb_to_hex
-from typing import cast
 from colorthief import ColorThief
 from celery import shared_task
 
