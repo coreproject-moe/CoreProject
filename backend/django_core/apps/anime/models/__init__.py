@@ -14,8 +14,8 @@ from ...studios.models import StudioModel
 from .anime_genre import AnimeGenreModel
 from .anime_theme import AnimeThemeModel
 
-cover_upload_pattern = FilePattern(filename_pattern="/cover/{uuid:s}{ext}")
-banner_upload_pattern = FilePattern(filename_patten="/banner/{uuid:s}{ext}")
+cover_upload_pattern = FilePattern(filename_pattern="cover/{uuid:s}{ext}")
+banner_upload_pattern = FilePattern(filename_patten="banner/{uuid:s}{ext}")
 
 # Create your models here.
 
