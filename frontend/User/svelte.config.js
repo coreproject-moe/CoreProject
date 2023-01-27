@@ -9,39 +9,39 @@ const is_node = process.env.BUILD_NODE_ENV ?? false;
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-    // Consult https://github.com/sveltejs/svelte-preprocess
-    // for more information about preprocessors
-    preprocess: [
-        preprocess({
-            style: 'postcss',
-            postcss: true
-        })
-    ],
-    kit: {
-        appDir: 'svelte__user',
-        adapter: is_static
-        ? static_adapter({
-            fallback: 'app.html',
-            precompress: false,
-            strict: true
-        })
-        : is_node
-        ? node_adapter({
-            precompress: false
-        })
-        : vercel({
-            // an array of dependencies that esbuild should treat
-            // as external when bundling functions
-            external: []
-        }),
-        alias: {
-            $hooks: path.resolve('./src/hooks'),
-            $components: path.resolve('./src/lib/components'),
-            $icons: path.resolve('./src/lib/icons'),
-            $kaomoji: path.resolve('./src/lib/kaomoji'),
-            $error: path.resolve('./src/lib/components/errors')
-        }
-    }
+	// Consult https://github.com/sveltejs/svelte-preprocess
+	// for more information about preprocessors
+	preprocess: [
+		preprocess({
+			style: 'postcss',
+			postcss: true
+		})
+	],
+	kit: {
+		appDir: 'svelte__user',
+		adapter: is_static
+			? static_adapter({
+					fallback: 'app.html',
+					precompress: true,
+					strict: true
+			  })
+			: is_node
+			? node_adapter({
+					precompress: false
+			  })
+			: vercel({
+					// an array of dependencies that esbuild should treat
+					// as external when bundling functions
+					external: []
+			  }),
+		alias: {
+			$hooks: path.resolve('./src/hooks'),
+			$components: path.resolve('./src/lib/components'),
+			$icons: path.resolve('./src/lib/icons'),
+			$kaomoji: path.resolve('./src/lib/kaomoji'),
+			$error: path.resolve('./src/lib/components/errors')
+		}
+	}
 };
 
 export default config;
