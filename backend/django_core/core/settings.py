@@ -286,7 +286,7 @@ CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:5173",
 ]
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "backend.localhost"]
 
 CORS_ALLOW_METHODS = [
     "DELETE",
