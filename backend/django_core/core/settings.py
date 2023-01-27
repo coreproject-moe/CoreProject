@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 
+# https://github.com/typeddjango/django-stubs/tree/54a1e894257f6eea49b63fcd3a6eb89af00daf55/django_stubs_ext#usage
+import django_stubs_ext
+
+django_stubs_ext.monkeypatch()
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -35,12 +40,6 @@ USERNAME_DISCRIMINATOR_LENGTH = 4
 MAL_CLIENT_ID = os.environ.get("MAL_CLIENT_ID")
 MAL_CLIENT_SECRET = os.environ.get("MAL_CLIENT_SECRET")
 
-# Max retires for request
-MAX_RETRY = 10
-MAX_REQUESTS_PER_MINUTE = 55
-REQUEST_STATUS_CODES_TO_RETRY = [408, 429, 500, 502, 503, 504]
-BUCKET_NAME = "coreproject"
-
 
 # HOST configurations
 # We are using this to hyperlink model relations
@@ -58,6 +57,8 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    # Postgres
+    "django.contrib.postgres",
     # Whitenoise
     "django.contrib.staticfiles",
     # Rest Framework
@@ -69,6 +70,7 @@ INSTALLED_APPS = [
     "huey.contrib.djhuey",
     # 3rd party adminpanel
     "django_better_admin_arrayfield",
+    "django_admin_hstore_widget",
     # Api ( Django-Ninja )
     "apps.api",
     # Models
@@ -192,7 +194,7 @@ DATABASES = {
         "HOST": "",
         "PORT": "",
         # https://stackoverflow.com/questions/23504483/django-conn-max-age-setting-error
-        "CONN_MAX_AGE": 60,
+        # "CONN_MAX_AGE": 10,
         "CONN_HEALTH_CHECKS": True,
     }
 }

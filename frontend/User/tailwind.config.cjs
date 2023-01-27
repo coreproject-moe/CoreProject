@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: ['./App.{js,jsx,ts,tsx}', './screens/**/*.{js,jsx,ts,tsx}'],
+    content: ['./src/**/*.{html,js,svelte,ts,json}'],
     theme: {
         fontFamily: {
             sans: [`Kokoro`, 'sans-serif']

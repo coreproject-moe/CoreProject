@@ -16,7 +16,7 @@ def get_individual_anime_producer_info(
     anime_id: int,
 ) -> list[ProducerModel]:
     query = get_list_or_404(
-        get_object_or_404(AnimeModel, id=anime_id).anime_producers,
+        get_object_or_404(AnimeModel, pk=anime_id).producers,
     )
     return query
 
@@ -37,6 +37,6 @@ def post_individual_anime_producer_info(
     )
 
     instance: ProducerModel = query[0]
-    anime_info_model.anime_producers.add(instance)
+    anime_info_model.producers.add(instance)
 
     return instance

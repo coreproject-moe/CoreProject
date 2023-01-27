@@ -19,7 +19,7 @@ async def avatar_view(
     CLIENT = httpx.AsyncClient()
 
     try:
-        user = await CustomUser.objects.aget(id=user_id)
+        user = await CustomUser.objects.aget(pk=user_id)
     except CustomUser.DoesNotExist:
         return render(
             request,

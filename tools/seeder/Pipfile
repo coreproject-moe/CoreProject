@@ -4,15 +4,19 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-aiohttp = "*"
-aiohttp_client_cache = {extras = ["redis"], version = "*"}
-aiohttp-retry = "*"
-pyrate-limiter = {extras = ["redis"], version = "*"}
 humanize = "*"
 termcolor = "*"
+# HTTP Client
+requests = "*"
+requests_cache =  {extras = ["redis"], version = "*"}
+requests_ratelimiter = "*"
 
 [dev-packages]
 black = "*"
 
 [requires]
 python_version = "3.11"
+
+[scripts]
+seed_character = 'python character.py'
+seed_staff = 'python staff.py'

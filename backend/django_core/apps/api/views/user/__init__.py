@@ -1,20 +1,19 @@
-from core.auth import AuthBearer
+from ...auth import AuthBearer
 from ninja import File, Form, Router, UploadedFile
 from pydantic import AnyUrl, EmailStr
 
 from django.conf import settings
-from django.contrib.auth import get_user_model
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
-
+from apps.user.models import CustomUser
 from ...schemas.user import UserSchema
 
 router = Router()
 
 
 @router.get("/", response=UserSchema, auth=AuthBearer())
-def get_user_info(request: HttpRequest):
-    user = get_user_model().objects.get(id=request.auth.id)
+def get_user_info(request: HttpRequest) -> CustomUser:
+    user = CustomUser.objects.get(pk=request.auth.id)
     return user
 
 
@@ -31,14 +30,17 @@ def patch_individual_user_info(
     ),
     avatar_provider: AnyUrl = Form(...),
     avatar: UploadedFile = File(...),
-):
+) -> None:
     pass
 
 
 @router.get("/{str:username}/", response=UserSchema)
-def get_individual_user_info(request: HttpRequest, username: str):
+def get_individual_user_info(
+    request: HttpRequest,
+    username: str,
+) -> CustomUser:
     user = get_object_or_404(
-        get_user_model().objects.get_username_with_discriminator(),
+        CustomUser.objects.get_username_with_discriminator(),
         username_with_discriminator=username,
     )
     return user

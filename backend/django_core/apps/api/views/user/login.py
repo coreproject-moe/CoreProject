@@ -1,5 +1,5 @@
 from apps.user.backends import EmailOrUsernameModelBackend
-from apps.user.models import Token
+from apps.api.models import Token
 from ninja import Form, Router
 from pydantic import EmailStr
 
@@ -15,7 +15,7 @@ def post_user_login_info(
     request: HttpRequest,
     username: str | EmailStr = Form(...),
     password: str = Form(...),
-):
+) -> Token:
     user = EmailOrUsernameModelBackend.get_user_given_username_and_password(
         username, password
     )

@@ -4,4 +4,7 @@ from .models import CharacterModel
 
 # Register your models here.
 
-admin.site.register([CharacterModel])
+
+@admin.register(CharacterModel)
+class CharacterAdmin(admin.ModelAdmin[CharacterModel]):
+    pass

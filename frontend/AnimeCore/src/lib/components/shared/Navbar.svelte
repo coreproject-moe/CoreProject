@@ -4,13 +4,13 @@
     import Logo from "$icons/Logo.svelte";
     import Search from "$icons/Search.svelte";
     import NavbarModal from "$modals/Navbar.svelte";
+    import { modals } from "$store/Modal";
     import { navbar_variant } from "$store/Navbar_Variant";
 </script>
 
 <!-- Init the modal  -->
 <svelte:component
     this={NavbarModal}
-    id="nabar__modal"
 />
 
 <div class="navbar bg-transparent">
@@ -44,12 +44,19 @@
                         height={22}
                     />
                 </div>
+            {:else}
+                <!-- placeholder to remove layout shift  -->
+                <div
+                    transition:fade|local
+                    class="w-[158px] h-[22px]"
+                    style="grid-area: 1 / 1 / 2 / 2"
+                />
             {/if}
         </div>
     </div>
     <div class="navbar-end">
         <label
-            for="nabar__modal"
+            for={$modals.navbar}
             class="btn modal-button bg-transparent hover:bg-transparent px-0 border-transparent"
         >
             <img

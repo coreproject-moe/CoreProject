@@ -1,5 +1,5 @@
 from apps.anime.models import AnimeModel
-from apps.episodes.models import EpisodeTimestampModel
+from apps.episodes.models.episode_timestamp import EpisodeTimestampModel
 from ninja import Router
 
 from django.contrib.auth.decorators import login_required
@@ -27,7 +27,7 @@ def get_individual_anime_episode_total_timestamp_info(
 ) -> dict[str, str]:
     query = (
         get_object_or_404(AnimeModel, pk=anime_id)
-        .anime_episodes.get(episode_number__in=[episode_number])
+        .episodes.get(episode_number__in=[episode_number])
         .episode_timestamps.all()
         .aggregate(Avg("timestamp"))
     )
@@ -45,7 +45,7 @@ def get_individual_anime_episode_timestamp_info(
 ) -> list[EpisodeTimestampModel]:
     query = get_list_or_404(
         get_object_or_404(AnimeModel, pk=anime_id)
-        .anime_episodes.get(episode_number__in=[episode_number])
+        .episodes.get(episode_number__in=[episode_number])
         .episode_timestamps.filter(user=request.auth)
     )
     return query
@@ -74,7 +74,7 @@ def post_individual_anime_episode_timestamp_info(
     created = query[1]
 
     if created:
-        AnimeModel.objects.get(pk=anime_id).anime_episodes.get(
+        AnimeModel.objects.get(pk=anime_id).episodes.get(
             episode_number=episode_number
         ).episode_timestamps.add(data)
 

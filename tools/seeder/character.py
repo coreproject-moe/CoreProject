@@ -1,25 +1,17 @@
-import asyncio
 from datetime import datetime, timedelta
 from io import BytesIO
 import json
 import os
 import textwrap
-from typing import cast
 
 from humanize import intcomma, naturaltime
-from pyrate_limiter import Duration, Limiter, RedisBucket, RequestRate
 from termcolor import colored
 
-import aiohttp
-from aiohttp import FormData
-from aiohttp_client_cache.backends.redis import RedisBackend
-from aiohttp_client_cache.session import CachedSession
-from aiohttp_retry import ExponentialRetry, RetryClient
+
+from requests.sessions import Session
+from _session import session
 
 CHARACTER_LOCK_FILE_NAME = "Character.lock"
-
-CACHE_NAME = "characters"
-RETRY_STATUSES = [408, 429, 500, 502, 503, 504]
 
 EXECUTION_TIME: int = 0
 
@@ -34,40 +26,17 @@ SUCCESS_LIST = []
 WARNING_LIST = []
 ERROR_LIST = []
 
-limiter = Limiter(
-    RequestRate(1, Duration.SECOND),
-    RequestRate(60, Duration.MINUTE),
-    bucket_class=RedisBucket,
-    bucket_kwargs={
-        "bucket_name": CACHE_NAME,
-    },
-)
-
 BACKEND_API_URL = "http://127.0.0.1:8000/api/v1/characters"
 
 
-async def command() -> None:
-    global JIKAN, KITSU, ANILIST, DATABASE_ID, EXECUTION_TIME, SUCCESSFUL_NAMES, SUCCESSFUL_KITSU_IDS, SUCCESSFUL_ANILIST_IDS
-
-    retry_client = RetryClient(  # aiohttp-retry
-        client_session=CachedSession(  # aiohttp-client-cache
-            cache=RedisBackend(
-                CACHE_NAME,
-                expire_after=3600,
-            )
-        ),
-        retry_options=ExponentialRetry(
-            attempts=10,
-            max_timeout=100.00,
-            statuses=set(RETRY_STATUSES),
-        ),
-    )
-
-    session = cast(aiohttp.ClientSession, retry_client)
+def command() -> None:
+    global JIKAN, KITSU, ANILIST
+    global EXECUTION_TIME
+    global SUCCESSFUL_KITSU_IDS, SUCCESSFUL_ANILIST_IDS
 
     starting_number = 1
     character_number = 1
-    ending_number: int = await get_ending_number(session)
+    ending_number: int = get_ending_number(session)
 
     # Load JSON file and get data from it
     if os.path.exists(CHARACTER_LOCK_FILE_NAME):
@@ -126,15 +95,19 @@ async def command() -> None:
                             datetime.now()
                             +
                             timedelta(
-                                minutes=
+                                seconds=
                                     round(
                                         (
                                             ending_number
                                             -
                                             character_number
                                         )
-                                        /
-                                        60
+                                        *
+                                        (
+                                            EXECUTION_TIME
+                                            /
+                                            starting_number
+                                        )
                                 )
                             )
                         )
@@ -147,46 +120,44 @@ async def command() -> None:
     print(welcome_message)
 
     # Magic starts here
-    await populate_database(
+    populate_database(
         session=session,
         starting_number=starting_number,
         character_number=character_number,
         ending_number=ending_number,
     )
 
-    await session.close()
+    session.close()
 
     # Remove lock file
     os.remove(CHARACTER_LOCK_FILE_NAME)
 
 
-@limiter.ratelimit("ending", delay=True)
-async def get_ending_number(
-    session: aiohttp.ClientSession,
+def get_ending_number(
+    session: Session,
 ) -> int:
     """
-    :param session: `aiohttp.Client` instance to get data
+    :param session: `requests.Session` instance to get data
     """
-    res = await session.get("https://api.jikan.moe/v4/characters")
-    data = await res.json()
+    res = session.get("https://api.jikan.moe/v4/characters")
+    data = res.json()
     return int(data["pagination"]["items"]["total"])
 
 
-@limiter.ratelimit("jikan", delay=True)
-async def get_character_data_from_jikan(
+def get_character_data_from_jikan(
     character_number: int,
-    session: aiohttp.ClientSession,
+    session: Session,
 ) -> dict[str, str | None | BytesIO] | None:
     """
     :param character_number: The id of character
-    :param session: `aiohttp.Client` instance to get data
+    :param session: `requests.Session` instance to get data
     """
-    res = await session.get(f"https://api.jikan.moe/v4/characters/{character_number}")
-    data = await res.json()
+    res = session.get(f"https://api.jikan.moe/v4/characters/{character_number}")
+    data = res.json()
 
     returnable_data = {}
 
-    if res.status == 200 and str(data.get("status", None)) not in [
+    if res.status_code == 200 and str(data.get("status", None)) not in [
         "403",
         "404",
         "408",
@@ -204,7 +175,7 @@ async def get_character_data_from_jikan(
         except KeyError:
             image_url = data["images"]["jpg"]["image_url"]
         finally:
-            image = await session.get(image_url)
+            image = session.get(image_url)
 
         returnable_data = {
             "character_name": data["name"],
@@ -212,7 +183,7 @@ async def get_character_data_from_jikan(
             "character_about": data.get("about", None),
             "image_url": image_url,
             "character_image": BytesIO(
-                await image.read(),
+                image.content,
             ),
         }
     elif data.get("status", None) == 403:
@@ -240,24 +211,23 @@ async def get_character_data_from_jikan(
     return returnable_data
 
 
-@limiter.ratelimit("kitsu", delay=True)
-async def get_character_data_from_kitsu(
+def get_character_data_from_kitsu(
     character_number: int,
     character_name: str,
-    session: aiohttp.ClientSession,
+    session: Session,
 ) -> dict[str, str | None] | None:
     """
     :param character_name: The name of the character
-    :param session: `aiohttp.Client` instance to get data
+    :param session: `requests.Session` instance to get data
     """
-    res = await session.get(
+    res = session.get(
         f"https://kitsu.io/api/edge/characters?filter[name]:{character_name}",
     )
-    res_data = await res.json()
+    res_data = res.json()
 
     returnable_data = {}
 
-    if res.status == 200:
+    if res.status_code == 200:
         for data in res_data["data"]:
             # If the Kitsu ID exists in database
             # Skip to next iteration
@@ -285,15 +255,14 @@ async def get_character_data_from_kitsu(
     return returnable_data
 
 
-@limiter.ratelimit("kitsu", delay=True)
-async def get_character_data_from_anilist(
+def get_character_data_from_anilist(
     character_number: int,
     character_name: str,
-    session: aiohttp.ClientSession,
+    session: Session,
 ) -> dict[str, str | None] | None:
     """
     :param character_name: The name of the character
-    :param session: `aiohttp.Client instance to get data
+    :param session: `requests.Session instance to get data
     """
     query = {
         "query": """
@@ -337,12 +306,12 @@ async def get_character_data_from_anilist(
             "sort": "SEARCH_MATCH",
         },
     }
-    res = await session.post(url="https://graphql.anilist.co/", json=query)
-    res_data = await res.json()
+    res = session.post(url="https://graphql.anilist.co/", json=query)
+    res_data = res.json()
 
     returnable_data = {}
 
-    if res_data and res.status == 200:
+    if res_data and res.status_code == 200:
         for data in res_data["data"]["Page"]["characters"]:
             # If the Anilist ID exists in database
             # Skip to next iteration
@@ -369,8 +338,8 @@ async def get_character_data_from_anilist(
     return returnable_data
 
 
-async def populate_database(
-    session: aiohttp.ClientSession,
+def populate_database(
+    session: Session,
     character_number: int,
     starting_number: int,
     ending_number: int,
@@ -381,54 +350,57 @@ async def populate_database(
         start_time = datetime.now()
 
         # Actual work is being done here
-        jikan_data = await get_character_data_from_jikan(
+        jikan_data = get_character_data_from_jikan(
             character_number=character_number,
             session=session,
         )
 
         if jikan_data:
-            kitsu_data = await get_character_data_from_kitsu(
+            kitsu_data = get_character_data_from_kitsu(
                 character_number=character_number,
                 character_name=jikan_data["character_name"],
                 session=session,
             )
-            anilist_data = await get_character_data_from_anilist(
+            anilist_data = get_character_data_from_anilist(
                 character_number=character_number,
                 character_name=jikan_data["character_name"],
                 session=session,
             )
 
-            formdata = FormData()
+            formdata = {}
+            file_data = {}
 
             if kitsu_id := kitsu_data.get("kitsu_id", None):
-                formdata.add_field("kitsu_id", str(kitsu_id))
+                formdata["kitsu_id"] = str(kitsu_id)
 
             if anilist_id := anilist_data.get("anilist_id", None):
-                formdata.add_field("anilist_id", str(anilist_id))
+                formdata["anilist_id"] = str(anilist_id)
 
-            formdata.add_field("mal_id", str(starting_number))
-            formdata.add_field("name", str(jikan_data["character_name"]))
-            formdata.add_field(
-                "name_kanji",
-                str(
-                    jikan_data.get("character_name_kanji", "")
-                    or kitsu_data.get("character_name_kanji", "")
-                ),
-            )
-            formdata.add_field(
-                "character_image",
+            formdata["mal_id"] = str(starting_number)
+            formdata["name"] = str(jikan_data["character_name"])
+
+            if name_kanji := (
+                jikan_data.get("character_name_kanji", None)
+                or kitsu_data.get("character_name_kanji", None)
+            ):
+                formdata["name_kanji"] = name_kanji
+
+            file_data["character_image"] = (
+                f"{character_number}.{jikan_data['image_url'].split('.')[-1]}",
                 BytesIO(jikan_data["character_image"].read()),
-                filename=f"{character_number}.{jikan_data['image_url'].split('.')[-1]}",
             )
+            if about := jikan_data.get("character_about", None):
+                formdata["about"] = about
 
-            formdata.add_field("about", str(jikan_data["character_about"]))
+            res = session.post(BACKEND_API_URL, data=formdata, files=file_data)
+            if res.status_code == 200:
+                if successful_kitsu_id := kitsu_data.get("kitsu_id", None):
+                    SUCCESSFUL_KITSU_IDS.append(successful_kitsu_id)
+                if successful_anilist_id := anilist_data.get("anilist_id", None):
+                    SUCCESSFUL_ANILIST_IDS.append(successful_anilist_id)
 
-            res = await session.post(BACKEND_API_URL, data=formdata)
-            if res.status == 200:
-                SUCCESSFUL_KITSU_IDS.append(kitsu_data.get("kitsu_id", None))
-                SUCCESSFUL_ANILIST_IDS.append(anilist_data.get("anilist_id", None))
             else:
-                print(await res.text())
+                print(res.text)
                 raise Exception
 
             # Add 1 to `starting_number` on every successful request
@@ -439,7 +411,7 @@ async def populate_database(
         EXECUTION_TIME += (end_time - start_time).total_seconds()
 
         message = (
-            f"[{round(EXECUTION_TIME, 2)}]"
+            f"[{round(EXECUTION_TIME, 2):2f}]"
             " "
             f"Requested `character_info` for {character_number}"
             " | "
@@ -488,4 +460,4 @@ async def populate_database(
 
 
 if __name__ == "__main__":
-    asyncio.run(command())
+    command()

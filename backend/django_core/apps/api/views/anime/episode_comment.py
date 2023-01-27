@@ -1,5 +1,5 @@
 from apps.anime.models import AnimeModel
-from apps.episodes.models import EpisodeCommentModel
+from apps.episodes.models.episode_comment import EpisodeCommentModel
 from ninja import Router
 
 from django.contrib.auth.decorators import login_required
@@ -28,7 +28,7 @@ def get_individual_anime_episode_comments(
             AnimeModel,
             pk=anime_id,
         )
-        .anime_episodes.get(episode_number__in=[episode_number])
+        .episodes.get(episode_number__in=[episode_number])
         .episode_comments.all()
     )
     return query
@@ -49,7 +49,7 @@ def post_individual_anime_episode_comment(
         user=request.auth, **payload.dict()
     )
 
-    AnimeModel.objects.get(pk=anime_id).anime_episodes.get(
+    AnimeModel.objects.get(pk=anime_id).episodes.get(
         episode_number__in=[episode_number]
     ).episode_comments.add(data)
 

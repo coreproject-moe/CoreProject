@@ -86,7 +86,7 @@
     }}
 />
 
-<div class="inline-grid min-h-[60vh] md:min-h-screen w-screen">
+<div class="inline-grid h-full w-screen">
     <div style="grid-area: 1 / 1 / 2 / 2">
         <div
             class="hero h-full w-full bg-center bg-no-repeat"
