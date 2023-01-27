@@ -25,7 +25,7 @@ anime.{$SITE_ADDRESS} {
         encode gzip zstd
         try_files {path} /app.html
         file_server
-      
+
 }
 
 # user.example.com
