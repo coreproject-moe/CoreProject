@@ -5,8 +5,8 @@ import jinja2
 from aiohttp import web
 import aiohttp_jinja2
 
-from ..database import SessionLocal, engine, DjangoSessionLocal
-from ..settings import TEMPLATE_DIRS
+from database import SessionLocal, engine, DjangoSessionLocal
+from settings import TEMPLATE_DIRS
 
 routes = web.RouteTableDef()
 
