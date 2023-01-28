@@ -1,4 +1,3 @@
-{{$request_path := placeholder "http.request.orig_uri.path"}}
 <!DOCTYPE html>
 <html
     lang="en"
@@ -6,6 +5,10 @@
     data-theme="kokoro"
 >
     <head>
+        <!-- Caddyfile declarations   -->
+        {{$hostname := placeholder "http.request.host"}}
+        {{$request_path := placeholder "http.request.orig_uri"}}
+
         <meta name="darkreader-lock" />
         <meta charset="utf-8" />
         <link
@@ -31,7 +34,7 @@
         <!-- Dynamic opengraph -->
         <meta
             property="og:image"
-            content="https://backend.localhost/opengraph?path={{$request_path}}"
+            content="https://backend.localhost/opengraph?host={{ $hostname }}&path={{ $request_path }}"
         />
 
         <!-- Font preloading  -->
