@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- Caddyfile declarations   -->
+        {{$hostname := placeholder "http.request.host"}}
+        {{$request_path := placeholder "http.request.orig_uri"}}
+
+
         <meta charset="utf-8" />
         <link rel="icon" href="%sveltekit.assets%/favicon.png" />
         <meta name="viewport" content="width=device-width" />
@@ -47,6 +52,12 @@
             type="font/woff2"
             crossorigin
         />
+        <!-- Dynamic opengraph -->
+        <meta
+            property="og:image"
+            content="https://backend.localhost/opengraph?host={{ $hostname }}&path={{ $request_path }}"
+        />
+        
         %sveltekit.head%
     </head>
     <body>
