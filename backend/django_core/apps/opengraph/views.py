@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.http import FileResponse, HttpRequest
 
 from django.urls.resolvers import _route_to_regex
