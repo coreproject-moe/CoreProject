@@ -5,6 +5,10 @@
     data-theme="kokoro"
 >
     <head>
+        <!-- Caddyfile declarations   -->
+        {{$hostname := placeholder "http.request.host"}}
+        {{$request_path := placeholder "http.request.orig_uri"}}
+
         <meta name="darkreader-lock" />
         <meta charset="utf-8" />
         <link
@@ -26,6 +30,11 @@
         <meta
             name="description"
             content="Bridging the gap between streaming & torrenting sevices, with a modern and clean interface"
+        />
+        <!-- Dynamic opengraph -->
+        <meta
+            property="og:image"
+            content="https://backend.localhost/opengraph?host={{ $hostname }}&path={{ $request_path }}"
         />
 
         <!-- Font preloading  -->
