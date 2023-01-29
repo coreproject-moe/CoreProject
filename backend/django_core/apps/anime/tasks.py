@@ -32,7 +32,7 @@ def set_field_brightness(
     pk: int,
     field_name: str,
     image_field_name: str,
-):
+) -> None:
     instance = AnimeModel.objects.get(pk=pk)
 
     if image_field := getattr(instance, image_field_name):
@@ -40,8 +40,8 @@ def set_field_brightness(
         im = Image.open(image_field)
         stat = ImageStat.Stat(im)
         gs = (
-            math.sqrt(0.241 * (r**2) + 0.691 * (g**2) + 0.068 * (b**2))
-            for r, g, b in im.getdata()
+            math.sqrt(0.241 * (red**2) + 0.691 * (green**2) + 0.068 * (blue**2))
+            for red, green, blue in im.getdata()
         )
         average_brightness = sum(gs) / stat.count[0]
         setattr(instance, field_name, average_brightness)
