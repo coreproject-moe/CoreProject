@@ -43,7 +43,7 @@
         "js-cookie": "^3.0.1",
         "postcss": "^8.4.21",
         "postcss-load-config": "4.0.1",
-        "postcss-preset-env": "^8.0.0",
+        "postcss-preset-env": "^8.0.1",
         "prettier": "^2.8.3",
         "prettier-plugin-svelte": "^2.9.0",
         "sass": "^1.57.1",
