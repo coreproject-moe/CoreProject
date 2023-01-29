@@ -74,6 +74,8 @@ INSTALLED_APPS = [
     "django_admin_hstore_widget",
     # Api ( Django-Ninja )
     "apps.api",
+    # OpenGraph
+    "apps.opengraph",
     # Models
     "apps.anime",
     "apps.trackers",
@@ -174,31 +176,31 @@ LOGIN_URL = "login_page"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#         "CONN_MAX_AGE": 60,
-#         "CONN_HEALTH_CHECKS": True,
-#     }
-# }
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+        "CONN_MAX_AGE": 60,
+        "CONN_HEALTH_CHECKS": True,
+    }
+}
 
 # POSTGRES
 # https://www.enterprisedb.com/postgres-tutorials/how-use-postgresql-django
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "django",
-        "USER": "postgres",
-        "PASSWORD": "supersecretpassword",
-        "HOST": "",
-        "PORT": "",
-        # https://stackoverflow.com/questions/23504483/django-conn-max-age-setting-error
-        # "CONN_MAX_AGE": 10,
-        "CONN_HEALTH_CHECKS": True,
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "django",
+#         "USER": "postgres",
+#         "PASSWORD": "supersecretpassword",
+#         "HOST": "",
+#         "PORT": "",
+#         # https://stackoverflow.com/questions/23504483/django-conn-max-age-setting-error
+#         # "CONN_MAX_AGE": 10,
+#         "CONN_HEALTH_CHECKS": True,
+#     }
+# }
 
 # Allow more fields to be deleted at once
 # https://stackoverflow.com/questions/47585583/the-number-of-get-post-parameters-exceeded-settings-data-upload-max-number-field
@@ -285,7 +287,7 @@ CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:5173",
 ]
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "backend.localhost"]
 
 CORS_ALLOW_METHODS = [
     "DELETE",

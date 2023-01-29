@@ -39,6 +39,9 @@ urlpatterns = [
     #   HTTP
     # =========
     path("user/", include("apps.user.urls")),
+    #   OpenGraph
+    # =============
+    path("opengraph/", include("apps.opengraph.urls")),
     #   Api
     # ========
     path("api/", include("apps.api.urls")),
