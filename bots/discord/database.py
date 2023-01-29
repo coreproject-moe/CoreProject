@@ -17,8 +17,6 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, class_=AsyncSessi
 django_engine = create_async_engine(
     f"postgresql+asyncpg://{USER}:{PASSWORD}@{HOST}:{PORT}/django", echo=True
 )
-DjangoSessionLocal = sessionmaker(
-    autocommit=False, autoflush=False, class_=AsyncSession
-)
+DjangoSessionLocal = sessionmaker(autocommit=False, autoflush=False, class_=AsyncSession)
 
 BASE = declarative_base()
