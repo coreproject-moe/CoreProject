@@ -10,6 +10,11 @@
             {{$hostname := placeholder "http.request.host"}}
             {{$request_path := placeholder "http.request.orig_uri"}}
         -->
+        <!-- Dynamic opengraph -->
+        <meta
+            property="og:image"
+            content='https://backend.{{ env "SITE_ADDRESS" }}/opengraph?host={{ $hostname }}&path={{ $request_path }}'
+        />
 
         <meta name="darkreader-lock" />
         <meta charset="utf-8" />
@@ -32,11 +37,6 @@
         <meta
             name="description"
             content="Bridging the gap between streaming & torrenting sevices, with a modern and clean interface"
-        />
-        <!-- Dynamic opengraph -->
-        <meta
-            property="og:image"
-            content="https://backend.localhost/opengraph?host={{ $hostname }}&path={{ $request_path }}"
         />
 
         <!-- Font preloading  -->
