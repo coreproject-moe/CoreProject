@@ -43,8 +43,7 @@ uvicorn = '*'
 django-stubs-ext = "*"
 # ===================================================
 # Machine Learning
-numpy = "*"
-scikit-learn = "*"
+django-tailwind = "^3.4.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -83,7 +82,10 @@ huey = "python ./django_core/manage.py run_huey"
 collectstatic = "python ./django_core/manage.py collectstatic --clear --link" # Dont duplicate copy files.
 ## Mypy
 mypy = "mypy . --enable-incomplete-feature=Unpack"
-
+## Tailwind
+tailwind_install = "python ./django_core/manage.py tailwind install"
+tailwind_start = "python ./django_core/manage.py tailwind start"
+tailwind_build = "python ./django_core/manage.py tailwind build"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
