@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.views import debug
 from django.views.generic import TemplateView
-from .format import format_kokoro_color
+from .utilities.format import format_kokoro_color
 from django.templatetags.static import static
 
 

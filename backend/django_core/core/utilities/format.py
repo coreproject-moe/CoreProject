@@ -24,16 +24,12 @@ def format_kokoro_color(input: str) -> str:
 
     # This variable has ['kokoro-chan']
     regex_words: list[str] = re.findall(KOKORO_REGEX, input)
-    # First parse the word list
-    # ( there could be multiple occurances of the word 'kokoro')
-    for word in regex_words:
-        # Parse each word in the occurances
-        for letter in word:
-            color = KOKORO_WORD_COLOR_MAP.get(letter)
-            color_class = TAILWIND_COLOR_MAP.get(color)
-            color_formated_string += (
-                f"<span class='inline-flex {color_class}'>{letter}</span>"
-            )
+    word = "kokoro-chan"
+    # Parse each letter in the word
+    for letter in word:
+        color = KOKORO_WORD_COLOR_MAP.get(letter)
+        color_class = TAILWIND_COLOR_MAP.get(color)
+        color_formated_string += f"<span class='inline-flex {color_class}'>{letter}</span>"
 
     # Color the font.
     input = re.sub(KOKORO_REGEX, color_formated_string, input)
