@@ -16,15 +16,20 @@
             href="{% static 'fonts/Kokoro/stylesheet.css' %}"
         />
 
-        <title>{% block title %}{% endblock %}</title>
+        <title>
+            {% block title %}CoreProject | {{error_status_code}}{% endblock %}
+        </title>
         {% tailwind_css %}
-        <!--prettier-ignore-->
-        {% block 'css' %}{% endblock %}
     </head>
     <body
         class="flex items-center justify-center flex-col text-center h-screen m-0"
     >
-        {% block body %} {% endblock %}
+        <img src="{{svg.file}}" width="{{svg.width}}" height="{{svg.height}}" />
+        <div class="font-bold w-[70vw]">
+            <h1 class="text-indigo-800 text-3xl m-7">
+                {{error_status_code}} - {{error_status}}
+            </h1>
+            <p>{{error_text|safe}}</p>
+        </div>
     </body>
-    {% block 'js' %}{% endblock %}
 </html>
