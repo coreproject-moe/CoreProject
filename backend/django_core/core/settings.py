@@ -71,6 +71,11 @@ INSTALLED_APPS = [
     # 3rd party adminpanel
     "django_better_admin_arrayfield",
     "django_admin_hstore_widget",
+    # Django browser Reload
+    "django_browser_reload",
+    # Tailwind CSS
+    "tailwind",
+    "tailwind_src",  # Our custom app
     # Api ( Django-Ninja )
     "apps.api",
     # OpenGraph
@@ -111,6 +116,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # Browser Reload Middleware
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 
@@ -315,3 +322,11 @@ HUEY = PriorityRedisHuey(
 
 DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage" if DEBUG else ""
 DBBACKUP_STORAGE_OPTIONS = {"location": os.path.join(BASE_DIR, "backup")}
+
+# https://django-tailwind.readthedocs.io/en/latest/installation.html
+
+TAILWIND_APP_NAME = "tailwind_src"
+if os.name == "nt":
+    NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+else:
+    NPM_BIN_PATH = "/usr/local/bin/npm"

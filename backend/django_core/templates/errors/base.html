@@ -1,7 +1,7 @@
-{% load static %}
+{% load static tailwind_tags %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="kokoro">
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -17,57 +17,13 @@
         />
 
         <title>{% block title %}{% endblock %}</title>
-        <style>
-            * {
-                box-sizing: border-box;
-            }
-            html {
-                background-color: #07051a;
-                line-height: 1.5;
-                color: rgb(189, 184, 229);
-                font-family: 'Kokoro';
-                tab-size: 4;
-            }
-            body {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-                text-align: center;
-                height: 100vh;
-                margin: 0;
-            }
-
-            {# Tailwind inspired classes #}
-            {# Fonts #}
-            .font-bold {
-                font-weight: 700;
-            }
-
-            {# Width #}
-            .w-\[70vw\] {
-                width: 70vw;
-            }
-
-            {# Colors #}
-            .text-white {
-                color: white;
-            }
-            .text-warning {
-                color : rgb(237, 215, 140);
-            }
-            .text-indigo {
-                color: rgb(67, 56, 202);
-            }
-
-            {# Display #}
-            .inline-flex {
-                display: inline-flex;
-            }
-        </style>
+        {% tailwind_css %}
+        <!--prettier-ignore-->
         {% block 'css' %}{% endblock %}
     </head>
-    <body>
+    <body
+        class="flex items-center justify-center flex-col text-center h-screen m-0"
+    >
         {% block body %} {% endblock %}
     </body>
     {% block 'js' %}{% endblock %}
