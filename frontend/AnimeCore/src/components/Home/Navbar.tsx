@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import {
     createStyles,
     Navbar,
@@ -9,7 +9,6 @@ import {
 } from '@mantine/core';
 import { useMantineTheme } from '@mantine/core';
 import { useSpotlight } from '@mantine/spotlight';
-import { useEffect } from 'react';
 
 const useStyles = createStyles((theme) => ({
     nav: {
@@ -32,10 +31,18 @@ const useStyles = createStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center',
         color: theme.white,
+        transition: `background-color .1s ease`,
 
         '&:hover': {
+            backgroundColor: theme.colors.blue[2],
+
+            // Hide the text
             div: {
                 color: 'transparent',
+            },
+            // Color the svg icon
+            svg: {
+                color: theme.black,
             },
         },
         [theme.fn.smallerThan('sm')]: {
@@ -45,8 +52,11 @@ const useStyles = createStyles((theme) => ({
     },
 
     mainLinkActive: {
-        '&, &:hover': {
+        '&': {
             backgroundColor: theme.colors.blue[6],
+        },
+        '&:hover': {
+            backgroundColor: theme.colors.blue[2],
         },
     },
 
@@ -100,7 +110,7 @@ const useStyles = createStyles((theme) => ({
         justifyContent: 'center',
         color: theme.black,
         backgroundColor: theme.colors.yellow[5],
-        transition: `all .2s ease`,
+        transition: `background-color .2s ease`,
 
         '&:hover': {
             backgroundColor: theme.colors.yellow[3],
