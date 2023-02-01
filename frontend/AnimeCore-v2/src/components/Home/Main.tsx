@@ -27,7 +27,7 @@ export default function Main() {
                 <Flex className={classes.mainNavbar}>
                     <AnimeCoreLogo />
                 </Flex>
-                
+
                 <Flex className={classes.mainContent}>HEllo</Flex>
             </Flex>
         </>

@@ -17,12 +17,11 @@
         "baseUrl": ".",
         "paths": {
             "@components/*": ["./src/components/*"],
-            "@static/*" : ["public/*"],
+            "@static/*": ["public/*"],
             "@icons/*": ["./src/icons/*"]
         }
-
     },
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next.config.js",],
+    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "next.config.js"],
     "exclude": [
         "node_modules",
         // Next font handles this
