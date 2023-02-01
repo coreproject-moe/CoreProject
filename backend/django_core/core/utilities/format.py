@@ -23,7 +23,7 @@ def format_kokoro_color(input: str) -> str:
     color_formated_string = ""
 
     # This variable has ['kokoro-chan']
-    regex_words: list[str] = re.findall(KOKORO_REGEX, input)
+    re.findall(KOKORO_REGEX, input)
     word = "kokoro-chan"
     # Parse each letter in the word
     for letter in word:
