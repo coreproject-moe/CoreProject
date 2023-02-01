@@ -5,13 +5,47 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import NextNProgress from 'nextjs-progressbar';
 import { SpotlightProvider } from '@mantine/spotlight';
-import dynamic from 'next/dynamic';
+import localFont from '@next/font/local';
 
-const Fonts = dynamic(() => import('@components/Font'));
+const Kokoro = localFont({
+    src: [
+        {
+            path: '../fonts/Kokoro/Kokoro-Regular.woff2',
+            weight: '400',
+            style: 'normal',
+        },
+        {
+            path: '../fonts/Kokoro/Kokoro-Italic.woff2',
+            weight: '400',
+            style: 'italic',
+        },
+        {
+            path: '../fonts/Kokoro/Kokoro-Semibold.woff2',
+            weight: '600',
+            style: 'bold',
+        },
+        {
+            path: '../fonts/Kokoro/Kokoro-Bold.woff2',
+            weight: '700',
+            style: 'normal',
+        },
+        {
+            path: '../fonts/Kokoro/Kokoro-BoldItalic.woff2',
+            weight: '700',
+            style: 'italic',
+        },
+        {
+            path: '../fonts/Kokoro/Kokoro-SemiboldItalic.woff2',
+            weight: '600',
+            style: 'italic',
+        },
+    ],
+    variable: '--font-kokoro',
+});
 
 const App = (props: AppProps) => {
     const { Component, pageProps } = props;
-
+    console.log(Kokoro);
     return (
         <>
             <Head>
@@ -26,12 +60,10 @@ const App = (props: AppProps) => {
                 />
             </Head>
 
-            {/* Base64 Fonts  */}
-            <Fonts />
-
             <MantineProvider
                 withGlobalStyles
                 withNormalizeCSS
+                withCSSVariables
                 theme={{
                     globalStyles: (theme) => ({
                         body: {
@@ -42,7 +74,7 @@ const App = (props: AppProps) => {
                     /** Put your mantine theme override here */
                     colorScheme: 'dark',
                     /** Font Family */
-                    fontFamily: 'Kokoro',
+                    fontFamily: Kokoro.style.fontFamily,
                     /** Heading */
                     headings: {
                         sizes: {

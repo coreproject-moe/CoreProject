@@ -7,7 +7,7 @@ const nextConfig = {
     swcMinify: true,
     productionBrowserSourceMaps: true,
     /* https://nextjs.org/docs/api-reference/next.config.js/basepath */
-    basePath: isProd ? '/animecore' : '',
+    basePath: '',
     /* https://nextjs.org/docs/api-reference/next.config.js/trailing-slash */
     trailingSlash: true,
     /* https://nextjs.org/docs/api-reference/next.config.js/build-indicator*/
@@ -19,7 +19,7 @@ const nextConfig = {
         // https://nextjs.org/docs/api-reference/next.config.js/cdn-support-with-asset-prefix
         // This is stupid. But i dont have any better way.
         // B
-        assetPrefix: isProd ? '/static/' : '/',
+        assetPrefix: '/',
     },
     /**
      *
