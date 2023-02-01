@@ -11,8 +11,12 @@ if TYPE_CHECKING:
     from .models import CustomUser
 
 
-class UsernameWithDiscriminatorManager(models.Manager):
-    def get_username_with_discriminator(self, prefix: str = "") -> Any:
+class UsernameWithDiscriminatorManager(models.Manager["CustomUser"]):
+    # mypy: ignore-type
+    def get_username_with_discriminator(
+        self,
+        prefix: str = "",
+    ) -> models.QuerySet["CustomUser"]:
         prefix = prefix + "__" if prefix else ""
         return self.annotate(
             username_discriminator_as_string=Cast(
@@ -31,7 +35,10 @@ class UsernameWithDiscriminatorManager(models.Manager):
         )
 
 
-class UserManager(BaseUserManager, UsernameWithDiscriminatorManager):
+class UserManager(
+    BaseUserManager["CustomUser"],
+    UsernameWithDiscriminatorManager,
+):
     """
     Custom user model manager where email is the unique identifiers
     for authentication instead of usernames.
@@ -41,11 +48,10 @@ class UserManager(BaseUserManager, UsernameWithDiscriminatorManager):
         self,
         email: str,
         password: str,
-        **extra_fields: Any,
+        **extra_fields: dict[str, dict[str, Any]],
     ) -> "CustomUser":
-        """
-        Create and save a User with the given email and password.
-        """
+        """Create and save a User with the given email and password."""
+
         if not email:
             raise ValueError(_("The Email must be set"))
         email = self.normalize_email(email)
@@ -60,13 +66,13 @@ class UserManager(BaseUserManager, UsernameWithDiscriminatorManager):
         password: str,
         **extra_fields: Any,
     ) -> "CustomUser":
-        """
-        Create and save a SuperUser with the given email and password.
-        """
+        """Create and save a SuperUser with the given email and password."""
+
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
         extra_fields.setdefault("is_active", True)
 
+        # Sanity Check
         if extra_fields.get("is_staff") is not True:
             raise ValueError(_("Superuser must have is_staff=True."))
         if extra_fields.get("is_superuser") is not True:

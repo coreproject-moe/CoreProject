@@ -1,63 +1,71 @@
+from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
+
 from django.contrib import admin
 
+from ..forms import AnimeAdminModelForm
 from ..models import AnimeModel
 
 # Register your models here.
 
 
 @admin.register(AnimeModel)
-class AnimeInfoAdmin(admin.ModelAdmin):
+class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel], DynamicArrayMixin):
+    form = AnimeAdminModelForm
+
     filter_horizontal = [
-        "anime_genres",
-        "anime_themes",
-        "anime_studios",
-        "anime_producers",
-        "anime_characters",
-        "anime_name_synonyms",
-        "anime_recommendation",
-        "anime_episodes",
+        "genres",
+        "themes",
+        "studios",
+        "producers",
+        "characters",
+        "recommendations",
+        "episodes",
     ]
 
     list_filter = [
-        "anime_genres",
-        "anime_themes",
-        "anime_studios",
-        "anime_producers",
-        "anime_characters",
+        "genres",
+        "themes",
+        "studios",
+        "producers",
+        "characters",
     ]
 
     search_fields = [
-        "anime_name",
+        "name",
     ]
 
     fieldsets = (
         (
             None,
             {
-                "fields": ("mal_id",),
+                "fields": (
+                    "mal_id",
+                    "kitsu_id",
+                    "anilist_id",
+                ),
             },
         ),
         (
             ("Anime Names"),
             {
                 "fields": (
-                    "anime_name",
-                    "anime_name_japanese",
+                    "name",
+                    "name_japanese",
                 ),
             },
         ),
         (
             ("Anime Rating"),
             {
-                "fields": ("anime_rating",),
+                "fields": ("rating",),
             },
         ),
         (
             ("Anime Time Info"),
             {
                 "fields": (
-                    "anime_aired_from",
-                    "anime_aired_to",
+                    "aired_from",
+                    "aired_to",
                 )
             },
         ),
@@ -65,8 +73,8 @@ class AnimeInfoAdmin(admin.ModelAdmin):
             ("Anime Images"),
             {
                 "fields": (
-                    "anime_cover",
-                    "anime_banner",
+                    "cover",
+                    "banner",
                 )
             },
         ),
@@ -74,8 +82,8 @@ class AnimeInfoAdmin(admin.ModelAdmin):
             ("Anime Background & Summary"),
             {
                 "fields": (
-                    "anime_synopsis",
-                    "anime_background",
+                    "synopsis",
+                    "background",
                 )
             },
         ),
@@ -83,36 +91,38 @@ class AnimeInfoAdmin(admin.ModelAdmin):
             ("Anime M2M Fields"),
             {
                 "fields": (
-                    "anime_genres",
-                    "anime_themes",
-                    "anime_studios",
-                    "anime_producers",
-                    "anime_characters",
-                    "anime_name_synonyms",
-                    "anime_recommendation",
+                    "genres",
+                    "themes",
+                    "studios",
+                    "producers",
+                    "characters",
+                    "name_synonyms",
+                    "recommendations",
                 )
             },
         ),
         (
             ("Anime Episodes"),
             {
-                "fields": ("anime_episodes",),
+                "fields": ("episodes",),
+            },
+        ),
+        (
+            None,
+            {
+                "fields": (
+                    "theme_openings",
+                    "theme_endings",
+                ),
             },
         ),
     )
 
 
 # https://stackoverflow.com/questions/49293901/hide-model-from-main-admin-list-but-allow-creation-in-inline-editor
-# def has_module_permission(self, request):
+# def has_module_permission(self:Self, request):
 #     return False
 
 
-# Extra Imports
-# __ DO NOT REMOVE __
-
-from .anime_genre import AnimeGenreAdmin
-from .anime_synonym import AnimeSynonymAdmin
-from .anime_theme import AnimeThemeAdmin
-from .episode import EpisodeAdmin
-from .episode_comment import EpisodeCommentAdmin
-from .episode_timestamp import EpisodeTimestampAdmin
+from .anime_genre import AnimeGenreAdmin as AnimeGenreAdmin
+from .anime_theme import AnimeThemeAdmin as AnimeThemeAdmin

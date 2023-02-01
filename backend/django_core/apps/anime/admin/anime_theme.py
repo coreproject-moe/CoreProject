@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from ..models import AnimeThemeModel
+from ..models.anime_theme import AnimeThemeModel
 
 # Register your models here.
 
 
 @admin.register(AnimeThemeModel)
-class AnimeThemeAdmin(admin.ModelAdmin):
+class AnimeThemeAdmin(admin.ModelAdmin[AnimeThemeModel]):
     search_fields = ["name"]

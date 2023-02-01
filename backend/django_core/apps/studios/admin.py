@@ -6,5 +6,5 @@ from .models import StudioModel
 
 
 @admin.register(StudioModel)
-class StudioAdmin(admin.ModelAdmin):
+class StudioAdmin(admin.ModelAdmin[StudioModel]):
     search_fields = ["name"]

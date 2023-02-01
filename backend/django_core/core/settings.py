@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 
+# https://github.com/typeddjango/django-stubs/tree/54a1e894257f6eea49b63fcd3a6eb89af00daf55/django_stubs_ext#usage
+import django_stubs_ext
+
+django_stubs_ext.monkeypatch()
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -35,16 +40,6 @@ USERNAME_DISCRIMINATOR_LENGTH = 4
 MAL_CLIENT_ID = os.environ.get("MAL_CLIENT_ID")
 MAL_CLIENT_SECRET = os.environ.get("MAL_CLIENT_SECRET")
 
-# Max retires for request
-MAX_RETRY = 10
-MAX_REQUESTS_PER_MINUTE = 55
-REQUEST_STATUS_CODES_TO_RETRY = [408, 429, 500, 502, 503, 504]
-BUCKET_NAME = "coreproject"
-
-ALLOWED_HOSTS = [
-    "127.0.0.1",
-    "localhost",
-]
 
 # HOST configurations
 # We are using this to hyperlink model relations
@@ -56,13 +51,14 @@ HOSTNAME = "http://127.0.0.1:8000"
 INSTALLED_APPS = [
     # user must be above auth
     "apps.user",
-    "apps.discord",
     # Django stuff
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    # Postgres
+    "django.contrib.postgres",
     # Whitenoise
     "django.contrib.staticfiles",
     # Rest Framework
@@ -72,15 +68,26 @@ INSTALLED_APPS = [
     # 3rd party Django stuff
     "django_cleanup.apps.CleanupConfig",
     "huey.contrib.djhuey",
-    # APIS
+    # 3rd party adminpanel
+    "django_better_admin_arrayfield",
+    "django_admin_hstore_widget",
+    # Django browser Reload
+    "django_browser_reload",
+    # Tailwind CSS
+    "tailwind",
+    "tailwind_src",  # Our custom app
+    # Api ( Django-Ninja )
+    "apps.api",
+    # OpenGraph
+    "apps.opengraph",
+    # Models
     "apps.anime",
     "apps.trackers",
     "apps.characters",
     "apps.producers",
     "apps.studios",
     "apps.staffs",
-    # Views ( Frontend )
-    "apps.frontend",
+    "apps.episodes",
 ]
 
 
@@ -103,11 +110,14 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.cache.UpdateCacheMiddleware",  # Cache
     "django.middleware.common.CommonMiddleware",
+    "django.middleware.cache.FetchFromCacheMiddleware",  # Cache
     "django.middleware.csrf.CsrfViewMiddleware",
+    "corsheaders.middleware.CorsPostCsrfMiddleware",  # Cors headers
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "django.middleware.cache.FetchFromCacheMiddleware",  # Cache
+    # Browser Reload Middleware
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 
@@ -128,6 +138,7 @@ if DEBUG:
     INTERNAL_IPS = [
         "127.0.0.1",
     ]
+
 # Cookie override
 CSRF_COOKIE_SAMESITE = "Strict"
 SESSION_COOKIE_SAMESITE = "Strict"
@@ -173,7 +184,6 @@ LOGIN_URL = "login_page"
 
 DATABASES = {
     "default": {
-        "CONN_MAX_AGE": None,
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
         "CONN_MAX_AGE": 60,
@@ -183,15 +193,17 @@ DATABASES = {
 
 # POSTGRES
 # https://www.enterprisedb.com/postgres-tutorials/how-use-postgresql-django
+
 # DATABASES = {
 #     "default": {
-#         "ENGINE": "django.db.backends.postgresql_psycopg2",
+#         "ENGINE": "django.db.backends.postgresql",
 #         "NAME": "django",
 #         "USER": "postgres",
 #         "PASSWORD": "supersecretpassword",
 #         "HOST": "",
 #         "PORT": "",
-#         "CONN_MAX_AGE": 60,
+#         # https://stackoverflow.com/questions/23504483/django-conn-max-age-setting-error
+#         # "CONN_MAX_AGE": 10,
 #         "CONN_HEALTH_CHECKS": True,
 #     }
 # }
@@ -274,12 +286,25 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # django-cors-headers settings
 # https://pypi.org/project/django-cors-headers/
 
-CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:3000",
-    "http://127.0.0.1:8000",
-    "http://localhost:3000",
-    "http://localhost:8000",
+
+CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS = [
+    # Port = 5173
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
 ]
+
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "backend.localhost"]
+
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+
+CORS_ALLOW_CREDENTIALS = True
 
 # settings.py -- alternative configuration method
 # https://huey.readthedocs.io/en/latest/contrib.html#setting-things-up
@@ -295,9 +320,13 @@ HUEY = PriorityRedisHuey(
     connection_pool=pool,
 )
 
-DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage"
+DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage" if DEBUG else ""
 DBBACKUP_STORAGE_OPTIONS = {"location": os.path.join(BASE_DIR, "backup")}
 
-# Mappings from AIOHTTP
-BASE_AIOHTTP_URL = "http://localhost:8000"
-AIOHTTP_AVATAR_URL = f"{BASE_AIOHTTP_URL}/user/avatar/"  # /id
+# https://django-tailwind.readthedocs.io/en/latest/installation.html
+
+TAILWIND_APP_NAME = "tailwind_src"
+if os.name == "nt":
+    NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+else:
+    NPM_BIN_PATH = "/usr/local/bin/npm"

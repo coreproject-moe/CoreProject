@@ -27,7 +27,8 @@ def refresh_kitsu_jwt() -> None:
 
     for object in models:
         # We are adding the timestamp as directed by kitsu
-        # Essentially what we are doing is we are taking the datetime object and 1 month to it
+        # Essentially what we are doing is
+        # we are taking the datetime object and 1 month to it
         # expires_in = object.created_at + timezone.timedelta(seconds=object.expires_in)
 
         res = session.post(

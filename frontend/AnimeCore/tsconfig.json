@@ -1,0 +1,18 @@
+{
+    "extends": "./.svelte-kit/tsconfig.json",
+    "compilerOptions": {
+        "module": "es2015",
+        "strict": true,
+        "allowUnreachableCode": false,
+        "allowSyntheticDefaultImports": true,
+        "exactOptionalPropertyTypes": true,
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "noImplicitOverride": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "resolveJsonModule": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUncheckedIndexedAccess": true
+    }
+}

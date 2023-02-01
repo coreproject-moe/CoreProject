@@ -1,0 +1,46 @@
+{
+    "name": "animecore",
+    "version": "1.0.0",
+    "main": "index.ts",
+    "scripts": {
+        "start": "expo start --dev-client",
+        "android": "expo run:android",
+        "ios": "expo run:ios",
+        "web": "expo start --web"
+    },
+    "dependencies": {
+        "@tailwindcss/typography": "^0.5.9",
+        "daisyui": "^2.49.0",
+        "expo": "~47.0.13",
+        "expo-font": "^11.0.1",
+        "expo-splash-screen": "~0.17.5",
+        "expo-status-bar": "~1.4.2",
+        "nativewind": "^2.0.11",
+        "react": "18.2.0",
+        "react-native": "0.71.1"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.20.12",
+        "@tsconfig/react-native": "^2.0.3",
+        "@types/jest": "^29.4.0",
+        "@types/react": "^18.0.27",
+        "@types/react-native": "^0.71.1",
+        "@types/react-test-renderer": "^18.0.0",
+        "@typescript-eslint/eslint-plugin": "^5.50.0",
+        "babel-plugin-module-resolver": "^5.0.0",
+        "eslint": "^8.33.0",
+        "eslint-config-airbnb": "^19.0.4",
+        "eslint-config-prettier": "^8.6.0",
+        "eslint-config-standard-with-typescript": "^33.0.0",
+        "eslint-plugin-import": "^2.27.5",
+        "eslint-plugin-jsx-a11y": "^6.7.1",
+        "eslint-plugin-n": "^15.6.1",
+        "eslint-plugin-promise": "^6.1.1",
+        "eslint-plugin-react": "^7.32.2",
+        "eslint-plugin-react-hooks": "^4.6.0",
+        "eslint-plugin-react-native": "^4.0.0",
+        "tailwind": "^4.0.0",
+        "typescript": "^4.9.5"
+    },
+    "private": true
+}

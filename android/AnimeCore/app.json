@@ -1,0 +1,10 @@
+{
+    "expo": {
+        "name": "AnimeCore",
+        "slug": "AnimeCore",
+        "version": "1.0.0",
+        "assetBundlePatterns": ["**/*"],
+        "jsEngine": "hermes"
+    },
+    "name": "AnimeCore"
+}
