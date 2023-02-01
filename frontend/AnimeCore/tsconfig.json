@@ -16,9 +16,9 @@
         "incremental": true,
         "baseUrl": ".",
         "paths": {
-            "@components/*": ["components/*"],
+            "@components/*": ["./src/components/*"],
             "@static/*" : ["public/*"],
-            "@icons/*": ["icons/*"]
+            "@icons/*": ["./src/icons/*"]
         }
 
     },

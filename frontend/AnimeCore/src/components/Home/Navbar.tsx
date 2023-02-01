@@ -12,21 +12,6 @@ import { useSpotlight } from '@mantine/spotlight';
 import { useEffect } from 'react';
 
 const useStyles = createStyles((theme) => ({
-    hoverDiv: {
-        position: 'absolute',
-        display: 'flex',
-        background: theme.colors.blue[2],
-        borderRadius: theme.radius.md,
-        height: 54,
-        width: 54,
-        zIndex: 2,
-        opacity: 0,
-
-        [theme.fn.smallerThan('sm')]: {
-            height: 30,
-            width: 30,
-        },
-    },
     nav: {
         backgroundColor: theme.colors.blue[9],
     },
@@ -193,78 +178,14 @@ export default function DoubleNavbar() {
     const theme = useMantineTheme();
     const spotlight = useSpotlight();
 
-    const middleIconContainerDiv = useRef<HTMLDivElement | null>(null);
-    const animationItemRef = useRef<HTMLDivElement | null>(null);
-
-    useEffect(() => {
-        animationItemRef!.current!.style.transform = `translateY(${
-            middleIconContainerDiv!.current?.getBoundingClientRect().top
-        }px)`;
-    }, [middleIconContainerDiv, animationItemRef]);
-
-    const mouseEnterIcon = (item: React.MouseEvent) => {
-        if (animationItemRef.current) {
-            const element = item.currentTarget as HTMLDivElement;
-            animationItemRef.current.style.transform = `translateY(${Math.round(
-                element.getBoundingClientRect().top
-            )}px)`;
-
-            const childElement = element.firstChild as SVGElement;
-            childElement.style.color = theme.black;
-        }
-    };
-
-    const mouseLeaveIcon = (item: React.MouseEvent) => {
-        if (animationItemRef.current) {
-            const element = item.currentTarget as HTMLDivElement;
-            element.style.opacity = '1';
-
-            const childElement = element.firstChild as SVGElement;
-            childElement.style.color = theme.white;
-        }
-    };
-
-    const mouseEnterIconParent = (item: React.MouseEvent) => {
-        // Maybe fix the animation logic someday
-        // If it works dont break it
-
-        animationItemRef!.current!.style.transform = `translateY(${Math.round(
-            item.currentTarget.getBoundingClientRect().top
-        )}px)`;
-
-        setTimeout(() => {
-            animationItemRef!.current!.style.opacity = '1';
-            animationItemRef.current!.style.transitionDuration = '150ms';
-        }, ANIMATION_DURATION);
-    };
-
-    const mouseLeaveIconParent = () =>
-        // item: React.MouseEvent
-        {
-            animationItemRef!.current!.style.opacity = '0';
-            setTimeout(() => {
-                animationItemRef.current!.style.transitionDuration = '0ms';
-            }, ANIMATION_DURATION);
-        };
-
-    const mouseLeavesNavElement = () =>
-        // item: React.MouseEvent
-        {
-            animationItemRef!.current!.style.opacity = '0';
-        };
-
     return (
-        <Flex onMouseLeave={mouseLeavesNavElement}>
+        <Flex>
             <Navbar
                 className={classes.nav}
                 height={'100vh'}
                 width={{ md: 100 }}
             >
                 <Navbar.Section grow className={classes.sideBar}>
-                    <div
-                        ref={animationItemRef}
-                        className={classes.hoverDiv}
-                    ></div>
                     <Flex
                         mih={50}
                         gap="sm"
@@ -321,9 +242,6 @@ export default function DoubleNavbar() {
                         align="center"
                         direction="column"
                         wrap="nowrap"
-                        ref={middleIconContainerDiv}
-                        onMouseEnter={mouseEnterIconParent}
-                        onMouseLeave={mouseLeaveIconParent}
                     >
                         {Icons.middle.map((item, index) => {
                             return (
@@ -333,8 +251,6 @@ export default function DoubleNavbar() {
                                         [classes.linkActive]:
                                             active === item.name,
                                     })}
-                                    onMouseEnter={mouseEnterIcon}
-                                    onMouseLeave={mouseLeaveIcon}
                                     onClick={() => setActive(item.name)}
                                 >
                                     <Flex
@@ -360,16 +276,12 @@ export default function DoubleNavbar() {
                         direction="column"
                         wrap="nowrap"
                         mb="xl"
-                        onMouseEnter={mouseEnterIconParent}
-                        onMouseLeave={mouseLeaveIconParent}
                     >
                         {Icons.last.map((item, index) => {
                             return (
                                 <UnstyledButton
                                     key={index}
                                     className={classes.mainLink}
-                                    onMouseEnter={mouseEnterIcon}
-                                    onMouseLeave={mouseLeaveIcon}
                                 >
                                     <Flex
                                         direction="column"
