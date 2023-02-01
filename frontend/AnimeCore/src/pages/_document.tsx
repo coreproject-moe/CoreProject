@@ -10,11 +10,7 @@ export default class _Document extends Document {
     render() {
         return (
             <Html>
-                <Head>
-                    <Script id="django" strategy="beforeInteractive">{`
-                        window.CSRFTOKEN = '{{ csrf_token }}';
-                    `}</Script>
-                </Head>
+                <Head></Head>
 
                 <body>
                     <Main />
