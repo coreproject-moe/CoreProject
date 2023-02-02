@@ -1,3 +1,4 @@
+
 {% extends 'tailwind_base.html' %}
 <!--prettier-ignore-->
 {% load static %}
@@ -41,10 +42,15 @@ CoreProject | Landing page
         );
     }
 </style>
+
+   
+
+  
 {% endblock %}
 
 <!--prettier-ignore-->
 {% block body %}
+
 <div
     class="items-center flex h-screen justify-center overflow-hidden p-0 m-0 bg-[#09080c]"
 >
@@ -86,11 +92,13 @@ CoreProject | Landing page
         {% endfor %}
     </div>
 </div>
+
 {% endblock %}
 
 <!--prettier-ignore-->
 
 {% block js %}
+
 <script>
     document.getElementById('cards').onmousemove = (e) => {
         for (const card of document.getElementsByClassName('card')) {
@@ -106,4 +114,5 @@ CoreProject | Landing page
         `This awesome site was made using this tutorial | Youtube : https://www.youtube.com/watch?v=htGfnF1zN4g | CodePen : https://cdpn.io/MWQeYLW`
     );
 </script>
+
 {% endblock %}
