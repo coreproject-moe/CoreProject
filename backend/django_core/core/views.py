@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.templatetags.static import static
 from .utilities.format import format_kokoro_color
+from django.http import HttpResponse, HttpRequest
 
 ERROR_DICT = {
     400: {
@@ -66,40 +67,51 @@ ERROR_DICT = {
 }
 
 
-def home_view(request):
+async def home_view(request: HttpRequest) -> HttpResponse:
     return render(
         request,
         template_name="home/index.html",
     )
 
 
-def four_zero_zero_view(request, exception):
+async def four_zero_zero_view(request: HttpRequest, exception: None = None) -> HttpResponse:
+    context = ERROR_DICT.get(400)
+    context.setdefault("error_status_code", 400)
     return render(
         request,
         "errors/base.html",
-        context=ERROR_DICT.get(400).setdefault("error_status_code", 400),
+        context,
     )
 
 
-def four_zero_three_view(request, exception):
+async def four_zero_three_view(
+    request: HttpRequest, exception: None = None
+) -> HttpResponse:
+    context = ERROR_DICT.get(403)
+    context.setdefault("error_status_code", 403)
     return render(
         request,
         "errors/base.html",
-        context=ERROR_DICT.get(403).setdefault("error_status_code", 403),
+        context,
     )
 
 
-def four_zero_four_view(request, exception):
+async def four_zero_four_view(request: HttpRequest, exception: None = None) -> HttpResponse:
+    context = ERROR_DICT.get(404)
+    context.setdefault("error_status_code", 404)
     return render(
         request,
         "errors/base.html",
-        context=ERROR_DICT.get(404).setdefault("error_status_code", 404),
+        context,
     )
 
 
-def five_zero_zero_view(request):
+async def five_zero_zero_view(request: HttpRequest) -> HttpResponse:
+    context = ERROR_DICT.get(500)
+    context.setdefault("error_status_code", 500)
+
     return render(
         request,
         "errors/base.html",
-        context=ERROR_DICT.get(500).setdefault("error_status_code", 500),
+        context,
     )
