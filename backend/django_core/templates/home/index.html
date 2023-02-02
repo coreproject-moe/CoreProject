@@ -1,4 +1,10 @@
-{%extends 'tailwind_base.html'%}
+{% extends 'tailwind_base.html' %}
+<!--prettier-ignore-->
+{% load static %}
+
+{% block title %}
+CoreProject | Landing page
+{% endblock %}
 
 <!--prettier-ignore-->
 {% block head %}
@@ -6,12 +12,9 @@
 <style>
     :root {
         --card-color: #09080c;
+        --card-background-color: rgba(7, 5, 25, 0.1);
         --card-after-color: rgba(255, 255, 255, 0.4);
         --card-before-color: rgba(255, 255, 255, 0.06);
-    }
-
-    .card {
-        background-color: rgba(7, 5, 25, 0.1);
     }
 
     #cards:hover > .card::after {
@@ -52,7 +55,10 @@
         {% for key,value in cards.items %}
         <div
             class="card rounded-xl border-[1px] md:border-0 cursor-pointer flex flex-col relative w-[300px] h-[260px] before:h-full before:w-full before:z-30 before:rounded-[inherit] before:opacity-0 before:absolute before:top-0 before:left-0 before:transition-opacity before:duration-500 after:h-full after:w-full after:z-10 after:rounded-[inherit] after:opacity-0 after:absolute after:top-0 after:left-0 after:transition-opacity after:duration-500"
-            style="border-color: var(--card-before-color)"
+            style="
+                border-color: var(--card-before-color);
+                background-color: var(--card-background-color);
+            "
         >
             <div
                 class="rounded-[inherit] flex flex-col grow inset-[1px] p-2.5 absolute z-20"
@@ -67,10 +73,11 @@
                     class="card-info-wrapper items-center flex grow justify-start"
                 >
                     <div class="card-info">
-                        <i class="fa-duotone fa-apartment"></i>
                         <div class="card-info-title text-white">
-                            <h3>{{ key }}</h3>
-                            <h4>Places to be apart. Wait, what?</h4>
+                            <div class="flex">
+                                <p class="text-xl">{{ key }}</p>
+                            </div>
+                            <div>{{ value.description }}</div>
                         </div>
                     </div>
                 </div>
@@ -96,5 +103,8 @@
             card.style.setProperty('--mouse-y', `${y}px`);
         }
     };
+    console.log(
+        `This awesome site was made using this tutorial | Youtube : https://www.youtube.com/watch?v=htGfnF1zN4g | CodePen : https://cdpn.io/MWQeYLW`
+    );
 </script>
 {% endblock %}
