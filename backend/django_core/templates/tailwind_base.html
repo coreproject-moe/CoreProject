@@ -15,11 +15,11 @@
             rel="stylesheet"
             href="{% static 'fonts/Kokoro/stylesheet.css' %}"
         />
-
-        <title>{%block title%} {%endblock%}</title>
+        {% block head %} {% endblock %}
+        <title>{% block title %} {% endblock %}</title>
         {% tailwind_css %}
     </head>
     <body>
-        {%block body%}{%endblock%}
+        {% block body %}{% endblock %} {% block js %} {% endblock %}
     </body>
 </html>
