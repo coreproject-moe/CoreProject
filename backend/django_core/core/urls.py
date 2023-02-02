@@ -16,9 +16,7 @@ Including another URLconf
 from . import views
 from django.conf import settings
 from django.contrib import admin
-from django.urls import include, path, re_path
-from django.views import debug
-from django.views.generic import TemplateView
+from django.urls import include, path
 
 
 handler400 = views.four_zero_zero_view
@@ -35,10 +33,10 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     #   Errors
     # ===========
-    re_path("400/$", handler400),
-    re_path("403/$", handler403),
-    re_path("404/$", handler404),
-    re_path("500/$", handler500),
+    path("400/", handler400),
+    path("403/", handler403),
+    path("404/", handler404),
+    path("500/", handler500),
     #   HTTP
     # =========
     path("user/", include("apps.user.urls")),
