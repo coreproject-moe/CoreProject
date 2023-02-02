@@ -80,20 +80,10 @@ async def home_view(request: HttpRequest) -> HttpResponse:
                 "description": "Requests is an elegant and simple HTTP library for Python, built for human beings.",
                 "logo": static("images/logos/requests.png"),
             },
-            "rew": {
-                "type": "Web Framework",
-                "description": "The web framework for perfectionists with deadlines.",
-                "logo": static("images/logos/django.svg"),
-            },
-            "321": {
-                "type": "Web Framework",
-                "description": "The web framework for perfectionists with deadlines.",
-                "logo": static("images/logos/django.svg"),
-            },
-            "asfd": {
-                "type": "Web Framework",
-                "description": "The web framework for perfectionists with deadlines.",
-                "logo": static("images/logos/django.svg"),
+            "celery": {
+                "type": "Task Queue",
+                "description": "Distributed Task Queue",
+                "logo": static("images/logos/celery.svg"),
             },
         },
     }
