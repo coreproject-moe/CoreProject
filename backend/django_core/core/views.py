@@ -68,10 +68,37 @@ ERROR_DICT = {
 
 
 async def home_view(request: HttpRequest) -> HttpResponse:
-    return render(
-        request,
-        template_name="home/index.html",
-    )
+    context = {
+        "cards": {
+            "django": {
+                "type": "Web Framework",
+                "description": "The web framework for perfectionists with deadlines.",
+                "logo": static("images/logos/django.svg"),
+            },
+            "fdsa": {
+                "type": "Web Framework",
+                "description": "The web framework for perfectionists with deadlines.",
+                "logo": static("images/logos/django.svg"),
+            },
+            "rew": {
+                "type": "Web Framework",
+                "description": "The web framework for perfectionists with deadlines.",
+                "logo": static("images/logos/django.svg"),
+            },
+            "321": {
+                "type": "Web Framework",
+                "description": "The web framework for perfectionists with deadlines.",
+                "logo": static("images/logos/django.svg"),
+            },
+            "asfd": {
+                "type": "Web Framework",
+                "description": "The web framework for perfectionists with deadlines.",
+                "logo": static("images/logos/django.svg"),
+            },
+        },
+    }
+
+    return render(request, "home/index.html", context)
 
 
 async def four_zero_zero_view(request: HttpRequest, exception: None = None) -> HttpResponse:

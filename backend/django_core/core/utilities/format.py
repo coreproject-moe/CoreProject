@@ -1,6 +1,6 @@
 import re
 
-KOKORO_WORD_COLOR_MAP: dict[str, str] = {
+KOKORO_WORD_COLOR_MAP = {
     "-": "white",
     "a": "white",
     "c": "white",
@@ -11,22 +11,24 @@ KOKORO_WORD_COLOR_MAP: dict[str, str] = {
     "r": "white",
 }
 
-TAILWIND_COLOR_MAP: dict[str, str] = {
+TAILWIND_COLOR_MAP = {
     "white": "text-white",
     "yellow": "text-warning",
 }
 
-KOKORO_REGEX = re.compile(r"kokoro-chan", re.M)
+WORD = "kokoro-chan"
 
 
 def format_kokoro_color(input: str) -> str:
+    KOKORO_REGEX = re.compile(r"{}".format(WORD), re.M)
+
     color_formated_string = ""
 
     # This variable has ['kokoro-chan']
     re.findall(KOKORO_REGEX, input)
-    word = "kokoro-chan"
+
     # Parse each letter in the word
-    for letter in word:
+    for letter in WORD:
         color = KOKORO_WORD_COLOR_MAP.get(letter)
         color_class = TAILWIND_COLOR_MAP.get(color)
         color_formated_string += f"<span class='inline-flex {color_class}'>{letter}</span>"
