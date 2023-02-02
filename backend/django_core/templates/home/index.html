@@ -1,22 +1,21 @@
-{%extends 'tailwind_base.html'%} {% block head %}
+
+{% extends 'tailwind_base.html' %}
+<!--prettier-ignore-->
+{% load static %}
+
+{% block title %}
+    CoreProject | Landing page
+{% endblock %}
+
+<!--prettier-ignore-->
+{% block head %}
 
     <style>
         :root {
-            --bg-color: rgb(20, 20, 20);
-            --card-color: rgb(23, 23, 23);
-        }
-
-        body {
-            background-color: var(--bg-color);
-        }
-
-        #cards {
-            max-width: 916px;
-            width: calc(100% - 20px);
-        }
-
-        .card {
-            background-color: rgba(255, 255, 255, 0.1);
+            --card-color: #09080c;
+            --card-background-color: rgba(7, 5, 25, 0.1);
+            --card-after-color: rgba(255, 255, 255, 0.4);
+            --card-before-color: rgba(255, 255, 255, 0.06);
         }
 
         #cards:hover > .card::after {
@@ -30,7 +29,7 @@
         .card::before {
             background: radial-gradient(
                 800px circle at var(--mouse-x) var(--mouse-y),
-                rgba(255, 255, 255, 0.06),
+                var(--card-before-color),
                 transparent 40%
             );
         }
@@ -38,175 +37,34 @@
         .card::after {
             background: radial-gradient(
                 600px circle at var(--mouse-x) var(--mouse-y),
-                rgba(255, 255, 255, 0.4),
+                var(--card-after-color),
                 transparent 40%
             );
         }
-
-        /* -- ↓ ↓ ↓ extra card content styles ↓ ↓ ↓ -- */
-
-        h1,
-        h2,
-        h3,
-        h4,
-        span {
-            color: rgb(240, 240, 240);
-            font-family: 'Rubik', sans-serif;
-            font-weight: 400;
-            margin: 0px;
-        }
-
-        i {
-            color: rgb(240, 240, 240);
-        }
-
-        .card-image > i {
-            font-size: 6em;
-            opacity: 0.25;
-        }
-
-        .card-info-wrapper {
-            padding: 0px 20px;
-        }
-
-        .card-info {
-            align-items: flex-start;
-            display: flex;
-            gap: 10px;
-        }
-
-        .card-info > i {
-            font-size: 1em;
-            height: 20px;
-            line-height: 20px;
-        }
-
-        .card-info-title > h3 {
-            font-size: 1.1em;
-            line-height: 20px;
-        }
-
-        .card-info-title > h4 {
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 0.85em;
-            margin-top: 8px;
-        }
-
-        /* -- ↓ ↓ ↓ some responsiveness ↓ ↓ ↓ -- */
-
-        @media (max-width: 1000px) {
-            body {
-                align-items: flex-start;
-                overflow: auto;
-            }
-
-            #cards {
-                max-width: 1000px;
-                padding: 10px 0px;
-            }
-
-            .card {
-                flex-shrink: 1;
-                width: calc(50% - 4px);
-            }
-        }
-
-        @media (max-width: 500px) {
-            .card {
-                height: 180px;
-            }
-
-            .card-image {
-                height: 80px;
-            }
-
-            .card-image > i {
-                font-size: 3em;
-            }
-
-            .card-info-wrapper {
-                padding: 0px 10px;
-            }
-
-            .card-info > i {
-                font-size: 0.8em;
-            }
-
-            .card-info-title > h3 {
-                font-size: 0.9em;
-            }
-
-            .card-info-title > h4 {
-                font-size: 0.8em;
-                margin-top: 4px;
-            }
-        }
-
-        @media (max-width: 320px) {
-            .card {
-                width: 100%;
-            }
-        }
-
-        /* -- ↓ ↓ ↓ YouTube link styles ↓ ↓ ↓ -- */
-
-        #youtube-link {
-            bottom: 10px;
-        }
-
-        #youtube-link > i {
-            color: rgb(239, 83, 80);
-        }
-
-        #source-link {
-            bottom: 60px;
-        }
-
-        #source-link > i {
-            color: rgb(94, 106, 210);
-        }
-
-        .link {
-            align-items: center;
-            backdrop-filter: blur(3px);
-            background-color: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            display: inline-flex;
-            gap: 5px;
-            left: 10px;
-            padding: 10px 20px;
-            position: fixed;
-            text-decoration: none;
-            z-index: 100;
-        }
-
-        .link:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .link > i,
-        .link > span {
-            height: 20px;
-            line-height: 20px;
-        }
-
-        .link > span {
-            color: white;
-        }
     </style>
+
+
+
+
 {% endblock %}
 
 <!--prettier-ignore-->
 {% block body %}
-    <div class="items-center flex h-screen justify-center overflow-hidden p-0 m-0">
-        <div id="cards" class="flex flex-wrap gap-2">
-            {% for i in '012345' %}
+
+    <div
+        class="items-center flex h-screen justify-center overflow-hidden p-0 m-0 bg-[#09080c]"
+    >
+        <div
+            id="cards"
+            class="gap-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-items-center"
+        >
+            {% for key,value in cards.items %}
                 <div
-                    class="card rounded-xl cursor-pointer flex flex-col relative w-[300px] h-[260px] before:h-full before:w-full before:z-30 before:rounded-[inherit] before:opacity-0 before:absolute before:top-0 before:left-0 before:transition-opacity before:duration-500 after:h-full after:w-full after:z-10 after:rounded-[inherit] after:opacity-0 after:absolute after:top-0 after:left-0 after:transition-opacity after:duration-500"
+                    class="card rounded-xl border-[1px] md:border-0 cursor-pointer flex flex-col relative w-[300px] h-[260px] before:h-full before:w-full before:z-30 before:rounded-[inherit] before:opacity-0 before:absolute before:top-0 before:left-0 before:transition-opacity before:duration-500 after:h-full after:w-full after:z-10 after:rounded-[inherit] after:opacity-0 after:absolute after:top-0 after:left-0 after:transition-opacity after:duration-500"
+                    style="
+                        border-color: var(--card-before-color);
+                        background-color: var(--card-background-color);
+                    "
                 >
                     <div
                         class="rounded-[inherit] flex flex-col grow inset-[1px] p-2.5 absolute z-20"
@@ -215,17 +73,17 @@
                         <div
                             class="items-center flex h-[140px] justify-center overflow-hidden"
                         >
-                            {% comment %} Put image here {% endcomment %}
-                            <i class="fa-duotone fa-apartment"></i>
+                            <img src="{{ value.logo }}" width="120" />
                         </div>
                         <div
                             class="card-info-wrapper items-center flex grow justify-start"
                         >
                             <div class="card-info">
-                                <i class="fa-duotone fa-apartment"></i>
-                                <div class="card-info-title">
-                                    <h3>Apartments</h3>
-                                    <h4>Places to be apart. Wait, what?</h4>
+                                <div class="card-info-title text-white">
+                                    <div class="flex">
+                                        <p class="text-xl">{{ key }}</p>
+                                    </div>
+                                    <div>{{ value.description }}</div>
                                 </div>
                             </div>
                         </div>
@@ -240,16 +98,21 @@
 <!--prettier-ignore-->
 
 {% block js %}
+
     <script>
         document.getElementById('cards').onmousemove = (e) => {
             for (const card of document.getElementsByClassName('card')) {
                 const rect = card.getBoundingClientRect(),
-                x = e.clientX - rect.left,
-                y = e.clientY - rect.top;
+                x = Math.round(e.clientX - rect.left),
+                y = Math.round(e.clientY - rect.top);
 
                 card.style.setProperty('--mouse-x', `${x}px`);
                 card.style.setProperty('--mouse-y', `${y}px`);
             }
         };
+        console.log(
+            `This awesome site was made using this tutorial | Youtube : https://www.youtube.com/watch?v=htGfnF1zN4g | CodePen : https://cdpn.io/MWQeYLW`
+        );
     </script>
+
 {% endblock %}
