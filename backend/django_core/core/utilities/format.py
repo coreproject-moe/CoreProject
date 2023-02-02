@@ -20,7 +20,7 @@ WORD = "kokoro-chan"
 
 
 def format_kokoro_color(input: str) -> str:
-    KOKORO_REGEX = re.compile(fr"{WORD}", re.M)
+    KOKORO_REGEX = re.compile(rf"{WORD}", re.M)
 
     color_formated_string = ""
 
