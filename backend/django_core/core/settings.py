@@ -68,7 +68,8 @@ INSTALLED_APPS = [
     "corsheaders",
     # 3rd party Django stuff
     "django_cleanup.apps.CleanupConfig",
-    "huey.contrib.djhuey",
+    # 3rd Party Models
+    "colorfield",
     # 3rd party adminpanel
     "django_better_admin_arrayfield",
     "django_admin_hstore_widget",
@@ -313,20 +314,6 @@ CORS_ALLOW_METHODS = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True
-
-# settings.py -- alternative configuration method
-# https://huey.readthedocs.io/en/latest/contrib.html#setting-things-up
-
-from huey import PriorityRedisHuey
-from redis import ConnectionPool
-
-pool = ConnectionPool(host="localhost", port=6379, max_connections=20)
-HUEY = PriorityRedisHuey(
-    "coreproject_huey",
-    use_zlib=True,
-    compression=True,
-    connection_pool=pool,
-)
 
 DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage" if DEBUG else ""
 DBBACKUP_STORAGE_OPTIONS = {"location": os.path.join(BASE_DIR, "backup")}

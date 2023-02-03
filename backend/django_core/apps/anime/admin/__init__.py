@@ -11,7 +11,6 @@ from ..models import AnimeModel
 @admin.register(AnimeModel)
 class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel], DynamicArrayMixin):
     form = AnimeAdminModelForm
-
     filter_horizontal = [
         "genres",
         "themes",
@@ -21,7 +20,6 @@ class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel], DynamicArrayMixin):
         "recommendations",
         "episodes",
     ]
-
     list_filter = [
         "genres",
         "themes",
@@ -29,7 +27,6 @@ class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel], DynamicArrayMixin):
         "producers",
         "characters",
     ]
-
     search_fields = [
         "name",
     ]
@@ -51,6 +48,15 @@ class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel], DynamicArrayMixin):
                 "fields": (
                     "name",
                     "name_japanese",
+                ),
+            },
+        ),
+        (
+            ("Image Colors"),
+            {
+                "fields": (
+                    "banner_background_color",
+                    "cover_background_color",
                 ),
             },
         ),

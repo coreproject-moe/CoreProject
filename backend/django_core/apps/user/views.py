@@ -1,7 +1,7 @@
 import hashlib
 import textwrap
 
-from core.utility import sendfile
+from core.utils.sendfile import sendfile
 import httpx
 
 from django.core.management.utils import get_random_secret_key
