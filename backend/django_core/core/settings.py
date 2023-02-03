@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     # Postgres
     "django.contrib.postgres",
     # Whitenoise
+    "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     # Rest Framework
     "ninja",
@@ -72,6 +73,9 @@ INSTALLED_APPS = [
     # 3rd party adminpanel
     "django_better_admin_arrayfield",
     "django_admin_hstore_widget",
+    # Tailwind CSS
+    "tailwind",
+    "tailwind_src",  # Our custom app
     # Api ( Django-Ninja )
     "apps.api",
     # OpenGraph
@@ -93,6 +97,8 @@ if DEBUG:
     INSTALLED_APPS += (
         "debug_toolbar",
         "dbbackup",  # django-dbbackup
+        # Django browser Reload
+        "django_browser_reload",
     )
 
 
@@ -124,6 +130,8 @@ if DEBUG:
     MIDDLEWARE += (
         "debug_toolbar.middleware.DebugToolbarMiddleware",
         "django_cprofile_middleware.middleware.ProfilerMiddleware",
+        # Browser Reload Middleware
+        "django_browser_reload.middleware.BrowserReloadMiddleware",
     )
 
 
@@ -266,7 +274,14 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = Path(BASE_DIR, "staticfiles")
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+
+# Enable when django 4.2 is released
+# http://whitenoise.evans.io/en/latest/django.html#add-compression-and-caching-support
+# STORAGES = {
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = Path(BASE_DIR, "media")
@@ -302,3 +317,11 @@ CORS_ALLOW_CREDENTIALS = True
 
 DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage" if DEBUG else ""
 DBBACKUP_STORAGE_OPTIONS = {"location": os.path.join(BASE_DIR, "backup")}
+
+# https://django-tailwind.readthedocs.io/en/latest/installation.html
+
+TAILWIND_APP_NAME = "tailwind_src"
+if os.name == "nt":
+    NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+else:
+    NPM_BIN_PATH = "/usr/local/bin/npm"

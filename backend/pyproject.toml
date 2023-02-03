@@ -44,7 +44,10 @@ uvicorn = '*'
 # Typing support
 django-stubs-ext = "*"
 # ===================================================
+# Color Gra
 colorthief = "^0.2.1"
+# Tailwind CSS
+django-tailwind = "^3.4.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -80,6 +83,10 @@ mksync = "python ./django_core/manage.py makemigrations"
 collectstatic = "python ./django_core/manage.py collectstatic --clear --link" # Dont duplicate copy files.
 ## Mypy
 mypy = "mypy . --enable-incomplete-feature=Unpack"
+## Tailwind
+tailwind_install = "python ./django_core/manage.py tailwind install"
+tailwind_start = "python ./django_core/manage.py tailwind start"
+tailwind_build = "python ./django_core/manage.py tailwind build"
 
 [tool.poe.tasks.celery]
 shell="""
