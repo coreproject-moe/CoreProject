@@ -1,13 +1,16 @@
 <script lang="ts">
     import { Mousewheel } from "swiper";
-    import { Swiper, SwiperSlide } from "swiper/svelte";
     import voca from "voca";
 
     import myList from "$data/mock/my_list.json";
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import Settings from "$icons/Settings.svelte";
     import { responsiveMode } from "$store/Responsive";
-
+    import { onMount } from "svelte";
+    onMount(async () => {
+        const { register } = await import("swiper/element/bundle");
+        register();
+    });
     // Responsive switches
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
@@ -44,7 +47,7 @@
 </div>
 
 <div class="w-96 md:w-[60vw]">
-    <Swiper
+    <swiper-container
         speed={600}
         direction="horizontal"
         slidesPerView={"auto"}
@@ -56,7 +59,7 @@
         }}
     >
         {#each myList as item}
-            <SwiperSlide>
+            <swiper-slide>
                 <div class="card w-36 h-52 bg-base-100 image-full before:!opacity-60">
                     <figure>
                         <img
@@ -71,7 +74,7 @@
                         <div class="card-actions">{item.current}/{item.total}</div>
                     </div>
                 </div>
-            </SwiperSlide>
+            </swiper-slide>
         {/each}
-    </Swiper>
+    </swiper-container>
 </div>

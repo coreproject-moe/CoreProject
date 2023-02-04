@@ -1,13 +1,16 @@
 <script lang="ts">
     import { FreeMode, Mousewheel } from "swiper";
-    import { Swiper, SwiperSlide } from "swiper/svelte";
     import voca from "voca";
 
     import latestEpisodes from "$data/mock/latest_episode.json";
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import Play from "$icons/Play.svelte";
     import { responsiveMode } from "$store/Responsive";
-
+    import { onMount } from "svelte";
+    onMount(async () => {
+        const { register } = await import("swiper/element/bundle");
+        register();
+    });
     // Responsive switches
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
@@ -26,7 +29,7 @@
     />
 </p>
 <div class="h-28 md:h-[530px] w-96 md:w-80">
-    <Swiper
+    <swiper-container
         direction={mobile ? "horizontal" : "vertical"}
         modules={[Mousewheel, FreeMode]}
         slidesPerView={mobile ? 1 : 4}
@@ -40,7 +43,7 @@
         }}
     >
         {#each latestEpisodes as item}
-            <SwiperSlide>
+            <swiper-slide>
                 <div
                     class="w-10/12 md:w-64 carousel-item bg-center rounded-xl bg-no-repeat bg-cover flex items-center justify-between p-8"
                     style="
@@ -75,7 +78,7 @@
                         />
                     </button>
                 </div>
-            </SwiperSlide>
+            </swiper-slide>
         {/each}
-    </Swiper>
+    </swiper-container>
 </div>

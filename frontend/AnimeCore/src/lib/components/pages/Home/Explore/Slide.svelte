@@ -1,17 +1,20 @@
 <script lang="ts">
-    import { Swiper, SwiperSlide } from "swiper/svelte";
-
     import exploreData from "$data/mock/explore.json";
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import FourBoxSquares from "$icons/FourBoxSquares.svelte";
     import Funnel from "$icons/Funnel.svelte";
     import Search from "$icons/Search.svelte";
     import { responsiveMode } from "$store/Responsive";
+    import AnimeCard from "./AnimeCard.svelte";
+    import { onMount } from "svelte";
 
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
-    import AnimeCard from "./AnimeCard.svelte";
 
+    onMount(async () => {
+        const { register } = await import("swiper/element/bundle");
+        register();
+    });
     let selectionChoice = "popular";
 </script>
 
@@ -68,12 +71,12 @@
             </div>
         </div>
         <div class="h-96 mt-10">
-            <Swiper
+            <swiper-container
                 slidesPerView={2}
                 direction="vertical"
             >
                 {#each exploreData as item}
-                    <SwiperSlide>
+                    <swiper-slide>
                         <AnimeCard
                             animeName={item.animeTitle}
                             animeCoverBackgroundImage={item.animeBackgroundCoverImage}
@@ -83,9 +86,9 @@
                             animeAirTime={item.animeAirTime}
                             animeSummary={item.animeSummary}
                         />
-                    </SwiperSlide>
+                    </swiper-slide>
                 {/each}
-            </Swiper>
+            </swiper-container>
         </div>
     {:else}
         <div class="flex gap-7 mt-8">

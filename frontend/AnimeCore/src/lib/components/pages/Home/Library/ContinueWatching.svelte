@@ -1,12 +1,17 @@
 <script lang="ts">
     import { Mousewheel } from "swiper";
-    import { Swiper, SwiperSlide } from "swiper/svelte";
+
     import voca from "voca";
 
     import continueWatching from "$data/mock/continue_watching.json";
     import Play from "$icons/Play.svelte";
     import { responsiveMode } from "$store/Responsive";
+    import { onMount } from "svelte";
 
+    onMount(async () => {
+        const { register } = await import("swiper/element/bundle");
+        register();
+    });
     // Responsive switches
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
@@ -21,7 +26,7 @@
 
 <p class="font-bold text-3xl items-start flex pb-4 mt-10 mb-6 md:my-0">Continue Watching</p>
 <div class="h-28 md:h-[200px] w-96 md:w-[60vw]">
-    <Swiper
+    <swiper-container
         speed={600}
         direction="horizontal"
         slidesPerView={"auto"}
@@ -33,7 +38,7 @@
         }}
     >
         {#each continueWatching as item}
-            <SwiperSlide>
+            <swiper-slide>
                 <div
                     class="h-28 md:h-[200px] w-96 md:w-[640px] flex flex-row gap-6 select-none cursor-grab carousel-item rounded-xl items-center justify-around"
                     style="
@@ -67,7 +72,7 @@
                         </button>
                     </div>
                 </div>
-            </SwiperSlide>
+            </swiper-slide>
         {/each}
-    </Swiper>
+    </swiper-container>
 </div>
