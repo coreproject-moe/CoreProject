@@ -131,7 +131,7 @@ if DEBUG:
         "debug_toolbar.middleware.DebugToolbarMiddleware",
         "django_cprofile_middleware.middleware.ProfilerMiddleware",
         # Browser Reload Middleware
-        "django_browser_reload.middleware.BrowserReloadMiddleware",
+        # "django_browser_reload.middleware.BrowserReloadMiddleware",
     )
 
 

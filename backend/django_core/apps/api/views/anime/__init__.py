@@ -44,26 +44,24 @@ def get_anime_info(
     # 2 Step get query
     # There wont be a performance hit if we do all().filter()
     # https://docs.djangoproject.com/en/4.0/topics/db/queries/#retrieving-specific-objects-with-filters
-    query = AnimeModel.objects.all()
+    query = (
+        AnimeModel.objects.get_names_and_name_synonyms_and_name_japanese_as_string().all()
+    )
 
     # We must pop this to filter other fields on the later stage
-    if anime_name := query_dict.pop("anime_name", None):
-        query = (
-            query.annotate(
-                similiarity=Greatest(
-                    TrigramSimilarity("anime_name", anime_name),
-                    TrigramSimilarity("anime_name_japanese", anime_name),
-                    # This line doesn't work
-                    TrigramSimilarity("anime_name_synonyms", anime_name),
-                ),
-            )
-            .filter(
-                Q(anime_name__unaccent__trigram_similar=anime_name)
-                | Q(anime_name_japanese__unaccent__trigram_similar=anime_name),
-                similiarity__gte=0.1,
-            )
-            .order_by("-similiarity")
-        )
+    if name := query_dict.pop("name", None):
+        # query = (
+        #     query.annotate(
+        #         similiarity=TrigramSimilarity(
+        #             "names_and_name_synonyms_and_name_japanese_as_string", name
+        #         )
+        #     )
+        #     .filter(
+        #         similiarity__gte=0.1,
+        #     )
+        #     .order_by("-similiarity")
+        # )
+        print(query.query)
 
     # Same here but with ids
     for id in [
