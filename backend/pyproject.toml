@@ -78,7 +78,7 @@ prod_uvicorn = "gunicorn --app-dir=django_core core.asgi:application -w 4 -k uvi
 ##  Migrations
 sync = "python ./django_core/manage.py migrate"
 mksync = "python ./django_core/manage.py makemigrations"
-## Task queue
+createsuperuser = 'python ./django_core/manage.py createsuperuser'
 ## Staticfiles
 collectstatic = "python ./django_core/manage.py collectstatic --clear --link" # Dont duplicate copy files.
 ## Mypy

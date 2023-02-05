@@ -12,14 +12,12 @@ from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from ninja.pagination import paginate
 
-from django.db.models.functions import Greatest
 from django.db.models import Q, QuerySet
 from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
 
 try:
     from django.contrib.postgres.search import TrigramSimilarity
-    from django.db.models.functions import Greatest
 
     HAS_POSTGRES = True
 except ImportError:
@@ -39,19 +37,18 @@ def get_anime_info(
     if not HAS_POSTGRES:
         raise Http404("Looksups are not supported on any other databases except Postgres")
 
+    special_query = None
     query_dict = filters.dict(exclude_none=True)
     query_object = Q()
     # 2 Step get query
     # There wont be a performance hit if we do all().filter()
     # https://docs.djangoproject.com/en/4.0/topics/db/queries/#retrieving-specific-objects-with-filters
-    query = (
-        AnimeModel.objects.get_names_and_name_synonyms_and_name_japanese_as_string().all()
-    )
 
     # We must pop this to filter other fields on the later stage
     if name := query_dict.pop("name", None):
-        query = (
-            query.annotate(
+        special_query = (
+            AnimeModel.objects.get_names_and_name_synonyms_and_name_japanese_as_string()
+            .annotate(
                 similiarity=TrigramSimilarity(
                     "names_and_name_synonyms_and_name_japanese_as_string", name
                 )
@@ -70,7 +67,7 @@ def get_anime_info(
     ]:
         if value := query_dict.pop(id, None):
             _query_ = Q()
-            for position in value.split(","):
+            for position in str(value).split(","):
                 _query_ |= Q(
                     **{f"{id}": int(position.strip())},
                 )
@@ -94,6 +91,11 @@ def get_anime_info(
 
     # This can be (AND: )
     # This means it is empty
+    if special_query:
+        query = special_query
+    else:
+        query = AnimeModel.objects.all()
+    
     if query_object:
         query = query.filter(query_object).distinct()
 
