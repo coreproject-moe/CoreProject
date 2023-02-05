@@ -22,14 +22,14 @@ class AnimeManager(models.Manager["AnimeModel"]):
             name_synonyms_as_string=Func(
                 F("name_synonyms"),
                 Value(" "),
-                funtion="array_to_string",
+                function="array_to_string",
                 output_field=CharField(),
             ),
             names_and_name_synonyms_and_name_japanese_as_string=Concat(
                 "name",
                 Value(" "),
-                "name_synonyms_as_string",
-                Value(" "),
                 "name_japanese",
+                Value(" "),
+                "name_synonyms_as_string",
             ),
         )
