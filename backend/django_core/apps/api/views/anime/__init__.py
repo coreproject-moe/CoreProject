@@ -50,18 +50,17 @@ def get_anime_info(
 
     # We must pop this to filter other fields on the later stage
     if name := query_dict.pop("name", None):
-        # query = (
-        #     query.annotate(
-        #         similiarity=TrigramSimilarity(
-        #             "names_and_name_synonyms_and_name_japanese_as_string", name
-        #         )
-        #     )
-        #     .filter(
-        #         similiarity__gte=0.1,
-        #     )
-        #     .order_by("-similiarity")
-        # )
-        print(query.query)
+        query = (
+            query.annotate(
+                similiarity=TrigramSimilarity(
+                    "names_and_name_synonyms_and_name_japanese_as_string", name
+                )
+            )
+            .filter(
+                similiarity__gte=0.1,
+            )
+            .order_by("-similiarity")
+        )
 
     # Same here but with ids
     for id in [
