@@ -13,6 +13,8 @@ from ...studios.models import StudioModel
 from .anime_genre import AnimeGenreModel
 from .anime_theme import AnimeThemeModel
 
+from ..managers import AnimeManager
+
 cover_upload_pattern = FilePattern(filename_pattern="cover/{uuid:s}{ext}")
 banner_upload_pattern = FilePattern(filename_patten="banner/{uuid:s}{ext}")
 
@@ -93,6 +95,9 @@ class AnimeModel(models.Model):
     )
 
     updated = models.DateTimeField(auto_now_add=True)
+
+    # We are doing custom Managers
+    objects = AnimeManager()
 
     def __str__(self) -> str:
         return f"{self.name}"
