@@ -14,7 +14,7 @@
         "@mantine/hooks": "^5.6.3",
         "@mantine/next": "^5.10.2",
         "@mantine/modals": "^5.10.2",
-        "@mantine/notifications": "^5.10.2",
+        "@mantine/notifications": "^5.10.3",
         "@mantine/spotlight": "^5.10.2",
         "@next/font": "^13.1.6",
         "next": "^13.1.6",
