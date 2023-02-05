@@ -95,7 +95,7 @@ def get_anime_info(
         query = special_query
     else:
         query = AnimeModel.objects.all()
-    
+
     if query_object:
         query = query.filter(query_object).distinct()
 
