@@ -1,7 +1,7 @@
 import hashlib
 import textwrap
 
-from core.utility import sendfile
+from core.utils.sendfile import sendfile
 import httpx
 
 from django.core.management.utils import get_random_secret_key
@@ -19,7 +19,7 @@ async def avatar_view(
     CLIENT = httpx.AsyncClient()
 
     try:
-        user = await CustomUser.objects.aget(id=user_id)
+        user = await CustomUser.objects.aget(pk=user_id)
     except CustomUser.DoesNotExist:
         return render(
             request,

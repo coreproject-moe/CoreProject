@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import os
 from pathlib import Path
 
+# https://github.com/typeddjango/django-stubs/tree/54a1e894257f6eea49b63fcd3a6eb89af00daf55/django_stubs_ext#usage
+import django_stubs_ext
+
+django_stubs_ext.monkeypatch()
+
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -35,12 +40,6 @@ USERNAME_DISCRIMINATOR_LENGTH = 4
 MAL_CLIENT_ID = os.environ.get("MAL_CLIENT_ID")
 MAL_CLIENT_SECRET = os.environ.get("MAL_CLIENT_SECRET")
 
-# Max retires for request
-MAX_RETRY = 10
-MAX_REQUESTS_PER_MINUTE = 55
-REQUEST_STATUS_CODES_TO_RETRY = [408, 429, 500, 502, 503, 504]
-BUCKET_NAME = "coreproject"
-
 
 # HOST configurations
 # We are using this to hyperlink model relations
@@ -61,6 +60,7 @@ INSTALLED_APPS = [
     # Postgres
     "django.contrib.postgres",
     # Whitenoise
+    "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     # Rest Framework
     "ninja",
@@ -68,12 +68,18 @@ INSTALLED_APPS = [
     "corsheaders",
     # 3rd party Django stuff
     "django_cleanup.apps.CleanupConfig",
-    "huey.contrib.djhuey",
+    # 3rd Party Models
+    "colorfield",
     # 3rd party adminpanel
     "django_better_admin_arrayfield",
     "django_admin_hstore_widget",
+    # Tailwind CSS
+    "tailwind",
+    "tailwind_src",  # Our custom app
     # Api ( Django-Ninja )
     "apps.api",
+    # OpenGraph
+    "apps.opengraph",
     # Models
     "apps.anime",
     "apps.trackers",
@@ -91,6 +97,8 @@ if DEBUG:
     INSTALLED_APPS += (
         "debug_toolbar",
         "dbbackup",  # django-dbbackup
+        # Django browser Reload
+        "django_browser_reload",
     )
 
 
@@ -122,6 +130,8 @@ if DEBUG:
     MIDDLEWARE += (
         "debug_toolbar.middleware.DebugToolbarMiddleware",
         "django_cprofile_middleware.middleware.ProfilerMiddleware",
+        # Browser Reload Middleware
+        "django_browser_reload.middleware.BrowserReloadMiddleware",
     )
 
 
@@ -174,31 +184,31 @@ LOGIN_URL = "login_page"
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#         "CONN_MAX_AGE": 60,
-#         "CONN_HEALTH_CHECKS": True,
-#     }
-# }
-
-# POSTGRES
-# https://www.enterprisedb.com/postgres-tutorials/how-use-postgresql-django
-
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "django",
-        "USER": "postgres",
-        "PASSWORD": "supersecretpassword",
-        "HOST": "",
-        "PORT": "",
-        # https://stackoverflow.com/questions/23504483/django-conn-max-age-setting-error
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
         "CONN_MAX_AGE": 60,
         "CONN_HEALTH_CHECKS": True,
     }
 }
+
+# POSTGRES
+# https://www.enterprisedb.com/postgres-tutorials/how-use-postgresql-django
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "django",
+#         "USER": "postgres",
+#         "PASSWORD": "supersecretpassword",
+#         "HOST": "",
+#         "PORT": "",
+#         # https://stackoverflow.com/questions/23504483/django-conn-max-age-setting-error
+#         # "CONN_MAX_AGE": 10,
+#         "CONN_HEALTH_CHECKS": True,
+#     }
+# }
 
 # Allow more fields to be deleted at once
 # https://stackoverflow.com/questions/47585583/the-number-of-get-post-parameters-exceeded-settings-data-upload-max-number-field
@@ -264,7 +274,14 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = Path(BASE_DIR, "staticfiles")
-# STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+
+# Enable when django 4.2 is released
+# http://whitenoise.evans.io/en/latest/django.html#add-compression-and-caching-support
+# STORAGES = {
+#     "staticfiles": {
+#         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+#     },
+# }
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = Path(BASE_DIR, "media")
@@ -285,7 +302,7 @@ CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:5173",
 ]
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "backend.localhost"]
 
 CORS_ALLOW_METHODS = [
     "DELETE",
@@ -298,19 +315,13 @@ CORS_ALLOW_METHODS = [
 
 CORS_ALLOW_CREDENTIALS = True
 
-# settings.py -- alternative configuration method
-# https://huey.readthedocs.io/en/latest/contrib.html#setting-things-up
-
-from huey import PriorityRedisHuey
-from redis import ConnectionPool
-
-pool = ConnectionPool(host="localhost", port=6379, max_connections=20)
-HUEY = PriorityRedisHuey(
-    "coreproject_huey",
-    use_zlib=True,
-    compression=True,
-    connection_pool=pool,
-)
-
 DBBACKUP_STORAGE = "django.core.files.storage.FileSystemStorage" if DEBUG else ""
 DBBACKUP_STORAGE_OPTIONS = {"location": os.path.join(BASE_DIR, "backup")}
+
+# https://django-tailwind.readthedocs.io/en/latest/installation.html
+
+TAILWIND_APP_NAME = "tailwind_src"
+if os.name == "nt":
+    NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+else:
+    NPM_BIN_PATH = "/usr/local/bin/npm"

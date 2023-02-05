@@ -1,6 +1,6 @@
 repos:
     - repo: https://github.com/pre-commit/mirrors-eslint
-      rev: v8.32.0
+      rev: v8.33.0
       hooks:
           - id: eslint
             args: [
@@ -41,20 +41,6 @@ repos:
           - id: djcss
           - id: djjs
 
-    - repo: https://github.com/PyCQA/autoflake
-      rev: "v2.0.0"
-      hooks:
-          - id: autoflake
-            args:
-                [
-                    "-i",
-                    "--remove-all-unused-imports",
-                    "--recursive",
-                    "--ignore-init-module-imports",
-                    "--expand-star-imports",
-                    "--remove-unused-variables",
-                ]
-
     - repo: https://github.com/psf/black
       rev: 22.12.0
       hooks:
@@ -93,14 +79,23 @@ repos:
                 - prettier@2.6.2
                 - prettier-plugin-svelte@2.7.0
 
-    - repo: https://github.com/PyCQA/isort
-      rev: 5.11.4
-      hooks:
-          - id: isort
-            args: [--profile, black, --ca, --cs]
-
     - repo: https://github.com/asottile/pyupgrade
       rev: v3.3.1
       hooks:
           - id: pyupgrade
             args: [--py311-plus]
+    - repo: https://github.com/charliermarsh/ruff-pre-commit
+      # Ruff version.
+      rev: "v0.0.237"
+      hooks:
+          - id: ruff
+            # Respect `exclude` and `extend-exclude` settings.
+            args:
+                [
+                    "--fix",
+                    "--respect-gitignore",
+                    "--exclude",
+                    "./android",
+                    "--exclude",
+                    "./tools",
+                ]

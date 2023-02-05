@@ -53,8 +53,7 @@ def get_character_info(
         "anilist_id",
     ]
     for id in id_lookups:
-        value = query_dict.pop(id, None)
-        if value:
+        if value := query_dict.pop(id, None):
             _query_ = Q()
             for position in value.split(","):
                 _query_ |= Q(**{f"{id}": int(position.strip())})
@@ -94,5 +93,5 @@ def get_individual_character_info(
     request: HttpRequest,
     character_id: str,
 ) -> QuerySet[CharacterModel]:
-    queryset = get_object_or_404(CharacterModel, id=character_id)
+    queryset = get_object_or_404(CharacterModel, pk=character_id)
     return queryset

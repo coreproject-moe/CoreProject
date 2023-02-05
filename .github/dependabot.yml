@@ -12,6 +12,12 @@ updates:
       schedule:
           interval: daily
       open-pull-requests-limit: 100
+    # Backend (tailwind)
+    - package-ecosystem: npm
+      directory: /backend/django_core/tailwind_src/static_src/
+      schedule:
+          interval: daily
+      open-pull-requests-limit: 100
 
     # Android
     # =======
@@ -24,7 +30,7 @@ updates:
     # Frontend
     # =========
     - package-ecosystem: npm
-      directory: /frontend/Admin/
+      directory: /frontend/AnimeCore/
       schedule:
           interval: daily
       open-pull-requests-limit: 100
@@ -48,6 +54,12 @@ updates:
     # =====
     - package-ecosystem: pip
       directory: /bots/discord/
+      schedule:
+          interval: daily
+      open-pull-requests-limit: 100
+    # BETA REPOS
+    - package-ecosystem: npm
+      directory: /frontend/AnimeCore-v2/
       schedule:
           interval: daily
       open-pull-requests-limit: 100

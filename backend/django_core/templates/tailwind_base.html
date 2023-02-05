@@ -1,0 +1,27 @@
+{% load static tailwind_tags %}
+
+<!DOCTYPE html>
+
+<html lang="en" data-theme="kokoro" class="bg-black">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="icon"
+            type="image/svg+xml"
+            href="{% static 'images/favicon/favicon.svg' %}"
+        />
+        <link
+            rel="stylesheet"
+            href="{% static 'fonts/Kokoro/stylesheet.css' %}"
+        />
+        {% block head %} {% endblock %}
+        <title>{% block title %} {% endblock %}</title>
+        {% tailwind_css %}
+    </head>
+    <body>
+        {% block body %}{% endblock %} {% block js %} {% endblock %}
+    </body>
+</html>

@@ -17,16 +17,16 @@ router = Router()
 def get_producer_info(
     request: HttpRequest,
     filters: ProducerFilter = Query(...),
-):
+) -> ProducerModel:
     query_object = Q()
     query_dict = filters.dict(exclude_none=True)
 
     character_name = query_dict.pop("name", None)
     if character_name:
-        query = Q()
+        _query_ = Q()
         for position in character_name.split(","):
-            query |= Q(**{f"name__icontains": position.strip()})
-        query_object &= query
+            _query_ |= Q(**{"name__icontains": position.strip()})
+        query_object &= _query_
 
     query = ProducerModel.objects.all()
 
@@ -40,6 +40,6 @@ def get_producer_info(
 def get_individual_producer_info(
     request: HttpRequest,
     producer_id: str,
-):
-    queryset = get_object_or_404(ProducerModel, id=producer_id)
+) -> ProducerModel:
+    queryset = get_object_or_404(ProducerModel, pk=producer_id)
     return queryset

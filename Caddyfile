@@ -1,34 +1,39 @@
 {
         log {
-                output file ./access.log
+                # output file ./access.log
                 level debug
         }
 }
 
-# api.example.com
-# 127.0.0.1 {
-#        #  Django Rest API
-#        reverse_proxy localhost:8000 {
-#                @sendfile header X-Sendfile *
-#                handle_response @sendfile {
-#                        rewrite {http.reverse_proxy.header.X-Sendfile}
-#                        encode zstd gzip
-#                        file_server
-#                }
-#        }
-# }
-
+# backend.example.com
+backend.{$SITE_ADDRESS} {
+        #  Django Rest API
+        reverse_proxy localhost:8000 {
+                @sendfile header X-Sendfile *
+                handle_response @sendfile {
+                        rewrite {http.reverse_proxy.header.X-Sendfile}
+                        encode zstd gzip
+                        file_server
+                }
+        }
+}
 
 # anime.example.com
-# 127.0.0.1 {
-#         # Svelte AnimeCore SSG
-#         encode gzip zstd
-#         reverse_proxy localhost:8001
-# }
+anime.{$SITE_ADDRESS} {
+        # Svelte AnimeCore CSR
+        root * {system.wd}/frontend/AnimeCore/build/
+        encode gzip zstd
+	  templates
+        try_files {path} /app.html
+        file_server
+
+}
 
 # user.example.com
-# 127.0.0.1 {
-#         # Svelte AnimeCore SSG
-#         encode gzip zstd
-#         reverse_proxy localhost:8001
-# }
+user.{$SITE_ADDRESS} {
+        # Svelte AnimeCore SSR
+        root * {system.wd}/frontend/User/build/
+        encode gzip zstd
+        try_files {path} /app.html
+        file_server
+}

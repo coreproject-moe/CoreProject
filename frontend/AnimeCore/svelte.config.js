@@ -23,7 +23,7 @@ const config = {
         adapter: is_static
         ? static_adapter({
             fallback: "app.html",
-            precompress: false,
+            precompress: true,
             strict: true
         })
         : is_node

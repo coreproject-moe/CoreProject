@@ -1,15 +1,117 @@
-[project]
-name = "core-backend"
+[tool.poetry]
+name = "coreproject"
 version = "0.1.0"
 description = "A modern backend powering the the world's most advanced anime site"
-authors = [
-    {name = "baseplate-admin", email = "61817579+baseplate-admin@users.noreply.github.com"},
-]
-requires-python = ">=3.11,<4.0"
-license = {text = "AGPL-3.0-only"}
+authors = ["baseplate-admin <61817579+baseplate-admin@users.noreply.github.com>"]
+readme = "README.md"
+license = "AGPL-3.0-only"
 
-[tool.pylint.format]
-max-line-length = "92"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = {version = '^4.2a1', extras = ['argon2']}
+# First Party ( Redis )
+redis = {extras = ['hiredis'], version = ">=4"}
+# First party ( Image )
+pillow = "*"
+# First Party ( Database )
+psycopg2 = "*"
+# 3rd Party ( Files )
+django-dynamic-filenames = "*"
+# 3rd Party ( Middlewares )
+django_cleanup = "*"
+django_cors_headers = "*"
+# 3rd Party ( Environmental Variables )
+python_dotenv = "*"
+# 3rd Party ( WhiteNoise )
+whitenoise = {extras = ["brotli"], version = "*"}
+# 3rd Party ( Tasks )
+celery = {extras = ["redis"], version = "^5.2.7"}
+gevent = {version = '*',markers = "sys_platform  == 'win32'"}
+# 3rd Party ( Better admin widgets )
+django-better-admin-arrayfield = "*"
+django-admin-hstore-widget = "^1.2.1"   # https://github.com/PokaInc/django-admin-hstore-widget/pull/25
+# 3rd Party ( Model Fields )
+django-colorfield = "*"
+# Rest framework
+django_ninja = "*"
+pydantic = {extras = ["email"], version = "*"}
+# ===================================================
+httpx = {extras = ['http2','brotli'], version = "*"}
+# Application servers
+gunicorn = {extras = ["setproctile"], version = "*"}
+uvicorn = '*'
+# Typing support
+django-stubs-ext = "*"
+# ===================================================
+# Color Gra
+colorthief = "^0.2.1"
+# Tailwind CSS
+django-tailwind = "^3.4.0"
+
+
+[tool.poetry.group.dev.dependencies]
+## Watchfiles
+# https://github.com/adamchainz/django-watchfiles/issues/12
+# django-watchfiles = "*"
+# Django
+django_debug_toolbar = "*"
+django_dbbackup = "*"
+django_cprofile_middleware = "*"
+## Code formatting
+# Black
+black = "*"
+# Linting
+ruff = "*"
+# Mypy
+mypy = "*"
+django_stubs = {extras = ["compatible_mypy"], version = "*"}
+# Types
+types_redis = "*"
+# Task Runner
+poethepoet = "^0.18.1"
+
+[tool.poe.tasks]
+dev = 'python ./django_core/manage.py runserver 127.0.0.1:8000'
+## Prod servers
+prod_uvicorn = "gunicorn --app-dir=django_core core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
+##  Migrations
+sync = "python ./django_core/manage.py migrate"
+mksync = "python ./django_core/manage.py makemigrations"
+## Task queue
+## Staticfiles
+collectstatic = "python ./django_core/manage.py collectstatic --clear --link" # Dont duplicate copy files.
+## Mypy
+mypy = "mypy . --enable-incomplete-feature=Unpack"
+## Tailwind
+tailwind_install = "python ./django_core/manage.py tailwind install"
+tailwind_start = "python ./django_core/manage.py tailwind start"
+tailwind_build = "python ./django_core/manage.py tailwind build"
+
+[tool.poe.tasks.celery]
+shell="""
+import subprocess
+import sys
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+os.chdir(os.path.join(BASE_DIR,'django_core'))
+
+if sys.platform == "win32":
+    command = "celery -A core worker -l info -P gevent"
+else:
+    command = "celery -A core worker -l info"
+
+subprocess.call(command)
+"""
+interpreter= 'python'
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
 
 [tool.black]
 line-length = 92
@@ -71,8 +173,48 @@ known_django = [
     'djclick'
 ]
 
-[tool.autoflake]
-remove-all-unused-imports = true
-recursive = true
-ignore-init-module-imports = true
-expand-star-imports = true
+
+[tool.ruff]
+line-length = 92
+
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "venv",
+    # https://github.com/charliermarsh/ruff/issues/61#issuecomment-1233497658
+    '**/migrations'
+]
+
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+# Assume Python 3.11
+target-version = "py311"
+
+
+[tool.ruff.per-file-ignores]
+"*/__init__.py" = ["E402",'E501']
+"*/settings.py" = ["E402"]
+"*/api_v1.py" = ["E402"]
+"*/urls.py" = ['E402']
+
+[tool.ruff.mccabe]
+# Unlike Flake8, default to a complexity level of 10.
+max-complexity = 10

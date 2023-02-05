@@ -1,77 +1,77 @@
-from django_admin_hstore_widget.forms import HStoreFormField
 from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 
-from django import forms
 from django.contrib import admin
 
+from ..forms import AnimeAdminModelForm
 from ..models import AnimeModel
 
 # Register your models here.
 
 
-class AnimeAdminModelForm(forms.ModelForm):
-    anime_theme_openings = HStoreFormField()
-    anime_theme_endings = HStoreFormField()
-
-    class Meta:
-        model = AnimeModel
-        exclude = ()
-
-
 @admin.register(AnimeModel)
-class AnimeInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
+class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel], DynamicArrayMixin):
     form = AnimeAdminModelForm
-    formfield_overrides = {"hello": {"widgets": HStoreFormField}}
     filter_horizontal = [
-        "anime_genres",
-        "anime_themes",
-        "anime_studios",
-        "anime_producers",
-        "anime_characters",
-        "anime_recommendation",
-        "anime_episodes",
+        "genres",
+        "themes",
+        "studios",
+        "producers",
+        "characters",
+        "recommendations",
+        "episodes",
     ]
-
     list_filter = [
-        "anime_genres",
-        "anime_themes",
-        "anime_studios",
-        "anime_producers",
-        "anime_characters",
+        "genres",
+        "themes",
+        "studios",
+        "producers",
+        "characters",
     ]
-
     search_fields = [
-        "anime_name",
+        "name",
     ]
 
     fieldsets = (
         (
             None,
             {
-                "fields": ("mal_id",),
+                "fields": (
+                    "mal_id",
+                    "kitsu_id",
+                    "anilist_id",
+                ),
             },
         ),
         (
             ("Anime Names"),
             {
                 "fields": (
-                    "anime_name",
-                    "anime_name_japanese",
+                    "name",
+                    "name_japanese",
+                ),
+            },
+        ),
+        (
+            ("Image Colors"),
+            {
+                "fields": (
+                    "banner_background_color",
+                    "cover_background_color",
                 ),
             },
         ),
         (
             ("Anime Rating"),
             {
-                "fields": ("anime_rating",),
+                "fields": ("rating",),
             },
         ),
         (
             ("Anime Time Info"),
             {
                 "fields": (
-                    "anime_aired_from",
-                    "anime_aired_to",
+                    "aired_from",
+                    "aired_to",
                 )
             },
         ),
@@ -79,8 +79,8 @@ class AnimeInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
             ("Anime Images"),
             {
                 "fields": (
-                    "anime_cover",
-                    "anime_banner",
+                    "cover",
+                    "banner",
                 )
             },
         ),
@@ -88,8 +88,8 @@ class AnimeInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
             ("Anime Background & Summary"),
             {
                 "fields": (
-                    "anime_synopsis",
-                    "anime_background",
+                    "synopsis",
+                    "background",
                 )
             },
         ),
@@ -97,28 +97,28 @@ class AnimeInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
             ("Anime M2M Fields"),
             {
                 "fields": (
-                    "anime_genres",
-                    "anime_themes",
-                    "anime_studios",
-                    "anime_producers",
-                    "anime_characters",
-                    "anime_name_synonyms",
-                    "anime_recommendation",
+                    "genres",
+                    "themes",
+                    "studios",
+                    "producers",
+                    "characters",
+                    "name_synonyms",
+                    "recommendations",
                 )
             },
         ),
         (
             ("Anime Episodes"),
             {
-                "fields": ("anime_episodes",),
+                "fields": ("episodes",),
             },
         ),
         (
             None,
             {
                 "fields": (
-                    "anime_theme_openings",
-                    "anime_theme_endings",
+                    "theme_openings",
+                    "theme_endings",
                 ),
             },
         ),

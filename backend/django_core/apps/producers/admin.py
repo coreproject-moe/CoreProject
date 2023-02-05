@@ -6,5 +6,5 @@ from .models import ProducerModel
 
 
 @admin.register(ProducerModel)
-class ProducerAdmin(admin.ModelAdmin):
+class ProducerAdmin(admin.ModelAdmin[ProducerModel]):
     search_fields = ["name"]

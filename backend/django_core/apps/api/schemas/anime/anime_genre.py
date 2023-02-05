@@ -1,4 +1,4 @@
-from apps.anime.models import AnimeGenreModel
+from apps.anime.models.anime_genre import AnimeGenreModel
 from ninja import ModelSchema
 
 

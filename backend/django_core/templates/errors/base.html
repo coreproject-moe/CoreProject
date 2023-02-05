@@ -1,74 +1,15 @@
-{% load static %}
+{% extends 'tailwind_base.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link
-            rel="icon"
-            type="image/svg+xml"
-            href="{% static 'images/favicon/favicon.svg' %}"
-        />
-        <link
-            rel="stylesheet"
-            href="{% static 'fonts/Kokoro/stylesheet.css' %}"
-        />
+{%block title%} CoreProject | {{error_status_code}} {%endblock%}
 
-        <title>{% block title %}{% endblock %}</title>
-        <style>
-            * {
-                box-sizing: border-box;
-            }
-            html {
-                background-color: #07051a;
-                line-height: 1.5;
-                color: rgb(189, 184, 229);
-                font-family: 'Kokoro';
-                tab-size: 4;
-            }
-            body {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-direction: column;
-                text-align: center;
-                height: 100vh;
-                margin: 0;
-            }
-
-            {# Tailwind inspired classes #}
-            {# Fonts #}
-            .font-bold {
-                font-weight: 700;
-            }
-
-            {# Width #}
-            .w-\[70vw\] {
-                width: 70vw;
-            }
-
-            {# Colors #}
-            .text-white {
-                color: white;
-            }
-            .text-warning {
-                color : rgb(237, 215, 140);
-            }
-            .text-indigo {
-                color: rgb(67, 56, 202);
-            }
-
-            {# Display #}
-            .inline-flex {
-                display: inline-flex;
-            }
-        </style>
-        {% block 'css' %}{% endblock %}
-    </head>
-    <body>
-        {% block body %} {% endblock %}
-    </body>
-    {% block 'js' %}{% endblock %}
-</html>
+{%block body%}
+    <div class="flex items-center justify-center flex-col text-center h-screen m-0">
+        <img src="{{svg.file}}" width="{{svg.width}}" height="{{svg.height}}" />
+        <div class="font-bold w-[70vw]">
+            <h1 class="text-indigo-800 text-3xl m-7">
+                {{error_status_code}} - {{error_status}}
+            </h1>
+            <p>{{error_text|safe}}</p>
+        </div>
+    </div>
+{%endblock%}

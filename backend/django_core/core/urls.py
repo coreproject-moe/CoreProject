@@ -13,20 +13,24 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
+from . import views
 from django.conf import settings
 from django.contrib import admin
-from django.urls import include, path
-from django.views import debug
-from django.views.generic import TemplateView
 
-handler400 = TemplateView.as_view(template_name="errors/400.html")
-handler403 = TemplateView.as_view(template_name="errors/403.html")
-handler404 = TemplateView.as_view(template_name="errors/404.html")
-handler500 = TemplateView.as_view(template_name="errors/500.html")
+from django.urls import include, path
+
+# from django.views import debug
+
+
+handler400 = views.four_zero_zero_view
+handler403 = views.four_zero_three_view
+handler404 = views.four_zero_four_view
+handler500 = views.five_zero_zero_view
 
 urlpatterns = [
-    path("", debug.default_urlconf),
+    # Default django welcome page
+    # path("", debug.default_urlconf),
+    path("", views.home_view, name="home_view"),
     #   Admin Site
     # ================
     path("admin/", admin.site.urls),
@@ -39,9 +43,15 @@ urlpatterns = [
     #   HTTP
     # =========
     path("user/", include("apps.user.urls")),
+    #   OpenGraph
+    # =============
+    path("opengraph/", include("apps.opengraph.urls")),
     #   Api
     # ========
     path("api/", include("apps.api.urls")),
 ]
 if settings.DEBUG:
-    urlpatterns += (path("__debug__/", include("debug_toolbar.urls")),)
+    urlpatterns += [
+        path("__debug__/", include("debug_toolbar.urls")),
+        path("__reload__/", include("django_browser_reload.urls")),
+    ]

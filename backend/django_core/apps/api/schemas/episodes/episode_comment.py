@@ -1,4 +1,4 @@
-from apps.episodes.models import EpisodeCommentModel
+from apps.episodes.models.episode_comment import EpisodeCommentModel
 from ninja import Field, ModelSchema
 
 
