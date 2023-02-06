@@ -1,7 +1,7 @@
 from typing import TYPE_CHECKING
 
 from django.db import models
-from django.db.models import CharField, Value, Func, F
+from django.db.models import CharField, F, Func, Value
 from django.db.models.functions import Concat
 
 if TYPE_CHECKING:

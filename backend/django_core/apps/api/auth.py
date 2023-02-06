@@ -1,8 +1,10 @@
 from apps.user.models import CustomUser
 from ninja.security import HttpBearer
-from .models import Token
+
 from django.contrib.auth.models import AnonymousUser
 from django.http import HttpRequest
+
+from .models import Token
 
 
 class AuthBearer(HttpBearer):

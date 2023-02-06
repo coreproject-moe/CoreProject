@@ -1,17 +1,16 @@
+from colorfield.fields import ColorField
 from dynamic_filenames import FilePattern
 
 from django.contrib.postgres.fields import HStoreField
 from django.db import models
-from colorfield.fields import ColorField
 
 from ...characters.models import CharacterModel
 from ...episodes.models import EpisodeModel
 from ...producers.models import ProducerModel
 from ...studios.models import StudioModel
+from ..managers import AnimeManager
 from .anime_genre import AnimeGenreModel
 from .anime_theme import AnimeThemeModel
-
-from ..managers import AnimeManager
 
 cover_upload_pattern = FilePattern(filename_pattern="cover/{uuid:s}{ext}")
 banner_upload_pattern = FilePattern(filename_patten="banner/{uuid:s}{ext}")

@@ -1,6 +1,6 @@
 from ninja import ModelSchema
 
-from ....staffs.models import StaffModel, StaffAlternateNameModel
+from ....staffs.models import StaffAlternateNameModel, StaffModel
 
 
 class StaffAlternateNameSchema(ModelSchema):
