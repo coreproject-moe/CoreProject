@@ -131,7 +131,7 @@ if DEBUG:
         "debug_toolbar.middleware.DebugToolbarMiddleware",
         "django_cprofile_middleware.middleware.ProfilerMiddleware",
         # Browser Reload Middleware
-        "django_browser_reload.middleware.BrowserReloadMiddleware",
+        # "django_browser_reload.middleware.BrowserReloadMiddleware",
     )
 
 
@@ -186,9 +186,14 @@ LOGIN_URL = "login_page"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-        "CONN_MAX_AGE": 60,
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "django",
+        "USER": "postgres",
+        "PASSWORD": "supersecretpassword",
+        "HOST": "",
+        "PORT": "",
+        # https://stackoverflow.com/questions/23504483/django-conn-max-age-setting-error
+        # "CONN_MAX_AGE": 10,
         "CONN_HEALTH_CHECKS": True,
     }
 }

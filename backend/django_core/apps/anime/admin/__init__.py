@@ -1,15 +1,19 @@
-from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
-
 from django.contrib import admin
 
 from ..forms import AnimeAdminModelForm
-from ..models import AnimeModel
+from ..models import AnimeModel, AnimeNameSynonymModel
+
 
 # Register your models here.
+@admin.register(AnimeNameSynonymModel)
+class AnimeNameSynonymAdmin(
+    admin.ModelAdmin[AnimeNameSynonymModel],
+):
+    pass
 
 
 @admin.register(AnimeModel)
-class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel], DynamicArrayMixin):
+class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel]):
     form = AnimeAdminModelForm
     filter_horizontal = [
         "genres",
@@ -17,6 +21,7 @@ class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel], DynamicArrayMixin):
         "studios",
         "producers",
         "characters",
+        "name_synonyms",
         "recommendations",
         "episodes",
     ]
