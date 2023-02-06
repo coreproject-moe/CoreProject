@@ -8,7 +8,6 @@ from ...characters.models import CharacterModel
 from ...episodes.models import EpisodeModel
 from ...producers.models import ProducerModel
 from ...studios.models import StudioModel
-from ..managers import AnimeManager
 from .anime_genre import AnimeGenreModel
 from .anime_theme import AnimeThemeModel
 
@@ -97,8 +96,6 @@ class AnimeModel(models.Model):
 
     updated = models.DateTimeField(auto_now_add=True)
 
-    # We are doing custom Managers
-    objects = AnimeManager()
 
     def __str__(self) -> str:
         return f"{self.name}"
