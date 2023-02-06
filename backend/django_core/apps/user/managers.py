@@ -1,7 +1,6 @@
 from typing import TYPE_CHECKING, Any
 
 from django.contrib.auth.base_user import BaseUserManager
-from django.db import models
 
 from .mixins.username_with_discriminator import UsernameWithDiscriminatorManager
 from django.utils.translation import gettext_lazy as _
