@@ -49,6 +49,7 @@ def get_anime_info(
     if name := query_dict.pop("name", None):
         query = (
             query.annotate(
+                
                 similiarity=Greatest(
                     TrigramSimilarity("name", name),
                     TrigramSimilarity("name_japanese", name),

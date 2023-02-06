@@ -2,6 +2,7 @@ from colorfield.fields import ColorField
 from dynamic_filenames import FilePattern
 
 from django.contrib.postgres.fields import HStoreField
+from django.contrib.postgres.indexes import GinIndex
 from django.db import models
 
 from ...characters.models import CharacterModel
@@ -25,6 +26,13 @@ class AnimeNameSynonymModel(models.Model):
 
     class Meta:
         verbose_name = "Anime Synonym"
+        indexes = [
+            GinIndex(
+                name="anime_name_synonym_trgm_idx",
+                fields=["name"],
+                opclasses=["gin_trgm_ops"],
+            ),
+        ]
 
 
 class AnimeModel(models.Model):
@@ -96,9 +104,20 @@ class AnimeModel(models.Model):
 
     updated = models.DateTimeField(auto_now_add=True)
 
-
     def __str__(self) -> str:
         return f"{self.name}"
 
     class Meta:
         verbose_name = "Anime"
+        indexes = [
+            GinIndex(
+                name="anime_model_name_trgm_idx",
+                fields=["name"],
+                opclasses=["gin_trgm_ops"],
+            ),
+            GinIndex(
+                name="anime_name_japanese_trgm_idx",
+                fields=["name_japanese"],
+                opclasses=["gin_trgm_ops"],
+            ),
+        ]
