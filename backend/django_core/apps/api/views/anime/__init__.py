@@ -163,6 +163,7 @@ def post_anime_info(
         if key
         not in [
             # Ignore M2M relations
+            "name_synonyms",
             "genres",
             "themes",
             "studios",
@@ -181,7 +182,7 @@ def post_anime_info(
         defaults=model_data,
     )
     if name_synonyms_list := kwargs.get("name_synonyms", None):
-        for anime_name_synonym in name_synonyms_list[0].split(","):
+        for anime_name_synonym in name_synonyms_list:
             anime_synonym_instance = AnimeNameSynonymModel.objects.create(
                 name=anime_name_synonym.strip(),
             )

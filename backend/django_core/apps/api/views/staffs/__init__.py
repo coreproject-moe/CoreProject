@@ -114,6 +114,7 @@ def post_staff_info(
             anime_synonym_instance = StaffAlternateNameModel.objects.create(
                 name=alternate_name.strip(),
             )
+           
             staff_model_instance.alternate_names.add(anime_synonym_instance)
 
     return staff_model_instance
