@@ -38,17 +38,17 @@ def get_anime_info(
     if not HAS_POSTGRES:
         raise Http404("Looksups are not supported on any other databases except Postgres")
 
-    special_query = None
     query_dict = filters.dict(exclude_none=True)
     query_object = Q()
     # 2 Step get query
     # There wont be a performance hit if we do all().filter()
     # https://docs.djangoproject.com/en/4.0/topics/db/queries/#retrieving-specific-objects-with-filters
+    query = AnimeModel.objects.all()
 
     # We must pop this to filter other fields on the later stage
     if name := query_dict.pop("name", None):
-        special_query = (
-            AnimeModel.objects.annotate(
+        query = (
+            query.annotate(
                 similiarity=Greatest(
                     TrigramSimilarity("name", name),
                     TrigramSimilarity("name_japanese", name),
@@ -93,15 +93,11 @@ def get_anime_info(
 
     # This can be (AND: )
     # This means it is empty
-    if special_query:
-        query = special_query
-    else:
-        query = AnimeModel.objects.all()
-
-    print(query.explain(analyze=True))
 
     if query_object:
         query = query.filter(query_object).distinct()
+
+    print(query.explain(analyze=True))
 
     if not query:
         raise Http404(

@@ -24,6 +24,12 @@ from apps.anime.models import AnimeNameSynonymModel
 from ninja import ModelSchema
 
 
+class AnimeNameSynonymSchema(ModelSchema):
+    class Config:
+        model = AnimeNameSynonymModel
+        model_fields = ["name"]
+
+
 class AnimeInfoGETSchema(ModelSchema):
     genres: AnyUrl
     producers: AnyUrl
@@ -31,16 +37,11 @@ class AnimeInfoGETSchema(ModelSchema):
     characters: AnyUrl
     themes: AnyUrl
     episode: AnyUrl
-    name_synonyms: str = ""
+    name_synonyms: list[AnimeNameSynonymSchema] = []
 
     class Config:
         model = AnimeModel
         model_fields = "__all__"
-
-    @staticmethod
-    def resolve_name_synonyms(obj: AnimeModel):
-        # Modify the list from ['hello,world'] to ['hello','world']
-        return ""
 
     @staticmethod
     def resolve_genres(obj: AnimeModel) -> str:

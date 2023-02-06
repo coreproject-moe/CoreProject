@@ -6,7 +6,7 @@ from django.db import models
 staff_upload_pattern = FilePattern(filename_pattern="staffs/{uuid:s}{ext}")
 
 
-class AlternateNameModel(models.Model):
+class StaffAlternateNameModel(models.Model):
     name = models.CharField(max_length=100, null=False, blank=False)
 
     def __str__(self) -> str:
@@ -24,6 +24,7 @@ class StaffModel(models.Model):
     name = models.CharField(max_length=1024)
     given_name = models.CharField(max_length=1024, null=True, blank=True)
     family_name = models.CharField(max_length=1024, null=True, blank=True)
+    alternate_names = models.ManyToManyField(StaffAlternateNameModel, blank=True)
 
     staff_image = models.ImageField(
         storage=OverwriteStorage,

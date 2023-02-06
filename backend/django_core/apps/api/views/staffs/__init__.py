@@ -6,7 +6,7 @@ from django.db.models import Q, QuerySet
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 
-from ....staffs.models import StaffModel
+from ....staffs.models import StaffModel, StaffAlternateNameModel
 from ...filters.staffs import StaffFilter
 from ...schemas.staffs import StaffSchema
 
@@ -94,7 +94,11 @@ def post_staff_info(
     model_data = {
         key: value
         for key, value in kwargs.items()
-        if value
+        if key
+        not in [
+            "alternate_names",
+        ]
+        and value
         not in [
             None,
             "",  # ignore empty strings
@@ -105,6 +109,12 @@ def post_staff_info(
         name=kwargs["name"],
         defaults=model_data,
     )
+    if alternate_names_list := kwargs.get("alternate_names", None):
+        for alternate_name in alternate_names_list[0].split(","):
+            anime_synonym_instance = StaffAlternateNameModel.objects.create(
+                name=alternate_name.strip(),
+            )
+            staff_model_instance.alternate_names.add(anime_synonym_instance)
 
     return staff_model_instance
 
