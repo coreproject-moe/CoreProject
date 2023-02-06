@@ -1,7 +1,7 @@
 import contextlib
 import datetime
 
-from apps.anime.models import AnimeModel
+from apps.anime.models import AnimeModel, AnimeNameSynonymModel
 from apps.anime.models.anime_genre import AnimeGenreModel
 from apps.anime.models.anime_theme import AnimeThemeModel
 from apps.api.filters.anime import AnimeInfoFilters
@@ -15,9 +15,10 @@ from ninja.pagination import paginate
 from django.db.models import Q, QuerySet
 from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
+from django.db.models.functions import Greatest
 
 try:
-    from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
+    from django.contrib.postgres.search import TrigramSimilarity
 
     HAS_POSTGRES = True
 except ImportError:
@@ -46,18 +47,19 @@ def get_anime_info(
 
     # We must pop this to filter other fields on the later stage
     if name := query_dict.pop("name", None):
-        _vector_ = SearchVector(
-            "name",
-            "name_japanese",
-            "name_synonyms",
-        )
-        _query_ = SearchQuery(name)
-        query = query.annotate(
-            name_rank=SearchRank(
-                _vector_,
-                _query_,
+        query = (
+            query.annotate(
+                similiarity=Greatest(
+                    TrigramSimilarity("name", name),
+                    TrigramSimilarity("name_japanese", name),
+                    TrigramSimilarity("name_synonyms__name", name),
+                )
             )
-        ).order_by("-name_rank")
+            .filter(
+                similiarity__gte=0.3,
+            )
+            .order_by("-similiarity")
+        )
 
     # Same here but with ids
     for id in [
@@ -67,7 +69,7 @@ def get_anime_info(
     ]:
         if value := query_dict.pop(id, None):
             _query_ = Q()
-            for position in value.split(","):
+            for position in str(value).split(","):
                 _query_ |= Q(
                     **{f"{id}": int(position.strip())},
                 )
@@ -91,8 +93,11 @@ def get_anime_info(
 
     # This can be (AND: )
     # This means it is empty
+
     if query_object:
         query = query.filter(query_object).distinct()
+
+    print(query.explain(analyze=True))
 
     if not query:
         raise Http404(
@@ -158,6 +163,7 @@ def post_anime_info(
         if key
         not in [
             # Ignore M2M relations
+            "name_synonyms",
             "genres",
             "themes",
             "studios",
@@ -175,6 +181,12 @@ def post_anime_info(
         name=kwargs["name"],
         defaults=model_data,
     )
+    if name_synonyms_list := kwargs.get("name_synonyms", None):
+        for anime_name_synonym in name_synonyms_list:
+            anime_synonym_instance = AnimeNameSynonymModel.objects.create(
+                name=anime_name_synonym.strip(),
+            )
+            database.name_synonyms.add(anime_synonym_instance)
 
     if genres_list := kwargs.get("genres", None):
         with contextlib.suppress(IndexError, AnimeGenreModel.DoesNotExist):

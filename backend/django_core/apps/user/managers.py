@@ -1,38 +1,12 @@
 from typing import TYPE_CHECKING, Any
 
-from django.conf import settings
 from django.contrib.auth.base_user import BaseUserManager
-from django.db import models
-from django.db.models import CharField, Value
-from django.db.models.functions import Cast, Concat, LPad
+
+from .mixins.username_with_discriminator import UsernameWithDiscriminatorManager
 from django.utils.translation import gettext_lazy as _
 
 if TYPE_CHECKING:
     from .models import CustomUser
-
-
-class UsernameWithDiscriminatorManager(models.Manager["CustomUser"]):
-    # mypy: ignore-type
-    def get_username_with_discriminator(
-        self,
-        prefix: str = "",
-    ) -> models.QuerySet["CustomUser"]:
-        prefix = prefix + "__" if prefix else ""
-        return self.annotate(
-            username_discriminator_as_string=Cast(
-                f"{prefix}username_discriminator", output_field=CharField()
-            ),
-            username_with_discriminator=Concat(
-                f"{prefix}username",
-                Value("#"),
-                LPad(
-                    "username_discriminator_as_string",
-                    int(settings.USERNAME_DISCRIMINATOR_LENGTH),
-                    Value("0"),
-                ),
-                output_field=CharField(),
-            ),
-        )
 
 
 class UserManager(

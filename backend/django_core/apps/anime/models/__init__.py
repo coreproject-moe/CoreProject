@@ -1,8 +1,6 @@
-from django_better_admin_arrayfield.models.fields import ArrayField
 from dynamic_filenames import FilePattern
 
 from django.contrib.postgres.fields import HStoreField
-from django.contrib.postgres.indexes import GinIndex
 from django.db import models
 from colorfield.fields import ColorField
 
@@ -13,10 +11,22 @@ from ...studios.models import StudioModel
 from .anime_genre import AnimeGenreModel
 from .anime_theme import AnimeThemeModel
 
+from ..managers import AnimeManager
+
 cover_upload_pattern = FilePattern(filename_pattern="cover/{uuid:s}{ext}")
 banner_upload_pattern = FilePattern(filename_patten="banner/{uuid:s}{ext}")
 
 # Create your models here.
+
+
+class AnimeNameSynonymModel(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self) -> str:
+        return f"{self.name}"
+
+    class Meta:
+        verbose_name = "Anime Synonym"
 
 
 class AnimeModel(models.Model):
@@ -36,13 +46,7 @@ class AnimeModel(models.Model):
         blank=True,
         max_length=1024,
     )
-    name_synonyms = ArrayField(
-        # https://stackoverflow.com/questions/61206968/setting-arrayfield-to-null-or
-        default=list,
-        blank=True,
-        null=False,
-        base_field=models.CharField(max_length=1024),
-    )
+    name_synonyms = models.ManyToManyField(AnimeNameSynonymModel, blank=True)
 
     source = models.CharField(max_length=128, blank=True, null=True)
     aired_from = models.DateTimeField(blank=True, null=True)
@@ -94,18 +98,11 @@ class AnimeModel(models.Model):
 
     updated = models.DateTimeField(auto_now_add=True)
 
+    # We are doing custom Managers
+    objects = AnimeManager()
+
     def __str__(self) -> str:
         return f"{self.name}"
 
     class Meta:
         verbose_name = "Anime"
-        indexes = [
-            # Index for 'name' , 'name_japanese', 'name_synonyms'
-            GinIndex(
-                fields=[
-                    "name",
-                    "name_japanese",
-                    "name_synonyms",
-                ],
-            )
-        ]

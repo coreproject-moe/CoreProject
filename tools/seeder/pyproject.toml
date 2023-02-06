@@ -9,7 +9,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 requests = "^2.28.2"
-humanize = "^4.5.0"
+humanize = "^4.6.0"
 termcolor = "^2.2.0"
 requests-cache = {extras = ["redis"], version = "^0.9.8"}
 requests-ratelimiter = "*"

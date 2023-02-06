@@ -3,12 +3,19 @@ from ninja.files import UploadedFile
 from ninja.pagination import paginate
 
 from django.db.models import Q, QuerySet
-from django.http import HttpRequest
+from django.http import HttpRequest, Http404
 from django.shortcuts import get_object_or_404
-
-from ....staffs.models import StaffModel
+from django.db.models.functions import Greatest
+from ....staffs.models import StaffModel, StaffAlternateNameModel
 from ...filters.staffs import StaffFilter
 from ...schemas.staffs import StaffSchema
+
+try:
+    from django.contrib.postgres.search import TrigramSimilarity
+
+    HAS_POSTGRES = True
+except ImportError:
+    HAS_POSTGRES = False
 
 router = Router()
 
@@ -19,18 +26,31 @@ def get_staff_info(
     request: HttpRequest,
     filters: StaffFilter = Query(...),
 ) -> QuerySet[StaffModel]:
-    query_object = Q()
+    if not HAS_POSTGRES:
+        raise Http404("Looksups are not supported on any other databases except Postgres")
+
     query_dict = filters.dict(exclude_none=True)
+
+    query_object = Q()
+    query = StaffModel.objects.all()
 
     staff_name = query_dict.pop("name", None)
     if staff_name:
-        _query_ = Q()
         # Modify this
-        for position in staff_name.split(","):
-            _query_ |= Q(**{"name__icontains": position.strip()}) | Q(
-                **{"alternate_names__icontains": position.strip()}
+        query = (
+            query.annotate(
+                similiarity=Greatest(
+                    TrigramSimilarity("name", staff_name),
+                    TrigramSimilarity("alternate_names__name", staff_name),
+                    TrigramSimilarity("family_name", staff_name),
+                    TrigramSimilarity("given_name", staff_name),
+                )
             )
-        query_object &= _query_
+            .filter(
+                similiarity__gte=0.3,
+            )
+            .order_by("-similiarity")
+        )
 
     # Specilized lookups
     for specialized_name in [
@@ -54,8 +74,6 @@ def get_staff_info(
             for position in value.split(","):
                 _query_ |= Q(**{f"{id}": int(position.strip())})
             query_object &= _query_
-
-    query = StaffModel.objects.all()
 
     if query_object:
         query = query.filter(query_object).distinct()
@@ -94,7 +112,11 @@ def post_staff_info(
     model_data = {
         key: value
         for key, value in kwargs.items()
-        if value
+        if key
+        not in [
+            "alternate_names",
+        ]
+        and value
         not in [
             None,
             "",  # ignore empty strings
@@ -105,6 +127,12 @@ def post_staff_info(
         name=kwargs["name"],
         defaults=model_data,
     )
+    if alternate_names_list := kwargs.get("alternate_names", None):
+        for alternate_name in alternate_names_list:
+            anime_synonym_instance = StaffAlternateNameModel.objects.create(
+                name=alternate_name.strip(),
+            )
+            staff_model_instance.alternate_names.add(anime_synonym_instance)
 
     return staff_model_instance
 

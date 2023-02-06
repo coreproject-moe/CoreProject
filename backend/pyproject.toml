@@ -29,7 +29,6 @@ whitenoise = {extras = ["brotli"], version = "*"}
 celery = {extras = ["redis"], version = "^5.2.7"}
 gevent = {version = '*',markers = "sys_platform  == 'win32'"}
 # 3rd Party ( Better admin widgets )
-django-better-admin-arrayfield = "*"
 django-admin-hstore-widget = "^1.2.1"   # https://github.com/PokaInc/django-admin-hstore-widget/pull/25
 # 3rd Party ( Model Fields )
 django-colorfield = "*"
@@ -78,7 +77,7 @@ prod_uvicorn = "gunicorn --app-dir=django_core core.asgi:application -w 4 -k uvi
 ##  Migrations
 sync = "python ./django_core/manage.py migrate"
 mksync = "python ./django_core/manage.py makemigrations"
-## Task queue
+createsuperuser = 'python ./django_core/manage.py createsuperuser'
 ## Staticfiles
 collectstatic = "python ./django_core/manage.py collectstatic --clear --link" # Dont duplicate copy files.
 ## Mypy
