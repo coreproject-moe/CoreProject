@@ -56,7 +56,7 @@ def get_anime_info(
                 )
             )
             .filter(
-                similiarity__gte=0.1,
+                similiarity__gte=0.3,
             )
             .order_by("-similiarity")
         )
