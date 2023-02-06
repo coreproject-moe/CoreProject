@@ -20,6 +20,9 @@ from django.shortcuts import resolve_url
 ## future update ??
 ## Take a look at issue(526)
 
+from apps.anime.models import AnimeNameSynonymModel
+from ninja import ModelSchema
+
 
 class AnimeInfoGETSchema(ModelSchema):
     genres: AnyUrl
@@ -28,10 +31,16 @@ class AnimeInfoGETSchema(ModelSchema):
     characters: AnyUrl
     themes: AnyUrl
     episode: AnyUrl
+    name_synonyms: str = ""
 
     class Config:
         model = AnimeModel
         model_fields = "__all__"
+
+    @staticmethod
+    def resolve_name_synonyms(obj: AnimeModel):
+        # Modify the list from ['hello,world'] to ['hello','world']
+        return ""
 
     @staticmethod
     def resolve_genres(obj: AnimeModel) -> str:

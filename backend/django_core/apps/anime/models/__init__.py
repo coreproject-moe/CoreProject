@@ -1,4 +1,3 @@
-from django_better_admin_arrayfield.models.fields import ArrayField
 from dynamic_filenames import FilePattern
 
 from django.contrib.postgres.fields import HStoreField
@@ -21,6 +20,16 @@ banner_upload_pattern = FilePattern(filename_patten="banner/{uuid:s}{ext}")
 # Create your models here.
 
 
+class AnimeNameSynonymModel(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self) -> str:
+        return f"{self.name}"
+
+    class Meta:
+        verbose_name = "Anime Synonym"
+
+
 class AnimeModel(models.Model):
     mal_id = models.IntegerField(unique=True, blank=False, null=True)
     anilist_id = models.IntegerField(unique=True, blank=False, null=True)
@@ -38,13 +47,7 @@ class AnimeModel(models.Model):
         blank=True,
         max_length=1024,
     )
-    name_synonyms = ArrayField(
-        # https://stackoverflow.com/questions/61206968/setting-arrayfield-to-null-or
-        default=list,
-        blank=True,
-        null=False,
-        base_field=models.CharField(max_length=1024),
-    )
+    name_synonyms = models.ManyToManyField(AnimeNameSynonymModel, blank=True)
 
     source = models.CharField(max_length=128, blank=True, null=True)
     aired_from = models.DateTimeField(blank=True, null=True)
@@ -104,13 +107,3 @@ class AnimeModel(models.Model):
 
     class Meta:
         verbose_name = "Anime"
-        indexes = [
-            # Index for 'name' , 'name_japanese', 'name_synonyms'
-            GinIndex(
-                fields=[
-                    "name",
-                    "name_japanese",
-                    "name_synonyms",
-                ],
-            )
-        ]

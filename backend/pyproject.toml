@@ -29,7 +29,6 @@ whitenoise = {extras = ["brotli"], version = "*"}
 celery = {extras = ["redis"], version = "^5.2.7"}
 gevent = {version = '*',markers = "sys_platform  == 'win32'"}
 # 3rd Party ( Better admin widgets )
-django-better-admin-arrayfield = "*"
 django-admin-hstore-widget = "^1.2.1"   # https://github.com/PokaInc/django-admin-hstore-widget/pull/25
 # 3rd Party ( Model Fields )
 django-colorfield = "*"

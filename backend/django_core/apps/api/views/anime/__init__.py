@@ -1,7 +1,7 @@
 import contextlib
 import datetime
 
-from apps.anime.models import AnimeModel
+from apps.anime.models import AnimeModel, AnimeNameSynonymModel
 from apps.anime.models.anime_genre import AnimeGenreModel
 from apps.anime.models.anime_theme import AnimeThemeModel
 from apps.api.filters.anime import AnimeInfoFilters
@@ -15,6 +15,7 @@ from ninja.pagination import paginate
 from django.db.models import Q, QuerySet
 from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
+from django.db.models.functions import Greatest
 
 try:
     from django.contrib.postgres.search import TrigramSimilarity
@@ -47,10 +48,11 @@ def get_anime_info(
     # We must pop this to filter other fields on the later stage
     if name := query_dict.pop("name", None):
         special_query = (
-            AnimeModel.objects.get_names_and_name_synonyms_and_name_japanese_as_string()
-            .annotate(
-                similiarity=TrigramSimilarity(
-                    "names_and_name_synonyms_and_name_japanese_as_string", name
+            AnimeModel.objects.annotate(
+                similiarity=Greatest(
+                    TrigramSimilarity("name", name),
+                    TrigramSimilarity("name_japanese", name),
+                    TrigramSimilarity("name_synonyms__name", name),
                 )
             )
             .filter(
@@ -95,6 +97,8 @@ def get_anime_info(
         query = special_query
     else:
         query = AnimeModel.objects.all()
+
+    print(query.explain(analyze=True))
 
     if query_object:
         query = query.filter(query_object).distinct()
@@ -180,6 +184,12 @@ def post_anime_info(
         name=kwargs["name"],
         defaults=model_data,
     )
+    if name_synonyms_list := kwargs.get("name_synonyms", None):
+        for anime_name_synonym in name_synonyms_list[0].split(","):
+            anime_synonym_instance = AnimeNameSynonymModel.objects.create(
+                name=anime_name_synonym.strip(),
+            )
+            database.name_synonyms.add(anime_synonym_instance)
 
     if genres_list := kwargs.get("genres", None):
         with contextlib.suppress(IndexError, AnimeGenreModel.DoesNotExist):
