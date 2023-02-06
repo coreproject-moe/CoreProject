@@ -26,13 +26,6 @@ class AnimeNameSynonymModel(models.Model):
 
     class Meta:
         verbose_name = "Anime Synonym"
-        indexes = [
-            GinIndex(
-                name="anime_name_synonym_trgm_idx",
-                fields=["name"],
-                opclasses=["gin_trgm_ops"],
-            ),
-        ]
 
 
 class AnimeModel(models.Model):
@@ -109,15 +102,3 @@ class AnimeModel(models.Model):
 
     class Meta:
         verbose_name = "Anime"
-        indexes = [
-            GinIndex(
-                name="anime_model_name_trgm_idx",
-                fields=["name"],
-                opclasses=["gin_trgm_ops"],
-            ),
-            GinIndex(
-                name="anime_name_japanese_trgm_idx",
-                fields=["name_japanese"],
-                opclasses=["gin_trgm_ops"],
-            ),
-        ]
