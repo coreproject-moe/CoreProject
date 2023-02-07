@@ -71,11 +71,13 @@ INSTALLED_APPS = [
     # 3rd Party Models
     "colorfield",
     # 3rd party adminpanel
-    "django_better_admin_arrayfield",
     "django_admin_hstore_widget",
     # Tailwind CSS
     "tailwind",
     "tailwind_src",  # Our custom app
+    # Crispy Froms
+    "crispy_forms",
+    "crispy_tailwind",
     # Api ( Django-Ninja )
     "apps.api",
     # OpenGraph
