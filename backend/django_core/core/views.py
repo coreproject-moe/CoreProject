@@ -68,7 +68,6 @@ ERROR_DICT = {
 
 
 async def home_view(request: HttpRequest) -> HttpResponse:
-
     context = {
         "cards": {
             "django": {
