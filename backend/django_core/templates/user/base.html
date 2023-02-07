@@ -1,12 +1,17 @@
 {% extends 'tailwind_base.html' %}
 <!--prettier-ignore-->
-
-{% block body %}
-<div class="grid h-screen">
+{%block head%}
+<script
+    defer
+    src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+></script>
+<script src="https://cdn.jsdelivr.net/npm/@shat/stylenames@v1.x.x/lib/index.umd.js"></script>
+{%endblock%} {% block body %}
+<div class="grid h-screen" x-init="() => $store.background_image">
     <div class="bg-black h-screen fixed" style="grid-area: 1 / 1 / 2 / 2">
         <div
             class="h-screen w-screen bg-no-repeat bg-center bg-cover brightness-90"
-            style="background-image: url('/posters/Comic-Girls-Image.png')"
+            :style="`background-image:url('${$store.background_image.image_url}')`"
         ></div>
         <div
             class="absolute inset-0 bg-gradient-to-t from-base-100 via-base-100/[.8] md:via-base-100/[.0001]"
@@ -66,7 +71,23 @@
         </div>
     </div>
     <div class="h-screen grid absolute inset-0">
-        {%block card%} {%endblock%}
+        {% block card %} {% endblock %}
     </div>
 </div>
 {% endblock %}
+<!--prettier-ignore-->
+{%block js%}
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.store('background_image', {
+            shown: false,
+            image_url:
+                'https://hatrabbits.com/wp-content/uploads/2017/01/random.jpg',
+            init() {
+                console.log(this.image_url);
+            },
+        });
+    });
+</script>
+
+{%endblock%}
