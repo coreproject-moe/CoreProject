@@ -65,3 +65,6 @@ async def avatar_view(
 
     await CLIENT.aclose()
     return response
+
+def sign_up_view(request):
+    return render('users')
