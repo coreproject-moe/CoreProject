@@ -1,30 +1,24 @@
 import hashlib
 import textwrap
 
-from core.utility import sendfile
 import httpx
-
-from django.views.decorators.http import require_POST
+from django.http import FileResponse
 from django.core.management.utils import get_random_secret_key
 from django.core.validators import URLValidator
 from django.http import HttpRequest, HttpResponse, StreamingHttpResponse
 from django.shortcuts import render
-from django.conf import settings
 
 from .models import CustomUser
-from .forms import UserRegistrationForm, UsernameDiscriminatorForm
-
-CLIENT = httpx.AsyncClient()
 
 
 async def avatar_view(
     request: HttpRequest,
     user_id: int,
 ) -> StreamingHttpResponse | HttpResponse:
-    response: StreamingHttpResponse
+    CLIENT = httpx.AsyncClient()
 
     try:
-        user = await CustomUser.objects.aget(id=user_id)
+        user = await CustomUser.objects.aget(pk=user_id)
     except CustomUser.DoesNotExist:
         return render(
             request,
@@ -39,7 +33,7 @@ async def avatar_view(
 
     if user.avatar:
         avatar_file = open(user.avatar.path, "rb")
-        response = sendfile(avatar_file)
+        response = FileResponse(avatar_file)
 
     else:
         try:
@@ -57,63 +51,17 @@ async def avatar_view(
             )
         except Exception as e:
             response = HttpResponse(
-                textwrap.dendant(
+                textwrap.dedent(
                     f"""
                         Please Check your <b>email</b> string.
                         <br/>
                         It is |> <b>{avatar_url}</b>
-                        which is not a valid string
+                        which might not a valid string
                         <br />
                         <b>Error</b> : {e}
                     """
                 )
             )
 
+    await CLIENT.aclose()
     return response
-
-
-def signup_view(request: HttpRequest) -> HttpResponse:
-    form = UserRegistrationForm(request.POST or None)
-
-    return render(
-        request,
-        "user/signup.html",
-        context={
-            "form": form,
-        },
-    )
-
-
-def login_view(request: HttpRequest) -> HttpResponse:
-    return render(request, "user/login.html")
-
-
-@require_POST
-def username_discriminator_endpoint(
-    request: HttpRequest,
-) -> HttpResponse:
-    """
-    Returns :
-        - 404 : not found
-        - 302 : found
-    """
-    form = UsernameDiscriminatorForm(request.POST or None)
-
-    if form.is_valid() and not (
-        CustomUser.objects.get_username_with_discriminator()
-        .filter(
-            username_with_discriminator=f"""{
-                form.cleaned_data.get('username')
-            }#{
-                form.cleaned_data.get('username_discriminator')
-                .zfill(
-                    settings.USERNAME_DISCRIMINATOR_LENGTH
-                )
-            }
-            """
-        )
-        .exists()
-    ):
-        return HttpResponse(status_code=404)
-    else:
-        return HttpResponse(status_code=302)

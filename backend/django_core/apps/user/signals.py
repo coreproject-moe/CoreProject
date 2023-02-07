@@ -1,5 +1,6 @@
 import inspect
-from typing import Unpack, TypedDict
+from typing import TypedDict, Unpack
+
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.http import HttpRequest

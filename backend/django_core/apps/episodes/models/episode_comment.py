@@ -1,6 +1,7 @@
+from apps.user.models import CustomUser
+
 from django.db import models
 
-from apps.user.models import CustomUser
 from ..managers import EpisodeCommentManager
 
 # Create your models here.

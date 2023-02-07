@@ -554,40 +554,6 @@ files = [
 Pillow = "*"
 
 [[package]]
-name = "crispy-bootstrap5"
-version = "0.7"
-description = "Bootstrap5 template pack for django-crispy-forms"
-category = "main"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "crispy-bootstrap5-0.7.tar.gz", hash = "sha256:0745a67199619149b7feca87dab7a45664876ed50fb582b38fd2aeb3f8a8d869"},
-    {file = "crispy_bootstrap5-0.7-py3-none-any.whl", hash = "sha256:f3ff1ef5cb379fe80b1b02e245008f276444098a4bdb8d855bed84c623798a85"},
-]
-
-[package.dependencies]
-django = ">=3.2"
-django-crispy-forms = ">=1.13.0"
-
-[package.extras]
-test = ["pytest", "pytest-django"]
-
-[[package]]
-name = "crispy-tailwind"
-version = "0.5.0"
-description = "A tailwind package for Django Crispy Forms"
-category = "main"
-optional = false
-python-versions = ">=3.5"
-files = [
-    {file = "crispy-tailwind-0.5.0.tar.gz", hash = "sha256:0041c85b73b0a197e312ab969bd505aa1f96752a6a50324377287c2b6be3c0cb"},
-    {file = "crispy_tailwind-0.5.0-py3-none-any.whl", hash = "sha256:65cfcdf8dce96be37c99578e2688ed2d0067e6ff633baaf657358b3b3be052c7"},
-]
-
-[package.dependencies]
-django-crispy-forms = ">=1.11.2"
-
-[[package]]
 name = "cryptography"
 version = "39.0.0"
 description = "cryptography is a package which provides cryptographic recipes and primitives to Python developers."
@@ -731,18 +697,6 @@ optional = false
 python-versions = "*"
 files = [
     {file = "django-cprofile-middleware-1.0.5.tar.gz", hash = "sha256:b942185a38f3b582935a55c768f126ce9a6f0cefceee3b5d19e6b307ad129889"},
-]
-
-[[package]]
-name = "django-crispy-forms"
-version = "1.14.0"
-description = "Best way to have Django DRY forms"
-category = "main"
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "django-crispy-forms-1.14.0.tar.gz", hash = "sha256:35887b8851a931374dd697207a8f56c57a9c5cb9dbf0b9fa54314da5666cea5b"},
-    {file = "django_crispy_forms-1.14.0-py3-none-any.whl", hash = "sha256:bc4d2037f6de602d39c0bc452ac3029d1f5d65e88458872cc4dbc01c3a400604"},
 ]
 
 [[package]]
@@ -1293,6 +1247,24 @@ files = [
 ]
 
 [[package]]
+name = "isort"
+version = "5.12.0"
+description = "A Python utility / library to sort Python imports."
+category = "dev"
+optional = false
+python-versions = ">=3.8.0"
+files = [
+    {file = "isort-5.12.0-py3-none-any.whl", hash = "sha256:f84c2818376e66cf843d497486ea8fed8700b340f308f076c6fb1229dff318b6"},
+    {file = "isort-5.12.0.tar.gz", hash = "sha256:8bef7dde241278824a6d83f44a544709b065191b95b6e50894bdc722fcba0504"},
+]
+
+[package.extras]
+colors = ["colorama (>=0.4.3)"]
+pipfile-deprecated-finder = ["pip-shims (>=0.5.2)", "pipreqs", "requirementslib"]
+plugins = ["setuptools"]
+requirements-deprecated-finder = ["pip-api", "pipreqs"]
+
+[[package]]
 name = "kombu"
 version = "5.2.4"
 description = "Messaging library for Python."
@@ -1719,28 +1691,28 @@ idna2008 = ["idna"]
 
 [[package]]
 name = "ruff"
-version = "0.0.241"
+version = "0.0.239"
 description = "An extremely fast Python linter, written in Rust."
 category = "dev"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "ruff-0.0.241-py3-none-macosx_10_7_x86_64.whl", hash = "sha256:2bebc3caa5a1efd528a427f466a6b1210349766d1438af859a4bf89516a2268a"},
-    {file = "ruff-0.0.241-py3-none-macosx_10_9_x86_64.macosx_11_0_arm64.macosx_10_9_universal2.whl", hash = "sha256:7271ff412f60308a2ef3c24d950911532e1327e13b2ede5b1dac92c596e73782"},
-    {file = "ruff-0.0.241-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:7a67284d77413cc680c049b741145b7d7787bd5253777e93cccab99008aea4ba"},
-    {file = "ruff-0.0.241-py3-none-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:6c6408aa688e8bab8610d0a6b78689462ced5aa6bc79dd2e89e22b4461ef962d"},
-    {file = "ruff-0.0.241-py3-none-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:7a3f833d1b7149d2660b577245010243211a524bd6695ad10e26f5b9fb130e69"},
-    {file = "ruff-0.0.241-py3-none-manylinux_2_17_ppc64.manylinux2014_ppc64.whl", hash = "sha256:c16f1146a87d6365b8537dfb6c9572e86c374bb1cc5fe01ca6bceb189d9e0b15"},
-    {file = "ruff-0.0.241-py3-none-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:ab85d063020556238d38f8ae74c84a45968ceb3b394b1b5e7f38273b5ed80f3b"},
-    {file = "ruff-0.0.241-py3-none-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:8630f9457184e05dfdc7452832fcc6942355f4d4caf5e966d949874654e43569"},
-    {file = "ruff-0.0.241-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:c97c5c87e0c9666c3e35fd370cbe8b01624c3d359667c4152f03f252db540e21"},
-    {file = "ruff-0.0.241-py3-none-musllinux_1_2_aarch64.whl", hash = "sha256:972436a823ef8e9496d6cbfee58412278ef0290ef1e9794510f9eee7c3a12283"},
-    {file = "ruff-0.0.241-py3-none-musllinux_1_2_armv7l.whl", hash = "sha256:ff1abbba49b67508e3a1595cc64fc4b1a661f4a0ffb6247f49098b602313ad78"},
-    {file = "ruff-0.0.241-py3-none-musllinux_1_2_i686.whl", hash = "sha256:5691ed16b981825dc73ed1bde066ec8122883cc0c4bf71cf20c1ab5e9bd22e9f"},
-    {file = "ruff-0.0.241-py3-none-musllinux_1_2_x86_64.whl", hash = "sha256:0155e834564ebc750c97b271038e118a7ee44f319363e32667248cbf298fece3"},
-    {file = "ruff-0.0.241-py3-none-win32.whl", hash = "sha256:017d6011ceb8d27c320f4e105e62794fcd8fbe8467abf4f0de3166d0b1768f5e"},
-    {file = "ruff-0.0.241-py3-none-win_amd64.whl", hash = "sha256:201c84c9acf450041a949bd5eb4a4599df63a358ef79df723bd839e8067da139"},
-    {file = "ruff-0.0.241.tar.gz", hash = "sha256:2e16873052e3c524eed41f4d55e96c0d3ec95489d1bf9a36f71311b5ada359b1"},
+    {file = "ruff-0.0.239-py3-none-macosx_10_7_x86_64.whl", hash = "sha256:de9830cfcca81c5d25233bf4be6f2f95deb58a7eaf2295f91280de97a54240d7"},
+    {file = "ruff-0.0.239-py3-none-macosx_10_9_x86_64.macosx_11_0_arm64.macosx_10_9_universal2.whl", hash = "sha256:71c05f627fb9efb0859af248fe00f61391266d14e9406c10236dec7db1b1bfe5"},
+    {file = "ruff-0.0.239-py3-none-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:3b1caea095c22067abc685b8452be5a9079ca27b88bffd80730f9e4ca8f81e7c"},
+    {file = "ruff-0.0.239-py3-none-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:97293bae6da5bd82672473f6d43421de7dd27fe8a8b1b3c79ffeda37bcb492b4"},
+    {file = "ruff-0.0.239-py3-none-manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:25c3a84f8db9281385685041e98b67afd4a0bb5a872e897331af8229eb28b965"},
+    {file = "ruff-0.0.239-py3-none-manylinux_2_17_ppc64.manylinux2014_ppc64.whl", hash = "sha256:0056b7e1975a3ad7ef7eb9df4ca9f905661caf924c6843ecbe4e10719cd6cd0b"},
+    {file = "ruff-0.0.239-py3-none-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:b38916c62eb2587743d2ec8e1f03a43eb5889cf4a56cb55f5eb3bffee5260e32"},
+    {file = "ruff-0.0.239-py3-none-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:7afe3bc50339b916b75a587ed299859fae9c1056ed73d35531c0af610dbe67f6"},
+    {file = "ruff-0.0.239-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:daac673996ecbef77bccf8cd03189c60302568b7aec669e352aa2d8925b074b2"},
+    {file = "ruff-0.0.239-py3-none-musllinux_1_2_aarch64.whl", hash = "sha256:d3e4bb03333b0c8012ad7d27246a7a95dba3d6ec8796c172af055a179a86b61c"},
+    {file = "ruff-0.0.239-py3-none-musllinux_1_2_armv7l.whl", hash = "sha256:801a209887f777811caf9fd4513eec9b505e139d1b0844e1eacd1b4683b0eba2"},
+    {file = "ruff-0.0.239-py3-none-musllinux_1_2_i686.whl", hash = "sha256:216592db3bd93c260cc329d3237548f17fea1f43f87673ab5cdeb04d548fbea9"},
+    {file = "ruff-0.0.239-py3-none-musllinux_1_2_x86_64.whl", hash = "sha256:1e523edf92c5e888d93a145ef20ad548fca4da7cbd7a8321b3539967a03b7caf"},
+    {file = "ruff-0.0.239-py3-none-win32.whl", hash = "sha256:e54233e7d97d5b705582f673dc3184c7b16c42f7eac3be707c0adf716e457293"},
+    {file = "ruff-0.0.239-py3-none-win_amd64.whl", hash = "sha256:a1bdd3b5ea60b160d3ceb2f8fef4d88af58b7932d4ed46c85c586ef2f277b71d"},
+    {file = "ruff-0.0.239.tar.gz", hash = "sha256:bbb1fe64d4641ce7e5855bbebd9e81f6a596501bcb67842600186b3aa9b950cf"},
 ]
 
 [[package]]
@@ -1849,14 +1821,14 @@ files = [
 
 [[package]]
 name = "types-redis"
-version = "4.4.0.6"
+version = "4.4.0.4"
 description = "Typing stubs for redis"
 category = "dev"
 optional = false
 python-versions = "*"
 files = [
-    {file = "types-redis-4.4.0.6.tar.gz", hash = "sha256:57f8b3706afe47ef36496d70a97a3783560e6cb19e157be12985dbb31de1d853"},
-    {file = "types_redis-4.4.0.6-py3-none-any.whl", hash = "sha256:8b40d6bf3a54352d4cb2aa7d01294c572a39d40a9d289b96bdf490b51d3a42d2"},
+    {file = "types-redis-4.4.0.4.tar.gz", hash = "sha256:b70829ca3401d3153d628e28d860070eff1b36b2fa3e5af3e583c1d167383cab"},
+    {file = "types_redis-4.4.0.4-py3-none-any.whl", hash = "sha256:802e893ad3f88e03d3a2feb0d23a715d60b0bb330bc598a52f1de237fc2547a5"},
 ]
 
 [package.dependencies]
@@ -2024,4 +1996,4 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "dfb36b861a8643f6f1c750da1dee9dd4c721521ace561d1682a10831b25d0085"
+content-hash = "157fa33560000e5e69651cfccf717148f85eda16a7998406c35ec689a360b616"

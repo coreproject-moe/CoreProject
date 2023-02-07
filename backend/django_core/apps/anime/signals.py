@@ -1,9 +1,11 @@
-from typing import Unpack, TypedDict
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from .models import AnimeModel
+from typing import TypedDict, Unpack
 
 from apps.anime.tasks import set_field_color
+
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+from .models import AnimeModel
 
 
 class DjangoInstance(TypedDict):

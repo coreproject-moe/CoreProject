@@ -1,5 +1,5 @@
-from apps.user.backends import EmailOrUsernameModelBackend
 from apps.api.models import Token
+from apps.user.backends import EmailOrUsernameModelBackend
 from ninja import Form, Router
 from pydantic import EmailStr
 
