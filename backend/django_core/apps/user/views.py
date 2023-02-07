@@ -1,9 +1,8 @@
 import hashlib
 import textwrap
 
-from core.utils.sendfile import sendfile
 import httpx
-
+from django.http import FileResponse
 from django.core.management.utils import get_random_secret_key
 from django.core.validators import URLValidator
 from django.http import HttpRequest, HttpResponse, StreamingHttpResponse
@@ -34,7 +33,7 @@ async def avatar_view(
 
     if user.avatar:
         avatar_file = open(user.avatar.path, "rb")
-        response = sendfile(avatar_file)
+        response = FileResponse(avatar_file)
 
     else:
         try:
