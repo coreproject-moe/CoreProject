@@ -65,10 +65,15 @@
 {% block body %}
 <div class="grid h-screen" x-init="() => $store.background">
     <div
-        class="bg-black h-screen fixed"
+        class="bg-black h-screen fixed transition"
         style="grid-area: 1 / 1 / 2 / 2"
         x-show="$store.background.shown"
-        x-transition
+        x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 transform scale-90"
+        x-transition:enter-end="opacity-100 transform scale-100"
+        x-transition:leave="transition ease-in duration-300"
+        x-transition:leave-start="opacity-100 transform scale-100"
+        x-transition:leave-end="opacity-0 transform scale-90"
     >
         <div
             class="h-screen w-screen bg-no-repeat bg-center bg-cover brightness-90"
@@ -154,7 +159,7 @@
 
                 setInterval(() => {
                     change_image.call(this);
-                }, 1000);
+                }, 2000);
             },
         });
     });
