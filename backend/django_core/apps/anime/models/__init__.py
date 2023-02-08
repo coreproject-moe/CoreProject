@@ -2,7 +2,6 @@ from colorfield.fields import ColorField
 from dynamic_filenames import FilePattern
 
 from django.contrib.postgres.fields import HStoreField
-from django.contrib.postgres.indexes import GinIndex
 from django.db import models
 
 from ...characters.models import CharacterModel

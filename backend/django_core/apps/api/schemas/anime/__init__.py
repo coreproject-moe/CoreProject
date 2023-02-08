@@ -21,7 +21,6 @@ from django.shortcuts import resolve_url
 ## Take a look at issue(526)
 
 
-
 class AnimeNameSynonymSchema(ModelSchema):
     class Config:
         model = AnimeNameSynonymModel
