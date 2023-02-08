@@ -1,7 +1,8 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.templatetags.static import static
+
 from .utilities.format import format_kokoro_color
-from django.http import HttpResponse, HttpRequest
 
 ERROR_DICT = {
     400: {
@@ -91,7 +92,10 @@ async def home_view(request: HttpRequest) -> HttpResponse:
     return render(request, "home/index.html", context)
 
 
-async def four_zero_zero_view(request: HttpRequest, exception: None = None) -> HttpResponse:
+async def four_zero_zero_view(
+    request: HttpRequest,
+    exception: None = None,
+) -> HttpResponse:
     context = ERROR_DICT.get(400)
     context.setdefault("error_status_code", 400)
     return render(
@@ -113,7 +117,10 @@ async def four_zero_three_view(
     )
 
 
-async def four_zero_four_view(request: HttpRequest, exception: None = None) -> HttpResponse:
+async def four_zero_four_view(
+    request: HttpRequest,
+    exception: None = None,
+) -> HttpResponse:
     context = ERROR_DICT.get(404)
     context.setdefault("error_status_code", 404)
     return render(

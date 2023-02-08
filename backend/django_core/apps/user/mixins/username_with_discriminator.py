@@ -1,7 +1,7 @@
-from django.db import models
-
 from typing import TYPE_CHECKING
+
 from django.conf import settings
+from django.db import models
 from django.db.models import CharField, Value
 from django.db.models.functions import Cast, Concat, LPad
 

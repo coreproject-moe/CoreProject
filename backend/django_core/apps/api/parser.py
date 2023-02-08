@@ -1,6 +1,7 @@
 from ninja.parser import Parser
-from django.http import HttpRequest
 from ninja.types import DictStrAny
+
+from django.http import HttpRequest
 
 try:
     import orjson

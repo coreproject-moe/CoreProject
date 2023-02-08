@@ -8,7 +8,7 @@ from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 
 try:
-    from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
+    from django.contrib.postgres.search import TrigramSimilarity
 
     HAS_POSTGRES = True
 except ImportError:
@@ -37,14 +37,9 @@ def get_character_info(
 
     character_name = query_dict.pop("name", None)
     if character_name:
-        _vector_ = SearchVector("name", "about")
-        _query_ = SearchQuery(character_name)
         query = query.annotate(
-            character_rank=SearchRank(
-                _vector_,
-                _query_,
-            )
-        ).order_by("-character_rank")
+            similarity=TrigramSimilarity("name", character_name)
+        ).order_by("-similarity")
 
     # Same here but with ids
     id_lookups = [

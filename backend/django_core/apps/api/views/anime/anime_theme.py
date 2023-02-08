@@ -1,6 +1,5 @@
 from apps.anime.models import AnimeModel
 from apps.anime.models.anime_theme import AnimeThemeModel
-
 from ninja import Router
 
 from django.http import HttpRequest

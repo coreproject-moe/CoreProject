@@ -13,9 +13,9 @@ from ninja.files import UploadedFile
 from ninja.pagination import paginate
 
 from django.db.models import Q, QuerySet
+from django.db.models.functions import Greatest
 from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
-from django.db.models.functions import Greatest
 
 try:
     from django.contrib.postgres.search import TrigramSimilarity

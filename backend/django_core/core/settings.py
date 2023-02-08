@@ -71,7 +71,6 @@ INSTALLED_APPS = [
     # 3rd Party Models
     "colorfield",
     # 3rd party adminpanel
-    "django_better_admin_arrayfield",
     "django_admin_hstore_widget",
     # Tailwind CSS
     "tailwind",
@@ -131,7 +130,7 @@ if DEBUG:
         "debug_toolbar.middleware.DebugToolbarMiddleware",
         "django_cprofile_middleware.middleware.ProfilerMiddleware",
         # Browser Reload Middleware
-        # "django_browser_reload.middleware.BrowserReloadMiddleware",
+        "django_browser_reload.middleware.BrowserReloadMiddleware",
     )
 
 
