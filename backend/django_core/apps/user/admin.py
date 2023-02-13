@@ -43,7 +43,7 @@ class CustomUserAdmin(DjangoUserAdmin):
             {
                 "fields": (
                     "username",
-                    "username_discriminator",
+                    "discriminator",
                     "password",
                 )
             },
@@ -93,7 +93,7 @@ class CustomUserAdmin(DjangoUserAdmin):
                 "classes": ("wide",),
                 "fields": (
                     "username",
-                    "username_discriminator",
+                    "discriminator",
                     "email",
                     "password1",
                     "password2",

@@ -103,10 +103,10 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 (
-                    "username_discriminator",
+                    "discriminator",
                     models.BigIntegerField(
                         blank=True,
-                        help_text="Optional. 4 characters or fewer. If not provided a random `username_discriminator` will be selected.",  # noqa
+                        help_text="Optional. 4 characters or fewer. If not provided a random `discriminator` will be selected.",  # noqa
                         null=True,
                         validators=[
                             django.core.validators.MaxValueValidator(36),
@@ -168,7 +168,7 @@ class Migration(migrations.Migration):
                 "unique_together": {
                     (
                         "username",
-                        "username_discriminator",
+                        "discriminator",
                     ),
                 },
             },
