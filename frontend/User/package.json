@@ -28,7 +28,7 @@
         "autoprefixer": "^10.4.13",
         "cssnano": "^5.1.14",
         "cross-env": "^7.0.3",
-        "daisyui": "^2.50.0",
+        "daisyui": "^2.50.1",
         "eslint": "^8.34.0",
         "eslint-config-prettier": "^8.6.0",
         "eslint-plugin-simple-import-sort": "^10.0.0",
