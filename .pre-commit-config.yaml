@@ -1,6 +1,6 @@
 repos:
     - repo: https://github.com/pre-commit/mirrors-eslint
-      rev: v8.33.0
+      rev: v8.34.0
       hooks:
           - id: eslint
             args: [
@@ -86,7 +86,7 @@ repos:
             args: [--py311-plus]
     - repo: https://github.com/charliermarsh/ruff-pre-commit
       # Ruff version.
-      rev: "v0.0.242"
+      rev: "v0.0.246"
       hooks:
           - id: ruff
             # Respect `exclude` and `extend-exclude` settings.
