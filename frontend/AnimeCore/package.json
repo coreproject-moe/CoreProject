@@ -17,7 +17,7 @@
         "update": "npx npm-check-updates -u && npm install"
     },
     "devDependencies": {
-        "@sveltejs/adapter-node": "^1.1.8",
+        "@sveltejs/adapter-node": "^1.2.0",
         "@sveltejs/adapter-static": "^2.0.1",
         "@sveltejs/adapter-vercel": "^2.0.2",
         "@sveltejs/kit": "^1.5.5",
