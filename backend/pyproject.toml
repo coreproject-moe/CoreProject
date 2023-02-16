@@ -107,11 +107,11 @@ subprocess.call(command)
 """
 interpreter= 'python'
 
-
 [build-system]
-requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
+requires = [
+  "poetry-core",
+]
 
 [tool.black]
 line-length = 92
@@ -145,7 +145,6 @@ explicit_package_bases = true
 [tool.django-stubs]
 django_settings_module = "core.settings"
 
-
 [tool.isort]
 # https://github.com/PyCQA/isort/wiki/isort-Settings
 profile = "black"
@@ -172,7 +171,6 @@ known_django = [
     'django',
     'djclick'
 ]
-
 
 [tool.ruff]
 line-length = 92
