@@ -22,5 +22,7 @@ poethepoet = "^0.18.1"
 dev = 'adev runserver ./web/main.py --app-factory=aiohttp_app'
 
 [build-system]
-requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+requires = [
+  "poetry-core",
+]
