@@ -9,7 +9,7 @@
     defer
     src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
 ></script>
-<script src="https://unpkg.com/htmx.org@1.8.5"></script>
+
 <style>
     .card {
         border-image: linear-gradient(
@@ -69,11 +69,11 @@
         style="grid-area: 1 / 1 / 2 / 2"
         x-show="$store.background.shown"
         x-transition:enter="transition ease-out duration-300"
-        x-transition:enter-start="opacity-0 transform scale-90"
-        x-transition:enter-end="opacity-100 transform scale-100"
+        x-transition:enter-start="opacity-0 transform blur"
+        x-transition:enter-end="opacity-100 transform blur-none"
         x-transition:leave="transition ease-in duration-300"
-        x-transition:leave-start="opacity-100 transform scale-100"
-        x-transition:leave-end="opacity-0 transform scale-90"
+        x-transition:leave-start="opacity-100 transform blur-none"
+        x-transition:leave-end="opacity-0 transform blur"
     >
         <div
             class="h-screen w-screen bg-no-repeat bg-center bg-cover brightness-90"
@@ -146,15 +146,31 @@
                     },
                 ];
 
-                function change_image() {
+                let last_chosen_image_index;
+
+                async function change_image() {
                     this.shown = false;
-                    const index = Math.floor(Math.random() * CHOICES.length);
-                    const item = CHOICES[index];
+                    // Sleep for 200 ms
+                    // Very important for us to sleep here
+                    await new Promise((r) => setTimeout(r, 200));
+
+                    // Our custom function to get a number
+                    const NEW_CHOCIES = CHOICES.filter(
+                        (data, index) => index !== last_chosen_image_index
+                    );
+                    const index = Math.floor(
+                        Math.random() * NEW_CHOCIES.length
+                    );
+                    last_chosen_image_index = index;
+                    const item = NEW_CHOCIES[index];
+
+                    // Mutate AlpineJS
                     this.source_name = item.name;
                     this.source = item.type;
-                    this.shown = true;
                     this.image_url = item.image;
+                    this.shown = true;
                 }
+
                 change_image.call(this);
 
                 setInterval(() => {
