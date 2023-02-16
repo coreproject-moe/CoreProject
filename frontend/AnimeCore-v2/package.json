@@ -10,7 +10,7 @@
         "lint": "next lint"
     },
     "dependencies": {
-        "@mantine/core": "^5.10.3",
+        "@mantine/core": "^5.10.4",
         "@mantine/hooks": "^5.6.3",
         "@mantine/next": "^5.10.3",
         "@mantine/notifications": "^5.10.4",
