@@ -34,7 +34,7 @@
 			const index = Math.floor(Math.random() * CHOICES.length);
 			CHOICE_NUMBER = index;
 			console.log(index);
-		}, 5000);
+		}, 2000);
 	});
 </script>
 
