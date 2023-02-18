@@ -1,0 +1,65 @@
+{% extends 'user/base.html' %}
+<!--prettier-ignore-->
+{% block title %} Sign Up {% endblock title %}
+
+
+{%block form%}
+<form>
+    {% csrf_token %}
+
+    <div class="flex justify-center mb-10">
+        <div class="font-bold text-4xl select-none flex">
+            <span class="inline-flex text-white">c</span>
+            <span class="inline-flex text-warning">o</span>
+            <span class="inline-flex text-white">r</span>
+            <span class="inline-flex text-white">e</span>
+            &nbsp;
+            <span class="inline-flex text-info">p</span>
+            <span class="inline-flex text-info">r</span>
+            <span class="inline-flex text-info">o</span>
+            <span class="inline-flex text-info">j</span>
+            <span class="inline-flex text-info">e</span>
+            <span class="inline-flex text-info">c</span>
+            <span class="inline-flex text-info">t</span>
+        </div>
+    </div>
+
+    <div class="grid gap-6">
+        <input
+            style="--tw-bg-opacity: 0.3"
+            type="text"
+            placeholder="Username"
+            name="username"
+            class="input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0"
+        />
+        <input
+            style="--tw-bg-opacity: 0.3"
+            type="text"
+            placeholder="Email"
+            name="email"
+            class="input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0"
+        />
+        <input
+            style="--tw-bg-opacity: 0.3"
+            type="text"
+            placeholder="Password"
+            name="password"
+            class="input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0"
+        />
+        <input
+            style="--tw-bg-opacity: 0.3"
+            type="text"
+            placeholder="Confirm Password"
+            name="confirm_password"
+            class="input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0"
+        />
+    </div>
+    <div class="flex justify-center mt-5 items-center gap-2">
+        <button class="btn btn-secondary font-bold text-black" type="submit">
+            Register
+        </button>
+        or <a class="underline" href="{% url 'login_view' %}">login</a>
+    </div>
+</form>
+
+{%endblock%}

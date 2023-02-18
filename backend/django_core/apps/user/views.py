@@ -67,5 +67,9 @@ async def avatar_view(
     return response
 
 
-def sign_up_view(request):
-    return render(request, "user/sign_up.html")
+def signup_view(request):
+    return render(request, "user/signup.html")
+
+
+def login_view(request):
+    return render(request, "user/login.html")

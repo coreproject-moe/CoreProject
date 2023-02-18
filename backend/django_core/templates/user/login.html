@@ -5,7 +5,8 @@
 
 {%block form%}
 
-<form novalidate="">
+<form>
+    {% csrf_token %}
     <div class="flex justify-center mb-10">
         <div class="font-bold text-4xl select-none flex" @click="open=!open">
             <span class="inline-flex text-white">c</span>
@@ -43,7 +44,7 @@
             Login
         </button>
         or
-        <a class="underline" href="/signup">signup</a>
+        <a class="underline" href="{% url 'signup_view' %}">signup</a>
     </div>
 </form>
 
