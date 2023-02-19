@@ -26,8 +26,8 @@ def patch_individual_user_info(
     last_name: str = Form(...),
     password: str = Form(...),
     email: EmailStr = Form(...),
-    username_discriminator: int = Form(
-        default=None, gt=0, lt=int(str(settings.USERNAME_DISCRIMINATOR_LENGTH * "9"))
+    discriminator: int = Form(
+        default=None, gt=0, lt=int(str(settings.DISCRIMINATOR_LENGTH * "9"))
     ),
     avatar_provider: AnyUrl = Form(...),
     avatar: UploadedFile = File(...),

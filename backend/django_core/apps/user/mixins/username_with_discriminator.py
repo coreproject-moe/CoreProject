@@ -17,15 +17,15 @@ class UsernameWithDiscriminatorManager(models.Manager["CustomUser"]):
     ) -> models.QuerySet["CustomUser"]:
         prefix = prefix + "__" if prefix else ""
         return self.annotate(
-            username_discriminator_as_string=Cast(
-                f"{prefix}username_discriminator", output_field=CharField()
+            discriminator_as_string=Cast(
+                f"{prefix}discriminator", output_field=CharField()
             ),
             username_with_discriminator=Concat(
                 f"{prefix}username",
                 Value("#"),
                 LPad(
-                    "username_discriminator_as_string",
-                    int(settings.USERNAME_DISCRIMINATOR_LENGTH),
+                    "discriminator_as_string",
+                    int(settings.DISCRIMINATOR_LENGTH),
                     Value("0"),
                 ),
                 output_field=CharField(),

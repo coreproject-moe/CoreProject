@@ -6,7 +6,7 @@ from django.dispatch import receiver
 from django.http import HttpRequest
 
 from .models import CustomUser
-from .utilities import get_client_ip, get_random_username_discriminator
+from .utilities import get_client_ip, get_random_discriminator
 
 
 class DjangoInstance(TypedDict):
@@ -18,10 +18,8 @@ def user_discriminator_handler(
     **kwargs: Unpack[DjangoInstance],
 ) -> None:
     instance = kwargs["instance"]
-    if not instance.username_discriminator:
-        instance.username_discriminator = get_random_username_discriminator(
-            username=instance.username
-        )
+    if not instance.discriminator:
+        instance.discriminator = get_random_discriminator(username=instance.username)
 
 
 @receiver(pre_save, sender=CustomUser)
