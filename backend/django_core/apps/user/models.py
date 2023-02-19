@@ -101,7 +101,7 @@ class CustomUser(
                     .discriminator
                 )
                 .zfill(
-                    settings.DISCRIMINATOR_LENGTH 
+                    settings.DISCRIMINATOR_LENGTH
                 )
             }"""
 
