@@ -149,6 +149,13 @@
                         image: "{% static '/posters/Comic-Girls-Image.png' %}",
                     },
                 ];
+                CHOICES.forEach((item) => {
+                    const link = document.createElement('link');
+                    link.rel = 'preload';
+                    link.as = 'image';
+                    link.href = item.image;
+                    document.head.appendChild(link);
+                });
 
                 let last_chosen_image_index;
 
