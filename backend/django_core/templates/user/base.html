@@ -69,7 +69,10 @@
 
 <!--prettier-ignore-->
 {% block body %}
-<div class="grid h-screen" x-init="() => $store.background" hx-boost="true">
+<div class="grid h-screen" x-init="() => $store.background">
+    <div class="absolute top-8 left-8 btn glass z-50">
+        <img src="{% static 'images/logos/AnimeCore.svg' %}" />
+    </div>
     <div
         class="bg-black h-screen fixed transition-all duration-300 ease-out"
         style="grid-area: 1 / 1 / 2 / 2"
@@ -86,9 +89,7 @@
         <div
             class="absolute inset-0 bg-gradient-to-t from-base-100 via-base-100/[.8] md:via-base-100/[.0001]"
         ></div>
-        <div class="absolute top-8 left-8 btn glass">
-            <img src="{% static 'images/logos/AnimeCore.svg' %}" />
-        </div>
+
         <div class="absolute bottom-8 left-8">
             <div class="flex flex-col">
                 <div class="text-secondary">
