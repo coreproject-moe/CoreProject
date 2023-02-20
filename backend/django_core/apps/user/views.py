@@ -88,14 +88,13 @@ def signup_view(request: HttpRequest) -> HttpResponse:
 def login_view(request: HttpRequest) -> HttpResponse:
     form = LoginForm(data=request.POST or None)
 
-    if request.method == "POST":
-        if form.is_valid():
-            if user := authenticate(
-                request,
-                username=form.cleaned_data.get("username"),
-                password=form.cleaned_data.get("password"),
-            ):
-                login(request, user)
+    if request.method == "POST" and form.is_valid():
+        if user := authenticate(
+            request,
+            username=form.cleaned_data.get("username"),
+            password=form.cleaned_data.get("password"),
+        ):
+            login(request, user)
 
     return render(
         request,
@@ -111,6 +110,7 @@ def username_and_discriminator_validity_checker_view(
     request: HttpRequest,
 ) -> HttpRequest:
     form = UsernameWithDiscriminatorForm(request.POST)
+    
     if form.is_valid():
         username_exists: CustomUser.objects.get_username_with_discriminator().filter(
             username_with_discriminator=f"""{
