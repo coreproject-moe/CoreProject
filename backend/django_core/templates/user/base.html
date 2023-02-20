@@ -71,13 +71,11 @@
 {% block body %}
 <div class="grid h-screen" x-init="() => $store.background" hx-boost="true">
     <div
-        class="bg-black h-screen fixed"
+        class="bg-black h-screen fixed transition-all duration-300 ease-out"
         style="grid-area: 1 / 1 / 2 / 2"
         x-show="$store.background.shown"
-        x-transition:enter="transition-opacity ease-in duration-300"
         x-transition:enter-start="opacity-70 blur-sm"
         x-transition:enter-end="opacity-100 blur-none"
-        x-transition:leave="transition-opacity ease-out duration-300"
         x-transition:leave-start="opacity-100 blur-none"
         x-transition:leave-end="opacity-70 blur-sm"
     >
