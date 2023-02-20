@@ -5,15 +5,8 @@
 
 <!--prettier-ignore-->
 {% block head %}
-<script
-    defer
-    src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
-></script>
-<script
-    src="https://unpkg.com/htmx.org@1.8.5"
-    integrity="sha384-7aHh9lqPYGYZ7sTHvzP1t3BAfLhYSTy9ArHdP3Xsr9/3TlGurYgcPBoFmXX2TX/w"
-    crossorigin="anonymous"
-></script>
+<script defer src="{% static 'js/alpine/cdn.min.js'%}"></script>
+<script src="{% static 'js/htmx/htmx.min.js'%}"></script>
 
 <style>
     .card {
@@ -70,7 +63,7 @@
 <!--prettier-ignore-->
 {% block body %}
 <div class="grid h-screen" x-init="() => $store.background" hx-boost="true">
-    <div class="absolute top-8 left-8 btn glass z-50">
+    <div class="absolute top-8 left-8 btn btn-disabled glass z-50">
         <img src="{% static 'images/logos/AnimeCore.svg' %}" />
     </div>
     <div

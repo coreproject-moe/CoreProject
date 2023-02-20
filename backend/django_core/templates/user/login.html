@@ -1,12 +1,12 @@
 {% extends 'user/base.html' %}
 <!--prettier-ignore-->
-{% block title %} Sign Up {% endblock title %}
+{% block title %} Log In {% endblock title %}
+<!--prettier-ignore-->
+{% load crispy_forms_tags %}
 
+{% block form %}
 
-{%block form%}
-
-<form>
-    {% csrf_token %}
+<form method="post" action="{% url 'login_view' %}">
     <div class="flex justify-center mb-10">
         <div class="font-bold text-4xl select-none flex">
             <span class="inline-flex text-white">c</span>
@@ -24,28 +24,18 @@
         </div>
     </div>
     <div class="grid gap-6">
-        <input
-            style="--tw-bg-opacity: 0.3"
-            type="text"
-            placeholder="Username or Email"
-            name="username"
-            class="input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0"
-        />
-        <input
-            style="--tw-bg-opacity: 0.3"
-            type="text"
-            placeholder="Password"
-            name="password"
-            class="input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0"
-        />
-    </div>
-    <div class="flex justify-center mt-5 items-center gap-2">
-        <button class="btn btn-secondary font-bold text-black" type="submit">
-            Login
-        </button>
-        or
-        <a class="underline" href="{% url 'signup_view' %}">signup</a>
+        {% crispy form %}
+        <div class="flex justify-center items-center gap-2">
+            <button
+                class="btn btn-secondary font-bold text-black"
+                type="submit"
+            >
+                Login
+            </button>
+            or
+            <a class="underline" href="{% url 'signup_view' %}">signup</a>
+        </div>
     </div>
 </form>
 
-{%endblock%}
+{% endblock %}

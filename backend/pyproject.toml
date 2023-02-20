@@ -43,10 +43,11 @@ uvicorn = '*'
 # Typing support
 django-stubs-ext = "*"
 # ===================================================
-# Color Gra
+# Color Grabber
 colorthief = "^0.2.1"
 # Tailwind CSS
 django-tailwind = "^3.4.0"
+# Form tools
 django-crispy-forms = "^1.14.0"
 crispy-tailwind = "^0.5.0"
 

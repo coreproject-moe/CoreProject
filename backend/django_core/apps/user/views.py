@@ -8,6 +8,7 @@ from django.core.validators import URLValidator
 from django.http import HttpRequest, HttpResponse, StreamingHttpResponse
 from django.shortcuts import render
 
+from .forms import LoginForm, RegisterForm
 from .models import CustomUser
 
 
@@ -68,8 +69,30 @@ async def avatar_view(
 
 
 def signup_view(request):
-    return render(request, "user/signup.html")
+    form = RegisterForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            print("ok")
+
+    return render(
+        request,
+        "user/signup.html",
+        context={
+            "form": form,
+        },
+    )
 
 
-def login_view(request):
-    return render(request, "user/login.html")
+def login_view(request: HttpRequest):
+    form = LoginForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            print("ok")
+
+    return render(
+        request,
+        "user/login.html",
+        context={
+            "form": form,
+        },
+    )
