@@ -5,12 +5,12 @@
 
 <!--prettier-ignore-->
 {% block head %}
-<script defer src="{% static 'js/alpine/cdn.min.js'%}"></script>
-<script src="{% static 'js/htmx/htmx.min.js'%}"></script>
+    <script defer src="{% static 'js/alpine/cdn.min.js'%}"></script>
+    <script src="{% static 'js/htmx/htmx.min.js'%}"></script>
 
-<style>
-    .card {
-        border-image: linear-gradient(
+    <style>
+        .card {
+            border-image: linear-gradient(
                 to top,
                 transparent 0.1%,
                 white 15%,
@@ -18,171 +18,171 @@
                 rgba(0, 0, 0, 0)
             )
             1 100%;
-        border-image-width: 3px;
-    }
-    .card::before {
-        content: '';
-        position: absolute;
-        bottom: 10.5px;
-        right: 0;
-        border-left: 3px solid white;
-        border-radius: 9999px;
-        width: 1px;
-        height: 100px;
-        background-color: white;
-    }
-    .card::after {
-        content: '';
-        position: absolute;
-        bottom: 10.5px;
-        left: 0;
-        border-left: 3px solid white;
-        border-radius: 9999px;
-        width: 1px;
-        height: 100px;
-        background-color: white;
-    }
-    .card-body {
-        z-index: 1;
-    }
-    .card-body::after {
-        position: absolute;
-        top: 0px;
-        bottom: 0px;
-        left: 0px;
-        right: 0px;
-        z-index: -1;
-        box-shadow: inset 0 -3px 0 0 rgba(250, 250, 250, 0.9);
-        content: '';
-        border-radius: 16px;
-    }
-</style>
+            border-image-width: 3px;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            bottom: 10.5px;
+            right: 0;
+            border-left: 3px solid white;
+            border-radius: 9999px;
+            width: 1px;
+            height: 100px;
+            background-color: white;
+        }
+        .card::after {
+            content: '';
+            position: absolute;
+            bottom: 10.5px;
+            left: 0;
+            border-left: 3px solid white;
+            border-radius: 9999px;
+            width: 1px;
+            height: 100px;
+            background-color: white;
+        }
+        .card-body {
+            z-index: 1;
+        }
+        .card-body::after {
+            position: absolute;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            z-index: -1;
+            box-shadow: inset 0 -3px 0 0 rgba(250, 250, 250, 0.9);
+            content: '';
+            border-radius: 16px;
+        }
+    </style>
 
 {% endblock %}
 
 <!--prettier-ignore-->
 {% block body %}
-<div class="grid h-screen" x-init="() => $store.background" hx-boost="true">
-    <div class="absolute top-8 left-8 btn btn-disabled glass z-50">
-        <img src="{% static 'images/logos/AnimeCore.svg' %}" />
-    </div>
-    <div
-        class="bg-black h-screen fixed transition-all duration-300 ease-out"
-        style="grid-area: 1 / 1 / 2 / 2"
-        x-show="$store.background.shown"
-        x-transition:enter-start="opacity-50 blur-sm"
-        x-transition:enter-end="opacity-100 blur-none"
-        x-transition:leave-start="opacity-100 blur-none"
-        x-transition:leave-end="opacity-50 blur-sm"
-    >
-        <div
-            class="h-screen w-screen bg-no-repeat bg-center bg-cover brightness-90"
-            :style="`background-image:url('${$store.background.image_url}')`"
-        ></div>
-        <div
-            class="absolute inset-0 bg-gradient-to-t from-base-100 via-base-100/[.8] md:via-base-100/[.0001]"
-        ></div>
-
-        <div class="absolute bottom-8 left-8">
-            <div class="flex flex-col">
-                <div class="text-secondary">
-                    Background from the
-                    <span x-text="$store.background.source"></span>
-                </div>
-                <div
-                    class="text-white"
-                    x-text="$store.background.source_name"
-                ></div>
-            </div>
+    <div class="grid h-screen" x-init="() => $store.background" hx-boost="true">
+        <div class="absolute top-8 left-8 btn btn-disabled glass z-50">
+            <img src="{% static 'images/logos/AnimeCore.svg' %}" />
         </div>
-    </div>
-    <div class="h-screen grid absolute inset-0">
         <div
+            class="bg-black h-screen fixed transition-all duration-300 ease-out"
             style="grid-area: 1 / 1 / 2 / 2"
-            class="inline-grid justify-center md:justify-end content-center"
+            x-show="$store.background.shown"
+            x-transition:enter-start="opacity-50 blur-sm"
+            x-transition:enter-end="opacity-100 blur-none"
+            x-transition:leave-start="opacity-100 blur-none"
+            x-transition:leave-end="opacity-50 blur-sm"
         >
             <div
-                class="card w-96 bg-base-100 shadow-xl mr-0 md:mr-6 bg-transparent from-base-100 bg-gradient-to-t"
+                class="h-screen w-screen bg-no-repeat bg-center bg-cover brightness-90"
+                :style="`background-image:url('${$store.background.image_url}')`"
+            ></div>
+            <div
+                class="absolute inset-0 bg-gradient-to-t from-base-100 via-base-100/[.8] md:via-base-100/[.0001]"
+            ></div>
+
+            <div class="absolute bottom-8 left-8">
+                <div class="flex flex-col">
+                    <div class="text-secondary">
+                        Background from the
+                        <span x-text="$store.background.source"></span>
+                    </div>
+                    <div
+                        class="text-white"
+                        x-text="$store.background.source_name"
+                    ></div>
+                </div>
+            </div>
+        </div>
+        <div class="h-screen grid absolute inset-0">
+            <div
+                style="grid-area: 1 / 1 / 2 / 2"
+                class="inline-grid justify-center md:justify-end content-center"
             >
-                <div class="card-body rounded-2xl">
-                    {% block form %} {% endblock %}
+                <div
+                    class="card w-96 bg-base-100 shadow-xl mr-0 md:mr-6 bg-transparent from-base-100 bg-gradient-to-t"
+                >
+                    <div class="card-body rounded-2xl">
+                        {% block form %} {% endblock %}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 <!--prettier-ignore-->
 {% block js %}
-<script>
-    document.addEventListener('alpine:init', () => {
-        Alpine.store('background', {
-            source_name: '',
-            source: '',
-            shown: true,
-            image_url: '',
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('background', {
+                source_name: '',
+                source: '',
+                shown: true,
+                image_url: '',
 
-            init() {
-                let CHOICE_NUMBER;
-                let CHOICES = [
-                    {
-                        type: 'anime',
-                        name: 'Demon Slayer',
-                        image: "{% static '/posters/demon-slayer.webp' %}",
-                        credit: 'https://www.reddit.com/r/DemonSlayerAnime/comments/tpgpid/demon_slayer_4k_wallpaper/',
-                    },
-                    {
-                        type: 'anime',
-                        name: 'Attack on Titan',
-                        image: "{% static '/posters/attack-on-titan.jpg' %}",
-                    },
-                    {
-                        type: 'anime',
-                        name: 'Comic Girls',
-                        image: "{% static '/posters/Comic-Girls-Image.png' %}",
-                    },
-                ];
-                CHOICES.forEach((item) => {
-                    const link = document.createElement('link');
-                    link.rel = 'preload';
-                    link.as = 'image';
-                    link.href = item.image;
-                    document.head.appendChild(link);
-                });
+                init() {
+                    let CHOICE_NUMBER;
+                    let CHOICES = [
+                        {
+                            type: 'anime',
+                            name: 'Demon Slayer',
+                            image: "{% static '/posters/demon-slayer.webp' %}",
+                            credit: 'https://www.reddit.com/r/DemonSlayerAnime/comments/tpgpid/demon_slayer_4k_wallpaper/',
+                        },
+                        {
+                            type: 'anime',
+                            name: 'Attack on Titan',
+                            image: "{% static '/posters/attack-on-titan.jpg' %}",
+                        },
+                        {
+                            type: 'anime',
+                            name: 'Comic Girls',
+                            image: "{% static '/posters/Comic-Girls-Image.png' %}",
+                        },
+                    ];
+                    CHOICES.forEach((item) => {
+                        const link = document.createElement('link');
+                        link.rel = 'preload';
+                        link.as = 'image';
+                        link.href = item.image;
+                        document.head.appendChild(link);
+                    });
 
-                let last_chosen_image_index;
+                    let last_chosen_image_index;
 
-                async function change_image() {
-                    this.shown = false;
-                    // Sleep for 200 ms
-                    // Very important for us to sleep here
-                    await new Promise((r) => setTimeout(r, 300));
+                    async function change_image() {
+                        this.shown = false;
+                        // Sleep for 200 ms
+                        // Very important for us to sleep here
+                        await new Promise((r) => setTimeout(r, 300));
 
-                    // Our custom function to get a number
-                    const NEW_CHOCIES = CHOICES.filter(
-                        (data, index) => index !== last_chosen_image_index
-                    );
-                    const index = Math.floor(
-                        Math.random() * NEW_CHOCIES.length
-                    );
-                    last_chosen_image_index = index;
-                    const item = NEW_CHOCIES[index];
+                        // Our custom function to get a number
+                        const NEW_CHOCIES = CHOICES.filter(
+                            (data, index) => index !== last_chosen_image_index
+                        );
+                        const index = Math.floor(
+                            Math.random() * NEW_CHOCIES.length
+                        );
+                        last_chosen_image_index = index;
+                        const item = NEW_CHOCIES[index];
 
-                    // Mutate AlpineJS
-                    this.source_name = item.name;
-                    this.source = item.type;
-                    this.image_url = item.image;
-                    this.shown = true;
-                }
+                        // Mutate AlpineJS
+                        this.source_name = item.name;
+                        this.source = item.type;
+                        this.image_url = item.image;
+                        this.shown = true;
+                    }
 
-                change_image.call(this);
-
-                setInterval(() => {
                     change_image.call(this);
-                }, 2000);
-            },
+
+                    setInterval(() => {
+                        change_image.call(this);
+                    }, 2000);
+                },
+            });
         });
-    });
-</script>
+    </script>
 {% endblock %}
