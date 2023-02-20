@@ -139,3 +139,6 @@ def username_and_discriminator_validity_checker_view(
         else:
             # Return status code 200
             return HttpResponse(HTTPStatus.OK)
+
+    else:
+        return form.errors

@@ -42,6 +42,11 @@
 </form>
 
 <script>
+    // https://stackoverflow.com/a/1421988
+    function isNumber(n) {
+        return /^-?[\d.]+(?:e-?\d+)?$/.test(n);
+    }
+
     const el = document.querySelector('#id_username');
 
     el.addEventListener('input', () => {
@@ -61,7 +66,11 @@
         // Remove Empty Elements
         const splittedValue = value.split('#').filter((i) => i);
 
-        if (HashLength === 1 && splittedValue.length === 2) {
+        if (
+            HashLength === 1 &&
+            splittedValue.length === 2 &&
+            isNumber(splittedValue[1]) === true
+        ) {
             let formData = new FormData();
             formData.append('username', splittedValue[0]);
             formData.append('discriminator', splittedValue[1]);
@@ -75,7 +84,11 @@
                         'X-CSRFToken': '{{ csrf_token }}',
                     },
                 }
-            ).then((res) => console.log(res));
+            ).then((res) => {
+                if (res.ok) {
+                    console.log('1');
+                }
+            });
         } else {
         }
     });
