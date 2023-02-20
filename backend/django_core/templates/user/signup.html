@@ -41,5 +41,43 @@
     </div>
 </form>
 
-<script src="{% static 'user/js/signup.js'%}"></script>
+<script>
+    const el = document.querySelector('#id_username');
+
+    el.addEventListener('input', () => {
+        const value = el.value;
+
+        if (value.length === 0) {
+            return;
+        }
+        const valueRegex = value.match(/#/gi);
+
+        if (!valueRegex) {
+            return;
+        }
+
+        const HashLength = valueRegex.length;
+
+        // Remove Empty Elements
+        const splittedValue = value.split('#').filter((i) => i);
+
+        if (HashLength === 1 && splittedValue.length === 2) {
+            let formData = new FormData();
+            formData.append('username', splittedValue[0]);
+            formData.append('discriminator', splittedValue[1]);
+
+            fetch(
+                "{% url 'username_and_discriminator_validity_checker_view' %}",
+                {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                }
+            ).then((res) => console.log(res));
+        } else {
+        }
+    });
+</script>
 {% endblock %}

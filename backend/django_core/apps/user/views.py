@@ -1,7 +1,7 @@
 import hashlib
 import textwrap
-
 import httpx
+from http import HTTPStatus
 from django.views.decorators.http import require_POST
 from django.contrib.auth import authenticate, login
 from django.core.management.utils import get_random_secret_key
@@ -110,10 +110,12 @@ def username_and_discriminator_validity_checker_view(
     request: HttpRequest,
 ) -> HttpRequest:
     form = UsernameWithDiscriminatorForm(request.POST)
-    
+
     if form.is_valid():
-        username_exists: CustomUser.objects.get_username_with_discriminator().filter(
-            username_with_discriminator=f"""{
+        username_exists = (
+            CustomUser.objects.get_username_with_discriminator()
+            .filter(
+                username_with_discriminator=f"""{
                 form
                 .cleaned_data
                 .get('username')
@@ -127,9 +129,13 @@ def username_and_discriminator_validity_checker_view(
                     .DISCRIMINATOR_LENGTH
                 )
             }"""
-        ).exists()
+            )
+            .exists()
+        )
 
         if username_exists:
-            return HttpResponse()
+            # Return status code 300
+            return HttpResponse(HTTPStatus.FOUND)
         else:
-            return HttpResponse()
+            # Return status code 200
+            return HttpResponse(HTTPStatus.OK)
