@@ -62,8 +62,6 @@ INSTALLED_APPS = [
     # Whitenoise
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
-    # Rest Framework
-    "ninja",
     # 3rd party rest framework stuff
     "corsheaders",
     # 3rd party Django stuff
@@ -77,8 +75,10 @@ INSTALLED_APPS = [
     "tailwind_src",  # Our custom app
     # Crispy Froms
     "crispy_forms",
-    "crispy_tailwind",
+    # HTMX
+    "django_htmx",
     # Api ( Django-Ninja )
+    "ninja",
     "apps.api",
     # OpenGraph
     "apps.opengraph",
@@ -112,6 +112,8 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     # Cors headers
     "corsheaders.middleware.CorsMiddleware",
+    # HTMX middleware
+    "django_htmx.middleware.HtmxMiddleware",
     "django.middleware.cache.UpdateCacheMiddleware",  # Cache
     "django.middleware.common.CommonMiddleware",
     "django.middleware.cache.FetchFromCacheMiddleware",  # Cache
@@ -333,7 +335,3 @@ if os.name == "nt":
     NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 else:
     NPM_BIN_PATH = "/usr/local/bin/npm"
-
-# https://github.com/django-crispy-forms/crispy-tailwind#how-to-install
-CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
-CRISPY_TEMPLATE_PACK = "tailwind"

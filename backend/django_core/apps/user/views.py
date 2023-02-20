@@ -71,7 +71,6 @@ async def avatar_view(
 
 async def signup_view(request: HttpRequest) -> HttpResponse:
     form = RegisterForm(request.POST or None)
-
     if request.method == "POST":
         if form.is_valid():
             print("ok")
