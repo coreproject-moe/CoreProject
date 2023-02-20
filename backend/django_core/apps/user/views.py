@@ -5,9 +5,10 @@ import httpx
 from django.http import FileResponse
 from django.core.management.utils import get_random_secret_key
 from django.core.validators import URLValidator
-from django.http import HttpRequest, HttpResponse, StreamingHttpResponse
+from django.http import FileResponse, HttpRequest, HttpResponse, StreamingHttpResponse
 from django.shortcuts import render
 
+from .forms import LoginForm, RegisterForm
 from .models import CustomUser
 
 
@@ -65,3 +66,33 @@ async def avatar_view(
 
     await CLIENT.aclose()
     return response
+
+
+def signup_view(request):
+    form = RegisterForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            print("ok")
+
+    return render(
+        request,
+        "user/signup.html",
+        context={
+            "form": form,
+        },
+    )
+
+
+def login_view(request: HttpRequest):
+    form = LoginForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            print("ok")
+
+    return render(
+        request,
+        "user/login.html",
+        context={
+            "form": form,
+        },
+    )

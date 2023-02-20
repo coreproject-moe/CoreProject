@@ -34,12 +34,6 @@ urlpatterns = [
     #   Admin Site
     # ================
     path("admin/", admin.site.urls),
-    #   Errors
-    # ===========
-    path("400/", handler400),
-    path("403/", handler403),
-    path("404/", handler404),
-    path("500/", handler500),
     #   HTTP
     # =========
     path("user/", include("apps.user.urls")),
@@ -54,4 +48,10 @@ if settings.DEBUG:
     urlpatterns += [
         path("__debug__/", include("debug_toolbar.urls")),
         path("__reload__/", include("django_browser_reload.urls")),
+        #   Errors
+        # ===========
+        path("400/", handler400),
+        path("403/", handler403),
+        path("404/", handler404),
+        path("500/", handler500),
     ]

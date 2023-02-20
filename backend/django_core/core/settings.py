@@ -75,6 +75,9 @@ INSTALLED_APPS = [
     # Tailwind CSS
     "tailwind",
     "tailwind_src",  # Our custom app
+    # Crispy Froms
+    "crispy_forms",
+    "crispy_tailwind",
     # Api ( Django-Ninja )
     "apps.api",
     # OpenGraph
@@ -329,3 +332,7 @@ if os.name == "nt":
     NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 else:
     NPM_BIN_PATH = "/usr/local/bin/npm"
+
+# https://github.com/django-crispy-forms/crispy-tailwind#how-to-install
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_TEMPLATE_PACK = "tailwind"

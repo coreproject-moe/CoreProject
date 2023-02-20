@@ -1,0 +1,44 @@
+{% extends 'user/base.html' %}
+<!--prettier-ignore-->
+{% block title %} Sign Up {% endblock title %}
+<!--prettier-ignore-->
+{% load crispy_forms_tags %}
+
+
+{% block form %}
+
+    <form method="post" action="{% url 'signup_view' %}">
+        <div class="flex justify-center mb-10">
+            <div class="font-bold text-4xl select-none flex">
+                <span class="inline-flex text-white">c</span>
+                <span class="inline-flex text-warning">o</span>
+                <span class="inline-flex text-white">r</span>
+                <span class="inline-flex text-white">e</span>
+                &nbsp;
+                <span class="inline-flex text-info">p</span>
+                <span class="inline-flex text-info">r</span>
+                <span class="inline-flex text-info">o</span>
+                <span class="inline-flex text-info">j</span>
+                <span class="inline-flex text-info">e</span>
+                <span class="inline-flex text-info">c</span>
+                <span class="inline-flex text-info">t</span>
+            </div>
+        </div>
+        <div class="grid gap-6">
+            {% crispy form %}
+            <div class="flex justify-center items-center gap-2">
+                <button
+                    class="btn btn-secondary font-bold text-black"
+                    type="submit"
+                >
+                    Register
+                </button>
+                or
+                <a class="underline" href="{% url 'login_view' %}" hx-boost="true"
+                >login</a
+                    >
+                </div>
+            </div>
+        </form>
+
+{% endblock %}
