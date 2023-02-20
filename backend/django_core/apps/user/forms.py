@@ -40,8 +40,10 @@ class LoginForm(forms.Form):
         ),
     )
 
-    helper = FormHelper()
-    helper.form_show_labels = False
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_show_labels = False
 
 
 class RegisterForm(forms.Form):
@@ -69,7 +71,7 @@ class RegisterForm(forms.Form):
                 "placeholder": "Password",
                 "class": "input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0",
                 "style": "--tw-bg-opacity: 0.3",
-                "autocomplete": "off",
+                "autocomplete": "new-password",
             }
         )
     )
@@ -79,10 +81,12 @@ class RegisterForm(forms.Form):
                 "placeholder": "Confirm Password",
                 "class": "input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0",
                 "style": "--tw-bg-opacity: 0.3",
-                "autocomplete": "off",
+                "autocomplete": "new-password",
             }
         )
     )
 
-    helper = FormHelper()
-    helper.form_show_labels = False
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_show_labels = False
