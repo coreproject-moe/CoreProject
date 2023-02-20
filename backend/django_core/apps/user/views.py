@@ -2,7 +2,8 @@ import hashlib
 import textwrap
 
 import httpx
-from django.http import FileResponse
+
+from django.contrib.auth import authenticate, login
 from django.core.management.utils import get_random_secret_key
 from django.core.validators import URLValidator
 from django.http import FileResponse, HttpRequest, HttpResponse, StreamingHttpResponse
@@ -68,8 +69,9 @@ async def avatar_view(
     return response
 
 
-def signup_view(request):
+async def signup_view(request: HttpRequest) -> HttpResponse:
     form = RegisterForm(request.POST or None)
+
     if request.method == "POST":
         if form.is_valid():
             print("ok")
@@ -83,11 +85,17 @@ def signup_view(request):
     )
 
 
-def login_view(request: HttpRequest):
-    form = LoginForm(request.POST or None)
+def login_view(request: HttpRequest) -> HttpResponse:
+    form = LoginForm(data=request.POST or None)
+
     if request.method == "POST":
         if form.is_valid():
-            print("ok")
+            if user := authenticate(
+                request,
+                username=form.cleaned_data.get("username"),
+                password=form.cleaned_data.get("password"),
+            ):
+                login(request, user)
 
     return render(
         request,

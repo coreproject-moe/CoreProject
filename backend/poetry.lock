@@ -1679,6 +1679,17 @@ files = [
 ]
 
 [[package]]
+name = "pywatchman"
+version = "1.4.1"
+description = "Watchman client for python"
+category = "dev"
+optional = false
+python-versions = "*"
+files = [
+    {file = "pywatchman-1.4.1.tar.gz", hash = "sha256:d0047eb275deafb0011eda0a1a815fbd9742478c3d2b5ad6956d300e447dc2f9"},
+]
+
+[[package]]
 name = "redis"
 version = "4.4.2"
 description = "Python client for Redis database and key-value store"
@@ -2023,4 +2034,4 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "6ad61f6932634f3dee211e7f918222e11d5a2230747e7920e419f43976c4dcbe"
+content-hash = "5b79725b49ec0cb3bb054e4d2206dbf10118cdec34b375df0797c10f1be22d03"
