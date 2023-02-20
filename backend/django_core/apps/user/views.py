@@ -2,14 +2,15 @@ import hashlib
 import textwrap
 
 import httpx
-
+from django.views.decorators.http import require_POST
 from django.contrib.auth import authenticate, login
 from django.core.management.utils import get_random_secret_key
 from django.core.validators import URLValidator
 from django.http import FileResponse, HttpRequest, HttpResponse, StreamingHttpResponse
 from django.shortcuts import render
+from django.conf import settings
 
-from .forms import LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm, UsernameWithDiscriminatorForm
 from .models import CustomUser
 
 
@@ -69,7 +70,7 @@ async def avatar_view(
     return response
 
 
-async def signup_view(request: HttpRequest) -> HttpResponse:
+def signup_view(request: HttpRequest) -> HttpResponse:
     form = RegisterForm(request.POST or None)
     if request.method == "POST":
         if form.is_valid():
@@ -103,3 +104,32 @@ def login_view(request: HttpRequest) -> HttpResponse:
             "form": form,
         },
     )
+
+
+@require_POST
+def username_and_discriminator_validity_checker_view(
+    request: HttpRequest,
+) -> HttpRequest:
+    form = UsernameWithDiscriminatorForm(request.POST)
+    if form.is_valid():
+        username_exists: CustomUser.objects.get_username_with_discriminator().filter(
+            username_with_discriminator=f"""{
+                form
+                .cleaned_data
+                .get('username')
+            }#{
+                str(
+                    form
+                    .cleaned_data
+                    .get('discriminator')
+                ).zfill(
+                    settings
+                    .DISCRIMINATOR_LENGTH
+                )
+            }"""
+        ).exists()
+
+        if username_exists:
+            return HttpResponse()
+        else:
+            return HttpResponse()

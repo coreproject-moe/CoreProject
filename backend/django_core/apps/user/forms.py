@@ -2,6 +2,7 @@ from crispy_forms.helper import FormHelper
 
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.conf import settings
 
 from .models import CustomUser
 
@@ -94,3 +95,11 @@ class RegisterForm(forms.Form):
                 "class"
             ] = "input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0"
             visible.field.widget.attrs["style"] = "--tw-bg-opacity: 0.3"
+
+
+class UsernameWithDiscriminatorForm(forms.Form):
+    username = forms.CharField()
+    discriminator = forms.IntegerField(
+        max_value=int("9" * settings.DISCRIMINATOR_LENGTH),
+        min_value=1,
+    )
