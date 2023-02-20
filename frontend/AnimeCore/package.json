@@ -23,7 +23,7 @@
         "@sveltejs/kit": "^1.7.1",
         "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
         "@tailwindcss/typography": "^0.5.9",
-        "@types/js-cookie": "^3.0.2",
+        "@types/js-cookie": "^3.0.3",
         "@types/uuid": "^9.0.0",
         "@types/voca": "^1.4.2",
         "@typescript-eslint/eslint-plugin": "^5.52.0",
