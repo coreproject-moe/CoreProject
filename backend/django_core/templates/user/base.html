@@ -69,7 +69,7 @@
 
 <!--prettier-ignore-->
 {% block body %}
-<div class="grid h-screen" x-init="() => $store.background">
+<div class="grid h-screen" x-init="() => $store.background" hx-boost="true">
     <div class="absolute top-8 left-8 btn glass z-50">
         <img src="{% static 'images/logos/AnimeCore.svg' %}" />
     </div>
@@ -164,7 +164,7 @@
                     this.shown = false;
                     // Sleep for 200 ms
                     // Very important for us to sleep here
-                    await new Promise((r) => setTimeout(r, 200));
+                    await new Promise((r) => setTimeout(r, 300));
 
                     // Our custom function to get a number
                     const NEW_CHOCIES = CHOICES.filter(
