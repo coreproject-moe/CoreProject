@@ -3,7 +3,6 @@ from crispy_forms.helper import FormHelper
 from django import forms
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.conf import settings
-
 from .models import CustomUser
 
 
