@@ -23,8 +23,6 @@ class LoginForm(forms.Form):
         label="Username or Email",
         widget=forms.TextInput(
             attrs={
-                "class": "input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0",
-                "style": "--tw-bg-opacity: 0.3",
                 "placeholder": "Username or Email",
             }
         ),
@@ -33,8 +31,6 @@ class LoginForm(forms.Form):
         label="Password",
         widget=forms.PasswordInput(
             attrs={
-                "class": "input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0",
-                "style": "--tw-bg-opacity: 0.3",
                 "placeholder": "Password",
             }
         ),
@@ -45,14 +41,20 @@ class LoginForm(forms.Form):
         self.helper = FormHelper(self)
         self.helper.form_show_labels = False
 
+        # https://stackoverflow.com/a/29717314
+        for visible in self.visible_fields():
+            # Add tailwind classes
+            visible.field.widget.attrs[
+                "class"
+            ] = "input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0"
+            visible.field.widget.attrs["style"] = "--tw-bg-opacity: 0.3"
+
 
 class RegisterForm(forms.Form):
     username = forms.CharField(
         widget=forms.TextInput(
             attrs={
                 "placeholder": "Username",
-                "class": "input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0",
-                "style": "--tw-bg-opacity: 0.3",
             }
         )
     )
@@ -60,8 +62,6 @@ class RegisterForm(forms.Form):
         widget=forms.TextInput(
             attrs={
                 "placeholder": "Email",
-                "class": "input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0",
-                "style": "--tw-bg-opacity: 0.3",
             }
         )
     )
@@ -69,8 +69,6 @@ class RegisterForm(forms.Form):
         widget=forms.PasswordInput(
             attrs={
                 "placeholder": "Password",
-                "class": "input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0",
-                "style": "--tw-bg-opacity: 0.3",
                 "autocomplete": "new-password",
             }
         )
@@ -79,8 +77,6 @@ class RegisterForm(forms.Form):
         widget=forms.PasswordInput(
             attrs={
                 "placeholder": "Confirm Password",
-                "class": "input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0",
-                "style": "--tw-bg-opacity: 0.3",
                 "autocomplete": "new-password",
             }
         )
@@ -90,3 +86,11 @@ class RegisterForm(forms.Form):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper(self)
         self.helper.form_show_labels = False
+
+        # https://stackoverflow.com/a/29717314
+        for visible in self.visible_fields():
+            # Add tailwind classes
+            visible.field.widget.attrs[
+                "class"
+            ] = "input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0"
+            visible.field.widget.attrs["style"] = "--tw-bg-opacity: 0.3"
