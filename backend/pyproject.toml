@@ -48,7 +48,7 @@ colorthief = "^0.2.1"
 # Tailwind CSS
 django-tailwind = "^3.4.0"
 # Form tools
-django-crispy-forms = "^1.14.0"
+django-crispy-forms = "^2.0"
 # HTMX Powerup
 django-htmx = "^1.13.0"
 
