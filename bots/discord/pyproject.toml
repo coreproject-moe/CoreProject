@@ -7,10 +7,10 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-discord-py = "^2.1.0"
-sqlalchemy = {extras = ["postgresql-asyncpg"], version = "^2.0.1"}
+discord-py = "^2.1.1"
+sqlalchemy = {extras = ["postgresql-asyncpg"], version = "^2.0.4"}
 aiohttp-jinja2 = "^1.5"
-alembic = "^1.9.2"
+alembic = "^1.9.4"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -22,5 +22,7 @@ poethepoet = "^0.18.1"
 dev = 'adev runserver ./web/main.py --app-factory=aiohttp_app'
 
 [build-system]
-requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+requires = [
+  "poetry-core",
+]

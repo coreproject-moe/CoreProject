@@ -54,16 +54,16 @@ class CustomUser(
             "Unselect this instead of deleting accounts."
         ),
     )
-    username_discriminator = models.BigIntegerField(
+    discriminator = models.BigIntegerField(
         blank=True,
         null=True,
         help_text=(
             "Optional. "
-            f"{settings.USERNAME_DISCRIMINATOR_LENGTH} characters or fewer. "
-            "If not provided a random `username_discriminator` will be selected."
+            f"{settings.DISCRIMINATOR_LENGTH } characters or fewer. "
+            "If not provided a random `discriminator` will be selected."
         ),
         validators=[
-            MaxValueValidator(int(9 * settings.USERNAME_DISCRIMINATOR_LENGTH)),
+            MaxValueValidator(int(9 * settings.DISCRIMINATOR_LENGTH)),
             MinValueValidator(1),  # Same thing but remove negative digits
         ],
     )
@@ -88,7 +88,7 @@ class CustomUser(
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = [
         "username",
-        "username_discriminator",
+        "discriminator",
     ]
 
     def get_username_with_discriminator(self) -> str:
@@ -98,10 +98,10 @@ class CustomUser(
             }#{
                 str(
                     self
-                    .username_discriminator
+                    .discriminator
                 )
                 .zfill(
-                    settings.USERNAME_DISCRIMINATOR_LENGTH
+                    settings.DISCRIMINATOR_LENGTH
                 )
             }"""
 
@@ -116,5 +116,5 @@ class CustomUser(
         verbose_name = _("user")
         verbose_name_plural = _("users")
         unique_together = [
-            ("username", "username_discriminator"),
+            ("username", "discriminator"),
         ]

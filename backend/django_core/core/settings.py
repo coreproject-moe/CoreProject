@@ -35,7 +35,7 @@ DEBUG = True
 
 # Increase this in future
 # If you increase this make sure to run `migrations`
-USERNAME_DISCRIMINATOR_LENGTH = 4
+DISCRIMINATOR_LENGTH = 4
 
 MAL_CLIENT_ID = os.environ.get("MAL_CLIENT_ID")
 MAL_CLIENT_SECRET = os.environ.get("MAL_CLIENT_SECRET")
