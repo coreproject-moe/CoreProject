@@ -74,6 +74,7 @@ types_redis = "*"
 poethepoet = "^0.18.1"
 isort = "^5.12.0"
 
+
 [tool.poe.tasks]
 dev = 'python ./django_core/manage.py runserver 127.0.0.1:8000'
 ## Prod servers

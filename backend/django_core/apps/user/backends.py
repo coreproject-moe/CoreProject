@@ -1,3 +1,4 @@
+import contextlib
 from typing import Any, cast
 
 from apps.user.models import CustomUser
@@ -26,21 +27,18 @@ class EmailOrUsernameModelBackend(ModelBackend):
             return None
         query = None
 
-        # So `username` is something like baseplate-admin#0001
-        # we need to split to get the username and discriminator
-        try:
-            user_model: CustomUser = (
-                CustomUser.objects.get_username_with_discriminator().get(
-                    Q(username_with_discriminator=username_or_email)
-                    | Q(email__iexact=username_or_email)
-                )
+        # Supress user doesn't exist
+        with contextlib.suppress(CustomUser.DoesNotExist):
+            user_model = CustomUser.objects.get_username_with_discriminator().get(
+                Q(username_with_discriminator=username_or_email)
+                | Q(email__iexact=username_or_email)
             )
+
             # If password matches then return user
             if check_password(password, user_model.password):
                 query = user_model
 
-        finally:
-            return query
+        return query
 
     def authenticate(
         self,

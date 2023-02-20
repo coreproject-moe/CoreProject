@@ -69,6 +69,7 @@ class RegisterForm(forms.Form):
                 "placeholder": "Password",
                 "class": "input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0",
                 "style": "--tw-bg-opacity: 0.3",
+                "autocomplete": "off",
             }
         )
     )
@@ -78,6 +79,7 @@ class RegisterForm(forms.Form):
                 "placeholder": "Confirm Password",
                 "class": "input w-full text-white font-semibold max-w-xs border-[3px] border-warning focus:outline-0",
                 "style": "--tw-bg-opacity: 0.3",
+                "autocomplete": "off",
             }
         )
     )
