@@ -2,10 +2,10 @@ import hashlib
 import textwrap
 
 import httpx
-from django.http import FileResponse
+
 from django.core.management.utils import get_random_secret_key
 from django.core.validators import URLValidator
-from django.http import HttpRequest, HttpResponse, StreamingHttpResponse
+from django.http import FileResponse, HttpRequest, HttpResponse, StreamingHttpResponse
 from django.shortcuts import render
 
 from .forms import LoginForm, RegisterForm
