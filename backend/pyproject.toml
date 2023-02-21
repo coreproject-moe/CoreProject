@@ -46,7 +46,7 @@ django-stubs-ext = "*"
 # Color Grabber
 colorthief = "^0.2.1"
 # Tailwind CSS
-django-tailwind = "^3.4.0"
+django-tailwind = "^3.5.0"
 # Form tools
 django-crispy-forms = "^2.0"
 # HTMX Powerup
