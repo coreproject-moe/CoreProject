@@ -46,8 +46,8 @@
     function isNumber(n) {
         return /^-?[\d.]+(?:e-?\d+)?$/.test(n);
     }
-
-    const el = document.querySelector('#id_username');
+    var el;
+    el ??= document.querySelector('#id_username');
 
     el.addEventListener('input', async () => {
         const value = el.value;

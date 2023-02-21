@@ -56,7 +56,6 @@ class RegisterForm(forms.Form):
         widget=forms.TextInput(
             attrs={
                 "placeholder": "Username",
-                "oninput": "checkUsernameInput(event)",
             }
         )
     )
