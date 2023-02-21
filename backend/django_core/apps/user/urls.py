@@ -6,6 +6,7 @@ urlpatterns = [
     path("avatar/<int:user_id>", views.avatar_view, name="avatar_view"),
     path("signup/", views.signup_view, name="signup_view"),
     path("login/", views.login_view, name="login_view"),
+    path("logout/", views.logout_view, name="logout_view"),
     path(
         "__username_validity_endpoint__/",
         views.username_and_discriminator_validity_checker_view,
