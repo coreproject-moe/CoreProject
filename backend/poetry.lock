@@ -601,14 +601,14 @@ tox = ["tox"]
 
 [[package]]
 name = "django"
-version = "4.2a1"
+version = "4.2b1"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
 category = "main"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "Django-4.2a1-py3-none-any.whl", hash = "sha256:e913e60991a0c2a5f099a80ea1e2ec90b1636e6deb60bad16b89086819b48d4b"},
-    {file = "Django-4.2a1.tar.gz", hash = "sha256:3a29fc014f46fd6a552296fd1cfc77f616c4120b68cc117eee4a8237aa163f7a"},
+    {file = "Django-4.2b1-py3-none-any.whl", hash = "sha256:9bf13063a882a9b0f7028c4cdc32ea36fe104491cd7720859117990933f9c589"},
+    {file = "Django-4.2b1.tar.gz", hash = "sha256:33e3b3b80924dae3e6d4b5e697eaee724d5a35c1a430df44b1d72c802657992f"},
 ]
 
 [package.dependencies]
@@ -2031,4 +2031,4 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "d3d2bce9e49bf555db43d83cc91677f562b2b1e6fa9113e3cb593acf8a348c3f"
+content-hash = "8aae6a3a1948bad60ad459e2576be154e806d5e265887ef64073e6418f1bb162"
