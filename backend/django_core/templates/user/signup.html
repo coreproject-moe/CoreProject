@@ -49,20 +49,18 @@
 
     const el = document.querySelector('#id_username');
 
-    el.addEventListener('input', () => {
+    el.addEventListener('input', async () => {
         const value = el.value;
-
         if (value.length === 0) {
             return;
         }
-        const valueRegex = value.match(/#/gi);
 
+        const valueRegex = value.match(/#/gi);
         if (!valueRegex) {
             return;
         }
 
         const HashLength = valueRegex.length;
-
         // Remove Empty Elements
         const splittedValue = value.split('#').filter((i) => i);
 
@@ -85,12 +83,25 @@
                     },
                 }
             ).then((res) => {
-                if (res.ok) {
-                    console.log('1');
+                if (!res.ok) {
+                    // The username with discriminator is taken by another user
+                    // Show an error
+                    el.setCustomValidity('This username is not available');
+                    el.classList.add('!border-red-800');
                 }
             });
-        } else {
+        } else if (HashLength >= 1) {
+            el.setCustomValidity(
+                'There must be one hash in the username. ( eg: SoraAmamiya#1993 )'
+            );
+            el.classList.add('!border-red-800');
+        } else if (isNumber(splittedValue[1]) === false) {
+            el.setCustomValidity(
+                'The discriminator must be a number. ( eg : SoraAmamiya#1993 )'
+            );
+            el.classList.add('!border-red-800');
         }
     });
 </script>
+
 {% endblock %}
