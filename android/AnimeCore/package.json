@@ -20,7 +20,7 @@
         "react-native": "0.71.3"
     },
     "devDependencies": {
-        "@babel/core": "^7.20.12",
+        "@babel/core": "^7.21.0",
         "@tsconfig/react-native": "^2.0.3",
         "@types/jest": "^29.4.0",
         "@types/react": "^18.0.28",
