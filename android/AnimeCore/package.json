@@ -10,7 +10,7 @@
     },
     "dependencies": {
         "@tailwindcss/typography": "^0.5.9",
-        "daisyui": "^2.50.1",
+        "daisyui": "^2.50.2",
         "expo": "~47.0.13",
         "expo-font": "^11.0.1",
         "expo-splash-screen": "~0.17.5",
@@ -20,7 +20,7 @@
         "react-native": "0.71.3"
     },
     "devDependencies": {
-        "@babel/core": "^7.20.12",
+        "@babel/core": "^7.21.0",
         "@tsconfig/react-native": "^2.0.3",
         "@types/jest": "^29.4.0",
         "@types/react": "^18.0.28",
