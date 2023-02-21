@@ -5,7 +5,16 @@
 {% load crispy_forms_tags %}
 
 {% block form %}
+{% if request.user.is_authenticated %}
 
+<p class="text-white text-center">
+    Welcome, {{ request.user }}.
+    <br />
+    Perhaps you want to
+    <a class="underline" href="{% url 'logout_view' %}">logout</a>?
+</p>
+<!--prettier-ignore-->
+{% else %}
 <form method="post" action="{% url 'login_view' %}">
     <div class="flex justify-center mb-10">
         <div class="font-bold text-4xl select-none flex">
@@ -38,4 +47,6 @@
     </div>
 </form>
 
+{% endif %}
+<!--prettier-ignore-->
 {% endblock %}

@@ -1,15 +1,19 @@
 import hashlib
-import textwrap
-import httpx
 from http import HTTPStatus
-from django.views.decorators.http import require_POST
-from django.contrib.auth import authenticate, login
+import textwrap
+
+from django_htmx.http import HttpResponseLocation
+import httpx
+
+from django.conf import settings
+from django.contrib.auth import authenticate, login, logout
 from django.core.management.utils import get_random_secret_key
 from django.core.validators import URLValidator
 from django.http import FileResponse, HttpRequest, HttpResponse, StreamingHttpResponse
 from django.shortcuts import render
-from django.conf import settings
-
+from django.urls import reverse_lazy
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import ensure_csrf_cookie
 from .forms import LoginForm, RegisterForm, UsernameWithDiscriminatorForm
 from .models import CustomUser
 
@@ -95,6 +99,7 @@ def login_view(request: HttpRequest) -> HttpResponse:
             password=form.cleaned_data.get("password"),
         ):
             login(request, user)
+            return HttpResponseLocation(reverse_lazy("login_view"))
 
     return render(
         request,
@@ -105,14 +110,25 @@ def login_view(request: HttpRequest) -> HttpResponse:
     )
 
 
+def logout_view(request: HttpRequest) -> HttpResponse:
+    logout(request)
+    return HttpResponseLocation(reverse_lazy("login_view"))
+
+
 @require_POST
+@ensure_csrf_cookie
 def username_and_discriminator_validity_checker_view(
     request: HttpRequest,
 ) -> HttpRequest:
     form = UsernameWithDiscriminatorForm(request.POST)
 
     if form.is_valid():
-        username_exists = (
+        if CustomUser.objects.filter(username=form.cleaned_data.get("username")).distinct(
+            "discriminator"
+        ).count() > int("9" * settings.DISCRIMINATOR_LENGTH):
+            return HttpResponse("Your username is too popular. Please pick another one")
+
+        if (
             CustomUser.objects.get_username_with_discriminator()
             .filter(
                 username_with_discriminator=f"""{
@@ -131,9 +147,7 @@ def username_and_discriminator_validity_checker_view(
             }"""
             )
             .exists()
-        )
-
-        if username_exists:
+        ):
             # Return status code 300
             return HttpResponse(HTTPStatus.FOUND)
         else:

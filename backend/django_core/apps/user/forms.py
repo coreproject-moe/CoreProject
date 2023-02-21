@@ -1,8 +1,9 @@
 from crispy_forms.helper import FormHelper
 
 from django import forms
-from django.contrib.auth.forms import UserChangeForm, UserCreationForm
 from django.conf import settings
+from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+
 from .models import CustomUser
 
 
@@ -55,6 +56,7 @@ class RegisterForm(forms.Form):
         widget=forms.TextInput(
             attrs={
                 "placeholder": "Username",
+                "oninput": "checkUsernameInput(event)",
             }
         )
     )
