@@ -12,8 +12,6 @@ from django.core.validators import URLValidator
 from django.http import FileResponse, HttpRequest, HttpResponse, StreamingHttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.decorators.http import require_POST
-from django.views.decorators.csrf import ensure_csrf_cookie
 from .forms import LoginForm, RegisterForm, UsernameWithDiscriminatorForm
 from .models import CustomUser
 
@@ -115,14 +113,12 @@ def logout_view(request: HttpRequest) -> HttpResponse:
     return HttpResponseLocation(reverse_lazy("login_view"))
 
 
-@require_POST
-@ensure_csrf_cookie
 def username_and_discriminator_validity_checker_view(
     request: HttpRequest,
 ) -> HttpRequest:
-    form = UsernameWithDiscriminatorForm(request.POST)
+    form = UsernameWithDiscriminatorForm(request.POST or None)
 
-    if form.is_valid():
+    if request.method == "POST" and form.is_valid():
         if CustomUser.objects.filter(username=form.cleaned_data.get("username")).distinct(
             "discriminator"
         ).count() > int("9" * settings.DISCRIMINATOR_LENGTH):
@@ -148,10 +144,10 @@ def username_and_discriminator_validity_checker_view(
             )
             .exists()
         ):
-            # Return status code 300
+            # Return status code 300 if username with discriminator exists
             return HttpResponse(HTTPStatus.FOUND)
         else:
-            # Return status code 200
+            # Return status code 200 if username with discriminator is available
             return HttpResponse(HTTPStatus.OK)
 
     else:

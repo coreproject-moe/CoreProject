@@ -5,15 +5,15 @@
 
 <!--prettier-ignore-->
 {% block head %}
-    <!-- AlpineJS -->
-    <script defer src="{% static 'js/alpine/cdn.min.js'%}"></script>
-    <!-- HTMX -->
-    <script defer src="{% static 'js/htmx/htmx.min.js'%}"></script>
-    <script defer src="{% static 'js/htmx/debug.js'%}"></script>
+<!-- AlpineJS -->
+<script defer src="{% static 'js/alpine/cdn.min.js'%}"></script>
+<!-- HTMX -->
+<script defer src="{% static 'js/htmx/htmx.min.js'%}"></script>
+<script defer src="{% static 'js/htmx/debug.js'%}"></script>
 
-    <style>
-        .card {
-            border-image: linear-gradient(
+<style>
+    .card {
+        border-image: linear-gradient(
                 to top,
                 transparent 0.1%,
                 white 15%,
@@ -21,111 +21,130 @@
                 rgba(0, 0, 0, 0)
             )
             1 100%;
-            border-image-width: 3px;
-        }
-        .card::before {
-            content: '';
-            position: absolute;
-            bottom: 10.5px;
-            right: 0;
-            border-left: 3px solid white;
-            border-radius: 9999px;
-            width: 1px;
-            height: 100px;
-            background-color: white;
-        }
-        .card::after {
-            content: '';
-            position: absolute;
-            bottom: 10.5px;
-            left: 0;
-            border-left: 3px solid white;
-            border-radius: 9999px;
-            width: 1px;
-            height: 100px;
-            background-color: white;
-        }
-        .card-body {
-            z-index: 1;
-        }
-        .card-body::after {
-            position: absolute;
-            top: 0px;
-            bottom: 0px;
-            left: 0px;
-            right: 0px;
-            z-index: -1;
-            box-shadow: inset 0 -3px 0 0 rgba(250, 250, 250, 0.9);
-            content: '';
-            border-radius: 16px;
-        }
-    </style>
+        border-image-width: 3px;
+    }
+    .card::before {
+        content: '';
+        position: absolute;
+        bottom: 10.5px;
+        right: 0;
+        border-left: 3px solid white;
+        border-radius: 9999px;
+        width: 1px;
+        height: 100px;
+        background-color: white;
+    }
+    .card::after {
+        content: '';
+        position: absolute;
+        bottom: 10.5px;
+        left: 0;
+        border-left: 3px solid white;
+        border-radius: 9999px;
+        width: 1px;
+        height: 100px;
+        background-color: white;
+    }
+    .card-body {
+        z-index: 1;
+    }
+    .card-body::after {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        z-index: -1;
+        box-shadow: inset 0 -3px 0 0 rgba(250, 250, 250, 0.9);
+        content: '';
+        border-radius: 16px;
+    }
+</style>
 
 {% endblock %}
 
 <!--prettier-ignore-->
 {% block body %}
+<div
+    class="grid h-screen"
+    x-init="() => $store.background"
+    hx-boost="true"
+    hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+>
+    <div class="absolute top-8 left-8 btn btn-disabled glass z-50">
+        <img src="{% static 'images/logos/AnimeCore.svg' %}" />
+    </div>
     <div
-        class="grid h-screen"
-        x-init="() => $store.background"
-        hx-boost="true"
-        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+        class="bg-black h-screen fixed transition-all duration-300 ease-out"
+        style="grid-area: 1 / 1 / 2 / 2"
+        x-show="$store.background.shown"
+        x-transition:enter-start="opacity-50 blur-sm"
+        x-transition:enter-end="opacity-100 blur-none"
+        x-transition:leave-start="opacity-100 blur-none"
+        x-transition:leave-end="opacity-50 blur-sm"
     >
-        <div class="absolute top-8 left-8 btn btn-disabled glass z-50">
-            <img src="{% static 'images/logos/AnimeCore.svg' %}" />
-        </div>
         <div
-            class="bg-black h-screen fixed transition-all duration-300 ease-out"
-            style="grid-area: 1 / 1 / 2 / 2"
-            x-show="$store.background.shown"
-            x-transition:enter-start="opacity-50 blur-sm"
-            x-transition:enter-end="opacity-100 blur-none"
-            x-transition:leave-start="opacity-100 blur-none"
-            x-transition:leave-end="opacity-50 blur-sm"
-        >
-            <div
-                class="h-screen w-screen bg-no-repeat bg-center bg-cover brightness-90"
-                :style="`background-image:url('${$store.background.image_url}')`"
-            ></div>
-            <div
-                class="absolute inset-0 bg-gradient-to-t from-base-100 via-base-100/[.8] md:via-base-100/[.0001]"
-            ></div>
+            class="h-screen w-screen bg-no-repeat bg-center bg-cover brightness-90"
+            :style="`background-image:url('${$store.background.image_url}')`"
+        ></div>
+        <div
+            class="absolute inset-0 bg-gradient-to-t from-base-100 via-base-100/[.8] md:via-base-100/[.0001]"
+        ></div>
 
-            <div class="absolute bottom-8 left-8">
-                <div class="flex flex-col">
-                    <div class="text-secondary">
-                        Background from the
-                        <span x-text="$store.background.source"></span>
-                    </div>
-                    <div
-                        class="text-white"
-                        x-text="$store.background.source_name"
-                    ></div>
+        <div class="absolute bottom-8 left-8">
+            <div class="flex flex-col">
+                <div class="text-secondary">
+                    Background from the
+                    <span x-text="$store.background.source"></span>
                 </div>
+                <div
+                    class="text-white"
+                    x-text="$store.background.source_name"
+                ></div>
             </div>
         </div>
-        <div class="h-screen grid absolute inset-0">
+    </div>
+    <div class="h-screen grid absolute inset-0">
+        <div
+            style="grid-area: 1 / 1 / 2 / 2"
+            class="inline-grid justify-center md:justify-end content-center"
+        >
             <div
-                style="grid-area: 1 / 1 / 2 / 2"
-                class="inline-grid justify-center md:justify-end content-center"
+                class="card w-96 bg-base-100 shadow-xl mr-0 md:mr-6 bg-transparent from-base-100 bg-gradient-to-t"
             >
-                <div
-                    class="card w-96 bg-base-100 shadow-xl mr-0 md:mr-6 bg-transparent from-base-100 bg-gradient-to-t"
-                >
-                    <div class="card-body rounded-2xl">
-                        {% block form %} {% endblock %}
-                    </div>
+                <div class="card-body rounded-2xl">
+                    {% block form %} {% endblock %}
                 </div>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}
 
 <!--prettier-ignore-->
 {% block js %}
-    {% django_htmx_script %}
+{% django_htmx_script %}
+<script>
+    (() => {
+        // https://github.com/sindresorhus/array-shuffle/blob/67b4b2ad7eca5a682f147fc9b34d2ae7a6ef5333/index.js
+        function arrayShuffle(array) {
+            if (!Array.isArray(array)) {
+                throw new TypeError(`Expected an array, got ${typeof array}`);
+            }
 
-    <script>
+            array = [...array];
+
+            for (let index = array.length - 1; index > 0; index--) {
+                const newIndex = Math.floor(Math.random() * (index + 1));
+                [array[index], array[newIndex]] = [
+                    array[newIndex],
+                    array[index],
+                ];
+            }
+
+            return array;
+        }
+
         document.addEventListener('alpine:init', () => {
             Alpine.store('background', {
                 source_name: '',
@@ -134,7 +153,6 @@
                 image_url: '',
 
                 init() {
-                    let CHOICE_NUMBER;
                     let CHOICES = [
                         {
                             type: 'anime',
@@ -161,8 +179,6 @@
                         document.head.appendChild(link);
                     });
 
-                    let last_chosen_image_index;
-
                     async function change_image() {
                         this.shown = false;
                         // Sleep for 200 ms
@@ -170,14 +186,8 @@
                         await new Promise((r) => setTimeout(r, 300));
 
                         // Our custom function to get a number
-                        const NEW_CHOCIES = CHOICES.filter(
-                            (data, index) => index !== last_chosen_image_index
-                        );
-                        const index = Math.floor(
-                            Math.random() * NEW_CHOCIES.length
-                        );
-                        last_chosen_image_index = index;
-                        const item = NEW_CHOCIES[index];
+                        const NEW_CHOICES = arrayShuffle(CHOICES);
+                        const item = NEW_CHOICES[0];
 
                         // Mutate AlpineJS
                         this.source_name = item.name;
@@ -194,5 +204,6 @@
                 },
             });
         });
-    </script>
+    })();
+</script>
 {% endblock %}
