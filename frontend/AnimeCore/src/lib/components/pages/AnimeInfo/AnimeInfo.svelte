@@ -19,6 +19,7 @@
         updated: Date;
     }>;
     import Navbar from "$components/shared/Navbar.svelte";
+    import ScrollArea from "$components/shared/ScrollArea.svelte";
     import BookOpen from "$icons/Book-Open.svelte";
     import Download from "$icons/Download.svelte";
     import Edit from "$icons/Edit.svelte";
@@ -66,9 +67,10 @@
 
                         <!-- Anime info  -->
                         <anime-info class="flex flex-col gap-2">
-                            <h1 class="text-white text-4xl font-bold">Hyouka</h1>
+                            <h1 class="text-white text-4xl font-bold">{data?.title_english}</h1>
                             <p class="text-neutral-400 text-sm">
-                                <span class="items">氷菓</span>
+                                <!-- Todo modify this to have anime synonyms  -->
+                                <span class="items">{data?.title_japanese}</span>
                                 <span class="items">Hyouka: Forbidden Secrets</span>
                             </p>
                             <p class="text-white text-xs">
@@ -102,12 +104,13 @@
                                     aria-label="Play"
                                     class="btn btn-info btn-lg rounded-lg normal-case btn-square"
                                 >
-                                    <div class="flex justify-between gap-2 py-2">
+                                    <div class="flex flex-col justify-center items-center py-2">
                                         <BookOpen
                                             width="32"
                                             height="31"
                                             class="text-base-100"
                                         />
+                                        <p>Read</p>
                                     </div>
                                 </button>
                             </div>
@@ -155,37 +158,20 @@
                     </div>
 
                     <anime-synopsys>
-                        <p class="w-80">
-                            Energy-conservative high school student Houtarou Oreki ends up with more
-                            than he bargained for when he signs up for the Classics Club at his
-                            sister's behest—especially when he realizes how deep-rooted the club's
-                            history really is. Begrudgingly, Oreki is dragged into an investigation
-                            concerning the 45-year-old mystery that surrounds the club room.
-                            Accompanied by his fellow club members, the knowledgeable Satoshi
-                            Fukube, the stern but benign Mayaka Ibara, and the ever-curious Eru
-                            Chitanda, Oreki must combat deadlines and lack of information with
-                            resourcefulness and hidden talent, in order to not only find the truth
-                            buried beneath the dust of works created years before them, but of other
-                            small side cases as well. Based on the award-winning Koten-bu light
-                            novel series, and directed by Yasuhiro Takemoto of Suzumiya Haruhi no
-                            Shoushitsu, Hyouka shows that normal life can be full of small
-                            mysteries, be it family history, a student film, or even the withered
-                            flowers that make up a ghost story. Energy-conservative high school
-                            student Houtarou Oreki ends up with more than he bargained for when he
-                            signs up for the Classics Club at his sister's behest—especially when he
-                            realizes how deep-rooted the club's history really is. Begrudgingly,
-                            Oreki is dragged into an investigation concerning the 45-year-old
-                            mystery that surrounds the club room. Accompanied by his fellow club
-                            members, the knowledgeable Satoshi Fukube, the stern but benign Mayaka
-                            Ibara, and the ever-curious Eru Chitanda, Oreki must combat deadlines
-                            and lack of information with resourcefulness and hidden talent, in order
-                            to not only find the truth buried beneath the dust of works created
-                            years before them, but of other small side cases as well. Based on the
-                            award-winning Koten-bu light novel series, and directed by Yasuhiro
-                            Takemoto of Suzumiya Haruhi no Shoushitsu, Hyouka shows that normal life
-                            can be full of small mysteries, be it family history, a student film, or
-                            even the withered flowers that make up a ghost story.
-                        </p>
+                        <ScrollArea class="w-[410px] h-56">
+                            <p class="nowrap">
+                                {data?.anime_synopsis}
+                            </p>
+                        </ScrollArea>
+                        <div class="flex gap-2 mt-3">
+                            {#each ["mystery", "slice of life"] as tag}
+                                <span
+                                    class="badge text-white bg-base-100 badge-lg rounded-md border-transparent leading-6 text-sm font-bold capitalize"
+                                >
+                                    {tag}
+                                </span>
+                            {/each}
+                        </div>
                     </anime-synopsys>
                     <anime-ratings class="hidden md:flex flex-col">
                         <h1 class="text-white text-2xl font-bold mb-4">Ratings</h1>
