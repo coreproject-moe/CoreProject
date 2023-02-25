@@ -1,5 +1,5 @@
 <script lang="ts">
-    import AnimeInfo from "$components/pages/AnimeInfo/AnimeInfo.svelte";
+    import AnimeInfo from "$components/pages/AnimeInfo/Index.svelte";
 
     import type { PageData } from "./$types";
 
