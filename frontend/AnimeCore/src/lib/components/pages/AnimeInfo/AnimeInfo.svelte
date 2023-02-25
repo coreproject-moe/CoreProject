@@ -24,14 +24,15 @@
     import Play from "$icons/Play.svelte";
     import PlayCircle from "$icons/PlayCircle.svelte";
     import Share from "$icons/Share.svelte";
+    import Star from "$icons/Star.svelte";
     import TrendingUp from "$icons/Trending-Up.svelte";
     import Video from "$icons/Video.svelte";
 </script>
 
-<div class="grid h-screen">
+<div class="grid h-screen relative">
     <!-- Background Image Container -->
     <div
-        class="bg-black h-screen fixed"
+        class="bg-black h-screen absolute top-0"
         style="grid-area: 1 / 1 / 2 / 2;"
     >
         <div
@@ -108,6 +109,7 @@
                                 class="btn btn-sm btn-square btn-warning flex justify-center items-center"
                             >
                                 <Edit
+                                    variant="with_underline_around_pencil"
                                     width="18"
                                     height="18"
                                     color="black"
@@ -150,7 +152,21 @@
                             novel series, and directed by Yasuhiro Takemoto of Suzumiya Haruhi no
                             Shoushitsu, Hyouka shows that normal life can be full of small
                             mysteries, be it family history, a student film, or even the withered
-                            flowers that make up a ghost story.
+                            flowers that make up a ghost story. Energy-conservative high school
+                            student Houtarou Oreki ends up with more than he bargained for when he
+                            signs up for the Classics Club at his sister's behest—especially when he
+                            realizes how deep-rooted the club's history really is. Begrudgingly,
+                            Oreki is dragged into an investigation concerning the 45-year-old
+                            mystery that surrounds the club room. Accompanied by his fellow club
+                            members, the knowledgeable Satoshi Fukube, the stern but benign Mayaka
+                            Ibara, and the ever-curious Eru Chitanda, Oreki must combat deadlines
+                            and lack of information with resourcefulness and hidden talent, in order
+                            to not only find the truth buried beneath the dust of works created
+                            years before them, but of other small side cases as well. Based on the
+                            award-winning Koten-bu light novel series, and directed by Yasuhiro
+                            Takemoto of Suzumiya Haruhi no Shoushitsu, Hyouka shows that normal life
+                            can be full of small mysteries, be it family history, a student film, or
+                            even the withered flowers that make up a ghost story.
                         </p>
                     </anime-synopsys>
                     <anime-ratings class="flex flex-col">
@@ -175,7 +191,7 @@
                             <div class="flex gap-2 justify-center items-center">
                                 <div class="flex justify-center items-center">
                                     <TrendingUp
-                                        style="transform:translateY(3px)"
+                                        class="translate-y-1"
                                         width="20"
                                         height="18"
                                         color="black"
@@ -188,6 +204,28 @@
                         </button>
 
                         <p class="text-white mt-2">Your rating</p>
+                        <star-container class="flex mt-2 items-center gap-2">
+                            <stars class="flex">
+                                <!-- Todo fix this star rating system -->
+                                {#each Array(5) as _}
+                                    <Star
+                                        class="translate-y-1"
+                                        width="25"
+                                        height="25"
+                                    />
+                                {/each}
+                            </stars>
+                            <span class="font-bold nowrap text-lg">90 %</span>
+                            <button class="btn btn-square btn-sm btn-info">
+                                <Edit
+                                    variant="without_underline_around_pencil"
+                                    height="15"
+                                    width="15"
+                                />
+                            </button>
+                        </star-container>
+
+                        <p class="mt-5">Add a review</p>
                     </anime-ratings>
                 </div>
             </div>
