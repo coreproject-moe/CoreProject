@@ -16,7 +16,7 @@
         "@mantine/notifications": "^5.10.4",
         "@mantine/modals": "^5.10.4",
         "@mantine/spotlight": "^5.10.4",
-        "@next/font": "^13.1.6",
+        "@next/font": "^13.2.1",
         "next": "^13.1.6",
         "nextjs-progressbar": "^0.0.16",
         "react": "^18.2.0",
