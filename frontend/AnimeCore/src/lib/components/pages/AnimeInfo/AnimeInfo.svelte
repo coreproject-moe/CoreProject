@@ -25,6 +25,7 @@
     import Edit from "$icons/Edit.svelte";
     import External from "$icons/External.svelte";
     import PlayCircle from "$icons/PlayCircle.svelte";
+    import Settings from "$icons/Settings.svelte";
     import Share from "$icons/Share.svelte";
     import Star from "$icons/Star.svelte";
     import TrendingUp from "$icons/Trending-Up.svelte";
@@ -52,7 +53,7 @@
                 <div class="pt-8 md:pr-[72px] pl-6 md:pl-20 pb-0">
                     <Navbar />
                 </div>
-                <div
+                <anime-info
                     class="flex justify-center items-center md:items-start gap-11 flex-col md:flex-row mt-12 md:mt-20"
                 >
                     <div class="flex gap-7">
@@ -158,7 +159,7 @@
                     </div>
 
                     <anime-synopsys>
-                        <ScrollArea class="w-[410px] h-56">
+                        <ScrollArea class="w-[410px] h-56 text-white">
                             <p class="nowrap">
                                 {data?.anime_synopsis}
                             </p>
@@ -172,21 +173,42 @@
                                 </span>
                             {/each}
                         </div>
+                        <button
+                            class="btn btn-sm  text-sm normal-case glass btn-disabled mt-5 gap-4 text-white flex-nowrap"
+                            style="--glass-blur:20px;--glass-reflex-degree:360deg;--glass-reflex-opacity:0;--glass-opacity:10%"
+                        >
+                            <div>
+                                <span>Score :</span>
+                                <span class="text-warning">78</span>
+                            </div>
+                            <div>
+                                <span>Status :</span>
+                                <span class="text-warning">watching</span>
+                            </div>
+                            <div>
+                                <span>Episode :</span>
+                                <span class="text-warning">0/22</span>
+                            </div>
+                            <div>
+                                <span>Your Score :</span>
+                                <span class="text-warning">Not Rated</span>
+                            </div>
+                        </button>
                     </anime-synopsys>
                     <anime-ratings class="hidden md:flex flex-col">
                         <h1 class="text-white text-2xl font-bold mb-4">Ratings</h1>
                         <p>
                             <span class="text-white text-3xl font-bold">79%</span>
-                            <span class="text-sm">| 2.8k ratings</span>
+                            <span class="text-sm text-neutral-400">| 2.8k ratings</span>
                         </p>
                         <div class="divider w-[71px] color-[#D9D9D9]" />
                         <p class="my-1">
                             <span class="text-white text-xl">#86</span>
-                            <span class="text-sm">Most Popular All Time</span>
+                            <span class="text-sm text-neutral-400">Most Popular All Time</span>
                         </p>
                         <p class="my-1">
                             <span class="text-white text-xl">#260</span>
-                            <span class="text-sm">Highest Rated Of All Time</span>
+                            <span class="text-sm text-neutral-400">Highest Rated Of All Time</span>
                         </p>
 
                         <button
@@ -237,7 +259,22 @@
                             />
                         </p>
                     </anime-ratings>
-                </div>
+                </anime-info>
+                <episode>
+                    <div class="flex gap-1">
+                        <h1 class="font-bond text-lg text-white">Episodes</h1>
+                        <button class="btn btn-square btn-sm">
+                            <Settings
+                                class="translate-y-1"
+                                color="white"
+                                height="22"
+                                width="22"
+                            />
+                        </button>
+                    </div>
+
+                    <episode-and-dub-container>available in</episode-and-dub-container>
+                </episode>
             </div>
         </div>
     </div>
