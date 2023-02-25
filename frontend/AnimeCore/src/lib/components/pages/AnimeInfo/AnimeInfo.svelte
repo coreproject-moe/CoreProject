@@ -21,6 +21,7 @@
     import Navbar from "$components/shared/Navbar.svelte";
     import Download from "$icons/Download.svelte";
     import Edit from "$icons/Edit.svelte";
+    import External from "$icons/External.svelte";
     import Play from "$icons/Play.svelte";
     import PlayCircle from "$icons/PlayCircle.svelte";
     import Share from "$icons/Share.svelte";
@@ -225,7 +226,14 @@
                             </button>
                         </star-container>
 
-                        <p class="mt-5">Add a review</p>
+                        <p class="mt-4 flex items-center text-white">
+                            Add a review
+                            <External
+                                class="translate-y-1 ml-1"
+                                width="18"
+                                height="19"
+                            />
+                        </p>
                     </anime-ratings>
                 </div>
             </div>
