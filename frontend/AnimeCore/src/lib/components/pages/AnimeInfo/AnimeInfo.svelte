@@ -22,7 +22,6 @@
     import Download from "$icons/Download.svelte";
     import Edit from "$icons/Edit.svelte";
     import External from "$icons/External.svelte";
-    import Play from "$icons/Play.svelte";
     import PlayCircle from "$icons/PlayCircle.svelte";
     import Share from "$icons/Share.svelte";
     import Star from "$icons/Star.svelte";
@@ -33,11 +32,11 @@
 <div class="grid h-screen relative">
     <!-- Background Image Container -->
     <div
-        class="bg-black h-screen absolute top-0"
+        class="bg-black h-[80vw] md:h-screen absolute top-0"
         style="grid-area: 1 / 1 / 2 / 2;"
     >
         <div
-            class="h-screen w-screen bg-no-repeat bg-center bg-cover brightness-50"
+            class="h-[80vw] md:h-screen w-screen bg-no-repeat bg-center bg-cover brightness-50"
             style="background-image:url('{data?.anime_cover ?? ''}')"
         />
         <div
@@ -51,91 +50,96 @@
                 <div class="pt-8 md:pr-[72px] pl-6 md:pl-20 pb-0">
                     <Navbar />
                 </div>
-                <div class="flex justify-center gap-11">
-                    <!-- Anime image card  -->
-                    <anime-image-card class="card w-52 h-72">
-                        <img
-                            class="rounded-lg"
-                            src="https://media.kitsu.io/anime/poster_images/42420/large.jpg"
-                            alt="Azure Lane"
-                        />
-                    </anime-image-card>
+                <div
+                    class="flex justify-center items-center md:items-start gap-11 flex-col md:flex-row mt-12 md:mt-20"
+                >
+                    <div class="flex gap-7">
+                        <!-- Anime image card  -->
+                        <anime-image-card class="card w-36 md:w-52 h-48 md:h-72">
+                            <img
+                                class="rounded-lg"
+                                src="https://media.kitsu.io/anime/poster_images/42420/large.jpg"
+                                alt="Azure Lane"
+                            />
+                        </anime-image-card>
 
-                    <!-- Anime info  -->
-                    <anime-info class="flex flex-col gap-2">
-                        <h1 class="text-white text-4xl font-bold">Hyouka</h1>
-                        <p class="text-neutral-400 text-sm">
-                            <span class="items">氷菓</span>
-                            <span class="items">Hyouka: Forbidden Secrets</span>
-                        </p>
-                        <p class="text-white text-xs">
-                            <span class="items">TV</span>
-                            <span class="items">22eps</span>
-                            <span class="items">completed</span>
-                            <span class="items">spring 2021</span>
-                            <span class="items">kyoto</span>
-                        </p>
+                        <!-- Anime info  -->
+                        <anime-info class="flex flex-col gap-2">
+                            <h1 class="text-white text-4xl font-bold">Hyouka</h1>
+                            <p class="text-neutral-400 text-sm">
+                                <span class="items">氷菓</span>
+                                <span class="items">Hyouka: Forbidden Secrets</span>
+                            </p>
+                            <p class="text-white text-xs">
+                                <span class="items">TV</span>
+                                <span class="items">22eps</span>
+                                <span class="items">completed</span>
+                                <span class="items">spring 2021</span>
+                                <span class="items">kyoto</span>
+                            </p>
 
-                        <!-- buttons  -->
-                        <div class="mt-7 btn-group">
-                            <button
-                                aria-label="Play"
-                                class="btn btn-md md:btn-lg btn-primary rounded-[16px]"
-                            >
-                                <div class="flex justify-between gap-2 py-2">
-                                    <PlayCircle
-                                        width={30}
-                                        height={30}
-                                        color="white"
-                                    />
-                                    <div class="flex flex-col text-start gap-1 ">
-                                        <h2 class="font-bold">Watch</h2>
-                                        <p class="text-xs normal-case">Ep 01</p>
+                            <!-- buttons  -->
+                            <div class="mt-7 hidden md:flex">
+                                <button
+                                    aria-label="Play"
+                                    class="btn btn-lg btn-primary rounded-lg"
+                                >
+                                    <div class="flex justify-between gap-2 py-2">
+                                        <PlayCircle
+                                            width={30}
+                                            height={30}
+                                            color="white"
+                                            class="translate-y-1"
+                                        />
+                                        <div class="flex flex-col text-start gap-1">
+                                            <h2 class="font-bold">Watch</h2>
+                                            <p class="text-xs normal-case">Ep 01</p>
+                                        </div>
                                     </div>
-                                </div>
-                            </button>
-                        </div>
-                        <!-- Share button groups  -->
-                        <div class="mt-5 flex gap-2 ">
-                            <button
-                                class="btn btn-sm btn-square btn-warning flex justify-center items-center"
-                            >
-                                <Video
-                                    width="18"
-                                    height="18"
-                                    color="black"
-                                />
-                            </button>
-                            <button
-                                class="btn btn-sm btn-square btn-warning flex justify-center items-center"
-                            >
-                                <Edit
-                                    variant="with_underline_around_pencil"
-                                    width="18"
-                                    height="18"
-                                    color="black"
-                                />
-                            </button>
-                            <button
-                                class="btn btn-sm btn-square btn-warning flex justify-center items-center"
-                            >
-                                <Download
-                                    width="18"
-                                    height="18"
-                                    color="black"
-                                />
-                            </button>
-                            <button
-                                class="btn btn-sm btn-square btn-warning flex justify-center items-center"
-                            >
-                                <Share
-                                    width="18"
-                                    height="18"
-                                    color="black"
-                                />
-                            </button>
-                        </div>
-                    </anime-info>
+                                </button>
+                            </div>
+                            <!-- Share button groups  -->
+                            <div class="mt-5 gap-2 hidden md:flex">
+                                <button
+                                    class="btn btn-sm btn-square btn-warning flex justify-center items-center"
+                                >
+                                    <Video
+                                        width="18"
+                                        height="18"
+                                        color="black"
+                                    />
+                                </button>
+                                <button
+                                    class="btn btn-sm btn-square btn-warning flex justify-center items-center"
+                                >
+                                    <Edit
+                                        variant="with_underline_around_pencil"
+                                        width="18"
+                                        height="18"
+                                        color="black"
+                                    />
+                                </button>
+                                <button
+                                    class="btn btn-sm btn-square btn-warning flex justify-center items-center"
+                                >
+                                    <Download
+                                        width="18"
+                                        height="18"
+                                        color="black"
+                                    />
+                                </button>
+                                <button
+                                    class="btn btn-sm btn-square btn-warning flex justify-center items-center"
+                                >
+                                    <Share
+                                        width="18"
+                                        height="18"
+                                        color="black"
+                                    />
+                                </button>
+                            </div>
+                        </anime-info>
+                    </div>
 
                     <anime-synopsys>
                         <p class="w-80">
@@ -170,7 +174,7 @@
                             even the withered flowers that make up a ghost story.
                         </p>
                     </anime-synopsys>
-                    <anime-ratings class="flex flex-col">
+                    <anime-ratings class="hidden md:flex flex-col">
                         <h1 class="text-white text-2xl font-bold mb-4">Ratings</h1>
                         <p>
                             <span class="text-white text-3xl font-bold">79%</span>
