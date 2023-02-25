@@ -2,34 +2,35 @@
     import type { SVGAttributes } from "svelte/elements";
     type $$Props = SVGAttributes<SVGElement>;
 </script>
-
 <svg
-    viewBox="0 0 20 18"
+    {...$$props}
+    viewBox="0 0 32 31"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    {...$$props}
 >
-    <g filter="url(#filter0_d_1911_2848)">
+    <g filter="url(#filter0_d_1951_2801)">
         <path
-            d="M15.5 3L10.75 7.75L8.25 5.25L4.5 9"
+            d="M6 3H12C13.0609 3 14.0783 3.42143 14.8284 4.17157C15.5786 4.92172 16 5.93913 16 7V21C16 20.2044 15.6839 19.4413 15.1213 18.8787C14.5587 18.3161 13.7956 18 13 18H6V3Z"
             stroke="currentColor"
+            stroke-width="3"
             stroke-linecap="round"
             stroke-linejoin="round"
         />
         <path
-            d="M12.5 3H15.5V6"
+            d="M26 3H20C18.9391 3 17.9217 3.42143 17.1716 4.17157C16.4214 4.92172 16 5.93913 16 7V21C16 20.2044 16.3161 19.4413 16.8787 18.8787C17.4413 18.3161 18.2044 18 19 18H26V3Z"
             stroke="currentColor"
+            stroke-width="3"
             stroke-linecap="round"
             stroke-linejoin="round"
         />
     </g>
     <defs>
         <filter
-            id="filter0_d_1911_2848"
+            id="filter0_d_1951_2801"
             x="0"
             y="0"
-            width="20"
-            height="20"
+            width="32"
+            height="32"
             filterUnits="userSpaceOnUse"
             color-interpolation-filters="sRGB"
         >
@@ -56,12 +57,12 @@
             <feBlend
                 mode="normal"
                 in2="BackgroundImageFix"
-                result="effect1_dropShadow_1911_2848"
+                result="effect1_dropShadow_1951_2801"
             />
             <feBlend
                 mode="normal"
                 in="SourceGraphic"
-                in2="effect1_dropShadow_1911_2848"
+                in2="effect1_dropShadow_1951_2801"
                 result="shape"
             />
         </filter>

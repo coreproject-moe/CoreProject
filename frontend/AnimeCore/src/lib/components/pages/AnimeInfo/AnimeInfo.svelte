@@ -19,6 +19,7 @@
         updated: Date;
     }>;
     import Navbar from "$components/shared/Navbar.svelte";
+    import BookOpen from "$icons/Book-Open.svelte";
     import Download from "$icons/Download.svelte";
     import Edit from "$icons/Edit.svelte";
     import External from "$icons/External.svelte";
@@ -79,10 +80,10 @@
                             </p>
 
                             <!-- buttons  -->
-                            <div class="mt-7 hidden md:flex">
+                            <div class="mt-7 hidden md:flex items-center gap-4">
                                 <button
                                     aria-label="Play"
-                                    class="btn btn-lg btn-primary rounded-lg"
+                                    class="btn btn-lg btn-primary rounded-lg w-[108px] h-[70px] normal-case"
                                 >
                                     <div class="flex justify-between gap-2 py-2">
                                         <PlayCircle
@@ -91,10 +92,22 @@
                                             color="white"
                                             class="translate-y-1"
                                         />
-                                        <div class="flex flex-col text-start gap-1">
-                                            <h2 class="font-bold">Watch</h2>
-                                            <p class="text-xs normal-case">Ep 01</p>
+                                        <div class="flex flex-col text-start">
+                                            <h2 class="font-bold text-sm">Watch</h2>
+                                            <p class="text-xs font-thin text-zinc-300">Ep 01</p>
                                         </div>
+                                    </div>
+                                </button>
+                                <button
+                                    aria-label="Play"
+                                    class="btn btn-info btn-lg rounded-lg normal-case btn-square"
+                                >
+                                    <div class="flex justify-between gap-2 py-2">
+                                        <BookOpen
+                                            width="32"
+                                            height="31"
+                                            class="text-base-100"
+                                        />
                                     </div>
                                 </button>
                             </div>
@@ -106,7 +119,7 @@
                                     <Video
                                         width="18"
                                         height="18"
-                                        color="black"
+                                        class="text-base-100"
                                     />
                                 </button>
                                 <button
@@ -116,7 +129,7 @@
                                         variant="with_underline_around_pencil"
                                         width="18"
                                         height="18"
-                                        color="black"
+                                        class="text-base-100"
                                     />
                                 </button>
                                 <button
@@ -125,7 +138,7 @@
                                     <Download
                                         width="18"
                                         height="18"
-                                        color="black"
+                                        class="text-base-100"
                                     />
                                 </button>
                                 <button
@@ -134,7 +147,7 @@
                                     <Share
                                         width="18"
                                         height="18"
-                                        color="black"
+                                        class="text-base-100"
                                     />
                                 </button>
                             </div>
@@ -196,10 +209,9 @@
                             <div class="flex gap-2 justify-center items-center">
                                 <div class="flex justify-center items-center">
                                     <TrendingUp
-                                        class="translate-y-1"
+                                        class="translate-y-1 text-base-100"
                                         width="20"
                                         height="18"
-                                        color="black"
                                     />
                                 </div>
                                 <p class="text-black normal-case whitespace-nowrap">
