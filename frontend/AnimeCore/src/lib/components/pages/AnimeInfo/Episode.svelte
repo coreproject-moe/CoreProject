@@ -72,7 +72,7 @@
                 </div>
             </episode-and-dub-container>
         </div>
-        <div class="flex w-full justify-end">
+        <div class="flex w-full justify-end -translate-x-40">
             <div class="flex justify-center text-white gap-5">
                 <div class="flex flex-col w-[135px]">
                     <span>Type</span>
@@ -98,7 +98,7 @@
             </div>
         </div>
 
-        <episode-details class="flex flex-col w-56 text-white">
+        <episode-details class="flex flex-col text-white">
             <p class="flex gap-2">
                 <span class="font-bold text-xl">Details</span>
                 <button class="btn btn-square btn-sm">
