@@ -1,4 +1,5 @@
 from typing import Any
+from functools import partial
 
 from dynamic_filenames import FilePattern
 
@@ -8,6 +9,8 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from django.utils.crypto import get_random_string
+
 
 from .managers import UserManager
 from .validators import username_validator
@@ -118,3 +121,26 @@ class CustomUser(
         unique_together = [
             ("username", "discriminator"),
         ]
+
+
+class Token(models.Model):
+    token = models.CharField(
+        default=partial(
+            get_random_string,
+            16,
+        ),
+        unique=True,
+        max_length=16,
+        editable=False,
+    )
+    user = models.OneToOneField(
+        CustomUser,
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self) -> str:
+        return f"User : {self.user.username} | Token : {self.token}"
+
+    class Meta:
+        verbose_name = _("token")
+        verbose_name_plural = _("tokens")

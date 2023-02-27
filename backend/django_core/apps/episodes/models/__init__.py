@@ -35,6 +35,13 @@ class EpisodeModel(models.Model):
     episode_comments = models.ManyToManyField(EpisodeCommentModel, blank=True)
     episode_timestamps = models.ManyToManyField(EpisodeTimestampModel, blank=True)
 
+    # Extra providers
+    streamsb_url = models.URLField(blank=True, null=True)
+    streamtape_url = models.URLField(blank=True, null=True)
+    doodstream_url = models.URLField(blank=True, null=True)
+    fembed_url = models.URLField(blank=True, null=True)
+    mp4_upload_url = models.URLField(blank=True, null=True)
+
     def __str__(self) -> str:
         return f"{self.episode_number}. {self.episode_name}"
 
