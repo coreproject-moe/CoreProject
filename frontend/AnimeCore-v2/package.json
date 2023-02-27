@@ -12,7 +12,7 @@
     "dependencies": {
         "@mantine/core": "^5.10.4",
         "@mantine/hooks": "^5.6.3",
-        "@mantine/next": "^5.10.4",
+        "@mantine/next": "^5.10.5",
         "@mantine/notifications": "^5.10.4",
         "@mantine/modals": "^5.10.4",
         "@mantine/spotlight": "^5.10.4",
