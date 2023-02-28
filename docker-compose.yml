@@ -16,7 +16,7 @@ services:
         ports:
             - '9000:8000'
         environment:
-            - POSTGRES_NAME=django
+            - POSTGRES_NAME=postgres
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=supersecretpassword
             - POSTGRES_HOST=db

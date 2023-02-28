@@ -10,11 +10,10 @@ ENV  PIP_NO_CACHE_DIR=off
 ENV  PIP_DISABLE_PIP_VERSION_CHECK=on 
 ENV  PIP_DEFAULT_TIMEOUT=100 
 # poetry:
-ENV  POETRY_VERSION=1.3.2
 ENV  POETRY_VIRTUALENVS_CREATE=false 
 ENV  POETRY_CACHE_DIR='/var/cache/pypoetry'
 
-RUN pip install "poetry==$POETRY_VERSION" && poetry --version
+RUN pip install "poetry" && poetry --version
 
 WORKDIR /code
 # copy project
@@ -23,6 +22,13 @@ COPY poetry.lock pyproject.toml /code
 RUN poetry config virtualenvs.create false \
   && poetry install $(test "$YOUR_ENV" == production && echo "--no-dev") --no-interaction --no-ansi
 
+RUN apk add nodejs-current npm git
+
 COPY . /code
 RUN poetry shell
+RUN poe tailwind_install
+RUN poe tailwind_build
+RUN apk del nodejs npm git
+
+
 ENTRYPOINT ["sh","entrypoint.sh"]
