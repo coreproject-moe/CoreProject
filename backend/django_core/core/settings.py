@@ -195,8 +195,8 @@ DATABASES = {
         "NAME": "django",
         "USER": "postgres",
         "PASSWORD": "supersecretpassword",
-        "HOST": "",
-        "PORT": "",
+        "HOST": "localhost",
+        "PORT": "5432",
         # https://stackoverflow.com/questions/23504483/django-conn-max-age-setting-error
         # "CONN_MAX_AGE": 10,
         "CONN_HEALTH_CHECKS": True,
