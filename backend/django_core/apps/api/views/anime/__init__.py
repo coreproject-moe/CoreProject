@@ -1,6 +1,7 @@
 import contextlib
 import datetime
 
+from http import HTTPStatus
 from apps.anime.models import AnimeModel, AnimeNameSynonymModel
 from apps.anime.models.anime_genre import AnimeGenreModel
 from apps.anime.models.anime_theme import AnimeThemeModel
@@ -8,13 +9,15 @@ from apps.api.filters.anime import AnimeInfoFilters
 from apps.characters.models import CharacterModel
 from apps.producers.models import ProducerModel
 from apps.studios.models import StudioModel
+from apps.user.models import CustomUser
+from ...auth import AuthBearer
 from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from ninja.pagination import paginate
 
 from django.db.models import Q, QuerySet
 from django.db.models.functions import Greatest
-from django.http import Http404, HttpRequest
+from django.http import Http404, HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
 
 try:
@@ -109,7 +112,7 @@ def get_anime_info(
     return query
 
 
-@router.post("", response=AnimeInfoGETSchema)
+@router.post("", response=AnimeInfoGETSchema, auth=AuthBearer())
 def post_anime_info(
     request: HttpRequest,
     mal_id: int | None = Form(default=None),
@@ -132,6 +135,13 @@ def post_anime_info(
     producers: list[str] = Form(default=None),
     characters: list[str] = Form(default=None),
 ) -> AnimeModel:
+    user: CustomUser = request.auth
+    if not user.is_superuser:
+        raise HttpResponse(
+            "Superuser is required for this operation",
+            status_code=HTTPStatus.UNAUTHORIZED,
+        )
+
     kwargs = {
         "mal_id": mal_id,
         "anilist_id": anilist_id,

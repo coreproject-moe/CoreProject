@@ -2,11 +2,13 @@ from apps.anime.models import AnimeModel
 from apps.episodes.models.episode_timestamp import EpisodeTimestampModel
 from ninja import Router
 
-from django.contrib.auth.decorators import login_required
 from django.db.models import Avg
 from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
+from django.http import HttpRequest
+from django.shortcuts import get_list_or_404, get_object_or_404
 
+from apps.api.auth import AuthBearer
 from ...schemas.episodes.episode_timestamp import (
     EpisodeTimestampGETSchema,
     EpisodeTimestampPOSTSchema,
@@ -54,8 +56,8 @@ def get_individual_anime_episode_timestamp_info(
 @router.post(
     "/{int:anime_id}/episodes/{str:episode_number}/timestamps",
     response=EpisodeTimestampGETSchema,
+    auth=AuthBearer(),
 )
-@login_required
 def post_individual_anime_episode_timestamp_info(
     request: HttpRequest,
     anime_id: int,
