@@ -36,7 +36,7 @@ class EpisodeModel(models.Model):
     episode_timestamps = models.ManyToManyField(EpisodeTimestampModel, blank=True)
 
     # Extra providers
-    streamsb_url = models.URLField(blank=True, null=True)
+    streamsb_id = models.CharField(max_length=20, blank=True, null=True)
     streamtape_url = models.URLField(blank=True, null=True)
     doodstream_url = models.URLField(blank=True, null=True)
     fembed_url = models.URLField(blank=True, null=True)
