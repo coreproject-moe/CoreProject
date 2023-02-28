@@ -50,7 +50,7 @@ django-tailwind = "^3.5.0"
 # Form tools
 django-crispy-forms = "^2.0"
 # HTMX Powerup
-django-htmx = "^1.13.0"
+django-htmx = "^1.14.0"
 
 
 [tool.poetry.group.dev.dependencies]
