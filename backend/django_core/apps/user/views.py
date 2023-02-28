@@ -76,7 +76,17 @@ def signup_view(request: HttpRequest) -> HttpResponse:
     form = RegisterForm(request.POST or None)
     if request.method == "POST":
         if form.is_valid():
-            print("ok")
+            user = CustomUser.objects.create(**form.cleaned_data)
+            login(request, user)
+            token_model = Token.objects.create(user=user)
+            response = HttpResponseLocation(reverse_lazy("login_view"))
+            response.set_cookie(
+                key="token",
+                value=token_model.token,
+                httponly=False,
+                samesite="lax",
+            )
+            return response
 
     return render(
         request,

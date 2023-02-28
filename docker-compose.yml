@@ -13,6 +13,7 @@ services:
             - 5432
 
     web:
+        image: coreproject
         restart: unless-stopped
         build: ./backend
         entrypoint: /code/server_entrypoint.sh
@@ -30,40 +31,44 @@ services:
         depends_on:
             - db
 
-    # redis:
-    #     restart: unless-stopped
-    #     image: redis:7.0.5-alpine
+    redis:
+        restart: unless-stopped
+        image: redis:7.0.5-alpine
 
-    # worker:
-    #     restart: unless-stopped
-    #     build: ./backend
-    #     entrypoint: /code/worker_entrypoint.sh
-    #     environment:
-    #         - CELERY_BROKER_URL='redis://redis:6379/0'
-    #         - CELERY_RESULT_BACKEND='redis://redis:6379/0'
-    #         - POSTGRES_NAME=postgres
-    #         - POSTGRES_USER=postgres
-    #         - POSTGRES_PASSWORD=supersecretpassword
-    #         - POSTGRES_HOST=db
-    #         - POSTGRES_PORT=5432
-    #         - DJANGO_ALLOWED_HOSTS=backend.coreproject.moe
-    #     depends_on:
-    #         - web
-    #         - redis
-
-    caddy:
-        image: caddy:2
-        container_name: caddy
-        restart: always
-        ports:
-            - 80:80 # Needed for the ACME HTTP-01 challenge.
-            - 443:443
+    worker:
+        image: coreproject
+        restart: unless-stopped
+        build: ./backend
         volumes:
-            - ./Caddyfile:/etc/caddy/Caddyfile:ro
-            - ./caddy-config:/config
-            - ./caddy-data:/data
+            - ./media:/code/django_core/media
+        entrypoint: /code/worker_entrypoint.sh
         environment:
-            - SITE_ADDRESS=coreproject.moe
-            - LOG_FILE=/data/access.log
+            - 'REDIS_URL=redis://redis:6379/0'
+            - 'CELERY_BROKER_URL=redis://redis:6379/0'
+            - 'CELERY_RESULT_BACKEND=redis://redis:6379/0'
+            - POSTGRES_NAME=postgres
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=supersecretpassword
+            - POSTGRES_HOST=db
+            - POSTGRES_PORT=5432
+            - DJANGO_ALLOWED_HOSTS=backend.coreproject.moe
+        depends_on:
+            - web
+            - redis
+
+    # caddy:
+    #     image: caddy:2
+    #     container_name: caddy
+    #     restart: always
+    #     ports:
+    #         - 80:80 # Needed for the ACME HTTP-01 challenge.
+    #         - 443:443
+    #     volumes:
+    #         - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    #         - ./caddy-config:/config
+    #         - ./caddy-data:/data
+    #     environment:
+    #         - SITE_ADDRESS=coreproject.moe
+    #         - LOG_FILE=/data/access.log
 volumes:
     pgdata:

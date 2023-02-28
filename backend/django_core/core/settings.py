@@ -34,7 +34,7 @@ SECRET_KEY = (
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get("DEBUG", False)
 
 # Increase this in future
 # If you increase this make sure to run `migrations`
@@ -311,15 +311,15 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # https://pypi.org/project/django-cors-headers/
 
 
-CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS = [
-    # Port = 5173
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-]
+CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS = []
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 if environs := os.environ.get("DJANGO_ALLOWED_HOSTS").split(" "):
     ALLOWED_HOSTS += environs
+
+for entry in ALLOWED_HOSTS:
+    CORS_ALLOWED_ORIGINS.append(f"https://{entry}")
+    CSRF_TRUSTED_ORIGINS.append(f"https://{entry}")
 
 CORS_ALLOW_METHODS = [
     "DELETE",
@@ -342,3 +342,8 @@ if os.name == "nt":
     NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 elif os.name == "posix":
     NPM_BIN_PATH = "/usr/bin/npm"
+
+
+# Celery configs
+CELERY_BROKER_URL = os.environ.get("BROKER_URL", "redis://localhost:6379/0")
+CELERY_RESULT_BACKEND = os.environ.get("RESULT_BACKEND", "redis://localhost:6379/0")
