@@ -1,5 +1,6 @@
 services:
     db:
+        restart: unless-stopped
         image: postgres:15-alpine
         volumes:
             - ./data/db:/var/lib/postgresql/data
@@ -8,7 +9,15 @@ services:
             - POSTGRES_DB=postgres
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=supersecretpassword
+        expose:
+            - 5432
+
+    redis:
+        restart: unless-stopped
+        image: redis:7.0.5-alpine
+
     web:
+        restart: unless-stopped
         build: ./backend
         command: python ./django_core/manage.py runserver 0.0.0.0:8000
         volumes:
