@@ -1,10 +1,27 @@
-version: "3"
 services:
-    AnimeCore:
-        image: AnimeCore
+    db:
+        image: postgres
+        volumes:
+            - ./data/db:/var/lib/postgresql/data
+        environment:
+            - POSTGRES_DB=postgres
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=supersecretpassword
+    web:
         build:
             context: .
-            dockerfile: ./frontend/AnimeCore/Dockerfile
-            target: deploy-node
+            dockerfile: ./backend/Dockerfile
+        command: python manage.py runserver 0.0.0.0:8000
+        volumes:
+            - .:/
         ports:
-            - 3002:3000
+            - '8000:8000'
+        environment:
+            - POSTGRES_NAME=django
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=supersecretpassword
+        depends_on:
+            - db
+
+volumes:
+    pgdata:
