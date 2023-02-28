@@ -28,7 +28,8 @@ COPY . /code
 RUN poetry shell
 RUN poe tailwind_install
 RUN poe tailwind_build
-RUN apk del nodejs npm 
+COPY . /code
+RUN apk del nodejs npm
 
 
 ENTRYPOINT ["sh","entrypoint.sh"]
