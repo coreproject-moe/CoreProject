@@ -138,7 +138,8 @@ def post_anime_info(
     user: CustomUser = request.auth
     if not user.is_superuser:
         raise HttpResponse(
-            "Superuser is required for this operation", status_code=HTTPStatus.UNAUTHORIZED
+            "Superuser is required for this operation",
+            status_code=HTTPStatus.UNAUTHORIZED,
         )
 
     kwargs = {

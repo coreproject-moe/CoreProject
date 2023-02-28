@@ -5,6 +5,8 @@ from django.db.models import Q
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 
+from apps.api.auth import AuthBearer
+
 from ....studios.models import StudioModel
 from ...filters.studios import StudioFilter
 from ...schemas.studios import StudioSchema
@@ -35,7 +37,7 @@ def get_studio_info(
     return query
 
 
-@router.get("/{str:studio_id}/", response=StudioSchema)
+@router.get("/{str:studio_id}/", response=StudioSchema, auth=AuthBearer())
 def get_individual_studio_info(
     request: HttpRequest,
     studio_id: str,

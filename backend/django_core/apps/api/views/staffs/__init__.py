@@ -9,6 +9,7 @@ from django.http import Http404, HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
 
 from apps.user.models import CustomUser
+from apps.api.auth import AuthBearer
 
 from ....staffs.models import StaffAlternateNameModel, StaffModel
 from ...filters.staffs import StaffFilter
@@ -85,7 +86,7 @@ def get_staff_info(
     return query
 
 
-@router.post("", response=StaffSchema)
+@router.post("", response=StaffSchema, auth=AuthBearer())
 def post_staff_info(
     request: HttpRequest,
     mal_id: int | None = Form(default=None),
@@ -101,7 +102,8 @@ def post_staff_info(
     user: CustomUser = request.auth
     if not user.is_superuser:
         raise HttpResponse(
-            "Superuser is required for this operation", status_code=HTTPStatus.UNAUTHORIZED
+            "Superuser is required for this operation",
+            status_code=HTTPStatus.UNAUTHORIZED,
         )
     kwargs = {
         "mal_id": mal_id,
