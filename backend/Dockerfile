@@ -22,14 +22,8 @@ COPY poetry.lock pyproject.toml /code
 RUN poetry config virtualenvs.create false \
   && poetry install $(test "$YOUR_ENV" == production && echo "--no-dev") --no-interaction --no-ansi
 
-RUN apk add nodejs-current npm 
-
 COPY . /code
 RUN poetry shell
-RUN poe tailwind_install
-RUN poe tailwind_build
-COPY . /code
-RUN apk del nodejs npm
 
 
 ENTRYPOINT ["sh","entrypoint.sh"]
