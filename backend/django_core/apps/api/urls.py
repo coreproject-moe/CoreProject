@@ -157,27 +157,6 @@ tracker_router.add_router(
     tags=["trackers"],
 )
 
-# __ USER ROUTER __
-
-from .views.user import router as user_router
-
-api.add_router("/user", user_router, tags=["user"])
-
-user_router.add_router(
-    "",
-    import_string(
-        "apps.api.views.user.login.router",
-    ),
-    tags=["user"],
-)
-user_router.add_router(
-    "",
-    import_string(
-        "apps.api.views.user.logout.router",
-    ),
-    tags=["user"],
-)
-
 
 urlpatterns = [
     path(

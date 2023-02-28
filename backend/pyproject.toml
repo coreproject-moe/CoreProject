@@ -9,13 +9,13 @@ license = "AGPL-3.0-only"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-django = {version = '^4.2b1', extras = ['argon2']}
+django = {version = '^4.1', extras = ['argon2']}
 # First Party ( Redis )
 redis = {extras = ['hiredis'], version = ">=4"}
 # First party ( Image )
 pillow = "*"
 # First Party ( Database )
-psycopg2 = "*"
+psycopg2-binary = "*"
 # 3rd Party ( Files )
 django-dynamic-filenames = "*"
 # 3rd Party ( Middlewares )
@@ -50,7 +50,9 @@ django-tailwind = "^3.5.0"
 # Form tools
 django-crispy-forms = "^2.0"
 # HTMX Powerup
-django-htmx = "^1.14.0"
+django-htmx = "^1.13.0"
+typing-extensions = "^4.5.0"
+crispy-tailwind = "^0.5.0"
 
 
 [tool.poetry.group.dev.dependencies]
@@ -76,7 +78,7 @@ poethepoet = "^0.18.1"
 isort = "^5.12.0"
 
 [tool.poe.tasks]
-dev = 'python ./django_core/manage.py runserver 127.0.0.1:8000'
+dev = 'python ./django_core/manage.py runserver 127.0.0.1:9000'
 ## Prod servers
 prod_uvicorn = "gunicorn --app-dir=django_core core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker" # For linux only
 ##  Migrations

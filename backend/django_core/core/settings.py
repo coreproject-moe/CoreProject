@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     "tailwind_src",  # Our custom app
     # Crispy Froms
     "crispy_forms",
+    "crispy_tailwind",
     # HTMX
     "django_htmx",
     # Api ( Django-Ninja )
@@ -92,7 +93,8 @@ INSTALLED_APPS = [
     "apps.episodes",
 ]
 
-
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_TEMPLATE_PACK = "tailwind"
 # Debug Toolbar Add
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install-the-app
 if DEBUG:
@@ -195,8 +197,8 @@ DATABASES = {
         "NAME": "django",
         "USER": "postgres",
         "PASSWORD": "supersecretpassword",
-        "HOST": "",
-        "PORT": "",
+        "HOST": "localhost",
+        "PORT": "5432",
         # https://stackoverflow.com/questions/23504483/django-conn-max-age-setting-error
         # "CONN_MAX_AGE": 10,
         "CONN_HEALTH_CHECKS": True,
@@ -333,5 +335,5 @@ DBBACKUP_STORAGE_OPTIONS = {"location": os.path.join(BASE_DIR, "backup")}
 TAILWIND_APP_NAME = "tailwind_src"
 if os.name == "nt":
     NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
-else:
-    NPM_BIN_PATH = "/usr/local/bin/npm"
+elif os.name == "posix":
+    NPM_BIN_PATH = "/usr/bin/npm"
