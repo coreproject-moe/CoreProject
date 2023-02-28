@@ -12,7 +12,7 @@ services:
         build: ./backend
         command: python ./django_core/manage.py runserver 0.0.0.0:8000
         volumes:
-            - ./backend:/code
+            - ./media:/code/django_core/media
         ports:
             - '9000:8000'
         environment:
