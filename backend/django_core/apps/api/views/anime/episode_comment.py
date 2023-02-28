@@ -2,11 +2,10 @@ from apps.anime.models import AnimeModel
 from apps.episodes.models.episode_comment import EpisodeCommentModel
 from ninja import Router
 
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
 
 from apps.api.auth import AuthBearer
-from apps.user.models import CustomUser
 
 from ...schemas.episodes.episode_comment import (
     EpisodeCommentGETSchema,
