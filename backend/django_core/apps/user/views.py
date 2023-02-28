@@ -13,7 +13,7 @@ from django.http import FileResponse, HttpRequest, HttpResponse, StreamingHttpRe
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from .forms import LoginForm, RegisterForm, UsernameWithDiscriminatorForm
-from .models import CustomUser
+from .models import CustomUser, Token
 
 
 async def avatar_view(
@@ -97,7 +97,15 @@ def login_view(request: HttpRequest) -> HttpResponse:
             password=form.cleaned_data.get("password"),
         ):
             login(request, user)
-            return HttpResponseLocation(reverse_lazy("login_view"))
+            token_model = Token.objects.create(user=request.user)
+            response = HttpResponseLocation(reverse_lazy("login_view"))
+            response.set_cookie(
+                key="token",
+                value=token_model.token,
+                httponly=False,
+                samesite="lax",
+            )
+            return response
 
     return render(
         request,
@@ -109,8 +117,11 @@ def login_view(request: HttpRequest) -> HttpResponse:
 
 
 def logout_view(request: HttpRequest) -> HttpResponse:
+    Token.objects.get(user=request.user).delete()
     logout(request)
-    return HttpResponseLocation(reverse_lazy("login_view"))
+    response = HttpResponseLocation(reverse_lazy("login_view"))
+    response.delete_cookie("token")
+    return response
 
 
 def username_and_discriminator_validity_checker_view(
