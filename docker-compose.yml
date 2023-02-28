@@ -23,7 +23,7 @@ services:
         volumes:
             - ./media:/code/django_core/media
         ports:
-            - '9000:8000'
+            - "9000:8000"
         environment:
             - POSTGRES_NAME=postgres
             - POSTGRES_USER=postgres
