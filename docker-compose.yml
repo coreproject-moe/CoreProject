@@ -19,7 +19,7 @@ services:
         volumes:
             - ./media:/code/django_core/media
         ports:
-            - "9000:8000"
+            - '9000:8000'
         environment:
             - POSTGRES_NAME=postgres
             - POSTGRES_USER=postgres
@@ -51,5 +51,19 @@ services:
     #         - web
     #         - redis
 
+    caddy:
+        image: caddy:2
+        container_name: caddy
+        restart: always
+        ports:
+            - 80:80 # Needed for the ACME HTTP-01 challenge.
+            - 443:443
+        volumes:
+            - ./Caddyfile:/etc/caddy/Caddyfile:ro
+            - ./caddy-config:/config
+            - ./caddy-data:/data
+        environment:
+            - SITE_ADDRESS=coreproject.moe
+            - LOG_FILE=/data/access.log
 volumes:
     pgdata:
