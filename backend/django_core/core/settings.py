@@ -197,11 +197,11 @@ LOGIN_URL = "login_page"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("SQL_DATABASE"),
-        "USER": os.environ.get("SQL_USER"),
-        "PASSWORD": os.environ.get("SQL_PASSWORD"),
-        "HOST": os.environ.get("SQL_HOST"),
-        "PORT": os.environ.get("SQL_PORT"),
+        "NAME": os.environ.get("POSTGRES_NAME"),
+        "USER": os.environ.get("POSTGRES_USER"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+        "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
+        "PORT": os.environ.get("POSTGRES_PORT", 5432),
         # https://stackoverflow.com/questions/23504483/django-conn-max-age-setting-error
         # "CONN_MAX_AGE": 10,
         "CONN_HEALTH_CHECKS": True,

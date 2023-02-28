@@ -17,14 +17,17 @@ ENV  POETRY_CACHE_DIR='/var/cache/pypoetry'
 
 RUN pip install "poetry==$POETRY_VERSION" && poetry --version
 
+WORKDIR /code
 # copy project
-WORKDIR /usr/src/app
-COPY . /usr/src/app
+COPY poetry.lock pyproject.toml /code/
 
-RUN poetry install
+RUN poetry config virtualenvs.create false \
+  && poetry install $(test "$YOUR_ENV" == production && echo "--no-dev") --no-interaction --no-ansi
+
+COPY . /code
 RUN poetry shell
 RUN poe mksync
-RUN poe sync
+RUN poe sync 
 RUN poe dev 
 
 ENTRYPOINT python /django_core/manage.py runserver 0.0.0.0:8000
