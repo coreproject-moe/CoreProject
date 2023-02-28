@@ -12,6 +12,8 @@ do
     sleep 2
 done
 
+poe collectstatic
+
 # python manage.py createsuperuser --noinput
 gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000
 

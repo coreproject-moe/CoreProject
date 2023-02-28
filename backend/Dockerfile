@@ -22,7 +22,7 @@ COPY poetry.lock pyproject.toml /code
 RUN poetry config virtualenvs.create false \
   && poetry install $(test "$YOUR_ENV" == production && echo "--no-dev") --no-interaction --no-ansi
 
-RUN apk add nodejs-current npm 
+RUN apk --no-cache add nodejs-current npm 
 
 COPY . /code
 RUN poetry shell
@@ -32,7 +32,7 @@ RUN poe tailwind_install
 RUN poe tailwind_build
 COPY . /code
 
-RUN apk del nodejs npm
+RUN apk del nodejs npm 
 
 RUN chmod +x /code/server_entrypoint.sh
 RUN chmod +x /code/worker_entrypoint.sh

@@ -34,7 +34,7 @@ SECRET_KEY = (
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Increase this in future
 # If you increase this make sure to run `migrations`
