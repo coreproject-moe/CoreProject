@@ -4,7 +4,7 @@ from ninja.security import HttpBearer
 from django.contrib.auth.models import AnonymousUser
 from django.http import HttpRequest
 
-from .models import Token
+from apps.user.models import Token
 
 
 class AuthBearer(HttpBearer):

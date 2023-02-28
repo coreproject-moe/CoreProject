@@ -1,10 +1,12 @@
+from http import HTTPStatus
 from apps.anime.models import AnimeModel
 from apps.studios.models import StudioModel
 from ninja import Router
-
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
 
+from apps.api.auth import AuthBearer
+from apps.user.models import CustomUser
 from ...schemas.studios import StudioSchema
 
 router = Router()
@@ -22,12 +24,17 @@ def get_individual_anime_studio_info(
     return query
 
 
-@router.post("/{int:anime_id}/studios", response=StudioSchema)
+@router.post("/{int:anime_id}/studios", response=StudioSchema, auth=AuthBearer())
 def post_individual_anime_studio_info(
     request: HttpRequest,
     anime_id: int,
     payload: StudioSchema,
 ) -> StudioModel:
+    user: CustomUser = request.auth
+    if not user.is_superuser:
+        raise HttpResponse(
+            "Superuser is required for this operation", status_code=HTTPStatus.UNAUTHORIZED
+        )
     # Set this at top
     # Because if there is no anime_info_model with corresponding query
     # theres no point in continuing

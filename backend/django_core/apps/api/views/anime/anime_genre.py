@@ -1,9 +1,13 @@
+from http import HTTPStatus
 from apps.anime.models import AnimeModel
 from apps.anime.models.anime_genre import AnimeGenreModel
 from ninja import Router
+from apps.user.models import CustomUser
 
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
+
+from apps.api.auth import AuthBearer
 
 from ...schemas.anime.anime_genre import AnimeGenreSchema
 
@@ -21,12 +25,17 @@ def get_individual_anime_genre_info(
     return query
 
 
-@router.post("/{int:anime_id}/genres", response=AnimeGenreSchema)
+@router.post("/{int:anime_id}/genres", response=AnimeGenreSchema, auth=AuthBearer())
 def post_individual_anime_genre_info(
     request: HttpRequest,
     anime_id: int,
     payload: AnimeGenreSchema,
 ) -> AnimeGenreModel:
+    user: CustomUser = request.auth
+    if not user.is_superuser:
+        raise HttpResponse(
+            "Superuser is required for this operation", status_code=HTTPStatus.UNAUTHORIZED
+        )
     # Set this at top
     # Because if there is no anime_info_model with corresponding query
     # theres no point in continuing

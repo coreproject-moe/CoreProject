@@ -2,9 +2,11 @@ from apps.anime.models import AnimeModel
 from apps.episodes.models.episode_comment import EpisodeCommentModel
 from ninja import Router
 
-from django.contrib.auth.decorators import login_required
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
+
+from apps.api.auth import AuthBearer
+from apps.user.models import CustomUser
 
 from ...schemas.episodes.episode_comment import (
     EpisodeCommentGETSchema,
@@ -37,8 +39,8 @@ def get_individual_anime_episode_comments(
 @router.post(
     "/{int:anime_id}/episodes/{str:episode_number}/comments",
     response=EpisodeCommentGETSchema,
+    auth=AuthBearer(),
 )
-@login_required
 def post_individual_anime_episode_comment(
     request: HttpRequest,
     anime_id: int,

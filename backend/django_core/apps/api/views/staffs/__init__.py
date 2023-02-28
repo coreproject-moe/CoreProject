@@ -1,11 +1,14 @@
+from http import HTTPStatus
 from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from ninja.pagination import paginate
 
 from django.db.models import Q, QuerySet
 from django.db.models.functions import Greatest
-from django.http import Http404, HttpRequest
+from django.http import Http404, HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
+
+from apps.user.models import CustomUser
 
 from ....staffs.models import StaffAlternateNameModel, StaffModel
 from ...filters.staffs import StaffFilter
@@ -95,6 +98,11 @@ def post_staff_info(
     about: str | None = Form(default=None),
     alternate_names: list[str] = Form(default=None),
 ) -> StaffModel:
+    user: CustomUser = request.auth
+    if not user.is_superuser:
+        raise HttpResponse(
+            "Superuser is required for this operation", status_code=HTTPStatus.UNAUTHORIZED
+        )
     kwargs = {
         "mal_id": mal_id,
         "kitsu_id": kitsu_id,

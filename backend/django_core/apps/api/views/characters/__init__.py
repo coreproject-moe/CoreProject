@@ -1,7 +1,12 @@
+from http import HTTPStatus
 from apps.characters.models import CharacterModel
 from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from ninja.pagination import paginate
+from apps.user.models import CustomUser
+
+from django.http import HttpRequest, HttpResponse
+from django.shortcuts import  get_object_or_404
 
 from django.db.models import Q, QuerySet
 from django.http import HttpRequest
@@ -71,6 +76,12 @@ def post_character_info(
     character_image: UploadedFile | None = File(default=None),
     about: str | None = Form(default=None),
 ) -> QuerySet[CharacterModel]:
+    user: CustomUser = request.auth
+    if not user.is_superuser:
+        raise HttpResponse(
+            "Superuser is required for this operation", status_code=HTTPStatus.UNAUTHORIZED
+        )
+        
     instance = CharacterModel.objects.create(
         name=name,
         mal_id=mal_id,
