@@ -1,0 +1,19 @@
+#!/bin/sh
+
+until cd /code/django_core
+do
+    echo "Waiting for server volume..."
+done
+
+
+until python manage.py migrate
+do
+    echo "Waiting for db to be ready..."
+    sleep 2
+done
+
+# python manage.py createsuperuser --noinput
+gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000
+
+# for debug
+#python manage.py runserver 0.0.0.0:8000
