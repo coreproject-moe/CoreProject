@@ -10,17 +10,18 @@ services:
             - POSTGRES_PASSWORD=supersecretpassword
     web:
         build: ./backend
-        command: python manage.py runserver 0.0.0.0:8000
+        command: python ./django_core/manage.py runserver 0.0.0.0:8000
         volumes:
-            - .:/
+            - ./backend:/code
         ports:
-            - '8000:8000'
+            - '9000:8000'
         environment:
             - POSTGRES_NAME=django
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=supersecretpassword
             - POSTGRES_HOST=db
             - POSTGRES_PORT=5432
+            - DJANGO_ALLOWED_HOSTS=backend.coreproject.moe
         depends_on:
             - db
 

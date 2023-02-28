@@ -1,8 +1,7 @@
 FROM python:3.11.2-alpine AS development_build
 
 
-ENV DJANGO_ENV=${DJANGO_ENV}
-  # python:
+# python:
 ENV  PYTHONFAULTHANDLER=1 
 ENV  PYTHONUNBUFFERED=1 
 ENV  PYTHONHASHSEED=random 
@@ -19,15 +18,11 @@ RUN pip install "poetry==$POETRY_VERSION" && poetry --version
 
 WORKDIR /code
 # copy project
-COPY poetry.lock pyproject.toml /code/
+COPY poetry.lock pyproject.toml /code
 
 RUN poetry config virtualenvs.create false \
   && poetry install $(test "$YOUR_ENV" == production && echo "--no-dev") --no-interaction --no-ansi
 
 COPY . /code
 RUN poetry shell
-RUN poe mksync
-RUN poe sync 
-RUN poe dev 
-
-ENTRYPOINT python /django_core/manage.py runserver 0.0.0.0:8000
+ENTRYPOINT ["sh","entrypoint.sh"]
