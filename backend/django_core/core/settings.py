@@ -28,7 +28,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-mn19l@e%r^s&a^pa9%(bf173v-0c54^@3s(pb!ts_yuts0$+6p"
+SECRET_KEY = (
+    os.environ.get("SECRET_KEY")
+    or "django-insecure-mn19l@e%r^s&a^pa9%(bf173v-0c54^@3s(pb!ts_yuts0$+6p"
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -194,11 +197,11 @@ LOGIN_URL = "login_page"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "django",
-        "USER": "postgres",
-        "PASSWORD": "supersecretpassword",
-        "HOST": "localhost",
-        "PORT": "5432",
+        "NAME": os.environ.get("POSTGRES_NAME"),
+        "USER": os.environ.get("POSTGRES_USER"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+        "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
+        "PORT": os.environ.get("POSTGRES_PORT", 5432),
         # https://stackoverflow.com/questions/23504483/django-conn-max-age-setting-error
         # "CONN_MAX_AGE": 10,
         "CONN_HEALTH_CHECKS": True,
@@ -314,7 +317,9 @@ CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:5173",
 ]
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "backend.localhost"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+if environs := os.environ.get("DJANGO_ALLOWED_HOSTS").split(" "):
+    ALLOWED_HOSTS += environs
 
 CORS_ALLOW_METHODS = [
     "DELETE",
