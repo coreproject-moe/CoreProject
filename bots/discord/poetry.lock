@@ -396,14 +396,14 @@ pygments = ["pygments (>=2.2.0)"]
 
 [[package]]
 name = "discord-py"
-version = "2.1.1"
+version = "2.2.0"
 description = "A Python wrapper for the Discord API"
 category = "main"
 optional = false
 python-versions = ">=3.8.0"
 files = [
-    {file = "discord.py-2.1.1-py3-none-any.whl", hash = "sha256:b99fbf4ad74f007c680f33f5174738858146c99a2bc4f6d0e08ddbf93bc12c4d"},
-    {file = "discord.py-2.1.1.tar.gz", hash = "sha256:8258b7af641c532e9e33e186c7b867d9ff5575fe63a460b17ed55bd4fe082200"},
+    {file = "discord.py-2.2.0-py3-none-any.whl", hash = "sha256:012e98571af6847467e81f9501bbe4c6ebfe292c842f5ef8e951908839ee1cd0"},
+    {file = "discord.py-2.2.0.tar.gz", hash = "sha256:a92d69ab6f982998693d0c371ea19235fa0f9900b50068fc461086d02c33e6bb"},
 ]
 
 [package.dependencies]
@@ -1101,4 +1101,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "e7341bb40e9de9431f7ae05f0619ac0a185824bb49edf3cf4ebb00a79d3e02f4"
+content-hash = "a14896df34d892395da583e52a1c7293ffc27393fed34c5429269914ff7206aa"
