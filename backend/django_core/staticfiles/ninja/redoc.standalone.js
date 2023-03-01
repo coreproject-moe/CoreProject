@@ -1,0 +1,1 @@
+/usr/local/lib/python3.11/site-packages/ninja/static/ninja/redoc.standalone.js

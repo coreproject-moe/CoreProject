@@ -1,0 +1,1 @@
+/usr/local/lib/python3.11/site-packages/colorfield/static/colorfield/jscolor/jscolor.js

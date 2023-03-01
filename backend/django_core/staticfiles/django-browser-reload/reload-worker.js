@@ -1,0 +1,1 @@
+/usr/local/lib/python3.11/site-packages/django_browser_reload/static/django-browser-reload/reload-worker.js

@@ -1,0 +1,1 @@
+/usr/local/lib/python3.11/site-packages/debug_toolbar/static/debug_toolbar/js/toolbar.js
