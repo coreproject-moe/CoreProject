@@ -1,1 +1,0 @@
-/usr/local/lib/python3.11/site-packages/ninja/static/ninja/swagger-ui-bundle.js
