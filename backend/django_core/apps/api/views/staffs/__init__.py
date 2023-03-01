@@ -103,7 +103,7 @@ def post_staff_info(
     if not user.is_superuser:
         raise HttpResponse(
             "Superuser is required for this operation",
-            status_code=HTTPStatus.UNAUTHORIZED,
+            status=HTTPStatus.UNAUTHORIZED,
         )
     kwargs = {
         "mal_id": mal_id,

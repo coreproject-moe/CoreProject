@@ -29,11 +29,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get(
-    "SECRET_KEY", "django-insecure-mn19l@e%r^s&a^pa9%(bf173v-0c54^@3s(pb!ts_yuts0$+6p"
+    "SECRET_KEY",
+    "django-insecure-mn19l@e%r^s&a^pa9%(bf173v-0c54^@3s(pb!ts_yuts0$+6p",
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", False)
+DEBUG = os.environ.get("DEBUG", True)
 
 # Increase this in future
 # If you increase this make sure to run `migrations`
@@ -196,9 +197,9 @@ LOGIN_URL = "login_page"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("POSTGRES_NAME"),
-        "USER": os.environ.get("POSTGRES_USER"),
-        "PASSWORD": os.environ.get("POSTGRES_PASSWORD"),
+        "NAME": os.environ.get("POSTGRES_NAME", "django"),
+        "USER": os.environ.get("POSTGRES_USER", "postgres"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "admin"),
         "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
         "PORT": os.environ.get("POSTGRES_PORT", 5432),
         # https://stackoverflow.com/questions/23504483/django-conn-max-age-setting-error
@@ -316,8 +317,6 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 if environs := os.environ.get("DJANGO_ALLOWED_HOSTS"):
     environ = environs.split(" ")
     ALLOWED_HOSTS += environ
-
-print(ALLOWED_HOSTS)
 
 for entry in ALLOWED_HOSTS:
     CORS_ALLOWED_ORIGINS.append(f"https://{entry}")

@@ -34,7 +34,7 @@ def post_individual_anime_genre_info(
     user: CustomUser = request.auth
     if not user.is_superuser:
         raise HttpResponse(
-            "Superuser is required for this operation", status_code=HTTPStatus.UNAUTHORIZED
+            "Superuser is required for this operation", status=HTTPStatus.UNAUTHORIZED
         )
     # Set this at top
     # Because if there is no anime_info_model with corresponding query

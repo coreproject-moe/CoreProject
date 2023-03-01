@@ -76,7 +76,23 @@ def signup_view(request: HttpRequest) -> HttpResponse:
     form = RegisterForm(request.POST or None)
     if request.method == "POST":
         if form.is_valid():
-            user = CustomUser.objects.create(**form.cleaned_data)
+            user_data = {
+                "password": form.cleaned_data["password"],
+                "email": form.cleaned_data["email"],
+            }
+
+            username_with_maybe_discriminator: str = form.cleaned_data["username"]
+            if "#" in username_with_maybe_discriminator:
+                username_with_discriminator_splitted = (
+                    username_with_maybe_discriminator.strip().split("#")
+                )
+                user_data["username"] = username_with_discriminator_splitted[0]
+                user_data["discriminator"] = username_with_discriminator_splitted[1]
+            else:
+                user_data["username"] = username_with_maybe_discriminator
+
+            user = CustomUser.objects.create(**user_data)
+
             login(request, user)
             token_model = Token.objects.create(user=user)
             response = HttpResponseLocation(reverse_lazy("login_view"))
@@ -165,11 +181,15 @@ def username_and_discriminator_validity_checker_view(
             )
             .exists()
         ):
-            # Return status code 300 if username with discriminator exists
-            return HttpResponse(HTTPStatus.FOUND)
+            # Return status code 406 if username with discriminator exists
+            return HttpResponse(
+                "CUSTOM MESSAGE", status=HTTPStatus.FOUND, 
+            )
+
         else:
             # Return status code 200 if username with discriminator is available
-            return HttpResponse(HTTPStatus.OK)
-
+            return HttpResponse(
+                "Username found", status=HTTPStatus.NOT_FOUND, 
+            )
     else:
         return form.errors

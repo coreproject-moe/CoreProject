@@ -40,7 +40,7 @@ class CustomUser(
     last_name = models.CharField(_("last name"), max_length=150, blank=True)
     email = models.EmailField(
         _("email address"),
-        blank=True,
+        blank=False,
         unique=True,
         help_text=_("Required. A valid email with a valid domain"),
     )

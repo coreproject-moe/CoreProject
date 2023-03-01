@@ -7,103 +7,107 @@
 
 {% block form %}
 
-    <form method="post" action="{% url 'signup_view' %}">
-        <div class="flex justify-center mb-10">
-            <div class="font-bold text-4xl select-none flex">
-                <span class="inline-flex text-white">c</span>
-                <span class="inline-flex text-warning">o</span>
-                <span class="inline-flex text-white">r</span>
-                <span class="inline-flex text-white">e</span>
-                &nbsp;
-                <span class="inline-flex text-info">p</span>
-                <span class="inline-flex text-info">r</span>
-                <span class="inline-flex text-info">o</span>
-                <span class="inline-flex text-info">j</span>
-                <span class="inline-flex text-info">e</span>
-                <span class="inline-flex text-info">c</span>
-                <span class="inline-flex text-info">t</span>
-            </div>
+<form method="post" action="{% url 'signup_view' %}">
+    <div class="flex justify-center mb-10">
+        <div class="font-bold text-4xl select-none flex">
+            <span class="inline-flex text-white">c</span>
+            <span class="inline-flex text-warning">o</span>
+            <span class="inline-flex text-white">r</span>
+            <span class="inline-flex text-white">e</span>
+            &nbsp;
+            <span class="inline-flex text-info">p</span>
+            <span class="inline-flex text-info">r</span>
+            <span class="inline-flex text-info">o</span>
+            <span class="inline-flex text-info">j</span>
+            <span class="inline-flex text-info">e</span>
+            <span class="inline-flex text-info">c</span>
+            <span class="inline-flex text-info">t</span>
         </div>
-        <div class="grid gap-6">
-            {% crispy form %}
-            <div class="flex justify-center items-center gap-2">
-                <button
-                    class="btn btn-secondary font-bold text-black"
-                    type="submit"
-                >
-                    Register
-                </button>
-                or
-                <a class="underline" href="{% url 'login_view' %}" hx-boost="true"
+    </div>
+    <div class="grid gap-6">
+        {% crispy form %}
+        <div class="flex justify-center items-center gap-2">
+            <button
+                class="btn btn-secondary font-bold text-black"
+                type="submit"
+            >
+                Register
+            </button>
+            or
+            <a class="underline" href="{% url 'login_view' %}" hx-boost="true"
                 >login</a
-                    >
-                </div>
-            </div>
-        </form>
+            >
+        </div>
+    </div>
+</form>
 
-        <script>
-            (() => {
-                // https://stackoverflow.com/a/1421988
-                function isNumber(n) {
-                    return /^-?[\d.]+(?:e-?\d+)?$/.test(n);
-                }
+<script>
+    (() => {
+        // https://stackoverflow.com/a/1421988
+        function isNumber(n) {
+            return /^-?[\d.]+(?:e-?\d+)?$/.test(n);
+        }
 
-                const el = document.querySelector('#id_username');
+        const el = document.querySelector('#id_username');
 
-                el.addEventListener('input', async () => {
-                    const value = el.value;
-                    if (value.length === 0) {
-                        return;
+        el.addEventListener('input', async () => {
+            const value = el.value;
+            if (value.length === 0) {
+                return;
+            }
+
+            const valueRegex = value.match(/#/gi);
+            if (!valueRegex) {
+                return;
+            }
+
+            const HashLength = valueRegex.length;
+            // Remove Empty Elements
+            const splittedValue = value.split('#').filter((i) => i);
+
+            if (
+                HashLength === 1 &&
+                splittedValue.length === 2 &&
+                isNumber(splittedValue[1]) === true
+            ) {
+                let formData = new FormData();
+                formData.append('username', splittedValue[0]);
+                formData.append('discriminator', splittedValue[1]);
+
+                fetch(
+                    "{% url 'username_and_discriminator_validity_checker_view' %}",
+                    {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}',
+                        },
                     }
-
-                    const valueRegex = value.match(/#/gi);
-                    if (!valueRegex) {
-                        return;
-                    }
-
-                    const HashLength = valueRegex.length;
-                    // Remove Empty Elements
-                    const splittedValue = value.split('#').filter((i) => i);
-
-                    if (
-                        HashLength === 1 &&
-                        splittedValue.length === 2 &&
-                        isNumber(splittedValue[1]) === true
-                    ) {
-                        let formData = new FormData();
-                        formData.append('username', splittedValue[0]);
-                        formData.append('discriminator', splittedValue[1]);
-
-                        fetch(
-                            "{% url 'username_and_discriminator_validity_checker_view' %}",
-                            {
-                                method: 'POST',
-                                body: formData,
-                                headers: {
-                                    'X-CSRFToken': '{{ csrf_token }}',
-                                },
-                            }
-                        ).then((res) => {
-                            if (!res.ok) {
-                                // The username with discriminator is taken by another user
-                                // Show an error
-                                el.setCustomValidity('This username is not available');
-                                el.classList.add('!border-red-800');
-                            }
-                        });
-                    } else if (HashLength >= 1) {
-                        el.setCustomValidity(
-                            'There must be one hash in the username. ( eg: SoraAmamiya#1993 )'
-                        );
+                ).then((res) => {
+                    console.log(res);
+                    if (res.status === 302) {
+                        // The username with discriminator is taken by another user
+                        // Show an error
+                        el.setCustomValidity('This username is not available');
                         el.classList.add('!border-red-800');
-                    } else if (isNumber(splittedValue[1]) === false) {
-                        el.setCustomValidity(
-                            'The discriminator must be a number. ( eg : SoraAmamiya#1993 )'
-                        );
-                        el.classList.add('!border-red-800');
+                    } else if (res.status === 404) {
+                        el.setCustomValidity('');
+                        el.classList.remove('!border-red-800');
                     }
                 });
-            })();
-        </script>
+            } else if (HashLength >= 1) {
+                el.setCustomValidity(
+                    'There must be one hash in the username. ( eg: SoraAmamiya#1993 )'
+                );
+                el.classList.add('!border-red-800');
+            } else if (isNumber(splittedValue[1]) === false) {
+                el.setCustomValidity(
+                    'The discriminator must be a number. ( eg : SoraAmamiya#1993 )'
+                );
+                el.classList.add('!border-red-800');
+            }
+        });
+    })();
+</script>
 
 {% endblock %}

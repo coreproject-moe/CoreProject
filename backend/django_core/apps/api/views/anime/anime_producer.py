@@ -35,7 +35,7 @@ def post_individual_anime_producer_info(
     if not user.is_superuser:
         raise HttpResponse(
             "Superuser is required for this operation",
-            status_code=HTTPStatus.UNAUTHORIZED,
+            status=HTTPStatus.UNAUTHORIZED,
         )
     # Set this at top
     # Because if there is no anime_info_model with corresponding query
