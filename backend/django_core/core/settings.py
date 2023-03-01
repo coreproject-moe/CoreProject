@@ -28,9 +28,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = (
-    os.environ.get("SECRET_KEY")
-    or "django-insecure-mn19l@e%r^s&a^pa9%(bf173v-0c54^@3s(pb!ts_yuts0$+6p"
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY", "django-insecure-mn19l@e%r^s&a^pa9%(bf173v-0c54^@3s(pb!ts_yuts0$+6p"
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -314,8 +313,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS = []
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
-if environs := os.environ.get("DJANGO_ALLOWED_HOSTS").split(" "):
-    ALLOWED_HOSTS += environs
+if environs := os.environ.get("DJANGO_ALLOWED_HOSTS"):
+    environ = environs.split(" ")
+    ALLOWED_HOSTS += environ
+
+print(ALLOWED_HOSTS)
 
 for entry in ALLOWED_HOSTS:
     CORS_ALLOWED_ORIGINS.append(f"https://{entry}")
