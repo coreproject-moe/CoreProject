@@ -20,14 +20,14 @@ services:
         volumes:
             - ./media:/code/django_core/media
         ports:
-            - '9000:8000'
+            - "9000:8000"
         expose:
             - 9000
         environment:
             - POSTGRES_NAME=postgres
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=supersecretpassword
-            - 'POSTGRES_HOST=db'
+            - "POSTGRES_HOST=db"
             - POSTGRES_PORT=5432
             - DJANGO_ALLOWED_HOSTS=backend.coreproject.moe
         depends_on:
@@ -45,13 +45,13 @@ services:
             - ./media:/code/django_core/media
         entrypoint: /code/worker_entrypoint.sh
         environment:
-            - 'REDIS_URL=redis://redis:6379/0'
-            - 'CELERY_BROKER_URL=redis://redis:6379/0'
-            - 'CELERY_RESULT_BACKEND=redis://redis:6379/0'
+            - "REDIS_URL=redis://redis:6379/0"
+            - "CELERY_BROKER_URL=redis://redis:6379/0"
+            - "CELERY_RESULT_BACKEND=redis://redis:6379/0"
             - POSTGRES_NAME=postgres
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=supersecretpassword
-            - 'POSTGRES_HOST=db'
+            - "POSTGRES_HOST=db"
             - POSTGRES_PORT=5432
             - DJANGO_ALLOWED_HOSTS=backend.coreproject.moe
         depends_on:
@@ -61,7 +61,7 @@ services:
     caddy:
         image: caddy:latest
         container_name: caddy
-        network_mode: 'host'
+        network_mode: "host"
         restart: always
         ports:
             - 80:80 # Needed for the ACME HTTP-01 challenge.
