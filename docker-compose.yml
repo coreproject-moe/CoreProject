@@ -10,19 +10,15 @@ services:
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=supersecretpassword
 
-    web:
+    django:
         image: coreproject
         restart: unless-stopped
         build: ./backend
         entrypoint: /code/server_entrypoint.sh
         volumes:
             - ./media:/code/django_core/media
-        ports:
-            - "9000:8000"
-        expose:
-            - 9000
         environment:
-            # - 'DEBUG=False'
+            - 'DEBUG=False'
             - POSTGRES_NAME=postgres
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=supersecretpassword
@@ -44,7 +40,7 @@ services:
             - ./media:/code/django_core/media
         entrypoint: /code/worker_entrypoint.sh
         environment:
-            # - 'DEBUG=False'
+            - 'DEBUG=False'
             - "REDIS_URL=redis://redis:6379/0"
             - "CELERY_BROKER_URL=redis://redis:6379/0"
             - "CELERY_RESULT_BACKEND=redis://redis:6379/0"
@@ -55,13 +51,12 @@ services:
             - POSTGRES_PORT=5432
             - DJANGO_ALLOWED_HOSTS=backend.${SITE_ADDRESS}
         depends_on:
-            - web
+            - django
             - redis
 
     caddy:
         image: caddy:alpine
         container_name: caddy
-        network_mode: "host"
         restart: always
         ports:
             - 80:80 # Needed for the ACME HTTP-01 challenge.
