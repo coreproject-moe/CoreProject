@@ -12,6 +12,7 @@ class EpisodePOSTSchema(ModelSchema):
     class Config:
         model = EpisodeModel
         model_exclude = [
+            "id",
             "episode_comments",
             "episode_timestamps",
         ]
