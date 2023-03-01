@@ -9,8 +9,6 @@ services:
             - POSTGRES_DB=postgres
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=supersecretpassword
-        expose:
-            - 5432
 
     web:
         image: coreproject
@@ -29,7 +27,7 @@ services:
             - POSTGRES_PASSWORD=supersecretpassword
             - "POSTGRES_HOST=db"
             - POSTGRES_PORT=5432
-            - DJANGO_ALLOWED_HOSTS=backend.coreproject.moe
+            - DJANGO_ALLOWED_HOSTS=backend.${SITE_ADDRESS}
         depends_on:
             - db
 
@@ -53,13 +51,13 @@ services:
             - POSTGRES_PASSWORD=supersecretpassword
             - "POSTGRES_HOST=db"
             - POSTGRES_PORT=5432
-            - DJANGO_ALLOWED_HOSTS=backend.coreproject.moe
+            - DJANGO_ALLOWED_HOSTS=backend.${SITE_ADDRESS}
         depends_on:
             - web
             - redis
 
     caddy:
-        image: caddy:latest
+        image: caddy:alpine
         container_name: caddy
         network_mode: "host"
         restart: always
@@ -71,7 +69,7 @@ services:
             - ./caddy-config:/config
             - ./caddy-data:/data
         environment:
-            - SITE_ADDRESS=coreproject.moe
+            - SITE_ADDRESS=${SITE_ADDRESS}
             - LOG_FILE=/data/access.log
 volumes:
     pgdata:
