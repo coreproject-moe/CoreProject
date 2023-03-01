@@ -183,13 +183,15 @@ def username_and_discriminator_validity_checker_view(
         ):
             # Return status code 406 if username with discriminator exists
             return HttpResponse(
-                "CUSTOM MESSAGE", status=HTTPStatus.FOUND, 
+                "CUSTOM MESSAGE",
+                status=HTTPStatus.FOUND,
             )
 
         else:
             # Return status code 200 if username with discriminator is available
             return HttpResponse(
-                "Username found", status=HTTPStatus.NOT_FOUND, 
+                "Username found",
+                status=HTTPStatus.NOT_FOUND,
             )
     else:
         return form.errors
