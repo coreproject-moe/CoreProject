@@ -19,21 +19,20 @@ backend.{$SITE_ADDRESS} {
 }
 
 # anime.example.com
-anime.{$SITE_ADDRESS} {
-        # Svelte AnimeCore CSR
-        root * {system.wd}/frontend/AnimeCore/build/
-        encode gzip zstd
-	  templates
-        try_files {path} /app.html
-        file_server
-
-}
+#anime.{$SITE_ADDRESS} {
+#        # Svelte AnimeCore CSR
+#        root * {system.wd}/frontend/AnimeCore/build/
+#        encode gzip zstd
+#	     templates
+#        try_files {path} /app.html
+#        file_server
+#}
 
 # user.example.com
-user.{$SITE_ADDRESS} {
-        # Svelte AnimeCore SSR
-        root * {system.wd}/frontend/User/build/
-        encode gzip zstd
-        try_files {path} /app.html
-        file_server
-}
+#user.{$SITE_ADDRESS} {
+#        # Svelte AnimeCore SSR
+#        root * {system.wd}/frontend/User/build/
+#        encode gzip zstd
+#        try_files {path} /app.html
+#        file_server
+#}
