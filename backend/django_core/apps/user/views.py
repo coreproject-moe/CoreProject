@@ -93,17 +93,18 @@ def signup_view(request: HttpRequest) -> HttpResponse:
 
             user = CustomUser.objects.create_user(**user_data)
             login(request, user)
-            token_model = Token.objects.create(user=user)
+            token_model, _ = Token.objects.get_or_create(user=user)
             response = HttpResponseLocation(reverse_lazy("login_view"))
             response.set_cookie(
                 key="token",
                 value=token_model.token,
                 httponly=False,
-                samesite="lax",
-                domain="." + settings.SITE_ADDRESS
+                samesite=None,
+                domain=f".{settings.SITE_ADDRESS}"
                 if settings.SITE_ADDRESS
-                else request.get_host(),
+                else request.META["HTTP_HOST"],
             )
+
             return response
 
     return render(
@@ -132,13 +133,16 @@ def login_view(request: HttpRequest) -> HttpResponse:
             password=form.cleaned_data.get("password"),
         ):
             login(request, user)
-            token_model = Token.objects.create(user=request.user)
+            token_model, _ = Token.objects.get_or_create(user=request.user)
             response = HttpResponseLocation(reverse_lazy("login_view"))
             response.set_cookie(
                 key="token",
                 value=token_model.token,
                 httponly=False,
-                samesite="lax",
+                samesite=None,
+                domain=f".{settings.SITE_ADDRESS}"
+                if settings.SITE_ADDRESS
+                else request.META["HTTP_HOST"],
             )
             return response
 
