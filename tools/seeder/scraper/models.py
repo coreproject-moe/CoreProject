@@ -14,7 +14,7 @@ class Trailer:
     youtube_id: str
     url: str
     embed_url: str
-    images: Dict[str, str]
+    images: dict[str, str]
 
 
 @dataclass
@@ -27,7 +27,7 @@ class Title:
 class Aired:
     from_date: str
     to_date: str
-    prop: Dict[str, Dict[str, int]]
+    prop: dict[str, dict[str, int]]
     string: str
 
 
@@ -35,14 +35,14 @@ class Aired:
 class MyAnimeList:
     mal_id: int
     url: str
-    images: Dict[str, Image]
+    images: dict[str, Image]
     trailer: Trailer
     approved: bool
-    titles: List[Title]
+    titles: list[Title]
     title: str
     title_english: str
     title_japanese: str
-    title_synonyms: List[str]
+    title_synonyms: list[str]
     type: str
     source: str
     episodes: int

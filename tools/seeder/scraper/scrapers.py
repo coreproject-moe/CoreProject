@@ -17,9 +17,7 @@ class AnimeScraper:
         return AnimeInfo(myanimelist=self.mal, kitsu=self.kitsu, anilist=self.anilist)
 
     def _get_mal_info(self) -> MyAnimeList:
-        data = httpx.get(f"https://api.jikan.moe/v4/anime?q={self.query}").json()[
-            "data"
-        ][0]
+        data = httpx.get(f"https://api.jikan.moe/v4/anime?q={self.query}").json()["data"][0]
         images_data = data["images"]["webp"]
 
         images: Image = Image(
@@ -37,12 +35,12 @@ class AnimeScraper:
         )
 
         titles_data = data["titles"]
-        titles: List[Title] = [
+        titles: list[Title] = [
             Title(type=title_data["type"], title=title_data["title"])
             for title_data in titles_data
         ]
 
-        title_synonyms: List[str] = data["title_synonyms"]
+        title_synonyms: list[str] = data["title_synonyms"]
         aired_data = data["aired"]
         aired: Aired = Aired(
             from_date=aired_data["from"],
@@ -110,9 +108,7 @@ class AnimeScraper:
 
     def _get_kitsu_info(self, query: str) -> Kitsu:
         params = {"page[limit]": "1", "filter[text]": query}
-        data = httpx.get(f"{self.KITSU_BASE_URL}/anime", params=params).json()["data"][
-            0
-        ]
+        data = httpx.get(f"{self.KITSU_BASE_URL}/anime", params=params).json()["data"][0]
         kitsu_id = data["id"]
         link = f'https://kitsu.io/anime/{data["attributes"]["slug"]}'
         return Kitsu(kitsu_id, link)
