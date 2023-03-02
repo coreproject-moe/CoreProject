@@ -91,8 +91,7 @@ def signup_view(request: HttpRequest) -> HttpResponse:
             else:
                 user_data["username"] = username_with_maybe_discriminator
 
-            user = CustomUser.objects.create(**user_data)
-
+            user = CustomUser.objects.create_user(**user_data)
             login(request, user)
             token_model = Token.objects.create(user=user)
             response = HttpResponseLocation(reverse_lazy("login_view"))
@@ -101,6 +100,9 @@ def signup_view(request: HttpRequest) -> HttpResponse:
                 value=token_model.token,
                 httponly=False,
                 samesite="lax",
+                domain="." + settings.SITE_ADDRESS
+                if settings.SITE_ADDRESS
+                else request.get_host(),
             )
             return response
 
@@ -115,6 +117,13 @@ def signup_view(request: HttpRequest) -> HttpResponse:
 
 def login_view(request: HttpRequest) -> HttpResponse:
     form = LoginForm(data=request.POST or None)
+    context = {
+        "form": form,
+        "user": request.user,
+    }
+
+    if request.user.is_authenticated:
+        context["token"] = Token.objects.get(user=request.user).token
 
     if request.method == "POST" and form.is_valid():
         if user := authenticate(
@@ -136,9 +145,7 @@ def login_view(request: HttpRequest) -> HttpResponse:
     return render(
         request,
         "user/login.html",
-        context={
-            "form": form,
-        },
+        context=context,
     )
 
 

@@ -5,48 +5,51 @@
 {% load crispy_forms_tags %}
 
 {% block form %}
-    {% if request.user.is_authenticated %}
+{% if user.is_authenticated %}
+<div class="text-white text-center">
+    Welcome,
+    <br />
+    User : {{ user }}
+    <br />
+    Token : {{ token }}
+    <br />
+    Perhaps you want to
+    <a class="underline" href="{% url 'logout_view' %}">logout</a>?
+</div>
+<!--prettier-ignore-->
+{% else %}
+<form method="post" action="{% url 'login_view' %}">
+    <div class="flex justify-center mb-10">
+        <div class="font-bold text-4xl select-none flex">
+            <span class="inline-flex text-white">c</span>
+            <span class="inline-flex text-warning">o</span>
+            <span class="inline-flex text-white">r</span>
+            <span class="inline-flex text-white">e</span>
+            &nbsp;
+            <span class="inline-flex text-info">p</span>
+            <span class="inline-flex text-info">r</span>
+            <span class="inline-flex text-info">o</span>
+            <span class="inline-flex text-info">j</span>
+            <span class="inline-flex text-info">e</span>
+            <span class="inline-flex text-info">c</span>
+            <span class="inline-flex text-info">t</span>
+        </div>
+    </div>
+    <div class="grid gap-6">
+        {% crispy form %}
+        <div class="flex justify-center items-center gap-2">
+            <button
+                class="btn btn-secondary font-bold text-black"
+                type="submit"
+            >
+                Login
+            </button>
+            or
+            <a class="underline" href="{% url 'signup_view' %}">signup</a>
+        </div>
+    </div>
+</form>
 
-        <p class="text-white text-center">
-            Welcome, {{ request.user }}.
-            <br />
-            Perhaps you want to
-            <a class="underline" href="{% url 'logout_view' %}">logout</a>?
-        </p>
-        <!--prettier-ignore-->
-    {% else %}
-        <form method="post" action="{% url 'login_view' %}">
-            <div class="flex justify-center mb-10">
-                <div class="font-bold text-4xl select-none flex">
-                    <span class="inline-flex text-white">c</span>
-                    <span class="inline-flex text-warning">o</span>
-                    <span class="inline-flex text-white">r</span>
-                    <span class="inline-flex text-white">e</span>
-                    &nbsp;
-                    <span class="inline-flex text-info">p</span>
-                    <span class="inline-flex text-info">r</span>
-                    <span class="inline-flex text-info">o</span>
-                    <span class="inline-flex text-info">j</span>
-                    <span class="inline-flex text-info">e</span>
-                    <span class="inline-flex text-info">c</span>
-                    <span class="inline-flex text-info">t</span>
-                </div>
-            </div>
-            <div class="grid gap-6">
-                {% crispy form %}
-                <div class="flex justify-center items-center gap-2">
-                    <button
-                        class="btn btn-secondary font-bold text-black"
-                        type="submit"
-                    >
-                        Login
-                    </button>
-                    or
-                    <a class="underline" href="{% url 'signup_view' %}">signup</a>
-                </div>
-            </div>
-        </form>
-
-    {% endif %}
-    <!--prettier-ignore-->
+{% endif %}
+<!--prettier-ignore-->
 {% endblock %}
