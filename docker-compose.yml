@@ -72,5 +72,3 @@ services:
         environment:
             - SITE_ADDRESS=${SITE_ADDRESS}
             - LOG_FILE=/data/access.log
-volumes:
-    pgdata:
