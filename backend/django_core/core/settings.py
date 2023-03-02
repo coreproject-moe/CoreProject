@@ -325,6 +325,14 @@ for entry in ALLOWED_HOSTS:
     CORS_ALLOWED_ORIGINS.append(f"https://{entry}")
     CSRF_TRUSTED_ORIGINS.append(f"https://{entry}")
 
+# Uncomment this following block to allow access to only subdomains
+#if SITE_ADDRESS:
+#    SITE_ADDRESS_ESCAPED = SITE_ADDRESS.replace(".", "\\.")
+#    CORS_ALLOWED_ORIGIN_REGEXES = [
+#        rf"^(https?:\/\/)?([\w-]+\.)?{SITE_ADDRESS_ESCAPED}$",
+#    ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_METHODS = [
     "DELETE",
     "GET",

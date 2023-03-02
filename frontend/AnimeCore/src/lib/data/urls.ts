@@ -31,6 +31,12 @@ export class Anilist {
 }
 
 export class UrlMaps {
+    private BASE_URL = "https://backend.coreproject.moe/api/v1";
+
+    public id = (id: number | string) => {
+        return `${this.BASE_URL}/anime/${id}`;
+    };
+
     public get media_url() {
         // return process.env.NODE_ENV === "development" ? get(page).url.origin : "/media";
         return get(page).url.origin;
