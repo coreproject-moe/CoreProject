@@ -102,7 +102,7 @@ def signup_view(request: HttpRequest) -> HttpResponse:
                 samesite=None,
                 domain=f".{settings.SITE_ADDRESS}"
                 if settings.SITE_ADDRESS
-                else request.META["HTTP_HOST"],
+                else request.headers["host"],
             )
 
             return response
@@ -142,7 +142,7 @@ def login_view(request: HttpRequest) -> HttpResponse:
                 samesite=None,
                 domain=f".{settings.SITE_ADDRESS}"
                 if settings.SITE_ADDRESS
-                else request.META["HTTP_HOST"],
+                else request.headers["host"],
             )
             return response
 
