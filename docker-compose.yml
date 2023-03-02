@@ -9,6 +9,9 @@ services:
             - POSTGRES_DB=postgres
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=supersecretpassword
+    redis:
+        restart: unless-stopped
+        image: redis:7.0.5-alpine
 
     django:
         image: coreproject
@@ -21,8 +24,8 @@ services:
             - ./media:/code/django_core/media
         environment:
             - DEBUG=False
-            - DJANGO_CACHE_LOCATION=redis://redis:6379/1
-            - REDIS_URL=redis://redis:6379
+            - "DJANGO_CACHE_LOCATION=redis://redis:6379/1"
+            - REDIS_URL=redis://redis:6379/0
             - CACHE_MIDDLEWARE_SECONDS=500
             - POSTGRES_NAME=postgres
             - POSTGRES_USER=postgres
@@ -33,10 +36,6 @@ services:
             - SITE_ADDRESS=${SITE_ADDRESS}
         depends_on:
             - db
-
-    redis:
-        restart: unless-stopped
-        image: redis:7.0.5-alpine
 
     worker:
         image: coreproject
@@ -51,9 +50,7 @@ services:
             - DEBUG=False
             - DJANGO_CACHE_LOCATION=redis://redis:6379/1
             - CACHE_MIDDLEWARE_SECONDS=500
-            - REDIS_URL=redis://redis:6379
-            - "CELERY_BROKER_URL=redis://redis:6379/0"
-            - "CELERY_RESULT_BACKEND=redis://redis:6379/0"
+            - REDIS_URL=redis://redis:6379/0
             - POSTGRES_NAME=postgres
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=supersecretpassword
