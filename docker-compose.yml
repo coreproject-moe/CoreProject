@@ -15,6 +15,8 @@ services:
         restart: unless-stopped
         build: ./backend
         entrypoint: /code/server_entrypoint.sh
+        dns: 
+           - 1.1.1.1
         volumes:
             - ./media:/code/django_core/media
         environment:
@@ -38,6 +40,8 @@ services:
         image: coreproject
         restart: unless-stopped
         build: ./backend
+        dns: 
+           - 1.1.1.1
         volumes:
             - ./media:/code/django_core/media
         entrypoint: /code/worker_entrypoint.sh
@@ -62,6 +66,8 @@ services:
         image: caddy:alpine
         container_name: caddy
         restart: always
+        dns: 
+           - 1.1.1.1
         ports:
             - 80:80 # Needed for the ACME HTTP-01 challenge.
             - 443:443
