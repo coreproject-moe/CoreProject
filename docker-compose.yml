@@ -20,9 +20,10 @@ services:
         volumes:
             - ./media:/code/django_core/media
         environment:
-            - DJANGO_CACHE_LOCATION=redis://redis:6379/1
-            - CACHE_MIDDLEWARE_SECONDS=500
             - DEBUG=False
+            - DJANGO_CACHE_LOCATION=redis://redis:6379/1
+            - REDIS_URL=redis://redis:6379
+            - CACHE_MIDDLEWARE_SECONDS=500
             - POSTGRES_NAME=postgres
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=supersecretpassword
@@ -47,10 +48,10 @@ services:
             - ./media:/code/django_core/media
         entrypoint: /code/worker_entrypoint.sh
         environment:
+            - DEBUG=False
             - DJANGO_CACHE_LOCATION=redis://redis:6379/1
             - CACHE_MIDDLEWARE_SECONDS=500
-            - DEBUG=False
-            - "REDIS_URL=redis://redis:6379/0"
+            - REDIS_URL=redis://redis:6379
             - "CELERY_BROKER_URL=redis://redis:6379/0"
             - "CELERY_RESULT_BACKEND=redis://redis:6379/0"
             - POSTGRES_NAME=postgres
