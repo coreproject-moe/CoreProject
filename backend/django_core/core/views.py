@@ -68,7 +68,7 @@ ERROR_DICT = {
 }
 
 
-async def home_view(request: HttpRequest) -> HttpResponse:
+def home_view(request: HttpRequest) -> HttpResponse:
     context = {
         "cards": {
             "django": {
@@ -92,7 +92,7 @@ async def home_view(request: HttpRequest) -> HttpResponse:
     return render(request, "home/index.html", context)
 
 
-async def four_zero_zero_view(
+def four_zero_zero_view(
     request: HttpRequest,
     exception: None = None,
 ) -> HttpResponse:
@@ -105,9 +105,7 @@ async def four_zero_zero_view(
     )
 
 
-async def four_zero_three_view(
-    request: HttpRequest, exception: None = None
-) -> HttpResponse:
+def four_zero_three_view(request: HttpRequest, exception: None = None) -> HttpResponse:
     context = ERROR_DICT.get(403)
     context.setdefault("error_status_code", 403)
     return render(
@@ -117,7 +115,7 @@ async def four_zero_three_view(
     )
 
 
-async def four_zero_four_view(
+def four_zero_four_view(
     request: HttpRequest,
     exception: None = None,
 ) -> HttpResponse:
@@ -130,7 +128,7 @@ async def four_zero_four_view(
     )
 
 
-async def five_zero_zero_view(request: HttpRequest) -> HttpResponse:
+def five_zero_zero_view(request: HttpRequest) -> HttpResponse:
     context = ERROR_DICT.get(500)
     context.setdefault("error_status_code", 500)
 

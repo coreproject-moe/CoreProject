@@ -34,7 +34,8 @@ SECRET_KEY = os.environ.get(
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False if os.environ.get("DEBUG") else True
+# DEBUG = False if os.environ.get("DEBUG") else True
+DEBUG = False
 
 # Increase this in future
 # If you increase this make sure to run `migrations`
@@ -200,7 +201,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": os.environ.get("POSTGRES_NAME", "django"),
         "USER": os.environ.get("POSTGRES_USER", "postgres"),
-        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "admin"),
+        "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "supersecretpassword"),
         "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
         "PORT": os.environ.get("POSTGRES_PORT", 5432),
         # https://stackoverflow.com/questions/23504483/django-conn-max-age-setting-error
