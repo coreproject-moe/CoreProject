@@ -19,7 +19,7 @@
     "devDependencies": {
         "@sveltejs/adapter-node": "^1.2.0",
         "@sveltejs/adapter-static": "^2.0.1",
-        "@sveltejs/kit": "^1.9.2",
+        "@sveltejs/kit": "^1.9.3",
         "@sveltejs/adapter-vercel": "^2.2.0",
         "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
         "@tailwindcss/typography": "^0.5.9",
