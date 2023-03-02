@@ -12,6 +12,7 @@ ENV  PIP_DEFAULT_TIMEOUT=100
 # poetry:
 ENV  POETRY_VIRTUALENVS_CREATE=false
 ENV  POETRY_CACHE_DIR='/var/cache/pypoetry'
+ENV DEBUG=false
 
 RUN pip install --no-cache-dir "poetry" && poetry --version
 
@@ -20,7 +21,7 @@ WORKDIR /code
 COPY poetry.lock pyproject.toml /code/
 
 RUN poetry config virtualenvs.create false \
-  && poetry install --no-interaction --no-ansi
+  && poetry install --no-interaction --no-ansi --no-dev
 
 RUN apk --no-cache add nodejs-current npm
 

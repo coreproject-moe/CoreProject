@@ -142,7 +142,7 @@ if DEBUG:
     )
 
 # https://docs.djangoproject.com/en/4.0/topics/cache/#the-per-site-cache-1
-CACHE_MIDDLEWARE_SECONDS = 0
+CACHE_MIDDLEWARE_SECONDS = int(os.environ.get("CACHE_MIDDLEWARE_SECONDS", 0))
 
 
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#configure-internal-ips
@@ -184,12 +184,13 @@ LOGIN_URL = "login_page"
 # Cache
 # https://docs.djangoproject.com/en/4.0/topics/cache/#filesystem-caching
 
-# CACHES = {
-#     "default": {
-#         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-#         "LOCATION": "redis://127.0.0.1:6379",
-#     }
-# }
+if CACHE_MIDDLEWARE_SECONDS != 0:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.redis.RedisCache",
+            "LOCATION": os.environ.get("DJANGO_CACHE_LOCATION", "redis://127.0.0.1:6379"),
+        }
+    }
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases

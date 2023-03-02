@@ -18,6 +18,8 @@ services:
         volumes:
             - ./media:/code/django_core/media
         environment:
+            - DJANGO_CACHE_LOCATION=redis://redis:6379/1
+            - CACHE_MIDDLEWARE_SECONDS=500
             - DEBUG=False
             - POSTGRES_NAME=postgres
             - POSTGRES_USER=postgres
@@ -40,6 +42,8 @@ services:
             - ./media:/code/django_core/media
         entrypoint: /code/worker_entrypoint.sh
         environment:
+            - DJANGO_CACHE_LOCATION=redis://redis:6379/1
+            - CACHE_MIDDLEWARE_SECONDS=500
             - DEBUG=False
             - "REDIS_URL=redis://redis:6379/0"
             - "CELERY_BROKER_URL=redis://redis:6379/0"
