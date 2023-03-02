@@ -7,7 +7,12 @@
 
 # backend.example.com
 backend.{$SITE_ADDRESS} {
-        #  Django Rest API
+        # File server
+        handle_path /media* {
+		root * {system.wd}/media
+		file_server
+	}
+        #  Django
         reverse_proxy django:8000 {
                 @sendfile header X-Sendfile *
                 handle_response @sendfile {
