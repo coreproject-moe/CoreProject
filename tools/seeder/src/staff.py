@@ -9,8 +9,8 @@ from humanize import intcomma, naturaltime
 from termcolor import colored
 
 from requests.sessions import Session
-
-from src._session import session
+from ._report import get_report_message
+from ._session import session
 
 STAFF_LOCK_FILE_NAME = "Staff.lock"
 
@@ -352,27 +352,15 @@ def populate_database(
         EXECUTION_TIME += (end_time - start_time).total_seconds()
 
         print(
-            f"[{EXECUTION_TIME:.2f}]"
-            " "
-            f"Requested `staff_info` for {staff_number}"
-            " | "
-            f"""`starting_number` {
-                starting_number - 1
-                if jikan_data
-                else starting_number
-            }"""
-            " | "
-            f"""[{', '.join(
-                sorted(
-                        set(
-                            SUCCESS_LIST
-                            + ERROR_LIST
-                            + WARNING_LIST
-                        ),
-                        key=lambda string: string[10],
-                    )
-                )
-            }]"""
+            get_report_message(
+                base_field_number=staff_number,
+                starting_number=starting_number - 1 if jikan_data else starting_number,
+                execution_time=EXECUTION_TIME,
+                field_name="staff_info",
+                success_list=SUCCESS_LIST,
+                warning_list=WARNING_LIST,
+                error_list=ERROR_LIST,
+            )
         )
 
         # Reset the list
