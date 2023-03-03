@@ -1,23 +1,12 @@
-import contextlib
-import datetime
 
-from http import HTTPStatus
-from apps.anime.models import AnimeModel, AnimeNameSynonymModel
-from apps.anime.models.anime_genre import AnimeGenreModel
-from apps.anime.models.anime_theme import AnimeThemeModel
+from apps.anime.models import AnimeModel
 from apps.api.filters.anime import AnimeInfoFilters
-from apps.characters.models import CharacterModel
-from apps.producers.models import ProducerModel
-from apps.studios.models import StudioModel
-from apps.user.models import CustomUser
-from ...auth import AuthBearer
-from ninja import File, Form, Query, Router
-from ninja.files import UploadedFile
+from ninja import Query, Router
 from ninja.pagination import paginate
 
 from django.db.models import Q, QuerySet
 from django.db.models.functions import Greatest
-from django.http import Http404, HttpRequest, HttpResponse
+from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
 
 try:

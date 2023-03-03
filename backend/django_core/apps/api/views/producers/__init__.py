@@ -1,18 +1,23 @@
+from http import HTTPStatus
 from ninja import Query, Router
 from ninja.pagination import paginate
 
 from django.db.models import Q
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
+
+from apps.user.models import CustomUser
+
+from ...auth import AuthBearer
 
 from ....producers.models import ProducerModel
 from ...filters.producers import ProducerFilter
-from ...schemas.producers import ProducerSchema
+from ...schemas.producers import ProducerGETSchema, ProducerPOSTSchema
 
 router = Router()
 
 
-@router.get("", response=list[ProducerSchema])
+@router.get("", response=list[ProducerGETSchema])
 @paginate
 def get_producer_info(
     request: HttpRequest,
@@ -36,7 +41,19 @@ def get_producer_info(
     return query
 
 
-@router.get("/{str:producer_id}/", response=ProducerSchema)
+@router.post("", response=ProducerGETSchema, auth=AuthBearer())
+def post_producer_info(request: HttpRequest, payload: ProducerPOSTSchema) -> ProducerModel:
+    user: CustomUser = request.auth
+    if not user.is_superuser:
+        raise HttpResponse(
+            "Superuser is required for this operation", status=HTTPStatus.UNAUTHORIZED
+        )
+
+    instance = ProducerModel.objects.create(**payload.dict(exclude_none=True))
+    return instance
+
+
+@router.get("/{str:producer_id}/", response=ProducerGETSchema)
 def get_individual_producer_info(
     request: HttpRequest,
     producer_id: str,
