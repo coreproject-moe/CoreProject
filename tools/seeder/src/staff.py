@@ -4,13 +4,13 @@ import json
 import os
 import textwrap
 from typing import Any
-
+from ._welcome import get_welcome_message
 from humanize import intcomma, naturaltime
 from termcolor import colored
 
 from requests.sessions import Session
 
-from _session import session
+from src._session import session
 
 STAFF_LOCK_FILE_NAME = "Staff.lock"
 
@@ -27,7 +27,9 @@ SUCCESS_LIST = []
 WARNING_LIST = []
 ERROR_LIST = []
 
-BACKEND_API_URL = "http://127.0.0.1:8000/api/v1/staffs"
+from ._conf import STAFF_ENDPOINT, TOKEN
+
+# Token from from backend
 
 
 def command() -> None:
@@ -68,59 +70,15 @@ def command() -> None:
             elif "n" in answer:
                 break
 
-    welcome_message = textwrap.dedent(
-        f"""
-            Starting Number : {
-                colored(
-                    str(
-                        intcomma(
-                            staff_number
-                        )
-                    ),
-                    color='green'
-
-                )
-            }
-            Total `staff` to get :  {
-                colored(
-                    str(
-                        intcomma(
-                            ending_number
-                        )
-                    ),
-                    color='green'
-                )
-            }
-            Time to finish : {
-                colored(
-                    str(
-                        naturaltime(
-                            datetime.now()
-                            +
-                            timedelta(
-                                seconds=
-                                    round(
-                                        (
-                                            ending_number
-                                            -
-                                            staff_number
-                                        )
-                                        *
-                                        (
-                                            EXECUTION_TIME
-                                            /
-                                            starting_number
-                                        )
-                                )
-                            )
-                        )
-                    ),
-                    color='green'
-                )
-            }
-        """
+    print(
+        get_welcome_message(
+            staff_number,
+            ending_number,
+            EXECUTION_TIME,
+            starting_number,
+            "staff",
+        )
     )
-    print(welcome_message)
 
     # Magic starts here
     populate_database(
@@ -369,7 +327,14 @@ def populate_database(
                         f"{staff_number}.{image_url.split('.')[-1]}",
                         BytesIO(image.content).read(),
                     )
-            res = session.post(BACKEND_API_URL, data=formdata, files=file_data)
+            res = session.post(
+                STAFF_ENDPOINT,
+                data=formdata,
+                files=file_data,
+                headers={
+                    "Authorization": f"Bearer {TOKEN}",
+                },
+            )
             if res.status_code == 200:
                 if jikan_id := jikan_data.get("mal_id"):
                     SUCCESSFUL_JIKAN_IDS.append(jikan_id)

@@ -1,15 +1,13 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 from io import BytesIO
 import json
 import os
-import textwrap
-
-from humanize import intcomma, naturaltime
+from ._welcome import get_welcome_message
 from termcolor import colored
 
-
+from ._conf import CHARACTER_ENDPOINT, TOKEN
 from requests.sessions import Session
-from _session import session
+from src._session import session
 
 CHARACTER_LOCK_FILE_NAME = "Character.lock"
 
@@ -25,11 +23,6 @@ SUCCESSFUL_ANILIST_IDS = []
 SUCCESS_LIST = []
 WARNING_LIST = []
 ERROR_LIST = []
-
-BACKEND_API_URL = "https://backend.coreproject.moe/api/v1/characters"
-
-# Token from from backend
-TOKEN = ""
 
 
 def command() -> None:
@@ -69,59 +62,15 @@ def command() -> None:
             elif "n" in answer:
                 break
 
-    welcome_message = textwrap.dedent(
-        f"""
-            Starting Number : {
-                colored(
-                    text=str(
-                        intcomma(
-                            character_number
-                        )
-                    ),
-                    color='green'
-                )
-            }
-            Total `characters` to get : {
-                colored(
-                    text=str(
-                        intcomma(
-                            ending_number
-                        )
-                    ),
-                    color='green'
-                )
-            }
-            Time to finish : {
-                colored(
-                    text=str(
-                        naturaltime(
-                            datetime.now()
-                            +
-                            timedelta(
-                                seconds=
-                                    round(
-                                        (
-                                            ending_number
-                                            -
-                                            character_number
-                                        )
-                                        *
-                                        (
-                                            EXECUTION_TIME
-                                            /
-                                            starting_number
-                                        )
-                                )
-                            )
-                        )
-                    ),
-                    color='green'
-                )
-            }
-        """
+    print(
+        get_welcome_message(
+            character_number,
+            ending_number,
+            EXECUTION_TIME,
+            starting_number,
+            "characters",
+        )
     )
-    print(welcome_message)
-
     # Magic starts here
     populate_database(
         session=session,
@@ -396,7 +345,7 @@ def populate_database(
                 formdata["about"] = about
 
             res = session.post(
-                BACKEND_API_URL,
+                CHARACTER_ENDPOINT,
                 data=formdata,
                 files=file_data,
                 headers={
@@ -467,7 +416,3 @@ def populate_database(
         )
 
         print(message)
-
-
-if __name__ == "__main__":
-    command()

@@ -9,7 +9,7 @@ from humanize import intcomma, naturaltime
 from termcolor import colored
 
 
-from _session import session
+from src._session import session
 
 STUDIO_LOCK_FILE_NAME = "Studios.lock"
 
