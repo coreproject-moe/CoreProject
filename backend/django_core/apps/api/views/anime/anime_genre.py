@@ -9,12 +9,12 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 
 from apps.api.auth import AuthBearer
 
-from ...schemas.anime.anime_genre import AnimeGenreSchema
+from ...schemas.anime.anime_genre import AnimeGenreGETSchema, AnimeGenrePOSTSchema
 
 router = Router()
 
 
-@router.get("/{int:anime_id}/genres", response=list[AnimeGenreSchema])
+@router.get("/{int:anime_id}/genres", response=list[AnimeGenreGETSchema])
 def get_individual_anime_genre_info(
     request: HttpRequest,
     anime_id: int,
@@ -25,16 +25,17 @@ def get_individual_anime_genre_info(
     return query
 
 
-@router.post("/{int:anime_id}/genres", response=AnimeGenreSchema, auth=AuthBearer())
+@router.post("/{int:anime_id}/genres", response=AnimeGenreGETSchema, auth=AuthBearer())
 def post_individual_anime_genre_info(
     request: HttpRequest,
     anime_id: int,
-    payload: AnimeGenreSchema,
+    payload: AnimeGenrePOSTSchema,
 ) -> AnimeGenreModel:
     user: CustomUser = request.auth
     if not user.is_superuser:
         raise HttpResponse(
-            "Superuser is required for this operation", status=HTTPStatus.UNAUTHORIZED
+            "Superuser is required for this operation",
+            status=HTTPStatus.UNAUTHORIZED,
         )
     # Set this at top
     # Because if there is no anime_info_model with corresponding query
