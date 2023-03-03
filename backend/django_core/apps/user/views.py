@@ -2,6 +2,7 @@ import hashlib
 from http import HTTPStatus
 import textwrap
 
+from typing import cast
 from django_htmx.http import HttpResponseLocation
 import httpx
 
@@ -14,6 +15,34 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from .forms import LoginForm, RegisterForm, UsernameWithDiscriminatorForm
 from .models import CustomUser, Token
+
+
+# Helper functions
+
+
+def set_cookies(
+    request: HttpRequest,
+    response: HttpResponse,
+    token: str,
+) -> None:
+    # running on a a port ( which is fine )
+    hostname = request.get_host()
+
+    if ":" in hostname:
+        host = hostname.split(":")[0]
+    else:
+        host = hostname
+
+    response.set_cookie(
+        key="token",
+        value=token,
+        httponly=False,
+        samesite=None,
+        domain=f".{settings.SITE_ADDRESS}" if settings.SITE_ADDRESS else host,
+    )
+
+
+# Create your views here
 
 
 async def avatar_view(
@@ -94,17 +123,9 @@ def signup_view(request: HttpRequest) -> HttpResponse:
             user = CustomUser.objects.create_user(**user_data)
             login(request, user)
             token_model, _ = Token.objects.get_or_create(user=user)
-            response = HttpResponseLocation(reverse_lazy("login_view"))
-            response.set_cookie(
-                key="token",
-                value=token_model.token,
-                httponly=False,
-                samesite=None,
-                domain=f".{settings.SITE_ADDRESS}"
-                if settings.SITE_ADDRESS
-                else request.headers["host"],
-            )
-
+            htmx_response = HttpResponseLocation(reverse_lazy("login_view"))
+            response = cast(HttpResponse, htmx_response)
+            set_cookies(request, response, token_model.token)
             return response
 
     return render(
@@ -134,16 +155,9 @@ def login_view(request: HttpRequest) -> HttpResponse:
         ):
             login(request, user)
             token_model, _ = Token.objects.get_or_create(user=request.user)
-            response = HttpResponseLocation(reverse_lazy("login_view"))
-            response.set_cookie(
-                key="token",
-                value=token_model.token,
-                httponly=False,
-                samesite=None,
-                domain=f".{settings.SITE_ADDRESS}"
-                if settings.SITE_ADDRESS
-                else request.headers["host"],
-            )
+            htmx_response = HttpResponseLocation(reverse_lazy("login_view"))
+            response = cast(HttpResponse, htmx_response)
+            set_cookies(request, response, token_model.token)
             return response
 
     return render(
