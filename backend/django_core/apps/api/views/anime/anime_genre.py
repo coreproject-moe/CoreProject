@@ -23,3 +23,30 @@ def get_individual_anime_genre_info(
         get_object_or_404(AnimeModel, pk=anime_id).genres,
     )
     return query
+
+
+@router.post("/{int:anime_id}/genres", response=AnimeGenreGETSchema, auth=AuthBearer())
+def post_individual_anime_genre_info(
+    request: HttpRequest,
+    anime_id: int,
+    payload: list[AnimeGenrePOSTSchema],
+) -> AnimeGenreModel:
+    user: CustomUser = request.auth
+    if not user.is_superuser:
+        raise HttpResponse(
+            "Superuser is required for this operation", status=HTTPStatus.UNAUTHORIZED
+        )
+
+    anime_info_model = get_object_or_404(AnimeModel, pk=anime_id)
+    instance_objects = []
+    for object in payload:
+        instance_objects.append(
+            AnimeGenreModel(
+                type="anime",
+                **object.dict(exclude_none=True),
+            )
+        )
+
+    instance = AnimeGenreModel.objects.bulk_create(instance_objects)
+    query = anime_info_model.genres.add(instance)
+    return query
