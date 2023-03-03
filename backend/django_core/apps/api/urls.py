@@ -22,7 +22,20 @@ api.add_router(
     anime_router,
     tags=["anime_info"],
 )
-
+anime_router.add_router(
+    "",
+    import_string(
+        "apps.api.views.anime.genres.router",
+    ),
+    tags=["anime_info"],
+)
+anime_router.add_router(
+    "",
+    import_string(
+        "apps.api.views.anime.themes.router",
+    ),
+    tags=["anime_info"],
+)
 anime_router.add_router(
     "",
     import_string(
@@ -59,13 +72,6 @@ anime_router.add_router(
     tags=["anime_info"],
 )
 
-anime_router.add_router(
-    "",
-    import_string(
-        "apps.api.views.anime.genres.router",
-    ),
-    tags=["anime_info"],
-)
 
 # Episodes
 

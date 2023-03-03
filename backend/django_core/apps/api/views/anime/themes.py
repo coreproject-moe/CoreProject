@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from apps.anime.models.anime_genre import AnimeGenreModel
+from apps.anime.models.anime_theme import AnimeThemeModel
 from ninja import Router
 from apps.user.models import CustomUser
 
@@ -7,24 +7,24 @@ from django.http import HttpRequest, HttpResponse
 
 from apps.api.auth import AuthBearer
 
-from ...schemas.anime.anime_genre import AnimeGenreGETSchema, AnimeGenrePOSTSchema
+from ...schemas.anime.anime_theme import AnimeThemePOSTSchema, AnimeThemeGETSchema
 
 router = Router()
 
 
-@router.get("/genres", response=list[AnimeGenreGETSchema])
-def get_anime_genre_info(
+@router.get("/themes", response=list[AnimeThemeGETSchema])
+def get_anime_theme_info(
     request: HttpRequest,
-) -> list[AnimeGenreModel]:
-    query = AnimeGenreModel.objects.filter(type__icontains="anime")
+) -> list[AnimeThemeModel]:
+    query = AnimeThemeModel.objects.filter(type__icontains="anime")
     return query
 
 
-@router.post("/genres", response=AnimeGenreGETSchema, auth=AuthBearer())
-def post_anime_genre_info(
+@router.post("/themes", response=AnimeThemeGETSchema, auth=AuthBearer())
+def post_anime_theme_info(
     request: HttpRequest,
-    payload: list[AnimeGenrePOSTSchema],
-) -> list[AnimeGenreModel]:
+    payload: list[AnimeThemePOSTSchema],
+) -> list[AnimeThemeModel]:
     user: CustomUser = request.auth
     if not user.is_superuser:
         raise HttpResponse(
@@ -34,11 +34,11 @@ def post_anime_genre_info(
     instance_objects = []
     for object in payload:
         instance_objects.append(
-            AnimeGenreModel(
+            AnimeThemeModel(
                 type="anime",
                 **object.dict(exclude_none=True),
             )
         )
 
-    query = AnimeGenreModel.objects.bulk_create(instance_objects)
+    query = AnimeThemeModel.objects.bulk_create(instance_objects)
     return query

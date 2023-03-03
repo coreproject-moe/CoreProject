@@ -30,7 +30,7 @@ def post_individual_anime_genre_info(
     request: HttpRequest,
     anime_id: int,
     payload: list[AnimeGenrePOSTSchema],
-) -> AnimeGenreModel:
+) -> list[AnimeGenreModel]:
     user: CustomUser = request.auth
     if not user.is_superuser:
         raise HttpResponse(
@@ -48,5 +48,6 @@ def post_individual_anime_genre_info(
         )
 
     instance = AnimeGenreModel.objects.bulk_create(instance_objects)
-    query = anime_info_model.genres.add(instance)
-    return query
+    anime_info_model.genres.add(instance)
+
+    return instance

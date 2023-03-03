@@ -11,4 +11,7 @@ class AnimeGenreGETSchema(ModelSchema):
 class AnimeGenrePOSTSchema(ModelSchema):
     class Config:
         model = AnimeGenreModel
-        model_exclude = ["type", "id"]
+        model_exclude = [
+            "id",
+            "type",
+        ]
