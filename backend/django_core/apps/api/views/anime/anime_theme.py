@@ -45,6 +45,6 @@ def post_individual_anime_theme_info(
     )
 
     instance: AnimeThemeModel = query[0]
-    anime_info_model.studios.add(instance)
+    anime_info_model.themes.add(instance)
 
     return instance
