@@ -1,11 +1,17 @@
 import sys
 
-if sys.argv[1] == "character":
-    from src.character import command
+if argument := sys.argv[1]:
+    if argument == "character":
+        from src.character import command
 
-    command()
+        command()
 
-elif sys.argv[1] == "staff":
-    from src.staff import command
+    elif argument == "staff":
+        from src.staff import command
 
-    command()
+        command()
+
+    elif argument == "genre":
+        from src.genre import command
+
+        command()

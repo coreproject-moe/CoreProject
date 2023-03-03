@@ -29,3 +29,4 @@ requires = [
 [tool.poe.tasks]
 seed_character = 'python seed.py character'
 seed_staff = 'python seed.py staff'
+seed_genre = 'python seed.py genre'
