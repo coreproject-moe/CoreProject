@@ -48,7 +48,9 @@ def post_producer_info(request: HttpRequest, payload: ProducerPOSTSchema) -> Pro
         raise HttpResponse(
             "Superuser is required for this operation", status=HTTPStatus.UNAUTHORIZED
         )
-    ProducerModel.objects.get
+
+    instance = ProducerModel.objects.create(**payload.dict(exclude_none=True))
+    return instance
 
 
 @router.get("/{str:producer_id}/", response=ProducerGETSchema)

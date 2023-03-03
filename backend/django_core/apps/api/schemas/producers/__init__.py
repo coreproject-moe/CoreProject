@@ -14,5 +14,4 @@ class ProducerPOSTSchema(ModelSchema):
         model = ProducerModel
         model_exclude = [
             "id",
-            "type",
         ]
