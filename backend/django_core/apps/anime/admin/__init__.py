@@ -72,6 +72,12 @@ class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel]):
             },
         ),
         (
+            ("Anime Sourece"),
+            {
+                "fields": ("source",),
+            },
+        ),
+        (
             ("Anime Time Info"),
             {
                 "fields": (

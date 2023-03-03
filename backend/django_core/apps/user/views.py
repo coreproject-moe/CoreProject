@@ -29,16 +29,16 @@ def set_cookies(
     hostname = request.get_host()
 
     if ":" in hostname:
-        host = hostname.split(":")[0]
+        domain = hostname.split(":")[0]
     else:
-        host = hostname
+        domain = hostname
 
     response.set_cookie(
         key="token",
         value=token,
         httponly=False,
         samesite=None,
-        domain=f".{settings.SITE_ADDRESS}" if settings.SITE_ADDRESS else host,
+        domain=f".{settings.SITE_ADDRESS}" if settings.SITE_ADDRESS else domain,
     )
 
 
