@@ -45,7 +45,7 @@ def post_individual_anime_theme_info(
                 **object.dict(exclude_none=True),
             )
         )
-        
+
     instance = AnimeThemeModel.objects.bulk_create(instance_objects)
     anime_info_model.themes.add(instance)
 
