@@ -9,12 +9,12 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 from apps.api.auth import AuthBearer
 from apps.user.models import CustomUser
 
-from ...schemas.producers import ProducerSchema
+from ...schemas.producers import ProducerGETSchema
 
 router = Router()
 
 
-@router.get("/{int:anime_id}/producers", response=list[ProducerSchema])
+@router.get("/{int:anime_id}/producers", response=list[ProducerGETSchema])
 def get_individual_anime_producer_info(
     request: HttpRequest,
     anime_id: int,
@@ -25,11 +25,11 @@ def get_individual_anime_producer_info(
     return query
 
 
-@router.post("/{int:anime_id}/producers", response=ProducerSchema, auth=AuthBearer())
+@router.post("/{int:anime_id}/producers", response=ProducerGETSchema, auth=AuthBearer())
 def post_individual_anime_producer_info(
     request: HttpRequest,
     anime_id: int,
-    payload: ProducerSchema,
+    payload: ProducerGETSchema,
 ) -> ProducerModel:
     user: CustomUser = request.auth
     if not user.is_superuser:

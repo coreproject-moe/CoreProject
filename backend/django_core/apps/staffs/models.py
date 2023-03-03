@@ -13,7 +13,8 @@ class StaffAlternateNameModel(models.Model):
         return f"{self.name}"
 
     class Meta:
-        verbose_name = "Staff | People ( Alternate Names )"
+        verbose_name = "Staff | People ( Alternate Name )"
+        verbose_name_plural = "Staffs | People ( Alternate Names )"
 
 
 class StaffModel(models.Model):
