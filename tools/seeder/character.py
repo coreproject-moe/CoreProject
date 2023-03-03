@@ -26,7 +26,10 @@ SUCCESS_LIST = []
 WARNING_LIST = []
 ERROR_LIST = []
 
-BACKEND_API_URL = "http://127.0.0.1:8000/api/v1/characters"
+BACKEND_API_URL = "https://backend.coreproject.moe/api/v1/characters"
+
+# Token from from backend
+TOKEN = ""
 
 
 def command() -> None:
@@ -392,7 +395,14 @@ def populate_database(
             if about := jikan_data.get("character_about", None):
                 formdata["about"] = about
 
-            res = session.post(BACKEND_API_URL, data=formdata, files=file_data)
+            res = session.post(
+                BACKEND_API_URL,
+                data=formdata,
+                files=file_data,
+                headers={
+                    "Authorization": f"Bearer {TOKEN}",
+                },
+            )
             if res.status_code == 200:
                 if successful_kitsu_id := kitsu_data.get("kitsu_id", None):
                     SUCCESSFUL_KITSU_IDS.append(successful_kitsu_id)
