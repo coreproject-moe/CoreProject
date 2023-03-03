@@ -7,7 +7,8 @@ from termcolor import colored
 
 from ._conf import CHARACTER_ENDPOINT, TOKEN
 from requests.sessions import Session
-from src._session import session
+from ._session import session
+from ._report import get_report_message
 
 CHARACTER_LOCK_FILE_NAME = "Character.lock"
 
@@ -369,27 +370,16 @@ def populate_database(
         end_time = datetime.now()
         EXECUTION_TIME += (end_time - start_time).total_seconds()
 
-        message = (
-            f"[{round(EXECUTION_TIME, 2):2f}]"
-            " "
-            f"Requested `character_info` for {character_number}"
-            " | "
-            f"""`starting_number` {
-                    starting_number - 1
-                    if jikan_data else starting_number
-            }"""
-            " | "
-            f"""[{', '.join(
-                sorted(
-                    (
-                        SUCCESS_LIST +
-                        ERROR_LIST +
-                        WARNING_LIST
-                    ),
-                    key=lambda string: string[10],
-                    )
-                )
-            }]"""
+        print(
+            get_report_message(
+                base_field_number=character_number,
+                starting_number=starting_number - 1 if jikan_data else starting_number,
+                execution_time=EXECUTION_TIME,
+                field_name="character_info",
+                success_list=SUCCESS_LIST,
+                error_list=ERROR_LIST,
+                warning_list=WARNING_LIST,
+            )
         )
         # Reset the list
         SUCCESS_LIST.clear()
@@ -414,5 +404,3 @@ def populate_database(
             open(CHARACTER_LOCK_FILE_NAME, "w", encoding="utf-8"),
             indent=2,
         )
-
-        print(message)
