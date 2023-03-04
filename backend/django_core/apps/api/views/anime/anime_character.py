@@ -1,13 +1,13 @@
 from http import HTTPStatus
+
 from apps.anime.models import AnimeModel
+from apps.api.auth import AuthBearer
 from apps.characters.models import CharacterModel
+from apps.user.models import CustomUser
 from ninja import Router
 
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
-
-from apps.user.models import CustomUser
-from apps.api.auth import AuthBearer
 
 from ...schemas.characters import CharacterSchema
 

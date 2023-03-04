@@ -1,18 +1,15 @@
 from http import HTTPStatus
+
+from apps.api.auth import AuthBearer
 from apps.characters.models import CharacterModel
+from apps.user.models import CustomUser
 from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from ninja.pagination import paginate
-from apps.user.models import CustomUser
-
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import get_object_or_404
 
 from django.db.models import Q, QuerySet
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
-
-from apps.api.auth import AuthBearer
 
 try:
     from django.contrib.postgres.search import TrigramSimilarity

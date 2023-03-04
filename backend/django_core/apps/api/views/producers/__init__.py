@@ -1,4 +1,6 @@
 from http import HTTPStatus
+
+from apps.user.models import CustomUser
 from ninja import Query, Router
 from ninja.pagination import paginate
 
@@ -6,11 +8,8 @@ from django.db.models import Q
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
 
-from apps.user.models import CustomUser
-
-from ...auth import AuthBearer
-
 from ....producers.models import ProducerModel
+from ...auth import AuthBearer
 from ...filters.producers import ProducerFilter
 from ...schemas.producers import ProducerGETSchema, ProducerPOSTSchema
 
