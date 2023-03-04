@@ -5,8 +5,8 @@ from asgiref.sync import sync_to_async
 from celery import shared_task
 import httpx
 
-from django.core.files import File
 from django.conf import settings
+from django.core.files import File
 from django.core.files.storage import FileSystemStorage
 
 from ..episodes.models import EpisodeModel
@@ -33,7 +33,7 @@ async def post_files_to_streamsb(
             "file": file,
         },
         data={
-            "api_key": STREAMSB_KEY,
+            "api_key": settings.STREAMSB_KEY,
             "json": "1",
         },
     )
