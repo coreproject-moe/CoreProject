@@ -28,6 +28,7 @@ def get_individual_episodes(
 @router.post("/{int:anime_id}/episodes", response=EpisodeGETSchema, auth=AuthBearer())
 def post_individual_episodes(
     request: HttpRequest,
+    anime_id: int,
     episode_number: int = Form(...),
     episode_name: str = Form(...),
     episode_cover: UploadedFile | None = File(default=None),
