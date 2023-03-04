@@ -4,6 +4,8 @@ from apps.episodes.models import EpisodeModel
 from ninja import Router, Form, File
 from ninja.files import UploadedFile
 
+import json
+from typing import Any
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
 
@@ -33,6 +35,9 @@ def post_individual_episodes(
     episode_name: str = Form(...),
     episode_cover: UploadedFile | None = File(default=None),
     episode_summary: str = Form(...),
+    # FIX THIS ASAP
+    # THIS SHOULD BE `dict[str,str]`
+    providers: Any | None = Form(default=None),
 ) -> EpisodeModel:
     user: CustomUser = request.auth
     if not user.is_superuser:
@@ -50,13 +55,12 @@ def post_individual_episodes(
         "episode_name": episode_name,
         "episode_cover": episode_cover,
         "episode_summary": episode_summary,
+        "providers": json.loads(providers),
     }
 
-    query = EpisodeModel.objects.create(
+    instance = EpisodeModel.objects.create(
         **{key: value for key, value in payload.items() if value}
     )
-
-    instance: EpisodeModel = query[0]
-    anime_info_model.studios.add(instance)
+    anime_info_model.episodes.add(instance)
 
     return instance
