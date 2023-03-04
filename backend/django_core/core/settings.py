@@ -121,8 +121,11 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     # Cors headers
     "corsheaders.middleware.CorsMiddleware",
+    # Allow Patch files
+    "apps.api.middleware.process_put_patch",
     # HTMX middleware
     "django_htmx.middleware.HtmxMiddleware",
+    # Django
     "django.middleware.cache.UpdateCacheMiddleware",  # Cache
     "django.middleware.common.CommonMiddleware",
     "django.middleware.cache.FetchFromCacheMiddleware",  # Cache
