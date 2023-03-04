@@ -1,4 +1,7 @@
 from http import HTTPStatus
+
+from apps.api.auth import AuthBearer
+from apps.user.models import CustomUser
 from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from ninja.pagination import paginate
@@ -7,9 +10,6 @@ from django.db.models import Q, QuerySet
 from django.db.models.functions import Greatest
 from django.http import Http404, HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
-
-from apps.user.models import CustomUser
-from apps.api.auth import AuthBearer
 
 from ....staffs.models import StaffAlternateNameModel, StaffModel
 from ...filters.staffs import StaffFilter

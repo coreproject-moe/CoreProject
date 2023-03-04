@@ -1,15 +1,18 @@
 from http import HTTPStatus
+import uuid
+
 from apps.anime.models import AnimeModel
+from apps.api.auth import AuthBearer
+from apps.api.tasks import upload_file_to_providers
 from apps.episodes.models import EpisodeModel
-from ninja import Router, Form, File
+from apps.user.models import CustomUser
+from ninja import File, Form, Router
 from ninja.files import UploadedFile
 
-import json
+from django.core.files.storage import FileSystemStorage
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
 
-from apps.api.auth import AuthBearer
-from apps.user.models import CustomUser
 from ...schemas.episodes import EpisodeGETSchema
 
 router = Router()
@@ -33,10 +36,8 @@ def post_individual_episodes(
     episode_number: int = Form(...),
     episode_name: str = Form(...),
     episode_cover: UploadedFile | None = File(default=None),
+    episode_file: UploadedFile | None = File(default=None),
     episode_summary: str = Form(...),
-    # FIX THIS ASAP
-    # THIS SHOULD BE `dict[str,str]`
-    providers: str | None = Form(default=None),
 ) -> EpisodeModel:
     user: CustomUser = request.auth
     if not user.is_superuser:
@@ -54,12 +55,17 @@ def post_individual_episodes(
         "episode_name": episode_name,
         "episode_cover": episode_cover,
         "episode_summary": episode_summary,
-        "providers": json.loads(providers),
     }
 
     instance = EpisodeModel.objects.create(
         **{key: value for key, value in payload.items() if value}
     )
     anime_info_model.episodes.add(instance)
+
+    # These tasks are here for celery actually
+    if episode_file:
+        file_name = f"temp/{uuid.uuid4()}/{episode_file.name}"
+        FileSystemStorage().save(name=file_name, content=episode_file)
+        upload_file_to_providers.delay(pk=instance.pk, file_name=file_name)
 
     return instance

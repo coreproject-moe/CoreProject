@@ -1,13 +1,13 @@
 from http import HTTPStatus
+
 from apps.anime.models import AnimeModel
+from apps.api.auth import AuthBearer
 from apps.producers.models import ProducerModel
+from apps.user.models import CustomUser
 from ninja import Router
 
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
-
-from apps.api.auth import AuthBearer
-from apps.user.models import CustomUser
 
 from ...schemas.producers import ProducerGETSchema
 
