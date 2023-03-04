@@ -1,5 +1,5 @@
 from django.utils.decorators import sync_and_async_middleware
-from typing import Callable
+from collections.abc import Callable
 from django.http import HttpRequest, HttpResponse
 from asgiref.sync import sync_to_async
 

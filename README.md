@@ -66,7 +66,7 @@ Core Project is a collection of several projects - animecore, mangacore & soundc
 -   Search
 -   Clean & feature-rich UI
 -   MAL-sync support
--   and more!
+-   and many more!
 
 All features are under development.
 
