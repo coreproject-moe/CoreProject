@@ -28,9 +28,9 @@ class AnimeNameSynonymModel(models.Model):
 
 
 class AnimeModel(models.Model):
-    mal_id = models.IntegerField(unique=True, blank=False, null=True)
-    anilist_id = models.IntegerField(unique=True, blank=False, null=True)
-    kitsu_id = models.IntegerField(unique=True, blank=False, null=True)
+    mal_id = models.IntegerField(unique=True, blank=True, null=True)
+    anilist_id = models.IntegerField(unique=True, blank=True, null=True)
+    kitsu_id = models.IntegerField(unique=True, blank=True, null=True)
 
     # These 3 fields can't be null or else search vector will throw an error
     name = models.CharField(

@@ -1,4 +1,3 @@
-
 from apps.anime.models import AnimeModel
 from apps.api.filters.anime import AnimeInfoFilters
 from ninja import Query, Router
