@@ -1,8 +1,8 @@
 import hashlib
 from http import HTTPStatus
 import textwrap
-
 from typing import cast
+
 from django_htmx.http import HttpResponseLocation
 import httpx
 
@@ -13,9 +13,9 @@ from django.core.validators import URLValidator
 from django.http import FileResponse, HttpRequest, HttpResponse, StreamingHttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy
+
 from .forms import LoginForm, RegisterForm, UsernameWithDiscriminatorForm
 from .models import CustomUser, Token
-
 
 # Helper functions
 

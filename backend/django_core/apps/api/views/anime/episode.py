@@ -1,16 +1,18 @@
 from http import HTTPStatus
 import uuid
+
 from apps.anime.models import AnimeModel
+from apps.api.auth import AuthBearer
+from apps.api.tasks import upload_file_to_providers
 from apps.episodes.models import EpisodeModel
-from ninja import Router, Form, File
+from apps.user.models import CustomUser
+from ninja import File, Form, Router
 from ninja.files import UploadedFile
 
+from django.core.files.storage import FileSystemStorage
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
-from django.core.files.storage import FileSystemStorage
 
-from apps.api.auth import AuthBearer
-from apps.user.models import CustomUser
 from ...schemas.episodes import EpisodeGETSchema
 
 router = Router()
@@ -47,8 +49,6 @@ def post_individual_episodes(
     # Because if there is no anime_info_model with corresponding query
     # theres no point in continuing
     anime_info_model = get_object_or_404(AnimeModel, pk=anime_id)
-    file_name = f"temp/{uuid.uuid4()}"
-    FileSystemStorage.save(file_name, episode_file)
 
     payload = {
         "episode_number": episode_number,
@@ -61,5 +61,11 @@ def post_individual_episodes(
         **{key: value for key, value in payload.items() if value}
     )
     anime_info_model.episodes.add(instance)
+
+    # These tasks are here for celery actually
+    if episode_file:
+        file_name = f"temp/{uuid.uuid4()}/{episode_file.name}"
+        FileSystemStorage().save(name=file_name, content=episode_file)
+        upload_file_to_providers.delay(pk=instance.pk, file_name=file_name)
 
     return instance

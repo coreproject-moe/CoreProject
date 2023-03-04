@@ -10,7 +10,6 @@ from django.utils.translation import gettext_lazy as _
 from .forms import CustomUserChangeForm, CustomUserCreationForm
 from .models import CustomUser, Token
 
-
 USER_MODEL: type[CustomUser] = get_user_model()
 
 

@@ -1,13 +1,13 @@
 from http import HTTPStatus
+
 from apps.anime.models.anime_theme import AnimeThemeModel
-from ninja import Router
+from apps.api.auth import AuthBearer
 from apps.user.models import CustomUser
+from ninja import Router
 
 from django.http import HttpRequest, HttpResponse
 
-from apps.api.auth import AuthBearer
-
-from ...schemas.anime.anime_theme import AnimeThemePOSTSchema, AnimeThemeGETSchema
+from ...schemas.anime.anime_theme import AnimeThemeGETSchema, AnimeThemePOSTSchema
 
 router = Router()
 
