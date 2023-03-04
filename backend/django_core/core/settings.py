@@ -41,9 +41,11 @@ DEBUG = False if os.environ.get("DEBUG") else True
 # If you increase this make sure to run `migrations`
 DISCRIMINATOR_LENGTH = 4
 
+
+# Our Secret Keys
 MAL_CLIENT_ID = os.environ.get("MAL_CLIENT_ID")
 MAL_CLIENT_SECRET = os.environ.get("MAL_CLIENT_SECRET")
-
+STREAMSB_KEY = os.environ.get("STREAMSB_KEY")
 
 # HOST configurations
 # We are using this to hyperlink model relations

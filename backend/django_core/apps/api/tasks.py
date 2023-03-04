@@ -6,6 +6,7 @@ from celery import shared_task
 import httpx
 
 from django.core.files import File
+from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 
 from ..episodes.models import EpisodeModel
@@ -14,14 +15,13 @@ from ..episodes.models import EpisodeModel
 async def post_files_to_streamsb(
     file: File,
 ):
-    STREAMSB_KEY = "9872h2ymuvumhyu7z6tb"
     STREAMDB_SERVER_URL = "https://api.streamsb.com/api/upload/server"
     CLIENT = httpx.AsyncClient()
 
     server_url_res = await CLIENT.get(
         STREAMDB_SERVER_URL,
         params={
-            "key": STREAMSB_KEY,
+            "key": settings.STREAMSB_KEY,
         },
     )
     server_url_res_json = server_url_res.json()
