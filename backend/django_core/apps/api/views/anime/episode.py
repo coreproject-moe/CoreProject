@@ -5,7 +5,6 @@ from ninja import Router, Form, File
 from ninja.files import UploadedFile
 
 import json
-from typing import Any
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
 
@@ -37,7 +36,7 @@ def post_individual_episodes(
     episode_summary: str = Form(...),
     # FIX THIS ASAP
     # THIS SHOULD BE `dict[str,str]`
-    providers: Any | None = Form(default=None),
+    providers: str | None = Form(default=None),
 ) -> EpisodeModel:
     user: CustomUser = request.auth
     if not user.is_superuser:
