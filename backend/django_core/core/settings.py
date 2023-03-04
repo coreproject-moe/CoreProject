@@ -48,8 +48,8 @@ MAL_CLIENT_SECRET = os.environ.get("MAL_CLIENT_SECRET")
 # HOST configurations
 # We are using this to hyperlink model relations
 
-HOSTNAME = "http://127.0.0.1:8000"
 SITE_ADDRESS = os.environ.get("SITE_ADDRESS")
+HOSTNAME = SITE_ADDRESS if SITE_ADDRESS else "http://127.0.0.1:9000"
 
 # Application definition
 
