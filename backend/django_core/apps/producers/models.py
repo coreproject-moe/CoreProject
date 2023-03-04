@@ -30,7 +30,7 @@ class ProducerModel(models.Model):
     about = models.TextField(null=True, blank=True)
 
     def __str__(self) -> str:
-        return f"{self.mal_id}. {self.name} ({self.type})"
+        return f"{self.pk}. {self.name} | Mal_id : {self.mal_id}"
 
     class Meta:
         verbose_name = "Producer"

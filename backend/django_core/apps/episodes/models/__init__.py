@@ -2,13 +2,11 @@ from core.storages import OverwriteStorage
 from dynamic_filenames import FilePattern
 
 from django.db import models
-
+from django.contrib.postgres.fields import HStoreField
 from .episode_comment import EpisodeCommentModel
 from .episode_timestamp import EpisodeTimestampModel
 
-episode_cover_pattern = FilePattern(filename_pattern="/episode_cover/{uuid:s}{ext}")
-episode_pattern = FilePattern(filename_pattern="/episode/{uuid:s}{ext}")
-
+episode_cover_pattern = FilePattern(filename_pattern="episode_cover/{uuid:s}{ext}")
 
 # Create your models here.
 
@@ -23,24 +21,18 @@ class EpisodeModel(models.Model):
         blank=True,
         null=True,
     )
-    episode_file = models.FileField(
-        storage=OverwriteStorage(),
-        upload_to=episode_pattern,
-        default=None,
-        blank=True,
-        null=True,
-    )
+
     episode_summary = models.TextField(default="", blank=True, null=True)
 
     episode_comments = models.ManyToManyField(EpisodeCommentModel, blank=True)
     episode_timestamps = models.ManyToManyField(EpisodeTimestampModel, blank=True)
 
     # Extra providers
-    streamsb_id = models.CharField(max_length=20, blank=True, null=True)
-    streamtape_url = models.URLField(blank=True, null=True)
-    doodstream_url = models.URLField(blank=True, null=True)
-    fembed_url = models.URLField(blank=True, null=True)
-    mp4_upload_url = models.URLField(blank=True, null=True)
+    providers = HStoreField(
+        default=dict,
+        null=False,
+        blank=True,
+    )
 
     def __str__(self) -> str:
         return f"{self.episode_number}. {self.episode_name}"

@@ -1,14 +1,15 @@
 from http import HTTPStatus
 from apps.anime.models import AnimeModel
 from apps.episodes.models import EpisodeModel
-from ninja import Router
+from ninja import Router, Form, File
+from ninja.files import UploadedFile
 
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
 
 from apps.api.auth import AuthBearer
 from apps.user.models import CustomUser
-from ...schemas.episodes import EpisodeGETSchema, EpisodePOSTSchema
+from ...schemas.episodes import EpisodeGETSchema
 
 router = Router()
 
@@ -27,8 +28,10 @@ def get_individual_episodes(
 @router.post("/{int:anime_id}/episodes", response=EpisodeGETSchema, auth=AuthBearer())
 def post_individual_episodes(
     request: HttpRequest,
-    anime_id: int,
-    payload: EpisodePOSTSchema,
+    episode_number: int = Form(...),
+    episode_name: str = Form(...),
+    episode_cover: UploadedFile | None = File(default=None),
+    episode_summary: str = Form(...),
 ) -> EpisodeModel:
     user: CustomUser = request.auth
     if not user.is_superuser:
@@ -40,8 +43,16 @@ def post_individual_episodes(
     # Because if there is no anime_info_model with corresponding query
     # theres no point in continuing
     anime_info_model = get_object_or_404(AnimeModel, pk=anime_id)
-    query = EpisodeModel.objects.get_or_create(
-        **payload.dict(),
+
+    payload = {
+        "episode_number": episode_number,
+        "episode_name": episode_name,
+        "episode_cover": episode_cover,
+        "episode_summary": episode_summary,
+    }
+
+    query = EpisodeModel.objects.create(
+        **{key: value for key, value in payload.items() if value}
     )
 
     instance: EpisodeModel = query[0]
