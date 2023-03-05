@@ -23,7 +23,7 @@ COPY poetry.lock pyproject.toml /code/
 RUN poetry config virtualenvs.create false \
   && poetry install --no-interaction --no-ansi --no-dev
 
-RUN apk --no-cache add nodejs-current npm
+RUN apk --no-cache add nodejs-current npm ffmpeg
 
 COPY . /code
 RUN poetry shell
