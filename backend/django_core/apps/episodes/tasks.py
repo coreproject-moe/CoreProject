@@ -11,7 +11,7 @@ from .models import EpisodeModel
 
 def post_files_to_streamsb(file):
     STREAMDB_SERVER_URL = "https://api.streamsb.com/api/upload/server"
-    CLIENT = httpx.Client(timeout=None, http2=True)
+    CLIENT = httpx.Client(timeout=300, http2=True)
     server_url_res = CLIENT.get(
         STREAMDB_SERVER_URL,
         params={
@@ -46,6 +46,7 @@ def upload_file_to_providers_and_set_thumbnail(
 ) -> None:
     instance = EpisodeModel.objects.get(pk=pk)
 
+    # This check is necessary as Celery executes same task multiple times
     if episode_file := getattr(instance, "episode_file"):
         data = {
             "streamsb": post_files_to_streamsb(episode_file),
