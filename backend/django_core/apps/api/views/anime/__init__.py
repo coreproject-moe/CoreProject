@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 from http import HTTPStatus
 from apps.anime.models import AnimeModel, AnimeNameSynonymModel
 from apps.api.filters.anime import AnimeInfoFilters
