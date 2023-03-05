@@ -20,7 +20,7 @@ def get_anime_genre_info(
     return query
 
 
-@router.post("/genres", response=AnimeGenreGETSchema, auth=AuthBearer())
+@router.post("/genres", response=list[AnimeGenreGETSchema], auth=AuthBearer())
 def post_anime_genre_info(
     request: HttpRequest,
     payload: list[AnimeGenrePOSTSchema],
@@ -41,4 +41,5 @@ def post_anime_genre_info(
         )
 
     query = AnimeGenreModel.objects.bulk_create(instance_objects)
+    print(query)
     return query
