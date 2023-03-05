@@ -38,7 +38,7 @@ def post_individual_episodes(
 ) -> EpisodeModel:
     user: CustomUser = request.auth
     if not user.is_superuser:
-        raise HttpResponse(
+        return HttpResponse(
             "Superuser is required for this operation",
             status=HTTPStatus.UNAUTHORIZED,
         )
@@ -78,7 +78,7 @@ def patch_individual_episode_info(
 ):
     user: CustomUser = request.auth
     if not user.is_superuser:
-        raise HttpResponse(
+        return HttpResponse(
             "Superuser is required for this operation",
             status=HTTPStatus.UNAUTHORIZED,
         )

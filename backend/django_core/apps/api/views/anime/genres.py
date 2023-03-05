@@ -27,7 +27,7 @@ def post_anime_genre_info(
 ) -> list[AnimeGenreModel]:
     user: CustomUser = request.auth
     if not user.is_superuser:
-        raise HttpResponse(
+        return HttpResponse(
             "Superuser is required for this operation", status=HTTPStatus.UNAUTHORIZED
         )
 

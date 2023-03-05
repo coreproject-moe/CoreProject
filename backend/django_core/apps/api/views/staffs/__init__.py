@@ -101,7 +101,7 @@ def post_staff_info(
 ) -> StaffModel:
     user: CustomUser = request.auth
     if not user.is_superuser:
-        raise HttpResponse(
+        return HttpResponse(
             "Superuser is required for this operation",
             status=HTTPStatus.UNAUTHORIZED,
         )
