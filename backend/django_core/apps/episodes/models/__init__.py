@@ -7,7 +7,8 @@ from django.db import models
 from .episode_comment import EpisodeCommentModel
 from .episode_timestamp import EpisodeTimestampModel
 
-episode_cover_pattern = FilePattern(filename_pattern="episode_cover/{uuid:s}{ext}")
+episode_pattern = FilePattern(filename_pattern="episode/{uuid:s}{ext}")
+episode_thumbnail_pattern = FilePattern(filename_pattern="thumbnail/{uuid:s}{ext}")
 
 # Create your models here.
 
@@ -15,9 +16,14 @@ episode_cover_pattern = FilePattern(filename_pattern="episode_cover/{uuid:s}{ext
 class EpisodeModel(models.Model):
     episode_number = models.BigIntegerField(default=0)
     episode_name = models.CharField(max_length=1024)
-    episode_cover = models.ImageField(
-        storage=OverwriteStorage(),
-        upload_to=episode_cover_pattern,
+    episode_thumbnail = models.ImageField(
+        upload_to=episode_thumbnail_pattern,
+        default=None,
+        blank=True,
+        null=True,
+    )
+    episode_file = models.FileField(
+        upload_to=episode_pattern,
         default=None,
         blank=True,
         null=True,

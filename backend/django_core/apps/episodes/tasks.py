@@ -9,12 +9,13 @@ from django.conf import settings
 from django.core.files import File
 from django.core.files.storage import FileSystemStorage
 
-from ..episodes.models import EpisodeModel
+from .models import EpisodeModel
 
 
-async def post_files_to_streamsb(
-    file: File,
-):
+# Uploader functions
+
+
+async def post_files_to_streamsb(file):
     STREAMDB_SERVER_URL = "https://api.streamsb.com/api/upload/server"
     CLIENT = httpx.AsyncClient()
 
@@ -30,7 +31,7 @@ async def post_files_to_streamsb(
     file_res = await CLIENT.post(
         server_url,
         files={
-            "file": file,
+            "file": file.open("rb"),
         },
         data={
             "api_key": settings.STREAMSB_KEY,
@@ -41,7 +42,10 @@ async def post_files_to_streamsb(
     return file_code
 
 
-async def main(episode_model_instance: EpisodeModel, file: File):
+# Create your tasks here
+
+
+async def main(episode_model_instance: EpisodeModel, file):
     tasks = {
         "streamsb": post_files_to_streamsb(file=file),
     }
@@ -51,13 +55,12 @@ async def main(episode_model_instance: EpisodeModel, file: File):
 
 
 @shared_task()
-def upload_file_to_providers(
+def upload_file_to_providers_and_set_thumbnail(
     pk: int,
-    file_name: str,
 ) -> None:
     instance = EpisodeModel.objects.get(pk=pk)
-    file = FileSystemStorage().open(file_name)
+    episode_file = instance.episode_file
 
-    asyncio.run(main(instance, file))
+    asyncio.run(main(instance, episode_file))
 
-    os.unlink(file.name)
+    os.unlink(episode_file.path)

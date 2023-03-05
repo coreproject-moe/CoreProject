@@ -3,13 +3,11 @@ import uuid
 
 from apps.anime.models import AnimeModel
 from apps.api.auth import AuthBearer
-from apps.api.tasks import upload_file_to_providers
 from apps.episodes.models import EpisodeModel
 from apps.user.models import CustomUser
 from ninja import File, Form, Router
 from ninja.files import UploadedFile
 
-from django.core.files.storage import FileSystemStorage
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
 
@@ -35,7 +33,7 @@ def post_individual_episodes(
     anime_id: int,
     episode_number: int = Form(...),
     episode_name: str = Form(...),
-    episode_cover: UploadedFile | None = File(default=None),
+    episode_thumbnail: UploadedFile | None = File(default=None),
     episode_file: UploadedFile | None = File(default=None),
     episode_summary: str = Form(...),
 ) -> EpisodeModel:
@@ -53,7 +51,8 @@ def post_individual_episodes(
     payload = {
         "episode_number": episode_number,
         "episode_name": episode_name,
-        "episode_cover": episode_cover,
+        "episode_thumbnail": episode_thumbnail,
+        "episode_file": episode_file,
         "episode_summary": episode_summary,
     }
 
@@ -61,13 +60,6 @@ def post_individual_episodes(
         **{key: value for key, value in payload.items() if value}
     )
     anime_info_model.episodes.add(instance)
-
-    # These tasks are here for celery actually
-    if episode_file:
-        file_name = f"temp/{uuid.uuid4()}/{episode_file.name}"
-        FileSystemStorage().save(name=file_name, content=episode_file)
-        upload_file_to_providers.delay(pk=instance.pk, file_name=file_name)
-
     return instance
 
 
@@ -81,7 +73,7 @@ def patch_individual_episode_info(
     anime_id: int,
     episode_number: int,
     episode_name: str = Form(...),
-    episode_cover: UploadedFile | None = File(default=None),
+    episode_thumbnail: UploadedFile | None = File(default=None),
     episode_file: UploadedFile | None = File(default=None),
     episode_summary: str = Form(...),
 ):
@@ -97,7 +89,7 @@ def patch_individual_episode_info(
     )
     validated_data = {
         "episode_name": episode_name,
-        "episode_cover": episode_cover,
+        "episode_thumbnail": episode_thumbnail,
         "episode_file": episode_file,
         "episode_summary": episode_summary,
     }
@@ -107,10 +99,5 @@ def patch_individual_episode_info(
             setattr(episode_instance, attr, value)
     # These tasks are here for celery actually
     episode_instance.save()
-
-    if episode_file:
-        file_name = f"temp/{uuid.uuid4()}/{episode_file.name}"
-        FileSystemStorage().save(name=file_name, content=episode_file)
-        upload_file_to_providers.delay(pk=episode_instance.pk, file_name=file_name)
 
     return episode_instance
