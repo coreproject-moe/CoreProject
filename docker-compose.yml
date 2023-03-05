@@ -13,6 +13,8 @@ services:
         restart: unless-stopped
         image: redis:7.0.5-alpine
 
+    # Backend
+
     django:
         image: coreproject
         restart: unless-stopped
@@ -43,7 +45,7 @@ services:
             # - STREAMSB_KEY=
         depends_on:
             - db
-
+    # Celery
     worker:
         image: coreproject
         restart: unless-stopped
@@ -77,6 +79,8 @@ services:
             - django
             - redis
 
+    # Web server
+
     caddy:
         image: caddy:alpine
         container_name: caddy
@@ -94,3 +98,6 @@ services:
         environment:
             - SITE_ADDRESS=${SITE_ADDRESS}
             - LOG_FILE=/data/access.log
+
+    anime:
+        
