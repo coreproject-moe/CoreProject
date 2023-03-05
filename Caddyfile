@@ -23,6 +23,10 @@ backend.{$SITE_ADDRESS} {
         }
 }
 
+anime.{$SITE_ADDRESS} {
+        reverse_proxy anime:3000 
+}
+
 # anime.example.com
 #anime.{$SITE_ADDRESS} {
 #        # Svelte AnimeCore CSR
