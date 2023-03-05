@@ -13,8 +13,41 @@ services:
         restart: unless-stopped
         image: redis:7.0.5-alpine
 
-    # Backend
 
+# Celery
+    celery:
+        image: coreproject
+        restart: unless-stopped
+        build: ./backend
+        dns:
+            - 1.1.1.1
+        volumes:
+            - ./media:/code/django_core/media
+        entrypoint: /code/worker_entrypoint.sh
+        environment:
+            - DEBUG=False
+            # Cache related settings
+            - DJANGO_CACHE_LOCATION=redis://redis:6379/1
+            - CACHE_MIDDLEWARE_SECONDS=500
+            - REDIS_URL=redis://redis:6379/0
+            # POSTGRS specific codse
+            - POSTGRES_NAME=postgres
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=supersecretpassword
+            - "POSTGRES_HOST=db"
+            - POSTGRES_PORT=5432
+            # Sitename related things
+            - DJANGO_ALLOWED_HOSTS=backend.${SITE_ADDRESS}
+            - SITE_ADDRESS=${SITE_ADDRESS}
+            # Secret Keys
+            # - MAL_CLIENT_ID=
+            # - MAL_CLIENT_SECRET=
+            # - STREAMSB_KEY=
+        depends_on:
+            - db
+            - redis
+
+    # Backend
     django:
         image: coreproject
         restart: unless-stopped
@@ -45,46 +78,23 @@ services:
             # - STREAMSB_KEY=
         depends_on:
             - db
-    # Celery
-    worker:
-        image: coreproject
-        restart: unless-stopped
-        build: ./backend
-        dns:
-            - 1.1.1.1
-        volumes:
-            - ./media:/code/django_core/media
-        entrypoint: /code/worker_entrypoint.sh
-        environment:
-            - DEBUG=False
-            # Cache related settings
-            - DJANGO_CACHE_LOCATION=redis://redis:6379/1
-            - CACHE_MIDDLEWARE_SECONDS=500
-            - REDIS_URL=redis://redis:6379/0
-            # POSTGRS specific codse
-            - POSTGRES_NAME=postgres
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=supersecretpassword
-            - "POSTGRES_HOST=db"
-            - POSTGRES_PORT=5432
-            # Sitename related things
-            - DJANGO_ALLOWED_HOSTS=backend.${SITE_ADDRESS}
-            - SITE_ADDRESS=${SITE_ADDRESS}
-            # Secret Keys
-            # - MAL_CLIENT_ID=
-            # - MAL_CLIENT_SECRET=
-            # - STREAMSB_KEY=
-        depends_on:
-            - db
-            - django
             - redis
+            - celery
+    
+  
+    # Frontend
+    anime:
+        restart: unless-stopped
+        build: ./frontend/AnimeCore
+        dns: 1.1.1.1
+        environment:
+            - PORT=3000
+            - HOST=0.0.0.0
 
     # Web server
-
     caddy:
         image: caddy:alpine
-        container_name: caddy
-        restart: always
+        restart: unless-stopped
         dns:
             - 1.1.1.1
         ports:
@@ -98,12 +108,7 @@ services:
         environment:
             - SITE_ADDRESS=${SITE_ADDRESS}
             - LOG_FILE=/data/access.log
-
-    # Frontend
-    anime:
-        restart: unless-stopped
-        build: ./frontend/AnimeCore
-        dns: 1.1.1.1
-        environment:
-            - PORT=3000
-            - HOST=localhost
+        
+        depends_on:
+            - django
+            - anime
