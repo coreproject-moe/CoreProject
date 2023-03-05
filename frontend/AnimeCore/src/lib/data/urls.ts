@@ -31,7 +31,8 @@ export class Anilist {
 }
 
 export class UrlMaps {
-    private BASE_URL = "https://backend.localhost/api/v1";
+    public DOMAIN = "https://backend.coreproject.moe";
+    private BASE_URL = this.DOMAIN + "/api/v1";
 
     public id = (id: number | string) => {
         return `${this.BASE_URL}/anime/${id}`;

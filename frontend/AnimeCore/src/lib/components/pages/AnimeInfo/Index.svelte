@@ -12,12 +12,13 @@
         anime_source: string;
         anime_aired_from: Date;
         anime_aired_to: Date;
-        anime_cover: string; // Image
         anime_synopsis: string;
+        anime_cover: string; // Image
         anime_background: string;
         anime_rating: string;
         updated: Date;
     }>;
+    import { UrlMaps } from "$data/urls";
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
     import Bookmark from "$icons/Bookmark.svelte";
@@ -35,6 +36,7 @@
     import ImageCard from "./ImageCard.svelte";
     import Episode from "./Episode.svelte";
 
+    const urls = new UrlMaps();
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
 </script>
@@ -66,9 +68,7 @@
                     >
                         <div class="flex gap-7">
                             <!-- Anime image card  -->
-                            <ImageCard
-                                src="https://media.kitsu.io/anime/poster_images/42420/large.jpg"
-                            />
+                            <ImageCard src={urls.DOMAIN + data?.anime_background} />
 
                             <!-- Anime info  -->
                             <AnimeInfo

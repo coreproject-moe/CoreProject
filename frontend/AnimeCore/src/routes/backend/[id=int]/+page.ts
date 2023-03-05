@@ -43,9 +43,7 @@ export const load = (async ({
         recommendations: [number];
         episodes: [number];
         episode: string;
-    }> = data.data;
-
-    console.log(data.data);
+    }> = data;
 
     const backend_remapped_to_frontend: Partial<{
         mal_id: number;
@@ -79,7 +77,6 @@ export const load = (async ({
     };
 
     const errorMessage: string = data.status === 404 && data.message;
-
     return {
         animeData: backend_remapped_to_frontend,
         error: errorMessage
