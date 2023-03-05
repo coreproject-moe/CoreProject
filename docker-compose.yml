@@ -98,7 +98,7 @@ services:
         environment:
             - SITE_ADDRESS=${SITE_ADDRESS}
             - LOG_FILE=/data/access.log
-    
+
     # Frontend
     anime:
         restart: unless-stopped
