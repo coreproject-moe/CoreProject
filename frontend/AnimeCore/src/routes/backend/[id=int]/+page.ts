@@ -57,6 +57,7 @@ export const load = (async ({
         anime_source: string;
         anime_aired_from: Date;
         anime_aired_to: Date;
+        anime_banner: string; // image
         anime_cover: string; // Image
         anime_synopsis: string;
         anime_background: string;
@@ -70,6 +71,7 @@ export const load = (async ({
         anime_source: backend_data?.source ?? "",
         anime_aired_from: dayjs(backend_data?.aired_from, "YYYY-MM-DD").toDate(),
         anime_aired_to: dayjs(backend_data?.aired_to, "YYYY-MM-DD").toDate(),
+        anime_banner: backend_data?.banner ?? "",
         anime_cover: backend_data?.cover ?? "",
         anime_synopsis: backend_data?.synopsis ?? "",
         anime_background: backend_data?.background ?? "",

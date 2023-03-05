@@ -13,6 +13,7 @@
         anime_aired_from: Date;
         anime_aired_to: Date;
         anime_synopsis: string;
+        anime_banner?: string; // Image
         anime_cover: string; // Image
         anime_background: string;
         anime_rating: string;
@@ -39,6 +40,9 @@
     const urls = new UrlMaps();
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
+
+    const anime_card_image = urls.DOMAIN + String(data?.anime_banner);
+    const anime_background_image = urls.DOMAIN + String(data?.anime_cover);
 </script>
 
 <div class="grid h-screen relative">
@@ -49,7 +53,7 @@
     >
         <div
             class="h-[80vw] md:h-screen w-screen bg-no-repeat bg-center bg-cover brightness-50"
-            style="background-image:url('{data?.anime_cover ?? ''}')"
+            style="background-image:url('{anime_background_image}')"
         />
         <div
             class="absolute inset-0 bg-gradient-to-t from-base-100 via-base-100/[.8] md:via-base-100/[.0001]"
@@ -68,7 +72,7 @@
                     >
                         <div class="flex gap-7">
                             <!-- Anime image card  -->
-                            <ImageCard src={urls.DOMAIN + data?.anime_background} />
+                            <ImageCard src={anime_card_image} />
 
                             <!-- Anime info  -->
                             <AnimeInfo
