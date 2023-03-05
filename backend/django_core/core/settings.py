@@ -51,7 +51,6 @@ STREAMSB_KEY = os.environ.get("STREAMSB_KEY")
 # We are using this to hyperlink model relations
 
 SITE_ADDRESS = os.environ.get("SITE_ADDRESS")
-HOSTNAME = SITE_ADDRESS if SITE_ADDRESS else "http://127.0.0.1:9000"
 
 # Application definition
 

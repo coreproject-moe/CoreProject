@@ -28,12 +28,12 @@ class AnimeNameSynonymSchema(ModelSchema):
 
 
 class AnimeInfoGETSchema(ModelSchema):
-    genres: AnyUrl
-    producers: AnyUrl
-    studios: AnyUrl
-    characters: AnyUrl
-    themes: AnyUrl
-    episode: AnyUrl
+    genres: str
+    producers: str
+    studios: str
+    characters: str
+    themes: str
+    episode: str
     name_synonyms: list[AnimeNameSynonymSchema] = []
 
     class Config:
@@ -43,29 +43,29 @@ class AnimeInfoGETSchema(ModelSchema):
     @staticmethod
     def resolve_genres(obj: AnimeModel) -> str:
         url = resolve_url("api-1.0.0:get_individual_anime_genre_info", anime_id=obj.pk)
-        return f"{settings.HOSTNAME}{url}"
+        return f"{url}"
 
     @staticmethod
     def resolve_producers(obj: AnimeModel) -> str:
         url = resolve_url("api-1.0.0:get_individual_anime_producer_info", anime_id=obj.pk)
-        return f"{settings.HOSTNAME}{url}"
+        return f"{url}"
 
     @staticmethod
     def resolve_studios(obj: AnimeModel) -> str:
         url = resolve_url("api-1.0.0:get_individual_anime_studio_info", anime_id=obj.pk)
-        return f"{settings.HOSTNAME}{url}"
+        return f"{url}"
 
     @staticmethod
     def resolve_characters(obj: AnimeModel) -> str:
         url = resolve_url("api-1.0.0:get_individual_anime_character_info", anime_id=obj.pk)
-        return f"{settings.HOSTNAME}{url}"
+        return f"{url}"
 
     @staticmethod
     def resolve_themes(obj: AnimeModel) -> str:
         url = resolve_url("api-1.0.0:get_individual_anime_theme_info", anime_id=obj.pk)
-        return f"{settings.HOSTNAME}{url}"
+        return f"{url}"
 
     @staticmethod
     def resolve_episode(obj: AnimeModel) -> str:
         url = resolve_url("api-1.0.0:get_individual_episodes", anime_id=obj.pk)
-        return f"{settings.HOSTNAME}{url}"
+        return f"{url}"
