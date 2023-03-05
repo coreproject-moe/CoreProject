@@ -5,7 +5,7 @@ COPY . .
 RUN npm i
 RUN npm run build:node
 
-RUN rm -rf ./*
-COPY --from=build /app/package.json .
-COPY --from=build /app/build .
+RUN mv package.json ./build
+RUN ls
+RUN cp -a ./build/ ./
 CMD ["node", "index.js"]
