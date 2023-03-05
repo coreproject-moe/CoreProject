@@ -8,7 +8,7 @@ dotenv.load_dotenv()
 
 STREAMTAPE_LOGIN = os.getenv("STREAMTAPE_LOGIN")
 STREAMTAPE_KEY = os.getenv("STREAMTAPE_KEY")
-STREAMTAPE_PARENT_FOLDER_ID = os.getenv("STREAMTAPE_PARENT_FOLDER_ID")
+STREAMTAPE_PARENT_FOLDER_ID = "eAOuUTmAPAE"
 
 
 async def create_folder(name: str) -> str:
