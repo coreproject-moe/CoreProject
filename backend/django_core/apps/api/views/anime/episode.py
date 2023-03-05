@@ -1,5 +1,4 @@
 from http import HTTPStatus
-import uuid
 
 from apps.anime.models import AnimeModel
 from apps.api.auth import AuthBearer

@@ -1,4 +1,3 @@
-from core.storages import OverwriteStorage
 from dynamic_filenames import FilePattern
 
 from django.contrib.postgres.fields import HStoreField
