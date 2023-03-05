@@ -45,7 +45,13 @@ DISCRIMINATOR_LENGTH = 4
 # Our Secret Keys
 MAL_CLIENT_ID = os.environ.get("MAL_CLIENT_ID")
 MAL_CLIENT_SECRET = os.environ.get("MAL_CLIENT_SECRET")
+# Stream SB
 STREAMSB_KEY = os.environ.get("STREAMSB_KEY")
+# Stream Tape
+STREAMTAPE_LOGIN = os.getenv("STREAMTAPE_LOGIN")
+STREAMTAPE_KEY = os.getenv("STREAMTAPE_KEY")
+STREAMTAPE_PARENT_FOLDER_ID = os.getenv("STREAMTAPE_PARENT_FOLDER_ID")
+
 
 # HOST configurations
 # We are using this to hyperlink model relations

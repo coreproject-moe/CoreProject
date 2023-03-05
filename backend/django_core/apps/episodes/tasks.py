@@ -37,6 +37,50 @@ def post_files_to_streamsb(file):
     return file_code
 
 
+def post_files_to_streamtape(name: str, file) -> str:
+    """
+    Create a new folder in Streamtape using the Streamtape API.
+    Args:
+    name (str): The name of the folder to be created.
+    Returns:
+    str: The ID of the newly created folder, or the ID of the parent folder if folder creation fails.
+    Note:
+    This function requires the following constants to be defined: LOGIN, KEY, and PARENT_FOLDER_ID.
+    """
+    client = httpx.Client(http2=True, timeout=300)
+
+    # Create Folder
+    url = "https://api.streamtape.com/file/createfolder"
+    params = {
+        "login": settings.STREAMTAPE_LOGIN,
+        "key": settings.STREAMTAPE_KEY,
+        "name": name,
+        "pid": settings.STREAMTAPE_PARENT_FOLDER_ID,
+    }
+    response = client.get(url, params=params)
+    if response.status_code == 200:
+        folder_id_data = response.json()
+        if result := folder_id_data["result"]:
+            folder_id = result["folderid"]
+        folder_id = settings.STREAMTAPE_PARENT_FOLDER_ID
+    folder_id = settings.STREAMTAPE_PARENT_FOLDER_ID
+
+    # Upload Server get
+    url = "https://api.streamtape.com/file/ul"
+    params = {
+        "login": settings.STREAMTAPE_LOGIN,
+        "key": settings.STREAMTAPE_KEY,
+        "folder": folder_id,
+    }
+    response = client.get(url, params=params)
+    if response.status_code == 200:
+        upload_url = response.json()["result"]["url"]
+
+    response = client.post(upload_url, files={"file1": file.open("rb")})
+    if response.status_code == 200:
+        return response.json()["result"]["id"]
+
+
 # Create your tasks here
 
 
@@ -50,6 +94,7 @@ def upload_file_to_providers_and_set_thumbnail(
     if episode_file := getattr(instance, "episode_file"):
         data = {
             "streamsb": post_files_to_streamsb(episode_file),
+            "streamtape": post_files_to_streamtape(instance.episode_name, episode_file),
         }
 
         instance.providers = data
