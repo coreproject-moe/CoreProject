@@ -3,13 +3,14 @@ import httpx
 
 from django.conf import settings
 
+from django.db.models import FileField
 from .models import EpisodeModel
 
 
 # Uploader functions
 
 
-def post_files_to_streamsb(file):
+def post_files_to_streamsb(file: FileField) -> str:
     STREAMDB_SERVER_URL = "https://api.streamsb.com/api/upload/server"
     CLIENT = httpx.Client(timeout=300, http2=True)
     server_url_res = CLIENT.get(
@@ -37,7 +38,7 @@ def post_files_to_streamsb(file):
     return file_code
 
 
-def post_files_to_streamtape(name: str, file) -> str:
+def post_files_to_streamtape(name: str, file: FileField) -> str:
     """
     Create a new folder in Streamtape using the Streamtape API.
     Args:
