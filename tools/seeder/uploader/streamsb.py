@@ -1,8 +1,12 @@
-# import asyncio
+import asyncio
 import httpx
+import os
+import dotenv
 
-STREAMSB_API_KEY = "9872h2ymuvumhyu7z6tb"
+dotenv.load_dotenv()
+
 STREAMSB_API_BASE_URL = "https://api.streamsb.com/api"
+STREAMSB_API_KEY = os.getenv("STREAMSB_API_KEY")
 
 
 async def get_streamsb_file_status(file_code: str):
@@ -38,16 +42,16 @@ async def upload_to_streamsb_by_file(file_path: str) -> str:
             return response.json()["result"]
 
 
-# Examples :
-
+# # Examples :
 # async def main():
+#     result = await upload_to_streamsb_by_file(
+#         "death_note-01.mp4"
+#     )  # return uploaded file_code and status
+#     print(result)
 #     # filecode = await upload_to_streamsb_by_url("https://bokunopico.mp4")
 
 #     # status = await get_streamsb_file_status("bokunopico")
-#     # result = await upload_to_streamsb_by_file(
-#     #     "oniichan.mp4"
-#     # )  # return uploaded file_code and status
-#     ...
 
 
-# asyncio.run(main())
+# if __name__ == "__main__":
+#     asyncio.run(main())
