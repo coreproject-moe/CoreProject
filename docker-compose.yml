@@ -13,8 +13,7 @@ services:
         restart: unless-stopped
         image: redis:7.0.5-alpine
 
-
-# Celery
+    # Celery
     celery:
         image: coreproject
         restart: unless-stopped
@@ -80,8 +79,7 @@ services:
             - db
             - redis
             - celery
-    
-  
+
     # Frontend
     anime:
         restart: unless-stopped
@@ -108,7 +106,7 @@ services:
         environment:
             - SITE_ADDRESS=${SITE_ADDRESS}
             - LOG_FILE=/data/access.log
-        
+
         depends_on:
             - django
             - anime
