@@ -32,7 +32,7 @@ export const load = (async ({
         background: string;
         rating: string;
         theme_openings: string;
-        theme_endings: any;
+        theme_endings: string;
         updated: string;
         name_synonyms: [];
         genres: string;
