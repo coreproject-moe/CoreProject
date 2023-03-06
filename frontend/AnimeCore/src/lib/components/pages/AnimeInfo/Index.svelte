@@ -185,7 +185,7 @@
                             </button>
                         </anime-synopsys>
                         {#if !mobile}
-                            <anime-ratings class="flex flex-col w-[33vw]">
+                            <anime-ratings class="flex flex-col min-w-1/6 !w-1/6 max-w-1/6">
                                 <h1 class="text-white text-2xl font-bold mb-4">Ratings</h1>
                                 <p>
                                     <span class="text-white text-3xl font-bold">79%</span>

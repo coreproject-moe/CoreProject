@@ -1,17 +1,10 @@
 <script lang="ts">
     import "../app.scss";
 
-    import { afterUpdate } from "svelte";
     import { fade } from "svelte/transition";
 
     import NavigationBar from "$components/shared/NavigationBar.svelte";
     import navigationState from "$store/Navigation_State";
-    afterUpdate(async () => {
-        document
-            ?.querySelectorAll<HTMLDivElement | HTMLStyleElement>("#loader")
-            ?.forEach((e) => e.remove());
-        document?.querySelector<HTMLElement>(".root")?.style.removeProperty("display");
-    });
 </script>
 
 <svelte:window

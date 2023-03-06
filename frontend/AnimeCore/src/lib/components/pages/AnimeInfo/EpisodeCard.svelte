@@ -1,5 +1,6 @@
 <script lang="ts">
     export let episode_card_background_image: string;
+    export let episode_name: string;
 </script>
 
 <episode-card
