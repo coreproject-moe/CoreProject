@@ -31,7 +31,7 @@ class AnimeInfoGETSchema(ModelSchema):
     studios: str
     characters: str
     themes: str
-    episode: str
+    episodes: str
     name_synonyms: list[AnimeNameSynonymSchema] = []
 
     class Config:
@@ -64,6 +64,6 @@ class AnimeInfoGETSchema(ModelSchema):
         return f"{url}"
 
     @staticmethod
-    def resolve_episode(obj: AnimeModel) -> str:
+    def resolve_episodes(obj: AnimeModel) -> str:
         url = resolve_url("api-1.0.0:get_individual_episodes", anime_id=obj.pk)
         return f"{url}"
