@@ -121,9 +121,7 @@
                 {/each}
             </div>
         </div>
-        <episode-details
-            class="flex flex-col text-white min-w-1/6 w-1/6 max-w-1/6 justify-center items-start"
-        >
+        <episode-details class="flex flex-col text-white justify-center items-start !w-[221px]">
             <p class="flex gap-2">
                 <span class="font-bold text-xl">Details</span>
                 <button class="btn btn-square btn-sm">
