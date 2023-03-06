@@ -145,7 +145,8 @@ def login_view(request: HttpRequest) -> HttpResponse:
     }
 
     if request.user.is_authenticated:
-        context["token"] = Token.objects.get(user=request.user).token
+        instance, _ = Token.objects.get_or_create(user=request.user)
+        context["token"] = instance.token
 
     if request.method == "POST" and form.is_valid():
         if user := authenticate(
