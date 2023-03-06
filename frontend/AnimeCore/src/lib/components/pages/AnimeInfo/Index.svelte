@@ -25,6 +25,14 @@
         name: string;
         type: string;
     }>;
+    export let episodes: Array<{
+        id: number;
+        episode_number: number;
+        episode_name: string;
+        episode_thumbnail: string;
+        episode_summary: string;
+        providers: Array<object>;
+    }>;
     import { UrlMaps } from "$data/urls";
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
@@ -84,6 +92,8 @@
                             <AnimeInfo
                                 title_english={data?.title_english ?? ""}
                                 title_japanese={data?.title_japanese ?? ""}
+                                anime_source={data?.anime_source ?? ""}
+                                episodes={episodes.length}
                             />
                         </div>
 
@@ -129,14 +139,26 @@
                                     {data?.anime_synopsis}
                                 </p>
                             </ScrollArea>
-                            <div class="hidden md:flex gap-2 mt-3">
-                                {#each genres ?? [] as item}
-                                    <span
-                                        class="badge text-white bg-base-100 badge-lg rounded-md border-transparent leading-6 text-sm font-bold capitalize"
-                                    >
-                                        {item.name}
-                                    </span>
-                                {/each}
+                            <div class="hidden md:flex gap-2 flex-row pt-5">
+                                {#await genres}
+                                    <div class="animate-pulse flex space-x-4">
+                                        {#each Array(5) as _}
+                                            <div
+                                                class="w-14 badge text-white bg-base-100 badge-lg rounded-md border-transparent leading-6 text-sm font-bold capitalize"
+                                            />
+                                        {/each}
+                                    </div>
+                                {:then value}
+                                    {#each value as item}
+                                        <span
+                                            class="badge text-white bg-base-100 badge-lg rounded-md border-transparent leading-6 text-sm font-bold capitalize"
+                                        >
+                                            {item.name}
+                                        </span>
+                                    {/each}
+                                {:catch}
+                                    <p>Error</p>
+                                {/await}
                             </div>
                             <button
                                 class="btn btn-sm  text-sm normal-case glass btn-disabled mt-5 gap-4 text-white flex-nowrap hidden md:flex"
@@ -231,7 +253,7 @@
                             </anime-ratings>
                         {/if}
                     </anime-info>
-                    <Episode />
+                    <Episode {episodes} />
                 </div>
             </div>
         </div>

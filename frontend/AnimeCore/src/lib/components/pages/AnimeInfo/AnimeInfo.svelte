@@ -1,6 +1,8 @@
 <script lang="ts">
     export let title_english: string;
     export let title_japanese: string;
+    export let anime_source: string;
+    export let episodes: number;
 
     import BookOpen from "$icons/Book-Open.svelte";
     import Download from "$icons/Download.svelte";
@@ -19,11 +21,14 @@
     <p class="text-neutral-400 text-sm">
         <!-- Todo modify this to have anime synonyms  -->
         <span class="items">{title_japanese}</span>
-        <span class="items">Hyouka: Forbidden Secrets</span>
     </p>
     <p class="text-white text-xs">
-        <span class="items">TV</span>
-        <span class="items">22eps</span>
+        {#if anime_source}
+            <span class="items">{anime_source}</span>
+        {/if}
+        {#if episodes}
+            <span class="items">{episodes}eps</span>
+        {/if}
         <span class="items">completed</span>
         <span class="items">spring 2021</span>
         <span class="items">kyoto</span>

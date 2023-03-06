@@ -1,4 +1,12 @@
 <script lang="ts">
+    export let episodes: Array<{
+        id: number;
+        episode_number: number;
+        episode_name: string;
+        episode_thumbnail: string;
+        episode_summary: string;
+        providers: Array<object>;
+    }>;
     import Search from "$icons/Search.svelte";
     import Settings from "$icons/Settings.svelte";
 
@@ -25,7 +33,7 @@
             <episode-and-dub-container class="flex gap-4 mt-12">
                 <div class="flex gap-3">
                     <p class="font-bold text-white flex justify-center items-center">
-                        <span class="text-3xl">23</span>
+                        <span class="text-3xl">{episodes.length}</span>
                         episodes
                     </p>
                     <div class="text-white flex justify-center items-center">▪</div>

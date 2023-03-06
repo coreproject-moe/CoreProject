@@ -13,4 +13,5 @@
 <AnimeInfo
     data={data.animeData}
     genres={data.genre}
+    episodes={data.episodes}
 />
