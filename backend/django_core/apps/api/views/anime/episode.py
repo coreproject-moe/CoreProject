@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any
+from typing import Any, AnyStr
 from apps.anime.models import AnimeModel
 from apps.api.auth import AuthBearer
 from apps.episodes.models import EpisodeModel
@@ -35,7 +35,7 @@ def post_individual_episodes(
     episode_name: str = Form(...),
     episode_thumbnail: UploadedFile | None = File(default=None),
     episode_summary: str = Form(None),
-    providers: Json[str] | None = Form(None),
+    providers: Json[AnyStr] | None = Form(None),
 ) -> EpisodeModel:
     user: CustomUser = request.auth
     if not user.is_superuser:
@@ -75,7 +75,7 @@ def patch_individual_episode_info(
     episode_name: str = Form(...),
     episode_thumbnail: UploadedFile | None = File(default=None),
     episode_summary: str | None = Form(None),
-    providers: Json[str] | None = Form(None),
+    providers: Json[AnyStr] | None = Form(None),
 ):
     user: CustomUser = request.auth
     if not user.is_superuser:

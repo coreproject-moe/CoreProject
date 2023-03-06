@@ -20,7 +20,7 @@ def get_anime_theme_info(
     return query
 
 
-@router.post("/themes", response=AnimeThemeGETSchema, auth=AuthBearer())
+@router.post("/themes", response=list[AnimeThemeGETSchema], auth=AuthBearer())
 def post_anime_theme_info(
     request: HttpRequest,
     payload: list[AnimeThemePOSTSchema],
