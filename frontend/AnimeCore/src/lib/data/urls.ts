@@ -38,6 +38,10 @@ export class UrlMaps {
         return `${this.BASE_URL}/anime/${id}`;
     };
 
+    public genre = (id: number | string) => {
+        return `${this.BASE_URL}/anime/${id}/genres`;
+    };
+
     public get media_url() {
         // return process.env.NODE_ENV === "development" ? get(page).url.origin : "/media";
         return get(page).url.origin;

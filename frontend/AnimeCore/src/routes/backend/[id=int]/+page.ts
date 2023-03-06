@@ -78,9 +78,23 @@ export const load = (async ({
         updated: new Date()
     };
 
+    const genre = async () => {
+        const url = backend_id.genre(params.id);
+        const res = await fetch(url);
+        const res_json = await res.json();
+        const data: Array<{
+            id: number;
+            mal_id: number;
+            name: string;
+            type: string;
+        }> = res_json;
+        return data;
+    };
+
     const errorMessage: string = data.status === 404 && data.message;
     return {
         animeData: backend_remapped_to_frontend,
-        error: errorMessage
+        error: errorMessage,
+        genre: genre()
     };
 }) satisfies PageLoad;

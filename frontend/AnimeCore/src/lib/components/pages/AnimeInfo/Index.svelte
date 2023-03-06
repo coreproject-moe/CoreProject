@@ -19,6 +19,12 @@
         anime_rating: string;
         updated: Date;
     }>;
+    export let genres: Array<{
+        id: number;
+        mal_id: number;
+        name: string;
+        type: string;
+    }>;
     import { UrlMaps } from "$data/urls";
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
@@ -124,11 +130,11 @@
                                 </p>
                             </ScrollArea>
                             <div class="hidden md:flex gap-2 mt-3">
-                                {#each ["mystery", "slice of life"] as tag}
+                                {#each genres ?? [] as item}
                                     <span
                                         class="badge text-white bg-base-100 badge-lg rounded-md border-transparent leading-6 text-sm font-bold capitalize"
                                     >
-                                        {tag}
+                                        {item.name}
                                     </span>
                                 {/each}
                             </div>
