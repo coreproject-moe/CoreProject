@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Any, AnyStr
+from typing import AnyStr
 from apps.anime.models import AnimeModel
 from apps.api.auth import AuthBearer
 from apps.episodes.models import EpisodeModel
