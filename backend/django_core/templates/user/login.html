@@ -1,11 +1,11 @@
 {% extends 'user/base.html' %}
 <!--prettier-ignore-->
-{% block title %} 
-{% if user.is_authenticated %}
-    Log Out 
-{% else %}
-    Log In 
-{% endif %}
+{% block title %}
+    {% if user.is_authenticated %}
+        Log Out
+    {% else %}
+        Log In
+    {% endif %}
 {% endblock title %}
 <!--prettier-ignore-->
 {% load crispy_forms_tags %}
