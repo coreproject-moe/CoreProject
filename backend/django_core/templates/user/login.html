@@ -1,6 +1,12 @@
 {% extends 'user/base.html' %}
 <!--prettier-ignore-->
-{% block title %} Log In {% endblock title %}
+{% block title %} 
+{% if user.is_authenticated %}
+    Log Out 
+{% else %}
+    Log In 
+{% endif %}
+{% endblock title %}
 <!--prettier-ignore-->
 {% load crispy_forms_tags %}
 
@@ -10,7 +16,7 @@
             Welcome,<br />User : {{ user }}<br />Token : {{ token }}<br />Perhaps you
             want to <a class="underline" href="{% url 'logout_view' %}">logout</a>?
         </div>
-<!--prettier-ignore-->
+    <!--prettier-ignore-->
     {% else %}
         <form method="post" action="{% url 'login_view' %}">
             <div class="flex justify-center mb-10">
