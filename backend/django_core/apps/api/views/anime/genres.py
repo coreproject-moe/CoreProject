@@ -3,10 +3,10 @@ from http import HTTPStatus
 from apps.anime.models.anime_genre import AnimeGenreModel
 from apps.api.auth import AuthBearer
 from apps.user.models import CustomUser
-from ninja import Router
+from ninja import Router, Query
 
 from django.http import HttpRequest, HttpResponse
-
+from ...filters.genres import GenreFilter
 from ...schemas.anime.anime_genre import AnimeGenreGETSchema, AnimeGenrePOSTSchema
 
 router = Router()
@@ -15,8 +15,12 @@ router = Router()
 @router.get("/genres", response=list[AnimeGenreGETSchema])
 def get_anime_genre_info(
     request: HttpRequest,
+    filters: GenreFilter = Query(...),
 ) -> list[AnimeGenreModel]:
-    query = AnimeGenreModel.objects.filter(type__icontains="anime")
+    query = AnimeGenreModel.objects.filter(
+        type__icontains="anime", **filters.dict(exclude_none=True)
+    )
+
     return query
 
 

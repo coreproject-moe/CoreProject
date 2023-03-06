@@ -80,7 +80,7 @@
                 <div class="pt-8 md:pr-[72px] pl-6 md:pl-20 pb-0">
                     <Navbar />
                 </div>
-                <div class="flex flex-col mt-0 mx-6 md:mx-20">
+                <div class="flex flex-col mt-0 md:mt-20 mx-6 md:mx-20 ">
                     <anime-info
                         class="flex justify-between items-center md:items-start gap-3 flex-col md:flex-row"
                     >
