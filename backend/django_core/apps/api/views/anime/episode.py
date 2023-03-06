@@ -1,5 +1,5 @@
 from http import HTTPStatus
-
+from typing import Any
 from apps.anime.models import AnimeModel
 from apps.api.auth import AuthBearer
 from apps.episodes.models import EpisodeModel
@@ -7,6 +7,7 @@ from apps.user.models import CustomUser
 from ninja import File, Form, Router
 from ninja.files import UploadedFile
 
+from pydantic import Json
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
 
@@ -33,8 +34,8 @@ def post_individual_episodes(
     episode_number: int = Form(...),
     episode_name: str = Form(...),
     episode_thumbnail: UploadedFile | None = File(default=None),
-    episode_file: UploadedFile | None = File(default=None),
-    episode_summary: str = Form(...),
+    episode_summary: str = Form(None),
+    providers: Json[str] | None = Form(None),
 ) -> EpisodeModel:
     user: CustomUser = request.auth
     if not user.is_superuser:
@@ -51,8 +52,8 @@ def post_individual_episodes(
         "episode_number": episode_number,
         "episode_name": episode_name,
         "episode_thumbnail": episode_thumbnail,
-        "episode_file": episode_file,
         "episode_summary": episode_summary,
+        "providers": providers,
     }
 
     instance = EpisodeModel.objects.create(
@@ -73,8 +74,8 @@ def patch_individual_episode_info(
     episode_number: int,
     episode_name: str = Form(...),
     episode_thumbnail: UploadedFile | None = File(default=None),
-    episode_file: UploadedFile | None = File(default=None),
-    episode_summary: str = Form(...),
+    episode_summary: str | None = Form(None),
+    providers: Json[str] | None = Form(None),
 ):
     user: CustomUser = request.auth
     if not user.is_superuser:
@@ -89,8 +90,8 @@ def patch_individual_episode_info(
     validated_data = {
         "episode_name": episode_name,
         "episode_thumbnail": episode_thumbnail,
-        "episode_file": episode_file,
         "episode_summary": episode_summary,
+        "providers": providers,
     }
 
     for attr, value in validated_data.items():

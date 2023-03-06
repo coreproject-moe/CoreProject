@@ -21,12 +21,6 @@ class EpisodeModel(models.Model):
         blank=True,
         null=True,
     )
-    episode_file = models.FileField(
-        upload_to=episode_pattern,
-        default=None,
-        blank=True,
-        null=True,
-    )
 
     episode_summary = models.TextField(default="", blank=True, null=True)
 
