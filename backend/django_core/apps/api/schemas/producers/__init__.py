@@ -1,3 +1,4 @@
+
 from ninja import ModelSchema
 
 from ....producers.models import ProducerModel
