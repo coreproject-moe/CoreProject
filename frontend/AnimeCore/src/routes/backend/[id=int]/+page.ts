@@ -56,8 +56,8 @@ export const load = (async ({
             title_english: string;
             title_japanese: string;
             anime_source: string;
-            anime_aired_from: Date;
-            anime_aired_to: Date;
+            anime_aired_from: string;
+            anime_aired_to: string;
             anime_banner: string; // image
             anime_cover: string; // Image
             anime_synopsis: string;
@@ -69,8 +69,8 @@ export const load = (async ({
             title_english: backend_data?.name ?? "",
             title_japanese: backend_data?.name_japanese ?? "",
             anime_source: backend_data?.source ?? "",
-            anime_aired_from: dayjs(backend_data?.aired_from, "YYYY-MM-DD").toDate(),
-            anime_aired_to: dayjs(backend_data?.aired_to, "YYYY-MM-DD").toDate(),
+            anime_aired_from: backend_data?.aired_from ?? "",
+            anime_aired_to: backend_data?.aired_to ?? "",
             anime_banner: backend_data?.banner ?? "",
             anime_cover: backend_data?.cover ?? "",
             anime_synopsis: backend_data?.synopsis ?? "",

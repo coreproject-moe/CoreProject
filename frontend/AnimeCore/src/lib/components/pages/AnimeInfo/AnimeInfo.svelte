@@ -3,7 +3,10 @@
     export let title_japanese: string;
     export let anime_source: string;
     export let episodes: number;
+    export let status: "completed" | "airing";
+    export let aired_from: string;
 
+    import { formatDateString } from "$functions/covertDateToSeason";
     import BookOpen from "$icons/Book-Open.svelte";
     import Download from "$icons/Download.svelte";
     import Edit from "$icons/Edit.svelte";
@@ -14,6 +17,7 @@
 
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
+
 </script>
 
 <anime-info-base class="flex flex-col gap-2">
@@ -29,9 +33,10 @@
         {#if episodes}
             <span class="items">{episodes}eps</span>
         {/if}
-        <span class="items">completed</span>
-        <span class="items">spring 2021</span>
-        <span class="items">kyoto</span>
+        <span class="items">{status}</span>
+        {#if aired_from}
+            <span class="items">{formatDateString(aired_from)}</span>
+        {/if}
     </p>
 
     <!-- buttons  -->

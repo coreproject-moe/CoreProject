@@ -10,8 +10,8 @@
         title_english: string;
         title_japanese: string;
         anime_source: string;
-        anime_aired_from: Date;
-        anime_aired_to: Date;
+        anime_aired_from: string;
+        anime_aired_to: string;
         anime_synopsis: string;
         anime_banner?: string; // Image
         anime_cover: string; // Image
@@ -94,6 +94,8 @@
                                 title_japanese={data?.title_japanese ?? ""}
                                 anime_source={data?.anime_source ?? ""}
                                 episodes={episodes.length}
+                                status={data?.anime_aired_to ? "completed" : "airing"}
+                                aired_from={data?.anime_aired_to ?? ""}
                             />
                         </div>
 
@@ -174,7 +176,7 @@
                                 </div>
                                 <div>
                                     <span>Episode :</span>
-                                    <span class="text-warning">0/22</span>
+                                    <span class="text-warning">0/{episodes.length}</span>
                                 </div>
                                 <div>
                                     <span>Your Score :</span>
