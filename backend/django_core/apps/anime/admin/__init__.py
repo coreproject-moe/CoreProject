@@ -72,7 +72,7 @@ class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel]):
             },
         ),
         (
-            ("Anime Sourece"),
+            ("Anime Source"),
             {
                 "fields": ("source",),
             },
