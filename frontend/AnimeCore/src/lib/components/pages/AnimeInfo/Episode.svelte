@@ -16,6 +16,19 @@
     const backend_urls = new UrlMaps();
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
+
+    const details_mapping = [
+        { Episodes: 22 },
+        { "Episode Duration": "26 mins" },
+        { Status: "Finished" },
+        { "Start Date": "" },
+        { "End Date": "" },
+        { Season: "" },
+        { Studios: "" },
+        { Producers: [] },
+        { Source: [] },
+        { Tags: [] }
+    ];
 </script>
 
 {#if !mobile}
@@ -121,7 +134,9 @@
                 {/each}
             </div>
         </div>
-        <episode-details class="flex flex-col text-white justify-center items-start !w-[221px]">
+        <episode-details
+            class="flex flex-col text-white justify-center items-start !w-[221px] gap-6"
+        >
             <p class="flex gap-2">
                 <span class="font-bold text-xl">Details</span>
                 <button class="btn btn-square btn-sm">
@@ -133,6 +148,12 @@
                     />
                 </button>
             </p>
+            {#each details_mapping as item}
+                <div class="flex flex-col">
+                    <span class="font-bold">{Object.keys(item)}</span>
+                    <span>{Object.values(item)}</span>
+                </div>
+            {/each}
         </episode-details>
     </div>
 {/if}
