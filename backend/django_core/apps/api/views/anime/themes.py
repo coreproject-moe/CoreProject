@@ -3,10 +3,11 @@ from http import HTTPStatus
 from apps.anime.models.anime_theme import AnimeThemeModel
 from apps.api.auth import AuthBearer
 from apps.user.models import CustomUser
-from ninja import Router
+from ninja import Query, Router
 
 from django.http import HttpRequest, HttpResponse
 
+from ...filters.themes import ThemeFilter
 from ...schemas.anime.anime_theme import AnimeThemeGETSchema, AnimeThemePOSTSchema
 
 router = Router()
@@ -15,8 +16,12 @@ router = Router()
 @router.get("/themes", response=list[AnimeThemeGETSchema])
 def get_anime_theme_info(
     request: HttpRequest,
+    filters: ThemeFilter = Query(...),
 ) -> list[AnimeThemeModel]:
-    query = AnimeThemeModel.objects.filter(type__icontains="anime")
+    query = AnimeThemeModel.objects.filter(
+        type__icontains="anime",
+        **filters.dict(exclude_none=True),
+    )
     return query
 
 
