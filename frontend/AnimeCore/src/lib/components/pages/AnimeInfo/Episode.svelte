@@ -7,11 +7,13 @@
         episode_summary: string;
         providers: Array<object>;
     }>;
+    import { UrlMaps } from "$data/urls";
     import Search from "$icons/Search.svelte";
     import Settings from "$icons/Settings.svelte";
-
+    import EpisodeCard from "./EpisodeCard.svelte";
     import { responsiveMode } from "$store/Responsive";
 
+    const backend_urls = new UrlMaps();
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
 </script>
@@ -32,9 +34,9 @@
             </div>
             <episode-and-dub-container class="flex gap-4 mt-12">
                 <div class="flex gap-3">
-                    <p class="font-bold text-white flex justify-center items-center">
+                    <p class="font-bold text-white flex gap-2 justify-center items-center">
                         <span class="text-3xl">{episodes.length}</span>
-                        episodes
+                        <span>episodes</span>
                     </p>
                     <div class="text-white flex justify-center items-center">▪</div>
 
@@ -120,4 +122,10 @@
             </p>
         </episode-details>
     </episode>
+    <div class="grid gap-x-20 gap-y-10 grid-cols-3 mt-10">
+        {#each episodes as episode}
+            {@const url = backend_urls.DOMAIN + episode.episode_thumbnail}
+            <EpisodeCard episode_card_background_image={url} />
+        {/each}
+    </div>
 {/if}

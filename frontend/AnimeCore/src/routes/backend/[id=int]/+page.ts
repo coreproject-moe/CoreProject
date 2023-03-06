@@ -1,5 +1,3 @@
-import dayjs from "dayjs";
-
 import { UrlMaps } from "$data/urls";
 
 import type { PageLoad } from "./$types";
