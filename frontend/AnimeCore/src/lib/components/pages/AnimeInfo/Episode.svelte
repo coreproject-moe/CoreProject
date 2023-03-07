@@ -4,6 +4,7 @@
         episode_number: number;
         episode_name: string;
         episode_thumbnail: string;
+        episode_length: number;
         episode_summary: string;
         providers: Array<object>;
     }>;
@@ -14,6 +15,7 @@
     import { responsiveMode } from "$store/Responsive";
     import List from "$icons/List.svelte";
     import MoreVertical from "$icons/MoreVertical.svelte";
+    import { formatNumberToDuration } from "$functions/formatNumberToDuration";
 
     const backend_urls = new UrlMaps();
     let mobile: boolean;
@@ -21,7 +23,7 @@
 
     const details_mapping = [
         { Episodes: 22 },
-        { "Episode Duration": "26 mins" },
+        { "Episode Duration": 0 },
         { Status: "Finished" },
         { "Start Date": "" },
         { "End Date": "" },
@@ -59,7 +61,7 @@
             </div>
         </div>
         {#each episodes as episode}
-            <div class="flex h-16 w-[90vw] items-center bg-[#1E2036] rounded-lg relative">
+            <div class="flex h-16 w-[90vw] items-center bg-[#1E2036] rounded-lg relative my-4">
                 <img
                     class="mask mask-squircle h-10 w-10 mx-4"
                     src={episode.episode_thumbnail}
@@ -67,7 +69,7 @@
                 />
                 <div class="flex flex-col">
                     <span class="font-bold">Episode {episode.episode_number}</span>
-                    <span>23:23</span>
+                    <span>{formatNumberToDuration(episode.episode_length)}</span>
                 </div>
                 <MoreVertical
                     class="absolute right-5"
@@ -174,9 +176,11 @@
                     {@const url = backend_urls.DOMAIN + episode.episode_thumbnail}
                     {@const name = episode.episode_name}
                     {@const number = episode.episode_number}
+                    {@const duration = episode.episode_length}
                     <EpisodeCard
                         episode_card_background_image={url}
                         episode_name={name}
+                        episode_duration={duration}
                         episode_number={number}
                     />
                 {/each}

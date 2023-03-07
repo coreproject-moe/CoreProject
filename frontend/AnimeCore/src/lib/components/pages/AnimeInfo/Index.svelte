@@ -27,7 +27,6 @@
     import External from "$icons/External.svelte";
     import Heart from "$icons/Heart.svelte";
 
-    import Star from "$icons/Star.svelte";
     import TrendingUp from "$icons/Trending-Up.svelte";
     import { responsiveMode } from "$store/Responsive";
 
@@ -70,6 +69,7 @@
             episode_number: number;
             episode_name: string;
             episode_thumbnail: string;
+            episode_length: number;
             episode_summary: string;
             providers: Array<object>;
         }> = res_json;
@@ -280,9 +280,7 @@
                     {#await episodes(String(data?.episodes))}
                         {#if !mobile}<EpisodeSkeleton />{/if}
                     {:then episodes}
-                        {#if episodes}
-                            <Episode {episodes} />
-                        {/if}
+                        <Episode {episodes} />
                     {/await}
                 </div>
             </div>
