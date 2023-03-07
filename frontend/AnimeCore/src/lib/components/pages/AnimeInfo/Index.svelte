@@ -35,6 +35,7 @@
     import ImageCard from "./ImageCard.svelte";
     import Episode from "./Episode.svelte";
     import EpisodeSkeleton from "./Episode.skeleton.svelte";
+    import StarRating from "svelte-star-rating";
 
     const urls = new UrlMaps();
     let mobile: boolean;
@@ -248,13 +249,11 @@
                                 <star-container class="flex mt-2 items-center gap-2 flex-nowrap">
                                     <stars class="flex">
                                         <!-- Todo fix this star rating system -->
-                                        {#each Array(5) as _}
-                                            <Star
-                                                class="translate-y-1"
-                                                width="25"
-                                                height="25"
-                                            />
-                                        {/each}
+                                        <StarRating
+                                            rating={3.5}
+                                            
+                                            style="border: 1px solid firebrick;padding: 12px;"
+                                        />
                                     </stars>
                                     <p class="font-bold nowrap text-lg w-12">90 %</p>
                                     <button class="btn btn-square btn-sm btn-info">

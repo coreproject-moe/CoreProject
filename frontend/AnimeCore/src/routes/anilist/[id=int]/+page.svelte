@@ -6,4 +6,4 @@
     export let data: PageData;
 </script>
 
-<AnimeInfo {data} />
+<AnimeInfo data={data.animeData} />
