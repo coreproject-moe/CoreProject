@@ -33,9 +33,9 @@ def post_individual_episodes(
     anime_id: int,
     episode_number: int = Form(...),
     episode_name: str = Form(...),
+    episode_length: int = Form(...),
     episode_thumbnail: UploadedFile | None = File(default=None),
     episode_summary: str = Form(None),
-    episode_length: int = Form(None),
     providers: Json[AnyStr] | None = Form(None),
 ) -> EpisodeModel:
     user: CustomUser = request.auth
