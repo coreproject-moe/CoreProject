@@ -36,11 +36,11 @@
 </script>
 
 {#if mobile}
-    <div class="flex flex-col text-white">
+    <div class="flex flex-col text-white mt-10">
         <span class="font-bold text-2xl">Episodes</span>
         <div class="divider after:bg-white before:bg-white" />
         <div class="flex justify-between">
-            <div class="flex">
+            <div class="flex text-xl font-bold">
                 {episodes.length} Episodes
             </div>
             <div class="flex gap-4">

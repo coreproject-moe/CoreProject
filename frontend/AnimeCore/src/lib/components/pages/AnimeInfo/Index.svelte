@@ -119,7 +119,7 @@
                         </div>
 
                         {#if mobile}
-                            <div class="flex self-start gap-2">
+                            <div class="flex self-start gap-2 mt-10 md:mt-0">
                                 <button class="btn btn-sm btn-info normal-case">
                                     <div class="flex justify-center align-center gap-3">
                                         <span class="w-2 translate-y-1">
@@ -151,7 +151,7 @@
                             </div>
                         {/if}
 
-                        <anime-synopsys>
+                        <anime-synopsys class="md:mt-0 mt-10">
                             <ScrollArea
                                 class="h-56 text-white"
                                 offsetScrollbar={true}
