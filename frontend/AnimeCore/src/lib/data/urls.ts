@@ -58,6 +58,10 @@ export class UrlMaps {
         return `${this.BASE_URL}/anime/${id}/episodes`;
     };
 
+    public episode_number = (anime_id: number | string, episode_number: number | string) => {
+        return `${this.BASE_URL}/anime/${anime_id}/episodes/${episode_number}`;
+    };
+
     public get media_url() {
         // return process.env.NODE_ENV === "development" ? get(page).url.origin : "/media";
         return get(page).url.origin;

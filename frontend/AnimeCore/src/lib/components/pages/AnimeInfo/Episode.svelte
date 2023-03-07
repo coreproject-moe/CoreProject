@@ -12,6 +12,7 @@
     import Settings from "$icons/Settings.svelte";
     import EpisodeCard from "./EpisodeCard.svelte";
     import { responsiveMode } from "$store/Responsive";
+    import List from "$icons/List.svelte";
 
     const backend_urls = new UrlMaps();
     let mobile: boolean;
@@ -31,7 +32,46 @@
     ];
 </script>
 
-{#if !mobile}
+{#if mobile}
+    <div class="flex flex-col text-white">
+        <span class="font-bold text-2xl">Episodes</span>
+        <div class="divider after:bg-white before:bg-white" />
+        <div class="flex justify-between">
+            <div class="flex">
+                {episodes.length} Episodes
+            </div>
+            <div class="flex gap-4">
+                <div>
+                    <List
+                        width="30"
+                        height="30"
+                        color="white"
+                    />
+                </div>
+                <div>
+                    <Search
+                        width="20"
+                        height="20"
+                        color="white"
+                    />
+                </div>
+            </div>
+        </div>
+        {#each episodes as episode}
+            <div class="flex h-16 w-[90vw] items-center bg-[#1E2036] rounded-lg">
+                <img
+                    class="mask mask-squircle h-10 w-10 mx-4"
+                    src={episode.episode_thumbnail}
+                    alt={episode.episode_name}
+                />
+                <div class="flex flex-col">
+                    <span class="font-bold">Episode {episode.episode_number}</span>
+                    <span>he</span>
+                </div>
+            </div>
+        {/each}
+    </div>
+{:else}
     <div class="flex justify-between items-center md:items-start gap-3 flex-col md:flex-row mt-24">
         <div class="flex w-4/5 flex-col">
             <div class="flex">

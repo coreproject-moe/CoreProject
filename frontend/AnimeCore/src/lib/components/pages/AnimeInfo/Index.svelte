@@ -251,7 +251,6 @@
                                         <!-- Todo fix this star rating system -->
                                         <StarRating
                                             rating={3.5}
-                                            
                                             style="border: 1px solid firebrick;padding: 12px;"
                                         />
                                     </stars>
@@ -278,7 +277,7 @@
                     </anime-info>
                     <!-- Episodes go here  -->
                     {#await episodes(String(data?.episodes))}
-                        <EpisodeSkeleton />
+                        {#if !mobile}<EpisodeSkeleton />{/if}
                     {:then episodes}
                         {#if episodes}
                             <Episode {episodes} />
