@@ -38,6 +38,18 @@ export class UrlMaps {
         return `${this.BASE_URL}/anime/${id}`;
     };
 
+    public mal_id = (id: number | string) => {
+        return `${this.BASE_URL}/anime?mal_id=${id}`;
+    };
+
+    public kitsu_id = (id: number | string) => {
+        return `${this.BASE_URL}/anime?kitsu_id=${id}`;
+    };
+
+    public anilist_id = (id: number | string) => {
+        return `${this.BASE_URL}/anime?anilist_id=${id}`;
+    };
+
     public genre = (id: number | string) => {
         return `${this.BASE_URL}/anime/${id}/genres`;
     };

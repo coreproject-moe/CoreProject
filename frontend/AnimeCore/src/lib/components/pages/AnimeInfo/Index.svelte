@@ -14,7 +14,7 @@
         anime_rating: string;
         genres: string;
         episodes: string;
-        episode_count: number;
+        episodes_count: number;
     }>;
 
     import { UrlMaps } from "$data/urls";
@@ -111,7 +111,7 @@
                                 title_english={data?.title_english ?? ""}
                                 title_japanese={data?.title_japanese ?? ""}
                                 anime_source={data?.anime_source ?? ""}
-                                episodes={Number(data?.episode_count)}
+                                episodes={Number(data?.episodes_count)}
                                 status={data?.anime_aired_to ? "completed" : "airing"}
                                 aired_from={data?.anime_aired_to ?? ""}
                             />
@@ -197,7 +197,7 @@
                                 <div>
                                     <span>Episode :</span>
                                     <span class="text-warning">
-                                        0/{Number(data?.episode_count)}
+                                        0/{data?.episodes_count}
                                     </span>
                                 </div>
                                 <div>
