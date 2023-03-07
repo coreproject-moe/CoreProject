@@ -4,7 +4,7 @@ import type { PageLoad } from "./$types";
 
 export const load = (async ({
     params
-    // ,fetch // Use this if you want Server Side Fetch | https://kit.svelte.dev/docs/hooks#externalfetch
+    ,fetch // Use this if you want Server Side Fetch | https://kit.svelte.dev/docs/hooks#externalfetch
 }) => {
     const backend_mapping = new UrlMaps();
 

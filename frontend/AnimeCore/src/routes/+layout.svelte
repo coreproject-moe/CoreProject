@@ -1,12 +1,12 @@
 <script lang="ts">
     import "../app.scss";
 
-    import { beforeUpdate } from "svelte";
+    import { onMount } from "svelte";
     import { fade } from "svelte/transition";
 
     import NavigationBar from "$components/shared/NavigationBar.svelte";
     import navigationState from "$store/Navigation_State";
-    beforeUpdate(async () => {
+    onMount(async () => {
         document
             ?.querySelectorAll<HTMLDivElement | HTMLStyleElement>("#loader")
             ?.forEach((e) => e.remove());

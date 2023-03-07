@@ -34,6 +34,7 @@
     import AnimeInfo from "./AnimeInfo.svelte";
     import ImageCard from "./ImageCard.svelte";
     import Episode from "./Episode.svelte";
+    import EpisodeSkeleton from "./Episode.skeleton.svelte";
 
     const urls = new UrlMaps();
     let mobile: boolean;
@@ -278,7 +279,7 @@
                     </anime-info>
                     <!-- Episodes go here  -->
                     {#await episodes(String(data?.episodes))}
-                        Loading
+                        <EpisodeSkeleton />
                     {:then episodes}
                         {#if episodes}
                             <Episode {episodes} />
