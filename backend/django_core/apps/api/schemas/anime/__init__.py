@@ -1,6 +1,6 @@
 from apps.anime.models import AnimeModel, AnimeNameSynonymModel
 from ninja import ModelSchema
-
+from django.db.models import Avg
 from django.shortcuts import resolve_url
 
 ## Observations from getting request from stack trace
@@ -33,11 +33,17 @@ class AnimeInfoGETSchema(ModelSchema):
     themes: str
     episodes: str
     episodes_count: int
+    average_episode_length: int
     name_synonyms: list[AnimeNameSynonymSchema] = []
 
     class Config:
         model = AnimeModel
         model_fields = "__all__"
+
+    @staticmethod
+    def resolve_average_episode_length(obj: AnimeModel) -> int:
+        avg = obj.episodes.all().aggregate(value=Avg("episode_length"))
+        return avg["value"]
 
     @staticmethod
     def resolve_episodes_count(obj: AnimeModel) -> int:

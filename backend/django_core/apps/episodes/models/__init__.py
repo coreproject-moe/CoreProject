@@ -27,6 +27,7 @@ class EpisodeModel(models.Model):
     episode_comments = models.ManyToManyField(EpisodeCommentModel, blank=True)
     episode_timestamps = models.ManyToManyField(EpisodeTimestampModel, blank=True)
 
+    episode_length = models.PositiveIntegerField(default=None, blank=True)
     # Extra providers
     providers = HStoreField(
         default=dict,

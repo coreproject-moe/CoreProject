@@ -35,6 +35,7 @@ def post_individual_episodes(
     episode_name: str = Form(...),
     episode_thumbnail: UploadedFile | None = File(default=None),
     episode_summary: str = Form(None),
+    episode_length: int = Form(None),
     providers: Json[AnyStr] | None = Form(None),
 ) -> EpisodeModel:
     user: CustomUser = request.auth
@@ -53,6 +54,7 @@ def post_individual_episodes(
         "episode_name": episode_name,
         "episode_thumbnail": episode_thumbnail,
         "episode_summary": episode_summary,
+        "episode_length": episode_length,
         "providers": providers,
     }
 
@@ -75,6 +77,7 @@ def patch_individual_episode_info(
     episode_name: str = Form(...),
     episode_thumbnail: UploadedFile | None = File(default=None),
     episode_summary: str | None = Form(None),
+    episode_length: int = Form(None),
     providers: Json[AnyStr] | None = Form(None),
 ):
     user: CustomUser = request.auth
@@ -91,6 +94,7 @@ def patch_individual_episode_info(
         "episode_name": episode_name,
         "episode_thumbnail": episode_thumbnail,
         "episode_summary": episode_summary,
+        "episode_length": episode_length,
         "providers": providers,
     }
 
