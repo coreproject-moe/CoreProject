@@ -39,8 +39,8 @@ export const load = (async ({
             studios: string;
             producers: string;
             characters: string;
+            episodes: string;
             recommendations: [number];
-            episodes: [number];
             episodes_count: number;
         }> = data;
 
@@ -56,17 +56,8 @@ export const load = (async ({
             anime_synopsis: string;
             anime_background: string;
             anime_rating: string;
-            genres: () => Promise<{ id: number; mal_id: number; name: string; type: string }[]>;
-            episodes: () => Promise<
-                {
-                    id: number;
-                    episode_number: number;
-                    episode_name: string;
-                    episode_thumbnail: string;
-                    episode_summary: string;
-                    providers: Array<object>;
-                }[]
-            >;
+            genres: string;
+            episodes: string;
             episodes_count: number;
         }> = {
             mal_id: backend_data?.mal_id ?? 0,
@@ -79,38 +70,8 @@ export const load = (async ({
             anime_cover: backend_data?.cover ?? "",
             anime_synopsis: backend_data?.synopsis ?? "",
             anime_background: backend_data?.background ?? "",
-
-            genres: async () => {
-                const res = await fetch(backend_mapping.DOMAIN + String(backend_data.genres));
-                if (!res.ok) {
-                    throw new Error("Failed to fetch genres" + res.status);
-                }
-                const res_json = await res.json();
-                const data: Array<{
-                    id: number;
-                    mal_id: number;
-                    name: string;
-                    type: string;
-                }> = res_json;
-                return data;
-            },
-
-            episodes: async () => {
-                const res = await fetch(backend_mapping.DOMAIN + String(backend_data.episodes));
-                if (!res.ok) {
-                    throw new Error("Failed to fetch episodes" + res.status);
-                }
-                const res_json = await res.json();
-                const data: Array<{
-                    id: number;
-                    episode_number: number;
-                    episode_name: string;
-                    episode_thumbnail: string;
-                    episode_summary: string;
-                    providers: Array<object>;
-                }> = res_json;
-                return data;
-            },
+            genres: backend_data?.genres ?? "",
+            episodes: backend_data?.episodes ?? "",
             episodes_count: backend_data?.episodes_count ?? 0
         };
 

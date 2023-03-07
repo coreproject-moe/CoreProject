@@ -12,17 +12,8 @@
         anime_synopsis: string;
         anime_background: string;
         anime_rating: string;
-        genres: () => Promise<{ id: number; mal_id: number; name: string; type: string }[]>;
-        episodes: () => Promise<
-            {
-                id: number;
-                episode_number: number;
-                episode_name: string;
-                episode_thumbnail: string;
-                episode_summary: string;
-                providers: Array<object>;
-            }[]
-        >;
+        genres: string;
+        episodes: string;
         episode_count: number;
     }>;
 
@@ -50,6 +41,38 @@
 
     const anime_card_image = urls.DOMAIN + String(data?.anime_banner);
     const anime_background_image = urls.DOMAIN + String(data?.anime_cover);
+
+    const genres = async (url: string) => {
+        const res = await fetch(urls.DOMAIN + url);
+        if (!res.ok) {
+            throw new Error("Failed to fetch genres" + res.status);
+        }
+        const res_json = await res.json();
+        const data: Array<{
+            id: number;
+            mal_id: number;
+            name: string;
+            type: string;
+        }> = res_json;
+        return data;
+    };
+
+    const episodes = async (url: string) => {
+        const res = await fetch(urls.DOMAIN + url);
+        if (!res.ok) {
+            throw new Error("Failed to fetch episodes" + res.status);
+        }
+        const res_json = await res.json();
+        const data: Array<{
+            id: number;
+            episode_number: number;
+            episode_name: string;
+            episode_thumbnail: string;
+            episode_summary: string;
+            providers: Array<object>;
+        }> = res_json;
+        return data;
+    };
 </script>
 
 <div class="grid h-screen relative">
@@ -136,7 +159,7 @@
                                 </p>
                             </ScrollArea>
                             <div class="hidden md:flex gap-2 flex-row pt-5">
-                                {#await data.genres?.()}
+                                {#await genres(String(data?.genres))}
                                     <div class="animate-pulse flex space-x-4">
                                         {#each Array(5) as _}
                                             <div
@@ -155,7 +178,7 @@
                                         {/each}
                                     {/if}
                                 {:catch}
-                                    <p>Error</p>
+                                    <nothing />
                                 {/await}
                             </div>
                             <button
@@ -254,7 +277,7 @@
                         {/if}
                     </anime-info>
                     <!-- Episodes go here  -->
-                    {#await data?.episodes?.()}
+                    {#await episodes(String(data?.episodes))}
                         Loading
                     {:then episodes}
                         {#if episodes}
