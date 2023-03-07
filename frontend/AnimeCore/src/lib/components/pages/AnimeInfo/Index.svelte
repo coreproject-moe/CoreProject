@@ -255,6 +255,7 @@
                             </anime-ratings>
                         {/if}
                     </anime-info>
+                    <!-- Episodes go here  -->
                     <Episode {episodes} />
                 </div>
             </div>

@@ -127,9 +127,11 @@
                 {#each episodes as episode}
                     {@const url = backend_urls.DOMAIN + episode.episode_thumbnail}
                     {@const name = episode.episode_name}
+                    {@const number = episode.episode_number}
                     <EpisodeCard
                         episode_card_background_image={url}
                         episode_name={name}
+                        episode_number={number}
                     />
                 {/each}
             </div>
