@@ -13,6 +13,7 @@
     import EpisodeCard from "./EpisodeCard.svelte";
     import { responsiveMode } from "$store/Responsive";
     import List from "$icons/List.svelte";
+    import MoreVertical from "$icons/MoreVertical.svelte";
 
     const backend_urls = new UrlMaps();
     let mobile: boolean;
@@ -66,8 +67,13 @@
                 />
                 <div class="flex flex-col">
                     <span class="font-bold">Episode {episode.episode_number}</span>
-                    <span>he</span>
+                    <span>23:23</span>
                 </div>
+                <MoreVertical
+                    class="absolute right-10"
+                    width="20"
+                    height="20"
+                />
             </div>
         {/each}
     </div>
