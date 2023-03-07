@@ -42,8 +42,11 @@ class AnimeInfoGETSchema(ModelSchema):
 
     @staticmethod
     def resolve_average_episode_length(obj: AnimeModel) -> int:
-        avg = obj.episodes.all().aggregate(value=Avg("episode_length"))
-        return avg["value"]
+        if instance := obj.episodes.all():
+            avg = instance.aggregate(value=Avg("episode_length"))
+            return avg["value"]
+        else:
+            return 0
 
     @staticmethod
     def resolve_episodes_count(obj: AnimeModel) -> int:
