@@ -65,6 +65,21 @@ def post_individual_episodes(
     return instance
 
 
+@router.get(
+    "/{int:anime_id}/episodes/{int:episode_number}",
+    response=EpisodeGETSchema,
+)
+def get_individual_episode(
+    request: HttpRequest,
+    anime_id: int,
+    episode_number: int,
+):
+    instance = get_object_or_404(
+        get_object_or_404(AnimeModel, pk=anime_id).episodes, episode_number=episode_number
+    )
+    return instance
+
+
 @router.patch(
     "/{int:anime_id}/episodes/{int:episode_number}",
     response=EpisodeGETSchema,
