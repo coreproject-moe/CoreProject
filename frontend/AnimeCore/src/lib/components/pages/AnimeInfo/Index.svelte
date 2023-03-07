@@ -2,37 +2,29 @@
 <script lang="ts">
     export let data: Partial<{
         mal_id: number;
-        episodes: [
-            {
-                episode_number: number;
-            }
-        ];
         title_english: string;
         title_japanese: string;
         anime_source: string;
         anime_aired_from: string;
         anime_aired_to: string;
-        anime_synopsis: string;
-        anime_banner?: string; // Image
+        anime_banner: string; // image
         anime_cover: string; // Image
+        anime_synopsis: string;
         anime_background: string;
         anime_rating: string;
-        updated: Date;
+        genres: () => Promise<{ id: number; mal_id: number; name: string; type: string }[]>;
+        episodes: () => Promise<
+            {
+                id: number;
+                episode_number: number;
+                episode_name: string;
+                episode_thumbnail: string;
+                episode_summary: string;
+                providers: Array<object>;
+            }[]
+        >;
     }>;
-    export let genres: Array<{
-        id: number;
-        mal_id: number;
-        name: string;
-        type: string;
-    }>;
-    export let episodes: Array<{
-        id: number;
-        episode_number: number;
-        episode_name: string;
-        episode_thumbnail: string;
-        episode_summary: string;
-        providers: Array<object>;
-    }>;
+
     import { UrlMaps } from "$data/urls";
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
@@ -89,6 +81,7 @@
                             <ImageCard src={anime_card_image} />
 
                             <!-- Anime info  -->
+
                             <AnimeInfo
                                 title_english={data?.title_english ?? ""}
                                 title_japanese={data?.title_japanese ?? ""}
@@ -142,7 +135,7 @@
                                 </p>
                             </ScrollArea>
                             <div class="hidden md:flex gap-2 flex-row pt-5">
-                                {#await genres}
+                                {#await data.genres?.()}
                                     <div class="animate-pulse flex space-x-4">
                                         {#each Array(5) as _}
                                             <div
@@ -151,13 +144,15 @@
                                         {/each}
                                     </div>
                                 {:then value}
-                                    {#each value as item}
-                                        <span
-                                            class="badge text-white bg-base-100 badge-lg rounded-md border-transparent leading-6 text-sm font-bold capitalize"
-                                        >
-                                            {item.name}
-                                        </span>
-                                    {/each}
+                                    {#if value}
+                                        {#each value as item}
+                                            <span
+                                                class="badge text-white bg-base-100 badge-lg rounded-md border-transparent leading-6 text-sm font-bold capitalize"
+                                            >
+                                                {item.name}
+                                            </span>
+                                        {/each}
+                                    {/if}
                                 {:catch}
                                     <p>Error</p>
                                 {/await}
