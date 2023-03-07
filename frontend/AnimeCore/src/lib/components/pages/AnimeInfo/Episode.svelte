@@ -59,7 +59,7 @@
             </div>
         </div>
         {#each episodes as episode}
-            <div class="flex h-16 w-[90vw] items-center bg-[#1E2036] rounded-lg">
+            <div class="flex h-16 w-[90vw] items-center bg-[#1E2036] rounded-lg relative">
                 <img
                     class="mask mask-squircle h-10 w-10 mx-4"
                     src={episode.episode_thumbnail}
@@ -70,9 +70,9 @@
                     <span>23:23</span>
                 </div>
                 <MoreVertical
-                    class="absolute right-10"
-                    width="20"
-                    height="20"
+                    class="absolute right-5"
+                    width="30"
+                    height="30"
                 />
             </div>
         {/each}
