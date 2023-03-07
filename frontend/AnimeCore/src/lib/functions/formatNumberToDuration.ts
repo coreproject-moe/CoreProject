@@ -4,6 +4,8 @@ dayjs.extend(duration);
 
 export function formatNumberToDuration(seconds: number) {
     const durationObject = dayjs.duration(seconds, "seconds");
-    const timeString = dayjs(durationObject.asMilliseconds()).format("m:s");
+
+    const timeString = dayjs(durationObject.asMilliseconds()).format("mm:ss");
+
     return timeString;
 }
