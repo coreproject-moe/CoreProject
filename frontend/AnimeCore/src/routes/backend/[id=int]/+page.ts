@@ -3,8 +3,8 @@ import { UrlMaps } from "$data/urls";
 import type { PageLoad } from "./$types";
 
 export const load = (async ({
-    params
-    // ,fetch // Use this if you want Server Side Fetch | https://kit.svelte.dev/docs/hooks#externalfetch
+    params,
+    fetch // Use this if you want Server Side Fetch | https://kit.svelte.dev/docs/hooks#externalfetch
 }) => {
     const backend_mapping = new UrlMaps();
 
@@ -41,6 +41,7 @@ export const load = (async ({
             characters: string;
             recommendations: [number];
             episodes: [number];
+            episodes_count: number;
         }> = data;
 
         const backend_remapped_to_frontend: Partial<{
@@ -66,6 +67,7 @@ export const load = (async ({
                     providers: Array<object>;
                 }[]
             >;
+            episodes_count: number;
         }> = {
             mal_id: backend_data?.mal_id ?? 0,
             title_english: backend_data?.name ?? "",
@@ -80,6 +82,9 @@ export const load = (async ({
 
             genres: async () => {
                 const res = await fetch(backend_mapping.DOMAIN + String(backend_data.genres));
+                if (!res.ok) {
+                    throw new Error("Failed to fetch genres" + res.status);
+                }
                 const res_json = await res.json();
                 const data: Array<{
                     id: number;
@@ -92,6 +97,9 @@ export const load = (async ({
 
             episodes: async () => {
                 const res = await fetch(backend_mapping.DOMAIN + String(backend_data.episodes));
+                if (!res.ok) {
+                    throw new Error("Failed to fetch episodes" + res.status);
+                }
                 const res_json = await res.json();
                 const data: Array<{
                     id: number;
@@ -102,7 +110,8 @@ export const load = (async ({
                     providers: Array<object>;
                 }> = res_json;
                 return data;
-            }
+            },
+            episodes_count: backend_data?.episodes_count ?? 0
         };
 
         return backend_remapped_to_frontend;

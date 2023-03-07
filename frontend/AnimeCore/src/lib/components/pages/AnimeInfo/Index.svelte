@@ -23,6 +23,7 @@
                 providers: Array<object>;
             }[]
         >;
+        episode_count: number;
     }>;
 
     import { UrlMaps } from "$data/urls";
@@ -86,7 +87,7 @@
                                 title_english={data?.title_english ?? ""}
                                 title_japanese={data?.title_japanese ?? ""}
                                 anime_source={data?.anime_source ?? ""}
-                                episodes={episodes.length}
+                                episodes={Number(data?.episode_count)}
                                 status={data?.anime_aired_to ? "completed" : "airing"}
                                 aired_from={data?.anime_aired_to ?? ""}
                             />
@@ -171,7 +172,9 @@
                                 </div>
                                 <div>
                                     <span>Episode :</span>
-                                    <span class="text-warning">0/{episodes.length}</span>
+                                    <span class="text-warning">
+                                        0/{Number(data?.episode_count)}
+                                    </span>
                                 </div>
                                 <div>
                                     <span>Your Score :</span>
@@ -251,7 +254,13 @@
                         {/if}
                     </anime-info>
                     <!-- Episodes go here  -->
-                    <Episode {episodes} />
+                    {#await data?.episodes?.()}
+                        Loading
+                    {:then episodes}
+                        {#if episodes}
+                            <Episode {episodes} />
+                        {/if}
+                    {/await}
                 </div>
             </div>
         </div>
