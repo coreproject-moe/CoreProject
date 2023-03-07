@@ -247,14 +247,15 @@
 
                                 <p class="text-white mt-2">Your rating</p>
                                 <star-container class="flex mt-2 items-center gap-2 flex-nowrap">
-                                    <stars class="flex">
-                                        <!-- Todo fix this star rating system -->
+                                    <stars class="flex translate-y-1">
                                         <StarRating
-                                            rating={3.5}
-                                            style="border: 1px solid firebrick;padding: 12px;"
+                                            rating={Number(data?.anime_rating ?? 0)}
+                                            config={{ fullColor: "white" }}
                                         />
                                     </stars>
-                                    <p class="font-bold nowrap text-lg w-12">90 %</p>
+                                    <p class="font-bold nowrap text-lg w-12">
+                                        {(100 / 5) * Number(data?.anime_rating ?? 0)} %
+                                    </p>
                                     <button class="btn btn-square btn-sm btn-info">
                                         <Edit
                                             variant="without_underline_around_pencil"

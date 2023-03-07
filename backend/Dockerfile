@@ -31,6 +31,7 @@ RUN poetry shell
 # Build tailwind CSS codes
 RUN python django_core/manage.py tailwind install
 RUN python django_core/manage.py tailwind build
+RUN npm cache clean --force
 RUN python django_core/manage.py collectstatic --clear --link --no-input
 COPY . /code
 

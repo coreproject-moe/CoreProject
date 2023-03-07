@@ -8,4 +8,5 @@ RUN npm run build:node
 RUN mv package.json ./build
 RUN find . -maxdepth 1 ! -name 'build' -exec rm -rf "{}" \;
 RUN cd ./build
+RUN npm cache clean --force
 CMD ["node", "build/index.js"]

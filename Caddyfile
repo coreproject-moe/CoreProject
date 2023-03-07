@@ -3,6 +3,7 @@
                 # output file ./access.log
                 level debug
         }
+        experimental_http3
 }
 
 # backend.example.com
