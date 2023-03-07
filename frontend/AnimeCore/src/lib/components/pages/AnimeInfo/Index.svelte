@@ -2,37 +2,21 @@
 <script lang="ts">
     export let data: Partial<{
         mal_id: number;
-        episodes: [
-            {
-                episode_number: number;
-            }
-        ];
         title_english: string;
         title_japanese: string;
         anime_source: string;
         anime_aired_from: string;
         anime_aired_to: string;
-        anime_synopsis: string;
-        anime_banner?: string; // Image
+        anime_banner: string; // image
         anime_cover: string; // Image
+        anime_synopsis: string;
         anime_background: string;
         anime_rating: string;
-        updated: Date;
+        genres: string;
+        episodes: string;
+        episode_count: number;
     }>;
-    export let genres: Array<{
-        id: number;
-        mal_id: number;
-        name: string;
-        type: string;
-    }>;
-    export let episodes: Array<{
-        id: number;
-        episode_number: number;
-        episode_name: string;
-        episode_thumbnail: string;
-        episode_summary: string;
-        providers: Array<object>;
-    }>;
+
     import { UrlMaps } from "$data/urls";
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
@@ -57,6 +41,38 @@
 
     const anime_card_image = urls.DOMAIN + String(data?.anime_banner);
     const anime_background_image = urls.DOMAIN + String(data?.anime_cover);
+
+    const genres = async (url: string) => {
+        const res = await fetch(urls.DOMAIN + url);
+        if (!res.ok) {
+            throw new Error("Failed to fetch genres" + res.status);
+        }
+        const res_json = await res.json();
+        const data: Array<{
+            id: number;
+            mal_id: number;
+            name: string;
+            type: string;
+        }> = res_json;
+        return data;
+    };
+
+    const episodes = async (url: string) => {
+        const res = await fetch(urls.DOMAIN + url);
+        if (!res.ok) {
+            throw new Error("Failed to fetch episodes" + res.status);
+        }
+        const res_json = await res.json();
+        const data: Array<{
+            id: number;
+            episode_number: number;
+            episode_name: string;
+            episode_thumbnail: string;
+            episode_summary: string;
+            providers: Array<object>;
+        }> = res_json;
+        return data;
+    };
 </script>
 
 <div class="grid h-screen relative">
@@ -89,11 +105,12 @@
                             <ImageCard src={anime_card_image} />
 
                             <!-- Anime info  -->
+
                             <AnimeInfo
                                 title_english={data?.title_english ?? ""}
                                 title_japanese={data?.title_japanese ?? ""}
                                 anime_source={data?.anime_source ?? ""}
-                                episodes={episodes.length}
+                                episodes={Number(data?.episode_count)}
                                 status={data?.anime_aired_to ? "completed" : "airing"}
                                 aired_from={data?.anime_aired_to ?? ""}
                             />
@@ -142,7 +159,7 @@
                                 </p>
                             </ScrollArea>
                             <div class="hidden md:flex gap-2 flex-row pt-5">
-                                {#await genres}
+                                {#await genres(String(data?.genres))}
                                     <div class="animate-pulse flex space-x-4">
                                         {#each Array(5) as _}
                                             <div
@@ -151,15 +168,17 @@
                                         {/each}
                                     </div>
                                 {:then value}
-                                    {#each value as item}
-                                        <span
-                                            class="badge text-white bg-base-100 badge-lg rounded-md border-transparent leading-6 text-sm font-bold capitalize"
-                                        >
-                                            {item.name}
-                                        </span>
-                                    {/each}
+                                    {#if value}
+                                        {#each value as item}
+                                            <span
+                                                class="badge text-white bg-base-100 badge-lg rounded-md border-transparent leading-6 text-sm font-bold capitalize"
+                                            >
+                                                {item.name}
+                                            </span>
+                                        {/each}
+                                    {/if}
                                 {:catch}
-                                    <p>Error</p>
+                                    <nothing />
                                 {/await}
                             </div>
                             <button
@@ -176,7 +195,9 @@
                                 </div>
                                 <div>
                                     <span>Episode :</span>
-                                    <span class="text-warning">0/{episodes.length}</span>
+                                    <span class="text-warning">
+                                        0/{Number(data?.episode_count)}
+                                    </span>
                                 </div>
                                 <div>
                                     <span>Your Score :</span>
@@ -256,7 +277,13 @@
                         {/if}
                     </anime-info>
                     <!-- Episodes go here  -->
-                    <Episode {episodes} />
+                    {#await episodes(String(data?.episodes))}
+                        Loading
+                    {:then episodes}
+                        {#if episodes}
+                            <Episode {episodes} />
+                        {/if}
+                    {/await}
                 </div>
             </div>
         </div>

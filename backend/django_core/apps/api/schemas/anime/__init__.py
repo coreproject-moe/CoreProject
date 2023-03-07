@@ -32,11 +32,16 @@ class AnimeInfoGETSchema(ModelSchema):
     characters: str
     themes: str
     episodes: str
+    episodes_count: int
     name_synonyms: list[AnimeNameSynonymSchema] = []
 
     class Config:
         model = AnimeModel
         model_fields = "__all__"
+
+    @staticmethod
+    def resolve_episodes_count(obj: AnimeModel) -> int:
+        return obj.episodes.count()
 
     @staticmethod
     def resolve_genres(obj: AnimeModel) -> str:

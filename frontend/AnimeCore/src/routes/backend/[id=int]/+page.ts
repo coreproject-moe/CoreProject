@@ -39,18 +39,13 @@ export const load = (async ({
             studios: string;
             producers: string;
             characters: string;
+            episodes: string;
             recommendations: [number];
-            episodes: [number];
-            episode: string;
+            episodes_count: number;
         }> = data;
 
         const backend_remapped_to_frontend: Partial<{
             mal_id: number;
-            episodes: [
-                {
-                    episode_number: number;
-                }
-            ];
             title_english: string;
             title_japanese: string;
             anime_source: string;
@@ -61,9 +56,11 @@ export const load = (async ({
             anime_synopsis: string;
             anime_background: string;
             anime_rating: string;
+            genres: string;
+            episodes: string;
+            episodes_count: number;
         }> = {
             mal_id: backend_data?.mal_id ?? 0,
-            episodes: [{ episode_number: data?.episodes }],
             title_english: backend_data?.name ?? "",
             title_japanese: backend_data?.name_japanese ?? "",
             anime_source: backend_data?.source ?? "",
@@ -72,41 +69,16 @@ export const load = (async ({
             anime_banner: backend_data?.banner ?? "",
             anime_cover: backend_data?.cover ?? "",
             anime_synopsis: backend_data?.synopsis ?? "",
-            anime_background: backend_data?.background ?? ""
+            anime_background: backend_data?.background ?? "",
+            genres: backend_data?.genres ?? "",
+            episodes: backend_data?.episodes ?? "",
+            episodes_count: backend_data?.episodes_count ?? 0
         };
+
         return backend_remapped_to_frontend;
     };
 
-    const genre = async () => {
-        const url = backend_mapping.genre(params.id);
-        const res = await fetch(url);
-        const res_json = await res.json();
-        const data: Array<{
-            id: number;
-            mal_id: number;
-            name: string;
-            type: string;
-        }> = res_json;
-        return data;
-    };
-
-    const episodes = async () => {
-        const url = backend_mapping.episode(params.id);
-        const res = await fetch(url);
-        const res_json = await res.json();
-        const data: Array<{
-            id: number;
-            episode_number: number;
-            episode_name: string;
-            episode_thumbnail: string;
-            episode_summary: string;
-            providers: Array<object>;
-        }> = res_json;
-        return data;
-    };
     return {
-        animeData: anime(),
-        genre: genre(),
-        episodes: episodes()
+        animeData: anime()
     };
 }) satisfies PageLoad;

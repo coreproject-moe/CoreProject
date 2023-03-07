@@ -10,8 +10,4 @@
     <title>{data.animeData?.title_english} | CoreProject</title>
 </svelte:head>
 
-<AnimeInfo
-    data={data.animeData}
-    genres={data.genre}
-    episodes={data.episodes}
-/>
+<AnimeInfo data={data.animeData} />
