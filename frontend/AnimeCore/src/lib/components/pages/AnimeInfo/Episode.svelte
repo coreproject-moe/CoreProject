@@ -16,6 +16,7 @@
     import List from "$icons/List.svelte";
     import MoreVertical from "$icons/MoreVertical.svelte";
     import { formatNumberToDuration } from "$functions/formatNumberToDuration";
+    import { page } from "$app/stores";
 
     const backend_urls = new UrlMaps();
     let mobile: boolean;
@@ -61,22 +62,24 @@
             </div>
         </div>
         {#each episodes as episode}
-            <div class="flex h-16 w-[90vw] items-center bg-[#1E2036] rounded-lg relative my-4">
-                <img
-                    class="mask mask-squircle h-10 w-10 mx-4"
-                    src={episode.episode_thumbnail}
-                    alt={episode.episode_name}
-                />
-                <div class="flex flex-col">
-                    <span class="font-bold">Episode {episode.episode_number}</span>
-                    <span>{formatNumberToDuration(episode.episode_length)}</span>
+            <a href="{$page.url.href}/episodes/{episode?.episode_number}">
+                <div class="flex h-16 w-[90vw] items-center bg-[#1E2036] rounded-lg relative my-4">
+                    <img
+                        class="mask mask-squircle h-10 w-10 mx-4"
+                        src={episode.episode_thumbnail}
+                        alt={episode.episode_name}
+                    />
+                    <div class="flex flex-col">
+                        <span class="font-bold">Episode {episode.episode_number}</span>
+                        <span>{formatNumberToDuration(episode.episode_length)}</span>
+                    </div>
+                    <MoreVertical
+                        class="absolute right-5"
+                        width="30"
+                        height="30"
+                    />
                 </div>
-                <MoreVertical
-                    class="absolute right-5"
-                    width="30"
-                    height="30"
-                />
-            </div>
+            </a>
         {/each}
     </div>
 {:else}
