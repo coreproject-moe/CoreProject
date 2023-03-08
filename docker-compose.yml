@@ -80,7 +80,6 @@ services:
             - redis
             - celery
 
-  
     # Frontend
     anime:
         restart: unless-stopped
