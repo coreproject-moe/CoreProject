@@ -28,9 +28,9 @@ class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel]):
     list_filter = [
         "genres",
         "themes",
-        "studios",
-        "producers",
-        "characters",
+        # "studios",
+        # "producers",
+        # "characters",
     ]
     search_fields = [
         "name",
