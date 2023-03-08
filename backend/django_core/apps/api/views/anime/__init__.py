@@ -186,13 +186,14 @@ def post_anime_info(
             0,
         ]
     }
-    database, _ = AnimeModel.objects.get_or_create(
+    database = AnimeModel.objects.create(
         name=kwargs["name"],
         defaults=model_data,
     )
+
     if name_synonyms_list := kwargs.get("name_synonyms", None):
         for anime_name_synonym in name_synonyms_list:
-            anime_synonym_instance = AnimeNameSynonymModel.objects.create(
+            anime_synonym_instance = AnimeNameSynonymModel.objects.get_or_create(
                 name=anime_name_synonym.strip(),
             )
             database.name_synonyms.add(anime_synonym_instance)
