@@ -73,6 +73,10 @@ class AnimeModel(models.Model):
     rating = models.FloatField(
         blank=True,
         null=True,
+        validators=[
+            MaxValueValidator(5),
+            MinValueValidator(0),
+        ],
     )
 
     genres = models.ManyToManyField(AnimeGenreModel, blank=True)
@@ -85,7 +89,6 @@ class AnimeModel(models.Model):
     recommendations = models.ManyToManyField("self", blank=True)
     episodes = models.ManyToManyField(EpisodeModel, blank=True)
 
-    rating = models.CharField(max_length=128, null=True, blank=True)
 
     # Dict Model field
     theme_openings = HStoreField(
