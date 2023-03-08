@@ -4,7 +4,7 @@ from django.db import models
 
 
 class ProducerModel(models.Model):
-    mal_id = models.IntegerField(unique=True, blank=False, null=False)
+    mal_id = models.IntegerField(unique=True, blank=True, null=True)
     kitsu_id = models.IntegerField(unique=True, blank=True, null=True)
     name = models.CharField(
         max_length=128,

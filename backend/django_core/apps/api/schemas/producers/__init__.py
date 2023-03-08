@@ -10,6 +10,8 @@ class ProducerGETSchema(ModelSchema):
 
 
 class ProducerPOSTSchema(ModelSchema):
+    kitsu_id: int | None = None
+
     class Config:
         model = ProducerModel
         model_exclude = [

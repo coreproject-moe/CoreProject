@@ -9,12 +9,12 @@ from ninja import Router
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
 
-from ...schemas.studios import StudioSchema
+from ...schemas.studios import StudioGETSchema
 
 router = Router()
 
 
-@router.get("/{int:anime_id}/studios", response=list[StudioSchema])
+@router.get("/{int:anime_id}/studios", response=list[StudioGETSchema])
 def get_individual_anime_studio_info(
     request: HttpRequest,
     anime_id: int,
@@ -26,11 +26,11 @@ def get_individual_anime_studio_info(
     return query
 
 
-@router.post("/{int:anime_id}/studios", response=StudioSchema, auth=AuthBearer())
+@router.post("/{int:anime_id}/studios", response=StudioGETSchema, auth=AuthBearer())
 def post_individual_anime_studio_info(
     request: HttpRequest,
     anime_id: int,
-    payload: StudioSchema,
+    payload: StudioGETSchema,
 ) -> StudioModel:
     user: CustomUser = request.auth
     if not user.is_superuser:

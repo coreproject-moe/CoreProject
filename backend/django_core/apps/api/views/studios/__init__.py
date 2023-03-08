@@ -1,19 +1,21 @@
+from http import HTTPStatus
 from apps.api.auth import AuthBearer
 from ninja import Query, Router
 from ninja.pagination import paginate
 
 from django.db.models import Q
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
 
 from ....studios.models import StudioModel
 from ...filters.studios import StudioFilter
-from ...schemas.studios import StudioSchema
+from ...schemas.studios import StudioGETSchema, StudioPOSTSchema
+from ....user.models import CustomUser
 
 router = Router()
 
 
-@router.get("", response=list[StudioSchema])
+@router.get("", response=list[StudioGETSchema])
 @paginate
 def get_studio_info(
     request: HttpRequest,
@@ -36,7 +38,19 @@ def get_studio_info(
     return query
 
 
-@router.get("/{str:studio_id}/", response=StudioSchema, auth=AuthBearer())
+@router.post("", response=StudioGETSchema, auth=AuthBearer())
+def post_studio_info(request: HttpRequest, payload: StudioPOSTSchema) -> StudioModel:
+    user: CustomUser = request.auth
+    if not user.is_superuser:
+        return HttpResponse(
+            "Superuser is required for this operation", status=HTTPStatus.UNAUTHORIZED
+        )
+
+    instance = StudioModel.objects.create(**payload.dict(exclude_none=True))
+    return instance
+
+
+@router.get("/{str:studio_id}/", response=StudioGETSchema, auth=AuthBearer())
 def get_individual_studio_info(
     request: HttpRequest,
     studio_id: str,

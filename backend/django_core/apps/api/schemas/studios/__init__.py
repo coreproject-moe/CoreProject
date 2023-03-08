@@ -3,7 +3,13 @@ from ninja import ModelSchema
 from ....studios.models import StudioModel
 
 
-class StudioSchema(ModelSchema):
+class StudioGETSchema(ModelSchema):
+    class Config:
+        model = StudioModel
+        model_fields = "__all__"
+
+
+class StudioPOSTSchema(ModelSchema):
     class Config:
         model = StudioModel
         model_exclude = [
