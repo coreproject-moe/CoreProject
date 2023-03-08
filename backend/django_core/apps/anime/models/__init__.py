@@ -7,7 +7,7 @@ from django.db import models
 from ...characters.models import CharacterModel
 from ...episodes.models import EpisodeModel
 from ...producers.models import ProducerModel
-from ...studios.models import StudioModel
+
 from .anime_genre import AnimeGenreModel
 from .anime_theme import AnimeThemeModel
 
@@ -73,9 +73,10 @@ class AnimeModel(models.Model):
 
     genres = models.ManyToManyField(AnimeGenreModel, blank=True)
     themes = models.ManyToManyField(AnimeThemeModel, blank=True)
-    studios = models.ManyToManyField(StudioModel, blank=True)
-    producers = models.ManyToManyField(ProducerModel, blank=True)
     characters = models.ManyToManyField(CharacterModel, blank=True)
+    # Producers and studios are the same
+    studios = models.ManyToManyField(ProducerModel, blank=True, related_name="studios")
+    producers = models.ManyToManyField(ProducerModel, blank=True, related_name="producers")
 
     recommendations = models.ManyToManyField("self", blank=True)
     episodes = models.ManyToManyField(EpisodeModel, blank=True)

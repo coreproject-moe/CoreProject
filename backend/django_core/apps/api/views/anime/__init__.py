@@ -16,7 +16,6 @@ from apps.characters.models import CharacterModel
 from apps.user.models import CustomUser
 from apps.anime.models.anime_theme import AnimeThemeModel
 from apps.producers.models import ProducerModel
-from apps.studios.models import StudioModel
 
 try:
     from django.contrib.postgres.search import TrigramSimilarity
@@ -210,7 +209,7 @@ def post_anime_info(
 
     if studios_list := kwargs.get("studios", None):
         for studio in studios_list:
-            studio_instance = StudioModel.objects.get(pk=studio)
+            studio_instance = ProducerModel.objects.get(pk=studio)
             database.studios.add(studio_instance)
 
     if producers_list := kwargs.get("producers", None):

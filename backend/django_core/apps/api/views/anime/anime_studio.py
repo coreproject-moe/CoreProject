@@ -2,23 +2,23 @@ from http import HTTPStatus
 
 from apps.anime.models import AnimeModel
 from apps.api.auth import AuthBearer
-from apps.studios.models import StudioModel
 from apps.user.models import CustomUser
 from ninja import Router
 
+from ....producers.models import ProducerModel
+from ...schemas.producers import ProducerGETSchema, ProducerPOSTSchema
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
 
-from ...schemas.studios import StudioGETSchema
 
 router = Router()
 
 
-@router.get("/{int:anime_id}/studios", response=list[StudioGETSchema])
+@router.get("/{int:anime_id}/studios", response=list[ProducerGETSchema])
 def get_individual_anime_studio_info(
     request: HttpRequest,
     anime_id: int,
-) -> list[StudioModel]:
+) -> list[ProducerModel]:
     query = get_list_or_404(
         get_object_or_404(AnimeModel, pk=anime_id).studios,
     )
@@ -26,12 +26,12 @@ def get_individual_anime_studio_info(
     return query
 
 
-@router.post("/{int:anime_id}/studios", response=StudioGETSchema, auth=AuthBearer())
+@router.post("/{int:anime_id}/studios", response=ProducerGETSchema, auth=AuthBearer())
 def post_individual_anime_studio_info(
     request: HttpRequest,
     anime_id: int,
-    payload: StudioGETSchema,
-) -> StudioModel:
+    payload: ProducerPOSTSchema,
+) -> ProducerModel:
     user: CustomUser = request.auth
     if not user.is_superuser:
         return HttpResponse(
@@ -42,11 +42,11 @@ def post_individual_anime_studio_info(
     # theres no point in continuing
     anime_info_model = get_object_or_404(AnimeModel, pk=anime_id)
 
-    query = StudioModel.objects.get_or_create(
+    query = ProducerModel.objects.get_or_create(
         **payload.dict(),
     )
 
-    instance: StudioModel = query[0]
+    instance: ProducerModel = query[0]
     anime_info_model.studios.add(instance)
 
     return instance

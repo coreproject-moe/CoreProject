@@ -100,7 +100,6 @@ INSTALLED_APPS = [
     "apps.trackers",
     "apps.characters",
     "apps.producers",
-    "apps.studios",
     "apps.staffs",
     "apps.episodes",
 ]

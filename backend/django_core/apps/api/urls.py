@@ -129,15 +129,6 @@ api.add_router(
     tags=["staffs"],
 )
 
-# __STUDIO ROUTER ___
-
-from .views.studios import router as studio_router
-
-api.add_router(
-    "/studios",
-    studio_router,
-    tags=["studios"],
-)
 
 # __ TRACKER ROUTER __
 
