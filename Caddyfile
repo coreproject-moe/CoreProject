@@ -1,8 +1,8 @@
 {
-        log {
-                # output file ./access.log
-                level debug
-        }
+        # log {
+        #         # output file ./access.log
+        #         level debug
+        # }
 }
 
 # backend.example.com
@@ -14,7 +14,7 @@ backend.{$SITE_ADDRESS} {
 	}
 
         #  Django
-        reverse_proxy varnish:80 {
+        reverse_proxy varnish-django:80 {
                 # @sendfile header X-Sendfile *
                 # handle_response @sendfile {
                 #         rewrite {http.reverse_proxy.header.X-Sendfile}

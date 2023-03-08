@@ -81,13 +81,13 @@ services:
             - celery
 
     # Varnish
-    varnish:
+    varnish-django:
         image: varnish:fresh-alpine
-        container_name: varnish
         volumes:
-            - ./default.vcl:/etc/varnish/default.vcl:ro
-        tmpfs:
-            - /var/lib/varnish:exec
+            - ./django.vcl:/etc/varnish/default.vcl:ro
+        # https://github.com/moby/moby/issues/20437
+        # tmpfs:
+        #     - /var/lib/varnish:exec
         environment:
             - VARNISH_SIZE=1G
         command: "-p default_keep=300"
@@ -122,5 +122,5 @@ services:
             - LOG_FILE=/data/access.log
 
         depends_on:
-            - django
+            - varnish-django
             - anime
