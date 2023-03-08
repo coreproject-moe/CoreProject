@@ -3,6 +3,7 @@ from dynamic_filenames import FilePattern
 
 from django.contrib.postgres.fields import HStoreField
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 from ...characters.models import CharacterModel
 from ...episodes.models import EpisodeModel
@@ -69,7 +70,14 @@ class AnimeModel(models.Model):
 
     synopsis = models.TextField(blank=True, null=True)
     background = models.TextField(blank=True, null=True)
-    rating = models.CharField(max_length=50, blank=True, null=True)
+    rating = models.FloatField(
+        blank=True,
+        null=True,
+        validators=[
+            MaxValueValidator(5),
+            MinValueValidator(0),
+        ],
+    )
 
     genres = models.ManyToManyField(AnimeGenreModel, blank=True)
     themes = models.ManyToManyField(AnimeThemeModel, blank=True)
@@ -81,7 +89,6 @@ class AnimeModel(models.Model):
     recommendations = models.ManyToManyField("self", blank=True)
     episodes = models.ManyToManyField(EpisodeModel, blank=True)
 
-    rating = models.CharField(max_length=128, null=True, blank=True)
 
     # Dict Model field
     theme_openings = HStoreField(
