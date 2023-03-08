@@ -89,7 +89,6 @@ class AnimeModel(models.Model):
     recommendations = models.ManyToManyField("self", blank=True)
     episodes = models.ManyToManyField(EpisodeModel, blank=True)
 
-
     # Dict Model field
     theme_openings = HStoreField(
         default=dict,
