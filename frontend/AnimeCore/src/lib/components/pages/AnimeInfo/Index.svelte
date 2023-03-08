@@ -35,6 +35,7 @@
     import Episode from "./Episode.svelte";
     import EpisodeSkeleton from "./Episode.skeleton.svelte";
     import StarRating from "svelte-star-rating";
+    import Settings from "$icons/Settings.svelte";
 
     const urls = new UrlMaps();
     let mobile: boolean;
@@ -75,6 +76,19 @@
         }> = res_json;
         return data;
     };
+
+    const details_mapping = [
+        { Episodes: 22 },
+        { "Episode Duration": 0 },
+        { Status: "Finished" },
+        { "Start Date": "" },
+        { "End Date": "" },
+        { Season: "" },
+        { Studios: "" },
+        { Producers: [] },
+        { Source: [] },
+        { Tags: [] }
+    ];
 </script>
 
 <div class="grid h-screen relative">
@@ -276,12 +290,40 @@
                             </anime-ratings>
                         {/if}
                     </anime-info>
-                    <!-- Episodes go here  -->
-                    {#await episodes(String(data?.episodes))}
-                        {#if !mobile}<EpisodeSkeleton />{/if}
-                    {:then episodes}
-                        <Episode {episodes} />
-                    {/await}
+                    <div
+                        class="flex justify-between items-center md:items-start gap-3 flex-col md:flex-row mt-24"
+                    >
+                        {#await episodes(String(data?.episodes))}
+                            {#if !mobile}<EpisodeSkeleton />{/if}
+                        {:then episodes}
+                            <Episode {episodes} />
+                        {:catch}
+                            <div class="flex" />
+                        {/await}
+                        {#if !mobile}
+                            <episode-details
+                                class="flex flex-col text-white justify-center items-start !w-[221px] gap-6"
+                            >
+                                <p class="flex gap-2">
+                                    <span class="font-bold text-xl">Details</span>
+                                    <button class="btn btn-square btn-sm">
+                                        <Settings
+                                            class="translate-y-0.5"
+                                            color="white"
+                                            height="22"
+                                            width="22"
+                                        />
+                                    </button>
+                                </p>
+                                {#each details_mapping as item}
+                                    <div class="flex flex-col">
+                                        <span class="font-bold">{Object.keys(item)}</span>
+                                        <span>{Object.values(item)}</span>
+                                    </div>
+                                {/each}
+                            </episode-details>
+                        {/if}
+                    </div>
                 </div>
             </div>
         </div>

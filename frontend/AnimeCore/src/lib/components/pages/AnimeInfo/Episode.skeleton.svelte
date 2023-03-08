@@ -79,18 +79,4 @@
             {/each}
         </div>
     </div>
-    <episode-details class="flex flex-col justify-center items-start !w-[221px] gap-6">
-        <p class="flex gap-2">
-            <span class="font-bold text-xl">
-                <button class="btn btn-square btn-sm w-14" />
-            </span>
-            <button class="btn btn-square btn-sm" />
-        </p>
-        {#each Array(10) as _}
-            <div class="flex flex-col">
-                <span class="font-bold"><button class="btn btn-square btn-sm w-16" /></span>
-                <span><button class="btn btn-square btn-sm" /></span>
-            </div>
-        {/each}
-    </episode-details>
 </div>
