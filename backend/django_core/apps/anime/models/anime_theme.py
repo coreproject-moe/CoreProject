@@ -2,6 +2,8 @@ from django.db import models
 
 # Create your models here.
 
+TYPE_CHOICES = ()
+
 
 class AnimeThemeModel(models.Model):
     mal_id = models.IntegerField(unique=True, blank=False, null=False)

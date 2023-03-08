@@ -80,6 +80,20 @@ services:
             - redis
             - celery
 
+    # Varnish
+    varnish:
+        image: varnish:fresh-alpine
+        container_name: varnish
+        volumes:
+            - ./default.vcl:/etc/varnish/default.vcl:ro
+        tmpfs:
+            - /var/lib/varnish:exec
+        environment:
+            - VARNISH_SIZE=1G
+        command: "-p default_keep=300"
+        depends_on:
+            - django
+
     # Frontend
     anime:
         restart: unless-stopped

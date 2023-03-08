@@ -12,14 +12,15 @@ backend.{$SITE_ADDRESS} {
 		root * {system.wd}/media
 		file_server
 	}
+
         #  Django
-        reverse_proxy django:8000 {
-                @sendfile header X-Sendfile *
-                handle_response @sendfile {
-                        rewrite {http.reverse_proxy.header.X-Sendfile}
-                        encode zstd gzip
-                        file_server
-                }
+        reverse_proxy varnish:80 {
+                # @sendfile header X-Sendfile *
+                # handle_response @sendfile {
+                #         rewrite {http.reverse_proxy.header.X-Sendfile}
+                #         encode zstd gzip
+                #         file_server
+                # }
         }
 }
 
