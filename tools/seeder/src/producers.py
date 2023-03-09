@@ -31,6 +31,7 @@ def command() -> None:
 
     data_list = []
     _EXECUTION_TIME_ = 0
+
     for page in range(0, data["pagination"]["last_visible_page"]):
         start = datetime.now()
         time.sleep(1)
@@ -48,7 +49,9 @@ def command() -> None:
         )
 
         if data := _res_.json().get("data"):
-            data_list.append(data)
+            for item in data:
+                data_list.append(item)
+
         else:
             raise Exception(f"Why did this fail | Reason : {_res_.json()}")
 
