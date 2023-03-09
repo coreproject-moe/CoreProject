@@ -45,7 +45,7 @@ def get_download_link(anime_id: int, episode: int) -> str:
     return select_highest_resolutions(gogo_api.get_download_links(anime_id, episode))
 
 
-def find_anime_by_name(anime_name: str) -> Optional[Dict[str, str]]:
+def find_anime_by_name(anime_name: str) -> dict[str, str] | None:
     with suppress(Exception):
         search_url = f"https://backend.coreproject.moe/api/v1/anime?name={anime_name}"
         response = requests.get(search_url)

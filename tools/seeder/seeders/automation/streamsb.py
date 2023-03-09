@@ -20,9 +20,7 @@ async def get_streamsb_file_status(file_code: str):
 async def upload_to_streamsb_by_url(url: str):
     async with httpx.AsyncClient() as client:
         params = {"key": STREAMSB_API_KEY, "url": url}
-        response = await client.get(
-            f"{STREAMSB_API_BASE_URL}/upload/url", params=params
-        )
+        response = await client.get(f"{STREAMSB_API_BASE_URL}/upload/url", params=params)
         return response.json()["result"]["filecode"]
 
 

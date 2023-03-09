@@ -21,7 +21,7 @@ def date_converter(date: str) -> str:
     return dt.strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def select_highest_resolutions(data: Dict[str, str]) -> str:
+def select_highest_resolutions(data: dict[str, str]) -> str:
     preferred_resolutions = ["1080P", "720P", "480P", "360P"]
     for resolution in preferred_resolutions:
         for item in data:

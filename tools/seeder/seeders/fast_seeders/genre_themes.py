@@ -17,7 +17,7 @@ HEADERS = {
 }
 
 
-async def get_genres() -> List[dict]:
+async def get_genres() -> list[dict]:
     async with httpx.AsyncClient() as client:
         genres_data = await client.get("https://api.jikan.moe/v4/genres/anime")
         genres_data = genres_data.json()
