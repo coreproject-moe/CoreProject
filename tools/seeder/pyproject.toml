@@ -13,8 +13,8 @@ humanize = "^4.6.0"
 termcolor = "^2.2.0"
 requests-cache = {extras = ["redis"], version = "^1.0.0"}
 requests-ratelimiter = "*"
-click = "^8.1.3"
 python-dotenv = "^1.0.0"
+selectolax = "*"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.1.0"
@@ -30,3 +30,4 @@ requires = [
 seed_character = 'python seed.py character'
 seed_staff = 'python seed.py staff'
 seed_genre = 'python seed.py genre'
+seed_themes = 'python seed.py theme'

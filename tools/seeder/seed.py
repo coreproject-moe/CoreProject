@@ -15,3 +15,9 @@ if argument := sys.argv[1]:
         from src.genre import command
 
         command()
+
+    elif argument == "theme":
+        
+        from src.themes import command
+
+        command()

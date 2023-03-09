@@ -29,14 +29,6 @@ def command() -> None:
         )
     )
 
-    session.post(
-        "https://httpbin.org/post",
-        data=data_list,
-        headers={
-            "Authorization": f"Bearer {TOKEN}",
-        },
-    )
-
     for index, item in enumerate(data_list):
         start_time = datetime.now()
         print(
@@ -49,6 +41,14 @@ def command() -> None:
                 error_list=[],
                 warning_list=[],
             )
+        )
+
+        res = session.post(
+            ANIME_GENRE_ENDPOINT,
+            json=([item]),
+            headers={
+                "Authorization": f"Bearer {TOKEN}",
+            },
         )
         end_time = datetime.now()
         EXECUTION_TIME += (end_time - start_time).total_seconds()

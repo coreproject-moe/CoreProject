@@ -10,6 +10,8 @@ from requests.adapters import HTTPAdapter
 from requests_cache import RedisCache  # type: ignore
 from requests_ratelimiter import RedisBucket
 
+from redis import ConnectionPool
+
 
 class CachedLimiterSession(CacheMixin, LimiterMixin, Session):
     """
@@ -43,13 +45,16 @@ retry_strategy = Retry(
     status_forcelist=RETRY_STATUSES,
 )
 adapter = HTTPAdapter(max_retries=retry_strategy)
+redis_pool = ConnectionPool(host="localhost", port=6379, db=0)
 
 session = CachedLimiterSession(
     bucket_class=RedisBucket,
     backend=RedisCache(),
     # Undocumented ( pyrate-limiter )
     bucket_kwargs={
+        "redis_pool": redis_pool,
         "bucket_name": CACHE_NAME,
+        "expire_time": 30,
     },
     # https://docs.api.jikan.moe/#section/Information/Rate-Limiting
     per_minute=60,
