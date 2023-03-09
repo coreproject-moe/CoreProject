@@ -125,13 +125,13 @@ def post_anime_info(
     cover: UploadedFile | None = File(default=None),
     synopsis: str | None = Form(default=None),
     background: str | None = Form(default=None),
-    rating: str | None = Form(default=None, max_length=50),
+    rating: float | None = Form(default=None, gt=0, lt=5),
     # We need pk for these
-    genres: list[int] = Form(default=None),
-    themes: list[int] = Form(default=None),
-    studios: list[int] = Form(default=None),
-    producers: list[int] = Form(default=None),
-    characters: list[int] = Form(default=None),
+    genres: list[str] = Form(default=None),
+    themes: list[str] = Form(default=None),
+    studios: list[str] = Form(default=None),
+    producers: list[str] = Form(default=None),
+    characters: list[str] = Form(default=None),
 ) -> AnimeModel:
     user: CustomUser = request.auth
     if not user.is_superuser:
@@ -155,11 +155,11 @@ def post_anime_info(
         "background": background,
         "rating": rating,
         # m2m Fields
-        "genres": genres,
-        "themes": themes,
-        "studios": studios,
-        "producers": producers,
-        "characters": characters,
+        "genres": genres[0].split(",") if genres else None,
+        "themes": themes[0].split(",") if themes else None,
+        "studios": studios[0].split(",") if studios else None,
+        "producers": producers[0].split(",") if producers else None,
+        "characters": characters[0].split(",") if producers else None,
         #   synonyms names can be
         #       like this   :   ['hello,world']
         #   What we want is :   ['hello', 'world']
@@ -188,12 +188,15 @@ def post_anime_info(
     }
     database = AnimeModel.objects.create(
         name=kwargs["name"],
-        defaults=model_data,
     )
+
+    for attr, value in model_data.items():
+        if value:
+            setattr(database, attr, value)
 
     if name_synonyms_list := kwargs.get("name_synonyms", None):
         for anime_name_synonym in name_synonyms_list:
-            anime_synonym_instance = AnimeNameSynonymModel.objects.get_or_create(
+            anime_synonym_instance = AnimeNameSynonymModel.objects.create(
                 name=anime_name_synonym.strip(),
             )
             database.name_synonyms.add(anime_synonym_instance)
