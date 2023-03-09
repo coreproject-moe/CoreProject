@@ -89,34 +89,7 @@ services:
             - PORT=3000
             - HOST=0.0.0.0
 
-    # Varnish
-    varnish-django:
-        image: varnish:fresh-alpine
-        restart: unless-stopped
-        volumes:
-            - ./varnish/django.vcl:/etc/varnish/default.vcl:ro
-        # https://github.com/moby/moby/issues/20437
-        # tmpfs:
-        #     - /var/lib/varnish:exec
-        environment:
-            - VARNISH_SIZE=0.5G
-        command: "-p default_keep=300"
-        depends_on:
-            - django
-
-    varnish-anime:
-        image: varnish:fresh-alpine
-        restart: unless-stopped
-        volumes:
-            - ./varnish/anime.vcl:/etc/varnish/default.vcl:ro
-        # https://github.com/moby/moby/issues/20437
-        # tmpfs:
-        #     - /var/lib/varnish:exec
-        environment:
-            - VARNISH_SIZE=0.5G
-        command: "-p default_keep=300"
-        depends_on:
-            - anime
+  
 
     # Web server
     caddy:
@@ -137,5 +110,5 @@ services:
             - LOG_FILE=/data/access.log
 
         depends_on:
-            - varnish-django
-            - varnish-anime
+            - django
+            - anime

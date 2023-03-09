@@ -143,3 +143,6 @@ class Token(models.Model):
     class Meta:
         verbose_name = _("token")
         verbose_name_plural = _("tokens")
+        unique_together = [
+            ("token", "user"),
+        ]
