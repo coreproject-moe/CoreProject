@@ -39,7 +39,7 @@ pydantic = {extras = ["email"], version = "*"}
 httpx = {extras = ['http2','brotli'], version = "*"}
 # Application servers
 gunicorn = {extras = ["setproctile"], version = "*"}
-uvicorn = '*'
+uvicorn = {extras = ["standard"], version = "^0.20.0"}
 # Typing support
 django-stubs-ext = "*"
 # ===================================================
@@ -49,12 +49,12 @@ colorthief = "^0.2.1"
 django-tailwind = "^3.5.0"
 # Form tools
 django-crispy-forms = "^2.0"
+crispy-tailwind = "^0.5.0"
 # HTMX Powerup
 django-htmx = "^1.13.0"
-typing-extensions = "^4.5.0"
-crispy-tailwind = "^0.5.0"
-dj-database-url = "^1.2.0"
-ffmpeg-python = "^0.2.0"
+
+
+
 
 
 [tool.poetry.group.dev.dependencies]
