@@ -17,7 +17,11 @@ if argument := sys.argv[1]:
         command()
 
     elif argument == "theme":
-        
         from src.themes import command
+
+        command()
+
+    elif argument == "producer":
+        from src.producers import command
 
         command()

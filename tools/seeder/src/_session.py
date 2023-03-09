@@ -59,6 +59,7 @@ session = CachedLimiterSession(
     # https://docs.api.jikan.moe/#section/Information/Rate-Limiting
     per_minute=60,
     per_second=1,
+    per_host=True,
     # https://requests-cache.readthedocs.io/en/stable/user_guide/expiration.html
     expire_after=360,
 )
