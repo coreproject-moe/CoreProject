@@ -1,8 +1,10 @@
 {
-        # log {
-        #         # output file ./access.log
-        #         level debug
-        # }
+         log {
+                output file ./logs/access.log {
+                        compress
+                }
+                level debug
+        }
 }
 
 # backend.example.com

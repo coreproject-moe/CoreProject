@@ -125,7 +125,7 @@ def post_anime_info(
     cover: UploadedFile | None = File(default=None),
     synopsis: str | None = Form(default=None),
     background: str | None = Form(default=None),
-    rating: float | None = Form(default=None, gt=0, lt=5),
+    rating: str | None  = Form(default=None),
     # We need pk for these
     genres: list[str] = Form(default=None),
     themes: list[str] = Form(default=None),

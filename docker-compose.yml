@@ -56,6 +56,7 @@ services:
             - 1.1.1.1
         volumes:
             - ./media:/code/django_core/media
+            - ./logs:/code/logs
         environment:
             - DEBUG=False
             # Cache related settings
@@ -103,6 +104,7 @@ services:
             - ./caddy-config:/config
             - ./caddy-data:/data
             - ./media:/srv/media
+            - ./logs:/srv/logs
         environment:
             - SITE_ADDRESS=${SITE_ADDRESS}
             - LOG_FILE=/data/access.log
