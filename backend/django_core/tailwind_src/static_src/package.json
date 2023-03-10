@@ -18,7 +18,7 @@
         "@tailwindcss/forms": "^0.5.2",
         "@tailwindcss/line-clamp": "^0.4.0",
         "@tailwindcss/typography": "^0.5.2",
-        "autoprefixer": "^10.4.13",
+        "autoprefixer": "^10.4.14",
         "cross-env": "^7.0.3",
         "cssnano": "^5.1.15",
         "daisyui": "^2.51.3",
