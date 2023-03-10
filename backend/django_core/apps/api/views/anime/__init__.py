@@ -125,12 +125,13 @@ def post_anime_info(
     cover: UploadedFile | None = File(default=None),
     synopsis: str | None = Form(default=None),
     background: str | None = Form(default=None),
-    rating: str | None  = Form(default=None),
+    rating: str | None = Form(default=None),
     # We need pk for these
     genres: list[str] = Form(default=None),
     themes: list[str] = Form(default=None),
     studios: list[str] = Form(default=None),
     producers: list[str] = Form(default=None),
+    staffs: list[str] = Form(default=None),
     characters: list[str] = Form(default=None),
 ) -> AnimeModel:
     user: CustomUser = request.auth
@@ -159,6 +160,7 @@ def post_anime_info(
         "themes": themes[0].split(",") if themes else None,
         "studios": studios[0].split(",") if studios else None,
         "producers": producers[0].split(",") if producers else None,
+        "staffs": staffs[0].split(",") if staffs else None,
         "characters": characters[0].split(",") if producers else None,
         #   synonyms names can be
         #       like this   :   ['hello,world']

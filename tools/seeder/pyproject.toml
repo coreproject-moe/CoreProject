@@ -15,6 +15,7 @@ requests-cache = {extras = ["redis"], version = "^1.0.0"}
 requests-ratelimiter = "*"
 python-dotenv = "^1.0.0"
 selectolax = "*"
+httpx = "^0.23.3"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.1.0"
