@@ -25,7 +25,7 @@
 </script>
 
 {#if mobile}
-    <div class="flex flex-col text-white mt-10 md:mt-0">
+    <div class="flex flex-col text-white mt-10 md:mt-0 w-full">
         <span class="font-bold text-2xl">Episodes</span>
         <div class="divider after:bg-white before:bg-white" />
         <div class="flex justify-between">
