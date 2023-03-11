@@ -9,7 +9,7 @@ from ninja.files import UploadedFile
 
 from pydantic import Json
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import get_list_or_404, get_object_or_404
+from django.shortcuts import get_object_or_404
 
 from ...schemas.episodes import EpisodeGETSchema
 
