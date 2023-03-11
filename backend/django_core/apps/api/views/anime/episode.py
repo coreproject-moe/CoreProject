@@ -21,10 +21,14 @@ def get_individual_episodes(
     request: HttpRequest,
     anime_id: int,
 ) -> list[EpisodeModel]:
-    query = get_list_or_404(
-        get_object_or_404(AnimeModel, pk=anime_id).episodes,
-    )
-    return query.order_by("-episode_number")
+    try:
+        query = (
+            AnimeModel.objects.get(pk=anime_id).episodes.all().order_by("-episode_number")
+        )
+    except (AnimeModel.DoesNotExist, EpisodeModel.DoesNotExist):
+        return HttpResponse("Object does not exist")
+
+    return query
 
 
 @router.post("/{int:anime_id}/episodes", response=EpisodeGETSchema, auth=AuthBearer())
