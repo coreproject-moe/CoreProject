@@ -24,7 +24,7 @@ def get_individual_episodes(
     query = get_list_or_404(
         get_object_or_404(AnimeModel, pk=anime_id).episodes,
     )
-    return query
+    return query.order_by("-episode_number")
 
 
 @router.post("/{int:anime_id}/episodes", response=EpisodeGETSchema, auth=AuthBearer())
