@@ -3,14 +3,13 @@ import { UrlMaps } from "$data/urls";
 import type { PageLoad } from "./$types";
 
 export const load = (async ({
-    params,
-    fetch // Use this if you want Server Side Fetch | https://kit.svelte.dev/docs/hooks#externalfetch
+    params
+    // ,fetch // Use this if you want Server Side Fetch | https://kit.svelte.dev/docs/hooks#externalfetch
 }) => {
     const backend_mapping = new UrlMaps();
 
     const anime = async () => {
         const url = backend_mapping.mal_id(params.id);
-        console.log(url);
         const data_response = await fetch(url);
         const data: {
             items: {
@@ -106,6 +105,7 @@ export const load = (async ({
         };
 
         const backend_remapped_to_frontend: Partial<{
+            id: number;
             mal_id: number;
             title_english: string;
             title_japanese: string;
@@ -121,6 +121,7 @@ export const load = (async ({
             episodes: string;
             episodes_count: number;
         }> = {
+            id: Number(backend_data?.id),
             mal_id: backend_data?.mal_id ?? 0,
             title_english: backend_data?.name ?? "",
             title_japanese: backend_data?.name_japanese ?? "",

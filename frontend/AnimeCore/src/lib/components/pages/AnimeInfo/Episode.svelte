@@ -8,6 +8,7 @@
         episode_summary: string;
         providers: Array<object>;
     }>;
+    export let backend_anime_number: number;
     import { UrlMaps } from "$data/urls";
     import Search from "$icons/Search.svelte";
     import Settings from "$icons/Settings.svelte";
@@ -21,7 +22,6 @@
     const backend_urls = new UrlMaps();
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
-
 </script>
 
 {#if mobile}
@@ -50,11 +50,12 @@
             </div>
         </div>
         {#each episodes as episode}
-            <a href="{$page.url.href}/episodes/{episode?.episode_number}">
+            {@const url = backend_urls.DOMAIN + episode.episode_thumbnail}
+            <a href="/backend/{backend_anime_number}/episodes/{episode.episode_number}">
                 <div class="flex h-16 w-[90vw] items-center bg-[#1E2036] rounded-lg relative my-4">
                     <img
                         class="mask mask-squircle h-10 w-10 mx-4"
-                        src={episode.episode_thumbnail}
+                        src={url}
                         alt={episode.episode_name}
                     />
                     <div class="flex flex-col">
@@ -168,6 +169,7 @@
                 {@const number = episode.episode_number}
                 {@const duration = episode.episode_length}
                 <EpisodeCard
+                    {backend_anime_number}
                     episode_card_background_image={url}
                     episode_name={name}
                     episode_duration={duration}

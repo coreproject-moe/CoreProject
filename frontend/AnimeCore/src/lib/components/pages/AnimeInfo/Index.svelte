@@ -1,6 +1,7 @@
 <!-- https://www.figma.com/file/tNUUtsk20ltOrQICdEoggG/Core-Project?node-id=1875%3A2336&t=ZryTYMGAVmoLyR72-0 -->
 <script lang="ts">
     export let data: Partial<{
+        id: number;
         mal_id: number;
         title_english: string;
         title_japanese: string;
@@ -118,7 +119,10 @@
                     >
                         <div class="flex gap-7">
                             <!-- Anime image card  -->
-                            <ImageCard src={anime_card_image} />
+                            <ImageCard
+                                src={anime_card_image}
+                                alt={`${data?.title_english} image`}
+                            />
 
                             <!-- Anime info  -->
 
@@ -296,7 +300,10 @@
                         {#await episodes(String(data?.episodes))}
                             {#if !mobile}<EpisodeSkeleton />{/if}
                         {:then episodes}
-                            <Episode {episodes} />
+                            <Episode
+                                backend_anime_number={Number(data?.id)}
+                                {episodes}
+                            />
                         {:catch}
                             <div class="flex" />
                         {/await}

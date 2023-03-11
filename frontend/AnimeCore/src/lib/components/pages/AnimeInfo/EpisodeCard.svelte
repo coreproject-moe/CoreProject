@@ -1,19 +1,18 @@
 <script lang="ts">
     import { formatNumberToDuration } from "$functions/formatNumberToDuration";
 
+    export let backend_anime_number: number;
     export let episode_card_background_image: string;
     export let episode_name: string;
     export let episode_duration: number;
     export let episode_number: number;
-
-    import { page } from "$app/stores";
 </script>
 
-<a href="{$page.url.href}/episodes/{episode_number}">
+<a href="/backend/{backend_anime_number}/episodes/{episode_number}">
     <episode-card-container
-        class="flex flex-col gap-4 active:scale-95 transform transition-transform"
+        class="flex flex-col gap-4 active:scale-95 transform transition-transform items-center"
     >
-        <episode-card class="grid w-80 h-52 rounded-2xl relative">
+        <episode-card class="flex w-80 h-52 rounded-2xl relative">
             <episode-card-background-image
                 class="w-80 h-52 rounded-2xl absolute inset-0 z-0"
                 style="background-image:url({episode_card_background_image})"

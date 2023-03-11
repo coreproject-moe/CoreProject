@@ -1,11 +1,14 @@
 <script lang="ts">
     export let src: string;
+    export let alt: string;
 </script>
 
-<anime-image-card class="card w-36 md:w-72 h-48 md:h-72 flex">
+<anime-image-card class="card flex w-[200px] h-[300px]">
     <img
-        class="rounded-lg"
+        class="rounded-lg object-contain"
+        width={200}
+        height={300}
         {src}
-        alt="Azure Lane"
+        {alt}
     />
 </anime-image-card>

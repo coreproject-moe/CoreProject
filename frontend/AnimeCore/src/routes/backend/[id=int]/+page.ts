@@ -4,7 +4,7 @@ import type { PageLoad } from "./$types";
 
 export const load = (async ({
     params
-    ,fetch // Use this if you want Server Side Fetch | https://kit.svelte.dev/docs/hooks#externalfetch
+    // ,fetch // Use this if you want Server Side Fetch | https://kit.svelte.dev/docs/hooks#externalfetch
 }) => {
     const backend_mapping = new UrlMaps();
 
@@ -45,6 +45,7 @@ export const load = (async ({
         }> = data;
 
         const backend_remapped_to_frontend: Partial<{
+            id: number;
             mal_id: number;
             title_english: string;
             title_japanese: string;
@@ -60,6 +61,7 @@ export const load = (async ({
             episodes: string;
             episodes_count: number;
         }> = {
+            id: backend_data?.id ?? 0,
             mal_id: backend_data?.mal_id ?? 0,
             title_english: backend_data?.name ?? "",
             title_japanese: backend_data?.name_japanese ?? "",

@@ -1,7 +1,7 @@
 <div
-    class="flex justify-between items-center md:items-start gap-3 flex-col md:flex-row mt-24 animate-pulse"
+    class="flex justify-between items-center md:items-start gap-3 flex-col md:flex-row animate-pulse w-full"
 >
-    <div class="flex w-4/5 flex-col">
+    <div class="flex w-full flex-col">
         <div class="flex">
             <div>
                 <div class="flex gap-1">
