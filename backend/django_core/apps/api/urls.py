@@ -133,8 +133,14 @@ api.add_router(
 
 from .views.user import router as user_router
 
-# api.add_router("/user", user_router, tags=["users"])
-
+user_router = api.add_router("/user", user_router, tags=["users"])
+user_router.add_router(
+    "",
+    import_string(
+        "apps.api.views.user.login.router",
+    ),
+    tags=["users"],
+)
 # __ TRACKER ROUTER __
 
 from .views.trackers import router as tracker_router
