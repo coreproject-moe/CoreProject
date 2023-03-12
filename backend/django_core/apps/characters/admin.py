@@ -7,4 +7,7 @@ from .models import CharacterModel
 
 @admin.register(CharacterModel)
 class CharacterAdmin(admin.ModelAdmin[CharacterModel]):
-    pass
+    search_fields = [
+        "name",
+        "name_kanji",
+    ]
