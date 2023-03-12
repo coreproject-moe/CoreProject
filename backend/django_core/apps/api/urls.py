@@ -129,6 +129,11 @@ api.add_router(
     tags=["staffs"],
 )
 
+# __ USER ROUTER __
+
+from .views.user import router as user_router
+
+# api.add_router("/user", user_router, tags=["users"])
 
 # __ TRACKER ROUTER __
 
