@@ -92,7 +92,7 @@
     ];
 </script>
 
-<div class="grid h-screen relative">
+<div class="grid h-screen relative overflow-x-hidden">
     <!-- Background Image Container -->
     <div
         class="bg-black h-[80vw] md:h-screen absolute top-0"
@@ -113,11 +113,11 @@
                 <div class="pt-8 md:pr-[72px] pl-6 md:pl-20 pb-0">
                     <Navbar />
                 </div>
-                <div class="flex flex-col mt-0 md:mt-20 mx-6 md:mx-20 ">
+                <div class="flex flex-col mt-12 md:mt-20 mx-6 md:mx-20">
                     <anime-info
                         class="flex justify-between items-center md:items-start gap-3 flex-col md:flex-row"
                     >
-                        <div class="flex gap-7">
+                        <div class="flex gap-7 self-start">
                             <!-- Anime image card  -->
                             <ImageCard
                                 src={anime_card_image}
@@ -125,7 +125,6 @@
                             />
 
                             <!-- Anime info  -->
-
                             <AnimeInfo
                                 title_english={data?.title_english ?? ""}
                                 title_japanese={data?.title_japanese ?? ""}
@@ -298,7 +297,9 @@
                         class="flex justify-between items-center md:items-start gap-3 flex-col md:flex-row mt-24"
                     >
                         {#await episodes(String(data?.episodes))}
-                            {#if !mobile}<EpisodeSkeleton />{/if}
+                            {#if !mobile}
+                                <EpisodeSkeleton />
+                            {/if}
                         {:then episodes}
                             <Episode
                                 backend_anime_number={Number(data?.id)}

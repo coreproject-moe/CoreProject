@@ -17,7 +17,6 @@
     import List from "$icons/List.svelte";
     import MoreVertical from "$icons/MoreVertical.svelte";
     import { formatNumberToDuration } from "$functions/formatNumberToDuration";
-    import { page } from "$app/stores";
 
     const backend_urls = new UrlMaps();
     let mobile: boolean;
