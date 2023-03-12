@@ -21,7 +21,6 @@ from . import views
 
 # from django.views import debug
 
-# Write your urls here
 
 # Admin site Branding
 admin.site.site_header = "CoreProject administration"
@@ -32,6 +31,8 @@ handler400 = views.four_zero_zero_view
 handler403 = views.four_zero_three_view
 handler404 = views.four_zero_four_view
 handler500 = views.five_zero_zero_view
+
+# Write your urls here
 
 urlpatterns = [
     # Default django welcome page
