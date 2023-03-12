@@ -20,20 +20,20 @@ const config = {
     kit: {
         appDir: 'svelte__user',
         adapter: is_static
-        ? static_adapter({
-            fallback: 'app.html',
-            precompress: true,
-            strict: true
-        })
-        : is_node
-        ? node_adapter({
-            precompress: false
-        })
-        : vercel({
+            ? static_adapter({
+                fallback: 'app.html',
+                precompress: true,
+                strict: true
+            })
+            : is_node
+            ? node_adapter({
+                precompress: false
+            })
+            : vercel({
             // an array of dependencies that esbuild should treat
             // as external when bundling functions
-            external: []
-        }),
+                external: []
+            }),
         alias: {
             $hooks: path.resolve('./src/hooks'),
             $components: path.resolve('./src/lib/components'),
