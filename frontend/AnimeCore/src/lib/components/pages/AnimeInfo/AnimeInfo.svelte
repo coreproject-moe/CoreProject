@@ -19,7 +19,7 @@
     $: mobile = $responsiveMode === "mobile";
 </script>
 
-<anime-info-base class="flex flex-col gap-2 w-72">
+<anime-info-base class="flex flex-col gap-2 w-3/5 md:w-72">
     <h1 class="text-white text-2xl md:text-4xl font-bold">{title_english}</h1>
     <p class="text-neutral-400 text-sm">
         <!-- Todo modify this to have anime synonyms  -->
