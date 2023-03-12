@@ -21,7 +21,13 @@ from . import views
 
 # from django.views import debug
 
+# Write your urls here
 
+# Admin site Branding
+admin.site.site_header = "CoreProject administration"
+admin.site.site_title = "CoreProject site admin"
+
+# Error handlers
 handler400 = views.four_zero_zero_view
 handler403 = views.four_zero_three_view
 handler404 = views.four_zero_four_view
@@ -44,6 +50,7 @@ urlpatterns = [
     # ========
     path("api/", include("apps.api.urls")),
 ]
+
 if settings.DEBUG:
     urlpatterns += [
         path("__debug__/", include("debug_toolbar.urls")),

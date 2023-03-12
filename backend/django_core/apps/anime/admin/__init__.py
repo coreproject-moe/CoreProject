@@ -9,13 +9,14 @@ from ..models import AnimeModel, AnimeNameSynonymModel
 class AnimeNameSynonymAdmin(
     admin.ModelAdmin[AnimeNameSynonymModel],
 ):
+    search_fields = ["name"]
     pass
 
 
 @admin.register(AnimeModel)
 class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel]):
     form = AnimeAdminModelForm
-    filter_horizontal = [
+    autocomplete_fields = [
         "genres",
         "themes",
         "studios",
