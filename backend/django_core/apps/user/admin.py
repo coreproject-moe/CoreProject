@@ -15,7 +15,7 @@ USER_MODEL: type[CustomUser] = get_user_model()
 
 @admin.register(Token)
 class TokenAdmin(admin.ModelAdmin):
-    pass
+    autocomplete_fields = ["user"]
 
 
 @admin.register(CustomUser)
