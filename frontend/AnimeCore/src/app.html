@@ -40,6 +40,12 @@
             content="Bridging the gap between streaming & torrenting sevices, with a modern and clean interface"
         />
 
+        <!-- Opengraph -->
+        <meta
+            property="og:site_name"
+            content="CoreProject"
+        />
+
         <!-- Font preloading  -->
         <link
             rel="preload"
@@ -110,7 +116,7 @@
                 -ms-transform: translate(-18px, -18px);
                 transform: translate(-18px, -18px);
                 -webkit-animation: dotRect var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86)
-                                   infinite;
+                    infinite;
                 animation: dotRect var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86) infinite;
             }
 
@@ -132,9 +138,9 @@
                 stroke-dasharray: 150 50 150 50;
                 stroke-dashoffset: 75;
                 -webkit-animation: pathCircle var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86)
-                                   infinite;
+                    infinite;
                 animation: pathCircle var(--duration) cubic-bezier(0.785, 0.135, 0.15, 0.86)
-                           infinite;
+                    infinite;
             }
 
             @-webkit-keyframes dotRect {
@@ -228,15 +234,15 @@
         <div
             id="loader"
             style="
-                   height: 100vh;
-                   display: flex;
-                   justify-content: center;
-                   align-items: center;
-                   position: absolute;
-                   left: 0;
-                   right: 0;
-                   z-index: -100000;
-                  "
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                left: 0;
+                right: 0;
+                z-index: -100000;
+            "
         >
             <div class="loader">
                 <svg viewBox="0 0 80 80">
