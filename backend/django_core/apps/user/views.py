@@ -144,9 +144,11 @@ def login_view(request: HttpRequest) -> HttpResponse:
         "user": request.user,
     }
 
-    if request.user.is_authenticated:
-        instance, _ = Token.objects.get_or_create(user=request.user)
-        context["token"] = instance.token
+    response = render(
+        request,
+        "user/login.html",
+        context=context,
+    )
 
     if request.method == "POST" and form.is_valid():
         if user := authenticate(
@@ -155,17 +157,14 @@ def login_view(request: HttpRequest) -> HttpResponse:
             password=form.cleaned_data.get("password"),
         ):
             login(request, user)
-            token_model, _ = Token.objects.get_or_create(user=request.user)
             htmx_response = HttpResponseLocation(reverse_lazy("login_view"))
             response = cast(HttpResponse, htmx_response)
-            set_cookies(request, response, token_model.token)
-            return response
 
-    return render(
-        request,
-        "user/login.html",
-        context=context,
-    )
+    if not request.COOKIES.get("token") and request.user.is_authenticated:
+        instance, _ = Token.objects.get_or_create(user__id=request.user.id)
+        set_cookies(request, response, instance.token)
+
+    return response
 
 
 def logout_view(request: HttpRequest) -> HttpResponse:
