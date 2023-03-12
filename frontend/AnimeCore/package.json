@@ -48,7 +48,7 @@
         "prettier-plugin-svelte": "^2.9.0",
         "sass": "^1.58.3",
         "svelte": "^3.56.0",
-        "svelte-check": "^3.1.0",
+        "svelte-check": "^3.1.2",
         "svelte-gestures": "^1.4.1",
         "svelte-preprocess": "^5.0.1",
         "svelte-star-rating": "^2.0.1",
