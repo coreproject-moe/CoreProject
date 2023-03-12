@@ -83,8 +83,17 @@ services:
 
     # Frontend
     anime:
+        image: frontend
         restart: unless-stopped
         build: ./frontend/AnimeCore
+        dns: 1.1.1.1
+        environment:
+            - PORT=3000
+            - HOST=0.0.0.0
+    user:
+        image: frontend
+        restart: unless-stopped
+        build: ./frontend/User
         dns: 1.1.1.1
         environment:
             - PORT=3000
@@ -112,3 +121,4 @@ services:
         depends_on:
             - django
             - anime
+            - user
