@@ -1,6 +1,8 @@
 export class UrlMaps {
 	private get api_root() {
-		return process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:8000' : '';
+		return process.env.NODE_ENV === 'development'
+			? 'http://127.0.0.1:9000'
+			: `https://backend.${process.env.SITE_ADDRESS}`;
 	}
 
 	public get signup_url() {
