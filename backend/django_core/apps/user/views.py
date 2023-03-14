@@ -3,7 +3,6 @@ from http import HTTPStatus
 import textwrap
 from typing import cast
 
-from django_htmx.http import HttpResponseLocation
 import httpx
 
 from django.conf import settings
@@ -15,31 +14,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 
 from .forms import LoginForm, RegisterForm, UsernameWithDiscriminatorForm
-from .models import CustomUser, Token
-
-# Helper functions
-
-
-def set_cookies(
-    request: HttpRequest,
-    response: HttpResponse,
-    token: str,
-) -> None:
-    # running on a a port ( which is fine )
-    hostname = request.get_host()
-
-    if ":" in hostname:
-        domain = hostname.split(":")[0]
-    else:
-        domain = hostname
-
-    response.set_cookie(
-        key="token",
-        value=token,
-        httponly=False,
-        samesite=None,
-        domain=f".{settings.SITE_ADDRESS}" if settings.SITE_ADDRESS else domain,
-    )
+from .models import CustomUser
 
 
 # Create your views here
@@ -98,80 +73,6 @@ async def avatar_view(
             )
 
     await CLIENT.aclose()
-    return response
-
-
-def signup_view(request: HttpRequest) -> HttpResponse:
-    form = RegisterForm(request.POST or None)
-    if request.method == "POST":
-        if form.is_valid():
-            user_data = {
-                "password": form.cleaned_data["password"],
-                "email": form.cleaned_data["email"],
-            }
-
-            username_with_maybe_discriminator: str = form.cleaned_data["username"]
-            if "#" in username_with_maybe_discriminator:
-                username_with_discriminator_splitted = (
-                    username_with_maybe_discriminator.strip().split("#")
-                )
-                user_data["username"] = username_with_discriminator_splitted[0]
-                user_data["discriminator"] = username_with_discriminator_splitted[1]
-            else:
-                user_data["username"] = username_with_maybe_discriminator
-
-            user = CustomUser.objects.create_user(**user_data)
-            login(request, user)
-            token_model, _ = Token.objects.get_or_create(user=user)
-            htmx_response = HttpResponseLocation(reverse_lazy("login_view"))
-            response = cast(HttpResponse, htmx_response)
-            set_cookies(request, response, token_model.token)
-            return response
-
-    return render(
-        request,
-        "user/signup.html",
-        context={
-            "form": form,
-        },
-    )
-
-
-def login_view(request: HttpRequest) -> HttpResponse:
-    form = LoginForm(data=request.POST or None)
-    context = {
-        "form": form,
-        "user": request.user,
-    }
-
-    response = render(
-        request,
-        "user/login.html",
-        context=context,
-    )
-
-    if request.method == "POST" and form.is_valid():
-        if user := authenticate(
-            request,
-            username=form.cleaned_data.get("username"),
-            password=form.cleaned_data.get("password"),
-        ):
-            login(request, user)
-            htmx_response = HttpResponseLocation(reverse_lazy("login_view"))
-            response = cast(HttpResponse, htmx_response)
-
-    if not request.COOKIES.get("token") and request.user.is_authenticated:
-        instance, _ = Token.objects.get_or_create(user__id=request.user.id)
-        set_cookies(request, response, instance.token)
-
-    return response
-
-
-def logout_view(request: HttpRequest) -> HttpResponse:
-    Token.objects.get(user=request.user).delete()
-    logout(request)
-    response = HttpResponseLocation(reverse_lazy("login_view"))
-    response.delete_cookie("token")
     return response
 
 

@@ -121,28 +121,3 @@ class CustomUser(
             ("username", "discriminator"),
         ]
 
-
-class Token(models.Model):
-    token = models.CharField(
-        default=partial(
-            get_random_string,
-            16,
-        ),
-        unique=True,
-        max_length=16,
-        editable=False,
-    )
-    user = models.OneToOneField(
-        CustomUser,
-        on_delete=models.CASCADE,
-    )
-
-    def __str__(self) -> str:
-        return f"User : {self.user.username} | Token : {self.token}"
-
-    class Meta:
-        verbose_name = _("token")
-        verbose_name_plural = _("tokens")
-        unique_together = [
-            ("token", "user"),
-        ]

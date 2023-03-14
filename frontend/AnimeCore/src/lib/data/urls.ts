@@ -34,6 +34,10 @@ export class UrlMaps {
     public DOMAIN = "https://backend.coreproject.moe";
     private BASE_URL = this.DOMAIN + "/api/v1";
 
+    public anime = () => {
+        return `${this.BASE_URL}/anime`;
+    };
+
     public id = (id: number | string) => {
         return `${this.BASE_URL}/anime/${id}`;
     };
