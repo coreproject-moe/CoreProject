@@ -13,7 +13,7 @@ from django.http import FileResponse, HttpRequest, HttpResponse, StreamingHttpRe
 from django.shortcuts import render
 from django.urls import reverse_lazy
 
-from .forms import LoginForm, RegisterForm, UsernameWithDiscriminatorForm
+from .forms import UsernameWithDiscriminatorForm
 from .models import CustomUser
 
 
