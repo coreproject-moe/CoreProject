@@ -35,6 +35,10 @@ RUN npm cache clean --force
 RUN python django_core/manage.py collectstatic --clear --link --no-input
 COPY . /code
 
+# Cleanups
+RUN pip install "pip-autoremove"
+RUN pip-autoremove poetry -y
+RUN pip-autoremove "pip-autoremove" -y
 RUN apk del nodejs npm
 
 RUN chmod +x /code/server_entrypoint.sh
