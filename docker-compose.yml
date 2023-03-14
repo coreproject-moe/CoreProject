@@ -90,6 +90,7 @@ services:
         environment:
             - PORT=3000
             - HOST=0.0.0.0
+
     user:
         image: frontend
         restart: unless-stopped
@@ -99,6 +100,22 @@ services:
             - SITE_ADDRESS=${SITE_ADDRESS}
             - PORT=3000
             - HOST=0.0.0.0
+
+    # Varnish
+    django-varnish:
+        image: varnish:fresh
+        volumes:
+            - ./varnish/django.vcl:/etc/varnish/default.vcl:ro
+        depends_on:
+            - django
+
+    anime-varnish:
+        image: varnish:fresh
+        volumes:
+            - ./varnish/anime.vcl:/etc/varnish/default.vcl:ro
+        depends_on:
+            - anime
+
 
     # Web server
     caddy:
@@ -120,6 +137,6 @@ services:
             - LOG_FILE=/data/access.log
 
         depends_on:
-            - django
-            - anime
+            - django-varnish
+            - anime-varnish
             - user
