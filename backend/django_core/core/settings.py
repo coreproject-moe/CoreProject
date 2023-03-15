@@ -69,6 +69,10 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    # Sitemap
+    "django.contrib.sitemaps",
+    # Multi Domain Site framework
+    "django.contrib.sites",
     # Postgres
     "django.contrib.postgres",
     # Whitenoise
