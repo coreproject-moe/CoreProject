@@ -116,7 +116,6 @@ services:
         depends_on:
             - anime
 
-
     # Web server
     caddy:
         image: caddy:alpine

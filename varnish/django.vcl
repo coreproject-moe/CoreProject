@@ -62,4 +62,3 @@ sub vcl_backend_response {
 sub vcl_deliver {
 	unset resp.http.x-url;
 }
-

@@ -1,17 +1,14 @@
 import hashlib
 from http import HTTPStatus
 import textwrap
-from typing import cast
 
 import httpx
 
 from django.conf import settings
-from django.contrib.auth import authenticate, login, logout
 from django.core.management.utils import get_random_secret_key
 from django.core.validators import URLValidator
 from django.http import FileResponse, HttpRequest, HttpResponse, StreamingHttpResponse
 from django.shortcuts import render
-from django.urls import reverse_lazy
 
 from .forms import UsernameWithDiscriminatorForm
 from .models import CustomUser
