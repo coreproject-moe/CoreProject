@@ -1,7 +1,6 @@
 from colorfield.fields import ColorField
 from dynamic_filenames import FilePattern
 
-from django.contrib.postgres.fields import HStoreField
 from django.db import models
 
 from ...characters.models import CharacterModel
@@ -9,6 +8,7 @@ from ...episodes.models import EpisodeModel
 from ...producers.models import ProducerModel
 from ...staffs.models import StaffModel
 
+from .anime_openings_and_endings import AnimeOpeningModel, AnimeEndingModel
 from .anime_genre import AnimeGenreModel
 from .anime_theme import AnimeThemeModel
 
@@ -83,17 +83,8 @@ class AnimeModel(models.Model):
     recommendations = models.ManyToManyField("self", blank=True)
     episodes = models.ManyToManyField(EpisodeModel, blank=True)
 
-    # Dict Model field
-    theme_openings = HStoreField(
-        default=dict,
-        null=False,
-        blank=True,
-    )
-    theme_endings = HStoreField(
-        default=dict,
-        null=False,
-        blank=True,
-    )
+    openings = models.ManyToManyField(AnimeOpeningModel, blank=True)
+    endings = models.ManyToManyField(AnimeEndingModel, blank=True)
 
     updated = models.DateTimeField(auto_now_add=True)
 

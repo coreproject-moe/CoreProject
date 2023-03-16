@@ -26,6 +26,8 @@ class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel]):
         "name_synonyms",
         "recommendations",
         "episodes",
+        "openings",
+        "endings",
     ]
     list_filter = [
         "genres",
@@ -118,6 +120,8 @@ class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel]):
                     "characters",
                     "name_synonyms",
                     "recommendations",
+                    "openings",
+                    "endings",
                 )
             },
         ),
@@ -125,15 +129,6 @@ class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel]):
             ("Anime Episodes"),
             {
                 "fields": ("episodes",),
-            },
-        ),
-        (
-            None,
-            {
-                "fields": (
-                    "theme_openings",
-                    "theme_endings",
-                ),
             },
         ),
     )
@@ -146,3 +141,7 @@ class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel]):
 
 from .anime_genre import AnimeGenreAdmin as AnimeGenreAdmin
 from .anime_theme import AnimeThemeAdmin as AnimeThemeAdmin
+from .anime_openings_and_endings import (
+    AnimeEndingAdmin as AnimeEndingAdmin,
+    AnimeOpeningAdmin as AnimeOpeningAdmin,
+)
