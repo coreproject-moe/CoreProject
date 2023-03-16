@@ -182,6 +182,16 @@ tracker_router.add_router(
     tags=["trackers"],
 )
 
+# __ FEED ROUTER __
+# May be powered by Machine learning in future
+from .views.feeds.featured import router as feature_router
+
+api.add_router(
+    "/feed/featured",
+    feature_router,
+    tags=["feed"],
+)
+
 
 urlpatterns = [
     path(
