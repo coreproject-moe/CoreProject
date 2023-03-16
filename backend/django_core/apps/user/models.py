@@ -118,4 +118,3 @@ class CustomUser(
         unique_together = [
             ("username", "discriminator"),
         ]
-
