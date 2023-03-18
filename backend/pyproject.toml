@@ -38,7 +38,7 @@ pydantic = {extras = ["email"], version = "*"}
 httpx = {extras = ['http2'], version = "*"}
 # Application servers
 gunicorn = {extras = ["setproctile"], version = "*"}
-uvicorn = {extras = ["standard"], version = "^0.21.0"}
+uvicorn = {extras = ["standard"], version = "^0.21.1"}
 # Typing support
 django-stubs-ext = "*"
 # ===================================================
