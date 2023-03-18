@@ -62,5 +62,9 @@
         "voca": "^1.4.0"
     },
     "type": "module",
-    "dependencies": {}
+    "dependencies": {
+        "@felte/reporter-tippy": "^1.1.5",
+        "@felte/validator-yup": "^1.0.11",
+        "felte": "^1.2.7"
+    }
 }
