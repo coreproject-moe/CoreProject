@@ -70,4 +70,12 @@ export class UrlMaps {
         // return process.env.NODE_ENV === "development" ? get(page).url.origin : "/media";
         return get(page).url.origin;
     }
+
+    public get signup_url() {
+        return `${this.BASE_URL}/sign_up`;
+    }
+
+    public get login_url() {
+        return `${this.BASE_URL}/login`;
+    }
 }

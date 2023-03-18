@@ -6,7 +6,7 @@
     import * as yup from "yup";
 
     import { goto } from "$app/navigation";
-    import { UrlMaps } from "$lib/urls";
+    import { UrlMaps } from "$data/urls";
     const urls = new UrlMaps();
     // Creating yup schema
     const schema = yup.object({
