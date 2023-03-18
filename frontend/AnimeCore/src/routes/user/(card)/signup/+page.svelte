@@ -143,8 +143,8 @@
                     </button>
                     or
                     <a
-                        class="underline"
-                        href="/login"
+                        class="link"
+                        href="./login"
                     >
                         login
                     </a>

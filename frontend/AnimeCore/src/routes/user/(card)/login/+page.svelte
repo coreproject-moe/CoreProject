@@ -117,8 +117,8 @@
                     </button>
                     or
                     <a
-                        class="underline"
-                        href="/signup"
+                        class="link"
+                        href="./signup"
                     >
                         signup
                     </a>
