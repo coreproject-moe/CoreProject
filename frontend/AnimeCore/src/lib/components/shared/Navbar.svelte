@@ -3,7 +3,6 @@
 
     import Logo from "$icons/Logo.svelte";
     import Search from "$icons/Search.svelte";
-    import NavbarModal from "$modals/Navbar.svelte";
     import { navbar_variant } from "$store/Navbar_Variant";
     import { responsiveMode } from "$store/Responsive";
     import { user_is_logged_in } from "$store/User";
@@ -11,9 +10,6 @@
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
 </script>
-
-<!-- Init the modal  -->
-<svelte:component this={NavbarModal} />
 
 <div class="navbar bg-transparent">
     <div class="navbar-start hidden md:block">
