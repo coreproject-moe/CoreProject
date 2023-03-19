@@ -3,8 +3,6 @@
 
     import Logo from "$icons/Logo.svelte";
     import Search from "$icons/Search.svelte";
-    import NavbarModal from "$modals/Navbar.svelte";
-    import { modals } from "$store/Modal";
     import { navbar_variant } from "$store/Navbar_Variant";
     import { responsiveMode } from "$store/Responsive";
     import { user_is_logged_in } from "$store/User";
@@ -12,9 +10,6 @@
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
 </script>
-
-<!-- Init the modal  -->
-<svelte:component this={NavbarModal} />
 
 <div class="navbar bg-transparent">
     <div class="navbar-start hidden md:block">
@@ -62,18 +57,13 @@
     </div>
     <div class="navbar-end">
         {#if $user_is_logged_in}
-            <label
-                for={$modals.navbar}
-                class="modal-button btn border-transparent bg-transparent px-0 hover:bg-transparent"
-            >
-                <img
-                    alt=""
-                    class="mask mask-squircle"
-                    src="/images/(Avatar)-placeholder.png"
-                    width="50"
-                    height="50"
-                />
-            </label>
+            <img
+                alt=""
+                class="mask mask-squircle"
+                src="/images/(Avatar)-placeholder.png"
+                width="50"
+                height="50"
+            />
         {:else}
             <a
                 class="glass flex h-[55px] w-[60px] items-center justify-center rounded-lg border-2 border-dashed border-white font-bold hover:border-dashed active:scale-95"

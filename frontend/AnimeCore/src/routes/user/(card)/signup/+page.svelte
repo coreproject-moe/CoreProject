@@ -74,10 +74,50 @@
         debounced: {
             timeout: 300,
             validate: async (values) => {
-                const warnings = {};
+                const warnings: Partial<typeof values> = {};
                 // Check for username availability
                 if (values.username) {
-                    console.log(values.username);
+                    const valueRegex = values.username.match(/#/gi);
+                    if (!valueRegex) {
+                        return;
+                    }
+
+                    const HashLength = valueRegex.length;
+                    // Remove Empty Elements
+                    const splittedValue = values.username.split("#").filter((i) => i);
+
+                    if (
+                        HashLength === 1 &&
+                        splittedValue.length === 2 &&
+                        !isNaN(Number(splittedValue[1]))
+                    ) {
+                        let formData = new FormData();
+                        formData.append("username", splittedValue[0] ?? "");
+                        formData.append("discriminator", splittedValue[1] ?? "");
+
+                        fetch(urls.username_validity_endpoint, {
+                            method: "POST",
+                            body: formData,
+                            headers: {
+                                "X-CSRFToken": "{{ csrf_token }}"
+                            }
+                        }).then((res) => {
+                            console.log(res);
+                            if (res.status === 302) {
+                                // The username with discriminator is taken by another user
+                                // Show an error
+                                warnings.username = "This username is not available";
+                            } else if (res.status === 404) {
+                                // ok
+                            }
+                        });
+                    } else if (HashLength >= 1) {
+                        warnings.username =
+                            "There must be one hash in the username. ( eg: SoraAmamiya#1993 )";
+                    } else if (isNaN(Number(splittedValue[1]))) {
+                        warnings.username =
+                            "The discriminator must be a number. ( eg : SoraAmamiya#1993 )";
+                    }
                 }
 
                 return warnings;
