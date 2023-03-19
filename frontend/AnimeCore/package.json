@@ -65,5 +65,8 @@
         "vite": "4.2.0",
         "voca": "^1.4.0"
     },
-    "type": "module"
+    "type": "module",
+    "dependencies": {
+        "@vercel/analytics": "^0.1.11"
+    }
 }

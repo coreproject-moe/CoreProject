@@ -2,7 +2,7 @@
     import { onDestroy, onMount } from "svelte";
     import { blur } from "svelte/transition";
 
-    import AnimeCore from "$icons/AnimeCore.svelte";
+    // import AnimeCore from "$icons/AnimeCore.svelte";
 
     let CHOICE_NUMBER: number;
     let CHOICES: Array<{
@@ -84,12 +84,12 @@
                 />
 
                 <!-- Top animecore logo div  -->
-                <div class="absolute top-8 left-8">
+                <!-- <div class="absolute top-8 left-8">
                     <AnimeCore
                         width="164"
                         height="25"
                     />
-                </div>
+                </div> -->
                 <!-- Background from anime div  -->
                 <div
                     class="absolute bottom-8 left-8"

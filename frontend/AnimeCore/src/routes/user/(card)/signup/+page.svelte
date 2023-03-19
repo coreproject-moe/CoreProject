@@ -7,6 +7,7 @@
 
     import { goto } from "$app/navigation";
     import { UrlMaps } from "$data/urls";
+
     const urls = new UrlMaps();
     // Creating yup schema
     const schema = yup.object({
@@ -67,10 +68,21 @@
                     allowHTML: true
                 }
             })
-        ]
+        ],
 
         // Debounced async validation
-        // debounced: {}
+        debounced: {
+            timeout: 300,
+            validate: async (values) => {
+                const warnings = {};
+                // Check for username availability
+                if (values.username) {
+                    console.log(values.username);
+                }
+
+                return warnings;
+            }
+        }
     });
     const input_mapping = [
         {
