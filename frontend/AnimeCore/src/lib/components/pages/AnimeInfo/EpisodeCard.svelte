@@ -10,16 +10,16 @@
 
 <a href="/backend/{backend_anime_number}/episodes/{episode_number}">
     <episode-card-container
-        class="flex flex-col gap-4 active:scale-95 transform transition-transform items-center"
+        class="flex transform flex-col items-center gap-4 transition-transform active:scale-95"
     >
-        <episode-card class="flex w-80 h-52 rounded-2xl relative">
+        <episode-card class="relative flex h-52 w-80 rounded-2xl">
             <episode-card-background-image
-                class="w-80 h-52 rounded-2xl absolute inset-0 z-0"
+                class="absolute inset-0 z-0 h-52 w-80 rounded-2xl"
                 style="background-image:url({episode_card_background_image})"
             />
-            <episode-card-background-gradient class="w-80 h-52 rounded-2xl absolute inset-0 z-10" />
+            <episode-card-background-gradient class="absolute inset-0 z-10 h-52 w-80 rounded-2xl" />
             <episode-card-info
-                class="w-80 h-52 rounded-2xl absolute inset-0 z-20 text-white font-bold"
+                class="absolute inset-0 z-20 h-52 w-80 rounded-2xl font-bold text-white"
             >
                 <p class="absolute inset-x-0 bottom-3 text-center text-xs">{episode_number}</p>
                 <p class="absolute bottom-3 right-3 text-xs">
@@ -27,7 +27,7 @@
                 </p>
             </episode-card-info>
         </episode-card>
-        <episode-name class="text-zinc-200 text-center">{episode_name}</episode-name>
+        <episode-name class="text-center text-zinc-200">{episode_name}</episode-name>
     </episode-card-container>
 </a>
 

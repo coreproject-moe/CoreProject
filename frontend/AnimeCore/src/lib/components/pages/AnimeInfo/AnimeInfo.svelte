@@ -19,13 +19,13 @@
     $: mobile = $responsiveMode === "mobile";
 </script>
 
-<anime-info-base class="flex flex-col gap-2 w-3/5 md:w-72">
-    <h1 class="text-white text-2xl md:text-4xl font-bold">{title_english}</h1>
-    <p class="text-neutral-400 text-sm">
+<anime-info-base class="flex w-3/5 flex-col gap-2 md:w-72">
+    <h1 class="text-2xl font-bold text-white md:text-4xl">{title_english}</h1>
+    <p class="text-sm text-neutral-400">
         <!-- Todo modify this to have anime synonyms  -->
         <span class="items">{title_japanese}</span>
     </p>
-    <p class="text-white text-xs">
+    <p class="text-xs text-white">
         {#if anime_source}
             <span class="items">{anime_source}</span>
         {/if}
@@ -43,7 +43,7 @@
         <div class="mt-7 flex items-center gap-4">
             <button
                 aria-label="Play"
-                class="btn btn-lg btn-primary rounded-lg w-[108px] h-[70px] normal-case"
+                class="btn-primary btn-lg btn h-[70px] w-[108px] rounded-lg normal-case"
             >
                 <div class="flex justify-between gap-2 py-2">
                     <PlayCircle
@@ -53,16 +53,16 @@
                         class="translate-y-1"
                     />
                     <div class="flex flex-col text-start">
-                        <h2 class="font-bold text-sm">Watch</h2>
+                        <h2 class="text-sm font-bold">Watch</h2>
                         <p class="text-xs font-thin text-zinc-300">Ep 01</p>
                     </div>
                 </div>
             </button>
             <button
                 aria-label="Play"
-                class="btn btn-info btn-lg rounded-lg normal-case btn-square"
+                class="btn-info btn-square btn-lg btn rounded-lg normal-case"
             >
-                <div class="flex flex-col justify-center items-center py-2">
+                <div class="flex flex-col items-center justify-center py-2">
                     <BookOpen
                         width="32"
                         height="31"
@@ -75,15 +75,15 @@
     {/if}
     <!-- Share button groups  -->
     {#if !mobile}
-        <div class="mt-5 gap-2 flex">
-            <button class="btn btn-sm btn-square btn-warning flex justify-center items-center">
+        <div class="mt-5 flex gap-2">
+            <button class="btn-warning btn-square btn-sm btn flex items-center justify-center">
                 <Video
                     width="18"
                     height="18"
                     class="text-base-100"
                 />
             </button>
-            <button class="btn btn-sm btn-square btn-warning flex justify-center items-center">
+            <button class="btn-warning btn-square btn-sm btn flex items-center justify-center">
                 <Edit
                     variant="with_underline_around_pencil"
                     width="18"
@@ -91,14 +91,14 @@
                     class="text-base-100"
                 />
             </button>
-            <button class="btn btn-sm btn-square btn-warning flex justify-center items-center">
+            <button class="btn-warning btn-square btn-sm btn flex items-center justify-center">
                 <Download
                     width="18"
                     height="18"
                     class="text-base-100"
                 />
             </button>
-            <button class="btn btn-sm btn-square btn-warning flex justify-center items-center">
+            <button class="btn-warning btn-square btn-sm btn flex items-center justify-center">
                 <Share
                     width="18"
                     height="18"

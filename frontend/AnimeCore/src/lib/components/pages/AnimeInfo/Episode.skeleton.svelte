@@ -1,43 +1,43 @@
 <div
-    class="flex justify-between items-center md:items-start gap-3 flex-col md:flex-row animate-pulse w-full"
+    class="flex w-full animate-pulse flex-col items-center justify-between gap-3 md:flex-row md:items-start"
 >
     <div class="flex w-full flex-col">
         <div class="flex">
             <div>
                 <div class="flex gap-1">
                     <h1 class="font-bond text-lg text-white">
-                        <button class="btn btn-square btn-sm w-14" />
+                        <button class="btn-square btn-sm btn w-14" />
                     </h1>
-                    <button class="btn btn-square btn-sm " />
+                    <button class="btn-square btn-sm btn " />
                 </div>
-                <episode-and-dub-container class="flex gap-4 mt-12">
+                <episode-and-dub-container class="mt-12 flex gap-4">
                     <div class="flex gap-3">
-                        <p class="font-bold flex gap-2 justify-center items-center">
+                        <p class="flex items-center justify-center gap-2 font-bold">
                             <span class="text-3xl">
-                                <button class="btn btn-square btn-sm" />
+                                <button class="btn-square btn-sm btn" />
                             </span>
-                            <span><button class="btn btn-square btn-sm w-14" /></span>
+                            <span><button class="btn-square btn-sm btn w-14" /></span>
                         </p>
-                        <div class="text-zinc-500 flex justify-center items-center">▪</div>
-                        <div class="flex justify-center items-center">
+                        <div class="flex items-center justify-center text-zinc-500">▪</div>
+                        <div class="flex items-center justify-center">
                             <div class="flex flex-col gap-2">
                                 <span class="text-white">
-                                    <button class="btn btn-square btn-sm w-20" />
+                                    <button class="btn-square btn-sm btn w-20" />
                                 </span>
                                 <span class="flex gap-3">
                                     {#each Array(2) as _}
                                         <span
-                                            class="badge bg-[#1E2036] badge-lg rounded-md border-transparent leading-6 text-sm font-bold capitalize"
+                                            class="badge badge-lg rounded-md border-transparent bg-[#1E2036] text-sm font-bold capitalize leading-6"
                                         />
                                     {/each}
                                 </span>
                             </div>
                         </div>
-                        <div class="text-zinc-500 flex justify-center items-center">▪</div>
-                        <div class="flex justify-center items-center gap-3">
+                        <div class="flex items-center justify-center text-zinc-500">▪</div>
+                        <div class="flex items-center justify-center gap-3">
                             {#each Array(3) as _}
                                 <span
-                                    class="badge bg-[#1E2036] badge-lg rounded-md border-transparent leading-6 text-sm font-bold capitalize"
+                                    class="badge badge-lg rounded-md border-transparent bg-[#1E2036] text-sm font-bold capitalize leading-6"
                                 />
                             {/each}
                         </div>
@@ -46,35 +46,35 @@
             </div>
             <div class="flex w-full justify-end">
                 <div class="flex justify-center gap-5">
-                    <div class="flex flex-col w-[135px]">
-                        <span><button class="btn btn-square btn-xs w-14" /></span>
+                    <div class="flex w-[135px] flex-col">
+                        <span><button class="btn-square btn-xs btn w-14" /></span>
                         <select class="select w-full bg-neutral" />
                     </div>
-                    <div class="flex flex-col w-[135px]">
-                        <span><button class="btn btn-square btn-xs w-14" /></span>
+                    <div class="flex w-[135px] flex-col">
+                        <span><button class="btn-square btn-xs btn w-14" /></span>
                         <select class="select w-full bg-neutral" />
                     </div>
                     <div class="flex translate-y-8">
-                        <button class="btn btn-square" />
+                        <button class="btn-square btn" />
                     </div>
                 </div>
             </div>
         </div>
-        <div class="grid gap-x-20 gap-y-10 grid-cols-3 mt-10">
+        <div class="mt-10 grid grid-cols-3 gap-x-20 gap-y-10">
             {#each Array(9) as _}
                 <episode-card-container class="flex flex-col gap-4">
-                    <episode-card class="grid w-80 h-52 rounded-2xl relative">
+                    <episode-card class="relative grid h-52 w-80 rounded-2xl">
                         <episode-card-background-image
-                            class="w-80 h-52 rounded-2xl absolute inset-0 z-0 bg-[#1E2036]"
+                            class="absolute inset-0 z-0 h-52 w-80 rounded-2xl bg-[#1E2036]"
                         />
                         <episode-card-background-gradient
-                            class="w-80 h-52 rounded-2xl absolute inset-0 z-10"
+                            class="absolute inset-0 z-10 h-52 w-80 rounded-2xl"
                         />
                         <episode-card-info
-                            class="w-80 h-52 rounded-2xl absolute inset-0 z-20 font-bold"
+                            class="absolute inset-0 z-20 h-52 w-80 rounded-2xl font-bold"
                         />
                     </episode-card>
-                    <episode-name class="text-zinc-200 text-center bg-[#1E2036]" />
+                    <episode-name class="bg-[#1E2036] text-center text-zinc-200" />
                 </episode-card-container>
             {/each}
         </div>

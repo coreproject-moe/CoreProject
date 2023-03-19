@@ -15,15 +15,15 @@
 <!-- Modals  -->
 <svelte:component this={GenreModal} />
 
-<div class="hero min-h-[184px] mt-10 md:mt-0 md:min-h-screen bg-base-100">
-    <div class="hero-content text-center p-0">
+<div class="hero mt-10 min-h-[184px] bg-base-100 md:mt-0 md:min-h-screen">
+    <div class="hero-content p-0 text-center">
         <div class="block flex-col">
             <AutoComplete />
             {#if mobile}
                 <div class="mt-10">
                     <label
                         for={$modals.genre}
-                        class="btn modal-button flex gap-5"
+                        class="modal-button btn flex gap-5"
                     >
                         <span class="text-white">or search by genres</span>
                         <ChevronUpDown
@@ -34,27 +34,27 @@
                     </label>
                 </div>
             {:else}
-                <div class="divider w-80 mx-auto mt-12 mb-6 before:bg-white after:bg-white">
+                <div class="divider mx-auto mt-12 mb-6 w-80 before:bg-white after:bg-white">
                     or search by genres
                 </div>
-                <div class="grid grid-cols-6 gap-x-0 lg:gap-x-5 gap-y-5 justify-items-center">
+                <div class="grid grid-cols-6 justify-items-center gap-x-0 gap-y-5 lg:gap-x-5">
                     {#each badgeData as item}
-                        <div class="btn font-bold text-black w-fit whitespace-nowrap {item.class}">
+                        <div class="btn w-fit whitespace-nowrap font-bold text-black {item.class}">
                             {item.name}
                         </div>
                     {/each}
                 </div>
                 <div class="mt-24 flex flex-col items-center">
                     <div class="w-[500px]">
-                        <h1 class="font-bold text-3xl mb-2">Choose your preferences</h1>
+                        <h1 class="mb-2 text-3xl font-bold">Choose your preferences</h1>
                         <p>
                             Choose some options to customize your experience. You can change them
                             anytime by clicking the profile icon and going to Settings
                         </p>
                     </div>
                 </div>
-                <div class="flex w-full flex-row justify-center mt-8">
-                    <div class="flex flex-row align-center">
+                <div class="mt-8 flex w-full flex-row justify-center">
+                    <div class="align-center flex flex-row">
                         Romaji Naming
                         <ChevronDown
                             color="white"
@@ -63,7 +63,7 @@
                         />
                     </div>
                     <div class="divider divider-horizontal before:bg-white after:bg-white" />
-                    <div class="flex flex-row align-center">
+                    <div class="align-center flex flex-row">
                         10 point scoring system
                         <ChevronDown
                             color="white"
@@ -72,7 +72,7 @@
                         />
                     </div>
                     <div class="divider divider-horizontal before:bg-white after:bg-white" />
-                    <div class="flex flex-row align-center">
+                    <div class="align-center flex flex-row">
                         2 trackers added
                         <ChevronDown
                             color="white"
@@ -81,7 +81,7 @@
                         />
                     </div>
                     <div class="divider divider-horizontal before:bg-white after:bg-white" />
-                    <div class="flex flex-row align-center">
+                    <div class="align-center flex flex-row">
                         Show 18+ content
                         <ChevronDown
                             color="white"

@@ -17,15 +17,15 @@
     lastestEpisodeNameWordCount ??= 25;
 </script>
 
-<p class="text-3xl font-bold flex">Latest Episode</p>
-<p class="flex gap-2 mt-6 mb-3 md:my-0">
+<p class="flex text-3xl font-bold">Latest Episode</p>
+<p class="mt-6 mb-3 flex gap-2 md:my-0">
     show from my list only
     <ChevronDown
         height={25}
         width={25}
     />
 </p>
-<div class="h-28 md:h-[530px] w-96 md:w-80">
+<div class="h-28 w-96 md:h-[530px] md:w-80">
     <Swiper
         direction={mobile ? "horizontal" : "vertical"}
         modules={[Mousewheel, FreeMode]}
@@ -42,7 +42,7 @@
         {#each latestEpisodes as item}
             <SwiperSlide>
                 <div
-                    class="w-10/12 md:w-64 carousel-item bg-center rounded-xl bg-no-repeat bg-cover flex items-center justify-between p-8"
+                    class="carousel-item flex w-10/12 items-center justify-between rounded-xl bg-cover bg-center bg-no-repeat p-8 md:w-64"
                     style="
                         background-image:
                             linear-gradient(90deg, rgb(7 5 25 / 92%) -1.41%, rgba(7, 5, 25, 0.1) 100%),
@@ -66,7 +66,7 @@
                     </div>
 
                     <button
-                        class="btn btn-circle btn-md btn-warning"
+                        class="btn-warning btn-md btn-circle btn"
                         aria-label="play"
                     >
                         <Play

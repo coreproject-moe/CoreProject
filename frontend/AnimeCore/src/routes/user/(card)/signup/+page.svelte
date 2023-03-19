@@ -101,8 +101,8 @@
 </svelte:head>
 
 <form use:form>
-    <div class="flex justify-center mb-10">
-        <div class="font-bold text-4xl select-none flex">
+    <div class="mb-10 flex justify-center">
+        <div class="flex select-none text-4xl font-bold">
             <span class="inline-flex text-white">c</span>
             <span class="inline-flex text-warning">o</span>
             <span class="inline-flex text-white">r</span>
@@ -125,13 +125,13 @@
                 type={input_item.type}
                 placeholder={input_item.placeholder}
                 name={input_item.name}
-                class="input text-white font-semibold border-[3px] h-16 border-warning focus:outline-0 placeholder:uppercase"
+                class="input h-16 border-[3px] border-warning font-semibold text-white placeholder:uppercase focus:outline-0"
             />
         {/each}
     </div>
-    <div class="flex justify-center mt-10 items-center gap-2">
+    <div class="mt-10 flex items-center justify-center gap-2">
         <button
-            class="btn btn-secondary font-bold text-black"
+            class="btn-secondary btn font-bold text-black"
             type="submit"
         >
             Register

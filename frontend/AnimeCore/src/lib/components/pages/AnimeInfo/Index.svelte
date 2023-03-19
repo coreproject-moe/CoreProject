@@ -92,14 +92,14 @@
     ];
 </script>
 
-<div class="grid h-screen relative overflow-x-hidden">
+<div class="relative grid h-screen overflow-x-hidden">
     <!-- Background Image Container -->
     <div
-        class="bg-black h-[80vw] md:h-screen absolute top-0"
+        class="absolute top-0 h-[80vw] bg-black md:h-screen"
         style="grid-area: 1 / 1 / 2 / 2;"
     >
         <div
-            class="h-[80vw] md:h-screen w-screen bg-no-repeat bg-center bg-cover brightness-50"
+            class="h-[80vw] w-screen bg-cover bg-center bg-no-repeat brightness-50 md:h-screen"
             style="background-image:url('{anime_background_image}')"
         />
         <div
@@ -107,15 +107,15 @@
         />
     </div>
 
-    <div class="h-screen grid w-screen absolute inset-0">
+    <div class="absolute inset-0 grid h-screen w-screen">
         <div class="hero">
             <div class="grid h-full w-full">
-                <div class="pt-8 md:pr-[72px] pl-6 md:pl-20 pb-0">
+                <div class="pt-8 pl-6 pb-0 md:pr-[72px] md:pl-20">
                     <Navbar />
                 </div>
-                <div class="flex flex-col mt-12 md:mt-20 mx-6 md:mx-20">
+                <div class="mx-6 mt-12 flex flex-col md:mx-20 md:mt-20">
                     <anime-info
-                        class="flex justify-between items-center md:items-start gap-3 flex-col md:flex-row"
+                        class="flex flex-col items-center justify-between gap-3 md:flex-row md:items-start"
                     >
                         <div class="flex gap-7 self-start">
                             <!-- Anime image card  -->
@@ -136,9 +136,9 @@
                         </div>
 
                         {#if mobile}
-                            <div class="flex self-start gap-2 mt-10 md:mt-0">
-                                <button class="btn btn-sm btn-info normal-case">
-                                    <div class="flex justify-center align-center gap-3">
+                            <div class="mt-10 flex gap-2 self-start md:mt-0">
+                                <button class="btn-info btn-sm btn normal-case">
+                                    <div class="align-center flex justify-center gap-3">
                                         <span class="w-2 translate-y-1">
                                             <Circle color="#6FCF97" />
                                         </span>
@@ -152,13 +152,13 @@
                                         </span>
                                     </div>
                                 </button>
-                                <button class="btn btn-sm btn-info btn-square">
+                                <button class="btn-info btn-square btn-sm btn">
                                     <Bookmark
                                         width="16"
                                         height="16"
                                     />
                                 </button>
-                                <button class="btn btn-sm btn-info btn-square">
+                                <button class="btn-info btn-square btn-sm btn">
                                     <Heart
                                         color="#FF8796"
                                         width="16"
@@ -168,7 +168,7 @@
                             </div>
                         {/if}
 
-                        <anime-synopsys class="md:mt-0 mt-10">
+                        <anime-synopsys class="mt-10 md:mt-0">
                             <ScrollArea
                                 class="h-56 text-white"
                                 offsetScrollbar={true}
@@ -177,12 +177,12 @@
                                     {data?.anime_synopsis}
                                 </p>
                             </ScrollArea>
-                            <div class="hidden md:flex gap-2 flex-row pt-5">
+                            <div class="hidden flex-row gap-2 pt-5 md:flex">
                                 {#await genres(String(data?.genres))}
-                                    <div class="animate-pulse flex space-x-4">
+                                    <div class="flex animate-pulse space-x-4">
                                         {#each Array(5) as _}
                                             <div
-                                                class="w-14 badge text-white bg-base-100 badge-lg rounded-md border-transparent leading-6 text-sm font-bold capitalize"
+                                                class="badge badge-lg w-14 rounded-md border-transparent bg-base-100 text-sm font-bold capitalize leading-6 text-white"
                                             />
                                         {/each}
                                     </div>
@@ -190,7 +190,7 @@
                                     {#if value}
                                         {#each value as item}
                                             <span
-                                                class="badge text-white bg-base-100 badge-lg rounded-md border-transparent leading-6 text-sm font-bold capitalize"
+                                                class="badge badge-lg rounded-md border-transparent bg-base-100 text-sm font-bold capitalize leading-6 text-white"
                                             >
                                                 {item.name}
                                             </span>
@@ -201,7 +201,7 @@
                                 {/await}
                             </div>
                             <button
-                                class="btn btn-sm  text-sm normal-case glass btn-disabled mt-5 gap-4 text-white flex-nowrap hidden md:flex"
+                                class="btn-disabled glass  btn-sm btn mt-5 hidden flex-nowrap gap-4 text-sm normal-case text-white md:flex"
                                 style="--glass-blur:20px;--glass-reflex-degree:90deg;--glass-reflex-opacity:0;--glass-opacity:10%"
                             >
                                 <div>
@@ -225,55 +225,55 @@
                             </button>
                         </anime-synopsys>
                         {#if !mobile}
-                            <anime-ratings class="flex flex-col !w-[240px]">
-                                <h1 class="text-white text-2xl font-bold mb-4">Ratings</h1>
+                            <anime-ratings class="flex !w-[240px] flex-col">
+                                <h1 class="mb-4 text-2xl font-bold text-white">Ratings</h1>
                                 <p>
-                                    <span class="text-white text-3xl font-bold">79%</span>
+                                    <span class="text-3xl font-bold text-white">79%</span>
                                     <span class="text-sm text-neutral-400">| 2.8k ratings</span>
                                 </p>
-                                <div class="divider w-[71px] color-[#D9D9D9]" />
+                                <div class="color-[#D9D9D9] divider w-[71px]" />
                                 <p class="my-1">
-                                    <span class="text-white text-xl">#86</span>
+                                    <span class="text-xl text-white">#86</span>
                                     <span class="text-sm text-neutral-400">
                                         Most Popular All Time
                                     </span>
                                 </p>
                                 <p class="my-1">
-                                    <span class="text-white text-xl">#260</span>
+                                    <span class="text-xl text-white">#260</span>
                                     <span class="text-sm text-neutral-400">
                                         Highest Rated Of All Time
                                     </span>
                                 </p>
 
                                 <button
-                                    class="btn bg-white hover:bg-white my-2 h-[26px] w-[170px] px-0 leading-none min-h-fit"
+                                    class="btn my-2 h-[26px] min-h-fit w-[170px] bg-white px-0 leading-none hover:bg-white"
                                 >
-                                    <div class="flex gap-2 justify-center items-center">
-                                        <div class="flex justify-center items-center">
+                                    <div class="flex items-center justify-center gap-2">
+                                        <div class="flex items-center justify-center">
                                             <TrendingUp
                                                 class="translate-y-1 text-base-100"
                                                 width="20"
                                                 height="18"
                                             />
                                         </div>
-                                        <p class="text-black normal-case whitespace-nowrap">
+                                        <p class="whitespace-nowrap normal-case text-black">
                                             Detailed Distribution
                                         </p>
                                     </div>
                                 </button>
 
-                                <p class="text-white mt-2">Your rating</p>
-                                <star-container class="flex mt-2 items-center gap-2 flex-nowrap">
+                                <p class="mt-2 text-white">Your rating</p>
+                                <star-container class="mt-2 flex flex-nowrap items-center gap-2">
                                     <stars class="flex translate-y-1">
                                         <StarRating
                                             rating={Number(data?.anime_rating ?? 0)}
                                             config={{ fullColor: "white" }}
                                         />
                                     </stars>
-                                    <p class="font-bold nowrap text-lg w-12">
+                                    <p class="nowrap w-12 text-lg font-bold">
                                         {(100 / 5) * Number(data?.anime_rating ?? 0)} %
                                     </p>
-                                    <button class="btn btn-square btn-sm btn-info">
+                                    <button class="btn-info btn-square btn-sm btn">
                                         <Edit
                                             variant="without_underline_around_pencil"
                                             height="15"
@@ -285,7 +285,7 @@
                                 <p class="mt-4 flex items-center text-white">
                                     Add a review
                                     <External
-                                        class="translate-y-1 ml-1"
+                                        class="ml-1 translate-y-1"
                                         width="18"
                                         height="19"
                                     />
@@ -294,7 +294,7 @@
                         {/if}
                     </anime-info>
                     <div
-                        class="flex justify-between items-center md:items-start gap-3 flex-col md:flex-row mt-24"
+                        class="mt-24 flex flex-col items-center justify-between gap-3 md:flex-row md:items-start"
                     >
                         {#await episodes(String(data?.episodes))}
                             {#if !mobile}
@@ -310,11 +310,11 @@
                         {/await}
                         {#if !mobile}
                             <episode-details
-                                class="flex flex-col text-white justify-center items-start !w-[221px] gap-6"
+                                class="flex !w-[221px] flex-col items-start justify-center gap-6 text-white"
                             >
                                 <p class="flex gap-2">
-                                    <span class="font-bold text-xl">Details</span>
-                                    <button class="btn btn-square btn-sm">
+                                    <span class="text-xl font-bold">Details</span>
+                                    <button class="btn-square btn-sm btn">
                                         <Settings
                                             class="translate-y-0.5"
                                             color="white"

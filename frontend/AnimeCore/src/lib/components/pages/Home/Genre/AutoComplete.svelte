@@ -27,7 +27,7 @@
         class="m-1"
     >
         <div class="relative text-gray-600 focus-within:text-gray-400">
-            <span class="absolute w-16 h-full flex justify-center items-center">
+            <span class="absolute flex h-full w-16 items-center justify-center">
                 <Search
                     color="red"
                     height={mobile ? 22 : 36}
@@ -38,7 +38,7 @@
                 on:focus={onFocus}
                 on:blur={onBlur}
                 type="Search"
-                class="py-2 text-gray-900 placeholder-gray-600 bg-white rounded-[8px] md:rounded-[16px] pl-16 h-12 md:h-20 w-[65vw] md:w-[40vw] text-sm md:text-xl outline-none focus:border-4 focus:border-red-400"
+                class="h-12 w-[65vw] rounded-[8px] bg-white py-2 pl-16 text-sm text-gray-900 placeholder-gray-600 outline-none focus:border-4 focus:border-red-400 md:h-20 md:w-[40vw] md:rounded-[16px] md:text-xl"
                 placeholder="Search for anything"
                 autocomplete="off"
             />
@@ -47,7 +47,7 @@
     <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
     <ul
         tabindex="0"
-        class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52 items-center inset-x-0 mx-auto pt-6"
+        class="dropdown-content menu rounded-box inset-x-0 mx-auto w-52 items-center bg-base-100 p-2 pt-6 shadow"
     >
         {#if data.length !== 0}
             {#each Array(10) as item}
