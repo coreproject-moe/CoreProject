@@ -18,25 +18,25 @@
         episodes_count: number;
     }>;
 
-    import { UrlMaps } from "$data/urls";
+    import StarRating from "svelte-star-rating";
+    
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
+    import { UrlMaps } from "$data/urls";
     import Bookmark from "$icons/Bookmark.svelte";
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import Circle from "$icons/Circle.svelte";
     import Edit from "$icons/Edit.svelte";
     import External from "$icons/External.svelte";
     import Heart from "$icons/Heart.svelte";
-
+    import Settings from "$icons/Settings.svelte";
     import TrendingUp from "$icons/Trending-Up.svelte";
     import { responsiveMode } from "$store/Responsive";
-
+    
     import AnimeInfo from "./AnimeInfo.svelte";
-    import ImageCard from "./ImageCard.svelte";
-    import Episode from "./Episode.svelte";
     import EpisodeSkeleton from "./Episode.skeleton.svelte";
-    import StarRating from "svelte-star-rating";
-    import Settings from "$icons/Settings.svelte";
+    import Episode from "./Episode.svelte";
+    import ImageCard from "./ImageCard.svelte";
 
     const urls = new UrlMaps();
     let mobile: boolean;

@@ -10,13 +10,14 @@
     }>;
     export let backend_anime_number: number;
     import { UrlMaps } from "$data/urls";
-    import Search from "$icons/Search.svelte";
-    import Settings from "$icons/Settings.svelte";
-    import EpisodeCard from "./EpisodeCard.svelte";
-    import { responsiveMode } from "$store/Responsive";
+    import { formatNumberToDuration } from "$functions/formatNumberToDuration";
     import List from "$icons/List.svelte";
     import MoreVertical from "$icons/MoreVertical.svelte";
-    import { formatNumberToDuration } from "$functions/formatNumberToDuration";
+    import Search from "$icons/Search.svelte";
+    import Settings from "$icons/Settings.svelte";
+    import { responsiveMode } from "$store/Responsive";
+    
+    import EpisodeCard from "./EpisodeCard.svelte";
 
     const backend_urls = new UrlMaps();
     let mobile: boolean;

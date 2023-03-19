@@ -28,7 +28,7 @@
             image: "/posters/Comic-Girls-Image.png"
         }
     ];
-    
+
     let interval: NodeJS.Timer | undefined;
     onMount(() => {
         interval = setInterval(() => {
@@ -98,6 +98,71 @@
         {/if}
     {/each}
     <div class="h-screen grid absolute inset-0">
-        <slot />
+        <div
+            style="grid-area: 1 / 1 / 2 / 2"
+            class="inline-grid justify-center md:justify-end content-center"
+        >
+            <div
+                class="card w-[35vw] bg-base-100 shadow-xl mr-0 md:mr-24 bg-transparent from-base-100 bg-gradient-to-t placeholder:capitalize"
+            >
+                <div class="card-body rounded-2xl">
+                    <slot />
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<style lang="scss">
+    $border-width: 3px;
+
+    .card {
+        border-image: linear-gradient(
+                to top,
+                transparent 0.1%,
+                white 15%,
+                transparent,
+                rgba(0, 0, 0, 0)
+            )
+            1 100%;
+        border-image-width: $border-width;
+
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: 10.5px;
+            right: 0;
+            border-left: $border-width solid white;
+            border-radius: 9999px;
+            width: 1px;
+            height: 100px;
+            background-color: white;
+        }
+        &::after {
+            content: "";
+            position: absolute;
+            bottom: 10.5px;
+            left: 0;
+            border-left: $border-width solid white;
+            border-radius: 9999px;
+            width: 1px;
+            height: 100px;
+            background-color: white;
+        }
+    }
+    .card-body {
+        z-index: 1;
+
+        &::after {
+            position: absolute;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            z-index: -1;
+            box-shadow: inset 0 $border-width * -1 0 0 rgba(250, 250, 250, 0.9);
+            content: "";
+            border-radius: 16px;
+        }
+    }
+</style>

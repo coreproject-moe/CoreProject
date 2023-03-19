@@ -1,7 +1,9 @@
 <script lang="ts">
+    import voca from "voca";
+    
     import Episode from "$components/pages/Episode/Index.svelte";
     import { UrlMaps } from "$data/urls";
-    import voca from "voca";
+    
     import type { PageData } from "./$types";
 
     export let data: PageData;

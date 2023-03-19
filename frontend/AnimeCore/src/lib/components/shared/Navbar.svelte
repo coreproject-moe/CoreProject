@@ -62,25 +62,26 @@
     </div>
     <div class="navbar-end">
         {#if $user_is_logged_in}
-            <label
-                for={$modals.navbar}
-                class="btn modal-button bg-transparent hover:bg-transparent px-0 border-transparent"
-            >
-                <img
-                    alt=""
-                    class="mask mask-squircle"
-                    src="/images/(Avatar)-placeholder.png"
-                    width="50"
-                    height="50"
-                />
-            </label>
+        <label
+        for={$modals.navbar}
+        class="btn modal-button bg-transparent hover:bg-transparent px-0 border-transparent"
+    >
+        <img
+            alt=""
+            class="mask mask-squircle"
+            src="/images/(Avatar)-placeholder.png"
+            width="50"
+            height="50"
+        />
+    </label>
         {:else}
-            <a
-                class="w-[60px] h-[55px] rounded-lg flex justify-center items-center border-dashed hover:border-dashed border-2 border-white font-bold active:scale-95 glass"
-                href="/user/login"
-            >
-                Log in
-            </a>
+        <a
+        class="w-[60px] h-[55px] rounded-lg flex justify-center items-center border-dashed hover:border-dashed border-2 border-white font-bold active:scale-95 glass"
+        href="/user/login"
+    >
+        Log in
+    </a>
+          
         {/if}
     </div>
 </div>
