@@ -149,7 +149,13 @@ user_router.add_router(
     ),
     tags=["user"],
 )
-
+user_router.add_router(
+    "/username_validity",
+    import_string(
+        "apps.api.views.user.username_validity.router",
+    ),
+    tags=["user"],
+)
 # __ TRACKER ROUTER __
 
 from .views.trackers import router as tracker_router

@@ -7,7 +7,6 @@
 
     import { goto } from "$app/navigation";
     import { UrlMaps } from "$data/urls";
-    import { isNumber } from "$functions/isNumber";
 
     const urls = new UrlMaps();
     // Creating yup schema
@@ -90,7 +89,7 @@
                     if (
                         HashLength === 1 &&
                         splittedValue.length === 2 &&
-                        isNumber(splittedValue[1]) === true
+                        !isNaN(Number(splittedValue[1]))
                     ) {
                         let formData = new FormData();
                         formData.append("username", splittedValue[0] ?? "");
@@ -115,7 +114,7 @@
                     } else if (HashLength >= 1) {
                         warnings.username =
                             "There must be one hash in the username. ( eg: SoraAmamiya#1993 )";
-                    } else if (isNumber(splittedValue[1]) === false) {
+                    } else if (isNaN(Number(splittedValue[1]))) {
                         warnings.username =
                             "The discriminator must be a number. ( eg : SoraAmamiya#1993 )";
                     }
