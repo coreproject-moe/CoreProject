@@ -16,7 +16,7 @@
     import Search from "$icons/Search.svelte";
     import Settings from "$icons/Settings.svelte";
     import { responsiveMode } from "$store/Responsive";
-    
+
     import EpisodeCard from "./EpisodeCard.svelte";
 
     const backend_urls = new UrlMaps();

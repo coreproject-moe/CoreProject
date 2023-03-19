@@ -81,7 +81,7 @@
     >
         Log in
     </a>
-          
+
         {/if}
     </div>
 </div>
