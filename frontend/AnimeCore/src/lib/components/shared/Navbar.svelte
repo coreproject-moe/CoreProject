@@ -7,6 +7,7 @@
     import { modals } from "$store/Modal";
     import { navbar_variant } from "$store/Navbar_Variant";
     import { responsiveMode } from "$store/Responsive";
+    import { user_is_logged_in } from "$store/User";
 
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
@@ -60,14 +61,7 @@
         </div>
     </div>
     <div class="navbar-end">
-        {#if true}
-            <a
-                class="w-[60px] h-[55px] rounded-lg flex justify-center items-center border-dashed border-2 border-white font-bold active:scale-95"
-                href="/user/login"
-            >
-                Log in
-            </a>
-        {:else}
+        {#if $user_is_logged_in}
             <label
                 for={$modals.navbar}
                 class="btn modal-button bg-transparent hover:bg-transparent px-0 border-transparent"
@@ -80,6 +74,13 @@
                     height="50"
                 />
             </label>
+        {:else}
+            <a
+                class="w-[60px] h-[55px] rounded-lg flex justify-center items-center border-dashed hover:border-dashed border-2 border-white font-bold active:scale-95 glass"
+                href="/user/login"
+            >
+                Log in
+            </a>
         {/if}
     </div>
 </div>

@@ -28,6 +28,7 @@
             image: "/posters/Comic-Girls-Image.png"
         }
     ];
+    
     let interval: NodeJS.Timer | undefined;
     onMount(() => {
         interval = setInterval(() => {
