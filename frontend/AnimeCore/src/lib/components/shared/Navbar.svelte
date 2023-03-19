@@ -54,7 +54,7 @@
                 <!-- placeholder to remove layout shift  -->
                 <div
                     transition:fade|local
-                    class="w-[158px] h-[22px]"
+                    class="h-[22px] w-[158px]"
                     style="grid-area: 1 / 1 / 2 / 2"
                 />
             {/if}
@@ -64,7 +64,7 @@
         {#if $user_is_logged_in}
             <label
                 for={$modals.navbar}
-                class="btn modal-button bg-transparent hover:bg-transparent px-0 border-transparent"
+                class="modal-button btn border-transparent bg-transparent px-0 hover:bg-transparent"
             >
                 <img
                     alt=""
@@ -76,7 +76,7 @@
             </label>
         {:else}
             <a
-                class="w-[60px] h-[55px] rounded-lg flex justify-center items-center border-dashed hover:border-dashed border-2 border-white font-bold active:scale-95 glass"
+                class="glass flex h-[55px] w-[60px] items-center justify-center rounded-lg border-2 border-dashed border-white font-bold hover:border-dashed active:scale-95"
                 href="/user/login"
             >
                 Log in

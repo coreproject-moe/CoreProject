@@ -10,13 +10,14 @@
     }>;
     export let backend_anime_number: number;
     import { UrlMaps } from "$data/urls";
-    import Search from "$icons/Search.svelte";
-    import Settings from "$icons/Settings.svelte";
-    import EpisodeCard from "./EpisodeCard.svelte";
-    import { responsiveMode } from "$store/Responsive";
+    import { formatNumberToDuration } from "$functions/formatNumberToDuration";
     import List from "$icons/List.svelte";
     import MoreVertical from "$icons/MoreVertical.svelte";
-    import { formatNumberToDuration } from "$functions/formatNumberToDuration";
+    import Search from "$icons/Search.svelte";
+    import Settings from "$icons/Settings.svelte";
+    import { responsiveMode } from "$store/Responsive";
+
+    import EpisodeCard from "./EpisodeCard.svelte";
 
     const backend_urls = new UrlMaps();
     let mobile: boolean;
@@ -24,9 +25,9 @@
 </script>
 
 {#if mobile}
-    <div class="flex flex-col text-white mt-10 md:mt-0 w-full">
-        <span class="font-bold text-2xl">Episodes</span>
-        <div class="divider after:bg-white before:bg-white" />
+    <div class="mt-10 flex w-full flex-col text-white md:mt-0">
+        <span class="text-2xl font-bold">Episodes</span>
+        <div class="divider before:bg-white after:bg-white" />
         <div class="flex justify-between">
             <div class="flex text-xl font-bold">
                 {episodes.length} Episodes
@@ -51,9 +52,9 @@
         {#each episodes as episode}
             {@const url = backend_urls.DOMAIN + episode.episode_thumbnail}
             <a href="/backend/{backend_anime_number}/episodes/{episode.episode_number}">
-                <div class="flex h-16 w-[90vw] items-center bg-[#1E2036] rounded-lg relative my-4">
+                <div class="relative my-4 flex h-16 w-[90vw] items-center rounded-lg bg-[#1E2036]">
                     <img
-                        class="mask mask-squircle h-10 w-10 mx-4"
+                        class="mask mask-squircle mx-4 h-10 w-10"
                         src={url}
                         alt={episode.episode_name}
                     />
@@ -76,7 +77,7 @@
             <div>
                 <div class="flex gap-1">
                     <h1 class="font-bond text-lg text-white">Episodes</h1>
-                    <button class="btn btn-square btn-sm">
+                    <button class="btn-square btn-sm btn">
                         <Settings
                             class="translate-y-0.5"
                             color="white"
@@ -85,15 +86,15 @@
                         />
                     </button>
                 </div>
-                <episode-and-dub-container class="flex gap-4 mt-12">
+                <episode-and-dub-container class="mt-12 flex gap-4">
                     <div class="flex gap-3">
-                        <p class="font-bold text-white flex gap-2 justify-center items-center">
+                        <p class="flex items-center justify-center gap-2 font-bold text-white">
                             <span class="text-3xl">{episodes.length}</span>
                             <span>episodes</span>
                         </p>
-                        <div class="text-white flex justify-center items-center">▪</div>
+                        <div class="flex items-center justify-center text-white">▪</div>
 
-                        <div class="flex justify-center items-center">
+                        <div class="flex items-center justify-center">
                             <div class="flex flex-col gap-2">
                                 <span class="text-white">
                                     available in <span
@@ -102,32 +103,32 @@
                                 </span>
                                 <span class="flex gap-3">
                                     <span
-                                        class="badge text-white bg-[#1E2036] badge-lg rounded-md border-transparent leading-6 text-sm font-bold capitalize"
+                                        class="badge badge-lg rounded-md border-transparent bg-[#1E2036] text-sm font-bold capitalize leading-6 text-white"
                                     >
                                         Sub
                                     </span>
                                     <span
-                                        class="badge text-white bg-[#1E2036] badge-lg rounded-md border-transparent leading-6 text-sm font-bold capitalize"
+                                        class="badge badge-lg rounded-md border-transparent bg-[#1E2036] text-sm font-bold capitalize leading-6 text-white"
                                     >
                                         Dub
                                     </span>
                                 </span>
                             </div>
                         </div>
-                        <div class="text-white flex justify-center items-center">▪</div>
-                        <div class="flex justify-center items-center gap-3">
+                        <div class="flex items-center justify-center text-white">▪</div>
+                        <div class="flex items-center justify-center gap-3">
                             <span
-                                class="badge text-white bg-[#1E2036] badge-lg rounded-md border-transparent leading-6 text-sm font-bold capitalize"
+                                class="badge badge-lg rounded-md border-transparent bg-[#1E2036] text-sm font-bold capitalize leading-6 text-white"
                             >
                                 1080
                             </span>
                             <span
-                                class="badge text-white bg-[#1E2036] badge-lg rounded-md border-transparent leading-6 text-sm font-bold capitalize"
+                                class="badge badge-lg rounded-md border-transparent bg-[#1E2036] text-sm font-bold capitalize leading-6 text-white"
                             >
                                 720
                             </span>
                             <span
-                                class="badge text-white bg-[#1E2036] badge-lg rounded-md border-transparent leading-6 text-sm font-bold capitalize"
+                                class="badge badge-lg rounded-md border-transparent bg-[#1E2036] text-sm font-bold capitalize leading-6 text-white"
                             >
                                 480
                             </span>
@@ -136,21 +137,21 @@
                 </episode-and-dub-container>
             </div>
             <div class="flex w-full justify-end">
-                <div class="flex justify-center text-white gap-5">
-                    <div class="flex flex-col w-[135px]">
+                <div class="flex justify-center gap-5 text-white">
+                    <div class="flex w-[135px] flex-col">
                         <span>Type</span>
-                        <select class="mt-2 select w-full bg-neutral">
+                        <select class="select mt-2 w-full bg-neutral">
                             <option value="Subbed">Subbed</option>
                         </select>
                     </div>
-                    <div class="flex flex-col w-[135px]">
+                    <div class="flex w-[135px] flex-col">
                         <span>Display</span>
-                        <select class="mt-2 select w-full bg-neutral">
+                        <select class="select mt-2 w-full bg-neutral">
                             <option value="Thumbnails">Thumbnails</option>
                         </select>
                     </div>
                     <div class="flex translate-y-8">
-                        <button class="btn btn-square">
+                        <button class="btn-square btn">
                             <Search
                                 width="16"
                                 height="16"
@@ -161,7 +162,7 @@
                 </div>
             </div>
         </div>
-        <div class="grid gap-x-20 gap-y-10 grid-cols-3 mt-10">
+        <div class="mt-10 grid grid-cols-3 gap-x-20 gap-y-10">
             {#each episodes as episode}
                 {@const url = backend_urls.DOMAIN + episode.episode_thumbnail}
                 {@const name = episode.episode_name}

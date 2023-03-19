@@ -3,7 +3,7 @@
     export let alt: string;
 </script>
 
-<anime-image-card class="card flex w-[100px] md:w-[200px] h-[150px] md:h-[300px]">
+<anime-image-card class="card flex h-[150px] w-[100px] md:h-[300px] md:w-[200px]">
     <img
         class="rounded-lg object-contain"
         width={200}
