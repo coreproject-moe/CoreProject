@@ -19,7 +19,6 @@ const config = {
     ],
     kit: {
         appDir: "svelte__animecore",
-        // adapter: adapter({ fallback: "app.html" }),
         adapter: is_static
             ? static_adapter({
                 fallback: "app.html",

@@ -4,7 +4,6 @@
     import { createForm } from "felte";
     import Cookies from "js-cookie";
     import * as yup from "yup";
-    import voca from "voca";
 
     import { page } from "$app/stores";
     import { UrlMaps } from "$data/urls";
@@ -103,7 +102,7 @@
             <input
                 style="--tw-bg-opacity:0.30"
                 type={input_item.type}
-                placeholder={voca.upperCase(input_item.placeholder)}
+                placeholder={input_item.placeholder}
                 name={input_item.name}
                 class="input h-16 border-[3px] border-warning font-semibold text-white placeholder:uppercase focus:outline-0"
             />
