@@ -19,7 +19,7 @@
     }>;
 
     import StarRating from "svelte-star-rating";
-    
+
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
     import { UrlMaps } from "$data/urls";
@@ -32,7 +32,7 @@
     import Settings from "$icons/Settings.svelte";
     import TrendingUp from "$icons/Trending-Up.svelte";
     import { responsiveMode } from "$store/Responsive";
-    
+
     import AnimeInfo from "./AnimeInfo.svelte";
     import EpisodeSkeleton from "./Episode.skeleton.svelte";
     import Episode from "./Episode.svelte";
