@@ -60,12 +60,10 @@
         "uuid": "^9.0.0",
         "vite": "4.2.0",
         "voca": "^1.4.0",
-          "@felte/reporter-tippy": "^1.1.5",
+        "@felte/reporter-tippy": "^1.1.5",
         "@felte/validator-yup": "^1.0.11",
         "felte": "^1.2.7"
     },
     "type": "module",
-    "dependencies": {
-      
-    }
+    "dependencies": {}
 }
