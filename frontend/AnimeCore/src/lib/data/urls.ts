@@ -14,14 +14,6 @@ export class MAL {
     };
 }
 
-export class Kitsu {
-    private BASE_URL = ``;
-
-    public id = () => {
-        return;
-    };
-}
-
 export class Anilist {
     private BASE_URL = ``;
 
@@ -77,5 +69,9 @@ export class UrlMaps {
 
     public get login_url() {
         return `${this.BASE_URL}/login`;
+    }
+
+    public get username_validity_endpoint() {
+        return `${this.BASE_URL}/username_validity`;
     }
 }

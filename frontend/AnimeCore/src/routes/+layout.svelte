@@ -6,17 +6,13 @@
 
     import NavigationBar from "$components/shared/NavigationBar.svelte";
     import navigationState from "$store/Navigation_State";
+
     onMount(async () => {
         document
             ?.querySelectorAll<HTMLDivElement | HTMLStyleElement>("#loader")
             ?.forEach((e) => e.remove());
         document?.querySelector<HTMLElement>(".root")?.style.removeProperty("display");
     });
-
-    import { dev } from "$app/environment";
-    import { inject } from "@vercel/analytics";
-
-    inject({ mode: dev ? "development" : "production" });
 </script>
 
 <svelte:window
