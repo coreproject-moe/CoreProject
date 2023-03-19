@@ -29,13 +29,16 @@
         }
     ];
 
+    const changeIndex = () => {
+        const index = Math.floor(Math.random() * CHOICES.length);
+        CHOICE_NUMBER = index;
+    };
     let interval: NodeJS.Timer | undefined;
     onMount(() => {
         interval = setInterval(() => {
-            const index = Math.floor(Math.random() * CHOICES.length);
-            CHOICE_NUMBER = index;
-            console.log(index);
-        }, 2000);
+            changeIndex();
+        }, 20000);
+        changeIndex();
     });
     onDestroy(() => {
         clearInterval(interval);
@@ -69,11 +72,11 @@
 
             <div
                 transition:blur|local
-                class="bg-black h-screen fixed"
+                class="fixed h-screen bg-black"
                 style="grid-area: 1 / 1 / 2 / 2;"
             >
                 <div
-                    class="h-screen w-screen bg-no-repeat bg-center bg-cover brightness-90"
+                    class="h-screen w-screen bg-cover bg-center bg-no-repeat brightness-90"
                     style="background-image:url('{item.image}')"
                 />
                 <div
@@ -88,22 +91,27 @@
                     />
                 </div>
                 <!-- Background from anime div  -->
-                <div class="absolute bottom-8 left-8">
+                <div
+                    class="absolute bottom-8 left-8"
+                    style="z-index:99999"
+                >
                     <div class="flex flex-col">
-                        <div class="text-secondary">Background from {type()}</div>
-                        <div class="text-white">{item.name}</div>
+                        <p class="text-secondary">Background from {type()}</p>
+                        <p class="text-white">
+                            {item.name}
+                        </p>
                     </div>
                 </div>
             </div>
         {/if}
     {/each}
-    <div class="h-screen grid absolute inset-0">
+    <div class="absolute inset-0 grid h-screen">
         <div
             style="grid-area: 1 / 1 / 2 / 2"
-            class="inline-grid justify-center md:justify-end content-center"
+            class="inline-grid content-center justify-center md:justify-end"
         >
             <div
-                class="card w-[35vw] bg-base-100 shadow-xl mr-0 md:mr-24 bg-transparent from-base-100 bg-gradient-to-t placeholder:capitalize"
+                class="card mr-0 w-96 bg-base-100 bg-transparent bg-gradient-to-t from-base-100 shadow-xl placeholder:capitalize md:mr-24 md:w-[35vw]"
             >
                 <div class="card-body rounded-2xl">
                     <slot />
