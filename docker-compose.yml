@@ -91,16 +91,6 @@ services:
             - PORT=3000
             - HOST=0.0.0.0
 
-    user:
-        image: frontend
-        restart: unless-stopped
-        build: ./frontend/User
-        dns: 1.1.1.1
-        environment:
-            - SITE_ADDRESS=${SITE_ADDRESS}
-            - PORT=3000
-            - HOST=0.0.0.0
-
     # Varnish
     django-varnish:
         image: varnish:fresh
@@ -138,4 +128,4 @@ services:
         depends_on:
             - django-varnish
             - anime-varnish
-            - user
+

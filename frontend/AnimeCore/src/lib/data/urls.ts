@@ -64,14 +64,14 @@ export class UrlMaps {
     }
 
     public get signup_url() {
-        return `${this.BASE_URL}/sign_up`;
+        return `${this.BASE_URL}/user/sign_up`;
     }
 
     public get login_url() {
-        return `${this.BASE_URL}/login`;
+        return `${this.BASE_URL}/user/login`;
     }
 
     public get username_validity_endpoint() {
-        return `${this.BASE_URL}/username_validity`;
+        return `${this.BASE_URL}/user/username_validity`;
     }
 }
