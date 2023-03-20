@@ -6,7 +6,7 @@
     export let status: "completed" | "airing";
     export let aired_from: string;
 
-    import { formatDateString } from "$functions/covertDateToSeason";
+    import { formatDate } from "$functions/formatDate";
     import BookOpen from "$icons/Book-Open.svelte";
     import Download from "$icons/Download.svelte";
     import Edit from "$icons/Edit.svelte";
@@ -17,6 +17,8 @@
 
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
+
+    const formated_date = new formatDate(aired_from);
 </script>
 
 <anime-info-base class="flex w-3/5 flex-col gap-2 md:w-72">
@@ -34,7 +36,7 @@
         {/if}
         <span class="items">{status}</span>
         {#if aired_from}
-            <span class="items">{formatDateString(aired_from)}</span>
+            <span class="items">{formated_date.formatToSeason}</span>
         {/if}
     </p>
 

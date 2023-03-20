@@ -10,7 +10,8 @@
     }>;
     export let backend_anime_number: number;
     import { UrlMaps } from "$data/urls";
-    import { formatNumberToDuration } from "$functions/formatNumberToDuration";
+    import { formatTime } from "$functions/formatTime";
+
     import List from "$icons/List.svelte";
     import MoreVertical from "$icons/MoreVertical.svelte";
     import Search from "$icons/Search.svelte";
@@ -51,6 +52,7 @@
         </div>
         {#each episodes as episode}
             {@const url = backend_urls.DOMAIN + episode.episode_thumbnail}
+            {@const formated_date = new formatTime(episode.episode_length)}
             <a href="../backend/{backend_anime_number}/episodes/{episode.episode_number}">
                 <div class="relative my-4 flex h-16 w-[90vw] items-center rounded-lg bg-[#1E2036]">
                     <img
@@ -60,7 +62,7 @@
                     />
                     <div class="flex flex-col">
                         <span class="font-bold">Episode {episode.episode_number}</span>
-                        <span>{formatNumberToDuration(episode.episode_length)}</span>
+                        <span>{formated_date.formatSecondsToTimeStampDuration}</span>
                     </div>
                     <MoreVertical
                         class="absolute right-5"

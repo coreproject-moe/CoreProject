@@ -38,7 +38,7 @@
     import EpisodeSkeleton from "./Episode.skeleton.svelte";
     import Episode from "./Episode.svelte";
     import ImageCard from "./ImageCard.svelte";
-    import { formatSecondsToMinutes } from "$functions/formatSecondsToMinutes";
+    import { formatTime } from "$functions/formatTime";
 
     const urls = new UrlMaps();
     let mobile: boolean;
@@ -84,9 +84,9 @@
         { Episodes: 22 },
         {
             // Average episode duration
-            "Episode Duration": `${formatSecondsToMinutes(
-                Number(data?.average_episode_length)
-            )} minutes`
+            "Episode Duration": `${
+                new formatTime(Number(data?.average_episode_length)).formatSecondsToMinutes
+            } minutes`
         },
         { Status: "Finished" },
         { "Start Date": data?.anime_aired_from },
@@ -97,6 +97,7 @@
         { Source: [] },
         { Tags: [] }
     ];
+    console.log(data);
 </script>
 
 <div class="relative grid h-screen overflow-x-hidden">

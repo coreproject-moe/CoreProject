@@ -1,11 +1,13 @@
 <script lang="ts">
-    import { formatNumberToDuration } from "$functions/formatNumberToDuration";
+    import { formatTime } from "$functions/formatTime";
 
     export let backend_anime_number: number;
     export let episode_card_background_image: string;
     export let episode_name: string;
     export let episode_duration: number;
     export let episode_number: number;
+
+    const formated_date = new formatTime(episode_duration);
 </script>
 
 <a href="../backend/{backend_anime_number}/episodes/{episode_number}">
@@ -23,7 +25,7 @@
             >
                 <p class="absolute inset-x-0 bottom-3 text-center text-xs">{episode_number}</p>
                 <p class="absolute bottom-3 right-3 text-xs">
-                    {formatNumberToDuration(episode_duration)}
+                    {formated_date.formatSecondsToTimeStampDuration}
                 </p>
             </episode-card-info>
         </episode-card>
