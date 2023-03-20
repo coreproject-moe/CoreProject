@@ -15,6 +15,11 @@
 
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
+
+    const closeDropdown = () => {
+        let element = document.activeElement as HTMLDivElement;
+        element?.blur();
+    };
 </script>
 
 <div class="navbar bg-transparent">
@@ -78,7 +83,7 @@
                 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
                 <ul
                     tabindex="0"
-                    class="dropdown-content menu rounded-box flex w-[275px] flex-col gap-5 border-4 border-info bg-base-100 px-7 pt-6 pb-16 shadow "
+                    class="dropdown-content menu rounded-box flex w-[275px] flex-col gap-5 border-4 border-info bg-base-100 px-7 pt-6 pb-16 shadow"
                 >
                     <div class="flex justify-between">
                         <div class="flex items-center gap-1">
@@ -89,7 +94,10 @@
                             />
                             <span class="text-xs font-bold text-white">Profile View</span>
                         </div>
-                        <button class="btn-square btn-xs btn flex items-center bg-base-100">
+                        <button
+                            class="btn-square btn-xs btn flex items-center bg-base-100"
+                            on:click={closeDropdown}
+                        >
                             <Cross
                                 width="16"
                                 height="18"
