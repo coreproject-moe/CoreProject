@@ -11,6 +11,16 @@
         episode_comments: Array<string>;
         episode_timestamps: Array<string>;
     };
+
+    let htmlIFrameElement: HTMLIFrameElement | undefined = undefined;
+    $: {
+        if (htmlIFrameElement) {
+            // streamsb
+            let document = htmlIFrameElement.contentWindow?.document;
+            let htmlVidoeElement = document?.querySelector(".jw-video") as HTMLVideoElement;
+            htmlVidoeElement.currentTime;
+        }
+    }
 </script>
 
 <div class="relative grid h-screen">
@@ -21,16 +31,19 @@
                     <Navbar />
                 </div>
                 <div class="mx-6 mt-0 flex flex-col items-center md:mx-20">
-                    <iframe
-                        class="h-[200px] w-[80vw] md:h-[80vh]"
-                        title="anime"
-                        src="https://sbbrisk.com/e/{data?.providers?.streamsb}.html"
-                        frameborder="0"
-                        marginwidth="0"
-                        marginheight="0"
-                        scrolling="NO"
-                        allowfullscreen
-                    />
+                    {#each Object.values(data?.providers) as provider}
+                        <iframe
+                            bind:this={htmlIFrameElement}
+                            class="h-[200px] w-[80vw] md:h-[80vh]"
+                            title={data?.episode_name}
+                            src="https://sbbrisk.com/e/{provider}.html"
+                            frameborder="0"
+                            marginwidth="0"
+                            marginheight="0"
+                            scrolling="NO"
+                            allowfullscreen
+                        />
+                    {/each}
                 </div>
             </div>
         </div>
