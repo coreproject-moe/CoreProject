@@ -128,4 +128,3 @@ services:
         depends_on:
             - django-varnish
             - anime-varnish
-
