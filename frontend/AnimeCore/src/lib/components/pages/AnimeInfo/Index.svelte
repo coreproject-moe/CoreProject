@@ -16,6 +16,7 @@
         genres: string;
         episodes: string;
         episodes_count: number;
+        average_episode_length: number;
     }>;
 
     import StarRating from "svelte-star-rating";
@@ -37,6 +38,7 @@
     import EpisodeSkeleton from "./Episode.skeleton.svelte";
     import Episode from "./Episode.svelte";
     import ImageCard from "./ImageCard.svelte";
+    import { formatSecondsToMinutes } from "$functions/formatSecondsToMinutes";
 
     const urls = new UrlMaps();
     let mobile: boolean;
@@ -80,9 +82,14 @@
 
     const details_mapping = [
         { Episodes: 22 },
-        { "Episode Duration": 0 },
+        {
+            // Average episode duration
+            "Episode Duration": `${formatSecondsToMinutes(
+                Number(data?.average_episode_length)
+            )} minutes`
+        },
         { Status: "Finished" },
-        { "Start Date": "" },
+        { "Start Date": data?.anime_aired_from },
         { "End Date": "" },
         { Season: "" },
         { Studios: "" },

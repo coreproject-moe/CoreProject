@@ -55,7 +55,7 @@
             {/if}
         </div>
     </div>
-    <div class="navbar-end">
+    <div class="navbar-end text-white">
         {#if $user_is_logged_in}
             <img
                 alt=""
@@ -66,7 +66,7 @@
             />
         {:else}
             <a
-                class="glass flex h-[55px] w-[60px] items-center justify-center rounded-lg border-2 border-dashed border-white font-bold hover:border-dashed active:scale-95"
+                class="glass flex h-[55px] w-[60px] items-center justify-center rounded-lg border-2 border-dashed font-bold hover:border-dashed active:scale-95"
                 href="/user/login"
             >
                 Log in

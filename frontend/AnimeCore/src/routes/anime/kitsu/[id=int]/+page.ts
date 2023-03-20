@@ -41,6 +41,7 @@ export const load = (async ({
                 episodes: string;
                 recommendations: [number];
                 episodes_count: number;
+                average_episode_length: number;
             }[];
         } = await data_response?.json();
 
@@ -73,6 +74,7 @@ export const load = (async ({
             episodes: string;
             recommendations: [number];
             episodes_count: number;
+            average_episode_length: number;
         } = data?.["items"]?.[0] ?? {
             id: 0,
             mal_id: 0,
@@ -101,7 +103,8 @@ export const load = (async ({
             characters: "",
             episodes: "",
             recommendations: [0],
-            episodes_count: 0
+            episodes_count: 0,
+            average_episode_length: 0
         };
 
         const backend_remapped_to_frontend: Partial<{
@@ -120,6 +123,7 @@ export const load = (async ({
             genres: string;
             episodes: string;
             episodes_count: number;
+            average_episode_length: number;
         }> = {
             id: backend_data?.id ?? 0,
             mal_id: backend_data?.mal_id ?? 0,
@@ -134,7 +138,8 @@ export const load = (async ({
             anime_background: backend_data?.background ?? "",
             genres: backend_data?.genres ?? "",
             episodes: backend_data?.episodes ?? "",
-            episodes_count: backend_data?.episodes_count ?? 0
+            episodes_count: backend_data?.episodes_count ?? 0,
+            average_episode_length: backend_data?.average_episode_length ?? 0
         };
 
         return backend_remapped_to_frontend;
