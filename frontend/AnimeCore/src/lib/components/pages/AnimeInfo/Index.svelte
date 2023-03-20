@@ -39,6 +39,7 @@
     import Episode from "./Episode.svelte";
     import ImageCard from "./ImageCard.svelte";
     import { formatTime } from "$functions/formatTime";
+    import { formatDate } from "$functions/formatDate";
 
     const urls = new UrlMaps();
     let mobile: boolean;
@@ -80,6 +81,9 @@
         return data;
     };
 
+    const formated_aired_from = new formatDate(String(data?.anime_aired_from));
+    const formated_aired_to = new formatDate(String(data?.anime_aired_to));
+
     const details_mapping = [
         { Episodes: 22 },
         {
@@ -89,15 +93,14 @@
             } minutes`
         },
         { Status: "Finished" },
-        { "Start Date": data?.anime_aired_from },
-        { "End Date": "" },
-        { Season: "" },
+        { "Start Date": formated_aired_from.formatToHumanReadableForm },
+        { "End Date": formated_aired_to.formatToHumanReadableForm },
+        { Season: formated_aired_from.formatToSeason },
         { Studios: "" },
         { Producers: [] },
         { Source: [] },
         { Tags: [] }
     ];
-    console.log(data);
 </script>
 
 <div class="relative grid h-screen overflow-x-hidden">
@@ -333,8 +336,10 @@
                                 </p>
                                 {#each details_mapping as item}
                                     <div class="flex flex-col">
-                                        <span class="font-bold">{Object.keys(item)}</span>
-                                        <span>{Object.values(item)}</span>
+                                        <span class="font-bold capitalize">
+                                            {Object.keys(item)}
+                                        </span>
+                                        <span class="capitalize">{Object.values(item)}</span>
                                     </div>
                                 {/each}
                             </episode-details>

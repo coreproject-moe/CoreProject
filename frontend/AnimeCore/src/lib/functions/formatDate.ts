@@ -1,10 +1,18 @@
 import dayjs from "dayjs";
+import localeData from "dayjs/plugin/localeData";
 
 export class formatDate {
     #date: dayjs.Dayjs;
 
     constructor(date: string) {
         this.#date = dayjs(date);
+    }
+
+    public get formatToHumanReadableForm() {
+        dayjs.extend(localeData);
+        return `${dayjs().localeData().monthsShort(this.#date)} ${this.#date.format(
+            "D"
+        )}, ${this.#date.format("YYYY")}`;
     }
 
     public get formatToSeason() {
