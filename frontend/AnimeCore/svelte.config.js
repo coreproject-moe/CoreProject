@@ -21,19 +21,19 @@ const config = {
         appDir: "svelte__animecore",
         adapter: is_static
             ? static_adapter({
-                  fallback: "app.html",
+                fallback: "app.html",
                   // precompress: true,
-                  strict: true
-              })
+                strict: true
+            })
             : is_node
             ? node_adapter({
-                  precompress: false
-              })
+                precompress: false
+            })
             : vercel({
                   // an array of dependencies that esbuild should treat
                   // as external when bundling functions
-                  external: []
-              }),
+                external: []
+            }),
 
         alias: {
             $store: path.resolve("./src/lib/store"),
