@@ -142,7 +142,7 @@
                         </div>
                         <div class="hidden gap-4 md:flex">
                             <button
-                                class="btn-secondary btn-sm btn-square btn"
+                                class="btn-secondary btn-square btn-sm btn"
                                 on:click={() => {
                                     minusOneToMainHeroSlideActiveIndex();
                                 }}
@@ -154,7 +154,7 @@
                                 />
                             </button>
                             <button
-                                class="btn-secondary btn-sm btn-square btn"
+                                class="btn-secondary btn-square btn-sm btn"
                                 on:click={() => {
                                     addOneToMainHeroSlideActiveIndex();
                                 }}
