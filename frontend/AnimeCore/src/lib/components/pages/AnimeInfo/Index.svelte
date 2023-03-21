@@ -85,17 +85,17 @@
     const formated_aired_to = new formatDate(String(data?.anime_aired_to));
 
     const details_mapping = [
-        { Episodes: 22 },
-        {
+        data?.episodes_count ?? { Episodes: data?.episodes_count },
+        data?.average_episode_length ?? {
             // Average episode duration
             "Episode Duration": `${
                 new formatTime(Number(data?.average_episode_length)).formatSecondsToMinutes
             } minutes`
         },
         { Status: "Finished" },
-        { "Start Date": formated_aired_from.formatToHumanReadableForm },
-        { "End Date": formated_aired_to.formatToHumanReadableForm },
-        { Season: formated_aired_from.formatToSeason },
+        data?.anime_aired_from ?? { "Start Date": formated_aired_from.formatToHumanReadableForm },
+        data?.anime_aired_to ?? { "End Date": formated_aired_to.formatToHumanReadableForm },
+        data?.anime_aired_from ?? { Season: formated_aired_from.formatToSeason },
         { Studios: "" },
         { Producers: [] },
         { Source: [] },

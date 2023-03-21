@@ -2,23 +2,11 @@ import { get } from "svelte/store";
 
 import { page } from "$app/stores";
 
-export class MAL {
+export class Jikan {
     private BASE_URL = `https://api.jikan.moe/v4/anime`;
 
     public id = (id: number | string) => {
         return `${this.BASE_URL}/${id}/full`;
-    };
-
-    public pictures = (id: number | string) => {
-        return `${this.BASE_URL}/${id}/pictures`;
-    };
-}
-
-export class Anilist {
-    private BASE_URL = ``;
-
-    public id = () => {
-        return;
     };
 }
 
@@ -63,15 +51,15 @@ export class UrlMaps {
         return get(page).url.origin;
     }
 
-    public get signup_url() {
+    public signup_url = () => {
         return `${this.BASE_URL}/user/sign_up`;
-    }
+    };
 
-    public get login_url() {
+    public login_url = () => {
         return `${this.BASE_URL}/user/login`;
-    }
+    };
 
-    public get username_validity_endpoint() {
+    public username_validity_endpoint = () => {
         return `${this.BASE_URL}/user/username_validity`;
-    }
+    };
 }

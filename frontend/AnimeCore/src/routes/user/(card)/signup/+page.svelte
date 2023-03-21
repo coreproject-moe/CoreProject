@@ -46,7 +46,7 @@
             data.append("email", values.email);
             data.append("password", values.password);
 
-            const res = await fetch(urls.signup_url, {
+            const res = await fetch(urls.signup_url(), {
                 method: "post",
                 body: data
             });
@@ -95,7 +95,7 @@
                         formData.append("username", splittedValue[0] ?? "");
                         formData.append("discriminator", splittedValue[1] ?? "");
 
-                        fetch(urls.username_validity_endpoint, {
+                        fetch(urls.username_validity_endpoint(), {
                             method: "POST",
                             body: formData,
                             headers: {
@@ -153,23 +153,6 @@
 </svelte:head>
 
 <form use:form>
-    <div class="mb-10 flex justify-center">
-        <div class="flex select-none text-4xl font-bold">
-            <span class="inline-flex text-white">c</span>
-            <span class="inline-flex text-warning">o</span>
-            <span class="inline-flex text-white">r</span>
-            <span class="inline-flex text-white">e</span>
-            &nbsp;
-            <span class="inline-flex text-info">p</span>
-            <span class="inline-flex text-info">r</span>
-            <span class="inline-flex text-info">o</span>
-            <span class="inline-flex text-info">j</span>
-            <span class="inline-flex text-info">e</span>
-            <span class="inline-flex text-info">c</span>
-            <span class="inline-flex text-info">t</span>
-        </div>
-    </div>
-
     <div class="grid gap-6">
         {#each input_mapping as input_item}
             <input

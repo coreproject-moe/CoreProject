@@ -91,10 +91,7 @@
                     />
                 </div> -->
                 <!-- Background from anime div  -->
-                <div
-                    class="absolute bottom-8 left-8"
-                    style="z-index:99999"
-                >
+                <div class="absolute bottom-8 left-8">
                     <div class="flex flex-col">
                         <p class="text-secondary">Background from {type()}</p>
                         <p class="text-white">
@@ -114,6 +111,23 @@
                 class="card mr-0 w-96 bg-base-100 bg-transparent bg-gradient-to-t from-base-100 shadow-xl placeholder:capitalize md:mr-24 md:w-[35vw]"
             >
                 <div class="card-body rounded-2xl">
+                    <div class="mb-24 flex justify-center">
+                        <div class="flex select-none text-5xl font-bold">
+                            <span class="inline-flex text-white">c</span>
+                            <span class="inline-flex text-warning">o</span>
+                            <span class="inline-flex text-white">r</span>
+                            <span class="inline-flex text-white">e</span>
+                            &nbsp;
+                            <span class="inline-flex text-info">p</span>
+                            <span class="inline-flex text-info">r</span>
+                            <span class="inline-flex text-info">o</span>
+                            <span class="inline-flex text-info">j</span>
+                            <span class="inline-flex text-info">e</span>
+                            <span class="inline-flex text-info">c</span>
+                            <span class="inline-flex text-info">t</span>
+                        </div>
+                    </div>
+
                     <slot />
                 </div>
             </div>
