@@ -2,7 +2,7 @@ from apps.user.models import CustomUser
 from ninja import Router, Form
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse, JsonResponse
-
+from ...schemas.user.username_validity import UsernameValiditySchema
 from http import HTTPStatus
 
 router = Router()
@@ -11,9 +11,9 @@ router = Router()
 @router.post(
     "",
     response={
-        302: str,
-        404: str,
-        406: str,
+        302: UsernameValiditySchema,
+        404: UsernameValiditySchema,
+        406: UsernameValiditySchema,
     },
 )
 def post_username_validity_info(
@@ -27,8 +27,12 @@ def post_username_validity_info(
     if CustomUser.objects.filter(username=username).distinct("discriminator").count() > int(
         "9" * settings.DISCRIMINATOR_LENGTH
     ):
+        # Return status code 406 if username with discriminator is not available in db
         return JsonResponse(
-            "Your username is too popular. Please pick another one",
+            {
+                "status": 406,
+                "message": "Your username is too popular. Please pick another one",
+            },
             safe=False,
             status=HTTPStatus.NOT_ACCEPTABLE,
         )
@@ -42,7 +46,10 @@ def post_username_validity_info(
     ):
         # Return status code 406 if username with discriminator exists
         return JsonResponse(
-            "Username with discriminator is unavailable",
+            {
+                "status": 406,
+                "message": "Username with discriminator is unavailable",
+            },
             safe=False,
             status=HTTPStatus.FOUND,
         )
@@ -50,7 +57,10 @@ def post_username_validity_info(
     else:
         # Return status code 200 if username with discriminator is available
         return JsonResponse(
-            "Username available",
+            {
+                "status": 200,
+                "message": "Username available",
+            },
             safe=False,
             status=HTTPStatus.NOT_FOUND,
         )
