@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { get, writable } from "svelte/store";
+import { writable } from "svelte/store";
 
 import { browser } from "$app/environment";
 import { UrlMaps } from "$data/urls";
