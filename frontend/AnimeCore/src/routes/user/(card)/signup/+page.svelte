@@ -4,6 +4,7 @@
     import { validator } from "@felte/validator-yup";
     import { createForm } from "felte";
     import * as yup from "yup";
+    import voca from "voca";
 
     import { goto } from "$app/navigation";
     import { UrlMaps } from "$data/urls";
@@ -93,7 +94,10 @@
                     ) {
                         let formData = new FormData();
                         formData.append("username", splittedValue[0] ?? "");
-                        formData.append("discriminator", splittedValue[1] ?? "");
+                        formData.append(
+                            "discriminator",
+                            voca.padLeft(splittedValue[1], 4, "0") ?? ""
+                        );
 
                         const res = await fetch(urls.username_validity(), {
                             method: "POST",
