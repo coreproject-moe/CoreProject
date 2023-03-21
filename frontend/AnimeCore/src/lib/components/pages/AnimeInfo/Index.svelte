@@ -20,6 +20,7 @@
     }>;
 
     import StarRating from "svelte-star-rating";
+    import isEmpty from "lodash.isempty";
 
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
@@ -34,10 +35,10 @@
     import TrendingUp from "$icons/Trending-Up.svelte";
     import { responsiveMode } from "$store/Responsive";
 
-    import AnimeInfo from "./AnimeInfo.svelte";
-    import EpisodeSkeleton from "./Episode.skeleton.svelte";
-    import Episode from "./Episode.svelte";
-    import ImageCard from "./ImageCard.svelte";
+    import AnimeInfo from "./AnimeInfo/AnimeInfo.svelte";
+    import EpisodeSkeleton from "./Skeletons/Episode.skeleton.svelte";
+    import Episode from "./Episodes/Episode.svelte";
+    import ImageCard from "./AnimeInfo/ImageCard.svelte";
     import { formatTime } from "$functions/formatTime";
     import { formatDate } from "$functions/formatDate";
 
@@ -93,9 +94,11 @@
             } minutes`
         },
         { Status: "Finished" },
-        data?.anime_aired_from ?? { "Start Date": formated_aired_from.formatToHumanReadableForm },
-        data?.anime_aired_to ?? { "End Date": formated_aired_to.formatToHumanReadableForm },
-        data?.anime_aired_from ?? { Season: formated_aired_from.formatToSeason },
+        data?.anime_aired_from
+            ? { "Start Date": formated_aired_from.formatToHumanReadableForm }
+            : {},
+        data?.anime_aired_to ? { "End Date": formated_aired_to.formatToHumanReadableForm } : {},
+        data?.anime_aired_from ? { Season: formated_aired_from.formatToSeason } : {},
         { Studios: "" },
         { Producers: [] },
         { Source: [] },
@@ -335,12 +338,14 @@
                                     </button>
                                 </p>
                                 {#each details_mapping as item}
-                                    <div class="flex flex-col">
-                                        <span class="font-bold capitalize">
-                                            {Object.keys(item)}
-                                        </span>
-                                        <span class="capitalize">{Object.values(item)}</span>
-                                    </div>
+                                    {#if !isEmpty(item)}
+                                        <div class="flex flex-col">
+                                            <span class="font-bold capitalize">
+                                                {Object.keys(item)}
+                                            </span>
+                                            <span class="capitalize">{Object.values(item)}</span>
+                                        </div>
+                                    {/if}
                                 {/each}
                             </episode-details>
                         {/if}
