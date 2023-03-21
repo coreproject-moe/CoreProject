@@ -10,6 +10,7 @@
     import data from "$data/mock/main_hero_data.json";
     import { navbar_variant } from "$store/Navbar_Variant";
     import { timer as timerStore } from "$store/Timer";
+    import Navbar from "$components/shared/Navbar.svelte";
     const browser = detect();
 
     let mainHeroSlideActiveIndex = 0;
@@ -53,7 +54,7 @@
 
 <!-- svelte-ignore redundant-event-modifier -->
 <div
-    class="h-screen w-screen carousel carousel-vertical snap-none md:snap-y md:snap-mandatory text-white overflow-x-hidden"
+    class="carousel-vertical carousel h-screen w-screen snap-none overflow-x-hidden text-white md:snap-y md:snap-mandatory"
     on:scroll|passive={() => {
         if (
             Math.abs(Number(mainHeroRootElement?.getBoundingClientRect().top)) >=
@@ -67,13 +68,18 @@
         }
     }}
 >
-    <div class="carousel-item snap-always h-[450px] md:min-h-screen w-screen">
+    <div class="carousel-item h-[450px] w-screen snap-always md:min-h-screen">
         <div
-            class="inline-grid"
+            class="relative inline-grid"
             bind:this={mainHeroRootElement}
             use:swipe={{ timeframe: 300, minSwipeDistance: 100, touchAction: "pan-y" }}
             on:swipe={swipeHandler}
         >
+            <div class="absolute z-10 w-screen">
+                <div class="pt-8 pl-6 pb-0 md:pr-[72px] md:pl-20">
+                    <Navbar />
+                </div>
+            </div>
             {#each data as item, index}
                 {#if index === mainHeroSlideActiveIndex}
                     <div
