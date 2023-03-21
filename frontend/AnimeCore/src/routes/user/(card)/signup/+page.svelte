@@ -53,7 +53,7 @@
             });
 
             if (res.ok) {
-                goto("/login");
+                goto("./login");
             }
         },
         // onSuccess(response, context) {
