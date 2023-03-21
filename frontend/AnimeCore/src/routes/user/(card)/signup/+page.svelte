@@ -95,7 +95,7 @@
                         formData.append("username", splittedValue[0] ?? "");
                         formData.append("discriminator", splittedValue[1] ?? "");
 
-                        fetch(urls.username_validity_endpoint(), {
+                        fetch(urls.username_validity(), {
                             method: "POST",
                             body: formData,
                             headers: {

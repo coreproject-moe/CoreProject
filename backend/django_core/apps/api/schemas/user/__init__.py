@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 
 
 class UserSchema(ModelSchema):
-    avatar: AnyUrl
+    avatar: str
 
     class Config:
         model = get_user_model()
@@ -26,4 +26,4 @@ class UserSchema(ModelSchema):
                 "user_id": obj.id,
             },
         )
-        return f"{settings.HOSTNAME}{url}"
+        return f"{url}"

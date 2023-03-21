@@ -59,7 +59,11 @@ export class UrlMaps {
         return `${this.BASE_URL}/user/login`;
     };
 
-    public username_validity_endpoint = () => {
+    public username_validity = () => {
         return `${this.BASE_URL}/user/username_validity`;
+    };
+
+    public user_info = () => {
+        return `${this.BASE_URL}/user/`;
     };
 }
