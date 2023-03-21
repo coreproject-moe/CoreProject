@@ -36,7 +36,7 @@ user_token.subscribe((value) => {
             });
 
             if (res.ok) {
-                const data: Promise<{
+                const data: {
                     id: number;
                     last_login: string;
                     is_superuser: boolean;
@@ -52,7 +52,7 @@ user_token.subscribe((value) => {
                     groups: number[];
                     user_permissions: number[];
                     avatar: string;
-                }> = res.json(); // dont call await here
+                } = await res.json(); // dont call await here
                 user_information.set(data);
             } else {
                 console.error(`Cannot Fetch to backend user endpoint | Reason ${res.text}`);
@@ -61,7 +61,7 @@ user_token.subscribe((value) => {
     }
 });
 export const user_information = writable<
-    | Promise<{
+    | {
           id: number;
           last_login: string;
           is_superuser: boolean;
@@ -77,6 +77,6 @@ export const user_information = writable<
           groups: number[];
           user_permissions: number[];
           avatar: string;
-      }>
+      }
     | undefined
 >(undefined);
