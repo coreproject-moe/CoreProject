@@ -48,7 +48,6 @@ async def avatar_view(
             )
             # Just a check Here
             URLValidator()(avatar_url)
-            print(avatar_url)
             _request_ = CLIENT.build_request("GET", avatar_url)
             avatar_response = await CLIENT.send(_request_)
             response = StreamingHttpResponse(
