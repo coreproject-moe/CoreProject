@@ -150,6 +150,13 @@ user_router.add_router(
     tags=["user"],
 )
 user_router.add_router(
+    "",
+    import_string(
+        "apps.api.views.user.signup.router",
+    ),
+    tags=["user"],
+)
+user_router.add_router(
     "/username_validity",
     import_string(
         "apps.api.views.user.username_validity.router",
