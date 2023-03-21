@@ -8,4 +8,4 @@
     }
 </script>
 
-<div class="text-center text-2xl text-white">You are successfully logged out</div>
+<div class="text-center text-2xl text-white">You have successfully logged out</div>

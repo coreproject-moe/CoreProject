@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { get, readable, writable } from "svelte/store";
+import { get, writable } from "svelte/store";
 
 import { browser } from "$app/environment";
 import { UrlMaps } from "$data/urls";
@@ -16,23 +16,13 @@ export const user_is_logged_in = writable<boolean | undefined>(undefined, functi
     }
 });
 
-export const user_token = readable<string | undefined>(undefined, function start(set) {
-    if (!browser) {
-        return;
-    }
-
-    const token = Cookies.get("token");
-    if (token !== undefined) {
-        set(token);
-    }
-});
-
-user_token.subscribe((value) => {
-    if (value && get(user_is_logged_in)) {
+user_is_logged_in.subscribe((value) => {
+    if (value) {
         (async () => {
+            const token = Cookies.get("token");
             const backend_mapping = new UrlMaps();
             const res = await fetch(backend_mapping.user_info(), {
-                headers: { Authorization: `Bearer ${value}` }
+                headers: { Authorization: `Bearer ${token}` }
             });
 
             if (res.ok) {
@@ -60,6 +50,7 @@ user_token.subscribe((value) => {
         })();
     }
 });
+
 export const user_information = writable<
     | {
           id: number;
