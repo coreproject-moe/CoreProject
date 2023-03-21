@@ -10,6 +10,10 @@ episode_pattern = FilePattern(filename_pattern="episode/{uuid:s}{ext}")
 episode_thumbnail_pattern = FilePattern(filename_pattern="thumbnail/{uuid:s}{ext}")
 
 # Create your models here.
+EPISODE_TYPE = [
+    ("sub", "sub"),
+    ("dub", "dub"),
+]
 
 
 class EpisodeModel(models.Model):
@@ -27,7 +31,16 @@ class EpisodeModel(models.Model):
     episode_comments = models.ManyToManyField(EpisodeCommentModel, blank=True)
     episode_timestamps = models.ManyToManyField(EpisodeTimestampModel, blank=True)
 
-    episode_length = models.PositiveIntegerField(default=None, blank=True)
+    episode_length = models.PositiveIntegerField(
+        default=None,
+        blank=True,
+    )
+    # Sub or Dub
+    episode_type = models.CharField(
+        max_length=3,
+        choices=EPISODE_TYPE,
+        blank=True,
+    )
     # Extra providers
     providers = HStoreField(
         default=dict,
