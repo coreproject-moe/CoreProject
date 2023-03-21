@@ -51,8 +51,12 @@ export class UrlMaps {
         return get(page).url.origin;
     }
 
+    public user_info = () => {
+        return `${this.BASE_URL}/user/`;
+    };
+
     public signup_url = () => {
-        return `${this.BASE_URL}/user/sign_up`;
+        return `${this.BASE_URL}/user/signup`;
     };
 
     public login_url = () => {
@@ -61,9 +65,5 @@ export class UrlMaps {
 
     public username_validity = () => {
         return `${this.BASE_URL}/user/username_validity`;
-    };
-
-    public user_info = () => {
-        return `${this.BASE_URL}/user/`;
     };
 }
