@@ -40,7 +40,7 @@
             password: "",
             confirm_password: ""
         },
-        onSubmit: async (values /*context*/) => {
+        onSubmit: async (values) => {
             const data = new FormData();
             data.append("username", values.username);
             data.append("email", values.email);

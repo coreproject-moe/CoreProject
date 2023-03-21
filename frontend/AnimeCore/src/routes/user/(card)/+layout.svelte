@@ -111,7 +111,7 @@
                 class="card mr-0 w-96 bg-base-100 bg-transparent bg-gradient-to-t from-base-100 shadow-xl placeholder:capitalize md:mr-24 md:w-[35vw]"
             >
                 <div class="card-body rounded-2xl">
-                    <div class="mb-24 flex justify-center">
+                    <div class="flex justify-center">
                         <div class="flex select-none text-5xl font-bold">
                             <span class="inline-flex text-white">c</span>
                             <span class="inline-flex text-warning">o</span>
