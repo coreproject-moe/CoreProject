@@ -12,7 +12,7 @@ from django.utils.translation import gettext_lazy as _
 from .managers import UserManager
 from .validators import username_validator
 
-avatar = FilePattern(filename_pattern="/avatar{ext}")
+avatar = FilePattern(filename_pattern="avatar/{uuid:s}{ext}")
 
 
 # Create your models here.

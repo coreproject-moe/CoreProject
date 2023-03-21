@@ -21,7 +21,7 @@ async def avatar_view(
     request: HttpRequest,
     user_id: int,
 ) -> StreamingHttpResponse | HttpResponse:
-    CLIENT = httpx.AsyncClient()
+    CLIENT = httpx.AsyncClient(follow_redirects=True)
 
     try:
         user = await CustomUser.objects.aget(pk=user_id)
@@ -48,7 +48,7 @@ async def avatar_view(
             )
             # Just a check Here
             URLValidator()(avatar_url)
-
+            print(avatar_url)
             _request_ = CLIENT.build_request("GET", avatar_url)
             avatar_response = await CLIENT.send(_request_)
             response = StreamingHttpResponse(
