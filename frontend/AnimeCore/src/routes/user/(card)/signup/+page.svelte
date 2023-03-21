@@ -33,7 +33,7 @@
             )
     });
     // Creating the form
-    const { form } = createForm({
+    const { form, errors } = createForm({
         initialValues: {
             username: "",
             email: "",
@@ -47,7 +47,7 @@
             data.append("password", values.password);
 
             const res = await fetch(urls.signup_url(), {
-                method: "post",
+                method: "POST",
                 body: data
             });
 
@@ -95,31 +95,25 @@
                         formData.append("username", splittedValue[0] ?? "");
                         formData.append("discriminator", splittedValue[1] ?? "");
 
-                        fetch(urls.username_validity(), {
+                        const res = await fetch(urls.username_validity(), {
                             method: "POST",
-                            body: formData,
-                            headers: {
-                                "X-CSRFToken": "{{ csrf_token }}"
-                            }
-                        }).then((res) => {
-                            console.log(res);
-                            if (res.status === 302) {
-                                // The username with discriminator is taken by another user
-                                // Show an error
-                                warnings.username = "This username is not available";
-                            } else if (res.status === 404) {
-                                // ok
-                            }
+                            body: formData
                         });
+                        if (res.status === 302) {
+                            // The username with discriminator is taken by another user
+                            // Show an error
+                            warnings["username"] = "This username is not available";
+                        } else if (res.status === 404) {
+                            // ok
+                        }
                     } else if (HashLength >= 1) {
-                        warnings.username =
+                        warnings["username"] =
                             "There must be one hash in the username. ( eg: SoraAmamiya#1993 )";
                     } else if (isNaN(Number(splittedValue[1]))) {
-                        warnings.username =
+                        warnings["username"] =
                             "The discriminator must be a number. ( eg : SoraAmamiya#1993 )";
                     }
                 }
-
                 return warnings;
             }
         }
