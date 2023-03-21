@@ -54,7 +54,7 @@
             });
             if (res.ok) {
                 const data = await res.json();
-                Cookies.set("token", data.token, { domain: $page.url.hostname });
+                Cookies.set("token", data.token);
                 user_is_logged_in.set(true);
             } else {
                 errorText = "No such user found with the given <b>Username</b> and <b>Password</b>";
