@@ -41,6 +41,7 @@ async def get_genre_mapping(mal_id):
     json = res.json()
     # Could return multiple
     data = json[0]
+    print(f"Got `genre` data for {mal_id}")
     return data["id"]
 
 
@@ -55,6 +56,7 @@ async def get_theme_mapping(mal_id):
     json = res.json()
     # Could return multiple
     data = json[0]
+    print(f"Got `theme` data for {mal_id}")
     return data["id"]
 
 
@@ -68,6 +70,7 @@ async def get_studio_or_producer_mapping(mal_id):
     json = res.json()
     # Could return multiple
     data = json["items"][0]
+    print(f"Got `studio`|`producer` data for {mal_id}")
     return data["id"]
 
 
@@ -81,10 +84,12 @@ async def get_character_mapping(mal_id):
     json = res.json()
     # Could return multiple
     data = json["items"][0]
+    print(f"Got `character` data for {mal_id}")
     return data["id"]
 
 
 async def post_to_backend(item):
+    print(f"Got starting point for {item.get('mal_id')}")
     mapping = {
         "mal_id": item["mal_id"],
         "name": item.get("title"),
