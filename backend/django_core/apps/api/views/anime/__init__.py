@@ -146,7 +146,6 @@ def post_anime_info(
     themes: list[str] = Form(default=None),
     studios: list[str] = Form(default=None),
     producers: list[str] = Form(default=None),
-    staffs: list[str] = Form(default=None),
     characters: list[str] = Form(default=None),
 ) -> AnimeModel:
     user: CustomUser = request.auth
