@@ -1,4 +1,4 @@
-import httpx, asyncio
+import httpx, asyncio, os
 from ._conf import (
     ANIME_GENRE_ENDPOINT,
     ANIME_THEME_ENDPOINT,
@@ -12,10 +12,16 @@ from dateutil import parser
 import contextlib
 from bing_image_downloader import downloader
 from io import BytesIO
+from datetime import datetime
+import json
 
 BASE_URL = "https://api.jikan.moe/v4/anime"
 
 client = httpx.AsyncClient()
+MISSING_CHARACTER_ENRTIES = []
+MISSING_GENRE_ENTRIES = []
+MISSING_STUDIO_ENTRIES = []
+MISSING_THEME_MAPPING = []
 
 
 def image_downloader(term: str, output_dir: str = "images"):
@@ -32,60 +38,76 @@ def image_downloader(term: str, output_dir: str = "images"):
 
 async def get_genre_mapping(mal_id):
     """Given `mal_id` return `pk`"""
-    res = await client.get(
-        ANIME_GENRE_ENDPOINT,
-        params={
-            "mal_id": mal_id,
-        },
-    )
-    json = res.json()
-    # Could return multiple
-    data = json[0]
-    print(f"Got `genre` data for {mal_id}")
-    return data["id"]
+    try:
+        res = await client.get(
+            ANIME_GENRE_ENDPOINT,
+            params={
+                "mal_id": mal_id,
+            },
+        )
+        json = res.json()
+        # Could return multiple
+        data = json[0]
+        print(f"Got `genre` data for {mal_id}")
+        return data["id"]
+    except IndexError:
+        MISSING_GENRE_ENTRIES.append(mal_id)
+        return ""
 
 
 async def get_theme_mapping(mal_id):
     """Given `mal_id` return `pk`"""
-    res = await client.get(
-        ANIME_THEME_ENDPOINT,
-        params={
-            "mal_id": mal_id,
-        },
-    )
-    json = res.json()
-    # Could return multiple
-    data = json[0]
-    print(f"Got `theme` data for {mal_id}")
-    return data["id"]
+    try:
+        res = await client.get(
+            ANIME_THEME_ENDPOINT,
+            params={
+                "mal_id": mal_id,
+            },
+        )
+        json = res.json()
+        # Could return multiple
+        data = json[0]
+        print(f"Got `theme` data for {mal_id}")
+        return data["id"]
+    except IndexError:
+        MISSING_THEME_MAPPING.append(mal_id)
+        return ""
 
 
 async def get_studio_or_producer_mapping(mal_id):
-    res = await client.get(
-        PRODUCER_ENDPOINT,
-        params={
-            "mal_id": mal_id,
-        },
-    )
-    json = res.json()
-    # Could return multiple
-    data = json["items"][0]
-    print(f"Got `studio`|`producer` data for {mal_id}")
-    return data["id"]
+    try:
+        res = await client.get(
+            PRODUCER_ENDPOINT,
+            params={
+                "mal_id": mal_id,
+            },
+        )
+        json = res.json()
+        # Could return multiple
+        data = json["items"][0]
+        print(f"Got `studio`|`producer` data for {mal_id}")
+        return data["id"]
+    except IndexError:
+        MISSING_STUDIO_ENTRIES.append(mal_id)
+        return ""
 
 
 async def get_character_mapping(mal_id):
-    res = await client.get(
-        CHARACTER_ENDPOINT,
-        params={
-            "mal_id": mal_id,
-        },
-    )
-    json = res.json()
-    # Could return multiple
-    data = json["items"][0]
-    print(f"Got `character` data for {mal_id}")
-    return data["id"]
+    try:
+        res = await client.get(
+            CHARACTER_ENDPOINT,
+            params={
+                "mal_id": mal_id,
+            },
+        )
+        json = res.json()
+        # Could return multiple
+        data = json["items"][0]
+        print(f"Got `character` data for {mal_id}")
+        return data["id"]
+    except IndexError:
+        MISSING_CHARACTER_ENRTIES.append(mal_id)
+        return ""
 
 
 async def post_to_backend(item):
@@ -101,8 +123,10 @@ async def post_to_backend(item):
         "rating": item.get("rating"),
     }
     with contextlib.suppress(TypeError):
-        mapping["aired_from"] = parser.parse(item.get("aired")["from"])
-        mapping["aired_to"] = parser.parse(item.get("aired")["to"])
+        mapping["aired_from"] = datetime.isoformat(
+            parser.parse(item.get("aired")["from"])
+        )
+        mapping["aired_to"] = datetime.isoformat(parser.parse(item.get("aired")["to"]))
 
     mapping["genres"] = await asyncio.gather(
         *[get_genre_mapping(data["mal_id"]) for data in item.get("genres")]
@@ -153,7 +177,8 @@ async def post_to_backend(item):
         # Large
         "cover": open(f"./images/{search_term}/Image_1.jpg", "rb"),
     }
-    await client.post(
+
+    res = await client.post(
         ANIME_ENDPOINT,
         files=files,
         data=mapping,
@@ -161,15 +186,61 @@ async def post_to_backend(item):
             "Authorization": f"Bearer {TOKEN}",
         },
     )
+    if not res.status_code == 200:
+        raise Exception("This is not meant to happen")
 
+    log_dictionary = {
+        "MISSING_CHARACTER_ENRTIES": MISSING_CHARACTER_ENRTIES,
+        "MISSING_GENRE_ENTRIES": MISSING_GENRE_ENTRIES,
+        "MISSING_STUDIO_ENTRIES": MISSING_STUDIO_ENTRIES,
+        "MISSING_THEME_MAPPING": MISSING_THEME_MAPPING,
+    }
+
+    json.dump(
+        log_dictionary,
+        open("anime.lock", "w", encoding="utf-8"),
+        indent=2,
+    )
     print("Seeded Anime for {} | Mal ID : {}".format(item.get("title"), item["mal_id"]))
 
 
 async def command() -> None:
+    starting_page = 0
+    # Load JSON file and get data from it
+    if os.path.exists("anime.lock"):
+        print("Lock file found. Do you want to use it?")
+        global MISSING_CHARACTER_ENRTIES, MISSING_GENRE_ENTRIES, MISSING_STUDIO_ENTRIES, MISSING_THEME_MAPPING
+        # While loop to ask for data
+        while True:
+            answer = input("\r").lower()
+
+            if "y" in answer:
+                data = json.load(open("anime.lock", encoding="utf-8"))
+                starting_number = int(data.get("STARTING_NUMBER", starting_number))
+                character_number = int(data.get("CHARACTER_NUMBER", character_number))
+
+                MISSING_CHARACTER_ENRTIES = data.get(
+                    "MISSING_CHARACTER_ENRTIES", MISSING_CHARACTER_ENRTIES
+                )
+                MISSING_GENRE_ENTRIES = data.get(
+                    "MISSING_GENRE_ENTRIES", MISSING_GENRE_ENTRIES
+                )
+                MISSING_STUDIO_ENTRIES = data.get(
+                    "MISSING_STUDIO_ENTRIES", MISSING_STUDIO_ENTRIES
+                )
+                MISSING_THEME_MAPPING = data.get(
+                    "MISSING_THEME_MAPPING", MISSING_THEME_MAPPING
+                )
+
+                break
+
+            elif "n" in answer:
+                break
+
     _res_ = await client.get(BASE_URL)
     total_pages = _res_.json()["pagination"]["last_visible_page"]
 
-    for page in range(0, int(total_pages)):
-        __res__ = session.get(BASE_URL, params={"page": page})
+    for page in range(starting_page, int(total_pages)):
+        __res__ = await client.get(BASE_URL, params={"page": page})
         data = __res__.json()
-        asyncio.gather(*[post_to_backend(item) for item in data["data"] if data])
+        asyncio.gather(*[post_to_backend(item) for item in data["data"]])
