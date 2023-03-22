@@ -1,6 +1,11 @@
 import httpx, asyncio
 import sys
-from ._conf import ANIME_GENRE_ENDPOINT, ANIME_THEME_ENDPOINT
+from ._conf import (
+    ANIME_GENRE_ENDPOINT,
+    ANIME_THEME_ENDPOINT,
+    PRODUCER_ENDPOINT,
+    CHARACTER_ENDPOINT,
+)
 from dateutil import parser
 import contextlib
 
@@ -37,6 +42,31 @@ async def get_theme_mapping(mal_id):
     return data["id"]
 
 
+async def get_studio_or_producer_mapping(mal_id):
+    res = await client.get(
+        PRODUCER_ENDPOINT,
+        params={
+            "mal_id": mal_id,
+        },
+    )
+    json = res.json()
+    # Could return multiple
+    data = json["items"][0]
+    return data["id"]
+
+
+async def get_character_mapping(mal_id):
+    res = await client.get(
+        CHARACTER_ENDPOINT,
+        params={
+            "mal_id": mal_id,
+        },
+    )
+    json = res.json()
+    data = json[0]
+    return data["id"]
+
+
 async def post_to_backend(item):
     mapping = {
         "mal_id": item["mal_id"],
@@ -60,8 +90,30 @@ async def post_to_backend(item):
     )
 
     mapping["studios"] = await asyncio.gather(
-        *[get_studio_mapping(data["mal_id"]) for data in item.get("studios")]
+        *[
+            get_studio_or_producer_mapping(data["mal_id"])
+            for data in item.get("studios")
+        ]
     )
+    mapping["producers"] = await asyncio.gather(
+        *[
+            get_studio_or_producer_mapping(data["mal_id"])
+            for data in item.get("producers")
+        ]
+    )
+
+    # Get Characters
+    characters_res = await client.get(f'{BASE_URL}/{item["mal_id"]}/characters')
+    character_res_json = characters_res.json()
+    mapping["characters"] = asyncio.gather(
+        *[
+            get_character_mapping(data["character"]["mal_id"])
+            for data in character_res_json["data"]
+        ]
+    )
+
+    print(mapping)
+    sys.exit(0)
 
 
 async def command() -> None:
@@ -69,6 +121,6 @@ async def command() -> None:
     total_pages = _res_.json()["pagination"]["last_visible_page"]
 
     for page in range(0, int(total_pages)):
-        __res__ = await client.get(f"https://api.jikan.moe/v4/anime?page={page}")
+        __res__ = await client.get(BASE_URL, params={"page": page})
         data = __res__.json()
         asyncio.gather(*[post_to_backend(item) for item in data["data"]])
