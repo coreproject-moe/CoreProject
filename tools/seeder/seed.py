@@ -1,4 +1,5 @@
 import sys
+import asyncio
 
 if argument := sys.argv[1]:
     if argument == "character":
@@ -25,3 +26,8 @@ if argument := sys.argv[1]:
         from src.producers import command
 
         command()
+
+    elif argument == 'anime':
+        from src.animes import command
+
+        asyncio.run(command())
