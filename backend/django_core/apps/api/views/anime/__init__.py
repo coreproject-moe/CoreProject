@@ -11,6 +11,7 @@ from django.http import Http404, HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
 from apps.anime.models.anime_genre import AnimeGenreModel
 
+from apps.staffs.models import StaffModel
 from apps.api.auth import AuthBearer
 from apps.characters.models import CharacterModel
 from apps.user.models import CustomUser
@@ -75,7 +76,21 @@ def get_anime_info(
                 )
             query_object &= _query_
 
+    # Staff lookups
+    if staff := query_dict.pop("staffs", None):
+        for position in staff.split(","):
+            _query_ &= (
+                Q(staff__name__icontains=position.strip())
+                | Q(
+                    staff__alternate_names__name__icontains=position.strip(),
+                )
+                | Q(staff__family_name__icontains=position.strip())
+                | Q(staff__family_name__icontains=position.strip())
+            )
+            query_object &= _query_
+
     # Many to many lookups
+
     for item in [
         "genres",
         "themes",
@@ -119,12 +134,14 @@ def post_anime_info(
     source: str | None = Form(default=None),
     aired_from: datetime.datetime | None = Form(default=None),
     aired_to: datetime.datetime | None = Form(default=None),
-    banner: UploadedFile | None = File(default=None),
-    cover: UploadedFile | None = File(default=None),
     synopsis: str | None = Form(default=None),
     background: str | None = Form(default=None),
     rating: str | None = Form(default=None),
+    # Images
+    banner: UploadedFile | None = File(default=None),
+    cover: UploadedFile | None = File(default=None),
     # We need pk for these
+    staffs: list[str] = Form(default=None),
     genres: list[str] = Form(default=None),
     themes: list[str] = Form(default=None),
     studios: list[str] = Form(default=None),
@@ -154,6 +171,7 @@ def post_anime_info(
         "background": background,
         "rating": rating,
         # m2m Fields
+        "staffs": staffs[0].split(",") if staffs else None,
         "genres": genres[0].split(",") if genres else None,
         "themes": themes[0].split(",") if themes else None,
         "studios": studios[0].split(",") if studios else None,
@@ -219,6 +237,11 @@ def post_anime_info(
         for character in characters_list:
             character_instance = CharacterModel.objects.get(pk=character)
             database.characters.add(character_instance)
+
+    if staffs_list := kwargs.get("staffs", None):
+        for staff in staffs_list:
+            staff_instance = StaffModel.objects.get(pk=staff)
+            database.staffs.add(staff_instance)
 
     return database
 

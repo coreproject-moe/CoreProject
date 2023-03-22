@@ -6,6 +6,4 @@ from ....characters.models import CharacterModel
 class CharacterSchema(ModelSchema):
     class Config:
         model = CharacterModel
-        model_exclude = [
-            "id",
-        ]
+        model_fields = "__all__"
