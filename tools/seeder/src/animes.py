@@ -6,6 +6,7 @@ from ._conf import (
     PRODUCER_ENDPOINT,
     CHARACTER_ENDPOINT,
 )
+from ._session import session
 from dateutil import parser
 import contextlib
 
@@ -63,7 +64,9 @@ async def get_character_mapping(mal_id):
         },
     )
     json = res.json()
-    data = json[0]
+    # Could return multiple
+    data = json["items"][0]
+    print(data["id"])
     return data["id"]
 
 
@@ -103,7 +106,7 @@ async def post_to_backend(item):
     )
 
     # Get Characters
-    characters_res = await client.get(f'{BASE_URL}/{item["mal_id"]}/characters')
+    characters_res = session.get(f'{BASE_URL}/{item["mal_id"]}/characters')
     character_res_json = characters_res.json()
     mapping["characters"] = await asyncio.gather(
         *[
