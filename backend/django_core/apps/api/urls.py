@@ -129,7 +129,40 @@ api.add_router(
     tags=["staffs"],
 )
 
+# __ USER ROUTER __
 
+from .views.user import router as user_router
+
+api.add_router("/user", user_router, tags=["user"])
+
+user_router.add_router(
+    "",
+    import_string(
+        "apps.api.views.user.login.router",
+    ),
+    tags=["user"],
+)
+user_router.add_router(
+    "",
+    import_string(
+        "apps.api.views.user.logout.router",
+    ),
+    tags=["user"],
+)
+user_router.add_router(
+    "",
+    import_string(
+        "apps.api.views.user.signup.router",
+    ),
+    tags=["user"],
+)
+user_router.add_router(
+    "/username_validity",
+    import_string(
+        "apps.api.views.user.username_validity.router",
+    ),
+    tags=["user"],
+)
 # __ TRACKER ROUTER __
 
 from .views.trackers import router as tracker_router
@@ -160,6 +193,16 @@ tracker_router.add_router(
         "apps.api.views.trackers.mal.router",
     ),
     tags=["trackers"],
+)
+
+# __ FEED ROUTER __
+# May be powered by Machine learning in future
+from .views.feeds.featured import router as feature_router
+
+api.add_router(
+    "/feed/featured",
+    feature_router,
+    tags=["feed"],
 )
 
 

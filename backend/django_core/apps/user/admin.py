@@ -8,14 +8,9 @@ from django.http import HttpRequest
 from django.utils.translation import gettext_lazy as _
 
 from .forms import CustomUserChangeForm, CustomUserCreationForm
-from .models import CustomUser, Token
+from .models import CustomUser
 
 USER_MODEL: type[CustomUser] = get_user_model()
-
-
-@admin.register(Token)
-class TokenAdmin(admin.ModelAdmin):
-    pass
 
 
 @admin.register(CustomUser)

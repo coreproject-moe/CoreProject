@@ -7,7 +7,7 @@ export default defineConfig({
         legalComments: "none"
     },
     build: {
-        target: "esnext",
-        sourcemap: true
+        target: "esnext"
+        // ,sourcemap: true
     }
 });

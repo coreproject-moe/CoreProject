@@ -97,8 +97,6 @@ def get_anime_info(
     if query_object:
         query = query.filter(query_object).distinct()
 
-    print(query.explain(analyze=True))
-
     if not query:
         raise Http404(
             "No {} matches the given query with {}".format(

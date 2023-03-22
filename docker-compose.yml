@@ -56,6 +56,7 @@ services:
             - 1.1.1.1
         volumes:
             - ./media:/code/django_core/media
+            - ./logs:/code/logs
         environment:
             - DEBUG=False
             # Cache related settings
@@ -82,12 +83,28 @@ services:
 
     # Frontend
     anime:
+        image: frontend
         restart: unless-stopped
         build: ./frontend/AnimeCore
         dns: 1.1.1.1
         environment:
             - PORT=3000
             - HOST=0.0.0.0
+
+    # Varnish
+    django-varnish:
+        image: varnish:fresh
+        volumes:
+            - ./varnish/django.vcl:/etc/varnish/default.vcl:ro
+        depends_on:
+            - django
+
+    anime-varnish:
+        image: varnish:fresh
+        volumes:
+            - ./varnish/anime.vcl:/etc/varnish/default.vcl:ro
+        depends_on:
+            - anime
 
     # Web server
     caddy:
@@ -103,10 +120,11 @@ services:
             - ./caddy-config:/config
             - ./caddy-data:/data
             - ./media:/srv/media
+            - ./logs:/srv/logs
         environment:
             - SITE_ADDRESS=${SITE_ADDRESS}
             - LOG_FILE=/data/access.log
 
         depends_on:
-            - django
-            - anime
+            - django-varnish
+            - anime-varnish

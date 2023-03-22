@@ -101,13 +101,13 @@
     <title>CoreProject | {$page.status}</title>
 </svelte:head>
 
-<div class="flex items-center justify-center h-screen flex-col text-center gap-12">
+<div class="flex h-screen flex-col items-center justify-center gap-12 text-center">
     <svelte:component
         this={errorPage?.kaomoji.component}
         width={errorPage?.kaomoji?.width}
         height={errorPage?.kaomoji.height}
     />
-    <h1 class="text-indigo-700 text-3xl">
+    <h1 class="text-3xl text-indigo-700">
         <b>{$page.status}</b>
         -
         <b>{errorMessage}</b>

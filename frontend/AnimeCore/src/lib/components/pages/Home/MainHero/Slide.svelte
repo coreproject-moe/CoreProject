@@ -93,14 +93,11 @@
             style="background-image:url('{background ?? ''}')"
         >
             <div
-                class="hero-overlay from-base-100 via-base-100/[.8] md:via-base-100/[.0001] grid"
+                class="hero-overlay grid from-base-100 via-base-100/[.8] md:via-base-100/[.0001]"
                 style="--tw-bg-opacity:0"
             >
-                <div class="pt-8 md:pr-[72px] pl-6 md:pl-20 pb-0">
-                    <Navbar />
-                </div>
                 <div
-                    class="grid grid-flow-col auto-cols-max min-w-full content-end pb-8  justify-center md:justify-between"
+                    class="grid min-w-full auto-cols-max grid-flow-col content-end justify-center  pb-8 md:justify-between"
                 >
                     <div class="hidden md:flex" />
                     <div class="flex items-center gap-3">
@@ -110,7 +107,7 @@
                         />
 
                         <div
-                            class="w-56 flex justify-center swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal"
+                            class="swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal flex w-56 justify-center"
                         >
                             <div class="flex flex-row gap-3">
                                 {#each Array(data.length) as _, index}
@@ -140,9 +137,9 @@
                                 {/each}
                             </div>
                         </div>
-                        <div class="gap-4 hidden md:flex">
+                        <div class="hidden gap-4 md:flex">
                             <button
-                                class="btn btn-secondary btn-sm btn-square"
+                                class="btn-secondary btn-square btn-sm btn"
                                 on:click={() => {
                                     minusOneToMainHeroSlideActiveIndex();
                                 }}
@@ -154,7 +151,7 @@
                                 />
                             </button>
                             <button
-                                class="btn btn-secondary btn-sm btn-square"
+                                class="btn-secondary btn-square btn-sm btn"
                                 on:click={() => {
                                     addOneToMainHeroSlideActiveIndex();
                                 }}
@@ -167,7 +164,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="hidden md:flex items-center animate-bounce">
+                    <div class="hidden animate-bounce items-center md:flex">
                         <Mouse
                             width={24}
                             height={24}
@@ -178,9 +175,9 @@
                 </div>
             </div>
 
-            <div class="pl-10 md:pl-24 hero-content flex-col justify-self-start">
+            <div class="hero-content flex-col justify-self-start pl-10 md:pl-24">
                 <div class="max-w-[80vw]">
-                    <div class="text-secondary text-lg font-bold pb-3 flex gap-2">
+                    <div class="flex gap-2 pb-3 text-lg font-bold text-secondary">
                         Featured
                         <span class="flex items-center">
                             <span
@@ -190,7 +187,7 @@
                     </div>
                     <ScrollArea
                         style="height:72px"
-                        class="font-bold leading-8 md:leading-[4.25rem] text-3xl md:text-6xl"
+                        class="text-3xl font-bold leading-8 md:text-6xl md:leading-[4.25rem]"
                         on:mouseenter={() => {
                             $timerStore = "pause";
                         }}
@@ -207,7 +204,7 @@
                         {animeTitle}
                     </ScrollArea>
 
-                    <h1 class="font-bold py-8 hidden md:flex">
+                    <h1 class="hidden py-8 font-bold md:flex">
                         <span class="items">TV</span>
                         <span class="items">{String(animeEpisodeCount)} eps</span>
                         <span class="items">Completed</span>
@@ -217,7 +214,7 @@
                     <ScrollArea
                         parentClass="mb-5"
                         style="min-height:110px"
-                        class="max-h-24 font-normal text-gray-400 prose [text-shadow:-1px_-1px_0_#0000009e,1px_-1px_0_#0000008c,0px_1px_0_#0000009e,1px_0px_0_#00000061]"
+                        class="prose max-h-24 font-normal text-gray-400 [text-shadow:-1px_-1px_0_#0000009e,1px_-1px_0_#0000008c,0px_1px_0_#0000009e,1px_0px_0_#00000061]"
                         offsetScrollbar
                         on:mouseenter={() => {
                             $timerStore = "pause";
@@ -234,10 +231,10 @@
                     >
                         {animeSummary}
                     </ScrollArea>
-                    <div class="gap-4 pt-3 hidden md:flex">
+                    <div class="hidden gap-4 pt-3 md:flex">
                         {#each tags as tag}
                             <span
-                                class="badge text-white bg-base-100 badge-lg rounded-md uppercase border-transparent leading-6 text-sm font-bold"
+                                class="badge badge-lg rounded-md border-transparent bg-base-100 text-sm font-bold uppercase leading-6 text-white"
                             >
                                 {tag}
                             </span>
@@ -246,7 +243,7 @@
                     <div class="mt-6 flex gap-4">
                         <button
                             aria-label="Play"
-                            class="btn btn-md md:btn-lg btn-secondary rounded-[16px] px-5 "
+                            class="btn-secondary btn-md btn rounded-[16px] px-5 md:btn-lg "
                         >
                             <Play
                                 width={24}
@@ -254,9 +251,9 @@
                             />
                         </button>
                         <button
-                            class="btn btn-secondary btn-md md:btn-lg btn-outline border-4 rounded-[16px]"
+                            class="btn-outline btn-secondary btn-md btn rounded-[16px] border-4 md:btn-lg"
                         >
-                            <div class="text-lg font-bold flex gap-2">
+                            <div class="flex gap-2 text-lg font-bold">
                                 Details
                                 <span class="flex items-center">
                                     <ChevronsRight

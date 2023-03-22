@@ -11,11 +11,11 @@ license = "AGPL-3.0-only"
 python = "^3.11"
 django = {version = '^4.1', extras = ['argon2']}
 # First Party ( Redis )
-redis = {extras = ['hiredis'], version = ">=4"}
+redis = {extras = ['hiredis'], version = ">=4.1"}
 # First party ( Image )
 pillow = "*"
 # First Party ( Database )
-psycopg2-binary = "*"
+psycopg2-binary = '*'
 # 3rd Party ( Files )
 django-dynamic-filenames = "*"
 # 3rd Party ( Middlewares )
@@ -24,10 +24,9 @@ django_cors_headers = "*"
 # 3rd Party ( Environmental Variables )
 python_dotenv = "*"
 # 3rd Party ( WhiteNoise )
-whitenoise = {extras = ["brotli"], version = "*"}
+whitenoise = {version = "*"}
 # 3rd Party ( Tasks )
 celery = {extras = ["redis"], version = "^5.2.7"}
-gevent = {version = '*',markers = "sys_platform  == 'win32'"}
 # 3rd Party ( Better admin widgets )
 django-admin-hstore-widget = "^1.2.1"   # https://github.com/PokaInc/django-admin-hstore-widget/pull/25
 # 3rd Party ( Model Fields )
@@ -36,10 +35,10 @@ django-colorfield = "*"
 django_ninja = "*"
 pydantic = {extras = ["email"], version = "*"}
 # ===================================================
-httpx = {extras = ['http2','brotli'], version = "*"}
+httpx = {extras = ['http2'], version = "*"}
 # Application servers
 gunicorn = {extras = ["setproctile"], version = "*"}
-uvicorn = {extras = ["standard"], version = "^0.20.0"}
+uvicorn = {extras = ["standard"], version = "^0.21.1"}
 # Typing support
 django-stubs-ext = "*"
 # ===================================================
@@ -47,13 +46,6 @@ django-stubs-ext = "*"
 colorthief = "^0.2.1"
 # Tailwind CSS
 django-tailwind = "^3.5.0"
-# Form tools
-django-crispy-forms = "^2.0"
-crispy-tailwind = "^0.5.0"
-# HTMX Powerup
-django-htmx = "^1.13.0"
-
-
 
 
 
@@ -95,25 +87,6 @@ mypy = "mypy . --enable-incomplete-feature=Unpack"
 tailwind_install = "python ./django_core/manage.py tailwind install"
 tailwind_start = "python ./django_core/manage.py tailwind start"
 tailwind_build = "python ./django_core/manage.py tailwind build"
-
-[tool.poe.tasks.celery]
-shell="""
-import subprocess
-import sys
-import os
-from pathlib import Path
-
-BASE_DIR = Path(__file__).resolve().parent
-os.chdir(os.path.join(BASE_DIR,'django_core'))
-
-if sys.platform == "win32":
-    command = "celery -A core worker -l info -P gevent"
-else:
-    command = "celery -A core worker -l info"
-
-subprocess.call(command)
-"""
-interpreter= 'python'
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
@@ -166,18 +139,11 @@ sections = [
     "THIRDPARTY",
     "FIRSTPARTY",
     "DJANGO",
-    "AIOHTTP",
     "LOCALFOLDER"
 ]
-known_aiohttp = [
-    "aiohttp",
-    "aiohttp_client_cache",
-    "aiohttp_retry",
-    "aiohttp_jinja2"
-]
+
 known_django = [
     'django',
-    'djclick'
 ]
 
 [tool.ruff]

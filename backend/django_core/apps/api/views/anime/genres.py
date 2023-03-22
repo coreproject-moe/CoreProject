@@ -45,5 +45,4 @@ def post_anime_genre_info(
         )
 
     query = AnimeGenreModel.objects.bulk_create(instance_objects)
-    print(query)
     return query

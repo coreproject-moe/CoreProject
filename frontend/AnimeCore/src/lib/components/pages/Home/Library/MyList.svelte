@@ -20,10 +20,10 @@
     mylistAnimeNameWordCount ??= 25;
 </script>
 
-<div class="flex justify-between pb-3 gap-2 mt-10 mb-3 md:my-0">
-    <div class="flex items-center flex-col md:flex-row gap-5 md:gap-0">
-        <p class="font-bold text-3xl items-start">My List</p>
-        <p class="text-3xl hidden md:block">•</p>
+<div class="mt-10 mb-3 flex justify-between gap-2 pb-3 md:my-0">
+    <div class="flex flex-col items-center gap-5 md:flex-row md:gap-0">
+        <p class="items-start text-3xl font-bold">My List</p>
+        <p class="hidden text-3xl md:block">•</p>
         <p class="text-sm md:text-xl">
             Watching
             <ChevronDown
@@ -57,14 +57,14 @@
     >
         {#each myList as item}
             <SwiperSlide>
-                <div class="card w-36 h-52 bg-base-100 image-full before:!opacity-60">
+                <div class="card image-full h-52 w-36 bg-base-100 before:!opacity-60">
                     <figure>
                         <img
                             src={item.background_image}
                             alt={item.name}
                         />
                     </figure>
-                    <div class="card-body justify-between items-center !text-white">
+                    <div class="card-body items-center justify-between !text-white">
                         <h2 class="card-title text-sm">
                             {voca.chain(item.name).truncate(mylistAnimeNameWordCount + 3)}
                         </h2>

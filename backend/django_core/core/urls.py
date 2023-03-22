@@ -16,21 +16,41 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
-
+from django.contrib.sitemaps.views import sitemap as django_sitemap
 from . import views
+from . import sitemap
 
 # from django.views import debug
 
 
+# Admin site Branding
+admin.site.site_header = "CoreProject administration"
+admin.site.site_title = "CoreProject site admin"
+
+# Error handlers
 handler400 = views.four_zero_zero_view
 handler403 = views.four_zero_three_view
 handler404 = views.four_zero_four_view
 handler500 = views.five_zero_zero_view
 
+# Write your urls here
+
 urlpatterns = [
     # Default django welcome page
     # path("", debug.default_urlconf),
     path("", views.home_view, name="home_view"),
+    #   Sitemap
+    # =============
+    path(
+        "sitemap.xml",
+        django_sitemap,
+        {
+            "sitemaps": {
+                "anime": sitemap.AnimeSitemap,
+            }
+        },
+        name="django.contrib.sitemaps.views.sitemap",
+    ),
     #   Admin Site
     # ================
     path("admin/", admin.site.urls),
@@ -44,6 +64,7 @@ urlpatterns = [
     # ========
     path("api/", include("apps.api.urls")),
 ]
+
 if settings.DEBUG:
     urlpatterns += [
         path("__debug__/", include("debug_toolbar.urls")),

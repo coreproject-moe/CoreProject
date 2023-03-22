@@ -7,7 +7,12 @@ from .models import StaffAlternateNameModel, StaffModel
 
 @admin.register(StaffModel)
 class StaffModelAdmin(admin.ModelAdmin[StaffModel]):
-    pass
+    search_fields = [
+        "name",
+        "given_name",
+        "family_name",
+        "alternate_names__name",
+    ]
 
 
 @admin.register(StaffAlternateNameModel)

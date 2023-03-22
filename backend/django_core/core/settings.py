@@ -69,6 +69,10 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    # Sitemap
+    "django.contrib.sitemaps",
+    # Multi Domain Site framework
+    "django.contrib.sites",
     # Postgres
     "django.contrib.postgres",
     # Whitenoise
@@ -85,11 +89,6 @@ INSTALLED_APPS = [
     # Tailwind CSS
     "tailwind",
     "tailwind_src",  # Our custom app
-    # Crispy Froms
-    "crispy_forms",
-    "crispy_tailwind",
-    # HTMX
-    "django_htmx",
     # Api ( Django-Ninja )
     "ninja",
     "apps.api",
@@ -104,8 +103,6 @@ INSTALLED_APPS = [
     "apps.episodes",
 ]
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
-CRISPY_TEMPLATE_PACK = "tailwind"
 # Debug Toolbar Add
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install-the-app
 if DEBUG:
@@ -127,8 +124,6 @@ MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
     # Allow Patch files
     "apps.api.middleware.process_put_patch",
-    # HTMX middleware
-    "django_htmx.middleware.HtmxMiddleware",
     # Django
     "django.middleware.cache.UpdateCacheMiddleware",  # Cache
     "django.middleware.common.CommonMiddleware",

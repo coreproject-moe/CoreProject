@@ -9,21 +9,25 @@ from ..models import AnimeModel, AnimeNameSynonymModel
 class AnimeNameSynonymAdmin(
     admin.ModelAdmin[AnimeNameSynonymModel],
 ):
+    search_fields = ["name"]
     pass
 
 
 @admin.register(AnimeModel)
 class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel]):
     form = AnimeAdminModelForm
-    filter_horizontal = [
+    autocomplete_fields = [
         "genres",
         "themes",
         "studios",
         "producers",
+        "staffs",
         "characters",
         "name_synonyms",
         "recommendations",
         "episodes",
+        "openings",
+        "endings",
     ]
     list_filter = [
         "genres",
@@ -112,9 +116,12 @@ class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel]):
                     "themes",
                     "studios",
                     "producers",
+                    "staffs",
                     "characters",
                     "name_synonyms",
                     "recommendations",
+                    "openings",
+                    "endings",
                 )
             },
         ),
@@ -122,15 +129,6 @@ class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel]):
             ("Anime Episodes"),
             {
                 "fields": ("episodes",),
-            },
-        ),
-        (
-            None,
-            {
-                "fields": (
-                    "theme_openings",
-                    "theme_endings",
-                ),
             },
         ),
     )
@@ -143,3 +141,7 @@ class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel]):
 
 from .anime_genre import AnimeGenreAdmin as AnimeGenreAdmin
 from .anime_theme import AnimeThemeAdmin as AnimeThemeAdmin
+from .anime_openings_and_endings import (
+    AnimeEndingAdmin as AnimeEndingAdmin,
+    AnimeOpeningAdmin as AnimeOpeningAdmin,
+)

@@ -15,14 +15,14 @@
     let selectionChoice = "popular";
 </script>
 
-<div class="hero min-h-[80vh] md:min-h-screen w-screen flex flex-col">
+<div class="hero flex min-h-[80vh] w-screen flex-col md:min-h-screen">
     <div
-        class="flex gap-3 md:gap-32 pt-8 w-screen md:w-auto my-7 md:my-0 overflow-y-scroll scrollbar-hide"
+        class="my-7 flex w-screen gap-3 overflow-y-scroll pt-8 scrollbar-hide md:my-0 md:w-auto md:gap-32"
     >
         {#each ["popular", "trending", "top rated", "upcoming"] as item}
             <button
                 class="btn {selectionChoice.toLowerCase() === item.toLowerCase() &&
-                    'btn-active'} btn-ghost text-white capitalize font-bold text-lg first:ml-4 first:md:ml-0 last:mr-4 last:md:mr-0 "
+                    'btn-active'} btn-ghost text-lg font-bold capitalize text-white first:ml-4 last:mr-4 first:md:ml-0 last:md:mr-0 "
                 on:click|capture={() => {
                     selectionChoice = item.toLowerCase();
                 }}
@@ -32,7 +32,7 @@
         {/each}
     </div>
     {#if mobile}
-        <div class="flex w-screen justify-between items-center">
+        <div class="flex w-screen items-center justify-between">
             <!-- All time button -->
             <div class="pl-8">
                 All Time
@@ -45,9 +45,9 @@
             </div>
 
             <!-- Filter and square Button  -->
-            <div class="pr-6 flex gap-6">
+            <div class="flex gap-6 pr-6">
                 <button class="btn">
-                    <div class="flex gap-1 items-center">
+                    <div class="flex items-center gap-1">
                         <span>
                             <Funnel
                                 width={18}
@@ -58,7 +58,7 @@
                         <span class="text-white">Filter</span>
                     </div>
                 </button>
-                <button class="btn btn-square">
+                <button class="btn-square btn">
                     <FourBoxSquares
                         height={24}
                         width={24}
@@ -67,7 +67,7 @@
                 </button>
             </div>
         </div>
-        <div class="h-96 mt-10">
+        <div class="mt-10 h-96">
             <Swiper
                 slidesPerView={2}
                 direction="vertical"
@@ -88,44 +88,44 @@
             </Swiper>
         </div>
     {:else}
-        <div class="flex gap-7 mt-8">
-            <div class="flex flex-col w-[135px]">
+        <div class="mt-8 flex gap-7">
+            <div class="flex w-[135px] flex-col">
                 <span>Time Range</span>
-                <select class="mt-2 select w-full bg-neutral">
+                <select class="select mt-2 w-full bg-neutral">
                     <option selected>All-Time</option>
                 </select>
             </div>
-            <div class="flex flex-col w-[135px]">
+            <div class="flex w-[135px] flex-col">
                 Genre
-                <select class="mt-2 select w-full max-w-[135px] bg-neutral">
+                <select class="select mt-2 w-full max-w-[135px] bg-neutral">
                     <option selected>Any</option>
                 </select>
             </div>
-            <div class="flex flex-col w-[135px]">
+            <div class="flex w-[135px] flex-col">
                 Year
-                <select class="mt-2 select w-full max-w-[135px] bg-neutral">
+                <select class="select mt-2 w-full max-w-[135px] bg-neutral">
                     <option selected>Any</option>
                 </select>
             </div>
-            <div class="flex flex-col w-[135px]">
+            <div class="flex w-[135px] flex-col">
                 Season
-                <select class="mt-2 select w-full max-w-[135px] bg-neutral">
+                <select class="select mt-2 w-full max-w-[135px] bg-neutral">
                     <option selected>Any</option>
                 </select>
             </div>
-            <div class="flex flex-col w-[135px]">
+            <div class="flex w-[135px] flex-col">
                 Format
-                <select class="mt-2 select w-full max-w-[135px] bg-neutral">
+                <select class="select mt-2 w-full max-w-[135px] bg-neutral">
                     <option selected>Any</option>
                 </select>
             </div>
-            <div class="flex flex-col w-[135px]">
+            <div class="flex w-[135px] flex-col">
                 Airing Status
-                <select class="mt-2 select w-full max-w-[135px] bg-neutral">
+                <select class="select mt-2 w-full max-w-[135px] bg-neutral">
                     <option selected>Any</option>
                 </select>
             </div>
-            <div class="flex flex-col w-[135px]">
+            <div class="flex w-[135px] flex-col">
                 Search
                 <div class="relative mt-2">
                     <span class="absolute inset-y-0 left-0 flex items-center pl-2">
@@ -138,19 +138,19 @@
                     </span>
                     <input
                         type="text"
-                        class="input bg-neutral w-[135px] pl-9"
+                        class="input w-[135px] bg-neutral pl-9"
                         autocomplete="off"
                     />
                 </div>
             </div>
-            <div class="flex flex-col w-[135px]">
+            <div class="flex w-[135px] flex-col">
                 Sort by
-                <select class="mt-2 select w-full max-w-[135px] bg-neutral">
+                <select class="select mt-2 w-full max-w-[135px] bg-neutral">
                     <option selected>Popularity</option>
                 </select>
             </div>
             <div class="flex self-end">
-                <button class="btn btn-square">
+                <button class="btn-square btn">
                     <FourBoxSquares
                         height={24}
                         width={24}
@@ -159,7 +159,7 @@
                 </button>
             </div>
         </div>
-        <div class="mt-[40px] grid gap-x-20 gap-y-10 grid-cols-3">
+        <div class="mt-[40px] grid grid-cols-3 gap-x-20 gap-y-10">
             {#each exploreData as item}
                 <AnimeCard
                     animeName={item.animeTitle}

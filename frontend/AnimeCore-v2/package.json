@@ -12,24 +12,24 @@
     "dependencies": {
         "@mantine/core": "^5.10.5",
         "@mantine/hooks": "^5.6.3",
-        "@mantine/next": "^6.0.1",
+        "@mantine/next": "^6.0.4",
         "@mantine/notifications": "^5.10.5",
         "@mantine/modals": "^5.10.5",
         "@mantine/spotlight": "^5.10.5",
-        "@next/font": "^13.2.3",
-        "next": "^13.2.3",
+        "@next/font": "^13.2.4",
+        "next": "^13.2.4",
         "nextjs-progressbar": "^0.0.16",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     },
     "devDependencies": {
         "@svgr/webpack": "^6.5.1",
-        "@types/node": "18.14.6",
+        "@types/node": "18.15.5",
         "@types/react": "18.0.28",
         "@types/react-dom": "18.0.11",
-        "eslint": "8.35.0",
-        "eslint-config-next": "^13.2.3",
-        "sass": "^1.58.3",
-        "typescript": "4.9.5"
+        "eslint": "8.36.0",
+        "eslint-config-next": "^13.2.4",
+        "sass": "^1.59.3",
+        "typescript": "5.0.2"
     }
 }

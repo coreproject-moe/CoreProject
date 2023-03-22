@@ -23,7 +23,7 @@ COPY poetry.lock pyproject.toml /code/
 RUN poetry config virtualenvs.create false \
   && poetry install --no-interaction --no-ansi --no-dev
 
-RUN apk --no-cache add nodejs-current npm ffmpeg
+RUN apk --no-cache add nodejs-current npm
 
 COPY . /code
 RUN poetry shell
@@ -35,6 +35,10 @@ RUN npm cache clean --force
 RUN python django_core/manage.py collectstatic --clear --link --no-input
 COPY . /code
 
+# Cleanups
+RUN pip install "pip-autoremove"
+RUN pip-autoremove poetry -y
+RUN pip-autoremove "pip-autoremove" -y
 RUN apk del nodejs npm
 
 RUN chmod +x /code/server_entrypoint.sh

@@ -9,7 +9,7 @@ from ninja.files import UploadedFile
 
 from pydantic import Json
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import get_list_or_404, get_object_or_404
+from django.shortcuts import get_object_or_404
 
 from ...schemas.episodes import EpisodeGETSchema
 
@@ -21,9 +21,13 @@ def get_individual_episodes(
     request: HttpRequest,
     anime_id: int,
 ) -> list[EpisodeModel]:
-    query = get_list_or_404(
-        get_object_or_404(AnimeModel, pk=anime_id).episodes,
-    )
+    try:
+        query = (
+            AnimeModel.objects.get(pk=anime_id).episodes.all().order_by("episode_number")
+        )
+    except (AnimeModel.DoesNotExist, EpisodeModel.DoesNotExist):
+        return HttpResponse("Object does not exist")
+
     return query
 
 

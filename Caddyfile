@@ -1,8 +1,10 @@
 {
-        # log {
-        #         # output file ./access.log
-        #         level debug
-        # }
+         log {
+                output file ./logs/access.log {
+                        compress
+                }
+                level debug
+        }
 }
 
 # backend.example.com
@@ -14,7 +16,7 @@ backend.{$SITE_ADDRESS} {
 	}
 
         #  Django
-        reverse_proxy django:8000 {
+        reverse_proxy django-varnish:80 {
                 # @sendfile header X-Sendfile *
                 # handle_response @sendfile {
                 #         rewrite {http.reverse_proxy.header.X-Sendfile}
@@ -25,8 +27,10 @@ backend.{$SITE_ADDRESS} {
 }
 
 anime.{$SITE_ADDRESS} {
-        reverse_proxy anime:3000
+        reverse_proxy anime-varnish:80
 }
+
+
 
 # anime.example.com
 #anime.{$SITE_ADDRESS} {
