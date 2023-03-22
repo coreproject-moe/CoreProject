@@ -105,7 +105,7 @@ async def post_to_backend(item):
     # Get Characters
     characters_res = await client.get(f'{BASE_URL}/{item["mal_id"]}/characters')
     character_res_json = characters_res.json()
-    mapping["characters"] = asyncio.gather(
+    mapping["characters"] = await asyncio.gather(
         *[
             get_character_mapping(data["character"]["mal_id"])
             for data in character_res_json["data"]
