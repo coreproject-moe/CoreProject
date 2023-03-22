@@ -157,7 +157,7 @@ async def post_to_backend(item):
         },
     )
 
-    print("Seeded Anime for {}".format(item.get("title")))
+    print("Seeded Anime for {} | Mal ID : {}".format(item.get("title"), item["mal_id"]))
 
 
 async def command() -> None:
