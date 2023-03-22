@@ -17,6 +17,7 @@ python-dotenv = "^1.0.0"
 selectolax = "*"
 httpx = "^0.23.3"
 python-dateutil = "^2.8.2"
+bing-image-downloader = "^1.1.2"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.1.0"

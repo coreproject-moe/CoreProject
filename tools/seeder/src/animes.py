@@ -4,14 +4,30 @@ from ._conf import (
     ANIME_THEME_ENDPOINT,
     PRODUCER_ENDPOINT,
     CHARACTER_ENDPOINT,
+    ANIME_ENDPOINT,
+    TOKEN,
 )
 from ._session import session
 from dateutil import parser
 import contextlib
+from bing_image_downloader import downloader
+from io import BytesIO
 
 BASE_URL = "https://api.jikan.moe/v4/anime"
 
 client = httpx.AsyncClient()
+
+
+def image_downloader(term: str, output_dir: str = "images"):
+    return downloader.download(
+        term,
+        limit=1,
+        output_dir=output_dir,
+        adult_filter_off=True,
+        force_replace=False,
+        timeout=60,
+        verbose=True,
+    )
 
 
 async def get_genre_mapping(mal_id):
@@ -113,7 +129,33 @@ async def post_to_backend(item):
         ]
     )
 
-    await client.post()
+    try:
+        image_url = item["images"]["webp"]["image_url"]
+    except KeyError:
+        image_url = item["images"]["jpg"]["image_url"]
+    finally:
+        image = session.get(image_url)
+
+    # Search for a good 4k cover
+    search_term = f"{item.get('title')} Wallpaper 4k"
+    image_downloader(search_term)
+
+    files = {
+        # Small
+        "banner": BytesIO(
+            image.content,
+        ),
+        # Large
+        "cover": open(f"./images/{search_term}/Image_1.jpg", "rb"),
+    }
+    await client.post(
+        ANIME_ENDPOINT,
+        files=files,
+        data=mapping,
+        headers={
+            "Authorization": f"Bearer {TOKEN}",
+        },
+    )
 
 
 async def command() -> None:
@@ -123,4 +165,4 @@ async def command() -> None:
     for page in range(0, int(total_pages)):
         __res__ = session.get(BASE_URL, params={"page": page})
         data = __res__.json()
-        asyncio.gather(*[post_to_backend(item) for item in data["data"]])
+        asyncio.gather(*[post_to_backend(item) for item in data["data"] if data])

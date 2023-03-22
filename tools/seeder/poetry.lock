@@ -53,6 +53,18 @@ tests = ["attrs[tests-no-zope]", "zope.interface"]
 tests-no-zope = ["cloudpickle", "cloudpickle", "hypothesis", "hypothesis", "mypy (>=0.971,<0.990)", "mypy (>=0.971,<0.990)", "pympler", "pympler", "pytest (>=4.3.0)", "pytest (>=4.3.0)", "pytest-mypy-plugins", "pytest-mypy-plugins", "pytest-xdist[psutil]", "pytest-xdist[psutil]"]
 
 [[package]]
+name = "bing-image-downloader"
+version = "1.1.2"
+description = "Python library to download bulk images from Bing.com"
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "bing_image_downloader-1.1.2-py3-none-any.whl", hash = "sha256:3b912f81d3bea1861a395fe2a6111f6d14654085abc3dc7467fbb57fd040f676"},
+    {file = "bing_image_downloader-1.1.2.tar.gz", hash = "sha256:bdc207ae5b036869ab42ca9d95d8f4b515c1e47e3ae0108b83a407e85eb36f7d"},
+]
+
+[[package]]
 name = "black"
 version = "23.1.0"
 description = "The uncompromising code formatter."
@@ -786,4 +798,4 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "6d9e191ce559d927e2bc809f6d258c344468f3b559ab05e2fbaa3f445f0cc51c"
+content-hash = "95bfd2269aff9919258dd7d1764e34ed83f55231a144d374094ccf4be77c0239"
