@@ -25,11 +25,18 @@ def get_producer_info(
     query_object = Q()
     query_dict = filters.dict(exclude_none=True)
 
-    character_name = query_dict.pop("name", None)
-    if character_name:
+    if character_name := query_dict.pop("name", None):
         _query_ = Q()
         for position in character_name.split(","):
             _query_ |= Q(**{"name__icontains": position.strip()})
+        query_object &= _query_
+
+    if mal_id := query_dict.pop("mal_id", None):
+        _query_ = Q()
+        for position in str(mal_id).split(","):
+            _query_ |= Q(
+                **{f"mal_id": position.strip()},
+            )
         query_object &= _query_
 
     query = ProducerModel.objects.all()
