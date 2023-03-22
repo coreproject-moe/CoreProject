@@ -9,7 +9,15 @@ class StaffAlternateNameSchema(ModelSchema):
         model_fields = ["name"]
 
 
-class StaffSchema(ModelSchema):
+class StaffGETSchema(ModelSchema):
+    alternate_names: list[StaffAlternateNameSchema] = []
+
+    class Config:
+        model = StaffModel
+        model_fields = "__all__"
+
+
+class StaffPOSTSchema(ModelSchema):
     alternate_names: list[StaffAlternateNameSchema] = []
 
     class Config:

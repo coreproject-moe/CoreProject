@@ -39,6 +39,13 @@ anime_router.add_router(
 anime_router.add_router(
     "",
     import_string(
+        "apps.api.views.anime.anime_staff.router",
+    ),
+    tags=["anime_info"],
+)
+anime_router.add_router(
+    "",
+    import_string(
         "apps.api.views.anime.anime_genre.router",
     ),
     tags=["anime_info"],
