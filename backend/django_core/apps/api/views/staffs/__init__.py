@@ -13,7 +13,7 @@ from django.shortcuts import get_object_or_404
 
 from ....staffs.models import StaffAlternateNameModel, StaffModel
 from ...filters.staffs import StaffFilter
-from ...schemas.staffs import StaffSchema
+from ...schemas.staffs import StaffPOSTSchema
 
 try:
     from django.contrib.postgres.search import TrigramSimilarity
@@ -25,7 +25,7 @@ except ImportError:
 router = Router()
 
 
-@router.get("", response=list[StaffSchema])
+@router.get("", response=list[StaffPOSTSchema])
 @paginate
 def get_staff_info(
     request: HttpRequest,
@@ -86,7 +86,7 @@ def get_staff_info(
     return query
 
 
-@router.post("", response=StaffSchema, auth=AuthBearer())
+@router.post("", response=StaffPOSTSchema, auth=AuthBearer())
 def post_staff_info(
     request: HttpRequest,
     mal_id: int | None = Form(default=None),
@@ -148,7 +148,7 @@ def post_staff_info(
     return staff_model_instance
 
 
-@router.get("/{str:staff_id}/", response=StaffSchema)
+@router.get("/{str:staff_id}/", response=StaffPOSTSchema)
 def get_individual_staff_info(
     request: HttpRequest,
     staff_id: str,

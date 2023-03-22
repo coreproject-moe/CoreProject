@@ -2,6 +2,7 @@ from apps.anime.models import AnimeModel, AnimeNameSynonymModel
 from ninja import ModelSchema
 from django.db.models import Avg
 from django.shortcuts import resolve_url
+from .anime_opening_and_ending import AnimeOpeningAndEndingGETSchema
 
 ## Observations from getting request from stack trace
 # So initial ovservation is that our code call was reduced from
@@ -26,6 +27,7 @@ class AnimeNameSynonymSchema(ModelSchema):
 
 
 class AnimeInfoGETSchema(ModelSchema):
+    staffs: str
     genres: str
     producers: str
     studios: str
@@ -35,6 +37,8 @@ class AnimeInfoGETSchema(ModelSchema):
     episodes_count: int
     average_episode_length: int
     name_synonyms: list[AnimeNameSynonymSchema] = []
+    openings: list[AnimeOpeningAndEndingGETSchema] = []
+    endings: list[AnimeOpeningAndEndingGETSchema] = []
 
     class Config:
         model = AnimeModel
@@ -51,6 +55,11 @@ class AnimeInfoGETSchema(ModelSchema):
     @staticmethod
     def resolve_episodes_count(obj: AnimeModel) -> int:
         return obj.episodes.count()
+
+    @staticmethod
+    def resolve_staffs(obj: AnimeModel) -> str:
+        url = resolve_url("api-1.0.0:get_individual_anime_staff_info", anime_id=obj.pk)
+        return f"{url}"
 
     @staticmethod
     def resolve_genres(obj: AnimeModel) -> str:
