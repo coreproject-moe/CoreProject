@@ -54,7 +54,7 @@ def get_character_info(
     for id in id_lookups:
         if value := query_dict.pop(id, None):
             _query_ = Q()
-            for position in value.split(","):
+            for position in str(value).split(","):
                 _query_ |= Q(**{f"{id}": int(position.strip())})
             query_object &= _query_
 
