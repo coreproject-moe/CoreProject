@@ -19,15 +19,13 @@
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
 
-    const closeDropdown = () => {
-        let element = document.activeElement as HTMLDivElement;
-        element?.blur();
-    };
+    let dropdown_open = false;
 </script>
 
 <div class="navbar bg-transparent">
     <div class="navbar-start hidden md:block">
         <Search
+            class="text-white"
             height={30}
             width={30}
         />
@@ -73,22 +71,35 @@
         {#if $user_is_logged_in}
             {#if $user_information}
                 {@const avatar_url = backend_mapping.DOMAIN + $user_information?.avatar}
-                <div class="dropdown-end dropdown">
+                <div class="dropdown-end dropdown relative {dropdown_open ? 'dropdown-open' : ''}">
                     <!-- svelte-ignore a11y-label-has-associated-control -->
                     <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-                    <label tabindex="0">
-                        <img
-                            alt="{$user_information?.username}'s avatar"
-                            class="mask mask-squircle"
-                            src={avatar_url}
-                            width="50"
-                            height="50"
-                        />
-                    </label>
+                    <!-- svelte-ignore a11y-click-events-have-key-events -->
+                    <img
+                        alt="{$user_information?.username}'s avatar"
+                        class="mask mask-squircle"
+                        src={avatar_url}
+                        width="50"
+                        height="50"
+                        on:click={() => {
+                            dropdown_open = !dropdown_open;
+                        }}
+                    />
+                    {#if dropdown_open}
+                        <div transition:fade|local={{ duration: 100 }}>
+                            <span
+                                class="absolute left-3 top-16 inline-block rounded-lg border-l-4 border-info"
+                                style="height: 60px;"
+                            />
+                            <span
+                                class="absolute right-3 top-16 inline-block rounded-lg border-l-4 border-info"
+                                style="height: 33px;"
+                            />
+                        </div>
+                    {/if}
                     <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-                    <ul
-                        tabindex="0"
-                        class="dropdown-content menu rounded-box flex w-[300px] flex-col gap-5 border-4 border-info bg-base-100 px-7 pt-6 pb-16 shadow"
+                    <div
+                        class="dropdown-content menu rounded-box mt-24 flex w-[300px] flex-col gap-5 border-4 border-info bg-base-100 px-7 pt-6 pb-16 shadow"
                     >
                         <div class="flex justify-between">
                             <div class="flex items-center gap-1">
@@ -118,40 +129,42 @@
                                 height="50"
                             />
                             <div>
-                                <span class="text-2xl font-bold">
+                                <span class="text-2xl font-bold text-primary">
                                     {$user_information?.username}
                                 </span>
-                                <span class="font-semibold">{$user_information?.email}</span>
+                                <span class="font-semibold text-info">
+                                    {$user_information?.email}
+                                </span>
                             </div>
                         </div>
                         <div class="flex items-center gap-4">
                             <button class="btn-info btn-square btn-sm btn">
                                 <PersonLinearGradient />
                             </button>
-                            <span class="font-bold">View Profile</span>
+                            <span class="font-bold text-white">View Profile</span>
                         </div>
 
                         <div class="flex items-center gap-4">
                             <button class="btn-info btn-square btn-sm btn">
                                 <ListLinearGradient />
                             </button>
-                            <span class="font-bold">View My List</span>
+                            <span class="font-bold  text-white">View My List</span>
                         </div>
 
                         <div class="flex items-center gap-4">
                             <button class="btn-info btn-square btn-sm btn">
                                 <MoonLinearGradient />
                             </button>
-                            <span class="font-bold">Choose Theme</span>
+                            <span class="font-bold text-white">Choose Theme</span>
                         </div>
 
                         <div class="flex items-center gap-4">
                             <button class="btn-info btn-square btn-sm btn">
                                 <SettingsLinearGradient />
                             </button>
-                            <span class="font-bold">Change Settings</span>
+                            <span class="font-bold text-white">Change Settings</span>
                         </div>
-                    </ul>
+                    </div>
                 </div>
             {:else}
                 <button class="loading btn-square btn text-white" />
