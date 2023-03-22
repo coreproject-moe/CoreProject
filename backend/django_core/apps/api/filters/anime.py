@@ -20,3 +20,4 @@ class AnimeInfoFilters(Schema):
     studios: str | None = None
     producers: str | None = None
     characters: str | None = None
+    staffs: str | None = None
