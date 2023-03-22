@@ -157,6 +157,8 @@ async def post_to_backend(item):
         },
     )
 
+    print("Seeded Anime for {}".format(item.get("title")))
+
 
 async def command() -> None:
     _res_ = await client.get(BASE_URL)
