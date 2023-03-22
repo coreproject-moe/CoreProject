@@ -12,10 +12,12 @@ class AbstractBaseModel(models.Model):
     entry = models.BigIntegerField(null=False, blank=False)
     # Opening/closing theme name
     name = models.CharField(max_length=512, blank=False, null=False)
+    # Canonical URL
+    url = models.URLField(blank=False, null=True)
 
     class Meta:
         unique_together = [
-            ("entry", "name"),
+            ("entry", "name", "url"),
         ]
         abstract = True
 
@@ -28,6 +30,9 @@ class AnimeOpeningModel(AbstractBaseModel):
         null=True,
     )
 
+    def __str__(self) -> str:
+        return f"{self.entry}. {self.name}"
+
 
 class AnimeEndingModel(AbstractBaseModel):
     thumbnail = models.ImageField(
@@ -36,3 +41,6 @@ class AnimeEndingModel(AbstractBaseModel):
         blank=True,
         null=True,
     )
+
+    def __str__(self) -> str:
+        return f"{self.entry}. {self.name}"

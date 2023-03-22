@@ -9,12 +9,12 @@ from ...schemas.anime.anime_opening_and_ending import AnimeOpeningAndEndingGETSc
 router = Router()
 
 
-@router.get("/{int:anime_id}/openings", response=list[AnimeOpeningAndEndingGETSchema])
-def get_individual_anime_opening_info(
+@router.get("/{int:anime_id}/endings", response=list[AnimeOpeningAndEndingGETSchema])
+def get_individual_anime_endings_info(
     request: HttpRequest,
     anime_id: int,
 ) -> list[AnimeOpeningModel]:
     query = get_list_or_404(
-        get_object_or_404(AnimeModel, pk=anime_id).openings,
+        get_object_or_404(AnimeModel, pk=anime_id).endings,
     )
     return query

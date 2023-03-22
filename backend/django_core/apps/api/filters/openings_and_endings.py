@@ -1,7 +1,7 @@
 from ninja import Schema
 
 
-class OpeningFilter(Schema):
+class OpeningAndEndingFilter(Schema):
     # Opening number
     entry: int | None = None
     # Opening/closing theme name

@@ -134,11 +134,12 @@ def post_anime_info(
     source: str | None = Form(default=None),
     aired_from: datetime.datetime | None = Form(default=None),
     aired_to: datetime.datetime | None = Form(default=None),
-    banner: UploadedFile | None = File(default=None),
-    cover: UploadedFile | None = File(default=None),
     synopsis: str | None = Form(default=None),
     background: str | None = Form(default=None),
     rating: str | None = Form(default=None),
+    # Images
+    banner: UploadedFile | None = File(default=None),
+    cover: UploadedFile | None = File(default=None),
     # We need pk for these
     staffs: list[str] = Form(default=None),
     genres: list[str] = Form(default=None),
