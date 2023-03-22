@@ -1,5 +1,4 @@
 import httpx, asyncio
-import sys
 from ._conf import (
     ANIME_GENRE_ENDPOINT,
     ANIME_THEME_ENDPOINT,
@@ -114,8 +113,7 @@ async def post_to_backend(item):
         ]
     )
 
-    print(mapping)
-    sys.exit(0)
+    await client.post()
 
 
 async def command() -> None:
@@ -123,6 +121,6 @@ async def command() -> None:
     total_pages = _res_.json()["pagination"]["last_visible_page"]
 
     for page in range(0, int(total_pages)):
-        __res__ = await client.get(BASE_URL, params={"page": page})
+        __res__ = session.get(BASE_URL, params={"page": page})
         data = __res__.json()
         asyncio.gather(*[post_to_backend(item) for item in data["data"]])
