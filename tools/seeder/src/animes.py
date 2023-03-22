@@ -66,7 +66,6 @@ async def get_character_mapping(mal_id):
     json = res.json()
     # Could return multiple
     data = json["items"][0]
-    print(data["id"])
     return data["id"]
 
 
