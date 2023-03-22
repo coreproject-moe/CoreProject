@@ -16,9 +16,6 @@ class AbstractBaseModel(models.Model):
     url = models.URLField(blank=False, null=True)
 
     class Meta:
-        unique_together = [
-            ("entry", "name", "url"),
-        ]
         abstract = True
 
 
@@ -33,6 +30,13 @@ class AnimeOpeningModel(AbstractBaseModel):
     def __str__(self) -> str:
         return f"{self.entry}. {self.name}"
 
+    class Meta:
+        unique_together = [
+            ("entry", "name", "url"),
+        ]
+        verbose_name = "Anime Opening"
+        verbose_name_plural = "Anime Openings"
+
 
 class AnimeEndingModel(AbstractBaseModel):
     thumbnail = models.ImageField(
@@ -44,3 +48,10 @@ class AnimeEndingModel(AbstractBaseModel):
 
     def __str__(self) -> str:
         return f"{self.entry}. {self.name}"
+
+    class Meta:
+        unique_together = [
+            ("entry", "name", "url"),
+        ]
+        verbose_name = "Anime Ending"
+        verbose_name_plural = "Anime Endings"
