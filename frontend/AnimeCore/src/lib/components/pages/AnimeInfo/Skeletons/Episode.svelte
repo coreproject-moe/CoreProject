@@ -6,7 +6,7 @@
 </script>
 
 {#if mobile}
-    <div class="mt-10 flex w-full flex-col text-white md:mt-0">
+    <div class="mt-10 flex w-full animate-pulse flex-col text-white md:mt-0">
         <span class="text-2xl font-bold">Episodes</span>
         <div class="divider before:bg-white after:bg-white" />
         <div class="flex justify-between">
