@@ -35,7 +35,7 @@ def get_producer_info(
         _query_ = Q()
         for position in str(mal_id).split(","):
             _query_ |= Q(
-                **{f"mal_id": position.strip()},
+                **{"mal_id": position.strip()},
             )
         query_object &= _query_
 

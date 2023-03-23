@@ -23,7 +23,6 @@ class Migration(migrations.Migration):
                 "verbose_name_plural": "Anime Openings",
             },
         ),
-
         migrations.AddField(
             model_name="animeendingmodel",
             name="url",
