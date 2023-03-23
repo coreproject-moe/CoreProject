@@ -34,12 +34,13 @@
                     {#each Object.entries(data?.providers) as item}
                         {@const key = item[0]}
                         {@const value = item[1]}
+                        {@const url = `https://sbbrisk.com/e/${value}.html`}
                         {#if key === "streamsb"}
                             <iframe
                                 bind:this={htmlIFrameElement}
                                 class="h-[200px] w-[80vw] md:h-[80vh]"
                                 title={data?.episode_name}
-                                src="https://sbbrisk.com/e/{value}.html"
+                                src={url}
                                 frameborder="0"
                                 marginwidth="0"
                                 marginheight="0"
