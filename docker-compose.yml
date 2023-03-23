@@ -92,12 +92,12 @@ services:
             - HOST=0.0.0.0
 
     # Varnish
-    django-varnish:
-        image: varnish:fresh
-        volumes:
-            - ./varnish/django.vcl:/etc/varnish/default.vcl:ro
-        depends_on:
-            - django
+    # django-varnish:
+    #     image: varnish:fresh
+    #     volumes:
+    #         - ./varnish/django.vcl:/etc/varnish/default.vcl:ro
+    #     depends_on:
+    #         - django
 
     anime-varnish:
         image: varnish:fresh
@@ -126,5 +126,5 @@ services:
             - LOG_FILE=/data/access.log
 
         depends_on:
-            - django-varnish
+            - django
             - anime-varnish

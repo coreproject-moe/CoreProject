@@ -36,7 +36,7 @@
     import { responsiveMode } from "$store/Responsive";
 
     import AnimeInfo from "./AnimeInfo/AnimeInfo.svelte";
-    import EpisodeSkeleton from "./Skeletons/Episode.skeleton.svelte";
+    import EpisodeSkeleton from "./Skeletons/Episode.svelte";
     import Episode from "./Episodes/Episode.svelte";
     import ImageCard from "./AnimeInfo/ImageCard.svelte";
     import { formatTime } from "$functions/formatTime";
@@ -311,9 +311,7 @@
                         class="mt-24 flex flex-col items-center justify-between gap-3 md:flex-row md:items-start"
                     >
                         {#await episodes(String(data?.episodes))}
-                            {#if !mobile}
-                                <EpisodeSkeleton />
-                            {/if}
+                            <EpisodeSkeleton />
                         {:then episodes}
                             <Episode
                                 backend_anime_number={Number(data?.id)}
