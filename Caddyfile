@@ -16,7 +16,7 @@ backend.{$SITE_ADDRESS} {
 	}
 
         #  Django
-        reverse_proxy django-varnish:80 {
+        reverse_proxy django:8000 {
                 # @sendfile header X-Sendfile *
                 # handle_response @sendfile {
                 #         rewrite {http.reverse_proxy.header.X-Sendfile}
