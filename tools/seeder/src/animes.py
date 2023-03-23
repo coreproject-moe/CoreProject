@@ -5,8 +5,11 @@ from ._conf import (
     PRODUCER_ENDPOINT,
     CHARACTER_ENDPOINT,
     ANIME_ENDPOINT,
+    STAFF_ENDPOINT,
     TOKEN,
 )
+
+import yt_dlp
 from ._session import session
 from dateutil import parser
 import contextlib
@@ -22,6 +25,7 @@ MISSING_CHARACTER_ENRTIES = []
 MISSING_GENRE_ENTRIES = []
 MISSING_STUDIO_ENTRIES = []
 MISSING_THEME_MAPPING = []
+MISSING_STAFF_ENTRIES = []
 
 
 def image_downloader(term: str, output_dir: str = "images"):
@@ -110,6 +114,29 @@ async def get_character_mapping(mal_id):
         return ""
 
 
+async def get_staff_mapping(mal_id):
+    try:
+        res = await client.get(STAFF_ENDPOINT, params={"mal_id": mal_id})
+        json = res.json()
+        print(json)
+        # Could return multiple
+        data = json["items"][0]
+        print(f"Got `staff` data for {mal_id}")
+        return data["id"]
+    except IndexError:
+        MISSING_STAFF_ENTRIES.append(mal_id)
+
+
+async def get_anime_opening_mapping(string):
+    ydl_opts = {
+        "default_search": "ytsearch",  # set the default search to YouTube
+        "max_results": 1,  # limit to only one result
+        "quiet": True,  # suppress console output
+    }
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        search_results = ydl.extract_info(string, download=False)
+
+
 async def post_to_backend(item):
     print(f"Got starting point for {item.get('mal_id')}")
     mapping = {
@@ -148,8 +175,18 @@ async def post_to_backend(item):
         ]
     )
 
+    # Get Staffs
+    staff_res = session.get(f'{BASE_URL}/{item["mal_id"]}/staff')
+    staff_res_json = staff_res.json()
+    mapping["staffs"] = await asyncio.gather(
+        *[
+            get_staff_mapping(data["person"]["mal_id"])
+            for data in staff_res_json["data"]
+        ]
+    )
+
     # Get Characters
-    characters_res = session.get(f'{BASE_URL}/{item["mal_id"]}/characters')
+    characters_res = session.get(f'{BASE_URL}/{item["mal_id"]}/staffs')
     character_res_json = characters_res.json()
     mapping["characters"] = await asyncio.gather(
         *[
@@ -178,22 +215,23 @@ async def post_to_backend(item):
         "cover": open(f"./images/{search_term}/Image_1.jpg", "rb"),
     }
 
-    res = await client.post(
-        ANIME_ENDPOINT,
-        files=files,
-        data=mapping,
-        headers={
-            "Authorization": f"Bearer {TOKEN}",
-        },
-    )
-    if not res.status_code == 200:
-        raise Exception("This is not meant to happen")
+    # res = await client.post(
+    #     ANIME_ENDPOINT,
+    #     files=files,
+    #     data=mapping,
+    #     headers={
+    #         "Authorization": f"Bearer {TOKEN}",
+    #     },
+    # )
+    # if not res.status_code == 200:
+    #     raise Exception("This is not meant to happen")
 
     log_dictionary = {
         "MISSING_CHARACTER_ENRTIES": MISSING_CHARACTER_ENRTIES,
         "MISSING_GENRE_ENTRIES": MISSING_GENRE_ENTRIES,
         "MISSING_STUDIO_ENTRIES": MISSING_STUDIO_ENTRIES,
         "MISSING_THEME_MAPPING": MISSING_THEME_MAPPING,
+        "MISSING_STAFF_ENTRIES": MISSING_STAFF_ENTRIES,
     }
 
     json.dump(
@@ -231,6 +269,9 @@ async def command() -> None:
                 MISSING_THEME_MAPPING = data.get(
                     "MISSING_THEME_MAPPING", MISSING_THEME_MAPPING
                 )
+                MISSING_STAFF_ENTRIES = data.get(
+                    "MISSING_STAFF_ENTRIES", MISSING_STAFF_ENTRIES
+                )
 
                 break
 
@@ -243,4 +284,10 @@ async def command() -> None:
     for page in range(starting_page, int(total_pages)):
         __res__ = await client.get(BASE_URL, params={"page": page})
         data = __res__.json()
-        asyncio.gather(*[post_to_backend(item) for item in data["data"]])
+
+        for item in data["data"]:
+            await post_to_backend(item)
+            break
+        break
+
+        # asyncio.gather(*[post_to_backend(item) for item in data["data"]])
