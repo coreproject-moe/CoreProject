@@ -150,9 +150,7 @@ async def post_to_backend(item):
         "rating": item.get("rating"),
     }
     with contextlib.suppress(TypeError):
-        mapping["aired_from"] = datetime.isoformat(
-            parser.parse(item.get("aired")["from"])
-        )
+        mapping["aired_from"] = datetime.isoformat(parser.parse(item.get("aired")["from"]))
         mapping["aired_to"] = datetime.isoformat(parser.parse(item.get("aired")["to"]))
 
     mapping["genres"] = await asyncio.gather(
@@ -163,26 +161,17 @@ async def post_to_backend(item):
     )
 
     mapping["studios"] = await asyncio.gather(
-        *[
-            get_studio_or_producer_mapping(data["mal_id"])
-            for data in item.get("studios")
-        ]
+        *[get_studio_or_producer_mapping(data["mal_id"]) for data in item.get("studios")]
     )
     mapping["producers"] = await asyncio.gather(
-        *[
-            get_studio_or_producer_mapping(data["mal_id"])
-            for data in item.get("producers")
-        ]
+        *[get_studio_or_producer_mapping(data["mal_id"]) for data in item.get("producers")]
     )
 
     # Get Staffs
     staff_res = session.get(f'{BASE_URL}/{item["mal_id"]}/staff')
     staff_res_json = staff_res.json()
     mapping["staffs"] = await asyncio.gather(
-        *[
-            get_staff_mapping(data["person"]["mal_id"])
-            for data in staff_res_json["data"]
-        ]
+        *[get_staff_mapping(data["person"]["mal_id"]) for data in staff_res_json["data"]]
     )
 
     # Get Characters

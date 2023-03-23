@@ -27,7 +27,7 @@ if argument := sys.argv[1]:
 
         command()
 
-    elif argument == 'anime':
+    elif argument == "anime":
         from src.animes import command
 
         asyncio.run(command())

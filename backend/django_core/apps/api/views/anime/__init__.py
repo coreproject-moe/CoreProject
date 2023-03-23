@@ -175,7 +175,6 @@ def post_anime_info(
         "themes": themes[0].split(",") if themes else None,
         "studios": studios[0].split(",") if studios else None,
         "producers": producers[0].split(",") if producers else None,
-        "staffs": staffs[0].split(",") if staffs else None,
         "characters": characters[0].split(",") if producers else None,
         #   synonyms names can be
         #       like this   :   ['hello,world']
