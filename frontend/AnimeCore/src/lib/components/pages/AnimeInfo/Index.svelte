@@ -33,7 +33,6 @@
     import Heart from "$icons/Heart.svelte";
     import Settings from "$icons/Settings.svelte";
     import TrendingUp from "$icons/Trending-Up.svelte";
-    import { responsiveMode } from "$store/Responsive";
 
     import AnimeInfo from "./AnimeInfo/AnimeInfo.svelte";
     import EpisodeSkeleton from "./Skeletons/Episode.svelte";
@@ -43,8 +42,6 @@
     import { formatDate } from "$functions/formatDate";
 
     const urls = new UrlMaps();
-    let mobile: boolean;
-    $: mobile = $responsiveMode === "mobile";
 
     const anime_card_image = urls.DOMAIN + String(data?.anime_banner);
     const anime_background_image = urls.DOMAIN + String(data?.anime_cover);
@@ -149,38 +146,36 @@
                             />
                         </div>
 
-                        {#if mobile}
-                            <div class="mt-10 flex gap-2 self-start md:mt-0">
-                                <button class="btn-info btn-sm btn normal-case">
-                                    <div class="align-center flex justify-center gap-3">
-                                        <span class="w-2 translate-y-1">
-                                            <Circle color="#6FCF97" />
-                                        </span>
-                                        <span class="font-bold">Watching</span>
-                                        <span class="w-2">
-                                            <ChevronDown
-                                                width="16"
-                                                height="16"
-                                                class="text-base-100"
-                                            />
-                                        </span>
-                                    </div>
-                                </button>
-                                <button class="btn-info btn-square btn-sm btn">
-                                    <Bookmark
-                                        width="16"
-                                        height="16"
-                                    />
-                                </button>
-                                <button class="btn-info btn-square btn-sm btn">
-                                    <Heart
-                                        color="#FF8796"
-                                        width="16"
-                                        height="16"
-                                    />
-                                </button>
-                            </div>
-                        {/if}
+                        <div class="mt-10 flex gap-2 self-start md:mt-0 md:hidden">
+                            <button class="btn-info btn-sm btn normal-case">
+                                <div class="align-center flex justify-center gap-3">
+                                    <span class="w-2 translate-y-1">
+                                        <Circle color="#6FCF97" />
+                                    </span>
+                                    <span class="font-bold">Watching</span>
+                                    <span class="w-2">
+                                        <ChevronDown
+                                            width="16"
+                                            height="16"
+                                            class="text-base-100"
+                                        />
+                                    </span>
+                                </div>
+                            </button>
+                            <button class="btn-info btn-square btn-sm btn">
+                                <Bookmark
+                                    width="16"
+                                    height="16"
+                                />
+                            </button>
+                            <button class="btn-info btn-square btn-sm btn">
+                                <Heart
+                                    color="#FF8796"
+                                    width="16"
+                                    height="16"
+                                />
+                            </button>
+                        </div>
 
                         <anime-synopsys class="mt-10 md:mt-0">
                             <ScrollArea
@@ -238,74 +233,70 @@
                                 </div>
                             </button>
                         </anime-synopsys>
-                        {#if !mobile}
-                            <anime-ratings class="flex !w-[240px] flex-col">
-                                <h1 class="mb-4 text-2xl font-bold text-white">Ratings</h1>
-                                <p>
-                                    <span class="text-3xl font-bold text-white">79%</span>
-                                    <span class="text-sm text-neutral-400">| 2.8k ratings</span>
-                                </p>
-                                <div class="color-[#D9D9D9] divider w-[71px]" />
-                                <p class="my-1">
-                                    <span class="text-xl text-white">#86</span>
-                                    <span class="text-sm text-neutral-400">
-                                        Most Popular All Time
-                                    </span>
-                                </p>
-                                <p class="my-1">
-                                    <span class="text-xl text-white">#260</span>
-                                    <span class="text-sm text-neutral-400">
-                                        Highest Rated Of All Time
-                                    </span>
-                                </p>
+                        <anime-ratings class="hidden !w-[240px] flex-col md:flex">
+                            <h1 class="mb-4 text-2xl font-bold text-white">Ratings</h1>
+                            <p>
+                                <span class="text-3xl font-bold text-white">79%</span>
+                                <span class="text-sm text-neutral-400">| 2.8k ratings</span>
+                            </p>
+                            <div class="color-[#D9D9D9] divider w-[71px]" />
+                            <p class="my-1">
+                                <span class="text-xl text-white">#86</span>
+                                <span class="text-sm text-neutral-400">Most Popular All Time</span>
+                            </p>
+                            <p class="my-1">
+                                <span class="text-xl text-white">#260</span>
+                                <span class="text-sm text-neutral-400">
+                                    Highest Rated Of All Time
+                                </span>
+                            </p>
 
-                                <button
-                                    class="btn my-2 h-[26px] min-h-fit w-[170px] bg-white px-0 leading-none hover:bg-white"
-                                >
-                                    <div class="flex items-center justify-center gap-2">
-                                        <div class="flex items-center justify-center">
-                                            <TrendingUp
-                                                class="translate-y-1 text-base-100"
-                                                width="20"
-                                                height="18"
-                                            />
-                                        </div>
-                                        <p class="whitespace-nowrap normal-case text-black">
-                                            Detailed Distribution
-                                        </p>
+                            <button
+                                class="btn my-2 h-[26px] min-h-fit w-[170px] bg-white px-0 leading-none hover:bg-white"
+                            >
+                                <div class="flex items-center justify-center gap-2">
+                                    <div class="flex items-center justify-center">
+                                        <TrendingUp
+                                            class="translate-y-1 text-base-100"
+                                            width="20"
+                                            height="18"
+                                        />
                                     </div>
-                                </button>
-
-                                <p class="mt-2 text-white">Your rating</p>
-                                <star-container class="mt-2 flex flex-nowrap items-center gap-2">
-                                    <stars class="flex translate-y-1">
-                                        <StarRating
-                                            rating={Number(data?.anime_rating ?? 0)}
-                                            config={{ fullColor: "white" }}
-                                        />
-                                    </stars>
-                                    <p class="nowrap w-12 text-lg font-bold">
-                                        {(100 / 5) * Number(data?.anime_rating ?? 0)} %
+                                    <p class="whitespace-nowrap normal-case text-black">
+                                        Detailed Distribution
                                     </p>
-                                    <button class="btn-info btn-square btn-sm btn">
-                                        <Edit
-                                            variant="without_underline_around_pencil"
-                                            height="15"
-                                            width="15"
-                                        />
-                                    </button>
-                                </star-container>
+                                </div>
+                            </button>
 
-                                <p class="mt-4 flex items-center text-white">
-                                    Add a review
-                                    <External
-                                        class="ml-1 translate-y-1"
-                                        width="18"
-                                        height="19"
+                            <p class="mt-2 text-white">Your rating</p>
+                            <star-container class="mt-2 flex flex-nowrap items-center gap-2">
+                                <stars class="flex translate-y-1">
+                                    <StarRating
+                                        rating={Number(data?.anime_rating ?? 0)}
+                                        config={{ fullColor: "white" }}
                                     />
+                                </stars>
+                                <p class="nowrap w-12 text-lg font-bold">
+                                    {(100 / 5) * Number(data?.anime_rating ?? 0)} %
                                 </p>
-                            </anime-ratings>
-                        {/if}
+                                <button class="btn-info btn-square btn-sm btn">
+                                    <Edit
+                                        variant="without_underline_around_pencil"
+                                        height="15"
+                                        width="15"
+                                    />
+                                </button>
+                            </star-container>
+
+                            <p class="mt-4 flex items-center text-white">
+                                Add a review
+                                <External
+                                    class="ml-1 translate-y-1"
+                                    width="18"
+                                    height="19"
+                                />
+                            </p>
+                        </anime-ratings>
                     </anime-info>
                     <div
                         class="mt-24 flex flex-col items-center justify-between gap-3 md:flex-row md:items-start"
@@ -320,33 +311,32 @@
                         {:catch}
                             <div class="flex" />
                         {/await}
-                        {#if !mobile}
-                            <episode-details
-                                class="flex !w-[221px] flex-col items-start justify-center gap-6 text-white"
-                            >
-                                <p class="flex gap-2">
-                                    <span class="text-xl font-bold">Details</span>
-                                    <button class="btn-square btn-sm btn">
-                                        <Settings
-                                            class="translate-y-0.5"
-                                            color="white"
-                                            height="22"
-                                            width="22"
-                                        />
-                                    </button>
-                                </p>
-                                {#each details_mapping as item}
-                                    {#if !isEmpty(item)}
-                                        <div class="flex flex-col">
-                                            <span class="font-bold capitalize">
-                                                {Object.keys(item)}
-                                            </span>
-                                            <span class="capitalize">{Object.values(item)}</span>
-                                        </div>
-                                    {/if}
-                                {/each}
-                            </episode-details>
-                        {/if}
+
+                        <episode-details
+                            class="hidden !w-[221px] flex-col items-start justify-center gap-6 text-white md:flex"
+                        >
+                            <p class="flex gap-2">
+                                <span class="text-xl font-bold">Details</span>
+                                <button class="btn-square btn-sm btn">
+                                    <Settings
+                                        class="translate-y-0.5"
+                                        color="white"
+                                        height="22"
+                                        width="22"
+                                    />
+                                </button>
+                            </p>
+                            {#each details_mapping as item}
+                                {#if !isEmpty(item)}
+                                    <div class="flex flex-col">
+                                        <span class="font-bold capitalize">
+                                            {Object.keys(item)}
+                                        </span>
+                                        <span class="capitalize">{Object.values(item)}</span>
+                                    </div>
+                                {/if}
+                            {/each}
+                        </episode-details>
                     </div>
                 </div>
             </div>
