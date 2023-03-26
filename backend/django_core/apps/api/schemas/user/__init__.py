@@ -13,7 +13,6 @@ class UserSchema(ModelSchema):
         model_exclude = [
             "password",
             "avatar",
-            "ip",  # https://github.com/pydantic/pydantic/issues/333
         ]
 
     @staticmethod

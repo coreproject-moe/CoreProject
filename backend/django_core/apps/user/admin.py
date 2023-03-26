@@ -27,7 +27,6 @@ class CustomUserAdmin(DjangoUserAdmin):
         "is_staff",
     )
     list_filter = (
-        "ip",
         "email",
         "is_staff",
         "is_active",
@@ -54,7 +53,6 @@ class CustomUserAdmin(DjangoUserAdmin):
                 "fields": (
                     "first_name",
                     "last_name",
-                    "ip",
                     "email",
                     "avatar",
                     "avatar_provider",
