@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, SafeAreaView } from 'react-native';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 
@@ -22,12 +22,12 @@ export default function App() {
     }
 
     return (
-        <View
-            onLayout={onLayoutRootView}
-            className="h-full flex items-center justify-center bg-white"
-        >
-            <Text>Open up App.js to start working on your app!</Text>
+        <SafeAreaView onLayout={onLayoutRootView}>
             <StatusBar style="auto" />
-        </View>
+
+            <View className="h-full flex items-center justify-center text-2xl bg-white">
+                <Text>Hi i am working on android app</Text>
+            </View>
+        </SafeAreaView>
     );
 }

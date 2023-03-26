@@ -10,7 +10,7 @@
     const formated_date = new formatTime(episode_duration);
 </script>
 
-<a href="../backend/{backend_anime_number}/episodes/{episode_number}">
+<a href="../backend/{backend_anime_number}/episode/{episode_number}">
     <episode-card-container
         class="flex transform flex-col items-center gap-4 transition-transform active:scale-95 "
     >
