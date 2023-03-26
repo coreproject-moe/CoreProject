@@ -51,7 +51,7 @@
     {#each episodes as episode}
         {@const url = backend_urls.DOMAIN + episode.episode_thumbnail}
         {@const formated_date = new formatTime(episode.episode_length)}
-        <a href="../backend/{backend_anime_number}/episodes/{episode.episode_number}">
+        <a href="../backend/{backend_anime_number}/episode/{episode.episode_number}">
             <div class="relative my-4 flex h-16 w-[90vw] items-center rounded-lg bg-[#1E2036]">
                 <img
                     class="mask mask-squircle mx-4 h-10 w-10"
