@@ -89,7 +89,7 @@
                         {@const player_height = widthMapping[videoPlayerWidth]["height"]}
                         {@const player_width = widthMapping[videoPlayerWidth]["width"]}
                         {#if key === "streamsb"}
-                            {@const url = "r" ?? `https://sbbrisk.com/e/${value}.html`}
+                            {@const url = `https://sbbrisk.com/e/${value}.html`}
                             <iframe
                                 title={episode_data?.episode_name}
                                 src={url}
