@@ -48,7 +48,7 @@
             data.append("username", values.username);
             data.append("password", values.password);
 
-            const res = await fetch(urls.login_url(), {
+            const res = await fetch(urls.login(), {
                 method: "post",
                 body: data
             });
