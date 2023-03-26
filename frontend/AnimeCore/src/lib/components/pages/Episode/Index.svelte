@@ -82,7 +82,7 @@
                     {#each Object.entries(episode_data?.providers) as item}
                         {@const key = item[0]}
                         {@const value = item[1]}
-                        {@const url = "https://google.com" ?? `https://sbbrisk.com/e/${value}.html`}
+                        {@const url = `https://sbbrisk.com/e/${value}.html`}
                         {@const player_height = widthMapping[videoPlayerWidth]["height"]}
                         {@const player_width = widthMapping[videoPlayerWidth]["width"]}
                         {#if key === "streamsb"}
