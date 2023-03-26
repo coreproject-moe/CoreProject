@@ -3,6 +3,7 @@
     import Navbar from "$components/shared/Navbar.svelte";
     import { UrlMaps } from "$data/urls";
     import ChevronsRight from "$icons/Chevrons-Right.svelte";
+    import { responsiveMode } from "$store/Responsive";
     export let episode_data: {
         id: number;
         episode_number: number;
@@ -44,6 +45,7 @@
         recommendations: [number];
         episodes_count: number;
     };
+    const backend_mapping = new UrlMaps();
 
     // let htmlIFrameElement: HTMLIFrameElement | undefined = undefined;
     // $: {
@@ -63,11 +65,32 @@
         normal: {
             height: "50vh",
             width: "50vw"
+        },
+        mobile: {
+            height: "",
+            width: ""
         }
     };
-    const videoPlayerWidth: keyof typeof widthMapping = "normal";
+    let mobile: boolean;
+    let videoPlayerWidth: keyof typeof widthMapping;
 
-    const backend_mapping = new UrlMaps();
+    $: mobile = $responsiveMode === "mobile";
+
+    $: {
+        if (mobile) {
+            videoPlayerWidth = "mobile";
+        } else {
+            const value = localStorage.getItem("video_plater_width");
+            if (value) {
+                videoPlayerWidth = value as typeof videoPlayerWidth;
+            } else {
+                videoPlayerWidth = "normal";
+            }
+        }
+    }
+
+    // Set localstorage on value change
+    $: localStorage.setItem("video_player_width", videoPlayerWidth);
 </script>
 
 <div class="relative grid h-screen ">
