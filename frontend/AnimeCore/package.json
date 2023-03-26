@@ -67,6 +67,6 @@
         "vite": "4.2.1",
         "voca": "^1.4.0"
     },
-    "type": "module",
+    "type": "module"
     
 }
