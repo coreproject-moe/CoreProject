@@ -114,7 +114,7 @@
                         <div class="flex flex-col">
                             <span class="font-bold">Episodes</span>
                             <div class="mt-8 grid grid-cols-8 gap-4">
-                                {#each Array(anime_data?.episodes_count + 10).fill(0) as _, index}
+                                {#each Array(anime_data?.episodes_count).fill(0) as _, index}
                                     {@const actual_index = index >= 0 ? index + 1 : index}
                                     {@const button_active =
                                         Number($page.params.episode_number) === actual_index}
