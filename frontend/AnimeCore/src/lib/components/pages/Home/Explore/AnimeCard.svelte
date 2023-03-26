@@ -7,7 +7,7 @@
     export let animeAirTime: string | number;
     export let animeSummary: string;
 
-    import voca from "voca";
+    import voca from"voca";
 </script>
 
 <div class="inline-grid h-36 w-96 md:h-52">
@@ -114,7 +114,7 @@
         color: #d8d8d8;
 
         &:not(:last-child)::after {
-            content: " ▪ ";
+            content:" ▪";
         }
     }
 </style>

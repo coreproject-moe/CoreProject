@@ -37,7 +37,6 @@
     import AnimeInfo from "./AnimeInfo/AnimeInfo.svelte";
     import EpisodeSkeleton from "./Skeletons/Episode.svelte";
     import Episode from "./Episodes/Episode.svelte";
-    import ImageCard from "./AnimeInfo/ImageCard.svelte";
     import { formatTime } from "$functions/formatTime";
     import { formatDate } from "$functions/formatDate";
 
@@ -130,10 +129,17 @@
                     >
                         <div class="flex gap-7 self-start">
                             <!-- Anime image card  -->
-                            <ImageCard
-                                src={anime_card_image}
-                                alt={`${data?.title_english} image`}
-                            />
+                            <anime-image-card
+                                class="card flex h-[150px] w-[100px] md:h-[300px] md:w-[200px]"
+                            >
+                                <img
+                                    class="rounded-lg object-contain"
+                                    width={200}
+                                    height={300}
+                                    src={anime_card_image}
+                                    alt="${data?.title_english} banner image"
+                                />
+                            </anime-image-card>
 
                             <!-- Anime info  -->
                             <AnimeInfo
@@ -239,7 +245,7 @@
                                 <span class="text-3xl font-bold text-white">79%</span>
                                 <span class="text-sm text-neutral-400">| 2.8k ratings</span>
                             </p>
-                            <div class="color-[#D9D9D9] divider w-[71px]" />
+                            <div class="divider w-[71px]" />
                             <p class="my-1">
                                 <span class="text-xl text-white">#86</span>
                                 <span class="text-sm text-neutral-400">Most Popular All Time</span>
