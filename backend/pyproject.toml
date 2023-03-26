@@ -9,13 +9,13 @@ license = "AGPL-3.0-only"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-django = {extras = ['argon2'], version = ">=4.2a1"}
+django = {version = '^4.1', extras = ['argon2']}
 # First Party ( Redis )
 redis = {extras = ['hiredis'], version = ">=4.1"}
 # First party ( Image )
 pillow = "*"
 # First Party ( Database )
-psycopg = "^3.1.8"
+psycopg2-binary = '*'
 # 3rd Party ( Files )
 django-dynamic-filenames = "*"
 # 3rd Party ( Middlewares )
@@ -49,7 +49,6 @@ django-tailwind = "^3.5.0"
 
 
 
-
 [tool.poetry.group.dev.dependencies]
 ## Watchfiles
 # https://github.com/adamchainz/django-watchfiles/issues/12
@@ -69,7 +68,7 @@ django_stubs = {extras = ["compatible_mypy"], version = "*"}
 # Types
 types_redis = "*"
 # Task Runner
-poethepoet = "^0.19.0"
+poethepoet = "^0.18.1"
 isort = "^5.12.0"
 
 [tool.poe.tasks]
