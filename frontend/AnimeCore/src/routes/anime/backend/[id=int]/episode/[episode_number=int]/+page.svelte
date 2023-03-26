@@ -33,4 +33,7 @@
     />
 </svelte:head>
 
-<Episode data={data?.episode} />
+<Episode
+    episode_data={data?.episode}
+    anime_data={data?.anime}
+/>
