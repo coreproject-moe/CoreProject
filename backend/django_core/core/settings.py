@@ -90,6 +90,8 @@ INSTALLED_APPS = [
     "apps.api",
     # OpenGraph
     "apps.opengraph",
+    # Feed
+    "apps.feed",
     # Models
     "apps.anime",
     "apps.trackers",
