@@ -46,6 +46,7 @@
                     class="mx-6 mt-0 flex items-start md:mx-20 {videoPlayerWidth === 'normal'
                         ? 'flex-row'
                         : 'flex-col'}"
+                    style="height:{widthMapping[videoPlayerWidth]['height']}px"
                 >
                     {#each Object.entries(data?.providers) as item}
                         {@const key = item[0]}
@@ -69,7 +70,12 @@
                             pass
                         {/if}
                     {/each}
-                    <div class="divider divider-horizontal before:bg-white after:bg-white" />
+                    {#if videoPlayerWidth === "normal"}
+                        <div
+                            class="divider divider-horizontal ml-24 h-[250px] self-center before:bg-white after:bg-white"
+                        />
+                    {/if}
+                    <div class="flex">ga</div>
                 </div>
             </div>
         </div>
