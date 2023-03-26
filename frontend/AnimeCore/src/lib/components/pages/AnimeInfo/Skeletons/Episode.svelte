@@ -1,8 +1,8 @@
 <script lang="typescript">
-    import { responsiveMode } from "$store/Responsive";
+    import { responsiveMode } from"$store/Responsive";
 
     let mobile: boolean;
-    $: mobile = $responsiveMode === "mobile";
+    $: mobile = $responsiveMode ==="mobile";
 </script>
 
 <div class="mt-10 flex w-full animate-pulse flex-col text-white  md:mt-0 md:hidden">
@@ -30,7 +30,7 @@
                     <h1 class="font-bond text-lg text-white">
                         <button class="btn-square btn-sm btn w-14" />
                     </h1>
-                    <button class="btn-square btn-sm btn " />
+                    <button class="btn-square btn-sm btn" />
                 </div>
                 <episode-and-dub-container class="mt-12 flex gap-4">
                     <div class="flex gap-3">
