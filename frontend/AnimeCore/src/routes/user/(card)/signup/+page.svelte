@@ -47,7 +47,7 @@
             data.append("email", values.email);
             data.append("password", values.password);
 
-            const res = await fetch(urls.signup_url(), {
+            const res = await fetch(urls.signup(), {
                 method: "POST",
                 body: data
             });

@@ -55,15 +55,29 @@ export class UrlMaps {
         return `${this.BASE_URL}/user/`;
     };
 
-    public signup_url = () => {
+    public signup = () => {
         return `${this.BASE_URL}/user/signup`;
     };
 
-    public login_url = () => {
+    public login = () => {
         return `${this.BASE_URL}/user/login`;
     };
 
     public username_validity = () => {
         return `${this.BASE_URL}/user/username_validity`;
+    };
+
+    // Feeds
+    public anime_feed = () => {
+        return `${this.DOMAIN}/feed/anime/`;
+    };
+    public character_feed = () => {
+        return `${this.DOMAIN}/feed/character/`;
+    };
+    public staff_feed = () => {
+        return `${this.DOMAIN}/feed/staff/`;
+    };
+    public producer_feed = () => {
+        return `${this.DOMAIN}/feed/producer/`;
     };
 }
