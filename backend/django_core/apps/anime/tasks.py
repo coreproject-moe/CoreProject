@@ -3,7 +3,7 @@ import math
 from PIL import Image, ImageStat
 from celery import shared_task
 from colorthief import ColorThief
-from core.utils.rgb_to_hex import rgb_to_hex
+from core.utilities.rgb_to_hex import rgb_to_hex
 
 from .models import AnimeModel
 

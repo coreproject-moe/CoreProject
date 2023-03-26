@@ -16,9 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
-from django.contrib.sitemaps.views import sitemap as django_sitemap
 from . import views
-from . import sitemap
 
 # from django.views import debug
 
@@ -39,19 +37,6 @@ urlpatterns = [
     # Default django welcome page
     # path("", debug.default_urlconf),
     path("", views.home_view, name="home_view"),
-    #   Sitemap
-    # =============
-    path(
-        "sitemap.xml",
-        django_sitemap,
-        {
-            "sitemaps": {
-                "anime": sitemap.AnimeSitemap,
-            }
-        },
-        name="django.contrib.sitemaps.views.sitemap",
-    ),
-    #   Admin Site
     # ================
     path("admin/", admin.site.urls),
     #   HTTP
