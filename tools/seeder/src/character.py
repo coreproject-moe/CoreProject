@@ -394,8 +394,8 @@ def populate_database(
             "KITSU": KITSU,
             "ANILIST": ANILIST,
             "EXECUTION_TIME": EXECUTION_TIME,
-            "SUCCESSFUL_KITSU_IDS": SUCCESSFUL_KITSU_IDS,
-            "SUCCESSFUL_ANILIST_IDS": SUCCESSFUL_ANILIST_IDS,
+            "SUCCESSFUL_KITSU_IDS": list(set(SUCCESSFUL_KITSU_IDS)),
+            "SUCCESSFUL_ANILIST_IDS": list(set(SUCCESSFUL_ANILIST_IDS)),
         }
 
         # Log the data to a `.lock` file

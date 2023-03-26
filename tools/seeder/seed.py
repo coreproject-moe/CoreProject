@@ -1,4 +1,5 @@
 import sys
+import asyncio
 
 if argument := sys.argv[1]:
     if argument == "character":
@@ -15,3 +16,18 @@ if argument := sys.argv[1]:
         from src.genre import command
 
         command()
+
+    elif argument == "theme":
+        from src.themes import command
+
+        command()
+
+    elif argument == "producer":
+        from src.producers import command
+
+        command()
+
+    elif argument == "anime":
+        from src.animes import command
+
+        asyncio.run(command())
