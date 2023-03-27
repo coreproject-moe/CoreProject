@@ -22,7 +22,7 @@ updates:
     # Android
     # =======
     - package-ecosystem: npm
-      directory: /android/AnimeCore/
+      directory: /android/coreproject/
       schedule:
           interval: daily
       open-pull-requests-limit: 100
