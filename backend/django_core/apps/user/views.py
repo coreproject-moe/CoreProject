@@ -105,7 +105,7 @@ def username_and_discriminator_validity_checker_view(
         ):
             # Return status code 406 if username with discriminator exists
             return HttpResponse(
-                "CUSTOM MESSAGE",
+                "An username with the said discriminator is found",
                 status=HTTPStatus.FOUND,
             )
 

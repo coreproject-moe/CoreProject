@@ -251,3 +251,76 @@ def get_individual_anime_info(
 ) -> AnimeModel:
     query = get_object_or_404(AnimeModel, pk=anime_id)
     return query
+
+
+@router.patch("/{int:anime_id}", response=AnimeInfoGETSchema)
+def patch_individual_anime_info(
+    request: HttpRequest,
+    anime_id: int,
+    # Optional parameters
+    mal_id: int | None = Form(default=None),
+    anilist_id: int | None = Form(default=None),
+    kitsu_id: int | None = Form(default=None),
+    name: str | None = Form(None, max_length=1024),
+    name_japanese: str | None = Form(default=None, max_length=1024),
+    name_synonyms: list[str] = Form(default=None),
+    source: str | None = Form(default=None),
+    aired_from: datetime.datetime | None = Form(default=None),
+    aired_to: datetime.datetime | None = Form(default=None),
+    synopsis: str | None = Form(default=None),
+    background: str | None = Form(default=None),
+    rating: str | None = Form(default=None),
+    # Images
+    banner: UploadedFile | None = File(default=None),
+    cover: UploadedFile | None = File(default=None),
+    # We need pk for these
+    staffs: list[str] = Form(default=None),
+    genres: list[str] = Form(default=None),
+    themes: list[str] = Form(default=None),
+    studios: list[str] = Form(default=None),
+    producers: list[str] = Form(default=None),
+    characters: list[str] = Form(default=None),
+) -> AnimeModel:
+    kwargs = {
+        "mal_id": mal_id,
+        "anilist_id": anilist_id,
+        "kitsu_id": kitsu_id,
+        "name": name,
+        "name_japanese": name_japanese,
+        "source": source,
+        "aired_from": aired_from,
+        "aired_to": aired_to,
+        "banner": banner,
+        "cover": cover,
+        "synopsis": synopsis,
+        "background": background,
+        "rating": rating,
+    }
+    # Filter and remove the None values
+    filtered_kwargs = {key: value for key, value in kwargs.items() if value}
+
+    instance = AnimeModel.objects.get(pk=anime_id)
+    for attribute, value in filtered_kwargs.items():
+        setattr(instance, attribute, value)
+
+    # Work with m2m fields
+    m2m_kwargs = {
+        "staffs": staffs[0].split(",") if staffs else None,
+        "genres": genres[0].split(",") if genres else None,
+        "themes": themes[0].split(",") if themes else None,
+        "studios": studios[0].split(",") if studios else None,
+        "producers": producers[0].split(",") if producers else None,
+        "characters": characters[0].split(",") if producers else None,
+        #   synonyms names can be
+        #       like this   :   ['hello,world']
+        #   What we want is :   ['hello', 'world']
+        "name_synonyms": name_synonyms[0].split(",") if name_synonyms else None,
+    }
+    filtered_m2m_kwargs = {key: value for key, value in m2m_kwargs.items() if value}
+
+    for attribute, value in filtered_m2m_kwargs.items():
+        if specific_field := getattr(instance, attribute):
+            specific_field.set(value)
+
+    instance.save()
+    return instance
