@@ -68,13 +68,20 @@ def get_individual_producer_info(
     return queryset
 
 
-@router.patch("/{str:producer_id}/", response=ProducerGETSchema)
+@router.patch("/{str:producer_id}/", response=ProducerGETSchema, auth=AuthBearer())
 def get_individual_producer_info(
     request: HttpRequest,
-    producer_id: str,
+    producer_id: int,
     # Optional
     payload: ProducerPOSTSchema,
 ) -> ProducerModel:
+    user: CustomUser = request.auth
+    if not user.is_superuser:
+        return HttpResponse(
+            "Superuser is required for this operation",
+            status=HTTPStatus.UNAUTHORIZED,
+        )
+        
     queryset = get_object_or_404(ProducerModel, pk=producer_id)
     for attribute, value in payload.dict(exclude_none=True):
         setattr(queryset, attribute, value)
