@@ -48,8 +48,6 @@ urlpatterns = [
     #   Api
     # ========
     path("api/", include("apps.api.urls")),
-    #   Feed ( For Listing all entries )
-    path("feed/", include("apps.feed.urls")),
 ]
 
 if settings.DEBUG:

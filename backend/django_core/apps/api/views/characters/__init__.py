@@ -94,10 +94,48 @@ def post_character_info(
     return instance
 
 
-@router.get("/{str:character_id}/", response=CharacterSchema)
+@router.get("/{int:character_id}/", response=CharacterSchema)
 def get_individual_character_info(
     request: HttpRequest,
-    character_id: str,
+    character_id: int,
 ) -> QuerySet[CharacterModel]:
     queryset = get_object_or_404(CharacterModel, pk=character_id)
     return queryset
+
+
+@router.patch("/{int:character_id}/", response=CharacterSchema, auth=AuthBearer())
+def patch_individual_character_info(
+    request: HttpRequest,
+    character_id: int,
+    # Optional fields
+    mal_id: int = Form(default=None),
+    kitsu_id: int | None = Form(default=None),
+    anilist_id: int | None = Form(default=None),
+    name: str = Form(None, max_length=1024),
+    name_kanji: str | None = Form(default=None, max_length=1024),
+    character_image: UploadedFile | None = File(default=None),
+    about: str | None = Form(default=None),
+):
+    user: CustomUser = request.auth
+    if not user.is_superuser:
+        return HttpResponse(
+            "Superuser is required for this operation",
+            status=HTTPStatus.UNAUTHORIZED,
+        )
+    instance = get_object_or_404(CharacterModel, pk=character_id)
+
+    kwargs = {
+        "mal_id": mal_id,
+        "kitsu_id": kitsu_id,
+        "anilist_id": anilist_id,
+        "name": name,
+        "name_kanji": name_kanji,
+        "character_image": character_image,
+        "about": about,
+    }
+    filtered_kwargs = {key: value for key, value in kwargs.items() if value}
+    for attribute, value in filtered_kwargs:
+        setattr(instance, attribute, value)
+
+    instance.save()
+    return instance

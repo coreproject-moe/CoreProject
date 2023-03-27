@@ -229,7 +229,9 @@ api.add_router(
     feature_router,
     tags=["feed"],
 )
+from .views.feeds.all import router as all_router
 
+api.add_router("/feed/all", all_router, tags=["feed"])
 
 urlpatterns = [
     path(
