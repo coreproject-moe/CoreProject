@@ -1,9 +1,12 @@
 <script lang="ts">
     import { page } from "$app/stores";
+    import { browser } from "$app/environment";
+
     import Navbar from "$components/shared/Navbar.svelte";
     import { UrlMaps } from "$data/urls";
     import ChevronsRight from "$icons/Chevrons-Right.svelte";
     import { responsiveMode } from "$store/Responsive";
+
     export let episode_data: {
         id: number;
         episode_number: number;
@@ -72,25 +75,20 @@
         }
     };
     let mobile: boolean;
-    let videoPlayerWidth: keyof typeof widthMapping;
+    let videoPlayerWidth: keyof typeof widthMapping =
+        (browser && (localStorage.getItem("video_plater_width") as keyof typeof widthMapping)) ||
+        "normal";
 
     $: mobile = $responsiveMode === "mobile";
 
     $: {
         if (mobile) {
             videoPlayerWidth = "mobile";
-        } else {
-            const value = localStorage.getItem("video_plater_width");
-            if (value) {
-                videoPlayerWidth = value as typeof videoPlayerWidth;
-            } else {
-                videoPlayerWidth = "normal";
-            }
         }
     }
 
     // Set localstorage on value change
-    $: localStorage.setItem("video_player_width", videoPlayerWidth);
+    $: browser && localStorage.setItem("video_player_width", videoPlayerWidth);
 </script>
 
 <div class="relative grid h-screen ">
