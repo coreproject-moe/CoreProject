@@ -13,7 +13,7 @@ export async function GET({ url }) {
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
         ${anime_data
             .map((item) => {
-                return `  
+                return `
                     <url>
                         <loc>https://${url.host}/anime/backend/${item}</loc>
                     </url>
