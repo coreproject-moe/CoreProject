@@ -81,7 +81,7 @@ def get_individual_producer_info(
             "Superuser is required for this operation",
             status=HTTPStatus.UNAUTHORIZED,
         )
-        
+
     queryset = get_object_or_404(ProducerModel, pk=producer_id)
     for attribute, value in payload.dict(exclude_none=True):
         setattr(queryset, attribute, value)
