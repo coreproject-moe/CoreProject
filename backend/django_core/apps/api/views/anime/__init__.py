@@ -306,7 +306,7 @@ def patch_individual_anime_info(
     # Filter and remove the None values
     filtered_kwargs = {key: value for key, value in kwargs.items() if value}
 
-    instance = AnimeModel.objects.get(pk=anime_id)
+    instance = get_object_or_404(AnimeModel, pk=anime_id)
     for attribute, value in filtered_kwargs.items():
         setattr(instance, attribute, value)
 

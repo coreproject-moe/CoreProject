@@ -59,10 +59,25 @@ def post_producer_info(request: HttpRequest, payload: ProducerPOSTSchema) -> Pro
     return instance
 
 
-@router.get("/{str:producer_id}/", response=ProducerGETSchema)
+@router.get("/{int:producer_id}/", response=ProducerGETSchema)
+def get_individual_producer_info(
+    request: HttpRequest,
+    producer_id: int,
+) -> ProducerModel:
+    queryset = get_object_or_404(ProducerModel, pk=producer_id)
+    return queryset
+
+
+@router.patch("/{str:producer_id}/", response=ProducerGETSchema)
 def get_individual_producer_info(
     request: HttpRequest,
     producer_id: str,
+    # Optional
+    payload: ProducerPOSTSchema,
 ) -> ProducerModel:
     queryset = get_object_or_404(ProducerModel, pk=producer_id)
+    for attribute, value in payload.dict(exclude_none=True):
+        setattr(queryset, attribute, value)
+
+    queryset.save()
     return queryset

@@ -122,7 +122,7 @@ def patch_individual_character_info(
             "Superuser is required for this operation",
             status=HTTPStatus.UNAUTHORIZED,
         )
-    instance = CharacterModel.objects.get(pk=character_id)
+    instance = get_object_or_404(CharacterModel, pk=character_id)
 
     kwargs = {
         "mal_id": mal_id,
