@@ -253,7 +253,7 @@ def get_individual_anime_info(
     return query
 
 
-@router.patch("/{int:anime_id}", response=AnimeInfoGETSchema)
+@router.patch("/{int:anime_id}", response=AnimeInfoGETSchema, auth=AuthBearer())
 def patch_individual_anime_info(
     request: HttpRequest,
     anime_id: int,
@@ -281,6 +281,13 @@ def patch_individual_anime_info(
     producers: list[str] = Form(default=None),
     characters: list[str] = Form(default=None),
 ) -> AnimeModel:
+    user: CustomUser = request.auth
+    if not user.is_superuser:
+        return HttpResponse(
+            "Superuser is required for this operation",
+            status=HTTPStatus.UNAUTHORIZED,
+        )
+
     kwargs = {
         "mal_id": mal_id,
         "anilist_id": anilist_id,
