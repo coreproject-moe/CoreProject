@@ -37,8 +37,12 @@ urlpatterns = [
     # Default django welcome page
     # path("", debug.default_urlconf),
     path("", views.home_view, name="home_view"),
+    #   Admin
     # ================
     path("admin/", admin.site.urls),
+    #   Django Defender Admin
+    # ============================
+    path("admin/defender/", include("defender.urls")),
     #   HTTP
     # =========
     path("user/", include("apps.user.urls")),

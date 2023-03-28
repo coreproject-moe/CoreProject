@@ -46,6 +46,7 @@ django-stubs-ext = "*"
 colorthief = "^0.2.1"
 # Tailwind CSS
 django-tailwind = "^3.5.0"
+django-defender = "^0.9.7"
 
 
 

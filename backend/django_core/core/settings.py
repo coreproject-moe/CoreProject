@@ -82,6 +82,8 @@ INSTALLED_APPS = [
     "colorfield",
     # 3rd party adminpanel
     "django_admin_hstore_widget",
+    # Block users
+    "defender",
     # Tailwind CSS
     "tailwind",
     "tailwind_src",  # Our custom app
@@ -129,6 +131,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # Django defender
+    "defender.middleware.FailedLoginMiddleware",
 ]
 
 if DEBUG:
@@ -317,6 +321,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ALLOWED_ORIGINS = CSRF_TRUSTED_ORIGINS = []
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+
 if environs := os.environ.get("DJANGO_ALLOWED_HOSTS"):
     environ = environs.split(" ")
     ALLOWED_HOSTS += environ
