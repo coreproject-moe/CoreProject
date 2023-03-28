@@ -29,7 +29,6 @@
     }}
 />
 
-
 {#if $navigationState === "loading"}
     <div out:fade={{ delay: 500 }}>
         <NavigationBar />
