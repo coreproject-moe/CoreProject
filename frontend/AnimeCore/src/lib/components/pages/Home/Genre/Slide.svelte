@@ -1,5 +1,4 @@
 <script lang="ts">
-    import GenreModal from "$components/modals/Genre.svelte";
     import badgeData from "$data/components/badge_data.json";
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import ChevronUpDown from "$icons/Chevron-Up-Down.svelte";
@@ -11,9 +10,6 @@
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";
 </script>
-
-<!-- Modals  -->
-<svelte:component this={GenreModal} />
 
 <div class="hero mt-10 min-h-[184px] bg-base-100 md:mt-0 md:min-h-screen">
     <div class="hero-content p-0 text-center">

@@ -13,7 +13,8 @@
     import MoonLinearGradient from "$icons/Moon-Linear-Gradient.svelte";
     import SettingsLinearGradient from "$icons/Settings-Linear-Gradient.svelte";
     import { UrlMaps } from "$data/urls";
-
+    import { modals } from "$store/Modal";
+    import SearchModal from "$components/modals/Search.svelte";
     const backend_mapping = new UrlMaps();
 
     let mobile: boolean;
@@ -22,13 +23,17 @@
     let dropdown_open = false;
 </script>
 
+<svelte:component this={SearchModal} />
+
 <div class="navbar bg-transparent">
     <div class="navbar-start hidden md:block">
-        <Search
-            class="text-white"
-            height={30}
-            width={30}
-        />
+        <label for={$modals.genre}>
+            <Search
+                class="text-white"
+                height={30}
+                width={30}
+            />
+        </label>
     </div>
     <div
         class="navbar-center glass rounded-md"
@@ -67,7 +72,7 @@
             {/if}
         </div>
     </div>
-    <div class="navbar-end ">
+    <div class="navbar-end">
         {#if $user_is_logged_in}
             {#if $user_information}
                 {@const avatar_url = backend_mapping.DOMAIN + $user_information?.avatar}
@@ -148,7 +153,7 @@
                             <button class="btn-info btn-square btn-sm btn">
                                 <ListLinearGradient />
                             </button>
-                            <span class="font-bold  text-white">View My List</span>
+                            <span class="font-bold text-white">View My List</span>
                         </div>
 
                         <div class="flex items-center gap-4">
