@@ -137,7 +137,7 @@
                                     width={200}
                                     height={300}
                                     src={anime_card_image}
-                                    alt="${data?.title_english} banner image"
+                                    alt="{data?.title_english} banner image"
                                 />
                             </anime-image-card>
 
