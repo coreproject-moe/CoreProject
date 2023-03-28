@@ -14,6 +14,7 @@
     import SettingsLinearGradient from "$icons/Settings-Linear-Gradient.svelte";
     import { UrlMaps } from "$data/urls";
     import { modals } from "$store/Modal";
+    import SearchModal from "$components/modals/Search.svelte";
     const backend_mapping = new UrlMaps();
 
     let mobile: boolean;
@@ -21,6 +22,8 @@
 
     let dropdown_open = false;
 </script>
+
+<svelte:component this={SearchModal} />
 
 <div class="navbar bg-transparent">
     <div class="navbar-start hidden md:block">
