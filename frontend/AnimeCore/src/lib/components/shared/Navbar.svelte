@@ -27,7 +27,7 @@
 
 <div class="navbar bg-transparent">
     <div class="navbar-start hidden md:block">
-        <label for={$modals.genre}>
+        <label for={$modals.search}>
             <Search
                 class="text-white"
                 height={30}
