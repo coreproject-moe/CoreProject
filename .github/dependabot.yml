@@ -53,7 +53,7 @@ updates:
       open-pull-requests-limit: 100
     # BETA REPOS
     - package-ecosystem: npm
-      directory: /frontend/AnimeCore-v2/
+      directory: /frontend/coreproject/
       schedule:
           interval: daily
       open-pull-requests-limit: 100
