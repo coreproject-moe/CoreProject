@@ -1,11 +1,14 @@
 <script lang="ts">
     import { page } from "$app/stores";
-    import { browser } from "$app/environment";
 
     import Navbar from "$components/shared/Navbar.svelte";
     import { UrlMaps } from "$data/urls";
     import ChevronsRight from "$icons/Chevrons-Right.svelte";
     import { responsiveMode } from "$store/Responsive";
+    import MaximizeInward from "$icons/Maximize-Inward.svelte";
+    import MaximizeOutward from "$icons/Maximize-Outward.svelte";
+
+    import { video_player_width } from "$store/VideoPlayerWidth";
 
     export let episode_data: {
         id: number;
@@ -60,83 +63,155 @@
     //     }
     // }
 
+    let mobile: boolean;
+
+    $: mobile = $responsiveMode === "mobile";
+
     const widthMapping = {
         wide: {
-            height: "800px",
-            width: "1280px"
+            height: "80vh",
+            width: "89vw"
         },
         normal: {
             height: "50vh",
             width: "50vw"
         },
         mobile: {
-            height: "",
-            width: ""
+            height: "30vh",
+            width: "89vw"
         }
     };
-    let mobile: boolean;
-    let videoPlayerWidth: keyof typeof widthMapping =
-        (browser && (localStorage.getItem("video_plater_width") as keyof typeof widthMapping)) ||
-        "normal";
-
-    $: mobile = $responsiveMode === "mobile";
-
-    $: {
-        if (mobile) {
-            videoPlayerWidth = "mobile";
-        }
-    }
-
-    // Set localstorage on value change
-    $: browser && localStorage.setItem("video_player_width", videoPlayerWidth);
 </script>
 
-<div class="relative grid h-screen ">
+<div class="relative grid h-screen items-center overflow-x-hidden">
     <div class="absolute inset-0 grid h-screen w-screen">
         <div class="hero">
             <div class="grid h-full w-full">
-                <div class="pt-8 pl-6 pb-0 md:pr-[72px] md:pl-20">
+                <div class="pb-0 pl-6 pt-8 md:pl-20 md:pr-[72px]">
                     <Navbar />
                 </div>
                 <div
-                    class="mx-6 mt-0 flex items-start md:mx-20 {videoPlayerWidth === 'normal'
-                        ? 'flex-row'
-                        : 'flex-col'}"
-                    style="height:{widthMapping[videoPlayerWidth]['height']}"
+                    class="mx-6 mt-0 flex items-start md:mx-20 {$video_player_width === 'normal'
+                        ? 'mt-20 flex-row'
+                        : 'mt-2 flex-col'}"
+                    style="min-height:{widthMapping[$video_player_width ?? 'normal']['height']}"
                 >
-                    {#each Object.entries(episode_data?.providers) as item}
-                        {@const key = item[0]}
-                        {@const value = item[1]}
-                        {@const player_height = widthMapping[videoPlayerWidth]["height"]}
-                        {@const player_width = widthMapping[videoPlayerWidth]["width"]}
-                        {#if key === "streamsb"}
-                            {@const url = `https://sbbrisk.com/e/${value}.html`}
-                            <iframe
-                                title={episode_data?.episode_name}
-                                src={url}
-                                class="bg-black"
-                                style="height:{player_height}; width:{player_width};"
-                                frameborder="0"
-                                marginwidth="0"
-                                marginheight="0"
-                                scrolling="NO"
-                                allowfullscreen
-                            />
-                        {:else if key === "doodstream"}
-                            pass
-                        {/if}
-                    {/each}
-                    {#if videoPlayerWidth === "normal"}
+                    <div class="flex flex-col">
+                        {#each Object.entries(episode_data?.providers) as item}
+                            {@const key = item[0]}
+                            {@const value = item[1]}
+                            {@const player_height =
+                                widthMapping[$video_player_width ?? "normal"]["height"]}
+                            {@const player_width =
+                                widthMapping[$video_player_width ?? "normal"]["width"]}
+                            {#if key === "streamsb"}
+                                {@const url = `https://sbbrisk.com/e/${value}.html`}
+                                <iframe
+                                    title={episode_data?.episode_name}
+                                    src={url}
+                                    class="self-center rounded-lg bg-black"
+                                    style="height:{player_height}; width:{player_width};"
+                                    frameborder="0"
+                                    marginwidth="0"
+                                    marginheight="0"
+                                    scrolling="NO"
+                                    allowfullscreen
+                                />
+                            {:else if key === "doodstream"}
+                                pass
+                            {/if}
+                        {/each}
+                        <div
+                            class="mt-6 flex h-10 max-h-10 w-full items-center justify-between rounded-lg bg-info px-4 font-semibold"
+                        >
+                            <div class="flex gap-7">
+                                <a
+                                    href={Number($page.params.episode_number) !== 1
+                                        ? `./${Number($page.params.episode_number) - 1}`
+                                        : "javascript:void(0)"}
+                                    class="flex gap-2 {Number($page.params.episode_number) !== 1
+                                        ? 'text-black'
+                                        : 'pointer-events-none text-zinc-500'}"
+                                >
+                                    <ChevronsRight
+                                        class="rotate-180"
+                                        width="24"
+                                        height="24"
+                                    />
+                                    Previous
+                                </a>
+                            </div>
+
+                            <div class="flex gap-4 text-black">
+                                {#if $video_player_width === "wide"}
+                                    <p class="flex items-center">Shrink</p>
+                                    <button
+                                        class="btn-square btn-xs btn"
+                                        on:click={() => {
+                                            $video_player_width = "normal";
+                                        }}
+                                    >
+                                        <MaximizeInward
+                                            width="20"
+                                            height="20"
+                                        />
+                                    </button>
+                                {:else if $video_player_width === "normal"}
+                                    <p class="flex items-center">Expand</p>
+                                    <button
+                                        class="btn-square btn-xs btn"
+                                        on:click={() => {
+                                            $video_player_width = "wide";
+                                        }}
+                                    >
+                                        <MaximizeOutward
+                                            width="25"
+                                            height="25"
+                                        />
+                                    </button>
+                                {/if}
+                            </div>
+
+                            <div class="flex gap-7">
+                                <a
+                                    href={Number($page.params.episode_number) !==
+                                    anime_data?.episodes_count
+                                        ? `./${Number($page.params.episode_number) + 1}`
+                                        : "javascript:void(0)"}
+                                    class="flex gap-2 {Number($page.params.episode_number) !==
+                                    anime_data?.episodes_count
+                                        ? 'text-black'
+                                        : 'pointer-events-none text-zinc-500'}"
+                                >
+                                    Next
+                                    <ChevronsRight
+                                        width="24"
+                                        height="24"
+                                    />
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {#if $video_player_width === "normal"}
                         <div
                             class="divider divider-horizontal ml-24 h-[250px] self-center before:bg-info after:bg-info"
                         />
                     {/if}
+
                     <div
-                        class="flex {videoPlayerWidth === 'normal' ? 'ml-24 flex-col' : 'flex-row'}"
+                        class="flex {$video_player_width === 'normal'
+                            ? 'ml-24 flex-col'
+                            : 'mt-16 w-full flex-row justify-between'}"
                     >
                         <div class="flex flex-col">
                             <span class="font-bold text-white">Episodes</span>
-                            <div class="mt-8 grid w-[340px] grid-cols-8 gap-y-4 gap-x-2 self-start">
+                            <div
+                                class="mt-8 grid {$video_player_width === 'normal'
+                                    ? 'w-[340px] grid-cols-8'
+                                    : $video_player_width === 'wide' || 'mobile'
+                                    ? 'w-[490px] grid-cols-12'
+                                    : ''} gap-x-2 gap-y-4 self-start"
+                            >
                                 {#each Array(anime_data?.episodes_count).fill(0) as _, index}
                                     {@const actual_index = index >= 0 ? index + 1 : index}
                                     {@const button_active =
@@ -158,10 +233,16 @@
                                 {/each}
                             </div>
                         </div>
-                        <div
-                            class="divider mt-10 mb-16 w-[200px] self-center before:bg-info after:bg-info"
-                        />
-                        <div class="flex flex-row">
+                        {#if $video_player_width === "normal"}
+                            <div
+                                class="divider mb-16 mt-10 w-[200px] self-center before:bg-info after:bg-info"
+                            />
+                        {:else if $video_player_width === "wide"}
+                            <div
+                                class="divider divider-horizontal mb-16 mt-10 h-[200px] self-center before:bg-info after:bg-info"
+                            />
+                        {/if}
+                        <div class="hidden flex-row md:flex">
                             <anime-image-card class="card flex h-[150px] w-[100px] self-center">
                                 <img
                                     class="rounded-lg object-contain"
@@ -171,7 +252,11 @@
                                     height="150"
                                 />
                             </anime-image-card>
-                            <anime-info class="ml-9 w-36">
+                            <anime-info
+                                class="ml-9 w-36 {$video_player_width === 'wide'
+                                    ? 'self-center'
+                                    : ''} :"
+                            >
                                 <p class="self-end text-lg font-bold leading-5 text-white">
                                     {anime_data?.name}
                                 </p>
