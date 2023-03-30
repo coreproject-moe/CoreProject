@@ -1,83 +1,113 @@
-import { get } from "svelte/store";
-
-import { page } from "$app/stores";
-
-export class Jikan {
-    private BASE_URL = `https://api.jikan.moe/v4/anime`;
-
-    public id = (id: number | string) => {
-        return `${this.BASE_URL}/${id}/full`;
-    };
-}
+import _ from "lodash";
 
 export class UrlMaps {
     public DOMAIN = "https://backend.coreproject.moe";
     private BASE_URL = this.DOMAIN + "/api/v1";
 
-    public anime = () => {
-        return `${this.BASE_URL}/anime`;
-    };
-
+    // Url Declaration
     public id = (id: number | string) => {
-        return `${this.BASE_URL}/anime/${id}`;
-    };
-
-    public mal_id = (id: number | string) => {
-        return `${this.BASE_URL}/anime?mal_id=${id}`;
-    };
-
-    public kitsu_id = (id: number | string) => {
-        return `${this.BASE_URL}/anime?kitsu_id=${id}`;
-    };
-
-    public anilist_id = (id: number | string) => {
-        return `${this.BASE_URL}/anime?anilist_id=${id}`;
-    };
-
-    public genre = (id: number | string) => {
-        return `${this.BASE_URL}/anime/${id}/genres`;
+        return new URL(`${this.BASE_URL}/anime/${id}`);
     };
 
     public episode = (id: number | string) => {
-        return `${this.BASE_URL}/anime/${id}/episodes`;
+        return new URL(`${this.BASE_URL}/anime/${id}/episodes`);
     };
 
     public episode_number = (anime_id: number | string, episode_number: number | string) => {
-        return `${this.BASE_URL}/anime/${anime_id}/episodes/${episode_number}`;
+        return new URL(`${this.BASE_URL}/anime/${anime_id}/episodes/${episode_number}`);
     };
 
     public get media_url() {
         // return process.env.NODE_ENV === "development" ? get(page).url.origin : "/media";
-        return get(page).url.origin;
+        return "";
     }
 
     public user_info = () => {
-        return `${this.BASE_URL}/user/`;
+        return new URL(`${this.BASE_URL}/user/`);
     };
 
     public signup = () => {
-        return `${this.BASE_URL}/user/signup`;
+        return new URL(`${this.BASE_URL}/user/signup`);
     };
 
     public login = () => {
-        return `${this.BASE_URL}/user/login`;
+        return new URL(`${this.BASE_URL}/user/login`);
     };
 
     public username_validity = () => {
-        return `${this.BASE_URL}/user/username_validity`;
+        return new URL(`${this.BASE_URL}/user/username_validity`);
+    };
+
+    // Searchable endpoints
+    public anime = ({
+        mal_id,
+        kitsu_id,
+        anilist_id,
+        name,
+        genres,
+        themes,
+        studios,
+        producers,
+        characters,
+        staffs
+    }: {
+        mal_id?: number;
+        kitsu_id?: number;
+        anilist_id?: number;
+        name?: string;
+        genres?: string;
+        themes?: string;
+        studios?: string;
+        producers?: string;
+        characters?: string;
+        staffs?: string;
+    }) => {
+        const url = new URL(`${this.BASE_URL}/anime`);
+        const searchObject = _.pickBy({
+            mal_id: mal_id ?? 0,
+            kitsu_id: kitsu_id ?? 0,
+            anilist_id: anilist_id ?? 0,
+            name: name ?? "",
+            genres: genres ?? "",
+            themes: themes ?? "",
+            studios: studios ?? "",
+            producers: producers ?? "",
+            characters: characters ?? "",
+            staffs: staffs ?? ""
+        });
+        for (const key in searchObject) url.searchParams.append(key, searchObject[key] as string);
+        return url;
+    };
+
+    public genre = ({
+        id,
+        name,
+        mal_id
+    }: {
+        id: number | string;
+        name?: string;
+        mal_id?: string;
+    }) => {
+        const url = new URL(`${this.BASE_URL}/anime/${id}/genres`);
+        const searchObject = _.pickBy({
+            name: name ?? "",
+            mal_id: mal_id ?? 0
+        });
+        for (const key in searchObject) url.searchParams.append(key, searchObject[key] as string);
+        return url;
     };
 
     // Feeds
     public anime_feed = () => {
-        return `${this.DOMAIN}/feed/anime/`;
+        return new URL(`${this.DOMAIN}/feed/anime/`);
     };
     public character_feed = () => {
-        return `${this.DOMAIN}/feed/character/`;
+        return new URL(`${this.DOMAIN}/feed/character/`);
     };
     public staff_feed = () => {
-        return `${this.DOMAIN}/feed/staff/`;
+        return new URL(`${this.DOMAIN}/feed/staff/`);
     };
     public producer_feed = () => {
-        return `${this.DOMAIN}/feed/producer/`;
+        return new URL(`${this.DOMAIN}/feed/producer/`);
     };
 }

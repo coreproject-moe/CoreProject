@@ -9,7 +9,7 @@ export const load = (async ({
     const backend_mapping = new UrlMaps();
 
     const anime = async () => {
-        const url = backend_mapping.anilist_id(params.id);
+        const url = backend_mapping.anime({ anilist_id: Number(params.id) });
         const data_response = await fetch(url);
         const data: {
             items: {

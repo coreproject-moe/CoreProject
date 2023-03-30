@@ -47,12 +47,7 @@
         const target = e.target as HTMLInputElement;
         const value = target.value;
         if (value) {
-            const res = await fetch(
-                `${backend_mapping.anime()}?` +
-                    new URLSearchParams({
-                        name: value
-                    })
-            );
+            const res = await fetch(backend_mapping.anime({ name: value }));
             if (res.ok) {
                 const data = await res.json();
                 const item = data["items"][0];
