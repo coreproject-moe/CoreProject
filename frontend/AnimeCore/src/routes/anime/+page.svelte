@@ -76,7 +76,7 @@
             on:swipe={swipeHandler}
         >
             <div class="absolute z-10 w-screen">
-                <div class="pt-8 pl-6 pb-0 md:pr-[72px] md:pl-20">
+                <div class="pb-0 pl-6 pt-8 md:pl-20 md:pr-[72px]">
                     <Navbar />
                 </div>
             </div>
@@ -105,7 +105,7 @@
             {/each}
         </div>
     </div>
-    <div class="carousel-item snap-always">
+    <div class="carousel-item block snap-always md:hidden">
         <GenreSlide />
     </div>
     <div class="carousel-item snap-always">
