@@ -91,6 +91,7 @@
                             {data}
                             {addOneToMainHeroSlideActiveIndex}
                             {minusOneToMainHeroSlideActiveIndex}
+                            mal_id={item.mal_id}
                             animeTitle={item.animeTitle}
                             animeSummary={item.animeSummary}
                             animeEpisodeCount={item.animeEpisodeCount}

@@ -1,5 +1,6 @@
 [
     {
+        "mal_id": 12189,
         "animeStudio": "Kyoto Animations",
         "animeTitle": "Hyouka",
         "animeAirTime": "Spring 2012",
@@ -10,6 +11,7 @@
         "tags": ["Mystery", "Slice of Life"]
     },
     {
+        "mal_id": 30831,
         "animeStudio": "Studio DEEN",
         "animeTitle": "KonoSuba",
         "animeAirTime": "Spring 2012",
@@ -20,6 +22,7 @@
         "tags": ["Adventure", "Comedy", "Ecchi", "Fantasy"]
     },
     {
+        "mal_id": 31580,
         "animeEpisodeCount": 13,
         "animeStudio": "Polygon Pictures",
         "animeAirTime": "Winter 2016",
@@ -30,6 +33,7 @@
         "tags": ["Action", "Horror", "Mystery", "Supernatural"]
     },
     {
+        "mal_id": 40748,
         "animeEpisodeCount": 24,
         "animeStudio": "MAPPA",
         "animeAirTime": "Fall 2020",
@@ -40,6 +44,7 @@
         "tags": ["Action", "Drama", "Supernatural"]
     },
     {
+        "mal_id": 38555,
         "animeEpisodeCount": 12,
         "animeStudio": "SILVER LINK",
         "animeAirTime": "Spring 2020",
@@ -50,6 +55,7 @@
         "tags": ["Comedy", "Fantasy", "Romance", "Slice of Life"]
     },
     {
+        "mal_id": 35790,
         "animeEpisodeCount": 25,
         "animeStudio": "Kinema Citrus",
         "animeAirTime": "Winter 2019",
@@ -60,6 +66,7 @@
         "tags": ["Action", "Adventure", "Fantasy"]
     },
     {
+        "mal_id": 43608,
         "animeEpisodeCount": 13,
         "animeStudio": "A1-Pictures",
         "animeAirTime": "Spring 2022",
@@ -71,6 +78,7 @@
     },
 
     {
+        "mal_id": 21843,
         "animeEpisodeCount": 12,
         "animeStudio": "MAPPA",
         "animeAirTime": "Fall 2014",
@@ -81,6 +89,7 @@
         "tags": ["Action", "Adventure", "Fantasy", "Supernatural"]
     },
     {
+        "mal_id": 31043,
         "animeEpisodeCount": 12,
         "animeStudio": "A1-Pictures",
         "animeAirTime": "Winter 2016",
@@ -91,6 +100,7 @@
         "tags": ["Comedy", "Psychological", "Romance", "Slice of Life"]
     },
     {
+        "mal_id": 31478,
         "animeEpisodeCount": 12,
         "animeStudio": "bones",
         "animeAirTime": "Spring 2016",

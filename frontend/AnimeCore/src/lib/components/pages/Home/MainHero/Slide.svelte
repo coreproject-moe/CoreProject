@@ -26,6 +26,7 @@
         backgroundBanner: string;
         tags: string[];
     }>;
+    export let mal_id: number;
     export let mainHeroSlideActiveIndex: number;
     export let animeTitle: string;
     export let animeSummary: string;
@@ -97,7 +98,7 @@
                 style="--tw-bg-opacity:0"
             >
                 <div
-                    class="grid min-w-full auto-cols-max grid-flow-col content-end justify-center  pb-8 md:justify-between"
+                    class="grid min-w-full auto-cols-max grid-flow-col content-end justify-center pb-8 md:justify-between"
                 >
                     <div class="hidden md:flex" />
                     <div class="flex items-center gap-3">
@@ -241,19 +242,23 @@
                         {/each}
                     </div>
                     <div class="mt-6 flex gap-4">
-                        <button
+                        <a
+                            href="/anime/mal/{mal_id}"
                             aria-label="Play"
-                            class="btn-secondary btn-md btn rounded-[16px] px-5 md:btn-lg "
+                            class="btn-secondary btn-md btn rounded-[16px] px-5 md:btn-lg"
                         >
                             <Play
                                 width={24}
                                 height={24}
                             />
-                        </button>
+                        </a>
                         <button
                             class="btn-outline btn-secondary btn-md btn rounded-[16px] border-4 md:btn-lg"
                         >
-                            <div class="flex gap-2 text-lg font-bold">
+                            <a
+                                href="/anime/mal/{mal_id}"
+                                class="flex gap-2 text-lg font-bold"
+                            >
                                 Details
                                 <span class="flex items-center">
                                     <ChevronsRight
@@ -261,7 +266,7 @@
                                         width={24}
                                     />
                                 </span>
-                            </div>
+                            </a>
                         </button>
                     </div>
                 </div>
