@@ -79,16 +79,18 @@ export class UrlMaps {
         return url;
     };
 
-    public genre = ({
-        id,
-        name,
-        mal_id
-    }: {
-        id: number | string;
-        name?: string;
-        mal_id?: string;
-    }) => {
-        const url = new URL(`${this.BASE_URL}/anime/${id}/genres`);
+    public genre = ({ name, mal_id }: { name?: string; mal_id?: string }) => {
+        const url = new URL(`${this.BASE_URL}/anime/genres`);
+        const searchObject = _.pickBy({
+            name: name ?? "",
+            mal_id: mal_id ?? 0
+        });
+        for (const key in searchObject) url.searchParams.append(key, searchObject[key] as string);
+        return url;
+    };
+
+    public theme = ({ name, mal_id }: { name?: string; mal_id?: string }) => {
+        const url = new URL(`${this.BASE_URL}/anime/themes`);
         const searchObject = _.pickBy({
             name: name ?? "",
             mal_id: mal_id ?? 0

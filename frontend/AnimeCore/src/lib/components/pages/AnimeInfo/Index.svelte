@@ -20,7 +20,7 @@
     }>;
 
     import StarRating from "svelte-star-rating";
-    import isEmpty from "lodash.isempty";
+    import _ from "lodash";
 
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
@@ -216,7 +216,7 @@
                                 {/await}
                             </div>
                             <button
-                                class="btn-disabled glass  btn-sm btn mt-5 hidden flex-nowrap gap-4 text-sm normal-case text-white md:flex"
+                                class="btn-disabled glass btn-sm btn mt-5 hidden flex-nowrap gap-4 text-sm normal-case text-white md:flex"
                                 style="--glass-blur:20px;--glass-reflex-degree:90deg;--glass-reflex-opacity:0;--glass-opacity:10%"
                             >
                                 <div>
@@ -333,7 +333,7 @@
                                 </button>
                             </p>
                             {#each details_mapping as item}
-                                {#if !isEmpty(item)}
+                                {#if !_.isEmpty(item)}
                                     <div class="flex flex-col">
                                         <span class="font-bold capitalize">
                                             {Object.keys(item)}
