@@ -69,7 +69,7 @@ def get_individual_producer_info(
 
 
 @router.patch("/{str:producer_id}/", response=ProducerGETSchema, auth=AuthBearer())
-def get_individual_producer_info(
+def patch_individual_producer_info(
     request: HttpRequest,
     producer_id: int,
     # Optional

@@ -32,7 +32,8 @@ django-admin-hstore-widget = "^1.2.1"   # https://github.com/PokaInc/django-admi
 # 3rd Party ( Model Fields )
 django-colorfield = "*"
 # Rest framework
-django_ninja = { git = 'https://github.com/baseplate-admin/django-ninja.git', branch='master'}
+django_ninja = "*"
+ninja-put-patch-file-upload-middleware = {git = "https://github.com/baseplate-admin/ninja_put_patch_file_upload_middleware.git"}
 pydantic = {extras = ["email"], version = "*"}
 # ===================================================
 httpx = {extras = ['http2'], version = "*"}
