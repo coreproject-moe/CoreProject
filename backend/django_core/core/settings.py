@@ -87,8 +87,7 @@ INSTALLED_APPS = [
     # Tailwind CSS
     "tailwind",
     "tailwind_src",  # Our custom app
-    # Api ( Django-Ninja )
-    "ninja",
+    # Api
     "apps.api",
     # OpenGraph
     "apps.opengraph",
@@ -120,8 +119,6 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     # Cors headers
     "corsheaders.middleware.CorsMiddleware",
-    # Allow Patch files
-    "ninja.middlewares.process_put_patch",
     # Django
     "django.middleware.cache.UpdateCacheMiddleware",  # Cache
     "django.middleware.common.CommonMiddleware",
