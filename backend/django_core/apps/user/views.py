@@ -13,7 +13,6 @@ from django.shortcuts import render
 from .forms import UsernameWithDiscriminatorForm
 from .models import CustomUser
 
-
 # Create your views here
 
 

@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
+
 from . import views
 
 # from django.views import debug
@@ -51,7 +52,7 @@ urlpatterns = [
     path("opengraph/", include("apps.opengraph.urls")),
     #   Api
     # ========
-    path("api/", include("apps.api.urls")),
+    path("api/v2/", include("apps.api.urls")),
 ]
 
 if settings.DEBUG:

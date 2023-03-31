@@ -88,6 +88,8 @@ INSTALLED_APPS = [
     "tailwind",
     "tailwind_src",  # Our custom app
     # Api
+    "rest_framework",
+    "rest_framework.authtoken",
     "apps.api",
     # OpenGraph
     "apps.opengraph",
@@ -128,9 +130,14 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    # Django defender
-    "defender.middleware.FailedLoginMiddleware",
 ]
+
+# I Actually locked myself out here
+if not DEBUG:
+    MIDDLEWARE += [
+        # Django defender
+        "defender.middleware.FailedLoginMiddleware",
+    ]
 
 if DEBUG:
     MIDDLEWARE += (

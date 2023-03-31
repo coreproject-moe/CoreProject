@@ -32,7 +32,8 @@ django-admin-hstore-widget = "^1.2.1"   # https://github.com/PokaInc/django-admi
 # 3rd Party ( Model Fields )
 django-colorfield = "*"
 # Rest framework
-
+djangorestframework = "^3.14.0"
+django-filter = "^23.1"
 # ===================================================
 httpx = {extras = ['http2'], version = "*"}
 # Application servers
@@ -46,6 +47,7 @@ colorthief = "^0.2.1"
 # Tailwind CSS
 django-tailwind = "^3.5.0"
 django-defender = "^0.9.7"
+
 
 
 

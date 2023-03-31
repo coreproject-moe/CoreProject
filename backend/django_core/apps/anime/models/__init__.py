@@ -7,9 +7,8 @@ from ...characters.models import CharacterModel
 from ...episodes.models import EpisodeModel
 from ...producers.models import ProducerModel
 from ...staffs.models import StaffModel
-
-from .anime_openings_and_endings import AnimeOpeningModel, AnimeEndingModel
 from .anime_genre import AnimeGenreModel
+from .anime_openings_and_endings import AnimeEndingModel, AnimeOpeningModel
 from .anime_theme import AnimeThemeModel
 
 cover_upload_pattern = FilePattern(filename_pattern="cover/{uuid:s}{ext}")

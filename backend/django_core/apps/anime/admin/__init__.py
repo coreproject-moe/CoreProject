@@ -140,8 +140,8 @@ class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel]):
 
 
 from .anime_genre import AnimeGenreAdmin as AnimeGenreAdmin
-from .anime_theme import AnimeThemeAdmin as AnimeThemeAdmin
 from .anime_openings_and_endings import (
     AnimeEndingAdmin as AnimeEndingAdmin,
     AnimeOpeningAdmin as AnimeOpeningAdmin,
 )
+from .anime_theme import AnimeThemeAdmin as AnimeThemeAdmin
