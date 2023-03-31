@@ -58,7 +58,7 @@
         "svelte-star-rating": "^2.0.1",
         "swiper": "^8.4.7",
         "tailwind-scrollbar-hide": "^1.1.7",
-        "tailwindcss": "^3.3.0",
+        "tailwindcss": "^3.3.1",
         "tslib": "^2.5.0",
         "typescript": "^5.0.2",
         "uuid": "^9.0.0",
