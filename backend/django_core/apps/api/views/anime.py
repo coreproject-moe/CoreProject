@@ -13,8 +13,9 @@ from rest_framework.response import Response
 from ..filters.anime import AnimeFilter
 from ..serializers.anime import (
     AnimeGenreSerializer,
-    AnimeSerializer,
     AnimeThemeSerializer,
+    AnimeGETSerializer,
+    AnimePOSTSerializer,
 )
 from ..serializers.character import CharacterSerializer
 from ..serializers.producer import ProducerSerializer
@@ -32,9 +33,14 @@ class AnimeViewSet(
     filter_backends = [DjangoFilterBackend]
     filter_class = AnimeFilter
     filterset_fields = ("name",)
-    serializer_class = AnimeSerializer
+    serializer_class = AnimePOSTSerializer
     queryset = AnimeModel.objects.all()
     lookup_field = "pk"
+
+    def get_serializer_class(self):
+        if self.action == "retrieve" or self.action == "list":
+            return AnimeGETSerializer
+        return AnimePOSTSerializer
 
     @action(detail=True, filter_backends=[])
     def genres(self, *args, **kwargs) -> Response:
@@ -75,7 +81,7 @@ class AnimeViewSet(
     @action(detail=True, filter_backends=[])
     def recommendations(self, *args, **kwargs) -> Response:
         query: AnimeModel = self.get_object()
-        serializer = AnimeSerializer(query.recommendations, many=True)
+        serializer = AnimeGETSerializer(query.recommendations, many=True)
         return Response(serializer.data)
 
     @action(detail=True, filter_backends=[])

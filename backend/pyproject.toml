@@ -67,6 +67,7 @@ ruff = "*"
 # Mypy
 mypy = "*"
 django_stubs = {extras = ["compatible_mypy"], version = "*"}
+djangorestframework-stubs = {extras = ["compatible-mypy"], version = "^1.10.0"}
 # Types
 types_redis = "*"
 # Task Runner
@@ -117,7 +118,10 @@ warn_unused_ignores = true
 warn_unused_configs = true
 check_untyped_defs = true
 follow_imports = "silent"
-plugins = ["mypy_django_plugin.main"]
+plugins = [
+    "mypy_django_plugin.main",
+    'mypy_drf_plugin.main'
+]
 exclude = [
     "migrations"
 ]
