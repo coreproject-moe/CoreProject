@@ -43,6 +43,12 @@ class AnimeViewSet(
             return AnimeGETSerializer
         return AnimePOSTSerializer
 
+    @action(detail=False, filter_backends=[], url_path="themes")
+    def themes_all(self, *args, **kwargs):
+        query = AnimeThemeModel.objects.filter(type="anime")
+        serializer = AnimeThemeSerializer(instance=query, many=True)
+        return Response(serializer.data)
+
     @action(detail=False, filter_backends=[], url_path=r"(?P<pk>\d+)/genres")
     def genres(self, *args, **kwargs) -> Response:
         query: AnimeModel = AnimeModel.objects.get(pk=kwargs.get("pk"))
