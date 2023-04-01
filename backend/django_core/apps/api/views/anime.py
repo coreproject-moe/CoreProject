@@ -37,6 +37,8 @@ class AnimeViewSet(
     serializer_class = AnimePOSTSerializer
     queryset = AnimeModel.objects.all()
     lookup_field = "pk"
+    # Capture only integers
+    lookup_value_regex = "\d+"
 
     def get_serializer_class(self):
         if self.action == "retrieve" or self.action == "list":
@@ -44,55 +46,55 @@ class AnimeViewSet(
         return AnimePOSTSerializer
 
     @action(detail=False, filter_backends=[], url_path="themes")
-    def themes_all(self, *args, **kwargs):
+    def _themes_(self, *args, **kwargs):
         query = AnimeThemeModel.objects.filter(type="anime")
         serializer = AnimeThemeSerializer(instance=query, many=True)
         return Response(serializer.data)
 
-    @action(detail=False, filter_backends=[], url_path=r"(?P<pk>\d+)/genres")
+    @action(detail=True, filter_backends=[])
     def genres(self, *args, **kwargs) -> Response:
-        query: AnimeModel = AnimeModel.objects.get(pk=kwargs.get("pk"))
+        query: AnimeModel = self.get_object()
         serializer = AnimeGenreSerializer(query.genres, many=True)
         return Response(serializer.data)
 
-    @action(detail=False, filter_backends=[], url_path=r"(?P<pk>\d+)/themes")
+    @action(detail=True, filter_backends=[])
     def themes(self, *args, **kwargs) -> Response:
-        query: AnimeModel = AnimeModel.objects.get(pk=kwargs.get("pk"))
+        query: AnimeModel = self.get_object()
         serializer = AnimeThemeSerializer(query.themes, many=True)
         return Response(serializer.data)
 
-    @action(detail=False, filter_backends=[], url_path=r"(?P<pk>\d+)/characters")
+    @action(detail=True, filter_backends=[])
     def characters(self, *args, **kwargs) -> Response:
-        query: AnimeModel = AnimeModel.objects.get(pk=kwargs.get("pk"))
+        query: AnimeModel = self.get_object()
         serializer = CharacterSerializer(query.characters, many=True)
         return Response(serializer.data)
 
-    @action(detail=False, filter_backends=[], url_path=r"(?P<pk>\d+)/studios")
+    @action(detail=True, filter_backends=[])
     def studios(self, *args, **kwargs) -> Response:
-        query: AnimeModel = AnimeModel.objects.get(pk=kwargs.get("pk"))
+        query: AnimeModel = self.get_object()
         serializer = ProducerSerializer(query.studios, many=True)
         return Response(serializer.data)
 
-    @action(detail=False, filter_backends=[], url_path=r"(?P<pk>\d+)/producers")
+    @action(detail=True, filter_backends=[])
     def producers(self, *args, **kwargs) -> Response:
-        query: AnimeModel = AnimeModel.objects.get(pk=kwargs.get("pk"))
+        query: AnimeModel = self.get_object()
         serializer = ProducerSerializer(query.producers, many=True)
         return Response(serializer.data)
 
-    @action(detail=False, filter_backends=[], url_path=r"(?P<pk>\d+)/staffs")
+    @action(detail=True, filter_backends=[])
     def staffs(self, *args, **kwargs) -> Response:
-        query: AnimeModel = AnimeModel.objects.get(pk=kwargs.get("pk"))
+        query: AnimeModel = self.get_object()
         serializer = StaffSerializer(query.staffs, many=True)
         return Response(serializer.data)
 
-    @action(detail=False, filter_backends=[], url_path=r"(?P<pk>\d+)/recommendations")
+    @action(detail=True, filter_backends=[])
     def recommendations(self, *args, **kwargs) -> Response:
-        query: AnimeModel = AnimeModel.objects.get(pk=kwargs.get("pk"))
+        query: AnimeModel = self.get_object()
         serializer = AnimeGETSerializer(query.recommendations, many=True)
         return Response(serializer.data)
 
-    @action(detail=False, filter_backends=[], url_path=r"(?P<pk>\d+)/episodes")
+    @action(detail=True, filter_backends=[])
     def episodes(self, *args, **kwargs) -> Response:
-        query: AnimeModel = AnimeModel.objects.get(pk=kwargs.get("pk"))
+        query: AnimeModel = self.get_object()
         serializer = EpisodeSerializer(query.episodes, many=True)
         return Response(serializer.data)
