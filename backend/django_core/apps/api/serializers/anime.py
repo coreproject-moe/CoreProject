@@ -27,6 +27,9 @@ class AnimeSerializer(serializers.ModelSerializer):
         ret["characters"] = reverse_lazy("anime-characters", args=[instance.pk])
         ret["studios"] = reverse_lazy("anime-studios", args=[instance.pk])
         ret["producers"] = reverse_lazy("anime-producers", args=[instance.pk])
+        ret["staffs"] = reverse_lazy("anime-staffs", args=[instance.pk])
+        ret["recommendations"] = reverse_lazy("anime-recommendations", args=[instance.pk])
+        ret["episodes"] = reverse_lazy("anime-episodes", args=[instance.pk])
         return ret
 
 
