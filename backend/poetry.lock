@@ -829,6 +829,22 @@ coreapi = ["coreapi (>=2.0.0)"]
 markdown = ["types-Markdown (>=0.1.5)"]
 
 [[package]]
+name = "drf-nested-routers"
+version = "0.93.4"
+description = "Nested resources for the Django Rest Framework"
+category = "main"
+optional = false
+python-versions = ">=3.5"
+files = [
+    {file = "drf-nested-routers-0.93.4.tar.gz", hash = "sha256:01aa556b8c08608bb74fb34f6ca065a5183f2cda4dc0478192cc17a2581d71b0"},
+    {file = "drf_nested_routers-0.93.4-py2.py3-none-any.whl", hash = "sha256:996b77f3f4dfaf64569e7b8f04e3919945f90f95366838ca5b8bed9dd709d6c5"},
+]
+
+[package.dependencies]
+Django = ">=1.11"
+djangorestframework = ">=3.6.0"
+
+[[package]]
 name = "gunicorn"
 version = "20.1.0"
 description = "WSGI HTTP Server for UNIX"
@@ -2058,4 +2074,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "5abd9b2a0d3c8be0d8001dc13b361a10a586a4feb88e62abad075306d56ca881"
+content-hash = "6079149a3fa7e142f572bab5eeed14f96db3cef6589fa9ef226d1ada64840d87"
