@@ -13,7 +13,6 @@ from rest_framework.mixins import (
 )
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.request import Request
 from ..filters.anime import AnimeFilter
 from ..serializers.anime import (
     AnimeGenreSerializer,
@@ -65,17 +64,17 @@ class AnimeViewSet(
     )
     def anime_themes(self, *args, **kwargs):
         if self.request.method == "GET":
-            query = AnimeGenreModel.objects.filter(type="anime")
+            query = AnimeThemeModel.objects.filter(type="anime")
 
             if theme_pk := kwargs.get("theme_pk"):
                 query = get_object_or_404(query, pk=theme_pk)
-                serializer = AnimeGenreSerializer(instance=query)
+                serializer = AnimeThemeSerializer(instance=query)
             else:
-                serializer = AnimeGenreSerializer(instance=query, many=True)
+                serializer = AnimeThemeSerializer(instance=query, many=True)
             return Response(serializer.data)
 
         elif self.request.method == "POST":
-            serializer = AnimeGenreSerializer(data=self.request.data)
+            serializer = AnimeThemeSerializer(data=self.request.data)
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -83,9 +82,9 @@ class AnimeViewSet(
 
         elif self.request.method == "PUT":
             if theme_pk := kwargs.get("theme_pk"):
-                query = AnimeGenreModel.objects.filter(type="anime").get(pk=theme_pk)
+                query = AnimeThemeModel.objects.filter(type="anime").get(pk=theme_pk)
                 instance = get_object_or_404(query, pk=theme_pk)
-                serializer = AnimeGenreSerializer(
+                serializer = AnimeThemeSerializer(
                     instance=instance, data=self.request.data, partial=True
                 )
                 if serializer.is_valid():
