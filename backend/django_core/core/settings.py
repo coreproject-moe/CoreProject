@@ -121,7 +121,7 @@ MIDDLEWARE = [
     # Cors headers
     "corsheaders.middleware.CorsMiddleware",
     # Allow Patch files
-    "ninja.middlewares.process_put_patch",
+    "ninja_put_patch_file_upload_middleware.middlewares.process_put_patch",
     # Django
     "django.middleware.cache.UpdateCacheMiddleware",  # Cache
     "django.middleware.common.CommonMiddleware",

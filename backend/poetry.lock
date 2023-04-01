@@ -1146,15 +1146,15 @@ version = "0.1.0"
 description = "A middleware that allows user to upload files using PUT / Patch"
 category = "main"
 optional = false
-python-versions = "^3.7"
-files = []
-develop = false
+python-versions = ">=3.7,<4.0"
+files = [
+    {file = "ninja_put_patch_file_upload_middleware-0.1.0-py3-none-any.whl", hash = "sha256:a982c52e1c29d0fd376a3aa10819288cb007ecb54566e8e562a272e53f8b2a1f"},
+    {file = "ninja_put_patch_file_upload_middleware-0.1.0.tar.gz", hash = "sha256:9dec00cc4edd03d2be4f9658010c9f1019d70333621f02a3fe2ab998129d94ab"},
+]
 
-[package.source]
-type = "git"
-url = "https://github.com/baseplate-admin/ninja_put_patch_file_upload_middleware.git"
-reference = "HEAD"
-resolved_reference = "7d61cc7deb3589944b0d45cb89d238dfa38bfa10"
+[package.dependencies]
+asgiref = ">=3.6,<4.0"
+django = ">=3.2"
 
 [[package]]
 name = "packaging"
@@ -1993,4 +1993,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "8119ca2807a862fc481689b0127cff268d5b8e77a0d29f7d2f31223f38165aad"
+content-hash = "c30c405c84a839a419933a794882b4083e106646160633632356f04611c8b197"
