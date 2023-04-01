@@ -1,4 +1,5 @@
 from apps.anime.models import AnimeModel
+from apps.anime.models.anime_genre import AnimeGenreModel
 from apps.anime.models.anime_theme import AnimeThemeModel
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
@@ -14,14 +15,14 @@ from rest_framework.response import Response
 from ..filters.anime import AnimeFilter
 from ..serializers.anime import (
     AnimeGenreSerializer,
-    AnimeThemeSerializer,
     AnimeGETSerializer,
     AnimePOSTSerializer,
+    AnimeThemeSerializer,
 )
 from ..serializers.character import CharacterSerializer
+from ..serializers.episode import EpisodeSerializer
 from ..serializers.producer import ProducerSerializer
 from ..serializers.staff import StaffSerializer
-from ..serializers.episode import EpisodeSerializer
 
 
 class AnimeViewSet(
@@ -45,10 +46,16 @@ class AnimeViewSet(
             return AnimeGETSerializer
         return AnimePOSTSerializer
 
-    @action(detail=False, filter_backends=[], url_path="themes")
-    def _themes_(self, *args, **kwargs):
+    @action(detail=False, methods=["GET", "POST"], filter_backends=[], url_path="themes")
+    def anime_themes(self, *args, **kwargs):
         query = AnimeThemeModel.objects.filter(type="anime")
         serializer = AnimeThemeSerializer(instance=query, many=True)
+        return Response(serializer.data)
+
+    @action(detail=False, methods=["GET", "POST"], filter_backends=[], url_path="themes")
+    def anime_genres(self, *args, **kwargs):
+        query = AnimeGenreModel.objects.filter(type="anime")
+        serializer = AnimeGenreSerializer(instance=query, many=True)
         return Response(serializer.data)
 
     @action(detail=True, filter_backends=[])
