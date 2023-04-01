@@ -1,10 +1,10 @@
 from apps.user.models import CustomUser
-from rest_framework import permissions
-from rest_framework.views import APIView
+from rest_framework import permissions, status
 from rest_framework.request import Request
 from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from ..serializers.user import UserSerializer
-from rest_framework import status
 
 
 class UserView(APIView):

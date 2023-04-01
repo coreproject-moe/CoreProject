@@ -88,9 +88,11 @@ INSTALLED_APPS = [
     "tailwind",
     "tailwind_src",  # Our custom app
     # Api
+    "apps.api",  # Our app
     "rest_framework",
     "rest_framework.authtoken",
-    "apps.api",
+    # Filtering
+    "django_filters",
     # OpenGraph
     "apps.opengraph",
     # Models
