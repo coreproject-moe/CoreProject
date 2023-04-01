@@ -58,20 +58,42 @@ class AnimeViewSet(
 
     @action(
         detail=False,
-        methods=["GET", "POST"],
+        methods=["GET", "POST", "PUT"],
         filter_backends=[],
         serializer_class=AnimeThemeSerializer,
         url_path=r"themes(/(?P<theme_pk>\d+))?/?",
     )
     def anime_themes(self, *args, **kwargs):
-        query = AnimeThemeModel.objects.filter(type="anime")
+        if self.request.method == "GET":
+            query = AnimeGenreModel.objects.filter(type="anime")
 
-        if theme_pk := kwargs.get("theme_pk"):
-            query = get_object_or_404(query, pk=theme_pk)
-            serializer = AnimeThemeSerializer(instance=query)
-        else:
-            serializer = AnimeThemeSerializer(instance=query, many=True)
-        return Response(serializer.data)
+            if theme_pk := kwargs.get("theme_pk"):
+                query = get_object_or_404(query, pk=theme_pk)
+                serializer = AnimeGenreSerializer(instance=query)
+            else:
+                serializer = AnimeGenreSerializer(instance=query, many=True)
+            return Response(serializer.data)
+
+        elif self.request.method == "POST":
+            serializer = AnimeGenreSerializer(data=self.request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        elif self.request.method == "PUT":
+            if theme_pk := kwargs.get("theme_pk"):
+                query = AnimeGenreModel.objects.filter(type="anime").get(pk=theme_pk)
+                instance = get_object_or_404(query, pk=theme_pk)
+                serializer = AnimeGenreSerializer(
+                    instance=instance, data=self.request.data, partial=True
+                )
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                raise exceptions.MethodNotAllowed("`theme_pk` is required for PUT request")
 
     @action(
         detail=False,
@@ -80,8 +102,8 @@ class AnimeViewSet(
         serializer_class=AnimeGenreSerializer,
         url_path=r"genres(/(?P<genre_pk>\d+))?/?",
     )
-    def anime_genres(self, request: Request, *args, **kwargs):
-        if request.method == "GET":
+    def anime_genres(self, *args, **kwargs):
+        if self.request.method == "GET":
             query = AnimeGenreModel.objects.filter(type="anime")
 
             if genre_pk := kwargs.get("genre_pk"):
@@ -91,19 +113,19 @@ class AnimeViewSet(
                 serializer = AnimeGenreSerializer(instance=query, many=True)
             return Response(serializer.data)
 
-        elif request.method == "POST":
-            serializer = AnimeGenreSerializer(data=request.data)
+        elif self.request.method == "POST":
+            serializer = AnimeGenreSerializer(data=self.request.data)
             if serializer.is_valid():
                 serializer.save()
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        elif request.method == "PUT":
+        elif self.request.method == "PUT":
             if genre_pk := kwargs.get("genre_pk"):
                 query = AnimeGenreModel.objects.filter(type="anime")
                 instance = get_object_or_404(query, pk=genre_pk)
                 serializer = AnimeGenreSerializer(
-                    instance=instance, data=request.data, partial=True
+                    instance=instance, data=self.request.data, partial=True
                 )
                 if serializer.is_valid():
                     serializer.save()
