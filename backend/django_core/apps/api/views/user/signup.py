@@ -1,11 +1,13 @@
 from apps.user.models import CustomUser
 from ninja import Form, Router
 from pydantic import EmailStr
+
 from django.http import HttpRequest
+
+from ...schemas.user import UserSchema
 
 # from django.conf import settings
 
-from ...schemas.user import UserSchema
 
 router = Router()
 

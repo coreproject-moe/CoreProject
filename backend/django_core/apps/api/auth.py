@@ -1,11 +1,34 @@
+import logging
+from typing import Any, Optional
+
 from apps.user.models import CustomUser
+from ninja.compatibility import get_headers
 from ninja.security import HttpBearer
-from .models import Token
+
+from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 from django.http import HttpRequest
 
+from .models import Token
+
+logger = logging.getLogger("django")
+
 
 class AuthBearer(HttpBearer):
+    def __call__(self, request: HttpRequest) -> Optional[Any]:
+        headers = get_headers(request)
+        auth_value = headers.get(self.header)
+        if not auth_value:
+            return AnonymousUser()  # if there is no key, we return AnonymousUser object
+        parts = auth_value.split(" ")
+
+        if parts[0].lower() != self.openapi_scheme:
+            if settings.DEBUG:
+                logger.error(f"Unexpected auth - '{auth_value}'")
+            return None
+        token = " ".join(parts[1:])
+        return self.authenticate(request, token)
+
     def authenticate(
         self,
         request: HttpRequest,

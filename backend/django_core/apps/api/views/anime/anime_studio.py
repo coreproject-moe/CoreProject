@@ -5,11 +5,11 @@ from apps.api.auth import AuthBearer
 from apps.user.models import CustomUser
 from ninja import Router
 
-from ....producers.models import ProducerModel
-from ...schemas.producers import ProducerGETSchema, ProducerPOSTSchema
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_list_or_404, get_object_or_404
 
+from ....producers.models import ProducerModel
+from ...schemas.producers import ProducerGETSchema, ProducerPOSTSchema
 
 router = Router()
 
