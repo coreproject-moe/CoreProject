@@ -1,7 +1,9 @@
 from apps.anime.models import AnimeModel, AnimeNameSynonymModel
 from ninja import ModelSchema
+
 from django.db.models import Avg
 from django.shortcuts import resolve_url
+
 from .anime_opening_and_ending import AnimeOpeningAndEndingGETSchema
 
 ## Observations from getting request from stack trace

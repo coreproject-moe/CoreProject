@@ -1,8 +1,9 @@
-from ninja import Router
 from apps.anime.models import AnimeModel
 from apps.characters.models import CharacterModel
 from apps.producers.models import ProducerModel
 from apps.staffs.models import StaffModel
+from ninja import Router
+
 from django.http import HttpRequest
 
 router = Router()

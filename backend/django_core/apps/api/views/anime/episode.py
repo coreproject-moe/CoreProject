@@ -1,13 +1,14 @@
 from http import HTTPStatus
 from typing import AnyStr
+
 from apps.anime.models import AnimeModel
 from apps.api.auth import AuthBearer
 from apps.episodes.models import EpisodeModel
 from apps.user.models import CustomUser
 from ninja import File, Form, Router
 from ninja.files import UploadedFile
-
 from pydantic import Json
+
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
 

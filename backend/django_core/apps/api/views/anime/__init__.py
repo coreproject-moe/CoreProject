@@ -1,7 +1,15 @@
 import datetime
 from http import HTTPStatus
+
 from apps.anime.models import AnimeModel, AnimeNameSynonymModel
+from apps.anime.models.anime_genre import AnimeGenreModel
+from apps.anime.models.anime_theme import AnimeThemeModel
+from apps.api.auth import AuthBearer
 from apps.api.filters.anime import AnimeInfoFilters
+from apps.characters.models import CharacterModel
+from apps.producers.models import ProducerModel
+from apps.staffs.models import StaffModel
+from apps.user.models import CustomUser
 from ninja import File, Form, Query, Router, UploadedFile
 from ninja.pagination import paginate
 
@@ -9,14 +17,6 @@ from django.db.models import Q, QuerySet
 from django.db.models.functions import Greatest
 from django.http import Http404, HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
-from apps.anime.models.anime_genre import AnimeGenreModel
-
-from apps.staffs.models import StaffModel
-from apps.api.auth import AuthBearer
-from apps.characters.models import CharacterModel
-from apps.user.models import CustomUser
-from apps.anime.models.anime_theme import AnimeThemeModel
-from apps.producers.models import ProducerModel
 
 try:
     from django.contrib.postgres.search import TrigramSimilarity

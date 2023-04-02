@@ -1,5 +1,6 @@
-from ..models.anime_openings_and_endings import AnimeEndingModel, AnimeOpeningModel
 from django.contrib import admin
+
+from ..models.anime_openings_and_endings import AnimeEndingModel, AnimeOpeningModel
 
 
 @admin.register(AnimeEndingModel)
