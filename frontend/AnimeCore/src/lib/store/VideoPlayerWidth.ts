@@ -25,7 +25,7 @@ export const video_player_width = writable<"normal" | "wide" | "mobile" | undefi
 );
 
 video_player_width.subscribe((value) => {
-    if (browser) {
+    if (browser && value !== "mobile") {
         localStorage.setItem("video_player_width", String(value));
     }
 });

@@ -53,15 +53,15 @@
     };
     const backend_mapping = new UrlMaps();
 
-    // let htmlIFrameElement: HTMLIFrameElement | undefined = undefined;
-    // $: {
-    //     if (htmlIFrameElement) {
-    //         // streamsb
-    //         let document = htmlIFrameElement.contentWindow?.document;
-    //         let htmlVidoeElement = document?.querySelector(".jw-video") as HTMLVideoElement;
-    //         htmlVidoeElement.currentTime;
-    //     }
-    // }
+    let htmlIFrameElement: HTMLIFrameElement | undefined = undefined;
+    $: {
+        if (htmlIFrameElement) {
+            // streamsb
+            let document = htmlIFrameElement.contentWindow?.document;
+            // get value from localStorage
+            // format is domain.id
+        }
+    }
 
     let mobile: boolean;
 
@@ -87,7 +87,7 @@
     <div class="absolute inset-0 grid h-screen w-screen">
         <div class="hero">
             <div class="grid h-full w-full">
-                <div class="pb-0 pl-6 pt-8 md:pl-20 md:pr-[72px]">
+                <div class="pb-0 pl-6 pr-6 pt-8 md:pl-20 md:pr-[72px]">
                     <Navbar />
                 </div>
                 <div
@@ -208,8 +208,10 @@
                             <div
                                 class="mt-8 grid {$video_player_width === 'normal'
                                     ? 'w-[340px] grid-cols-8'
-                                    : $video_player_width === 'wide' || 'mobile'
+                                    : $video_player_width === 'wide'
                                     ? 'w-[490px] grid-cols-12'
+                                    : $video_player_width === 'mobile'
+                                    ? 'w-full grid-cols-12'
                                     : ''} gap-x-2 gap-y-4 self-start"
                             >
                                 {#each Array(anime_data?.episodes_count).fill(0) as _, index}

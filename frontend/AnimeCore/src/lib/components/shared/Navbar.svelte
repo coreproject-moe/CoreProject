@@ -25,7 +25,7 @@
 
 <svelte:component this={SearchModal} />
 
-<div class="navbar bg-transparent">
+<div class="navbar justify-between bg-transparent">
     <div class="navbar-start hidden md:block">
         <label for={$modals.search}>
             <Search
@@ -104,7 +104,7 @@
                     {/if}
                     <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
                     <div
-                        class="dropdown-content menu rounded-box mt-24 flex w-[300px] flex-col gap-5 border-4 border-info bg-base-100 px-7 pt-6 pb-16 shadow"
+                        class="dropdown-content menu rounded-box mt-24 flex w-[300px] flex-col gap-5 border-4 border-info bg-base-100 px-7 pb-16 pt-6 shadow"
                     >
                         <div class="flex justify-between">
                             <div class="flex items-center gap-1">
