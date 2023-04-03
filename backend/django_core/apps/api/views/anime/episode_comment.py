@@ -32,8 +32,11 @@ def get_individual_anime_episode_comments(
         .episodes.get(episode_number__in=[episode_number])
         .episode_comments.all()
     )
+    new_query = []
+
     for i in query:
-        print(i.descendants_tree)
+        print(i)
+        print(i.tree)
 
     return []
 
@@ -58,3 +61,29 @@ def post_individual_anime_episode_comment(
     ).episode_comments.add(data)
 
     return data
+
+
+data = [
+    {"data": {"desc": "1"}},
+    {
+        "data": {"desc": "2"},
+        "children": [
+            {"data": {"desc": "21"}},
+            {"data": {"desc": "22"}},
+            {
+                "data": {"desc": "23"},
+                "children": [
+                    {"data": {"desc": "231"}},
+                ],
+            },
+            {"data": {"desc": "24"}},
+        ],
+    },
+    {"data": {"desc": "3"}},
+    {
+        "data": {"desc": "4"},
+        "children": [
+            {"data": {"desc": "41"}},
+        ],
+    },
+]
