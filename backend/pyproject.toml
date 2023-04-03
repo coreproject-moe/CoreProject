@@ -15,7 +15,7 @@ redis = {extras = ['hiredis'], version = ">=4.1"}
 # First party ( Image )
 pillow = "*"
 # First Party ( Database )
-psycopg2-binary = '*'
+psycopg = '>=3'
 # 3rd Party ( Files )
 django-dynamic-filenames = "*"
 # 3rd Party ( Brute Force protection )
