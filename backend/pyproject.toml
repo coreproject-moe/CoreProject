@@ -22,6 +22,8 @@ django-dynamic-filenames = "*"
 django-defender = ">=0.9.7"
 # 3rd Party ( Tailwind CSS )
 django-tailwind = ">=3.5.0"
+# 3rd Party ( Tree Structure )
+django-treebeard = "^4.6.1"
 # 3rd Party ( Middlewares )
 django_cleanup = "*"
 django_cors_headers = "*"
@@ -49,6 +51,7 @@ django-stubs-ext = "*"
 # ===================================================
 # Color Grabber
 colorthief = ">=0.2.1"
+
 
 
 

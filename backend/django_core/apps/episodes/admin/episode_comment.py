@@ -1,14 +1,16 @@
 from django.contrib import admin
 from django.db.models.query import QuerySet
 from django.http import HttpRequest
-
+from treebeard.admin import TreeAdmin
+from treebeard.forms import movenodeform_factory
 from ..models.episode_comment import EpisodeCommentModel
 
 # Register your models here.
 
 
 @admin.register(EpisodeCommentModel)
-class EpisodeCommentAdmin(admin.ModelAdmin[EpisodeCommentModel]):
+class EpisodeCommentAdmin(TreeAdmin[EpisodeCommentModel]):
+    form = movenodeform_factory(EpisodeCommentModel)
     autocomplete_fields = ["user"]
     list_filters = ["user"]
     search_fields = ["user__username", "text"]
