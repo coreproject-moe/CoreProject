@@ -20,8 +20,6 @@ class EpisodeTimestampModel(models.Model):
         on_delete=models.CASCADE,
     )
 
-    objects = UsernameWithDiscriminatorManager()
-
     def __str__(self) -> str:
         return f"{self.episode}. {self.user}"
 

@@ -9,6 +9,7 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 from ...schemas.episodes.episode_comment import (
     EpisodeCommentGETSchema,
     EpisodeCommentPOSTSchema,
+    EpisodeCommentTreeSchema,
 )
 
 router = Router()
@@ -16,13 +17,13 @@ router = Router()
 
 @router.get(
     "/{int:anime_id}/episodes/{str:episode_number}/comments",
-    response=list[EpisodeCommentGETSchema],
+    response=list[EpisodeCommentTreeSchema],
 )
 def get_individual_anime_episode_comments(
     request: HttpRequest,
     anime_id: int,
     episode_number: str,
-) -> list[EpisodeCommentModel]:
+):
     query = get_list_or_404(
         get_object_or_404(
             AnimeModel,
@@ -31,7 +32,10 @@ def get_individual_anime_episode_comments(
         .episodes.get(episode_number__in=[episode_number])
         .episode_comments.all()
     )
-    return query
+    for i in query:
+        print(i.descendants_tree)
+
+    return []
 
 
 @router.post(
