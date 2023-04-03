@@ -9,7 +9,7 @@ license = "AGPL-3.0-only"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-django = {version = '^4.1', extras = ['argon2']}
+django = {version = '>=4.1', extras = ['argon2']}
 # First Party ( Redis )
 redis = {extras = ['hiredis'], version = ">=4.1"}
 # First party ( Image )
@@ -18,6 +18,10 @@ pillow = "*"
 psycopg2-binary = '*'
 # 3rd Party ( Files )
 django-dynamic-filenames = "*"
+# 3rd Party ( Brute Force protection )
+django-defender = ">=0.9.7"
+# 3rd Party ( Tailwind CSS )
+django-tailwind = ">=3.5.0"
 # 3rd Party ( Middlewares )
 django_cleanup = "*"
 django_cors_headers = "*"
@@ -26,28 +30,25 @@ python_dotenv = "*"
 # 3rd Party ( WhiteNoise )
 whitenoise = {version = "*"}
 # 3rd Party ( Tasks )
-celery = {extras = ["redis"], version = "^5.2.7"}
+celery = {extras = ["redis"], version = ">=5.2.7"}
 # 3rd Party ( Better admin widgets )
-django-admin-hstore-widget = "^1.2.1"   # https://github.com/PokaInc/django-admin-hstore-widget/pull/25
+django-admin-hstore-widget = ">=1.2.1"   # https://github.com/PokaInc/django-admin-hstore-widget/pull/25
 # 3rd Party ( Model Fields )
 django-colorfield = "*"
 # Rest framework
 django_ninja = "*"
-ninja-put-patch-file-upload-middleware = "^0.1.1"
+ninja-put-patch-file-upload-middleware = ">=0.1.1"
 pydantic = {extras = ["email"], version = "*"}
 # ===================================================
 httpx = {extras = ['http2'], version = "*"}
 # Application servers
 gunicorn = {extras = ["setproctile"], version = "*"}
-uvicorn = {extras = ["standard"], version = "^0.21.1"}
+uvicorn = {extras = ["standard"], version = ">=0.21.1"}
 # Typing support
 django-stubs-ext = "*"
 # ===================================================
 # Color Grabber
-colorthief = "^0.2.1"
-# Tailwind CSS
-django-tailwind = "^3.5.0"
-django-defender = "^0.9.7"
+colorthief = ">=0.2.1"
 
 
 
