@@ -26,9 +26,10 @@ services:
         environment:
             - DEBUG=False
             # Cache related settings
-            - DJANGO_CACHE_LOCATION=redis://redis:6379/1
             - CACHE_MIDDLEWARE_SECONDS=10
             - REDIS_URL=redis://redis:6379/0
+            - DJANGO_CACHE_LOCATION=redis://redis:6379/1
+            - DEFENDER_REDIS_URL=redis://redis:6379/2
             # POSTGRS specific codse
             - POSTGRES_NAME=postgres
             - POSTGRES_USER=postgres
@@ -60,9 +61,10 @@ services:
         environment:
             - DEBUG=False
             # Cache related settings
-            - DJANGO_CACHE_LOCATION=redis://redis:6379/1
             - CACHE_MIDDLEWARE_SECONDS=10
             - REDIS_URL=redis://redis:6379/0
+            - DJANGO_CACHE_LOCATION=redis://redis:6379/1
+            - DEFENDER_REDIS_URL=redis://redis:6379/2
             # POSTGRS specific codse
             - POSTGRES_NAME=postgres
             - POSTGRES_USER=postgres
@@ -99,13 +101,6 @@ services:
     #     depends_on:
     #         - django
 
-    anime-varnish:
-        image: varnish:fresh
-        volumes:
-            - ./varnish/anime.vcl:/etc/varnish/default.vcl:ro
-        depends_on:
-            - anime
-
     # Web server
     caddy:
         image: caddy:alpine
@@ -127,4 +122,4 @@ services:
 
         depends_on:
             - django
-            - anime-varnish
+            - anime

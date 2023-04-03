@@ -183,6 +183,11 @@ TEMPLATES = [
 
 ASGI_APPLICATION = "core.asgi.application"
 
+# Override the default redis_url
+# Hours wasted -> 3
+DEFENDER_REDIS_URL = os.environ.get("DEFENDER_REDIS_URL", "redis://127.0.0.1:6379")
+
+
 # Override the login url
 # https://stackoverflow.com/questions/49532708/custom-login-url-in-django#49532812
 LOGIN_URL = "login_page"

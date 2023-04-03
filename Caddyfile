@@ -27,7 +27,7 @@ backend.{$SITE_ADDRESS} {
 }
 
 anime.{$SITE_ADDRESS} {
-        reverse_proxy anime-varnish:80
+        reverse_proxy anime:3000
 }
 
 
