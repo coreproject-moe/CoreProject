@@ -1,5 +1,5 @@
 import logging
-from typing import Any, Optional
+from typing import Any
 
 from apps.user.models import CustomUser
 from ninja.compatibility import get_headers
@@ -15,7 +15,7 @@ logger = logging.getLogger("django")
 
 
 class AuthBearer(HttpBearer):
-    def __call__(self, request: HttpRequest) -> Optional[Any]:
+    def __call__(self, request: HttpRequest) -> Any | None:
         headers = get_headers(request)
         auth_value = headers.get(self.header)
         if not auth_value:
