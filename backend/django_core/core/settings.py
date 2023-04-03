@@ -80,8 +80,6 @@ INSTALLED_APPS = [
     "django_cleanup.apps.CleanupConfig",
     # 3rd Party Models
     "colorfield",
-    # 3rd Party Node lists
-    "treebeard",
     # 3rd party adminpanel
     "django_admin_hstore_widget",
     # Block users

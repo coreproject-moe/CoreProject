@@ -706,21 +706,6 @@ django = ">=3.2.14"
 django-browser-reload = ">=1.6.0,<2.0.0"
 
 [[package]]
-name = "django-treebeard"
-version = "4.6.1"
-description = "Efficient tree implementations for Django"
-category = "main"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "django-treebeard-4.6.1.tar.gz", hash = "sha256:84ab35040277d524eb77939e235568c9c856cb523cc9655793b66fe9a3ef468b"},
-    {file = "django_treebeard-4.6.1-py3-none-any.whl", hash = "sha256:89bc79a7d9ae62e8071ff1f866c83b1484c408d6082ce11cf3eca689240712f6"},
-]
-
-[package.dependencies]
-Django = ">=3.2"
-
-[[package]]
 name = "dnspython"
 version = "2.3.0"
 description = "DNS toolkit"
@@ -1992,4 +1977,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "dc5b58864719bb72856f2b15880e4b0275d422f3b44833dca3a46205ca6194d2"
+content-hash = "afa8969a754109423fe518cc3cdbc1d21a914794f8ebc8895ea495311a205b6b"
