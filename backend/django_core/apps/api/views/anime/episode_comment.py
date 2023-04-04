@@ -11,6 +11,7 @@ from ...schemas.episodes.episode_comment import (
     EpisodeCommentPOSTSchema,
     EpisodeCommentTreeSchema,
 )
+from ...decorator import recursionlimit
 
 router = Router()
 
@@ -19,12 +20,13 @@ router = Router()
     "/{int:anime_id}/episodes/{str:episode_number}/comments",
     response=list[EpisodeCommentTreeSchema],
 )
+@recursionlimit(90000)
 def get_individual_anime_episode_comments(
     request: HttpRequest,
     anime_id: int,
     episode_number: str,
 ):
-    query = get_list_or_404(
+    query: list[EpisodeCommentModel] = get_list_or_404(
         get_object_or_404(
             AnimeModel,
             pk=anime_id,
@@ -32,13 +34,25 @@ def get_individual_anime_episode_comments(
         .episodes.get(episode_number__in=[episode_number])
         .episode_comments.all()
     )
-    new_query = []
 
-    for i in query:
-        print(i)
-        print(i.tree)
+    return_list = []
 
-    return []
+    def get_nested_children(item: EpisodeCommentModel):
+        __list__ = []
+        __list__.append(
+            {
+                "user": str(item.user),
+                "text": item.text,
+                "comment_added": item.comment_added,
+                "children": [get_nested_children(i)[0] for i in item.get_children()],
+            }
+        )
+        return __list__
+
+    for item in query:
+        return_list.extend(get_nested_children(item))
+
+    return return_list
 
 
 @router.post(
@@ -61,29 +75,3 @@ def post_individual_anime_episode_comment(
     ).episode_comments.add(data)
 
     return data
-
-
-data = [
-    {"data": {"desc": "1"}},
-    {
-        "data": {"desc": "2"},
-        "children": [
-            {"data": {"desc": "21"}},
-            {"data": {"desc": "22"}},
-            {
-                "data": {"desc": "23"},
-                "children": [
-                    {"data": {"desc": "231"}},
-                ],
-            },
-            {"data": {"desc": "24"}},
-        ],
-    },
-    {"data": {"desc": "3"}},
-    {
-        "data": {"desc": "4"},
-        "children": [
-            {"data": {"desc": "41"}},
-        ],
-    },
-]
