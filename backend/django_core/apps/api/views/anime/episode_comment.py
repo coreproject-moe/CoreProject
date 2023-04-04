@@ -38,7 +38,6 @@ def get_individual_anime_episode_comments(
     return_list = []
 
     def get_nested_children(item: EpisodeCommentModel):
-        
         __list__ = []
         __list__.append(
             {
