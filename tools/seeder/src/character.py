@@ -352,7 +352,9 @@ def populate_database(
                 headers={
                     "Authorization": f"Bearer {TOKEN}",
                 },
+                verify=False,
             )
+            print(res.text)
             if res.status_code == 200:
                 if successful_kitsu_id := kitsu_data.get("kitsu_id", None):
                     SUCCESSFUL_KITSU_IDS.append(successful_kitsu_id)

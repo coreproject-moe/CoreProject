@@ -1,7 +1,7 @@
 import _ from "lodash";
 
 export class UrlMaps {
-    public DOMAIN = "https://backend.coreproject.moe";
+    public DOMAIN = "https://backend.localhost";
     private BASE_URL = this.DOMAIN + "/api/v1";
 
     // Url Declaration
