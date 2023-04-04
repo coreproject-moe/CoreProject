@@ -20,7 +20,6 @@ router = Router()
     "/{int:anime_id}/episodes/{str:episode_number}/comments",
     response=list[EpisodeCommentTreeSchema],
 )
-@recursionlimit(90000)
 def get_individual_anime_episode_comments(
     request: HttpRequest,
     anime_id: int,
@@ -37,20 +36,34 @@ def get_individual_anime_episode_comments(
 
     return_list = []
 
-    def get_nested_children(item: EpisodeCommentModel):
-        __list__ = []
-        __list__.append(
-            {
-                "user": str(item.user),
-                "text": item.text,
-                "comment_added": item.comment_added,
-                "children": [get_nested_children(i)[0] for i in item.get_children()],
-            }
-        )
-        return __list__
-
     for item in query:
-        return_list.extend(get_nested_children(item))
+        stack = []
+        stack.append(item)
+        nested_children = []
+        while stack:
+            current_item = stack.pop()
+            children = current_item.get_children()
+
+            child_nodes = []
+            for child in children:
+                child_node = {
+                    "user": str(child.user),
+                    "text": child.text,
+                    "comment_added": child.comment_added,
+                    "children": [],
+                }
+                stack.append(child)
+                child_nodes.append(child_node)
+
+            current_node = {
+                "user": str(current_item.user),
+                "text": current_item.text,
+                "comment_added": current_item.comment_added,
+                "children": child_nodes,
+            }
+            nested_children.append(current_node)
+
+        return_list.append(nested_children[0])
 
     return return_list
 
