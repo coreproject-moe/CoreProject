@@ -11,12 +11,10 @@
     export let backend_anime_number: number;
     import { UrlMaps } from "$data/urls";
     import { formatTime } from "$functions/formatTime";
-
-    import List from "$icons/List.svelte";
+import List from "$icons/List.svelte";
     import MoreVertical from "$icons/MoreVertical.svelte";
     import Search from "$icons/Search.svelte";
     import Settings from "$icons/Settings.svelte";
-    import { responsiveMode } from "$store/Responsive";
 
     import EpisodeCard from "./EpisodeCard.svelte";
 

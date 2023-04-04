@@ -1,20 +1,20 @@
 <script lang="ts">
     import { fade } from "svelte/transition";
 
+    import SearchModal from "$components/modals/Search.svelte";
+    import { UrlMaps } from "$data/urls";
+    import Cross from "$icons/Cross.svelte";
+    import ListLinearGradient from "$icons/List-Linear-Gradient.svelte";
     import Logo from "$icons/Logo.svelte";
+    import MoonLinearGradient from "$icons/Moon-Linear-Gradient.svelte";
+    import Person from "$icons/Person.svelte";
+    import PersonLinearGradient from "$icons/Person-Linear-Gradient.svelte";
     import Search from "$icons/Search.svelte";
+    import SettingsLinearGradient from "$icons/Settings-Linear-Gradient.svelte";
+    import { modals } from "$store/Modal";
     import { navbar_variant } from "$store/Navbar_Variant";
     import { responsiveMode } from "$store/Responsive";
-    import Person from "$icons/Person.svelte";
-    import { user_is_logged_in, user_information } from "$store/User";
-    import Cross from "$icons/Cross.svelte";
-    import PersonLinearGradient from "$icons/Person-Linear-Gradient.svelte";
-    import ListLinearGradient from "$icons/List-Linear-Gradient.svelte";
-    import MoonLinearGradient from "$icons/Moon-Linear-Gradient.svelte";
-    import SettingsLinearGradient from "$icons/Settings-Linear-Gradient.svelte";
-    import { UrlMaps } from "$data/urls";
-    import { modals } from "$store/Modal";
-    import SearchModal from "$components/modals/Search.svelte";
+    import { user_information,user_is_logged_in } from "$store/User";
     const backend_mapping = new UrlMaps();
 
     let mobile: boolean;

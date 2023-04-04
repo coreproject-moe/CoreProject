@@ -5,9 +5,8 @@
     import Cookies from "js-cookie";
     import * as yup from "yup";
 
-    import { user_is_logged_in } from "$store/User";
-    import { page } from "$app/stores";
     import { UrlMaps } from "$data/urls";
+    import { user_is_logged_in } from "$store/User";
     let errorText = "";
 
     const input_mapping = [

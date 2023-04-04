@@ -1,13 +1,11 @@
 <script lang="ts">
     import { page } from "$app/stores";
-
-    import Navbar from "$components/shared/Navbar.svelte";
+import Navbar from "$components/shared/Navbar.svelte";
     import { UrlMaps } from "$data/urls";
     import ChevronsRight from "$icons/Chevrons-Right.svelte";
-    import { responsiveMode } from "$store/Responsive";
     import MaximizeInward from "$icons/Maximize-Inward.svelte";
     import MaximizeOutward from "$icons/Maximize-Outward.svelte";
-
+    import { responsiveMode } from "$store/Responsive";
     import { video_player_width } from "$store/VideoPlayerWidth";
 
     export let episode_data: {
