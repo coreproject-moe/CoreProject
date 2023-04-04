@@ -11,6 +11,7 @@ from ...schemas.episodes.episode_comment import (
     EpisodeCommentPOSTSchema,
     EpisodeCommentTreeSchema,
 )
+from ...decorator import recursionlimit
 
 router = Router()
 
@@ -19,6 +20,7 @@ router = Router()
     "/{int:anime_id}/episodes/{str:episode_number}/comments",
     response=list[EpisodeCommentTreeSchema],
 )
+@recursionlimit(90000)
 def get_individual_anime_episode_comments(
     request: HttpRequest,
     anime_id: int,
