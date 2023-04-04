@@ -16,23 +16,23 @@ repos:
                 # - "eslint-config-next@12.1.6"
                 # - react@18.2.0
                 # - "@emotion/eslint-plugin@11.7.0"
-#                 - react@latest
-#                 - eslint-plugin-react@latest
-#                 - eslint-config-airbnb@latest
-#                 - eslint-plugin-react-native@latest
-#                 - eslint-plugin-react-hooks@latest
-#                 - eslint-plugin-jsx-a11y@latest
-#                 - eslint-plugin-import@latest
-#                 Svelte Related
-#                 - eslint@latest
-#                 - eslint-config-prettier@latest
-#                 - eslint-plugin-svelte3@latest
-#                 - svelte@latest
-#                 - "@typescript-eslint/eslint-plugin@latest"
-#                 - "@typescript-eslint/parser@latest"
+                #                 - react@latest
+                #                 - eslint-plugin-react@latest
+                #                 - eslint-config-airbnb@latest
+                #                 - eslint-plugin-react-native@latest
+                #                 - eslint-plugin-react-hooks@latest
+                #                 - eslint-plugin-jsx-a11y@latest
+                #                 - eslint-plugin-import@latest
+                #                 Svelte Related
+                #                 - eslint@latest
+                #                 - eslint-config-prettier@latest
+                #                 - eslint-plugin-svelte3@latest
+                #                 - svelte@latest
+                #                 - "@typescript-eslint/eslint-plugin@latest"
+                #                 - "@typescript-eslint/parser@latest"
                 - eslint-plugin-simple-import-sort@latest
-#                 - eslint-plugin-unused-imports@latest
-#                 - typescript@latest
+    #                 - eslint-plugin-unused-imports@latest
+    #                 - typescript@latest
 
     - repo: https://github.com/rtts/djhtml
       rev: "3.0.6" # replace with the latest tag on GitHub
