@@ -84,6 +84,8 @@ INSTALLED_APPS = [
     "django_admin_hstore_widget",
     # Block users
     "defender",
+    # Tree
+    "treenode",
     # Tailwind CSS
     "tailwind",
     "tailwind_src",  # Our custom app

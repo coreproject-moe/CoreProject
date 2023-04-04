@@ -19,12 +19,14 @@
         average_episode_length: number;
     }>;
 
-    import StarRating from "svelte-star-rating";
     import _ from "lodash";
+    import StarRating from "svelte-star-rating";
 
     import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
     import { UrlMaps } from "$data/urls";
+    import { formatDate } from "$functions/formatDate";
+    import { formatTime } from "$functions/formatTime";
     import Bookmark from "$icons/Bookmark.svelte";
     import ChevronDown from "$icons/Chevron-Down.svelte";
     import Circle from "$icons/Circle.svelte";
@@ -35,10 +37,8 @@
     import TrendingUp from "$icons/Trending-Up.svelte";
 
     import AnimeInfo from "./AnimeInfo/AnimeInfo.svelte";
-    import EpisodeSkeleton from "./Skeletons/Episode.svelte";
     import Episode from "./Episodes/Episode.svelte";
-    import { formatTime } from "$functions/formatTime";
-    import { formatDate } from "$functions/formatDate";
+    import EpisodeSkeleton from "./Skeletons/Episode.svelte";
 
     const urls = new UrlMaps();
 

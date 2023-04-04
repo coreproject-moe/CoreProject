@@ -1,6 +1,4 @@
 <script lang="ts">
-    import ChevronUpDown from "$icons/Chevron-Up-Down.svelte";
-    import { modals } from "$store/Modal";
     import { responsiveMode } from "$store/Responsive";
 
     import AutoComplete from "./AutoComplete.svelte";
