@@ -11,7 +11,6 @@ from ...schemas.episodes.episode_comment import (
     EpisodeCommentPOSTSchema,
     EpisodeCommentTreeSchema,
 )
-from ...decorator import recursionlimit
 
 router = Router()
 
@@ -36,34 +35,20 @@ def get_individual_anime_episode_comments(
 
     return_list = []
 
-    for item in query:
-        stack = []
-        stack.append(item)
-        nested_children = []
-        while stack:
-            current_item = stack.pop()
-            children = current_item.get_children()
-
-            child_nodes = []
-            for child in children:
-                child_node = {
-                    "user": str(child.user),
-                    "text": child.text,
-                    "comment_added": child.comment_added,
-                    "children": [],
-                }
-                stack.append(child)
-                child_nodes.append(child_node)
-
-            current_node = {
-                "user": str(current_item.user),
-                "text": current_item.text,
-                "comment_added": current_item.comment_added,
-                "children": child_nodes,
+    def get_nested_children(item: EpisodeCommentModel):
+        __list__ = []
+        __list__.append(
+            {
+                "user": str(item.user),
+                "text": item.text,
+                "comment_added": item.comment_added,
+                "children": [get_nested_children(i)[0] for i in item.get_children()],
             }
-            nested_children.append(current_node)
+        )
+        return __list__
 
-        return_list.append(nested_children[0])
+    for item in query:
+        return_list.extend(get_nested_children(item))
 
     return return_list
 
