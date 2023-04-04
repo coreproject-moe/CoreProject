@@ -1,8 +1,9 @@
 <script lang="ts">
+    import _ from "lodash";
+
+    import { UrlMaps } from "$data/urls";
     import Search from "$icons/Search.svelte";
     import { responsiveMode } from "$store/Responsive";
-    import { UrlMaps } from "$data/urls";
-    import _ from "lodash";
 
     const backend_mapping = new UrlMaps();
 

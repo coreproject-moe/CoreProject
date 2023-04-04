@@ -1,7 +1,8 @@
 <script lang="ts">
     import Cookies from "js-cookie";
-    import { user_is_logged_in } from "$store/User";
     import { get } from "svelte/store";
+
+    import { user_is_logged_in } from "$store/User";
 
     if (get(user_is_logged_in)) {
         Cookies.remove("token");

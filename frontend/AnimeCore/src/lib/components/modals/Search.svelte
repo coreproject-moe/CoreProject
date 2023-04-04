@@ -1,5 +1,6 @@
 <script lang="ts">
     import _ from "lodash";
+
     import { modals } from "$store/Modal";
     import { timer as timerStore } from "$store/Timer";
     let value: boolean;
@@ -13,9 +14,9 @@
             break;
     }
 
+    import { UrlMaps } from "$data/urls";
     import Search from "$icons/Search.svelte";
     import { responsiveMode } from "$store/Responsive";
-    import { UrlMaps } from "$data/urls";
 
     let mobile: boolean;
     $: mobile = $responsiveMode === "mobile";

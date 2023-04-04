@@ -1,7 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
 
-    import Navbar from "$components/shared/Navbar.svelte";
     import ScrollArea from "$components/shared/ScrollArea.svelte";
     import { fetchImageAndConvertToBlob } from "$functions/fetchImage";
     import { getImageBrightness } from "$functions/getImageBrightness";

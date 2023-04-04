@@ -3,8 +3,4 @@
 </script>
 
 <!-- Modals  -->
-<div>
-
-
-    <slot />
-</div>
+<slot />
