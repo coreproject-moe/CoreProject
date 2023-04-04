@@ -31,7 +31,7 @@ def get_individual_anime_episode_comments(
             AnimeModel,
             pk=anime_id,
         )
-        .episodes.get(episode_number__in=[episode_number])
+        .episodes.get(episode_number=episode_number)
         .episode_comments.all()
     )
 
@@ -57,14 +57,14 @@ def get_individual_anime_episode_comments(
 
 
 @router.post(
-    "/{int:anime_id}/episodes/{str:episode_number}/comments",
+    "/{int:anime_id}/episodes/{int:episode_number}/comments",
     response=EpisodeCommentGETSchema,
     auth=AuthBearer(),
 )
 def post_individual_anime_episode_comment(
     request: HttpRequest,
     anime_id: int,
-    episode_number: str,
+    episode_number: int,
     payload: EpisodeCommentPOSTSchema,
 ) -> EpisodeCommentModel:
     data: EpisodeCommentModel = EpisodeCommentModel.objects.create(
