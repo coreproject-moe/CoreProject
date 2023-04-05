@@ -8,7 +8,7 @@
 	import '../app.scss';
 	import { AppShell, Avatar } from '@skeletonlabs/skeleton';
 
-	import {blur} from 'svelte/transition';
+	import { blur } from 'svelte/transition';
 
 	// import icons
 	import AnimeCore from '$icons/AnimeCore.svelte';
@@ -144,19 +144,36 @@
 							type="button"
 							class="{is_active
 								? 'relative bg-secondary-100 before:absolute before:-left-0.5 before:z-10 before:h-4 before:w-1 before:rounded-lg before:bg-primary-500'
-								: 'bg-initial'} btn-icon h-16 w-16 flex-col justify-center gap-1 rounded-lg p-0 text-sm"
+								: 'bg-initial'} btn-icon relative h-16 w-16 rounded-lg p-0"
 							on:click={() => {
 								active_button = item.name;
 							}}
 						>
-							<svelte:component
-								this={item.icon.component}
-								height={item.icon.height}
-								width={item.icon.width}
-								color={is_active ? 'black' : item.icon.color}
-							/>
 							{#if !is_active}
-								<p class="!m-0 capitalize" >{item.name}</p>
+								<div
+									class="absolute inset-0 flex flex-col items-center justify-center gap-5"
+									transition:blur|local
+								>
+									<svelte:component
+										this={item.icon.component}
+										height={item.icon.height}
+										width={item.icon.width}
+										color={item.icon.color}
+									/>
+									<p class="!m-0 text-sm capitalize">{item.name}</p>
+								</div>
+							{:else}
+								<div
+									class="absolute inset-0 flex items-center justify-center"
+									transition:blur|local
+								>
+									<svelte:component
+										this={item.icon.component}
+										height={item.icon.height}
+										width={item.icon.width}
+										color="black"
+									/>
+								</div>
 							{/if}
 						</button>
 					{/each}
