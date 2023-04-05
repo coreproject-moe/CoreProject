@@ -23,90 +23,88 @@
 	import Misc from '$icons/Misc.svelte';
 
 	// Local
-	let active_button: string = 'home';
+	let active_button:
+		| keyof typeof icon_mapping.top
+		| keyof typeof icon_mapping.middle
+		| keyof typeof icon_mapping.bottom = 'home';
 
 	const icon_mapping = {
-		top: [
-			{
+		top: {
+			search: {
 				icon: {
 					component: Search,
 					width: 18,
 					height: 18,
 					color: 'black'
-				},
-				name: ''
+				}
 			}
-		],
-		middle: [
-			{
+		},
+		middle: {
+			home: {
 				icon: {
 					component: Home,
 					width: 18,
 					height: 18,
 					color: 'white'
-				},
-				name: 'home'
+				}
 			},
-			{
+
+			discover: {
 				icon: {
 					component: Explore,
 					width: 18,
 					height: 18,
 					color: 'white'
-				},
-				name: 'discover'
+				}
 			},
-			{
+			list: {
 				icon: {
 					component: List,
 					width: 25,
 					height: 25,
 					color: 'white'
-				},
-				name: 'list'
+				}
 			},
-			{
+			schedule: {
 				icon: {
 					component: Schedule,
 					width: 18,
 					height: 18,
 					color: 'white'
-				},
-				name: 'schedule'
+				}
 			},
-			{
+			forum: {
 				icon: {
 					component: Forum,
 					width: 18,
 					height: 18,
 					color: 'white'
-				},
-				name: 'forum'
+				}
 			}
-		],
-		bottom: [
-			{
+		},
+		bottom: {
+			settings: {
 				icon: {
 					component: Settings,
 					width: 18,
 					height: 18,
 					color: 'white'
-				},
-				name: 'settings'
+				}
 			},
-			{
+			'misc.': {
 				icon: {
 					component: Misc,
 					width: 18,
 					height: 18,
 					color: 'white'
-				},
-				name: 'misc.'
+				}
 			}
-		]
+		}
 	};
 
-	$: console.log(active_button);
+	const middle_section_click = (item: string) => {
+		active_button = item as typeof active_button;
+	};
 </script>
 
 <div class="h-screen overflow-hidden">
@@ -125,29 +123,36 @@
 		<svelte:fragment slot="sidebarLeft">
 			<div class="flex h-full w-28 flex-col justify-between">
 				<div class="mt-3 flex flex-col items-center gap-5">
-					{#each icon_mapping.top as item}
+					{#each Object.entries(icon_mapping.top) as item}
+						{@const item_icon = item[1].icon}
 						<button type="button" class="btn-icon rounded-md bg-warning-400 p-0">
 							<svelte:component
-								this={item.icon.component}
-								height={item.icon.height}
-								width={item.icon.width}
-								color={item.icon.color}
+								this={item_icon.component}
+								height={item_icon.height}
+								width={item_icon.width}
+								color={item_icon.color}
 							/>
 						</button>
 					{/each}
 				</div>
 
 				<div class="flex flex-col items-center gap-9">
-					{#each icon_mapping.middle as item}
-						{@const is_active = active_button === item.name}
+					{#each Object.entries(icon_mapping.middle) as item}
+						{@const item_name = item[0]}
+						{@const item_icon = item[1].icon}
+
+						{@const component = item_icon.component}
+						{@const component_width = item_icon.width}
+						{@const component_height = item_icon.height}
+
+						{@const is_active = active_button === item_name}
+
 						<button
 							type="button"
 							class="{is_active
 								? 'relative bg-secondary-100 before:absolute before:-left-0.5 before:z-10 before:h-4 before:w-1 before:rounded-lg before:bg-primary-500'
 								: 'bg-initial'} btn-icon relative h-16 w-16 rounded-lg p-0"
-							on:click={() => {
-								active_button = item.name;
-							}}
+							on:click={() => middle_section_click(item_name)}
 						>
 							<div class="inline-grid">
 								{#if !is_active}
@@ -156,12 +161,12 @@
 										transition:blur|local
 									>
 										<svelte:component
-											this={item.icon.component}
-											height={item.icon.height}
-											width={item.icon.width}
-											color={item.icon.color}
+											this={component}
+											height={component_height}
+											width={component_width}
+											color={item_icon.color}
 										/>
-										<p class="!m-0 text-sm capitalize">{item.name}</p>
+										<p class="!m-0 text-sm capitalize">{item_name}</p>
 									</div>
 								{:else}
 									<div
@@ -169,9 +174,9 @@
 										transition:blur|local
 									>
 										<svelte:component
-											this={item.icon.component}
-											height={item.icon.height}
-											width={item.icon.width}
+											this={component}
+											height={component_height}
+											width={component_width}
 											color="black"
 										/>
 									</div>
@@ -182,18 +187,20 @@
 				</div>
 
 				<div class="mb-9 flex flex-col items-center gap-9">
-					{#each icon_mapping.bottom as item}
+					{#each Object.entries(icon_mapping.bottom) as item}
+						{@const item_name = item[0]}
+						{@const item_icon = item[1].icon}
 						<button
 							type="button"
 							class="bg-initial btn-icon h-16 w-16 flex-col justify-center gap-1 rounded-lg p-0 text-sm"
 						>
 							<svelte:component
-								this={item.icon.component}
-								height={item.icon.height}
-								width={item.icon.width}
-								color={item.icon.color}
+								this={item_icon.component}
+								height={item_icon.height}
+								width={item_icon.width}
+								color={item_icon.color}
 							/>
-							<p class="!m-0 capitalize">{item.name}</p>
+							<p class="!m-0 capitalize">{item_name}</p>
 						</button>
 					{/each}
 				</div>
