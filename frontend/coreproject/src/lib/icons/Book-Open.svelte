@@ -2,6 +2,7 @@
     import type { SVGAttributes } from "svelte/elements";
     type $$Props = SVGAttributes<SVGElement>;
 </script>
+
 <svg
     {...$$props}
     viewBox="0 0 32 31"
