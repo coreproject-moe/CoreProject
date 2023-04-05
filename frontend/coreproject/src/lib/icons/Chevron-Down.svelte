@@ -8,7 +8,7 @@
 		stroke="currentColor"
 		stroke-linecap="round"
 		stroke-linejoin="round"
-		stroke-width="4"
-		d="M9 18L15 12L9 6"
+		stroke-width="3.5"
+		d="M6 9L12 15L18 9"
 	/>
 </svg>

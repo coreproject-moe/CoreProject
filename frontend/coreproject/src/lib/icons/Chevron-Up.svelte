@@ -3,46 +3,39 @@
 	type $$Props = SVGAttributes<SVGElement>;
 </script>
 
-<svg {...$$props} viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-	<g filter="url(#filter0_d_2536_5517)">
+<svg xmlns="http://www.w3.org/2000/svg" {...$$props} fill="none" viewBox="0 0 24 25">
+	<g filter="url(#filter0_d_664_61)">
 		<path
-			d="M11 3L5 9"
-			stroke="#EB5757"
-			stroke-width="2"
+			stroke="#fff"
 			stroke-linecap="round"
 			stroke-linejoin="round"
-		/>
-		<path
-			d="M5 3L11 9"
-			stroke="#EB5757"
-			stroke-width="2"
-			stroke-linecap="round"
-			stroke-linejoin="round"
+			stroke-width="3.5"
+			d="M18 15L12 9L6 15"
 		/>
 	</g>
 	<defs>
 		<filter
-			id="filter0_d_2536_5517"
-			x="-2"
+			id="filter0_d_664_61"
+			width="32"
+			height="32"
+			x="-4"
 			y="0"
-			width="20"
-			height="20"
-			filterUnits="userSpaceOnUse"
 			color-interpolation-filters="sRGB"
+			filterUnits="userSpaceOnUse"
 		>
 			<feFlood flood-opacity="0" result="BackgroundImageFix" />
 			<feColorMatrix
 				in="SourceAlpha"
+				result="hardAlpha"
 				type="matrix"
 				values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-				result="hardAlpha"
 			/>
 			<feOffset dy="4" />
 			<feGaussianBlur stdDeviation="2" />
 			<feComposite in2="hardAlpha" operator="out" />
 			<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
-			<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2536_5517" />
-			<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2536_5517" result="shape" />
+			<feBlend in2="BackgroundImageFix" mode="normal" result="effect1_dropShadow_664_61" />
+			<feBlend in="SourceGraphic" in2="effect1_dropShadow_664_61" mode="normal" result="shape" />
 		</filter>
 	</defs>
 </svg>
