@@ -41,17 +41,17 @@
 					</button>
 				</div>
 
-				<div class="flex flex-col gap-9">
+				<div class="flex flex-col gap-9 items-center">
 					<button
 						type="button"
-						class="btn bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
+						class="btn-icon bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
 					>
 						<Home width="18" height="18" />
 						Home
 					</button>
 					<button
 						type="button"
-						class="btn bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
+						class="btn-icon bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
 					>
 						<Explore width="18" height="18" />
 						Discover
@@ -59,7 +59,7 @@
 
 					<button
 						type="button"
-						class="btn bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
+						class="btn-icon bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
 					>
 						<List width="25" height="25" />
 						List
@@ -67,7 +67,7 @@
 
 					<button
 						type="button"
-						class="btn bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
+						class="btn-icon bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
 					>
 						<Schedule width="18" height="18" />
 						Schedule
@@ -75,7 +75,7 @@
 
 					<button
 						type="button"
-						class="btn bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
+						class="btn-icon bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
 					>
 						<Forum width="18" height="18" />
 						Forum
@@ -85,7 +85,7 @@
 				<div class="flex flex-col gap-9 items-center mb-9">
 					<button
 						type="button"
-						class="btn bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
+						class="btn-icon bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
 					>
 						<Settings width="18" height="18" />
 						Settings
@@ -93,7 +93,7 @@
 
 					<button
 						type="button"
-						class="btn bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
+						class="btn-icon bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
 					>
 						<Misc width="18" height="18" />
 						Misc.
