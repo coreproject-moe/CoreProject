@@ -10,7 +10,7 @@
 </script>
 
 <!-- App Shell -->
-<AppShell>
+<AppShell class="h-screen">
 	<svelte:fragment slot="header">
 		<!-- App Bar -->
 		<AppBar>
