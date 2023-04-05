@@ -8,6 +8,8 @@
 	import '../app.scss';
 	import { AppShell, Avatar } from '@skeletonlabs/skeleton';
 
+	import {blur} from 'svelte/transition';
+
 	// import icons
 	import AnimeCore from '$icons/AnimeCore.svelte';
 	import Logo from '$icons/Logo.svelte';
@@ -137,9 +139,12 @@
 
 				<div class="flex flex-col items-center gap-9">
 					{#each icon_mapping.middle as item}
+						{@const is_active = active_button === item.name}
 						<button
 							type="button"
-							class="bg-initial btn-icon h-16 w-16 flex-col justify-center gap-1 rounded-lg p-0 text-sm"
+							class="{is_active
+								? 'relative bg-secondary-100 before:absolute before:-left-0.5 before:z-10 before:h-4 before:w-1 before:rounded-lg before:bg-primary-500'
+								: 'bg-initial'} btn-icon h-16 w-16 flex-col justify-center gap-1 rounded-lg p-0 text-sm"
 							on:click={() => {
 								active_button = item.name;
 							}}
@@ -148,9 +153,11 @@
 								this={item.icon.component}
 								height={item.icon.height}
 								width={item.icon.width}
-								color={item.icon.color}
+								color={is_active ? 'black' : item.icon.color}
 							/>
-							<p class="!m-0 capitalize">{item.name}</p>
+							{#if !is_active}
+								<p class="!m-0 capitalize" >{item.name}</p>
+							{/if}
 						</button>
 					{/each}
 				</div>
