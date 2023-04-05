@@ -18,6 +18,92 @@
 	import Forum from '$icons/Forum.svelte';
 	import Settings from '$icons/Settings.svelte';
 	import Misc from '$icons/Misc.svelte';
+
+	// Local
+	let active_button: string;
+
+	const icon_mapping = {
+		top: [
+			{
+				icon: {
+					component: Search,
+					width: 18,
+					height: 18,
+					color: 'black'
+				},
+				name: ''
+			}
+		],
+		middle: [
+			{
+				icon: {
+					component: Home,
+					width: 18,
+					height: 18,
+					color: 'white'
+				},
+				name: 'home'
+			},
+			{
+				icon: {
+					component: Explore,
+					width: 18,
+					height: 18,
+					color: 'white'
+				},
+				name: 'discover'
+			},
+			{
+				icon: {
+					component: List,
+					width: 25,
+					height: 25,
+					color: 'white'
+				},
+				name: 'list'
+			},
+			{
+				icon: {
+					component: Schedule,
+					width: 18,
+					height: 18,
+					color: 'white'
+				},
+				name: 'schedule'
+			},
+			{
+				icon: {
+					component: Forum,
+					width: 18,
+					height: 18,
+					color: 'white'
+				},
+				name: 'forum'
+			}
+		],
+		bottom: [
+			{
+				icon: {
+					component: Settings,
+					width: 18,
+					height: 18,
+					color: 'white'
+				},
+				name: 'settings'
+			},
+			{
+				icon: {
+					component: Misc,
+					width: 18,
+					height: 18,
+					color: 'white'
+				},
+				name: 'misc.'
+			}
+		]
+	};
+
+	$: console.log(active_button);
 </script>
 
 <div class="h-screen overflow-hidden">
@@ -36,68 +122,53 @@
 		<svelte:fragment slot="sidebarLeft">
 			<div class="w-28 h-full flex flex-col justify-between">
 				<div class="flex mt-3 flex-col gap-5 items-center">
-					<button type="button" class="btn-icon bg-warning-400 rounded-md p-0">
-						<Search color="black" width="18" height="18" />
-					</button>
+					{#each icon_mapping.top as item}
+						<button type="button" class="btn-icon bg-warning-400 rounded-md p-0">
+							<svelte:component
+								this={item.icon.component}
+								height={item.icon.height}
+								width={item.icon.width}
+								color={item.icon.color}
+							/>
+						</button>
+					{/each}
 				</div>
 
 				<div class="flex flex-col gap-9 items-center">
-					<button
-						type="button"
-						class="btn-icon bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
-					>
-						<Home width="18" height="18" />
-						Home
-					</button>
-					<button
-						type="button"
-						class="btn-icon bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
-					>
-						<Explore width="18" height="18" />
-						Discover
-					</button>
-
-					<button
-						type="button"
-						class="btn-icon bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
-					>
-						<List width="25" height="25" />
-						List
-					</button>
-
-					<button
-						type="button"
-						class="btn-icon bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
-					>
-						<Schedule width="18" height="18" />
-						Schedule
-					</button>
-
-					<button
-						type="button"
-						class="btn-icon bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
-					>
-						<Forum width="18" height="18" />
-						Forum
-					</button>
+					{#each icon_mapping.middle as item}
+						<button
+							type="button"
+							class="btn-icon w-16 h-16 bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
+							on:click={() => {
+								active_button = item.name;
+							}}
+						>
+							<svelte:component
+								this={item.icon.component}
+								height={item.icon.height}
+								width={item.icon.width}
+								color={item.icon.color}
+							/>
+							<p class="capitalize !m-0">{item.name}</p>
+						</button>
+					{/each}
 				</div>
 
 				<div class="flex flex-col gap-9 items-center mb-9">
-					<button
-						type="button"
-						class="btn-icon bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
-					>
-						<Settings width="18" height="18" />
-						Settings
-					</button>
-
-					<button
-						type="button"
-						class="btn-icon bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
-					>
-						<Misc width="18" height="18" />
-						Misc.
-					</button>
+					{#each icon_mapping.bottom as item}
+						<button
+							type="button"
+							class="btn-icon w-16 h-16 bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
+						>
+							<svelte:component
+								this={item.icon.component}
+								height={item.icon.height}
+								width={item.icon.width}
+								color={item.icon.color}
+							/>
+							<p class="capitalize !m-0">{item.name}</p>
+						</button>
+					{/each}
 				</div>
 			</div>
 		</svelte:fragment>
