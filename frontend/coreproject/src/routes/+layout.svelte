@@ -7,6 +7,7 @@
 	// Most of your app wide CSS should be put in this file
 	import '../app.scss';
 	import { AppShell, Avatar } from '@skeletonlabs/skeleton';
+
 	// import icons
 	import AnimeCore from '$icons/AnimeCore.svelte';
 	import Logo from '$icons/Logo.svelte';
