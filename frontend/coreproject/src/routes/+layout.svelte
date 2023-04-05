@@ -23,7 +23,7 @@
 	import Misc from '$icons/Misc.svelte';
 
 	// Local
-	let active_button: string;
+	let active_button: string = 'home';
 
 	const icon_mapping = {
 		top: [
@@ -149,32 +149,34 @@
 								active_button = item.name;
 							}}
 						>
-							{#if !is_active}
-								<div
-									class="absolute inset-0 flex flex-col items-center justify-center gap-5"
-									transition:blur|local
-								>
-									<svelte:component
-										this={item.icon.component}
-										height={item.icon.height}
-										width={item.icon.width}
-										color={item.icon.color}
-									/>
-									<p class="!m-0 text-sm capitalize">{item.name}</p>
-								</div>
-							{:else}
-								<div
-									class="absolute inset-0 flex items-center justify-center"
-									transition:blur|local
-								>
-									<svelte:component
-										this={item.icon.component}
-										height={item.icon.height}
-										width={item.icon.width}
-										color="black"
-									/>
-								</div>
-							{/if}
+							<div class="inline-grid">
+								{#if !is_active}
+									<div
+										class="absolute inset-0 flex flex-col items-center justify-center gap-2"
+										transition:blur|local
+									>
+										<svelte:component
+											this={item.icon.component}
+											height={item.icon.height}
+											width={item.icon.width}
+											color={item.icon.color}
+										/>
+										<p class="!m-0 text-sm capitalize">{item.name}</p>
+									</div>
+								{:else}
+									<div
+										class="absolute inset-0 flex items-center justify-center"
+										transition:blur|local
+									>
+										<svelte:component
+											this={item.icon.component}
+											height={item.icon.height}
+											width={item.icon.width}
+											color="black"
+										/>
+									</div>
+								{/if}
+							</div>
 						</button>
 					{/each}
 				</div>
