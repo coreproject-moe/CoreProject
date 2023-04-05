@@ -110,21 +110,21 @@
 <div class="h-screen overflow-hidden">
 	<AppShell>
 		<svelte:fragment slot="header">
-			<div class="h-24 flex justify-between">
-				<Logo height="48" width="33.6" class="mt-10 mx-10" />
+			<div class="flex h-24 justify-between">
+				<Logo height="48" width="33.6" class="mx-10 mt-10" />
 
 				<AnimeCore width="168" height="33.6" class="self-center" />
 
-				<div class="h-16 w-16 mr-16 self-center">
+				<div class="mr-16 h-16 w-16 self-center">
 					<Avatar rounded="rounded-md" src="https://i.pravatar.cc/?img=48" initials="JD" />
 				</div>
 			</div>
 		</svelte:fragment>
 		<svelte:fragment slot="sidebarLeft">
-			<div class="w-28 h-full flex flex-col justify-between">
-				<div class="flex mt-3 flex-col gap-5 items-center">
+			<div class="flex h-full w-28 flex-col justify-between">
+				<div class="mt-3 flex flex-col items-center gap-5">
 					{#each icon_mapping.top as item}
-						<button type="button" class="btn-icon bg-warning-400 rounded-md p-0">
+						<button type="button" class="btn-icon rounded-md bg-warning-400 p-0">
 							<svelte:component
 								this={item.icon.component}
 								height={item.icon.height}
@@ -135,11 +135,11 @@
 					{/each}
 				</div>
 
-				<div class="flex flex-col gap-9 items-center">
+				<div class="flex flex-col items-center gap-9">
 					{#each icon_mapping.middle as item}
 						<button
 							type="button"
-							class="btn-icon w-16 h-16 bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
+							class="bg-initial btn-icon h-16 w-16 flex-col justify-center gap-1 rounded-lg p-0 text-sm"
 							on:click={() => {
 								active_button = item.name;
 							}}
@@ -150,16 +150,16 @@
 								width={item.icon.width}
 								color={item.icon.color}
 							/>
-							<p class="capitalize !m-0">{item.name}</p>
+							<p class="!m-0 capitalize">{item.name}</p>
 						</button>
 					{/each}
 				</div>
 
-				<div class="flex flex-col gap-9 items-center mb-9">
+				<div class="mb-9 flex flex-col items-center gap-9">
 					{#each icon_mapping.bottom as item}
 						<button
 							type="button"
-							class="btn-icon w-16 h-16 bg-initial rounded-lg p-0 flex-col gap-1 justify-center text-sm"
+							class="bg-initial btn-icon h-16 w-16 flex-col justify-center gap-1 rounded-lg p-0 text-sm"
 						>
 							<svelte:component
 								this={item.icon.component}
@@ -167,7 +167,7 @@
 								width={item.icon.width}
 								color={item.icon.color}
 							/>
-							<p class="capitalize !m-0">{item.name}</p>
+							<p class="!m-0 capitalize">{item.name}</p>
 						</button>
 					{/each}
 				</div>
