@@ -127,7 +127,7 @@
 			</div>
 		</svelte:fragment>
 		<svelte:fragment slot="sidebarLeft">
-			<div class="flex h-full flex-col justify-between xl:w-20 2xl:w-28">
+			<div class="flex h-[85vh] flex-col justify-between xl:w-20 2xl:w-28">
 				<div class="mt-3 flex flex-col items-center gap-5">
 					{#each Object.entries(icon_mapping.top) as item}
 						{@const item_icon = item[1].icon}
@@ -157,7 +157,7 @@
 							type="button"
 							class="{is_active
 								? 'relative bg-secondary-100 before:absolute before:-left-0.5 before:z-10 before:h-4 before:w-1 before:rounded-lg before:bg-primary-500'
-								: 'bg-initial'} btn-icon relative rounded-lg p-0 xl:h-12 xl:w-12 2xl:h-16 2xl:w-16"
+								: 'bg-initial'} btn-icon relative rounded-lg p-0 md:h-12 md:w-12 2xl:h-16 2xl:w-16"
 							on:click={() => middle_section_click(item_name)}
 						>
 							<div class="inline-grid">
