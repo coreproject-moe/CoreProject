@@ -107,11 +107,11 @@
 	}
 </script>
 
-<div class="h-screen overflow-hidden">
+<div class="h-screen overflow-hidden bg-surface-500">
 	<AppShell>
 		<svelte:fragment slot="header">
-			<div class="md:h-18 flex justify-between md:mx-6 md:mt-5 2xl:mx-10 2xl:h-24">
-				<Logo height="48" width="33.6" class="self-center" />
+			<div class="md:h-18 flex justify-between items-center md:mx-6 md:my-3 2xl:mx-10 2xl:h-24">
+				<Logo height="48" width="33.6" class="self-center pt-2" />
 
 				<AnimeCore width="168" height="33.6" />
 
