@@ -142,7 +142,7 @@
 					{/each}
 				</div>
 
-				<div class="mt-14 flex flex-col items-center md:gap-5 2xl:gap-9">
+				<div class="md:mt-10 2xl:mt-14 flex flex-col items-center md:gap-5 2xl:gap-9">
 					{#each Object.entries(icon_mapping.middle) as item}
 						{@const item_name = item[0]}
 						{@const item_icon = item[1].icon}
@@ -192,7 +192,7 @@
 					{/each}
 				</div>
 
-				<div class="mt-20 flex flex-col items-center md:gap-5 2xl:gap-9">
+				<div class="md:mt-10 2xl:mt-20 flex flex-col items-center md:gap-5 2xl:gap-9">
 					{#each Object.entries(icon_mapping.bottom) as item}
 						{@const item_name = item[0]}
 						{@const item_icon = item[1].icon}
@@ -207,7 +207,7 @@
 								color={item_icon.color}
 							/>
 							<p class="!m-0 capitalize md:!text-xs 2xl:!text-lg">{item_name}</p>
-						</button>
+  						</button>
 					{/each}
 				</div>
 			</div>
