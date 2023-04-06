@@ -110,18 +110,24 @@
 <div class="h-screen overflow-hidden">
 	<AppShell>
 		<svelte:fragment slot="header">
-			<div class="flex h-24 justify-between">
-				<Logo height="48" width="33.6" class="mx-10 mt-10" />
+			<div class="xl:h-18 flex justify-between xl:mx-6 xl:mt-5 2xl:mx-10 2xl:h-24">
+				<Logo height="48" width="33.6" class="self-center" />
 
-				<AnimeCore width="168" height="33.6" class="self-center" />
+				<AnimeCore width="168" height="33.6" />
 
-				<div class="mr-16 h-16 w-16 self-center">
-					<Avatar rounded="rounded-md" src="https://i.pravatar.cc/?img=48" initials="JD" />
+				<div class="xl:h-10 xl:w-10 2xl:h-16 2xl:w-16">
+					<Avatar
+						rounded="rounded-md"
+						width="w-full"
+						cursor="cursor-pointer"
+						src="https://i.pravatar.cc/?img=48"
+						initials="JD"
+					/>
 				</div>
 			</div>
 		</svelte:fragment>
 		<svelte:fragment slot="sidebarLeft">
-			<div class="flex h-full w-28 flex-col justify-between">
+			<div class="flex h-full flex-col justify-between xl:w-20 2xl:w-28">
 				<div class="mt-3 flex flex-col items-center gap-5">
 					{#each Object.entries(icon_mapping.top) as item}
 						{@const item_icon = item[1].icon}
@@ -136,7 +142,7 @@
 					{/each}
 				</div>
 
-				<div class="flex flex-col items-center gap-9">
+				<div class="flex flex-col items-center xl:gap-5 2xl:gap-9">
 					{#each Object.entries(icon_mapping.middle) as item}
 						{@const item_name = item[0]}
 						{@const item_icon = item[1].icon}
@@ -151,7 +157,7 @@
 							type="button"
 							class="{is_active
 								? 'relative bg-secondary-100 before:absolute before:-left-0.5 before:z-10 before:h-4 before:w-1 before:rounded-lg before:bg-primary-500'
-								: 'bg-initial'} btn-icon relative h-16 w-16 rounded-lg p-0"
+								: 'bg-initial'} btn-icon relative rounded-lg p-0 xl:h-12 xl:w-12 2xl:h-16 2xl:w-16"
 							on:click={() => middle_section_click(item_name)}
 						>
 							<div class="inline-grid">
@@ -166,7 +172,7 @@
 											width={component_width}
 											color={item_icon.color}
 										/>
-										<p class="!m-0 text-sm capitalize">{item_name}</p>
+										<p class="!m-0 capitalize xl:!text-xs 2xl:!text-lg">{item_name}</p>
 									</div>
 								{:else}
 									<div
@@ -186,13 +192,13 @@
 					{/each}
 				</div>
 
-				<div class="mb-9 flex flex-col items-center gap-9">
+				<div class="flex flex-col items-center xl:mb-5 xl:gap-5 2xl:mb-9 2xl:gap-9">
 					{#each Object.entries(icon_mapping.bottom) as item}
 						{@const item_name = item[0]}
 						{@const item_icon = item[1].icon}
 						<button
 							type="button"
-							class="bg-initial btn-icon h-16 w-16 flex-col justify-center gap-1 rounded-lg p-0 text-sm"
+							class="bg-initial btn-icon flex-col justify-center gap-1 rounded-lg p-0 text-sm xl:h-12 xl:w-12 2xl:h-16 2xl:w-16"
 						>
 							<svelte:component
 								this={item_icon.component}
@@ -200,7 +206,7 @@
 								width={item_icon.width}
 								color={item_icon.color}
 							/>
-							<p class="!m-0 capitalize">{item_name}</p>
+							<p class="!m-0 capitalize xl:!text-xs 2xl:!text-lg">{item_name}</p>
 						</button>
 					{/each}
 				</div>
