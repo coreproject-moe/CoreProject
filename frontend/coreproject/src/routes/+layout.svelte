@@ -102,9 +102,9 @@
 		}
 	};
 
-	const middle_section_click = (item: string) => {
+	async function middle_section_click(item: string) {
 		active_button = item as typeof active_button;
-	};
+	}
 </script>
 
 <div class="h-screen overflow-hidden">
