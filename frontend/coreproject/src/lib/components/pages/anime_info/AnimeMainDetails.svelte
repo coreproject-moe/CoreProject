@@ -125,19 +125,19 @@
 
     <div class="bg-white/20 rounded mt-3 p-1 px-3 w-max flex items-center gap-2 text-[10px]">
       <div class="flex items-center gap-1">
-        Score: 
+        Score:
         <span class="text-warning-400">{anime.score}</span>
       </div>
       <div class="flex items-center gap-1">
-        Status: 
+        Status:
         <span class="text-warning-400">{anime.status}</span>
       </div>
       <div class="flex items-center gap-1">
-        Episode: 
+        Episode:
         <span class="text-warning-400">0/{anime.episodes}</span>
       </div>
       <div class="flex items-center gap-1">
-        Your Score: 
+        Your Score:
         <span class="text-warning-400">Not Rated</span>
       </div>
     </div>
