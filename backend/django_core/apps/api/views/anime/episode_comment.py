@@ -7,9 +7,9 @@ from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
 
 from ...schemas.episodes.episode_comment import (
+    EpisodeCommentTreePOSTSchema,
     EpisodeCommentGETSchema,
-    EpisodeCommentPOSTSchema,
-    EpisodeCommentTreeSchema,
+    EpisodeCommentTreeGETSchema,
 )
 from ...decorator import recursionlimit
 
@@ -18,7 +18,7 @@ router = Router()
 
 @router.get(
     "/{int:anime_id}/episodes/{int:episode_number}/comments",
-    response=list[EpisodeCommentTreeSchema],
+    response=list[EpisodeCommentTreeGETSchema],
 )
 @recursionlimit(90000)
 def get_individual_anime_episode_comments(
@@ -65,14 +65,10 @@ def post_individual_anime_episode_comment(
     request: HttpRequest,
     anime_id: int,
     episode_number: int,
-    payload: EpisodeCommentPOSTSchema,
+    payload: EpisodeCommentTreePOSTSchema,
 ) -> EpisodeCommentModel:
-    data: EpisodeCommentModel = EpisodeCommentModel.objects.create(
-        user=request.auth, **payload.dict()
-    )
-
-    AnimeModel.objects.get(pk=anime_id).episodes.get(
-        episode_number__in=[episode_number]
-    ).episode_comments.add(data)
+    data = payload.dict(exclude_none=True)
+    if parent_pk := data.get("parent_pk"):
+        pass
 
     return data
