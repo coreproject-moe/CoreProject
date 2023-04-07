@@ -11,7 +11,7 @@
 	import { blur } from 'svelte/transition';
 
 	// import icons
-	import AnimeCore from '$icons/AnimeCore.svelte';	
+	import AnimeCore from '$icons/AnimeCore.svelte';
 	import Logo from '$icons/Logo.svelte';
 	import Search from '$icons/Search.svelte';
 	import Home from '$icons/Home.svelte';
