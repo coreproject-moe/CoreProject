@@ -1,18 +1,24 @@
 <script lang="ts">
-	export let anime_id: number;
+  import { page } from '$app/stores';
 
 	import { anime_list } from '$data/mock/anime_list';
 	import AnimeMainDetails from './AnimeMainDetails.svelte';
 
-	let anime = anime_list?.find((anime) => anime.id == anime_id);
+  let anime_id = Number($page.params.id);
+
+	let anime = anime_list?.find((anime) => anime.id === anime_id);
 </script>
 
-<div class="anime_info rounded-tl-3xl overflow-hidden">
-	<div class="anime_basic_details h-screen relative bg-[url({anime?.bannerBackgroundImage})] bg-cover">
-		<div class="gradient absolute w-full h-full bg-gradient-to-t from-surface-500 to-surface-500/50" />
-		<div class="absolute w-full h-full p-16">
-
-      <AnimeMainDetails {anime} />
-    </div>
+<div class="anime_info overflow-hidden rounded-tl-3xl">
+	<div
+		class="anime_basic_details relative h-screen bg-cover"
+		style="background-image: url({anime?.bannerBackgroundImage ?? ''});"
+	>
+		<div
+			class="gradient absolute h-full w-full bg-gradient-to-t from-surface-500 to-surface-500/50"
+		/>
+		<div class="absolute h-full w-full p-16">
+			<AnimeMainDetails {anime} />
+		</div>
 	</div>
 </div>

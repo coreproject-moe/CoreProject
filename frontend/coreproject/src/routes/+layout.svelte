@@ -107,11 +107,11 @@
 	}
 </script>
 
-<div class="h-screen overflow-hidden bg-surface-500">
+<div class="h-screen overflow-hidden">
 	<AppShell>
 		<svelte:fragment slot="header">
 			<div class="md:h-18 flex justify-between items-center md:mx-6 md:my-3 2xl:mx-10 2xl:h-24">
-				<Logo height="48" width="33.6" class="self-center pt-2" />
+				<Logo width="33.6" />
 
 				<AnimeCore width="168" height="33.6" />
 
@@ -192,7 +192,7 @@
 					{/each}
 				</div>
 
-				<div class="md:mt-10 2xl:mt-20 flex flex-col items-center md:gap-5 2xl:gap-9">
+				<div class="md:mt-10 2xl:mt-20 flex flex-col-reverse items-center md:gap-5 2xl:gap-9">
 					{#each Object.entries(icon_mapping.bottom) as item}
 						{@const item_name = item[0]}
 						{@const item_icon = item[1].icon}

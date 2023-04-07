@@ -11,7 +11,13 @@ export const anime_list = [
     episodes: 22,
     status: 'Completed',
     score: 79,
+    rating: 4.59,
+    totalResponse: 3058,
     premiered: 'Spring 2012',
+    milestones: [
+      { title: 'Most popular of all time', value: 86 },
+      { title: 'Highest rated all time', value: 260 },
+    ],
     description: `High school freshman Houtarou Oreki has but one goal: to lead a gray life while conserving as much energy as he can. Unfortunately, his peaceful days come to an end when his older sister, Tomoe, forces him to save the memberless Classics Club from disbandment.
     Luckily, Orekis predicament seems to be over when he heads to the clubroom and discovers that his fellow first-year, Eru Chitanda, has already become a member. However, despite his obligation being fulfilled, Oreki finds himself entangled by Chitandas curious and bubbly personality, soon joining the club of his own volition.
 

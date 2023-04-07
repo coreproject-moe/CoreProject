@@ -1,20 +1,29 @@
 <script lang="ts">
 	export let anime: any;
 
-	import { truncate_str } from '$lib/helpers/truncate_str';
 	// icons
 	import PlayCircle from '$icons/PlayCircle.svelte';
-	import Book from '$icons/Book.svelte';
-	import HeadPhones from '$icons/HeadPhones.svelte';
+	import Read from '$icons/Read.svelte';
+	import Listen from '$icons/Listen.svelte';
 	import Video from '$icons/Video.svelte';
-	import Edit3 from '$icons/Edit3.svelte';
 	import Download from '$icons/Download.svelte';
 	import Share from '$icons/Share.svelte';
-  import SettingsOutline from '$icons/SettingsOutline.svelte';
-  import TrendingUp from '$icons/Trending-Up.svelte';
+	import SettingsOutline from '$icons/SettingsOutline.svelte';
+	import TrendingUp from '$icons/Trending-Up.svelte';
 	import Star from '$icons/Star.svelte';
-  import Edit from '$icons/Edit.svelte';
-  import ExternalLink from '$icons/ExternalLink.svelte';
+	import Edit from '$icons/Edit.svelte';
+	import ExternalLink from '$icons/ExternalLink.svelte';
+
+	const roundedRating = Math.floor(anime.rating);
+	const grayStars = 5 - roundedRating;
+
+	const ratingPercentage = Math.ceil((anime.rating / 5) * 100);
+
+	const k_formatter = (total_rating: number) => {
+		return Math.abs(total_rating) > 999
+			? Math.sign(total_rating) * Number((Math.abs(total_rating) / 1000).toFixed(1)) + 'k'
+			: Math.sign(total_rating) * Math.abs(total_rating);
+	};
 </script>
 
 <div class="grid grid-cols-12 items-end">
@@ -32,7 +41,7 @@
 			</div>
 
 			<div
-				class="anime_basic_details mt-2 flex flex-wrap items-center gap-2 text-xs font-semibold opacity-100 pr-5"
+				class="anime_basic_details mt-2 flex flex-wrap items-center gap-2 pr-5 text-xs font-semibold opacity-100"
 			>
 				<span>{anime.type}</span>
 				<span>-</span>
@@ -61,7 +70,7 @@
 					type="button"
 					class="btn h-16 flex-col gap-1 rounded-lg bg-secondary-100 text-xs font-bold text-surface-500"
 				>
-					<Book width="22" height="22" color="bg-surface-500" />
+					<Read width="22" height="22" color="bg-surface-500" />
 					Read
 				</button>
 
@@ -69,7 +78,7 @@
 					type="button"
 					class="btn h-16 flex-col gap-1 rounded-lg bg-secondary-100 text-xs font-bold text-surface-500"
 				>
-					<HeadPhones width="22" height="22" color="bg-surface-500" />
+					<Listen width="22" height="22" color="bg-surface-500" />
 					Listen
 				</button>
 			</div>
@@ -86,7 +95,7 @@
 					type="button"
 					class="btn-icon btn-icon-sm rounded bg-warning-400 p-0 text-surface-500"
 				>
-					<Edit3 width="20" />
+					<Edit width="20" variant="with_underline_around_pencil" />
 				</button>
 
 				<button
@@ -106,93 +115,108 @@
 		</div>
 	</div>
 
-	<div class="col-span-4 pr-10">
+	<div class="col-span-4 pr-8">
 		<div class="flex items-center gap-4">
-      <h4 class="font-semibold">Synopsis</h4>
-      <SettingsOutline width="15" height="15" class="opacity-75" />
-    </div>
-		<p class="mt-5 text-justify !text-xs opacity-80">
-			{truncate_str(anime.description, 500)}
-		</p>
+			<h4 class="font-semibold">Synopsis</h4>
+			<SettingsOutline width="15" height="15" class="opacity-75" />
+		</div>
+		<div
+			class="mt-5 h-36 overflow-hidden pr-3 scrollbar scrollbar-track-white scrollbar-thumb-surface-200 scrollbar-track-rounded-xl scrollbar-thumb-rounded-xl scrollbar-w-1 hover:overflow-y-scroll hover:pr-2"
+		>
+			<p class="text-justify !text-xs opacity-80">
+				{anime.description}
+			</p>
+		</div>
 
-		<div class="flex gap-2 mt-3">
+		<div class="mt-3 flex gap-2">
 			{#each anime.generes as genere}
-				<div class="bg-surface-500 p-1 px-3 text-xs text-white rounded">
+				<div class="rounded bg-surface-500 p-1 px-3 text-xs text-white">
 					{genere}
 				</div>
 			{/each}
 		</div>
 
-    <div class="bg-white/20 rounded mt-3 p-1 px-3 w-max flex items-center gap-2 text-[10px]">
-      <div class="flex items-center gap-1">
-        Score:
-        <span class="text-warning-400">{anime.score}</span>
-      </div>
-      <div class="flex items-center gap-1">
-        Status:
-        <span class="text-warning-400">{anime.status}</span>
-      </div>
-      <div class="flex items-center gap-1">
-        Episode:
-        <span class="text-warning-400">0/{anime.episodes}</span>
-      </div>
-      <div class="flex items-center gap-1">
-        Your Score:
-        <span class="text-warning-400">Not Rated</span>
-      </div>
-    </div>
+		<div class="mt-3 flex w-max items-center gap-2 rounded bg-white/20 p-1 px-3 text-[10px]">
+			<div class="flex items-center gap-1">
+				Score:
+				<span class="text-warning-400">{anime.score}</span>
+			</div>
+			<div class="flex items-center gap-1">
+				Status:
+				<span class="text-warning-400">{anime.status}</span>
+			</div>
+			<div class="flex items-center gap-1">
+				Episode:
+				<span class="text-warning-400">0/{anime.episodes}</span>
+			</div>
+			<div class="flex items-center gap-1">
+				Your Score:
+				<span class="text-warning-400">Not Rated</span>
+			</div>
+		</div>
 	</div>
 
 	<div class="col-span-2">
-    <div class="flex items-center gap-4">
-      <h4 class="font-semibold">Ratings</h4>
-      <SettingsOutline width="15" height="15" class="opacity-75" />
-    </div>
+		<div class="flex items-center gap-4">
+			<h4 class="font-semibold">Ratings</h4>
+			<SettingsOutline width="15" height="15" class="opacity-75" />
+		</div>
 
-    <div class="mt-4">
-      <div>
-        <span class="font-bold text-3xl underline underline-offset-[15px] decoration-white/25">79%</span>
-        <span class="text-xs">| 2.8k Ratings</span>
-      </div>
+		<div class="mt-4">
+			<div>
+				<span class="text-3xl font-bold underline decoration-white/25 underline-offset-[15px]"
+					>{ratingPercentage}%</span
+				>
+				<span class="text-xs">| {k_formatter(anime.totalResponse)} Ratings</span>
+			</div>
 
-      <div class="mt-3">
-        <div class="flex items-center gap-2">
-          <span>#86</span>
-          <span class="text-xs opacity-80">Most popular all time</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span>#260</span>
-          <span class="text-xs opacity-80">Highest rated all time</span>
-        </div>
-      </div>
+			<div class="mt-3">
+				{#each anime.milestones as milestone}
+					<div class="flex items-center gap-2">
+						<span>#{milestone.value}</span>
+						<span class="text-xs opacity-80">{milestone.title}</span>
+					</div>
+				{/each}
+			</div>
 
-      <button class="btn btn-sm bg-secondary-100 text-surface-500 rounded py-1 px-2 text-xs mt-3">
-        <TrendingUp width="15" height="15" />
-        Detailed Distribution
-      </button>
+			<button class="btn btn-sm mt-3 gap-2 rounded bg-secondary-100 px-2 py-1 text-xs text-surface-500">
+				<TrendingUp width="15" height="15" />
+				Detailed Distribution
+			</button>
 
-      <div class="rating mt-2">
-        <span class="text-xs">Your rating</span>
+			<div class="rating mt-2">
+				<span class="text-xs">Your rating</span>
 
-        <div class="ratings flex items-center gap-3">
-            <div class="flex gap-2">
-              <Star width="15" height="15" fill="fill-white" />
-              <Star width="15" height="15" fill="fill-white" />
-              <Star width="15" height="15" fill="fill-white" />
-              <Star width="15" height="15" fill="fill-white" />
-              <Star width="15" height="15" />
-            </div>
-            <span class="text-xs font-bold">100%</span>
-            <button class="btn-icon btn-icon-sm bg-secondary-100 text-surface-500 rounded p-0">
-              <Edit width="10" height="10" color="bg-surface-500" />
-            </button>
-        </div>
-      </div>
+				<div class="ratings flex items-center gap-3">
+					<div class="flex gap-2">
+						<!-- <Star width="15" height="15" fill="fill-white" />
+						<Star width="15" height="15" fill="fill-white" />
+						<Star width="15" height="15" fill="fill-white" />
+						<Star width="15" height="15" fill="fill-white" />
+						<Star width="15" height="15" /> -->
+						{#each Array(roundedRating) as _}
+							<Star variation="solid" size="15" class="text-white" />
+						{/each}
+						{#each Array(grayStars) as _}
+							<Star variation="outline" size="15" class="text-white" />
+						{/each}
+					</div>
+					<span class="text-xs font-bold">{ratingPercentage}%</span>
+					<button class="btn-icon w-6 h-6 rounded bg-secondary-100 p-0 text-surface-500">
+						<Edit
+							width="13"
+							height="13"
+							variant="without_underline_around_pencil"
+							color="bg-surface-500"
+						/>
+					</button>
+				</div>
+			</div>
 
-      <button class="review btn btn-sm flex items-center gap-2 p-0 text-xs mt-2">
-        Add a review
-        <ExternalLink width="15" height="15" />
-      </button>
-    </div>
-  </div>
+			<button class="review btn btn-sm mt-2 flex items-center gap-2 p-0 text-xs">
+				Add a review
+				<ExternalLink width="15" height="15" />
+			</button>
+		</div>
+	</div>
 </div>
