@@ -116,7 +116,7 @@
 			<h4 class="font-semibold">Synopsis</h4>
 			<SettingsOutline width="15" height="15" class="opacity-75" />
 		</div>
-    
+
 		<ScrollArea
 			offsetScrollbar
 			parentClass="mt-5"
