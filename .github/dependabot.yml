@@ -51,13 +51,13 @@ updates:
       schedule:
           interval: daily
       open-pull-requests-limit: 100
-      
+
     # Docker
     - package-ecosystem: "docker"
       directory: "/"
       schedule:
           interval: "daily"
-          
+
     # BETA REPOS
     - package-ecosystem: npm
       directory: /frontend/coreproject/
