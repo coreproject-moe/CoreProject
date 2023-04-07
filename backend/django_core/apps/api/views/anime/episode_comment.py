@@ -51,10 +51,8 @@ def get_individual_anime_episode_comments(
 
     return_list = []
 
-    query_list = list(query)
-
-    while query_list:
-        item = query_list.pop()
+    while query:
+        item = query.pop()
         return_list.extend(get_nested_children(item))
 
     return return_list
