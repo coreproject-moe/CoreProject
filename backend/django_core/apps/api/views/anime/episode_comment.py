@@ -16,11 +16,25 @@ from ...decorator import recursionlimit
 router = Router()
 
 
+@recursionlimit(90000)
+def get_nested_children(item: EpisodeCommentModel):
+    _list = []
+    _list.append(
+        {
+            "pk": item.pk,
+            "user": str(item.user),
+            "text": item.text,
+            "comment_added": item.comment_added,
+            "children": [get_nested_children(i)[0] for i in item.get_children()],
+        }
+    )
+    return _list
+
+
 @router.get(
     "/{int:anime_id}/episodes/{int:episode_number}/comments",
     response=list[EpisodeCommentTreeGETSchema],
 )
-@recursionlimit(90000)
 def get_individual_anime_episode_comments(
     request: HttpRequest,
     anime_id: int,
@@ -37,20 +51,10 @@ def get_individual_anime_episode_comments(
 
     return_list = []
 
-    def get_nested_children(item: EpisodeCommentModel):
-        __list__ = []
-        __list__.append(
-            {
-                "pk": item.pk,
-                "user": str(item.user),
-                "text": item.text,
-                "comment_added": item.comment_added,
-                "children": [get_nested_children(i)[0] for i in item.get_children()],
-            }
-        )
-        return __list__
+    query_list = list(query)
 
-    for item in query:
+    while query_list:
+        item = query_list.pop()
         return_list.extend(get_nested_children(item))
 
     return return_list
