@@ -11,7 +11,7 @@
 	import { blur } from 'svelte/transition';
 
 	// import icons
-	import AnimeCore from '$icons/AnimeCore.svelte';
+	import AnimeCore from '$icons/AnimeCore.svelte';	
 	import Logo from '$icons/Logo.svelte';
 	import Search from '$icons/Search.svelte';
 	import Home from '$icons/Home.svelte';
@@ -27,6 +27,7 @@
 		| keyof typeof icon_mapping.top
 		| keyof typeof icon_mapping.middle
 		| keyof typeof icon_mapping.bottom = 'home';
+
 
 	const icon_mapping = {
 		top: {
@@ -110,8 +111,8 @@
 <div class="h-screen overflow-hidden">
 	<AppShell>
 		<svelte:fragment slot="header">
-			<div class="md:h-18 flex justify-between items-center md:mx-6 md:my-3 2xl:mx-10 2xl:h-24">
-				<Logo width="33.6" />
+			<div class="md:h-18 flex justify-between items-center md:mx-6 md:my-3 2xl:my-0 2xl:mx-10 2xl:h-24">
+				<Logo width="33.6" height="48" />
 
 				<AnimeCore width="168" height="33.6" />
 
