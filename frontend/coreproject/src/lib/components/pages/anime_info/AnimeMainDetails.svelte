@@ -12,10 +12,7 @@
 	import Download from '$icons/Download.svelte';
 	import Share from '$icons/Share.svelte';
 	import SettingsOutline from '$icons/SettingsOutline.svelte';
-	import TrendingUp from '$icons/Trending-Up.svelte';
-	import Star from '$icons/Star.svelte';
 	import Edit from '$icons/Edit.svelte';
-	import ExternalLink from '$icons/ExternalLink.svelte';
 </script>
 
 <div class="grid grid-cols-12 items-start">
