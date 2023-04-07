@@ -54,9 +54,10 @@ updates:
       
     # Docker
     - package-ecosystem: "docker"
-        directory: "/"
-        schedule:
+      directory: "/"
+      schedule:
           interval: "daily"
+          
     # BETA REPOS
     - package-ecosystem: npm
       directory: /frontend/coreproject/
