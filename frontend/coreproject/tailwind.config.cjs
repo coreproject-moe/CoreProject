@@ -12,6 +12,5 @@ module.exports = {
 		require('@tailwindcss/forms'),
 		require('@tailwindcss/typography'),
 		...require('@skeletonlabs/skeleton/tailwind/skeleton.cjs')(),
-    require('tailwind-scrollbar')({ nocompatible: true }),
 	]
 };

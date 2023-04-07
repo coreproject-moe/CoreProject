@@ -1,6 +1,8 @@
 <script lang="ts">
 	export let anime: any;
 
+	import ScrollArea from '$components/shared/ScrollArea.svelte';
+
 	// icons
 	import PlayCircle from '$icons/PlayCircle.svelte';
 	import Read from '$icons/Read.svelte';
@@ -14,16 +16,10 @@
 	import Edit from '$icons/Edit.svelte';
 	import ExternalLink from '$icons/ExternalLink.svelte';
 
+	// manage ratings
 	const roundedRating = Math.floor(anime.rating);
 	const grayStars = 5 - roundedRating;
-
 	const ratingPercentage = Math.ceil((anime.rating / 5) * 100);
-
-	const k_formatter = (total_rating: number) => {
-		return Math.abs(total_rating) > 999
-			? Math.sign(total_rating) * Number((Math.abs(total_rating) / 1000).toFixed(1)) + 'k'
-			: Math.sign(total_rating) * Math.abs(total_rating);
-	};
 </script>
 
 <div class="grid grid-cols-12 items-end">
@@ -120,13 +116,15 @@
 			<h4 class="font-semibold">Synopsis</h4>
 			<SettingsOutline width="15" height="15" class="opacity-75" />
 		</div>
-		<div
-			class="mt-5 h-36 overflow-hidden pr-3 scrollbar scrollbar-track-white scrollbar-thumb-surface-200 scrollbar-track-rounded-xl scrollbar-thumb-rounded-xl scrollbar-w-1 hover:overflow-y-scroll hover:pr-2"
+    
+		<ScrollArea
+			offsetScrollbar
+			parentClass="mt-5"
+			style="min-height:140px"
+			class="max-h-24 text-justify !text-xs"
 		>
-			<p class="text-justify !text-xs opacity-80">
-				{anime.description}
-			</p>
-		</div>
+			{anime.description}
+		</ScrollArea>
 
 		<div class="mt-3 flex gap-2">
 			{#each anime.generes as genere}
@@ -167,7 +165,7 @@
 				<span class="text-3xl font-bold underline decoration-white/25 underline-offset-[15px]"
 					>{ratingPercentage}%</span
 				>
-				<span class="text-xs">| {k_formatter(anime.totalResponse)} Ratings</span>
+				<span class="text-xs">| {anime.totalResponse} Ratings</span>
 			</div>
 
 			<div class="mt-3">
@@ -179,7 +177,9 @@
 				{/each}
 			</div>
 
-			<button class="btn btn-sm mt-3 gap-2 rounded bg-secondary-100 px-2 py-1 text-xs text-surface-500">
+			<button
+				class="btn btn-sm mt-3 gap-2 rounded bg-secondary-100 px-2 py-1 text-xs text-surface-500"
+			>
 				<TrendingUp width="15" height="15" />
 				Detailed Distribution
 			</button>
@@ -202,7 +202,7 @@
 						{/each}
 					</div>
 					<span class="text-xs font-bold">{ratingPercentage}%</span>
-					<button class="btn-icon w-6 h-6 rounded bg-secondary-100 p-0 text-surface-500">
+					<button class="btn-icon h-6 w-6 rounded bg-secondary-100 p-0 text-surface-500">
 						<Edit
 							width="13"
 							height="13"
