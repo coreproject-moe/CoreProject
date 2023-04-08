@@ -14,7 +14,7 @@
 	{style}
 	class="{parentClass} {offsetScrollbar
 		? 'pr-3'
-		: 'pr-0'} scrollbar overflow-y-scroll overscroll-y-contain"
+		: 'pr-0'} scrollbar overflow-hidden overflow-y-scroll overscroll-y-contain"
 >
 	<div class="{klass} whitespace-pre-line">
 		<slot />
@@ -35,7 +35,7 @@
 		transition: border-color 0.2s linear;
 		&:hover {
 			/* the color we want the scrollbar on hover */
-			border-color: rgba(255, 255, 255, 0.12);
+			border-color: rgba(255, 255, 255, 0.15);
 		}
 		&::-webkit-scrollbar,
 		&::-webkit-scrollbar-corner,

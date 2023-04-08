@@ -46,5 +46,8 @@
 		"vitest": "^0.29.8",
 		"voca": "^1.4.0"
 	},
-	"type": "module"
+	"type": "module",
+	"dependencies": {
+		"tailwind-scrollbar": "^3.0.0"
+	}
 }
