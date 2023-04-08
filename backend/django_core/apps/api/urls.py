@@ -220,6 +220,17 @@ tracker_router.add_router(
     tags=["trackers"],
 )
 
+
+# __ EPISODE ROUTER ___
+from .views.episodes.comment import router as episode_comment_router
+
+api.add_router(
+    "/episode/comment",
+    episode_comment_router,
+    tags=["episodes"],
+)
+
+
 # __ FEED ROUTER __
 # May be powered by Machine learning in future
 from .views.feeds.featured import router as feature_router

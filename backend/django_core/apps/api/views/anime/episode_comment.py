@@ -58,19 +58,3 @@ def get_individual_anime_episode_comments(
     return return_list
 
 
-@router.post(
-    "/{int:anime_id}/episodes/{int:episode_number}/comments",
-    response=EpisodeCommentGETSchema,
-    auth=AuthBearer(),
-)
-def post_individual_anime_episode_comment(
-    request: HttpRequest,
-    anime_id: int,
-    episode_number: int,
-    payload: EpisodeCommentTreePOSTSchema,
-) -> EpisodeCommentModel:
-    data = payload.dict(exclude_none=True)
-    if parent_pk := data.get("parent_pk"):
-        pass
-
-    return data

@@ -8,11 +8,16 @@ class EpisodeCommentGETSchema(ModelSchema):
 
     class Config:
         model = EpisodeCommentModel
-        model_fields = ["user", "text"]
+        model_fields = ["id", "user", "text"]
 
 
 class EpisodeCommentTreePOSTSchema(Schema):
     parent_pk: int | None = None
+    text: str
+
+
+class EpisodeCommentTreePATCHSchema(Schema):
+    pk: int
     text: str
 
 

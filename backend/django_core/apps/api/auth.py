@@ -15,6 +15,20 @@ logger = logging.getLogger("django")
 
 
 class AuthBearer(HttpBearer):
+    def authenticate(
+        self,
+        request: HttpRequest,
+        token: str,
+    ) -> CustomUser | AnonymousUser:
+        try:
+            token_data = Token.objects.get(token=token)
+            return token_data.user
+
+        except Token.DoesNotExist:
+            return AnonymousUser
+
+
+class OptionalAuthBearer(AuthBearer):
     def __call__(self, request: HttpRequest) -> Any | None:
         headers = get_headers(request)
         auth_value = headers.get(self.header)
@@ -28,15 +42,3 @@ class AuthBearer(HttpBearer):
             return None
         token = " ".join(parts[1:])
         return self.authenticate(request, token)
-
-    def authenticate(
-        self,
-        request: HttpRequest,
-        token: str,
-    ) -> CustomUser | AnonymousUser:
-        try:
-            token_data = Token.objects.get(token=token)
-            return token_data.user
-
-        except Token.DoesNotExist:
-            return AnonymousUser
