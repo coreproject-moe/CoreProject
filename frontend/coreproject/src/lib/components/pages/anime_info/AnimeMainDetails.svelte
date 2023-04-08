@@ -20,7 +20,7 @@
 		<div class="col-span-7 flex items-end gap-10">
 			<img class="xl:w-60 2xl:w-80 xl:rounded-xl 2xl:rounded-3xl" src={anime.cardBackgroundImage} alt={anime.titles.eng} />
 			<div>
-				<h2 class="font-bold md:!text-4xl">{anime.titles.eng}</h2>
+				<h2 class="font-bold 2xl:!text-5xl 3xl:!text-6xl">{anime.titles.eng}</h2>
 
 				<p class="pt-3 3xl:mt-5 flex items-center gap-2 text-surface-100">
 					<span class="xl:text-xs 2xl:text-sm 3xl:!text-[16px] font-medium after:content-['▪'] after:ml-1">{anime.titles.japanese}</span>
