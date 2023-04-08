@@ -1,37 +1,21 @@
-/* eslint-disable */
-
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: ["./src/**/*.{html,js,svelte,ts,json}"],
-    theme: {
-        fontFamily: {
-            sans: ["Kokoro", "sans-serif"]
-        },
-
-        extend: {}
-    },
-
-    plugins: [
-        require("@tailwindcss/typography"),
-        require("tailwind-scrollbar-hide"),
-        require("daisyui")
+    darkMode: 'class',
+    content: [
+        './src/**/*.{html,js,svelte,ts}',
+        require('path').join(require.resolve('@skeletonlabs/skeleton'), '../**/*.{html,js,svelte,ts}')
     ],
-
-    daisyui: {
-        themes: [
-            {
-                kokoro: {
-                    primary: "#7569E1",
-                    secondary: "#E3BD49",
-                    accent: "#FFF7F8",
-                    neutral: "#1E2036",
-                    "base-100": "#070519",
-                    info: "#DCD9F7",
-                    success: "#6FCF97",
-                    warning: "#EDD68D",
-                    error: "#EB5757"
-                }
-            }
-        ]
-    }
+    theme: {
+        extend: {
+            screens: {
+                '3xl': '1920px',
+            },
+        }
+    },
+    plugins: [
+        require('@tailwindcss/forms'),
+        require('@tailwindcss/typography'),
+        ...require('@skeletonlabs/skeleton/tailwind/skeleton.cjs')(),
+        require('tailwind-scrollbar'),
+    ]
 };

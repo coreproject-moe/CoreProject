@@ -6,5 +6,5 @@ node_modules
 .env
 .env.*
 !.env.example
-.vercel
-.next
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
