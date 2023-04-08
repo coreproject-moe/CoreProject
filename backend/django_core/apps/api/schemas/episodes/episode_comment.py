@@ -8,20 +8,22 @@ class EpisodeCommentGETSchema(ModelSchema):
 
     class Config:
         model = EpisodeCommentModel
-        model_fields = ["user", "text", "comment_added"]
+        model_fields = ["id", "user", "text"]
 
 
-class EpisodeCommentPOSTSchema(ModelSchema):
-    class Config:
-        model = EpisodeCommentModel
-        model_fields = [
-            "text",
-        ]
+class EpisodeCommentTreePOSTSchema(Schema):
+    parent_pk: int | None = None
+    text: str
 
 
-class EpisodeCommentTreeSchema(Schema):
+class EpisodeCommentTreePATCHSchema(Schema):
+    pk: int
+    text: str
+
+
+class EpisodeCommentTreeGETSchema(Schema):
     pk: int
     user: str
     text: str
     comment_added: datetime.datetime
-    children: list["EpisodeCommentTreeSchema"] = []
+    children: list["EpisodeCommentTreeGETSchema"] = []
