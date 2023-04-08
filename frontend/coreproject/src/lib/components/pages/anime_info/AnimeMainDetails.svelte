@@ -44,7 +44,7 @@
 					<span>{anime.studio}</span>
 				</div>
 
-				<div class="xl:mt-5 2xl:mt-7 3xl:mt-10 flex items-center xl:gap-3 2xl:gap-5">
+				<div class="xl:mt-5 2xl:mt-7 3xl:mt-12 flex items-center xl:gap-3 2xl:gap-5">
 					<button
 						type="button"
 						class="btn 2xl:btn-md 3xl:btn-lg xl:h-16 2xl:h-20 justify-start xl:rounded-lg 2xl:rounded-xl bg-primary-500 xl:text-xs 2xl:text-xl font-bold text-white"
@@ -76,28 +76,28 @@
 				<div class="user_options mt-5 flex xl:gap-2 2xl:gap-3">
 					<button
 						type="button"
-						class="btn-icon xl:btn-icon-sm 3xl:btn-icon-lg 2xl:w-12 3xl:w-14 2xl:h-12 3xl:h-14 xl:rounded 2xl:rounded-lg bg-warning-400 p-0 text-surface-500"
+						class="btn-icon xl:btn-icon-sm 3xl:btn-icon-lg 2xl:w-12 3xl:w-10 2xl:h-12 3xl:h-10 xl:rounded 2xl:rounded-lg bg-warning-400 p-0 text-surface-500"
 					>
 						<Video width="20" />
 					</button>
 
 					<button
 						type="button"
-						class="btn-icon xl:btn-icon-sm 2xl:btn-icon-lg 2xl:w-12 3xl:w-14 2xl:h-12 3xl:h-14 xl:rounded 2xl:rounded-lg bg-warning-400 p-0 text-surface-500"
+						class="btn-icon xl:btn-icon-sm 2xl:btn-icon-lg 2xl:w-12 3xl:w-10 2xl:h-12 3xl:h-10 xl:rounded 2xl:rounded-lg bg-warning-400 p-0 text-surface-500"
 					>
 						<Edit width="20" variant="with_underline_around_pencil" />
 					</button>
 
 					<button
 						type="button"
-						class="btn-icon xl:btn-icon-sm 2xl:btn-icon-lg 2xl:w-12 3xl:w-14 2xl:h-12 3xl:h-14 xl:rounded 2xl:rounded-lg bg-warning-400 p-0 text-surface-500"
+						class="btn-icon xl:btn-icon-sm 2xl:btn-icon-lg 2xl:w-12 3xl:w-10 2xl:h-12 3xl:h-10 xl:rounded 2xl:rounded-lg bg-warning-400 p-0 text-surface-500"
 					>
 						<Download width="20" />
 					</button>
 
 					<button
 						type="button"
-						class="btn-icon xl:btn-icon-sm 2xl:btn-icon-lg 2xl:w-12 3xl:w-14 2xl:h-12 3xl:h-14 xl:rounded 2xl:rounded-lg bg-warning-400 p-0 text-surface-500"
+						class="btn-icon xl:btn-icon-sm 2xl:btn-icon-lg 2xl:w-12 3xl:w-10 2xl:h-12 3xl:h-10 xl:rounded 2xl:rounded-lg bg-warning-400 p-0 text-surface-500"
 					>
 						<Share width="20" />
 					</button>
@@ -115,7 +115,7 @@
 
 			<ScrollArea
 				offsetScrollbar
-				parentClass="mt-5"
+				parentClass="mt-4 2xl:mt-6 3xl:mt-8"
 				class="xl:max-h-40 3xl:max-h-60 text-justify xl:!text-xs 2xl:!text-base 2xl:!leading-normal text-surface-50"
 			>
 				{anime.description}

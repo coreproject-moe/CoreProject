@@ -15,7 +15,7 @@
 		<SettingsOutline width="15" height="15" class="opacity-75" />
 	</div>
 
-	<div class="xl:mt-4 2xl:mt-5">
+	<div class="xl:mt-4 2xl:mt-8">
 		<div>
 			<span class="xl:text-3xl 2xl:text-4xl 3xl:text-5xl font-bold underline decoration-white/25 underline-offset-[15px]"
 				>{Math.ceil((anime.rating / 5) * 100)}%</span
