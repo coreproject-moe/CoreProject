@@ -111,6 +111,8 @@ if DEBUG:
         "dbbackup",  # django-dbbackup
         # Django browser Reload
         "django_browser_reload",
+        # Django extensions
+        "django_extensions",
     )
 
 
