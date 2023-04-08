@@ -1,5 +1,4 @@
 from apps.anime.models import AnimeModel
-from apps.api.auth import AuthBearer
 from apps.episodes.models.episode_comment import EpisodeCommentModel
 from ninja import Router
 
@@ -7,8 +6,6 @@ from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
 
 from ...schemas.episodes.episode_comment import (
-    EpisodeCommentTreePOSTSchema,
-    EpisodeCommentGETSchema,
     EpisodeCommentTreeGETSchema,
 )
 from ...decorator import recursionlimit
@@ -56,5 +53,3 @@ def get_individual_anime_episode_comments(
         return_list.extend(get_nested_children(item))
 
     return return_list
-
-
