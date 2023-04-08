@@ -15,7 +15,7 @@
 		style="background-image: url({anime?.bannerBackgroundImage ?? ''});"
 	>
 		<div
-			class="gradient absolute h-full w-full bg-gradient-to-t from-surface-500 to-surface-500/50"
+			class="gradient absolute h-full w-full bg-gradient-to-t from-surface-900 to-surface-900/50"
 		/>
 		<div class="absolute h-full w-full xl:p-16 2xl:p-18 3xl:p-28">
 			<AnimeMainDetails {anime} />
