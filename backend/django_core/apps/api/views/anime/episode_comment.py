@@ -5,8 +5,13 @@ from ninja import Router
 from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
 
+from apps.api.auth import AuthBearer
+from apps.episodes.models import EpisodeModel
+from typing import cast
 from ...schemas.episodes.episode_comment import (
+    EpisodeCommentGETSchema,
     EpisodeCommentTreeGETSchema,
+    EpisodeCommentTreePOSTSchema,
 )
 from ...decorator import recursionlimit
 
@@ -53,3 +58,40 @@ def get_individual_anime_episode_comments(
         return_list.extend(get_nested_children(item))
 
     return return_list
+
+
+@router.post(
+    "/{int:anime_id}/episodes/{int:episode_number}/comments",
+    response=EpisodeCommentGETSchema,
+    auth=AuthBearer(),
+)
+def post_individual_anime_episode_comment(
+    request: HttpRequest,
+    anime_id: int,
+    episode_number: int,
+    payload: EpisodeCommentTreePOSTSchema,
+) -> EpisodeCommentModel:
+    data = payload.dict(exclude_none=True, exclude_unset=True)
+
+    comment_instance = EpisodeCommentModel.objects.create(
+        text=data["text"],
+        user=request.auth,
+    )
+
+    if parent_pk := data.get("parent_pk"):
+        if parent_pk != 0:
+            parent_instance = get_object_or_404(EpisodeCommentModel, pk=parent_pk)
+            comment_instance.set_parent(parent_instance)
+
+    query_object = get_object_or_404(
+        get_object_or_404(
+            AnimeModel,
+            pk=anime_id,
+        ).episodes,
+        episode_number=episode_number,
+    )
+    query = cast(EpisodeModel, query_object)
+
+    query.episode_comments.add(comment_instance)
+
+    return comment_instance
