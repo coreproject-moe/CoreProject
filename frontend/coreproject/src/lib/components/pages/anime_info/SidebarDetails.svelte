@@ -16,11 +16,11 @@
 	</div>
 
 	<div class="xl:mt-4 2xl:mt-8">
-		<div>
+		<div class="divide-x flex items-end gap-3">
 			<span class="xl:text-3xl 2xl:text-4xl 3xl:text-5xl font-bold underline decoration-white/25 underline-offset-[15px]"
 				>{Math.ceil((anime.rating / 5) * 100)}%</span
 			>
-			<span class="xl:text-xs 2xl:text-base 3xl:text-lg">| {anime.totalResponse} Ratings</span>
+			<span class="xl:text-xs 2xl:text-base 3xl:text-lg pl-2">{anime.totalResponse} Ratings</span>
 		</div>
 
 		<div class="xl:mt-3 2xl:mt-5 3xl:mt-7">

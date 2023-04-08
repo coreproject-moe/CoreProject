@@ -108,7 +108,7 @@
 	}
 </script>
 
-<div class="h-screen overflow-hidden">
+<div class="h-screen">
 	<AppShell>
 		<svelte:fragment slot="header">
 			<div class="md:h-18 flex justify-between items-center md:mx-6 md:my-3 2xl:my-0 2xl:mx-10 2xl:h-24">
@@ -143,7 +143,7 @@
 					{/each}
 				</div>
 
-				<div class="md:mt-10 2xl:mt-14 flex flex-col items-center md:gap-5 2xl:gap-9">
+				<div class="md:mt-10 flex flex-col items-center md:gap-5 2xl:gap-9">
 					{#each Object.entries(icon_mapping.middle) as item}
 						{@const item_name = item[0]}
 						{@const item_icon = item[1].icon}

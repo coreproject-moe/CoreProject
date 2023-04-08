@@ -18,31 +18,30 @@
 <div class="grid grid-cols-12 items-start">
 	<div class="col-span-10 grid grid-cols-12 items-end xl:gap-10">
 		<div class="col-span-7 flex items-end gap-10">
-			<img class="xl:w-60 2xl:w-96 xl:rounded-xl 2xl:rounded-3xl" src={anime.cardBackgroundImage} alt={anime.titles.eng} />
+			<img class="xl:w-60 2xl:w-80 xl:rounded-xl 2xl:rounded-3xl" src={anime.cardBackgroundImage} alt={anime.titles.eng} />
 			<div>
-				<h2 class="font-bold 2xl:!text-5xl 3xl:!text-6xl">{anime.titles.eng}</h2>
+				<h2 class="font-bold md:!text-4xl">{anime.titles.eng}</h2>
 
-				<div class="pt-3 3xl:mt-5 flex items-center gap-2 xl:text-xs 2xl:text-sm 3xl:!text-[16px] font-medium text-surface-100">
-					<span>{anime.titles.japanese}</span>
-					<span>-</span>
-					<span>{anime.titles.eng}</span>
-					<span>-</span>
-					<span>{anime.titles.others}</span>
-				</div>
+				<p class="pt-3 3xl:mt-5 flex items-center gap-2 text-surface-100">
+					<span class="xl:text-xs 2xl:text-sm 3xl:!text-[16px] font-medium after:content-['▪'] after:ml-1">{anime.titles.japanese}</span>
+					<span class="xl:text-xs 2xl:text-sm 3xl:!text-[16px] font-medium after:content-['▪'] after:ml-1">{anime.titles.eng}</span>
+					<span class="xl:text-xs 2xl:text-sm 3xl:!text-[16px] font-medium">{anime.titles.others}</span>
+				</p>
 
-				<div
-					class="pt-4 flex flex-wrap items-center gap-2 pr-5 xl:text-xs 2xl:text-sm 3xl:!text-[16px] 2xl:!leading-none font-semibold"
-				>
-					<span>{anime.type}</span>
-					<span>-</span>
-					<span>{anime.episodes} eps</span>
-					<span>-</span>
-					<span>{anime.status}</span>
-					<span>-</span>
-					<span>{anime.premiered}</span>
-					<span>-</span>
-					<span>{anime.studio}</span>
-				</div>
+				<p class="pt-4 flex flex-wrap items-center gap-2 pr-5">
+					<span class="xl:text-xs 2xl:text-sm 3xl:!text-[16px] 2xl:!leading-none font-semibold after:content-['▪'] after:ml-1">
+						{anime.type}
+					</span>
+					<span class="xl:text-xs 2xl:text-sm 3xl:!text-[16px] 2xl:!leading-none font-semibold after:content-['▪'] after:ml-1">
+						{anime.episodes} eps
+					</span>
+					<span class="xl:text-xs 2xl:text-sm 3xl:!text-[16px] 2xl:!leading-none font-semibold after:content-['▪'] after:ml-1">
+						{anime.status}</span>
+					<span class="xl:text-xs 2xl:text-sm 3xl:!text-[16px] 2xl:!leading-none font-semibold after:content-['▪'] after:ml-1">
+						{anime.premiered}
+					</span>
+					<span class="xl:text-xs 2xl:text-sm 3xl:!text-[16px] 2xl:!leading-none font-semibold">{anime.studio}</span>
+				</p>
 
 				<div class="xl:mt-5 2xl:mt-7 3xl:mt-12 flex items-center xl:gap-3 2xl:gap-5">
 					<button
@@ -116,7 +115,7 @@
 			<ScrollArea
 				offsetScrollbar
 				parentClass="mt-4 2xl:mt-6 3xl:mt-8"
-				class="xl:max-h-40 3xl:max-h-60 text-justify xl:!text-xs 2xl:!text-base 2xl:!leading-normal text-surface-50"
+				class="xl:max-h-40 3xl:max-h-48 text-justify xl:!text-xs 2xl:!text-base 2xl:!leading-normal text-surface-50"
 			>
 				{anime.description}
 			</ScrollArea>
