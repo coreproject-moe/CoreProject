@@ -1,10 +1,11 @@
 <script lang="ts">
 	export let anime: any;
 
+	import StarRating from 'svelte-star-rating';
+
 	// icons
 	import SettingsOutline from '$icons/SettingsOutline.svelte';
 	import TrendingUp from '$icons/Trending-Up.svelte';
-	import Star from '$icons/Star.svelte';
 	import Edit from '$icons/Edit.svelte';
 	import ExternalLink from '$icons/ExternalLink.svelte';
 </script>
@@ -16,11 +17,11 @@
 	</div>
 
 	<div class="md:mt-3">
-		<div class="divide-x flex items-end gap-3">
-			<span class="md:text-[2.5vw] font-bold underline decoration-white/25 underline-offset-[2vh]"
+		<div class="flex items-end gap-3">
+			<span class="md:text-[2.5vw] font-bold underline decoration-white/25 underline-offset-8"
 				>{Math.ceil((anime.rating / 5) * 100)}%</span
 			>
-			<span class="md:text-[0.8vw] pl-2">{anime.totalResponse} Ratings</span>
+			<span class="md:text-[0.8vw] pl-2 divider-vertical !border-white/25">{anime.totalResponse} Ratings</span>
 		</div>
 
 		<div class="md:mt-3">
@@ -41,16 +42,8 @@
 
 		<div class="md:mt-3">
 			<span class="md:text-[1vw]">Your rating</span>
-
 			<div class="flex items-center gap-3">
-				<div class="flex gap-2">
-					{#each Array(Math.floor(anime.rating)) as _}
-						<Star variation="solid" size="18" class="text-white" />
-					{/each}
-					{#each Array(5 - Math.floor(anime.rating)) as _}
-						<Star variation="outline" size="18" class="text-white" />
-					{/each}
-				</div>
+				<StarRating rating={anime.rating} config={{size: 18}} style={"margin: 0;"} />
 				<span class="md:text-[1.3vw] font-bold">{Math.ceil((anime.rating / 5) * 100)}%</span>
 				<button class="btn-icon rounded bg-secondary-100 p-1 text-surface-500">
 					<Edit

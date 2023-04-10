@@ -78,30 +78,25 @@
 				<span class="font-bold md:text-[3vw]">{anime.titles.eng}</span>
 
 				<p class="flex items-center gap-2 text-surface-100">
-					<span class="md:text-[0.8vw] font-medium after:content-['▪'] after:ml-1">{anime.titles.japanese}</span>
-					<span class="md:text-[0.8vw] font-medium after:content-['▪'] after:ml-1">{anime.titles.eng}</span>
-					<span class="md:text-[0.8vw] font-medium">{anime.titles.others}</span>
+					{#each Object.entries(anime.titles) as anime_title}
+						{#if anime_title[0] !== 'eng'}
+							<span class="md:text-[0.8vw] font-medium [&:not(:last-child)]:after:content-['▪'] [&:not(:last-child)]:after:ml-2">{anime_title[1]}</span>
+						{/if}
+					{/each}
 				</p>
 
 				<p class="pt-2 flex flex-wrap items-center gap-2">
-					<span class="md:text-[0.9vw] md:leading-none font-semibold after:content-['▪'] after:ml-1">
-						{anime.type}
-					</span>
-					<span class="md:text-[0.9vw] md:leading-none font-semibold after:content-['▪'] after:ml-1">
-						{anime.episodes} eps
-					</span>
-					<span class="md:text-[0.9vw] md:leading-none font-semibold after:content-['▪'] after:ml-1">
-						{anime.status}</span>
-					<span class="md:text-[0.9vw] md:leading-none font-semibold after:content-['▪'] after:ml-1">
-						{anime.premiered}
-					</span>
-					<span class="md:text-[0.9vw] md:leading-none font-semibold">{anime.studio}</span>
+					{#each Object.entries(anime.basic_details) as anime_detail}
+						<span class="md:text-[0.9vw] md:leading-none font-semibold [&:not(:last-child)]:after:content-['▪'] [&:not(:last-child)]:after:ml-1">
+							{anime_detail[1]} {anime_detail[0] === 'episodes' ? 'eps' : ''}
+						</span>
+					{/each}
 				</p>
 
 				<div class="md:mt-10 flex items-center md:gap-4">
 					<button
 						type="button"
-						class="btn md:h-[8vh] md:w-[8vw] justify-center md:rounded-lg bg-primary-500 md:text-[1vw] font-bold text-white"
+						class="btn md:h-[9vh] md:w-[8vw] justify-center md:rounded-lg bg-primary-500 md:text-[1vw] font-bold text-white"
 					>
 						<PlayCircle width="30" height="30" color="white" />
 						<div class="flex flex-col items-start">
@@ -121,7 +116,7 @@
 
 						<button
 						type="button"
-						class="btn md:h-[8vh] md:w-[5vw] flex-col gap-1 md:rounded-lg bg-secondary-100 md:text-[1vw] md:font-semibold text-surface-500 capitalize"
+						class="btn md:p-2 md:h-[9vh] md:w-[5vw] flex-col gap-1 md:rounded-lg bg-secondary-100 md:text-[1vw] md:font-semibold text-surface-500 capitalize"
 						>
 							<svelte:component 
 								this={component}

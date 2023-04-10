@@ -2,18 +2,20 @@ export const anime_list = [
   {
     "id": 1,
     "titles": {
+      "japanese": "氷菓",
       "eng": "Hyouka",
       "others": "Hyou-ka, Hyouka: Hyoka",
-      "japanese": "氷菓"
     },
-    "studio": "Kyoto Animation",
-    "type": "TV",
-    "episodes": 22,
-    "status": "Completed",
+    basic_details: {
+      "type": "TV",
+      "episodes": 22,
+      "status": "Completed",
+      "premiered": "Spring 2012",
+      "studio": "Kyoto Animation",
+    },
     "score": 79,
     "rating": 4.59,
     "totalResponse": 3058,
-    "premiered": "Spring 2012",
     "milestones": [
       { "title": "Most popular of all time", "value": 86 },
       { "title": "Highest rated all time", "value": 260 }
