@@ -6,7 +6,6 @@ from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 
 from ...schemas.episodes.episode_comment import (
-    EpisodeCommentTreePOSTSchema,
     EpisodeCommentGETSchema,
     EpisodeCommentTreePATCHSchema,
 )
