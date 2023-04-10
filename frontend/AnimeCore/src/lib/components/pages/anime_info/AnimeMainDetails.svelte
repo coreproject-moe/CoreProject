@@ -185,11 +185,11 @@
 				</div>
 				<div class="flex items-center gap-1">
 					Status:
-					<span class="text-warning-400">{anime.status}</span>
+					<span class="text-warning-400">{anime.basic_details.status}</span>
 				</div>
 				<div class="flex items-center gap-1">
 					Episode:
-					<span class="text-warning-400">0/{anime.episodes}</span>
+					<span class="text-warning-400">0/{anime.basic_details.episodes}</span>
 				</div>
 				<div class="flex items-center gap-1">
 					Your Score:
