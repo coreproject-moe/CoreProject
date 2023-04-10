@@ -83,7 +83,7 @@
 					<span class="md:text-[0.8vw] font-medium">{anime.titles.others}</span>
 				</p>
 
-				<p class="pt-2 flex flex-wrap items-center gap-2 pr-5">
+				<p class="pt-2 flex flex-wrap items-center gap-2">
 					<span class="md:text-[0.9vw] md:leading-none font-semibold after:content-['▪'] after:ml-1">
 						{anime.type}
 					</span>
