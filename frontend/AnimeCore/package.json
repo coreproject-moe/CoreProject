@@ -20,7 +20,7 @@
         "@felte/reporter-tippy": "^1.1.5",
         "@felte/validator-yup": "^1.0.11",
         "@sveltejs/adapter-node": "^1.2.3",
-        "@sveltejs/adapter-static": "^2.0.1",
+        "@sveltejs/adapter-static": "^2.0.2",
         "@sveltejs/adapter-vercel": "^2.4.1",
         "@sveltejs/kit": "^1.15.2",
         "@tailwindcss/nesting": "^0.0.0-insiders.565cd3e",
