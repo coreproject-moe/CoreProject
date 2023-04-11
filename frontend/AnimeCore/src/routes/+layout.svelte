@@ -128,11 +128,11 @@
 			</div>
 		</svelte:fragment>
 		<svelte:fragment slot="sidebarLeft">
-			<div class="flex flex-col md:w-20 2xl:w-28">
+			<div class="flex flex-col md:w-[6.25vw]">
 				<div class="mt-3 flex flex-col items-center gap-5">
 					{#each Object.entries(icon_mapping.top) as item}
 						{@const item_icon = item[1].icon}
-						<button type="button" class="btn-icon rounded-md bg-warning-400 p-0">
+						<button type="button" class="btn-icon md:rounded-[0.375vw] bg-warning-400 p-0 md:w-[2.5vw]">
 							<svelte:component
 								this={item_icon.component}
 								height={item_icon.height}
@@ -157,14 +157,14 @@
 						<button
 							type="button"
 							class="{is_active
-								? 'relative bg-secondary-100 before:absolute before:-left-0.5 before:z-10 before:h-4 before:w-1 before:rounded-lg before:bg-primary-500'
-								: 'bg-initial'} btn-icon relative rounded-lg p-0 md:h-12 md:w-12 2xl:h-16 2xl:w-16"
+								? 'relative bg-secondary-100 before:absolute before:-left-0.5 before:z-10 before:h-[0.875vw] before:w-[0.25vw] before:rounded-lg before:bg-primary-500'
+								: 'bg-initial'} btn-icon relative rounded-lg p-0 md:w-[3.375vw]"
 							on:click={() => middle_section_click(item_name)}
 						>
 							<div class="inline-grid">
 								{#if !is_active}
 									<div
-										class="absolute inset-0 flex flex-col items-center justify-center gap-2"
+										class="absolute inset-0 flex flex-col items-center justify-center md:gap-[0.75vw]"
 										transition:blur|local
 									>
 										<svelte:component
@@ -173,7 +173,7 @@
 											width={component_width}
 											color={item_icon.color}
 										/>
-										<p class="!m-0 capitalize md:!text-xs 2xl:!text-lg">{item_name}</p>
+										<span class="capitalize md:text-[0.875vw] md:leading-[1.05vw]">{item_name}</span>
 									</div>
 								{:else}
 									<div
@@ -199,7 +199,7 @@
 						{@const item_icon = item[1].icon}
 						<button
 							type="button"
-							class="bg-initial btn-icon flex-col justify-center gap-1 rounded-lg p-0 text-sm md:h-12 md:w-12 2xl:h-16 2xl:w-16"
+							class="bg-initial btn-icon flex-col justify-center p-0 text-sm md:w-[3.375vw] md:gap-[0.75vw]"
 						>
 							<svelte:component
 								this={item_icon.component}
@@ -207,7 +207,7 @@
 								width={item_icon.width}
 								color={item_icon.color}
 							/>
-							<p class="!m-0 capitalize md:!text-xs 2xl:!text-lg">{item_name}</p>
+							<span class="!m-0 capitalize md:text-[0.875vw] md:leading-[1.05vw]">{item_name}</span>
   						</button>
 					{/each}
 				</div>

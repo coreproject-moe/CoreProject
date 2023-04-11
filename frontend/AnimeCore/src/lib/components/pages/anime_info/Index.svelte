@@ -17,7 +17,7 @@
 		<div
 			class="gradient absolute h-full w-full bg-gradient-to-t from-surface-900 to-surface-900/50"
 		/>
-		<div class="absolute h-full w-full xl:p-16 2xl:p-18 3xl:p-28">
+		<div class="absolute h-full w-full md:p-[5vw]">
 			<AnimeMainDetails {anime} />
 		</div>
 	</div>
