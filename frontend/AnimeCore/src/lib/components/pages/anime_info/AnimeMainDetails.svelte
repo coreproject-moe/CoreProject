@@ -122,9 +122,8 @@
 		}
 	};
 
-	// scroll area
-	let scroll_area;
-	let scroll_top: number = 0;
+	// scroll top
+	let scroll_top;
 </script>
 
 <div class="grid grid-cols-12 items-start">
@@ -229,16 +228,13 @@
 			</div>
 
 			<ScrollArea
+				bind:scroll_top
 				offsetScrollbar
 				parentClass="mt-5"
-				{scroll_area}
-				{scroll_top}
 				class="text-justify md:max-h-[9.5vw] md:text-[0.75vw] md:leading-[1vw]"
 			>
 				<div 
-					class="from-surface-50 to-surface-50/50 bg-clip-text text-transparent"
-					class:bg-gradient-to-b={scroll_top < 30}
-					class:bg-gradient-to-t={scroll_top > 30}
+					class="{scroll_top > 30 ? 'bg-gradient-to-t' : 'bg-gradient-to-b'} from-surface-50 to-surface-50/50 bg-clip-text text-transparent duration-300"
 				>
 					{anime.description}
 				</div>

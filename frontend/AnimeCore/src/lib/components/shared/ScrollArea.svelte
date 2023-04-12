@@ -4,16 +4,12 @@
 	export let parentClass = '';
 	export { klass as class };
 	export let offsetScrollbar = false;
-	export let scroll_area;
+
 	export let scroll_top;
 </script>
 
 <div
-	bind:this={scroll_area}
-	on:scroll={() => {
-		scroll_top = scroll_area.scrollTop
-		console.log(scroll_top)
-	}}
+	on:scroll={(e) => scroll_top = e.target.scrollTop}
 	{style}
 	class="{parentClass} {offsetScrollbar
 		? 'pr-3'
