@@ -233,7 +233,7 @@
 				parentClass="mt-5"
 				class="text-justify md:max-h-[9.5vw] md:text-[0.75vw] md:leading-[1vw]"
 			>
-				<div 
+				<div
 					class="{scroll_top > 30 ? 'bg-gradient-to-t' : 'bg-gradient-to-b'} from-surface-50 to-surface-50/50 bg-clip-text text-transparent duration-300"
 				>
 					{anime.description}
