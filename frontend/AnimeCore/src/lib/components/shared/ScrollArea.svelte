@@ -4,13 +4,16 @@
 	export let parentClass = '';
 	export { klass as class };
 	export let offsetScrollbar = false;
+	export let scroll_area;
+	export let scroll_top;
 </script>
 
 <div
-	on:mouseenter
-	on:mouseleave
-	on:touchstart
-	on:touchend
+	bind:this={scroll_area}
+	on:scroll={() => {
+		scroll_top = scroll_area.scrollTop
+		console.log(scroll_top)
+	}}
 	{style}
 	class="{parentClass} {offsetScrollbar
 		? 'pr-3'

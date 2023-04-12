@@ -121,6 +121,10 @@
 			}
 		}
 	};
+
+	// scroll area
+	let scroll_area;
+	let scroll_top: number = 0;
 </script>
 
 <div class="grid grid-cols-12 items-start">
@@ -227,9 +231,15 @@
 			<ScrollArea
 				offsetScrollbar
 				parentClass="mt-5"
+				{scroll_area}
+				{scroll_top}
 				class="text-justify md:max-h-[9.5vw] md:text-[0.75vw] md:leading-[1vw]"
 			>
-				<div class="bg-gradient-to-b from-surface-50 to-surface-50/50 bg-clip-text text-transparent">
+				<div 
+					class="from-surface-50 to-surface-50/50 bg-clip-text text-transparent"
+					class:bg-gradient-to-b={scroll_top < 30}
+					class:bg-gradient-to-t={scroll_top > 30}
+				>
 					{anime.description}
 				</div>
 			</ScrollArea>
