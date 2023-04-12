@@ -122,15 +122,17 @@
 		}
 	};
 
-	// scroll area
-	let scroll_area;
-	let scroll_top: number = 0;
+	let scroll_top: number;
 </script>
 
 <div class="grid grid-cols-12 items-start">
 	<div class="col-span-10 grid grid-cols-12 items-end justify-between">
 		<div class="col-span-7 flex items-end md:gap-[3.125vw]">
-			<img class="md:w-[12.5vw] md:rounded-[1vw]" src={anime.cardBackgroundImage} alt={anime.titles.eng} />
+			<img
+				class="md:w-[12.5vw] md:rounded-[1vw]"
+				src={anime.cardBackgroundImage}
+				alt={anime.titles.eng}
+			/>
 			<div>
 				<span class="font-bold md:text-[2.5vw] md:leading-[3vw]">{anime.titles.eng}</span>
 
@@ -157,47 +159,49 @@
 				</p>
 
 				<div class="flex items-center md:mt-[2.25vw] md:gap-[1.15vw]">
-				    <button
-				      type="button"
-				      class="btn bg-primary-500 font-bold text-white md:h-[4.3vw] md:w-[6.75vw] md:rounded-[0.625vw] md:text-[0.87vw]"
-					     >
-					      <div class="flex items-center justify-center md:gap-[0.7vw]">
-					      	  <PlayCircle width="25" height="25" color="white" />
-						      <div class="flex flex-col items-start">
-							       <span class="md:leading-5">Watch</span>
-							       <span class="font-normal leading-none text-surface-100 md:text-[0.625vw]">Ep 01</span>
-						      </div>
-					      </div>
-				    </button>
+					<button
+						type="button"
+						class="btn bg-primary-500 font-bold text-white md:h-[4.3vw] md:w-[6.75vw] md:rounded-[0.625vw] md:text-[0.87vw]"
+					>
+						<div class="flex items-center justify-center md:gap-[0.7vw]">
+							<PlayCircle width="25" height="25" color="white" />
+							<div class="flex flex-col items-start">
+								<span class="md:leading-5">Watch</span>
+								<span class="font-normal leading-none text-surface-100 md:text-[0.625vw]"
+									>Ep 01</span
+								>
+							</div>
+						</div>
+					</button>
 
-				    {#each Object.entries(icon_mapping.anime_options) as item}
-					    {@const item_name = item[0]}
-					    {@const item_icon = item[1].icon}
+					{#each Object.entries(icon_mapping.anime_options) as item}
+						{@const item_name = item[0]}
+						{@const item_icon = item[1].icon}
 
-					    {@const component = item_icon.component}
-					    {@const component_width = item_icon.width}
-					    {@const component_height = item_icon.height}
-					    {@const component_color = item_icon.color}
+						{@const component = item_icon.component}
+						{@const component_width = item_icon.width}
+						{@const component_height = item_icon.height}
+						{@const component_color = item_icon.color}
 
-					    <button
-					       type="button"
-					       class="btn bg-secondary-100 capitalize text-surface-500 md:h-[4.3vw] md:w-[4.3vw] md:rounded-[0.625vw]
+						<button
+							type="button"
+							class="btn bg-secondary-100 capitalize text-surface-500 md:h-[4.3vw] md:w-[4.3vw] md:rounded-[0.625vw]
 					       md:text-[0.87vw] md:font-semibold"
-					    >
-					       <div class="flex flex-col items-center justify-center md:gap-[0.68vw]">
-						       	<svelte:component
-						            this={component}
-						        	width={component_width}
-						        	height={component_height}
-						        	color={component_color}
-						       />
-						       <span class="md:leading-[1vw]">{item_name}</span>
-					       </div>
-					    </button>
-				    {/each}
+						>
+							<div class="flex flex-col items-center justify-center md:gap-[0.68vw]">
+								<svelte:component
+									this={component}
+									width={component_width}
+									height={component_height}
+									color={component_color}
+								/>
+								<span class="md:leading-[1vw]">{item_name}</span>
+							</div>
+						</button>
+					{/each}
 				</div>
 
-				<div class="md:mt-[1.25vw] flex md:gap-[0.625vw]">
+				<div class="flex md:mt-[1.25vw] md:gap-[0.625vw]">
 					{#each Object.entries(icon_mapping.user_options_icons) as item}
 						{@const item_icon = item[1].icon}
 
@@ -229,16 +233,15 @@
 			</div>
 
 			<ScrollArea
+				bind:scroll_top
 				offsetScrollbar
 				parentClass="mt-5"
 				{scroll_area}
 				{scroll_top}
 				class="text-justify md:max-h-[9.5vw] md:text-[0.75vw] md:leading-[1vw]"
 			>
-				<div 
-					class="from-surface-50 to-surface-50/50 bg-clip-text text-transparent"
-					class:bg-gradient-to-b={scroll_top < 30}
-					class:bg-gradient-to-t={scroll_top > 30}
+				<div
+					class="bg-gradient-to-b from-surface-50 to-surface-50/50 bg-clip-text text-transparent"
 				>
 					{anime.description}
 				</div>
@@ -246,14 +249,16 @@
 
 			<div class="flex gap-2 md:mt-3">
 				{#each anime.generes as genere}
-					<div class="rounded bg-surface-500 md:py-[0.375vw] px-[0.95vw] text-white md:text-[0.75vw] md:leading-[0.9vw]">
+					<div
+						class="rounded bg-surface-500 px-[0.95vw] text-white md:py-[0.375vw] md:text-[0.75vw] md:leading-[0.9vw]"
+					>
 						{genere}
 					</div>
 				{/each}
 			</div>
 
 			<div
-				class="flex w-max items-center gap-2 rounded bg-white/20 md:py-[0.375vw] md:px-[0.75vw] md:mt-3 md:text-[0.625vw] md:leading-[0.75vw]"
+				class="flex w-max items-center gap-2 rounded bg-white/20 md:mt-3 md:px-[0.75vw] md:py-[0.375vw] md:text-[0.625vw] md:leading-[0.75vw]"
 			>
 				<div class="flex items-center gap-1">
 					Score:

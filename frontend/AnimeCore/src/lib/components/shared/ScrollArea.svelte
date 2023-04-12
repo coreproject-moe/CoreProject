@@ -4,15 +4,15 @@
 	export let parentClass = '';
 	export { klass as class };
 	export let offsetScrollbar = false;
-	export let scroll_area;
-	export let scroll_top;
+	export let scroll_top: number;
+
+	let scroll_element: HTMLDivElement;
 </script>
 
 <div
-	bind:this={scroll_area}
+	bind:this={scroll_element}
 	on:scroll={() => {
-		scroll_top = scroll_area.scrollTop
-		console.log(scroll_top)
+		scroll_top = scroll_element.scrollTop;
 	}}
 	{style}
 	class="{parentClass} {offsetScrollbar
@@ -52,8 +52,8 @@
 			/* inherit border-color to inherit transitions */
 			border-color: inherit;
 		}
-    &::-webkit-scrollbar-track {
-      background: transparent !important;
-    }
+		&::-webkit-scrollbar-track {
+			background: transparent !important;
+		}
 	}
 </style>
