@@ -5,7 +5,7 @@
 	export { klass as class };
 	export let offsetScrollbar = false;
 
-	export let scroll_top: number = 0;
+	export let scroll_top = 0;
 </script>
 
 <div

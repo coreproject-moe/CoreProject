@@ -123,7 +123,7 @@
 	};
 
 	// scroll top
-	let scroll_top: number = 0;
+	let scroll_top = 0;
 </script>
 
 <div class="grid grid-cols-12 items-start">
