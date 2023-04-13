@@ -27,7 +27,7 @@ class ProducerModel(models.Model):
     )
     established = models.DateTimeField(null=True, blank=True)
     about = models.TextField(null=True, blank=True)
-    
+
     # Timestamp field
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
