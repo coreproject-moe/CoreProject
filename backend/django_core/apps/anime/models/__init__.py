@@ -85,7 +85,9 @@ class AnimeModel(models.Model):
     openings = models.ManyToManyField(AnimeOpeningModel, blank=True)
     endings = models.ManyToManyField(AnimeEndingModel, blank=True)
 
-    updated = models.DateTimeField(auto_now_add=True)
+    # Timestamp fields
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
         return f"{self.name}"

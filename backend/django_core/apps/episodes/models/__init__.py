@@ -48,6 +48,10 @@ class EpisodeModel(models.Model):
         blank=True,
     )
 
+    # Timestamp field
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
     def __str__(self) -> str:
         return f"{self.episode_number}. {self.episode_name}"
 

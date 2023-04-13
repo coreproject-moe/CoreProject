@@ -35,6 +35,10 @@ class StaffModel(models.Model):
         null=True,
     )
     about = models.TextField(null=True, blank=True)
+   
+    # Timestamp field
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
         return f"{self.pk}. {self.name}"

@@ -27,6 +27,10 @@ class ProducerModel(models.Model):
     )
     established = models.DateTimeField(null=True, blank=True)
     about = models.TextField(null=True, blank=True)
+    
+    # Timestamp field
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
         return f"{self.pk}. {self.name} | Mal_id : {self.mal_id}"
