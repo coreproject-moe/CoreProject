@@ -1,6 +1,7 @@
+import datetime
+
 from apps.episodes.models.episode_comment import EpisodeCommentModel
 from ninja import Field, ModelSchema, Schema
-import datetime
 
 
 class EpisodeCommentGETSchema(ModelSchema):

@@ -1,10 +1,9 @@
 from core.storages import OverwriteStorage
 from dynamic_filenames import FilePattern
-
-from django.db import models
-
 from mixins.created_at import CreatedAtMixin
 from mixins.updated_at import UpdatedAtMixin
+
+from django.db import models
 
 staff_upload_pattern = FilePattern(filename_pattern="staffs/{uuid:s}{ext}")
 

@@ -1,9 +1,10 @@
 from dynamic_filenames import FilePattern
+from mixins.created_at import CreatedAtMixin
+from mixins.updated_at import UpdatedAtMixin
 
 from django.contrib.postgres.fields import HStoreField
 from django.db import models
-from mixins.created_at import CreatedAtMixin
-from mixins.updated_at import UpdatedAtMixin
+
 from .episode_comment import EpisodeCommentModel
 from .episode_timestamp import EpisodeTimestampModel
 

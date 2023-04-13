@@ -1,7 +1,7 @@
-from django.db import models
+from mixins.created_at import CreatedAtMixin
 from mixins.updated_at import UpdatedAtMixin
 
-from mixins.created_at import CreatedAtMixin
+from django.db import models
 
 # Create your models here.
 

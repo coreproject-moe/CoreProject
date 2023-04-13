@@ -1,9 +1,10 @@
 from colorfield.fields import ColorField
 from dynamic_filenames import FilePattern
-
-from django.db import models
 from mixins.created_at import CreatedAtMixin
 from mixins.updated_at import UpdatedAtMixin
+
+from django.db import models
+
 from ...characters.models import CharacterModel
 from ...episodes.models import EpisodeModel
 from ...producers.models import ProducerModel

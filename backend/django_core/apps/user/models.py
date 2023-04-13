@@ -1,6 +1,7 @@
 from typing import Any
 
 from dynamic_filenames import FilePattern
+from mixins.created_at import CreatedAtMixin
 
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
@@ -9,7 +10,6 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from mixins.created_at import CreatedAtMixin
 from .managers import UserManager
 from .validators import username_validator
 
