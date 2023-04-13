@@ -84,6 +84,10 @@ class CustomUser(
 
     objects = UserManager()
 
+    # Timestamp field
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    # Django specific fields
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = [
         "username",
