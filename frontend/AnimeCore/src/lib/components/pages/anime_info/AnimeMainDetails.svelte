@@ -235,7 +235,7 @@
 			>
 				<div
 					class="from-surface-50 via-surface-50/50 to-surface-50/50 from-20% via-95% bg-clip-text text-transparent"
-					class:bg-gradient-to-b={scroll_top < 20}     
+					class:bg-gradient-to-b={scroll_top < 20}
 					class:bg-surface-50={scroll_top >= 20 && scroll_top <= 30}
 					class:bg-gradient-to-t={scroll_top > 30}
 				>
