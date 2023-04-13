@@ -26,7 +26,7 @@ def get_nested_children(item: EpisodeCommentModel):
             "pk": item.pk,
             "user": str(item.user),
             "text": item.text,
-            "comment_added": item.comment_added,
+            "created_at": item.created_at,
             "children": [get_nested_children(i)[0] for i in item.get_children()],
         }
     )

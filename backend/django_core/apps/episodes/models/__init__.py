@@ -2,7 +2,8 @@ from dynamic_filenames import FilePattern
 
 from django.contrib.postgres.fields import HStoreField
 from django.db import models
-
+from mixins.created_at import CreatedAtMixin
+from mixins.updated_at import UpdatedAtMixin
 from .episode_comment import EpisodeCommentModel
 from .episode_timestamp import EpisodeTimestampModel
 
@@ -16,7 +17,7 @@ EPISODE_TYPE = [
 ]
 
 
-class EpisodeModel(models.Model):
+class EpisodeModel(UpdatedAtMixin, CreatedAtMixin):
     episode_number = models.BigIntegerField(default=0)
     episode_name = models.CharField(max_length=1024)
     episode_thumbnail = models.ImageField(
@@ -47,10 +48,6 @@ class EpisodeModel(models.Model):
         null=False,
         blank=True,
     )
-
-    # Timestamp field
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
         return f"{self.episode_number}. {self.episode_name}"

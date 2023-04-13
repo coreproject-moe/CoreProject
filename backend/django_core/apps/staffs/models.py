@@ -3,6 +3,9 @@ from dynamic_filenames import FilePattern
 
 from django.db import models
 
+from mixins.created_at import CreatedAtMixin
+from mixins.updated_at import UpdatedAtMixin
+
 staff_upload_pattern = FilePattern(filename_pattern="staffs/{uuid:s}{ext}")
 
 
@@ -17,7 +20,7 @@ class StaffAlternateNameModel(models.Model):
         verbose_name_plural = "Staff | People ( Alternate Names )"
 
 
-class StaffModel(models.Model):
+class StaffModel(CreatedAtMixin, UpdatedAtMixin):
     mal_id = models.IntegerField(unique=True, null=True, blank=True)
     kitsu_id = models.IntegerField(unique=True, null=True, blank=True)
     anilist_id = models.IntegerField(unique=True, null=True, blank=True)
@@ -35,10 +38,6 @@ class StaffModel(models.Model):
         null=True,
     )
     about = models.TextField(null=True, blank=True)
-   
-    # Timestamp field
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
         return f"{self.pk}. {self.name}"

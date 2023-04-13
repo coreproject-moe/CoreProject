@@ -2,7 +2,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.templatetags.static import static
 
-from .utilities.format import format_kokoro_color
+from utilities.format import format_kokoro_color
 
 ERROR_DICT = {
     400: {

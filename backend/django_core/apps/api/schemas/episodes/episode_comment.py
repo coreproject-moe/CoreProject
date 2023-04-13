@@ -25,5 +25,5 @@ class EpisodeCommentTreeGETSchema(Schema):
     pk: int
     user: str
     text: str
-    comment_added: datetime.datetime
+    created_at: datetime.datetime
     children: list["EpisodeCommentTreeGETSchema"] = []

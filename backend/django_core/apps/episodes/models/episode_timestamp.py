@@ -1,10 +1,12 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
+from mixins.created_at import CreatedAtMixin
+
 # Create your models here.
 
 
-class EpisodeTimestampModel(models.Model):
+class EpisodeTimestampModel(CreatedAtMixin):
     timestamp = models.IntegerField(default=0)
 
     episode = models.ForeignKey(
