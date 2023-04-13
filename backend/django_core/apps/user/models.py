@@ -1,6 +1,7 @@
 from typing import Any
 
 from dynamic_filenames import FilePattern
+from mixins.created_at import CreatedAtMixin
 
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
@@ -21,6 +22,7 @@ avatar = FilePattern(filename_pattern="avatar/{uuid:s}{ext}")
 class CustomUser(
     AbstractBaseUser,
     PermissionsMixin,
+    CreatedAtMixin,
 ):
     username = models.CharField(
         _("username"),
@@ -84,6 +86,7 @@ class CustomUser(
 
     objects = UserManager()
 
+    # Django specific fields
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = [
         "username",

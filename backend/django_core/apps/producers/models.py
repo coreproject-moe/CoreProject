@@ -1,9 +1,12 @@
+from mixins.created_at import CreatedAtMixin
+from mixins.updated_at import UpdatedAtMixin
+
 from django.db import models
 
 # Create your models here.
 
 
-class ProducerModel(models.Model):
+class ProducerModel(CreatedAtMixin, UpdatedAtMixin):
     mal_id = models.IntegerField(unique=True, blank=True, null=True)
     kitsu_id = models.IntegerField(unique=True, blank=True, null=True)
     name = models.CharField(

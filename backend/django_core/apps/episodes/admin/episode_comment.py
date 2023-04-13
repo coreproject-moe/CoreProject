@@ -1,7 +1,8 @@
-from django.contrib import admin
-
 from treenode.admin import TreeNodeModelAdmin
 from treenode.forms import TreeNodeForm
+
+from django.contrib import admin
+
 from ..models.episode_comment import EpisodeCommentModel
 
 # Register your models here.

@@ -1,5 +1,7 @@
 from core.storages import OverwriteStorage
 from dynamic_filenames import FilePattern
+from mixins.created_at import CreatedAtMixin
+from mixins.updated_at import UpdatedAtMixin
 
 from django.db import models
 
@@ -17,7 +19,7 @@ class StaffAlternateNameModel(models.Model):
         verbose_name_plural = "Staff | People ( Alternate Names )"
 
 
-class StaffModel(models.Model):
+class StaffModel(CreatedAtMixin, UpdatedAtMixin):
     mal_id = models.IntegerField(unique=True, null=True, blank=True)
     kitsu_id = models.IntegerField(unique=True, null=True, blank=True)
     anilist_id = models.IntegerField(unique=True, null=True, blank=True)
