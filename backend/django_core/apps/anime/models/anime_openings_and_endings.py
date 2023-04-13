@@ -7,7 +7,7 @@ ending_upload_pattern = FilePattern(filename_pattern="ending/{uuid:s}{ext}")
 
 
 # Create your models here.
-class AbstractBaseModel(models.Model):
+class AbstractBaseOpeningAndEndingModel(models.Model):
     # Either opening number/closing number
     entry = models.BigIntegerField(null=False, blank=False)
     # Opening/closing theme name
@@ -19,7 +19,7 @@ class AbstractBaseModel(models.Model):
         abstract = True
 
 
-class AnimeOpeningModel(AbstractBaseModel):
+class AnimeOpeningModel(AbstractBaseOpeningAndEndingModel):
     thumbnail = models.ImageField(
         upload_to=opening_upload_pattern,
         default=None,
@@ -38,7 +38,7 @@ class AnimeOpeningModel(AbstractBaseModel):
         verbose_name_plural = "Anime Openings"
 
 
-class AnimeEndingModel(AbstractBaseModel):
+class AnimeEndingModel(AbstractBaseOpeningAndEndingModel):
     thumbnail = models.ImageField(
         upload_to=ending_upload_pattern,
         default=None,

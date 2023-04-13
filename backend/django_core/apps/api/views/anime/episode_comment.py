@@ -1,19 +1,20 @@
+from typing import cast
+
 from apps.anime.models import AnimeModel
+from apps.api.auth import AuthBearer
+from apps.episodes.models import EpisodeModel
 from apps.episodes.models.episode_comment import EpisodeCommentModel
 from ninja import Router
 
 from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
 
-from apps.api.auth import AuthBearer
-from apps.episodes.models import EpisodeModel
-from typing import cast
+from ...decorator import recursionlimit
 from ...schemas.episodes.episode_comment import (
     EpisodeCommentGETSchema,
     EpisodeCommentTreeGETSchema,
     EpisodeCommentTreePOSTSchema,
 )
-from ...decorator import recursionlimit
 
 router = Router()
 
@@ -26,7 +27,7 @@ def get_nested_children(item: EpisodeCommentModel):
             "pk": item.pk,
             "user": str(item.user),
             "text": item.text,
-            "comment_added": item.comment_added,
+            "created_at": item.created_at,
             "children": [get_nested_children(i)[0] for i in item.get_children()],
         }
     )

@@ -1,5 +1,5 @@
-import sys
 from functools import wraps
+import sys
 
 
 def recursionlimit(limit):

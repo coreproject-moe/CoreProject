@@ -1,6 +1,7 @@
+import datetime
+
 from apps.episodes.models.episode_comment import EpisodeCommentModel
 from ninja import Field, ModelSchema, Schema
-import datetime
 
 
 class EpisodeCommentGETSchema(ModelSchema):
@@ -25,5 +26,5 @@ class EpisodeCommentTreeGETSchema(Schema):
     pk: int
     user: str
     text: str
-    comment_added: datetime.datetime
+    created_at: datetime.datetime
     children: list["EpisodeCommentTreeGETSchema"] = []

@@ -1,4 +1,6 @@
 from dynamic_filenames import FilePattern
+from mixins.created_at import CreatedAtMixin
+from mixins.updated_at import UpdatedAtMixin
 
 from django.contrib.postgres.fields import HStoreField
 from django.db import models
@@ -16,7 +18,7 @@ EPISODE_TYPE = [
 ]
 
 
-class EpisodeModel(models.Model):
+class EpisodeModel(UpdatedAtMixin, CreatedAtMixin):
     episode_number = models.BigIntegerField(default=0)
     episode_name = models.CharField(max_length=1024)
     episode_thumbnail = models.ImageField(
