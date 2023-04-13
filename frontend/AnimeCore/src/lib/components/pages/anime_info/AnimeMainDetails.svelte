@@ -234,7 +234,7 @@
 				class="text-justify md:max-h-[9.5vw] md:text-[0.75vw] md:leading-[1vw]"
 			>
 				<div
-					class="{scroll_top > 30 ? 'bg-gradient-to-t' : 'bg-gradient-to-b'} from-surface-50 to-surface-50/50 bg-clip-text text-transparent duration-300"
+					class="{scroll_top > 30 ? 'bg-gradient-to-t' : scroll_top < 20 ? 'bg-gradient-to-b' : 'bg-white'} from-white via-surface-50/50 to-surface-50/50 from-20% via-95% bg-clip-text text-transparent"
 				>
 					{anime.description}
 				</div>
