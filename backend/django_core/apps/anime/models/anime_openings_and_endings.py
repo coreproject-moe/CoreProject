@@ -1,9 +1,5 @@
-from dynamic_filenames import FilePattern
-
 from django.db import models
-
-opening_upload_pattern = FilePattern(filename_pattern="opening/{uuid:s}{ext}")
-ending_upload_pattern = FilePattern(filename_pattern="ending/{uuid:s}{ext}")
+from ...images.models import Image
 
 
 # Create your models here.
@@ -14,19 +10,16 @@ class AbstractBaseOpeningAndEndingModel(models.Model):
     name = models.CharField(max_length=512, blank=False, null=False)
     # Canonical URL
     url = models.URLField(blank=False, null=True)
+    thumbnail = models.ForeignKey(
+        Image,
+        on_delete=models.CASCADE,
+    )
 
     class Meta:
         abstract = True
 
 
 class AnimeOpeningModel(AbstractBaseOpeningAndEndingModel):
-    thumbnail = models.ImageField(
-        upload_to=opening_upload_pattern,
-        default=None,
-        blank=True,
-        null=True,
-    )
-
     def __str__(self) -> str:
         return f"{self.entry}. {self.name}"
 
@@ -39,13 +32,6 @@ class AnimeOpeningModel(AbstractBaseOpeningAndEndingModel):
 
 
 class AnimeEndingModel(AbstractBaseOpeningAndEndingModel):
-    thumbnail = models.ImageField(
-        upload_to=ending_upload_pattern,
-        default=None,
-        blank=True,
-        null=True,
-    )
-
     def __str__(self) -> str:
         return f"{self.entry}. {self.name}"
 

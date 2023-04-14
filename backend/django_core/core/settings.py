@@ -94,6 +94,8 @@ INSTALLED_APPS = [
     "apps.api",
     # OpenGraph
     "apps.opengraph",
+    # Images
+    "apps.images",
     # Models
     "apps.anime",
     "apps.trackers",

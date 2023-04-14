@@ -1,11 +1,9 @@
 from core.storages import OverwriteStorage
-from dynamic_filenames import FilePattern
 from mixins.created_at import CreatedAtMixin
 from mixins.updated_at import UpdatedAtMixin
 
+from ..images.models import Image
 from django.db import models
-
-staff_upload_pattern = FilePattern(filename_pattern="staffs/{uuid:s}{ext}")
 
 
 class StaffAlternateNameModel(models.Model):
@@ -29,13 +27,7 @@ class StaffModel(CreatedAtMixin, UpdatedAtMixin):
     family_name = models.CharField(max_length=1024, null=True, blank=True)
     alternate_names = models.ManyToManyField(StaffAlternateNameModel, blank=True)
 
-    staff_image = models.ImageField(
-        storage=OverwriteStorage,
-        upload_to=staff_upload_pattern,
-        default=None,
-        blank=True,
-        null=True,
-    )
+    staff_image = models.ForeignKey(Image, on_delete=models.CASCADE)
     about = models.TextField(null=True, blank=True)
 
     def __str__(self) -> str:

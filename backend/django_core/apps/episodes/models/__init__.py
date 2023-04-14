@@ -5,11 +5,10 @@ from mixins.updated_at import UpdatedAtMixin
 from django.contrib.postgres.fields import HStoreField
 from django.db import models
 
+from ...images.models import Image
 from .episode_comment import EpisodeCommentModel
 from .episode_timestamp import EpisodeTimestampModel
 
-episode_pattern = FilePattern(filename_pattern="episode/{uuid:s}{ext}")
-episode_thumbnail_pattern = FilePattern(filename_pattern="thumbnail/{uuid:s}{ext}")
 
 # Create your models here.
 EPISODE_TYPE = [
@@ -21,11 +20,9 @@ EPISODE_TYPE = [
 class EpisodeModel(UpdatedAtMixin, CreatedAtMixin):
     episode_number = models.BigIntegerField(default=0)
     episode_name = models.CharField(max_length=1024)
-    episode_thumbnail = models.ImageField(
-        upload_to=episode_thumbnail_pattern,
-        default=None,
-        blank=True,
-        null=True,
+    episode_thumbnail = models.ForeignKey(
+        Image,
+        on_delete=models.CASCADE,
     )
 
     episode_summary = models.TextField(default="", blank=True, null=True)

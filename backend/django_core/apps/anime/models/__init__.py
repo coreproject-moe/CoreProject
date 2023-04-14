@@ -1,10 +1,9 @@
-from colorfield.fields import ColorField
-from dynamic_filenames import FilePattern
 from mixins.created_at import CreatedAtMixin
 from mixins.updated_at import UpdatedAtMixin
 
 from django.db import models
 
+from ...images.models import ImageWithBrightnessAndBackgroundColor
 from ...characters.models import CharacterModel
 from ...episodes.models import EpisodeModel
 from ...producers.models import ProducerModel
@@ -13,8 +12,6 @@ from .anime_genre import AnimeGenreModel
 from .anime_openings_and_endings import AnimeEndingModel, AnimeOpeningModel
 from .anime_theme import AnimeThemeModel
 
-cover_upload_pattern = FilePattern(filename_pattern="cover/{uuid:s}{ext}")
-banner_upload_pattern = FilePattern(filename_pattern="banner/{uuid:s}{ext}")
 
 # Create your models here.
 
@@ -53,21 +50,20 @@ class AnimeModel(CreatedAtMixin, UpdatedAtMixin):
     aired_to = models.DateTimeField(blank=True, null=True)
 
     # Image fields
-    banner = models.ImageField(
-        upload_to=banner_upload_pattern,
-        default=None,
+    banner = models.ForeignKey(
+        ImageWithBrightnessAndBackgroundColor,
+        on_delete=models.CASCADE,
+        related_name="banner",
         blank=True,
         null=True,
     )
-    cover = models.ImageField(
-        upload_to=cover_upload_pattern,
-        default=None,
+    cover = models.ForeignKey(
+        ImageWithBrightnessAndBackgroundColor,
+        on_delete=models.CASCADE,
+        related_name="cover",
         blank=True,
         null=True,
     )
-    # Image field nearest color
-    banner_background_color = ColorField(null=True, blank=True)
-    cover_background_color = ColorField(null=True, blank=True)
 
     synopsis = models.TextField(blank=True, null=True)
     background = models.TextField(blank=True, null=True)

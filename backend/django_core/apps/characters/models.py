@@ -1,10 +1,7 @@
-from dynamic_filenames import FilePattern
 from mixins.created_at import CreatedAtMixin
 from mixins.updated_at import UpdatedAtMixin
-
+from ..images.models import Image
 from django.db import models
-
-anime_charaters_pattern = FilePattern(filename_pattern="characters/{uuid:s}{ext}")
 
 
 # Create your models here.
@@ -17,9 +14,9 @@ class CharacterModel(CreatedAtMixin, UpdatedAtMixin):
 
     name = models.CharField(max_length=1024)
     name_kanji = models.CharField(max_length=1024, null=True, blank=True)
-    character_image = models.ImageField(
-        upload_to=anime_charaters_pattern,
-        default=None,
+    character_image = models.ForeignKey(
+        Image,
+        on_delete=models.CASCADE,
         blank=True,
         null=True,
     )
