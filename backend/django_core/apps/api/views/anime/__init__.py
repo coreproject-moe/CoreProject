@@ -352,10 +352,10 @@ def patch_individual_anime_info(
 
     for attribute, value in filtered_file_kwargs.items():
         if specific_field := getattr(instance, attribute):
-            instance, _ = ImageWithBrightnessAndBackgroundColor.objects.get_or_create(
+            image_instance, _ = ImageWithBrightnessAndBackgroundColor.objects.get_or_create(
                 image=value
             )
-            specific_field = instance
+            setattr(instance, specific_field, image_instance)
 
     instance.save()
     return instance

@@ -10,6 +10,7 @@ from ninja.pagination import paginate
 from django.db.models import Q, QuerySet
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
+from ....images.models import Image
 
 try:
     from django.contrib.postgres.search import TrigramSimilarity
@@ -88,9 +89,13 @@ def post_character_info(
         kitsu_id=kitsu_id,
         anilist_id=anilist_id,
         name_kanji=name_kanji,
-        character_image=character_image,
         about=about,
     )
+    if character_image:
+        image_instance, _ = Image.objects.get_or_create(image=character_image)
+        instance.character_image = image_instance
+        instance.save()
+
     return instance
 
 
@@ -130,12 +135,21 @@ def patch_individual_character_info(
         "anilist_id": anilist_id,
         "name": name,
         "name_kanji": name_kanji,
-        "character_image": character_image,
         "about": about,
     }
     filtered_kwargs = {key: value for key, value in kwargs.items() if value}
     for attribute, value in filtered_kwargs:
         setattr(instance, attribute, value)
+
+    file_kwargs = {
+        "character_image": character_image,
+    }
+    filtered_file_kwargs = {key: value for key, value in file_kwargs.items() if value}
+
+    for attribute, value in filtered_file_kwargs.items():
+        if specific_field := getattr(instance, attribute):
+            image_instance, _ = Image.objects.get_or_create(image=value)
+            setattr(instance, specific_field, image_instance)
 
     instance.save()
     return instance
