@@ -1,7 +1,7 @@
 from typing import Any
 
 from dynamic_filenames import FilePattern
-from mixins.created_at import CreatedAtMixin
+from mixins.models.created_at import CreatedAtMixin
 
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin

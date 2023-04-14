@@ -1,4 +1,4 @@
-from mixins.created_at import CreatedAtMixin
+from mixins.models.created_at import CreatedAtMixin
 
 from django.contrib.auth import get_user_model
 from django.db import models

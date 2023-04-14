@@ -6,7 +6,7 @@ from django.db.models import CharField, Value
 from django.db.models.functions import Cast, Concat, LPad
 
 if TYPE_CHECKING:
-    from ..models import CustomUser
+    from ...apps.user.models import CustomUser
 
 
 class UsernameWithDiscriminatorManager(models.Manager["CustomUser"]):

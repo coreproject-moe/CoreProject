@@ -1,7 +1,7 @@
 from core.storages import OverwriteStorage
 from dynamic_filenames import FilePattern
-from mixins.created_at import CreatedAtMixin
-from mixins.updated_at import UpdatedAtMixin
+from mixins.models.created_at import CreatedAtMixin
+from mixins.models.updated_at import UpdatedAtMixin
 
 from django.db import models
 

@@ -1,5 +1,5 @@
 from apps.user.models import CustomUser
-from mixins.created_at import CreatedAtMixin
+from mixins.models.created_at import CreatedAtMixin
 from treenode.models import TreeNodeModel
 
 from django.db import models
