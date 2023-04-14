@@ -122,8 +122,6 @@
 		}
 	};
 
-	// scroll top
-	let scroll_top = 0;
 </script>
 
 <div class="grid grid-cols-12 items-start">
@@ -227,21 +225,13 @@
 				<SettingsOutline width="11" height="11" class="opacity-75" />
 			</div>
 
-			<ScrollArea
-				bind:scroll_top
-				offsetScrollbar
-				parentClass="mt-5"
-				class="text-justify md:max-h-[9.5vw] md:text-[0.75vw] md:leading-[1vw]"
-			>
-				<div
-					class="from-surface-50 via-surface-50/50 to-surface-50/50 from-20% via-95% bg-clip-text text-transparent"
-					class:bg-gradient-to-b={scroll_top < 20}
-					class:bg-surface-50={scroll_top >= 20 && scroll_top <= 30}
-					class:bg-gradient-to-t={scroll_top > 30}
-				>
+				<ScrollArea
+					offsetScrollbar
+					parentClass="mt-5"
+					class="text-justify md:max-h-[9.5vw] md:text-[0.75vw] md:leading-[1vw] text-surface-50"
+				>	
 					{anime.description}
-				</div>
-			</ScrollArea>
+				</ScrollArea>
 
 			<div class="flex gap-2 md:mt-3">
 				{#each anime.generes as genere}
