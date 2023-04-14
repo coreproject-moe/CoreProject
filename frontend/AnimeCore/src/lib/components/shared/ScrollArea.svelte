@@ -1,4 +1,6 @@
 <script lang="ts">
+	import type { UIEventHandler } from 'svelte/elements';
+
 	let klass = '';
 	export let style = '';
 	export let parentClass = '';
@@ -9,27 +11,18 @@
 	export let fadeHeight = "20px";
 
 
-	let overlayClasses = [];
-	const handleScroll = (e) => {
-		let scrollableScrollTop = e.target.scrollTop;
-	    let contentHeight = e.target.clientHeight;
-	    let atBottom = e.target.scrollHeight === contentHeight + scrollableScrollTop;
-	    let updatedOverlayClasses = [];
-	    overlayClasses = updatedOverlayClasses;
+	export let scroll_top = 0;
 
-	    if (scrollableScrollTop === 0) {
-	      updatedOverlayClasses.push("top");
-	    }
-	    if (atBottom) {
-	      updatedOverlayClasses.push("bottom");
-	    }
-	    console.log(overlayClasses)
-	}
+	const onScroll: UIEventHandler<HTMLDivElement> = (event) => {
+		const el = event?.currentTarget as HTMLElement;
+		scroll_top = Math.round((el.scrollTop / (el.scrollHeight - el.clientHeight)) * 100);
+	};
+
 </script>
 
 
 <div
-	on:scroll={handleScroll}
+	on:scroll={onScroll}
 	{style}
 	class="{parentClass} {offsetScrollbar
 		? 'pr-3'
@@ -69,9 +62,31 @@
 			/* inherit border-color to inherit transitions */
 			border-color: inherit;
 		}
-    &::-webkit-scrollbar-track {
-      background: transparent !important;
-    }
+		&::-webkit-scrollbar-track {
+			background: transparent !important;
+		}
+	}
+
+	.scroll-top {
+		mask-image: linear-gradient(0deg, rgba(7, 5, 25, 0.8) 80%, rgba(0, 0, 0, 0) 100%);
+		mask-repeat: no-repeat;
+		mask-position: top;
+	}
+	.scroll-bottom {
+		mask-image: linear-gradient(180deg, rgba(7, 5, 25, 0.8) 80%, rgba(0, 0, 0, 0) 100%);
+		mask-repeat: no-repeat;
+		mask-position: bottom;
+	}
+	.scroll-middle {
+		mask-image: linear-gradient(
+			0deg,
+			rgba(0, 0, 0, 0.5) 20%,
+			rgba(7, 5, 25, 0.9) 40%,
+			rgba(7, 5, 25, 0.9) 80%,
+			rgba(0, 0, 0, 0.5) 100%
+		);
+		mask-repeat: no-repeat;
+		mask-position: bottom;
 	}
 
 	.overlay {
