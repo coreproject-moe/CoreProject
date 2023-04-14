@@ -65,8 +65,8 @@ def command() -> None:
 
     print(
         get_welcome_message(
+            starting_number,
             character_number,
-            ending_number,
             EXECUTION_TIME,
             starting_number,
             "characters",

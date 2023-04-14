@@ -16,6 +16,8 @@ redis = {extras = ['hiredis'], version = ">=4.1"}
 pillow = "*"
 # First Party ( Database )
 psycopg = {extras = ["binary"], version = "^3.1.8"}
+# 3rd Party ( Tree Model )
+django-treenode = "^0.19.0"
 # 3rd Party ( Files )
 django-dynamic-filenames = "*"
 # 3rd Party ( Brute Force protection )
@@ -49,7 +51,7 @@ django-stubs-ext = "*"
 # ===================================================
 # Color Grabber
 colorthief = ">=0.2.1"
-django-treenode = "^0.19.0"
+
 
 
 
