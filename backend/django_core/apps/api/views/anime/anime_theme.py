@@ -1,12 +1,9 @@
-from http import HTTPStatus
 
 from apps.anime.models import AnimeModel
 from apps.anime.models.anime_theme import AnimeThemeModel
-from apps.api.auth import AuthBearer
-from apps.user.models import CustomUser
 from ninja import Router
 
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
 
 from ...schemas.anime.anime_theme import AnimeThemeGETSchema
