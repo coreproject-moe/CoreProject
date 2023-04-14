@@ -90,8 +90,9 @@ createsuperuser = 'python ./django_core/manage.py createsuperuser'
 collectstatic = "python ./django_core/manage.py collectstatic --clear --link" # Dont duplicate copy files.
 ## Mypy
 mypy = "mypy . --enable-incomplete-feature=Unpack"
-## Graph
+## Django extensions
 graph = "python django_core/manage.py graph_models -a -o mymodel.png"
+reset_db = "python django_core/manage.py reset_db"
 ## Tailwind
 tailwind_install = "python ./django_core/manage.py tailwind install"
 tailwind_start = "python ./django_core/manage.py tailwind start"
