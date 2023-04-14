@@ -22,9 +22,9 @@
 	{style}
 	class="{parentClass} {offsetScrollbar
 		? 'pr-3'
-		: 'pr-0'} scrollbar overflow-hidden overflow-y-scroll overscroll-y-contain relative"
+		: 'pr-0'} scrollbar overflow-hidden overflow-y-scroll overscroll-y-contain"
 >
-	<div class="{klass} whitespace-pre-line content">
+	<div class="{klass} whitespace-pre-line">
 		<slot />
 	</div>
 </div>
