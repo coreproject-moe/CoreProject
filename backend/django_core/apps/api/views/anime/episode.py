@@ -13,6 +13,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
 
 from ...schemas.episodes import EpisodeGETSchema
+from ....images.models import Image
 
 router = Router()
 
@@ -57,7 +58,6 @@ def post_individual_episodes(
     payload = {
         "episode_number": episode_number,
         "episode_name": episode_name,
-        "episode_thumbnail": episode_thumbnail,
         "episode_summary": episode_summary,
         "episode_length": episode_length,
         "providers": providers,
@@ -67,6 +67,12 @@ def post_individual_episodes(
         **{key: value for key, value in payload.items() if value}
     )
     anime_info_model.episodes.add(instance)
+
+    if episode_thumbnail:
+        image_instance, _ = Image.objects.get(image=episode_thumbnail)
+        instance.episode_thumbnail = image_instance
+        instance.save()
+
     return instance
 
 
@@ -106,13 +112,12 @@ def patch_individual_episode_info(
             "Superuser is required for this operation",
             status=HTTPStatus.UNAUTHORIZED,
         )
-    episode_instance = get_object_or_404(
+    episode_instance: EpisodeModel = get_object_or_404(
         get_object_or_404(AnimeModel, pk=anime_id).episodes,
         episode_number=episode_number,
     )
     validated_data = {
         "episode_name": episode_name,
-        "episode_thumbnail": episode_thumbnail,
         "episode_summary": episode_summary,
         "episode_length": episode_length,
         "providers": providers,
@@ -121,7 +126,11 @@ def patch_individual_episode_info(
     for attr, value in validated_data.items():
         if value:
             setattr(episode_instance, attr, value)
-    # These tasks are here for celery actually
+
+    if episode_thumbnail:
+        image_instance, _ = Image.objects.get_or_create(image=episode_thumbnail)
+        episode_instance.episode_thumbnail = image_instance
+
     episode_instance.save()
 
     return episode_instance
