@@ -5,7 +5,7 @@ from celery import shared_task
 from colorthief import ColorThief
 from utilities.rgb_to_hex import rgb_to_hex
 
-from .models import AnimeModel
+from .models import ImageWithBrightnessAndBackgroundColor
 
 
 @shared_task()
@@ -14,7 +14,7 @@ def set_field_color(
     field_name: str,
     image_field_name: str,
 ) -> None:
-    instance = AnimeModel.objects.get(pk=pk)
+    instance = ImageWithBrightnessAndBackgroundColor.objects.get(pk=pk)
 
     if image_field := getattr(instance, image_field_name):
         color = ColorThief(image_field.path).get_color(quality=1)
@@ -25,7 +25,7 @@ def set_field_color(
             rgb_value_to_hex,
         )
         instance.save()
-        print(f"Set color for | AnimeModel = {pk}")
+        print(f"Set color for | Image Model = {pk}")
 
 
 @shared_task()
@@ -34,7 +34,7 @@ def set_field_brightness(
     field_name: str,
     image_field_name: str,
 ) -> None:
-    instance = AnimeModel.objects.get(pk=pk)
+    instance = ImageWithBrightnessAndBackgroundColor.objects.get(pk=pk)
 
     if image_field := getattr(instance, image_field_name):
         # https://stackoverflow.com/a/3498247
@@ -47,4 +47,4 @@ def set_field_brightness(
         average_brightness = sum(gs) / stat.count[0]
         setattr(instance, field_name, average_brightness)
         instance.save()
-        print(f"Set brightness for | AnimeModel = {pk}")
+        print(f"Set brightness for | Image Model = {pk}")

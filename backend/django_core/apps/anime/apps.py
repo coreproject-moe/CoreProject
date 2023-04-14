@@ -6,4 +6,4 @@ class AnimeConfig(AppConfig):
     name = "apps.anime"
 
     def ready(self) -> None:
-        from . import signals as signals
+        from ..images import signals as signals
