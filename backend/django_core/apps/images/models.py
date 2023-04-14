@@ -10,7 +10,11 @@ image_upload_pattern = FilePattern(filename_pattern="{uuid:s}{ext}")
 class Image(models.Model):
     image = models.ImageField(upload_to=image_upload_pattern)
 
+    class Meta:
+        verbose_name = "Image"
+
 
 class ImageWithBrightnessAndBackgroundColor(Image, BrightnessMixin, BackgroundColorMixin):
     class Meta:
-        pass
+        verbose_name = "Image with brightness and background color"
+        verbose_name_plural = "Images with brightness and background color"

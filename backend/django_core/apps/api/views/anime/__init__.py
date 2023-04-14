@@ -17,6 +17,7 @@ from django.db.models import Q, QuerySet
 from django.db.models.functions import Greatest
 from django.http import Http404, HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
+from ....images.models import ImageWithBrightnessAndBackgroundColor
 
 try:
     from django.contrib.postgres.search import TrigramSimilarity
@@ -187,6 +188,9 @@ def post_anime_info(
         for key, value in kwargs.items()
         if key
         not in [
+            # Ignore files
+            "banner",
+            "cover",
             # Ignore M2M relations
             "name_synonyms",
             "genres",
@@ -203,6 +207,18 @@ def post_anime_info(
         ]
     }
     database = AnimeModel.objects.create(**model_data)
+
+    if banner:
+        instance, _ = ImageWithBrightnessAndBackgroundColor.objects.get_or_create(
+            image=banner
+        )
+        database.banner = instance
+
+    if cover:
+        instance, _ = ImageWithBrightnessAndBackgroundColor.objects.get_or_create(
+            image=cover
+        )
+        database.cover = instance
 
     if name_synonyms_list := kwargs.get("name_synonyms", None):
         for anime_name_synonym in name_synonyms_list:
@@ -297,12 +313,11 @@ def patch_individual_anime_info(
         "source": source,
         "aired_from": aired_from,
         "aired_to": aired_to,
-        "banner": banner,
-        "cover": cover,
         "synopsis": synopsis,
         "background": background,
         "rating": rating,
     }
+
     # Filter and remove the None values
     filtered_kwargs = {key: value for key, value in kwargs.items() if value}
 
@@ -328,6 +343,19 @@ def patch_individual_anime_info(
     for attribute, value in filtered_m2m_kwargs.items():
         if specific_field := getattr(instance, attribute):
             specific_field.set(value)
+
+    file_kwargs = {
+        "banner": banner,
+        "cover": cover,
+    }
+    filtered_file_kwargs = {key: value for key, value in file_kwargs.items() if value}
+
+    for attribute, value in filtered_file_kwargs.items():
+        if specific_field := getattr(instance, attribute):
+            instance, _ = ImageWithBrightnessAndBackgroundColor.objects.get_or_create(
+                image=value
+            )
+            specific_field = instance
 
     instance.save()
     return instance
