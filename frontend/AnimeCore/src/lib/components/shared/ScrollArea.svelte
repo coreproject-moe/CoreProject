@@ -19,7 +19,7 @@
 
 	    if (scrollableScrollTop === 0) {
 	      updatedOverlayClasses.push("top");
-	    } 
+	    }
 	    if (atBottom) {
 	      updatedOverlayClasses.push("bottom");
 	    }
@@ -34,7 +34,7 @@
 	class="{parentClass} {offsetScrollbar
 		? 'pr-3'
 		: 'pr-0'} scrollbar overflow-hidden overflow-y-scroll overscroll-y-contain relative"
->	
+>
 	<div class="overlay {overlayClasses.map(s => styles[s])}" />
 	<div class="{klass} whitespace-pre-line content">
 		<slot />
@@ -91,7 +91,7 @@
 		    width: 100%;
 		    height: 40px;
 		    background: transparent;
-		    position: absolute; 
+		    position: absolute;
 		}
 		&:before {
 		    top: 0px;

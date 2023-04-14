@@ -229,7 +229,7 @@
 					offsetScrollbar
 					parentClass="mt-5"
 					class="text-justify md:max-h-[9.5vw] md:text-[0.75vw] md:leading-[1vw] text-surface-50"
-				>	
+				>
 					{anime.description}
 				</ScrollArea>
 
