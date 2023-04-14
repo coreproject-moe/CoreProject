@@ -54,15 +54,15 @@ class AnimeModel(CreatedAtMixin, UpdatedAtMixin):
         ImageWithBrightnessAndBackgroundColor,
         on_delete=models.CASCADE,
         related_name="banner",
-        blank=True,
         null=True,
+        blank=True,
     )
     cover = models.ForeignKey(
         ImageWithBrightnessAndBackgroundColor,
         on_delete=models.CASCADE,
         related_name="cover",
-        blank=True,
         null=True,
+        blank=True,
     )
 
     synopsis = models.TextField(blank=True, null=True)

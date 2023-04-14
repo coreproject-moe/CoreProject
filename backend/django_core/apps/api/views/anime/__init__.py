@@ -257,6 +257,7 @@ def post_anime_info(
             staff_instance = StaffModel.objects.get(pk=staff)
             database.staffs.add(staff_instance)
 
+    database.save()
     return database
 
 

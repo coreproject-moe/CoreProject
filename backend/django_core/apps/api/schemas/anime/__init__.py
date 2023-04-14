@@ -3,7 +3,7 @@ from ninja import ModelSchema
 
 from django.db.models import Avg
 from django.shortcuts import resolve_url
-
+from ..images import ImageWithBrightnessAndBackgroundColorSchema
 from .anime_opening_and_ending import AnimeOpeningAndEndingGETSchema
 
 ## Observations from getting request from stack trace
@@ -38,6 +38,8 @@ class AnimeInfoGETSchema(ModelSchema):
     episodes: str
     episodes_count: int
     average_episode_length: int
+    banner: ImageWithBrightnessAndBackgroundColorSchema | None = None
+    cover: ImageWithBrightnessAndBackgroundColorSchema | None = None
     name_synonyms: list[AnimeNameSynonymSchema] = []
     openings: list[AnimeOpeningAndEndingGETSchema] = []
     endings: list[AnimeOpeningAndEndingGETSchema] = []

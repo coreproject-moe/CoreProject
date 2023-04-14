@@ -61,15 +61,6 @@ class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel]):
             },
         ),
         (
-            ("Image Colors"),
-            {
-                "fields": (
-                    "banner_background_color",
-                    "cover_background_color",
-                ),
-            },
-        ),
-        (
             ("Anime Rating"),
             {
                 "fields": ("rating",),
