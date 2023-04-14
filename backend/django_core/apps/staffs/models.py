@@ -1,4 +1,3 @@
-from core.storages import OverwriteStorage
 from mixins.created_at import CreatedAtMixin
 from mixins.updated_at import UpdatedAtMixin
 

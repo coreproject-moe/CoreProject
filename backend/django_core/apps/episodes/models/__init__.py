@@ -1,4 +1,3 @@
-from dynamic_filenames import FilePattern
 from mixins.created_at import CreatedAtMixin
 from mixins.updated_at import UpdatedAtMixin
 
