@@ -135,7 +135,7 @@
 			scrollbar_type = 'scroll-bottom';
 		}
 	}
-  
+
 </script>
 
 <div class="grid grid-cols-12 items-start">
