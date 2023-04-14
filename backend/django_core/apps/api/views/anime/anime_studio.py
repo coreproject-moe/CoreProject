@@ -1,4 +1,3 @@
-
 from apps.anime.models import AnimeModel
 from ninja import Router
 
