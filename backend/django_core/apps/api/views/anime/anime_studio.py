@@ -24,29 +24,3 @@ def get_individual_anime_studio_info(
     )
 
     return query
-
-
-@router.post("/{int:anime_id}/studios", response=ProducerGETSchema, auth=AuthBearer())
-def post_individual_anime_studio_info(
-    request: HttpRequest,
-    anime_id: int,
-    payload: ProducerPOSTSchema,
-) -> ProducerModel:
-    user: CustomUser = request.auth
-    if not user.is_superuser:
-        return HttpResponse(
-            "Superuser is required for this operation", status=HTTPStatus.UNAUTHORIZED
-        )
-    # Set this at top
-    # Because if there is no anime_info_model with corresponding query
-    # theres no point in continuing
-    anime_info_model = get_object_or_404(AnimeModel, pk=anime_id)
-
-    query = ProducerModel.objects.get_or_create(
-        **payload.dict(),
-    )
-
-    instance: ProducerModel = query[0]
-    anime_info_model.studios.add(instance)
-
-    return instance
