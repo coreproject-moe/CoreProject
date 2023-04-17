@@ -51,10 +51,9 @@ django-stubs-ext = "*"
 # ===================================================
 # Color Grabber
 colorthief = ">=0.2.1"
+# Parsers
 selectolax = "^0.3.12"
-
-
-
+python-dateutil = "^2.8.2"
 
 [tool.poetry.group.dev.dependencies]
 ## Watchfiles
@@ -81,6 +80,12 @@ isort = "^5.12.0"
 django-extensions = "^3.2.1"
 pygraphviz = "^1.10"
 
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.3.1"
+pytest-django = "^4.5.2"
+
+
 [tool.poe.tasks]
 dev = 'python ./django_core/manage.py runserver 127.0.0.1:9000'
 ## Prod servers
@@ -106,6 +111,13 @@ build-backend = "poetry.core.masonry.api"
 requires = [
   "poetry-core",
 ]
+
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "core.settings"
+pythonpath = 'django_core'
+python_files = ["test_*.py", "*_test.py", "testing/python/*.py"]
+
 
 [tool.black]
 line-length = 92
