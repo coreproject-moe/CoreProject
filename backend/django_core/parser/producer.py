@@ -1,12 +1,20 @@
 # Code Owners : `horidesu`, `baseplate-admin`
 # Licensed Under : AGPL-v3
-
+import datetime
 from selectolax.parser import HTMLParser
 from utilities.string import StringHelper
 from utilities.regex import RegexHelper
 from ._decorators import return_specified_type_on_catched_error
-
+from typing import TypedDict
 from dateutil import parser
+
+
+class ProducerDictionary(TypedDict):
+    mal_id: str
+    name: str
+    japanese_title: str
+    established: datetime.datetime
+    about: str
 
 
 class ProducerParser:
@@ -20,25 +28,30 @@ class ProducerParser:
     @staticmethod
     def get_parser(html):
         return HTMLParser(html)
-    
+
+    @property
     @return_specified_type_on_catched_error("str")
     def get_producer_url(self):
         return self.parser.css_first('meta[property="og:url"]').attributes["content"]
 
+    @property
     @return_specified_type_on_catched_error("str")
     def get_producer_id(self) -> str:
-        return self.regex_helper.get_id_from_url(self.get_producer_url())
+        return self.regex_helper.get_id_from_url(self.get_producer_url)
 
+    @property
     @return_specified_type_on_catched_error("str")
     def get_producer_name(self):
         node = self.parser.css_first("#contentWrapper > div:first-child > h1")
         return self.string_helper.cleanse(node.text())
 
+    @property
     @return_specified_type_on_catched_error("str")
     def get_producer_japanese_name(self):
         node = self.parser.select("span").text_contains("Japanese:")
         return self.string_helper.cleanse(node.matches[0].next.text())
 
+    @property
     @return_specified_type_on_catched_error("str")
     def get_producter_establish_date(self):
         node = self.parser.select("span").text_contains("Established:")
@@ -46,17 +59,18 @@ class ProducerParser:
         actual_date = parser.parse(string_date)
         return actual_date
 
+    @property
     @return_specified_type_on_catched_error("str")
     def get_producer_about(self):
         return self.parser.css_first(
             "#content > div:nth-of-type(1) div.spaceit_pad > span:not(.dark_text)"
         ).text()
 
-    def build_dictionary(self):
+    def build_dictionary(self) -> ProducerDictionary:
         return {
-            "mal_id": self.get_producer_id(),
-            "name": self.get_producer_name(),
-            "japanese_title": self.get_producer_japanese_name(),
-            "established": self.get_producter_establish_date(),
-            "about": self.get_producer_about(),
+            "mal_id": self.get_producer_id,
+            "name": self.get_producer_name,
+            "japanese_title": self.get_producer_japanese_name,
+            "established": self.get_producter_establish_date,
+            "about": self.get_producer_about,
         }
