@@ -85,7 +85,6 @@ pygraphviz = "^1.10"
 pytest = "^7.3.1"
 pytest-django = "^4.5.2"
 
-
 [tool.poe.tasks]
 dev = 'python ./django_core/manage.py runserver 127.0.0.1:9000'
 ## Prod servers
@@ -112,12 +111,10 @@ requires = [
   "poetry-core",
 ]
 
-
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "core.settings"
 pythonpath = 'django_core'
 python_files = ["test_*.py", "*_test.py", "testing/python/*.py"]
-
 
 [tool.black]
 line-length = 92

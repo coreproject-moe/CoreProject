@@ -5,7 +5,7 @@ import datetime
 
 
 def get_staff_res_given_mal_id(mal_id: int) -> httpx.Response:
-    return httpx.get("https://myanimelist.net/people/{}".format(mal_id))
+    return httpx.get(f"https://myanimelist.net/people/{mal_id}")
 
 
 # noqa: E501

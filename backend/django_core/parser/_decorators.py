@@ -1,4 +1,5 @@
-from typing import Any, Callable, Optional, Literal
+from typing import Any, Literal
+from collections.abc import Callable
 import functools
 
 # These decorators catch :
@@ -9,9 +10,9 @@ import functools
 def return_specified_type_on_catched_error(
     return_type: Literal["str"] | Literal["list"],
 ) -> Callable[..., Any]:
-    def decorator(func: Callable[..., Any]) -> Callable[..., Optional[Any]]:
+    def decorator(func: Callable[..., Any]) -> Callable[..., Any | None]:
         @functools.wraps(func)
-        def wrapper(*args: Any, **kwargs: Any) -> Optional[Any]:
+        def wrapper(*args: Any, **kwargs: Any) -> Any | None:
             try:
                 return func(*args, **kwargs)
 
