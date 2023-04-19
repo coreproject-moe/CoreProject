@@ -111,7 +111,7 @@ def test_momo_asakura():
     """
     Haii! This function checks the details about Asakura Momo, anothew amazing seiyuu in da anime industry!
     It confirms if her ID is correct and if her name and birthday are accurate. It also checks if there is an image of her and if she has any alternate names.
-    Natsukawa-san was born on July 18, 1996 in Fukuoka Prefecture, Japan!
+    Asakura-chan was born on July 18, 1996 in Fukuoka Prefecture, Japan!
     """
     res = get_staff_res_given_mal_id(26543)
     parser = StaffParser(res.text)
