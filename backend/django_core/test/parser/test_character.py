@@ -1,7 +1,6 @@
 from parser.character import CharacterParser
 
 import httpx
-import pytest
 
 res = httpx.get("https://myanimelist.net/character/1")
 
