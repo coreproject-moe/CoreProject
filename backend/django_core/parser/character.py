@@ -6,8 +6,7 @@ from typing import TypedDict
 from selectolax.parser import HTMLParser
 from utilities.regex import RegexHelper
 
-# We need to return `None` on exception.
-# Because there can be cases where the node doesn't exist in HTML
+
 from ._decorators import return_specified_type_on_catched_error
 
 

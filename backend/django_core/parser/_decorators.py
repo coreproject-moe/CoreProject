@@ -1,6 +1,10 @@
 from typing import Any, Callable, Optional, Literal
 import functools
 
+# These decorators catch :
+#   AttributeError : In case `selectolax` fails to find the dom node
+#   IndexError : In case `selectolax` finds empty dom node
+
 
 def return_specified_type_on_catched_error(
     return_type: Literal["str"] | Literal["list"],
