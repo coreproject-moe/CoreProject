@@ -12,7 +12,7 @@ from dateutil import parser
 class ProducerDictionary(TypedDict):
     mal_id: str
     name: str
-    japanese_title: str
+    name_japanese: str
     established: datetime.datetime
     about: str
 
@@ -70,7 +70,7 @@ class ProducerParser:
         return {
             "mal_id": self.get_producer_id,
             "name": self.get_producer_name,
-            "japanese_title": self.get_producer_japanese_name,
+            "name_japanese": self.get_producer_japanese_name,
             "established": self.get_producter_establish_date,
             "about": self.get_producer_about,
         }
