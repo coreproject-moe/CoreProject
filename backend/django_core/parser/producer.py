@@ -20,7 +20,7 @@ class ProducerParser:
     @staticmethod
     def get_parser(html):
         return HTMLParser(html)
-    
+
     @return_specified_type_on_catched_error("str")
     def get_producer_url(self):
         return self.parser.css_first('meta[property="og:url"]').attributes["content"]
