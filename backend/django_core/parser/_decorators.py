@@ -6,7 +6,7 @@ from typing import Any, Callable, Optional
 #   IndexError : In case `selectolax` finds empty dom node
 
 
-def return_empty_string_on_attribute_error(
+def return_empty_string_on_catched_error(
     func: Callable[..., Any]
 ) -> Callable[..., Optional[Any]]:
     def wrapper(*args: Any, **kwargs: Any) -> Optional[Any]:
@@ -19,7 +19,7 @@ def return_empty_string_on_attribute_error(
     return wrapper
 
 
-def return_empty_list_on_attribute_error(
+def return_empty_list_on_catched_error(
     func: Callable[..., Any]
 ) -> Callable[..., Optional[Any]]:
     def wrapper(*args: Any, **kwargs: Any) -> Optional[Any]:

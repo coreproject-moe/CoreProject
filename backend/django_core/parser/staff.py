@@ -6,8 +6,8 @@ from utilities.regex import RegexHelper
 from utilities.string import StringHelper
 from dateutil import parser
 from ._decorators import (
-    return_empty_list_on_attribute_error,
-    return_empty_string_on_attribute_error,
+    return_empty_list_on_catched_error,
+    return_empty_string_on_catched_error,
 )
 
 
@@ -34,29 +34,29 @@ class StaffParser:
     def get_parser(html) -> HTMLParser:
         return HTMLParser(html)
 
-    @return_empty_string_on_attribute_error
+    @return_empty_string_on_catched_error
     def get_staff_url(self) -> str:
         return self.parser.css_first("meta[property='og:url']").attributes["content"]
 
-    @return_empty_string_on_attribute_error
+    @return_empty_string_on_catched_error
     def get_staff_id(self) -> int:
         return self.regex_helper.get_id_from_url(self.get_staff_url())
 
-    @return_empty_string_on_attribute_error
+    @return_empty_string_on_catched_error
     def get_staff_image(self) -> str:
         return self.parser.css_first("meta[property='og:image']").attributes["content"]
 
-    @return_empty_string_on_attribute_error
+    @return_empty_string_on_catched_error
     def get_staff_name(self) -> str:
         return self.parser.css_first("meta[property='og:title']").attributes["content"]
 
-    @return_empty_string_on_attribute_error
+    @return_empty_string_on_catched_error
     def get_staff_about(self) -> str:
         return self.parser.css_first(
             "div#content table tr td.borderClass .people-informantion-more"
         ).text()
 
-    @return_empty_string_on_attribute_error
+    @return_empty_string_on_catched_error
     def get_staff_family_name(self) -> str:
         node = self.parser.css_first("#content table tr td.borderClass")
         matches = node.select("span").text_contains("Family name:").matches
@@ -76,7 +76,7 @@ class StaffParser:
 
         return family_name
 
-    @return_empty_string_on_attribute_error
+    @return_empty_string_on_catched_error
     def get_staff_given_name(self) -> str:
         node = self.parser.select("span").text_contains("Given name:").matches
         if len(node) > 1:
@@ -88,7 +88,7 @@ class StaffParser:
 
         return given_name
 
-    @return_empty_list_on_attribute_error
+    @return_empty_list_on_catched_error
     def get_staff_alternate_name(self) -> str:
         node = self.parser.css_first("div#content table tr td.borderClass")
         matches = node.select("div span").text_contains("Alternate names:").matches
@@ -101,7 +101,7 @@ class StaffParser:
 
         return alternate_name
 
-    @return_empty_string_on_attribute_error
+    @return_empty_string_on_catched_error
     def get_staff_birthday(self) -> str:
         node = self.parser.css_first("div#content table tr td.borderClass")
         matches = node.select("div span").text_contains("Birthday:").matches
