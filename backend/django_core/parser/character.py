@@ -8,7 +8,7 @@ from utilities.regex import RegexHelper
 
 # We need to return `None` on exception.
 # Because there can be cases where the node doesn't exist in HTML
-from ._decorators import return_empty_string_on_catched_error
+from ._decorators import return_specified_type_on_catched_error
 
 
 class CharacterDictionary(TypedDict):
@@ -30,25 +30,25 @@ class CharacterParser:
     def get_parser(html):
         return HTMLParser(html)
 
-    @return_empty_string_on_catched_error
+    @return_specified_type_on_catched_error("str")
     def get_character_url(self) -> str:
         return self.parser.css_first("meta[property='og:url']").attributes["content"]
 
-    @return_empty_string_on_catched_error
+    @return_specified_type_on_catched_error("str")
     def get_character_id(self) -> str:
         return self.regex_helper.get_id_from_url(self.get_character_url())
 
-    @return_empty_string_on_catched_error
+    @return_specified_type_on_catched_error("str")
     def get_character_name(self):
         return self.parser.css_first("meta[property='og:title']").attributes["content"]
 
-    @return_empty_string_on_catched_error
+    @return_specified_type_on_catched_error("str")
     def get_character_name_kanji(self):
         return self.regex_helper.get_content_between_first_brackets(
             self.parser.css_first("h2.normal_header span small").text()
         )
 
-    @return_empty_string_on_catched_error
+    @return_specified_type_on_catched_error("str")
     def get_about(self):
         html = self.parser.css_first("#content table tbody tr > td:nth-of-type(2)")
         tags = ["div", "br", "table", "h2"]
@@ -56,7 +56,7 @@ class CharacterParser:
         sentences = html.text().split("\n")
         return "\n\n".join(sentences).strip()
 
-    @return_empty_string_on_catched_error
+    @return_specified_type_on_catched_error("str")
     def get_character_image(self):
         return self.parser.css_first("meta[property='og:image']").attributes["content"]
 
