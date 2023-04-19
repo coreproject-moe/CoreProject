@@ -1,4 +1,6 @@
 import httpx
+from parser.producer import ProducerParser
+import datetime
 
 
 def get_producer_res_given_mal_id(mal_id: int) -> httpx.Response:
