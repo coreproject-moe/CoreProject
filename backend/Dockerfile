@@ -37,8 +37,7 @@ COPY . /code
 
 # Cleanups
 RUN pip install "pip-autoremove"
-RUN pip-autoremove poetry -y
-RUN pip-autoremove "pip-autoremove" -y
+RUN pip-autoremove poetry "pip-autoremove" cython  -y
 RUN apk del nodejs npm
 
 RUN chmod +x /code/server_entrypoint.sh

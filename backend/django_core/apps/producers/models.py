@@ -16,13 +16,7 @@ class ProducerModel(CreatedAtMixin, UpdatedAtMixin):
         blank=False,
     )
     # Titles
-    default_title = models.CharField(
-        max_length=128,
-        default="",
-        null=True,
-        blank=True,
-    )
-    japanese_title = models.CharField(
+    name_japanese = models.CharField(
         max_length=128,
         default="",
         null=True,
