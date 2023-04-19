@@ -79,6 +79,8 @@ isort = "^5.12.0"
 # Django extensions
 django-extensions = "^3.2.1"
 pygraphviz = "^1.10"
+# Profiler
+gprof2dot = "^2022.7.29"
 
 
 [tool.poetry.group.test.dependencies]
