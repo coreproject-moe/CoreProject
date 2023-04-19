@@ -29,24 +29,29 @@ class CharacterParser:
     def get_parser(html):
         return HTMLParser(html)
 
+    @property
     @return_specified_type_on_catched_error("str")
     def get_character_url(self) -> str:
         return self.parser.css_first("meta[property='og:url']").attributes["content"]
 
+    @property
     @return_specified_type_on_catched_error("str")
     def get_character_id(self) -> str:
-        return self.regex_helper.get_id_from_url(self.get_character_url())
+        return self.regex_helper.get_id_from_url(self.get_character_url)
 
+    @property
     @return_specified_type_on_catched_error("str")
     def get_character_name(self):
         return self.parser.css_first("meta[property='og:title']").attributes["content"]
 
+    @property
     @return_specified_type_on_catched_error("str")
     def get_character_name_kanji(self):
         return self.regex_helper.get_content_between_first_brackets(
             self.parser.css_first("h2.normal_header span small").text()
         )
 
+    @property
     @return_specified_type_on_catched_error("str")
     def get_about(self):
         html = self.parser.css_first("#content table tbody tr > td:nth-of-type(2)")
@@ -55,16 +60,17 @@ class CharacterParser:
         sentences = html.text().split("\n")
         return "\n\n".join(sentences).strip()
 
+    @property
     @return_specified_type_on_catched_error("str")
     def get_character_image(self):
         return self.parser.css_first("meta[property='og:image']").attributes["content"]
 
     def build_dictionary(self) -> CharacterDictionary:
         dictionary = {
-            "mal_id": self.get_character_id(),
-            "name": self.get_character_name(),
-            "name_kanji": self.get_character_name_kanji(),
-            "character_image": self.get_character_image(),
-            "about": self.get_about(),
+            "mal_id": self.get_character_id,
+            "name": self.get_character_name,
+            "name_kanji": self.get_character_name_kanji,
+            "character_image": self.get_character_image,
+            "about": self.get_about,
         }
         return dictionary

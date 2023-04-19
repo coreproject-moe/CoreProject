@@ -31,28 +31,34 @@ class StaffParser:
     def get_parser(html) -> HTMLParser:
         return HTMLParser(html)
 
+    @property
     @return_specified_type_on_catched_error("str")
     def get_staff_url(self) -> str:
         return self.parser.css_first("meta[property='og:url']").attributes["content"]
 
+    @property
     @return_specified_type_on_catched_error("str")
-    def get_staff_id(self) -> int:
-        return self.regex_helper.get_id_from_url(self.get_staff_url())
+    def get_staff_id(self) -> str:
+        return self.regex_helper.get_id_from_url(self.get_staff_url)
 
+    @property
     @return_specified_type_on_catched_error("str")
     def get_staff_image(self) -> str:
         return self.parser.css_first("meta[property='og:image']").attributes["content"]
 
+    @property
     @return_specified_type_on_catched_error("str")
     def get_staff_name(self) -> str:
         return self.parser.css_first("meta[property='og:title']").attributes["content"]
 
+    @property
     @return_specified_type_on_catched_error("str")
     def get_staff_about(self) -> str:
         return self.parser.css_first(
             "div#content table tr td.borderClass .people-informantion-more"
         ).text()
 
+    @property
     @return_specified_type_on_catched_error("str")
     def get_staff_family_name(self) -> str:
         node = self.parser.css_first("#content table tr td.borderClass")
@@ -73,6 +79,7 @@ class StaffParser:
 
         return family_name
 
+    @property
     @return_specified_type_on_catched_error("str")
     def get_staff_given_name(self) -> str:
         node = self.parser.select("span").text_contains("Given name:").matches
@@ -85,6 +92,7 @@ class StaffParser:
 
         return given_name
 
+    @property
     @return_specified_type_on_catched_error("list")
     def get_staff_alternate_name(self) -> str:
         node = self.parser.css_first("div#content table tr td.borderClass")
@@ -98,6 +106,7 @@ class StaffParser:
 
         return alternate_name
 
+    @property
     @return_specified_type_on_catched_error("str")
     def get_staff_birthday(self) -> str:
         node = self.parser.css_first("div#content table tr td.borderClass")
@@ -110,12 +119,12 @@ class StaffParser:
 
     def build_dictionary(self) -> StaffDictionary:
         return {
-            "mal_id": self.get_staff_id(),
-            "name": self.get_staff_name(),
-            "given_name": self.get_staff_given_name(),
-            "family_name": self.get_staff_family_name(),
-            "alternate_name": self.get_staff_alternate_name(),
-            "birthday": self.get_staff_birthday(),
-            "about": self.get_staff_about(),
-            "staff_image": self.get_staff_image(),
+            "mal_id": self.get_staff_id,
+            "name": self.get_staff_name,
+            "given_name": self.get_staff_given_name,
+            "family_name": self.get_staff_family_name,
+            "alternate_name": self.get_staff_alternate_name,
+            "birthday": self.get_staff_birthday,
+            "about": self.get_staff_about,
+            "staff_image": self.get_staff_image,
         }
