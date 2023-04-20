@@ -16,6 +16,11 @@ class SitemapBuilder:
     def get_content_given_url(url: str) -> str:
         return httpx.get(url).content
 
+    @staticmethod
+    def contains_integer(string):
+        pattern = re.compile(r"\d+")
+        return bool(re.search(pattern, string))
+
     def get_links_from_sitemap(self, url: str) -> list[str]:
         sitemap_content = self.get_content_given_url(url)
         sitemap_parser = self.get_parser(sitemap_content)
@@ -33,21 +38,19 @@ class SitemapBuilder:
         | Literal["news"]
         | Literal["featured"]
         | Literal["mangastore"],
-        return_only_links_with_integer: bool = True,
+        return_only_ids=True,
     ):
         index_sitemap_links = self.get_links_from_sitemap(self.url)
-
-        if filter:
-            for url in index_sitemap_links:
-                if filter in url:
-                    if return_only_links_with_integer and not re.search(r"\d+", url):
-                        continue
-
-                    index_sitemap_links.append(url)
+        index_sitemap_links = [url for url in index_sitemap_links if f"{filter}-" in url]
 
         sitemap_link_buffer = []
         for sitemap in index_sitemap_links:
             individual_sitemap_link = self.get_links_from_sitemap(sitemap)
-            sitemap_link_buffer.extend(individual_sitemap_link)
+            if return_only_ids:
+                for item in individual_sitemap_link:
+                    if self.contains_integer(item):
+                        sitemap_link_buffer.append(item)
+            else:
+                sitemap_link_buffer.extend(individual_sitemap_link)
 
         return sitemap_link_buffer
