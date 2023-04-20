@@ -1,6 +1,7 @@
 import httpx
 from selectolax.parser import HTMLParser
 from typing import Literal
+import re
 
 
 class SitemapBuilder:
@@ -32,18 +33,21 @@ class SitemapBuilder:
         | Literal["news"]
         | Literal["featured"]
         | Literal["mangastore"],
+        return_only_links_with_integer: bool = True,
     ):
         index_sitemap_links = self.get_links_from_sitemap(self.url)
 
         if filter:
-            index_sitemap_links = [url for url in index_sitemap_links if filter in url]
+            for url in index_sitemap_links:
+                if filter in url:
+                    if return_only_links_with_integer and not re.search(r"\d+", url):
+                        continue
+
+                    index_sitemap_links.append(url)
 
         sitemap_link_buffer = []
         for sitemap in index_sitemap_links:
             individual_sitemap_link = self.get_links_from_sitemap(sitemap)
             sitemap_link_buffer.extend(individual_sitemap_link)
-
-        with open("test.txt", "w") as f:
-            f.write(str(sitemap_link_buffer))
 
         return sitemap_link_buffer

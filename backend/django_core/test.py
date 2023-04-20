@@ -1,4 +1,4 @@
 from builder.sitemap import SitemapBuilder
 
 
-SitemapBuilder("https://myanimelist.net/sitemap/index.xml").build(filter="character")
+SitemapBuilder("https://myanimelist.net/sitemap/index.xml").build(filter="anime")
