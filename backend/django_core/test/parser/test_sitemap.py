@@ -6,8 +6,7 @@ res = httpx.get("https://myanimelist.net/anime.php")
 
 def test_genre_sitemap_parser():
     parser = SitemapParser(res.content)
-    data = parser.genres()
-    assert data == [
+    assert parser.genres == [
         1,
         2,
         3,

@@ -1,8 +1,4 @@
-from parser.sitemap import SitemapParser
-import httpx
+from builder.sitemap import SitemapBuilder
 
 
-res = httpx.get("https://myanimelist.net/anime.php")
-
-
-print(SitemapParser(res.content).genres())
+SitemapBuilder("https://myanimelist.net/sitemap/index.xml").build()
