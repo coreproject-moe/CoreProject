@@ -1,6 +1,4 @@
-from builder.sitemap import SitemapBuilder
+from builder.anime import AnimeBuilder
 
 
-x = SitemapBuilder("https://myanimelist.net/sitemap/index.xml").build(filter="anime")
-with open("test.txt", "w") as f:
-    f.write(str(x))
+AnimeBuilder().build_list()
