@@ -1,5 +1,6 @@
 import httpx
 from selectolax.parser import HTMLParser
+from typing import Literal
 
 
 class SitemapBuilder:
@@ -22,12 +23,27 @@ class SitemapBuilder:
         links = [node.text() for node in loc_nodes]
         return links
 
-    def build(self):
+    def build(
+        self,
+        filter: Literal["character"]
+        | Literal["anime"]
+        | Literal["manga"]
+        | Literal["people"]
+        | Literal["news"]
+        | Literal["featured"]
+        | Literal["mangastore"],
+    ):
         index_sitemap_links = self.get_links_from_sitemap(self.url)
+
+        if filter:
+            index_sitemap_links = [url for url in index_sitemap_links if filter in url]
 
         sitemap_link_buffer = []
         for sitemap in index_sitemap_links:
             individual_sitemap_link = self.get_links_from_sitemap(sitemap)
             sitemap_link_buffer.extend(individual_sitemap_link)
 
-        print(sitemap_link_buffer)
+        with open("test.txt", "w") as f:
+            f.write(str(sitemap_link_buffer))
+
+        return sitemap_link_buffer
