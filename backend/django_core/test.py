@@ -1,4 +1,5 @@
 from builder.anime import AnimeBuilder
 
 
-AnimeBuilder().build_list()
+x = AnimeBuilder().build_list()
+print(x)

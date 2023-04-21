@@ -1,4 +1,4 @@
-from parser.sitemap import SitemapParser
+from django_core.parser.urls import SitemapParser
 import httpx
 
 res = httpx.get("https://myanimelist.net/anime.php")
