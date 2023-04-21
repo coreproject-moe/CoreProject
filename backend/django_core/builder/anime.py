@@ -1,6 +1,4 @@
 import string
-from typing import Literal
-import httpx
 
 
 class AnimeBuilder:
