@@ -7,7 +7,7 @@ from selectolax.parser import HTMLParser
 from utilities.regex import RegexHelper
 
 
-from ._decorators import return_specified_type_on_catched_error
+from ._decorators import return_on_error
 
 
 class CharacterDictionary(TypedDict):
@@ -30,29 +30,29 @@ class CharacterParser:
         return HTMLParser(html)
 
     @property
-    @return_specified_type_on_catched_error("str")
+    @return_on_error("")
     def get_character_url(self) -> str:
         return self.parser.css_first("meta[property='og:url']").attributes["content"]
 
     @property
-    @return_specified_type_on_catched_error("str")
+    @return_on_error("")
     def get_character_id(self) -> str:
         return self.regex_helper.get_id_from_url(self.get_character_url)
 
     @property
-    @return_specified_type_on_catched_error("str")
+    @return_on_error("")
     def get_character_name(self):
         return self.parser.css_first("meta[property='og:title']").attributes["content"]
 
     @property
-    @return_specified_type_on_catched_error("str")
+    @return_on_error("")
     def get_character_name_kanji(self):
         return self.regex_helper.get_content_between_first_brackets(
             self.parser.css_first("h2.normal_header span small").text()
         )
 
     @property
-    @return_specified_type_on_catched_error("str")
+    @return_on_error("")
     def get_about(self):
         html = self.parser.css_first("#content table tbody tr > td:nth-of-type(2)")
         tags = ["div", "br", "table", "h2"]
@@ -61,7 +61,7 @@ class CharacterParser:
         return "\n\n".join(sentences).strip()
 
     @property
-    @return_specified_type_on_catched_error("str")
+    @return_on_error("")
     def get_character_image(self):
         return self.parser.css_first("meta[property='og:image']").attributes["content"]
 

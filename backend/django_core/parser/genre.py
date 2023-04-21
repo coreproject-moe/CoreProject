@@ -2,7 +2,7 @@ from selectolax.parser import HTMLParser
 
 from utilities.regex import RegexHelper
 
-from ._decorators import return_specified_type_on_catched_error
+from ._decorators import return_on_error
 
 
 class AnimeGenreParser:
@@ -17,12 +17,12 @@ class AnimeGenreParser:
         return HTMLParser(html)
 
     @property
-    @return_specified_type_on_catched_error("str")
+    @return_on_error("")
     def get_url(self) -> str:
         return self.parser.css_first('meta[property="og:url"]').attributes["content"]
 
     @property
-    @return_specified_type_on_catched_error("str")
+    @return_on_error("")
     def get_mal_id(self) -> int:
         return self.regex_helper.get_id_from_url(self.get_url)
 
