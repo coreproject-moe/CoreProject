@@ -37,7 +37,7 @@ class AnimeBuilder:
     @return_on_error("")
     def has_next_page(self, html: str) -> bool:
         parser = self.get_parser(html)
-        node = parser.css_first("div.normal_header > .fl-r > div > span.bgColor1")
+        node = parser.css_first("div.normal_header > div.fl-r > div > span.bgColor1")
 
         select_node_list = node.text().split(" ")
         for item in select_node_list:

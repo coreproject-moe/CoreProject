@@ -2,7 +2,7 @@ from selectolax.parser import HTMLParser
 
 from utilities.regex import RegexHelper
 
-from ..decorators.return_error_decorator import return_on_error
+from decorators.return_error_decorator import return_on_error
 
 
 class AnimeGenreParser:
