@@ -1,9 +1,10 @@
 from selectolax.parser import HTMLParser
-
 from utilities.regex import RegexHelper
+import string
+from typing import Literal
 
 
-class SitemapParser:
+class UrlParser:
     def __init__(self, html: str) -> None:
         self.parser = self.get_parser(html)
         # Facades
@@ -12,6 +13,13 @@ class SitemapParser:
     @staticmethod
     def get_parser(html: str) -> HTMLParser:
         return HTMLParser(html)
+
+    @staticmethod
+    def build_list(name: Literal["anime"] | Literal["character"]):
+        alphabet_list = list(string.ascii_uppercase + ".")
+        return [
+            f"https://myanimelist.net/anime.php?letter={letter}" for letter in alphabet_list
+        ]
 
     @property
     def genres(self) -> list[int]:

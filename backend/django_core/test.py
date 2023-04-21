@@ -1,4 +1,5 @@
-from builder.sitemap import SitemapBuilder
+from builder.anime import AnimeBuilder
 
 
-SitemapBuilder("https://myanimelist.net/sitemap/index.xml").build()
+x = AnimeBuilder().build_list()
+print(x)
