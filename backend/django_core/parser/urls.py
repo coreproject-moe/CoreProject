@@ -1,5 +1,4 @@
 from selectolax.parser import HTMLParser
-import httpx
 from utilities.regex import RegexHelper
 import string
 from typing import Literal
