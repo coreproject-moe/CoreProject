@@ -25,25 +25,21 @@ class AnimeBuilder:
         ]
 
     @staticmethod
+    def check_if_string_contains_integer(string: str) -> bool:
+        pattern = re.compile(r"\d+")
+        return bool(re.search(pattern, string))
+
+    @staticmethod
     def check_if_string_contains_bracket(string: str) -> bool:
         pattern = re.compile(r"\[\d+\]")
-
-        if re.search(pattern, string):
-            return True
-
-        return False
+        return bool(re.search(pattern, string))
 
     @return_on_error("")
     def has_next_page(self, html: str) -> bool:
         parser = self.get_parser(html)
-        node = parser.select("div.normal_header > .fl-r > div > span.bgColor1")
+        node = parser.css_first("div.normal_header > .fl-r > div > span.bgColor1")
 
-        if len(node.matches) > 1:
-            raise AttributeError("More than one node found")
-
-        select_node = node.matches[0]
-
-        select_node_list = select_node.text().split(" ")
+        select_node_list = node.text().split(" ")
         for item in select_node_list:
             if self.check_if_string_contains_bracket(item):
                 bracketed_element_position = select_node_list.index(item)
@@ -65,25 +61,33 @@ class AnimeBuilder:
         return anchors
 
     def _build_urls(self, url: str) -> None:
-        # print(url)
-        # print(self.visited_urls)
+        print(url)
+
         self.visited_urls.add(url)
 
         res = self.client.get(url)
         html = res.content
 
-        anime_nodes = self.get_parser(html).css("a[href*=anime]")
+        anime_nodes = self.get_parser(html).css("a[href*='/anime/']")
         for anime_node in anime_nodes:
             anime_href = anime_node.attributes["href"]
-            if anime_href not in self.anchors:
+            if anime_href not in self.anchors and self.check_if_string_contains_integer(
+                anime_href
+            ):
                 self.anchors.append(anime_href)
 
         if self.has_next_page(html):
             all_pages = self.get_all_pages_in_span_tag(html)
+            for item in all_pages:
+                myanimelist_formated_url = "https://myanimelist.net" + item
+                if myanimelist_formated_url not in self.visited_urls:
+                    next_url = myanimelist_formated_url
+                    break
 
-            next_url = list(set(all_pages) ^ self.visited_urls)[0]
-            self._build_urls(f"https://myanimelist.net{next_url}")
+            self._build_urls(next_url)
 
     def build_urls(self):
-        self._build_urls("https://myanimelist.net/anime.php?letter=.")
-        print(self.anchors)
+        for url in self.build_list():
+            self._build_urls(url)
+
+        return self.anchors

@@ -2,4 +2,5 @@ from builder.anime import AnimeBuilder
 
 
 x = AnimeBuilder().build_urls()
-print(x)
+with open("test.txt", "w") as f:
+    f.write(str(x))
