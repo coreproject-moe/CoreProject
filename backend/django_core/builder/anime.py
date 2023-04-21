@@ -53,7 +53,7 @@ class AnimeBuilder:
     def get_all_pages_in_span_tag(self, html):
         parser = self.get_parser(html)
         node = (
-            parser.css_first("div.normal_header > .fl-r > div > span.bgColor1")
+            parser.css_first("div.normal_header > div.fl-r > div > span.bgColor1")
             .select("a")
             .matches
         )
