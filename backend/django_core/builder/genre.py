@@ -4,7 +4,9 @@ import string
 from typing import Literal
 
 
-class UrlParser:
+class GenreBuilder:
+    base_url = "https://myanimelist.net/anime/genre/{}"
+
     def __init__(self, html: str) -> None:
         self.parser = self.get_parser(html)
         # Facades
@@ -14,15 +16,8 @@ class UrlParser:
     def get_parser(html: str) -> HTMLParser:
         return HTMLParser(html)
 
-    @staticmethod
-    def build_list(name: Literal["anime"] | Literal["character"]):
-        alphabet_list = list(string.ascii_uppercase + ".")
-        return [
-            f"https://myanimelist.net/anime.php?letter={letter}" for letter in alphabet_list
-        ]
-
     @property
-    def genres(self) -> list[int]:
+    def genre_list(self) -> list[int]:
         """
         Given : https://myanimelist.net/anime.php
         return all the urls that match genre query
@@ -34,6 +29,5 @@ class UrlParser:
         ]
         return sorted(link_ids)
 
-    @property
-    def characters(self) -> list[int]:
-        pass
+    def build_urls(self) -> list[str]:
+        return [self.base_url.format(mal_id) for mal_id in self.genre_list]
