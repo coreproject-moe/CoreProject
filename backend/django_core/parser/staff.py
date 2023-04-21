@@ -5,7 +5,7 @@ from selectolax.parser import HTMLParser
 from utilities.regex import RegexHelper
 from utilities.string import StringHelper
 from dateutil import parser
-from ._decorators import return_on_error
+from ..decorators.return_error_decorator import return_on_error
 
 
 class StaffDictionary(TypedDict):

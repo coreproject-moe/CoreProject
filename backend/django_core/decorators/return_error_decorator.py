@@ -8,7 +8,7 @@ import functools
 
 
 def return_on_error(
-    return_type: Literal["[]"] | Literal["''"],
+    return_type: Literal["[]"] | Literal[""],
 ) -> Callable[..., Any]:
     def decorator(func: Callable[..., Any]) -> Callable[..., Any | None]:
         @functools.wraps(func)
