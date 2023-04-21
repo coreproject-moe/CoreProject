@@ -1,7 +1,5 @@
 from django.test import TestCase
 from apps.characters.models import CharacterModel
-from apps.user.models import CustomUser
-from apps.api.models import Token
 from ninja.testing import TestClient
 from apps.api.urls import api
 
