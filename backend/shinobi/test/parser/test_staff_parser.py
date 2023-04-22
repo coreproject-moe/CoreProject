@@ -25,8 +25,7 @@ def test_first_person_parser():
     assert data["family_name"] == "関"
     assert data["alternate_name"] == ["Seki Mondoya", "門戸 開", "Monto Hiraku"]
     assert data["birthday"] == datetime.datetime(1972, 9, 8, 0, 0)
-    
-    
+
     # assert (
     #     data["about"]
     #     == "Hometown: Tokyo, Japan\nBlood type: AB\n\nTwitter: @seki0908\nProfile: Atomic Monkey"
