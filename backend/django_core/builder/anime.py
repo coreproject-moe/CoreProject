@@ -61,7 +61,9 @@ class AnimeBuilder:
         return anchors
 
     def _build_urls(self, url: str) -> None:
-        print(url)
+
+
+        
 
         self.visited_urls.add(url)
 
