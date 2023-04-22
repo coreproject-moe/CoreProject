@@ -4,10 +4,9 @@
 from typing import TypedDict
 
 from selectolax.parser import HTMLParser
-from shinobi.utilities.regex import RegexHelper
-
 
 from shinobi.decorators.return_error_decorator import return_on_error
+from shinobi.utilities.regex import RegexHelper
 
 
 class CharacterDictionary(TypedDict):

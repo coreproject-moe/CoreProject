@@ -1,6 +1,8 @@
-import httpx
-from shinobi.parser.producer import ProducerParser
 import datetime
+
+import httpx
+
+from shinobi.parser.producer import ProducerParser
 
 
 def get_producer_res_given_mal_id(mal_id: int) -> httpx.Response:

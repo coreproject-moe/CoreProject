@@ -1,7 +1,8 @@
-from shinobi.parser.staff import StaffParser
+import datetime
 
 import httpx
-import datetime
+
+from shinobi.parser.staff import StaffParser
 
 
 def get_staff_res_given_mal_id(mal_id: int) -> httpx.Response:

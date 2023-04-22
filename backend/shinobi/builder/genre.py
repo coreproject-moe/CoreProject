@@ -1,4 +1,5 @@
 from selectolax.parser import HTMLParser
+
 from shinobi.utilities.regex import RegexHelper
 
 

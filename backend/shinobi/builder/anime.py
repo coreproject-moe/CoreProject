@@ -1,7 +1,9 @@
+import re
 import string
+
 import httpx
 from selectolax.parser import HTMLParser
-import re
+
 from shinobi.decorators.return_error_decorator import return_on_error
 
 
