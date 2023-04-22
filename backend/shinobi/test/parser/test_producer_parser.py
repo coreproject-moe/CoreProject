@@ -15,7 +15,7 @@ def test_first_producer_parser():
 
     data = parser.build_dictionary()
 
-    assert data["mal_id"] == "1"
+    assert data["mal_id"] == 1
     assert data["mal_id"].isdigit()
     assert data["name"] == "Pierrot"
     assert data["name_japanese"] == "ぴえろ"

@@ -85,7 +85,6 @@ class AnimeBuilder:
     def build_dictionary(
         self, excluded_ids: list[int] | None = None, sort=False
     ) -> dict[int, str]:
-        # Methods
         for url in self._build_word_list():
             self._build_urls(url)
 

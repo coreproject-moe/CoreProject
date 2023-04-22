@@ -15,7 +15,7 @@ def test_first_person_parser():
     parser = StaffParser(res.text)
     data = parser.build_dictionary()
 
-    assert data["mal_id"] == "1"
+    assert data["mal_id"] == 1
     assert data["mal_id"].isdigit()
     assert data["name"] == "Tomokazu Seki"
     assert (
@@ -38,7 +38,7 @@ def test_second_person_parser():
     parser = StaffParser(res.text)
     data = parser.build_dictionary()
 
-    assert data["mal_id"] == "2"
+    assert data["mal_id"] == 2
     assert data["mal_id"].isdigit()
     assert data["name"] == "Tomokazu Sugita"
     assert (
@@ -67,7 +67,7 @@ def test_sora_amamiya():
     parser = StaffParser(res.text)
     data = parser.build_dictionary()
 
-    assert data["mal_id"] == "21517"
+    assert data["mal_id"] == 21517
     assert data["mal_id"].isdigit()
     assert data["name"] == "Sora Amamiya"
     assert data["given_name"] == "天"
@@ -93,7 +93,7 @@ def test_natsukawa_shiina():
     parser = StaffParser(res.text)
     data = parser.build_dictionary()
 
-    assert data["mal_id"] == "23405"
+    assert data["mal_id"] == 23405
     assert data["mal_id"].isdigit()
     assert data["name"] == "Shiina Natsukawa"
     assert data["given_name"] == "椎菜"
@@ -119,7 +119,7 @@ def test_momo_asakura():
     parser = StaffParser(res.text)
     data = parser.build_dictionary()
 
-    assert data["mal_id"] == "26543"
+    assert data["mal_id"] == 26543
     assert data["name"] == "Momo Asakura"
     assert data["given_name"] == "もも"
     assert data["family_name"] == "麻倉"
