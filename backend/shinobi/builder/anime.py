@@ -2,7 +2,7 @@ import string
 import httpx
 from selectolax.parser import HTMLParser
 import re
-from decorators.return_error_decorator import return_on_error
+from shinobi.decorators.return_error_decorator import return_on_error
 
 
 class AnimeBuilder:
@@ -61,10 +61,6 @@ class AnimeBuilder:
         return anchors
 
     def _build_urls(self, url: str) -> None:
-
-
-        
-
         self.visited_urls.add(url)
 
         res = self.client.get(url)

@@ -2,8 +2,8 @@
 # Licensed Under : AGPL-v3
 import datetime
 from selectolax.parser import HTMLParser
-from utilities.string import StringHelper
-from utilities.regex import RegexHelper
+from shinobi.utilities.string import StringHelper
+from shinobi.utilities.regex import RegexHelper
 from decorators.return_error_decorator import return_on_error
 from typing import TypedDict
 from dateutil import parser

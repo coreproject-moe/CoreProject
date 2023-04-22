@@ -1,5 +1,5 @@
 from selectolax.parser import HTMLParser
-from utilities.regex import RegexHelper
+from shinobi.utilities.regex import RegexHelper
 
 
 class GenreBuilder:

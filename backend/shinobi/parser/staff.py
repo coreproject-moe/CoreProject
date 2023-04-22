@@ -2,10 +2,10 @@ import re
 import datetime
 from typing import TypedDict
 from selectolax.parser import HTMLParser
-from utilities.regex import RegexHelper
-from utilities.string import StringHelper
+from shinobi.utilities.regex import RegexHelper
+from shinobi.utilities.string import StringHelper
 from dateutil import parser
-from decorators.return_error_decorator import return_on_error
+from shinobi.decorators.return_error_decorator import return_on_error
 
 
 class StaffDictionary(TypedDict):
