@@ -40,6 +40,9 @@ RUN pip install "pip-autoremove"
 RUN pip-autoremove poetry "pip-autoremove" cython  -y
 RUN apk del nodejs npm
 
+# Remove test folders
+RUN find . -type d -name 'test*' -exec rm -r {} +
+
 RUN chmod +x /code/server_entrypoint.sh
 RUN chmod +x /code/worker_entrypoint.sh
 

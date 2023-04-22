@@ -1,4 +1,4 @@
-from builder.genre import GenreBuilder
+from shinobi.builder.genre import GenreBuilder
 import httpx
 
 res = httpx.get("https://myanimelist.net/anime.php")

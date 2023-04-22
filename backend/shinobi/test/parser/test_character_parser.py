@@ -1,4 +1,4 @@
-from parser.character import CharacterParser
+from shinobi.parser.character import CharacterParser
 
 import httpx
 

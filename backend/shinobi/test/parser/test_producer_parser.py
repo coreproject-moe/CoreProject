@@ -1,5 +1,5 @@
 import httpx
-from parser.producer import ProducerParser
+from shinobi.parser.producer import ProducerParser
 import datetime
 
 

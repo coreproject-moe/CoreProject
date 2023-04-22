@@ -1,4 +1,4 @@
-from parser.staff import StaffParser
+from shinobi.parser.staff import StaffParser
 
 import httpx
 import datetime

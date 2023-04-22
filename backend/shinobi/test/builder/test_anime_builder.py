@@ -1,4 +1,4 @@
-from builder.anime import AnimeBuilder
+from shinobi.builder.anime import AnimeBuilder
 
 
 def test_anime_builder():
