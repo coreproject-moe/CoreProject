@@ -1,6 +1,6 @@
-from typing import Any, Literal
 from collections.abc import Callable
 import functools
+from typing import Any, Literal
 
 # These decorators catch :
 #   AttributeError : In case `selectolax` fails to find the dom node

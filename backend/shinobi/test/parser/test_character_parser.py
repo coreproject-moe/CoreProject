@@ -1,6 +1,6 @@
-from parser.character import CharacterParser
-
 import httpx
+
+from shinobi.parser.character import CharacterParser
 
 res = httpx.get("https://myanimelist.net/character/1")
 

@@ -1,38 +1,26 @@
 import string
+
 import httpx
 from selectolax.parser import HTMLParser
-import re
-from decorators.return_error_decorator import return_on_error
+
+from shinobi.decorators.return_error_decorator import return_on_error
+from shinobi.utilities.regex import RegexHelper
 
 
 class AnimeBuilder:
     def __init__(self) -> None:
-        self.anchors = []
-        self.visited_urls = set()
+        self.anchors: list[str] = []
+        self.visited_urls: set[str] = set()
 
         # Reusuable clients
         self.client = httpx.Client()
 
+        # Facades
+        self.regex_helper = RegexHelper()
+
     @staticmethod
     def get_parser(html: str) -> HTMLParser:
         return HTMLParser(html)
-
-    @staticmethod
-    def build_list():
-        alphabet_list = list("." + string.ascii_uppercase)
-        return [
-            f"https://myanimelist.net/anime.php?letter={letter}" for letter in alphabet_list
-        ]
-
-    @staticmethod
-    def check_if_string_contains_integer(string: str) -> bool:
-        pattern = re.compile(r"\d+")
-        return bool(re.search(pattern, string))
-
-    @staticmethod
-    def check_if_string_contains_bracket(string: str) -> bool:
-        pattern = re.compile(r"\[\d+\]")
-        return bool(re.search(pattern, string))
 
     @return_on_error("")
     def has_next_page(self, html: str) -> bool:
@@ -41,7 +29,7 @@ class AnimeBuilder:
 
         select_node_list = node.text().split(" ")
         for item in select_node_list:
-            if self.check_if_string_contains_bracket(item):
+            if self.regex_helper.check_if_string_contains_bracket(item):
                 bracketed_element_position = select_node_list.index(item)
                 break
 
@@ -60,11 +48,13 @@ class AnimeBuilder:
         anchors = [anchor.attributes["href"] for anchor in node]
         return anchors
 
+    def _build_word_list(self) -> list[str]:
+        alphabet_list = list("." + string.ascii_uppercase)
+        return [
+            f"https://myanimelist.net/anime.php?letter={letter}" for letter in alphabet_list
+        ]
+
     def _build_urls(self, url: str) -> None:
-
-
-        
-
         self.visited_urls.add(url)
 
         res = self.client.get(url)
@@ -73,8 +63,9 @@ class AnimeBuilder:
         anime_nodes = self.get_parser(html).css("a[href*='/anime/']")
         for anime_node in anime_nodes:
             anime_href = anime_node.attributes["href"]
-            if anime_href not in self.anchors and self.check_if_string_contains_integer(
-                anime_href
+            if (
+                anime_href not in self.anchors
+                and self.regex_helper.check_if_string_contains_integer(anime_href)
             ):
                 self.anchors.append(anime_href)
 
@@ -88,8 +79,22 @@ class AnimeBuilder:
 
             self._build_urls(next_url)
 
-    def build_urls(self):
-        for url in self.build_list():
+    def _build_ids(self) -> list[int]:
+        return [self.regex_helper.get_first_integer_from_url(item) for item in self.anchors]
+
+    def build_dictionary(
+        self, excluded_ids: list[int] | None = None, sort=False
+    ) -> dict[int, str]:
+        # Methods
+        for url in self._build_word_list():
             self._build_urls(url)
 
-        return self.anchors
+        dictionary = dict(zip(self._build_ids(), self.anchors))
+
+        if sort:
+            dictionary = dict(sorted(dictionary.items()))
+
+        if excluded_ids:
+            dictionary = {k: v for k, v in dictionary.items() if k not in excluded_ids}
+
+        return dictionary
