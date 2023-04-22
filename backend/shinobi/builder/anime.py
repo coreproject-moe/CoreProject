@@ -51,10 +51,9 @@ class AnimeBuilder:
 
     def _build_word_list(self) -> list[str]:
         alphabet_list = list("." + string.ascii_uppercase)
-        # return [
-        #     f"https://myanimelist.net/anime.php?letter={letter}" for letter in alphabet_list
-        # ]
-        return ["https://myanimelist.net/anime.php?letter=."]
+        return [
+            f"https://myanimelist.net/anime.php?letter={letter}" for letter in alphabet_list
+        ]
 
     def _build_urls(self, url: str) -> None:
         self.visited_urls.add(url)
@@ -84,10 +83,19 @@ class AnimeBuilder:
     def _build_ids(self) -> list[int]:
         return [self.regex_helper.get_first_integer_from_url(item) for item in self.anchors]
 
-    def build_dictionary(self, sort=False) -> dict[int, str]:
+    def build_dictionary(
+        self, excluded_ids: list[int] | None = None, sort=False
+    ) -> dict[int, str]:
         # Methods
         for url in self._build_word_list():
             self._build_urls(url)
 
         dictionary = dict(zip(self._build_ids(), self.anchors))
-        return dictionary if not sort else dict(sorted(dictionary.items()))
+
+        if sort:
+            dictionary = dict(sorted(dictionary.items()))
+
+        if excluded_ids:
+            dictionary = {k: v for k, v in dictionary.items() if k not in excluded_ids}
+
+        return dictionary

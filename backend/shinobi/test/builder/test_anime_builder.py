@@ -1,15 +1,20 @@
 from shinobi.builder.anime import AnimeBuilder
 
 
-def test_anime_builder():
+def test_anime_dictionary_builder():
     builder = AnimeBuilder()
+    dictionary = builder.build_dictionary(excluded_ids=[54915])
+    
+    dictionary_keys = list(dictionary.keys())
+    dictionary_values = list(dictionary.values())
 
-    urls = builder.build_urls()
+    assert 54915 not in list(dictionary_keys)
 
     assert (
         "https://myanimelist.net/anime/36305/Zutto_Mae_kara_Suki_deshita_Kokuhaku_Jikkou_Iinkai__Kinyoubi_no_Ohayou"
-        in urls
+        in dictionary_values
     )
     assert (
-        "https://myanimelist.net/anime/30831/Kono_Subarashii_Sekai_ni_Shukufuku_wo" in urls
+        "https://myanimelist.net/anime/30831/Kono_Subarashii_Sekai_ni_Shukufuku_wo"
+        in dictionary_values
     )
