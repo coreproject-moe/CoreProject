@@ -4,7 +4,7 @@ from shinobi.builder.anime import AnimeBuilder
 def test_anime_dictionary_builder():
     builder = AnimeBuilder()
     dictionary = builder.build_dictionary(excluded_ids=[54915])
-    
+
     dictionary_keys = list(dictionary.keys())
     dictionary_values = list(dictionary.values())
 
