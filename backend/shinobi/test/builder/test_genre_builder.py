@@ -1,11 +1,9 @@
 import httpx
+import pytest
 
 from shinobi.builder.genre import GenreBuilder
 
 res = httpx.get("https://myanimelist.net/anime.php")
-
-
-import pytest
 
 
 @pytest.mark.shinobi
