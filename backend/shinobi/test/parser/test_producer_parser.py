@@ -10,7 +10,6 @@ def get_producer_res_given_mal_id(mal_id: int) -> httpx.Response:
     return httpx.get(f"https://myanimelist.net/anime/producer/{mal_id}")
 
 
-@pytest.mark.shinobi
 def test_first_producer_parser():
     res = get_producer_res_given_mal_id(1)
     parser = ProducerParser(res.text)

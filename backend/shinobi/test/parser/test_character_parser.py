@@ -9,7 +9,6 @@ import pytest
 
 
 # noqa: E501
-@pytest.mark.shinobi
 def test_first_character_parser():
     parser = CharacterParser(res.text)
     data = parser.build_dictionary()

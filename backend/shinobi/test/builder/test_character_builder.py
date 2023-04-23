@@ -3,7 +3,6 @@ import pytest
 from shinobi.builder.character import CharacterBuilder
 
 
-@pytest.mark.shinobi
 def test_character_dictionary_builder():
     builder = CharacterBuilder()
     dictionary = builder.build_dictionary(excluded_ids=[54915])

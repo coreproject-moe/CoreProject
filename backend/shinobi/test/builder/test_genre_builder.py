@@ -3,7 +3,6 @@ import pytest
 from shinobi.builder.genre import GenreBuilder
 
 
-@pytest.mark.shinobi
 def test_genre_sitemap_parser():
     parser = GenreBuilder()
     dictionary = parser.build_dictionary()
