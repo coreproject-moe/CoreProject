@@ -5,10 +5,6 @@ from shinobi.parser.character import CharacterParser
 res = httpx.get("https://myanimelist.net/character/1")
 
 
-def test_myanimelist_response():
-    assert res.status_code == 200
-
-
 # noqa: E501
 def test_first_character_parser():
     parser = CharacterParser(res.text)
