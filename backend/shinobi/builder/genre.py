@@ -1,18 +1,13 @@
+import httpx
 from selectolax.parser import HTMLParser
 
 from shinobi.utilities.regex import RegexHelper
 
 
 class GenreBuilder:
-    """
-    Given : https://myanimelist.net/anime.php
-    Return all the `genres` in MyAnimeList
-    """
-
-    base_url = "https://myanimelist.net/anime/genre/{}"
-
-    def __init__(self, html: str) -> None:
-        self.parser = self.get_parser(html)
+    def __init__(self) -> None:
+        # Reusuable Clients
+        self.client = httpx.Client(follow_redirects=True, http2=True)
 
         # Facades
         self.regex_helper = RegexHelper()
@@ -21,14 +16,25 @@ class GenreBuilder:
     def get_parser(html: str) -> HTMLParser:
         return HTMLParser(html)
 
-    @property
-    def genre_list(self) -> list[int]:
-        genre_nodes = self.parser.css('a[href*="genre"]')
+    def __build_urls(self, ids: list[int]) -> list[str]:
+        return [f"https://myanimelist.net/anime/genre/{mal_id}" for mal_id in ids]
+
+    def __build_ids(self, html: str) -> list[int]:
+        parser = self.get_parser(html)
+        genre_nodes = parser.css('a[href*="genre"]')
         link_ids = [
-            int(self.regex_helper.get_id_from_url(node.attributes["href"]))
+            self.regex_helper.get_id_from_url(node.attributes["href"])
             for node in genre_nodes
         ]
         return sorted(link_ids)
 
-    def build_urls(self) -> list[str]:
-        return [self.base_url.format(mal_id) for mal_id in self.genre_list]
+    def build_dictionary(self) -> dict[int, str]:
+        res = self.client.get("https://myanimelist.net/anime.php")
+        html = res.content
+
+        ids = self.__build_ids(html)
+        urls = self.__build_urls(ids)
+
+        dictionary = dict(zip(ids, urls))
+
+        return dictionary
