@@ -16,10 +16,10 @@ class GenreBuilder:
     def get_parser(html: str) -> HTMLParser:
         return HTMLParser(html)
 
-    def _build_urls(self, ids: list[int]) -> list[str]:
+    def __build_urls(self, ids: list[int]) -> list[str]:
         return [f"https://myanimelist.net/anime/genre/{mal_id}" for mal_id in ids]
 
-    def _build_ids(self, html: str) -> list[int]:
+    def __build_ids(self, html: str) -> list[int]:
         parser = self.get_parser(html)
         genre_nodes = parser.css('a[href*="genre"]')
         link_ids = [
@@ -32,8 +32,8 @@ class GenreBuilder:
         res = self.client.get("https://myanimelist.net/anime.php")
         html = res.content
 
-        ids = self._build_ids(html)
-        urls = self._build_urls(ids)
+        ids = self.__build_ids(html)
+        urls = self.__build_urls(ids)
 
         dictionary = dict(zip(ids, urls))
 
