@@ -4,7 +4,7 @@ from shinobi.builder.genre import GenreBuilder
 def test_genre_sitemap_parser():
     parser = GenreBuilder()
     dictionary = parser.build_dictionary()
-    assert dictionary.keys() == [
+    assert list(dictionary.keys()) == [
         1,
         2,
         3,
@@ -82,7 +82,7 @@ def test_genre_sitemap_parser():
         80,
         81,
     ]
-    assert dictionary.values() == [
+    assert list(dictionary.values()) == [
         "https://myanimelist.net/anime/genre/1",
         "https://myanimelist.net/anime/genre/2",
         "https://myanimelist.net/anime/genre/3",
@@ -163,6 +163,6 @@ def test_genre_sitemap_parser():
     # Check if list is sorted
     # https://stackoverflow.com/a/3755251
     assert all(
-        dictionary.keys()[i] <= dictionary.keys()[i + 1]
+        list(dictionary.keys())[i] <= list(dictionary.keys())[i + 1]
         for i in range(len(dictionary.keys()) - 1)
     )

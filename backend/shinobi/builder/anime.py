@@ -67,7 +67,7 @@ class AnimeBuilder:
                 anime_href not in self.anchors
                 and self.regex_helper.check_if_string_contains_integer(anime_href)
             ):
-                self.anchors.append(anime_href)
+                self.anchors.append("https://myanimelist.net" + anime_href)
 
         if self.has_next_page(html):
             all_pages = self.get_all_pages_in_span_tag(html)
@@ -94,6 +94,8 @@ class AnimeBuilder:
             dictionary = dict(sorted(dictionary.items()))
 
         if excluded_ids:
-            dictionary = {k: v for k, v in dictionary.items() if k not in excluded_ids}
+            dictionary = {
+                key: value for key, value in dictionary.items() if key not in excluded_ids
+            }
 
         return dictionary
