@@ -76,7 +76,7 @@ class AnimeBuilder:
                 if myanimelist_formated_url not in self.visited_urls:
                     next_url = myanimelist_formated_url
                     break
-                        
+
             self.__build_urls(next_url)
 
     def __build_ids(self) -> list[int]:

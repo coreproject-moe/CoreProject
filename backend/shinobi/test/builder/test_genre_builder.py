@@ -1,4 +1,3 @@
-
 from shinobi.builder.genre import GenreBuilder
 
 
