@@ -40,3 +40,8 @@ class RegexHelper:
     # ------------
     def replace_br_with_newline(self, text: str) -> str:
         return re.sub(r"<br\s*\/?>", "\n", text)
+
+    def remove_anime_from_the_end_of_a_string(self, text: str) -> str:
+        pattern = r"(.*?)\sAnime"
+
+        return re.sub(pattern, r"\1", text)
