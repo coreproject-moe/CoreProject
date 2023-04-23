@@ -7,7 +7,7 @@ from shinobi.decorators.return_error_decorator import return_on_error
 from shinobi.utilities.regex import RegexHelper
 
 
-class CharacterBuilder:
+class StaffBuilder:
     def __init__(self) -> None:
         self.anchors: list[str] = []
         self.visited_urls: set[str] = set()
@@ -51,17 +51,18 @@ class CharacterBuilder:
     def _build_word_list(self) -> list[str]:
         alphabet_list = list(string.ascii_uppercase)
         return [
-            f"https://myanimelist.net/character.php?letter={letter}"
+            f"https://myanimelist.net/people.php?letter={letter}"
             for letter in alphabet_list
         ]
 
     def __build_urls(self, url: str) -> None:
+        print(url)
         self.visited_urls.add(url)
 
         res = self.client.get(url)
         html = res.content
 
-        anime_nodes = self.get_parser(html).css("a[href*='/character/']")
+        anime_nodes = self.get_parser(html).css("a[href*='/people/']")
         for anime_node in anime_nodes:
             anime_href = anime_node.attributes["href"]
             if (
