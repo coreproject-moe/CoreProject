@@ -1,6 +1,9 @@
+import pytest
+
 from shinobi.builder.anime import AnimeBuilder
 
 
+@pytest.mark.shinobi
 def test_anime_dictionary_builder():
     builder = AnimeBuilder()
     dictionary = builder.build_dictionary(excluded_ids=[54915])

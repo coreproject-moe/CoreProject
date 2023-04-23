@@ -1,6 +1,7 @@
 import datetime
 
 import httpx
+import pytest
 
 from shinobi.parser.staff import StaffParser
 
@@ -10,6 +11,7 @@ def get_staff_res_given_mal_id(mal_id: int) -> httpx.Response:
 
 
 # noqa: E501
+@pytest.mark.shinobi
 def test_first_person_parser():
     res = get_staff_res_given_mal_id(1)
     parser = StaffParser(res.text)
@@ -33,6 +35,7 @@ def test_first_person_parser():
 
 
 # noqa: E501
+@pytest.mark.shinobi
 def test_second_person_parser():
     res = get_staff_res_given_mal_id(2)
     parser = StaffParser(res.text)
@@ -55,6 +58,7 @@ def test_second_person_parser():
 
 
 # noqa: E501
+@pytest.mark.shinobi
 def test_sora_amamiya():
     """
     Sora-chan UwU
@@ -83,6 +87,7 @@ def test_sora_amamiya():
     )
 
 
+@pytest.mark.shinobi
 def test_natsukawa_shiina():
     """
     Dis function tests da information abou' Natsukawa Shiina, a seiyuu in da anime industry.
@@ -109,6 +114,7 @@ def test_natsukawa_shiina():
     )
 
 
+@pytest.mark.shinobi
 def test_momo_asakura():
     """
     Haii! This function checks the details about Asakura Momo, anothew amazing seiyuu in da anime industry!

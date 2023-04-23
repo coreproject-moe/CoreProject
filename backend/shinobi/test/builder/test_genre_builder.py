@@ -5,6 +5,10 @@ from shinobi.builder.genre import GenreBuilder
 res = httpx.get("https://myanimelist.net/anime.php")
 
 
+import pytest
+
+
+@pytest.mark.shinobi
 def test_genre_sitemap_parser():
     parser = GenreBuilder(res.content)
     assert parser.genre_list == [
