@@ -62,7 +62,7 @@ class CharacterBuilder:
         res = self.client.get(url)
         html = res.content
 
-        anime_nodes = self.get_parser(html).css("a[href*='/anime/']")
+        anime_nodes = self.get_parser(html).css("a[href*='/character/']")
         for anime_node in anime_nodes:
             anime_href = anime_node.attributes["href"]
             if (
