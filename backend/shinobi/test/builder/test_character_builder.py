@@ -1,4 +1,3 @@
-import pytest
 
 from shinobi.builder.character import CharacterBuilder
 

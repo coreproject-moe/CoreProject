@@ -5,7 +5,6 @@ from shinobi.parser.character import CharacterParser
 res = httpx.get("https://myanimelist.net/character/1")
 
 
-import pytest
 
 
 # noqa: E501

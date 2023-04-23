@@ -1,4 +1,3 @@
-import pytest
 
 from shinobi.builder.anime import AnimeBuilder
 

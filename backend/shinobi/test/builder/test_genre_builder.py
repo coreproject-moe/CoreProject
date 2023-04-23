@@ -1,4 +1,3 @@
-import pytest
 
 from shinobi.builder.genre import GenreBuilder
 

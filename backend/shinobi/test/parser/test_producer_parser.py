@@ -1,7 +1,6 @@
 import datetime
 
 import httpx
-import pytest
 
 from shinobi.parser.producer import ProducerParser
 
