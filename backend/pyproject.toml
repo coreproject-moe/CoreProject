@@ -106,6 +106,9 @@ reset_db = "python django_core/manage.py reset_db"
 tailwind_install = "python ./django_core/manage.py tailwind install"
 tailwind_start = "python ./django_core/manage.py tailwind start"
 tailwind_build = "python ./django_core/manage.py tailwind build"
+# Test
+test_shinobi = 'pytest -vv -m "not database" -x'
+
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
