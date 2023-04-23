@@ -5,10 +5,7 @@ from selectolax.parser import HTMLParser
 
 from shinobi.decorators.return_error_decorator import return_on_error
 from shinobi.utilities.regex import RegexHelper
-
-from pyrate_limiter import Limiter, RequestRate, Duration
-
-limiter = Limiter(RequestRate(100, Duration.MINUTE))
+import time
 
 
 class CharacterBuilder:
@@ -66,21 +63,37 @@ class CharacterBuilder:
             for letter in alphabet_list
         ]
 
-    @limiter.ratelimit("character", delay=True, max_delay=10)
-    def __build_urls(self, url: str) -> None:
+    def __build_urls(self, url: str, delay: int | None = None) -> None:
         self.visited_urls.add(url)
 
         res = self.client.get(url)
         html = res.content
 
-        anime_nodes = self.get_parser(html).css("a[href*='/character/']")
-        for anime_node in anime_nodes:
-            anime_href = anime_node.attributes["href"]
+        character_nodes = self.get_parser(html).css("a[href*='/character/']")
+
+        # MyAnimeList Blocked us
+        # Exponential delay
+        if len(character_nodes) == 0:
+            if not delay:
+                delay = 2
+
+            if delay > 60:
+                raise TimeoutError(f"Delay raised to {delay}")
+
+            time.sleep(delay)
+
+            delay = delay ^ 2
+            self.__build_urls(url, delay)
+
+        for character_node in character_nodes:
+            character_href = character_node.attributes["href"]
             if (
-                anime_href not in self.anchors
-                and self.regex_helper.check_if_string_contains_integer(anime_href)
+                character_href not in self.anchors
+                and self.regex_helper.check_if_string_contains_integer(character_href)
             ):
-                self.anchors.append(self.add_myanimelist_if_not_already_there(anime_href))
+                self.anchors.append(
+                    self.add_myanimelist_if_not_already_there(character_href)
+                )
 
         if self.has_next_page(html):
             all_pages = self.get_all_pages_in_span_tag(html)
