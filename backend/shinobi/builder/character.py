@@ -22,6 +22,13 @@ class CharacterBuilder:
     def get_parser(html: str) -> HTMLParser:
         return HTMLParser(html)
 
+    @staticmethod
+    def add_myanimelist_if_not_already_there(url: str) -> str:
+        if "myanimelist.net" not in url:
+            return "https://myanimelist.net" + url
+        else:
+            return url
+
     @return_on_error("")
     def has_next_page(self, html: str) -> bool:
         parser = self.get_parser(html)
@@ -68,7 +75,7 @@ class CharacterBuilder:
                 anime_href not in self.anchors
                 and self.regex_helper.check_if_string_contains_integer(anime_href)
             ):
-                self.anchors.append("https://myanimelist.net" + anime_href)
+                self.anchors.append(self.add_myanimelist_if_not_already_there(anime_href))
 
         if self.has_next_page(html):
             all_pages = self.get_all_pages_in_span_tag(html)
