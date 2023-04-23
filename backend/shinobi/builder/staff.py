@@ -5,6 +5,9 @@ from selectolax.parser import HTMLParser
 
 from shinobi.decorators.return_error_decorator import return_on_error
 from shinobi.utilities.regex import RegexHelper
+from pyrate_limiter import Limiter, RequestRate, Duration
+
+limiter = Limiter(RequestRate(100, Duration.MINUTE))
 
 
 class StaffBuilder:
@@ -62,6 +65,7 @@ class StaffBuilder:
             for letter in alphabet_list
         ]
 
+    @limiter.ratelimit("staff", delay=True, max_delay=10)
     def __build_urls(self, url: str) -> None:
         print(url)
         self.visited_urls.add(url)
