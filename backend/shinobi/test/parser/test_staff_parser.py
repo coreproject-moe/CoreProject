@@ -16,7 +16,6 @@ def test_first_person_parser():
     data = parser.build_dictionary()
 
     assert data["mal_id"] == 1
-    assert data["mal_id"].isdigit()
     assert data["name"] == "Tomokazu Seki"
     assert (
         data["staff_image"] == "https://cdn.myanimelist.net/images/voiceactors/1/55486.jpg"
@@ -39,7 +38,6 @@ def test_second_person_parser():
     data = parser.build_dictionary()
 
     assert data["mal_id"] == 2
-    assert data["mal_id"].isdigit()
     assert data["name"] == "Tomokazu Sugita"
     assert (
         data["staff_image"] == "https://cdn.myanimelist.net/images/voiceactors/2/60638.jpg"
@@ -68,7 +66,6 @@ def test_sora_amamiya():
     data = parser.build_dictionary()
 
     assert data["mal_id"] == 21517
-    assert data["mal_id"].isdigit()
     assert data["name"] == "Sora Amamiya"
     assert data["given_name"] == "天"
     assert data["family_name"] == "雨宮"
@@ -94,7 +91,6 @@ def test_natsukawa_shiina():
     data = parser.build_dictionary()
 
     assert data["mal_id"] == 23405
-    assert data["mal_id"].isdigit()
     assert data["name"] == "Shiina Natsukawa"
     assert data["given_name"] == "椎菜"
     assert data["family_name"] == "夏川"
