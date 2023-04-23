@@ -109,7 +109,6 @@ tailwind_build = "python ./django_core/manage.py tailwind build"
 # Test
 test_shinobi = 'pytest -vv -m "not database" -x'
 
-
 [build-system]
 build-backend = "poetry.core.masonry.api"
 requires = [
