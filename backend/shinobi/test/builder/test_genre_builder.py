@@ -1,6 +1,4 @@
-
 from shinobi.builder.genre import GenreBuilder
-
 
 
 def test_genre_sitemap_parser():
