@@ -38,7 +38,7 @@ class CharacterBuilder:
 
         return True
 
-    def get_all_pages_in_span_tag(self, html):
+    def get_all_pages_in_span_tag(self, html: str) -> list[str]:
         parser = self.get_parser(html)
         node = (
             parser.css_first("div.normal_header > div.fl-r > div > span.bgColor1")

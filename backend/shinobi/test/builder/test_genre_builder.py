@@ -1,15 +1,13 @@
-import httpx
 import pytest
 
 from shinobi.builder.genre import GenreBuilder
 
-res = httpx.get("https://myanimelist.net/anime.php")
-
 
 @pytest.mark.shinobi
 def test_genre_sitemap_parser():
-    parser = GenreBuilder(res.content)
-    assert parser.genre_list == [
+    parser = GenreBuilder()
+    dictionary = parser.build_dictionary()
+    assert dictionary.keys() == [
         1,
         2,
         3,
@@ -87,7 +85,7 @@ def test_genre_sitemap_parser():
         80,
         81,
     ]
-    assert parser.build_urls() == [
+    assert dictionary.values() == [
         "https://myanimelist.net/anime/genre/1",
         "https://myanimelist.net/anime/genre/2",
         "https://myanimelist.net/anime/genre/3",
@@ -168,6 +166,6 @@ def test_genre_sitemap_parser():
     # Check if list is sorted
     # https://stackoverflow.com/a/3755251
     assert all(
-        parser.genre_list[i] <= parser.genre_list[i + 1]
-        for i in range(len(parser.genre_list) - 1)
+        dictionary.keys()[i] <= dictionary.keys()[i + 1]
+        for i in range(len(dictionary.keys()) - 1)
     )
