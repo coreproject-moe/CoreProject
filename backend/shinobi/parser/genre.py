@@ -24,3 +24,10 @@ class AnimeGenreParser:
     @return_on_error("")
     def get_mal_id(self) -> int:
         return self.regex_helper.get_id_from_url(self.get_url)
+
+    def build_dictionary(self):
+        dictionary = {
+            "mal_id": self.get_mal_id,
+            "name": "",
+            "description": "",
+        }

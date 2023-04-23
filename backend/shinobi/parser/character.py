@@ -65,7 +65,7 @@ class CharacterParser:
         return self.parser.css_first("meta[property='og:image']").attributes["content"]
 
     def build_dictionary(self) -> CharacterDictionary:
-        dictionary = {
+        dictionary: CharacterDictionary = {
             "mal_id": self.get_character_id,
             "name": self.get_character_name,
             "name_kanji": self.get_character_name_kanji,

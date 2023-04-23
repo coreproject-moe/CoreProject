@@ -69,10 +69,11 @@ class ProducerParser:
         ).text()
 
     def build_dictionary(self) -> ProducerDictionary:
-        return {
+        dictionary: ProducerDictionary = {
             "mal_id": self.get_producer_id,
             "name": self.get_producer_name,
             "name_japanese": self.get_producer_japanese_name,
             "established": self.get_producter_establish_date,
             "about": self.get_producer_about,
         }
+        return dictionary

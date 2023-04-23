@@ -120,7 +120,7 @@ class StaffParser:
         return birthday
 
     def build_dictionary(self) -> StaffDictionary:
-        return {
+        dictionary: StaffDictionary = {
             "mal_id": self.get_staff_id,
             "name": self.get_staff_name,
             "given_name": self.get_staff_given_name,
@@ -130,3 +130,4 @@ class StaffParser:
             "about": self.get_staff_about,
             "staff_image": self.get_staff_image,
         }
+        return dictionary
