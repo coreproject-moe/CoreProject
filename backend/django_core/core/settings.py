@@ -92,8 +92,6 @@ INSTALLED_APPS = [
     # Api ( Django-Ninja )
     "ninja",
     "apps.api",
-    # OpenGraph
-    "apps.opengraph",
     # Models
     "apps.anime",
     "apps.trackers",
