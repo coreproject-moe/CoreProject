@@ -213,7 +213,7 @@ if CACHE_MIDDLEWARE_SECONDS != 0:
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("POSTGRES_NAME", "django"),
+        "NAME": os.environ.get("POSTGRES_NAME", "postgres"),
         "USER": os.environ.get("POSTGRES_USER", "postgres"),
         "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "supersecretpassword"),
         "HOST": os.environ.get("POSTGRES_HOST", "localhost"),

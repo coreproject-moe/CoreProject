@@ -1,6 +1,7 @@
 from colorfield.fields import ColorField
 from dynamic_filenames import FilePattern
 from mixins.models.created_at import CreatedAtMixin
+from mixins.models.is_locked import IsLockedMixin
 from mixins.models.updated_at import UpdatedAtMixin
 
 from django.db import models
@@ -29,7 +30,7 @@ class AnimeNameSynonymModel(models.Model):
         verbose_name = "Anime Synonym"
 
 
-class AnimeModel(CreatedAtMixin, UpdatedAtMixin):
+class AnimeModel(CreatedAtMixin, UpdatedAtMixin, IsLockedMixin):
     mal_id = models.IntegerField(unique=True, blank=True, null=True)
     anilist_id = models.IntegerField(unique=True, blank=True, null=True)
     kitsu_id = models.IntegerField(unique=True, blank=True, null=True)

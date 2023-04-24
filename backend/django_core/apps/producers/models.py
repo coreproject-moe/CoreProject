@@ -1,4 +1,5 @@
 from mixins.models.created_at import CreatedAtMixin
+from mixins.models.is_locked import IsLockedMixin
 from mixins.models.updated_at import UpdatedAtMixin
 
 from django.db import models
@@ -6,7 +7,7 @@ from django.db import models
 # Create your models here.
 
 
-class ProducerModel(CreatedAtMixin, UpdatedAtMixin):
+class ProducerModel(CreatedAtMixin, UpdatedAtMixin, IsLockedMixin):
     mal_id = models.IntegerField(unique=True, blank=True, null=True)
     kitsu_id = models.IntegerField(unique=True, blank=True, null=True)
     name = models.CharField(
