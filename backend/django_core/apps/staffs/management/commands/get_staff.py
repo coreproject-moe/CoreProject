@@ -7,7 +7,7 @@ from shinobi.parser.staff import StaffParser
 
 from django.core.management.base import BaseCommand
 
-from ...models import StaffModel
+from ...models import StaffModel, StaffAlternateNameModel
 
 
 class Command(BaseCommand):
@@ -37,9 +37,16 @@ class Command(BaseCommand):
             self.stdout.write(f"No StaffModel found for {self.style.ERROR(staff_id)}")
             sys.exit(1)
 
+        if alternate_name := data_dictionary.pop("alternate_name"):
+            for name in alternate_name:
+                instance, created = StaffAlternateNameModel.objects.get_or_create(name)
+                if created:
+                    StaffModel.alternate_names.add(instance)
+
         for attr, value in data_dictionary.items():
             if value:
                 setattr(staff_instance, attr, value)
 
         staff_instance.save()
+
         self.stdout.write(f"Successfully got info for {self.style.SUCCESS(staff_id)}")
