@@ -5,26 +5,20 @@ from celery import shared_task
 from colorthief import ColorThief
 from utilities.rgb_to_hex import rgb_to_hex
 
-from shinobi.builder.anime import AnimeBuilder
-
 from django.core.management import call_command
-from django.db.models import Q
-from django.utils import timezone
 
 from .models import AnimeModel
 
+from shinobi.builder.genre import AnimeGenreBuilder
 
-@shared_task()
-def get_perodic_animes():
-    builder = AnimeBuilder()
 
-    instances = AnimeModel.objects.filter(
-        Q(updated_at__gte=timezone.now() - timezone.timedelta(days=7)) & Q(is_locked=False)
-    )
-    dictionary = builder.build_dictionary(excluded_ids=instances.values_list(flat=True))
+@shared_task
+def get_preiodic_anime_genres():
+    builder = AnimeGenreBuilder()
+    dictionary = builder.build_dictionary()
 
-    for anime in list(dictionary.keys()):
-        call_command("get_anime", anime_id=anime)
+    for genre in list(dictionary.keys()):
+        call_command("get_anime_genre", genre_id=genre)
 
 
 @shared_task()

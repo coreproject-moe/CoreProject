@@ -1,12 +1,12 @@
 import httpx
 
-from shinobi.parser.genre import GenreParser
+from shinobi.parser.genre import AnimeGenreParser
 
 res = httpx.get("https://myanimelist.net/anime/genre/1")
 
 
 def test_anime_genre_parser():
-    parser = GenreParser(res.content)
+    parser = AnimeGenreParser(res.content)
     data = parser.build_dictionary()
 
     assert data["mal_id"] == 1

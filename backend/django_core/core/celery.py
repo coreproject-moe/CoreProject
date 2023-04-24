@@ -1,6 +1,7 @@
 import os
 
 from celery import Celery
+from celery.schedules import crontab
 
 # Set the default Django settings module for the 'celery' program.
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "core.settings")
@@ -18,5 +19,25 @@ app.config_from_object("django.conf:settings", namespace="CELERY")
 
 # Load task modules from all registered Django apps.
 app.autodiscover_tasks()
+
+# Celery beat
+app.conf.beat_schedule = {
+    # Characters
+    # ==========
+    # Executes every Friday night at 12:00 a.m.
+    "get-preiodic-characters-every-friday-morning": {
+        "task": "apps.characters.tasks.get_perodic_character",
+        "schedule": crontab(hour=0, minute=00, day_of_week=5),
+    },
+    # Staffs / People
+    # ==========
+    # Executes every Friday night at 12:00 a.m.
+    "get-preiodic-staffs-every-friday-morning": {
+        "task": "apps.staffs.tasks.get_perodic_staff",
+        "schedule": crontab(hour=0, minute=00, day_of_week=5),
+    },
+}
+
+app.conf.timezone = "UTC"
 
 app.conf.broker_url = BASE_REDIS_URL

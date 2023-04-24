@@ -14,7 +14,7 @@ class GenreDictionary(TypedDict):
     type: str
 
 
-class GenreParser:
+class AnimeGenreParser:
     def __init__(self, html: str):
         self.parser = HTMLParser(html)
 
