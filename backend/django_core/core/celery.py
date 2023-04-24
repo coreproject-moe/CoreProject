@@ -36,6 +36,13 @@ app.conf.beat_schedule = {
         "task": "apps.staffs.tasks.get_perodic_staff",
         "schedule": crontab(hour=0, minute=00, day_of_week=5),
     },
+    # Anime
+    # ======
+    # Genre
+    "get-preiodic-genres-every-friday-night": {
+        "task": "apps.anime.tasks.get_preiodic_anime_genres",
+        "schedule": crontab(hour=0, minute=00, day_of_week=5),
+    },
 }
 
 app.conf.timezone = "UTC"

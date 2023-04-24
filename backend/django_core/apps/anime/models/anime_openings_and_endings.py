@@ -7,6 +7,7 @@ ending_upload_pattern = FilePattern(filename_pattern="ending/{uuid:s}{ext}")
 
 
 # Create your models here.
+
 class AbstractBaseOpeningAndEndingModel(models.Model):
     # Either opening number/closing number
     entry = models.BigIntegerField(null=False, blank=False)

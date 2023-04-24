@@ -1,4 +1,7 @@
 from django.db import models
+from mixins.models.updated_at import UpdatedAtMixin
+from mixins.models.created_at import CreatedAtMixin
+from mixins.models.is_locked import IsLockedMixin
 
 # Create your models here.
 
@@ -8,7 +11,7 @@ TYPE_CHOICES = [
 ]
 
 
-class AnimeThemeModel(models.Model):
+class AnimeThemeModel(UpdatedAtMixin, CreatedAtMixin, IsLockedMixin):
     mal_id = models.IntegerField(unique=True, blank=False, null=False)
     name = models.CharField(unique=True, max_length=50, default="", null=False, blank=False)
     type = models.CharField(
