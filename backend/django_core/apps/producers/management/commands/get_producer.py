@@ -26,7 +26,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options) -> NoReturn:
         producer_number: int = options["producer_number"]
-        res = self.client.get(f"https://myanimelist.net/producer/{producer_number}")
+        res = self.client.get(f"https://myanimelist.net/anime/producer/{producer_number}")
 
         parser = ProducerParser(res.content)
         data_dictionary = parser.build_dictionary()
