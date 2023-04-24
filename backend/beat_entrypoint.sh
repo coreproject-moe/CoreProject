@@ -1,12 +1,11 @@
 #!/bin/sh
 
-until cd /code/django_core
+until cd /code
 do
     echo "Waiting for server volume..."
 done
 
-mkdir -p /var/run/celery /var/log/celery
-chown -R nobody:nogroup /var/run/celery /var/log/celery
-
 # run a worker :)
-celery -A core beat -l info --uid=nobody --gid=nogroup
+export PYTHONPATH=$PYTHONPATH:/code/django_core:/code
+
+celery -A django_core.core beat -l info 

@@ -5,6 +5,8 @@ do
     echo "Waiting for server volume..."
 done
 
+export PYTHONPATH=$PYTHONPATH:/code/django_core:/code
+
 
 until (python manage.py makemigrations && python manage.py migrate)
 do

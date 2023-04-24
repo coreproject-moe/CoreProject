@@ -45,6 +45,7 @@ RUN find . -type d -name 'test*' -exec rm -r {} +
 
 RUN chmod +x /code/server_entrypoint.sh
 RUN chmod +x /code/worker_entrypoint.sh
+RUN chmod +x /code/beat_entrypoint.sh
 
 RUN chmod +x /code/entrypoint.sh
 
