@@ -1,3 +1,4 @@
+import sys
 from typing import NoReturn
 
 import httpx
@@ -30,7 +31,14 @@ class Command(BaseCommand):
         parser = CharacterParser(res.content)
         data_dictionary = parser.build_dictionary()
 
-        character_instance = CharacterModel.objects.get(mal_id=character_number)
+        try:
+            character_instance = CharacterModel.objects.get(mal_id=character_number)
+        except CharacterModel.DoesNotExist:
+            self.stdout.write(
+                f"No CharacterModel found for {self.style.ERROR(character_number)}"
+            )
+            sys.exit(1)
+
         for attr, value in data_dictionary.items():
             if value:
                 setattr(character_instance, attr, value)
