@@ -1,5 +1,6 @@
-from shinobi.builder.anime import AnimeBuilder
 import pytest
+
+from shinobi.builder.anime import AnimeBuilder
 
 
 @pytest.mark.long

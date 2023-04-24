@@ -37,7 +37,7 @@ COPY . /code
 
 # Cleanups
 RUN pip install "pip-autoremove"
-RUN pip-autoremove poetry "pip-autoremove" cython  -y
+RUN pip-autoremove poetry "pip-autoremove" cython 'django-browser-reload'  -y
 RUN apk del nodejs npm
 
 # Remove test folders
