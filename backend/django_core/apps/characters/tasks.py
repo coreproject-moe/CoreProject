@@ -15,7 +15,9 @@ def get_perodic_character():
     instances = CharacterModel.objects.filter(
         Q(updated_at__gte=timezone.now() - timezone.timedelta(days=7)) & Q(is_locked=False)
     )
-    dictionary = builder.build_dictionary(excluded_ids=instances.values_list('pk',flat=True))
+    dictionary = builder.build_dictionary(
+        excluded_ids=instances.values_list("pk", flat=True)
+    )
 
     for character in list(dictionary.keys()):
         call_command("get_character", character_id=character)
