@@ -1,11 +1,11 @@
 import string
+import time
 
 import httpx
 from selectolax.parser import HTMLParser
 
 from shinobi.decorators.return_error_decorator import return_on_error
 from shinobi.utilities.regex import RegexHelper
-import time
 
 
 class StaffBuilder:

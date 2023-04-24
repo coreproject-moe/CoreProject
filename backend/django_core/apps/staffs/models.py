@@ -1,6 +1,7 @@
 from core.storages import OverwriteStorage
 from dynamic_filenames import FilePattern
 from mixins.models.created_at import CreatedAtMixin
+from mixins.models.is_locked import IsLockedMixin
 from mixins.models.updated_at import UpdatedAtMixin
 
 from django.db import models
@@ -19,7 +20,7 @@ class StaffAlternateNameModel(models.Model):
         verbose_name_plural = "Staff | People ( Alternate Names )"
 
 
-class StaffModel(CreatedAtMixin, UpdatedAtMixin):
+class StaffModel(CreatedAtMixin, UpdatedAtMixin, IsLockedMixin):
     mal_id = models.IntegerField(unique=True, null=True, blank=True)
     kitsu_id = models.IntegerField(unique=True, null=True, blank=True)
     anilist_id = models.IntegerField(unique=True, null=True, blank=True)

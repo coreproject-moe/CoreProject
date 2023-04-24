@@ -1,5 +1,6 @@
-from shinobi.builder.character import CharacterBuilder
 import pytest
+
+from shinobi.builder.character import CharacterBuilder
 
 
 @pytest.mark.long

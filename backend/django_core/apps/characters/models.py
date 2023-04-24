@@ -1,5 +1,6 @@
 from dynamic_filenames import FilePattern
 from mixins.models.created_at import CreatedAtMixin
+from mixins.models.is_locked import IsLockedMixin
 from mixins.models.updated_at import UpdatedAtMixin
 
 from django.db import models
@@ -10,7 +11,7 @@ anime_charaters_pattern = FilePattern(filename_pattern="characters/{uuid:s}{ext}
 # Create your models here.
 
 
-class CharacterModel(CreatedAtMixin, UpdatedAtMixin):
+class CharacterModel(CreatedAtMixin, UpdatedAtMixin, IsLockedMixin):
     mal_id = models.IntegerField(unique=True, null=True)
     kitsu_id = models.IntegerField(unique=True, null=True)
     anilist_id = models.IntegerField(unique=True, null=True)

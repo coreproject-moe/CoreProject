@@ -1,10 +1,10 @@
+from typing import TypedDict
+
 from selectolax.parser import HTMLParser
 
 from shinobi.decorators.return_error_decorator import return_on_error
 from shinobi.utilities.regex import RegexHelper
 from shinobi.utilities.string import StringHelper
-
-from typing import TypedDict
 
 
 class GenreDictionary(TypedDict):
