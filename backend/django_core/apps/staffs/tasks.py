@@ -14,7 +14,9 @@ def get_perodic_staff():
     instances = StaffModel.objects.filter(
         Q(updated_at__gte=timezone.now() - timezone.timedelta(days=7)) & Q(is_locked=False)
     )
-    dictionary = builder.build_dictionary(excluded_ids=instances.values_list(flat=True))
+    dictionary = builder.build_dictionary(
+        excluded_ids=instances.values_list("pk", flat=True)
+    )
 
     for staff in list(dictionary.keys()):
         call_command("get_staff", staff_id=staff)

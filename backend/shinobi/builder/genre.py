@@ -4,7 +4,7 @@ from selectolax.parser import HTMLParser
 from shinobi.utilities.regex import RegexHelper
 
 
-class GenreBuilder:
+class AnimeGenreBuilder:
     def __init__(self) -> None:
         # Reusuable Clients
         self.client = httpx.Client(follow_redirects=True, http2=True)
