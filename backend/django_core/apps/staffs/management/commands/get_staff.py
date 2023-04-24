@@ -19,22 +19,22 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument(
-            "staff_number",
+            "staff_id",
             type=int,
             help="The staff number to get information for",
         )
 
     def handle(self, *args, **options) -> NoReturn:
-        staff_number: int = options["staff_number"]
-        res = self.client.get(f"https://myanimelist.net/people/{staff_number}")
+        staff_id: int = options["staff_id"]
+        res = self.client.get(f"https://myanimelist.net/people/{staff_id}")
 
         parser = StaffParser(res.content)
         data_dictionary = parser.build_dictionary()
 
         try:
-            staff_instance = StaffModel.objects.get(mal_id=staff_number)
+            staff_instance = StaffModel.objects.get(mal_id=staff_id)
         except StaffModel.DoesNotExist:
-            self.stdout.write(f"No StaffModel found for {self.style.ERROR(staff_number)}")
+            self.stdout.write(f"No StaffModel found for {self.style.ERROR(staff_id)}")
             sys.exit(1)
 
         for attr, value in data_dictionary.items():
@@ -42,4 +42,4 @@ class Command(BaseCommand):
                 setattr(staff_instance, attr, value)
 
         staff_instance.save()
-        self.stdout.write(f"Successfully got info for {self.style.SUCCESS(staff_number)}")
+        self.stdout.write(f"Successfully got info for {self.style.SUCCESS(staff_id)}")
