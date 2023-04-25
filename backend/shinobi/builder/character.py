@@ -6,6 +6,7 @@ from selectolax.parser import HTMLParser
 
 from shinobi.decorators.return_error_decorator import return_on_error
 from shinobi.utilities.regex import RegexHelper
+from shinobi.utilities.string import StringHelper
 
 
 class CharacterBuilder:
@@ -18,17 +19,11 @@ class CharacterBuilder:
 
         # Facades
         self.regex_helper = RegexHelper()
+        self.string_helper = StringHelper()
 
     @staticmethod
     def get_parser(html: str) -> HTMLParser:
         return HTMLParser(html)
-
-    @staticmethod
-    def add_myanimelist_if_not_already_there(url: str) -> str:
-        if "myanimelist.net" not in url:
-            return "https://myanimelist.net" + url
-        else:
-            return url
 
     @return_on_error("")
     def has_next_page(self, html: str) -> bool:
@@ -92,7 +87,7 @@ class CharacterBuilder:
                 and self.regex_helper.check_if_string_contains_integer(character_href)
             ):
                 self.anchors.append(
-                    self.add_myanimelist_if_not_already_there(character_href)
+                    self.string_helper.add_myanimelist_if_not_already_there(character_href)
                 )
 
         if self.has_next_page(html):

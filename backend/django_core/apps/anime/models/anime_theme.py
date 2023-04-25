@@ -21,6 +21,7 @@ class AnimeThemeModel(UpdatedAtMixin, CreatedAtMixin, IsLockedMixin):
         null=False,
         blank=False,
     )
+    description = models.TextField(null=True, blank=False)
 
     def __str__(self) -> str:
         return f"{self.pk}. {self.name} ({self.type})"
