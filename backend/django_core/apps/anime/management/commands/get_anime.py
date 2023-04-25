@@ -1,6 +1,9 @@
 import sys
 from typing import NoReturn
 
+from apps.characters.models import CharacterModel
+from apps.producers.models import ProducerModel
+from apps.staffs.models import StaffModel
 import httpx
 
 from shinobi.parser.anime import AnimeParser
@@ -8,6 +11,8 @@ from shinobi.parser.anime import AnimeParser
 from django.core.management.base import BaseCommand
 
 from ...models import AnimeModel
+from ...models.anime_genre import AnimeGenreModel
+from ...models.anime_theme import AnimeThemeModel
 
 
 class Command(BaseCommand):
@@ -27,19 +32,64 @@ class Command(BaseCommand):
             type=int,
             help="The Theme ID number to get information for",
         )
+        parser.add_argument(
+            "--create",
+            action="store_true",
+            help="Flag to indicate that the anime will be created",
+        )
 
     def handle(self, *args, **options) -> NoReturn:
-        anime_id: int = options["theme_id"]
+        anime_id: int = options["anime_id"]
+        create: bool = options.get("create")
+
         res = self.client.get(f"https://myanimelist.net/anime/{anime_id}/")
 
         parser = AnimeParser(res.content)
         data_dictionary = parser.build_dictionary()
 
-        try:
-            anime_instance = AnimeModel.objects.get(mal_id=anime_id)
-        except AnimeModel.DoesNotExist:
-            self.stdout.write(f"No ThemeModel found for {self.style.ERROR(theme_id)}")
-            sys.exit(1)
+        if create:
+            anime_instance = AnimeModel.objects.create(mal_id=anime_id)
+
+        else:
+            try:
+                anime_instance = AnimeModel.objects.get(mal_id=anime_id)
+            except AnimeModel.DoesNotExist:
+                self.stdout.write(f"No AnimeModel found for {self.style.ERROR(anime_id)}")
+                sys.exit(1)
+
+        if genres := data_dictionary.pop("genres"):
+            for genre in genres:
+                anime_genre_instance = AnimeGenreModel.objects.get(mal_id=genre)
+                anime_instance.genres.add(anime_genre_instance)
+
+        if themes := data_dictionary.pop("themes"):
+            for theme in themes:
+                anime_theme_instance = AnimeThemeModel.objects.get(mal_id=theme)
+                anime_instance.themes.add(anime_theme_instance)
+
+        if characters := data_dictionary.pop("characters"):
+            for character in characters:
+                character_instance = CharacterModel.objects.get(mal_id=character)
+                anime_instance.characters.add(character_instance)
+
+        if studios := data_dictionary.pop("studios"):
+            for studio in studios:
+                studio_instance = ProducerModel.objects.get(mal_id=studio)
+                anime_instance.studios.add(studio_instance)
+
+        if producers := data_dictionary.pop("producers"):
+            for producer in producers:
+                producer_instance = ProducerModel.objects.get(mal_id=producer)
+                anime_instance.producers.add(producer_instance)
+
+        if staffs := data_dictionary.pop("staffs"):
+            for staff in staffs:
+                staff_instance = StaffModel.objects.get(mal_id=staff)
+                anime_instance.staffs.add(staff_instance)
+
+        # Handle this later :)
+        data_dictionary.pop("openings")
+        data_dictionary.pop("endings")
 
         for attr, value in data_dictionary.items():
             if value:

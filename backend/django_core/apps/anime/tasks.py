@@ -12,7 +12,6 @@ from django.core.management import call_command
 
 from .models import AnimeModel
 
-
 # Beat tasks
 
 
