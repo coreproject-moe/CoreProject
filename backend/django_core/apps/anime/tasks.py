@@ -13,13 +13,16 @@ from django.core.management import call_command
 from .models import AnimeModel
 
 
+# Beat tasks
+
+
 @shared_task
 def get_preiodic_anime_genres():
     builder = AnimeGenreBuilder()
     dictionary = builder.build_dictionary()
 
     for genre in list(dictionary.keys()):
-        call_command("get_anime_genre", genre_id=genre)
+        call_anime_genre_command.delay(genre)
 
 
 @shared_task
@@ -28,7 +31,21 @@ def get_preiodic_anime_themes():
     dictionary = builder.build_dictionary()
 
     for theme in list(dictionary.keys()):
-        call_command("get_anime_theme", theme_id=theme)
+        call_anime_theme_command.delay(theme)
+
+
+# Calls
+@shared_task()
+def call_anime_genre_command(id: int):
+    call_command("get_anime_genre", genre_id=id)
+
+
+@shared_task()
+def call_anime_theme_command(id: int):
+    call_command("get_anime_theme", theme_id=id)
+
+
+# Setters
 
 
 @shared_task()
