@@ -8,6 +8,8 @@ from shinobi.decorators.return_error_decorator import return_on_error
 from shinobi.utilities.regex import RegexHelper
 from shinobi.utilities.string import StringHelper
 
+import httpx
+
 
 class AnimeParser:
     def __init__(self, html: str) -> None:
@@ -17,12 +19,35 @@ class AnimeParser:
         self.regex_helper = RegexHelper()
         self.string_helper = StringHelper()
 
+        # Clients
+        self.client = httpx.Client()
+
+    @property
+    @lru_cache(maxsize=None)
+    def __get_character_and_staff_page_content(self) -> str:
+        url = self.get_anime_url + "/characters"
+        res = self.client.get(url)
+        return res.content
+
+    @property
+    @return_on_error("")
+    @lru_cache(maxsize=None)
+    def __get_aired_text(self):
+        # aired text contains in this format
+        # 'aired_from to aired_to'
+        node = self.parser.select("span").text_contains("Aired:").matches
+        if len(node) > 1:
+            raise ValueError("There are multiple aired node")
+
+        return self.string_helper.cleanse(node[0].next.text())
+
     @staticmethod
     def get_parser(html: str) -> HTMLParser:
         return HTMLParser(html)
 
     @property
     @return_on_error("")
+    @lru_cache(maxsize=None)
     def get_anime_url(self):
         return self.parser.css_first("meta[property='og:url']").attributes["content"]
 
@@ -85,27 +110,15 @@ class AnimeParser:
         return source
 
     @property
-    @return_on_error("")
-    @lru_cache(maxsize=None)
-    def get_aired_text(self):
-        # aired text contains in this format
-        # 'aired_from to aired_to'
-        node = self.parser.select("span").text_contains("Aired:").matches
-        if len(node) > 1:
-            raise ValueError("There are multiple aired node")
-
-        return self.string_helper.cleanse(node[0].next.text())
-
-    @property
     def get_aired_from(self) -> datetime.datetime:
-        aired_text = self.get_aired_text
+        aired_text = self.__get_aired_text
         splitted_text = aired_text.split("to")
         aired_from = parser.parse(self.string_helper.cleanse(splitted_text[0]))
         return aired_from
 
     @property
     def get_aired_to(self) -> datetime.datetime:
-        aired_text = self.get_aired_text
+        aired_text = self.__get_aired_text
         splitted_text = aired_text.split("to")
         aired_to = parser.parse(self.string_helper.cleanse(splitted_text[1]))
         return aired_to
@@ -157,8 +170,8 @@ class AnimeParser:
         anchor_tags = genre_parent_nodes.css("a[href*='/anime/']")
         return sorted(
             {
-                    self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
-                    for anchor in anchor_tags
+                self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
+                for anchor in anchor_tags
             }
         )
 
@@ -173,21 +186,8 @@ class AnimeParser:
         anchor_tags = theme_parent_nodes.css("a[href*='/anime/']")
         return sorted(
             {
-                    self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
-                    for anchor in anchor_tags
-            }
-        )
-
-    @property
-    @return_on_error([])
-    def get_characters(self) -> list[int]:
-        node = self.parser.css_first("div.detail-characters-list")
-
-        anchor_tags = node.css("a[href*='/character/']")
-        return sorted(
-            {
-                    self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
-                    for anchor in anchor_tags
+                self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
+                for anchor in anchor_tags
             }
         )
 
@@ -200,8 +200,49 @@ class AnimeParser:
         anchor_tags = node[0].parent.css("a[href*='/producer/']")
         return sorted(
             {
-                    self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
-                    for anchor in anchor_tags
+                self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
+                for anchor in anchor_tags
+            }
+        )
+
+    @property
+    @return_on_error("")
+    def get_producers(self) -> list[int]:
+        node = self.parser.select("span").text_contains("Producers:").matches
+        if len(node) > 1:
+            raise ValueError("There are multiple Producer node")
+
+        anchor_tags = node[0].parent.css("a[href*='/producer/']")
+        return sorted(
+            {
+                self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
+                for anchor in anchor_tags
+            }
+        )
+
+    @property
+    @return_on_error([])
+    def get_characters(self) -> list[int]:
+        parser = self.get_parser(self.__get_character_and_staff_page_content)
+
+        anchor_tags = parser.css("a[href*='/character/']")
+        return sorted(
+            {
+                self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
+                for anchor in anchor_tags
+            }
+        )
+
+    @property
+    @return_on_error("")
+    def get_staffs(self):
+        parser = self.get_parser(self.__get_character_and_staff_page_content)
+
+        anchor_tags = parser.css("a[href*='/people/']")
+        return sorted(
+            {
+                self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
+                for anchor in anchor_tags
             }
         )
 
@@ -222,8 +263,8 @@ class AnimeParser:
             "themes": self.get_themes,
             "characters": self.get_characters,
             "studios": self.get_studios,
-            "producers": "",
-            "staffs": "",
+            "producers": self.get_producers,
+            "staffs": self.get_staffs,
             "recommendations": "",  # self
             "episodes": "",
             "openings": "",
