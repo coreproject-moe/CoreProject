@@ -235,7 +235,7 @@ class AnimeParser:
 
     @property
     @return_on_error("")
-    def get_staffs(self):
+    def get_staffs(self) -> list[int]:
         parser = self.get_parser(self.__get_character_and_staff_page_content)
 
         anchor_tags = parser.css("a[href*='/people/']")
@@ -245,6 +245,56 @@ class AnimeParser:
                 for anchor in anchor_tags
             }
         )
+
+    @property
+    def get_openings(self) -> list[str]:
+        node = self.parser.select("h2").text_contains("Opening Theme").matches
+
+        opening_table_tag = node[0].parent.next.next
+        # stupid myanimelist shows popup as table
+        opening_table_tag.strip_tags(["div#js-oped-popup"])
+        openings: dict[int, str] = {}
+
+        table_rows = opening_table_tag.css("tr")
+        for row in table_rows:
+            colon_spilitted_text = row.text().split(":")
+            # There are no colons in text
+            # "Hikaru nara"
+            if len(colon_spilitted_text) == 1:
+                openings[1] = self.string_helper.cleanse(colon_spilitted_text[0])
+
+            # "1: Hikaru nara"
+            else:
+                openings[int(colon_spilitted_text[0])] = self.string_helper.cleanse(
+                    colon_spilitted_text[1]
+                )
+
+        return openings
+
+    @property
+    def get_endings(self) -> list[str]:
+        node = self.parser.select("h2").text_contains("Ending Theme").matches
+
+        endings_table_tag = node[0].parent.next.next
+        # stupid myanimelist shows popup as table
+        endings_table_tag.strip_tags(["div#js-oped-popup"])
+        endings: dict[int, str] = {}
+
+        table_rows = endings_table_tag.css("tr")
+        for row in table_rows:
+            colon_spilitted_text = row.text().split(":")
+            # There are no colons in text
+            # "Hikaru nara"
+            if len(colon_spilitted_text) == 1:
+                endings[1] = self.string_helper.cleanse(colon_spilitted_text[0])
+
+            # "1: Hikaru nara"
+            else:
+                endings[int(colon_spilitted_text[0])] = self.string_helper.cleanse(
+                    colon_spilitted_text[1]
+                )
+
+        return endings
 
     def build_dictionary(self):
         dictionary = {
@@ -258,7 +308,6 @@ class AnimeParser:
             "synopsis": self.get_synopsis,
             "background": self.get_background,
             "rating": self.get_rating,
-            # List[int]
             "genres": self.get_genres,
             "themes": self.get_themes,
             "characters": self.get_characters,
@@ -266,8 +315,7 @@ class AnimeParser:
             "producers": self.get_producers,
             "staffs": self.get_staffs,
             "recommendations": "",  # self
-            "episodes": "",
-            "openings": "",
-            "endings": "",
+            "openings": self.get_openings,
+            "endings": self.get_endings,
         }
         return dictionary
