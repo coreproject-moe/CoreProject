@@ -68,6 +68,7 @@ class AnimeParser:
 
                 next_node.decompose(recursive=True)
 
+            # There are no nodes
             except AttributeError:
                 break
 
@@ -144,6 +145,42 @@ class AnimeParser:
         rating = self.string_helper.cleanse(node[0].next.text())
         return rating
 
+    @property
+    @return_on_error("")
+    def get_genres(self) -> list[int]:
+        node = self.parser.select("span").text_contains("Genres:").matches
+        if len(node) > 1:
+            raise ValueError("There are multiple Genre node")
+
+        genre_parent_nodes = node[0].parent
+        # Remove all span tags
+        genre_parent_nodes.strip_tags(["span"])
+        anchor_tags = genre_parent_nodes.css("a[href*='/anime/']")
+        return sorted(
+            [
+                self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
+                for anchor in anchor_tags
+            ]
+        )
+
+    @property
+    @return_on_error("")
+    def get_themes(self):
+        node = self.parser.select("span").text_contains("Themes:").matches
+        if len(node) > 1:
+            raise ValueError("There are multiple Genre node")
+
+        theme_parent_nodes = node[0].parent
+        # Remove all span tags
+        theme_parent_nodes.strip_tags(["span"])
+        anchor_tags = theme_parent_nodes.css("a[href*='/anime/']")
+        return sorted(
+            [
+                self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
+                for anchor in anchor_tags
+            ]
+        )
+
     def build_dictionary(self):
         dictionary = {
             "mal_id": self.get_anime_id,
@@ -151,15 +188,14 @@ class AnimeParser:
             "name_japanese": self.get_anime_name_japanese,
             "name_synonyms": self.get_anime_name_synonyms,
             "source": self.get_source,
-            # Datetime
             "aired_from": self.get_aired_from,
             "aired_to": self.get_aired_to,
             "synopsis": self.get_synopsis,
             "background": self.get_background,
             "rating": self.get_rating,
             # List[int]
-            "genres": "",
-            "themes": "",
+            "genres": self.get_genres,
+            "themes": self.get_themes,
             "characters": "",
             "studios": "",
             "producers": "",
