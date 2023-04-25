@@ -76,10 +76,13 @@ class AnimeModel(CreatedAtMixin, UpdatedAtMixin, IsLockedMixin):
 
     genres = models.ManyToManyField(AnimeGenreModel, blank=True)
     themes = models.ManyToManyField(AnimeThemeModel, blank=True)
+
     characters = models.ManyToManyField(CharacterModel, blank=True)
+
     # Producers and studios are the same
     studios = models.ManyToManyField(ProducerModel, blank=True, related_name="studios")
     producers = models.ManyToManyField(ProducerModel, blank=True, related_name="producers")
+
     staffs = models.ManyToManyField(StaffModel, blank=True)
 
     recommendations = models.ManyToManyField("self", blank=True)

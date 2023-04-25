@@ -10,7 +10,7 @@ readme = "README.md"
 python = "^3.10"
 requests = "^2.28.2"
 humanize = "^4.6.0"
-termcolor = "^2.2.0"
+termcolor = "^2.3.0"
 requests-cache = {extras = ["redis"], version = "^1.0.1"}
 requests-ratelimiter = "*"
 python-dotenv = "^1.0.0"

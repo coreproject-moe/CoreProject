@@ -34,7 +34,7 @@ class Command(BaseCommand):
         try:
             genre_instance = AnimeGenreModel.objects.get(mal_id=genre_id)
         except AnimeGenreModel.DoesNotExist:
-            self.stdout.write(f"No ProducerModel found for {self.style.ERROR(genre_id)}")
+            self.stdout.write(f"No GenreModel found for {self.style.ERROR(genre_id)}")
             sys.exit(1)
 
         for attr, value in data_dictionary.items():

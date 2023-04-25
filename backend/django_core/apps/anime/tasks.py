@@ -10,6 +10,7 @@ from django.core.management import call_command
 from .models import AnimeModel
 
 from shinobi.builder.genre import AnimeGenreBuilder
+from shinobi.builder.theme import AnimeThemeBuilder
 
 
 @shared_task
@@ -19,6 +20,15 @@ def get_preiodic_anime_genres():
 
     for genre in list(dictionary.keys()):
         call_command("get_anime_genre", genre_id=genre)
+
+
+@shared_task
+def get_preiodic_anime_themes():
+    builder = AnimeThemeBuilder()
+    dictionary = builder.build_dictionary()
+
+    for theme in list(dictionary.keys()):
+        call_command("get_anime_theme", theme_id=theme)
 
 
 @shared_task()
