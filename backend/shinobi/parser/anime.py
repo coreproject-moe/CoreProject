@@ -10,6 +10,29 @@ from shinobi.utilities.regex import RegexHelper
 from shinobi.utilities.string import StringHelper
 
 
+class AnimeDictionary:
+    mal_id: int
+    name: str
+    name_japanese: str
+    name_synonyms: list[str]
+    source: str
+    aired_from: datetime.datetime
+    aired_to: datetime.datetime
+    synopsis: str
+    background: str
+    rating: str
+    genres: list[int]
+    themes: list[int]
+    characters: list[int]
+    studios: list[int]
+    producers: list[int]
+    staffs: list[int]
+    demographics: list[int]
+    recommendations: list[int]
+    openings: list[int]
+    endings: list[int]
+
+
 class AnimeParser:
     def __init__(self, html: str) -> None:
         self.parser = self.get_parser(html)
@@ -191,6 +214,7 @@ class AnimeParser:
         )
 
     @property
+    @return_on_error([])
     def get_studios(self) -> list[int]:
         node = self.parser.select("span").text_contains("Studios:").matches
         if len(node) > 1:
@@ -205,7 +229,7 @@ class AnimeParser:
         )
 
     @property
-    @return_on_error("")
+    @return_on_error([])
     def get_producers(self) -> list[int]:
         node = self.parser.select("span").text_contains("Producers:").matches
         if len(node) > 1:
@@ -233,11 +257,26 @@ class AnimeParser:
         )
 
     @property
-    @return_on_error("")
+    @return_on_error([])
     def get_staffs(self) -> list[int]:
         parser = self.get_parser(self.__get_character_and_staff_page_content)
 
         anchor_tags = parser.css("a[href*='/people/']")
+        return sorted(
+            {
+                self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
+                for anchor in anchor_tags
+            }
+        )
+
+    @property
+    @return_on_error([])
+    def get_demographics(self) -> list[int]:
+        node = self.parser.select("span").text_contains("Demographic:").matches
+        if len(node) > 1:
+            raise ValueError("There are multiple Demographic node")
+
+        anchor_tags = node[0].parent.css("a[href*='/genre/']")
         return sorted(
             {
                 self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
@@ -295,7 +334,7 @@ class AnimeParser:
 
         return endings
 
-    def build_dictionary(self):
+    def build_dictionary(self) -> AnimeDictionary:
         dictionary = {
             "mal_id": self.get_anime_id,
             "name": self.get_anime_name,
@@ -313,6 +352,7 @@ class AnimeParser:
             "studios": self.get_studios,
             "producers": self.get_producers,
             "staffs": self.get_staffs,
+            "demographics": self.get_demographics,
             "recommendations": "",  # self
             "openings": self.get_openings,
             "endings": self.get_endings,
