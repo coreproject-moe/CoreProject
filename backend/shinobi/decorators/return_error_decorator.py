@@ -1,6 +1,6 @@
 from collections.abc import Callable
 import functools
-from typing import Any, Literal, TypeVar, Type
+from typing import Any, TypeVar
 
 
 T = TypeVar("T")
@@ -10,7 +10,7 @@ T = TypeVar("T")
 
 
 def return_on_error(
-    return_type: Type[T],
+    return_type: type[T],
 ) -> Callable[[Callable[..., Any]], Callable[..., T]]:
     def decorator(func: Callable[..., Any]) -> Callable[..., T]:
         @functools.wraps(func)
