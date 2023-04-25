@@ -32,9 +32,6 @@
   <a href="https://github.com/baseplate-admin/CoreProject/blob/v2/LICENSE" alt="License - AGPL-3.0">
     <img src="https://img.shields.io/github/license/baseplate-admin/CoreProject.svg?style=for-the-badge">
   </a>
-  <a href="https://codeclimate.com/github/baseplate-admin/CoreProject/maintainability">
-    <img src="https://img.shields.io/codeclimate/maintainability/baseplate-admin/CoreProject?style=for-the-badge" />
-  </a>
 
   <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/baseplate-admin/coreproject?style=for-the-badge">
   <img alt="Lines of code" src="https://img.shields.io/tokei/lines/github/baseplate-admin/coreproject?style=for-the-badge">
