@@ -5,12 +5,12 @@ from celery import shared_task
 from colorthief import ColorThief
 from utilities.rgb_to_hex import rgb_to_hex
 
+from shinobi.builder.genre import AnimeGenreBuilder
+from shinobi.builder.theme import AnimeThemeBuilder
+
 from django.core.management import call_command
 
 from .models import AnimeModel
-
-from shinobi.builder.genre import AnimeGenreBuilder
-from shinobi.builder.theme import AnimeThemeBuilder
 
 
 @shared_task

@@ -7,7 +7,7 @@ from shinobi.parser.staff import StaffParser
 
 from django.core.management.base import BaseCommand
 
-from ...models import StaffModel, StaffAlternateNameModel
+from ...models import StaffAlternateNameModel, StaffModel
 
 
 class Command(BaseCommand):
