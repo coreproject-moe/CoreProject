@@ -8,6 +8,8 @@ from django.utils import timezone
 
 from .models import CharacterModel
 
+# Beat tasks
+
 
 @shared_task()
 def get_perodic_character():
@@ -21,4 +23,12 @@ def get_perodic_character():
     )
 
     for character in list(dictionary.keys()):
-        call_command("get_character", character_id=character)
+        call_character_command.delay(character)
+
+
+# Call Commands
+
+
+@shared_task()
+def call_character_command(id: int):
+    call_command("get_character", character_id=id)

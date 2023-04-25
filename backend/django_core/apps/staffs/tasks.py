@@ -21,4 +21,11 @@ def get_perodic_staff():
     )
 
     for staff in list(dictionary.keys()):
-        call_command("get_staff", staff_id=staff)
+        call_staff_command.delay(staff)
+
+
+# Call commands
+
+
+def call_staff_command(id: int):
+    call_command("get_staff", staff_id=id)
