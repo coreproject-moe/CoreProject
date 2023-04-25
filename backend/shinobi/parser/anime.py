@@ -23,22 +23,22 @@ class AnimeParser:
 
     @property
     @return_on_error("")
-    def get_anime_url(self) -> str:
+    def get_anime_url(self):
         return self.parser.css_first("meta[property='og:url']").attributes["content"]
 
     @property
     @return_on_error("")
-    def get_anime_id(self) -> str:
+    def get_anime_id(self):
         return self.regex_helper.get_id_from_url(self.get_anime_url)
 
     @property
     @return_on_error("")
-    def get_anime_name(self) -> str:
+    def get_anime_name(self):
         return self.parser.css_first("meta[property='og:title']").attributes["content"]
 
     @property
     @return_on_error("")
-    def get_anime_name_japanese(self) -> str:
+    def get_anime_name_japanese(self):
         node = self.parser.select("span").text_contains("Japanese:").matches
         if len(node) > 1:
             raise ValueError("There are more than one node in name japanese node")
@@ -47,7 +47,7 @@ class AnimeParser:
         return name_japanese
 
     @property
-    @return_on_error("")
+    @return_on_error([])
     def get_anime_name_synonyms(self) -> list[str]:
         node = self.parser.select("h2").text_contains("Alternative Titles").matches[0]
         alternate_names = []
@@ -76,7 +76,7 @@ class AnimeParser:
 
     @property
     @return_on_error("")
-    def get_source(self) -> str:
+    def get_source(self):
         node = self.parser.select("span").text_contains("Source:").matches
         if len(node) > 1:
             raise ValueError("There are multiple source node")
@@ -87,7 +87,7 @@ class AnimeParser:
     @property
     @return_on_error("")
     @lru_cache(maxsize=None)
-    def get_aired_text(self) -> str:
+    def get_aired_text(self):
         # aired text contains in this format
         # 'aired_from to aired_to'
         node = self.parser.select("span").text_contains("Aired:").matches
@@ -112,7 +112,7 @@ class AnimeParser:
 
     @property
     @return_on_error("")
-    def get_synopsis(self) -> str:
+    def get_synopsis(self):
         node = self.parser.css_first("p[itemprop='description']")
 
         synopsis = self.string_helper.cleanse(node.text())
@@ -124,7 +124,7 @@ class AnimeParser:
 
     @property
     @return_on_error("")
-    def get_background(self) -> str:
+    def get_background(self):
         node = self.parser.select("h2").text_contains("Background").matches
         if len(node) > 1:
             raise ValueError("There are multiple Background node")
@@ -137,7 +137,7 @@ class AnimeParser:
 
     @property
     @return_on_error("")
-    def get_rating(self) -> str:
+    def get_rating(self):
         node = self.parser.select("span").text_contains("Rating:").matches
         if len(node) > 1:
             raise ValueError("There are multiple Rating node")
@@ -146,7 +146,7 @@ class AnimeParser:
         return rating
 
     @property
-    @return_on_error("")
+    @return_on_error([])
     def get_genres(self) -> list[int]:
         node = self.parser.select("span").text_contains("Genres:").matches
         if len(node) > 1:
@@ -154,31 +154,63 @@ class AnimeParser:
 
         genre_parent_nodes = node[0].parent
         # Remove all span tags
-        genre_parent_nodes.strip_tags(["span"])
         anchor_tags = genre_parent_nodes.css("a[href*='/anime/']")
         return sorted(
-            [
-                self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
-                for anchor in anchor_tags
-            ]
+            set(
+                [
+                    self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
+                    for anchor in anchor_tags
+                ]
+            )
         )
 
     @property
-    @return_on_error("")
-    def get_themes(self):
+    @return_on_error([])
+    def get_themes(self) -> list[int]:
         node = self.parser.select("span").text_contains("Themes:").matches
         if len(node) > 1:
             raise ValueError("There are multiple Genre node")
 
         theme_parent_nodes = node[0].parent
-        # Remove all span tags
-        theme_parent_nodes.strip_tags(["span"])
         anchor_tags = theme_parent_nodes.css("a[href*='/anime/']")
         return sorted(
-            [
-                self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
-                for anchor in anchor_tags
-            ]
+            set(
+                [
+                    self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
+                    for anchor in anchor_tags
+                ]
+            )
+        )
+
+    @property
+    @return_on_error([])
+    def get_characters(self) -> list[int]:
+        node = self.parser.css_first("div.detail-characters-list")
+
+        anchor_tags = node.css("a[href*='/character/']")
+        return sorted(
+            set(
+                [
+                    self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
+                    for anchor in anchor_tags
+                ]
+            )
+        )
+
+    @property
+    def get_studios(self) -> list[int]:
+        node = self.parser.select("span").text_contains("Studios:").matches
+        if len(node) > 1:
+            raise ValueError("There are multiple Studio node")
+
+        anchor_tags = node[0].parent.css("a[href*='/producer/']")
+        return sorted(
+            set(
+                [
+                    self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
+                    for anchor in anchor_tags
+                ]
+            )
         )
 
     def build_dictionary(self):
@@ -196,8 +228,8 @@ class AnimeParser:
             # List[int]
             "genres": self.get_genres,
             "themes": self.get_themes,
-            "characters": "",
-            "studios": "",
+            "characters": self.get_characters,
+            "studios": self.get_studios,
             "producers": "",
             "staffs": "",
             "recommendations": "",  # self
