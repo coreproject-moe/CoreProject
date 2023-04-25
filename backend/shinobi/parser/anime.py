@@ -156,12 +156,10 @@ class AnimeParser:
         # Remove all span tags
         anchor_tags = genre_parent_nodes.css("a[href*='/anime/']")
         return sorted(
-            set(
-                [
+            {
                     self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
                     for anchor in anchor_tags
-                ]
-            )
+            }
         )
 
     @property
@@ -174,12 +172,10 @@ class AnimeParser:
         theme_parent_nodes = node[0].parent
         anchor_tags = theme_parent_nodes.css("a[href*='/anime/']")
         return sorted(
-            set(
-                [
+            {
                     self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
                     for anchor in anchor_tags
-                ]
-            )
+            }
         )
 
     @property
@@ -189,12 +185,10 @@ class AnimeParser:
 
         anchor_tags = node.css("a[href*='/character/']")
         return sorted(
-            set(
-                [
+            {
                     self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
                     for anchor in anchor_tags
-                ]
-            )
+            }
         )
 
     @property
@@ -205,12 +199,10 @@ class AnimeParser:
 
         anchor_tags = node[0].parent.css("a[href*='/producer/']")
         return sorted(
-            set(
-                [
+            {
                     self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
                     for anchor in anchor_tags
-                ]
-            )
+            }
         )
 
     def build_dictionary(self):
