@@ -25,7 +25,7 @@ class CharacterParser:
         self.regex_helper = RegexHelper()
 
     @staticmethod
-    def get_parser(html):
+    def get_parser(html: str) -> HTMLParser:
         return HTMLParser(html)
 
     @property
