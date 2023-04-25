@@ -1,4 +1,8 @@
-from selectolax.parser import HTMLParser
+import datetime
+from functools import lru_cache
+
+from dateutil import parser
+from selectolax.parser import HTMLParser, Node
 
 from shinobi.decorators.return_error_decorator import return_on_error
 from shinobi.utilities.regex import RegexHelper
@@ -45,10 +49,100 @@ class AnimeParser:
     @property
     @return_on_error("")
     def get_anime_name_synonyms(self) -> list[str]:
-        node = self.parser.css(
-            'h2:contains("Alternative Titles") + div:has(+ h2:contains("Information"))'
+        node = self.parser.select("h2").text_contains("Alternative Titles").matches[0]
+        alternate_names = []
+
+        next_node: Node
+
+        while True:
+            if node.next.tag == "h2":
+                break
+            elif node.next.tag == "div":
+                next_node = node.next
+
+            try:
+                alternate_name = self.string_helper.cleanse(
+                    next_node.css_first("span").next.text()
+                )
+                alternate_names.append(alternate_name)
+
+                next_node.decompose(recursive=True)
+
+            except AttributeError:
+                break
+
+        return alternate_names
+
+    @property
+    @return_on_error("")
+    def get_source(self) -> str:
+        node = self.parser.select("span").text_contains("Source:").matches
+        if len(node) > 1:
+            raise ValueError("There are multiple source node")
+
+        source = self.string_helper.cleanse(node[0].next.text())
+        return source
+
+    @property
+    @return_on_error("")
+    @lru_cache(maxsize=None)
+    def get_aired_text(self) -> str:
+        # aired text contains in this format
+        # 'aired_from to aired_to'
+        node = self.parser.select("span").text_contains("Aired:").matches
+        if len(node) > 1:
+            raise ValueError("There are multiple aired node")
+
+        return self.string_helper.cleanse(node[0].next.text())
+
+    @property
+    def get_aired_from(self) -> datetime.datetime:
+        aired_text = self.get_aired_text
+        splitted_text = aired_text.split("to")
+        aired_from = parser.parse(self.string_helper.cleanse(splitted_text[0]))
+        return aired_from
+
+    @property
+    def get_aired_to(self) -> datetime.datetime:
+        aired_text = self.get_aired_text
+        splitted_text = aired_text.split("to")
+        aired_to = parser.parse(self.string_helper.cleanse(splitted_text[1]))
+        return aired_to
+
+    @property
+    @return_on_error("")
+    def get_synopsis(self) -> str:
+        node = self.parser.css_first("p[itemprop='description']")
+
+        synopsis = self.string_helper.cleanse(node.text())
+        return (
+            ""
+            if "No synopsis information has been added to this title." in synopsis
+            else synopsis
         )
-        print(node)
+
+    @property
+    @return_on_error("")
+    def get_background(self) -> str:
+        node = self.parser.select("h2").text_contains("Background").matches
+        if len(node) > 1:
+            raise ValueError("There are multiple Background node")
+
+        parent_node = node[0].parent.parent
+        parent_node.strip_tags(["p", "div"])
+
+        background = self.string_helper.cleanse(parent_node.text())
+        return background
+
+    @property
+    @return_on_error("")
+    def get_rating(self) -> str:
+        node = self.parser.select("span").text_contains("Rating:").matches
+        if len(node) > 1:
+            raise ValueError("There are multiple Rating node")
+
+        rating = self.string_helper.cleanse(node[0].next.text())
+        return rating
 
     def build_dictionary(self):
         dictionary = {
@@ -56,13 +150,13 @@ class AnimeParser:
             "name": self.get_anime_name,
             "name_japanese": self.get_anime_name_japanese,
             "name_synonyms": self.get_anime_name_synonyms,
-            "source": "",
+            "source": self.get_source,
             # Datetime
-            "aired_from": "",
-            "aired_to": "",
-            "synopsis": "",
-            "background": "",
-            "rating": "",
+            "aired_from": self.get_aired_from,
+            "aired_to": self.get_aired_to,
+            "synopsis": self.get_synopsis,
+            "background": self.get_background,
+            "rating": self.get_rating,
             # List[int]
             "genres": "",
             "themes": "",

@@ -1,5 +1,6 @@
-from selectolax.parser import HTMLParser
 import httpx
+from selectolax.parser import HTMLParser
+
 from shinobi.utilities.regex import RegexHelper
 from shinobi.utilities.string import StringHelper
 
