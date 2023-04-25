@@ -2,7 +2,6 @@ from collections.abc import Callable
 import functools
 from typing import Any, TypeVar
 
-
 T = TypeVar("T")
 # These decorators catch :
 #   AttributeError : In case `selectolax` fails to find the dom node

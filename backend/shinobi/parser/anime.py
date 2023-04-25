@@ -2,13 +2,12 @@ import datetime
 from functools import lru_cache
 
 from dateutil import parser
+import httpx
 from selectolax.parser import HTMLParser, Node
 
 from shinobi.decorators.return_error_decorator import return_on_error
 from shinobi.utilities.regex import RegexHelper
 from shinobi.utilities.string import StringHelper
-
-import httpx
 
 
 class AnimeParser:
