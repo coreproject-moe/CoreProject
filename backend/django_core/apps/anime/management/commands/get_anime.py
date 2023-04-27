@@ -10,7 +10,7 @@ from shinobi.parser.anime import AnimeParser
 
 from django.core.management.base import BaseCommand
 
-from ...models import AnimeModel
+from ...models import AnimeModel, AnimeNameSynonymModel
 from ...models.anime_genre import AnimeGenreModel
 from ...models.anime_theme import AnimeThemeModel
 
@@ -56,6 +56,13 @@ class Command(BaseCommand):
             except AnimeModel.DoesNotExist:
                 self.stdout.write(f"No AnimeModel found for {self.style.ERROR(anime_id)}")
                 sys.exit(1)
+        if alternate_name := data_dictionary.pop("name_synonyms"):
+            for name in alternate_name:
+                (
+                    alternate_name_synonym_instance,
+                    _,
+                ) = AnimeNameSynonymModel.objects.get_or_create(name=name)
+                anime_instance.name_synonyms.add(alternate_name_synonym_instance)
 
         if genres := data_dictionary.pop("genres"):
             for genre in genres:
