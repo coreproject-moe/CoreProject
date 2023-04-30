@@ -49,10 +49,10 @@
   <i>From V3 UI, click on the images to open full view in new tab</i>
   <br>
   <br>
-  <img src="https://raw.githubusercontent.com/sssuneeth/host-assets/main/CoreProject/homepage-screenshot.png" alt="Home Page Mockup" width=49%>
-  <img src="https://raw.githubusercontent.com/sssuneeth/host-assets/main/CoreProject/anime-info-screenshot.png" alt="Anime Info Page Mockup" width=49%>
-  <img src="https://raw.githubusercontent.com/sssuneeth/host-assets/main/CoreProject/register-page-screenshot.png" alt="Register Page Mockup" width=49%>
-  <img src="https://raw.githubusercontent.com/sssuneeth/host-assets/main/CoreProject/search-panel-screenshot.png" alt="Search Panel Mockup" width=49%>
+  <img src="https://user-images.githubusercontent.com/61817579/235350591-ef773175-8d90-4a7f-b412-1aa71953b5b1.png" alt="Home Page Mockup" width=49%>
+  <img src="https://user-images.githubusercontent.com/61817579/235350607-a77e4cbe-54f5-4678-ad49-81bc740ea6a0.png" alt="Anime Info Page Mockup" width=49%>
+  <img src="https://user-images.githubusercontent.com/61817579/235350621-56415d11-991d-4a64-b61f-a27da6e56529.png" alt="Register Page Mockup" width=49%>
+  <img src="https://user-images.githubusercontent.com/61817579/235350654-1eee77aa-dba3-47c1-934c-58318ef611da.png" alt="Search Panel Mockup" width=49%>
 </p>
 
 ## (Upcoming) Features
