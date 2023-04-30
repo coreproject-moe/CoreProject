@@ -12,7 +12,7 @@
   <p align="center">
    <b> A feature-rich modern streaming site! </b> Currently in active development
    <br>
-   Site is in v2 UI - 
+   Site is in v2 UI -
    Check <a href="https://coreproject.moe/anime/">v3 UI</a>,
    <a href="https://github.com/sssuneeth/CoreProject-V3-UI/">Working Repo for v3 UI</a>
     <br><br>
