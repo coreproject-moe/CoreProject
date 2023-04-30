@@ -49,10 +49,10 @@
   <i>From V3 UI, click on the images to open full view in new tab</i>
   <br>
   <br>
-  <img src="https://imgbox.io/ib/mZwPoOMD11.png" alt="Home Page Mockup" width=49%>
-  <img src="https://imgbox.io/ib/OUbB4rsyCh.png" alt="Anime Info Page Mockup" width=49%>
-  <img src="https://imgbox.io/ib/zPypve2smU.png" alt="Register Page Mockup" width=49%>
-  <img src="https://imgbox.io/ib/22dteHTHrH.png" alt="Search Panel Mockup" width=49%>
+  <img src="https://raw.githubusercontent.com/sssuneeth/host-assets/main/CoreProject/homepage-screenshot.png" alt="Home Page Mockup" width=49%>
+  <img src="https://raw.githubusercontent.com/sssuneeth/host-assets/main/CoreProject/anime-info-screenshot.png" alt="Anime Info Page Mockup" width=49%>
+  <img src="https://raw.githubusercontent.com/sssuneeth/host-assets/main/CoreProject/register-page-screenshot.png" alt="Register Page Mockup" width=49%>
+  <img src="https://raw.githubusercontent.com/sssuneeth/host-assets/main/CoreProject/search-panel-screenshot.png" alt="Search Panel Mockup" width=49%>
 </p>
 
 ## (Upcoming) Features
