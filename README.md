@@ -11,6 +11,10 @@
 
   <p align="center">
    <b> A feature-rich modern streaming site! </b> Currently in active development
+   <br>
+   Site is in v2 UI - 
+   Check <a href="https://coreproject.moe/anime/">v3 UI</a>,
+   <a href="https://github.com/sssuneeth/CoreProject-V3-UI/">Working Repo for v3 UI</a>
     <br><br>
     <a href="https://github.com/baseplate-admin/CoreProject"><strong>Explore the docs »</strong></a>
   </p>
@@ -42,12 +46,13 @@
 ## Screenshots
 
 <p float="left">
-  <i>Click on the images to open full view in new tab</i>
+  <i>From V3 UI, click on the images to open full view in new tab</i>
   <br>
   <br>
-  <img src="https://user-images.githubusercontent.com/41228366/161109978-5b07e615-d260-48b4-b605-50fde6a3a284.png" alt="Home Page Mockup" width=49.5%>
-  <img src="https://user-images.githubusercontent.com/41228366/161110862-80b23b2b-e6e9-49c6-9555-51463da77c26.png" alt="Discover Section Mockup" width=49.5%>
-  <img src="https://user-images.githubusercontent.com/41228366/161114183-f9744421-2137-4a9b-b6b6-0f64e5b7a329.png" alt="Anime Info Page Mockup" width=49.5%>
+  <img src="https://imgbox.io/ib/mZwPoOMD11.png" alt="Home Page Mockup" width=49%>
+  <img src="https://imgbox.io/ib/OUbB4rsyCh.png" alt="Anime Info Page Mockup" width=49%>
+  <img src="https://imgbox.io/ib/zPypve2smU.png" alt="Register Page Mockup" width=49%>
+  <img src="https://imgbox.io/ib/22dteHTHrH.png" alt="Search Panel Mockup" width=49%>
 </p>
 
 ## (Upcoming) Features
