@@ -1,5 +1,4 @@
 import string
-import time
 
 from shinobi.utilities.session import Session
 from selectolax.parser import HTMLParser
@@ -73,18 +72,6 @@ class StaffBuilder:
 
         # MyAnimeList Blocked us
         # Exponential delay
-        if res.status_code == 403 or len(staff_nodes) == 0:
-            if not delay:
-                delay = 2
-
-            if delay > 128:
-                raise TimeoutError(f"Delay raised to {delay}")
-
-            time.sleep(delay)
-
-            delay = delay * 2
-            self.__build_urls(url, delay)
-
         for staff_node in staff_nodes:
             staff_href = staff_node.attributes["href"]
             if (

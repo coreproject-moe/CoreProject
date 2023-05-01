@@ -1,5 +1,4 @@
 import string
-import time
 
 from shinobi.utilities.session import Session
 from selectolax.parser import HTMLParser
@@ -68,18 +67,6 @@ class CharacterBuilder:
 
         # MyAnimeList Blocked us
         # Exponential delay
-        if res.status_code == 403 or len(character_nodes) == 0:
-            if not delay:
-                delay = 2
-
-            if delay > 128:
-                raise TimeoutError(f"Delay raised to {delay}")
-
-            time.sleep(delay)
-
-            delay = delay * 2
-            self.__build_urls(url, delay)
-
         for character_node in character_nodes:
             character_href = character_node.attributes["href"]
             if (
