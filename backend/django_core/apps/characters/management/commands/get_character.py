@@ -8,6 +8,7 @@ from shinobi.parser.character import CharacterParser
 from django.core.management.base import BaseCommand
 
 from ...models import CharacterModel
+from ...tasks import get_perodic_character
 
 
 class Command(BaseCommand):
@@ -23,9 +24,21 @@ class Command(BaseCommand):
             type=int,
             help="The character number to get information for",
         )
+        parser.add_argument(
+            "--periodic",
+            action="store_true",
+            help="Flag to indicate that the anime will be created",
+        )
 
     def handle(self, *args, **options) -> NoReturn:
         character_number: int = options["character_number"]
+
+        periodic: bool = options["periodic"]
+        if periodic:
+            get_perodic_character.delay()
+            self.stdout.write(f"Successfully stated preiodic celery commands")
+            sys.exit(0)
+
         res = self.client.get(f"https://myanimelist.net/character/{character_number}")
 
         parser = CharacterParser(res.content)

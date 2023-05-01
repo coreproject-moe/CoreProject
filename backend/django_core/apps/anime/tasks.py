@@ -7,6 +7,7 @@ from utilities.rgb_to_hex import rgb_to_hex
 
 from shinobi.builder.genre import AnimeGenreBuilder
 from shinobi.builder.theme import AnimeThemeBuilder
+from shinobi.builder.anime import AnimeBuilder
 
 from django.core.management import call_command
 
@@ -15,8 +16,8 @@ from .models import AnimeModel
 # Beat tasks
 
 
-@shared_task
-def get_preiodic_anime_genres():
+@shared_task()
+def get_periodic_anime_genres():
     builder = AnimeGenreBuilder()
     dictionary = builder.build_dictionary()
 
@@ -24,13 +25,22 @@ def get_preiodic_anime_genres():
         call_anime_genre_command.delay(genre)
 
 
-@shared_task
-def get_preiodic_anime_themes():
+@shared_task()
+def get_periodic_anime_themes():
     builder = AnimeThemeBuilder()
     dictionary = builder.build_dictionary()
 
     for theme in list(dictionary.keys()):
         call_anime_theme_command.delay(theme)
+
+
+@shared_task()
+def get_periodic_anime():
+    builder = AnimeBuilder()
+    dictionary = builder.build_dictionary()
+
+    for anime in list(dictionary.keys()):
+        call_anime_command(anime)
 
 
 # Calls
@@ -42,6 +52,11 @@ def call_anime_genre_command(id: int):
 @shared_task()
 def call_anime_theme_command(id: int):
     call_command("get_anime_theme", theme_id=id)
+
+
+@shared_task
+def call_anime_command(id: int):
+    call_command("get_anime", anime_id=id)
 
 
 # Setters

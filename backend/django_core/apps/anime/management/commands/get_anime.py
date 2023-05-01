@@ -13,6 +13,7 @@ from django.core.management.base import BaseCommand
 from ...models import AnimeModel, AnimeNameSynonymModel
 from ...models.anime_genre import AnimeGenreModel
 from ...models.anime_theme import AnimeThemeModel
+from ...tasks import get_periodic_anime
 
 
 class Command(BaseCommand):
@@ -37,10 +38,21 @@ class Command(BaseCommand):
             action="store_true",
             help="Flag to indicate that the anime will be created",
         )
+        parser.add_argument(
+            "--periodic",
+            action="store_true",
+            help="Flag to indicate that the anime will be created",
+        )
 
     def handle(self, *args, **options) -> NoReturn:
         anime_id: int = options["anime_id"]
         create: bool = options.get("create")
+        periodic: bool = options.get("periodic")
+
+        if periodic:
+            get_periodic_anime.delay()
+            self.stdout.write(f"Successfully stated preiodic celery commands")
+            sys.exit(0)
 
         res = self.client.get(f"https://myanimelist.net/anime/{anime_id}/")
 

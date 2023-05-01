@@ -25,22 +25,22 @@ app.conf.beat_schedule = {
     # Characters
     # ==========
     # Executes every Friday night at 12:00 a.m.
-    "get-preiodic-characters-every-friday-morning": {
+    "get-periodic-characters-every-friday-morning": {
         "task": "apps.characters.tasks.get_perodic_character",
         "schedule": crontab(hour=0, minute=00, day_of_week=5),
     },
     # Staffs / People
     # ==========
     # Executes every Friday night at 12:00 a.m.
-    "get-preiodic-staffs-every-friday-morning": {
+    "get-periodic-staffs-every-friday-morning": {
         "task": "apps.staffs.tasks.get_perodic_staff",
         "schedule": crontab(hour=0, minute=00, day_of_week=5),
     },
     # Anime
     # ======
     # Genre
-    "get-preiodic-genres-every-friday-night": {
-        "task": "apps.anime.tasks.get_preiodic_anime_genres",
+    "get-periodic-genres-every-friday-night": {
+        "task": "apps.anime.tasks.get_periodic_anime_genres",
         "schedule": crontab(hour=0, minute=00, day_of_week=5),
     },
 }
