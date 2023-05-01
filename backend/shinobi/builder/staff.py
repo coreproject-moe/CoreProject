@@ -64,7 +64,6 @@ class StaffBuilder:
         ]
 
     def __build_urls(self, url: str, delay: int | None = None) -> None:
-        print(url)
         self.visited_urls.add(url)
 
         res = self.client.get(url)

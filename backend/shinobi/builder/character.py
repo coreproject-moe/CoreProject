@@ -59,7 +59,6 @@ class CharacterBuilder:
         ]
 
     def __build_urls(self, url: str, delay: int | None = None) -> None:
-        print(delay)
         self.visited_urls.add(url)
 
         res = self.client.get(url)
