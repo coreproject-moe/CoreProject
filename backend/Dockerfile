@@ -20,8 +20,8 @@ WORKDIR /code
 # copy project
 COPY poetry.lock pyproject.toml /code/
 
-RUN poetry config virtualenvs.create false \
-  && poetry install --no-interaction --no-ansi --no-dev
+RUN poetry config virtualenvs.create false
+RUN poetry install --no-interaction --no-ansi --no-dev
 
 RUN apk --no-cache add nodejs-current npm
 
