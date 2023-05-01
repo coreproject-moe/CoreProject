@@ -80,7 +80,7 @@ class AnimeBuilder:
 
             time.sleep(delay)
 
-            delay = delay ^ 2
+            delay = delay * 2
             self.__build_urls(url, delay)
 
         for anime_node in anime_nodes:

@@ -83,7 +83,7 @@ class StaffBuilder:
 
             time.sleep(delay)
 
-            delay = delay ^ 2
+            delay = delay * 2
             self.__build_urls(url, delay)
 
         for staff_node in staff_nodes:

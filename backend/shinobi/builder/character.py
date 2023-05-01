@@ -59,6 +59,7 @@ class CharacterBuilder:
         ]
 
     def __build_urls(self, url: str, delay: int | None = None) -> None:
+        print(delay)
         self.visited_urls.add(url)
 
         res = self.client.get(url)
@@ -68,7 +69,7 @@ class CharacterBuilder:
 
         # MyAnimeList Blocked us
         # Exponential delay
-        if len(character_nodes) == 0:
+        if res.status_code == 403 or len(character_nodes) == 0:
             if not delay:
                 delay = 2
 
@@ -77,7 +78,7 @@ class CharacterBuilder:
 
             time.sleep(delay)
 
-            delay = delay ^ 2
+            delay = delay * 2
             self.__build_urls(url, delay)
 
         for character_node in character_nodes:
