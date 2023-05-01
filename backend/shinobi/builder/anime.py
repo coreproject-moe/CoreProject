@@ -1,7 +1,7 @@
 import string
 import time
 
-import httpx
+from shinobi.utilities.session import Session
 from selectolax.parser import HTMLParser
 
 from shinobi.decorators.return_error_decorator import return_on_error
@@ -14,7 +14,7 @@ class AnimeBuilder:
         self.visited_urls: set[str] = set()
 
         # Reusuable clients
-        self.client = httpx.Client()
+        self.client = Session()
 
         # Facades
         self.regex_helper = RegexHelper()
@@ -69,19 +69,6 @@ class AnimeBuilder:
         html = res.content
 
         anime_nodes = self.get_parser(html).css("a[href*='/anime/']")
-        # MyAnimeList Blocked us
-        # Exponential delay
-        if res.status_code == 403 or len(anime_nodes) == 0:
-            if not delay:
-                delay = 2
-
-            if delay > 128:
-                raise TimeoutError(f"Delay raised to {delay}")
-
-            time.sleep(delay)
-
-            delay = delay * 2
-            self.__build_urls(url, delay)
 
         for anime_node in anime_nodes:
             anime_href = anime_node.attributes["href"]

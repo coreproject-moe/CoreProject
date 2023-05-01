@@ -1,8 +1,7 @@
 import sys
 from typing import NoReturn
-
-import httpx
-
+import time
+from shinobi.utilities.session import Session
 from shinobi.parser.character import CharacterParser
 
 from django.core.management.base import BaseCommand
@@ -10,12 +9,14 @@ from django.core.management.base import BaseCommand
 from ...models import CharacterModel
 from ...tasks import get_perodic_character
 
+TIMEOUT = 2
+
 
 class Command(BaseCommand):
     help = "Django command that gets the Character Information given mal_id"
 
     def __init__(self, *args, **kwargs) -> None:
-        self.client = httpx.Client()
+        self.client = Session()
         super().__init__(*args, **kwargs)
 
     def add_arguments(self, parser):

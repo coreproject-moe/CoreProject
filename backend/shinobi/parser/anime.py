@@ -2,12 +2,13 @@ import datetime
 from functools import lru_cache
 
 from dateutil import parser
-import httpx
 from selectolax.parser import HTMLParser, Node
 
 from shinobi.decorators.return_error_decorator import return_on_error
 from shinobi.utilities.regex import RegexHelper
 from shinobi.utilities.string import StringHelper
+
+from shinobi.utilities.session import Session
 
 
 class AnimeDictionary:
@@ -42,7 +43,7 @@ class AnimeParser:
         self.string_helper = StringHelper()
 
         # Clients
-        self.client = httpx.Client(http2=True, follow_redirects=True)
+        self.client = Session()
 
     @property
     @lru_cache(maxsize=None)

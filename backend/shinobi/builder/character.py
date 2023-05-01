@@ -1,7 +1,7 @@
 import string
 import time
 
-import httpx
+from shinobi.utilities.session import Session
 from selectolax.parser import HTMLParser
 
 from shinobi.decorators.return_error_decorator import return_on_error
@@ -15,7 +15,7 @@ class CharacterBuilder:
         self.visited_urls: set[str] = set()
 
         # Reusuable clients
-        self.client = httpx.Client()
+        self.client = Session()
 
         # Facades
         self.regex_helper = RegexHelper()

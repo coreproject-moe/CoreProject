@@ -1,4 +1,4 @@
-import httpx
+from shinobi.utilities.session import Session
 from selectolax.parser import HTMLParser
 
 from shinobi.utilities.regex import RegexHelper
@@ -7,7 +7,7 @@ from shinobi.utilities.regex import RegexHelper
 class AnimeGenreBuilder:
     def __init__(self) -> None:
         # Reusuable Clients
-        self.client = httpx.Client(follow_redirects=True, http2=True)
+        self.client = Session()
 
         # Facades
         self.regex_helper = RegexHelper()
