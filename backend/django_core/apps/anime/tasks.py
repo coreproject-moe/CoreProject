@@ -12,7 +12,7 @@ from shinobi.builder.anime import AnimeBuilder
 from django.db.models import Q
 from django.core.management import call_command
 from django.utils import timezone
-
+from typing import NoReturn
 from .models import AnimeModel
 
 # Beat tasks
@@ -53,17 +53,17 @@ def get_periodic_anime():
 
 # Calls
 @shared_task()
-def call_anime_genre_command(id: int):
+def call_anime_genre_command(id: int) -> NoReturn:
     call_command("get_anime_genre", id)
 
 
 @shared_task()
-def call_anime_theme_command(id: int):
+def call_anime_theme_command(id: int) -> NoReturn:
     call_command("get_anime_theme", id)
 
 
 @shared_task()
-def call_anime_command(id: int):
+def call_anime_command(id: int) -> NoReturn:
     call_command("get_anime", id, create=True)
 
 
@@ -75,7 +75,7 @@ def set_field_color(
     pk: int,
     field_name: str,
     image_field_name: str,
-) -> None:
+) -> NoReturn:
     instance = AnimeModel.objects.get(pk=pk)
 
     if image_field := getattr(instance, image_field_name):
@@ -95,7 +95,7 @@ def set_field_brightness(
     pk: int,
     field_name: str,
     image_field_name: str,
-) -> None:
+) -> NoReturn:
     instance = AnimeModel.objects.get(pk=pk)
 
     if image_field := getattr(instance, image_field_name):
