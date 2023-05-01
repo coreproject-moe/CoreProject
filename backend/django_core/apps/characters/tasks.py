@@ -30,6 +30,6 @@ def get_perodic_character():
 # Call Commands
 
 
-@shared_task()
+@shared_task(rate_limit="100/m")
 def call_character_command(id: int):
     call_command("get_character", id, create=True)

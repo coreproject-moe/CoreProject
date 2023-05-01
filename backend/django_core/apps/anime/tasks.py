@@ -52,17 +52,17 @@ def get_periodic_anime():
 
 
 # Calls
-@shared_task()
+@shared_task(rate_limit="100/m")
 def call_anime_genre_command(id: int) -> NoReturn:
     call_command("get_anime_genre", id)
 
 
-@shared_task()
+@shared_task(rate_limit="100/m")
 def call_anime_theme_command(id: int) -> NoReturn:
     call_command("get_anime_theme", id)
 
 
-@shared_task()
+@shared_task(rate_limit="100/m")
 def call_anime_command(id: int) -> NoReturn:
     call_command("get_anime", id, create=True)
 
