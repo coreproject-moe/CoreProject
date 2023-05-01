@@ -71,7 +71,7 @@ class AnimeBuilder:
         anime_nodes = self.get_parser(html).css("a[href*='/anime/']")
         # MyAnimeList Blocked us
         # Exponential delay
-        if len(anime_nodes) == 0:
+        if res.status_code == 403 or len(anime_nodes) == 0:
             if not delay:
                 delay = 2
 

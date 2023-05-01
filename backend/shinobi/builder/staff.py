@@ -74,7 +74,7 @@ class StaffBuilder:
 
         # MyAnimeList Blocked us
         # Exponential delay
-        if len(staff_nodes) == 0:
+        if res.status_code == 403 or len(staff_nodes) == 0:
             if not delay:
                 delay = 2
 
