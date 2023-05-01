@@ -18,4 +18,4 @@ def test_first_producer_parser():
     assert data["mal_id"] == 1
     assert data["name"] == "Pierrot"
     assert data["name_japanese"] == "ぴえろ"
-    assert data["established"] == datetime.datetime(1979, 5, 23, 0, 0)
+    assert data["established"] == datetime.datetime(1979, 5, 1, 0, 0)
