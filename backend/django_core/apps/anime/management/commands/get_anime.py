@@ -41,7 +41,7 @@ class Command(BaseCommand):
         parser.add_argument(
             "--periodic",
             action="store_true",
-            help="Flag to indicate that the anime will be created",
+            help="Flag to periodic task will be created",
         )
 
     def handle(self, *args, **options) -> NoReturn:
@@ -60,7 +60,7 @@ class Command(BaseCommand):
         data_dictionary = parser.build_dictionary()
 
         if create:
-            anime_instance = AnimeModel.objects.create(mal_id=anime_id)
+            anime_instance, _ = AnimeModel.objects.get_or_create(mal_id=anime_id)
 
         else:
             try:
@@ -68,6 +68,7 @@ class Command(BaseCommand):
             except AnimeModel.DoesNotExist:
                 self.stdout.write(f"No AnimeModel found for {self.style.ERROR(anime_id)}")
                 sys.exit(1)
+
         if alternate_name := data_dictionary.pop("name_synonyms"):
             for name in alternate_name:
                 (

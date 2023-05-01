@@ -31,4 +31,4 @@ def get_perodic_character():
 
 @shared_task()
 def call_character_command(id: int):
-    call_command("get_character", character_id=id)
+    call_command("get_character", id, create=True)

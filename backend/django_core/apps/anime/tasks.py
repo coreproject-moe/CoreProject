@@ -9,7 +9,9 @@ from shinobi.builder.genre import AnimeGenreBuilder
 from shinobi.builder.theme import AnimeThemeBuilder
 from shinobi.builder.anime import AnimeBuilder
 
+from django.db.models import Q
 from django.core.management import call_command
+from django.utils import timezone
 
 from .models import AnimeModel
 
@@ -37,26 +39,32 @@ def get_periodic_anime_themes():
 @shared_task()
 def get_periodic_anime():
     builder = AnimeBuilder()
-    dictionary = builder.build_dictionary()
+    instances = AnimeModel.objects.filter(
+        Q(updated_at__gte=timezone.now() - timezone.timedelta(days=7)) & Q(is_locked=False)
+    )
+
+    dictionary = builder.build_dictionary(
+        excluded_ids=instances.values_list("pk", flat=True)
+    )
 
     for anime in list(dictionary.keys()):
-        call_anime_command(anime)
+        call_anime_command.delay(anime)
 
 
 # Calls
 @shared_task()
 def call_anime_genre_command(id: int):
-    call_command("get_anime_genre", genre_id=id)
+    call_command("get_anime_genre", id)
 
 
 @shared_task()
 def call_anime_theme_command(id: int):
-    call_command("get_anime_theme", theme_id=id)
+    call_command("get_anime_theme", id)
 
 
-@shared_task
+@shared_task()
 def call_anime_command(id: int):
-    call_command("get_anime", anime_id=id)
+    call_command("get_anime", id, create=True)
 
 
 # Setters

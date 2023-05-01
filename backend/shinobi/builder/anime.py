@@ -75,7 +75,7 @@ class AnimeBuilder:
             if not delay:
                 delay = 2
 
-            if delay > 60:
+            if delay > 128:
                 raise TimeoutError(f"Delay raised to {delay}")
 
             time.sleep(delay)
