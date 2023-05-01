@@ -42,7 +42,7 @@ class AnimeParser:
         self.string_helper = StringHelper()
 
         # Clients
-        self.client = httpx.Client()
+        self.client = httpx.Client(http2=True, follow_redirects=True)
 
     @property
     @lru_cache(maxsize=None)
