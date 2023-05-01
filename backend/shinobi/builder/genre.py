@@ -30,7 +30,7 @@ class AnimeGenreBuilder:
 
     def build_dictionary(self) -> dict[int, str]:
         res = self.client.get("https://myanimelist.net/anime.php")
-        html = res.content
+        html = res.text
 
         ids = self.__build_ids(html)
         urls = self.__build_urls(ids)

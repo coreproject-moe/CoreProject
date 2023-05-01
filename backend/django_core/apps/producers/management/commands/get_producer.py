@@ -27,7 +27,7 @@ class Command(BaseCommand):
         producer_number: int = options["producer_number"]
         res = self.client.get(f"https://myanimelist.net/anime/producer/{producer_number}")
 
-        parser = ProducerParser(res.content)
+        parser = ProducerParser(res.text)
         data_dictionary = parser.build_dictionary()
 
         try:

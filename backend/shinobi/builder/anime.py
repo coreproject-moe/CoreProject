@@ -66,7 +66,7 @@ class AnimeBuilder:
         self.visited_urls.add(url)
 
         res = self.client.get(url)
-        html = res.content
+        html = res.text
 
         anime_nodes = self.get_parser(html).css("a[href*='/anime/']")
 

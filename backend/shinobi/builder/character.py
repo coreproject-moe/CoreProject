@@ -62,7 +62,7 @@ class CharacterBuilder:
         self.visited_urls.add(url)
 
         res = self.client.get(url)
-        html = res.content
+        html = res.text
 
         character_nodes = self.get_parser(html).css("a[href*='/character/']")
 

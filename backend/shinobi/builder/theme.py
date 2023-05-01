@@ -40,7 +40,7 @@ class AnimeThemeBuilder:
 
     def build_dictionary(self) -> dict[int, str]:
         res = self.client.get("https://myanimelist.net/anime.php")
-        html = res.content
+        html = res.text
 
         urls = self.__build_urls(html)
         ids = self.__build_ids()

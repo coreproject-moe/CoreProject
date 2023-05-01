@@ -67,7 +67,7 @@ class StaffBuilder:
         self.visited_urls.add(url)
 
         res = self.client.get(url)
-        html = res.content
+        html = res.text
 
         staff_nodes = self.get_parser(html).css("a[href*='/people/']")
 

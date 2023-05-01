@@ -49,7 +49,7 @@ class Command(BaseCommand):
 
         res = self.client.get(f"https://myanimelist.net/character/{character_id}")
 
-        parser = CharacterParser(res.content)
+        parser = CharacterParser(res.text)
         data_dictionary = parser.build_dictionary()
 
         if create:

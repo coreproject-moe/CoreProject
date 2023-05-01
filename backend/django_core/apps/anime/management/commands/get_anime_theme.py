@@ -31,7 +31,7 @@ class Command(BaseCommand):
         theme_id: int = options["theme_id"]
         res = self.client.get(f"https://myanimelist.net/anime/genre/{theme_id}")
 
-        parser = AnimeGenreParser(res.content)
+        parser = AnimeGenreParser(res.text)
         data_dictionary = parser.build_dictionary()
 
         try:

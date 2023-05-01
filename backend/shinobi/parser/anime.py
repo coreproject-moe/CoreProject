@@ -50,7 +50,7 @@ class AnimeParser:
     def __get_character_and_staff_page_content(self) -> str:
         url = self.get_anime_url + "/characters"
         res = self.client.get(url)
-        return res.content
+        return res.text
 
     @property
     @return_on_error("")

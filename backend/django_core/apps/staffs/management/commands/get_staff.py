@@ -27,7 +27,7 @@ class Command(BaseCommand):
         staff_id: int = options["staff_id"]
         res = self.client.get(f"https://myanimelist.net/people/{staff_id}")
 
-        parser = StaffParser(res.content)
+        parser = StaffParser(res.text)
         data_dictionary = parser.build_dictionary()
 
         try:

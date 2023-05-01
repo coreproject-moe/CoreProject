@@ -55,7 +55,7 @@ class Command(BaseCommand):
 
         res = self.client.get(f"https://myanimelist.net/anime/{anime_id}/")
 
-        parser = AnimeParser(res.content)
+        parser = AnimeParser(res.text)
         data_dictionary = parser.build_dictionary()
 
         if create:
