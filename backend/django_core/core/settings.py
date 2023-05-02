@@ -208,6 +208,10 @@ if CACHE_MIDDLEWARE_SECONDS != 0:
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+
+# POSTGRES
+# https://www.enterprisedb.com/postgres-tutorials/how-use-postgresql-django
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
@@ -221,23 +225,6 @@ DATABASES = {
         "CONN_HEALTH_CHECKS": True,
     }
 }
-
-# POSTGRES
-# https://www.enterprisedb.com/postgres-tutorials/how-use-postgresql-django
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": "django",
-#         "USER": "postgres",
-#         "PASSWORD": "supersecretpassword",
-#         "HOST": "",
-#         "PORT": "",
-#         # https://stackoverflow.com/questions/23504483/django-conn-max-age-setting-error
-#         # "CONN_MAX_AGE": 10,
-#         "CONN_HEALTH_CHECKS": True,
-#     }
-# }
 
 # Allow more fields to be deleted at once
 # https://stackoverflow.com/questions/47585583/the-number-of-get-post-parameters-exceeded-settings-data-upload-max-number-field

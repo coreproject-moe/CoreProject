@@ -1,16 +1,14 @@
 import sys
-import time
 from typing import NoReturn
 
 from shinobi.parser.character import CharacterParser
 from shinobi.utilities.session import session
 
 from django.core.management.base import BaseCommand
+from django.core.files.images import ImageFile
 
 from ...models import CharacterModel
 from ...tasks import get_perodic_character
-
-TIMEOUT = 2
 
 
 class Command(BaseCommand):
@@ -67,6 +65,10 @@ class Command(BaseCommand):
             sys.exit(1)
 
         for attr, value in data_dictionary.items():
+            # Special method
+            if attr == "character_image" and value:
+                setattr(character_instance, attr, ImageFile(value))
+
             if value:
                 setattr(character_instance, attr, value)
 

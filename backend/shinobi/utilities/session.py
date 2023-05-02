@@ -39,6 +39,7 @@ RETRY_STATUSES = [403]
 
 retry_strategy = Retry(
     total=15,
+    backoff_factor=2,
     status_forcelist=RETRY_STATUSES,
 )
 adapter = HTTPAdapter(max_retries=retry_strategy)
