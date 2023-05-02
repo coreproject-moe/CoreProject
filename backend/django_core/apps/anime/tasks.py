@@ -1,18 +1,19 @@
 import math
+from typing import NoReturn
 
 from PIL import Image, ImageStat
 from celery import shared_task
 from colorthief import ColorThief
 from utilities.rgb_to_hex import rgb_to_hex
 
+from shinobi.builder.anime import AnimeBuilder
 from shinobi.builder.genre import AnimeGenreBuilder
 from shinobi.builder.theme import AnimeThemeBuilder
-from shinobi.builder.anime import AnimeBuilder
 
-from django.db.models import Q
 from django.core.management import call_command
+from django.db.models import Q
 from django.utils import timezone
-from typing import NoReturn
+
 from .models import AnimeModel
 
 # Beat tasks

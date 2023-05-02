@@ -1,8 +1,8 @@
 import sys
 from typing import NoReturn
 
-from shinobi.utilities.session import session
 from shinobi.parser.producer import ProducerParser
+from shinobi.utilities.session import session
 
 from django.core.management.base import BaseCommand
 

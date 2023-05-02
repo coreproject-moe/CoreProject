@@ -4,8 +4,9 @@ from typing import NoReturn
 from apps.characters.models import CharacterModel
 from apps.producers.models import ProducerModel
 from apps.staffs.models import StaffModel
-from shinobi.utilities.session import session
+
 from shinobi.parser.anime import AnimeParser
+from shinobi.utilities.session import session
 
 from django.core.management.base import BaseCommand
 

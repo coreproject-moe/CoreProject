@@ -1,6 +1,5 @@
 import requests
 
-
 from shinobi.parser.genre import AnimeGenreParser
 
 res = requests.get("https://myanimelist.net/anime/genre/1")

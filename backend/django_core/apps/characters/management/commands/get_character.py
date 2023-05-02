@@ -1,8 +1,9 @@
 import sys
-from typing import NoReturn
 import time
-from shinobi.utilities.session import session
+from typing import NoReturn
+
 from shinobi.parser.character import CharacterParser
+from shinobi.utilities.session import session
 
 from django.core.management.base import BaseCommand
 

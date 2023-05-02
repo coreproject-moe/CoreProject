@@ -1,7 +1,7 @@
-from shinobi.utilities.session import session
 from selectolax.parser import HTMLParser
 
 from shinobi.utilities.regex import RegexHelper
+from shinobi.utilities.session import session
 from shinobi.utilities.string import StringHelper
 
 

@@ -2,7 +2,6 @@ import requests
 
 from shinobi.parser.character import CharacterParser
 
-
 res = requests.get("https://myanimelist.net/character/1")
 
 
