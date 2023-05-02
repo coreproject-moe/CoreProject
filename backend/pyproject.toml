@@ -16,7 +16,7 @@ redis = {extras = ['hiredis'], version = "*"}
 # First party ( Image )
 pillow = "*"
 # First Party ( Database )
-psycopg = {extras = ["binary"], version = "^3.1.8"}
+psycopg = {extras = ["binary"], version = "^3.1.9"}
 # 3rd Party ( Tree Model )
 django-treenode = "^0.19.0"
 # 3rd Party ( Files )
