@@ -67,8 +67,13 @@ class Command(BaseCommand):
         for attr, value in data_dictionary.items():
             # Special method
             if attr == "character_image":
-                setattr(character_instance, attr, ImageFile(value.getvalue()))
-            
+                if value:
+                    setattr(
+                        character_instance,
+                        attr,
+                        ImageFile(value, name=f"{character_id}.png"),
+                    )
+
             else:
                 if value:
                     setattr(character_instance, attr, value)
