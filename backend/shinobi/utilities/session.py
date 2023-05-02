@@ -43,7 +43,7 @@ retry_strategy = Retry(
     status_forcelist=RETRY_STATUSES,
 )
 adapter = HTTPAdapter(max_retries=retry_strategy)
-redis_pool = ConnectionPool(host="localhost", port=6379, db=0)
+redis_pool = ConnectionPool(host="redis", port=6379, db=5)
 
 session = CachedLimiterSession(
     bucket_class=RedisBucket,
