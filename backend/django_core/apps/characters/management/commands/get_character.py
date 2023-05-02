@@ -66,11 +66,12 @@ class Command(BaseCommand):
 
         for attr, value in data_dictionary.items():
             # Special method
-            if attr == "character_image" and value:
-                setattr(character_instance, attr, ImageFile(value))
-
-            if value:
-                setattr(character_instance, attr, value)
+            if attr == "character_image":
+                setattr(character_instance, attr, ImageFile(value.getvalue()))
+            
+            else:
+                if value:
+                    setattr(character_instance, attr, value)
 
         character_instance.save()
         self.stdout.write(f"Successfully got info for {self.style.SUCCESS(character_id)}")
