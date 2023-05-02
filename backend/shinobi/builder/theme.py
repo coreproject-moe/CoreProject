@@ -1,4 +1,4 @@
-from shinobi.utilities.session import Session
+from shinobi.utilities.session import session
 from selectolax.parser import HTMLParser
 
 from shinobi.utilities.regex import RegexHelper
@@ -10,7 +10,7 @@ class AnimeThemeBuilder:
         self.anchors = []
 
         # Reusuable clients
-        self.client = Session()
+        self.client = session
 
         # Facades
         self.regex_helper = RegexHelper()

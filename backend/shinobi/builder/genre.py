@@ -1,4 +1,4 @@
-from shinobi.utilities.session import Session
+from shinobi.utilities.session import session
 from selectolax.parser import HTMLParser
 
 from shinobi.utilities.regex import RegexHelper
@@ -7,7 +7,7 @@ from shinobi.utilities.regex import RegexHelper
 class AnimeGenreBuilder:
     def __init__(self) -> None:
         # Reusuable Clients
-        self.client = Session()
+        self.client = session
 
         # Facades
         self.regex_helper = RegexHelper()

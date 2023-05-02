@@ -8,7 +8,7 @@ from shinobi.decorators.return_error_decorator import return_on_error
 from shinobi.utilities.regex import RegexHelper
 from shinobi.utilities.string import StringHelper
 
-from shinobi.utilities.session import Session
+from shinobi.utilities.session import session
 
 
 class AnimeDictionary:
@@ -43,7 +43,7 @@ class AnimeParser:
         self.string_helper = StringHelper()
 
         # Clients
-        self.client = Session()
+        self.client = session
 
     @property
     @lru_cache(maxsize=None)

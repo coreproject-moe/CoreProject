@@ -8,6 +8,9 @@ from selectolax.parser import HTMLParser
 from shinobi.decorators.return_error_decorator import return_on_error
 from shinobi.utilities.regex import RegexHelper
 
+from shinobi.utilities.session import session
+from io import BytesIO
+
 
 class CharacterDictionary(TypedDict):
     mal_id: str
@@ -23,6 +26,8 @@ class CharacterParser:
 
         # Facades
         self.regex_helper = RegexHelper()
+
+        self.client = session
 
     @staticmethod
     def get_parser(html: str) -> HTMLParser:
@@ -62,7 +67,10 @@ class CharacterParser:
     @property
     @return_on_error("")
     def get_character_image(self):
-        return self.parser.css_first("meta[property='og:image']").attributes["content"]
+        url = self.parser.css_first("meta[property='og:image']").attributes["content"]
+        if url:
+            res = self.client.get(url)
+            return BytesIO(res.content)
 
     def build_dictionary(self) -> CharacterDictionary:
         dictionary: CharacterDictionary = {

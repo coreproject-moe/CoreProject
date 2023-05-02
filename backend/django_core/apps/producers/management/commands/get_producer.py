@@ -1,7 +1,7 @@
 import sys
 from typing import NoReturn
 
-from shinobi.utilities.session import Session
+from shinobi.utilities.session import session
 from shinobi.parser.producer import ProducerParser
 
 from django.core.management.base import BaseCommand
@@ -13,7 +13,7 @@ class Command(BaseCommand):
     help = "Django command that gets the Producer Information given mal_id"
 
     def __init__(self, *args, **kwargs) -> None:
-        self.client = Session()
+        self.client = session
         super().__init__(*args, **kwargs)
 
     def add_arguments(self, parser):

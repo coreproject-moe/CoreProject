@@ -1,6 +1,6 @@
 import string
 
-from shinobi.utilities.session import Session
+from shinobi.utilities.session import session
 from selectolax.parser import HTMLParser
 
 from shinobi.decorators.return_error_decorator import return_on_error
@@ -14,7 +14,7 @@ class CharacterBuilder:
         self.visited_urls: set[str] = set()
 
         # Reusuable clients
-        self.client = Session()
+        self.client = session
 
         # Facades
         self.regex_helper = RegexHelper()
@@ -57,7 +57,7 @@ class CharacterBuilder:
             for letter in alphabet_list
         ]
 
-    def __build_urls(self, url: str, delay: int | None = None) -> None:
+    def __build_urls(self, url: str) -> None:
         self.visited_urls.add(url)
 
         res = self.client.get(url)
@@ -65,8 +65,14 @@ class CharacterBuilder:
 
         character_nodes = self.get_parser(html).css("a[href*='/character/']")
 
-        # MyAnimeList Blocked us
-        # Exponential delay
+        if len(character_nodes) == 0:
+            print(
+                f"""
+                Status : {res.status_code}
+                URL : {url}
+            """
+            )
+
         for character_node in character_nodes:
             character_href = character_node.attributes["href"]
             if (

@@ -4,7 +4,7 @@ from typing import NoReturn
 from apps.characters.models import CharacterModel
 from apps.producers.models import ProducerModel
 from apps.staffs.models import StaffModel
-from shinobi.utilities.session import Session
+from shinobi.utilities.session import session
 from shinobi.parser.anime import AnimeParser
 
 from django.core.management.base import BaseCommand
@@ -23,7 +23,7 @@ class Command(BaseCommand):
     help = "Django command that gets the Anime Information given mal_id"
 
     def __init__(self, *args, **kwargs) -> None:
-        self.client = Session()
+        self.client = session
         super().__init__(*args, **kwargs)
 
     def add_arguments(self, parser):

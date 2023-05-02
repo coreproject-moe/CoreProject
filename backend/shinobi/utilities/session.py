@@ -37,10 +37,11 @@ class CachedLimiterSession(LimiterMixin, Session):
 
 
 CACHE_NAME = "seeder"
-RETRY_STATUSES = [403, 408, 429, 500, 502, 503, 504]
+RETRY_STATUSES = [403]
 
 retry_strategy = Retry(
     total=10,
+    backoff_factor=0.1,
     status_forcelist=RETRY_STATUSES,
 )
 adapter = HTTPAdapter(max_retries=retry_strategy)

@@ -1,6 +1,6 @@
 import string
 
-from shinobi.utilities.session import Session
+from shinobi.utilities.session import session
 from selectolax.parser import HTMLParser
 
 from shinobi.decorators.return_error_decorator import return_on_error
@@ -13,7 +13,7 @@ class StaffBuilder:
         self.visited_urls: set[str] = set()
 
         # Reusuable clients
-        self.client = Session()
+        self.client = session
 
         # Facades
         self.regex_helper = RegexHelper()
@@ -62,7 +62,7 @@ class StaffBuilder:
             for letter in alphabet_list
         ]
 
-    def __build_urls(self, url: str, delay: int | None = None) -> None:
+    def __build_urls(self, url: str) -> None:
         self.visited_urls.add(url)
 
         res = self.client.get(url)
