@@ -38,8 +38,7 @@ CACHE_NAME = "seeder"
 RETRY_STATUSES = [403]
 
 retry_strategy = Retry(
-    total=10,
-    backoff_factor=0.1,
+    total=15,
     status_forcelist=RETRY_STATUSES,
 )
 adapter = HTTPAdapter(max_retries=retry_strategy)
