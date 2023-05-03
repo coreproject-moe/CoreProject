@@ -13,10 +13,22 @@ def get_periodic_staff():
     builder = StaffBuilder()
 
     instances = StaffModel.objects.filter(
-        Q(updated_at__gte=timezone.now() - timezone.timedelta(days=7)) & Q(is_locked=False)
+        (
+            (
+                Q(name__isnull=True)
+                | Q(given_name__isnull=True)
+                | Q(family_name__isnull=True)
+                | Q(alternate_names__isnull=True)
+                | Q(staff_image__isnull=True)
+                | Q(about__isnull=True)
+            )
+            | Q(updated_at__gte=timezone.now() - timezone.timedelta(days=7))
+        )
+        & Q(is_locked=False)
     )
     dictionary = builder.build_dictionary(
-        excluded_ids=instances.values_list("pk", flat=True)
+        excluded_ids=instances.values_list("pk", flat=True),
+        sort=True,
     )
 
     for staff in list(dictionary.keys()):

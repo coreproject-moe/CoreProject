@@ -7,6 +7,7 @@ from shinobi.parser.staff import StaffParser
 from shinobi.utilities.session import session
 
 from ...models import StaffAlternateNameModel, StaffModel
+from ...tasks import get_periodic_staff
 
 
 class Command(BaseCommand):
@@ -21,20 +22,47 @@ class Command(BaseCommand):
             "staff_id",
             type=int,
             help="The staff number to get information for",
+            nargs="?",
+        )
+        parser.add_argument(
+            "--create",
+            action="store_true",
+            help="Flag to indicate that the anime will be created",
+        )
+        parser.add_argument(
+            "--periodic",
+            action="store_true",
+            help="Flag to periodic task will be created",
         )
 
     def handle(self, *args, **options) -> NoReturn:
+        periodic: bool = options["periodic"]
+        if periodic:
+            get_periodic_staff.delay()
+            self.stdout.write("Successfully stated preiodic celery commands")
+            sys.exit(0)
+
         staff_id: int = options["staff_id"]
+        if not staff_id:
+            self.stdout.write(self.style.ERROR("No staff_id provided"))
+            sys.exit(1)
+
+        create: bool = options["create"]
+        if create:
+            staff_instance, _ = StaffModel.objects.get_or_create(mal_id=staff_id)
+
+        else:
+            try:
+                staff_instance = StaffModel.objects.get(mal_id=staff_id)
+
+            except StaffModel.DoesNotExist:
+                self.stdout.write(f"No StaffModel found for {self.style.ERROR(staff_id)}")
+                sys.exit(1)
+
         res = self.client.get(f"https://myanimelist.net/people/{staff_id}")
 
         parser = StaffParser(res.text)
         data_dictionary = parser.build_dictionary()
-
-        try:
-            staff_instance = StaffModel.objects.get(mal_id=staff_id)
-        except StaffModel.DoesNotExist:
-            self.stdout.write(f"No StaffModel found for {self.style.ERROR(staff_id)}")
-            sys.exit(1)
 
         if alternate_name := data_dictionary.pop("alternate_name"):
             for name in alternate_name:
