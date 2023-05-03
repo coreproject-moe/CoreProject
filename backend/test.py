@@ -1,3 +1,3 @@
-from shinobi.builder.character import CharacterBuilder
+url = "https:/eexample.com/a.png"
 
-x = CharacterBuilder().build_dictionary()
+print(url.split(".")[-1])

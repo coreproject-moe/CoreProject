@@ -9,6 +9,8 @@ from requests_cache import RedisCache  # type: ignore
 from requests_ratelimiter import LimiterMixin, RedisBucket
 from urllib3.util import Retry
 
+import os
+
 
 class CachedLimiterSession(LimiterMixin, Session):
     """
@@ -43,7 +45,7 @@ retry_strategy = Retry(
     status_forcelist=RETRY_STATUSES,
 )
 adapter = HTTPAdapter(max_retries=retry_strategy)
-redis_pool = ConnectionPool(host="redis", port=6379, db=5)
+redis_pool = ConnectionPool.from_url(os.environ.get("REDIS_URL", "redis://localhost:6379"))
 
 session = CachedLimiterSession(
     bucket_class=RedisBucket,

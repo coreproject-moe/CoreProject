@@ -37,20 +37,18 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options) -> NoReturn:
-        character_id: int = options["character_id"]
-        create: bool = options["create"]
         periodic: bool = options["periodic"]
-
         if periodic:
             get_perodic_character.delay()
             self.stdout.write(f"Successfully stated preiodic celery commands")
             sys.exit(0)
 
-        res = self.client.get(f"https://myanimelist.net/character/{character_id}")
+        character_id: int = options["character_id"]
+        if not character_id:
+            self.stdout.write(self.style.ERROR("No character_id provided"))
+            sys.exit(1)
 
-        parser = CharacterParser(res.text)
-        data_dictionary = parser.build_dictionary()
-
+        create: bool = options["create"]
         if create:
             character_instance, _ = CharacterModel.objects.get_or_create(
                 mal_id=character_id
@@ -58,25 +56,33 @@ class Command(BaseCommand):
 
         try:
             character_instance = CharacterModel.objects.get(mal_id=character_id)
+
         except CharacterModel.DoesNotExist:
             self.stdout.write(
                 f"No CharacterModel found for {self.style.ERROR(character_id)}"
             )
             sys.exit(1)
 
+        res = self.client.get(f"https://myanimelist.net/character/{character_id}")
+
+        parser = CharacterParser(res.text)
+        data_dictionary = {k: v for k, v in parser.build_dictionary().items() if v}
+
         for attr, value in data_dictionary.items():
             # Special method
             if attr == "character_image":
-                if value:
-                    setattr(
-                        character_instance,
-                        attr,
-                        ImageFile(value, name=f"{character_id}.png"),
-                    )
+                # value is of type ChacaterImage
+                setattr(
+                    character_instance,
+                    attr,
+                    ImageFile(
+                        value["image"],
+                        name=f"{character_id}.{value['mimetype'].lower()}",
+                    ),
+                )
 
             else:
-                if value:
-                    setattr(character_instance, attr, value)
+                setattr(character_instance, attr, value)
 
         character_instance.save()
         self.stdout.write(f"Successfully got info for {self.style.SUCCESS(character_id)}")
