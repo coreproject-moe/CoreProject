@@ -79,7 +79,6 @@ django_stubs = {extras = ["compatible_mypy"], version = "*"}
 types_redis = "*"
 # Task Runner
 poethepoet = "^0.19.0"
-isort = "^5.12.0"
 # Django extensions
 django-extensions = "^3.2.1"
 # pygraphviz = "^1.10"
@@ -155,26 +154,6 @@ explicit_package_bases = true
 
 [tool.django-stubs]
 django_settings_module = "core.settings"
-
-[tool.isort]
-# https://github.com/PyCQA/isort/wiki/isort-Settings
-profile = "black"
-force_sort_within_sections = true
-combine_as_imports = true
-force_grid_wrap = 0
-
-sections = [
-    "FUTURE",
-    "STDLIB",
-    "THIRDPARTY",
-    "FIRSTPARTY",
-    "DJANGO",
-    "LOCALFOLDER"
-]
-
-known_django = [
-    'django',
-]
 
 [tool.ruff]
 line-length = 92
