@@ -1,6 +1,7 @@
 import sys
 from typing import NoReturn
 
+from django.core.files.images import ImageFile
 from django.core.management.base import BaseCommand
 
 from shinobi.parser.staff import StaffParser
@@ -62,7 +63,7 @@ class Command(BaseCommand):
         res = self.client.get(f"https://myanimelist.net/people/{staff_id}")
 
         parser = StaffParser(res.text)
-        data_dictionary = parser.build_dictionary()
+        data_dictionary = {k: v for k, v in parser.build_dictionary().items() if v}
 
         if alternate_name := data_dictionary.pop("alternate_name"):
             for name in alternate_name:
@@ -71,7 +72,17 @@ class Command(BaseCommand):
                     StaffModel.alternate_names.add(instance)
 
         for attr, value in data_dictionary.items():
-            if value:
+            if attr == "staff_image":
+                setattr(
+                    staff_instance,
+                    attr,
+                    ImageFile(
+                        value["image"],
+                        name=f"{staff_id}.{value['mimetype'].lower()}",
+                    ),
+                )
+
+            else:
                 setattr(staff_instance, attr, value)
 
         staff_instance.save()

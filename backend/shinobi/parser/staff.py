@@ -8,12 +8,18 @@ from selectolax.parser import HTMLParser
 from shinobi.decorators.return_error_decorator import return_on_error
 from shinobi.utilities.regex import RegexHelper
 from shinobi.utilities.string import StringHelper
+from io import BytesIO
+
+
+class StaffImageDictionary(TypedDict):
+    image: BytesIO
+    mimetype: str
 
 
 class StaffDictionary(TypedDict):
     mal_id: str
     name: str
-    staff_image: str
+    staff_image: StaffImageDictionary
     given_name: str
     family_name: str
     alternate_name: list[str]
@@ -44,9 +50,15 @@ class StaffParser:
         return self.regex_helper.get_id_from_url(self.get_staff_url)
 
     @property
-    @return_on_error("")
-    def get_staff_image(self) -> str:
-        return self.parser.css_first("meta[property='og:image']").attributes["content"]
+    @return_on_error({})
+    def get_staff_image(self) -> StaffImageDictionary:
+        url = self.parser.css_first("meta[property='og:image']").attributes["content"]
+        if url:
+            res = self.client.get(url)
+            return {
+                "image": BytesIO(res.content),
+                "mimetype": url.split(".")[-1],
+            }
 
     @property
     @return_on_error("")
