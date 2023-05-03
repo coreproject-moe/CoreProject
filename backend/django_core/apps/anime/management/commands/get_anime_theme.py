@@ -1,11 +1,10 @@
 import sys
 from typing import NoReturn
 
-import httpx
+from django.core.management.base import BaseCommand
 
 from shinobi.parser.genre import AnimeGenreParser
-
-from django.core.management.base import BaseCommand
+from shinobi.utilities.session import session
 
 from ...models.anime_theme import AnimeThemeModel
 
@@ -18,7 +17,7 @@ class Command(BaseCommand):
     help = "Django command that gets the Anime Theme Information given mal_id"
 
     def __init__(self, *args, **kwargs) -> None:
-        self.client = httpx.Client()
+        self.client = session
         super().__init__(*args, **kwargs)
 
     def add_arguments(self, parser):
@@ -32,7 +31,7 @@ class Command(BaseCommand):
         theme_id: int = options["theme_id"]
         res = self.client.get(f"https://myanimelist.net/anime/genre/{theme_id}")
 
-        parser = AnimeGenreParser(res.content)
+        parser = AnimeGenreParser(res.text)
         data_dictionary = parser.build_dictionary()
 
         try:

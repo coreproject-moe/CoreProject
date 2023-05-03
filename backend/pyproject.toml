@@ -11,7 +11,8 @@ license = "AGPL-3.0-only"
 python = "^3.11"
 django = {version = '>=4.2', extras = ['argon2']}
 # First Party ( Redis )
-redis = {extras = ['hiredis'], version = ">=4.5.4"}
+# redis = {extras = ['hiredis'], version = ">=4.5.4"}
+redis = {extras = ['hiredis'], version = "*"}
 # First party ( Image )
 pillow = "*"
 # First Party ( Database )
@@ -42,7 +43,10 @@ django_ninja = "*"
 ninja-put-patch-file-upload-middleware = ">=0.1.1"
 pydantic = {extras = ["email"], version = "*"}
 # ===================================================
-httpx = {extras = ['http2'], version = "*"}
+# Http Client
+requests = "^2.29.0"
+requests-ratelimiter = {extras = ["redis"], version = "^0.4.0"}
+requests-cache = "^1.0.1"
 # Application servers
 gunicorn = {extras = ["setproctile"], version = "*"}
 uvicorn = {extras = ["standard"], version = ">=0.21.1"}
@@ -75,7 +79,6 @@ django_stubs = {extras = ["compatible_mypy"], version = "*"}
 types_redis = "*"
 # Task Runner
 poethepoet = "^0.19.0"
-isort = "^5.12.0"
 # Django extensions
 django-extensions = "^3.2.1"
 # pygraphviz = "^1.10"
@@ -152,26 +155,6 @@ explicit_package_bases = true
 [tool.django-stubs]
 django_settings_module = "core.settings"
 
-[tool.isort]
-# https://github.com/PyCQA/isort/wiki/isort-Settings
-profile = "black"
-force_sort_within_sections = true
-combine_as_imports = true
-force_grid_wrap = 0
-
-sections = [
-    "FUTURE",
-    "STDLIB",
-    "THIRDPARTY",
-    "FIRSTPARTY",
-    "DJANGO",
-    "LOCALFOLDER"
-]
-
-known_django = [
-    'django',
-]
-
 [tool.ruff]
 line-length = 92
 
@@ -206,6 +189,11 @@ dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 # Assume Python 3.11
 target-version = "py311"
 
+select = [
+  "E",  # pycodestyle
+  "F",  # pyflakes
+  "I",  # isort
+]
 
 [tool.ruff.per-file-ignores]
 "*/__init__.py" = ["E402",'E501']

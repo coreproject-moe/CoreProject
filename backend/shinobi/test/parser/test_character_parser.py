@@ -1,8 +1,8 @@
-import httpx
+import requests
 
 from shinobi.parser.character import CharacterParser
 
-res = httpx.get("https://myanimelist.net/character/1")
+res = requests.get("https://myanimelist.net/character/1")
 
 
 # noqa: E501

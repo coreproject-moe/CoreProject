@@ -1,11 +1,10 @@
 import string
-import time
 
-import httpx
 from selectolax.parser import HTMLParser
 
 from shinobi.decorators.return_error_decorator import return_on_error
 from shinobi.utilities.regex import RegexHelper
+from shinobi.utilities.session import session
 
 
 class AnimeBuilder:
@@ -14,7 +13,7 @@ class AnimeBuilder:
         self.visited_urls: set[str] = set()
 
         # Reusuable clients
-        self.client = httpx.Client()
+        self.client = session
 
         # Facades
         self.regex_helper = RegexHelper()
@@ -62,26 +61,13 @@ class AnimeBuilder:
             f"https://myanimelist.net/anime.php?letter={letter}" for letter in alphabet_list
         ]
 
-    def __build_urls(self, url: str, delay: int | None = None) -> None:
+    def __build_urls(self, url: str) -> None:
         self.visited_urls.add(url)
 
         res = self.client.get(url)
-        html = res.content
+        html = res.text
 
         anime_nodes = self.get_parser(html).css("a[href*='/anime/']")
-        # MyAnimeList Blocked us
-        # Exponential delay
-        if len(anime_nodes) == 0:
-            if not delay:
-                delay = 2
-
-            if delay > 60:
-                raise TimeoutError(f"Delay raised to {delay}")
-
-            time.sleep(delay)
-
-            delay = delay ^ 2
-            self.__build_urls(url, delay)
 
         for anime_node in anime_nodes:
             anime_href = anime_node.attributes["href"]

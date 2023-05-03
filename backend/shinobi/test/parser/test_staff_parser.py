@@ -1,12 +1,12 @@
 import datetime
 
-import httpx
+import requests
 
 from shinobi.parser.staff import StaffParser
 
 
-def get_staff_res_given_mal_id(mal_id: int) -> httpx.Response:
-    return httpx.get(f"https://myanimelist.net/people/{mal_id}")
+def get_staff_res_given_mal_id(mal_id: int) -> requests.Response:
+    return requests.get(f"https://myanimelist.net/people/{mal_id}")
 
 
 # noqa: E501

@@ -1,11 +1,10 @@
 import string
-import time
 
-import httpx
 from selectolax.parser import HTMLParser
 
 from shinobi.decorators.return_error_decorator import return_on_error
 from shinobi.utilities.regex import RegexHelper
+from shinobi.utilities.session import session
 
 
 class StaffBuilder:
@@ -14,7 +13,7 @@ class StaffBuilder:
         self.visited_urls: set[str] = set()
 
         # Reusuable clients
-        self.client = httpx.Client()
+        self.client = session
 
         # Facades
         self.regex_helper = RegexHelper()
@@ -63,29 +62,16 @@ class StaffBuilder:
             for letter in alphabet_list
         ]
 
-    def __build_urls(self, url: str, delay: int | None = None) -> None:
-        print(url)
+    def __build_urls(self, url: str) -> None:
         self.visited_urls.add(url)
 
         res = self.client.get(url)
-        html = res.content
+        html = res.text
 
         staff_nodes = self.get_parser(html).css("a[href*='/people/']")
 
         # MyAnimeList Blocked us
         # Exponential delay
-        if len(staff_nodes) == 0:
-            if not delay:
-                delay = 2
-
-            if delay > 60:
-                raise TimeoutError(f"Delay raised to {delay}")
-
-            time.sleep(delay)
-
-            delay = delay ^ 2
-            self.__build_urls(url, delay)
-
         for staff_node in staff_nodes:
             staff_href = staff_node.attributes["href"]
             if (

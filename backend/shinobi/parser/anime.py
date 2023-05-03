@@ -2,11 +2,11 @@ import datetime
 from functools import lru_cache
 
 from dateutil import parser
-import httpx
 from selectolax.parser import HTMLParser, Node
 
 from shinobi.decorators.return_error_decorator import return_on_error
 from shinobi.utilities.regex import RegexHelper
+from shinobi.utilities.session import session
 from shinobi.utilities.string import StringHelper
 
 
@@ -42,14 +42,14 @@ class AnimeParser:
         self.string_helper = StringHelper()
 
         # Clients
-        self.client = httpx.Client()
+        self.client = session
 
     @property
     @lru_cache(maxsize=None)
     def __get_character_and_staff_page_content(self) -> str:
         url = self.get_anime_url + "/characters"
         res = self.client.get(url)
-        return res.content
+        return res.text
 
     @property
     @return_on_error("")
@@ -285,6 +285,7 @@ class AnimeParser:
         )
 
     @property
+    @return_on_error({})
     def get_openings(self) -> list[str]:
         node = self.parser.select("h2").text_contains("Opening Theme").matches
 
@@ -310,6 +311,7 @@ class AnimeParser:
         return openings
 
     @property
+    @return_on_error({})
     def get_endings(self) -> list[str]:
         node = self.parser.select("h2").text_contains("Ending Theme").matches
 

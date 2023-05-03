@@ -1,7 +1,7 @@
-import httpx
 from selectolax.parser import HTMLParser
 
 from shinobi.utilities.regex import RegexHelper
+from shinobi.utilities.session import session
 from shinobi.utilities.string import StringHelper
 
 
@@ -10,7 +10,7 @@ class AnimeThemeBuilder:
         self.anchors = []
 
         # Reusuable clients
-        self.client = httpx.Client()
+        self.client = session
 
         # Facades
         self.regex_helper = RegexHelper()
@@ -40,7 +40,7 @@ class AnimeThemeBuilder:
 
     def build_dictionary(self) -> dict[int, str]:
         res = self.client.get("https://myanimelist.net/anime.php")
-        html = res.content
+        html = res.text
 
         urls = self.__build_urls(html)
         ids = self.__build_ids()

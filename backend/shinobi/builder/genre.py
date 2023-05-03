@@ -1,13 +1,13 @@
-import httpx
 from selectolax.parser import HTMLParser
 
 from shinobi.utilities.regex import RegexHelper
+from shinobi.utilities.session import session
 
 
 class AnimeGenreBuilder:
     def __init__(self) -> None:
         # Reusuable Clients
-        self.client = httpx.Client(follow_redirects=True, http2=True)
+        self.client = session
 
         # Facades
         self.regex_helper = RegexHelper()
@@ -30,7 +30,7 @@ class AnimeGenreBuilder:
 
     def build_dictionary(self) -> dict[int, str]:
         res = self.client.get("https://myanimelist.net/anime.php")
-        html = res.content
+        html = res.text
 
         ids = self.__build_ids(html)
         urls = self.__build_urls(ids)

@@ -2,12 +2,11 @@ import logging
 from typing import Any
 
 from apps.user.models import CustomUser
-from ninja.compatibility import get_headers
-from ninja.security import HttpBearer
-
 from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 from django.http import HttpRequest
+from ninja.compatibility import get_headers
+from ninja.security import HttpBearer
 
 from .models import Token
 

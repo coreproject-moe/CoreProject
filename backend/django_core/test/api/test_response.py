@@ -1,9 +1,8 @@
+import pytest
 from apps.api.urls import api
 from apps.characters.models import CharacterModel
-from ninja.testing import TestClient
-import pytest
-
 from django.test import TestCase
+from ninja.testing import TestClient
 
 client = TestClient(api.default_router)
 

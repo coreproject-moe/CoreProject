@@ -1,10 +1,9 @@
 from http import HTTPStatus
 
 from apps.user.models import CustomUser
-from ninja import Form, Router
-
 from django.conf import settings
 from django.http import HttpRequest, HttpResponse, JsonResponse
+from ninja import Form, Router
 
 from ...schemas.user.username_validity import UsernameValiditySchema
 

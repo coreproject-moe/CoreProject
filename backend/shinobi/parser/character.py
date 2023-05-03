@@ -1,19 +1,26 @@
 # Code Owners : `horidesu`, `baseplate-admin`
 # Licensed Under : AGPL-v3
 
+from io import BytesIO
 from typing import TypedDict
 
 from selectolax.parser import HTMLParser
 
 from shinobi.decorators.return_error_decorator import return_on_error
 from shinobi.utilities.regex import RegexHelper
+from shinobi.utilities.session import session
+
+
+class CharacterImageDictionary(TypedDict):
+    image: BytesIO
+    mimetype: str
 
 
 class CharacterDictionary(TypedDict):
     mal_id: str
     name: str
     name_kanji: str
-    character_image: str
+    character_image: CharacterImageDictionary
     about: str
 
 
@@ -23,6 +30,8 @@ class CharacterParser:
 
         # Facades
         self.regex_helper = RegexHelper()
+
+        self.client = session
 
     @staticmethod
     def get_parser(html: str) -> HTMLParser:
@@ -62,7 +71,13 @@ class CharacterParser:
     @property
     @return_on_error("")
     def get_character_image(self):
-        return self.parser.css_first("meta[property='og:image']").attributes["content"]
+        url = self.parser.css_first("meta[property='og:image']").attributes["content"]
+        if url:
+            res = self.client.get(url)
+            return {
+                "image": BytesIO(res.content),
+                "mimetype": url.split(".")[-1],
+            }
 
     def build_dictionary(self) -> CharacterDictionary:
         dictionary: CharacterDictionary = {

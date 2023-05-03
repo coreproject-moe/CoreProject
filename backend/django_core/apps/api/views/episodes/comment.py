@@ -1,9 +1,8 @@
 from apps.api.auth import AuthBearer
 from apps.episodes.models.episode_comment import EpisodeCommentModel
-from ninja import Router
-
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
+from ninja import Router
 
 from ...schemas.episodes.episode_comment import (
     EpisodeCommentGETSchema,

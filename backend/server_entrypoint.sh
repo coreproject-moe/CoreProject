@@ -16,8 +16,11 @@ done
 
 python manage.py collectstatic --clear --link --no-input
 
+# Change ownership
+chown -R nobody:nogroup /code/django_core/media
+
 # python manage.py createsuperuser --noinput
-gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000 --access-logfile /code/logs/gunicorn.log --error-logfile -
+gunicorn core.asgi:application -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000 --access-logfile /code/logs/gunicorn.log --error-logfile - --user nobody --group nogroup
 
 # for debug
 #python manage.py runserver 0.0.0.0:8000

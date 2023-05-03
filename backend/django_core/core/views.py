@@ -1,8 +1,7 @@
-from utilities.format import format_kokoro_color
-
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.templatetags.static import static
+from utilities.format import format_kokoro_color
 
 ERROR_DICT = {
     400: {
@@ -78,7 +77,8 @@ def home_view(request: HttpRequest) -> HttpResponse:
             },
             "requests": {
                 "type": "HTTP Request library",
-                "description": "Requests is an elegant and simple HTTP library for Python, built for human beings.",
+                "description": "Requests is an elegant and simple HTTP library for Python,\
+                    built for human beings.",
                 "logo": static("images/logos/requests.png"),
             },
             "celery": {

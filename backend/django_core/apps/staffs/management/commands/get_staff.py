@@ -1,11 +1,10 @@
 import sys
 from typing import NoReturn
 
-import httpx
+from django.core.management.base import BaseCommand
 
 from shinobi.parser.staff import StaffParser
-
-from django.core.management.base import BaseCommand
+from shinobi.utilities.session import session
 
 from ...models import StaffAlternateNameModel, StaffModel
 
@@ -14,7 +13,7 @@ class Command(BaseCommand):
     help = "Django command that gets the Staff Information given mal_id"
 
     def __init__(self, *args, **kwargs) -> None:
-        self.client = httpx.Client()
+        self.client = session
         super().__init__(*args, **kwargs)
 
     def add_arguments(self, parser):
@@ -28,7 +27,7 @@ class Command(BaseCommand):
         staff_id: int = options["staff_id"]
         res = self.client.get(f"https://myanimelist.net/people/{staff_id}")
 
-        parser = StaffParser(res.content)
+        parser = StaffParser(res.text)
         data_dictionary = parser.build_dictionary()
 
         try:

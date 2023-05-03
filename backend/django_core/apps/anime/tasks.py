@@ -1,22 +1,25 @@
 import math
+from typing import NoReturn
 
-from PIL import Image, ImageStat
 from celery import shared_task
 from colorthief import ColorThief
+from django.core.management import call_command
+from django.db.models import Q
+from django.utils import timezone
+from PIL import Image, ImageStat
 from utilities.rgb_to_hex import rgb_to_hex
 
+from shinobi.builder.anime import AnimeBuilder
 from shinobi.builder.genre import AnimeGenreBuilder
 from shinobi.builder.theme import AnimeThemeBuilder
-
-from django.core.management import call_command
 
 from .models import AnimeModel
 
 # Beat tasks
 
 
-@shared_task
-def get_preiodic_anime_genres():
+@shared_task()
+def get_periodic_anime_genres():
     builder = AnimeGenreBuilder()
     dictionary = builder.build_dictionary()
 
@@ -24,8 +27,8 @@ def get_preiodic_anime_genres():
         call_anime_genre_command.delay(genre)
 
 
-@shared_task
-def get_preiodic_anime_themes():
+@shared_task()
+def get_periodic_anime_themes():
     builder = AnimeThemeBuilder()
     dictionary = builder.build_dictionary()
 
@@ -33,15 +36,35 @@ def get_preiodic_anime_themes():
         call_anime_theme_command.delay(theme)
 
 
+@shared_task()
+def get_periodic_anime():
+    builder = AnimeBuilder()
+    instances = AnimeModel.objects.filter(
+        Q(updated_at__gte=timezone.now() - timezone.timedelta(days=7)) & Q(is_locked=False)
+    )
+
+    dictionary = builder.build_dictionary(
+        excluded_ids=instances.values_list("pk", flat=True)
+    )
+
+    for anime in list(dictionary.keys()):
+        call_anime_command.delay(anime)
+
+
 # Calls
 @shared_task()
-def call_anime_genre_command(id: int):
-    call_command("get_anime_genre", genre_id=id)
+def call_anime_genre_command(id: int) -> NoReturn:
+    call_command("get_anime_genre", id)
 
 
 @shared_task()
-def call_anime_theme_command(id: int):
-    call_command("get_anime_theme", theme_id=id)
+def call_anime_theme_command(id: int) -> NoReturn:
+    call_command("get_anime_theme", id)
+
+
+@shared_task()
+def call_anime_command(id: int) -> NoReturn:
+    call_command("get_anime", id, create=True)
 
 
 # Setters
@@ -52,7 +75,7 @@ def set_field_color(
     pk: int,
     field_name: str,
     image_field_name: str,
-) -> None:
+) -> NoReturn:
     instance = AnimeModel.objects.get(pk=pk)
 
     if image_field := getattr(instance, image_field_name):
@@ -72,7 +95,7 @@ def set_field_brightness(
     pk: int,
     field_name: str,
     image_field_name: str,
-) -> None:
+) -> NoReturn:
     instance = AnimeModel.objects.get(pk=pk)
 
     if image_field := getattr(instance, image_field_name):

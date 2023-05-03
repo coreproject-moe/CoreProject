@@ -4,15 +4,15 @@ from typing import NoReturn
 from apps.characters.models import CharacterModel
 from apps.producers.models import ProducerModel
 from apps.staffs.models import StaffModel
-import httpx
+from django.core.management.base import BaseCommand
 
 from shinobi.parser.anime import AnimeParser
-
-from django.core.management.base import BaseCommand
+from shinobi.utilities.session import session
 
 from ...models import AnimeModel, AnimeNameSynonymModel
 from ...models.anime_genre import AnimeGenreModel
 from ...models.anime_theme import AnimeThemeModel
+from ...tasks import get_periodic_anime
 
 
 class Command(BaseCommand):
@@ -23,7 +23,7 @@ class Command(BaseCommand):
     help = "Django command that gets the Anime Information given mal_id"
 
     def __init__(self, *args, **kwargs) -> None:
-        self.client = httpx.Client()
+        self.client = session
         super().__init__(*args, **kwargs)
 
     def add_arguments(self, parser):
@@ -37,18 +37,27 @@ class Command(BaseCommand):
             action="store_true",
             help="Flag to indicate that the anime will be created",
         )
+        parser.add_argument(
+            "--periodic",
+            action="store_true",
+            help="Flag to periodic task will be created",
+        )
 
     def handle(self, *args, **options) -> NoReturn:
+        periodic: bool = options.get("periodic")
+        if periodic:
+            get_periodic_anime.delay()
+            self.stdout.write("Successfully stated preiodic celery commands")
+            sys.exit(0)
+
         anime_id: int = options["anime_id"]
+        if not anime_id:
+            self.stdout.write(self.style.ERROR("No anime_id provided"))
+            sys.exit(1)
+
         create: bool = options.get("create")
-
-        res = self.client.get(f"https://myanimelist.net/anime/{anime_id}/")
-
-        parser = AnimeParser(res.content)
-        data_dictionary = parser.build_dictionary()
-
         if create:
-            anime_instance = AnimeModel.objects.create(mal_id=anime_id)
+            anime_instance, _ = AnimeModel.objects.get_or_create(mal_id=anime_id)
 
         else:
             try:
@@ -56,6 +65,12 @@ class Command(BaseCommand):
             except AnimeModel.DoesNotExist:
                 self.stdout.write(f"No AnimeModel found for {self.style.ERROR(anime_id)}")
                 sys.exit(1)
+
+        res = self.client.get(f"https://myanimelist.net/anime/{anime_id}/")
+
+        parser = AnimeParser(res.text)
+        data_dictionary = {k: v for k, v in parser.build_dictionary().items() if v}
+
         if alternate_name := data_dictionary.pop("name_synonyms"):
             for name in alternate_name:
                 (
@@ -99,8 +114,7 @@ class Command(BaseCommand):
         data_dictionary.pop("endings")
 
         for attr, value in data_dictionary.items():
-            if value:
-                setattr(anime_instance, attr, value)
+            setattr(anime_instance, attr, value)
 
         anime_instance.save()
         self.stdout.write(f"Successfully got info for {self.style.SUCCESS(anime_id)}")

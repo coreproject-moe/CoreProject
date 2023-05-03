@@ -10,13 +10,12 @@ from apps.characters.models import CharacterModel
 from apps.producers.models import ProducerModel
 from apps.staffs.models import StaffModel
 from apps.user.models import CustomUser
-from ninja import File, Form, Query, Router, UploadedFile
-from ninja.pagination import paginate
-
 from django.db.models import Q, QuerySet
 from django.db.models.functions import Greatest
 from django.http import Http404, HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
+from ninja import File, Form, Query, Router, UploadedFile
+from ninja.pagination import paginate
 
 try:
     from django.contrib.postgres.search import TrigramSimilarity

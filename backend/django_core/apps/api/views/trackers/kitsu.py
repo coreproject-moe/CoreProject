@@ -1,9 +1,8 @@
 from apps.trackers.models import KitsuModel
-from ninja import Router
-
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
+from ninja import Router
 
 from ...schemas.trackers.kitsu import KitsuGETSchema, KitsuPOSTSchema
 

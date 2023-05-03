@@ -3,14 +3,13 @@
 import functools
 
 import apps.user.validators.username
-import dynamic_filenames
-
-from django.conf import settings
 import django.core.validators
-from django.db import migrations, models
 import django.db.models.deletion
 import django.utils.crypto
 import django.utils.timezone
+import dynamic_filenames
+from django.conf import settings
+from django.db import migrations, models
 
 
 class Migration(migrations.Migration):

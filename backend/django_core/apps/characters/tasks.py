@@ -1,10 +1,9 @@
 from celery import shared_task
-
-from shinobi.builder.character import CharacterBuilder
-
 from django.core.management import call_command
 from django.db.models import Q
 from django.utils import timezone
+
+from shinobi.builder.character import CharacterBuilder
 
 from .models import CharacterModel
 
@@ -19,7 +18,8 @@ def get_perodic_character():
         Q(updated_at__gte=timezone.now() - timezone.timedelta(days=7)) & Q(is_locked=False)
     )
     dictionary = builder.build_dictionary(
-        excluded_ids=instances.values_list("pk", flat=True)
+        excluded_ids=instances.values_list("pk", flat=True),
+        sort=True,
     )
 
     for character in list(dictionary.keys()):
@@ -31,4 +31,4 @@ def get_perodic_character():
 
 @shared_task()
 def call_character_command(id: int):
-    call_command("get_character", character_id=id)
+    call_command("get_character", id, create=True)

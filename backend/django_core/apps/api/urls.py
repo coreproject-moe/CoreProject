@@ -1,7 +1,6 @@
-from ninja import NinjaAPI
-
 from django.urls import path
 from django.utils.module_loading import import_string
+from ninja import NinjaAPI
 
 from .parser import CustomParser
 
