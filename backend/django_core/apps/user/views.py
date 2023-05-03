@@ -47,8 +47,7 @@ async def avatar_view(
 
         def streaming_content():
             # Iterate over the response content, and yield it in chunks
-            for chunk in _request_.iter_content(chunk_size=1024):
-                yield chunk
+            yield from _request_.iter_content(chunk_size=1024)
 
         return StreamingHttpResponse(
             streaming_content(),
