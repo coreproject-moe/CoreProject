@@ -8,7 +8,7 @@ from shinobi.parser.character import CharacterParser
 from shinobi.utilities.session import session
 
 from ...models import CharacterModel
-from ...tasks import get_perodic_character
+from ...tasks import get_periodic_character
 
 
 class Command(BaseCommand):
@@ -39,7 +39,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options) -> NoReturn:
         periodic: bool = options["periodic"]
         if periodic:
-            get_perodic_character.delay()
+            get_periodic_character.delay()
             self.stdout.write("Successfully stated preiodic celery commands")
             sys.exit(0)
 
@@ -54,14 +54,15 @@ class Command(BaseCommand):
                 mal_id=character_id
             )
 
-        try:
-            character_instance = CharacterModel.objects.get(mal_id=character_id)
+        else:
+            try:
+                character_instance = CharacterModel.objects.get(mal_id=character_id)
 
-        except CharacterModel.DoesNotExist:
-            self.stdout.write(
-                f"No CharacterModel found for {self.style.ERROR(character_id)}"
-            )
-            sys.exit(1)
+            except CharacterModel.DoesNotExist:
+                self.stdout.write(
+                    f"No CharacterModel found for {self.style.ERROR(character_id)}"
+                )
+                sys.exit(1)
 
         res = self.client.get(f"https://myanimelist.net/character/{character_id}")
 

@@ -11,12 +11,23 @@ from .models import CharacterModel
 
 
 @shared_task()
-def get_perodic_character():
+def get_periodic_character():
     builder = CharacterBuilder()
 
+    # TODO Order the first query higher
     instances = CharacterModel.objects.filter(
-        Q(updated_at__gte=timezone.now() - timezone.timedelta(days=7)) & Q(is_locked=False)
+        (
+            (
+                Q(name__isnull=True)
+                | Q(name_kanji__isnull=True)
+                | Q(character_image__isnull=True)
+                | Q(about__isnull=True)
+            )
+            | (Q(updated_at__gte=timezone.now() - timezone.timedelta(days=14)))
+        )
+        & Q(is_locked=False)
     )
+
     dictionary = builder.build_dictionary(
         excluded_ids=instances.values_list("pk", flat=True),
         sort=True,
