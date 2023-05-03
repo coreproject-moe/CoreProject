@@ -285,6 +285,7 @@ class AnimeParser:
         )
 
     @property
+    @return_on_error({})
     def get_openings(self) -> list[str]:
         node = self.parser.select("h2").text_contains("Opening Theme").matches
 
@@ -310,6 +311,7 @@ class AnimeParser:
         return openings
 
     @property
+    @return_on_error({})
     def get_endings(self) -> list[str]:
         node = self.parser.select("h2").text_contains("Ending Theme").matches
 

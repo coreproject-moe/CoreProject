@@ -45,20 +45,18 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options) -> NoReturn:
-        anime_id: int = options["anime_id"]
-        create: bool = options.get("create")
         periodic: bool = options.get("periodic")
-
         if periodic:
             get_periodic_anime.delay()
             self.stdout.write(f"Successfully stated preiodic celery commands")
             sys.exit(0)
 
-        res = self.client.get(f"https://myanimelist.net/anime/{anime_id}/")
+        anime_id: int = options["anime_id"]
+        if not anime_id:
+            self.stdout.write(self.style.ERROR("No anime_id provided"))
+            sys.exit(1)
 
-        parser = AnimeParser(res.text)
-        data_dictionary = parser.build_dictionary()
-
+        create: bool = options.get("create")
         if create:
             anime_instance, _ = AnimeModel.objects.get_or_create(mal_id=anime_id)
 
@@ -68,6 +66,11 @@ class Command(BaseCommand):
             except AnimeModel.DoesNotExist:
                 self.stdout.write(f"No AnimeModel found for {self.style.ERROR(anime_id)}")
                 sys.exit(1)
+
+        res = self.client.get(f"https://myanimelist.net/anime/{anime_id}/")
+
+        parser = AnimeParser(res.text)
+        data_dictionary = {k: v for k, v in parser.build_dictionary().items() if v}
 
         if alternate_name := data_dictionary.pop("name_synonyms"):
             for name in alternate_name:
@@ -112,8 +115,7 @@ class Command(BaseCommand):
         data_dictionary.pop("endings")
 
         for attr, value in data_dictionary.items():
-            if value:
-                setattr(anime_instance, attr, value)
+            setattr(anime_instance, attr, value)
 
         anime_instance.save()
         self.stdout.write(f"Successfully got info for {self.style.SUCCESS(anime_id)}")
