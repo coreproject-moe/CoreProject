@@ -1,9 +1,8 @@
+from django.contrib.postgres.fields import HStoreField
+from django.db import models
 from dynamic_filenames import FilePattern
 from mixins.models.created_at import CreatedAtMixin
 from mixins.models.updated_at import UpdatedAtMixin
-
-from django.contrib.postgres.fields import HStoreField
-from django.db import models
 
 from .episode_comment import EpisodeCommentModel
 from .episode_timestamp import EpisodeTimestampModel

@@ -4,11 +4,10 @@ from typing import NoReturn
 from apps.characters.models import CharacterModel
 from apps.producers.models import ProducerModel
 from apps.staffs.models import StaffModel
+from django.core.management.base import BaseCommand
 
 from shinobi.parser.anime import AnimeParser
 from shinobi.utilities.session import session
-
-from django.core.management.base import BaseCommand
 
 from ...models import AnimeModel, AnimeNameSynonymModel
 from ...models.anime_genre import AnimeGenreModel
@@ -48,7 +47,7 @@ class Command(BaseCommand):
         periodic: bool = options.get("periodic")
         if periodic:
             get_periodic_anime.delay()
-            self.stdout.write(f"Successfully stated preiodic celery commands")
+            self.stdout.write("Successfully stated preiodic celery commands")
             sys.exit(0)
 
         anime_id: int = options["anime_id"]

@@ -1,11 +1,11 @@
 import sys
 from typing import NoReturn
 
+from django.core.files.images import ImageFile
+from django.core.management.base import BaseCommand
+
 from shinobi.parser.character import CharacterParser
 from shinobi.utilities.session import session
-
-from django.core.management.base import BaseCommand
-from django.core.files.images import ImageFile
 
 from ...models import CharacterModel
 from ...tasks import get_perodic_character
@@ -40,7 +40,7 @@ class Command(BaseCommand):
         periodic: bool = options["periodic"]
         if periodic:
             get_perodic_character.delay()
-            self.stdout.write(f"Successfully stated preiodic celery commands")
+            self.stdout.write("Successfully stated preiodic celery commands")
             sys.exit(0)
 
         character_id: int = options["character_id"]

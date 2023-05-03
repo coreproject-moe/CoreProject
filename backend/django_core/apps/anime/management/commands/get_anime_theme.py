@@ -1,10 +1,10 @@
 import sys
 from typing import NoReturn
 
+from django.core.management.base import BaseCommand
+
 from shinobi.parser.genre import AnimeGenreParser
 from shinobi.utilities.session import session
-
-from django.core.management.base import BaseCommand
 
 from ...models.anime_theme import AnimeThemeModel
 

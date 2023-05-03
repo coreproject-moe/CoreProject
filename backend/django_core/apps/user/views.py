@@ -1,9 +1,8 @@
 import hashlib
-from http import HTTPStatus
 import textwrap
+from http import HTTPStatus
 
 import requests
-
 from django.conf import settings
 from django.core.management.utils import get_random_secret_key
 from django.core.validators import URLValidator

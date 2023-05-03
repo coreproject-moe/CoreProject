@@ -1,6 +1,5 @@
-from ninja import Router
-
 from django.http import HttpRequest
+from ninja import Router
 
 from ....anime.models import AnimeModel
 from ...auth import OptionalAuthBearer

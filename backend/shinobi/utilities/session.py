@@ -1,3 +1,4 @@
+import os
 from typing import Any
 
 from redis import ConnectionPool
@@ -8,8 +9,6 @@ from requests.utils import DEFAULT_ACCEPT_ENCODING
 from requests_cache import RedisCache  # type: ignore
 from requests_ratelimiter import LimiterMixin, RedisBucket
 from urllib3.util import Retry
-
-import os
 
 
 class CachedLimiterSession(LimiterMixin, Session):

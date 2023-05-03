@@ -1,8 +1,7 @@
 from apps.user.models import CustomUser
-from ninja import ModelSchema
-
 from django.contrib.auth import get_user_model
 from django.urls import reverse_lazy
+from ninja import ModelSchema
 
 
 class UserSchema(ModelSchema):

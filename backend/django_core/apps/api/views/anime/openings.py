@@ -3,11 +3,10 @@ from http import HTTPStatus
 from apps.anime.models.anime_openings_and_endings import AnimeOpeningModel
 from apps.api.auth import AuthBearer
 from apps.user.models import CustomUser
+from django.http import HttpRequest, HttpResponse
 from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from pydantic import AnyUrl
-
-from django.http import HttpRequest, HttpResponse
 
 from ...filters.openings_and_endings import OpeningAndEndingFilter
 from ...schemas.anime.anime_opening_and_ending import AnimeOpeningAndEndingGETSchema

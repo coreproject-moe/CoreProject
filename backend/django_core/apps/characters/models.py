@@ -1,9 +1,8 @@
+from django.db import models
 from dynamic_filenames import FilePattern
 from mixins.models.created_at import CreatedAtMixin
 from mixins.models.is_locked import IsLockedMixin
 from mixins.models.updated_at import UpdatedAtMixin
-
-from django.db import models
 
 anime_charaters_pattern = FilePattern(filename_pattern="characters/{uuid:s}{ext}")
 

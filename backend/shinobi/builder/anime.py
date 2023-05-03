@@ -1,5 +1,4 @@
 import string
-import time
 
 from selectolax.parser import HTMLParser
 

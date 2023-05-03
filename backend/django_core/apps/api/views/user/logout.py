@@ -1,7 +1,6 @@
 from apps.api.models import Token
-from ninja import Router
-
 from django.http import HttpRequest, HttpResponse
+from ninja import Router
 
 from ...auth import AuthBearer
 

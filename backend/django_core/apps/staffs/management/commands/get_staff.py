@@ -1,10 +1,10 @@
 import sys
 from typing import NoReturn
 
+from django.core.management.base import BaseCommand
+
 from shinobi.parser.staff import StaffParser
 from shinobi.utilities.session import session
-
-from django.core.management.base import BaseCommand
 
 from ...models import StaffAlternateNameModel, StaffModel
 

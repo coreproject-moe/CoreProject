@@ -1,18 +1,17 @@
 import math
 from typing import NoReturn
 
-from PIL import Image, ImageStat
 from celery import shared_task
 from colorthief import ColorThief
+from django.core.management import call_command
+from django.db.models import Q
+from django.utils import timezone
+from PIL import Image, ImageStat
 from utilities.rgb_to_hex import rgb_to_hex
 
 from shinobi.builder.anime import AnimeBuilder
 from shinobi.builder.genre import AnimeGenreBuilder
 from shinobi.builder.theme import AnimeThemeBuilder
-
-from django.core.management import call_command
-from django.db.models import Q
-from django.utils import timezone
 
 from .models import AnimeModel
 

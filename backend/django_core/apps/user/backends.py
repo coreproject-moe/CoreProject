@@ -2,7 +2,6 @@ import contextlib
 from typing import Any, cast
 
 from apps.user.models import CustomUser
-
 from django.contrib.auth.backends import ModelBackend
 from django.contrib.auth.models import AbstractBaseUser
 from django.db.models import Q

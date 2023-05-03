@@ -1,12 +1,11 @@
 from core.utilities.CachedLimiterSession import CachedLimiterSession
+from django.conf import settings
+from django.db.models import F
+from django.utils import timezone
 from huey import crontab
 from huey.contrib.djhuey import db_periodic_task
 from requests_cache import RedisCache
 from requests_ratelimiter import RedisBucket
-
-from django.conf import settings
-from django.db.models import F
-from django.utils import timezone
 
 from ...models import MalModel
 from ..__logger__ import logger

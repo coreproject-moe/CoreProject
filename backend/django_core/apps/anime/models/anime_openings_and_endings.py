@@ -1,6 +1,5 @@
-from dynamic_filenames import FilePattern
-
 from django.db import models
+from dynamic_filenames import FilePattern
 
 opening_upload_pattern = FilePattern(filename_pattern="opening/{uuid:s}{ext}")
 ending_upload_pattern = FilePattern(filename_pattern="ending/{uuid:s}{ext}")
