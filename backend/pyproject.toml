@@ -78,7 +78,7 @@ django_stubs = {extras = ["compatible_mypy"], version = "*"}
 # Types
 types_redis = "*"
 # Task Runner
-poethepoet = "^0.19.0"
+poethepoet = "^0.20.0"
 # Django extensions
 django-extensions = "^3.2.1"
 # pygraphviz = "^1.10"
