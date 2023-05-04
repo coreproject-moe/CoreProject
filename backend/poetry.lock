@@ -1404,14 +1404,14 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "poethepoet"
-version = "0.19.0"
+version = "0.20.0"
 description = "A task runner that works well with poetry."
 category = "dev"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "poethepoet-0.19.0-py3-none-any.whl", hash = "sha256:87038be589077e4b407050a9da644d9cd9e4076ccfc8abc7f855cf6870d5c6c2"},
-    {file = "poethepoet-0.19.0.tar.gz", hash = "sha256:897eb85ec15876d79befc7d19d4c80ce7c8b214d1bb0dcfec640abd81616bfed"},
+    {file = "poethepoet-0.20.0-py3-none-any.whl", hash = "sha256:cb37be15f3895ccc65ddf188c2e3d8fb79e26cc9d469a6098cb1c6f994659f6f"},
+    {file = "poethepoet-0.20.0.tar.gz", hash = "sha256:ca5a2a955f52dfb0a53fad3c989ef0b69ce3d5ec0f6bfa9b1da1f9e32d262e20"},
 ]
 
 [package.dependencies]
@@ -2338,4 +2338,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "3b6b8fe8f507f9dcfe324aa66545191080008a6082e169dd4a84d61cd77d7843"
+content-hash = "baa741f9042919c6c4415d9657a6954dc33f03ced99e8260f3ebe2fcf5dd57de"
