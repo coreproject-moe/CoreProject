@@ -217,14 +217,14 @@ attrs = ">=20"
 
 [[package]]
 name = "celery"
-version = "5.3.0b2"
+version = "5.3.0rc1"
 description = "Distributed Task Queue."
 category = "main"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "celery-5.3.0b2-py3-none-any.whl", hash = "sha256:b034f1e6475a90cf3e8c47357f132d0ed23fede22206ef5fc78b91f40f43ad67"},
-    {file = "celery-5.3.0b2.tar.gz", hash = "sha256:9ca1c46c40a5fd0946783d3a5a1ee532e283a586b1eeebd88a40a17af757a875"},
+    {file = "celery-5.3.0rc1-py3-none-any.whl", hash = "sha256:3afa81e7c6393097a4079badc11117ac20a1bf145c92ae5f1cc3ed24c2b1f165"},
+    {file = "celery-5.3.0rc1.tar.gz", hash = "sha256:0f104775617974c9a108857c883dd5a5b0a9058278bccf1881ff5d3317fa15ab"},
 ]
 
 [package.dependencies]
@@ -233,22 +233,22 @@ click = ">=8.1.2,<9.0"
 click-didyoumean = ">=0.3.0"
 click-plugins = ">=1.1.1"
 click-repl = ">=0.2.0"
-kombu = ">=5.3.0b2,<6.0"
-pytz = ">=2021.3"
-redis = {version = ">=4.2.2,<4.4.0", optional = true, markers = "extra == \"redis\""}
+kombu = ">=5.3.0b3,<6.0"
+redis = {version = ">=4.3.6,<4.4.0", optional = true, markers = "extra == \"redis\""}
+tzdata = ">=2022.7"
 vine = ">=5.0.0,<6.0"
 
 [package.extras]
 arangodb = ["pyArango (>=2.0.1)"]
-auth = ["cryptography (==39.0.0)"]
-azureblockblob = ["azure-storage-blob (>=12.11.0)"]
+auth = ["cryptography (==40.0.1)"]
+azureblockblob = ["azure-storage-blob (>=12.15.0)"]
 brotli = ["brotli (>=1.0.0)", "brotlipy (>=0.7.0)"]
 cassandra = ["cassandra-driver (>=3.25.0,<4)"]
 consul = ["python-consul2 (==0.1.5)"]
 cosmosdbsql = ["pydocumentdb (==2.3.5)"]
 couchbase = ["couchbase (>=3.0.0)"]
 couchdb = ["pycouchdb (==1.14.2)"]
-django = ["Django (>=1.11)"]
+django = ["Django (>=2.2.28)"]
 dynamodb = ["boto3 (>=1.22.2)"]
 elasticsearch = ["elasticsearch (<8.0)"]
 eventlet = ["eventlet (>=0.32.0)"]
@@ -256,20 +256,20 @@ gevent = ["gevent (>=1.5.0)"]
 librabbitmq = ["librabbitmq (>=1.5.0)"]
 memcache = ["pylibmc (==1.6.3)"]
 mongodb = ["pymongo[srv] (>=4.0.2)"]
-msgpack = ["msgpack (==1.0.4)"]
+msgpack = ["msgpack (==1.0.5)"]
 pymemcache = ["python-memcached (==1.59)"]
-pyro = ["pyro4 (==4.82)"]
+pyro = ["pyro5"]
 pytest = ["pytest-celery (==0.0.0)"]
-redis = ["redis (>=4.2.2,<4.4.0)"]
-s3 = ["boto3 (>=1.9.125)"]
+redis = ["redis (>=4.3.6,<4.4.0)"]
+s3 = ["boto3 (==1.26.110)"]
 slmq = ["softlayer-messaging (>=1.0.3)"]
-solar = ["ephem (>=4.1.3,<4.2.0)"]
-sqlalchemy = ["sqlalchemy (==1.4.45)"]
-sqs = ["kombu[sqs] (>=5.2.4,<5.3.0)"]
+solar = ["ephem (==4.1.4)"]
+sqlalchemy = ["sqlalchemy (>=1.4.47,<2.0)"]
+sqs = ["kombu[sqs] (>=5.3.0b3,<5.4.0)"]
 tblib = ["tblib (>=1.3.0)", "tblib (>=1.5.0)"]
 yaml = ["PyYAML (>=3.10)"]
 zookeeper = ["kazoo (>=1.3.1)"]
-zstd = ["zstandard (==0.19.0)"]
+zstd = ["zstandard (==0.20.0)"]
 
 [[package]]
 name = "certifi"
@@ -1676,7 +1676,7 @@ cli = ["click (>=5.0)"]
 name = "pytz"
 version = "2023.3"
 description = "World timezone definitions, modern and historical"
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 files = [
