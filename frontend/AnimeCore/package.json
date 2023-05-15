@@ -49,7 +49,7 @@
         "postcss-preset-env": "^8.3.2",
         "prettier": "^2.8.8",
         "prettier-plugin-svelte": "^2.10.0",
-        "prettier-plugin-tailwindcss": "^0.2.8",
+        "prettier-plugin-tailwindcss": "^0.3.0",
         "sass": "^1.62.1",
         "svelte": "^3.59.1",
         "svelte-check": "^3.3.2",
