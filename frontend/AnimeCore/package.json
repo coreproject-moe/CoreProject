@@ -63,7 +63,7 @@
         "typescript": "^5.0.4",
         "uuid": "^9.0.0",
         "vite": "4.3.7",
-        "voca": "^1.4.0"
+        "voca": "^1.4.1"
     },
     "type": "module"
 }
