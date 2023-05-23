@@ -14,7 +14,7 @@
    <br>
    Site is in v2 UI -
    Check <a href="https://core-project-v3-ui.vercel.app">v3 UI</a> |
-   <a href="https://github.com/sssuneeth/CoreProject-V3-UI/">Working Repo for v3 UI</a>
+   <a href="https://github.com/Tokito69/CoreProject-V3-UI/">Working Repo for v3 UI</a>
     <br><br>
     <a href="https://github.com/baseplate-admin/CoreProject"><strong>Explore the docs »</strong></a>
   </p>
