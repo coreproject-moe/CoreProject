@@ -8,7 +8,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-requests = "^2.30.0"
+requests = "^2.31.0"
 humanize = "^4.6.0"
 termcolor = "^2.3.0"
 requests-cache = {extras = ["redis"], version = "^1.0.1"}
