@@ -44,7 +44,7 @@
         "eslint-plugin-unused-imports": "^2.0.0",
         "felte": "^1.2.7",
         "js-cookie": "^3.0.5",
-        "postcss": "^8.4.23",
+        "postcss": "^8.4.24",
         "postcss-load-config": "4.0.1",
         "postcss-preset-env": "^8.4.1",
         "prettier": "^2.8.8",
