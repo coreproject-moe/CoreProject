@@ -18,7 +18,7 @@ pillow = "*"
 # First Party ( Database )
 psycopg = {extras = ["binary"], version = "^3.1.9"}
 # 3rd Party ( Tree Model )
-django-treenode = "^0.20.0"
+django-treenode = "^0.20.1"
 # 3rd Party ( Files )
 django-dynamic-filenames = "*"
 # 3rd Party ( Brute Force protection )

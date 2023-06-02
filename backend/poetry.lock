@@ -840,14 +840,14 @@ django-browser-reload = ">=1.6.0,<2.0.0"
 
 [[package]]
 name = "django-treenode"
-version = "0.20.0"
+version = "0.20.1"
 description = "probably the best abstract model/admin for your tree based stuff."
 category = "main"
 optional = false
 python-versions = "*"
 files = [
-    {file = "django-treenode-0.20.0.tar.gz", hash = "sha256:a5bfcb46a55c9cad3178bd6470da6f2985077d38df0ccefd2c5d612c6e2dcb44"},
-    {file = "django_treenode-0.20.0-py3-none-any.whl", hash = "sha256:0c57541929233e458224c34e2a3672aaf10781a45554ffa4070046e64b7ec6a6"},
+    {file = "django-treenode-0.20.1.tar.gz", hash = "sha256:ef677b9596a9d6acd6b947a5c91f1440abbc45a36785c91b3e2ffded4c8a318a"},
+    {file = "django_treenode-0.20.1-py3-none-any.whl", hash = "sha256:f41ad5c25145123892aa3620de308c0af424ed15c54722959e0fab66c89b9433"},
 ]
 
 [[package]]
@@ -2288,4 +2288,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "61b52c51c568cb54670160b4fa7302b942ba57b2c09d0a6992469cc27a83c38c"
+content-hash = "454dc17ef4d379e032fc17de50aee0f77d2b4637bfd832dc949da57962373f84"
