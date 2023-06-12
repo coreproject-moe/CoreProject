@@ -33,7 +33,7 @@
         "autoprefixer": "^10.4.14",
         "cross-env": "^7.0.3",
         "cssnano": "^6.0.1",
-        "daisyui": "^3.0.22",
+        "daisyui": "^3.1.0",
         "dayjs": "^1.11.8",
         "detect-browser": "^5.3.0",
         "easytimer.js": "^4.5.4",
