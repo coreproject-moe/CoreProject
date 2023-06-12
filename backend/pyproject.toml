@@ -33,7 +33,7 @@ python_dotenv = "*"
 # 3rd Party ( WhiteNoise )
 whitenoise = {version = "*"}
 # 3rd Party ( Tasks )
-celery = {extras = ["redis"], version = ">=5.3.0b2"}
+celery = {extras = ["redis"], version = ">=5.3.0"}
 # 3rd Party ( Better admin widgets )
 django-admin-hstore-widget = ">=1.2.1"   # https://github.com/PokaInc/django-admin-hstore-widget/pull/25
 # 3rd Party ( Model Fields )
