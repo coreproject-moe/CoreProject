@@ -1,11 +1,13 @@
 # Inspired from https://github.com/UziTech/marked-emoji/blob/ea8c9c2b3ca8dbb9adc5f1f9826fe6cb4178900f/.github/workflows/automerge.yml
 name: 'Automerge'
 on:
-    workflow_run:
-        workflows:
-            - CI
-        types:
-            - completed
+    push:
+        branches: ["master", v2]
+    pull_request:
+        # The branches below must be a subset of the branches above
+        branches: ["master"]
+    schedule:
+        - cron: "41 12 * * 0"
 
 jobs:
     Automerge:
