@@ -1,12 +1,12 @@
 import datetime
 
+from shinobi.utilities.session import session
 import requests
-
 from shinobi.parser.producer import ProducerParser
 
 
 def get_producer_res_given_mal_id(mal_id: int) -> requests.Response:
-    return requests.get(f"https://myanimelist.net/anime/producer/{mal_id}")
+    return session.get(f"https://myanimelist.net/anime/producer/{mal_id}")
 
 
 def test_first_producer_parser():

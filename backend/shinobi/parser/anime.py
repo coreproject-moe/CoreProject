@@ -23,10 +23,8 @@ class AnimeDictionary:
     rating: str
     genres: list[int]
     themes: list[int]
-    characters: list[int]
     studios: list[int]
     producers: list[int]
-    staffs: list[int]
     demographics: list[int]
     recommendations: list[int]
     openings: list[int]
@@ -43,13 +41,6 @@ class AnimeParser:
 
         # Clients
         self.client = session
-
-    @property
-    @lru_cache(maxsize=None)
-    def __get_character_and_staff_page_content(self) -> str:
-        url = self.get_anime_url + "/characters"
-        res = self.client.get(url)
-        return res.text
 
     @property
     @return_on_error("")
@@ -245,32 +236,6 @@ class AnimeParser:
 
     @property
     @return_on_error([])
-    def get_characters(self) -> list[int]:
-        parser = self.get_parser(self.__get_character_and_staff_page_content)
-
-        anchor_tags = parser.css("a[href*='/character/']")
-        return sorted(
-            {
-                self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
-                for anchor in anchor_tags
-            }
-        )
-
-    @property
-    @return_on_error([])
-    def get_staffs(self) -> list[int]:
-        parser = self.get_parser(self.__get_character_and_staff_page_content)
-
-        anchor_tags = parser.css("a[href*='/people/']")
-        return sorted(
-            {
-                self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
-                for anchor in anchor_tags
-            }
-        )
-
-    @property
-    @return_on_error([])
     def get_demographics(self) -> list[int]:
         node = self.parser.select("span").text_contains("Demographic:").matches
         if len(node) > 1:
@@ -350,10 +315,8 @@ class AnimeParser:
             "rating": self.get_rating,
             "genres": self.get_genres,
             "themes": self.get_themes,
-            "characters": self.get_characters,
             "studios": self.get_studios,
             "producers": self.get_producers,
-            "staffs": self.get_staffs,
             "demographics": self.get_demographics,
             "recommendations": "",  # self
             "openings": self.get_openings,

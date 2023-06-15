@@ -1,12 +1,12 @@
 import datetime
-
 import requests
+from shinobi.utilities.session import session
 
 from shinobi.parser.staff import StaffParser
 
 
 def get_staff_res_given_mal_id(mal_id: int) -> requests.Response:
-    return requests.get(f"https://myanimelist.net/people/{mal_id}")
+    return session.get(f"https://myanimelist.net/people/{mal_id}")
 
 
 # noqa: E501
