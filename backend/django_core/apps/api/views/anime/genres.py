@@ -1,9 +1,8 @@
-from http import HTTPStatus
-
 from apps.anime.models.anime_genre import AnimeGenreModel
 from apps.api.auth import AuthBearer
-from apps.user.models import CustomUser
-from django.http import HttpRequest, HttpResponse
+from apps.api.decorator import permission_required
+from apps.api.permissions import IsSuperUser
+from django.http import HttpRequest
 from ninja import Query, Router
 
 from ...filters.genres import GenreFilter
@@ -25,16 +24,11 @@ def get_anime_genre_info(
 
 
 @router.post("/genres", response=list[AnimeGenreGETSchema], auth=AuthBearer())
+@permission_required([IsSuperUser])
 def post_anime_genre_info(
     request: HttpRequest,
     payload: list[AnimeGenrePOSTSchema],
 ) -> list[AnimeGenreModel]:
-    user: CustomUser = request.auth
-    if not user.is_superuser:
-        return HttpResponse(
-            "Superuser is required for this operation", status=HTTPStatus.UNAUTHORIZED
-        )
-
     instance_objects = []
     for object in payload:
         instance_objects.append(

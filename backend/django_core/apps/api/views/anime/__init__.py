@@ -1,18 +1,18 @@
 import datetime
-from http import HTTPStatus
 
 from apps.anime.models import AnimeModel, AnimeNameSynonymModel
 from apps.anime.models.anime_genre import AnimeGenreModel
 from apps.anime.models.anime_theme import AnimeThemeModel
 from apps.api.auth import AuthBearer
+from apps.api.decorator import permission_required
 from apps.api.filters.anime import AnimeInfoFilters
+from apps.api.permissions import IsSuperUser
 from apps.characters.models import CharacterModel
 from apps.producers.models import ProducerModel
 from apps.staffs.models import StaffModel
-from apps.user.models import CustomUser
 from django.db.models import Q, QuerySet
 from django.db.models.functions import Greatest
-from django.http import Http404, HttpRequest, HttpResponse
+from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
 from ninja import File, Form, Query, Router, UploadedFile
 from ninja.pagination import paginate
@@ -122,6 +122,7 @@ def get_anime_info(
 
 
 @router.post("", response=AnimeInfoGETSchema, auth=AuthBearer())
+@permission_required([IsSuperUser])
 def post_anime_info(
     request: HttpRequest,
     mal_id: int | None = Form(default=None),
@@ -147,13 +148,6 @@ def post_anime_info(
     producers: list[str] = Form(default=None),
     characters: list[str] = Form(default=None),
 ) -> AnimeModel:
-    user: CustomUser = request.auth
-    if not user.is_superuser:
-        return HttpResponse(
-            "Superuser is required for this operation",
-            status=HTTPStatus.UNAUTHORIZED,
-        )
-
     kwargs = {
         "mal_id": mal_id,
         "anilist_id": anilist_id,
@@ -253,6 +247,7 @@ def get_individual_anime_info(
 
 
 @router.patch("/{int:anime_id}", response=AnimeInfoGETSchema, auth=AuthBearer())
+@permission_required([IsSuperUser])
 def patch_individual_anime_info(
     request: HttpRequest,
     anime_id: int,
@@ -280,13 +275,6 @@ def patch_individual_anime_info(
     producers: list[str] = Form(default=None),
     characters: list[str] = Form(default=None),
 ) -> AnimeModel:
-    user: CustomUser = request.auth
-    if not user.is_superuser:
-        return HttpResponse(
-            "Superuser is required for this operation",
-            status=HTTPStatus.UNAUTHORIZED,
-        )
-
     kwargs = {
         "mal_id": mal_id,
         "anilist_id": anilist_id,
