@@ -15,4 +15,4 @@ def username_validator(username: str) -> None:
 
     # It can raise issues with usernames like `baseplate-admin#0001#0001`
     if "#" in username:
-        raise ValidationError(f"Usernames should not contain `#`")
+        raise ValidationError("Usernames should not contain `#`")
