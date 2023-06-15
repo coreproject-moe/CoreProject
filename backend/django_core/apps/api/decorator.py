@@ -1,10 +1,10 @@
 import sys
 from functools import wraps
-from http import HTTPStatus
-from typing import TYPE_CHECKING
-
+from django.http import HttpRequest
+from typing import Optional, TYPE_CHECKING
 from django.contrib.auth.models import AnonymousUser
-from django.http import HttpRequest, HttpResponse
+from http import HTTPStatus
+from ninja.errors import HttpError
 
 if TYPE_CHECKING:
     from .permissions import IsSuperUser
@@ -31,6 +31,7 @@ def throttle():
     def decorator(func):
         @wraps(func)
         def wrapper(request: HttpRequest, *args, **kwargs):
+            path = request.path
             if False:
                 return 429, None
             return func(request, *args, **kwargs)
@@ -40,7 +41,7 @@ def throttle():
     return decorator
 
 
-def permission_required(permissions: list["IsSuperUser"], key: str | None = "auth"):
+def permission_required(permissions: list["IsSuperUser"], key: Optional[str] = "auth"):
     def decorator(func):
         @wraps(func)
         def wrapper(request: HttpRequest, *args, **kwargs):
@@ -53,9 +54,9 @@ def permission_required(permissions: list["IsSuperUser"], key: str | None = "aut
                 [permission(request, user).has_permissions() for permission in permissions]
             )
             if not permission_granted:
-                return HttpResponse(
+                raise HttpError(
+                    HTTPStatus.UNAUTHORIZED,
                     "Superuser is required for this operation",
-                    status=HTTPStatus.UNAUTHORIZED,
                 )
             return func(request, *args, **kwargs)
 
