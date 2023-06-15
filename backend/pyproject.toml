@@ -27,7 +27,7 @@ django-defender = ">=0.9.7"
 django-tailwind = ">=3.5.0"
 # 3rd Party ( Middlewares )
 django_cleanup = "*"
-django_cors_headers = "*"
+django_cors_headers = "^4.1.0"
 # 3rd Party ( Environmental Variables )
 python_dotenv = "*"
 # 3rd Party ( WhiteNoise )

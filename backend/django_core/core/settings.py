@@ -89,9 +89,6 @@ INSTALLED_APPS = [
     # Tailwind CSS
     "tailwind",
     "tailwind_src",  # Our custom app
-    # Api ( Django-Ninja )
-    "ninja",
-    "apps.api",
     # Models
     "apps.anime",
     "apps.trackers",
@@ -122,21 +119,17 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     # Cors headers
     "corsheaders.middleware.CorsMiddleware",
-    # Allow Patch files
-    "ninja_put_patch_file_upload_middleware.middlewares.process_put_patch",
     # Django
     "django.middleware.cache.UpdateCacheMiddleware",  # Cache
     "django.middleware.common.CommonMiddleware",
     "django.middleware.cache.FetchFromCacheMiddleware",  # Cache
     "django.middleware.csrf.CsrfViewMiddleware",
-    "corsheaders.middleware.CorsPostCsrfMiddleware",  # Cors headers
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     # Django defender
     "defender.middleware.FailedLoginMiddleware",
 ]
-
 if DEBUG:
     MIDDLEWARE += (
         # Debug Toolbar Middleware
@@ -350,6 +343,6 @@ DBBACKUP_STORAGE_OPTIONS = {"location": os.path.join(BASE_DIR, "backup")}
 
 TAILWIND_APP_NAME = "tailwind_src"
 if os.name == "nt":
-    NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+    NPM_BIN_PATH = r"C:\\Program Files\\nodejs\\npm.cmd"
 elif os.name == "posix":
     NPM_BIN_PATH = "/usr/bin/npm"
