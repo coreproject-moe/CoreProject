@@ -10,8 +10,8 @@ from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from ninja.pagination import paginate
 
-from django_core.apps.api.decorator import permission_required
-from django_core.apps.api.permissions import IsSuperUserOrReadOnly
+from apps.api.decorator import permission_required
+from apps.api.permissions import IsSuperUser
 
 from ....staffs.models import StaffAlternateNameModel, StaffModel
 from ...filters.staffs import StaffFilter
@@ -89,7 +89,7 @@ def get_staff_info(
 
 
 @router.post("", response=StaffPOSTSchema, auth=AuthBearer())
-@permission_required([IsSuperUserOrReadOnly])
+@permission_required([IsSuperUser])
 def post_staff_info(
     request: HttpRequest,
     mal_id: int | None = Form(default=None),

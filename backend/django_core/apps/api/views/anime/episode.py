@@ -11,8 +11,8 @@ from ninja import File, Form, Router
 from ninja.files import UploadedFile
 from pydantic import Json
 
-from django_core.apps.api.decorator import permission_required
-from django_core.apps.api.permissions import IsSuperUserOrReadOnly
+from apps.api.decorator import permission_required
+from apps.api.permissions import IsSuperUser
 
 from ...schemas.episodes import EpisodeGETSchema
 
@@ -35,7 +35,7 @@ def get_individual_episodes(
 
 
 @router.post("/{int:anime_id}/episodes", response=EpisodeGETSchema, auth=AuthBearer())
-@permission_required([IsSuperUserOrReadOnly])
+@permission_required([IsSuperUser])
 def post_individual_episodes(
     request: HttpRequest,
     anime_id: int,
@@ -87,7 +87,7 @@ def get_individual_episode(
     response=EpisodeGETSchema,
     auth=AuthBearer(),
 )
-@permission_required([IsSuperUserOrReadOnly])
+@permission_required([IsSuperUser])
 def patch_individual_episode_info(
     request: HttpRequest,
     anime_id: int,

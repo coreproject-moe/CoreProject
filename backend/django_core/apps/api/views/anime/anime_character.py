@@ -9,7 +9,7 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 from ninja import Router
 
 from apps.api.decorator import permission_required
-from apps.api.permissions import IsSuperUserOrReadOnly
+from apps.api.permissions import IsSuperUser
 
 from ...schemas.characters import CharacterSchema
 
@@ -32,7 +32,7 @@ def get_individual_anime_character_info(
     response=list[CharacterSchema],
     auth=AuthBearer(),
 )
-@permission_required([IsSuperUserOrReadOnly])
+@permission_required([IsSuperUser])
 def post_individual_anime_character_info(
     request: HttpRequest,
     anime_id: int,

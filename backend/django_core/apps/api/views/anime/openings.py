@@ -8,8 +8,8 @@ from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from pydantic import AnyUrl
 
-from django_core.apps.api.decorator import permission_required
-from django_core.apps.api.permissions import IsSuperUserOrReadOnly
+from apps.api.decorator import permission_required
+from apps.api.permissions import IsSuperUser
 
 from ...filters.openings_and_endings import OpeningAndEndingFilter
 from ...schemas.anime.anime_opening_and_ending import AnimeOpeningAndEndingGETSchema
@@ -28,7 +28,7 @@ def get_anime_opening_info(
 
 
 @router.post("/openings", response=AnimeOpeningAndEndingGETSchema, auth=AuthBearer())
-@permission_required([IsSuperUserOrReadOnly])
+@permission_required([IsSuperUser])
 def post_anime_opening_info(
     request: HttpRequest,
     entry: int | None = Form(...),

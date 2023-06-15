@@ -10,8 +10,8 @@ from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from ninja.pagination import paginate
 
-from django_core.apps.api.decorator import permission_required
-from django_core.apps.api.permissions import IsSuperUserOrReadOnly
+from apps.api.decorator import permission_required
+from apps.api.permissions import IsSuperUser
 
 try:
     from django.contrib.postgres.search import TrigramSimilarity
@@ -67,7 +67,7 @@ def get_character_info(
 
 
 @router.post("", response=CharacterSchema, auth=AuthBearer())
-@permission_required([IsSuperUserOrReadOnly])
+@permission_required([IsSuperUser])
 def post_character_info(
     request: HttpRequest,
     mal_id: int = Form(default=None),
@@ -100,7 +100,7 @@ def get_individual_character_info(
 
 
 @router.patch("/{int:character_id}/", response=CharacterSchema, auth=AuthBearer())
-@permission_required([IsSuperUserOrReadOnly])
+@permission_required([IsSuperUser])
 def patch_individual_character_info(
     request: HttpRequest,
     character_id: int,

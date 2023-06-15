@@ -17,7 +17,7 @@ from django.shortcuts import get_object_or_404
 from ninja import File, Form, Query, Router, UploadedFile
 from ninja.pagination import paginate
 from apps.api.decorator import throttle, permission_required
-from apps.api.permissions import IsSuperUserOrReadOnly
+from apps.api.permissions import IsSuperUser
 
 try:
     from django.contrib.postgres.search import TrigramSimilarity
@@ -124,7 +124,7 @@ def get_anime_info(
 
 
 @router.post("", response=AnimeInfoGETSchema, auth=AuthBearer())
-@permission_required([IsSuperUserOrReadOnly])
+@permission_required([IsSuperUser])
 def post_anime_info(
     request: HttpRequest,
     mal_id: int | None = Form(default=None),
@@ -249,7 +249,7 @@ def get_individual_anime_info(
 
 
 @router.patch("/{int:anime_id}", response=AnimeInfoGETSchema, auth=AuthBearer())
-@permission_required([IsSuperUserOrReadOnly])
+@permission_required([IsSuperUser])
 def patch_individual_anime_info(
     request: HttpRequest,
     anime_id: int,

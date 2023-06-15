@@ -6,7 +6,7 @@ from apps.user.models import CustomUser
 from django.http import HttpRequest, HttpResponse
 from ninja import Query, Router
 from apps.api.decorator import permission_required
-from apps.api.permissions import IsSuperUserOrReadOnly
+from apps.api.permissions import IsSuperUser
 
 from ...filters.genres import GenreFilter
 from ...schemas.anime.anime_genre import AnimeGenreGETSchema, AnimeGenrePOSTSchema
@@ -27,7 +27,7 @@ def get_anime_genre_info(
 
 
 @router.post("/genres", response=list[AnimeGenreGETSchema], auth=AuthBearer())
-@permission_required([IsSuperUserOrReadOnly])
+@permission_required([IsSuperUser])
 def post_anime_genre_info(
     request: HttpRequest,
     payload: list[AnimeGenrePOSTSchema],

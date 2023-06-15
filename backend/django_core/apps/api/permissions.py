@@ -5,7 +5,7 @@ from django.http import HttpRequest
 SAFE_METHODS = ("GET", "HEAD", "OPTIONS")
 
 
-class IsSuperUserOrReadOnly:
+class IsSuperUser:
     def __init__(self, request: HttpRequest, user: User) -> None:
         self.request = request
         self.user = user

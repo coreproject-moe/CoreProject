@@ -1,9 +1,12 @@
 import sys
 from functools import wraps
 from django.http import HttpRequest, HttpResponse
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
 from django.contrib.auth.models import AnonymousUser
 from http import HTTPStatus
+
+if TYPE_CHECKING:
+    from .permissions import IsSuperUser
 
 
 def recursionlimit(limit):
@@ -37,7 +40,7 @@ def throttle():
     return decorator
 
 
-def permission_required(permissions: list, key: Optional[str] = "auth"):
+def permission_required(permissions: list["IsSuperUser"], key: Optional[str] = "auth"):
     def decorator(func):
         @wraps(func)
         def wrapper(request: HttpRequest, *args, **kwargs):
