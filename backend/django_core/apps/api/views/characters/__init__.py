@@ -19,12 +19,12 @@ except ImportError:
 from django.http import Http404
 
 from ...filters.characters import CharacterFilter
-from ...schemas.characters import CharacterSchema
+from ...schemas.characters import CharacterGETSchema, CharacterPOSTSchema
 
 router = Router()
 
 
-@router.get("", response=list[CharacterSchema])
+@router.get("", response=list[CharacterGETSchema])
 @paginate
 def get_character_info(
     request: HttpRequest,
@@ -62,7 +62,7 @@ def get_character_info(
     return query
 
 
-@router.post("", response=CharacterSchema, auth=AuthBearer())
+@router.post("", response=CharacterPOSTSchema, auth=AuthBearer())
 @permission_required([IsSuperUser])
 def post_character_info(
     request: HttpRequest,
@@ -86,7 +86,7 @@ def post_character_info(
     return instance
 
 
-@router.get("/{int:character_id}/", response=CharacterSchema)
+@router.get("/{int:character_id}/", response=CharacterGETSchema)
 def get_individual_character_info(
     request: HttpRequest,
     character_id: int,
@@ -95,7 +95,7 @@ def get_individual_character_info(
     return queryset
 
 
-@router.patch("/{int:character_id}/", response=CharacterSchema, auth=AuthBearer())
+@router.patch("/{int:character_id}/", response=CharacterGETSchema, auth=AuthBearer())
 @permission_required([IsSuperUser])
 def patch_individual_character_info(
     request: HttpRequest,

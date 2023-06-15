@@ -7,12 +7,12 @@ from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
 from ninja import Router
 
-from ...schemas.characters import CharacterSchema
+from ...schemas.characters import CharacterGETSchema
 
 router = Router()
 
 
-@router.get("/{int:anime_id}/character", response=list[CharacterSchema])
+@router.get("/{int:anime_id}/character", response=list[CharacterGETSchema])
 def get_individual_anime_character_info(
     request: HttpRequest,
     anime_id: int,
@@ -25,14 +25,14 @@ def get_individual_anime_character_info(
 
 @router.post(
     "/{int:anime_id}/character",
-    response=list[CharacterSchema],
+    response=list[CharacterGETSchema],
     auth=AuthBearer(),
 )
 @permission_required([IsSuperUser])
 def post_individual_anime_character_info(
     request: HttpRequest,
     anime_id: int,
-    payload: CharacterSchema,
+    payload: CharacterGETSchema,
 ) -> CharacterModel:
     # Set this at top
     # Because if there is no anime_info_model with corresponding query

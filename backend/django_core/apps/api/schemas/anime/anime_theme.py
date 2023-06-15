@@ -14,4 +14,7 @@ class AnimeThemePOSTSchema(ModelSchema):
         model_exclude = [
             "id",
             "type",
+            "created_at",
+            "updated_at",
+            "is_locked",
         ]

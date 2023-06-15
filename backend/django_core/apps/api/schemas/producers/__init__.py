@@ -16,4 +16,7 @@ class ProducerPOSTSchema(ModelSchema):
         model = ProducerModel
         model_exclude = [
             "id",
+            "created_at",
+            "updated_at",
+            "is_locked",
         ]

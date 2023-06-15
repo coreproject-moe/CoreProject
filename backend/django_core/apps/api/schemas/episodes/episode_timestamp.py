@@ -17,4 +17,4 @@ class EpisodeTimestampGETSchema(ModelSchema):
 class EpisodeTimestampPOSTSchema(ModelSchema):
     class Config:
         model = EpisodeTimestampModel
-        model_exclude = ["episode", "id", "user"]
+        model_exclude = ["episode", "id", "user", "created_at"]
