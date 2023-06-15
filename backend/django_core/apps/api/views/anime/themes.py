@@ -1,13 +1,10 @@
-from http import HTTPStatus
 
 from apps.anime.models.anime_theme import AnimeThemeModel
 from apps.api.auth import AuthBearer
-from apps.user.models import CustomUser
-from django.http import HttpRequest, HttpResponse
-from ninja import Query, Router
-
 from apps.api.decorator import permission_required
 from apps.api.permissions import IsSuperUser
+from django.http import HttpRequest
+from ninja import Query, Router
 
 from ...filters.themes import ThemeFilter
 from ...schemas.anime.anime_theme import AnimeThemeGETSchema, AnimeThemePOSTSchema

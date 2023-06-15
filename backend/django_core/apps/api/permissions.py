@@ -1,4 +1,5 @@
 from typing import Any
+
 from django.contrib.auth.models import User
 from django.http import HttpRequest
 
@@ -11,6 +12,6 @@ class IsSuperUser:
         self.user = user
 
     def has_permissions(self, *args: Any, **kwds: Any) -> Any:
-        if self.user.is_superuser and not self.request.method in SAFE_METHODS:
+        if self.user.is_superuser and self.request.method not in SAFE_METHODS:
             return True
         return False

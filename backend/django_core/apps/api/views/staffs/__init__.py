@@ -1,17 +1,14 @@
-from http import HTTPStatus
 
 from apps.api.auth import AuthBearer
-from apps.user.models import CustomUser
+from apps.api.decorator import permission_required
+from apps.api.permissions import IsSuperUser
 from django.db.models import Q, QuerySet
 from django.db.models.functions import Greatest
-from django.http import Http404, HttpRequest, HttpResponse
+from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
 from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from ninja.pagination import paginate
-
-from apps.api.decorator import permission_required
-from apps.api.permissions import IsSuperUser
 
 from ....staffs.models import StaffAlternateNameModel, StaffModel
 from ...filters.staffs import StaffFilter

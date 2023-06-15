@@ -1,15 +1,12 @@
-from http import HTTPStatus
 
 from apps.anime.models.anime_openings_and_endings import AnimeOpeningModel
 from apps.api.auth import AuthBearer
-from apps.user.models import CustomUser
-from django.http import HttpRequest, HttpResponse
+from apps.api.decorator import permission_required
+from apps.api.permissions import IsSuperUser
+from django.http import HttpRequest
 from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from pydantic import AnyUrl
-
-from apps.api.decorator import permission_required
-from apps.api.permissions import IsSuperUser
 
 from ...filters.openings_and_endings import OpeningAndEndingFilter
 from ...schemas.anime.anime_opening_and_ending import AnimeOpeningAndEndingGETSchema

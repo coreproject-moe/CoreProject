@@ -1,8 +1,9 @@
 import datetime
 
-from shinobi.utilities.session import session
 import requests
+
 from shinobi.parser.producer import ProducerParser
+from shinobi.utilities.session import session
 
 
 def get_producer_res_given_mal_id(mal_id: int) -> requests.Response:

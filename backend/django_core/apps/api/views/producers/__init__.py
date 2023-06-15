@@ -1,14 +1,11 @@
-from http import HTTPStatus
-
-from apps.user.models import CustomUser
-from django.db.models import Q
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import get_object_or_404
-from ninja import Query, Router
-from ninja.pagination import paginate
 
 from apps.api.decorator import permission_required
 from apps.api.permissions import IsSuperUser
+from django.db.models import Q
+from django.http import HttpRequest
+from django.shortcuts import get_object_or_404
+from ninja import Query, Router
+from ninja.pagination import paginate
 
 from ....producers.models import ProducerModel
 from ...auth import AuthBearer

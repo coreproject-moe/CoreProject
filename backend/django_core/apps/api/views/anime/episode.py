@@ -1,18 +1,15 @@
-from http import HTTPStatus
 from typing import AnyStr
 
 from apps.anime.models import AnimeModel
 from apps.api.auth import AuthBearer
+from apps.api.decorator import permission_required
+from apps.api.permissions import IsSuperUser
 from apps.episodes.models import EpisodeModel
-from apps.user.models import CustomUser
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
 from ninja import File, Form, Router
 from ninja.files import UploadedFile
 from pydantic import Json
-
-from apps.api.decorator import permission_required
-from apps.api.permissions import IsSuperUser
 
 from ...schemas.episodes import EpisodeGETSchema
 

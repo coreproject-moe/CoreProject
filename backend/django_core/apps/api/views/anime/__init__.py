@@ -1,23 +1,21 @@
 import datetime
-from http import HTTPStatus
 
 from apps.anime.models import AnimeModel, AnimeNameSynonymModel
 from apps.anime.models.anime_genre import AnimeGenreModel
 from apps.anime.models.anime_theme import AnimeThemeModel
 from apps.api.auth import AuthBearer
+from apps.api.decorator import permission_required
 from apps.api.filters.anime import AnimeInfoFilters
+from apps.api.permissions import IsSuperUser
 from apps.characters.models import CharacterModel
 from apps.producers.models import ProducerModel
 from apps.staffs.models import StaffModel
-from apps.user.models import CustomUser
 from django.db.models import Q, QuerySet
 from django.db.models.functions import Greatest
-from django.http import Http404, HttpRequest, HttpResponse
+from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
 from ninja import File, Form, Query, Router, UploadedFile
 from ninja.pagination import paginate
-from apps.api.decorator import throttle, permission_required
-from apps.api.permissions import IsSuperUser
 
 try:
     from django.contrib.postgres.search import TrigramSimilarity

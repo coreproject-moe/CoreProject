@@ -1,17 +1,14 @@
-from http import HTTPStatus
 
 from apps.api.auth import AuthBearer
+from apps.api.decorator import permission_required
+from apps.api.permissions import IsSuperUser
 from apps.characters.models import CharacterModel
-from apps.user.models import CustomUser
 from django.db.models import Q, QuerySet
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from ninja.pagination import paginate
-
-from apps.api.decorator import permission_required
-from apps.api.permissions import IsSuperUser
 
 try:
     from django.contrib.postgres.search import TrigramSimilarity
