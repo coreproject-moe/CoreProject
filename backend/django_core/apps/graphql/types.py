@@ -1,7 +1,6 @@
 import strawberry
-from strawberry import auto
-
 from apps.anime.models import AnimeModel
+from strawberry import auto
 
 
 @strawberry.django.type(AnimeModel)

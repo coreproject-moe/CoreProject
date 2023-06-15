@@ -1,4 +1,5 @@
 import strawberry
+
 from .types import Anime
 
 
