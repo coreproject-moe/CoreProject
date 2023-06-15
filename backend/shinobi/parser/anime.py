@@ -60,7 +60,6 @@ class AnimeParser:
 
     @property
     @return_on_error("")
-    @lru_cache(maxsize=None)
     def get_anime_url(self):
         return self.parser.css_first("meta[property='og:url']").attributes["content"]
 
