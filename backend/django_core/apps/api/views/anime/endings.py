@@ -1,4 +1,3 @@
-
 from apps.anime.models.anime_openings_and_endings import AnimeEndingModel
 from apps.api.auth import AuthBearer
 from apps.api.decorator import permission_required

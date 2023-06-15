@@ -1,4 +1,3 @@
-
 from apps.anime.models.anime_genre import AnimeGenreModel
 from apps.api.auth import AuthBearer
 from apps.api.decorator import permission_required

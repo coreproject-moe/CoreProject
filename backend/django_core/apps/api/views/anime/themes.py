@@ -1,4 +1,3 @@
-
 from apps.anime.models.anime_theme import AnimeThemeModel
 from apps.api.auth import AuthBearer
 from apps.api.decorator import permission_required
