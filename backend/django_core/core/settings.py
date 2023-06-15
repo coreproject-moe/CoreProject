@@ -86,12 +86,13 @@ INSTALLED_APPS = [
     "defender",
     # Tree
     "treenode",
+    # Grahpql
+    "strawberry.django",
+    "strawberry_django",
+    "apps.graphql",
     # Tailwind CSS
     "tailwind",
     "tailwind_src",  # Our custom app
-    # Api ( Django-Ninja )
-    "ninja",
-    "apps.api",
     # Models
     "apps.anime",
     "apps.trackers",
@@ -122,26 +123,23 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     # Cors headers
     "corsheaders.middleware.CorsMiddleware",
-    # Allow Patch files
-    "ninja_put_patch_file_upload_middleware.middlewares.process_put_patch",
     # Django
     "django.middleware.cache.UpdateCacheMiddleware",  # Cache
     "django.middleware.common.CommonMiddleware",
     "django.middleware.cache.FetchFromCacheMiddleware",  # Cache
     "django.middleware.csrf.CsrfViewMiddleware",
-    "corsheaders.middleware.CorsPostCsrfMiddleware",  # Cors headers
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     # Django defender
     "defender.middleware.FailedLoginMiddleware",
 ]
-
 if DEBUG:
     MIDDLEWARE += (
         # Debug Toolbar Middleware
         # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#add-the-middleware
-        "debug_toolbar.middleware.DebugToolbarMiddleware",
+        # https://strawberry-graphql.github.io/strawberry-graphql-django/guides/debug-toolbar/
+        "strawberry_django.middlewares.debug_toolbar.DebugToolbarMiddleware",
         # CProfile middleware
         # https://github.com/omarish/django-cprofile-middleware/blob/80e27f3876949e0d9c452c0e48ed03d73e026b73/README.md#installing
         "django_cprofile_middleware.middleware.ProfilerMiddleware",
@@ -350,6 +348,13 @@ DBBACKUP_STORAGE_OPTIONS = {"location": os.path.join(BASE_DIR, "backup")}
 
 TAILWIND_APP_NAME = "tailwind_src"
 if os.name == "nt":
-    NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+    NPM_BIN_PATH = r"C:\\Program Files\\nodejs\\npm.cmd"
 elif os.name == "posix":
     NPM_BIN_PATH = "/usr/bin/npm"
+
+
+# Graphql
+STRAWBERRY_DJANGO = {
+    "FIELD_DESCRIPTION_FROM_HELP_TEXT": True,
+    "TYPE_DESCRIPTION_FROM_MODEL_DOCSTRING": True,
+}

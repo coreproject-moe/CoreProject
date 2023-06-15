@@ -47,9 +47,9 @@ urlpatterns = [
     #   HTTP
     # =========
     path("user/", include("apps.user.urls")),
-    #   Api
-    # ========
-    path("api/", include("apps.api.urls")),
+    #   Graphql
+    # ============
+    path("graphql", include("apps.graphql.urls")),
 ]
 
 if settings.DEBUG:
