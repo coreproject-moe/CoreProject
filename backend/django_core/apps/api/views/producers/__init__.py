@@ -7,6 +7,9 @@ from django.shortcuts import get_object_or_404
 from ninja import Query, Router
 from ninja.pagination import paginate
 
+from django_core.apps.api.decorator import permission_required
+from django_core.apps.api.permissions import IsSuperUserOrReadOnly
+
 from ....producers.models import ProducerModel
 from ...auth import AuthBearer
 from ...filters.producers import ProducerFilter
@@ -47,13 +50,8 @@ def get_producer_info(
 
 
 @router.post("", response=ProducerGETSchema, auth=AuthBearer())
+@permission_required([IsSuperUserOrReadOnly])
 def post_producer_info(request: HttpRequest, payload: ProducerPOSTSchema) -> ProducerModel:
-    user: CustomUser = request.auth
-    if not user.is_superuser:
-        return HttpResponse(
-            "Superuser is required for this operation", status=HTTPStatus.UNAUTHORIZED
-        )
-
     instance = ProducerModel.objects.create(**payload.dict(exclude_none=True))
     return instance
 
@@ -68,19 +66,13 @@ def get_individual_producer_info(
 
 
 @router.patch("/{str:producer_id}/", response=ProducerGETSchema, auth=AuthBearer())
+@permission_required([IsSuperUserOrReadOnly])
 def patch_individual_producer_info(
     request: HttpRequest,
     producer_id: int,
     # Optional
     payload: ProducerPOSTSchema,
 ) -> ProducerModel:
-    user: CustomUser = request.auth
-    if not user.is_superuser:
-        return HttpResponse(
-            "Superuser is required for this operation",
-            status=HTTPStatus.UNAUTHORIZED,
-        )
-
     queryset = get_object_or_404(ProducerModel, pk=producer_id)
     for attribute, value in payload.dict(exclude_none=True):
         setattr(queryset, attribute, value)

@@ -16,6 +16,8 @@ from django.http import Http404, HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404
 from ninja import File, Form, Query, Router, UploadedFile
 from ninja.pagination import paginate
+from apps.api.decorator import throttle, permission_required
+from apps.api.permissions import IsSuperUserOrReadOnly
 
 try:
     from django.contrib.postgres.search import TrigramSimilarity
@@ -122,6 +124,7 @@ def get_anime_info(
 
 
 @router.post("", response=AnimeInfoGETSchema, auth=AuthBearer())
+@permission_required([IsSuperUserOrReadOnly])
 def post_anime_info(
     request: HttpRequest,
     mal_id: int | None = Form(default=None),
@@ -147,13 +150,6 @@ def post_anime_info(
     producers: list[str] = Form(default=None),
     characters: list[str] = Form(default=None),
 ) -> AnimeModel:
-    user: CustomUser = request.auth
-    if not user.is_superuser:
-        return HttpResponse(
-            "Superuser is required for this operation",
-            status=HTTPStatus.UNAUTHORIZED,
-        )
-
     kwargs = {
         "mal_id": mal_id,
         "anilist_id": anilist_id,
@@ -253,6 +249,7 @@ def get_individual_anime_info(
 
 
 @router.patch("/{int:anime_id}", response=AnimeInfoGETSchema, auth=AuthBearer())
+@permission_required([IsSuperUserOrReadOnly])
 def patch_individual_anime_info(
     request: HttpRequest,
     anime_id: int,
@@ -280,13 +277,6 @@ def patch_individual_anime_info(
     producers: list[str] = Form(default=None),
     characters: list[str] = Form(default=None),
 ) -> AnimeModel:
-    user: CustomUser = request.auth
-    if not user.is_superuser:
-        return HttpResponse(
-            "Superuser is required for this operation",
-            status=HTTPStatus.UNAUTHORIZED,
-        )
-
     kwargs = {
         "mal_id": mal_id,
         "anilist_id": anilist_id,

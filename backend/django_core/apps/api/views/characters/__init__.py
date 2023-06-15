@@ -10,6 +10,9 @@ from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from ninja.pagination import paginate
 
+from django_core.apps.api.decorator import permission_required
+from django_core.apps.api.permissions import IsSuperUserOrReadOnly
+
 try:
     from django.contrib.postgres.search import TrigramSimilarity
 
@@ -64,6 +67,7 @@ def get_character_info(
 
 
 @router.post("", response=CharacterSchema, auth=AuthBearer())
+@permission_required([IsSuperUserOrReadOnly])
 def post_character_info(
     request: HttpRequest,
     mal_id: int = Form(default=None),
@@ -74,13 +78,6 @@ def post_character_info(
     character_image: UploadedFile | None = File(default=None),
     about: str | None = Form(default=None),
 ) -> QuerySet[CharacterModel]:
-    user: CustomUser = request.auth
-    if not user.is_superuser:
-        return HttpResponse(
-            "Superuser is required for this operation",
-            status=HTTPStatus.UNAUTHORIZED,
-        )
-
     instance = CharacterModel.objects.create(
         name=name,
         mal_id=mal_id,
@@ -103,6 +100,7 @@ def get_individual_character_info(
 
 
 @router.patch("/{int:character_id}/", response=CharacterSchema, auth=AuthBearer())
+@permission_required([IsSuperUserOrReadOnly])
 def patch_individual_character_info(
     request: HttpRequest,
     character_id: int,
@@ -115,12 +113,6 @@ def patch_individual_character_info(
     character_image: UploadedFile | None = File(default=None),
     about: str | None = Form(default=None),
 ):
-    user: CustomUser = request.auth
-    if not user.is_superuser:
-        return HttpResponse(
-            "Superuser is required for this operation",
-            status=HTTPStatus.UNAUTHORIZED,
-        )
     instance = get_object_or_404(CharacterModel, pk=character_id)
 
     kwargs = {

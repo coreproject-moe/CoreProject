@@ -8,6 +8,9 @@ from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from pydantic import AnyUrl
 
+from django_core.apps.api.decorator import permission_required
+from django_core.apps.api.permissions import IsSuperUserOrReadOnly
+
 from ...filters.openings_and_endings import OpeningAndEndingFilter
 from ...schemas.anime.anime_opening_and_ending import AnimeOpeningAndEndingGETSchema
 
@@ -25,6 +28,7 @@ def get_anime_ending_info(
 
 
 @router.post("/endings", response=AnimeOpeningAndEndingGETSchema, auth=AuthBearer())
+@permission_required([IsSuperUserOrReadOnly])
 def post_anime_ending_info(
     request: HttpRequest,
     entry: int | None = Form(...),
@@ -32,12 +36,6 @@ def post_anime_ending_info(
     url: AnyUrl = Form(...),
     thumbnail: UploadedFile | None = File(...),
 ) -> AnimeEndingModel:
-    user: CustomUser = request.auth
-    if not user.is_superuser:
-        return HttpResponse(
-            "Superuser is required for this operation", status=HTTPStatus.UNAUTHORIZED
-        )
-
     query = AnimeEndingModel.objects.create(
         entry=entry,
         name=name,

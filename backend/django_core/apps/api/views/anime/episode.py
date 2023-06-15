@@ -11,6 +11,9 @@ from ninja import File, Form, Router
 from ninja.files import UploadedFile
 from pydantic import Json
 
+from django_core.apps.api.decorator import permission_required
+from django_core.apps.api.permissions import IsSuperUserOrReadOnly
+
 from ...schemas.episodes import EpisodeGETSchema
 
 router = Router()
@@ -32,6 +35,7 @@ def get_individual_episodes(
 
 
 @router.post("/{int:anime_id}/episodes", response=EpisodeGETSchema, auth=AuthBearer())
+@permission_required([IsSuperUserOrReadOnly])
 def post_individual_episodes(
     request: HttpRequest,
     anime_id: int,
@@ -42,12 +46,6 @@ def post_individual_episodes(
     episode_summary: str = Form(None),
     providers: Json[AnyStr] | None = Form(None),
 ) -> EpisodeModel:
-    user: CustomUser = request.auth
-    if not user.is_superuser:
-        return HttpResponse(
-            "Superuser is required for this operation",
-            status=HTTPStatus.UNAUTHORIZED,
-        )
     # Set this at top
     # Because if there is no anime_info_model with corresponding query
     # theres no point in continuing
@@ -89,6 +87,7 @@ def get_individual_episode(
     response=EpisodeGETSchema,
     auth=AuthBearer(),
 )
+@permission_required([IsSuperUserOrReadOnly])
 def patch_individual_episode_info(
     request: HttpRequest,
     anime_id: int,
@@ -99,12 +98,6 @@ def patch_individual_episode_info(
     episode_length: int = Form(None),
     providers: Json[AnyStr] | None = Form(None),
 ):
-    user: CustomUser = request.auth
-    if not user.is_superuser:
-        return HttpResponse(
-            "Superuser is required for this operation",
-            status=HTTPStatus.UNAUTHORIZED,
-        )
     episode_instance = get_object_or_404(
         get_object_or_404(AnimeModel, pk=anime_id).episodes,
         episode_number=episode_number,

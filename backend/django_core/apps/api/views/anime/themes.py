@@ -6,6 +6,9 @@ from apps.user.models import CustomUser
 from django.http import HttpRequest, HttpResponse
 from ninja import Query, Router
 
+from django_core.apps.api.decorator import permission_required
+from django_core.apps.api.permissions import IsSuperUserOrReadOnly
+
 from ...filters.themes import ThemeFilter
 from ...schemas.anime.anime_theme import AnimeThemeGETSchema, AnimeThemePOSTSchema
 
@@ -25,15 +28,11 @@ def get_anime_theme_info(
 
 
 @router.post("/themes", response=list[AnimeThemeGETSchema], auth=AuthBearer())
+@permission_required([IsSuperUserOrReadOnly])
 def post_anime_theme_info(
     request: HttpRequest,
     payload: list[AnimeThemePOSTSchema],
 ) -> list[AnimeThemeModel]:
-    user: CustomUser = request.auth
-    if not user.is_superuser:
-        return HttpResponse(
-            "Superuser is required for this operation", status=HTTPStatus.UNAUTHORIZED
-        )
 
     instance_objects = []
     for object in payload:
