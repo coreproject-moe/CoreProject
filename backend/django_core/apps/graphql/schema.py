@@ -8,7 +8,8 @@ from strawberry_django_plus import gql
 
 @gql.type
 class Query:
-    anime: list[Anime] = gql.django.field()
+    animes: list[Anime] = gql.django.field()
+    anime: Anime = gql.django.field()
 
 
 @strawberry.type
