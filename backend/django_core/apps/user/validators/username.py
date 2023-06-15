@@ -12,3 +12,7 @@ INVALID_USERNAMES = set(RESERVED_USERNAME)
 def username_validator(username: str) -> None:
     if username in INVALID_USERNAMES:
         raise ValidationError(f"Username {username} not allowed")
+
+    # It can raise issues with usernames like `baseplate-admin#0001#0001`
+    if "#" in username:
+        raise ValidationError("Usernames should not contain `#`")
