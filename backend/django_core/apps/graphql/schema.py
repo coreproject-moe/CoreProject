@@ -1,9 +1,9 @@
 import strawberry
-from .types import Anime
 from strawberry.schema.config import StrawberryConfig
-from strawberry.django import auth
-from strawberry_django_plus.optimizer import DjangoOptimizerExtension
 from strawberry_django_plus import gql
+from strawberry_django_plus.optimizer import DjangoOptimizerExtension
+
+from .types import Anime
 
 
 @gql.type
