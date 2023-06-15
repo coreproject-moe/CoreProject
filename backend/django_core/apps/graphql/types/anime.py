@@ -1,7 +1,6 @@
 import strawberry
-from strawberry import auto
-
 from apps.anime.models import AnimeModel, AnimeNameSynonymModel
+from strawberry import auto
 
 __all__ = ["Anime"]
 
