@@ -1,10 +1,9 @@
-from http import HTTPStatus
-
 from apps.api.auth import AuthBearer
-from apps.user.models import CustomUser
+from apps.api.decorator import permission_required
+from apps.api.permissions import IsSuperUser
 from django.db.models import Q, QuerySet
 from django.db.models.functions import Greatest
-from django.http import Http404, HttpRequest, HttpResponse
+from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
 from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
@@ -86,6 +85,7 @@ def get_staff_info(
 
 
 @router.post("", response=StaffPOSTSchema, auth=AuthBearer())
+@permission_required([IsSuperUser])
 def post_staff_info(
     request: HttpRequest,
     mal_id: int | None = Form(default=None),
@@ -98,12 +98,6 @@ def post_staff_info(
     about: str | None = Form(default=None),
     alternate_names: list[str] = Form(default=None),
 ) -> StaffModel:
-    user: CustomUser = request.auth
-    if not user.is_superuser:
-        return HttpResponse(
-            "Superuser is required for this operation",
-            status=HTTPStatus.UNAUTHORIZED,
-        )
     kwargs = {
         "mal_id": mal_id,
         "kitsu_id": kitsu_id,

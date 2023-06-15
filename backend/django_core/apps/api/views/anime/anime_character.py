@@ -1,10 +1,9 @@
-from http import HTTPStatus
-
 from apps.anime.models import AnimeModel
 from apps.api.auth import AuthBearer
+from apps.api.decorator import permission_required
+from apps.api.permissions import IsSuperUser
 from apps.characters.models import CharacterModel
-from apps.user.models import CustomUser
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
 from ninja import Router
 
@@ -29,17 +28,12 @@ def get_individual_anime_character_info(
     response=list[CharacterSchema],
     auth=AuthBearer(),
 )
+@permission_required([IsSuperUser])
 def post_individual_anime_character_info(
     request: HttpRequest,
     anime_id: int,
     payload: CharacterSchema,
 ) -> CharacterModel:
-    user: CustomUser = request.auth
-    if not user.is_superuser:
-        return HttpResponse(
-            "Superuser is required for this operation",
-            status=HTTPStatus.UNAUTHORIZED,
-        )
     # Set this at top
     # Because if there is no anime_info_model with corresponding query
     # theres no point in continuing

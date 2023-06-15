@@ -1,10 +1,9 @@
-from http import HTTPStatus
-
 from apps.api.auth import AuthBearer
+from apps.api.decorator import permission_required
+from apps.api.permissions import IsSuperUser
 from apps.characters.models import CharacterModel
-from apps.user.models import CustomUser
 from django.db.models import Q, QuerySet
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
@@ -64,6 +63,7 @@ def get_character_info(
 
 
 @router.post("", response=CharacterSchema, auth=AuthBearer())
+@permission_required([IsSuperUser])
 def post_character_info(
     request: HttpRequest,
     mal_id: int = Form(default=None),
@@ -74,13 +74,6 @@ def post_character_info(
     character_image: UploadedFile | None = File(default=None),
     about: str | None = Form(default=None),
 ) -> QuerySet[CharacterModel]:
-    user: CustomUser = request.auth
-    if not user.is_superuser:
-        return HttpResponse(
-            "Superuser is required for this operation",
-            status=HTTPStatus.UNAUTHORIZED,
-        )
-
     instance = CharacterModel.objects.create(
         name=name,
         mal_id=mal_id,
@@ -103,6 +96,7 @@ def get_individual_character_info(
 
 
 @router.patch("/{int:character_id}/", response=CharacterSchema, auth=AuthBearer())
+@permission_required([IsSuperUser])
 def patch_individual_character_info(
     request: HttpRequest,
     character_id: int,
@@ -115,12 +109,6 @@ def patch_individual_character_info(
     character_image: UploadedFile | None = File(default=None),
     about: str | None = Form(default=None),
 ):
-    user: CustomUser = request.auth
-    if not user.is_superuser:
-        return HttpResponse(
-            "Superuser is required for this operation",
-            status=HTTPStatus.UNAUTHORIZED,
-        )
     instance = get_object_or_404(CharacterModel, pk=character_id)
 
     kwargs = {
