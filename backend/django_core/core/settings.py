@@ -86,6 +86,9 @@ INSTALLED_APPS = [
     "defender",
     # Tree
     "treenode",
+    # Grahpql
+    "strawberry.django",
+    "apps.graphql",
     # Tailwind CSS
     "tailwind",
     "tailwind_src",  # Our custom app
@@ -134,7 +137,8 @@ if DEBUG:
     MIDDLEWARE += (
         # Debug Toolbar Middleware
         # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#add-the-middleware
-        "debug_toolbar.middleware.DebugToolbarMiddleware",
+        # https://strawberry-graphql.github.io/strawberry-graphql-django/guides/debug-toolbar/
+        "strawberry_django.middlewares.debug_toolbar.DebugToolbarMiddleware",
         # CProfile middleware
         # https://github.com/omarish/django-cprofile-middleware/blob/80e27f3876949e0d9c452c0e48ed03d73e026b73/README.md#installing
         "django_cprofile_middleware.middleware.ProfilerMiddleware",
@@ -346,3 +350,10 @@ if os.name == "nt":
     NPM_BIN_PATH = r"C:\\Program Files\\nodejs\\npm.cmd"
 elif os.name == "posix":
     NPM_BIN_PATH = "/usr/bin/npm"
+
+
+# Graphql
+STRAWBERRY_DJANGO = {
+    "FIELD_DESCRIPTION_FROM_HELP_TEXT": True,
+    "TYPE_DESCRIPTION_FROM_MODEL_DOCSTRING": True,
+}

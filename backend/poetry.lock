@@ -849,6 +849,17 @@ dnspython = ">=2.0.0"
 idna = ">=2.0.0"
 
 [[package]]
+name = "graphql-core"
+version = "3.2.3"
+description = "GraphQL implementation for Python, a port of GraphQL.js, the JavaScript reference implementation for GraphQL."
+optional = false
+python-versions = ">=3.6,<4"
+files = [
+    {file = "graphql-core-3.2.3.tar.gz", hash = "sha256:06d2aad0ac723e35b1cb47885d3e5c45e956a53bc1b209a9fc5369007fe46676"},
+    {file = "graphql_core-3.2.3-py3-none-any.whl", hash = "sha256:5766780452bd5ec8ba133f8bf287dc92713e3868ddd83aee4faab9fc3e303dc3"},
+]
+
+[[package]]
 name = "gunicorn"
 version = "20.1.0"
 description = "WSGI HTTP Server for UNIX"
@@ -1859,6 +1870,57 @@ doc = ["sphinx"]
 test = ["pytest", "pytest-cov"]
 
 [[package]]
+name = "strawberry-graphql"
+version = "0.185.1"
+description = "A library for creating GraphQL APIs"
+optional = false
+python-versions = ">=3.7,<4.0"
+files = [
+    {file = "strawberry_graphql-0.185.1-py3-none-any.whl", hash = "sha256:90d8cd138d7f10e96abf8632eacd3767ec59d0e0afb564d39e275ff341fc5b85"},
+    {file = "strawberry_graphql-0.185.1.tar.gz", hash = "sha256:99e8b18e1a1eb15f6954760e8c3f00c63cca53740be1032c44e3b97b4f5e705e"},
+]
+
+[package.dependencies]
+graphql-core = ">=3.2.0,<3.3.0"
+python-dateutil = ">=2.7.0,<3.0.0"
+typing_extensions = ">=4.1.0"
+
+[package.extras]
+aiohttp = ["aiohttp (>=3.7.4.post0,<4.0.0)"]
+asgi = ["python-multipart (>=0.0.5,<0.0.7)", "starlette (>=0.18.0)"]
+chalice = ["chalice (>=1.22,<2.0)"]
+channels = ["asgiref (>=3.2,<4.0)", "channels (>=3.0.5)"]
+cli = ["libcst (>=0.4.7)", "pygments (>=2.3,<3.0)", "rich (>=12.0.0)", "typer (>=0.7.0)"]
+debug = ["libcst (>=0.4.7)", "rich (>=12.0.0)"]
+debug-server = ["libcst (>=0.4.7)", "pygments (>=2.3,<3.0)", "python-multipart (>=0.0.5,<0.0.7)", "rich (>=12.0.0)", "starlette (>=0.18.0)", "typer (>=0.7.0)", "uvicorn (>=0.11.6,<0.22.0)"]
+django = ["Django (>=3.2)", "asgiref (>=3.2,<4.0)"]
+fastapi = ["fastapi (>=0.65.2)", "python-multipart (>=0.0.5,<0.0.7)"]
+flask = ["flask (>=1.1)"]
+opentelemetry = ["opentelemetry-api (<2)", "opentelemetry-sdk (<2)"]
+pydantic = ["pydantic (<2)"]
+pyinstrument = ["pyinstrument (>=4.0.0)"]
+sanic = ["sanic (>=20.12.2)"]
+starlite = ["starlite (>=1.48.0)"]
+
+[[package]]
+name = "strawberry-graphql-django"
+version = "0.9.4"
+description = "Strawberry GraphQL Django extension"
+optional = false
+python-versions = ">=3.7,<4.0"
+files = [
+    {file = "strawberry_graphql_django-0.9.4-py3-none-any.whl", hash = "sha256:99ff77019ebb4f0c17beb64b86aff3257cefd5299269542830b52f48e7eafbfd"},
+    {file = "strawberry_graphql_django-0.9.4.tar.gz", hash = "sha256:d3e20eb3106ca329270825aa14c14ecf1e0b3248cc8946dcf90c1ea23f8be8fd"},
+]
+
+[package.dependencies]
+Django = ">=3.2"
+strawberry-graphql = ">=0.160.0"
+
+[package.extras]
+debug-toolbar = ["django-debug-toolbar (>=3.4)"]
+
+[[package]]
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
@@ -2193,4 +2255,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "7988e1d214288c3725afdb1ac8a93b50a32a7cf81b5ae534b7337f6a3307d61f"
+content-hash = "6b285af96d9f447853f1d46bb93aade508d9bb4b79f95960c15201e333e189ec"
