@@ -11,7 +11,7 @@ class AnimeNameSynonym:
     name: auto
 
 
-@strawberry.django.type(AnimeModel)
+@strawberry.django.type(AnimeModel, pagination=True)
 class Anime:
     id: auto
 
