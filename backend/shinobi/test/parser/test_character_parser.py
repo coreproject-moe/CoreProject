@@ -1,8 +1,8 @@
-import requests
+from shinobi.utilities.session import session
 
 from shinobi.parser.character import CharacterParser
 
-res = requests.get("https://myanimelist.net/character/1")
+res = session.get("https://myanimelist.net/character/1")
 
 
 # noqa: E501

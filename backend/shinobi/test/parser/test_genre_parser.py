@@ -1,8 +1,8 @@
-import requests
+from shinobi.utilities.session import session
 
 from shinobi.parser.genre import AnimeGenreParser
 
-res = requests.get("https://myanimelist.net/anime/genre/1")
+res = session.get("https://myanimelist.net/anime/genre/1")
 
 
 def test_anime_genre_parser():
