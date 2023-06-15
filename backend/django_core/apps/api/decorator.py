@@ -28,6 +28,8 @@ def recursionlimit(limit):
     return decorator
 
 
+# The following decorators were inspired by this comment
+# https://github.com/vitalik/django-ninja/discussions/580#discussioncomment-3795237
 def throttle():
     def decorator(func):
         @wraps(func)
@@ -45,10 +47,7 @@ def permission_required(permissions: list["IsSuperUser"], key: str | None = "aut
     def decorator(func):
         @wraps(func)
         def wrapper(request: HttpRequest, *args, **kwargs):
-            try:
-                user = getattr(request, key)
-            except AttributeError:
-                user = AnonymousUser
+            user = getattr(request, key, AnonymousUser)
 
             permission_granted = any(
                 [permission(request, user).has_permissions() for permission in permissions]
