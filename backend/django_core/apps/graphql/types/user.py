@@ -1,6 +1,6 @@
 import strawberry
-from strawberry import auto
 from apps.user.models import CustomUser
+from strawberry import auto
 
 
 @strawberry.django.type(CustomUser)
