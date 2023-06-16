@@ -11,7 +11,7 @@ class IsSuperUser:
         self.request = request
         self.user = user
 
-    def has_permissions(self, *args: Any, **kwds: Any) -> Any:
+    def has_permissions(self) -> bool:
         if self.user.is_superuser and self.request.method not in SAFE_METHODS:
             return True
         return False
