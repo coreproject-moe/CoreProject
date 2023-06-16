@@ -1,15 +1,12 @@
 import hashlib
 import textwrap
-from http import HTTPStatus
 
 import requests
-from django.conf import settings
 from django.core.management.utils import get_random_secret_key
 from django.core.validators import URLValidator
 from django.http import FileResponse, HttpRequest, HttpResponse, StreamingHttpResponse
 from django.shortcuts import render
 
-from .forms import UsernameWithDiscriminatorForm
 from .models import CustomUser
 
 # Create your views here
