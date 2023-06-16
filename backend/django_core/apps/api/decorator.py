@@ -1,12 +1,13 @@
 import sys
+from collections.abc import Callable
 from functools import wraps
 from http import HTTPStatus
-from typing import TYPE_CHECKING, Any, Callable
+from typing import TYPE_CHECKING, Any
 
+from apps.user.models import CustomUser
 from django.contrib.auth.models import AnonymousUser
 from django.http import HttpRequest
 from ninja.errors import HttpError
-from apps.user.models import CustomUser
 
 if TYPE_CHECKING:
     from .permissions import IsSuperUser
