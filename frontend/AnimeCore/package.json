@@ -17,7 +17,7 @@
         "update": "npx npm-check-updates -u && npm install"
     },
     "devDependencies": {
-        "@felte/reporter-tippy": "^1.1.5",
+        "@felte/reporter-tippy": "^1.1.7",
         "@felte/validator-yup": "^1.1.1",
         "@sveltejs/adapter-node": "^1.2.4",
         "@sveltejs/adapter-static": "^2.0.2",
