@@ -4,6 +4,7 @@ from dynamic_filenames import FilePattern
 from mixins.models.created_at import CreatedAtMixin
 from mixins.models.is_locked import IsLockedMixin
 from mixins.models.updated_at import UpdatedAtMixin
+from django.contrib.postgres.indexes import GinIndex
 
 from ...characters.models import CharacterModel
 from ...episodes.models import EpisodeModel
@@ -26,6 +27,11 @@ class AnimeNameSynonymModel(models.Model):
         return f"{self.name}"
 
     class Meta:
+        indexes = [
+            GinIndex(
+                name="anime_name_synonym_idx", fields=["name"], opclasses=["gin_trgm_ops"]
+            ),
+        ]
         verbose_name = "Anime Synonym"
 
 
@@ -95,3 +101,10 @@ class AnimeModel(CreatedAtMixin, UpdatedAtMixin, IsLockedMixin):
 
     class Meta:
         verbose_name = "Anime"
+        indexes = [
+            GinIndex(
+                fields=["name", "name_japanese"],
+                name="anime_name|name_japanese_idx",
+                opclasses=["gin_trgm_ops", "gin_trgm_ops"],
+            ),
+        ]
