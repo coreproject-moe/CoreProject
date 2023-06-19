@@ -239,9 +239,20 @@ api.add_router(
     feature_router,
     tags=["feed"],
 )
-from .views.feeds.all import router as all_router
 
-api.add_router("/feed/all", all_router, tags=["feed"])
+
+# __ STATS ROUTER __
+
+api.add_router(
+    "/stats/histogram",
+    import_string("apps.api.views.stats.histogram.router"),
+    tags=["stats"],
+)
+api.add_router(
+    "/stats/id",
+    import_string("apps.api.views.stats.id.router"),
+    tags=["stats"],
+)
 
 urlpatterns = [
     path(

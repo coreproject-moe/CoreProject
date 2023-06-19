@@ -2,21 +2,13 @@ from apps.api.auth import AuthBearer
 from apps.api.decorator import permission_required
 from apps.api.permissions import IsSuperUser
 from apps.characters.models import CharacterModel
+from django.contrib.postgres.search import TrigramSimilarity
 from django.db.models import Q, QuerySet
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from ninja.pagination import paginate
-
-try:
-    from django.contrib.postgres.search import TrigramSimilarity
-
-    HAS_POSTGRES = True
-except ImportError:
-    HAS_POSTGRES = False
-
-from django.http import Http404
 
 from ...filters.characters import CharacterFilter
 from ...schemas.characters import CharacterGETSchema, CharacterPOSTSchema
@@ -30,9 +22,6 @@ def get_character_info(
     request: HttpRequest,
     filters: CharacterFilter = Query(...),
 ) -> QuerySet[CharacterModel]:
-    if not HAS_POSTGRES:
-        raise Http404("Looksups are not supported on any other databases except Postgres")
-
     query_object = Q()
     query_dict = filters.dict(exclude_none=True)
     query = CharacterModel.objects.all()

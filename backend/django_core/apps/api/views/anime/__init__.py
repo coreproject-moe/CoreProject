@@ -10,19 +10,13 @@ from apps.api.permissions import IsSuperUser
 from apps.characters.models import CharacterModel
 from apps.producers.models import ProducerModel
 from apps.staffs.models import StaffModel
+from django.contrib.postgres.search import TrigramSimilarity
 from django.db.models import Q, QuerySet
 from django.db.models.functions import Greatest
 from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
 from ninja import File, Form, Query, Router, UploadedFile
 from ninja.pagination import paginate
-
-try:
-    from django.contrib.postgres.search import TrigramSimilarity
-
-    HAS_POSTGRES = True
-except ImportError:
-    HAS_POSTGRES = False
 
 from ...schemas.anime import AnimeInfoGETSchema
 
@@ -35,9 +29,6 @@ def get_anime_info(
     request: HttpRequest,
     filters: AnimeInfoFilters = Query(...),
 ) -> QuerySet[AnimeModel]:
-    if not HAS_POSTGRES:
-        raise Http404("Looksups are not supported on any other databases except Postgres")
-
     query_dict = filters.dict(exclude_none=True)
     query_object = Q()
     # 2 Step get query
