@@ -6,7 +6,7 @@ import json
 router = Router()
 
 
-@router.get("/anime")
+@router.get("/anime", response=dict[int, dict[int, dict[str, int]]])
 def anime_histogram(request):
     date_objects = AnimeModel.objects.all().values_list("created_at")
     pd_dataframe = pd.DataFrame(date_objects, columns=["created_at"])
@@ -23,12 +23,13 @@ def anime_histogram(request):
         orient="records"
     )  # [{"month": 6, "year": 2023, "count": 1}]
 
-    # We want custom datastructure.
-    # {
-    #   2023: {
-    # }
-    # }
+    returnable_dictionary: dict[int, dict[int, dict[str, int]]] = {}
+    for item in histogram_json:
+        year = item["year"]
+        month = item["month"]
+        count = item["count"]
 
-    # returnable_dictionary: dict[int, dict[int, dict[str, int]]] = {}
+        returnable_dictionary.setdefault(year, {})
+        returnable_dictionary[year].setdefault(month, {"count": count})
 
-    return json.loads(histogram_json)
+    return returnable_dictionary

@@ -245,11 +245,11 @@ api.add_router("/feed/all", all_router, tags=["feed"])
 
 
 # __ STATS ROUTER __
-from .views.stats import router as stats_router
+from .views.stats.histogram import router as stats_histogram_router
 
 api.add_router(
-    "/stats/anime",
-    stats_router,
+    "/stats/histogram",
+    stats_histogram_router,
     tags=["stats"],
 )
 
