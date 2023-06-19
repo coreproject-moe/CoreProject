@@ -1,13 +1,15 @@
 from ninja import Router
 from apps.anime.models import AnimeModel
+from apps.characters.models import CharacterModel
 import pandas as pd
 from django.http.request import HttpRequest
+from typing import Literal
 
 router = Router()
 
 
-@router.get("/anime", response=dict[int, dict[int, dict[str, int]]])
-def anime_histogram(request):
+@router.get("/anime", response=dict[int, dict[int, dict[Literal["count"], int]]])
+def anime_histogram(request) -> dict[int, dict[int, dict[Literal["count"], int]]]:
     date_objects = AnimeModel.objects.all().values_list("created_at")
     pd_dataframe = pd.DataFrame(date_objects, columns=["created_at"])
     pd_dataframe["created_at"] = pd.to_datetime(pd_dataframe["created_at"])
@@ -23,7 +25,7 @@ def anime_histogram(request):
         orient="records"
     )  # [{"month": 6, "year": 2023, "count": 1}]
 
-    returnable_dictionary: dict[int, dict[int, dict[str, int]]] = {}
+    returnable_dictionary: dict[int, dict[int, dict[Literal["count"], int]]] = {}
     for item in histogram_json:
         year = item["year"]
         month = item["month"]
@@ -35,9 +37,11 @@ def anime_histogram(request):
     return returnable_dictionary
 
 
-@router.get("/character", response=dict[int, dict[int, dict[str, int]]])
-def character_histogram(request: HttpRequest):
-    date_objects = AnimeModel.objects.all().values_list("created_at")
+@router.get("/character", response=dict[int, dict[int, dict[Literal["count"], int]]])
+def character_histogram(
+    request: HttpRequest,
+) -> dict[int, dict[int, dict[Literal["count"], int]]]:
+    date_objects = CharacterModel.objects.all().values_list("created_at")
     pd_dataframe = pd.DataFrame(date_objects, columns=["created_at"])
     pd_dataframe["created_at"] = pd.to_datetime(pd_dataframe["created_at"])
 
@@ -52,7 +56,7 @@ def character_histogram(request: HttpRequest):
         orient="records"
     )  # [{"month": 6, "year": 2023, "count": 1}]
 
-    returnable_dictionary: dict[int, dict[int, dict[str, int]]] = {}
+    returnable_dictionary: dict[int, dict[int, dict[Literal["count"], int]]] = {}
     for item in histogram_json:
         year = item["year"]
         month = item["month"]

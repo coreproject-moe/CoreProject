@@ -239,17 +239,18 @@ api.add_router(
     feature_router,
     tags=["feed"],
 )
-from .views.feeds.all import router as all_router
-
-api.add_router("/feed/all", all_router, tags=["feed"])
 
 
 # __ STATS ROUTER __
-from .views.stats.histogram import router as stats_histogram_router
 
 api.add_router(
     "/stats/histogram",
-    stats_histogram_router,
+    import_string("apps.api.views.stats.histogram.router"),
+    tags=["stats"],
+)
+api.add_router(
+    "/stats/id",
+    import_string("apps.api.views.stats.id.router"),
     tags=["stats"],
 )
 
