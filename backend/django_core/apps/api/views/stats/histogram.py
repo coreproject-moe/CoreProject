@@ -49,16 +49,16 @@ def get_json_data_given_model(
     # [{"month": 6, "year": 2023, "count": 1}]
     histogram_json = histogram_data.to_dict(orient="records")
 
-    returnable_dictionary: RETURN_TYPE = {}
+    return_data: RETURN_TYPE = {}
     for item in histogram_json:
         year = item["year"]
         month = item["month"]
         count = item["count"]
 
-        returnable_dictionary.setdefault(year, {})
-        returnable_dictionary[year].setdefault(month, {"count": count})
+        return_data.setdefault(year, {})
+        return_data[year].setdefault(month, {"count": count})
 
-    return returnable_dictionary
+    return return_data
 
 
 @router.get("/anime", response=RETURN_TYPE)
