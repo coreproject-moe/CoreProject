@@ -13,12 +13,8 @@ from ....staffs.models import StaffAlternateNameModel, StaffModel
 from ...filters.staffs import StaffFilter
 from ...schemas.staffs import StaffPOSTSchema
 
-try:
-    from django.contrib.postgres.search import TrigramSimilarity
+from django.contrib.postgres.search import TrigramSimilarity
 
-    HAS_POSTGRES = True
-except ImportError:
-    HAS_POSTGRES = False
 
 router = Router()
 
@@ -29,8 +25,6 @@ def get_staff_info(
     request: HttpRequest,
     filters: StaffFilter = Query(...),
 ) -> QuerySet[StaffModel]:
-    if not HAS_POSTGRES:
-        raise Http404("Looksups are not supported on any other databases except Postgres")
 
     query_dict = filters.dict(exclude_none=True)
 

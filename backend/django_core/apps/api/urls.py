@@ -243,6 +243,16 @@ from .views.feeds.all import router as all_router
 
 api.add_router("/feed/all", all_router, tags=["feed"])
 
+
+# __ STATS ROUTER __
+from .views.stats import router as stats_router
+
+api.add_router(
+    "/stats/anime",
+    stats_router,
+    tags=["stats"],
+)
+
 urlpatterns = [
     path(
         "v1/",

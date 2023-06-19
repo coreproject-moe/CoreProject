@@ -9,12 +9,8 @@ from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from ninja.pagination import paginate
 
-try:
-    from django.contrib.postgres.search import TrigramSimilarity
+from django.contrib.postgres.search import TrigramSimilarity
 
-    HAS_POSTGRES = True
-except ImportError:
-    HAS_POSTGRES = False
 
 from django.http import Http404
 
@@ -30,8 +26,6 @@ def get_character_info(
     request: HttpRequest,
     filters: CharacterFilter = Query(...),
 ) -> QuerySet[CharacterModel]:
-    if not HAS_POSTGRES:
-        raise Http404("Looksups are not supported on any other databases except Postgres")
 
     query_object = Q()
     query_dict = filters.dict(exclude_none=True)
