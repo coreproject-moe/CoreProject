@@ -29,11 +29,10 @@ def get_json_data_given_model(
     histogram_data = (
         pd_dataframe.groupby(["month", "year"]).size().reset_index(name="count")
     )
-    histogram_json = histogram_data.to_dict(
-        orient="records"
-    )  # [{"month": 6, "year": 2023, "count": 1}]
+    # [{"month": 6, "year": 2023, "count": 1}]
+    histogram_json = histogram_data.to_dict(orient="records")
 
-    returnable_dictionary: dict[int, RETURN_TYPE] = {}
+    returnable_dictionary: RETURN_TYPE = {}
     for item in histogram_json:
         year = item["year"]
         month = item["month"]
