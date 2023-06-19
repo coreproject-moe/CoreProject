@@ -1,11 +1,12 @@
-from ninja import Router
+from typing import Literal
+
+import pandas as pd
 from apps.anime.models import AnimeModel
 from apps.characters.models import CharacterModel
-from apps.staffs.models import StaffModel
 from apps.producers.models import ProducerModel
-import pandas as pd
+from apps.staffs.models import StaffModel
 from django.http.request import HttpRequest
-from typing import Literal
+from ninja import Router
 
 router = Router()
 

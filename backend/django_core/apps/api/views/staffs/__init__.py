@@ -1,9 +1,10 @@
 from apps.api.auth import AuthBearer
 from apps.api.decorator import permission_required
 from apps.api.permissions import IsSuperUser
+from django.contrib.postgres.search import TrigramSimilarity
 from django.db.models import Q, QuerySet
 from django.db.models.functions import Greatest
-from django.http import Http404, HttpRequest
+from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
@@ -12,9 +13,6 @@ from ninja.pagination import paginate
 from ....staffs.models import StaffAlternateNameModel, StaffModel
 from ...filters.staffs import StaffFilter
 from ...schemas.staffs import StaffPOSTSchema
-
-from django.contrib.postgres.search import TrigramSimilarity
-
 
 router = Router()
 
@@ -25,7 +23,6 @@ def get_staff_info(
     request: HttpRequest,
     filters: StaffFilter = Query(...),
 ) -> QuerySet[StaffModel]:
-
     query_dict = filters.dict(exclude_none=True)
 
     query_object = Q()
