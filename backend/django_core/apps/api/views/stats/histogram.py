@@ -58,6 +58,8 @@ def get_json_data_given_model(
         returnable_dictionary.setdefault(year, {})
         returnable_dictionary[year].setdefault(month, {"count": count})
 
+    return returnable_dictionary
+
 
 @router.get("/anime", response=RETURN_TYPE)
 def anime_histogram(request: HttpRequest) -> RETURN_TYPE:
