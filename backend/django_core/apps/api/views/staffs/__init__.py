@@ -112,11 +112,6 @@ def post_staff_info(
             "alternate_names",
         ]
         and value
-        not in [
-            None,
-            "",  # ignore empty strings
-            0,
-        ]
     }
     staff_model_instance, _ = StaffModel.objects.get_or_create(
         name=kwargs["name"],
