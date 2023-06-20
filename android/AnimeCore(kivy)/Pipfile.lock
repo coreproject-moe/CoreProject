@@ -220,9 +220,7 @@
             "version": "==3.4"
         },
         "kivy": {
-            "extras": [
-                "full"
-            ],
+            "extras": ["full"],
             "hashes": [
                 "sha256:0454ad509b83f5ee04dd7bb46682f077adcde99d86c206127f2dd57aedd28f5b",
                 "sha256:0456359afe01a94d39bb29ce8a8dd9d9dcd86cec6532f17bffb0725647a8d63a",
