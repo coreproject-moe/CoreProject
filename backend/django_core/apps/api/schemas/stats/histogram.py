@@ -1,5 +1,6 @@
-from ninja.schema import Schema
 import datetime
+
+from ninja.schema import Schema
 
 
 class HistogramSchema(Schema):

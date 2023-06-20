@@ -1,14 +1,14 @@
-from typing import Literal
 
 
 from apps.anime.models import AnimeModel
 from apps.characters.models import CharacterModel
 from apps.producers.models import ProducerModel
 from apps.staffs.models import StaffModel
+from django.db.models import Count
+from django.db.models.functions import TruncMonth, TruncYear
 from django.http.request import HttpRequest
 from ninja import Router
-from django.db.models.functions import TruncMonth, TruncYear
-from django.db.models import Count
+
 from ...schemas.stats.histogram import HistogramSchema
 
 router = Router()
