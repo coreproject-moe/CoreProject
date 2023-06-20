@@ -18,11 +18,11 @@
     "default": {
         "buildozer": {
             "hashes": [
-                "sha256:040618d8625b2cb742938659045f98f27291271a68c699133faf0e715689ab20",
-                "sha256:640a361b53d2899cd11051308c79501c65733232c85b37c3d266999959a83b1b"
+                "sha256:987cc4363c4834893bbf1c32547b8afd953a16b92d788a654ca5f89ba197d9ea",
+                "sha256:ec685a53f88789607a43e629f9e25992c9be8824518b00d77ce3092ff7deca75"
             ],
             "index": "pypi",
-            "version": "==1.4.0"
+            "version": "==1.5.0"
         },
         "certifi": {
             "hashes": [
