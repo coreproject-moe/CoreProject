@@ -29,7 +29,7 @@
         "@types/lodash": "^4.14.195",
         "@types/uuid": "^9.0.2",
         "@types/voca": "^1.4.2",
-        "@typescript-eslint/eslint-plugin": "^5.59.11",
+        "@typescript-eslint/eslint-plugin": "^5.60.0",
         "@typescript-eslint/parser": "^5.60.0",
         "autoprefixer": "^10.4.14",
         "cross-env": "^7.0.3",
