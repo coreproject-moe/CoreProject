@@ -712,13 +712,13 @@ redis = "*"
 
 [[package]]
 name = "django-dynamic-filenames"
-version = "1.3.1"
+version = "1.3.2"
 description = "Write advanced filename patterns using the Format String Syntax."
 optional = false
 python-versions = "*"
 files = [
-    {file = "django-dynamic-filenames-1.3.1.tar.gz", hash = "sha256:92c679abd818f446e2c8c01d584aab2d93bdb4ed93f93d0a4ed5df052f284c08"},
-    {file = "django_dynamic_filenames-1.3.1-py2.py3-none-any.whl", hash = "sha256:89f8239c99d40a5634e439471b5cbbb65e5f08ee8d170f9907c76e72ab5c4ac2"},
+    {file = "django-dynamic-filenames-1.3.2.tar.gz", hash = "sha256:07c2f047fbb76c02f153305d53fdd95890cdbd5690072c7109a5638d4b456989"},
+    {file = "django_dynamic_filenames-1.3.2-py2.py3-none-any.whl", hash = "sha256:a78cb1a7b3642dc57c14ef8cc345894d988a4453ca6125292cefd3c328450417"},
 ]
 
 [package.dependencies]
