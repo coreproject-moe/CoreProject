@@ -603,20 +603,6 @@ files = [
 ]
 
 [[package]]
-name = "django-browser-reload"
-version = "1.10.0"
-description = "Automatically reload your browser in development."
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "django_browser_reload-1.10.0-py3-none-any.whl", hash = "sha256:a4c72ad7e7c670ce15d9c8e8f649d47c661fd1de383f3e5a0cd9da613b439364"},
-    {file = "django_browser_reload-1.10.0.tar.gz", hash = "sha256:7528891a2d231e9fa6b04575154e636d099b03480cd75c571aad97c3c5b9d9b9"},
-]
-
-[package.dependencies]
-Django = ">=3.2"
-
-[[package]]
 name = "django-cleanup"
 version = "8.0.0"
 description = "Deletes old files."
@@ -800,18 +786,20 @@ typing-extensions = "*"
 
 [[package]]
 name = "django-tailwind"
-version = "3.5.0"
+version = "3.6.0"
 description = "Tailwind CSS Framework for Django projects"
 optional = false
 python-versions = ">=3.8.1,<4.0.0"
 files = [
-    {file = "django_tailwind-3.5.0-py3-none-any.whl", hash = "sha256:dcc3b29463fff48a0e8ccd15c87fd467f0e746a7987bde0fdde6253dbb7861be"},
-    {file = "django_tailwind-3.5.0.tar.gz", hash = "sha256:c089b05b47d0e9d19567a81a74949fde16cbbfd8e4264c1f8eb4216a644065b2"},
+    {file = "django_tailwind-3.6.0-py3-none-any.whl", hash = "sha256:93db0ed1c18ae21ee8ad7f19f96744f5b2322e9d9872307a06e0f45b21cbe60a"},
+    {file = "django_tailwind-3.6.0.tar.gz", hash = "sha256:d878222a4ef957d1d0f0529dcd28b0065995ca6b8c7b43b058b9214c9e7d8ec0"},
 ]
 
 [package.dependencies]
 django = ">=3.2.14"
-django-browser-reload = ">=1.6.0,<2.0.0"
+
+[package.extras]
+reload = ["django-browser-reload (>=1.6.0,<2.0.0)"]
 
 [[package]]
 name = "django-treenode"
