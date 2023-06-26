@@ -19,7 +19,7 @@ export const recommendations = [
         id: 3,
         mal_id: 23273,
         name: "You Lie in April",
-        japanese_name: "四月は君の嘘",  
+        japanese_name: "四月は君の嘘",
         cover: "/images/YourLieInApril-bg.avif",
         episodes_count: 88,
     },

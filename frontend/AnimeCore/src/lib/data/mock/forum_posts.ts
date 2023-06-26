@@ -1,5 +1,5 @@
 export const forum_posts = [
-	{	
+	{
 		link: "/forum/",
 		title: "Celebrating 10 years of Hyouka!",
 		description: `Ousei Arima is a child prodigy known as the "Human Metronome" for playing the piano with precision and perfection. Guided by a strict mother and rigorous training, Kousei dominates every competition he enters`,

@@ -24,14 +24,14 @@ const config = {
                 strict: true
             })
             : is_node
-                ? node_adapter({
-                    precompress: false
-                })
-                : vercel({
+            ? node_adapter({
+                precompress: false
+            })
+            : vercel({
                     // an array of dependencies that esbuild should treat
                     // as external when bundling functions
-                    external: []
-                }),
+                external: []
+            }),
         alias: {
             $store: path.resolve("./src/lib/store"),
             $hooks: path.resolve("./src/hooks"),
