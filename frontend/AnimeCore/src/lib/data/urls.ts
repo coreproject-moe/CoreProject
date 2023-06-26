@@ -1,7 +1,19 @@
 import _ from "lodash";
 
 export class UrlMaps {
-    public DOMAIN = "https://backend.localhost";
+    #domain: string;
+
+    constructor({ domain }: { domain?: string }) {
+        if (domain) {
+            this.#domain = domain;
+        } else {
+            this.#domain = "https://backend.coreproject.moe";
+        }
+    }
+
+    public get DOMAIN() {
+        return this.#domain;
+    }
     private BASE_URL = this.DOMAIN + "/api/v1";
 
     // Url Declaration
@@ -39,29 +51,7 @@ export class UrlMaps {
     };
 
     // Searchable endpoints
-    public anime = ({
-        mal_id,
-        kitsu_id,
-        anilist_id,
-        name,
-        genres,
-        themes,
-        studios,
-        producers,
-        characters,
-        staffs
-    }: {
-        mal_id?: number;
-        kitsu_id?: number;
-        anilist_id?: number;
-        name?: string;
-        genres?: string;
-        themes?: string;
-        studios?: string;
-        producers?: string;
-        characters?: string;
-        staffs?: string;
-    }) => {
+    public anime = ({ mal_id, kitsu_id, anilist_id, name, genres, themes, studios, producers, characters, staffs }: { mal_id?: number; kitsu_id?: number; anilist_id?: number; name?: string; genres?: string; themes?: string; studios?: string; producers?: string; characters?: string; staffs?: string }) => {
         const url = new URL(`${this.BASE_URL}/anime`);
         const searchObject = _.pickBy({
             mal_id: mal_id ?? 0,
