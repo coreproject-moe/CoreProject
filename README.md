@@ -11,13 +11,6 @@
 
   <p align="center">
    <b> A feature-rich modern streaming site! </b> Currently in active development
-   <br>
-   Site is in v2 UI -
-   Check <a href="https://core-project-v3-ui.vercel.app">v3 UI</a> |
-   <a href="https://github.com/Tokito69/CoreProject-V3-UI/">Working Repo for v3 UI</a>
-    <br><br>
-    <a href="https://github.com/baseplate-admin/CoreProject"><strong>Explore the docs »</strong></a>
-  </p>
 </div>
 
 <p align="center">
@@ -46,9 +39,7 @@
 ## Screenshots
 
 <p float="left">
-  <i>From V3 UI, click on the images to open full view in new tab</i>
-  <br>
-  <br>
+
   <img src="https://user-images.githubusercontent.com/61817579/235350591-ef773175-8d90-4a7f-b412-1aa71953b5b1.png" alt="Home Page Mockup" width=49%>
   <img src="https://user-images.githubusercontent.com/61817579/235350607-a77e4cbe-54f5-4678-ad49-81bc740ea6a0.png" alt="Anime Info Page Mockup" width=49%>
   <img src="https://user-images.githubusercontent.com/61817579/235350621-56415d11-991d-4a64-b61f-a27da6e56529.png" alt="Register Page Mockup" width=49%>
