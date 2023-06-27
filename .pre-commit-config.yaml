@@ -86,13 +86,13 @@ repos:
             args: [--py311-plus]
 
     - repo: https://github.com/tox-dev/pyproject-fmt
-      rev: "0.12.0"
+      rev: "0.12.1"
       hooks:
           - id: pyproject-fmt
 
     - repo: https://github.com/charliermarsh/ruff-pre-commit
       # Ruff version.
-      rev: "v0.0.272"
+      rev: "v0.0.275"
       hooks:
           - id: ruff
             # Respect `exclude` and `extend-exclude` settings.
