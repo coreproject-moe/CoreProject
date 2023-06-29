@@ -9,7 +9,7 @@
     import Underline from "$icons/underline.svelte";
     import { offset } from "caret-pos";
     import { tick } from "svelte";
-    import type { SvelteComponentDev } from "svelte/internal";
+    import type { SvelteComponent } from "svelte";
     import tippy from "tippy.js";
     import xss from "xss";
 
@@ -29,7 +29,7 @@
         [key: string]: {
             function: (elemnt: HTMLElement) => void;
             icon: {
-                component: typeof SvelteComponentDev;
+                component: typeof SvelteComponent<{}>;
                 class: string;
             };
             description: string;

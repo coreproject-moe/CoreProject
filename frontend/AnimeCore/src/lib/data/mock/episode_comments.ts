@@ -26,4 +26,4 @@ export const episode_comments = [
         content: `This episode is damn good. **Tokito** is the best :P`,
         likes: 69
     }
-]
+];

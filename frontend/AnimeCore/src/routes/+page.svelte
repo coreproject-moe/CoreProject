@@ -28,8 +28,8 @@
     import { timer as timerStore } from "$store/timer";
     import { Timer as EasyTimer } from "easytimer.js";
     import { onDestroy, onMount } from "svelte";
+    import type { SvelteComponent } from "svelte";
     import { swipe } from "svelte-gestures";
-    import type { SvelteComponentDev } from "svelte/internal";
     import { tweened } from "svelte/motion";
     import { blur } from "svelte/transition";
     import tippy from "tippy.js";
@@ -140,7 +140,7 @@
             [key: string]: {
                 title?: string;
                 icon: {
-                    component: typeof SvelteComponentDev;
+                    component: typeof SvelteComponent<{}>;
                     class: string;
                 };
             };
@@ -220,172 +220,170 @@
     {@html opengraph_html}
 </svelte:head>
 
-<div class="md:p-[1.25vw] md:pr-[3.75vw]">
-    <div class="flex flex-col justify-between md:flex-row">
-        <latest-animes class="h-[22.5rem] w-full md:h-[27.875vw] md:w-[42.1875vw]">
-            <div
-                use:swipe={{ timeframe: 300, minSwipeDistance: 100, touchAction: "pan-y" }}
-                on:swipe={swipe_handler}
-                class="relative inline-grid h-full w-full"
-                bind:this={main_hero_slider_element}
-            >
-                {#each latest_animes as anime, index}
-                    {#if index === main_hero_slide_active_index}
-                        {@const slide_button_background = slide_buttons[main_hero_slide_active_index].background}
-                        <div
-                            class="relative col-start-1 col-end-2 row-start-1 row-end-[200]"
-                            transition:blur|local
-                            on:mouseenter={() => {
-                                $timerStore = "pause";
-                            }}
-                            on:mouseleave={() => {
-                                $timerStore = "start";
-                            }}
-                            on:touchstart={() => {
-                                $timerStore = "pause";
-                            }}
-                            on:touchend={() => {
-                                $timerStore = "start";
-                            }}
-                        >
-                            <ImageLoader
-                                src={anime.cover}
-                                class="absolute h-full w-full object-cover object-center md:rounded-t-[0.875vw]"
-                            />
+<home-container class="block md:p-[1.25vw] md:pr-[3.75vw]">
+    <hero-section class="flex flex-col justify-between md:flex-row">
+        <latest-animes-slider
+            class="relative inline-grid h-[22.5rem] w-full md:h-[27.875vw] md:w-[42.1875vw]"
+            use:swipe={{ timeframe: 300, minSwipeDistance: 100, touchAction: "pan-y" }}
+            on:swipe={swipe_handler}
+            bind:this={main_hero_slider_element}
+        >
+            {#each latest_animes as anime, index}
+                {@const active = index === main_hero_slide_active_index}
+                {@const slide_button_background = slide_buttons[main_hero_slide_active_index].background}
 
-                            <gradient-overlay class="absolute inset-0 bg-gradient-to-t from-surface-900 to-surface-900/30 md:from-surface-900/90 md:to-surface-900/25" />
-                            <gradient-overlay class="absolute inset-0 hidden bg-gradient-to-r from-surface-900 to-surface-900/25 md:flex md:from-surface-900/50" />
+                {#if active}
+                    <anime-slide
+                        class="relative col-start-1 col-end-2 row-start-1 row-end-[200]"
+                        transition:blur
+                        on:mouseenter={() => {
+                            $timerStore = "pause";
+                        }}
+                        on:mouseleave={() => {
+                            $timerStore = "start";
+                        }}
+                        on:touchstart={() => {
+                            $timerStore = "pause";
+                        }}
+                        on:touchend={() => {
+                            $timerStore = "start";
+                        }}
+                    >
+                        <ImageLoader
+                            src={anime.cover}
+                            class="absolute h-full w-full object-cover object-center md:rounded-t-[0.875vw]"
+                        />
 
-                            <div class="absolute bottom-0 px-[3vw] py-[2.625vw] md:px-[3.75vw]">
-                                <span class="text-3xl font-bold leading-[2.375vw] md:text-[2vw]">
-                                    {anime.name}
+                        <gradient-overlay class="absolute inset-0 bg-gradient-to-t from-surface-900 to-surface-900/30 md:from-surface-900/90 md:to-surface-900/25" />
+                        <gradient-overlay class="absolute inset-0 hidden bg-gradient-to-r from-surface-900 to-surface-900/25 md:flex md:from-surface-900/50" />
+
+                        <anime-details class="absolute bottom-0 px-4 py-[2.625vw] md:px-[3.75vw]">
+                            <anime-name class="text-3xl font-bold leading-[2.375vw] md:text-[2vw]">
+                                {anime.name}
+                            </anime-name>
+                            <anime-infos class="flex flex-wrap items-center gap-2 pt-3 text-xs font-medium md:gap-[0.65vw] md:pt-[0.5vw] md:text-[0.9375vw]">
+                                <span class="leading-[1.125vw]">
+                                    {anime.type}
                                 </span>
-                                <p class="flex flex-wrap items-center gap-2 pt-3 text-xs font-medium md:gap-[0.65vw] md:pt-[0.5vw] md:text-[0.9375vw]">
-                                    <span class="leading-[1.125vw]">
-                                        {anime.type}
-                                    </span>
-                                    <Circle class="w-[0.25vw] opacity-75" />
-                                    <span class="leading-[1.125vw]">
-                                        {anime.episodes_count} eps
-                                    </span>
-                                    <Circle class="w-[0.25vw] opacity-75" />
-                                    <span class="leading-[1.125vw]">Completed</span>
-                                    <Circle class="w-[0.25vw] opacity-75" />
-                                    <span class="capitalize leading-[1.125vw]">
-                                        {new FormatDate(anime.aired_from).format_to_season}
-                                    </span>
-                                    <Circle class="w-[0.25vw] opacity-75" />
-                                    <span class="leading-[1.125vw]">
-                                        {anime.studios[0]}
-                                    </span>
-                                </p>
+                                <Circle class="w-[0.25vw] opacity-75" />
+                                <span class="leading-[1.125vw]">
+                                    {anime.episodes_count} eps
+                                </span>
+                                <Circle class="w-[0.25vw] opacity-75" />
+                                <span class="leading-[1.125vw]">Completed</span>
+                                <Circle class="w-[0.25vw] opacity-75" />
+                                <span class="capitalize leading-[1.125vw]">
+                                    {new FormatDate(anime.aired_from).format_to_season}
+                                </span>
+                                <Circle class="w-[0.25vw] opacity-75" />
+                                <span class="leading-[1.125vw]">
+                                    {anime.studios[0]}
+                                </span>
+                            </anime-infos>
 
-                                <div class="flex gap-1 pb-2 pt-3 md:gap-[0.5vw] md:pt-[0.5vw]">
-                                    {#each anime.genres as item}
-                                        <span class="rounded bg-surface-900 p-1 px-2 text-xs md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.4vw] md:text-[0.75vw] md:font-semibold">{item}</span>
-                                    {/each}
-                                </div>
+                            <anime-genres class="flex gap-1 pb-2 pt-3 md:gap-[0.5vw] md:pt-[0.5vw]">
+                                {#each anime.genres as item}
+                                    <span class="rounded bg-surface-900 p-1 px-2 text-xs md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.4vw] md:text-[0.75vw] md:font-semibold">{item}</span>
+                                {/each}
+                            </anime-genres>
 
-                                <ScrollArea
-                                    gradientMask
-                                    parentClass="max-h-16 md:max-h-[6vw]"
-                                    class="text-xs font-medium leading-4 text-surface-200 md:pt-[0.75vw] md:text-[0.85vw] md:leading-[1.1vw]"
+                            <ScrollArea
+                                gradientMask
+                                parentClass="max-h-16 md:max-h-[6vw]"
+                                class="text-xs font-medium leading-4 text-surface-200 md:pt-[0.75vw] md:text-[0.85vw] md:leading-[1.1vw]"
+                            >
+                                {anime.synopsis}
+                            </ScrollArea>
+
+                            <options class="mb-2 mt-4 flex gap-3 md:mb-0 md:mt-[1.5vw] md:gap-[1vw]">
+                                <button class="{slide_button_background} btn btn-icon flex h-12 w-24 justify-center rounded-lg text-base font-bold text-surface-900 md:h-[3.125vw] md:w-[5.4375vw] md:rounded-[0.625vw] md:text-[0.875vw]">
+                                    <PlayCircle class="w-5 text-surface-900 md:w-[1.25vw]" />
+                                    <span>Ep 1</span>
+                                </button>
+
+                                <a
+                                    href="./mal/{anime.mal_id}"
+                                    class="unstyled"
                                 >
-                                    {anime.synopsis}
-                                </ScrollArea>
+                                    <button class="btn btn-icon flex h-12 w-28 items-center justify-center rounded-lg bg-surface-900 text-base font-semibold text-surface-50 md:h-[3.125vw] md:w-[6.5vw] md:rounded-[0.5vw] md:text-[0.875vw] md:font-bold">
+                                        <Info class="w-5 text-surface-50 md:w-[1.25vw]" />
+                                        <span>Details</span>
+                                    </button>
+                                </a>
 
-                                <div class="mb-2 mt-4 flex items-end justify-between md:mb-0 md:mt-[1.5vw]">
-                                    <div class="flex gap-3 md:gap-[1vw]">
-                                        <button class="{slide_button_background} btn btn-icon flex h-12 w-24 justify-center rounded-lg text-base font-bold text-surface-900 md:h-[3.125vw] md:w-[5.4375vw] md:rounded-[0.625vw] md:text-[0.875vw]">
-                                            <PlayCircle class="w-5 text-surface-900 md:w-[1.25vw]" />
-                                            <span>Ep 1</span>
-                                        </button>
+                                <button class="btn btn-icon h-12 w-12 rounded-[1.5vw] bg-surface-900 text-[3vw] font-bold text-surface-50 md:h-[3.125vw] md:w-[3.125vw] md:rounded-[0.5vw] md:text-[0.875vw]">
+                                    <Edit
+                                        variant="with_underline_around_pencil"
+                                        class="w-5 text-surface-50 md:w-[1.25vw]"
+                                    />
+                                </button>
+                            </options>
+                        </anime-details>
+                    </anime-slide>
+                {/if}
+            {/each}
 
-                                        <a
-                                            href="./mal/{anime.mal_id}"
-                                            class="unstyled"
-                                        >
-                                            <button class="btn btn-icon flex h-12 w-28 items-center justify-center rounded-lg bg-surface-900 text-base font-semibold text-surface-50 md:h-[3.125vw] md:w-[6.5vw] md:rounded-[0.5vw] md:text-[0.875vw] md:font-bold">
-                                                <Info class="w-5 text-surface-50 md:w-[1.25vw]" />
-                                                <span>Details</span>
-                                            </button>
-                                        </a>
+            <slide-progress class="flex flex-col px-[3vw] md:px-0">
+                <progress-bar
+                    class="h-[0.2rem] md:h-[0.145vw] {slide_buttons[main_hero_slide_active_index].background}"
+                    style="width: {$tweened_progress_value}%;"
+                />
 
-                                        <button class="btn btn-icon h-12 w-12 rounded-[1.5vw] bg-surface-900 text-[3vw] font-bold text-surface-50 md:h-[3.125vw] md:w-[3.125vw] md:rounded-[0.5vw] md:text-[0.875vw]">
-                                            <Edit
-                                                variant="with_underline_around_pencil"
-                                                class="w-5 text-surface-50 md:w-[1.25vw]"
-                                            />
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    {/if}
-                {/each}
+                <animes-boxes class="hidden w-full grid-cols-6 gap-[0.9375vw] md:mt-[1.25vw] md:grid">
+                    {#each latest_animes as _, index}
+                        <button
+                            class="col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] {slide_buttons[index].border} transition duration-300 hover:border-surface-50/50 {index === main_hero_slide_active_index ? slide_buttons[index].background : ''}"
+                            on:click={() => {
+                                timer?.reset();
+                                timer?.start();
+                                main_hero_slide_active_index = index;
+                            }}
+                        />
+                    {/each}
+                </animes-boxes>
+            </slide-progress>
 
-                <div class="flex flex-col px-[3vw] md:px-0">
-                    <progress-bar
-                        class="h-[0.2rem] md:h-[0.145vw] {slide_buttons[main_hero_slide_active_index].background}"
-                        style="width: {$tweened_progress_value}%;"
-                    />
-
-                    <div class="hidden w-full grid-cols-6 gap-[0.9375vw] md:mt-[1.25vw] md:grid">
-                        {#each latest_animes as _, index}
-                            <button
-                                class="col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] {slide_buttons[index].border} transition duration-300 hover:border-surface-50/50 {index === main_hero_slide_active_index ? slide_buttons[index].background : ''}"
-                                on:click={() => {
-                                    timer?.reset();
-                                    timer?.start();
-                                    main_hero_slide_active_index = index;
-                                }}
-                            />
-                        {/each}
-                    </div>
-                </div>
-
-                <button
-                    class="btn btn-icon absolute -left-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] bg-secondary-800 md:flex"
-                    on:click={() => {
-                        timer?.reset();
-                        timer?.start();
-                        minus_one_to_main_hero_slide_active_index();
-                    }}
-                >
-                    <Chevron
-                        color="text-white"
-                        class="w-[1.25vw] rotate-90"
-                    />
-                </button>
-                <button
-                    class="btn btn-icon absolute -right-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] bg-secondary-800 md:flex"
-                    on:click={async () => {
-                        timer?.reset();
-                        timer?.start();
-                        add_one_to_main_hero_slide_active_index();
-                    }}
-                >
-                    <Chevron
-                        color="text-white"
-                        class="w-[1.25vw] -rotate-90"
-                    />
-                </button>
-            </div>
-        </latest-animes>
+            <button
+                class="btn btn-icon absolute -left-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] bg-secondary-800 md:flex"
+                on:click={() => {
+                    timer?.reset();
+                    timer?.start();
+                    minus_one_to_main_hero_slide_active_index();
+                }}
+            >
+                <Chevron
+                    color="text-white"
+                    class="w-[1.25vw] rotate-90"
+                />
+            </button>
+            <button
+                class="btn btn-icon absolute -right-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] bg-secondary-800 md:flex"
+                on:click={async () => {
+                    timer?.reset();
+                    timer?.start();
+                    add_one_to_main_hero_slide_active_index();
+                }}
+            >
+                <Chevron
+                    color="text-white"
+                    class="w-[1.25vw] -rotate-90"
+                />
+            </button>
+        </latest-animes-slider>
 
         <latest-episodes class="hidden w-[21.5625vw] md:block">
-            <div class="flex items-center justify-between pr-[0.75vw]">
-                <div class="flex items-center gap-[0.625vw]">
+            <section-header class="flex items-center justify-between pr-[0.75vw]">
+                <header-title class="flex items-center gap-[0.625vw]">
                     <span class="text-[1.25vw] font-bold">Latest Episodes</span>
                     <button class="btn btn-icon h-[1.7vw] w-[1.7vw] rounded-[0.3vw] bg-surface-400">
                         <SettingsOutline class="w-[0.8vw]" />
                     </button>
-                </div>
+                </header-title>
                 <button class="btn btn-icon h-[1.75vw] w-[6vw] rounded-[0.3vw] bg-surface-400 text-[0.9vw] font-semibold">
                     <span>Full List</span>
                     <ArrowUpRight class="w-[0.9vw]" />
                 </button>
-            </div>
+            </section-header>
 
             <ScrollArea
                 offsetScrollbar
@@ -393,7 +391,7 @@
                 class="flex flex-col gap-[1vw]"
             >
                 {#each latest_episodes as anime}
-                    <div class="relative h-[5vw]">
+                    <anime-episode class="relative h-[5vw]">
                         <ImageLoader
                             src={anime.cover}
                             class="absolute h-full w-full rounded-[0.75vw] object-cover object-center"
@@ -401,58 +399,56 @@
                         <gradient-overlay class="gradient absolute inset-0 bg-gradient-to-t from-surface-900/75 to-surface-900/0" />
                         <gradient-overlay class="gradient absolute inset-0 bg-gradient-to-r from-surface-900/50 to-surface-900/0" />
 
-                        <div class="absolute inset-0">
-                            <div class="flex items-start justify-between p-[1.3125vw]">
-                                <div class="flex flex-col gap-[0.25vw]">
-                                    <span class="text-[1vw] font-semibold leading-[1.1875vw] text-white">
-                                        {anime.name}
+                        <episode-info class="absolute inset-0 flex items-start justify-between p-[1.3125vw]">
+                            <div class="flex flex-col gap-[0.25vw]">
+                                <episode-name class="text-[1vw] font-semibold leading-[1.1875vw] text-white">
+                                    {anime.name}
+                                </episode-name>
+                                <episode-dates class="flex items-center gap-[0.35vw] text-[0.8vw]">
+                                    <span class="font-semibold">
+                                        Ep {anime.episode_number < 10 ? "0" + anime.episode_number : anime.episode_number}
                                     </span>
-                                    <span class="flex items-center gap-[0.35vw] text-[0.8vw]">
-                                        <span class="font-semibold">
-                                            Ep {anime.episode_number < 10 ? "0" + anime.episode_number : anime.episode_number}
-                                        </span>
-                                        <span>
-                                            aired {new FormatDate(anime.release_date).format_to_time_from_now}
-                                        </span>
+                                    <span>
+                                        aired {new FormatDate(anime.release_date).format_to_time_from_now}
                                     </span>
-                                </div>
-                                <button class="btn btn-icon h-[2.5vw] w-[2.5vw] rounded-full bg-warning-400 text-surface-900">
-                                    <Play class="w-[1.25vw]" />
-                                </button>
+                                </episode-dates>
                             </div>
-                        </div>
-                    </div>
+                            <button class="btn btn-icon h-[2.5vw] w-[2.5vw] rounded-full bg-warning-400 text-surface-900">
+                                <Play class="w-[1.25vw]" />
+                            </button>
+                        </episode-info>
+                    </anime-episode>
                 {/each}
             </ScrollArea>
 
-            <div class="mt-[1vw] flex items-start justify-between gap-[2vw] pr-[0.75vw]">
+            <section-bottom class="mt-[1vw] flex items-start justify-between gap-[2vw] pr-[0.75vw]">
                 <span class="text-[0.75vw] font-semibold md:leading-[1.25vw]">showing recently aired episodes from your Anime List</span>
                 <button class="btn p-0 text-[0.75vw] font-semibold text-warning-400">Change to All</button>
-            </div>
+            </section-bottom>
         </latest-episodes>
 
-        <latest-episodes-mobile class="mt-10 px-[3vw] md:hidden">
-            <div class="flex items-end justify-between">
-                <div class="flex flex-col gap-1">
+        <latest-episodes-mobile class="mt-10 px-4 md:hidden">
+            <section-header class="flex items-end justify-between">
+                <header-title class="flex flex-col gap-1">
                     <p class="unstyled text-xl font-semibold">Latest Episodes</p>
                     <span class="text-xs font-medium text-surface-200">newest released episodes from anime in your list</span>
-                </div>
+                </header-title>
                 <button class="btn rounded-md bg-surface-400 px-3 py-2 text-sm font-semibold">
                     <span>Full List</span>
                     <ArrowUpRight class="w-4" />
                 </button>
-            </div>
+            </section-header>
 
-            <div class="mt-6 flex gap-5 overflow-x-scroll scroll-smooth pb-5">
+            <animes-episodes class="mt-6 flex gap-5 overflow-y-hidden overflow-x-scroll scroll-smooth pb-5">
                 {#each latest_episodes as anime}
                     <episode class="w-36 flex-shrink-0">
-                        <div class="relative">
+                        <anime-banner class="relative block">
                             <ImageLoader
                                 class="h-52 w-full rounded-[1.25rem] object-cover"
                                 src={anime.cover}
                             />
                             <div class="absolute inset-0 bg-gradient-to-t from-surface-900/25 to-surface-900/0" />
-                        </div>
+                        </anime-banner>
                         <span class="mt-2 line-clamp-1 text-sm font-semibold tracking-wide text-white">{anime.name}</span>
                         <p class="mt-1 text-xs text-surface-50">
                             Ep {anime.episode_number}
@@ -460,7 +456,7 @@
                         </p>
                     </episode>
                 {/each}
-            </div>
+            </animes-episodes>
         </latest-episodes-mobile>
 
         <navigation-card class="relative mt-[3.4vw] hidden h-[24.5vw] w-[16.625vw] md:block">
@@ -472,13 +468,13 @@
             <gradient-overlay class="gradient absolute inset-0 bg-gradient-to-t from-surface-900 from-[1%] to-surface-900/25" />
             <gradient-overlay class="gradient absolute inset-0 bg-gradient-to-r from-surface-900/50 to-surface-900/25" />
 
-            <div class="absolute inset-0 px-[1.875vw] pt-[2vw]">
-                <div class="flex flex-col gap-[0.2w]">
+            <navigation-content class="absolute inset-0 px-[1.875vw] pt-[2vw]">
+                <section-header class="flex flex-col gap-[0.2w]">
                     <span class="text-[1.5vw] font-bold leading-[1vw]">Welcome</span>
                     <span class="text-[0.875vw] font-semibold leading-[2.5vw]">Jump quickly into</span>
-                </div>
+                </section-header>
 
-                <div class="mt-[1vw] flex flex-col gap-[0.625vw]">
+                <navigation-left-buttons class="mt-[1vw] flex flex-col gap-[0.625vw]">
                     {#each Object.entries(icon_mapping.left) as item}
                         {@const item_title = item[1].title}
                         {@const item_icon = item[1].icon}
@@ -493,9 +489,9 @@
                             <span class="text-[1vw] font-bold">{item_title}</span>
                         </div>
                     {/each}
-                </div>
+                </navigation-left-buttons>
 
-                <div class="mt-[0.4vw]">
+                <navigation-right-buttons class="mt-[0.4vw]">
                     <span class="text-[0.9vw] font-semibold leading-none">More</span>
                     <div class="mt-[0.75vw] flex gap-[0.9375vw]">
                         {#each Object.entries(icon_mapping.bottom) as item}
@@ -509,150 +505,140 @@
                             </button>
                         {/each}
                     </div>
-                </div>
+                </navigation-right-buttons>
 
-                <div class="mt-[1vw] flex items-center justify-center">
+                <coreproject-logo class="mt-[1vw] flex items-center justify-center">
                     <CoreProject />
-                </div>
-            </div>
+                </coreproject-logo>
+            </navigation-content>
         </navigation-card>
-    </div>
+    </hero-section>
 
-    <div class="md:flex">
-        <div class="md:basis-[76%]">
-            <my-list class="hidden md:flex">
-                <div class="mt-[2.1875vw] w-full">
-                    <div class="flex items-center gap-[0.625vw]">
-                        <span class="text-[1.25vw] font-bold">My List</span>
-                        <button class="btn btn-icon h-[1.7vw] w-[1.7vw] rounded-[0.3vw] bg-surface-400">
-                            <SettingsOutline class="w-[0.9vw]" />
-                        </button>
-                    </div>
+    <my-list class="mt-[2.1875vw] hidden w-[68vw] flex-col md:flex">
+        <section-header class="flex items-center gap-[0.625vw]">
+            <header-title class="text-[1.25vw] font-bold">My List</header-title>
+            <button class="btn btn-icon h-[1.7vw] w-[1.7vw] rounded-[0.3vw] bg-surface-400">
+                <SettingsOutline class="w-[0.9vw]" />
+            </button>
+        </section-header>
 
-                    <div class="mt-[0.5vw] flex items-center justify-between">
-                        <span class="text-[1vw] font-semibold text-surface-50">
-                            {my_list.length} anime in Watching
-                        </span>
+        <my-list-info class="mt-[0.5vw] flex items-center justify-between">
+            <span class="text-[1vw] font-semibold text-surface-50">
+                {my_list.length} anime in Watching
+            </span>
 
-                        <div class="flex items-center gap-[1vw]">
-                            <button class="btn btn-icon h-[2.25vw] w-[6.625vw] gap-[0.625vw] rounded-[0.375vw] bg-surface-400 p-0 text-[0.875vw] font-semibold">
-                                Watching
-                                <Chevron class="w-[1vw]" />
+            <my-list-options class="flex items-center gap-[1vw]">
+                <button class="btn btn-icon h-[2.25vw] w-[6.625vw] gap-[0.625vw] rounded-[0.375vw] bg-surface-400 p-0 text-[0.875vw] font-semibold">
+                    Watching
+                    <Chevron class="w-[1vw]" />
+                </button>
+                <button class="btn btn-icon h-[2.25vw] w-[5.625vw] gap-[0.625vw] rounded-[0.375vw] bg-surface-400 p-0 text-[0.875vw] font-semibold">
+                    Full List
+                    <ArrowUpRight class="w-[1vw]" />
+                </button>
+            </my-list-options>
+        </my-list-info>
+
+        <my-list-animes class="relative mb-[2vw] mt-[1.5vw] grid grid-cols-7 gap-[1.5625vw]">
+            {#each my_list as anime}
+                <anime-card
+                    class="group col-span-1"
+                    use:tippy={{
+                        arrow: true,
+                        allowHTML: true,
+                        interactive: true,
+                        placement: "top",
+                        offset: [0, 17],
+                        animation: "shift-away",
+                        hideOnClick: false,
+                        appendTo: "parent",
+                        onTrigger: async (instance) => {
+                            const node = document.createElement("div");
+                            new MyListAnimeDetails({
+                                target: node,
+                                props: {
+                                    anime_cover: anime.cover,
+                                    anime_name: anime.name,
+                                    anime_type: anime.type,
+                                    anime_genres: anime.genres,
+                                    anime_studios: anime.studios,
+                                    anime_synopsis: anime.synopsis,
+                                    anime_current_episode: anime.current_episode,
+                                    anime_episodes_count: anime.episodes_count,
+                                    anime_release_date: anime.release_date
+                                }
+                            });
+
+                            instance.setContent(node);
+                        }
+                    }}
+                >
+                    <card class="relative block h-[12.5vw] w-full">
+                        <ImageLoader
+                            src={anime.cover}
+                            alt={anime.name}
+                            class="absolute h-full w-full rounded-[0.875vw] object-cover object-center"
+                        />
+
+                        <gradient-overlay class=" absolute inset-0 bg-gradient-to-t from-surface-900/90 to-surface-900/25 transition duration-300 group-hover:to-surface-900/75" />
+
+                        <anime-details class="absolute inset-0 grid w-full grid-cols-1 place-items-center transition duration-300 group-hover:opacity-0">
+                            <anime-name class="line-clamp-2 text-center text-[1vw] font-semibold leading-[1.35vw] text-white">
+                                {anime.name}
+                            </anime-name>
+                            <episode-details class="absolute bottom-[1vw] text-center text-[1vw] font-medium text-surface-200">
+                                {anime.current_episode}/{anime.episodes_count}
+                            </episode-details>
+                        </anime-details>
+
+                        <hover-buttons class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                            <button class="btn btn-icon h-[3.125vw] w-[5.4375vw] rounded-[0.625vw] bg-primary-500 text-[0.875vw] font-bold">
+                                <PlayCircle class="w-[1.25vw]" />
+                                <span>Ep {anime.current_episode}</span>
                             </button>
-                            <button class="btn btn-icon h-[2.25vw] w-[5.625vw] gap-[0.625vw] rounded-[0.375vw] bg-surface-400 p-0 text-[0.875vw] font-semibold">
-                                Full List
-                                <ArrowUpRight class="w-[1vw]" />
+
+                            <button class="btn btn-icon h-[3.125vw] w-[5.4375vw] rounded-[0.375vw] border-[0.2vw] border-surface-50/50 bg-surface-900 text-[0.875vw] font-bold text-surface-50">
+                                <Info class="w-[1.25vw]" />
+                                <span>Info</span>
                             </button>
-                        </div>
-                    </div>
+                        </hover-buttons>
+                    </card>
+                </anime-card>
+            {/each}
+        </my-list-animes>
+    </my-list>
 
-                    <div class="relative mb-[2vw] mt-[1.5vw] flex gap-[1.5625vw]">
-                        {#each my_list as anime}
-                            <div
-                                class="group basis-[14%]"
-                                use:tippy={{
-                                    arrow: true,
-                                    allowHTML: true,
-                                    interactive: true,
-                                    placement: "top",
-                                    offset: [0, 17],
-                                    animation: "shift-away",
-                                    hideOnClick: false,
-                                    appendTo: "parent",
-                                    onTrigger: async (instance) => {
-                                        const node = document.createElement("div");
-                                        new MyListAnimeDetails({
-                                            target: node,
-                                            props: {
-                                                anime_cover: anime.cover,
-                                                anime_name: anime.name,
-                                                anime_type: anime.type,
-                                                anime_genres: anime.genres,
-                                                anime_studios: anime.studios,
-                                                anime_synopsis: anime.synopsis,
-                                                anime_current_episode: anime.current_episode,
-                                                anime_episodes_count: anime.episodes_count,
-                                                anime_release_date: anime.release_date
-                                            }
-                                        });
+    <continue-watching-mobile class="mt-5 block px-4 md:hidden">
+        <section-header class="flex items-end justify-between">
+            <header-title class="flex flex-col gap-1">
+                <p class="unstyled text-xl font-semibold">Continue Watching</p>
+                <span class="text-xs font-medium text-surface-200">resume from where you left off</span>
+            </header-title>
+            <button class="btn rounded-md bg-surface-400 px-3 py-2 text-sm font-semibold">
+                <span>Full List</span>
+                <ArrowUpRight class="w-4" />
+            </button>
+        </section-header>
 
-                                        instance.setContent(node);
-                                    }
-                                }}
-                            >
-                                <div class="relative h-[12.5vw] w-full">
-                                    <ImageLoader
-                                        src={anime.cover}
-                                        alt={anime.name}
-                                        class="absolute h-full w-full rounded-[0.875vw] object-cover object-center"
-                                    />
-
-                                    <gradient-overlay class=" absolute inset-0 bg-gradient-to-t from-surface-900/90 to-surface-900/25 transition duration-300 group-hover:to-surface-900/75" />
-
-                                    <div class="absolute inset-0 grid w-full grid-cols-1 place-items-center transition duration-300 group-hover:opacity-0">
-                                        <span class="line-clamp-2 text-center text-[1vw] font-semibold leading-[1.35vw] text-white">
-                                            {anime.name}
-                                        </span>
-                                        <span class="absolute bottom-[1vw] text-center text-[1vw] font-medium text-surface-200">
-                                            {anime.current_episode}/{anime.episodes_count}
-                                        </span>
-                                    </div>
-
-                                    <div class="absolute inset-0 grid w-full grid-cols-1 place-items-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                                        <div class="flex flex-col gap-[0.5vw]">
-                                            <button class="btn btn-icon h-[3.125vw] w-[5.4375vw] rounded-[0.625vw] bg-primary-500 text-[0.875vw] font-bold">
-                                                <PlayCircle class="w-[1.25vw]" />
-                                                <span>Ep {anime.current_episode}</span>
-                                            </button>
-
-                                            <button class="btn btn-icon h-[3.125vw] w-[5.4375vw] rounded-[0.375vw] border-[0.2vw] border-surface-50/50 bg-surface-900 text-[0.875vw] font-bold text-surface-50">
-                                                <Info class="w-[1.25vw]" />
-                                                <span>Info</span>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {/each}
-                    </div>
-                </div>
-            </my-list>
-
-            <continue-watching-mobile class="md:hidden">
-                <div class="mt-5 px-[3vw]">
-                    <div class="flex items-end justify-between">
-                        <div class="flex flex-col gap-1">
-                            <p class="unstyled text-xl font-semibold">Continue Watching</p>
-                            <span class="text-xs font-medium text-surface-200">resume from where you left off</span>
-                        </div>
-                        <button class="btn rounded-md bg-surface-400 px-3 py-2 text-sm font-semibold">
-                            <span>Full List</span>
-                            <ArrowUpRight class="w-4" />
-                        </button>
-                    </div>
-
-                    <div class="mt-6 flex gap-5 overflow-x-scroll scroll-smooth pb-5">
-                        {#each continue_watching as anime}
-                            <episode class="w-36 flex-shrink-0">
-                                <div class="relative">
-                                    <ImageLoader
-                                        class="h-52 w-full rounded-[1.25rem] object-cover"
-                                        src={anime.banner}
-                                        alt={anime.name}
-                                    />
-                                    <div class="absolute inset-0 bg-gradient-to-t from-surface-900/25 to-surface-900/0" />
-                                </div>
-                                <span class="mt-2 line-clamp-1 text-sm font-semibold tracking-wide text-white">{anime.name}</span>
-                                <p class="mt-1 flex items-center gap-2 text-xs text-surface-50">
-                                    <span>{anime.current_episode}/{anime.episodes_count}</span>
-                                    <Circle class="w-1" />
-                                    <span>{new FormatTime(anime.time_watched).format_seconds_to_time_stamp_duration}</span>
-                                </p>
-                            </episode>
-                        {/each}
-                    </div>
-                </div>
-            </continue-watching-mobile>
-        </div>
-    </div>
-</div>
+        <animes-cards class="mt-6 flex gap-5 overflow-x-scroll scroll-smooth pb-5">
+            {#each continue_watching as anime}
+                <episode class="w-36 flex-shrink-0">
+                    <anime-banner class="relative block">
+                        <ImageLoader
+                            class="h-52 w-full rounded-[1.25rem] object-cover"
+                            src={anime.banner}
+                            alt={anime.name}
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-surface-900/25 to-surface-900/0" />
+                    </anime-banner>
+                    <anime-name class="mt-2 line-clamp-1 text-sm font-semibold tracking-wide text-white">{anime.name}</anime-name>
+                    <episode-details class="mt-1 flex items-center gap-2 text-xs text-surface-50">
+                        <span>{anime.current_episode}/{anime.episodes_count}</span>
+                        <Circle class="w-1" />
+                        <span>{new FormatTime(anime.time_watched).format_seconds_to_time_stamp_duration}</span>
+                    </episode-details>
+                </episode>
+            {/each}
+        </animes-cards>
+    </continue-watching-mobile>
+</home-container>

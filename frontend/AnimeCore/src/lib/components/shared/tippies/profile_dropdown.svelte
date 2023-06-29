@@ -4,14 +4,14 @@
     import SettingsOutline from "$icons/settings_outline.svelte";
     import User from "$icons/user.svelte";
     import { Avatar } from "@skeletonlabs/skeleton";
-    import type { SvelteComponentDev } from "svelte/internal";
+    import type { SvelteComponent } from "svelte";
     import voca from "voca";
 
     let dropdown_icons: {
         [key in string]: {
             name?: string;
             icon: {
-                component: typeof SvelteComponentDev;
+                component: typeof SvelteComponent<{}>;
                 class: string;
             };
             url?: string;

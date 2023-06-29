@@ -6,9 +6,11 @@ describe("format date function", () => {
         const date = new Date(2023, 5, 16);
         vi.setSystemTime(date);
     });
+
     afterEach(() => {
         vi.useRealTimers();
     });
+
     it("", () => {
         const formated_date = new FormatDate("2023-03-11T02:37:40.790Z");
 

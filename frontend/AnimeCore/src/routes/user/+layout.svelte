@@ -42,7 +42,7 @@
         {#if index === CHOICE}
             <div
                 class="relative col-start-1 col-end-2 row-start-1 row-end-2"
-                transition:blur|local={{ duration: 500 }}
+                transition:blur={{ duration: 500 }}
             >
                 <ImageLoader
                     src={item.cover ?? ""}
