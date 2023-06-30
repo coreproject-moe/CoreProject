@@ -10,7 +10,6 @@ if TYPE_CHECKING:
 
 
 class UsernameWithDiscriminatorManager(models.Manager["CustomUser"]):
-    # mypy: ignore-type
     def get_username_with_discriminator(
         self,
         prefix: str = "",

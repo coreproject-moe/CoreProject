@@ -86,13 +86,16 @@ INSTALLED_APPS = [
     "defender",
     # Tree
     "treenode",
+    # Tailwind CSS
+    "tailwind",
+    "tailwind_src",  # Our custom app
     # Grahpql
     "strawberry.django",
     "strawberry_django",
     "apps.graphql",
-    # Tailwind CSS
-    "tailwind",
-    "tailwind_src",  # Our custom app
+    # Api ( Django-Ninja )
+    "ninja",
+    "apps.api",
     # Models
     "apps.anime",
     "apps.trackers",
@@ -123,6 +126,8 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     # Cors headers
     "corsheaders.middleware.CorsMiddleware",
+    # Allow Patch files
+    "ninja_put_patch_file_upload_middleware.middlewares.process_put_patch",
     # Django
     "django.middleware.cache.UpdateCacheMiddleware",  # Cache
     "django.middleware.common.CommonMiddleware",
@@ -134,10 +139,10 @@ MIDDLEWARE = [
     # Django defender
     "defender.middleware.FailedLoginMiddleware",
 ]
+
 if DEBUG:
     MIDDLEWARE += (
         # Debug Toolbar Middleware
-        # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#add-the-middleware
         # https://strawberry-graphql.github.io/strawberry-graphql-django/guides/debug-toolbar/
         "strawberry_django.middlewares.debug_toolbar.DebugToolbarMiddleware",
         # CProfile middleware
@@ -348,10 +353,9 @@ DBBACKUP_STORAGE_OPTIONS = {"location": os.path.join(BASE_DIR, "backup")}
 
 TAILWIND_APP_NAME = "tailwind_src"
 if os.name == "nt":
-    NPM_BIN_PATH = r"C:\\Program Files\\nodejs\\npm.cmd"
+    NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 elif os.name == "posix":
     NPM_BIN_PATH = "/usr/bin/npm"
-
 
 # Graphql
 STRAWBERRY_DJANGO = {
