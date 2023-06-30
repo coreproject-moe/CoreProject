@@ -27,7 +27,7 @@ django-defender = ">=0.9.7"
 django-tailwind = ">=3.5.0"
 # 3rd Party ( Middlewares )
 django_cleanup = "*"
-django_cors_headers = "*"
+django_cors_headers = "^4.1.0"
 # 3rd Party ( Environmental Variables )
 python_dotenv = "*"
 # 3rd Party ( WhiteNoise )
@@ -38,10 +38,9 @@ celery = {extras = ["redis"], version = ">=5.3.0"}
 django-admin-hstore-widget = ">=1.2.1"   # https://github.com/PokaInc/django-admin-hstore-widget/pull/25
 # 3rd Party ( Model Fields )
 django-colorfield = "*"
-# Rest framework
-django_ninja = "*"
-ninja-put-patch-file-upload-middleware = ">=0.1.1"
-pydantic = {extras = ["email"], version = "*"}
+# Graphql framework
+strawberry-django-plus = "^2.6.4"
+strawberry-graphql-django = "^0.9.4"
 # ===================================================
 # Http Client
 requests = "^2.31.0"
@@ -58,6 +57,11 @@ colorthief = ">=0.2.1"
 # Parsers
 selectolax = "^0.3.14"
 python-dateutil = "^2.8.2"
+# API framework
+django-ninja = "^0.22.2"
+pydantic = {extras = ["email"], version = "^1.10.9"}
+ninja-put-patch-file-upload-middleware = "^0.1.1"
+
 
 [tool.poetry.group.dev.dependencies]
 ## Watchfiles
