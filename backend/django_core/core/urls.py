@@ -47,9 +47,6 @@ urlpatterns = [
     #   HTTP
     # =========
     path("user/", include("apps.user.urls")),
-    #   Graphql
-    # ============
-    path("graphql", include("apps.graphql.urls")),
     #   Api
     # ========
     path("api/", include("apps.api.urls")),
