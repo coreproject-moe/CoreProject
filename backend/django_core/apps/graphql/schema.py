@@ -3,12 +3,18 @@ from strawberry.schema.config import StrawberryConfig
 from strawberry_django_plus import gql
 from strawberry_django_plus.optimizer import DjangoOptimizerExtension
 
-from .types import Anime
+from .types.anime import Anime
+from .types.character import Character
+from .types.staff import Staff
+from .types.producer import Producer
 
 
 @gql.type
 class Query:
     animes: list[Anime] = gql.django.field(pagination=True)
+    characters: list[Character] = gql.django.field(pagination=True)
+    staffs: list[Staff] = gql.django.field(pagination=True)
+    producers: list[Producer] = gql.django.field(pagination=True)
 
 
 @strawberry.type

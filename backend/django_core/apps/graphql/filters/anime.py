@@ -4,8 +4,8 @@ from django.db.models.functions import Greatest
 from django.contrib.postgres.search import TrigramSimilarity
 from typing import TypeVar
 
+from .character import CharacterFilter
 from .staff import StaffFilter
-
 from .producer import ProducerFilter
 from .anime_genre import AnimeGenreFilter
 from .anime_theme import AnimeThemeFilter
@@ -41,11 +41,12 @@ class AnimeFilter:
 
         return query
 
-    genres: "AnimeGenreFilter"
-    themes: "AnimeThemeFilter"
+    genres: AnimeGenreFilter
+    themes: AnimeThemeFilter
+
+    staffs: StaffFilter
+    characters: CharacterFilter
 
     # Studios and producer share same model
     studios: ProducerFilter
     producers: ProducerFilter
-
-    staffs: StaffFilter
