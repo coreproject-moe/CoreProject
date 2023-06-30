@@ -21,8 +21,8 @@ updates:
 
     # Android
     # =======
-    - package-ecosystem: npm
-      directory: /android/coreproject/
+    - package-ecosystem: pip
+      directory: /android/AnimeCore(kivy)/
       schedule:
           interval: daily
       open-pull-requests-limit: 100

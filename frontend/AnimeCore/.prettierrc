@@ -3,9 +3,16 @@
     "tabWidth": 4,
     "singleQuote": false,
     "trailingComma": "none",
-    "printWidth": 100,
-    "arrowParens": "always",
     "bracketSameLine": false,
     "singleAttributePerLine": true,
-    "htmlWhitespaceSensitivity": "ignore"
+    "htmlWhitespaceSensitivity": "ignore",
+    "arrowParens": "always",
+    "printWidth": 400,
+    "plugins": ["prettier-plugin-svelte", "prettier-plugin-tailwindcss"],
+    "pluginSearchDirs": ["."],
+    "overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }],
+    "semi": true,
+    "importOrder": ["^@core/(.*)$", "^@server/(.*)$", "^@ui/(.*)$", "^[./]"],
+    "importOrderSeparation": true,
+    "importOrderSortSpecifiers": true
 }

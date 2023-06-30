@@ -5,6 +5,8 @@ node_modules
 /package
 .env
 .env.*
+.env.local
 !.env.example
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
 .vercel
-.next
