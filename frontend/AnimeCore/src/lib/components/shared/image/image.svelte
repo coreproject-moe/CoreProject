@@ -16,5 +16,5 @@
     {alt}
     {style}
     bind:this={image}
-    transition:fade|local
+    transition:fade
 />

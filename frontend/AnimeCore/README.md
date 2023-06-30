@@ -38,10 +38,10 @@
   <i>Click on the images to open full view in new tab</i>
   <br>
   <br>
-  <img src="https://github.com/tokitou-san/CoreProject-V3-UI/assets/114811070/9107b245-d770-4050-af31-6d1f16559ead" alt="Home Page Mockup" width=49%>
-  <img src="https://github.com/tokitou-san/CoreProject-V3-UI/assets/114811070/d3c47cca-6929-490c-8fd9-dd089881a3d2" alt="Anime Info Page Mockup" width=49%>
-  <img src="https://github.com/tokitou-san/CoreProject-V3-UI/assets/114811070/3f21b783-f511-418d-8f7c-375bef81afde" alt="Register Page Mockup" width=49%>
-  <img src="https://github.com/tokitou-san/CoreProject-V3-UI/assets/114811070/04a82f6a-11db-4235-a4fd-816afcadb736" alt="Search Panel Mockup" width=49%>
+  <img src="https://user-images.githubusercontent.com/61817579/235350591-ef773175-8d90-4a7f-b412-1aa71953b5b1.png" alt="Home Page Mockup" width=49%>
+  <img src="https://user-images.githubusercontent.com/61817579/235350607-a77e4cbe-54f5-4678-ad49-81bc740ea6a0.png" alt="Anime Info Page Mockup" width=49%>
+  <img src="https://github.com/baseplate-admin/CoreProject/assets/114811070/a9072216-815a-42c1-aee8-b337c47e2649" alt="Register Page Mockup" width=49%>
+  <img src="https://github.com/baseplate-admin/CoreProject/assets/114811070/8c2fee2f-f5ea-4df4-ac41-d9a4491a24f7" alt="Search Panel Mockup" width=49%>
 
 ## Contributing
 

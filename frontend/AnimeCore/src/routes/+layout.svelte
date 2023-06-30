@@ -23,16 +23,16 @@
     // NProgress
     import NProgress from "nprogress";
     import { beforeUpdate } from "svelte";
-    import type { SvelteComponentDev } from "svelte/internal";
+    import type { SvelteComponent } from "svelte";
     import { blur } from "svelte/transition";
     import tippy from "tippy.js";
 
     // Most of your app wide CSS should be put in this file
-    import "../app.scss";
+    import "../app.css";
     // Custom SCSS
     import "../nprogress.scss";
     // Your custom Skeleton theme:
-    import "../theme.scss";
+    import "../theme.css";
     // Tippy
     import "../tippy.postcss";
 
@@ -44,7 +44,7 @@
             [key in string]: {
                 name?: string;
                 icon: {
-                    component: typeof SvelteComponentDev;
+                    component: typeof SvelteComponent<{}>;
                     class: string;
                 };
                 url?: string;
@@ -157,7 +157,7 @@
 
     <AppShell>
         <svelte:fragment slot="header">
-            <navbar class="absolute top-0 flex h-[4.5rem] w-full items-center justify-between bg-surface-900/95 px-[3vw] backdrop-blur-3xl md:static md:h-[10vh] md:py-[0.9375vw] md:pl-[2.1vw] md:pr-[3.75vw] md:bg-surface-900">
+            <navbar class="absolute top-0 flex h-[4.5rem] w-full items-center justify-between bg-surface-900/95 px-[3vw] backdrop-blur-3xl md:static md:h-[10vh] md:bg-surface-900 md:py-[0.9375vw] md:pl-[2.1vw] md:pr-[3.75vw]">
                 {#if ["form", "logo"].includes($navbar_middle_section_variant)}
                     <a href="/">
                         <Logo class="w-9 md:w-[2vw]" />
@@ -168,13 +168,13 @@
                             <a
                                 href="/"
                                 class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform"
-                                transition:blur|local
+                                transition:blur
                             >
                                 <AnimeCore class="w-36 md:w-[10vw]" />
                             </a>
                         {:else if $navbar_middle_section_variant === "form"}
                             <div
-                                transition:blur|local
+                                transition:blur
                                 class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform"
                             >
                                 <a
@@ -273,7 +273,7 @@
                                     {#if is_active}
                                         <div
                                             class="absolute inset-0 flex items-center justify-center"
-                                            transition:blur|local
+                                            transition:blur
                                         >
                                             <svelte:component
                                                 this={component}
@@ -283,7 +283,7 @@
                                     {:else}
                                         <div
                                             class="absolute inset-0 flex flex-col items-center justify-center gap-[0.75vw]"
-                                            transition:blur|local
+                                            transition:blur
                                         >
                                             <svelte:component
                                                 this={component}
@@ -339,7 +339,7 @@
                             class="unstyled flex flex-col items-center gap-[0.5vh]"
                         >
                             <div class="{is_active ? 'bg-secondary-100' : 'bg-initial'} btn btn-icon relative h-11 w-[4.5rem] rounded-[0.75rem] p-0">
-                                <div transition:blur|local>
+                                <div transition:blur>
                                     {#if is_active}
                                         <svelte:component
                                             this={component}

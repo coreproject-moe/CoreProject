@@ -17,7 +17,7 @@
     href={link}
     class="card w-full grid-cols-7 overflow-hidden rounded-lg !bg-surface-400 md:grid md:rounded-[0.625vw]"
 >
-    <post-banner class="col-span-2 h-16 md:h-full md:w-full block">
+    <post-banner class="col-span-2 block h-16 md:h-full md:w-full">
         <ImageLoader
             src={post_banner}
             alt={post_title}

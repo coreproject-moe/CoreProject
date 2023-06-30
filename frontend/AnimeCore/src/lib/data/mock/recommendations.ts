@@ -5,7 +5,7 @@ export const recommendations = [
         name: "Demon Slayer: Kimetsu no Yaiba",
         japanese_name: "鬼滅の刃",
         cover: "/images/DemonSlayer-bg.avif",
-        episodes_count: 12,
+        episodes_count: 12
     },
     {
         id: 2,
@@ -13,7 +13,7 @@ export const recommendations = [
         name: "Hyouka",
         japanese_name: "氷菓",
         cover: "/images/Hyouka-bg.avif",
-        episodes_count: 41,
+        episodes_count: 41
     },
     {
         id: 3,
@@ -21,7 +21,7 @@ export const recommendations = [
         name: "You Lie in April",
         japanese_name: "四月は君の嘘",
         cover: "/images/YourLieInApril-bg.avif",
-        episodes_count: 88,
+        episodes_count: 88
     },
     {
         id: 4,
@@ -29,7 +29,7 @@ export const recommendations = [
         name: "Attack on Titan",
         japanese_name: "進撃の巨人",
         cover: "/images/AttackOnTitan-bg.avif",
-        episodes_count: 53,
+        episodes_count: 53
     },
     {
         id: 5,
@@ -37,7 +37,7 @@ export const recommendations = [
         name: "Jujutsu Kaisen",
         japanese_name: "呪術廻戦",
         cover: "/images/JujutsuKaisen.avif",
-        episodes_count: 23,
+        episodes_count: 23
     },
     {
         id: 6,
@@ -45,6 +45,6 @@ export const recommendations = [
         name: "Death Note",
         japanese_name: "デスノート",
         cover: "/images/DeathNote-bg.avif",
-        episodes_count: 38,
+        episodes_count: 38
     }
-]
+];

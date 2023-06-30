@@ -14,7 +14,7 @@
     import Heart from "$icons/heart.svelte";
     import Next from "$icons/next.svelte";
     import Warning from "$icons/warning.svelte";
-    import type { SvelteComponentDev } from "svelte/internal";
+    import type { SvelteComponent } from "svelte";
     import tippy from "tippy.js";
 
     export let episode_number: number | undefined;
@@ -30,7 +30,7 @@
         };
         options: {
             [key: string]: {
-                component: typeof SvelteComponentDev;
+                component: typeof SvelteComponent<{}>;
                 link: string;
                 class: string;
                 text: string;
@@ -179,12 +179,12 @@
                     <overlay-gradient class="absolute inset-0 bg-gradient-to-t from-surface-900/75 to-surface-900/50 md:from-surface-900/50 md:to-surface-900/25" />
                 </anime-banner>
                 <episode-main-detail class="absolute bottom-0 flex flex-col p-5 leading-none md:static md:gap-[0.25vw] md:p-0">
-                    <anime-title class="text-xl font-bold duration-300 ease-in-out scrollbar-none md:h-auto md:max-h-[1.75vw] md:overflow-hidden md:text-[1.5vw] md:leading-[1.75vw] md:text-surface-50 md:hover:max-h-[5vw] md:hover:overflow-y-scroll">Deamon Slayer</anime-title>
+                    <anime-title class="text-xl font-bold duration-300 ease-in-out scrollbar-none md:h-auto md:max-h-[1.75vw] md:overflow-hidden md:text-[1.5vw] md:leading-[1.75vw] md:text-surface-50 md:hover:max-h-[5vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Deamon Slayer</anime-title>
 
                     <span class="text-base text-surface-50 md:text-[1vw] md:leading-none">currently watching</span>
                     <span class="text-base font-semibold md:my-[0.5vw] md:text-[1.25vw] md:leading-none">Episode: {episode_number}</span>
 
-                    <episode-name class="text-sm duration-300 ease-in-out scrollbar-none md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[1vw] md:leading-[1.25vw] md:text-surface-50 md:hover:max-h-[5vw] md:hover:overflow-y-scroll">A Connected Bond: Daybreak and First Light</episode-name>
+                    <episode-name class="text-sm duration-300 ease-in-out scrollbar-none md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[1vw] md:leading-[1.25vw] md:text-surface-50 md:hover:max-h-[5vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">A Connected Bond: Daybreak and First Light</episode-name>
 
                     <button
                         type="button"
@@ -348,13 +348,13 @@
                             />
 
                             <anime-details class="absolute bottom-3 z-10 flex w-full flex-col items-center gap-1 px-[0.5vw] text-center md:bottom-[1vw] md:gap-[0.25vw]">
-                                <anime-title class="text-sm font-semibold leading-snug duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[1vw] md:leading-[1.25vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll">
+                                <anime-title class="text-sm font-semibold leading-snug duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[1vw] md:leading-[1.25vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">
                                     {anime.name}
                                 </anime-title>
                                 <anime-japanese-name class="text-xs leading-none md:text-[0.9vw]">
                                     {anime.japanese_name}
                                 </anime-japanese-name>
-                                <anime-episodes-count class="text-xs leading-none text-surface-50 duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[0.9vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll">
+                                <anime-episodes-count class="text-xs leading-none text-surface-50 duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[0.9vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">
                                     Episodes: <b>{anime.episodes_count}</b>
                                 </anime-episodes-count>
                             </anime-details>

@@ -20,7 +20,7 @@ const config = {
         adapter: is_static
             ? static_adapter({
                 fallback: "app.html",
-                // precompress: true,
+                  // precompress: true,
                 strict: true
             })
             : is_node
@@ -28,8 +28,8 @@ const config = {
                 precompress: false
             })
             : vercel({
-                    // an array of dependencies that esbuild should treat
-                    // as external when bundling functions
+                  // an array of dependencies that esbuild should treat
+                  // as external when bundling functions
                 external: []
             }),
         alias: {

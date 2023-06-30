@@ -7,7 +7,7 @@
     };
 </script>
 
-<div class="flex select-none gap-[0.25vw] leading-none text-[1.5vw] font-bold">
+<div class="flex select-none gap-[0.25vw] text-[1.5vw] font-bold leading-none">
     <p>
         {#each "core".split("") as letter}
             <span class="inline-flex {core_mapping[letter]}">{letter}</span>
