@@ -4,7 +4,7 @@ from apps.anime.models import AnimeModel
 from django.db.models.functions import Greatest
 from django.contrib.postgres.search import TrigramSimilarity
 
-@strawberry.django.filters.filter(AnimeModel)
+@strawberry.django.filters.filter(AnimeModel,lookups=True)
 class AnimeFilter:
     mal_id: auto
 
