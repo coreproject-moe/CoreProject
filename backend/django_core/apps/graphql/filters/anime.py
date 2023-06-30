@@ -10,7 +10,7 @@ from .producer import ProducerFilter
 from .anime_genre import AnimeGenreFilter
 from .anime_theme import AnimeThemeFilter
 
-QUERYSET = TypeVar("QUERYSET")
+T = TypeVar("T")
 
 
 @strawberry.django.filters.filter(AnimeModel)
@@ -24,7 +24,7 @@ class AnimeFilter:
 
     name: str
 
-    def filter_name(self, queryset: QUERYSET) -> QUERYSET:
+    def filter_name(self, queryset: T) -> T:
         query = (
             queryset.annotate(
                 similiarity=Greatest(
@@ -39,11 +39,10 @@ class AnimeFilter:
             .order_by("-similiarity")
         )
 
-        print(query.query)
         return query
 
-    genres: AnimeGenreFilter
-    themes: AnimeThemeFilter
+    genres: "AnimeGenreFilter"
+    themes: "AnimeThemeFilter"
 
     # Studios and producer share same model
     studios: ProducerFilter
