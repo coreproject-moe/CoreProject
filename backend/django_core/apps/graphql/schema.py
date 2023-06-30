@@ -9,7 +9,6 @@ from .types import Anime
 @gql.type
 class Query:
     animes: list[Anime] = gql.django.field(pagination=True)
-    anime: Anime = gql.django.field(pagination=False)
 
 
 @strawberry.type

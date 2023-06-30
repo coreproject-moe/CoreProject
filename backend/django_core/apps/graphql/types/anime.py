@@ -13,7 +13,7 @@ class AnimeNameSynonym:
 
 @strawberry.django.type(AnimeModel, filters=AnimeFilter)
 class Anime:
-    id: auto
+    id: int
 
     mal_id: auto
     anilist_id: auto
