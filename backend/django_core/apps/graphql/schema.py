@@ -8,6 +8,10 @@ from .types.character import Character
 from .types.producer import Producer
 from .types.staff import Staff
 
+from .mutations.anime import AnimeModelInput
+from strawberry_django_plus.permissions import IsSuperuser
+from strawberry_django_plus.directives import SchemaDirectiveExtension
+
 
 @gql.type
 class Query:
@@ -17,16 +21,20 @@ class Query:
     producers: list[Producer] = gql.django.field(pagination=True)
 
 
-@strawberry.type
+@gql.type
 class Mutation:
-    pass
+    create_anime: Anime = gql.django.create_mutation(
+        AnimeModelInput,
+        directives=[IsSuperuser()],
+    )
 
 
 schema = strawberry.Schema(
     query=Query,
+    mutation=Mutation,
     config=StrawberryConfig(auto_camel_case=False),
     extensions=[
-        # other extensions...
         DjangoOptimizerExtension,
+        SchemaDirectiveExtension,
     ],
 )
