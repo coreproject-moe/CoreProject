@@ -1,6 +1,7 @@
 import strawberry
 from apps.anime.models import AnimeModel, AnimeNameSynonymModel
 from strawberry import auto
+
 from ..filters.anime import AnimeFilter
 
 __all__ = ["Anime"]

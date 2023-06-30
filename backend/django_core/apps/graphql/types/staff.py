@@ -1,6 +1,5 @@
 import strawberry
-import strawberry_django
-from apps.staffs.models import StaffModel, StaffAlternateNameModel
+from apps.staffs.models import StaffAlternateNameModel, StaffModel
 
 from ..filters.staff import StaffFilter
 

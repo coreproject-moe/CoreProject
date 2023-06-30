@@ -1,6 +1,5 @@
-from apps.anime.models.anime_theme import AnimeThemeModel
 import strawberry
-from strawberry_django.filters import FilterLookup
+from apps.anime.models.anime_theme import AnimeThemeModel
 
 
 @strawberry.django.filters.filter(AnimeThemeModel, lookups=True)

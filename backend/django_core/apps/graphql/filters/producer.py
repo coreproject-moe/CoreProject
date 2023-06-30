@@ -1,5 +1,5 @@
-from apps.producers.models import ProducerModel
 import strawberry
+from apps.producers.models import ProducerModel
 
 
 @strawberry.django.filters.filter(ProducerModel, lookups=True)

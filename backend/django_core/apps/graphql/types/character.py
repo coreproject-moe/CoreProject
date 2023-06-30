@@ -1,6 +1,6 @@
 import strawberry
 from apps.characters.models import CharacterModel
-from strawberry import auto
+
 from ..filters.character import CharacterFilter
 
 

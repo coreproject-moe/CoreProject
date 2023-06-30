@@ -1,10 +1,10 @@
-from apps.staffs.models import StaffModel, StaffAlternateNameModel
-import strawberry_django
-from strawberry import auto
-
-from django.db.models.functions import Greatest
-from django.contrib.postgres.search import TrigramSimilarity
 from typing import TypeVar
+
+import strawberry_django
+from apps.staffs.models import StaffAlternateNameModel, StaffModel
+from django.contrib.postgres.search import TrigramSimilarity
+from django.db.models.functions import Greatest
+from strawberry import auto
 
 T = TypeVar("T")
 

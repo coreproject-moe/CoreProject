@@ -5,8 +5,8 @@ from strawberry_django_plus.optimizer import DjangoOptimizerExtension
 
 from .types.anime import Anime
 from .types.character import Character
-from .types.staff import Staff
 from .types.producer import Producer
+from .types.staff import Staff
 
 
 @gql.type

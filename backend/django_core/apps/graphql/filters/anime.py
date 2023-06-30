@@ -1,14 +1,15 @@
-import strawberry
-from apps.anime.models import AnimeModel
-from django.db.models.functions import Greatest
-from django.contrib.postgres.search import TrigramSimilarity
 from typing import TypeVar
 
-from .character import CharacterFilter
-from .staff import StaffFilter
-from .producer import ProducerFilter
+import strawberry
+from apps.anime.models import AnimeModel
+from django.contrib.postgres.search import TrigramSimilarity
+from django.db.models.functions import Greatest
+
 from .anime_genre import AnimeGenreFilter
 from .anime_theme import AnimeThemeFilter
+from .character import CharacterFilter
+from .producer import ProducerFilter
+from .staff import StaffFilter
 
 T = TypeVar("T")
 

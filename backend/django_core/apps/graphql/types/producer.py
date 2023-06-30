@@ -1,7 +1,8 @@
 import strawberry_django
 from apps.producers.models import ProducerModel
-from ..filters.staff import StaffFilter
 from strawberry import auto
+
+from ..filters.staff import StaffFilter
 
 
 @strawberry_django.type(ProducerModel, filters=StaffFilter)

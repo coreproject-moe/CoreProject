@@ -1,8 +1,9 @@
-from apps.characters.models import CharacterModel
-import strawberry_django
-from django.db.models.functions import Greatest
-from django.contrib.postgres.search import TrigramSimilarity
 from typing import TypeVar
+
+import strawberry_django
+from apps.characters.models import CharacterModel
+from django.contrib.postgres.search import TrigramSimilarity
+from django.db.models.functions import Greatest
 
 T = TypeVar("T")
 

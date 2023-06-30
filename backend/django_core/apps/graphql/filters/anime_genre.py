@@ -1,6 +1,5 @@
-from apps.anime.models.anime_genre import AnimeGenreModel
 import strawberry
-from strawberry_django.filters import FilterLookup
+from apps.anime.models.anime_genre import AnimeGenreModel
 
 
 @strawberry.django.filters.filter(AnimeGenreModel, lookups=True)
