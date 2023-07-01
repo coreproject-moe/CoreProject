@@ -6,6 +6,7 @@
     import Cross from "$icons/cross.svelte";
     import Delete from "$icons/delete.svelte";
     import Edit from "$icons/edit.svelte";
+    import EmptyUpload from "$icons/empty_upload.svelte";
     import Search from "$icons/search.svelte";
     import Star from "$icons/star.svelte";
     import Upload from "$icons/upload.svelte";
@@ -63,8 +64,10 @@
         });
 
         Array.from(files).forEach((file) => {
-            if (!file_list_names.includes(file.name)) {
-                data_list = data_list.concat({ file: file });
+            if (Object.keys(file_whitelist).includes(file.type)) {
+                if (!file_list_names.includes(file.name)) {
+                    data_list = data_list.concat({ file: file });
+                }
             }
         });
     }
@@ -74,17 +77,52 @@
         show_dropzone = false;
         dropzone_active = false;
 
-        const files = event.dataTransfer?.files as FileList;
+        const files = event.dataTransfer?.items as unknown as DataTransferItemList;
         const file_list_names = data_list.map((data) => {
             return data.file.name;
         });
 
-        Array.from(files).forEach((file) => {
-            if (Object.keys(file_whitelist).includes(file.type)) {
-                if (!file_list_names.includes(file.name)) {
-                    data_list = data_list.concat({ file: file });
-                }
+        Array.from(files).forEach(async (item) => {
+            const entry = item.webkitGetAsEntry();
+
+            if (entry?.isDirectory) {
+                scan_directory(entry as FileSystemDirectoryEntry);
+            } else if (entry?.isFile) {
+                const file_entry = entry as FileSystemFileEntry;
+                file_entry.file((file) => {
+                    if (Object.keys(file_whitelist).includes(file.type)) {
+                        if (!file_list_names.includes(file.name)) {
+                            data_list = data_list.concat({ file: file });
+                        }
+                    }
+                });
             }
+        });
+    }
+
+    async function scan_directory(item: FileSystemDirectoryEntry) {
+        let directory_reader = item.createReader();
+        const file_list_names = data_list.map((data) => {
+            return data.file.name;
+        });
+
+        directory_reader.readEntries((entries) => {
+            entries.forEach(async (entry) => {
+                if (entry.isFile) {
+                    const item = entry as FileSystemFileEntry;
+                    item.file(async (file) => {
+                        const file_type = file.name.split(".")[1];
+
+                        if (Object.values(file_whitelist).includes(`.${file_type}`)) {
+                            if (!file_list_names.includes(file.name)) {
+                                data_list = data_list.concat({ file: file });
+                            }
+                        }
+                    });
+                } else if (entry.isDirectory) {
+                    await scan_directory(entry as FileSystemDirectoryEntry);
+                }
+            });
         });
     }
 
@@ -167,13 +205,12 @@
                 slotLead="leading-none"
                 slotMessage="leading-none"
                 slotMeta="leading-none flex flex-col md:gap-[0.25vw]"
-                webkitDirectory={true}
             >
                 <svelte:fragment slot="lead">
                     <Upload class="w-9 md:w-[2vw]" />
                 </svelte:fragment>
                 <svelte:fragment slot="message">
-                    <span class="text-base font-semibold text-surface-50 md:text-[1.1vw]">Upload a file</span>
+                    <span class="text-base font-semibold text-surface-50 md:text-[1.1vw]">Drag and Drop files</span>
                 </svelte:fragment>
                 <svelte:fragment slot="meta">
                     <divider class="flex items-center justify-center gap-2 md:gap-[0.5vw]">
@@ -240,76 +277,85 @@
             </div>
         </uploads-options>
 
-        <uploads-table class="mt-10 block md:mt-[3vw]">
-            <table class="w-full border-separate border-spacing-y-2 leading-none text-surface-50 md:border-spacing-y-[0.25vw]">
-                <thead>
-                    <tr class="text-left md:text-[1vw]">
-                        <th>
-                            <input
-                                bind:this={main_checkbox}
-                                on:change={handle_main_checkbox_change}
-                                type="checkbox"
-                                class="cursor-pointer rounded border-2 bg-transparent focus:ring-0 focus:ring-offset-0 md:h-[1.25vw] md:w-[1.25vw] md:border-[0.2vw]"
-                            />
-                        </th>
-                        {#each ["name", "type", "date modified", "size"] as table_heading_item}
+        {#if data_list.length > 0}
+            <uploads-table class="mt-10 block md:mt-[3vw]">
+                <table class="w-full border-separate border-spacing-y-2 leading-none text-surface-50 md:border-spacing-y-[0.25vw]">
+                    <thead>
+                        <tr class="text-left md:text-[1vw]">
                             <th>
-                                <div class="flex items-center md:gap-[0.5vw]">
-                                    <span class="capitalize">{table_heading_item}</span>
-                                    <button class="btn p-0"><Chevron class="md:w-[1vw]" /></button>
-                                    <button class="btn p-0"><Chevron class="rotate-180 opacity-50 md:w-[1vw]" /></button>
-                                </div>
-                            </th>
-                        {/each}
-                    </tr>
-                </thead>
-                <!-- spacing -->
-                <tbody>
-                    <tr>
-                        <td class="h-5 md:h-[1vw]" />
-                    </tr>
-                </tbody>
-                <!-- spacing -->
-                <tbody>
-                    {#each data_list.sort() as data, index}
-                        {@const file = data.file}
-                        {@const name = file.name}
-                        {@const last_modified = new FormatDate(
-                            /*
-                                Somehow things got fked up and dayjs expects it to be in seconds and we have the file.lastModified as milliseconds.
-                                So here we go with our logic
-                            */
-                            dayjs.unix(file.lastModified / 1000).toString()
-                        ).format_to_human_readable_form}
-                        {@const type = "[DIRECTORY]"}
-                        {@const size = prettyBytes(file.size)}
-
-                        <tr>
-                            <td class="flex items-center md:gap-[1vw]">
                                 <input
-                                    bind:this={checkbox_elements[index]}
-                                    on:change={handle_sub_checkbox_change}
+                                    bind:this={main_checkbox}
+                                    on:change={handle_main_checkbox_change}
                                     type="checkbox"
                                     class="cursor-pointer rounded border-2 bg-transparent focus:ring-0 focus:ring-offset-0 md:h-[1.25vw] md:w-[1.25vw] md:border-[0.2vw]"
                                 />
-                                <button class="btn hidden p-0 md:flex">
-                                    <Star
-                                        variant="empty"
-                                        class="text-surface-50/50 md:w-[1.5vw]"
-                                        fill_color="none"
-                                    />
-                                </button>
-                            </td>
-                            <!-- name  -->
-                            {#each [name, type, last_modified, size] as table_item}
-                                <td>
-                                    <span class="md:text-[1vw]">{table_item}</span>
-                                </td>
+                            </th>
+                            {#each ["name", "type", "date modified", "size"] as table_heading_item}
+                                <th>
+                                    <div class="flex items-center md:gap-[0.5vw]">
+                                        <span class="capitalize">{table_heading_item}</span>
+                                        <button class="btn p-0"><Chevron class="md:w-[1vw]" /></button>
+                                        <button class="btn p-0"><Chevron class="rotate-180 opacity-50 md:w-[1vw]" /></button>
+                                    </div>
+                                </th>
                             {/each}
                         </tr>
-                    {/each}
-                </tbody>
-            </table>
-        </uploads-table>
+                    </thead>
+                    <!-- spacing -->
+                    <tbody>
+                        <tr>
+                            <td class="h-5 md:h-[1vw]" />
+                        </tr>
+                    </tbody>
+                    <!-- spacing -->
+                    <tbody>
+                        {#each data_list.sort() as data, index}
+                            {@const file = data.file}
+                            {@const name = file.name}
+                            {@const last_modified = new FormatDate(
+                                /* 
+                                    Somehow things got fked up and dayjs expects it to be in seconds and we have the file.lastModified as milliseconds.
+                                    So here we go with our logic 
+                                */
+                                dayjs.unix(file.lastModified / 1000).toString()
+                            ).format_to_human_readable_form}
+                            {@const type = "[DIRECTORY]"}
+                            {@const size = prettyBytes(file.size)}
+
+                            <tr>
+                                <td class="flex items-center md:gap-[1vw]">
+                                    <input
+                                        bind:this={checkbox_elements[index]}
+                                        on:change={handle_sub_checkbox_change}
+                                        type="checkbox"
+                                        class="cursor-pointer rounded border-2 bg-transparent focus:ring-0 focus:ring-offset-0 md:h-[1.25vw] md:w-[1.25vw] md:border-[0.2vw]"
+                                    />
+                                    <button class="btn hidden p-0 md:flex">
+                                        <Star
+                                            variant="empty"
+                                            class="text-surface-50/50 md:w-[1.5vw]"
+                                            fill_color="none"
+                                        />
+                                    </button>
+                                </td>
+                                {#each [name, type, last_modified, size] as table_item}
+                                    <td>
+                                        <span class="md:text-[1vw]">{table_item}</span>
+                                    </td>
+                                {/each}
+                            </tr>
+                        {/each}
+                    </tbody>
+                </table>
+            </uploads-table>
+        {:else}
+            <empty-ui class="mt-[5vw] flex w-full items-center justify-center gap-[2vw]">
+                <EmptyUpload class="w-[10vw] stroke-surface-300 stroke-[0.15vw] text-white" />
+                <div class="flex flex-col gap-[0.75vw]">
+                    <span class="text-[1.4vw] font-semibold leading-none text-surface-50">Empty!</span>
+                    <span class="text-[1.1vw] leading-none text-surface-300">Upload something to make kokoro-chan happy</span>
+                </div>
+            </empty-ui>
+        {/if}
     </uploads>
 </container>

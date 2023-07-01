@@ -222,10 +222,13 @@ export class OpengraphGenerator {
     }
 
     private get title() {
-        let title = `<title>${this.#title}</title><meta property="og:title" content="${this.#title}">`;
+        let title = `<title>${this.#title}</title>`;
 
+        // Handle opengraph
+        title += `<meta property="og:title" content="${this.#title}">`;
         // Handle Twitter
         title += `<meta name="twitter:title" content="${this.#title}" />`;
+
         return title;
     }
     private get url() {
@@ -248,8 +251,11 @@ export class OpengraphGenerator {
         return `<meta property="og:audio" content="${this.#audio}">`;
     }
     private get image() {
-        let image = `<meta property="og:image" content="${this.#image}">`;
+        let image = "";
+
+        image += `<meta property="og:image" content="${this.#image}">`;
         image += `<meta name="twitter:image" content="${this.#image}" />`;
+
         return image;
     }
     public get video() {

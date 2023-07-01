@@ -541,7 +541,7 @@
 
         <my-list-animes class="relative mb-[2vw] mt-[1.5vw] grid grid-cols-7 gap-[1.5625vw]">
             {#each my_list as anime}
-                <anime-card
+                <div
                     class="group col-span-1"
                     use:tippy={{
                         arrow: true,
@@ -603,7 +603,7 @@
                             </button>
                         </hover-buttons>
                     </card>
-                </anime-card>
+                </div>
             {/each}
         </my-list-animes>
     </my-list>
