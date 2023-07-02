@@ -46,7 +46,7 @@ pydantic = {extras = ["email"], version = "*"}
 # Http Client
 requests = "^2.31.0"
 requests-ratelimiter = {extras = ["redis"], version = "^0.4.0"}
-requests-cache = "^1.0.1"
+requests-cache = "^1.1.0"
 # Application servers
 gunicorn = {extras = ["setproctile"], version = "*"}
 uvicorn = {extras = ["standard"], version = ">=0.21.1"}
