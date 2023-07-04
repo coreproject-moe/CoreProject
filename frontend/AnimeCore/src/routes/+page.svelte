@@ -223,7 +223,7 @@
 <home-container class="block md:p-[1.25vw] md:pr-[3.75vw]">
     <hero-section class="flex flex-col justify-between md:flex-row">
         <latest-animes-slider
-            class="relative inline-grid h-[22.5rem] w-full md:h-[27.875vw] md:w-[42.1875vw]"
+            class="relative h-[22.5rem] w-full md:h-[27.875vw] md:w-[42.1875vw]"
             use:swipe={{ timeframe: 300, minSwipeDistance: 100, touchAction: "pan-y" }}
             on:swipe={swipe_handler}
             bind:this={main_hero_slider_element}
@@ -234,7 +234,8 @@
 
                 {#if active}
                     <anime-slide
-                        class="relative col-start-1 col-end-2 row-start-1 row-end-[200]"
+                        role="presentation"
+                        class="absolute inset-0 md:bottom-[2vw]"
                         transition:blur
                         on:mouseenter={() => {
                             $timerStore = "pause";
@@ -323,7 +324,7 @@
                 {/if}
             {/each}
 
-            <slide-progress class="flex flex-col px-[3vw] md:px-0">
+            <slide-progress class="absolute bottom-0 flex w-full flex-col px-[3vw] md:px-0">
                 <progress-bar
                     class="h-[0.2rem] md:h-[0.145vw] {slide_buttons[main_hero_slide_active_index].background}"
                     style="width: {$tweened_progress_value}%;"

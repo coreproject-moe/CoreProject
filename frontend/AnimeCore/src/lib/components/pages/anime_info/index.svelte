@@ -113,7 +113,7 @@
     };
 </script>
 
-<anime-info-container class="relative block h-screen bg-cover">
+<anime-info-container class="relative mt-16 block h-screen bg-cover md:mt-0">
     <ImageLoader
         src={anime_cover ?? ""}
         class="absolute hidden h-full w-full select-none rounded-tl-[1.5vw] object-cover object-center md:flex"
