@@ -5,9 +5,7 @@
 <section class="grid h-full grid-cols-5 items-end justify-between md:px-[5vw]">
     <radial-gradient
         class="pointer-events-none absolute inset-0 z-10 md:translate-x-[30vw]"
-        style="
-            background-image: radial-gradient(circle at center, rgba(117, 105, 225, 0.1) 0%, transparent 100%);
-        "
+        style="background-image: radial-gradient(circle at center, rgba(117, 105, 225, 0.1) 0%, transparent 100%);"
     />
     <error-context class="col-span-12 flex flex-col items-center leading-none md:col-span-3 md:mb-[12vw] md:items-start md:gap-[1vw]">
         <status-code class="text-7xl font-bold md:text-[7vw]">

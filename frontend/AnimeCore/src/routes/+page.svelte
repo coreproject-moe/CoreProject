@@ -127,7 +127,7 @@
     /* slide buttons colors */
     let slide_buttons = [
         { background: "bg-surface-50", border: "border-surface-50" },
-        { background: "bg-secondary-300", border: "border-error-400" },
+        { background: "bg-secondary-300", border: "border-secondary-300" },
         { background: "bg-warning-400", border: "border-warning-400" },
         { background: "bg-white", border: "border-white" },
         { background: "bg-primary-300", border: "border-primary-300" },
@@ -388,7 +388,7 @@
 
             <ScrollArea
                 offsetScrollbar
-                parentClass="mt-[1.5vw] max-h-[21.5625vw]"
+                parentClass="mt-[1vw] max-h-[22.25vw]"
                 class="flex flex-col gap-[1vw]"
             >
                 {#each latest_episodes as anime}
@@ -405,7 +405,7 @@
                                 <episode-name class="text-[1vw] font-semibold leading-[1.1875vw] text-white">
                                     {anime.name}
                                 </episode-name>
-                                <episode-dates class="flex items-center gap-[0.35vw] text-[0.8vw]">
+                                <episode-dates class="flex items-center gap-[0.35vw] text-[0.8vw] text-surface-50">
                                     <span class="font-semibold">
                                         Ep {anime.episode_number < 10 ? "0" + anime.episode_number : anime.episode_number}
                                     </span>
@@ -422,7 +422,7 @@
                 {/each}
             </ScrollArea>
 
-            <section-bottom class="mt-[1vw] flex items-start justify-between gap-[2vw] pr-[0.75vw]">
+            <section-bottom class="mt-[0.75vw] flex items-start justify-between gap-[2vw] pr-[0.75vw]">
                 <span class="text-[0.75vw] font-semibold md:leading-[1.25vw]">showing recently aired episodes from your Anime List</span>
                 <button class="btn p-0 text-[0.75vw] font-semibold text-warning-400">Change to All</button>
             </section-bottom>

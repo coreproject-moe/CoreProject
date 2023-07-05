@@ -128,10 +128,7 @@
                     <anime-banner class="relative col-span-12 h-96 md:h-[18.25vw] md:w-[13vw] md:flex-shrink-0">
                         <radial-gradient
                             class="pointer-events-none absolute inset-0 z-10 h-[150%] w-[125%] -translate-x-8 -translate-y-28 md:hidden"
-                            style="
-                                        background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
-                                        mask-image: linear-gradient(to bottom, rgba(7, 5, 25, 0.95) 80%, rgba(0, 0, 0, 0) 100%);
-                                    "
+                            style="background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 100%);mask-image: linear-gradient(to bottom, rgba(7, 5, 25, 0.95) 80%, rgba(0, 0, 0, 0) 100%);"
                         />
                         <ImageLoader
                             class="h-full w-full rounded-xl object-cover object-center md:rounded-[1vw]"
