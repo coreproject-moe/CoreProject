@@ -30,9 +30,7 @@
                 type="button"
                 aria-label="Clear"
                 class="btn absolute right-[1.25vw] p-0"
-                on:click={() => {
-                    search_query = "";
-                }}
+                on:click={() => (search_query = "")}
             >
                 <Cross style="width: 1.5vw; opacity: 0.7;" />
             </button>
@@ -47,23 +45,26 @@
                         gradientMask
                     >
                         {#each Array(6) as _}
-                            <div class="flex cursor-pointer items-center gap-[0.75vw] rounded-[0.7vw] p-[0.8vw] transition duration-300 hover:bg-surface-300/20">
+                            <a
+                                href="/mal/"
+                                class="unstyled flex items-center gap-[1vw] rounded-[0.7vw] p-[0.8vw] transition duration-200 hover:bg-white/10"
+                            >
                                 <ImageLoader
                                     src="/images/DemonSlayer-bg.avif"
                                     alt={search_query}
                                     class="h-[3.5vw] w-[3.5vw] rounded-[0.5vw] object-cover"
                                 />
                                 <div class="flex flex-col">
-                                    <span class="text-[1.1vw] font-semibold text-white">Kimetsu no Yaiba</span>
-                                    <span class="text-[0.7vw] font-medium uppercase leading-none text-surface-200">Demon slayer</span>
-                                    <div class="flex items-center gap-[0.3vw] pt-[0.1vw] text-[0.7vw] text-surface-200">
+                                    <span class="text-[1.1vw] font-semibold leading-none text-white">Kimetsu no Yaiba</span>
+                                    <span class="text-[0.7vw] font-medium uppercase leading-[1.5vw] text-surface-200">Demon slayer</span>
+                                    <div class="flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw] text-surface-200">
                                         <span>2006</span>
                                         <span>TV</span>
                                         <Circle style="width: 0.2vw;" />
                                         <span>26 eps</span>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         {/each}
                     </ScrollArea>
                 </div>

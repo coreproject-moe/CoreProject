@@ -277,10 +277,10 @@
             <navbar class="absolute top-0 flex h-[4.5rem] w-full items-center justify-between bg-surface-900/95 px-[3vw] backdrop-blur-3xl md:static md:h-[10vh] md:bg-surface-900 md:py-[0.9375vw] md:pl-[2.1vw] md:pr-[3.75vw]">
                 {#if ["form", "logo"].includes($navbar_middle_section_variant)}
                     <a href="/">
-                        <Logo class="w-9 md:w-[2vw]" />
+                        <Logo class="w-9 md:w-[2.25vw] md:pt-[0.75vw]" />
                     </a>
 
-                    <div class="relative">
+                    <div class="relative flex items-center">
                         {#if $navbar_middle_section_variant === "logo"}
                             <a
                                 href="/"
@@ -292,7 +292,7 @@
                         {:else if $navbar_middle_section_variant === "form"}
                             <div
                                 transition:blur
-                                class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform"
+                                class="absolute left-1/2 -translate-x-1/2"
                             >
                                 <a
                                     href="/"
