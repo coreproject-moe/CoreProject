@@ -58,7 +58,7 @@
         "prettier-plugin-tailwindcss": "^0.3.0",
         "pretty-bytes": "^6.1.0",
         "sass": "^1.63.6",
-        "svelte": "^4.0.4",
+        "svelte": "^4.0.5",
         "svelte-check": "^3.4.5",
         "svelte-gestures": "^1.5.2",
         "tailwind-scrollbar": "^3.0.4",
