@@ -140,13 +140,9 @@
             <dropzone
                 role="button"
                 tabindex="0"
-                on:dragover|preventDefault={() => {
-                    dropzone_active = true;
-                }}
+                on:dragover|preventDefault={() => (dropzone_active = true)}
                 on:drop|preventDefault={on_drop_handler}
-                on:dragleave|preventDefault={() => {
-                    dropzone_active = false;
-                }}
+                on:dragleave|preventDefault={() => (dropzone_active = false)}
                 class="flex w-[50vw] flex-col place-items-center gap-[0.75vw] rounded-[1vw] border-[0.2vw] border-dashed border-surface-50 bg-surface-400 py-[4vw] transition duration-300 ease-in-out"
                 class:bg-surface-500={dropzone_active}
             >
@@ -300,10 +296,10 @@
                             {@const file = data.file}
                             {@const name = file.name}
                             {@const last_modified = new FormatDate(
-                                /*
+                                /* 
                                     Somehow things got fked up.
                                     dayjs expects `time` to be in seconds and we have the file.lastModified as milliseconds.
-                                    So here we go with our logic.
+                                    So here we go with our logic. 
                                 */
                                 dayjs.unix(file.lastModified / 1000).toString()
                             ).format_to_human_readable_form}
