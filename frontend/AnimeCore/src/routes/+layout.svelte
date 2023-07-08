@@ -25,7 +25,7 @@
     import NProgress from "nprogress";
     import { beforeUpdate } from "svelte";
     import type { SvelteComponent } from "svelte";
-    import { blur } from "svelte/transition";
+    import { blur, slide } from "svelte/transition";
     import tippy from "tippy.js";
 
     // Most of your app wide CSS should be put in this file
@@ -74,7 +74,7 @@
                     component: Explore,
                     class: "w-[1.25vw] text-white"
                 },
-                url: undefined,
+                url: "/explore",
                 show_on_mobile: true
             },
             list: {
@@ -82,7 +82,7 @@
                     component: List,
                     class: "w-[1.7vw] text-white"
                 },
-                url: undefined,
+                url: "/list",
                 show_on_mobile: false
             },
             schedule: {
@@ -90,7 +90,7 @@
                     component: Schedule,
                     class: "w-[1.25vw] text-white"
                 },
-                url: undefined,
+                url: "/shedule",
                 show_on_mobile: false
             },
             forum: {
@@ -98,7 +98,7 @@
                     component: Forum,
                     class: "w-[1.25vw] text-white"
                 },
-                url: undefined,
+                url: "/forum",
                 show_on_mobile: true
             }
         },
@@ -151,7 +151,21 @@
     }
 
     /** vercel effect */
-    async function handle_mouseover() {}
+    let hover_glider_element: HTMLDivElement;
+    let GLIDER_TRANSITION_DURATION = 100;
+
+    function handle_mouseenter(event: MouseEvent) {
+        const target = event.target as HTMLAnchorElement;
+        hover_glider_element.style.transform = `translateY(${target.offsetTop}px)`;
+
+        if (getComputedStyle(hover_glider_element).getPropertyValue("opacity") === "0") {
+            setTimeout(() => {
+                hover_glider_element.style.opacity = "100";
+            }, GLIDER_TRANSITION_DURATION);
+        } else {
+            hover_glider_element.style.opacity = "100";
+        }
+    }
 </script>
 
 {#if $theme == "kokoro"}
@@ -357,7 +371,12 @@
                         {/each}
                     </div>
 
-                    <div class="mt-[2.8125vw] flex flex-col items-center gap-[1.5vw]">
+                    <div class="relative mt-[2.8125vw] flex flex-col items-center gap-[0.75vw]">
+                        <active_glider
+                            bind:this={hover_glider_element}
+                            class="absolute h-[4vw] w-[4vw] rounded-[0.75vw] bg-white/10 opacity-0 ease-in-out duration-{GLIDER_TRANSITION_DURATION}"
+                        />
+
                         {#each Object.entries(icon_mapping.middle) as item}
                             {@const item_name = item[0]}
                             {@const item_icon = item[1].icon}
@@ -368,10 +387,12 @@
                             {@const is_active = $page.url.pathname === item_href}
 
                             <a
-                                href={item_href ?? "javascript:void(0)"}
+                                href={item_href}
                                 type="button"
-                                class:pointer-events-none={item_href}
-                                class="{is_active ? 'relative bg-secondary-100 before:absolute before:-left-0.5 before:z-10 before:h-[0.875vw] before:w-[0.25vw] before:rounded-lg before:bg-primary-500' : 'bg-initial'} btn btn-icon relative w-[3.375vw] rounded-[0.5vw] p-0"
+                                class:pointer-events-none={!item_href}
+                                class="{is_active ? 'relative bg-secondary-100 before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500' : 'bg-initial'} btn btn-icon relative w-[4vw] rounded-[0.75vw] p-0"
+                                on:mouseenter={handle_mouseenter}
+                                on:mouseleave={() => (hover_glider_element.style.opacity = "0")}
                             >
                                 <div class="inline-grid">
                                     {#if is_active}
@@ -386,14 +407,14 @@
                                         </div>
                                     {:else}
                                         <div
-                                            class="absolute inset-0 flex flex-col items-center justify-center gap-[0.75vw]"
+                                            class="absolute inset-0 flex flex-col items-center justify-center gap-[0.35vw]"
                                             transition:blur
                                         >
                                             <svelte:component
                                                 this={component}
                                                 class={item_icon.class}
                                             />
-                                            <span class="text-[0.875vw] capitalize leading-[1.05vw]">
+                                            <span class="text-[0.75vw] font-semibold capitalize leading-[1.05vw]">
                                                 {item_name}
                                             </span>
                                         </div>
@@ -404,19 +425,19 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col-reverse items-center gap-[1.5vw]">
+                <div class="flex flex-col-reverse items-center gap-[1vw]">
                     {#each Object.entries(icon_mapping.bottom) as item}
                         {@const item_name = item[0]}
                         {@const item_icon = item[1].icon}
                         <button
                             type="button"
-                            class="bg-initial btn btn-icon w-[3.375vw] flex-col justify-center gap-[0.75vw] p-0 text-sm"
+                            class="bg-initial btn btn-icon w-[3.375vw] flex-col justify-center gap-[0.45vw] p-0 text-sm"
                         >
                             <svelte:component
                                 this={item_icon.component}
                                 class={item_icon.class}
                             />
-                            <span class="!m-0 text-[0.875vw] capitalize leading-[1.05vw]">
+                            <span class="!m-0 text-[0.75vw] font-semibold capitalize leading-[1.05vw]">
                                 {item_name}
                             </span>
                         </button>
