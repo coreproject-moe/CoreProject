@@ -1,18 +1,12 @@
-import strawberry
 from apps.anime.models import AnimeModel, AnimeNameSynonymModel
 from strawberry import auto
-
+import strawberry_django
 from ..filters.anime import AnimeFilter
 
 __all__ = ["Anime"]
 
 
-@strawberry.django.type(AnimeNameSynonymModel)
-class AnimeNameSynonym:
-    name: auto
-
-
-@strawberry.django.type(AnimeModel, filters=AnimeFilter)
+@strawberry_django.type(AnimeModel, filters=AnimeFilter)
 class Anime:
     id: int
 
@@ -23,7 +17,6 @@ class Anime:
     # name and name synonym
     name: auto
     name_japanese: auto
-    name_synonyms: AnimeNameSynonym
 
     source: auto
     aired_from: auto

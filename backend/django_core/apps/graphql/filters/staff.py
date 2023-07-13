@@ -9,7 +9,7 @@ from strawberry import auto
 T = TypeVar("T")
 
 
-@strawberry_django.filters.filter(StaffAlternateNameModel, lookups=True)
+@strawberry_django.filters.filter(model=StaffAlternateNameModel, lookups=True)
 class StaffAlternateNameFilter:
     name: auto
 
