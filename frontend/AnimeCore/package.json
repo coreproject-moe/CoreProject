@@ -55,7 +55,7 @@
         "postcss": "^8.4.26",
         "prettier": "^2.8.8",
         "prettier-plugin-svelte": "^2.10.1",
-        "prettier-plugin-tailwindcss": "^0.4.0",
+        "prettier-plugin-tailwindcss": "^0.4.1",
         "pretty-bytes": "^6.1.0",
         "sass": "^1.63.6",
         "svelte": "^4.0.5",
