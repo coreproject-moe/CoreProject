@@ -52,7 +52,7 @@
         "marked": "^5.1.1",
         "marked-emoji": "^1.2.0",
         "nprogress": "^0.2.0",
-        "postcss": "^8.4.25",
+        "postcss": "^8.4.26",
         "prettier": "^2.8.8",
         "prettier-plugin-svelte": "^2.10.1",
         "prettier-plugin-tailwindcss": "^0.4.0",
