@@ -61,7 +61,7 @@ export const anime_episodes = [
     },
     {
         id: 13,
-        number: 1,
+        number: 7,
         title: "The Revival of the Long-established Classic Literature Club",
         japanese_title: "老舗古典部復活 カッコいいですよね",
         thumbnail: "/images/episodes/hyouka/Hyouka-ep-1.avif",
@@ -71,7 +71,7 @@ export const anime_episodes = [
     },
     {
         id: 14,
-        number: 2,
+        number: 8,
         title: "The Activities of the Esteemed Classic Literature Club",
         japanese_title: "古典文学部の活動",
         thumbnail: "/images/episodes/hyouka/Hyouka-ep-2.avif",
@@ -81,7 +81,7 @@ export const anime_episodes = [
     },
     {
         id: 15,
-        number: 3,
+        number: 9,
         title: "The Descendants of the Classic Literature Club",
         japanese_title: "古典文学部の末裔",
         thumbnail: "/images/episodes/hyouka/Hyouka-ep-3.avif",
@@ -91,7 +91,7 @@ export const anime_episodes = [
     },
     {
         id: 16,
-        number: 4,
+        number: 10,
         title: "The Old Days of the Glorious Classic Literature Club",
         japanese_title: "栄光の古典文学クラブの昔",
         thumbnail: "/images/episodes/hyouka/Hyouka-ep-4.avif",
@@ -101,7 +101,7 @@ export const anime_episodes = [
     },
     {
         id: 17,
-        number: 5,
+        number: 11,
         title: "The Truth of the Historic Classic Literature Club",
         japanese_title: "歴史的古典文学部の真実",
         thumbnail: "/images/episodes/hyouka/Hyouka-ep-5.avif",
@@ -111,7 +111,7 @@ export const anime_episodes = [
     },
     {
         id: 18,
-        number: 6,
+        number: 12,
         title: "To Commit a Grave Sin",
         thumbnail: "/images/episodes/hyouka/Hyouka-ep-6.avif",
         japanese_title: "重大な罪を犯すには",

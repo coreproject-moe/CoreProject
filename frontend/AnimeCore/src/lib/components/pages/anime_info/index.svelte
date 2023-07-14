@@ -170,7 +170,7 @@
                                 class="btn h-14 w-[6.5rem] rounded-lg bg-primary-500 font-bold text-white md:h-[4.3vw] md:w-[7vw] md:rounded-[0.625vw]"
                             >
                                 <div class="flex gap-3 md:gap-[0.7vw]">
-                                    <PlayCircle class="w-5 md:w-[1.875vw]" />
+                                    <PlayCircle class="w-5 md:w-[1.5vw]" />
                                     <div class="flex flex-col items-start gap-1">
                                         <span class="text-sm leading-none md:text-[0.87vw]">Watch</span>
                                         <span class="text-xs font-bold leading-none text-surface-50 md:text-[0.625vw]">Ep 01</span>
@@ -271,7 +271,7 @@
             </anime-main-infos>
 
             <anime-episodes-container class="my-7 block md:my-[6vw]">
-                <section-header class="flex border-b-2 border-surface-50/50 pb-1 md:gap-x-[0.75vw] md:border-none md:pb-0">
+                <section-header class="flex border-b-2 border-surface-50/10 pb-1 md:gap-x-[0.75vw] md:border-none md:pb-0">
                     <header-title class="text-lg font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Episodes</header-title>
                     <button class="btn btn-icon hidden rounded bg-surface-400 p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
                         <SettingsOutline class="w-[0.9vw] opacity-75" />
@@ -372,7 +372,7 @@
 
                                 <card-info class="absolute bottom-0 flex h-max w-full justify-between p-1 md:top-0 md:p-[0.5vw]">
                                     <p class="rounded bg-surface-900/75 p-1 text-xs font-bold tracking-wider text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.75vw] md:py-[0.75vw] md:text-[0.8vw] md:leading-none">
-                                        EP {episode_number < 10 ? `0${episode_number}` : episode_number}
+                                        EP {String(episode_number).padStart(2, '0')}
                                     </p>
                                     <p class="unstyled rounded bg-surface-900/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">
                                         {new FormatTime(duration).format_seconds_to_time_stamp_duration}
@@ -426,7 +426,7 @@
 
                 <anime-media-section class="mt-10 flex grid-cols-5 flex-col gap-10 md:mt-[3vw] md:grid md:gap-[4.375vw]">
                     <comment-box class="md:col-span-3">
-                        <section-header class="flex gap-2 border-b-2 border-surface-50/50 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
+                        <section-header class="flex gap-2 border-b-2 border-surface-50/10 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
                             <header-title class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Comments</header-title>
                             <button class="btn btn-icon hidden rounded bg-surface-400 p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
                                 <SettingsOutline class="w-[0.9vw] opacity-75" />
@@ -509,7 +509,7 @@
                         </comments>
                     </comment-box>
                     <forum-posts class="md:col-span-2">
-                        <section-header class="flex gap-2 border-b-2 border-surface-50/50 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
+                        <section-header class="flex gap-2 border-b-2 border-surface-50/10 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
                             <section-title class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Forum Posts</section-title>
                             <button class="btn btn-icon hidden rounded bg-surface-400 p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
                                 <SettingsOutline class="w-[0.9vw] opacity-75" />
