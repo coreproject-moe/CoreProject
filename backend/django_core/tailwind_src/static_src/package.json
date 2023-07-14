@@ -22,7 +22,7 @@
         "cross-env": "^7.0.3",
         "cssnano": "^6.0.1",
         "daisyui": "^3.2.1",
-        "postcss": "^8.4.25",
+        "postcss": "^8.4.26",
         "postcss-import": "^15.1.0",
         "postcss-nested": "^6.0.1",
         "postcss-simple-vars": "^7.0.1",
