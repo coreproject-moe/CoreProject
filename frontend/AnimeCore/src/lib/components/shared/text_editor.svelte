@@ -15,13 +15,12 @@
 
     import Markdown from "./markdown.svelte";
 
-    let caret_offset_top: string | null = null;
-    let caret_offset_left: string | null = null;
-
+    let textarea_element: HTMLTextAreaElement;
     let textarea_value = "";
 
     let emoji_matches: [{ emoji: string; keyword: string }?];
     let show_emoji_picker = false;
+    let caret_offset: { top: number; left: number; height: number } | null = null;
     let active_emoji_index: number;
     const SHOWN_EMOJI_LIMIT = 5;
 
@@ -37,7 +36,9 @@
         };
     } = {
         bold: {
-            function: (element) => bold_text(element as HTMLTextAreaElement),
+            function: (element) => {
+                bold_text(element as HTMLTextAreaElement);
+            },
             icon: {
                 component: Bold,
                 class: "w-5 md:w-[1.4vw]  text-surface-200"
@@ -45,7 +46,9 @@
             description: "Add bold text, <Ctrl + b>"
         },
         italic: {
-            function: (element) => italic_text(element as HTMLTextAreaElement),
+            function: (element) => {
+                italic_text(element as HTMLTextAreaElement);
+            },
             icon: {
                 component: Italic,
                 class: "w-5 md:w-[1.5vw] text-surface-200"
@@ -53,7 +56,9 @@
             description: "Add italic text, <Ctrl + i>"
         },
         underline: {
-            function: (element) => underline_text(element as HTMLTextAreaElement),
+            function: (element) => {
+                underline_text(element as HTMLTextAreaElement);
+            },
             icon: {
                 component: Underline,
                 class: "w-5 md:w-[1.35vw] text-surface-200"
@@ -61,7 +66,9 @@
             description: "Add underline text, <Ctrl + u>"
         },
         strike: {
-            function: (element) => strike_text(element as HTMLTextAreaElement),
+            function: (element) => {
+                strike_text(element as HTMLTextAreaElement);
+            },
             icon: {
                 component: Strike,
                 class: "w-5 md:w-[1.5vw] text-surface-200"
@@ -69,7 +76,9 @@
             description: "Add strikethrough text, <Ctrl + Shift + x>"
         },
         code: {
-            function: (element) => code_text(element as HTMLTextAreaElement),
+            function: (element) => {
+                code_text(element as HTMLTextAreaElement);
+            },
             icon: {
                 component: Code,
                 class: "w-5 md:w-[1.5vw] text-surface-200"
@@ -77,7 +86,9 @@
             description: "Add code text, <Ctrl + e>"
         },
         hyperlink: {
-            function: (element) => hyperlink_text(element as HTMLTextAreaElement),
+            function: (element) => {
+                hyperlink_text(element as HTMLTextAreaElement);
+            },
             icon: {
                 component: Hyperlink,
                 class: "w-4 md:w-[1.25vw] text-surface-200 ml-3 md:ml-[1vw]"
@@ -105,10 +116,8 @@
 
     async function handle_blur() {
         emoji_matches = [];
+        caret_offset = null;
         show_emoji_picker = false;
-
-        caret_offset_top = null;
-        caret_offset_left = null;
     }
 
     async function handle_input(event: Event) {
@@ -145,25 +154,25 @@
             }
 
             // Popover settings
-            if (caret_offset_left === null || caret_offset_top == null) {
-                const textarea_position = element.getBoundingClientRect();
+            if (caret_offset === null) {
+                const textarea_position = textarea_element.getBoundingClientRect();
+                const scroll_top = textarea_element.scrollTop;
 
-                // CSS
-                const line_height = getComputedStyle(element).getPropertyValue("line-height");
+                const caret_position = offset(textarea_element);
+                const caret_offset_top = caret_position.top - textarea_position.top;
+                const caret_offset_left = caret_position.left - textarea_position.left;
+                const caret_offset_height = caret_position.height + 5; // Add extra height
 
-                const caret_position = offset(element);
-
-                // We need 2 times the line height to be actually effective.
-                caret_offset_top = `calc(${caret_position.top - textarea_position.top + caret_position.height}px + ${line_height} + ${line_height})`;
-                caret_offset_left = `calc(${caret_position.left - textarea_position.left}px)`;
+                caret_offset = {
+                    top: caret_offset_top - scroll_top,
+                    left: caret_offset_left,
+                    height: caret_offset_height
+                };
             }
         } else {
             emoji_matches = [];
+            caret_offset = null;
             show_emoji_picker = false;
-
-            // Caret
-            caret_offset_top = null;
-            caret_offset_left = null;
         }
     }
 
@@ -184,7 +193,7 @@
                 }
                 case "enter": {
                     event.preventDefault();
-                    await select_emoji({ element: event.currentTarget as HTMLTextAreaElement, emoji_index: active_emoji_index });
+                    await select_emoji(active_emoji_index);
                     break;
                 }
             }
@@ -355,11 +364,10 @@
         }
     }
 
-    async function select_emoji({ emoji_index, element }: { emoji_index: number; element: HTMLElement }) {
+    async function select_emoji(emoji_index: number) {
         const emoji_keyword = emoji_matches[emoji_index]?.keyword;
         const emoji_code = `:${emoji_keyword}:`;
 
-        const textarea_element = element as HTMLTextAreaElement;
         const selection_start = textarea_element.selectionStart;
         const selection_end = textarea_element.selectionEnd;
 
@@ -378,16 +386,15 @@
 
         // close emoji picker
         show_emoji_picker = false;
+        caret_offset = null;
         emoji_matches = [];
-
-        // Caret controls
-        caret_offset_left = null;
-        caret_offset_top = null;
     }
 
     let tab_type: "edit" | "preview" = "edit";
 
-    const handle_edit_preview_button_click = (item: string) => (tab_type = item as typeof tab_type);
+    const handle_edit_preview_button_click = (item: string) => {
+        tab_type = item as typeof tab_type;
+    };
 </script>
 
 <div class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary-500 md:rounded-[0.75vw] md:ring-[0.15vw]">
@@ -427,8 +434,8 @@
                         appendTo: document.body,
                         animation: "shift-away"
                     }}
-                    on:click={(event) => {
-                        button_function(event.currentTarget);
+                    on:click={() => {
+                        button_function(textarea_element);
                     }}
                 >
                     <svelte:component this={icon} />
@@ -438,10 +445,13 @@
     </textarea-navbar>
     {#if tab_type === "edit"}
         <textarea
-            on:paste={(event) => paste_text(event)}
+            on:paste={(event) => {
+                paste_text(event);
+            }}
             on:input={handle_input}
             on:keydown={handle_keydown}
             on:blur={handle_blur}
+            bind:this={textarea_element}
             bind:value={textarea_value}
             spellcheck="true"
             class="h-28 w-full resize-none border-none bg-surface-900 p-3 text-sm leading-tight text-surface-50 outline-none duration-300 ease-in-out placeholder:text-surface-200 focus:ring-0 md:h-[8vw] md:p-[1vw] md:text-[1vw] md:leading-[1.5vw]"
@@ -466,11 +476,10 @@
             </a>
         </div>
     </textarea-footer>
-    {#if show_emoji_picker && caret_offset_left && caret_offset_top && emoji_matches.length > 0}
+    {#if show_emoji_picker && caret_offset && emoji_matches.length > 0}
         <emoji-popover
-            class="emoji_picker absolute flex min-w-[12vw] flex-col divide-y divide-surface-50/10 overflow-hidden rounded-[0.5vw] bg-surface-400 text-[1vw] text-surface-50"
-            style:top={caret_offset_top}
-            style:left={caret_offset_left}
+            class="emoji_picker absolute flex flex-col divide-y divide-surface-50/10 overflow-hidden rounded-[0.5vw] bg-surface-400 text-[1vw] text-surface-50"
+            style="top: {caret_offset?.top + caret_offset?.height}px; left: {caret_offset?.left}px; min-width: 12vw;"
         >
             {#each emoji_matches as item, index}
                 {#if index < SHOWN_EMOJI_LIMIT}
@@ -478,12 +487,10 @@
                     {@const keyword = item?.["keyword"] ?? ""}
 
                     <div
-                        role="button"
-                        tabindex="0"
                         class="flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:bg-primary-500 hover:text-white"
                         class:bg-primary-500={active_emoji_index === index}
                         class:text-white={active_emoji_index === index}
-                        on:mousedown={async (event) => await select_emoji({ emoji_index: index, element: event.currentTarget })}
+                        on:mousedown={async () => await select_emoji(index)}
                     >
                         <div class="h-[0.9vw] w-[0.9vw]">
                             <ImageLoader

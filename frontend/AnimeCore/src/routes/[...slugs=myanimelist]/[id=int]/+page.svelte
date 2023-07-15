@@ -1,6 +1,5 @@
 <script lang="ts">
     import { page } from "$app/stores";
-    import AnimeInfoErrorPage from "$components/pages/anime_info/error.svelte";
     import AnimeInfoPage from "$components/pages/anime_info/index.svelte";
     import { anime_episodes } from "$data/mock/anime_episodes";
     import { anime_list } from "$data/mock/anime_list";
@@ -12,7 +11,7 @@
     let anime = anime_list?.find((anime) => anime.id === anime_id);
 
     const opengraph_html = new OpengraphGenerator({
-        title: anime ? `Watch ${anime?.name} on AnimeCore` : "404 - Page not found!",
+        title: `Watch ${anime?.name} on AnimeCore`,
         url: $page.url.href,
         description: anime?.synopsis ?? "",
         site_name: "CoreProject",
@@ -37,6 +36,4 @@
         anime_cover={anime.cover}
         {anime_episodes}
     />
-{:else}
-    <AnimeInfoErrorPage />
 {/if}

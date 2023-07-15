@@ -113,7 +113,7 @@
     };
 </script>
 
-<anime-info-container class="relative mt-16 block h-screen bg-cover md:mt-0">
+<anime-info-container class="relative block h-screen bg-cover">
     <ImageLoader
         src={anime_cover ?? ""}
         class="absolute hidden h-full w-full select-none rounded-tl-[1.5vw] object-cover object-center md:flex"
@@ -128,7 +128,10 @@
                     <anime-banner class="relative col-span-12 h-96 md:h-[18.25vw] md:w-[13vw] md:flex-shrink-0">
                         <radial-gradient
                             class="pointer-events-none absolute inset-0 z-10 h-[150%] w-[125%] -translate-x-8 -translate-y-28 md:hidden"
-                            style="background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 100%);mask-image: linear-gradient(to bottom, rgba(7, 5, 25, 0.95) 80%, rgba(0, 0, 0, 0) 100%);"
+                            style="
+                                        background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 100%);
+                                        mask-image: linear-gradient(to bottom, rgba(7, 5, 25, 0.95) 80%, rgba(0, 0, 0, 0) 100%);
+                                    "
                         />
                         <ImageLoader
                             class="h-full w-full rounded-xl object-cover object-center md:rounded-[1vw]"
@@ -371,10 +374,10 @@
                                 <overlay-effect class="absolute inset-0 hidden bg-gradient-to-t from-surface-900/75 to-transparent md:flex md:h-[12vw]" />
 
                                 <card-info class="absolute bottom-0 flex h-max w-full justify-between p-1 md:top-0 md:p-[0.5vw]">
-                                    <p class="rounded bg-surface-900/75 p-1 text-xs font-bold tracking-wider text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.75vw] md:py-[0.75vw] md:text-[0.8vw] md:leading-none">
+                                    <p class="rounded bg-surface-900/75 p-1 text-xs font-bold tracking-wider text-surface-50 md:bg-surface-900/50 md:p-[0.45vw] md:text-[0.8vw]">
                                         EP {episode_number < 10 ? `0${episode_number}` : episode_number}
                                     </p>
-                                    <p class="unstyled rounded bg-surface-900/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">
+                                    <p class="unstyled rounded bg-surface-900/75 p-1 py-0 text-[0.7rem] font-semibold tracking-wider text-surface-50 md:bg-surface-900/50 md:px-[0.45vw] md:py-[0.1vw] md:text-[0.75vw]">
                                         {new FormatTime(duration).format_seconds_to_time_stamp_duration}
                                     </p>
                                 </card-info>

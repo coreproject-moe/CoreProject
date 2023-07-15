@@ -1,6 +1,5 @@
 <script lang="ts">
     import { page } from "$app/stores";
-    import AnimeInfoErrorPage from "$components/pages/anime_info/error.svelte";
     import AnimeInfoPage from "$components/pages/anime_info/index.svelte";
     import { anime_episodes } from "$data/mock/anime_episodes";
     import { anime_list } from "$data/mock/anime_list";
@@ -35,6 +34,4 @@
         anime_cover={anime.cover}
         {anime_episodes}
     />
-{:else}
-    <AnimeInfoErrorPage />
 {/if}
