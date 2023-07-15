@@ -6,8 +6,6 @@
     export let style: string;
     let klass: string;
     export { klass as class };
-
-    let image: HTMLImageElement;
 </script>
 
 <img
@@ -15,6 +13,6 @@
     {src}
     {alt}
     {style}
-    bind:this={image}
+    loading="lazy"
     transition:fade
 />

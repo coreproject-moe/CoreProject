@@ -127,7 +127,7 @@
     /* slide buttons colors */
     let slide_buttons = [
         { background: "bg-surface-50", border: "border-surface-50" },
-        { background: "bg-secondary-300", border: "border-error-400" },
+        { background: "bg-secondary-300", border: "border-secondary-300" },
         { background: "bg-warning-400", border: "border-warning-400" },
         { background: "bg-white", border: "border-white" },
         { background: "bg-primary-300", border: "border-primary-300" },
@@ -223,7 +223,7 @@
 <home-container class="block md:p-[1.25vw] md:pr-[3.75vw]">
     <hero-section class="flex flex-col justify-between md:flex-row">
         <latest-animes-slider
-            class="relative inline-grid h-[22.5rem] w-full md:h-[27.875vw] md:w-[42.1875vw]"
+            class="relative h-[22.5rem] w-full md:h-[27.875vw] md:w-[42.1875vw]"
             use:swipe={{ timeframe: 300, minSwipeDistance: 100, touchAction: "pan-y" }}
             on:swipe={swipe_handler}
             bind:this={main_hero_slider_element}
@@ -234,7 +234,8 @@
 
                 {#if active}
                     <anime-slide
-                        class="relative col-start-1 col-end-2 row-start-1 row-end-[200]"
+                        role="presentation"
+                        class="absolute inset-0 md:bottom-[2vw]"
                         transition:blur
                         on:mouseenter={() => {
                             $timerStore = "pause";
@@ -289,6 +290,7 @@
 
                             <ScrollArea
                                 gradientMask
+                                offsetScrollbar
                                 parentClass="max-h-16 md:max-h-[6vw]"
                                 class="text-xs font-medium leading-4 text-surface-200 md:pt-[0.75vw] md:text-[0.85vw] md:leading-[1.1vw]"
                             >
@@ -323,7 +325,7 @@
                 {/if}
             {/each}
 
-            <slide-progress class="flex flex-col px-[3vw] md:px-0">
+            <slide-progress class="absolute bottom-0 flex w-full flex-col px-[3vw] md:px-0">
                 <progress-bar
                     class="h-[0.2rem] md:h-[0.145vw] {slide_buttons[main_hero_slide_active_index].background}"
                     style="width: {$tweened_progress_value}%;"
@@ -387,7 +389,7 @@
 
             <ScrollArea
                 offsetScrollbar
-                parentClass="mt-[1.5vw] max-h-[21.5625vw]"
+                parentClass="mt-[1vw] max-h-[22.25vw]"
                 class="flex flex-col gap-[1vw]"
             >
                 {#each latest_episodes as anime}
@@ -404,7 +406,7 @@
                                 <episode-name class="text-[1vw] font-semibold leading-[1.1875vw] text-white">
                                     {anime.name}
                                 </episode-name>
-                                <episode-dates class="flex items-center gap-[0.35vw] text-[0.8vw]">
+                                <episode-dates class="flex items-center gap-[0.35vw] text-[0.8vw] text-surface-50">
                                     <span class="font-semibold">
                                         Ep {anime.episode_number < 10 ? "0" + anime.episode_number : anime.episode_number}
                                     </span>
@@ -421,7 +423,7 @@
                 {/each}
             </ScrollArea>
 
-            <section-bottom class="mt-[1vw] flex items-start justify-between gap-[2vw] pr-[0.75vw]">
+            <section-bottom class="mt-[0.75vw] flex items-start justify-between gap-[2vw] pr-[0.75vw]">
                 <span class="text-[0.75vw] font-semibold md:leading-[1.25vw]">showing recently aired episodes from your Anime List</span>
                 <button class="btn p-0 text-[0.75vw] font-semibold text-warning-400">Change to All</button>
             </section-bottom>
@@ -459,22 +461,22 @@
             </animes-episodes>
         </latest-episodes-mobile>
 
-        <navigation-card class="relative mt-[3.4vw] hidden h-[24.5vw] w-[16.625vw] md:block">
+        <navigation-card class="relative mt-[2.75vw] hidden h-[24.5vw] w-[16.625vw] md:block">
             <ImageLoader
                 src="/images/NavigationBox-bg.avif"
-                class="absolute h-full w-full rounded-[0.875vw] border-[0.25vw] border-surface-50 object-cover object-center"
+                class="absolute h-full w-full rounded-[0.875vw] object-cover object-center"
             />
 
             <gradient-overlay class="gradient absolute inset-0 bg-gradient-to-t from-surface-900 from-[1%] to-surface-900/25" />
             <gradient-overlay class="gradient absolute inset-0 bg-gradient-to-r from-surface-900/50 to-surface-900/25" />
 
-            <navigation-content class="absolute inset-0 px-[1.875vw] pt-[2vw]">
+            <navigation-content class="absolute inset-0 flex flex-col justify-between px-[1.875vw] pt-[2vw]">
                 <section-header class="flex flex-col gap-[0.2w]">
                     <span class="text-[1.5vw] font-bold leading-[1vw]">Welcome</span>
                     <span class="text-[0.875vw] font-semibold leading-[2.5vw]">Jump quickly into</span>
                 </section-header>
 
-                <navigation-left-buttons class="mt-[1vw] flex flex-col gap-[0.625vw]">
+                <navigation-left-buttons class="mt-[1vw] flex flex-col gap-[0.75vw]">
                     {#each Object.entries(icon_mapping.left) as item}
                         {@const item_title = item[1].title}
                         {@const item_icon = item[1].icon}
@@ -541,7 +543,7 @@
 
         <my-list-animes class="relative mb-[2vw] mt-[1.5vw] grid grid-cols-7 gap-[1.5625vw]">
             {#each my_list as anime}
-                <anime-card
+                <div
                     class="group col-span-1"
                     use:tippy={{
                         arrow: true,
@@ -597,13 +599,13 @@
                                 <span>Ep {anime.current_episode}</span>
                             </button>
 
-                            <button class="btn btn-icon h-[3.125vw] w-[5.4375vw] rounded-[0.375vw] border-[0.2vw] border-surface-50/50 bg-surface-900 text-[0.875vw] font-bold text-surface-50">
+                            <button class="btn btn-icon h-[3.125vw] w-[5.4375vw] rounded-[0.625vw] bg-surface-900 text-[0.875vw] font-bold text-surface-50">
                                 <Info class="w-[1.25vw]" />
                                 <span>Info</span>
                             </button>
                         </hover-buttons>
                     </card>
-                </anime-card>
+                </div>
             {/each}
         </my-list-animes>
     </my-list>
