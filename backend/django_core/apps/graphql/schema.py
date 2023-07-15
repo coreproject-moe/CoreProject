@@ -1,14 +1,13 @@
 import strawberry
-from strawberry.schema.config import StrawberryConfig
 import strawberry_django
+from gqlauth.user import arg_mutations as mutations
+from strawberry.schema.config import StrawberryConfig
+from strawberry_django.optimizer import DjangoOptimizerExtension
+
 from .types.anime import Anime
 from .types.character import Character
 from .types.producer import Producer
 from .types.staff import Staff
-
-from strawberry_django.optimizer import DjangoOptimizerExtension
-
-from gqlauth.user import arg_mutations as mutations
 
 
 @strawberry.type

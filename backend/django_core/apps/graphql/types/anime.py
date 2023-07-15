@@ -1,6 +1,7 @@
-from apps.anime.models import AnimeModel, AnimeNameSynonymModel
-from strawberry import auto
 import strawberry_django
+from apps.anime.models import AnimeModel
+from strawberry import auto
+
 from ..filters.anime import AnimeFilter
 
 __all__ = ["Anime"]
