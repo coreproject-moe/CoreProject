@@ -13,11 +13,12 @@
     import Filter from "$icons/filter.svelte";
     import Heart from "$icons/heart.svelte";
     import Next from "$icons/next.svelte";
+    import PlayCircle from "$icons/play_circle.svelte";
+    import Share from "$icons/share.svelte";
     import Warning from "$icons/warning.svelte";
+    import { Accordion, AccordionItem } from "@skeletonlabs/skeleton";
     import type { SvelteComponent } from "svelte";
     import tippy from "tippy.js";
-
-    export let episode_number: number | undefined;
 
     const button_state_mapping: { [key: string]: boolean } = {
         lights: false
@@ -63,9 +64,14 @@
             }
         }
     };
+
+    /** Episode Contents */
+    export let episode_number: number;
+    export let episode_details = `The autumn he was twelve, piano prodigy Kousei Arima suddenly found himself unable to play the piano after his mother's death. Ever since then, it's like he's been frozen in time. His childhood friend, Tsubaki Sawabe, watches over him with concern; one day, she invites him on a double date. Kousei's other childhood friend, Ryouta Watari, is being introduced to a certain girl. Kousei reluctantly heads over to the rendezvous spot. There, he sees a girl playing a melodica. This girl, who allegedly has a crush on Watari, is Kaori Miyazono. And she turns out to be a violinist!`;
+    export let episode_name = `Monotone/Colorful`;
 </script>
 
-<episode-container class="block md:py-[2vw] md:pl-[1vw] md:pr-[3.75vw]">
+<episode-container class="flex flex-col md:gap-[3.5vw] md:py-[2vw] md:pl-[1vw] md:pr-[3.75vw]">
     <episode-content class="grid grid-cols-12 md:gap-[5vw]">
         <video-player class="col-span-12 flex flex-col md:col-span-8 md:gap-[0.75vw]">
             <player class="h-64 w-full md:h-[35vw]">
@@ -146,59 +152,104 @@
                 </div>
             </video-player-options>
         </video-player>
-        <episode-info class="col-span-12 flex flex-col gap-10 p-5 md:col-span-4 md:justify-between md:gap-0 md:p-0">
-            <episodes-container class="flex flex-col justify-between gap-3 md:gap-[1.5vw]">
-                <header class="flex items-center justify-between">
-                    <span class="font-semibold md:text-[1.35vw]">Episodes</span>
-                    <button class="btn flex items-center gap-2 rounded bg-surface-400 px-3 py-2 text-xs font-semibold leading-none md:gap-[0.5vw] md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.5vw] md:text-[1vw]">
-                        EPS: 1 - 20
-                        <Chevron class="w-3 md:w-[1vw]" />
-                    </button>
-                </header>
+        <episode-info class="col-span-12 flex flex-col gap-10 p-5 md:col-span-4 md:gap-[1.5vw] md:p-0">
+            <header class="flex items-center justify-between">
+                <span class="font-semibold md:text-[1.35vw]">Episodes</span>
+                <button class="btn flex items-center gap-2 rounded bg-surface-400 px-3 py-2 text-xs font-semibold leading-none md:gap-[0.5vw] md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.5vw] md:text-[1vw]">
+                    EPS: 1 - 60
+                    <Chevron class="w-3 md:w-[1vw]" />
+                </button>
+            </header>
 
-                <episodes class="grid grid-cols-6 gap-2 md:gap-[0.75vw]">
-                    {#each Array(30) as item, index}
-                        {@const actual_index = index + 1}
-                        {@const button_active = actual_index === episode_number}
-                        <a
-                            href="./{actual_index}"
-                            class="{button_active ? 'bg-primary-500' : 'bg-surface-400'} unstyled btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]"
-                        >
-                            {actual_index}
-                        </a>
-                    {/each}
-                </episodes>
-            </episodes-container>
-            <episode-detail class="relative flex items-end md:gap-[1.5vw]">
-                <anime-banner class="relative h-72 w-full md:h-[13vw] md:w-[9vw] md:flex-shrink-0">
-                    <ImageLoader
-                        class="h-full w-full rounded-lg object-cover object-center md:rounded-[0.5vw]"
-                        src="/images/DemonSlayer-bg.avif"
-                        alt="Demon Slayer"
-                    />
-                    <overlay-gradient class="absolute inset-0 bg-gradient-to-t from-surface-900/75 to-surface-900/50 md:from-surface-900/50 md:to-surface-900/25" />
-                </anime-banner>
-                <episode-main-detail class="absolute bottom-0 flex flex-col p-5 leading-none md:static md:gap-[0.25vw] md:p-0">
-                    <anime-title class="text-xl font-bold duration-300 ease-in-out scrollbar-none md:h-auto md:max-h-[1.75vw] md:overflow-hidden md:text-[1.5vw] md:leading-[1.75vw] md:text-surface-50 md:hover:max-h-[5vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Deamon Slayer</anime-title>
-
-                    <span class="text-base text-surface-50 md:text-[1vw] md:leading-none">currently watching</span>
-                    <span class="text-base font-semibold md:my-[0.5vw] md:text-[1.25vw] md:leading-none">Episode: {episode_number}</span>
-
-                    <episode-name class="text-sm duration-300 ease-in-out scrollbar-none md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[1vw] md:leading-[1.25vw] md:text-surface-50 md:hover:max-h-[5vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">A Connected Bond: Daybreak and First Light</episode-name>
-
-                    <button
-                        type="button"
-                        class="btn mt-2 flex w-max items-center gap-0 rounded-md bg-primary-600 px-3 font-bold text-white md:mt-[1vw] md:h-[3vw] md:w-full md:gap-[0.5vw] md:rounded-[0.5vw] md:p-0"
+            <episodes class="grid grid-cols-6 gap-2 md:gap-[0.75vw]">
+                {#each Array(60) as item, index}
+                    {@const actual_index = index + 1}
+                    {@const button_active = actual_index === episode_number}
+                    <a
+                        href="./{actual_index}"
+                        class="{button_active ? 'bg-primary-500' : 'bg-surface-400'} unstyled btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]"
                     >
-                        <span class="text-sm md:text-[1.1vw]">More Details</span>
-                        <Chevron class="w-5 -rotate-90 md:w-[1.25vw]" />
-                    </button>
-                </episode-main-detail>
-            </episode-detail>
+                        {actual_index}
+                    </a>
+                {/each}
+            </episodes>
         </episode-info>
     </episode-content>
 
-    <episode-media class="grid grid-cols-12 p-5 md:mt-[5vw] md:gap-[5vw] md:p-0">
+    <episode-details class="grid grid-cols-12 gap-5 p-5 md:gap-[5vw] md:p-0">
+        <episode-info class="col-span-8 flex flex-col md:gap-[1vw]">
+            <anime-name-options class="flex items-center justify-between">
+                <div>
+                    <a
+                        href="/mal/1"
+                        class="unstyled flex flex-col leading-none md:gap-[0.25vw] md:text-[1.1vw]"
+                    >
+                        <span class="font-semibold uppercase">Demon Slayer S1</span>
+                        <span class="text-surface-50 md:text-[1vw]">Kimetsu no yaiba</span>
+                    </a>
+                </div>
+                <options>
+                    <button class="btn bg-transparent p-0">
+                        <Share class="md:w-[1.25vw]" />
+                    </button>
+                </options>
+            </anime-name-options>
+            <Accordion
+                padding="p-0"
+                hover="bg-transparent"
+                duration={300}
+            >
+                <AccordionItem
+                    open
+                    regionPanel="text-surface-50 md:text-[1vw] md:leading-[1.35vw]"
+                    regionControl="text-base text-warning-400 font-semibold md:text-[1.25vw] md:leading-[1vw] md:pb-[1vw]"
+                    regionCaret="md:w-[1vw]"
+                >
+                    <svelte:fragment slot="lead">EP{episode_number}</svelte:fragment>
+                    <svelte:fragment slot="summary">{episode_name}</svelte:fragment>
+                    <svelte:fragment slot="content">
+                        {episode_details}
+                    </svelte:fragment>
+                </AccordionItem>
+            </Accordion>
+            <a
+                href="/mal/1"
+                class="btn w-max rounded-md bg-primary-500 py-3 text-sm font-semibold leading-none md:rounded-[0.5vw] md:py-[0.9vw] md:text-[1vw]"
+            >
+                <span>View detail</span>
+                <Chevron class="w-3 -rotate-90 md:w-[1vw]" />
+            </a>
+        </episode-info>
+        <next-episode class="col-span-4">
+            <span class="font-semibold uppercase md:text-[1.1vw]">next episode</span>
+            <a
+                href="./{episode_number + 1}"
+                class="unstyled flex md:mt-[0.75vw] md:gap-[1vw]"
+            >
+                <episode-cover class="relative">
+                    <ImageLoader
+                        src="/images/episodes/hyouka/Hyouka-ep-6.avif"
+                        class="md:w-[12vw] md:rounded-[0.25vw]"
+                    />
+                    <overlay class="absolute inset-0 flex items-center justify-center bg-surface-900/40">
+                        <play class="rounded-full bg-surface-900/50 md:p-[1vw]">
+                            <PlayCircle class="md:w-[1.25vw]" />
+                        </play>
+                    </overlay>
+                </episode-cover>
+                <episode-info class="flex flex-col justify-between leading-none md:py-[1vw]">
+                    <div class="flex flex-col md:gap-[0.5vw]">
+                        <span class="text-warning-200 md:text-[1.1vw]">Finally they met</span>
+                        <span class="md:text-[1vw]">Episode - {episode_number + 1}</span>
+                    </div>
+
+                    <span class="text-surface-50 md:text-[1vw]">23 min</span>
+                </episode-info>
+            </a>
+        </next-episode>
+    </episode-details>
+
+    <episode-media class="grid grid-cols-12 p-5 md:gap-[5vw] md:p-0">
         <comments-section class="col-span-12 flex flex-col md:col-span-7 md:gap-[0.75vw]">
             <span class="flex gap-2 border-b-2 border-surface-50/25 pb-1 text-base font-semibold md:gap-[0.75vw] md:border-none md:pb-0 md:text-[1.25vw] md:leading-[1.5vw]">Comments</span>
 

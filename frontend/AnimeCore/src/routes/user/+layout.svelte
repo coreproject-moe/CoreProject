@@ -4,11 +4,12 @@
     import CoreProject from "$icons/core_project.svelte";
     import Refresh from "$icons/refresh.svelte";
     import { Timer as EasyTimer } from "easytimer.js";
-    import { beforeUpdate, onDestroy } from "svelte";
+    import _ from "lodash";
+    import { onDestroy, onMount } from "svelte";
     import { blur } from "svelte/transition";
 
-    // Constants
-    let CHOICE: number;
+    let image: string | undefined;
+    let name: string | undefined;
 
     let timer = new EasyTimer({
         target: {
@@ -22,13 +23,20 @@
     });
 
     const change_index = () => {
-        const index = globalThis.Math.floor(globalThis.Math.random() * latest_animes.length);
-        CHOICE = index;
+        const item = _.sample(latest_animes);
+
+        image = item?.cover;
+        name = item?.name;
+
+        // Side Effect
         timer.isRunning() ? timer.reset() : timer.start();
     };
 
-    // Run it before the UI is updated to show current behaviour
-    beforeUpdate(() => {
+    /**
+     * Don't use beforeUpdate
+     * Check : https://github.com/sveltejs/svelte/issues/6016
+     */
+    onMount(() => {
         change_index();
     });
 
@@ -38,14 +46,14 @@
 </script>
 
 <root class="relative inline-grid h-full w-full md:grid-cols-2">
-    {#each latest_animes as item, index}
-        {#if index === CHOICE}
+    {#if image && name}
+        {#key image}
             <div
                 class="relative col-start-1 col-end-2 row-start-1 row-end-2"
                 transition:blur={{ duration: 500 }}
             >
                 <ImageLoader
-                    src={item.cover ?? ""}
+                    src={image}
                     class="absolute h-full w-full object-cover"
                 />
 
@@ -71,7 +79,7 @@
                         <span class="text-[2.25vw] font-semibold uppercase leading-none tracking-widest text-surface-300/75 md:text-[0.75vw]">Background from anime</span>
                         <div class="flex items-center gap-[2vw] md:gap-[0.5vw]">
                             <span class="text-[3vw] font-bold uppercase leading-none tracking-widest text-warning-400 md:text-[1vw]">
-                                {item.name}
+                                {name}
                             </span>
                             <button
                                 class="btn p-0"
@@ -83,8 +91,8 @@
                     </div>
                 </div>
             </div>
-        {/if}
-    {/each}
+        {/key}
+    {/if}
     <div class="z-0 col-start-1 col-end-1 row-start-1 row-end-1 flex items-center justify-center md:col-start-2 md:col-end-2 md:block md:items-end md:px-[8vw] md:py-[2.2vw]">
         <slot />
     </div>
