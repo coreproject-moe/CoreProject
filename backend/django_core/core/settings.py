@@ -97,9 +97,6 @@ INSTALLED_APPS = [
     "strawberry_django",
     "gqlauth",
     "apps.graphql",
-    # Api ( Django-Ninja )
-    "ninja",
-    "apps.api",
     # Models
     "apps.anime",
     "apps.trackers",
@@ -130,8 +127,6 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     # Cors headers
     "corsheaders.middleware.CorsMiddleware",
-    # Allow Patch files
-    "ninja_put_patch_file_upload_middleware.middlewares.process_put_patch",
     # Django
     "django.middleware.cache.UpdateCacheMiddleware",  # Cache
     "django.middleware.common.CommonMiddleware",

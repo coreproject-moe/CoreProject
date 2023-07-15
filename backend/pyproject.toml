@@ -41,6 +41,7 @@ django-colorfield = "*"
 # Graphql framework
 strawberry_graphql = "^0.194.1"
 strawberry-graphql-django = "^0.10.3"
+strawberry-django-auth = "^0.375.0"
 # ===================================================
 # Http Client
 requests = "^2.31.0"
@@ -57,11 +58,6 @@ colorthief = ">=0.2.1"
 # Parsers
 selectolax = "^0.3.14"
 python-dateutil = "^2.8.2"
-# API framework
-django-ninja = "^0.22.2"
-pydantic = {extras = ["email"], version = "^1.10.9"}
-ninja-put-patch-file-upload-middleware = "^0.1.1"
-strawberry-django-auth = "^0.375.0"
 
 
 [tool.poetry.group.dev.dependencies]
