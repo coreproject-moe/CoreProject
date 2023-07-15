@@ -372,7 +372,7 @@
 
                                 <card-info class="absolute bottom-0 flex h-max w-full justify-between p-1 md:top-0 md:p-[0.5vw]">
                                     <p class="rounded bg-surface-900/75 p-1 text-xs font-bold tracking-wider text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.75vw] md:py-[0.75vw] md:text-[0.8vw] md:leading-none">
-                                        EP {String(episode_number).padStart(2, "0")}
+                                        EP {String(episode_number).padStart(2, '0')}
                                     </p>
                                     <p class="unstyled rounded bg-surface-900/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">
                                         {new FormatTime(duration).format_seconds_to_time_stamp_duration}
