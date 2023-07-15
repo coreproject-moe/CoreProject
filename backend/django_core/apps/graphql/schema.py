@@ -8,6 +8,8 @@ from .types.staff import Staff
 
 from strawberry_django.optimizer import DjangoOptimizerExtension
 
+from gqlauth.user import arg_mutations as mutations
+
 
 @strawberry.type
 class Query:
@@ -17,8 +19,14 @@ class Query:
     producers: list[Producer] = strawberry_django.field(pagination=True)
 
 
+@strawberry.type
+class Mutations:
+    register = mutations.Register.field
+
+
 schema = strawberry.Schema(
     query=Query,
+    mutation=Mutations,
     config=StrawberryConfig(auto_camel_case=False),
     extensions=[
         DjangoOptimizerExtension,

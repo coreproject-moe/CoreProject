@@ -27,9 +27,8 @@ class EmailOrUsernameModelBackend(ModelBackend):
 
         # Supress user doesn't exist
         with contextlib.suppress(CustomUser.DoesNotExist):
-            user_model = CustomUser.objects.get_username_with_discriminator().get(
-                Q(username_with_discriminator=username_or_email)
-                | Q(email__iexact=username_or_email)
+            user_model = CustomUser.objects.get(
+                Q(username=username_or_email) | Q(email__iexact=username_or_email)
             )
 
             # If password matches then return user
