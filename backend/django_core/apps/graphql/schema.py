@@ -22,6 +22,8 @@ class Query:
 @strawberry.type
 class Mutations:
     register = mutations.Register.field
+    verify_account = mutations.VerifyAccount.field
+    token_auth = mutations.ObtainJSONWebToken.field
 
 
 schema = strawberry.Schema(

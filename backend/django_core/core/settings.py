@@ -370,6 +370,7 @@ STRAWBERRY_DJANGO = {
 }
 
 # Graphql
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 GQL_AUTH = GqlAuthSettings(
     LOGIN_REQUIRE_CAPTCHA=False,
     REGISTER_REQUIRE_CAPTCHA=False,
