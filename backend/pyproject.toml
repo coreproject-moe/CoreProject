@@ -8,7 +8,7 @@ license = "AGPL-3.0-only"
 
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.11,<3.12"
 django = {version = '>=4.2', extras = ['argon2']}
 # First Party ( Redis )
 # redis = {extras = ['hiredis'], version = ">=4.5.4"}
@@ -61,6 +61,7 @@ python-dateutil = "^2.8.2"
 django-ninja = "^0.22.2"
 pydantic = {extras = ["email"], version = "^1.10.9"}
 ninja-put-patch-file-upload-middleware = "^0.1.1"
+strawberry-django-auth = "^0.375.0"
 
 
 [tool.poetry.group.dev.dependencies]

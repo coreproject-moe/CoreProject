@@ -440,13 +440,13 @@ files = [
 
 [[package]]
 name = "click"
-version = "8.1.4"
+version = "8.1.5"
 description = "Composable command line interface toolkit"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "click-8.1.4-py3-none-any.whl", hash = "sha256:2739815aaa5d2c986a88f1e9230c55e17f0caad3d958a5e13ad0797c166db9e3"},
-    {file = "click-8.1.4.tar.gz", hash = "sha256:b97d0c74955da062a7d4ef92fadb583806a585b2ea81958a81bd72726cbb8e37"},
+    {file = "click-8.1.5-py3-none-any.whl", hash = "sha256:e576aa487d679441d7d30abb87e1b43d24fc53bffb8758443b1a9e1cee504548"},
+    {file = "click-8.1.5.tar.gz", hash = "sha256:4be4b1af8d665c6d942909916d31a213a106800c47d0eeba73d34da3cbc11367"},
 ]
 
 [package.dependencies]
@@ -1474,6 +1474,23 @@ dotenv = ["python-dotenv (>=0.10.4)"]
 email = ["email-validator (>=1.0.3)"]
 
 [[package]]
+name = "pyjwt"
+version = "2.7.0"
+description = "JSON Web Token implementation in Python"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "PyJWT-2.7.0-py3-none-any.whl", hash = "sha256:ba2b425b15ad5ef12f200dc67dd56af4e26de2331f965c5439994dad075876e1"},
+    {file = "PyJWT-2.7.0.tar.gz", hash = "sha256:bd6ca4a3c4285c1a2d4349e5a035fdf8fb94e04ccd0fcbe6ba289dae9cc3e074"},
+]
+
+[package.extras]
+crypto = ["cryptography (>=3.4.0)"]
+dev = ["coverage[toml] (==5.0.4)", "cryptography (>=3.4.0)", "pre-commit", "pytest (>=6.0.0,<7.0.0)", "sphinx (>=4.5.0,<5.0.0)", "sphinx-rtd-theme", "zope.interface"]
+docs = ["sphinx (>=4.5.0,<5.0.0)", "sphinx-rtd-theme", "zope.interface"]
+tests = ["coverage[toml] (==5.0.4)", "pytest (>=6.0.0,<7.0.0)"]
+
+[[package]]
 name = "pyrate-limiter"
 version = "2.10.0"
 description = "Python Rate-Limiter using Leaky-Bucket Algorithm"
@@ -1850,6 +1867,26 @@ files = [
 dev = ["build", "flake8"]
 doc = ["sphinx"]
 test = ["pytest", "pytest-cov"]
+
+[[package]]
+name = "strawberry-django-auth"
+version = "0.375.0"
+description = "Graphql authentication system with Strawberry for Django."
+optional = false
+python-versions = ">=3.8,<3.12"
+files = [
+    {file = "strawberry_django_auth-0.375.0-py3-none-any.whl", hash = "sha256:981be9ae685625ae16d33404237b737f923640ce5ab3e91af2deb2660e80bf20"},
+    {file = "strawberry_django_auth-0.375.0.tar.gz", hash = "sha256:1ebc91711d370e2e3b6874e1c52e6a4eab78272dc34e325413d9ef1a8cec12aa"},
+]
+
+[package.dependencies]
+Django = ">=3.2,<4.3"
+django-stubs = {version = ">=4.2.0,<5.0.0", extras = ["compatible-mypy"]}
+PyJWT = ">=2.6.0,<3.0"
+strawberry-graphql-django = ">=0.10.5"
+
+[package.extras]
+captcha = ["pillow[captcha] (>=9.5.0,<10.0.0)"]
 
 [[package]]
 name = "strawberry-graphql"
@@ -2238,5 +2275,5 @@ brotli = ["Brotli"]
 
 [metadata]
 lock-version = "2.0"
-python-versions = "^3.11"
-content-hash = "6fd3332298f2ead82c271b21fd81e764e6b9a3604f9c90e0283601c34ea6e6ad"
+python-versions = ">=3.11,<3.12"
+content-hash = "cadecabc68389837da5739a959669934ac5f5696fbd750be39538f0b971e7290"

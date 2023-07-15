@@ -21,6 +21,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
+from gqlauth.settings_type import GqlAuthSettings
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -92,6 +95,7 @@ INSTALLED_APPS = [
     # Grahpql
     "strawberry.django",
     "strawberry_django",
+    "gqlauth",
     "apps.graphql",
     # Api ( Django-Ninja )
     "ninja",
@@ -134,6 +138,8 @@ MIDDLEWARE = [
     "django.middleware.cache.FetchFromCacheMiddleware",  # Cache
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    # GQL Auth
+    "gqlauth.core.middlewares.django_jwt_middleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     # Django defender
@@ -362,3 +368,9 @@ STRAWBERRY_DJANGO = {
     "FIELD_DESCRIPTION_FROM_HELP_TEXT": True,
     "TYPE_DESCRIPTION_FROM_MODEL_DOCSTRING": True,
 }
+
+# Graphql
+GQL_AUTH = GqlAuthSettings(
+    LOGIN_REQUIRE_CAPTCHA=False,
+    REGISTER_REQUIRE_CAPTCHA=False,
+)
