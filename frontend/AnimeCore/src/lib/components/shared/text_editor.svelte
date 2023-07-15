@@ -154,7 +154,7 @@
                 const caret_position = offset(element);
 
                 // We need 2 times the line height to be actually effective.
-                caret_offset_top = `calc(${caret_position.top - textarea_position.top + caret_position.height}px + ${line_height} + ${line_height})`;
+                caret_offset_top = `calc(${caret_position.top - textarea_position.top + caret_position.height}px + (2 * ${line_height}))`;
                 caret_offset_left = `calc(${caret_position.left - textarea_position.left}px)`;
             }
         } else {
@@ -170,7 +170,6 @@
     async function handle_keydown(event: KeyboardEvent) {
         /**Emoji specific codes*/
         if (show_emoji_picker) {
-            console.log("Activated");
             switch (event.key.toLowerCase()) {
                 case "arrowup": {
                     event.preventDefault();
@@ -466,7 +465,7 @@
             </a>
         </div>
     </textarea-footer>
-    {#if show_emoji_picker && caret_offset_left && caret_offset_top && emoji_matches.length > 0}
+    {#if show_emoji_picker && emoji_matches.length > 0}
         <emoji-popover
             class="emoji_picker absolute flex min-w-[12vw] flex-col divide-y divide-surface-50/10 overflow-hidden rounded-[0.5vw] bg-surface-400 text-[1vw] text-surface-50"
             style:top={caret_offset_top}

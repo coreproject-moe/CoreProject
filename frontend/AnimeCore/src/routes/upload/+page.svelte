@@ -8,7 +8,7 @@
     const opengraph_html = new OpengraphGenerator({
         title: `Upload on AnimeCore`,
         url: $page.url.href,
-        description: "",
+        description: "Upload on animecore",
         site_name: "CoreProject",
         locale: "en_US",
         image_url: ""
