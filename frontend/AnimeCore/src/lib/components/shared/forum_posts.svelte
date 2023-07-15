@@ -1,7 +1,6 @@
 <script lang="ts">
     import { FormatDate } from "$functions/format_date";
     import MessageCircle from "$icons/message_circle.svelte";
-
     import ImageLoader from "./image/image_loader.svelte";
 
     export let link: string;

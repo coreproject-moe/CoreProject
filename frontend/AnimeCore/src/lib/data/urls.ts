@@ -1,4 +1,4 @@
-import _ from "lodash";
+import pickBy from "lodash/pickBy";
 
 export class UrlMaps {
     #domain: string;
@@ -53,7 +53,7 @@ export class UrlMaps {
     // Searchable endpoints
     public anime = ({ mal_id, kitsu_id, anilist_id, name, genres, themes, studios, producers, characters, staffs }: { mal_id?: number; kitsu_id?: number; anilist_id?: number; name?: string; genres?: string; themes?: string; studios?: string; producers?: string; characters?: string; staffs?: string }) => {
         const url = new URL(`${this.BASE_URL}/anime`);
-        const searchObject = _.pickBy({
+        const searchObject = pickBy({
             mal_id: mal_id ?? 0,
             kitsu_id: kitsu_id ?? 0,
             anilist_id: anilist_id ?? 0,
@@ -71,7 +71,7 @@ export class UrlMaps {
 
     public genre = ({ name, mal_id }: { name?: string; mal_id?: string }) => {
         const url = new URL(`${this.BASE_URL}/anime/genres`);
-        const searchObject = _.pickBy({
+        const searchObject = pickBy({
             name: name ?? "",
             mal_id: mal_id ?? 0
         });
@@ -81,7 +81,7 @@ export class UrlMaps {
 
     public theme = ({ name, mal_id }: { name?: string; mal_id?: string }) => {
         const url = new URL(`${this.BASE_URL}/anime/themes`);
-        const searchObject = _.pickBy({
+        const searchObject = pickBy({
             name: name ?? "",
             mal_id: mal_id ?? 0
         });

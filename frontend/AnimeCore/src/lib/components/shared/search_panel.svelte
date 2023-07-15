@@ -3,7 +3,6 @@
     import Circle from "$icons/circle.svelte";
     import Cross from "$icons/cross.svelte";
     import Search from "$icons/search.svelte";
-
     import ImageLoader from "./image/image_loader.svelte";
 
     // search input

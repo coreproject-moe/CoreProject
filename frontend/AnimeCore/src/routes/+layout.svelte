@@ -16,6 +16,12 @@
     import Settings from "$icons/settings.svelte";
     import { navbar_middle_section_variant } from "$store/navbar";
     import { theme } from "$store/theme";
+    // Most of your app wide CSS should be put in this file
+    import "../app.css";
+    // Custom SCSS
+    import "../nprogress.scss";
+    // Tippy
+    import "../tippy.postcss";
     import { AppShell, Avatar } from "@skeletonlabs/skeleton";
     import { Modal, modalStore } from "@skeletonlabs/skeleton";
     import type { ModalComponent, ModalSettings } from "@skeletonlabs/skeleton";
@@ -27,13 +33,6 @@
     import type { SvelteComponent } from "svelte";
     import { blur, slide } from "svelte/transition";
     import tippy from "tippy.js";
-
-    // Most of your app wide CSS should be put in this file
-    import "../app.css";
-    // Custom SCSS
-    import "../nprogress.scss";
-    // Tippy
-    import "../tippy.postcss";
 
     // Local
     const icon_mapping: {

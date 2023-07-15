@@ -19,19 +19,19 @@ const config = {
         // See https://kit.svelte.dev/docs/adapters for more information about adapters.
         adapter: is_static
             ? static_adapter({
-                fallback: "app.html",
+                  fallback: "app.html",
                   // precompress: true,
-                strict: true
-            })
+                  strict: true
+              })
             : is_node
             ? node_adapter({
-                precompress: false
-            })
+                  precompress: false
+              })
             : vercel({
                   // an array of dependencies that esbuild should treat
                   // as external when bundling functions
-                external: []
-            }),
+                  external: []
+              }),
         alias: {
             $store: path.resolve("./src/lib/store"),
             $hooks: path.resolve("./src/hooks"),
@@ -42,7 +42,8 @@ const config = {
             $error: path.resolve("./src/lib/components/errors"),
             $functions: path.resolve("./src/lib/functions"),
             $modals: path.resolve("./src/lib/components/modals"),
-            $skeletons: path.resolve("./src/lib/skeletons")
+            $skeletons: path.resolve("./src/lib/skeletons"),
+            $home: path.resolve("./")
         }
     }
 };

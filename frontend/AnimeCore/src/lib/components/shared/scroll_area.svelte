@@ -27,7 +27,7 @@
     class:mask-top={gradientMask && scroll_percent <= 100 && scroll_percent >= 90}
     class:mask-middle={gradientMask && scroll_percent < 90 && scroll_percent >= 10}
     class:mask-bottom={gradientMask && scroll_percent < 10 && scroll_percent >= 0}
-    class="{parentClass} {offsetScrollbar ? 'pr-[0.75vw]' : 'pr-0'} block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin"
+    class="{parentClass} {offsetScrollbar ? 'pr-3 md:pr-[0.75vw]' : 'pr-0'} block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin"
 >
     <div class="{klass} whitespace-pre-line">
         <slot />

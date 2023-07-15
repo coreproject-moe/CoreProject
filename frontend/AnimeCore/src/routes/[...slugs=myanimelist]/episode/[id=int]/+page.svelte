@@ -3,7 +3,7 @@
     import EpisodePage from "$components/pages/episode/index.svelte";
     import { OpengraphGenerator } from "$functions/opengraph";
 
-    let episode_number: number | undefined;
+    let episode_number: number;
     $: episode_number = Number($page.params.id);
 
     const opengraph_html = new OpengraphGenerator({

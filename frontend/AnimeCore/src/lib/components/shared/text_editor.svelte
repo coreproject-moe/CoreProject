@@ -7,17 +7,18 @@
     import Italic from "$icons/italic.svelte";
     import Strike from "$icons/strike.svelte";
     import Underline from "$icons/underline.svelte";
+    import Markdown from "./markdown.svelte";
     import { offset } from "caret-pos";
     import { tick } from "svelte";
     import type { SvelteComponent } from "svelte";
     import tippy from "tippy.js";
     import xss from "xss";
 
-    import Markdown from "./markdown.svelte";
-
     let caret_offset_top: string | null = null;
     let caret_offset_left: string | null = null;
 
+    // Bindings
+    let textarea_element: HTMLTextAreaElement;
     let textarea_value = "";
 
     let emoji_matches: [{ emoji: string; keyword: string }?];
@@ -426,9 +427,7 @@
                         appendTo: document.body,
                         animation: "shift-away"
                     }}
-                    on:click={(event) => {
-                        button_function(event.currentTarget);
-                    }}
+                    on:click={() => button_function(textarea_element)}
                 >
                     <svelte:component this={icon} />
                 </button>
@@ -442,6 +441,7 @@
             on:keydown={handle_keydown}
             on:blur={handle_blur}
             bind:value={textarea_value}
+            bind:this={textarea_element}
             spellcheck="true"
             class="h-28 w-full resize-none border-none bg-surface-900 p-3 text-sm leading-tight text-surface-50 outline-none duration-300 ease-in-out placeholder:text-surface-200 focus:ring-0 md:h-[8vw] md:p-[1vw] md:text-[1vw] md:leading-[1.5vw]"
             placeholder="Leave a comment"
