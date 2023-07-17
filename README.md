@@ -40,9 +40,9 @@
 
 <p float="left">
 
-  <img src="https://user-images.githubusercontent.com/61817579/235350591-ef773175-8d90-4a7f-b412-1aa71953b5b1.png" alt="Home Page Mockup" width=49%>
-  <img src="https://user-images.githubusercontent.com/61817579/235350607-a77e4cbe-54f5-4678-ad49-81bc740ea6a0.png" alt="Anime Info Page Mockup" width=49%>
-  <img src="https://github.com/baseplate-admin/CoreProject/assets/114811070/a9072216-815a-42c1-aee8-b337c47e2649" alt="Register Page Mockup" width=49%>
+  <img src="https://github.com/baseplate-admin/CoreProject/assets/114811070/e5028205-2d26-4884-8d7a-8d4292789eff" alt="Home Page Mockup" width=49%>
+  <img src="https://github.com/baseplate-admin/CoreProject/assets/114811070/9e655d1b-2aff-42d2-9d50-473bb5ef1fcd" alt="Anime Info Page Mockup" width=49%>
+  <img src="https://github.com/baseplate-admin/CoreProject/assets/114811070/dcabe6f0-c7ce-43da-a670-3443598ba892" alt="Register Page Mockup" width=49%>
   <img src="https://github.com/baseplate-admin/CoreProject/assets/114811070/8c2fee2f-f5ea-4df4-ac41-d9a4491a24f7" alt="Search Panel Mockup" width=49%>
 </p>
 
