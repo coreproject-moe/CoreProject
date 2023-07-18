@@ -1,6 +1,6 @@
 repos:
     - repo: https://github.com/pre-commit/mirrors-eslint
-      rev: v8.44.0
+      rev: v8.45.0
       hooks:
           - id: eslint
             args: [
@@ -92,7 +92,7 @@ repos:
 
     - repo: https://github.com/astral-sh/ruff-pre-commit
       # Ruff version.
-      rev: "v0.0.277"
+      rev: "v0.0.278"
       hooks:
           - id: ruff
             # Respect `exclude` and `extend-exclude` settings.
