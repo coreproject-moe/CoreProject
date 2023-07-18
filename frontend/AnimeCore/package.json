@@ -42,15 +42,17 @@
         "cross-env": "^7.0.3",
         "dayjs": "^1.11.9",
         "easytimer.js": "^4.5.4",
-        "emoji-picker-element": "^1.18.3",
         "eslint": "^8.45.0",
         "eslint-config-prettier": "^8.8.0",
         "eslint-plugin-svelte": "^2.32.2",
         "felte": "^1.2.11",
+        "highlight.js": "^11.8.0",
         "html-entities": "^2.4.0",
+        "isomorphic-dompurify": "^1.8.0",
         "lodash": "^4.17.21",
         "marked": "^5.1.1",
         "marked-emoji": "^1.2.0",
+        "marked-highlight": "^2.0.1",
         "nprogress": "^0.2.0",
         "postcss": "^8.4.26",
         "prettier": "^2.8.8",
@@ -68,8 +70,7 @@
         "typescript": "^5.1.6",
         "vite": "^4.4.4",
         "vitest": "^0.33.0",
-        "voca": "^1.4.1",
-        "xss": "^1.0.14"
+        "voca": "^1.4.1"
     },
     "type": "module",
     "workspaces": [

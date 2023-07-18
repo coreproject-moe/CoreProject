@@ -1,32 +1,40 @@
 <script lang="ts">
     import { emojis } from "$data/emojis";
-    import { marked } from "marked";
+    import hljs from "highlight.js";
+    import "highlight.js/scss/github-dark.scss";
+    import DOMPurify from "isomorphic-dompurify";
+    import type { marked as markedType } from "marked";
+    import { Marked } from "marked";
+    import type { MarkedEmojiOptions } from "marked-emoji";
     import { markedEmoji } from "marked-emoji";
-    import xss from "xss";
+    import { markedHighlight } from "marked-highlight";
 
     export let markdown = "";
     export { klass as class };
 
     let klass = "";
 
-    const emoji_options = {
+    const emoji_options: MarkedEmojiOptions = {
         emojis,
         unicode: false
     };
 
     // Override function
-    const renderer: marked.RendererObject = {
+    const renderer: markedType.RendererObject = {
         del(text: string) {
-            /** Dont convert s (tag) -> del (tag)
-             * Reason 1: Skeleton.dev is formatting `del` tag | Source : https://www.skeleton.dev/elements/typography
-             * Reason 2: Marked.js is not allowing us to add unstyled class to rendered text.
-             */
-
-            return `<s>${text}</s>`;
+            return `<del class='unstyled'>${text}</del>`;
         }
     };
 
-    marked.use(
+    const marked = new Marked(
+        // Highlight.js
+        markedHighlight({
+            langPrefix: "hljs language-",
+            highlight: (code, lang) => {
+                const language = hljs.getLanguage(lang) ? lang : "plaintext";
+                return hljs.highlight(code, { language }).value;
+            }
+        }),
         // Emoji plugin
         markedEmoji(emoji_options),
         {
@@ -39,7 +47,7 @@
     );
 
     let html: string;
-    $: html = xss(marked.parse(markdown));
+    $: html = DOMPurify.sanitize(marked.parse(markdown));
 </script>
 
 <markdown class={klass}>
