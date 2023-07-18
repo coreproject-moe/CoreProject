@@ -5,6 +5,7 @@
 
     const items: Array<{
         image: { src: string; alt: string; class?: string };
+        class?: string;
         gradient: { mobile: string; desktop: string; class?: string };
     }> = [
         {
@@ -14,8 +15,8 @@
             },
             gradient: {
                 class: "h-[50dvh] w-[100dvw] md:h-[40dvw] md:w-[calc(100%*2)]",
-                mobile: "radial-gradient(50dvh circle at center, rgba(252, 233, 214, 0.25) 0%, transparent 50%)",
-                desktop: "radial-gradient(40dvw circle at center, rgba(252, 233, 214, 0.25) 0%, transparent 50%)"
+                mobile: "radial-gradient(50dvh circle at center, rgba(218, 202, 207, 0.25) 0%, transparent 50%)",
+                desktop: "radial-gradient(40dvw circle at center, rgba(218, 202, 207, 0.25) 0%, transparent 50%)"
             }
         },
         {
@@ -24,10 +25,11 @@
                 alt: "Ichigo",
                 class: "ml-auto"
             },
+            class: "items-end",
             gradient: {
                 class: "h-[50dvh] w-[100dvw] md:h-[50dvw] md:w-[calc(100%*2)]",
-                mobile: "radial-gradient(50dvh circle at center, rgba(117, 105, 225, 0.25) 0%, transparent 50%)",
-                desktop: "radial-gradient(50dvw circle at center, rgba(117, 105, 225, 0.25) 0%, transparent 50%)"
+                mobile: "radial-gradient(45dvh circle at center, rgba(137, 155, 206, 0.25) 0%, transparent 50%)",
+                desktop: "radial-gradient(45dvw circle at center, rgba(137, 155, 206, 0.25) 0%, transparent 50%)"
             }
         },
         {
@@ -55,6 +57,7 @@
     ];
     const mapping: {
         image: { src: string; alt: string; class?: string };
+        class?: string;
         gradient: { mobile: string; desktop: string; class?: string };
     } = sample(items)!; // This logically can't be undefined or null
 </script>
@@ -72,7 +75,7 @@
     </style>
 </svelte:head>
 
-<section class="relative flex h-full grid-cols-5 flex-col items-center justify-end gap-20 md:grid md:items-end md:gap-0">
+<section class="{mapping.class} relative flex h-full grid-cols-5 flex-col justify-end gap-20 md:grid md:items-end md:gap-0">
     <error-context class="col-span-5 flex flex-col items-center leading-none md:col-span-3 md:mb-[13vw] md:items-start md:gap-[1vw] md:pl-[5vw]">
         <status-code class="text-7xl font-bold md:text-[7vw]">
             {#each "404".split("") as number}
@@ -104,7 +107,7 @@
         <img
             src={mapping.image.src}
             alt={mapping.image.alt}
-            class="{mapping.image.class ?? ''} relative object-contain object-bottom md:h-[100dvh]"
+            class="{mapping.image.class ?? ''} relative h-[40dvh] object-contain object-bottom md:h-[100dvh]"
         />
     </character-image>
 </section>
