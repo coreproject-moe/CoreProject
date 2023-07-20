@@ -27,8 +27,8 @@
 </svelte:head>
 
 {#if anime}
-    <!-- 
-        TopRounded is due to how skeleton works with it's AppRail. 
+    <!--
+        TopRounded is due to how skeleton works with it's AppRail.
         We are essentially monkeypatching border-top-left-radius
     -->
     <TopRounded class="fixed z-10 hidden w-[1.5vw] text-surface-900 md:flex" />
