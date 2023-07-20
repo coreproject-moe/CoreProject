@@ -10,11 +10,11 @@ T = TypeVar("T")
 
 @strawberry_django.filters.filter(CharacterModel)
 class CharacterFilter:
-    mal_id: int
-    kitsu_id: int
-    anilist_id: int
+    mal_id: int | None
+    kitsu_id: int | None
+    anilist_id: int | None
 
-    name: str
+    name: str | None
 
     def filter_name(self, queryset: T) -> T:
         query = (
