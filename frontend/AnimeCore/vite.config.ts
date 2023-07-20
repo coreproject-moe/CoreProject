@@ -5,8 +5,10 @@ export default defineConfig({
     plugins: [sveltekit()],
     esbuild: {
         legalComments: "none",
+        /*
         // This is magix
-        // minifyIdentifiers: false,
+        minifyIdentifiers: false,
+        */
         // Disable console
         drop: ["console", "debugger"]
     },

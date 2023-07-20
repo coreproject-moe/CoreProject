@@ -2,9 +2,9 @@
     import { page } from "$app/stores";
     import EpisodePage from "$components/pages/episode/index.svelte";
     import { OpengraphGenerator } from "$functions/opengraph";
+    import { derived } from "svelte/store";
 
-    let episode_number: number;
-    $: episode_number = Number($page.params.id);
+    let episode_number = derived(page, (page) => page.params.id);
 
     const opengraph_html = new OpengraphGenerator({
         title: `Watch  on AnimeCore | Episode ${episode_number}`,
@@ -20,4 +20,4 @@
     {@html opengraph_html}
 </svelte:head>
 
-<EpisodePage {episode_number} />
+<EpisodePage episode_number={Number($episode_number)} />

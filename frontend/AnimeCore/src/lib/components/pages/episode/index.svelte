@@ -20,6 +20,7 @@
     import type { SvelteComponent } from "svelte";
     import { blur } from "svelte/transition";
     import tippy from "tippy.js";
+    import Comment from "./comment.svelte";
 
     const toggle_lights = () => {
         button_state_mapping.lights = !button_state_mapping.lights;
@@ -307,37 +308,14 @@
 
             <comments class="mt-10 flex flex-col gap-5 md:mt-[2vw] md:gap-[1.5vw]">
                 {#each episode_comments as comment}
-                    <comment class="flex gap-3 md:gap-[1vw]">
-                        <a
-                            href="/user/"
-                            class="h-7 w-7 flex-shrink-0 md:h-[2vw] md:w-[2vw]"
-                        >
-                            <ImageLoader
-                                src={comment.user.profile_pic}
-                                alt="Avatar"
-                                class="h-full w-full shrink-0 rounded-full object-cover"
-                            />
-                        </a>
-                        <comment-details class="flex flex-col items-start gap-1 md:gap-0">
-                            <a
-                                href="/user/"
-                                class="unstyled text-xs leading-none md:text-[1vw]"
-                            >
-                                <username>{comment.user.username}</username>
-                                <comment-time class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">{new FormatDate(comment.date).format_to_time_from_now}</comment-time>
-                            </a>
-
-                            <Markdown
-                                class="text-sm leading-snug text-surface-50 md:text-[1vw] md:leading-[1.5vw]"
-                                markdown={comment.content}
-                            />
-
-                            <button class="btn mt-2 p-0 md:mt-0">
-                                <Heart class="w-3 text-surface-300 md:w-[1vw]" />
-                                <likes class="text-xs md:text-[0.75vw]">{comment.likes}</likes>
-                            </button>
-                        </comment-details>
-                    </comment>
+                    <Comment
+                        comment_user_profile_pic={comment.user.profile_pic}
+                        comment_username={comment.user.username}
+                        comment_date={comment.date}
+                        comment_content={comment.content}
+                        comment_likes={comment.likes}
+                        comment_replies={comment.replies}
+                    />
                 {/each}
             </comments>
         </comments-section>

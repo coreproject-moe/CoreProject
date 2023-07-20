@@ -41,15 +41,16 @@
         "video/mkv": ".mkv"
     };
     function handle_sub_checkbox_change(): void {
-        const truthy_checkbox_array = checkbox_elements.filter((item) => {
-            return item.checked;
-        });
+        const truthy_checkbox_array = checkbox_elements.filter((item) => item.checked);
 
         if (truthy_checkbox_array.length === data_list.length) {
             main_checkbox.indeterminate = false;
             main_checkbox.checked = true;
-        } else {
+        } else if (truthy_checkbox_array.length !== 0) {
             main_checkbox.indeterminate = true;
+            main_checkbox.checked = false;
+        } else {
+            main_checkbox.indeterminate = false;
             main_checkbox.checked = false;
         }
     }
@@ -296,10 +297,10 @@
                             {@const file = data.file}
                             {@const name = file.name}
                             {@const last_modified = new FormatDate(
-                                /*
+                                /* 
                                     Somehow things got fked up.
                                     dayjs expects `time` to be in seconds and we have the file.lastModified as milliseconds.
-                                    So here we go with our logic.
+                                    So here we go with our logic. 
                                 */
                                 dayjs.unix(file.lastModified / 1000).toString()
                             ).format_to_human_readable_form}

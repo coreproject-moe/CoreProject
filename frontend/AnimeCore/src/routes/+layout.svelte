@@ -31,7 +31,7 @@
     import NProgress from "nprogress";
     import { beforeUpdate } from "svelte";
     import type { SvelteComponent } from "svelte";
-    import { blur, slide } from "svelte/transition";
+    import { blur } from "svelte/transition";
     import tippy from "tippy.js";
 
     // Local
@@ -151,19 +151,31 @@
 
     /** vercel effect */
     let hover_glider_element: HTMLDivElement;
-    let GLIDER_TRANSITION_DURATION = 100;
+    let GLIDER_TRANSITION_DURATION = 200;
+    let is_hovered = false;
+    let mouseleaveTimeout: NodeJS.Timer | null = null;
 
     function handle_mouseenter(event: MouseEvent) {
         const target = event.target as HTMLAnchorElement;
         hover_glider_element.style.transform = `translateY(${target.offsetTop}px)`;
 
-        if (getComputedStyle(hover_glider_element).getPropertyValue("opacity") === "0") {
-            setTimeout(() => {
-                hover_glider_element.style.opacity = "100";
-            }, GLIDER_TRANSITION_DURATION);
-        } else {
+        if (!is_hovered) {
+            GLIDER_TRANSITION_DURATION = 50;
             hover_glider_element.style.opacity = "100";
+            is_hovered = true;
+        } else {
+            GLIDER_TRANSITION_DURATION = 200;
         }
+
+        clearTimeout(mouseleaveTimeout!);
+    }
+
+    function handle_mouseleave() {
+        // Delay the mouseleave event to allow time ( GLIDER_TRANSITION_DURATION ) for moving to a sibling element
+        mouseleaveTimeout = setTimeout(() => {
+            hover_glider_element.style.opacity = "0";
+            is_hovered = false;
+        }, GLIDER_TRANSITION_DURATION);
     }
 </script>
 
@@ -393,7 +405,7 @@
                                 class:pointer-events-none={!item_href}
                                 class="{is_active ? 'relative bg-secondary-100 before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500' : 'bg-initial'} btn btn-icon relative w-[4vw] rounded-[0.75vw] p-0"
                                 on:mouseenter={handle_mouseenter}
-                                on:mouseleave={() => (hover_glider_element.style.opacity = "0")}
+                                on:mouseleave={handle_mouseleave}
                             >
                                 <div class="inline-grid">
                                     {#if is_active}

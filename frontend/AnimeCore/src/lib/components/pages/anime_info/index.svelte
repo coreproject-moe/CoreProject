@@ -138,7 +138,11 @@
                         <overlay-gradient class="gradient absolute inset-0 bg-gradient-to-t from-surface-900/75 to-surface-900/25 md:hidden" />
                     </anime-banner>
                     <anime-details class="absolute bottom-0 col-span-12 p-5 md:static md:p-0">
-                        <anime-name class="text-2xl font-bold md:text-[2vw] md:leading-[2.7vw]">{anime_name}</anime-name>
+                        <ScrollArea class="max-h-48 md:max-h-[10vw]">
+                            <anime-name class="text-2xl font-bold md:text-[2vw] md:leading-[2.7vw]">
+                                {anime_name}
+                            </anime-name>
+                        </ScrollArea>
 
                         <anime-japanese-name class="unstyled flex flex-wrap gap-x-2 pt-2 text-xs font-semibold uppercase tracking-wider text-surface-50 md:gap-x-[0.25vw] md:pt-[0.625vw] md:text-[0.75vw] md:leading-[0.9vw]">
                             {japanese_name}

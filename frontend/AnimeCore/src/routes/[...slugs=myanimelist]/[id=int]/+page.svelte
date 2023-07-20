@@ -6,10 +6,11 @@
     import { anime_list } from "$data/mock/anime_list";
     import { OpengraphGenerator } from "$functions/opengraph";
     import TopRounded from "$icons/top_rounded.svelte";
+    import { derived } from "svelte/store";
 
-    let anime_id = Number($page.params.id);
+    let anime_id = derived(page, (page) => page.params.id);
 
-    let anime = anime_list?.find((anime) => anime.id === anime_id);
+    let anime = anime_list?.find((anime) => anime.id === Number($anime_id));
 
     const opengraph_html = new OpengraphGenerator({
         title: anime ? `Watch ${anime?.name} on AnimeCore` : "404 - Page not found!",
@@ -26,8 +27,8 @@
 </svelte:head>
 
 {#if anime}
-    <!--
-        TopRounded is due to how skeleton works with it's AppRail.
+    <!-- 
+        TopRounded is due to how skeleton works with it's AppRail. 
         We are essentially monkeypatching border-top-left-radius
     -->
     <TopRounded class="fixed z-10 hidden w-[1.5vw] text-surface-900 md:flex" />
