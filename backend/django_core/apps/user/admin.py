@@ -42,7 +42,6 @@ class CustomUserAdmin(DjangoUserAdmin):
             {
                 "fields": (
                     "username",
-                    "discriminator",
                     "password",
                 )
             },
@@ -91,7 +90,6 @@ class CustomUserAdmin(DjangoUserAdmin):
                 "classes": ("wide",),
                 "fields": (
                     "username",
-                    "discriminator",
                     "email",
                     "password1",
                     "password2",
@@ -129,9 +127,8 @@ class CustomUserAdmin(DjangoUserAdmin):
                 item.strip()
                 for item in search_term.split(",")
             ]
-            queryset = self.model.objects.get_username_with_discriminator().filter(
-                Q(username_with_discriminator__in=search_term_list)
-                | Q(email__in=search_term_list)
+            queryset = self.model.objects.filter(
+                Q(username__in=search_term_list) | Q(email__in=search_term_list)
             )
 
         return queryset, may_have_duplicates

@@ -1,5 +1,4 @@
 from apps.user.models import CustomUser
-from django.conf import settings
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 from ninja import File, Form, Router, UploadedFile
@@ -25,9 +24,6 @@ def patch_individual_user_info(
     last_name: str = Form(...),
     password: str = Form(...),
     email: EmailStr = Form(...),
-    discriminator: int = Form(
-        default=None, gt=0, lt=int(str(settings.DISCRIMINATOR_LENGTH * "9"))
-    ),
     avatar_provider: AnyUrl = Form(...),
     avatar: UploadedFile = File(...),
 ) -> None:
@@ -40,7 +36,7 @@ def get_individual_user_info(
     username: str,
 ) -> CustomUser:
     user = get_object_or_404(
-        CustomUser.objects.get_username_with_discriminator(),
-        username_with_discriminator=username,
+        CustomUser,
+        username=username,
     )
     return user
