@@ -11,8 +11,7 @@ license = "AGPL-3.0-only"
 python = "^3.11"
 django = {version = '>=4.2', extras = ['argon2']}
 # First Party ( Redis )
-# redis = {extras = ['hiredis'], version = ">=4.5.4"}
-redis = {extras = ['hiredis'], version = "*"}
+redis = {extras = ['hiredis'], version = ">=4.5.4"}
 # First party ( Image )
 pillow = "*"
 # First Party ( Database )
@@ -64,6 +63,7 @@ python-dateutil = "^2.8.2"
 # https://github.com/adamchainz/django-watchfiles/issues/12
 # django-watchfiles = "*"
 # Django
+django-browser-reload = "^1.11.0"
 django_debug_toolbar = "*"
 django_dbbackup = "*"
 django_cprofile_middleware = "*"
@@ -84,6 +84,7 @@ django-extensions = "^3.2.3"
 # pygraphviz = "^1.10"
 # # Profiler
 # gprof2dot = "^2022.7.29"
+
 
 
 [tool.poetry.group.test.dependencies]
