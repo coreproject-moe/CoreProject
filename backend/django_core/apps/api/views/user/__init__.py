@@ -25,9 +25,6 @@ def patch_individual_user_info(
     last_name: str = Form(...),
     password: str = Form(...),
     email: EmailStr = Form(...),
-    discriminator: int = Form(
-        default=None, gt=0, lt=int(str(settings.DISCRIMINATOR_LENGTH * "9"))
-    ),
     avatar_provider: AnyUrl = Form(...),
     avatar: UploadedFile = File(...),
 ) -> None:
@@ -41,6 +38,6 @@ def get_individual_user_info(
 ) -> CustomUser:
     user = get_object_or_404(
         CustomUser,
-        username_with_discriminator=username,
+        username=username,
     )
     return user

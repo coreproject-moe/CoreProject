@@ -15,11 +15,3 @@ class CustomUserChangeForm(UserChangeForm["CustomUser"]):
     class Meta:
         model = CustomUser
         fields = ("email",)
-
-
-class UsernameWithDiscriminatorForm(forms.Form):
-    username = forms.CharField()
-    discriminator = forms.IntegerField(
-        max_value=int("9" * settings.DISCRIMINATOR_LENGTH),
-        min_value=1,
-    )
