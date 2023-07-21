@@ -15,9 +15,10 @@ from django.db.models import Q, QuerySet
 from django.db.models.functions import Greatest
 from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
+from django_ratelimit.decorators import ratelimit
 from ninja import File, Form, Query, Router, UploadedFile
 from ninja.pagination import paginate
-from django_ratelimit.decorators import ratelimit
+
 from ...schemas.anime import AnimeInfoGETSchema
 
 router = Router()

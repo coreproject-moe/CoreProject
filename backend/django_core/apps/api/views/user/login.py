@@ -1,9 +1,10 @@
 from apps.api.models import Token
 from apps.user.backends import EmailOrUsernameModelBackend
 from django.http import Http404, HttpRequest
+from django_ratelimit.decorators import ratelimit
 from ninja import Form, Router
 from pydantic import EmailStr
-from django_ratelimit.decorators import ratelimit
+
 from ...schemas.user.login import LoginSchema
 
 router = Router()
