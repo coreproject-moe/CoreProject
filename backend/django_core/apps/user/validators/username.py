@@ -12,4 +12,3 @@ INVALID_USERNAMES = set(RESERVED_USERNAME)
 def username_validator(username: str) -> None:
     if username in INVALID_USERNAMES:
         raise ValidationError(f"Username {username} not allowed")
-

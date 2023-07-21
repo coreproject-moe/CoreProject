@@ -128,8 +128,7 @@ class CustomUserAdmin(DjangoUserAdmin):
                 for item in search_term.split(",")
             ]
             queryset = self.model.objects.filter(
-                Q(username__in=search_term_list)
-                | Q(email__in=search_term_list)
+                Q(username__in=search_term_list) | Q(email__in=search_term_list)
             )
 
         return queryset, may_have_duplicates

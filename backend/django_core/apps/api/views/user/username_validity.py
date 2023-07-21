@@ -1,8 +1,5 @@
-from http import HTTPStatus
 
-from apps.user.models import CustomUser
-from django.conf import settings
-from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.http import HttpRequest, HttpResponse
 from ninja import Form, Router
 
 from ...schemas.user.username_validity import UsernameValiditySchema
@@ -22,4 +19,4 @@ def post_username_validity_info(
     request: HttpRequest,
     username: str = Form(...),
 ) -> HttpResponse:
-   pass
+    pass
