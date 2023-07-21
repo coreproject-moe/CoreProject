@@ -17,7 +17,8 @@ def post_user_login_info(
     password: str = Form(...),
 ) -> Token:
     user = EmailOrUsernameModelBackend.get_user_given_username_and_password(
-        username, password
+        username,
+        password,
     )
 
     if not user:
