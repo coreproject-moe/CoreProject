@@ -17,6 +17,7 @@ avatar = FilePattern(filename_pattern="avatar/{uuid:s}{ext}")
 
 # Create your models here.
 
+
 class CustomUser(
     AbstractBaseUser,
     PermissionsMixin,
@@ -30,9 +31,9 @@ class CustomUser(
         ),
         unique=True,
         validators=[
-            username_validator, 
+            username_validator,
             RegexValidator(
-                fr"^[a-zA-Z0-9_-]+#[0-9]{{{settings.DISCRIMINATOR_LENGTH}}}$",
+                rf"^[a-zA-Z0-9_-]+#[0-9]{{{settings.DISCRIMINATOR_LENGTH}}}$",
                 message="Username is not valid for this regex `^[a-zA-Z0-9_-]+#[0-9]{4}$`",
             ),
         ],
@@ -61,7 +62,7 @@ class CustomUser(
             "Unselect this instead of deleting accounts."
         ),
     )
- 
+
     avatar = models.ImageField(
         upload_to=avatar,
         default=None,
@@ -81,7 +82,7 @@ class CustomUser(
 
     # Django specific fields
     USERNAME_FIELD = "username"
-    REQUIRED_FIELDS = ['email']
+    REQUIRED_FIELDS = ["email"]
 
     def save(self, *args: Any, **kwargs: Any) -> None:
         super().save(*args, **kwargs)

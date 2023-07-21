@@ -25,20 +25,16 @@ class EpisodeTimestampAdmin(admin.ModelAdmin[EpisodeTimestampModel]):
             search_term,
         )
         if "#" in search_term:
-            queryset = (
-                self.model.objects
-                .filter(
-                    username__in=[
-                        # Remove trailing whitespace
-                        # We might have something like
-                        # user = ['baseplate-admin ', ' baseplate-foot']
-                        # make it
-                        # user = ['baseplate-admin','baseplate-foot']
-                        item.strip()
-                        for item in search_term.split(",")
-                    ]
-                )
-                .distinct()
-            )
+            queryset = self.model.objects.filter(
+                username__in=[
+                    # Remove trailing whitespace
+                    # We might have something like
+                    # user = ['baseplate-admin ', ' baseplate-foot']
+                    # make it
+                    # user = ['baseplate-admin','baseplate-foot']
+                    item.strip()
+                    for item in search_term.split(",")
+                ]
+            ).distinct()
 
         return queryset, may_have_duplicates
