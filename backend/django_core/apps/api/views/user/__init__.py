@@ -40,7 +40,7 @@ def get_individual_user_info(
     username: str,
 ) -> CustomUser:
     user = get_object_or_404(
-        CustomUser.objects.get_username_with_discriminator(),
+        CustomUser,
         username_with_discriminator=username,
     )
     return user

@@ -2,7 +2,7 @@ from typing import Any
 
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
-from django.core.validators import MaxValueValidator, MinValueValidator
+from django.core.validators import RegexValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
@@ -17,7 +17,6 @@ avatar = FilePattern(filename_pattern="avatar/{uuid:s}{ext}")
 
 # Create your models here.
 
-
 class CustomUser(
     AbstractBaseUser,
     PermissionsMixin,
@@ -29,7 +28,14 @@ class CustomUser(
         help_text=_(
             "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
         ),
-        validators=[username_validator],
+        unique=True,
+        validators=[
+            username_validator, 
+            RegexValidator(
+                fr"^[a-zA-Z0-9_-]+#[0-9]{{{settings.DISCRIMINATOR_LENGTH}}}$",
+                message="Username is not valid for this regex `^[a-zA-Z0-9_-]+#[0-9]{4}$`",
+            ),
+        ],
         error_messages={
             "unique": _("A user with that username already exists."),
         },
@@ -55,19 +61,7 @@ class CustomUser(
             "Unselect this instead of deleting accounts."
         ),
     )
-    discriminator = models.BigIntegerField(
-        blank=True,
-        null=True,
-        help_text=(
-            "Optional. "
-            f"{settings.DISCRIMINATOR_LENGTH } characters or fewer. "
-            "If not provided a random `discriminator` will be selected."
-        ),
-        validators=[
-            MaxValueValidator(int(9 * settings.DISCRIMINATOR_LENGTH)),
-            MinValueValidator(1),  # Same thing but remove negative digits
-        ],
-    )
+ 
     avatar = models.ImageField(
         upload_to=avatar,
         default=None,
@@ -86,36 +80,19 @@ class CustomUser(
     objects = UserManager()
 
     # Django specific fields
-    USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = [
-        "username",
-        "discriminator",
-    ]
-
-    def get_username_with_discriminator(self) -> str:
-        return f"""{
-                self
-                .username
-            }#{
-                str(
-                    self
-                    .discriminator
-                )
-                .zfill(
-                    settings.DISCRIMINATOR_LENGTH
-                )
-            }"""
+    USERNAME_FIELD = "username"
+    REQUIRED_FIELDS = ['email']
 
     def save(self, *args: Any, **kwargs: Any) -> None:
         super().save(*args, **kwargs)
 
     def __str__(self) -> str:
-        return self.get_username_with_discriminator()
+        return self.username
 
     class Meta:
         db_table = "user"
         verbose_name = _("user")
         verbose_name_plural = _("users")
         unique_together = [
-            ("username", "discriminator"),
+            ("username", "email"),
         ]

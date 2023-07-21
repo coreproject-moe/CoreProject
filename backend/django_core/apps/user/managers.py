@@ -2,7 +2,6 @@ from typing import TYPE_CHECKING, Any
 
 from django.contrib.auth.base_user import BaseUserManager
 from django.utils.translation import gettext_lazy as _
-from mixins.manager.username_with_discriminator import UsernameWithDiscriminatorManager
 
 if TYPE_CHECKING:
     from .models import CustomUser
@@ -10,7 +9,6 @@ if TYPE_CHECKING:
 
 class UserManager(
     BaseUserManager["CustomUser"],
-    UsernameWithDiscriminatorManager,
 ):
     """
     Custom user model manager where email is the unique identifiers

@@ -26,9 +26,9 @@ class EpisodeTimestampAdmin(admin.ModelAdmin[EpisodeTimestampModel]):
         )
         if "#" in search_term:
             queryset = (
-                self.model.objects.get_username_with_discriminator(prefix="user")
+                self.model.objects
                 .filter(
-                    username_with_discriminator__in=[
+                    username__in=[
                         # Remove trailing whitespace
                         # We might have something like
                         # user = ['baseplate-admin ', ' baseplate-foot']
