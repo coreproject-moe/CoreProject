@@ -17,7 +17,7 @@ from django.http import Http404, HttpRequest
 from django.shortcuts import get_object_or_404
 from ninja import File, Form, Query, Router, UploadedFile
 from ninja.pagination import paginate
-
+from django_ratelimit.decorators import ratelimit
 from ...schemas.anime import AnimeInfoGETSchema
 
 router = Router()
@@ -25,6 +25,7 @@ router = Router()
 
 @router.get("", response=list[AnimeInfoGETSchema])
 @paginate
+@ratelimit(key="ip", rate="100/h")
 def get_anime_info(
     request: HttpRequest,
     filters: AnimeInfoFilters = Query(...),
