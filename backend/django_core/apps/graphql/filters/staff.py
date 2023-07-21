@@ -1,17 +1,12 @@
 from typing import TypeVar
 
 import strawberry_django
-from apps.staffs.models import StaffAlternateNameModel, StaffModel
+from apps.staffs.models import StaffModel
 from django.contrib.postgres.search import TrigramSimilarity
 from django.db.models.functions import Greatest
 from strawberry import auto
 
 T = TypeVar("T")
-
-
-@strawberry_django.filters.filter(model=StaffAlternateNameModel, lookups=True)
-class StaffAlternateNameFilter:
-    name: auto
 
 
 @strawberry_django.filters.filter(StaffModel)

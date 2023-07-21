@@ -16,14 +16,14 @@ T = TypeVar("T")
 
 @strawberry.django.filters.filter(AnimeModel)
 class AnimeFilter:
-    id: int
+    id: int | None
 
     # ID based lookups
-    mal_id: int
-    kitsu_id: int
-    anilist_id: int
+    mal_id: int | None
+    kitsu_id: int | None
+    anilist_id: int | None
 
-    name: str
+    name: str | None
 
     def filter_name(self, queryset: T) -> T:
         query = (
@@ -42,12 +42,13 @@ class AnimeFilter:
 
         return query
 
-    genres: AnimeGenreFilter
-    themes: AnimeThemeFilter
+    genres: AnimeGenreFilter | None
+    themes: AnimeThemeFilter | None
 
-    staffs: StaffFilter
-    characters: CharacterFilter
+    staffs: StaffFilter | None
+    characters: CharacterFilter | None
 
     # Studios and producer share same model
-    studios: ProducerFilter
-    producers: ProducerFilter
+    studios: ProducerFilter | None
+    producers: ProducerFilter | None
+    
