@@ -39,7 +39,7 @@ django-admin-hstore-widget = ">=1.2.1"   # https://github.com/PokaInc/django-adm
 # 3rd Party ( Model Fields )
 django-colorfield = "*"
 # Rest framework
-django_ninja = "*"
+django_ninja = ">=1.0a1"
 ninja-put-patch-file-upload-middleware = ">=0.1.1"
 pydantic = {extras = ["email"], version = "*"}
 # ===================================================
