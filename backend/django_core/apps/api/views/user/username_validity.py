@@ -1,4 +1,3 @@
-
 from django.http import HttpRequest, HttpResponse
 from ninja import Form, Router
 
