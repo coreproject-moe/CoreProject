@@ -1,5 +1,4 @@
 from apps.user.models import CustomUser
-from django.conf import settings
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 from ninja import File, Form, Router, UploadedFile
