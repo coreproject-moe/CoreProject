@@ -21,7 +21,7 @@
     // Custom SCSS
     import "../nprogress.scss";
     // Tippy
-    import "../tippy.postcss";
+    import "../tippy.scss";
     import { AppShell, Avatar } from "@skeletonlabs/skeleton";
     import { Modal, modalStore } from "@skeletonlabs/skeleton";
     import type { ModalComponent, ModalSettings } from "@skeletonlabs/skeleton";
@@ -345,6 +345,7 @@
                             animation: "shift-away",
                             appendTo: document.body,
                             interactive: true,
+                            theme: "elaine",
                             onTrigger: async (instance) => {
                                 const node = document.createElement("div");
                                 new ProfileDropdown({

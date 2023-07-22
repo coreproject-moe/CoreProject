@@ -532,6 +532,7 @@
                         animation: "shift-away",
                         hideOnClick: false,
                         appendTo: "parent",
+                        theme: "elaine",
                         onTrigger: async (instance) => {
                             const node = document.createElement("div");
                             new MyListAnimeDetails({

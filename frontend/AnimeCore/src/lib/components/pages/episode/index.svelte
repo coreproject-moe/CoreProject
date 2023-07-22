@@ -1,17 +1,15 @@
 <script lang="ts">
+    import Comment from "$components/shared/comment.svelte";
     import ForumPosts from "$components/shared/forum_posts.svelte";
     import ImageLoader from "$components/shared/image/image_loader.svelte";
-    import Markdown from "$components/shared/markdown.svelte";
     import TextEditor from "$components/shared/text_editor.svelte";
     import { episode_comments } from "$data/mock/episode_comments";
     import { forum_posts } from "$data/mock/forum_posts";
     import { recommendations } from "$data/mock/recommendations";
-    import { FormatDate } from "$functions/format_date";
     import Chevron from "$icons/chevron.svelte";
     import Cross from "$icons/cross.svelte";
     import Download from "$icons/download.svelte";
     import Filter from "$icons/filter.svelte";
-    import Heart from "$icons/heart.svelte";
     import Next from "$icons/next.svelte";
     import PlayCircle from "$icons/play_circle.svelte";
     import Share from "$icons/share.svelte";
@@ -20,8 +18,11 @@
     import type { SvelteComponent } from "svelte";
     import { blur } from "svelte/transition";
     import tippy from "tippy.js";
-    import Comment from "./comment.svelte";
 
+    /* Comment section logics */
+    let comment_body: string;
+
+    /* Video player options */
     const toggle_lights = () => {
         button_state_mapping.lights = !button_state_mapping.lights;
     };
@@ -153,7 +154,8 @@
                                     arrow: false,
                                     offset: [0, 17],
                                     appendTo: document.body,
-                                    animation: "shift-away"
+                                    animation: "shift-away",
+                                    theme: "elaine"
                                 }}
                             >
                                 <svelte:component
@@ -284,30 +286,44 @@
                 </button>
             </comments-info>
 
-            <form class="mt-3 md:mt-[1vw]">
-                <TextEditor />
+            <comment-form class="flex md:gap-[1vw]">
+                <a
+                    href="/user/"
+                    class="h-7 w-7 flex-shrink-0 md:mt-[0.5vw] md:h-[2vw] md:w-[2vw]"
+                >
+                    <ImageLoader
+                        src="/images/DemonSlayer-bg.avif"
+                        alt="Avatar"
+                        class="h-full w-full shrink-0 rounded-full object-cover"
+                    />
+                </a>
+                <form class="mt-3 flex flex-col md:mt-[1vw] md:gap-[0.75vw]">
+                    <span class="leading-none text-surface-50 md:text-[1vw]">
+                        Comment as <strong>Tokito</strong>
+                    </span>
+                    <TextEditor textarea_value={comment_body} />
+                    <warning-submit class="flex justify-between gap-5 md:gap-[1vw]">
+                        <warning class="flex items-center gap-3 md:gap-[0.625vw]">
+                            <Warning class="w-10 md:w-[1.2vw]" />
+                            <p class="unstyled text-[0.65rem] font-light leading-tight text-surface-300 md:text-[0.75vw] md:leading-[1.125vw]">
+                                Please remember to follow our
+                                <a
+                                    href="/"
+                                    class="unstyled text-surface-200 underline"
+                                >
+                                    community guidelines
+                                </a>
+                                while commenting. Also please refrain from posting spoilers.
+                            </p>
+                        </warning>
 
-                <warning-submit class="mt-4 flex justify-between gap-5 md:mt-[0.75vw] md:gap-[1vw]">
-                    <warning class="flex items-center gap-3 md:gap-[0.625vw]">
-                        <Warning class="w-10 md:w-[1.2vw]" />
-                        <p class="unstyled text-[0.65rem] font-light leading-tight text-surface-300 md:text-[0.75vw] md:leading-[1.125vw]">
-                            Please remember to follow our
-                            <a
-                                href="/"
-                                class="unstyled text-surface-200 underline"
-                            >
-                                community guidelines
-                            </a>
-                            while commenting. Also please refrain from posting spoilers.
-                        </p>
-                    </warning>
-
-                    <button class="btn btn-sm h-9 w-40 rounded bg-primary-500 text-sm font-semibold md:h-[2.2vw] md:w-[7vw] md:rounded-[0.375vw] md:text-[0.85vw]">Comment</button>
-                </warning-submit>
-            </form>
+                        <button class="btn btn-sm h-9 w-40 rounded bg-primary-500 text-sm font-semibold md:h-[2.2vw] md:w-[6vw] md:rounded-[0.375vw] md:text-[0.85vw]">Comment</button>
+                    </warning-submit>
+                </form>
+            </comment-form>
 
             <comments class="mt-10 flex flex-col gap-5 md:mt-[2vw] md:gap-[1.5vw]">
-                {#each episode_comments as comment}
+                {#each episode_comments as comment, index}
                     <Comment
                         comment_user_profile_pic={comment.user.profile_pic}
                         comment_username={comment.user.username}
@@ -315,6 +331,7 @@
                         comment_content={comment.content}
                         comment_likes={comment.likes}
                         comment_replies={comment.replies}
+                        show_replies={index === 0}
                     />
                 {/each}
             </comments>

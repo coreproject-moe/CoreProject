@@ -19,14 +19,6 @@ export class FormatDate {
     }
 
     public get format_to_time_from_now() {
-        /**
-         * Format date into Time From Now format
-         * suffix will be "ago" or "in"
-         * @example
-         * Here's a simple example
-         * // input "2023-04-22T10:30:00.000Z"
-         * // output "20 hours ago"
-         */
         return dayjs.utc(this.#date).fromNow();
     }
 
