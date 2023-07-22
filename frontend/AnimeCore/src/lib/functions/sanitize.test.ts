@@ -7,4 +7,10 @@ test("sanitize function", () => {
 
     const image_src = `<img src='#' alt='sora_amamiya' onerror=alert(1) />`;
     expect(sanitize(image_src)).toBe(`<img src="#" alt="sora_amamiya" />`);
+
+    const blockquote_src = `<blockquote class='hello'>hello</blockquote>`;
+    expect(sanitize(blockquote_src)).toBe(`<blockquote class="hello">hello</blockquote>`);
+
+    const marked_src = `<p><a href="mailto:&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;">&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;</a></p>`;
+    expect(sanitize(marked_src)).toBe(`<p><a href="mailto:email@example.com">&#101;&#109;&#97;&#x69;&#x6c;&#x40;&#101;&#120;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#46;&#x63;&#x6f;&#109;</a></p>`);
 });

@@ -3,6 +3,7 @@ import xss from "xss";
 export function sanitize(text: string) {
     return xss(text, {
         whiteList: {
+            blockquote: ["class"],
             del: ["class"],
             p: ["class"],
             strong: ["class"],
