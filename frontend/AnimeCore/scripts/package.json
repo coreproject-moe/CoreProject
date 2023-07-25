@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "private": true,
     "devDependencies": {
-        "node-fetch": "^3.3.1",
+        "node-fetch": "^3.3.2",
         "node-fetch-retry": "^2.0.1",
         "sharp": "^0.32.4"
     },
