@@ -1817,21 +1817,21 @@ yaml = ["pyyaml (>=5.4)"]
 
 [[package]]
 name = "requests-ratelimiter"
-version = "0.4.0"
+version = "0.4.1"
 description = "Rate-limiting for the requests library"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "requests-ratelimiter-0.4.0.tar.gz", hash = "sha256:4fcd71bd75488409329bb4e7baad8df98efec2c3a5d34ad4388d84cd35eeda8d"},
-    {file = "requests_ratelimiter-0.4.0-py3-none-any.whl", hash = "sha256:4c41dc0bb5a58ef668283a0512d55d075bc4b82487d1765382512bdbec37c6a5"},
+    {file = "requests_ratelimiter-0.4.1-py3-none-any.whl", hash = "sha256:b8b63841c2fff73ea4fab8e9823d5a5ecfd7795f5475e45f39ae72605317d059"},
+    {file = "requests_ratelimiter-0.4.1.tar.gz", hash = "sha256:254a2565947517016a1dadba51d778d26639a7bbc4114445c667b6d46e899836"},
 ]
 
 [package.dependencies]
-pyrate-limiter = ">=2.8"
+pyrate-limiter = ">=2.8,<3.0"
 requests = ">=2.20"
 
 [package.extras]
-docs = ["furo (==2022.9.15)", "myst-parser (>=0.17)", "sphinx (>=4.3.0,<5.0.0)", "sphinx-autodoc-typehints (>=1.17,<2.0)", "sphinx-copybutton (>=0.5)"]
+docs = ["furo (>=2022.12,<2023.0)", "myst-parser (>=0.17)", "sphinx (>=5.2,<6.0)", "sphinx-autodoc-typehints (>=1.22,<2.0)", "sphinx-copybutton (>=0.5)"]
 
 [[package]]
 name = "ruff"
@@ -2302,4 +2302,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "0315a54e4351ed4975fe1fffc978402ec39176f5be91485a458799a327b71621"
+content-hash = "5c7909d45a00a0c9a129fbe6da7aafd74d61a7de30c679718949f9e17268ae94"
