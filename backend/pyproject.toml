@@ -57,7 +57,7 @@ django-stubs-ext = "*"
 # Color Grabber
 colorthief = ">=0.2.1"
 # Parsers
-selectolax = "^0.3.15"
+selectolax = "^0.3.16"
 python-dateutil = "^2.8.2"
 
 [tool.poetry.group.dev.dependencies]
