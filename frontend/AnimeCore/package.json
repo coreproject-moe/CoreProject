@@ -55,7 +55,7 @@
         "marked-mangle": "^1.1.0",
         "nprogress": "^0.2.0",
         "postcss": "^8.4.27",
-        "prettier": "^3.0.0",
+        "prettier": "^3.0.1",
         "prettier-plugin-svelte": "^3.0.3",
         "prettier-plugin-tailwindcss": "^0.4.1",
         "pretty-bytes": "^6.1.1",
