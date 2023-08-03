@@ -12,7 +12,7 @@ export function sanitize(text: string) {
             a: ["href", "class"],
             u: ["class"],
             i: ["class"],
-            img: ["src", "alt"],
+            img: ["src", "alt", "class"],
             code: ["class"],
             pre: ["class"],
             span: ["class"],

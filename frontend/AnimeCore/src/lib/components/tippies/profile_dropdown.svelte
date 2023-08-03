@@ -5,7 +5,6 @@
     import User from "$icons/user.svelte";
     import { Avatar } from "@skeletonlabs/skeleton";
     import type { SvelteComponent } from "svelte";
-    import voca from "voca";
 
     let dropdown_icons: {
         [key in string]: {
@@ -51,19 +50,47 @@
             }
         }
     };
+
+    // Bindings
+    let email_element_scroll_percent = 0;
+    let username_element_scroll_percent = 0;
 </script>
 
 <div class="w-48 rounded-lg bg-surface-400 p-4 shadow-lg shadow-surface-900/50 md:w-[12vw] md:rounded-[0.5vw] md:px-[0.75vw] md:py-[1.125vw]">
-    <div class="flex items-center gap-[3vw] md:gap-[0.8vw]">
-        <Avatar
-            rounded="rounded-[1.2vw] md:rounded-[0.375vw]"
-            width="w-10 md:w-[2.5vw]"
-            src="/images/Avatar.avif"
-            initials="SA"
-        />
-        <div class="flex flex-col md:gap-[0.5vw]">
-            <span class="text-base font-semibold md:text-[1vw] md:leading-none">soraamamiya</span>
-            <span class="text-xs font-medium md:text-[0.8vw] md:leading-none">{voca.truncate("sora_amamiya@coreproject.moe", 17)}</span>
+    <div class="grid grid-cols-12 items-center gap-[3vw] md:gap-[0.8vw]">
+        <avatar class="col-span-3">
+            <Avatar
+                rounded="rounded-[1.2vw] md:rounded-[0.375vw]"
+                width="w-full"
+                src="/images/Avatar.avif"
+                initials="SA"
+            />
+        </avatar>
+        <div class="col-span-9 line-clamp-1 flex flex-col md:gap-[0.25vw]">
+            <p
+                class="overflow-x-scroll text-base font-semibold scrollbar-none md:text-[1vw] md:leading-none"
+                class:mask-right={username_element_scroll_percent <= 10 && username_element_scroll_percent >= 0}
+                class:mask-left-and-right={username_element_scroll_percent < 90 && username_element_scroll_percent >= 10}
+                class:mask-left={username_element_scroll_percent <= 100 && username_element_scroll_percent >= 90}
+                on:scroll={(event) => {
+                    const el = event.currentTarget;
+                    username_element_scroll_percent = globalThis.Math.round((el.scrollLeft / (el.scrollWidth - el.clientWidth)) * 100);
+                }}
+            >
+                soraamamiya#0001
+            </p>
+            <p
+                class="overflow-x-scroll text-xs font-medium scrollbar-none md:text-[0.8vw]"
+                class:mask-right={email_element_scroll_percent <= 10 && email_element_scroll_percent >= 0}
+                class:mask-left-and-right={email_element_scroll_percent < 90 && email_element_scroll_percent >= 10}
+                class:mask-left={email_element_scroll_percent <= 100 && email_element_scroll_percent >= 90}
+                on:scroll={(event) => {
+                    const el = event.currentTarget;
+                    email_element_scroll_percent = globalThis.Math.round((el.scrollLeft / (el.scrollWidth - el.clientWidth)) * 100);
+                }}
+            >
+                sora_amamiya@coreproject.moe
+            </p>
         </div>
     </div>
 
@@ -95,3 +122,15 @@
         {/each}
     </div>
 </div>
+
+<style>
+    .mask-right {
+        mask-image: linear-gradient(to right, rgba(7, 5, 25) 75%, rgba(0, 0, 0, 0) 100%);
+    }
+    .mask-left-and-right {
+        mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(7, 5, 25) 25%, rgba(7, 5, 25) 75%, rgba(0, 0, 0, 0) 100%);
+    }
+    .mask-left {
+        mask-image: linear-gradient(to left, rgba(7, 5, 25) 75%, rgba(0, 0, 0, 0) 100%);
+    }
+</style>

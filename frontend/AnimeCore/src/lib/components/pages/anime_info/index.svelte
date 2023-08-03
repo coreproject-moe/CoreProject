@@ -238,7 +238,7 @@
                         offsetScrollbar
                         gradientMask
                         parentClass="mt-3 md:mt-[1.25vw]"
-                        class="h-40 text-justify text-xs md:h-[10.25vw] md:text-[0.75vw] md:leading-[1vw]"
+                        class="h-40 text-justify text-xs md:h-[10.25vw] md:text-[0.8vw] md:leading-[1vw]"
                     >
                         {anime_synopsis}
                     </ScrollArea>
@@ -249,24 +249,28 @@
                         <span class="rounded bg-surface-900 px-[0.95vw] md:py-[0.375vw]">Horror</span>
                     </anime-genres>
 
-                    <anime-scores class="hidden w-max gap-[0.75vw] rounded-[0.25vw] bg-surface-50/10 backdrop-blur-lg md:mt-[0.5vw] md:flex md:px-[0.75vw] md:py-[0.375vw] md:text-[0.65vw] md:leading-[0.75vw]">
+                    <anime-scores class="hidden w-max gap-[0.75vw] rounded-[0.25vw] bg-surface-50/10 backdrop-blur-lg md:mt-[0.5vw] md:flex md:px-[0.75vw] md:py-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
                         <score class="flex gap-[0.25vw]">
                             <span>Score:</span>
-                            <span class="text-warning-400">79</span>
+                            <span class="font-semibold text-warning-400">79</span>
                         </score>
                         <status class="flex gap-[0.25vw]">
                             <span>Status:</span>
-                            <span class="text-warning-400">Watching</span>
-                            <Chevron class="w-[0.625vw] text-warning-400" />
+                            <button class="btn p-0 leading-none md:text-[0.75vw]">
+                                <span class="font-semibold text-warning-400">Watching</span>
+                                <Chevron class="w-[0.625vw] text-warning-400" />
+                            </button>
                         </status>
                         <episodes-count class="flex gap-[0.25vw]">
                             <span>Episode:</span>
-                            <span class="text-warning-400">0/{anime_episodes_count}</span>
+                            <span class="font-semibold text-warning-400">0/{anime_episodes_count}</span>
                         </episodes-count>
                         <your-scrore class="flex gap-[0.25vw]">
                             <span>Your Score:</span>
-                            <span class="text-warning-400">Not Rated</span>
-                            <Chevron class="w-[0.625vw] text-warning-400" />
+                            <button class="btn p-0 leading-none md:text-[0.75vw]">
+                                <span class="font-semibold text-warning-400">Not Rated</span>
+                                <Chevron class="w-[0.625vw] text-warning-400" />
+                            </button>
                         </your-scrore>
                     </anime-scores>
                 </anime-synopsis>
@@ -384,11 +388,11 @@
 
                             <episode-info-card class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:gap-[0.75vw] md:rounded-b-[0.625vw] md:bg-surface-900 md:p-[1vw]">
                                 <episode-titles class="relative flex w-full flex-col items-start gap-1 md:gap-[0.25vw]">
-                                    <episode-name class="md:hover:overflow-scroll-y max-h-9 w-full overflow-hidden text-[0.8rem] font-light leading-snug text-white duration-500 ease-in-out md:max-h-[1.25vw] md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:max-h-[18vw] md:hover:text-surface-50">
+                                    <episode-name class="md:hover:overflow-scroll-y max-h-9 w-full overflow-hidden text-[0.8rem] font-light leading-snug text-white duration-500 ease-in-out scrollbar-none md:max-h-[1.25vw] md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:max-h-[18vw] md:hover:text-surface-50">
                                         {title}
                                     </episode-name>
 
-                                    <episode-japanese-name class="md:hover:overflow-scroll-y max-h-4 w-full overflow-hidden text-[0.8rem] font-light leading-snug text-white duration-500 ease-in-out md:max-h-[1.3vw] md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:max-h-[18vw] md:hover:text-surface-50">
+                                    <episode-japanese-name class="md:hover:overflow-scroll-y max-h-4 w-full overflow-hidden text-[0.8rem] font-light leading-snug text-white duration-500 ease-in-out scrollbar-none md:max-h-[1.3vw] md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:max-h-[18vw] md:hover:text-surface-50">
                                         {japanese_name}
                                     </episode-japanese-name>
                                 </episode-titles>
@@ -555,13 +559,13 @@
                     <span class="divider-vertical m-0 !border-surface-50/50 font-semibold text-surface-50 md:pl-1 md:text-[0.75vw] md:leading-[0.8vw]">2.8k ratings</span>
                 </raing>
 
-                <raking class="md:mt-[1.125vw]">
+                <raking class="block md:mt-[1vw]">
                     <div class="flex items-center md:gap-[0.25vw]">
-                        <span class="md:text-[1vw] md:leading-[1.5vw]">#80</span>
+                        <span class="font-semibold md:text-[1vw] md:leading-[1.5vw]">#80</span>
                         <span class="text-surface-50 md:text-[0.75vw] md:leading-[0.75vw]">Trending of all time</span>
                     </div>
                     <div class="flex items-center md:gap-[0.25vw]">
-                        <span class="md:text-[1vw] md:leading-[1.5vw]">#108</span>
+                        <span class="font-semibold md:text-[1vw] md:leading-[1.5vw]">#108</span>
                         <span class="text-surface-50 md:text-[0.75vw] md:leading-[0.75vw]">Most popular anime</span>
                     </div>
                 </raking>
@@ -672,14 +676,14 @@
                     </div>
 
                     <casts class="mt-[1vw] block">
-                        <casts-cards class="relative grid h-[7.5vw] w-[12.5vw] grid-cols-2 gap-[2px] overflow-hidden rounded-[0.75vw]">
+                        <casts-cards class="relative grid h-[9vw] w-full grid-cols-2 gap-[2px] overflow-hidden rounded-[0.75vw]">
                             <cast-image class="relative col-span-1 w-full bg-cover">
                                 <ImageLoader
                                     src="https://s4.anilist.co/file/anilistcdn/character/large/b55131-ypodHQCyHbzD.png"
                                     class="absolute h-full w-full object-cover object-center"
                                 />
 
-                                <span class="absolute bottom-[0.3vw] z-10 w-full text-center text-[0.9vw] font-bold leading-[1.25vw]">Houtarou Oreki</span>
+                                <span class="absolute bottom-[0.3vw] z-10 w-full text-center text-[0.9vw] font-bold leading-[1vw] md:px-[1vw]">Houtarou Oreki</span>
                             </cast-image>
                             <cast-details class="relative col-span-1 w-full bg-cover">
                                 <ImageLoader
@@ -687,7 +691,7 @@
                                     class="absolute h-full w-full object-cover object-center"
                                 />
 
-                                <span class="absolute bottom-[0.3vw] z-10 w-full text-center text-[0.9vw] font-bold leading-[1.25vw]">Yuuichi Nakamura</span>
+                                <span class="absolute bottom-[0.3vw] z-10 w-full text-center text-[0.9vw] font-bold leading-[1vw] md:px-[1vw]">Yuuichi Nakamura</span>
                             </cast-details>
                             <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-surface-900/75 to-surface-900/25" />
                         </casts-cards>
@@ -766,8 +770,6 @@
 <style lang="scss">
     episode-japanese-name,
     episode-name {
-        scrollbar-width: none;
-
         &:not(:hover) {
             /* if we need to change the width, we should change the 90% to higher  */
             mask-image: linear-gradient(90deg, rgba(7, 5, 25, 0.95) 90%, rgba(0, 0, 0, 0) 100%);

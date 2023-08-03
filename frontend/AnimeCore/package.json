@@ -28,10 +28,10 @@
         "@sveltejs/kit": "^1.22.4",
         "@tailwindcss/forms": "^0.5.4",
         "@tailwindcss/typography": "^0.5.9",
+        "@total-typescript/ts-reset": "^0.4.2",
         "@types/lodash": "^4.14.196",
         "@types/marked": "^5.0.1",
         "@types/nprogress": "^0.2.0",
-        "@types/voca": "^1.4.2",
         "@typescript-eslint/eslint-plugin": "^6.2.1",
         "@typescript-eslint/parser": "^6.2.1",
         "@zxcvbn-ts/core": "^3.0.2",
@@ -55,8 +55,8 @@
         "marked-mangle": "^1.1.0",
         "nprogress": "^0.2.0",
         "postcss": "^8.4.27",
-        "prettier": "^2.8.8",
-        "prettier-plugin-svelte": "^2.10.1",
+        "prettier": "^3.0.0",
+        "prettier-plugin-svelte": "^3.0.3",
         "prettier-plugin-tailwindcss": "^0.4.1",
         "pretty-bytes": "^6.1.1",
         "sass": "^1.64.2",
@@ -70,12 +70,10 @@
         "typescript": "^5.1.6",
         "vite": "^4.4.8",
         "vitest": "^0.34.1",
-        "voca": "^1.4.1",
         "xss": "^1.0.14"
     },
     "type": "module",
     "workspaces": [
         "./scripts"
-    ],
-    "dependencies": {}
+    ]
 }

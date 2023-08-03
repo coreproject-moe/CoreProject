@@ -61,12 +61,12 @@
             </a>
         </error-context>
         <character-image
-            class="relative flex items-end justify-center md:w-[45dvw]"
+            class="pointer-events-none relative flex items-end justify-center md:w-[45dvw]"
             style="--mobile-gradient:{mapping.gradient.mobile}; --desktop-gradient:{mapping.gradient.desktop}"
         >
             <gradient
                 class:md:ml-[8vw]={on_left}
-                class="{mapping.gradient.class} absolute [background:var(--mobile-gradient)] md:[background:var(--desktop-gradient)]"
+                class="{mapping.gradient.class ?? ''} absolute [background:var(--mobile-gradient)] md:[background:var(--desktop-gradient)]"
             />
 
             <img

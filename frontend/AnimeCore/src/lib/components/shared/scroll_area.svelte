@@ -27,7 +27,7 @@
     class:mask-top={gradientMask && scroll_percent <= 100 && scroll_percent >= 90}
     class:mask-middle={gradientMask && scroll_percent < 90 && scroll_percent >= 10}
     class:mask-bottom={gradientMask && scroll_percent < 10 && scroll_percent >= 0}
-    class="{parentClass} {offsetScrollbar ? 'pr-3 md:pr-[0.75vw]' : 'pr-0'} block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin"
+    class="{parentClass} {offsetScrollbar ? 'pr-3 md:pr-[0.75vw]' : 'pr-0'} block h-full w-full overflow-y-scroll overscroll-y-contain border-transparent scrollbar-thin"
 >
     <div class="{klass} whitespace-pre-line">
         <slot />
@@ -37,8 +37,6 @@
 <style lang="scss">
     scroll-area {
         scrollbar-color: rgba(255, 255, 255, 0.12);
-        /* set to some transparent color */
-        border-color: rgba(255, 255, 255, 0);
         /* here we make the color transition */
         transition: border-color 0.2s linear;
         &:hover {

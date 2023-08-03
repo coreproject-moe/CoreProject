@@ -38,13 +38,21 @@
         }),
         // Emoji plugin
         markedEmoji(emoji_options),
+        {
+            extensions: [
+                {
+                    name: "emoji",
+                    renderer: (token) => {
+                        return `<img class="inline-flex w-4 justify-center align-center -translate-y-0.5 md:w-[1vw]" alt="${token.name}" src="${token.emoji}">`;
+                    }
+                }
+            ]
+        },
         // Mangle plugin
         mangle(),
         // Marked defaults
         {
             renderer,
-            // Disable it as marked-mangle doesn't support typescript
-            mangle: false,
             // We dont need github like header prefix
             headerIds: false
         }

@@ -173,6 +173,7 @@ export class OpengraphGenerator {
         width?: number;
         height?: number;
     };
+    #keywords?: string[];
 
     constructor({
         title,
@@ -182,7 +183,8 @@ export class OpengraphGenerator {
         locale,
         audio,
         image_url,
-        video
+        video,
+        keywords
     }: {
         title: string;
         url: string;
@@ -203,6 +205,7 @@ export class OpengraphGenerator {
             width?: number;
             height?: number;
         };
+        keywords?: string[];
     }) {
         this.#title = encode(title);
         this.#url = url;
@@ -218,6 +221,9 @@ export class OpengraphGenerator {
         }
         if (video) {
             this.#video = video;
+        }
+        if (keywords) {
+            this.#keywords = keywords;
         }
     }
 
@@ -294,6 +300,10 @@ export class OpengraphGenerator {
         return video_opengraph_text;
     }
 
+    private get keywords() {
+        return `<meta name="keywords" content="${this.#keywords?.join(", ")}"/>`;
+    }
+
     public generate_opengraph() {
         let opengraph_html = `<meta property="og:type" content="website">`;
         opengraph_html += this.site_name;
@@ -302,15 +312,18 @@ export class OpengraphGenerator {
         opengraph_html += this.url;
         opengraph_html += this.description;
 
-        opengraph_html += `<meta name="twitter:card" content="summary_large_image" />`;
         if (this.#audio) {
             opengraph_html += this.audio;
         }
         if (this.#image) {
             opengraph_html += this.image;
+            opengraph_html += `<meta name="twitter:card" content="summary_large_image" />`;
         }
         if (this.#video) {
             opengraph_html += this.video;
+        }
+        if (this.#keywords) {
+            opengraph_html += this.keywords;
         }
 
         return opengraph_html;

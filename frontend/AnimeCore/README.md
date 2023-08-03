@@ -28,10 +28,9 @@
   </a>
 
   <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/baseplate-admin/CoreProject-V3-UI?style=for-the-badge">
-  <img alt="Lines of code" src="https://img.shields.io/tokei/lines/github/baseplate-admin/CoreProject-V3-UI?style=for-the-badge">
   <a href='https://discord.gg/7AraSmKqnN'><img alt="Discord" src="https://img.shields.io/discord/1039894823626362931?style=for-the-badge"></a>
 </p>
-
+    
 ## Screenshots
 
 <p float="left">

@@ -575,7 +575,7 @@
 
                         <hover-buttons class="absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:gap-[0.5vw]">
                             <button class="btn btn-icon h-14 w-24 rounded-xl bg-primary-500 text-base font-bold md:h-[3.125vw] md:w-[5.4375vw] md:rounded-[0.625vw] md:text-[0.875vw]">
-                                <PlayCircle class="w-4 md:w-[1.25vw]" />
+                                <PlayCircle class="w-4 md:w-[1vw]" />
                                 <span>Ep {anime.current_episode}</span>
                             </button>
 
