@@ -15,7 +15,7 @@ redis = {extras = ['hiredis'], version = ">=4.5.4"}
 # First party ( Image )
 pillow = "*"
 # First Party ( Database )
-psycopg = {extras = ["binary"], version = "^3.1.9"}
+psycopg = {extras = ["binary"], version = "^3.1.10"}
 # 3rd Party ( Rate Limit )
 django-ratelimit = "^4.1.0"
 # 3rd Party ( Tree Model )
