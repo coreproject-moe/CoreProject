@@ -10,7 +10,8 @@
   <h2 align="center">Core Project</h2>
 
   <p align="center">
-   <b> A feature-rich modern streaming site! </b> Currently in active development
+   <b> A feature-rich modern streaming site! </b> Currently in active development <br>
+    V3 UI dev repo: <a href="https://github.com/tokitou-san/CoreProject-V3-UI"><b>CoreProject-V3-UI</a>
 </div>
 
 <p align="center">
@@ -31,7 +32,6 @@
   </a>
 
   <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/baseplate-admin/coreproject?style=for-the-badge">
-  <img alt="Lines of code" src="https://img.shields.io/tokei/lines/github/baseplate-admin/coreproject?style=for-the-badge">
   <a href="https://results.pre-commit.ci/latest/github/baseplate-admin/CoreProject/v3"><img src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white&style=for-the-badge" alt="pre-commit.ci status"></a>
   <a href='https://discord.gg/7AraSmKqnN'><img alt="Discord" src="https://img.shields.io/discord/1039894823626362931?style=for-the-badge"></a>
 </p>
