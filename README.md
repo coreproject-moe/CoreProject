@@ -39,7 +39,6 @@
 ## Screenshots
 
 <p float="left">
-
   <img src="https://github.com/baseplate-admin/CoreProject/assets/114811070/e5028205-2d26-4884-8d7a-8d4292789eff" alt="Home Page Mockup" width=49%>
   <img src="https://github.com/baseplate-admin/CoreProject/assets/114811070/9e655d1b-2aff-42d2-9d50-473bb5ef1fcd" alt="Anime Info Page Mockup" width=49%>
   <img src="https://github.com/baseplate-admin/CoreProject/assets/114811070/dcabe6f0-c7ce-43da-a670-3443598ba892" alt="Register Page Mockup" width=49%>
@@ -86,7 +85,7 @@ See the [open issues](https://github.com/baseplate-admin/CoreProject/issues) and
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Contributing
-
+Read [CONTRIBUTING.md](https://github.com/baseplate-admin/CoreProject/blob/master/CONTRIBUTING.md) for more details.
 -   If you have a suggestion/idea that would make this project better, please create a pull request. All pull requests will be reviewed by us, and adjusted.
 
 -   You can also [open a new issue](https://github.com/baseplate-admin/CoreProject/issues/new/choose) or [help us with an existing one](https://github.com/baseplate-admin/CoreProject/issues).
