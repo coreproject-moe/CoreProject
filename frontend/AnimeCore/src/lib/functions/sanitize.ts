@@ -1,7 +1,9 @@
 import xss from "xss";
 
-export function sanitize(text: string) {
-    return xss(text, {
+export async function sanitize(_text: string | undefined | Promise<string | undefined>): Promise<string> {
+    const text = await _text;
+
+    return xss(text ?? "", {
         whiteList: {
             blockquote: ["class"],
             del: ["class"],

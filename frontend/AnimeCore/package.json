@@ -34,7 +34,7 @@
         "@types/nprogress": "^0.2.0",
         "@typescript-eslint/eslint-plugin": "^6.3.0",
         "@typescript-eslint/parser": "^6.3.0",
-        "@zxcvbn-ts/core": "^3.0.2",
+        "@zxcvbn-ts/core": "^3.0.3",
         "@zxcvbn-ts/language-common": "^3.0.3",
         "@zxcvbn-ts/language-en": "^3.0.1",
         "autoprefixer": "^10.4.14",
@@ -53,6 +53,8 @@
         "marked-emoji": "^1.2.2",
         "marked-highlight": "^2.0.4",
         "marked-mangle": "^1.1.2",
+        "marked-smartypants": "^1.0.5",
+        "marked-xhtml": "^1.0.4",
         "nprogress": "^0.2.0",
         "postcss": "^8.4.27",
         "prettier": "^3.0.1",
@@ -75,5 +77,6 @@
     "type": "module",
     "workspaces": [
         "./scripts"
-    ]
+    ],
+    "dependencies": {}
 }

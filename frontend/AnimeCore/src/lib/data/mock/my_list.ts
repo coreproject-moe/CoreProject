@@ -33,7 +33,7 @@ export const my_list = [
         name: "GOLDEN BOY: Sasurai no Obenkyou Yarou",
         cover: "/images/GoldenBoy.avif",
         synopsis: `
-				Kintarou Ooe is a specialist in part-time work, riding all over the highways and byways of Japan on his trusty steed, the Mikazuki 5, and finding employment wherever he can. His adventures bring him knowledge and experience that can't be taught in a classroom, from political corruption to the delicacy of a young woman's heart. With nothing but the open road before him—not to mention the many beautiful women along the way—Kintarou
+				Kintarou Ooe is a specialist in part-time work, riding all over the highways and byways of Japan on his trusty steed, the Mikazuki 5, and finding employment wherever he can. His adventures bring him knowledge and experience that can't be taught in a classroom, from political corruption to the delicacy of a young woman's heart. With nothing but the open road before him—not to mention the many beautiful women along the way—Kintarou 
 				`,
         current_episode: 1,
         episodes_count: 6,
