@@ -386,17 +386,17 @@
                                 </card-info>
                             </card-banner-info>
 
-                            <episode-info-card class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:gap-[0.75vw] md:rounded-b-[0.625vw] md:bg-surface-900 md:p-[1vw]">
+                            <episode-info-card class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-surface-900 md:p-[1vw]">
                                 <episode-titles class="relative flex w-full flex-col items-start gap-1 md:gap-[0.25vw]">
-                                    <episode-name class="md:hover:overflow-scroll-y max-h-9 w-full overflow-hidden text-[0.8rem] font-light leading-snug text-white duration-500 ease-in-out scrollbar-none md:max-h-[1.25vw] md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:max-h-[18vw] md:hover:text-surface-50">
+                                    <episode-name class="md:hover:overflow-scroll-y max-h-9 w-full overflow-hidden text-[0.8rem] font-light leading-snug text-white duration-500 ease-in-out scrollbar-none md:max-h-[1.25vw] md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:max-h-[18vw] md:hover:text-surface-50 line-clamp-2 md:line-clamp-none">
                                         {title}
                                     </episode-name>
 
-                                    <episode-japanese-name class="md:hover:overflow-scroll-y max-h-4 w-full overflow-hidden text-[0.8rem] font-light leading-snug text-white duration-500 ease-in-out scrollbar-none md:max-h-[1.3vw] md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:max-h-[18vw] md:hover:text-surface-50">
+                                    <episode-japanese-name class="md:hover:overflow-scroll-y max-h-4 w-full overflow-hidden text-[0.8rem] font-light leading-snug text-white duration-500 ease-in-out scrollbar-none md:max-h-[1.3vw] md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:max-h-[18vw] md:hover:text-surface-50 line-clamp-2 md:line-clamp-none">
                                         {japanese_name}
                                     </episode-japanese-name>
                                 </episode-titles>
-                                <episode-available-formats class="relative flex w-full items-center gap-2 md:mt-[0.25vw] md:gap-[0.65vw]">
+                                <episode-available-formats class="relative md:pt-[0.75vw] flex w-full items-center gap-2 md:gap-[0.65vw] bg-surface-900">
                                     <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
                                         {#each episode.formats as format}
                                             <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">{format}</span>
@@ -407,15 +407,12 @@
                                         {#each episode.resolutions as episode_resolution}
                                             {@const resolution = (() => {
                                                 switch (episode_resolution) {
-                                                    case "720p": {
-                                                        return "hd";
-                                                    }
-                                                    case "1080p": {
+                                                    case "1080p":
                                                         return "fhd";
-                                                    }
-                                                    default: {
+                                                    case "720p":
+                                                        return "hd";
+                                                    default:
                                                         return "sd";
-                                                    }
                                                 }
                                             })()}
 
@@ -774,12 +771,6 @@
             /* if we need to change the width, we should change the 90% to higher  */
             mask-image: linear-gradient(90deg, rgba(7, 5, 25, 0.95) 90%, rgba(0, 0, 0, 0) 100%);
             mask-position: right;
-        }
-
-        @media (max-width: 767px) {
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
         }
     }
 </style>

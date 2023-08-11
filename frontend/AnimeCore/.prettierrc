@@ -9,6 +9,5 @@
     "arrowParens": "always",
     "printWidth": 400,
     "plugins": ["prettier-plugin-svelte", "prettier-plugin-tailwindcss"],
-    "pluginSearchDirs": ["."],
     "overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }]
 }

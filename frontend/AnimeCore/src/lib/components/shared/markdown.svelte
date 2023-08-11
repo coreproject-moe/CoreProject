@@ -2,29 +2,21 @@
     import { emojis } from "$data/emojis";
     import { sanitize } from "$functions/sanitize";
     import hljs from "highlight.js";
-    import "highlight.js/scss/github-dark.scss";
-    import type { marked as markedType } from "marked";
     import { Marked } from "marked";
-    import type { MarkedEmojiOptions } from "marked-emoji";
     import { markedEmoji } from "marked-emoji";
     import { markedHighlight } from "marked-highlight";
     import { mangle } from "marked-mangle";
+    import { markedXhtml } from "marked-xhtml";
+    import { markedSmartypants } from "marked-smartypants";
 
     export let markdown = "";
     export { klass as class };
 
     let klass = "";
 
-    const emoji_options: MarkedEmojiOptions = {
+    const emoji_options = {
         emojis,
         unicode: false
-    };
-
-    // Override function
-    const renderer: markedType.RendererObject = {
-        del(text: string) {
-            return `<del class='unstyled'>${text}</del>`;
-        }
     };
 
     const marked = new Marked(
@@ -48,20 +40,40 @@
                 }
             ]
         },
+        // Smartypants plugin
+        markedSmartypants(),
+        // XHTML plugin
+        markedXhtml(),
         // Mangle plugin
         mangle(),
         // Marked defaults
         {
-            renderer,
+            // Override function
+            renderer: {
+                del(text: string) {
+                    return `<del class='unstyled'>${text}</del>`;
+                }
+            },
             // We dont need github like header prefix
             headerIds: false
         }
     );
 
-    let html: string;
+    let html: string | Promise<string>;
     $: html = sanitize(marked.parse(markdown));
 </script>
 
 <markdown class={klass}>
-    {@html html}
+    {#await html then html}
+        {@html html}
+    {/await}
 </markdown>
+
+<style lang="postcss">
+    :global(pre) {
+        @apply !p-0 !bg-transparent !rounded-md;
+    }
+    :global(code) {
+        @apply !bg-surface-400/50 md:rounded-[0.5vw] md:p-3 md:leading-[1.25vw] leading-snug text-xs md:text-[0.9vw];
+    }
+</style>

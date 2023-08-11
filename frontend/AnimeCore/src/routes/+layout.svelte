@@ -2,6 +2,7 @@
     import { afterNavigate, beforeNavigate } from "$app/navigation";
     import { page } from "$app/stores";
     import SearchPanel from "$components/shared/search_panel.svelte";
+    import VercelHover from "$components/shared/vercel_hover.svelte";
     import ProfileDropdown from "$components/tippies/profile_dropdown.svelte";
     // import icons
     import AnimeCore from "$icons/anime_core.svelte";
@@ -147,35 +148,6 @@
             position: "items-start"
         };
         modalStore.trigger(search_modal);
-    }
-
-    /** vercel effect */
-    let hover_glider_element: HTMLDivElement;
-    let GLIDER_TRANSITION_DURATION = 200;
-    let is_hovered = false;
-    let mouseleaveTimeout: NodeJS.Timer | null = null;
-
-    function handle_mouseenter(event: MouseEvent) {
-        const target = event.target as HTMLAnchorElement;
-        hover_glider_element.style.transform = `translateY(${target.offsetTop}px)`;
-
-        if (!is_hovered) {
-            GLIDER_TRANSITION_DURATION = 50;
-            hover_glider_element.style.opacity = "100";
-            is_hovered = true;
-        } else {
-            GLIDER_TRANSITION_DURATION = 200;
-        }
-
-        clearTimeout(mouseleaveTimeout!);
-    }
-
-    function handle_mouseleave() {
-        // Delay the mouseleave event to allow time ( GLIDER_TRANSITION_DURATION ) for moving to a sibling element
-        mouseleaveTimeout = setTimeout(() => {
-            hover_glider_element.style.opacity = "0";
-            is_hovered = false;
-        }, GLIDER_TRANSITION_DURATION);
     }
 </script>
 
@@ -385,12 +357,13 @@
                         {/each}
                     </div>
 
-                    <div class="relative mt-[2.8125vw] flex flex-col items-center gap-[0.75vw]">
-                        <active_glider
-                            bind:this={hover_glider_element}
-                            class="absolute h-[4vw] w-[4vw] rounded-[0.75vw] bg-white/10 opacity-0 ease-in-out duration-{GLIDER_TRANSITION_DURATION}"
-                        />
-
+                    <VercelHover
+                        direction="vertical"
+                        glider_container_class="mt-[2.8125vw] flex flex-col items-center gap-[0.75vw]"
+                        active_element_class="rounded-[0.75vw] bg-white/10"
+                        let:handle_mouseenter
+                        let:handle_mouseleave
+                    >
                         {#each Object.entries(icon_mapping.middle) as item}
                             {@const item_name = item[0]}
                             {@const item_icon = item[1].icon}
@@ -401,12 +374,12 @@
                             {@const is_active = $page.url.pathname === item_href}
 
                             <a
+                                on:mouseenter={handle_mouseenter}
+                                on:mouseleave={handle_mouseleave}
                                 href={item_href}
                                 type="button"
                                 class:pointer-events-none={!item_href}
                                 class="{is_active ? 'relative bg-secondary-100 before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500' : 'bg-initial'} btn btn-icon relative w-[4vw] rounded-[0.75vw] p-0"
-                                on:mouseenter={handle_mouseenter}
-                                on:mouseleave={handle_mouseleave}
                             >
                                 <div class="inline-grid">
                                     {#if is_active}
@@ -436,7 +409,7 @@
                                 </div>
                             </a>
                         {/each}
-                    </div>
+                    </VercelHover>
                 </div>
 
                 <div class="flex flex-col-reverse items-center gap-[1vw]">
