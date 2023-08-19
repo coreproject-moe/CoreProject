@@ -422,7 +422,7 @@
             {/each}
         </div>
     </textarea-navbar>
-    <textarea-body class="block h-28 md:h-[8vw] overflow-y-scroll">
+    <textarea-body class="block h-28 overflow-y-scroll md:h-[8vw]">
         {#if tab_type === "edit"}
             <textarea
                 on:paste={(event) => paste_text(event)}
@@ -432,7 +432,7 @@
                 bind:value={textarea_value}
                 bind:this={textarea_element}
                 spellcheck="true"
-                class="w-full h-full resize-none border-none bg-surface-900 p-3 text-sm leading-tight text-surface-50 outline-none duration-300 ease-in-out placeholder:text-surface-200 focus:ring-0 md:p-[1vw] md:text-[1vw] md:leading-[1.5vw]"
+                class="h-full w-full resize-none border-none bg-surface-900 p-3 text-sm leading-tight text-surface-50 outline-none duration-300 ease-in-out placeholder:text-surface-200 focus:ring-0 md:p-[1vw] md:text-[1vw] md:leading-[1.5vw]"
                 placeholder="Leave a comment"
             />
         {:else if tab_type === "preview"}
@@ -440,7 +440,7 @@
                 {#if textarea_value}
                     <Markdown
                         markdown={textarea_value}
-                        class="w-full h-full border-none bg-surface-900 text-sm leading-tight text-surface-50 outline-none md:text-[1vw] md:leading-[1.5vw]"
+                        class="h-full w-full border-none bg-surface-900 text-sm leading-tight text-surface-50 outline-none md:text-[1vw] md:leading-[1.5vw]"
                     />
                 {:else}
                     <span class="text-sm leading-tight text-surface-50 md:text-[1vw] md:leading-[1.5vw]">Nothing to preview</span>
@@ -451,8 +451,9 @@
     <textarea-footer class="flex justify-between bg-surface-400/50 px-4 py-2 text-[0.65rem] font-thin leading-[1.5vw] text-surface-200 md:px-[1vw] md:py-[0.1vw] md:text-[0.75vw]">
         <div />
         <div>
-            Learn more about <a
-                class="unstyled underline"
+            Learn more about
+            <a
+                class="underline"
                 href="/"
             >
                 core editor

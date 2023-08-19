@@ -100,7 +100,7 @@
     <form-fields>
         <div class="flex gap-2 whitespace-nowrap pb-10 font-bold uppercase leading-none tracking-widest text-white md:pb-[1.8vw] md:text-[1.2vw]">
             <p>create your</p>
-            <p class="unstyled">
+            <p class="">
                 {#each "core".split("") as item}
                     <span class={core_color_mapping[item]}>{item}</span>
                 {/each}

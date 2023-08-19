@@ -11,7 +11,6 @@
     export let anime_id: number;
     export let anime_name: string;
     export let anime_episodes_count: number;
-    export let anime_current_episode: number;
     export let anime_type: string;
     export let anime_genres: string[];
     export let anime_studios: string[];
@@ -31,7 +30,7 @@
                     fill_color="yellow"
                     class="h-[1.1vw] w-[1.1vw]"
                 />
-                <span class="leading-none text-surface-50 md:text-[0.8vw]">4.5 rating</span>
+                <span class="text-surface-50 md:text-[0.8vw] leading-none">4.5 rating</span>
             </rating>
             <Circle class="opacity-50 md:w-[0.25vw]" />
             <anime-type>{anime_type}</anime-type>
@@ -58,18 +57,12 @@
             {anime_synopsis}
         </ScrollArea>
 
-        <options class="flex items-center md:mt-[0.25vw] md:gap-[0.5vw]">
-            <a
-                href="/mal/{anime_id}/episode/{anime_current_episode}"
-                class="btn h-[2.3vw] flex-1 bg-primary-500 leading-none md:rounded-[0.5vw]"
-            >
+        <options class="md:mt-[0.25vw] border-t-[0.1vw] md:pt-[0.75vw] border-white/10 flex items-center md:gap-[0.5vw]">
+            <a href="/mal/{anime_id}/episode/1" class="btn leading-none bg-primary-500 md:rounded-[0.5vw] flex-1 h-[2.3vw]">
                 <PlayCircle class="md:w-[1vw]" />
-                <span class="font-semibold md:text-[0.9vw]">Continue Ep {anime_current_episode}</span>
+                <span class="md:text-[0.9vw] font-semibold">Watch Ep 1</span>
             </a>
-            <a
-                href="/mal/{anime_id}"
-                class="btn aspect-square h-[2.3vw] bg-primary-500/25 p-0 leading-none md:rounded-[0.5vw]"
-            >
+            <a href="/mal/{anime_id}" class="btn leading-none bg-primary-500/25 md:rounded-[0.5vw] p-0 h-[2.3vw] aspect-square">
                 <Info class="md:w-[1.2vw]" />
             </a>
         </options>

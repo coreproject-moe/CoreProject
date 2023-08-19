@@ -36,7 +36,7 @@
 
 <style lang="scss">
     scroll-area {
-        scrollbar-color: rgba(255, 255, 255, 0.12);
+        scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
         /* here we make the color transition */
         transition: border-color 0.2s linear;
         &:hover {

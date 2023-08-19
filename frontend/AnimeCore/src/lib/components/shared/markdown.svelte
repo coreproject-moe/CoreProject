@@ -48,12 +48,6 @@
         mangle(),
         // Marked defaults
         {
-            // Override function
-            renderer: {
-                del(text: string) {
-                    return `<del class='unstyled'>${text}</del>`;
-                }
-            },
             // We dont need github like header prefix
             headerIds: false
         }
@@ -70,10 +64,10 @@
 </markdown>
 
 <style lang="postcss">
-    :global(pre) {
-        @apply !p-0 !bg-transparent !rounded-md;
+    :global(markdown pre) {
+        @apply !rounded-md !bg-transparent !p-0;
     }
-    :global(code) {
-        @apply !bg-surface-400/50 md:rounded-[0.5vw] md:p-3 md:leading-[1.25vw] leading-snug text-xs md:text-[0.9vw];
+    :global(markdown code) {
+        @apply !bg-surface-400/50 text-xs leading-snug md:rounded-[0.5vw] md:p-3 md:text-[0.9vw] md:leading-[1.25vw];
     }
 </style>
