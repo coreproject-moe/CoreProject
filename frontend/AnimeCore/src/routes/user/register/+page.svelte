@@ -25,7 +25,7 @@
     let page = 0;
 
     // The state of all of our pages
-    let pages_state: { [key: number]: {} } = [];
+    let pages_state: { [key: number]: Record<string, string | number> } = [];
 
     // Our handlers
     function onSubmit(values: CustomEvent) {

@@ -37,7 +37,7 @@
     <comment-details class="flex flex-col items-start gap-1 md:gap-0">
         <a
             href="/user/"
-            class="unstyled text-xs leading-none md:text-[1vw]"
+            class="text-xs leading-none md:text-[1vw]"
         >
             <username>{comment_username}</username>
             <comment-time class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">{new FormatDate(comment_date).format_to_time_from_now}</comment-time>
@@ -63,7 +63,7 @@
                     hover="bg-transparent"
                 >
                     <AccordionItem
-                        open={open}
+                        {open}
                         regionPanel="text-surface md:text-[1vw] md:leading-[1.35vw] items-start justify-start"
                         regionControl="text-sm text-warning-400 font-semibold md:text-[0.9vw] md:leading-[1vw] pb-2 md:pb-[0.75vw] w-max"
                         regionCaret="md:w-[0.75vw] items-start justify-start"
@@ -85,7 +85,7 @@
                                     <reply-details class="flex flex-col items-start gap-1 md:gap-0">
                                         <a
                                             href="/user/"
-                                            class="unstyled text-xs leading-none md:text-[1vw]"
+                                            class="text-xs leading-none md:text-[1vw]"
                                         >
                                             <username>{reply.user.username}</username>
                                             <reply-time class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">{new FormatDate(reply.date).format_to_time_from_now}</reply-time>

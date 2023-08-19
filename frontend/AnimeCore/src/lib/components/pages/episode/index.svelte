@@ -88,7 +88,7 @@
     />
 {/if}
 
-<episode-container class="flex flex-col md:gap-[3.5vw] md:py-[2vw] md:pl-[1vw] md:pr-[3.75vw] mt-16 md:mt-0">
+<episode-container class="mt-16 flex flex-col md:mt-0 md:gap-[3.5vw] md:py-[2vw] md:pl-[1vw] md:pr-[3.75vw]">
     <episode-content class="grid grid-cols-12 md:gap-[5vw]">
         <video-player class="col-span-12 flex flex-col md:col-span-8 md:gap-[0.75vw]">
             <player class="relative h-64 w-full md:z-30 md:h-[35vw]">
@@ -145,7 +145,6 @@
 
                             <a
                                 href={link}
-                                class="unstyled"
                                 class:pointer-events-none={!link}
                                 use:tippy={{
                                     content: `<div class='leading-none w-max whitespace-nowrap rounded-lg bg-surface-400 px-2 py-1 text-[0.65rem] text-surface-50 md:px-[0.75vw] md:py-[0.5vw] md:rounded-[0.35vw] md:text-[1vw]'>${text}</div>`,
@@ -170,20 +169,20 @@
         </video-player>
         <episode-info class="col-span-12 flex flex-col gap-3 p-5 md:col-span-4 md:gap-[1.5vw] md:p-0">
             <header class="flex items-center justify-between">
-                <span class="font-semibold text-lg md:text-[1.35vw]">Episodes</span>
+                <span class="text-lg font-semibold md:text-[1.35vw]">Episodes</span>
                 <button class="btn flex items-center gap-2 rounded bg-surface-400 px-3 py-2 text-xs font-semibold leading-none md:gap-[0.5vw] md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.5vw] md:text-[1vw]">
                     EPS: 1 - 60
                     <Chevron class="w-3 md:w-[1vw]" />
                 </button>
             </header>
 
-            <episodes class="grid grid-cols-7 md:grid-cols-6 gap-2 md:gap-[0.75vw]">
+            <episodes class="grid grid-cols-7 gap-2 md:grid-cols-6 md:gap-[0.75vw]">
                 {#each Array(60) as item, index}
                     {@const actual_index = index + 1}
                     {@const button_active = actual_index === episode_number}
                     <a
                         href="./{actual_index}"
-                        class="{button_active ? 'bg-primary-500' : 'bg-surface-400'} unstyled btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]"
+                        class="{button_active ? 'bg-primary-500' : 'bg-surface-400'} btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]"
                     >
                         {actual_index}
                     </a>
@@ -193,15 +192,15 @@
     </episode-content>
 
     <episode-details class="grid grid-cols-12 gap-5 p-5 md:gap-[5vw] md:p-0">
-        <episode-info class="col-span-12 md:col-span-8 flex flex-col gap-2 md:gap-[1vw]">
+        <episode-info class="col-span-12 flex flex-col gap-2 md:col-span-8 md:gap-[1vw]">
             <anime-name-options class="flex items-center justify-between">
                 <div>
                     <a
                         href="/mal/1"
-                        class="unstyled flex flex-col leading-none gap-1 md:gap-[0.25vw] text-lg md:text-[1.1vw]"
+                        class="flex flex-col gap-1 text-lg leading-none md:gap-[0.25vw] md:text-[1.1vw]"
                     >
                         <span class="font-semibold uppercase">Demon Slayer S1</span>
-                        <span class="text-surface-50 text-base md:text-[1vw]">Kimetsu no yaiba</span>
+                        <span class="text-base text-surface-50 md:text-[1vw]">Kimetsu no yaiba</span>
                     </a>
                 </div>
                 <options>
@@ -236,11 +235,11 @@
                 <Chevron class="w-3 -rotate-90 md:w-[1vw]" />
             </a>
         </episode-info>
-        <next-episode class="col-span-4 hidden md:flex flex-col">
+        <next-episode class="col-span-4 hidden flex-col md:flex">
             <span class="font-semibold uppercase md:text-[1.1vw]">next episode</span>
             <a
                 href="./{episode_number + 1}"
-                class="unstyled flex md:mt-[0.75vw] md:gap-[1vw]"
+                class="flex md:mt-[0.75vw] md:gap-[1vw]"
             >
                 <episode-cover class="relative">
                     <ImageLoader
@@ -289,7 +288,7 @@
             <comment-form class="flex flex-col md:flex-row md:gap-[1vw]">
                 <a
                     href="/user/"
-                    class="h-7 w-7 flex-shrink-0 md:mt-[0.5vw] md:h-[2vw] md:w-[2vw] hidden md:flex"
+                    class="hidden h-7 w-7 flex-shrink-0 md:mt-[0.5vw] md:flex md:h-[2vw] md:w-[2vw]"
                 >
                     <ImageLoader
                         src="/images/DemonSlayer-bg.avif"
@@ -297,7 +296,7 @@
                         class="h-full w-full shrink-0 rounded-full object-cover"
                     />
                 </a>
-                <form class="mt-3 flex flex-col md:mt-[1vw] gap-3 md:gap-[0.75vw]">
+                <form class="mt-3 flex flex-col gap-3 md:mt-[1vw] md:gap-[0.75vw]">
                     <span class="leading-none text-surface-50 md:text-[1vw]">
                         Comment as <strong>Tokito</strong>
                     </span>
@@ -305,11 +304,11 @@
                     <warning-submit class="flex justify-between gap-5 md:gap-[1vw]">
                         <warning class="flex items-center gap-3 md:gap-[0.625vw]">
                             <Warning class="w-10 md:w-[1.2vw]" />
-                            <p class="unstyled text-[0.65rem] font-light leading-tight text-surface-300 md:text-[0.75vw] md:leading-[1.125vw]">
+                            <p class="text-[0.65rem] font-light leading-tight text-surface-300 md:text-[0.75vw] md:leading-[1.125vw]">
                                 Please remember to follow our
                                 <a
                                     href="/"
-                                    class="unstyled text-surface-200 underline"
+                                    class="text-surface-200 underline"
                                 >
                                     community guidelines
                                 </a>
@@ -393,7 +392,7 @@
             </forum-posts>
 
             <recommendations-container>
-                <span class="font-semibold text-lg md:text-[1.35vw]">Recommendations</span>
+                <span class="text-lg font-semibold md:text-[1.35vw]">Recommendations</span>
 
                 <container class="mt-3 grid grid-cols-3 gap-4 md:mt-[1.25vw] md:grid-cols-3 md:gap-[1vw]">
                     {#each recommendations as anime}

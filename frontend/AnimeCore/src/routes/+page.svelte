@@ -3,17 +3,16 @@
     import ImageLoader from "$components/shared/image/image_loader.svelte";
     import ScrollArea from "$components/shared/scroll_area.svelte";
     import MyListAnimeDetails from "$components/tippies/my_list_anime_details.svelte";
-    import { continue_watching } from "$data/mock/continue_watching";
     import { latest_animes } from "$data/mock/latest_animes";
     import { latest_episodes } from "$data/mock/latest_episodes";
     import { my_list } from "$data/mock/my_list";
     import { FormatDate } from "$functions/format_date";
-    import { FormatTime } from "$functions/format_time";
     import { OpengraphGenerator } from "$functions/opengraph";
     import ArrowUpRight from "$icons/arrow_up_right.svelte";
     import Chevron from "$icons/chevron.svelte";
     import Circle from "$icons/circle.svelte";
     import CoreProject from "$icons/core_project.svelte";
+    import Caption from "$icons/caption.svelte";
     import Edit from "$icons/edit.svelte";
     import Forum from "$icons/forum.svelte";
     import Info from "$icons/info.svelte";
@@ -32,6 +31,7 @@
     import { swipe } from "svelte-gestures";
     import { tweened } from "svelte/motion";
     import { blur } from "svelte/transition";
+    import Mic from "$icons/mic.svelte";
     import tippy from "tippy.js";
 
     /* Slider codes */
@@ -306,10 +306,7 @@
                                     <span>Ep 1</span>
                                 </button>
 
-                                <a
-                                    href="./mal/{anime.mal_id}"
-                                    class="unstyled"
-                                >
+                                <a href="./mal/{anime.mal_id}">
                                     <button class="btn btn-icon flex h-14 w-28 items-center justify-center rounded-xl bg-surface-900 text-base font-semibold text-surface-50 md:h-[3.125vw] md:w-[6.5vw] md:rounded-[0.5vw] md:text-[0.875vw] md:font-bold">
                                         <Info class="w-5 text-surface-50 md:w-[1.25vw]" />
                                         <span>Details</span>
@@ -487,7 +484,7 @@
         </navigation-card>
     </hero-section>
 
-    <my-list class="mt-[2.1875vw] flex flex-col p-4 pt-7 md:flex md:w-[68vw] md:p-0">
+    <my-list class="flex flex-col p-4 pt-7 md:mb-[1vw] md:mt-[2.1875vw] md:flex md:w-[68vw] md:p-0">
         <section-header class="flex items-center gap-[0.625vw]">
             <header-title class="text-lg font-bold md:text-[1.25vw]">My List</header-title>
             <button class="btn btn-icon hidden h-[1.7vw] w-[1.7vw] rounded-[0.3vw] bg-surface-400 md:flex">
@@ -495,7 +492,7 @@
             </button>
         </section-header>
 
-        <my-list-info class="mt-0 flex items-center justify-between md:mt-[0.5vw]">
+        <my-list-info class="flex items-center justify-between">
             <span class="text-sm text-surface-50 md:text-[1vw] md:font-semibold">
                 {my_list.length} anime in Watching
             </span>
@@ -519,73 +516,71 @@
             </see-all>
         </my-list-info>
 
-        <my-list-animes class="hide-scrollbar relative mb-[2vw] mt-4 flex snap-x grid-cols-7 gap-5 overflow-x-scroll scroll-smooth md:mt-[1.5vw] md:grid md:gap-[1.5vw] md:overflow-visible">
+        <my-list-animes class="relative mt-4 grid grid-cols-3 gap-3 md:mt-[1vw] md:grid-cols-5 md:gap-[1.25vw]">
             {#each my_list as anime}
-                <div
-                    class="group col-span-1 w-40 flex-shrink-0 snap-start md:w-auto"
-                    use:tippy={{
-                        arrow: true,
-                        allowHTML: true,
-                        interactive: true,
-                        placement: "top",
-                        offset: [0, 17],
-                        animation: "shift-away",
-                        hideOnClick: false,
-                        appendTo: "parent",
-                        theme: "elaine",
-                        onTrigger: async (instance) => {
-                            const node = document.createElement("div");
-                            new MyListAnimeDetails({
-                                target: node,
-                                props: {
-                                    anime_cover: anime.cover,
-                                    anime_name: anime.name,
-                                    anime_type: anime.type,
-                                    anime_genres: anime.genres,
-                                    anime_studios: anime.studios,
-                                    anime_synopsis: anime.synopsis,
-                                    anime_current_episode: anime.current_episode,
-                                    anime_episodes_count: anime.episodes_count,
-                                    anime_release_date: anime.release_date
-                                }
-                            });
-
-                            instance.setContent(node);
-                        }
-                    }}
+                <a
+                    href="/mal/{anime.id}/episode/{anime.current_episode}"
+                    class="relative col-span-1 flex flex-col gap-2 md:gap-[0.5vw]"
                 >
-                    <card class="relative block h-60 w-full md:h-[12.5vw]">
+                    <div
+                        class="relative"
+                        use:tippy={{
+                            arrow: false,
+                            allowHTML: true,
+                            placement: "right-start",
+                            animation: "scale",
+                            duration: [150, 10],
+                            interactive: true,
+                            appendTo: document.body,
+                            onTrigger: async (instance) => {
+                                const node = document.createElement("div");
+                                new MyListAnimeDetails({
+                                    target: node,
+                                    props: {
+                                        anime_id: anime.id,
+                                        anime_name: anime.name,
+                                        anime_type: anime.type,
+                                        anime_genres: anime.genres,
+                                        anime_studios: anime.studios,
+                                        anime_episodes_count: anime.episodes_count,
+                                        anime_synopsis: anime.synopsis,
+                                        anime_current_episode: anime.current_episode,
+                                        anime_release_date: anime.release_date
+                                    }
+                                });
+
+                                instance.setContent(node);
+                            }
+                        }}
+                    >
                         <ImageLoader
                             src={anime.cover}
                             alt={anime.name}
-                            class="absolute h-full w-full rounded-2xl object-cover object-center md:rounded-[0.875vw]"
+                            class="h-52 w-full rounded-md object-cover object-center md:h-[18vw] md:rounded-[0.35vw]"
                         />
+                        <overlay class="absolute inset-0 flex items-end bg-gradient-to-t from-surface-900/75 to-transparent p-2 leading-none md:p-[0.5vw]">
+                            <div class="flex gap-1 overflow-hidden rounded md:gap-[0.2vw] md:rounded-[0.3vw]">
+                                <subs class="flex items-center gap-1 bg-warning-400 p-1 text-black md:gap-[0.25vw] md:px-[0.35vw] md:py-[0.25vw]">
+                                    <Caption class="h-4 md:h-[1.25vw]" />
+                                    <span class="text-xs font-semibold md:text-[0.8vw]">{anime.episodes_count}</span>
+                                </subs>
+                                <dubs class="flex items-center gap-1 bg-white/25 p-1 backdrop-blur md:gap-[0.25vw] md:px-[0.45vw] md:py-[0.25vw]">
+                                    <Mic class="h-3 md:h-[0.8vw]" />
+                                    <span class="text-xs font-semibold md:text-[0.8vw]">{anime.episodes_count}</span>
+                                </dubs>
+                            </div>
+                        </overlay>
+                    </div>
 
-                        <gradient-overlay class=" absolute inset-0 bg-gradient-to-tr from-surface-900/90 to-surface-900/25 transition duration-300 group-hover:to-surface-900/75 md:bg-gradient-to-t" />
-
-                        <anime-details class="absolute inset-0 flex w-full grid-cols-1 flex-col justify-end gap-1 px-5 pb-3 transition duration-300 group-hover:opacity-0 md:grid md:place-items-center md:gap-0 md:p-0">
-                            <anime-name class="line-clamp-2 text-sm font-semibold text-white md:text-center md:text-[1vw] md:leading-[1.35vw]">
-                                {anime.name}
-                            </anime-name>
-                            <episode-details class="bottom-[1vw] text-xs font-medium text-surface-200 md:absolute md:text-center md:text-[1vw]">
-                                <span class="hidden md:flex">{anime.current_episode}/{anime.episodes_count}</span>
-                                <span class="md:hidden">Episode {anime.current_episode}/{anime.episodes_count}</span>
-                            </episode-details>
-                        </anime-details>
-
-                        <hover-buttons class="absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-0 transition-opacity duration-300 group-hover:opacity-100 md:gap-[0.5vw]">
-                            <button class="btn btn-icon h-14 w-24 rounded-xl bg-primary-500 text-base font-bold md:h-[3.125vw] md:w-[5.4375vw] md:rounded-[0.625vw] md:text-[0.875vw]">
-                                <PlayCircle class="w-4 md:w-[1vw]" />
-                                <span>Ep {anime.current_episode}</span>
-                            </button>
-
-                            <button class="btn btn-icon h-14 w-24 rounded-xl bg-surface-900 text-base font-bold text-surface-50 md:h-[3.125vw] md:w-[5.4375vw] md:rounded-[0.625vw] md:text-[0.875vw]">
-                                <Info class="w-5 md:w-[1.25vw]" />
-                                <span>Info</span>
-                            </button>
-                        </hover-buttons>
-                    </card>
-                </div>
+                    <anime-details class="flex flex-col gap-2 text-surface-50 md:gap-[0.5vw]">
+                        <anime_name class="line-clamp-1 text-xs font-semibold leading-none md:text-[1vw]">{anime.name}</anime_name>
+                        <anime_info class="flex items-center gap-2 text-xs leading-none text-surface-50 md:gap-[0.5vw] md:text-[0.8vw]">
+                            <span>Watching</span>
+                            <Circle class="w-1 opacity-75 md:w-[0.25vw]" />
+                            <span>{anime.current_episode}/{anime.episodes_count} eps</span>
+                        </anime_info>
+                    </anime-details>
+                </a>
             {/each}
         </my-list-animes>
     </my-list>

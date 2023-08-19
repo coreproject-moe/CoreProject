@@ -5,15 +5,28 @@
     import User from "$icons/user.svelte";
     import { Avatar } from "@skeletonlabs/skeleton";
     import type { SvelteComponent } from "svelte";
+    // Bindings
+    let email_element_scroll_percent = 0,
+        username_element_scroll_percent = 0;
 
+    function mouseenter(el: HTMLElement) {
+        document.body.classList.add("select-none");
+        el.classList.add("select-text");
+    }
+
+    function mouseleave(el: HTMLElement) {
+        el.classList.remove("select-text");
+        document.body.classList.remove("select-none");
+    }
+    // Icons
     let dropdown_icons: {
         [key in string]: {
-            name?: string;
+            name: string;
             icon: {
                 component: typeof SvelteComponent<{}>;
                 class: string;
             };
-            url?: string;
+            url: string | undefined;
             show_on_mobile?: boolean | undefined;
         };
     } = {
@@ -50,10 +63,6 @@
             }
         }
     };
-
-    // Bindings
-    let email_element_scroll_percent = 0;
-    let username_element_scroll_percent = 0;
 </script>
 
 <div class="w-48 rounded-lg bg-surface-400 p-4 shadow-lg shadow-surface-900/50 md:w-[12vw] md:rounded-[0.5vw] md:px-[0.75vw] md:py-[1.125vw]">
@@ -72,6 +81,8 @@
                 class:mask-right={username_element_scroll_percent <= 10 && username_element_scroll_percent >= 0}
                 class:mask-left-and-right={username_element_scroll_percent < 90 && username_element_scroll_percent >= 10}
                 class:mask-left={username_element_scroll_percent <= 100 && username_element_scroll_percent >= 90}
+                on:mouseenter={(event) => mouseenter(event.currentTarget)}
+                on:mouseleave={(event) => mouseleave(event.currentTarget)}
                 on:scroll={(event) => {
                     const el = event.currentTarget;
                     username_element_scroll_percent = globalThis.Math.round((el.scrollLeft / (el.scrollWidth - el.clientWidth)) * 100);
@@ -84,6 +95,8 @@
                 class:mask-right={email_element_scroll_percent <= 10 && email_element_scroll_percent >= 0}
                 class:mask-left-and-right={email_element_scroll_percent < 90 && email_element_scroll_percent >= 10}
                 class:mask-left={email_element_scroll_percent <= 100 && email_element_scroll_percent >= 90}
+                on:mouseenter={(event) => mouseenter(event.currentTarget)}
+                on:mouseleave={(event) => mouseleave(event.currentTarget)}
                 on:scroll={(event) => {
                     const el = event.currentTarget;
                     email_element_scroll_percent = globalThis.Math.round((el.scrollLeft / (el.scrollWidth - el.clientWidth)) * 100);
@@ -102,7 +115,7 @@
 
             <a
                 href={item_href}
-                class="unstyled"
+                class=""
                 class:pointer-events-none={!item_href}
             >
                 <div class="flex cursor-pointer items-center gap-2 rounded-[0.2vw] p-[0.4rem] transition duration-100 md:gap-[0.75vw] md:p-[0.5vw] md:py-[0.5vw] md:hover:bg-surface-300/20">

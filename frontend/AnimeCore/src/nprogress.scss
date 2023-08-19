@@ -1,4 +1,9 @@
 $nprogress-bar-color: rgb(var(--color-primary-500));
+$nprogress-bar-seconday-color: rgb(var(--color-secondary-500));
+$nprogress-bar-success-color: rgb(var(--color-success-500));
+$nprogress-bar-warning-color: rgb(var(--color-warning-500));
+
+$animation-duration: 2s;
 $nprogress-height: 0.2rem;
 
 /* Make clicks pass-through */
@@ -8,6 +13,7 @@ $nprogress-height: 0.2rem;
 
 #nprogress .bar {
     background: $nprogress-bar-color;
+    animation: $animation-duration linear infinite change-bg;
 
     position: fixed;
     z-index: 1031;
@@ -16,6 +22,13 @@ $nprogress-height: 0.2rem;
 
     width: 100%;
     height: $nprogress-height;
+
+    @keyframes change-bg {
+        0%, 100% { background: $nprogress-bar-color; }
+        25% { background: $nprogress-bar-seconday-color; }
+        50% { background: $nprogress-bar-success-color; }
+        75% { background: $nprogress-bar-warning-color; }
+    }
 }
 
 /* Fancy blur effect */

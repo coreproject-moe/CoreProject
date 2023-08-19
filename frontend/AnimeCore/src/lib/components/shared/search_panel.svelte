@@ -46,7 +46,7 @@
                         {#each Array(6) as _}
                             <a
                                 href="/mal/"
-                                class="unstyled flex items-center gap-[1vw] rounded-[0.7vw] p-[0.8vw] transition duration-200 hover:bg-white/10"
+                                class="flex items-center gap-[1vw] rounded-[0.7vw] p-[0.8vw] transition duration-200 hover:bg-white/10"
                             >
                                 <ImageLoader
                                     src="/images/DemonSlayer-bg.avif"
@@ -94,7 +94,7 @@
             Want even advanced searching with genres, time-ranges, tags and more? Try the
             <a
                 href="/explore"
-                class="unstyled text-surface-50 underline"
+                class="text-surface-50 underline"
             >
                 Explore
             </a>

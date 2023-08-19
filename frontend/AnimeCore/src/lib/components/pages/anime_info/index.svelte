@@ -142,7 +142,7 @@
                             </anime-name>
                         </ScrollArea>
 
-                        <anime-japanese-name class="unstyled flex flex-wrap gap-x-2 pt-2 text-xs font-semibold uppercase tracking-wider text-surface-50 md:gap-x-[0.25vw] md:pt-[0.625vw] md:text-[0.75vw] md:leading-[0.9vw]">
+                        <anime-japanese-name class="flex flex-wrap gap-x-2 pt-2 text-xs font-semibold uppercase tracking-wider text-surface-50 md:gap-x-[0.25vw] md:pt-[0.625vw] md:text-[0.75vw] md:leading-[0.9vw]">
                             {japanese_name}
                         </anime-japanese-name>
 
@@ -365,7 +365,7 @@
 
                         <a
                             href="./watch/{episode_number}"
-                            class="unstyled relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4"
+                            class="relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4"
                         >
                             <card-banner-info class="relative col-span-5 h-full w-full md:col-span-12 md:h-[19vw]">
                                 <card-banner class="block h-24 md:h-[12vw] md:w-full">
@@ -380,7 +380,7 @@
                                     <p class="rounded bg-surface-900/75 p-1 text-xs font-bold tracking-wider text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.75vw] md:py-[0.75vw] md:text-[0.8vw] md:leading-none">
                                         EP {String(episode_number).padStart(2, "0")}
                                     </p>
-                                    <p class="unstyled rounded bg-surface-900/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">
+                                    <p class="rounded bg-surface-900/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">
                                         {new FormatTime(duration).format_seconds_to_time_stamp_duration}
                                     </p>
                                 </card-info>
@@ -388,15 +388,15 @@
 
                             <episode-info-card class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-surface-900 md:p-[1vw]">
                                 <episode-titles class="relative flex w-full flex-col items-start gap-1 md:gap-[0.25vw]">
-                                    <episode-name class="md:hover:overflow-scroll-y max-h-9 w-full overflow-hidden text-[0.8rem] font-light leading-snug text-white duration-500 ease-in-out scrollbar-none md:max-h-[1.25vw] md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:max-h-[18vw] md:hover:text-surface-50 line-clamp-2 md:line-clamp-none">
+                                    <episode-name class="md:hover:overflow-scroll-y line-clamp-2 max-h-9 w-full overflow-hidden text-[0.8rem] font-light leading-snug text-white duration-500 ease-in-out scrollbar-none md:line-clamp-none md:max-h-[1.25vw] md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:max-h-[18vw] md:hover:text-surface-50">
                                         {title}
                                     </episode-name>
 
-                                    <episode-japanese-name class="md:hover:overflow-scroll-y max-h-4 w-full overflow-hidden text-[0.8rem] font-light leading-snug text-white duration-500 ease-in-out scrollbar-none md:max-h-[1.3vw] md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:max-h-[18vw] md:hover:text-surface-50 line-clamp-2 md:line-clamp-none">
+                                    <episode-japanese-name class="md:hover:overflow-scroll-y line-clamp-2 max-h-4 w-full overflow-hidden text-[0.8rem] font-light leading-snug text-white duration-500 ease-in-out scrollbar-none md:line-clamp-none md:max-h-[1.3vw] md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:max-h-[18vw] md:hover:text-surface-50">
                                         {japanese_name}
                                     </episode-japanese-name>
                                 </episode-titles>
-                                <episode-available-formats class="relative md:pt-[0.75vw] flex w-full items-center gap-2 md:gap-[0.65vw] bg-surface-900">
+                                <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.65vw] md:pt-[0.75vw]">
                                     <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
                                         {#each episode.formats as format}
                                             <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">{format}</span>
@@ -459,11 +459,11 @@
                             <comment-submit class="mt-4 flex justify-between gap-5 md:mt-[0.75vw] md:gap-[1vw]">
                                 <comment-alert class="flex items-center gap-3 md:gap-[0.625vw]">
                                     <Warning class="w-10 md:w-[1.2vw]" />
-                                    <p class="unstyled text-[0.65rem] font-light leading-tight text-surface-300 md:text-[0.75vw] md:leading-[1.125vw]">
+                                    <p class="text-[0.65rem] font-light leading-tight text-surface-300 md:text-[0.75vw] md:leading-[1.125vw]">
                                         Please remember to follow our
                                         <a
                                             href="/"
-                                            class="unstyled text-surface-200 underline"
+                                            class="text-surface-200 underline"
                                         >
                                             community guidelines
                                         </a>

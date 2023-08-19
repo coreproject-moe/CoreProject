@@ -34,10 +34,10 @@
 ## Screenshots
 
 <p float="left">
-  <img src="https://github.com/tokitou-san/CoreProject-V3-UI/assets/114811070/d1d07a61-3fc1-4751-a4e9-f012f973917d" alt="Home Page Mockup" width=49%>
+  <img src="https://github.com/tokitou-san/CoreProject-V3-UI/assets/114811070/0d192748-391d-498b-9bb9-31947c5f03f8" alt="Home Page Mockup" width=49%>
   <img src="https://github.com/tokitou-san/CoreProject-V3-UI/assets/114811070/2efe334d-148b-4539-bba5-4422e0907ec3" alt="Anime Info Page Mockup" width=49%>
+  <img src="https://github.com/tokitou-san/CoreProject-V3-UI/assets/114811070/a4bfc77a-f21f-4c47-90cd-ace2083b7441" alt="Register Page Mockup" width=49%>
   <img src="https://github.com/tokitou-san/CoreProject-V3-UI/assets/114811070/d5f4b322-03d5-47ba-b305-39d5c5395a13" alt="Register Page Mockup" width=49%>
-  <img src="https://github.com/baseplate-admin/CoreProject/assets/114811070/8c2fee2f-f5ea-4df4-ac41-d9a4491a24f7" alt="Search Panel Mockup" width=49%>
 
 ## Contributing
 
