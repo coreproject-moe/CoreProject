@@ -1,11 +1,11 @@
 from django.core.exceptions import ValidationError
 
-RESERVED_USERNAME = [
-    "admin",
-]
 
-
-INVALID_USERNAMES = set(RESERVED_USERNAME)
+INVALID_USERNAMES = set(
+    [
+        "admin",
+    ]
+)
 
 
 # This will only get invoked when using modelform
