@@ -16,10 +16,8 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
-
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 from rest_framework.authtoken import views as rest_framework_authtoken_views
-
-from drf_spectacular.views import SpectacularSwaggerView, SpectacularAPIView
 
 from . import views
 
