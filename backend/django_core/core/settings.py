@@ -89,7 +89,7 @@ INSTALLED_APPS = [
     # Tailwind CSS
     "tailwind",
     "tailwind_src",  # Our custom app
-    # Api 
+    # Api
     # Models
     "apps.anime",
     "apps.trackers",

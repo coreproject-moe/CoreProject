@@ -796,7 +796,7 @@ files = [
 django = "*"
 django-stubs-ext = ">=4.2.2"
 mypy = [
-    {version = ">=1.0.0"},
+    {version = ">=1.0.0", optional = true, markers = "extra != \"compatible-mypy\""},
     {version = "==1.4.*", optional = true, markers = "extra == \"compatible-mypy\""},
 ]
 types-pytz = "*"
@@ -848,6 +848,21 @@ files = [
     {file = "django-treenode-0.20.1.tar.gz", hash = "sha256:ef677b9596a9d6acd6b947a5c91f1440abbc45a36785c91b3e2ffded4c8a318a"},
     {file = "django_treenode-0.20.1-py3-none-any.whl", hash = "sha256:f41ad5c25145123892aa3620de308c0af424ed15c54722959e0fab66c89b9433"},
 ]
+
+[[package]]
+name = "djangorestframework"
+version = "3.14.0"
+description = "Web APIs for Django, made easy."
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "djangorestframework-3.14.0-py3-none-any.whl", hash = "sha256:eb63f58c9f218e1a7d064d17a70751f528ed4e1d35547fdade9aaf4cd103fd08"},
+    {file = "djangorestframework-3.14.0.tar.gz", hash = "sha256:579a333e6256b09489cbe0a067e66abe55c6595d8926be6b99423786334350c8"},
+]
+
+[package.dependencies]
+django = ">=3.0"
+pytz = "*"
 
 [[package]]
 name = "dnspython"
@@ -2352,4 +2367,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "0a1334a37e9d3eef29359f432d66be8b6afefeca8320852645e7669e76f29a52"
+content-hash = "b6ea7361e3aa097ce081924eeee712c73723b278775766aea82e137c8f33c4df"
