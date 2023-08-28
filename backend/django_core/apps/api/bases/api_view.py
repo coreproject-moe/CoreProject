@@ -27,3 +27,16 @@ SuperUserUpdateProtectedAPIView = type(
     (object,),
     {"perform_update": write_protected_function},
 )
+
+
+class SuperUserDeleteProtectedAPIView:
+    def perform_destroy(self: views.APIView, instance):
+        if self.request.user.is_superuser:
+            instance.delete()
+        else:
+            return Response(
+                {
+                    "message": "You do not have permission to create objects.",
+                },
+                status=status.HTTP_403_FORBIDDEN,
+            )

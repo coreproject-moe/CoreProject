@@ -4,6 +4,7 @@ from rest_framework import generics
 from ...bases.api_view import (
     SuperUserUpdateProtectedAPIView,
     SuperUserWriteProtectedAPIView,
+    SuperUserDeleteProtectedAPIView,
 )
 from ...serializers.anime import AnimeSerializer
 
@@ -18,6 +19,7 @@ class AnimeAPIView(
 
 class AnimeSpecificAPIView(
     SuperUserUpdateProtectedAPIView,
+    SuperUserDeleteProtectedAPIView,
     generics.RetrieveUpdateDestroyAPIView,
 ):
     queryset = AnimeModel.objects.all()

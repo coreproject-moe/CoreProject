@@ -4,6 +4,7 @@ from rest_framework import generics
 from ...bases.api_view import (
     SuperUserUpdateProtectedAPIView,
     SuperUserWriteProtectedAPIView,
+    SuperUserDeleteProtectedAPIView,
 )
 from ...serializers.anime.genre import AnimeGenreSerializer
 
@@ -18,6 +19,7 @@ class AnimeGenresAPIView(
 
 class AnimeGenresSpecificAPIView(
     SuperUserUpdateProtectedAPIView,
+    SuperUserDeleteProtectedAPIView,
     generics.RetrieveUpdateDestroyAPIView,
 ):
     queryset = AnimeGenreModel.objects.filter(type__icontains="anime")
