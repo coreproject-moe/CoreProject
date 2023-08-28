@@ -41,10 +41,10 @@ class AnimeSpecificGenreAPIView(
             AnimeModel.objects.prefetch_related("genres").get(pk=self.kwargs["pk"]).genres
         )
 
-    def get(self, *args, **kwargs):
+    def get(self, *args, **kwargs) -> Response:
         return self.list(*args, **kwargs)
 
-    def post(self, request: HttpRequest, *args, **kwargs):
+    def post(self, request: HttpRequest, *args, **kwargs) -> Response:
         anime_model_instance = AnimeModel.objects.prefetch_related("genres").get(
             pk=self.kwargs["pk"]
         )
