@@ -1,7 +1,6 @@
-from apps.staffs.models import StaffModel, StaffAlternateNameModel
-from rest_framework import serializers
-
 from apps.api.bases.serializer import GetOrCreateSlugRelatedField
+from apps.staffs.models import StaffAlternateNameModel, StaffModel
+from rest_framework import serializers
 
 
 class StaffSerializer(serializers.ModelSerializer):

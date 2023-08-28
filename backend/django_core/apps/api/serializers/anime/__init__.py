@@ -8,11 +8,10 @@ from rest_framework import serializers
 
 from ...bases.serializer import GetOrCreateSlugRelatedField
 from ..character import CharacterSerializer
-from .genre import AnimeGenreSerializer
-from .theme import AnimeThemeSerializer
-from ..character import CharacterSerializer
 from ..producers import ProducerSerializer
 from ..staffs import StaffSerializer
+from .genre import AnimeGenreSerializer
+from .theme import AnimeThemeSerializer
 
 
 class AbstractBaseAnimeSerializer(serializers.ModelSerializer):
