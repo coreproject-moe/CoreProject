@@ -888,6 +888,16 @@ trio = ["trio (>=0.14,<0.23)"]
 wmi = ["wmi (>=1.5.1,<2.0.0)"]
 
 [[package]]
+name = "drf-writable-nested"
+version = "0.7.0"
+description = "Writable nested helpers for django-rest-framework's serializers"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "drf_writable_nested-0.7.0-py3-none-any.whl", hash = "sha256:154c0381e8a3a477e0fd539d5e1caf8ff4c1097a9c0c0fe741d4858b11b0455b"},
+]
+
+[[package]]
 name = "email-validator"
 version = "2.0.0.post2"
 description = "A robust email address syntax and deliverability validation library."
@@ -2367,4 +2377,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "b6ea7361e3aa097ce081924eeee712c73723b278775766aea82e137c8f33c4df"
+content-hash = "6b2a0591c83abe61c6814e4b506fa8248a4b799ecb5f8dbd30ced9e865985005"

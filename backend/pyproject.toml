@@ -60,6 +60,7 @@ colorthief = ">=0.2.1"
 selectolax = "^0.3.16"
 python-dateutil = "^2.8.2"
 djangorestframework = "^3.14.0"
+drf-writable-nested = "^0.7.0"
 
 [tool.poetry.group.dev.dependencies]
 ## Watchfiles
