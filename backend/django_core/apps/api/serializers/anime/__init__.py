@@ -1,6 +1,6 @@
 from apps.anime.models import AnimeModel, AnimeNameSynonymModel
-
 from rest_framework import serializers
+
 from .genre import AnimeGenreSerializer
 from .theme import AnimeThemeSerializer
 

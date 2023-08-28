@@ -1,8 +1,6 @@
-from rest_framework import serializers
+
+from rest_framework import serializers, status, views
 from rest_framework.response import Response
-from typing import NoReturn
-from rest_framework import views
-from rest_framework import status
 
 
 def write_protected_function(self: views.APIView, serializer: serializers.ModelSerializer):

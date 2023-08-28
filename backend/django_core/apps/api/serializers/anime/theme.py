@@ -1,5 +1,4 @@
 from apps.anime.models.anime_theme import AnimeThemeModel
-
 from rest_framework import serializers
 
 
