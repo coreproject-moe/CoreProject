@@ -1,11 +1,12 @@
-from ..serializers.anime import AnimeSerializer
 from apps.anime.models import AnimeModel
 from apps.anime.models.anime_genre import AnimeGenreModel
 from rest_framework import generics
+
 from ..bases.api_view import (
-    SuperUserWriteProtectedAPIView,
     SuperUserUpdateProtectedAPIView,
+    SuperUserWriteProtectedAPIView,
 )
+from ..serializers.anime import AnimeSerializer
 from ..serializers.anime.genre import AnimeGenreSerializer
 
 

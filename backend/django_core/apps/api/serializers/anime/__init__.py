@@ -1,8 +1,9 @@
 from apps.anime.models import AnimeModel, AnimeNameSynonymModel
-from rest_framework import serializers
-from ...bases.serializer import GetOrCreateSlugRelatedField
 from apps.anime.models.anime_genre import AnimeGenreModel
 from apps.anime.models.anime_theme import AnimeThemeModel
+from rest_framework import serializers
+
+from ...bases.serializer import GetOrCreateSlugRelatedField
 
 
 class AnimeSerializer(serializers.ModelSerializer):
