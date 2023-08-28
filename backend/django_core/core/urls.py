@@ -18,6 +18,9 @@ from django.contrib import admin
 from django.urls import include, path
 
 from . import views
+from drf_spectacular.views import (
+    SpectacularAPIView,
+)
 
 # from django.views import debug
 
@@ -50,6 +53,7 @@ urlpatterns = [
     #   API
     # ========
     path("api/v2/", include("apps.api.urls")),
+    path("api/v2/swagger", SpectacularAPIView.as_view()),
 ]
 
 if settings.DEBUG:

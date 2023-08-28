@@ -92,6 +92,7 @@ INSTALLED_APPS = [
     # Api
     "rest_framework",
     "rest_framework.authtoken",
+    "drf_spectacular",
     # Models
     "apps.anime",
     "apps.trackers",
@@ -101,6 +102,11 @@ INSTALLED_APPS = [
     "apps.episodes",
 ]
 
+# Rest framework
+REST_FRAMEWORK = {
+    # YOUR SETTINGS
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+}
 # Debug Toolbar Add
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install-the-app
 if DEBUG:

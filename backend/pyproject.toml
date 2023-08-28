@@ -61,6 +61,7 @@ selectolax = "^0.3.16"
 python-dateutil = "^2.8.2"
 djangorestframework = "^3.14.0"
 drf-writable-nested = "^0.7.0"
+drf-spectacular = "^0.26.4"
 
 [tool.poetry.group.dev.dependencies]
 ## Watchfiles
