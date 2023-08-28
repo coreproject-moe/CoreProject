@@ -16,9 +16,10 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
-from drf_spectacular.views import (
-    SpectacularAPIView,
-)
+
+from rest_framework.authtoken import views as rest_framework_authtoken_views
+
+from drf_spectacular.views import SpectacularSwaggerView, SpectacularAPIView
 
 from . import views
 
@@ -53,7 +54,18 @@ urlpatterns = [
     #   API
     # ========
     path("api/v2/", include("apps.api.urls")),
-    path("api/v2/swagger", SpectacularAPIView.as_view()),
+    path(
+        "api/v2/token-auth/",
+        rest_framework_authtoken_views.obtain_auth_token,
+        name="api-token-auth",
+    ),
+    # Swagger
+    path("api/v2/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path(
+        "api/v2/schema/swagger-ui/",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
+    ),
 ]
 
 if settings.DEBUG:

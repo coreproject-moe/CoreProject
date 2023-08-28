@@ -911,6 +911,20 @@ offline = ["drf-spectacular-sidecar"]
 sidecar = ["drf-spectacular-sidecar"]
 
 [[package]]
+name = "drf-spectacular-sidecar"
+version = "2023.8.1"
+description = "Serve self-contained distribution builds of Swagger UI and Redoc with Django"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "drf-spectacular-sidecar-2023.8.1.tar.gz", hash = "sha256:79b928d75b8f7c07d2188dda33ea10ca90d4f7234af5788dda58dc4434cd27f8"},
+    {file = "drf_spectacular_sidecar-2023.8.1-py3-none-any.whl", hash = "sha256:aa9027e8aadb907bb6be486a7219f1474ab678914cae8aebf34445f02e80bdca"},
+]
+
+[package.dependencies]
+Django = ">=2.2"
+
+[[package]]
 name = "drf-writable-nested"
 version = "0.7.0"
 description = "Writable nested helpers for django-rest-framework's serializers"
@@ -2578,4 +2592,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "c72bf821cf8534adfae0a87c661d82622f49d6a7e97689a86639a403218015ac"
+content-hash = "7e94191e4d933a63fe7d72baea0487956c0bc28782e8ad0a4493f1cf742f1a8b"
