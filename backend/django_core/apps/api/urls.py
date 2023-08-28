@@ -1,5 +1,6 @@
-from .views import AnimeAPIView, AnimeSpecificAPIView
 from django.urls import path
+
+from .views import AnimeAPIView, AnimeSpecificAPIView
 
 urlpatterns = [
     path("anime/", AnimeAPIView.as_view()),

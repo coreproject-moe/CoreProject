@@ -1,7 +1,7 @@
 from django.core.exceptions import ValidationError
 
 INVALID_USERNAMES = {
-        "admin",
+    "admin",
 }
 
 

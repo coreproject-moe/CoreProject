@@ -1,10 +1,8 @@
-from rest_framework.response import Response
-from ..serializers.anime import AnimeSerializer
 from apps.anime.models import AnimeModel
-
 from rest_framework import generics
-from typing import NoReturn
+
 from ..bases.api_view import SuperUserWriteProtectedAPIView
+from ..serializers.anime import AnimeSerializer
 
 
 class AnimeAPIView(generics.ListCreateAPIView, SuperUserWriteProtectedAPIView):
