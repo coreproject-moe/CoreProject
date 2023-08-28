@@ -2,7 +2,7 @@ from apps.anime.models import AnimeModel, AnimeNameSynonymModel
 from apps.anime.models.anime_genre import AnimeGenreModel
 from apps.anime.models.anime_theme import AnimeThemeModel
 from rest_framework import serializers
-
+from ..character import CharacterSerializer
 from ...bases.serializer import GetOrCreateSlugRelatedField
 
 
@@ -25,6 +25,7 @@ class AnimeSerializer(serializers.ModelSerializer):
         required=False,
         queryset=AnimeNameSynonymModel.objects.all(),
     )
+    characters = CharacterSerializer(many=True)
 
     class Meta:
         model = AnimeModel
