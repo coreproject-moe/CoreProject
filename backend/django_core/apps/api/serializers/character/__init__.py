@@ -1,5 +1,5 @@
-from rest_framework import serializers
 from apps.characters.models import CharacterModel
+from rest_framework import serializers
 
 
 class CharacterSerializer(serializers.ModelSerializer):
