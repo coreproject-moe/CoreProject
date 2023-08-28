@@ -1,5 +1,6 @@
 from apps.anime.models import AnimeModel
 from apps.anime.models.anime_genre import AnimeGenreModel
+from apps.anime.models.anime_theme import AnimeThemeModel
 from django.http import HttpRequest
 from rest_framework import generics, mixins, status
 from rest_framework.response import Response
@@ -8,14 +9,9 @@ from ...bases.api_view import (
     SuperUserUpdateProtectedAPIView,
     SuperUserWriteProtectedAPIView,
 )
+from ...serializers.anime import AnimeSerializer
 from ...serializers.anime.genre import AnimeGenreSerializer
 from ...serializers.anime.theme import AnimeThemeSerializer
-
-from ...serializers.anime import AnimeSerializer
-from apps.anime.models.anime_genre import AnimeGenreModel
-from apps.anime.models.anime_theme import AnimeThemeModel
-
-from django.http import HttpRequest
 
 
 class AnimeAPIView(
