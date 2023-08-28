@@ -6,7 +6,7 @@ from ...bases.api_view import (
     SuperUserUpdateProtectedAPIView,
     SuperUserWriteProtectedAPIView,
 )
-from ...serializers.anime import AnimeSerializer
+from ...serializers.anime import AnimeGETSerializer, AnimePOSTSerializer
 
 
 class AnimeAPIView(
@@ -14,7 +14,7 @@ class AnimeAPIView(
     generics.ListCreateAPIView,
 ):
     queryset = AnimeModel.objects.all()
-    serializer_class = AnimeSerializer
+    serializer_class = AnimeGETSerializer
 
 
 class AnimeSpecificAPIView(
@@ -23,7 +23,12 @@ class AnimeSpecificAPIView(
     generics.RetrieveUpdateDestroyAPIView,
 ):
     queryset = AnimeModel.objects.all()
-    serializer_class = AnimeSerializer
+
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return AnimeGETSerializer
+        else:
+            return AnimePOSTSerializer
 
 
 # class AnimeSpecificThemeAPIView(
