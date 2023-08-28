@@ -90,6 +90,8 @@ INSTALLED_APPS = [
     "tailwind",
     "tailwind_src",  # Our custom app
     # Api
+    "rest_framework",
+    "rest_framework.authtoken",
     # Models
     "apps.anime",
     "apps.trackers",
@@ -210,7 +212,8 @@ if CACHE_MIDDLEWARE_SECONDS != 0:
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("POSTGRES_NAME", "postgres"),
+        # Database name
+        "NAME": os.environ.get("POSTGRES_NAME", "coreproject"),
         "USER": os.environ.get("POSTGRES_USER", "postgres"),
         "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "supersecretpassword"),
         "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
