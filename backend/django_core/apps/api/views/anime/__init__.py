@@ -2,9 +2,9 @@ from apps.anime.models import AnimeModel
 from rest_framework import generics
 
 from ...bases.api_view import (
+    SuperUserDeleteProtectedAPIView,
     SuperUserUpdateProtectedAPIView,
     SuperUserWriteProtectedAPIView,
-    SuperUserDeleteProtectedAPIView,
 )
 from ...serializers.anime import AnimeSerializer
 
