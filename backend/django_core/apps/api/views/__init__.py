@@ -1,19 +1,24 @@
-from rest_framework.response import Response
 from ..serializers.anime import AnimeSerializer
 from apps.anime.models import AnimeModel
 
 from rest_framework import generics
-from typing import NoReturn
-from ..bases.api_view import SuperUserWriteProtectedAPIView
+from ..bases.api_view import (
+    SuperUserWriteProtectedAPIView,
+    SuperUserUpdateProtectedAPIView,
+)
 
 
-class AnimeAPIView(generics.ListCreateAPIView, SuperUserWriteProtectedAPIView):
+class AnimeAPIView(
+    SuperUserWriteProtectedAPIView,
+    generics.ListCreateAPIView,
+):
     queryset = AnimeModel.objects.all()
     serializer_class = AnimeSerializer
 
 
 class AnimeSpecificAPIView(
-    generics.RetrieveUpdateDestroyAPIView, SuperUserWriteProtectedAPIView
+    SuperUserUpdateProtectedAPIView,
+    generics.RetrieveUpdateDestroyAPIView,
 ):
     queryset = AnimeModel.objects.all()
     serializer_class = AnimeSerializer

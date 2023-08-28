@@ -18,9 +18,15 @@ def write_protected_function(self: views.APIView, serializer: serializers.ModelS
         )
 
 
-class SuperUserWriteProtectedAPIView:
-    ...
+# https://stackoverflow.com/a/45087505
+SuperUserWriteProtectedAPIView = type(
+    "SuperUserWriteProtectedAPIView",
+    (object,),
+    {"perform_create": write_protected_function},
+)
 
-
-SuperUserWriteProtectedAPIView.perform_update = write_protected_function
-SuperUserWriteProtectedAPIView.perform_create = write_protected_function
+SuperUserUpdateProtectedAPIView = type(
+    "SuperUserUpdateProtectedAPIView",
+    (object,),
+    {"perform_update": write_protected_function},
+)
