@@ -1,4 +1,3 @@
-from rest_framework.fields import empty
 from apps.anime.models import AnimeModel, AnimeNameSynonymModel
 from apps.anime.models.anime_genre import AnimeGenreModel
 from apps.anime.models.anime_theme import AnimeThemeModel
@@ -6,9 +5,9 @@ from apps.characters.models import CharacterModel
 from rest_framework import serializers
 
 from ...bases.serializer import GetOrCreateSlugRelatedField
+from ..character import CharacterSerializer
 from .genre import AnimeGenreSerializer
 from .theme import AnimeThemeSerializer
-from ..character import CharacterSerializer
 
 
 class AbstractBaseAnimeSerializer(serializers.ModelSerializer):
