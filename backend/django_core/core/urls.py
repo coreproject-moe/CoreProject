@@ -47,9 +47,7 @@ urlpatterns = [
     #   HTTP
     # =========
     path("user/", include("apps.user.urls")),
-    #   Api
-    # ========
-    path("api/", include("apps.api.urls")),
+
 ]
 
 if settings.DEBUG:
