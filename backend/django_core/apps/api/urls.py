@@ -1,10 +1,10 @@
-from django.urls import path, include
+from django.urls import include, path
+from rest_framework.routers import DefaultRouter
 
 from .views.anime import (
-    AnimeViewSet,
     AnimeSpecificAPIView,
+    AnimeViewSet,
 )
-from rest_framework.routers import DefaultRouter
 from .views.anime.genre import AnimeGenresAPIView, AnimeGenresSpecificAPIView
 from .views.anime.theme import AnimeThemesAPIView, AnimeThemesSpecificAPIView
 from .views.user.login import LoginAPIView
