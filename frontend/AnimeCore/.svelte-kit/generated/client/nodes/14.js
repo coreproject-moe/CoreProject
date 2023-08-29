@@ -1,1 +1,0 @@
-export { default as component } from "../../../../src/routes/[...slugs=myanimelist]/[id=int]/episode/[id=int]/+page.svelte";
