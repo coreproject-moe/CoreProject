@@ -3,11 +3,15 @@ from rest_framework import status, views
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 
+from rest_framework.permissions import IsAuthenticated
 from ...serializers.user.token import TokenSerializer
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication
 
 
 class LogoutAPIView(views.APIView):
     serializer_class = TokenSerializer
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    permission_classes = [IsAuthenticated]
 
     def get_serializer_context(self):
         return {"request": self.request, "format": self.format_kwarg, "view": self}
@@ -25,5 +29,4 @@ class LogoutAPIView(views.APIView):
         if token_instance.user == request.user:
             token_instance.delete()
             return Response(status=status.HTTP_202_ACCEPTED)
-        print(request.user)
         return Response(status=status.HTTP_400_BAD_REQUEST)
