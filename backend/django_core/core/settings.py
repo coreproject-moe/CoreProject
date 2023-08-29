@@ -94,6 +94,9 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "drf_spectacular",
     "drf_spectacular_sidecar",
+    "django_filters",
+    "crispy_forms",
+    "crispy_bootstrap4",
     # Models
     "apps.anime",
     "apps.trackers",
@@ -103,6 +106,8 @@ INSTALLED_APPS = [
     "apps.episodes",
 ]
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 # Rest framework
 REST_FRAMEWORK = {
     # YOUR SETTINGS
