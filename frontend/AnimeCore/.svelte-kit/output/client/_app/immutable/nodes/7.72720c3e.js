@@ -1,0 +1,1 @@
+import{s as n,l as i,m as r,i as c,I as a,d as m}from"../chunks/scheduler.036c1cd3.js";import{S as p,i as l}from"../chunks/index.a85a8016.js";function f(s){let t;return{c(){t=i("List page")},l(e){t=r(e,"List page")},m(e,o){c(e,t,o)},p:a,i:a,o:a,d(e){e&&m(t)}}}class x extends p{constructor(t){super(),l(this,t,null,f,n,{})}}export{x as component};
