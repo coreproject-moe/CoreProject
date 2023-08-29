@@ -17,6 +17,7 @@ class AnimeFilter(filters.FilterSet):
     characters = filters.CharFilter(method="character_filter", label="Character Filter")
     studios = filters.CharFilter(method="studio_filter", label="Studio Filter")
     producers = filters.CharFilter(method="producer_filter", label="Producer Filter")
+    staffs = filters.CharFilter(method="staff_filter", label="Staff Filter")
 
     def name_filter(
         self, queryset: QuerySet[AnimeModel], name, value: str
@@ -83,4 +84,10 @@ class AnimeFilter(filters.FilterSet):
         self, queryset: QuerySet[AnimeModel], name: str, value: str
     ) -> QuerySet[AnimeModel]:
         query = queryset.filter(producers__name__in=value.split(","))
+        return query
+
+    def staff_filter(
+        self, queryset: QuerySet[AnimeModel], name: str, value: str
+    ) -> QuerySet[AnimeModel]:
+        query = queryset.filter(staffs__name__in=value.split(","))
         return query
