@@ -7,11 +7,15 @@ from django.db.models.functions import Greatest
 
 class AnimeFilter(filters.FilterSet):
     name = filters.CharFilter(method="name_filter", label="Name Filter")
-    mal_id = filters.NumberFilter(method="mal_id_filter", label="MyAnimeList ID filter")
+    mal_id = filters.CharFilter(method="mal_id_filter", label="MyAnimeList ID Filter")
+    kitsu_id = filters.CharFilter(method="kitsu_id_filter", label="Kitsu ID Filter")
 
     def mal_id_filter(self, queryset: AnimeModel, name, value: str) -> AnimeModel:
-        print(value)
-        query = queryset.filter(mal_id__in=[value])
+        query = queryset.filter(mal_id__in=list(map(int, value.split(","))))
+        return query
+
+    def kitsu_id_filter(self, queryset: AnimeModel, name, value: str) -> AnimeModel:
+        query = queryset.filter(kitsu_id__in=list(map(int, value.split(","))))
         return query
 
     def name_filter(self, queryset: AnimeModel, name, value: str) -> AnimeModel:
