@@ -12,7 +12,6 @@
     import Chevron from "$icons/chevron.svelte";
     import Circle from "$icons/circle.svelte";
     import CoreProject from "$icons/core_project.svelte";
-    import Caption from "$icons/caption.svelte";
     import Edit from "$icons/edit.svelte";
     import Forum from "$icons/forum.svelte";
     import Info from "$icons/info.svelte";
@@ -24,59 +23,134 @@
     import Preference from "$icons/preference.svelte";
     import Recent from "$icons/recent.svelte";
     import SettingsOutline from "$icons/settings_outline.svelte";
-    import { timer as timerStore } from "$store/timer";
     import { Timer as EasyTimer } from "easytimer.js";
     import { onDestroy, onMount } from "svelte";
     import type { SvelteComponent } from "svelte";
     import { swipe } from "svelte-gestures";
     import { tweened } from "svelte/motion";
     import { blur } from "svelte/transition";
-    import Mic from "$icons/mic.svelte";
     import tippy from "tippy.js";
 
-    /* Slider codes */
-    let main_hero_slider_element: HTMLElement;
-    let main_hero_slide_active_index = 0;
+    const slider_delay = 10,
+        timer = new EasyTimer({
+            target: {
+                seconds: slider_delay
+            },
+            precision: "secondTenths"
+        }),
+        slide_buttons = [
+            { background: "bg-surface-50", border: "border-surface-50" },
+            { background: "bg-secondary-300", border: "border-secondary-300" },
+            { background: "bg-warning-400", border: "border-warning-400" },
+            { background: "bg-white", border: "border-white" },
+            { background: "bg-primary-300", border: "border-primary-300" },
+            { background: "bg-error-200", border: "border-error-200" }
+        ],
+        opengraph_html = new OpengraphGenerator({
+            title: "AnimeCore - A modern anime streaming site",
+            site_name: "CoreProject",
+            image_url: "", // Use Opengraph later
+            url: $page.url.href,
+            locale: "en_US",
+            description: "The most modern anime streaming site"
+        }).generate_opengraph(),
+        icon_mapping: {
+            [key: string]: {
+                [key: string]: {
+                    title?: string;
+                    icon: {
+                        component: typeof SvelteComponent<{}>;
+                        class: string;
+                    };
+                };
+            };
+        } = {
+            left: {
+                forums: {
+                    title: "Forums",
+                    icon: {
+                        component: Forum,
+                        class: "text-surface-900 w-[1.25vw]"
+                    }
+                },
+                last_watched: {
+                    title: "Last watched anime",
+                    icon: {
+                        component: Recent,
+                        class: "text-surface-900 w-[1.25vw]"
+                    }
+                },
+                notifications: {
+                    title: "Notifications",
+                    icon: {
+                        component: Notifications,
+                        class: "text-surface-900 w-[1.25vw]"
+                    }
+                }
+            },
+            bottom: {
+                language: {
+                    icon: {
+                        component: Language,
+                        class: "text-surface-900 w-[1.25vw]"
+                    }
+                },
+                preferences: {
+                    icon: {
+                        component: Preference,
+                        class: "text-surface-900 w-[1.25vw]"
+                    }
+                },
+                theme: {
+                    icon: {
+                        component: Moon,
+                        class: "text-surface-900 w-[1.25vw]"
+                    }
+                },
+                settings: {
+                    icon: {
+                        component: SettingsOutline,
+                        class: "text-surface-900 w-[1.25vw]"
+                    }
+                }
+            }
+        };
+
+    /* Bindings */
+    let my_list_grid: HTMLElement,
+        /* Slider codes */
+        main_hero_slider_element: HTMLElement,
+        main_hero_slide_active_index = 0;
 
     const add_one_to_main_hero_slide_active_index = () => {
-        if (main_hero_slide_active_index + 1 === latest_animes.length) {
-            main_hero_slide_active_index = 0;
-            return;
-        }
-        main_hero_slide_active_index += 1;
-    };
+            if (main_hero_slide_active_index + 1 === latest_animes.length) {
+                main_hero_slide_active_index = 0;
+                return;
+            }
+            main_hero_slide_active_index += 1;
+        },
+        minus_one_to_main_hero_slide_active_index = () => {
+            if (main_hero_slide_active_index === 0) {
+                main_hero_slide_active_index = latest_animes.length - 1;
+                return;
+            }
+            main_hero_slide_active_index -= 1;
+        },
+        swipe_handler = (event: CustomEvent) => {
+            const direction = event.detail.direction;
+            timer.reset();
 
-    const minus_one_to_main_hero_slide_active_index = () => {
-        if (main_hero_slide_active_index === 0) {
-            main_hero_slide_active_index = latest_animes.length - 1;
-            return;
-        }
-        main_hero_slide_active_index -= 1;
-    };
-
-    const swipe_handler = (event: CustomEvent) => {
-        const direction = event.detail.direction;
-        timer.reset();
-        if (direction === "left") {
-            add_one_to_main_hero_slide_active_index();
-        } else if (direction === "right") {
-            minus_one_to_main_hero_slide_active_index();
-        }
-    };
+            if (direction === "left") {
+                add_one_to_main_hero_slide_active_index();
+            } else if (direction === "right") {
+                minus_one_to_main_hero_slide_active_index();
+            }
+        };
 
     // Progress bar code //
-    const slider_delay = 10;
-    let progress_value = 0;
-
-    let tweened_progress_value = tweened(progress_value);
+    let progress_value = 0,
+        tweened_progress_value = tweened(progress_value);
     $: tweened_progress_value.set(progress_value);
-
-    let timer = new EasyTimer({
-        target: {
-            seconds: slider_delay
-        },
-        precision: "secondTenths"
-    });
 
     timer.on("targetAchieved", () => {
         // change slider
@@ -85,33 +159,19 @@
     });
 
     timer.on("secondTenthsUpdated", () => {
-        const time = timer.getTotalTimeValues().secondTenths;
-        const value = (100 / slider_delay) * (time / 10);
+        const time = timer.getTotalTimeValues().secondTenths,
+            value = (100 / slider_delay) * (time / 10);
+
         progress_value = value;
     });
-
-    $: {
-        switch ($timerStore) {
-            case "start":
-                timer?.start();
-                break;
-            case "pause":
-                timer?.pause();
-                break;
-            case "reset":
-                timer?.reset();
-                timer?.start();
-                break;
-        }
-    }
 
     // Controls timer according to element visibility on viewport
     onMount(() => {
         const observer = new IntersectionObserver((entries) => {
             if (entries[0].isIntersecting) {
-                $timerStore = "start";
+                timer?.start();
             } else {
-                $timerStore = "pause";
+                timer?.pause();
             }
         });
 
@@ -123,96 +183,14 @@
         timer.reset();
         timer.stop();
     });
-
-    /* slide buttons colors */
-    let slide_buttons = [
-        { background: "bg-surface-50", border: "border-surface-50" },
-        { background: "bg-secondary-300", border: "border-secondary-300" },
-        { background: "bg-warning-400", border: "border-warning-400" },
-        { background: "bg-white", border: "border-white" },
-        { background: "bg-primary-300", border: "border-primary-300" },
-        { background: "bg-error-200", border: "border-error-200" }
-    ];
-
-    /* Icons */
-    const icon_mapping: {
-        [key: string]: {
-            [key: string]: {
-                title?: string;
-                icon: {
-                    component: typeof SvelteComponent<{}>;
-                    class: string;
-                };
-            };
-        };
-    } = {
-        left: {
-            forums: {
-                title: "Forums",
-                icon: {
-                    component: Forum,
-                    class: "text-surface-900 w-[1.25vw]"
-                }
-            },
-            last_watched: {
-                title: "Last watched anime",
-                icon: {
-                    component: Recent,
-                    class: "text-surface-900 w-[1.25vw]"
-                }
-            },
-            notifications: {
-                title: "Notifications",
-                icon: {
-                    component: Notifications,
-                    class: "text-surface-900 w-[1.25vw]"
-                }
-            }
-        },
-        bottom: {
-            language: {
-                icon: {
-                    component: Language,
-                    class: "text-surface-900 w-[1.25vw]"
-                }
-            },
-            preferences: {
-                icon: {
-                    component: Preference,
-                    class: "text-surface-900 w-[1.25vw]"
-                }
-            },
-            theme: {
-                icon: {
-                    component: Moon,
-                    class: "text-surface-900 w-[1.25vw]"
-                }
-            },
-            settings: {
-                icon: {
-                    component: SettingsOutline,
-                    class: "text-surface-900 w-[1.25vw]"
-                }
-            }
-        }
-    };
-
-    const opengraph_html = new OpengraphGenerator({
-        title: "AnimeCore - A modern anime streaming site",
-        site_name: "CoreProject",
-        image_url: "", // Use Opengraph later
-        url: $page.url.href,
-        locale: "en_US",
-        description: "The most modern anime streaming site"
-    }).generate_opengraph();
 </script>
 
 <svelte:window
     on:focus={() => {
-        $timerStore = "start";
+        timer?.start();
     }}
     on:blur={() => {
-        $timerStore = "pause";
+        timer?.pause();
     }}
 />
 
@@ -238,16 +216,16 @@
                         class="absolute inset-0 md:bottom-[2vw]"
                         transition:blur
                         on:mouseenter={() => {
-                            $timerStore = "pause";
+                            timer?.pause();
                         }}
                         on:mouseleave={() => {
-                            $timerStore = "start";
+                            timer?.start();
                         }}
                         on:touchstart={() => {
-                            $timerStore = "pause";
+                            timer?.pause();
                         }}
                         on:touchend={() => {
-                            $timerStore = "start";
+                            timer?.start();
                         }}
                     >
                         <ImageLoader
@@ -516,70 +494,62 @@
             </see-all>
         </my-list-info>
 
-        <my-list-animes class="relative mt-4 grid grid-cols-3 gap-3 md:mt-[1vw] md:grid-cols-5 md:gap-[1.25vw]">
+        <my-list-animes
+            class="relative mt-4 grid grid-cols-3 gap-3 md:mt-[1vw] md:grid-cols-5 md:gap-[1.25vw]"
+            bind:this={my_list_grid}
+        >
             {#each my_list as anime}
                 <a
                     href="/mal/{anime.id}/episode/{anime.current_episode}"
-                    class="relative col-span-1 flex flex-col gap-2 md:gap-[0.5vw]"
+                    class="relative"
+                    use:tippy={{
+                        arrow: false,
+                        allowHTML: true,
+                        placement: "right-start",
+                        animation: "shift-away",
+                        duration: [200, 50],
+                        interactive: true,
+                        appendTo: document.body,
+                        onTrigger: async (instance) => {
+                            const node = document.createElement("tippy-my-list-animes");
+                            new MyListAnimeDetails({
+                                target: node,
+                                props: {
+                                    anime_id: anime.id,
+                                    anime_name: anime.name,
+                                    anime_type: anime.type,
+                                    anime_genres: anime.genres,
+                                    anime_studios: anime.studios,
+                                    anime_episodes_count: anime.episodes_count,
+                                    anime_synopsis: anime.synopsis,
+                                    anime_current_episode: anime.current_episode,
+                                    anime_release_date: anime.release_date
+                                }
+                            });
+
+                            instance.setContent(node);
+                        }
+                    }}
                 >
-                    <div
-                        class="relative"
-                        use:tippy={{
-                            arrow: false,
-                            allowHTML: true,
-                            placement: "right-start",
-                            animation: "scale",
-                            duration: [150, 10],
-                            interactive: true,
-                            appendTo: document.body,
-                            onTrigger: async (instance) => {
-                                const node = document.createElement("div");
-                                new MyListAnimeDetails({
-                                    target: node,
-                                    props: {
-                                        anime_id: anime.id,
-                                        anime_name: anime.name,
-                                        anime_type: anime.type,
-                                        anime_genres: anime.genres,
-                                        anime_studios: anime.studios,
-                                        anime_episodes_count: anime.episodes_count,
-                                        anime_synopsis: anime.synopsis,
-                                        anime_current_episode: anime.current_episode,
-                                        anime_release_date: anime.release_date
-                                    }
-                                });
-
-                                instance.setContent(node);
-                            }
-                        }}
-                    >
-                        <ImageLoader
-                            src={anime.cover}
-                            alt={anime.name}
-                            class="h-52 w-full rounded-md object-cover object-center md:h-[18vw] md:rounded-[0.35vw]"
-                        />
-                        <overlay class="absolute inset-0 flex items-end bg-gradient-to-t from-surface-900/75 to-transparent p-2 leading-none md:p-[0.5vw]">
-                            <div class="flex gap-1 overflow-hidden rounded md:gap-[0.2vw] md:rounded-[0.3vw]">
-                                <subs class="flex items-center gap-1 bg-warning-400 p-1 text-black md:gap-[0.25vw] md:px-[0.35vw] md:py-[0.25vw]">
-                                    <Caption class="h-4 md:h-[1.25vw]" />
-                                    <span class="text-xs font-semibold md:text-[0.8vw]">{anime.episodes_count}</span>
-                                </subs>
-                                <dubs class="flex items-center gap-1 bg-white/25 p-1 backdrop-blur md:gap-[0.25vw] md:px-[0.45vw] md:py-[0.25vw]">
-                                    <Mic class="h-3 md:h-[0.8vw]" />
-                                    <span class="text-xs font-semibold md:text-[0.8vw]">{anime.episodes_count}</span>
-                                </dubs>
-                            </div>
-                        </overlay>
-                    </div>
-
-                    <anime-details class="flex flex-col gap-2 text-surface-50 md:gap-[0.5vw]">
-                        <anime_name class="line-clamp-1 text-xs font-semibold leading-none md:text-[1vw]">{anime.name}</anime_name>
-                        <anime_info class="flex items-center gap-2 text-xs leading-none text-surface-50 md:gap-[0.5vw] md:text-[0.8vw]">
-                            <span>Watching</span>
-                            <Circle class="w-1 opacity-75 md:w-[0.25vw]" />
-                            <span>{anime.current_episode}/{anime.episodes_count} eps</span>
-                        </anime_info>
-                    </anime-details>
+                    <ImageLoader
+                        src={anime.cover}
+                        alt={anime.name}
+                        class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]"
+                    />
+                    <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
+                        <div class="flex flex-col gap-1 bg-surface-900/90 p-3 md:gap-[0.35vw] md:p-[1vw]">
+                            <ScrollArea class="flex overflow-hidden text-sm font-semibold duration-300 ease-in-out scrollbar-none hover:max-h-[10vw] hover:overflow-y-scroll md:max-h-[1.35vw] md:text-[1vw] md:leading-[1.35vw]">
+                                <span class="line-clamp-1 md:line-clamp-none">
+                                    {anime.name}
+                                </span>
+                            </ScrollArea>
+                            <anime_info class="flex items-center gap-2 text-xs leading-none text-surface-50 md:gap-[0.5vw] md:text-[0.8vw]">
+                                <span class="hidden md:flex">Watching</span>
+                                <Circle class="hidden opacity-75 md:flex md:w-[0.25vw]" />
+                                <span>{anime.current_episode}/{anime.episodes_count} eps</span>
+                            </anime_info>
+                        </div>
+                    </anime-info>
                 </a>
             {/each}
         </my-list-animes>

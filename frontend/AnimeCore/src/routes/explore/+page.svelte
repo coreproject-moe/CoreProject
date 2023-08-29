@@ -7,8 +7,6 @@
     import MoreBox from "$icons/more_box.svelte";
     import { trending_animes } from "$data/mock/trending";
     import tippy from "tippy.js";
-    import Caption from "$icons/caption.svelte";
-    import Mic from "$icons/mic.svelte";
     import FilterOptions from "$components/tippies/filter_options.svelte";
     import Cross from "$icons/cross.svelte";
     import { FormatDate } from "$functions/format_date";
@@ -94,31 +92,29 @@
         }
     };
 
-    function update_selected_items(key: string, selected_item: [string, string]) {
-        let filter_option = filter_options_mapping[key];
-        let is_selected = filter_option.selected_items?.some((item) => item[0] === selected_item[0]);
+    const update_selected_items = (key: string, selected_item: [string, string]) => {
+            let filter_option = filter_options_mapping[key];
+            let is_selected = filter_option.selected_items?.some((item) => item[0] === selected_item[0]);
 
-        if (is_selected) {
-            filter_option.selected_items = filter_option.selected_items?.filter((item) => item[0] !== selected_item[0]);
-        } else {
-            filter_option.selected_items = [...filter_option.selected_items, selected_item];
-        }
+            if (is_selected) {
+                filter_option.selected_items = filter_option.selected_items?.filter((item) => item[0] !== selected_item[0]);
+            } else {
+                filter_option.selected_items = [...filter_option.selected_items, selected_item];
+            }
 
-        // update filer_options_mapping
-        filter_options_mapping[key] = filter_option;
-    }
-
-    function clear_selected_items(key: string) {
-        // update filter_options_mapping
-        filter_options_mapping[key].selected_items = [];
-    }
+            // update filer_options_mapping
+            filter_options_mapping[key] = filter_option;
+        },
+        clear_selected_items = (key: string) => {
+            // update filter_options_mapping
+            filter_options_mapping[key].selected_items = [];
+        },
+        change_thumbnail_mode = (mode: typeof thumbnail_mode) => {
+            thumbnail_mode = mode;
+        };
 
     /* Thumbnail modes */
-    let thumbnail_mode: "card_with_tippy" | "detailed_card" = "detailed_card";
-
-    function change_thumbnail_mode(mode: typeof thumbnail_mode) {
-        thumbnail_mode = mode;
-    }
+    let thumbnail_mode: "card_with_tippy" | "detailed_card" = "card_with_tippy";
 
     const opengraph_html = new OpengraphGenerator({
         title: "Explore the Anime Universe: Your Gateway to Otaku Delights!",
@@ -257,47 +253,49 @@
                 <span class="text-xl font-semibold leading-none md:text-[1.35vw]">Trending Now</span>
                 <span class="text-base leading-none text-surface-50 md:text-[1vw]">Crowd Favorites: Anime Hits and Hype</span>
             </headings>
-            <div class="flex md:gap-[1vw]">
+            <div class="flex gap-3 md:gap-[1vw]">
                 <button class="btn p-0 text-surface-50">
-                    <Expand class="md:w-[1.25vw]" />
+                    <Expand class="w-5 md:w-[1.25vw]" />
                     <span class="font-semibold md:text-[1vw]">Trending</span>
                 </button>
-                <span class="divider-vertical h-[2vw] !border-surface-50/25" />
+                <span class="divider-vertical h-7 !border-surface-50/25 md:h-[2vw]" />
                 <button
                     class="btn p-0 text-surface-50"
                     on:click={() => change_thumbnail_mode("card_with_tippy")}
                 >
-                    <SixGrids class="md:w-[1.15vw]" />
+                    <SixGrids class="w-5 md:w-[1.15vw]" />
                 </button>
                 <button
                     class="btn p-0 text-surface-50"
                     on:click={() => change_thumbnail_mode("detailed_card")}
                 >
-                    <MoreBox class="md:w-[1vw]" />
+                    <MoreBox class="w-[1.1rem] md:w-[1vw]" />
                 </button>
             </div>
         </div>
 
         {#if thumbnail_mode === "detailed_card"}
-            <result-animes class="mt-5 grid grid-cols-3 gap-3 md:mt-[1.25vw] md:grid-cols-3 md:gap-[1.5vw]">
+            <result-animes class="mt-5 grid grid-cols-2 gap-3 md:mt-[1.25vw] md:grid-cols-3 md:gap-[1.5vw]">
                 {#each trending_animes as anime}
                     <a
                         in:scale={{ start: 0.95 }}
                         href="/mal/{anime.id}"
-                        class="relative col-span-1 grid grid-cols-2"
+                        class="relative col-span-1 grid grid-cols-1 md:grid-cols-2"
                     >
                         <div class="relative">
                             <ImageLoader
                                 src={anime.cover}
                                 alt={anime.name}
-                                class="h-52 w-full rounded-l-lg object-cover object-center md:h-[20vw] md:rounded-l-[0.35vw]"
+                                class="h-56 w-full rounded-t-lg object-cover object-center md:h-[20vw] md:rounded-l-[0.35vw]"
                             />
-                            <anime-info class="absolute inset-x-0 bottom-0 rounded-l-lg backdrop-blur md:rounded-l-[0.35vw]">
-                                <div class="flex flex-col bg-surface-900/90 p-[1vw] md:gap-[0.35vw]">
-                                    <ScrollArea class="flex max-h-[1.5vw] overflow-hidden font-semibold duration-300 ease-in-out scrollbar-none hover:max-h-[10vw] hover:overflow-y-scroll md:text-[1vw] md:leading-[1.35vw]">
-                                        {anime.name}
+                            <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-l-[0.35vw]">
+                                <div class="flex flex-col bg-surface-900/90 p-3 md:gap-[0.35vw] md:p-[1vw]">
+                                    <ScrollArea class="flex overflow-hidden text-sm font-semibold duration-300 ease-in-out scrollbar-none hover:max-h-[10vw] hover:overflow-y-scroll md:max-h-[1.35vw] md:text-[1vw] md:leading-[1.35vw]">
+                                        <span class="line-clamp-1 md:line-clamp-none">
+                                            {anime.name}
+                                        </span>
                                     </ScrollArea>
-                                    <studio-name class="text-surface-50 md:text-[0.8vw]">
+                                    <studio-name class="line-clamp-1 text-xs text-surface-50 md:line-clamp-none md:text-[0.8vw]">
                                         {anime.studios}
                                     </studio-name>
                                 </div>
@@ -305,27 +303,28 @@
                         </div>
 
                         <anime-details class="flex flex-col justify-between rounded-r-lg bg-surface-400/25 md:rounded-r-[0.35vw]">
-                            <div class="flex flex-col gap-2 leading-none text-surface-50 md:gap-[0.5vw] md:p-[1vw]">
-                                <release-time class="font-semibold capitalize md:text-[1vw]">
+                            <div class="flex flex-col gap-1 p-3 leading-none text-surface-50 md:gap-[0.5vw] md:p-[1vw]">
+                                <release-time class="text-xs font-semibold capitalize md:text-[1vw]">
                                     {new FormatDate(anime.release_date).format_to_season}
                                 </release-time>
-                                <div class="flex items-center md:gap-[0.5vw]">
-                                    <type class="md:text-[0.8vw]">{anime.type}</type>
-                                    <Circle class="opacity-50 md:w-[0.25vw]" />
-                                    <episodes class="md:text-[0.8vw]">{anime.episodes_count} episodes</episodes>
+                                <div class="flex items-center gap-1 md:gap-[0.5vw]">
+                                    <type class="text-xs md:text-[0.8vw]">{anime.type}</type>
+                                    <Circle class="w-1 opacity-50 md:w-[0.25vw]" />
+                                    <episodes class="text-xs md:text-[0.8vw]">{anime.episodes_count} episodes</episodes>
                                 </div>
                                 <ScrollArea
                                     offsetScrollbar
-                                    parentClass="md:max-h-[11vw] md:mt-[0.5vw]"
-                                    class="text-justify text-surface-300 md:text-[0.85vw] md:leading-[1vw]"
+                                    gradientMask
+                                    parentClass="max-h-24 md:max-h-[11vw] md:mt-[0.5vw]"
+                                    class="text-xs leading-snug text-surface-300 md:text-justify md:text-[0.85vw] md:leading-[1vw]"
                                 >
                                     {anime.synopsis}
                                 </ScrollArea>
                             </div>
 
-                            <genres class="flex items-center md:gap-[0.5vw] md:p-[1vw]">
+                            <genres class="flex items-center gap-2 overflow-x-scroll p-3 scrollbar-none md:gap-[0.5vw] md:p-[1vw]">
                                 {#each anime.genres as genre}
-                                    <genre class="bg-warning-400 font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
+                                    <genre class="whitespace-nowrap rounded bg-warning-400 p-1 text-xs font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
                                         {genre}
                                     </genre>
                                 {/each}
@@ -348,8 +347,8 @@
                                 arrow: false,
                                 allowHTML: true,
                                 placement: "right-start",
-                                animation: "scale",
-                                duration: [150, 10],
+                                animation: "shift-away",
+                                duration: [200, 50],
                                 interactive: true,
                                 appendTo: document.body,
                                 onTrigger: async (instance) => {
@@ -375,32 +374,23 @@
                             <ImageLoader
                                 src={anime.cover}
                                 alt={anime.name}
-                                class="h-52 w-full rounded-md object-cover object-center md:h-[20vw] md:rounded-[0.35vw]"
+                                class="h-60 w-full rounded-md object-cover object-center md:h-[20vw] md:rounded-[0.35vw]"
                             />
-                            <overlay class="absolute inset-0 flex items-end bg-gradient-to-t from-surface-900/75 to-transparent p-2 leading-none md:p-[0.5vw]">
-                                <div class="flex gap-1 overflow-hidden rounded md:gap-[0.2vw] md:rounded-[0.3vw]">
-                                    <subs class="flex items-center gap-1 bg-warning-400 p-1 text-black md:gap-[0.25vw] md:px-[0.35vw] md:py-[0.25vw]">
-                                        <Caption class="h-4 md:h-[1.25vw]" />
-                                        <span class="text-xs font-semibold md:text-[0.8vw]">{anime.episodes_count}</span>
-                                    </subs>
-                                    <dubs class="flex items-center gap-1 bg-white/25 p-1 backdrop-blur md:gap-[0.25vw] md:px-[0.45vw] md:py-[0.25vw]">
-                                        <Mic class="h-3 md:h-[0.8vw]" />
-                                        <span class="text-xs font-semibold md:text-[0.8vw]">{anime.episodes_count}</span>
-                                    </dubs>
+                            <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
+                                <div class="flex flex-col gap-1 bg-surface-900/90 p-3 md:gap-[0.35vw] md:p-[1vw]">
+                                    <ScrollArea class="flex overflow-hidden text-sm font-semibold duration-300 ease-in-out scrollbar-none hover:max-h-[10vw] hover:overflow-y-scroll md:max-h-[1.35vw] md:text-[1vw] md:leading-[1.35vw]">
+                                        <span class="line-clamp-1 md:line-clamp-none">
+                                            {anime.name}
+                                        </span>
+                                    </ScrollArea>
+                                    <anime_info class="flex items-center gap-2 text-xs leading-none text-surface-50 md:gap-[0.5vw] md:text-[0.8vw]">
+                                        <genre>{anime.genres[0]}</genre>
+                                        <Circle class="w-1 opacity-75 md:w-[0.25vw]" />
+                                        <episodes_count>{anime.episodes_count} eps</episodes_count>
+                                    </anime_info>
                                 </div>
-                            </overlay>
+                            </anime-info>
                         </div>
-
-                        <anime-details class="flex flex-col gap-2 text-surface-50 md:gap-[0.5vw]">
-                            <anime_name class="line-clamp-1 text-xs font-semibold leading-none md:text-[1vw]">
-                                {anime.name}
-                            </anime_name>
-                            <anime_info class="flex items-center gap-2 text-xs leading-none text-surface-50 md:gap-[0.5vw] md:text-[0.9vw]">
-                                <genre>{anime.genres[0]}</genre>
-                                <Circle class="w-1 opacity-75 md:w-[0.25vw]" />
-                                <episodes_count>{anime.episodes_count} eps</episodes_count>
-                            </anime_info>
-                        </anime-details>
                     </a>
                 {/each}
             </result-animes>

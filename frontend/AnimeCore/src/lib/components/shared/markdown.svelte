@@ -14,11 +14,6 @@
 
     let klass = "";
 
-    const emoji_options = {
-        emojis,
-        unicode: false
-    };
-
     const marked = new Marked(
         // Highlight.js
         markedHighlight({
@@ -29,7 +24,10 @@
             }
         }),
         // Emoji plugin
-        markedEmoji(emoji_options),
+        markedEmoji({
+            emojis,
+            unicode: false
+        }),
         {
             extensions: [
                 {

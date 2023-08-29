@@ -3,13 +3,7 @@
     import MessageCircle from "$icons/message_circle.svelte";
     import ImageLoader from "./image/image_loader.svelte";
 
-    export let link: string;
-    export let post_banner: string;
-    export let post_title: string;
-    export let post_description: string;
-    export let author: string;
-    export let posted_on_date: string;
-    export let responses: number;
+    export let link: string, post_banner: string, post_title: string, post_description: string, author: string, posted_on_date: string, responses: number;
 </script>
 
 <a
