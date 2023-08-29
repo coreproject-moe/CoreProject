@@ -25,9 +25,9 @@ class AnimeFilter(filters.FilterSet):
         query = (
             queryset.annotate(
                 similiarity=Greatest(
-                    TrigramSimilarity("name", value),
-                    TrigramSimilarity("name_japanese", value),
-                    TrigramSimilarity("name_synonyms__name", value),
+                    TrigramSimilarity("name__in", value.split(",")),
+                    TrigramSimilarity("name_japanese__in", value.split(",")),
+                    TrigramSimilarity("name_synonyms__name__in", value.split(",")),
                 )
             )
             .filter(
@@ -93,10 +93,12 @@ class AnimeFilter(filters.FilterSet):
         query = (
             queryset.annotate(
                 similiarity=Greatest(
-                    TrigramSimilarity("staffs__name", value),
-                    TrigramSimilarity("staffs__given_name", value),
-                    TrigramSimilarity("staffs__family_name", value),
-                    TrigramSimilarity("staffs__alternate_names__name", value),
+                    TrigramSimilarity("staffs__name__in", value.split(",")),
+                    TrigramSimilarity("staffs__given_name__in", value.split(",")),
+                    TrigramSimilarity("staffs__family_name__in", value.split(",")),
+                    TrigramSimilarity(
+                        "staffs__alternate_names__name__in", value.split(",")
+                    ),
                 )
             )
             .filter(
