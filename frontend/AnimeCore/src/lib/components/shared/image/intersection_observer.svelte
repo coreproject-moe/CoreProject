@@ -1,5 +1,8 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    let klass = "";
+
+    export { klass as class };
 
     export let once = false;
 
@@ -26,8 +29,8 @@
 </script>
 
 <div
+    class={klass}
     bind:this={container}
-    class="h-full"
 >
     <slot {intersecting} />
 </div>
