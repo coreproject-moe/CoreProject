@@ -4,6 +4,8 @@ from django.db.models.functions import Greatest
 from django.db.models.query import QuerySet
 from django_filters import rest_framework as filters
 
+from django.db.models import Q
+
 
 class AnimeFilter(filters.FilterSet):
     name = filters.CharFilter(method="name_filter", label="Name Filter")
@@ -22,21 +24,21 @@ class AnimeFilter(filters.FilterSet):
     def name_filter(
         self, queryset: QuerySet[AnimeModel], name, value: str
     ) -> QuerySet[AnimeModel]:
-        query = (
-            queryset.annotate(
-                similiarity=Greatest(
-                    TrigramSimilarity("name__in", value.split(",")),
-                    TrigramSimilarity("name_japanese__in", value.split(",")),
-                    TrigramSimilarity("name_synonyms__name__in", value.split(",")),
+        for _name in value.split(","):
+            queryset = (
+                queryset.annotate(
+                    similiarity=Greatest(
+                        TrigramSimilarity("name", _name),
+                        TrigramSimilarity("name_japanese", _name),
+                        TrigramSimilarity("name_synonyms__name", _name),
+                    )
                 )
+                .filter(
+                    similiarity__gte=0.3,
+                )
+                .order_by("-similiarity")
             )
-            .filter(
-                similiarity__gte=0.3,
-            )
-            .order_by("-similiarity")
-        )
-
-        return query
+        return queryset
 
     def mal_id_filter(
         self, queryset: QuerySet[AnimeModel], name: str, value: str
@@ -72,19 +74,20 @@ class AnimeFilter(filters.FilterSet):
     def character_filter(
         self, queryset: QuerySet[AnimeModel], name: str, value: str
     ) -> QuerySet[AnimeModel]:
-        query = (
-            queryset.annotate(
-                similiarity=Greatest(
-                    TrigramSimilarity("characters__name__in", value.split(",")),
-                    TrigramSimilarity("characters__name_kanji__in", value.split(",")),
+        for _name in value.split(","):
+            queryset = (
+                queryset.annotate(
+                    similiarity=Greatest(
+                        TrigramSimilarity("characters__name", _name),
+                        TrigramSimilarity("characters__name_kanji", _name),
+                    )
                 )
+                .filter(
+                    similiarity__gte=0.3,
+                )
+                .order_by("-similiarity")
             )
-            .filter(
-                similiarity__gte=0.3,
-            )
-            .order_by("-similiarity")
-        )
-        return query
+        return queryset
 
     def studio_filter(
         self, queryset: QuerySet[AnimeModel], name: str, value: str
@@ -101,22 +104,18 @@ class AnimeFilter(filters.FilterSet):
     def staff_filter(
         self, queryset: QuerySet[AnimeModel], name: str, value: str
     ) -> QuerySet[AnimeModel]:
-        query = (
-            queryset.annotate(
-                similiarity=Greatest(
-                    TrigramSimilarity("staffs__name__in", value.split(",")),
-                    TrigramSimilarity("staffs__given_name__in", value.split(",")),
-                    TrigramSimilarity("staffs__family_name__in", value.split(",")),
-                    TrigramSimilarity(
-                        "staffs__alternate_names__name__in", value.split(",")
-                    ),
+        for _name in value.split(","):
+            queryset = (
+                queryset.annotate(
+                    similarity=Greatest(
+                        TrigramSimilarity("staffs__name", _name),
+                        TrigramSimilarity("staffs__given_name", _name),
+                        TrigramSimilarity("staffs__family_name", _name),
+                        TrigramSimilarity("staffs__alternate_names__name", _name),
+                    )
                 )
+                .filter(Q(similarity__gte=0.3))
+                .order_by("-similarity")
             )
-            .filter(
-                similiarity__gte=0.3,
-            )
-            .order_by("-similiarity")
-        )
-        print(query.query)
 
-        return query
+        return queryset
