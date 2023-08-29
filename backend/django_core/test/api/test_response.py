@@ -1,98 +1,147 @@
-import pytest
-from apps.api.urls import api
+from rest_framework.test import APITestCase
 from apps.characters.models import CharacterModel
-from django.test import TestCase
-from ninja.testing import TestClient
 
-client = TestClient(api.default_router)
+from rest_framework import status
+from typing import NoReturn
+from apps.user.models import CustomUser as User
+
+from rest_framework.authtoken.models import Token
 
 
-@pytest.mark.database
-class CharacterAPITestCase(TestCase):
+class CharacterTestCases(APITestCase):
+    def __init__(self, methodName: str = "runTest") -> None:
+        super().__init__(methodName)
+        self.url = "/api/v2/character/"
+
     def setUp(self):
-        CharacterModel.objects.create(
-            id=1,
-            mal_id=1,
-            kitsu_id=1,
-            anilist_id=1,
-            name="Spike",
-            name_kanji="スパイク・スピーゲル",
-            about="""Birthdate: June 26, 2044\nHeight: 185 cm (6' 1")\nWeight: 70 kg (155 lbs)\nBlood type: O\nPlanet of Origin: Mars\n\nSpike Spiegel is a tall and lean 27-year-old bounty hunter born on Mars. The inspiration for Spike is found in martial artist Bruce Lee who uses the martial arts style of Jeet Kune Do as depicted in Session 8, "Waltz For Venus". He has fluffy, dark green hair (which is inspired by Yusaku Matsuda's) and reddish brown eyes, one of which is artificial and lighter than the other. He is usually dressed in a blue leisure suit, with a yellow shirt and Lupin III inspired boots. A flashback in Session 6 revealed it was his fully functioning right eye which was surgically replaced by the cybernetic one (although Spike himself may not have conscious recollection of the procedure since he claims to have lost his natural eye in an "accident"). One theory is that his natural eye may have been lost during the pre-series massacre in which he supposedly "died". The purpose of this cybernetic eye is never explicitly stated, though it apparently gives him exceptional hand-eye coordination - particularly with firearms (Spike's gun of choice is a Jericho 941, as seen throughout the series). In the first episode, when facing a bounty-head using Red Eye, Spike mocks him, calling his moves "too slow". At first, this seems like posturing on Spike's part, but even with his senses and reflexes accelerated to superhuman levels by the drug, the bounty cannot even touch Spike. A recurring device throughout the entire show is a closeup on Spike's fully-natural left eye before dissolving to a flashback of his life as part of the syndicate. As said by Spike himself in the last episode, his right eye "only sees the present" and his left eye "only sees the past." Spike often has a bent cigarette between his lips, sometimes despite rain or "No Smoking" signs.""",
+        self.character = CharacterModel.objects.create(
+            mal_id=10,
+            kitsu_id=10,
+            anilist_id=10,
+            name="Hello",
+            name_kanji="world",
+            about="Hello world",
+        )
+        # Create 2 users
+        self.normal_user = User.objects.create_user(
+            username="testuser#0001", email="admin2@django.com", password="testpassword"
+        )
+        self.normal_token = Token.objects.create(user=self.normal_user)
+
+        self.super_user = User.objects.create_superuser(
+            username="testuser1#0001", email="admin1@django.com", password="testpassword"
+        )
+        self.super_token = Token.objects.create(user=self.super_user)
+
+    def tearDown(self) -> None:
+        self.normal_token.delete()
+        self.normal_user.delete()
+
+        self.super_user.delete()
+        self.super_token.delete()
+
+        self.character.delete()
+
+    def test_get_endpoint(self) -> NoReturn:
+        response = self.client.get(self.url, format="json")
+        self.assertEqual(response.status_code, status.HTTP_200_OK, "Response looks okay")
+
+        self.assertEqual(
+            response.json(),
+            [
+                {
+                    "mal_id": 10,
+                    "kitsu_id": 10,
+                    "anilist_id": 10,
+                    "name": "Hello",
+                    "name_kanji": "world",
+                    "character_image": None,
+                    "about": "Hello world",
+                }
+            ],
         )
 
-    def test_character_api_response_given_mal_id(self):
-        res = self.client.get("/api/v1/characters", {"mal_id": 1})
-        actual_data = res.json()
-        actual_items = actual_data["items"][0]
-        assert actual_items["mal_id"] == 1
-        assert actual_items["kitsu_id"] == 1
-        assert actual_items["anilist_id"] == 1
-        assert actual_items["name"] == "Spike"
-        assert (
-            actual_items["about"]
-            == """Birthdate: June 26, 2044\nHeight: 185 cm (6' 1")\nWeight: 70 kg (155 lbs)\nBlood type: O\nPlanet of Origin: Mars\n\nSpike Spiegel is a tall and lean 27-year-old bounty hunter born on Mars. The inspiration for Spike is found in martial artist Bruce Lee who uses the martial arts style of Jeet Kune Do as depicted in Session 8, "Waltz For Venus". He has fluffy, dark green hair (which is inspired by Yusaku Matsuda's) and reddish brown eyes, one of which is artificial and lighter than the other. He is usually dressed in a blue leisure suit, with a yellow shirt and Lupin III inspired boots. A flashback in Session 6 revealed it was his fully functioning right eye which was surgically replaced by the cybernetic one (although Spike himself may not have conscious recollection of the procedure since he claims to have lost his natural eye in an "accident"). One theory is that his natural eye may have been lost during the pre-series massacre in which he supposedly "died". The purpose of this cybernetic eye is never explicitly stated, though it apparently gives him exceptional hand-eye coordination - particularly with firearms (Spike's gun of choice is a Jericho 941, as seen throughout the series). In the first episode, when facing a bounty-head using Red Eye, Spike mocks him, calling his moves "too slow". At first, this seems like posturing on Spike's part, but even with his senses and reflexes accelerated to superhuman levels by the drug, the bounty cannot even touch Spike. A recurring device throughout the entire show is a closeup on Spike's fully-natural left eye before dissolving to a flashback of his life as part of the syndicate. As said by Spike himself in the last episode, his right eye "only sees the present" and his left eye "only sees the past." Spike often has a bent cigarette between his lips, sometimes despite rain or "No Smoking" signs."""
+    def test_post_endpoint(self) -> NoReturn:
+        unauthenticated_response = self.client.post(
+            self.url,
+            {
+                "mal_id": 11,
+                "kitsu_id": 11,
+                "anilist_id": 11,
+                "name": "Hello w",
+                "name_kanji": "o world",
+                "character_image": None,
+                "about": "Hello world 1",
+            },
+            format="json",
+        )
+        self.assertEqual(
+            unauthenticated_response.status_code,
+            status.HTTP_401_UNAUTHORIZED,
+            "Unauthorized Response Status Code looks okay",
+        )
+        self.assertEqual(
+            unauthenticated_response.json(),
+            {"detail": "Authentication credentials were not provided."},
+            "Unauthorized Response looks okay",
         )
 
-    def test_character_api_response_given_kitsu_id(self):
-        res = self.client.get("/api/v1/characters", {"kitsu_id": 1})
-        actual_data = res.json()
-        actual_items = actual_data["items"][0]
-        assert actual_items["mal_id"] == 1
-        assert actual_items["kitsu_id"] == 1
-        assert actual_items["anilist_id"] == 1
-        assert actual_items["name"] == "Spike"
-        assert (
-            actual_items["about"]
-            == """Birthdate: June 26, 2044\nHeight: 185 cm (6' 1")\nWeight: 70 kg (155 lbs)\nBlood type: O\nPlanet of Origin: Mars\n\nSpike Spiegel is a tall and lean 27-year-old bounty hunter born on Mars. The inspiration for Spike is found in martial artist Bruce Lee who uses the martial arts style of Jeet Kune Do as depicted in Session 8, "Waltz For Venus". He has fluffy, dark green hair (which is inspired by Yusaku Matsuda's) and reddish brown eyes, one of which is artificial and lighter than the other. He is usually dressed in a blue leisure suit, with a yellow shirt and Lupin III inspired boots. A flashback in Session 6 revealed it was his fully functioning right eye which was surgically replaced by the cybernetic one (although Spike himself may not have conscious recollection of the procedure since he claims to have lost his natural eye in an "accident"). One theory is that his natural eye may have been lost during the pre-series massacre in which he supposedly "died". The purpose of this cybernetic eye is never explicitly stated, though it apparently gives him exceptional hand-eye coordination - particularly with firearms (Spike's gun of choice is a Jericho 941, as seen throughout the series). In the first episode, when facing a bounty-head using Red Eye, Spike mocks him, calling his moves "too slow". At first, this seems like posturing on Spike's part, but even with his senses and reflexes accelerated to superhuman levels by the drug, the bounty cannot even touch Spike. A recurring device throughout the entire show is a closeup on Spike's fully-natural left eye before dissolving to a flashback of his life as part of the syndicate. As said by Spike himself in the last episode, his right eye "only sees the present" and his left eye "only sees the past." Spike often has a bent cigarette between his lips, sometimes despite rain or "No Smoking" signs."""
+        # Protected response
+        self.client.credentials(HTTP_AUTHORIZATION=f"Token {self.normal_token.key}")
+        protected_response = self.client.post(
+            self.url,
+            {
+                "mal_id": 111,
+                "kitsu_id": 111,
+                "anilist_id": 111,
+                "name": "Hello wo",
+                "name_kanji": "lo world",
+                "character_image": None,
+                "about": "Hello world 11",
+            },
+            format="json",
+        )
+        self.assertEqual(
+            protected_response.status_code,
+            status.HTTP_403_FORBIDDEN,
+            "Protected Response Status Code looks okay",
+        )
+        self.assertEqual(
+            protected_response.json(),
+            {"detail": "You do not have permission to perform this action."},
+            "Protected Response looks okay",
         )
 
-    def test_character_api_response_given_anilist_id(self):
-        res = self.client.get("/api/v1/characters", {"anilist": 1})
-        actual_data = res.json()
-        actual_items = actual_data["items"][0]
-        assert actual_items["mal_id"] == 1
-        assert actual_items["kitsu_id"] == 1
-        assert actual_items["anilist_id"] == 1
-        assert actual_items["name"] == "Spike"
-        assert (
-            actual_items["about"]
-            == """Birthdate: June 26, 2044\nHeight: 185 cm (6' 1")\nWeight: 70 kg (155 lbs)\nBlood type: O\nPlanet of Origin: Mars\n\nSpike Spiegel is a tall and lean 27-year-old bounty hunter born on Mars. The inspiration for Spike is found in martial artist Bruce Lee who uses the martial arts style of Jeet Kune Do as depicted in Session 8, "Waltz For Venus". He has fluffy, dark green hair (which is inspired by Yusaku Matsuda's) and reddish brown eyes, one of which is artificial and lighter than the other. He is usually dressed in a blue leisure suit, with a yellow shirt and Lupin III inspired boots. A flashback in Session 6 revealed it was his fully functioning right eye which was surgically replaced by the cybernetic one (although Spike himself may not have conscious recollection of the procedure since he claims to have lost his natural eye in an "accident"). One theory is that his natural eye may have been lost during the pre-series massacre in which he supposedly "died". The purpose of this cybernetic eye is never explicitly stated, though it apparently gives him exceptional hand-eye coordination - particularly with firearms (Spike's gun of choice is a Jericho 941, as seen throughout the series). In the first episode, when facing a bounty-head using Red Eye, Spike mocks him, calling his moves "too slow". At first, this seems like posturing on Spike's part, but even with his senses and reflexes accelerated to superhuman levels by the drug, the bounty cannot even touch Spike. A recurring device throughout the entire show is a closeup on Spike's fully-natural left eye before dissolving to a flashback of his life as part of the syndicate. As said by Spike himself in the last episode, his right eye "only sees the present" and his left eye "only sees the past." Spike often has a bent cigarette between his lips, sometimes despite rain or "No Smoking" signs."""
+        # Superuser test
+        self.client.credentials(HTTP_AUTHORIZATION=f"Token {self.super_token.key}")
+        final_response = self.client.post(
+            self.url,
+            {
+                "mal_id": 1111,
+                "kitsu_id": 1111,
+                "anilist_id": 1111,
+                "name": "Hello wor",
+                "name_kanji": "llo world",
+                "character_image": None,
+                "about": "Hello world 111",
+            },
+            format="json",
         )
-
-    def test_character_api_response_given_name(self):
-        res = self.client.get("/api/v1/characters", {"name": "Spike"})
-        actual_data = res.json()
-        actual_items = actual_data["items"][0]
-        assert actual_items["mal_id"] == 1
-        assert actual_items["kitsu_id"] == 1
-        assert actual_items["anilist_id"] == 1
-        assert actual_items["name"] == "Spike"
-        assert (
-            actual_items["about"]
-            == """Birthdate: June 26, 2044\nHeight: 185 cm (6' 1")\nWeight: 70 kg (155 lbs)\nBlood type: O\nPlanet of Origin: Mars\n\nSpike Spiegel is a tall and lean 27-year-old bounty hunter born on Mars. The inspiration for Spike is found in martial artist Bruce Lee who uses the martial arts style of Jeet Kune Do as depicted in Session 8, "Waltz For Venus". He has fluffy, dark green hair (which is inspired by Yusaku Matsuda's) and reddish brown eyes, one of which is artificial and lighter than the other. He is usually dressed in a blue leisure suit, with a yellow shirt and Lupin III inspired boots. A flashback in Session 6 revealed it was his fully functioning right eye which was surgically replaced by the cybernetic one (although Spike himself may not have conscious recollection of the procedure since he claims to have lost his natural eye in an "accident"). One theory is that his natural eye may have been lost during the pre-series massacre in which he supposedly "died". The purpose of this cybernetic eye is never explicitly stated, though it apparently gives him exceptional hand-eye coordination - particularly with firearms (Spike's gun of choice is a Jericho 941, as seen throughout the series). In the first episode, when facing a bounty-head using Red Eye, Spike mocks him, calling his moves "too slow". At first, this seems like posturing on Spike's part, but even with his senses and reflexes accelerated to superhuman levels by the drug, the bounty cannot even touch Spike. A recurring device throughout the entire show is a closeup on Spike's fully-natural left eye before dissolving to a flashback of his life as part of the syndicate. As said by Spike himself in the last episode, his right eye "only sees the present" and his left eye "only sees the past." Spike often has a bent cigarette between his lips, sometimes despite rain or "No Smoking" signs."""
+        self.assertEqual(
+            final_response.status_code,
+            status.HTTP_201_CREATED,
+            "Super Response Status Code looks okay",
         )
-
-    def test_character_api_response_given_kanji_name(self):
-        res = self.client.get("/api/v1/characters", {"name": "スパイク・スピーゲル"})
-        actual_data = res.json()
-        actual_items = actual_data["items"][0]
-        assert actual_items["mal_id"] == 1
-        assert actual_items["kitsu_id"] == 1
-        assert actual_items["anilist_id"] == 1
-        assert actual_items["name"] == "Spike"
-        assert (
-            actual_items["about"]
-            == """Birthdate: June 26, 2044\nHeight: 185 cm (6' 1")\nWeight: 70 kg (155 lbs)\nBlood type: O\nPlanet of Origin: Mars\n\nSpike Spiegel is a tall and lean 27-year-old bounty hunter born on Mars. The inspiration for Spike is found in martial artist Bruce Lee who uses the martial arts style of Jeet Kune Do as depicted in Session 8, "Waltz For Venus". He has fluffy, dark green hair (which is inspired by Yusaku Matsuda's) and reddish brown eyes, one of which is artificial and lighter than the other. He is usually dressed in a blue leisure suit, with a yellow shirt and Lupin III inspired boots. A flashback in Session 6 revealed it was his fully functioning right eye which was surgically replaced by the cybernetic one (although Spike himself may not have conscious recollection of the procedure since he claims to have lost his natural eye in an "accident"). One theory is that his natural eye may have been lost during the pre-series massacre in which he supposedly "died". The purpose of this cybernetic eye is never explicitly stated, though it apparently gives him exceptional hand-eye coordination - particularly with firearms (Spike's gun of choice is a Jericho 941, as seen throughout the series). In the first episode, when facing a bounty-head using Red Eye, Spike mocks him, calling his moves "too slow". At first, this seems like posturing on Spike's part, but even with his senses and reflexes accelerated to superhuman levels by the drug, the bounty cannot even touch Spike. A recurring device throughout the entire show is a closeup on Spike's fully-natural left eye before dissolving to a flashback of his life as part of the syndicate. As said by Spike himself in the last episode, his right eye "only sees the present" and his left eye "only sees the past." Spike often has a bent cigarette between his lips, sometimes despite rain or "No Smoking" signs."""
-        )
-
-    def test_character_api_response_given_individual_url(self):
-        res = self.client.get("/api/v1/characters/1/")
-        actual_data = res.json()
-        assert actual_data["mal_id"] == 1
-        assert actual_data["kitsu_id"] == 1
-        assert actual_data["anilist_id"] == 1
-        assert actual_data["name"] == "Spike"
-        assert (
-            actual_data["about"]
-            == """Birthdate: June 26, 2044\nHeight: 185 cm (6' 1")\nWeight: 70 kg (155 lbs)\nBlood type: O\nPlanet of Origin: Mars\n\nSpike Spiegel is a tall and lean 27-year-old bounty hunter born on Mars. The inspiration for Spike is found in martial artist Bruce Lee who uses the martial arts style of Jeet Kune Do as depicted in Session 8, "Waltz For Venus". He has fluffy, dark green hair (which is inspired by Yusaku Matsuda's) and reddish brown eyes, one of which is artificial and lighter than the other. He is usually dressed in a blue leisure suit, with a yellow shirt and Lupin III inspired boots. A flashback in Session 6 revealed it was his fully functioning right eye which was surgically replaced by the cybernetic one (although Spike himself may not have conscious recollection of the procedure since he claims to have lost his natural eye in an "accident"). One theory is that his natural eye may have been lost during the pre-series massacre in which he supposedly "died". The purpose of this cybernetic eye is never explicitly stated, though it apparently gives him exceptional hand-eye coordination - particularly with firearms (Spike's gun of choice is a Jericho 941, as seen throughout the series). In the first episode, when facing a bounty-head using Red Eye, Spike mocks him, calling his moves "too slow". At first, this seems like posturing on Spike's part, but even with his senses and reflexes accelerated to superhuman levels by the drug, the bounty cannot even touch Spike. A recurring device throughout the entire show is a closeup on Spike's fully-natural left eye before dissolving to a flashback of his life as part of the syndicate. As said by Spike himself in the last episode, his right eye "only sees the present" and his left eye "only sees the past." Spike often has a bent cigarette between his lips, sometimes despite rain or "No Smoking" signs."""
+        self.assertEqual(
+            final_response.json(),
+            {
+                "mal_id": 1111,
+                "kitsu_id": 1111,
+                "anilist_id": 1111,
+                "name": "Hello wor",
+                "name_kanji": "llo world",
+                "character_image": None,
+                "about": "Hello world 111",
+            },
+            "Unauthorized Response looks okay",
         )
