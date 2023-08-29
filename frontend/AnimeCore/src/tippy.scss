@@ -1,0 +1,25 @@
+@import "tippy.js/dist/tippy.css";
+@import "tippy.js/animations/shift-away.css";
+@import "tippy.js/animations/scale.css";
+
+.tippy-box {
+    @apply bg-transparent;
+
+    &[data-theme~="elaine"] {
+        &[data-placement^="top"] > .tippy-arrow::before {
+            @apply border-t-primary-500;
+            border-width: 0.75vw 0.75vw 0;
+            bottom: -0.5vw;
+        }
+
+        &[data-placement^="bottom"] > .tippy-arrow::before {
+            @apply border-b-primary-500;
+            border-width: 0 0.75vw 0.75vw;
+            top: -0.5vw;
+        }
+    }
+}
+
+.tippy-content {
+    @apply p-0;
+}
