@@ -43,7 +43,7 @@
         "caret-pos": "^2.0.0",
         "cross-env": "^7.0.3",
         "dayjs": "^1.11.9",
-        "easytimer.js": "^4.5.4",
+        "easytimer.js": "^4.6.0",
         "eslint": "^8.48.0",
         "eslint-config-prettier": "^9.0.0",
         "eslint-plugin-svelte": "^2.33.0",
