@@ -1,10 +1,9 @@
 from apps.anime.models import AnimeModel
 from django.contrib.postgres.search import TrigramSimilarity
+from django.db.models import Q
 from django.db.models.functions import Greatest
 from django.db.models.query import QuerySet
 from django_filters import rest_framework as filters
-
-from django.db.models import Q
 
 
 class AnimeFilter(filters.FilterSet):
