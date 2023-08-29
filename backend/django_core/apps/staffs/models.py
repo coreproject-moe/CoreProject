@@ -4,6 +4,7 @@ from dynamic_filenames import FilePattern
 from mixins.models.created_at import CreatedAtMixin
 from mixins.models.is_locked import IsLockedMixin
 from mixins.models.updated_at import UpdatedAtMixin
+from django.contrib.postgres.indexes import GinIndex
 
 staff_upload_pattern = FilePattern(filename_pattern="staffs/{uuid:s}{ext}")
 
@@ -15,6 +16,13 @@ class StaffAlternateNameModel(models.Model):
         return f"{self.name}"
 
     class Meta:
+        indexes = [
+            GinIndex(
+                name="staff_alternate_idx",
+                fields=["name"],
+                opclasses=["gin_trgm_ops"],
+            ),
+        ]
         verbose_name = "Staff | People ( Alternate Name )"
         verbose_name_plural = "Staff | People ( Alternate Names )"
 
@@ -42,5 +50,12 @@ class StaffModel(CreatedAtMixin, UpdatedAtMixin, IsLockedMixin):
         return f"{self.pk}. {self.name}"
 
     class Meta:
+        indexes = [
+            GinIndex(
+                fields=["name", "given_name", "family_name"],
+                name="staff_name_idx",
+                opclasses=["gin_trgm_ops", "gin_trgm_ops", "gin_trgm_ops"],
+            ),
+        ]
         verbose_name = "Staff | People"
         verbose_name_plural = "Staffs | Peoples"

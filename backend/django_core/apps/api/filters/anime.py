@@ -35,6 +35,8 @@ class AnimeFilter(filters.FilterSet):
             )
             .order_by("-similiarity")
         )
+        print(query.explain())
+
         return query
 
     def mal_id_filter(
@@ -89,5 +91,17 @@ class AnimeFilter(filters.FilterSet):
     def staff_filter(
         self, queryset: QuerySet[AnimeModel], name: str, value: str
     ) -> QuerySet[AnimeModel]:
-        query = queryset.filter(staffs__name__in=value.split(","))
+        query = (
+            queryset.annotate(
+                similiarity=Greatest(
+                    TrigramSimilarity("staffs__name", value),
+                    TrigramSimilarity("staffs__given_name", value),
+                    TrigramSimilarity("staffs__family_name", value),
+                )
+            )
+            .filter(
+                similiarity__gte=0.3,
+            )
+            .order_by("-similiarity")
+        )
         return query
