@@ -1,10 +1,11 @@
 from apps.anime.models import AnimeModel
+from rest_framework import viewsets
 
 from ...bases.api_view import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from ...serializers.anime import AnimeGETSerializer, AnimePOSTSerializer
 
 
-class AnimeAPIView(ListCreateAPIView):
+class AnimeViewSet(viewsets.ViewSetMixin, ListCreateAPIView):
     queryset = AnimeModel.objects.all()
     serializer_class = AnimeGETSerializer
 
