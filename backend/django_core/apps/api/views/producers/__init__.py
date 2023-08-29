@@ -1,5 +1,5 @@
-from apps.producers.models import ProducerModel
 from apps.api.permissions import IsSuperUserOrReadOnly
+from apps.producers.models import ProducerModel
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, mixins, viewsets
 
