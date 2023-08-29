@@ -5,9 +5,9 @@ from .views.anime import (
     AnimeSpecificAPIView,
     AnimeViewSet,
 )
-from .views.characters import CharacterViewSet, CharacterSpecificAPIView
 from .views.anime.genre import AnimeGenresAPIView, AnimeGenresSpecificAPIView
 from .views.anime.theme import AnimeThemesAPIView, AnimeThemesSpecificAPIView
+from .views.characters import CharacterSpecificAPIView, CharacterViewSet
 from .views.user.login import LoginAPIView
 from .views.user.logout import LogoutAPIView
 from .views.producers import ProducerViewSet
