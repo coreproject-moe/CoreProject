@@ -17,6 +17,6 @@ urlpatterns = [
     path("anime/themes/", AnimeThemesAPIView.as_view()),
     path("anime/themes/<int:pk>/", AnimeThemesSpecificAPIView.as_view()),
     # User routes
-    path("user/login", LoginAPIView.as_view()),
+    path("user/login/", LoginAPIView.as_view()),
     path("user/logout/", LogoutAPIView.as_view()),
 ]
