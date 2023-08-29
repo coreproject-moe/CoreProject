@@ -1,11 +1,10 @@
-from rest_framework.test import APITestCase
-from apps.characters.models import CharacterModel
-
-from rest_framework import status
 from typing import NoReturn
-from apps.user.models import CustomUser as User
 
+from apps.characters.models import CharacterModel
+from apps.user.models import CustomUser as User
+from rest_framework import status
 from rest_framework.authtoken.models import Token
+from rest_framework.test import APITestCase
 
 
 class CharacterTestCases(APITestCase):
