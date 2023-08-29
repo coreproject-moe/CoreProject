@@ -35,7 +35,6 @@ class AnimeFilter(filters.FilterSet):
             )
             .order_by("-similiarity")
         )
-        print(query.explain())
 
         return query
 
@@ -97,6 +96,7 @@ class AnimeFilter(filters.FilterSet):
                     TrigramSimilarity("staffs__name", value),
                     TrigramSimilarity("staffs__given_name", value),
                     TrigramSimilarity("staffs__family_name", value),
+                    TrigramSimilarity("staffs__alternate_names__name", value),
                 )
             )
             .filter(
@@ -104,4 +104,6 @@ class AnimeFilter(filters.FilterSet):
             )
             .order_by("-similiarity")
         )
+        print(query.query)
+
         return query
