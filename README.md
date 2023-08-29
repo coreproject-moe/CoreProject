@@ -85,7 +85,9 @@ See the [open issues](https://github.com/baseplate-admin/CoreProject/issues) and
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Contributing
+
 Read [CONTRIBUTING.md](https://github.com/baseplate-admin/CoreProject/blob/master/CONTRIBUTING.md) for more details.
+
 -   If you have a suggestion/idea that would make this project better, please create a pull request. All pull requests will be reviewed by us, and adjusted.
 
 -   You can also [open a new issue](https://github.com/baseplate-admin/CoreProject/issues/new/choose) or [help us with an existing one](https://github.com/baseplate-admin/CoreProject/issues).
