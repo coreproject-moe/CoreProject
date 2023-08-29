@@ -1,9 +1,8 @@
 from apps.anime.models.anime_theme import AnimeThemeModel
+from apps.api.permissions import IsSuperUserOrReadOnly
+from rest_framework import generics
 
 from ...serializers.anime.theme import AnimeThemeSerializer
-
-from rest_framework import generics
-from apps.api.permissions import IsSuperUserOrReadOnly
 
 
 class AnimeThemesAPIView(generics.ListCreateAPIView):

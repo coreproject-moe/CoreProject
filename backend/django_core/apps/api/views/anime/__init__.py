@@ -1,12 +1,10 @@
 from apps.anime.models import AnimeModel
+from apps.api.permissions import IsSuperUserOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets
+from rest_framework import generics, mixins, viewsets
 
-from rest_framework import mixins
-from rest_framework import generics
 from ...filters.anime import AnimeFilter
 from ...serializers.anime import AnimeGETSerializer, AnimePOSTSerializer
-from apps.api.permissions import IsSuperUserOrReadOnly
 
 
 class AnimeViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet):

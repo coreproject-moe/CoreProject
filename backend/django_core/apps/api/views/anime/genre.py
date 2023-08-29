@@ -1,8 +1,8 @@
 from apps.anime.models.anime_genre import AnimeGenreModel
+from apps.api.permissions import IsSuperUserOrReadOnly
+from rest_framework import generics
 
 from ...serializers.anime.genre import AnimeGenreSerializer
-from rest_framework import generics
-from apps.api.permissions import IsSuperUserOrReadOnly
 
 
 class AnimeGenresAPIView(generics.ListCreateAPIView):
