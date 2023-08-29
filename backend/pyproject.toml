@@ -63,6 +63,8 @@ python-dateutil = "^2.8.2"
 djangorestframework = "^3.14.0"
 drf-spectacular = "^0.26.4"
 drf-spectacular-sidecar = "^2023.8.1"
+# Django filters
+django-filter = "^23.2"
 
 [tool.poetry.group.dev.dependencies]
 ## Watchfiles
