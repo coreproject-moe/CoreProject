@@ -1,9 +1,9 @@
-from rest_framework import views
-from ...serializers.user.token import TokenSerializer
 from django.http import HttpRequest
-from rest_framework.response import Response
+from rest_framework import status, views
 from rest_framework.authtoken.models import Token
-from rest_framework import status
+from rest_framework.response import Response
+
+from ...serializers.user.token import TokenSerializer
 
 
 class LogoutAPIView(views.APIView):

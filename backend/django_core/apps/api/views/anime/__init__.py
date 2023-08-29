@@ -1,4 +1,5 @@
 from apps.anime.models import AnimeModel
+
 from ...bases.api_view import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from ...serializers.anime import AnimeGETSerializer, AnimePOSTSerializer
 
