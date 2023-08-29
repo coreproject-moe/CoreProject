@@ -34,7 +34,7 @@
         "@types/marked": "^5.0.1",
         "@types/node": "^20.5.7",
         "@types/nprogress": "^0.2.0",
-        "@typescript-eslint/eslint-plugin": "^6.4.1",
+        "@typescript-eslint/eslint-plugin": "^6.5.0",
         "@typescript-eslint/parser": "^6.4.1",
         "@zxcvbn-ts/core": "^3.0.3",
         "@zxcvbn-ts/language-common": "^3.0.3",
