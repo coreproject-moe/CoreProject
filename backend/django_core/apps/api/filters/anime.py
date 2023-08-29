@@ -14,7 +14,10 @@ class AnimeFilter(filters.FilterSet):
     anilist_id = filters.CharFilter(method="anilist_id_filter", label="Anilist ID Filter")
     # many to many fields
     genre = filters.CharFilter(method="genre_filter", label="Genre Filter")
-    themes = filters.CharFilter(method="themes_filter", label="Themes Filter")
+    themes = filters.CharFilter(method="themes_filter", label="Theme Filter")
+    characters = filters.CharFilter(method="character_filter", label="Character Filter")
+    studios = filters.CharFilter(method="studio_filter", label="Studio Filter")
+    producers = filters.CharFilter(method="producer_filter", label="Producer Filter")
 
     def name_filter(
         self, queryset: QuerySet[AnimeModel], name, value: str
@@ -69,4 +72,16 @@ class AnimeFilter(filters.FilterSet):
         self, queryset: QuerySet[AnimeModel], name: str, value: str
     ) -> QuerySet[AnimeModel]:
         query = queryset.filter(characters__name__in=value.split(","))
+        return query
+
+    def studio_filter(
+        self, queryset: QuerySet[AnimeModel], name: str, value: str
+    ) -> QuerySet[AnimeModel]:
+        query = queryset.filter(studios__name__in=value.split(","))
+        return query
+
+    def producer_filter(
+        self, queryset: QuerySet[AnimeModel], name: str, value: str
+    ) -> QuerySet[AnimeModel]:
+        query = queryset.filter(producers__name__in=value.split(","))
         return query
