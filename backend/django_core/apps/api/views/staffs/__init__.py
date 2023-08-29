@@ -1,5 +1,5 @@
-from apps.staffs.models import StaffModel
 from apps.api.permissions import IsSuperUserOrReadOnly
+from apps.staffs.models import StaffModel
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, mixins, viewsets
 

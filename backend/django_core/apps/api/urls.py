@@ -8,10 +8,10 @@ from .views.anime import (
 from .views.anime.genre import AnimeGenresAPIView, AnimeGenresSpecificAPIView
 from .views.anime.theme import AnimeThemesAPIView, AnimeThemesSpecificAPIView
 from .views.characters import CharacterSpecificAPIView, CharacterViewSet
+from .views.producers import ProducerSpecificAPIView, ProducerViewSet
+from .views.staffs import StaffSpecificAPIView, StaffViewSet
 from .views.user.login import LoginAPIView
 from .views.user.logout import LogoutAPIView
-from .views.producers import ProducerViewSet, ProducerSpecificAPIView
-from .views.staffs import StaffSpecificAPIView, StaffViewSet
 
 base_router = DefaultRouter()
 base_router.register(r"anime", AnimeViewSet, basename="anime")
