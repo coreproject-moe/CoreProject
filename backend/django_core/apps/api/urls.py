@@ -10,10 +10,12 @@ from .views.anime.genre import AnimeGenresAPIView, AnimeGenresSpecificAPIView
 from .views.anime.theme import AnimeThemesAPIView, AnimeThemesSpecificAPIView
 from .views.user.login import LoginAPIView
 from .views.user.logout import LogoutAPIView
+from .views.producers import ProducerViewSet
 
 base_router = DefaultRouter()
 base_router.register(r"anime", AnimeViewSet, basename="anime")
 base_router.register(r"character", CharacterViewSet, basename="character")
+base_router.register(r"producer", ProducerViewSet, basename="producer")
 
 urlpatterns = [
     path("", include(base_router.urls)),
