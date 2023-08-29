@@ -10,12 +10,14 @@ from .views.anime.theme import AnimeThemesAPIView, AnimeThemesSpecificAPIView
 from .views.characters import CharacterSpecificAPIView, CharacterViewSet
 from .views.user.login import LoginAPIView
 from .views.user.logout import LogoutAPIView
-from .views.producers import ProducerViewSet
+from .views.producers import ProducerViewSet, ProducerSpecificAPIView
+from .views.staffs import StaffSpecificAPIView, StaffViewSet
 
 base_router = DefaultRouter()
 base_router.register(r"anime", AnimeViewSet, basename="anime")
 base_router.register(r"character", CharacterViewSet, basename="character")
 base_router.register(r"producer", ProducerViewSet, basename="producer")
+base_router.register(r"staff", StaffViewSet, basename="staff")
 
 urlpatterns = [
     path("", include(base_router.urls)),
@@ -30,4 +32,8 @@ urlpatterns = [
     path("user/logout/", LogoutAPIView.as_view()),
     # Character specific routes
     path("character/<int:pk>/", CharacterSpecificAPIView.as_view()),
+    # Producer specific routes
+    path("producer/<int:pk>/", ProducerSpecificAPIView.as_view()),
+    # Staff specific routes
+    path("staff/<int:pk>/", StaffSpecificAPIView.as_view()),
 ]
