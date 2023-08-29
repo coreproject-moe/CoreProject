@@ -12,6 +12,7 @@
 <IntersectionObserver
     once={true}
     let:intersecting
+    class="h-full"
 >
     {#if intersecting}
         <Image
