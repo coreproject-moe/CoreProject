@@ -1,13 +1,19 @@
 from apps.anime.models import AnimeModel
 from rest_framework import viewsets
-
+from django_filters.rest_framework import DjangoFilterBackend
 from ...bases.api_view import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from ...serializers.anime import AnimeGETSerializer, AnimePOSTSerializer
+from ...filters.anime import AnimeFilter
 
 
 class AnimeViewSet(viewsets.ViewSetMixin, ListCreateAPIView):
     queryset = AnimeModel.objects.all()
     serializer_class = AnimeGETSerializer
+    # Filters
+    filter_backends = [
+        DjangoFilterBackend,
+    ]
+    filterset_class = AnimeFilter
 
 
 class AnimeSpecificAPIView(RetrieveUpdateDestroyAPIView):
