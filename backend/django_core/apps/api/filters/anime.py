@@ -14,7 +14,7 @@ class AnimeFilter(filters.FilterSet):
     anilist_id = filters.CharFilter(method="anilist_id_filter", label="Anilist ID Filter")
     # many to many fields
     genre = filters.CharFilter(method="genre_filter", label="Genre Filter")
-    themes = filters.CharFilter(method="themes_filter", label="Theme Filter")
+    themes = filters.CharFilter(method="theme_filter", label="Theme Filter")
     characters = filters.CharFilter(method="character_filter", label="Character Filter")
     studios = filters.CharFilter(method="studio_filter", label="Studio Filter")
     producers = filters.CharFilter(method="producer_filter", label="Producer Filter")
