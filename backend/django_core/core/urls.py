@@ -17,7 +17,6 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
-from rest_framework.authtoken import views as rest_framework_authtoken_views
 
 from . import views
 
@@ -52,11 +51,6 @@ urlpatterns = [
     #   API
     # ========
     path("api/v2/", include("apps.api.urls")),
-    path(
-        "api/v2/token-auth/",
-        rest_framework_authtoken_views.obtain_auth_token,
-        name="api-token-auth",
-    ),
     # Swagger
     path("api/v2/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(

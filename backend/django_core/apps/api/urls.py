@@ -7,6 +7,7 @@ from .views.anime import (
 from .views.anime.genre import AnimeGenresAPIView, AnimeGenresSpecificAPIView
 from .views.anime.theme import AnimeThemesAPIView, AnimeThemesSpecificAPIView
 from .views.user.logout import LogoutAPIView
+from .views.user.login import LoginAPIView
 
 urlpatterns = [
     path("anime/", AnimeAPIView.as_view()),
@@ -16,5 +17,6 @@ urlpatterns = [
     path("anime/themes/", AnimeThemesAPIView.as_view()),
     path("anime/themes/<int:pk>/", AnimeThemesSpecificAPIView.as_view()),
     # User routes
+    path("user/login", LoginAPIView.as_view()),
     path("user/logout/", LogoutAPIView.as_view()),
 ]
