@@ -1,15 +1,15 @@
-from django.contrib.auth.models import User
-from django.http import HttpRequest
-
-SAFE_METHODS = ("GET", "HEAD", "OPTIONS")
+from rest_framework.permissions import SAFE_METHODS, BasePermission
 
 
-class IsSuperUser:
-    def __init__(self, request: HttpRequest, user: User) -> None:
-        self.request = request
-        self.user = user
+class IsSuperUserOrReadOnly(BasePermission):
+    """
+    The request is authenticated as a superuser, or is a read-only request.
+    """
 
-    def has_permissions(self) -> bool:
-        if self.user.is_superuser and self.request.method not in SAFE_METHODS:
-            return True
-        return False
+    def has_permission(self, request, view):
+        return bool(
+            request.method in SAFE_METHODS
+            or request.user
+            and request.user.is_authenticated
+            and request.user.is_superuser
+        )

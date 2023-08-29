@@ -45,12 +45,14 @@ class AnimeModel(CreatedAtMixin, UpdatedAtMixin, IsLockedMixin):
         unique=True,
         null=False,
         max_length=1024,
+        db_index=True,
     )
     name_japanese = models.CharField(
         default="",
         null=False,
         blank=True,
         max_length=1024,
+        db_index=True,
     )
     name_synonyms = models.ManyToManyField(AnimeNameSynonymModel, blank=True)
 
@@ -100,7 +102,6 @@ class AnimeModel(CreatedAtMixin, UpdatedAtMixin, IsLockedMixin):
         return f"{self.name}"
 
     class Meta:
-        verbose_name = "Anime"
         indexes = [
             GinIndex(
                 fields=["name", "name_japanese"],
@@ -108,3 +109,4 @@ class AnimeModel(CreatedAtMixin, UpdatedAtMixin, IsLockedMixin):
                 opclasses=["gin_trgm_ops", "gin_trgm_ops"],
             ),
         ]
+        verbose_name = "Anime"

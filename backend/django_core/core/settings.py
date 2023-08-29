@@ -89,9 +89,14 @@ INSTALLED_APPS = [
     # Tailwind CSS
     "tailwind",
     "tailwind_src",  # Our custom app
-    # Api ( Django-Ninja )
-    "ninja",
-    "apps.api",
+    # Api
+    "rest_framework",
+    "rest_framework.authtoken",
+    "drf_spectacular",
+    "drf_spectacular_sidecar",
+    "django_filters",
+    "crispy_forms",
+    "crispy_bootstrap4",
     # Models
     "apps.anime",
     "apps.trackers",
@@ -101,6 +106,22 @@ INSTALLED_APPS = [
     "apps.episodes",
 ]
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+# Rest framework
+REST_FRAMEWORK = {
+    # YOUR SETTINGS
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.TokenAuthentication",
+    ),
+}
+SPECTACULAR_SETTINGS = {
+    "SWAGGER_UI_DIST": "SIDECAR",  # shorthand to use the sidecar instead
+    "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
+    "REDOC_DIST": "SIDECAR",
+    # OTHER SETTINGS
+}
 # Debug Toolbar Add
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install-the-app
 if DEBUG:
@@ -122,8 +143,6 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     # Cors headers
     "corsheaders.middleware.CorsMiddleware",
-    # Allow Patch files
-    "ninja_put_patch_file_upload_middleware.middlewares.process_put_patch",
     # Django
     "django.middleware.cache.UpdateCacheMiddleware",  # Cache
     "django.middleware.common.CommonMiddleware",
@@ -214,7 +233,8 @@ if CACHE_MIDDLEWARE_SECONDS != 0:
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("POSTGRES_NAME", "postgres"),
+        # Database name
+        "NAME": os.environ.get("POSTGRES_NAME", "coreproject"),
         "USER": os.environ.get("POSTGRES_USER", "postgres"),
         "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "supersecretpassword"),
         "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
