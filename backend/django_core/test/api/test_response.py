@@ -144,3 +144,4 @@ class CharacterTestCases(APITestCase):
             },
             "Super Response looks okay",
         )
+        self.assertEqual(CharacterModel.objects.get(mal_id=1111).name, "Hello wor")
