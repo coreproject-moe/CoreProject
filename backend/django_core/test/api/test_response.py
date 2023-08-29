@@ -142,5 +142,5 @@ class CharacterTestCases(APITestCase):
                 "character_image": None,
                 "about": "Hello world 111",
             },
-            "Unauthorized Response looks okay",
+            "Super Response looks okay",
         )
