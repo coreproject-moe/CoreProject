@@ -1,14 +1,17 @@
 from apps.anime.models.anime_genre import AnimeGenreModel
 
-from ...bases.api_view import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from ...serializers.anime.genre import AnimeGenreSerializer
+from rest_framework import generics
+from apps.api.permissions import IsSuperUserOrReadOnly
 
 
-class AnimeGenresAPIView(ListCreateAPIView):
+class AnimeGenresAPIView(generics.ListCreateAPIView):
     queryset = AnimeGenreModel.objects.filter(type__icontains="anime")
     serializer_class = AnimeGenreSerializer
+    permission_classes = (IsSuperUserOrReadOnly,)
 
 
-class AnimeGenresSpecificAPIView(RetrieveUpdateDestroyAPIView):
+class AnimeGenresSpecificAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = AnimeGenreModel.objects.filter(type__icontains="anime")
     serializer_class = AnimeGenreSerializer
+    permission_classes = (IsSuperUserOrReadOnly,)

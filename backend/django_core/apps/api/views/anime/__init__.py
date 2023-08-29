@@ -2,23 +2,27 @@ from apps.anime.models import AnimeModel
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 
-from ...bases.api_view import ListCreateAPIView, RetrieveUpdateDestroyAPIView
+from rest_framework import mixins
+from rest_framework import generics
 from ...filters.anime import AnimeFilter
 from ...serializers.anime import AnimeGETSerializer, AnimePOSTSerializer
+from apps.api.permissions import IsSuperUserOrReadOnly
 
 
-class AnimeViewSet(viewsets.ViewSetMixin, ListCreateAPIView):
+class AnimeViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = AnimeModel.objects.all()
     serializer_class = AnimeGETSerializer
     # Filters
-    filter_backends = [
-        DjangoFilterBackend,
-    ]
+    filter_backends = (DjangoFilterBackend,)
     filterset_class = AnimeFilter
 
+    # Permissions
+    permission_classes = (IsSuperUserOrReadOnly,)
 
-class AnimeSpecificAPIView(RetrieveUpdateDestroyAPIView):
+
+class AnimeSpecificAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = AnimeModel.objects.all()
+    permission_classes = (IsSuperUserOrReadOnly,)
 
     def get_serializer_class(self):
         if self.request.method == "GET":
