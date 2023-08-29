@@ -1,10 +1,8 @@
 from apps.characters.models import CharacterModel
-from django.db.models import Q
+from django.contrib.postgres.search import TrigramSimilarity
 from django.db.models.functions import Greatest
 from django.db.models.query import QuerySet
 from django_filters import rest_framework as filters
-
-from django.contrib.postgres.search import TrigramSimilarity
 
 
 class CharacterFilter(filters.FilterSet):

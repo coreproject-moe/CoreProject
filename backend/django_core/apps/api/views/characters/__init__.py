@@ -1,5 +1,5 @@
-from apps.characters.models import CharacterModel
 from apps.api.permissions import IsSuperUserOrReadOnly
+from apps.characters.models import CharacterModel
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, mixins, viewsets
 
