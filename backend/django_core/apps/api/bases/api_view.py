@@ -1,4 +1,4 @@
-from rest_framework import serializers, status, views
+from rest_framework import serializers, status, views, generics
 from rest_framework.response import Response
 
 
@@ -15,21 +15,15 @@ def write_protected_function(self: views.APIView, serializer: serializers.ModelS
         )
 
 
-# https://stackoverflow.com/a/45087505
-SuperUserWriteProtectedAPIView = type(
-    "SuperUserWriteProtectedAPIView",
-    (object,),
-    {"perform_create": write_protected_function},
-)
-
-SuperUserUpdateProtectedAPIView = type(
-    "SuperUserUpdateProtectedAPIView",
-    (object,),
-    {"perform_update": write_protected_function},
-)
+class ListCreateAPIView(generics.ListCreateAPIView):
+    def perform_create(self, *args, **kwargs):
+        write_protected_function(*args, **kwargs)
 
 
-class SuperUserDeleteProtectedAPIView:
+class RetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    def perform_update(self, *args, **kwargs):
+        write_protected_function(*args, **kwargs)
+
     def perform_destroy(self: views.APIView, instance):
         if self.request.user.is_superuser:
             instance.delete()
