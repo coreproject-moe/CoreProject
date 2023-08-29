@@ -72,7 +72,18 @@ class AnimeFilter(filters.FilterSet):
     def character_filter(
         self, queryset: QuerySet[AnimeModel], name: str, value: str
     ) -> QuerySet[AnimeModel]:
-        query = queryset.filter(characters__name__in=value.split(","))
+        query = (
+            queryset.annotate(
+                similiarity=Greatest(
+                    TrigramSimilarity("characters__name__in", value.split(",")),
+                    TrigramSimilarity("characters__name_kanji__in", value.split(",")),
+                )
+            )
+            .filter(
+                similiarity__gte=0.3,
+            )
+            .order_by("-similiarity")
+        )
         return query
 
     def studio_filter(
