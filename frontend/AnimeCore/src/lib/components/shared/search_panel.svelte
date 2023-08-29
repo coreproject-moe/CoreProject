@@ -42,6 +42,7 @@
                     <ScrollArea
                         offsetScrollbar
                         gradientMask
+                        class="md:pb-[2vw]"
                     >
                         {#each Array(6) as _}
                             <a

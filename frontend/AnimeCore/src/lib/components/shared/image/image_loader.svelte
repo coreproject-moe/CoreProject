@@ -2,9 +2,9 @@
     import Image from "./image.svelte";
     import IntersectionObserver from "./intersection_observer.svelte";
 
-    export let src: string;
-    export let alt = "";
-    export let style = "";
+    export let src: string,
+        alt = "",
+        style = "";
     let klass = "";
     export { klass as class };
 </script>

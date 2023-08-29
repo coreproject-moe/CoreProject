@@ -9,7 +9,6 @@
     import { derived } from "svelte/store";
 
     let anime_id = derived(page, (page) => page.params.id);
-
     let anime = anime_list?.find((anime) => anime.id === Number($anime_id));
 
     const opengraph_html = new OpengraphGenerator({
@@ -27,12 +26,13 @@
 </svelte:head>
 
 {#if anime}
-    <!--
-        TopRounded is due to how skeleton works with it's AppRail.
+    <!-- 
+        TopRounded is due to how skeleton works with it's AppRail. 
         We are essentially monkeypatching border-top-left-radius
     -->
     <TopRounded class="fixed z-10 hidden w-[1.5vw] text-surface-900 md:flex" />
     <AnimeInfoPage
+        anime_id={anime.id}
         anime_name={anime.name}
         japanese_name={anime.japanese_name}
         anime_episodes_count={anime.episodes_count}

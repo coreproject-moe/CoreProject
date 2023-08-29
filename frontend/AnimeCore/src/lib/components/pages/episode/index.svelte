@@ -28,55 +28,54 @@
     };
 
     const button_state_mapping: { [key: string]: boolean } = {
-        lights: false
-    };
-
-    const video_player_mapping: {
-        preferences: {
-            [key: string]: {
-                text: string;
-            };
-        };
-        options: {
-            [key: string]: {
-                component: typeof SvelteComponent<{}>;
-                link: string;
-                class: string;
-                text: string;
-            };
-        };
-    } = {
-        preferences: {
-            lights: {
-                text: "Lights"
-            }
+            lights: false
         },
-        options: {
-            download: {
-                component: Download,
-                link: "./",
-                class: "w-4 md:w-[1.4vw]",
-                text: "Download"
+        video_player_mapping: {
+            preferences: {
+                [key: string]: {
+                    text: string;
+                };
+            };
+            options: {
+                [key: string]: {
+                    component: typeof SvelteComponent<{}>;
+                    link: string;
+                    class: string;
+                    text: string;
+                };
+            };
+        } = {
+            preferences: {
+                lights: {
+                    text: "Lights"
+                }
             },
-            prev: {
-                component: Next,
-                link: "./",
-                class: "w-4 md:w-[1.4vw] rotate-180",
-                text: "Previous Episode"
-            },
-            next: {
-                component: Next,
-                link: "./",
-                class: "w-4 md:w-[1.4vw]",
-                text: "Next Episode"
+            options: {
+                download: {
+                    component: Download,
+                    link: "./",
+                    class: "w-4 md:w-[1.4vw]",
+                    text: "Download"
+                },
+                prev: {
+                    component: Next,
+                    link: "./",
+                    class: "w-4 md:w-[1.4vw] rotate-180",
+                    text: "Previous Episode"
+                },
+                next: {
+                    component: Next,
+                    link: "./",
+                    class: "w-4 md:w-[1.4vw]",
+                    text: "Next Episode"
+                }
             }
-        }
-    };
+        };
 
     /** Episode Contents */
-    export let episode_number: number;
-    export let episode_details = `The autumn he was twelve, piano prodigy Kousei Arima suddenly found himself unable to play the piano after his mother's death. Ever since then, it's like he's been frozen in time. His childhood friend, Tsubaki Sawabe, watches over him with concern; one day, she invites him on a double date. Kousei's other childhood friend, Ryouta Watari, is being introduced to a certain girl. Kousei reluctantly heads over to the rendezvous spot. There, he sees a girl playing a melodica. This girl, who allegedly has a crush on Watari, is Kaori Miyazono. And she turns out to be a violinist!`;
-    export let episode_name = `Monotone/Colorful`;
+    export let episode_number: number,
+        episode_details = `The autumn he was twelve, piano prodigy Kousei Arima suddenly found himself unable to play the piano after his mother's death. Ever since then, it's like he's been frozen in time. His childhood friend, Tsubaki Sawabe, watches over him with concern; one day, she invites him on a double date. Kousei's other childhood friend, Ryouta Watari, is being introduced to a certain girl. Kousei reluctantly heads over to the rendezvous spot. There, he sees a girl playing a melodica. This girl, who allegedly has a crush on Watari, is Kaori Miyazono. And she turns out to be a violinist!`,
+        episode_name = `Monotone/Colorful`;
 </script>
 
 {#if button_state_mapping.lights}

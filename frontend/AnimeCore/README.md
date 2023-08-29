@@ -30,14 +30,14 @@
   <a href="https://results.pre-commit.ci/latest/github/tokitou-san/CoreProject-V3-UI/v3"><img src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white&style=for-the-badge" alt="pre-commit.ci status"></a>
   <a href='https://discord.gg/7AraSmKqnN'><img alt="Discord" src="https://img.shields.io/discord/1039894823626362931?style=for-the-badge"></a>
 </p>
-
+    
 ## Screenshots
 
 <p float="left">
-  <img src="https://github.com/tokitou-san/CoreProject-V3-UI/assets/114811070/0d192748-391d-498b-9bb9-31947c5f03f8" alt="Home Page Mockup" width=49%>
-  <img src="https://github.com/tokitou-san/CoreProject-V3-UI/assets/114811070/2efe334d-148b-4539-bba5-4422e0907ec3" alt="Anime Info Page Mockup" width=49%>
-  <img src="https://github.com/tokitou-san/CoreProject-V3-UI/assets/114811070/a4bfc77a-f21f-4c47-90cd-ace2083b7441" alt="Register Page Mockup" width=49%>
-  <img src="https://github.com/tokitou-san/CoreProject-V3-UI/assets/114811070/d5f4b322-03d5-47ba-b305-39d5c5395a13" alt="Register Page Mockup" width=49%>
+  <img src="https://github.com/tokitou-san/CoreProject-V3-UI/assets/114811070/9b6ee595-2660-4baf-9967-a8c4f1ddee94" alt="Home Page Mockup" width=49%>
+  <img src="https://github.com/tokitou-san/CoreProject-V3-UI/assets/114811070/b2d74f9d-68d2-4e75-bbda-0baff1c0eb87" alt="Anime Info Page Mockup" width=49%>
+  <img src="https://github.com/tokitou-san/CoreProject-V3-UI/assets/114811070/95fe8c30-1628-4b38-9c2a-861b5df27fca" alt="Explore Page Mockup" width=49%>
+  <img src="https://github.com/tokitou-san/CoreProject-V3-UI/assets/114811070/d5f4b322-03d5-47ba-b305-39d5c5395a13" alt="Episode Page Mockup" width=49%>
 
 ## Contributing
 
