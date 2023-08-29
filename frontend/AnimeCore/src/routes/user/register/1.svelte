@@ -24,11 +24,6 @@
 
     zxcvbnOptions.setOptions(options);
 
-    // Broken
-    // See : https://github.com/pablo-abc/felte/issues/223#issuecomment-1510467575
-    // Dont remove this unless you know what you are doing
-    // Is meant to be a temporary workaround
-
     const dispatch = createEventDispatcher();
 
     const schema = z

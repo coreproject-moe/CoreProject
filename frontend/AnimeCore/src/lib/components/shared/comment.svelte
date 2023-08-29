@@ -6,21 +6,21 @@
     import Heart from "$icons/heart.svelte";
     import { Accordion, AccordionItem } from "@skeletonlabs/skeleton";
 
-    export let comment_user_profile_pic: string;
-    export let comment_username: string;
-    export let comment_date: string;
-    export let comment_content: string;
-    export let comment_likes: number;
-    export let comment_replies: Array<{
-        user: {
-            username: string;
-            profile_pic: string;
-        };
-        date: string;
-        content: string;
-        likes: number;
-    }>;
-    export let open: boolean;
+    export let comment_user_profile_pic: string,
+        comment_username: string,
+        comment_date: string,
+        comment_content: string,
+        comment_likes: number,
+        comment_replies: Array<{
+            user: {
+                username: string;
+                profile_pic: string;
+            };
+            date: string;
+            content: string;
+            likes: number;
+        }>,
+        open: boolean;
 </script>
 
 <comment class="flex gap-3 md:gap-[1vw]">

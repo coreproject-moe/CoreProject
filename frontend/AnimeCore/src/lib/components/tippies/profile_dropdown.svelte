@@ -9,17 +9,17 @@
     let email_element_scroll_percent = 0,
         username_element_scroll_percent = 0;
 
-    function mouseenter(el: HTMLElement) {
-        document.body.classList.add("select-none");
-        el.classList.add("select-text");
-    }
+    const mouseenter = (el: HTMLElement) => {
+            document.body.classList.add("select-none");
+            el.classList.add("select-text");
+        },
+        mouseleave = (el: HTMLElement) => {
+            el.classList.remove("select-text");
+            document.body.classList.remove("select-none");
+        };
 
-    function mouseleave(el: HTMLElement) {
-        el.classList.remove("select-text");
-        document.body.classList.remove("select-none");
-    }
     // Icons
-    let dropdown_icons: {
+    const dropdown_icons: {
         [key in string]: {
             name: string;
             icon: {

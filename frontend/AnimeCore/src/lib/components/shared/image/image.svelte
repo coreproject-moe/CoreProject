@@ -1,9 +1,9 @@
 <script lang="ts">
     import { fade } from "svelte/transition";
 
-    export let src: string;
-    export let alt: string;
-    export let style: string;
+    export let src: string,
+        alt = "",
+        style = "";
     let klass: string;
     export { klass as class };
 </script>

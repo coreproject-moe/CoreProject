@@ -29,86 +29,85 @@
     import type { SvelteComponent } from "svelte";
     import Comment from "$components/shared/comment.svelte";
 
-    export let anime_name: string;
-    export let japanese_name: string;
-    export let anime_episodes_count: number;
-    export let anime_date: string;
-    export let anime_synopsis: string;
-    export let anime_banner: string;
-    export let anime_cover: string;
-
-    export let anime_episodes: any;
+    export let anime_id: number,
+        anime_episodes: any,
+        anime_name: string,
+        japanese_name: string,
+        anime_episodes_count: number,
+        anime_date: string,
+        anime_synopsis: string,
+        anime_banner: string,
+        anime_cover: string;
 
     const anime_details = {
-        format: "TV",
-        episodes: "22",
-        "episode Duration": "26 Minutes",
-        status: "finished",
-        "start date": new FormatDate("2012-04-23").format_to_human_readable_form,
-        "end date": new FormatDate("2012-09-16").format_to_human_readable_form,
-        season: new FormatDate("2012-4").format_to_season,
-        studios: "Kyoto Animation",
-        producers: ["Lantis", "Kadokawa Shoten", "Klock Worx", "chara-ani.com", "Animation Do"],
-        source: "Night Novel"
-        //tags: []
-    };
-
-    const icon_mapping: {
-        [key: string]: {
+            format: "TV",
+            episodes: "22",
+            "episode Duration": "26 Minutes",
+            status: "finished",
+            "start date": new FormatDate("2012-04-23").format_to_human_readable_form,
+            "end date": new FormatDate("2012-09-16").format_to_human_readable_form,
+            season: new FormatDate("2012-4").format_to_season,
+            studios: "Kyoto Animation",
+            producers: ["Lantis", "Kadokawa Shoten", "Klock Worx", "chara-ani.com", "Animation Do"],
+            source: "Night Novel"
+            //tags: []
+        },
+        icon_mapping: {
             [key: string]: {
-                icon: {
-                    component: typeof SvelteComponent<{}>;
-                    class: string;
-                    color?: string;
-                    variant?: boolean | string;
-                    label?: string;
+                [key: string]: {
+                    icon: {
+                        component: typeof SvelteComponent<{}>;
+                        class: string;
+                        color?: string;
+                        variant?: boolean | string;
+                        label?: string;
+                    };
                 };
             };
+        } = {
+            anime_options: {
+                read: {
+                    icon: {
+                        component: Read,
+                        class: "w-4 md:w-[1.5vw] text-surface-500"
+                    }
+                },
+                listen: {
+                    icon: {
+                        component: Listen,
+                        class: "w-4 md:w-[1.5vw] text-surface-500"
+                    }
+                }
+            },
+            user_options_icons: {
+                video: {
+                    icon: {
+                        component: Video,
+                        variant: false,
+                        class: "w-4 md:w-[1.125vw]"
+                    }
+                },
+                edit: {
+                    icon: {
+                        component: Edit,
+                        variant: "with_underline_around_pencil",
+                        class: "w-4 md:w-[1.125vw]"
+                    }
+                },
+                download: {
+                    icon: {
+                        component: Download,
+                        class: "w-4 md:w-[1.125vw]"
+                    }
+                },
+                share: {
+                    icon: {
+                        component: Share,
+                        class: "w-4 md:w-[1.125vw]"
+                    }
+                }
+            }
         };
-    } = {
-        anime_options: {
-            read: {
-                icon: {
-                    component: Read,
-                    class: "w-4 md:w-[1.5vw] text-surface-500"
-                }
-            },
-            listen: {
-                icon: {
-                    component: Listen,
-                    class: "w-4 md:w-[1.5vw] text-surface-500"
-                }
-            }
-        },
-        user_options_icons: {
-            video: {
-                icon: {
-                    component: Video,
-                    variant: false,
-                    class: "w-4 md:w-[1.125vw]"
-                }
-            },
-            edit: {
-                icon: {
-                    component: Edit,
-                    variant: "with_underline_around_pencil",
-                    class: "w-4 md:w-[1.125vw]"
-                }
-            },
-            download: {
-                icon: {
-                    component: Download,
-                    class: "w-4 md:w-[1.125vw]"
-                }
-            },
-            share: {
-                icon: {
-                    component: Share,
-                    class: "w-4 md:w-[1.125vw]"
-                }
-            }
-        }
-    };
 </script>
 
 <anime-info-container class="relative mt-16 block h-screen bg-cover md:mt-0">
@@ -237,16 +236,18 @@
                     <ScrollArea
                         offsetScrollbar
                         gradientMask
-                        parentClass="mt-3 md:mt-[1.25vw]"
-                        class="h-40 text-justify text-xs md:h-[10.25vw] md:text-[0.8vw] md:leading-[1vw]"
+                        parentClass="max-h-40 mt-3 md:mt-[1.25vw] md:max-h-[10.25vw]"
+                        class="text-justify text-xs md:pb-[1.25vw] md:text-[0.8vw] md:leading-[1vw]"
                     >
                         {anime_synopsis}
                     </ScrollArea>
 
                     <anime-genres class="hidden gap-[0.5vw] text-white md:mt-[1vw] md:flex md:text-[0.75vw] md:leading-[0.9vw]">
-                        <span class="rounded bg-surface-900 px-[0.95vw] md:py-[0.375vw]">Mystery</span>
-                        <span class="rounded bg-surface-900 px-[0.95vw] md:py-[0.375vw]">Romance</span>
-                        <span class="rounded bg-surface-900 px-[0.95vw] md:py-[0.375vw]">Horror</span>
+                        {#each ["Action", "Romance", "Horror"] as genre}
+                            <span class="rounded-[0.25vw] bg-warning-400 font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">
+                                {genre}
+                            </span>
+                        {/each}
                     </anime-genres>
 
                     <anime-scores class="hidden w-max gap-[0.75vw] rounded-[0.25vw] bg-surface-50/10 backdrop-blur-lg md:mt-[0.5vw] md:flex md:px-[0.75vw] md:py-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
@@ -364,7 +365,7 @@
                         {@const duration = episode.duration}
 
                         <a
-                            href="./watch/{episode_number}"
+                            href="./{anime_id}/episode/{episode_number}"
                             class="relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4"
                         >
                             <card-banner-info class="relative col-span-5 h-full w-full md:col-span-12 md:h-[19vw]">
@@ -484,7 +485,7 @@
                                     comment_content={comment.content}
                                     comment_likes={comment.likes}
                                     comment_replies={comment.replies}
-                                    show_replies={index === 0}
+                                    open={index === 0}
                                 />
                             {/each}
                         </comments>

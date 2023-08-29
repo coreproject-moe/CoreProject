@@ -6,9 +6,8 @@
     import { anime_list } from "$data/mock/anime_list";
     import { OpengraphGenerator } from "$functions/opengraph";
 
-    let anime_id = Number($page.params.id);
-
-    let anime = anime_list?.find((anime) => anime.id === anime_id);
+    let anime_id = Number($page.params.id),
+        anime = anime_list?.find((anime) => anime.id === anime_id);
 
     const opengraph_html = new OpengraphGenerator({
         title: `Watch ${anime?.name} on AnimeCore`,
@@ -26,8 +25,9 @@
 
 {#if anime}
     <AnimeInfoPage
+        anime_id={anime.id}
         anime_name={anime.name}
-        anime_alternative_name={anime.alternative_name}
+        japanese_name={anime.japanese_name}
         anime_episodes_count={anime.episodes_count}
         anime_date={anime.updated}
         anime_synopsis={anime.synopsis}
