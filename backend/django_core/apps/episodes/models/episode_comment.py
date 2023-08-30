@@ -1,8 +1,8 @@
 from apps.user.models import CustomUser
-from django.db import models
-from mixins.models.created_at import CreatedAtMixin
-from django_ltree.models import TreeModel
 from django.contrib.postgres import indexes as idx
+from django.db import models
+from django_ltree.models import TreeModel
+from mixins.models.created_at import CreatedAtMixin
 
 # Create your models here.
 

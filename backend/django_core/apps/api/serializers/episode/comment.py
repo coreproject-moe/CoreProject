@@ -1,7 +1,6 @@
-from rest_framework import serializers
-from apps.episodes.models import EpisodeCommentModel
 
-import uuid
+from apps.episodes.models import EpisodeCommentModel
+from rest_framework import serializers
 
 
 class EpisodeCommentSerializer(serializers.ModelSerializer):
