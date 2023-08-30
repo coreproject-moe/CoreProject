@@ -15,12 +15,3 @@ class EpisodeCommentSerializer(serializers.ModelSerializer):
                 "required": False,
             }
         }
-
-
-# class EpisodeCommentPOSTSerializer(serializers.ModelSerializer):
-#     class Meta(EpisodeCommentBaseSerializer.Meta):
-#         fields = [
-#             "user",
-#             "text",
-#             "path",
-#         ]
