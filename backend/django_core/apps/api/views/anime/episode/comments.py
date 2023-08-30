@@ -15,12 +15,19 @@ from ....serializers.episode.comment import EpisodeCommentSerializer
 
 
 class EpisodeCommentAPIView(generics.ListAPIView):
-    queryset = EpisodeCommentModel.objects.all()
     serializer_class = EpisodeCommentSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = EpisodeCommentFilter
     # Permissions
     permission_classes = (IsAuthenticatedOrReadOnly,)
+
+    def get_queryset(self, *args, **kwargs):
+        queryset = (
+            AnimeModel.objects.get(pk=self.kwargs["pk"])
+            .episodes.get(episode_number=self.kwargs["episode_number"])
+            .episode_comments
+        )
+        return queryset
 
     def post(self, request: HttpRequest, pk: int, episode_number: int) -> Response:
         serializer: EpisodeCommentSerializer = self.get_serializer(data=request.data)

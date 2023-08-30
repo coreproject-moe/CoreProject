@@ -4,6 +4,7 @@ from apps.anime.models.anime_theme import AnimeThemeModel
 from apps.characters.models import CharacterModel
 from apps.producers.models import ProducerModel
 from apps.staffs.models import StaffModel
+
 from rest_framework import serializers
 
 from ...bases.serializer import GetOrCreateSlugRelatedField
@@ -12,6 +13,23 @@ from ..producers import ProducerSerializer
 from ..staffs import StaffSerializer
 from .genre import AnimeGenreSerializer
 from .theme import AnimeThemeSerializer
+
+
+# Dumbed Down serializers
+
+
+class DumbedDownEpisodeSerializer(serializers.Serializer):
+    episode_number = serializers.IntegerField()
+    episode_name = serializers.CharField()
+    episode_thumbnail = serializers.CharField()
+
+    episode_summary = serializers.CharField()
+    episode_length = serializers.IntegerField()
+    # Sub or Dub
+    episode_type = serializers.CharField()
+
+
+# Actual serializers
 
 
 class AbstractBaseAnimeSerializer(serializers.ModelSerializer):
@@ -24,7 +42,41 @@ class AbstractBaseAnimeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AnimeModel
-        fields = "__all__"
+        fields = [
+            # ID's
+            "mal_id",
+            "anilist_id",
+            "kitsu_id",
+            # Characters
+            "name",
+            "name_japanese",
+            "name_synonyms",
+            # Date fields
+            "aired_from",
+            "aired_to",
+            # Image Fields
+            "banner",
+            "cover",
+            # Color Fields
+            "banner_background_color",
+            "cover_background_color",
+            # Extra info fields
+            "synopsis",
+            "background",
+            "source",
+            # Rating fields
+            "rating",
+            # Some M2M fields
+            "genres",
+            "themes",
+            "characters",
+            "studios",
+            "producers",
+            "staffs",
+            "episodes",
+            "openings",
+            "endings",
+        ]
         read_only_fields = ["is_locked"]
 
 
@@ -38,6 +90,8 @@ class AnimeGETSerializer(AbstractBaseAnimeSerializer):
     producers = ProducerSerializer(many=True, read_only=True)
 
     staffs = StaffSerializer(many=True, read_only=True)
+
+    episodes = DumbedDownEpisodeSerializer(many=True, read_only=True)
 
 
 class AnimePOSTSerializer(AbstractBaseAnimeSerializer):
