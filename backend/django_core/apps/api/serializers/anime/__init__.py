@@ -4,7 +4,6 @@ from apps.anime.models.anime_theme import AnimeThemeModel
 from apps.characters.models import CharacterModel
 from apps.producers.models import ProducerModel
 from apps.staffs.models import StaffModel
-
 from rest_framework import serializers
 
 from ...bases.serializer import GetOrCreateSlugRelatedField
@@ -13,7 +12,6 @@ from ..producers import ProducerSerializer
 from ..staffs import StaffSerializer
 from .genre import AnimeGenreSerializer
 from .theme import AnimeThemeSerializer
-
 
 # Dumbed Down serializers
 
