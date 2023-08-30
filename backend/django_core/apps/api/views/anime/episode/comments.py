@@ -10,6 +10,10 @@ from django.utils.crypto import get_random_string
 from ....filters.comments import EpisodeCommentFilter
 
 
+# If we need to revisit, take a look at our ChadGPT conversation
+# https://chat.openai.com/share/06777217-e9a9-4fb4-bcfc-28e9f59be6f8
+
+
 class EpisodeCommentAPIView(generics.ListAPIView):
     queryset = EpisodeCommentModel.objects.all()
     serializer_class = EpisodeCommentSerializer
