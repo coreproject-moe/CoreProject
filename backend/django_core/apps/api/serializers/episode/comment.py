@@ -1,4 +1,3 @@
-
 from apps.episodes.models import EpisodeCommentModel
 from rest_framework import serializers
 
