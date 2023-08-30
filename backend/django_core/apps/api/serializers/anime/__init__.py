@@ -62,8 +62,17 @@ class AbstractBaseAnimeSerializer(serializers.ModelSerializer):
             "staffs",
             "openings",
             "endings",
+            # Super fields
+            "is_locked",
+            "updated_at",
+            "created_at",
         ]
-        read_only_fields = ["is_locked"]
+        read_only_fields = [
+            # Super fields should stay locked
+            "is_locked",
+            "updated_at",
+            "created_at",
+        ]
 
 
 class AnimeGETSerializer(AbstractBaseAnimeSerializer):
