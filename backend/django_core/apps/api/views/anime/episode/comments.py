@@ -20,7 +20,7 @@ class EpisodeCommentAPIView(generics.ListAPIView):
     filter_backends = (DjangoFilterBackend,)
     filterset_class = EpisodeCommentFilter
     # Permissions
-    # permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
     def post(self, request: HttpRequest, pk: int, episode_number: int) -> Response:
         serializer: EpisodeCommentSerializer = self.get_serializer(data=request.data)
