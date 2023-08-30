@@ -12,6 +12,7 @@ from .views.producers import ProducerSpecificAPIView, ProducerViewSet
 from .views.staffs import StaffSpecificAPIView, StaffViewSet
 from .views.user.login import LoginAPIView
 from .views.user.logout import LogoutAPIView
+from .views.anime.episode.comments import EpisodeCommentAPIView
 
 base_router = DefaultRouter()
 base_router.register(r"anime", AnimeViewSet, basename="anime")
@@ -27,6 +28,10 @@ urlpatterns = [
     path("anime/genres/<int:pk>/", AnimeGenresSpecificAPIView.as_view()),
     path("anime/themes/", AnimeThemesAPIView.as_view()),
     path("anime/themes/<int:pk>/", AnimeThemesSpecificAPIView.as_view()),
+    # Episode
+    path(
+        "anime/<int:pk>/episode/<int:episode_pk>/comment", EpisodeCommentAPIView.as_view()
+    ),
     # User routes
     path("user/login/", LoginAPIView.as_view()),
     path("user/logout/", LogoutAPIView.as_view()),
