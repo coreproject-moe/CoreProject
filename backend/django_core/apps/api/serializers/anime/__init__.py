@@ -18,17 +18,6 @@ from .theme import AnimeThemeSerializer
 # Dumbed Down serializers
 
 
-class DumbedDownEpisodeSerializer(serializers.Serializer):
-    episode_number = serializers.IntegerField()
-    episode_name = serializers.CharField()
-    episode_thumbnail = serializers.CharField()
-
-    episode_summary = serializers.CharField()
-    episode_length = serializers.IntegerField()
-    # Sub or Dub
-    episode_type = serializers.CharField()
-
-
 # Actual serializers
 
 
@@ -73,7 +62,6 @@ class AbstractBaseAnimeSerializer(serializers.ModelSerializer):
             "studios",
             "producers",
             "staffs",
-            "episodes",
             "openings",
             "endings",
         ]
@@ -90,8 +78,6 @@ class AnimeGETSerializer(AbstractBaseAnimeSerializer):
     producers = ProducerSerializer(many=True, read_only=True)
 
     staffs = StaffSerializer(many=True, read_only=True)
-
-    episodes = DumbedDownEpisodeSerializer(many=True, read_only=True)
 
 
 class AnimePOSTSerializer(AbstractBaseAnimeSerializer):
