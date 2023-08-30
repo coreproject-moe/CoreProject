@@ -1,8 +1,6 @@
-from django.contrib.postgres.search import TrigramSimilarity
-from django.db.models.functions import Greatest
+from apps.episodes.models.episode_comment import EpisodeCommentModel
 from django.db.models.query import QuerySet
 from django_filters import rest_framework as filters
-from apps.episodes.models.episode_comment import EpisodeCommentModel
 
 
 class EpisodeCommentFilter(filters.FilterSet):
