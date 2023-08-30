@@ -1,25 +1,28 @@
 from rest_framework import serializers
 from apps.episodes.models import EpisodeCommentModel
 
+import uuid
 
-class EpisodeCommentBaseSerializer(serializers.ModelSerializer):
+
+class EpisodeCommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = EpisodeCommentModel
-
-
-class EpisodeCommentGETSerializer(EpisodeCommentBaseSerializer):
-    class Meta(EpisodeCommentBaseSerializer.Meta):
         fields = [
             "user",
             "text",
             "path",
         ]
+        extra_kwargs = {
+            "path": {
+                "required": False,
+            }
+        }
 
 
-class EpisodeCommentPOSTSerializer(serializers.ModelSerializer):
-    class Meta(EpisodeCommentBaseSerializer.Meta):
-        fields = [
-            "user",
-            "text",
-            "path",
-        ]
+# class EpisodeCommentPOSTSerializer(serializers.ModelSerializer):
+#     class Meta(EpisodeCommentBaseSerializer.Meta):
+#         fields = [
+#             "user",
+#             "text",
+#             "path",
+#         ]

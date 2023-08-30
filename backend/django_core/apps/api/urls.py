@@ -30,7 +30,8 @@ urlpatterns = [
     path("anime/themes/<int:pk>/", AnimeThemesSpecificAPIView.as_view()),
     # Episode
     path(
-        "anime/<int:pk>/episode/<int:episode_pk>/comment", EpisodeCommentAPIView.as_view()
+        "anime/<int:pk>/episode/<int:episode_number>/comment",
+        EpisodeCommentAPIView.as_view(),
     ),
     # User routes
     path("user/login/", LoginAPIView.as_view()),
