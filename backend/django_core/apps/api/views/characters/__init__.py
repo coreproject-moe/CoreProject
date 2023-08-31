@@ -1,18 +1,13 @@
 from apps.api.permissions import IsSuperUserOrReadOnly
 from apps.characters.models import CharacterModel
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import mixins, viewsets
-
+from rest_framework import viewsets
+from rest_framework.pagination import LimitOffsetPagination
 from ...filters.character import CharacterFilter
 from ...serializers.character import CharacterSerializer
 
 
-class CharacterViewSet(
-    mixins.ListModelMixin,
-    mixins.CreateModelMixin,
-    mixins.RetrieveModelMixin,
-    viewsets.GenericViewSet,
-):
+class CharacterViewSet(viewsets.ModelViewSet):
     queryset = CharacterModel.objects.all()
     serializer_class = CharacterSerializer
 
@@ -22,3 +17,6 @@ class CharacterViewSet(
 
     # Permissions
     permission_classes = (IsSuperUserOrReadOnly,)
+
+    # Pagination
+    pagination_class = LimitOffsetPagination

@@ -8,9 +8,7 @@ from ...filters.anime import AnimeFilter
 from ...serializers.anime import AnimeGETSerializer, AnimePOSTSerializer
 
 
-class AnimeViewSet(
-    viewsets.ModelViewSet,
-):
+class AnimeViewSet(viewsets.ModelViewSet):
     queryset = AnimeModel.objects.all()
 
     # Filters
