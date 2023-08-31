@@ -13,6 +13,6 @@ class EpisodeCommentModel(TreeNodeModel, CreatedAtMixin):
     def __str__(self) -> str:
         return f"{self.user} | {self.text}"
 
-    class Meta(TreeNodeModel.Meta):
-        verbose_name = "Episode Comment"
-        verbose_name_plural = "Episode Comments"
+    class Meta:
+        # https://youtu.be/u8F7bTJVe_4?t=1057
+        indexes = [idx.GistIndex(fields=["path"])]
