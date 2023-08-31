@@ -1,6 +1,7 @@
 from apps.anime.models import AnimeModel
 from apps.episodes.models.episode_comment import EpisodeCommentModel
 from django.http import HttpRequest
+from django.utils.crypto import get_random_string
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -32,27 +33,18 @@ class EpisodeCommentAPIView(generics.ListAPIView):
         serializer: EpisodeCommentSerializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
+        # Serializer Data
+        serializer_data = {
+            "user": serializer.validated_data["user"],
+            "text": serializer.validated_data["text"],
+            "path": serializer.validated_data.get("path", get_random_string(4)),
+        }
+
         episode_instance = AnimeModel.objects.get(pk=pk).episodes.get(
             episode_number=episode_number
         )
-        # Serializer Data
-
-        serializer_data = {
-            "user": request.user,
-            "text": serializer.validated_data["text"],
-        }
-
-        if path := serializer.validated_data.get("path"):
-            episode_comment_model_instance = EpisodeCommentModel.objects.get(
-                path__match=path
-            )
-            episode_comment_instance = EpisodeCommentModel.objects.create_child(
-                parent=episode_comment_model_instance, **serializer_data
-            )
-
-        else:
-            episode_comment_instance = EpisodeCommentModel.objects.create(**serializer_data)
-
-        episode_instance.episode_comments.add(episode_comment_instance)
+        episode_instance.episode_comments.add(
+            EpisodeCommentModel.objects.create(**serializer_data)
+        )
 
         return Response(status=200, data=serializer.data)

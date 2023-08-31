@@ -10,4 +10,5 @@ class EpisodeCommentFilter(filters.FilterSet):
         self, queryset: QuerySet[EpisodeCommentModel], name, value: str
     ) -> QuerySet[EpisodeCommentModel]:
         queryset = queryset.filter(path__descendants=value)
+        print(queryset.query)
         return queryset
