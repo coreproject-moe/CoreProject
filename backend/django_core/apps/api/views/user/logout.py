@@ -10,7 +10,6 @@ from ...serializers.user.token import TokenSerializer
 
 class LogoutAPIView(views.APIView):
     serializer_class = TokenSerializer
-    authentication_classes = [TokenAuthentication, SessionAuthentication]
     permission_classes = [IsAuthenticated]
 
     def get_serializer_context(self):
