@@ -5,7 +5,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
-
+from rest_framework.pagination import LimitOffsetPagination
 from ....filters.comments import EpisodeCommentFilter
 from ....serializers.episode.comment import EpisodeCommentSerializer
 
@@ -19,6 +19,8 @@ class EpisodeCommentAPIView(generics.ListAPIView):
     filterset_class = EpisodeCommentFilter
     # Permissions
     permission_classes = (IsAuthenticatedOrReadOnly,)
+    # Pagination
+    pagination_class = LimitOffsetPagination
 
     def get_queryset(self, *args, **kwargs):
         queryset = (
