@@ -3,9 +3,10 @@ from apps.episodes.models.episode_comment import EpisodeCommentModel
 from django.http import HttpRequest
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
+from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
-from rest_framework.pagination import LimitOffsetPagination
+
 from ....filters.comments import EpisodeCommentFilter
 from ....serializers.episode.comment import EpisodeCommentSerializer
 
@@ -14,6 +15,9 @@ from ....serializers.episode.comment import EpisodeCommentSerializer
 
 
 class EpisodeCommentAPIView(generics.ListAPIView):
+    # this is due to drf-spectacular
+    queryset = EpisodeCommentModel.objects.none()
+
     serializer_class = EpisodeCommentSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = EpisodeCommentFilter

@@ -1,4 +1,3 @@
-from apps.episodes.models.episode_timestamp import EpisodeTimestampModel
 from rest_framework import serializers
 
 
