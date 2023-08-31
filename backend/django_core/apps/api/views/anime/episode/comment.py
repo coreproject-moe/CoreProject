@@ -14,6 +14,9 @@ from ....serializers.episode.comment import EpisodeCommentSerializer
 
 
 class EpisodeCommentAPIView(generics.ListAPIView):
+    # this is due to drf-spectacular
+    queryset = EpisodeCommentModel.objects.none()
+
     serializer_class = EpisodeCommentSerializer
     filter_backends = (DjangoFilterBackend,)
     filterset_class = EpisodeCommentFilter

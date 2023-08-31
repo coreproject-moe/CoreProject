@@ -13,6 +13,9 @@ from ....serializers.episode import EpisodeSerializer
 
 
 class EpisodeAPIView(generics.ListAPIView):
+    # This is due to drf-`spectacular`
+    queryset = EpisodeModel.objects.none()
+
     serializer_class = EpisodeSerializer
     filter_backends = (DjangoFilterBackend,)
     # Permissions
