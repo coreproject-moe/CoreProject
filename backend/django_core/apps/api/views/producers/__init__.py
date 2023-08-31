@@ -1,7 +1,7 @@
 from apps.api.permissions import IsSuperUserOrReadOnly
 from apps.producers.models import ProducerModel
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import mixins, viewsets
+from rest_framework import viewsets
 from rest_framework.pagination import LimitOffsetPagination
 
 from ...filters.producer import ProducerFilter

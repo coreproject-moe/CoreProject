@@ -1,8 +1,9 @@
 from apps.api.permissions import IsSuperUserOrReadOnly
 from apps.staffs.models import StaffModel
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import mixins, viewsets
+from rest_framework import viewsets
 from rest_framework.pagination import LimitOffsetPagination
+
 from ...filters.staff import StaffFilter
 from ...serializers.staffs import StaffSerializer
 

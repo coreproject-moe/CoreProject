@@ -3,6 +3,7 @@ from apps.characters.models import CharacterModel
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.pagination import LimitOffsetPagination
+
 from ...filters.character import CharacterFilter
 from ...serializers.character import CharacterSerializer
 
