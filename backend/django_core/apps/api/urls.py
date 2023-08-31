@@ -7,7 +7,6 @@ from .views.anime import (
 )
 from .views.anime.episode.comment import EpisodeCommentAPIView
 from .views.anime.episode.timestamp import EpisodeTimeStampAPIView
-
 from .views.anime.genre import AnimeGenresAPIView, AnimeGenresSpecificAPIView
 from .views.anime.theme import AnimeThemesAPIView, AnimeThemesSpecificAPIView
 from .views.characters import CharacterSpecificAPIView, CharacterViewSet

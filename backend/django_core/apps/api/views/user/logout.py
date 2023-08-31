@@ -1,6 +1,5 @@
 from django.http import HttpRequest
 from rest_framework import status, views
-from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
