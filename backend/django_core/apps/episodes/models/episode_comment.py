@@ -8,8 +8,6 @@ from mixins.models.created_at import CreatedAtMixin
 
 
 class EpisodeCommentModel(TreeModel, CreatedAtMixin):
-    label_size = 4
-
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     text = models.TextField()
 
