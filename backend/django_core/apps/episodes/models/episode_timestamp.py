@@ -14,7 +14,7 @@ class EpisodeTimestampModel(CreatedAtMixin):
     )
 
     def __str__(self) -> str:
-        return f"{self.episode}. {self.user}"
+        return f"{self.user} | {self.timestamp} seconds"
 
     class Meta:
         verbose_name = "Episode Timestamp"
