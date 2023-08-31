@@ -3,6 +3,7 @@ from apps.api.permissions import IsSuperUserOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, mixins, viewsets
 from rest_framework.pagination import LimitOffsetPagination
+
 from ...filters.anime import AnimeFilter
 from ...serializers.anime import AnimeGETSerializer, AnimePOSTSerializer
 
