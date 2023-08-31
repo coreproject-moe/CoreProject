@@ -12,19 +12,21 @@ from ....serializers.episode.timestamp import EpisodeTimpstampSerializer
 # https://chat.openai.com/share/06777217-e9a9-4fb4-bcfc-28e9f59be6f8
 
 
-class EpisodeTimeStampAPIView(generics.ListAPIView):
+class EpisodeTimeStampAPIView(generics.GenericAPIView):
     serializer_class = EpisodeTimpstampSerializer
     filter_backends = (DjangoFilterBackend,)
     # Permissions
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
-    def get_queryset(self, *args, **kwargs):
+    def get(self, request: HttpRequest, pk: int, episode_number: int) -> Response:
         queryset = (
-            AnimeModel.objects.get(pk=self.kwargs["pk"])
-            .episodes.get(episode_number=self.kwargs["episode_number"])
-            .episode_timestamps
+            AnimeModel.objects.get(pk=pk)
+            .episodes.get(episode_number=episode_number)
+            .episode_timestamps.get(user=request.user)
         )
-        return queryset
+
+        serializer = self.get_serializer(queryset)
+        return Response(serializer.data)
 
     def post(self, request: HttpRequest, pk: int, episode_number: int) -> Response:
         serializer: EpisodeTimpstampSerializer = self.get_serializer(data=request.data)

@@ -108,6 +108,10 @@ INSTALLED_APPS = [
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+SILENCED_SYSTEM_CHECKS = [
+    "rest_framework.W001",
+]
 # Rest framework
 REST_FRAMEWORK = {
     # YOUR SETTINGS
@@ -116,6 +120,7 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.TokenAuthentication",
         "rest_framework.authentication.SessionAuthentication",
     ),
+    "PAGE_SIZE": 100,
 }
 SPECTACULAR_SETTINGS = {
     "SWAGGER_UI_DIST": "SIDECAR",  # shorthand to use the sidecar instead
