@@ -9,8 +9,8 @@ from ..models.episode_timestamp import EpisodeTimestampModel
 
 @admin.register(EpisodeTimestampModel)
 class EpisodeTimestampAdmin(admin.ModelAdmin[EpisodeTimestampModel]):
-    autocomplete_fields = ["user", "episode"]
-    list_filter = ["user", "episode"]
+    autocomplete_fields = ["user"]
+    list_filter = ["user"]
     search_fields = ["user__username"]
 
     def get_search_results(

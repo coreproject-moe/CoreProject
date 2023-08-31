@@ -8,19 +8,13 @@ from mixins.models.created_at import CreatedAtMixin
 class EpisodeTimestampModel(CreatedAtMixin):
     timestamp = models.IntegerField(default=0)
 
-    episode = models.ForeignKey(
-        to="EpisodeModel",
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True,
-    )
     user = models.ForeignKey(
         get_user_model(),
         on_delete=models.CASCADE,
     )
 
     def __str__(self) -> str:
-        return f"{self.episode}. {self.user}"
+        return f"{self.user} | {self.timestamp} seconds"
 
     class Meta:
         verbose_name = "Episode Timestamp"
