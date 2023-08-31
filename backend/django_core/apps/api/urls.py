@@ -5,7 +5,7 @@ from .views.anime import (
     AnimeSpecificAPIView,
     AnimeViewSet,
 )
-from .views.anime.episode.comment import EpisodeCommentAPIView
+from .views.anime.episode.comments import EpisodeCommentAPIView
 from .views.anime.genre import AnimeGenresAPIView, AnimeGenresSpecificAPIView
 from .views.anime.theme import AnimeThemesAPIView, AnimeThemesSpecificAPIView
 from .views.characters import CharacterSpecificAPIView, CharacterViewSet
@@ -31,10 +31,6 @@ urlpatterns = [
     # Episode
     path(
         "anime/<int:pk>/episode/<int:episode_number>/comment",
-        EpisodeCommentAPIView.as_view(),
-    ),
-    path(
-        "anime/<int:pk>/episode/<int:episode_number>/timestamp",
         EpisodeCommentAPIView.as_view(),
     ),
     # User routes

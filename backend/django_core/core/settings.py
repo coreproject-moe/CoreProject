@@ -85,7 +85,7 @@ INSTALLED_APPS = [
     # Block users
     "defender",
     # Tree
-    "treenode",
+    "django_ltree",
     # Tailwind CSS
     "tailwind",
     "tailwind_src",  # Our custom app
