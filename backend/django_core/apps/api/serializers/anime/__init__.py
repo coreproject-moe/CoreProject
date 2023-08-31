@@ -13,6 +13,11 @@ from ..staffs import StaffSerializer
 from .genre import AnimeGenreSerializer
 from .theme import AnimeThemeSerializer
 
+# Dumbed Down serializers
+
+
+# Actual serializers
+
 
 class AbstractBaseAnimeSerializer(serializers.ModelSerializer):
     name_synonyms = GetOrCreateSlugRelatedField(
@@ -24,8 +29,50 @@ class AbstractBaseAnimeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AnimeModel
-        fields = "__all__"
-        read_only_fields = ["is_locked"]
+        fields = [
+            # ID's
+            "mal_id",
+            "anilist_id",
+            "kitsu_id",
+            # Characters
+            "name",
+            "name_japanese",
+            "name_synonyms",
+            # Date fields
+            "aired_from",
+            "aired_to",
+            # Image Fields
+            "banner",
+            "cover",
+            # Color Fields
+            "banner_background_color",
+            "cover_background_color",
+            # Extra info fields
+            "synopsis",
+            "background",
+            "source",
+            # Rating fields
+            "rating",
+            # Some M2M fields
+            "genres",
+            "themes",
+            "characters",
+            "studios",
+            "producers",
+            "staffs",
+            "openings",
+            "endings",
+            # Super fields
+            "is_locked",
+            "updated_at",
+            "created_at",
+        ]
+        read_only_fields = [
+            # Super fields should stay locked
+            "is_locked",
+            "updated_at",
+            "created_at",
+        ]
 
 
 class AnimeGETSerializer(AbstractBaseAnimeSerializer):
