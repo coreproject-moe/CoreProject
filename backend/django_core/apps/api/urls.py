@@ -2,7 +2,6 @@ from django.urls import include, path
 from rest_framework.routers import DefaultRouter
 
 from .views.anime import (
-    AnimeSpecificAPIView,
     AnimeViewSet,
 )
 from .views.anime.episode import EpisodeAPIView

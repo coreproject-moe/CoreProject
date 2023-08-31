@@ -1,6 +1,5 @@
-from rest_framework import serializers
-
 from apps.episodes.models import EpisodeModel
+from rest_framework import serializers
 
 
 class EpisodeSerializer(serializers.ModelSerializer):
