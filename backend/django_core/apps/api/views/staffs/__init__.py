@@ -10,6 +10,7 @@ from ...serializers.staffs import StaffSerializer
 class StaffViewSet(
     mixins.ListModelMixin,
     mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
     viewsets.GenericViewSet,
 ):
     queryset = StaffModel.objects.all()
@@ -20,12 +21,4 @@ class StaffViewSet(
     filterset_class = StaffFilter
 
     # Permissions
-    permission_classes = (IsSuperUserOrReadOnly,)
-
-
-class StaffSpecificAPIView(
-    generics.RetrieveUpdateDestroyAPIView,
-):
-    queryset = StaffModel.objects.all()
-    serializer_class = StaffSerializer
     permission_classes = (IsSuperUserOrReadOnly,)

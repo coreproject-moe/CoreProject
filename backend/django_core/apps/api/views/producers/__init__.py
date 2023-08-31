@@ -10,6 +10,7 @@ from ...serializers.producers import ProducerSerializer
 class ProducerViewSet(
     mixins.ListModelMixin,
     mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
     viewsets.GenericViewSet,
 ):
     queryset = ProducerModel.objects.all()
@@ -22,10 +23,3 @@ class ProducerViewSet(
     # Permissions
     permission_classes = (IsSuperUserOrReadOnly,)
 
-
-class ProducerSpecificAPIView(
-    generics.RetrieveUpdateDestroyAPIView,
-):
-    queryset = ProducerModel.objects.all()
-    serializer_class = ProducerSerializer
-    permission_classes = (IsSuperUserOrReadOnly,)

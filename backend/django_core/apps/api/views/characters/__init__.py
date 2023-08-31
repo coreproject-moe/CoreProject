@@ -10,6 +10,7 @@ from ...serializers.character import CharacterSerializer
 class CharacterViewSet(
     mixins.ListModelMixin,
     mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
     viewsets.GenericViewSet,
 ):
     queryset = CharacterModel.objects.all()
@@ -20,12 +21,4 @@ class CharacterViewSet(
     filterset_class = CharacterFilter
 
     # Permissions
-    permission_classes = (IsSuperUserOrReadOnly,)
-
-
-class CharacterSpecificAPIView(
-    generics.RetrieveUpdateDestroyAPIView,
-):
-    queryset = CharacterModel.objects.all()
-    serializer_class = CharacterSerializer
     permission_classes = (IsSuperUserOrReadOnly,)

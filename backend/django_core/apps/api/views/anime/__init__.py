@@ -7,7 +7,12 @@ from ...filters.anime import AnimeFilter
 from ...serializers.anime import AnimeGETSerializer, AnimePOSTSerializer
 
 
-class AnimeViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, viewsets.GenericViewSet):
+class AnimeViewSet(
+    mixins.ListModelMixin,
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    viewsets.GenericViewSet,
+):
     queryset = AnimeModel.objects.all()
     serializer_class = AnimeGETSerializer
     # Filters
