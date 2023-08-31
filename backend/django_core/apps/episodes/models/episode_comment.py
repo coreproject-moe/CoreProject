@@ -16,3 +16,5 @@ class EpisodeCommentModel(TreeModel, CreatedAtMixin):
 
     class Meta:
         indexes = [idx.GistIndex(fields=["path"])]
+        verbose_name = "Episode Comment"
+        verbose_name_plural = "Episode Comments"
