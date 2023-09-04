@@ -53,7 +53,7 @@
         "html-entities": "^2.4.0",
         "lodash": "^4.17.21",
         "marked": "^7.0.5",
-        "marked-emoji": "^1.2.2",
+        "marked-emoji": "^1.2.3",
         "marked-highlight": "^2.0.4",
         "marked-mangle": "^1.1.2",
         "marked-smartypants": "^1.1.2",
