@@ -27,14 +27,6 @@ updates:
           interval: daily
       open-pull-requests-limit: 100
 
-    # Frontend
-    # =========
-    - package-ecosystem: npm
-      directory: /frontend/AnimeCore/
-      schedule:
-          interval: daily
-      open-pull-requests-limit: 100
-
     # Tools
     # Seeder
     # =======
@@ -51,9 +43,17 @@ updates:
       schedule:
           interval: daily
       open-pull-requests-limit: 100
-    # Actions
 
-    - package-ecosystem: "github-actions"
-      directory: "/"
+    # Actions
+    - package-ecosystem: 'github-actions'
+      directory: '/'
       schedule:
-          interval: "daily"
+          interval: 'daily'
+
+    # Submodule
+    - package-ecosystem: 'gitsubmodule'
+      directory: '/'
+      allow:
+          - dependency-name: '/frontend/AnimeCore'
+      schedule:
+          interval: 'daily'
