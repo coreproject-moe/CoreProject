@@ -1,41 +1,6 @@
 repos:
-    - repo: https://github.com/pre-commit/mirrors-eslint
-      rev: v8.48.0
-      hooks:
-          - id: eslint
-            args: [
-                    "./frontend",
-                    # --config,
-                    # ./frontend/AnimeCore/.eslintrc.cjs,
-                    --ignore-pattern,
-                    "/backend/static/*",
-                    --fix,
-                ]
-            additional_dependencies:
-                # - "next@12.2.0"
-                # - "eslint-config-next@12.1.6"
-                # - react@18.2.0
-                # - "@emotion/eslint-plugin@11.7.0"
-                #                 - react@latest
-                #                 - eslint-plugin-react@latest
-                #                 - eslint-config-airbnb@latest
-                #                 - eslint-plugin-react-native@latest
-                #                 - eslint-plugin-react-hooks@latest
-                #                 - eslint-plugin-jsx-a11y@latest
-                #                 - eslint-plugin-import@latest
-                #                 Svelte Related
-                #                 - eslint@latest
-                #                 - eslint-config-prettier@latest
-                #                 - eslint-plugin-svelte3@latest
-                #                 - svelte@latest
-                #                 - "@typescript-eslint/eslint-plugin@latest"
-                #                 - "@typescript-eslint/parser@latest"
-                - eslint-plugin-simple-import-sort@latest
-    #                 - eslint-plugin-unused-imports@latest
-    #                 - typescript@latest
-
     - repo: https://github.com/rtts/djhtml
-      rev: "3.0.6" # replace with the latest tag on GitHub
+      rev: '3.0.6' # replace with the latest tag on GitHub
       hooks:
           - id: djhtml
           - id: djcss
@@ -45,13 +10,13 @@ repos:
       rev: 23.7.0
       hooks:
           - id: black
-            args: ["--line-length", "92", "--target-version", "py311"]
+            args: ['--line-length', '92', '--target-version', 'py311']
 
     - repo: https://github.com/adamchainz/django-upgrade
       rev: 1.14.1
       hooks:
           - id: django-upgrade
-            args: [--target-version, "4.2"]
+            args: [--target-version, '4.2']
 
     - repo: https://github.com/pre-commit/pre-commit-hooks
       rev: v4.4.0
@@ -61,24 +26,6 @@ repos:
           - id: check-ast
           - id: sort-simple-yaml
 
-    - repo: https://github.com/pre-commit/mirrors-prettier
-      rev: v3.0.3
-      hooks:
-          - id: prettier
-            files: \.(lock|json|yaml|yml|md)$|./backend/\.(html)$|./frontend/\.(js|jsx|ts|tsx|css|sass|scss|svelte|html)$
-            args:
-                [
-                    --tab-width,
-                    "4",
-                    --use-tabs,
-                    "false",
-                    --bracket-same-line,
-                    "false",
-                ]
-            additional_dependencies:
-                - prettier@2.6.2
-                - prettier-plugin-svelte@2.7.0
-
     - repo: https://github.com/asottile/pyupgrade
       rev: v3.10.1
       hooks:
@@ -86,22 +33,21 @@ repos:
             args: [--py311-plus]
 
     - repo: https://github.com/tox-dev/pyproject-fmt
-      rev: "1.1.0"
+      rev: '1.1.0'
       hooks:
           - id: pyproject-fmt
 
     - repo: https://github.com/astral-sh/ruff-pre-commit
       # Ruff version.
-      rev: "v0.0.287"
+      rev: 'v0.0.287'
       hooks:
           - id: ruff
             # Respect `exclude` and `extend-exclude` settings.
             args:
                 [
-                    "--fix",
-                    "--respect-gitignore",
-                    "--exclude",
-                    "./android",
-                    "--exclude",
-                    "./tools",
+                    '--fix',
+                    '--respect-gitignore',
+                    '--exclude',
+                    './tools',
+      
                 ]

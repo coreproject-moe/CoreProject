@@ -133,7 +133,7 @@ python_files = ["test_*.py", "*_test.py", "testing/python/*.py"]
 
 [tool.black]
 line-length = 92
-target-version = ["py311"]
+target-version = ["py312"]
 
 [tool.mypy]
 show_error_codes = true
@@ -156,7 +156,7 @@ plugins = ["mypy_django_plugin.main"]
 exclude = [
     "migrations"
 ]
-mypy_path = "django_core,tsukaeru"
+mypy_path = "django_core"
 namespace_packages = true
 explicit_package_bases = true
 
@@ -188,7 +188,9 @@ exclude = [
     "node_modules",
     "venv",
     # https://github.com/charliermarsh/ruff/issues/61#issuecomment-1233497658
-    '**/migrations'
+    '**/migrations/*',
+    # Ignore tests
+    '**/test/*'
 ]
 
 # Allow unused variables when underscore-prefixed.
