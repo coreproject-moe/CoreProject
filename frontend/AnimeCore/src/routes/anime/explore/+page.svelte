@@ -16,6 +16,10 @@
     import Expand from "$icons/expand.svelte";
     import SixGrids from "$icons/six_grids.svelte";
     import { scale } from "svelte/transition";
+    import HoverExpand from "$components/shared/hover_expand.svelte";
+
+    /* Bindings */
+    let result_animes_element: HTMLElement;
 
     let filter_options_mapping: {
         [key: string]: {
@@ -162,7 +166,7 @@
                     />
                 </div>
             </search>
-            {#each Object.entries(filter_options_mapping) as option, index}
+            {#each Object.entries(filter_options_mapping) as option}
                 {@const title = option[1].title}
                 {@const klass = option[1].class}
                 {@const selected_items = option[1].selected_items}
@@ -275,7 +279,10 @@
         </div>
 
         {#if thumbnail_mode === "detailed_card"}
-            <result-animes class="mt-5 grid grid-cols-2 gap-3 md:mt-[1.25vw] md:grid-cols-3 md:gap-[1.5vw]">
+            <result-animes
+                bind:this={result_animes_element}
+                class="mt-5 grid grid-cols-2 gap-3 md:mt-[1.25vw] md:grid-cols-3 md:gap-[1.5vw]"
+            >
                 {#each trending_animes as anime}
                     <a
                         in:scale={{ start: 0.95 }}
@@ -290,11 +297,12 @@
                             />
                             <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-l-[0.35vw]">
                                 <div class="flex flex-col bg-surface-900/90 p-3 md:gap-[0.35vw] md:p-[1vw]">
-                                    <ScrollArea class="flex overflow-hidden text-sm font-semibold duration-300 ease-in-out scrollbar-none hover:max-h-[10vw] hover:overflow-y-scroll md:max-h-[1.35vw] md:text-[1vw] md:leading-[1.35vw]">
-                                        <span class="line-clamp-1 md:line-clamp-none">
-                                            {anime.name}
-                                        </span>
-                                    </ScrollArea>
+                                    <HoverExpand
+                                        class="text-sm font-semibold md:text-[1vw] md:leading-[1.35vw]"
+                                        height="md:max-h-[1.35vw] md:hover:max-h-[10vw]"
+                                    >
+                                        {anime.name}
+                                    </HoverExpand>
                                     <studio-name class="line-clamp-1 text-xs text-surface-50 md:line-clamp-none md:text-[0.8vw]">
                                         {anime.studios}
                                     </studio-name>
@@ -334,7 +342,10 @@
                 {/each}
             </result-animes>
         {:else if thumbnail_mode === "card_with_tippy"}
-            <result-animes class="mt-5 grid grid-cols-3 gap-3 md:mt-[1.25vw] md:grid-cols-6 md:gap-[1.5vw]">
+            <result-animes
+                class="mt-5 grid grid-cols-3 gap-3 md:mt-[1.25vw] md:grid-cols-6 md:gap-[1.5vw]"
+                bind:this={result_animes_element}
+            >
                 {#each trending_animes as anime}
                     <a
                         in:scale={{ start: 0.95 }}
@@ -352,6 +363,9 @@
                                 interactive: true,
                                 appendTo: document.body,
                                 onTrigger: async (instance) => {
+                                    // Lazy offset calculation
+                                    instance.props.offset = [0, globalThis.Math.abs(parseInt(getComputedStyle(result_animes_element)?.gap))];
+
                                     const node = document.createElement("div");
                                     new AnimeCard({
                                         target: node,
@@ -362,8 +376,7 @@
                                             anime_genres: anime.genres,
                                             anime_studios: anime.studios,
                                             anime_episodes_count: anime.episodes_count,
-                                            anime_synopsis: anime.synopsis,
-                                            anime_release_date: anime.release_date
+                                            anime_synopsis: anime.synopsis
                                         }
                                     });
 
@@ -378,11 +391,12 @@
                             />
                             <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
                                 <div class="flex flex-col gap-1 bg-surface-900/90 p-3 md:gap-[0.35vw] md:p-[1vw]">
-                                    <ScrollArea class="flex overflow-hidden text-sm font-semibold duration-300 ease-in-out scrollbar-none hover:max-h-[10vw] hover:overflow-y-scroll md:max-h-[1.35vw] md:text-[1vw] md:leading-[1.35vw]">
-                                        <span class="line-clamp-1 md:line-clamp-none">
-                                            {anime.name}
-                                        </span>
-                                    </ScrollArea>
+                                    <HoverExpand
+                                        class="text-sm font-semibold md:text-[1vw] md:leading-[1.35vw]"
+                                        height="md:max-h-[1.35vw] md:hover:max-h-[10vw]"
+                                    >
+                                        {anime.name}
+                                    </HoverExpand>
                                     <anime_info class="flex items-center gap-2 text-xs leading-none text-surface-50 md:gap-[0.5vw] md:text-[0.8vw]">
                                         <genre>{anime.genres[0]}</genre>
                                         <Circle class="w-1 opacity-75 md:w-[0.25vw]" />

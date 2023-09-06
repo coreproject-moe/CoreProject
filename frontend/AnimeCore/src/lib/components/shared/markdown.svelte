@@ -8,7 +8,7 @@
     import { mangle } from "marked-mangle";
     import { markedXhtml } from "marked-xhtml";
     import { markedSmartypants } from "marked-smartypants";
-
+    import { cn } from "$functions/classnames";
     export let markdown = "";
     export { klass as class };
 
@@ -55,7 +55,7 @@
     $: html = sanitize(marked.parse(markdown));
 </script>
 
-<markdown class={klass}>
+<markdown class={cn(klass)}>
     {#await html then html}
         {@html html}
     {/await}

@@ -4,6 +4,8 @@
 
 .tippy-box {
     @apply bg-transparent;
+    // https://github.com/atomiks/tippyjs/issues/451#issuecomment-473252780
+    max-width: none !important;
 
     &[data-theme~="elaine"] {
         &[data-placement^="top"] > .tippy-arrow::before {

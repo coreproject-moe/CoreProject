@@ -1,7 +1,9 @@
 <script lang="ts">
+    import { page } from "$app/stores";
     import ImageLoader from "$components/shared/image/image_loader.svelte";
     import ScrollArea from "$components/shared/scroll_area.svelte";
     import { FormatDate } from "$functions/format_date";
+    import { remove_slash_from_end } from "$functions/urls/remove_slash_at_end";
     import Play from "$icons/play.svelte";
     import { onMount } from "svelte";
     import { slide } from "svelte/transition";
@@ -16,6 +18,10 @@
         release_date: string;
         synopsis: string;
     };
+
+    // Formated anime details
+    const formated_episode_number = String(anime.episode_number).padStart(2, "0");
+    const formated_release_date = new FormatDate(anime.release_date).format_to_time_from_now;
 
     /* Bindings */
     let ANIMATION_DURATION = 300,
@@ -41,30 +47,28 @@
     function handle_mouseenter() {
         if (visible_ratio < 0.8) should_expand = true;
         show_more_info = true;
-        anime_episode.classList.add("snap-center")
     }
 
     function handle_mouseleave() {
         show_more_info = false;
         should_expand = false;
-        anime_episode.classList.remove("snap-center")
     }
 
     function handle_animationstart() {
-        if (!scroll_area_element) return;
-        if (!should_expand) return;
+        const parent_element = anime_episode.parentElement!;
 
-        const target_scroll_top = anime_episode.offsetTop - scroll_area_element.scrollTop + parseInt(getComputedStyle(anime_episode!.parentElement!).gap) - anime_episode.offsetHeight;
+        // Declare rects
+        const parent_rect = parent_element.getBoundingClientRect(), // taking parent not scroll_area_element
+            anime_episode_rect = anime_episode.getBoundingClientRect();
 
-        setTimeout(
-            () => {
-                scroll_area_element!.scroll({
-                    top: target_scroll_top,
-                    behavior: "smooth"
-                });
-            },
-            ANIMATION_DURATION * (1.1 / 3)
-        );
+        const scroll_area_center = scroll_area_element.offsetHeight / 2;
+        const anime_episode_center = anime_episode_rect.top - parent_rect.top + anime_episode_rect.height / 2;
+        const target_scroll_top = anime_episode_center - scroll_area_center + parseInt(getComputedStyle(anime_episode.parentElement!).gap) || 0;
+
+        scroll_area_element.scroll({
+            top: target_scroll_top,
+            behavior: "smooth"
+        });
     }
 </script>
 
@@ -89,15 +93,15 @@
             </episode-name>
             <episode-dates class="flex items-center gap-[0.35vw] text-[0.8vw] text-surface-50">
                 <span class="font-semibold">
-                    Ep {String(anime.episode_number).padStart(2, "0")}
+                    Ep {formated_episode_number}
                 </span>
                 <span>
-                    aired {new FormatDate(anime.release_date).format_to_time_from_now}
+                    aired {formated_release_date}
                 </span>
             </episode-dates>
         </div>
         <a
-            href="./mal/{anime.id}/episode/{anime.episode_number}"
+            href="{remove_slash_from_end($page.url.pathname)}/mal/{anime.id}/episode/{anime.episode_number}"
             class="btn btn-icon h-[2.5vw] w-[2.5vw] rounded-full bg-warning-400 text-surface-900 transition-colors duration-300 group-hover:bg-white"
         >
             <Play class="w-[1.25vw]" />

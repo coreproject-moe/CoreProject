@@ -45,15 +45,7 @@
     });
 </script>
 
-<svelte:head>
-    <style>
-        #page {
-            overflow-y: hidden;
-        }
-    </style>
-</svelte:head>
-
-<root class="relative inline-grid h-full w-full md:grid-cols-2">
+<root class="relative grid h-full w-full md:grid-cols-2">
     {#if image && name}
         {#key image}
             <div

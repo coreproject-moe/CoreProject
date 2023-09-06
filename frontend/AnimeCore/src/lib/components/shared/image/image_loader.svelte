@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { cn } from "$functions/classnames";
     import Image from "./image.svelte";
     import IntersectionObserver from "./intersection_observer.svelte";
 
@@ -12,7 +13,7 @@
 <IntersectionObserver
     once={true}
     let:intersecting
-    class="h-full"
+    class={cn("h-full", klass)}
 >
     {#if intersecting}
         <Image

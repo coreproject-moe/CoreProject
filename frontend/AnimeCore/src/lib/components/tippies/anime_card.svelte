@@ -5,10 +5,10 @@
     import PlayCircle from "$icons/play_circle.svelte";
     import Star from "$icons/star.svelte";
 
-    export let anime_id: number, anime_name: string, anime_episodes_count: number, anime_type: string, anime_genres: string[], anime_studios: string[], anime_synopsis: string, anime_release_date: string;
+    export let anime_id: number, anime_name: string, anime_episodes_count: number, anime_type: string, anime_genres: string[], anime_studios: string[], anime_synopsis: string;
 </script>
 
-<popup-container class="hidden flex-col overflow-hidden bg-surface-400 leading-none md:flex md:w-[20vw] md:rounded-[0.75vw]">
+<popup-container class="hidden flex-col overflow-hidden bg-surface-400 leading-none md:flex md:w-[20vw] md:rounded-[0.75vw] md:rounded-t-[0.3vw]">
     <div class="flex flex-col md:gap-[0.35vw] md:p-[1vw]">
         <anime-name class="font-semibold md:text-[1vw] md:leading-[1.25vw]">{anime_name}</anime-name>
 
@@ -49,14 +49,14 @@
 
         <options class="flex items-center border-t-[0.1vw] border-white/10 md:mt-[0.25vw] md:gap-[0.5vw] md:pt-[0.75vw]">
             <a
-                href="/mal/{anime_id}/episode/1"
+                href="./mal/{anime_id}/episode/1"
                 class="btn h-[2.3vw] flex-1 bg-primary-500 leading-none md:rounded-[0.5vw]"
             >
                 <PlayCircle class="md:w-[1vw]" />
                 <span class="font-semibold md:text-[0.9vw]">Watch Ep 1</span>
             </a>
             <a
-                href="/mal/{anime_id}"
+                href="./mal/{anime_id}"
                 class="btn aspect-square h-[2.3vw] bg-primary-500/25 p-0 leading-none md:rounded-[0.5vw]"
             >
                 <Info class="md:w-[1.2vw]" />

@@ -2,7 +2,6 @@
     import ImageLoader from "$components/shared/image/image_loader.svelte";
     import Markdown from "$components/shared/markdown.svelte";
     import { FormatDate } from "$functions/format_date";
-    import Chevron from "$icons/chevron.svelte";
     import Heart from "$icons/heart.svelte";
     import { Accordion, AccordionItem } from "@skeletonlabs/skeleton";
 

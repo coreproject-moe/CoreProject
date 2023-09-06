@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { cn } from "$functions/classnames";
+
     export let glider_container_class = "";
     export let active_element_class = "";
     export let direction: "horizontal" | "vertical";
@@ -61,7 +63,7 @@
 >
     <active_glider
         bind:this={hover_glider_element}
-        class="{active_element_class} absolute opacity-0 ease-in-out duration-{GLIDER_TRANSITION_DURATION}"
+        class={cn(active_element_class,`absolute opacity-0 ease-in-out duration-${GLIDER_TRANSITION_DURATION}`)}
     />
 
     <slot

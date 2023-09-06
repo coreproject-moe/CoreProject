@@ -13,15 +13,17 @@ export default defineConfig({
     ],
     esbuild: {
         legalComments: "none",
-        /*
         // This is magix
-        minifyIdentifiers: false,
-        */
+        // minifyIdentifiers: false,
         // Disable console
         drop: ["console", "debugger"]
     },
     build: {
-        target: "esnext"
+        target: "es2015",
+        sourcemap: true
+    },
+    css: {
+        devSourcemap: true
     },
     test: {
         include: ["src/**/*.{test,spec}.{js,ts}"]

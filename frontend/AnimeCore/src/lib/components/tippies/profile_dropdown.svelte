@@ -115,7 +115,6 @@
 
             <a
                 href={item_href}
-                class=""
                 class:pointer-events-none={!item_href}
             >
                 <div class="flex cursor-pointer items-center gap-2 rounded-[0.2vw] p-[0.4rem] transition duration-100 md:gap-[0.75vw] md:p-[0.5vw] md:py-[0.5vw] md:hover:bg-surface-300/20">

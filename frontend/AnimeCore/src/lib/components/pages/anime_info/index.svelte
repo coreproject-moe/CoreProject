@@ -28,16 +28,11 @@
     import { Ratings } from "@skeletonlabs/skeleton";
     import type { SvelteComponent } from "svelte";
     import Comment from "$components/shared/comment.svelte";
+    import { page } from "$app/stores";
+    import HoverExpand from "$components/shared/hover_expand.svelte";
+    import { remove_slash_from_end } from "$functions/urls/remove_slash_at_end";
 
-    export let anime_id: number,
-        anime_episodes: any,
-        anime_name: string,
-        japanese_name: string,
-        anime_episodes_count: number,
-        anime_date: string,
-        anime_synopsis: string,
-        anime_banner: string,
-        anime_cover: string;
+    export let anime_id: number, anime_episodes: any, anime_name: string, japanese_name: string, anime_episodes_count: number, anime_date: string, anime_synopsis: string, anime_banner: string, anime_cover: string;
 
     const anime_details = {
             format: "TV",
@@ -365,7 +360,7 @@
                         {@const duration = episode.duration}
 
                         <a
-                            href="./{anime_id}/episode/{episode_number}"
+                            href="{remove_slash_from_end($page.url.pathname)}/episode/{episode_number}"
                             class="relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4"
                         >
                             <card-banner-info class="relative col-span-5 h-full w-full md:col-span-12 md:h-[19vw]">
@@ -388,19 +383,32 @@
                             </card-banner-info>
 
                             <episode-info-card class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-surface-900 md:p-[1vw]">
-                                <episode-titles class="relative flex w-full flex-col items-start gap-1 md:gap-[0.25vw]">
-                                    <episode-name class="md:hover:overflow-scroll-y line-clamp-2 max-h-9 w-full overflow-hidden text-[0.8rem] font-light leading-snug text-white duration-500 ease-in-out scrollbar-none md:line-clamp-none md:max-h-[1.25vw] md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:max-h-[18vw] md:hover:text-surface-50">
-                                        {title}
-                                    </episode-name>
+                                <episode-titles class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
+                                    <HoverExpand
+                                        class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50"
 
-                                    <episode-japanese-name class="md:hover:overflow-scroll-y line-clamp-2 max-h-4 w-full overflow-hidden text-[0.8rem] font-light leading-snug text-white duration-500 ease-in-out scrollbar-none md:line-clamp-none md:max-h-[1.3vw] md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:max-h-[18vw] md:hover:text-surface-50">
+                                        height="max-h-9 md:max-h-[1.25vw] md:hover:max-h-[18vw]"
+                                        duration="duration-500"
+                                        line_clamp="line-clamp-2"
+                                    >
+                                        {title}
+                                    </HoverExpand>
+
+                                    <HoverExpand
+                                        class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50"
+                                        
+                                        height="max-h-4 md:max-h-[1.3vw] md:hover:max-h-[18vw]"
+                                        duration="duration-500"
+                                    >
                                         {japanese_name}
-                                    </episode-japanese-name>
+                                    </HoverExpand>
                                 </episode-titles>
                                 <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.65vw] md:pt-[0.75vw]">
                                     <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
                                         {#each episode.formats as format}
-                                            <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">{format}</span>
+                                            <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">
+                                                {format}
+                                            </span>
                                         {/each}
                                     </formats>
                                     <Circle class="w-1 opacity-50 md:w-[0.25vw]" />
@@ -764,14 +772,3 @@
         </anime-more-details>
     </anime-info-section>
 </anime-info-container>
-
-<style lang="scss">
-    episode-japanese-name,
-    episode-name {
-        &:not(:hover) {
-            /* if we need to change the width, we should change the 90% to higher  */
-            mask-image: linear-gradient(90deg, rgba(7, 5, 25, 0.95) 90%, rgba(0, 0, 0, 0) 100%);
-            mask-position: right;
-        }
-    }
-</style>
