@@ -30,7 +30,7 @@
   <a href="https://results.pre-commit.ci/latest/github/tokitou-san/CoreProject-V3-UI/v3"><img src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white&style=for-the-badge" alt="pre-commit.ci status"></a>
   <a href='https://discord.gg/7AraSmKqnN'><img alt="Discord" src="https://img.shields.io/discord/1039894823626362931?style=for-the-badge"></a>
 </p>
-
+    
 ## Screenshots
 
 <p float="left">
