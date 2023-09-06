@@ -45,14 +45,14 @@ updates:
       open-pull-requests-limit: 100
 
     # Actions
-    - package-ecosystem: 'github-actions'
-      directory: '/'
+    - package-ecosystem: "github-actions"
+      directory: "/"
       schedule:
-          interval: 'daily'
+          interval: "daily"
 
     # Submodule
-    - package-ecosystem: 'gitsubmodule'
-      directory: '/'
+    - package-ecosystem: "gitsubmodule"
+      directory: "/"
 
       schedule:
-          interval: 'daily'
+          interval: "daily"
