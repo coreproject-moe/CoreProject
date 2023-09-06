@@ -1,7 +1,6 @@
+from settings import POSTGRES
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import declarative_base, sessionmaker
-
-from settings import POSTGRES
 
 NAME = POSTGRES["NAME"]
 USER = POSTGRES["USER"]

@@ -23,9 +23,10 @@
 #
 # Source https://github.com/Android-for-Python/Webview-Example
 
-from android.runnable import run_on_ui_thread
 from jnius import PythonJavaClass, autoclass, cast, java_method
 from kivy.uix.modalview import ModalView
+
+from android.runnable import run_on_ui_thread
 
 WebViewA = autoclass("android.webkit.WebView")
 WebViewClient = autoclass("android.webkit.WebViewClient")

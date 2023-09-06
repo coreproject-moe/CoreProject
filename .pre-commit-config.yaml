@@ -49,5 +49,5 @@ repos:
                     '--respect-gitignore',
                     '--exclude',
                     './tools',
-      
+
                 ]
