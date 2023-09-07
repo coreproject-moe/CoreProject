@@ -1,11 +1,9 @@
 from collections.abc import AsyncGenerator
 
-import jinja2
-
-from aiohttp import web
 import aiohttp_jinja2
-
-from database import SessionLocal, engine, DjangoSessionLocal
+import jinja2
+from aiohttp import web
+from database import DjangoSessionLocal, SessionLocal, engine
 from settings import TEMPLATE_DIRS
 
 routes = web.RouteTableDef()
