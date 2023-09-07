@@ -23,21 +23,21 @@ const config = {
         // See https://kit.svelte.dev/docs/adapters for more information about adapters.
         adapter: is_static
             ? static_adapter({
-                  fallback: "app.html",
+                fallback: "app.html",
                   // precompress: true,
-                  strict: true
-              })
+                strict: true
+            })
             : is_node
             ? node_adapter({
-                  precompress: false
-              })
+                precompress: false
+            })
             : is_vercel
             ? vercel({ external: [] })
             : is_netlify
             ? netlify({
-                  edge: false,
-                  split: true
-              })
+                edge: false,
+                split: true
+            })
             : auto(),
         alias: {
             $store: path.resolve("./src/lib/store"),
