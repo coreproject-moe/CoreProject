@@ -43,16 +43,15 @@ updates:
       schedule:
           interval: daily
       open-pull-requests-limit: 100
+      
+    #Frontend
+    - package-ecosystem: 'npm'
+      directory: '/frontend'
+      schedule:
+          interval: 'daily'
 
     # Actions
-    - package-ecosystem: "github-actions"
-      directory: "/"
+    - package-ecosystem: 'github-actions'
+      directory: '/'
       schedule:
-          interval: "daily"
-
-    # Submodule
-    - package-ecosystem: "gitsubmodule"
-      directory: "/"
-
-      schedule:
-          interval: "daily"
+          interval: 'daily'
