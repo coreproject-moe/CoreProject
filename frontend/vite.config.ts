@@ -7,7 +7,7 @@ export default defineConfig({
         purgeCss({
             safelist: {
                 // any selectors that begin with "hljs-" will not be purged
-                greedy: [/^hljs-/]
+                greedy: [/^hljs-/, /^sl-/]
             }
         })
     ],
@@ -19,7 +19,7 @@ export default defineConfig({
         drop: ["console", "debugger"]
     },
     build: {
-        target: "es2015",
+        target: "esnext",
         sourcemap: true
     },
     css: {
