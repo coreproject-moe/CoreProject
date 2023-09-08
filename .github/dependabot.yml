@@ -43,7 +43,7 @@ updates:
       schedule:
           interval: daily
       open-pull-requests-limit: 100
-      
+
     #Frontend
     - package-ecosystem: 'npm'
       directory: '/frontend'
