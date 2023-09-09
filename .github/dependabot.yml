@@ -45,10 +45,10 @@ updates:
       open-pull-requests-limit: 100
 
     #Frontend
-    - package-ecosystem: 'npm'
-      directory: '/frontend'
-      schedule:
-          interval: 'daily'
+    #- package-ecosystem: 'npm'
+    #  directory: '/frontend'
+    #  schedule:
+    #      interval: 'daily'
 
     # Actions
     - package-ecosystem: 'github-actions'
