@@ -59,11 +59,14 @@ selectolax = "^0.3.16"
 python-dateutil = "^2.8.2"
 # Rest Framework
 djangorestframework = "^3.14.0"
+django-crispy-forms = "^2.0"
+# OpenAPI
 drf-spectacular = "^0.26.4"
 drf-spectacular-sidecar = "^2023.9.1"
 # Django filters
 django-filter = "^23.2"
 django-ltree = "^0.5.3"
+crispy-bootstrap4 = "^2022.1"
 
 [tool.poetry.group.dev.dependencies]
 ## Watchfiles

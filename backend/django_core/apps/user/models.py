@@ -21,7 +21,6 @@ avatar = FilePattern(filename_pattern="avatar/{uuid:s}{ext}")
 class CustomUser(
     AbstractBaseUser,
     PermissionsMixin,
-    CreatedAtMixin,
 ):
     username = models.CharField(
         _("username"),

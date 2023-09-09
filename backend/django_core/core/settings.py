@@ -95,6 +95,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "drf_spectacular_sidecar",
     "django_filters",
+    # Crispy forms
     "crispy_forms",
     "crispy_bootstrap4",
     # Models
