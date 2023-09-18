@@ -64,7 +64,7 @@ django-crispy-forms = "^2.0"
 drf-spectacular = "^0.26.4"
 drf-spectacular-sidecar = "^2023.9.1"
 # Django filters
-django-filter = "^23.2"
+django-filter = "^23.3"
 django-ltree = "^0.5.3"
 crispy-bootstrap4 = "^2022.1"
 
