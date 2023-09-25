@@ -61,7 +61,7 @@ python-dateutil = "^2.8.2"
 djangorestframework = "^3.14.0"
 django-crispy-forms = "^2.0"
 # OpenAPI
-drf-spectacular = "^0.26.4"
+drf-spectacular = "^0.26.5"
 drf-spectacular-sidecar = "^2023.9.1"
 # Django filters
 django-filter = "^23.3"
