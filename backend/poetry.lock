@@ -1969,13 +1969,13 @@ yaml = ["pyyaml (>=5.4)"]
 
 [[package]]
 name = "requests-ratelimiter"
-version = "0.4.1"
+version = "0.4.2"
 description = "Rate-limiting for the requests library"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "requests_ratelimiter-0.4.1-py3-none-any.whl", hash = "sha256:b8b63841c2fff73ea4fab8e9823d5a5ecfd7795f5475e45f39ae72605317d059"},
-    {file = "requests_ratelimiter-0.4.1.tar.gz", hash = "sha256:254a2565947517016a1dadba51d778d26639a7bbc4114445c667b6d46e899836"},
+    {file = "requests_ratelimiter-0.4.2-py3-none-any.whl", hash = "sha256:1cf68b02cca692f8dfa8eca12653a3ee177bea3208f8dd7533bb52a3ab14d16c"},
+    {file = "requests_ratelimiter-0.4.2.tar.gz", hash = "sha256:7b804c9484617e3e7c372eba81b9dedfe6d34904d1ceb8b7c4a4f3b864dc0dbd"},
 ]
 
 [package.dependencies]
@@ -2571,4 +2571,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "404db5ee9e008b1eadbdd3f8a01b3d024f8cbdb95d6d589f57e9fb5394180602"
+content-hash = "82e332c5c2b0802fbc2dc77a5712935ab079bf82a2f230212638b989b2a07900"
