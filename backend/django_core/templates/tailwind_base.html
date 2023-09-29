@@ -33,7 +33,7 @@
         <title>{% block title %} {% endblock %}</title>
         {% tailwind_css %}
     </head>
-    <body>
+    <body hx-boost="true">
         {% block body %}{% endblock %} {% block js %} {% endblock %}
     </body>
 </html>
