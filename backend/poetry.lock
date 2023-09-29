@@ -670,6 +670,20 @@ files = [
 Pillow = ">=9.0.0"
 
 [[package]]
+name = "django-components"
+version = "0.28.2"
+description = "A way to create simple reusable template components in Django."
+optional = false
+python-versions = "*"
+files = [
+    {file = "django_components-0.28.2-py3-none-any.whl", hash = "sha256:7f5731e463dc04299f7c30ab9f09f14037eda39149605a71b61aa2b53486c2ab"},
+    {file = "django_components-0.28.2.tar.gz", hash = "sha256:e8301fe234d1e5caf2730edad15633ca5fe8100fe9b1330af7420eaf207fdbc0"},
+]
+
+[package.dependencies]
+Django = ">=3.2"
+
+[[package]]
 name = "django-cors-headers"
 version = "4.2.0"
 description = "django-cors-headers is a Django application for handling the server headers required for Cross-Origin Resource Sharing (CORS)."
@@ -2585,4 +2599,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "f269b26bc7b3a195882b692eba0df7c0e6a39c07004a1cf6a4e0b9eea0ce90ba"
+content-hash = "904ae312ca00758c510c4d9ab4b078ff325938cb62af06c5bc56d9d65e429907"
