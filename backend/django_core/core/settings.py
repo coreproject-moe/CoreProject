@@ -75,7 +75,10 @@ INSTALLED_APPS = [
     "django_htmx",
     # Whitenoise
     "whitenoise.runserver_nostatic",
-    "django.contrib.staticfiles",
+    # Components
+    "django_components",
+    "django_components.safer_staticfiles",  # <-- ADD
+    # "django.contrib.staticfiles", 
     # 3rd party rest framework stuff
     "corsheaders",
     # 3rd party Django stuff
@@ -97,6 +100,7 @@ INSTALLED_APPS = [
     "drf_spectacular",
     "drf_spectacular_sidecar",
     "django_filters",
+ 
     # Crispy forms
     "crispy_forms",
     "crispy_bootstrap4",
@@ -200,14 +204,24 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [BASE_DIR / "templates"],
-        "APP_DIRS": True,
+        # "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+            ], 
+            'builtins': [
+                'django_components.templatetags.component_tags',
             ],
+            'loaders':[(
+                'django.template.loaders.cached.Loader', [
+                    'django.template.loaders.filesystem.Loader',
+                    'django.template.loaders.app_directories.Loader',
+                    'django_components.template_loader.Loader',
+                ]
+            )],
         },
     },
 ]
@@ -317,6 +331,7 @@ STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
     Path(BASE_DIR, "static"),
+    Path(BASE_DIR,'components')
 ]
 
 STATIC_ROOT = Path(BASE_DIR, "staticfiles")
