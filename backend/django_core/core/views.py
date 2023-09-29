@@ -67,7 +67,6 @@ ERROR_DICT = {
 }
 
 
-
 def four_zero_zero_view(
     request: HttpRequest,
     exception: None = None,

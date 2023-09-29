@@ -1,8 +1,9 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
-from django.http import HttpRequest,HttpResponse
 from django.templatetags.static import static
 
 # Create your views here.
+
 
 def stack_view(request: HttpRequest) -> HttpResponse:
     context = {
@@ -27,4 +28,3 @@ def stack_view(request: HttpRequest) -> HttpResponse:
     }
 
     return render(request, "stack/index.html", context)
-

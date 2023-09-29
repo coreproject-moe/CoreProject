@@ -59,7 +59,7 @@ urlpatterns = [
     ),
     #  Pages
     # =======
-    path('',include('apps.pages.urls')),
+    path("", include("apps.pages.urls")),
 ]
 
 if settings.DEBUG:
