@@ -38,7 +38,6 @@ handler500 = views.five_zero_zero_view
 urlpatterns = [
     # Default django welcome page
     # path("", debug.default_urlconf),
-    path("", views.home_view, name="home_view"),
     #   Admin
     # ================
     path("admin/", admin.site.urls),
@@ -58,6 +57,9 @@ urlpatterns = [
         SpectacularSwaggerView.as_view(url_name="schema"),
         name="swagger-ui",
     ),
+    #  Pages
+    # =======
+    path("", include("apps.pages.urls")),
 ]
 
 if settings.DEBUG:
