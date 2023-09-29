@@ -795,6 +795,20 @@ files = [
 Django = ">=3.2"
 
 [[package]]
+name = "django-htmx"
+version = "1.16.0"
+description = "Extensions for using Django with htmx."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django_htmx-1.16.0-py3-none-any.whl", hash = "sha256:360d11266666e5d92bda57069f671f2c04642eb1fc071e4c4160cf9f504cbfa6"},
+    {file = "django_htmx-1.16.0.tar.gz", hash = "sha256:56a65045e079503877ba1354acb481030cf54da1e1f731d33c280e0a14b214cf"},
+]
+
+[package.dependencies]
+Django = ">=3.2"
+
+[[package]]
 name = "django-ltree"
 version = "0.5.3"
 description = "Django app to support ltree postgres extension"
@@ -858,7 +872,7 @@ files = [
 django = "*"
 django-stubs-ext = ">=4.2.2"
 mypy = [
-    {version = ">=1.0.0"},
+    {version = ">=1.0.0", optional = true, markers = "extra != \"compatible-mypy\""},
     {version = "==1.5.*", optional = true, markers = "extra == \"compatible-mypy\""},
 ]
 types-pytz = "*"
@@ -2571,4 +2585,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "82e332c5c2b0802fbc2dc77a5712935ab079bf82a2f230212638b989b2a07900"
+content-hash = "f269b26bc7b3a195882b692eba0df7c0e6a39c07004a1cf6a4e0b9eea0ce90ba"

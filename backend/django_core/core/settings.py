@@ -71,6 +71,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     # Postgres
     "django.contrib.postgres",
+    # HTMX
+    "django_htmx",
     # Whitenoise
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
@@ -143,6 +145,8 @@ if DEBUG:
 
 
 MIDDLEWARE = [
+    # HTMX
+    "django_htmx.middleware.HtmxMiddleware",
     # Django Specific
     "django.middleware.security.SecurityMiddleware",
     # Whitenoise

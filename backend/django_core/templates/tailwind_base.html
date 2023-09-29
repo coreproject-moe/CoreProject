@@ -28,7 +28,7 @@
             rel="stylesheet"
             href="{% static 'fonts/Kokoro/stylesheet.css' %}"
         />
-        <script src="{% static 'vendor/js/htmx/htmx.min.js'%}" async></script>
+        <script src="{% static 'vendor/js/htmx/htmx.min.js'%}" defer></script>
         {% block head %} {% endblock %}
         <title>{% block title %} {% endblock %}</title>
         {% tailwind_css %}

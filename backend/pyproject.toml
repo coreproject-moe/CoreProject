@@ -67,6 +67,7 @@ drf-spectacular-sidecar = "^2023.9.1"
 django-filter = "^23.3"
 django-ltree = "^0.5.3"
 crispy-bootstrap4 = "^2022.1"
+django-htmx = "^1.16.0"
 
 [tool.poetry.group.dev.dependencies]
 ## Watchfiles
