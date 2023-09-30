@@ -671,13 +671,13 @@ Pillow = ">=9.0.0"
 
 [[package]]
 name = "django-components"
-version = "0.28.2"
+version = "0.28.3"
 description = "A way to create simple reusable template components in Django."
 optional = false
 python-versions = "*"
 files = [
-    {file = "django_components-0.28.2-py3-none-any.whl", hash = "sha256:7f5731e463dc04299f7c30ab9f09f14037eda39149605a71b61aa2b53486c2ab"},
-    {file = "django_components-0.28.2.tar.gz", hash = "sha256:e8301fe234d1e5caf2730edad15633ca5fe8100fe9b1330af7420eaf207fdbc0"},
+    {file = "django_components-0.28.3-py3-none-any.whl", hash = "sha256:55c9174e5b8aa3f46db23b2182bd3ba1b883840bbf341690b7880170697c8d4d"},
+    {file = "django_components-0.28.3.tar.gz", hash = "sha256:9d5f8d45260c0acb7c80b087b2f5d6d76541c28b565713a702ac05b5d450a774"},
 ]
 
 [package.dependencies]
@@ -886,7 +886,7 @@ files = [
 django = "*"
 django-stubs-ext = ">=4.2.2"
 mypy = [
-    {version = ">=1.0.0", optional = true, markers = "extra != \"compatible-mypy\""},
+    {version = ">=1.0.0"},
     {version = "==1.5.*", optional = true, markers = "extra == \"compatible-mypy\""},
 ]
 types-pytz = "*"
@@ -2599,4 +2599,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "904ae312ca00758c510c4d9ab4b078ff325938cb62af06c5bc56d9d65e429907"
+content-hash = "3a7d5f5b9f784617eec303de3e3aa7210196937524ba6b2e6f0031175d97fd65"
