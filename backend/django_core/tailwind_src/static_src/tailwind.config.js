@@ -65,7 +65,7 @@ module.exports = {
             {
                 kokoro: {
                     primary: '#7569E1',
-                    secondary: '#E3BD49',
+                    secondary: '#03020C',
                     accent: '#FFF7F8',
                     neutral: '#1E2036',
                     'base-100': '#070519',
