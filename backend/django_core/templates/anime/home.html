@@ -1,6 +1,8 @@
 {% extends 'tailwind_base.html' %}
 
+
 {% block head %}
+    {% component_css_dependencies %}
     <title>AnimeCore</title>
 {% endblock %}
 
@@ -50,36 +52,7 @@
                                     {% include 'icons/search.html' with class="w-[1.25vw] text-black" %}
                                 </button>
                             </div>
-                            <glider-container class="mt-[2.8125vw] flex flex-col items-center gap-[0.5vw]" style="position: relative;">
-                                <active_glider class="rounded-[0.75vw] bg-white/10 absolute opacity-0 ease-in-out duration-50" style="height: 76.8px; width: 76.8px; z-index: -1; transform: translateY(0px); opacity: 0;"></active_glider>
-                                <a
-                                    href="/anime"
-                                    type="button"
-                                    class="btn btn-accent before:absolute before:-left-[0.75vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary relative w-[4vw] h-[4vw] rounded-[0.75vw]"
-                                >
-                                    <div class="inline-grid">
-                                        <div class="absolute inset-0 flex items-center justify-center">
-                                            {% include 'icons/home.html' with class="!text-black w-[1.5vw] text-white" %}
-                                        </div>
-                                    </div>
-                                </a>
-
-                                {% for icon in icons %}
-
-                                    <a href="{{ icon.href }}" type="button" class="btn !bg-transparent relative w-[4vw] h-[4vw] rounded-[0.75vw] p-0">
-                                        <div class="inline-grid">
-                                            <div class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]">
-                                                {% include icon.html with class=icon.class %}
-                                                <span class="text-[0.75vw] font-semibold capitalize leading-[1.05vw]">
-                                                    {{ icon.label }}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </a>
-
-                                {% endfor %}
-
-                            </glider-container>
+                            {% component "vercel_hover" %}
                         </div>
                         <div class="flex flex-col items-center">
                             <button type="button" class="btn !bg-transparent w-[4vw] h-[4vw] flex-col justify-center gap-[0.45vw] p-0 text-sm">
@@ -797,3 +770,7 @@
         </div>
     </div>
 {% endblock %}
+
+{%block js %}
+    {% component_js_dependencies %}
+{%endblock%}
