@@ -64,46 +64,21 @@
                                     </div>
                                 </a>
                                 
-                                <a href="/anime/explore" type="button" class="btn !bg-transparent relative w-[4vw] h-[4vw] rounded-[0.75vw] p-0">
-                                    <div class="inline-grid">
-                                        <div class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]">
-                                            {% include 'icons/compass.html' with   class="w-[1.25vw] text-white" %}
-                                            <span class="text-[0.75vw] font-semibold capitalize leading-[1.05vw]">
-                                                explore
-                                            </span>
+                                {% for icon in icons %}
+                                
+                                    <a href="{{ icon.href }}" type="button" class="btn !bg-transparent relative w-[4vw] h-[4vw] rounded-[0.75vw] p-0">
+                                        <div class="inline-grid">
+                                            <div class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]">
+                                                {% include icon.html with class=icon.class %}
+                                                <span class="text-[0.75vw] font-semibold capitalize leading-[1.05vw]">
+                                                    {{ icon.label }}
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                                <a href="/anime/list" type="button" class="btn !bg-transparent relative w-[4vw] h-[4vw] rounded-[0.75vw] p-0">
-                                    <div class="inline-grid">
-                                        <div class="absolute inset-0 flex flex-col items-center justify-center gap-[0.35vw]">
-                                            {% include 'icons/list.html' with class="w-[1.75vw] text-white"%}
-                                            <span class="text-[0.75vw] font-semibold capitalize leading-[1.05vw]">
-                                                list
-                                            </span>
-                                        </div>      
-                                    </div>
-                                </a>
-                                <a href="/anime/shedule" type="button" class="btn !bg-transparent relative w-[4vw] h-[4vw] rounded-[0.75vw] p-0">
-                                    <div class="inline-grid">
-                                        <div class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]">
-                                            {% include 'icons/calender.html' with class="w-[1.25vw] text-white" %}
-                                            <span class="text-[0.75vw] font-semibold capitalize leading-[1.05vw]">
-                                                schedule
-                                            </span>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="/anime/forum" type="button" class="btn !bg-transparent relative w-[4vw] h-[4vw] rounded-[0.75vw] p-0">
-                                    <div class="inline-grid">
-                                        <div class="absolute inset-0 flex flex-col items-center justify-center gap-[0.35vw]">
-                                            {% include 'icons/chat.html' with class="w-[1.25vw] text-white" %}
-                                            <span class="text-[0.75vw] font-semibold capitalize leading-[1.05vw]">
-                                                forum
-                                            </span>
-                                        </div>
-                                    </div>
-                                </a>
+                                    </a>
+                                    
+                                {% endfor %}
+                            
                             </glider-container>
                         </div>
                         <div class="flex flex-col items-center">
