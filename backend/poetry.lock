@@ -842,13 +842,13 @@ develop = ["tox", "twine"]
 
 [[package]]
 name = "django-ninja"
-version = "1.0b1"
+version = "1.0b2"
 description = "Django Ninja - Fast Django REST framework"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "django_ninja-1.0b1-py3-none-any.whl", hash = "sha256:16e130d9b6264d84fd23d0bfd59b5fa45577d22e60a3d79c814a21ac701c1d1c"},
-    {file = "django_ninja-1.0b1.tar.gz", hash = "sha256:4982f6fae214aa8b6f82b196daa10330820d0b0f01f9da375feb942c2d317d09"},
+    {file = "django_ninja-1.0b2-py3-none-any.whl", hash = "sha256:a810443c4e7792b562caa9eb9c250e7a1366bf3b6d41db2428f4857690cdb7dc"},
+    {file = "django_ninja-1.0b2.tar.gz", hash = "sha256:66f02ec8b199ddf3291e24d546ee0e2423070a772267590b2717c5b78fac5128"},
 ]
 
 [package.dependencies]
