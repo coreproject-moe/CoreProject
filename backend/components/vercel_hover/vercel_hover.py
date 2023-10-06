@@ -11,10 +11,12 @@ class VercelHover(component.Component):
     def get_context_data(
         self,
         icons: list,
+        direction: str,
         glider_container_class: str | None = None,
         active_element_class: str | None = None,
     ):
         return {
+            "direction": direction,
             "glider_container_class": glider_container_class,
             "active_element_class": active_element_class,
             "icons": icons,

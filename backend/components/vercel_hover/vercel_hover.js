@@ -1,9 +1,8 @@
 (() => {
-    let direction = 'vertical';
-
     /** vercel effect */
-    let hover_glider_element = document.querySelector('active_glider'),
+    const hover_glider_element = document.querySelector('active_glider'),
         glider_container_element = document.querySelector('glider-container'),
+        direction = glider_container_element.getAttribute('direction'),
         GLIDER_TRANSITION_DURATION = 200,
         is_hovered = false, // Boolean switch flag
         mouse_leave_timeout = null;
