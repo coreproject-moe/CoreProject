@@ -1,5 +1,5 @@
 (() => {
-    let direction = 'horizontal';
+    let direction = 'vertical';
 
     /** vercel effect */
     let hover_glider_element = document.querySelector('active_glider'),
