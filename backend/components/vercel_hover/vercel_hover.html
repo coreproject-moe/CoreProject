@@ -1,4 +1,9 @@
-{% for icon in icons %}
+<glider-container class="{{ glider_container_class }}">
+    <active_glider
+        class="{{ active_element_class }} absolute opacity-0 ease-in-out duration-200"
+    ></active_glider>
+
+    {% for icon in icons %}
     <a
         href="{{ icon.href }}"
         type="button"
@@ -17,5 +22,5 @@
             </div>
         </div>
     </a>
-
-{% endfor %}
+    {% endfor %}
+</glider-container>
