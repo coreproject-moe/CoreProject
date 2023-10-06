@@ -3,7 +3,7 @@
         glider_container_element = document.querySelector('glider-container'),
         direction = glider_container_element.getAttribute('direction'),
         GLIDER_TRANSITION_DURATION =
-            glider_container_element.getAttribute('duration') || 200,
+            parseInt(glider_container_element.getAttribute('duration')) || 200,
         mouse_leave_timeout = null,
         is_hovered = false; // Boolean switch flag
 
@@ -42,7 +42,7 @@
 
             if (!is_hovered) {
                 GLIDER_TRANSITION_DURATION = 50;
-                hover_glider_element.style.transitionDuration = '1ms';
+                hover_glider_element.style.transitionDuration = `${GLIDER_TRANSITION_DURATION}ms`;
                 hover_glider_element.style.opacity = '100';
                 is_hovered = true;
             } else {
