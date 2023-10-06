@@ -2,7 +2,8 @@
     let hover_glider_element = document.querySelector('active_glider'),
         glider_container_element = document.querySelector('glider-container'),
         direction = glider_container_element.getAttribute('direction'),
-        GLIDER_TRANSITION_DURATION = 200,
+        GLIDER_TRANSITION_DURATION =
+            glider_container_element.getAttribute('duration') || 200,
         mouse_leave_timeout = null,
         is_hovered = false; // Boolean switch flag
 
@@ -30,14 +31,6 @@
                 target_zindex ? target_zindex - 1 : -1
             );
 
-            if (!is_hovered) {
-                GLIDER_TRANSITION_DURATION = 50;
-                hover_glider_element.style.opacity = '100';
-                is_hovered = true;
-            } else {
-                GLIDER_TRANSITION_DURATION = 200;
-            }
-
             switch (direction) {
                 case 'vertical':
                     hover_glider_element.style.transform = `translateY(${target.offsetTop}px)`;
@@ -45,6 +38,16 @@
                 case 'horizontal':
                     hover_glider_element.style.transform = `translateX(${target.offsetLeft}px)`;
                     break;
+            }
+
+            if (!is_hovered) {
+                GLIDER_TRANSITION_DURATION = 50;
+                hover_glider_element.style.transitionDuration = '1ms';
+                hover_glider_element.style.opacity = '100';
+                is_hovered = true;
+            } else {
+                GLIDER_TRANSITION_DURATION = 200;
+                hover_glider_element.style.transitionDuration = `${GLIDER_TRANSITION_DURATION}ms`;
             }
 
             clearTimeout(mouse_leave_timeout);
