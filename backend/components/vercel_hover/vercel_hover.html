@@ -8,23 +8,23 @@
     ></active_glider>
 
     {% for icon in icons %}
-    <a
-        href="{{ icon.href }}"
-        type="button"
-        class="btn !bg-transparent relative w-[4vw] h-[4vw] rounded-[0.75vw] p-0"
-    >
-        <div class="inline-grid">
-            <div
-                class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]"
-            >
-                {% include icon.html with class=icon.class %}
-                <span
-                    class="text-[0.75vw] font-semibold capitalize leading-[1.05vw]"
+        <a
+            href="{{ icon.href }}"
+            type="button"
+            class="btn !bg-transparent relative w-[4vw] h-[4vw] rounded-[0.75vw] p-0"
+        >
+            <div class="inline-grid">
+                <div
+                    class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]"
                 >
-                    {{ icon.label }}
-                </span>
+                    {% include icon.html with class=icon.class %}
+                    <span
+                        class="text-[0.75vw] font-semibold capitalize leading-[1.05vw]"
+                    >
+                        {{ icon.label }}
+                    </span>
+                </div>
             </div>
-        </div>
-    </a>
+        </a>
     {% endfor %}
 </glider-container>
