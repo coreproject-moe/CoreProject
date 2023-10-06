@@ -1,6 +1,6 @@
 (() => {
     /** vercel effect */
-    const hover_glider_element = document.querySelector('active_glider'),
+    let hover_glider_element = document.querySelector('active_glider'),
         glider_container_element = document.querySelector('glider-container'),
         direction = glider_container_element.getAttribute('direction'),
         GLIDER_TRANSITION_DURATION = 200,
