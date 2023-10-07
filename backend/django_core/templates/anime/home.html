@@ -53,26 +53,26 @@
                                 </button>
                             </div>
                             {% component_block "vercel_hover" icons=icons glider_container_class='mt-[2.8125vw] flex flex-col items-center gap-[0.75vw]' active_element_class='rounded-[0.75vw] bg-white/10' direction='vertical' duration=200 %}
-                                {% fill 'items' %} 
+                                {% fill 'items' %}
                                     {% for icon in icons %}
-                                            <a
-                                                href="{{ icon.href }}"
-                                                type="button"
-                                                class="btn btn-icon relative w-[4vw] rounded-[0.75vw] p-0  {% if icon.href in request.path %} relative bg-secondary-100 before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500 {% else %} !bg-transparent {% endif %}"
-                                            >
-                                                <div class="inline-grid">
-                                                    <div
-                                                        class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]"
+                                        <a
+                                            href="{{ icon.href }}"
+                                            type="button"
+                                            class="btn btn-icon relative w-[4vw] rounded-[0.75vw] p-0  {% if icon.href in request.path %} relative bg-secondary-100 before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500 {% else %} !bg-transparent {% endif %}"
+                                        >
+                                            <div class="inline-grid">
+                                                <div
+                                                    class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]"
+                                                >
+                                                    {% include icon.html with class=icon.class %}
+                                                    <span
+                                                        class="text-[0.75vw] font-semibold capitalize leading-[1.05vw]"
                                                     >
-                                                        {% include icon.html with class=icon.class %}
-                                                        <span
-                                                            class="text-[0.75vw] font-semibold capitalize leading-[1.05vw]"
-                                                        >
-                                                            {{ icon.label }}
-                                                        </span>
-                                                    </div>
+                                                        {{ icon.label }}
+                                                    </span>
                                                 </div>
-                                            </a>
+                                            </div>
+                                        </a>
                                     {% endfor %}
                                 {% endfill %}
                             {% endcomponent_block %}
