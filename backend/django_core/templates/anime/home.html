@@ -1,6 +1,8 @@
 {% extends 'tailwind_base.html' %}
 
+
 {% block head %}
+    {% component_css_dependencies %}
     <title>AnimeCore</title>
 {% endblock %}
 
@@ -10,100 +12,17 @@
             <header class="flex-none z-10">
                 <navbar class="absolute top-0 flex h-[4.5rem] w-full items-center justify-between bg-surface-900/95 px-4 backdrop-blur-3xl md:static md:h-[10vh] md:bg-surface-900 md:py-[0.9375vw] md:pl-[2.1vw] md:pr-[3.75vw]">
                     <a href="/">
-                        <svg class="w-9 md:w-[2.25vw] md:pt-[0.75vw]" viewBox="0 0 28 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <g filter="url(#filter0_d_3565_5702)">
-                                <path
-                                    fill-rule="evenodd"
-                                    clip-rule="evenodd"
-                                    d="M14 31.9999C19.5228 31.9999 24 27.5536 24 22.0689C24 16.5841 19.5228 12.1378 14 12.1378C8.47715 12.1378 4 16.5841 4 22.0689C4 27.5536 8.47715 31.9999 14 31.9999ZM13.9991 26.4828C16.4537 26.4828 18.4436 24.5067 18.4436 22.069C18.4436 19.6313 16.4537 17.6552 13.9991 17.6552C11.5445 17.6552 9.55469 19.6313 9.55469 22.069C9.55469 24.5067 11.5445 26.4828 13.9991 26.4828Z"
-                                    fill="#7569E1"
-                                ></path>
-                                <ellipse cx="13.9993" cy="3.31035" rx="3.33333" ry="3.31035" fill="#DCD9F7"></ellipse>
-                            </g>
-                            <defs>
-                                <filter id="filter0_d_3565_5702" x="0" y="0" width="28" height="39.9999" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                    <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
-                                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix>
-                                    <feOffset dy="4"></feOffset>
-                                    <feGaussianBlur stdDeviation="2"></feGaussianBlur>
-                                    <feComposite in2="hardAlpha" operator="out"></feComposite>
-                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"></feColorMatrix>
-                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_3565_5702"></feBlend>
-                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3565_5702" result="shape"></feBlend>
-                                </filter>
-                            </defs>
-                        </svg>
+                        {% include 'icons/coreproject.html' with  class="w-9 md:w-[2.25vw] md:pt-[0.75vw]" %}
                     </a>
                     <div class="relative flex items-center md:static">
                         <div class="absolute left-1/2 -translate-x-1/2">
                             <a href="/" class="hidden md:flex">
-                                <svg class="w-[10vw]" viewBox="0 0 140 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <g filter="url(#filter0_d_3571_5637)">
-                                        <path
-                                            d="M14.912 19.7753C15.4643 19.7753 15.912 19.3276 15.912 18.7753V13.427C15.912 8.37079 13.2925 6.51685 10.1766 6.51685C8.54377 6.51685 7.26248 6.92613 6.29359 7.42579C5.85055 7.65427 5.70348 8.19993 5.91771 8.65003L6.40075 9.66494C6.65214 10.1931 7.29841 10.3837 7.84132 10.1659C8.41308 9.93651 9.05315 9.77528 9.73542 9.77528C10.733 9.77528 11.4202 10.0223 11.8373 10.5105C12.2928 11.0436 11.6016 11.6438 10.9076 11.5435C7.3015 11.0223 4 12.5648 4 15.6461C4 18.0056 5.7096 20 8.7979 20C9.95425 20 10.8941 19.6377 11.6638 19.0664C11.943 18.8592 12.3825 19.0424 12.3825 19.3902C12.3825 19.6029 12.555 19.7753 12.7677 19.7753H14.912ZM11.5398 14.2884C12.0279 14.3998 12.3302 14.8999 12.1186 15.3535C11.5785 16.5115 10.4543 17.191 9.45968 17.191C8.38429 17.191 7.52949 16.6292 7.52949 15.6461C7.52949 14.3635 9.20927 13.7564 11.5398 14.2884Z"
-                                            fill="white"
-                                        ></path>
-                                        <path
-                                            d="M25.6155 6.51685C24.4216 6.51685 23.5936 6.88973 23.0037 7.36581C22.75 7.57049 22.3066 7.40819 22.3066 7.08226C22.3066 6.8941 22.1541 6.74157 21.966 6.74157H19.7772C19.2249 6.74157 18.7772 7.18929 18.7772 7.74157V18.7753C18.7772 19.3276 19.2249 19.7753 19.7772 19.7753H21.3066C21.8589 19.7753 22.3066 19.3276 22.3066 18.7753V13.0337C22.3066 10.7303 23.7129 9.88764 24.7332 9.88764C25.8086 9.88764 27.1597 10.3652 27.1597 12.5843V18.7753C27.1597 19.3276 27.6074 19.7753 28.1597 19.7753H29.6892C30.2415 19.7753 30.6892 19.3276 30.6892 18.7753V12.5843C30.6892 8.37079 28.4005 6.51685 25.6155 6.51685Z"
-                                            fill="white"
-                                        ></path>
-                                        <path
-                                            d="M35.3253 4.49438C36.5386 4.49438 37.5312 3.48315 37.5312 2.24719C37.5312 1.01124 36.5386 0 35.3253 0C34.112 0 33.1194 1.01124 33.1194 2.24719C33.1194 3.48315 34.112 4.49438 35.3253 4.49438ZM33.5606 18.7753C33.5606 19.3276 34.0083 19.7753 34.5606 19.7753H36.09C36.6423 19.7753 37.09 19.3276 37.09 18.7753V7.74157C37.09 7.18929 36.6423 6.74157 36.09 6.74157H34.5606C34.0083 6.74157 33.5606 7.18929 33.5606 7.74157V18.7753Z"
-                                            fill="white"
-                                        ></path>
-                                        <path
-                                            d="M54.6285 6.51685C53.5715 6.51685 52.6695 6.78012 51.896 7.3517C51.3429 7.7604 50.5058 7.73059 49.9607 7.31138C49.2753 6.78436 48.4389 6.51685 47.4592 6.51685C46.3412 6.51685 45.4329 6.77991 44.6357 7.40664C44.3698 7.61568 43.9297 7.44431 43.9297 7.10608C43.9297 6.90477 43.7665 6.74157 43.5652 6.74157H41.4002C40.848 6.74157 40.4002 7.18929 40.4002 7.74157V18.7753C40.4002 19.3276 40.848 19.7753 41.4002 19.7753H42.9297C43.482 19.7753 43.9297 19.3276 43.9297 18.7753V13.0337C43.9297 10.5056 45.336 9.88764 46.246 9.88764C47.2111 9.88764 48.3416 10.3652 48.3416 12.5843V18.7753C48.3416 19.3276 48.7893 19.7753 49.3416 19.7753H50.8711C51.4234 19.7753 51.8711 19.3276 51.8711 18.7753V13.0337C51.8711 10.5056 53.1946 9.88764 54.077 9.88764C55.0421 9.88764 56.283 10.3652 56.283 12.5843V18.7753C56.283 19.3276 56.7307 19.7753 57.283 19.7753H58.8124C59.3647 19.7753 59.8124 19.3276 59.8124 18.7753V12.5843C59.8124 8.37079 57.6341 6.51685 54.6285 6.51685Z"
-                                            fill="white"
-                                        ></path>
-                                        <path
-                                            d="M68.9507 16.6292C68.8747 16.6292 68.8005 16.6278 68.7279 16.6248C67.9796 16.5947 67.9171 15.738 68.5539 15.3436L74.1963 11.8494C74.5694 11.6183 74.7547 11.1683 74.6061 10.7554C73.4093 7.42917 70.5231 6.51685 68.8955 6.51685C64.6215 6.51685 62.0296 9.55056 62.0296 13.2584C62.0296 16.9382 64.6767 20 68.8955 20C70.5646 20 72.0332 19.4896 73.3015 18.4862C73.6872 18.181 73.7319 17.6261 73.4472 17.2251L72.7952 16.307C72.4226 15.7823 71.6482 15.7465 71.088 16.0632C70.4335 16.4331 69.6751 16.6292 68.9507 16.6292ZM68.9507 9.88764C69.2575 9.88764 69.5318 9.93725 69.7767 10.0254C70.3622 10.236 70.2528 10.9949 69.7186 11.3138L66.0515 13.503C65.8439 13.6269 65.5591 13.5002 65.5591 13.2584C65.5591 11.4045 66.9653 9.88764 68.9507 9.88764Z"
-                                            fill="white"
-                                        ></path>
-                                        <path
-                                            d="M86.5607 15.7303C84.7408 15.7303 83.3621 14.2978 83.3621 12.5843C83.3621 10.8708 84.7408 9.4382 86.5607 9.4382C87.1144 9.4382 87.6253 9.56931 88.0788 9.8169C88.6442 10.1255 89.4129 10.1255 89.8001 9.61075L90.8071 8.27213C91.0953 7.88912 91.0761 7.34898 90.715 7.03375C89.496 5.96944 87.9686 5.39326 86.3401 5.39326C81.7352 5.39326 78.9502 8.59551 78.9502 12.5843C78.9502 16.573 81.7352 19.7753 86.3401 19.7753C87.9686 19.7753 89.496 19.1991 90.715 18.1348C91.0761 17.8196 91.0953 17.2794 90.8071 16.8964L89.8001 15.5578C89.4129 15.043 88.6442 15.043 88.0788 15.3516C87.6253 15.5992 87.1144 15.7303 86.5607 15.7303Z"
-                                            fill="#DCD9F7"
-                                        ></path>
-                                        <path
-                                            d="M100.561 5.39326C96.066 5.39326 93.0604 8.59551 93.0604 12.5843C93.0604 16.573 96.1488 19.7753 100.561 19.7753C104.807 19.7753 108.061 16.573 108.061 12.5843C108.061 8.59551 104.752 5.39326 100.561 5.39326ZM100.561 15.7303C98.8786 15.7303 97.4723 14.2978 97.4723 12.5843C97.4723 10.8708 98.8786 9.4382 100.561 9.4382C102.243 9.4382 103.649 10.8708 103.649 12.5843C103.649 14.2978 102.243 15.7303 100.561 15.7303Z"
-                                            fill="#F2C94C"
-                                        ></path>
-                                        <path
-                                            d="M115.131 6.8427C115.131 6.29041 114.683 5.8427 114.131 5.8427H111.719C111.167 5.8427 110.719 6.29041 110.719 6.8427V18.3258C110.719 18.8781 111.167 19.3258 111.719 19.3258H114.131C114.683 19.3258 115.131 18.8781 115.131 18.3258V14.3539C115.131 12.1348 116.261 10.7022 117.557 10.3371C117.928 10.2329 118.293 10.171 118.663 10.1597C119.331 10.1394 119.984 9.66674 119.984 8.99851V6.47469C119.984 5.89161 119.485 5.42411 118.911 5.52776C117.05 5.86387 115.902 6.69947 115.131 8.3427V6.8427Z"
-                                            fill="#DCD9F7"
-                                        ></path>
-                                        <path
-                                            d="M128.748 15.8427C128.103 15.8427 128.032 15.1573 128.583 14.8215L134.586 11.1607C134.953 10.9371 135.141 10.501 135.015 10.0904C133.821 6.19781 130.713 5.39326 128.913 5.39326C124.308 5.39326 121.523 8.59551 121.523 12.5843C121.523 16.573 124.308 19.7753 128.913 19.7753C130.729 19.7753 132.323 19.2 133.661 18.1372C134.054 17.825 134.092 17.2562 133.79 16.8551L132.73 15.4464C132.371 14.969 131.676 14.9193 131.155 15.2125C130.465 15.6013 129.638 15.8427 128.748 15.8427ZM128.913 9.32584C129.17 9.32584 129.393 9.36917 129.585 9.44089C130.102 9.63369 129.966 10.2878 129.494 10.5741L127.063 12.0513C126.45 12.4236 125.66 12.021 125.892 11.3424C126.319 10.0924 127.548 9.32584 128.913 9.32584Z"
-                                            fill="#DCD9F7"
-                                        ></path>
-                                        <circle cx="35.1998" cy="2.4" r="2.4" fill="#EDD68D"></circle>
-                                    </g>
-                                    <defs>
-                                        <filter id="filter0_d_3571_5637" x="0" y="0" width="139.054" height="28" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                            <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
-                                            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix>
-                                            <feOffset dy="4"></feOffset>
-                                            <feGaussianBlur stdDeviation="2"></feGaussianBlur>
-                                            <feComposite in2="hardAlpha" operator="out"></feComposite>
-                                            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"></feColorMatrix>
-                                            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_3571_5637"></feBlend>
-                                            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3571_5637" result="shape"></feBlend>
-                                        </filter>
-                                    </defs>
-                                </svg>
+                                {% include 'icons/animecore.html' with  class="w-[10vw]" %}
                             </a>
                             <search-form>
                                 <form class="relative flex h-12 w-[65vw] items-center md:hidden">
                                     <button class="btn absolute left-4 p-0" aria-label="Search">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 opacity-75" fill="none" viewBox="0 0 36 36">
-                                            <path
-                                                stroke="currentColor"
-                                                stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                stroke-width="6"
-                                                d="M16.5 28.5C23.1274 28.5 28.5 23.1274 28.5 16.5C28.5 9.87258 23.1274 4.5 16.5 4.5C9.87258 4.5 4.5 9.87258 4.5 16.5C4.5 23.1274 9.87258 28.5 16.5 28.5Z"
-                                            ></path>
-                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6" d="M31.5001 31.5001L24.9751 24.9751"></path>
-                                        </svg>
+                                        {% include 'icons/search.html' with class="w-5 opacity-75" %}
                                     </button>
                                     <input
                                         type="text"
@@ -130,113 +49,33 @@
                         <div>
                             <div class="flex flex-col items-center">
                                 <button type="button" class="btn btn-warning w-[3vw] h-[3vw] p-0 rounded-[0.5vw]">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-[1.25vw] text-black" fill="none" viewBox="0 0 36 36">
-                                        <path
-                                            stroke="currentColor"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="6"
-                                            d="M16.5 28.5C23.1274 28.5 28.5 23.1274 28.5 16.5C28.5 9.87258 23.1274 4.5 16.5 4.5C9.87258 4.5 4.5 9.87258 4.5 16.5C4.5 23.1274 9.87258 28.5 16.5 28.5Z"
-                                        ></path>
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6" d="M31.5001 31.5001L24.9751 24.9751"></path>
-                                    </svg>
+                                    {% include 'icons/search.html' with class="w-[1.25vw] text-black" %}
                                 </button>
                             </div>
-                            <glider-container class="mt-[2.8125vw] flex flex-col items-center gap-[0.5vw]" style="position: relative;">
-                                <active_glider class="rounded-[0.75vw] bg-white/10 absolute opacity-0 ease-in-out duration-50" style="height: 76.8px; width: 76.8px; z-index: -1; transform: translateY(0px); opacity: 0;"></active_glider>
-                                <a
-                                    href="/anime"
-                                    type="button"
-                                    class="btn btn-accent before:absolute before:-left-[0.75vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary relative w-[4vw] h-[4vw] rounded-[0.75vw]"
-                                >
-                                    <div class="inline-grid">
-                                        <div class="absolute inset-0 flex items-center justify-center">
-                                            <svg class="!text-black w-[1.5vw] text-white" viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M7.99961 16V12C7.99961 11.4477 8.44733 11 8.99961 11H10.9996C11.5519 11 11.9996 11.4477 11.9996 12V16C11.9996 16.55 12.4496 17 12.9996 17H15.9996C16.5496 17 16.9996 16.55 16.9996 16V9.99997C16.9996 9.44769 17.4473 8.99997 17.9996 8.99997H18.6996C19.1596 8.99997 19.3796 8.42997 19.0296 8.12997L10.6696 0.599971C10.2896 0.259971 9.70961 0.259971 9.32961 0.599971L0.96961 8.12997C0.62961 8.42997 0.83961 8.99997 1.29961 8.99997H1.99961C2.55189 8.99997 2.99961 9.44769 2.99961 9.99997V16C2.99961 16.55 3.44961 17 3.99961 17H6.99961C7.54961 17 7.99961 16.55 7.99961 16Z"
-                                                    fill="currentColor"
-                                                ></path>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="/anime/explore" type="button" class="btn !bg-transparent relative w-[4vw] h-[4vw] rounded-[0.75vw] p-0">
-                                    <div class="inline-grid">
-                                        <div class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]">
-                                            <svg class="w-[1.25vw] text-white" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M10 0C4.48 0 0 4.48 0 10C0 15.52 4.48 20 10 20C15.52 20 20 15.52 20 10C20 4.48 15.52 0 10 0ZM10 18C5.59 18 2 14.41 2 10C2 5.59 5.59 2 10 2C14.41 2 18 5.59 18 10C18 14.41 14.41 18 10 18ZM5.65317 13.0185C5.26027 13.864 6.13598 14.7397 6.98146 14.3468L11.3472 12.318C11.7752 12.1191 12.1191 11.7752 12.318 11.3472L14.3468 6.98146C14.7397 6.13599 13.864 5.26026 13.0185 5.65317L8.65283 7.68197C8.22479 7.88089 7.88089 8.22479 7.68197 8.65283L5.65317 13.0185ZM10 8.9C10.61 8.9 11.1 9.39 11.1 10C11.1 10.61 10.61 11.1 10 11.1C9.39 11.1 8.9 10.61 8.9 10C8.9 9.39 9.39 8.9 10 8.9Z"
-                                                    fill="currentColor"
-                                                ></path>
-                                            </svg>
-                                            <span class="text-[0.75vw] font-semibold capitalize leading-[1.05vw]">
-                                                explore
-                                            </span>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="/anime/list" type="button" class="btn !bg-transparent relative w-[4vw] h-[4vw] rounded-[0.75vw] p-0">
-                                    <div class="inline-grid">
-                                        <div class="absolute inset-0 flex flex-col items-center justify-center gap-[0.35vw]">
-                                            <svg class="w-[1.75vw] text-white" viewBox="0 0 26 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <g filter="url(#filter0_d_1011_784)">
-                                                    <path d="M9.6665 5H20.4998" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M9.6665 10H20.4998" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M9.6665 15H20.4998" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M5.5 5H5.50833" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M5.5 10H5.50833" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                    <path d="M5.5 15H5.50833" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                                </g>
-                                                <defs>
-                                                    <filter id="filter0_d_1011_784" x="-1" y="0" width="28" height="28" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                                        <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
-                                                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix>
-                                                        <feOffset dy="4"></feOffset>
-                                                        <feGaussianBlur stdDeviation="2"></feGaussianBlur>
-                                                        <feComposite in2="hardAlpha" operator="out"></feComposite>
-                                                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"></feColorMatrix>
-                                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1011_784"></feBlend>
-                                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1011_784" result="shape"></feBlend>
-                                                    </filter>
-                                                </defs>
-                                            </svg>
-                                            <span class="text-[0.75vw] font-semibold capitalize leading-[1.05vw]">
-                                                list
-                                            </span>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="/anime/shedule" type="button" class="btn !bg-transparent relative w-[4vw] h-[4vw] rounded-[0.75vw] p-0">
-                                    <div class="inline-grid">
-                                        <div class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]">
-                                            <svg class="w-[1.25vw] text-white" viewBox="0 0 18 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M15.667 2.49998H15.3337C15.0575 2.49998 14.8337 2.27612 14.8337 1.99998V1.66665C14.8337 1.20831 14.4587 0.833313 14.0003 0.833313C13.542 0.833313 13.167 1.20831 13.167 1.66665V1.99998C13.167 2.27612 12.9431 2.49998 12.667 2.49998H5.33366C5.05752 2.49998 4.83366 2.27612 4.83366 1.99998V1.66665C4.83366 1.20831 4.45866 0.833313 4.00033 0.833313C3.54199 0.833313 3.16699 1.20831 3.16699 1.66665V1.99998C3.16699 2.27612 2.94313 2.49998 2.66699 2.49998H2.33366C1.41699 2.49998 0.666992 3.24998 0.666992 4.16665V17.5C0.666992 18.4166 1.41699 19.1666 2.33366 19.1666H15.667C16.5837 19.1666 17.3337 18.4166 17.3337 17.5V4.16665C17.3337 3.24998 16.5837 2.49998 15.667 2.49998ZM14.8337 17.5H3.16699C2.70866 17.5 2.33366 17.125 2.33366 16.6666V6.66665H15.667V16.6666C15.667 17.125 15.292 17.5 14.8337 17.5Z"
-                                                    fill="currentColor"
-                                                ></path>
-                                            </svg>
-                                            <span class="text-[0.75vw] font-semibold capitalize leading-[1.05vw]">
-                                                schedule
-                                            </span>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a href="/anime/forum" type="button" class="btn !bg-transparent relative w-[4vw] h-[4vw] rounded-[0.75vw] p-0">
-                                    <div class="inline-grid">
-                                        <div class="absolute inset-0 flex flex-col items-center justify-center gap-[0.35vw]">
-                                            <svg class="w-[1.25vw] text-white" viewBox="0 0 18 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M15.667 4.00002H15.3337C15.0575 4.00002 14.8337 4.22388 14.8337 4.50002V10.6667C14.8337 11.125 14.4587 11.5 14.0003 11.5H4.50033C4.22418 11.5 4.00033 11.7239 4.00033 12V12.3334C4.00033 13.25 4.75033 14 5.66699 14H13.7932C13.9258 14 14.053 14.0527 14.1468 14.1465L16.4801 16.4798C16.7951 16.7948 17.3337 16.5717 17.3337 16.1262V5.66669C17.3337 4.75002 16.5837 4.00002 15.667 4.00002ZM13.167 8.16669V2.33335C13.167 1.41669 12.417 0.666687 11.5003 0.666687H2.33366C1.41699 0.666687 0.666992 1.41669 0.666992 2.33335V11.9596C0.666992 12.405 1.20556 12.6281 1.52055 12.3131L3.85388 9.9798C3.94765 9.88603 4.07482 9.83335 4.20743 9.83335H11.5003C12.417 9.83335 13.167 9.08335 13.167 8.16669Z"
-                                                    fill="currentColor"
-                                                ></path>
-                                            </svg>
-                                            <span class="text-[0.75vw] font-semibold capitalize leading-[1.05vw]">
-                                                forum
-                                            </span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </glider-container>
+                            {% component_block "vercel_hover" icons=icons glider_container_class='mt-[2.8125vw] flex flex-col items-center gap-[0.75vw]' active_element_class='rounded-[0.75vw] bg-white/10' direction='vertical' duration=200 %}
+                                {% fill 'items' %}
+                                    {% for icon in icons %}
+                                        <a
+                                            href="{{ icon.href }}"
+                                            type="button"
+                                            class="btn btn-icon relative w-[4vw] rounded-[0.75vw] p-0  {% if icon.href in request.path %} relative bg-secondary-100 before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500 {% else %} !bg-transparent {% endif %}"
+                                        >
+                                            <div class="inline-grid">
+                                                <div
+                                                    class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]"
+                                                >
+                                                    {% include icon.html with class=icon.class %}
+                                                    <span
+                                                        class="text-[0.75vw] font-semibold capitalize leading-[1.05vw]"
+                                                    >
+                                                        {{ icon.label }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    {% endfor %}
+                                {% endfill %}
+                            {% endcomponent_block %}
                         </div>
                         <div class="flex flex-col items-center">
                             <button type="button" class="btn !bg-transparent w-[4vw] h-[4vw] flex-col justify-center gap-[0.45vw] p-0 text-sm">
@@ -954,3 +793,7 @@
         </div>
     </div>
 {% endblock %}
+
+{%block js %}
+    {% component_js_dependencies %}
+{%endblock%}

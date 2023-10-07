@@ -67,7 +67,7 @@ drf-spectacular-sidecar = "^2023.9.1"
 django-filter = "^23.3"
 django-ltree = "^0.5.3"
 crispy-bootstrap4 = "^2022.1"
-django-components = "^0.28.2"
+django-components = "^0.28.3"
 django-htmx = "^1.16.0"
 
 [tool.poetry.group.dev.dependencies]
@@ -138,7 +138,7 @@ python_files = ["test_*.py", "*_test.py", "testing/python/*.py"]
 
 [tool.black]
 line-length = 92
-target-version = ["py312"]
+target-version = ["py311"]
 
 [tool.mypy]
 show_error_codes = true
