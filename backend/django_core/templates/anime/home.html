@@ -58,7 +58,7 @@
                                             <a
                                                 href="{{ icon.href }}"
                                                 type="button"
-                                                class="btn relative w-[4vw] h-[4vw] rounded-[0.75vw] p-0 {% if icon.href in request.path %} relative bg-secondary-100 before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500 {% else %} bg-initial {% endif %}"
+                                                class="btn btn-icon relative w-[4vw] rounded-[0.75vw] p-0  {% if icon.href in request.path %} relative bg-secondary-100 before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500 {% else %} !bg-transparent {% endif %}"
                                             >
                                                 <div class="inline-grid">
                                                     <div
