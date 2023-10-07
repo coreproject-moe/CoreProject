@@ -10,7 +10,6 @@ class VercelHover(component.Component):
     # This component takes one parameter, a date string to show in the template
     def get_context_data(
         self,
-        icons: list,
         direction: str,
         duration: int = 200,
         glider_container_class: str | None = None,
@@ -21,7 +20,6 @@ class VercelHover(component.Component):
             "direction": direction,
             "glider_container_class": glider_container_class,
             "active_element_class": active_element_class,
-            "icons": icons,
         }
 
     class Media:

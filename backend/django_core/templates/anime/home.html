@@ -52,7 +52,30 @@
                                     {% include 'icons/search.html' with class="w-[1.25vw] text-black" %}
                                 </button>
                             </div>
-                            {% component "vercel_hover" icons=icons glider_container_class='mt-[2.8125vw] flex flex-col items-center gap-[0.75vw]' active_element_class='rounded-[0.75vw] bg-white/10' direction='vertical' duration=200 %}
+                            {% component_block "vercel_hover" icons=icons glider_container_class='mt-[2.8125vw] flex flex-col items-center gap-[0.75vw]' active_element_class='rounded-[0.75vw] bg-white/10' direction='vertical' duration=200 %}
+                                {% fill 'items' %} 
+                                    {% for icon in icons %}
+                                            <a
+                                                href="{{ icon.href }}"
+                                                type="button"
+                                                class="btn relative w-[4vw] h-[4vw] rounded-[0.75vw] p-0 {% if icon.href in request.path %} relative bg-secondary-100 before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500 {% else %} bg-initial {% endif %}"
+                                            >
+                                                <div class="inline-grid">
+                                                    <div
+                                                        class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]"
+                                                    >
+                                                        {% include icon.html with class=icon.class %}
+                                                        <span
+                                                            class="text-[0.75vw] font-semibold capitalize leading-[1.05vw]"
+                                                        >
+                                                            {{ icon.label }}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                    {% endfor %}
+                                {% endfill %}
+                            {% endcomponent_block %}
                         </div>
                         <div class="flex flex-col items-center">
                             <button type="button" class="btn !bg-transparent w-[4vw] h-[4vw] flex-col justify-center gap-[0.45vw] p-0 text-sm">

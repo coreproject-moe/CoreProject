@@ -4,6 +4,12 @@ from django.shortcuts import render
 def anime_home_view(request):
     icons = [
         {
+            "html": "icons/home.html",
+            "class": "w-[1.25vw] text-white",
+            "label": "home",
+            "href": "/anime",
+        },
+        {
             "html": "icons/compass.html",
             "class": "w-[1.25vw] text-white",
             "label": "explore",

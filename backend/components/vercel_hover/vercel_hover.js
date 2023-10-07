@@ -55,6 +55,7 @@
         handle_mouseleave = () => {
             // Delay the mouseleave event to allow time ( GLIDER_TRANSITION_DURATION ) for moving to a sibling element
             mouse_leave_timeout = setTimeout(() => {
+                hover_glider_element.style.transitionDuration = `0ms`;
                 hover_glider_element.style.opacity = '0';
                 is_hovered = false;
             }, GLIDER_TRANSITION_DURATION);
