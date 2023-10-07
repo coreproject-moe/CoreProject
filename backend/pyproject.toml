@@ -37,10 +37,6 @@ celery = {extras = ["redis"], version = ">=5.3.0"}
 django-admin-hstore-widget = ">=1.2.1"   # https://github.com/PokaInc/django-admin-hstore-widget/pull/25
 # 3rd Party ( Model Fields )
 django-colorfield = "*"
-# Rest framework
-django_ninja = ">=1.0a1"
-ninja-put-patch-file-upload-middleware = ">=0.1.1"
-pydantic = {extras = ["email"], version = "*"}
 # ===================================================
 # Http Client
 requests = "^2.31.0"
@@ -62,7 +58,7 @@ djangorestframework = "^3.14.0"
 django-crispy-forms = "^2.0"
 # OpenAPI
 drf-spectacular = "^0.26.5"
-drf-spectacular-sidecar = "^2023.9.1"
+drf-spectacular-sidecar = "^2023.10.1"
 # Django filters
 django-filter = "^23.3"
 django-ltree = "^0.5.3"
@@ -90,7 +86,7 @@ django_stubs = {extras = ["compatible_mypy"], version = "*"}
 # Types
 types_redis = "*"
 # Task Runner
-poethepoet = "^0.23.0"
+poethepoet = "^0.24.0"
 # Django extensions
 django-extensions = "^3.2.3"
 # pygraphviz = "^1.10"
