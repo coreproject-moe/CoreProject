@@ -58,15 +58,23 @@
                                         <a
                                             href="{{ icon.href }}"
                                             type="button"
-                                            class="btn btn-icon relative w-[4vw] rounded-[0.75vw] p-0  {% if icon.href in request.path %} relative bg-secondary-100 before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500 {% else %} !bg-transparent {% endif %}"
+                                            class="btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0  {% if icon.href in request.path %} relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500 {% else %} !bg-transparent {% endif %}"
                                         >
                                             <div class="inline-grid">
                                                 <div
                                                     class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]"
                                                 >
-                                                    {% include icon.html with class=icon.class %}
+                                                    {# source: https://stackoverflow.com/questions/4386168/how-to-concatenate-strings-in-django-templates #}
+                                                    {% if icon.href in request.path %}
+                                                        {% with " !text-secondary" as active_class %}
+                                                            {% include icon.html with class=icon.class|add:active_class %}
+                                                        {% endwith %}
+                                                    {% else %}
+                                                        {% include icon.html with class=icon.class %}
+                                                    {% endif %}
+
                                                     <span
-                                                        class="text-[0.75vw] font-semibold capitalize leading-[1.05vw]"
+                                                        class="{% if icon.href in request.path %} text-secondary {% endif %} text-[0.75vw] font-semibold capitalize leading-[1.05vw]"
                                                     >
                                                         {{ icon.label }}
                                                     </span>
