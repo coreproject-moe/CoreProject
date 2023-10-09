@@ -125,4 +125,4 @@ django_core/static/svelte__animecore/
 django_core/static/svelte__user/
 
 user.html
-animecore.html
+# animecore.html "why commennted"
