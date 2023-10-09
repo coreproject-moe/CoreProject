@@ -5,7 +5,7 @@
         GLIDER_TRANSITION_DURATION =
         parseInt(glider_container_element.getAttribute('duration')) || 200,
     mouse_leave_timeout = null,
-    is_hovered = false; // Boolean switch flag
+    is_hovered_from_prev_el = false; // Check if hover is from previous element ( not from outside )
 
     /** vercel effect */
     const handle_mouseenter = (event) => {
@@ -36,25 +36,25 @@
                 break;
         };
 
-        if (!is_hovered) {
+        if (is_hovered_from_prev_el) {
+            GLIDER_TRANSITION_DURATION = 200;
+            hover_glider_element.style.transitionDuration = `${GLIDER_TRANSITION_DURATION}ms`;
+        } else {
             GLIDER_TRANSITION_DURATION = 50;
             hover_glider_element.style.transitionDuration = `${GLIDER_TRANSITION_DURATION}ms`;
             // Show element after it reach its position
             setTimeout(() => hover_glider_element.style.opacity = '100', GLIDER_TRANSITION_DURATION);
-            is_hovered = true;
-        } else {
-            GLIDER_TRANSITION_DURATION = 200;
-            hover_glider_element.style.transitionDuration = `${GLIDER_TRANSITION_DURATION}ms`;
+            is_hovered_from_prev_el = true;
         };
 
         clearTimeout(mouse_leave_timeout);
     },
+
     handle_mouseleave = () => {
         // Delay the mouseleave event to allow time ( GLIDER_TRANSITION_DURATION ) for moving to a sibling element
         mouse_leave_timeout = setTimeout(() => {
-            hover_glider_element.style.transitionDuration = `0ms`;
             hover_glider_element.style.opacity = '0';
-            is_hovered = false;
+            is_hovered_from_prev_el = false;
         }, GLIDER_TRANSITION_DURATION);
     };
 
