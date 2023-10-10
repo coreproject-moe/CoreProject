@@ -663,13 +663,13 @@ Pillow = ">=9.0.0"
 
 [[package]]
 name = "django-components"
-version = "0.28.3"
+version = "0.29"
 description = "A way to create simple reusable template components in Django."
 optional = false
 python-versions = "*"
 files = [
-    {file = "django_components-0.28.3-py3-none-any.whl", hash = "sha256:55c9174e5b8aa3f46db23b2182bd3ba1b883840bbf341690b7880170697c8d4d"},
-    {file = "django_components-0.28.3.tar.gz", hash = "sha256:9d5f8d45260c0acb7c80b087b2f5d6d76541c28b565713a702ac05b5d450a774"},
+    {file = "django_components-0.29-py3-none-any.whl", hash = "sha256:42d98ebe72f9e7cab4b3a5a6d72a17f1065716e1967ef0dff0dfd9c59bfbbca0"},
+    {file = "django_components-0.29.tar.gz", hash = "sha256:5a7220e65a75632eb6deb842f36ce690a115b6c4c5cd7ab5ffa62ee8fda46908"},
 ]
 
 [package.dependencies]
@@ -2395,4 +2395,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "de07422a7633af69ef9338ea6e866948370c134bc087721eeca4ba795a81a29b"
+content-hash = "6b7f0856a65aa44f0747eff883664a6b2b0eaa3cdfe5f9bbd1ce15f9704eaae4"
