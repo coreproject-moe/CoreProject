@@ -35,7 +35,7 @@
         <title>{% block title %} {% endblock %}</title>
         {% tailwind_css %}
     </head>
-    <body hx-boost="true" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
         {% block body %}{% endblock %} {% block js %} {% endblock %}
     </body>
 </html>
