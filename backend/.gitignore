@@ -120,12 +120,6 @@ dmypy.json
 # Nor Poetry
 !poetry.lock
 
-# Frontend Codes
-django_core/static/svelte__animecore/
-django_core/static/svelte__user/
-
-user.html
-# animecore.html "why commennted"
 
 # Tattoo sucks
 *.rdb
