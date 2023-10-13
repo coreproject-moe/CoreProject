@@ -1,4 +1,4 @@
-{% load static tailwind_tags %}
+{% load static tailwind_tags django_htmx %}
 
 <!DOCTYPE html>
 
@@ -30,11 +30,12 @@
         />
         <script src="{% static 'vendor/js/htmx/htmx.min.js'%}" defer></script>
         <script src="{% static 'vendor/js/hyperscript/hyperscript.min.js'%}"></script>
+        {% django_htmx_script %}
         {% block head %} {% endblock %}
         <title>{% block title %} {% endblock %}</title>
         {% tailwind_css %}
     </head>
-    <body hx-boost="true">
+    <body hx-boost="true" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
         {% block body %}{% endblock %} {% block js %} {% endblock %}
     </body>
 </html>
