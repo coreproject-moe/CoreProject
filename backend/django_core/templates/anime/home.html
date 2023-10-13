@@ -58,7 +58,10 @@
                                         <a
                                             href="{{ icon.href }}"
                                             type="button"
-                                            _="on click add .blur-sm then settle then remove .blur-sm"
+                                            hx-get="{{ icon.href|add:"_partial" }}"
+                                            hx-swap='innerHTML'
+                                            hx-target='#page'
+                                            _="on click add .blur-sm then wait 100ms then remove .blur-sm"
                                             class="transition-all btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0  {% if icon.href == request.path %} relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500 {% else %} !bg-transparent {% endif %}"
                                         >
                                             <div class="inline-grid">
@@ -112,8 +115,8 @@
                         </div>
                     </div>
                 </aside>
-                <div id="page" class="flex-1 overflow-x-hidden flex flex-col" style="scrollbar-gutter: auto;">
-                    {% include 'anime/_partial.html' %}
+                <div id="page" class="flex-1 overflow-x-hidden flex flex-col">
+                    {% include 'anime/_partial.html'%}
                 </div>
             </div>
             <footer id="shell-footer" class="flex-none">

@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 
 def anime_home_view(request):
+
     icons = [
         {
             "html": "icons/home.html",
@@ -35,3 +36,10 @@ def anime_home_view(request):
         },
     ]
     return render(request, "anime/home.html", context={"icons": icons})
+
+
+def partial_anime_view(request):
+    return render(
+        request,
+        "anime/_partial.html"
+    )
