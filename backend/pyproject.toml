@@ -63,15 +63,15 @@ drf-spectacular-sidecar = "^2023.10.1"
 django-filter = "^23.3"
 django-ltree = "^0.5.3"
 crispy-bootstrap4 = "^2022.1"
-django-components = "^0.28.3"
-django-htmx = "^1.16.0"
+django-components = "^0.29"
+django-htmx = "^1.17.0"
 
 [tool.poetry.group.dev.dependencies]
 ## Watchfiles
 # https://github.com/adamchainz/django-watchfiles/issues/12
 # django-watchfiles = "*"
 # Django
-django-browser-reload = "^1.11.0"
+django-browser-reload = "^1.12.0"
 django_debug_toolbar = "*"
 django_dbbackup = "*"
 django_cprofile_middleware = "*"
@@ -86,7 +86,7 @@ django_stubs = {extras = ["compatible_mypy"], version = "*"}
 # Types
 types_redis = "*"
 # Task Runner
-poethepoet = "^0.24.0"
+poethepoet = "^0.24.1"
 # Django extensions
 django-extensions = "^3.2.3"
 # pygraphviz = "^1.10"
