@@ -1,11 +1,4 @@
-<glider-container
-    class="{{ glider_container_class }}"
-    direction="{{ direction }}"
-    duration="{{ duration }}"
->
-    <active_glider
-        class="{{ active_element_class }} absolute opacity-0 ease-in-out duration-200"
-    ></active_glider>
-
-    {% slot 'items' default  %} {% endslot %}
+<glider-container class="{{ glider_container_class }}" direction="{{ direction }}" duration="{{ duration }}">
+<active_glider class="{{ active_element_class }} absolute opacity-0 ease-in-out duration-200"></active_glider>
+{% slot 'items' default %} {% endslot %}
 </glider-container>

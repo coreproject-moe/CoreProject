@@ -1,41 +1,32 @@
 {% load static tailwind_tags django_htmx %}
-
 <!DOCTYPE html>
-
 <html lang="en" data-theme="kokoro">
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="darkreader-lock" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
-        />
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
         <meta name="robots" content="index,follow" />
         <meta name="googlebot" content="index,follow" />
-        <meta
-            name="description"
-            content="Bridging the gap between streaming & torrenting sevices, with a modern and clean interface"
-        />
-
-        <link
-            rel="icon"
-            type="image/svg+xml"
-            href="{% static 'images/favicon/favicon.svg' %}"
-        />
-        <link
-            rel="stylesheet"
-            href="{% static 'fonts/Kokoro/stylesheet.css' %}"
-        />
+        <meta name="description"
+              content="Bridging the gap between streaming & torrenting sevices, with a modern and clean interface" />
+        <link rel="icon"
+              type="image/svg+xml"
+              href="{% static 'images/favicon/favicon.svg' %}" />
+        <link rel="stylesheet" href="{% static 'fonts/Kokoro/stylesheet.css' %}" />
         <script src="{% static 'vendor/js/htmx/htmx.min.js'%}" defer></script>
         <script src="{% static 'vendor/js/hyperscript/hyperscript.min.js'%}"></script>
         {% django_htmx_script %}
-        {% block head %} {% endblock %}
-        <title>{% block title %} {% endblock %}</title>
+        {% block head %}{% endblock %}
+        <title>
+            {% block title %}{% endblock %}
+        </title>
         {% tailwind_css %}
     </head>
     <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-        {% block body %}{% endblock %} {% block js %} {% endblock %}
+        {% block body %}{% endblock %}
+        {% block js %}{% endblock %}
     </body>
 </html>
