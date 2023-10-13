@@ -104,6 +104,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap4",
     # Models
+    "apps.pages",
     "apps.anime",
     "apps.trackers",
     "apps.characters",

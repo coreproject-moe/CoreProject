@@ -1,5 +1,6 @@
 {% extends 'tailwind_base.html' %}
 
+{% load split %}
 
 {% block head %}
     {% component_css_dependencies %}
@@ -67,11 +68,7 @@
                                                 on click 
                                                     add .blur-sm
                                                     then wait 100ms
-                                                    if '{{icon.href}}' === '{{request.path}}'
-                                                        add 'relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500' to me
-                                                    else
-                                                        add '!bg-transparent' to me
-                                                    end
+                                                    
                                                     add .hidden to <span/> in me  
                                                     then remove .blur-sm 
                                             "
@@ -182,5 +179,6 @@
 {% endblock %}
 
 {%block js %}
+
     {% component_js_dependencies %}
 {%endblock%}
