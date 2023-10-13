@@ -126,3 +126,6 @@ django_core/static/svelte__user/
 
 user.html
 # animecore.html "why commennted"
+
+# Tattoo sucks
+*.rdb
