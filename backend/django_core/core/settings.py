@@ -179,7 +179,7 @@ if DEBUG:
         # https://github.com/omarish/django-cprofile-middleware/blob/80e27f3876949e0d9c452c0e48ed03d73e026b73/README.md#installing
         "django_cprofile_middleware.middleware.ProfilerMiddleware",
         # Browser Reload Middleware
-        # "django_browser_reload.middleware.BrowserReloadMiddleware",
+        "django_browser_reload.middleware.BrowserReloadMiddleware",
     )
 
 # https://docs.djangoproject.com/en/4.0/topics/cache/#the-per-site-cache-1
