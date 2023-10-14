@@ -163,18 +163,12 @@
                                                     <span class="rounded-lg bg-secondary p-2 px-3 text-xs md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.4vw] md:text-[0.75vw] md:font-semibold">Action</span>
                                                     <span class="rounded-lg bg-secondary p-2 px-3 text-xs md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.4vw] md:text-[0.75vw] md:font-semibold">Echhi</span>
                                                 </anime-genres>
-                                                <scroll-area
-                                                    class="max-h-16 md:max-h-[6vw] md:flex pr-3 md:pr-[0.75vw] block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent] [mask-image:_linear-gradient(180deg,_rgba(7,5,25,0.95)_80%,_rgba(0,0,0,0)_100%)]"
-                                                >
-                                                    <div>
-                                                        <div class="text-xs font-medium leading-4 text-surface-200 md:pt-[0.75vw] md:text-[0.85vw] md:leading-[1.1vw]">
-                                                            Idly indulging in baseless paranormal activities with the Occult Club, high schooler Yuuji Itadori spends his days at either the clubroom or the hospital, where he visits his bedridden
-                                                            grandfather. However, this leisurely lifestyle soon takes a turn for the strange when he unknowingly encounters a cursed item. Triggering a chain of supernatural occurrences, Yuuji
-                                                            finds himself suddenly thrust into the world of Curses—dreadful beings formed from human malice and negativity—after swallowing the said item, revealed to be a finger belonging to the
-                                                            demon Sukuna Ryoumen, the "King of Curses."
-                                                        </div>
-                                                    </div>
-                                                </scroll-area>
+                                                {% component_block "scroll_area" scroll_area_class="text-xs font-medium leading-4 text-surface-200 md:pt-[0.75vw] md:text-[0.85vw] md:leading-[1.1vw]" parent_class="max-h-16 md:max-h-[6vw]" %}
+                                                    Idly indulging in baseless paranormal activities with the Occult Club, high schooler Yuuji Itadori spends his days at either the clubroom or the hospital, where he visits his bedridden
+                                                    grandfather. However, this leisurely lifestyle soon takes a turn for the strange when he unknowingly encounters a cursed item. Triggering a chain of supernatural occurrences, Yuuji
+                                                    finds himself suddenly thrust into the world of Curses—dreadful beings formed from human malice and negativity—after swallowing the said item, revealed to be a finger belonging to the
+                                                    demon Sukuna Ryoumen, the "King of Curses.
+                                                {% endcomponent_block %} 
                                                 <options class="mb-2 mt-5 flex gap-3 md:mb-0 md:mt-[1.5vw] md:gap-[1vw]">
                                                     <button
                                                         class="btn btn-warning flex h-14 w-24 justify-center gap-1 rounded-xl text-base text-secondary font-bold  md:h-[3.125vw] md:w-[5.4375vw] md:rounded-[0.625vw] md:text-[0.875vw] md:gap-[0.5vw]"
