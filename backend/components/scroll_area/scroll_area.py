@@ -10,16 +10,14 @@ class ScollArea(component.Component):
         self,
         scroll_area_class: str,
         parent_class: str,
-        offset_scrollbar: bool = False,
-        gradient_mask: bool = False,
+        offset_scrollbar: str | None = None,
     ):
         return {
             "class": scroll_area_class,
             "parent_class": parent_class,
             "offset_scrollbar": offset_scrollbar,
-            "gradient_mask": gradient_mask,
         }
 
     class Media:
-        css = ""
-        js = ""
+        css = "scroll_area/scroll_area.css"
+        js = "scroll_area/scroll_area.js"

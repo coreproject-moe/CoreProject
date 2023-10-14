@@ -1,6 +1,5 @@
 <scroll-area
-    class="{{ parent_class }} pr-3 md:pr-[0.75vw] block h-full w-full overflow-y-scroll overscroll-y-contain [scrollbar-width:_thin] [scrollbar-color:_rgba(255,255,255,0.12)_transparent] [mask-image:_linear-gradient(180deg,_rgba(7,5,25,0.95)_80%,_rgba(0,0,0,0)_100%)]"
-    gradient-mask="{{ gradient_mask }}"
+    class="{{ parent_class }} {{ offset_scrollbar }} block h-full w-full overflow-y-scroll overscroll-y-contain [scrollbar-width:_thin] [scrollbar-color:_rgba(255,255,255,0.12)_transparent]"
 >
     <div class="{{ class }}">
         {% slot "context" default %} {% endslot %}
