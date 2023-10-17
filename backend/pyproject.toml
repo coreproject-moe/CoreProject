@@ -62,7 +62,7 @@ drf-spectacular-sidecar = "^2023.10.1"
 # Django filters
 django-filter = "^23.3"
 django-ltree = "^0.5.3"
-crispy-bootstrap4 = "^2022.1"
+crispy-bootstrap4 = "^2023.1"
 django-components = "^0.29"
 django-htmx = "^1.17.0"
 
