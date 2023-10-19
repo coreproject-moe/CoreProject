@@ -56,8 +56,8 @@
                                 {% fill 'items' %}
                                     {% for icon in icons %}
                                         <button
-                                          
                                             type="button"
+                                            @click="href='{{icon.href}}'"
                                             _="
                                                on click
                                                add .blur-sm
@@ -65,23 +65,18 @@
                                                add .hidden to <span/> in me
                                                then remove .blur-sm
                                               "
-                                            class="btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0  {% if icon.href == request.path %} relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500 {% else %} !bg-transparent {% endif %}"
+                                              x-bind:class = "href === '{{icon.href}}' ? 'relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500' : '!bg-transparent'"
+                                            class="btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0"
                                         >
                                             <div class="inline-grid">
                                                 <div
                                                     class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]"
-                                                >
-                                                    {# source: https://stackoverflow.com/questions/4386168/how-to-concatenate-strings-in-django-templates #}
-                                                    {% if icon.href == request.path %}
-                                                        {% with " !text-secondary" as active_class %}
-                                                            {% include icon.html with class=icon.class|add:active_class %}
-                                                        {% endwith %}
-                                                    {% else %}
-                                                        {% include icon.html with class=icon.class %}
-                                                    {% endif %}
 
+                                                    x-bind:class="href === '{{icon.href}}' ? '{{icon.class}}' : '!text-secondary' "
+                                                >
+                                                        {% include icon.html  with class=icon.class %}
                                                     <span
-                                                        class="{% if icon.href == request.path %} hidden text-secondary {% endif %} text-[0.75vw] font-semibold capitalize leading-[1.05vw]"
+                                                     x-bind:class = "href === '{{icon.href}}' ? 'hidden text-secondary' : 'text-[0.75vw] font-semibold capitalize leading-[1.05vw]'"
                                                     >
                                                         {{ icon.label }}
                                                     </span>
@@ -809,5 +804,6 @@
 {% endblock %}
 
 {%block js %}
+<script src="//unpkg.com/alpinejs" defer></script>
     {% component_js_dependencies %}
 {%endblock%}
