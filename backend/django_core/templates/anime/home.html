@@ -77,7 +77,6 @@
                                                         {% include icon.html with class=icon.class|add:" !text-secondary" %}
                                                     </template>
                                                     <template x-if="href !== '{{icon.href}}'">
-
                                                         {% include icon.html with class=icon.class %}
                                                     </template>
                                                     <span
@@ -809,6 +808,5 @@
 {% endblock %}
 
 {%block js %}
-    <script src="//unpkg.com/alpinejs" defer></script>
     {% component_js_dependencies %}
 {%endblock%}
