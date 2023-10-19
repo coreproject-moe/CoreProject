@@ -55,8 +55,8 @@
                             {% component_block "vercel_hover" glider_container_class='mt-[2.8125vw] flex flex-col items-center gap-[0.75vw]' active_element_class='rounded-[0.75vw] bg-white/10' direction='vertical' duration=200 %}
                                 {% fill 'items' %}
                                     {% for icon in icons %}
-                                        <a
-                                            href="{{ icon.href }}"
+                                        <button
+                                          
                                             type="button"
                                             _="
                                                on click
@@ -87,7 +87,7 @@
                                                     </span>
                                                 </div>
                                             </div>
-                                        </a>
+                                        </button>
                                     {% endfor %}
                                 {% endfill %}
                             {% endcomponent_block %}
