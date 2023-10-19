@@ -52,7 +52,7 @@
                                     {% include 'icons/search.html' with class="w-[1.25vw] text-black" %}
                                 </button>
                             </div>
-                            {% component_block "vercel_hover" glider_container_class='mt-[2.8125vw] flex flex-col items-center gap-[0.75vw]' active_element_class='rounded-[0.75vw] bg-white/10' direction='vertical' duration=200 %}
+                            {% component_block "vercel_hover" glider_container_class='mt-[2.8125vw] flex flex-col items-center gap-[0.75vw]' active_element_class='rounded-[0.75vw] bg-white/10' direction='vertical' duration=200 alpine='x-data = "{ href :\''|add:request.path|add:'\'}"'|safe%}
                                 {% fill 'items' %}
                                     {% for icon in icons %}
                                         <button
@@ -79,6 +79,7 @@
                                                     <template x-if="href !== '{{icon.href}}'">
                                                         {% include icon.html with class=icon.class %}
                                                     </template>
+
                                                     <span
                                                         x-bind:class = "href === '{{icon.href}}' ? 'hidden text-secondary' : 'text-[0.75vw] font-semibold capitalize leading-[1.05vw]'"
                                                     >
