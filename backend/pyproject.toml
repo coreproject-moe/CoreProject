@@ -11,7 +11,8 @@ license = "AGPL-3.0-only"
 python = "^3.11"
 django = {version = '>=4.2.3', extras = ['argon2']}
 # First Party ( Redis )
-redis = {extras = ['hiredis'], version = ">=4.5.4"}
+# redis = {extras = ['hiredis'], version = ">=4.5.4"}
+redis =  ">=4.5.4"
 # First party ( Image )
 pillow = "*"
 # First Party ( Database )
