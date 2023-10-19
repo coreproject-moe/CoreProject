@@ -12,6 +12,7 @@ python = "^3.11"
 django = {version = '>=4.2.3', extras = ['argon2']}
 # First Party ( Redis )
 # redis = {extras = ['hiredis'], version = ">=4.5.4"}
+# https://github.com/redis/hiredis-py/issues/172
 redis =  ">=4.5.4"
 # First party ( Image )
 pillow = "*"
