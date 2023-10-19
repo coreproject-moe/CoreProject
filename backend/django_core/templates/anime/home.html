@@ -74,7 +74,13 @@
 
                                                     x-bind:class="href === '{{icon.href}}' ? '{{icon.class}}' : '!text-secondary' "
                                                 >
-                                                        {% include icon.html  with class=icon.class %}
+                                                        {% if icon.href == request.path %}
+                                                            {% with " !text-secondary" as active_class %}
+                                                                {% include icon.html with class=icon.class|add:active_class %}
+                                                            {% endwith %}
+                                                        {% else %}
+                                                            {% include icon.html with class=icon.class %}
+                                                        {% endif %}
                                                     <span
                                                      x-bind:class = "href === '{{icon.href}}' ? 'hidden text-secondary' : 'text-[0.75vw] font-semibold capitalize leading-[1.05vw]'"
                                                     >
