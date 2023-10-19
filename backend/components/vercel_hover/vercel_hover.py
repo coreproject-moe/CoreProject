@@ -10,10 +10,12 @@ class VercelHover(component.Component):
         self,
         direction: str,
         duration: int = 200,
+        alpine:str|None=None,
         glider_container_class: str | None = None,
         active_element_class: str | None = None,
     ):
         return {
+            "alpine":alpine,
             "duration": duration,
             "direction": direction,
             "glider_container_class": glider_container_class,
