@@ -1,14 +1,9 @@
 {% extends 'tailwind_base.html' %}
 <!--prettier-ignore-->
 {% load static %}
-
-{% block title %}
-    CoreProject | Landing page
-{% endblock %}
-
+{% block title %}CoreProject | Landing page{% endblock %}
 <!--prettier-ignore-->
 {% block head %}
-
     <style>
         :root {
             --card-color: #09080c;
@@ -50,37 +45,21 @@
         }
     </style>
 {% endblock %}
-
 <!--prettier-ignore-->
 {% block body %}
-    <div
-        class="base__item items-center flex h-screen justify-center overflow-hidden p-0 m-0 bg-[#09080c]"
-    >
-        <div
-            id="cards"
-            class="gap-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-items-center"
-        >
+    <div class="base__item items-center flex h-screen justify-center overflow-hidden p-0 m-0 bg-[#09080c]">
+        <div id="cards"
+             class="gap-2 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-items-center">
             {% for key,value in cards.items %}
-
-                <div
-                    class="card rounded-xl border-[1px] md:border-0 cursor-pointer flex flex-col relative w-[300px] h-[260px] before:h-full before:w-full before:z-30 before:rounded-[inherit] before:opacity-0 before:absolute before:top-0 before:left-0 before:transition-opacity before:duration-500 after:h-full after:w-full after:z-10 after:rounded-[inherit] after:opacity-0 after:absolute after:top-0 after:left-0 after:transition-opacity after:duration-500"
-                    style="
-                           border-color: var(--card-before-color);
-                           background-color: var(--card-background-color);
-                          "
-                >
-                    <div
-                        class="rounded-[inherit] flex flex-col grow inset-[1px] p-2.5 absolute z-20"
-                        style="background-color: var(--card-color)"
-                    >
-                        <div
-                            class="items-center flex h-[140px] justify-center overflow-hidden"
-                        >
+                <div class="card rounded-xl border-[1px] md:border-0 cursor-pointer flex flex-col relative w-[300px] h-[260px] before:h-full before:w-full before:z-30 before:rounded-[inherit] before:opacity-0 before:absolute before:top-0 before:left-0 before:transition-opacity before:duration-500 after:h-full after:w-full after:z-10 after:rounded-[inherit] after:opacity-0 after:absolute after:top-0 after:left-0 after:transition-opacity after:duration-500"
+                     style="border-color: var(--card-before-color);
+                            background-color: var(--card-background-color)">
+                    <div class="rounded-[inherit] flex flex-col grow inset-[1px] p-2.5 absolute z-20"
+                         style="background-color: var(--card-color)">
+                        <div class="items-center flex h-[140px] justify-center overflow-hidden">
                             <img src="{{ value.logo }}" width="120" />
                         </div>
-                        <div
-                            class="card-info-wrapper items-center flex grow justify-start"
-                        >
+                        <div class="card-info-wrapper items-center flex grow justify-start">
                             <div class="card-info">
                                 <div class="card-info-title text-white">
                                     <div class="flex">
@@ -96,9 +75,7 @@
         </div>
     </div>
 {% endblock %}
-
 <!--prettier-ignore-->
-
 {% block js %}
     <script>
         document.getElementById('cards').onmousemove = (e) => {

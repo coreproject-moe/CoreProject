@@ -55,32 +55,39 @@
                             {% component_block "vercel_hover" glider_container_class='mt-[2.8125vw] flex flex-col items-center gap-[0.75vw]' active_element_class='rounded-[0.75vw] bg-white/10' direction='vertical' duration=200 %}
                                 {% fill 'items' %}
                                     {% for icon in icons %}
-                                        <a
-                                            href="{{ icon.href }}"
+                                        <button
                                             type="button"
-                                            class="btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0  {% if icon.href in request.path %} relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500 {% else %} !bg-transparent {% endif %}"
+                                            @click="href='{{icon.href}}'"
+                                            _="
+                                               on click
+                                               add .blur-sm
+                                               then wait 100ms
+                                               add .hidden to <span/> in me
+                                               then remove .blur-sm
+                                              "
+                                            x-bind:class = "href === '{{icon.href}}' ? 'relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500' : '!bg-transparent'"
+                                            class="btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0"
                                         >
                                             <div class="inline-grid">
                                                 <div
                                                     class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]"
                                                 >
-                                                    {# source: https://stackoverflow.com/questions/4386168/how-to-concatenate-strings-in-django-templates #}
-                                                    {% if icon.href in request.path %}
-                                                        {% with " !text-secondary" as active_class %}
-                                                            {% include icon.html with class=icon.class|add:active_class %}
-                                                        {% endwith %}
-                                                    {% else %}
-                                                        {% include icon.html with class=icon.class %}
-                                                    {% endif %}
 
+                                                    <template x-if="href === '{{icon.href}}'">
+                                                        {% include icon.html with class=icon.class|add:" !text-secondary" %}
+                                                    </template>
+                                                    <template x-if="href !== '{{icon.href}}'">
+
+                                                        {% include icon.html with class=icon.class %}
+                                                    </template>
                                                     <span
-                                                        class="{% if icon.href in request.path %} hidden text-secondary {% endif %} text-[0.75vw] font-semibold capitalize leading-[1.05vw]"
+                                                        x-bind:class = "href === '{{icon.href}}' ? 'hidden text-secondary' : 'text-[0.75vw] font-semibold capitalize leading-[1.05vw]'"
                                                     >
                                                         {{ icon.label }}
                                                     </span>
                                                 </div>
                                             </div>
-                                        </a>
+                                        </button>
                                     {% endfor %}
                                 {% endfill %}
                             {% endcomponent_block %}
@@ -163,18 +170,12 @@
                                                     <span class="rounded-lg bg-secondary p-2 px-3 text-xs md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.4vw] md:text-[0.75vw] md:font-semibold">Action</span>
                                                     <span class="rounded-lg bg-secondary p-2 px-3 text-xs md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.4vw] md:text-[0.75vw] md:font-semibold">Echhi</span>
                                                 </anime-genres>
-                                                <scroll-area
-                                                    class="max-h-16 md:max-h-[6vw] md:flex pr-3 md:pr-[0.75vw] block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent] [mask-image:_linear-gradient(180deg,_rgba(7,5,25,0.95)_80%,_rgba(0,0,0,0)_100%)]"
-                                                >
-                                                    <div>
-                                                        <div class="text-xs font-medium leading-4 text-surface-200 md:pt-[0.75vw] md:text-[0.85vw] md:leading-[1.1vw]">
-                                                            Idly indulging in baseless paranormal activities with the Occult Club, high schooler Yuuji Itadori spends his days at either the clubroom or the hospital, where he visits his bedridden
-                                                            grandfather. However, this leisurely lifestyle soon takes a turn for the strange when he unknowingly encounters a cursed item. Triggering a chain of supernatural occurrences, Yuuji
-                                                            finds himself suddenly thrust into the world of Curses—dreadful beings formed from human malice and negativity—after swallowing the said item, revealed to be a finger belonging to the
-                                                            demon Sukuna Ryoumen, the "King of Curses."
-                                                        </div>
-                                                    </div>
-                                                </scroll-area>
+                                                {% component_block "scroll_area" scroll_area_class="text-xs font-medium leading-4 text-surface-200 md:pt-[0.75vw] md:text-[0.85vw] md:leading-[1.1vw]" parent_class="max-h-16 md:max-h-[6vw]" offset_scrollbar="pr-3 md:pr-[0.75vw]" %}
+                                                    Idly indulging in baseless paranormal activities with the Occult Club, high schooler Yuuji Itadori spends his days at either the clubroom or the hospital, where he visits his bedridden
+                                                    grandfather. However, this leisurely lifestyle soon takes a turn for the strange when he unknowingly encounters a cursed item. Triggering a chain of supernatural occurrences, Yuuji
+                                                    finds himself suddenly thrust into the world of Curses—dreadful beings formed from human malice and negativity—after swallowing the said item, revealed to be a finger belonging to the
+                                                    demon Sukuna Ryoumen, the "King of Curses.
+                                                {% endcomponent_block %}
                                                 <options class="mb-2 mt-5 flex gap-3 md:mb-0 md:mt-[1.5vw] md:gap-[1vw]">
                                                     <button
                                                         class="btn btn-warning flex h-14 w-24 justify-center gap-1 rounded-xl text-base text-secondary font-bold  md:h-[3.125vw] md:w-[5.4375vw] md:rounded-[0.625vw] md:text-[0.875vw] md:gap-[0.5vw]"
@@ -808,5 +809,6 @@
 {% endblock %}
 
 {%block js %}
+    <script src="//unpkg.com/alpinejs" defer></script>
     {% component_js_dependencies %}
 {%endblock%}
