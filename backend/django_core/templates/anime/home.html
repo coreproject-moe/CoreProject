@@ -71,16 +71,15 @@
                                             <div class="inline-grid">
                                                 <div
                                                     class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]"
+                                                > 
 
-                                                    x-bind:class="href === '{{icon.href}}' ? '{{icon.class}}' : '!text-secondary' "
-                                                >
-                                                        {% if icon.href == request.path %}
-                                                            {% with " !text-secondary" as active_class %}
-                                                                {% include icon.html with class=icon.class|add:active_class %}
-                                                            {% endwith %}
-                                                        {% else %}
+                                                    <template x-if="href === '{{icon.href}}'">
+                                                        {% include icon.html with class=icon.class|add:" !text-secondary" %}
+                                                     </template>
+                                                        <template x-if="href !== '{{icon.href}}'">
+
                                                             {% include icon.html with class=icon.class %}
-                                                        {% endif %}
+                                                     </template>
                                                     <span
                                                      x-bind:class = "href === '{{icon.href}}' ? 'hidden text-secondary' : 'text-[0.75vw] font-semibold capitalize leading-[1.05vw]'"
                                                     >
