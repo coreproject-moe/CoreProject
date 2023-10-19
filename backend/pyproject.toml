@@ -11,7 +11,9 @@ license = "AGPL-3.0-only"
 python = "^3.11"
 django = {version = '>=4.2.3', extras = ['argon2']}
 # First Party ( Redis )
-redis = {extras = ['hiredis'], version = ">=4.5.4"}
+# redis = {extras = ['hiredis'], version = ">=4.5.4"}
+# https://github.com/redis/hiredis-py/issues/172
+redis =  ">=4.5.4"
 # First party ( Image )
 pillow = "*"
 # First Party ( Database )
@@ -51,18 +53,18 @@ django-stubs-ext = "*"
 # Color Grabber
 colorthief = ">=0.2.1"
 # Parsers
-selectolax = "^0.3.16"
+selectolax = "^0.3.17"
 python-dateutil = "^2.8.2"
 # Rest Framework
 djangorestframework = "^3.14.0"
-django-crispy-forms = "^2.0"
+django-crispy-forms = "^2.1"
 # OpenAPI
 drf-spectacular = "^0.26.5"
 drf-spectacular-sidecar = "^2023.10.1"
 # Django filters
 django-filter = "^23.3"
 django-ltree = "^0.5.3"
-crispy-bootstrap4 = "^2022.1"
+crispy-bootstrap4 = "^2023.1"
 django-components = "^0.29"
 django-htmx = "^1.17.0"
 
