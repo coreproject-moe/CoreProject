@@ -77,12 +77,12 @@
                                                     class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]"
                                                 >
 
-<div :class="href !== '{{icon.href}}' && 'hidden'">
-    {% include icon.html with class=icon.class|add:" !text-secondary" %}
-</div>
-<div :class="href === '{{icon.href}}' && 'hidden'">
-    {% include icon.html with class=icon.class %}
-</div>
+                                                    <div :class="href !== '{{icon.href}}' && 'hidden'">
+                                                        {% include icon.html with class=icon.class|add:" !text-secondary" %}
+                                                    </div>
+                                                    <div :class="href === '{{icon.href}}' && 'hidden'">
+                                                        {% include icon.html with class=icon.class %}
+                                                    </div>
 
                                                     <span
                                                         x-bind:class = "href === '{{icon.href}}' ? 'hidden text-secondary' : 'text-[0.75vw] font-semibold capitalize leading-[1.05vw]'"
