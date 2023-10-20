@@ -18,7 +18,7 @@ class CustomUserChangeForm(UserChangeForm["CustomUser"]):
 
 class LoginForm(forms.Form):
     username = forms.CharField(
-        label="Email / Username",
+        label="Email / Username:",
         widget=forms.TextInput(
             attrs={
                 "autofocus": True,
@@ -26,8 +26,11 @@ class LoginForm(forms.Form):
                 "class": "h-12 w-full rounded-xl border-[0.4vw] border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]",
             }
         ),
+        help_text="we’ll send you a verification email, so please ensure it’s active",
     )
+
     password = forms.CharField(
+        label="Password:",
         widget=forms.PasswordInput(
             attrs={
                 "placeholder": "enter your existing password",
