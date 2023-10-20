@@ -1,7 +1,14 @@
-htmx.onLoad(() => {
-    let hover_glider_element = document.querySelector('active_glider'),
-        glider_container_element = document.querySelector('glider-container'),
-        direction = glider_container_element.getAttribute('direction'),
+htmx.onLoad(function (content) {
+    const hover_glider_element = content.querySelector('active_glider') ?? null,
+          glider_container_element =
+        content.querySelector('glider-container') ?? null;
+
+    if (hover_glider_element == null || glider_container_element == null) {
+        console.log('elements are null | skipping | `vercel-hover.js`');
+        return;
+    }
+
+    let direction = glider_container_element.getAttribute('direction') ?? null,
         GLIDER_TRANSITION_DURATION =
         parseInt(glider_container_element.getAttribute('duration')) || 200,
     mouse_leave_timeout = null,
@@ -66,4 +73,4 @@ htmx.onLoad(() => {
             children.addEventListener('mouseenter', handle_mouseenter);
             children.addEventListener('mouseleave', handle_mouseleave);
         });
-})();
+});
