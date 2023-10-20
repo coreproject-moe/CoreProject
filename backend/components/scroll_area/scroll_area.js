@@ -1,6 +1,11 @@
 htmx.onLoad(function (content) {
-    let scroll_area = content.querySelector('scroll-area'),
-        add_mask_bottom = scroll_area.scrollHeight > scroll_area.clientHeight,
+    const scroll_area = content.querySelector('scroll-area') ?? null;
+    if (scroll_area == null) {
+        console.log('elements are null | skipping | `scroll-area.js`');
+        return;
+    }
+    
+    let add_mask_bottom = scroll_area.scrollHeight > scroll_area.clientHeight,
         mask_class =
             '[mask-image:_linear-gradient(180deg,_rgba(7,5,25,0.95)_80%,_rgba(0,0,0,0)_100%)]';
 
