@@ -1,9 +1,19 @@
 {% extends 'tailwind_base.html' %}
+{% load static %}
 
 
 {% block body %}
     <div class="relative grid h-screen w-screen md:grid-cols-2 bg-secondary">
-        <div>Slider</div>
+        <div class="relative">
+            {% for anime in animes %}
+                {# remove this if checking #}
+                {% if forloop.counter == 3 %}
+                    <img class="absolute w-full h-full object-cover" src="{% static anime.cover %}">
+                    {# gradients #}
+                    <div class="absolute inset-0 bg-gradient-to-r from-secondary/75 to-secondary/25"></div>
+                {% endif %}
+            {% endfor %}
+        </div>
         {% block form %}{% endblock %}
     </div>
 {% endblock %}
