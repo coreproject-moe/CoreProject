@@ -2,30 +2,30 @@
 {% load crispy_forms_tags %}
 
 {% block title%}
-Login | CoreProject
+    Login | CoreProject
 {%endblock%}
 
 {% block form%}
 
-<form class="flex h-max w-full flex-col gap-[15vw] bg-surface-900 p-10 md:h-full md:justify-between md:gap-0 md:rounded-none md:p-[5vw] md:pr-[10vw]">
-    {% csrf_token %}
-<span class="flex items-center text-base font-bold uppercase leading-none tracking-widest text-white md:text-[1.5vw]">hey there! welcome back 👋</span>
-    <form-fields class="flex flex-col gap-7 md:block">
-        <email-or-username-field class="flex flex-col gap-[0.3rem] md:gap-[0.5vw]">
-            <label
-                for="email-or-username"
-                class="text-base font-semibold leading-none md:text-[1.1vw]"
-            >
-                {{ form.username.label }}
-            </label>
-            {{ form.username }}
-            <info class="flex items-center gap-2 md:gap-[0.5vw]">
-                {% include "icons/info.html" with class="w-3 opacity-70 md:w-[0.9vw]" %}
-                <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.8vw]">
-                    {{ form.username.help_text }}
-                </span>
-            </info>
-        </email-or-username-field>
+    <form class="flex h-max w-full flex-col gap-[15vw] bg-surface-900 p-10 md:h-full md:justify-between md:gap-0 md:rounded-none md:p-[5vw] md:pr-[10vw]">
+        {% csrf_token %}
+        <span class="flex items-center text-base font-bold uppercase leading-none tracking-widest text-white md:text-[1.5vw]">hey there! welcome back 👋</span>
+        <form-fields class="flex flex-col gap-7 md:block">
+            <email-or-username-field class="flex flex-col gap-[0.3rem] md:gap-[0.5vw]">
+                <label
+                    for="email-or-username"
+                    class="text-base font-semibold leading-none md:text-[1.1vw]"
+                >
+                    {{ form.username.label }}
+                </label>
+                {{ form.username }}
+                <info class="flex items-center gap-2 md:gap-[0.5vw]">
+                    {% include "icons/info.html" with class="w-3 opacity-70 md:w-[0.9vw]" %}
+                    <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.8vw]">
+                        {{ form.username.help_text }}
+                    </span>
+                </info>
+            </email-or-username-field>
 
             <password-field class="flex flex-col gap-[0.3rem] md:mt-[1.5vw] md:gap-[0.5vw]">
                 <label
