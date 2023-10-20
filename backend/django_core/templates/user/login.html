@@ -1,0 +1,20 @@
+{% extends 'tailwind_base.html' %}
+
+{% block head %}
+    {# {% component_css_dependencies %} #}
+    <title>Login | CoreProject</title>
+{% endblock %}
+
+{% block body %}
+<div class="relative grid h-screen w-screen md:grid-cols-2">
+    <div class="z-0 col-start-1 col-end-1 row-start-1 row-end-1 flex items-center justify-center md:col-start-2 md:col-end-2 md:block md:items-end md:px-[8vw] md:py-[2.2vw]">
+        <form class="flex h-max w-full flex-col gap-[15vw] p-10 md:h-full md:justify-between md:gap-0 md:rounded-none md:p-0">
+            Login form
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{# {%block js %}
+    {% component_js_dependencies %}
+{%endblock%} #}
