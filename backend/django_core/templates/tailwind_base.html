@@ -1,7 +1,5 @@
-{% load static tailwind_tags %}
-
+{% load static tailwind_tags django_htmx %}
 <!DOCTYPE html>
-
 <html lang="en" data-theme="kokoro">
     <head>
         <meta charset="UTF-8" />
@@ -18,23 +16,25 @@
             name="description"
             content="Bridging the gap between streaming & torrenting sevices, with a modern and clean interface"
         />
-
         <link
             rel="icon"
             type="image/svg+xml"
             href="{% static 'images/favicon/favicon.svg' %}"
         />
+
         <link
             rel="stylesheet"
             href="{% static 'fonts/Kokoro/stylesheet.css' %}"
         />
-        <script src="{% static 'vendor/js/htmx/htmx.min.js'%}" defer></script>
+        <script src="{% static 'vendor/js/htmx/htmx.min.js'%}"></script>
         <script src="{% static 'vendor/js/hyperscript/hyperscript.min.js'%}"></script>
-        {% block head %} {% endblock %}
-        <title>{% block title %} {% endblock %}</title>
+        {% django_htmx_script %} {% block head %}{% endblock %}
+        <title>{% block title %}{% endblock %}</title>
         {% tailwind_css %}
     </head>
-    <body hx-boost="true">
-        {% block body %}{% endblock %} {% block js %} {% endblock %}
+    <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+        {% block body %}{% endblock %} {% block js %}{% endblock %}
+        <script src="{% static 'vendor/js/alpine/alpine.min.js'%}"></script>
+
     </body>
 </html>

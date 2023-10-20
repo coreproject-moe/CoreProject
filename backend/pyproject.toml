@@ -136,7 +136,7 @@ python_files = ["test_*.py", "*_test.py", "testing/python/*.py"]
 
 [tool.black]
 line-length = 92
-target-version = ["py312"]
+target-version = ["py311"]
 
 [tool.mypy]
 show_error_codes = true
