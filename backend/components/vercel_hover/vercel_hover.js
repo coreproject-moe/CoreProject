@@ -1,7 +1,7 @@
 htmx.onLoad(function (content) {
     const hover_glider_element = content.querySelector('active_glider') ?? null,
-        glider_container_element =
-            content.querySelector('glider-container') ?? null;
+          glider_container_element =
+        content.querySelector('glider-container') ?? null;
 
     if (hover_glider_element == null || glider_container_element == null) {
         console.log('elements are null | skipping | `vercel-hover.js`');
