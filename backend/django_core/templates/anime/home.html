@@ -57,7 +57,8 @@
                                     {% for icon in icons %}
                                         <button
                                             type="button"
-                                            @click="$store.href='{{icon.href}}'"
+                                            @click="href='{{icon.href}}'"
+
                                             _="
                                                on click
                                                add .blur-sm
@@ -66,10 +67,8 @@
                                                then remove .blur-sm
                                               "
                                             hx-get="{{icon.href}}"
-                                            hx-target="#page"
-                                            hx-push-url="{{icon.href}}"
-                                            hx-replace-url="{{icon.href}}"
-                                            x-bind:class = "$store.href === '{{icon.href}}' ? 'relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500' : '!bg-transparent'"
+                                            hx-target="#page-content"
+                                            x-bind:class = "href === '{{icon.href}}' ? 'relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500' : '!bg-transparent'"
                                             class="btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0"
                                         >
                                             <div class="inline-grid">
@@ -77,15 +76,15 @@
                                                     class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]"
                                                 >
 
-                                                    <div :class="$store.href !== '{{icon.href}}' && 'hidden'">
+                                                    <template x-if="href === '{{icon.href}}'">
                                                         {% include icon.html with class=icon.class|add:" !text-secondary" %}
-                                                    </div>
-                                                    <div :class="$store.href === '{{icon.href}}' && 'hidden'">
+                                                    </template>
+                                                    <template x-if="href !== '{{icon.href}}'">
                                                         {% include icon.html with class=icon.class %}
-                                                    </div>
+                                                    </template>
 
                                                     <span
-                                                        x-bind:class = "$store.href === '{{icon.href}}' ? 'hidden text-secondary' : 'text-[0.75vw] font-semibold capitalize leading-[1.05vw]'"
+                                                        x-bind:class = "href === '{{icon.href}}' ? 'hidden text-secondary' : 'text-[0.75vw] font-semibold capitalize leading-[1.05vw]'"
                                                     >
                                                         {{ icon.label }}
                                                     </span>
@@ -93,11 +92,6 @@
                                             </div>
                                         </button>
                                     {% endfor %}
-                                    <script>
-                                        document.addEventListener('alpine:init', () => {
-                                            Alpine.store('href', '{{request.path}}')
-                                        })
-                                    </script>
                                 {% endfill %}
                             {% endcomponent_block %}
                         </div>
