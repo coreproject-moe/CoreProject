@@ -1,9 +1,11 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import  render
 
+from ...user.forms import LoginForm
 
 def login_view(request):
-    if request.user.is_authenticated:
-        return redirect("anime_home_view")
+    form = LoginForm()
+    context = {
+        "form": form
+    }
 
-    context = {}
-    return render(request, "user/login.html")
+    return render(request, "user/login.html", context)
