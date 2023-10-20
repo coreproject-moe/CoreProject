@@ -13,7 +13,7 @@ def login_view(request: HttpRequest):
         {"name": "You Lie in April", "cover": "/images/mock/YourLieInApril-bg.avif"},
         {"name": "Attack on Titan", "cover": "/images/mock/AttackOnTitan-bg.avif"},
         {"name": "Jujutsu Kaisen", "cover": "/images/mock/JujutsuKaisen.avif"},
-        {"name": "Death Note", "cover": "/images/mock/DeathNote-bg.avif"}
+        {"name": "Death Note", "cover": "/images/mock/DeathNote-bg.avif"},
     ]
 
     context = {
