@@ -21,13 +21,13 @@
             type="image/svg+xml"
             href="{% static 'images/favicon/favicon.svg' %}"
         />
-        <script src="{% static 'vendor/js/alpine/alpine.min.js'%}" defer></script>
+        <script src="{% static 'vendor/js/alpine/alpine.min.js'%}"></script>
 
         <link
             rel="stylesheet"
             href="{% static 'fonts/Kokoro/stylesheet.css' %}"
         />
-        <script src="{% static 'vendor/js/htmx/htmx.min.js'%}" defer></script>
+        <script src="{% static 'vendor/js/htmx/htmx.min.js'%}"></script>
         <script src="{% static 'vendor/js/hyperscript/hyperscript.min.js'%}"></script>
         {% django_htmx_script %} {% block head %}{% endblock %}
         <title>{% block title %}{% endblock %}</title>
