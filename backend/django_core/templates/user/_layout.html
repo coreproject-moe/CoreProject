@@ -28,11 +28,8 @@
                                 <span class="text-[3vw] font-bold uppercase leading-none tracking-widest text-warning md:text-[1vw]">
                                     {{ anime.name }}
                                 </span>
-                                <button
-                                    class="btn hidden p-0"
-                                    on:click={change_index}
-                                >
-                                    <Refresh class="hidden w-[2vw] md:flex md:w-[0.8vw]" />
+                                <button>
+                                    {% include "icons/refresh.html" with class="hidden md:flex md:w-[1vw]" %}
                                 </button>
                             </div>
                         </div>
