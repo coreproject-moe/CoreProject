@@ -104,6 +104,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap4",
     # Models
+    "apps.pages",
     "apps.anime",
     "apps.trackers",
     "apps.characters",
@@ -203,7 +204,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [BASE_DIR / "templates"],
-        # "APP_DIRS": True,
+        "APP_DIRS": False,
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.debug",
@@ -331,7 +332,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 STATIC_URL = "/static/"
 
-STATICFILES_DIRS = [Path(BASE_DIR, "static"), Path(BASE_DIR, "components")]
+STATICFILES_DIRS = [
+    Path(BASE_DIR.parent, "components"),
+    Path(BASE_DIR, "static"),
+]
 
 STATIC_ROOT = Path(BASE_DIR, "staticfiles")
 

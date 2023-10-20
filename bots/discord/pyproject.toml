@@ -8,15 +8,15 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.11"
 discord-py = "^2.3.2"
-sqlalchemy = {extras = ["postgresql-asyncpg"], version = "^2.0.21"}
+sqlalchemy = {extras = ["postgresql-asyncpg"], version = "^2.0.22"}
 aiohttp-jinja2 = "^1.5"
 alembic = "^1.12.0"
 
 
 [tool.poetry.group.dev.dependencies]
-black = "^23.9.1"
+black = "^23.10.0"
 aiohttp-devtools = "^1.1"
-poethepoet = "^0.23.0"
+poethepoet = "^0.24.1"
 
 [tool.poe.tasks]
 dev = 'adev runserver ./web/main.py --app-factory=aiohttp_app'

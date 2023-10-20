@@ -11,7 +11,9 @@ license = "AGPL-3.0-only"
 python = "^3.11"
 django = {version = '>=4.2.3', extras = ['argon2']}
 # First Party ( Redis )
-redis = {extras = ['hiredis'], version = ">=4.5.4"}
+# redis = {extras = ['hiredis'], version = ">=4.5.4"}
+# https://github.com/redis/hiredis-py/issues/172
+redis =  ">=4.5.4"
 # First party ( Image )
 pillow = "*"
 # First Party ( Database )
@@ -37,10 +39,6 @@ celery = {extras = ["redis"], version = ">=5.3.0"}
 django-admin-hstore-widget = ">=1.2.1"   # https://github.com/PokaInc/django-admin-hstore-widget/pull/25
 # 3rd Party ( Model Fields )
 django-colorfield = "*"
-# Rest framework
-django_ninja = ">=1.0a1"
-ninja-put-patch-file-upload-middleware = ">=0.1.1"
-pydantic = {extras = ["email"], version = "*"}
 # ===================================================
 # Http Client
 requests = "^2.31.0"
@@ -55,27 +53,27 @@ django-stubs-ext = "*"
 # Color Grabber
 colorthief = ">=0.2.1"
 # Parsers
-selectolax = "^0.3.16"
+selectolax = "^0.3.17"
 python-dateutil = "^2.8.2"
 # Rest Framework
 djangorestframework = "^3.14.0"
-django-crispy-forms = "^2.0"
+django-crispy-forms = "^2.1"
 # OpenAPI
 drf-spectacular = "^0.26.5"
-drf-spectacular-sidecar = "^2023.9.1"
+drf-spectacular-sidecar = "^2023.10.1"
 # Django filters
 django-filter = "^23.3"
 django-ltree = "^0.5.3"
-crispy-bootstrap4 = "^2022.1"
-django-components = "^0.28.2"
-django-htmx = "^1.16.0"
+crispy-bootstrap4 = "^2023.1"
+django-components = "^0.29"
+django-htmx = "^1.17.0"
 
 [tool.poetry.group.dev.dependencies]
 ## Watchfiles
 # https://github.com/adamchainz/django-watchfiles/issues/12
 # django-watchfiles = "*"
 # Django
-django-browser-reload = "^1.11.0"
+django-browser-reload = "^1.12.0"
 django_debug_toolbar = "*"
 django_dbbackup = "*"
 django_cprofile_middleware = "*"
@@ -90,7 +88,7 @@ django_stubs = {extras = ["compatible_mypy"], version = "*"}
 # Types
 types_redis = "*"
 # Task Runner
-poethepoet = "^0.23.0"
+poethepoet = "^0.24.1"
 # Django extensions
 django-extensions = "^3.2.3"
 # pygraphviz = "^1.10"
@@ -138,7 +136,7 @@ python_files = ["test_*.py", "*_test.py", "testing/python/*.py"]
 
 [tool.black]
 line-length = 92
-target-version = ["py312"]
+target-version = ["py311"]
 
 [tool.mypy]
 show_error_codes = true
