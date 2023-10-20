@@ -18,12 +18,14 @@
                         for="email-or-username"
                         class="text-base font-semibold leading-none md:text-[1.1vw]"
                     >
-                        {{ form.username.label }}:
+                        {{ form.username.label }}
                     </label>
                     {{ form.username }}
                     <info class="flex items-center gap-2 md:gap-[0.5vw]">
                         {% include "icons/info.html" with class="w-3 opacity-70 md:w-[0.9vw]" %}
-                        <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">we’ll send you a verification email, so please ensure it’s active</span>
+                        <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.8vw]">
+                            {{ form.username.help_text }}
+                        </span>
                     </info>
                 </email-or-username-field>
 
