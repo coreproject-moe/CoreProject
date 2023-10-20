@@ -1,10 +1,9 @@
 from django.shortcuts import render
+from django.http import HttpRequest
+from ..forms.user import LoginForm
 
-from ...user.forms import LoginForm
 
+def login_view(request:HttpRequest):
+    form = LoginForm(request.POST or None)
 
-def login_view(request):
-    form = LoginForm()
-    context = {"form": form}
-
-    return render(request, "user/login.html", context)
+    return render(request, "user/login.html", context={"form": form})
