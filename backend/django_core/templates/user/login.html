@@ -11,7 +11,9 @@
         hx-post="{% url "login_view" %}"
     >
         {# show toast here for now #}
-        <div id="toast"></div>
+        <div id="toast" class="toast p-0 absolute bottom-[0.5vw] right-[0.5vw]">
+            {% include "components/toast.html" with message="Login failed" %}
+        </div>
 
         {% csrf_token %}
         <span class="flex items-center text-base font-bold uppercase leading-none tracking-widest text-white md:text-[1.5vw]">hey there! welcome back 👋</span>
