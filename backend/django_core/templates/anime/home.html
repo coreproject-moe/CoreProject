@@ -58,7 +58,7 @@
                                         <button
                                             type="button"
                                             _="
-                                            {# djlint:off #}
+                                            {% comment %} djlint:off {% endcomment %}
                                                 on hyperscript:change(url)
                                                     if url !== '{{icon.href}}'
                                                     put 'btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 !bg-transparent' into my.classList
@@ -82,8 +82,8 @@
                                                     
                                                     add .hidden to <span/> in me
                                                     then remove .blur-sm
-                                            {# djlint:on #}
-                                              "
+                                            {% comment %} djlint:on {% endcomment %}
+                                            "
                                             hx-push-url= "{{icon.href}}"
                                             hx-get="{{icon.href}}"
                                             hx-target="#page-content"
@@ -94,7 +94,7 @@
                                                 <div class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]">
                                                     <icon
                                                         _="
-                                                            {# djlint:off #}
+                                                            {% comment %} djlint:off {% endcomment %}
 
                                                             on hyperscript:change(url)
                                                                 if url !== '{{icon.href}}'
@@ -102,7 +102,7 @@
                                                                 else
                                                                     put '!text-secondary' into my.classList
                                                                 end
-                                                            {# djlint:on #}
+                                                            {% comment %} djlint:on {% endcomment %}
                                                           "
                                                         class="{% if icon.href == request.path %} !text-secondary {% else %} !text-white {% endif %}"
                                                     >

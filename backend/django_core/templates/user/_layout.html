@@ -7,7 +7,7 @@
         <div
             class="relative duration-300"
             _="
-                {# djlint:off #}
+                {% comment %} djlint:off {% endcomment %}
 
                 init
                     repeat forever
@@ -32,7 +32,7 @@
 
                     end
 
-                {# djlint:on #}
+                {% comment %} djlint:on {% endcomment %}
               ">
             <img class="absolute w-full h-full object-cover transition-all " src="" _="on change(image) set @src to image" />
             {# gradients #}
