@@ -55,10 +55,11 @@
                             {% component_block "vercel_hover" glider_container_class='mt-[2.8125vw] flex flex-col items-center gap-[0.75vw]' active_element_class='rounded-[0.75vw] bg-white/10' direction='vertical' duration=200 %}
                                 {% fill 'items' %}
                                     {% for icon in icons %}
+                                        {% comment %} djlint:off {% endcomment %}
+
                                         <button
                                             type="button"
                                             _="
-                                            {% comment %} djlint:off {% endcomment %}
                                                 on hyperscript:change(url)
                                                     if url !== '{{icon.href}}'
                                                     put 'btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 !bg-transparent' into my.classList
@@ -82,7 +83,6 @@
                                                     
                                                     add .hidden to <span/> in me
                                                     then remove .blur-sm
-                                            {% comment %} djlint:on {% endcomment %}
                                             "
                                             hx-push-url= "{{icon.href}}"
                                             hx-get="{{icon.href}}"
@@ -90,11 +90,14 @@
 
                                             class="btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 {% if icon.href == request.path %} relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500 {% else %} !bg-transparent {% endif %}"
                                         >
+                                            {% comment %} djlint:on {% endcomment %}
+
                                             <div class="inline-grid">
                                                 <div class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]">
+                                                    {% comment %} djlint:off {% endcomment %}
                                                     <icon
                                                         _="
-                                                            {% comment %} djlint:off {% endcomment %}
+                                                          
 
                                                             on hyperscript:change(url)
                                                                 if url !== '{{icon.href}}'
@@ -102,12 +105,12 @@
                                                                 else
                                                                     put '!text-secondary' into my.classList
                                                                 end
-                                                            {% comment %} djlint:on {% endcomment %}
                                                           "
                                                         class="{% if icon.href == request.path %} !text-secondary {% else %} !text-white {% endif %}"
                                                     >
                                                         {% include icon.html with class=icon.class %}
                                                     </icon>
+                                                    {% comment %} djlint:on {% endcomment %}
 
                                                     <span
                                                         class='text-[0.75vw] font-semibold capitalize leading-[1.05vw] {% if icon.href == request.path %} hidden {%endif%}'
