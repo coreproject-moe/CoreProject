@@ -1,9 +1,4 @@
-<div class="toast-header">
-    <strong class="mr-auto">Toast</strong>
-    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
-<div class="toast-body">
-    {{ message }}
+<div class="flex items-center md:gap-[0.75vw] glass bg-primary px-[1vw] py-[0.75vw] rounded-[0.5vw]">
+    {% include "icons/info.html" with class="md:w-[1.25vw]" %}
+    <span class="leading-none text-white">{{ message }}</span>
 </div>
