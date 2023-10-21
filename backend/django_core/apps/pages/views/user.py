@@ -3,9 +3,9 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpRequest
 from django.shortcuts import render
 from django.templatetags.static import static
+from django_htmx.http import retarget
 
 from ..forms.user import LoginForm
-from django_htmx.http import retarget
 
 
 def login_view(request: HttpRequest):
