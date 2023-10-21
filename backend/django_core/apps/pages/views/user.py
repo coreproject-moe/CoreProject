@@ -4,8 +4,9 @@ from django.http import HttpRequest
 from django.shortcuts import render
 from django.templatetags.static import static
 
-from ..forms.user import LoginForm
 from django_core.utilities.toast import toast
+
+from ..forms.user import LoginForm
 
 
 def login_view(request: HttpRequest):
