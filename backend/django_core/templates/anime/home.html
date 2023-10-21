@@ -58,49 +58,49 @@
                                         <button
                                             type="button"
                                             _="
-                                       
-                                                on change(url)
-                                                    if url !== '{{icon.href}}'
-                                                        put 'btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0' into my.classList
-                                                        remove .hidden from <span/> in me
-                                                    end
-                                              
-                                                on htmx:afterRequest
-                                                    add .blur-sm
-                                                    then wait 100ms
-                                                    if event.detail.pathInfo.responsePath === '{{icon.href}}'
-                                                        remove '!bg-transparent' from my.classList 
-                                                        put 'btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500' into my.classList
-                                                    else
-                                                        remove 'relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500' from my.classList
-                                                        put 'btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 !bg-transparent' into my.classList 
-                                                    end
 
-                                                    send change(url:event.detail.pathInfo.responsePath) to <icon/> in <glider-container/>
-                                                    send change(url:event.detail.pathInfo.responsePath) to <button/> in <glider-container/>
-                                                    add .hidden to <span/> in me
-                                                    then remove .blur-sm
-                                                
+                                               on change(url)
+                                               if url !== '{{icon.href}}'
+                                               put 'btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0' into my.classList
+                                               remove .hidden from <span/> in me
+                                               end
+
+                                               on htmx:afterRequest
+                                               add .blur-sm
+                                               then wait 100ms
+                                               if event.detail.pathInfo.responsePath === '{{icon.href}}'
+                                               remove '!bg-transparent' from my.classList
+                                               put 'btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500' into my.classList
+                                               else
+                                               remove 'relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500' from my.classList
+                                               put 'btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 !bg-transparent' into my.classList
+                                               end
+
+                                               send change(url:event.detail.pathInfo.responsePath) to <icon/> in <glider-container/>
+                                               send change(url:event.detail.pathInfo.responsePath) to <button/> in <glider-container/>
+                                               add .hidden to <span/> in me
+                                               then remove .blur-sm
+
                                               "
                                             hx-push-url= "{{icon.href}}"
                                             hx-get="{{icon.href}}"
                                             hx-target="#page-content"
-                                         
+
                                             class="btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 {% if icon.href == request.path %} relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500 {% else %} !bg-transparent {% endif %}"
                                         >
                                             <div class="inline-grid">
                                                 <div class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]">
-                                                    <icon 
+                                                    <icon
                                                         _="
-                                                            on change(url)
-                                                                if url !== '{{icon.href}}'
-                                                                    put '!text-white' into my.classList
-                                                                else
-                                                                    put '!text-secondary' into my.classList
-                                                                end
-                                                        "
+                                                           on change(url)
+                                                           if url !== '{{icon.href}}'
+                                                           put '!text-white' into my.classList
+                                                           else
+                                                           put '!text-secondary' into my.classList
+                                                           end
+                                                          "
                                                         class="{% if icon.href == request.path %} !text-secondary {% else %} !text-white {% endif %}"
-                                                     >
+                                                    >
                                                         {% include icon.html with class=icon.class %}
                                                     </icon>
 
