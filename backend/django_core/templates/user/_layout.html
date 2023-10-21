@@ -4,10 +4,10 @@
 
 {% block body %}
     <div class="relative grid h-screen w-screen md:grid-cols-2 bg-secondary">
+
         <div
             class="relative duration-300"
             _="
-                {% comment %} djlint:off {% endcomment %}
 
                 init
                     repeat forever
@@ -34,6 +34,8 @@
 
                 {% comment %} djlint:on {% endcomment %}
               ">
+        {% comment %} djlint:on {% endcomment %}
+
             <img class="absolute w-full h-full object-cover transition-all " src="" _="on change(image) set @src to image" />
             {# gradients #}
             <div class="absolute inset-0 bg-gradient-to-r from-secondary/75 to-secondary/50"></div>
