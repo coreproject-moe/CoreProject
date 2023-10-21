@@ -12,7 +12,7 @@
                         add .blur-sm to <img/> in me
                         add .blur-sm to <anime-name/> in me
                         
-                        wait 200ms
+                        then wait 200ms
                         js
                             {# https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_sample #}
                             const random_anime = (arr => {
@@ -23,9 +23,9 @@
                         end
                         send change(image:it.cover) to <img/> in me
                         send change(anime_name:it.name) to <anime-name/> in me
-                        remove .blur-sm from <anime-name/> in me
-                        remove .blur-sm from <img/> in me
-                        wait 1s
+                        then remove .blur-sm from <anime-name/> in me
+                        then remove .blur-sm from <img/> in me
+                        then wait 1s
                     end
                     
         ">
