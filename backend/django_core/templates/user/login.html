@@ -10,10 +10,6 @@
         class="flex h-max w-full flex-col gap-[15vw] bg-surface-900 p-10 md:h-full md:justify-between md:gap-0 md:rounded-none md:p-[5vw] md:pr-[10vw]"
         hx-post="{% url "login_view" %}"
     >
-        {# show toast here for now #}
-        <div id="toast" class="toast p-0 absolute bottom-[0.75vw] right-[0.75vw]">
-        </div>
-
         {% csrf_token %}
         <span class="flex items-center text-base font-bold uppercase leading-none tracking-widest text-white md:text-[1.5vw]">hey there! welcome back 👋</span>
         <form-fields class="flex flex-col gap-7 md:block">
