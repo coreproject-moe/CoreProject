@@ -63,19 +63,13 @@
                                                if url !== '{{icon.href}}'
                                                put 'btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 !bg-transparent' into my.classList
                                                remove .hidden from <span/> in me
+                                               else
+                                               put 'btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500' into my.classList
                                                end
 
                                                on htmx:afterRequest
                                                add .blur-sm
                                                then wait 100ms
-
-                                               if event.detail.pathInfo.responsePath === '{{icon.href}}'
-                                               remove '!bg-transparent' from my.classList
-                                               put 'btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500' into my.classList
-                                               else
-                                               remove 'relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500' from my.classList
-                                               put 'btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 !bg-transparent' into my.classList
-                                               end
 
                                                send hyperscript:change(url:event.detail.pathInfo.responsePath) to <icon/> in <glider-container/>
                                                send hyperscript:change(url:event.detail.pathInfo.responsePath) to <button/> in <glider-container/>
