@@ -9,28 +9,28 @@
             class="relative duration-300"
             _="
 
-               init
-               repeat forever
-               add .blur-sm to <img/> in me
-               add .blur-sm to <anime-name/> in me
+                init
+                    repeat forever
+                    add .blur-sm to <img/> in me
+                    add .blur-sm to <anime-name/> in me
 
-               then wait 200ms
-               js
+                    then wait 200ms
+                    js
                         {# https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_sample #}
-               const random_anime = (arr => {
-               const len = arr == null ? 0 : arr.length
-               return len ? arr[Math.floor(Math.random() * len)] : undefined
-               })({{animes|safe}})
-               return random_anime
-               end
+                        const random_anime = (arr => {
+                        const len = arr == null ? 0 : arr.length
+                        return len ? arr[Math.floor(Math.random() * len)] : undefined
+                        })({{animes|safe}})
+                        return random_anime
+                    end
 
-               send change(image:it.cover) to <img/> in me
-               send change(anime_name:it.name) to <anime-name/> in me
-               then remove .blur-sm from <anime-name/> in me
-               then remove .blur-sm from <img/> in me
-               then wait 1s
+                    send change(image:it.cover) to <img/> in me
+                    send change(anime_name:it.name) to <anime-name/> in me
+                    then remove .blur-sm from <anime-name/> in me
+                    then remove .blur-sm from <img/> in me
+                    then wait 1s
 
-               end
+                    end
 
                 {% comment %} djlint:on {% endcomment %}
               ">
