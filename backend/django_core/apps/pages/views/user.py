@@ -4,8 +4,7 @@ from django.http import HttpRequest
 from django.shortcuts import render
 from django.templatetags.static import static
 
-from django_core.utilities.toast import toast
-
+from utilities.toast import toast
 from ..forms.user import LoginForm
 
 
