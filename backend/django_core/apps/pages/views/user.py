@@ -3,8 +3,8 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpRequest
 from django.shortcuts import render
 from django.templatetags.static import static
-
 from utilities.toast import toast
+
 from ..forms.user import LoginForm
 
 
