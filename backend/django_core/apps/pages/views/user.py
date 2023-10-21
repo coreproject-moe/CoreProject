@@ -1,10 +1,10 @@
+from defender import config, utils
+from django.contrib.auth import authenticate, login
 from django.http import HttpRequest, HttpResponseForbidden
 from django.shortcuts import render
 from django.templatetags.static import static
-from django.contrib.auth import authenticate, login
+
 from ..forms.user import LoginForm
-from defender import utils
-from defender import config
 
 
 def login_view(request: HttpRequest):
