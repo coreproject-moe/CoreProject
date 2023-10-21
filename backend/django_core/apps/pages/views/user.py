@@ -46,8 +46,11 @@ def login_view(request: HttpRequest):
             login(request, user)
         else:
             login_unsuccessful = True
-            utils.add_login_attempt_to_db(request, login_valid=False, username=username)
-            return HttpResponseForbidden(f"Attempts = {utils.get_user_attempts(username)}")
+            utils.add_login_attempt_to_db(
+                request,
+                login_valid=not login_unsuccessful,
+                username=username,
+            )
 
         utils.check_request(
             request,
