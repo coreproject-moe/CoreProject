@@ -1,11 +1,11 @@
 from defender import config, utils
 from django.contrib.auth import authenticate, login
-from django.http import HttpRequest, HttpResponseForbidden
+from django.http import HttpRequest
 from django.shortcuts import render
 from django.templatetags.static import static
-from django_htmx.http import retarget
 
 from ..forms.user import LoginForm
+from django_core.utilities.toast import toast
 
 
 def login_view(request: HttpRequest):
@@ -41,22 +41,22 @@ def login_view(request: HttpRequest):
                 f"You have attempted to login {config.FAILURE_LIMIT} times, with no success."
                 f"Your account is locked for {utils.get_lockout_cooloff_time(username=username)} seconds"
             )
-            return HttpResponseForbidden(detail)
+            return toast(request, message=detail)
 
         if user is not None:
             login(request, user)
         else:
             login_unsuccessful = True
             utils.add_login_attempt_to_db(request, login_valid=False, username=username)
-            response = render(request, "components/toast.html", { "message": "User not found!" })
-            return retarget(response, "#toast")
+            return toast(request, message="User not found!")
 
         utils.check_request(
             request,
             login_unsuccessful=login_unsuccessful,
             username=username,
         )
+
         if login_unsuccessful:
-            return HttpResponseForbidden("Login not allowed")
+            return toast(request, message="Login not allowed")
 
     return render(request, "user/login.html", context)
