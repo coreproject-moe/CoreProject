@@ -1,4 +1,5 @@
 from defender import config, utils
+from django_htmx.http import retarget
 from django.contrib.auth import authenticate, login
 from django.http import HttpRequest, HttpResponseForbidden
 from django.shortcuts import render
@@ -47,7 +48,9 @@ def login_view(request: HttpRequest):
         else:
             login_unsuccessful = True
             utils.add_login_attempt_to_db(request, login_valid=False, username=username)
-            return HttpResponseForbidden(f"Attempts = {utils.get_user_attempts(username)}")
+            # return HttpResponseForbidden(f"Attempts = {utils.get_user_attempts(request)}")
+            response = render(request, "components/toast.html", { "message": "Nahhh" })
+            return retarget(response, "#toast")
 
         utils.check_request(
             request,
