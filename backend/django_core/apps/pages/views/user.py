@@ -34,18 +34,21 @@ def login_view(request: HttpRequest):
             username=username,
             password=form.cleaned_data["password"],
         )
+
         if utils.is_already_locked(request, username=username):
             detail = (
                 f"You have attempted to login {config.FAILURE_LIMIT} times, with no success."
                 f"Your account is locked for {utils.get_lockout_cooloff_time(username=username)} seconds"
             )
             return HttpResponseForbidden(detail)
+
         if user is not None:
             login(request, user)
         else:
             login_unsuccessful = True
             utils.add_login_attempt_to_db(request, login_valid=False, username=username)
-            return HttpResponseForbidden(f'Attempts = {utils.get_user_attempts(username)}')
+            return HttpResponseForbidden(f"Attempts = {utils.get_user_attempts(username)}")
+
         utils.check_request(
             request,
             login_unsuccessful=login_unsuccessful,
