@@ -8,10 +8,9 @@
             class="relative duration-200"
             _="
                on hyperscript:change_background
-               add .blur-sm to <img/> in me
-               add .blur-sm to <anime-name/> in me
+               add .backdrop-blur to <backdrop/> in me
 
-               then wait 200ms
+               then wait 300ms
                js
                         {# https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_sample #}
                const random_anime = (arr => {
@@ -23,8 +22,7 @@
 
                send change(image:it.cover) to <img/> in me
                send change(anime_name:it.name) to <anime-name/> in me
-               then remove .blur-sm from <anime-name/> in me
-               then remove .blur-sm from <img/> in me
+               then remove .backdrop-blur from <backdrop/> in me
                init
                repeat forever
                trigger hyperscript:change_background
@@ -35,8 +33,9 @@
               ">
 
             <img class="absolute w-full h-full object-cover transition-all " src="" _="on change(image) set @src to image" />
-            {# gradients #}
+            {# backdrops #}
             <div class="absolute inset-0 bg-gradient-to-r from-secondary/75 to-secondary/50"></div>
+            <backdrop class="absolute inset-0 bg-transparent duration-300"></backdrop>
 
             <div class="absolute inset-0 bottom-[6vw] hidden flex-col items-center justify-center text-center md:flex text-white">
                 <span class="text-[0.9vw] font-semibold uppercase leading-none">welcome to</span>
