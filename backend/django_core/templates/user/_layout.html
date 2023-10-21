@@ -5,7 +5,7 @@
 {% block body %}
     <div class="relative grid h-screen w-screen md:grid-cols-2 bg-secondary">
         <div
-            class="relative duration-200 image_event_source"
+            class="relative duration-200"
             _="
                on hyperscript:change_background
                add .blur-sm to <img/> in me
@@ -27,7 +27,7 @@
                then remove .blur-sm from <img/> in me
                init
                repeat forever
-               send hyperscript:change_background to me
+               trigger hyperscript:change_background
                then wait 10s
 
                end
@@ -54,7 +54,7 @@
                         <span class="text-[3vw] font-bold uppercase leading-none tracking-widest text-warning md:text-[1vw]">
                             <anime-name _="on change(anime_name) put anime_name into me"></anime-name>
                         </span>
-                        <button _="on click send hyperscript:change_background to .image_event_source">
+                        <button _="on click trigger hyperscript:change_background">
                             {% include "icons/refresh.html" with class="hidden md:flex md:w-[1vw]" %}
                         </button>
                     </div>
