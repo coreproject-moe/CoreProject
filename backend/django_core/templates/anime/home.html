@@ -52,14 +52,14 @@
                                     {% include 'icons/search.html' with class="w-[1.25vw] text-black" %}
                                 </button>
                             </div>
-                            {% component_block "vercel_hover" glider_container_class='mt-[2.8125vw] flex flex-col items-center gap-[0.75vw]' active_element_class='rounded-[0.75vw] bg-white/10' direction='vertical' duration=200 alpine='x-data = "{ href :\'\'}" x-init="href=\''|add:request.path|add:'\'"'|safe%}
+                            {% component_block "vercel_hover" glider_container_class='mt-[2.8125vw] flex flex-col items-center gap-[0.75vw]' active_element_class='rounded-[0.75vw] bg-white/10' direction='vertical' duration=200 alpine='x-data = "{ href :\'\'}" %}
                                 {% fill 'items' %}
                                     {% for icon in icons %}
                                         <button
                                             type="button"
                                             _="
                                        
-                                                on change(url)
+                                                on hyperscript:change(url)
                                                     if url !== '{{icon.href}}'
                                                         put 'btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0' into my.classList
                                                         remove .hidden from <span/> in me
@@ -76,8 +76,8 @@
                                                         put 'btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 !bg-transparent' into my.classList 
                                                     end
 
-                                                    send change(url:event.detail.pathInfo.responsePath) to <icon/> in <glider-container/>
-                                                    send change(url:event.detail.pathInfo.responsePath) to <button/> in <glider-container/>
+                                                    send hyperscript:change(url:event.detail.pathInfo.responsePath) to <icon/> in <glider-container/>
+                                                    send hyperscript:change(url:event.detail.pathInfo.responsePath) to <button/> in <glider-container/>
                                                     add .hidden to <span/> in me
                                                     then remove .blur-sm
                                                 
@@ -92,7 +92,7 @@
                                                 <div class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]">
                                                     <icon 
                                                         _="
-                                                            on change(url)
+                                                            on hyperscript:change(url)
                                                                 if url !== '{{icon.href}}'
                                                                     put '!text-white' into my.classList
                                                                 else
