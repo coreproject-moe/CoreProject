@@ -30,7 +30,6 @@ htmx.onLoad(function (content) {
 
             // We need to make sure that zIndex is not auto
         const target_zindex = parseInt(target_computed_style.zIndex);
-
         glider_container_element.style.zIndex = String(target_zindex ?? 0);
         hover_glider_element.style.zIndex = String(target_zindex - 1 ?? -1);
 

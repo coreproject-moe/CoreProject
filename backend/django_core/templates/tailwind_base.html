@@ -34,7 +34,6 @@
     </head>
     <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
         {% block body %}{% endblock %} {% block js %}{% endblock %}
-        <script src="{% static 'vendor/js/alpine/alpine.min.js'%}"></script>
 
     </body>
 </html>

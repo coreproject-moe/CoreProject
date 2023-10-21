@@ -4,39 +4,64 @@
 
 {% block body %}
     <div class="relative grid h-screen w-screen md:grid-cols-2 bg-secondary">
-        <div class="relative">
-            {% for anime in animes %}
-                {# remove this if checking #}
-                {% if forloop.counter == 3 %}
-                    <img class="absolute w-full h-full object-cover" src="{% static anime.cover %}">
-                    {# gradients #}
-                    <div class="absolute inset-0 bg-gradient-to-r from-secondary/75 to-secondary/50"></div>
+        <div
+            class="relative duration-300 image_event_source"
+            _="
+               on hyperscript:change_background
+               add .blur-sm to <img/> in me
+               add .blur-sm to <anime-name/> in me
 
-                    <div class="absolute inset-0 bottom-[6vw] hidden flex-col items-center justify-center text-center md:flex text-white">
-                        <span class="text-[0.9vw] font-semibold uppercase leading-none">welcome to</span>
-                        <div class="mt-[0.75vw] flex items-center leading-none md:text-[1.5vw] font-semibold">coreproject.moe</div>
-                        <span class="mt-[2.875vw] max-w-[22vw] text-[1.25vw] font-semibold leading-[1.75vw]">Bridging the gap between streaming and torrenting sites with a modern and clean interface.</span>
+               then wait 200ms
+               js
+                        {# https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_sample #}
+               const random_anime = (arr => {
+               const len = arr == null ? 0 : arr.length
+               return len ? arr[Math.floor(Math.random() * len)] : undefined
+               })({{animes|safe}})
+               return random_anime
+               end
 
-                        <span class="mt-[4vw] text-[1vw] font-semibold leading-none">With a coreproject account, you can</span>
-                        <span class="mt-[0.5vw] max-w-[22vw] text-[1vw] font-medium leading-[1vw] text-surface-200">continue on animecore, mangacore and soundcore with same account.</span>
+               send change(image:it.cover) to <img/> in me
+               send change(anime_name:it.name) to <anime-name/> in me
+               then remove .blur-sm from <anime-name/> in me
+               then remove .blur-sm from <img/> in me
+               init
+               repeat forever
+               send hyperscript:change_background to me
+               then wait 10s
+
+               end
+
+              ">
+
+            <img class="absolute w-full h-full object-cover transition-all " src="" _="on change(image) set @src to image" />
+            {# gradients #}
+            <div class="absolute inset-0 bg-gradient-to-r from-secondary/75 to-secondary/50"></div>
+
+            <div class="absolute inset-0 bottom-[6vw] hidden flex-col items-center justify-center text-center md:flex text-white">
+                <span class="text-[0.9vw] font-semibold uppercase leading-none">welcome to</span>
+                <div class="mt-[0.75vw] flex items-center leading-none md:text-[1.5vw] font-semibold">coreproject.moe</div>
+                <span class="mt-[2.875vw] max-w-[22vw] text-[1.25vw] font-semibold leading-[1.75vw]">Bridging the gap between streaming and torrenting sites with a modern and clean interface.</span>
+
+                <span class="mt-[4vw] text-[1vw] font-semibold leading-none">With a coreproject account, you can</span>
+                <span class="mt-[0.5vw] max-w-[22vw] text-[1vw] font-medium leading-[1vw] text-surface-200">continue on animecore, mangacore and soundcore with same account.</span>
+            </div>
+
+            <div class="absolute bottom-[1.85vw] left-10 md:left-[2vw] md:flex">
+                <div class="flex flex-col gap-2 md:gap-[0.75vw]">
+                    <span class="text-[2.25vw] font-semibold uppercase leading-none tracking-widest text-white/75 md:text-[0.75vw]">Background from anime</span>
+                    <div class="flex items-center gap-[2vw] md:gap-[0.5vw]">
+                        <span class="text-[3vw] font-bold uppercase leading-none tracking-widest text-warning md:text-[1vw]">
+                            <anime-name _="on change(anime_name) put anime_name into me"></anime-name>
+                        </span>
+                        <button _="on click send hyperscript:change_background to .image_event_source">
+                            {% include "icons/refresh.html" with class="hidden md:flex md:w-[1vw]" %}
+                        </button>
                     </div>
-
-                    <div class="absolute bottom-[1.85vw] left-10 md:left-[2vw] md:flex">
-                        <div class="flex flex-col gap-2 md:gap-[0.75vw]">
-                            <span class="text-[2.25vw] font-semibold uppercase leading-none tracking-widest text-white/75 md:text-[0.75vw]">Background from anime</span>
-                            <div class="flex items-center gap-[2vw] md:gap-[0.5vw]">
-                                <span class="text-[3vw] font-bold uppercase leading-none tracking-widest text-warning md:text-[1vw]">
-                                    {{ anime.name }}
-                                </span>
-                                <button>
-                                    {% include "icons/refresh.html" with class="hidden md:flex md:w-[1vw]" %}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
+                </div>
+            </div>
         </div>
         {% block form %}{% endblock %}
     </div>
+
 {% endblock %}
