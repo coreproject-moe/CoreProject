@@ -48,7 +48,9 @@ def login_view(request: HttpRequest):
         else:
             login_unsuccessful = True
             utils.add_login_attempt_to_db(request, login_valid=False, username=username)
-            response = render(request, "components/toast.html", { "message": "User not found!" })
+            response = render(
+                request, "components/toast.html", {"message": "User not found!"}
+            )
             return retarget(response, "#toast")
 
         utils.check_request(
