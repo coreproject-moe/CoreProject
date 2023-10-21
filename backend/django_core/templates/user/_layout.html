@@ -7,28 +7,28 @@
         <div
             class="relative duration-200"
             _="
-                on hyperscript:change_background
-                add .backdrop-blur to <backdrop/> in me
-                then wait 300ms
-                
-                js
-                    {# https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_sample #}
-                    const random_anime = (arr => {
-                        const len = arr == null ? 0 : arr.length
-                        return len ? arr[Math.floor(Math.random() * len)] : undefined
-                    })({{animes|safe}})
-                    return random_anime
-                end
+               on hyperscript:change_background
+               add .backdrop-blur to <backdrop/> in me
+               then wait 300ms
 
-                send change(image:it.cover) to <img/> in me
-                send change(anime_name:it.name) to <anime-name/> in me
-                then remove .backdrop-blur from <backdrop/> in me
-               
-                init
-                    repeat forever
-                    trigger hyperscript:change_background
-                    then wait 10s
-                end
+               js
+                    {# https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_sample #}
+               const random_anime = (arr => {
+               const len = arr == null ? 0 : arr.length
+               return len ? arr[Math.floor(Math.random() * len)] : undefined
+               })({{animes|safe}})
+               return random_anime
+               end
+
+               send change(image:it.cover) to <img/> in me
+               send change(anime_name:it.name) to <anime-name/> in me
+               then remove .backdrop-blur from <backdrop/> in me
+
+               init
+               repeat forever
+               trigger hyperscript:change_background
+               then wait 10s
+               end
 
               ">
 
