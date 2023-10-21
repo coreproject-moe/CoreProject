@@ -4,31 +4,31 @@
 
 {% block body %}
     <div class="relative grid h-screen w-screen md:grid-cols-2 bg-secondary">
-        <div 
-            class="relative duration-300" 
+        <div
+            class="relative duration-300"
             _="
-                init
-                    repeat forever
-                        add .blur-sm to <img/> in me
-                        add .blur-sm to <anime-name/> in me
-                        
-                        wait 200ms
-                        js
+               init
+               repeat forever
+               add .blur-sm to <img/> in me
+               add .blur-sm to <anime-name/> in me
+
+               wait 200ms
+               js
                             {# https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_sample #}
-                            const random_anime = (arr => {
-                                const len = arr == null ? 0 : arr.length
-                                return len ? arr[Math.floor(Math.random() * len)] : undefined
-                            })({{animes|safe}})
-                            return random_anime
-                        end
-                        send change(image:it.cover) to <img/> in me
-                        send change(anime_name:it.name) to <anime-name/> in me
-                        remove .blur-sm from <anime-name/> in me
-                        remove .blur-sm from <img/> in me
-                        wait 1s
-                    end
-                    
-        ">
+               const random_anime = (arr => {
+               const len = arr == null ? 0 : arr.length
+               return len ? arr[Math.floor(Math.random() * len)] : undefined
+               })({{animes|safe}})
+               return random_anime
+               end
+               send change(image:it.cover) to <img/> in me
+               send change(anime_name:it.name) to <anime-name/> in me
+               remove .blur-sm from <anime-name/> in me
+               remove .blur-sm from <img/> in me
+               wait 1s
+               end
+
+              ">
             <img class="absolute w-full h-full object-cover transition-all " src="" _="on change(image) set @src to image" />
             {# gradients #}
             <div class="absolute inset-0 bg-gradient-to-r from-secondary/75 to-secondary/50"></div>

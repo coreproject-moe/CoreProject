@@ -11,7 +11,10 @@ def login_view(request: HttpRequest):
     animes = [
         {"name": "Demon Slayer", "cover": static("/images/mock/DemonSlayer-cover.avif")},
         {"name": "Hyouka", "cover": static("/images/mock/Hyouka-bg.avif")},
-        {"name": "You Lie in April", "cover": static("/images/mock/YourLieInApril-bg.avif")},
+        {
+            "name": "You Lie in April",
+            "cover": static("/images/mock/YourLieInApril-bg.avif"),
+        },
         {"name": "Attack on Titan", "cover": static("/images/mock/AttackOnTitan-bg.avif")},
         {"name": "Jujutsu Kaisen", "cover": static("/images/mock/JujutsuKaisen.avif")},
         {"name": "Death Note", "cover": static("/images/mock/DeathNote-bg.avif")},
