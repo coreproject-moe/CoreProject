@@ -1,14 +1,16 @@
 from defender import config, utils
 from django.contrib.auth import authenticate, login
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.templatetags.static import static
-from django_htmx.http import retarget
-
+from django.urls import reverse_lazy
+from django_htmx.http import retarget, HttpResponseClientRefresh, HttpResponseClientRedirect
+from django.contrib.auth import logout
 from ..forms.user import LoginForm
+from django.shortcuts import redirect
 
 
-def login_view(request: HttpRequest):
+def login_view(request: HttpRequest) -> HttpResponse | HttpResponseClientRefresh:
     form = LoginForm(request.POST or None)
 
     animes = [
@@ -39,9 +41,13 @@ def login_view(request: HttpRequest):
             )
 
         if user is not None:
-            
             login(request, user)
-            message = f"Welcome Back {username}"
+
+            redirect_location = request.GET.get("next")
+            if redirect_location:
+                return HttpResponseClientRedirect(redirect_location)
+            else:
+                return HttpResponseClientRefresh()
 
         else:
             login_unsuccessful = True
@@ -73,14 +79,25 @@ def login_view(request: HttpRequest):
             "components/toast.html",
             {"message": message},
         )
-        
-        return retarget(response, "#toast")
+    elif form.errors:
+        response = render(
+            request,
+            "components/toast.html",
+            {"message": form.errors},
+        )
+    else:
+        return render(
+            request,
+            "user/login.html",
+            context={
+                "form": form,
+                "animes": animes,
+            },
+        )
+    return retarget(response, "#toast")
 
-    return render(
-        request,
-        "user/login.html",
-        context={
-            "form": form,
-            "animes": animes,
-        },
-    )
+
+def logout_view(request: HttpRequest) -> HttpResponse:
+    logout(request)
+    redirect_location = request.GET.get("next") or reverse_lazy("login_view")
+    return redirect(redirect_location)
