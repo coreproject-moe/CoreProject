@@ -1,17 +1,17 @@
 {% extends 'user/_layout.html'%}
+
+
 {% load crispy_forms_tags %}
 
-{% block head %}
-    <title>Login | CoreProject</title>
+
+{% block title %}
+    Register | CoreProject
 {% endblock %}
 
 {% block sidebody%}
-
     <form
         class="flex h-max w-full flex-col bg-surface-900 p-10 pb-[10vw] pt-[7vw] md:h-full md:justify-between md:rounded-none md:p-0"
         method="POST"
-        data-felte-reporter-svelte-id="MqNh0H40ObgB78scl2mNh"
-        novalidate=""
     >
         <form-fields
         ><div
@@ -19,10 +19,10 @@
         >
             <p>create your</p>
             <p class="">
-                <span class="text-surface-50">c</span
-                    ><span class="text-warning-400">o</span
-                        ><span class="text-surface-50">r</span
-                            ><span class="text-surface-50">e</span>
+                <span class="text-white">c</span
+                    ><span class="text-warning">o</span
+                        ><span class="text-white">r</span
+                            ><span class="text-white">e</span>
                         </p>
                         <p>account</p>
                     </div>
@@ -37,10 +37,7 @@
                             id="email"
                             placeholder="sora@coreproject.moe"
                             class="h-12 w-full rounded-xl border-[0.4vw] border-primary-500 bg-transparent pl-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:pl-[1vw] md:text-[1.1vw]"
-                            data-felte-validation-message="Please enter a valid email address"
-                            aria-invalid="true"
                         />
-                        <div style="display: none"></div>
                         <span
                             class="mt-[0.75vw] text-xs leading-none text-surface-300 md:mt-0 md:text-[0.75vw]"
                         >Please enter a valid email address</span
@@ -202,7 +199,7 @@
                                                                             <span class="text-xs text-surface-100 md:text-[0.75vw]"
                                                                             >Already have an account?</span
                                                                                 >
-                                                                                <a href="./login" class="text-base leading-none md:text-[1.1vw]"
+                                                                                <a href="{% url 'login_view'%}"  class="text-base leading-none md:text-[1.1vw] text-primary underline"
                                                                                 >Login</a
                                                                                     >
                                                                                 </div>
