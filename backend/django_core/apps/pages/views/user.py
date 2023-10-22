@@ -39,6 +39,7 @@ def login_view(request: HttpRequest):
             )
 
         if user is not None:
+            
             login(request, user)
             message = f"Welcome Back {username}"
 
@@ -49,7 +50,7 @@ def login_view(request: HttpRequest):
                 login_valid=False,
                 username=username,
             )
-            
+
             login_attempts = int(config.FAILURE_LIMIT) - int(
                 utils.get_user_attempts(request, username=username)
             )
@@ -72,6 +73,7 @@ def login_view(request: HttpRequest):
             "components/toast.html",
             {"message": message},
         )
+        
         return retarget(response, "#toast")
 
     return render(
