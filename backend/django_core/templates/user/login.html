@@ -4,7 +4,9 @@
 {% block head %}
     <title>Login | CoreProject</title>
 {% endblock %}
-{% block form %}
+
+
+{% block sidebody %}
 
     {% if request.user.is_authenticated %}
         <div class='flex flex-col items-start justify-center gap-[2vw] p-[2vw]'>
@@ -76,5 +78,5 @@
             </div>
         </form>
 
-    {%endif%}
+    {% endif %}
 {% endblock %}

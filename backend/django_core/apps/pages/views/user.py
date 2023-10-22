@@ -100,3 +100,7 @@ def logout_view(request: HttpRequest) -> HttpResponse:
     logout(request)
     redirect_location = request.GET.get("next") or reverse_lazy("login_view")
     return redirect(redirect_location)
+
+
+def register_view(request: HttpRequest) -> HttpResponse:
+    return render(request, "user/register.html")
