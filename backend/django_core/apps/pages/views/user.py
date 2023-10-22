@@ -8,21 +8,21 @@ from django_htmx.http import HttpResponseClientRedirect, HttpResponseClientRefre
 
 from ..forms.user import LoginForm
 
+animes = [
+    {"name": "Demon Slayer", "cover": static("/images/mock/DemonSlayer-cover.avif")},
+    {"name": "Hyouka", "cover": static("/images/mock/Hyouka-bg.avif")},
+    {
+        "name": "You Lie in April",
+        "cover": static("/images/mock/YourLieInApril-bg.avif"),
+    },
+    {"name": "Attack on Titan", "cover": static("/images/mock/AttackOnTitan-bg.avif")},
+    {"name": "Jujutsu Kaisen", "cover": static("/images/mock/JujutsuKaisen.avif")},
+    {"name": "Death Note", "cover": static("/images/mock/DeathNote-bg.avif")},
+]
+
 
 def login_view(request: HttpRequest) -> HttpResponse | HttpResponseClientRefresh:
     form = LoginForm(request.POST or None)
-
-    animes = [
-        {"name": "Demon Slayer", "cover": static("/images/mock/DemonSlayer-cover.avif")},
-        {"name": "Hyouka", "cover": static("/images/mock/Hyouka-bg.avif")},
-        {
-            "name": "You Lie in April",
-            "cover": static("/images/mock/YourLieInApril-bg.avif"),
-        },
-        {"name": "Attack on Titan", "cover": static("/images/mock/AttackOnTitan-bg.avif")},
-        {"name": "Jujutsu Kaisen", "cover": static("/images/mock/JujutsuKaisen.avif")},
-        {"name": "Death Note", "cover": static("/images/mock/DeathNote-bg.avif")},
-    ]
 
     login_unsuccessful = False
 
@@ -103,4 +103,10 @@ def logout_view(request: HttpRequest) -> HttpResponse:
 
 
 def register_view(request: HttpRequest) -> HttpResponse:
-    return render(request, "user/register.html")
+    return render(
+        request,
+        "user/register.html",
+        context={
+            "animes": animes,
+        },
+    )

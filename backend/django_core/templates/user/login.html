@@ -1,15 +1,15 @@
 {% extends 'user/_layout.html'%}
 {% load crispy_forms_tags %}
 
-{% block head %}
-    <title>Login | CoreProject</title>
+{% block title %}
+    Login | CoreProject
 {% endblock %}
 
 
 {% block sidebody %}
 
     {% if request.user.is_authenticated %}
-        <div class='flex flex-col items-start justify-center gap-[2vw] p-[2vw]'>
+        <div class='flex flex-col items-start justify-center gap-[2vw]'>
             <div class='flex items-center text-base font-bold uppercase leading-none tracking-widest text-white md:text-[1.5vw]'>welcome back {{request.user}}</div>
             <div>
                 Perhaps you meant to
@@ -24,7 +24,7 @@
         </div>
     {%else%}
         <form
-            class="flex h-max w-full flex-col gap-[15vw] bg-surface-900 p-10 md:h-full md:justify-between md:gap-0 md:rounded-none md:p-[5vw] md:pr-[10vw]"
+            class="flex h-max w-full flex-col gap-[15vw] bg-surface-900 p-10 md:h-full md:justify-between md:gap-0 md:rounded-none md:p-0"
             hx-post="{{request.get_full_path }}"
             enctype="application/x-www-form-urlencoded"
         >
@@ -62,7 +62,7 @@
                 <div class="flex flex-col gap-1 md:gap-[0.5vw]">
                     <span class="text-xs leading-none text-surface-100 md:text-[0.75vw]">Don't have a core account?</span>
                     <a
-                        href="./register"
+                        href="{% url 'register_view'%}"
                         class="text-base leading-none md:text-[1.1vw] text-primary underline"
                     >
                         Register
