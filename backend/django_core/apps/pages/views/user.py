@@ -39,7 +39,6 @@ def login_view(request: HttpRequest):
             )
 
         if user is not None:
-            
             login(request, user)
             message = f"Welcome Back {username}"
 
@@ -73,7 +72,7 @@ def login_view(request: HttpRequest):
             "components/toast.html",
             {"message": message},
         )
-        
+
         return retarget(response, "#toast")
 
     return render(
