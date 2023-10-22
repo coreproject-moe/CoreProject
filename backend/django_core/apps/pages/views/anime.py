@@ -1,4 +1,5 @@
 from django.shortcuts import render
+
 from ..data.anime import icons
 
 

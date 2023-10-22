@@ -1,13 +1,12 @@
 from defender import config, utils
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.templatetags.static import static
 from django.urls import reverse_lazy
-from django_htmx.http import retarget, HttpResponseClientRefresh, HttpResponseClientRedirect
-from django.contrib.auth import logout
+from django_htmx.http import HttpResponseClientRedirect, HttpResponseClientRefresh, retarget
+
 from ..forms.user import LoginForm
-from django.shortcuts import redirect
 
 
 def login_view(request: HttpRequest) -> HttpResponse | HttpResponseClientRefresh:
