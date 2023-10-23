@@ -6,7 +6,7 @@ from django.templatetags.static import static
 from django.urls import reverse_lazy
 from django_htmx.http import HttpResponseClientRedirect, HttpResponseClientRefresh, retarget
 
-from ..forms.user import LoginForm, FirstRegisterForm
+from ..forms.user import FirstRegisterForm, LoginForm
 
 animes = [
     {"name": "Demon Slayer", "cover": static("/images/mock/DemonSlayer-cover.avif")},
@@ -107,7 +107,7 @@ def register_view(request: HttpRequest) -> HttpResponse:
 
     if first_form.is_valid():
         pass
-    
+
     elif first_form.errors:
         response = render(
             request,
@@ -115,7 +115,7 @@ def register_view(request: HttpRequest) -> HttpResponse:
             {"message": first_form.errors},
         )
         return retarget(response, "#toast")
-    
+
     else:
         return render(
             request,
