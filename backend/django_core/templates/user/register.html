@@ -6,31 +6,33 @@
 
 {% block sidebody %}
     <form class="flex h-max w-full flex-col bg-surface-900 p-10 pb-[10vw] pt-[7vw] md:h-full md:justify-between md:rounded-none md:p-0" method="POST">
-        <form-fields>
-            <div class="flex flex-col gap-2 whitespace-nowrap pb-10 font-bold uppercase leading-none tracking-widest text-white md:pb-[1.8vw] md:text-[1.2vw] md:gap-[0.5vw]">
-                <span class="inline-flex md:gap-[0.5vw]">
-                    <p>create your</p>
-                    <p class="inline-flex">
-                        <span class="text-white/90">c</span>
-                        <span class="text-warning">o</span>
-                        <span class="text-white/90">r</span>
-                        <span class="text-white/90">e</span>
-                    </p>
-                    <p>account</p>
-                </span>
-                <span class="uppercase md:text-[1vw] font-medium text-white/90">unlock the anime world - join us!</span>
-            </div>
-            <email-field class="flex flex-col gap-[0.3rem] md:gap-[0.75vw]">
+        <div class="flex flex-col gap-2 whitespace-nowrap font-bold uppercase leading-none tracking-widest text-white md:text-[1.2vw] md:gap-[0.5vw]">
+            <span class="inline-flex md:gap-[0.5vw]">
+                <p>create your</p>
+                <p class="inline-flex">
+                    <span class="text-white/90">c</span>
+                    <span class="text-warning">o</span>
+                    <span class="text-white/90">r</span>
+                    <span class="text-white/90">e</span>
+                </p>
+                <p>account</p>
+            </span>
+            <span class="uppercase md:text-[1vw] font-medium text-white/90">unlock the anime world - join us!</span>
+        </div>
+        <form-fields class="flex flex-col md:gap-[1.5vw]">
+            <email-field class="flex flex-col gap-[0.3rem] md:gap-[0.5vw]">
                 <label for="email" class="mt-4 text-lg font-semibold leading-none md:mt-[1.1vw] md:text-[1.1vw]">{{ form.email.label }}</label>
                 {{ form.email }}
                 <span class="mt-[0.75vw] text-xs leading-none text-base-content md:mt-0 md:text-[0.75vw]">
                     {{ form.email.help_text }}
                 </span>
             </email-field>
-            <password-field>
-                <label for="password" class="mt-4 text-lg font-semibold leading-none md:mt-[1.1vw] md:text-[1.1vw]">{{ form.password1.label }}</label>
+            <password-field class="flex flex-col gap-[0.3rem] md:gap-[0.5vw]">
+                <label for="password" class="text-lg font-semibold leading-none md:text-[1.1vw]">
+                    {{ form.password1.label }}
+                </label>
                 {{ form.password1 }}
-                <password-strength class="mt-2 flex flex-col md:mt-[1vw]">
+                <password-strength class="flex flex-col">
                     <div class="grid grid-cols-4 gap-[1.5vw] md:gap-[0.75vw]">
                         <span class="bg-primary/60 col-span-1 h-[1.75vw] w-full rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw]"></span>
                         <span class="bg-primary/70 col-span-1 h-[1.75vw] w-full rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw]"></span>
@@ -80,11 +82,11 @@
                     </div>
                 </password-strength>
             </password-field>
-            <confirm-password-field>
-                <label for="confirm-password" class="mt-4 text-lg font-semibold leading-none md:mt-[2.2vw] md:text-[1.1vw]">{{ form.password2.label }}</label>
-                <div class="relative flex flex-col md:mt-[0.7vw]">
-                    {{ form.password2 }}
-                </div>
+            <confirm-password-field class="flex flex-col gap-[0.3rem] md:gap-[0.5vw]">
+                <label for="confirm-password" class="text-lg font-semibold leading-none md:text-[1.1vw]">
+                    {{ form.password2.label }}
+                </label>
+                {{ form.password2 }}
             </confirm-password-field>
         </form-fields>
         <div class="mt-11 flex items-center justify-between md:mt-0">
