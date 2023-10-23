@@ -82,7 +82,8 @@
                            const children_array = Array.from(my.children);
                            if (strength === 0) {
                            children_array.forEach(children=>{
-                           children.classList.add('!bg-transparent')
+                           children.classList.add('!bg-transparent');
+                           children.classList.remove('!border-none')
                            })
                            return;
                            }
@@ -92,15 +93,19 @@
                            switch (index){
                            case 0:
                            children.classList.add('bg-primary/60');
+                           children.classList.add('!border-none');
                            break;
                            case 1:
                            children.classList.add('bg-primary/70');
+                           children.classList.add('!border-none');
                            break;
                            case 2:
                            children.classList.add('bg-primary/80');
+                           children.classList.add('!border-none');
                            break
                            case 3:
                            children.classList.add('bg-primary/90');
+                           children.classList.add('!border-none');
                            break;
 
                            }
