@@ -32,9 +32,9 @@
             </email-field>
             <password-field class="flex flex-col gap-[0.3rem] md:gap-[0.5vw]">
                 <label for="password" class="text-lg font-semibold leading-none md:text-[1.1vw]">
-                    {{ form.password1.label }}
+                    {{ form.password.label }}
                 </label>
-                {{ form.password1 }}
+                {{ form.password }}
                 <password-strength class="flex flex-col">
                     <div class="grid grid-cols-4 gap-[1.5vw] md:gap-[0.75vw]">
                         <span class="bg-primary/60 col-span-1 h-[1.75vw] w-full rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw]"></span>
@@ -87,9 +87,9 @@
             </password-field>
             <confirm-password-field class="flex flex-col gap-[0.3rem] md:gap-[0.5vw]">
                 <label for="confirm-password" class="text-lg font-semibold leading-none md:text-[1.1vw]">
-                    {{ form.password2.label }}
+                    {{ form.confirm_password.label }}
                 </label>
-                {{ form.password2 }}
+                {{ form.confirm_password }}
             </confirm-password-field>
         </form-fields>
         <div class="flex items-center justify-between">

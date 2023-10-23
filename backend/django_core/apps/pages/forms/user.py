@@ -37,7 +37,7 @@ class RegisterForm(forms.Form):
         ),
         help_text="Please enter a valid email address",
     )
-    password1 = forms.CharField(
+    password = forms.CharField(
         label="Password:",
         widget=forms.PasswordInput(
             attrs={
@@ -46,7 +46,7 @@ class RegisterForm(forms.Form):
             }
         ),
     )
-    password2 = forms.CharField(
+    confirm_password = forms.CharField(
         label="Confirm Password:",
         widget=forms.PasswordInput(
             attrs={
