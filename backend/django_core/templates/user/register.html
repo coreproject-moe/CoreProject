@@ -73,38 +73,40 @@
                 </label>
                 {{ form.password }}
                 <div class="flex flex-col">
-                    <password-strength class="grid grid-cols-4 gap-[1.5vw] md:gap-[0.75vw]"
-                                       _="
-                                          on hyperscript:password_strength(strength)
-                                          js(my, strength)
-                                          const children_array = Array.from(my.children);
-                                          if (strength === 0) {
-                                          children_array.forEach(children=>{
-                                          children.classList.add('!bg-transparent')
-                                          })
-                                          return;
-                                          }
+                    <password-strength
+                        class="grid grid-cols-4 gap-[1.5vw] md:gap-[0.75vw]"
+                        _="
+                          on hyperscript:password_strength(strength)
+                          js(my, strength)
+                          const children_array = Array.from(my.children);
+                          if (strength === 0) {
+                          children_array.forEach(children=>{
+                          children.classList.add('!bg-transparent')
+                          })
+                          return;
+                          }
 
-                                          children_array.splice(0,strength).forEach((children,index)=>{
-                                          children.classList.remove('!bg-transparent')
-                                          switch (index){
-                                          case 0:
-                                          children.classList.add('bg-primary/60');
-                                          break;
-                                          case 1:
-                                          children.classList.add('bg-primary/70');
-                                          break;
-                                          case 2:
-                                          children.classList.add('bg-primary/80');
-                                          break
-                                          case 3:
-                                          children.classList.add('bg-primary/90');
-                                          break;
+                          children_array.splice(0,strength).forEach((children,index)=>{
+                          children.classList.remove('!bg-transparent')
+                          switch (index){
+                          case 0:
+                          children.classList.add('bg-primary/60');
+                          break;
+                          case 1:
+                          children.classList.add('bg-primary/70');
+                          break;
+                          case 2:
+                          children.classList.add('bg-primary/80');
+                          break
+                          case 3:
+                          children.classList.add('bg-primary/90');
+                          break;
 
-                                          }
-                                          });
-                                          end
-                                         ">
+                          }
+                          });
+                          end
+                         "
+                        >
                         <span class="col-span-1 h-[1.75vw] w-full rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw]"></span>
                         <span class="col-span-1 h-[1.75vw] w-full rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw]"></span>
                         <span class="col-span-1 h-[1.75vw] w-full rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw]"></span>
@@ -115,7 +117,8 @@
                         <div class="ml-2 mt-[0.4vw] flex flex-col gap-[0.1vw] md:w-3/5">
                             <div slot="placeholder">
                                 <div class="flex flex-col gap-1 md:gap-[0.3vw]">
-                                    <div class="flex items-center gap-2 md:gap-[0.5vw]"
+                                    <div
+                                        class="flex items-center gap-2 md:gap-[0.5vw]"
                                          _="
                                             on keyup from #{{ form.password.auto_id  }}
                                             if it.value.length >= 8
@@ -127,7 +130,8 @@
                                         {% include "icons/tick.html" with class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" %}
                                         <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 8 characters</span>
                                     </div>
-                                    <div class="flex items-center gap-2 md:gap-[0.5vw]"
+                                    <div
+                                        class="flex items-center gap-2 md:gap-[0.5vw]"
                                          _="
                                             on keyup from #{{ form.password.auto_id  }}
                                             js(it)
@@ -143,7 +147,8 @@
                                         {% include "icons/tick.html" with class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" %}
                                         <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 1 special character</span>
                                     </div>
-                                    <div class="flex items-center gap-2 md:gap-[0.5vw]"
+                                    <div
+                                        class="flex items-center gap-2 md:gap-[0.5vw]"
                                          _="
                                             on keyup from #{{ form.password.auto_id  }}
                                             js(it)
@@ -154,22 +159,24 @@
                                             else
                                             add .opacity-30 to <svg/> in me
                                             end
-                                           ">
+                                           "
+                                        >
                                         {% include "icons/tick.html" with class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" %}
                                         <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 1 number</span>
                                     </div>
-                                    <div class="flex items-center gap-2 md:gap-[0.5vw]"
+                                    <div
+                                        class="flex items-center gap-2 md:gap-[0.5vw]"
                                          _ = "
-                                                                                       on keyup from #{{ form.password.auto_id  }}
-                                                                                       js(it)
-                                                                                       return new RegExp(/[a-zA-Z]/).test(it.value)
-                                                                                       end
-                                                                                       if it
-                                                                                       remove .opacity-30 from <svg/> in me
-                                                                                       else
-                                                                                       add .opacity-30 to <svg/> in me
-                                                                                       end
-                                                                                      "
+                                           on keyup from #{{ form.password.auto_id  }}
+                                           js(it)
+                                           return new RegExp(/[a-zA-Z]/).test(it.value)
+                                           end
+                                           if it
+                                           remove .opacity-30 from <svg/> in me
+                                           else
+                                           add .opacity-30 to <svg/> in me
+                                           end
+                                          "
                                     >
                                         {% include "icons/tick.html" with class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" %}
                                         <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 1 lower-case or upper-case character</span>
