@@ -18,13 +18,24 @@
             <p>account</p>
         </div>
         <email-field class="flex flex-col gap-[0.3rem] md:gap-[0.75vw]">
-            <label for="email" class="mt-4 text-lg font-semibold leading-none md:mt-[1.1vw] md:text-[1.1vw]"> {{ form.email.label }}</label>
+            <label for="email" class="mt-4 text-lg font-semibold leading-none md:mt-[1.1vw] md:text-[1.1vw]">   {{ form.email.label }}
+            </label>
             {{form.email}}
-            <span class="mt-[0.75vw] text-xs leading-none text-base-content md:mt-0 md:text-[0.75vw]">{{form.email.help_text}}</span>
+            <span class="mt-[0.75vw] text-xs leading-none text-base-content md:mt-0 md:text-[0.75vw]">
+                {{form.email.help_text}}
+            </span>
         </email-field>
         <password-field>
-            <label for="password" class="mt-4 text-lg font-semibold leading-none md:mt-[1.1vw] md:text-[1.1vw]">Password</label>
-            <input type="password" id="password" name="password" placeholder="enter a strong password" class="mt-[0.3rem] h-12 w-full rounded-xl border-[0.4vw] border-primary-500 bg-transparent pl-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:mt-[0.7vw] md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:pl-[1vw] md:text-[1.1vw]" />
+            <label for="password" class="mt-4 text-lg font-semibold leading-none md:mt-[1.1vw] md:text-[1.1vw]">
+                Password
+            </label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="enter a strong password"
+                class="mt-[0.3rem] h-12 w-full rounded-xl border-[0.4vw] border-primary-500 bg-transparent pl-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:mt-[0.7vw] md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:pl-[1vw] md:text-[1.1vw]"
+            />
             <password-strength class="mt-2 flex flex-col md:mt-[1vw]">
                 <div class="grid grid-cols-4 gap-[1.5vw] md:gap-[0.75vw]">
                     <span class="bg-primary-800 col-span-1 h-[1.75vw] w-full rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw]"></span>
@@ -76,9 +87,17 @@
             </password-strength>
         </password-field>
         <confirm-password-field>
-            <label for="confirm-password" class="mt-4 text-lg font-semibold leading-none md:mt-[2.2vw] md:text-[1.1vw]">Confirm Password</label>
+            <label for="confirm-password" class="mt-4 text-lg font-semibold leading-none md:mt-[2.2vw] md:text-[1.1vw]">
+                Confirm Password
+            </label>
             <div class="relative flex flex-col md:mt-[0.7vw]">
-                <input type="password" id="confirm_password" name="confirm_password" placeholder="re-enter your password" class="mt-[0.3rem] h-12 w-full rounded-xl border-[0.4vw] border-primary-500 bg-transparent pl-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:mt-0 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:pl-[1vw] md:text-[1.1vw]" />
+                <input
+                    type="password"
+                    id="confirm_password"
+                    name="confirm_password"
+                    placeholder="re-enter your password"
+                    class="mt-[0.3rem] h-12 w-full rounded-xl border-[0.4vw] border-primary-500 bg-transparent pl-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:mt-0 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:pl-[1vw] md:text-[1.1vw]"
+                />
                 <div slot="placeholder"></div>
             </div>
         </confirm-password-field>
@@ -86,7 +105,9 @@
     <div class="mt-11 flex items-center justify-between md:mt-0">
         <div class="flex flex-col gap-1 md:gap-[0.5vw]">
             <span class="text-xs text-surface-100 md:text-[0.75vw]">Already have an account?</span>
-            <a href="{% url 'login_view'%}" class="text-base leading-none md:text-[1.1vw] text-primary underline">Login</a>
+            <a href="{% url 'login_view'%}" class="text-base leading-none md:text-[1.1vw] text-primary underline">
+                Login
+            </a>
         </div>
         <button type="submit" class="btn h-12 rounded-lg bg-secondary-800 p-0 px-5 text-base font-semibold leading-none md:h-[2.75vw] md:rounded-[0.5vw] md:px-[1.25vw] md:text-[0.95vw]">
             <span>Continue</span>
