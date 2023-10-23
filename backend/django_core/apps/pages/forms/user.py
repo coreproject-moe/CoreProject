@@ -48,7 +48,7 @@ class RegisterForm(forms.Form):
                         if me.value.length >= 8 remove .opacity-30 from #minimum-8-icon
                         else add .opacity-30 to #minimum-8-icon
                         end
-                """
+                """,
             }
         ),
     )
