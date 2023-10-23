@@ -89,17 +89,22 @@
                 {{ form.password2 }}
             </confirm-password-field>
         </form-fields>
-        <div class="mt-11 flex items-center justify-between md:mt-0">
+        <div class="flex items-center justify-between">
             <div class="flex flex-col gap-1 md:gap-[0.5vw]">
-                <span class="text-xs text-surface-100 md:text-[0.75vw]">Already have an account?</span>
-                <a href="{% url 'login_view'%}" class="text-base leading-none md:text-[1.1vw] text-primary underline">Login</a>
+                <span class="text-xs leading-none text-surface-100 md:text-[0.75vw]">Already have an account?</span>
+                <a
+                    href="{% url 'login_view'%}"
+                    class="text-base leading-none md:text-[1.1vw] text-primary underline"
+                >
+                    Login
+                </a>
             </div>
-            <button type="submit" class="btn h-12 rounded-lg bg-secondary-800 p-0 px-5 text-base font-semibold leading-none md:h-[2.75vw] md:rounded-[0.5vw] md:px-[1.25vw] md:text-[0.95vw]">
+            <button
+                type="submit"
+                class="btn glass btn-primary bg-primary-focus h-12 rounded-lg p-0 px-5 text-base font-semibold md:h-[2.75vw] md:rounded-[0.5vw] md:px-[1.25vw] md:text-[0.95vw] leading-none"
+            >
                 <span>Continue</span>
-                <svg class="w-4 rotate-45 md:w-[1vw]" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M4.66699 11.3333L11.3337 4.66666" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                    <path d="M4.66699 4.66666H11.3337V11.3333" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
+                {% include "icons/arrow_up_right.html" with class="w-4 rotate-45 md:w-[1vw]" %}
             </button>
         </div>
     </form>
