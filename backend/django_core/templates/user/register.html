@@ -115,61 +115,61 @@
                         <div class="ml-2 mt-[0.4vw] flex flex-col gap-[0.1vw] md:w-3/5">
                             <div slot="placeholder">
                                 <div class="flex flex-col gap-1 md:gap-[0.3vw]">
-                                    <div class="flex items-center gap-2 md:gap-[0.5vw]" 
-                                    _="
-                                        on keyup from #{{ form.password.auto_id  }} 
-                                        if it.value.length >= 8 
+                                    <div class="flex items-center gap-2 md:gap-[0.5vw]"
+                                         _="
+                                            on keyup from #{{ form.password.auto_id  }}
+                                            if it.value.length >= 8
                                             remove .opacity-30 from <svg/> in me
-                                        else
-                                            add .opacity-30 to <svg/> in me 
-                                    "
+                                            else
+                                            add .opacity-30 to <svg/> in me
+                                           "
                                     >
                                         {% include "icons/tick.html" with class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" %}
                                         <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 8 characters</span>
                                     </div>
                                     <div class="flex items-center gap-2 md:gap-[0.5vw]"
-                                    _="
-                                        on keyup from #{{ form.password.auto_id  }} 
-                                        js(it)
+                                         _="
+                                            on keyup from #{{ form.password.auto_id  }}
+                                            js(it)
                                             return new RegExp(/[!@#$%^&*()_+{}\[\]:;<>,.?\\]/).test(it.value)
-                                        end
-                                        if it
+                                            end
+                                            if it
                                             remove .opacity-30 from <svg/> in me
-                                        else
-                                            add .opacity-30 to <svg/> in me 
-                                        end
-                                    "
+                                            else
+                                            add .opacity-30 to <svg/> in me
+                                            end
+                                           "
                                     >
                                         {% include "icons/tick.html" with class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" %}
                                         <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 1 special character</span>
                                     </div>
                                     <div class="flex items-center gap-2 md:gap-[0.5vw]"
-                                    _="
-                                     on keyup from #{{ form.password.auto_id  }} 
-                                        js(it)
+                                         _="
+                                            on keyup from #{{ form.password.auto_id  }}
+                                            js(it)
                                             return new RegExp(/\d/).test(it.value)
-                                        end
-                                        if it
+                                            end
+                                            if it
                                             remove .opacity-30 from <svg/> in me
-                                        else
-                                            add .opacity-30 to <svg/> in me 
-                                        end
-                                    ">
+                                            else
+                                            add .opacity-30 to <svg/> in me
+                                            end
+                                           ">
                                         {% include "icons/tick.html" with class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" %}
                                         <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 1 number</span>
                                     </div>
-                                    <div class="flex items-center gap-2 md:gap-[0.5vw]" 
-                                     _ = "
-                                      on keyup from #{{ form.password.auto_id  }} 
-                                        js(it)
-                                            return new RegExp(/[a-zA-Z]/).test(it.value)
-                                        end
-                                        if it
-                                            remove .opacity-30 from <svg/> in me
-                                        else
-                                            add .opacity-30 to <svg/> in me 
-                                        end
-                                     "
+                                    <div class="flex items-center gap-2 md:gap-[0.5vw]"
+                                         _ = "
+                                                                                   on keyup from #{{ form.password.auto_id  }}
+                                                                                   js(it)
+                                                                                   return new RegExp(/[a-zA-Z]/).test(it.value)
+                                                                                   end
+                                                                                   if it
+                                                                                   remove .opacity-30 from <svg/> in me
+                                                                                   else
+                                                                                   add .opacity-30 to <svg/> in me
+                                                                                   end
+                                                                                  "
                                     >
                                         {% include "icons/tick.html" with class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" %}
                                         <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 1 lower-case or upper-case character</span>
