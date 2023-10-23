@@ -10,5 +10,5 @@ urlpatterns = [
     path("stack/", stack_view, name="stack_view"),
     path("user/login/", login_view, name="login_view"),
     path("user/logout/", logout_view, name="logout_view"),
-    path("user/register", register_view, name="register_view"),
+    path("user/register/", register_view, name="register_view"),
 ]

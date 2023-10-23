@@ -25,7 +25,7 @@ class LoginForm(forms.Form):
     )
 
 
-class RegisterForm(forms.Form):
+class FirstRegisterForm(forms.Form):
     email = forms.EmailField(
         label="Email:",
         widget=forms.TextInput(
@@ -45,12 +45,12 @@ class RegisterForm(forms.Form):
                 "class": "h-12 w-full rounded-xl border-[0.4vw] border-primary-500 bg-transparent pl-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:pl-[1vw] md:text-[1.1vw]",
                 "_": """
                     on keyup
-                        set text to my.value
+                        set global password to my.value
                         if my.value === 0
                             send hyperscript:password_strength(strength:0) to <password-strength/>
                         end
-                        js(text)
-                            return window.get_password_strength(text).score;
+                        js(password)
+                            return window.get_password_strength(password).score;
                         end
                         send hyperscript:password_strength(strength:it) to <password-strength/>
                 """,
@@ -63,6 +63,12 @@ class RegisterForm(forms.Form):
             attrs={
                 "placeholder": "re-enter your password",
                 "class": "h-12 w-full rounded-xl border-[0.4vw] border-primary-500 bg-transparent pl-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:pl-[1vw] md:text-[1.1vw]",
+                "_": """
+                    on keyup
+                        if my.value === password
+                            log "Passwords do match"
+                        end
+                """,
             }
         ),
     )
