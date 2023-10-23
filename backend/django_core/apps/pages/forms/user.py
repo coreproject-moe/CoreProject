@@ -45,14 +45,11 @@ class RegisterForm(forms.Form):
                 "class": "h-12 w-full rounded-xl border-[0.4vw] border-primary-500 bg-transparent pl-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:pl-[1vw] md:text-[1.1vw]",
                 "_": """
                     on keyup
-                        set text to my.value
-                        if my.value === 0 
-                            send hyperscript:password_strength(strength:0) to <password-strength/> 
+                        if me.value.length >= 8
+                            remove .opacity-30 from #minimum-8-icon
+                        else
+                            add .opacity-30 to #minimum-8-icon
                         end
-                        js(text)
-                            return window.get_password_strength(text).score;
-                        end
-                        send hyperscript:password_strength(strength:it) to <password-strength/> 
                 """,
             }
         ),
