@@ -167,16 +167,16 @@
                                     <div
                                         class="flex items-center gap-2 md:gap-[0.5vw]"
                                         _="
-                                          on keyup from #{{ form.password.auto_id  }}
-                                          js(it)
-                                          return new RegExp(/[a-zA-Z]/).test(it.value)
-                                          end
-                                          if it
-                                          remove .opacity-30 from <svg/> in me
-                                          else
-                                          add .opacity-30 to <svg/> in me
-                                          end
-                                         "
+                                           on keyup from #{{ form.password.auto_id  }}
+                                           js(it)
+                                           return new RegExp(/[a-zA-Z]/).test(it.value)
+                                           end
+                                           if it
+                                           remove .opacity-30 from <svg/> in me
+                                           else
+                                           add .opacity-30 to <svg/> in me
+                                           end
+                                          "
                                     >
                                         {% include "icons/tick.html" with class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" %}
                                         <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 1 lower-case or upper-case character</span>
