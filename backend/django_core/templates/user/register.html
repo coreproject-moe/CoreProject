@@ -80,31 +80,14 @@
                            on hyperscript:password_strength(strength)
                            js(my, strength)
                            const children_array = Array.from(my.children);
-                           if (strength === 0) {
+
                            children_array.forEach((children, index)=>{
                            children.classList.remove(`!bg-primary/${60+index*10}`);
                            })
-                           return;
-                           }
 
-                           children_array.splice(0,strength).forEach((children,index)=>{
-                           children.classList.remove('!bg-transparent')
-                           switch (index){
-                           case 0:
-                           children.classList.add('!bg-primary/60');
-                           break;
-                           case 1:
-                           children.classList.add('!bg-primary/70');
-                           break;
-                           case 2:
-                           children.classList.add('!bg-primary/80');
-                           break
-                           case 3:
-                           children.classList.add('!bg-primary/90');
-                           break;
-
-                           }
-                           });
+                           children_array.splice(0, strength).forEach((children, index)=>{
+                           children.classList.add(`!bg-primary/${60+index*10}`);
+                           })
                            end
                           "
                     >
