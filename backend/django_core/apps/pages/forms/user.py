@@ -46,13 +46,13 @@ class RegisterForm(forms.Form):
                 "_": """
                     on keyup
                         set text to my.value
-                        if my.value === 0 
-                            send hyperscript:password_strength(strength:0) to <password-strength/> 
+                        if my.value === 0
+                            send hyperscript:password_strength(strength:0) to <password-strength/>
                         end
                         js(text)
                             return window.get_password_strength(text).score;
                         end
-                        send hyperscript:password_strength(strength:it) to <password-strength/> 
+                        send hyperscript:password_strength(strength:it) to <password-strength/>
                 """,
             }
         ),
