@@ -69,5 +69,5 @@ class FirstRegisterForm(forms.Form):
                 """,
             }
         ),
-        help_text="Please make sure you enter the same password in both fields"
+        help_text="Please make sure you enter the same password in both fields",
     )
