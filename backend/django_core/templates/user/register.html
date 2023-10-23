@@ -81,9 +81,8 @@
                            js(my, strength)
                            const children_array = Array.from(my.children);
                            if (strength === 0) {
-                           children_array.forEach(children=>{
-                           children.classList.add('!bg-transparent');
-                           children.classList.remove('!border-none')
+                           children_array.forEach((children, index)=>{
+                           children.classList.remove(`!bg-primary/${60+index*10}`);
                            })
                            return;
                            }
@@ -92,20 +91,16 @@
                            children.classList.remove('!bg-transparent')
                            switch (index){
                            case 0:
-                           children.classList.add('bg-primary/60');
-                           children.classList.add('!border-none');
+                           children.classList.add('!bg-primary/60');
                            break;
                            case 1:
-                           children.classList.add('bg-primary/70');
-                           children.classList.add('!border-none');
+                           children.classList.add('!bg-primary/70');
                            break;
                            case 2:
-                           children.classList.add('bg-primary/80');
-                           children.classList.add('!border-none');
+                           children.classList.add('!bg-primary/80');
                            break
                            case 3:
-                           children.classList.add('bg-primary/90');
-                           children.classList.add('!border-none');
+                           children.classList.add('!bg-primary/90');
                            break;
 
                            }
@@ -113,10 +108,10 @@
                            end
                           "
                     >
-                        <span class="h-[1.75vw] rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw] border-[0.2vw] border-accent/25"></span>
-                        <span class="h-[1.75vw] rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw] border-[0.2vw] border-accent/25"></span>
-                        <span class="h-[1.75vw] rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw] border-[0.2vw] border-accent/25"></span>
-                        <span class="h-[1.75vw] rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw] border-[0.2vw] border-accent/25"></span>
+                        <span class="h-[1.75vw] rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw] bg-primary/20 transition-colors"></span>
+                        <span class="h-[1.75vw] rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw] bg-primary/20 transition-colors"></span>
+                        <span class="h-[1.75vw] rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw] bg-primary/20 transition-colors"></span>
+                        <span class="h-[1.75vw] rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw] bg-primary/20 transition-colors"></span>
                     </password-strength >
                     <div class="mt-3 md:mt-[1.25vw]">
                         <span class="text-sm font-semibold uppercase leading-none tracking-wider text-surface-50 md:text-[1vw]">must contain</span>
