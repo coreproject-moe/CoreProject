@@ -63,9 +63,11 @@ class FirstRegisterForm(forms.Form):
                 "_": """
                     on keyup
                         if my.value === password
-                            log "Passwords do match"
+                            add .hidden to next <span/>
+                        else remove .hidden from next <span/>
                         end
                 """,
             }
         ),
+        help_text="Please make sure you enter the same password in both fields"
     )
