@@ -4,6 +4,43 @@
     Register | CoreProject
 {% endblock %}
 
+{%block head%}
+
+    <script type='module' >
+        const zxcvbnTscore  = await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/core@latest/+esm')
+        // Language import
+        const zxcvbnCommonPackage = await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-common@latest/+esm');
+        const zxcvbnEnPackage = await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-en@latest/+esm');
+
+        const options = {
+            translations: zxcvbnEnPackage.translations,
+            graphs: zxcvbnCommonPackage.adjacencyGraphs,
+            dictionary: {
+                ...zxcvbnCommonPackage.dictionary,
+                ...zxcvbnEnPackage.dictionary,
+                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-fr@latest/+esm')).dictionary,
+                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-de@latest/+esm')).dictionary,
+                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-it@latest/+esm')).dictionary,
+                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-nl-be@latest/+esm')).dictionary,
+                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-es-es@latest/+esm')).dictionary,
+                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-pt-br@latest/+esm')).dictionary,
+                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-ja@latest/+esm')).dictionary,
+                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-fi@latest/+esm')).dictionary,
+                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-pl@latest/+esm')).dictionary,
+                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-cs@latest/+esm')).dictionary,
+                ...(await import( 'https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-id@latest/+esm' )).dictionary,
+                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-ar@latest/+esm')).dictionary,
+            },
+        }
+        zxcvbnTscore.zxcvbnOptions.setOptions(options)
+
+        function get_password_strength(password){
+            return zxcvbnTscore.zxcvbn(password)
+        }
+        window.get_password_strength = get_password_strength
+    </script>
+{%endblock%}
+
 {% block sidebody %}
     <form
         class="flex h-max w-full flex-col bg-surface-900 p-10 pb-[10vw] pt-[7vw] md:h-full md:justify-between md:rounded-none md:p-0"
@@ -78,19 +115,62 @@
                         <div class="ml-2 mt-[0.4vw] flex flex-col gap-[0.1vw] md:w-3/5">
                             <div slot="placeholder">
                                 <div class="flex flex-col gap-1 md:gap-[0.3vw]">
-                                    <div class="flex items-center gap-2 md:gap-[0.5vw]">
-                                        {% include "icons/tick.html" with class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" id="minimum-8-icon" %}
+                                    <div class="flex items-center gap-2 md:gap-[0.5vw]" 
+                                    _="
+                                        on keyup from #{{ form.password.auto_id  }} 
+                                        if it.value.length >= 8 
+                                            remove .opacity-30 from <svg/> in me
+                                        else
+                                            add .opacity-30 to <svg/> in me 
+                                    "
+                                    >
+                                        {% include "icons/tick.html" with class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" %}
                                         <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 8 characters</span>
                                     </div>
-                                    <div class="flex items-center gap-2 md:gap-[0.5vw]">
+                                    <div class="flex items-center gap-2 md:gap-[0.5vw]"
+                                    _="
+                                        on keyup from #{{ form.password.auto_id  }} 
+                                        js(it)
+                                            return new RegExp(/[!@#$%^&*()_+{}\[\]:;<>,.?\\]/).test(it.value)
+                                        end
+                                        if it
+                                            remove .opacity-30 from <svg/> in me
+                                        else
+                                            add .opacity-30 to <svg/> in me 
+                                        end
+                                    "
+                                    >
                                         {% include "icons/tick.html" with class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" %}
                                         <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 1 special character</span>
                                     </div>
-                                    <div class="flex items-center gap-2 md:gap-[0.5vw]">
+                                    <div class="flex items-center gap-2 md:gap-[0.5vw]"
+                                    _="
+                                     on keyup from #{{ form.password.auto_id  }} 
+                                        js(it)
+                                            return new RegExp(/\d/).test(it.value)
+                                        end
+                                        if it
+                                            remove .opacity-30 from <svg/> in me
+                                        else
+                                            add .opacity-30 to <svg/> in me 
+                                        end
+                                    ">
                                         {% include "icons/tick.html" with class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" %}
                                         <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 1 number</span>
                                     </div>
-                                    <div class="flex items-center gap-2 md:gap-[0.5vw]">
+                                    <div class="flex items-center gap-2 md:gap-[0.5vw]" 
+                                     _ = "
+                                      on keyup from #{{ form.password.auto_id  }} 
+                                        js(it)
+                                            return new RegExp(/[a-zA-Z]/).test(it.value)
+                                        end
+                                        if it
+                                            remove .opacity-30 from <svg/> in me
+                                        else
+                                            add .opacity-30 to <svg/> in me 
+                                        end
+                                     "
+                                    >
                                         {% include "icons/tick.html" with class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" %}
                                         <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 1 lower-case or upper-case character</span>
                                     </div>
@@ -128,37 +208,4 @@
     </form>
 
 
-    <script type='module' async>
-        const zxcvbnTscore  = await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/core@latest/+esm')
-        // Language import
-        const zxcvbnCommonPackage = await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-common@latest/+esm');
-        const zxcvbnEnPackage = await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-en@latest/+esm');
-
-        const options = {
-            translations: zxcvbnEnPackage.translations,
-            graphs: zxcvbnCommonPackage.adjacencyGraphs,
-            dictionary: {
-                ...zxcvbnCommonPackage.dictionary,
-                ...zxcvbnEnPackage.dictionary,
-                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-fr@latest/+esm')).dictionary,
-                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-de@latest/+esm')).dictionary,
-                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-it@latest/+esm')).dictionary,
-                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-nl-be@latest/+esm')).dictionary,
-                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-es-es@latest/+esm')).dictionary,
-                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-pt-br@latest/+esm')).dictionary,
-                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-ja@latest/+esm')).dictionary,
-                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-fi@latest/+esm')).dictionary,
-                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-pl@latest/+esm')).dictionary,
-                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-cs@latest/+esm')).dictionary,
-                ...(await import( 'https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-id@latest/+esm' )).dictionary,
-                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-ar@latest/+esm')).dictionary,
-            },
-        }
-        zxcvbnTscore.zxcvbnOptions.setOptions(options)
-
-        function get_password_strength(password){
-            return zxcvbnTscore.zxcvbn(password)
-        }
-        window.get_password_strength = get_password_strength
-    </script>
 {% endblock %}
