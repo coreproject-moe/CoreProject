@@ -1,13 +1,11 @@
 {% extends 'user/_layout.html'%} 
 
 
-{% load crispy_forms_tags %} 
-
 
 {% block title %}
 Register | CoreProject 
-{% endblock %} 
 
+{% endblock %} 
 
 {% block sidebody%}
 <form
@@ -27,22 +25,18 @@ Register | CoreProject
             </p>
             <p>account</p>
         </div>
-        <email-field class="flex flex-col gap-[0.3rem] md:gap-[0.75vw]"
-            ><label
+        <email-field class="flex flex-col gap-[0.3rem] md:gap-[0.75vw]">
+            <label
                 for="email"
-                class="text-lg font-semibold leading-none md:text-[1.1vw]"
-                >Email</label
+                class="mt-4 text-lg font-semibold leading-none md:mt-[1.1vw] md:text-[1.1vw]"
+                > {{ form.email.label }}</label
             >
-            <input
-                name="email"
-                id="email"
-                placeholder="sora@coreproject.moe"
-                class="h-12 w-full rounded-xl border-[0.4vw] border-primary-500 bg-transparent pl-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:pl-[1vw] md:text-[1.1vw]"
-            />
+                {{form.email}}
             <span
-                class="mt-[0.75vw] text-xs leading-none text-surface-300 md:mt-0 md:text-[0.75vw]"
-                >Please enter a valid email address</span
-            ></email-field
+                class="mt-[0.75vw] text-xs leading-none text-base-content md:mt-0 md:text-[0.75vw]"
+                >{{form.email.help_text}}</span
+            >
+            </email-field
         >
         <password-field
             ><label
