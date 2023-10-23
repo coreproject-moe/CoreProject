@@ -7,15 +7,18 @@
 {% block sidebody %}
 <form class="flex h-max w-full flex-col bg-surface-900 p-10 pb-[10vw] pt-[7vw] md:h-full md:justify-between md:rounded-none md:p-0" method="POST">
     <form-fields>
-        <div class="flex gap-2 whitespace-nowrap pb-10 font-bold uppercase leading-none tracking-widest text-white md:pb-[1.8vw] md:text-[1.2vw]">
-            <p>create your</p>
-            <p class="">
-                <span class="text-white">c</span>
-                <span class="text-warning">o</span>
-                <span class="text-white">r</span>
-                <span class="text-white">e</span>
-            </p>
-            <p>account</p>
+        <div class="flex flex-col gap-2 whitespace-nowrap pb-10 font-bold uppercase leading-none tracking-widest text-white md:pb-[1.8vw] md:text-[1.5vw]">
+            <span class="inline-flex md:gap-[0.5vw]">
+                <p>create your</p>
+                <p class="inline-flex">
+                    <span class="text-white/90">c</span>
+                    <span class="text-warning">o</span>
+                    <span class="text-white/90">r</span>
+                    <span class="text-white/90">e</span>
+                </p>
+                <p>account</p>
+            </span>
+            <span class="text-[1vw] font-medium">Unlock the Anime World – Join Us!</span>
         </div>
         <email-field class="flex flex-col gap-[0.3rem] md:gap-[0.75vw]">
             <label for="email" class="mt-4 text-lg font-semibold leading-none md:mt-[1.1vw] md:text-[1.1vw]">{{ form.email.label }}</label>
