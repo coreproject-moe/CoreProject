@@ -109,7 +109,7 @@ def register_view(request: HttpRequest) -> HttpResponse | None:
         pass
 
     elif first_form.errors:
-        for field_name, field_error in first_form.errors.as_data().items():
+        for _, field_error in first_form.errors.as_data().items():
             for error in field_error:
                 response = render(
                     request,
