@@ -13,9 +13,9 @@
         class="flex h-max w-full flex-col bg-surface-900 p-10 pb-[10vw] pt-[7vw] md:h-full md:justify-between md:rounded-none md:p-0"
         method="POST"
     >
-    {% csrf_token %}
+        {% csrf_token %}
 
-    {% include 'user/register/_1.html' with form=first_form %}
-  
+        {% include 'user/register/_1.html' with form=first_form %}
+
     </form>
 {% endblock %}
