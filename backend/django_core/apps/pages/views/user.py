@@ -102,19 +102,21 @@ def logout_view(request: HttpRequest) -> HttpResponse:
     return redirect(redirect_location)
 
 
-def register_view(request: HttpRequest) -> HttpResponse:
+def register_view(request: HttpRequest) -> HttpResponse | None:
     first_form = FirstRegisterForm(request.POST or None)
 
     if first_form.is_valid():
         pass
 
     elif first_form.errors:
-        response = render(
-            request,
-            "components/toast.html",
-            {"message": first_form.errors},
-        )
-        return retarget(response, "#toast")
+        for field_name, field_error in first_form.errors.as_data().items():
+            for error in field_error:
+                response = render(
+                    request,
+                    "components/toast.html",
+                    {"message": error.message},
+                )
+                return retarget(response, "#toast")
 
     else:
         return render(
