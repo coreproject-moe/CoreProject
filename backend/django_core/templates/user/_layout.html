@@ -10,19 +10,18 @@
                add .backdrop-blur to
                <backdrop/> in me
                then wait 300ms
-
-               js
-            {# https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_sample #}
-               const random_anime = (arr => {
-               const len = arr == null ? 0 : arr.length
-               return len ? arr[Math.floor(Math.random() * len)] : undefined
-               })({{animes|safe}})
-               return random_anime
-               end
-
-               send change(image:it.cover) to <img/> in me
-               send change(anime_name:it.name) to <anime-name/> in me
-               then remove .backdrop-blur from <backdrop/> in me
+                js(previous_array)
+                {# https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_sample #}
+                const random_anime = (arr => {
+                const len = arr == null ? 0 : arr.length
+                return len ? arr[Math.floor(Math.random() * len)] : undefined
+                })({{animes|safe}}.filter(item => item != previous_array))
+                return random_anime
+                end
+                set local previous_array to it
+                send change(image:previous_array.cover) to <img/> in me
+                send change(anime_name:previous_array.name) to <anime-name/> in me
+                then remove .backdrop-blur from <backdrop/> in me
 
                init
                repeat forever
