@@ -80,12 +80,10 @@
                            on hyperscript:password_strength(strength)
                            js(my, strength)
                            const children_array = Array.from(my.children);
-                           if (strength === 0) {
+
                            children_array.forEach((children, index)=>{
                            children.classList.add('opacity-25');
                            })
-                           return;
-                           }
 
                            children_array.splice(0,strength).forEach((children,index)=>{
                            children.classList.remove('opacity-25');
