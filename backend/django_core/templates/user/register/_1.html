@@ -1,0 +1,151 @@
+{% csrf_token %}
+<div class="flex flex-col gap-2 whitespace-nowrap font-bold uppercase leading-none tracking-widest text-white md:text-[1.2vw] md:gap-[0.5vw]">
+    <span class="inline-flex md:gap-[0.5vw]">
+        <p>create your</p>
+        <p class="inline-flex">
+            <span class="text-white/90">c</span>
+            <span class="text-warning">o</span>
+            <span class="text-white/90">r</span>
+            <span class="text-white/90">e</span>
+        </p>
+        <p>account</p>
+    </span>
+    <span class="uppercase md:text-[1vw] font-medium text-white/90">unlock the anime world - join us!</span>
+</div>
+<form-fields class="flex flex-col md:gap-[1.5vw]">
+    <email-field class="flex flex-col gap-[0.3rem] md:gap-[0.5vw]">
+        <label for="email" class="mt-4 text-lg font-semibold leading-none md:mt-[1.1vw] md:text-[1.1vw]">{{ form.email.label }}</label>
+        {{ form.email }}
+        <span class="mt-[0.75vw] text-xs leading-none text-base-content md:mt-0 md:text-[0.75vw]">
+            {{ form.email.help_text }}
+        </span>
+    </email-field>
+    <password-field class="flex flex-col gap-[0.3rem] md:gap-[0.5vw]">
+        <label for="password" class="text-lg font-semibold leading-none md:text-[1.1vw]">
+            {{ form.password.label }}
+        </label>
+        {{ form.password }}
+        <div class="flex flex-col">
+            <password-strength
+                class="grid grid-cols-4 gap-[1.5vw] md:gap-[0.75vw]"
+                _="
+                   on hyperscript:password_strength(strength)
+                   js(my, strength)
+                   const children_array = Array.from(my.children);
+
+                   children_array.forEach((children, index)=>{
+                   children.classList.add('opacity-25');
+                   })
+
+                   children_array.splice(0,strength).forEach((children,index)=>{
+                   children.classList.remove('opacity-25');
+                   });
+                   end
+                  "
+            >
+                <span class="h-[1.75vw] rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw] bg-primary/20 transition-colors bg-primary opacity-25"></span>
+                <span class="h-[1.75vw] rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw] bg-primary/20 transition-colors bg-primary opacity-25"></span>
+                <span class="h-[1.75vw] rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw] bg-primary/20 transition-colors bg-primary opacity-25"></span>
+                <span class="h-[1.75vw] rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw] bg-primary/20 transition-colors bg-primary opacity-25"></span>
+            </password-strength >
+            <div class="mt-3 md:mt-[1.25vw]">
+                <span class="text-sm font-semibold uppercase leading-none tracking-wider text-surface-50 md:text-[1vw]">must contain</span>
+                <div class="ml-2 mt-[0.4vw] flex flex-col gap-[0.1vw] md:w-3/5">
+                    <div slot="placeholder">
+                        <div class="flex flex-col gap-1 md:gap-[0.3vw]">
+                            <div
+                                class="flex items-center gap-2 md:gap-[0.5vw]"
+                                _="
+                                   on keyup from #{{ form.password.auto_id  }}
+                                   if it.value.length >= 8
+                                   remove .opacity-30 from <svg/> in me
+                                   else
+                                   add .opacity-30 to <svg/> in me
+                                  "
+                            >
+                                {% include "icons/tick.html" with class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" %}
+                                <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 8 characters</span>
+                            </div>
+                            <div
+                                class="flex items-center gap-2 md:gap-[0.5vw]"
+                                _="
+                                   on keyup from #{{ form.password.auto_id  }}
+                                   js(it)
+                                   return new RegExp(/[!@#$%^&*()_+{}\[\]:;<>,.?\\]/).test(it.value)
+                                   end
+                                   if it
+                                   remove .opacity-30 from <svg/> in me
+                                   else
+                                   add .opacity-30 to <svg/> in me
+                                   end
+                                  "
+                            >
+                                {% include "icons/tick.html" with class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" %}
+                                <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 1 special character</span>
+                            </div>
+                            <div
+                                class="flex items-center gap-2 md:gap-[0.5vw]"
+                                _="
+                                   on keyup from #{{ form.password.auto_id  }}
+                                   js(it)
+                                   return new RegExp(/\d/).test(it.value)
+                                   end
+                                   if it
+                                   remove .opacity-30 from <svg/> in me
+                                   else
+                                   add .opacity-30 to <svg/> in me
+                                   end
+                                  "
+                            >
+                                {% include "icons/tick.html" with class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" %}
+                                <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 1 number</span>
+                            </div>
+                            <div
+                                class="flex items-center gap-2 md:gap-[0.5vw]"
+                                _="
+                                   on keyup from #{{ form.password.auto_id  }}
+                                   js(it)
+                                   return new RegExp(/[a-zA-Z]/).test(it.value)
+                                   end
+                                   if it
+                                   remove .opacity-30 from <svg/> in me
+                                   else
+                                   add .opacity-30 to <svg/> in me
+                                   end
+                                  "
+                            >
+                                {% include "icons/tick.html" with class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" %}
+                                <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 1 lower-case or upper-case character</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </password-field>
+    <confirm-password-field class="flex flex-col gap-[0.3rem] md:gap-[0.5vw]">
+        <label for="confirm-password" class="text-lg font-semibold leading-none md:text-[1.1vw]">
+            {{ form.confirm_password.label }}
+        </label>
+        {{ form.confirm_password }}
+        <span class="leading-none md:text-[0.75vw] invisible">{{ form.confirm_password.help_text }}</span>
+    </confirm-password-field>
+</form-fields>
+<div class="flex items-center justify-between">
+    <div class="flex flex-col gap-1 md:gap-[0.5vw]">
+        <span class="text-xs leading-none text-surface-100 md:text-[0.75vw]">Already have an account?</span>
+        <a
+            href="{% url 'login_view'%}"
+            class="text-base leading-none md:text-[1.1vw] text-primary underline"
+        >
+            Login
+        </a>
+    </div>
+    <button
+        type="submit"
+        class="btn glass btn-primary bg-primary-focus h-12 rounded-lg p-0 px-5 text-base font-semibold md:h-[2.75vw] md:rounded-[0.5vw] md:px-[1.25vw] md:text-[0.95vw] leading-none"
+    >
+        <span>Continue</span>
+        {% include "icons/arrow_up_right.html" with class="w-4 rotate-45 md:w-[1vw]" %}
+    </button>
+</div>
