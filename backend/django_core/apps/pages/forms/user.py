@@ -64,11 +64,11 @@ class FirstRegisterForm(forms.Form):
                     on keyup
                         if my.value.length === 0
                             add .invisible to next <span/>
-
+                        
                         else
                             if my.value === password
                                 add .invisible to next <span/>
-                            else
+                            else 
                                 remove .invisible from next <span/>
                             end
                         end

@@ -119,9 +119,9 @@ def register_view(request: HttpRequest) -> HttpResponse:
     else:
         return render(
             request,
-            "user/register.html",
+            "user/register/index.html",
             context={
-                "form": first_form,
+                "first_form": first_form,
                 "animes": animes,
             },
         )
