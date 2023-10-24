@@ -102,9 +102,9 @@ def logout_view(request: HttpRequest) -> HttpResponse:
     return redirect(redirect_location)
 
 
-def register_view(request: HttpRequest, _query: int | None = 1) -> HttpResponse:
+def register_view(request: HttpRequest, _internal_state_: int | None = 1) -> HttpResponse:
     if request.htmx:
-        if _query == 1:
+        if _internal_state_ == 1:
             form = FirstRegisterForm(request.POST or None)
 
             if form.is_valid():
@@ -117,16 +117,14 @@ def register_view(request: HttpRequest, _query: int | None = 1) -> HttpResponse:
                     {"message": form.errors},
                 )
                 return retarget(response, "#toast")
-            else:
-                response = render(
-                    request,
-                    "user/register/_1.html",
-                    context={
-                        "form": form,
-                    },
-                )
-                return response
-        if _query == 2:
+            return render(
+                request,
+                "user/register/_1.html",
+                context={
+                    "form": form,
+                },
+            )
+        if _internal_state_ == 2:
             return render(
                 request,
                 "user/register/_2.html",
