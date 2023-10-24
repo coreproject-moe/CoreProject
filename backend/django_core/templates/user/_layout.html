@@ -15,7 +15,7 @@
                const random_anime = (arr => {
                const len = arr == null ? 0 : arr.length
                return len ? arr[Math.floor(Math.random() * len)] : undefined
-               })({{animes|safe}}.filter(item => item != previous_array))
+               })(Array.from({{animes|safe}}).filter(item => item != previous_array))
                return random_anime
                end
                set local previous_array to it
