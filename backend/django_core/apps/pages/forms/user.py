@@ -23,3 +23,65 @@ class LoginForm(forms.Form):
             }
         ),
     )
+
+
+class FirstRegisterForm(forms.Form):
+    email = forms.EmailField(
+        label="Email:",
+        widget=forms.TextInput(
+            attrs={
+                "autofocus": True,
+                "placeholder": "sora_amamiya@coreproject.moe",
+                "class": "h-12 w-full rounded-xl border-[0.4vw] bg-transparent pl-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:pl-[1vw] md:text-[1.1vw]",
+            }
+        ),
+        help_text="Please enter a valid email address",
+    )
+    password = forms.CharField(
+        label="Password:",
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": "enter your existing password",
+                "class": "h-12 w-full rounded-xl border-[0.4vw] bg-transparent pl-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:pl-[1vw] md:text-[1.1vw]",
+                "_": """
+                    on keyup
+                        set global password to my.value
+                        js(password)
+                            return window.get_password_strength(password).score;
+                        end
+                        send hyperscript:password_strength(strength:it) to <password-strength/>
+                """,
+            }
+        ),
+    )
+    confirm_password = forms.CharField(
+        label="Confirm Password:",
+        widget=forms.PasswordInput(
+            attrs={
+                "placeholder": "re-enter your password",
+                "class": "h-12 w-full rounded-xl border-[0.4vw] bg-transparent pl-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:pl-[1vw] md:text-[1.1vw]",
+                "_": """
+                    on keyup
+                        if my.value.length === 0
+                            add .invisible to next <span/>
+                        
+                        else
+                            if my.value === password
+                                add .invisible to next <span/>
+                            else 
+                                remove .invisible from next <span/>
+                            end
+                        end
+                """,
+            }
+        ),
+        help_text="Please make sure you enter the same password in both fields",
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.get("confirm_password")
+
+        if password != confirm_password:
+            raise forms.ValidationError("`password` and `confirm_password` does not match")
