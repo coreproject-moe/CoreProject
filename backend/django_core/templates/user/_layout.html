@@ -18,7 +18,7 @@
                 })({{animes|safe}}.filter(item => item != previous_array))
                 return random_anime
                 end
-                set global previous_array to it
+                set local previous_array to it
                 send change(image:previous_array.cover) to <img/> in me
                 send change(anime_name:previous_array.name) to <anime-name/> in me
                 then remove .backdrop-blur from <backdrop/> in me
