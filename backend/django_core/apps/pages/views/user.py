@@ -82,7 +82,7 @@ def login_view(request: HttpRequest) -> HttpResponse | HttpResponseClientRefresh
         response = render(
             request,
             "components/toast.html",
-            {"message": form.errors},
+            {"message": form.non_field_errors().as_text()},
         )
     else:
         return render(
@@ -102,28 +102,38 @@ def logout_view(request: HttpRequest) -> HttpResponse:
     return redirect(redirect_location)
 
 
-def register_view(request: HttpRequest) -> HttpResponse | None:
-    first_form = FirstRegisterForm(request.POST or None)
+def register_view(request: HttpRequest, _internal_state_: int | None = 1) -> HttpResponse:
+    if request.htmx:
+        if _internal_state_ == 1:
+            form = FirstRegisterForm(request.POST or None)
 
-    if first_form.is_valid():
-        pass
+            if form.is_valid():
+                return register_view(request, 2)
 
-    elif first_form.errors:
-        for _, field_error in first_form.errors.as_data().items():
-            for error in field_error:
+            elif form.errors:
                 response = render(
                     request,
                     "components/toast.html",
-                    {"message": error.message},
+                    {"message": form.non_field_errors().as_text()},
                 )
                 return retarget(response, "#toast")
+            return render(
+                request,
+                "user/register/_1.html",
+                context={
+                    "form": form,
+                },
+            )
+        if _internal_state_ == 2:
+            return render(
+                request,
+                "user/register/_2.html",
+            )
 
-    else:
-        return render(
-            request,
-            "user/register/index.html",
-            context={
-                "first_form": first_form,
-                "animes": animes,
-            },
-        )
+    return render(
+        request,
+        "user/register/index.html",
+        context={
+            "animes": animes,
+        },
+    )

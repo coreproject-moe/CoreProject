@@ -1,4 +1,37 @@
-{% csrf_token %}
+{% block head%}
+    <script type='module'>
+        const zxcvbnTscore  = await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/core@latest/+esm')
+        // Language import
+        const zxcvbnCommonPackage = await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-common@latest/+esm');
+        const zxcvbnEnPackage = await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-en@latest/+esm');
+        const options = {
+            translations: zxcvbnEnPackage.translations,
+            graphs: zxcvbnCommonPackage.adjacencyGraphs,
+            dictionary: {
+                ...zxcvbnCommonPackage.dictionary,
+                ...zxcvbnEnPackage.dictionary,
+                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-fr@latest/+esm')).dictionary,
+                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-de@latest/+esm')).dictionary,
+                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-it@latest/+esm')).dictionary,
+                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-nl-be@latest/+esm')).dictionary,
+                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-es-es@latest/+esm')).dictionary,
+                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-pt-br@latest/+esm')).dictionary,
+                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-ja@latest/+esm')).dictionary,
+                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-fi@latest/+esm')).dictionary,
+                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-pl@latest/+esm')).dictionary,
+                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-cs@latest/+esm')).dictionary,
+                ...(await import( 'https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-id@latest/+esm' )).dictionary,
+                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-ar@latest/+esm')).dictionary,
+            },
+        }
+        zxcvbnTscore.zxcvbnOptions.setOptions(options)
+        function get_password_strength(password){
+            return zxcvbnTscore.zxcvbn(password)
+        }
+        window.get_password_strength = get_password_strength
+    </script>
+{% endblock %}
+
 <div class="flex flex-col gap-2 whitespace-nowrap font-bold uppercase leading-none tracking-widest text-white md:text-[1.2vw] md:gap-[0.5vw]">
     <span class="inline-flex md:gap-[0.5vw]">
         <p>create your</p>
@@ -12,7 +45,13 @@
     </span>
     <span class="uppercase md:text-[1vw] font-medium text-white/90">unlock the anime world - join us!</span>
 </div>
-<form-fields class="flex flex-col md:gap-[1.5vw]">
+<form-fields class="flex flex-col md:gap-[1.5vw]"
+
+             _="
+                init
+                set global validator to {'length': false, 'special': false, 'number': false, 'lower_or_upper': false}
+               "
+>
     <email-field class="flex flex-col gap-[0.3rem] md:gap-[0.5vw]">
         <label for="email" class="mt-4 text-lg font-semibold leading-none md:mt-[1.1vw] md:text-[1.1vw]">{{ form.email.label }}</label>
         {{ form.email }}
@@ -29,6 +68,7 @@
             <password-strength
                 class="grid grid-cols-4 gap-[1.5vw] md:gap-[0.75vw]"
                 _="
+
                    on hyperscript:password_strength(strength)
                    js(my, strength)
                    const children_array = Array.from(my.children);
@@ -58,8 +98,10 @@
                                 _="
                                    on keyup from #{{ form.password.auto_id  }}
                                    if it.value.length >= 8
+                                   set global validator.length to true
                                    remove .opacity-30 from <svg/> in me
                                    else
+                                   set global validator.length to false
                                    add .opacity-30 to <svg/> in me
                                   "
                             >
@@ -74,8 +116,10 @@
                                    return new RegExp(/[!@#$%^&*()_+{}\[\]:;<>,.?\\]/).test(it.value)
                                    end
                                    if it
+                                   set global validator.special to true
                                    remove .opacity-30 from <svg/> in me
                                    else
+                                   set global validator.special to false
                                    add .opacity-30 to <svg/> in me
                                    end
                                   "
@@ -91,8 +135,10 @@
                                    return new RegExp(/\d/).test(it.value)
                                    end
                                    if it
+                                   set global validator.number to true
                                    remove .opacity-30 from <svg/> in me
                                    else
+                                   set global validator.number to false
                                    add .opacity-30 to <svg/> in me
                                    end
                                   "
@@ -108,8 +154,10 @@
                                    return new RegExp(/[a-zA-Z]/).test(it.value)
                                    end
                                    if it
+                                   set global validator.lower_or_upper to true
                                    remove .opacity-30 from <svg/> in me
                                    else
+                                   set global validator.lower_or_upper to false
                                    add .opacity-30 to <svg/> in me
                                    end
                                   "
@@ -123,7 +171,7 @@
             </div>
         </div>
     </password-field>
-    <confirm-password-field class="flex flex-col gap-[0.3rem] md:gap-[0.5vw]">
+    <confirm-password-field class="flex flex-col gap-[0.3rem] md:gap-[0.5vw]" >
         <label for="confirm-password" class="text-lg font-semibold leading-none md:text-[1.1vw]">
             {{ form.confirm_password.label }}
         </label>
@@ -143,7 +191,26 @@
     </div>
     <button
         type="submit"
-        class="btn glass btn-primary bg-primary-focus h-12 rounded-lg p-0 px-5 text-base font-semibold md:h-[2.75vw] md:rounded-[0.5vw] md:px-[1.25vw] md:text-[0.95vw] leading-none"
+        class="btn btn-disabled glass btn-primary bg-primary-focus h-12 rounded-lg p-0 px-5 text-base font-semibold md:h-[2.75vw] md:rounded-[0.5vw] md:px-[1.25vw] md:text-[0.95vw] leading-none"
+        _="
+           on keyup from <input/>
+           js(validator)
+           if (document.querySelector('#{{form.confirm_password.auto_id}}').value === document.querySelector('#{{form.password.auto_id}}').value){
+           validator['passwords_match'] = true
+           } else{
+           validator['passwords_match'] = false
+           }
+
+           let _validator = Object.values(validator);
+
+           const is_all_true = _validator.every((element) => element === true)
+           return is_all_true;
+           end
+           if it
+           remove .btn-disabled from me
+           else
+           add .btn-disabled to me
+          "
     >
         <span>Continue</span>
         {% include "icons/arrow_up_right.html" with class="w-4 rotate-45 md:w-[1vw]" %}

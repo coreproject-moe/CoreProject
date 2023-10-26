@@ -67,6 +67,7 @@ django-ltree = "^0.5.3"
 crispy-bootstrap4 = "^2023.1"
 django-components = "^0.29"
 django-htmx = "^1.17.0"
+markdown = "^3.5"
 
 [tool.poetry.group.dev.dependencies]
 ## Watchfiles
