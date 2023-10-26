@@ -1,9 +1,12 @@
 from defender import config, utils
+from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.templatetags.static import static
 from django.urls import reverse_lazy
+from django.utils.http import url_has_allowed_host_and_scheme
+from django.views.decorators.cache import never_cache
 from django_htmx.http import HttpResponseClientRedirect, HttpResponseClientRefresh, retarget
 
 from ..forms.user import FirstRegisterForm, LoginForm
@@ -21,6 +24,7 @@ animes = [
 ]
 
 
+@never_cache
 def login_view(request: HttpRequest) -> HttpResponse | HttpResponseClientRefresh:
     form = LoginForm(request.POST or None)
 
@@ -43,7 +47,12 @@ def login_view(request: HttpRequest) -> HttpResponse | HttpResponseClientRefresh
             login(request, user)
 
             redirect_location = request.GET.get("next")
-            if redirect_location:
+            url_is_safe = url_has_allowed_host_and_scheme(
+                url=redirect_location,
+                allowed_hosts=settings.ALLOWED_HOSTS,
+                require_https=request.is_secure(),
+            )
+            if redirect_location and url_is_safe:
                 return HttpResponseClientRedirect(redirect_location)
             else:
                 return HttpResponseClientRefresh()
@@ -96,10 +105,19 @@ def login_view(request: HttpRequest) -> HttpResponse | HttpResponseClientRefresh
     return retarget(response, "#toast")
 
 
+@never_cache
 def logout_view(request: HttpRequest) -> HttpResponse:
     logout(request)
     redirect_location = request.GET.get("next") or reverse_lazy("login_view")
-    return redirect(redirect_location)
+    url_is_safe = url_has_allowed_host_and_scheme(
+        url=redirect_location,
+        allowed_hosts=settings.ALLOWED_HOSTS,
+        require_https=request.is_secure(),
+    )
+    if redirect_location and url_is_safe:
+        return redirect(redirect_location)
+
+    return HttpResponseClientRefresh()
 
 
 def register_view(request: HttpRequest, _internal_state_: int | None = 1) -> HttpResponse:
