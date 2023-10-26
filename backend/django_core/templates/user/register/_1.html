@@ -1,4 +1,4 @@
-<script type='module' async>
+<script type='module'>
     const zxcvbnTscore  = await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/core@latest/+esm')
         // Language import
     const zxcvbnCommonPackage = await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-common@latest/+esm');
@@ -29,6 +29,7 @@
     }
     window.get_password_strength = get_password_strength
 </script>
+
 <div class="flex flex-col gap-2 whitespace-nowrap font-bold uppercase leading-none tracking-widest text-white md:text-[1.2vw] md:gap-[0.5vw]">
     <span class="inline-flex md:gap-[0.5vw]">
         <p>create your</p>
