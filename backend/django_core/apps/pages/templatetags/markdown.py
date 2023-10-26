@@ -1,6 +1,6 @@
 import markdown as python_markdown
-from markdown.extensions.codehilite import CodeHiliteExtension
 from django import template
+from markdown.extensions.codehilite import CodeHiliteExtension
 
 register = template.Library()
 
