@@ -7,4 +7,13 @@ def anime_home_view(request):
     if request.htmx:
         return render(request, "anime/_partial.html")
 
-    return render(request, "anime/home.html", context={"icons": icons})
+    return render(
+        request,
+        "anime/home.html",
+        context={
+            "icons": icons,
+            "var": """``` { .html }
+<p>HTML Document</p>
+```""",
+        },
+    )
