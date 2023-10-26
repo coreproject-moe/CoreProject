@@ -47,7 +47,12 @@ class FirstRegisterForm(forms.Form):
                     on keyup
                         set global password to my.value
                         js(password)
-                            return window.get_password_strength(password).score;
+                            try{
+                                return window.get_password_strength(password).score;
+                            }catch (e){
+                                console.log("Silenced errors")
+                                return null
+                            }
                         end
                         send hyperscript:password_strength(strength:it) to <password-strength/>
                 """,
