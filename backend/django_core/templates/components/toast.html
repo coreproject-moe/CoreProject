@@ -6,10 +6,10 @@
 >
     {% include "icons/info.html" with class="md:w-[1.25vw]" %}
     <span class="leading-none text-white font-semibold select-none text-[0.9vw]"
-        >
+    >
         {% autoescape off %}
             {{ message|markdown }}
         {% endautoescape %}
         </span
-    >
-</div>
+        >
+    </div>
