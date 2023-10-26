@@ -15,10 +15,7 @@
         hx-target="closest div"
         enctype="application/x-www-form-urlencoded"
     >
-        {% csrf_token %}
         <div class='contents' hx-get='{{request.path}}' hx-target='this' hx-trigger='load'>
-
-
         </div>
     </form>
 {% endblock %}

@@ -82,7 +82,7 @@ def login_view(request: HttpRequest) -> HttpResponse | HttpResponseClientRefresh
         response = render(
             request,
             "components/toast.html",
-            {"message": form.errors},
+            {"message": form.non_field_errors().as_text()},
         )
     else:
         return render(
@@ -114,7 +114,7 @@ def register_view(request: HttpRequest, _internal_state_: int | None = 1) -> Htt
                 response = render(
                     request,
                     "components/toast.html",
-                    {"message": form.errors},
+                    {"message": form.non_field_errors().as_text()},
                 )
                 return retarget(response, "#toast")
             return render(
