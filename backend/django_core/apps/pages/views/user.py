@@ -1,14 +1,15 @@
 from defender import config, utils
+from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.templatetags.static import static
 from django.urls import reverse_lazy
-from django_htmx.http import HttpResponseClientRedirect, HttpResponseClientRefresh, retarget
 from django.utils.http import url_has_allowed_host_and_scheme
-from ..forms.user import FirstRegisterForm, LoginForm
-from django.conf import settings
 from django.views.decorators.cache import never_cache
+from django_htmx.http import HttpResponseClientRedirect, HttpResponseClientRefresh, retarget
+
+from ..forms.user import FirstRegisterForm, LoginForm
 
 animes = [
     {"name": "Demon Slayer", "cover": static("/images/mock/DemonSlayer-cover.avif")},
