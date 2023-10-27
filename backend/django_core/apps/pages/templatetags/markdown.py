@@ -1,6 +1,5 @@
 import markdown as python_markdown
 from django import template
-from markdown.extensions.codehilite import CodeHiliteExtension
 from pymdownx.highlight import HighlightExtension
 
 register = template.Library()
