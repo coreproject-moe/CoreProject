@@ -131,8 +131,8 @@ class SecondRegisterForm(forms.Form):
 
     def clean(self):
         cleaned_data = self.cleaned_data
-        username = cleaned_data["username"]
 
-        if CustomUser.objects.filter(username=username).exists():
-            self.fields["username"].widget.attrs["class"] += " focus:border-error"
-            raise forms.ValidationError("`username` already taken! try another one")
+        if username := cleaned_data.get("username"):
+            if CustomUser.objects.filter(username=username).exists():
+                self.fields["username"].widget.attrs["class"] += " focus:border-error"
+                raise forms.ValidationError("`username` already taken! try another one")
