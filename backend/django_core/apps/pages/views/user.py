@@ -9,7 +9,7 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.cache import never_cache
 from django_htmx.http import HttpResponseClientRedirect, HttpResponseClientRefresh, retarget
 
-from ..forms.user import FirstRegisterForm, LoginForm
+from ..forms.user import FirstRegisterForm, LoginForm, SecondRegisterForm
 
 animes = [
     {"name": "Demon Slayer", "cover": static("/images/mock/DemonSlayer-cover.avif")},
@@ -143,9 +143,14 @@ def register_view(request: HttpRequest, _internal_state_: int | None = 2) -> Htt
                 },
             )
         if _internal_state_ == 2:
+            form = SecondRegisterForm(request.POST or None)
+
             return render(
                 request,
                 "user/register/_2.html",
+                context={
+                    "form": form
+                }
             )
 
     return render(

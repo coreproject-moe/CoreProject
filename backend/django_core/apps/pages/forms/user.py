@@ -90,3 +90,17 @@ class FirstRegisterForm(forms.Form):
 
         if password != confirm_password:
             raise forms.ValidationError("`password` and `confirm_password` does not match")
+
+
+class SecondRegisterForm(forms.Form):
+    username = forms.CharField(
+        label="Username:",
+        widget=forms.TextInput(
+            attrs={
+                "autofocus": True,
+                "placeholder": "choose any username",
+                "class": "h-12 w-full rounded-xl border-[0.4vw] border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]",
+            }
+        ),
+        help_text="you can change username in your user settings later, so go bonkers!",
+    )
