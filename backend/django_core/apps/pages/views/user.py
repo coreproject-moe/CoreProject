@@ -146,10 +146,10 @@ def register_view(request: HttpRequest, _internal_state_: int | None = 2) -> Htt
             form = SecondRegisterForm(request.POST or None)
 
             if form.is_valid():
-                print("Valid")
+                pass
 
             elif form.errors:
-                print(form.errors)
+                pass
 
             return render(request, "user/register/_2.html", context={"form": form})
 

@@ -1,3 +1,4 @@
+import re
 from django import forms
 from django.contrib.auth import get_user_model
 
@@ -119,7 +120,12 @@ class SecondRegisterForm(forms.Form):
 
     def clean(self):
         cleaned_data = self.cleaned_data
-        username = self.cleaned_data.get("username")
+        username = self.cleaned_data["username"]
+        username_pattern = r'^[a-zA-Z0-9_-]+#[0-9]{4}$'
+
+        if not re.match(username_pattern, username):
+            self.fields["username"].widget.attrs["class"] += " focus:border-error"
+            raise forms.ValidationError("username not valid! use the format: letters, digits and # followed by 4 digits, eg: sora#4444")
 
         if get_user_model().objects.filter(username=username).exists():
             self.fields["username"].widget.attrs["class"] += " focus:border-error"
