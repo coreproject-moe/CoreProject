@@ -93,7 +93,9 @@ class FirstRegisterForm(forms.Form):
         confirm_password = cleaned_data.get("confirm_password")
 
         if password != confirm_password:
-            raise forms.ValidationError("`password` and `confirm_password` does not match")
+            raise forms.ValidationError(
+                "**password** and **confirm_password** does not match"
+            )
 
 
 class SecondRegisterForm(forms.Form):
@@ -110,7 +112,7 @@ class SecondRegisterForm(forms.Form):
             username_validator,
             RegexValidator(
                 rf"^[a-zA-Z0-9_-]+#[0-9]{{{settings.DISCRIMINATOR_LENGTH}}}$",
-                message="Username is not valid for this regex `^[a-zA-Z0-9_-]+#[0-9]{4}$`",
+                message="**Username** is not valid for this regex `^[a-zA-Z0-9_-]+#[0-9]{4}$`",
             ),
         ],
         help_text="you can change username in your user settings later, so go bonkers!",
@@ -133,5 +135,5 @@ class SecondRegisterForm(forms.Form):
         if username := cleaned_data.get("username"):
             if CustomUser.objects.filter(username=username).exists():
                 self.add_error(
-                    "username", error="`username` already taken! try another one"
+                    "username", error="**Username** already taken! try another one"
                 )
