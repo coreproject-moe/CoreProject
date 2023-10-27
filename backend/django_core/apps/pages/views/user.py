@@ -120,7 +120,7 @@ def logout_view(request: HttpRequest) -> HttpResponse:
     return HttpResponseClientRefresh()
 
 
-def register_view(request: HttpRequest, _internal_state_: int | None = 2) -> HttpResponse:
+def register_view(request: HttpRequest, _internal_state_: int | None = 1) -> HttpResponse:
     if request.htmx:
         if _internal_state_ == 1:
             form = FirstRegisterForm(request.POST or None)
