@@ -152,7 +152,7 @@ def register_view(request: HttpRequest) -> HttpResponse:
 
             if form.is_valid():
                 request.session["_internal_state_"] = 3
-                request.session["_form_"] = request.session.get("_form_") | form.data
+                request.session["_form_"] = request.session["_form_"] | form.data
                 return register_view(request)
 
             elif form.errors:
@@ -166,7 +166,7 @@ def register_view(request: HttpRequest) -> HttpResponse:
             return HttpResponse(200)
     else:
         # Fresh state
-        request.session["_internal_state_"] = 1
+        request.session["_internal_state_"] = 2
         request.session["_form_"] = {}
 
     return render(
