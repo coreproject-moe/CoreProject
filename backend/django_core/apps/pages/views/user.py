@@ -166,7 +166,7 @@ def register_view(request: HttpRequest) -> HttpResponse:
             return HttpResponse(200)
     else:
         # Fresh state
-        request.session["_internal_state_"] = 2
+        request.session["_internal_state_"] = 1
         request.session["_form_"] = {}
 
     return render(
