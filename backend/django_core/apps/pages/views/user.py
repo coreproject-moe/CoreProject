@@ -162,8 +162,8 @@ def register_view(request: HttpRequest) -> HttpResponse:
             return render(request, "user/register/_2.html", context={"form": form})
         elif _internal_state_ == 3:
             form_data = request.session["_form_"]
-            username = form_data.get("username")[0]
-            email = form_data.get("email")[0]
+            username = form_data["username"][0] if form_data.get("username") else None
+            email = form_data["email"][0] if form_data.get("email") else None
 
             return render(
                 request,
@@ -175,7 +175,7 @@ def register_view(request: HttpRequest) -> HttpResponse:
             )
     else:
         # Fresh state
-        request.session["_internal_state_"] = 1
+        request.session["_internal_state_"] = 3
         request.session["_form_"] = {}
 
     return render(
