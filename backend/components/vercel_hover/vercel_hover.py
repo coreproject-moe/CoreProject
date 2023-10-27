@@ -21,5 +21,4 @@ class VercelHover(component.Component):
         }
 
     class Media:
-        css = "vercel_hover/vercel_hover.css"
         js = "vercel_hover/vercel_hover.js"
