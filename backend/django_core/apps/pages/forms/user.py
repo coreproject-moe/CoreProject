@@ -135,4 +135,4 @@ class SecondRegisterForm(forms.Form):
         if username := cleaned_data.get("username"):
             if CustomUser.objects.filter(username=username).exists():
                 self.fields["username"].widget.attrs["class"] += " focus:border-error"
-                raise forms.ValidationError("`username` already taken! try another one")
+                self.add_error("username", error="`username` already taken! try another one")
