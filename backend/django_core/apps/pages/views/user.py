@@ -162,11 +162,17 @@ def register_view(request: HttpRequest) -> HttpResponse:
             return render(request, "user/register/_2.html", context={"form": form})
         else:
             form_data = request.session["_form_"]
-            print(form_data)
-            return render(request, "user/register/_3.html", context={})
+            return render(
+                request,
+                "user/register/_3.html",
+                context={
+                    "username": form_data["username"][0],
+                    "email": form_data["email"][0]
+                }
+            )
     else:
         # Fresh state
-        request.session["_internal_state_"] = 3
+        request.session["_internal_state_"] = 1
         request.session["_form_"] = {}
 
     return render(
