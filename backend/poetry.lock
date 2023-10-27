@@ -1481,6 +1481,24 @@ files = [
 plugins = ["importlib-metadata"]
 
 [[package]]
+name = "pymdown-extensions"
+version = "10.3.1"
+description = "Extension pack for Python Markdown."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "pymdown_extensions-10.3.1-py3-none-any.whl", hash = "sha256:8cba67beb2a1318cdaf742d09dff7c0fc4cafcc290147ade0f8fb7b71522711a"},
+    {file = "pymdown_extensions-10.3.1.tar.gz", hash = "sha256:f6c79941498a458852853872e379e7bab63888361ba20992fc8b4f8a9b61735e"},
+]
+
+[package.dependencies]
+markdown = ">=3.2"
+pyyaml = "*"
+
+[package.extras]
+extra = ["pygments (>=2.12)"]
+
+[[package]]
 name = "pyrate-limiter"
 version = "2.10.0"
 description = "Python Rate-Limiter using Leaky-Bucket Algorithm"
@@ -2378,4 +2396,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "5c7f754dafa3128b0611e0b7f42591ae749d2d9b3c0fb7baa0db6bf223c71d5b"
+content-hash = "7234f36ba185f5d2caeb539eb055d20c4cb73cc6cbc9c45e19d0d1cfcdc47896"
