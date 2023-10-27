@@ -74,13 +74,13 @@
                    const children_array = Array.from(my.children);
 
                    children_array.forEach((children, index)=>{
-                    const bg_class = children.getAttribute('bg_class');
-                    children.classList.remove(bg_class);
+                   const bg_class = children.getAttribute('bg_class');
+                   children.classList.remove(bg_class);
                    })
 
                    children_array.splice(0,strength).forEach((children,index)=>{
                    const bg_class = children.getAttribute('bg_class');
-                    children.classList.add(bg_class);
+                   children.classList.add(bg_class);
                    });
                    end
                   "
