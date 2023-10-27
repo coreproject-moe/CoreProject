@@ -74,19 +74,21 @@
                    const children_array = Array.from(my.children);
 
                    children_array.forEach((children, index)=>{
-                   children.classList.add('opacity-25');
+                    const bg_class = children.getAttribute('bg_class');
+                    children.classList.remove(bg_class);
                    })
 
                    children_array.splice(0,strength).forEach((children,index)=>{
-                   children.classList.remove('opacity-25');
+                   const bg_class = children.getAttribute('bg_class');
+                    children.classList.add(bg_class);
                    });
                    end
                   "
             >
-                <span class="h-[1.75vw] rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw] bg-primary/20 transition-colors bg-primary opacity-25"></span>
-                <span class="h-[1.75vw] rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw] bg-primary/20 transition-colors bg-primary opacity-25"></span>
-                <span class="h-[1.75vw] rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw] bg-primary/20 transition-colors bg-primary opacity-25"></span>
-                <span class="h-[1.75vw] rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw] bg-primary/20 transition-colors bg-primary opacity-25"></span>
+                <span bg_class="bg-blue-800" class="h-[1.75vw] rounded-[0.5vw] md:h-[0.75vw] md:rounded-[0.1875vw] transition-colors md:border-[0.15vw] border-white/25"></span>
+                <span bg_class="bg-blue-700" class="h-[1.75vw] rounded-[0.5vw] md:h-[0.75vw] md:rounded-[0.1875vw] transition-colors md:border-[0.15vw] border-white/25"></span>
+                <span bg_class="bg-blue-600" class="h-[1.75vw] rounded-[0.5vw] md:h-[0.75vw] md:rounded-[0.1875vw] transition-colors md:border-[0.15vw] border-white/25"></span>
+                <span bg_class="bg-blue-500" class="h-[1.75vw] rounded-[0.5vw] md:h-[0.75vw] md:rounded-[0.1875vw] transition-colors md:border-[0.15vw] border-white/25"></span>
             </password-strength >
             <div class="mt-3 md:mt-[1.25vw]">
                 <span class="text-sm font-semibold uppercase leading-none tracking-wider text-surface-50 md:text-[1vw]">must contain</span>
