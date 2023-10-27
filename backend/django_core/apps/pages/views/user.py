@@ -146,10 +146,11 @@ def register_view(request: HttpRequest, _internal_state_: int | None = 2) -> Htt
             form = SecondRegisterForm(request.POST or None)
 
             if form.is_valid():
-                pass
+                print("Valid")
 
             elif form.errors:
-                pass
+                if form.fields["username"].error_messages:
+                    form.fields["username"].widget.attrs["class"] += " focus:border-error"
 
             return render(request, "user/register/_2.html", context={"form": form})
 

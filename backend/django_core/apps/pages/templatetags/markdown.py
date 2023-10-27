@@ -1,6 +1,6 @@
 import markdown as python_markdown
 from django import template
-from markdown.extensions.codehilite import CodeHiliteExtension
+from pymdownx.highlight import HighlightExtension
 
 register = template.Library()
 
@@ -11,13 +11,14 @@ def markdown(text: str):
     x = python_markdown.markdown(
         text,
         extensions=[
-            "fenced_code",
-            CodeHiliteExtension(
+            "pymdownx.superfences",
+            "pymdownx.emoji",
+            "pymdownx.escapeall",
+            HighlightExtension(
                 noclasses=True,
                 pygments_style="github-dark",
                 use_pygments=True,
             ),
         ],
     )
-    print(x)
     return x
