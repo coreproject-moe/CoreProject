@@ -1,20 +1,17 @@
-<div class="flex flex-col items-start gap-[1.5vw]">
-    <form-title>
-        <span class="text-base font-bold uppercase tracking-widest md:text-[1.2vw]">choose your username and verify</span>
-    </form-title>
-    <username-field class="mt-[4vw] w-full">
-        <label for="username" class="text-lg font-semibold md:text-[1.1vw]">
+<span class="text-base font-bold uppercase tracking-widest md:text-[1.2vw]">choose your username and verify</span>
+<div class="flex flex-col md:gap-[1.5vw]">
+    <username-field class="flex flex-col gap-[0.3rem] md:gap-[0.35vw] w-full">
+        <label for="username" class="text-lg font-semibold md:text-[1.1vw] leading-none">
             {{ form.username.label }}
         </label>
         {{ form.username }}
-        <div style="display: none"></div>
         <info class="flex items-start gap-2 md:gap-[0.5vw]">
             {% include "icons/info.html" with class="w-3 opacity-70 md:w-[0.9vw]" %}
             <span class="text-xs text-surface-300 md:text-[0.75vw]">{{ form.username.help_text }}</span>
         </info>
     </username-field>
-    <otp-field class="mt-2 w-full md:mt-0">
-        <label for="otp" class="text-lg font-semibold md:text-[1.1vw]">
+    <otp-field class="flex flex-col gap-[0.3rem] md:gap-[0.35vw] w-full">
+        <label for="otp" class="text-lg font-semibold md:text-[1.1vw] leading-none">
             {{ form.otp.label }}
         </label>
         {{ form.otp }}
