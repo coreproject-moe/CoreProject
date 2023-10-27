@@ -1,4 +1,3 @@
-
 from apps.user.models import CustomUser
 from apps.user.validators import username_validator
 from django import forms
