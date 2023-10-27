@@ -93,7 +93,9 @@ class FirstRegisterForm(forms.Form):
         confirm_password = cleaned_data.get("confirm_password")
 
         if password != confirm_password:
-            raise forms.ValidationError("**password** and **confirm_password** does not match")
+            raise forms.ValidationError(
+                "**password** and **confirm_password** does not match"
+            )
 
 
 class SecondRegisterForm(forms.Form):
