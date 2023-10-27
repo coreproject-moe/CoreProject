@@ -85,7 +85,7 @@ class FirstRegisterForm(forms.Form):
     )
 
     def clean(self):
-        cleaned_data = super().clean()
+        cleaned_data = self.cleaned_data
         password = cleaned_data.get("password")
         confirm_password = cleaned_data.get("confirm_password")
 
@@ -118,8 +118,8 @@ class SecondRegisterForm(forms.Form):
     )
 
     def clean(self):
-        cleaned_data = super().clean()
-        username = cleaned_data.get("username")
+        cleaned_data = self.cleaned_data
+        username = self.cleaned_data.get("username")
 
         if get_user_model().objects.filter(username=username).exists():
             self.fields["username"].widget.attrs["class"] += " !border-error"
