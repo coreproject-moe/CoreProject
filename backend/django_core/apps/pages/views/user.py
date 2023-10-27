@@ -1,6 +1,6 @@
 from defender import config, utils
 from django.conf import settings
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect, render
 from django.templatetags.static import static
@@ -146,8 +146,10 @@ def register_view(request: HttpRequest, _internal_state_: int | None = 2) -> Htt
             form = SecondRegisterForm(request.POST or None)
 
             if form.is_valid():
-                username = form.cleaned_data["username"]
-                print(username)
+                print("Valid")
+
+            elif form.errors:
+                print(form.errors)
 
             return render(request, "user/register/_2.html", context={"form": form})
 

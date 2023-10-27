@@ -1,4 +1,6 @@
+from click import clear
 from django import forms
+from django.contrib.auth import get_user_model
 
 
 class LoginForm(forms.Form):
@@ -115,3 +117,10 @@ class SecondRegisterForm(forms.Form):
         ),
         help_text="if you didn’t receive the code, check your spam folder. Or use the resend button",
     )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        username = cleaned_data.get("username")
+
+        if not get_user_model().objects.filter(username=username).exists():
+            raise forms.ValidationError("username already taken! try another one")

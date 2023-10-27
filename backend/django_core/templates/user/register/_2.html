@@ -10,7 +10,7 @@
         {{ form.username }}
         <info class="flex items-start gap-2 md:gap-[0.5vw]">
             {% include "icons/info.html" with class="w-3 opacity-70 md:w-[0.9vw]" %}
-            <span class="text-xs text-surface-300 md:text-[0.75vw]">{{ form.username.help_text }}</span>
+            <span id="username_help_text" class="text-xs text-surface-300 md:text-[0.75vw]">{{ form.username.help_text }}</span>
         </info>
     </username-field>
     <otp-field class="flex flex-col gap-[0.3rem] md:gap-[0.35vw] w-full">
