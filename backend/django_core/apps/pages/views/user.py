@@ -9,7 +9,7 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.cache import never_cache
 from django_htmx.http import HttpResponseClientRedirect, HttpResponseClientRefresh, retarget
 
-from ..forms.user import FirstRegisterForm, LoginForm
+from ..forms.user import FirstRegisterForm, LoginForm, SecondRegisterForm
 
 animes = [
     {"name": "Demon Slayer", "cover": static("/images/mock/DemonSlayer-cover.avif")},
@@ -120,13 +120,17 @@ def logout_view(request: HttpRequest) -> HttpResponse:
     return HttpResponseClientRefresh()
 
 
-def register_view(request: HttpRequest, _internal_state_: int | None = 1) -> HttpResponse:
+def register_view(request: HttpRequest) -> HttpResponse:
     if request.htmx:
+        _internal_state_ = request.session["_internal_state_"]
+
         if _internal_state_ == 1:
             form = FirstRegisterForm(request.POST or None)
 
             if form.is_valid():
-                return register_view(request, 2)
+                request.session["_internal_state_"] = _internal_state_ + 1
+                request.session["_form_"] = dict(form.data)
+                return register_view(request)
 
             elif form.errors:
                 response = render(
@@ -142,11 +146,28 @@ def register_view(request: HttpRequest, _internal_state_: int | None = 1) -> Htt
                     "form": form,
                 },
             )
-        if _internal_state_ == 2:
-            return render(
-                request,
-                "user/register/_2.html",
-            )
+
+        elif _internal_state_ == 2:
+            form = SecondRegisterForm(request.POST or None)
+
+            if form.is_valid():
+                request.session["_internal_state_"] = 3
+                request.session["_form_"] = request.session.get("_form_") | form.data
+                return register_view(request)
+
+            elif form.errors:
+                if form.fields["username"].error_messages:
+                    form.fields["username"].widget.attrs["class"] += " focus:border-error"
+
+            return render(request, "user/register/_2.html", context={"form": form})
+        else:
+            form_data = request.session["_form_"]
+            print(form_data)
+            return HttpResponse(200)
+    else:
+        # Fresh state
+        request.session["_internal_state_"] = 1
+        request.session["_form_"] = {}
 
     return render(
         request,

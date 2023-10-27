@@ -69,6 +69,7 @@ django-components = "^0.29"
 django-htmx = "^1.17.0"
 markdown = "^3.5"
 pygments = "^2.16.1"
+pymdown-extensions = {extras = ["pygments"], version = "^10.3.1"}
 
 [tool.poetry.group.dev.dependencies]
 ## Watchfiles

@@ -1,4 +1,8 @@
+from apps.user.models import CustomUser
+from apps.user.validators import username_validator
 from django import forms
+from django.conf import settings
+from django.core.validators import RegexValidator
 
 
 class LoginForm(forms.Form):
@@ -84,9 +88,50 @@ class FirstRegisterForm(forms.Form):
     )
 
     def clean(self):
-        cleaned_data = super().clean()
+        cleaned_data = self.cleaned_data
         password = cleaned_data.get("password")
         confirm_password = cleaned_data.get("confirm_password")
 
         if password != confirm_password:
             raise forms.ValidationError("`password` and `confirm_password` does not match")
+
+
+class SecondRegisterForm(forms.Form):
+    username = forms.CharField(
+        label="Username:",
+        widget=forms.TextInput(
+            attrs={
+                "autofocus": True,
+                "placeholder": "choose any username",
+                "class": "h-12 w-full rounded-xl border-[0.4vw] border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]",
+            }
+        ),
+        validators=[
+            username_validator,
+            RegexValidator(
+                rf"^[a-zA-Z0-9_-]+#[0-9]{{{settings.DISCRIMINATOR_LENGTH}}}$",
+                message="Username is not valid for this regex `^[a-zA-Z0-9_-]+#[0-9]{4}$`",
+            ),
+        ],
+        help_text="you can change username in your user settings later, so go bonkers!",
+    )
+
+    otp = forms.CharField(
+        label="One Time Verification Code:",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "enter the code",
+                "class": "h-12 w-full rounded-xl border-[0.4vw] border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]",
+            }
+        ),
+        help_text="if you didn’t receive the code, check your spam folder. Or use the resend button",
+    )
+
+    def clean(self):
+        cleaned_data = self.cleaned_data
+
+        if username := cleaned_data.get("username"):
+            if CustomUser.objects.filter(username=username).exists():
+                self.add_error(
+                    "username", error="`username` already taken! try another one"
+                )
