@@ -160,14 +160,17 @@ def register_view(request: HttpRequest) -> HttpResponse:
                     form.fields["username"].widget.attrs["class"] += " focus:border-error"
 
             return render(request, "user/register/_2.html", context={"form": form})
-        else:
+        elif _internal_state_ == 3:
             form_data = request.session["_form_"]
+            username = form_data["username"][0]
+            email = form_data["email"][0]
+
             return render(
                 request,
                 "user/register/_3.html",
                 context={
-                    "username": form_data["username"][0],
-                    "email": form_data["email"][0]
+                    "username": username,
+                    "email": email
                 }
             )
     else:
