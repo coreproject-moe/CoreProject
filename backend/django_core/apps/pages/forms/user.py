@@ -1,9 +1,8 @@
-import re
 
+from apps.user.models import CustomUser
+from apps.user.validators import username_validator
 from django import forms
 from django.conf import settings
-from apps.user.validators import username_validator
-from apps.user.models import CustomUser
 from django.core.validators import RegexValidator
 
 
@@ -134,4 +133,6 @@ class SecondRegisterForm(forms.Form):
 
         if username := cleaned_data.get("username"):
             if CustomUser.objects.filter(username=username).exists():
-                self.add_error("username", error="`username` already taken! try another one")
+                self.add_error(
+                    "username", error="`username` already taken! try another one"
+                )
