@@ -168,10 +168,7 @@ def register_view(request: HttpRequest) -> HttpResponse:
             return render(
                 request,
                 "user/register/_3.html",
-                context={
-                    "username": username,
-                    "email": email
-                }
+                context={"username": username, "email": email},
             )
     else:
         # Fresh state
