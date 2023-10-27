@@ -122,8 +122,9 @@ class SecondRegisterForm(forms.Form):
         cleaned_data = self.cleaned_data
         username = self.cleaned_data["username"]
         username_pattern = r'^[a-zA-Z0-9_-]+#[0-9]{4}$'
+        pattern = re.compile('^[a-zA-Z0-9_-]+#[0-9]{4}$')
 
-        if not re.match(username_pattern, username):
+        if not pattern.match(username):
             self.fields["username"].widget.attrs["class"] += " focus:border-error"
             raise forms.ValidationError("username not valid! use the format: letters, digits and # followed by 4 digits, eg: sora#4444")
 
