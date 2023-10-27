@@ -163,7 +163,7 @@ def register_view(request: HttpRequest) -> HttpResponse:
         else:
             form_data = request.session["_form_"]
             print(form_data)
-            return HttpResponse(200)
+            return render(request, "user/register/_3.html", context={})
     else:
         # Fresh state
         request.session["_internal_state_"] = 3
