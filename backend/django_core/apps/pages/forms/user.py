@@ -1,7 +1,10 @@
 import re
 
 from django import forms
-from django.contrib.auth import get_user_model
+from django.conf import settings
+from apps.user.validators import username_validator
+from apps.user.models import CustomUser
+from django.core.validators import RegexValidator
 
 
 class LoginForm(forms.Form):
@@ -105,6 +108,13 @@ class SecondRegisterForm(forms.Form):
                 "class": "h-12 w-full rounded-xl border-[0.4vw] border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]",
             }
         ),
+        validators=[
+            username_validator,
+            RegexValidator(
+                rf"^[a-zA-Z0-9_-]+#[0-9]{{{settings.DISCRIMINATOR_LENGTH}}}$",
+                message="Username is not valid for this regex `^[a-zA-Z0-9_-]+#[0-9]{4}$`",
+            ),
+        ],
         help_text="you can change username in your user settings later, so go bonkers!",
     )
 
@@ -121,16 +131,8 @@ class SecondRegisterForm(forms.Form):
 
     def clean(self):
         cleaned_data = self.cleaned_data
-        username = self.cleaned_data["username"]
-        username_pattern = r"^[a-zA-Z0-9_-]+#[0-9]{4}$"
-        pattern = re.compile("^[a-zA-Z0-9_-]+#[0-9]{4}$")
+        username = cleaned_data["username"]
 
-        if not pattern.match(username):
+        if CustomUser.objects.filter(username=username).exists():
             self.fields["username"].widget.attrs["class"] += " focus:border-error"
-            raise forms.ValidationError(
-                "username not valid! use the format: letters, digits and # followed by 4 digits, eg: sora#4444"
-            )
-
-        if get_user_model().objects.filter(username=username).exists():
-            self.fields["username"].widget.attrs["class"] += " focus:border-error"
-            raise forms.ValidationError("username already taken! try another one")
+            raise forms.ValidationError("`username` already taken! try another one")

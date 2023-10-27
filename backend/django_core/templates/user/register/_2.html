@@ -15,9 +15,7 @@
                 class="text-xs text-surface-300 md:text-[0.75vw]"
             >
                 {% if form.non_field_errors %}
-                    {% for error in form.non_field_errors %}
-                        {{ error }}
-                    {% endfor %}
+                  
                 {% else %}
                     {{ form.username.help_text }}
                 {% endif %}
