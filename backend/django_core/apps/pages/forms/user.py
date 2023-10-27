@@ -121,5 +121,6 @@ class SecondRegisterForm(forms.Form):
         cleaned_data = super().clean()
         username = cleaned_data.get("username")
 
-        if not get_user_model().objects.filter(username=username).exists():
+        if get_user_model().objects.filter(username=username).exists():
+            self.fields["username"].widget.attrs["class"] += " !border-error"
             raise forms.ValidationError("username already taken! try another one")
