@@ -145,13 +145,7 @@ def register_view(request: HttpRequest, _internal_state_: int | None = 2) -> Htt
         if _internal_state_ == 2:
             form = SecondRegisterForm(request.POST or None)
 
-            return render(
-                request,
-                "user/register/_2.html",
-                context={
-                    "form": form
-                }
-            )
+            return render(request, "user/register/_2.html", context={"form": form})
 
     return render(
         request,
