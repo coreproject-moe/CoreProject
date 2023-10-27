@@ -162,8 +162,8 @@ def register_view(request: HttpRequest) -> HttpResponse:
             return render(request, "user/register/_2.html", context={"form": form})
         elif _internal_state_ == 3:
             form_data = request.session["_form_"]
-            username = form_data["username"][0] if form_data.get("username") else None
-            email = form_data["email"][0] if form_data.get("email") else None
+            username = form_data.get("username", [None])[0]
+            email = form_data.get("email", [None])[0]
 
             return render(
                 request,
