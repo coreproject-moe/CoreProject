@@ -190,6 +190,9 @@ def register_view(request: HttpRequest) -> HttpResponse:
 def reset_password_view(request):
     form = ResetPasswordForm(request.POST or None)
 
+    if request.htmx:
+        return render(request, "user/reset_password/_partial.html", context={"form": form})
+
     if form.is_valid():
         print("Valid")
 
@@ -198,5 +201,5 @@ def reset_password_view(request):
             form.fields["email"].widget.attrs["class"] += " focus:border-error"
 
     return render(
-        request, "user/reset_password.html", context={"animes": animes, "form": form}
+        request, "user/reset_password/index.html", context={"animes": animes, "form": form}
     )

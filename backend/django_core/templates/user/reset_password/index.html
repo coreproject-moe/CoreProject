@@ -1,0 +1,14 @@
+{% extends "user/_layout.html" %}
+
+{% block title %}
+    Reset Password | CoreProject
+{% endblock %}
+
+{% block sidebody %}
+    <form
+        class="flex h-max w-full flex-col gap-[15vw] bg-surface-900 p-10 md:h-full md:justify-between md:gap-0 md:rounded-none md:p-0"
+        hx-post="{{request.get_full_path}}"
+    >
+        {% include "user/reset_password/_partial.html" %}
+    </form>
+{% endblock %}
