@@ -191,7 +191,10 @@ def reset_password_view(request):
     form = ResetPasswordForm(request.POST or None)
 
     if request.htmx:
-        if form.errors:
+        if form.is_valid():
+            pass
+
+        elif form.errors:
             if form.fields["email"].error_messages:
                 form.fields["email"].widget.attrs["class"] += " focus:border-error"
 

@@ -151,3 +151,9 @@ class ResetPasswordForm(forms.Form):
         ),
         help_text=" we’ll send you a reset password link on your registered email address",
     )
+
+    def clean(self):
+        email = self.cleaned_data.get("email")
+
+        if not CustomUser.objects.filter(email=email).exists():
+            self.add_error("email", error="**Email** not registered! enter registered email address")

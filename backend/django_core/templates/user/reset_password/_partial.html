@@ -11,7 +11,7 @@
         {% include "icons/info.html" with class="w-3 opacity-70 md:w-[0.9vw]" %}
         <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.8vw]">
             {% if form.email.errors %}
-                {{ form.email.errors }}
+                {{ form.email.errors|first }}
             {% else %}
                 {{ form.email.help_text }}
             {% endif %}
