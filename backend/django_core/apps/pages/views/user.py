@@ -190,7 +190,6 @@ def register_view(request: HttpRequest) -> HttpResponse:
 def reset_password_view(request):
     form = ResetPasswordForm(request.POST or None)
 
-    return render(request, "user/reset_password.html", context={
-        "animes": animes,
-        "form": form
-    })
+    return render(
+        request, "user/reset_password.html", context={"animes": animes, "form": form}
+    )
