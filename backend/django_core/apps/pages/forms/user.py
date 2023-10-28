@@ -151,7 +151,3 @@ class ResetPasswordForm(forms.Form):
         ),
         help_text=" we’ll send you a reset password link on your registered email address",
     )
-
-    def clean(self):
-        cleaned_data = super().clean()
-        print(cleaned_data.get("email"))
