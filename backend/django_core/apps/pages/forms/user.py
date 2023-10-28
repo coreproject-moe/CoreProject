@@ -138,6 +138,7 @@ class SecondRegisterForm(forms.Form):
                     "username", error="**Username** already taken! try another one"
                 )
 
+
 class ResetPasswordForm(forms.Form):
     email = forms.EmailField(
         label="Email:",
