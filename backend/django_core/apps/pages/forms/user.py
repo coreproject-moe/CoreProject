@@ -153,7 +153,5 @@ class ResetPasswordForm(forms.Form):
     )
 
     def clean(self):
-        cleaned_data = self.cleaned_data
-
-        if email := cleaned_data.get("email"):
-            print(email)
+        cleaned_data = super().clean()
+        print(cleaned_data.get("email"))

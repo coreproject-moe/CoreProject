@@ -190,6 +190,9 @@ def register_view(request: HttpRequest) -> HttpResponse:
 def reset_password_view(request):
     form = ResetPasswordForm(request.POST or None)
 
+    if form.is_valid():
+        print("Valid")
+
     return render(
         request, "user/reset_password.html", context={"animes": animes, "form": form}
     )
