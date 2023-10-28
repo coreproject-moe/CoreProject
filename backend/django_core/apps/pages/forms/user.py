@@ -137,3 +137,16 @@ class SecondRegisterForm(forms.Form):
                 self.add_error(
                     "username", error="**Username** already taken! try another one"
                 )
+
+class ResetPasswordForm(forms.Form):
+    email = forms.EmailField(
+        label="Email:",
+        widget=forms.TextInput(
+            attrs={
+                "autofocus": True,
+                "placeholder": "sora_amamiya@coreproject.moe",
+                "class": "h-12 w-full rounded-xl border-[0.4vw] bg-transparent pl-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:pl-[1vw] md:text-[1.1vw]",
+            }
+        ),
+        help_text=" we’ll send you a reset password link on your registered email address",
+    )
