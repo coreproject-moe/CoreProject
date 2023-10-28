@@ -193,6 +193,10 @@ def reset_password_view(request):
     if form.is_valid():
         print("Valid")
 
+    elif form.errors:
+        if form.fields["email"].error_messages:
+            form.fields["email"].widget.attrs["class"] += " focus:border-error"
+
     return render(
         request, "user/reset_password.html", context={"animes": animes, "form": form}
     )
