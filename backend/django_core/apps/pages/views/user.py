@@ -9,7 +9,7 @@ from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.cache import never_cache
 from django_htmx.http import HttpResponseClientRedirect, HttpResponseClientRefresh, retarget
 
-from ..forms.user import FirstRegisterForm, LoginForm, SecondRegisterForm
+from ..forms.user import FirstRegisterForm, LoginForm, ResetPasswordForm, SecondRegisterForm
 
 animes = [
     {"name": "Demon Slayer", "cover": static("/images/mock/DemonSlayer-cover.avif")},
@@ -184,4 +184,12 @@ def register_view(request: HttpRequest) -> HttpResponse:
         context={
             "animes": animes,
         },
+    )
+
+
+def reset_password_view(request):
+    form = ResetPasswordForm(request.POST or None)
+
+    return render(
+        request, "user/reset_password.html", context={"animes": animes, "form": form}
     )
