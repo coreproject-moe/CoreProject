@@ -153,7 +153,10 @@ class ResetPasswordForm(forms.Form):
     )
 
     def clean(self):
-        cleaned_data = self.cleaned_data
+        email = self.cleaned_data.get("email")
 
-        if email := cleaned_data.get("email"):
-            print(email)
+        if not CustomUser.objects.filter(email=email).exists():
+            self.add_error(
+                "email",
+                error="**Email** not registered! please enter a registered email address",
+            )
