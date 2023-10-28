@@ -12,5 +12,5 @@ urlpatterns = [
     path("user/login/", login_view, name="login_view"),
     path("user/logout/", logout_view, name="logout_view"),
     path("user/register/", register_view, name="register_view"),
-    path("user/reset-password/", reset_password_view, name="reset_password_view")
+    path("user/reset-password/", reset_password_view, name="reset_password_view"),
 ]
