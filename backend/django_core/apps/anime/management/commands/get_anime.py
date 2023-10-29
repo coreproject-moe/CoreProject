@@ -1,12 +1,12 @@
 import sys
 from argparse import ArgumentParser
-
+from typing import Any
 from apps.characters.models import CharacterModel
 from apps.producers.models import ProducerModel
 from apps.staffs.models import StaffModel
 from django.core.management.base import BaseCommand
 
-from shinobi.parser.anime import AnimeParser
+from shinobi.parser.anime import AnimeParser, AnimeDictionary
 from shinobi.utilities.session import session
 
 from ...models import AnimeModel, AnimeNameSynonymModel
@@ -22,7 +22,7 @@ class Command(BaseCommand):
 
     help = "Django command that gets the Anime Information given mal_id"
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         self.client = session
         super().__init__(*args, **kwargs)
 
@@ -43,7 +43,7 @@ class Command(BaseCommand):
             help="Flag to periodic task will be created",
         )
 
-    def handle(self, *args, **options) -> None:
+    def handle(self, *args: Any, **options: dict[str, Any]) -> None:
         periodic: bool = bool(options.get("periodic"))
         if periodic:
             get_periodic_anime.delay()
@@ -69,7 +69,10 @@ class Command(BaseCommand):
         res = self.client.get(f"https://myanimelist.net/anime/{anime_id}/")
 
         parser = AnimeParser(res.text)
-        data_dictionary = {k: v for k, v in dict(parser.build_dictionary()).items() if v}
+        # Refractor this to AnimeDictionary
+        data_dictionary: dict[str, Any] = {
+            k: v for k, v in parser.build_dictionary().items() if v
+        }
 
         if alternate_name := data_dictionary.pop("name_synonyms"):
             for name in alternate_name:

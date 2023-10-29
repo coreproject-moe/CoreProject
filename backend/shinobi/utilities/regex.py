@@ -19,8 +19,8 @@ class RegexHelper:
 
     def get_content_between_first_brackets(self, text: str) -> str:
         pattern = re.compile(r"\((.*?)\)")
-        if content := re.search(pattern, text).group(1):
-            return content
+        if content := re.search(pattern, text):
+            return content.group(1)
         else:
             raise Exception("No content found")
 

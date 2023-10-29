@@ -6,7 +6,7 @@ from typing import Any, Callable
 #   IndexError : In case `selectolax` finds empty dom node
 
 
-def return_on_error[T](return_type: T) -> Callable[[Callable], Callable]:
+def return_on_error[T](return_type: T) -> Callable[[Callable], T]:
     def decorator(func: Callable) -> Callable:
         @functools.wraps(func)
         def wrapper(*args: Any, **kwargs: Any) -> T:
