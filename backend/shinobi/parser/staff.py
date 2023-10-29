@@ -2,7 +2,7 @@ import dataclasses
 import datetime
 import re
 from io import BytesIO
-from typing import Any
+from typing import Any, TypedDict
 
 from dateutil import parser
 from selectolax.parser import HTMLParser
@@ -12,14 +12,12 @@ from shinobi.utilities.regex import RegexHelper
 from shinobi.utilities.string import StringHelper
 
 
-@dataclasses.dataclass
-class StaffImageDictionary:
+class StaffImageDictionary(TypedDict):
     image: BytesIO
     mimetype: str
 
 
-@dataclasses.dataclass
-class StaffDictionary:
+class StaffDictionary(TypedDict):
     mal_id: str
     name: str
     staff_image: StaffImageDictionary
@@ -58,10 +56,10 @@ class StaffParser:
         url = self.parser.css_first("meta[property='og:image']").attributes["content"]
         if url:
             res = self.client.get(url)
-            return StaffImageDictionary(
-                image=BytesIO(res.content),
-                mimetype=url.split(".")[-1],
-            )
+            return {
+                "image": BytesIO(res.content),
+                "mimetype": url.split(".")[-1],
+            }
 
     @property
     @return_on_error("")
@@ -135,14 +133,14 @@ class StaffParser:
         return birthday
 
     def build_dictionary(self) -> dict[str, Any]:
-        dictionary = StaffDictionary(
-            mal_id=self.get_staff_id,
-            name=self.get_staff_name,
-            given_name=self.get_staff_given_name,
-            family_name=self.get_staff_family_name,
-            alternate_name=self.get_staff_alternate_name,
-            birthday=self.get_staff_birthday,
-            about=self.get_staff_about,
-            staff_image=self.get_staff_image,
-        )
-        return dataclasses.asdict(dictionary)
+        dictionary: StaffDictionary = {
+            "mal_id": self.get_staff_id,
+            "name": self.get_staff_name,
+            "given_name": self.get_staff_given_name,
+            "family_name": self.get_staff_family_name,
+            "alternate_name": self.get_staff_alternate_name,
+            "birthday": self.get_staff_birthday,
+            "about": self.get_staff_about,
+            "staff_image": self.get_staff_image,
+        }
+        return dictionary

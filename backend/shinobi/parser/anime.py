@@ -1,7 +1,7 @@
 import dataclasses
 import datetime
 from functools import lru_cache
-from typing import Any
+from typing import Any, TypedDict
 
 from dateutil import parser
 from selectolax.parser import HTMLParser, Node
