@@ -17,7 +17,7 @@ redis =  ">=4.5.4"
 # First party ( Image )
 pillow = ">=10.1.0"
 # First Party ( Database )
-psycopg = {extras = ["binary"], version = "^3.1.12"}
+psycopg = {extras = ["binary"], version = ">=3.1.12"}
 # Database Integrations
 django-ltree = ">=0.5.3"
 # 3rd Party ( Rate Limit )
