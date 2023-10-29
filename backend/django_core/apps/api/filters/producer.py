@@ -12,7 +12,7 @@ class ProducerFilter(filters.FilterSet):
     kitsu_id = filters.CharFilter(method="kitsu_id_filter", label="Kitsu ID Filter")
 
     def name_filter(
-        self, queryset: QuerySet[ProducerModel], name, value: str
+        self, queryset: QuerySet[ProducerModel], name: str, value: str
     ) -> QuerySet[ProducerModel]:
         for _name in value.split(","):
             queryset = (

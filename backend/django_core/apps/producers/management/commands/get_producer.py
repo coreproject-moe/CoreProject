@@ -1,5 +1,6 @@
 import sys
-from argparse import ArgumentParser, Namespace
+from argparse import ArgumentParser
+from typing import Any
 
 from django.core.management.base import BaseCommand
 
@@ -16,7 +17,7 @@ def get_periodic_producers():
 class Command(BaseCommand):
     help = "Django command that gets the Producer Information given mal_id"
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         self.client = session
         super().__init__(*args, **kwargs)
 
@@ -38,7 +39,7 @@ class Command(BaseCommand):
             help="Flag to periodic task will be created",
         )
 
-    def handle(self, *args, **options: Namespace) -> None:
+    def handle(self, *args: Any, **options: dict[str, Any]) -> None:
         periodic: bool = bool(options["periodic"])
         if periodic:
             get_periodic_producers.delay()

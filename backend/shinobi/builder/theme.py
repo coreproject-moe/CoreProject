@@ -7,7 +7,7 @@ from shinobi.utilities.string import StringHelper
 
 class AnimeThemeBuilder:
     def __init__(self) -> None:
-        self.anchors = []
+        self.anchors: list[str] = []
 
         # Reusuable clients
         self.client = session
@@ -35,6 +35,7 @@ class AnimeThemeBuilder:
                 anchor.attributes["href"]
             )
             for anchor in theme_anchor_nodes
+            if anchor.attributes["href"]
         ]
         return self.anchors
 

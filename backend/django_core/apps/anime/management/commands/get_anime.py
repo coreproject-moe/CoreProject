@@ -1,6 +1,6 @@
 import sys
 from argparse import ArgumentParser
-from dataclasses import asdict
+from typing import Any
 
 from apps.characters.models import CharacterModel
 from apps.producers.models import ProducerModel
@@ -23,7 +23,7 @@ class Command(BaseCommand):
 
     help = "Django command that gets the Anime Information given mal_id"
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         self.client = session
         super().__init__(*args, **kwargs)
 
@@ -70,7 +70,7 @@ class Command(BaseCommand):
         res = self.client.get(f"https://myanimelist.net/anime/{anime_id}/")
 
         parser = AnimeParser(res.text)
-        data_dictionary = {k: v for k, v in asdict(parser.build_dictionary()).items() if v}
+        data_dictionary = {k: v for k, v in parser.build_dictionary().items() if v}
 
         if alternate_name := data_dictionary.pop("name_synonyms"):
             for name in alternate_name:
