@@ -101,7 +101,7 @@ async def login_view(request: "HtmxHttpRequest") -> HttpResponse:
     else:
         return render(
             request,
-            "user/login.html",
+            "user/login/index.html",
             context={
                 "form": form,
                 "animes": animes,
