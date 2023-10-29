@@ -22,7 +22,7 @@
     </password-field>
     <button
         hx-get="{% url 'reset_password_view' %}"
-        hx-target=".contents"
+        hx-target="<content/>"
         hx-push-url="{% url 'reset_password_view' %}"
         class="text-start btn !bg-secondary p-0 text-base font-semibold leading-none text-primary underline md:text-[1vw] flex flex-col items-start md:mt-[2vw]"
     >
@@ -35,7 +35,7 @@
         <button
 
             hx-get="{% url 'register_view' %}"
-            hx-target=".contents"
+            hx-target="<content/>"
             hx-push-url="{% url 'register_view' %}"
             class="text-start text-base leading-none md:text-[1.1vw] text-primary underline"
         >
