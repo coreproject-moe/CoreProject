@@ -1,5 +1,6 @@
-from shinobi.builder.theme import AnimeThemeBuilder
 from typing import NoReturn
+
+from shinobi.builder.theme import AnimeThemeBuilder
 
 
 def test_theme_builder() -> NoReturn:
