@@ -39,7 +39,7 @@ class FirstRegisterForm(forms.Form):
                 "class": "h-12 w-full rounded-xl border-[0.4vw] bg-transparent pl-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:pl-[1vw] md:text-[1.1vw]",
             }
         ),
-        help_text="Please enter a valid email address",
+        help_text="we’ll send you a verification email, so please ensure it’s active",
     )
     password = forms.CharField(
         label="Password:",
