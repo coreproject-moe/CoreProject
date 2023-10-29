@@ -1,5 +1,6 @@
 import sys
-from typing import NoReturn
+from argparse import ArgumentParser
+from typing import Any
 
 from django.core.management.base import BaseCommand
 
@@ -12,18 +13,18 @@ from ...models.anime_genre import AnimeGenreModel
 class Command(BaseCommand):
     help = "Django command that gets the Anime Genre Information given mal_id"
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         self.client = session
         super().__init__(*args, **kwargs)
 
-    def add_arguments(self, parser):
+    def add_arguments(self, parser: ArgumentParser) -> None:
         parser.add_argument(
             "genre_id",
             type=int,
             help="The Genre ID number to get information for",
         )
 
-    def handle(self, *args, **options) -> NoReturn:
+    def handle(self, *args: Any, **options: dict[str, Any]) -> None:
         genre_id: str = str(options["genre_id"])
         res = self.client.get(f"https://myanimelist.net/anime/genre/{genre_id}")
 

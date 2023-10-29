@@ -1,5 +1,5 @@
 import sys
-from typing import NoReturn
+from typing import Any
 
 from django.core.management.base import BaseCommand
 
@@ -16,7 +16,7 @@ class Command(BaseCommand):
 
     help = "Django command that gets the Anime Theme Information given mal_id"
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         self.client = session
         super().__init__(*args, **kwargs)
 
@@ -27,7 +27,7 @@ class Command(BaseCommand):
             help="The Theme ID number to get information for",
         )
 
-    def handle(self, *args, **options) -> NoReturn:
+    def handle(self, *args: Any, **options: dict[str, Any]) -> None:
         theme_id: str = str(options["theme_id"])
         res = self.client.get(f"https://myanimelist.net/anime/genre/{theme_id}")
 

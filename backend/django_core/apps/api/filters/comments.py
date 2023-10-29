@@ -7,7 +7,7 @@ class EpisodeCommentFilter(filters.FilterSet):
     path = filters.CharFilter(method="path_filter", label="Path Filter")
 
     def path_filter(
-        self, queryset: QuerySet[EpisodeCommentModel], name, value: str
+        self, queryset: QuerySet[EpisodeCommentModel], name: str, value: str
     ) -> QuerySet[EpisodeCommentModel]:
         queryset = queryset.filter(path__descendants=value)
         print(queryset.query)
