@@ -41,5 +41,5 @@ def get_periodic_character() -> None:
 
 
 @shared_task()
-def call_character_command(id: int):
+def call_character_command(id: int) -> None:
     call_command("get_character", id, create=True)

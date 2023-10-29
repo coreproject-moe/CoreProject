@@ -16,10 +16,11 @@ def test_first_person_parser() -> None:
     parser = StaffParser(res.text)
     data = parser.build_dictionary()
 
-    assert data["mal_id"] == 1
+    assert int(data["mal_id"]) == 1
     assert data["name"] == "Tomokazu Seki"
     assert (
-        data["staff_image"] == "https://cdn.myanimelist.net/images/voiceactors/1/55486.jpg"
+        str(data["staff_image"])
+        == "https://cdn.myanimelist.net/images/voiceactors/1/55486.jpg"
     )
     assert data["given_name"] == "智一"
     assert data["family_name"] == "関"

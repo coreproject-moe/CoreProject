@@ -21,7 +21,7 @@ class AnimeViewSet(viewsets.ModelViewSet):
     # Pagination
     pagination_class = LimitOffsetPagination
 
-    def get_serializer_class(self):
+    def get_serializer_class(self) -> type[AnimeGETSerializer] | type[AnimePOSTSerializer]:
         if self.request.method == "GET":
             return AnimeGETSerializer
         else:

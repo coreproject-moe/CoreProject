@@ -320,7 +320,7 @@ class AnimeParser:
             studios=self.get_studios,
             producers=self.get_producers,
             demographics=self.get_demographics,
-            recommendations="",  # self
+            recommendations=[],  # self
             openings=self.get_openings,
             endings=self.get_endings,
         )

@@ -43,7 +43,7 @@ def get_periodic_anime() -> None:
     )
 
     dictionary = builder.build_dictionary(
-        excluded_ids=instances.values_list("pk", flat=True)
+        excluded_ids=list(instances.values_list("pk", flat=True))
     )
 
     for anime in list(dictionary.keys()):
