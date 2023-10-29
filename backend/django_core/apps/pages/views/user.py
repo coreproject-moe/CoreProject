@@ -1,17 +1,15 @@
+from typing import TYPE_CHECKING
+
 from defender import config, utils
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.templatetags.static import static
 from django.urls import reverse_lazy
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.cache import never_cache
 from django_htmx.http import HttpResponseClientRedirect, HttpResponseClientRefresh, retarget
-from django.shortcuts import render
-from django.http import HttpResponse
-from typing import TYPE_CHECKING
-from ..data.anime import icons
 
 if TYPE_CHECKING:
     from ..request import HtmxHttpRequest
@@ -142,7 +140,9 @@ def register_view(request: "HtmxHttpRequest") -> HttpResponse:
             elif form.errors:
                 print(form.cleaned_data)
                 if form.fields["confirm_password"].error_messages:
-                    form.fields["confirm_password"].widget.attrs["class"] += " focus:border-error"
+                    form.fields["confirm_password"].widget.attrs[
+                        "class"
+                    ] += " focus:border-error"
 
             return render(
                 request,
