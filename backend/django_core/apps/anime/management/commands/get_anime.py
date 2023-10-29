@@ -13,6 +13,7 @@ from ...models import AnimeModel, AnimeNameSynonymModel
 from ...models.anime_genre import AnimeGenreModel
 from ...models.anime_theme import AnimeThemeModel
 from ...tasks import get_periodic_anime
+from argparse import ArgumentParser
 
 
 class Command(BaseCommand):
@@ -26,7 +27,7 @@ class Command(BaseCommand):
         self.client = session
         super().__init__(*args, **kwargs)
 
-    def add_arguments(self, parser):
+    def add_arguments(self, parser: ArgumentParser) -> None:
         parser.add_argument(
             "anime_id",
             type=int,

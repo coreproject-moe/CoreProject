@@ -2,7 +2,7 @@ from apps.producers.models import ProducerModel
 from rest_framework import serializers
 
 
-class ProducerSerializer(serializers.ModelSerializer):
+class ProducerSerializer(serializers.ModelSerializer["ProducerModel"]):
     class Meta:
         model = ProducerModel
         fields = [

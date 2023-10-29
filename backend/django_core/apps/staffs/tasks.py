@@ -9,7 +9,7 @@ from .models import StaffModel
 
 
 @shared_task()
-def get_periodic_staff():
+def get_periodic_staff() -> None:
     builder = StaffBuilder()
 
     instances = StaffModel.objects.filter(

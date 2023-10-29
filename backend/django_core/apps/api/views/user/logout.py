@@ -3,7 +3,7 @@ from rest_framework import status, views
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-
+from typing import Any
 from ...serializers.user.token import TokenSerializer
 
 
@@ -11,7 +11,7 @@ class LogoutAPIView(views.APIView):
     serializer_class = TokenSerializer
     permission_classes = [IsAuthenticated]
 
-    def get_serializer_context(self):
+    def get_serializer_context(self) -> dict[str, Any]:
         return {"request": self.request, "format": self.format_kwarg, "view": self}
 
     def get_serializer(self, *args, **kwargs):

@@ -6,7 +6,7 @@ res = session.get("https://myanimelist.net/character/1")
 
 
 # noqa: E501
-def test_first_character_parser() -> NoReturn:
+def test_first_character_parser() -> None:
     parser = CharacterParser(res.text)
     data = parser.build_dictionary()
 
