@@ -82,7 +82,7 @@ class FirstRegisterForm(forms.Form):
         if password != confirm_password:
             self.add_error(
                 "confirm_password",
-                error="**password** and **confirm_password** does not match",
+                error="**Password** and **Confirm Password** does not match",
             )
 
 

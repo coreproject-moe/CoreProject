@@ -1,3 +1,5 @@
+{% load markdown %}
+
 {% block head%}
     <script type='module'>
         const zxcvbnTscore  = await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/core@latest/+esm')
@@ -179,7 +181,7 @@
         {{ form.confirm_password }}
         <span class="leading-none md:text-[0.75vw]">
             {% if form.confirm_password.errors %}
-                {{ form.confirm_password.errors }}
+                {{ form.confirm_password.errors|first|markdown|safe }}
             {% else %}
                 {{ form.confirm_password.help_text }}
             {% endif %}
