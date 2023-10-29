@@ -1,5 +1,5 @@
 import sys
-from typing import NoReturn
+from argparse import ArgumentParser
 
 from django.core.files.images import ImageFile
 from django.core.management.base import BaseCommand
@@ -9,8 +9,6 @@ from shinobi.utilities.session import session
 
 from ...models import CharacterModel
 from ...tasks import get_periodic_character
-
-from argparse import ArgumentParser
 
 
 class Command(BaseCommand):

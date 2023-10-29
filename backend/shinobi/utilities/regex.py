@@ -11,7 +11,7 @@ class RegexHelper:
         if not _match:
             raise Exception("No match found")
 
-        
+
         if _id_ := _id_ = _match.group(1):
             not _id_.isdigit():
             raise Exception("Id is not a digit.")

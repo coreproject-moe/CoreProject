@@ -1,4 +1,3 @@
-
 from shinobi.parser.character import CharacterParser
 from shinobi.utilities.session import session
 

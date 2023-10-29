@@ -1,6 +1,5 @@
 import sys
 from argparse import ArgumentParser
-from typing import NoReturn
 
 from apps.characters.models import CharacterModel
 from apps.producers.models import ProducerModel
