@@ -1,6 +1,7 @@
 import dataclasses
 import datetime
 from functools import lru_cache
+from typing import Any
 
 from dateutil import parser
 from selectolax.parser import HTMLParser, Node
@@ -302,7 +303,7 @@ class AnimeParser:
 
         return endings
 
-    def build_dictionary(self) -> AnimeDictionary:
+    def build_dictionary(self) -> dict[str, Any]:
         dictionary = AnimeDictionary(
             mal_id=self.get_anime_id,
             name=self.get_anime_name,
@@ -323,4 +324,4 @@ class AnimeParser:
             openings=self.get_openings,
             endings=self.get_endings,
         )
-        return dictionary
+        return dataclasses.asdict(dictionary)

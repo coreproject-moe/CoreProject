@@ -23,7 +23,7 @@ class Command(BaseCommand):
             help="The Genre ID number to get information for",
         )
 
-    def handle(self, *args, **options) -> NoReturn:
+    def handle(self, *args, **options) -> None:
         genre_id: str = str(options["genre_id"])
         res = self.client.get(f"https://myanimelist.net/anime/genre/{genre_id}")
 

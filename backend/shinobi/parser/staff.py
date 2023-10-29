@@ -1,3 +1,4 @@
+import dataclasses
 import datetime
 import re
 from io import BytesIO
@@ -10,13 +11,17 @@ from shinobi.decorators.return_error_decorator import return_on_error
 from shinobi.utilities.regex import RegexHelper
 from shinobi.utilities.string import StringHelper
 
+from typing import Any
 
-class StaffImageDictionary(TypedDict):
+
+@dataclasses.dataclass
+class StaffImageDictionary:
     image: BytesIO
     mimetype: str
 
 
-class StaffDictionary(TypedDict):
+@dataclasses.dataclass
+class StaffDictionary:
     mal_id: str
     name: str
     staff_image: StaffImageDictionary
@@ -55,10 +60,10 @@ class StaffParser:
         url = self.parser.css_first("meta[property='og:image']").attributes["content"]
         if url:
             res = self.client.get(url)
-            return {
-                "image": BytesIO(res.content),
-                "mimetype": url.split(".")[-1],
-            }
+            return StaffImageDictionary(
+                image=BytesIO(res.content),
+                mimetype=url.split(".")[-1],
+            )
 
     @property
     @return_on_error("")
@@ -131,15 +136,15 @@ class StaffParser:
         birthday = parser.parse(self.string_helper.cleanse(matches[0].next.text()))
         return birthday
 
-    def build_dictionary(self) -> StaffDictionary:
-        dictionary: StaffDictionary = {
-            "mal_id": self.get_staff_id,
-            "name": self.get_staff_name,
-            "given_name": self.get_staff_given_name,
-            "family_name": self.get_staff_family_name,
-            "alternate_name": self.get_staff_alternate_name,
-            "birthday": self.get_staff_birthday,
-            "about": self.get_staff_about,
-            "staff_image": self.get_staff_image,
-        }
-        return dictionary
+    def build_dictionary(self) -> dict[str, Any]:
+        dictionary = StaffDictionary(
+            mal_id=self.get_staff_id,
+            name=self.get_staff_name,
+            given_name=self.get_staff_given_name,
+            family_name=self.get_staff_family_name,
+            alternate_name=self.get_staff_alternate_name,
+            birthday=self.get_staff_birthday,
+            about=self.get_staff_about,
+            staff_image=self.get_staff_image,
+        )
+        return dataclasses.asdict(dictionary)

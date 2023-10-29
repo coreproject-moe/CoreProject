@@ -9,7 +9,7 @@ def test_first_character_parser() -> None:
     parser = CharacterParser(res.text)
     data = parser.build_dictionary()
 
-    assert data["mal_id"] == 1
+    assert int(data["mal_id"]) == 1
     assert data["name"] == "Spike Spiegel"
     assert data["name_kanji"] == "スパイク・スピーゲル"
     assert (

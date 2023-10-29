@@ -1,5 +1,5 @@
 import sys
-from typing import NoReturn
+from typing import Any
 
 from django.core.files.images import ImageFile
 from django.core.management.base import BaseCommand
@@ -9,16 +9,16 @@ from shinobi.utilities.session import session
 
 from ...models import StaffAlternateNameModel, StaffModel
 from ...tasks import get_periodic_staff
-
+from argparse import ArgumentParser
 
 class Command(BaseCommand):
     help = "Django command that gets the Staff Information given mal_id"
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         self.client = session
         super().__init__(*args, **kwargs)
 
-    def add_arguments(self, parser):
+    def add_arguments(self, parser: ArgumentParser) -> None:
         parser.add_argument(
             "staff_id",
             type=int,
@@ -36,8 +36,8 @@ class Command(BaseCommand):
             help="Flag to periodic task will be created",
         )
 
-    def handle(self, *args, **options) -> NoReturn:
-        periodic: bool = options["periodic"]
+    def handle(self, *args: Any, **options: dict[str, Any]) -> None:
+        periodic: bool = bool(options["periodic"])
         if periodic:
             get_periodic_staff.delay()
             self.stdout.write("Successfully stated preiodic celery commands")
@@ -48,7 +48,7 @@ class Command(BaseCommand):
             self.stdout.write(self.style.ERROR("No staff_id provided"))
             sys.exit(1)
 
-        create: bool = options["create"]
+        create: bool = bool(options["create"])
         if create:
             staff_instance, _ = StaffModel.objects.get_or_create(mal_id=staff_id)
 
