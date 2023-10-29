@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, cast
 
 from defender import config, utils
 from django.conf import settings
@@ -58,9 +58,9 @@ async def login_view(request: "HtmxHttpRequest") -> HttpResponse:
                     require_https=request.is_secure(),
                 )
                 if redirect_location and url_is_safe:
-                    return HttpResponseClientRedirect(redirect_location)
+                    return cast(HttpResponse, HttpResponseClientRedirect)(redirect_location)
                 else:
-                    return HttpResponseClientRefresh()
+                    return cast(HttpResponse, HttpResponseClientRefresh)()
 
             else:
                 login_unsuccessful = True
@@ -128,9 +128,9 @@ async def logout_view(request: "HtmxHttpRequest") -> HttpResponse:
         require_https=request.is_secure(),
     )
     if redirect_location and url_is_safe:
-        return redirect(redirect_location)
+        return cast(HttpResponse, redirect(redirect_location))
 
-    return HttpResponseClientRefresh()
+    return cast(HttpResponse, HttpResponseClientRefresh)()
 
 
 async def register_view(request: "HtmxHttpRequest") -> HttpResponse:
@@ -175,7 +175,14 @@ async def register_view(request: "HtmxHttpRequest") -> HttpResponse:
                 if form.fields["username"].error_messages:
                     form.fields["username"].widget.attrs["class"] += " focus:border-error"
 
-            return render(request, "user/register/_2.html", context={"form": form})
+            return render(
+                request,
+                "user/register/_2.html",
+                context={
+                    "form": form,
+                },
+            )
+
         elif _internal_state_ == 3:
             form_data = request.session["_form_"]
             username = form_data.get("username", [None])[0]
