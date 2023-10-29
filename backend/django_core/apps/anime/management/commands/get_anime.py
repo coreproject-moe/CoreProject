@@ -44,19 +44,19 @@ class Command(BaseCommand):
             help="Flag to periodic task will be created",
         )
 
-    def handle(self, *args, **options) -> NoReturn:
-        periodic: bool = options.get("periodic")
+    def handle(self, *args, **options) -> None:
+        periodic: bool = bool(options.get("periodic"))
         if periodic:
             get_periodic_anime.delay()
             self.stdout.write("Successfully stated preiodic celery commands")
             sys.exit(0)
 
-        anime_id: int = int(options["anime_id"])
+        anime_id: str = str(options["anime_id"])
         if not anime_id:
             self.stdout.write(self.style.ERROR("No anime_id provided"))
             sys.exit(1)
 
-        create: bool = options.get("create")
+        create: bool = bool(options.get("create"))
         if create:
             anime_instance, _ = AnimeModel.objects.get_or_create(mal_id=anime_id)
 

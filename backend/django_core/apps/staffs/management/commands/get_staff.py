@@ -43,7 +43,7 @@ class Command(BaseCommand):
             self.stdout.write("Successfully stated preiodic celery commands")
             sys.exit(0)
 
-        staff_id: int = options["staff_id"]
+        staff_id: str = str(options["staff_id"])
         if not staff_id:
             self.stdout.write(self.style.ERROR("No staff_id provided"))
             sys.exit(1)

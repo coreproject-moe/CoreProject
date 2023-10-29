@@ -10,6 +10,8 @@ from shinobi.utilities.session import session
 from ...models import CharacterModel
 from ...tasks import get_periodic_character
 
+from argparse import ArgumentParser
+
 
 class Command(BaseCommand):
     help = "Django command that gets the Character Information given mal_id"
@@ -18,7 +20,7 @@ class Command(BaseCommand):
         self.client = session
         super().__init__(*args, **kwargs)
 
-    def add_arguments(self, parser):
+    def add_arguments(self, parser: ArgumentParser) -> None:
         parser.add_argument(
             "character_id",
             type=int,
@@ -36,14 +38,14 @@ class Command(BaseCommand):
             help="Flag to periodic task will be created",
         )
 
-    def handle(self, *args, **options) -> NoReturn:
+    def handle(self, *args, **options) -> None:
         periodic: bool = options["periodic"]
         if periodic:
             get_periodic_character.delay()
             self.stdout.write("Successfully stated preiodic celery commands")
             sys.exit(0)
 
-        character_id: int = options["character_id"]
+        character_id: str = str(options["character_id"])
         if not character_id:
             self.stdout.write(self.style.ERROR("No character_id provided"))
             sys.exit(1)

@@ -8,7 +8,7 @@ from shinobi.utilities.session import session
 
 from ...models import ProducerModel
 
-from argparse import ArgumentParser
+from argparse import ArgumentParser, Namespace
 
 
 def get_periodic_producers():
@@ -40,8 +40,8 @@ class Command(BaseCommand):
             help="Flag to periodic task will be created",
         )
 
-    def handle(self, *args, **options) -> NoReturn:
-        periodic: bool = options["periodic"]
+    def handle(self, *args, **options: Namespace) -> None:
+        periodic: bool = bool(options["periodic"])
         if periodic:
             get_periodic_producers.delay()
             self.stdout.write("Successfully stated preiodic celery commands")
