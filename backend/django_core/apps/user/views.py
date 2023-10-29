@@ -21,7 +21,7 @@ async def avatar_view(
     except CustomUser.DoesNotExist:
         return render(
             request,
-            "user/user_does_not_exist.htm",
+            "user/user_does_not_exist.php",
             context={
                 "database_name": "postgres",
                 "database_user": "animecore",
