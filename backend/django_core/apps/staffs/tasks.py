@@ -9,7 +9,7 @@ from .models import StaffModel
 
 
 @shared_task()
-def get_periodic_staff():
+def get_periodic_staff() -> None:
     builder = StaffBuilder()
 
     instances = StaffModel.objects.filter(
@@ -27,7 +27,7 @@ def get_periodic_staff():
         & Q(is_locked=False)
     )
     dictionary = builder.build_dictionary(
-        excluded_ids=instances.values_list("pk", flat=True),
+        excluded_ids=list(instances.values_list("pk", flat=True)),
         sort=True,
     )
 
@@ -38,5 +38,5 @@ def get_periodic_staff():
 # Call commands
 
 
-def call_staff_command(id: int):
+def call_staff_command(id: int) -> None:
     call_command("get_staff", staff_id=id)

@@ -6,16 +6,23 @@ class RegexHelper:
     # -------
     def get_id_from_url(self, url: str) -> int:
         pattern = re.compile(r"/(\d+)/")
+
         _match = re.search(pattern, url)
-        _id = _match.group(1)
-        if not _id.isdigit():
+        if not _match:
+            raise Exception("No match found")
+
+        _id_ = _match.group(1)
+        if not _id_.isdigit():
             raise Exception("Id is not a digit.")
 
-        return int(_id)
+        return int(_id_)
 
     def get_content_between_first_brackets(self, text: str) -> str:
         pattern = re.compile(r"\((.*?)\)")
-        return re.search(pattern, text).group(1)
+        if content := re.search(pattern, text).group(1):
+            return content
+        else:
+            raise Exception("No content found")
 
     def get_first_integer_from_url(self, text: str) -> int:
         pattern = r"\/(\d+)\/"

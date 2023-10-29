@@ -75,7 +75,7 @@ class FirstRegisterForm(forms.Form):
         help_text="Please make sure you enter the same password in both fields",
     )
 
-    def clean(self):
+    def clean(self) -> None:
         cleaned_data = self.cleaned_data
         password = cleaned_data.get("password")
         confirm_password = cleaned_data.get("confirm_password")
@@ -118,7 +118,7 @@ class SecondRegisterForm(forms.Form):
         help_text="if you didn’t receive the code, check your spam folder. Or use the resend button",
     )
 
-    def clean(self):
+    def clean(self) -> None:
         cleaned_data = self.cleaned_data
 
         if username := cleaned_data.get("username"):
@@ -141,7 +141,7 @@ class ResetPasswordForm(forms.Form):
         help_text=" we’ll send you a reset password link on your registered email address",
     )
 
-    def clean(self):
+    def clean(self) -> None:
         email = self.cleaned_data.get("email")
 
         if not CustomUser.objects.filter(email=email).exists():

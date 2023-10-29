@@ -1,5 +1,5 @@
 import sys
-from typing import NoReturn
+from argparse import ArgumentParser
 
 from django.core.files.images import ImageFile
 from django.core.management.base import BaseCommand
@@ -18,7 +18,7 @@ class Command(BaseCommand):
         self.client = session
         super().__init__(*args, **kwargs)
 
-    def add_arguments(self, parser):
+    def add_arguments(self, parser: ArgumentParser) -> None:
         parser.add_argument(
             "character_id",
             type=int,
@@ -36,14 +36,14 @@ class Command(BaseCommand):
             help="Flag to periodic task will be created",
         )
 
-    def handle(self, *args, **options) -> NoReturn:
+    def handle(self, *args, **options) -> None:
         periodic: bool = options["periodic"]
         if periodic:
             get_periodic_character.delay()
             self.stdout.write("Successfully stated preiodic celery commands")
             sys.exit(0)
 
-        character_id: int = options["character_id"]
+        character_id: str = str(options["character_id"])
         if not character_id:
             self.stdout.write(self.style.ERROR("No character_id provided"))
             sys.exit(1)

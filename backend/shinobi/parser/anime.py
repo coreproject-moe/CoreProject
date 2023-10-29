@@ -1,3 +1,4 @@
+import dataclasses
 import datetime
 from functools import lru_cache
 
@@ -10,6 +11,7 @@ from shinobi.utilities.session import session
 from shinobi.utilities.string import StringHelper
 
 
+@dataclasses.dataclass
 class AnimeDictionary:
     mal_id: int
     name: str
@@ -301,24 +303,24 @@ class AnimeParser:
         return endings
 
     def build_dictionary(self) -> AnimeDictionary:
-        dictionary = {
-            "mal_id": self.get_anime_id,
-            "name": self.get_anime_name,
-            "name_japanese": self.get_anime_name_japanese,
-            "name_synonyms": self.get_anime_name_synonyms,
-            "source": self.get_source,
-            "aired_from": self.get_aired_from,
-            "aired_to": self.get_aired_to,
-            "synopsis": self.get_synopsis,
-            "background": self.get_background,
-            "rating": self.get_rating,
-            "genres": self.get_genres,
-            "themes": self.get_themes,
-            "studios": self.get_studios,
-            "producers": self.get_producers,
-            "demographics": self.get_demographics,
-            "recommendations": "",  # self
-            "openings": self.get_openings,
-            "endings": self.get_endings,
-        }
+        dictionary = AnimeDictionary(
+            mal_id=self.get_anime_id,
+            name=self.get_anime_name,
+            name_japanese=self.get_anime_name_japanese,
+            name_synonyms=self.get_anime_name_synonyms,
+            source=self.get_source,
+            aired_from=self.get_aired_from,
+            aired_to=self.get_aired_to,
+            synopsis=self.get_synopsis,
+            background=self.get_background,
+            rating=self.get_rating,
+            genres=self.get_genres,
+            themes=self.get_themes,
+            studios=self.get_studios,
+            producers=self.get_producers,
+            demographics=self.get_demographics,
+            recommendations=[],  # self
+            openings=self.get_openings,
+            endings=self.get_endings,
+        )
         return dictionary

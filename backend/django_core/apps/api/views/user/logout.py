@@ -1,3 +1,5 @@
+from typing import Any
+
 from django.http import HttpRequest
 from rest_framework import status, views
 from rest_framework.authtoken.models import Token
@@ -11,7 +13,7 @@ class LogoutAPIView(views.APIView):
     serializer_class = TokenSerializer
     permission_classes = [IsAuthenticated]
 
-    def get_serializer_context(self):
+    def get_serializer_context(self) -> dict[str, Any]:
         return {"request": self.request, "format": self.format_kwarg, "view": self}
 
     def get_serializer(self, *args, **kwargs):

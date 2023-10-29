@@ -24,7 +24,7 @@ class Command(BaseCommand):
         )
 
     def handle(self, *args, **options) -> NoReturn:
-        genre_id: int = options["genre_id"]
+        genre_id: str = str(options["genre_id"])
         res = self.client.get(f"https://myanimelist.net/anime/genre/{genre_id}")
 
         parser = AnimeGenreParser(res.text)

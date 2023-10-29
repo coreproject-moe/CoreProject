@@ -1,5 +1,4 @@
 import math
-from typing import NoReturn
 
 from celery import shared_task
 from colorthief import ColorThief
@@ -19,7 +18,7 @@ from .models import AnimeModel
 
 
 @shared_task()
-def get_periodic_anime_genres():
+def get_periodic_anime_genres() -> None:
     builder = AnimeGenreBuilder()
     dictionary = builder.build_dictionary()
 
@@ -28,7 +27,7 @@ def get_periodic_anime_genres():
 
 
 @shared_task()
-def get_periodic_anime_themes():
+def get_periodic_anime_themes() -> None:
     builder = AnimeThemeBuilder()
     dictionary = builder.build_dictionary()
 
@@ -37,14 +36,14 @@ def get_periodic_anime_themes():
 
 
 @shared_task()
-def get_periodic_anime():
+def get_periodic_anime() -> None:
     builder = AnimeBuilder()
     instances = AnimeModel.objects.filter(
         Q(updated_at__gte=timezone.now() - timezone.timedelta(days=7)) & Q(is_locked=False)
     )
 
     dictionary = builder.build_dictionary(
-        excluded_ids=instances.values_list("pk", flat=True)
+        excluded_ids=list(instances.values_list("pk", flat=True))
     )
 
     for anime in list(dictionary.keys()):
@@ -53,17 +52,17 @@ def get_periodic_anime():
 
 # Calls
 @shared_task()
-def call_anime_genre_command(id: int) -> NoReturn:
+def call_anime_genre_command(id: int) -> None:
     call_command("get_anime_genre", id)
 
 
 @shared_task()
-def call_anime_theme_command(id: int) -> NoReturn:
+def call_anime_theme_command(id: int) -> None:
     call_command("get_anime_theme", id)
 
 
 @shared_task()
-def call_anime_command(id: int) -> NoReturn:
+def call_anime_command(id: int) -> None:
     call_command("get_anime", id, create=True)
 
 
@@ -75,7 +74,7 @@ def set_field_color(
     pk: int,
     field_name: str,
     image_field_name: str,
-) -> NoReturn:
+) -> None:
     instance = AnimeModel.objects.get(pk=pk)
 
     if image_field := getattr(instance, image_field_name):
@@ -95,7 +94,7 @@ def set_field_brightness(
     pk: int,
     field_name: str,
     image_field_name: str,
-) -> NoReturn:
+) -> None:
     instance = AnimeModel.objects.get(pk=pk)
 
     if image_field := getattr(instance, image_field_name):

@@ -43,19 +43,19 @@ class ProducerParser:
 
     @property
     @return_on_error("")
-    def get_producer_name(self):
+    def get_producer_name(self) -> str:
         node = self.parser.css_first("#contentWrapper > div:first-child > h1")
         return self.string_helper.cleanse(node.text())
 
     @property
     @return_on_error("")
-    def get_producer_japanese_name(self):
+    def get_producer_japanese_name(self) -> str:
         node = self.parser.select("span").text_contains("Japanese:")
         return self.string_helper.cleanse(node.matches[0].next.text())
 
     @property
     @return_on_error("")
-    def get_producter_establish_date(self):
+    def get_producter_establish_date(self) -> datetime.datetime:
         node = self.parser.select("span").text_contains("Established:")
         string_date = self.string_helper.cleanse(node.matches[0].next.text())
         actual_date = parser.parse(string_date)
@@ -63,7 +63,7 @@ class ProducerParser:
 
     @property
     @return_on_error("")
-    def get_producer_about(self):
+    def get_producer_about(self) -> str:
         return self.parser.css_first(
             "#content > div:nth-of-type(1) div.spaceit_pad > span:not(.dark_text)"
         ).text()

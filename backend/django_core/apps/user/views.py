@@ -1,5 +1,6 @@
 import hashlib
 import textwrap
+from collections.abc import Iterator
 
 import requests
 from django.core.management.utils import get_random_secret_key
@@ -21,7 +22,7 @@ async def avatar_view(
     except CustomUser.DoesNotExist:
         return render(
             request,
-            "user/user_does_not_exist.htm",
+            "user/user_does_not_exist.php",
             context={
                 "database_name": "postgres",
                 "database_user": "animecore",
@@ -42,7 +43,7 @@ async def avatar_view(
         URLValidator()(avatar_url)
         _request_ = requests.get(avatar_url, stream=True)
 
-        def streaming_content():
+        def streaming_content() -> Iterator[bytes]:
             # Iterate over the response content, and yield it in chunks
             yield from _request_.iter_content(chunk_size=1024)
 

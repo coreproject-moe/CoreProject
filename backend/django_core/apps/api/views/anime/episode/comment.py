@@ -35,7 +35,7 @@ class EpisodeCommentAPIView(generics.ListAPIView):
         return queryset
 
     def post(self, request: HttpRequest, pk: int, episode_number: int) -> Response:
-        serializer: EpisodeCommentSerializer = self.get_serializer(data=request.data)
+        serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
         episode_instance = AnimeModel.objects.get(pk=pk).episodes.get(

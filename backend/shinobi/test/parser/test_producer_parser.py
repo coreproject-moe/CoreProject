@@ -1,4 +1,5 @@
 import datetime
+from typing import NoReturn
 
 import requests
 
@@ -10,7 +11,7 @@ def get_producer_res_given_mal_id(mal_id: int) -> requests.Response:
     return session.get(f"https://myanimelist.net/anime/producer/{mal_id}")
 
 
-def test_first_producer_parser():
+def test_first_producer_parser() -> NoReturn:
     res = get_producer_res_given_mal_id(1)
     parser = ProducerParser(res.text)
 

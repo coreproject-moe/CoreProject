@@ -1,7 +1,7 @@
 from shinobi.builder.genre import AnimeGenreBuilder
 
 
-def test_genre_sitemap_parser():
+def test_genre_sitemap_parser() -> None:
     parser = AnimeGenreBuilder()
     dictionary = parser.build_dictionary()
     assert list(dictionary.keys()) == [
