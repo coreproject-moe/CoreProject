@@ -54,7 +54,7 @@ def test_second_person_parser() -> None:
 
 
 # noqa: E501
-def test_sora_amamiya():
+def test_sora_amamiya() -> None:
     """
     Sora-chan UwU
     It makes sure dat the sora-chan's ID is 21517 and dat dere is an image of hew.
@@ -81,7 +81,7 @@ def test_sora_amamiya():
     )
 
 
-def test_natsukawa_shiina():
+def test_natsukawa_shiina() -> None:
     """
     Dis function tests da information abou' Natsukawa Shiina, a seiyuu in da anime industry.
     It makes suwe dat hew ID is currect and dat hew name and biwthday awe currect.
@@ -106,7 +106,7 @@ def test_natsukawa_shiina():
     )
 
 
-def test_momo_asakura():
+def test_momo_asakura() -> None:
     """
     Haii! This function checks the details about Asakura Momo, anothew amazing seiyuu in da anime industry!
     It confirms if her ID is correct and if her name and birthday are accurate. It also checks if there is an image of her and if she has any alternate names.
