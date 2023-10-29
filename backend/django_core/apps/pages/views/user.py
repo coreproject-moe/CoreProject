@@ -147,6 +147,9 @@ def register_view(request: "HtmxHttpRequest") -> HttpResponse:
                     form.fields["confirm_password"].widget.attrs[
                         "class"
                     ] += " focus:border-error"
+                    form.fields["confirm_password"].widget.attrs[
+                        "_"
+                    ] = "init focus() me"
 
             return render(
                 request,
