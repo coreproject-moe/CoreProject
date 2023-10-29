@@ -909,6 +909,33 @@ django = ">=3.0"
 pytz = "*"
 
 [[package]]
+name = "djangorestframework-stubs"
+version = "3.14.4"
+description = "PEP-484 stubs for django-rest-framework"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "djangorestframework-stubs-3.14.4.tar.gz", hash = "sha256:8ee8719bfeb647b92cc200e15b3cc9813d2e4468c8190777a55a121542a4b2d4"},
+    {file = "djangorestframework_stubs-3.14.4-py3-none-any.whl", hash = "sha256:5be8275dd05d6629b3d1688929586ef7b6bc66b4f3f728b5e0389305f07c7a7f"},
+]
+
+[package.dependencies]
+django-stubs = ">=4.2.5"
+mypy = [
+    {version = ">=0.991", optional = true, markers = "extra != \"compatible-mypy\""},
+    {version = ">=1.6.0,<1.7.0", optional = true, markers = "extra == \"compatible-mypy\""},
+]
+requests = ">=2.0.0"
+types-PyYAML = ">=5.4.3"
+types-requests = ">=0.1.12"
+typing-extensions = ">=3.10.0"
+
+[package.extras]
+compatible-mypy = ["mypy (>=1.6.0,<1.7.0)"]
+coreapi = ["coreapi (>=2.0.0)"]
+markdown = ["types-Markdown (>=0.1.5)"]
+
+[[package]]
 name = "drf-spectacular"
 version = "0.26.5"
 description = "Sane and flexible OpenAPI 3 schema generation for Django REST framework"
@@ -2404,4 +2431,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "3792924c55f450a1143c74bc4802a5407e85e675d094700921bbf38f2bb90617"
+content-hash = "f3564359d96b2e415d1263e9cb24a02ed7b93ee6a60333caca1895d3887494f0"
