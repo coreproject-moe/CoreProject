@@ -40,12 +40,20 @@ class CharacterParser:
     @property
     @return_on_error("")
     def get_character_url(self) -> str:
-        return self.parser.css_first("meta[property='og:url']").attributes["content"]
+        if character_url := self.parser.css_first("meta[property='og:url']").attributes[
+            "content"
+        ]:
+            return character_url
+        else:
+            raise AttributeError("`get_character_url` element not found")
 
     @property
     @return_on_error("")
     def get_character_id(self) -> str:
-        return self.regex_helper.get_id_from_url(self.get_character_url)
+        if character_id := self.regex_helper.get_id_from_url(self.get_character_url):
+            return character_id
+        else:
+            raise AttributeError("`get_character_id` element not found")
 
     @property
     @return_on_error("")

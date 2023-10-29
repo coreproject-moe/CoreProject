@@ -64,7 +64,12 @@ class AnimeParser:
     @property
     @return_on_error("")
     def get_anime_url(self) -> str:
-        return self.parser.css_first("meta[property='og:url']").attributes["content"]
+        if anime_url := self.parser.css_first("meta[property='og:url']").attributes[
+            "content"
+        ]:
+            return anime_url
+        else:
+            raise AttributeError("`get_anime_url` element not found")
 
     @property
     @return_on_error("")
@@ -72,7 +77,7 @@ class AnimeParser:
         if anime_id := self.regex_helper.get_id_from_url(self.get_anime_url):
             return str(anime_id)
         else:
-            raise AttributeError("Element not found")
+            raise AttributeError("`get_anime_id` element not found")
 
     @property
     @return_on_error("")
@@ -82,7 +87,7 @@ class AnimeParser:
         ]:
             return anime_name
         else:
-            raise AttributeError("Element not found")
+            raise AttributeError("`get_anime_name` element not found")
 
     @property
     @return_on_error("")
