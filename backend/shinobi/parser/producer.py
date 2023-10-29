@@ -55,7 +55,7 @@ class ProducerParser:
 
     @property
     @return_on_error("")
-    def get_producter_establish_date(self) -> datetime:
+    def get_producter_establish_date(self) -> datetime.datetime:
         node = self.parser.select("span").text_contains("Established:")
         string_date = self.string_helper.cleanse(node.matches[0].next.text())
         actual_date = parser.parse(string_date)
