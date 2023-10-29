@@ -1,4 +1,5 @@
 import sys
+from argparse import ArgumentParser
 from typing import Any
 
 from django.core.management.base import BaseCommand
@@ -7,8 +8,6 @@ from shinobi.parser.genre import AnimeGenreParser
 from shinobi.utilities.session import session
 
 from ...models.anime_genre import AnimeGenreModel
-
-from argparse import ArgumentParser
 
 
 class Command(BaseCommand):

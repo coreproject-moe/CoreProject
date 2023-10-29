@@ -1,4 +1,5 @@
 import sys
+from argparse import ArgumentParser
 from typing import Any
 
 from django.core.files.images import ImageFile
@@ -9,7 +10,7 @@ from shinobi.utilities.session import session
 
 from ...models import StaffAlternateNameModel, StaffModel
 from ...tasks import get_periodic_staff
-from argparse import ArgumentParser
+
 
 class Command(BaseCommand):
     help = "Django command that gets the Staff Information given mal_id"

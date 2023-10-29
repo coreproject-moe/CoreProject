@@ -1,5 +1,6 @@
 import sys
 from argparse import ArgumentParser
+from typing import Any
 
 from apps.characters.models import CharacterModel
 from apps.producers.models import ProducerModel
@@ -13,7 +14,6 @@ from ...models import AnimeModel, AnimeNameSynonymModel
 from ...models.anime_genre import AnimeGenreModel
 from ...models.anime_theme import AnimeThemeModel
 from ...tasks import get_periodic_anime
-from typing import Any
 
 
 class Command(BaseCommand):

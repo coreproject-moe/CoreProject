@@ -1,5 +1,6 @@
 import sys
-from argparse import ArgumentParser, Namespace
+from argparse import ArgumentParser
+from typing import Any
 
 from django.core.management.base import BaseCommand
 
@@ -7,7 +8,6 @@ from shinobi.parser.producer import ProducerParser
 from shinobi.utilities.session import session
 
 from ...models import ProducerModel
-from typing import Any
 
 
 def get_periodic_producers():

@@ -2,7 +2,7 @@ import dataclasses
 import datetime
 import re
 from io import BytesIO
-from typing import TypedDict
+from typing import Any
 
 from dateutil import parser
 from selectolax.parser import HTMLParser
@@ -10,8 +10,6 @@ from selectolax.parser import HTMLParser
 from shinobi.decorators.return_error_decorator import return_on_error
 from shinobi.utilities.regex import RegexHelper
 from shinobi.utilities.string import StringHelper
-
-from typing import Any
 
 
 @dataclasses.dataclass
