@@ -1,3 +1,4 @@
+import dataclasses
 import datetime
 from functools import lru_cache
 
@@ -8,8 +9,6 @@ from shinobi.decorators.return_error_decorator import return_on_error
 from shinobi.utilities.regex import RegexHelper
 from shinobi.utilities.session import session
 from shinobi.utilities.string import StringHelper
-
-import dataclasses
 
 
 @dataclasses.dataclass
