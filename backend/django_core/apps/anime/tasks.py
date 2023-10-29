@@ -1,5 +1,4 @@
 import math
-from typing import NoReturn
 
 from celery import shared_task
 from colorthief import ColorThief

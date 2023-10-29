@@ -1,10 +1,10 @@
 import datetime
+from typing import NoReturn
 
 import requests
 
 from shinobi.parser.producer import ProducerParser
 from shinobi.utilities.session import session
-from typing import NoReturn
 
 
 def get_producer_res_given_mal_id(mal_id: int) -> requests.Response:

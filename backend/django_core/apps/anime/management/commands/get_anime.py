@@ -1,4 +1,5 @@
 import sys
+from argparse import ArgumentParser
 from typing import NoReturn
 
 from apps.characters.models import CharacterModel
@@ -13,7 +14,6 @@ from ...models import AnimeModel, AnimeNameSynonymModel
 from ...models.anime_genre import AnimeGenreModel
 from ...models.anime_theme import AnimeThemeModel
 from ...tasks import get_periodic_anime
-from argparse import ArgumentParser
 
 
 class Command(BaseCommand):
