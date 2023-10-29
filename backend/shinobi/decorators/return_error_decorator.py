@@ -2,8 +2,8 @@
 #   AttributeError : In case `selectolax` fails to find the dom node
 #   IndexError : In case `selectolax` finds empty dom node
 
-from typing import Type, Callable, Any, Union, Tuple
 import functools
+from typing import Any, Callable
 
 
 def return_on_error[T](return_type: T) -> Callable[[Callable], Callable]:
