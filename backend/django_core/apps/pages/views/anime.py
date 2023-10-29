@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from ..request import HtmxHttpRequest
 
 
-def anime_home_view(request: "HtmxHttpRequest") -> HttpResponse:
+async def anime_home_view(request: "HtmxHttpRequest") -> HttpResponse:
     if request.htmx:
         return render(request, "anime/_partial.html")
 

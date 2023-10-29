@@ -11,5 +11,5 @@ from ..data.stack import context
 # Create your views here.
 
 
-def stack_view(request: "HtmxHttpRequest") -> HttpResponse:
+async def stack_view(request: "HtmxHttpRequest") -> HttpResponse:
     return render(request, "stack/index.html", context)
