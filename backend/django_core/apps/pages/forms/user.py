@@ -60,7 +60,8 @@ class FirstRegisterForm(forms.Form):
                         end
                         send hyperscript:password_strength(strength:it) to <password-strength/>
                 """,
-            }
+            },
+            render_value=True,
         ),
     )
     confirm_password = forms.CharField(
