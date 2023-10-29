@@ -939,10 +939,11 @@ files = [
 [package.dependencies]
 django-stubs = ">=4.2.5"
 mypy = [
-    {version = ">=0.991", optional = true, markers = "extra != \"compatible-mypy\""},
+    {version = ">=0.991"},
     {version = ">=1.6.0,<1.7.0", optional = true, markers = "extra == \"compatible-mypy\""},
 ]
 requests = ">=2.0.0"
+types-Markdown = {version = ">=0.1.5", optional = true, markers = "extra == \"markdown\""}
 types-PyYAML = ">=5.4.3"
 types-requests = ">=0.1.12"
 typing-extensions = ">=3.10.0"
@@ -2459,4 +2460,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "092b81f3ab014afbe88dd2cba4043897c6d4b61d9e7379e6c65445f3324be0db"
+content-hash = "76fb30e8043095cc2634d34403444eff9eeb3d30196c4065fcbc81c93b9dca9c"
