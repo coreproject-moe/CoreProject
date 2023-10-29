@@ -1,6 +1,6 @@
 import hashlib
 import textwrap
-
+from typing import Iterator
 import requests
 from django.core.management.utils import get_random_secret_key
 from django.core.validators import URLValidator
@@ -42,7 +42,7 @@ async def avatar_view(
         URLValidator()(avatar_url)
         _request_ = requests.get(avatar_url, stream=True)
 
-        def streaming_content():
+        def streaming_content() -> Iterator[bytes]:
             # Iterate over the response content, and yield it in chunks
             yield from _request_.iter_content(chunk_size=1024)
 

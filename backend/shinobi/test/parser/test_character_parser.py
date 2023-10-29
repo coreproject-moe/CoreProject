@@ -1,11 +1,12 @@
 from shinobi.parser.character import CharacterParser
 from shinobi.utilities.session import session
+from typing import NoReturn
 
 res = session.get("https://myanimelist.net/character/1")
 
 
 # noqa: E501
-def test_first_character_parser():
+def test_first_character_parser() -> NoReturn:
     parser = CharacterParser(res.text)
     data = parser.build_dictionary()
 
