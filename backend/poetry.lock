@@ -797,6 +797,23 @@ files = [
 Django = ">=3.2"
 
 [[package]]
+name = "django-filter-stubs"
+version = "0.1.3"
+description = "PEP-484 stubs for django-filter"
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-filter-stubs-0.1.3.tar.gz", hash = "sha256:8b03ef8c304024672c3ebc99b72b59fb6f9d6c1a2b3b16a5100bf11a1577bc8b"},
+    {file = "django_filter_stubs-0.1.3-py3-none-any.whl", hash = "sha256:b683e8ddb92a1e1456a53dc299963ae4a5768f8d3cc3318dbef06c4b7d943336"},
+]
+
+[package.dependencies]
+django-stubs = ">=1.3.0"
+djangorestframework-stubs = ">=0.4.0"
+mypy = ">=0.750"
+typing-extensions = ">=3.7.4"
+
+[[package]]
 name = "django-htmx"
 version = "1.17.0"
 description = "Extensions for using Django with htmx."
@@ -2431,4 +2448,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "f3564359d96b2e415d1263e9cb24a02ed7b93ee6a60333caca1895d3887494f0"
+content-hash = "2c35cd50d95e0851bdb8568f28bd321ba89204234ccd8c1969506a1c3fb44fe7"
