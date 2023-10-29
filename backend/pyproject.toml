@@ -18,6 +18,8 @@ redis =  ">=4.5.4"
 pillow = "*"
 # First Party ( Database )
 psycopg = {extras = ["binary"], version = "^3.1.12"}
+# Database Integrations
+django-ltree = "^0.5.3"
 # 3rd Party ( Rate Limit )
 django-ratelimit = "^4.1.0"
 # 3rd Party ( Files )
@@ -63,12 +65,12 @@ drf-spectacular = "^0.26.5"
 drf-spectacular-sidecar = "^2023.10.1"
 # Django filters
 django-filter = "^23.3"
-django-ltree = "^0.5.3"
 crispy-bootstrap4 = "^2023.1"
+# Components
 django-components = "^0.29"
 django-htmx = "^1.17.0"
+# Markdown 
 markdown = "^3.5"
-pygments = "^2.16.1"
 pymdown-extensions = {extras = ["pygments"], version = "^10.3.1"}
 
 [tool.poetry.group.dev.dependencies]
