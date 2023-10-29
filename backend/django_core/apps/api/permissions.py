@@ -1,6 +1,6 @@
+from django.http import HttpRequest
 from rest_framework.permissions import SAFE_METHODS, BasePermission
 from rest_framework.views import APIView
-from django.http import HttpRequest
 
 
 class IsSuperUserOrReadOnly(BasePermission):
