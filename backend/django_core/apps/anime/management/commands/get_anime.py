@@ -50,7 +50,7 @@ class Command(BaseCommand):
             self.stdout.write("Successfully stated preiodic celery commands")
             sys.exit(0)
 
-        anime_id: int = options["anime_id"]
+        anime_id: int = int(options["anime_id"])
         if not anime_id:
             self.stdout.write(self.style.ERROR("No anime_id provided"))
             sys.exit(1)

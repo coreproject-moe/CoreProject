@@ -1,7 +1,8 @@
 from shinobi.builder.theme import AnimeThemeBuilder
+from typing import NoReturn
 
 
-def test_theme_builder():
+def test_theme_builder() -> NoReturn:
     builder = AnimeThemeBuilder()
     data_dictionary = builder.build_dictionary()
     assert list(data_dictionary.keys()) == [
