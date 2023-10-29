@@ -8,6 +8,13 @@ from django.urls import reverse_lazy
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.cache import never_cache
 from django_htmx.http import HttpResponseClientRedirect, HttpResponseClientRefresh, retarget
+from django.shortcuts import render
+from django.http import HttpResponse
+from typing import TYPE_CHECKING
+from ..data.anime import icons
+
+if TYPE_CHECKING:
+    from ..request import HtmxHttpRequest
 
 from ..forms.user import FirstRegisterForm, LoginForm, ResetPasswordForm, SecondRegisterForm
 
@@ -25,7 +32,7 @@ animes = [
 
 
 @never_cache
-def login_view(request: HttpRequest) -> HttpResponse | HttpResponseClientRefresh:
+def login_view(request: "HtmxHttpRequest") -> HttpResponse:
     form = LoginForm(request.POST or None)
 
     login_unsuccessful = False
@@ -106,7 +113,7 @@ def login_view(request: HttpRequest) -> HttpResponse | HttpResponseClientRefresh
 
 
 @never_cache
-def logout_view(request: HttpRequest) -> HttpResponse:
+def logout_view(request: "HtmxHttpRequest") -> HttpResponse:
     logout(request)
     redirect_location = request.GET.get("next") or reverse_lazy("login_view")
     url_is_safe = url_has_allowed_host_and_scheme(
@@ -120,7 +127,7 @@ def logout_view(request: HttpRequest) -> HttpResponse:
     return HttpResponseClientRefresh()
 
 
-def register_view(request: HttpRequest) -> HttpResponse:
+def register_view(request: "HtmxHttpRequest") -> HttpResponse:
     if request.htmx:
         _internal_state_ = request.session["_internal_state_"]
 
@@ -187,7 +194,7 @@ def register_view(request: HttpRequest) -> HttpResponse:
     )
 
 
-def reset_password_view(request):
+def reset_password_view(request: "HtmxHttpRequest") -> HttpResponse:
     form = ResetPasswordForm(request.POST or None)
 
     if request.htmx:
