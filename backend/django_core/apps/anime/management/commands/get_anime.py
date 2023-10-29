@@ -1,12 +1,14 @@
+from dataclasses import asdict
 import sys
 from argparse import ArgumentParser
+from typing import cast
 
 from apps.characters.models import CharacterModel
 from apps.producers.models import ProducerModel
 from apps.staffs.models import StaffModel
 from django.core.management.base import BaseCommand
 
-from shinobi.parser.anime import AnimeParser
+from shinobi.parser.anime import AnimeParser, AnimeDictionary
 from shinobi.utilities.session import session
 
 from ...models import AnimeModel, AnimeNameSynonymModel
@@ -69,7 +71,7 @@ class Command(BaseCommand):
         res = self.client.get(f"https://myanimelist.net/anime/{anime_id}/")
 
         parser = AnimeParser(res.text)
-        data_dictionary = {k: v for k, v in parser.build_dictionary().items() if v}
+        data_dictionary = {k: v for k, v in asdict(parser.build_dictionary()).items() if v}
 
         if alternate_name := data_dictionary.pop("name_synonyms"):
             for name in alternate_name:

@@ -45,12 +45,12 @@ class Command(BaseCommand):
             self.stdout.write("Successfully stated preiodic celery commands")
             sys.exit(0)
 
-        producer_id: int = options["producer_id"]
+        producer_id = str(options["producer_id"])
         if not producer_id:
             self.stdout.write(self.style.ERROR("No producer_id provided"))
             sys.exit(1)
 
-        create: bool = options["create"]
+        create: bool = bool(options["create"])
         if create:
             producer_instance, _ = ProducerModel.objects.get_or_create(mal_id=producer_id)
         else:

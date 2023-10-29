@@ -27,7 +27,7 @@ def get_periodic_staff() -> None:
         & Q(is_locked=False)
     )
     dictionary = builder.build_dictionary(
-        excluded_ids=instances.values_list("pk", flat=True),
+        excluded_ids=list(instances.values_list("pk", flat=True)),
         sort=True,
     )
 

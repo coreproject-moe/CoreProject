@@ -11,17 +11,16 @@ class RegexHelper:
         if not _match:
             raise Exception("No match found")
 
-
-        if _id_ := _id_ = _match.group(1):
-            not _id_.isdigit():
+        _id_ = _match.group(1)
+        if not _id_.isdigit():
             raise Exception("Id is not a digit.")
 
         return int(_id_)
 
     def get_content_between_first_brackets(self, text: str) -> str:
         pattern = re.compile(r"\((.*?)\)")
-        if match := re.search(pattern, text):
-            return match.group(1)
+        if content := re.search(pattern, text).group(1):
+            return content
         else:
             raise Exception("No content found")
 
