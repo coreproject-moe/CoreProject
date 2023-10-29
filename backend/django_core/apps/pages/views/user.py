@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, cast
+from typing import TYPE_CHECKING
 
 from defender import config, utils
 from django.conf import settings
@@ -58,9 +58,9 @@ async def login_view(request: "HtmxHttpRequest") -> HttpResponse:
                     require_https=request.is_secure(),
                 )
                 if redirect_location and url_is_safe:
-                    return cast(HttpResponse, HttpResponseClientRedirect)(redirect_location)
+                    return HttpResponseClientRedirect(redirect_location)
                 else:
-                    return cast(HttpResponse, HttpResponseClientRefresh)()
+                    return HttpResponseClientRefresh()
 
             else:
                 login_unsuccessful = True
@@ -128,9 +128,9 @@ async def logout_view(request: "HtmxHttpRequest") -> HttpResponse:
         require_https=request.is_secure(),
     )
     if redirect_location and url_is_safe:
-        return cast(HttpResponse, redirect(redirect_location))
+        return redirect(redirect_location)
 
-    return cast(HttpResponse, HttpResponseClientRefresh)()
+    return HttpResponseClientRefresh()
 
 
 async def register_view(request: "HtmxHttpRequest") -> HttpResponse:
@@ -143,7 +143,7 @@ async def register_view(request: "HtmxHttpRequest") -> HttpResponse:
             if form.is_valid():
                 request.session["_internal_state_"] = _internal_state_ + 1
                 request.session["_form_"] = dict(form.data)
-                return register_view(request)
+                return await register_view(request)
 
             elif form.errors:
                 if form.errors.get("email"):
@@ -169,20 +169,13 @@ async def register_view(request: "HtmxHttpRequest") -> HttpResponse:
             if form.is_valid():
                 request.session["_internal_state_"] = 3
                 request.session["_form_"] = request.session["_form_"] | form.data
-                return register_view(request)
+                return await register_view(request)
 
             elif form.errors:
                 if form.fields["username"].error_messages:
                     form.fields["username"].widget.attrs["class"] += " focus:border-error"
 
-            return render(
-                request,
-                "user/register/_2.html",
-                context={
-                    "form": form,
-                },
-            )
-
+            return render(request, "user/register/_2.html", context={"form": form})
         elif _internal_state_ == 3:
             form_data = request.session["_form_"]
             username = form_data.get("username", [None])[0]
