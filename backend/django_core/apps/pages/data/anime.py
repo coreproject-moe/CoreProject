@@ -1,12 +1,11 @@
 from django.urls import reverse_lazy
 
-
 icons = [
     {
         "html": "icons/home.html",
         "class": "w-[1.25vw]",
         "label": "home",
-        "href": reverse_lazy('anime_home_view'),
+        "href": reverse_lazy("anime_home_view"),
     },
     {
         "html": "icons/compass.html",

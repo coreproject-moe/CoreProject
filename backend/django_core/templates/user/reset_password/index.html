@@ -9,12 +9,12 @@
         class="flex h-max w-full flex-col gap-[15vw] bg-surface-900 p-10 md:h-full md:justify-between md:gap-0 md:rounded-none md:p-0"
         hx-post="{{request.get_full_path}}"
     >
-        <content 
+        <content
             class='contents'
             hx-get='{{request.get_full_path}}'
             hx-target='this'
             hx-trigger='load'
-       
+
         />
     </form>
 {% endblock %}
