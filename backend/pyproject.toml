@@ -15,7 +15,7 @@ django = {version = '>=5.0b1', extras = ['argon2']}
 # https://github.com/redis/hiredis-py/issues/172
 redis =  ">=4.5.4"
 # First party ( Image )
-pillow = "*"
+pillow = ">=10.1.0"
 # First Party ( Database )
 psycopg = {extras = ["binary"], version = "^3.1.12"}
 # Database Integrations
