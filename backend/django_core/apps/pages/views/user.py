@@ -140,7 +140,9 @@ def register_view(request: "HtmxHttpRequest") -> HttpResponse:
             elif form.errors:
                 print(form.cleaned_data)
                 if form.fields["confirm_password"].error_messages:
-                    form.fields["confirm_password"].widget.attrs["class"] += " focus:border-error"
+                    form.fields["confirm_password"].widget.attrs[
+                        "class"
+                    ] += " focus:border-error"
 
             return render(
                 request,
