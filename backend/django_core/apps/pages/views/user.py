@@ -30,7 +30,7 @@ animes = [
 
 
 @never_cache
-def login_view(request: "HtmxHttpRequest") -> HttpResponse:
+async def login_view(request: "HtmxHttpRequest") -> HttpResponse:
     form = LoginForm(request.POST or None)
 
     login_unsuccessful = False
@@ -111,7 +111,7 @@ def login_view(request: "HtmxHttpRequest") -> HttpResponse:
 
 
 @never_cache
-def logout_view(request: "HtmxHttpRequest") -> HttpResponse:
+async def logout_view(request: "HtmxHttpRequest") -> HttpResponse:
     logout(request)
     redirect_location = request.GET.get("next") or reverse_lazy("login_view")
     url_is_safe = url_has_allowed_host_and_scheme(
@@ -125,7 +125,7 @@ def logout_view(request: "HtmxHttpRequest") -> HttpResponse:
     return HttpResponseClientRefresh()
 
 
-def register_view(request: "HtmxHttpRequest") -> HttpResponse:
+async def register_view(request: "HtmxHttpRequest") -> HttpResponse:
     if request.htmx:
         _internal_state_ = request.session["_internal_state_"]
 
@@ -195,7 +195,7 @@ def register_view(request: "HtmxHttpRequest") -> HttpResponse:
     )
 
 
-def reset_password_view(request: "HtmxHttpRequest") -> HttpResponse:
+async def reset_password_view(request: "HtmxHttpRequest") -> HttpResponse:
     form = ResetPasswordForm(request.POST or None)
 
     if request.htmx:

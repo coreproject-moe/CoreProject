@@ -53,7 +53,7 @@ class FirstRegisterForm(forms.Form):
                         js(password)
                             try{
                                 return window.get_password_strength(password).score;
-                            }catch (e){
+                            } catch (e) {
                                 console.log("Silenced errors")
                                 return null
                             }
