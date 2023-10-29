@@ -6,9 +6,9 @@ register = template.Library()
 
 
 @register.filter(name="markdown")
-def markdown(text: str):
+def markdown(text: str) -> str:
     """Returns the value turned into a list."""
-    x = python_markdown.markdown(
+    return python_markdown.markdown(
         text,
         extensions=[
             "pymdownx.superfences",
@@ -21,4 +21,3 @@ def markdown(text: str):
             ),
         ],
     )
-    return x

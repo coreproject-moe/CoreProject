@@ -8,6 +8,8 @@ from shinobi.utilities.session import session
 
 from ...models import ProducerModel
 
+from argparse import ArgumentParser
+
 
 def get_periodic_producers():
     pass
@@ -20,7 +22,7 @@ class Command(BaseCommand):
         self.client = session
         super().__init__(*args, **kwargs)
 
-    def add_arguments(self, parser):
+    def add_arguments(self, parser: ArgumentParser) -> None:
         parser.add_argument(
             "producer_id",
             type=int,

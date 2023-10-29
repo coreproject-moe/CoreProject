@@ -38,5 +38,5 @@ def get_periodic_staff() -> None:
 # Call commands
 
 
-def call_staff_command(id: int):
+def call_staff_command(id: int) -> None:
     call_command("get_staff", staff_id=id)
