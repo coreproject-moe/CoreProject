@@ -17,7 +17,7 @@
     >
         <content
             class='contents'
-            hx-get='{{request.path}}'
+            hx-get='{{request.get_full_path}}'
             hx-target='this'
             hx-trigger='load'
         ></content>
