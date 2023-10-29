@@ -2460,8 +2460,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-<<<<<<< Updated upstream
-content-hash = "76fb30e8043095cc2634d34403444eff9eeb3d30196c4065fcbc81c93b9dca9c"
-=======
-content-hash = "e48d690084dd3cd70faa0c9254b15f6f300063273ba05f0fda170dcb2a7e6f83"
->>>>>>> Stashed changes
+content-hash = "b55719250b1f916c76a608a5e050516aed470c64b4291fdf76efca4bf347753c"
