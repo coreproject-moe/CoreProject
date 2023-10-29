@@ -1467,20 +1467,6 @@ files = [
 ]
 
 [[package]]
-name = "pygments"
-version = "2.16.1"
-description = "Pygments is a syntax highlighting package written in Python."
-optional = false
-python-versions = ">=3.7"
-files = [
-    {file = "Pygments-2.16.1-py3-none-any.whl", hash = "sha256:13fc09fa63bc8d8671a6d247e1eb303c4b343eaee81d861f3404db2935653692"},
-    {file = "Pygments-2.16.1.tar.gz", hash = "sha256:1daff0494820c69bc8941e407aa20f577374ee88364ee10a98fdbe0aece96e29"},
-]
-
-[package.extras]
-plugins = ["importlib-metadata"]
-
-[[package]]
 name = "pymdown-extensions"
 version = "10.3.1"
 description = "Extension pack for Python Markdown."
@@ -2003,6 +1989,17 @@ files = [
 ]
 
 [[package]]
+name = "types-markdown"
+version = "3.5.0.0"
+description = "Typing stubs for Markdown"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "types-Markdown-3.5.0.0.tar.gz", hash = "sha256:8c2f5526bba29feee24040d4694ced554d09ae46d1f1523b2b739558beabae42"},
+    {file = "types_Markdown-3.5.0.0-py3-none-any.whl", hash = "sha256:f1ff987576f347ec83aca0c2ced45e64e1deb771e0a6189744480013ccb59c96"},
+]
+
+[[package]]
 name = "types-pyopenssl"
 version = "23.2.0.2"
 description = "Typing stubs for pyOpenSSL"
@@ -2052,6 +2049,20 @@ files = [
 [package.dependencies]
 cryptography = ">=35.0.0"
 types-pyOpenSSL = "*"
+
+[[package]]
+name = "types-requests"
+version = "2.31.0.10"
+description = "Typing stubs for requests"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "types-requests-2.31.0.10.tar.gz", hash = "sha256:dc5852a76f1eaf60eafa81a2e50aefa3d1f015c34cf0cba130930866b1b22a92"},
+    {file = "types_requests-2.31.0.10-py3-none-any.whl", hash = "sha256:b32b9a86beffa876c0c3ac99a4cd3b8b51e973fb8e3bd4e0a6bb32c7efad80fc"},
+]
+
+[package.dependencies]
+urllib3 = ">=2"
 
 [[package]]
 name = "typing-extensions"
@@ -2393,4 +2404,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "d93ed0da94872fec3aab84085edfe63c94b88d4037b0368cc4122c04c9dc13d2"
+content-hash = "0304fa653168e13f14e39fb86fe1d12b70a0cc7150e844abdb4f4e7cbbbac9c4"

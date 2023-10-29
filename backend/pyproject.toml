@@ -92,6 +92,9 @@ mypy = "*"
 django_stubs = {extras = ["compatible_mypy"], version = "*"}
 # Types
 types_redis = "*"
+types-requests = "^2.31.0.10"
+types-markdown = "^3.5.0.0"
+
 # Task Runner
 poethepoet = "^0.24.1"
 # Django extensions
