@@ -39,7 +39,7 @@ class FirstRegisterForm(forms.Form):
                 "class": "h-12 w-full rounded-xl border-[0.4vw] bg-transparent pl-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:pl-[1vw] md:text-[1.1vw]",
             }
         ),
-        help_text="Please enter a valid email address",
+        help_text="we’ll send you a verification email, so please ensure it’s active",
     )
     password = forms.CharField(
         label="Password:",
@@ -60,7 +60,8 @@ class FirstRegisterForm(forms.Form):
                         end
                         send hyperscript:password_strength(strength:it) to <password-strength/>
                 """,
-            }
+            },
+            render_value=True,
         ),
     )
     confirm_password = forms.CharField(
@@ -69,18 +70,6 @@ class FirstRegisterForm(forms.Form):
             attrs={
                 "placeholder": "re-enter your password",
                 "class": "h-12 w-full rounded-xl border-[0.4vw] bg-transparent pl-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:pl-[1vw] md:text-[1.1vw]",
-                "_": """
-                    on keyup
-                        if my.value.length === 0
-                            add .invisible to next <span/>
-                        else
-                            if my.value === password
-                                add .invisible to next <span/>
-                            else
-                                remove .invisible from next <span/>
-                            end
-                        end
-                """,
             }
         ),
         help_text="Please make sure you enter the same password in both fields",
@@ -94,7 +83,7 @@ class FirstRegisterForm(forms.Form):
         if password != confirm_password:
             self.add_error(
                 "confirm_password",
-                error="**password** and **confirm_password** does not match",
+                error="**Password** and **Confirm Password** does not match",
             )
 
 

@@ -1,3 +1,5 @@
+{% load markdown %}
+
 {% block head%}
     <script type='module'>
         const zxcvbnTscore  = await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/core@latest/+esm')
@@ -51,7 +53,11 @@
         <label for="email" class="mt-4 text-lg font-semibold leading-none md:mt-[1.1vw] md:text-[1.1vw]">{{ form.email.label }}</label>
         {{ form.email }}
         <span class="mt-[0.75vw] text-xs leading-none text-base-content md:mt-0 md:text-[0.75vw]">
-            {{ form.email.help_text }}
+            {% if form.email.errors %}
+                {{ form.email.errors }}
+            {% else %}
+                {{ form.email.help_text }}
+            {% endif %}
         </span>
     </email-field>
     <password-field class="flex flex-col gap-[0.3rem] md:gap-[0.5vw]">
@@ -175,7 +181,7 @@
         {{ form.confirm_password }}
         <span class="leading-none md:text-[0.75vw]">
             {% if form.confirm_password.errors %}
-                {{ form.confirm_password.errors }}
+                {{ form.confirm_password.errors|first|markdown|safe }}
             {% else %}
                 {{ form.confirm_password.help_text }}
             {% endif %}
