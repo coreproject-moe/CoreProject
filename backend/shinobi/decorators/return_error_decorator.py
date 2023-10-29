@@ -1,9 +1,9 @@
+import functools
+from typing import Any, Callable
+
 # These decorators catch :
 #   AttributeError : In case `selectolax` fails to find the dom node
 #   IndexError : In case `selectolax` finds empty dom node
-
-import functools
-from typing import Any, Callable
 
 
 def return_on_error[T](return_type: T) -> Callable[[Callable], Callable]:
