@@ -1,38 +1,36 @@
 {% load markdown %}
 
-{% block head%}
-    <script type='module'>
-        const zxcvbnTscore  = await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/core@latest/+esm')
-        // Language import
-        const zxcvbnCommonPackage = await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-common@latest/+esm');
-        const zxcvbnEnPackage = await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-en@latest/+esm');
-        const options = {
-            translations: zxcvbnEnPackage.translations,
-            graphs: zxcvbnCommonPackage.adjacencyGraphs,
-            dictionary: {
-                ...zxcvbnCommonPackage.dictionary,
-                ...zxcvbnEnPackage.dictionary,
-                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-fr@latest/+esm')).dictionary,
-                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-de@latest/+esm')).dictionary,
-                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-it@latest/+esm')).dictionary,
-                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-nl-be@latest/+esm')).dictionary,
-                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-es-es@latest/+esm')).dictionary,
-                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-pt-br@latest/+esm')).dictionary,
-                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-ja@latest/+esm')).dictionary,
-                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-fi@latest/+esm')).dictionary,
-                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-pl@latest/+esm')).dictionary,
-                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-cs@latest/+esm')).dictionary,
-                ...(await import( 'https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-id@latest/+esm' )).dictionary,
-                ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-ar@latest/+esm')).dictionary,
-            },
-        }
-        zxcvbnTscore.zxcvbnOptions.setOptions(options)
-        function get_password_strength(password){
-            return zxcvbnTscore.zxcvbn(password)
-        }
-        window.get_password_strength = get_password_strength
-    </script>
-{% endblock %}
+<script type='module'>
+    const zxcvbnTscore  = await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/core@latest/+esm')
+    // Language import
+    const zxcvbnCommonPackage = await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-common@latest/+esm');
+    const zxcvbnEnPackage = await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-en@latest/+esm');
+    const options = {
+        translations: zxcvbnEnPackage.translations,
+        graphs: zxcvbnCommonPackage.adjacencyGraphs,
+        dictionary: {
+            ...zxcvbnCommonPackage.dictionary,
+            ...zxcvbnEnPackage.dictionary,
+            ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-fr@latest/+esm')).dictionary,
+            ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-de@latest/+esm')).dictionary,
+            ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-it@latest/+esm')).dictionary,
+            ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-nl-be@latest/+esm')).dictionary,
+            ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-es-es@latest/+esm')).dictionary,
+            ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-pt-br@latest/+esm')).dictionary,
+            ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-ja@latest/+esm')).dictionary,
+            ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-fi@latest/+esm')).dictionary,
+            ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-pl@latest/+esm')).dictionary,
+            ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-cs@latest/+esm')).dictionary,
+            ...(await import( 'https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-id@latest/+esm' )).dictionary,
+            ...(await import('https://cdn.jsdelivr.net/npm/@zxcvbn-ts/language-ar@latest/+esm')).dictionary,
+        },
+    }
+    zxcvbnTscore.zxcvbnOptions.setOptions(options)
+    function get_password_strength(password){
+        return zxcvbnTscore.zxcvbn(password)
+    }
+    window.get_password_strength = get_password_strength
+</script>
 
 <div class="flex flex-col gap-2 whitespace-nowrap font-bold uppercase leading-none tracking-widest text-white md:text-[1.2vw] md:gap-[0.5vw]">
     <span class="inline-flex md:gap-[0.5vw]">
