@@ -67,6 +67,9 @@ django-ltree = "^0.5.3"
 crispy-bootstrap4 = "^2023.1"
 django-components = "^0.29"
 django-htmx = "^1.17.0"
+markdown = "^3.5"
+pygments = "^2.16.1"
+pymdown-extensions = {extras = ["pygments"], version = "^10.3.1"}
 
 [tool.poetry.group.dev.dependencies]
 ## Watchfiles
@@ -98,7 +101,7 @@ django-extensions = "^3.2.3"
 
 
 [tool.poetry.group.test.dependencies]
-pytest = "^7.4.2"
+pytest = "^7.4.3"
 pytest-django = "^4.5.2"
 
 [tool.poe.tasks]

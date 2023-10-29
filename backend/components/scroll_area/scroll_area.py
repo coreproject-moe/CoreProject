@@ -19,5 +19,4 @@ class ScollArea(component.Component):
         }
 
     class Media:
-        css = "scroll_area/scroll_area.css"
         js = "scroll_area/scroll_area.js"
