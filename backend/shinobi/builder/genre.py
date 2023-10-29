@@ -25,7 +25,9 @@ class AnimeGenreBuilder:
         link_ids = [
             self.regex_helper.get_id_from_url(node.attributes["href"])
             for node in genre_nodes
+            if node.attributes["href"]
         ]
+
         return sorted(link_ids)
 
     def build_dictionary(self) -> dict[int, str]:

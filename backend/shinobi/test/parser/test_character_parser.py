@@ -13,7 +13,7 @@ def test_first_character_parser() -> None:
     assert data["name"] == "Spike Spiegel"
     assert data["name_kanji"] == "スパイク・スピーゲル"
     assert (
-        data["character_image"]
+        str(data["character_image"])
         == "https://cdn.myanimelist.net/images/characters/4/50197.jpg"
     )
     assert (

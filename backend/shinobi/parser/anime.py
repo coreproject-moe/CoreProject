@@ -63,22 +63,30 @@ class AnimeParser:
 
     @property
     @return_on_error("")
-    def get_anime_url(self):
+    def get_anime_url(self) -> str:
         return self.parser.css_first("meta[property='og:url']").attributes["content"]
 
     @property
     @return_on_error("")
-    def get_anime_id(self):
-        return self.regex_helper.get_id_from_url(self.get_anime_url)
+    def get_anime_id(self) -> str:
+        if anime_id := self.regex_helper.get_id_from_url(self.get_anime_url):
+            return str(anime_id)
+        else:
+            raise AttributeError("Element not found")
 
     @property
     @return_on_error("")
-    def get_anime_name(self):
-        return self.parser.css_first("meta[property='og:title']").attributes["content"]
+    def get_anime_name(self) -> str:
+        if anime_name := self.parser.css_first("meta[property='og:title']").attributes[
+            "content"
+        ]:
+            return anime_name
+        else:
+            raise AttributeError("Element not found")
 
     @property
     @return_on_error("")
-    def get_anime_name_japanese(self):
+    def get_anime_name_japanese(self) -> str:
         node = self.parser.select("span").text_contains("Japanese:").matches
         if len(node) > 1:
             raise ValueError("There are more than one node in name japanese node")
@@ -98,7 +106,8 @@ class AnimeParser:
             if node.next.tag == "h2":
                 break
             elif node.next.tag == "div":
-                next_node = node.next
+                if node.next:
+                    next_node = node.next
 
             try:
                 alternate_name = self.string_helper.cleanse(
@@ -116,7 +125,7 @@ class AnimeParser:
 
     @property
     @return_on_error("")
-    def get_source(self):
+    def get_source(self) -> str:
         node = self.parser.select("span").text_contains("Source:").matches
         if len(node) > 1:
             raise ValueError("There are multiple source node")
@@ -140,7 +149,7 @@ class AnimeParser:
 
     @property
     @return_on_error("")
-    def get_synopsis(self):
+    def get_synopsis(self) -> str:
         node = self.parser.css_first("p[itemprop='description']")
 
         synopsis = self.string_helper.cleanse(node.text())
@@ -152,7 +161,7 @@ class AnimeParser:
 
     @property
     @return_on_error("")
-    def get_background(self):
+    def get_background(self) -> str:
         node = self.parser.select("h2").text_contains("Background").matches
         if len(node) > 1:
             raise ValueError("There are multiple Background node")
@@ -165,7 +174,7 @@ class AnimeParser:
 
     @property
     @return_on_error("")
-    def get_rating(self):
+    def get_rating(self) -> str:
         node = self.parser.select("span").text_contains("Rating:").matches
         if len(node) > 1:
             raise ValueError("There are multiple Rating node")
@@ -187,6 +196,7 @@ class AnimeParser:
             {
                 self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
                 for anchor in anchor_tags
+                if anchor.attributes["href"]
             }
         )
 
@@ -203,6 +213,7 @@ class AnimeParser:
             {
                 self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
                 for anchor in anchor_tags
+                if anchor.attributes["href"]
             }
         )
 
@@ -218,6 +229,7 @@ class AnimeParser:
             {
                 self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
                 for anchor in anchor_tags
+                if anchor.attributes["href"]
             }
         )
 
@@ -233,6 +245,7 @@ class AnimeParser:
             {
                 self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
                 for anchor in anchor_tags
+                if anchor.attributes["href"]
             }
         )
 
@@ -248,12 +261,13 @@ class AnimeParser:
             {
                 self.regex_helper.get_first_integer_from_url(anchor.attributes["href"])
                 for anchor in anchor_tags
+                if anchor.attributes["href"]
             }
         )
 
     @property
     @return_on_error({})
-    def get_openings(self) -> list[str]:
+    def get_openings(self) -> dict[int, str]:
         node = self.parser.select("h2").text_contains("Opening Theme").matches
 
         opening_table_tag = node[0].parent.next.next
@@ -279,7 +293,7 @@ class AnimeParser:
 
     @property
     @return_on_error({})
-    def get_endings(self) -> list[str]:
+    def get_endings(self) -> dict[int, str]:
         node = self.parser.select("h2").text_contains("Ending Theme").matches
 
         endings_table_tag = node[0].parent.next.next
