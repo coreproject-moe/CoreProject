@@ -11,7 +11,7 @@ def get_staff_res_given_mal_id(mal_id: int) -> requests.Response:
 
 
 # noqa: E501
-def test_first_person_parser():
+def test_first_person_parser() -> None:
     res = get_staff_res_given_mal_id(1)
     parser = StaffParser(res.text)
     data = parser.build_dictionary()
@@ -33,7 +33,7 @@ def test_first_person_parser():
 
 
 # noqa: E501
-def test_second_person_parser():
+def test_second_person_parser() -> None:
     res = get_staff_res_given_mal_id(2)
     parser = StaffParser(res.text)
     data = parser.build_dictionary()
