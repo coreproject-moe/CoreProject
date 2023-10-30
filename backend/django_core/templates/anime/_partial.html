@@ -140,6 +140,12 @@
                                         else
                                         remove .bg-warning from me
                                         end
+
+                                        on click
+                                        set global slide_index to {{ forloop.counter }}
+                                        send hyperscript:slide_left to #anime_slider
+                                        send hyperscript:slider_change to me
+                                        end 
                                     "
                                     class="slider-brick col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-secondary-300 transition duration-300 hover:border-surface-50/50"
                                 ></button>
