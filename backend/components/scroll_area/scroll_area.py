@@ -8,11 +8,13 @@ class ScollArea(component.Component):
     # get params
     def get_context_data(
         self,
+        _: str,
         scroll_area_class: str,
         parent_class: str,
         offset_scrollbar: str | None = None,
     ):
         return {
+            "hyperscript": _,
             "class": scroll_area_class,
             "parent_class": parent_class,
             "offset_scrollbar": offset_scrollbar,
