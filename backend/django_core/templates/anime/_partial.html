@@ -129,12 +129,9 @@
                     <slide-progress class="absolute bottom-0 flex w-full flex-col z-20">
                         <progress-bar class="h-[0.2rem] md:h-[0.145vw] bg-warning" style="width: 94%"></progress-bar>
                         <animes-boxes class="hidden w-full grid-cols-6 gap-[0.9375vw] md:mt-[1.25vw] md:grid">
-                            <button class="col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-warning transition duration-300 hover:border-surface-50/50 bg-warning"></button>
-                            <button class="col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-secondary-300 transition duration-300 hover:border-surface-50/50"></button>
-                            <button class="col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-warning-400 transition duration-300 hover:border-surface-50/50"></button>
-                            <button class="col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-white transition duration-300 hover:border-surface-50/50"></button>
-                            <button class="col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-primary-300 transition duration-300 hover:border-surface-50/50"></button>
-                            <button class="col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-error-200 transition duration-300 hover:border-surface-50/50"></button>
+                            {% for _ in latest_animes %}
+                                <button class="col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-secondary-300 transition duration-300 hover:border-surface-50/50"></button>
+                            {% endfor %}
                         </animes-boxes>
                     </slide-progress>
                     <button
