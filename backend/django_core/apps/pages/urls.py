@@ -6,7 +6,7 @@ from .views.user import login_view, logout_view, register_view, reset_password_v
 
 urlpatterns = [
     path("anime/", anime_home_view, name="anime_home_view"),
-    path("anime/explore/", anime_home_view, name="anime_home_view"),
+    path("anime/explore/", anime_home_view, name="anime_explore_view"),
     path("stack/", stack_view, name="stack_view"),
     # User pages
     path("user/login/", login_view, name="login_view"),
