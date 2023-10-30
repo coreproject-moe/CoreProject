@@ -49,32 +49,24 @@
                                     _="on change(anime_type) put anime_type into me"
                                     class="leading-[1.125vw]"
                                 ></anime-type>
-                                <svg class="w-1 opacity-75 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
-                                </svg>
+                                {% include "icons/dot.html" with class="w-1 opacity-75 md:w-[0.25vw]" %}
                                 <anime-eps
                                     _="on change(anime_eps) put anime_eps into <span/> in me"
                                     class="leading-[1.125vw]"
                                 >
                                     <span></span> eps
                                 </anime-eps>
-                                <svg class="w-1 opacity-75 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
-                                </svg>
+                                {% include "icons/dot.html" with class="w-1 opacity-75 md:w-[0.25vw]" %}
                                 <anime-status
                                     _="on change(status) put status into me"
                                     class="leading-[1.125vw]"
                                 ></anime-status>
-                                <svg class="w-1 opacity-75 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
-                                </svg>
+                                {% include "icons/dot.html" with class="w-1 opacity-75 md:w-[0.25vw]" %}
                                 <anime-date
                                     _="on change(release_date) put release_date into me"
                                     class="capitalize leading-[1.125vw]"
                                 ></anime-date>
-                                <svg class="w-1 opacity-75 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
-                                </svg>
+                                {% include "icons/dot.html" with class="w-1 opacity-75 md:w-[0.25vw]" %}
                                 <anime-studio
                                     _="on change(anime_studio) put anime_studio into me"
                                     class="leading-[1.125vw] uppercase"
