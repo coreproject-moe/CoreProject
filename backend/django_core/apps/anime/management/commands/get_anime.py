@@ -1,12 +1,13 @@
 import sys
 from argparse import ArgumentParser
 from typing import Any
+
 from apps.characters.models import CharacterModel
 from apps.producers.models import ProducerModel
 from apps.staffs.models import StaffModel
 from django.core.management.base import BaseCommand
 
-from shinobi.parser.anime import AnimeParser, AnimeDictionary
+from shinobi.parser.anime import AnimeParser
 from shinobi.utilities.session import session
 
 from ...models import AnimeModel, AnimeNameSynonymModel
