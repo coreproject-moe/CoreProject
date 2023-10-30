@@ -19,6 +19,7 @@
                            send change(anime_type:it.type) to #anime_type
                            send change(anime_eps:it.episodes) to #anime_eps
                            send change(status:it.status) to #anime_status
+                           send change(release_date:it.release_date) to #release_date
 
                            init
                            send hyperscript:slide to me
@@ -69,7 +70,11 @@
                                 <svg class="w-1 opacity-75 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
                                 </svg>
-                                <span class="capitalize leading-[1.125vw]">autumn 2014</span>
+                                <span
+                                    _="on change(release_date) put release_date into me"
+                                    id="release_date"
+                                    class="capitalize leading-[1.125vw]"
+                                ></span>
                                 <svg class="w-1 opacity-75 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
                                 </svg>
