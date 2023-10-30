@@ -4,9 +4,9 @@
             <hero-section class="flex flex-col justify-between md:flex-row">
                 <latest-animes-slider class="relative h-96 w-full md:h-[27.875vw] md:w-[42.1875vw]" style="touch-action: pan-y">
                     <anime-slide
+                        id="anime_slider"
                         _="
                            on hyperscript:slide
-                           set local slide_index to 0
                            js(slide_index)
                            const anime = (arr => {
                            const len = arr == null ? 0 : arr.length;
@@ -23,10 +23,19 @@
                            send change(anime_studio:it.studio) to <anime-studio /> in me
                            send change(synopsis:it.synopsis) to <scroll-area/> in me
 
-                           init
+                           on hyperscript:slide_left
+                           if slide_index - 1 is equal to -1
+                           set global slide_index to {{ latest_animes }}.length - 1
+                           else
+                           decrement global slide_index by 1
+                           end
                            send hyperscript:slide to me
                            end
 
+                           init
+                           set global slide_index to 0
+                           send hyperscript:slide to me
+                           end
                           "
                         role="presentation"
                         class="absolute inset-0 md:bottom-[2vw]"
@@ -117,15 +126,14 @@
                             <button class="col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-error-200 transition duration-300 hover:border-surface-50/50"></button>
                         </animes-boxes>
                     </slide-progress>
-                    <button class="btn btn-primary p-0 absolute -left-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] md:flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-[1.25vw] rotate-90" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
-                        </svg>
+                    <button
+                        _="on click send hyperscript:slide_left to #anime_slider"
+                        class="btn btn-primary p-0 absolute -left-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] md:flex"
+                    >
+                        {% include "icons/chevron.html" with class="w-[1.25vw] rotate-90" %}
                     </button>
                     <button class="btn btn-primary p-0 absolute -right-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] bg-secondary-800 md:flex">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-[1.25vw] -rotate-90" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
-                        </svg>
+                        {% include "icons/chevron.html" with class="w-[1.25vw] -rotate-90" %}
                     </button>
                 </latest-animes-slider>
                 <latest-episodes class="hidden w-[21.5625vw] md:block">
