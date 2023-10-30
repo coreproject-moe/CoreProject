@@ -16,11 +16,11 @@
                            end
                            send change(anime_name:it.name) to <anime-name/> in me
                            send change(image:it.image) to <img/> in me
-                           send change(anime_type:it.type) to #anime_type
-                           send change(anime_eps:it.episodes) to #anime_eps
-                           send change(status:it.status) to #anime_status
-                           send change(release_date:it.release_date) to #release_date
-                           send change(anime_studio:it.studio) to #anime_studio
+                           send change(anime_type:it.type) to <anime-type/> in me
+                           send change(anime_eps:it.episodes) to <anime-eps/> in me
+                           send change(status:it.status) to <anime-status/> in me
+                           send change(release_date:it.release_date) to <anime-date/> in me
+                           send change(anime_studio:it.studio) to <anime-studio /> in me
 
                            init
                            send hyperscript:slide to me
@@ -45,45 +45,40 @@
                             ></anime-name>
                             <japanese-name class="text-base font-semibold text-white/90 md:hidden md:text-[2vw] md:leading-[2.375vw]"> Sorcery Fight </japanese-name>
                             <anime-infos class="flex flex-wrap items-center gap-2 pt-4 text-xs font-semibold text-white/90 md:gap-[0.65vw] md:pt-[0.5vw] md:text-[0.9375vw]">
-                                <span
+                                <anime-type
                                     _="on change(anime_type) put anime_type into me"
-                                    id="anime_type"
                                     class="leading-[1.125vw]"
-                                ></span>
+                                ></anime-type>
                                 <svg class="w-1 opacity-75 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
                                 </svg>
-                                <span
+                                <anime-eps
                                     _="on change(anime_eps) put anime_eps into <span/> in me"
-                                    id="anime_eps"
                                     class="leading-[1.125vw]"
                                 >
                                     <span></span> eps
-                                </span>
+                                </anime-eps>
                                 <svg class="w-1 opacity-75 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
                                 </svg>
-                                <span
+                                <anime-status
                                     _="on change(status) put status into me"
-                                    id="anime_status"
                                     class="leading-[1.125vw]"
-                                ></span>
+                                ></anime-status>
                                 <svg class="w-1 opacity-75 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
                                 </svg>
-                                <span
+                                <anime-date
                                     _="on change(release_date) put release_date into me"
-                                    id="release_date"
                                     class="capitalize leading-[1.125vw]"
-                                ></span>
+                                ></anime-date>
                                 <svg class="w-1 opacity-75 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
                                 </svg>
-                                <span
+                                <anime-studio
                                     _="on change(anime_studio) put anime_studio into me"
-                                    id="anime_studio"
                                     class="leading-[1.125vw] uppercase"
-                                ></span>
+                                ></anime-studio>
                             </anime-infos>
                             <anime-genres class="flex gap-2 pb-2 pt-3 md:gap-[0.5vw] md:pt-[0.5vw]">
                                 <span class="rounded-lg bg-secondary p-2 px-3 text-xs md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.4vw] md:text-[0.75vw] md:font-semibold">Sic-Fic</span>
