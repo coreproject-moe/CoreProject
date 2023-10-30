@@ -5,29 +5,29 @@
                 <latest-animes-slider class="relative h-96 w-full md:h-[27.875vw] md:w-[42.1875vw]" style="touch-action: pan-y">
                     <anime-slide
                         _="
-                            on hyperscript:slide
-                            set local slide_index to 0
-                            js(slide_index)
-                            const anime = (arr => {
-                                const len = arr == null ? 0 : arr.length;
-                                return len ? arr[slide_index] : undefined;
-                            })({{ latest_animes }})
-                            return anime;
-                            end
-                            log it.name
+                           on hyperscript:slide
+                           set local slide_index to 0
+                           js(slide_index)
+                           const anime = (arr => {
+                           const len = arr == null ? 0 : arr.length;
+                           return len ? arr[slide_index] : undefined;
+                           })({{ latest_animes }})
+                           return anime;
+                           end
+                           log it.name
 
-                            if slide_index + 1 is equal to {{ latest_animes }}.length
-                                set local slide_index to 0
-                            else
-                                increment slide_index
-                            end
+                           if slide_index + 1 is equal to {{ latest_animes }}.length
+                           set local slide_index to 0
+                           else
+                           increment slide_index
+                           end
 
 
-                            init
-                            send hyperscript:slide to me
-                            end
+                           init
+                           send hyperscript:slide to me
+                           end
 
-                        "
+                          "
                         role="presentation"
                         class="absolute inset-0 md:bottom-[2vw]"
                         style=""
