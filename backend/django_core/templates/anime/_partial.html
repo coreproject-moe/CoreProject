@@ -32,6 +32,15 @@
                            send hyperscript:slide to me
                            end
 
+                           on hyperscript:slide_right
+                           if slide_index + 1 is equal to {{ latest_animes }}.length
+                           set global slide_index to 0
+                           else
+                           increment global slide_index by 1
+                           end
+                           send hyperscript:slide to me
+                           end
+
                            init
                            set global slide_index to 0
                            send hyperscript:slide to me
@@ -132,7 +141,10 @@
                     >
                         {% include "icons/chevron.html" with class="w-[1.25vw] rotate-90" %}
                     </button>
-                    <button class="btn btn-primary p-0 absolute -right-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] bg-secondary-800 md:flex">
+                    <button
+                        _="on click send hyperscript:slide_right to #anime_slider"
+                        class="btn btn-primary p-0 absolute -right-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] bg-secondary-800 md:flex"
+                    >
                         {% include "icons/chevron.html" with class="w-[1.25vw] -rotate-90" %}
                     </button>
                 </latest-animes-slider>
