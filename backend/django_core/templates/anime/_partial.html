@@ -18,6 +18,7 @@
                            send change(image:it.image) to <img/> in me
                            send change(anime_type:it.type) to #anime_type
                            send change(anime_eps:it.episodes) to #anime_eps
+                           send change(status:it.status) to #anime_status
 
                            init
                            send hyperscript:slide to me
@@ -60,7 +61,11 @@
                                 <svg class="w-1 opacity-75 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
                                 </svg>
-                                <span class="leading-[1.125vw]">Completed</span>
+                                <span
+                                    _="on change(status) put status into me"
+                                    id="anime_status"
+                                    class="leading-[1.125vw]"
+                                ></span>
                                 <svg class="w-1 opacity-75 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
                                 </svg>
