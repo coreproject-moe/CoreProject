@@ -16,6 +16,8 @@
                            end
                            send change(anime_name:it.name) to <anime-name/> in me
                            send change(image:it.image) to <img/> in me
+                           send change(anime_type:it.type) to #anime_type
+                           send change(anime_eps:it.episodes) to #anime_eps
 
                            init
                            send hyperscript:slide to me
@@ -40,11 +42,21 @@
                             ></anime-name>
                             <japanese-name class="text-base font-semibold text-white/90 md:hidden md:text-[2vw] md:leading-[2.375vw]"> Sorcery Fight </japanese-name>
                             <anime-infos class="flex flex-wrap items-center gap-2 pt-4 text-xs font-semibold text-white/90 md:gap-[0.65vw] md:pt-[0.5vw] md:text-[0.9375vw]">
-                                <span class="leading-[1.125vw]"> TV </span>
+                                <span
+                                    _="on change(anime_type) put anime_type into me"
+                                    id="anime_type"
+                                    class="leading-[1.125vw]"
+                                ></span>
                                 <svg class="w-1 opacity-75 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
                                 </svg>
-                                <span class="leading-[1.125vw]"> 24 eps </span>
+                                <span
+                                    _="on change(anime_eps) put anime_eps into <span/> in me"
+                                    id="anime_eps"
+                                    class="leading-[1.125vw]"
+                                >
+                                    <span></span> eps
+                                </span>
                                 <svg class="w-1 opacity-75 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
                                 </svg>
