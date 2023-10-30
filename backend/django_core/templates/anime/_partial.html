@@ -2,11 +2,14 @@
     <div class="h-full">
         <home-container class="mt-16 block md:mt-0 md:p-[1.25vw] md:pr-[3.75vw]">
             <hero-section class="flex flex-col justify-between md:flex-row">
-                <latest-animes-slider class="relative h-96 w-full md:h-[27.875vw] md:w-[42.1875vw]" style="touch-action: pan-y">
+                <latest-animes-slider class="relative h-96 w-full md:h-[27.875vw] md:w-[42.1875vw]">
                     <anime-slide
                         id="anime_slider"
+                        class="absolute inset-0 md:bottom-[2vw]"
                         _="
                            on hyperscript:slide
+                           add .backdrop-blur-sm to <backdrop/> in me
+                           then wait 300ms
                            js(slide_index)
                            const anime = (arr => {
                            const len = arr == null ? 0 : arr.length;
@@ -22,6 +25,7 @@
                            send change(release_date:it.release_date) to <anime-date/> in me
                            send change(anime_studio:it.studio) to <anime-studio /> in me
                            send change(synopsis:it.synopsis) to <scroll-area/> in me
+                           then remove .backdrop-blur-sm from <backdrop/> in me
 
                            on hyperscript:slide_left
                            if slide_index - 1 is equal to -1
@@ -46,10 +50,8 @@
                            send hyperscript:slide to me
                            end
                           "
-                        role="presentation"
-                        class="absolute inset-0 md:bottom-[2vw]"
-                        style=""
                     >
+                        <backdrop class="absolute inset-0 bg-transparent duration-300 z-10 pointer-events-none md:rounded-t-[0.875vw]"></backdrop>
                         <img
                             _="on change(image) set @src to image" src=""
                             loading="lazy"
@@ -124,7 +126,7 @@
                             </options>
                         </anime-details>
                     </anime-slide>
-                    <slide-progress class="absolute bottom-0 flex w-full flex-col">
+                    <slide-progress class="absolute bottom-0 flex w-full flex-col z-20">
                         <progress-bar class="h-[0.2rem] md:h-[0.145vw] bg-warning" style="width: 94%"></progress-bar>
                         <animes-boxes class="hidden w-full grid-cols-6 gap-[0.9375vw] md:mt-[1.25vw] md:grid">
                             <button class="col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-warning transition duration-300 hover:border-surface-50/50 bg-warning"></button>
