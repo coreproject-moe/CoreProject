@@ -23,12 +23,12 @@ icons = [
         "html": "icons/calender.html",
         "class": "w-[1.25vw]",
         "href": "/anime/shedule",
-        "label": "schedule/",
+        "label": "schedule",
     },
     {
         "html": "icons/chat.html",
         "class": "w-[1.25vw]",
         "href": "/anime/forum",
-        "label": "forum/",
+        "label": "forum",
     },
 ]
