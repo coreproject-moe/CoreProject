@@ -134,13 +134,13 @@
                             {% for _ in latest_animes %}
                                 <button
                                     _="
-                                        on hyperscript:slider_change
-                                        if slide_index is equal to {{ forloop.counter0 }}
-                                        add .bg-warning to me
-                                        else
-                                        remove .bg-warning from me
-                                        end
-                                    "
+                                       on hyperscript:slider_change
+                                       if slide_index is equal to {{ forloop.counter0 }}
+                                       add .bg-warning to me
+                                       else
+                                       remove .bg-warning from me
+                                       end
+                                      "
                                     class="slider-brick col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-secondary-300 transition duration-300 hover:border-surface-50/50"
                                 ></button>
                             {% endfor %}
