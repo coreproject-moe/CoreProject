@@ -3,7 +3,35 @@
         <home-container class="mt-16 block md:mt-0 md:p-[1.25vw] md:pr-[3.75vw]">
             <hero-section class="flex flex-col justify-between md:flex-row">
                 <latest-animes-slider class="relative h-96 w-full md:h-[27.875vw] md:w-[42.1875vw]" style="touch-action: pan-y">
-                    <anime-slide role="presentation" class="absolute inset-0 md:bottom-[2vw]" style="">
+                    <anime-slide
+                        _="
+                            on hyperscript:slide
+                            set local slide_index to 0
+                            js(slide_index)
+                            const anime = (arr => {
+                                const len = arr == null ? 0 : arr.length;
+                                return len ? arr[slide_index] : undefined;
+                            })({{ latest_animes }})
+                            return anime;
+                            end
+                            log it.name
+
+                            if slide_index + 1 is equal to {{ latest_animes }}.length
+                                set local slide_index to 0
+                            else
+                                increment slide_index
+                            end
+
+
+                            init
+                            send hyperscript:slide to me
+                            end
+
+                        "
+                        role="presentation"
+                        class="absolute inset-0 md:bottom-[2vw]"
+                        style=""
+                    >
                         <div class="absolute h-full w-full object-cover object-center md:rounded-t-[0.875vw]">
                             <img class="absolute h-full w-full object-cover object-center md:rounded-t-[0.875vw]" src="https://staticg.sportskeeda.com/editor/2023/04/95453-16812287437122-1920.jpg?w=840" alt="" style="" loading="lazy" />
                         </div>
