@@ -50,6 +50,9 @@
                            init
                            set global slide_index to 0
                            send hyperscript:slide to me
+                           repeat forever
+                           send hyperscript:slide_right to me
+                           then wait 10s
                            end
                           "
                     >
