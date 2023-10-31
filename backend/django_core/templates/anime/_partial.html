@@ -23,8 +23,8 @@
                            send change(anime_eps:it.episodes) to <anime-eps/> in me
                            send change(status:it.status) to <anime-status/> in me
                            send change(release_date:it.release_date) to <anime-date/> in me
-                           send change(anime_studio:it.studio) to <anime-studio /> in me
-                           send change(synopsis:it.synopsis) to <scroll-area/> in me
+                           send change(anime_studio:it.studio) to <anime-studio/> in me
+                           send change(synopsis:it.synopsis) to <anime-synopsis/> in me
 
                            send hyperscript:slider_change to .slider-brick
                            then remove .backdrop-blur-sm from <backdrop/> in me
@@ -100,8 +100,10 @@
                                 <span class="rounded-lg bg-secondary p-2 px-3 text-xs md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.4vw] md:text-[0.75vw] md:font-semibold">Action</span>
                                 <span class="rounded-lg bg-secondary p-2 px-3 text-xs md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.4vw] md:text-[0.75vw] md:font-semibold">Echhi</span>
                             </anime-genres>
-                            {% component_block "scroll_area" _="on change(synopsis) put synopsis into <div/> in me" scroll_area_class="text-xs font-medium leading-4  text-surface-200 md:text-[0.85vw] md:leading-[1.1vw]" parent_class="max-h-16 md:max-h-[6vw] md:mt-[0.5vw]" offset_scrollbar="pr-3  md:pr-[0.75vw]" %}
-                            {% endcomponent_block %}
+                            <anime-synopsis _="on change(synopsis) put synopsis into <div/> in me">
+                                {% component_block "scroll_area" scroll_area_class="text-xs font-medium leading-4  text-surface-200 md:text-[0.85vw] md:leading-[1.1vw]" parent_class="max-h-16 md:max-h-[6vw] md:mt-[0.5vw]" offset_scrollbar="pr-3  md:pr-[0.75vw]" %}
+                                {% endcomponent_block %}
+                            </anime-synopsis>
                             <options class="mb-2 mt-5 flex gap-3 md:mb-0 md:mt-[1.5vw] md:gap-[1vw]">
                                 <button class="btn btn-warning flex h-14 w-24 justify-center gap-1 rounded-xl text-base text-secondary font-bold md:h-[3.125vw] md:w-[5.4375vw] md:rounded-[0.625vw] md:text-[0.875vw] md:gap-[0.5vw]">
                                     <svg class="w-4 text-surface-900 md:w-[1vw]" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
