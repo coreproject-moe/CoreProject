@@ -113,7 +113,7 @@ django-extensions = "^3.2.3"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.4.3"
-pytest-django = "^4.5.2"
+pytest-django = "^4.6.0"
 
 [tool.poe.tasks]
 dev = 'python ./django_core/manage.py runserver 127.0.0.1:9000'
