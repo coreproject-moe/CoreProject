@@ -3,6 +3,10 @@
 
 {% block head %}
     {% component_css_dependencies %}
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
     <title>AnimeCore</title>
 {% endblock %}
 
@@ -192,5 +196,17 @@
 {% endblock %}
 
 {%block js %}
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     {% component_js_dependencies %}
+    <script>
+        const swiper = new Swiper('.swiper', {
+          loop: true,
+
+          // Navigation arrows
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+        });
+    </script>
 {%endblock%}

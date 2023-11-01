@@ -3,9 +3,22 @@
         <home-container class="mt-16 block md:mt-0 md:p-[1.25vw] md:pr-[3.75vw]">
             <hero-section class="flex flex-col justify-between md:flex-row">
                 <latest-animes-slider class="relative h-96 w-full md:h-[27.875vw] md:w-[42.1875vw]">
+                    <div class="swiper">
+                      <!-- Additional required wrapper -->
+                      <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide">Slide 1</div>
+                        <div class="swiper-slide">Slide 2</div>
+                        <div class="swiper-slide">Slide 3</div>
+                        ...
+                      </div>
+                      <!-- If we need navigation buttons -->
+                      <div class="swiper-button-prev"></div>
+                      <div class="swiper-button-next"></div>
+                    </div>
                     <anime-slide
                         id="anime_slider"
-                        class="absolute inset-0 md:bottom-[2vw]"
+                        class="absolute inset-0 md:bottom-[2vw] hidden"
                     >
                         <backdrop class="absolute inset-0 bg-transparent duration-300 z-10 pointer-events-none md:rounded-t-[0.875vw]"></backdrop>
                         <img
