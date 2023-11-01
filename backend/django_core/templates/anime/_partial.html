@@ -6,107 +6,37 @@
                     <anime-slide
                         id="anime_slider"
                         class="absolute inset-0 md:bottom-[2vw]"
-                        _="
-                           on hyperscript:slide
-                           add .backdrop-blur-sm to <backdrop/> in me
-                           then wait 300ms
-                           js(slide_index)
-                           const anime = (arr => {
-                           const len = arr == null ? 0 : arr.length;
-                           return len ? arr[slide_index] : undefined;
-                           })({{ latest_animes }})
-                           return anime;
-                           end
-                           send change(anime_name:it.name) to <anime-name/> in me
-                           send change(image:it.image) to <img/> in me
-                           send change(anime_type:it.type) to <anime-type/> in me
-                           send change(anime_eps:it.episodes) to <anime-eps/> in me
-                           send change(status:it.status) to <anime-status/> in me
-                           send change(release_date:it.release_date) to <anime-date/> in me
-                           send change(anime_studio:it.studio) to <anime-studio/> in me
-                           send change(synopsis:it.synopsis) to <anime-synopsis/> in me
-
-                           send hyperscript:slider_change to .slider-brick
-                           then remove .backdrop-blur-sm from <backdrop/> in me
-
-                           on hyperscript:slide_left
-                           if slide_index - 1 is equal to -1
-                           set global slide_index to {{ latest_animes }}.length - 1
-                           else
-                           decrement global slide_index by 1
-                           end
-                           send hyperscript:slide to me
-                           end
-
-                           on hyperscript:slide_right
-                           if slide_index + 1 is equal to {{ latest_animes }}.length
-                           set global slide_index to 0
-                           else
-                           increment global slide_index by 1
-                           end
-                           send hyperscript:slide to me
-                           end
-
-                           init
-                           set global slide_index to 0
-                           send hyperscript:slide to me
-                           repeat forever
-                           send hyperscript:slide_right to me
-                           then wait 10s
-                           end
-                          "
                     >
                         <backdrop class="absolute inset-0 bg-transparent duration-300 z-10 pointer-events-none md:rounded-t-[0.875vw]"></backdrop>
                         <img
-                            _="on change(image) set @src to image" src=""
                             loading="lazy"
                             class="absolute h-full w-full object-cover object-center md:rounded-t-[0.875vw]"
                         />
                         <gradient-overlay class="absolute inset-0 bg-gradient-to-t from-secondary/90 to-secondary/50 md:to-surface-900/25"></gradient-overlay>
                         <gradient-overlay class="absolute inset-0 hidden bg-gradient-to-r from-surface-900 to-surface-900/25 md:flex md:from-surface-900/50"></gradient-overlay>
                         <anime-details class="absolute bottom-7 left-7 flex flex-col md:bottom-0 md:left-0 md:px-[3.75vw] md:py-[2.625vw] z-20">
-                            <anime-name
-                                _="on change(anime_name) put anime_name into me"
-                                class="text-white text-3xl font-bold md:text-[2vw] md:leading-[2.375vw]"
-                            ></anime-name>
+                            <anime-name class="text-white text-3xl font-bold md:text-[2vw] md:leading-[2.375vw]"></anime-name>
                             <japanese-name class="text-base font-semibold text-white/90 md:hidden md:text-[2vw] md:leading-[2.375vw]"> Sorcery Fight </japanese-name>
                             <anime-infos class="flex flex-wrap items-center gap-2 pt-4 text-xs font-semibold text-white/90 md:gap-[0.65vw] md:pt-[0.5vw] md:text-[0.9375vw]">
-                                <anime-type
-                                    _="on change(anime_type) put anime_type into me"
-                                    class="leading-[1.125vw]"
-                                ></anime-type>
+                                <anime-type class="leading-[1.125vw]"></anime-type>
                                 {% include "icons/dot.html" with class="w-1 opacity-75 md:w-[0.25vw]" %}
-                                <anime-eps
-                                    _="on change(anime_eps) put anime_eps into <span/> in me"
-                                    class="leading-[1.125vw]"
-                                >
+                                <anime-eps class="leading-[1.125vw]">
                                     <span></span> eps
                                 </anime-eps>
                                 {% include "icons/dot.html" with class="w-1 opacity-75 md:w-[0.25vw]" %}
-                                <anime-status
-                                    _="on change(status) put status into me"
-                                    class="leading-[1.125vw]"
-                                ></anime-status>
+                                <anime-status class="leading-[1.125vw]"></anime-status>
                                 {% include "icons/dot.html" with class="w-1 opacity-75 md:w-[0.25vw]" %}
-                                <anime-date
-                                    _="on change(release_date) put release_date into me"
-                                    class="capitalize leading-[1.125vw]"
-                                ></anime-date>
+                                <anime-date class="capitalize leading-[1.125vw]"></anime-date>
                                 {% include "icons/dot.html" with class="w-1 opacity-75 md:w-[0.25vw]" %}
-                                <anime-studio
-                                    _="on change(anime_studio) put anime_studio into me"
-                                    class="leading-[1.125vw] uppercase"
-                                ></anime-studio>
+                                <anime-studio class="leading-[1.125vw] uppercase"></anime-studio>
                             </anime-infos>
                             <anime-genres class="flex gap-2 pb-2 pt-3 md:gap-[0.5vw] md:pt-[0.5vw]">
                                 <span class="rounded-lg bg-secondary p-2 px-3 text-xs md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.4vw] md:text-[0.75vw] md:font-semibold">Sic-Fic</span>
                                 <span class="rounded-lg bg-secondary p-2 px-3 text-xs md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.4vw] md:text-[0.75vw] md:font-semibold">Action</span>
                                 <span class="rounded-lg bg-secondary p-2 px-3 text-xs md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.4vw] md:text-[0.75vw] md:font-semibold">Echhi</span>
                             </anime-genres>
-                            <anime-synopsis _="on change(synopsis) put synopsis into <div/> in me">
-                                {% component_block "scroll_area" scroll_area_class="text-xs font-medium leading-4  text-surface-200 md:text-[0.85vw] md:leading-[1.1vw]" parent_class="max-h-16 md:max-h-[6vw] md:mt-[0.5vw]" offset_scrollbar="pr-3  md:pr-[0.75vw]" %}
-                                {% endcomponent_block %}
-                            </anime-synopsis>
+                            {% component_block "scroll_area" scroll_area_class="text-xs font-medium leading-4  text-surface-200 md:text-[0.85vw] md:leading-[1.1vw]" parent_class="max-h-16 md:max-h-[6vw] md:mt-[0.5vw]" offset_scrollbar="pr-3  md:pr-[0.75vw]" %}
+                            {% endcomponent_block %}
                             <options class="mb-2 mt-5 flex gap-3 md:mb-0 md:mt-[1.5vw] md:gap-[1vw]">
                                 <button class="btn btn-warning flex h-14 w-24 justify-center gap-1 rounded-xl text-base text-secondary font-bold md:h-[3.125vw] md:w-[5.4375vw] md:rounded-[0.625vw] md:text-[0.875vw] md:gap-[0.5vw]">
                                     <svg class="w-4 text-surface-900 md:w-[1vw]" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -137,35 +67,16 @@
                         <progress-bar class="h-[0.2rem] md:h-[0.145vw] bg-warning" style="width: 94%"></progress-bar>
                         <animes-boxes class="hidden w-full grid-cols-6 gap-[0.9375vw] md:mt-[1.25vw] md:grid">
                             {% for _ in latest_animes %}
-                                <button
-                                    _="
-                                       on hyperscript:slider_change
-                                       if slide_index is equal to {{ forloop.counter0 }}
-                                       add .bg-warning to me
-                                       else
-                                       remove .bg-warning from me
-                                       end
-
-                                       on click
-                                       set global slide_index to {{ forloop.counter }}
-                                       send hyperscript:slide_left to #anime_slider
-                                       send hyperscript:slider_change to me
-                                       end
-                                      "
-                                    class="slider-brick col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-secondary-300 transition duration-300 hover:border-surface-50/50"
+                                <button class="slider-brick col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-secondary-300 transition duration-300 hover:border-surface-50/50"
                                 ></button>
                             {% endfor %}
                         </animes-boxes>
                     </slide-progress>
-                    <button
-                        _="on click send hyperscript:slide_left to #anime_slider"
-                        class="btn btn-primary p-0 absolute -left-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] md:flex"
+                    <button class="btn btn-primary p-0 absolute -left-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] md:flex"
                     >
                         {% include "icons/chevron.html" with class="w-[1.25vw] rotate-90" %}
                     </button>
-                    <button
-                        _="on click send hyperscript:slide_right to #anime_slider"
-                        class="btn btn-primary p-0 absolute -right-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] bg-secondary-800 md:flex"
+                    <button class="btn btn-primary p-0 absolute -right-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] bg-secondary-800 md:flex"
                     >
                         {% include "icons/chevron.html" with class="w-[1.25vw] -rotate-90" %}
                     </button>
