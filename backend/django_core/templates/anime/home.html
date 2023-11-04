@@ -197,7 +197,22 @@
     {% component_js_dependencies %}
     <script type="module">
         (async() => {
+            if(!navigator.onLine) return;
             await import("{% static 'vendor/js/swiper/swiper-element.min.js' %}");
+
+            const swiper_el = document.querySelector("swiper-container");
+            const swipe_left_btn = document.querySelector("#swipe-left-btn");
+            const swipe_right_btn = document.querySelector("#swipe-right-btn");
+            
+            swipe_right_btn.addEventListener("click", () => {
+                swiper_el.swiper.loopFix();
+                swiper_el.swiper.slideNext();
+            });
+
+            swipe_left_btn.addEventListener("click", () => {
+                swiper_el.swiper.loopFix();
+                swiper_el.swiper.slidePrev();
+            });
         })();
     </script>
 {% endblock %}
