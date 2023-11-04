@@ -1,4 +1,5 @@
 {% extends 'tailwind_base.html' %}
+{% load static %}
 
 
 {% block head %}
@@ -193,6 +194,7 @@
 
 {%block js %}
     {% component_js_dependencies %}
+    <script src="{% static 'vendor/js/swiper/swiper.min.js' %}"></script>
     <script>
         const swiper = new Swiper('.swiper', {
             loop: true,
