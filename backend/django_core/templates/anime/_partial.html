@@ -39,9 +39,11 @@
                                             </span>
                                         </anime-infos>
                                         <anime-genres class="flex gap-2 pb-2 pt-3 md:gap-[0.5vw] md:pt-[0.5vw]">
-                                            <span class="rounded-lg bg-secondary p-2 px-3 text-xs md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.4vw] md:text-[0.75vw] md:font-semibold">Sic-Fic</span>
-                                            <span class="rounded-lg bg-secondary p-2 px-3 text-xs md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.4vw] md:text-[0.75vw] md:font-semibold">Action</span>
-                                            <span class="rounded-lg bg-secondary p-2 px-3 text-xs md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.4vw] md:text-[0.75vw] md:font-semibold">Echhi</span>
+                                            {% for genre in anime.genres %}
+                                                <span class="rounded-lg bg-secondary p-2 px-3 text-xs md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.4vw] md:text-[0.75vw] md:font-semibold capitalize">
+                                                    {{ genre }}
+                                                </span>
+                                            {% endfor %}
                                         </anime-genres>
                                         {% component_block "scroll_area" scroll_area_class="text-xs font-medium leading-4  text-surface-200 md:text-[0.85vw] md:leading-[1.1vw]" parent_class="max-h-16 md:max-h-[6vw] md:mt-[0.5vw]" offset_scrollbar="pr-3  md:pr-[0.75vw]" %}
                                             {{ anime.synopsis }}
