@@ -195,5 +195,9 @@
 
 {% block js %}
     {% component_js_dependencies %}
-    <script src="{% static 'vendor/js/swiper/swiper-element.min.js' %}"></script>
+    <script type="module">
+        (async() => {
+            await import("{% static 'vendor/js/swiper/swiper-element.min.js' %}");
+        })();
+    </script>
 {% endblock %}
