@@ -4,6 +4,7 @@
 
 {% block head %}
     {% component_css_dependencies %}
+    <link rel="stylesheet" href="{% static 'vendor/css/swiper/swiper.min.css'%}"></link>
     <title>AnimeCore</title>
 {% endblock %}
 
@@ -198,12 +199,17 @@
         import Swiper from "{% static 'vendor/js/swiper/swiper.js' %}";
         const swiper = new Swiper('.swiper', {
             loop: true,
+            effect: 'fade',
 
-          // Navigation arrows
+            // Navigation arrows
             navigation: {
                 nextEl: '.swiper-button-next',
                 prevEl: '.swiper-button-prev',
             },
+
+            injectStylesUrls: [
+                "{% static 'vendor/css/swiper/effect-fade.min.css' %}",
+            ],
         });
     </script>
 {% endblock %}
