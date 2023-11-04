@@ -195,24 +195,5 @@
 
 {% block js %}
     {% component_js_dependencies %}
-    <script type="module">
-        import Swiper from "{% static 'vendor/js/swiper/swiper.js' %}";
-        const swiper = new Swiper('.swiper', {
-            loop: true,
-            effect: 'fade',
-            fadeEffect: {
-                crossFade: true
-            },
-
-            // Navigation arrows
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-
-            injectStylesUrls: [
-                "{% static 'vendor/css/swiper/effect-fade.min.css' %}",
-            ],
-        });
-    </script>
+    <script src="{% static 'vendor/js/swiper/swiper-element.min.js' %}"></script>
 {% endblock %}
