@@ -5,9 +5,9 @@
                 <latest-animes-slider class="relative h-96 w-full md:h-[27.875vw] md:w-[42.1875vw]">
                     <div class="swiper w-full h-full">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide">Slide 1</div>
-                            <div class="swiper-slide">Slide 2</div>
-                            <div class="swiper-slide">Slide 3</div>
+                            {% for anime in latest_animes %}
+                                <div class="swiper-slide">Slide {{ forloop.counter }}</div>
+                            {% endfor %}
                         </div>
                     </div>
                     <slide-progress class="absolute bottom-0 flex w-full flex-col z-20">
