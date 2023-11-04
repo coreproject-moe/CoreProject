@@ -194,19 +194,16 @@
 
 {% block js %}
     {% component_js_dependencies %}
-    <script src="{% static 'vendor/js/swiper/swiper.min.js' %}"></script>
     <script type="module">
-        (async() => {
-            if(!navigator.onLine) return;
-            const swiper = new Swiper('.swiper', {
-                loop: true,
+        import Swiper from "{% static 'vendor/js/swiper/swiper.min.js' %}";
+        const swiper = new Swiper('.swiper', {
+            loop: true,
 
-              // Navigation arrows
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-            });
-        })();
+          // Navigation arrows
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+        });
     </script>
 {% endblock %}
