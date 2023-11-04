@@ -2,7 +2,7 @@
     <div class="h-full">
         <home-container class="mt-16 block md:mt-0 md:p-[1.25vw] md:pr-[3.75vw]">
             <hero-section class="flex flex-col justify-between md:flex-row">
-                <latest-animes-slider class="relative h-96 w-full md:h-[27.875vw] md:w-[42.1875vw]">
+                <latest-animes-slider class="relative h-96 w-full md:h-[26vw] md:w-[42vw]">
                     <div class="swiper w-full h-full">
                         <div class="swiper-wrapper">
                             {% for anime in latest_animes %}
@@ -83,7 +83,7 @@
                             {% endfor %}
                         </div>
                     </div>
-                    <slide-progress class="absolute bottom-0 flex w-full flex-col z-20">
+                    <slide-progress class="flex w-full flex-col">
                         <progress-bar class="h-[0.2rem] md:h-[0.145vw] bg-warning" style="width: 94%"></progress-bar>
                         <animes-boxes class="hidden w-full grid-cols-6 gap-[0.9375vw] md:mt-[1.25vw] md:grid">
                             {% for _ in latest_animes %}
