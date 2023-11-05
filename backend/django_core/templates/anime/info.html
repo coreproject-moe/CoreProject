@@ -20,11 +20,11 @@
                         <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
                             <div>
                                 <div class="max-h-48 md:max-h-[10vw]">
-                                    <anime-name class="text-2xl font-bold md:text-[2vw] md:leading-[2.7vw]">Your Lie in April</anime-name>
+                                    <anime-name class="text-2xl font-bold md:text-[2vw] md:leading-[2.7vw] text-white">Your Lie in April</anime-name>
                                 </div>
                             </div>
                         </scroll-area>
-                        <anime-japanese-name class="flex flex-wrap gap-x-2 pt-2 text-xs font-semibold uppercase tracking-wider text-surface-50 md:gap-x-[0.25vw] md:pt-[0.625vw] md:text-[0.75vw] md:leading-[0.9vw]">四月は君の嘘</anime-japanese-name>
+                        <anime-japanese-name class="flex flex-wrap gap-x-2 pt-2 text-xs font-semibold uppercase tracking-wider md:gap-x-[0.25vw] md:pt-[0.625vw] md:text-[0.75vw] md:leading-[0.9vw]">四月は君の嘘</anime-japanese-name>
                         <anime-other-infos class="mt-1 flex flex-wrap items-center gap-2 text-xs font-semibold md:mt-[0.25vw] md:gap-[0.5vw] md:pt-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
                             <span>TV</span>
                             {% include "icons/dot.html" with class="w-[0.35rem] opacity-75" %}
@@ -37,30 +37,24 @@
                             <span class="uppercase tracking-wider">Kuschio animation</span>
                         </anime-other-infos>
                         <watch-options class="mt-3 flex items-center gap-3 md:mt-[1.5vw] md:gap-[0.75vw]">
-                            <button type="button" class="btn h-14 w-[6.5rem] rounded-lg bg-primary-500 font-bold text-white md:h-[4.3vw] md:w-[7vw] md:rounded-[0.625vw]">
+                            <button type="button" class="btn btn-primary h-14 w-[6.5rem] rounded-lg font-bold text-white md:h-[4vw] md:w-[7vw] md:rounded-[0.625vw]">
                                 <div class="flex gap-3 md:gap-[0.7vw]">
                                     {% include "icons/play.html" with class="w-5 md:w-[1.5vw]" %}
                                     <div class="flex flex-col items-start gap-1">
-                                        <span class="text-sm leading-none md:text-[0.87vw]">Watch</span>
-                                        <span class="text-xs font-bold leading-none text-surface-50 md:text-[0.625vw]">Ep 01</span>
+                                        <span class="text-sm leading-none md:text-[0.9vw]">Watch</span>
+                                        <span class="text-xs font-semibold leading-none text-surface-50 md:text-[0.75vw]">Ep 01</span>
                                     </div>
                                 </div>
                             </button>
-                            <button type="button" class="btn h-14 w-14 rounded-lg bg-secondary-100 capitalize text-surface-500 md:h-[4.3vw] md:w-[4.3vw] md:rounded-[0.625vw] md:text-[0.87vw] md:font-semibold" disabled>
+                            <button type="button" class="btn h-14 w-14 rounded-lg bg-secondary-100 capitalize text-surface-500 md:h-[4vw] md:w-[4vw] md:rounded-[0.625vw] md:text-[0.87vw] md:font-semibold" disabled>
                                 <div class="flex flex-col items-center gap-2 md:gap-[0.68vw]">
-                                    <svg class="w-4 md:w-[1.5vw] text-surface-500" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M2.5 3.75H10C11.3261 3.75 12.5979 4.27678 13.5355 5.21447C14.4732 6.15215 15 7.42392 15 8.75V26.25C15 25.2554 14.6049 24.3016 13.9017 23.5983C13.1984 22.8951 12.2446 22.5 11.25 22.5H2.5V3.75Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        <path d="M27.5 3.75H20C18.6739 3.75 17.4021 4.27678 16.4645 5.21447C15.5268 6.15215 15 7.42392 15 8.75V26.25C15 25.2554 15.3951 24.3016 16.0983 23.5983C16.8016 22.8951 17.7554 22.5 18.75 22.5H27.5V3.75Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
+                                    {% include "icons/book.html" with class="w-4 md:w-[1.5vw] text-surface-500" %}
                                     <span class="leading-none">read</span>
                                 </div>
                             </button>
-                            <button type="button" class="btn h-14 w-14 rounded-lg bg-secondary-100 capitalize text-surface-500 md:h-[4.3vw] md:w-[4.3vw] md:rounded-[0.625vw] md:text-[0.87vw] md:font-semibold" disabled>
+                            <button type="button" class="btn h-14 w-14 rounded-lg bg-secondary-100 capitalize text-surface-500 md:h-[4vw] md:w-[4vw] md:rounded-[0.625vw] md:text-[0.87vw] md:font-semibold" disabled>
                                 <div class="flex flex-col items-center gap-2 md:gap-[0.68vw]">
-                                    <svg class="w-4 md:w-[1.5vw] text-surface-500" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M3.75 22.5V15C3.75 12.0163 4.93526 9.15483 7.04505 7.04505C9.15483 4.93526 12.0163 3.75 15 3.75C17.9837 3.75 20.8452 4.93526 22.955 7.04505C25.0647 9.15483 26.25 12.0163 26.25 15V22.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        <path d="M26.25 23.75C26.25 24.413 25.9866 25.0489 25.5178 25.5178C25.0489 25.9866 24.413 26.25 23.75 26.25H22.5C21.837 26.25 21.2011 25.9866 20.7322 25.5178C20.2634 25.0489 20 24.413 20 23.75V20C20 19.337 20.2634 18.7011 20.7322 18.2322C21.2011 17.7634 21.837 17.5 22.5 17.5H26.25V23.75ZM3.75 23.75C3.75 24.413 4.01339 25.0489 4.48223 25.5178C4.95107 25.9866 5.58696 26.25 6.25 26.25H7.5C8.16304 26.25 8.79893 25.9866 9.26777 25.5178C9.73661 25.0489 10 24.413 10 23.75V20C10 19.337 9.73661 18.7011 9.26777 18.2322C8.79893 17.7634 8.16304 17.5 7.5 17.5H3.75V23.75Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
+                                    {% include "icons/headphone.html" with class="w-4 md:w-[1.5vw] text-surface-500" %}
                                     <span class="leading-none">listen</span>
                                 </div>
                             </button>
