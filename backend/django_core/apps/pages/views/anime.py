@@ -24,9 +24,9 @@ async def anime_home_view(request: "HtmxHttpRequest") -> HttpResponse:
     )
 
 
-
 async def anime_info_view(request: "HtmxHttpRequest", pk: int) -> HttpResponse:
     return render(request, "anime/home.html", context={})
+
 
 async def anime_explore_view(request: "HtmxHttpRequest") -> HttpResponse:
     if request.htmx:
@@ -37,4 +37,3 @@ async def anime_explore_view(request: "HtmxHttpRequest") -> HttpResponse:
         "anime/_layout.html",
         context={"icons": icons},
     )
-

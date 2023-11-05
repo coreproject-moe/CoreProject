@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views.anime import anime_explore_view, anime_home_view
+from .views.anime import anime_home_view
 from .views.stack import stack_view
 from .views.user import login_view, logout_view, register_view, reset_password_view
 
