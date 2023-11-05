@@ -11,14 +11,30 @@ if TYPE_CHECKING:
 
 async def anime_home_view(request: "HtmxHttpRequest") -> HttpResponse:
     if request.htmx:
-        return render(request, "anime/_partial.html")
+        return render(
+            request,
+            "anime/_partial_home.html",
+            context={"latest_animes": latest_animes},
+        )
 
     return render(
         request,
-        "anime/home.html",
+        "anime/_layout.html",
         context={"icons": icons, "latest_animes": latest_animes},
     )
 
 
+
 async def anime_info_view(request: "HtmxHttpRequest", pk: int) -> HttpResponse:
     return render(request, "anime/home.html", context={})
+
+async def anime_explore_view(request: "HtmxHttpRequest") -> HttpResponse:
+    if request.htmx:
+        return render(request, "anime/_partial_explore.html")
+
+    return render(
+        request,
+        "anime/_layout.html",
+        context={"icons": icons},
+    )
+
