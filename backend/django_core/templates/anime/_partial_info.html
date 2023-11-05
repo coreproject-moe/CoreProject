@@ -1,1 +1,1399 @@
-<h1>Anime Info page</h1>
+<anime-info-container class="relative mt-16 block h-screen bg-cover md:mt-0">
+    <gradient-overlay class="gradient absolute inset-0 bg-gradient-to-t from-surface-900 to-surface-900/50"></gradient-overlay>
+    <anime-info-section class="absolute inset-0 grid grid-cols-12 items-start p-5 pt-10 md:p-[5vw]">
+        <anime-info-episodes class="col-span-12 md:col-span-10 md:pr-[4vw]">
+            <anime-main-infos class="grid grid-cols-12 items-end justify-between">
+                <anime-titles class="relative col-span-12 grid grid-cols-12 gap-5 md:col-span-7 md:flex md:w-full md:items-end md:gap-[2vw] md:pr-[2vw]">
+                    <anime-banner class="relative col-span-12 h-96 md:h-[18.25vw] md:w-[13vw] md:flex-shrink-0">
+                        <radial-gradient class="pointer-events-none absolute inset-0 z-10 h-[150%] w-[125%] -translate-x-8 -translate-y-28 [background-image:radial-gradient(circle_at_center,rgba(255,255,255,0.1)0%,transparent_100%)] [mask-image:linear-gradient(to_bottom,rgba(7,5,25,0.95)80%,rgba(0,0,0,0)100%)] md:hidden"></radial-gradient>
+                        <div class="h-full w-full rounded-xl object-cover object-center md:rounded-[1vw]">
+                            <div class="h-full w-full rounded-xl object-cover object-center md:rounded-[1vw] placeholder animate-pulse !bg-surface-400"></div>
+                        </div>
+                        <overlay-gradient class="gradient absolute inset-0 bg-gradient-to-t from-surface-900/75 to-surface-900/25 md:hidden"></overlay-gradient>
+                    </anime-banner>
+                    <anime-details class="absolute bottom-0 col-span-12 p-5 md:static md:p-0">
+                        <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                            <div>
+                                <div class="max-h-48 md:max-h-[10vw]">
+                                    <anime-name class="text-2xl font-bold md:text-[2vw] md:leading-[2.7vw]">Your Lie in April</anime-name>
+                                </div>
+                            </div>
+                        </scroll-area>
+                        <anime-japanese-name class="flex flex-wrap gap-x-2 pt-2 text-xs font-semibold uppercase tracking-wider text-surface-50 md:gap-x-[0.25vw] md:pt-[0.625vw] md:text-[0.75vw] md:leading-[0.9vw]">四月は君の嘘</anime-japanese-name>
+                        <anime-other-infos class="mt-1 flex flex-wrap items-center gap-2 text-xs font-semibold md:mt-[0.25vw] md:gap-[0.5vw] md:pt-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
+                            <span data-svelte-h="svelte-u9rmgs">TV</span>
+                            <svg class="w-[0.35rem] opacity-50" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
+                            </svg>
+                            <span>9 eps</span>
+                            <svg class="w-[0.35rem] opacity-50" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
+                            </svg>
+                            <span data-svelte-h="svelte-3p0uht">Completed</span>
+                            <svg class="w-[0.35rem] opacity-50" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
+                            </svg>
+                            <span class="capitalize">spring 2023</span>
+                            <svg class="w-[0.35rem] opacity-50" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
+                            </svg>
+                            <span class="uppercase tracking-wider" data-svelte-h="svelte-39rb5w">Kuschio animation</span>
+                        </anime-other-infos>
+                        <watch-options class="mt-3 flex items-center gap-3 md:mt-[1.5vw] md:gap-[0.75vw]">
+                            <button type="button" class="btn h-14 w-[6.5rem] rounded-lg bg-primary-500 font-bold text-white md:h-[4.3vw] md:w-[7vw] md:rounded-[0.625vw]">
+                                <div class="flex gap-3 md:gap-[0.7vw]">
+                                    <svg class="w-5 md:w-[1.5vw]" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12.9615 7.89235C13.1685 7.73214 13.3361 7.52665 13.4513 7.29164C13.5666 7.05663 13.6266 6.79834 13.6266 6.53658C13.6266 6.27482 13.5666 6.01653 13.4513 5.78152C13.3361 5.54651 13.1685 5.34102 12.9615 5.18081C10.2808 3.10657 7.28748 1.47165 4.09351 0.337231L3.50952 0.129752C2.39342 -0.266427 1.21383 0.488369 1.06269 1.64113C0.640479 4.89111 0.640479 8.18205 1.06269 11.432C1.21473 12.5848 2.39342 13.3396 3.50952 12.9434L4.09351 12.7359C7.28748 11.6015 10.2808 9.96659 12.9615 7.89235Z" fill="currentColor"></path>
+                                    </svg>
+                                    <div class="flex flex-col items-start gap-1" data-svelte-h="svelte-15n7j5p">
+                                        <span class="text-sm leading-none md:text-[0.87vw]">Watch</span>
+                                        <span class="text-xs font-bold leading-none text-surface-50 md:text-[0.625vw]">Ep 01</span>
+                                    </div>
+                                </div>
+                            </button>
+                            <button type="button" class="btn h-14 w-14 rounded-lg bg-secondary-100 capitalize text-surface-500 md:h-[4.3vw] md:w-[4.3vw] md:rounded-[0.625vw] md:text-[0.87vw] md:font-semibold" disabled>
+                                <div class="flex flex-col items-center gap-2 md:gap-[0.68vw]">
+                                    <svg class="w-4 md:w-[1.5vw] text-surface-500" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2.5 3.75H10C11.3261 3.75 12.5979 4.27678 13.5355 5.21447C14.4732 6.15215 15 7.42392 15 8.75V26.25C15 25.2554 14.6049 24.3016 13.9017 23.5983C13.1984 22.8951 12.2446 22.5 11.25 22.5H2.5V3.75Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M27.5 3.75H20C18.6739 3.75 17.4021 4.27678 16.4645 5.21447C15.5268 6.15215 15 7.42392 15 8.75V26.25C15 25.2554 15.3951 24.3016 16.0983 23.5983C16.8016 22.8951 17.7554 22.5 18.75 22.5H27.5V3.75Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                    <span class="leading-none">read</span>
+                                </div>
+                            </button>
+                            <button type="button" class="btn h-14 w-14 rounded-lg bg-secondary-100 capitalize text-surface-500 md:h-[4.3vw] md:w-[4.3vw] md:rounded-[0.625vw] md:text-[0.87vw] md:font-semibold" disabled>
+                                <div class="flex flex-col items-center gap-2 md:gap-[0.68vw]">
+                                    <svg class="w-4 md:w-[1.5vw] text-surface-500" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3.75 22.5V15C3.75 12.0163 4.93526 9.15483 7.04505 7.04505C9.15483 4.93526 12.0163 3.75 15 3.75C17.9837 3.75 20.8452 4.93526 22.955 7.04505C25.0647 9.15483 26.25 12.0163 26.25 15V22.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M26.25 23.75C26.25 24.413 25.9866 25.0489 25.5178 25.5178C25.0489 25.9866 24.413 26.25 23.75 26.25H22.5C21.837 26.25 21.2011 25.9866 20.7322 25.5178C20.2634 25.0489 20 24.413 20 23.75V20C20 19.337 20.2634 18.7011 20.7322 18.2322C21.2011 17.7634 21.837 17.5 22.5 17.5H26.25V23.75ZM3.75 23.75C3.75 24.413 4.01339 25.0489 4.48223 25.5178C4.95107 25.9866 5.58696 26.25 6.25 26.25H7.5C8.16304 26.25 8.79893 25.9866 9.26777 25.5178C9.73661 25.0489 10 24.413 10 23.75V20C10 19.337 9.73661 18.7011 9.26777 18.2322C8.79893 17.7634 8.16304 17.5 7.5 17.5H3.75V23.75Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                    <span class="leading-none">listen</span>
+                                </div>
+                            </button>
+                        </watch-options>
+                        <user-options class="mt-3 flex gap-2 md:mt-[0.75vw] md:gap-[0.75vw]">
+                            <button type="button" aria-label="video" class="btn btn-icon w-7 rounded bg-warning-400 p-0 text-surface-500 md:w-[1.875vw] md:rounded-[0.25vw]">
+                                <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 md:w-[1.125vw]" variant="false">
+                                    <g clip-path="url(#clip0_1917_2470)">
+                                        <path d="M17.25 5.25L12 9L17.25 12.75V5.25Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M10.5 3.75H2.25C1.42157 3.75 0.75 4.42157 0.75 5.25V12.75C0.75 13.5784 1.42157 14.25 2.25 14.25H10.5C11.3284 14.25 12 13.5784 12 12.75V5.25C12 4.42157 11.3284 3.75 10.5 3.75Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_1917_2470">
+                                            <rect width="18" height="18" fill="white"></rect>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </button>
+                            <button type="button" aria-label="edit" class="btn btn-icon w-7 rounded bg-warning-400 p-0 text-surface-500 md:w-[1.875vw] md:rounded-[0.25vw]">
+                                <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 md:w-[1.125vw]">
+                                    <path d="M9 15H15.75" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M12.375 2.62517C12.6734 2.3268 13.078 2.15918 13.5 2.15918C13.7089 2.15918 13.9158 2.20033 14.1088 2.28029C14.3019 2.36024 14.4773 2.47743 14.625 2.62517C14.7727 2.77291 14.8899 2.9483 14.9699 3.14132C15.0498 3.33435 15.091 3.54124 15.091 3.75017C15.091 3.9591 15.0498 4.16599 14.9699 4.35902C14.8899 4.55204 14.7727 4.72743 14.625 4.87517L5.25 14.2502L2.25 15.0002L3 12.0002L12.375 2.62517Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </button>
+                            <button type="button" aria-label="download" class="btn btn-icon w-7 rounded bg-warning-400 p-0 text-surface-500 md:w-[1.875vw] md:rounded-[0.25vw]">
+                                <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 md:w-[1.125vw]">
+                                    <path d="M15.75 11.25V14.25C15.75 14.6478 15.592 15.0294 15.3107 15.3107C15.0294 15.592 14.6478 15.75 14.25 15.75H3.75C3.35218 15.75 2.97064 15.592 2.68934 15.3107C2.40804 15.0294 2.25 14.6478 2.25 14.25V11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M5.25 7.5L9 11.25L12.75 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M9 11.25V2.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </button>
+                            <button type="button" aria-label="share" class="btn btn-icon w-7 rounded bg-warning-400 p-0 text-surface-500 md:w-[1.875vw] md:rounded-[0.25vw]">
+                                <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 md:w-[1.125vw]">
+                                    <path d="M13.5 6C14.7426 6 15.75 4.99264 15.75 3.75C15.75 2.50736 14.7426 1.5 13.5 1.5C12.2574 1.5 11.25 2.50736 11.25 3.75C11.25 4.99264 12.2574 6 13.5 6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M4.5 11.25C5.74264 11.25 6.75 10.2426 6.75 9C6.75 7.75736 5.74264 6.75 4.5 6.75C3.25736 6.75 2.25 7.75736 2.25 9C2.25 10.2426 3.25736 11.25 4.5 11.25Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M13.5 16.5C14.7426 16.5 15.75 15.4926 15.75 14.25C15.75 13.0074 14.7426 12 13.5 12C12.2574 12 11.25 13.0074 11.25 14.25C11.25 15.4926 12.2574 16.5 13.5 16.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M6.44238 10.1328L11.5649 13.1178" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M11.5574 4.88281L6.44238 7.86781" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </button>
+                        </user-options>
+                    </anime-details>
+                </anime-titles>
+                <anime-synopsis class="col-span-12 mt-10 md:col-span-5 md:mt-0">
+                    <section-header class="flex gap-[0.75vw]">
+                        <header-title class="text-lg font-semibold md:text-[1.25vw] md:leading-[1.5vw]" data-svelte-h="svelte-7g8xhy">Synopsis</header-title>
+                        <button class="btn btn-icon hidden rounded-[0.1875vw] bg-surface-400 p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
+                            <svg class="w-[0.9vw] opacity-75" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_565_480)">
+                                    <path d="M15 18.75C17.0711 18.75 18.75 17.0711 18.75 15C18.75 12.9289 17.0711 11.25 15 11.25C12.9289 11.25 11.25 12.9289 11.25 15C11.25 17.0711 12.9289 18.75 15 18.75Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M24.25 18.75C24.0836 19.127 24.034 19.5452 24.1075 19.9507C24.181 20.3562 24.3743 20.7304 24.6625 21.025L24.7375 21.1C24.9699 21.3322 25.1543 21.6079 25.2801 21.9114C25.406 22.2149 25.4707 22.5402 25.4707 22.8688C25.4707 23.1973 25.406 23.5226 25.2801 23.8261C25.1543 24.1296 24.9699 24.4053 24.7375 24.6375C24.5053 24.8699 24.2296 25.0543 23.9261 25.1801C23.6226 25.306 23.2973 25.3707 22.9688 25.3707C22.6402 25.3707 22.3149 25.306 22.0114 25.1801C21.7079 25.0543 21.4322 24.8699 21.2 24.6375L21.125 24.5625C20.8304 24.2743 20.4562 24.081 20.0507 24.0075C19.6452 23.934 19.227 23.9836 18.85 24.15C18.4803 24.3085 18.165 24.5716 17.9429 24.9069C17.7208 25.2423 17.6016 25.6353 17.6 26.0375V26.25C17.6 26.913 17.3366 27.5489 16.8678 28.0178C16.3989 28.4866 15.763 28.75 15.1 28.75C14.437 28.75 13.8011 28.4866 13.3322 28.0178C12.8634 27.5489 12.6 26.913 12.6 26.25V26.1375C12.5903 25.7238 12.4564 25.3225 12.2156 24.9859C11.9749 24.6493 11.6384 24.3929 11.25 24.25C10.873 24.0836 10.4548 24.034 10.0493 24.1075C9.64377 24.181 9.2696 24.3743 8.975 24.6625L8.9 24.7375C8.66782 24.9699 8.3921 25.1543 8.0886 25.2801C7.78511 25.406 7.45979 25.4707 7.13125 25.4707C6.80271 25.4707 6.47739 25.406 6.1739 25.2801C5.8704 25.1543 5.59468 24.9699 5.3625 24.7375C5.13006 24.5053 4.94566 24.2296 4.81985 23.9261C4.69404 23.6226 4.62928 23.2973 4.62928 22.9688C4.62928 22.6402 4.69404 22.3149 4.81985 22.0114C4.94566 21.7079 5.13006 21.4322 5.3625 21.2L5.4375 21.125C5.72567 20.8304 5.91898 20.4562 5.99251 20.0507C6.06603 19.6452 6.01639 19.227 5.85 18.85C5.69155 18.4803 5.42844 18.165 5.09308 17.9429C4.75772 17.7208 4.36473 17.6016 3.9625 17.6H3.75C3.08696 17.6 2.45107 17.3366 1.98223 16.8678C1.51339 16.3989 1.25 15.763 1.25 15.1C1.25 14.437 1.51339 13.8011 1.98223 13.3322C2.45107 12.8634 3.08696 12.6 3.75 12.6H3.8625C4.27624 12.5903 4.67751 12.4564 5.01412 12.2156C5.35074 11.9749 5.60714 11.6384 5.75 11.25C5.91639 10.873 5.96603 10.4548 5.89251 10.0493C5.81898 9.64377 5.62567 9.2696 5.3375 8.975L5.2625 8.9C5.03006 8.66782 4.84566 8.3921 4.71985 8.0886C4.59404 7.78511 4.52928 7.45979 4.52928 7.13125C4.52928 6.80271 4.59404 6.47739 4.71985 6.1739C4.84566 5.8704 5.03006 5.59468 5.2625 5.3625C5.49468 5.13006 5.7704 4.94566 6.0739 4.81985C6.37739 4.69404 6.70271 4.62928 7.03125 4.62928C7.35979 4.62928 7.68511 4.69404 7.9886 4.81985C8.2921 4.94566 8.56782 5.13006 8.8 5.3625L8.875 5.4375C9.1696 5.72567 9.54377 5.91898 9.94926 5.99251C10.3548 6.06603 10.773 6.01639 11.15 5.85H11.25C11.6197 5.69155 11.935 5.42844 12.1571 5.09308C12.3792 4.75772 12.4984 4.36473 12.5 3.9625V3.75C12.5 3.08696 12.7634 2.45107 13.2322 1.98223C13.7011 1.51339 14.337 1.25 15 1.25C15.663 1.25 16.2989 1.51339 16.7678 1.98223C17.2366 2.45107 17.5 3.08696 17.5 3.75V3.8625C17.5016 4.26473 17.6208 4.65772 17.8429 4.99308C18.065 5.32844 18.3803 5.59155 18.75 5.75C19.127 5.91639 19.5452 5.96603 19.9507 5.89251C20.3562 5.81898 20.7304 5.62567 21.025 5.3375L21.1 5.2625C21.3322 5.03006 21.6079 4.84566 21.9114 4.71985C22.2149 4.59404 22.5402 4.52928 22.8688 4.52928C23.1973 4.52928 23.5226 4.59404 23.8261 4.71985C24.1296 4.84566 24.4053 5.03006 24.6375 5.2625C24.8699 5.49468 25.0543 5.7704 25.1801 6.0739C25.306 6.37739 25.3707 6.70271 25.3707 7.03125C25.3707 7.35979 25.306 7.68511 25.1801 7.9886C25.0543 8.2921 24.8699 8.56782 24.6375 8.8L24.5625 8.875C24.2743 9.1696 24.081 9.54377 24.0075 9.94926C23.934 10.3548 23.9836 10.773 24.15 11.15V11.25C24.3085 11.6197 24.5716 11.935 24.9069 12.1571C25.2423 12.3792 25.6353 12.4984 26.0375 12.5H26.25C26.913 12.5 27.5489 12.7634 28.0178 13.2322C28.4866 13.7011 28.75 14.337 28.75 15C28.75 15.663 28.4866 16.2989 28.0178 16.7678C27.5489 17.2366 26.913 17.5 26.25 17.5H26.1375C25.7353 17.5016 25.3423 17.6208 25.0069 17.8429C24.6716 18.065 24.4085 18.3803 24.25 18.75V18.75Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_565_480">
+                                        <rect width="30" height="30" fill="currentColor"></rect>
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                        </button>
+                    </section-header>
+                    <scroll-area class="max-h-40 mt-3 md:mt-[1.25vw] md:max-h-[10.25vw] pr-3 md:pr-[0.75vw] block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                        <div>
+                            <div class="text-justify text-xs md:pb-[1.25vw] md:text-[0.8vw] md:leading-[1vw]">Kousei Arima is a child prodigy known as the "Human Metronome" for playing the piano with precision and perfection. Guided by a strict mother and rigorous training, Kousei dominates every competition he enters, earning the admiration of his musical peers and praise from audiences. When his mother suddenly passes away, the subsequent trauma makes him unable to hear the sound of a piano, and he never takes the stage thereafter. Nowadays, Kousei lives a quiet and unassuming life as a junior high school student alongside his friends Tsubaki Sawabe and Ryouta Watari. While struggling to get over his mother's death, he continues to cling to music. His monochrome life turns upside down the day he encounters the eccentric violinist Kaori Miyazono, who thrusts him back into the spotlight as her accompanist. Through a little lie, these two young musicians grow closer together as Kaori tries to fill Kousei's world with color.</div>
+                        </div>
+                    </scroll-area>
+                    <anime-genres class="hidden gap-[0.5vw] text-white md:mt-[1vw] md:flex md:text-[0.75vw] md:leading-[0.9vw]">
+                        <span class="rounded-[0.25vw] bg-warning-400 font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Action </span>
+                        <span class="rounded-[0.25vw] bg-warning-400 font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Romance </span>
+                        <span class="rounded-[0.25vw] bg-warning-400 font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Horror </span>
+                    </anime-genres>
+                    <anime-scores class="hidden w-max gap-[0.75vw] rounded-[0.25vw] bg-surface-50/10 backdrop-blur-lg md:mt-[0.5vw] md:flex md:px-[0.75vw] md:py-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
+                        <score class="flex gap-[0.25vw]" data-svelte-h="svelte-1ujrkk">
+                            <span>Score:</span>
+                            <span class="font-semibold text-warning-400">79</span>
+                        </score>
+                        <status class="flex gap-[0.25vw]">
+                            <span data-svelte-h="svelte-k2z92">Status:</span>
+                            <button class="btn p-0 leading-none md:text-[0.75vw]">
+                                <span class="font-semibold text-warning-400" data-svelte-h="svelte-1uekx12">Watching</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-[0.625vw] text-warning-400" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
+                                </svg>
+                            </button>
+                        </status>
+                        <episodes-count class="flex gap-[0.25vw]">
+                            <span data-svelte-h="svelte-74k8xv">Episode:</span>
+                            <span class="font-semibold text-warning-400">0/9</span>
+                        </episodes-count>
+                        <your-scrore class="flex gap-[0.25vw]">
+                            <span data-svelte-h="svelte-1j3pdr5">Your Score:</span>
+                            <button class="btn p-0 leading-none md:text-[0.75vw]">
+                                <span class="font-semibold text-warning-400" data-svelte-h="svelte-rfzzy2">Not Rated</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-[0.625vw] text-warning-400" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
+                                </svg>
+                            </button>
+                        </your-scrore>
+                    </anime-scores>
+                </anime-synopsis>
+            </anime-main-infos>
+            <anime-episodes-container class="my-7 block md:my-[6vw]">
+                <section-header class="flex border-b-2 border-surface-50/10 pb-1 md:gap-x-[0.75vw] md:border-none md:pb-0">
+                    <header-title class="text-lg font-semibold md:text-[1.25vw] md:leading-[1.5vw]" data-svelte-h="svelte-11ldjpy">Episodes</header-title>
+                    <button class="btn btn-icon hidden rounded bg-surface-400 p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
+                        <svg class="w-[0.9vw] opacity-75" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_565_480)">
+                                <path d="M15 18.75C17.0711 18.75 18.75 17.0711 18.75 15C18.75 12.9289 17.0711 11.25 15 11.25C12.9289 11.25 11.25 12.9289 11.25 15C11.25 17.0711 12.9289 18.75 15 18.75Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M24.25 18.75C24.0836 19.127 24.034 19.5452 24.1075 19.9507C24.181 20.3562 24.3743 20.7304 24.6625 21.025L24.7375 21.1C24.9699 21.3322 25.1543 21.6079 25.2801 21.9114C25.406 22.2149 25.4707 22.5402 25.4707 22.8688C25.4707 23.1973 25.406 23.5226 25.2801 23.8261C25.1543 24.1296 24.9699 24.4053 24.7375 24.6375C24.5053 24.8699 24.2296 25.0543 23.9261 25.1801C23.6226 25.306 23.2973 25.3707 22.9688 25.3707C22.6402 25.3707 22.3149 25.306 22.0114 25.1801C21.7079 25.0543 21.4322 24.8699 21.2 24.6375L21.125 24.5625C20.8304 24.2743 20.4562 24.081 20.0507 24.0075C19.6452 23.934 19.227 23.9836 18.85 24.15C18.4803 24.3085 18.165 24.5716 17.9429 24.9069C17.7208 25.2423 17.6016 25.6353 17.6 26.0375V26.25C17.6 26.913 17.3366 27.5489 16.8678 28.0178C16.3989 28.4866 15.763 28.75 15.1 28.75C14.437 28.75 13.8011 28.4866 13.3322 28.0178C12.8634 27.5489 12.6 26.913 12.6 26.25V26.1375C12.5903 25.7238 12.4564 25.3225 12.2156 24.9859C11.9749 24.6493 11.6384 24.3929 11.25 24.25C10.873 24.0836 10.4548 24.034 10.0493 24.1075C9.64377 24.181 9.2696 24.3743 8.975 24.6625L8.9 24.7375C8.66782 24.9699 8.3921 25.1543 8.0886 25.2801C7.78511 25.406 7.45979 25.4707 7.13125 25.4707C6.80271 25.4707 6.47739 25.406 6.1739 25.2801C5.8704 25.1543 5.59468 24.9699 5.3625 24.7375C5.13006 24.5053 4.94566 24.2296 4.81985 23.9261C4.69404 23.6226 4.62928 23.2973 4.62928 22.9688C4.62928 22.6402 4.69404 22.3149 4.81985 22.0114C4.94566 21.7079 5.13006 21.4322 5.3625 21.2L5.4375 21.125C5.72567 20.8304 5.91898 20.4562 5.99251 20.0507C6.06603 19.6452 6.01639 19.227 5.85 18.85C5.69155 18.4803 5.42844 18.165 5.09308 17.9429C4.75772 17.7208 4.36473 17.6016 3.9625 17.6H3.75C3.08696 17.6 2.45107 17.3366 1.98223 16.8678C1.51339 16.3989 1.25 15.763 1.25 15.1C1.25 14.437 1.51339 13.8011 1.98223 13.3322C2.45107 12.8634 3.08696 12.6 3.75 12.6H3.8625C4.27624 12.5903 4.67751 12.4564 5.01412 12.2156C5.35074 11.9749 5.60714 11.6384 5.75 11.25C5.91639 10.873 5.96603 10.4548 5.89251 10.0493C5.81898 9.64377 5.62567 9.2696 5.3375 8.975L5.2625 8.9C5.03006 8.66782 4.84566 8.3921 4.71985 8.0886C4.59404 7.78511 4.52928 7.45979 4.52928 7.13125C4.52928 6.80271 4.59404 6.47739 4.71985 6.1739C4.84566 5.8704 5.03006 5.59468 5.2625 5.3625C5.49468 5.13006 5.7704 4.94566 6.0739 4.81985C6.37739 4.69404 6.70271 4.62928 7.03125 4.62928C7.35979 4.62928 7.68511 4.69404 7.9886 4.81985C8.2921 4.94566 8.56782 5.13006 8.8 5.3625L8.875 5.4375C9.1696 5.72567 9.54377 5.91898 9.94926 5.99251C10.3548 6.06603 10.773 6.01639 11.15 5.85H11.25C11.6197 5.69155 11.935 5.42844 12.1571 5.09308C12.3792 4.75772 12.4984 4.36473 12.5 3.9625V3.75C12.5 3.08696 12.7634 2.45107 13.2322 1.98223C13.7011 1.51339 14.337 1.25 15 1.25C15.663 1.25 16.2989 1.51339 16.7678 1.98223C17.2366 2.45107 17.5 3.08696 17.5 3.75V3.8625C17.5016 4.26473 17.6208 4.65772 17.8429 4.99308C18.065 5.32844 18.3803 5.59155 18.75 5.75C19.127 5.91639 19.5452 5.96603 19.9507 5.89251C20.3562 5.81898 20.7304 5.62567 21.025 5.3375L21.1 5.2625C21.3322 5.03006 21.6079 4.84566 21.9114 4.71985C22.2149 4.59404 22.5402 4.52928 22.8688 4.52928C23.1973 4.52928 23.5226 4.59404 23.8261 4.71985C24.1296 4.84566 24.4053 5.03006 24.6375 5.2625C24.8699 5.49468 25.0543 5.7704 25.1801 6.0739C25.306 6.37739 25.3707 6.70271 25.3707 7.03125C25.3707 7.35979 25.306 7.68511 25.1801 7.9886C25.0543 8.2921 24.8699 8.56782 24.6375 8.8L24.5625 8.875C24.2743 9.1696 24.081 9.54377 24.0075 9.94926C23.934 10.3548 23.9836 10.773 24.15 11.15V11.25C24.3085 11.6197 24.5716 11.935 24.9069 12.1571C25.2423 12.3792 25.6353 12.4984 26.0375 12.5H26.25C26.913 12.5 27.5489 12.7634 28.0178 13.2322C28.4866 13.7011 28.75 14.337 28.75 15C28.75 15.663 28.4866 16.2989 28.0178 16.7678C27.5489 17.2366 26.913 17.5 26.25 17.5H26.1375C25.7353 17.5016 25.3423 17.6208 25.0069 17.8429C24.6716 18.065 24.4085 18.3803 24.25 18.75V18.75Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_565_480">
+                                    <rect width="30" height="30" fill="currentColor"></rect>
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </button>
+                </section-header>
+                <episodes-options class="mt-2 flex flex-col justify-between gap-y-5 md:mt-0 md:flex-row md:gap-y-0">
+                    <episodes-available-in class="hidden items-end gap-2 md:flex md:gap-[1.25vw]">
+                        <p class="flex items-center gap-1 md:gap-[0.75vw]">
+                            <span class="text-base font-bold leading-none md:text-[2vw] md:leading-[1.9vw]" data-svelte-h="svelte-lwtsmo">23</span>
+                            <span class="text-xs font-semibold md:text-[1vw]" data-svelte-h="svelte-r9gwh4">episodes</span>
+                            <svg class="w-[0.4vw] opacity-50" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
+                            </svg>
+                        </p>
+                        <available-formats>
+                            <div class="flex w-full items-center gap-2 leading-4 md:gap-[1vw] md:leading-[1.5vw]" data-svelte-h="svelte-13lvnsu">
+                                <span class="flex-shrink-0 text-[0.5rem] font-medium md:text-[0.75vw]">Available in</span>
+                                <div class="h-[0.1rem] w-full bg-surface-50/25 md:h-[0.08vw] md:bg-surface-300"></div>
+                            </div>
+                            <formats class="flex h-5 gap-2 text-[0.5rem] font-bold md:h-[1.8vw] md:gap-[0.75vw] md:text-[0.75vw]">
+                                <span class="flex h-full place-items-center rounded bg-surface-400 px-2 uppercase leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">sub </span>
+                                <span class="flex h-full place-items-center rounded bg-surface-400 px-2 uppercase leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">dub </span>
+                                <svg class="w-[0.4vw] opacity-50" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
+                                </svg>
+                                <span class="flex h-full place-items-center rounded bg-surface-400 px-2 leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">1080p </span>
+                                <span class="flex h-full place-items-center rounded bg-surface-400 px-2 leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">720p </span>
+                                <span class="flex h-full place-items-center rounded bg-surface-400 px-2 leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">480p </span>
+                            </formats>
+                        </available-formats>
+                    </episodes-available-in>
+                    <episodes-filtering class="flex items-center justify-between gap-2 md:items-end md:gap-[0.75vw]">
+                        <p class="flex items-center gap-1 md:hidden" data-svelte-h="svelte-hoi2bp">
+                            <span class="text-base font-bold leading-none">23</span>
+                            <span class="text-sm font-semibold text-surface-50">episodes</span>
+                        </p>
+                        <by-formats class="group hidden flex-col gap-2 md:flex md:gap-[0.5vw]">
+                            <span class="text-[0.65rem] leading-[0.9vw] text-surface-50 transition-colors duration-300 group-hover:text-white md:text-[0.75vw]" data-svelte-h="svelte-4kg831">Type</span>
+                            <button class="btn h-7 rounded bg-surface-400 px-3 text-[0.65rem] font-semibold md:h-[2.4vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.9vw] md:leading-[0.9vw]">
+                                <span data-svelte-h="svelte-1sii61j">Subbed</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 md:w-[1vw]" color="lightgray" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
+                                </svg>
+                            </button>
+                        </by-formats>
+                        <by-modes class="group hidden flex-col gap-2 md:flex md:gap-[0.5vw]">
+                            <span class="text-[0.65rem] leading-[0.9vw] text-surface-50 transition-colors duration-300 group-hover:text-white md:text-[0.75vw]" data-svelte-h="svelte-16htgo0">Display Mode</span>
+                            <button class="btn h-7 rounded bg-surface-400 px-3 text-[0.65rem] font-semibold leading-[0.9vw] md:h-[2.4vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.9vw]">
+                                <span data-svelte-h="svelte-1w3m1b">Thumbnails</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-3 md:w-[1vw]" color="lightgray" fill="none" viewBox="0 0 24 24">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
+                                </svg>
+                            </button>
+                        </by-modes>
+                        <button class="btn btn-icon h-7 w-auto rounded bg-surface-400 p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]" aria-label="Search">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 md:w-[1vw]" color="lightgray" fill="none" viewBox="0 0 36 36">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6" d="M16.5 28.5C23.1274 28.5 28.5 23.1274 28.5 16.5C28.5 9.87258 23.1274 4.5 16.5 4.5C9.87258 4.5 4.5 9.87258 4.5 16.5C4.5 23.1274 9.87258 28.5 16.5 28.5Z"></path>
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6" d="M31.5001 31.5001L24.9751 24.9751"></path>
+                            </svg>
+                        </button>
+                    </episodes-filtering>
+                </episodes-options>
+                <anime-episodes-cards class="mt-4 grid grid-cols-12 gap-5 md:mt-[2.5vw] md:gap-[2.5vw]">
+                    <a href="/anime/mal/1/episode/1" class="relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4">
+                        <card-banner-info class="relative col-span-5 h-full w-full md:col-span-12 md:h-[19vw]">
+                            <card-banner class="block h-24 md:h-[12vw] md:w-full">
+                                <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw]">
+                                    <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw] placeholder animate-pulse !bg-surface-400"></div>
+                                </div>
+                            </card-banner>
+                            <overlay-effect class="absolute inset-0 hidden bg-gradient-to-t from-surface-900/75 to-transparent md:flex md:h-[12vw]"></overlay-effect>
+                            <card-info class="absolute bottom-0 flex h-max w-full justify-between p-1 md:top-0 md:p-[0.5vw]">
+                                <p class="rounded bg-surface-900/75 p-1 text-xs font-bold tracking-wider text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.75vw] md:py-[0.75vw] md:text-[0.8vw] md:leading-none">EP 01</p>
+                                <p class="rounded bg-surface-900/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">20:54</p>
+                            </card-info>
+                        </card-banner-info>
+                        <episode-info-card class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-surface-900 md:p-[1vw]">
+                            <episode-titles class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-9 md:max-h-[1.25vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-2 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">The Revival of the Long-established Classic Literature Club. The Descendants of the Classic Literature Club </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-4 md:max-h-[1.3vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-1 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">老舗古典部復活 カッコいいですよね 栄光の古典文学クラブの昔 古典文学部の活動 </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                            </episode-titles>
+                            <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.65vw] md:pt-[0.75vw]">
+                                <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">sub </span>
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">dub </span>
+                                </formats>
+                                <svg class="w-1 opacity-50 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
+                                </svg>
+                                <resolutions class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">sd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">hd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">fhd </span>
+                                </resolutions>
+                            </episode-available-formats>
+                        </episode-info-card>
+                    </a>
+                    <a href="/anime/mal/1/episode/2" class="relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4">
+                        <card-banner-info class="relative col-span-5 h-full w-full md:col-span-12 md:h-[19vw]">
+                            <card-banner class="block h-24 md:h-[12vw] md:w-full">
+                                <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw]">
+                                    <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw] placeholder animate-pulse !bg-surface-400"></div>
+                                </div>
+                            </card-banner>
+                            <overlay-effect class="absolute inset-0 hidden bg-gradient-to-t from-surface-900/75 to-transparent md:flex md:h-[12vw]"></overlay-effect>
+                            <card-info class="absolute bottom-0 flex h-max w-full justify-between p-1 md:top-0 md:p-[0.5vw]">
+                                <p class="rounded bg-surface-900/75 p-1 text-xs font-bold tracking-wider text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.75vw] md:py-[0.75vw] md:text-[0.8vw] md:leading-none">EP 02</p>
+                                <p class="rounded bg-surface-900/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">24:11</p>
+                            </card-info>
+                        </card-banner-info>
+                        <episode-info-card class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-surface-900 md:p-[1vw]">
+                            <episode-titles class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-9 md:max-h-[1.25vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-2 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">The Activities of the Esteemed Classic Literature Club </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-4 md:max-h-[1.3vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-1 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">古典文学部の活動 </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                            </episode-titles>
+                            <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.65vw] md:pt-[0.75vw]">
+                                <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">sub </span>
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">dub </span>
+                                </formats>
+                                <svg class="w-1 opacity-50 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
+                                </svg>
+                                <resolutions class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">sd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">hd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">fhd </span>
+                                </resolutions>
+                            </episode-available-formats>
+                        </episode-info-card>
+                    </a>
+                    <a href="/anime/mal/1/episode/3" class="relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4">
+                        <card-banner-info class="relative col-span-5 h-full w-full md:col-span-12 md:h-[19vw]">
+                            <card-banner class="block h-24 md:h-[12vw] md:w-full">
+                                <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw]">
+                                    <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw] placeholder animate-pulse !bg-surface-400"></div>
+                                </div>
+                            </card-banner>
+                            <overlay-effect class="absolute inset-0 hidden bg-gradient-to-t from-surface-900/75 to-transparent md:flex md:h-[12vw]"></overlay-effect>
+                            <card-info class="absolute bottom-0 flex h-max w-full justify-between p-1 md:top-0 md:p-[0.5vw]">
+                                <p class="rounded bg-surface-900/75 p-1 text-xs font-bold tracking-wider text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.75vw] md:py-[0.75vw] md:text-[0.8vw] md:leading-none">EP 03</p>
+                                <p class="rounded bg-surface-900/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">20:57</p>
+                            </card-info>
+                        </card-banner-info>
+                        <episode-info-card class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-surface-900 md:p-[1vw]">
+                            <episode-titles class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-9 md:max-h-[1.25vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-2 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">The Descendants of the Classic Literature Club </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-4 md:max-h-[1.3vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-1 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">古典文学部の末裔 </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                            </episode-titles>
+                            <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.65vw] md:pt-[0.75vw]">
+                                <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">sub </span>
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">dub </span>
+                                </formats>
+                                <svg class="w-1 opacity-50 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
+                                </svg>
+                                <resolutions class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">sd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">hd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">fhd </span>
+                                </resolutions>
+                            </episode-available-formats>
+                        </episode-info-card>
+                    </a>
+                    <a href="/anime/mal/1/episode/4" class="relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4">
+                        <card-banner-info class="relative col-span-5 h-full w-full md:col-span-12 md:h-[19vw]">
+                            <card-banner class="block h-24 md:h-[12vw] md:w-full">
+                                <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw]">
+                                    <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw] placeholder animate-pulse !bg-surface-400"></div>
+                                </div>
+                            </card-banner>
+                            <overlay-effect class="absolute inset-0 hidden bg-gradient-to-t from-surface-900/75 to-transparent md:flex md:h-[12vw]"></overlay-effect>
+                            <card-info class="absolute bottom-0 flex h-max w-full justify-between p-1 md:top-0 md:p-[0.5vw]">
+                                <p class="rounded bg-surface-900/75 p-1 text-xs font-bold tracking-wider text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.75vw] md:py-[0.75vw] md:text-[0.8vw] md:leading-none">EP 04</p>
+                                <p class="rounded bg-surface-900/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">23:25</p>
+                            </card-info>
+                        </card-banner-info>
+                        <episode-info-card class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-surface-900 md:p-[1vw]">
+                            <episode-titles class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-9 md:max-h-[1.25vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-2 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">The Old Days of the Glorious Classic Literature Club. The Truth of the Historic Classic Literature Club </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-4 md:max-h-[1.3vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-1 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">栄光の古典文学クラブの昔 </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                            </episode-titles>
+                            <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.65vw] md:pt-[0.75vw]">
+                                <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">sub </span>
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">dub </span>
+                                </formats>
+                                <svg class="w-1 opacity-50 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
+                                </svg>
+                                <resolutions class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">sd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">hd </span>
+                                </resolutions>
+                            </episode-available-formats>
+                        </episode-info-card>
+                    </a>
+                    <a href="/anime/mal/1/episode/5" class="relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4">
+                        <card-banner-info class="relative col-span-5 h-full w-full md:col-span-12 md:h-[19vw]">
+                            <card-banner class="block h-24 md:h-[12vw] md:w-full">
+                                <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw]">
+                                    <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw] placeholder animate-pulse !bg-surface-400"></div>
+                                </div>
+                            </card-banner>
+                            <overlay-effect class="absolute inset-0 hidden bg-gradient-to-t from-surface-900/75 to-transparent md:flex md:h-[12vw]"></overlay-effect>
+                            <card-info class="absolute bottom-0 flex h-max w-full justify-between p-1 md:top-0 md:p-[0.5vw]">
+                                <p class="rounded bg-surface-900/75 p-1 text-xs font-bold tracking-wider text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.75vw] md:py-[0.75vw] md:text-[0.8vw] md:leading-none">EP 05</p>
+                                <p class="rounded bg-surface-900/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">23:02</p>
+                            </card-info>
+                        </card-banner-info>
+                        <episode-info-card class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-surface-900 md:p-[1vw]">
+                            <episode-titles class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-9 md:max-h-[1.25vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-2 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">The Truth of the Historic Classic Literature Club </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-4 md:max-h-[1.3vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-1 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">歴史的古典文学部の真実 </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                            </episode-titles>
+                            <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.65vw] md:pt-[0.75vw]">
+                                <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">sub </span>
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">dub </span>
+                                </formats>
+                                <svg class="w-1 opacity-50 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
+                                </svg>
+                                <resolutions class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">sd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">hd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">fhd </span>
+                                </resolutions>
+                            </episode-available-formats>
+                        </episode-info-card>
+                    </a>
+                    <a href="/anime/mal/1/episode/6" class="relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4">
+                        <card-banner-info class="relative col-span-5 h-full w-full md:col-span-12 md:h-[19vw]">
+                            <card-banner class="block h-24 md:h-[12vw] md:w-full">
+                                <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw]">
+                                    <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw] placeholder animate-pulse !bg-surface-400"></div>
+                                </div>
+                            </card-banner>
+                            <overlay-effect class="absolute inset-0 hidden bg-gradient-to-t from-surface-900/75 to-transparent md:flex md:h-[12vw]"></overlay-effect>
+                            <card-info class="absolute bottom-0 flex h-max w-full justify-between p-1 md:top-0 md:p-[0.5vw]">
+                                <p class="rounded bg-surface-900/75 p-1 text-xs font-bold tracking-wider text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.75vw] md:py-[0.75vw] md:text-[0.8vw] md:leading-none">EP 06</p>
+                                <p class="rounded bg-surface-900/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">23:56</p>
+                            </card-info>
+                        </card-banner-info>
+                        <episode-info-card class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-surface-900 md:p-[1vw]">
+                            <episode-titles class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-9 md:max-h-[1.25vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-2 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">To Commit a Grave Sin </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-4 md:max-h-[1.3vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-1 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">重大な罪を犯すには </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                            </episode-titles>
+                            <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.65vw] md:pt-[0.75vw]">
+                                <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">sub </span>
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">dub </span>
+                                </formats>
+                                <svg class="w-1 opacity-50 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
+                                </svg>
+                                <resolutions class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">sd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">hd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">fhd </span>
+                                </resolutions>
+                            </episode-available-formats>
+                        </episode-info-card>
+                    </a>
+                    <a href="/anime/mal/1/episode/7" class="relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4">
+                        <card-banner-info class="relative col-span-5 h-full w-full md:col-span-12 md:h-[19vw]">
+                            <card-banner class="block h-24 md:h-[12vw] md:w-full">
+                                <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw]">
+                                    <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw] placeholder animate-pulse !bg-surface-400"></div>
+                                </div>
+                            </card-banner>
+                            <overlay-effect class="absolute inset-0 hidden bg-gradient-to-t from-surface-900/75 to-transparent md:flex md:h-[12vw]"></overlay-effect>
+                            <card-info class="absolute bottom-0 flex h-max w-full justify-between p-1 md:top-0 md:p-[0.5vw]">
+                                <p class="rounded bg-surface-900/75 p-1 text-xs font-bold tracking-wider text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.75vw] md:py-[0.75vw] md:text-[0.8vw] md:leading-none">EP 07</p>
+                                <p class="rounded bg-surface-900/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">20:54</p>
+                            </card-info>
+                        </card-banner-info>
+                        <episode-info-card class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-surface-900 md:p-[1vw]">
+                            <episode-titles class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-9 md:max-h-[1.25vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-2 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">The Revival of the Long-established Classic Literature Club </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-4 md:max-h-[1.3vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-1 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">老舗古典部復活 カッコいいですよね </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                            </episode-titles>
+                            <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.65vw] md:pt-[0.75vw]">
+                                <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">sub </span>
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">dub </span>
+                                </formats>
+                                <svg class="w-1 opacity-50 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
+                                </svg>
+                                <resolutions class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">sd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">hd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">fhd </span>
+                                </resolutions>
+                            </episode-available-formats>
+                        </episode-info-card>
+                    </a>
+                    <a href="/anime/mal/1/episode/8" class="relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4">
+                        <card-banner-info class="relative col-span-5 h-full w-full md:col-span-12 md:h-[19vw]">
+                            <card-banner class="block h-24 md:h-[12vw] md:w-full">
+                                <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw]">
+                                    <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw] placeholder animate-pulse !bg-surface-400"></div>
+                                </div>
+                            </card-banner>
+                            <overlay-effect class="absolute inset-0 hidden bg-gradient-to-t from-surface-900/75 to-transparent md:flex md:h-[12vw]"></overlay-effect>
+                            <card-info class="absolute bottom-0 flex h-max w-full justify-between p-1 md:top-0 md:p-[0.5vw]">
+                                <p class="rounded bg-surface-900/75 p-1 text-xs font-bold tracking-wider text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.75vw] md:py-[0.75vw] md:text-[0.8vw] md:leading-none">EP 08</p>
+                                <p class="rounded bg-surface-900/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">24:11</p>
+                            </card-info>
+                        </card-banner-info>
+                        <episode-info-card class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-surface-900 md:p-[1vw]">
+                            <episode-titles class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-9 md:max-h-[1.25vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-2 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">The Activities of the Esteemed Classic Literature Club </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-4 md:max-h-[1.3vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-1 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">古典文学部の活動 </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                            </episode-titles>
+                            <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.65vw] md:pt-[0.75vw]">
+                                <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">sub </span>
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">dub </span>
+                                </formats>
+                                <svg class="w-1 opacity-50 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
+                                </svg>
+                                <resolutions class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">sd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">hd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">fhd </span>
+                                </resolutions>
+                            </episode-available-formats>
+                        </episode-info-card>
+                    </a>
+                    <a href="/anime/mal/1/episode/9" class="relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4">
+                        <card-banner-info class="relative col-span-5 h-full w-full md:col-span-12 md:h-[19vw]">
+                            <card-banner class="block h-24 md:h-[12vw] md:w-full">
+                                <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw]">
+                                    <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw] placeholder animate-pulse !bg-surface-400"></div>
+                                </div>
+                            </card-banner>
+                            <overlay-effect class="absolute inset-0 hidden bg-gradient-to-t from-surface-900/75 to-transparent md:flex md:h-[12vw]"></overlay-effect>
+                            <card-info class="absolute bottom-0 flex h-max w-full justify-between p-1 md:top-0 md:p-[0.5vw]">
+                                <p class="rounded bg-surface-900/75 p-1 text-xs font-bold tracking-wider text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.75vw] md:py-[0.75vw] md:text-[0.8vw] md:leading-none">EP 09</p>
+                                <p class="rounded bg-surface-900/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">20:57</p>
+                            </card-info>
+                        </card-banner-info>
+                        <episode-info-card class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-surface-900 md:p-[1vw]">
+                            <episode-titles class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-9 md:max-h-[1.25vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-2 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">The Descendants of the Classic Literature Club </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-4 md:max-h-[1.3vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-1 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">古典文学部の末裔 </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                            </episode-titles>
+                            <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.65vw] md:pt-[0.75vw]">
+                                <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">sub </span>
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">dub </span>
+                                </formats>
+                                <svg class="w-1 opacity-50 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
+                                </svg>
+                                <resolutions class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">sd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">hd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">fhd </span>
+                                </resolutions>
+                            </episode-available-formats>
+                        </episode-info-card>
+                    </a>
+                    <a href="/anime/mal/1/episode/10" class="relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4">
+                        <card-banner-info class="relative col-span-5 h-full w-full md:col-span-12 md:h-[19vw]">
+                            <card-banner class="block h-24 md:h-[12vw] md:w-full">
+                                <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw]">
+                                    <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw] placeholder animate-pulse !bg-surface-400"></div>
+                                </div>
+                            </card-banner>
+                            <overlay-effect class="absolute inset-0 hidden bg-gradient-to-t from-surface-900/75 to-transparent md:flex md:h-[12vw]"></overlay-effect>
+                            <card-info class="absolute bottom-0 flex h-max w-full justify-between p-1 md:top-0 md:p-[0.5vw]">
+                                <p class="rounded bg-surface-900/75 p-1 text-xs font-bold tracking-wider text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.75vw] md:py-[0.75vw] md:text-[0.8vw] md:leading-none">EP 10</p>
+                                <p class="rounded bg-surface-900/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">23:25</p>
+                            </card-info>
+                        </card-banner-info>
+                        <episode-info-card class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-surface-900 md:p-[1vw]">
+                            <episode-titles class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-9 md:max-h-[1.25vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-2 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">The Old Days of the Glorious Classic Literature Club </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-4 md:max-h-[1.3vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-1 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">栄光の古典文学クラブの昔 </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                            </episode-titles>
+                            <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.65vw] md:pt-[0.75vw]">
+                                <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">sub </span>
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">dub </span>
+                                </formats>
+                                <svg class="w-1 opacity-50 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
+                                </svg>
+                                <resolutions class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">sd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">hd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">fhd </span>
+                                </resolutions>
+                            </episode-available-formats>
+                        </episode-info-card>
+                    </a>
+                    <a href="/anime/mal/1/episode/11" class="relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4">
+                        <card-banner-info class="relative col-span-5 h-full w-full md:col-span-12 md:h-[19vw]">
+                            <card-banner class="block h-24 md:h-[12vw] md:w-full">
+                                <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw]">
+                                    <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw] placeholder animate-pulse !bg-surface-400"></div>
+                                </div>
+                            </card-banner>
+                            <overlay-effect class="absolute inset-0 hidden bg-gradient-to-t from-surface-900/75 to-transparent md:flex md:h-[12vw]"></overlay-effect>
+                            <card-info class="absolute bottom-0 flex h-max w-full justify-between p-1 md:top-0 md:p-[0.5vw]">
+                                <p class="rounded bg-surface-900/75 p-1 text-xs font-bold tracking-wider text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.75vw] md:py-[0.75vw] md:text-[0.8vw] md:leading-none">EP 11</p>
+                                <p class="rounded bg-surface-900/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">23:02</p>
+                            </card-info>
+                        </card-banner-info>
+                        <episode-info-card class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-surface-900 md:p-[1vw]">
+                            <episode-titles class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-9 md:max-h-[1.25vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-2 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">The Truth of the Historic Classic Literature Club </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-4 md:max-h-[1.3vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-1 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">歴史的古典文学部の真実 </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                            </episode-titles>
+                            <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.65vw] md:pt-[0.75vw]">
+                                <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">sub </span>
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">dub </span>
+                                </formats>
+                                <svg class="w-1 opacity-50 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
+                                </svg>
+                                <resolutions class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">sd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">hd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">fhd </span>
+                                </resolutions>
+                            </episode-available-formats>
+                        </episode-info-card>
+                    </a>
+                    <a href="/anime/mal/1/episode/12" class="relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4">
+                        <card-banner-info class="relative col-span-5 h-full w-full md:col-span-12 md:h-[19vw]">
+                            <card-banner class="block h-24 md:h-[12vw] md:w-full">
+                                <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw]">
+                                    <div class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw] placeholder animate-pulse !bg-surface-400"></div>
+                                </div>
+                            </card-banner>
+                            <overlay-effect class="absolute inset-0 hidden bg-gradient-to-t from-surface-900/75 to-transparent md:flex md:h-[12vw]"></overlay-effect>
+                            <card-info class="absolute bottom-0 flex h-max w-full justify-between p-1 md:top-0 md:p-[0.5vw]">
+                                <p class="rounded bg-surface-900/75 p-1 text-xs font-bold tracking-wider text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.75vw] md:py-[0.75vw] md:text-[0.8vw] md:leading-none">EP 12</p>
+                                <p class="rounded bg-surface-900/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-surface-900/75 md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">23:56</p>
+                            </card-info>
+                        </card-banner-info>
+                        <episode-info-card class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-surface-900 md:p-[1vw]">
+                            <episode-titles class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-9 md:max-h-[1.25vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-2 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">To Commit a Grave Sin </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                    <div>
+                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-4 md:max-h-[1.3vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                            <span class="line-clamp-1 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">重大な罪を犯すには </span>
+                                        </div>
+                                    </div>
+                                </scroll-area>
+                            </episode-titles>
+                            <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.65vw] md:pt-[0.75vw]">
+                                <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">sub </span>
+                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">dub </span>
+                                </formats>
+                                <svg class="w-1 opacity-50 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
+                                </svg>
+                                <resolutions class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">sd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">hd </span>
+                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">fhd </span>
+                                </resolutions>
+                            </episode-available-formats>
+                        </episode-info-card>
+                    </a>
+                </anime-episodes-cards>
+                <anime-media-section class="mt-10 flex grid-cols-5 flex-col gap-10 md:mt-[3vw] md:grid md:gap-[4.375vw]">
+                    <comment-box class="md:col-span-3">
+                        <section-header class="flex gap-2 border-b-2 border-surface-50/10 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
+                            <header-title class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]" data-svelte-h="svelte-v1dp1u">Comments</header-title>
+                            <button class="btn btn-icon hidden rounded bg-surface-400 p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
+                                <svg class="w-[0.9vw] opacity-75" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_565_480)">
+                                        <path d="M15 18.75C17.0711 18.75 18.75 17.0711 18.75 15C18.75 12.9289 17.0711 11.25 15 11.25C12.9289 11.25 11.25 12.9289 11.25 15C11.25 17.0711 12.9289 18.75 15 18.75Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M24.25 18.75C24.0836 19.127 24.034 19.5452 24.1075 19.9507C24.181 20.3562 24.3743 20.7304 24.6625 21.025L24.7375 21.1C24.9699 21.3322 25.1543 21.6079 25.2801 21.9114C25.406 22.2149 25.4707 22.5402 25.4707 22.8688C25.4707 23.1973 25.406 23.5226 25.2801 23.8261C25.1543 24.1296 24.9699 24.4053 24.7375 24.6375C24.5053 24.8699 24.2296 25.0543 23.9261 25.1801C23.6226 25.306 23.2973 25.3707 22.9688 25.3707C22.6402 25.3707 22.3149 25.306 22.0114 25.1801C21.7079 25.0543 21.4322 24.8699 21.2 24.6375L21.125 24.5625C20.8304 24.2743 20.4562 24.081 20.0507 24.0075C19.6452 23.934 19.227 23.9836 18.85 24.15C18.4803 24.3085 18.165 24.5716 17.9429 24.9069C17.7208 25.2423 17.6016 25.6353 17.6 26.0375V26.25C17.6 26.913 17.3366 27.5489 16.8678 28.0178C16.3989 28.4866 15.763 28.75 15.1 28.75C14.437 28.75 13.8011 28.4866 13.3322 28.0178C12.8634 27.5489 12.6 26.913 12.6 26.25V26.1375C12.5903 25.7238 12.4564 25.3225 12.2156 24.9859C11.9749 24.6493 11.6384 24.3929 11.25 24.25C10.873 24.0836 10.4548 24.034 10.0493 24.1075C9.64377 24.181 9.2696 24.3743 8.975 24.6625L8.9 24.7375C8.66782 24.9699 8.3921 25.1543 8.0886 25.2801C7.78511 25.406 7.45979 25.4707 7.13125 25.4707C6.80271 25.4707 6.47739 25.406 6.1739 25.2801C5.8704 25.1543 5.59468 24.9699 5.3625 24.7375C5.13006 24.5053 4.94566 24.2296 4.81985 23.9261C4.69404 23.6226 4.62928 23.2973 4.62928 22.9688C4.62928 22.6402 4.69404 22.3149 4.81985 22.0114C4.94566 21.7079 5.13006 21.4322 5.3625 21.2L5.4375 21.125C5.72567 20.8304 5.91898 20.4562 5.99251 20.0507C6.06603 19.6452 6.01639 19.227 5.85 18.85C5.69155 18.4803 5.42844 18.165 5.09308 17.9429C4.75772 17.7208 4.36473 17.6016 3.9625 17.6H3.75C3.08696 17.6 2.45107 17.3366 1.98223 16.8678C1.51339 16.3989 1.25 15.763 1.25 15.1C1.25 14.437 1.51339 13.8011 1.98223 13.3322C2.45107 12.8634 3.08696 12.6 3.75 12.6H3.8625C4.27624 12.5903 4.67751 12.4564 5.01412 12.2156C5.35074 11.9749 5.60714 11.6384 5.75 11.25C5.91639 10.873 5.96603 10.4548 5.89251 10.0493C5.81898 9.64377 5.62567 9.2696 5.3375 8.975L5.2625 8.9C5.03006 8.66782 4.84566 8.3921 4.71985 8.0886C4.59404 7.78511 4.52928 7.45979 4.52928 7.13125C4.52928 6.80271 4.59404 6.47739 4.71985 6.1739C4.84566 5.8704 5.03006 5.59468 5.2625 5.3625C5.49468 5.13006 5.7704 4.94566 6.0739 4.81985C6.37739 4.69404 6.70271 4.62928 7.03125 4.62928C7.35979 4.62928 7.68511 4.69404 7.9886 4.81985C8.2921 4.94566 8.56782 5.13006 8.8 5.3625L8.875 5.4375C9.1696 5.72567 9.54377 5.91898 9.94926 5.99251C10.3548 6.06603 10.773 6.01639 11.15 5.85H11.25C11.6197 5.69155 11.935 5.42844 12.1571 5.09308C12.3792 4.75772 12.4984 4.36473 12.5 3.9625V3.75C12.5 3.08696 12.7634 2.45107 13.2322 1.98223C13.7011 1.51339 14.337 1.25 15 1.25C15.663 1.25 16.2989 1.51339 16.7678 1.98223C17.2366 2.45107 17.5 3.08696 17.5 3.75V3.8625C17.5016 4.26473 17.6208 4.65772 17.8429 4.99308C18.065 5.32844 18.3803 5.59155 18.75 5.75C19.127 5.91639 19.5452 5.96603 19.9507 5.89251C20.3562 5.81898 20.7304 5.62567 21.025 5.3375L21.1 5.2625C21.3322 5.03006 21.6079 4.84566 21.9114 4.71985C22.2149 4.59404 22.5402 4.52928 22.8688 4.52928C23.1973 4.52928 23.5226 4.59404 23.8261 4.71985C24.1296 4.84566 24.4053 5.03006 24.6375 5.2625C24.8699 5.49468 25.0543 5.7704 25.1801 6.0739C25.306 6.37739 25.3707 6.70271 25.3707 7.03125C25.3707 7.35979 25.306 7.68511 25.1801 7.9886C25.0543 8.2921 24.8699 8.56782 24.6375 8.8L24.5625 8.875C24.2743 9.1696 24.081 9.54377 24.0075 9.94926C23.934 10.3548 23.9836 10.773 24.15 11.15V11.25C24.3085 11.6197 24.5716 11.935 24.9069 12.1571C25.2423 12.3792 25.6353 12.4984 26.0375 12.5H26.25C26.913 12.5 27.5489 12.7634 28.0178 13.2322C28.4866 13.7011 28.75 14.337 28.75 15C28.75 15.663 28.4866 16.2989 28.0178 16.7678C27.5489 17.2366 26.913 17.5 26.25 17.5H26.1375C25.7353 17.5016 25.3423 17.6208 25.0069 17.8429C24.6716 18.065 24.4085 18.3803 24.25 18.75V18.75Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_565_480">
+                                            <rect width="30" height="30" fill="currentColor"></rect>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </button>
+                        </section-header>
+                        <comments-info class="mt-2 flex items-center justify-between md:hidden">
+                            <p class="flex items-center gap-1 md:hidden" data-svelte-h="svelte-kavhfj">
+                                <span class="text-base font-bold leading-none">69</span>
+                                <span class="text-sm font-semibold text-surface-50">comments</span>
+                            </p>
+                            <button class="btn btn-icon h-7 w-auto rounded bg-surface-400 p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]" aria-label="Filter">
+                                <svg class="w-3 md:w-[1vw]" color="lightgray" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M18.3332 1.5H1.6665L8.33317 9.38333V14.8333L11.6665 16.5V9.38333L18.3332 1.5Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </button>
+                        </comments-info>
+                        <form class="mt-3 md:mt-[1vw]">
+                            <div class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary-500 md:rounded-[0.75vw] md:ring-[0.15vw]">
+                                <textarea-navbar class="flex h-8 items-center justify-between overflow-hidden rounded-t-lg bg-surface-400/50 md:h-[2.5vw] md:rounded-t-[0.75vw]">
+                                    <div>
+                                        <button type="button" class="bg-surface-900 text-surface-50 h-8 px-5 text-xs capitalize leading-[1.5vw] transition-colors duration-100 md:h-[2.5vw] md:px-[1.5vw] md:text-[1vw]">edit </button>
+                                        <button type="button" class="text-surface-300 h-8 px-5 text-xs capitalize leading-[1.5vw] transition-colors duration-100 md:h-[2.5vw] md:px-[1.5vw] md:text-[1vw]">preview </button>
+                                    </div>
+                                    <div class="flex place-items-center gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]">
+                                        <button class="btn p-0 w-5 md:w-[1.4vw]  text-surface-200" type="button" aria-label="bold">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="bold-text">
+                                                <path fill="none" d="M0 0h24v24H0V0z"></path>
+                                                <path fill="currentColor" d="M15.6 10.79c.97-.67 1.65-1.77 1.65-2.79 0-2.26-1.75-4-4-4H8c-.55 0-1 .45-1 1v12c0 .55.45 1 1 1h5.78c2.07 0 3.96-1.69 3.97-3.77.01-1.53-.85-2.84-2.15-3.44zM10 6.5h3c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-3v-3zm3.5 9H10v-3h3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z"></path>
+                                            </svg>
+                                        </button>
+                                        <button class="btn p-0 w-5 md:w-[1.5vw] text-surface-200" type="button" aria-label="italic">
+                                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h4m4 0h-4m0 0-4 12m0 0h4m-4 0H6"></path>
+                                            </svg>
+                                        </button>
+                                        <button class="btn p-0 w-5 md:w-[1.35vw] text-surface-200" type="button" aria-label="underline">
+                                            <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" enable-background="new 0 0 52 52" xml:space="preserve">
+                                                <path d="M44.5,42h-37C6.7,42,6,42.7,6,43.5v3C6,47.3,6.7,48,7.5,48h37c0.8,0,1.5-0.7,1.5-1.5v-3
+	C46,42.7,45.3,42,44.5,42z"></path>
+                                                <g>
+                                                    <path d="M25.3,38C17.8,37.6,12,31.1,12,23.6L12,10c0-1.1,0.9-2,2-2h2c1.1,0,2,0.9,2,2l0,13.7c0,4.3,3.2,8,7.5,8.3
+		c4.7,0.3,8.5-3.4,8.5-8V10c0-1.1,0.9-2,2-2h2c1.1,0,2,0.9,2,2v14C40,32,33.3,38.4,25.3,38z"></path>
+                                                </g>
+                                            </svg>
+                                        </button>
+                                        <button class="btn p-0 w-5 md:w-[1.5vw] text-surface-200" type="button" aria-label="strike">
+                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1818 4.5H12.2572C14.6518 4.49998 16.06 5.70029 16.6667 6.27002C17.0694 6.64806 17.0893 7.28091 16.7112 7.68353C16.3332 8.08615 15.7003 8.10606 15.2977 7.72803C14.8402 7.2984 13.9043 6.5 12.2572 6.5H12.1818C11.3372 6.5 10.5747 7.0042 10.2433 7.78217C9.76004 8.91658 10.3492 10.2218 11.5197 10.6097L12.6975 11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H8.84183C8.04044 9.87767 7.81744 8.37359 8.40331 6.99832C9.04851 5.48375 10.5346 4.5 12.1818 4.5ZM14.3007 14H16.6374C17.0712 15.0358 17.1365 16.2306 16.7304 17.3744C16.0672 19.2426 14.2995 20.4908 12.317 20.4908H11.725C9.84848 20.4908 8.54549 19.8758 7.31543 18.7208C6.91281 18.3428 6.8929 17.7099 7.27094 17.3073C7.64899 16.9047 8.28183 16.8848 8.68445 17.2628C9.58301 18.1065 10.4086 18.4908 11.725 18.4908H12.317C13.4529 18.4908 14.4657 17.7757 14.8456 16.7053C15.1889 15.7383 14.9443 14.7076 14.3007 14Z" fill="currentColor"></path>
+                                            </svg>
+                                        </button>
+                                        <button class="btn p-0 w-5 md:w-[1.5vw] text-surface-200" type="button" aria-label="code">
+                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M8 8L3 12L8 16M16 16L21 12L16 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </svg>
+                                        </button>
+                                        <button class="btn p-0 w-4 md:w-[1.25vw] text-surface-200 ml-3 md:ml-[1vw]" type="button" aria-label="hyperlink">
+                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M10.975 14.51a1.05 1.05 0 0 0 0-1.485 2.95 2.95 0 0 1 0-4.172l3.536-3.535a2.95 2.95 0 1 1 4.172 4.172l-1.093 1.092a1.05 1.05 0 0 0 1.485 1.485l1.093-1.092a5.05 5.05 0 0 0-7.142-7.142L9.49 7.368a5.05 5.05 0 0 0 0 7.142c.41.41 1.075.41 1.485 0zm2.05-5.02a1.05 1.05 0 0 0 0 1.485 2.95 2.95 0 0 1 0 4.172l-3.5 3.5a2.95 2.95 0 1 1-4.171-4.172l1.025-1.025a1.05 1.05 0 0 0-1.485-1.485L3.87 12.99a5.05 5.05 0 0 0 7.142 7.142l3.5-3.5a5.05 5.05 0 0 0 0-7.142 1.05 1.05 0 0 0-1.485 0z" fill="currentColor"></path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </textarea-navbar>
+                                <textarea-body class="block h-28 overflow-y-scroll md:h-[8vw]">
+                                    <textarea spellcheck="true" class="h-full w-full resize-none border-none bg-surface-900 p-3 text-sm leading-tight text-surface-50 outline-none duration-300 ease-in-out placeholder:text-surface-200 focus:ring-0 md:p-[1vw] md:text-[1vw] md:leading-[1.5vw]" placeholder="Leave a comment"></textarea>
+                                </textarea-body>
+                                <textarea-footer class="flex justify-between bg-surface-400/50 px-4 py-2 text-[0.65rem] font-thin leading-[1.5vw] text-surface-200 md:px-[1vw] md:py-[0.1vw] md:text-[0.75vw]" data-svelte-h="svelte-4ipsmt">
+                                    <div></div>
+                                    <div>Learn more about <a class="underline" href="/">core editor</a>
+                                    </div>
+                                </textarea-footer>
+                            </div>
+                            <comment-submit class="mt-4 flex justify-between gap-5 md:mt-[0.75vw] md:gap-[1vw]">
+                                <comment-alert class="flex items-center gap-3 md:gap-[0.625vw]">
+                                    <svg class="w-10 md:w-[1.2vw]" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M6.86001 1.92961L1.21335 8.99961C1.09693 9.15083 1.03533 9.32226 1.03467 9.49687C1.03402 9.67148 1.09434 9.84318 1.20963 9.99488C1.32492 10.1466 1.49116 10.273 1.69182 10.3615C1.89247 10.4501 2.12055 10.4977 2.35335 10.4996H13.6467C13.8795 10.4977 14.1076 10.4501 14.3082 10.3615C14.5089 10.273 14.6751 10.1466 14.7904 9.99488C14.9057 9.84318 14.966 9.67148 14.9654 9.49687C14.9647 9.32226 14.9031 9.15083 14.7867 8.99961L9.14001 1.92961C9.02117 1.78267 8.85383 1.66117 8.65414 1.57686C8.45446 1.49254 8.22917 1.44824 8.00001 1.44824C7.77086 1.44824 7.54557 1.49254 7.34588 1.57686C7.1462 1.66117 6.97886 1.78267 6.86001 1.92961V1.92961Z" stroke="currentColor" stroke-opacity="0.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M8 4.5V6.5" stroke="currentColor" stroke-opacity="0.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M8 8.5H8.00667" stroke="currentColor" stroke-opacity="0.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                    <p class="text-[0.65rem] font-light leading-tight text-surface-300 md:text-[0.75vw] md:leading-[1.125vw]" data-svelte-h="svelte-19357bb">Please remember to follow our <a href="/" class="text-surface-200 underline">community guidelines</a> while commenting. Also please refrain from posting spoilers. </p>
+                                </comment-alert>
+                                <button class="btn btn-sm h-9 w-40 rounded bg-primary-500 text-sm font-semibold md:h-[2.2vw] md:w-[7vw] md:rounded-[0.375vw] md:text-[0.85vw]" data-svelte-h="svelte-hpj9yr">Comment</button>
+                            </comment-submit>
+                        </form>
+                        <comments class="mt-10 flex flex-col gap-5 md:mt-[2vw] md:gap-[1.5vw]">
+                            <comment class="flex gap-3 md:gap-[1vw]">
+                                <a href="/user/" class="h-7 w-7 flex-shrink-0 md:h-[2vw] md:w-[2vw]">
+                                    <div class="h-full w-full shrink-0 rounded-full object-cover">
+                                        <div class="h-full w-full shrink-0 rounded-full object-cover placeholder animate-pulse !bg-surface-400"></div>
+                                    </div>
+                                </a>
+                                <comment-details class="flex flex-col items-start gap-1 md:gap-0">
+                                    <a href="/user/" class="text-xs leading-none md:text-[1vw]">
+                                        <username>Tokito</username>
+                                        <comment-time class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">8 months ago</comment-time>
+                                    </a>
+                                    <markdown class="text-sm leading-snug text-surface-50 md:text-[1vw] md:leading-[1.5vw]"></markdown>
+                                    <options class="mt-2 flex items-center gap-3 md:mt-[0.75vw] md:gap-[0.75vw]">
+                                        <button class="btn p-0">
+                                            <svg class="w-3 text-surface-300 md:w-[1vw]" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10.4201 2.30506C10.1647 2.04956 9.86147 1.84688 9.52774 1.7086C9.19401 1.57032 8.8363 1.49915 8.47506 1.49915C8.11382 1.49915 7.75611 1.57032 7.42238 1.7086C7.08865 1.84688 6.78544 2.04956 6.53006 2.30506L6.00006 2.83506L5.47006 2.30506C4.95421 1.78921 4.25458 1.49941 3.52506 1.49941C2.79554 1.49941 2.09591 1.78921 1.58006 2.30506C1.06421 2.8209 0.774414 3.52054 0.774414 4.25006C0.774414 4.97957 1.06421 5.67921 1.58006 6.19506L2.11006 6.72506L6.00006 10.6151L9.89006 6.72506L10.4201 6.19506C10.6756 5.93968 10.8782 5.63647 11.0165 5.30274C11.1548 4.96901 11.226 4.6113 11.226 4.25006C11.226 3.88881 11.1548 3.53111 11.0165 3.19738C10.8782 2.86365 10.6756 2.56044 10.4201 2.30506Z" fill="currentColor"></path>
+                                            </svg>
+                                            <likes class="text-xs md:text-[0.75vw]">1204</likes>
+                                        </button>
+                                        <button class="btn p-0 text-xs uppercase text-surface-50 md:text-[0.8vw]" data-svelte-h="svelte-y2kxur">Replay</button>
+                                    </options>
+                                    <replies-section class="md:mt-[0.35vw]">
+                                        <div class="accordion w-full space-y-1 " data-testid="accordion">
+                                            <div class="accordion-item  " data-testid="accordion-item">
+                                                <button type="button" class="accordion-control text-start w-full flex items-center space-x-4 p-0 bg-transparent rounded-container-token text-sm text-warning-400 font-semibold md:text-[0.9vw] md:leading-[1vw] pb-2 md:pb-[0.75vw] w-max" id="accordion-control-0.7125822691761627" aria-expanded="true" aria-controls="accordion-panel-0.7125822691761627">
+                                                    <div class="accordion-summary flex-1">Replies</div>
+                                                    <div class="accordion-summary-caret fill-current w-3 transition-transform duration-[200ms] md:w-[0.75vw] items-start justify-start rotate-180">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                                            <path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path>
+                                                        </svg>
+                                                    </div>
+                                                </button>
+                                                <div class="accordion-panel  p-0 rounded-container-token text-surface md:text-[1vw] md:leading-[1.35vw] items-start justify-start" id="accordion-panel-0.7125822691761627" role="region" aria-hidden="false" aria-labelledby="accordion-control-0.7125822691761627">
+                                                    <reply class="flex gap-3 md:gap-[1vw]">
+                                                        <a href="/user/" class="h-7 w-7 flex-shrink-0 md:h-[2vw] md:w-[2vw]">
+                                                            <div class="h-full w-full shrink-0 rounded-full object-cover">
+                                                                <div class="h-full w-full shrink-0 rounded-full object-cover placeholder animate-pulse !bg-surface-400"></div>
+                                                            </div>
+                                                        </a>
+                                                        <reply-details class="flex flex-col items-start gap-1 md:gap-0">
+                                                            <a href="/user/" class="text-xs leading-none md:text-[1vw]">
+                                                                <username>Sora amamiya</username>
+                                                                <reply-time class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">8 months ago</reply-time>
+                                                            </a>
+                                                            <markdown class="text-sm leading-snug text-surface-50 md:text-[1vw] md:leading-[1.5vw]"></markdown>
+                                                            <options class="mt-2 flex items-center md:mt-[0.75vw] md:gap-[0.75vw]">
+                                                                <button class="btn p-0">
+                                                                    <svg class="w-3 text-surface-300 md:w-[1vw]" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path d="M10.4201 2.30506C10.1647 2.04956 9.86147 1.84688 9.52774 1.7086C9.19401 1.57032 8.8363 1.49915 8.47506 1.49915C8.11382 1.49915 7.75611 1.57032 7.42238 1.7086C7.08865 1.84688 6.78544 2.04956 6.53006 2.30506L6.00006 2.83506L5.47006 2.30506C4.95421 1.78921 4.25458 1.49941 3.52506 1.49941C2.79554 1.49941 2.09591 1.78921 1.58006 2.30506C1.06421 2.8209 0.774414 3.52054 0.774414 4.25006C0.774414 4.97957 1.06421 5.67921 1.58006 6.19506L2.11006 6.72506L6.00006 10.6151L9.89006 6.72506L10.4201 6.19506C10.6756 5.93968 10.8782 5.63647 11.0165 5.30274C11.1548 4.96901 11.226 4.6113 11.226 4.25006C11.226 3.88881 11.1548 3.53111 11.0165 3.19738C10.8782 2.86365 10.6756 2.56044 10.4201 2.30506Z" fill="currentColor"></path>
+                                                                    </svg>
+                                                                    <likes class="text-xs md:text-[0.75vw]">699</likes>
+                                                                </button>
+                                                            </options>
+                                                        </reply-details>
+                                                    </reply>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </replies-section>
+                                </comment-details>
+                            </comment>
+                            <comment class="flex gap-3 md:gap-[1vw]">
+                                <a href="/user/" class="h-7 w-7 flex-shrink-0 md:h-[2vw] md:w-[2vw]">
+                                    <div class="h-full w-full shrink-0 rounded-full object-cover">
+                                        <div class="h-full w-full shrink-0 rounded-full object-cover placeholder animate-pulse !bg-surface-400"></div>
+                                    </div>
+                                </a>
+                                <comment-details class="flex flex-col items-start gap-1 md:gap-0">
+                                    <a href="/user/" class="text-xs leading-none md:text-[1vw]">
+                                        <username>Sora amamiya</username>
+                                        <comment-time class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">10 months ago</comment-time>
+                                    </a>
+                                    <markdown class="text-sm leading-snug text-surface-50 md:text-[1vw] md:leading-[1.5vw]"></markdown>
+                                    <options class="mt-2 flex items-center gap-3 md:mt-[0.75vw] md:gap-[0.75vw]">
+                                        <button class="btn p-0">
+                                            <svg class="w-3 text-surface-300 md:w-[1vw]" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10.4201 2.30506C10.1647 2.04956 9.86147 1.84688 9.52774 1.7086C9.19401 1.57032 8.8363 1.49915 8.47506 1.49915C8.11382 1.49915 7.75611 1.57032 7.42238 1.7086C7.08865 1.84688 6.78544 2.04956 6.53006 2.30506L6.00006 2.83506L5.47006 2.30506C4.95421 1.78921 4.25458 1.49941 3.52506 1.49941C2.79554 1.49941 2.09591 1.78921 1.58006 2.30506C1.06421 2.8209 0.774414 3.52054 0.774414 4.25006C0.774414 4.97957 1.06421 5.67921 1.58006 6.19506L2.11006 6.72506L6.00006 10.6151L9.89006 6.72506L10.4201 6.19506C10.6756 5.93968 10.8782 5.63647 11.0165 5.30274C11.1548 4.96901 11.226 4.6113 11.226 4.25006C11.226 3.88881 11.1548 3.53111 11.0165 3.19738C10.8782 2.86365 10.6756 2.56044 10.4201 2.30506Z" fill="currentColor"></path>
+                                            </svg>
+                                            <likes class="text-xs md:text-[0.75vw]">106</likes>
+                                        </button>
+                                        <button class="btn p-0 text-xs uppercase text-surface-50 md:text-[0.8vw]" data-svelte-h="svelte-y2kxur">Replay</button>
+                                    </options>
+                                </comment-details>
+                            </comment>
+                            <comment class="flex gap-3 md:gap-[1vw]">
+                                <a href="/user/" class="h-7 w-7 flex-shrink-0 md:h-[2vw] md:w-[2vw]">
+                                    <div class="h-full w-full shrink-0 rounded-full object-cover">
+                                        <div class="h-full w-full shrink-0 rounded-full object-cover placeholder animate-pulse !bg-surface-400"></div>
+                                    </div>
+                                </a>
+                                <comment-details class="flex flex-col items-start gap-1 md:gap-0">
+                                    <a href="/user/" class="text-xs leading-none md:text-[1vw]">
+                                        <username>Sora amamiya</username>
+                                        <comment-time class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">10 months ago</comment-time>
+                                    </a>
+                                    <markdown class="text-sm leading-snug text-surface-50 md:text-[1vw] md:leading-[1.5vw]"></markdown>
+                                    <options class="mt-2 flex items-center gap-3 md:mt-[0.75vw] md:gap-[0.75vw]">
+                                        <button class="btn p-0">
+                                            <svg class="w-3 text-surface-300 md:w-[1vw]" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M10.4201 2.30506C10.1647 2.04956 9.86147 1.84688 9.52774 1.7086C9.19401 1.57032 8.8363 1.49915 8.47506 1.49915C8.11382 1.49915 7.75611 1.57032 7.42238 1.7086C7.08865 1.84688 6.78544 2.04956 6.53006 2.30506L6.00006 2.83506L5.47006 2.30506C4.95421 1.78921 4.25458 1.49941 3.52506 1.49941C2.79554 1.49941 2.09591 1.78921 1.58006 2.30506C1.06421 2.8209 0.774414 3.52054 0.774414 4.25006C0.774414 4.97957 1.06421 5.67921 1.58006 6.19506L2.11006 6.72506L6.00006 10.6151L9.89006 6.72506L10.4201 6.19506C10.6756 5.93968 10.8782 5.63647 11.0165 5.30274C11.1548 4.96901 11.226 4.6113 11.226 4.25006C11.226 3.88881 11.1548 3.53111 11.0165 3.19738C10.8782 2.86365 10.6756 2.56044 10.4201 2.30506Z" fill="currentColor"></path>
+                                            </svg>
+                                            <likes class="text-xs md:text-[0.75vw]">69</likes>
+                                        </button>
+                                        <button class="btn p-0 text-xs uppercase text-surface-50 md:text-[0.8vw]" data-svelte-h="svelte-y2kxur">Replay</button>
+                                    </options>
+                                </comment-details>
+                            </comment>
+                        </comments>
+                    </comment-box>
+                    <forum-posts class="md:col-span-2">
+                        <section-header class="flex gap-2 border-b-2 border-surface-50/10 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
+                            <section-title class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]" data-svelte-h="svelte-1c3584g">Forum Posts</section-title>
+                            <button class="btn btn-icon hidden rounded bg-surface-400 p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
+                                <svg class="w-[0.9vw] opacity-75" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_565_480)">
+                                        <path d="M15 18.75C17.0711 18.75 18.75 17.0711 18.75 15C18.75 12.9289 17.0711 11.25 15 11.25C12.9289 11.25 11.25 12.9289 11.25 15C11.25 17.0711 12.9289 18.75 15 18.75Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M24.25 18.75C24.0836 19.127 24.034 19.5452 24.1075 19.9507C24.181 20.3562 24.3743 20.7304 24.6625 21.025L24.7375 21.1C24.9699 21.3322 25.1543 21.6079 25.2801 21.9114C25.406 22.2149 25.4707 22.5402 25.4707 22.8688C25.4707 23.1973 25.406 23.5226 25.2801 23.8261C25.1543 24.1296 24.9699 24.4053 24.7375 24.6375C24.5053 24.8699 24.2296 25.0543 23.9261 25.1801C23.6226 25.306 23.2973 25.3707 22.9688 25.3707C22.6402 25.3707 22.3149 25.306 22.0114 25.1801C21.7079 25.0543 21.4322 24.8699 21.2 24.6375L21.125 24.5625C20.8304 24.2743 20.4562 24.081 20.0507 24.0075C19.6452 23.934 19.227 23.9836 18.85 24.15C18.4803 24.3085 18.165 24.5716 17.9429 24.9069C17.7208 25.2423 17.6016 25.6353 17.6 26.0375V26.25C17.6 26.913 17.3366 27.5489 16.8678 28.0178C16.3989 28.4866 15.763 28.75 15.1 28.75C14.437 28.75 13.8011 28.4866 13.3322 28.0178C12.8634 27.5489 12.6 26.913 12.6 26.25V26.1375C12.5903 25.7238 12.4564 25.3225 12.2156 24.9859C11.9749 24.6493 11.6384 24.3929 11.25 24.25C10.873 24.0836 10.4548 24.034 10.0493 24.1075C9.64377 24.181 9.2696 24.3743 8.975 24.6625L8.9 24.7375C8.66782 24.9699 8.3921 25.1543 8.0886 25.2801C7.78511 25.406 7.45979 25.4707 7.13125 25.4707C6.80271 25.4707 6.47739 25.406 6.1739 25.2801C5.8704 25.1543 5.59468 24.9699 5.3625 24.7375C5.13006 24.5053 4.94566 24.2296 4.81985 23.9261C4.69404 23.6226 4.62928 23.2973 4.62928 22.9688C4.62928 22.6402 4.69404 22.3149 4.81985 22.0114C4.94566 21.7079 5.13006 21.4322 5.3625 21.2L5.4375 21.125C5.72567 20.8304 5.91898 20.4562 5.99251 20.0507C6.06603 19.6452 6.01639 19.227 5.85 18.85C5.69155 18.4803 5.42844 18.165 5.09308 17.9429C4.75772 17.7208 4.36473 17.6016 3.9625 17.6H3.75C3.08696 17.6 2.45107 17.3366 1.98223 16.8678C1.51339 16.3989 1.25 15.763 1.25 15.1C1.25 14.437 1.51339 13.8011 1.98223 13.3322C2.45107 12.8634 3.08696 12.6 3.75 12.6H3.8625C4.27624 12.5903 4.67751 12.4564 5.01412 12.2156C5.35074 11.9749 5.60714 11.6384 5.75 11.25C5.91639 10.873 5.96603 10.4548 5.89251 10.0493C5.81898 9.64377 5.62567 9.2696 5.3375 8.975L5.2625 8.9C5.03006 8.66782 4.84566 8.3921 4.71985 8.0886C4.59404 7.78511 4.52928 7.45979 4.52928 7.13125C4.52928 6.80271 4.59404 6.47739 4.71985 6.1739C4.84566 5.8704 5.03006 5.59468 5.2625 5.3625C5.49468 5.13006 5.7704 4.94566 6.0739 4.81985C6.37739 4.69404 6.70271 4.62928 7.03125 4.62928C7.35979 4.62928 7.68511 4.69404 7.9886 4.81985C8.2921 4.94566 8.56782 5.13006 8.8 5.3625L8.875 5.4375C9.1696 5.72567 9.54377 5.91898 9.94926 5.99251C10.3548 6.06603 10.773 6.01639 11.15 5.85H11.25C11.6197 5.69155 11.935 5.42844 12.1571 5.09308C12.3792 4.75772 12.4984 4.36473 12.5 3.9625V3.75C12.5 3.08696 12.7634 2.45107 13.2322 1.98223C13.7011 1.51339 14.337 1.25 15 1.25C15.663 1.25 16.2989 1.51339 16.7678 1.98223C17.2366 2.45107 17.5 3.08696 17.5 3.75V3.8625C17.5016 4.26473 17.6208 4.65772 17.8429 4.99308C18.065 5.32844 18.3803 5.59155 18.75 5.75C19.127 5.91639 19.5452 5.96603 19.9507 5.89251C20.3562 5.81898 20.7304 5.62567 21.025 5.3375L21.1 5.2625C21.3322 5.03006 21.6079 4.84566 21.9114 4.71985C22.2149 4.59404 22.5402 4.52928 22.8688 4.52928C23.1973 4.52928 23.5226 4.59404 23.8261 4.71985C24.1296 4.84566 24.4053 5.03006 24.6375 5.2625C24.8699 5.49468 25.0543 5.7704 25.1801 6.0739C25.306 6.37739 25.3707 6.70271 25.3707 7.03125C25.3707 7.35979 25.306 7.68511 25.1801 7.9886C25.0543 8.2921 24.8699 8.56782 24.6375 8.8L24.5625 8.875C24.2743 9.1696 24.081 9.54377 24.0075 9.94926C23.934 10.3548 23.9836 10.773 24.15 11.15V11.25C24.3085 11.6197 24.5716 11.935 24.9069 12.1571C25.2423 12.3792 25.6353 12.4984 26.0375 12.5H26.25C26.913 12.5 27.5489 12.7634 28.0178 13.2322C28.4866 13.7011 28.75 14.337 28.75 15C28.75 15.663 28.4866 16.2989 28.0178 16.7678C27.5489 17.2366 26.913 17.5 26.25 17.5H26.1375C25.7353 17.5016 25.3423 17.6208 25.0069 17.8429C24.6716 18.065 24.4085 18.3803 24.25 18.75V18.75Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_565_480">
+                                            <rect width="30" height="30" fill="currentColor"></rect>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </button>
+                        </section-header>
+                        <forum-details class="mt-2 flex items-center justify-between md:mt-[0.75vw]">
+                            <p class="flex items-center gap-1 md:hidden" data-svelte-h="svelte-relu4i">
+                                <span class="text-base font-bold leading-none">106</span>
+                                <span class="text-sm font-semibold text-surface-50">posts</span>
+                            </p>
+                            <forum-options class="flex items-center gap-2 md:w-full md:justify-between">
+                                <button class="btn btn-sm h-7 gap-2 rounded bg-surface-400 px-2 text-xs font-semibold md:h-[2.4vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.875vw]">
+                                    <svg color="surface-50" class="w-4 rotate-45 md:w-[1vw]" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g filter="url(#filter0_d_2536_5517)">
+                                            <path d="M11 3L5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            <path d="M5 3L11 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </g>
+                                        <defs>
+                                            <filter id="filter0_d_2536_5517" x="-2" y="0" width="20" height="20" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                                <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                                                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix>
+                                                <feOffset dy="4"></feOffset>
+                                                <feGaussianBlur stdDeviation="2"></feGaussianBlur>
+                                                <feComposite in2="hardAlpha" operator="out"></feComposite>
+                                                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"></feColorMatrix>
+                                                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2536_5517"></feBlend>
+                                                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2536_5517" result="shape"></feBlend>
+                                            </filter>
+                                        </defs>
+                                    </svg> Create New </button>
+                                <button class="btn btn-icon h-7 w-auto rounded bg-surface-400 p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]" aria-label="Filter">
+                                    <svg class="w-3 md:w-[1vw]" color="lightgray" viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M18.3332 1.5H1.6665L8.33317 9.38333V14.8333L11.6665 16.5V9.38333L18.3332 1.5Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </button>
+                            </forum-options>
+                        </forum-details>
+                        <posts class="mt-4 grid grid-cols-2 flex-col gap-4 md:mt-[1.25vw] md:flex md:gap-[1vw]">
+                            <a href="/" class="card w-full grid-cols-7 overflow-hidden rounded-lg !bg-surface-400 md:grid md:rounded-[0.625vw]">
+                                <post-banner class="col-span-2 block h-16 md:h-full md:w-full">
+                                    <div class="h-full w-full object-cover object-center">
+                                        <div class="h-full w-full object-cover object-center placeholder animate-pulse !bg-surface-400"></div>
+                                    </div>
+                                </post-banner>
+                                <post-container class="flex h-36 flex-col justify-between p-3 md:col-span-5 md:h-full md:gap-[0.375vw] md:p-[1vw]">
+                                    <post-head>
+                                        <post-title class="line-clamp-2 text-xs font-extrabold md:text-[0.875vw] md:leading-[1.25vw]">Celebrating 10 years of Hyouka!</post-title>
+                                        <post-description class="mt-2 line-clamp-3 text-[0.6rem] font-medium leading-snug text-surface-50 md:mt-[0.5vw] md:line-clamp-2 md:text-[0.75vw] md:leading-[1.125vw]">Ousei Arima is a child prodigy known as the "Human Metronome" for playing the piano with precision and perfection. Guided by a strict mother and rigorous training, Kousei dominates every competition he enters</post-description>
+                                    </post-head>
+                                    <post-infos class="flex items-end justify-between text-[0.6rem] leading-none md:mt-[0.75vw] md:items-center md:text-[0.75vw]">
+                                        <post-user-infos class="flex flex-col gap-1 md:flex-row md:items-center md:gap-[0.25vw]">
+                                            <post-author-name>Posted by <span class="text-[0.65rem] font-semibold md:text-[0.85vw]">Eiennlaio</span>
+                                            </post-author-name>
+                                            <post-uploaded-date class="text-surface-50">7 months ago</post-uploaded-date>
+                                        </post-user-infos>
+                                        <post-responses class="flex items-center gap-1 md:gap-[0.25vw]">
+                                            <svg class="w-3 md:w-[1vw]" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M17.5 9.58336C17.5029 10.6832 17.2459 11.7683 16.75 12.75C16.162 13.9265 15.2581 14.916 14.1395 15.6078C13.021 16.2995 11.7319 16.6662 10.4167 16.6667C9.31678 16.6696 8.23176 16.4126 7.25 15.9167L2.5 17.5L4.08333 12.75C3.58744 11.7683 3.33047 10.6832 3.33333 9.58336C3.33384 8.26815 3.70051 6.97907 4.39227 5.86048C5.08402 4.7419 6.07355 3.838 7.25 3.25002C8.23176 2.75413 9.31678 2.49716 10.4167 2.50002H10.8333C12.5703 2.59585 14.2109 3.32899 15.441 4.55907C16.671 5.78915 17.4042 7.42973 17.5 9.16669V9.58336Z" stroke="#DCD9F7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </svg>
+                                            <responses-text>69</responses-text>
+                                        </post-responses>
+                                    </post-infos>
+                                </post-container>
+                            </a>
+                            <a href="/" class="card w-full grid-cols-7 overflow-hidden rounded-lg !bg-surface-400 md:grid md:rounded-[0.625vw]">
+                                <post-banner class="col-span-2 block h-16 md:h-full md:w-full">
+                                    <div class="h-full w-full object-cover object-center">
+                                        <div class="h-full w-full object-cover object-center placeholder animate-pulse !bg-surface-400"></div>
+                                    </div>
+                                </post-banner>
+                                <post-container class="flex h-36 flex-col justify-between p-3 md:col-span-5 md:h-full md:gap-[0.375vw] md:p-[1vw]">
+                                    <post-head>
+                                        <post-title class="line-clamp-2 text-xs font-extrabold md:text-[0.875vw] md:leading-[1.25vw]">Can You See Hyouka as a Point-n-Click Adventure Game?</post-title>
+                                        <post-description class="mt-2 line-clamp-3 text-[0.6rem] font-medium leading-snug text-surface-50 md:mt-[0.5vw] md:line-clamp-2 md:text-[0.75vw] md:leading-[1.125vw]">So, while watching the series, I can see it being adapted as a point-n-click game in which you ask people around, looking for clues and solve mysteries on the top given to you. Player would be controlling Oreki in a 3D-esque environment and go around interrogate people around. You have choice of responses and see where that gets you. Would you play a game like that based on Hyouka? </post-description>
+                                    </post-head>
+                                    <post-infos class="flex items-end justify-between text-[0.6rem] leading-none md:mt-[0.75vw] md:items-center md:text-[0.75vw]">
+                                        <post-user-infos class="flex flex-col gap-1 md:flex-row md:items-center md:gap-[0.25vw]">
+                                            <post-author-name>Posted by <span class="text-[0.65rem] font-semibold md:text-[0.85vw]">simonitro</span>
+                                            </post-author-name>
+                                            <post-uploaded-date class="text-surface-50">a year ago</post-uploaded-date>
+                                        </post-user-infos>
+                                        <post-responses class="flex items-center gap-1 md:gap-[0.25vw]">
+                                            <svg class="w-3 md:w-[1vw]" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M17.5 9.58336C17.5029 10.6832 17.2459 11.7683 16.75 12.75C16.162 13.9265 15.2581 14.916 14.1395 15.6078C13.021 16.2995 11.7319 16.6662 10.4167 16.6667C9.31678 16.6696 8.23176 16.4126 7.25 15.9167L2.5 17.5L4.08333 12.75C3.58744 11.7683 3.33047 10.6832 3.33333 9.58336C3.33384 8.26815 3.70051 6.97907 4.39227 5.86048C5.08402 4.7419 6.07355 3.838 7.25 3.25002C8.23176 2.75413 9.31678 2.49716 10.4167 2.50002H10.8333C12.5703 2.59585 14.2109 3.32899 15.441 4.55907C16.671 5.78915 17.4042 7.42973 17.5 9.16669V9.58336Z" stroke="#DCD9F7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                            </svg>
+                                            <responses-text>55</responses-text>
+                                        </post-responses>
+                                    </post-infos>
+                                </post-container>
+                            </a>
+                        </posts>
+                    </forum-posts>
+                </anime-media-section>
+            </anime-episodes-container>
+        </anime-info-episodes>
+        <anime-more-details class="hidden flex-col md:col-span-2 md:flex">
+            <section-header class="flex gap-[0.75vw]">
+                <header-title class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]" data-svelte-h="svelte-fcr951">Ratings</header-title>
+                <button class="btn btn-icon rounded-[0.1875vw] bg-surface-400 p-0 md:h-[1.5vw] md:w-[1.5vw]">
+                    <svg class="w-[0.9vw] opacity-75" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_565_480)">
+                            <path d="M15 18.75C17.0711 18.75 18.75 17.0711 18.75 15C18.75 12.9289 17.0711 11.25 15 11.25C12.9289 11.25 11.25 12.9289 11.25 15C11.25 17.0711 12.9289 18.75 15 18.75Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M24.25 18.75C24.0836 19.127 24.034 19.5452 24.1075 19.9507C24.181 20.3562 24.3743 20.7304 24.6625 21.025L24.7375 21.1C24.9699 21.3322 25.1543 21.6079 25.2801 21.9114C25.406 22.2149 25.4707 22.5402 25.4707 22.8688C25.4707 23.1973 25.406 23.5226 25.2801 23.8261C25.1543 24.1296 24.9699 24.4053 24.7375 24.6375C24.5053 24.8699 24.2296 25.0543 23.9261 25.1801C23.6226 25.306 23.2973 25.3707 22.9688 25.3707C22.6402 25.3707 22.3149 25.306 22.0114 25.1801C21.7079 25.0543 21.4322 24.8699 21.2 24.6375L21.125 24.5625C20.8304 24.2743 20.4562 24.081 20.0507 24.0075C19.6452 23.934 19.227 23.9836 18.85 24.15C18.4803 24.3085 18.165 24.5716 17.9429 24.9069C17.7208 25.2423 17.6016 25.6353 17.6 26.0375V26.25C17.6 26.913 17.3366 27.5489 16.8678 28.0178C16.3989 28.4866 15.763 28.75 15.1 28.75C14.437 28.75 13.8011 28.4866 13.3322 28.0178C12.8634 27.5489 12.6 26.913 12.6 26.25V26.1375C12.5903 25.7238 12.4564 25.3225 12.2156 24.9859C11.9749 24.6493 11.6384 24.3929 11.25 24.25C10.873 24.0836 10.4548 24.034 10.0493 24.1075C9.64377 24.181 9.2696 24.3743 8.975 24.6625L8.9 24.7375C8.66782 24.9699 8.3921 25.1543 8.0886 25.2801C7.78511 25.406 7.45979 25.4707 7.13125 25.4707C6.80271 25.4707 6.47739 25.406 6.1739 25.2801C5.8704 25.1543 5.59468 24.9699 5.3625 24.7375C5.13006 24.5053 4.94566 24.2296 4.81985 23.9261C4.69404 23.6226 4.62928 23.2973 4.62928 22.9688C4.62928 22.6402 4.69404 22.3149 4.81985 22.0114C4.94566 21.7079 5.13006 21.4322 5.3625 21.2L5.4375 21.125C5.72567 20.8304 5.91898 20.4562 5.99251 20.0507C6.06603 19.6452 6.01639 19.227 5.85 18.85C5.69155 18.4803 5.42844 18.165 5.09308 17.9429C4.75772 17.7208 4.36473 17.6016 3.9625 17.6H3.75C3.08696 17.6 2.45107 17.3366 1.98223 16.8678C1.51339 16.3989 1.25 15.763 1.25 15.1C1.25 14.437 1.51339 13.8011 1.98223 13.3322C2.45107 12.8634 3.08696 12.6 3.75 12.6H3.8625C4.27624 12.5903 4.67751 12.4564 5.01412 12.2156C5.35074 11.9749 5.60714 11.6384 5.75 11.25C5.91639 10.873 5.96603 10.4548 5.89251 10.0493C5.81898 9.64377 5.62567 9.2696 5.3375 8.975L5.2625 8.9C5.03006 8.66782 4.84566 8.3921 4.71985 8.0886C4.59404 7.78511 4.52928 7.45979 4.52928 7.13125C4.52928 6.80271 4.59404 6.47739 4.71985 6.1739C4.84566 5.8704 5.03006 5.59468 5.2625 5.3625C5.49468 5.13006 5.7704 4.94566 6.0739 4.81985C6.37739 4.69404 6.70271 4.62928 7.03125 4.62928C7.35979 4.62928 7.68511 4.69404 7.9886 4.81985C8.2921 4.94566 8.56782 5.13006 8.8 5.3625L8.875 5.4375C9.1696 5.72567 9.54377 5.91898 9.94926 5.99251C10.3548 6.06603 10.773 6.01639 11.15 5.85H11.25C11.6197 5.69155 11.935 5.42844 12.1571 5.09308C12.3792 4.75772 12.4984 4.36473 12.5 3.9625V3.75C12.5 3.08696 12.7634 2.45107 13.2322 1.98223C13.7011 1.51339 14.337 1.25 15 1.25C15.663 1.25 16.2989 1.51339 16.7678 1.98223C17.2366 2.45107 17.5 3.08696 17.5 3.75V3.8625C17.5016 4.26473 17.6208 4.65772 17.8429 4.99308C18.065 5.32844 18.3803 5.59155 18.75 5.75C19.127 5.91639 19.5452 5.96603 19.9507 5.89251C20.3562 5.81898 20.7304 5.62567 21.025 5.3375L21.1 5.2625C21.3322 5.03006 21.6079 4.84566 21.9114 4.71985C22.2149 4.59404 22.5402 4.52928 22.8688 4.52928C23.1973 4.52928 23.5226 4.59404 23.8261 4.71985C24.1296 4.84566 24.4053 5.03006 24.6375 5.2625C24.8699 5.49468 25.0543 5.7704 25.1801 6.0739C25.306 6.37739 25.3707 6.70271 25.3707 7.03125C25.3707 7.35979 25.306 7.68511 25.1801 7.9886C25.0543 8.2921 24.8699 8.56782 24.6375 8.8L24.5625 8.875C24.2743 9.1696 24.081 9.54377 24.0075 9.94926C23.934 10.3548 23.9836 10.773 24.15 11.15V11.25C24.3085 11.6197 24.5716 11.935 24.9069 12.1571C25.2423 12.3792 25.6353 12.4984 26.0375 12.5H26.25C26.913 12.5 27.5489 12.7634 28.0178 13.2322C28.4866 13.7011 28.75 14.337 28.75 15C28.75 15.663 28.4866 16.2989 28.0178 16.7678C27.5489 17.2366 26.913 17.5 26.25 17.5H26.1375C25.7353 17.5016 25.3423 17.6208 25.0069 17.8429C24.6716 18.065 24.4085 18.3803 24.25 18.75V18.75Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_565_480">
+                                <rect width="30" height="30" fill="currentColor"></rect>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </button>
+            </section-header>
+            <anime-ratings class="md:mt-[1.56vw]">
+                <raing class="flex items-center gap-[0.5vw]" data-svelte-h="svelte-9h7f90">
+                    <span class="border-b-2 border-surface-50/50 pb-[0.5vw] font-bold md:text-[2vw] md:leading-[1.5vw]">92%</span>
+                    <span class="divider-vertical m-0 !border-surface-50/50 font-semibold text-surface-50 md:pl-1 md:text-[0.75vw] md:leading-[0.8vw]">2.8k ratings</span>
+                </raing>
+                <raking class="block md:mt-[1vw]" data-svelte-h="svelte-b3rov8">
+                    <div class="flex items-center md:gap-[0.25vw]">
+                        <span class="font-semibold md:text-[1vw] md:leading-[1.5vw]">#80</span>
+                        <span class="text-surface-50 md:text-[0.75vw] md:leading-[0.75vw]">Trending of all time</span>
+                    </div>
+                    <div class="flex items-center md:gap-[0.25vw]">
+                        <span class="font-semibold md:text-[1vw] md:leading-[1.5vw]">#108</span>
+                        <span class="text-surface-50 md:text-[0.75vw] md:leading-[0.75vw]">Most popular anime</span>
+                    </div>
+                </raking>
+                <button class="btn bg-secondary-100 text-surface-500 md:mt-[1.125vw] md:h-[1.5vw] md:w-[9vw] md:rounded-[0.18vw] md:text-[0.75vw] md:leading-[0.9vw]">
+                    <div class="flex place-items-center gap-[0.25vw]">
+                        <svg viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-[1vw]">
+                            <g filter="url(#filter0_d_1911_2848)">
+                                <path d="M15.5 3L10.75 7.75L8.25 5.25L4.5 9" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M12.5 3H15.5V6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </g>
+                            <defs>
+                                <filter id="filter0_d_1911_2848" x="0" y="0" width="20" height="20" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                    <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix>
+                                    <feOffset dy="4"></feOffset>
+                                    <feGaussianBlur stdDeviation="2"></feGaussianBlur>
+                                    <feComposite in2="hardAlpha" operator="out"></feComposite>
+                                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"></feColorMatrix>
+                                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1911_2848"></feBlend>
+                                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1911_2848" result="shape"></feBlend>
+                                </filter>
+                            </defs>
+                        </svg> Detailed Distribution
+                    </div>
+                </button>
+                <star-rating class="md:mt-[0.4vw]">
+                    <span class="font-semibold md:text-[0.9vw] md:leading-[0.9vw]" data-svelte-h="svelte-jc620j">Your rating</span>
+                    <div class="flex items-center gap-[0.75vw] md:mt-[0.25vw]">
+                        <ratings>
+                            <div class="ratings w-full flex text-token fill-token justify-center space-x-2 " data-testid="rating-bar">
+                                <span class="rating-icon ">
+                                    <svg width="30" height="30" viewBox="0 0 30 30" fill="white" xmlns="http://www.w3.org/2000/svg" color="white" class="w-[1.25vw]">
+                                        <path d="M15 2.5L18.8625 10.325L27.5 11.5875L21.25 17.675L22.725 26.275L15 22.2125L7.275 26.275L8.75 17.675L2.5 11.5875L11.1375 10.325L15 2.5Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </span>
+                                <span class="rating-icon ">
+                                    <svg width="30" height="30" viewBox="0 0 30 30" fill="white" xmlns="http://www.w3.org/2000/svg" color="white" class="w-[1.25vw]">
+                                        <path d="M15 2.5L18.8625 10.325L27.5 11.5875L21.25 17.675L22.725 26.275L15 22.2125L7.275 26.275L8.75 17.675L2.5 11.5875L11.1375 10.325L15 2.5Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </span>
+                                <span class="rating-icon ">
+                                    <svg width="30" height="30" viewBox="0 0 30 30" fill="white" xmlns="http://www.w3.org/2000/svg" color="white" class="w-[1.25vw]">
+                                        <path d="M15 2.5L18.8625 10.325L27.5 11.5875L21.25 17.675L22.725 26.275L15 22.2125L7.275 26.275L8.75 17.675L2.5 11.5875L11.1375 10.325L15 2.5Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </span>
+                                <span class="rating-icon ">
+                                    <svg width="30" height="30" viewBox="0 0 30 30" fill="white" xmlns="http://www.w3.org/2000/svg" color="white" class="w-[1.25vw]">
+                                        <path d="M15 2.5L18.8625 10.325L27.5 11.5875L21.25 17.675L22.725 26.275L15 22.2125L7.275 26.275L8.75 17.675L2.5 11.5875L11.1375 10.325L15 2.5Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </span>
+                                <span class="rating-icon ">
+                                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" color="white" class="w-[1.25vw]">
+                                        <defs>
+                                            <linearGradient id="grad">
+                                                <stop offset="50%" stop-color="white"></stop>
+                                                <stop offset="50%" stop-color="transparent"></stop>
+                                            </linearGradient>
+                                        </defs>
+                                        <path fill="url(#grad)" d="M15 2.5L18.8625 10.325L27.5 11.5875L21.25 17.675L22.725 26.275L15 22.2125L7.275 26.275L8.75 17.675L2.5 11.5875L11.1375 10.325L15 2.5Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </span>
+                            </div>
+                        </ratings>
+                        <span class="font-bold leading-none md:text-[0.95vw]" data-svelte-h="svelte-7rm839">92%</span>
+                        <button class="btn btn-icon bg-secondary-100 p-[0.3vw] text-surface-500 md:w-[1.375vw] md:rounded-[0.19vw]">
+                            <svg color="bg-surface-500" style="width: 0.75vw;" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_1917_2501)">
+                                    <path d="M8.5 1.50015C8.63132 1.36883 8.78722 1.26466 8.9588 1.19359C9.13038 1.12252 9.31428 1.08594 9.5 1.08594C9.68572 1.08594 9.86962 1.12252 10.0412 1.19359C10.2128 1.26466 10.3687 1.36883 10.5 1.50015C10.6313 1.63147 10.7355 1.78737 10.8066 1.95895C10.8776 2.13054 10.9142 2.31443 10.9142 2.50015C10.9142 2.68587 10.8776 2.86977 10.8066 3.04135C10.7355 3.21293 10.6313 3.36883 10.5 3.50015L3.75 10.2502L1 11.0002L1.75 8.25015L8.5 1.50015Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_1917_2501">
+                                        <rect width="12" height="12" fill="white"></rect>
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                        </button>
+                    </div>
+                </star-rating>
+                <button class="btn btn-sm flex gap-[0.5vw] p-0 md:mt-[1vw] md:text-[0.8vw] md:leading-[0.9vw]">Add a review <svg class="w-[0.8vw]" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M22.5 16.25V23.75C22.5 24.413 22.2366 25.0489 21.7678 25.5178C21.2989 25.9866 20.663 26.25 20 26.25H6.25C5.58696 26.25 4.95107 25.9866 4.48223 25.5178C4.01339 25.0489 3.75 24.413 3.75 23.75V10C3.75 9.33696 4.01339 8.70107 4.48223 8.23223C4.95107 7.76339 5.58696 7.5 6.25 7.5H13.75" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M18.75 3.75H26.25V11.25" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path d="M12.5 17.5L26.25 3.75" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </button>
+            </anime-ratings>
+            <more-infos-header class="flex gap-[0.75vw] md:mt-[6vw]">
+                <header-title class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]" data-svelte-h="svelte-2w6ikd">Details</header-title>
+                <button class="btn btn-icon rounded bg-surface-400 p-0 md:h-[1.5vw] md:w-[1.5vw]">
+                    <svg class="w-[0.9vw] opacity-75" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_565_480)">
+                            <path d="M15 18.75C17.0711 18.75 18.75 17.0711 18.75 15C18.75 12.9289 17.0711 11.25 15 11.25C12.9289 11.25 11.25 12.9289 11.25 15C11.25 17.0711 12.9289 18.75 15 18.75Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M24.25 18.75C24.0836 19.127 24.034 19.5452 24.1075 19.9507C24.181 20.3562 24.3743 20.7304 24.6625 21.025L24.7375 21.1C24.9699 21.3322 25.1543 21.6079 25.2801 21.9114C25.406 22.2149 25.4707 22.5402 25.4707 22.8688C25.4707 23.1973 25.406 23.5226 25.2801 23.8261C25.1543 24.1296 24.9699 24.4053 24.7375 24.6375C24.5053 24.8699 24.2296 25.0543 23.9261 25.1801C23.6226 25.306 23.2973 25.3707 22.9688 25.3707C22.6402 25.3707 22.3149 25.306 22.0114 25.1801C21.7079 25.0543 21.4322 24.8699 21.2 24.6375L21.125 24.5625C20.8304 24.2743 20.4562 24.081 20.0507 24.0075C19.6452 23.934 19.227 23.9836 18.85 24.15C18.4803 24.3085 18.165 24.5716 17.9429 24.9069C17.7208 25.2423 17.6016 25.6353 17.6 26.0375V26.25C17.6 26.913 17.3366 27.5489 16.8678 28.0178C16.3989 28.4866 15.763 28.75 15.1 28.75C14.437 28.75 13.8011 28.4866 13.3322 28.0178C12.8634 27.5489 12.6 26.913 12.6 26.25V26.1375C12.5903 25.7238 12.4564 25.3225 12.2156 24.9859C11.9749 24.6493 11.6384 24.3929 11.25 24.25C10.873 24.0836 10.4548 24.034 10.0493 24.1075C9.64377 24.181 9.2696 24.3743 8.975 24.6625L8.9 24.7375C8.66782 24.9699 8.3921 25.1543 8.0886 25.2801C7.78511 25.406 7.45979 25.4707 7.13125 25.4707C6.80271 25.4707 6.47739 25.406 6.1739 25.2801C5.8704 25.1543 5.59468 24.9699 5.3625 24.7375C5.13006 24.5053 4.94566 24.2296 4.81985 23.9261C4.69404 23.6226 4.62928 23.2973 4.62928 22.9688C4.62928 22.6402 4.69404 22.3149 4.81985 22.0114C4.94566 21.7079 5.13006 21.4322 5.3625 21.2L5.4375 21.125C5.72567 20.8304 5.91898 20.4562 5.99251 20.0507C6.06603 19.6452 6.01639 19.227 5.85 18.85C5.69155 18.4803 5.42844 18.165 5.09308 17.9429C4.75772 17.7208 4.36473 17.6016 3.9625 17.6H3.75C3.08696 17.6 2.45107 17.3366 1.98223 16.8678C1.51339 16.3989 1.25 15.763 1.25 15.1C1.25 14.437 1.51339 13.8011 1.98223 13.3322C2.45107 12.8634 3.08696 12.6 3.75 12.6H3.8625C4.27624 12.5903 4.67751 12.4564 5.01412 12.2156C5.35074 11.9749 5.60714 11.6384 5.75 11.25C5.91639 10.873 5.96603 10.4548 5.89251 10.0493C5.81898 9.64377 5.62567 9.2696 5.3375 8.975L5.2625 8.9C5.03006 8.66782 4.84566 8.3921 4.71985 8.0886C4.59404 7.78511 4.52928 7.45979 4.52928 7.13125C4.52928 6.80271 4.59404 6.47739 4.71985 6.1739C4.84566 5.8704 5.03006 5.59468 5.2625 5.3625C5.49468 5.13006 5.7704 4.94566 6.0739 4.81985C6.37739 4.69404 6.70271 4.62928 7.03125 4.62928C7.35979 4.62928 7.68511 4.69404 7.9886 4.81985C8.2921 4.94566 8.56782 5.13006 8.8 5.3625L8.875 5.4375C9.1696 5.72567 9.54377 5.91898 9.94926 5.99251C10.3548 6.06603 10.773 6.01639 11.15 5.85H11.25C11.6197 5.69155 11.935 5.42844 12.1571 5.09308C12.3792 4.75772 12.4984 4.36473 12.5 3.9625V3.75C12.5 3.08696 12.7634 2.45107 13.2322 1.98223C13.7011 1.51339 14.337 1.25 15 1.25C15.663 1.25 16.2989 1.51339 16.7678 1.98223C17.2366 2.45107 17.5 3.08696 17.5 3.75V3.8625C17.5016 4.26473 17.6208 4.65772 17.8429 4.99308C18.065 5.32844 18.3803 5.59155 18.75 5.75C19.127 5.91639 19.5452 5.96603 19.9507 5.89251C20.3562 5.81898 20.7304 5.62567 21.025 5.3375L21.1 5.2625C21.3322 5.03006 21.6079 4.84566 21.9114 4.71985C22.2149 4.59404 22.5402 4.52928 22.8688 4.52928C23.1973 4.52928 23.5226 4.59404 23.8261 4.71985C24.1296 4.84566 24.4053 5.03006 24.6375 5.2625C24.8699 5.49468 25.0543 5.7704 25.1801 6.0739C25.306 6.37739 25.3707 6.70271 25.3707 7.03125C25.3707 7.35979 25.306 7.68511 25.1801 7.9886C25.0543 8.2921 24.8699 8.56782 24.6375 8.8L24.5625 8.875C24.2743 9.1696 24.081 9.54377 24.0075 9.94926C23.934 10.3548 23.9836 10.773 24.15 11.15V11.25C24.3085 11.6197 24.5716 11.935 24.9069 12.1571C25.2423 12.3792 25.6353 12.4984 26.0375 12.5H26.25C26.913 12.5 27.5489 12.7634 28.0178 13.2322C28.4866 13.7011 28.75 14.337 28.75 15C28.75 15.663 28.4866 16.2989 28.0178 16.7678C27.5489 17.2366 26.913 17.5 26.25 17.5H26.1375C25.7353 17.5016 25.3423 17.6208 25.0069 17.8429C24.6716 18.065 24.4085 18.3803 24.25 18.75V18.75Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_565_480">
+                                <rect width="30" height="30" fill="currentColor"></rect>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </button>
+            </more-infos-header>
+            <more-infos class="md:mt-[1.25vw]">
+                <anime-details class="flex flex-col gap-[1.125vw] capitalize">
+                    <div class="flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none text-surface-50">
+                        <p class="font-semibold text-white">format</p>
+                        <p>TV</p>
+                    </div>
+                    <div class="flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none text-surface-50">
+                        <p class="font-semibold text-white">episodes</p>
+                        <p>22</p>
+                    </div>
+                    <div class="flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none text-surface-50">
+                        <p class="font-semibold text-white">episode Duration</p>
+                        <p>26 Minutes</p>
+                    </div>
+                    <div class="flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none text-surface-50">
+                        <p class="font-semibold text-white">status</p>
+                        <p>finished</p>
+                    </div>
+                    <div class="flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none text-surface-50">
+                        <p class="font-semibold text-white">start date</p>
+                        <p>Apr 23, 2012</p>
+                    </div>
+                    <div class="flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none text-surface-50">
+                        <p class="font-semibold text-white">end date</p>
+                        <p>Sep 16, 2012</p>
+                    </div>
+                    <div class="flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none text-surface-50">
+                        <p class="font-semibold text-white">season</p>
+                        <p>spring 2012</p>
+                    </div>
+                    <div class="flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none text-surface-50">
+                        <p class="font-semibold text-white">studios</p>
+                        <p>Kyoto Animation</p>
+                    </div>
+                    <div class="flex flex-col gap-[0.75vw] text-[0.9375vw] leading-none text-surface-50">
+                        <p class="font-semibold text-white">producers</p>
+                        <p>Animation Do</p>
+                        <p>Kadokawa Shoten</p>
+                        <p>Klock Worx</p>
+                        <p>Lantis</p>
+                        <p>chara-ani.com</p>
+                    </div>
+                    <div class="flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none text-surface-50">
+                        <p class="font-semibold text-white">source</p>
+                        <p>Night Novel</p>
+                    </div>
+                </anime-details>
+                <voiceovercase class="mt-[2.5vw] block">
+                    <section-header class="flex gap-[0.75vw]">
+                        <header-title class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]" data-svelte-h="svelte-15t97s4">Voiceover Cast</header-title>
+                        <button class="btn btn-icon rounded bg-surface-400 p-0 md:h-[1.5vw] md:w-[1.5vw]">
+                            <svg class="w-[0.9vw] opacity-75" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_565_480)">
+                                    <path d="M15 18.75C17.0711 18.75 18.75 17.0711 18.75 15C18.75 12.9289 17.0711 11.25 15 11.25C12.9289 11.25 11.25 12.9289 11.25 15C11.25 17.0711 12.9289 18.75 15 18.75Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M24.25 18.75C24.0836 19.127 24.034 19.5452 24.1075 19.9507C24.181 20.3562 24.3743 20.7304 24.6625 21.025L24.7375 21.1C24.9699 21.3322 25.1543 21.6079 25.2801 21.9114C25.406 22.2149 25.4707 22.5402 25.4707 22.8688C25.4707 23.1973 25.406 23.5226 25.2801 23.8261C25.1543 24.1296 24.9699 24.4053 24.7375 24.6375C24.5053 24.8699 24.2296 25.0543 23.9261 25.1801C23.6226 25.306 23.2973 25.3707 22.9688 25.3707C22.6402 25.3707 22.3149 25.306 22.0114 25.1801C21.7079 25.0543 21.4322 24.8699 21.2 24.6375L21.125 24.5625C20.8304 24.2743 20.4562 24.081 20.0507 24.0075C19.6452 23.934 19.227 23.9836 18.85 24.15C18.4803 24.3085 18.165 24.5716 17.9429 24.9069C17.7208 25.2423 17.6016 25.6353 17.6 26.0375V26.25C17.6 26.913 17.3366 27.5489 16.8678 28.0178C16.3989 28.4866 15.763 28.75 15.1 28.75C14.437 28.75 13.8011 28.4866 13.3322 28.0178C12.8634 27.5489 12.6 26.913 12.6 26.25V26.1375C12.5903 25.7238 12.4564 25.3225 12.2156 24.9859C11.9749 24.6493 11.6384 24.3929 11.25 24.25C10.873 24.0836 10.4548 24.034 10.0493 24.1075C9.64377 24.181 9.2696 24.3743 8.975 24.6625L8.9 24.7375C8.66782 24.9699 8.3921 25.1543 8.0886 25.2801C7.78511 25.406 7.45979 25.4707 7.13125 25.4707C6.80271 25.4707 6.47739 25.406 6.1739 25.2801C5.8704 25.1543 5.59468 24.9699 5.3625 24.7375C5.13006 24.5053 4.94566 24.2296 4.81985 23.9261C4.69404 23.6226 4.62928 23.2973 4.62928 22.9688C4.62928 22.6402 4.69404 22.3149 4.81985 22.0114C4.94566 21.7079 5.13006 21.4322 5.3625 21.2L5.4375 21.125C5.72567 20.8304 5.91898 20.4562 5.99251 20.0507C6.06603 19.6452 6.01639 19.227 5.85 18.85C5.69155 18.4803 5.42844 18.165 5.09308 17.9429C4.75772 17.7208 4.36473 17.6016 3.9625 17.6H3.75C3.08696 17.6 2.45107 17.3366 1.98223 16.8678C1.51339 16.3989 1.25 15.763 1.25 15.1C1.25 14.437 1.51339 13.8011 1.98223 13.3322C2.45107 12.8634 3.08696 12.6 3.75 12.6H3.8625C4.27624 12.5903 4.67751 12.4564 5.01412 12.2156C5.35074 11.9749 5.60714 11.6384 5.75 11.25C5.91639 10.873 5.96603 10.4548 5.89251 10.0493C5.81898 9.64377 5.62567 9.2696 5.3375 8.975L5.2625 8.9C5.03006 8.66782 4.84566 8.3921 4.71985 8.0886C4.59404 7.78511 4.52928 7.45979 4.52928 7.13125C4.52928 6.80271 4.59404 6.47739 4.71985 6.1739C4.84566 5.8704 5.03006 5.59468 5.2625 5.3625C5.49468 5.13006 5.7704 4.94566 6.0739 4.81985C6.37739 4.69404 6.70271 4.62928 7.03125 4.62928C7.35979 4.62928 7.68511 4.69404 7.9886 4.81985C8.2921 4.94566 8.56782 5.13006 8.8 5.3625L8.875 5.4375C9.1696 5.72567 9.54377 5.91898 9.94926 5.99251C10.3548 6.06603 10.773 6.01639 11.15 5.85H11.25C11.6197 5.69155 11.935 5.42844 12.1571 5.09308C12.3792 4.75772 12.4984 4.36473 12.5 3.9625V3.75C12.5 3.08696 12.7634 2.45107 13.2322 1.98223C13.7011 1.51339 14.337 1.25 15 1.25C15.663 1.25 16.2989 1.51339 16.7678 1.98223C17.2366 2.45107 17.5 3.08696 17.5 3.75V3.8625C17.5016 4.26473 17.6208 4.65772 17.8429 4.99308C18.065 5.32844 18.3803 5.59155 18.75 5.75C19.127 5.91639 19.5452 5.96603 19.9507 5.89251C20.3562 5.81898 20.7304 5.62567 21.025 5.3375L21.1 5.2625C21.3322 5.03006 21.6079 4.84566 21.9114 4.71985C22.2149 4.59404 22.5402 4.52928 22.8688 4.52928C23.1973 4.52928 23.5226 4.59404 23.8261 4.71985C24.1296 4.84566 24.4053 5.03006 24.6375 5.2625C24.8699 5.49468 25.0543 5.7704 25.1801 6.0739C25.306 6.37739 25.3707 6.70271 25.3707 7.03125C25.3707 7.35979 25.306 7.68511 25.1801 7.9886C25.0543 8.2921 24.8699 8.56782 24.6375 8.8L24.5625 8.875C24.2743 9.1696 24.081 9.54377 24.0075 9.94926C23.934 10.3548 23.9836 10.773 24.15 11.15V11.25C24.3085 11.6197 24.5716 11.935 24.9069 12.1571C25.2423 12.3792 25.6353 12.4984 26.0375 12.5H26.25C26.913 12.5 27.5489 12.7634 28.0178 13.2322C28.4866 13.7011 28.75 14.337 28.75 15C28.75 15.663 28.4866 16.2989 28.0178 16.7678C27.5489 17.2366 26.913 17.5 26.25 17.5H26.1375C25.7353 17.5016 25.3423 17.6208 25.0069 17.8429C24.6716 18.065 24.4085 18.3803 24.25 18.75V18.75Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_565_480">
+                                        <rect width="30" height="30" fill="currentColor"></rect>
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                        </button>
+                    </section-header>
+                    <div class="mt-[1vw] flex flex-col">
+                        <span class="text-[0.9375vw] text-surface-50" data-svelte-h="svelte-iybpe7">VAs</span>
+                        <button class="btn btn-sm mt-[0.3vw] h-[2.25vw] w-[6.625vw] gap-1 rounded-[0.375vw] bg-surface-400 p-0 text-[0.875vw]">Japanese <svg xmlns="http://www.w3.org/2000/svg" class="w-[0.9vw]" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <casts class="mt-[1vw] block">
+                        <casts-cards class="relative grid h-[9vw] w-full grid-cols-2 gap-[2px] overflow-hidden rounded-[0.75vw]">
+                            <cast-image class="relative col-span-1 w-full bg-cover">
+                                <div class="absolute h-full w-full object-cover object-center">
+                                    <div class="absolute h-full w-full object-cover object-center placeholder animate-pulse !bg-surface-400"></div>
+                                </div>
+                                <span class="absolute bottom-[0.3vw] z-10 w-full text-center text-[0.9vw] font-bold leading-[1vw] md:px-[1vw]" data-svelte-h="svelte-1g23arn">Houtarou Oreki</span>
+                            </cast-image>
+                            <cast-details class="relative col-span-1 w-full bg-cover">
+                                <div class="absolute h-full w-full object-cover object-center">
+                                    <div class="absolute h-full w-full object-cover object-center placeholder animate-pulse !bg-surface-400"></div>
+                                </div>
+                                <span class="absolute bottom-[0.3vw] z-10 w-full text-center text-[0.9vw] font-bold leading-[1vw] md:px-[1vw]" data-svelte-h="svelte-dz08k2">Yuuichi Nakamura</span>
+                            </cast-details>
+                            <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-surface-900/75 to-surface-900/25"></gradient-overlay>
+                        </casts-cards>
+                        <casts-options class="mt-[1.5vw] flex flex-col">
+                            <pagination-buttons class="btn-group flex h-[2.25vw] w-1/2 rounded-[0.5vw] bg-surface-400">
+                                <button class="h-full w-full bg-surface-400 !p-0 font-semibold">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-[1vw] rotate-180" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
+                                    </svg>
+                                </button>
+                                <button class="h-full w-full bg-surface-400 !p-0 !text-[0.9vw] font-bold" data-svelte-h="svelte-ay9v7f">01</button>
+                                <button class="h-full w-full bg-surface-400 !p-0 font-semibold">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-[1vw]" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
+                                    </svg>
+                                </button>
+                            </pagination-buttons>
+                            <span class="mt-[1vw] text-[0.75vw] leading-none text-surface-50" data-svelte-h="svelte-5r5l7u">Showing 1-5, out of 58 Voiceover Casts</span>
+                        </casts-options>
+                    </casts>
+                </voiceovercase>
+                <recommendations class="mt-[2.5vw] block">
+                    <section-header class="flex gap-3">
+                        <header-title class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]" data-svelte-h="svelte-dioo8v">Recommendations</header-title>
+                        <button class="btn btn-icon rounded bg-surface-400 p-0 md:h-[1.5vw] md:w-[1.5vw]">
+                            <svg class="w-[0.9vw] opacity-75" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_565_480)">
+                                    <path d="M15 18.75C17.0711 18.75 18.75 17.0711 18.75 15C18.75 12.9289 17.0711 11.25 15 11.25C12.9289 11.25 11.25 12.9289 11.25 15C11.25 17.0711 12.9289 18.75 15 18.75Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M24.25 18.75C24.0836 19.127 24.034 19.5452 24.1075 19.9507C24.181 20.3562 24.3743 20.7304 24.6625 21.025L24.7375 21.1C24.9699 21.3322 25.1543 21.6079 25.2801 21.9114C25.406 22.2149 25.4707 22.5402 25.4707 22.8688C25.4707 23.1973 25.406 23.5226 25.2801 23.8261C25.1543 24.1296 24.9699 24.4053 24.7375 24.6375C24.5053 24.8699 24.2296 25.0543 23.9261 25.1801C23.6226 25.306 23.2973 25.3707 22.9688 25.3707C22.6402 25.3707 22.3149 25.306 22.0114 25.1801C21.7079 25.0543 21.4322 24.8699 21.2 24.6375L21.125 24.5625C20.8304 24.2743 20.4562 24.081 20.0507 24.0075C19.6452 23.934 19.227 23.9836 18.85 24.15C18.4803 24.3085 18.165 24.5716 17.9429 24.9069C17.7208 25.2423 17.6016 25.6353 17.6 26.0375V26.25C17.6 26.913 17.3366 27.5489 16.8678 28.0178C16.3989 28.4866 15.763 28.75 15.1 28.75C14.437 28.75 13.8011 28.4866 13.3322 28.0178C12.8634 27.5489 12.6 26.913 12.6 26.25V26.1375C12.5903 25.7238 12.4564 25.3225 12.2156 24.9859C11.9749 24.6493 11.6384 24.3929 11.25 24.25C10.873 24.0836 10.4548 24.034 10.0493 24.1075C9.64377 24.181 9.2696 24.3743 8.975 24.6625L8.9 24.7375C8.66782 24.9699 8.3921 25.1543 8.0886 25.2801C7.78511 25.406 7.45979 25.4707 7.13125 25.4707C6.80271 25.4707 6.47739 25.406 6.1739 25.2801C5.8704 25.1543 5.59468 24.9699 5.3625 24.7375C5.13006 24.5053 4.94566 24.2296 4.81985 23.9261C4.69404 23.6226 4.62928 23.2973 4.62928 22.9688C4.62928 22.6402 4.69404 22.3149 4.81985 22.0114C4.94566 21.7079 5.13006 21.4322 5.3625 21.2L5.4375 21.125C5.72567 20.8304 5.91898 20.4562 5.99251 20.0507C6.06603 19.6452 6.01639 19.227 5.85 18.85C5.69155 18.4803 5.42844 18.165 5.09308 17.9429C4.75772 17.7208 4.36473 17.6016 3.9625 17.6H3.75C3.08696 17.6 2.45107 17.3366 1.98223 16.8678C1.51339 16.3989 1.25 15.763 1.25 15.1C1.25 14.437 1.51339 13.8011 1.98223 13.3322C2.45107 12.8634 3.08696 12.6 3.75 12.6H3.8625C4.27624 12.5903 4.67751 12.4564 5.01412 12.2156C5.35074 11.9749 5.60714 11.6384 5.75 11.25C5.91639 10.873 5.96603 10.4548 5.89251 10.0493C5.81898 9.64377 5.62567 9.2696 5.3375 8.975L5.2625 8.9C5.03006 8.66782 4.84566 8.3921 4.71985 8.0886C4.59404 7.78511 4.52928 7.45979 4.52928 7.13125C4.52928 6.80271 4.59404 6.47739 4.71985 6.1739C4.84566 5.8704 5.03006 5.59468 5.2625 5.3625C5.49468 5.13006 5.7704 4.94566 6.0739 4.81985C6.37739 4.69404 6.70271 4.62928 7.03125 4.62928C7.35979 4.62928 7.68511 4.69404 7.9886 4.81985C8.2921 4.94566 8.56782 5.13006 8.8 5.3625L8.875 5.4375C9.1696 5.72567 9.54377 5.91898 9.94926 5.99251C10.3548 6.06603 10.773 6.01639 11.15 5.85H11.25C11.6197 5.69155 11.935 5.42844 12.1571 5.09308C12.3792 4.75772 12.4984 4.36473 12.5 3.9625V3.75C12.5 3.08696 12.7634 2.45107 13.2322 1.98223C13.7011 1.51339 14.337 1.25 15 1.25C15.663 1.25 16.2989 1.51339 16.7678 1.98223C17.2366 2.45107 17.5 3.08696 17.5 3.75V3.8625C17.5016 4.26473 17.6208 4.65772 17.8429 4.99308C18.065 5.32844 18.3803 5.59155 18.75 5.75C19.127 5.91639 19.5452 5.96603 19.9507 5.89251C20.3562 5.81898 20.7304 5.62567 21.025 5.3375L21.1 5.2625C21.3322 5.03006 21.6079 4.84566 21.9114 4.71985C22.2149 4.59404 22.5402 4.52928 22.8688 4.52928C23.1973 4.52928 23.5226 4.59404 23.8261 4.71985C24.1296 4.84566 24.4053 5.03006 24.6375 5.2625C24.8699 5.49468 25.0543 5.7704 25.1801 6.0739C25.306 6.37739 25.3707 6.70271 25.3707 7.03125C25.3707 7.35979 25.306 7.68511 25.1801 7.9886C25.0543 8.2921 24.8699 8.56782 24.6375 8.8L24.5625 8.875C24.2743 9.1696 24.081 9.54377 24.0075 9.94926C23.934 10.3548 23.9836 10.773 24.15 11.15V11.25C24.3085 11.6197 24.5716 11.935 24.9069 12.1571C25.2423 12.3792 25.6353 12.4984 26.0375 12.5H26.25C26.913 12.5 27.5489 12.7634 28.0178 13.2322C28.4866 13.7011 28.75 14.337 28.75 15C28.75 15.663 28.4866 16.2989 28.0178 16.7678C27.5489 17.2366 26.913 17.5 26.25 17.5H26.1375C25.7353 17.5016 25.3423 17.6208 25.0069 17.8429C24.6716 18.065 24.4085 18.3803 24.25 18.75V18.75Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_565_480">
+                                        <rect width="30" height="30" fill="currentColor"></rect>
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                        </button>
+                    </section-header>
+                    <recommendations-cards class="mt-[1vw] block">
+                        <cards-container class="grid grid-cols-2 gap-[1vw]">
+                            <a href="/myanimelist/1" class="card relative col-span-1 h-[9.375vw] w-full overflow-hidden rounded-[0.75vw] bg-cover bg-center">
+                                <div class="absolute h-full w-full object-cover object-center">
+                                    <div class="absolute h-full w-full object-cover object-center placeholder animate-pulse !bg-surface-400"></div>
+                                </div>
+                                <span class="absolute bottom-[0.3vw] z-10 line-clamp-2 w-full px-[0.5vw] text-center text-[0.9vw] font-semibold leading-[1.25vw]" data-svelte-h="svelte-88vwga">Yahari Ore no Seishun Love Come wa Machigatteiru.</span>
+                                <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-surface-900/75 to-surface-900/25"></gradient-overlay>
+                            </a>
+                            <a href="/myanimelist/1" class="card relative col-span-1 h-[9.375vw] w-full overflow-hidden rounded-[0.75vw] bg-cover">
+                                <div class="absolute h-full w-full object-cover object-center">
+                                    <div class="absolute h-full w-full object-cover object-center placeholder animate-pulse !bg-surface-400"></div>
+                                </div>
+                                <span class="absolute bottom-[0.3vw] z-10 line-clamp-2 w-full px-[0.5vw] text-center text-[0.9vw] font-semibold leading-[1.25vw]" data-svelte-h="svelte-w9tao2">Suzumiya Haruhi no Yuuutsu</span>
+                                <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-surface-900/75 to-surface-900/25"></gradient-overlay>
+                            </a>
+                        </cards-container>
+                        <recommendations-options class="mt-[1.5vw] flex flex-col">
+                            <pagination-buttons class="btn-group flex h-[2.25vw] w-1/2 rounded-[0.5vw] bg-surface-400">
+                                <button class="h-full w-full bg-surface-400 !p-0 font-semibold">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-[1vw] rotate-180" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
+                                    </svg>
+                                </button>
+                                <button class="h-full w-full bg-surface-400 !p-0 !text-[0.9vw] font-bold" data-svelte-h="svelte-ay9v7f">01</button>
+                                <button class="h-full w-full bg-surface-400 !p-0 font-semibold">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-[1vw]" fill="none" viewBox="0 0 24 24">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
+                                    </svg>
+                                </button>
+                            </pagination-buttons>
+                            <span class="mt-[1vw] text-[0.75vw] leading-none text-surface-50" data-svelte-h="svelte-138zbr">Showing 1-8, out of 47 Recommendations</span>
+                        </recommendations-options>
+                    </recommendations-cards>
+                </recommendations>
+            </more-infos>
+        </anime-more-details>
+    </anime-info-section>
+</anime-info-container>
