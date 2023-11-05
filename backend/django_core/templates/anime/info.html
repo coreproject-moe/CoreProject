@@ -26,23 +26,21 @@
                         </scroll-area>
                         <anime-japanese-name class="flex flex-wrap gap-x-2 pt-2 text-xs font-semibold uppercase tracking-wider text-surface-50 md:gap-x-[0.25vw] md:pt-[0.625vw] md:text-[0.75vw] md:leading-[0.9vw]">四月は君の嘘</anime-japanese-name>
                         <anime-other-infos class="mt-1 flex flex-wrap items-center gap-2 text-xs font-semibold md:mt-[0.25vw] md:gap-[0.5vw] md:pt-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
-                            <span data-svelte-h="svelte-u9rmgs">TV</span>
+                            <span>TV</span>
                             {% include "icons/dot.html" with class="w-[0.35rem] opacity-75" %}
                             <span>9 eps</span>
                             {% include "icons/dot.html" with class="w-[0.35rem] opacity-75" %}
-                            <span data-svelte-h="svelte-3p0uht">Completed</span>
+                            <span>Completed</span>
                             {% include "icons/dot.html" with class="w-[0.35rem] opacity-75" %}
                             <span class="capitalize">spring 2023</span>
                             {% include "icons/dot.html" with class="w-[0.35rem] opacity-75" %}
-                            <span class="uppercase tracking-wider" data-svelte-h="svelte-39rb5w">Kuschio animation</span>
+                            <span class="uppercase tracking-wider">Kuschio animation</span>
                         </anime-other-infos>
                         <watch-options class="mt-3 flex items-center gap-3 md:mt-[1.5vw] md:gap-[0.75vw]">
                             <button type="button" class="btn h-14 w-[6.5rem] rounded-lg bg-primary-500 font-bold text-white md:h-[4.3vw] md:w-[7vw] md:rounded-[0.625vw]">
                                 <div class="flex gap-3 md:gap-[0.7vw]">
-                                    <svg class="w-5 md:w-[1.5vw]" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M12.9615 7.89235C13.1685 7.73214 13.3361 7.52665 13.4513 7.29164C13.5666 7.05663 13.6266 6.79834 13.6266 6.53658C13.6266 6.27482 13.5666 6.01653 13.4513 5.78152C13.3361 5.54651 13.1685 5.34102 12.9615 5.18081C10.2808 3.10657 7.28748 1.47165 4.09351 0.337231L3.50952 0.129752C2.39342 -0.266427 1.21383 0.488369 1.06269 1.64113C0.640479 4.89111 0.640479 8.18205 1.06269 11.432C1.21473 12.5848 2.39342 13.3396 3.50952 12.9434L4.09351 12.7359C7.28748 11.6015 10.2808 9.96659 12.9615 7.89235Z" fill="currentColor"></path>
-                                    </svg>
-                                    <div class="flex flex-col items-start gap-1" data-svelte-h="svelte-15n7j5p">
+                                    {% include "icons/play.html" with class="w-5 md:w-[1.5vw]" %}
+                                    <div class="flex flex-col items-start gap-1">
                                         <span class="text-sm leading-none md:text-[0.87vw]">Watch</span>
                                         <span class="text-xs font-bold leading-none text-surface-50 md:text-[0.625vw]">Ep 01</span>
                                     </div>
@@ -108,7 +106,7 @@
                 </anime-titles>
                 <anime-synopsis class="col-span-12 mt-10 md:col-span-5 md:mt-0">
                     <section-header class="flex gap-[0.75vw]">
-                        <header-title class="text-lg font-semibold md:text-[1.25vw] md:leading-[1.5vw]" data-svelte-h="svelte-7g8xhy">Synopsis</header-title>
+                        <header-title class="text-lg font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Synopsis</header-title>
                         <button class="btn btn-icon hidden rounded-[0.1875vw] bg-surface-400 p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
                             <svg class="w-[0.9vw] opacity-75" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_565_480)">
@@ -134,27 +132,27 @@
                         <span class="rounded-[0.25vw] bg-warning-400 font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Horror </span>
                     </anime-genres>
                     <anime-scores class="hidden w-max gap-[0.75vw] rounded-[0.25vw] bg-surface-50/10 backdrop-blur-lg md:mt-[0.5vw] md:flex md:px-[0.75vw] md:py-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
-                        <score class="flex gap-[0.25vw]" data-svelte-h="svelte-1ujrkk">
+                        <score class="flex gap-[0.25vw]">
                             <span>Score:</span>
                             <span class="font-semibold text-warning-400">79</span>
                         </score>
                         <status class="flex gap-[0.25vw]">
-                            <span data-svelte-h="svelte-k2z92">Status:</span>
+                            <span>Status:</span>
                             <button class="btn p-0 leading-none md:text-[0.75vw]">
-                                <span class="font-semibold text-warning-400" data-svelte-h="svelte-1uekx12">Watching</span>
+                                <span class="font-semibold text-warning-400">Watching</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-[0.625vw] text-warning-400" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
                                 </svg>
                             </button>
                         </status>
                         <episodes-count class="flex gap-[0.25vw]">
-                            <span data-svelte-h="svelte-74k8xv">Episode:</span>
+                            <span>Episode:</span>
                             <span class="font-semibold text-warning-400">0/9</span>
                         </episodes-count>
                         <your-scrore class="flex gap-[0.25vw]">
-                            <span data-svelte-h="svelte-1j3pdr5">Your Score:</span>
+                            <span>Your Score:</span>
                             <button class="btn p-0 leading-none md:text-[0.75vw]">
-                                <span class="font-semibold text-warning-400" data-svelte-h="svelte-rfzzy2">Not Rated</span>
+                                <span class="font-semibold text-warning-400">Not Rated</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-[0.625vw] text-warning-400" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
                                 </svg>
@@ -165,7 +163,7 @@
             </anime-main-infos>
             <anime-episodes-container class="my-7 block md:my-[6vw]">
                 <section-header class="flex border-b-2 border-surface-50/10 pb-1 md:gap-x-[0.75vw] md:border-none md:pb-0">
-                    <header-title class="text-lg font-semibold md:text-[1.25vw] md:leading-[1.5vw]" data-svelte-h="svelte-11ldjpy">Episodes</header-title>
+                    <header-title class="text-lg font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Episodes</header-title>
                     <button class="btn btn-icon hidden rounded bg-surface-400 p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
                         <svg class="w-[0.9vw] opacity-75" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_565_480)">
@@ -183,14 +181,14 @@
                 <episodes-options class="mt-2 flex flex-col justify-between gap-y-5 md:mt-0 md:flex-row md:gap-y-0">
                     <episodes-available-in class="hidden items-end gap-2 md:flex md:gap-[1.25vw]">
                         <p class="flex items-center gap-1 md:gap-[0.75vw]">
-                            <span class="text-base font-bold leading-none md:text-[2vw] md:leading-[1.9vw]" data-svelte-h="svelte-lwtsmo">23</span>
-                            <span class="text-xs font-semibold md:text-[1vw]" data-svelte-h="svelte-r9gwh4">episodes</span>
+                            <span class="text-base font-bold leading-none md:text-[2vw] md:leading-[1.9vw]">23</span>
+                            <span class="text-xs font-semibold md:text-[1vw]">episodes</span>
                             <svg class="w-[0.4vw] opacity-50" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
                             </svg>
                         </p>
                         <available-formats>
-                            <div class="flex w-full items-center gap-2 leading-4 md:gap-[1vw] md:leading-[1.5vw]" data-svelte-h="svelte-13lvnsu">
+                            <div class="flex w-full items-center gap-2 leading-4 md:gap-[1vw] md:leading-[1.5vw]">
                                 <span class="flex-shrink-0 text-[0.5rem] font-medium md:text-[0.75vw]">Available in</span>
                                 <div class="h-[0.1rem] w-full bg-surface-50/25 md:h-[0.08vw] md:bg-surface-300"></div>
                             </div>
@@ -207,23 +205,23 @@
                         </available-formats>
                     </episodes-available-in>
                     <episodes-filtering class="flex items-center justify-between gap-2 md:items-end md:gap-[0.75vw]">
-                        <p class="flex items-center gap-1 md:hidden" data-svelte-h="svelte-hoi2bp">
+                        <p class="flex items-center gap-1 md:hidden">
                             <span class="text-base font-bold leading-none">23</span>
                             <span class="text-sm font-semibold text-surface-50">episodes</span>
                         </p>
                         <by-formats class="group hidden flex-col gap-2 md:flex md:gap-[0.5vw]">
-                            <span class="text-[0.65rem] leading-[0.9vw] text-surface-50 transition-colors duration-300 group-hover:text-white md:text-[0.75vw]" data-svelte-h="svelte-4kg831">Type</span>
+                            <span class="text-[0.65rem] leading-[0.9vw] text-surface-50 transition-colors duration-300 group-hover:text-white md:text-[0.75vw]">Type</span>
                             <button class="btn h-7 rounded bg-surface-400 px-3 text-[0.65rem] font-semibold md:h-[2.4vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.9vw] md:leading-[0.9vw]">
-                                <span data-svelte-h="svelte-1sii61j">Subbed</span>
+                                <span>Subbed</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-3 md:w-[1vw]" color="lightgray" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
                                 </svg>
                             </button>
                         </by-formats>
                         <by-modes class="group hidden flex-col gap-2 md:flex md:gap-[0.5vw]">
-                            <span class="text-[0.65rem] leading-[0.9vw] text-surface-50 transition-colors duration-300 group-hover:text-white md:text-[0.75vw]" data-svelte-h="svelte-16htgo0">Display Mode</span>
+                            <span class="text-[0.65rem] leading-[0.9vw] text-surface-50 transition-colors duration-300 group-hover:text-white md:text-[0.75vw]">Display Mode</span>
                             <button class="btn h-7 rounded bg-surface-400 px-3 text-[0.65rem] font-semibold leading-[0.9vw] md:h-[2.4vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.9vw]">
-                                <span data-svelte-h="svelte-1w3m1b">Thumbnails</span>
+                                <span>Thumbnails</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-3 md:w-[1vw]" color="lightgray" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
                                 </svg>
@@ -793,7 +791,7 @@
                 <anime-media-section class="mt-10 flex grid-cols-5 flex-col gap-10 md:mt-[3vw] md:grid md:gap-[4.375vw]">
                     <comment-box class="md:col-span-3">
                         <section-header class="flex gap-2 border-b-2 border-surface-50/10 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
-                            <header-title class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]" data-svelte-h="svelte-v1dp1u">Comments</header-title>
+                            <header-title class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Comments</header-title>
                             <button class="btn btn-icon hidden rounded bg-surface-400 p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
                                 <svg class="w-[0.9vw] opacity-75" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_565_480)">
@@ -809,7 +807,7 @@
                             </button>
                         </section-header>
                         <comments-info class="mt-2 flex items-center justify-between md:hidden">
-                            <p class="flex items-center gap-1 md:hidden" data-svelte-h="svelte-kavhfj">
+                            <p class="flex items-center gap-1 md:hidden">
                                 <span class="text-base font-bold leading-none">69</span>
                                 <span class="text-sm font-semibold text-surface-50">comments</span>
                             </p>
@@ -868,7 +866,7 @@
                                 <textarea-body class="block h-28 overflow-y-scroll md:h-[8vw]">
                                     <textarea spellcheck="true" class="h-full w-full resize-none border-none bg-surface-900 p-3 text-sm leading-tight text-surface-50 outline-none duration-300 ease-in-out placeholder:text-surface-200 focus:ring-0 md:p-[1vw] md:text-[1vw] md:leading-[1.5vw]" placeholder="Leave a comment"></textarea>
                                 </textarea-body>
-                                <textarea-footer class="flex justify-between bg-surface-400/50 px-4 py-2 text-[0.65rem] font-thin leading-[1.5vw] text-surface-200 md:px-[1vw] md:py-[0.1vw] md:text-[0.75vw]" data-svelte-h="svelte-4ipsmt">
+                                <textarea-footer class="flex justify-between bg-surface-400/50 px-4 py-2 text-[0.65rem] font-thin leading-[1.5vw] text-surface-200 md:px-[1vw] md:py-[0.1vw] md:text-[0.75vw]">
                                     <div></div>
                                     <div>Learn more about <a class="underline" href="/">core editor</a>
                                     </div>
@@ -881,9 +879,9 @@
                                         <path d="M8 4.5V6.5" stroke="currentColor" stroke-opacity="0.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                         <path d="M8 8.5H8.00667" stroke="currentColor" stroke-opacity="0.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                     </svg>
-                                    <p class="text-[0.65rem] font-light leading-tight text-surface-300 md:text-[0.75vw] md:leading-[1.125vw]" data-svelte-h="svelte-19357bb">Please remember to follow our <a href="/" class="text-surface-200 underline">community guidelines</a> while commenting. Also please refrain from posting spoilers. </p>
+                                    <p class="text-[0.65rem] font-light leading-tight text-surface-300 md:text-[0.75vw] md:leading-[1.125vw]">Please remember to follow our <a href="/" class="text-surface-200 underline">community guidelines</a> while commenting. Also please refrain from posting spoilers. </p>
                                 </comment-alert>
-                                <button class="btn btn-sm h-9 w-40 rounded bg-primary-500 text-sm font-semibold md:h-[2.2vw] md:w-[7vw] md:rounded-[0.375vw] md:text-[0.85vw]" data-svelte-h="svelte-hpj9yr">Comment</button>
+                                <button class="btn btn-sm h-9 w-40 rounded bg-primary-500 text-sm font-semibold md:h-[2.2vw] md:w-[7vw] md:rounded-[0.375vw] md:text-[0.85vw]">Comment</button>
                             </comment-submit>
                         </form>
                         <comments class="mt-10 flex flex-col gap-5 md:mt-[2vw] md:gap-[1.5vw]">
@@ -906,7 +904,7 @@
                                             </svg>
                                             <likes class="text-xs md:text-[0.75vw]">1204</likes>
                                         </button>
-                                        <button class="btn p-0 text-xs uppercase text-surface-50 md:text-[0.8vw]" data-svelte-h="svelte-y2kxur">Replay</button>
+                                        <button class="btn p-0 text-xs uppercase text-surface-50 md:text-[0.8vw]">Replay</button>
                                     </options>
                                     <replies-section class="md:mt-[0.35vw]">
                                         <div class="accordion w-full space-y-1 " data-testid="accordion">
@@ -967,7 +965,7 @@
                                             </svg>
                                             <likes class="text-xs md:text-[0.75vw]">106</likes>
                                         </button>
-                                        <button class="btn p-0 text-xs uppercase text-surface-50 md:text-[0.8vw]" data-svelte-h="svelte-y2kxur">Replay</button>
+                                        <button class="btn p-0 text-xs uppercase text-surface-50 md:text-[0.8vw]">Replay</button>
                                     </options>
                                 </comment-details>
                             </comment>
@@ -990,7 +988,7 @@
                                             </svg>
                                             <likes class="text-xs md:text-[0.75vw]">69</likes>
                                         </button>
-                                        <button class="btn p-0 text-xs uppercase text-surface-50 md:text-[0.8vw]" data-svelte-h="svelte-y2kxur">Replay</button>
+                                        <button class="btn p-0 text-xs uppercase text-surface-50 md:text-[0.8vw]">Replay</button>
                                     </options>
                                 </comment-details>
                             </comment>
@@ -998,7 +996,7 @@
                     </comment-box>
                     <forum-posts class="md:col-span-2">
                         <section-header class="flex gap-2 border-b-2 border-surface-50/10 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
-                            <section-title class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]" data-svelte-h="svelte-1c3584g">Forum Posts</section-title>
+                            <section-title class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Forum Posts</section-title>
                             <button class="btn btn-icon hidden rounded bg-surface-400 p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
                                 <svg class="w-[0.9vw] opacity-75" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_565_480)">
@@ -1014,7 +1012,7 @@
                             </button>
                         </section-header>
                         <forum-details class="mt-2 flex items-center justify-between md:mt-[0.75vw]">
-                            <p class="flex items-center gap-1 md:hidden" data-svelte-h="svelte-relu4i">
+                            <p class="flex items-center gap-1 md:hidden">
                                 <span class="text-base font-bold leading-none">106</span>
                                 <span class="text-sm font-semibold text-surface-50">posts</span>
                             </p>
@@ -1105,7 +1103,7 @@
         </anime-info-episodes>
         <anime-more-details class="hidden flex-col md:col-span-2 md:flex">
             <section-header class="flex gap-[0.75vw]">
-                <header-title class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]" data-svelte-h="svelte-fcr951">Ratings</header-title>
+                <header-title class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Ratings</header-title>
                 <button class="btn btn-icon rounded-[0.1875vw] bg-surface-400 p-0 md:h-[1.5vw] md:w-[1.5vw]">
                     <svg class="w-[0.9vw] opacity-75" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_565_480)">
@@ -1121,11 +1119,11 @@
                 </button>
             </section-header>
             <anime-ratings class="md:mt-[1.56vw]">
-                <raing class="flex items-center gap-[0.5vw]" data-svelte-h="svelte-9h7f90">
+                <raing class="flex items-center gap-[0.5vw]">
                     <span class="border-b-2 border-surface-50/50 pb-[0.5vw] font-bold md:text-[2vw] md:leading-[1.5vw]">92%</span>
                     <span class="divider-vertical m-0 !border-surface-50/50 font-semibold text-surface-50 md:pl-1 md:text-[0.75vw] md:leading-[0.8vw]">2.8k ratings</span>
                 </raing>
-                <raking class="block md:mt-[1vw]" data-svelte-h="svelte-b3rov8">
+                <raking class="block md:mt-[1vw]">
                     <div class="flex items-center md:gap-[0.25vw]">
                         <span class="font-semibold md:text-[1vw] md:leading-[1.5vw]">#80</span>
                         <span class="text-surface-50 md:text-[0.75vw] md:leading-[0.75vw]">Trending of all time</span>
@@ -1158,7 +1156,7 @@
                     </div>
                 </button>
                 <star-rating class="md:mt-[0.4vw]">
-                    <span class="font-semibold md:text-[0.9vw] md:leading-[0.9vw]" data-svelte-h="svelte-jc620j">Your rating</span>
+                    <span class="font-semibold md:text-[0.9vw] md:leading-[0.9vw]">Your rating</span>
                     <div class="flex items-center gap-[0.75vw] md:mt-[0.25vw]">
                         <ratings>
                             <div class="ratings w-full flex text-token fill-token justify-center space-x-2 " data-testid="rating-bar">
@@ -1195,7 +1193,7 @@
                                 </span>
                             </div>
                         </ratings>
-                        <span class="font-bold leading-none md:text-[0.95vw]" data-svelte-h="svelte-7rm839">92%</span>
+                        <span class="font-bold leading-none md:text-[0.95vw]">92%</span>
                         <button class="btn btn-icon bg-secondary-100 p-[0.3vw] text-surface-500 md:w-[1.375vw] md:rounded-[0.19vw]">
                             <svg color="bg-surface-500" style="width: 0.75vw;" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_1917_2501)">
@@ -1218,7 +1216,7 @@
                 </button>
             </anime-ratings>
             <more-infos-header class="flex gap-[0.75vw] md:mt-[6vw]">
-                <header-title class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]" data-svelte-h="svelte-2w6ikd">Details</header-title>
+                <header-title class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Details</header-title>
                 <button class="btn btn-icon rounded bg-surface-400 p-0 md:h-[1.5vw] md:w-[1.5vw]">
                     <svg class="w-[0.9vw] opacity-75" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_565_480)">
@@ -1282,7 +1280,7 @@
                 </anime-details>
                 <voiceovercase class="mt-[2.5vw] block">
                     <section-header class="flex gap-[0.75vw]">
-                        <header-title class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]" data-svelte-h="svelte-15t97s4">Voiceover Cast</header-title>
+                        <header-title class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Voiceover Cast</header-title>
                         <button class="btn btn-icon rounded bg-surface-400 p-0 md:h-[1.5vw] md:w-[1.5vw]">
                             <svg class="w-[0.9vw] opacity-75" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_565_480)">
@@ -1298,7 +1296,7 @@
                         </button>
                     </section-header>
                     <div class="mt-[1vw] flex flex-col">
-                        <span class="text-[0.9375vw] text-surface-50" data-svelte-h="svelte-iybpe7">VAs</span>
+                        <span class="text-[0.9375vw] text-surface-50">VAs</span>
                         <button class="btn btn-sm mt-[0.3vw] h-[2.25vw] w-[6.625vw] gap-1 rounded-[0.375vw] bg-surface-400 p-0 text-[0.875vw]">Japanese <svg xmlns="http://www.w3.org/2000/svg" class="w-[0.9vw]" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
                         </svg>
@@ -1310,13 +1308,13 @@
                                 <div class="absolute h-full w-full object-cover object-center">
                                     <div class="absolute h-full w-full object-cover object-center placeholder animate-pulse !bg-surface-400"></div>
                                 </div>
-                                <span class="absolute bottom-[0.3vw] z-10 w-full text-center text-[0.9vw] font-bold leading-[1vw] md:px-[1vw]" data-svelte-h="svelte-1g23arn">Houtarou Oreki</span>
+                                <span class="absolute bottom-[0.3vw] z-10 w-full text-center text-[0.9vw] font-bold leading-[1vw] md:px-[1vw]">Houtarou Oreki</span>
                             </cast-image>
                             <cast-details class="relative col-span-1 w-full bg-cover">
                                 <div class="absolute h-full w-full object-cover object-center">
                                     <div class="absolute h-full w-full object-cover object-center placeholder animate-pulse !bg-surface-400"></div>
                                 </div>
-                                <span class="absolute bottom-[0.3vw] z-10 w-full text-center text-[0.9vw] font-bold leading-[1vw] md:px-[1vw]" data-svelte-h="svelte-dz08k2">Yuuichi Nakamura</span>
+                                <span class="absolute bottom-[0.3vw] z-10 w-full text-center text-[0.9vw] font-bold leading-[1vw] md:px-[1vw]">Yuuichi Nakamura</span>
                             </cast-details>
                             <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-surface-900/75 to-surface-900/25"></gradient-overlay>
                         </casts-cards>
@@ -1327,20 +1325,20 @@
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
                                     </svg>
                                 </button>
-                                <button class="h-full w-full bg-surface-400 !p-0 !text-[0.9vw] font-bold" data-svelte-h="svelte-ay9v7f">01</button>
+                                <button class="h-full w-full bg-surface-400 !p-0 !text-[0.9vw] font-bold">01</button>
                                 <button class="h-full w-full bg-surface-400 !p-0 font-semibold">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-[1vw]" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
                                     </svg>
                                 </button>
                             </pagination-buttons>
-                            <span class="mt-[1vw] text-[0.75vw] leading-none text-surface-50" data-svelte-h="svelte-5r5l7u">Showing 1-5, out of 58 Voiceover Casts</span>
+                            <span class="mt-[1vw] text-[0.75vw] leading-none text-surface-50">Showing 1-5, out of 58 Voiceover Casts</span>
                         </casts-options>
                     </casts>
                 </voiceovercase>
                 <recommendations class="mt-[2.5vw] block">
                     <section-header class="flex gap-3">
-                        <header-title class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]" data-svelte-h="svelte-dioo8v">Recommendations</header-title>
+                        <header-title class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Recommendations</header-title>
                         <button class="btn btn-icon rounded bg-surface-400 p-0 md:h-[1.5vw] md:w-[1.5vw]">
                             <svg class="w-[0.9vw] opacity-75" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_565_480)">
@@ -1361,14 +1359,14 @@
                                 <div class="absolute h-full w-full object-cover object-center">
                                     <div class="absolute h-full w-full object-cover object-center placeholder animate-pulse !bg-surface-400"></div>
                                 </div>
-                                <span class="absolute bottom-[0.3vw] z-10 line-clamp-2 w-full px-[0.5vw] text-center text-[0.9vw] font-semibold leading-[1.25vw]" data-svelte-h="svelte-88vwga">Yahari Ore no Seishun Love Come wa Machigatteiru.</span>
+                                <span class="absolute bottom-[0.3vw] z-10 line-clamp-2 w-full px-[0.5vw] text-center text-[0.9vw] font-semibold leading-[1.25vw]">Yahari Ore no Seishun Love Come wa Machigatteiru.</span>
                                 <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-surface-900/75 to-surface-900/25"></gradient-overlay>
                             </a>
                             <a href="/myanimelist/1" class="card relative col-span-1 h-[9.375vw] w-full overflow-hidden rounded-[0.75vw] bg-cover">
                                 <div class="absolute h-full w-full object-cover object-center">
                                     <div class="absolute h-full w-full object-cover object-center placeholder animate-pulse !bg-surface-400"></div>
                                 </div>
-                                <span class="absolute bottom-[0.3vw] z-10 line-clamp-2 w-full px-[0.5vw] text-center text-[0.9vw] font-semibold leading-[1.25vw]" data-svelte-h="svelte-w9tao2">Suzumiya Haruhi no Yuuutsu</span>
+                                <span class="absolute bottom-[0.3vw] z-10 line-clamp-2 w-full px-[0.5vw] text-center text-[0.9vw] font-semibold leading-[1.25vw]">Suzumiya Haruhi no Yuuutsu</span>
                                 <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-surface-900/75 to-surface-900/25"></gradient-overlay>
                             </a>
                         </cards-container>
@@ -1379,14 +1377,14 @@
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
                                     </svg>
                                 </button>
-                                <button class="h-full w-full bg-surface-400 !p-0 !text-[0.9vw] font-bold" data-svelte-h="svelte-ay9v7f">01</button>
+                                <button class="h-full w-full bg-surface-400 !p-0 !text-[0.9vw] font-bold">01</button>
                                 <button class="h-full w-full bg-surface-400 !p-0 font-semibold">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-[1vw]" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
                                     </svg>
                                 </button>
                             </pagination-buttons>
-                            <span class="mt-[1vw] text-[0.75vw] leading-none text-surface-50" data-svelte-h="svelte-138zbr">Showing 1-8, out of 47 Recommendations</span>
+                            <span class="mt-[1vw] text-[0.75vw] leading-none text-surface-50">Showing 1-8, out of 47 Recommendations</span>
                         </recommendations-options>
                     </recommendations-cards>
                 </recommendations>
