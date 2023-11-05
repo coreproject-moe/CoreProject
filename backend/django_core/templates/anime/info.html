@@ -75,32 +75,30 @@
                         </user-options>
                     </anime-details>
                 </anime-titles>
-                <anime-synopsis class="col-span-12 mt-10 md:col-span-5 md:mt-0">
+                <anime-synopsis class="col-span-12 mt-10 md:col-span-5 md:mt-0 flex flex-col gap-[0.75vw]">
                     <section-header class="flex gap-[0.75vw]">
                         <header-title class="text-lg font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Synopsis</header-title>
                         <button class="btn btn-secondary hidden rounded-[0.1875vw] p-0 md:flex md:h-[1.5vw] md:w-[1.5vw] min-h-full">
                             {% include "icons/settings.html" with class="w-[0.9vw] opacity-75" %}
                         </button>
                     </section-header>
-                    <scroll-area class="max-h-40 mt-3 md:mt-[1.25vw] md:max-h-[10.25vw] pr-3 md:pr-[0.75vw] block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
-                        <div>
-                            <div class="text-justify text-xs md:pb-[1.25vw] md:text-[0.8vw] md:leading-[1vw]">Kousei Arima is a child prodigy known as the "Human Metronome" for playing the piano with precision and perfection. Guided by a strict mother and rigorous training, Kousei dominates every competition he enters, earning the admiration of his musical peers and praise from audiences. When his mother suddenly passes away, the subsequent trauma makes him unable to hear the sound of a piano, and he never takes the stage thereafter. Nowadays, Kousei lives a quiet and unassuming life as a junior high school student alongside his friends Tsubaki Sawabe and Ryouta Watari. While struggling to get over his mother's death, he continues to cling to music. His monochrome life turns upside down the day he encounters the eccentric violinist Kaori Miyazono, who thrusts him back into the spotlight as her accompanist. Through a little lie, these two young musicians grow closer together as Kaori tries to fill Kousei's world with color.</div>
-                        </div>
-                    </scroll-area>
-                    <anime-genres class="hidden gap-[0.5vw] text-white md:mt-[1vw] md:flex md:text-[0.75vw] md:leading-[0.9vw]">
-                        <span class="rounded-[0.25vw] bg-warning-400 font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Action </span>
-                        <span class="rounded-[0.25vw] bg-warning-400 font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Romance </span>
-                        <span class="rounded-[0.25vw] bg-warning-400 font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Horror </span>
+                    {% component_block "scroll_area" scroll_area_class="text-justify text-xs md:text-[0.8vw] md:leading-[1vw]" parent_class="max-h-40 md:max-h-[10vw]" offset_scrollbar="pr-3  md:pr-[0.75vw]" %}
+                        Kousei Arima is a child prodigy known as the "Human Metronome" for playing the piano with precision and perfection. Guided by a strict mother and rigorous training, Kousei dominates every competition he enters, earning the admiration of his musical peers and praise from audiences. When his mother suddenly passes away, the subsequent trauma makes him unable to hear the sound of a piano, and he never takes the stage thereafter. Nowadays, Kousei lives a quiet and unassuming life as a junior high school student alongside his friends Tsubaki Sawabe and Ryouta Watari. While struggling to get over his mother's death, he continues to cling to music. His monochrome life turns upside down the day he encounters the eccentric violinist Kaori Miyazono, who thrusts him back into the spotlight as her accompanist. Through a little lie, these two young musicians grow closer together as Kaori tries to fill Kousei's world with color.
+                    {% endcomponent_block %}
+                    <anime-genres class="hidden gap-[0.5vw] text-white md:flex md:text-[0.75vw] md:leading-[0.9vw]">
+                        <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Action </span>
+                        <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Romance </span>
+                        <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Horror </span>
                     </anime-genres>
-                    <anime-scores class="hidden w-max gap-[0.75vw] rounded-[0.25vw] bg-surface-50/10 backdrop-blur-lg md:mt-[0.5vw] md:flex md:px-[0.75vw] md:py-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
+                    <anime-scores class="hidden w-max gap-[0.75vw] rounded-[0.25vw] bg-secondary md:flex md:px-[0.75vw] md:py-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
                         <score class="flex gap-[0.25vw]">
                             <span>Score:</span>
                             <span class="font-semibold text-warning-400">79</span>
                         </score>
                         <status class="flex gap-[0.25vw]">
                             <span>Status:</span>
-                            <button class="btn p-0 leading-none md:text-[0.75vw]">
-                                <span class="font-semibold text-warning-400">Watching</span>
+                            <button class="btn !bg-transparent border-none min-h-min h-min p-0 leading-none md:text-[0.75vw]">
+                                <span class="font-semibold text-warning">Watching</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-[0.625vw] text-warning-400" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
                                 </svg>
@@ -112,8 +110,8 @@
                         </episodes-count>
                         <your-scrore class="flex gap-[0.25vw]">
                             <span>Your Score:</span>
-                            <button class="btn p-0 leading-none md:text-[0.75vw]">
-                                <span class="font-semibold text-warning-400">Not Rated</span>
+                            <button class="btn !bg-transparent border-none min-h-min h-min p-0 leading-none md:text-[0.75vw]">
+                                <span class="font-semibold text-warning">Not Rated</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-[0.625vw] text-warning-400" fill="none" viewBox="0 0 24 24">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
                                 </svg>
