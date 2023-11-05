@@ -11,7 +11,6 @@ if TYPE_CHECKING:
 
 async def anime_home_view(request: "HtmxHttpRequest") -> HttpResponse:
     if request.htmx:
-        print("HTMX home")
         return render(
             request,
             "anime/_partial_home.html",
@@ -27,7 +26,6 @@ async def anime_home_view(request: "HtmxHttpRequest") -> HttpResponse:
 
 async def anime_explore_view(request: "HtmxHttpRequest") -> HttpResponse:
     if request.htmx:
-        print("HTMX explore")
         return render(request, "anime/_partial_explore.html")
 
     return render(
