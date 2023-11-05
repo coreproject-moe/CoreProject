@@ -198,24 +198,3 @@
         </div>
     </div>
 {% endblock %}
-
-{% block js %}
-    {% component_js_dependencies %}
-    <script type="module">
-        (async() => {
-            if(!navigator.onLine) return;
-            await import("{% static 'vendor/js/swiper/swiper-element.min.js' %}");
-
-            const swiper_el = document.querySelector("swiper-container");
-            const swipe_btns = document.querySelectorAll(".swipe-btn");
-
-            swipe_btns.forEach((btn, index) => {
-                btn.addEventListener("click", () => {
-                    swiper_el.swiper.loopFix();
-                    if(index === 0) swiper_el.swiper.slideNext();
-                    if(index === 1) swiper_el.swiper.slidePrev();
-                });
-            });
-        })();
-    </script>
-{% endblock %}
