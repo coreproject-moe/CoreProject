@@ -146,7 +146,7 @@
                     {% elif request.path == "/anime/explore/" %}
                         {% include 'anime/_partial_explore.html'%}
                     {% elif request.resolver_match.view_name == 'anime_info_view' %}
-                        {% include 'anime/_partial_info.html'%}
+                        {% include 'anime/info.html'%}
                     {% endif %}
                 </div>
             </div>
