@@ -81,7 +81,7 @@
                                               "
                                             hx-push-url= "{{icon.href}}"
                                             hx-get="{{icon.href}}"
-                                            hx-target="#page-content"
+                                            hx-target="#page"
 
                                             class="btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 {% if icon.href == request.path %} relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500 {% else %} !bg-transparent {% endif %}"
                                         >
@@ -141,7 +141,11 @@
                     </div>
                 </aside>
                 <div id="page" class="flex-1 overflow-x-hidden flex flex-col" style="scrollbar-gutter: auto;">
-                    {% include 'anime/_partial.html'%}
+                    {% if request.path == "/anime/" %}
+                        {% include 'anime/_partial_home.html'%}
+                    {% elif request.path == "/anime/explore/" %}
+                        {% include 'anime/_partial_explore.html'%}
+                    {% endif %}
                 </div>
             </div>
             <footer id="shell-footer" class="flex-none">
