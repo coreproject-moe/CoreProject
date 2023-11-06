@@ -13,7 +13,7 @@ async def anime_home_view(request: "HtmxHttpRequest") -> HttpResponse:
     if request.htmx:
         return render(
             request,
-            "anime/home/index.html",
+            "anime/index.html",
             context={"latest_animes": latest_animes},
         )
 
