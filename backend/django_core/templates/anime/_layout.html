@@ -131,7 +131,7 @@
                     </div>
                 </aside>
                 <div id="page" class="flex-1 overflow-x-hidden flex flex-col" style="scrollbar-gutter: auto;">
-<<<<<<< HEAD
+                    <<<<<<< HEAD
                     {% if request.path == "/anime/" %}
                         {% include 'anime/_partial_home.html'%}
                     {% elif request.path == "/anime/explore/" %}
@@ -139,14 +139,14 @@
                     {% elif request.resolver_match.view_name == 'anime_info_view' %}
                         {% include 'anime/info.html'%}
                     {% endif %}
-=======
+                    =======
                     <content
                         class='contents'
                         hx-get='{{request.get_full_path}}'
                         hx-target='this'
                         hx-trigger='load'
                     ></content>
->>>>>>> master
+                    >>>>>>> master
                 </div>
             </div>
             <footer id="shell-footer" class="flex-none">
