@@ -28,6 +28,7 @@
         />
         <script src="{% static 'vendor/js/htmx/htmx.min.js'%}"></script>
         <script src="{% static 'vendor/js/hyperscript/hyperscript.min.js'%}"></script>
+
         {% django_htmx_script %} {% block head %}{% endblock %}
         <title>{% block title %}{% endblock %}</title>
         {% tailwind_css %}
@@ -35,5 +36,10 @@
     <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
         {% block body %}{% endblock %} {% block js %}{% endblock %}
         <div id="toast" class="toast p-0 absolute bottom-[0.75vw] right-[0.75vw]"></div>
+        <script>
+            document.body.addEventListener('fetch:beforeRequest', (event) => {
+                event.detail.headers['X-CSRFToken'] = "{{ csrf_token }}";
+            });
+        </script>
     </body>
 </html>
