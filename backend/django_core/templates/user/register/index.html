@@ -11,15 +11,14 @@
 {% block sidebody %}
     <form
         class="flex h-max w-full flex-col bg-surface-900 p-10 pb-[10vw] pt-[7vw] md:h-full md:justify-between md:rounded-none md:p-0"
-        hx-post='{{request.get_full_path}}'
-        hx-target="<content/>"
+        hx-post="{{request.get_full_path}}"
+        hx-target="this"
         enctype="application/x-www-form-urlencoded"
     >
-        <content
-            class='contents'
-            hx-get='{{request.get_full_path}}'
-            hx-target='this'
-            hx-trigger='load'
-        ></content>
+        <div
+            hx-get="{{request.get_full_path}}"
+            hx-target="closest form"
+            hx-trigger="load"
+        ></div>
     </form>
 {% endblock %}
