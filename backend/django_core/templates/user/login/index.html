@@ -26,12 +26,12 @@
             hx-post="{{request.get_full_path }}"
             enctype="application/x-www-form-urlencoded"
         >
-            <content
+            <auth-content
                 class='contents'
                 hx-get='{{request.get_full_path}}'
                 hx-target='this'
                 hx-trigger='load'
-            ></content>
+            ></auth-content>
         </form>
     {% endif %}
 {% endblock %}
