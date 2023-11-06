@@ -142,11 +142,11 @@
                 </aside>
                 <div id="page" class="flex-1 overflow-x-hidden flex flex-col" style="scrollbar-gutter: auto;">
                     {% if request.path == "/anime/" %}
-                        {% include 'anime/partials/_home.html'%}
+                        {% include 'anime/_partials/home.html'%}
                     {% elif request.path == "/anime/explore/" %}
-                        {% include 'anime/partials/_explore.html'%}
+                        {% include 'anime/_partials/explore.html'%}
                     {% elif request.resolver_match.view_name == 'anime_info_view' %}
-                        {% include 'anime/partials/_info.html'%}
+                        {% include 'anime/_partials/info.html'%}
                     {% endif %}
                 </div>
             </div>
