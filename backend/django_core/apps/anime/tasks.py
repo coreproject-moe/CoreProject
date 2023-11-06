@@ -1,10 +1,10 @@
 import math
 
 from celery import shared_task
-from modern_colorthief import ColorThief
 from django.core.management import call_command
 from django.db.models import Q
 from django.utils import timezone
+from modern_colorthief import ColorThief
 from PIL import Image, ImageStat
 from utilities.rgb_to_hex import rgb_to_hex
 
