@@ -13,7 +13,7 @@ async def anime_home_view(request: "HtmxHttpRequest") -> HttpResponse:
     if request.htmx:
         return render(
             request,
-            "anime/_partial_home.html",
+            "anime/index.html",
             context={"latest_animes": latest_animes},
         )
 
@@ -26,10 +26,13 @@ async def anime_home_view(request: "HtmxHttpRequest") -> HttpResponse:
 
 async def anime_explore_view(request: "HtmxHttpRequest") -> HttpResponse:
     if request.htmx:
-        return render(request, "anime/_partial_explore.html")
+        return render(request, "anime/explore/index.html")
 
     return render(request, "anime/_layout.html", context={"icons": icons})
 
 
 async def anime_info_view(request: "HtmxHttpRequest", pk: int) -> HttpResponse:
+    if request.htmx:
+        return render(request, "anime/info/index.html")
+
     return render(request, "anime/_layout.html", context={"icons": icons})
