@@ -22,7 +22,7 @@ youtube-search = "^2.1.2"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.10.1"
-poethepoet = "^0.24.1"
+poethepoet = "^0.24.2"
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
