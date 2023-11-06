@@ -53,7 +53,7 @@ uvicorn = {extras = ["standard"], version = ">=0.21.1"}
 django-stubs-ext = "*"
 # ===================================================
 # Color Grabber
-colorthief = ">=0.2.1"
+modern_colorthief = "^0.1.0"
 # Parsers
 selectolax = ">=0.3.17"
 python-dateutil = ">=2.8.2"

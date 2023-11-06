@@ -1,7 +1,7 @@
 import math
 
 from celery import shared_task
-from colorthief import ColorThief
+from modern_colorthief import ColorThief
 from django.core.management import call_command
 from django.db.models import Q
 from django.utils import timezone

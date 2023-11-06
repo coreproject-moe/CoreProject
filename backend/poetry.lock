@@ -513,20 +513,6 @@ files = [
 ]
 
 [[package]]
-name = "colorthief"
-version = "0.2.1"
-description = "A module for grabbing the color palette from an image."
-optional = false
-python-versions = "*"
-files = [
-    {file = "colorthief-0.2.1-py2.py3-none-any.whl", hash = "sha256:b04fc8ce5cf9c888768745e29cb19b7b688d5711af6fba26e8057debabec56b9"},
-    {file = "colorthief-0.2.1.tar.gz", hash = "sha256:079cb0c95bdd669c4643e2f7494de13b0b6029d5cdbe2d74d5d3c3386bd57221"},
-]
-
-[package.dependencies]
-Pillow = "*"
-
-[[package]]
 name = "crispy-bootstrap4"
 version = "2023.1"
 description = "Bootstrap4 template pack for django-crispy-forms"
@@ -939,7 +925,7 @@ files = [
 [package.dependencies]
 django-stubs = ">=4.2.5"
 mypy = [
-    {version = ">=0.991"},
+    {version = ">=0.991", optional = true, markers = "extra != \"compatible-mypy\""},
     {version = ">=1.6.0,<1.7.0", optional = true, markers = "extra == \"compatible-mypy\""},
 ]
 requests = ">=2.0.0"
@@ -1183,6 +1169,19 @@ files = [
 [package.extras]
 docs = ["mdx-gh-links (>=0.2)", "mkdocs (>=1.5)", "mkdocs-gen-files", "mkdocs-literate-nav", "mkdocs-nature (>=0.6)", "mkdocs-section-index", "mkdocstrings[python]"]
 testing = ["coverage", "pyyaml"]
+
+[[package]]
+name = "modern-colorthief"
+version = "0.1.0"
+description = ""
+optional = false
+python-versions = ">=3.8,<4.0"
+files = [
+    {file = "modern_colorthief-0.1.0-py3-none-any.whl", hash = "sha256:7101383ea22d51dfbad5bdc190ec165d2adfaf75234f012b8363bd6e076f6903"},
+]
+
+[package.dependencies]
+pillow = ">=10.1.0,<11.0.0"
 
 [[package]]
 name = "mypy"
@@ -2460,4 +2459,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "d94d4bb82147e817e3359af6a2183fdb0273c41544c633c4f2c19e3133da0d2f"
+content-hash = "8ab672ccfeac5d5f926811acab23aad26b9535d8b7a46fc29fc15317837b9402"
