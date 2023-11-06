@@ -544,9 +544,15 @@
         (async() => {
             if(!navigator.onLine) return;
             await import("{% static 'vendor/js/swiper/swiper-element.min.js' %}");
+            const swiper = document.querySelector('.swiper').swiper;
 
             const swiper_el = document.querySelector("swiper-container");
             const swipe_btns = document.querySelectorAll(".swipe-btn");
+
+            swiper.on('slideChange', function () {
+                scroll_area({content:document})
+            });
+
 
             swipe_btns.forEach((btn, index) => {
                 btn.addEventListener("click", () => {

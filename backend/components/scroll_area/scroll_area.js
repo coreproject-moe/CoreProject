@@ -1,4 +1,4 @@
-htmx.onLoad(function (content) {
+const scroll_area = function ({ content }) {
     const scroll_area = content.querySelector('scroll-area') ?? null;
     if (scroll_area == null) {
         console.log('elements are null | skipping | `scroll-area.js`');
@@ -18,4 +18,6 @@ htmx.onLoad(function (content) {
             scroll_area.classList.remove(mask_class);
         else scroll_area.classList.add(mask_class);
     });
-});
+};
+
+htmx.onLoad((content) => scroll_area({ content:content }));
