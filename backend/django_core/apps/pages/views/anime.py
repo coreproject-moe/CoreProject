@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from ..data.anime import icons, latest_animes, anime
+from ..data.anime import anime, icons, latest_animes
 
 if TYPE_CHECKING:
     from ..request import HtmxHttpRequest
