@@ -20,4 +20,4 @@ const scroll_area = function ({ content }) {
     });
 };
 
-htmx.onLoad((content) => scroll_area({ content }));
+htmx.onLoad((content) => scroll_area({ content:content }));
