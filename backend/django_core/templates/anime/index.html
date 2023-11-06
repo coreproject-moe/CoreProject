@@ -548,12 +548,12 @@
 
             const swiper_el = document.querySelector("swiper-container");
             const swipe_btns = document.querySelectorAll(".swipe-btn");
-            
+
             swiper.on('slideChange', function () {
                 scroll_area({content:document})
             });
 
-            
+
             swipe_btns.forEach((btn, index) => {
                 btn.addEventListener("click", () => {
                     swiper_el.swiper.loopFix();
