@@ -184,64 +184,69 @@
                     </episodes-filtering>
                 </episodes-options>
                 <anime-episodes-cards class="mt-4 grid grid-cols-12 gap-5 md:mt-[2.5vw] md:gap-[2.5vw]">
-                    <a href="/anime/mal/1/episode/1" class="relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4">
-                        <card-banner-info class="relative col-span-5 h-full w-full md:col-span-12 md:h-[19vw]">
-                            <card-banner class="block h-24 md:h-[12vw] md:w-full">
-                                <img
-                                    src="{{ episode.banner }}"
-                                    class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw]"
-                                >
-                            </card-banner>
-                            <overlay-effect class="absolute inset-0 hidden bg-gradient-to-t from-secondary/75 to-transparent md:flex md:h-[12vw]"></overlay-effect>
-                            <card-info class="absolute bottom-0 flex h-max w-full justify-between p-1 md:top-0 md:p-[0.5vw]">
-                                <p class="rounded bg-secondary/75 p-1 text-xs font-bold tracking-wider text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-secondary md:px-[0.55vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">EP 01</p>
-                                <p class="rounded bg-secondary/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-secondary md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">
-                                    {{ episode.duration }}
-                                </p>
-                            </card-info>
-                        </card-banner-info>
-                        <episode-info-card class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-secondary md:p-[1vw]">
-                            <episode-titles class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
-                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
-                                    <div>
-                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-9 md:max-h-[1.25vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
-                                            <span class="line-clamp-2 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">
-                                                {{ episode.name }}
-                                            </span>
+                    {% for _ in '012345'|make_list %}
+                        <a
+                            href="/anime/mal/1/episode/1"
+                            class="relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4"
+                        >
+                            <card-banner-info class="relative col-span-5 h-full w-full md:col-span-12 md:h-[19vw]">
+                                <card-banner class="block h-24 md:h-[12vw] md:w-full">
+                                    <img
+                                        src="{{ episode.banner }}"
+                                        class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw]"
+                                    >
+                                </card-banner>
+                                <overlay-effect class="absolute inset-0 hidden bg-gradient-to-t from-secondary/75 to-transparent md:flex md:h-[12vw]"></overlay-effect>
+                                <card-info class="absolute bottom-0 flex h-max w-full justify-between p-1 md:top-0 md:p-[0.5vw]">
+                                    <p class="rounded bg-secondary/75 p-1 text-xs font-bold tracking-wider text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-secondary md:px-[0.55vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">EP 01</p>
+                                    <p class="rounded bg-secondary/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-secondary md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">
+                                        {{ episode.duration }}
+                                    </p>
+                                </card-info>
+                            </card-banner-info>
+                            <episode-info-card class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-secondary md:p-[1vw]">
+                                <episode-titles class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
+                                    <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                        <div>
+                                            <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-9 md:max-h-[1.25vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                                <span class="line-clamp-2 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">
+                                                    {{ episode.name }}
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </scroll-area>
-                                <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
-                                    <div>
-                                        <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-4 md:max-h-[1.3vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
-                                            <span class="line-clamp-1 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">
-                                                {{ episode.japanese_name }}
-                                            </span>
+                                    </scroll-area>
+                                    <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                        <div>
+                                            <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-4 md:max-h-[1.3vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
+                                                <span class="line-clamp-1 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">
+                                                    {{ episode.japanese_name }}
+                                                </span>
+                                            </div>
                                         </div>
-                                    </div>
-                                </scroll-area>
-                            </episode-titles>
-                            <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.65vw] md:pt-[0.75vw]">
-                                <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
-                                    {% for format in episode.formats %}
-                                        <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">
-                                            {{ format }}
-                                        </span>
-                                    {% endfor %}
-                                </formats>
-                                <svg class="w-1 opacity-50 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
-                                </svg>
-                                <resolutions class="flex gap-2 leading-none md:gap-[0.65vw]">
-                                    {% for res in episode.resolutions %}
-                                        <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">
-                                            {{ res }}
-                                        </span>
-                                    {% endfor %}
-                                </resolutions>
-                            </episode-available-formats>
-                        </episode-info-card>
-                    </a>
+                                    </scroll-area>
+                                </episode-titles>
+                                <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.65vw] md:pt-[0.75vw]">
+                                    <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                        {% for format in episode.formats %}
+                                            <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">
+                                                {{ format }}
+                                            </span>
+                                        {% endfor %}
+                                    </formats>
+                                    <svg class="w-1 opacity-50 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
+                                    </svg>
+                                    <resolutions class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                        {% for res in episode.resolutions %}
+                                            <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">
+                                                {{ res }}
+                                            </span>
+                                        {% endfor %}
+                                    </resolutions>
+                                </episode-available-formats>
+                            </episode-info-card>
+                        </a>
+                    {% endfor %}
                 </anime-episodes-cards>
                 <anime-media-section class="mt-10 flex grid-cols-5 flex-col gap-10 md:mt-[3vw] md:grid md:gap-[4.375vw]">
                     <comment-box class="md:col-span-3">
