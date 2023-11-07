@@ -225,10 +225,10 @@
                                         </div>
                                     </scroll-area>
                                 </episode-titles>
-                                <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.65vw] md:pt-[0.75vw]">
+                                <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.5vw] md:pt-[0.75vw]">
                                     <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
                                         {% for format in episode.formats %}
-                                            <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">
+                                            <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:text-[0.8vw]">
                                                 {{ format }}
                                             </span>
                                         {% endfor %}
@@ -238,7 +238,7 @@
                                     </svg>
                                     <resolutions class="flex gap-2 leading-none md:gap-[0.65vw]">
                                         {% for res in episode.resolutions %}
-                                            <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">
+                                            <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:text-[0.8vw]">
                                                 {{ res }}
                                             </span>
                                         {% endfor %}
