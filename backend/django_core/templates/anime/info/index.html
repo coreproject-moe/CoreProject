@@ -26,7 +26,9 @@
                                 </div>
                             </div>
                         </scroll-area>
-                        <anime-japanese-name class="flex flex-wrap gap-x-2 pt-2 text-xs font-semibold uppercase tracking-wider md:gap-x-[0.25vw] md:pt-[0.625vw] md:text-[0.75vw] md:leading-[0.9vw]">四月は君の嘘</anime-japanese-name>
+                        <anime-japanese-name class="flex flex-wrap gap-x-2 pt-2 text-xs font-semibold uppercase tracking-wider md:gap-x-[0.25vw] md:pt-[0.625vw] md:text-[0.75vw] md:leading-[0.9vw]">
+                            {{ anime.japanese_name }}
+                        </anime-japanese-name>
                         <anime-other-infos class="mt-1 flex flex-wrap items-center gap-2 text-xs font-semibold md:mt-[0.25vw] md:gap-[0.5vw] md:pt-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
                             <span>TV</span>
                             {% include "icons/dot.html" with class="w-[0.35rem] opacity-75" %}
