@@ -530,7 +530,7 @@
                     {% include "icons/settings.html" with class="w-[0.9vw] opacity-75" %}
                 </button>
             </more-infos-header>
-            <more-infos class="md:mt-[1.25vw]">
+            <more-infos class="md:mt-[1.25vw] md:mb-[2vw]">
                 <anime-details class="flex flex-col gap-[1.125vw] capitalize">
                     <div class="flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none text-surface-50">
                         <p class="font-semibold text-white">format</p>
@@ -611,21 +611,21 @@
                             </cast-details>
                             <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-secondary/75 to-secondary/5"></gradient-overlay>
                         </casts-cards>
-                        <casts-options class="mt-[1.5vw] flex flex-col">
-                            <pagination-buttons class="btn-group flex h-[2.25vw] w-1/2 rounded-[0.5vw] bg-surface-400">
-                                <button class="h-full w-full bg-surface-400 !p-0 font-semibold">
+                        <casts-options class="mt-[1vw] flex flex-col">
+                            <div class="btn-group">
+                                <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-[1vw] rotate-180" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
                                     </svg>
                                 </button>
-                                <button class="h-full w-full bg-surface-400 !p-0 !text-[0.9vw] font-bold">01</button>
-                                <button class="h-full w-full bg-surface-400 !p-0 font-semibold">
+                                <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">01</button>
+                                <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-[1vw]" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
                                     </svg>
                                 </button>
-                            </pagination-buttons>
-                            <span class="mt-[1vw] text-[0.75vw] leading-none text-surface-50">Showing 1-5, out of 58 Voiceover Casts</span>
+                            </div>
+                            <span class="mt-[0.5vw] text-[0.75vw] leading-none text-surface-50">Showing 1-5, out of 58 Voiceover Casts</span>
                         </casts-options>
                     </casts>
                 </voiceovercase>
@@ -637,7 +637,7 @@
                         </button>
                     </section-header>
                     <recommendations-cards class="mt-[1vw] block">
-                        <cards-container class="grid grid-cols-2 gap-[1vw]">
+                        <cards-container class="grid grid-cols-2 gap-[0.75vw]">
                             <a href="/myanimelist/1" class="card relative col-span-1 h-[9.375vw] w-full overflow-hidden rounded-[0.75vw] bg-cover bg-center">
                                 <img
                                     src="https://cdn.myanimelist.net/images/anime/1958/107912.jpg"
@@ -655,21 +655,21 @@
                                 <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-secondary/75 to-secondary/5"></gradient-overlay>
                             </a>
                         </cards-container>
-                        <recommendations-options class="mt-[1.5vw] flex flex-col">
-                            <pagination-buttons class="btn-group flex h-[2.25vw] w-1/2 rounded-[0.5vw] bg-surface-400">
-                                <button class="h-full w-full bg-surface-400 !p-0 font-semibold">
+                        <recommendations-options class="mt-[1vw] flex flex-col">
+                            <div class="btn-group">
+                                <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-[1vw] rotate-180" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
                                     </svg>
                                 </button>
-                                <button class="h-full w-full bg-surface-400 !p-0 !text-[0.9vw] font-bold">01</button>
-                                <button class="h-full w-full bg-surface-400 !p-0 font-semibold">
+                                <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">01</button>
+                                <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-[1vw]" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
                                     </svg>
                                 </button>
-                            </pagination-buttons>
-                            <span class="mt-[1vw] text-[0.75vw] leading-none text-surface-50">Showing 1-8, out of 47 Recommendations</span>
+                            </div>
+                            <span class="mt-[0.5vw] text-[0.75vw] leading-none text-surface-50">Showing 1-8, out of 47 Recommendations</span>
                         </recommendations-options>
                     </recommendations-cards>
                 </recommendations>
