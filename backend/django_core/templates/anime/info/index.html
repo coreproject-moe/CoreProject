@@ -223,16 +223,21 @@
                             </episode-titles>
                             <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.65vw] md:pt-[0.75vw]">
                                 <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
-                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">sub </span>
-                                    <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">dub </span>
+                                    {% for format in episode.formats %}
+                                        <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:p-[0.45vw] md:text-[0.8vw]">
+                                            {{ format }}
+                                        </span>
+                                    {% endfor %}
                                 </formats>
                                 <svg class="w-1 opacity-50 md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
                                 </svg>
                                 <resolutions class="flex gap-2 leading-none md:gap-[0.65vw]">
-                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">sd </span>
-                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">hd </span>
-                                    <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">fhd </span>
+                                    {% for res in episode.resolutions %}
+                                        <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:p-[0.45vw] md:text-[0.8vw]">
+                                            {{ res }}
+                                        </span>
+                                    {% endfor %}
                                 </resolutions>
                             </episode-available-formats>
                         </episode-info-card>
