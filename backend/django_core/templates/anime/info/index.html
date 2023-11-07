@@ -195,22 +195,28 @@
                             <overlay-effect class="absolute inset-0 hidden bg-gradient-to-t from-secondary/75 to-transparent md:flex md:h-[12vw]"></overlay-effect>
                             <card-info class="absolute bottom-0 flex h-max w-full justify-between p-1 md:top-0 md:p-[0.5vw]">
                                 <p class="rounded bg-secondary/75 p-1 text-xs font-bold tracking-wider text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-secondary md:px-[0.55vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">EP 01</p>
-                                <p class="rounded bg-secondary/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-secondary md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">20:54</p>
+                                <p class="rounded bg-secondary/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-secondary md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">
+                                    {{ episode.duration }}
+                                </p>
                             </card-info>
                         </card-banner-info>
-                        <episode-info-card class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-surface-900 md:p-[1vw]">
+                        <episode-info-card class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-secondary md:p-[1vw]">
                             <episode-titles class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
                                 <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
                                     <div>
                                         <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-9 md:max-h-[1.25vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
-                                            <span class="line-clamp-2 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">{{ episode.name }}</span>
+                                            <span class="line-clamp-2 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">
+                                                {{ episode.name }}
+                                            </span>
                                         </div>
                                     </div>
                                 </scroll-area>
                                 <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
                                     <div>
                                         <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-4 md:max-h-[1.3vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
-                                            <span class="line-clamp-1 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">老舗古典部復活 カッコいいですよね 栄光の古典文学クラブの昔 古典文学部の活動 </span>
+                                            <span class="line-clamp-1 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">
+                                                {{ episode.japanese_name }}
+                                            </span>
                                         </div>
                                     </div>
                                 </scroll-area>
