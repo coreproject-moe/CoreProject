@@ -925,7 +925,7 @@ files = [
 [package.dependencies]
 django-stubs = ">=4.2.5"
 mypy = [
-    {version = ">=0.991", optional = true, markers = "extra != \"compatible-mypy\""},
+    {version = ">=0.991"},
     {version = ">=1.6.0,<1.7.0", optional = true, markers = "extra == \"compatible-mypy\""},
 ]
 requests = ">=2.0.0"
@@ -1172,12 +1172,13 @@ testing = ["coverage", "pyyaml"]
 
 [[package]]
 name = "modern-colorthief"
-version = "0.1.0"
-description = ""
+version = "0.1.2"
+description = "Colorthief reimagined"
 optional = false
 python-versions = ">=3.8,<4.0"
 files = [
-    {file = "modern_colorthief-0.1.0-py3-none-any.whl", hash = "sha256:7101383ea22d51dfbad5bdc190ec165d2adfaf75234f012b8363bd6e076f6903"},
+    {file = "modern_colorthief-0.1.2-py3-none-any.whl", hash = "sha256:a57d82184708d926d3f4e47f83956a5fccf339af788e91e97e88013cf46ac1c6"},
+    {file = "modern_colorthief-0.1.2.tar.gz", hash = "sha256:bce71acb9611c2e7af029606d5bdbad786f72776841ebcf2ab4910d2a01de066"},
 ]
 
 [package.dependencies]
@@ -2459,4 +2460,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "8ab672ccfeac5d5f926811acab23aad26b9535d8b7a46fc29fc15317837b9402"
+content-hash = "c0a5b6b54bb51717ec55bc46a684af8e8d458197b1cb1c4c6be6c5dc108d18f7"
