@@ -91,7 +91,7 @@ anime = {
     "rating": "",
     "updated": "2023-03-11T02:37:40.790Z",
     "name_synonyms": [],
-    "genres": "/api/v1/anime/1/genres",
+    "genres": ["action", "rommance", "horror"],
     "themes": "/api/v1/anime/1/themes",
     "characters": "/api/v1/anime/1/character",
     "studios": "/api/v1/anime/1/studios",

@@ -90,9 +90,9 @@
                         {{ anime.synopsis }}
                     {% endcomponent_block %}
                     <anime-genres class="hidden gap-[0.5vw] text-white md:flex md:text-[0.75vw] md:leading-[0.9vw]">
-                        <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Action </span>
-                        <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Romance </span>
-                        <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Horror </span>
+                        {% for genre in anime.genres %}
+                            <span class="capitalize rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">{{ genre }}</span>
+                        {% endfor %}
                     </anime-genres>
                     <anime-scores class="hidden w-max gap-[0.75vw] rounded-[0.25vw] bg-secondary md:flex md:px-[0.75vw] md:py-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
                         <score class="flex gap-[0.25vw]">
