@@ -104,3 +104,12 @@ anime = {
     "episodes_count": 9,
     "average_episode_length": 1611,
 }
+
+anime_episode = {
+    "banner": "https://theglorioblog.files.wordpress.com/2014/11/april4b.png",
+    "name": "The Revival of the Long-established Classic Literature Club. The Descendants of the Classic Literature Club",
+    "japanese_name": "老舗古典部復活 カッコいいですよね 栄光の古典文学クラブの昔 古典文学部の活動",
+    "duration": "20:54", # add logic for this time later
+    "formats": ["sub", "dub"],
+    "resolutions": ["sd", "hd", "fhd"]
+}

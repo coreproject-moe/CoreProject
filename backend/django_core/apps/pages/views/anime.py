@@ -3,7 +3,7 @@ from typing import TYPE_CHECKING
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from ..data.anime import anime, icons, latest_animes
+from ..data.anime import anime, icons, latest_animes, anime_episode
 
 if TYPE_CHECKING:
     from ..request import HtmxHttpRequest
@@ -33,6 +33,6 @@ async def anime_explore_view(request: "HtmxHttpRequest") -> HttpResponse:
 
 async def anime_info_view(request: "HtmxHttpRequest", pk: int) -> HttpResponse:
     if request.htmx:
-        return render(request, "anime/info/index.html", context={"anime": anime})
+        return render(request, "anime/info/index.html", context={"anime": anime, "episode": anime_episode})
 
     return render(request, "anime/_layout.html", context={"icons": icons})
