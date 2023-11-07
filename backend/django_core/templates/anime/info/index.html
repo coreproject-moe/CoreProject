@@ -586,26 +586,30 @@
                     </section-header>
                     <div class="mt-[1vw] flex flex-col">
                         <span class="text-[0.9375vw] text-surface-50">VAs</span>
-                        <button class="btn btn-sm mt-[0.3vw] h-[2.25vw] w-[6.625vw] gap-1 rounded-[0.375vw] bg-surface-400 p-0 text-[0.875vw]">Japanese <svg xmlns="http://www.w3.org/2000/svg" class="w-[0.9vw]" fill="none" viewBox="0 0 24 24">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
-                        </svg>
+                        <button class="btn btn-secondary min-h-full mt-[0.3vw] h-[2.25vw] w-[6.625vw] gap-1 rounded-[0.375vw] bg-surface-400 p-0 text-[0.875vw]">
+                            Japanese
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-[0.9vw]" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
+                            </svg>
                         </button>
                     </div>
                     <casts class="mt-[1vw] block">
                         <casts-cards class="relative grid h-[9vw] w-full grid-cols-2 gap-[2px] overflow-hidden rounded-[0.75vw]">
                             <cast-image class="relative col-span-1 w-full bg-cover">
-                                <div class="absolute h-full w-full object-cover object-center">
-                                    <div class="absolute h-full w-full object-cover object-center placeholder animate-pulse !bg-surface-400"></div>
-                                </div>
-                                <span class="absolute bottom-[0.3vw] z-10 w-full text-center text-[0.9vw] font-bold leading-[1vw] md:px-[1vw]">Houtarou Oreki</span>
+                                <img
+                                    src="https://i.pinimg.com/550x/ed/47/64/ed4764a0074e785738f2797641aeb411.jpg"
+                                    class="absolute h-full w-full object-cover object-center"
+                                >
+                                <span class="absolute bottom-[0.3vw] z-10 w-full text-center text-[0.9vw] font-bold leading-[1vw] md:px-[1vw] text-white">Houtarou Oreki</span>
                             </cast-image>
                             <cast-details class="relative col-span-1 w-full bg-cover">
-                                <div class="absolute h-full w-full object-cover object-center">
-                                    <div class="absolute h-full w-full object-cover object-center placeholder animate-pulse !bg-surface-400"></div>
-                                </div>
-                                <span class="absolute bottom-[0.3vw] z-10 w-full text-center text-[0.9vw] font-bold leading-[1vw] md:px-[1vw]">Yuuichi Nakamura</span>
+                                <img
+                                    src="https://animeanime.global/wp-content/uploads/2020/10/360236.jpg"
+                                    class="absolute h-full w-full object-cover object-center"
+                                >
+                                <span class="absolute bottom-[0.3vw] z-10 w-full text-center text-[0.9vw] font-bold leading-[1vw] md:px-[1vw] text-white">Yuuichi Nakamura</span>
                             </cast-details>
-                            <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-surface-900/75 to-surface-900/25"></gradient-overlay>
+                            <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-secondary/75 to-secondary/5"></gradient-overlay>
                         </casts-cards>
                         <casts-options class="mt-[1.5vw] flex flex-col">
                             <pagination-buttons class="btn-group flex h-[2.25vw] w-1/2 rounded-[0.5vw] bg-surface-400">
