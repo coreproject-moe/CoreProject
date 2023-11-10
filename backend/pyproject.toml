@@ -8,7 +8,7 @@ license = "AGPL-3.0-only"
 
 
 [tool.poetry.dependencies]
-python = ">=3.11,<3.12"
+python = ">=3.12"
 django = {version = '>=4.2', extras = ['argon2']}
 # First Party ( Redis )
 # redis = {extras = ['hiredis'], version = ">=4.5.4"}
@@ -22,7 +22,7 @@ django-treenode = "^0.20.1"
 # 3rd Party ( Files )
 django-dynamic-filenames = "*"
 # 3rd Party ( Brute Force protection )
-django-defender = ">=0.9.7"
+django-defender = "*"
 # 3rd Party ( Tailwind CSS )
 django-tailwind = ">=3.5.0"
 # 3rd Party ( Middlewares )
@@ -39,9 +39,9 @@ django-admin-hstore-widget = ">=1.2.1"   # https://github.com/PokaInc/django-adm
 # 3rd Party ( Model Fields )
 django-colorfield = "*"
 # Graphql framework
-strawberry_graphql = "^0.194.1"
-strawberry-graphql-django = "^0.10.3"
-strawberry-django-auth = "^0.375.0"
+strawberry_graphql = ">=0.194.1"
+strawberry-graphql-django = ">=0.10.3"
+strawberry-django-auth = ">=0.375.0"
 # ===================================================
 # Http Client
 requests = "^2.31.0"
