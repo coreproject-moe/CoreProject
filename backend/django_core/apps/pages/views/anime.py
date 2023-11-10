@@ -15,10 +15,11 @@ async def anime_home_view_partial_slider_view(
 ) -> HttpResponse:
     anime = latest_animes[pk]
     next_index = (pk + 1) % len(latest_animes)
+    prev_index = (pk - 1) % len(latest_animes)
     return render(
         request,
         "anime/_slider.html",
-        context={"anime": anime, "next_index": next_index},
+        context={"anime": anime, "next_index": next_index, "prev_index": prev_index},
     )
 
 

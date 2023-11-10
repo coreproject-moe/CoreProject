@@ -3,7 +3,7 @@
 <home-container class="mt-16 block md:mt-0 md:p-[1.25vw] md:pr-[3.75vw]">
     <hero-section class="flex flex-col justify-between md:flex-row">
         <latest-animes-slider class="relative h-96 w-full md:h-[26vw] md:w-[42vw]">
-            <div class='h-full'
+            <div
                  _="
                     on fetch:beforeRequest(headers)
                     add .blur-sm
@@ -11,15 +11,30 @@
                     remove .blur-sm
 
                     on load
-                    get global slider
-                    if not slider
-                    set global slider to 0
+                    get global next_index
+                    if not next_index
+                    set global next_index to 0
                     end
-                    fetch `{{ request.get_full_path }}_slider/${slider}`
+                    fetch `{{ request.get_full_path }}_slider/${next_index}`
                     put result into my innerHTML
                     call _hyperscript.processNode(my)
                     wait 10s
+                    end
+
+                    on hyperscript:slide_next
+                    fetch `{{ request.get_full_path }}_slider/${next_index}`
+                    put result into my innerHTML
+                    call _hyperscript.processNode(my)
+                    end
+
+                    on hyperscript:slide_prev
+                    fetch `{{ request.get_full_path }}_slider/${prev_index}`
+                    put result into my innerHTML
+                    call _hyperscript.processNode(my)
+                    end
                    "
+                class='h-full'
+                id='slider-el'
             ></div>
             <slide-progress class="flex w-full flex-col">
                 <progress-bar class="h-[0.2rem] md:h-[0.145vw] bg-warning" style="width: 94%"></progress-bar>
@@ -31,12 +46,14 @@
                 </animes-boxes>
             </slide-progress>
             <button
+                _="on click send hyperscript:slide_prev to #slider-el"
                 id="swipe-left-btn"
                 class="swipe-btn btn btn-primary p-0 absolute -left-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] md:flex"
             >
                 {% include "icons/chevron.html" with class="w-[1.25vw] rotate-90" %}
             </button>
             <button
+                _="on click send hyperscript:slide_next to #slider-el"
                 id="swipe-right-btn"
                 class="swipe-btn btn btn-primary p-0 absolute -right-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] bg-secondary-800 md:flex"
             >

@@ -1,8 +1,9 @@
 
 <div
     _="
-       init
-       set global slider to '{{ next_index }}'
+       on load
+       set global next_index to '{{ next_index }}'
+       set global prev_index to '{{ prev_index }}'
        end
       "
     class="absolute h-full w-full object-cover object-center md:rounded-t-[0.875vw]"
