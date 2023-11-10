@@ -52,11 +52,11 @@
 
                 <div class="mt-5 flex justify-between md:mt-0 md:justify-start md:gap-[3vw]">
                     <button class="btn flex gap-3 p-0 text-base font-semibold leading-none text-surface-50 md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]">
-                    	{% include "icons/edit.html" with class="w-4 md:w-[1vw]" %}
+                        {% include "icons/edit.html" with class="w-4 md:w-[1vw]" %}
                         <span>Rename</span>
                     </button>
                     <button class="btn flex gap-3 p-0 text-base font-semibold leading-none text-surface-50 md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]">
-                    	{% include "icons/edit.html" with class="w-4 md:w-[1vw]" %}
+                        {% include "icons/edit.html" with class="w-4 md:w-[1vw]" %}
                         <span>Edit Details</span>
                     </button>
                     <button class="btn flex gap-3 p-0 text-base font-semibold leading-none text-surface-50 md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]">
@@ -82,10 +82,10 @@
                                 <div class="flex items-center md:gap-[0.5vw]">
                                     <span class="capitalize">name</span>
                                     <button class="btn p-0">
-                                    	{% include "icons/chevron.html" with class="md:w-[1vw]" %}
+                                        {% include "icons/chevron.html" with class="md:w-[1vw]" %}
                                     </button>
                                     <button class="btn p-0">
-                                    	{% include "icons/chevron.html" with class="rotate-180 opacity-50 md:w-[1vw]" %}
+                                        {% include "icons/chevron.html" with class="rotate-180 opacity-50 md:w-[1vw]" %}
                                     </button>
                                 </div>
                             </th>
@@ -93,10 +93,10 @@
                                 <div class="flex items-center md:gap-[0.5vw]">
                                     <span class="capitalize">type</span>
                                     <button class="btn p-0">
-                                    	{% include "icons/chevron.html" with class="md:w-[1vw]" %}
+                                        {% include "icons/chevron.html" with class="md:w-[1vw]" %}
                                     </button>
                                     <button class="btn p-0">
-                                    	{% include "icons/chevron.html" with class="rotate-180 opacity-50 md:w-[1vw]" %}
+                                        {% include "icons/chevron.html" with class="rotate-180 opacity-50 md:w-[1vw]" %}
                                     </button>
                                 </div>
                             </th>
@@ -104,10 +104,10 @@
                                 <div class="flex items-center md:gap-[0.5vw]">
                                     <span class="capitalize">date modified</span>
                                     <button class="btn p-0">
-                                    	{% include "icons/chevron.html" with class="md:w-[1vw]" %}
+                                        {% include "icons/chevron.html" with class="md:w-[1vw]" %}
                                     </button>
                                     <button class="btn p-0">
-                                    	{% include "icons/chevron.html" with class="rotate-180 opacity-50 md:w-[1vw]" %}
+                                        {% include "icons/chevron.html" with class="rotate-180 opacity-50 md:w-[1vw]" %}
                                     </button>
                                 </div>
                             </th>
@@ -115,10 +115,10 @@
                                 <div class="flex items-center md:gap-[0.5vw]">
                                     <span class="capitalize">size</span>
                                     <button class="btn p-0">
-                                    	{% include "icons/chevron.html" with class="md:w-[1vw]" %}
+                                        {% include "icons/chevron.html" with class="md:w-[1vw]" %}
                                     </button>
                                     <button class="btn p-0">
-                                    	{% include "icons/chevron.html" with class="rotate-180 opacity-50 md:w-[1vw]" %}
+                                        {% include "icons/chevron.html" with class="rotate-180 opacity-50 md:w-[1vw]" %}
                                     </button>
                                 </div>
                             </th>
@@ -132,35 +132,35 @@
                     </tbody>
                     <!-- spacing -->
                     <tbody>
-                            <tr>
-                                <td class="flex items-center md:gap-[1vw]">
-                                    <input
-                                        bind:this={checkbox_elements[index]}
-                                        on:change={handle_sub_checkbox_change}
-                                        type="checkbox"
-                                        class="cursor-pointer rounded border-2 bg-transparent focus:ring-0 focus:ring-offset-0 md:h-[1.25vw] md:w-[1.25vw] md:border-[0.2vw]"
+                        <tr>
+                            <td class="flex items-center md:gap-[1vw]">
+                                <input
+                                    bind:this={checkbox_elements[index]}
+                                    on:change={handle_sub_checkbox_change}
+                                    type="checkbox"
+                                    class="cursor-pointer rounded border-2 bg-transparent focus:ring-0 focus:ring-offset-0 md:h-[1.25vw] md:w-[1.25vw] md:border-[0.2vw]"
+                                />
+                                <button class="btn hidden p-0 md:flex">
+                                    <Star
+                                        variant="empty"
+                                        class="text-surface-50/50 md:w-[1.5vw]"
+                                        fill_color="none"
                                     />
-                                    <button class="btn hidden p-0 md:flex">
-                                        <Star
-                                            variant="empty"
-                                            class="text-surface-50/50 md:w-[1.5vw]"
-                                            fill_color="none"
-                                        />
-                                    </button>
-                                </td>
-                                <td>
-                                    <span class="md:text-[1vw]">name</span>
-                                </td>
-                                <td>
-                                    <span class="md:text-[1vw]">type</span>
-                                </td>
-                                <td>
-                                    <span class="md:text-[1vw]">last modified</span>
-                                </td>
-                                <td>
-                                    <span class="md:text-[1vw]">size</span>
-                                </td>
-                            </tr>
+                                </button>
+                            </td>
+                            <td>
+                                <span class="md:text-[1vw]">name</span>
+                            </td>
+                            <td>
+                                <span class="md:text-[1vw]">type</span>
+                            </td>
+                            <td>
+                                <span class="md:text-[1vw]">last modified</span>
+                            </td>
+                            <td>
+                                <span class="md:text-[1vw]">size</span>
+                            </td>
+                        </tr>
                         {/each}
                     </tbody>
                 </table>
@@ -172,6 +172,6 @@
                     <span class="text-sm leading-none text-surface-300 md:text-[1.1vw]">Upload something to make kokoro-chan happy</span>
                 </div>
             </empty-ui>
-	    </uploads>
-	</container>
+        </uploads>
+    </container>
 {% endblock %}
