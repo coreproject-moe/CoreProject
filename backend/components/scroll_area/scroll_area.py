@@ -5,7 +5,7 @@ import sys
 
 
 def get_random_integer():
-    random_integer = random.randint(0, sys.float_info.max)
+    random_integer = random.randint(0, sys.maxsize)
 
     if cache.get("scroll_area") == random_integer:
         get_random_integer()
