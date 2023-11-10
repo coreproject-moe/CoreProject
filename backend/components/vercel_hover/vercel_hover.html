@@ -9,8 +9,8 @@
 
             console.log(content) // only body content
             const hover_glider_element = content.querySelector("active-glider") ?? null,
-            glider_container_element = content.querySelector("glider-container") ?? null;
-            console.log(hover_glider_element, glider_container_element) 
+                  glider_container_element = content.querySelector("glider-container") ?? null;
+            console.log(hover_glider_element, glider_container_element)
 
             if (hover_glider_element == null || glider_container_element == null) {
                 console.log('elements are null | skipping | `vercel-hover.js`');
