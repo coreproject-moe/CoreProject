@@ -1,5 +1,5 @@
 <script>
-    const scroll_area = function ({ content }) {
+    htmx.onLoad((content) => {
         const scroll_area = content.querySelector(
             'scroll-area-{{random_integer}}'
         );
@@ -22,9 +22,7 @@
                 scroll_area.classList.remove(mask_class);
             else scroll_area.classList.add(mask_class);
         });
-    };
-
-    htmx.onLoad((content) => scroll_area({ content: content }));
+    });
 </script>
 
 <scroll-area-{{random_integer}}
