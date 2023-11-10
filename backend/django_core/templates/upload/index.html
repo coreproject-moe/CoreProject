@@ -34,30 +34,30 @@
                             class="absolute left-2 p-0 md:left-[1vw]"
                             aria-label="Search"
                         >
-                            {% include "icons/search.html" with class="md:w-[1vw] opacity-75" %}
+                            {% include "icons/search.html" with class="md:w-[1.25vw] opacity-75" %}
                         </button>
                         <input
                             type="text"
                             placeholder="Search"
-                            class="h-full w-56 rounded-lg border-none bg-neutral pl-12 text-base leading-none text-white shadow-lg !ring-0 placeholder:font-medium placeholder:text-surface-50 md:w-full md:rounded-[0.5vw] md:py-[0.5vw] md:pl-[3vw] md:text-[1vw]"
+                            class="h-full w-56 rounded-lg border-none bg-neutral pl-12 text-base leading-none text-white shadow-lg !ring-0 placeholder:font-medium placeholder:text-surface-50 md:w-full md:rounded-[0.5vw] md:py-[0.75vw] md:pl-[3vw] md:text-[1.1vw]"
                         />
                     </form>
-                    <button class="btn !bg-transparent min-h-full flex gap-2 p-0 leading-none text-surface-50 md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]">
+                    <button class="btn !bg-transparent min-h-full flex gap-2 p-0 leading-none text-surface-50 md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw] capitalize">
                     	{% include "icons/cross.html" with class="w-4 rotate-45 md:w-[1vw]" %}
                         New folder
                     </button>
                 </div>
 
                 <div class="mt-5 flex justify-between md:mt-0 md:justify-start md:gap-[3vw]">
-                    <button class="btn flex gap-3 p-0 text-base font-semibold leading-none text-surface-50 md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]">
+                    <button class="btn !bg-transparent min-h-full flex gap-3 p-0 text-base font-semibold leading-none text-surface-50 md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw] capitalize">
                         {% include "icons/edit.html" with class="w-4 md:w-[1vw]" %}
                         <span>Rename</span>
                     </button>
-                    <button class="btn flex gap-3 p-0 text-base font-semibold leading-none text-surface-50 md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]">
+                    <button class="btn !bg-transparent min-h-full flex gap-3 p-0 text-base font-semibold leading-none text-surface-50 md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw] capitalize">
                         {% include "icons/edit.html" with class="w-4 md:w-[1vw]" %}
                         <span>Edit Details</span>
                     </button>
-                    <button class="btn flex gap-3 p-0 text-base font-semibold leading-none text-surface-50 md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]">
+                    <button class="btn !bg-transparent min-h-full flex gap-3 p-0 text-base font-semibold leading-none text-surface-50 md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw] capitalize">
                         <Delete class="w-4 md:w-[1vw]" />
                         <span>Delete</span>
                     </button>
