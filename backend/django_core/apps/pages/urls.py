@@ -1,12 +1,22 @@
-from django.urls import path
+from django.urls import path, re_path
 
-from .views.anime import anime_explore_view, anime_home_view, anime_info_view
+from .views.anime import (
+    anime_explore_view,
+    anime_home_view,
+    anime_info_view,
+    anime_home_view_partial_slider_view,
+)
 from .views.stack import stack_view
 from .views.user import login_view, logout_view, register_view, reset_password_view
 
 urlpatterns = [
     # Anime pages
     path("anime/", anime_home_view, name="anime_home_view"),
+    path(
+        "anime/_slider/<int:pk>/",
+        anime_home_view_partial_slider_view,
+        name="anime_home_view_partial_slider_view",
+    ),
     path("anime/explore/", anime_explore_view, name="anime_explore_view"),
     path("anime/mal/<int:pk>/", anime_info_view, name="anime_info_view"),
     # Stack page

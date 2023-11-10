@@ -9,6 +9,20 @@ if TYPE_CHECKING:
     from ..request import HtmxHttpRequest
 
 
+async def anime_home_view_partial_slider_view(
+    request: "HtmxHttpRequest",
+    pk: int,
+) -> HttpResponse:
+    anime = latest_animes[pk]
+    return render(
+        request,
+        "anime/_slider.html",
+        context={
+            "anime": anime,
+        },
+    )
+
+
 async def anime_home_view(request: "HtmxHttpRequest") -> HttpResponse:
     if request.htmx:
         return render(
