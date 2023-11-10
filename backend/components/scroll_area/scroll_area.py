@@ -1,7 +1,8 @@
-from django_components import component
 import random
-from django.core.cache import cache
 import sys
+
+from django.core.cache import cache
+from django_components import component
 
 
 def get_random_integer():
