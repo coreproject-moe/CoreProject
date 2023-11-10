@@ -13,7 +13,7 @@ async def anime_home_view_partial_slider_view(
     request: "HtmxHttpRequest",
     pk: int,
 ) -> HttpResponse:
-    anime = latest_animes[pk]
+    anime = latest_animes[pk - 1]
     return render(
         request,
         "anime/_slider.html",
