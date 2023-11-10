@@ -11,22 +11,22 @@
                     wait 300ms
                     then remove .backdrop-blur from next <backdrop/>
 
-                    on load
-                    get global next_index
-                    if not next_index
-                    set global next_index to 0
-                    end
-                    fetch `{{ request.get_full_path }}_slider/${next_index}`
-                    put result into my innerHTML
-                    call _hyperscript.processNode(my)
-                    wait 10s
-                    end
+                   on load
+                   get global next_index
+                   if not next_index
+                   set global next_index to 0
+                   end
+                   fetch `{{ request.get_full_path }}_slider/${next_index}`
+                   put result into my innerHTML
+                   call _hyperscript.processNode(my)
+                   wait 10s
+                   end
 
-                    on hyperscript:slide_next
-                    fetch `{{ request.get_full_path }}_slider/${next_index}`
-                    put result into my innerHTML
-                    call _hyperscript.processNode(my)
-                    end
+                   on hyperscript:slide_next
+                   fetch `{{ request.get_full_path }}_slider/${next_index}`
+                   put result into my innerHTML
+                   call _hyperscript.processNode(my)
+                   end
 
                     on hyperscript:slide_prev
                     fetch `{{ request.get_full_path }}_slider/${prev_index}`
