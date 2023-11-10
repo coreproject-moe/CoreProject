@@ -8,7 +8,8 @@
                     on fetch:beforeRequest(headers)
                     add .blur-sm
                     on fetch:afterResponse
-                    remove .blur-sm
+                    wait 200ms
+                    then remove .blur-sm
 
                     on load
                     get global next_index
@@ -33,8 +34,8 @@
                     call _hyperscript.processNode(my)
                     end
                    "
-                class='h-full'
-                id='slider-el'
+                class="h-full duration-200"
+                id="slider-el"
             ></div>
             <slide-progress class="flex w-full flex-col">
                 <progress-bar class="h-[0.2rem] md:h-[0.145vw] bg-warning" style="width: 94%"></progress-bar>
