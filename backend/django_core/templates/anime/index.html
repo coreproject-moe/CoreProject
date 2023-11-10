@@ -4,36 +4,36 @@
     <hero-section class="flex flex-col justify-between md:flex-row">
         <latest-animes-slider class="relative h-96 w-full md:h-[26vw] md:w-[42vw]">
             <div
-                 _="
-                    on fetch:beforeRequest(headers)
-                    add .blur-sm
-                    on fetch:afterResponse
-                    wait 200ms
-                    then remove .blur-sm
+                _="
+                   on fetch:beforeRequest(headers)
+                   add .blur-sm
+                   on fetch:afterResponse
+                   wait 200ms
+                   then remove .blur-sm
 
-                    on load
-                    get global next_index
-                    if not next_index
-                    set global next_index to 0
-                    end
-                    fetch `{{ request.get_full_path }}_slider/${next_index}`
-                    put result into my innerHTML
-                    call _hyperscript.processNode(my)
-                    wait 10s
-                    end
+                   on load
+                   get global next_index
+                   if not next_index
+                   set global next_index to 0
+                   end
+                   fetch `{{ request.get_full_path }}_slider/${next_index}`
+                   put result into my innerHTML
+                   call _hyperscript.processNode(my)
+                   wait 10s
+                   end
 
-                    on hyperscript:slide_next
-                    fetch `{{ request.get_full_path }}_slider/${next_index}`
-                    put result into my innerHTML
-                    call _hyperscript.processNode(my)
-                    end
+                   on hyperscript:slide_next
+                   fetch `{{ request.get_full_path }}_slider/${next_index}`
+                   put result into my innerHTML
+                   call _hyperscript.processNode(my)
+                   end
 
-                    on hyperscript:slide_prev
-                    fetch `{{ request.get_full_path }}_slider/${prev_index}`
-                    put result into my innerHTML
-                    call _hyperscript.processNode(my)
-                    end
-                   "
+                   on hyperscript:slide_prev
+                   fetch `{{ request.get_full_path }}_slider/${prev_index}`
+                   put result into my innerHTML
+                   call _hyperscript.processNode(my)
+                   end
+                  "
                 class="h-full duration-200"
                 id="slider-el"
             ></div>
