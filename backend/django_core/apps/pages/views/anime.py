@@ -18,10 +18,7 @@ async def anime_home_view_partial_slider_view(
     return render(
         request,
         "anime/_slider.html",
-        context={
-            "anime": anime,
-            "next_index": next_index
-        },
+        context={"anime": anime, "next_index": next_index},
     )
 
 
