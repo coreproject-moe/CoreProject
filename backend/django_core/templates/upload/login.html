@@ -33,9 +33,12 @@
                             {% include "icons/chevron.html" with class="w-4 -rotate-90 md:w-[1.25vw]" %}
                         </button>
                     </token-input>
-                    <span class="text-lg leading-snug text-surface-50 md:text-[0.9vw] md:leading-[1.25vw]">
-                        Insert your unique API token here to unlock the full potential of Streamsb's video services
-                    </span>
+                    <info class="flex items-center gap-2 md:gap-[0.5vw]">
+                        {% include "icons/info.html" with class="w-3 opacity-70 md:w-[1vw]" %}
+                        <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.9vw]">
+                            Insert your unique API token here to unlock the full potential of Streamsb's video services
+                        </span>
+                    </info>
                 </streamsb>
             </providers>
         </form>
