@@ -31,26 +31,19 @@
                 <div class="flex items-center justify-between md:justify-start md:gap-[3vw]">
                     <form class="relative flex items-center">
                         <button
-                            class="btn absolute left-2 p-0 md:left-[1vw]"
+                            class="absolute left-2 p-0 md:left-[1vw]"
                             aria-label="Search"
                         >
-                            <Search
-                                class="hidden md:flex"
-                                style="width: 1vw; opacity: 0.75;"
-                            />
-                            <Search
-                                class="flex md:hidden"
-                                style="width: 1rem; opacity: 0.75;"
-                            />
+                            {% include "icons/search.html" with class="md:w-[1vw] opacity-75" %}
                         </button>
                         <input
                             type="text"
                             placeholder="Search"
-                            class="h-full w-56 rounded-lg border-none bg-surface-400 pl-12 text-base leading-none text-white shadow-lg !ring-0 placeholder:font-medium placeholder:text-surface-50 md:w-full md:rounded-[0.5vw] md:py-[0.5vw] md:pl-[3vw] md:text-[1vw]"
+                            class="h-full w-56 rounded-lg border-none bg-neutral pl-12 text-base leading-none text-white shadow-lg !ring-0 placeholder:font-medium placeholder:text-surface-50 md:w-full md:rounded-[0.5vw] md:py-[0.5vw] md:pl-[3vw] md:text-[1vw]"
                         />
                     </form>
-                    <button class="btn flex gap-2 p-0 leading-none text-surface-50 md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]">
-                        <Cross class="w-4 rotate-45 md:w-[1vw]" />
+                    <button class="btn !bg-transparent min-h-full flex gap-2 p-0 leading-none text-surface-50 md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]">
+                    	{% include "icons/cross.html" with class="w-4 rotate-45 md:w-[1vw]" %}
                         New folder
                     </button>
                 </div>
