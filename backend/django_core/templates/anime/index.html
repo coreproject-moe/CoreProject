@@ -3,27 +3,27 @@
 <home-container class="mt-16 block md:mt-0 md:p-[1.25vw] md:pr-[3.75vw]">
     <hero-section class="flex flex-col justify-between md:flex-row">
         <latest-animes-slider class="relative h-96 w-full md:h-[26vw] md:w-[42vw]">
-            <div class='h-full' 
-                _="
-                on fetch:beforeRequest(headers)
-                   
+            <div class='h-full'
+                 _="
+                    on fetch:beforeRequest(headers)
+
                     add .blur-sm
 
-                on fetch:afterResponse
+                    on fetch:afterResponse
                     remove .blur-sm
-                
-                on load
+
+                    on load
                     get global slider
                     if not slider
-                        set global slider to 1
+                    set global slider to 1
                     end
                     fetch `{{ request.get_full_path }}_slider/${slider}`
                     put result into my innerHTML
                     call _hyperscript.processNode(my)
                     wait 1s
                     set global slider to slider+1
-                   
-                "
+
+                   "
             ></div>
             <slide-progress class="flex w-full flex-col">
                 <progress-bar class="h-[0.2rem] md:h-[0.145vw] bg-warning" style="width: 94%"></progress-bar>
@@ -486,5 +486,5 @@
 
 {% block js %}
     {% component_js_dependencies %}
-    
+
 {% endblock %}

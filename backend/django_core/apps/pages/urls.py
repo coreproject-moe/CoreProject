@@ -1,10 +1,10 @@
-from django.urls import path, re_path
+from django.urls import path
 
 from .views.anime import (
     anime_explore_view,
     anime_home_view,
-    anime_info_view,
     anime_home_view_partial_slider_view,
+    anime_info_view,
 )
 from .views.stack import stack_view
 from .views.upload import upload_view
