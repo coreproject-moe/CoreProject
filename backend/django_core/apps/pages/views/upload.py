@@ -7,4 +7,4 @@ if TYPE_CHECKING:
 
 
 def upload_view(request: "HtmxHttpRequest"):
-    return render(request, "upload/login.html")
+    return render(request, "upload/index.html")
