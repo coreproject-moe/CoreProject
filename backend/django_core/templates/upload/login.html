@@ -16,24 +16,24 @@
             </span>
             <span class="text-xl text-surface-50 md:text-[1vw] md:leading-[2vw]">for seamless integration</span>
 
-            <providers class="mt-10 md:mt-[5vw]">
-                <streamsb class="flex flex-col md:gap-[0.25vw]">
+            <providers class="flex mt-10 md:mt-[5vw]">
+                <streamsb class="flex flex-col md:gap-[0.35vw] w-full">
                     <span class="text-xl font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Stream SB</span>
                     <token-input class="flex justify-between gap-5 md:gap-[1vw]">
                         <input
                             name="streamsb"
                             placeholder="StreamSB token"
-                            class="h-12 w-full rounded-xl border-2 border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.6vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
+                            class="h-12 w-full rounded-xl border-2 border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.5vw] md:rounded-[0.6vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
                         />
                         <button
                             type="submit"
-                            class="btn bg-primary-500 font-semibold leading-none md:rounded-[0.6vw] md:px-[1vw] md:py-[0.5vw] md:text-[1vw]"
+                            class="btn btn-primary md:w-[9vw] md:h-[3.5vw] font-semibold leading-none md:rounded-[0.6vw] md:text-[1vw]"
                         >
                             <span>Continue</span>
-                            <Chevron class="w-4 -rotate-90 md:w-[1vw]" />
+                            {% include "icons/chevron.html" with class="w-4 -rotate-90 md:w-[1.25vw]" %}
                         </button>
                     </token-input>
-                    <span class="text-lg leading-snug text-surface-50 md:text-[1vw] md:leading-[1.25vw]">
+                    <span class="text-lg leading-snug text-surface-50 md:text-[0.9vw] md:leading-[1.25vw]">
                         Insert your unique API token here to unlock the full potential of Streamsb's video services
                     </span>
                 </streamsb>
