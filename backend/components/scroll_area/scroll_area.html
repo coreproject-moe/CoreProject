@@ -18,7 +18,6 @@
             });
         end
       "
-    scroll-area-random-integer="{{random_integer}}"
     class="{{ parent_class }} {{ offset_scrollbar }} block h-full w-full overflow-y-scroll overscroll-y-contain [scrollbar-width:_thin] [scrollbar-color:rgba(255,255,255,0.12)_transparent]"
 >
     <div class="{{ class }}">{% slot "context" default %} {% endslot %}</div>
