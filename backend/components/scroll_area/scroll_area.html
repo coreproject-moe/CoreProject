@@ -1,7 +1,7 @@
 <script>
     htmx.onLoad((content) => {
         const scroll_area = content.querySelector(
-            'scroll-area-{{random_integer}}'
+            `[scroll-area-random-integer="{{random_integer}}"]`
         );
         if (scroll_area == null) {
             console.log('elements are null | skipping | `scroll-area.js`');
@@ -25,8 +25,9 @@
     });
 </script>
 
-<scroll-area-{{random_integer}}
+<scroll-area
+    scroll-area-random-integer="{{random_integer}}"
     class="{{ parent_class }} {{ offset_scrollbar }} block h-full w-full overflow-y-scroll overscroll-y-contain [scrollbar-width:_thin] [scrollbar-color:_rgba(255,255,255,0.12)_transparent]"
 >
     <div class="{{ class }}">{% slot "context" default %} {% endslot %}</div>
-</scroll-area-{{random_integer}}>
+</scroll-area>

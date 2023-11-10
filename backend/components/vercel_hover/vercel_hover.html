@@ -1,11 +1,13 @@
 <script>
-    htmx.onLoad(function (content) {
+    htmx.onLoad((content) => {
         const hover_glider_element =
-                content.querySelector('active_glider-{{random_integer}}') ??
-                null,
+                content.querySelector(
+                    `[active-glider-random-integer="{{random_integer}}"]`
+                ) ?? null,
             glider_container_element =
-                content.querySelector('glider-container-{{random_integer}}') ??
-                null;
+                content.querySelector(
+                    `[glider-container-random-integer="{{random_integer}}"]`
+                ) ?? null;
 
         if (hover_glider_element == null || glider_container_element == null) {
             console.log('elements are null | skipping | `vercel-hover.js`');
@@ -86,13 +88,15 @@
     });
 </script>
 
-<glider-container-{{random_integer}}
+<glider-container
+    glider-container-random-integer="{{random_integer}}"
     class="{{ glider_container_class }}"
     direction="{{ direction }}"
     duration="{{ duration }}"
 >
-    <active_glider-{{random_integer}}
+    <active_glider
+        active-glider-random-integer="{{ random_integer }}"
         class="{{ active_element_class }} absolute opacity-0 ease-in-out duration-200"
-    ></active_glider-{{random_integer}}>
+    ></active_glider>
     {% slot 'items' default %} {% endslot %}
-</glider-container-{{random_integer}}>
+</glider-container>
