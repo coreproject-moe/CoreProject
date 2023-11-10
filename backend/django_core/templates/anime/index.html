@@ -6,23 +6,19 @@
             <div class='h-full'
                  _="
                     on fetch:beforeRequest(headers)
-
                     add .blur-sm
-
                     on fetch:afterResponse
                     remove .blur-sm
 
                     on load
                     get global slider
                     if not slider
-                    set global slider to 1
+                    set global slider to 0
                     end
                     fetch `{{ request.get_full_path }}_slider/${slider}`
                     put result into my innerHTML
                     call _hyperscript.processNode(my)
-                    wait 1s
-                    set global slider to slider+1
-
+                    wait 10s
                    "
             ></div>
             <slide-progress class="flex w-full flex-col">

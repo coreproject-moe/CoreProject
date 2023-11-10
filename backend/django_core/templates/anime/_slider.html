@@ -1,5 +1,12 @@
 
-<div class="absolute h-full w-full object-cover object-center md:rounded-t-[0.875vw]">
+<div
+    _="
+        init
+        set global slider to '{{ next_index }}'
+        end
+    "
+    class="absolute h-full w-full object-cover object-center md:rounded-t-[0.875vw]"
+>
     <img class="absolute h-full w-full object-cover object-center md:rounded-t-[0.875vw]" src={{ anime.image }} alt="" style="" loading="lazy" />
 </div>
 <gradient-overlay class="absolute inset-0 bg-gradient-to-t from-secondary/90 to-secondary/50 md:to-surface-900/25"></gradient-overlay>
