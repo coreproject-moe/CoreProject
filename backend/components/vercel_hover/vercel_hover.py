@@ -1,4 +1,18 @@
+import random
+import sys
+
+from django.core.cache import cache
 from django_components import component
+
+
+def get_random_integer():
+    random_integer = random.randint(0, sys.maxsize)
+
+    if cache.get("vercel_hover") == random_integer:
+        get_random_integer()
+    else:
+        cache.set("vercel_hover", random_integer, 1)
+        return random_integer
 
 
 @component.register("vercel_hover")
@@ -18,7 +32,5 @@ class VercelHover(component.Component):
             "direction": direction,
             "glider_container_class": glider_container_class,
             "active_element_class": active_element_class,
+            "random_integer": get_random_integer(),
         }
-
-    class Media:
-        js = "vercel_hover/vercel_hover.js"

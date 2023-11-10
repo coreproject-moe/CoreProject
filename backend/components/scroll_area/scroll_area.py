@@ -1,11 +1,12 @@
-from django_components import component
 import random
-from django.core.cache import cache
 import sys
+
+from django.core.cache import cache
+from django_components import component
 
 
 def get_random_integer():
-    random_integer = random.randint(0, sys.float_info.max)
+    random_integer = random.randint(0, sys.maxsize)
 
     if cache.get("scroll_area") == random_integer:
         get_random_integer()

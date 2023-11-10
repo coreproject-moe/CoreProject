@@ -540,7 +540,8 @@
 
 {% block js %}
     {% component_js_dependencies %}
-    <script type="module">
+    {% comment %}
+      <script type="module">
         (async() => {
             if(!navigator.onLine) return;
             await import("{% static 'vendor/js/swiper/swiper-element.min.js' %}");
@@ -563,4 +564,5 @@
             });
         })();
     </script>
+    {% endcomment %}
 {% endblock %}
