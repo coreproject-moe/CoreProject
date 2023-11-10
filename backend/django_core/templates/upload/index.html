@@ -130,11 +130,11 @@
                     <tbody></tbody>
                 </table>
             </uploads-table>
-            <empty-ui class="mt-10 flex w-full flex-col items-center justify-center md:mt-[5vw] md:flex-row md:gap-[2vw]">
-                <EmptyUpload class="w-32 stroke-surface-50 stroke-[0.15vw] md:w-[10vw] md:stroke-surface-300" />
+            <empty-ui class="flex w-full flex-col items-center justify-center md:flex-row md:gap-[2vw]">
+            	{% include "icons/empty.html" with class="w-32 stroke-accent stroke-[0.15vw] md:w-[10vw] md:stroke-accent/50" %}
                 <div class="flex flex-col items-center gap-2 md:items-start md:gap-[0.75vw]">
-                    <span class="text-base font-semibold leading-none text-surface-50 md:text-[1.4vw]">Empty!</span>
-                    <span class="text-sm leading-none text-surface-300 md:text-[1.1vw]">Upload something to make kokoro-chan happy</span>
+                    <span class="text-base font-semibold leading-none text-accent md:text-[1.4vw]">Empty!</span>
+                    <span class="text-sm leading-none text-accent/50 md:text-[1.1vw]">Upload something to make kokoro-chan happy</span>
                 </div>
             </empty-ui>
         </uploads>
