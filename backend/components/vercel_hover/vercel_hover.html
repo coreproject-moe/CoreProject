@@ -1,7 +1,7 @@
 <script>
     function vercel(content) {
         const hover_glider_element = content.querySelector("active-glider") ?? null,
-        glider_container_element = content ?? null;
+              glider_container_element = content ?? null;
 
         if (hover_glider_element == null || glider_container_element == null) {
             console.log('elements are null | skipping | `vercel-hover.js`');
@@ -84,11 +84,11 @@
 
 <glider-container
     _="
-        init
-        js(me)
-        vercel(me)
-        end
-    "
+       init
+       js(me)
+       vercel(me)
+       end
+      "
     class="{{ glider_container_class }}"
     direction="{{ direction }}"
     duration="{{ duration }}"
