@@ -3,6 +3,7 @@ from django.urls import path
 from .views.anime import anime_explore_view, anime_home_view, anime_info_view
 from .views.stack import stack_view
 from .views.user import login_view, logout_view, register_view, reset_password_view
+from .views.upload import upload_view
 
 urlpatterns = [
     # Anime pages
@@ -16,4 +17,6 @@ urlpatterns = [
     path("user/logout/", logout_view, name="logout_view"),
     path("user/register/", register_view, name="register_view"),
     path("user/reset-password/", reset_password_view, name="reset_password_view"),
+    # Upload page
+    path("upload/", upload_view, name="upload_view"),
 ]
