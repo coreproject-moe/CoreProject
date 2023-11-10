@@ -13,15 +13,15 @@
                     remove .blur-sm
                 
                 on load
-                    get slider
+                    get global slider
                     if not slider
-                        set slider to 1
+                        set global slider to 1
                     end
                     fetch `{{ request.get_full_path }}_slider/${slider}`
                     put result into my innerHTML
                     call _hyperscript.processNode(my)
-                    wait 10s
-                    set slider to slider+1
+                    wait 1s
+                    set global slider to slider+1
                    
                 "
             ></div>
