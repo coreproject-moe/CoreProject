@@ -70,8 +70,6 @@
                         <tr class="text-left md:text-[1vw]">
                             <th>
                                 <input
-                                    bind:this={main_checkbox}
-                                    on:change={handle_main_checkbox_change}
                                     type="checkbox"
                                     class="cursor-pointer rounded border-2 bg-transparent focus:ring-0 focus:ring-offset-0 md:h-[1.25vw] md:w-[1.25vw] md:border-[0.2vw]"
                                 />
@@ -79,10 +77,10 @@
                             <th>
                                 <div class="flex items-center md:gap-[0.5vw]">
                                     <span class="capitalize">name</span>
-                                    <button class="btn p-0">
+                                    <button class="btn !bg-transparent min-h-full p-0">
                                         {% include "icons/chevron.html" with class="md:w-[1vw]" %}
                                     </button>
-                                    <button class="btn p-0">
+                                    <button class="btn !bg-transparent min-h-full p-0">
                                         {% include "icons/chevron.html" with class="rotate-180 opacity-50 md:w-[1vw]" %}
                                     </button>
                                 </div>
@@ -90,10 +88,10 @@
                             <th>
                                 <div class="flex items-center md:gap-[0.5vw]">
                                     <span class="capitalize">type</span>
-                                    <button class="btn p-0">
+                                    <button class="btn !bg-transparent min-h-full p-0">
                                         {% include "icons/chevron.html" with class="md:w-[1vw]" %}
                                     </button>
-                                    <button class="btn p-0">
+                                    <button class="btn !bg-transparent min-h-full p-0">
                                         {% include "icons/chevron.html" with class="rotate-180 opacity-50 md:w-[1vw]" %}
                                     </button>
                                 </div>
@@ -101,10 +99,10 @@
                             <th>
                                 <div class="flex items-center md:gap-[0.5vw]">
                                     <span class="capitalize">date modified</span>
-                                    <button class="btn p-0">
+                                    <button class="btn !bg-transparent min-h-full p-0">
                                         {% include "icons/chevron.html" with class="md:w-[1vw]" %}
                                     </button>
-                                    <button class="btn p-0">
+                                    <button class="btn !bg-transparent min-h-full p-0">
                                         {% include "icons/chevron.html" with class="rotate-180 opacity-50 md:w-[1vw]" %}
                                     </button>
                                 </div>
@@ -112,10 +110,10 @@
                             <th>
                                 <div class="flex items-center md:gap-[0.5vw]">
                                     <span class="capitalize">size</span>
-                                    <button class="btn p-0">
+                                    <button class="btn !bg-transparent min-h-full p-0">
                                         {% include "icons/chevron.html" with class="md:w-[1vw]" %}
                                     </button>
-                                    <button class="btn p-0">
+                                    <button class="btn !bg-transparent min-h-full p-0">
                                         {% include "icons/chevron.html" with class="rotate-180 opacity-50 md:w-[1vw]" %}
                                     </button>
                                 </div>
@@ -129,37 +127,7 @@
                         </tr>
                     </tbody>
                     <!-- spacing -->
-                    <tbody>
-                        <tr>
-                            <td class="flex items-center md:gap-[1vw]">
-                                <input
-                                    bind:this={checkbox_elements[index]}
-                                    on:change={handle_sub_checkbox_change}
-                                    type="checkbox"
-                                    class="cursor-pointer rounded border-2 bg-transparent focus:ring-0 focus:ring-offset-0 md:h-[1.25vw] md:w-[1.25vw] md:border-[0.2vw]"
-                                />
-                                <button class="btn hidden p-0 md:flex">
-                                    <Star
-                                        variant="empty"
-                                        class="text-surface-50/50 md:w-[1.5vw]"
-                                        fill_color="none"
-                                    />
-                                </button>
-                            </td>
-                            <td>
-                                <span class="md:text-[1vw]">name</span>
-                            </td>
-                            <td>
-                                <span class="md:text-[1vw]">type</span>
-                            </td>
-                            <td>
-                                <span class="md:text-[1vw]">last modified</span>
-                            </td>
-                            <td>
-                                <span class="md:text-[1vw]">size</span>
-                            </td>
-                        </tr>
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </uploads-table>
             <empty-ui class="mt-10 flex w-full flex-col items-center justify-center md:mt-[5vw] md:flex-row md:gap-[2vw]">
