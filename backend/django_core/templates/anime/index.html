@@ -19,10 +19,9 @@
                     end
                     fetch `{{ request.get_full_path }}_slider/${slider}`
                     put result into my innerHTML
-                    js(my)
-                        htmx.process(document.body)
-                    end
-                    set slider to slider + 1
+                    call _hyperscript.processNode(my)
+                    wait 10s
+                    set slider to slider+1
                    
                 "
             ></div>
