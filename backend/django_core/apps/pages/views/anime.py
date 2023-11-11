@@ -42,4 +42,11 @@ async def anime_info_view(request: "HtmxHttpRequest", pk: int) -> HttpResponse:
     return render(request, "anime/_layout.html", context={"icons": icons})
 
 async def anime_episode_view(request: "HtmxHttpRequest", mal_id: int, pk: int) -> HttpResponse:
-    return HttpResponse("Episode")
+    if request.htmx:
+        return render(
+            request,
+            "anime/episode/index.html",
+            context={},
+        )
+
+    return render(request, "anime/_layout.html", context={"icons": icons})
