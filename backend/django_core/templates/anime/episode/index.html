@@ -10,12 +10,12 @@
                 <preferences class="flex gap-2 md:items-center md:gap-[1vw]">
                     <sub-dub class="hidden items-center gap-[0.75vw] md:flex">
                         <span class="text-[1vw] font-semibold uppercase" data-svelte-h="svelte-dszpe2">sub/dub:</span>
-                        <button class="capitalize btn !bg-transparent min-h-full flex items-center gap-[0.5vw] rounded-[0.35vw] px-[0.75vw] py-[0.5vw] text-[1vw] leading-none">Vidstreaming (sub) <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-[1vw]">
+                        <button class="btn !bg-transparent min-h-full flex items-center gap-[0.5vw] rounded-[0.35vw] px-[0.75vw] py-[0.5vw] text-[1vw] leading-none">Vidstreaming (sub) <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-[1vw]">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
                             </svg>
                         </button>
                     </sub-dub>
-                    <button class="btn !bg-transparent min-h-full capitalize hidden items-center p-0 text-xs leading-none md:flex md:text-[0.9vw]">
+                    <button class="btn !bg-transparent min-h-full hidden items-center p-0 text-xs leading-none md:flex md:text-[0.9vw]">
                         <span>Lights:</span>
                         <status class="font-semibold text-primary-300" data-svelte-h="svelte-ajl8jh">Off</status>
                     </button>
@@ -51,7 +51,7 @@
                 </button>
             </header>
             <episodes class="grid grid-cols-7 gap-2 md:grid-cols-6 md:gap-[0.75vw]">
-                {% for _ in '012345678901234456789'|make_list %}
+                {% for _ in '012345678901234456789012345678902134567890123454678901234567'|make_list %}
                     <a
                         href="../{{ forloop.counter }}"
                         class="{% if request.resolver_match.kwargs.pk == forloop.counter %} btn-primary {% else %} btn-neutral {% endif %} btn rounded md:h-[2.5vw] min-h-full text-sm font-semibold leading-none md:rounded-[0.35vw] md:text-[1.2vw]"
@@ -71,33 +71,23 @@
                         <span class="text-base text-surface-50 md:text-[1vw]">Kimetsu no yaiba</span>
                     </a>
                 </div>
-                <options>
-                    <button class="btn bg-transparent p-0">
-                        <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="md:w-[1.25vw]">
-                            <path d="M13.5 6C14.7426 6 15.75 4.99264 15.75 3.75C15.75 2.50736 14.7426 1.5 13.5 1.5C12.2574 1.5 11.25 2.50736 11.25 3.75C11.25 4.99264 12.2574 6 13.5 6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                            <path d="M4.5 11.25C5.74264 11.25 6.75 10.2426 6.75 9C6.75 7.75736 5.74264 6.75 4.5 6.75C3.25736 6.75 2.25 7.75736 2.25 9C2.25 10.2426 3.25736 11.25 4.5 11.25Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                            <path d="M13.5 16.5C14.7426 16.5 15.75 15.4926 15.75 14.25C15.75 13.0074 14.7426 12 13.5 12C12.2574 12 11.25 13.0074 11.25 14.25C11.25 15.4926 12.2574 16.5 13.5 16.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                            <path d="M6.44238 10.1328L11.5649 13.1178" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                            <path d="M11.5574 4.88281L6.44238 7.86781" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        </svg>
-                    </button>
-                </options>
+                <button class="btn bg-transparent p-0">
+                    {% include "icons/share.html" with class="md:w-[1.25vw]" %}
+                </button>
             </anime-name-options>
             <div class="accordion w-full space-y-1 ">
                 <div class="accordion-item">
                     <button type="button" class="accordion-control text-start w-full flex items-center space-x-4 p-0 bg-transparent rounded-container-token text-base text-warning font-semibold md:text-[1.25vw] md:leading-[1vw] md:pb-[1vw]" id="accordion-control-0.4186117384197431" aria-expanded="true" aria-controls="accordion-panel-0.4186117384197431">
                         <div class="accordion-lead">EP1</div>
                         <div class="accordion-summary flex-1">Monotone/Colorful</div>
-                        <div class="accordion-summary-caret fill-current w-3 transition-transform duration-[200ms] md:w-[1vw] rotate-180">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                <path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path>
-                            </svg>
+                        <div class="accordion-summary-caret fill-current w-3 transition-transform duration-[200ms] md:w-[1.25vw] rotate-180">
+                            {% include "icons/chevron.html" %}
                         </div>
                     </button>
                     <div class="accordion-panel  p-0 rounded-container-token text-surface-50 text-sm leading-snug md:text-[1vw] md:leading-[1.35vw]" id="accordion-panel-0.4186117384197431" role="region" aria-hidden="false" aria-labelledby="accordion-control-0.4186117384197431">The autumn he was twelve, piano prodigy Kousei Arima suddenly found himself unable to play the piano after his mother's death. Ever since then, it's like he's been frozen in time. His childhood friend, Tsubaki Sawabe, watches over him with concern; one day, she invites him on a double date. Kousei's other childhood friend, Ryouta Watari, is being introduced to a certain girl. Kousei reluctantly heads over to the rendezvous spot. There, he sees a girl playing a melodica. This girl, who allegedly has a crush on Watari, is Kaori Miyazono. And she turns out to be a violinist!</div>
                 </div>
             </div>
-            <a href="/mal/1" class="btn btn-primary md:h-[3vw] min-h-max md:w-[10vw] rounded-md text-sm font-semibold leading-none md:rounded-[0.5vw] md:text-[1vw]">
+            <a href="/mal/1" class="btn btn-neutral md:h-[3vw] min-h-max md:w-[10vw] rounded-md text-sm font-semibold leading-none md:rounded-[0.5vw] md:text-[1vw]">
                 <span>View detail</span>
                 {% include "icons/chevron.html" with class="w-3 -rotate-90 md:w-[1vw]" %}
             </a>
@@ -110,7 +100,7 @@
                         <img class="md:w-[12vw] md:rounded-[0.25vw]" src="https://mangathrill.com/wp-content/uploads/2022/02/pjimage-2022-02-09T013124.016.jpg" alt="" style="" loading="lazy">
                     </div>
                     <overlay class="absolute inset-0 flex items-center justify-center bg-secondary/50">
-                        <play class="rounded-full bg-accent/25 md:p-[1vw]">
+                        <play class="rounded-full bg-secondary/75 md:p-[1vw]">
                             {% include "icons/play.html" with class="md:w-[1.25vw] text-white" %}
                         </play>
                     </overlay>
@@ -275,85 +265,27 @@
                 </posts>
             </forum-posts>
             <recommendations-container>
-                <span class="text-lg font-semibold md:text-[1.35vw]" data-svelte-h="svelte-1brbazo">Recommendations</span>
+                <span class="text-lg font-semibold md:text-[1.35vw]">Recommendations</span>
                 <container class="mt-3 grid grid-cols-3 gap-4 md:mt-[1.25vw] md:grid-cols-3 md:gap-[1vw]">
-                    <a href="/myanimelist/38000" class="card relative col-span-1 h-44 w-full overflow-hidden md:h-[15vw] md:rounded-[0.75vw]">
-                        <div class="h-full w-full object-cover object-center">
-                            <img class="h-full w-full object-cover object-center" src="/images/DemonSlayer-bg.avif" alt="" style="" loading="lazy">
-                        </div>
-                        <anime-details class="absolute bottom-3 z-10 flex w-full flex-col items-center gap-1 px-[0.5vw] text-center md:bottom-[1vw] md:gap-[0.25vw]">
-                            <anime-title class="text-sm font-semibold leading-snug duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[1vw] md:leading-[1.25vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Demon Slayer: Kimetsu no Yaiba</anime-title>
-                            <anime-japanese-name class="text-xs leading-none md:text-[0.9vw]">鬼滅の刃</anime-japanese-name>
-                            <anime-episodes-count class="text-xs leading-none text-surface-50 duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[0.9vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Episodes: <b>12</b>
-                            </anime-episodes-count>
-                        </anime-details>
-                        <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-surface-900/80 to-surface-900/25"></gradient-overlay>
-                    </a>
-                    <a href="/myanimelist/12189" class="card relative col-span-1 h-44 w-full overflow-hidden md:h-[15vw] md:rounded-[0.75vw]">
-                        <div class="h-full w-full object-cover object-center">
-                            <img class="h-full w-full object-cover object-center" src="/images/Hyouka-bg.avif" alt="" style="" loading="lazy">
-                        </div>
-                        <anime-details class="absolute bottom-3 z-10 flex w-full flex-col items-center gap-1 px-[0.5vw] text-center md:bottom-[1vw] md:gap-[0.25vw]">
-                            <anime-title class="text-sm font-semibold leading-snug duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[1vw] md:leading-[1.25vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Hyouka</anime-title>
-                            <anime-japanese-name class="text-xs leading-none md:text-[0.9vw]">氷菓</anime-japanese-name>
-                            <anime-episodes-count class="text-xs leading-none text-surface-50 duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[0.9vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Episodes: <b>41</b>
-                            </anime-episodes-count>
-                        </anime-details>
-                        <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-surface-900/80 to-surface-900/25"></gradient-overlay>
-                    </a>
-                    <a href="/myanimelist/23273" class="card relative col-span-1 h-44 w-full overflow-hidden md:h-[15vw] md:rounded-[0.75vw]">
-                        <div class="h-full w-full object-cover object-center">
-                            <img class="h-full w-full object-cover object-center" src="/images/YourLieInApril-bg.avif" alt="" style="" loading="lazy">
-                        </div>
-                        <anime-details class="absolute bottom-3 z-10 flex w-full flex-col items-center gap-1 px-[0.5vw] text-center md:bottom-[1vw] md:gap-[0.25vw]">
-                            <anime-title class="text-sm font-semibold leading-snug duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[1vw] md:leading-[1.25vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">You Lie in April</anime-title>
-                            <anime-japanese-name class="text-xs leading-none md:text-[0.9vw]">四月は君の嘘</anime-japanese-name>
-                            <anime-episodes-count class="text-xs leading-none text-surface-50 duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[0.9vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Episodes: <b>88</b>
-                            </anime-episodes-count>
-                        </anime-details>
-                        <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-surface-900/80 to-surface-900/25"></gradient-overlay>
-                    </a>
-                    <a href="/myanimelist/16498" class="card relative col-span-1 h-44 w-full overflow-hidden md:h-[15vw] md:rounded-[0.75vw]">
-                        <div class="h-full w-full object-cover object-center">
-                            <img class="h-full w-full object-cover object-center" src="/images/AttackOnTitan-bg.avif" alt="" style="" loading="lazy">
-                        </div>
-                        <anime-details class="absolute bottom-3 z-10 flex w-full flex-col items-center gap-1 px-[0.5vw] text-center md:bottom-[1vw] md:gap-[0.25vw]">
-                            <anime-title class="text-sm font-semibold leading-snug duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[1vw] md:leading-[1.25vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Attack on Titan</anime-title>
-                            <anime-japanese-name class="text-xs leading-none md:text-[0.9vw]">進撃の巨人</anime-japanese-name>
-                            <anime-episodes-count class="text-xs leading-none text-surface-50 duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[0.9vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Episodes: <b>53</b>
-                            </anime-episodes-count>
-                        </anime-details>
-                        <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-surface-900/80 to-surface-900/25"></gradient-overlay>
-                    </a>
-                    <a href="/myanimelist/40748" class="card relative col-span-1 h-44 w-full overflow-hidden md:h-[15vw] md:rounded-[0.75vw]">
-                        <div class="h-full w-full object-cover object-center">
-                            <img class="h-full w-full object-cover object-center" src="/images/JujutsuKaisen.avif" alt="" style="" loading="lazy">
-                        </div>
-                        <anime-details class="absolute bottom-3 z-10 flex w-full flex-col items-center gap-1 px-[0.5vw] text-center md:bottom-[1vw] md:gap-[0.25vw]">
-                            <anime-title class="text-sm font-semibold leading-snug duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[1vw] md:leading-[1.25vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Jujutsu Kaisen</anime-title>
-                            <anime-japanese-name class="text-xs leading-none md:text-[0.9vw]">呪術廻戦</anime-japanese-name>
-                            <anime-episodes-count class="text-xs leading-none text-surface-50 duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[0.9vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Episodes: <b>23</b>
-                            </anime-episodes-count>
-                        </anime-details>
-                        <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-surface-900/80 to-surface-900/25"></gradient-overlay>
-                    </a>
-                    <a href="/myanimelist/1535" class="card relative col-span-1 h-44 w-full overflow-hidden md:h-[15vw] md:rounded-[0.75vw]">
-                        <div class="h-full w-full object-cover object-center">
-                            <img class="h-full w-full object-cover object-center" src="/images/DeathNote-bg.avif" alt="" style="" loading="lazy">
-                        </div>
-                        <anime-details class="absolute bottom-3 z-10 flex w-full flex-col items-center gap-1 px-[0.5vw] text-center md:bottom-[1vw] md:gap-[0.25vw]">
-                            <anime-title class="text-sm font-semibold leading-snug duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[1vw] md:leading-[1.25vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Death Note</anime-title>
-                            <anime-japanese-name class="text-xs leading-none md:text-[0.9vw]">デスノート</anime-japanese-name>
-                            <anime-episodes-count class="text-xs leading-none text-surface-50 duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[0.9vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Episodes: <b>38</b>
-                            </anime-episodes-count>
-                        </anime-details>
-                        <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-surface-900/80 to-surface-900/25"></gradient-overlay>
-                    </a>
+                    {% for _ in '012'|make_list %}
+                        <a href="/myanimelist/38000" class="card relative col-span-1 h-44 w-full overflow-hidden md:h-[15vw] md:rounded-[0.75vw]">
+                            <div class="h-full w-full object-cover object-center">
+                                <img class="h-full w-full object-cover object-center" src="https://mangathrill.com/wp-content/uploads/2022/02/pjimage-2022-02-09T013124.016.jpg" alt="" style="" loading="lazy">
+                            </div>
+                            <anime-details class="absolute bottom-3 z-10 flex w-full flex-col items-center gap-1 px-[0.5vw] text-center md:bottom-[1vw] md:gap-[0.25vw]">
+                                <anime-title class="text-white text-sm font-semibold leading-snug duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[1vw] md:leading-[1.25vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Demon Slayer: Kimetsu no Yaiba</anime-title>
+                                <anime-japanese-name class="text-xs leading-none md:text-[0.9vw]">鬼滅の刃</anime-japanese-name>
+                                <anime-episodes-count class="text-xs leading-none text-surface-50 duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[0.9vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Episodes: <b>12</b>
+                                </anime-episodes-count>
+                            </anime-details>
+                            <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-secondary/90 to-secondary/25"></gradient-overlay>
+                        </a>
+                    {% endfor %}
                 </container>
                 <load-more class="mt-3 flex w-full justify-center md:mt-[1vw]">
-                    <button class="btn btn-sm h-7 gap-2 rounded bg-surface-400 px-3 text-xs font-semibold md:h-[2.4vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.875vw]">Load more <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" color="surface-50" class="w-4 md:w-[1vw]">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
-                        </svg>
+                    <button class="btn btn-neutral min-h-full h-7 gap-2 rounded px-3 text-xs font-semibold md:h-[2.4vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.875vw]">
+                        Load more
+                        {% include "icons/chevron.html" with class="w-4 md:w-[1vw]" %}
                     </button>
                 </load-more>
             </recommendations-container>
