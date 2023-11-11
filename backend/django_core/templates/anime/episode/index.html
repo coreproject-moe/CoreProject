@@ -1,1 +1,591 @@
-<h1>Episode page</h1>
+<episode-container class="mt-16 flex flex-col md:mt-0 md:gap-[3.5vw] md:py-[2vw] md:pl-[1vw] md:pr-[3.75vw]">
+    <episode-content class="grid grid-cols-12 md:gap-[5vw]">
+        <video-player class="col-span-12 flex flex-col md:col-span-8 md:gap-[0.75vw]">
+            <player class="relative h-64 w-full md:z-30 md:h-[35vw]">
+                <div class="h-full w-full rounded-none object-cover md:rounded-[0.5vw]">
+                    <img class="h-full w-full rounded-none object-cover md:rounded-[0.5vw] " src="/images/DemonSlayer-episode.webp" alt="Episode image" style="" loading="lazy">
+                </div>
+            </player>
+            <video-player-options class="flex flex-col gap-2 px-5 md:flex-row md:items-center md:justify-between md:gap-0 md:p-0">
+                <preferences class="flex gap-2 md:items-center md:gap-[1vw]">
+                    <sub-dub class="hidden items-center gap-[0.75vw] md:flex">
+                        <span class="text-[1vw] font-semibold uppercase" data-svelte-h="svelte-dszpe2">sub/dub:</span>
+                        <button class="btn flex items-center gap-[0.5vw] rounded-[0.35vw] bg-surface-400 px-[0.75vw] py-[0.5vw] text-[1vw] leading-none">Vidstreaming (sub) <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-[1vw]">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
+                            </svg>
+                        </button>
+                    </sub-dub>
+                    <button class="btn hidden items-center p-0 text-xs leading-none md:flex md:text-[0.9vw]">
+                        <span>Lights:</span>
+                        <status class="font-semibold text-primary-300" data-svelte-h="svelte-ajl8jh">Off</status>
+                    </button>
+                </preferences>
+                <div class="flex w-full items-center justify-between md:w-auto">
+                    <sub-dub class="flex items-center gap-2 md:hidden">
+                        <span class="text-xs font-semibold uppercase" data-svelte-h="svelte-65wj7">sub/dub:</span>
+                        <button class="btn flex items-center gap-2 rounded bg-surface-400 px-3 py-2 text-xs leading-none">Vidstreaming (sub) <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-3">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
+                            </svg>
+                        </button>
+                    </sub-dub>
+                    <video-options class="flex items-center gap-3 md:gap-[0.75vw]">
+                        <a href="/anime/mal/1/episode/1">
+                            <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 md:w-[1.4vw]">
+                                <path d="M15.75 11.25V14.25C15.75 14.6478 15.592 15.0294 15.3107 15.3107C15.0294 15.592 14.6478 15.75 14.25 15.75H3.75C3.35218 15.75 2.97064 15.592 2.68934 15.3107C2.40804 15.0294 2.25 14.6478 2.25 14.25V11.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M5.25 7.5L9 11.25L12.75 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M9 11.25V2.25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </a>
+                        <a href="/anime/mal/1/episode/1">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 md:w-[1.4vw] rotate-180">
+                                <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                    <path d="M0 0h24v24H0z"></path>
+                                    <path fill="currentColor" d="M2 5v14c0 .86 1.012 1.318 1.659.753l8-7a1 1 0 0 0 0-1.506l-8-7C3.012 3.682 2 4.141 2 5zm11 0v14c0 .86 1.012 1.318 1.659.753l8-7a1 1 0 0 0 0-1.506l-8-7C14.012 3.682 13 4.141 13 5z"></path>
+                                </g>
+                            </svg>
+                        </a>
+                        <a href="/anime/mal/1/episode/1">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 md:w-[1.4vw]">
+                                <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+                                    <path d="M0 0h24v24H0z"></path>
+                                    <path fill="currentColor" d="M2 5v14c0 .86 1.012 1.318 1.659.753l8-7a1 1 0 0 0 0-1.506l-8-7C3.012 3.682 2 4.141 2 5zm11 0v14c0 .86 1.012 1.318 1.659.753l8-7a1 1 0 0 0 0-1.506l-8-7C14.012 3.682 13 4.141 13 5z"></path>
+                                </g>
+                            </svg>
+                        </a>
+                    </video-options>
+                </div>
+            </video-player-options>
+        </video-player>
+        <episode-info class="col-span-12 flex flex-col gap-3 p-5 md:col-span-4 md:gap-[1.5vw] md:p-0">
+            <header class="flex items-center justify-between">
+                <span class="text-lg font-semibold md:text-[1.35vw]" data-svelte-h="svelte-1ox2gge">Episodes</span>
+                <button class="btn flex items-center gap-2 rounded bg-surface-400 px-3 py-2 text-xs font-semibold leading-none md:gap-[0.5vw] md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.5vw] md:text-[1vw]">EPS: 1 - 60 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-3 md:w-[1vw]">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
+                    </svg>
+                </button>
+            </header>
+            <episodes class="grid grid-cols-7 gap-2 md:grid-cols-6 md:gap-[0.75vw]">
+                <a href="/anime/mal/1/episode/1/1" class="bg-primary-500 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">1 </a>
+                <a href="/anime/mal/1/episode/1/2" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">2 </a>
+                <a href="/anime/mal/1/episode/1/3" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">3 </a>
+                <a href="/anime/mal/1/episode/1/4" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">4 </a>
+                <a href="/anime/mal/1/episode/1/5" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">5 </a>
+                <a href="/anime/mal/1/episode/1/6" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">6 </a>
+                <a href="/anime/mal/1/episode/1/7" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">7 </a>
+                <a href="/anime/mal/1/episode/1/8" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">8 </a>
+                <a href="/anime/mal/1/episode/1/9" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">9 </a>
+                <a href="/anime/mal/1/episode/1/10" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">10 </a>
+                <a href="/anime/mal/1/episode/1/11" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">11 </a>
+                <a href="/anime/mal/1/episode/1/12" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">12 </a>
+                <a href="/anime/mal/1/episode/1/13" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">13 </a>
+                <a href="/anime/mal/1/episode/1/14" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">14 </a>
+                <a href="/anime/mal/1/episode/1/15" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">15 </a>
+                <a href="/anime/mal/1/episode/1/16" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">16 </a>
+                <a href="/anime/mal/1/episode/1/17" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">17 </a>
+                <a href="/anime/mal/1/episode/1/18" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">18 </a>
+                <a href="/anime/mal/1/episode/1/19" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">19 </a>
+                <a href="/anime/mal/1/episode/1/20" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">20 </a>
+                <a href="/anime/mal/1/episode/1/21" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">21 </a>
+                <a href="/anime/mal/1/episode/1/22" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">22 </a>
+                <a href="/anime/mal/1/episode/1/23" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">23 </a>
+                <a href="/anime/mal/1/episode/1/24" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">24 </a>
+                <a href="/anime/mal/1/episode/1/25" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">25 </a>
+                <a href="/anime/mal/1/episode/1/26" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">26 </a>
+                <a href="/anime/mal/1/episode/1/27" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">27 </a>
+                <a href="/anime/mal/1/episode/1/28" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">28 </a>
+                <a href="/anime/mal/1/episode/1/29" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">29 </a>
+                <a href="/anime/mal/1/episode/1/30" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">30 </a>
+                <a href="/anime/mal/1/episode/1/31" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">31 </a>
+                <a href="/anime/mal/1/episode/1/32" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">32 </a>
+                <a href="/anime/mal/1/episode/1/33" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">33 </a>
+                <a href="/anime/mal/1/episode/1/34" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">34 </a>
+                <a href="/anime/mal/1/episode/1/35" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">35 </a>
+                <a href="/anime/mal/1/episode/1/36" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">36 </a>
+                <a href="/anime/mal/1/episode/1/37" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">37 </a>
+                <a href="/anime/mal/1/episode/1/38" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">38 </a>
+                <a href="/anime/mal/1/episode/1/39" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">39 </a>
+                <a href="/anime/mal/1/episode/1/40" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">40 </a>
+                <a href="/anime/mal/1/episode/1/41" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">41 </a>
+                <a href="/anime/mal/1/episode/1/42" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">42 </a>
+                <a href="/anime/mal/1/episode/1/43" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">43 </a>
+                <a href="/anime/mal/1/episode/1/44" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">44 </a>
+                <a href="/anime/mal/1/episode/1/45" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">45 </a>
+                <a href="/anime/mal/1/episode/1/46" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">46 </a>
+                <a href="/anime/mal/1/episode/1/47" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">47 </a>
+                <a href="/anime/mal/1/episode/1/48" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">48 </a>
+                <a href="/anime/mal/1/episode/1/49" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">49 </a>
+                <a href="/anime/mal/1/episode/1/50" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">50 </a>
+                <a href="/anime/mal/1/episode/1/51" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">51 </a>
+                <a href="/anime/mal/1/episode/1/52" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">52 </a>
+                <a href="/anime/mal/1/episode/1/53" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">53 </a>
+                <a href="/anime/mal/1/episode/1/54" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">54 </a>
+                <a href="/anime/mal/1/episode/1/55" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">55 </a>
+                <a href="/anime/mal/1/episode/1/56" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">56 </a>
+                <a href="/anime/mal/1/episode/1/57" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">57 </a>
+                <a href="/anime/mal/1/episode/1/58" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">58 </a>
+                <a href="/anime/mal/1/episode/1/59" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">59 </a>
+                <a href="/anime/mal/1/episode/1/60" class="bg-surface-400 btn rounded py-3 text-sm font-semibold leading-none md:rounded-[0.35vw] md:py-[0.75vw] md:text-[1.2vw]">60 </a>
+            </episodes>
+        </episode-info>
+    </episode-content>
+    <episode-details class="grid grid-cols-12 gap-5 p-5 md:gap-[5vw] md:p-0">
+        <episode-info class="col-span-12 flex flex-col gap-2 md:col-span-8 md:gap-[1vw]">
+            <anime-name-options class="flex items-center justify-between">
+                <div data-svelte-h="svelte-8kw9d2">
+                    <a href="/mal/1" class="flex flex-col gap-1 text-lg leading-none md:gap-[0.25vw] md:text-[1.1vw]">
+                        <span class="font-semibold uppercase">Demon Slayer S1</span>
+                        <span class="text-base text-surface-50 md:text-[1vw]">Kimetsu no yaiba</span>
+                    </a>
+                </div>
+                <options>
+                    <button class="btn bg-transparent p-0">
+                        <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="md:w-[1.25vw]">
+                            <path d="M13.5 6C14.7426 6 15.75 4.99264 15.75 3.75C15.75 2.50736 14.7426 1.5 13.5 1.5C12.2574 1.5 11.25 2.50736 11.25 3.75C11.25 4.99264 12.2574 6 13.5 6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M4.5 11.25C5.74264 11.25 6.75 10.2426 6.75 9C6.75 7.75736 5.74264 6.75 4.5 6.75C3.25736 6.75 2.25 7.75736 2.25 9C2.25 10.2426 3.25736 11.25 4.5 11.25Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M13.5 16.5C14.7426 16.5 15.75 15.4926 15.75 14.25C15.75 13.0074 14.7426 12 13.5 12C12.2574 12 11.25 13.0074 11.25 14.25C11.25 15.4926 12.2574 16.5 13.5 16.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M6.44238 10.1328L11.5649 13.1178" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path d="M11.5574 4.88281L6.44238 7.86781" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </button>
+                </options>
+            </anime-name-options>
+            <div class="accordion w-full space-y-1 " data-testid="accordion">
+                <div class="accordion-item  " data-testid="accordion-item">
+                    <button type="button" class="accordion-control text-start w-full flex items-center space-x-4 p-0 bg-transparent rounded-container-token text-base text-warning-400 font-semibold md:text-[1.25vw] md:leading-[1vw] md:pb-[1vw]" id="accordion-control-0.4186117384197431" aria-expanded="true" aria-controls="accordion-panel-0.4186117384197431">
+                        <div class="accordion-lead">EP1</div>
+                        <div class="accordion-summary flex-1">Monotone/Colorful</div>
+                        <div class="accordion-summary-caret fill-current w-3 transition-transform duration-[200ms] md:w-[1vw] rotate-180">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                <path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path>
+                            </svg>
+                        </div>
+                    </button>
+                    <div class="accordion-panel  p-0 rounded-container-token text-surface-50 text-sm leading-snug md:text-[1vw] md:leading-[1.35vw]" id="accordion-panel-0.4186117384197431" role="region" aria-hidden="false" aria-labelledby="accordion-control-0.4186117384197431">The autumn he was twelve, piano prodigy Kousei Arima suddenly found himself unable to play the piano after his mother's death. Ever since then, it's like he's been frozen in time. His childhood friend, Tsubaki Sawabe, watches over him with concern; one day, she invites him on a double date. Kousei's other childhood friend, Ryouta Watari, is being introduced to a certain girl. Kousei reluctantly heads over to the rendezvous spot. There, he sees a girl playing a melodica. This girl, who allegedly has a crush on Watari, is Kaori Miyazono. And she turns out to be a violinist!</div>
+                </div>
+            </div>
+            <a href="/mal/1" class="btn w-max rounded-md bg-primary-500 py-3 text-sm font-semibold leading-none md:rounded-[0.5vw] md:py-[0.9vw] md:text-[1vw]">
+                <span data-svelte-h="svelte-tpj0x0">View detail</span>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-3 -rotate-90 md:w-[1vw]">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
+                </svg>
+            </a>
+        </episode-info>
+        <next-episode class="col-span-4 hidden flex-col md:flex">
+            <span class="font-semibold uppercase md:text-[1.1vw]" data-svelte-h="svelte-1pwgppm">next episode</span>
+            <a href="/anime/mal/1/episode/1/2" class="flex md:mt-[0.75vw] md:gap-[1vw]">
+                <episode-cover class="relative">
+                    <div class="h-full md:w-[12vw] md:rounded-[0.25vw]">
+                        <img class="md:w-[12vw] md:rounded-[0.25vw]" src="/images/episodes/hyouka/Hyouka-ep-6.avif" alt="" style="" loading="lazy">
+                    </div>
+                    <overlay class="absolute inset-0 flex items-center justify-center bg-surface-900/40">
+                        <play class="rounded-full bg-surface-900/50 md:p-[1vw]">
+                            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="md:w-[1.25vw]">
+                                <path d="M12.9615 7.89235C13.1685 7.73214 13.3361 7.52665 13.4513 7.29164C13.5666 7.05663 13.6266 6.79834 13.6266 6.53658C13.6266 6.27482 13.5666 6.01653 13.4513 5.78152C13.3361 5.54651 13.1685 5.34102 12.9615 5.18081C10.2808 3.10657 7.28748 1.47165 4.09351 0.337231L3.50952 0.129752C2.39342 -0.266427 1.21383 0.488369 1.06269 1.64113C0.640479 4.89111 0.640479 8.18205 1.06269 11.432C1.21473 12.5848 2.39342 13.3396 3.50952 12.9434L4.09351 12.7359C7.28748 11.6015 10.2808 9.96659 12.9615 7.89235Z" fill="currentColor"></path>
+                            </svg>
+                        </play>
+                    </overlay>
+                </episode-cover>
+                <episode-info class="flex flex-col justify-between leading-none md:py-[1vw]">
+                    <div class="flex flex-col md:gap-[0.5vw]">
+                        <span class="text-warning-200 md:text-[1.1vw]" data-svelte-h="svelte-urba2z">Finally they met</span>
+                        <span class="md:text-[1vw]">Episode - 2</span>
+                    </div>
+                    <span class="text-surface-50 md:text-[1vw]" data-svelte-h="svelte-zt83tm">23 min</span>
+                </episode-info>
+            </a>
+        </next-episode>
+    </episode-details>
+    <episode-media class="grid grid-cols-12 p-5 md:gap-[5vw] md:p-0">
+        <comments-section class="col-span-12 flex flex-col md:col-span-7 md:gap-[0.75vw]">
+            <span class="flex gap-2 border-b-2 border-surface-50/25 pb-1 text-lg font-semibold md:gap-[0.75vw] md:border-none md:pb-0 md:text-[1.25vw] md:leading-[1.5vw]" data-svelte-h="svelte-fcwu4f">Comments</span>
+            <comments-info class="mt-2 flex items-center justify-between md:hidden">
+                <p class="flex items-center gap-1" data-svelte-h="svelte-1mufn9w">
+                    <span class="text-base font-bold leading-none">69</span>
+                    <span class="text-sm font-semibold text-surface-50">comments</span>
+                </p>
+                <button class="btn btn-icon h-7 w-auto rounded bg-surface-400 p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]" aria-label="Filter">
+                    <svg viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-3 md:w-[1vw]" color="lightgray">
+                        <path d="M18.3332 1.5H1.6665L8.33317 9.38333V14.8333L11.6665 16.5V9.38333L18.3332 1.5Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </button>
+            </comments-info>
+            <comment-form class="flex flex-col md:flex-row md:gap-[1vw]">
+                <a href="/user/" class="hidden h-7 w-7 flex-shrink-0 md:mt-[0.5vw] md:flex md:h-[2vw] md:w-[2vw]">
+                    <div class="h-full w-full shrink-0 rounded-full object-cover">
+                        <img class="h-full w-full shrink-0 rounded-full object-cover" src="/images/DemonSlayer-bg.avif" alt="Avatar" style="" loading="lazy">
+                    </div>
+                </a>
+                <form class="mt-3 flex flex-col gap-3 md:mt-[1vw] md:gap-[0.75vw]">
+                    <span class="leading-none text-surface-50 md:text-[1vw]" data-svelte-h="svelte-1hojf2e">Comment as <strong>Tokito</strong>
+                    </span>
+                    <div class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary-500 md:rounded-[0.75vw] md:ring-[0.15vw]">
+                        <textarea-navbar class="flex h-8 items-center justify-between overflow-hidden rounded-t-lg bg-surface-400/50 md:h-[2.5vw] md:rounded-t-[0.75vw]">
+                            <div>
+                                <button type="button" class="bg-surface-900 text-surface-50 h-8 px-5 text-xs capitalize leading-[1.5vw] transition-colors duration-100 md:h-[2.5vw] md:px-[1.5vw] md:text-[1vw]">edit </button>
+                                <button type="button" class="text-surface-300 h-8 px-5 text-xs capitalize leading-[1.5vw] transition-colors duration-100 md:h-[2.5vw] md:px-[1.5vw] md:text-[1vw]">preview </button>
+                            </div>
+                            <div class="flex place-items-center gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]">
+                                <button class="btn p-0 w-5 md:w-[1.4vw]  text-surface-200" type="button" aria-label="bold">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="bold-text">
+                                        <path fill="none" d="M0 0h24v24H0V0z"></path>
+                                        <path fill="currentColor" d="M15.6 10.79c.97-.67 1.65-1.77 1.65-2.79 0-2.26-1.75-4-4-4H8c-.55 0-1 .45-1 1v12c0 .55.45 1 1 1h5.78c2.07 0 3.96-1.69 3.97-3.77.01-1.53-.85-2.84-2.15-3.44zM10 6.5h3c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-3v-3zm3.5 9H10v-3h3.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5z"></path>
+                                    </svg>
+                                </button>
+                                <button class="btn p-0 w-5 md:w-[1.5vw] text-surface-200" type="button" aria-label="italic">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6h4m4 0h-4m0 0-4 12m0 0h4m-4 0H6"></path>
+                                    </svg>
+                                </button>
+                                <button class="btn p-0 w-5 md:w-[1.35vw] text-surface-200" type="button" aria-label="underline">
+                                    <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" enable-background="new 0 0 52 52" xml:space="preserve">
+                                        <path d="M44.5,42h-37C6.7,42,6,42.7,6,43.5v3C6,47.3,6.7,48,7.5,48h37c0.8,0,1.5-0.7,1.5-1.5v-3
+	C46,42.7,45.3,42,44.5,42z"></path>
+                                        <g>
+                                            <path d="M25.3,38C17.8,37.6,12,31.1,12,23.6L12,10c0-1.1,0.9-2,2-2h2c1.1,0,2,0.9,2,2l0,13.7c0,4.3,3.2,8,7.5,8.3
+		c4.7,0.3,8.5-3.4,8.5-8V10c0-1.1,0.9-2,2-2h2c1.1,0,2,0.9,2,2v14C40,32,33.3,38.4,25.3,38z"></path>
+                                        </g>
+                                    </svg>
+                                </button>
+                                <button class="btn p-0 w-5 md:w-[1.5vw] text-surface-200" type="button" aria-label="strike">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12.1818 4.5H12.2572C14.6518 4.49998 16.06 5.70029 16.6667 6.27002C17.0694 6.64806 17.0893 7.28091 16.7112 7.68353C16.3332 8.08615 15.7003 8.10606 15.2977 7.72803C14.8402 7.2984 13.9043 6.5 12.2572 6.5H12.1818C11.3372 6.5 10.5747 7.0042 10.2433 7.78217C9.76004 8.91658 10.3492 10.2218 11.5197 10.6097L12.6975 11H19C19.5523 11 20 11.4477 20 12C20 12.5523 19.5523 13 19 13H5C4.44772 13 4 12.5523 4 12C4 11.4477 4.44772 11 5 11H8.84183C8.04044 9.87767 7.81744 8.37359 8.40331 6.99832C9.04851 5.48375 10.5346 4.5 12.1818 4.5ZM14.3007 14H16.6374C17.0712 15.0358 17.1365 16.2306 16.7304 17.3744C16.0672 19.2426 14.2995 20.4908 12.317 20.4908H11.725C9.84848 20.4908 8.54549 19.8758 7.31543 18.7208C6.91281 18.3428 6.8929 17.7099 7.27094 17.3073C7.64899 16.9047 8.28183 16.8848 8.68445 17.2628C9.58301 18.1065 10.4086 18.4908 11.725 18.4908H12.317C13.4529 18.4908 14.4657 17.7757 14.8456 16.7053C15.1889 15.7383 14.9443 14.7076 14.3007 14Z" fill="currentColor"></path>
+                                    </svg>
+                                </button>
+                                <button class="btn p-0 w-5 md:w-[1.5vw] text-surface-200" type="button" aria-label="code">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M8 8L3 12L8 16M16 16L21 12L16 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                </button>
+                                <button class="btn p-0 w-4 md:w-[1.25vw] text-surface-200 ml-3 md:ml-[1vw]" type="button" aria-label="hyperlink">
+                                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M10.975 14.51a1.05 1.05 0 0 0 0-1.485 2.95 2.95 0 0 1 0-4.172l3.536-3.535a2.95 2.95 0 1 1 4.172 4.172l-1.093 1.092a1.05 1.05 0 0 0 1.485 1.485l1.093-1.092a5.05 5.05 0 0 0-7.142-7.142L9.49 7.368a5.05 5.05 0 0 0 0 7.142c.41.41 1.075.41 1.485 0zm2.05-5.02a1.05 1.05 0 0 0 0 1.485 2.95 2.95 0 0 1 0 4.172l-3.5 3.5a2.95 2.95 0 1 1-4.171-4.172l1.025-1.025a1.05 1.05 0 0 0-1.485-1.485L3.87 12.99a5.05 5.05 0 0 0 7.142 7.142l3.5-3.5a5.05 5.05 0 0 0 0-7.142 1.05 1.05 0 0 0-1.485 0z" fill="currentColor"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </textarea-navbar>
+                        <textarea-body class="block h-28 overflow-y-scroll md:h-[8vw]">
+                            <textarea spellcheck="true" class="h-full w-full resize-none border-none bg-surface-900 p-3 text-sm leading-tight text-surface-50 outline-none duration-300 ease-in-out placeholder:text-surface-200 focus:ring-0 md:p-[1vw] md:text-[1vw] md:leading-[1.5vw]" placeholder="Leave a comment"></textarea>
+                        </textarea-body>
+                        <textarea-footer class="flex justify-between bg-surface-400/50 px-4 py-2 text-[0.65rem] font-thin leading-[1.5vw] text-surface-200 md:px-[1vw] md:py-[0.1vw] md:text-[0.75vw]" data-svelte-h="svelte-4ipsmt">
+                            <div></div>
+                            <div>Learn more about <a class="underline" href="/">core editor</a>
+                            </div>
+                        </textarea-footer>
+                    </div>
+                    <warning-submit class="flex justify-between gap-5 md:gap-[1vw]">
+                        <warning class="flex items-center gap-3 md:gap-[0.625vw]">
+                            <svg viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-10 md:w-[1.2vw]">
+                                <path d="M6.86001 1.92961L1.21335 8.99961C1.09693 9.15083 1.03533 9.32226 1.03467 9.49687C1.03402 9.67148 1.09434 9.84318 1.20963 9.99488C1.32492 10.1466 1.49116 10.273 1.69182 10.3615C1.89247 10.4501 2.12055 10.4977 2.35335 10.4996H13.6467C13.8795 10.4977 14.1076 10.4501 14.3082 10.3615C14.5089 10.273 14.6751 10.1466 14.7904 9.99488C14.9057 9.84318 14.966 9.67148 14.9654 9.49687C14.9647 9.32226 14.9031 9.15083 14.7867 8.99961L9.14001 1.92961C9.02117 1.78267 8.85383 1.66117 8.65414 1.57686C8.45446 1.49254 8.22917 1.44824 8.00001 1.44824C7.77086 1.44824 7.54557 1.49254 7.34588 1.57686C7.1462 1.66117 6.97886 1.78267 6.86001 1.92961V1.92961Z" stroke="currentColor" stroke-opacity="0.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M8 4.5V6.5" stroke="currentColor" stroke-opacity="0.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                <path d="M8 8.5H8.00667" stroke="currentColor" stroke-opacity="0.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                            <p class="text-[0.65rem] font-light leading-tight text-surface-300 md:text-[0.75vw] md:leading-[1.125vw]" data-svelte-h="svelte-1cqjq6f">Please remember to follow our <a href="/" class="text-surface-200 underline">community guidelines</a> while commenting. Also please refrain from posting spoilers. </p>
+                        </warning>
+                        <button class="btn btn-sm h-9 w-40 rounded bg-primary-500 text-sm font-semibold md:h-[2.2vw] md:w-[6vw] md:rounded-[0.375vw] md:text-[0.85vw]" data-svelte-h="svelte-x7w50w">Comment</button>
+                    </warning-submit>
+                </form>
+            </comment-form>
+            <comments class="mt-10 flex flex-col gap-5 md:mt-[2vw] md:gap-[1.5vw]">
+                <comment class="flex gap-3 md:gap-[1vw]">
+                    <a href="/user/" class="h-7 w-7 flex-shrink-0 md:h-[2vw] md:w-[2vw]">
+                        <div class="h-full w-full shrink-0 rounded-full object-cover">
+                            <img class="h-full w-full shrink-0 rounded-full object-cover" src="/images/DemonSlayer-bg.avif" alt="Avatar" style="" loading="lazy">
+                        </div>
+                    </a>
+                    <comment-details class="flex flex-col items-start gap-1 md:gap-0">
+                        <a href="/user/" class="text-xs leading-none md:text-[1vw]">
+                            <username>Tokito</username>
+                            <comment-time class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">8 months ago</comment-time>
+                        </a>
+                        <markdown class="text-sm leading-snug text-surface-50 md:text-[1vw] md:leading-[1.5vw]">
+                            <p>Hi <strong>Tokito</strong> here! </p>
+                        </markdown>
+                        <options class="mt-2 flex items-center gap-3 md:mt-[0.75vw] md:gap-[0.75vw]">
+                            <button class="btn p-0">
+                                <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-3 text-surface-300 md:w-[1vw]">
+                                    <path d="M10.4201 2.30506C10.1647 2.04956 9.86147 1.84688 9.52774 1.7086C9.19401 1.57032 8.8363 1.49915 8.47506 1.49915C8.11382 1.49915 7.75611 1.57032 7.42238 1.7086C7.08865 1.84688 6.78544 2.04956 6.53006 2.30506L6.00006 2.83506L5.47006 2.30506C4.95421 1.78921 4.25458 1.49941 3.52506 1.49941C2.79554 1.49941 2.09591 1.78921 1.58006 2.30506C1.06421 2.8209 0.774414 3.52054 0.774414 4.25006C0.774414 4.97957 1.06421 5.67921 1.58006 6.19506L2.11006 6.72506L6.00006 10.6151L9.89006 6.72506L10.4201 6.19506C10.6756 5.93968 10.8782 5.63647 11.0165 5.30274C11.1548 4.96901 11.226 4.6113 11.226 4.25006C11.226 3.88881 11.1548 3.53111 11.0165 3.19738C10.8782 2.86365 10.6756 2.56044 10.4201 2.30506Z" fill="currentColor"></path>
+                                </svg>
+                                <likes class="text-xs md:text-[0.75vw]">1204</likes>
+                            </button>
+                            <button class="btn p-0 text-xs uppercase text-surface-50 md:text-[0.8vw]" data-svelte-h="svelte-y2kxur">Replay</button>
+                        </options>
+                        <replies-section class="md:mt-[0.35vw]">
+                            <div class="accordion w-full space-y-1 " data-testid="accordion">
+                                <div class="accordion-item  " data-testid="accordion-item">
+                                    <button type="button" class="accordion-control text-start w-full flex items-center space-x-4 p-0 bg-transparent rounded-container-token text-sm text-warning-400 font-semibold md:text-[0.9vw] md:leading-[1vw] pb-2 md:pb-[0.75vw] w-max" id="accordion-control-0.3905349331115273" aria-expanded="true" aria-controls="accordion-panel-0.3905349331115273">
+                                        <div class="accordion-summary flex-1">Replies</div>
+                                        <div class="accordion-summary-caret fill-current w-3 transition-transform duration-[200ms] md:w-[0.75vw] items-start justify-start rotate-180">
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                                <path d="M201.4 374.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 306.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"></path>
+                                            </svg>
+                                        </div>
+                                    </button>
+                                    <div class="accordion-panel  p-0 rounded-container-token text-surface md:text-[1vw] md:leading-[1.35vw] items-start justify-start" id="accordion-panel-0.3905349331115273" role="region" aria-hidden="false" aria-labelledby="accordion-control-0.3905349331115273">
+                                        <reply class="flex gap-3 md:gap-[1vw]">
+                                            <a href="/user/" class="h-7 w-7 flex-shrink-0 md:h-[2vw] md:w-[2vw]">
+                                                <div class="h-full w-full shrink-0 rounded-full object-cover">
+                                                    <img class="h-full w-full shrink-0 rounded-full object-cover" src="/images/Avatar.avif" alt="Avatar" style="" loading="lazy">
+                                                </div>
+                                            </a>
+                                            <reply-details class="flex flex-col items-start gap-1 md:gap-0">
+                                                <a href="/user/" class="text-xs leading-none md:text-[1vw]">
+                                                    <username>Sora amamiya</username>
+                                                    <reply-time class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">8 months ago</reply-time>
+                                                </a>
+                                                <markdown class="text-sm leading-snug text-surface-50 md:text-[1vw] md:leading-[1.5vw]">
+                                                    <p>Hi <strong>Tokito-san</strong>, long time no see </p>
+                                                </markdown>
+                                                <options class="mt-2 flex items-center md:mt-[0.75vw] md:gap-[0.75vw]">
+                                                    <button class="btn p-0">
+                                                        <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-3 text-surface-300 md:w-[1vw]">
+                                                            <path d="M10.4201 2.30506C10.1647 2.04956 9.86147 1.84688 9.52774 1.7086C9.19401 1.57032 8.8363 1.49915 8.47506 1.49915C8.11382 1.49915 7.75611 1.57032 7.42238 1.7086C7.08865 1.84688 6.78544 2.04956 6.53006 2.30506L6.00006 2.83506L5.47006 2.30506C4.95421 1.78921 4.25458 1.49941 3.52506 1.49941C2.79554 1.49941 2.09591 1.78921 1.58006 2.30506C1.06421 2.8209 0.774414 3.52054 0.774414 4.25006C0.774414 4.97957 1.06421 5.67921 1.58006 6.19506L2.11006 6.72506L6.00006 10.6151L9.89006 6.72506L10.4201 6.19506C10.6756 5.93968 10.8782 5.63647 11.0165 5.30274C11.1548 4.96901 11.226 4.6113 11.226 4.25006C11.226 3.88881 11.1548 3.53111 11.0165 3.19738C10.8782 2.86365 10.6756 2.56044 10.4201 2.30506Z" fill="currentColor"></path>
+                                                        </svg>
+                                                        <likes class="text-xs md:text-[0.75vw]">699</likes>
+                                                    </button>
+                                                </options>
+                                            </reply-details>
+                                        </reply>
+                                    </div>
+                                </div>
+                            </div>
+                        </replies-section>
+                    </comment-details>
+                </comment>
+                <comment class="flex gap-3 md:gap-[1vw]">
+                    <a href="/user/" class="h-7 w-7 flex-shrink-0 md:h-[2vw] md:w-[2vw]">
+                        <div class="h-full w-full shrink-0 rounded-full object-cover">
+                            <img class="h-full w-full shrink-0 rounded-full object-cover" src="/images/Avatar.avif" alt="Avatar" style="" loading="lazy">
+                        </div>
+                    </a>
+                    <comment-details class="flex flex-col items-start gap-1 md:gap-0">
+                        <a href="/user/" class="text-xs leading-none md:text-[1vw]">
+                            <username>Sora amamiya</username>
+                            <comment-time class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">10 months ago</comment-time>
+                        </a>
+                        <markdown class="text-sm leading-snug text-surface-50 md:text-[1vw] md:leading-[1.5vw]">
+                            <p>
+                                <strong>
+                                    <em>Tokito</em>
+                                </strong> Love you :P
+                            </p>
+                        </markdown>
+                        <options class="mt-2 flex items-center gap-3 md:mt-[0.75vw] md:gap-[0.75vw]">
+                            <button class="btn p-0">
+                                <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-3 text-surface-300 md:w-[1vw]">
+                                    <path d="M10.4201 2.30506C10.1647 2.04956 9.86147 1.84688 9.52774 1.7086C9.19401 1.57032 8.8363 1.49915 8.47506 1.49915C8.11382 1.49915 7.75611 1.57032 7.42238 1.7086C7.08865 1.84688 6.78544 2.04956 6.53006 2.30506L6.00006 2.83506L5.47006 2.30506C4.95421 1.78921 4.25458 1.49941 3.52506 1.49941C2.79554 1.49941 2.09591 1.78921 1.58006 2.30506C1.06421 2.8209 0.774414 3.52054 0.774414 4.25006C0.774414 4.97957 1.06421 5.67921 1.58006 6.19506L2.11006 6.72506L6.00006 10.6151L9.89006 6.72506L10.4201 6.19506C10.6756 5.93968 10.8782 5.63647 11.0165 5.30274C11.1548 4.96901 11.226 4.6113 11.226 4.25006C11.226 3.88881 11.1548 3.53111 11.0165 3.19738C10.8782 2.86365 10.6756 2.56044 10.4201 2.30506Z" fill="currentColor"></path>
+                                </svg>
+                                <likes class="text-xs md:text-[0.75vw]">106</likes>
+                            </button>
+                            <button class="btn p-0 text-xs uppercase text-surface-50 md:text-[0.8vw]" data-svelte-h="svelte-y2kxur">Replay</button>
+                        </options>
+                    </comment-details>
+                </comment>
+                <comment class="flex gap-3 md:gap-[1vw]">
+                    <a href="/user/" class="h-7 w-7 flex-shrink-0 md:h-[2vw] md:w-[2vw]">
+                        <div class="h-full w-full shrink-0 rounded-full object-cover">
+                            <img class="h-full w-full shrink-0 rounded-full object-cover" src="/images/Avatar.avif" alt="Avatar" style="" loading="lazy">
+                        </div>
+                    </a>
+                    <comment-details class="flex flex-col items-start gap-1 md:gap-0">
+                        <a href="/user/" class="text-xs leading-none md:text-[1vw]">
+                            <username>Sora amamiya</username>
+                            <comment-time class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">10 months ago</comment-time>
+                        </a>
+                        <markdown class="text-sm leading-snug text-surface-50 md:text-[1vw] md:leading-[1.5vw]">
+                            <p>This episode is damn good. <strong>Tokito</strong> is the best :P </p>
+                        </markdown>
+                        <options class="mt-2 flex items-center gap-3 md:mt-[0.75vw] md:gap-[0.75vw]">
+                            <button class="btn p-0">
+                                <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-3 text-surface-300 md:w-[1vw]">
+                                    <path d="M10.4201 2.30506C10.1647 2.04956 9.86147 1.84688 9.52774 1.7086C9.19401 1.57032 8.8363 1.49915 8.47506 1.49915C8.11382 1.49915 7.75611 1.57032 7.42238 1.7086C7.08865 1.84688 6.78544 2.04956 6.53006 2.30506L6.00006 2.83506L5.47006 2.30506C4.95421 1.78921 4.25458 1.49941 3.52506 1.49941C2.79554 1.49941 2.09591 1.78921 1.58006 2.30506C1.06421 2.8209 0.774414 3.52054 0.774414 4.25006C0.774414 4.97957 1.06421 5.67921 1.58006 6.19506L2.11006 6.72506L6.00006 10.6151L9.89006 6.72506L10.4201 6.19506C10.6756 5.93968 10.8782 5.63647 11.0165 5.30274C11.1548 4.96901 11.226 4.6113 11.226 4.25006C11.226 3.88881 11.1548 3.53111 11.0165 3.19738C10.8782 2.86365 10.6756 2.56044 10.4201 2.30506Z" fill="currentColor"></path>
+                                </svg>
+                                <likes class="text-xs md:text-[0.75vw]">69</likes>
+                            </button>
+                            <button class="btn p-0 text-xs uppercase text-surface-50 md:text-[0.8vw]" data-svelte-h="svelte-y2kxur">Replay</button>
+                        </options>
+                    </comment-details>
+                </comment>
+            </comments>
+        </comments-section>
+        <forum-recommendations class="col-span-12 mt-10 flex flex-col gap-5 md:col-span-5 md:mt-0 md:gap-[2vw]">
+            <forum-posts>
+                <span class="flex gap-2 border-b-2 border-surface-50/25 pb-1 text-lg font-semibold md:gap-[0.75vw] md:border-none md:pb-0 md:text-[1.25vw] md:leading-[1.5vw]" data-svelte-h="svelte-1fshqmj">Forum posts</span>
+                <forum-options class="mt-3 flex items-center justify-between md:mt-[1.25vw]">
+                    <posts-count class="flex items-center gap-1 md:hidden" data-svelte-h="svelte-120qm6q">
+                        <span class="text-base font-bold leading-none">106</span>
+                        <span class="text-sm font-semibold text-surface-50">posts</span>
+                    </posts-count>
+                    <forum-buttons class="flex items-center gap-2 md:w-full md:justify-between">
+                        <button class="btn btn-sm h-7 gap-2 rounded bg-surface-400 px-2 text-xs font-semibold md:h-[2.4vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.875vw]">
+                            <svg viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg" color="surface-50" class="w-4 rotate-45 md:w-[1vw]">
+                                <g filter="url(#filter0_d_2536_5517)">
+                                    <path d="M11 3L5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M5 3L11 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </g>
+                                <defs>
+                                    <filter id="filter0_d_2536_5517" x="-2" y="0" width="20" height="20" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                                        <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+                                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix>
+                                        <feOffset dy="4"></feOffset>
+                                        <feGaussianBlur stdDeviation="2"></feGaussianBlur>
+                                        <feComposite in2="hardAlpha" operator="out"></feComposite>
+                                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"></feColorMatrix>
+                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2536_5517"></feBlend>
+                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2536_5517" result="shape"></feBlend>
+                                    </filter>
+                                </defs>
+                            </svg> Create New </button>
+                        <button class="btn btn-icon h-7 w-auto rounded bg-surface-400 p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]" aria-label="Filter">
+                            <svg viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-3 md:w-[1vw]" color="lightgray">
+                                <path d="M18.3332 1.5H1.6665L8.33317 9.38333V14.8333L11.6665 16.5V9.38333L18.3332 1.5Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </svg>
+                        </button>
+                    </forum-buttons>
+                </forum-options>
+                <posts class="mt-4 grid grid-cols-2 flex-col gap-4 md:mt-[1vw] md:flex md:gap-[1vw]">
+                    <a href="/forum/" class="card w-full grid-cols-7 overflow-hidden rounded-lg !bg-surface-400 md:grid md:rounded-[0.625vw]">
+                        <post-banner class="col-span-2 block h-16 md:h-full md:w-full">
+                            <div class="h-full w-full object-cover object-center">
+                                <img class="h-full w-full object-cover object-center" src="https://blog.sakugabooru.com/wp-content/uploads/2017/11/hk22-1038x576.jpg" alt="Celebrating 10 years of Hyouka!" style="" loading="lazy">
+                            </div>
+                        </post-banner>
+                        <post-container class="flex h-36 flex-col justify-between p-3 md:col-span-5 md:h-full md:gap-[0.375vw] md:p-[1vw]">
+                            <post-head>
+                                <post-title class="line-clamp-2 text-xs font-extrabold md:text-[0.875vw] md:leading-[1.25vw]">Celebrating 10 years of Hyouka!</post-title>
+                                <post-description class="mt-2 line-clamp-3 text-[0.6rem] font-medium leading-snug text-surface-50 md:mt-[0.5vw] md:line-clamp-2 md:text-[0.75vw] md:leading-[1.125vw]">Ousei Arima is a child prodigy known as the "Human Metronome" for playing the piano with precision and perfection. Guided by a strict mother and rigorous training, Kousei dominates every competition he enters</post-description>
+                            </post-head>
+                            <post-infos class="flex items-end justify-between text-[0.6rem] leading-none md:mt-[0.75vw] md:items-center md:text-[0.75vw]">
+                                <post-user-infos class="flex flex-col gap-1 md:flex-row md:items-center md:gap-[0.25vw]">
+                                    <post-author-name>Posted by <span class="text-[0.65rem] font-semibold md:text-[0.85vw]">Eiennlaio</span>
+                                    </post-author-name>
+                                    <post-uploaded-date class="text-surface-50">7 months ago</post-uploaded-date>
+                                </post-user-infos>
+                                <post-responses class="flex items-center gap-1 md:gap-[0.25vw]">
+                                    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-3 md:w-[1vw]">
+                                        <path d="M17.5 9.58336C17.5029 10.6832 17.2459 11.7683 16.75 12.75C16.162 13.9265 15.2581 14.916 14.1395 15.6078C13.021 16.2995 11.7319 16.6662 10.4167 16.6667C9.31678 16.6696 8.23176 16.4126 7.25 15.9167L2.5 17.5L4.08333 12.75C3.58744 11.7683 3.33047 10.6832 3.33333 9.58336C3.33384 8.26815 3.70051 6.97907 4.39227 5.86048C5.08402 4.7419 6.07355 3.838 7.25 3.25002C8.23176 2.75413 9.31678 2.49716 10.4167 2.50002H10.8333C12.5703 2.59585 14.2109 3.32899 15.441 4.55907C16.671 5.78915 17.4042 7.42973 17.5 9.16669V9.58336Z" stroke="#DCD9F7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                    <responses-text>69</responses-text>
+                                </post-responses>
+                            </post-infos>
+                        </post-container>
+                    </a>
+                    <a href="/forum/" class="card w-full grid-cols-7 overflow-hidden rounded-lg !bg-surface-400 md:grid md:rounded-[0.625vw]">
+                        <post-banner class="col-span-2 block h-16 md:h-full md:w-full">
+                            <div class="h-full w-full object-cover object-center">
+                                <img class="h-full w-full object-cover object-center" src="https://99px.ru/sstorage/53/2019/04/tmb_257550_218851.jpg" alt="Can You See Hyouka as a Point-n-Click Adventure Game?" style="" loading="lazy">
+                            </div>
+                        </post-banner>
+                        <post-container class="flex h-36 flex-col justify-between p-3 md:col-span-5 md:h-full md:gap-[0.375vw] md:p-[1vw]">
+                            <post-head>
+                                <post-title class="line-clamp-2 text-xs font-extrabold md:text-[0.875vw] md:leading-[1.25vw]">Can You See Hyouka as a Point-n-Click Adventure Game?</post-title>
+                                <post-description class="mt-2 line-clamp-3 text-[0.6rem] font-medium leading-snug text-surface-50 md:mt-[0.5vw] md:line-clamp-2 md:text-[0.75vw] md:leading-[1.125vw]">So, while watching the series, I can see it being adapted as a point-n-click game in which you ask people around, looking for clues and solve mysteries on the top given to you. Player would be controlling Oreki in a 3D-esque environment and go around interrogate people around. You have choice of responses and see where that gets you. Would you play a game like that based on Hyouka? </post-description>
+                            </post-head>
+                            <post-infos class="flex items-end justify-between text-[0.6rem] leading-none md:mt-[0.75vw] md:items-center md:text-[0.75vw]">
+                                <post-user-infos class="flex flex-col gap-1 md:flex-row md:items-center md:gap-[0.25vw]">
+                                    <post-author-name>Posted by <span class="text-[0.65rem] font-semibold md:text-[0.85vw]">simonitro</span>
+                                    </post-author-name>
+                                    <post-uploaded-date class="text-surface-50">a year ago</post-uploaded-date>
+                                </post-user-infos>
+                                <post-responses class="flex items-center gap-1 md:gap-[0.25vw]">
+                                    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-3 md:w-[1vw]">
+                                        <path d="M17.5 9.58336C17.5029 10.6832 17.2459 11.7683 16.75 12.75C16.162 13.9265 15.2581 14.916 14.1395 15.6078C13.021 16.2995 11.7319 16.6662 10.4167 16.6667C9.31678 16.6696 8.23176 16.4126 7.25 15.9167L2.5 17.5L4.08333 12.75C3.58744 11.7683 3.33047 10.6832 3.33333 9.58336C3.33384 8.26815 3.70051 6.97907 4.39227 5.86048C5.08402 4.7419 6.07355 3.838 7.25 3.25002C8.23176 2.75413 9.31678 2.49716 10.4167 2.50002H10.8333C12.5703 2.59585 14.2109 3.32899 15.441 4.55907C16.671 5.78915 17.4042 7.42973 17.5 9.16669V9.58336Z" stroke="#DCD9F7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+                                    <responses-text>55</responses-text>
+                                </post-responses>
+                            </post-infos>
+                        </post-container>
+                    </a>
+                </posts>
+                <load-more class="mt-3 flex w-full justify-center md:mt-[1vw]">
+                    <button class="btn btn-sm h-7 gap-2 rounded bg-surface-400 px-3 text-xs font-semibold md:h-[2.4vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.875vw]">Load more <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" color="surface-50" class="w-4 md:w-[1vw]">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
+                        </svg>
+                    </button>
+                </load-more>
+            </forum-posts>
+            <recommendations-container>
+                <span class="text-lg font-semibold md:text-[1.35vw]" data-svelte-h="svelte-1brbazo">Recommendations</span>
+                <container class="mt-3 grid grid-cols-3 gap-4 md:mt-[1.25vw] md:grid-cols-3 md:gap-[1vw]">
+                    <a href="/myanimelist/38000" class="card relative col-span-1 h-44 w-full overflow-hidden md:h-[15vw] md:rounded-[0.75vw]">
+                        <div class="h-full w-full object-cover object-center">
+                            <img class="h-full w-full object-cover object-center" src="/images/DemonSlayer-bg.avif" alt="" style="" loading="lazy">
+                        </div>
+                        <anime-details class="absolute bottom-3 z-10 flex w-full flex-col items-center gap-1 px-[0.5vw] text-center md:bottom-[1vw] md:gap-[0.25vw]">
+                            <anime-title class="text-sm font-semibold leading-snug duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[1vw] md:leading-[1.25vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Demon Slayer: Kimetsu no Yaiba</anime-title>
+                            <anime-japanese-name class="text-xs leading-none md:text-[0.9vw]">鬼滅の刃</anime-japanese-name>
+                            <anime-episodes-count class="text-xs leading-none text-surface-50 duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[0.9vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Episodes: <b>12</b>
+                            </anime-episodes-count>
+                        </anime-details>
+                        <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-surface-900/80 to-surface-900/25"></gradient-overlay>
+                    </a>
+                    <a href="/myanimelist/12189" class="card relative col-span-1 h-44 w-full overflow-hidden md:h-[15vw] md:rounded-[0.75vw]">
+                        <div class="h-full w-full object-cover object-center">
+                            <img class="h-full w-full object-cover object-center" src="/images/Hyouka-bg.avif" alt="" style="" loading="lazy">
+                        </div>
+                        <anime-details class="absolute bottom-3 z-10 flex w-full flex-col items-center gap-1 px-[0.5vw] text-center md:bottom-[1vw] md:gap-[0.25vw]">
+                            <anime-title class="text-sm font-semibold leading-snug duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[1vw] md:leading-[1.25vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Hyouka</anime-title>
+                            <anime-japanese-name class="text-xs leading-none md:text-[0.9vw]">氷菓</anime-japanese-name>
+                            <anime-episodes-count class="text-xs leading-none text-surface-50 duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[0.9vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Episodes: <b>41</b>
+                            </anime-episodes-count>
+                        </anime-details>
+                        <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-surface-900/80 to-surface-900/25"></gradient-overlay>
+                    </a>
+                    <a href="/myanimelist/23273" class="card relative col-span-1 h-44 w-full overflow-hidden md:h-[15vw] md:rounded-[0.75vw]">
+                        <div class="h-full w-full object-cover object-center">
+                            <img class="h-full w-full object-cover object-center" src="/images/YourLieInApril-bg.avif" alt="" style="" loading="lazy">
+                        </div>
+                        <anime-details class="absolute bottom-3 z-10 flex w-full flex-col items-center gap-1 px-[0.5vw] text-center md:bottom-[1vw] md:gap-[0.25vw]">
+                            <anime-title class="text-sm font-semibold leading-snug duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[1vw] md:leading-[1.25vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">You Lie in April</anime-title>
+                            <anime-japanese-name class="text-xs leading-none md:text-[0.9vw]">四月は君の嘘</anime-japanese-name>
+                            <anime-episodes-count class="text-xs leading-none text-surface-50 duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[0.9vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Episodes: <b>88</b>
+                            </anime-episodes-count>
+                        </anime-details>
+                        <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-surface-900/80 to-surface-900/25"></gradient-overlay>
+                    </a>
+                    <a href="/myanimelist/16498" class="card relative col-span-1 h-44 w-full overflow-hidden md:h-[15vw] md:rounded-[0.75vw]">
+                        <div class="h-full w-full object-cover object-center">
+                            <img class="h-full w-full object-cover object-center" src="/images/AttackOnTitan-bg.avif" alt="" style="" loading="lazy">
+                        </div>
+                        <anime-details class="absolute bottom-3 z-10 flex w-full flex-col items-center gap-1 px-[0.5vw] text-center md:bottom-[1vw] md:gap-[0.25vw]">
+                            <anime-title class="text-sm font-semibold leading-snug duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[1vw] md:leading-[1.25vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Attack on Titan</anime-title>
+                            <anime-japanese-name class="text-xs leading-none md:text-[0.9vw]">進撃の巨人</anime-japanese-name>
+                            <anime-episodes-count class="text-xs leading-none text-surface-50 duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[0.9vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Episodes: <b>53</b>
+                            </anime-episodes-count>
+                        </anime-details>
+                        <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-surface-900/80 to-surface-900/25"></gradient-overlay>
+                    </a>
+                    <a href="/myanimelist/40748" class="card relative col-span-1 h-44 w-full overflow-hidden md:h-[15vw] md:rounded-[0.75vw]">
+                        <div class="h-full w-full object-cover object-center">
+                            <img class="h-full w-full object-cover object-center" src="/images/JujutsuKaisen.avif" alt="" style="" loading="lazy">
+                        </div>
+                        <anime-details class="absolute bottom-3 z-10 flex w-full flex-col items-center gap-1 px-[0.5vw] text-center md:bottom-[1vw] md:gap-[0.25vw]">
+                            <anime-title class="text-sm font-semibold leading-snug duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[1vw] md:leading-[1.25vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Jujutsu Kaisen</anime-title>
+                            <anime-japanese-name class="text-xs leading-none md:text-[0.9vw]">呪術廻戦</anime-japanese-name>
+                            <anime-episodes-count class="text-xs leading-none text-surface-50 duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[0.9vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Episodes: <b>23</b>
+                            </anime-episodes-count>
+                        </anime-details>
+                        <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-surface-900/80 to-surface-900/25"></gradient-overlay>
+                    </a>
+                    <a href="/myanimelist/1535" class="card relative col-span-1 h-44 w-full overflow-hidden md:h-[15vw] md:rounded-[0.75vw]">
+                        <div class="h-full w-full object-cover object-center">
+                            <img class="h-full w-full object-cover object-center" src="/images/DeathNote-bg.avif" alt="" style="" loading="lazy">
+                        </div>
+                        <anime-details class="absolute bottom-3 z-10 flex w-full flex-col items-center gap-1 px-[0.5vw] text-center md:bottom-[1vw] md:gap-[0.25vw]">
+                            <anime-title class="text-sm font-semibold leading-snug duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[1vw] md:leading-[1.25vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Death Note</anime-title>
+                            <anime-japanese-name class="text-xs leading-none md:text-[0.9vw]">デスノート</anime-japanese-name>
+                            <anime-episodes-count class="text-xs leading-none text-surface-50 duration-500 ease-in-out md:h-auto md:max-h-[2.5vw] md:overflow-hidden md:text-[0.9vw] md:hover:max-h-[7vw] md:hover:overflow-y-scroll md:hover:scrollbar-thin">Episodes: <b>38</b>
+                            </anime-episodes-count>
+                        </anime-details>
+                        <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-surface-900/80 to-surface-900/25"></gradient-overlay>
+                    </a>
+                </container>
+                <load-more class="mt-3 flex w-full justify-center md:mt-[1vw]">
+                    <button class="btn btn-sm h-7 gap-2 rounded bg-surface-400 px-3 text-xs font-semibold md:h-[2.4vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.875vw]">Load more <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" color="surface-50" class="w-4 md:w-[1vw]">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
+                        </svg>
+                    </button>
+                </load-more>
+            </recommendations-container>
+        </forum-recommendations>
+    </episode-media>
+</episode-container>
