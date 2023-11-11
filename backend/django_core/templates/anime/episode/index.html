@@ -225,45 +225,34 @@
         </comments-section>
         <forum-recommendations class="col-span-12 mt-10 flex flex-col gap-5 md:col-span-5 md:mt-0 md:gap-[2vw]">
             <forum-posts>
-                <span class="flex gap-2 border-b-2 border-surface-50/25 pb-1 text-lg font-semibold md:gap-[0.75vw] md:border-none md:pb-0 md:text-[1.25vw] md:leading-[1.5vw]" data-svelte-h="svelte-1fshqmj">Forum posts</span>
-                <forum-options class="mt-3 flex items-center justify-between md:mt-[1.25vw]">
-                    <posts-count class="flex items-center gap-1 md:hidden" data-svelte-h="svelte-120qm6q">
+                <section-header class="flex gap-2 border-b-2 border-surface-50/10 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
+                    <section-title class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Forum Posts</section-title>
+                    <button class="btn btn-secondary min-h-full hidden rounded bg-surface-400 p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
+                        {% include "icons/settings.html" with class="w-[0.9vw] opacity-75" %}
+                    </button>
+                </section-header>
+                <forum-details class="mt-2 flex items-center justify-between md:mt-[0.75vw]">
+                    <p class="flex items-center gap-1 md:hidden">
                         <span class="text-base font-bold leading-none">106</span>
                         <span class="text-sm font-semibold text-surface-50">posts</span>
-                    </posts-count>
-                    <forum-buttons class="flex items-center gap-2 md:w-full md:justify-between">
-                        <button class="btn btn-sm h-7 gap-2 rounded bg-surface-400 px-2 text-xs font-semibold md:h-[2.4vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.875vw]">
-                            <svg viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg" color="surface-50" class="w-4 rotate-45 md:w-[1vw]">
-                                <g filter="url(#filter0_d_2536_5517)">
-                                    <path d="M11 3L5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    <path d="M5 3L11 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                </g>
-                                <defs>
-                                    <filter id="filter0_d_2536_5517" x="-2" y="0" width="20" height="20" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                                        <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
-                                        <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"></feColorMatrix>
-                                        <feOffset dy="4"></feOffset>
-                                        <feGaussianBlur stdDeviation="2"></feGaussianBlur>
-                                        <feComposite in2="hardAlpha" operator="out"></feComposite>
-                                        <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"></feColorMatrix>
-                                        <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_2536_5517"></feBlend>
-                                        <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_2536_5517" result="shape"></feBlend>
-                                    </filter>
-                                </defs>
-                            </svg> Create New </button>
-                        <button class="btn btn-icon h-7 w-auto rounded bg-surface-400 p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]" aria-label="Filter">
-                            <svg viewBox="0 0 20 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-3 md:w-[1vw]" color="lightgray">
-                                <path d="M18.3332 1.5H1.6665L8.33317 9.38333V14.8333L11.6665 16.5V9.38333L18.3332 1.5Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
+                    </p>
+                    <forum-options class="flex items-center gap-2 md:w-full md:justify-between">
+                        <button class="btn btn-secondary min-h-full h-7 gap-2 rounded bg-surface-400 px-2 text-xs font-semibold md:h-[2.4vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.875vw]">
+                            {% include "icons/cross.html" with class="w-4 rotate-45 md:w-[1vw]" %}
+                            Create New
                         </button>
-                    </forum-buttons>
-                </forum-options>
-                <posts class="mt-4 grid grid-cols-2 flex-col gap-4 md:mt-[1vw] md:flex md:gap-[1vw]">
-                    <a href="/forum/" class="card w-full grid-cols-7 overflow-hidden rounded-lg !bg-surface-400 md:grid md:rounded-[0.625vw]">
+                        <button class="btn btn-secondary min-h-full h-7 w-auto rounded bg-surface-400 p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]" aria-label="Filter">
+                            {% include "icons/filter.html" with class="w-3 md:w-[1vw]" %}
+                        </button>
+                    </forum-options>
+                </forum-details>
+                <posts class="mt-4 grid grid-cols-2 flex-col gap-4 md:mt-[1.25vw] md:flex md:gap-[1vw]">
+                    <a href="/" class="card w-full grid-cols-7 overflow-hidden rounded-lg !bg-neutral/50 md:grid md:rounded-[0.625vw]">
                         <post-banner class="col-span-2 block h-16 md:h-full md:w-full">
-                            <div class="h-full w-full object-cover object-center">
-                                <img class="h-full w-full object-cover object-center" src="https://blog.sakugabooru.com/wp-content/uploads/2017/11/hk22-1038x576.jpg" alt="Celebrating 10 years of Hyouka!" style="" loading="lazy">
-                            </div>
+                            <img
+                                src="https://timelinecovers.pro/facebook-cover/download/anime-your-lie-in-april-kaori-and-arima-facebook-cover.jpg"
+                                class="h-full w-full object-cover object-center"
+                            >
                         </post-banner>
                         <post-container class="flex h-36 flex-col justify-between p-3 md:col-span-5 md:h-full md:gap-[0.375vw] md:p-[1vw]">
                             <post-head>
@@ -277,47 +266,13 @@
                                     <post-uploaded-date class="text-surface-50">7 months ago</post-uploaded-date>
                                 </post-user-infos>
                                 <post-responses class="flex items-center gap-1 md:gap-[0.25vw]">
-                                    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-3 md:w-[1vw]">
-                                        <path d="M17.5 9.58336C17.5029 10.6832 17.2459 11.7683 16.75 12.75C16.162 13.9265 15.2581 14.916 14.1395 15.6078C13.021 16.2995 11.7319 16.6662 10.4167 16.6667C9.31678 16.6696 8.23176 16.4126 7.25 15.9167L2.5 17.5L4.08333 12.75C3.58744 11.7683 3.33047 10.6832 3.33333 9.58336C3.33384 8.26815 3.70051 6.97907 4.39227 5.86048C5.08402 4.7419 6.07355 3.838 7.25 3.25002C8.23176 2.75413 9.31678 2.49716 10.4167 2.50002H10.8333C12.5703 2.59585 14.2109 3.32899 15.441 4.55907C16.671 5.78915 17.4042 7.42973 17.5 9.16669V9.58336Z" stroke="#DCD9F7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
+                                    {% include "icons/chat.html" with class="w-3 md:w-[1vw]" %}
                                     <responses-text>69</responses-text>
                                 </post-responses>
                             </post-infos>
                         </post-container>
                     </a>
-                    <a href="/forum/" class="card w-full grid-cols-7 overflow-hidden rounded-lg !bg-surface-400 md:grid md:rounded-[0.625vw]">
-                        <post-banner class="col-span-2 block h-16 md:h-full md:w-full">
-                            <div class="h-full w-full object-cover object-center">
-                                <img class="h-full w-full object-cover object-center" src="https://99px.ru/sstorage/53/2019/04/tmb_257550_218851.jpg" alt="Can You See Hyouka as a Point-n-Click Adventure Game?" style="" loading="lazy">
-                            </div>
-                        </post-banner>
-                        <post-container class="flex h-36 flex-col justify-between p-3 md:col-span-5 md:h-full md:gap-[0.375vw] md:p-[1vw]">
-                            <post-head>
-                                <post-title class="line-clamp-2 text-xs font-extrabold md:text-[0.875vw] md:leading-[1.25vw]">Can You See Hyouka as a Point-n-Click Adventure Game?</post-title>
-                                <post-description class="mt-2 line-clamp-3 text-[0.6rem] font-medium leading-snug text-surface-50 md:mt-[0.5vw] md:line-clamp-2 md:text-[0.75vw] md:leading-[1.125vw]">So, while watching the series, I can see it being adapted as a point-n-click game in which you ask people around, looking for clues and solve mysteries on the top given to you. Player would be controlling Oreki in a 3D-esque environment and go around interrogate people around. You have choice of responses and see where that gets you. Would you play a game like that based on Hyouka? </post-description>
-                            </post-head>
-                            <post-infos class="flex items-end justify-between text-[0.6rem] leading-none md:mt-[0.75vw] md:items-center md:text-[0.75vw]">
-                                <post-user-infos class="flex flex-col gap-1 md:flex-row md:items-center md:gap-[0.25vw]">
-                                    <post-author-name>Posted by <span class="text-[0.65rem] font-semibold md:text-[0.85vw]">simonitro</span>
-                                    </post-author-name>
-                                    <post-uploaded-date class="text-surface-50">a year ago</post-uploaded-date>
-                                </post-user-infos>
-                                <post-responses class="flex items-center gap-1 md:gap-[0.25vw]">
-                                    <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-3 md:w-[1vw]">
-                                        <path d="M17.5 9.58336C17.5029 10.6832 17.2459 11.7683 16.75 12.75C16.162 13.9265 15.2581 14.916 14.1395 15.6078C13.021 16.2995 11.7319 16.6662 10.4167 16.6667C9.31678 16.6696 8.23176 16.4126 7.25 15.9167L2.5 17.5L4.08333 12.75C3.58744 11.7683 3.33047 10.6832 3.33333 9.58336C3.33384 8.26815 3.70051 6.97907 4.39227 5.86048C5.08402 4.7419 6.07355 3.838 7.25 3.25002C8.23176 2.75413 9.31678 2.49716 10.4167 2.50002H10.8333C12.5703 2.59585 14.2109 3.32899 15.441 4.55907C16.671 5.78915 17.4042 7.42973 17.5 9.16669V9.58336Z" stroke="#DCD9F7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg>
-                                    <responses-text>55</responses-text>
-                                </post-responses>
-                            </post-infos>
-                        </post-container>
-                    </a>
                 </posts>
-                <load-more class="mt-3 flex w-full justify-center md:mt-[1vw]">
-                    <button class="btn btn-sm h-7 gap-2 rounded bg-surface-400 px-3 text-xs font-semibold md:h-[2.4vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.875vw]">Load more <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" color="surface-50" class="w-4 md:w-[1vw]">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
-                        </svg>
-                    </button>
-                </load-more>
             </forum-posts>
             <recommendations-container>
                 <span class="text-lg font-semibold md:text-[1.35vw]" data-svelte-h="svelte-1brbazo">Recommendations</span>
