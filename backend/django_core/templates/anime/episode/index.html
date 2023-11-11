@@ -83,9 +83,9 @@
                     </button>
                 </options>
             </anime-name-options>
-            <div class="accordion w-full space-y-1 " data-testid="accordion">
-                <div class="accordion-item  " data-testid="accordion-item">
-                    <button type="button" class="accordion-control text-start w-full flex items-center space-x-4 p-0 bg-transparent rounded-container-token text-base text-warning-400 font-semibold md:text-[1.25vw] md:leading-[1vw] md:pb-[1vw]" id="accordion-control-0.4186117384197431" aria-expanded="true" aria-controls="accordion-panel-0.4186117384197431">
+            <div class="accordion w-full space-y-1 ">
+                <div class="accordion-item">
+                    <button type="button" class="accordion-control text-start w-full flex items-center space-x-4 p-0 bg-transparent rounded-container-token text-base text-warning font-semibold md:text-[1.25vw] md:leading-[1vw] md:pb-[1vw]" id="accordion-control-0.4186117384197431" aria-expanded="true" aria-controls="accordion-panel-0.4186117384197431">
                         <div class="accordion-lead">EP1</div>
                         <div class="accordion-summary flex-1">Monotone/Colorful</div>
                         <div class="accordion-summary-caret fill-current w-3 transition-transform duration-[200ms] md:w-[1vw] rotate-180">
@@ -97,11 +97,9 @@
                     <div class="accordion-panel  p-0 rounded-container-token text-surface-50 text-sm leading-snug md:text-[1vw] md:leading-[1.35vw]" id="accordion-panel-0.4186117384197431" role="region" aria-hidden="false" aria-labelledby="accordion-control-0.4186117384197431">The autumn he was twelve, piano prodigy Kousei Arima suddenly found himself unable to play the piano after his mother's death. Ever since then, it's like he's been frozen in time. His childhood friend, Tsubaki Sawabe, watches over him with concern; one day, she invites him on a double date. Kousei's other childhood friend, Ryouta Watari, is being introduced to a certain girl. Kousei reluctantly heads over to the rendezvous spot. There, he sees a girl playing a melodica. This girl, who allegedly has a crush on Watari, is Kaori Miyazono. And she turns out to be a violinist!</div>
                 </div>
             </div>
-            <a href="/mal/1" class="btn w-max rounded-md bg-primary-500 py-3 text-sm font-semibold leading-none md:rounded-[0.5vw] md:py-[0.9vw] md:text-[1vw]">
-                <span data-svelte-h="svelte-tpj0x0">View detail</span>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-3 -rotate-90 md:w-[1vw]">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
-                </svg>
+            <a href="/mal/1" class="btn btn-primary md:h-[3vw] min-h-max md:w-[10vw] rounded-md text-sm font-semibold leading-none md:rounded-[0.5vw] md:text-[1vw]">
+                <span>View detail</span>
+                {% include "icons/chevron.html" with class="w-3 -rotate-90 md:w-[1vw]" %}
             </a>
         </episode-info>
         <next-episode class="col-span-4 hidden flex-col md:flex">
@@ -109,19 +107,17 @@
             <a href="/anime/mal/1/episode/1/2" class="flex md:mt-[0.75vw] md:gap-[1vw]">
                 <episode-cover class="relative">
                     <div class="h-full md:w-[12vw] md:rounded-[0.25vw]">
-                        <img class="md:w-[12vw] md:rounded-[0.25vw]" src="/images/episodes/hyouka/Hyouka-ep-6.avif" alt="" style="" loading="lazy">
+                        <img class="md:w-[12vw] md:rounded-[0.25vw]" src="https://mangathrill.com/wp-content/uploads/2022/02/pjimage-2022-02-09T013124.016.jpg" alt="" style="" loading="lazy">
                     </div>
-                    <overlay class="absolute inset-0 flex items-center justify-center bg-surface-900/40">
-                        <play class="rounded-full bg-surface-900/50 md:p-[1vw]">
-                            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="md:w-[1.25vw]">
-                                <path d="M12.9615 7.89235C13.1685 7.73214 13.3361 7.52665 13.4513 7.29164C13.5666 7.05663 13.6266 6.79834 13.6266 6.53658C13.6266 6.27482 13.5666 6.01653 13.4513 5.78152C13.3361 5.54651 13.1685 5.34102 12.9615 5.18081C10.2808 3.10657 7.28748 1.47165 4.09351 0.337231L3.50952 0.129752C2.39342 -0.266427 1.21383 0.488369 1.06269 1.64113C0.640479 4.89111 0.640479 8.18205 1.06269 11.432C1.21473 12.5848 2.39342 13.3396 3.50952 12.9434L4.09351 12.7359C7.28748 11.6015 10.2808 9.96659 12.9615 7.89235Z" fill="currentColor"></path>
-                            </svg>
+                    <overlay class="absolute inset-0 flex items-center justify-center bg-secondary/50">
+                        <play class="rounded-full bg-accent/25 md:p-[1vw]">
+                            {% include "icons/play.html" with class="md:w-[1.25vw] text-white" %}
                         </play>
                     </overlay>
                 </episode-cover>
                 <episode-info class="flex flex-col justify-between leading-none md:py-[1vw]">
                     <div class="flex flex-col md:gap-[0.5vw]">
-                        <span class="text-warning-200 md:text-[1.1vw]" data-svelte-h="svelte-urba2z">Finally they met</span>
+                        <span class="text-warning font-semibold md:text-[1.1vw]">Finally they met</span>
                         <span class="md:text-[1vw]">Episode - 2</span>
                     </div>
                     <span class="text-surface-50 md:text-[1vw]" data-svelte-h="svelte-zt83tm">23 min</span>
