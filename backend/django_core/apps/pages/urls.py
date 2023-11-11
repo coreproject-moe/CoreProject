@@ -1,6 +1,11 @@
 from django.urls import path
 
-from .views.anime import anime_explore_view, anime_home_view, anime_info_view, anime_episode_view
+from .views.anime import (
+    anime_episode_view,
+    anime_explore_view,
+    anime_home_view,
+    anime_info_view,
+)
 from .views.stack import stack_view
 from .views.upload import upload_view
 from .views.user import login_view, logout_view, register_view, reset_password_view
@@ -12,7 +17,11 @@ urlpatterns = [
     # Anime info page
     path("anime/mal/<int:pk>/", anime_info_view, name="anime_info_view"),
     # Anime episode page
-    path("anime/mal/<int:mal_id>/episode/<int:pk>/", anime_episode_view, name="anime_episode_view"),
+    path(
+        "anime/mal/<int:mal_id>/episode/<int:pk>/",
+        anime_episode_view,
+        name="anime_episode_view",
+    ),
     # Stack page
     path("stack/", stack_view, name="stack_view"),
     # User pages

@@ -1,4 +1,4 @@
-from typing import TYPE_CHECKING, AnyStr
+from typing import TYPE_CHECKING
 
 from django.http import HttpResponse
 from django.shortcuts import render
@@ -41,7 +41,10 @@ async def anime_info_view(request: "HtmxHttpRequest", pk: int) -> HttpResponse:
 
     return render(request, "anime/_layout.html", context={"icons": icons})
 
-async def anime_episode_view(request: "HtmxHttpRequest", mal_id: int, pk: int) -> HttpResponse:
+
+async def anime_episode_view(
+    request: "HtmxHttpRequest", mal_id: int, pk: int
+) -> HttpResponse:
     if request.htmx:
         return render(
             request,
