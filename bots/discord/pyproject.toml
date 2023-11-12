@@ -16,7 +16,7 @@ alembic = "^1.12.1"
 [tool.poetry.group.dev.dependencies]
 black = "^23.11.0"
 aiohttp-devtools = "^1.1"
-poethepoet = "^0.24.2"
+poethepoet = "^0.24.3"
 
 [tool.poe.tasks]
 dev = 'adev runserver ./web/main.py --app-factory=aiohttp_app'
