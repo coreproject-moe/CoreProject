@@ -12,7 +12,6 @@
                    on fetch:afterResponse
                    wait 300ms
                    js(current_index)
-                   console.log(current_index)
                    const slider_bricks = document.querySelectorAll('.slider-brick');
                    slider_bricks.forEach((btn) => btn.classList.remove('bg-warning'));
                    slider_bricks[current_index].classList.add('bg-warning');
