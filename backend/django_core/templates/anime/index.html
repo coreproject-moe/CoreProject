@@ -25,6 +25,12 @@
                    call _hyperscript.processNode(my)
                    end
 
+                   on hyperscript:slide_to(index)
+                   fetch `{{ request.get_full_path }}_slider/${index}`
+                   put result into my innerHTML
+                   call _hyperscript.processNode(my)
+                   end
+
                    init
                    get global next_index
                    if not next_index
@@ -48,7 +54,13 @@
                 ></progress-bar>
                 <animes-boxes class="hidden w-full grid-cols-6 gap-[0.9375vw] md:mt-[1.25vw] md:grid">
                     {% for _ in latest_animes %}
-                        <button class="slider-brick col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-secondary-300 transition duration-300 hover:border-surface-50/50"
+                        <button
+                            _="
+                                on click
+                                send hyperscript:slide_to(index:{{ forloop.counter0 }}) to <slider/>
+                                end
+                            "
+                            class="slider-brick col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-secondary-300 transition duration-300 hover:border-surface-50/50"
                         ></button>
                     {% endfor %}
                 </animes-boxes>
