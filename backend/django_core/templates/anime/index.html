@@ -1,12 +1,13 @@
 {% load static %}
 
-<home-container class="mt-16 block md:mt-0 md:p-[1.25vw] md:pr-[3.75vw]">
+<home-container class="mt-16 block md:mt-0 md:p-[1.25vw] md:pr-[3.75vw]" _="init js window.timer.start() end">
     <hero-section class="flex flex-col justify-between md:flex-row">
         <latest-animes-slider class="relative h-96 w-full md:h-[26vw] md:w-[42vw]">
             <div
                 _="
                    on fetch:beforeRequest(headers)
                    add .backdrop-blur-sm to next <backdrop/>
+                  
                    on fetch:afterResponse
                    wait 300ms
                    then remove .backdrop-blur-sm from next <backdrop/>
@@ -19,7 +20,6 @@
                    fetch `{{ request.get_full_path }}_slider/${next_index}`
                    put result into my innerHTML
                    call _hyperscript.processNode(my)
-                   wait 10s
                    end
 
                    on hyperscript:slide_next
@@ -35,11 +35,14 @@
                    end
                   "
                 class="h-full duration-300"
-                id="slider-el"
             ></div>
             <backdrop class="absolute inset-0 bg-transparent duration-300 md:rounded-t-[0.875vw] pointer-events-none"></backdrop>
             <slide-progress class="flex w-full flex-col">
-                <progress-bar class="h-[0.2rem] md:h-[0.145vw] bg-warning" style="width: 94%"></progress-bar>
+                <progress-bar class="h-[0.2rem] md:h-[0.145vw] bg-warning" 
+                _="
+                    on hyperscript:timer_updated(value)
+                         transition my *width to value%
+                "></progress-bar>
                 <animes-boxes class="hidden w-full grid-cols-6 gap-[0.9375vw] md:mt-[1.25vw] md:grid">
                     {% for _ in latest_animes %}
                         <button class="slider-brick col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-secondary-300 transition duration-300 hover:border-surface-50/50"
@@ -498,16 +501,3 @@
         </my-list-animes>
     </my-list>
 </home-container>
-
-{% block js %}
-    {% component_js_dependencies %}
-    <script type="module">
-        (async() => {
-            if(!navigator.onLine) return;
-
-            import easytimer = from "{% static 'vendor/js/easytimer/easytimer.js'%}";
-            let timer = new easytimer.Timer();
-            console.log(timer);
-        })();
-    </script>
-{% endblock %}
