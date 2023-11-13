@@ -4,6 +4,7 @@
     <hero-section class="flex flex-col justify-between md:flex-row">
         <latest-animes-slider class="relative h-96 w-full md:h-[26vw] md:w-[42vw]">
             <slider
+                class="h-full duration-300 flex"
                 _="
                    on fetch:beforeRequest(headers)
                    add .backdrop-blur-sm to next <backdrop/>
@@ -42,7 +43,6 @@
                    call _hyperscript.processNode(my)
                    end
                   "
-                class="h-full duration-300 flex"
             ></slider>
             <backdrop class="absolute inset-0 bg-transparent duration-300 md:rounded-t-[0.875vw] pointer-events-none"></backdrop>
             <slide-progress class="flex w-full flex-col">
@@ -56,6 +56,7 @@
                 <animes-boxes class="hidden w-full grid-cols-6 gap-[0.9375vw] md:mt-[1.25vw] md:grid">
                     {% for _ in latest_animes %}
                         <button
+                            class="slider-brick col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-secondary-300 transition duration-300 hover:border-surface-50/50"
                             _="
                                on click
                                send hyperscript:slide_to(index:{{ forloop.counter0 }}) to <slider/>
@@ -67,20 +68,19 @@
                                else remove .bg-warning from me
                                end
                               "
-                            class="slider-brick col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-secondary-300 transition duration-300 hover:border-surface-50/50"
                         ></button>
                     {% endfor %}
                 </animes-boxes>
             </slide-progress>
             <button
-                _="on click send hyperscript:slide_prev to <slider/>"
                 class="btn btn-primary min-h-max p-0 absolute -left-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] md:flex"
+                _="on click send hyperscript:slide_prev to <slider/>"
             >
                 {% include "icons/chevron.html" with class="w-[1.25vw] rotate-90" %}
             </button>
             <button
-                _="on click send hyperscript:slide_next to <slider/>"
                 class="btn btn-primary min-h-max p-0 absolute -right-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] bg-secondary-800 md:flex"
+                _="on click send hyperscript:slide_next to <slider/>"
             >
                 {% include "icons/chevron.html" with class="w-[1.25vw] -rotate-90" %}
             </button>
