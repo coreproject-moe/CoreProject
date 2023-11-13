@@ -42,9 +42,9 @@
                 <progress-bar
                     class="h-[0.2rem] md:h-[0.145vw] bg-warning duration-300 ease-linear"
                     _="
-                        on hyperscript:timer_updated(value)
-                        set my *width to value%
-                    "
+                       on hyperscript:timer_updated(value)
+                       set my *width to value%
+                      "
                 ></progress-bar>
                 <animes-boxes class="hidden w-full grid-cols-6 gap-[0.9375vw] md:mt-[1.25vw] md:grid">
                     {% for _ in latest_animes %}
