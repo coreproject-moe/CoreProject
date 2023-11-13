@@ -7,6 +7,7 @@
                 _="
                    on fetch:beforeRequest(headers)
                    add .backdrop-blur-sm to next <backdrop/>
+                   then call window.timer.reset()
 
                    on fetch:afterResponse
                    wait 300ms
@@ -16,14 +17,12 @@
                    fetch `{{ request.get_full_path }}_slider/${next_index}`
                    put result into my innerHTML
                    call _hyperscript.processNode(my)
-                   then call window.timer.reset()
                    end
 
                    on hyperscript:slide_prev
                    fetch `{{ request.get_full_path }}_slider/${prev_index}`
                    put result into my innerHTML
                    call _hyperscript.processNode(my)
-                   then call window.timer.reset()
                    end
 
                    init
