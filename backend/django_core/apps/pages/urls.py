@@ -4,6 +4,11 @@ from .views.anime import (
     anime_explore_view,
     anime_home_view,
     anime_home_view_partial_slider_view,
+
+    anime_episode_view,
+    anime_explore_view,
+    anime_home_view,
+
     anime_info_view,
 )
 from .views.stack import stack_view
@@ -19,7 +24,14 @@ urlpatterns = [
         name="anime_home_view_partial_slider_view",
     ),
     path("anime/explore/", anime_explore_view, name="anime_explore_view"),
+    # Anime info page
     path("anime/mal/<int:pk>/", anime_info_view, name="anime_info_view"),
+    # Anime episode page
+    path(
+        "anime/mal/<int:mal_id>/episode/<int:pk>/",
+        anime_episode_view,
+        name="anime_episode_view",
+    ),
     # Stack page
     path("stack/", stack_view, name="stack_view"),
     # User pages
