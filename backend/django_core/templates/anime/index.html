@@ -11,11 +11,7 @@
 
                    on fetch:afterResponse
                    wait 300ms
-                   js(current_index)
-                   const slider_bricks = document.querySelectorAll('.slider-brick');
-                   slider_bricks.forEach((btn) => btn.classList.remove('bg-warning'));
-                   slider_bricks[current_index].classList.add('bg-warning');
-                   end
+                   send hyperscript:change_active(index:current_index) to .slider-brick
                    then remove .backdrop-blur-sm from next <backdrop/>
 
                    on hyperscript:slide_next
@@ -63,6 +59,12 @@
                             _="
                                on click
                                send hyperscript:slide_to(index:{{ forloop.counter0 }}) to <slider/>
+                               end
+
+                               on hyperscript:change_active(index)
+                               if {{ forloop.counter0 }} is equal to index
+                               add .bg-warning to me
+                               else remove .bg-warning from me
                                end
                               "
                             class="slider-brick col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-secondary-300 transition duration-300 hover:border-surface-50/50"
