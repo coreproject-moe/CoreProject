@@ -29,6 +29,7 @@
         })
 
         window.timer.on("targetAchieved", () => {
+            document.querySelector('slider').dispatchEvent(new CustomEvent("hyperscript:slide_next"));
             window.timer.reset();
         });
     </script>

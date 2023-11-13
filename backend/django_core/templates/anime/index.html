@@ -3,7 +3,7 @@
 <home-container class="mt-16 block md:mt-0 md:p-[1.25vw] md:pr-[3.75vw]" _="init js window.timer.start() end">
     <hero-section class="flex flex-col justify-between md:flex-row">
         <latest-animes-slider class="relative h-96 w-full md:h-[26vw] md:w-[42vw]">
-            <div
+            <slider
                 _="
                    on fetch:beforeRequest(headers)
                    add .backdrop-blur-sm to next <backdrop/>
@@ -11,7 +11,6 @@
                    on fetch:afterResponse
                    wait 300ms
                    then remove .backdrop-blur-sm from next <backdrop/>
-
 
                    on hyperscript:slide_next
                    fetch `{{ request.get_full_path }}_slider/${next_index}`
@@ -35,8 +34,8 @@
                    call _hyperscript.processNode(my)
                    end
                   "
-                class="h-full duration-300"
-            ></div>
+                class="h-full duration-300 flex"
+            ></slider>
             <backdrop class="absolute inset-0 bg-transparent duration-300 md:rounded-t-[0.875vw] pointer-events-none"></backdrop>
             <slide-progress class="flex w-full flex-col">
                 <progress-bar
