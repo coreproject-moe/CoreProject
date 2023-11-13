@@ -7,11 +7,16 @@
                 _="
                    on fetch:beforeRequest(headers)
                    add .backdrop-blur-sm to next <backdrop/>
-                   send hyperscript:change_active(index:next_index) to .slider-brick
                    then call window.timer.reset()
 
                    on fetch:afterResponse
                    wait 300ms
+                   js(current_index)
+                   console.log(current_index)
+                   const slider_bricks = document.querySelectorAll('.slider-brick');
+                   slider_bricks.forEach((btn) => btn.classList.remove('bg-warning'));
+                   slider_bricks[current_index].classList.add('bg-warning');
+                   end
                    then remove .backdrop-blur-sm from next <backdrop/>
 
                    on hyperscript:slide_next
