@@ -11,7 +11,7 @@
                    on fetch:afterResponse
                    wait 300ms
                    then remove .backdrop-blur-sm from next <backdrop/>
-                 
+
 
                    on hyperscript:slide_next
                    fetch `{{ request.get_full_path }}_slider/${next_index}`
@@ -25,7 +25,7 @@
                    call _hyperscript.processNode(my)
                    end
 
-                    init
+                   init
                    get global next_index
                    if not next_index
                    set global next_index to 0
