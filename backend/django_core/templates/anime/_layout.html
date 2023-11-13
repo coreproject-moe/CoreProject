@@ -8,6 +8,31 @@
 {% endblock %}
 
 {% block body %}
+    <script type="module">
+        const slider_delay = 10; // Modify this if needed
+
+        const easytimer = await import('{% static 'vendor/js/easytimer/easytimer.min.js' %}');
+        window.timer = new easytimer.Timer({
+            target: {
+                seconds: slider_delay
+            },
+            precision: "secondTenths"
+        });
+
+        window.timer.on("secondTenthsUpdated",()=>{
+            const time = window.timer.getTotalTimeValues().secondTenths,
+                  value = (100 / slider_delay) * (time / 10);
+
+
+            const event = new CustomEvent("hyperscript:timer_updated", { detail : { value : value } } );
+            document.querySelector('progress-bar').dispatchEvent(event);
+        })
+
+        window.timer.on("targetAchieved", () => {
+            window.timer.reset();
+        });
+    </script>
+
     <div class="relative h-[100dvh] bg-secondary">
         <div class="w-full h-full flex flex-col overflow-hidden">
             <header class="flex-none z-10">
@@ -135,7 +160,11 @@
                         hx-get='{{request.get_full_path}}'
                         hx-target='this'
                         hx-trigger='load'
-                    ></content>
+                    >
+                     {% comment %}
+                        Everything is rendered here
+                     {% endcomment %}
+                    </content>
                 </div>
             </div>
             <footer id="shell-footer" class="flex-none">
@@ -185,4 +214,6 @@
             </footer>
         </div>
     </div>
+
+
 {% endblock %}
