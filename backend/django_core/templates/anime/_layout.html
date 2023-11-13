@@ -21,13 +21,13 @@
 
         window.timer.on("secondTenthsUpdated",()=>{
             const time = window.timer.getTotalTimeValues().secondTenths,
-                value = (100 / slider_delay) * (time / 10);
-            
+                  value = (100 / slider_delay) * (time / 10);
+
 
             const event = new CustomEvent("hyperscript:timer_updated", { detail : { value : value } } );
             document.querySelector('progress-bar').dispatchEvent(event);
         })
-        
+
         window.timer.on("targetAchieved", () => {
             window.timer.reset();
         });
