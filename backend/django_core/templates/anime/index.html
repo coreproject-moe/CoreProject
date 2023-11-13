@@ -56,10 +56,10 @@
                     {% for _ in latest_animes %}
                         <button
                             _="
-                                on click
-                                send hyperscript:slide_to(index:{{ forloop.counter0 }}) to <slider/>
-                                end
-                            "
+                               on click
+                               send hyperscript:slide_to(index:{{ forloop.counter0 }}) to <slider/>
+                               end
+                              "
                             class="slider-brick col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-secondary-300 transition duration-300 hover:border-surface-50/50"
                         ></button>
                     {% endfor %}
