@@ -1,33 +1,23 @@
-<script>
-    htmx.onLoad((content) => {
-        const scroll_area = content.querySelector(
-            `[scroll-area-random-integer="{{random_integer}}"]`
-        );
-        if (scroll_area == null) {
-            console.log('elements are null | skipping | `scroll-area.js`');
-            return;
-        }
-
-        let add_mask_bottom =
-            scroll_area.scrollHeight > scroll_area.clientHeight,
-        mask_class =
-            '[mask-image:_linear-gradient(180deg,_rgba(7,5,25,0.95)_80%,_rgba(0,0,0,0)_100%)]';
-
-        if (add_mask_bottom) scroll_area.classList.add(mask_class);
-
-        scroll_area.addEventListener('scroll', () => {
-            const { clientHeight, scrollHeight, scrollTop } = scroll_area;
-
-            if (clientHeight + scrollTop === scrollHeight)
-                scroll_area.classList.remove(mask_class);
-            else scroll_area.classList.add(mask_class);
-        });
-    });
-</script>
-
 <scroll-area
-    scroll-area-random-integer="{{random_integer}}"
-    class="{{ parent_class }} {{ offset_scrollbar }} block h-full w-full overflow-y-scroll overscroll-y-contain [scrollbar-width:_thin] [scrollbar-color:_rgba(255,255,255,0.12)_transparent]"
+    _="
+       init
+       js(my)
+       let add_mask_bottom =
+       my.scrollHeight > my.clientHeight,
+       mask_class = '[mask-image:linear-gradient(180deg,rgba(7,5,25,0.95)_80%,rgba(0,0,0,0)_100%)]';
+
+       if (add_mask_bottom) my.classList.add(mask_class);
+
+       my.addEventListener('scroll', () => {
+       const { clientHeight, scrollHeight, scrollTop } = my;
+
+       if (clientHeight + scrollTop === scrollHeight)
+       my.classList.remove(mask_class);
+       else my.classList.add(mask_class);
+       });
+       end
+      "
+    class="{{ parent_class }} {{ offset_scrollbar }} block h-full w-full overflow-y-scroll overscroll-y-contain [scrollbar-width:_thin] [scrollbar-color:rgba(255,255,255,0.12)_transparent]"
 >
     <div class="{{ class }}">{% slot "context" default %} {% endslot %}</div>
 </scroll-area>
