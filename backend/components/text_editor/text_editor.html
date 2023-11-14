@@ -1,8 +1,8 @@
-<div class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw]">
-    <textarea-navbar class="flex h-8 items-center justify-between overflow-hidden rounded-t-lg bg-surface-400/50 md:h-[2.5vw] md:rounded-t-[0.75vw]">
-        <div>
-            <button type="button" class="bg-surface-900 text-surface-50 h-8 px-5 text-xs capitalize leading-[1.5vw] transition-colors duration-100 md:h-[2.5vw] md:px-[1.5vw] md:text-[1vw]">edit </button>
-            <button type="button" class="text-surface-300 h-8 px-5 text-xs capitalize leading-[1.5vw] transition-colors duration-100 md:h-[2.5vw] md:px-[1.5vw] md:text-[1vw]">preview </button>
+<div class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw] overflow-hidden">
+    <textarea-navbar class="flex h-8 items-center justify-between overflow-hidden rounded-t-lg md:h-[2.5vw] md:rounded-t-[0.75vw]">
+        <div class="btn-group">
+            <button type="button" class="btn btn-neutral h-8 px-5 text-xs capitalize leading-[1.5vw] transition-colors duration-100 md:h-[2.5vw] md:px-[1.5vw] md:text-[1vw]">edit</button>
+            <button type="button" class="btn !bg-transparent opacity-75 h-8 px-5 text-xs capitalize leading-[1.5vw] transition-colors duration-100 md:h-[2.5vw] md:px-[1.5vw] md:text-[1vw]">preview</button>
         </div>
         <div class="flex place-items-center gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]">
             <button class="btn !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
@@ -11,16 +11,16 @@
             <button class="btn !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw] text-surface-200" type="button" aria-label="italic">
                 {% include "icons/italic.html" %}
             </button>
-            <button class="btn p-0 w-5 md:w-[1.35vw] text-surface-200" type="button" aria-label="underline">
+            <button class="btn !bg-transparent min-h-full p-0 w-5 md:w-[1.35vw] text-surface-200" type="button" aria-label="underline">
                 {% include "icons/underline.html" %}
             </button>
-            <button class="btn p-0 w-5 md:w-[1.5vw] text-surface-200" type="button" aria-label="strike">
+            <button class="btn !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw] text-surface-200" type="button" aria-label="strike">
                 {% include "icons/strike.html" %}
             </button>
-            <button class="btn p-0 w-5 md:w-[1.5vw] text-surface-200" type="button" aria-label="code">
+            <button class="btn !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw] text-surface-200" type="button" aria-label="code">
                 {% include "icons/code.html" %}
             </button>
-            <button class="btn p-0 w-4 md:w-[1.25vw] text-surface-200 ml-3 md:ml-[1vw]" type="button" aria-label="hyperlink">
+            <button class="btn !bg-transparent min-h-full p-0 w-4 md:w-[1.25vw] text-surface-200 ml-3 md:ml-[1vw]" type="button" aria-label="hyperlink">
                 {% include "icons/hyperlink.html" %}
             </button>
         </div>
@@ -28,7 +28,7 @@
     <textarea-body class="block h-28 overflow-y-scroll md:h-[8vw]">
         <textarea spellcheck="true" class="h-full w-full resize-none border-none bg-secondary p-3 text-sm leading-tight text-surface-50 outline-none duration-300 ease-in-out placeholder:text-surface-200 focus:ring-0 md:p-[1vw] md:text-[1vw] md:leading-[1.5vw]" placeholder="Leave a comment"></textarea>
     </textarea-body>
-    <textarea-footer class="flex justify-between bg-surface-400/50 px-4 py-2 text-[0.65rem] font-thin leading-[1.5vw] text-surface-200 md:px-[1vw] md:py-[0.1vw] md:text-[0.75vw]">
+    <textarea-footer class="flex justify-between bg-neutral-focus px-4 py-2 text-[0.65rem] font-thin leading-[1.5vw] text-surface-200 md:px-[1vw] md:py-[0.1vw] md:text-[0.75vw]">
         <div></div>
         <div>Learn more about <a class="underline" href="/">core editor</a>
         </div>
