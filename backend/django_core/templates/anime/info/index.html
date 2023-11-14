@@ -196,24 +196,12 @@
                                     </p>
                                 </card-info>
                                 <episode-titles class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
-                                    <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
-                                        <div>
-                                            <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-9 md:max-h-[1.25vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
-                                                <span class="line-clamp-2 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">
-                                                    {{ episode.name }}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </scroll-area>
-                                    <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
-                                        <div>
-                                            <div class="text-[0.8rem] font-light leading-snug text-white md:bg-surface-900 md:text-[0.9vw] md:leading-[1.25vw] md:text-surface-50/90 md:hover:text-surface-50 max-h-4 md:max-h-[1.3vw] md:hover:max-h-[18vw] duration-500 overflow-hidden ease-in-out scrollbar-none hover:overflow-y-scroll">
-                                                <span class="line-clamp-1 md:line-clamp-none [&amp;:not(:hover)]:[mask-image:_linear-gradient(90deg,_rgba(7,5,25)_75%,_rgba(0,0,0,0)_100%)]">
-                                                    {{ episode.japanese_name }}
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </scroll-area>
+                                    {% component_block "scroll_area" scroll_area_class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]" parent_class="max-h-9 md:max-h-[1.25vw] md:hover:max-h-[9vw] duration-500" offset_scrollbar="pr-3  md:pr-[0.75vw]" %}
+                                        {{ episode.name }}
+                                    {% endcomponent_block %}
+                                    {% component_block "scroll_area" scroll_area_class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]" parent_class="max-h-9 md:max-h-[1.25vw] md:hover:max-h-[9vw] duration-500" offset_scrollbar="pr-3  md:pr-[0.75vw]" %}
+                                        {{ episode.japanese_name }}
+                                    {% endcomponent_block %}
                                 </episode-titles>
                                 <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.5vw] md:pt-[0.75vw]">
                                     <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
