@@ -17,15 +17,9 @@
                         <overlay-gradient class="gradient absolute inset-0 bg-gradient-to-t from-surface-900/75 to-surface-900/25 md:hidden"></overlay-gradient>
                     </anime-banner>
                     <anime-details class="absolute bottom-0 col-span-12 p-5 md:static md:p-0">
-                        <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
-                            <div>
-                                <div class="max-h-48 md:max-h-[10vw]">
-                                    <anime-name class="text-2xl font-bold md:text-[2vw] md:leading-[2.7vw] text-white">
-                                        {{anime.name}}
-                                    </anime-name>
-                                </div>
-                            </div>
-                        </scroll-area>
+                        {% component_block "scroll_area" scroll_area_class="text-2xl font-bold md:text-[2vw] md:leading-[2.7vw] text-white" parent_class="max-h-48 md:max-h-[10vw]" offset_scrollbar="pr-3  md:pr-[0.75vw]" %}
+                            {{ anime.name }}
+                        {% endcomponent_block %}
                         <anime-japanese-name class="flex flex-wrap gap-x-2 pt-2 text-xs font-semibold uppercase tracking-wider md:gap-x-[0.25vw] md:pt-[0.625vw] md:text-[0.75vw] md:leading-[0.9vw]">
                             {{ anime.japanese_name }}
                         </anime-japanese-name>
