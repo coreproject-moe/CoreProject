@@ -34,6 +34,8 @@
                    end
 
                    init
+                   set global touch_start_x to 0
+                   set global touch_end_x to 0
                    get global next_index
                    if not next_index
                    set global next_index to 0
@@ -41,6 +43,23 @@
                    fetch `{{ request.get_full_path }}_slider/${next_index}`
                    put result into my innerHTML
                    call _hyperscript.processNode(my)
+                   end
+
+                   on touchstart
+                   set global touch_start_x to event.changedTouches[0].screenX
+                   end
+
+                   on touchend
+                   set global touch_end_x to event.changedTouches[0].screenX
+                   send hyperscript:check_direction to me
+                   end
+
+                   on hyperscript:check_direction
+                   if touch_end_x < touch_start_x
+                   send hyperscript:slide_prev to me
+                   end
+                   if touch_end_x > touch_start_x
+                   send hyperscript:slide_next to me
                    end
                   "
             ></slider>
