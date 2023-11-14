@@ -45,10 +45,10 @@
                    call _hyperscript.processNode(my)
                    end
 
-                   on touchstart
-                   set global touch_start_x to event.changedTouches[0].screenX
-                   end
+                   on mouseenter call window.timer.pause() end
+                   on mouseleave call window.timer.start() end
 
+                   on touchstart set global touch_start_x to event.changedTouches[0].screenX end
                    on touchend
                    set global touch_end_x to event.changedTouches[0].screenX
                    send hyperscript:check_direction to me
