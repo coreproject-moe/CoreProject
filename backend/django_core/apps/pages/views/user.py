@@ -30,10 +30,10 @@ animes = [
 
 
 @never_cache
-async def login_view(request: "HtmxHttpRequest") -> HttpResponse:
+def login_view(request: "HtmxHttpRequest") -> HttpResponse:
     form = LoginForm(request.POST or None)
-
     login_unsuccessful = False
+
     if request.htmx:
         if form.is_valid():
             username = form.cleaned_data["username"]
@@ -119,7 +119,7 @@ async def login_view(request: "HtmxHttpRequest") -> HttpResponse:
 
 
 @never_cache
-async def logout_view(request: "HtmxHttpRequest") -> HttpResponse:
+def logout_view(request: "HtmxHttpRequest") -> HttpResponse:
     logout(request)
     redirect_location = request.GET.get("next") or reverse_lazy("login_view")
     url_is_safe = url_has_allowed_host_and_scheme(
@@ -176,10 +176,13 @@ async def register_view(request: "HtmxHttpRequest") -> HttpResponse:
                     form.fields["username"].widget.attrs["class"] += " focus:border-error"
 
             return render(request, "user/register/_2.html", context={"form": form})
+
         elif _internal_state_ == 3:
             form_data = request.session["_form_"]
             username = form_data.get("username", [None])[0]
             email = form_data.get("email", [None])[0]
+
+            # TODO: Finish register logics
 
             return render(
                 request,
