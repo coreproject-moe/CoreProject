@@ -22,7 +22,7 @@
                    end
 
                    on hyperscript:slide_prev
-                   fetch `{{ request.get_full_path }}_slider/${prev_index}`
+                   fetch `{{ request.get_full_path }}_slider/${previous_index}`
                    put result into my innerHTML
                    call _hyperscript.processNode(my)
                    end
