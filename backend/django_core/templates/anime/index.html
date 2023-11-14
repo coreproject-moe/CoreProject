@@ -1,6 +1,9 @@
 {% load static %}
 
-<home-container class="mt-16 block md:mt-0 md:p-[1.25vw] md:pr-[3.75vw]" _="init call window.timer.start() end">
+<home-container
+    class="mt-16 block md:mt-0 md:p-[1.25vw] md:pr-[3.75vw]"
+    _="init call window.timer.start() end"
+>
     <hero-section class="flex flex-col justify-between md:flex-row">
         <latest-animes-slider class="relative h-96 w-full md:h-[26vw] md:w-[42vw]">
             <slider
@@ -36,11 +39,11 @@
                    init
                    set global touch_start_x to 0
                    set global touch_end_x to 0
-                   get global next_index
-                   if not next_index
-                   set global next_index to 0
+                   get global current_index
+                   if not current_index
+                   set global current_index to 0
                    end
-                   fetch `{{ request.get_full_path }}_slider/${next_index}`
+                   fetch `{{ request.get_full_path }}_slider/${current_index}`
                    put result into my innerHTML
                    call _hyperscript.processNode(my)
                    end
