@@ -291,19 +291,31 @@
         caret_offset_left = null;
         caret_offset_top = null;
     }
-
-    let tab_type = "edit";
-
-    async function handle_edit_preview_button_click(item) {
-        tab_type = item;
-    }
 </script>
 
 <text-editor class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw]">
     <textarea-navbar class="flex h-8 items-center justify-between rounded-t-lg md:h-[2.5vw] md:rounded-t-[0.75vw]">
         <div class="btn-group w-full h-full overflow-hidden p-[0.15vw]">
-            <button type="button" class="btn !bg-neutral-focus min-h-full h-8 px-5 text-xs capitalize leading-[1.5vw] transition-colors duration-100 md:h-[2.5vw] md:px-[1.5vw] md:text-[1vw]">edit</button>
-            <button type="button" class="btn !bg-transparent opacity-75 min-h-full h-8 px-5 text-xs capitalize leading-[1.5vw] transition-colors duration-100 md:h-[2.5vw] md:px-[1.5vw] md:text-[1vw]">preview</button>
+            <button
+                type="button"
+                class="textarea-navbar-type-btn bg-neutral-focus rounded-l-[0.6vw] min-h-full h-8 px-5 text-xs capitalize leading-[1.5vw] transition-colors duration-100 md:h-[2.5vw] md:px-[1.5vw] md:text-[1vw]"
+                _="
+                    on click
+                    remove .bg-neutral-focus from .textarea-navbar-type-btn
+                    then add .bg-neutral-focus to me
+                    end
+                "
+            >edit</button>
+            <button
+                type="button"
+                class="textarea-navbar-type-btn min-h-full h-8 px-5 text-xs capitalize leading-[1.5vw] transition-colors duration-100 md:h-[2.5vw] md:px-[1.5vw] md:text-[1vw]"
+                _="
+                    on click
+                    remove .bg-neutral-focus from .textarea-navbar-type-btn
+                    then add .bg-neutral-focus to me
+                    end
+                "
+            >preview</button>
         </div>
         <div class="flex place-items-center gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]">
             <div class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add bold text, <Ctrl + b>">
