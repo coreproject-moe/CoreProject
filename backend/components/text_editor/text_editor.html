@@ -12,6 +12,8 @@
         });
     });
 
+    textarea_element.addEventListener("paste", (event) => paste_text(event));
+
     let emoji_matches,
         show_emoji_picker = false,
         active_emoji_index,
@@ -207,6 +209,7 @@
             element.setSelectionRange(selection_start + selection_text.length + 3, selection_start + selection_text.length + 3);
         }
     }
+
     async function paste_text(event) {
         event.preventDefault();
         const element = event.currentTarget;
@@ -317,6 +320,17 @@
         caret_offset_left = null;
         caret_offset_top = null;
     }
+
+    function is_valid_url(url_string) {
+        // Credit : https://stackoverflow.com/a/43467144
+        let url;
+        try {
+            url = new URL(url_string);
+        } catch (_) {
+            return false;
+        };
+        return url.protocol === "http:" || url.protocol === "https:";
+    };
 </script>
 
 <text-editor class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw]">
