@@ -21,7 +21,7 @@
         "autoprefixer": "^10.4.16",
         "cross-env": "^7.0.3",
         "cssnano": "^6.0.1",
-        "daisyui": "^4.0.4",
+        "daisyui": "^4.0.7",
         "postcss": "^8.4.31",
         "postcss-import": "^15.1.0",
         "postcss-nested": "^6.0.1",
