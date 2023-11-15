@@ -1,13 +1,15 @@
 <div class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw] overflow-hidden">
-    <textarea-navbar class="flex h-8 items-center justify-between overflow-hidden rounded-t-lg md:h-[2.5vw] md:rounded-t-[0.75vw]">
+    <textarea-navbar class="flex h-8 items-center justify-between rounded-t-lg md:h-[2.5vw] md:rounded-t-[0.75vw]">
         <div class="btn-group">
             <button type="button" class="btn btn-neutral h-8 px-5 text-xs capitalize leading-[1.5vw] transition-colors duration-100 md:h-[2.5vw] md:px-[1.5vw] md:text-[1vw]">edit</button>
             <button type="button" class="btn !bg-transparent opacity-75 h-8 px-5 text-xs capitalize leading-[1.5vw] transition-colors duration-100 md:h-[2.5vw] md:px-[1.5vw] md:text-[1vw]">preview</button>
         </div>
         <div class="flex place-items-center gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]">
-            <button class="btn !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
-                {% include "icons/bold.html" %}
-            </button>
+            <div class="tooltip tooltip-bottom" data-tip="Add bold text, <Ctrl + b>">
+                <button class="btn !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
+                    {% include "icons/bold.html" %}
+                </button>
+            </div>
             <button class="btn !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw] text-surface-200" type="button" aria-label="italic">
                 {% include "icons/italic.html" %}
             </button>
