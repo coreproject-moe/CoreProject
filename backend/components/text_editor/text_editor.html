@@ -164,8 +164,8 @@
     }
     async function hyperlink_text(element) {
         const selection_start = element.selectionStart,
-            selection_end = element.selectionEnd,
-            selection_text = element.value.substring(selection_start, selection_end);
+              selection_end = element.selectionEnd,
+              selection_text = element.value.substring(selection_start, selection_end);
 
         // Handle use cases
         if (element.value.substring(selection_start - 3, selection_start) == "[](" && element.value.substring(selection_end, selection_end + 1) == ")") {
@@ -186,11 +186,11 @@
         const element = event.currentTarget;
 
         const selection_start = element.selectionStart,
-            selection_end = element.selectionEnd,
-            selection_text = element.value.substring(selection_start, selection_end);
+              selection_end = element.selectionEnd,
+              selection_text = element.value.substring(selection_start, selection_end);
 
         const clipboard_data = event.clipboardData?.getData("text") ?? "",
-            clipboard_data_contains_url = is_valid_url(clipboard_data);
+              clipboard_data_contains_url = is_valid_url(clipboard_data);
 
         if (selection_text && clipboard_data_contains_url) {
             const replacement_text = `[${selection_text}](${clipboard_data})`;
@@ -217,8 +217,8 @@
         element.focus();
 
         const selection_start = element.selectionStart,
-            selection_end = element.selectionEnd,
-            selection_text = element.value.substring(selection_start, selection_end);
+              selection_end = element.selectionEnd,
+              selection_text = element.value.substring(selection_start, selection_end);
 
         const regex_pattern_for_operator = new RegExp("^" + starting_operator.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&") + "|" + ending_operator.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&") + "$", "g");
 
@@ -267,13 +267,13 @@
         const textarea_element = element;
 
         const emoji_keyword = emoji_matches[emoji_index]?.keyword,
-            emoji_code = `:${emoji_keyword}:`;
+              emoji_code = `:${emoji_keyword}:`;
 
         const selection_start = textarea_element.selectionStart,
-            selection_end = textarea_element.selectionEnd;
+              selection_end = textarea_element.selectionEnd;
 
         const text_before_selection = textarea_value.substring(0, selection_start),
-            text_after_selection = textarea_value.substring(selection_end);
+              text_after_selection = textarea_value.substring(selection_end);
 
         // replace last word before text selection with emoji code
         const updated_text_before_selection = text_before_selection.replace(/\S+$/, emoji_code);
