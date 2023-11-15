@@ -1,0 +1,48 @@
+<div class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw]">
+    <textarea-navbar class="flex h-8 items-center justify-between rounded-t-lg md:h-[2.5vw] md:rounded-t-[0.75vw]">
+        <div class="btn-group w-full h-full overflow-hidden p-[0.15vw]">
+            <button type="button" class="btn !bg-neutral-focus min-h-full h-8 px-5 text-xs capitalize leading-[1.5vw] transition-colors duration-100 md:h-[2.5vw] md:px-[1.5vw] md:text-[1vw]">edit</button>
+            <button type="button" class="btn !bg-transparent opacity-75 min-h-full h-8 px-5 text-xs capitalize leading-[1.5vw] transition-colors duration-100 md:h-[2.5vw] md:px-[1.5vw] md:text-[1vw]">preview</button>
+        </div>
+        <div class="flex place-items-center gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]">
+            <div class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add bold text, <Ctrl + b>">
+                <button class="btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
+                    {% include "icons/bold.html" %}
+                </button>
+            </div>
+            <div class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add italic text, <Ctrl + i>">
+                <button class="btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
+                    {% include "icons/italic.html" %}
+                </button>
+            </div>
+            <div class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add underline text, <Ctrl + i>">
+                <button class="btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
+                    {% include "icons/underline.html" %}
+                </button>
+            </div>
+            <div class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add strikethrough text, <Ctrl + Shift + x>">
+                <button class="btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
+                    {% include "icons/strike.html" %}
+                </button>
+            </div>
+            <div class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add code text, <Ctrl + e>">
+                <button class="btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
+                    {% include "icons/code.html" %}
+                </button>
+            </div>
+            <div class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add hyperlink text, <Ctrl + k>">
+                <button class="btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
+                    {% include "icons/hyperlink.html" %}
+                </button>
+            </div>
+        </div>
+    </textarea-navbar>
+    <textarea-body class="block h-28 overflow-y-scroll md:h-[8vw]">
+        <textarea spellcheck="true" class="h-full w-full resize-none border-none bg-secondary p-3 text-sm leading-tight text-surface-50 outline-none duration-300 ease-in-out placeholder:text-surface-200 focus:ring-0 md:p-[1vw] md:text-[1vw] md:leading-[1.5vw]" placeholder="Leave a comment"></textarea>
+    </textarea-body>
+    <textarea-footer class="flex justify-between px-4 py-2 text-[0.65rem] font-thin leading-[1.5vw] text-surface-200 md:px-[1vw] md:py-[0.1vw] md:text-[0.75vw]">
+        <div></div>
+        <div>Learn more about <a class="underline" href="/">core editor</a>
+        </div>
+    </textarea-footer>
+</div>
