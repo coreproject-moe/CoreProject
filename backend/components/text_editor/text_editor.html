@@ -1,10 +1,16 @@
 <script>
-
     let textarea_value = "",
         caret_offset_top, caret_offset_left;
     // Bindings
-    let textarea_element = document.querySelector('text-editor');
-    console.log(textarea_element)
+    let textarea_element = document.querySelector('textarea-body textarea'),
+        text_editor_controls = document.querySelectorAll('.text-editor-controls');
+
+    const control_functions_arr = [bold_text, italic_text, underline_text, strike_text, code_text, hyperlink_text];
+    text_editor_controls.forEach((control, index) => {
+        control.addEventListener("click", () => {
+            control_functions_arr[index](textarea_element);
+        });
+    });
 
     let emoji_matches,
         show_emoji_picker = false,
@@ -148,19 +154,39 @@
     }
     // Editor specific functions
     async function bold_text(element) {
-        await operate_on_selected_text({ element: element, starting_operator: "**", ending_operator: "**" });
+        await operate_on_selected_text({
+            element: element,
+            starting_operator: "**",
+            ending_operator: "**"
+        });
     }
-    async function italic_text(element) {
-        await operate_on_selected_text({ element: element, starting_operator: "_", ending_operator: "_" });
+    async function italic_text() {
+        await operate_on_selected_text({
+            element: textarea_element,
+            starting_operator: "_",
+            ending_operator: "_"
+        });
     }
     async function code_text(element) {
-        await operate_on_selected_text({ element: element, starting_operator: "`", ending_operator: "`" });
+        await operate_on_selected_text({
+            element: element,
+            starting_operator: "`",
+            ending_operator: "`"
+        });
     }
     async function underline_text(element) {
-        await operate_on_selected_text({ element: element, starting_operator: "<u>", ending_operator: "</u>" });
+        await operate_on_selected_text({
+            element: element,
+            starting_operator: "<u>",
+            ending_operator: "</u>"
+        });
     }
     async function strike_text(element) {
-        await operate_on_selected_text({ element: element, starting_operator: "~~", ending_operator: "~~" });
+        await operate_on_selected_text({
+            element: element,
+            starting_operator: "~~",
+            ending_operator: "~~"
+        });
     }
     async function hyperlink_text(element) {
         const selection_start = element.selectionStart,
@@ -318,33 +344,45 @@
             >preview</button>
         </div>
         <div class="flex place-items-center gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]">
-            <div class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add bold text, <Ctrl + b>">
-                <button class="btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
+            <div
+                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add bold text, <Ctrl + b>"
+            >
+                <button class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
                     {% include "icons/bold.html" %}
                 </button>
             </div>
-            <div class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add italic text, <Ctrl + i>">
-                <button class="btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
+            <div
+                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add italic text, <Ctrl + i>"
+            >
+                <button class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
                     {% include "icons/italic.html" %}
                 </button>
             </div>
-            <div class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add underline text, <Ctrl + i>">
-                <button class="btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
+            <div
+                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add underline text, <Ctrl + i>"
+            >
+                <button class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
                     {% include "icons/underline.html" %}
                 </button>
             </div>
-            <div class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add strikethrough text, <Ctrl + Shift + x>">
-                <button class="btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
+            <div
+                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add strikethrough text, <Ctrl + Shift + x>"
+            >
+                <button class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
                     {% include "icons/strike.html" %}
                 </button>
             </div>
-            <div class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add code text, <Ctrl + e>">
-                <button class="btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
+            <div
+                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add code text, <Ctrl + e>"
+            >
+                <button class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
                     {% include "icons/code.html" %}
                 </button>
             </div>
-            <div class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add hyperlink text, <Ctrl + k>">
-                <button class="btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
+            <div
+                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add hyperlink text, <Ctrl + k>"
+            >
+                <button class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
                     {% include "icons/hyperlink.html" %}
                 </button>
             </div>
