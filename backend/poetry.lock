@@ -801,13 +801,13 @@ typing-extensions = ">=3.7.4"
 
 [[package]]
 name = "django-htmx"
-version = "1.17.0"
+version = "1.17.1"
 description = "Extensions for using Django with htmx."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django_htmx-1.17.0-py3-none-any.whl", hash = "sha256:070a37092b88a42cd7af26c1b65f63c4529bae276710fd16137dc934938b44f2"},
-    {file = "django_htmx-1.17.0.tar.gz", hash = "sha256:2ef0d19db41c6152881e782673cd2cd1755a7fd6784f8b4f2279fb18dc03d2c2"},
+    {file = "django-htmx-1.17.1.tar.gz", hash = "sha256:c5264ba7b8656934fdda8ea2b19d8a0eaef7d50468683229f3a1aa3bd660bd72"},
+    {file = "django_htmx-1.17.1-py3-none-any.whl", hash = "sha256:48b6dff40df09f78535ee9db92c7123db3f5243e5f4e95ab061df91a7864f897"},
 ]
 
 [package.dependencies]
