@@ -334,9 +334,9 @@
 <text-editor
     class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw]"
     _="
-       on hyperscript:demo
-       log 'Hii'
-       end
+        init
+        set global textarea_element to first <textarea/> in me
+        end
 
        on hyperscript:operate_on_selected_text(starting_operator, ending_operator)
        js(me, starting_operator, ending_operator)
@@ -473,10 +473,6 @@
     <textarea-body class="block h-28 overflow-y-scroll md:h-[8vw]">
         <textarea
             _="
-               on load
-               send hyperscript:demo to <text-editor/>
-               end
-
                on paste call paste_text(event) end
               "
             spellcheck="true"
