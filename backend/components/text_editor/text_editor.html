@@ -360,7 +360,7 @@
        * `_|hello|_` -> `|hello|`
        */
        const replacement_text = textarea_element.value.substring(selection_start - starting_operator.length, selection_end + ending_operator.length).replace(regex_pattern_for_operator, '');
-        me.dispatchEvent(new CustomEvent('hyperscript:insert_text', { detail : { text: textarea_element.value.substring(0, selection_start - starting_operator.length) + replacement_text + textarea_element.value.substring(selection_end + ending_operator.length)}}))
+       me.dispatchEvent(new CustomEvent('hyperscript:insert_text', { detail : { text: textarea_element.value.substring(0, selection_start - starting_operator.length) + replacement_text + textarea_element.value.substring(selection_end + ending_operator.length)}}))
 
        textarea_element.setSelectionRange(selection_start - starting_operator.length, selection_end - starting_operator.length);
        } else {
@@ -379,7 +379,7 @@
        */
 
        const replacement_text = textarea_element.value.substring(selection_start - starting_operator.length, selection_end + ending_operator.length).replace(regex_pattern_for_operator, '');
-        me.dispatchEvent(new CustomEvent('hyperscript:insert_text', { detail : { text: textarea_element.value.substring(0, selection_start) + replacement_text + textarea_element.value.substring(selection_end)}}))
+       me.dispatchEvent(new CustomEvent('hyperscript:insert_text', { detail : { text: textarea_element.value.substring(0, selection_start) + replacement_text + textarea_element.value.substring(selection_end)}}))
 
        textarea_element.setSelectionRange(selection_start, selection_end - (starting_operator.length + ending_operator.length));
        } else {
@@ -388,7 +388,7 @@
        * `|hello|` -> `_|hello|_`
        */
        const replacement_text = starting_operator + selection_text + ending_operator;
-        me.dispatchEvent(new CustomEvent('hyperscript:insert_text', { detail : { text: textarea_element.value.substring(0, selection_start) + replacement_text + textarea_element.value.substring(selection_end)}}))
+       me.dispatchEvent(new CustomEvent('hyperscript:insert_text', { detail : { text: textarea_element.value.substring(0, selection_start) + replacement_text + textarea_element.value.substring(selection_end)}}))
 
        textarea_element.setSelectionRange(selection_start + starting_operator.length, selection_end + starting_operator.length);
        }
