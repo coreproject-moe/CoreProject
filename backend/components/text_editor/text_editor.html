@@ -117,9 +117,9 @@
                 // Show emoji popover
                 emoji_popover.dispatchEvent(
                     new CustomEvent('hyperscript:popover', { detail: {
-                        show_emoji_picker: show_emoji_picker,
                         left: caret_offset_left,
                         top: caret_offset_top,
+                        emoji_matches: emoji_matches, 
                     }}));
                 emoji_popover.classList.remove('hidden');
             }
@@ -637,21 +637,27 @@
     <emoji-popover
         class="emoji_picker hidden absolute flex min-w-[12vw] flex-col divide-y divide-accent/10 overflow-hidden rounded-[0.5vw] bg-neutral text-[1vw]"
         _="
-           on hyperscript:popover(left, top)
-           set my *left to left
-           set my *top to top
-          "
+        on hyperscript:popover(left, top, emoji_matches)
+            set my *left to left
+            set my *top to top
+
+            js(me, emoji_matches)
+            const items_arr = [];
+            for (const emoji of Object.values(emoji_matches.slice(0, 5))) {
+                const item_html = `
+                    <div class='flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:bg-primary-500 hover:text-white'>
+                        <img
+                            class='md:w-[1vw]'
+                            src=${emoji.emoji}
+                        >
+                        <span>${emoji.keyword}</span>
+                    </div>
+                `;
+                items_arr.push(item_html);
+            }
+            me.innerHTML = items_arr.join('');
+            end
+        "
     >
-        <div
-            role="button"
-            tabindex="0"
-            class="flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:bg-primary-500 hover:text-white"
-        >
-            <img
-                class="md:w-[1vw]"
-                src="https://cdn.pixabay.com/photo/2020/12/27/20/24/smile-5865208_1280.png"
-            >
-            <span>emoji-name</span>
-        </div>
     </emoji-popover>
 </text-editor>
