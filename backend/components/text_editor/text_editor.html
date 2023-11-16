@@ -1,7 +1,12 @@
+{% load static %}
+
 <script>
     (async () => {
         if(!navigator.onLine) return;
-        
+
+        const emojis = await import("{% static 'data/emojis.json' %}");
+        console.log(emojis);
+
         let textarea_value = '',
             caret_offset_top,
             caret_offset_left;
