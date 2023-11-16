@@ -20,17 +20,17 @@ export default defineConfig({
         target: 'esnext',
         sourcemap: true,
         rollupOptions: {
-            input: {
+            input: [
                 // Vendor packages
-                htmx: join(JS_DIRECTORY, 'vendor', 'htmx.ts'),
-                hyperscript: join(JS_DIRECTORY, 'vendor', 'hyperscript.ts'),
+                join(JS_DIRECTORY, 'vendor', 'htmx.ts'),
+                join(JS_DIRECTORY, 'vendor', 'hyperscript.ts'),
 
                 // Tailwind.css
-                tailwind: join(CSS_DIRECTORY, 'index.postcss'),
+                join(CSS_DIRECTORY, 'index.postcss'),
 
                 // Textarea
-                textarea: join(JS_DIRECTORY, 'textarea.ts'),
-            },
+                join(JS_DIRECTORY, 'textarea.ts'),
+            ],
             output: {
                 chunkFileNames: undefined,
             },
