@@ -91,9 +91,6 @@ INSTALLED_APPS = [
     "defender",
     # Tree
     "django_ltree",
-    # Tailwind CSS
-    "tailwind",
-    "tailwind_src",  # Our custom app
     # Api
     "rest_framework",
     "rest_framework.authtoken",

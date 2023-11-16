@@ -19,6 +19,7 @@ export default defineConfig({
                 ),
 
                 // Tailwind.css
+                tailwind: resolve('./django_core/static_src/css/index.css'),
             },
             output: {
                 chunkFileNames: undefined,
