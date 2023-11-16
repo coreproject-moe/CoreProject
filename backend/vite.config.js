@@ -1,22 +1,21 @@
-import { join } from 'path';
+import { join, resolve } from 'path';
 import process from 'process';
 import { defineConfig } from 'vite';
 
-const DJANGO_DIRECTORY = process.cwd();
-const DJANGO_STATIC_DIRECTORY = join(DJANGO_DIRECTORY, '/static/');
-
-const STATIC_DIRECTORY = join(DJANGO_DIRECTORY, '/static_src/');
-
 export default defineConfig({
+    root: resolve('./django_core/'),
     base: '/static/',
     build: {
-        outDir: DJANGO_STATIC_DIRECTORY,
+        outDir: './static',
         manifest: true,
         emptyOutDir: true,
         target: 'es2015',
         rollupOptions: {
             input: {
-                htmx: join(STATIC_DIRECTORY, 'js', 'htmx.js'),
+                htmx: resolve('./django_core/static_src/js/htmx.js'),
+            },
+            output: {
+                chunkFileNames: undefined,
             },
         },
     },

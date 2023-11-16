@@ -418,3 +418,11 @@ def immutable_file_test(path, url):
 
 
 WHITENOISE_IMMUTABLE_FILE_TEST = immutable_file_test
+DJANGO_VITE = {
+"default": {
+    "dev_mode": DEBUG,
+    "dev_server_port":5173
+  },
+}
+# Where ViteJS assets are built.
+DJANGO_VITE_ASSETS_PATH = BASE_DIR / "static" 
