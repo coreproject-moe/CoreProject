@@ -30,6 +30,8 @@ export default defineConfig({
 
                 // Textarea
                 join(JS_DIRECTORY, 'textarea.ts'),
+                // Easytimer
+                join(JS_DIRECTORY, 'easytimer.ts'),
             ],
             output: {
                 chunkFileNames: undefined,
