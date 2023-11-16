@@ -1888,13 +1888,15 @@ const emojis = {
 };
 
 let textarea_value = '',
-    caret_offset_top,
-    caret_offset_left;
+    caret_offset_top: string | null = null,
+    caret_offset_left: string | null = null;
+
 // Bindings
-let textarea_element: HTMLTextAreaElement = document.querySelector(
+let textarea_element: HTMLTextAreaElement | null = document.querySelector(
         'textarea-body textarea'
-    ) as HTMLTextAreaElement,
-    text_editor_controls = document.querySelectorAll('.text-editor-controls');
+    ),
+    text_editor_controls = document.querySelectorAll('.text-editor-controls'),
+    emoji_popover: HTMLElement | null = document.querySelector('emoji-popover');
 
 const control_functions_arr = [
     bold_text,
@@ -1904,6 +1906,9 @@ const control_functions_arr = [
     code_text,
     hyperlink_text,
 ];
+
+// Add events
+textarea_element?.addEventListener('input', (event) => handle_input(event));
 
 text_editor_controls.forEach((control, index) => {
     control.addEventListener('click', () => {
@@ -1947,6 +1952,9 @@ async function handle_input(event) {
         // Caret
         caret_offset_top = null;
         caret_offset_left = null;
+
+        // Hide emoji popover
+        emoji_popover?.classList.add('hidden');
     } else {
         // Set first item active
         active_emoji_index = 0;
@@ -1984,6 +1992,18 @@ async function handle_input(event) {
             caret_offset_left = `calc(${
                 caret_position.left - textarea_position.left
             }px)`;
+
+            // Show emoji popover
+            emoji_popover?.dispatchEvent(
+                new CustomEvent('hyperscript:popover', {
+                    detail: {
+                        left: caret_offset_left,
+                        top: caret_offset_top,
+                        emoji_matches: emoji_matches,
+                    },
+                })
+            );
+            emoji_popover?.classList.remove('hidden');
         }
     }
 }
@@ -2319,18 +2339,12 @@ async function operate_on_selected_text({
     }
 }
 
-async function select_emoji({
-    element,
-    emoji_index,
-}: {
-    element: HTMLTextAreaElement;
-    emoji_index: number;
-}) {
+async function select_emoji({ element, emoji_index }) {
     const emoji_keyword = emoji_matches[emoji_index]?.keyword,
         emoji_code = `:${emoji_keyword}:`;
 
-    const selection_start = element?.selectionStart,
-        selection_end = element?.selectionEnd;
+    const selection_start = element.selectionStart,
+        selection_end = element.selectionEnd;
 
     const text_before_selection = textarea_value.substring(0, selection_start),
         text_after_selection = textarea_value.substring(selection_end);
