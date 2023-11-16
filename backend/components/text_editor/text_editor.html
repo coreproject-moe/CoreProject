@@ -5,7 +5,7 @@
         if(!navigator.onLine) return;
 
         const { emojis } = await import("{% static 'data/emojis.js' %}");
-        const caret = await import("{% static 'vendor/js/caret/caret.js' %}");
+        const { default: caret } = await import("{% static 'vendor/js/caret/caret.js' %}");
 
         let textarea_value = '',
             caret_offset_top,
@@ -98,7 +98,7 @@
                             'line-height'
                         );
 
-                    const caret_position = caret.default(element, element.selectionEnd);
+                    const caret_position = caret(element, element.selectionEnd);
 
                     // We need 2 times the line height to be actually effective.
                     caret_offset_top = `calc(${
