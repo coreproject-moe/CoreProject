@@ -30,7 +30,8 @@
         
         {% vite_asset 'js/htmx.ts' %}
         {% vite_asset 'js/hyperscript.ts' %}
-        {% vite_asset 'css/index.css' %}
+
+        <link rel='stylesheet' href='{% vite_asset_url 'css/index.css' %}'/>
 
         {% django_htmx_script %} 
         {% block head %}{% endblock %}
