@@ -23,13 +23,13 @@
         />
 
         {% vite_hmr_client %}
-        
+
         {% vite_asset 'js/vendor/htmx.ts' %}
         {% vite_asset 'js/vendor/hyperscript.ts' %}
 
         <link rel='stylesheet' href='{% vite_asset_url 'css/index.postcss' %}'/>
 
-        {% django_htmx_script %} 
+        {% django_htmx_script %}
         {% block head %}{% endblock %}
         <title>{% block title %}{% endblock %}</title>
     </head>
@@ -37,7 +37,7 @@
         {% block body %}{% endblock %} {% block js %}{% endblock %}
         <div id="toast" class="toast p-0 absolute bottom-[0.75vw] right-[0.75vw]"></div>
         <script>
-         
+
         </script>
     </body>
 </html>
