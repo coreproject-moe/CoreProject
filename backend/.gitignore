@@ -123,3 +123,6 @@ dmypy.json
 
 # Tattoo sucks
 *.rdb
+.python-version
+
+node_modules

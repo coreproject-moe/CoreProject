@@ -1,4 +1,4 @@
-{% load static tailwind_tags django_htmx %}
+{% load static tailwind_tags django_htmx django_vite %}
 <!DOCTYPE html>
 <html lang="en" data-theme="kokoro">
     <head>
@@ -26,7 +26,10 @@
             rel="stylesheet"
             href="{% static 'fonts/Kokoro/stylesheet.css' %}"
         />
-        <script src="{% static 'vendor/js/htmx/htmx.min.js'%}"></script>
+        {% vite_hmr_client %}
+        
+        {% vite_asset 'hyperscript' %}
+
         <script src="{% static 'vendor/js/hyperscript/hyperscript.min.js'%}"></script>
 
         {% django_htmx_script %} {% block head %}{% endblock %}

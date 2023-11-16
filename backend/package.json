@@ -1,0 +1,16 @@
+{
+    "name": "coreproject-backend",
+    "version": "1.0.0",
+    "description": "A modern anime streaming site",
+    "main": "",
+    "scripts": {
+        "dev": "vite",
+        "prod": "vite build"
+    },
+    "author": "",
+    "license": "AGPL-3.0-or-later",
+    "dependencies": {
+        "tailwindcss": "^3.3.5",
+        "vite": "^5.0.0"
+    }
+}

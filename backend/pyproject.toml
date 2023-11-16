@@ -72,6 +72,7 @@ django-htmx = ">=1.17.0"
 # Markdown
 markdown = ">=3.5"
 pymdown-extensions = {extras = ["pygments"], version = ">=10.3.1"}
+django-vite = "^3.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
