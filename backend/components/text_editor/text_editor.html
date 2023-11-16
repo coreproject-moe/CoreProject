@@ -113,7 +113,6 @@
     </textarea-navbar>
     <textarea-body class="block h-28 overflow-y-scroll md:h-[8vw]">
         <textarea
-            _="on paste call paste_text(event) end"
             spellcheck="true"
             class="h-full w-full resize-none border-none bg-secondary p-3 text-sm leading-tight text-surface-50 outline-none duration-300 ease-in-out placeholder:text-surface-200 focus:ring-0 md:p-[1vw] md:text-[1vw] md:leading-[1.5vw]"
             placeholder="Leave a comment"
@@ -127,4 +126,30 @@
             Learn more about <a class="underline" href="/">core editor</a>
         </div>
     </textarea-footer>
+    <emoji-popover
+        class="emoji_picker hidden absolute flex min-w-[12vw] flex-col divide-y divide-accent/10 overflow-hidden rounded-[0.5vw] bg-neutral text-[1vw]"
+        _="
+           on hyperscript:popover(left, top, emoji_matches)
+           set my *left to left
+           set my *top to top
+
+           js(me, emoji_matches)
+           const items_arr = [];
+           for (const emoji of Object.values(emoji_matches.slice(0, 5))) {
+           const item_html = `
+           <div class='flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:bg-primary-500 hover:text-white'>
+           <img
+           class='md:w-[1vw]'
+           src=${emoji.emoji}
+           >
+           <span>${emoji.keyword}</span>
+           </div>
+           `;
+           items_arr.push(item_html);
+           }
+           me.innerHTML = items_arr.join('');
+           end
+          "
+    >
+    </emoji-popover>
 </text-editor>
