@@ -22,19 +22,16 @@
             href="{% static 'images/favicon/favicon.svg' %}"
         />
 
-        <link
-            rel="stylesheet"
-            href="{% static 'fonts/Kokoro/stylesheet.css' %}"
-        />
         {% vite_hmr_client %}
         
-        {% vite_asset 'js/htmx.ts' %}
-        {% vite_asset 'js/hyperscript.ts' %}
+        {% vite_asset 'js/vendor/htmx.ts' %}
+        {% vite_asset 'js/vendor/hyperscript.ts' %}
 
-        <link rel='stylesheet' href='{% vite_asset_url 'css/index.css' %}'/>
+        <link rel='stylesheet' href='{% vite_asset_url 'css/index.postcss' %}'/>
 
         {% django_htmx_script %} 
         {% block head %}{% endblock %}
+        <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
         <title>{% block title %}{% endblock %}</title>
     </head>
     <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
