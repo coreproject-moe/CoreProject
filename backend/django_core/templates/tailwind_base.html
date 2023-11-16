@@ -31,16 +31,13 @@
 
         {% django_htmx_script %} 
         {% block head %}{% endblock %}
-        <script src="https://unpkg.com/hyperscript.org@0.9.12"></script>
         <title>{% block title %}{% endblock %}</title>
     </head>
     <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
         {% block body %}{% endblock %} {% block js %}{% endblock %}
         <div id="toast" class="toast p-0 absolute bottom-[0.75vw] right-[0.75vw]"></div>
         <script>
-            document.body.addEventListener('fetch:beforeRequest', (event) => {
-                event.detail.headers['X-CSRFToken'] = "{{ csrf_token }}";
-            });
+         
         </script>
     </body>
 </html>
