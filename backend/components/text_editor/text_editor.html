@@ -1,13 +1,13 @@
 <script>
     (async () => {
+        if(!navigator.onLine) return;
+        
         let textarea_value = '',
             caret_offset_top,
             caret_offset_left;
         // Bindings
         let textarea_element = document.querySelector('textarea-body textarea'),
-            text_editor_controls = document.querySelectorAll(
-                '.text-editor-controls'
-            );
+            text_editor_controls = document.querySelectorAll('.text-editor-controls');
 
         const control_functions_arr = [
             bold_text,
@@ -17,6 +17,7 @@
             code_text,
             hyperlink_text,
         ];
+
         text_editor_controls.forEach((control, index) => {
             control.addEventListener('click', () => {
                 control_functions_arr[index](textarea_element);
@@ -186,6 +187,7 @@
                 ending_operator: '**',
             });
         }
+
         async function italic_text() {
             await operate_on_selected_text({
                 element: textarea_element,
@@ -193,6 +195,7 @@
                 ending_operator: '_',
             });
         }
+
         async function code_text(element) {
             await operate_on_selected_text({
                 element: element,
@@ -200,6 +203,7 @@
                 ending_operator: '`',
             });
         }
+
         async function underline_text(element) {
             await operate_on_selected_text({
                 element: element,
@@ -207,6 +211,7 @@
                 ending_operator: '</u>',
             });
         }
+
         async function strike_text(element) {
             await operate_on_selected_text({
                 element: element,
@@ -214,6 +219,7 @@
                 ending_operator: '~~',
             });
         }
+
         async function hyperlink_text(element) {
             const selection_start = element.selectionStart,
                 selection_end = element.selectionEnd,
@@ -408,8 +414,9 @@
 
                 element.setSelectionRange(
                     selection_start,
-                    selection_end -
-                        (starting_operator.length + ending_operator.length)
+                    selection_end - (
+                        starting_operator.length + ending_operator.length
+                    )
                 );
             } else {
                 /**
@@ -432,9 +439,7 @@
             }
         }
 
-        async function select_emoji({ emoji_index, element }) {
-            const textarea_element = element;
-
+        async function select_emoji({ emoji_index }) {
             const emoji_keyword = emoji_matches[emoji_index]?.keyword,
                 emoji_code = `:${emoji_keyword}:`;
 
