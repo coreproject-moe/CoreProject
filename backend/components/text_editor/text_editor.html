@@ -390,14 +390,14 @@
        }
        end
 
-       on hyperscript:insert_text(target, text)
-       js(target, text)
+       on hyperscript:insert_text(text)
+       js(textarea_element, text)
        /**
        * Thanks stackoverflow guy and mozilla dev ( Michal Čaplygin |myf| )
        * Stackoverflow : https://stackoverflow.com/a/56509046
        * Mozilla : https://bugzilla.mozilla.org/show_bug.cgi?id=1523270
        */
-       target.select();
+       textarea_element.select();
        document.execCommand('insertText', false, text);
        end
       "
