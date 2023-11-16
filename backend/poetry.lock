@@ -606,16 +606,17 @@ files = [
 
 [[package]]
 name = "django-browser-reload"
-version = "1.12.0"
+version = "1.12.1"
 description = "Automatically reload your browser in development."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django_browser_reload-1.12.0-py3-none-any.whl", hash = "sha256:6c10b4b59a5aa7a412284d7c909fb5b80199e98a488f5b24da5c49b090d1ef3f"},
-    {file = "django_browser_reload-1.12.0.tar.gz", hash = "sha256:2dc98c752b55d22db9c11fbc0274c16160ce4dcd67ef0ef294135ab57d711435"},
+    {file = "django-browser-reload-1.12.1.tar.gz", hash = "sha256:875b6bd01db13380522ccb4ae75871a2edeae74bb5ac92bf32eb76763d575d86"},
+    {file = "django_browser_reload-1.12.1-py3-none-any.whl", hash = "sha256:08b457f1b6599bf782d4d2ecdfb0897d6fc936ac4035060d0269c2af5ef4ef7a"},
 ]
 
 [package.dependencies]
+asgiref = ">=3.6"
 Django = ">=3.2"
 
 [[package]]
@@ -2462,4 +2463,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "56dc7bb090eb0820522d87df17258a643dee3f0124e4d0022b793a581736c81d"
+content-hash = "bb0068006031fcdcd4f187db25e1408e4ab8a8177041099aaff92779d36654d6"
