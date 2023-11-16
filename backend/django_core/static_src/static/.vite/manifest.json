@@ -1,0 +1,21 @@
+{
+  "__commonjsHelpers-_koz0vxr.js": {
+    "file": "_commonjsHelpers-_koz0vxr.js"
+  },
+  "js/htmx.js": {
+    "file": "assets/htmx-qHz6VBj4.js",
+    "imports": [
+      "__commonjsHelpers-_koz0vxr.js"
+    ],
+    "isEntry": true,
+    "src": "js/htmx.js"
+  },
+  "js/hyperscript.js": {
+    "file": "assets/hyperscript-bhHd7CQf.js",
+    "imports": [
+      "__commonjsHelpers-_koz0vxr.js"
+    ],
+    "isEntry": true,
+    "src": "js/hyperscript.js"
+  }
+}

@@ -1,7 +1,0 @@
-{
-    "static_src/js/htmx.js": {
-        "file": "assets/htmx-okKVHXwV.js",
-        "isEntry": true,
-        "src": "static_src/js/htmx.js"
-    }
-}

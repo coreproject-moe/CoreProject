@@ -28,9 +28,8 @@
         />
         {% vite_hmr_client %}
         
-        {% vite_asset 'htmx' %}
-
-        <script src="{% static 'vendor/js/hyperscript/hyperscript.min.js'%}"></script>
+        {% vite_asset 'js/htmx.js' %}
+        {% vite_asset 'js/hyperscript.js' %}
 
         {% django_htmx_script %} {% block head %}{% endblock %}
         <title>{% block title %}{% endblock %}</title>

@@ -104,7 +104,7 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_bootstrap4",
     # Vite Plugin
-        'django_vite',
+    "django_vite",
     # Models
     "apps.pages",
     "apps.anime",
@@ -411,6 +411,7 @@ import re
 # Vite generates files with 8 hash digits
 # http://whitenoise.evans.io/en/stable/django.html#WHITENOISE_IMMUTABLE_FILE_TEST
 
+
 def immutable_file_test(path, url):
     # Match filename with 12 hex digits before the extension
     # e.g. app.db8f2edc0c8a.js
@@ -419,10 +420,10 @@ def immutable_file_test(path, url):
 
 WHITENOISE_IMMUTABLE_FILE_TEST = immutable_file_test
 DJANGO_VITE = {
-"default": {
-    "dev_mode": DEBUG,
-    "dev_server_port":5173
-  },
+    "default": {
+        "dev_mode": DEBUG,
+        "dev_server_port": 5173,
+    },
 }
 # Where ViteJS assets are built.
-DJANGO_VITE_ASSETS_PATH = BASE_DIR / "static" 
+DJANGO_VITE_ASSETS_PATH = BASE_DIR / "static"
