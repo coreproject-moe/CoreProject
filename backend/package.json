@@ -17,6 +17,7 @@
         "autoprefixer": "^10.4.16",
         "cssnano": "^6.0.1",
         "daisyui": "^4.1.1",
+        "easytimer.js": "^4.6.0",
         "htmx.org": "^1.9.8",
         "hyperscript.org": "^0.9.12",
         "postcss": "^8.4.31",
