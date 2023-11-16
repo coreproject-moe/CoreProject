@@ -119,7 +119,7 @@
                     new CustomEvent('hyperscript:popover', { detail: {
                         show_emoji_picker: show_emoji_picker,
                         left: caret_offset_left,
-                        top: caret_offset_top, 
+                        top: caret_offset_top,
                     }}));
                 emoji_popover.classList.remove('hidden');
             }
@@ -637,10 +637,10 @@
     <emoji-popover
         class="emoji_picker hidden absolute flex min-w-[12vw] flex-col divide-y divide-accent/10 overflow-hidden rounded-[0.5vw] bg-neutral text-[1vw]"
         _="
-        on hyperscript:popover(left, top)
-            set my *left to left
-            set my *top to top
-        "
+           on hyperscript:popover(left, top)
+           set my *left to left
+           set my *top to top
+          "
     >
         <div
             role="button"
