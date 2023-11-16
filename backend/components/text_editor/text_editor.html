@@ -1,338 +1,494 @@
 <script>
-    let textarea_value = "",
-        caret_offset_top, caret_offset_left;
-    // Bindings
-    let textarea_element = document.querySelector('textarea-body textarea'),
-        text_editor_controls = document.querySelectorAll('.text-editor-controls');
+    (async () => {
+        let textarea_value = '',
+            caret_offset_top,
+            caret_offset_left;
+        // Bindings
+        let textarea_element = document.querySelector('textarea-body textarea'),
+            text_editor_controls = document.querySelectorAll(
+                '.text-editor-controls'
+            );
 
-    const control_functions_arr = [bold_text, italic_text, underline_text, strike_text, code_text, hyperlink_text];
-    text_editor_controls.forEach((control, index) => {
-        control.addEventListener("click", () => {
-            control_functions_arr[index](textarea_element);
+        const control_functions_arr = [
+            bold_text,
+            italic_text,
+            underline_text,
+            strike_text,
+            code_text,
+            hyperlink_text,
+        ];
+        text_editor_controls.forEach((control, index) => {
+            control.addEventListener('click', () => {
+                control_functions_arr[index](textarea_element);
+            });
         });
-    });
 
-    let emoji_matches,
-        show_emoji_picker = false,
-        active_emoji_index,
-        SHOWN_EMOJI_LIMIT = 5;
+        let emoji_matches,
+            show_emoji_picker = false,
+            active_emoji_index,
+            SHOWN_EMOJI_LIMIT = 5;
 
-    // Hanlders
-    async function handle_blur() {
-        emoji_matches = [];
-        show_emoji_picker = false;
-
-        caret_offset_top = null;
-        caret_offset_left = null;
-    }
-
-    async function handle_input(event) {
-        const element = event.target;
-        const input_text = element.value;
-        let last_typed_word;
-
-        // to get last typed word even its in middle
-        const selection_start = element.selectionStart;
-        if (typeof selection_start !== "number") return;
-
-        const words_before_caret = input_text.substring(0, selection_start);
-        const words_list = words_before_caret.split(/[\s\n]/);
-        last_typed_word = words_list.at(-1) ?? "";
-
-        // check if last_typed_word starts with ":" that may or may not have subsequent word characters
-        const emoji_code = last_typed_word?.match(/^:(\S*)$/);
-        if (!emoji_code) {
+        // Hanlders
+        async function handle_blur() {
             emoji_matches = [];
             show_emoji_picker = false;
 
-            // Caret
             caret_offset_top = null;
             caret_offset_left = null;
-        } else {
-            // Set first item active
-            active_emoji_index = 0;
-
-            show_emoji_picker = true;
-            emoji_matches = [];
-
-            for (const item of Object.entries(emojis).sort()) {
-                const keyword = item[0];
-                const emoji = item[1];
-                if (keyword.includes(emoji_code[1])) {
-                    emoji_matches.push({
-                        emoji: emoji,
-                        keyword: keyword
-                    });
-                }
-            }
-
-            // Popover settings
-            if (caret_offset_left === null && caret_offset_top == null) {
-                const textarea_position = element.getBoundingClientRect();
-
-                // CSS
-                const line_height = getComputedStyle(element).getPropertyValue("line-height");
-
-                const caret_position = offset(element);
-
-                // We need 2 times the line height to be actually effective.
-                caret_offset_top = `calc(${caret_position.top - textarea_position.top + caret_position.height}px + (2 * ${line_height}))`;
-                caret_offset_left = `calc(${caret_position.left - textarea_position.left}px)`;
-            }
-        }
-    }
-
-    async function handle_keydown(event) {
-        /** Emoji specific codes */
-        if (show_emoji_picker) {
-            switch (event.key.toLowerCase()) {
-                case "arrowup": {
-                    event.preventDefault();
-                    active_emoji_index = (active_emoji_index - 1 + SHOWN_EMOJI_LIMIT) % SHOWN_EMOJI_LIMIT;
-                    break;
-                }
-                case "arrowdown": {
-                    event.preventDefault();
-                    active_emoji_index = (active_emoji_index + 1) % SHOWN_EMOJI_LIMIT;
-                    break;
-                }
-                case "enter": {
-                    event.preventDefault();
-                    await select_emoji({ element: event.currentTarget, emoji_index: active_emoji_index });
-                    break;
-                }
-            }
         }
 
-        /**
-         * Editor specific funtions
-         * Triggered by `ctrlKey`
-         */
-        if (event.ctrlKey) {
-            switch (event.key.toLowerCase()) {
-                case "b": {
-                    /** Bold Functionality */
-                    event.preventDefault();
-                    await bold_text(event.target);
-                    break;
-                }
-                case "i": {
-                    /** Italic functionality */
-                    event.preventDefault();
-                    await italic_text(event.target);
-                    break;
-                }
-                case "e": {
-                    /** Code functionality */
-                    event.preventDefault();
-                    await code_text(event.target);
-                    break;
-                }
-                case "u": {
-                    /** Underline functionality */
-                    event.preventDefault();
-                    await underline_text(event.target);
-                    break;
-                }
-                case "k": {
-                    /** Hyperlink functionality */
-                    event.preventDefault();
-                    await hyperlink_text(event.target);
-                    break;
-                }
-            }
-        }
+        async function handle_input(event) {
+            const element = event.target;
+            const input_text = element.value;
+            let last_typed_word;
 
-        if (event.ctrlKey && event.shiftKey) {
-            switch (event.key.toLowerCase()) {
-                case "x":
-                    event.preventDefault();
-                    await strike_text(event.target);
-                    break;
-            }
-        }
-    }
-    // Editor specific functions
-    async function bold_text(element) {
-        await operate_on_selected_text({
-            element: element,
-            starting_operator: "**",
-            ending_operator: "**"
-        });
-    }
-    async function italic_text() {
-        await operate_on_selected_text({
-            element: textarea_element,
-            starting_operator: "_",
-            ending_operator: "_"
-        });
-    }
-    async function code_text(element) {
-        await operate_on_selected_text({
-            element: element,
-            starting_operator: "`",
-            ending_operator: "`"
-        });
-    }
-    async function underline_text(element) {
-        await operate_on_selected_text({
-            element: element,
-            starting_operator: "<u>",
-            ending_operator: "</u>"
-        });
-    }
-    async function strike_text(element) {
-        await operate_on_selected_text({
-            element: element,
-            starting_operator: "~~",
-            ending_operator: "~~"
-        });
-    }
-    async function hyperlink_text(element) {
-        const selection_start = element.selectionStart,
-              selection_end = element.selectionEnd,
-              selection_text = element.value.substring(selection_start, selection_end);
+            // to get last typed word even its in middle
+            const selection_start = element.selectionStart;
+            if (typeof selection_start !== 'number') return;
 
-        // Handle use cases
-        if (element.value.substring(selection_start - 3, selection_start) == "[](" && element.value.substring(selection_end, selection_end + 1) == ")") {
-            /**
-             * [](||) -> ||
-             */
-            element.focus();
-            element.setSelectionRange(selection_start - 3, selection_end + 1);
-            document.execCommand("delete");
-        } else {
-            const replacement_text = `[${selection_text}]()`;
-            await insert_text({ target: element, text: element.value.substring(0, selection_start) + replacement_text + element.value.substring(selection_end) });
-            element.setSelectionRange(selection_start + selection_text.length + 3, selection_start + selection_text.length + 3);
-        }
-    }
+            const words_before_caret = input_text.substring(0, selection_start);
+            const words_list = words_before_caret.split(/[\s\n]/);
+            last_typed_word = words_list.at(-1) ?? '';
 
-    async function paste_text(event) {
-        event.preventDefault();
-        const element = event.currentTarget;
+            // check if last_typed_word starts with ":" that may or may not have subsequent word characters
+            const emoji_code = last_typed_word?.match(/^:(\S*)$/);
+            if (!emoji_code) {
+                emoji_matches = [];
+                show_emoji_picker = false;
 
-        const selection_start = element.selectionStart,
-              selection_end = element.selectionEnd,
-              selection_text = element.value.substring(selection_start, selection_end);
-
-        const clipboard_data = event.clipboardData?.getData("text") ?? "",
-              clipboard_data_contains_url = is_valid_url(clipboard_data);
-
-        if (selection_text && clipboard_data_contains_url) {
-            const replacement_text = `[${selection_text}](${clipboard_data})`;
-            await insert_text({ target: element, text: element.value.substring(0, selection_start) + replacement_text + element.value.substring(selection_end) });
-            element.setSelectionRange(selection_start + replacement_text.length, selection_start + replacement_text.length);
-        } else {
-            const replacement_text = clipboard_data;
-            await insert_text({ target: element, text: element.value.substring(0, selection_start) + replacement_text + element.value.substring(selection_end) });
-        }
-    }
-
-    // Functions
-    async function insert_text({ target, text }) {
-        /**
-         * Thanks stackoverflow guy and mozilla dev ( Michal Čaplygin |myf| )
-         * Stackoverflow : https://stackoverflow.com/a/56509046
-         * Mozilla : https://bugzilla.mozilla.org/show_bug.cgi?id=1523270
-         */
-        target.select();
-        document.execCommand("insertText", false, text);
-    }
-
-    async function operate_on_selected_text({ element, starting_operator, ending_operator }) {
-        element.focus();
-
-        const selection_start = element.selectionStart,
-              selection_end = element.selectionEnd,
-              selection_text = element.value.substring(selection_start, selection_end);
-
-        const regex_pattern_for_operator = new RegExp("^" + starting_operator.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&") + "|" + ending_operator.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&") + "$", "g");
-
-        // Handle use cases
-        if (element.value.substring(selection_start - starting_operator.length, selection_start) == starting_operator && element.value.substring(selection_end, selection_end + ending_operator.length) == ending_operator) {
-            if (selection_text) {
-                /**
-                 * `<starting_operator>|hello|<ending_operator>` -> `|hello|`
-                 * `_|hello|_` -> `|hello|`
-                 */
-                const replacement_text = element.value.substring(selection_start - starting_operator.length, selection_end + ending_operator.length).replace(regex_pattern_for_operator, "");
-                await insert_text({ target: element, text: element.value.substring(0, selection_start - starting_operator.length) + replacement_text + element.value.substring(selection_end + ending_operator.length) });
-
-                element.setSelectionRange(selection_start - starting_operator.length, selection_end - starting_operator.length);
+                // Caret
+                caret_offset_top = null;
+                caret_offset_left = null;
             } else {
+                // Set first item active
+                active_emoji_index = 0;
+
+                show_emoji_picker = true;
+                emoji_matches = [];
+
+                for (const item of Object.entries(emojis).sort()) {
+                    const keyword = item[0];
+                    const emoji = item[1];
+                    if (keyword.includes(emoji_code[1])) {
+                        emoji_matches.push({
+                            emoji: emoji,
+                            keyword: keyword,
+                        });
+                    }
+                }
+
+                // Popover settings
+                if (caret_offset_left === null && caret_offset_top == null) {
+                    const textarea_position = element.getBoundingClientRect();
+
+                    // CSS
+                    const line_height =
+                        getComputedStyle(element).getPropertyValue(
+                            'line-height'
+                        );
+
+                    const caret_position = offset(element);
+
+                    // We need 2 times the line height to be actually effective.
+                    caret_offset_top = `calc(${
+                        caret_position.top -
+                        textarea_position.top +
+                        caret_position.height
+                    }px + (2 * ${line_height}))`;
+                    caret_offset_left = `calc(${
+                        caret_position.left - textarea_position.left
+                    }px)`;
+                }
+            }
+        }
+
+        async function handle_keydown(event) {
+            /** Emoji specific codes */
+            if (show_emoji_picker) {
+                switch (event.key.toLowerCase()) {
+                    case 'arrowup': {
+                        event.preventDefault();
+                        active_emoji_index =
+                            (active_emoji_index - 1 + SHOWN_EMOJI_LIMIT) %
+                            SHOWN_EMOJI_LIMIT;
+                        break;
+                    }
+                    case 'arrowdown': {
+                        event.preventDefault();
+                        active_emoji_index =
+                            (active_emoji_index + 1) % SHOWN_EMOJI_LIMIT;
+                        break;
+                    }
+                    case 'enter': {
+                        event.preventDefault();
+                        await select_emoji({
+                            element: event.currentTarget,
+                            emoji_index: active_emoji_index,
+                        });
+                        break;
+                    }
+                }
+            }
+
+            /**
+             * Editor specific funtions
+             * Triggered by `ctrlKey`
+             */
+            if (event.ctrlKey) {
+                switch (event.key.toLowerCase()) {
+                    case 'b': {
+                        /** Bold Functionality */
+                        event.preventDefault();
+                        await bold_text(event.target);
+                        break;
+                    }
+                    case 'i': {
+                        /** Italic functionality */
+                        event.preventDefault();
+                        await italic_text(event.target);
+                        break;
+                    }
+                    case 'e': {
+                        /** Code functionality */
+                        event.preventDefault();
+                        await code_text(event.target);
+                        break;
+                    }
+                    case 'u': {
+                        /** Underline functionality */
+                        event.preventDefault();
+                        await underline_text(event.target);
+                        break;
+                    }
+                    case 'k': {
+                        /** Hyperlink functionality */
+                        event.preventDefault();
+                        await hyperlink_text(event.target);
+                        break;
+                    }
+                }
+            }
+
+            if (event.ctrlKey && event.shiftKey) {
+                switch (event.key.toLowerCase()) {
+                    case 'x':
+                        event.preventDefault();
+                        await strike_text(event.target);
+                        break;
+                }
+            }
+        }
+        // Editor specific functions
+        async function bold_text(element) {
+            await operate_on_selected_text({
+                element: element,
+                starting_operator: '**',
+                ending_operator: '**',
+            });
+        }
+        async function italic_text() {
+            await operate_on_selected_text({
+                element: textarea_element,
+                starting_operator: '_',
+                ending_operator: '_',
+            });
+        }
+        async function code_text(element) {
+            await operate_on_selected_text({
+                element: element,
+                starting_operator: '`',
+                ending_operator: '`',
+            });
+        }
+        async function underline_text(element) {
+            await operate_on_selected_text({
+                element: element,
+                starting_operator: '<u>',
+                ending_operator: '</u>',
+            });
+        }
+        async function strike_text(element) {
+            await operate_on_selected_text({
+                element: element,
+                starting_operator: '~~',
+                ending_operator: '~~',
+            });
+        }
+        async function hyperlink_text(element) {
+            const selection_start = element.selectionStart,
+                selection_end = element.selectionEnd,
+                selection_text = element.value.substring(
+                    selection_start,
+                    selection_end
+                );
+
+            // Handle use cases
+            if (
+                element.value.substring(selection_start - 3, selection_start) ==
+                    '[](' &&
+                element.value.substring(selection_end, selection_end + 1) == ')'
+            ) {
                 /**
-                 * `<starting_operator>||<ending_operator>` -> `||`
-                 * `_||_` -> `||`
+                 * [](||) -> ||
                  */
                 element.focus();
-                element.setSelectionRange(selection_start - starting_operator.length, selection_end + ending_operator.length);
-                document.execCommand("delete", false);
+                element.setSelectionRange(
+                    selection_start - 3,
+                    selection_end + 1
+                );
+                document.execCommand('delete');
+            } else {
+                const replacement_text = `[${selection_text}]()`;
+                await insert_text({
+                    target: element,
+                    text:
+                        element.value.substring(0, selection_start) +
+                        replacement_text +
+                        element.value.substring(selection_end),
+                });
+                element.setSelectionRange(
+                    selection_start + selection_text.length + 3,
+                    selection_start + selection_text.length + 3
+                );
             }
-        } else if (element.value.substring(selection_start, selection_start + starting_operator.length) == starting_operator && element.value.substring(selection_end - ending_operator.length, selection_end) == ending_operator) {
-            /**
-             * `|<starting_opeator>hello<ending_operator>|` -> `|hello|`
-             * `|_hello_|` -> `|hello|`
-             */
-
-            const replacement_text = element.value.substring(selection_start - starting_operator.length, selection_end + ending_operator.length).replace(regex_pattern_for_operator, '');
-            await insert_text({ target: element, text: element.value.substring(0, selection_start) + replacement_text + element.value.substring(selection_end) });
-
-            element.setSelectionRange(selection_start, selection_end - (starting_operator.length + ending_operator.length));
-        } else {
-            /**
-             * `|hello|` -> `<operator>|hello|<operator>`
-             * `|hello|` -> `_|hello|_`
-             */
-            const replacement_text = starting_operator + selection_text + ending_operator;
-            await insert_text({ target: element, text: element.value.substring(0, selection_start) + replacement_text + element.value.substring(selection_end) });
-            element.setSelectionRange(selection_start + starting_operator.length, selection_end + starting_operator.length);
         }
-    }
 
-    async function select_emoji({ emoji_index, element }) {
-        const textarea_element = element;
+        async function paste_text(event) {
+            event.preventDefault();
+            const element = event.currentTarget;
 
-        const emoji_keyword = emoji_matches[emoji_index]?.keyword,
-              emoji_code = `:${emoji_keyword}:`;
+            const selection_start = element.selectionStart,
+                selection_end = element.selectionEnd,
+                selection_text = element.value.substring(
+                    selection_start,
+                    selection_end
+                );
 
-        const selection_start = textarea_element.selectionStart,
-              selection_end = textarea_element.selectionEnd;
+            const clipboard_data = event.clipboardData?.getData('text') ?? '',
+                clipboard_data_contains_url = is_valid_url(clipboard_data);
 
-        const text_before_selection = textarea_value.substring(0, selection_start),
-              text_after_selection = textarea_value.substring(selection_end);
+            if (selection_text && clipboard_data_contains_url) {
+                const replacement_text = `[${selection_text}](${clipboard_data})`;
+                await insert_text({
+                    target: element,
+                    text:
+                        element.value.substring(0, selection_start) +
+                        replacement_text +
+                        element.value.substring(selection_end),
+                });
+                element.setSelectionRange(
+                    selection_start + replacement_text.length,
+                    selection_start + replacement_text.length
+                );
+            } else {
+                const replacement_text = clipboard_data;
+                await insert_text({
+                    target: element,
+                    text:
+                        element.value.substring(0, selection_start) +
+                        replacement_text +
+                        element.value.substring(selection_end),
+                });
+            }
+        }
 
-        // replace last word before text selection with emoji code
-        const updated_text_before_selection = text_before_selection.replace(/\S+$/, emoji_code);
-        await insert_text({ target: textarea_element, text: `${updated_text_before_selection} ${text_after_selection}` });
+        // Functions
+        async function insert_text({ target, text }) {
+            /**
+             * Thanks stackoverflow guy and mozilla dev ( Michal Čaplygin |myf| )
+             * Stackoverflow : https://stackoverflow.com/a/56509046
+             * Mozilla : https://bugzilla.mozilla.org/show_bug.cgi?id=1523270
+             */
+            target.select();
+            document.execCommand('insertText', false, text);
+        }
 
-        // set caret at the end of inserted emoji_code
-        const caret_position = updated_text_before_selection.length + 1;
-        textarea_element.setSelectionRange(caret_position, caret_position);
+        async function operate_on_selected_text({
+            element,
+            starting_operator,
+            ending_operator,
+        }) {
+            element.focus();
 
-        // close emoji picker
-        show_emoji_picker = false;
-        emoji_matches = [];
+            const selection_start = element.selectionStart,
+                selection_end = element.selectionEnd,
+                selection_text = element.value.substring(
+                    selection_start,
+                    selection_end
+                );
 
-        // Caret controls
-        caret_offset_left = null;
-        caret_offset_top = null;
-    }
+            const regex_pattern_for_operator = new RegExp(
+                '^' +
+                    starting_operator.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&') +
+                    '|' +
+                    ending_operator.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&') +
+                    '$',
+                'g'
+            );
 
-    function is_valid_url(url_string) {
-        // Credit : https://stackoverflow.com/a/43467144
-        let url;
-        try {
-            url = new URL(url_string);
-        } catch (_) {
-            return false;
-        };
-        return url.protocol === "http:" || url.protocol === "https:";
-    };
+            // Handle use cases
+            if (
+                element.value.substring(
+                    selection_start - starting_operator.length,
+                    selection_start
+                ) == starting_operator &&
+                element.value.substring(
+                    selection_end,
+                    selection_end + ending_operator.length
+                ) == ending_operator
+            ) {
+                if (selection_text) {
+                    /**
+                     * `<starting_operator>|hello|<ending_operator>` -> `|hello|`
+                     * `_|hello|_` -> `|hello|`
+                     */
+                    const replacement_text = element.value
+                        .substring(
+                            selection_start - starting_operator.length,
+                            selection_end + ending_operator.length
+                        )
+                        .replace(regex_pattern_for_operator, '');
+                    await insert_text({
+                        target: element,
+                        text:
+                            element.value.substring(
+                                0,
+                                selection_start - starting_operator.length
+                            ) +
+                            replacement_text +
+                            element.value.substring(
+                                selection_end + ending_operator.length
+                            ),
+                    });
+
+                    element.setSelectionRange(
+                        selection_start - starting_operator.length,
+                        selection_end - starting_operator.length
+                    );
+                } else {
+                    /**
+                     * `<starting_operator>||<ending_operator>` -> `||`
+                     * `_||_` -> `||`
+                     */
+                    element.focus();
+                    element.setSelectionRange(
+                        selection_start - starting_operator.length,
+                        selection_end + ending_operator.length
+                    );
+                    document.execCommand('delete', false);
+                }
+            } else if (
+                element.value.substring(
+                    selection_start,
+                    selection_start + starting_operator.length
+                ) == starting_operator &&
+                element.value.substring(
+                    selection_end - ending_operator.length,
+                    selection_end
+                ) == ending_operator
+            ) {
+                /**
+                 * `|<starting_opeator>hello<ending_operator>|` -> `|hello|`
+                 * `|_hello_|` -> `|hello|`
+                 */
+
+                const replacement_text = element.value
+                    .substring(
+                        selection_start - starting_operator.length,
+                        selection_end + ending_operator.length
+                    )
+                    .replace(regex_pattern_for_operator, '');
+                await insert_text({
+                    target: element,
+                    text:
+                        element.value.substring(0, selection_start) +
+                        replacement_text +
+                        element.value.substring(selection_end),
+                });
+
+                element.setSelectionRange(
+                    selection_start,
+                    selection_end -
+                        (starting_operator.length + ending_operator.length)
+                );
+            } else {
+                /**
+                 * `|hello|` -> `<operator>|hello|<operator>`
+                 * `|hello|` -> `_|hello|_`
+                 */
+                const replacement_text =
+                    starting_operator + selection_text + ending_operator;
+                await insert_text({
+                    target: element,
+                    text:
+                        element.value.substring(0, selection_start) +
+                        replacement_text +
+                        element.value.substring(selection_end),
+                });
+                element.setSelectionRange(
+                    selection_start + starting_operator.length,
+                    selection_end + starting_operator.length
+                );
+            }
+        }
+
+        async function select_emoji({ emoji_index, element }) {
+            const textarea_element = element;
+
+            const emoji_keyword = emoji_matches[emoji_index]?.keyword,
+                emoji_code = `:${emoji_keyword}:`;
+
+            const selection_start = textarea_element.selectionStart,
+                selection_end = textarea_element.selectionEnd;
+
+            const text_before_selection = textarea_value.substring(
+                    0,
+                    selection_start
+                ),
+                text_after_selection = textarea_value.substring(selection_end);
+
+            // replace last word before text selection with emoji code
+            const updated_text_before_selection = text_before_selection.replace(
+                /\S+$/,
+                emoji_code
+            );
+            await insert_text({
+                target: textarea_element,
+                text: `${updated_text_before_selection} ${text_after_selection}`,
+            });
+
+            // set caret at the end of inserted emoji_code
+            const caret_position = updated_text_before_selection.length + 1;
+            textarea_element.setSelectionRange(caret_position, caret_position);
+
+            // close emoji picker
+            show_emoji_picker = false;
+            emoji_matches = [];
+
+            // Caret controls
+            caret_offset_left = null;
+            caret_offset_top = null;
+        }
+
+        function is_valid_url(url_string) {
+            // Credit : https://stackoverflow.com/a/43467144
+            let url;
+            try {
+                url = new URL(url_string);
+            } catch (_) {
+                return false;
+            }
+            return url.protocol === 'http:' || url.protocol === 'https:';
+        }
+    })();
 </script>
 
-<text-editor class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw]">
-    <textarea-navbar class="flex h-8 items-center justify-between rounded-t-lg md:h-[2.5vw] md:rounded-t-[0.75vw]">
+<text-editor
+    class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw]"
+>
+    <textarea-navbar
+        class="flex h-8 items-center justify-between rounded-t-lg md:h-[2.5vw] md:rounded-t-[0.75vw]"
+    >
         <div class="btn-group w-full h-full overflow-hidden p-[0.15vw]">
             <button
                 type="button"
@@ -343,7 +499,9 @@
                    then add .bg-neutral-focus to me
                    end
                   "
-            >edit</button>
+            >
+                edit
+            </button>
             <button
                 type="button"
                 class="textarea-navbar-type-btn min-h-full h-8 px-5 text-xs capitalize leading-[1.5vw] transition-colors duration-100 md:h-[2.5vw] md:px-[1.5vw] md:text-[1vw]"
@@ -353,48 +511,82 @@
                    then add .bg-neutral-focus to me
                    end
                   "
-            >preview</button>
-        </div>
-        <div class="flex place-items-center gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]">
-            <div
-                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add bold text, <Ctrl + b>"
             >
-                <button class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
+                preview
+            </button>
+        </div>
+        <div
+            class="flex place-items-center gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]"
+        >
+            <div
+                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]"
+                data-tip="Add bold text, <Ctrl + b>"
+            >
+                <button
+                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]"
+                    type="button"
+                    aria-label="bold"
+                >
                     {% include "icons/bold.html" %}
                 </button>
             </div>
             <div
-                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add italic text, <Ctrl + i>"
+                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]"
+                data-tip="Add italic text, <Ctrl + i>"
             >
-                <button class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
+                <button
+                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]"
+                    type="button"
+                    aria-label="bold"
+                >
                     {% include "icons/italic.html" %}
                 </button>
             </div>
             <div
-                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add underline text, <Ctrl + i>"
+                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]"
+                data-tip="Add underline text, <Ctrl + i>"
             >
-                <button class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
+                <button
+                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]"
+                    type="button"
+                    aria-label="bold"
+                >
                     {% include "icons/underline.html" %}
                 </button>
             </div>
             <div
-                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add strikethrough text, <Ctrl + Shift + x>"
+                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]"
+                data-tip="Add strikethrough text, <Ctrl + Shift + x>"
             >
-                <button class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
+                <button
+                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]"
+                    type="button"
+                    aria-label="bold"
+                >
                     {% include "icons/strike.html" %}
                 </button>
             </div>
             <div
-                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add code text, <Ctrl + e>"
+                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]"
+                data-tip="Add code text, <Ctrl + e>"
             >
-                <button class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
+                <button
+                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]"
+                    type="button"
+                    aria-label="bold"
+                >
                     {% include "icons/code.html" %}
                 </button>
             </div>
             <div
-                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add hyperlink text, <Ctrl + k>"
+                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]"
+                data-tip="Add hyperlink text, <Ctrl + k>"
             >
-                <button class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
+                <button
+                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]"
+                    type="button"
+                    aria-label="bold"
+                >
                     {% include "icons/hyperlink.html" %}
                 </button>
             </div>
@@ -408,8 +600,12 @@
             placeholder="Leave a comment"
         ></textarea>
     </textarea-body>
-    <textarea-footer class="flex justify-between px-4 py-2 text-[0.65rem] font-thin leading-[1.5vw] text-surface-200 md:px-[1vw] md:py-[0.1vw] md:text-[0.75vw]">
+    <textarea-footer
+        class="flex justify-between px-4 py-2 text-[0.65rem] font-thin leading-[1.5vw] text-surface-200 md:px-[1vw] md:py-[0.1vw] md:text-[0.75vw]"
+    >
         <div></div>
-        <div>Learn more about <a class="underline" href="/">core editor</a></div>
+        <div>
+            Learn more about <a class="underline" href="/">core editor</a>
+        </div>
     </textarea-footer>
 </text-editor>
