@@ -338,55 +338,59 @@
        set global textarea_element to first <textarea/> in me
        end
 
-       on hyperscript:operate_on_selected_text(starting_operator, ending_operator)
-       js(me, starting_operator, ending_operator)
-       console.log(me)
-       me.focus();
+       on hyperscript:bold_text
+       send hyperscript:operate_on_selected_text(starting_operator:'**', ending_operator:'**') to me
+       end
 
-       const selection_start = me.selectionStart,
-       selection_end = me.selectionEnd,
-       selection_text = me.value.substring(selection_start, selection_end);
+       on hyperscript:operate_on_selected_text(starting_operator, ending_operator)
+       js(me, textarea_element, starting_operator, ending_operator)
+       textarea_element.focus();
+
+       const selection_start = textarea_element.selectionStart,
+       selection_end = textarea_element.selectionEnd,
+       selection_text = textarea_element.value.substring(selection_start, selection_end);
 
        const regex_pattern_for_operator = new RegExp('^' + starting_operator.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&') + '|' + ending_operator.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&') + '$', 'g');
 
        // Handle use cases
-       if (me.value.substring(selection_start - starting_operator.length, selection_start) == starting_operator && me.value.substring(selection_end, selection_end + ending_operator.length) == ending_operator) {
+       if (textarea_element.value.substring(selection_start - starting_operator.length, selection_start) == starting_operator && textarea_element.value.substring(selection_end, selection_end + ending_operator.length) == ending_operator) {
        if (selection_text) {
        /**
        * `<starting_operator>|hello|<ending_operator>` -> `|hello|`
        * `_|hello|_` -> `|hello|`
        */
-       const replacement_text = me.value.substring(selection_start - starting_operator.length, selection_end + ending_operator.length).replace(regex_pattern_for_operator, '');
-            {# await insert_text({ target: me, text: me.value.substring(0, selection_start - starting_operator.length) + replacement_text + me.value.substring(selection_end + ending_operator.length) }); #}
+       const replacement_text = textarea_element.value.substring(selection_start - starting_operator.length, selection_end + ending_operator.length).replace(regex_pattern_for_operator, '');
+        me.dispatchEvent(new CustomEvent('hyperscript:insert_text', { detail : { text: textarea_element.value.substring(0, selection_start - starting_operator.length) + replacement_text + textarea_element.value.substring(selection_end + ending_operator.length)}}))
 
-       me.setSelectionRange(selection_start - starting_operator.length, selection_end - starting_operator.length);
+       textarea_element.setSelectionRange(selection_start - starting_operator.length, selection_end - starting_operator.length);
        } else {
        /**
        * `<starting_operator>||<ending_operator>` -> `||`
        * `_||_` -> `||`
        */
-       me.focus();
-       me.setSelectionRange(selection_start - starting_operator.length, selection_end + ending_operator.length);
+       textarea_element.focus();
+       textarea_element.setSelectionRange(selection_start - starting_operator.length, selection_end + ending_operator.length);
        document.execCommand('delete', false);
        }
-       } else if (me.value.substring(selection_start, selection_start + starting_operator.length) == starting_operator && me.value.substring(selection_end - ending_operator.length, selection_end) == ending_operator) {
+       } else if (textarea_element.value.substring(selection_start, selection_start + starting_operator.length) == starting_operator && textarea_element.value.substring(selection_end - ending_operator.length, selection_end) == ending_operator) {
        /**
        * `|<starting_opeator>hello<ending_operator>|` -> `|hello|`
        * `|_hello_|` -> `|hello|`
        */
 
-       const replacement_text = me.value.substring(selection_start - starting_operator.length, selection_end + ending_operator.length).replace(regex_pattern_for_operator, '');
-        {# await insert_text({ target: me, text: me.value.substring(0, selection_start) + replacement_text + me.value.substring(selection_end) }); #}
+       const replacement_text = textarea_element.value.substring(selection_start - starting_operator.length, selection_end + ending_operator.length).replace(regex_pattern_for_operator, '');
+        me.dispatchEvent(new CustomEvent('hyperscript:insert_text', { detail : { text: textarea_element.value.substring(0, selection_start) + replacement_text + textarea_element.value.substring(selection_end)}}))
 
-       me.setSelectionRange(selection_start, selection_end - (starting_operator.length + ending_operator.length));
+       textarea_element.setSelectionRange(selection_start, selection_end - (starting_operator.length + ending_operator.length));
        } else {
        /**
        * `|hello|` -> `<operator>|hello|<operator>`
        * `|hello|` -> `_|hello|_`
        */
        const replacement_text = starting_operator + selection_text + ending_operator;
-        {# await insert_text({ target: me, text: me.value.substring(0, selection_start) + replacement_text + me.value.substring(selection_end) }); #}
-       me.setSelectionRange(selection_start + starting_operator.length, selection_end + starting_operator.length);
+        me.dispatchEvent(new CustomEvent('hyperscript:insert_text', { detail : { text: textarea_element.value.substring(0, selection_start) + replacement_text + textarea_element.value.substring(selection_end)}}))
+
+       textarea_element.setSelectionRange(selection_start + starting_operator.length, selection_end + starting_operator.length);
        }
        end
 
@@ -429,7 +433,11 @@
             <div
                 class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]" data-tip="Add bold text, <Ctrl + b>"
             >
-                <button class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]" type="button" aria-label="bold">
+                <button
+                    class="btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]"
+                    type="button" aria-label="bold"
+                    _="on click send hyperscript:bold_text to <text-editor/> end"
+                >
                     {% include "icons/bold.html" %}
                 </button>
             </div>
