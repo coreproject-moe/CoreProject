@@ -10,9 +10,11 @@
         let textarea_value = '',
             caret_offset_top,
             caret_offset_left;
+
         // Bindings
         let textarea_element = document.querySelector('textarea-body textarea'),
-            text_editor_controls = document.querySelectorAll('.text-editor-controls');
+            text_editor_controls = document.querySelectorAll('.text-editor-controls'),
+            emoji_popover = document.querySelector('emoji-popover');
 
         const control_functions_arr = [
             bold_text,
@@ -68,6 +70,9 @@
                 // Caret
                 caret_offset_top = null;
                 caret_offset_left = null;
+
+                // Hide emoji popover
+                emoji_popover.classList.add('hidden');
             } else {
                 // Set first item active
                 active_emoji_index = 0;
@@ -108,6 +113,15 @@
                         caret_position.left - textarea_position.left
                     }px)`;
                 }
+
+                // Show emoji popover
+                emoji_popover.dispatchEvent(
+                    new CustomEvent('hyperscript:popover', { detail: {
+                        show_emoji_picker: show_emoji_picker,
+                        left: caret_offset_left,
+                        top: caret_offset_top, 
+                    }}));
+                emoji_popover.classList.remove('hidden');
             }
         }
 
@@ -620,4 +634,24 @@
             Learn more about <a class="underline" href="/">core editor</a>
         </div>
     </textarea-footer>
+    <emoji-popover
+        class="emoji_picker hidden absolute flex min-w-[12vw] flex-col divide-y divide-accent/10 overflow-hidden rounded-[0.5vw] bg-neutral text-[1vw]"
+        _="
+        on hyperscript:popover(left, top)
+            set my *left to left
+            set my *top to top
+        "
+    >
+        <div
+            role="button"
+            tabindex="0"
+            class="flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:bg-primary-500 hover:text-white"
+        >
+            <img
+                class="md:w-[1vw]"
+                src="https://cdn.pixabay.com/photo/2020/12/27/20/24/smile-5865208_1280.png"
+            >
+            <span>emoji-name</span>
+        </div>
+    </emoji-popover>
 </text-editor>
