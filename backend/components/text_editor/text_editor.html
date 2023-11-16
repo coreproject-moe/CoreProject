@@ -334,9 +334,9 @@
 <text-editor
     class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw]"
     _="
-        init
-        set global textarea_element to first <textarea/> in me
-        end
+       init
+       set global textarea_element to first <textarea/> in me
+       end
 
        on hyperscript:operate_on_selected_text(starting_operator, ending_operator)
        js(me, starting_operator, ending_operator)
