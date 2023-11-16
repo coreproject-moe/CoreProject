@@ -1,0 +1,26 @@
+{
+  "__commonjsHelpers-PDDkieYd.js": {
+    "file": "_commonjsHelpers-PDDkieYd.js"
+  },
+  "css/index.css": {
+    "file": "assets/tailwind-R2qxIEPw.css",
+    "isEntry": true,
+    "src": "css/index.css"
+  },
+  "js/htmx.ts": {
+    "file": "assets/htmx-MeWAaFvB.js",
+    "imports": [
+      "__commonjsHelpers-PDDkieYd.js"
+    ],
+    "isEntry": true,
+    "src": "js/htmx.ts"
+  },
+  "js/hyperscript.ts": {
+    "file": "assets/hyperscript-cOIRSUfP.js",
+    "imports": [
+      "__commonjsHelpers-PDDkieYd.js"
+    ],
+    "isEntry": true,
+    "src": "js/hyperscript.ts"
+  }
+}
