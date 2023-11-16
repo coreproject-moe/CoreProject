@@ -12,10 +12,13 @@ export default defineConfig({
         target: 'es2015',
         rollupOptions: {
             input: {
-                htmx: resolve('./django_core/static_src/js/htmx.js'),
+                // Vendor packages
+                htmx: resolve('./django_core/static_src/js/htmx.ts'),
                 hyperscript: resolve(
-                    './django_core/static_src/js/hyperscript.js'
+                    './django_core/static_src/js/hyperscript.ts'
                 ),
+
+                // Tailwind.css
             },
             output: {
                 chunkFileNames: undefined,
