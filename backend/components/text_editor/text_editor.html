@@ -24,9 +24,7 @@
         ];
 
         // Add events
-        textarea_element.addEventListener("input", (event) => {
-            handle_input(event);
-        });
+        textarea_element.addEventListener("input", (event) => handle_input(event));
 
         text_editor_controls.forEach((control, index) => {
             control.addEventListener('click', () => {
