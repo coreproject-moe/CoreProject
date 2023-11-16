@@ -4,8 +4,9 @@
     (async () => {
         if(!navigator.onLine) return;
 
-        const emojis_response = await fetch("{% static 'data/emojis.json' %}");
-        const emojis = await emojis_response.json();
+        const data = await import("{% static 'data/emojis.js' %}");
+        const emojis = data.emojis;
+        console.log(emojis);
 
         let textarea_value = '',
             caret_offset_top,

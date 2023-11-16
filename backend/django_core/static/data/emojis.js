@@ -1,4 +1,4 @@
-{
+export const emojis = {
     "100": "/emojis/100.avif",
     "1234": "/emojis/1234.avif",
     "+1": "/emojis/+1.avif",
