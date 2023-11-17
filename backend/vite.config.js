@@ -1,7 +1,6 @@
 import { join, resolve } from 'path';
 import process from 'process';
 import { defineConfig } from 'vite';
-
 const STATIC_SRC = resolve('./django_core/static_src');
 
 const JS_DIRECTORY = join(STATIC_SRC, 'js');
@@ -11,6 +10,7 @@ const IMAGE_DIRECTORY = join(STATIC_SRC, 'images');
 export default defineConfig({
     root: resolve('./django_core/static_src'),
     base: '/static/',
+    // assetsInclude: ['**/*.svg'],
     // css: {
     //     devSourcemap: true,
     // },
@@ -35,8 +35,10 @@ export default defineConfig({
                 join(JS_DIRECTORY, 'easytimer.ts'),
                 // Register Page
                 join(JS_DIRECTORY, 'register.ts'),
-                // Favicon
-                join(IMAGE_DIRECTORY, 'favicon', 'favicon.svg'),
+                // Register Page
+                join(JS_DIRECTORY, 'favicon.js'),
+
+                // join(IMAGE_DIRECTORY, 'favicon', 'favicon.svg'),
             ],
             output: {
                 chunkFileNames: undefined,

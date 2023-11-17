@@ -16,13 +16,10 @@
             name="description"
             content="Bridging the gap between streaming & torrenting sevices, with a modern and clean interface"
         />
-        <link
-            rel="icon"
-            type="image/svg+xml"
-            href="{% vite_asset_url 'images/favicon/favicon.svg' %}"
-        />
+        {% comment %} This includes favicon {% endcomment %}
 
         {% vite_hmr_client %}
+        {% vite_asset 'js/favicon.js'%}
 
         {% vite_asset 'js/vendor/htmx.ts' %}
         {% vite_asset 'js/vendor/hyperscript.ts' %}
