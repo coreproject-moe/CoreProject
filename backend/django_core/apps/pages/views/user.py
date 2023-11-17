@@ -23,7 +23,10 @@ animes = [
         "name": "You Lie in April",
         "cover": static("/public/images/mock/YourLieInApril-bg.avif"),
     },
-    {"name": "Attack on Titan", "cover": static("/public/images/mock/AttackOnTitan-bg.avif")},
+    {
+        "name": "Attack on Titan",
+        "cover": static("/public/images/mock/AttackOnTitan-bg.avif"),
+    },
     {"name": "Jujutsu Kaisen", "cover": static("/public/images/mock/JujutsuKaisen.avif")},
     {"name": "Death Note", "cover": static("/public/images/mock/DeathNote-bg.avif")},
 ]
