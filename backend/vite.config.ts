@@ -18,7 +18,7 @@ export default defineConfig({
         outDir: join(process.cwd(), 'django_core', 'static'),
         manifest: true,
         emptyOutDir: true,
-        target: 'esnext',
+        target: 'es2015',
         sourcemap: true,
         rollupOptions: {
             input: [
