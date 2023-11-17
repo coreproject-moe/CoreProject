@@ -33,7 +33,6 @@
     <div class="flex flex-col gap-1 md:gap-[0.5vw]">
         <span class="text-xs leading-none text-surface-100 md:text-[0.75vw]">Don't have a core account?</span>
         <button
-
             hx-get="{% url 'register_view' %}"
             hx-target="<content/>"
             hx-push-url="{% url 'register_view' %}"
@@ -44,7 +43,7 @@
     </div>
     <button
         type="submit"
-        class="btn glass btn-primary bg-primary-focus h-12 rounded-lg p-0 px-5 text-base font-semibold md:h-[2.75vw] md:rounded-[0.5vw] md:px-[1.25vw] md:text-[0.95vw] leading-none"
+        class="btn btn-primary text-accent h-12 rounded-lg p-0 px-5 text-base font-semibold md:h-[2.75vw] md:rounded-[0.5vw] md:px-[1.25vw] md:text-[0.95vw] leading-none"
     >
         <span>Continue</span>
         {% include "icons/arrow_up_right.html" with class="w-4 rotate-45 md:w-[1vw]" %}
