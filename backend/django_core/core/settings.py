@@ -91,9 +91,6 @@ INSTALLED_APPS = [
     "defender",
     # Tree
     "django_ltree",
-    # Tailwind CSS
-    "tailwind",
-    "tailwind_src",  # Our custom app
     # Api
     "rest_framework",
     "rest_framework.authtoken",
@@ -103,6 +100,8 @@ INSTALLED_APPS = [
     # Crispy forms
     "crispy_forms",
     "crispy_bootstrap4",
+    # Vite Plugin
+    "django_vite",
     # Models
     "apps.pages",
     "apps.anime",
@@ -334,7 +333,7 @@ STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
     Path(BASE_DIR.parent, "components"),
-    Path(BASE_DIR, "static"),
+    Path(BASE_DIR, "static_src"),
 ]
 
 STATIC_ROOT = Path(BASE_DIR, "staticfiles")
@@ -401,3 +400,27 @@ if os.name == "nt":
     NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 elif os.name == "posix":
     NPM_BIN_PATH = "/usr/bin/npm"
+
+# WhiteNoise Patch
+
+import re
+
+# Vite generates files with 8 hash digits
+# http://whitenoise.evans.io/en/stable/django.html#WHITENOISE_IMMUTABLE_FILE_TEST
+
+
+def immutable_file_test(path, url):
+    # Match filename with 12 hex digits before the extension
+    # e.g. app.db8f2edc0c8a.js
+    return re.match(r"^.+\.[0-9a-f]{8,12}\..+$", url)
+
+
+WHITENOISE_IMMUTABLE_FILE_TEST = immutable_file_test
+DJANGO_VITE = {
+    "default": {
+        "dev_mode": DEBUG,
+        "dev_server_port": 5173,
+    },
+}
+# Where ViteJS assets are built.
+DJANGO_VITE_ASSETS_PATH = BASE_DIR / "static"

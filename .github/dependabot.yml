@@ -12,9 +12,10 @@ updates:
       schedule:
           interval: daily
       open-pull-requests-limit: 100
-    # Backend (tailwind)
+
+    # Backend (nodejs)
     - package-ecosystem: npm
-      directory: /backend/django_core/tailwind_src/static_src/
+      directory: /backend/
       schedule:
           interval: daily
       open-pull-requests-limit: 100

@@ -1,4 +1,4 @@
-{% load static tailwind_tags django_htmx %}
+{% load static django_htmx django_vite %}
 <!DOCTYPE html>
 <html lang="en" data-theme="kokoro">
     <head>
@@ -19,27 +19,25 @@
         <link
             rel="icon"
             type="image/svg+xml"
-            href="{% static 'images/favicon/favicon.svg' %}"
+            href="{% vite_asset_url 'images/favicon/favicon.svg' %}"
         />
 
-        <link
-            rel="stylesheet"
-            href="{% static 'fonts/Kokoro/stylesheet.css' %}"
-        />
-        <script src="{% static 'vendor/js/htmx/htmx.min.js'%}"></script>
-        <script src="{% static 'vendor/js/hyperscript/hyperscript.min.js'%}"></script>
+        {% vite_hmr_client %}
 
-        {% django_htmx_script %} {% block head %}{% endblock %}
+        {% vite_asset 'js/vendor/htmx.ts' %}
+        {% vite_asset 'js/vendor/hyperscript.ts' %}
+
+        <link rel='stylesheet' href='{% vite_asset_url 'css/index.postcss' %}'/>
+
+        {% django_htmx_script %}
+        {% block head %}{% endblock %}
         <title>{% block title %}{% endblock %}</title>
-        {% tailwind_css %}
     </head>
     <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
         {% block body %}{% endblock %} {% block js %}{% endblock %}
         <div id="toast" class="toast p-0 absolute bottom-[0.75vw] right-[0.75vw]"></div>
         <script>
-            document.body.addEventListener('fetch:beforeRequest', (event) => {
-                event.detail.headers['X-CSRFToken'] = "{{ csrf_token }}";
-            });
+
         </script>
     </body>
 </html>
