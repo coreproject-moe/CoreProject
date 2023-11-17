@@ -606,16 +606,17 @@ files = [
 
 [[package]]
 name = "django-browser-reload"
-version = "1.12.0"
+version = "1.12.1"
 description = "Automatically reload your browser in development."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django_browser_reload-1.12.0-py3-none-any.whl", hash = "sha256:6c10b4b59a5aa7a412284d7c909fb5b80199e98a488f5b24da5c49b090d1ef3f"},
-    {file = "django_browser_reload-1.12.0.tar.gz", hash = "sha256:2dc98c752b55d22db9c11fbc0274c16160ce4dcd67ef0ef294135ab57d711435"},
+    {file = "django-browser-reload-1.12.1.tar.gz", hash = "sha256:875b6bd01db13380522ccb4ae75871a2edeae74bb5ac92bf32eb76763d575d86"},
+    {file = "django_browser_reload-1.12.1-py3-none-any.whl", hash = "sha256:08b457f1b6599bf782d4d2ecdfb0897d6fc936ac4035060d0269c2af5ef4ef7a"},
 ]
 
 [package.dependencies]
+asgiref = ">=3.6"
 Django = ">=3.2"
 
 [[package]]
@@ -802,16 +803,17 @@ typing-extensions = ">=3.7.4"
 
 [[package]]
 name = "django-htmx"
-version = "1.17.1"
+version = "1.17.2"
 description = "Extensions for using Django with htmx."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django-htmx-1.17.1.tar.gz", hash = "sha256:c5264ba7b8656934fdda8ea2b19d8a0eaef7d50468683229f3a1aa3bd660bd72"},
-    {file = "django_htmx-1.17.1-py3-none-any.whl", hash = "sha256:48b6dff40df09f78535ee9db92c7123db3f5243e5f4e95ab061df91a7864f897"},
+    {file = "django-htmx-1.17.2.tar.gz", hash = "sha256:4089f2ed38727e9846c2f4cd1daddf6b010c7be8d834cfbcffc8c5ecf445c04e"},
+    {file = "django_htmx-1.17.2-py3-none-any.whl", hash = "sha256:f4971432d2ca45dbb31d9b58add1c50ae54354afe4bf59cafd591b1711b502c0"},
 ]
 
 [package.dependencies]
+asgiref = ">=3.6"
 Django = ">=3.2"
 
 [[package]]
@@ -943,7 +945,7 @@ files = [
 [package.dependencies]
 django-stubs = ">=4.2.5"
 mypy = [
-    {version = ">=0.991", optional = true, markers = "extra != \"compatible-mypy\""},
+    {version = ">=0.991"},
     {version = ">=1.6.0,<1.7.0", optional = true, markers = "extra == \"compatible-mypy\""},
 ]
 requests = ">=2.0.0"
@@ -2053,13 +2055,13 @@ files = [
 
 [[package]]
 name = "types-markdown"
-version = "3.5.0.2"
+version = "3.5.0.3"
 description = "Typing stubs for Markdown"
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "types-Markdown-3.5.0.2.tar.gz", hash = "sha256:111d96929838e3535040a3c029df97a66d4f7e1fd297020b9134ec9084b9b46c"},
-    {file = "types_Markdown-3.5.0.2-py3-none-any.whl", hash = "sha256:4ac8a2298ce0897bc726df9c2eddeb11e7f832a5f456ee3f84bb0d299f595e5b"},
+    {file = "types-Markdown-3.5.0.3.tar.gz", hash = "sha256:9afd38a8f53e19d43de3f8d89742b3674b5736767806ed9356d64ccb09f76439"},
+    {file = "types_Markdown-3.5.0.3-py3-none-any.whl", hash = "sha256:2299b9086c695f408a3ebabf820f1fba3b239f1b3bfdbb32bf42d530b42cdd83"},
 ]
 
 [[package]]
@@ -2478,4 +2480,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "bdd2a00f849f4a31d89ae39861c676f42e15eedd0d27c1860db61c65e7f3c773"
+content-hash = "53da1c033ce7c121859914580e61ca7ff72d492c143c030252a57f37c5aea2b2"
