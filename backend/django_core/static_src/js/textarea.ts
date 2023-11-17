@@ -454,7 +454,13 @@ async function operate_on_selected_text({
     }
 }
 
-async function select_emoji({ element, emoji_index }) {
+async function select_emoji({
+    element,
+    emoji_index,
+}: {
+    element: HTMLTextAreaElement;
+    emoji_index: number;
+}) {
     const emoji_keyword = emoji_matches[emoji_index]?.keyword,
         emoji_code = `:${emoji_keyword}:`;
 
@@ -487,13 +493,12 @@ async function select_emoji({ element, emoji_index }) {
     caret_offset_top = null;
 }
 
-function is_valid_url(url_string) {
+function is_valid_url(url_string: string) {
     // Credit : https://stackoverflow.com/a/43467144
-    let url;
     try {
-        url = new URL(url_string);
+        const url = new URL(url_string);
+        return url.protocol === 'http:' || url.protocol === 'https:';
     } catch (_) {
         return false;
     }
-    return url.protocol === 'http:' || url.protocol === 'https:';
 }
