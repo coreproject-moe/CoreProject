@@ -1,11 +1,3 @@
-import { ZxcvbnResult } from '@zxcvbn-ts/core';
-
-declare global {
-    interface Window {
-        get_password_strength: (password: string) => ZxcvbnResult;
-    }
-}
-
 const zxcvbnTscore = await import('@zxcvbn-ts/core');
 // Language import
 const zxcvbnCommonPackage = await import('@zxcvbn-ts/language-common');
@@ -31,6 +23,7 @@ const options = {
     },
 };
 zxcvbnTscore.zxcvbnOptions.setOptions(options);
+
 function get_password_strength(password: string) {
     return zxcvbnTscore.zxcvbn(password);
 }

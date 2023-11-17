@@ -2,11 +2,7 @@ import { Timer as EasyTimer } from 'easytimer.js';
 
 const slider_delay = 10; // Modify this if needed
 
-declare global {
-    interface Window {
-        timer: EasyTimer;
-    }
-}
+
 
 window.timer = new EasyTimer({
     target: {
