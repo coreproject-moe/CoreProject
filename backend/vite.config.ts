@@ -1,6 +1,7 @@
 import { join, resolve } from 'path';
 import process from 'process';
 import { defineConfig } from 'vite';
+
 const STATIC_SRC = resolve('./django_core/static_src');
 
 const JS_DIRECTORY = join(STATIC_SRC, 'js');
