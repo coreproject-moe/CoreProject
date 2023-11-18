@@ -113,25 +113,26 @@ async function handle_input(event: Event) {
             element.parentElement?.parentElement?.appendChild(custom_emoji_popover)
         }
 
-        let child_list: string[] = [];
-        emoji_matches.slice(0, 5).forEach(emoji => {
-            let emoji_item_html = `
-                <div class='flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:bg-primary-500 hover:text-white'>
-                    <img
-                        class='md:w-[1vw]'
-                        src=${emoji.emoji}
-                    >
-                    <span>${emoji.keyword}</span>
-                </div>
-            `;
-            child_list.push(emoji_item_html);
-        });
-
-        custom_emoji_popover.innerHTML = child_list.join('');
         custom_emoji_popover.className = "absolute min-w-[12vw] flex-col divide-y divide-accent/10 overflow-hidden rounded-[0.5vw] bg-neutral text-[1vw]";
-        custom_emoji_popover.style.position = "absolute";
+        custom_emoji_popover.style.position = "absolute"; // make sure its absolute
         custom_emoji_popover.style.top = caret_offset_top!;
         custom_emoji_popover.style.left = caret_offset_left!;
+
+        // remove children for inserting new ones
+        custom_emoji_popover.replaceChildren();
+
+        emoji_matches.slice(0, 5).forEach(emoji => {
+            let child_el = document.createElement("div");
+            child_el.className = 'flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:bg-primary-500 hover:text-white';
+            child_el.innerHTML = `
+                <img
+                    class='md:w-[1vw]'
+                    src=${emoji.emoji}
+                >
+                <span>${emoji.keyword}</span>
+            `;
+            custom_emoji_popover?.appendChild(child_el);
+        });
     }
 }
 
