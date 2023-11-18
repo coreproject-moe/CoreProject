@@ -137,7 +137,7 @@
 
            js(me, emoji_matches)
            const items_arr = [];
-           for (const emoji of Object.values(emoji_matches.slice(0, 5))) {
+           for (const emoji of Object.values(emoji_matches.slice(0, 5).sort())) {
            const item_html = `
            <div class='flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:bg-primary-500 hover:text-white'>
            <img
