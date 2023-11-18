@@ -1,4 +1,4 @@
-{% load django_vite %} {% vite_asset 'js/textarea.ts' %}
+{% load django_vite %} {% vite_asset 'js/texteditor.ts' %}
 
 <text-editor
     class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw]"
@@ -32,20 +32,18 @@
                 preview
             </button>
         </div>
-        <div
-            class="flex place-items-center gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]"
-        >
+        <div class="flex items-center gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]">
             <div
                 class="tooltip tooltip-top before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]"
                 data-tip="Add bold text, <Ctrl + b>"
             >
                 <button
-                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]"
+                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0"
                     type="button"
                     data-action="bold"
                     aria-label="bold"
                 >
-                    {% include "icons/bold.html" %}
+                    {% include "icons/bold.html" with class="md:h-[1.55vw]" %}
                 </button>
             </div>
             <div
@@ -53,12 +51,12 @@
                 data-tip="Add italic text, <Ctrl + i>"
             >
                 <button
-                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]"
+                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0"
                     type="button"
                     data-action="italic"
                     aria-label="italic"
                 >
-                    {% include "icons/italic.html" %}
+                    {% include "icons/italic.html" with class="md:h-[1.5vw]" %}
                 </button>
             </div>
             <div
@@ -66,12 +64,12 @@
                 data-tip="Add underline text, <Ctrl + i>"
             >
                 <button
-                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]"
+                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0"
                     type="button"
                     data-action="underline"
                     aria-label="underline"
                 >
-                    {% include "icons/underline.html" %}
+                    {% include "icons/underline.html" with class="md:h-[1.25vw]" %}
                 </button>
             </div>
             <div
@@ -79,12 +77,12 @@
                 data-tip="Add strikethrough text, <Ctrl + Shift + x>"
             >
                 <button
-                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]"
+                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0"
                     type="button"
                     aria-label="strike"
                     data-action="strike"
                 >
-                    {% include "icons/strike.html" %}
+                    {% include "icons/strike.html" with class="md:h-[1.45vw]" %}
                 </button>
             </div>
             <div
@@ -92,12 +90,12 @@
                 data-tip="Add code text, <Ctrl + e>"
             >
                 <button
-                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]"
+                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0"
                     type="button"
                     data-action="code"
                     aria-label="code"
                 >
-                    {% include "icons/code.html" %}
+                    {% include "icons/code.html" with class="md:h-[1.5vw]" %}
                 </button>
             </div>
             <div
@@ -105,12 +103,12 @@
                 data-tip="Add hyperlink text, <Ctrl + k>"
             >
                 <button
-                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]"
+                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0"
                     type="button"
                     data-action="hyperlink"
                     aria-label="hyperlink"
                 >
-                    {% include "icons/hyperlink.html" %}
+                    {% include "icons/hyperlink.html" with class="md:h-[1.25vw]" %}
                 </button>
             </div>
         </div>
