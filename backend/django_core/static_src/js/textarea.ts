@@ -13,24 +13,6 @@ let textarea_element: HTMLTextAreaElement | null = document.querySelector(
     text_editor_controls = document.querySelectorAll('.text-editor-controls'),
     emoji_popover: HTMLElement | null = document.querySelector('emoji-popover');
 
-const control_functions_arr = [
-    bold_text,
-    italic_text,
-    underline_text,
-    strike_text,
-    code_text,
-    hyperlink_text,
-];
-
-// Add events
-textarea_element?.addEventListener('input', (event) => handle_input(event));
-
-text_editor_controls.forEach((control, index) => {
-    control.addEventListener('click', () => {
-        control_functions_arr[index](textarea_element!);
-    });
-});
-
 let emoji_matches: { emoji: string; keyword: string }[],
     show_emoji_picker = false,
     active_emoji_index: number,
@@ -275,10 +257,10 @@ async function hyperlink_text(element: HTMLTextAreaElement) {
         );
     }
 }
-/*
-async function paste_text(event) {
+
+async function paste_text(event: ClipboardEvent) {
     event.preventDefault();
-    const element = event.currentTarget;
+    const element = event.currentTarget as HTMLTextAreaElement;
 
     const selection_start = element.selectionStart,
         selection_end = element.selectionEnd,
@@ -314,7 +296,6 @@ async function paste_text(event) {
         });
     }
 }
-*/
 
 // Functions
 async function insert_text({
@@ -512,4 +493,47 @@ function is_valid_url(url_string: string): boolean {
     } catch (_) {
         return false;
     }
+}
+
+// Add events
+if (textarea_element) {
+    textarea_element.addEventListener('input', (event) => handle_input(event));
+    textarea_element.addEventListener('paste', (event) => paste_text(event));
+
+    document
+        .querySelector(`[data-action='bold']`)
+        ?.addEventListener(
+            'click',
+            async () => await bold_text(textarea_element!)
+        );
+    document
+        .querySelector(`[data-action='italic']`)
+        ?.addEventListener(
+            'click',
+            async () => await italic_text(textarea_element!)
+        );
+    document
+        .querySelector(`[data-action='underline']`)
+        ?.addEventListener(
+            'click',
+            async () => await underline_text(textarea_element!)
+        );
+    document
+        .querySelector(`[data-action='strike']`)
+        ?.addEventListener(
+            'click',
+            async () => await strike_text(textarea_element!)
+        );
+    document
+        .querySelector(`[data-action='code']`)
+        ?.addEventListener(
+            'click',
+            async () => await code_text(textarea_element!)
+        );
+    document
+        .querySelector(`[data-action='hyperlink']`)
+        ?.addEventListener(
+            'click',
+            async () => await hyperlink_text(textarea_element!)
+        );
 }
