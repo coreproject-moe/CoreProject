@@ -27,13 +27,13 @@ textarea_element?.addEventListener('input', (event) => handle_input(event));
 
 text_editor_controls.forEach((control, index) => {
     control.addEventListener('click', () => {
-        control_functions_arr[index](textarea_element);
+        control_functions_arr[index](textarea_element!);
     });
 });
 
-let emoji_matches,
+let emoji_matches: { emoji: string; keyword: string }[],
     show_emoji_picker = false,
-    active_emoji_index,
+    active_emoji_index: number,
     SHOWN_EMOJI_LIMIT = 5;
 
 // Hanlders
@@ -45,9 +45,9 @@ async function handle_blur() {
     caret_offset_left = null;
 }
 
-async function handle_input(event) {
-    const element = event.target;
-    const input_text = element.value;
+async function handle_input(event: Event) {
+    const element = event.target as HTMLTextAreaElement;
+    const input_text = element?.value;
     let last_typed_word;
 
     // to get last typed word even its in middle
@@ -123,7 +123,7 @@ async function handle_input(event) {
     }
 }
 
-async function handle_keydown(event) {
+async function handle_keydown(event: KeyboardEvent) {
     /** Emoji specific codes */
     if (show_emoji_picker) {
         switch (event.key.toLowerCase()) {
@@ -143,7 +143,7 @@ async function handle_keydown(event) {
             case 'enter': {
                 event.preventDefault();
                 await select_emoji({
-                    element: event.currentTarget,
+                    element: event.currentTarget as HTMLTextAreaElement,
                     emoji_index: active_emoji_index,
                 });
                 break;
@@ -160,31 +160,31 @@ async function handle_keydown(event) {
             case 'b': {
                 /** Bold Functionality */
                 event.preventDefault();
-                await bold_text(event.target);
+                await bold_text(event.target as HTMLTextAreaElement);
                 break;
             }
             case 'i': {
                 /** Italic functionality */
                 event.preventDefault();
-                await italic_text(event.target);
+                await italic_text(event.target as HTMLTextAreaElement);
                 break;
             }
             case 'e': {
                 /** Code functionality */
                 event.preventDefault();
-                await code_text(event.target);
+                await code_text(event.target as HTMLTextAreaElement);
                 break;
             }
             case 'u': {
                 /** Underline functionality */
                 event.preventDefault();
-                await underline_text(event.target);
+                await underline_text(event.target as HTMLTextAreaElement);
                 break;
             }
             case 'k': {
                 /** Hyperlink functionality */
                 event.preventDefault();
-                await hyperlink_text(event.target);
+                await hyperlink_text(event.target as HTMLTextAreaElement);
                 break;
             }
         }
@@ -194,13 +194,13 @@ async function handle_keydown(event) {
         switch (event.key.toLowerCase()) {
             case 'x':
                 event.preventDefault();
-                await strike_text(event.target);
+                await strike_text(event.target as HTMLTextAreaElement);
                 break;
         }
     }
 }
 // Editor specific functions
-async function bold_text(element) {
+async function bold_text(element: HTMLTextAreaElement) {
     await operate_on_selected_text({
         element: element,
         starting_operator: '**',
@@ -208,7 +208,7 @@ async function bold_text(element) {
     });
 }
 
-async function italic_text(element) {
+async function italic_text(element: HTMLTextAreaElement) {
     await operate_on_selected_text({
         element: element,
         starting_operator: '_',
@@ -216,7 +216,7 @@ async function italic_text(element) {
     });
 }
 
-async function code_text(element) {
+async function code_text(element: HTMLTextAreaElement) {
     await operate_on_selected_text({
         element: element,
         starting_operator: '`',
@@ -224,7 +224,7 @@ async function code_text(element) {
     });
 }
 
-async function underline_text(element) {
+async function underline_text(element: HTMLTextAreaElement) {
     await operate_on_selected_text({
         element: element,
         starting_operator: '<u>',
@@ -232,7 +232,7 @@ async function underline_text(element) {
     });
 }
 
-async function strike_text(element) {
+async function strike_text(element: HTMLTextAreaElement) {
     await operate_on_selected_text({
         element: element,
         starting_operator: '~~',
@@ -240,7 +240,7 @@ async function strike_text(element) {
     });
 }
 
-async function hyperlink_text(element) {
+async function hyperlink_text(element: HTMLTextAreaElement) {
     const selection_start = element.selectionStart,
         selection_end = element.selectionEnd,
         selection_text = element.value.substring(
@@ -275,7 +275,7 @@ async function hyperlink_text(element) {
         );
     }
 }
-
+/*
 async function paste_text(event) {
     event.preventDefault();
     const element = event.currentTarget;
@@ -314,9 +314,16 @@ async function paste_text(event) {
         });
     }
 }
+*/
 
 // Functions
-async function insert_text({ target, text }) {
+async function insert_text({
+    target,
+    text,
+}: {
+    target: HTMLTextAreaElement;
+    text: string;
+}) {
     /**
      * Thanks stackoverflow guy and mozilla dev ( Michal Čaplygin |myf| )
      * Stackoverflow : https://stackoverflow.com/a/56509046
@@ -330,6 +337,10 @@ async function operate_on_selected_text({
     element,
     starting_operator,
     ending_operator,
+}: {
+    element: HTMLTextAreaElement;
+    starting_operator: string;
+    ending_operator: string;
 }) {
     element.focus();
 
