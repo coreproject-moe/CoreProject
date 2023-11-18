@@ -112,8 +112,19 @@ async function handle_input(event: Event) {
             custom_emoji_popover = document.createElement("custom-emoji-popover");
             element.parentElement?.parentElement?.appendChild(custom_emoji_popover)
         }
-        
-        custom_emoji_popover.innerHTML = "HEllo there!";
+
+        let emoji_item_html = `
+            <div class='flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:bg-primary-500 hover:text-white'>
+                <img
+                    class='md:w-[1vw]'
+                    src="bnah"
+                >
+                <span>nah</span>
+            </div>
+        `;
+
+        custom_emoji_popover.innerHTML = emoji_item_html;
+        custom_emoji_popover.className = "absolute min-w-[12vw] flex-col divide-y divide-accent/10 overflow-hidden rounded-[0.5vw] bg-neutral text-[1vw]";
         custom_emoji_popover.style.position = "absolute";
         custom_emoji_popover.style.top = caret_offset_top!;
         custom_emoji_popover.style.left = caret_offset_left!;
