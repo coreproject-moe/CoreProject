@@ -1,11 +1,13 @@
 {
-    "exclude": ["node_modules"],
+    "exclude": ["node_modules", "postcss.config.cjs"],
     "compilerOptions": {
+        "module": "NodeNext",
         "allowJs": true,
         "checkJs": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true,
+        "moduleResolution": "NodeNext",
         "skipLibCheck": true,
         "sourceMap": true,
         "strict": true
