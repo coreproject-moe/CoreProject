@@ -89,19 +89,19 @@ async function handle_input(event: Event) {
             caret_offset_left = `calc(${
                 caret_position.left - textarea_position.left
             }px)`;
-
-            // Show emoji popover
-            emoji_popover?.dispatchEvent(
-                new CustomEvent('hyperscript:popover', {
-                    detail: {
-                        left: caret_offset_left,
-                        top: caret_offset_top,
-                        emoji_matches: emoji_matches,
-                    },
-                })
-            );
-            emoji_popover?.classList.remove('hidden');
         }
+
+        // Show emoji popover
+        emoji_popover?.dispatchEvent(
+            new CustomEvent('hyperscript:popover', {
+                detail: {
+                    left: caret_offset_left,
+                    top: caret_offset_top,
+                    emoji_matches: emoji_matches,
+                },
+            })
+        );
+        emoji_popover?.classList.remove('hidden');
     }
 }
 
