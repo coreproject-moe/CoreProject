@@ -504,7 +504,7 @@ async function select_emoji({
     caret_offset_top = null;
 }
 
-function is_valid_url(url_string: string) {
+function is_valid_url(url_string: string): boolean {
     // Credit : https://stackoverflow.com/a/43467144
     try {
         const url = new URL(url_string);
