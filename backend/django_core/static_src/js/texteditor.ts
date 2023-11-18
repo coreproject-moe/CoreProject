@@ -50,9 +50,7 @@ async function handle_input(event: Event) {
         caret_offset_top = null;
         caret_offset_left = null;
 
-        // Hide emoji popover
-        emoji_popover?.classList.add('hidden');
-        // new way
+        // remove emoji popover element
         document.querySelector("custom-emoji-popover")?.remove();
     } else {
         // Set first item active
@@ -93,19 +91,7 @@ async function handle_input(event: Event) {
             }px)`;
         }
 
-        // Show emoji popover
-        emoji_popover?.dispatchEvent(
-            new CustomEvent('hyperscript:popover', {
-                detail: {
-                    left: caret_offset_left,
-                    top: caret_offset_top,
-                    emoji_matches: emoji_matches,
-                },
-            })
-        );
-        // emoji_popover?.classList.remove('hidden');
-
-        // try new logic
+        // emoji popover logics
         let custom_emoji_popover: HTMLElement | null = document.querySelector("custom-emoji-popover");
 
         if (!custom_emoji_popover) {
