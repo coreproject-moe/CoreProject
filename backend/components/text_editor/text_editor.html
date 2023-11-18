@@ -1,34 +1,16 @@
 {% load django_vite %} {% vite_asset 'js/texteditor.ts' %}
 
-<text-editor
-    class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw] flex flex-col"
->
+<text-editor class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw] flex flex-col">
     <textarea-navbar class="flex h-8 items-center justify-between rounded-t-lg md:h-[2.5vw] md:rounded-t-[0.75vw]">
         <div class="btn-group w-full h-full overflow-hidden p-[0.15vw]">
             <button
                 type="button"
-                class="textarea-navbar-type-btn bg-neutral-focus rounded-l-[0.6vw] min-h-full h-8 px-5 text-xs capitalize leading-[1.5vw] transition-colors duration-100 md:h-[2.5vw] md:px-[1.5vw] md:text-[1vw]"
-                _="
-                   on click
-                   remove .bg-neutral-focus from .textarea-navbar-type-btn
-                   then add .bg-neutral-focus to me
-                   end
-                  "
-            >
-                edit
-            </button>
+                class="bg-neutral rounded-l-[0.6vw] min-h-full h-8 px-5 text-xs capitalize leading-[1.5vw] transition-colors duration-100 md:h-[2.5vw] md:px-[1.5vw] md:text-[1vw]"
+            >edit</button>
             <button
                 type="button"
-                class="textarea-navbar-type-btn min-h-full h-8 px-5 text-xs capitalize leading-[1.5vw] transition-colors duration-100 md:h-[2.5vw] md:px-[1.5vw] md:text-[1vw]"
-                _="
-                   on click
-                   remove .bg-neutral-focus from .textarea-navbar-type-btn
-                   then add .bg-neutral-focus to me
-                   end
-                  "
-            >
-                preview
-            </button>
+                class="min-h-full h-8 px-5 text-xs capitalize leading-[1.5vw] transition-colors duration-100 md:h-[2.5vw] md:px-[1.5vw] md:text-[1vw]"
+            >preview</button>
         </div>
         <div class="flex items-center gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]">
             <div
@@ -36,7 +18,7 @@
                 data-tip="Add bold text, <Ctrl + b>"
             >
                 <button
-                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0"
+                    class="btn border-none !bg-transparent min-h-full p-0"
                     type="button"
                     data-action="bold"
                     aria-label="bold"
@@ -49,7 +31,7 @@
                 data-tip="Add italic text, <Ctrl + i>"
             >
                 <button
-                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0"
+                    class="btn border-none !bg-transparent min-h-full p-0"
                     type="button"
                     data-action="italic"
                     aria-label="italic"
@@ -62,7 +44,7 @@
                 data-tip="Add underline text, <Ctrl + i>"
             >
                 <button
-                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0"
+                    class="btn border-none !bg-transparent min-h-full p-0"
                     type="button"
                     data-action="underline"
                     aria-label="underline"
@@ -75,7 +57,7 @@
                 data-tip="Add strikethrough text, <Ctrl + Shift + x>"
             >
                 <button
-                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0"
+                    class="btn border-none !bg-transparent min-h-full p-0"
                     type="button"
                     aria-label="strike"
                     data-action="strike"
@@ -88,7 +70,7 @@
                 data-tip="Add code text, <Ctrl + e>"
             >
                 <button
-                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0"
+                    class="btn border-none !bg-transparent min-h-full p-0"
                     type="button"
                     data-action="code"
                     aria-label="code"
@@ -101,7 +83,7 @@
                 data-tip="Add hyperlink text, <Ctrl + k>"
             >
                 <button
-                    class="text-editor-controls btn border-none !bg-transparent min-h-full p-0"
+                    class="btn border-none !bg-transparent min-h-full p-0"
                     type="button"
                     data-action="hyperlink"
                     aria-label="hyperlink"
