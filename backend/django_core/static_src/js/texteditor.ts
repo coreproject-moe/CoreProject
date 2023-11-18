@@ -118,15 +118,14 @@ async function handle_input(event: Event) {
 
         emoji_matches.slice(0, 5).forEach(emoji => {
             let child_el = document.createElement("div");
-            let img_el = document.createElement("img");
-            let span_el = document.createElement("span");
             child_el.className = 'flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:bg-primary-500 hover:text-white';
-            img_el.className = 'md:w-[1vw]';
-            img_el.src = emoji.emoji;
-            span_el.innerText = emoji.keyword;
-
-            child_el.appendChild(img_el);
-            child_el.appendChild(span_el);
+            child_el.innerHTML = `
+                <img
+                    class='md:w-[1vw]'
+                    src=${emoji.emoji}
+                >
+                <span>${emoji.keyword}</span>
+            `
             custom_emoji_popover?.appendChild(child_el);
         });
 
