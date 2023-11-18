@@ -1,6 +1,4 @@
-{% load django_vite %}
-
-{% vite_asset 'js/textarea.ts' %}
+{% load django_vite %} {% vite_asset 'js/textarea.ts' %}
 
 <text-editor
     class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw]"
@@ -38,73 +36,79 @@
             class="flex place-items-center gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]"
         >
             <div
-                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]"
+                class="tooltip tooltip-top before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]"
                 data-tip="Add bold text, <Ctrl + b>"
             >
                 <button
                     class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]"
                     type="button"
+                    data-action="bold"
                     aria-label="bold"
                 >
                     {% include "icons/bold.html" %}
                 </button>
             </div>
             <div
-                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]"
+                class="tooltip tooltip-top before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]"
                 data-tip="Add italic text, <Ctrl + i>"
             >
                 <button
                     class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]"
                     type="button"
-                    aria-label="bold"
+                    data-action="italic"
+                    aria-label="italic"
                 >
                     {% include "icons/italic.html" %}
                 </button>
             </div>
             <div
-                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]"
+                class="tooltip tooltip-top before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]"
                 data-tip="Add underline text, <Ctrl + i>"
             >
                 <button
                     class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]"
                     type="button"
-                    aria-label="bold"
+                    data-action="underline"
+                    aria-label="underline"
                 >
                     {% include "icons/underline.html" %}
                 </button>
             </div>
             <div
-                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]"
+                class="tooltip tooltip-top before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]"
                 data-tip="Add strikethrough text, <Ctrl + Shift + x>"
             >
                 <button
                     class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]"
                     type="button"
-                    aria-label="bold"
+                    aria-label="strike"
+                    data-action="strike"
                 >
                     {% include "icons/strike.html" %}
                 </button>
             </div>
             <div
-                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]"
+                class="tooltip tooltip-top before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]"
                 data-tip="Add code text, <Ctrl + e>"
             >
                 <button
                     class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]"
                     type="button"
-                    aria-label="bold"
+                    data-action="code"
+                    aria-label="code"
                 >
                     {% include "icons/code.html" %}
                 </button>
             </div>
             <div
-                class="tooltip tooltip-bottom before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]"
+                class="tooltip tooltip-top before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]"
                 data-tip="Add hyperlink text, <Ctrl + k>"
             >
                 <button
                     class="text-editor-controls btn border-none !bg-transparent min-h-full p-0 w-5 md:w-[1.5vw]"
                     type="button"
-                    aria-label="bold"
+                    data-action="hyperlink"
+                    aria-label="hyperlink"
                 >
                     {% include "icons/hyperlink.html" %}
                 </button>
@@ -127,7 +131,7 @@
         </div>
     </textarea-footer>
     <emoji-popover
-        class="emoji_picker hidden absolute flex min-w-[12vw] flex-col divide-y divide-accent/10 overflow-hidden rounded-[0.5vw] bg-neutral text-[1vw]"
+        class="emoji_picker hidden absolute min-w-[12vw] flex-col divide-y divide-accent/10 overflow-hidden rounded-[0.5vw] bg-neutral text-[1vw]"
         _="
            on hyperscript:popover(left, top, emoji_matches)
            set my *left to left
