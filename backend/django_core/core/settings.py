@@ -70,7 +70,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     # Humanize
-    'django.contrib.humanize',
+    "django.contrib.humanize",
     # Postgres
     "django.contrib.postgres",
     # HTMX
