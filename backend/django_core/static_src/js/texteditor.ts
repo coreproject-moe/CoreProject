@@ -7,11 +7,7 @@ let textarea_value = '',
     caret_offset_left: string | null = null;
 
 // Bindings
-let textarea_element: HTMLTextAreaElement | null = document.querySelector(
-        'textarea-body textarea'
-    ),
-    text_editor_controls = document.querySelectorAll('.text-editor-controls'),
-    emoji_popover: HTMLElement | null = document.querySelector('emoji-popover');
+let textarea_element: HTMLTextAreaElement | null = document.querySelector('textarea');
 
 let emoji_matches: { emoji: string; keyword: string }[],
     show_emoji_picker = false,
@@ -96,7 +92,7 @@ async function handle_input(event: Event) {
 
         if (!custom_emoji_popover) {
             custom_emoji_popover = document.createElement("custom-emoji-popover");
-            element.parentElement?.parentElement?.appendChild(custom_emoji_popover)
+            element.parentElement?.appendChild(custom_emoji_popover)
         }
 
         custom_emoji_popover.className = "absolute min-w-[12vw] flex-col divide-y divide-accent/10 overflow-hidden rounded-[0.5vw] bg-neutral text-[1vw]";
