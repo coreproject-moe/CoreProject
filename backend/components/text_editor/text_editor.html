@@ -1,7 +1,7 @@
 {% load django_vite %} {% vite_asset 'js/texteditor.ts' %}
 
 <text-editor
-    class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw]"
+    class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw] flex flex-col"
 >
     <textarea-navbar class="flex h-8 items-center justify-between rounded-t-lg md:h-[2.5vw] md:rounded-t-[0.75vw]">
         <div class="btn-group w-full h-full overflow-hidden p-[0.15vw]">
@@ -117,11 +117,9 @@
         class="w-full resize-none border-none bg-secondary px-3 text-sm leading-tight text-surface-50 outline-none duration-300 ease-in-out placeholder:text-surface-200 focus:ring-0 md:px-[1vw] md:text-[1vw] md:leading-[1.5vw] h-28 overflow-y-scroll md:h-[8vw]"
     ></textarea>
     <textarea-footer
-        class="flex justify-between px-4 py-2 text-[0.65rem] font-thin leading-[1.5vw] text-accent md:px-[1vw] md:py-[0.1vw] md:text-[0.75vw]"
+        class="flex items-center gap-[0.25vw] px-4 py-2 text-[0.65rem] font-thin leading-[1.5vw] text-accent md:px-[1vw] md:py-[0.1vw] md:text-[0.75vw]"
+        style="align-self: flex-end;"
     >
-        <div></div>
-        <div>
-            Learn more about <a class="underline" href="/">core editor</a>
-        </div>
+        Learn more about <a class="underline" href="/">core editor</a>
     </textarea-footer>
 </text-editor>
