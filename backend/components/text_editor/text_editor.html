@@ -128,30 +128,4 @@
             Learn more about <a class="underline" href="/">core editor</a>
         </div>
     </textarea-footer>
-    <emoji-popover
-        class="emoji_picker hidden absolute min-w-[12vw] flex-col divide-y divide-accent/10 overflow-hidden rounded-[0.5vw] bg-neutral text-[1vw]"
-        _="
-           on hyperscript:popover(left, top, emoji_matches)
-           set my *left to left
-           set my *top to top
-
-           js(me, emoji_matches)
-           const items_arr = [];
-           for (const emoji of Object.values(emoji_matches.slice(0, 5).sort())) {
-           const item_html = `
-           <div class='flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:bg-primary-500 hover:text-white'>
-           <img
-           class='md:w-[1vw]'
-           src=${emoji.emoji}
-           >
-           <span>${emoji.keyword}</span>
-           </div>
-           `;
-           items_arr.push(item_html);
-           }
-           me.innerHTML = items_arr.join('');
-           end
-          "
-    >
-    </emoji-popover>
 </text-editor>
