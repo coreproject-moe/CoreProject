@@ -52,6 +52,8 @@ async function handle_input(event: Event) {
 
         // Hide emoji popover
         emoji_popover?.classList.add('hidden');
+        // new way
+        document.querySelector("custom-emoji-popover")?.remove();
     } else {
         // Set first item active
         active_emoji_index = 0;
@@ -101,7 +103,20 @@ async function handle_input(event: Event) {
                 },
             })
         );
-        emoji_popover?.classList.remove('hidden');
+        // emoji_popover?.classList.remove('hidden');
+
+        // try new logic
+        let custom_emoji_popover: HTMLElement | null = document.querySelector("custom-emoji-popover");
+
+        if (!custom_emoji_popover) {
+            custom_emoji_popover = document.createElement("custom-emoji-popover");
+            element.parentElement?.parentElement?.appendChild(custom_emoji_popover)
+        }
+        
+        custom_emoji_popover.innerHTML = "HEllo there!";
+        custom_emoji_popover.style.position = "absolute";
+        custom_emoji_popover.style.top = caret_offset_top!;
+        custom_emoji_popover.style.left = caret_offset_left!;
     }
 }
 
