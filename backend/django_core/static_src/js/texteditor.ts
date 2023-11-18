@@ -112,7 +112,7 @@ async function handle_input(event: Event) {
             custom_emoji_popover = document.createElement("custom-emoji-popover");
             element.parentElement?.parentElement?.appendChild(custom_emoji_popover)
         }
-        
+
         custom_emoji_popover.innerHTML = "HEllo there!";
         custom_emoji_popover.style.position = "absolute";
         custom_emoji_popover.style.top = caret_offset_top!;
