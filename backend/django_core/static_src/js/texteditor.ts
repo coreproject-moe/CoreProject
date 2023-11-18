@@ -7,9 +7,7 @@ let textarea_value = '',
     caret_offset_left: string | null = null;
 
 // Bindings
-let textarea_element: HTMLTextAreaElement | null = document.querySelector('textarea'),
-    text_editor_controls = document.querySelectorAll('.text-editor-controls'),
-    emoji_popover: HTMLElement | null = document.querySelector('emoji-popover');
+let textarea_element: HTMLTextAreaElement | null = document.querySelector('textarea');
 
 let emoji_matches: { emoji: string; keyword: string }[],
     show_emoji_picker = false,
