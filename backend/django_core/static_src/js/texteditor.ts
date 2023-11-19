@@ -450,14 +450,15 @@ async function select_emoji({
     const selection_start = element.selectionStart,
         selection_end = element.selectionEnd;
 
-    const text_before_selection = textarea_value.substring(0, selection_start),
-        text_after_selection = textarea_value.substring(selection_end);
+    const text_before_selection = element.value.substring(0, selection_start),
+        text_after_selection = element.value.substring(selection_end);
 
     // replace last word before text selection with emoji code
     const updated_text_before_selection = text_before_selection.replace(
         /\S+$/,
         emoji_code,
     );
+
     await insert_text({
         target: element,
         text: `${updated_text_before_selection} ${text_after_selection}`,
