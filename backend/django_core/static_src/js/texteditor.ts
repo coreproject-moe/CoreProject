@@ -98,16 +98,13 @@ async function handle_keydown(event: KeyboardEvent) {
         switch (event.key.toLowerCase()) {
             case 'arrowup': {
                 event.preventDefault();
-                active_emoji_index =
-                    (active_emoji_index - 1 + SHOWN_EMOJI_LIMIT) %
-                    SHOWN_EMOJI_LIMIT;
+                active_emoji_index = (active_emoji_index - 1 + emoji_matches.slice(0, 5).length) % emoji_matches.slice(0, 5).length;
                 initialize_emoji_popover();
                 break;
             }
             case 'arrowdown': {
                 event.preventDefault();
-                active_emoji_index =
-                    (active_emoji_index + 1) % SHOWN_EMOJI_LIMIT;
+                active_emoji_index = (active_emoji_index + 1) % emoji_matches.slice(0, 5).length;
                 initialize_emoji_popover();
                 break;
             }
