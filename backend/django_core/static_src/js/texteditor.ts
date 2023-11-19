@@ -86,7 +86,7 @@ async function handle_input(event: Event) {
                 caret_position.left - textarea_position.left
             }px)`;
         }
-        
+
         // show emoji popover
         initialize_emoji_popover();
     }
