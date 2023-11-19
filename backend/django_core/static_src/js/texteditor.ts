@@ -531,6 +531,7 @@ async function initialize_emoji_popover() {
             <img
                 class='md:w-[1vw]'
                 src=${emoji.emoji}
+                loading='lazy'
             >
             <span>${emoji.keyword}</span>
         `;
