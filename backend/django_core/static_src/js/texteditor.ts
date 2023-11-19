@@ -497,9 +497,17 @@ async function initialize_emoji_popover() {
         textarea_element?.parentElement?.appendChild(custom_emoji_popover);
     }
 
-    custom_emoji_popover.className =
-        "absolute min-w-[12vw] flex-col divide-y divide-accent/10 overflow-hidden rounded-[0.5vw] bg-neutral text-[1vw]";
-    custom_emoji_popover.style.position = "absolute"; // make sure its absolute
+    custom_emoji_popover.classList.add(
+        "absolute",
+        "min-w-[12vw]",
+        "flex-col",
+        "divide-y",
+        "divide-accent/10",
+        "overflow-hidden",
+        "rounded-[0.5vw]",
+        "bg-neutral",
+        "text-[1vw]",
+    );
     custom_emoji_popover.style.top = caret_offset_top!;
     custom_emoji_popover.style.left = caret_offset_left!;
 
@@ -508,8 +516,17 @@ async function initialize_emoji_popover() {
 
     emoji_matches.slice(0, 5).forEach((emoji, index) => {
         let child_el = document.createElement("div");
-        child_el.className =
-            "flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:bg-primary-500 hover:text-white";
+        child_el.classList.add(
+            "flex",
+            "cursor-pointer",
+            "items-center",
+            "gap-[0.5vw]",
+            "px-[0.75vw]",
+            "py-[0.25vw]",
+            "leading-[1.75vw]",
+            "hover:bg-primary-500",
+            "hover:text-white",
+        );
         child_el.innerHTML = `
             <img
                 class='md:w-[1vw]'
