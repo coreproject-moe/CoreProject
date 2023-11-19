@@ -11,8 +11,7 @@ let textarea_element: HTMLTextAreaElement | null = document.querySelector('texta
 
 let emoji_matches: { emoji: string; keyword: string }[],
     show_emoji_picker = false,
-    active_emoji_index: number,
-    SHOWN_EMOJI_LIMIT = 5;
+    active_emoji_index: number;
 
 // Hanlders
 async function handle_blur() {
