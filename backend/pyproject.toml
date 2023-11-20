@@ -131,10 +131,6 @@ mypy = "mypy . --enable-incomplete-feature=Unpack"
 ## Django extensions
 graph = "python django_core/manage.py graph_models -a -o mymodel.png"
 reset_db = "python django_core/manage.py reset_db"
-## Tailwind
-tailwind_install = "python ./django_core/manage.py tailwind install"
-tailwind_start = "python ./django_core/manage.py tailwind start"
-tailwind_build = "python ./django_core/manage.py tailwind build"
 # Test
 test_shinobi = 'pytest -vv ./shinobi'
 

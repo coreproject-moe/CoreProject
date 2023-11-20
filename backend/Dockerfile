@@ -1,5 +1,4 @@
-FROM python:3.11.2-alpine AS development_build
-
+FROM python:3.12-alpine AS development_build
 
 # python:
 ENV PYTHONFAULTHANDLER=1
@@ -28,17 +27,20 @@ RUN apk --no-cache add nodejs-current npm
 COPY . /code
 RUN poetry shell
 
-# Build tailwind CSS codes
-RUN python django_core/manage.py tailwind install
-RUN python django_core/manage.py tailwind build
-RUN npm cache clean --force
-RUN python django_core/manage.py collectstatic --clear --link --no-input
-COPY . /code
+# Build Frontend
+RUN npm i
+RUN npm run prod
 
 # Cleanups
+RUN poetry cache clear --all . --no-interaction
+RUN npm cache clean --force
 RUN pip install "pip-autoremove"
-RUN pip-autoremove poetry "pip-autoremove" cython 'django-browser-reload'  -y
+RUN pip-autoremove poetry "pip-autoremove" -y
 RUN apk del nodejs npm
+
+# Copy the final codes
+RUN python django_core/manage.py collectstatic --clear --link --no-input
+COPY . /code
 
 # Remove test folders
 RUN find . -type d -name 'test*' -exec rm -r {} +

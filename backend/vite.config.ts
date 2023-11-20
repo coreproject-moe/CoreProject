@@ -29,8 +29,8 @@ export default defineConfig({
                 // Tailwind.css
                 join(CSS_DIRECTORY, 'index.postcss'),
 
-                // Textarea
-                join(JS_DIRECTORY, 'textarea.ts'),
+                // Texteditor
+                join(JS_DIRECTORY, 'texteditor.ts'),
                 // Easytimer
                 join(JS_DIRECTORY, 'easytimer.ts'),
                 // Register Page
