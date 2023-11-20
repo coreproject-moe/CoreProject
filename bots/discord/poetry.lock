@@ -115,17 +115,17 @@ watchfiles = ">=0.10"
 
 [[package]]
 name = "aiohttp-jinja2"
-version = "1.5.1"
+version = "1.6"
 description = "jinja2 template renderer for aiohttp.web (http server for asyncio)"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "aiohttp-jinja2-1.5.1.tar.gz", hash = "sha256:8d149b2a57d91f794b33a394ea5bc66b567f38c74a5a6a9477afc2450f105c01"},
-    {file = "aiohttp_jinja2-1.5.1-py3-none-any.whl", hash = "sha256:45cf00b80ab4dcc19515df13a929826eeb9698e76a3bcfd99112418751f5a061"},
+    {file = "aiohttp-jinja2-1.6.tar.gz", hash = "sha256:a3a7ff5264e5bca52e8ae547bbfd0761b72495230d438d05b6c0915be619b0e2"},
+    {file = "aiohttp_jinja2-1.6-py3-none-any.whl", hash = "sha256:0df405ee6ad1b58e5a068a105407dc7dcc1704544c559f1938babde954f945c7"},
 ]
 
 [package.dependencies]
-aiohttp = ">=3.6.3"
+aiohttp = ">=3.9.0"
 jinja2 = ">=3.0.0"
 
 [[package]]
@@ -1075,4 +1075,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "5c7a0f20a11a061bc222270872b06531842f978b3ab765c914f46e52d6aa3ea1"
+content-hash = "93f33d523ae82581ef6bc7549e1f9859e103a01920767d45452aded2c1fb9794"
