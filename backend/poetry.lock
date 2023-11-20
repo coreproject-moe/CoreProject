@@ -574,13 +574,13 @@ test-randomorder = ["pytest-randomly"]
 
 [[package]]
 name = "django"
-version = "5.0b1"
+version = "5.0rc1"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
 optional = false
 python-versions = ">=3.10"
 files = [
-    {file = "Django-5.0b1-py3-none-any.whl", hash = "sha256:fc0fb85721c984d7c7bcbfc59cbd5eb7bcc5dd678f394b3b2b311f0c43cfb943"},
-    {file = "Django-5.0b1.tar.gz", hash = "sha256:c88635e733f0a0ef46c219635e21c8f5978eb2a14c3918224654541bc5d57030"},
+    {file = "Django-5.0rc1-py3-none-any.whl", hash = "sha256:04244960e238ef773db07890a9936351c8509c9a04812d38f5ead6d7acee58d6"},
+    {file = "Django-5.0rc1.tar.gz", hash = "sha256:a4bb77a659da032b741a95dcb957864f3695275d1d581ef7637214300faaaf30"},
 ]
 
 [package.dependencies]
