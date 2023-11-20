@@ -7,3 +7,7 @@ node_modules
 /media
 
 /data
+
+
+caddy-config
+caddy-data

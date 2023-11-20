@@ -34,7 +34,7 @@ services:
             - POSTGRES_NAME=postgres
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=supersecretpassword
-            - "POSTGRES_HOST=db"
+            - 'POSTGRES_HOST=db'
             - POSTGRES_PORT=5432
             # Sitename related things
             - DJANGO_ALLOWED_HOSTS=backend.${SITE_ADDRESS}
@@ -66,7 +66,7 @@ services:
             - POSTGRES_NAME=postgres
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=supersecretpassword
-            - "POSTGRES_HOST=db"
+            - 'POSTGRES_HOST=db'
             - POSTGRES_PORT=5432
             # Sitename related things
             - DJANGO_ALLOWED_HOSTS=backend.${SITE_ADDRESS}
@@ -102,7 +102,7 @@ services:
             - POSTGRES_NAME=postgres
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=supersecretpassword
-            - "POSTGRES_HOST=db"
+            - 'POSTGRES_HOST=db'
             - POSTGRES_PORT=5432
             # Sitename related things
             - DJANGO_ALLOWED_HOSTS=backend.${SITE_ADDRESS}
@@ -118,14 +118,6 @@ services:
             - beat
 
     # Frontend
-    anime:
-        image: frontend
-        restart: unless-stopped
-        build: ./frontend/AnimeCore
-        dns: 1.1.1.1
-        environment:
-            - PORT=3000
-            - HOST=0.0.0.0
 
     # Varnish
     # django-varnish:
@@ -156,4 +148,3 @@ services:
 
         depends_on:
             - django
-            - anime
