@@ -574,13 +574,13 @@ test-randomorder = ["pytest-randomly"]
 
 [[package]]
 name = "django"
-version = "5.0b1"
+version = "5.0rc1"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
 optional = false
 python-versions = ">=3.10"
 files = [
-    {file = "Django-5.0b1-py3-none-any.whl", hash = "sha256:fc0fb85721c984d7c7bcbfc59cbd5eb7bcc5dd678f394b3b2b311f0c43cfb943"},
-    {file = "Django-5.0b1.tar.gz", hash = "sha256:c88635e733f0a0ef46c219635e21c8f5978eb2a14c3918224654541bc5d57030"},
+    {file = "Django-5.0rc1-py3-none-any.whl", hash = "sha256:04244960e238ef773db07890a9936351c8509c9a04812d38f5ead6d7acee58d6"},
+    {file = "Django-5.0rc1.tar.gz", hash = "sha256:a4bb77a659da032b741a95dcb957864f3695275d1d581ef7637214300faaaf30"},
 ]
 
 [package.dependencies]
@@ -1392,13 +1392,13 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "poethepoet"
-version = "0.24.3"
+version = "0.24.4"
 description = "A task runner that works well with poetry."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "poethepoet-0.24.3-py3-none-any.whl", hash = "sha256:8817c6d3d8492776bbb17eb29b7b815b2905aefaa0ad887137e69e53349e2235"},
-    {file = "poethepoet-0.24.3.tar.gz", hash = "sha256:73f1060200d1c8f21e303d06a879c5c0e17b96ab16740da70aee2dcc3e4350e4"},
+    {file = "poethepoet-0.24.4-py3-none-any.whl", hash = "sha256:fb4ea35d7f40fe2081ea917d2e4102e2310fda2cde78974050ca83896e229075"},
+    {file = "poethepoet-0.24.4.tar.gz", hash = "sha256:ff4220843a87c888cbcb5312c8905214701d0af60ac7271795baa8369b428fef"},
 ]
 
 [package.dependencies]
@@ -2480,4 +2480,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "53da1c033ce7c121859914580e61ca7ff72d492c143c030252a57f37c5aea2b2"
+content-hash = "6346be4dcc5a5fd79bc681fadd37739fcf1e047f13b47d9278a43a9994a71d2c"

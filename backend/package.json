@@ -11,7 +11,7 @@
     "author": "",
     "license": "AGPL-3.0-or-later",
     "dependencies": {
-        "@laynezh/vite-plugin-lib-assets": "^0.5.7",
+        "@laynezh/vite-plugin-lib-assets": "^0.5.8",
         "@tailwindcss/aspect-ratio": "^0.4.2",
         "@tailwindcss/forms": "^0.5.7",
         "@tailwindcss/typography": "^0.5.10",
@@ -33,7 +33,7 @@
         "autoprefixer": "^10.4.16",
         "caret-pos": "^2.0.0",
         "cssnano": "^6.0.1",
-        "daisyui": "^4.3.1",
+        "daisyui": "^4.4.2",
         "easytimer.js": "^4.6.0",
         "htmx.org": "^1.9.8",
         "hyperscript.org": "^0.9.12",
