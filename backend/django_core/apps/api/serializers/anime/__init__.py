@@ -13,7 +13,6 @@ from ..staffs import StaffSerializer
 from .genre import AnimeGenreSerializer
 from .theme import AnimeThemeSerializer
 
-
 # Actual serializers
 
 
