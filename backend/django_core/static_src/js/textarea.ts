@@ -1,14 +1,13 @@
-import { offset } from "caret-pos";
+import { offset } from 'caret-pos';
 
-import emojis from "./emoji.json" assert { type: "json" };
+import emojis from './emoji.json' assert { type: 'json' };
 
-let textarea_value = "",
-    caret_offset_top: string | null = null,
+let caret_offset_top: string | null = null,
     caret_offset_left: string | null = null;
 
 // Bindings
 let textarea_element: HTMLTextAreaElement | null =
-    document.querySelector("textarea");
+    document.querySelector('textarea');
 
 let emoji_matches: { emoji: string; keyword: string }[],
     show_emoji_picker = false,
@@ -30,11 +29,11 @@ async function handle_input(event: Event) {
 
     // to get last typed word even its in middle
     const selection_start = element.selectionStart;
-    if (typeof selection_start !== "number") return;
+    if (typeof selection_start !== 'number') return;
 
     const words_before_caret = input_text.substring(0, selection_start);
     const words_list = words_before_caret.split(/[\s\n]/);
-    last_typed_word = words_list.at(-1) ?? "";
+    last_typed_word = words_list.at(-1) ?? '';
 
     // check if last_typed_word starts with ":" that may or may not have subsequent word characters
     const emoji_code = last_typed_word?.match(/^:(\S*)$/);
@@ -47,7 +46,7 @@ async function handle_input(event: Event) {
         caret_offset_left = null;
 
         // remove emoji popover element
-        document.querySelector("custom-emoji-popover")?.remove();
+        document.querySelector('custom-emoji-popover')?.remove();
     } else {
         // Set first item active
         active_emoji_index = 0;
@@ -72,7 +71,7 @@ async function handle_input(event: Event) {
 
             // CSS
             const line_height =
-                getComputedStyle(element).getPropertyValue("line-height");
+                getComputedStyle(element).getPropertyValue('line-height');
 
             const caret_position = offset(element);
 
@@ -96,7 +95,7 @@ async function handle_keydown(event: KeyboardEvent) {
     /** Emoji specific codes */
     if (show_emoji_picker) {
         switch (event.key.toLowerCase()) {
-            case "arrowup": {
+            case 'arrowup': {
                 event.preventDefault();
                 active_emoji_index =
                     (active_emoji_index -
@@ -106,14 +105,14 @@ async function handle_keydown(event: KeyboardEvent) {
                 initialize_emoji_popover();
                 break;
             }
-            case "arrowdown": {
+            case 'arrowdown': {
                 event.preventDefault();
                 active_emoji_index =
                     (active_emoji_index + 1) % emoji_matches.slice(0, 5).length;
                 initialize_emoji_popover();
                 break;
             }
-            case "enter": {
+            case 'enter': {
                 event.preventDefault();
                 await select_emoji({
                     element: event.currentTarget as HTMLTextAreaElement,
@@ -130,31 +129,31 @@ async function handle_keydown(event: KeyboardEvent) {
      */
     if (event.ctrlKey) {
         switch (event.key.toLowerCase()) {
-            case "b": {
+            case 'b': {
                 /** Bold Functionality */
                 event.preventDefault();
                 await bold_text(event.target as HTMLTextAreaElement);
                 break;
             }
-            case "i": {
+            case 'i': {
                 /** Italic functionality */
                 event.preventDefault();
                 await italic_text(event.target as HTMLTextAreaElement);
                 break;
             }
-            case "e": {
+            case 'e': {
                 /** Code functionality */
                 event.preventDefault();
                 await code_text(event.target as HTMLTextAreaElement);
                 break;
             }
-            case "u": {
+            case 'u': {
                 /** Underline functionality */
                 event.preventDefault();
                 await underline_text(event.target as HTMLTextAreaElement);
                 break;
             }
-            case "k": {
+            case 'k': {
                 /** Hyperlink functionality */
                 event.preventDefault();
                 await hyperlink_text(event.target as HTMLTextAreaElement);
@@ -165,7 +164,7 @@ async function handle_keydown(event: KeyboardEvent) {
 
     if (event.ctrlKey && event.shiftKey) {
         switch (event.key.toLowerCase()) {
-            case "x":
+            case 'x':
                 event.preventDefault();
                 await strike_text(event.target as HTMLTextAreaElement);
                 break;
@@ -176,40 +175,40 @@ async function handle_keydown(event: KeyboardEvent) {
 async function bold_text(element: HTMLTextAreaElement) {
     await operate_on_selected_text({
         element: element,
-        starting_operator: "**",
-        ending_operator: "**",
+        starting_operator: '**',
+        ending_operator: '**',
     });
 }
 
 async function italic_text(element: HTMLTextAreaElement) {
     await operate_on_selected_text({
         element: element,
-        starting_operator: "_",
-        ending_operator: "_",
+        starting_operator: '_',
+        ending_operator: '_',
     });
 }
 
 async function code_text(element: HTMLTextAreaElement) {
     await operate_on_selected_text({
         element: element,
-        starting_operator: "`",
-        ending_operator: "`",
+        starting_operator: '`',
+        ending_operator: '`',
     });
 }
 
 async function underline_text(element: HTMLTextAreaElement) {
     await operate_on_selected_text({
         element: element,
-        starting_operator: "<u>",
-        ending_operator: "</u>",
+        starting_operator: '<u>',
+        ending_operator: '</u>',
     });
 }
 
 async function strike_text(element: HTMLTextAreaElement) {
     await operate_on_selected_text({
         element: element,
-        starting_operator: "~~",
-        ending_operator: "~~",
+        starting_operator: '~~',
+        ending_operator: '~~',
     });
 }
 
@@ -218,21 +217,21 @@ async function hyperlink_text(element: HTMLTextAreaElement) {
         selection_end = element.selectionEnd,
         selection_text = element.value.substring(
             selection_start,
-            selection_end,
+            selection_end
         );
 
     // Handle use cases
     if (
         element.value.substring(selection_start - 3, selection_start) ==
-            "[](" &&
-        element.value.substring(selection_end, selection_end + 1) == ")"
+            '[](' &&
+        element.value.substring(selection_end, selection_end + 1) == ')'
     ) {
         /**
          * [](||) -> ||
          */
         element.focus();
         element.setSelectionRange(selection_start - 3, selection_end + 1);
-        document.execCommand("delete");
+        document.execCommand('delete');
     } else {
         const replacement_text = `[${selection_text}]()`;
         await insert_text({
@@ -244,7 +243,7 @@ async function hyperlink_text(element: HTMLTextAreaElement) {
         });
         element.setSelectionRange(
             selection_start + selection_text.length + 3,
-            selection_start + selection_text.length + 3,
+            selection_start + selection_text.length + 3
         );
     }
 }
@@ -257,10 +256,10 @@ async function paste_text(event: ClipboardEvent) {
         selection_end = element.selectionEnd,
         selection_text = element.value.substring(
             selection_start,
-            selection_end,
+            selection_end
         );
 
-    const clipboard_data = event.clipboardData?.getData("text") ?? "",
+    const clipboard_data = event.clipboardData?.getData('text') ?? '',
         clipboard_data_contains_url = is_valid_url(clipboard_data);
 
     if (selection_text && clipboard_data_contains_url) {
@@ -274,7 +273,7 @@ async function paste_text(event: ClipboardEvent) {
         });
         element.setSelectionRange(
             selection_start + replacement_text.length,
-            selection_start + replacement_text.length,
+            selection_start + replacement_text.length
         );
     } else {
         const replacement_text = clipboard_data;
@@ -302,7 +301,7 @@ async function insert_text({
      * Mozilla : https://bugzilla.mozilla.org/show_bug.cgi?id=1523270
      */
     target.select();
-    document.execCommand("insertText", false, text);
+    document.execCommand('insertText', false, text);
 }
 
 async function operate_on_selected_text({
@@ -320,27 +319,27 @@ async function operate_on_selected_text({
         selection_end = element.selectionEnd,
         selection_text = element.value.substring(
             selection_start,
-            selection_end,
+            selection_end
         );
 
     const regex_pattern_for_operator = new RegExp(
-        "^" +
-            starting_operator.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&") +
-            "|" +
-            ending_operator.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&") +
-            "$",
-        "g",
+        '^' +
+            starting_operator.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&') +
+            '|' +
+            ending_operator.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&') +
+            '$',
+        'g'
     );
 
     // Handle use cases
     if (
         element.value.substring(
             selection_start - starting_operator.length,
-            selection_start,
+            selection_start
         ) == starting_operator &&
         element.value.substring(
             selection_end,
-            selection_end + ending_operator.length,
+            selection_end + ending_operator.length
         ) == ending_operator
     ) {
         if (selection_text) {
@@ -351,25 +350,25 @@ async function operate_on_selected_text({
             const replacement_text = element.value
                 .substring(
                     selection_start - starting_operator.length,
-                    selection_end + ending_operator.length,
+                    selection_end + ending_operator.length
                 )
-                .replace(regex_pattern_for_operator, "");
+                .replace(regex_pattern_for_operator, '');
             await insert_text({
                 target: element,
                 text:
                     element.value.substring(
                         0,
-                        selection_start - starting_operator.length,
+                        selection_start - starting_operator.length
                     ) +
                     replacement_text +
                     element.value.substring(
-                        selection_end + ending_operator.length,
+                        selection_end + ending_operator.length
                     ),
             });
 
             element.setSelectionRange(
                 selection_start - starting_operator.length,
-                selection_end - starting_operator.length,
+                selection_end - starting_operator.length
             );
         } else {
             /**
@@ -379,18 +378,18 @@ async function operate_on_selected_text({
             element.focus();
             element.setSelectionRange(
                 selection_start - starting_operator.length,
-                selection_end + ending_operator.length,
+                selection_end + ending_operator.length
             );
-            document.execCommand("delete", false);
+            document.execCommand('delete', false);
         }
     } else if (
         element.value.substring(
             selection_start,
-            selection_start + starting_operator.length,
+            selection_start + starting_operator.length
         ) == starting_operator &&
         element.value.substring(
             selection_end - ending_operator.length,
-            selection_end,
+            selection_end
         ) == ending_operator
     ) {
         /**
@@ -401,9 +400,9 @@ async function operate_on_selected_text({
         const replacement_text = element.value
             .substring(
                 selection_start - starting_operator.length,
-                selection_end + ending_operator.length,
+                selection_end + ending_operator.length
             )
-            .replace(regex_pattern_for_operator, "");
+            .replace(regex_pattern_for_operator, '');
         await insert_text({
             target: element,
             text:
@@ -414,7 +413,7 @@ async function operate_on_selected_text({
 
         element.setSelectionRange(
             selection_start,
-            selection_end - (starting_operator.length + ending_operator.length),
+            selection_end - (starting_operator.length + ending_operator.length)
         );
     } else {
         /**
@@ -432,7 +431,7 @@ async function operate_on_selected_text({
         });
         element.setSelectionRange(
             selection_start + starting_operator.length,
-            selection_end + starting_operator.length,
+            selection_end + starting_operator.length
         );
     }
 }
@@ -456,7 +455,7 @@ async function select_emoji({
     // replace last word before text selection with emoji code
     const updated_text_before_selection = text_before_selection.replace(
         /\S+$/,
-        emoji_code,
+        emoji_code
     );
 
     await insert_text({
@@ -481,7 +480,7 @@ function is_valid_url(url_string: string): boolean {
     // Credit : https://stackoverflow.com/a/43467144
     try {
         const url = new URL(url_string);
-        return url.protocol === "http:" || url.protocol === "https:";
+        return url.protocol === 'http:' || url.protocol === 'https:';
     } catch (_) {
         return false;
     }
@@ -490,24 +489,24 @@ function is_valid_url(url_string: string): boolean {
 async function initialize_emoji_popover() {
     // emoji popover logics
     let custom_emoji_popover: HTMLElement | null = document.querySelector(
-        "custom-emoji-popover",
+        'custom-emoji-popover'
     );
 
     if (!custom_emoji_popover) {
-        custom_emoji_popover = document.createElement("custom-emoji-popover");
+        custom_emoji_popover = document.createElement('custom-emoji-popover');
         textarea_element?.parentElement?.appendChild(custom_emoji_popover);
     }
 
     custom_emoji_popover.classList.add(
-        "absolute",
-        "min-w-[12vw]",
-        "flex-col",
-        "divide-y",
-        "divide-accent/10",
-        "overflow-hidden",
-        "rounded-[0.5vw]",
-        "bg-neutral",
-        "text-[1vw]",
+        'absolute',
+        'min-w-[12vw]',
+        'flex-col',
+        'divide-y',
+        'divide-accent/10',
+        'overflow-hidden',
+        'rounded-[0.5vw]',
+        'bg-neutral',
+        'text-[1vw]'
     );
     custom_emoji_popover.style.top = caret_offset_top!;
     custom_emoji_popover.style.left = caret_offset_left!;
@@ -516,17 +515,17 @@ async function initialize_emoji_popover() {
     custom_emoji_popover.replaceChildren();
 
     emoji_matches.slice(0, 5).forEach((emoji, index) => {
-        let child_el = document.createElement("div");
+        let child_el = document.createElement('div');
         child_el.classList.add(
-            "flex",
-            "cursor-pointer",
-            "items-center",
-            "gap-[0.5vw]",
-            "px-[0.75vw]",
-            "py-[0.25vw]",
-            "leading-[1.75vw]",
-            "hover:bg-primary-500",
-            "hover:text-white",
+            'flex',
+            'cursor-pointer',
+            'items-center',
+            'gap-[0.5vw]',
+            'px-[0.75vw]',
+            'py-[0.25vw]',
+            'leading-[1.75vw]',
+            'hover:bg-primary-500',
+            'hover:text-white'
         );
         child_el.innerHTML = `
             <img
@@ -539,7 +538,7 @@ async function initialize_emoji_popover() {
 
         // check active
         if (index === active_emoji_index) {
-            child_el.classList.add("bg-primary", "text-white");
+            child_el.classList.add('bg-primary', 'text-white');
         }
         custom_emoji_popover?.appendChild(child_el);
     });
@@ -547,46 +546,46 @@ async function initialize_emoji_popover() {
 
 // Add events
 if (textarea_element) {
-    textarea_element.addEventListener("input", (event) => handle_input(event));
-    textarea_element.addEventListener("paste", (event) => paste_text(event));
-    textarea_element.addEventListener("keydown", (event) =>
-        handle_keydown(event),
+    textarea_element.addEventListener('input', (event) => handle_input(event));
+    textarea_element.addEventListener('paste', (event) => paste_text(event));
+    textarea_element.addEventListener('keydown', (event) =>
+        handle_keydown(event)
     );
 
     document
         .querySelector(`[data-action='bold']`)
         ?.addEventListener(
-            "click",
-            async () => await bold_text(textarea_element!),
+            'click',
+            async () => await bold_text(textarea_element!)
         );
     document
         .querySelector(`[data-action='italic']`)
         ?.addEventListener(
-            "click",
-            async () => await italic_text(textarea_element!),
+            'click',
+            async () => await italic_text(textarea_element!)
         );
     document
         .querySelector(`[data-action='underline']`)
         ?.addEventListener(
-            "click",
-            async () => await underline_text(textarea_element!),
+            'click',
+            async () => await underline_text(textarea_element!)
         );
     document
         .querySelector(`[data-action='strike']`)
         ?.addEventListener(
-            "click",
-            async () => await strike_text(textarea_element!),
+            'click',
+            async () => await strike_text(textarea_element!)
         );
     document
         .querySelector(`[data-action='code']`)
         ?.addEventListener(
-            "click",
-            async () => await code_text(textarea_element!),
+            'click',
+            async () => await code_text(textarea_element!)
         );
     document
         .querySelector(`[data-action='hyperlink']`)
         ?.addEventListener(
-            "click",
-            async () => await hyperlink_text(textarea_element!),
+            'click',
+            async () => await hyperlink_text(textarea_element!)
         );
 }

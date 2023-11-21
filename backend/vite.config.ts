@@ -25,14 +25,14 @@ export default defineConfig({
                 // Vendor packages
                 join(JS_DIRECTORY, 'vendor', 'htmx.ts'),
                 join(JS_DIRECTORY, 'vendor', 'hyperscript.ts'),
+                join(JS_DIRECTORY, 'vendor', 'easytimer.ts'),
 
                 // Tailwind.css
                 join(CSS_DIRECTORY, 'index.postcss'),
 
                 // Textarea
                 join(JS_DIRECTORY, 'textarea.ts'),
-                // Easytimer
-                join(JS_DIRECTORY, 'easytimer.ts'),
+
                 // Register Page
                 join(JS_DIRECTORY, 'register.ts'),
                 // join(IMAGE_DIRECTORY, 'favicon', 'favicon.svg'),
