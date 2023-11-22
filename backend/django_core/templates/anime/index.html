@@ -7,14 +7,16 @@
     <hero-section class="flex flex-col justify-between md:flex-row">
         <latest-animes-slider class="relative h-96 w-full md:h-[26vw] md:w-[42vw]">
             <slider
-                class="h-full duration-300 flex"
+                class="h-full duration-300 flex md:rounded-t-[0.875vw]"
                 _="
                    on fetch:beforeRequest(headers)
+                   add .bg-neutral to me
                    add .backdrop-blur-sm to next <backdrop/>
                    then call window.timer.reset()
 
                    on fetch:afterResponse
                    wait 300ms
+                   remove .bg-neutral from me
                    send hyperscript:change_active(index:current_index) to .slider-brick
                    then remove .backdrop-blur-sm from next <backdrop/>
 
