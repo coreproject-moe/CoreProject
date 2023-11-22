@@ -358,167 +358,37 @@
             </see-all>
         </my-list-info>
         <my-list-animes class="relative mt-4 grid grid-cols-3 gap-3 md:mt-[1vw] md:grid-cols-5 md:gap-[1.25vw]">
-            <a href="/anime/mal/1/episode/4" class="relative" aria-expanded="false">
-                <div class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]">
-                    <img class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]" src="/images/cover/one_piece.webp" alt="One piece" style="" loading="lazy" />
-                </div>
-                <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
-                    <div class="flex flex-col gap-1 bg-surface-900/90 p-3 md:gap-[0.35vw] md:p-[1vw]">
-                        <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
-                            <div>
-                                <div class="flex overflow-hidden text-sm font-semibold duration-300 ease-in-out scrollbar-none hover:max-h-[10vw] hover:overflow-y-scroll md:max-h-[1.35vw] md:text-[1vw] md:leading-[1.35vw]">
-                                    <span class="line-clamp-1 md:line-clamp-none">One piece</span>
-                                </div>
-                            </div>
-                        </scroll-area>
-                        <anime_info class="flex items-center gap-2 text-xs leading-none text-surface-50 md:gap-[0.5vw] md:text-[0.8vw]">
-                            <span class="hidden md:flex">Watching</span>
-                            <svg class="hidden opacity-75 md:flex md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
-                            </svg>
-                            <span>4/1071 eps</span>
-                        </anime_info>
+            {% for anime in my_list %}
+                <a href="/anime/mal/1/episode/4" class="relative" aria-expanded="false">
+                    <div class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]">
+                        <img
+                            class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]"
+                            src="{{ anime.image }}"
+                            alt="One piece"
+                            style=""
+                            loading="lazy"
+                        />
                     </div>
-                </anime-info>
-            </a>
-            <a href="/anime/mal/2/episode/8" class="relative" aria-expanded="false">
-                <div class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]">
-                    <img class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]" src="/images/cover/horimiya.jpg" alt="Horimiya: The Missing Piece" style="" loading="lazy" />
-                </div>
-                <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
-                    <div class="flex flex-col gap-1 bg-surface-900/90 p-3 md:gap-[0.35vw] md:p-[1vw]">
-                        <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
-                            <div>
-                                <div class="flex overflow-hidden text-sm font-semibold duration-300 ease-in-out scrollbar-none hover:max-h-[10vw] hover:overflow-y-scroll md:max-h-[1.35vw] md:text-[1vw] md:leading-[1.35vw]">
-                                    <span class="line-clamp-1 md:line-clamp-none">Horimiya: The Missing Piece</span>
+                    <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
+                        <div class="flex flex-col gap-1 bg-secondary/90 p-3 md:gap-[0.35vw] md:p-[1vw]">
+                            <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
+                                <div>
+                                    <div class="flex overflow-hidden text-sm font-semibold duration-300 ease-in-out scrollbar-none hover:max-h-[10vw] hover:overflow-y-scroll md:max-h-[1.35vw] md:text-[1vw] md:leading-[1.35vw]">
+                                        <span class="line-clamp-1 md:line-clamp-none">{{ anime.name }}</span>
+                                    </div>
                                 </div>
-                            </div>
-                        </scroll-area>
-                        <anime_info class="flex items-center gap-2 text-xs leading-none text-surface-50 md:gap-[0.5vw] md:text-[0.8vw]">
-                            <span class="hidden md:flex">Watching</span>
-                            <svg class="hidden opacity-75 md:flex md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
-                            </svg>
-                            <span>8/28 eps</span>
-                        </anime_info>
-                    </div>
-                </anime-info>
-            </a>
-            <a href="/anime/mal/3/episode/1" class="relative" aria-expanded="false">
-                <div class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]">
-                    <img class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]" src="/images/cover/rurouni.webp" alt="Rurouni Kenshin: Meji na tokito" style="" loading="lazy" />
-                </div>
-                <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
-                    <div class="flex flex-col gap-1 bg-surface-900/90 p-3 md:gap-[0.35vw] md:p-[1vw]">
-                        <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
-                            <div>
-                                <div class="flex overflow-hidden text-sm font-semibold duration-300 ease-in-out scrollbar-none hover:max-h-[10vw] hover:overflow-y-scroll md:max-h-[1.35vw] md:text-[1vw] md:leading-[1.35vw]">
-                                    <span class="line-clamp-1 md:line-clamp-none">Rurouni Kenshin: Meji na tokito</span>
-                                </div>
-                            </div>
-                        </scroll-area>
-                        <anime_info class="flex items-center gap-2 text-xs leading-none text-surface-50 md:gap-[0.5vw] md:text-[0.8vw]">
-                            <span class="hidden md:flex">Watching</span>
-                            <svg class="hidden opacity-75 md:flex md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
-                            </svg>
-                            <span>1/6 eps</span>
-                        </anime_info>
-                    </div>
-                </anime-info>
-            </a>
-            <a href="/anime/mal/4/episode/5" class="relative" aria-expanded="false">
-                <div class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]">
-                    <img class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]" src="/images/7Seeds.avif" alt="7SEEDS" style="" loading="lazy" />
-                </div>
-                <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
-                    <div class="flex flex-col gap-1 bg-surface-900/90 p-3 md:gap-[0.35vw] md:p-[1vw]">
-                        <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
-                            <div>
-                                <div class="flex overflow-hidden text-sm font-semibold duration-300 ease-in-out scrollbar-none hover:max-h-[10vw] hover:overflow-y-scroll md:max-h-[1.35vw] md:text-[1vw] md:leading-[1.35vw]">
-                                    <span class="line-clamp-1 md:line-clamp-none">7SEEDS</span>
-                                </div>
-                            </div>
-                        </scroll-area>
-                        <anime_info class="flex items-center gap-2 text-xs leading-none text-surface-50 md:gap-[0.5vw] md:text-[0.8vw]">
-                            <span class="hidden md:flex">Watching</span>
-                            <svg class="hidden opacity-75 md:flex md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
-                            </svg>
-                            <span>5/12 eps</span>
-                        </anime_info>
-                    </div>
-                </anime-info>
-            </a>
-            <a href="/anime/mal/5/episode/19" class="relative" aria-expanded="false">
-                <div class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]">
-                    <img class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]" src="/images/ShakuganNoShana.avif" alt="Shakugan no Shana" style="" loading="lazy" />
-                </div>
-                <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
-                    <div class="flex flex-col gap-1 bg-surface-900/90 p-3 md:gap-[0.35vw] md:p-[1vw]">
-                        <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
-                            <div>
-                                <div class="flex overflow-hidden text-sm font-semibold duration-300 ease-in-out scrollbar-none hover:max-h-[10vw] hover:overflow-y-scroll md:max-h-[1.35vw] md:text-[1vw] md:leading-[1.35vw]">
-                                    <span class="line-clamp-1 md:line-clamp-none">Shakugan no Shana</span>
-                                </div>
-                            </div>
-                        </scroll-area>
-                        <anime_info class="flex items-center gap-2 text-xs leading-none text-surface-50 md:gap-[0.5vw] md:text-[0.8vw]">
-                            <span class="hidden md:flex">Watching</span>
-                            <svg class="hidden opacity-75 md:flex md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
-                            </svg>
-                            <span>19/24 eps</span>
-                        </anime_info>
-                    </div>
-                </anime-info>
-            </a>
-            <a href="/anime/mal/6/episode/11" class="relative" aria-expanded="false">
-                <div class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]">
-                    <img class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]" src="/images/cover/jjk.webp" alt="Jujutsu Kaisen 2nd season" style="" loading="lazy" />
-                </div>
-                <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
-                    <div class="flex flex-col gap-1 bg-surface-900/90 p-3 md:gap-[0.35vw] md:p-[1vw]">
-                        <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
-                            <div>
-                                <div class="flex overflow-hidden text-sm font-semibold duration-300 ease-in-out scrollbar-none hover:max-h-[10vw] hover:overflow-y-scroll md:max-h-[1.35vw] md:text-[1vw] md:leading-[1.35vw]">
-                                    <span class="line-clamp-1 md:line-clamp-none">Jujutsu Kaisen 2nd season</span>
-                                </div>
-                            </div>
-                        </scroll-area>
-                        <anime_info class="flex items-center gap-2 text-xs leading-none text-surface-50 md:gap-[0.5vw] md:text-[0.8vw]">
-                            <span class="hidden md:flex">Watching</span>
-                            <svg class="hidden opacity-75 md:flex md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
-                            </svg>
-                            <span>11/12 eps</span>
-                        </anime_info>
-                    </div>
-                </anime-info>
-            </a>
-            <a href="/anime/mal/7/episode/9" class="relative" aria-expanded="false">
-                <div class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]">
-                    <img class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]" src="/images/ToLOVERu.avif" alt="To LOVE-Ru" style="" loading="lazy" />
-                </div>
-                <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
-                    <div class="flex flex-col gap-1 bg-surface-900/90 p-3 md:gap-[0.35vw] md:p-[1vw]">
-                        <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
-                            <div>
-                                <div class="flex overflow-hidden text-sm font-semibold duration-300 ease-in-out scrollbar-none hover:max-h-[10vw] hover:overflow-y-scroll md:max-h-[1.35vw] md:text-[1vw] md:leading-[1.35vw]">
-                                    <span class="line-clamp-1 md:line-clamp-none">To LOVE-Ru</span>
-                                </div>
-                            </div>
-                        </scroll-area>
-                        <anime_info class="flex items-center gap-2 text-xs leading-none text-surface-50 md:gap-[0.5vw] md:text-[0.8vw]">
-                            <span class="hidden md:flex">Watching</span>
-                            <svg class="hidden opacity-75 md:flex md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
-                            </svg>
-                            <span>9/26 eps</span>
-                        </anime_info>
-                    </div>
-                </anime-info>
-            </a>
+                            </scroll-area>
+                            <anime_info class="flex items-center gap-2 text-xs leading-none text-surface-50 md:gap-[0.5vw] md:text-[0.8vw]">
+                                <span class="hidden md:flex">{{ anime.status }}</span>
+                                <svg class="hidden opacity-75 md:flex md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
+                                </svg>
+                                <span>{{ anime.current_ep }}/{{ anime.total_ep }} eps</span>
+                            </anime_info>
+                        </div>
+                    </anime-info>
+                </a>
+            {% endfor %}
         </my-list-animes>
     </my-list>
 </home-container>
