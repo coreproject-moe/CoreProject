@@ -370,19 +370,13 @@
                         />
                     </div>
                     <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
-                        <div class="flex flex-col gap-1 bg-secondary/90 p-3 md:gap-[0.35vw] md:p-[1vw]">
-                            <scroll-area class="block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]">
-                                <div>
-                                    <div class="flex overflow-hidden text-sm font-semibold duration-300 ease-in-out scrollbar-none hover:max-h-[10vw] hover:overflow-y-scroll md:max-h-[1.35vw] md:text-[1vw] md:leading-[1.35vw]">
-                                        <span class="line-clamp-1 md:line-clamp-none">{{ anime.name }}</span>
-                                    </div>
-                                </div>
-                            </scroll-area>
+                        <div class="flex flex-col gap-1 bg-secondary/95 p-3 md:gap-[0.35vw] md:p-[1vw]">
+                            {% component_block 'scroll_area' parent_class='md:max-h-[1.35vw] md:leading-[1.35vw] hover:max-h-[10vw] duration-300' scroll_area_class='line-clamp-1 md:line-clamp-none text-sm font-semibold md:text-[1vw]' %}
+                                {{ anime.name }}
+                            {% endcomponent_block %}
                             <anime_info class="flex items-center gap-2 text-xs leading-none text-surface-50 md:gap-[0.5vw] md:text-[0.8vw]">
-                                <span class="hidden md:flex">{{ anime.status }}</span>
-                                <svg class="hidden opacity-75 md:flex md:w-[0.25vw]" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="5" cy="5" r="5" fill="currentColor"></circle>
-                                </svg>
+                                <span class="hidden md:flex capitalize">{{ anime.status }}</span>
+                                {% include "icons/dot.html" with class="hidden opacity-75 md:flex md:w-[0.25vw]" %}
                                 <span>{{ anime.current_ep }}/{{ anime.total_ep }} eps</span>
                             </anime_info>
                         </div>
