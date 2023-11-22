@@ -118,7 +118,7 @@ my_list = [
     {
         "id": 1,
         "name": "One piece",
-        "image": "/public/images/mock/OnePiece.jpg",
+        "image": "https://i.pinimg.com/originals/04/65/2b/04652b44ea7c1275d1022d98d59ecc97.jpg",
         "status": "watching",
         "current_ep": 612,
         "total_ep": 1086,
