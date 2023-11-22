@@ -11,12 +11,14 @@
                 _="
                    on fetch:beforeRequest(headers)
                    add .bg-neutral to me
+                   add .animate-pulse to me
                    add .backdrop-blur-sm to next <backdrop/>
                    then call window.timer.reset()
 
                    on fetch:afterResponse
                    wait 300ms
                    remove .bg-neutral from me
+                   remove .animate-pulse from me
                    send hyperscript:change_active(index:current_index) to .slider-brick
                    then remove .backdrop-blur-sm from next <backdrop/>
 
