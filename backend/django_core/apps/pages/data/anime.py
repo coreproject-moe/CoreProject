@@ -113,3 +113,14 @@ anime_episode = {
     "formats": ["sub", "dub"],
     "resolutions": ["sd", "hd", "fhd"],
 }
+
+my_list = [
+    {
+        "id": 1,
+        "name": "One piece",
+        "image": "/public/images/mock/OnePiece.jpg",
+        "status": "watching",
+        "current_ep": 612,
+        "total_ep": 1086,
+    }
+]
