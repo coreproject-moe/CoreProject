@@ -10,6 +10,7 @@ from .views.anime import (
 from .views.stack import stack_view
 from .views.upload import upload_view
 from .views.user import login_view, logout_view, register_view, reset_password_view
+from .views.partial import markdown_endpoint
 
 urlpatterns = [
     # Anime pages
@@ -37,4 +38,6 @@ urlpatterns = [
     path("user/reset-password/", reset_password_view, name="reset_password_view"),
     # Upload page
     path("upload/", upload_view, name="upload_view"),
+    # Partials
+    path("partials/markdown", markdown_endpoint, name="partial_markdown_endpoint"),
 ]
