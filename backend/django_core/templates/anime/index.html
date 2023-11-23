@@ -359,29 +359,42 @@
         </my-list-info>
         <my-list-animes class="relative mt-4 grid grid-cols-3 gap-3 md:mt-[1vw] md:grid-cols-5 md:gap-[1.25vw]">
             {% for anime in my_list %}
-                <a href="/anime/mal/1/episode/4" class="relative" aria-expanded="false">
-                    <div class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]">
-                        <img
-                            class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]"
-                            src="{{ anime.image }}"
-                            alt="One piece"
-                            style=""
-                            loading="lazy"
-                        />
-                    </div>
-                    <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
-                        <div class="flex flex-col gap-1 bg-secondary/95 p-3 md:gap-[0.35vw] md:p-[1vw]">
-                            {% component_block 'scroll_area' parent_class='md:max-h-[1.35vw] md:leading-[1.35vw] hover:max-h-[10vw] duration-300' scroll_area_class='line-clamp-1 md:line-clamp-none text-sm font-semibold md:text-[1vw]' %}
-                                {{ anime.name }}
-                            {% endcomponent_block %}
-                            <anime_info class="flex items-center gap-2 text-xs leading-none text-surface-50 md:gap-[0.5vw] md:text-[0.8vw]">
-                                <span class="hidden md:flex capitalize">{{ anime.status }}</span>
-                                {% include "icons/dot.html" with class="hidden opacity-75 md:flex md:w-[0.25vw]" %}
-                                <span>{{ anime.current_ep }}/{{ anime.total_ep }} eps</span>
-                            </anime_info>
+                <div class="dropdown dropdown-hover">
+                    <a
+                        tabindex="0"
+                        href="/anime/mal/1/episode/4"]
+                        class="relative dropdown dropdown-hover"
+                        aria-expanded="false"
+                    >
+                        <div class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]">
+                            <img
+                                class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]"
+                                src="{{ anime.image }}"
+                                alt="One piece"
+                                style=""
+                                loading="lazy"
+                            />
                         </div>
-                    </anime-info>
-                </a>
+                        <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
+                            <div class="flex flex-col gap-1 bg-secondary/95 p-3 md:gap-[0.35vw] md:p-[1vw]">
+                                {% component_block 'scroll_area' parent_class='md:max-h-[1.35vw] md:leading-[1.35vw] hover:max-h-[10vw] duration-300' scroll_area_class='line-clamp-1 md:line-clamp-none text-sm font-semibold md:text-[1vw]' %}
+                                    {{ anime.name }}
+                                {% endcomponent_block %}
+                                <anime_info class="flex items-center gap-2 text-xs leading-none text-surface-50 md:gap-[0.5vw] md:text-[0.8vw]">
+                                    <span class="hidden md:flex capitalize">{{ anime.status }}</span>
+                                    {% include "icons/dot.html" with class="hidden opacity-75 md:flex md:w-[0.25vw]" %}
+                                    <span>{{ anime.current_ep }}/{{ anime.total_ep }} eps</span>
+                                </anime_info>
+                            </div>
+                        </anime-info>
+                    </a>
+                    <ul
+                        tabindex="0"
+                        class="dropdown-content z-[1] top-0 left-[13.5vw] bg-neutral md:p-[0.5vw] rounded-[0.5vw] md:w-[10vw]"
+                    >
+                        <li><a>{{ anime.name }}</a></li>
+                    </ul>
+                </div>
             {% endfor %}
         </my-list-animes>
     </my-list>
