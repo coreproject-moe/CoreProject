@@ -364,10 +364,10 @@
                         tabindex="0"
                         hx-target="<content/>"
                         hx-get="/anime/mal/1/episode/4"
-                        class="relative dropdown dropdown-hover"
+                        class="relative"
                         aria-expanded="false"
                     >
-                        <div class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]">
+                        <dropdown-content class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]">
                             <img
                                 class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]"
                                 src="{{ anime.image }}"
@@ -375,7 +375,7 @@
                                 style=""
                                 loading="lazy"
                             />
-                        </div>
+                        </dropdown-content>
                         <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
                             <div class="flex flex-col gap-1 bg-secondary/95 p-3 md:gap-[0.35vw] md:p-[1vw]">
                                 {% component_block 'scroll_area' parent_class='md:max-h-[1.35vw] md:leading-[1.35vw] hover:max-h-[10vw] duration-300' scroll_area_class='line-clamp-1 md:line-clamp-none text-sm font-semibold md:text-[1vw]' %}
@@ -391,9 +391,24 @@
                     </button>
                     <ul
                         tabindex="0"
-                        class="dropdown-content z-[1] top-0 left-[13.85vw] bg-neutral md:p-[0.5vw] rounded-[0.5vw] md:w-[10vw]"
+                        class="dropdown-content bg-clip-content z-10 top-0 bg-neutral rounded-[0.5vw] md:w-[10vw]"
+                        _="
+                        init 
+                        js(me) 
+                            me.style.left = getComputedStyle(me.parentElement).width
+                            me.style.paddingLeft = getComputedStyle(me.parentElement.parentElement).gap
+                            // This is a failsafe to prevent overflowing
+                            me.style.maxWidth =  me.style.left = getComputedStyle(me.parentElement).width
+
+                        end
+                        "
                     >
-                        <li><a>{{ anime.name }}</a></li>
+                        <li>
+                        <div class='p-2'>
+                        hello world
+                        </div>
+                        
+                        </li>
                     </ul>
                 </div>
             {% endfor %}
