@@ -1,6 +1,6 @@
-from ..request import HtmxHttpRequest
 from django.http import HttpResponse
-from django.shortcuts import render
+
+from ..request import HtmxHttpRequest
 from ..templatetags.markdown import markdown
 
 

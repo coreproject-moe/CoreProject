@@ -393,21 +393,21 @@
                         tabindex="0"
                         class="dropdown-content bg-clip-content z-10 top-0 bg-neutral rounded-[0.5vw] md:w-[10vw]"
                         _="
-                        init 
-                        js(me) 
-                            me.style.left = getComputedStyle(me.parentElement).width
-                            me.style.paddingLeft = getComputedStyle(me.parentElement.parentElement).gap
-                            // This is a failsafe to prevent overflowing
-                            me.style.maxWidth =  me.style.left = getComputedStyle(me.parentElement).width
+                           init
+                           js(me)
+                           me.style.left = getComputedStyle(me.parentElement).width
+                           me.style.paddingLeft = getComputedStyle(me.parentElement.parentElement).gap
+                           // This is a failsafe to prevent overflowing
+                           me.style.maxWidth =  me.style.left = getComputedStyle(me.parentElement).width
 
-                        end
-                        "
+                           end
+                          "
                     >
                         <li>
-                        <div class='p-2'>
-                        hello world
-                        </div>
-                        
+                            <div class='p-2'>
+                                hello world
+                            </div>
+
                         </li>
                     </ul>
                 </div>
