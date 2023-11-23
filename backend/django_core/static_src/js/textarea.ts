@@ -1,5 +1,5 @@
 import { offset } from 'caret-pos';
-
+import Cookies from 'js-cookie';
 import emojis from './emoji.json' assert { type: 'json' };
 
 let caret_offset_top: string | null = null,
@@ -7,7 +7,12 @@ let caret_offset_top: string | null = null,
 
 // Bindings
 let textarea_element: HTMLTextAreaElement | null =
-    document.querySelector('textarea');
+        document.querySelector('textarea'),
+    preview_button_element: HTMLDivElement | null =
+        textarea_element?.parentElement?.querySelector('preview-button') ??
+        null,
+    preview_element: HTMLDivElement | null =
+        textarea_element?.parentElement?.querySelector('preview') ?? null;
 
 let emoji_matches: { emoji: string; keyword: string }[],
     show_emoji_picker = false,
@@ -588,4 +593,23 @@ if (textarea_element) {
             'click',
             async () => await hyperlink_text(textarea_element!)
         );
+}
+
+if (preview_button_element && textarea_element && preview_element) {
+    preview_button_element.addEventListener('click', async () => {
+        const res = await fetch(
+            window.urls.partials.partial_markdown_endpoint,
+            {
+                method: 'POST',
+                credentials: 'same-origin',
+                body: textarea_element?.value,
+                headers: { 'X-CSRFToken': window.csrfmiddlewaretoken },
+            }
+        );
+        if (res.ok) {
+            textarea_element?.classList.add('hidden');
+            preview_element!.innerHTML = await res.text();
+            preview_element?.classList.remove('hidden');
+        }
+    });
 }
