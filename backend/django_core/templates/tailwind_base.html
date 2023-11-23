@@ -22,11 +22,11 @@
             href="{% vite_asset_url 'images/favicon/favicon.svg' %}"
         />
         <script >
-        document.addEventListener("DOMContentLoaded",()=>{
-            document.body.addEventListener('fetch:beforeRequest', (event) => {
-                event.detail.headers['X-CSRFToken'] = `{{ csrf_token }}`;
-            });}
-        )
+            document.addEventListener("DOMContentLoaded",()=>{
+                document.body.addEventListener('fetch:beforeRequest', (event) => {
+                    event.detail.headers['X-CSRFToken'] = `{{ csrf_token }}`;
+                });}
+            )
         </script>
         {% vite_hmr_client %}
 
