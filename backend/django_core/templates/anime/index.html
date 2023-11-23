@@ -360,9 +360,10 @@
         <my-list-animes class="relative mt-4 grid grid-cols-3 gap-3 md:mt-[1vw] md:grid-cols-5 md:gap-[1.25vw]">
             {% for anime in my_list %}
                 <div class="dropdown dropdown-hover">
-                    <a
+                    <button
                         tabindex="0"
-                        href="/anime/mal/1/episode/4"]
+                        hx-target="<content/>"
+                        hx-get="/anime/mal/1/episode/4"
                         class="relative dropdown dropdown-hover"
                         aria-expanded="false"
                     >
@@ -387,7 +388,7 @@
                                 </anime_info>
                             </div>
                         </anime-info>
-                    </a>
+                    </button>
                     <ul
                         tabindex="0"
                         class="dropdown-content z-[1] top-0 left-[13.85vw] bg-neutral md:p-[0.5vw] rounded-[0.5vw] md:w-[10vw]"
