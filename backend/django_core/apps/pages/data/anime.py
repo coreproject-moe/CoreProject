@@ -130,5 +130,5 @@ my_list = [
         "status": "watching",
         "current_ep": 13,
         "total_ep": 25,
-    }
+    },
 ]
