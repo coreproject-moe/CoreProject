@@ -122,5 +122,13 @@ my_list = [
         "status": "watching",
         "current_ep": 612,
         "total_ep": 1086,
+    },
+    {
+        "id": 2,
+        "name": "Jujutsu Kaisen",
+        "image": "https://m.media-amazon.com/images/M/MV5BMTMwMDM4N2EtOTJiYy00OTQ0LThlZDYtYWUwOWFlY2IxZGVjXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_FMjpg_UX1000_.jpg",
+        "status": "watching",
+        "current_ep": 13,
+        "total_ep": 25,
     }
 ]
