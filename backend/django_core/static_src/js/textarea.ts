@@ -634,8 +634,10 @@ if (preview_btn_el && textarea_element && preview_element) {
             }
         );
         if (res.ok) {
-            preview_element!.innerHTML = await res.text();
             toggle_edit_preview_mode("preview");
+            const markdown_html = await res.text();
+            if (markdown_html) preview_element!.innerHTML = markdown_html;
+            else preview_element!.innerHTML = "Nothing to preview!";
         }
     });
 }
