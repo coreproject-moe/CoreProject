@@ -633,11 +633,11 @@ if (preview_btn_el && textarea_element && preview_element) {
                 headers: { 'X-CSRFToken': window.csrfmiddlewaretoken },
             }
         );
-        if (res.ok) {
-            toggle_edit_preview_mode("preview");
-            const markdown_html = await res.text();
-            if (markdown_html) preview_element!.innerHTML = markdown_html;
-            else preview_element!.innerHTML = "Nothing to preview!";
-        }
+        if (!res.ok) return;
+        // guard clause
+        toggle_edit_preview_mode("preview");
+        const markdown_html = await res.text();
+        if (markdown_html) preview_element!.innerHTML = markdown_html;
+        else preview_element!.innerHTML = "Nothing to preview!";
     });
 }
