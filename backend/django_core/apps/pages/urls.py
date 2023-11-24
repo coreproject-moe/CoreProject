@@ -23,14 +23,15 @@ urlpatterns = [
             name="anime_home_view_partial_slider_view",
         ),
         path("explore/", anime_explore_view, name="anime_explore_view"),
-        # Anime info page
-        path("mal/<int:pk>/", anime_info_view, name="anime_info_view"),
-        # Anime episode page
-        path(
-            "mal/<int:mal_id>/episode/<int:pk>/",
-            anime_episode_view,
-            name="anime_episode_view",
-        ),
+        # Anime Mal pages
+        path("mal/", include([
+            path("<int:pk>/", anime_info_view, name="anime_info_view"),
+            path(
+                "<int:mal_id>/episode/<int:pk>/",
+                anime_episode_view,
+                name="anime_episode_view",
+            ),
+        ])),
     ])),
     # Stack page
     path("stack/", stack_view, name="stack_view"),
