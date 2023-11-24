@@ -1,5 +1,5 @@
 {
-    "exclude": ["node_modules", "postcss.config.cjs"],
+    "exclude": ["node_modules", "postcss.config.cjs", "django_core/static"],
     "compilerOptions": {
         "module": "NodeNext",
         "allowJs": true,

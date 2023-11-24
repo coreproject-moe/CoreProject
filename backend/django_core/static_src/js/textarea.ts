@@ -1,5 +1,5 @@
 import { offset } from 'caret-pos';
-
+import Cookies from 'js-cookie';
 import emojis from './emoji.json' assert { type: 'json' };
 
 let caret_offset_top: string | null = null,
@@ -7,7 +7,12 @@ let caret_offset_top: string | null = null,
 
 // Bindings
 let textarea_element: HTMLTextAreaElement | null =
-    document.querySelector('textarea');
+        document.querySelector('textarea'),
+    preview_btn_el: HTMLDivElement | null =
+        textarea_element?.parentElement?.querySelector('preview-btn') ??
+        null,
+    edit_btn_el = preview_btn_el?.previousElementSibling,
+    preview_element = textarea_element?.nextElementSibling;
 
 let emoji_matches: { emoji: string; keyword: string }[],
     show_emoji_picker = false,
@@ -588,4 +593,49 @@ if (textarea_element) {
             'click',
             async () => await hyperlink_text(textarea_element!)
         );
+}
+
+function toggle_edit_preview_mode(mode: "preview" | "edit") {
+    switch (mode) {
+    case "edit":
+        // change btn styles
+        preview_btn_el?.classList.replace("btn-neutral", "btn-secondary");
+        edit_btn_el?.classList.replace("btn-secondary", "btn-neutral");
+        // change mode
+        textarea_element?.classList.remove('hidden');
+        preview_element?.classList.add('hidden');
+        break;
+    case "preview":
+        // change btn styles
+        edit_btn_el?.classList.replace("btn-neutral", "btn-secondary");
+        preview_btn_el?.classList.replace("btn-secondary", "btn-neutral");
+        // change mode
+        preview_element?.classList.remove('hidden');
+        textarea_element?.classList.add('hidden');
+        break;
+    default:
+        break;
+    }
+}
+
+edit_btn_el?.addEventListener("click", () => {
+    toggle_edit_preview_mode("edit");
+})
+
+if (preview_btn_el && textarea_element && preview_element) {
+    preview_btn_el.addEventListener('click', async () => {
+        const res = await fetch(
+            window.urls.partials.partial_markdown_endpoint,
+            {
+                method: 'POST',
+                credentials: 'same-origin',
+                body: textarea_element?.value,
+                headers: { 'X-CSRFToken': window.csrfmiddlewaretoken },
+            }
+        );
+        if (res.ok) {
+            preview_element!.innerHTML = await res.text();
+            toggle_edit_preview_mode("preview");
+        }
+    });
 }

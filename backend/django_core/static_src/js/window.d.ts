@@ -7,5 +7,11 @@ declare global {
         get_password_strength: (password: string) => ZxcvbnResult;
         timer: EasyTimer;
         _hyperscript: typeof _hyperscript;
+        csrfmiddlewaretoken: string;
+        urls: {
+            partials: {
+                partial_markdown_endpoint: string;
+            };
+        };
     }
 }
