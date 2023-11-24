@@ -8,11 +8,11 @@ let caret_offset_top: string | null = null,
 // Bindings
 let textarea_element: HTMLTextAreaElement | null =
         document.querySelector('textarea'),
-    preview_button_element: HTMLDivElement | null =
-        textarea_element?.parentElement?.querySelector('preview-button') ??
+    preview_btn_el: HTMLDivElement | null =
+        textarea_element?.parentElement?.querySelector('preview-btn') ??
         null,
-    preview_element: HTMLDivElement | null =
-        textarea_element?.parentElement?.querySelector('preview') ?? null;
+    edit_btn_el = preview_btn_el?.previousElementSibling,
+    preview_element = textarea_element?.nextElementSibling;
 
 let emoji_matches: { emoji: string; keyword: string }[],
     show_emoji_picker = false,
@@ -595,8 +595,35 @@ if (textarea_element) {
         );
 }
 
-if (preview_button_element && textarea_element && preview_element) {
-    preview_button_element.addEventListener('click', async () => {
+function toggle_edit_preview_mode(mode: "preview" | "edit") {
+    switch (mode) {
+    case "edit":
+        // change btn styles
+        preview_btn_el?.classList.replace("btn-neutral", "btn-secondary");
+        edit_btn_el?.classList.replace("btn-secondary", "btn-neutral");
+        // change mode
+        textarea_element?.classList.remove('hidden');
+        preview_element?.classList.add('hidden');
+        break;
+    case "preview":
+        // change btn styles
+        edit_btn_el?.classList.replace("btn-neutral", "btn-secondary");
+        preview_btn_el?.classList.replace("btn-secondary", "btn-neutral");
+        // change mode
+        preview_element?.classList.remove('hidden');
+        textarea_element?.classList.add('hidden');
+        break;
+    default:
+        break;
+    }
+}
+
+edit_btn_el?.addEventListener("click", () => {
+    toggle_edit_preview_mode("edit");
+})
+
+if (preview_btn_el && textarea_element && preview_element) {
+    preview_btn_el.addEventListener('click', async () => {
         const res = await fetch(
             window.urls.partials.partial_markdown_endpoint,
             {
@@ -607,9 +634,8 @@ if (preview_button_element && textarea_element && preview_element) {
             }
         );
         if (res.ok) {
-            textarea_element?.classList.add('hidden');
             preview_element!.innerHTML = await res.text();
-            preview_element?.classList.remove('hidden');
+            toggle_edit_preview_mode("preview");
         }
     });
 }
