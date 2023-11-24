@@ -54,7 +54,9 @@
                 {% for _ in '012345678901234456789012345678902134567890123454678901234567'|make_list %}
                     <a
                         href="../{{ forloop.counter }}"
-                        class="{% if request.resolver_match.kwargs.pk == forloop.counter %} btn-primary {% else %} btn-neutral {% endif %} btn rounded md:h-[2.5vw] min-h-full text-sm font-semibold leading-none md:rounded-[0.35vw] md:text-[1.2vw]"
+                        hx-get="../{{ forloop.counter }}"
+                        hx-push-url="true"
+                        class="{% if request.resolver_match.kwargs.pk == forloop.counter %} btn-primary {% else %} btn-neutral {% endif %} btn rounded md:h-[2.5vw] min-h-full text-sm font-semibold leading-none md:rounded-[0.35vw] md:text-[1.2vw] text-accent"
                     >
                         {{ forloop.counter }}
                     </a>
@@ -144,7 +146,7 @@
                             {% include "icons/info.html" with class="w-10 md:w-[1.2vw] opacity-75" %}
                             <p class="text-[0.65rem] font-light leading-tight text-surface-300 md:text-[0.75vw] md:leading-[1.125vw]">Please remember to follow our <a href="/" class="text-surface-200 underline">community guidelines</a> while commenting. Also please refrain from posting spoilers. </p>
                         </comment-alert>
-                        <button class="btn btn-primary min-h-full h-9 w-40 rounded bg-primary-500 text-sm font-semibold md:h-[2.2vw] md:w-[6vw] md:rounded-[0.375vw] md:text-[0.85vw]">Comment</button>
+                        <button class="btn btn-primary text-accent min-h-full h-9 w-40 rounded text-sm font-semibold md:h-[2.2vw] md:w-[6vw] md:rounded-[0.375vw] md:text-[0.85vw]">Comment</button>
                     </comment-submit>
                 </form>
             </comment-form>
