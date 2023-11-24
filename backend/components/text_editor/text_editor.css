@@ -1,4 +1,19 @@
 preview img {
     display: inline-flex;
-    width: 1vw;
+    width: 1.2vw;
+}
+
+preview code {
+    background: #1E2036;
+    padding: 0.15vw 0.25vw;
+    border-radius: 0.25vw;
+}
+
+preview a {
+    text-decoration: none;
+    color: #7569E1;
+}
+
+preview a:hover {
+    text-decoration: underline;
 }
