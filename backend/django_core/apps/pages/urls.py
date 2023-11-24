@@ -12,6 +12,7 @@ from .views.stack import stack_view
 from .views.upload import upload_view
 from .views.user import login_view, logout_view, register_view, reset_password_view
 
+# fmt: off
 urlpatterns = [
     # Anime pages
     path("anime/", include([
@@ -47,3 +48,4 @@ urlpatterns = [
         path("markdown", markdown_endpoint, name="partial_markdown_endpoint"),
     ])),
 ]
+# fmt: off
