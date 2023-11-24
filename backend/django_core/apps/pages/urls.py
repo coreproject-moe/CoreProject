@@ -24,7 +24,7 @@ urlpatterns = [
         ),
         path("explore/", anime_explore_view, name="anime_explore_view"),
         # Anime info page
-        path("anime/mal/<int:pk>/", anime_info_view, name="anime_info_view"),
+        path("mal/<int:pk>/", anime_info_view, name="anime_info_view"),
         # Anime episode page
         path(
             "mal/<int:mal_id>/episode/<int:pk>/",
