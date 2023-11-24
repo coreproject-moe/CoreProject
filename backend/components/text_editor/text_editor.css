@@ -2,3 +2,9 @@ preview img {
     display: inline-flex;
     width: 1.2vw;
 }
+
+preview code {
+    background: #1E2036;
+    padding: 0.15vw 0.25vw;
+    border-radius: 0.25vw;
+}
