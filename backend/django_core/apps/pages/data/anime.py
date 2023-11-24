@@ -113,3 +113,22 @@ anime_episode = {
     "formats": ["sub", "dub"],
     "resolutions": ["sd", "hd", "fhd"],
 }
+
+my_list = [
+    {
+        "id": 1,
+        "name": "One piece",
+        "image": "https://i.pinimg.com/originals/04/65/2b/04652b44ea7c1275d1022d98d59ecc97.jpg",
+        "status": "watching",
+        "current_ep": 612,
+        "total_ep": 1086,
+    },
+    {
+        "id": 2,
+        "name": "Jujutsu Kaisen",
+        "image": "https://m.media-amazon.com/images/M/MV5BMTMwMDM4N2EtOTJiYy00OTQ0LThlZDYtYWUwOWFlY2IxZGVjXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_FMjpg_UX1000_.jpg",
+        "status": "watching",
+        "current_ep": 13,
+        "total_ep": 25,
+    },
+]
