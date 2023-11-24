@@ -115,12 +115,9 @@
                         {% include "icons/settings.html" with class="w-[0.9vw] opacity-75" %}
                     </button>
                 </header-title>
-                <button class="btn btn-icon h-[1.75vw] w-[6vw] rounded-[0.3vw] bg-surface-400 text-[0.9vw] font-semibold">
+                <button class="btn btn-neutral rounded-[0.3vw] text-[0.9vw] font-semibold p-0 min-h-max md:h-[2vw] md:px-[0.5vw]">
                     <span>Full List</span>
-                    <svg class="w-[0.9vw]" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M4.66699 11.3333L11.3337 4.66666" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                        <path d="M4.66699 4.66666H11.3337V11.3333" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-                    </svg>
+                    {% include "icons/arrow_up_right.html" with class="w-[1vw]" %}
                 </button>
             </section-header>
             {% component_block 'scroll_area' parent_class='mt-[1vw] max-h-[22.25vw] snap-y scroll-smooth md:pr-[1vw]' scroll_area_class='flex flex-col gap-[1vw]' %}
@@ -152,7 +149,7 @@
             {% endcomponent_block %}
             <section-bottom class="mt-[0.75vw] flex items-start justify-between gap-[2vw] pr-[0.75vw]">
                 <span class="text-[0.75vw] font-semibold md:leading-[1.25vw]">showing recently aired episodes from your Anime List</span>
-                <button class="btn p-0 text-[0.75vw] font-semibold text-warning-400"> Change to All </button>
+                <button class="btn btn-secondary p-0 text-[0.75vw] font-semibold text-warning"> Change to All </button>
             </section-bottom>
         </latest-episodes>
         <navigation-card class="relative mt-[2.75vw] hidden h-[24.5vw] w-[16.625vw] md:block">
