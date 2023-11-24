@@ -15,7 +15,7 @@ requests-cache = {extras = ["redis"], version = "^1.1.1"}
 requests-ratelimiter = "*"
 python-dotenv = "^1.0.0"
 selectolax = "*"
-httpx = "^0.25.1"
+httpx = "^0.25.2"
 python-dateutil = "^2.8.2"
 bing-image-downloader = "^1.1.2"
 youtube-search = "^2.1.2"
