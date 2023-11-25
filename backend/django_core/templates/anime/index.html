@@ -126,32 +126,32 @@
                         role="group"
                         class="group relative h-[5vw] duration-300 ease-in-out hover:h-[16vw]"
                         _="
-                            on mouseenter
-                            wait 300ms
-                            then remove .invisible from <more-anime-info/> in me
-                            js(me)
-                            const parent_element = me.parentElement;
-                            const scroll_area_element = me.parentElement.parentElement;
+                           on mouseenter
+                           wait 300ms
+                           then remove .invisible from <more-anime-info/> in me
+                           js(me)
+                           const parent_element = me.parentElement;
+                           const scroll_area_element = me.parentElement.parentElement;
 
-                            console.log(me.offsetTop, scroll_area_element.offsetTop)
+                           console.log(me.offsetTop, scroll_area_element.offsetTop)
 
-                            // Declare rects
-                            const parent_rect = parent_element.getBoundingClientRect();
-                            const me_rect = me.getBoundingClientRect();
+                           // Declare rects
+                           const parent_rect = parent_element.getBoundingClientRect();
+                           const me_rect = me.getBoundingClientRect();
 
-                            const scroll_area_center = scroll_area_element.offsetHeight / 2;
-                            const me_center = me_rect.top - parent_rect.top + me_rect.height / 2;
-                            const target_scroll_top = me_center - scroll_area_center + parseInt(getComputedStyle(parent_element).gap) || 0;
+                           const scroll_area_center = scroll_area_element.offsetHeight / 2;
+                           const me_center = me_rect.top - parent_rect.top + me_rect.height / 2;
+                           const target_scroll_top = me_center - scroll_area_center + parseInt(getComputedStyle(parent_element).gap) || 0;
 
-                            scroll_area_element.scroll({
-                              top: target_scroll_top,
-                              behavior: 'smooth'
-                            });
-                            end
+                           scroll_area_element.scroll({
+                           top: target_scroll_top,
+                           behavior: 'smooth'
+                           });
+                           end
 
-                            on mouseleave
-                            add .invisible to <more-anime-info/> in me
-                        "
+                           on mouseleave
+                           add .invisible to <more-anime-info/> in me
+                          "
                     >
                         <div class="absolute h-full w-full rounded-[0.75vw] object-cover object-center">
                             <img
@@ -190,7 +190,7 @@
                             {% component_block 'scroll_area' parent_class='md:max-h-[6vw]' scroll_area_class='text-accent md:text-[0.8vw] md:leading-[1vw]' %}
                                 {{ episode.synopsis }}
                             {% endcomponent_block %}
-                            
+
                         </more-anime-info>
                     </anime-episode>
                 {% endfor %}
