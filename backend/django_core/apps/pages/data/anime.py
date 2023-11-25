@@ -143,7 +143,7 @@ latest_episodes = [
         "synopsis": """It is the Taisho Period in Japan. Tanjiro, a kindhearted boy who sells charcoal for a
                       living, finds his family slaughtered by a demon. To make matters worse, his younger sister
                       Nezuko, the sole survivor, has been transformed into a demon herself. Though devastated by this grim reality, Tanjiro resolves to become a “demon slayer” so that he can turn his
-                      sister back into a human, and kill the demon that massacred his family."""
+                      sister back into a human, and kill the demon that massacred his family.""",
     },
     {
         "id": 2,
@@ -154,7 +154,7 @@ latest_episodes = [
         "synopsis": """It is the Taisho Period in Japan. Tanjiro, a kindhearted boy who sells charcoal for a
                       living, finds his family slaughtered by a demon. To make matters worse, his younger sister
                       Nezuko, the sole survivor, has been transformed into a demon herself. Though devastated by this grim reality, Tanjiro resolves to become a “demon slayer” so that he can turn his
-                      sister back into a human, and kill the demon that massacred his family."""
+                      sister back into a human, and kill the demon that massacred his family.""",
     },
     {
         "id": 3,
@@ -165,7 +165,7 @@ latest_episodes = [
         "synopsis": """It is the Taisho Period in Japan. Tanjiro, a kindhearted boy who sells charcoal for a
                       living, finds his family slaughtered by a demon. To make matters worse, his younger sister
                       Nezuko, the sole survivor, has been transformed into a demon herself. Though devastated by this grim reality, Tanjiro resolves to become a “demon slayer” so that he can turn his
-                      sister back into a human, and kill the demon that massacred his family."""
+                      sister back into a human, and kill the demon that massacred his family.""",
     },
     {
         "id": 4,
@@ -176,7 +176,7 @@ latest_episodes = [
         "synopsis": """It is the Taisho Period in Japan. Tanjiro, a kindhearted boy who sells charcoal for a
                       living, finds his family slaughtered by a demon. To make matters worse, his younger sister
                       Nezuko, the sole survivor, has been transformed into a demon herself. Though devastated by this grim reality, Tanjiro resolves to become a “demon slayer” so that he can turn his
-                      sister back into a human, and kill the demon that massacred his family."""
+                      sister back into a human, and kill the demon that massacred his family.""",
     },
     {
         "id": 5,
@@ -187,6 +187,6 @@ latest_episodes = [
         "synopsis": """It is the Taisho Period in Japan. Tanjiro, a kindhearted boy who sells charcoal for a
                       living, finds his family slaughtered by a demon. To make matters worse, his younger sister
                       Nezuko, the sole survivor, has been transformed into a demon herself. Though devastated by this grim reality, Tanjiro resolves to become a “demon slayer” so that he can turn his
-                      sister back into a human, and kill the demon that massacred his family."""
-    }
+                      sister back into a human, and kill the demon that massacred his family.""",
+    },
 ]
