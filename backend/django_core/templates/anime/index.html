@@ -128,12 +128,11 @@
                         _="
                            on mouseenter
                            wait 300ms
-                           then remove .invisible from <more-anime-info/> in me
+                           set global episode_expanded to true
+                           send hyperscript:change_view to <more-anime-info/> in me
                            js(me)
                            const parent_element = me.parentElement;
                            const scroll_area_element = me.parentElement.parentElement;
-
-                           console.log(me.offsetTop, scroll_area_element.offsetTop)
 
                            // Declare rects
                            const parent_rect = parent_element.getBoundingClientRect();
@@ -150,7 +149,8 @@
                            end
 
                            on mouseleave
-                           add .invisible to <more-anime-info/> in me
+                           send hyperscript:change_view to <more-anime-info/> in me
+                           end
                           "
                     >
                         <div class="absolute h-full w-full rounded-[0.75vw] object-cover object-center">
@@ -175,7 +175,16 @@
                             </a>
                         </episode-info>
 
-                        <more-anime-info class="invisible absolute inset-x-0 bottom-0 flex flex-col gap-[0.5vw] p-[1.3125vw]">
+                        <more-anime-info
+                            class="invisible absolute inset-x-0 bottom-0 flex flex-col gap-[0.5vw] p-[1.3125vw]"
+                            _="
+                                on hyperscript:change_view
+                                if global episode_expanded is true and I match .invisible
+                                remove .invisible from me
+                                else add .invisible to me
+                                end
+                            "
+                        >
                             <genres class="flex items-center md:my-[0.35vw] md:gap-[0.5vw]">
                                 <genre class="bg-accent font-semibold leading-none text-secondary md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
                                     Horror
