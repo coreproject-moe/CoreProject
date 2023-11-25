@@ -122,7 +122,39 @@
             </section-header>
             {% component_block 'scroll_area' parent_class='mt-[1vw] max-h-[22.25vw] snap-y scroll-smooth md:pr-[1vw]' scroll_area_class='flex flex-col gap-[1vw]' %}
                 {% for episode in latest_episodes %}
-                    <anime-episode role="group" class="group relative h-[5vw] duration-300 ease-in-out hover:h-[16vw]">
+                    <anime-episode
+                        role="group"
+                        class="group relative h-[5vw] duration-300 ease-in-out hover:h-[16vw]"
+                        _="
+                            on mouseenter
+                            js(me)
+                            const parent_element = me.parentElement;
+                            const scroll_area_element = me.parentElement.parentElement;
+
+                            // Declare rects
+                            const parent_rect = parent_element.getBoundingClientRect()
+                            const me_rect = me.getBoundingClientRect();
+
+                            console.log(scroll_area_element.offsetHeight, me_rect.height)
+
+                            const scroll_area_center = scroll_area_element.offsetHeight / 2;
+                            const me_center = me_rect.top - parent_rect.top + me_rect.height / 2;
+                            const target_scroll_top = me_center - scroll_area_center + parseInt(getComputedStyle(me.parentElement).gap) || 0;
+
+                            console.log('parent_rect:', parent_rect);
+                            console.log('me_rect:', me_rect);
+                            console.log('scroll_area_center:', scroll_area_center);
+                            console.log('me_center:', me_center);
+                            console.log('target_scroll_top:', target_scroll_top);
+
+
+                            scroll_area_element.scroll({
+                                top: target_scroll_top,
+                                behavior: 'smooth'
+                            });
+                            end
+                        "
+                    >
                         <div class="absolute h-full w-full rounded-[0.75vw] object-cover object-center">
                             <img
                                 class="absolute h-full w-full rounded-[0.75vw] object-cover object-center"
