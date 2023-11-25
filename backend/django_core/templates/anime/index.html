@@ -178,12 +178,12 @@
                         <more-anime-info
                             class="invisible absolute inset-x-0 bottom-0 flex flex-col gap-[0.5vw] p-[1.3125vw]"
                             _="
-                                on hyperscript:change_view
-                                if global episode_expanded is true and I match .invisible
-                                remove .invisible from me
-                                else add .invisible to me
-                                end
-                            "
+                               on hyperscript:change_view
+                               if global episode_expanded is true and I match .invisible
+                               remove .invisible from me
+                               else add .invisible to me
+                               end
+                              "
                         >
                             <genres class="flex items-center md:my-[0.35vw] md:gap-[0.5vw]">
                                 <genre class="bg-accent font-semibold leading-none text-secondary md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
@@ -256,7 +256,7 @@
                             {% include "icons/preferences.html" with class="text-surface-900 w-[1.25vw]" %}
                         </button>
                         <button class="btn btn-accent min-h-max h-[2.5vw] w-[2.5vw] rounded-[0.375vw] p-0">
-                           {% include "icons/moon.html" with class="text-surface-900 w-[1.25vw]" %}
+                            {% include "icons/moon.html" with class="text-surface-900 w-[1.25vw]" %}
                         </button>
                         <button class="btn btn-accent min-h-max h-[2.5vw] w-[2.5vw] rounded-[0.375vw] bg-surface-50 p-0">
                             {% include "icons/settings.html" with class="text-surface-900 w-[1.25vw]" %}
