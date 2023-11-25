@@ -73,7 +73,7 @@ latest_animes = [
 ]
 
 anime = {
-    id: 1,
+    "id": 1,
     "mal_id": 23273,
     "anilist_id": None,
     "kitsu_id": None,
@@ -130,5 +130,63 @@ my_list = [
         "status": "watching",
         "current_ep": 13,
         "total_ep": 25,
+    },
+]
+
+latest_episodes = [
+    {
+        "id": 1,
+        "name": "SpyxFamily",
+        "cover": "https://m.media-amazon.com/images/M/MV5BOTcwZTkwMjctNjEyNS00ZjMxLWIyZjctZTljOTUwNzY4ZjczXkEyXkFqcGdeQXVyMTAyNjg4NjE0._V1_QL75_UX500_CR0,0,500,281_.jpg",
+        "episode_number": 6,
+        "release_date": "2023-06-28T10:30:00.000Z",
+        "synopsis": """It is the Taisho Period in Japan. Tanjiro, a kindhearted boy who sells charcoal for a
+                      living, finds his family slaughtered by a demon. To make matters worse, his younger sister
+                      Nezuko, the sole survivor, has been transformed into a demon herself. Though devastated by this grim reality, Tanjiro resolves to become a “demon slayer” so that he can turn his
+                      sister back into a human, and kill the demon that massacred his family.""",
+    },
+    {
+        "id": 2,
+        "name": "Kaguya-sama: Love Is War",
+        "cover": "https://images.justwatch.com/backdrop/104140955/s640/season-1.%7Bformat%7D",
+        "episode_number": 5,
+        "release_date": "2023-06-22T10:30:00.000Z",
+        "synopsis": """It is the Taisho Period in Japan. Tanjiro, a kindhearted boy who sells charcoal for a
+                      living, finds his family slaughtered by a demon. To make matters worse, his younger sister
+                      Nezuko, the sole survivor, has been transformed into a demon herself. Though devastated by this grim reality, Tanjiro resolves to become a “demon slayer” so that he can turn his
+                      sister back into a human, and kill the demon that massacred his family.""",
+    },
+    {
+        "id": 3,
+        "name": "Aharen-san wa Hakaraenai",
+        "cover": "https://lostinanime.com/wp-content/uploads/2022/06/Aharen-san-wa-Hakarenai-12-51.jpg",
+        "episode_number": 9,
+        "release_date": "2023-06-18T11:30:00.000Z",
+        "synopsis": """It is the Taisho Period in Japan. Tanjiro, a kindhearted boy who sells charcoal for a
+                      living, finds his family slaughtered by a demon. To make matters worse, his younger sister
+                      Nezuko, the sole survivor, has been transformed into a demon herself. Though devastated by this grim reality, Tanjiro resolves to become a “demon slayer” so that he can turn his
+                      sister back into a human, and kill the demon that massacred his family.""",
+    },
+    {
+        "id": 4,
+        "name": "Summer time Rendering",
+        "cover": "https://m.media-amazon.com/images/M/MV5BZjZkYTdlZGMtOGQyYy00MDlkLTkzZTEtZTI2OGIyM2VlOWM4XkEyXkFqcGdeQXVyMTA0NDQ4NTcz._V1_QL75_UX500_CR0,0,500,281_.jpg",
+        "episode_number": 12,
+        "release_date": "2023-06-10T12:30:00.000Z",
+        "synopsis": """It is the Taisho Period in Japan. Tanjiro, a kindhearted boy who sells charcoal for a
+                      living, finds his family slaughtered by a demon. To make matters worse, his younger sister
+                      Nezuko, the sole survivor, has been transformed into a demon herself. Though devastated by this grim reality, Tanjiro resolves to become a “demon slayer” so that he can turn his
+                      sister back into a human, and kill the demon that massacred his family.""",
+    },
+    {
+        "id": 5,
+        "name": "Jujutsu Kaisen",
+        "cover": "https://cdn.oneesports.gg/cdn-data/2023/07/Anime_JujutsuKaisen_Season2_GojoSatoru_GetoSuguru_GegeAkutami-450x253.jpg",
+        "episode_number": 27,
+        "release_date": "2023-06-03T12:30:00.000Z",
+        "synopsis": """It is the Taisho Period in Japan. Tanjiro, a kindhearted boy who sells charcoal for a
+                      living, finds his family slaughtered by a demon. To make matters worse, his younger sister
+                      Nezuko, the sole survivor, has been transformed into a demon herself. Though devastated by this grim reality, Tanjiro resolves to become a “demon slayer” so that he can turn his
+                      sister back into a human, and kill the demon that massacred his family.""",
     },
 ]
