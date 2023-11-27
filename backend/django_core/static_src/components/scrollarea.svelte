@@ -1,7 +1,6 @@
 <svelte:options
     customElement={{
         tag: 'scroll-area',
-        shadow: 'none',
     }}
 />
 
@@ -48,3 +47,4 @@
         </div>
     </div>
 </scroll-area>
+
