@@ -18,11 +18,8 @@
     function handle_scroll(event: Event) {
         const target = event.target as HTMLElement;
         const { scrollHeight, clientHeight, scrollTop } = target;
-        if (clientHeight + scrollTop === scrollHeight) {
-            add_mask_bottom = false;
-        } else {
-            add_mask_bottom = true;
-        }
+        add_mask_bottom =
+            clientHeight + scrollTop === scrollHeight ? false : true;
     }
 </script>
 

@@ -313,9 +313,9 @@
                         </dropdown-content>
                         <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
                             <div class="flex flex-col gap-1 bg-secondary/95 p-3 md:gap-[0.35vw] md:p-[1vw]">
-                                {% component_block 'scroll_area' parent_class='flex self-start md:max-h-[1.35vw] md:leading-[1.35vw] hover:max-h-[10vw] duration-300' scroll_area_class='line-clamp-1 md:line-clamp-none text-sm font-semibold md:text-[1vw]' %}
+                                <scroll-area gradientMask='true' parentClass='flex self-start md:max-h-[1.35vw] md:leading-[1.35vw] hover:max-h-[10vw] duration-300' class='line-clamp-1 md:line-clamp-none text-sm font-semibold md:text-[1vw]' %}
                                     {{ anime.name }}
-                                {% endcomponent_block %}
+                                </scroll-area>
                                 <anime_info class="flex items-center gap-2 text-xs leading-none text-surface-50 md:gap-[0.5vw] md:text-[0.8vw]">
                                     <span class="hidden md:flex capitalize">{{ anime.status }}</span>
                                     {% include "icons/dot.html" with class="hidden opacity-75 md:flex md:w-[0.25vw]" %}
@@ -365,9 +365,9 @@
                                 <genre class="bg-warning font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">Ecchi </genre>
                                 <genre class="bg-warning font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">sci-Fi </genre>
                             </genres>
-                            {% component_block 'scroll_area' parent_class='md:max-h-[4vw]' scroll_area_class='text-surface-50 md:text-[0.8vw] md:leading-[1vw]' %}
+                            <scroll-area  parentClass='md:max-h-[4vw]' class='text-surface-50 md:text-[0.8vw] md:leading-[1vw]' >
                                 Azur Lane, a combination of all the different Camps in the world, was once successful in repelling the underwater menace, the Siren. Now splintered, they must face a new threat in Red Axis, former allies who crave to wield this otherworldly Siren technology for their own nefarious desires! Who will be victorious in the never-ending war between these battleship girls!? Akagami no Shirayuki-hime depicts Shirayuki's journey toward a new life at the royal palace of Clarines, as well as Zen's endeavor to become a prince worthy of his title. As loyal friendships are forged and deadly enemies formed, Shirayuki and Zen slowly learn to support each other as they walk their own paths.
-                            {% endcomponent_block %}
+                            </scroll-area/>
                             <div class="divider md:before:h-[0.15vw] md:after:h-[0.15vw] md:m-0"></div>
                             <options class="flex items-center md:gap-[0.5vw]">
                                 <a href="/anime/mal/1/episode/4" class="btn btn-primary text-accent h-[2.75vw] flex-1 leading-none md:rounded-[0.5vw] min-h-full">
