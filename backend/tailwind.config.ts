@@ -43,7 +43,6 @@ module.exports = {
          * and make sure the pattern below matches your project structure.
          */
         './components/**/*.py',
-
         './**/*.py',
     ],
     theme: {
@@ -62,6 +61,7 @@ module.exports = {
         require('@tailwindcss/forms'),
         require('@tailwindcss/typography'),
         require('@tailwindcss/aspect-ratio'),
+        require('tailwind-scrollbar'),
         require('daisyui'),
     ],
     daisyui: {
