@@ -4,9 +4,9 @@
     let klass = '';
     export { klass as class };
 
-    export let parentClass = '';
-    export let offsetScrollbar = false;
-    export let gradientMask = false;
+    export let parent_class = '';
+    export let offset_scrollbar = false;
+    export let gradient_mask = false;
 
     let scroll_area: HTMLElement;
     let add_mask_bottom: boolean;
@@ -18,11 +18,8 @@
     function handle_scroll(event: Event) {
         const target = event.target as HTMLElement;
         const { scrollHeight, clientHeight, scrollTop } = target;
-        if (clientHeight + scrollTop === scrollHeight) {
-            add_mask_bottom = false;
-        } else {
-            add_mask_bottom = true;
-        }
+        add_mask_bottom =
+            clientHeight + scrollTop === scrollHeight ? false : true;
     }
 </script>
 
@@ -30,11 +27,11 @@
     bind:this={scroll_area}
     on:scroll={handle_scroll}
     class={cn(
-        parentClass,
-        offsetScrollbar && 'pr-3 md:pr-[0.75vw]',
+        parent_class,
+        offset_scrollbar && 'pr-3 md:pr-[0.75vw]',
         'block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:_rgba(255,255,255,0.12)_transparent]'
     )}
-    class:[mask-image:linear-gradient(180deg,rgba(7,5,25,0.95)80%,rgba(0,0,0,0)100%)]={gradientMask &&
+    class:[mask-image:linear-gradient(180deg,rgba(7,5,25,0.95)80%,rgba(0,0,0,0)100%)]={gradient_mask &&
         add_mask_bottom}
 >
     <div>
