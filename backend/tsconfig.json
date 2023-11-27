@@ -1,14 +1,18 @@
 {
-    "include": ["./**/*.ts", "./**/*.tsx", "django_core/static_src/components/index.ts"],
+    "include": [
+        "./**/*.ts",
+        "./**/*.tsx",
+        "django_core/static_src/components/index.ts"
+    ],
     "exclude": ["node_modules", "postcss.config.cjs", "django_core/static"],
     "compilerOptions": {
-        "module": "NodeNext",
+        "module": "ESNext",
         "allowJs": true,
         "checkJs": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true,
-        "moduleResolution": "NodeNext",
+        "moduleResolution": "Bundler",
         "skipLibCheck": true,
         "sourceMap": true,
         "strict": true
