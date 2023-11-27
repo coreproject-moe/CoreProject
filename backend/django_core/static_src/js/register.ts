@@ -1,4 +1,5 @@
-const zxcvbnTscore = await import('@zxcvbn-ts/core');
+import zxcvbnCore from '@zxcvbn-ts/core';
+
 // Language import
 const zxcvbnCommonPackage = await import('@zxcvbn-ts/language-common');
 const zxcvbnEnPackage = await import('@zxcvbn-ts/language-en');
@@ -22,11 +23,10 @@ const options = {
         ...(await import('@zxcvbn-ts/language-ar')).dictionary,
     },
 };
-zxcvbnTscore.zxcvbnOptions.setOptions(options);
+zxcvbnCore.zxcvbnOptions.setOptions(options);
 
 function get_password_strength(password: string) {
-    return zxcvbnTscore.zxcvbn(password);
+    return zxcvbnCore.zxcvbn(password);
 }
 
-// @ts-ignore
 window.get_password_strength = get_password_strength;

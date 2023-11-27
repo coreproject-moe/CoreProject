@@ -6,14 +6,18 @@
     ],
     "exclude": ["node_modules", "postcss.config.cjs", "django_core/static"],
     "compilerOptions": {
-        "module": "ESNext",
+        "lib": ["esnext", "DOM", "DOM.Iterable"],
+
         "allowJs": true,
         "checkJs": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true,
-        "moduleResolution": "Bundler",
-        "skipLibCheck": true,
+        "moduleResolution": "node",
+        "module": "esnext",
+        "target": "esnext",
+        "ignoreDeprecations": "5.0",
+        "skipLibCheck": false,
         "sourceMap": true,
         "strict": true
     }
