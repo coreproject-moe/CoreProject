@@ -1,7 +1,5 @@
-
 <script lang="ts">
-    import '../css/index.postcss';
-    import { cn } from './functions/classname';
+    import { cn } from '../functions/classname';
 
     let klass = '';
     export { klass as class };
