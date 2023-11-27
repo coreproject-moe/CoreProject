@@ -46,9 +46,10 @@
             </span>
         {% endfor %}
     </anime-genres>
-    {% component_block "scroll_area" scroll_area_class="text-xs font-medium leading-4  text-surface-200 md:text-[0.85vw] md:leading-[1.1vw]" parent_class="max-h-16 md:max-h-[6vw] md:mt-[0.5vw]" offset_scrollbar="pr-3  md:pr-[0.75vw]" %}
-        {{ anime.synopsis }}
-    {% endcomponent_block %}
+    <scroll-area gradientMask='true' class="text-xs font-medium leading-4  text-surface-200 md:text-[0.85vw] md:leading-[1.1vw]" parentClass="max-h-16 md:max-h-[6vw] md:mt-[0.5vw]" offsetScrollbar='true'>
+     {{ anime.synopsis }}
+    </scroll-area>
+
     <options class="mb-2 mt-5 flex gap-3 md:mb-0 md:mt-[1.5vw] md:gap-[1vw]">
         <button class="btn btn-warning flex h-14 w-24 justify-center gap-1 rounded-xl text-base text-secondary font-bold md:h-[3.125vw] md:w-[5.4375vw] md:rounded-[0.625vw] md:text-[0.875vw] md:gap-[0.5vw]">
             <svg class="w-4 text-surface-900 md:w-[1vw]" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -43,8 +43,12 @@ module.exports = {
          * and make sure the pattern below matches your project structure.
          */
         './components/**/*.py',
-
         './**/*.py',
+
+        /**
+         * Svelte
+         */
+        './**/*.svelte'
     ],
     theme: {
         extend: {
