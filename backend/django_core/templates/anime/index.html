@@ -196,10 +196,9 @@
                                     Thriller
                                 </genre>
                             </genres>
-                            {% component_block 'scroll_area' parent_class='md:max-h-[6vw]' scroll_area_class='text-accent md:text-[0.8vw] md:leading-[1vw]' %}
+                            <scroll-area gradientMask='true' parentClass='md:max-h-[6vw]' class='text-accent md:text-[0.8vw] md:leading-[1vw]'>
                                 {{ episode.synopsis }}
-                            {% endcomponent_block %}
-
+                            </scroll-area>
                         </more-anime-info>
                     </anime-episode>
                 {% endfor %}
