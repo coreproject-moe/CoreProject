@@ -1,7 +1,7 @@
 import { join, resolve } from 'path';
 import process from 'process';
 import { defineConfig } from 'vite';
-
+import { svelte } from '@sveltejs/vite-plugin-svelte';
 const STATIC_SRC = resolve('./django_core/static_src');
 
 const JS_DIRECTORY = join(STATIC_SRC, 'js');
@@ -11,6 +11,14 @@ export default defineConfig({
     root: resolve('./django_core/static_src'),
     base: '/static/',
 
+    plugins: [
+        svelte({
+            compilerOptions: {
+                customElement: true,
+            },
+            configFile: join(process.cwd(), 'svelte.config.js'),
+        }),
+    ],
     // css: {
     //     devSourcemap: true,
     // },
@@ -36,6 +44,8 @@ export default defineConfig({
                 // Register Page
                 join(JS_DIRECTORY, 'register.ts'),
                 // join(IMAGE_DIRECTORY, 'favicon', 'favicon.svg'),
+                // Components
+                join(JS_DIRECTORY, 'components', 'index.ts'),
             ],
             output: {
                 chunkFileNames: undefined,
