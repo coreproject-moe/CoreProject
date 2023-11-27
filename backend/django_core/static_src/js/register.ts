@@ -1,4 +1,4 @@
-import zxcvbnCore from '@zxcvbn-ts/core';
+import * as zxcvbnCore from '@zxcvbn-ts/core';
 
 // Language import
 const zxcvbnCommonPackage = await import('@zxcvbn-ts/language-common');
