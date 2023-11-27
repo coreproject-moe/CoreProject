@@ -13,7 +13,7 @@
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true,
-        "moduleResolution": "node",
+        "moduleResolution": "bundler",
         "module": "esnext",
         "target": "esnext",
         "ignoreDeprecations": "5.0",
