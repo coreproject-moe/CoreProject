@@ -17,7 +17,6 @@ export default defineConfig({
             compilerOptions: {
                 customElement: true,
             },
-            configFile: join(process.cwd(), 'svelte.config.js'),
         }),
     ],
     // css: {
