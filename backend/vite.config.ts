@@ -1,8 +1,7 @@
 import { join, resolve } from 'path';
 import process from 'process';
 import { defineConfig } from 'vite';
-import { svelte } from '@sveltejs/vite-plugin-svelte';
-import sveltePreprocess from 'svelte-preprocess';
+
 const STATIC_SRC = resolve('./django_core/static_src');
 
 const COMPONENT_DIRECTORY = join(STATIC_SRC, 'components');
@@ -13,15 +12,7 @@ export default defineConfig({
     root: resolve('./django_core/static_src'),
     base: '/static/',
 
-    plugins: [
-        svelte({
-            preprocess: sveltePreprocess({}),
-            compilerOptions: {
-                customElement: true,
-            },
-            emitCss: false,
-        }),
-    ],
+    plugins: [],
     // css: {
     //     devSourcemap: true,
     // },
