@@ -4,6 +4,7 @@ import { defineConfig } from 'vite';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
 const STATIC_SRC = resolve('./django_core/static_src');
 
+const COMPONENT_DIRECTORY = join(STATIC_SRC, 'components');
 const JS_DIRECTORY = join(STATIC_SRC, 'js');
 const CSS_DIRECTORY = join(STATIC_SRC, 'css');
 
@@ -45,7 +46,7 @@ export default defineConfig({
                 join(JS_DIRECTORY, 'register.ts'),
                 // join(IMAGE_DIRECTORY, 'favicon', 'favicon.svg'),
                 // Components
-                join(JS_DIRECTORY, 'components', 'index.ts'),
+                join(COMPONENT_DIRECTORY, 'index.ts'),
             ],
             output: {
                 chunkFileNames: undefined,

@@ -1,4 +1,5 @@
 {
+    "include": ["./**/*.ts", "./**/*.tsx"],
     "exclude": ["node_modules", "postcss.config.cjs", "django_core/static"],
     "compilerOptions": {
         "module": "NodeNext",
