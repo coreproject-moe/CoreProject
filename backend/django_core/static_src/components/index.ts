@@ -20,10 +20,3 @@ svelteRetag({
     shadow: false,
     hydratable: true,
 });
-svelteRetag({
-    component: Textarea,
-    tagname: 'coreproject-textarea',
-    attributes: [],
-    shadow: false,
-    hydratable: true,
-});

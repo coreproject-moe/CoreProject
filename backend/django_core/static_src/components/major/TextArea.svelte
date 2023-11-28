@@ -8,7 +8,7 @@
     import type { SvelteComponent } from 'svelte';
     import tippy from 'tippy.js';
 
-    import reverse from '../../functions/'
+    import { reverse } from '../../functions/urls';
     import Bold from '../icons/bold.svelte';
     import Italic from '../icons/italic.svelte';
     import Underline from '../icons/underline.svelte';
@@ -22,7 +22,8 @@
     // Textarea Bindings
     let textarea_element: HTMLTextAreaElement,
         textarea_value = '';
-    let preview_element: HTMLDivElement;
+
+    let preview_element_innerHTML = '';
 
     let emoji_matches: Array<{
             emoji: string;
@@ -556,14 +557,14 @@
             const res = await fetch(reverse('partial_markdown_endpoint'), {
                 method: 'POST',
                 credentials: 'same-origin',
-                body: textarea_element?.value,
+                body: textarea_value,
                 headers: { 'X-CSRFToken': window.csrfmiddlewaretoken },
             });
             // guard clause
             if (!res.ok) return;
             const markdown_html = await res.text();
-            if (markdown_html) preview_element!.innerHTML = markdown_html;
-            else preview_element!.innerHTML = 'Nothing to preview!';
+            if (markdown_html) preview_element_innerHTML = markdown_html;
+            else preview_element_innerHTML = 'Nothing to preview!';
         }
         active_tab = tab_name as typeof active_tab;
     }
@@ -645,7 +646,7 @@
         <div
             class="w-full px-3 text-sm leading-tight md:text-[1vw] md:leading-[1.5vw] h-28 overflow-y-scroll md:h-[8vw] md:px-[1vw] md:py-[0.5vw]"
             contenteditable="false"
-            bind:this={preview_element}
+            bind:innerHTML={preview_element_innerHTML}
         ></div>
     {/if}
 
