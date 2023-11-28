@@ -49,7 +49,7 @@
             function: (element) => bold_text(element as HTMLTextAreaElement),
             icon: {
                 component: Bold,
-                class: "w-5 md:w-[1.4vw]  text-surface-200"
+                class: "w-5 md:w-[1.5vw]  text-surface-200"
             },
             description: "Add bold text, <Ctrl + b>"
         },
@@ -65,7 +65,7 @@
             function: (element) => underline_text(element as HTMLTextAreaElement),
             icon: {
                 component: Underline,
-                class: "w-5 md:w-[1.35vw] text-surface-200"
+                class: "w-5 md:w-[1.25vw] text-surface-200"
             },
             description: "Add underline text, <Ctrl + u>"
         },
@@ -166,12 +166,13 @@
             switch (event.key.toLowerCase()) {
                 case "arrowup": {
                     event.preventDefault();
-                    active_emoji_index = (active_emoji_index - 1 + SHOWN_EMOJI_LIMIT) % SHOWN_EMOJI_LIMIT;
+                    active_emoji_index =
+                        (active_emoji_index - 1 + emoji_matches.length) % emoji_matches.length;
                     break;
                 }
                 case "arrowdown": {
                     event.preventDefault();
-                    active_emoji_index = (active_emoji_index + 1) % SHOWN_EMOJI_LIMIT;
+                    active_emoji_index = (active_emoji_index + 1) % emoji_matches.length;
                     break;
                 }
                 case "enter": {
@@ -448,14 +449,14 @@
             {@const active = tab === active_tab}
             <button
                 type="button"
-                class={cn("btn min-h-full capitalize md:h-[2.5vw] md:text-[1vw]", active ? "btn-neutral" : "bg-secondary")}
+                class={cn("btn min-h-full capitalize md:h-[2.25vw] md:text-[1vw]", active ? "btn-neutral" : "bg-secondary")}
                 on:click={() => handle_tab_click(tab)}
             >
                 {tab}
             </button>
         {/each}
     </div>
-    <div class="flex items-center gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]">
+    <div class="flex items-center h-max gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]">
         {#each Object.entries(icon_and_function_mapping) as item}
             {@const item_label = item[0]}
 
@@ -463,29 +464,26 @@
             {@const icon_class = item[1].icon.class}
             {@const button_function = item[1].function}
             {@const description = item[1].description}
-            <div
-                class="before:px-[0.5vw] before:py-[0.25vw] before:md:text-[0.9vw]"
+
+            <button
                 use:tippy={{
-                    content: `<div class='leading-2 w-max whitespace-nowrap rounded-lg bg-surface-400 px-2 py-1 text-[0.65rem] text-surface-50 md:px-[0.75vw] md:py-[0.3vw] md:text-[1vw]'>${encode(description)}</div>`,
+                    content: `<div class='leading-2 w-max whitespace-nowrap rounded-lg bg-neutral px-2 py-1 text-[0.65rem] text-accent md:px-[0.75vw] md:py-[0.3vw] md:text-[1vw]'>${encode(description)}</div>`,
                     allowHTML: true,
                     arrow: false,
                     appendTo: document.body,
                     animation: "shift-away",
                     theme: "elaine",
                     onTrigger(instance) {
-                        instance.props.offset = [0, vw(1)];
+                        instance.props.offset = [0, vw(1.25)];
                     }
                 }}
+                class={cn(icon_class, "btn min-h-max h-max border-none !bg-transparent p-0")}
+                type="button"
+                aria-label={item_label}
+                on:click={() => button_function(textarea_element)}
             >
-                <button
-                    class={cn(icon_class, "btn min-h-full border-none !bg-transparent p-0")}
-                    type="button"
-                    aria-label={item_label}
-                    on:click={() => button_function(textarea_element)}
-                >
-                    <svelte:component this={icon} />
-                </button>
-            </div>
+                <svelte:component this={icon} />
+            </button>
         {/each}
     </div>
 </textarea-navbar>
@@ -503,7 +501,7 @@
     ></textarea>
 {:else if active_tab === "preview"}
     <div
-        class="h-28 w-full overflow-y-scroll px-3 text-sm leading-tight md:h-[8vw] md:px-[1vw] md:py-[0.5vw] md:text-[1vw] md:leading-[1.5vw]"
+        class="h-28 w-full overflow-y-scroll px-3 text-sm leading-tight md:h-[8vw] md:px-[1vw] md:py-[0.5vw] md:text-[1vw] md:leading-[1.5vw] [&_img]:w-[1.25vw] [&_img]:inline-flex"
         contenteditable="false"
         bind:innerHTML={preview_element_innerHTML}
     ></div>
@@ -522,37 +520,37 @@
 </textarea-footer>
 {#if show_emoji_picker && emoji_matches.length > 0}
     <emoji-popover
-        class="divide-surface-50/10 bg-surface-400 text-surface-50 absolute flex min-w-[12vw] flex-col divide-y overflow-hidden rounded-[0.5vw] text-[1vw]"
+        class="divide-accent/10 bg-neutral text-accent absolute flex min-w-[12vw] flex-col divide-y overflow-hidden rounded-[0.5vw] text-[1vw]"
         style:top={caret_offset_top}
         style:left={caret_offset_left}
     >
-        {#each emoji_matches as item, index}
-            {#if index < SHOWN_EMOJI_LIMIT}
-                {@const emoji = item?.["emoji"] ?? ""}
-                {@const keyword = item?.["keyword"] ?? ""}
+        {#each emoji_matches.slice(0, SHOWN_EMOJI_LIMIT) as item, index}
+            {@const emoji = item?.["emoji"] ?? ""}
+            {@const keyword = item?.["keyword"] ?? ""}
 
-                <div
-                    role="button"
-                    tabindex="0"
-                    class="hover:bg-primary-500 flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:text-white"
-                    class:bg-primary-500={active_emoji_index === index}
-                    class:text-white={active_emoji_index === index}
-                    on:mousedown={async (event) =>
-                        await select_emoji({
-                            emoji_index: index,
-                            element: event.currentTarget
-                        })}
-                >
-                    <div class="h-[0.9vw] w-[0.9vw]">
-                        <img
-                            src={emoji}
-                            alt={keyword}
-                            class="h-full w-full"
-                        />
-                    </div>
-                    <span>{keyword}</span>
+            <div
+                role="button"
+                tabindex="0"
+                class="hover:bg-primary flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:text-accent"
+                class:bg-primary={active_emoji_index === index}
+                class:text-accent={active_emoji_index === index}
+                on:mouseenter={() => active_emoji_index = index}
+                on:mousedown={async () => {
+                    await select_emoji({
+                        emoji_index: index,
+                        element: textarea_element
+                    })
+                }}
+            >
+                <div class="h-[0.9vw] w-[0.9vw]">
+                    <img
+                        src={emoji}
+                        alt={keyword}
+                        class="h-full w-full"
+                    />
                 </div>
-            {/if}
+                <span>{keyword}</span>
+            </div>
         {/each}
     </emoji-popover>
 {/if}
