@@ -37,11 +37,9 @@
             });
 
             window.urls = {
-                {% autoescape off %}
-                    {% for pattern in urlpatterns %}
-                        `{{pattern.name}}`:`{{pattern.url}}`,
-                    {% endfor %}
-                {% endautoescape %}
+                {% for pattern in urlpatterns %}
+                    `{{pattern.name|safe}}`:`{{pattern.url|safe}}`,
+                {% endfor %}
             }
 
         

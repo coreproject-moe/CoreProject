@@ -8,10 +8,6 @@ declare global {
         timer: EasyTimer;
         _hyperscript: typeof _hyperscript;
         csrfmiddlewaretoken: string;
-        urls: {
-            partials: {
-                partial_markdown_endpoint: string;
-            };
-        };
+        urls: Record<string, string>;
     }
 }
