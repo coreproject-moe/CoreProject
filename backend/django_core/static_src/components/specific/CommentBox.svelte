@@ -2,7 +2,14 @@
     import TextArea from "../minor/TextArea.svelte";
 
     // Icons
-    import Info from "../icons/info.svelte";
+    import Info from "../icons/Info.svelte";
+
+    export const submit_url = "";
+
+    let textarea_value: string;
+    function handle_submit() {
+        // post to `submit_url`
+    }
 </script>
 
 <div class="flex flex-col gap-3 md:gap-[0.75vw]">
