@@ -16,10 +16,6 @@ class RegexURLResolver:  # type: ignore
     pass
 
 
-class LocaleRegexURLResolver:  # type: ignore
-    pass
-
-
 def describe_pattern(p):
     return str(p.pattern)
 
