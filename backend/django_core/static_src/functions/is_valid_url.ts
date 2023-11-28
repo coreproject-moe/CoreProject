@@ -10,5 +10,5 @@ export function is_valid_url(url_string: string) {
         return false;
     }
 
-    return url.protocol === 'http:' || url.protocol === 'https:';
+    return url.protocol === "http:" || url.protocol === "https:";
 }

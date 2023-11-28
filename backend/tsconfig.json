@@ -1,9 +1,5 @@
 {
-    "include": [
-        "./**/*.ts",
-        "./**/*.tsx",
-        "django_core/static_src/components/index.ts"
-    ],
+    "include": ["./**/*.ts", "./**/*.tsx", "django_core/static_src/components/index.ts"],
     "exclude": ["node_modules", "postcss.config.cjs", "django_core/static"],
     "compilerOptions": {
         "lib": ["esnext", "DOM", "DOM.Iterable"],
