@@ -8,6 +8,6 @@ declare global {
         timer: EasyTimer;
         _hyperscript: typeof _hyperscript;
         csrfmiddlewaretoken: string;
-        urls: Record<string, string>;
+        urls: Map<string, string>;
     }
 }

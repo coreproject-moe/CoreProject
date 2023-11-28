@@ -36,14 +36,23 @@
                 );
             });
 
-            window.urls = {
-                {% for pattern in urlpatterns %}
-                    `{{pattern.name|safe}}`:`{{pattern.url|safe}}`,
-                {% endfor %}
-            }
+            
+        </script>
 
+        <script>
+        window.urls = new Map();
+        {% autoescape off %}
+            {% for pattern in urlpatterns %}
+                {% if pattern.name %}
+                    window.urls.set(`{{pattern.name}}`, `{{pattern.url}}`);
+                {% endif %}
+            {% endfor %}
+        {% endautoescape %}
         
         </script>
+
+        {% vite_asset 'js/index.ts' %}
+
         {% vite_hmr_client %}
 
         {% vite_asset 'js/vendor/htmx.ts' %}

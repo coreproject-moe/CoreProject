@@ -92,7 +92,8 @@ def urls(request: HttpRequest):
         url = simplify_regex(regex)
 
         admin_pattern = re.compile(r"^/admin(?:/|$)")
-        if not admin_pattern.match(url):
+        format_pattern = re.compile(r"(\S+\.<format>\S*)")
+        if not admin_pattern.match(url) and not format_pattern.match(url):
             urlpatterns.append({"url": url, "name": url_name})
 
     return {"urlpatterns": urlpatterns}
