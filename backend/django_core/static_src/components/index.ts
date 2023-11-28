@@ -10,7 +10,14 @@ svelteRetag({
     component: ScrollArea,
     tagname: 'scroll-area',
     attributes: ['parent_class', 'offset_scrollbar', 'gradient_mask', 'class'], // Changes to these attributes will be reactively forwarded to your component
-    shadow: false, // Use the light DOM]
+    shadow: false, // Use the light DOM
+    hydratable: true,
+});
+svelteRetag({
+    component: Textarea,
+    tagname: 'coreproject-textarea',
+    attributes: [],
+    shadow: false,
     hydratable: true,
 });
 svelteRetag({
