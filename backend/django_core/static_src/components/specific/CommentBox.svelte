@@ -7,8 +7,15 @@
     export const submit_url = "";
 
     let textarea_value: string;
-    function handle_submit() {
-        // post to `submit_url`
+    async function handle_submit() {
+        await fetch(submit_url, {
+            method: "POST",
+            credentials: "same-origin",
+            body: JSON.stringify({ comment: textarea_value }),
+            headers: {
+                "X-CSRFToken": window.csrfmiddlewaretoken
+            }
+        });
     }
 </script>
 
