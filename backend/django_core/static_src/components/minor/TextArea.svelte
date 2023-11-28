@@ -563,7 +563,6 @@
             // guard clause
             if (!res.ok) return;
             const markdown_html = await res.text();
-            console.log(textarea_value);
             if (textarea_value) {
                 preview_element_innerHTML = markdown_html;
             } else {
