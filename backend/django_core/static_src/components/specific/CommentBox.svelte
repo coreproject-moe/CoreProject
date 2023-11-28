@@ -5,7 +5,7 @@
     import Info from "../icons/info.svelte";
 </script>
 
-<div class="mt-3 flex flex-col gap-3 md:mt-[1vw] md:gap-[0.75vw]">
+<div class="flex flex-col gap-3 md:gap-[0.75vw]">
     <div class="ring-surface-300/25 relative flex flex-col rounded-lg ring-2 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw]">
         <TextArea />
     </div>
