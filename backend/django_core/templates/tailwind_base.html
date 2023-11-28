@@ -22,11 +22,7 @@
             href="{% vite_asset_url 'images/favicon/favicon.svg' %}"
         />
         <script>
-            window.urls= {
-                partials: {
-                    partial_markdown_endpoint: `{% url 'partial_markdown_endpoint' %}`,
-                },
-            };
+
             window.csrfmiddlewaretoken = `{{ csrf_token }}`;
 
             document.addEventListener('DOMContentLoaded', () => {
@@ -39,9 +35,22 @@
                     }
                 );
             });
+
         </script>
 
+        <script>
+            window.urls = new Map();
+            {% autoescape off %}
+                {% for pattern in urlpatterns %}
+                    {% if pattern.name %}
+                        window.urls.set(`{{pattern.name}}`, `{{pattern.url}}`);
+                    {% endif %}
+                {% endfor %}
+            {% endautoescape %}
+
+        </script>
         {% vite_hmr_client %}
+        {% vite_asset 'js/index.ts' %}
 
         {% vite_asset 'js/vendor/htmx.ts' %}
         {% vite_asset 'js/vendor/hyperscript.ts' %}
