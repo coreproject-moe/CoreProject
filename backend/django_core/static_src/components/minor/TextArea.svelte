@@ -49,7 +49,7 @@
             function: (element) => bold_text(element as HTMLTextAreaElement),
             icon: {
                 component: Bold,
-                class: "w-5 md:w-[1.4vw]  text-surface-200"
+                class: "w-5 md:w-[1.5vw]  text-surface-200"
             },
             description: "Add bold text, <Ctrl + b>"
         },
@@ -65,7 +65,7 @@
             function: (element) => underline_text(element as HTMLTextAreaElement),
             icon: {
                 component: Underline,
-                class: "w-5 md:w-[1.35vw] text-surface-200"
+                class: "w-5 md:w-[1.25vw] text-surface-200"
             },
             description: "Add underline text, <Ctrl + u>"
         },
@@ -448,14 +448,14 @@
             {@const active = tab === active_tab}
             <button
                 type="button"
-                class={cn("btn min-h-full capitalize md:h-[2.5vw] md:text-[1vw]", active ? "btn-neutral" : "bg-secondary")}
+                class={cn("btn min-h-full capitalize md:h-[2.25vw] md:text-[1vw]", active ? "btn-neutral" : "bg-secondary")}
                 on:click={() => handle_tab_click(tab)}
             >
                 {tab}
             </button>
         {/each}
     </div>
-    <div class="flex items-center gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]">
+    <div class="flex items-center h-max gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]">
         {#each Object.entries(icon_and_function_mapping) as item}
             {@const item_label = item[0]}
 
@@ -473,10 +473,10 @@
                     animation: "shift-away",
                     theme: "elaine",
                     onTrigger(instance) {
-                        instance.props.offset = [0, vw(1)];
+                        instance.props.offset = [0, vw(1.25)];
                     }
                 }}
-                class={cn(icon_class, "btn min-h-full border-none !bg-transparent p-0")}
+                class={cn(icon_class, "btn min-h-max h-max border-none !bg-transparent p-0")}
                 type="button"
                 aria-label={item_label}
                 on:click={() => button_function(textarea_element)}
