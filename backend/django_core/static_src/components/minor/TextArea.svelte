@@ -501,7 +501,7 @@
     ></textarea>
 {:else if active_tab === "preview"}
     <div
-        class="h-28 w-full overflow-y-scroll px-3 text-sm leading-tight md:h-[8vw] md:px-[1vw] md:py-[0.5vw] md:text-[1vw] md:leading-[1.5vw]"
+        class="h-28 w-full overflow-y-scroll px-3 text-sm leading-tight md:h-[8vw] md:px-[1vw] md:py-[0.5vw] md:text-[1vw] md:leading-[1.5vw] [&_img]:w-[1.25vw] [&_img]:inline-flex"
         contenteditable="false"
         bind:innerHTML={preview_element_innerHTML}
     ></div>
