@@ -8,6 +8,7 @@
     import type { SvelteComponent } from 'svelte';
     import tippy from 'tippy.js';
 
+    import reverse from '../../functions/'
     import Bold from '../icons/bold.svelte';
     import Italic from '../icons/italic.svelte';
     import Underline from '../icons/underline.svelte';
@@ -15,13 +16,13 @@
     import Code from '../icons/code.svelte';
     import Hyperlink from '../icons/hyperlink.svelte';
 
-    let textarea_value = '';
-
     let caret_offset_top: string | null = null,
         caret_offset_left: string | null = null;
 
-    // Bindings
-    let textarea_element: HTMLTextAreaElement;
+    // Textarea Bindings
+    let textarea_element: HTMLTextAreaElement,
+        textarea_value = '';
+    let preview_element: HTMLDivElement;
 
     let emoji_matches: Array<{
             emoji: string;
@@ -549,7 +550,23 @@
     }
 
     // @type: 'edit' | 'preview'
-    let active_tab: string = 'edit';
+    let active_tab: 'edit' | 'preview' = 'edit';
+    async function handle_tab_click(tab_name: string) {
+        if (textarea_value && tab_name === 'preview') {
+            const res = await fetch(reverse('partial_markdown_endpoint'), {
+                method: 'POST',
+                credentials: 'same-origin',
+                body: textarea_element?.value,
+                headers: { 'X-CSRFToken': window.csrfmiddlewaretoken },
+            });
+            // guard clause
+            if (!res.ok) return;
+            const markdown_html = await res.text();
+            if (markdown_html) preview_element!.innerHTML = markdown_html;
+            else preview_element!.innerHTML = 'Nothing to preview!';
+        }
+        active_tab = tab_name as typeof active_tab;
+    }
 </script>
 
 <text-editor
@@ -567,7 +584,7 @@
                         'btn min-h-full md:h-[2.5vw] md:text-[1vw] capitalize',
                         active ? 'btn-neutral' : 'bg-secondary'
                     )}
-                    on:click={() => (active_tab = tab)}
+                    on:click={() => handle_tab_click(tab)}
                 >
                     {tab}
                 </button>
@@ -612,20 +629,26 @@
             {/each}
         </div>
     </textarea-navbar>
-    <textarea
-        on:paste={(event) => paste_text(event)}
-        on:input={handle_input}
-        on:keydown={handle_keydown}
-        on:blur={handle_blur}
-        bind:value={textarea_value}
-        bind:this={textarea_element}
-        spellcheck="true"
-        placeholder="Leave a comment"
-        class="w-full resize-none border-none bg-secondary px-3 text-sm leading-tight outline-none focus:ring-0 md:px-[1vw] md:text-[1vw] md:leading-[1.5vw] h-28 overflow-y-scroll md:h-[8vw] md:py-[0.5vw]"
-    ></textarea>
-    <preview
-        class="hidden w-full px-3 text-sm leading-tight md:text-[1vw] md:leading-[1.5vw] h-28 overflow-y-scroll md:h-[8vw] md:px-[1vw] md:py-[0.5vw]"
-    ></preview>
+    {#if active_tab === 'edit'}
+        <textarea
+            on:paste={(event) => paste_text(event)}
+            on:input={handle_input}
+            on:keydown={handle_keydown}
+            on:blur={handle_blur}
+            bind:value={textarea_value}
+            bind:this={textarea_element}
+            spellcheck="true"
+            placeholder="Leave a comment"
+            class="w-full resize-none border-none bg-secondary px-3 text-sm leading-tight outline-none focus:ring-0 md:px-[1vw] md:text-[1vw] md:leading-[1.5vw] h-28 overflow-y-scroll md:h-[8vw] md:py-[0.5vw]"
+        ></textarea>
+    {:else if active_tab === 'preview'}
+        <div
+            class="w-full px-3 text-sm leading-tight md:text-[1vw] md:leading-[1.5vw] h-28 overflow-y-scroll md:h-[8vw] md:px-[1vw] md:py-[0.5vw]"
+            contenteditable="false"
+            bind:this={preview_element}
+        ></div>
+    {/if}
+
     <textarea-footer
         class="flex items-center gap-[0.25vw] px-4 py-2 text-[0.65rem] font-thin leading-[1.5vw] text-accent md:px-[1vw] md:py-[0.1vw] md:text-[0.75vw]"
         style="align-self: flex-end;"
