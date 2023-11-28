@@ -1,7 +1,7 @@
 // @ts-ignore
 import svelteRetag from 'svelte-retag';
 
-import Textarea from './major/TextArea.svelte';
+import CommentBox from './specific/CommentBox.svelte';
 import ScrollArea from './minor/ScrollArea.svelte';
 
 import '../css/tippy.scss';
@@ -14,8 +14,8 @@ svelteRetag({
     hydratable: true,
 });
 svelteRetag({
-    component: Textarea,
-    tagname: 'coreproject-textarea',
+    component: CommentBox,
+    tagname: 'coreproject-commentbox',
     attributes: [],
     shadow: false,
     hydratable: true,
