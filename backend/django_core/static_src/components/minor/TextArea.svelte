@@ -166,8 +166,7 @@
             switch (event.key.toLowerCase()) {
                 case "arrowup": {
                     event.preventDefault();
-                    active_emoji_index =
-                        (active_emoji_index - 1 + emoji_matches.length) % emoji_matches.length;
+                    active_emoji_index = (active_emoji_index - 1 + emoji_matches.length) % emoji_matches.length;
                     break;
                 }
                 case "arrowdown": {
@@ -428,7 +427,9 @@
                 method: "POST",
                 credentials: "same-origin",
                 body: textarea_value,
-                headers: { "X-CSRFToken": window.csrfmiddlewaretoken }
+                headers: {
+                    "X-CSRFToken": window.csrfmiddlewaretoken
+                }
             });
             // guard clause
             if (!res.ok) return;
@@ -456,7 +457,7 @@
             </button>
         {/each}
     </div>
-    <div class="flex items-center h-max gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]">
+    <div class="flex h-max items-center gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]">
         {#each Object.entries(icon_and_function_mapping) as item}
             {@const item_label = item[0]}
 
@@ -477,7 +478,7 @@
                         instance.props.offset = [0, vw(1.25)];
                     }
                 }}
-                class={cn(icon_class, "btn min-h-max h-max border-none !bg-transparent p-0")}
+                class={cn(icon_class, "btn h-max min-h-max border-none !bg-transparent p-0")}
                 type="button"
                 aria-label={item_label}
                 on:click={() => button_function(textarea_element)}
@@ -501,7 +502,7 @@
     ></textarea>
 {:else if active_tab === "preview"}
     <div
-        class="h-28 w-full overflow-y-scroll px-3 text-sm leading-tight md:h-[8vw] md:px-[1vw] md:py-[0.5vw] md:text-[1vw] md:leading-[1.5vw] [&_img]:w-[1.25vw] [&_img]:inline-flex"
+        class="h-28 w-full overflow-y-scroll px-3 text-sm leading-tight md:h-[8vw] md:px-[1vw] md:py-[0.5vw] md:text-[1vw] md:leading-[1.5vw] [&_img]:inline-flex [&_img]:w-[1.25vw]"
         contenteditable="false"
         bind:innerHTML={preview_element_innerHTML}
     ></div>
@@ -520,7 +521,7 @@
 </textarea-footer>
 {#if show_emoji_picker && emoji_matches.length > 0}
     <emoji-popover
-        class="divide-accent/10 bg-neutral text-accent absolute flex min-w-[12vw] flex-col divide-y overflow-hidden rounded-[0.5vw] text-[1vw]"
+        class="absolute flex min-w-[12vw] flex-col divide-y divide-accent/10 overflow-hidden rounded-[0.5vw] bg-neutral text-[1vw] text-accent"
         style:top={caret_offset_top}
         style:left={caret_offset_left}
     >
@@ -531,15 +532,15 @@
             <div
                 role="button"
                 tabindex="0"
-                class="hover:bg-primary flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:text-accent"
+                class="flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:bg-primary hover:text-accent"
                 class:bg-primary={active_emoji_index === index}
                 class:text-accent={active_emoji_index === index}
-                on:mouseenter={() => active_emoji_index = index}
+                on:mouseenter={() => (active_emoji_index = index)}
                 on:mousedown={async () => {
                     await select_emoji({
                         emoji_index: index,
                         element: textarea_element
-                    })
+                    });
                 }}
             >
                 <div class="h-[0.9vw] w-[0.9vw]">

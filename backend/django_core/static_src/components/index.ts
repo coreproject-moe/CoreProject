@@ -16,7 +16,7 @@ svelteRetag({
 svelteRetag({
     component: CommentBox,
     tagname: "coreproject-commentbox",
-    attributes: [],
+    attributes: ["submit_url"],
     shadow: false,
     hydratable: true
 });
