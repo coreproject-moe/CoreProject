@@ -519,7 +519,7 @@
 </textarea-footer>
 {#if show_emoji_picker && emoji_matches.length > 0}
     <emoji-popover
-        class="divide-surface-50/10 bg-surface-400 text-surface-50 absolute flex min-w-[12vw] flex-col divide-y overflow-hidden rounded-[0.5vw] text-[1vw]"
+        class="divide-accent/10 bg-neutral text-accent absolute flex min-w-[12vw] flex-col divide-y overflow-hidden rounded-[0.5vw] text-[1vw]"
         style:top={caret_offset_top}
         style:left={caret_offset_left}
     >
@@ -531,9 +531,9 @@
                 <div
                     role="button"
                     tabindex="0"
-                    class="hover:bg-primary-500 flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:text-white"
-                    class:bg-primary-500={active_emoji_index === index}
-                    class:text-white={active_emoji_index === index}
+                    class="hover:bg-primary flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:text-accent"
+                    class:bg-primary={active_emoji_index === index}
+                    class:text-accent={active_emoji_index === index}
                     on:mousedown={async (event) =>
                         await select_emoji({
                             emoji_index: index,
