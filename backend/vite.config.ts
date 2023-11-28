@@ -39,9 +39,6 @@ export default defineConfig({
                 // Tailwind.css
                 join(CSS_DIRECTORY, 'index.postcss'),
 
-                // Textarea
-                join(JS_DIRECTORY, 'textarea.ts'),
-
                 // Register Page
                 join(JS_DIRECTORY, 'register.ts'),
                 // join(IMAGE_DIRECTORY, 'favicon', 'favicon.svg'),

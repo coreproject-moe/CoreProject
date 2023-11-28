@@ -550,7 +550,6 @@
         caret_offset_top = null;
     }
 
-    // @type: 'edit' | 'preview'
     let active_tab: 'edit' | 'preview' = 'edit';
     async function handle_tab_click(tab_name: string) {
         if (textarea_value && tab_name === 'preview') {
