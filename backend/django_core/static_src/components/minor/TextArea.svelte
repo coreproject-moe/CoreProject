@@ -463,10 +463,10 @@
             {@const icon_class = item[1].icon.class}
             {@const button_function = item[1].function}
             {@const description = item[1].description}
-            <div
-                class="before:px-[0.5vw] before:py-[0.25vw] before:md:text-[0.9vw]"
+
+            <button
                 use:tippy={{
-                    content: `<div class='leading-2 w-max whitespace-nowrap rounded-lg bg-surface-400 px-2 py-1 text-[0.65rem] text-surface-50 md:px-[0.75vw] md:py-[0.3vw] md:text-[1vw]'>${encode(description)}</div>`,
+                    content: `<div class='leading-2 w-max whitespace-nowrap rounded-lg bg-neutral px-2 py-1 text-[0.65rem] text-accent md:px-[0.75vw] md:py-[0.3vw] md:text-[1vw]'>${encode(description)}</div>`,
                     allowHTML: true,
                     arrow: false,
                     appendTo: document.body,
@@ -476,16 +476,13 @@
                         instance.props.offset = [0, vw(1)];
                     }
                 }}
+                class={cn(icon_class, "btn min-h-full border-none !bg-transparent p-0")}
+                type="button"
+                aria-label={item_label}
+                on:click={() => button_function(textarea_element)}
             >
-                <button
-                    class={cn(icon_class, "btn min-h-full border-none !bg-transparent p-0")}
-                    type="button"
-                    aria-label={item_label}
-                    on:click={() => button_function(textarea_element)}
-                >
-                    <svelte:component this={icon} />
-                </button>
-            </div>
+                <svelte:component this={icon} />
+            </button>
         {/each}
     </div>
 </textarea-navbar>
