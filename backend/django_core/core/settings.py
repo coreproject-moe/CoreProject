@@ -212,6 +212,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                # Custom
+                "apps.pages.context_processors.urls",
             ],
             "builtins": [
                 "django_components.templatetags.component_tags",

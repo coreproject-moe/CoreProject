@@ -22,11 +22,7 @@
             href="{% vite_asset_url 'images/favicon/favicon.svg' %}"
         />
         <script>
-            window.urls= {
-                partials: {
-                    partial_markdown_endpoint: `{% url 'partial_markdown_endpoint' %}`,
-                },
-            };
+           
             window.csrfmiddlewaretoken = `{{ csrf_token }}`;
 
             document.addEventListener('DOMContentLoaded', () => {
@@ -39,8 +35,17 @@
                     }
                 );
             });
-        </script>
 
+            window.urls = {
+                {% autoescape off %}
+                    {% for pattern in urlpatterns %}
+                        `{{pattern.name}}`:`{{pattern.url}}`,
+                    {% endfor %}
+                {% endautoescape %}
+            }
+
+        
+        </script>
         {% vite_hmr_client %}
 
         {% vite_asset 'js/vendor/htmx.ts' %}
