@@ -534,11 +534,12 @@
                 class="hover:bg-primary flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:text-accent"
                 class:bg-primary={active_emoji_index === index}
                 class:text-accent={active_emoji_index === index}
-                on:mousedown={async (event) =>
+                on:mousedown={async (event) => {
                     await select_emoji({
                         emoji_index: index,
-                        element: event.currentTarget
-                    })}
+                        element: textarea_element
+                    })
+                }}
             >
                 <div class="h-[0.9vw] w-[0.9vw]">
                     <img
