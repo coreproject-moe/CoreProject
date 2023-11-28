@@ -166,12 +166,13 @@
             switch (event.key.toLowerCase()) {
                 case "arrowup": {
                     event.preventDefault();
-                    active_emoji_index = (active_emoji_index - 1 + SHOWN_EMOJI_LIMIT) % SHOWN_EMOJI_LIMIT;
+                    active_emoji_index =
+                        (active_emoji_index - 1 + emoji_matches.length) % emoji_matches.length;
                     break;
                 }
                 case "arrowdown": {
                     event.preventDefault();
-                    active_emoji_index = (active_emoji_index + 1) % SHOWN_EMOJI_LIMIT;
+                    active_emoji_index = (active_emoji_index + 1) % emoji_matches.length;
                     break;
                 }
                 case "enter": {
@@ -523,33 +524,31 @@
         style:top={caret_offset_top}
         style:left={caret_offset_left}
     >
-        {#each emoji_matches as item, index}
-            {#if index < SHOWN_EMOJI_LIMIT}
-                {@const emoji = item?.["emoji"] ?? ""}
-                {@const keyword = item?.["keyword"] ?? ""}
+        {#each emoji_matches.slice(0, SHOWN_EMOJI_LIMIT) as item, index}
+            {@const emoji = item?.["emoji"] ?? ""}
+            {@const keyword = item?.["keyword"] ?? ""}
 
-                <div
-                    role="button"
-                    tabindex="0"
-                    class="hover:bg-primary flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:text-accent"
-                    class:bg-primary={active_emoji_index === index}
-                    class:text-accent={active_emoji_index === index}
-                    on:mousedown={async (event) =>
-                        await select_emoji({
-                            emoji_index: index,
-                            element: event.currentTarget
-                        })}
-                >
-                    <div class="h-[0.9vw] w-[0.9vw]">
-                        <img
-                            src={emoji}
-                            alt={keyword}
-                            class="h-full w-full"
-                        />
-                    </div>
-                    <span>{keyword}</span>
+            <div
+                role="button"
+                tabindex="0"
+                class="hover:bg-primary flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:text-accent"
+                class:bg-primary={active_emoji_index === index}
+                class:text-accent={active_emoji_index === index}
+                on:mousedown={async (event) =>
+                    await select_emoji({
+                        emoji_index: index,
+                        element: event.currentTarget
+                    })}
+            >
+                <div class="h-[0.9vw] w-[0.9vw]">
+                    <img
+                        src={emoji}
+                        alt={keyword}
+                        class="h-full w-full"
+                    />
                 </div>
-            {/if}
+                <span>{keyword}</span>
+            </div>
         {/each}
     </emoji-popover>
 {/if}
