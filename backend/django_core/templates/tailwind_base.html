@@ -54,6 +54,7 @@
 
         {% vite_asset 'js/vendor/htmx.ts' %}
         {% vite_asset 'js/vendor/hyperscript.ts' %}
+        {% vite_asset 'components/index.ts' %}
 
         <link rel='stylesheet' href='{% vite_asset_url 'css/index.postcss' %}'/>
 
@@ -61,6 +62,7 @@
         {% block head %}{% endblock %}
         <title>{% block title %}{% endblock %}</title>
     </head>
+
     <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
         {% block body %}{% endblock %} {% block js %}{% endblock %}
         <div id="toast" class="toast p-0 absolute bottom-[0.75vw] right-[0.75vw]"></div>

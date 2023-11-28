@@ -44,6 +44,11 @@ module.exports = {
          */
         './components/**/*.py',
         './**/*.py',
+
+        /**
+         * Svelte
+         */
+        './**/*.svelte'
     ],
     theme: {
         extend: {

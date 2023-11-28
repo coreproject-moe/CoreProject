@@ -1,14 +1,23 @@
 {
+    "include": [
+        "./**/*.ts",
+        "./**/*.tsx",
+        "django_core/static_src/components/index.ts"
+    ],
     "exclude": ["node_modules", "postcss.config.cjs", "django_core/static"],
     "compilerOptions": {
-        "module": "NodeNext",
+        "lib": ["esnext", "DOM", "DOM.Iterable"],
+
         "allowJs": true,
         "checkJs": true,
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
         "resolveJsonModule": true,
-        "moduleResolution": "NodeNext",
-        "skipLibCheck": true,
+        "moduleResolution": "Bundler",
+        "module": "esnext",
+        "target": "esnext",
+        "ignoreDeprecations": "5.0",
+        "skipLibCheck": false,
         "sourceMap": true,
         "strict": true
     }
