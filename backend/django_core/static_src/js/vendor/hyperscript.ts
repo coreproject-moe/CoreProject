@@ -1,4 +1,4 @@
-import _hyperscript from 'hyperscript.org';
+import _hyperscript from "hyperscript.org";
 
 _hyperscript.browserInit();
 _hyperscript.processNode(document.body);

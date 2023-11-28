@@ -1,1 +1,1 @@
-import 'htmx.org/dist/htmx';
+import "htmx.org/dist/htmx";

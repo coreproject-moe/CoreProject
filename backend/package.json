@@ -7,7 +7,7 @@
     "scripts": {
         "dev": "vite",
         "prod": "vite build",
-        "pretty": "prettier ."
+        "format": "prettier --plugin-search-dir . --write ."
     },
     "author": "",
     "license": "AGPL-3.0-or-later",

@@ -14,16 +14,13 @@ export function reverse(view: string, ...args: Array<string | number>) {
     if (matches?.length === 0) {
         return url;
     } else if (matches?.length !== args.length) {
-        throw new Error('`args` doesnot match with `urlpattern`');
+        throw new Error("`args` doesnot match with `urlpattern`");
     }
 
-    const replacements: Record<string, string> = matches.reduce(
-        (obj, k, i) => ({ ...obj, [k]: args[i] }),
-        {}
-    );
+    const replacements: Record<string, string> = matches.reduce((obj, k, i) => ({ ...obj, [k]: args[i] }), {});
 
     // Create a regular expression pattern to match all occurrences of the keys in replacements
-    const pattern = new RegExp(Object.keys(replacements).join('|'), 'g');
+    const pattern = new RegExp(Object.keys(replacements).join("|"), "g");
 
     const final_url = url.replace(pattern, function (match: string) {
         return replacements[match];

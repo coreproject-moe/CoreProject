@@ -80,8 +80,6 @@
     direction="{{ direction }}"
     duration="{{ duration }}"
 >
-    <active-glider
-        class="{{ active_element_class }} absolute opacity-0 ease-in-out duration-200"
-    ></active-glider>
+    <active-glider class="{{ active_element_class }} absolute opacity-0 ease-in-out duration-200"></active-glider>
     {% slot 'items' default %} {% endslot %}
 </glider-container>

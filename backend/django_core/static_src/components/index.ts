@@ -1,22 +1,22 @@
 // @ts-ignore
-import svelteRetag from 'svelte-retag';
+import svelteRetag from "svelte-retag";
 
-import CommentBox from './specific/CommentBox.svelte';
-import ScrollArea from './minor/ScrollArea.svelte';
+import CommentBox from "./specific/CommentBox.svelte";
+import ScrollArea from "./minor/ScrollArea.svelte";
 
-import '../css/tippy.scss';
+import "../css/tippy.scss";
 
 svelteRetag({
     component: ScrollArea,
-    tagname: 'scroll-area',
-    attributes: ['parent_class', 'offset_scrollbar', 'gradient_mask', 'class'], // Changes to these attributes will be reactively forwarded to your component
+    tagname: "scroll-area",
+    attributes: ["parent_class", "offset_scrollbar", "gradient_mask", "class"], // Changes to these attributes will be reactively forwarded to your component
     shadow: false, // Use the light DOM
-    hydratable: true,
+    hydratable: true
 });
 svelteRetag({
     component: CommentBox,
-    tagname: 'coreproject-commentbox',
+    tagname: "coreproject-commentbox",
     attributes: [],
     shadow: false,
-    hydratable: true,
+    hydratable: true
 });
