@@ -17,6 +17,7 @@ export default defineConfig({
             compilerOptions: {
                 customElement: true,
             },
+            configFile: join(process.cwd(), 'svelte.config.js'),
         }),
     ],
     // css: {
@@ -26,7 +27,7 @@ export default defineConfig({
         outDir: join(process.cwd(), 'django_core', 'static'),
         manifest: true,
         emptyOutDir: true,
-        target: 'esnext',
+        target: 'es2022',
         sourcemap: true,
         rollupOptions: {
             input: [

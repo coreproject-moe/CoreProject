@@ -548,41 +548,32 @@
         caret_offset_top = null;
     }
 
-    let tab_type: 'edit' | 'preview' = 'edit';
-
-    async function handle_edit_preview_button_click(
-        item: string
-    ): Promise<void> {
-        tab_type = item as typeof tab_type;
-    }
+    // @type: 'edit' | 'preview'
+    let active_tab: string = 'edit';
 </script>
 
-<div
-    class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary-500 md:rounded-[0.75vw] md:ring-[0.15vw]"
+<text-editor
+    class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw] flex flex-col"
 >
     <textarea-navbar
-        class="flex h-8 items-center justify-between overflow-hidden rounded-t-lg bg-surface-400/50 md:h-[2.5vw] md:rounded-t-[0.75vw]"
+        class="flex items-center justify-between rounded-t-lg md:rounded-t-[0.75vw]"
     >
-        <div>
-            {#each ['edit', 'preview'] as item}
-                {@const active = tab_type.toLowerCase() == item}
+        <div class="md:p-[0.25vw] md:pl-[0.3vw]">
+            {#each ['edit', 'preview'] as tab}
+                {@const active = tab === active_tab}
                 <button
                     type="button"
-                    on:click={() => handle_edit_preview_button_click(item)}
                     class={cn(
-                        active
-                            ? 'bg-surface-900 text-surface-50'
-                            : 'text-surface-300',
-                        'h-8 px-5 text-xs capitalize leading-[1.5vw] transition-colors duration-100 md:h-[2.5vw] md:px-[1.5vw] md:text-[1vw]'
+                        'btn min-h-full md:h-[2.5vw] md:text-[1vw] capitalize',
+                        active ? 'btn-neutral' : 'bg-secondary'
                     )}
+                    on:click={() => (active_tab = tab)}
                 >
-                    {item}
+                    {tab}
                 </button>
             {/each}
         </div>
-        <div
-            class="flex place-items-center gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]"
-        >
+        <div class="flex items-center gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]">
             {#each Object.entries(icon_and_function_mapping) as item}
                 {@const item_label = item[0]}
 
@@ -590,11 +581,8 @@
                 {@const icon_class = item[1].icon.class}
                 {@const button_function = item[1].function}
                 {@const description = item[1].description}
-
-                <button
-                    class="btn p-0 {icon_class}"
-                    type="button"
-                    aria-label={item_label}
+                <div
+                    class="before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]"
                     use:tippy={{
                         content: `<div class='leading-2 w-max whitespace-nowrap rounded-lg bg-surface-400 px-2 py-1 text-[0.65rem] text-surface-50 md:px-[0.75vw] md:py-[0.3vw] md:text-[1vw]'>${encode(
                             description
@@ -608,51 +596,45 @@
                             instance.props.offset = [0, vw(1)];
                         },
                     }}
-                    on:click={() => button_function(textarea_element)}
                 >
-                    <svelte:component this={icon} />
-                </button>
+                    <button
+                        class={cn(
+                            icon_class,
+                            'btn border-none !bg-transparent min-h-full p-0'
+                        )}
+                        type="button"
+                        aria-label={item_label}
+                        on:click={() => button_function(textarea_element)}
+                    >
+                        <svelte:component this={icon} />
+                    </button>
+                </div>
             {/each}
         </div>
     </textarea-navbar>
-    <textarea-body class="block h-28 overflow-y-scroll md:h-[8vw]">
-        {#if tab_type === 'edit'}
-            <textarea
-                on:paste={(event) => paste_text(event)}
-                on:input={handle_input}
-                on:keydown={handle_keydown}
-                on:blur={handle_blur}
-                bind:value={textarea_value}
-                bind:this={textarea_element}
-                spellcheck="true"
-                class="h-full w-full resize-none border-none bg-surface-900 p-3 text-sm leading-tight text-surface-50 outline-none duration-300 ease-in-out placeholder:text-surface-200 focus:ring-0 md:p-[1vw] md:text-[1vw] md:leading-[1.5vw]"
-                placeholder="Leave a comment"
-            />
-        {:else if tab_type === 'preview'}
-            <div class="p-3 md:p-[1vw]">
-                {#if textarea_value}
-                    <!--Not implemented error-->
-                {:else}
-                    <span
-                        class="text-sm leading-tight text-surface-50 md:text-[1vw] md:leading-[1.5vw]"
-                        >Nothing to preview</span
-                    >
-                {/if}
-            </div>
-        {/if}
-    </textarea-body>
+    <textarea
+        on:paste={(event) => paste_text(event)}
+        on:input={handle_input}
+        on:keydown={handle_keydown}
+        on:blur={handle_blur}
+        bind:value={textarea_value}
+        bind:this={textarea_element}
+        spellcheck="true"
+        placeholder="Leave a comment"
+        class="w-full resize-none border-none bg-secondary px-3 text-sm leading-tight outline-none focus:ring-0 md:px-[1vw] md:text-[1vw] md:leading-[1.5vw] h-28 overflow-y-scroll md:h-[8vw] md:py-[0.5vw]"
+    ></textarea>
+    <preview
+        class="hidden w-full px-3 text-sm leading-tight md:text-[1vw] md:leading-[1.5vw] h-28 overflow-y-scroll md:h-[8vw] md:px-[1vw] md:py-[0.5vw]"
+    ></preview>
     <textarea-footer
-        class="flex justify-between bg-surface-400/50 px-4 py-2 text-[0.65rem] font-thin leading-[1.5vw] text-surface-200 md:px-[1vw] md:py-[0.1vw] md:text-[0.75vw]"
+        class="flex items-center gap-[0.25vw] px-4 py-2 text-[0.65rem] font-thin leading-[1.5vw] text-accent md:px-[1vw] md:py-[0.1vw] md:text-[0.75vw]"
+        style="align-self: flex-end;"
     >
-        <div />
-        <div>
-            Learn more about
-            <a class="underline" href="/"> core editor </a>
-        </div>
+        Learn more about <a class="underline" href="/">core editor</a>
     </textarea-footer>
     {#if show_emoji_picker && emoji_matches.length > 0}
         <emoji-popover
-            class="emoji_picker absolute flex min-w-[12vw] flex-col divide-y divide-surface-50/10 overflow-hidden rounded-[0.5vw] bg-surface-400 text-[1vw] text-surface-50"
+            class="absolute flex min-w-[12vw] flex-col divide-y divide-surface-50/10 overflow-hidden rounded-[0.5vw] bg-surface-400 text-[1vw] text-surface-50"
             style:top={caret_offset_top}
             style:left={caret_offset_left}
         >
@@ -674,7 +656,11 @@
                             })}
                     >
                         <div class="h-[0.9vw] w-[0.9vw]">
-                            <img src={emoji} alt={keyword} />
+                            <img
+                                src={emoji}
+                                alt={keyword}
+                                class="h-full w-full"
+                            />
                         </div>
                         <span>{keyword}</span>
                     </div>
@@ -682,4 +668,4 @@
             {/each}
         </emoji-popover>
     {/if}
-</div>
+</text-editor>
