@@ -553,7 +553,7 @@
 
     let active_tab: 'edit' | 'preview' = 'edit';
     async function handle_tab_click(tab_name: string) {
-        if (textarea_value && tab_name === 'preview') {
+        if (tab_name === 'preview') {
             const res = await fetch(reverse('partial_markdown_endpoint'), {
                 method: 'POST',
                 credentials: 'same-origin',
@@ -563,8 +563,12 @@
             // guard clause
             if (!res.ok) return;
             const markdown_html = await res.text();
-            if (textarea_value) preview_element_innerHTML = markdown_html;
-            else preview_element_innerHTML = 'Nothing to preview!';
+            console.log(textarea_value);
+            if (textarea_value) {
+                preview_element_innerHTML = markdown_html;
+            } else {
+                preview_element_innerHTML = 'Nothing to preview!';
+            }
         }
         active_tab = tab_name as typeof active_tab;
     }
