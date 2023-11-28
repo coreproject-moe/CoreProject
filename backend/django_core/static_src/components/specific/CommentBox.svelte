@@ -19,7 +19,7 @@
                 >
                     community guidelines
                 </a>
-                 while commenting. Also please refrain from posting spoilers.
+                while commenting. Also please refrain from posting spoilers.
             </p>
         </comment-alert>
         <button class="btn btn-primary h-9 min-h-full w-40 rounded text-sm font-semibold text-accent md:h-[2.2vw] md:w-[6vw] md:rounded-[0.375vw] md:text-[0.85vw]">Comment</button>
