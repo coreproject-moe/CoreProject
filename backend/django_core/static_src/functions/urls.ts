@@ -1,6 +1,6 @@
 const urls = window.urls;
 
-export function reverse(view: string, ...kwargs: Array<string | number>) {
+export function reverse(view: string, ...args: Array<string | number>) {
     const url = urls.get(view);
     if (!url) {
         throw new Error(`No Match found for ${view}`);
@@ -13,12 +13,12 @@ export function reverse(view: string, ...kwargs: Array<string | number>) {
 
     if (matches?.length === 0) {
         return url;
-    } else if (matches?.length !== kwargs.length) {
-        throw new Error('`kwargs` doesnot match with `urlpattern`');
+    } else if (matches?.length !== args.length) {
+        throw new Error('`args` doesnot match with `urlpattern`');
     }
 
     const replacements: Record<string, string> = matches.reduce(
-        (obj, k, i) => ({ ...obj, [k]: kwargs[i] }),
+        (obj, k, i) => ({ ...obj, [k]: args[i] }),
         {}
     );
 
