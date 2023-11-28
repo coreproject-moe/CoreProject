@@ -196,28 +196,28 @@
                                         {{ episode.name }}
                                     </scroll-area>
                                     <scroll-area class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]" parent_class="max-h-9 md:max-h-[1.25vw] md:hover:max-h-[9vw] duration-500" offset_scrollbar="true" ?
-                                        {{ episode.japanese_name }}
-                                    </scroll-area>
-                                </episode-titles>
-                                <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.5vw] md:pt-[0.75vw]">
-                                    <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
-                                        {% for format in episode.formats %}
-                                            <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:text-[0.8vw]">
-                                                {{ format }}
-                                            </span>
-                                        {% endfor %}
-                                    </formats>
-                                    {% include "icons/dot.html" with class="w-1 opacity-50 md:w-[0.25vw]" %}
-                                    <resolutions class="flex gap-2 leading-none md:gap-[0.65vw]">
-                                        {% for res in episode.resolutions %}
-                                            <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:text-[0.8vw]">
-                                                {{ res }}
-                                            </span>
-                                        {% endfor %}
-                                    </resolutions>
-                                </episode-available-formats>
-                            </episode-info-card>
-                        </a>
+                                                 {{ episode.japanese_name }}
+                                                 </scroll-area>
+                                    </episode-titles>
+                                    <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.5vw] md:pt-[0.75vw]">
+                                        <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                            {% for format in episode.formats %}
+                                                <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:text-[0.8vw]">
+                                                    {{ format }}
+                                                </span>
+                                            {% endfor %}
+                                        </formats>
+                                        {% include "icons/dot.html" with class="w-1 opacity-50 md:w-[0.25vw]" %}
+                                        <resolutions class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                            {% for res in episode.resolutions %}
+                                                <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:text-[0.8vw]">
+                                                    {{ res }}
+                                                </span>
+                                            {% endfor %}
+                                        </resolutions>
+                                    </episode-available-formats>
+                                </episode-info-card>
+                            </a>
                     {% endfor %}
                 </anime-episodes-cards>
                 <anime-media-section class="mt-10 flex grid-cols-5 flex-col gap-10 md:mt-[3vw] md:grid md:gap-[4.375vw]">
@@ -239,7 +239,7 @@
                         </div>
                         <coreproject-commentbox></coreproject-commentbox>
 
-                            
+
                         <comments class="mt-10 flex flex-col gap-5 md:mt-[2vw] md:gap-[1.5vw]">
                             <comment class="flex gap-3 md:gap-[1vw]">
                                 <a href="/user/" class="h-7 w-7 flex-shrink-0 md:h-[2vw] md:w-[2vw]">
