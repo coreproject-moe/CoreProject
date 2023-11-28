@@ -4,6 +4,8 @@ import svelteRetag from 'svelte-retag';
 import Textarea from './major/TextArea.svelte';
 import ScrollArea from './minor/ScrollArea.svelte';
 
+import '../css/tippy.scss';
+
 svelteRetag({
     component: ScrollArea,
     tagname: 'scroll-area',
