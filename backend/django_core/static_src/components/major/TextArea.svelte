@@ -7,14 +7,16 @@
     import { encode } from 'html-entities';
     import type { SvelteComponent } from 'svelte';
     import tippy from 'tippy.js';
-
     import { reverse } from '../../functions/urls';
+
+    // Icons import
     import Bold from '../icons/bold.svelte';
     import Italic from '../icons/italic.svelte';
     import Underline from '../icons/underline.svelte';
     import Strike from '../icons/strike.svelte';
     import Code from '../icons/code.svelte';
     import Hyperlink from '../icons/hyperlink.svelte';
+    import Info from '../icons/info.svelte';
 
     let caret_offset_top: string | null = null,
         caret_offset_left: string | null = null;
@@ -569,126 +571,147 @@
     }
 </script>
 
-<text-editor
-    class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw] flex flex-col"
->
-    <textarea-navbar
-        class="flex items-center justify-between rounded-t-lg md:rounded-t-[0.75vw]"
+<div class="mt-3 flex flex-col gap-3 md:mt-[1vw] md:gap-[0.75vw]">
+    <div
+        class="relative rounded-lg ring-2 ring-surface-300/25 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw] flex flex-col"
     >
-        <div class="md:p-[0.25vw] md:pl-[0.3vw]">
-            {#each ['edit', 'preview'] as tab}
-                {@const active = tab === active_tab}
-                <button
-                    type="button"
-                    class={cn(
-                        'btn min-h-full md:h-[2.5vw] md:text-[1vw] capitalize',
-                        active ? 'btn-neutral' : 'bg-secondary'
-                    )}
-                    on:click={() => handle_tab_click(tab)}
-                >
-                    {tab}
-                </button>
-            {/each}
-        </div>
-        <div class="flex items-center gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]">
-            {#each Object.entries(icon_and_function_mapping) as item}
-                {@const item_label = item[0]}
-
-                {@const icon = item[1].icon.component}
-                {@const icon_class = item[1].icon.class}
-                {@const button_function = item[1].function}
-                {@const description = item[1].description}
-                <div
-                    class="before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]"
-                    use:tippy={{
-                        content: `<div class='leading-2 w-max whitespace-nowrap rounded-lg bg-surface-400 px-2 py-1 text-[0.65rem] text-surface-50 md:px-[0.75vw] md:py-[0.3vw] md:text-[1vw]'>${encode(
-                            description
-                        )}</div>`,
-                        allowHTML: true,
-                        arrow: false,
-                        appendTo: document.body,
-                        animation: 'shift-away',
-                        theme: 'elaine',
-                        onTrigger(instance) {
-                            instance.props.offset = [0, vw(1)];
-                        },
-                    }}
-                >
-                    <button
-                        class={cn(
-                            icon_class,
-                            'btn border-none !bg-transparent min-h-full p-0'
-                        )}
-                        type="button"
-                        aria-label={item_label}
-                        on:click={() => button_function(textarea_element)}
-                    >
-                        <svelte:component this={icon} />
-                    </button>
-                </div>
-            {/each}
-        </div>
-    </textarea-navbar>
-    {#if active_tab === 'edit'}
-        <textarea
-            on:paste={(event) => paste_text(event)}
-            on:input={handle_input}
-            on:keydown={handle_keydown}
-            on:blur={handle_blur}
-            bind:value={textarea_value}
-            bind:this={textarea_element}
-            spellcheck="true"
-            placeholder="Leave a comment"
-            class="w-full resize-none border-none bg-secondary px-3 text-sm leading-tight outline-none focus:ring-0 md:px-[1vw] md:text-[1vw] md:leading-[1.5vw] h-28 overflow-y-scroll md:h-[8vw] md:py-[0.5vw]"
-        ></textarea>
-    {:else if active_tab === 'preview'}
-        <div
-            class="w-full px-3 text-sm leading-tight md:text-[1vw] md:leading-[1.5vw] h-28 overflow-y-scroll md:h-[8vw] md:px-[1vw] md:py-[0.5vw]"
-            contenteditable="false"
-            bind:innerHTML={preview_element_innerHTML}
-        ></div>
-    {/if}
-
-    <textarea-footer
-        class="flex items-center gap-[0.25vw] px-4 py-2 text-[0.65rem] font-thin leading-[1.5vw] text-accent md:px-[1vw] md:py-[0.1vw] md:text-[0.75vw]"
-        style="align-self: flex-end;"
-    >
-        Learn more about <a class="underline" href="/">core editor</a>
-    </textarea-footer>
-    {#if show_emoji_picker && emoji_matches.length > 0}
-        <emoji-popover
-            class="absolute flex min-w-[12vw] flex-col divide-y divide-surface-50/10 overflow-hidden rounded-[0.5vw] bg-surface-400 text-[1vw] text-surface-50"
-            style:top={caret_offset_top}
-            style:left={caret_offset_left}
+        <textarea-navbar
+            class="flex items-center justify-between rounded-t-lg md:rounded-t-[0.75vw]"
         >
-            {#each emoji_matches as item, index}
-                {#if index < SHOWN_EMOJI_LIMIT}
-                    {@const emoji = item?.['emoji'] ?? ''}
-                    {@const keyword = item?.['keyword'] ?? ''}
-
-                    <div
-                        role="button"
-                        tabindex="0"
-                        class="flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:bg-primary-500 hover:text-white"
-                        class:bg-primary-500={active_emoji_index === index}
-                        class:text-white={active_emoji_index === index}
-                        on:mousedown={async (event) =>
-                            await select_emoji({
-                                emoji_index: index,
-                                element: event.currentTarget,
-                            })}
+            <div class="md:p-[0.25vw] md:pl-[0.3vw]">
+                {#each ['edit', 'preview'] as tab}
+                    {@const active = tab === active_tab}
+                    <button
+                        type="button"
+                        class={cn(
+                            'btn min-h-full md:h-[2.5vw] md:text-[1vw] capitalize',
+                            active ? 'btn-neutral' : 'bg-secondary'
+                        )}
+                        on:click={() => handle_tab_click(tab)}
                     >
-                        <div class="h-[0.9vw] w-[0.9vw]">
-                            <img
-                                src={emoji}
-                                alt={keyword}
-                                class="h-full w-full"
-                            />
-                        </div>
-                        <span>{keyword}</span>
+                        {tab}
+                    </button>
+                {/each}
+            </div>
+            <div
+                class="flex items-center gap-2 pr-4 md:gap-[0.75vw] md:pr-[1vw]"
+            >
+                {#each Object.entries(icon_and_function_mapping) as item}
+                    {@const item_label = item[0]}
+
+                    {@const icon = item[1].icon.component}
+                    {@const icon_class = item[1].icon.class}
+                    {@const button_function = item[1].function}
+                    {@const description = item[1].description}
+                    <div
+                        class="before:md:text-[0.9vw] before:px-[0.5vw] before:py-[0.25vw]"
+                        use:tippy={{
+                            content: `<div class='leading-2 w-max whitespace-nowrap rounded-lg bg-surface-400 px-2 py-1 text-[0.65rem] text-surface-50 md:px-[0.75vw] md:py-[0.3vw] md:text-[1vw]'>${encode(
+                                description
+                            )}</div>`,
+                            allowHTML: true,
+                            arrow: false,
+                            appendTo: document.body,
+                            animation: 'shift-away',
+                            theme: 'elaine',
+                            onTrigger(instance) {
+                                instance.props.offset = [0, vw(1)];
+                            },
+                        }}
+                    >
+                        <button
+                            class={cn(
+                                icon_class,
+                                'btn border-none !bg-transparent min-h-full p-0'
+                            )}
+                            type="button"
+                            aria-label={item_label}
+                            on:click={() => button_function(textarea_element)}
+                        >
+                            <svelte:component this={icon} />
+                        </button>
                     </div>
-                {/if}
-            {/each}
-        </emoji-popover>
-    {/if}
-</text-editor>
+                {/each}
+            </div>
+        </textarea-navbar>
+        {#if active_tab === 'edit'}
+            <textarea
+                on:paste={(event) => paste_text(event)}
+                on:input={handle_input}
+                on:keydown={handle_keydown}
+                on:blur={handle_blur}
+                bind:value={textarea_value}
+                bind:this={textarea_element}
+                spellcheck="true"
+                placeholder="Leave a comment"
+                class="w-full resize-none border-none bg-secondary px-3 text-sm leading-tight outline-none focus:ring-0 md:px-[1vw] md:text-[1vw] md:leading-[1.5vw] h-28 overflow-y-scroll md:h-[8vw] md:py-[0.5vw]"
+            ></textarea>
+        {:else if active_tab === 'preview'}
+            <div
+                class="w-full px-3 text-sm leading-tight md:text-[1vw] md:leading-[1.5vw] h-28 overflow-y-scroll md:h-[8vw] md:px-[1vw] md:py-[0.5vw]"
+                contenteditable="false"
+                bind:innerHTML={preview_element_innerHTML}
+            ></div>
+        {/if}
+
+        <textarea-footer
+            class="flex items-center gap-[0.25vw] px-4 py-2 text-[0.65rem] font-thin leading-[1.5vw] text-accent md:px-[1vw] md:py-[0.1vw] md:text-[0.75vw]"
+            style="align-self: flex-end;"
+        >
+            Learn more about <a class="underline" href="/">core editor</a>
+        </textarea-footer>
+        {#if show_emoji_picker && emoji_matches.length > 0}
+            <emoji-popover
+                class="absolute flex min-w-[12vw] flex-col divide-y divide-surface-50/10 overflow-hidden rounded-[0.5vw] bg-surface-400 text-[1vw] text-surface-50"
+                style:top={caret_offset_top}
+                style:left={caret_offset_left}
+            >
+                {#each emoji_matches as item, index}
+                    {#if index < SHOWN_EMOJI_LIMIT}
+                        {@const emoji = item?.['emoji'] ?? ''}
+                        {@const keyword = item?.['keyword'] ?? ''}
+
+                        <div
+                            role="button"
+                            tabindex="0"
+                            class="flex cursor-pointer items-center gap-[0.5vw] px-[0.75vw] py-[0.25vw] leading-[1.75vw] hover:bg-primary-500 hover:text-white"
+                            class:bg-primary-500={active_emoji_index === index}
+                            class:text-white={active_emoji_index === index}
+                            on:mousedown={async (event) =>
+                                await select_emoji({
+                                    emoji_index: index,
+                                    element: event.currentTarget,
+                                })}
+                        >
+                            <div class="h-[0.9vw] w-[0.9vw]">
+                                <img
+                                    src={emoji}
+                                    alt={keyword}
+                                    class="h-full w-full"
+                                />
+                            </div>
+                            <span>{keyword}</span>
+                        </div>
+                    {/if}
+                {/each}
+            </emoji-popover>
+        {/if}
+    </div>
+</div>
+<div class="flex justify-between gap-5 md:gap-[1vw]">
+    <comment-alert class="flex items-center gap-3 md:gap-[0.625vw]">
+        <Info class="w-10 md:w-[1.2vw] opacity-75" />
+        <p
+            class="text-[0.65rem] font-light leading-tight text-surface-300 md:text-[0.75vw] md:leading-[1.125vw]"
+        >
+            Please remember to follow our <a
+                href="/"
+                class="text-surface-200 underline">community guidelines</a
+            > while commenting. Also please refrain from posting spoilers.
+        </p>
+    </comment-alert>
+    <button
+        class="btn btn-primary text-accent min-h-full h-9 w-40 rounded text-sm font-semibold md:h-[2.2vw] md:w-[6vw] md:rounded-[0.375vw] md:text-[0.85vw]"
+        >Comment</button
+    >
+</div>
