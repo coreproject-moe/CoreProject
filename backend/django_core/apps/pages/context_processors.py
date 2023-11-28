@@ -1,11 +1,11 @@
-from django.http.request import HttpRequest
-from django.core.exceptions import ViewDoesNotExist
-from django.urls import URLPattern, URLResolver  # type: ignore
-from django.conf import settings
 import functools
-from django.utils import translation
 import re
+
+from django.conf import settings
 from django.contrib.admindocs.views import simplify_regex
+from django.core.exceptions import ViewDoesNotExist
+from django.http.request import HttpRequest
+from django.urls import URLPattern, URLResolver  # type: ignore
 
 
 class RegexURLPattern:  # type: ignore
@@ -33,7 +33,7 @@ def extract_views_from_urlpatterns(urlpatterns, base="", namespace=None):
                 if not p.name:
                     name = p.name
                 elif namespace:
-                    name = "{0}:{1}".format(namespace, p.name)
+                    name = f"{namespace}:{p.name}"
                 else:
                     name = p.name
                 pattern = describe_pattern(p)
@@ -46,7 +46,7 @@ def extract_views_from_urlpatterns(urlpatterns, base="", namespace=None):
             except ImportError:
                 continue
             if namespace and p.namespace:
-                _namespace = "{0}:{1}".format(namespace, p.namespace)
+                _namespace = f"{namespace}:{p.namespace}"
             else:
                 _namespace = p.namespace or namespace
             pattern = describe_pattern(p)

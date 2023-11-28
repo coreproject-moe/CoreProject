@@ -22,7 +22,7 @@
             href="{% vite_asset_url 'images/favicon/favicon.svg' %}"
         />
         <script>
-           
+
             window.csrfmiddlewaretoken = `{{ csrf_token }}`;
 
             document.addEventListener('DOMContentLoaded', () => {
@@ -42,7 +42,7 @@
                 {% endfor %}
             }
 
-        
+
         </script>
         {% vite_hmr_client %}
 
