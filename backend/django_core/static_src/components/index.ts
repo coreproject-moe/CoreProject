@@ -5,8 +5,6 @@ import CommentBox from "$components/specific/CommentBox.svelte";
 import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
 import MyAnime from "$components/specific/MyAnime.svelte";
 
-import "../css/tippy.scss";
-
 svelteRetag({
     component: ScrollArea,
     tagname: `scroll-area`,
