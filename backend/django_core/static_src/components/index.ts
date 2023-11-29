@@ -2,7 +2,7 @@
 import svelteRetag from "svelte-retag";
 
 import CommentBox from "$components/specific/CommentBox.svelte";
-import ScrollArea from "$components/minor/ScrollArea.svelte";
+import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
 import MyAnime from "$components/specific/MyAnime.svelte";
 
 import "../css/tippy.scss";
