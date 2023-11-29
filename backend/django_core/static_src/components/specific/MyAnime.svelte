@@ -4,7 +4,7 @@
     export let anime_image: string;
     export let anime_current_episodes: string;
     export let anime_total_episodes: string;
-
+    export let anime_description: string;
     // Pass styles
     export let dropdown_class: string;
 
@@ -12,6 +12,8 @@
     import Dot from "$icons/Dot.svelte";
     import ScrollArea from "$components/minor/ScrollArea.svelte";
     import { cn } from "$functions/classname";
+    import Star from "$icons/Star.svelte";
+    import Circle from "$icons/Circle.svelte";
 
     let main_element: HTMLElement;
 
@@ -29,17 +31,14 @@
     });
 </script>
 
-<svelte:window
-    on:resize={() => {
-        calculate_style();
-    }}
-/>
-
 <div
     class="dropdown dropdown-hover"
     bind:this={main_element}
 >
     <button
+        on:mouseenter={() => {
+            calculate_style();
+        }}
         class="relative"
         tabindex="0"
         aria-expanded="false"
@@ -82,58 +81,18 @@
     >
         <div class="flex flex-col bg-neutral md:gap-[0.35vw] md:rounded-[0.75vw] md:rounded-t-[0.3vw] md:p-[1vw]">
             <anime-name class="font-semibold text-accent md:text-[1vw] md:leading-[1.25vw]">
-                {{ anime_name }}
+                {anime_name}
             </anime-name>
             <div class="text-surface-50 flex items-center md:gap-[0.35vw] md:text-[0.8vw]">
                 <rating class="flex items-center md:gap-[0.5vw]">
-                    <svg
-                        width="30"
-                        height="30"
-                        viewBox="0 0 30 30"
-                        fill="yellow"
-                        xmlns="http://www.w3.org/2000/svg"
-                        color="yellow"
-                        class="h-[1.1vw] w-[1.1vw]"
-                    >
-                        <path
-                            d="M15 2.5L18.8625 10.325L27.5 11.5875L21.25 17.675L22.725 26.275L15 22.2125L7.275 26.275L8.75 17.675L2.5 11.5875L11.1375 10.325L15 2.5Z"
-                            stroke="currentColor"
-                            stroke-width="3"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        ></path>
-                    </svg>
+                    <Star />
                     <span class="text-surface-50 leading-none md:text-[0.8vw]">4.5 rating</span>
                 </rating>
-                <svg
-                    class="opacity-50 md:w-[0.25vw]"
-                    viewBox="0 0 10 10"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <circle
-                        cx="5"
-                        cy="5"
-                        r="5"
-                        fill="currentColor"
-                    ></circle>
-                </svg>
+                <Circle />
                 <anime-type>TV</anime-type>
-                <svg
-                    class="opacity-50 md:w-[0.25vw]"
-                    viewBox="0 0 10 10"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <circle
-                        cx="5"
-                        cy="5"
-                        r="5"
-                        fill="currentColor"
-                    ></circle>
-                </svg>
+                <Circle />
                 <episodes-count>
-                    {{ anime_total_episodes }} episdoes
+                    {anime_total_episodes} episdoes
                 </episodes-count>
             </div>
             <studio class="text-surface-50 md:text-[0.75vw]">
@@ -149,8 +108,7 @@
                 parent_class="md:max-h-[4vw]"
                 class="text-surface-50 md:text-[0.8vw] md:leading-[1vw]"
             >
-                Azur Lane, a combination of all the different Camps in the world, was once successful in repelling the underwater menace, the Siren. Now splintered, they must face a new threat in Red Axis, former allies who crave to wield this otherworldly Siren technology for their own nefarious desires! Who will be victorious in the never-ending war between these battleship girls!? Akagami no
-                Shirayuki-hime depicts Shirayuki's journey toward a new life at the royal palace of Clarines, as well as Zen's endeavor to become a prince worthy of his title. As loyal friendships are forged and deadly enemies formed, Shirayuki and Zen slowly learn to support each other as they walk their own paths.
+                {anime_description}
             </ScrollArea>
             <div class="divider md:m-0 md:before:h-[0.15vw] md:after:h-[0.15vw]"></div>
             <options class="flex items-center md:gap-[0.5vw]">
@@ -161,7 +119,7 @@
                     <!-- {% include "icons/play.html" with class="md:w-[0.9vw]" %} -->
                     <span class="font-semibold md:text-[0.9vw]">
                         Continue Ep
-                        {{ anime_current_episodes }}
+                        {anime_current_episodes}
                     </span>
                 </a>
                 <a
