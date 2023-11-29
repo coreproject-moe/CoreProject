@@ -241,11 +241,11 @@
                             <coreproject-commentbox></coreproject-commentbox>
                         </div>
                         <comments class="mt-10 flex flex-col gap-5 md:mt-[2vw] md:gap-[1.5vw]">
-                            <coreproject-comment 
+                            <coreproject-comment
                             {%comment%}
                             api_url='{% url "anime-commment-endpoint" pk=anime.id %}'
                             {%endcomment%}
-                            api_url='{% url "anime-commment-endpoint" pk=2 %}'
+                                api_url='{% url "anime-commment-endpoint" pk=2 %}'
                             >
                             </coreproject-comment>
                         </comments>

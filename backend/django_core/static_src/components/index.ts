@@ -9,14 +9,14 @@ import Comment from "$components/minor/Comment/Index.svelte";
 svelteRetag({
     component: ScrollArea,
     tagname: "scroll-area",
-    attributes: ["parent_class", "offset_scrollbar", "gradient_mask", "class"], 
+    attributes: ["parent_class", "offset_scrollbar", "gradient_mask", "class"],
     shadow: false, // Use the light DOM
     hydratable: true
 });
 svelteRetag({
     component: Comment,
     tagname: `coreproject-comment`,
-    attributes: [`api_url`], 
+    attributes: [`api_url`],
     shadow: false, // Use the light DOM
     hydratable: true
 });
