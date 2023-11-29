@@ -14,7 +14,7 @@
         <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.8vw]">
             {% if form.email.errors %}
                 <markdown markdown="{{form.email.errors|first}}"></markdown>
-            {% else %} 
+            {% else %}
                 {{ form.email.help_text }}
             {% endif %}
         </span>
