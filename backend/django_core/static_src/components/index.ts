@@ -1,8 +1,8 @@
 // @ts-ignore
 import svelteRetag from "svelte-retag";
 
-import CommentBox from "./specific/CommentBox.svelte";
-import ScrollArea from "./minor/ScrollArea.svelte";
+import CommentBox from "$components/specific/CommentBox.svelte";
+import ScrollArea from "$components//minor/ScrollArea.svelte";
 
 import "../css/tippy.scss";
 
