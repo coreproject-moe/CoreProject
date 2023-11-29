@@ -14,6 +14,14 @@
         "ignoreDeprecations": "5.0",
         "skipLibCheck": false,
         "sourceMap": true,
-        "strict": true
+        "strict": true,
+        "paths": {
+            "$functions": ["./django_core/static_src/functions/"],
+            "$functions/*": ["./django_core/static_src/functions/*"],
+            "$icons": ["./django_core/static_src/icons/"],
+            "$icons/*": ["./django_core/static_src/icons/*"],
+            "$components": ["./django_core/static_src/components/"],
+            "$components/*": ["./django_core/static_src/components/*"]
+        }
     }
 }

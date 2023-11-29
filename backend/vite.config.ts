@@ -2,7 +2,6 @@ import { join, resolve } from "path";
 import process from "process";
 import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
-import tsconfigPaths from "vite-tsconfig-paths";
 
 const STATIC_SRC = resolve("./django_core/static_src");
 
@@ -16,11 +15,11 @@ export default defineConfig({
     resolve: {
         alias: {
             $functions: join(STATIC_SRC, "functions"),
-            $components: join(STATIC_SRC, "components")
+            $components: join(STATIC_SRC, "components"),
+            $icons: join(STATIC_SRC, "icons")
         }
     },
     plugins: [
-        tsconfigPaths({}),
         svelte({
             compilerOptions: {
                 customElement: true
@@ -28,14 +27,17 @@ export default defineConfig({
             configFile: join(process.cwd(), "svelte.config.js")
         })
     ],
-    // css: {
-    //     devSourcemap: true,
-    // },
+    css: {
+        devSourcemap: true
+    },
     build: {
         outDir: join(process.cwd(), "django_core", "static"),
         manifest: true,
+        chunkSizeWarningLimit: 2048,
         emptyOutDir: true,
         target: "es2022",
+        cssTarget: "esnext",
+        cssMinify: "lightningcss",
         sourcemap: true,
         rollupOptions: {
             input: [
@@ -54,7 +56,7 @@ export default defineConfig({
                 join(COMPONENT_DIRECTORY, "index.ts")
             ],
             output: {
-                chunkFileNames: undefined
+                chunkFileNames: "coreproject.js"
             }
         }
     }

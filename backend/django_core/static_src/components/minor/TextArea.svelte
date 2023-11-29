@@ -10,12 +10,12 @@
     import { reverse } from "$functions/urls";
 
     // Icons import
-    import Bold from "../icons/Bold.svelte";
-    import Italic from "../icons/Italic.svelte";
-    import Underline from "../icons/Underline.svelte";
-    import Strike from "../icons/Strike.svelte";
-    import Code from "../icons/Code.svelte";
-    import Hyperlink from "../icons/Hyperlink.svelte";
+    import Bold from "$icons/Bold.svelte";
+    import Italic from "$icons/Italic.svelte";
+    import Underline from "$icons/Underline.svelte";
+    import Strike from "$icons/Strike.svelte";
+    import Code from "$icons/Code.svelte";
+    import Hyperlink from "$icons/Hyperlink.svelte";
 
     let caret_offset_top: string | null = null,
         caret_offset_left: string | null = null;

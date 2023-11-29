@@ -1,8 +1,8 @@
 <script lang="ts">
-    import TextArea from "../minor/TextArea.svelte";
+    import TextArea from "$components/minor/TextArea.svelte";
 
     // Icons
-    import Info from "../icons/Info.svelte";
+    import Info from "$icons/Info.svelte";
 
     export const submit_url = "";
 
