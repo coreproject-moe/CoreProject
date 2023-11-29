@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { FormatDate } from "$functions/format_date";
     import { get_preview_html_from_markdown } from "$functions/get_preview_html_from_markdown";
 
     export let api_url: string;
@@ -8,6 +9,8 @@
         next: null | number;
         previous: null | number;
         results: {
+            created_at: string;
+
             user: string;
             text: string;
             path: string;
@@ -55,7 +58,7 @@
                         <div class="text-white">Tokitouq</div>
                         <div class="md:text-[0.75vw]">{item.user}</div>
                     </div>
-                    <div class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">10 months ago</div>
+                    <div class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">{new FormatDate(item.created_at).format_to_time_from_now}</div>
                 </a>
                 <div class="text-sm leading-snug text-accent md:text-[1vw] md:leading-[1.5vw]">
                     {#await get_preview_html_from_markdown(item.text) then html}

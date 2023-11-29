@@ -34,6 +34,7 @@
         "caret-pos": "^2.0.0",
         "cssnano": "^6.0.1",
         "daisyui": "^4.4.14",
+        "dayjs": "^1.11.10",
         "easytimer.js": "^4.6.0",
         "html-entities": "^2.4.0",
         "htmx.org": "^1.9.9",
