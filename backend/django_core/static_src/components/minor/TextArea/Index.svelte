@@ -4,9 +4,7 @@
     import { vw } from "$functions/vw";
     import { is_valid_url } from "$functions/is_valid_url";
     import { offset } from "caret-pos";
-    import { encode } from "html-entities";
     import type { SvelteComponent } from "svelte";
-    import tippy from "tippy.js";
     import { reverse } from "$functions/urls";
 
     // Icons import
@@ -450,20 +448,11 @@
             {@const description = item[1].description}
 
             <button
-                use:tippy={{
-                    content: `<div class='leading-2 w-max whitespace-nowrap rounded-lg bg-neutral px-2 py-1 text-[0.65rem] text-accent md:px-[0.75vw] md:py-[0.3vw] md:text-[1vw]'>${encode(description)}</div>`,
-                    allowHTML: true,
-                    arrow: false,
-                    appendTo: document.body,
-                    animation: "shift-away",
-                    theme: "elaine",
-                    onTrigger(instance) {
-                        instance.props.offset = [0, vw(1.25)];
-                    }
-                }}
-                class={cn(icon_class, "btn h-max min-h-max border-none !bg-transparent p-0")}
+                class={cn(icon_class, "btn h-max min-h-max border-none !bg-transparent p-0", "tooltip tooltip-top")}
                 type="button"
+                data-tip={description}
                 aria-label={item_label}
+                on:mouseenter={() => {}}
                 on:click={() => button_function(textarea_element)}
             >
                 <svelte:component this={icon} />
