@@ -5,6 +5,9 @@
     export let anime_current_episodes: string;
     export let anime_total_episodes: string;
     export let anime_description: string;
+    export let anime_studio: string;
+    export let anime_genres: string;
+
     // Pass styles
     export let dropdown_class: string;
 
@@ -14,6 +17,8 @@
     import { cn } from "$functions/classname";
     import Star from "$icons/Star.svelte";
     import Circle from "$icons/Circle.svelte";
+    import Play from "$icons/Play.svelte";
+    import Info from "$icons/Info.svelte";
 
     let main_element: HTMLElement;
 
@@ -96,12 +101,12 @@
                 </episodes-count>
             </div>
             <studio class="text-surface-50 md:text-[0.75vw]">
-                <span>Bibury Animation Studios</span>
+                <span>{anime_studio}</span>
             </studio>
             <genres class="flex items-center md:my-[0.35vw] md:gap-[0.5vw]">
-                <genre class="bg-warning font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">Action</genre>
-                <genre class="bg-warning font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">Ecchi</genre>
-                <genre class="bg-warning font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">sci-Fi</genre>
+                {#each anime_genres.split(",") as item}
+                    <genre class="bg-warning font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">{item}</genre>
+                {/each}
             </genres>
             <ScrollArea
                 gradient_mask={true}
@@ -116,7 +121,7 @@
                     href="/anime/mal/1/episode/4"
                     class="btn btn-primary h-[2.75vw] min-h-full flex-1 leading-none text-accent md:rounded-[0.5vw]"
                 >
-                    <!-- {% include "icons/play.html" with class="md:w-[0.9vw]" %} -->
+                    <Play class="md:w-[0.9vw]" />
                     <span class="font-semibold md:text-[0.9vw]">
                         Continue Ep
                         {anime_current_episodes}
@@ -126,7 +131,7 @@
                     href="/anime/mal/1"
                     class="btn btn-square h-[2.75vw] min-h-full p-0 leading-none md:rounded-[0.5vw]"
                 >
-                    <!-- {% include "icons/info.html" with class="md:w-[1.2vw]" %} -->
+                    <Info class="md:w-[1.2vw]" />
                 </a>
             </options>
         </div>
