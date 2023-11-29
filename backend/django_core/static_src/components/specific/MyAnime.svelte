@@ -5,26 +5,26 @@
     export let anime_current_episodes: string;
     export let anime_total_episodes: string;
 
-    import { onMount } from "svelte";
+    // Pass styles
+    export let dropdown_class: string;
+
+    import { afterUpdate } from "svelte";
     import Dot from "$icons/Dot.svelte";
     import ScrollArea from "$components/minor/ScrollArea.svelte";
+    import { cn } from "$functions/classname";
 
     let main_element: HTMLElement;
 
     // Styles
     let style_left: string;
-    let padding_left: string;
 
     // Both of these functions require that parentElement is not changed
     // Please tatoo dont change the position of the element
     function calculate_style() {
         style_left = window.getComputedStyle(main_element).width;
-        padding_left = window.getComputedStyle(main_element?.parentElement as HTMLElement).gap;
-
-        console.log(padding_left);
     }
 
-    onMount(() => {
+    afterUpdate(() => {
         calculate_style();
     });
 </script>
@@ -77,8 +77,8 @@
 
     <button
         tabindex="0"
-        class="dropdown-content top-0 z-10 hidden flex-col leading-none md:flex md:w-[20vw]"
-        style="left:{style_left}; padding-left:{padding_left};"
+        class={cn(dropdown_class, "dropdown-content top-0 z-10 hidden flex-col leading-none md:flex md:w-[20vw]")}
+        style="left:{style_left};"
     >
         <div class="flex flex-col bg-neutral md:gap-[0.35vw] md:rounded-[0.75vw] md:rounded-t-[0.3vw] md:p-[1vw]">
             <anime-name class="font-semibold text-accent md:text-[1vw] md:leading-[1.25vw]">
@@ -144,13 +144,14 @@
                 <genre class="bg-warning font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">Ecchi</genre>
                 <genre class="bg-warning font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">sci-Fi</genre>
             </genres>
-            <scroll-area
+            <ScrollArea
+                gradient_mask={true}
                 parent_class="md:max-h-[4vw]"
                 class="text-surface-50 md:text-[0.8vw] md:leading-[1vw]"
             >
                 Azur Lane, a combination of all the different Camps in the world, was once successful in repelling the underwater menace, the Siren. Now splintered, they must face a new threat in Red Axis, former allies who crave to wield this otherworldly Siren technology for their own nefarious desires! Who will be victorious in the never-ending war between these battleship girls!? Akagami no
                 Shirayuki-hime depicts Shirayuki's journey toward a new life at the royal palace of Clarines, as well as Zen's endeavor to become a prince worthy of his title. As loyal friendships are forged and deadly enemies formed, Shirayuki and Zen slowly learn to support each other as they walk their own paths.
-            </scroll-area>
+            </ScrollArea>
             <div class="divider md:m-0 md:before:h-[0.15vw] md:after:h-[0.15vw]"></div>
             <options class="flex items-center md:gap-[0.5vw]">
                 <a

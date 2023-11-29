@@ -294,7 +294,7 @@
         </my-list-info>
         <my-list-animes class="relative mt-4 grid grid-cols-3 gap-3 md:mt-[1vw] md:grid-cols-5 md:gap-[1.25vw]">
             {% for anime in my_list %}
-               <coreproject-my-anime-list anime_name='{{anime.name}}' anime_status="{{anime.status}}" anime_image='{{ anime.image }}' anime_current_episodes="{{ anime.current_ep }}" anime_total_episodes="{{ anime.total_ep }}"></coreproject-my-anime-list>
+               <coreproject-my-anime-list dropdown_class='pl-3' anime_name='{{anime.name}}' anime_status="{{anime.status}}" anime_image='{{ anime.image }}' anime_current_episodes="{{ anime.current_ep }}" anime_total_episodes="{{ anime.total_ep }}"></coreproject-my-anime-list>
             {% endfor %}
         </my-list-animes>
     </my-list>

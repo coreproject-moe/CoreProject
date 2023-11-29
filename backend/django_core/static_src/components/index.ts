@@ -24,7 +24,7 @@ svelteRetag({
 svelteRetag({
     component: MyAnime,
     tagname: `coreproject-my-anime-list`,
-    attributes: [`anime_name`, `anime_status`, `anime_image`, `anime_current_episodes`, `anime_total_episodes`],
+    attributes: [`anime_name`, `anime_status`, `anime_image`, `anime_current_episodes`, `anime_total_episodes`, `dropdown_class`],
     shadow: false,
     hydratable: true
 });
