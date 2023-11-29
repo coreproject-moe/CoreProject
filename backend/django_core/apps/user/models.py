@@ -1,5 +1,6 @@
-from typing import Any
 import hashlib
+from typing import Any
+
 from django.conf import settings
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.core.validators import RegexValidator
