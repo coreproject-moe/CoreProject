@@ -56,7 +56,10 @@ export default defineConfig({
                 join(COMPONENT_DIRECTORY, "index.ts")
             ],
             output: {
-                chunkFileNames: "coreproject.js"
+                manualChunks: undefined,
+                entryFileNames: `coreproject.entry.[name].js`,
+                chunkFileNames: `coreproject.chunk.[name].js`,
+                assetFileNames: `coreproject.asset.[name].[ext]`
             }
         }
     }
