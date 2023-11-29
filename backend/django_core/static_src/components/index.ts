@@ -4,7 +4,7 @@ import svelteRetag from "svelte-retag";
 import CommentBox from "$components/specific/CommentBox.svelte";
 import ScrollArea from "$components//minor/ScrollArea.svelte";
 
-import "../css/tippy.scss";
+import Comment from "$components/minor/Comment/Index.svelte";
 
 svelteRetag({
     component: ScrollArea,
@@ -13,6 +13,14 @@ svelteRetag({
     shadow: false, // Use the light DOM
     hydratable: true
 });
+svelteRetag({
+    component: Comment,
+    tagname: `coreproject-comment`,
+    attributes: [`api_url`], // Changes to these attributes will be reactively forwarded to your component
+    shadow: false, // Use the light DOM
+    hydratable: true
+});
+// Specific Components
 svelteRetag({
     component: CommentBox,
     tagname: "coreproject-commentbox",

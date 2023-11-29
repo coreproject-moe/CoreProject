@@ -5,7 +5,10 @@ from dynamic_filenames import FilePattern
 from mixins.models.created_at import CreatedAtMixin
 from mixins.models.is_locked import IsLockedMixin
 from mixins.models.updated_at import UpdatedAtMixin
+from django_ltree.models import TreeModel
+from django.contrib.postgres import indexes as idx
 
+from apps.user.models import CustomUser
 from ...characters.models import CharacterModel
 from ...episodes.models import EpisodeModel
 from ...producers.models import ProducerModel
@@ -13,6 +16,7 @@ from ...staffs.models import StaffModel
 from .anime_genre import AnimeGenreModel
 from .anime_openings_and_endings import AnimeEndingModel, AnimeOpeningModel
 from .anime_theme import AnimeThemeModel
+from .anime_comment import AnimeCommentModel
 
 cover_upload_pattern = FilePattern(filename_pattern="cover/{uuid:s}{ext}")
 banner_upload_pattern = FilePattern(filename_pattern="banner/{uuid:s}{ext}")
@@ -97,6 +101,8 @@ class AnimeModel(CreatedAtMixin, UpdatedAtMixin, IsLockedMixin):
 
     openings = models.ManyToManyField(AnimeOpeningModel, blank=True)
     endings = models.ManyToManyField(AnimeEndingModel, blank=True)
+
+    comments = models.ManyToManyField(AnimeCommentModel, blank=True)
 
     def __str__(self) -> str:
         return f"{self.name}"

@@ -122,6 +122,7 @@ class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel]):
                     "recommendations",
                     "openings",
                     "endings",
+                    "comments",
                 )
             },
         ),
@@ -147,3 +148,4 @@ from .anime_openings_and_endings import (
     AnimeOpeningAdmin as AnimeOpeningAdmin,
 )
 from .anime_theme import AnimeThemeAdmin as AnimeThemeAdmin
+from .anime_comment import AnimeCommentAdmin as AnimeCommentAdmin
