@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { get_preview_html_from_markdown } from "$functions/get_preview_html_from_markdown";
+
     export let api_url: string;
 
     interface Comment {
@@ -55,7 +57,11 @@
                     </div>
                     <div class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">10 months ago</div>
                 </a>
-                <div class="text-sm leading-snug text-accent md:text-[1vw] md:leading-[1.5vw]">{item.text}</div>
+                <div class="text-sm leading-snug text-accent md:text-[1vw] md:leading-[1.5vw]">
+                    {#await get_preview_html_from_markdown(item.text) then html}
+                        {@html html}
+                    {/await}
+                </div>
                 <div class="mt-2 flex items-center gap-3 md:mt-[0.5vw] md:gap-[0.75vw]">
                     <button class="btn !bg-transparent p-0">
                         <!-- {% include "icons/like.html" with class="w-3 text-surface-300 md:w-[1vw]" %} -->

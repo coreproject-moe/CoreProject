@@ -16,6 +16,7 @@
     import Strike from "$icons/Strike.svelte";
     import Code from "$icons/Code.svelte";
     import Hyperlink from "$icons/Hyperlink.svelte";
+    import { get_preview_html_from_markdown } from "$functions/get_preview_html_from_markdown";
 
     let caret_offset_top: string | null = null,
         caret_offset_left: string | null = null;
@@ -422,24 +423,6 @@
 
     let active_tab: "edit" | "preview" = "edit";
     async function handle_tab_click(tab_name: string) {
-        if (tab_name === "preview") {
-            const res = await fetch(reverse("partial_markdown_endpoint"), {
-                method: "POST",
-                credentials: "same-origin",
-                body: textarea_value,
-                headers: {
-                    "X-CSRFToken": window.csrfmiddlewaretoken
-                }
-            });
-            // guard clause
-            if (!res.ok) return;
-            const markdown_html = await res.text();
-            if (textarea_value) {
-                preview_element_innerHTML = markdown_html;
-            } else {
-                preview_element_innerHTML = "Nothing to preview!";
-            }
-        }
         active_tab = tab_name as typeof active_tab;
     }
 </script>
@@ -504,8 +487,17 @@
     <div
         class="h-28 w-full overflow-y-scroll px-3 text-sm leading-tight md:h-[8vw] md:px-[1vw] md:py-[0.5vw] md:text-[1vw] md:leading-[1.5vw] [&_img]:inline-flex [&_img]:w-[1.25vw]"
         contenteditable="false"
-        bind:innerHTML={preview_element_innerHTML}
-    ></div>
+    >
+        {#if textarea_value}
+            {#await get_preview_html_from_markdown(textarea_value)}
+                Loading..
+            {:then html}
+                {@html html}
+            {/await}
+        {:else}
+            Nothing to preview!
+        {/if}
+    </div>
 {/if}
 
 <textarea-footer
