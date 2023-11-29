@@ -10,8 +10,13 @@
         previous: null | number;
         results: {
             created_at: string;
-
-            user: string;
+            user: {
+                username: string;
+                first_name: string;
+                last_name: string;
+                avatar: null | string;
+                avatar_provider: string;
+            };
             text: string;
             path: string;
         }[];
@@ -55,8 +60,8 @@
                     class="flex flex-col text-xs leading-none md:text-[1vw]"
                 >
                     <div class="flex items-center md:gap-[0.5vw]">
-                        <div class="text-white">Tokitouq</div>
-                        <div class="md:text-[0.75vw]">{item.user}</div>
+                        <div class="text-white">{`${item.user.first_name} ${item.user.last_name}`}</div>
+                        <div class="md:text-[0.75vw]">{item.user.username}</div>
                     </div>
                     <div class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">{new FormatDate(item.created_at).format_to_time_from_now}</div>
                 </a>
