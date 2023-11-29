@@ -2,6 +2,8 @@ import { join, resolve } from "path";
 import process from "process";
 import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
+import tsconfigPaths from "vite-tsconfig-paths";
+
 const STATIC_SRC = resolve("./django_core/static_src");
 
 const COMPONENT_DIRECTORY = join(STATIC_SRC, "components");
@@ -11,8 +13,14 @@ const CSS_DIRECTORY = join(STATIC_SRC, "css");
 export default defineConfig({
     root: resolve("./django_core/static_src"),
     base: "/static/",
-
+    resolve: {
+        alias: {
+            $functions: join(STATIC_SRC, "functions"),
+            $components: join(STATIC_SRC, "components")
+        }
+    },
     plugins: [
+        tsconfigPaths({}),
         svelte({
             compilerOptions: {
                 customElement: true

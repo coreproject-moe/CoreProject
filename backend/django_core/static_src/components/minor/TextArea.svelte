@@ -1,13 +1,13 @@
 <script lang="ts">
     import emojis from "./emoji.json";
-    import { cn } from "../../functions/classname";
-    import { vw } from "../../functions/vw";
-    import { is_valid_url } from "../../functions/is_valid_url";
+    import { cn } from "$functions/classname";
+    import { vw } from "$functions/vw";
+    import { is_valid_url } from "$functions/is_valid_url";
     import { offset } from "caret-pos";
     import { encode } from "html-entities";
     import type { SvelteComponent } from "svelte";
     import tippy from "tippy.js";
-    import { reverse } from "../../functions/urls";
+    import { reverse } from "$functions/urls";
 
     // Icons import
     import Bold from "../icons/Bold.svelte";

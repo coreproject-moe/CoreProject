@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { cn } from "../../functions/classname";
+    import { cn } from "$functions/classname";
 
     let klass = "";
     export { klass as class };

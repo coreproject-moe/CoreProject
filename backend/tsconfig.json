@@ -3,7 +3,6 @@
     "exclude": ["node_modules", "postcss.config.cjs", "django_core/static"],
     "compilerOptions": {
         "lib": ["esnext", "DOM", "DOM.Iterable"],
-
         "allowJs": true,
         "checkJs": true,
         "esModuleInterop": true,
