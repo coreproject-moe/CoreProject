@@ -1,5 +1,5 @@
 <script lang="ts">
-    import TextArea from "$components/minor/TextArea.svelte";
+    import TextArea from "$components/minor/TextArea/Index.svelte";
 
     // Icons
     import Info from "$icons/Info.svelte";
