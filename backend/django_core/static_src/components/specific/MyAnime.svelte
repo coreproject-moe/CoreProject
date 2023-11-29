@@ -11,7 +11,6 @@
     // Pass styles
     export let dropdown_class: string;
 
-    import { afterUpdate } from "svelte";
     import Dot from "$icons/Dot.svelte";
     import ScrollArea from "$components/minor/ScrollArea.svelte";
     import { cn } from "$functions/classname";
@@ -30,10 +29,6 @@
     function calculate_style() {
         style_left = window.getComputedStyle(main_element).width;
     }
-
-    afterUpdate(() => {
-        calculate_style();
-    });
 </script>
 
 <div

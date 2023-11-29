@@ -14,6 +14,8 @@ svelteRetag({
     shadow: false, // Use the light DOM
     hydratable: true
 });
+
+// Specific Components
 svelteRetag({
     component: CommentBox,
     tagname: `coreproject-commentbox`,
