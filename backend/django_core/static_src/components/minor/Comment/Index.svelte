@@ -15,7 +15,7 @@
                 first_name: string;
                 last_name: string;
                 avatar: null | string;
-                avatar_provider: string;
+                avatar_url: string;
             };
             text: string;
             path: string;
@@ -43,6 +43,7 @@
     Loading...
 {:then comment}
     {#each comment.results as item}
+        {@const avatar_src = item.user.avatar ? item.user.avatar : item.user.avatar_url}
         <div class="flex gap-3 md:gap-[1vw]">
             <a
                 href="/user/"
@@ -50,7 +51,7 @@
             >
                 <img
                     alt=""
-                    src="https://avatars.githubusercontent.com/u/114811070?s=40&v=4"
+                    src={avatar_src}
                     class="h-full w-full shrink-0 rounded-full object-cover"
                 />
             </a>

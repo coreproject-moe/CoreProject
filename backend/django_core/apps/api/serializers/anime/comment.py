@@ -10,7 +10,8 @@ class UserSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "avatar",
-            "avatar_provider",
+            "avatar_url",
+            "email",
         ]
 
 
