@@ -1,4 +1,3 @@
-{% load markdown %}
 <div class="flex flex-col gap-2 whitespace-nowrap font-bold uppercase leading-none tracking-widest text-white md:text-[1.2vw] md:gap-[0.5vw]">
     <span class="text-base font-bold uppercase tracking-widest md:text-[1.2vw]">choose your username and verify</span>
     <span class="uppercase md:text-[1vw] font-medium text-white/90">Secure Your Spot in the Anime Community!</span>
@@ -16,7 +15,7 @@
                 class="text-xs text-surface-300 md:text-[0.75vw]"
             >
                 {% if form.username.errors %}
-                    {{ form.username.errors.as_text|markdown|safe }}
+                    <markdown markdown="{{ form.username.errors.as_text|safe }}"></markdown>
                 {% else %}
                     {{ form.username.help_text }}
                 {% endif %}

@@ -1,4 +1,4 @@
-{% load markdown django_vite %}
+{% load django_vite %}
 
 {% vite_asset 'js/register.ts' %}
 
@@ -149,7 +149,7 @@
         {{ form.confirm_password }}
         <span class="leading-none md:text-[0.75vw]">
             {% if form.confirm_password.errors %}
-                {{ form.confirm_password.errors|first|markdown|safe }}
+                <markdown markdown="{{ form.confirm_password.errors|first|safe }}" ></markdown>
             {% else %}
                 {{ form.confirm_password.help_text }}
             {% endif %}
