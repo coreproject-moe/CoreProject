@@ -1,4 +1,4 @@
-{% load markdown %}
+
 
 <div class="flex flex-col gap-2 whitespace-nowrap font-bold uppercase leading-none tracking-widest text-white md:text-[1.2vw] md:gap-[0.5vw]">
     <span class="text-base font-bold uppercase tracking-widest md:text-[1.2vw]">forgot password? don't worry!</span>
@@ -13,7 +13,7 @@
         {% include "icons/info.html" with class="w-3 opacity-70 md:w-[0.9vw]" %}
         <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.8vw]">
             {% if form.email.errors %}
-                {{ form.email.errors|first|markdown|safe }}
+                <markdown markdown="{{form.email.errors|first}}"></markdown>
             {% else %}
                 {{ form.email.help_text }}
             {% endif %}
