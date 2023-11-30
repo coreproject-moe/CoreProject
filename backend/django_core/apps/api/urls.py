@@ -2,6 +2,7 @@ from django.urls import include, path
 from rest_framework import routers
 
 from .views.anime import AnimeViewSet
+from .views.anime.comment import AnimeCommentAPIView
 from .views.anime.episode import EpisodeAPIView
 from .views.anime.episode.comment import EpisodeCommentAPIView
 from .views.anime.episode.timestamp import EpisodeTimeStampAPIView
@@ -22,6 +23,11 @@ base_router.register(r"staff", StaffViewSet, basename="staff")
 urlpatterns = [
     path("", include(base_router.urls)),
     # Anime specific routes
+    path(
+        "anime/<int:pk>/comment",
+        AnimeCommentAPIView.as_view(),
+        name="anime-commment-endpoint",
+    ),
     path("anime/genres/", AnimeGenresAPIView.as_view()),
     path("anime/genres/<int:pk>/", AnimeGenresSpecificAPIView.as_view()),
     path("anime/themes/", AnimeThemesAPIView.as_view()),

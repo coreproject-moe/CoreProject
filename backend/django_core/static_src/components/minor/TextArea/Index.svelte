@@ -12,6 +12,7 @@
     import Strike from "$icons/Strike.svelte";
     import Code from "$icons/Code.svelte";
     import Hyperlink from "$icons/Hyperlink.svelte";
+    import { get_preview_html_from_markdown } from "$functions/get_preview_html_from_markdown";
 
     let caret_offset_top: string | null = null,
         caret_offset_left: string | null = null;

@@ -1,3 +1,4 @@
+import hashlib
 from typing import Any
 
 from django.conf import settings
@@ -84,6 +85,12 @@ class CustomUser(
 
     def save(self, *args: Any, **kwargs: Any) -> None:
         super().save(*args, **kwargs)
+
+    @property
+    def avatar_url(self):
+        hashed_email = hashlib.md5(self.email.encode()).hexdigest()
+
+        return self.avatar_provider.format(EMAIL=hashed_email)
 
     def __str__(self) -> str:
         return self.username

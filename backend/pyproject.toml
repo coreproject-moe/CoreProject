@@ -70,8 +70,6 @@ crispy-bootstrap4 = ">=2023.1"
 django-components = ">=0.29"
 django-htmx = ">=1.17.0"
 # Markdown
-markdown = ">=3.5"
-pymdown-extensions = {extras = ["pygments"], version = ">=10.3.1"}
 django-vite = "^3.0.0"
 
 

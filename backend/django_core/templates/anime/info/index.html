@@ -241,60 +241,13 @@
                             <coreproject-commentbox></coreproject-commentbox>
                         </div>
                         <comments class="mt-10 flex flex-col gap-5 md:mt-[2vw] md:gap-[1.5vw]">
-                            <comment class="flex gap-3 md:gap-[1vw]">
-                                <a href="/user/" class="h-7 w-7 flex-shrink-0 md:h-[2vw] md:w-[2vw]">
-                                    <img
-                                        src="https://avatars.githubusercontent.com/u/114811070?s=40&v=4"
-                                        class="h-full w-full shrink-0 rounded-full object-cover"
-                                    >
-                                </a>
-                                <comment-details class="flex flex-col items-start gap-1 md:gap-0">
-                                    <a href="/user/" class="text-xs leading-none md:text-[1vw] flex flex-col">
-                                        <div class="flex items-center md:gap-[0.5vw]">
-                                            <name class="text-white">Tokitouq</name>
-                                            <username class="md:text-[0.75vw]">@tokitouq</username>
-                                        </div>
-                                        <comment-time class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">10 months ago</comment-time>
-                                    </a>
-                                    <markdown class="text-sm leading-snug text-accent md:text-[1vw] md:leading-[1.5vw]">
-                                        I'm really happy with your determination to finish this project.
-                                    </markdown>
-                                    <options class="mt-2 flex items-center gap-3 md:mt-[0.5vw] md:gap-[0.75vw]">
-                                        <button class="btn !bg-transparent p-0">
-                                            {% include "icons/like.html" with class="w-3 text-surface-300 md:w-[1vw]" %}
-                                            <likes class="text-xs md:text-[0.75vw]">106</likes>
-                                        </button>
-                                        <button class="btn !bg-transparent p-0 text-xs uppercase text-surface-50 md:text-[0.8vw]">Replay</button>
-                                    </options>
-                                </comment-details>
-                            </comment>
-                            <comment class="flex gap-3 md:gap-[1vw]">
-                                <a href="/user/" class="h-7 w-7 flex-shrink-0 md:h-[2vw] md:w-[2vw]">
-                                    <img
-                                        src="https://avatars.githubusercontent.com/u/61817579?v=4"
-                                        class="h-full w-full shrink-0 rounded-full object-cover"
-                                    >
-                                </a>
-                                <comment-details class="flex flex-col items-start gap-1 md:gap-0">
-                                    <a href="/user/" class="text-xs leading-none md:text-[1vw] flex flex-col">
-                                        <div class="flex items-center md:gap-[0.5vw]">
-                                            <name class="text-white">baseplate-admin</name>
-                                            <username class="md:text-[0.75vw]">@baseplate-admin</username>
-                                        </div>
-                                        <comment-time class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">{{ '18 Nov 2023'|naturalday }}</comment-time>
-                                    </a>
-                                    <markdown class="text-sm leading-snug text-accent md:text-[1vw] md:leading-[1.5vw]">
-                                        I'm really disappointed at your lack of tattoo.
-                                    </markdown>
-                                    <options class="mt-2 flex items-center gap-3 md:mt-[0.5vw] md:gap-[0.75vw]">
-                                        <button class="btn !bg-transparent p-0">
-                                            {% include "icons/like.html" with class="w-3 text-surface-300 md:w-[1vw]" %}
-                                            <likes class="text-xs md:text-[0.75vw]">2064</likes>
-                                        </button>
-                                        <button class="btn !bg-transparent p-0 text-xs uppercase text-surface-50 md:text-[0.8vw]">Replay</button>
-                                    </options>
-                                </comment-details>
-                            </comment>
+                            <coreproject-comment
+                            {%comment%}
+                            api_url='{% url "anime-commment-endpoint" pk=anime.id %}'
+                            {%endcomment%}
+                                api_url='{% url "anime-commment-endpoint" pk=2 %}'
+                            >
+                            </coreproject-comment>
                         </comments>
                     </comment-box>
                     <forum-posts class="md:col-span-2">

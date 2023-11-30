@@ -10,6 +10,7 @@ from ...characters.models import CharacterModel
 from ...episodes.models import EpisodeModel
 from ...producers.models import ProducerModel
 from ...staffs.models import StaffModel
+from .anime_comment import AnimeCommentModel
 from .anime_genre import AnimeGenreModel
 from .anime_openings_and_endings import AnimeEndingModel, AnimeOpeningModel
 from .anime_theme import AnimeThemeModel
@@ -97,6 +98,8 @@ class AnimeModel(CreatedAtMixin, UpdatedAtMixin, IsLockedMixin):
 
     openings = models.ManyToManyField(AnimeOpeningModel, blank=True)
     endings = models.ManyToManyField(AnimeEndingModel, blank=True)
+
+    comments = models.ManyToManyField(AnimeCommentModel, blank=True)
 
     def __str__(self) -> str:
         return f"{self.name}"
