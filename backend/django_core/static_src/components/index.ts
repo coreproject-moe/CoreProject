@@ -9,7 +9,7 @@ import Markdown from "$components/minor/Markdown/Index.svelte";
 
 svelteRetag({
     component: Markdown,
-    tagname: `markdown`,
+    tagname: `coreproject-markdown`,
     attributes: [`markdown`, `class`], // Changes to these attributes will be reactively forwarded to your component
     shadow: false, // Use the light DOM
     hydratable: true

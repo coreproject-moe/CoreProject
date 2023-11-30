@@ -4,6 +4,6 @@
 >
     {% include "icons/info.html" with class="md:w-[1.25vw]" %}
     {% autoescape off %}
-        <markdown class="leading-none text-white font-semibold select-none text-[0.9vw]" markdown="{{ message|safe }}"></markdown>
+        <coreproject-markdown class="leading-none text-white font-semibold select-none text-[0.9vw]" markdown="{{ message|safe }}"></coreproject-markdown>
     {% endautoescape %}
 </div>

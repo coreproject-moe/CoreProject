@@ -15,7 +15,7 @@
                 class="text-xs text-surface-300 md:text-[0.75vw]"
             >
                 {% if form.username.errors %}
-                    <markdown markdown="{{ form.username.errors.as_text|safe }}"></markdown>
+                    <coreproject-markdown markdown="{{ form.username.errors.as_text|safe }}"></coreproject-markdown>
                 {% else %}
                     {{ form.username.help_text }}
                 {% endif %}

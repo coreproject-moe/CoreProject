@@ -149,7 +149,7 @@
         {{ form.confirm_password }}
         <span class="leading-none md:text-[0.75vw]">
             {% if form.confirm_password.errors %}
-                <markdown markdown="{{ form.confirm_password.errors|first|safe }}" ></markdown>
+                <coreproject-markdown markdown="{{ form.confirm_password.errors|first|safe }}" ></coreproject-markdown>
             {% else %}
                 {{ form.confirm_password.help_text }}
             {% endif %}
