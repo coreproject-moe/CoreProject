@@ -7,7 +7,6 @@ from .views.anime import (
     anime_home_view_partial_slider_view,
     anime_info_view,
 )
-from .views.partial import markdown_endpoint
 from .views.stack import stack_view
 from .views.upload import upload_view
 from .views.user import login_view, logout_view, register_view, reset_password_view
@@ -58,13 +57,4 @@ urlpatterns = [
     ),
     # Upload page
     path("upload/", upload_view, name="upload_view"),
-    # Partials
-    path(
-        "partials/",
-        include(
-            [
-                path("markdown", markdown_endpoint, name="partial_markdown_endpoint"),
-            ]
-        ),
-    ),
 ]

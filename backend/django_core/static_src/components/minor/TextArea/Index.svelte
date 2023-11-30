@@ -1,12 +1,10 @@
 <script lang="ts">
-    import emojis from "./emoji.json";
+    import emojis from "../../../data/emoji.json";
     import { cn } from "$functions/classname";
-    import { vw } from "$functions/vw";
     import { is_valid_url } from "$functions/is_valid_url";
     import { offset } from "caret-pos";
     import type { SvelteComponent } from "svelte";
-    import { reverse } from "$functions/urls";
-
+    import Markdown from "$components/minor/Markdown/Index.svelte";
     // Icons import
     import Bold from "$icons/Bold.svelte";
     import Italic from "$icons/Italic.svelte";
@@ -473,23 +471,16 @@
         class="h-28 w-full resize-none overflow-y-scroll border-none bg-secondary px-3 text-sm leading-tight outline-none focus:ring-0 md:h-[8vw] md:px-[1vw] md:py-[0.5vw] md:text-[1vw] md:leading-[1.5vw]"
     ></textarea>
 {:else if active_tab === "preview"}
-    <div
-        class="h-28 w-full overflow-y-scroll px-3 text-sm leading-tight md:h-[8vw] md:px-[1vw] md:py-[0.5vw] md:text-[1vw] md:leading-[1.5vw] [&_img]:inline-flex [&_img]:w-[1.25vw]"
-        contenteditable="false"
-    >
+    <div class="h-28 w-full overflow-y-scroll px-3 text-sm leading-tight md:h-[8vw] md:px-[1vw] md:py-[0.5vw] md:text-[1vw] md:leading-[1.5vw] [&_img]:inline-flex [&_img]:w-[1.25vw]">
         {#if textarea_value}
-            {#await get_preview_html_from_markdown(textarea_value)}
-                Loading..
-            {:then html}
-                {@html html}
-            {/await}
+            <Markdown markdown={textarea_value} />
         {:else}
             Nothing to preview!
         {/if}
     </div>
 {/if}
 
-<textarea-footer
+<footer
     class="flex items-center gap-[0.25vw] px-4 py-2 text-[0.65rem] font-thin leading-[1.5vw] text-accent md:px-[1vw] md:py-[0.1vw] md:text-[0.75vw]"
     style="align-self: flex-end;"
 >
@@ -499,9 +490,9 @@
     >
         core editor
     </a>
-</textarea-footer>
+</footer>
 {#if show_emoji_picker && emoji_matches.length > 0}
-    <emoji-popover
+    <div
         class="absolute flex min-w-[12vw] flex-col divide-y divide-accent/10 overflow-hidden rounded-[0.5vw] bg-neutral text-[1vw] text-accent"
         style:top={caret_offset_top}
         style:left={caret_offset_left}
@@ -534,5 +525,5 @@
                 <span>{keyword}</span>
             </div>
         {/each}
-    </emoji-popover>
+    </div>
 {/if}

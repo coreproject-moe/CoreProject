@@ -5,7 +5,15 @@ import CommentBox from "$components/specific/CommentBox.svelte";
 import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
 import MyAnime from "$components/specific/MyAnime.svelte";
 import Comment from "$components/minor/Comment/Index.svelte";
+import Markdown from "$components/minor/Markdown/Index.svelte";
 
+svelteRetag({
+    component: Markdown,
+    tagname: `markdown`,
+    attributes: [`markdown`, `class`], // Changes to these attributes will be reactively forwarded to your component
+    shadow: false, // Use the light DOM
+    hydratable: true
+});
 svelteRetag({
     component: ScrollArea,
     tagname: `scroll-area`,
