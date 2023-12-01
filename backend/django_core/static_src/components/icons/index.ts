@@ -10,6 +10,8 @@ import Book from "./Book/Index.svelte";
 import Calender from "./Calender/Index.svelte";
 import Chat from "./Chat/Index.svelte";
 import Chevron from "./Chevron/Index.svelte";
+import Compass from "./Compass/Index.svelte";
+import CoreText from "./CoreText/Index.svelte";
 import Circle from "./Circle/Index.svelte";
 import Code from "./Code/Index.svelte";
 import Dot from "./Dot/Index.svelte";
@@ -31,6 +33,8 @@ const icon_map: Record<string, ComponentType> = {
     chevron: Chevron,
     circle: Circle,
     code: Code,
+    compass: Compass,
+    "core-text": CoreText,
     dot: Dot,
     hyperlink: Hyperlink,
     info: Info,

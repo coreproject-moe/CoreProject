@@ -8,8 +8,7 @@ icons = [
         "href": reverse_lazy("anime_home_view"),
     },
     {
-        "html": "icons/compass.html",
-        "class": "w-[1.25vw]",
+        "icon": '<coreproject-icon-compass class="w-[1.25vw]"></coreproject-icon-compass>',
         "label": "explore",
         "href": "/anime/explore/",
     },
@@ -20,12 +19,12 @@ icons = [
         "href": "/anime/list/",
     },
     {
-        "icon": '<coreproject-icon-calender class="w-[1.25vw]"> </coreproject-icon-calender>',
+        "icon": '<coreproject-icon-calender class="w-[1.25vw]"></coreproject-icon-calender>',
         "href": "/anime/shedule",
         "label": "schedule",
     },
     {
-        "icon": '<coreproject-icon-chat class="w-[1.25vw]"> </coreproject-icon-chat>',
+        "icon": '<coreproject-icon-chat class="w-[1.25vw]"></coreproject-icon-chat>',
         "href": "/anime/forum",
         "label": "forum",
     },
