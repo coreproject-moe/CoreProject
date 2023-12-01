@@ -39,8 +39,12 @@ import Play from "./Play/Index.svelte";
 import Preference from "./Preference/Index.svelte";
 import Recent from "./Recent/Index.svelte";
 import Record from "./Record/Index.svelte";
+import Refresh from "./Refresh/Index.svelte";
 import Star from "./Star/Index.svelte";
 import Strike from "./Strike/Index.svelte";
+import Tick from "./Tick/Index.svelte";
+import Settings from "./Settings/Index.svelte";
+import Share from "./Share/Index.svelte";
 import Underline from "./Underline/Index.svelte";
 
 const icon_map = {
@@ -80,8 +84,12 @@ const icon_map = {
     preference: Preference,
     recent: Recent,
     record: Record,
+    refresh: Refresh,
     star: Star,
+    share: Share,
+    settings: Settings,
     strike: Strike,
+    tick: Tick,
     underline: Underline
 };
 
@@ -89,7 +97,7 @@ const icon_map = {
 Object.entries(icon_map).forEach((item) => {
     svelteRetag({
         component: item[1],
-        tagname: `coreproject-icon-${item[0]}`,
+        tagname: `coreproject-icon-${item[0]}`.toLowerCase(),
         attributes: ["class", "style"],
         shadow: false,
         hydratable: true

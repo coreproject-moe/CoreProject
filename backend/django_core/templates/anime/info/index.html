@@ -71,8 +71,8 @@
                                 <coreproject-icon-download class="w-4 md:w-[1.125vw]"></coreproject-icon-download>
                             </button>
                             <button type="button" aria-label="video" class="btn btn-warning w-7 h-7 rounded p-0 md:w-[2vw] md:h-[2vw] md:rounded-[0.25vw] min-h-full">
-                                {% include "icons/share.html" with class="w-4 md:w-[1.125vw]" %}
-                            </button>
+                                <coreproject-icon-share class="w-4 md:w-[1.125vw]"></coreproject-icon-share>
+
                         </user-options>
                     </anime-details>
                 </anime-titles>
@@ -80,7 +80,8 @@
                     <section-header class="flex gap-[0.75vw]">
                         <header-title class="text-lg font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Synopsis</header-title>
                         <button class="btn btn-secondary hidden rounded-[0.1875vw] p-0 md:flex md:h-[1.5vw] md:w-[1.5vw] min-h-full">
-                            {% include "icons/settings.html" with class="w-[0.9vw] opacity-75" %}
+                                                    <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+
                         </button>
                     </section-header>
                     <coreproject-scroll-area class="text-justify text-xs md:text-[0.8vw] md:leading-[1vw]" parent_class="max-h-40 md:max-h-[10vw]" offset_scrollbar="true" gradient_mask='true'>
@@ -122,7 +123,8 @@
                 <section-header class="flex border-b-2 border-surface-50/10 pb-1 md:gap-x-[0.75vw] md:border-none md:pb-0">
                     <header-title class="text-lg font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Episodes</header-title>
                     <button class="btn btn-secondary min-h-full hidden rounded bg-surface-400 p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
-                        {% include "icons/settings.html" with class="w-[0.9vw] opacity-75" %}
+                                                <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+
                     </button>
                 </section-header>
                 <episodes-options class="mt-2 flex flex-col justify-between gap-y-5 md:mt-0 md:flex-row md:gap-y-0">
@@ -170,7 +172,7 @@
                             </button>
                         </by-modes>
                         <button class="btn btn-secondary min-h-max h-7 w-auto rounded bg-surface-400 p-0 font-semibold md:ml-0 md:h-[2.5vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]" aria-label="Search">
-                            {% include "icons/search.html" with class="w-3 md:w-[1vw]" %}
+                            <coreproject-icon-search  class="w-3 md:w-[1vw]" ></coreproject-icon-search>
                         </button>
                     </episodes-filtering>
                 </episodes-options>
@@ -230,7 +232,8 @@
                         <section-header class="flex gap-2 border-b-2 border-surface-50/10 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
                             <header-title class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Comments</header-title>
                             <button class="btn btn-secondary min-h-full hidden rounded bg-surface-400 p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
-                                {% include "icons/settings.html" with class="w-[0.9vw] opacity-75" %}
+                                                        <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+
                             </button>
                         </section-header>
                         <div class="mt-2 flex items-center justify-between md:hidden">
@@ -260,7 +263,8 @@
                         <section-header class="flex gap-2 border-b-2 border-surface-50/10 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
                             <section-title class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Forum Posts</section-title>
                             <button class="btn btn-secondary min-h-full hidden rounded bg-surface-400 p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
-                                {% include "icons/settings.html" with class="w-[0.9vw] opacity-75" %}
+                                                        <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+
                             </button>
                         </section-header>
                         <forum-details class="mt-2 flex items-center justify-between md:mt-[0.75vw]">
@@ -314,7 +318,8 @@
             <section-header class="flex gap-[0.75vw]">
                 <header-title class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Ratings</header-title>
                 <button class="btn btn-secondary rounded-[0.1875vw] bg-surface-400 p-0 md:h-[1.5vw] md:w-[1.5vw] min-h-full">
-                    {% include "icons/settings.html" with class="w-[0.9vw] opacity-75" %}
+                                            <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+
                 </button>
             </section-header>
             <anime-ratings class="flex flex-col gap-[0.75vw]">
@@ -391,7 +396,8 @@
             <more-infos-header class="flex gap-[0.75vw] md:mt-[6vw]">
                 <header-title class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Details</header-title>
                 <button class="btn btn-secondary min-h-full rounded p-0 md:h-[1.5vw] md:w-[1.5vw]">
-                    {% include "icons/settings.html" with class="w-[0.9vw] opacity-75" %}
+                                            <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+
                 </button>
             </more-infos-header>
             <more-infos class="md:mt-[1.25vw] md:mb-[2vw]">
@@ -445,7 +451,8 @@
                     <section-header class="flex gap-[0.75vw]">
                         <header-title class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Voiceover Cast</header-title>
                         <button class="btn btn-secondary min-h-full rounded bg-surface-400 p-0 md:h-[1.5vw] md:w-[1.5vw]">
-                            {% include "icons/settings.html" with class="w-[0.9vw] opacity-75" %}
+                                                    <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+
                         </button>
                     </section-header>
                     <div class="mt-[1vw] flex flex-col">
@@ -494,7 +501,8 @@
                     <section-header class="flex gap-3">
                         <header-title class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Recommendations</header-title>
                         <button class="btn btn-secondary min-h-full rounded bg-surface-400 p-0 md:h-[1.5vw] md:w-[1.5vw]">
-                            {% include "icons/settings.html" with class="w-[0.9vw] opacity-75" %}
+                                                    <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+
                         </button>
                     </section-header>
                     <recommendations-cards class="mt-[1vw] block">
