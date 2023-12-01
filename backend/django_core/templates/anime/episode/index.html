@@ -25,7 +25,8 @@
                         <span class="text-xs font-semibold uppercase" data-svelte-h="svelte-65wj7">sub/dub:</span>
                         <button class="btn flex items-center gap-2 rounded bg-surface-400 px-3 py-2 text-xs leading-none">
                             Vidstreaming (sub)
-                            {% include "icons/chevron.html" %}
+                            <coreproject-icon-chevron ></coreproject-icon-chevron>
+
                         </button>
                     </sub-dub>
                     <video-options class="flex items-center gap-3 md:gap-[0.75vw]">
@@ -47,7 +48,8 @@
                 <span class="text-lg font-semibold md:text-[1.35vw]" data-svelte-h="svelte-1ox2gge">Episodes</span>
                 <button class="btn !bg-transparent min-h-full flex items-center gap-2 rounded bg-surface-400 px-3 py-2 text-xs font-semibold leading-none md:gap-[0.5vw] md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.5vw] md:text-[1vw]">
                     EPS: 1 - 60
-                    {% include "icons/chevron.html" with class="w-3 md:w-[1vw]" %}
+                        <coreproject-icon-chevron class="w-3 md:w-[1vw]"></coreproject-icon-chevron>
+
                 </button>
             </header>
             <episodes class="grid grid-cols-7 gap-2 md:grid-cols-6 md:gap-[0.75vw]">
@@ -83,7 +85,8 @@
                         <div class="accordion-lead">EP1</div>
                         <div class="accordion-summary flex-1">Monotone/Colorful</div>
                         <div class="accordion-summary-caret fill-current w-3 transition-transform duration-[200ms] md:w-[1.25vw] rotate-180">
-                            {% include "icons/chevron.html" %}
+                            <coreproject-icon-chevron ></coreproject-icon-chevron>
+
                         </div>
                     </button>
                     <div class="accordion-panel  p-0 rounded-container-token text-surface-50 text-sm leading-snug md:text-[1vw] md:leading-[1.35vw]" id="accordion-panel-0.4186117384197431" role="region" aria-hidden="false" aria-labelledby="accordion-control-0.4186117384197431">The autumn he was twelve, piano prodigy Kousei Arima suddenly found himself unable to play the piano after his mother's death. Ever since then, it's like he's been frozen in time. His childhood friend, Tsubaki Sawabe, watches over him with concern; one day, she invites him on a double date. Kousei's other childhood friend, Ryouta Watari, is being introduced to a certain girl. Kousei reluctantly heads over to the rendezvous spot. There, he sees a girl playing a melodica. This girl, who allegedly has a crush on Watari, is Kaori Miyazono. And she turns out to be a violinist!</div>
@@ -91,7 +94,8 @@
             </div>
             <a href="/mal/1" class="btn btn-neutral md:h-[3vw] min-h-max md:w-[10vw] rounded-md text-sm font-semibold leading-none md:rounded-[0.5vw] md:text-[1vw]">
                 <span>View detail</span>
-                {% include "icons/chevron.html" with class="w-3 -rotate-90 md:w-[1vw]" %}
+                    <coreproject-icon-chevron  class="w-3 -rotate-90 md:w-[1vw]"></coreproject-icon-chevron>
+
             </a>
         </episode-info>
         <next-episode class="col-span-4 hidden flex-col md:flex">
@@ -246,7 +250,7 @@
                 <load-more class="mt-3 flex w-full justify-center md:mt-[1vw]">
                     <button class="btn btn-neutral min-h-full h-7 gap-2 rounded px-3 text-xs font-semibold md:h-[2.4vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.875vw]">
                         Load more
-                        {% include "icons/chevron.html" with class="w-4 md:w-[1vw]" %}
+                        <coreproject-icon-chevron class="w-4 md:w-[1vw]"></coreproject-icon-chevron>
                     </button>
                 </load-more>
             </recommendations-container>

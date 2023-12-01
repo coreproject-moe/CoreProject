@@ -98,13 +98,14 @@
                 class="btn btn-primary text-accent min-h-max p-0 absolute -left-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] md:flex"
                 _="on click send hyperscript:slide_prev to <slider/>"
             >
-                {% include "icons/chevron.html" with class="w-[1.25vw] rotate-90" %}
+                <coreproject-icon-chevron class="w-[1.25vw] rotate-90"></coreproject-icon-chevron>
             </button>
             <button
                 class="btn btn-primary text-accent min-h-max p-0 absolute -right-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] bg-secondary-800 md:flex"
                 _="on click send hyperscript:slide_next to <slider/>"
             >
-                {% include "icons/chevron.html" with class="w-[1.25vw] -rotate-90" %}
+                <coreproject-icon-chevron class="w-[1.25vw] -rotate-90"></coreproject-icon-chevron>
+
             </button>
         </latest-animes-slider>
         <latest-episodes class="hidden w-[21.5625vw] md:block">
@@ -278,7 +279,7 @@
             <my-list-options class="hidden items-center gap-[1vw] md:flex">
                 <button class="btn btn-neutral min-h-max h-[2.25vw] w-[6.625vw] gap-[0.625vw] rounded-[0.375vw] bg-surface-400 p-0 text-[0.875vw] font-semibold">
                     Watching
-                    {% include "icons/chevron.html" with class="w-[1vw]" %}
+                    <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
                 </button>
                 <button class="btn btn-neutral min-h-max h-[2.25vw] w-[5.625vw] gap-[0.625vw] rounded-[0.375vw] bg-surface-400 p-0 text-[0.875vw] font-semibold">
                     Full List
@@ -288,7 +289,8 @@
             <see-all class="md:hidden">
                 <button class="btn gap-2 p-0 text-sm">
                     See all
-                    {% include "icons/chevron.html" with class="w-4 -rotate-90 text-primary-400" %}
+                    <coreproject-icon-chevron class="w-4 -rotate-90 text-primary-400"></coreproject-icon-chevron>
+
                 </button>
             </see-all>
         </my-list-info>
