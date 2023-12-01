@@ -39,15 +39,15 @@
         class="flex flex-wrap items-center gap-2 pt-4 text-xs font-semibold text-white/90 md:gap-[0.65vw] md:pt-[0.5vw] md:text-[0.9375vw]"
     >
         <span class="leading-[1.125vw]"> {{ anime.type }} </span>
-        {% include "icons/dot.html" with class="w-1 opacity-75 md:w-[0.25vw]" %}
+        <coreproject-icon-dot class='w-1 opacity-75 md:w-[0.25vw]' ></coreproject-icon-dot>
         <span class="leading-[1.125vw]"> {{ anime.episodes }} eps </span>
-        {% include "icons/dot.html" with class="w-1 opacity-75 md:w-[0.25vw]" %}
+                <coreproject-icon-dot class='w-1 opacity-75 md:w-[0.25vw]' ></coreproject-icon-dot>
         <span class="leading-[1.125vw]"> {{ anime.status }} </span>
-        {% include "icons/dot.html" with class="w-1 opacity-75 md:w-[0.25vw]" %}
+        <coreproject-icon-dot class='w-1 opacity-75 md:w-[0.25vw]' ></coreproject-icon-dot>
         <span class="capitalize leading-[1.125vw]">
             {{ anime.release_date }}
         </span>
-        {% include "icons/dot.html" with class="w-1 opacity-75 md:w-[0.25vw]" %}
+                <coreproject-icon-dot class='w-1 opacity-75 md:w-[0.25vw]' ></coreproject-icon-dot>
         <span class="leading-[1.125vw] capitalize"> {{ anime.studio }} </span>
     </anime-infos>
     <anime-genres class="flex gap-2 pb-2 pt-3 md:gap-[0.5vw] md:pt-[0.5vw]">
