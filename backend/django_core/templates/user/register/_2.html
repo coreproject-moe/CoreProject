@@ -9,7 +9,8 @@
         </label>
         {{ form.username }}
         <info class="flex items-start gap-2 md:gap-[0.5vw]">
-            {% include "icons/info.html" with class="w-3 opacity-70 md:w-[0.9vw]" %}
+            <coreproject-icon-info class="w-3 opacity-70 md:w-[0.9vw]" ></coreproject-icon-info >
+
             <span
                 id="username_help_text"
                 class="text-xs text-surface-300 md:text-[0.75vw]"
@@ -28,7 +29,8 @@
         </label>
         {{ form.otp }}
         <info class="flex items-start gap-2 md:gap-[0.5vw]">
-            {% include "icons/info.html" with class="w-3 opacity-70 md:w-[0.9vw]" %}
+            <coreproject-icon-info class="w-3 opacity-70 md:w-[0.9vw]" ></coreproject-icon-info >
+
             <span class="text-xs text-surface-300 md:text-[0.75vw]">{{ form.otp.help_text }}</span>
         </info>
     </otp-field>

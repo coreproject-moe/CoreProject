@@ -1,5 +1,12 @@
+<script lang="ts">
+    let klass = "";
+    export { klass as class };
+    export let style = "";
+</script>
+
 <svg
-    {% if class %}class="{{class}}"{% endif %}
+    class={klass}
+    {style}
     viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"
 >
     <path d="M3.75 22.5V15C3.75 12.0163 4.93526 9.15483 7.04505 7.04505C9.15483 4.93526 12.0163 3.75 15 3.75C17.9837 3.75 20.8452 4.93526 22.955 7.04505C25.0647 9.15483 26.25 12.0163 26.25 15V22.5" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>

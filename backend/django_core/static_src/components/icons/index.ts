@@ -21,15 +21,29 @@ import Delete from "./Delete/Index.svelte";
 import DoubleArrow from "./DoubleArrow/Index.svelte";
 import Download from "./Download/Index.svelte";
 import Dot from "./Dot/Index.svelte";
+import Edit from "./Edit/Index.svelte";
+import Empty from "./Empty/Index.svelte";
+import Filter from "./Filter/Index.svelte";
+import Headphone from "./Headphone/Index.svelte";
+import Home from "./Home/Index.svelte";
 import Hyperlink from "./Hyperlink/Index.svelte";
 import Info from "./Info/Index.svelte";
 import Italic from "./Italic/Index.svelte";
+import Language from "./Language/Index.svelte";
+import Like from "./Like/Index.svelte";
+import List from "./List/Index.svelte";
+import Misc from "./Misc/Index.svelte";
+import Moon from "./Moon/Index.svelte";
+import Notification from "./Notification/Index.svelte";
 import Play from "./Play/Index.svelte";
+import Preference from "./Preference/Index.svelte";
+import Recent from "./Recent/Index.svelte";
+import Record from "./Record/Index.svelte";
 import Star from "./Star/Index.svelte";
 import Strike from "./Strike/Index.svelte";
 import Underline from "./Underline/Index.svelte";
 
-const icon_map: Record<string, ComponentType> = {
+const icon_map = {
     "arrow-up-right": ArrowUpRight,
     animecore: AnimeCore,
     bold: Bold,
@@ -48,10 +62,24 @@ const icon_map: Record<string, ComponentType> = {
     "double-arrow": DoubleArrow,
     download: Download,
     dot: Dot,
+    edit: Edit,
+    empty: Empty,
+    filter: Filter,
+    headphone: Headphone,
+    home: Home,
     hyperlink: Hyperlink,
     info: Info,
     italic: Italic,
+    language: Language,
+    like: Like,
+    list: List,
+    misc: Misc,
+    moon: Moon,
+    notification: Notification,
     play: Play,
+    preference: Preference,
+    recent: Recent,
+    record: Record,
     star: Star,
     strike: Strike,
     underline: Underline
@@ -64,6 +92,6 @@ Object.entries(icon_map).forEach((item) => {
         tagname: `coreproject-icon-${item[0]}`,
         attributes: ["class", "style"],
         shadow: false,
-        hydratable: false
+        hydratable: true
     });
 });

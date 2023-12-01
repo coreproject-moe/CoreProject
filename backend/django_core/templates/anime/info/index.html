@@ -39,7 +39,8 @@
                         <watch-options class="mt-3 flex items-center gap-3 md:mt-[1.5vw] md:gap-[0.75vw]">
                             <button type="button" class="btn btn-primary h-14 w-[6.5rem] rounded-lg font-bold text-white md:h-[4vw] md:w-[7vw] md:rounded-[0.625vw]">
                                 <div class="flex gap-3 md:gap-[0.7vw]">
-                                    {% include "icons/play.html" with class="w-5 md:w-[1.5vw]" %}
+                                    <coreproject-icon-play class="w-5 md:w-[1.5vw]" ></coreproject-icon-play>
+
                                     <div class="flex flex-col items-start gap-1">
                                         <span class="text-sm leading-none md:text-[0.9vw]">Watch</span>
                                         <span class="text-xs font-semibold leading-none text-surface-50 md:text-[0.75vw]">Ep 01</span>
@@ -54,17 +55,17 @@
                             </button>
                             <button type="button" class="btn h-14 w-14 rounded-lg bg-secondary-100 capitalize text-surface-500 md:h-[4vw] md:w-[4vw] md:rounded-[0.625vw] md:text-[0.87vw] md:font-semibold" disabled>
                                 <div class="flex flex-col items-center gap-2 md:gap-[0.68vw]">
-                                    {% include "icons/headphone.html" with class="w-4 md:w-[1.5vw] text-surface-500" %}
+                                    <coreproject-icon-headphone class="w-4 md:w-[1.5vw] text-surface-500"></coreproject-icon-headphone>
                                     <span class="leading-none">listen</span>
                                 </div>
                             </button>
                         </watch-options>
                         <user-options class="mt-3 flex gap-2 md:mt-[0.75vw] md:gap-[0.75vw]">
                             <button type="button" aria-label="video" class="btn btn-warning w-7 h-7 rounded p-0 md:w-[2vw] md:h-[2vw] md:rounded-[0.25vw] min-h-full">
-                                {% include "icons/record.html" with class="w-4 md:w-[1.125vw]" %}
+                              <coreproject-icon-record class="w-4 md:w-[1.125vw]"></coreproject-icon-record>
                             </button>
                             <button type="button" aria-label="video" class="btn btn-warning w-7 h-7 rounded p-0 md:w-[2vw] md:h-[2vw] md:rounded-[0.25vw] min-h-full">
-                                {% include "icons/edit.html" with class="w-4 md:w-[1.125vw]" %}
+                                <coreproject-icon-edit class="w-4 md:w-[1.125vw]" ></coreproject-icon-edit>
                             </button>
                             <button type="button" aria-label="video" class="btn btn-warning w-7 h-7 rounded p-0 md:w-[2vw] md:h-[2vw] md:rounded-[0.25vw] min-h-full">
                                 <coreproject-icon-download class="w-4 md:w-[1.125vw]"></coreproject-icon-download>
@@ -238,7 +239,8 @@
                                 <span class="text-sm font-semibold text-surface-50">comments</span>
                             </p>
                             <button class="btn btn-icon h-7 w-auto rounded bg-surface-400 p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]" aria-label="Filter">
-                                {% include "icons/filter.html" with class="w-3 md:w-[1vw]" %}
+                                                           <coreproject-icon-filter class="w-3 md:w-[1vw]"></coreproject-icon-filter >
+
                             </button>
                         </div>
                         <div class="md:mt-[1vw]">
@@ -272,7 +274,8 @@
                                     Create New
                                 </button>
                                 <button class="btn btn-secondary min-h-full h-7 w-auto rounded bg-surface-400 p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]" aria-label="Filter">
-                                    {% include "icons/filter.html" with class="w-3 md:w-[1vw]" %}
+                                                                <coreproject-icon-filter class="w-3 md:w-[1vw]"></coreproject-icon-filter >
+
                                 </button>
                             </forum-options>
                         </forum-details>
@@ -374,13 +377,15 @@
                         </ratings>
                         <span class="font-bold leading-none md:text-[0.95vw]">92%</span>
                         <button class="btn btn-secondary min-h-full p-[0.3vw] text-surface-500 md:w-[1.375vw] md:h-[1.375vw] md:rounded-[0.19vw]">
-                            {% include "icons/edit.html" with class="w-[0.75vw]" %}
+                                                            <coreproject-icon-edit class="w-[0.75vw]" ></coreproject-icon-edit>
+
                         </button>
                     </div>
                 </star-rating>
                 <button class="btn !bg-transparent border-none min-h-full h-min w-max flex items-center gap-[0.5vw] p-0 md:text-[0.8vw]">
                     Add a review
-                    {% include "icons/edit.html" with class="w-[0.8vw]" %}
+                                                                                <coreproject-icon-edit class="w-[0.8vw]" ></coreproject-icon-edit>
+
                 </button>
             </anime-ratings>
             <more-infos-header class="flex gap-[0.75vw] md:mt-[6vw]">

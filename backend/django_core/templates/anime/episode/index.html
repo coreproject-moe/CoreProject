@@ -7,19 +7,19 @@
                 </div>
             </player>
             <video-player-options class="flex flex-col gap-2 px-5 md:flex-row md:items-center md:justify-between md:gap-0 md:p-0">
-                <preferences class="flex gap-2 md:items-center md:gap-[1vw]">
-                    <sub-dub class="hidden items-center gap-[0.75vw] md:flex">
+                <div class="flex gap-2 md:items-center md:gap-[1vw]">
+                    <div class="hidden items-center gap-[0.75vw] md:flex">
                         <span class="text-[1vw] font-semibold uppercase" data-svelte-h="svelte-dszpe2">sub/dub:</span>
                         <button class="btn !bg-transparent min-h-full flex items-center gap-[0.5vw] rounded-[0.35vw] px-[0.75vw] py-[0.5vw] text-[1vw] leading-none">Vidstreaming (sub) <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-[1vw]">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
                             </svg>
                         </button>
-                    </sub-dub>
+                    </div>
                     <button class="btn !bg-transparent min-h-full hidden items-center p-0 text-xs leading-none md:flex md:text-[0.9vw]">
                         <span>Lights:</span>
                         <status class="font-semibold text-primary-300" data-svelte-h="svelte-ajl8jh">Off</status>
                     </button>
-                </preferences>
+                </div>
                 <div class="flex w-full items-center justify-between md:w-auto">
                     <sub-dub class="flex items-center gap-2 md:hidden">
                         <span class="text-xs font-semibold uppercase" data-svelte-h="svelte-65wj7">sub/dub:</span>
@@ -108,7 +108,8 @@
                     </div>
                     <overlay class="absolute inset-0 flex items-center justify-center bg-secondary/50">
                         <play class="rounded-full bg-secondary/75 md:p-[1vw]">
-                            {% include "icons/play.html" with class="md:w-[1.25vw] text-white" %}
+                                <coreproject-icon-play class="md:w-[1.25vw] text-white" ></coreproject-icon-play>
+
                         </play>
                     </overlay>
                 </episode-cover>
@@ -169,7 +170,7 @@
                         </coreproject-markdown>
                         <options class="mt-2 flex items-center gap-3 md:mt-[0.5vw] md:gap-[0.75vw]">
                             <button class="btn !bg-transparent p-0">
-                                {% include "icons/like.html" with class="w-3 text-surface-300 md:w-[1vw]" %}
+                            <coreproject-icon-like class="w-3 text-surface-300 md:w-[1vw]"></coreproject-icon-like>
                                 <likes class="text-xs md:text-[0.75vw]">106</likes>
                             </button>
                             <button class="btn !bg-transparent p-0 text-xs uppercase text-surface-50 md:text-[0.8vw]">Replay</button>
@@ -197,7 +198,7 @@
                             Create New
                         </button>
                         <button class="btn btn-secondary min-h-full h-7 w-auto rounded bg-surface-400 p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]" aria-label="Filter">
-                            {% include "icons/filter.html" with class="w-3 md:w-[1vw]" %}
+                            <coreproject-icon-filter class="w-3 md:w-[1vw]"></coreproject-icon-filter >
                         </button>
                     </forum-options>
                 </forum-details>

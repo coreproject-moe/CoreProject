@@ -98,13 +98,13 @@
                 class="btn btn-primary text-accent min-h-max p-0 absolute -left-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] md:flex"
                 _="on click send hyperscript:slide_prev to <slider/>"
             >
-                <coreproject-icon-chevron class="w-[1.25vw] rotate-90"></coreproject-icon-chevron>
+                <coreproject-icon-chevron class="w-[1.25vw] rotate-45"></coreproject-icon-chevron>
             </button>
             <button
                 class="btn btn-primary text-accent min-h-max p-0 absolute -right-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] bg-secondary-800 md:flex"
                 _="on click send hyperscript:slide_next to <slider/>"
             >
-                <coreproject-icon-chevron class="w-[1.25vw] -rotate-90"></coreproject-icon-chevron>
+                <coreproject-icon-chevron class="w-[1.25vw] -rotate-45"></coreproject-icon-chevron>
 
             </button>
         </latest-animes-slider>
@@ -172,7 +172,7 @@
                                 </episode-dates>
                             </div>
                             <a href="/anime/mal/1/episode/6" class="btn btn-warning btn-square min-h-max rounded-full text-secondary p-0">
-                                {% include "icons/play.html" with class="w-[1vw]" %}
+                                <coreproject-icon-play class="w-[1vw]"></coreproject-icon-play>
                             </a>
                         </episode-info>
 
@@ -235,13 +235,13 @@
                     </div>
                     <div class="flex items-center gap-[1vw]">
                         <button class="btn btn-warning min-h-max h-[2.5vw] w-[2.5vw] rounded-[0.375vw] bg-surface-50 p-0">
-                            {% include "icons/recent.html" with class="text-surface-900 w-[1.25vw]" %}
+                            <coreproject-icon-recent class="text-surface-900 w-[1.25vw]"></coreproject-icon-recent>
                         </button>
                         <span class="text-[1vw] font-bold">Last watched anime</span>
                     </div>
                     <div class="flex items-center gap-[1vw]">
                         <button class="btn btn-warning min-h-max h-[2.5vw] w-[2.5vw] rounded-[0.375vw] bg-surface-50 p-0">
-                            {% include "icons/notifications.html" with class="text-surface-900 w-[1.25vw]" %}
+                        <coreproject-icon-notification class="text-surface-900 w-[1.25vw]"></coreproject-icon-notification >
                         </button>
                         <span class="text-[1vw] font-bold">Notifications</span>
                     </div>
@@ -250,13 +250,14 @@
                     <span class="text-[0.9vw] font-semibold leading-none">More</span>
                     <div class="mt-[0.75vw] flex gap-[0.9375vw]">
                         <button class="btn btn-accent min-h-max h-[2.5vw] w-[2.5vw] rounded-[0.375vw] p-0">
-                            {% include "icons/language.html" with class="text-surface-900 w-[1.25vw]" %}
+                            <coreproject-icon-language class="text-surface-900 w-[1.25vw]" ></coreproject-icon-language >
+
                         </button>
                         <button class="btn btn-accent min-h-max h-[2.5vw] w-[2.5vw] rounded-[0.375vw] p-0">
-                            {% include "icons/preferences.html" with class="text-surface-900 w-[1.25vw]" %}
+                            <coreproject-icon-preference class="text-surface-900 w-[1.25vw]" ></coreproject-icon-play>
                         </button>
                         <button class="btn btn-accent min-h-max h-[2.5vw] w-[2.5vw] rounded-[0.375vw] p-0">
-                            {% include "icons/moon.html" with class="text-surface-900 w-[1.25vw]" %}
+                        <coreproject-icon-moon class="text-surface-900 w-[1.25vw]" ></coreproject-icon-moon>
                         </button>
                         <button class="btn btn-accent min-h-max h-[2.5vw] w-[2.5vw] rounded-[0.375vw] bg-surface-50 p-0">
                             {% include "icons/settings.html" with class="text-surface-900 w-[1.25vw]" %}

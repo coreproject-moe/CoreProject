@@ -50,11 +50,12 @@
 
                 <div class="mt-5 flex justify-between md:mt-0 md:justify-start md:gap-[3vw]">
                     <button class="btn !bg-transparent min-h-full flex gap-3 p-0 text-base font-semibold leading-none text-surface-50 md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw] capitalize">
-                        {% include "icons/edit.html" with class="w-4 md:w-[1vw]" %}
+                                                                                                        <coreproject-icon-edit class="w-4 md:w-[1vw]" ></coreproject-icon-edit>
+
                         <span>Rename</span>
                     </button>
                     <button class="btn !bg-transparent min-h-full flex gap-3 p-0 text-base font-semibold leading-none text-surface-50 md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw] capitalize">
-                        {% include "icons/edit.html" with class="w-4 md:w-[1vw]" %}
+                            <coreproject-icon-edit class="w-4 md:w-[1vw]" ></coreproject-icon-edit>
                         <span>Edit Details</span>
                     </button>
                     <button class="btn !bg-transparent min-h-full flex gap-3 p-0 text-base font-semibold leading-none text-surface-50 md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw] capitalize">
@@ -136,7 +137,7 @@
                 </table>
             </uploads-table>
             <empty-ui class="flex w-full flex-col items-center justify-center md:flex-row md:gap-[2vw]">
-                {% include "icons/empty.html" with class="w-32 stroke-accent stroke-[0.15vw] md:w-[10vw] md:stroke-accent/50" %}
+                <coreproject-icon-empty class="w-32 stroke-accent stroke-[0.15vw] md:w-[10vw] md:stroke-accent/50"></coreproject-icon-empty>
                 <div class="flex flex-col items-center gap-2 md:items-start md:gap-[0.75vw]">
                     <span class="text-base font-semibold leading-none text-accent md:text-[1.4vw]">Empty!</span>
                     <span class="text-sm leading-none text-accent/50 md:text-[1.1vw]">Upload something to make kokoro-chan happy</span>
