@@ -43,9 +43,11 @@ import Refresh from "./Refresh/Index.svelte";
 import Star from "./Star/Index.svelte";
 import Strike from "./Strike/Index.svelte";
 import Tick from "./Tick/Index.svelte";
+import TrendingArrow from "./TrendingArrow/Index.svelte";
 import Settings from "./Settings/Index.svelte";
 import Share from "./Share/Index.svelte";
 import Underline from "./Underline/Index.svelte";
+import Upload from "./Upload/Index.svelte";
 
 const icon_map = {
     "arrow-up-right": ArrowUpRight,
@@ -90,7 +92,9 @@ const icon_map = {
     settings: Settings,
     strike: Strike,
     tick: Tick,
-    underline: Underline
+    "trending-arrow": TrendingArrow,
+    underline: Underline,
+    upload: Upload
 };
 
 // Register Icons
