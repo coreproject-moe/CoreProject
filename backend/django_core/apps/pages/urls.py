@@ -1,4 +1,4 @@
-from django.urls import include, path
+from django.urls import include, path, re_path
 
 from .views.anime import (
     anime_episode_view,
@@ -25,8 +25,8 @@ urlpatterns = [
                 ),
                 path("explore/", anime_explore_view, name="anime_explore_view"),
                 # Anime Mal pages
-                path(
-                    "mal/",
+                re_path(
+                    r"(mal|myanimelist)/",
                     include(
                         [
                             path("<int:pk>/", anime_info_view, name="anime_info_view"),
