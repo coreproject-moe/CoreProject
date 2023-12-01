@@ -13,13 +13,25 @@ import Star from "./Star/Index.svelte";
 import Strike from "./Strike/Index.svelte";
 import Underline from "./Underline/Index.svelte";
 
-const icon_array = [Bold, Circle, Code, Dot, Hyperlink, Info, Italic, Play, Star, Strike, Underline];
+const icon_map = {
+    bold: Bold,
+    circle: Circle,
+    code: Code,
+    dot: Dot,
+    hyperlink: Hyperlink,
+    info: Info,
+    italic: Italic,
+    play: Play,
+    star: Star,
+    strike: Strike,
+    underline: Underline
+};
 
 // Register Icons
-icon_array.forEach((item) => {
+Object.entries(icon_map).forEach((item) => {
     svelteRetag({
-        component: item,
-        tagname: `coreproject-icon-${String(item)}`,
+        component: item[1],
+        tagname: `coreproject-icon-${item[0]}`,
         attributes: ["class", "style"],
         shadow: false,
         hydratable: true
