@@ -984,13 +984,13 @@ sidecar = ["drf-spectacular-sidecar"]
 
 [[package]]
 name = "drf-spectacular-sidecar"
-version = "2023.10.1"
+version = "2023.12.1"
 description = "Serve self-contained distribution builds of Swagger UI and Redoc with Django"
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "drf-spectacular-sidecar-2023.10.1.tar.gz", hash = "sha256:546a83c173589715e530fad211af60cbcda2db54eb9e0935d44251639332af6d"},
-    {file = "drf_spectacular_sidecar-2023.10.1-py3-none-any.whl", hash = "sha256:3d042a6772512f4d238f0385d3430acf5f669f595fd0be2641fe6bbfb4c7b376"},
+    {file = "drf-spectacular-sidecar-2023.12.1.tar.gz", hash = "sha256:179422fd79db83774ccb177dc5ca22822691353f509343782ed8b941fd37b96d"},
+    {file = "drf_spectacular_sidecar-2023.12.1-py3-none-any.whl", hash = "sha256:65ac53674377691636722ec1a9b71f12203b483a90ae5f1afc5d216269eb299a"},
 ]
 
 [package.dependencies]
