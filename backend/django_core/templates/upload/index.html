@@ -19,7 +19,7 @@
                 </div>
             </upload-progress>
             <upload-input class="col-span-12 md:col-span-5 bg-neutral md:rounded-[0.75vw] cursor-pointer flex items-center justify-center flex-col md:gap-[0.25vw] md:h-[12vw]">
-                {% include "icons/upload.html" with class="md:w-[2vw] text-white" %}
+                <coreproject-icon-upload class="md:w-[2vw] text-white"></coreproject-icon-upload>
                 <span class="font-semibold md:text-[1.1vw] md:mt-[1vw]">Drag and Drop files</span>
                 <div class="divider md:px-[10vw] before:bg-accent/25 after:bg-accent/25 m-0 md:text-[0.9vw] md:before:h-[0.15vw] md:after:h-[0.15vw]">Or</div>
                 <span class="font-semibold md:text-[1.1vw]">Browse</span>
@@ -34,7 +34,7 @@
                             class="absolute left-2 p-0 md:left-[1vw]"
                             aria-label="Search"
                         >
-                            {% include "icons/search.html" with class="md:w-[1.25vw] opacity-75" %}
+                            <coreproject-icon-search   class="md:w-[1.25vw] opacity-75"  ></coreproject-icon-search>
                         </button>
                         <input
                             type="text"
@@ -50,12 +50,12 @@
 
                 <div class="mt-5 flex justify-between md:mt-0 md:justify-start md:gap-[3vw]">
                     <button class="btn !bg-transparent min-h-full flex gap-3 p-0 text-base font-semibold leading-none text-surface-50 md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw] capitalize">
-                                                                                                        <coreproject-icon-edit class="w-4 md:w-[1vw]" ></coreproject-icon-edit>
+                        <coreproject-icon-edit class="w-4 md:w-[1vw]" ></coreproject-icon-edit>
 
                         <span>Rename</span>
                     </button>
                     <button class="btn !bg-transparent min-h-full flex gap-3 p-0 text-base font-semibold leading-none text-surface-50 md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw] capitalize">
-                            <coreproject-icon-edit class="w-4 md:w-[1vw]" ></coreproject-icon-edit>
+                        <coreproject-icon-edit class="w-4 md:w-[1vw]" ></coreproject-icon-edit>
                         <span>Edit Details</span>
                     </button>
                     <button class="btn !bg-transparent min-h-full flex gap-3 p-0 text-base font-semibold leading-none text-surface-50 md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw] capitalize">
@@ -79,11 +79,11 @@
                                 <div class="flex items-center md:gap-[0.5vw]">
                                     <span class="capitalize">name</span>
                                     <button class="btn !bg-transparent min-h-full p-0">
-                                                <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
+                                        <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
 
                                     </button>
                                     <button class="btn !bg-transparent min-h-full p-0">
-                                                    <coreproject-icon-chevron class="rotate-180 opacity-50 md:w-[1vw]"></coreproject-icon-chevron>
+                                        <coreproject-icon-chevron class="rotate-180 opacity-50 md:w-[1vw]"></coreproject-icon-chevron>
 
                                     </button>
                                 </div>
@@ -92,23 +92,23 @@
                                 <div class="flex items-center md:gap-[0.5vw]">
                                     <span class="capitalize">type</span>
                                     <button class="btn !bg-transparent min-h-full p-0">
-                                                                                        <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
+                                        <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
 
                                     </button>
                                     <button class="btn !bg-transparent min-h-full p-0">
-                                                    <coreproject-icon-chevron class=""rotate-180 opacity-50 md:w-[1vw]"></coreproject-icon-chevron>
-                                    </button>
-                                </div>
-                            </th>
-                            <th>
-                                <div class="flex items-center md:gap-[0.5vw]">
-                                    <span class="capitalize">date modified</span>
-                                    <button class="btn !bg-transparent min-h-full p-0">
-                                                                                        <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
+                                        <coreproject-icon-chevron class=""rotate-180 opacity-50 md:w-[1vw]"></coreproject-icon-chevron>
+                                                                                                           </button>
+                                                                                                           </div>
+                                                                                                           </th>
+                                                                                                           <th>
+                                                                                                           <div class="flex items-center md:gap-[0.5vw]">
+                                                                                                                                               <span class="capitalize">date modified</span>
+                                                                                                                              <button class="btn !bg-transparent min-h-full p-0">
+                                                                                                                                                        <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
 
-                                    </button>
-                                    <button class="btn !bg-transparent min-h-full p-0">
-                                                    <coreproject-icon-chevron class=""rotate-180 opacity-50 md:w-[1vw]"></coreproject-icon-chevron>
+                                                                                                                                                                                                   </button>
+                                                                                                                                                                                                   <button class="btn !bg-transparent min-h-full p-0">
+                                                                                                                                                        <coreproject-icon-chevron class=""rotate-180 opacity-50 md:w-[1vw]"></coreproject-icon-chevron>
                                     </button>
                                 </div>
                             </th>
@@ -116,33 +116,33 @@
                                 <div class="flex items-center md:gap-[0.5vw]">
                                     <span class="capitalize">size</span>
                                     <button class="btn !bg-transparent min-h-full p-0">
-                                                                                        <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
+                                        <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
 
                                     </button>
                                     <button class="btn !bg-transparent min-h-full p-0">
-                                                    <coreproject-icon-chevron class=""rotate-180 opacity-50 md:w-[1vw]"></coreproject-icon-chevron>
-                                    </button>
-                                </div>
-                            </th>
-                        </tr>
-                    </thead>
-                    <!-- spacing -->
-                    <tbody>
-                        <tr>
-                            <td class="h-5 md:h-[1vw]" />
-                        </tr>
-                    </tbody>
-                    <!-- spacing -->
-                    <tbody></tbody>
-                </table>
-            </uploads-table>
-            <empty-ui class="flex w-full flex-col items-center justify-center md:flex-row md:gap-[2vw]">
-                <coreproject-icon-empty class="w-32 stroke-accent stroke-[0.15vw] md:w-[10vw] md:stroke-accent/50"></coreproject-icon-empty>
-                <div class="flex flex-col items-center gap-2 md:items-start md:gap-[0.75vw]">
-                    <span class="text-base font-semibold leading-none text-accent md:text-[1.4vw]">Empty!</span>
-                    <span class="text-sm leading-none text-accent/50 md:text-[1.1vw]">Upload something to make kokoro-chan happy</span>
-                </div>
-            </empty-ui>
-        </uploads>
-    </container>
-{% endblock %}
+                                        <coreproject-icon-chevron class=""rotate-180 opacity-50 md:w-[1vw]"></coreproject-icon-chevron>
+                                                                                                           </button>
+                                                                                                           </div>
+                                                                                                           </th>
+                                                                                                           </tr>
+                                                                                                           </thead>
+                                                                                                           <!-- spacing -->
+                                                                                                           <tbody>
+                                                                                                           <tr>
+                                                                                                           <td class="h-5 md:h-[1vw]" />
+                                                                                                                        </tr>
+                                                                                                                        </tbody>
+                                                                                                                        <!-- spacing -->
+                                                                                                                        <tbody></tbody>
+                                                                                                                        </table>
+                                                                                                                        </uploads-table>
+                                                                                                                        <empty-ui class="flex w-full flex-col items-center justify-center md:flex-row md:gap-[2vw]">
+                                                                                                                                                                         <coreproject-icon-empty class="w-32 stroke-accent stroke-[0.15vw] md:w-[10vw] md:stroke-accent/50"></coreproject-icon-empty>
+                                                                                                                                                                                    <div class="flex flex-col items-center gap-2 md:items-start md:gap-[0.75vw]">
+                                                                                                                                                              <span class="text-base font-semibold leading-none text-accent md:text-[1.4vw]">Empty!</span>
+                                                                                                                                                                    <span class="text-sm leading-none text-accent/50 md:text-[1.1vw]">Upload something to make kokoro-chan happy</span>
+                                                                                                                                                       </div>
+                                                                                                                                                       </empty-ui>
+                                                                                                                                                       </uploads>
+                                                                                                                                                       </container>
+                                                                                                               {% endblock %}

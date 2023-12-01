@@ -113,7 +113,8 @@
                 <header-title class="flex items-center gap-[0.625vw]">
                     <span class="text-[1.25vw] font-bold">Latest Episodes</span>
                     <button class="btn btn-secondary hidden rounded-[0.1875vw] p-0 md:flex md:h-[1.5vw] md:w-[1.5vw] min-h-full">
-                        {% include "icons/settings.html" with class="w-[0.9vw] opacity-75" %}
+                        <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+
                     </button>
                 </header-title>
                 <button class="btn btn-neutral rounded-[0.3vw] text-[0.9vw] font-semibold p-0 min-h-max md:h-[2vw] md:px-[0.5vw]">
@@ -229,7 +230,7 @@
                 <navigation-left-buttons class="mt-[1vw] flex flex-col gap-[0.75vw]">
                     <div class="flex items-center gap-[1vw]">
                         <button class="btn btn-warning min-h-max h-[2.5vw] w-[2.5vw] rounded-[0.375vw] p-0">
-                               <coreproject-icon-chat class="text-surface-900 w-[1.25vw]"> </coreproject-icon-chat>
+                            <coreproject-icon-chat class="text-surface-900 w-[1.25vw]"> </coreproject-icon-chat>
                         </button>
                         <span class="text-[1vw] font-bold">Forums</span>
                     </div>
@@ -241,7 +242,7 @@
                     </div>
                     <div class="flex items-center gap-[1vw]">
                         <button class="btn btn-warning min-h-max h-[2.5vw] w-[2.5vw] rounded-[0.375vw] bg-surface-50 p-0">
-                        <coreproject-icon-notification class="text-surface-900 w-[1.25vw]"></coreproject-icon-notification >
+                            <coreproject-icon-notification class="text-surface-900 w-[1.25vw]"></coreproject-icon-notification >
                         </button>
                         <span class="text-[1vw] font-bold">Notifications</span>
                     </div>
@@ -257,10 +258,10 @@
                             <coreproject-icon-preference class="text-surface-900 w-[1.25vw]" ></coreproject-icon-play>
                         </button>
                         <button class="btn btn-accent min-h-max h-[2.5vw] w-[2.5vw] rounded-[0.375vw] p-0">
-                        <coreproject-icon-moon class="text-surface-900 w-[1.25vw]" ></coreproject-icon-moon>
+                            <coreproject-icon-moon class="text-surface-900 w-[1.25vw]" ></coreproject-icon-moon>
                         </button>
                         <button class="btn btn-accent min-h-max h-[2.5vw] w-[2.5vw] rounded-[0.375vw] bg-surface-50 p-0">
-                            {% include "icons/settings.html" with class="text-surface-900 w-[1.25vw]" %}
+                            <coreproject-icon-settings class="text-surface-900 w-[1.25vw]" ></coreproject-icon-settings>
                         </button>
                     </div>
                 </navigation-right-buttons>
@@ -272,7 +273,8 @@
         <section-header class="flex items-center gap-[0.625vw]">
             <header-title class="text-lg font-bold md:text-[1.25vw]">My List</header-title>
             <button class="btn btn-secondary hidden rounded-[0.1875vw] p-0 md:flex md:h-[1.5vw] md:w-[1.5vw] min-h-full">
-                {% include "icons/settings.html" with class="w-[0.9vw] opacity-75" %}
+                <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+
             </button>
         </section-header>
         <my-list-info class="flex items-center justify-between">
