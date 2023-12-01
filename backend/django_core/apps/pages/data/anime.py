@@ -25,8 +25,7 @@ icons = [
         "label": "schedule",
     },
     {
-        "html": "icons/chat.html",
-        "class": "w-[1.25vw]",
+        "icon": '<coreproject-icon-chat class="w-[1.25vw]"> </coreproject-icon-chat>',
         "href": "/anime/forum",
         "label": "forum",
     },

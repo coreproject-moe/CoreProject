@@ -8,6 +8,7 @@ import ArrowUpRight from "./ArrowUpRight/Index.svelte";
 import Bold from "./Bold/Index.svelte";
 import Book from "./Book/Index.svelte";
 import Calender from "./Calender/Index.svelte";
+import Chat from "./Chat/Index.svelte";
 import Circle from "./Circle/Index.svelte";
 import Code from "./Code/Index.svelte";
 import Dot from "./Dot/Index.svelte";
@@ -25,6 +26,7 @@ const icon_map: Record<string, ComponentType> = {
     bold: Bold,
     book: Book,
     calender: Calender,
+    chat: Chat,
     circle: Circle,
     code: Code,
     dot: Dot,
