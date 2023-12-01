@@ -18,6 +18,7 @@ import Cross from "./Cross/Index.svelte";
 import Circle from "./Circle/Index.svelte";
 import Code from "./Code/Index.svelte";
 import Delete from "./Delete/Index.svelte";
+import DoubleArrow from "./DoubleArrow/Index.svelte";
 import Dot from "./Dot/Index.svelte";
 import Hyperlink from "./Hyperlink/Index.svelte";
 import Info from "./Info/Index.svelte";
@@ -43,6 +44,7 @@ const icon_map: Record<string, ComponentType> = {
     "coreproject-text": CoreProjectText,
     coreproject: CoreProject,
     delete: Delete,
+    "double-arrow": DoubleArrow,
     dot: Dot,
     hyperlink: Hyperlink,
     info: Info,
