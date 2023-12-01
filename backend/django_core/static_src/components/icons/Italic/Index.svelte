@@ -1,7 +1,7 @@
 <script lang="ts">
-    let klass: string;
+    let klass = "";
     export { klass as class };
-    export let style: string;
+    export let style = "";
 </script>
 
 <svg

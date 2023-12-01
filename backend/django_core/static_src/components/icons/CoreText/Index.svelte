@@ -1,9 +1,9 @@
 <script lang="ts">
     import { cn } from "$functions/classname";
 
-    let klass: string;
+    let klass = "";
     export { klass as class };
-    export let style: string;
+    export let style = "";
 </script>
 
 <p
