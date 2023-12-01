@@ -901,13 +901,13 @@ reload = ["django-browser-reload (>=1.6.0,<2.0.0)"]
 
 [[package]]
 name = "django-vite"
-version = "3.0.0"
+version = "3.0.1"
 description = "Integration of Vite in a Django project."
 optional = false
 python-versions = "*"
 files = [
-    {file = "django-vite-3.0.0.tar.gz", hash = "sha256:a2326f14d7aeba29e2db5ac4bcf27b0437810590d25f1b99a7fd20c5d1d312a2"},
-    {file = "django_vite-3.0.0-py3-none-any.whl", hash = "sha256:01407f806590872735f4ed87c79684e063942dba51838fc13f9056ebff10940c"},
+    {file = "django-vite-3.0.1.tar.gz", hash = "sha256:698977de63124305b0e3cf4afae5f0ffaa5ef041a336b1586b19579787dacb63"},
+    {file = "django_vite-3.0.1-py3-none-any.whl", hash = "sha256:60fbc743ce8187c545053afec0b8fe7f8e1633619c4e0433ebc4dd4f65d0d038"},
 ]
 
 [package.dependencies]
@@ -2446,4 +2446,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "599be1b6175c784b5c86807d40fbdde5cce287c1bc196c8f84cca190e0634ae9"
+content-hash = "cc9c0446db54c8ee263f6b537329757ad5cb12f1f25ddfdf2b0ee04f9bcddf47"
