@@ -99,7 +99,11 @@
                                                           "
                                                         class="{% if icon.href == request.path %} !text-secondary {% else %} !text-white {% endif %}"
                                                     >
-                                                        {% include icon.html with class=icon.class %}
+                                                        {% if icon.icon %}
+                                                            {{icon.icon|safe}}
+                                                        {% else %}
+                                                            {% include icon.html with class=icon.class %}
+                                                        {% endif %}
                                                     </icon>
 
                                                     <span
