@@ -19,21 +19,21 @@
                         <overlay-gradient class="gradient absolute inset-0 bg-gradient-to-t from-surface-900/75 to-surface-900/25 md:hidden"></overlay-gradient>
                     </anime-banner>
                     <anime-details class="absolute bottom-0 col-span-12 p-5 md:static md:p-0">
-                        <scroll-area class="text-2xl font-bold md:text-[2vw] md:leading-[2.7vw] text-white" parent_class="max-h-48 md:max-h-[10vw]" offset_scrollbar="true">
+                        <coreproject-scroll-area class="text-2xl font-bold md:text-[2vw] md:leading-[2.7vw] text-white" parent_class="max-h-48 md:max-h-[10vw]" offset_scrollbar="true">
                             {{ anime.name }}
-                        </scroll-area>
+                        </coreproject-scroll-area>
                         <anime-japanese-name class="flex flex-wrap gap-x-2 pt-2 text-xs font-semibold uppercase tracking-wider md:gap-x-[0.25vw] md:pt-[0.625vw] md:text-[0.75vw] md:leading-[0.9vw]">
                             {{ anime.japanese_name }}
                         </anime-japanese-name>
                         <anime-other-infos class="mt-1 flex flex-wrap items-center gap-2 text-xs font-semibold md:mt-[0.25vw] md:gap-[0.5vw] md:pt-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
                             <span>TV</span>
-                            {% include "icons/dot.html" with class="w-[0.35rem] opacity-75" %}
+                            <coreproject-icon-dot class='w-[0.35rem] opacity-75' ></coreproject-icon-dot>
                             <span>{{ anime.episodes_count }} eps</span>
-                            {% include "icons/dot.html" with class="w-[0.35rem] opacity-75" %}
+                            <coreproject-icon-dot class='w-[0.35rem] opacity-75' ></coreproject-icon-dot>
                             <span>Completed</span>
-                            {% include "icons/dot.html" with class="w-[0.35rem] opacity-75" %}
+                            <coreproject-icon-dot class='w-[0.35rem] opacity-75' ></coreproject-icon-dot>
                             <span class="capitalize">spring 2023</span>
-                            {% include "icons/dot.html" with class="w-[0.35rem] opacity-75" %}
+                            <coreproject-icon-dot class='w-[0.35rem] opacity-75' ></coreproject-icon-dot>
                             <span class="uppercase tracking-wider">Kuschio animation</span>
                         </anime-other-infos>
                         <watch-options class="mt-3 flex items-center gap-3 md:mt-[1.5vw] md:gap-[0.75vw]">
@@ -48,7 +48,7 @@
                             </button>
                             <button type="button" class="btn h-14 w-14 rounded-lg bg-secondary-100 capitalize text-surface-500 md:h-[4vw] md:w-[4vw] md:rounded-[0.625vw] md:text-[0.87vw] md:font-semibold" disabled>
                                 <div class="flex flex-col items-center gap-2 md:gap-[0.68vw]">
-                                    {% include "icons/book.html" with class="w-4 md:w-[1.5vw] text-surface-500" %}
+                                    <coreproject-icon-book class='w-4 md:w-[1.5vw] text-surface-500'></coreproject-icon-book>
                                     <span class="leading-none">read</span>
                                 </div>
                             </button>
@@ -82,9 +82,9 @@
                             {% include "icons/settings.html" with class="w-[0.9vw] opacity-75" %}
                         </button>
                     </section-header>
-                    <scroll-area class="text-justify text-xs md:text-[0.8vw] md:leading-[1vw]" parent_class="max-h-40 md:max-h-[10vw]" offset_scrollbar="true" gradient_mask='true'>
+                    <coreproject-scroll-area class="text-justify text-xs md:text-[0.8vw] md:leading-[1vw]" parent_class="max-h-40 md:max-h-[10vw]" offset_scrollbar="true" gradient_mask='true'>
                         {{ anime.synopsis }}
-                    </scroll-area>
+                    </coreproject-scroll-area>
                     <anime-genres class="hidden gap-[0.5vw] text-white md:flex md:text-[0.75vw] md:leading-[0.9vw]">
                         <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Action </span>
                         <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Romance </span>
@@ -128,7 +128,8 @@
                         <p class="flex items-center gap-1 md:gap-[0.75vw]">
                             <span class="text-base font-bold leading-none md:text-[2vw] md:leading-[1.9vw]">23</span>
                             <span class="text-xs font-semibold md:text-[1vw]">episodes</span>
-                            {% include "icons/dot.html" with class="w-[0.4vw] opacity-50" %}
+                            <coreproject-icon-dot class='w-[0.4vw] opacity-50' ></coreproject-icon-dot>
+
                         </p>
                         <available-formats>
                             <div class="flex w-full items-center gap-2 leading-4 md:gap-[1vw] md:leading-[1.5vw]">
@@ -138,7 +139,8 @@
                             <formats class="flex h-5 gap-2 text-[0.5rem] font-bold md:h-[1.8vw] md:gap-[0.5vw] md:text-[0.75vw]">
                                 <span class="flex h-full place-items-center rounded bg-secondary px-2 uppercase leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">sub </span>
                                 <span class="flex h-full place-items-center rounded bg-secondary px-2 uppercase leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">dub </span>
-                                {% include "icons/dot.html" with class="w-[0.4vw] opacity-50" %}
+                                <coreproject-icon-dot class='w-[0.4vw] opacity-50' ></coreproject-icon-dot>
+
                                 <span class="flex h-full place-items-center rounded bg-secondary px-2 leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">1080p </span>
                                 <span class="flex h-full place-items-center rounded bg-secondary px-2 leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">720p </span>
                                 <span class="flex h-full place-items-center rounded bg-secondary px-2 leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">480p </span>
@@ -192,12 +194,12 @@
                                     </p>
                                 </card-info>
                                 <episode-titles class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
-                                    <scroll-area class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]" parent_class="max-h-9 md:max-h-[1.25vw] md:hover:max-h-[9vw] duration-500" offset_scrollbar="true">
+                                    <coreproject-scroll-area class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]" parent_class="max-h-9 md:max-h-[1.25vw] md:hover:max-h-[9vw] duration-500" offset_scrollbar="true">
                                         {{ episode.name }}
-                                    </scroll-area>
-                                    <scroll-area class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]" parent_class="max-h-9 md:max-h-[1.25vw] md:hover:max-h-[9vw] duration-500" offset_scrollbar="true" ?
-                                                 {{ episode.japanese_name }}
-                                                 </scroll-area>
+                                    </coreproject-scroll-area>
+                                    <coreproject-scroll-area class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]" parent_class="max-h-9 md:max-h-[1.25vw] md:hover:max-h-[9vw] duration-500" offset_scrollbar="true" ?
+                                                             {{ episode.japanese_name }}
+                                                             </coreproject-scroll-area>
                                     </episode-titles>
                                     <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.5vw] md:pt-[0.75vw]">
                                         <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
@@ -207,7 +209,7 @@
                                                 </span>
                                             {% endfor %}
                                         </formats>
-                                        {% include "icons/dot.html" with class="w-1 opacity-50 md:w-[0.25vw]" %}
+                                        <coreproject-icon-dot class='w-1 opacity-50 md:w-[0.25vw]' ></coreproject-icon-dot>
                                         <resolutions class="flex gap-2 leading-none md:gap-[0.65vw]">
                                             {% for res in episode.resolutions %}
                                                 <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:text-[0.8vw]">
@@ -238,7 +240,7 @@
                             </button>
                         </div>
                         <div class="md:mt-[1vw]">
-                            <coreproject-commentbox></coreproject-commentbox>
+                            <coreproject-specific-commentbox></coreproject-specific-commentbox>
                         </div>
                         <comments class="mt-10 flex flex-col gap-5 md:mt-[2vw] md:gap-[1.5vw]">
                             <coreproject-comment

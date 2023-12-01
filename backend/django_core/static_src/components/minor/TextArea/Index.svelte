@@ -6,12 +6,12 @@
     import type { SvelteComponent } from "svelte";
     import Markdown from "$components/minor/Markdown/Index.svelte";
     // Icons import
-    import Bold from "$icons/Bold.svelte";
-    import Italic from "$icons/Italic.svelte";
-    import Underline from "$icons/Underline.svelte";
-    import Strike from "$icons/Strike.svelte";
-    import Code from "$icons/Code.svelte";
-    import Hyperlink from "$icons/Hyperlink.svelte";
+    import Bold from "$icons/Bold/Index.svelte";
+    import Italic from "$icons/Italic/Index.svelte";
+    import Underline from "$icons/Underline/Index.svelte";
+    import Strike from "$icons/Strike/Index.svelte";
+    import Code from "$icons/Code/Index.svelte";
+    import Hyperlink from "$icons/Hyperlink/Index.svelte";
 
     let caret_offset_top: string | null = null,
         caret_offset_left: string | null = null;

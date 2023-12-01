@@ -1,5 +1,12 @@
+<script lang="ts">
+    let klass: string;
+    export { klass as class };
+    export let style: string;
+</script>
+
 <svg
-    {% if class %}class='{{ class }}'{% endif %}
+    class={klass}
+    {style}
     viewBox="0 0 16 16"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"

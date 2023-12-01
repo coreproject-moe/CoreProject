@@ -2,7 +2,7 @@
     import TextArea from "$components/minor/TextArea/Index.svelte";
 
     // Icons
-    import Info from "$icons/Info.svelte";
+    import Info from "$icons/Info/Index.svelte";
 
     export const submit_url = "";
 

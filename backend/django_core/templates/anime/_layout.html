@@ -19,7 +19,7 @@
                     <div class="relative flex items-center md:static">
                         <div class="absolute left-1/2 -translate-x-1/2">
                             <a href="/anime" class="hidden md:flex">
-                                {% include 'icons/animecore.html' with  class="w-[10vw]" %}
+                                <coreproject-icon-animecore class="w-[10vw]" ></coreproject-icon-animecore>
                             </a>
                             <search-form>
                                 <form class="relative flex h-12 w-[65vw] items-center md:hidden">
@@ -99,7 +99,11 @@
                                                           "
                                                         class="{% if icon.href == request.path %} !text-secondary {% else %} !text-white {% endif %}"
                                                     >
-                                                        {% include icon.html with class=icon.class %}
+                                                        {% if icon.icon %}
+                                                            {{icon.icon|safe}}
+                                                        {% else %}
+                                                            {% include icon.html with class=icon.class %}
+                                                        {% endif %}
                                                     </icon>
 
                                                     <span

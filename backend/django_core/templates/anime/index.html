@@ -117,7 +117,7 @@
                 </header-title>
                 <button class="btn btn-neutral rounded-[0.3vw] text-[0.9vw] font-semibold p-0 min-h-max md:h-[2vw] md:px-[0.5vw]">
                     <span>Full List</span>
-                    {% include "icons/arrow_up_right.html" with class="w-[1vw]" %}
+                    <coreproject-icon-arrow-up-right class="w-[1vw]"></coreproject-icon-arrow-up-right>
                 </button>
             </section-header>
             {% component_block 'scroll_area' parent_class='mt-[1vw] max-h-[22.25vw] snap-y smooth-scroll md:pr-[1vw]' scroll_area_class='flex flex-col gap-[1vw]' %}
@@ -196,9 +196,9 @@
                                     Thriller
                                 </genre>
                             </genres>
-                            <scroll-area gradient_mask='true' parent_class='md:max-h-[6vw]' class='text-accent md:text-[0.8vw] md:leading-[1vw]'>
+                            <coreproject-scroll-area gradient_mask='true' parent_class='md:max-h-[6vw]' class='text-accent md:text-[0.8vw] md:leading-[1vw]'>
                                 {{ episode.synopsis }}
-                            </scroll-area>
+                            </coreproject-scroll-area>
                         </more-anime-info>
                     </anime-episode>
                 {% endfor %}
@@ -282,7 +282,7 @@
                 </button>
                 <button class="btn btn-neutral min-h-max h-[2.25vw] w-[5.625vw] gap-[0.625vw] rounded-[0.375vw] bg-surface-400 p-0 text-[0.875vw] font-semibold">
                     Full List
-                    {% include "icons/arrow_up_right.html" with class="w-[1vw]" %}
+                    <coreproject-icon-arrow-up-right class="w-[1vw]"></coreproject-icon-arrow-up-right>
                 </button>
             </my-list-options>
             <see-all class="md:hidden">
@@ -294,7 +294,7 @@
         </my-list-info>
         <my-list-animes class="relative mt-4 grid grid-cols-3 gap-3 md:mt-[1vw] md:grid-cols-5 md:gap-[1.25vw]">
             {% for anime in my_list %}
-                <coreproject-my-anime-list dropdown_class='pl-3' anime_name='{{anime.name}}' anime_status="{{anime.status}}" anime_image='{{ anime.image }}' anime_current_episodes="{{ anime.current_ep }}" anime_total_episodes="{{ anime.total_ep }}" anime_description="Azur Lane, a combination of all the different Camps in the world, was once successful in repelling the underwater menace, the Siren. Now splintered, they must face a new threat in Red Axis, former allies who crave to wield this otherworldly Siren technology for their own nefarious desires! Who will be victorious in the never-ending war between these battleship girls!? Akagami no Shirayuki-hime depicts Shirayuki's journey toward a new life at the royal palace of Clarines, as well as Zen's endeavor to become a prince worthy of his title. As loyal friendships are forged and deadly enemies formed, Shirayuki and Zen slowly learn to support each other as they walk their own paths." anime_studio="Bibury Animation Studios" anime_genres='Action,Ecchi,sci-Fi'></coreproject-my-anime-list>
+                <coreproject-specific-my-anime-list dropdown_class='pl-3' anime_name='{{anime.name}}' anime_status="{{anime.status}}" anime_image='{{ anime.image }}' anime_current_episodes="{{ anime.current_ep }}" anime_total_episodes="{{ anime.total_ep }}" anime_description="Azur Lane, a combination of all the different Camps in the world, was once successful in repelling the underwater menace, the Siren. Now splintered, they must face a new threat in Red Axis, former allies who crave to wield this otherworldly Siren technology for their own nefarious desires! Who will be victorious in the never-ending war between these battleship girls!? Akagami no Shirayuki-hime depicts Shirayuki's journey toward a new life at the royal palace of Clarines, as well as Zen's endeavor to become a prince worthy of his title. As loyal friendships are forged and deadly enemies formed, Shirayuki and Zen slowly learn to support each other as they walk their own paths." anime_studio="Bibury Animation Studios" anime_genres='Action,Ecchi,sci-Fi'></coreproject-specific-my-anime-list>
             {% endfor %}
         </my-list-animes>
     </my-list>

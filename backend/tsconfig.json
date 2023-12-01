@@ -18,8 +18,8 @@
         "paths": {
             "$functions": ["./django_core/static_src/functions/"],
             "$functions/*": ["./django_core/static_src/functions/*"],
-            "$icons": ["./django_core/static_src/icons/"],
-            "$icons/*": ["./django_core/static_src/icons/*"],
+            "$icons": ["./django_core/static_src/components/icons/"],
+            "$icons/*": ["./django_core/static_src/components/icons/*"],
             "$components": ["./django_core/static_src/components/"],
             "$components/*": ["./django_core/static_src/components/*"]
         }
