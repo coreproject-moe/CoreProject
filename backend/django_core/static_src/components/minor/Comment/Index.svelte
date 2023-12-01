@@ -1,7 +1,6 @@
 <script lang="ts">
     import { FormatDate } from "$functions/format_date";
-    import { get_preview_html_from_markdown } from "$functions/get_preview_html_from_markdown";
-
+    import Markdown from "$components/minor/Markdown/Index.svelte";
     export let api_url: string;
 
     interface Comment {
@@ -67,9 +66,7 @@
                     <div class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">{new FormatDate(item.created_at).format_to_time_from_now}</div>
                 </a>
                 <div class="text-sm leading-snug text-accent md:text-[1vw] md:leading-[1.5vw]">
-                    {#await get_preview_html_from_markdown(item.text) then html}
-                        {@html html}
-                    {/await}
+                    <Markdown markdown={item.text} />
                 </div>
                 <div class="mt-2 flex items-center gap-3 md:mt-[0.5vw] md:gap-[0.75vw]">
                     <button class="btn !bg-transparent p-0">
