@@ -19,9 +19,9 @@
                         <overlay-gradient class="gradient absolute inset-0 bg-gradient-to-t from-surface-900/75 to-surface-900/25 md:hidden"></overlay-gradient>
                     </anime-banner>
                     <anime-details class="absolute bottom-0 col-span-12 p-5 md:static md:p-0">
-                        <scroll-area class="text-2xl font-bold md:text-[2vw] md:leading-[2.7vw] text-white" parent_class="max-h-48 md:max-h-[10vw]" offset_scrollbar="true">
+                        <coreproject-scroll-area class="text-2xl font-bold md:text-[2vw] md:leading-[2.7vw] text-white" parent_class="max-h-48 md:max-h-[10vw]" offset_scrollbar="true">
                             {{ anime.name }}
-                        </scroll-area>
+                        </coreproject-scroll-area>
                         <anime-japanese-name class="flex flex-wrap gap-x-2 pt-2 text-xs font-semibold uppercase tracking-wider md:gap-x-[0.25vw] md:pt-[0.625vw] md:text-[0.75vw] md:leading-[0.9vw]">
                             {{ anime.japanese_name }}
                         </anime-japanese-name>
@@ -82,9 +82,9 @@
                             {% include "icons/settings.html" with class="w-[0.9vw] opacity-75" %}
                         </button>
                     </section-header>
-                    <scroll-area class="text-justify text-xs md:text-[0.8vw] md:leading-[1vw]" parent_class="max-h-40 md:max-h-[10vw]" offset_scrollbar="true" gradient_mask='true'>
+                    <coreproject-scroll-area class="text-justify text-xs md:text-[0.8vw] md:leading-[1vw]" parent_class="max-h-40 md:max-h-[10vw]" offset_scrollbar="true" gradient_mask='true'>
                         {{ anime.synopsis }}
-                    </scroll-area>
+                    </coreproject-scroll-area>
                     <anime-genres class="hidden gap-[0.5vw] text-white md:flex md:text-[0.75vw] md:leading-[0.9vw]">
                         <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Action </span>
                         <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Romance </span>
@@ -192,12 +192,12 @@
                                     </p>
                                 </card-info>
                                 <episode-titles class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
-                                    <scroll-area class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]" parent_class="max-h-9 md:max-h-[1.25vw] md:hover:max-h-[9vw] duration-500" offset_scrollbar="true">
+                                    <coreproject-scroll-area class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]" parent_class="max-h-9 md:max-h-[1.25vw] md:hover:max-h-[9vw] duration-500" offset_scrollbar="true">
                                         {{ episode.name }}
-                                    </scroll-area>
-                                    <scroll-area class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]" parent_class="max-h-9 md:max-h-[1.25vw] md:hover:max-h-[9vw] duration-500" offset_scrollbar="true" ?
+                                    </coreproject-scroll-area>
+                                    <coreproject-scroll-area class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]" parent_class="max-h-9 md:max-h-[1.25vw] md:hover:max-h-[9vw] duration-500" offset_scrollbar="true" ?
                                                  {{ episode.japanese_name }}
-                                                 </scroll-area>
+                                                 </coreproject-scroll-area>
                                     </episode-titles>
                                     <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.5vw] md:pt-[0.75vw]">
                                         <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
