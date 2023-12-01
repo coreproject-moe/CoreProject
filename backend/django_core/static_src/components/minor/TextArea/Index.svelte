@@ -12,7 +12,6 @@
     import Strike from "$icons/Strike/Index.svelte";
     import Code from "$icons/Code/Index.svelte";
     import Hyperlink from "$icons/Hyperlink/Index.svelte";
-    import { get_preview_html_from_markdown } from "$functions/get_preview_html_from_markdown";
 
     let caret_offset_top: string | null = null,
         caret_offset_left: string | null = null;
@@ -473,7 +472,7 @@
 {:else if active_tab === "preview"}
     <div class="h-28 w-full overflow-y-scroll px-3 text-sm leading-tight md:h-[8vw] md:px-[1vw] md:py-[0.5vw] md:text-[1vw] md:leading-[1.5vw] [&_img]:inline-flex [&_img]:w-[1.25vw]">
         {#if textarea_value}
-            <coreproject-markdown markdown={textarea_value} />
+            <Markdown markdown={textarea_value} />
         {:else}
             Nothing to preview!
         {/if}
