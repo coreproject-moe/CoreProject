@@ -8,8 +8,18 @@ import ArrowUpRight from "./ArrowUpRight/Index.svelte";
 import Bold from "./Bold/Index.svelte";
 import Book from "./Book/Index.svelte";
 import Calender from "./Calender/Index.svelte";
+import Chat from "./Chat/Index.svelte";
+import Chevron from "./Chevron/Index.svelte";
+import Compass from "./Compass/Index.svelte";
+import CoreText from "./CoreText/Index.svelte";
+import CoreProjectText from "./CoreProjectText/Index.svelte";
+import CoreProject from "./CoreProject/Index.svelte";
+import Cross from "./Cross/Index.svelte";
 import Circle from "./Circle/Index.svelte";
 import Code from "./Code/Index.svelte";
+import Delete from "./Delete/Index.svelte";
+import DoubleArrow from "./DoubleArrow/Index.svelte";
+import Download from "./Download/Index.svelte";
 import Dot from "./Dot/Index.svelte";
 import Hyperlink from "./Hyperlink/Index.svelte";
 import Info from "./Info/Index.svelte";
@@ -25,8 +35,18 @@ const icon_map: Record<string, ComponentType> = {
     bold: Bold,
     book: Book,
     calender: Calender,
+    chat: Chat,
+    chevron: Chevron,
     circle: Circle,
     code: Code,
+    compass: Compass,
+    "core-text": CoreText,
+    cross: Cross,
+    "coreproject-text": CoreProjectText,
+    coreproject: CoreProject,
+    delete: Delete,
+    "double-arrow": DoubleArrow,
+    download: Download,
     dot: Dot,
     hyperlink: Hyperlink,
     info: Info,

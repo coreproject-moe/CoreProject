@@ -422,7 +422,10 @@
     }
 </script>
 
-<textarea-navbar class="flex items-center justify-between rounded-t-lg md:rounded-t-[0.75vw]">
+<div
+    role="navigation"
+    class="flex items-center justify-between rounded-t-lg md:rounded-t-[0.75vw]"
+>
     <div class="md:p-[0.25vw] md:pl-[0.3vw]">
         {#each ["edit", "preview"] as tab}
             {@const active = tab === active_tab}
@@ -456,7 +459,7 @@
             </button>
         {/each}
     </div>
-</textarea-navbar>
+</div>
 {#if active_tab === "edit"}
     <textarea
         on:paste={(event) => paste_text(event)}
@@ -479,7 +482,7 @@
     </div>
 {/if}
 
-<footer
+<div
     class="flex items-center gap-[0.25vw] px-4 py-2 text-[0.65rem] font-thin leading-[1.5vw] text-accent md:px-[1vw] md:py-[0.1vw] md:text-[0.75vw]"
     style="align-self: flex-end;"
 >
@@ -489,7 +492,7 @@
     >
         core editor
     </a>
-</footer>
+</div>
 {#if show_emoji_picker && emoji_matches.length > 0}
     <div
         class="absolute flex min-w-[12vw] flex-col divide-y divide-accent/10 overflow-hidden rounded-[0.5vw] bg-neutral text-[1vw] text-accent"

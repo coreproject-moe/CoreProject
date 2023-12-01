@@ -35,7 +35,7 @@ export default defineConfig({
         manifest: true,
         chunkSizeWarningLimit: 2048,
         emptyOutDir: true,
-        target: "es2022",
+        target: "esnext",
         cssTarget: "esnext",
         cssMinify: "lightningcss",
         sourcemap: true,

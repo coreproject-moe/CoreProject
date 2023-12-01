@@ -67,7 +67,7 @@
                                 {% include "icons/edit.html" with class="w-4 md:w-[1.125vw]" %}
                             </button>
                             <button type="button" aria-label="video" class="btn btn-warning w-7 h-7 rounded p-0 md:w-[2vw] md:h-[2vw] md:rounded-[0.25vw] min-h-full">
-                                {% include "icons/download.html" with class="w-4 md:w-[1.125vw]" %}
+                                <coreproject-icon-download class="w-4 md:w-[1.125vw]"></coreproject-icon-download>
                             </button>
                             <button type="button" aria-label="video" class="btn btn-warning w-7 h-7 rounded p-0 md:w-[2vw] md:h-[2vw] md:rounded-[0.25vw] min-h-full">
                                 {% include "icons/share.html" with class="w-4 md:w-[1.125vw]" %}
@@ -99,7 +99,7 @@
                             <span>Status:</span>
                             <button class="btn !bg-transparent border-none min-h-min h-min p-0 leading-none md:text-[0.75vw]">
                                 <span class="font-semibold text-warning">Watching</span>
-                                {% include "icons/chevron.html" with class="w-[0.625vw] text-warning-400" %}
+                                    <coreproject-icon-chevron class="w-[0.625vw] text-warning-400" ></coreproject-icon-chevron>
                             </button>
                         </status>
                         <episodes-count class="flex gap-[0.25vw]">
@@ -110,7 +110,8 @@
                             <span>Your Score:</span>
                             <button class="btn !bg-transparent border-none min-h-min h-min p-0 leading-none md:text-[0.75vw]">
                                 <span class="font-semibold text-warning">Not Rated</span>
-                                {% include "icons/chevron.html" with class="w-[0.625vw] text-warning-400" %}
+                                <coreproject-icon-chevron class="w-[0.625vw] text-warning-400" ></coreproject-icon-chevron>
+
                             </button>
                         </your-scrore>
                     </anime-scores>
@@ -156,14 +157,15 @@
                             <span class="text-[0.65rem] leading-[0.9vw] text-surface-50 transition-colors duration-300 group-hover:text-white md:text-[0.75vw]">Type</span>
                             <button class="btn btn-secondary min-h-full h-7 rounded px-3 text-[0.65rem] font-semibold md:h-[2.5vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.9vw] md:leading-[0.9vw]">
                                 <span>Subbed</span>
-                                {% include "icons/chevron.html" with class="w-3 md:w-[1vw]" %}
+                                                                <coreproject-icon-chevron class="w-3 md:w-[1vw]" ></coreproject-icon-chevron>
+
                             </button>
                         </by-formats>
                         <by-modes class="group hidden flex-col gap-2 md:flex md:gap-[0.5vw]">
                             <span class="text-[0.65rem] leading-[0.9vw] text-surface-50 transition-colors duration-300 group-hover:text-white md:text-[0.75vw]">Display Mode</span>
                             <button class="btn btn-secondary min-h-full h-7 rounded px-3 text-[0.65rem] font-semibold leading-[0.9vw] md:h-[2.5vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.9vw]">
                                 <span>Thumbnails</span>
-                                {% include "icons/chevron.html" with class="w-3 md:w-[1vw]" %}
+                                <coreproject-icon-chevron class="w-3 md:w-[1vw]" ></coreproject-icon-chevron>
                             </button>
                         </by-modes>
                         <button class="btn btn-secondary min-h-max h-7 w-auto rounded bg-surface-400 p-0 font-semibold md:ml-0 md:h-[2.5vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]" aria-label="Search">
@@ -266,7 +268,7 @@
                             </p>
                             <forum-options class="flex items-center gap-2 md:w-full md:justify-between">
                                 <button class="btn btn-secondary min-h-full h-7 gap-2 rounded bg-surface-400 px-2 text-xs font-semibold md:h-[2.4vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.875vw]">
-                                    {% include "icons/cross.html" with class="w-4 rotate-45 md:w-[1vw]" %}
+                                    <coreproject-icon-cross class="w-4 rotate-45 md:w-[1vw]" ></coreproject-icon-cross>
                                     Create New
                                 </button>
                                 <button class="btn btn-secondary min-h-full h-7 w-auto rounded bg-surface-400 p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]" aria-label="Filter">
@@ -293,8 +295,8 @@
                                             </post-author-name>
                                             <post-uploaded-date class="text-surface-50">7 months ago</post-uploaded-date>
                                         </post-user-infos>
-                                        <post-responses class="flex items-center gap-1 md:gap-[0.25vw]">
-                                            {% include "icons/chat.html" with class="w-3 md:w-[1vw]" %}
+                                        <post-responses class="flex items-center gap-1 md:gap-[0.25vw]"> 
+                                            <coreproject-icon-chat class="w-3 md:w-[1vw]"> </coreproject-icon-chat>
                                             <responses-text>69</responses-text>
                                         </post-responses>
                                     </post-infos>
@@ -445,7 +447,8 @@
                         <span class="text-[0.9375vw] text-surface-50">VAs</span>
                         <button class="btn btn-secondary min-h-full mt-[0.3vw] h-[2.25vw] w-[6.625vw] gap-1 rounded-[0.375vw] bg-surface-400 p-0 text-[0.875vw]">
                             Japanese
-                            {% include "icons/chevron.html" with class="w-[1vw]" %}
+                            <coreproject-icon-chevron class="w-[1vw]" ></coreproject-icon-chevron>
+
                         </button>
                     </div>
                     <casts class="mt-[1vw] block">
@@ -468,12 +471,14 @@
                         </casts-cards>
                         <casts-options class="mt-[1vw] flex flex-col">
                             <div class="btn-group">
-                                <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">
-                                    {% include "icons/chevron.html" with class="w-[1vw] rotate-180" %}
+                                <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">\
+                                    <coreproject-icon-chevron class="w-[1vw] rotate-180"></coreproject-icon-chevron>
+
                                 </button>
                                 <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">01</button>
                                 <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">
-                                    {% include "icons/chevron.html" with class="w-[1vw]" %}
+                                            <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
+
                                 </button>
                             </div>
                             <span class="mt-[0.5vw] text-[0.75vw] leading-none text-surface-50">Showing 1-5, out of 58 Voiceover Casts</span>
@@ -509,11 +514,13 @@
                         <recommendations-options class="mt-[1vw] flex flex-col">
                             <div class="btn-group">
                                 <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">
-                                    {% include "icons/chevron.html" with class="w-[1vw] rotate-180" %}
+                                    <coreproject-icon-chevron class="w-[1vw] rotate-180"></coreproject-icon-chevron>
+
                                 </button>
                                 <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">01</button>
                                 <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">
-                                    {% include "icons/chevron.html" with class="w-[1vw]" %}
+                                        <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
+
                                 </button>
                             </div>
                             <span class="mt-[0.5vw] text-[0.75vw] leading-none text-surface-50">Showing 1-8, out of 47 Recommendations</span>
