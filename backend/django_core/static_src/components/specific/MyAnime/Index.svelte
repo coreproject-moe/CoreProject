@@ -16,7 +16,7 @@
     import { cn } from "$functions/classname";
     import Star from "$icons/Star/Index.svelte";
     import Circle from "$icons/Circle/Index.svelte";
-    import Play from "$icons/Play/Inderx.svelte";
+    import Play from "$icons/Play/Index.svelte";
     import Info from "$icons/Info/Index.svelte";
 
     let main_element: HTMLElement;
