@@ -99,7 +99,11 @@
                                                           "
                                                         class="{% if icon.href == request.path %} !text-secondary {% else %} !text-white {% endif %}"
                                                     >
-                                                        {% include icon.html with class=icon.class %}
+                                                        {% if not icon.html %}
+                                                            <coreproject-icon-calender class="w-[1.25vw]"> </coreproject-icon-calender>
+                                                        {% else %}
+                                                            {% include icon.html with class=icon.class %}
+                                                        {% endif %}
                                                     </icon>
 
                                                     <span

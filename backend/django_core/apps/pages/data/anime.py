@@ -20,8 +20,6 @@ icons = [
         "href": "/anime/list/",
     },
     {
-        "html": "icons/calender.html",
-        "class": "w-[1.25vw]",
         "href": "/anime/shedule",
         "label": "schedule",
     },
