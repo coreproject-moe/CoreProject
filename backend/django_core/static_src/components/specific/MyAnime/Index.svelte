@@ -11,13 +11,13 @@
     // Pass styles
     export let dropdown_class: string;
 
-    import Dot from "$icons/Dot.svelte";
+    import Dot from "$icons/Dot/Index.svelte";
     import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
     import { cn } from "$functions/classname";
-    import Star from "$icons/Star.svelte";
-    import Circle from "$icons/Circle.svelte";
-    import Play from "$icons/Play.svelte";
-    import Info from "$icons/Info.svelte";
+    import Star from "$icons/Star/Index.svelte";
+    import Circle from "$icons/Circle/Index.svelte";
+    import Play from "$icons/Play/Inderx.svelte";
+    import Info from "$icons/Info/Index.svelte";
 
     let main_element: HTMLElement;
 
