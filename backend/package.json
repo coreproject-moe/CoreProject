@@ -49,7 +49,7 @@
         "@sveltejs/vite-plugin-svelte": "^3.0.1",
         "lightningcss": "^1.22.1",
         "highlight.js": "^11.9.0",
-        "marked": "^10.0.0",
+        "marked": "^11.0.0",
         "marked-emoji": "^1.3.1",
         "marked-highlight": "^2.0.8",
         "marked-mangle": "^1.1.6",
