@@ -70,7 +70,7 @@ crispy-bootstrap4 = ">=2023.1"
 django-components = ">=0.29"
 django-htmx = ">=1.17.0"
 # Markdown
-django-vite = "^3.0.0"
+django-vite = "^3.0.1"
 
 
 [tool.poetry.group.dev.dependencies]
