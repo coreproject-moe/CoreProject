@@ -3,98 +3,52 @@ import type { ComponentType } from "svelte";
 // @ts-ignore
 import svelteRetag from "svelte-retag";
 
-import AnimeCore from "./AnimeCore/index.svelte";
-import ArrowUpRight from "./ArrowUpRight/Index.svelte";
-import Bold from "./Bold/Index.svelte";
-import Book from "./Book/Index.svelte";
-import Calender from "./Calender/Index.svelte";
-import Chat from "./Chat/Index.svelte";
-import Chevron from "./Chevron/Index.svelte";
-import Compass from "./Compass/Index.svelte";
-import CoreText from "./CoreText/Index.svelte";
-import CoreProjectText from "./CoreProjectText/Index.svelte";
-import CoreProject from "./CoreProject/Index.svelte";
-import Cross from "./Cross/Index.svelte";
-import Circle from "./Circle/Index.svelte";
-import Code from "./Code/Index.svelte";
-import Delete from "./Delete/Index.svelte";
-import DoubleArrow from "./DoubleArrow/Index.svelte";
-import Download from "./Download/Index.svelte";
-import Dot from "./Dot/Index.svelte";
-import Edit from "./Edit/Index.svelte";
-import Empty from "./Empty/Index.svelte";
-import Filter from "./Filter/Index.svelte";
-import Headphone from "./Headphone/Index.svelte";
-import Home from "./Home/Index.svelte";
-import Hyperlink from "./Hyperlink/Index.svelte";
-import Info from "./Info/Index.svelte";
-import Italic from "./Italic/Index.svelte";
-import Language from "./Language/Index.svelte";
-import Like from "./Like/Index.svelte";
-import List from "./List/Index.svelte";
-import Misc from "./Misc/Index.svelte";
-import Moon from "./Moon/Index.svelte";
-import Notification from "./Notification/Index.svelte";
-import Play from "./Play/Index.svelte";
-import Preference from "./Preference/Index.svelte";
-import Recent from "./Recent/Index.svelte";
-import Record from "./Record/Index.svelte";
-import Refresh from "./Refresh/Index.svelte";
-import Star from "./Star/Index.svelte";
-import Strike from "./Strike/Index.svelte";
-import Tick from "./Tick/Index.svelte";
-import TrendingArrow from "./TrendingArrow/Index.svelte";
-import Settings from "./Settings/Index.svelte";
-import Share from "./Share/Index.svelte";
-import Underline from "./Underline/Index.svelte";
-import Upload from "./Upload/Index.svelte";
-
 const icon_map = {
-    "arrow-up-right": ArrowUpRight,
-    animecore: AnimeCore,
-    bold: Bold,
-    book: Book,
-    calender: Calender,
-    chat: Chat,
-    chevron: Chevron,
-    circle: Circle,
-    code: Code,
-    compass: Compass,
-    "core-text": CoreText,
-    cross: Cross,
-    "coreproject-text": CoreProjectText,
-    coreproject: CoreProject,
-    delete: Delete,
-    "double-arrow": DoubleArrow,
-    download: Download,
-    dot: Dot,
-    edit: Edit,
-    empty: Empty,
-    filter: Filter,
-    headphone: Headphone,
-    home: Home,
-    hyperlink: Hyperlink,
-    info: Info,
-    italic: Italic,
-    language: Language,
-    like: Like,
-    list: List,
-    misc: Misc,
-    moon: Moon,
-    notification: Notification,
-    play: Play,
-    preference: Preference,
-    recent: Recent,
-    record: Record,
-    refresh: Refresh,
-    star: Star,
-    share: Share,
-    settings: Settings,
-    strike: Strike,
-    tick: Tick,
-    "trending-arrow": TrendingArrow,
-    underline: Underline,
-    upload: Upload
+    "arrow-up-right": await import("./ArrowUpRight/Index.svelte"),
+    animecore: await import("./AnimeCore/index.svelte"),
+    bold: await import("./Bold/Index.svelte"),
+    book: await import("./Book/Index.svelte"),
+    calender: await import("./Calender/Index.svelte"),
+    chat: await import("./Chat/Index.svelte"),
+    chevron: await import("./Chevron/Index.svelte"),
+    circle: await import("./Circle/Index.svelte"),
+    code: await import("./Code/Index.svelte"),
+    compass: await import("./Compass/Index.svelte"),
+    "core-text": await import("./CoreText/Index.svelte"),
+    cross: await import("./Cross/Index.svelte"),
+    "coreproject-text": await import("./CoreProjectText/Index.svelte"),
+    coreproject: await import("./CoreProject/Index.svelte"),
+    delete: await import("./Delete/Index.svelte"),
+    "double-arrow": await import("./DoubleArrow/Index.svelte"),
+    download: await import("./Download/Index.svelte"),
+    dot: await import("./Dot/Index.svelte"),
+    edit: await import("./Edit/Index.svelte"),
+    empty: await import("./Empty/Index.svelte"),
+    filter: await import("./Filter/Index.svelte"),
+    headphone: await import("./Headphone/Index.svelte"),
+    home: await import("./Home/Index.svelte"),
+    hyperlink: await import("./Hyperlink/Index.svelte"),
+    info: await import("./Info/Index.svelte"),
+    italic: await import("./Italic/Index.svelte"),
+    language: await import("./Language/Index.svelte"),
+    like: await import("./Like/Index.svelte"),
+    list: await import("./List/Index.svelte"),
+    misc: await import("./Misc/Index.svelte"),
+    moon: await import("./Moon/Index.svelte"),
+    notification: await import("./Notification/Index.svelte"),
+    play: await import("./Play/Index.svelte"),
+    preference: await import("./Preference/Index.svelte"),
+    recent: await import("./Recent/Index.svelte"),
+    record: await import("./Record/Index.svelte"),
+    refresh: await import("./Refresh/Index.svelte"),
+    star: await import("./Star/Index.svelte"),
+    share: await import("./Share/Index.svelte"),
+    settings: await import("./Settings/Index.svelte"),
+    strike: await import("./Strike/Index.svelte"),
+    tick: await import("./Tick/Index.svelte"),
+    "trending-arrow": await import("./TrendingArrow/Index.svelte"),
+    underline: await import("./Underline/Index.svelte"),
+    upload: await import("./Upload/Index.svelte")
 };
 
 // Register Icons
