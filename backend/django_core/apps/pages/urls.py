@@ -24,9 +24,8 @@ urlpatterns = [
                     name="anime_home_view_partial_slider_view",
                 ),
                 path("explore/", anime_explore_view, name="anime_explore_view"),
-                # Anime Mal pages
-                re_path(
-                    r"(mal|myanimelist)/",
+                path(
+                    "<str:platform>/",
                     include(
                         [
                             path("<int:pk>/", anime_info_view, name="anime_info_view"),
