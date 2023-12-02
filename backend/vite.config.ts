@@ -38,7 +38,7 @@ export default defineConfig({
         target: "esnext",
         cssTarget: "esnext",
         cssMinify: "lightningcss",
-        sourcemap: true,
+        // sourcemap: true,
         rollupOptions: {
             input: [
                 // Vendor packages

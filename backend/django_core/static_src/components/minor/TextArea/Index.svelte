@@ -20,8 +20,6 @@
     let textarea_element: HTMLTextAreaElement,
         textarea_value = "";
 
-    let preview_element_innerHTML = "";
-
     let emoji_matches: Array<{
             emoji: string;
             keyword: string;
@@ -230,89 +228,89 @@
         }
     }
     // Editor specific functions
-    async function bold_text(element: HTMLTextAreaElement) {
-        await operate_on_selected_text({
-            element: element,
-            starting_operator: "**",
-            ending_operator: "**"
-        });
-    }
-    async function italic_text(element: HTMLTextAreaElement) {
-        await operate_on_selected_text({
-            element: element,
-            starting_operator: "_",
-            ending_operator: "_"
-        });
-    }
-    async function code_text(element: HTMLTextAreaElement) {
-        await operate_on_selected_text({
-            element: element,
-            starting_operator: "`",
-            ending_operator: "`"
-        });
-    }
-    async function underline_text(element: HTMLTextAreaElement) {
-        await operate_on_selected_text({
-            element: element,
-            starting_operator: "<u>",
-            ending_operator: "</u>"
-        });
-    }
-    async function strike_text(element: HTMLTextAreaElement) {
-        await operate_on_selected_text({
-            element: element,
-            starting_operator: "~~",
-            ending_operator: "~~"
-        });
-    }
-    async function hyperlink_text(element: HTMLTextAreaElement) {
-        const selection_start = element.selectionStart,
-            selection_end = element.selectionEnd,
-            selection_text = element.value.substring(selection_start, selection_end);
-
-        // Handle use cases
-        if (element.value.substring(selection_start - 3, selection_start) == "[](" && element.value.substring(selection_end, selection_end + 1) == ")") {
-            /**
-             * [](||) -> ||
-             */
-            element.focus();
-            element.setSelectionRange(selection_start - 3, selection_end + 1);
-            document.execCommand("delete");
-        } else {
-            const replacement_text = `[${selection_text}]()`;
-            await insert_text({
-                target: element,
-                text: element.value.substring(0, selection_start) + replacement_text + element.value.substring(selection_end)
+    const bold_text = async (element: HTMLTextAreaElement) => {
+            await operate_on_selected_text({
+                element: element,
+                starting_operator: "**",
+                ending_operator: "**"
             });
-            element.setSelectionRange(selection_start + selection_text.length + 3, selection_start + selection_text.length + 3);
-        }
-    }
-    async function paste_text(event: ClipboardEvent & { currentTarget: HTMLTextAreaElement }) {
-        event.preventDefault();
-        const element = event.currentTarget;
-
-        const selection_start = element.selectionStart,
-            selection_end = element.selectionEnd,
-            selection_text = element.value.substring(selection_start, selection_end);
-
-        const clipboard_data = event.clipboardData?.getData("text") ?? "",
-            clipboard_data_contains_url = is_valid_url(clipboard_data);
-
-        if (selection_text && clipboard_data_contains_url) {
-            const replacement_text = `[${selection_text}](${clipboard_data})`;
-            await insert_text({
-                target: element,
-                text: element.value.substring(0, selection_start) + replacement_text + element.value.substring(selection_end)
+        },
+        italic_text = async (element: HTMLTextAreaElement) => {
+            await operate_on_selected_text({
+                element: element,
+                starting_operator: "_",
+                ending_operator: "_"
             });
-            element.setSelectionRange(selection_start + replacement_text.length, selection_start + replacement_text.length);
-        } else {
-            const replacement_text = clipboard_data;
-            await insert_text({
-                target: element,
-                text: element.value.substring(0, selection_start) + replacement_text + element.value.substring(selection_end)
+        },
+        code_text = async (element: HTMLTextAreaElement) => {
+            await operate_on_selected_text({
+                element: element,
+                starting_operator: "`",
+                ending_operator: "`"
             });
-        }
-    }
+        },
+        underline_text = async (element: HTMLTextAreaElement) => {
+            await operate_on_selected_text({
+                element: element,
+                starting_operator: "<u>",
+                ending_operator: "</u>"
+            });
+        },
+        strike_text = async (element: HTMLTextAreaElement) => {
+            await operate_on_selected_text({
+                element: element,
+                starting_operator: "~~",
+                ending_operator: "~~"
+            });
+        },
+        hyperlink_text = async (element: HTMLTextAreaElement) => {
+            const selection_start = element.selectionStart,
+                selection_end = element.selectionEnd,
+                selection_text = element.value.substring(selection_start, selection_end);
+
+            // Handle use cases
+            if (element.value.substring(selection_start - 3, selection_start) == "[](" && element.value.substring(selection_end, selection_end + 1) == ")") {
+                /**
+                 * [](||) -> ||
+                 */
+                element.focus();
+                element.setSelectionRange(selection_start - 3, selection_end + 1);
+                document.execCommand("delete");
+            } else {
+                const replacement_text = `[${selection_text}]()`;
+                await insert_text({
+                    target: element,
+                    text: element.value.substring(0, selection_start) + replacement_text + element.value.substring(selection_end)
+                });
+                element.setSelectionRange(selection_start + selection_text.length + 3, selection_start + selection_text.length + 3);
+            }
+        },
+        paste_text = async (event: ClipboardEvent & { currentTarget: HTMLTextAreaElement }) => {
+            event.preventDefault();
+            const element = event.currentTarget;
+
+            const selection_start = element.selectionStart,
+                selection_end = element.selectionEnd,
+                selection_text = element.value.substring(selection_start, selection_end);
+
+            const clipboard_data = event.clipboardData?.getData("text") ?? "",
+                clipboard_data_contains_url = is_valid_url(clipboard_data);
+
+            if (selection_text && clipboard_data_contains_url) {
+                const replacement_text = `[${selection_text}](${clipboard_data})`;
+                await insert_text({
+                    target: element,
+                    text: element.value.substring(0, selection_start) + replacement_text + element.value.substring(selection_end)
+                });
+                element.setSelectionRange(selection_start + replacement_text.length, selection_start + replacement_text.length);
+            } else {
+                const replacement_text = clipboard_data;
+                await insert_text({
+                    target: element,
+                    text: element.value.substring(0, selection_start) + replacement_text + element.value.substring(selection_end)
+                });
+            }
+        };
 
     // Functions
     async function insert_text({ target, text }: { target: HTMLTextAreaElement; text: string }): Promise<void> {
@@ -486,7 +484,8 @@
     class="flex items-center gap-[0.25vw] px-4 py-2 text-[0.65rem] font-thin leading-[1.5vw] text-accent md:px-[1vw] md:py-[0.1vw] md:text-[0.75vw]"
     style="align-self: flex-end;"
 >
-    Learn more about <a
+    Learn more about
+    <a
         class="underline"
         href="/"
     >
