@@ -88,9 +88,9 @@
                     <Star />
                     <span class="text-surface-50 leading-none md:text-[0.8vw]">4.5 rating</span>
                 </rating>
-                <Circle />
+                <Circle class="w-1 md:w-[0.25vw]" />
                 <anime-type>TV</anime-type>
-                <Circle />
+                <Circle class="w-1 md:w-[0.25vw]" />
                 <episodes-count>
                     {anime_total_episodes} episdoes
                 </episodes-count>
