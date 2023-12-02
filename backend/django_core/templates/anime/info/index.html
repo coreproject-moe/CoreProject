@@ -18,7 +18,7 @@
                         />
                         <overlay-gradient class="gradient absolute inset-0 bg-gradient-to-t from-surface-900/75 to-surface-900/25 md:hidden"></overlay-gradient>
                     </anime-banner>
-                    <anime-details class="absolute bottom-0 col-span-12 p-5 md:static md:p-0">
+                    <div class="absolute bottom-0 col-span-12 p-5 md:static md:p-0">
                         <coreproject-scroll-area class="text-2xl font-bold md:text-[2vw] md:leading-[2.7vw] text-white" parent_class="max-h-48 md:max-h-[10vw]" offset_scrollbar="true">
                             {{ anime.name }}
                         </coreproject-scroll-area>
@@ -74,7 +74,7 @@
                                 <coreproject-icon-share class="w-4 md:w-[1.125vw]"></coreproject-icon-share>
 
                             </user-options>
-                        </anime-details>
+                        </div>
                     </anime-titles>
                     <anime-synopsis class="col-span-12 mt-10 md:col-span-5 md:mt-0 flex flex-col gap-[0.75vw]">
                         <section-header class="flex gap-[0.75vw]">
@@ -202,9 +202,9 @@
                                         <coreproject-scroll-area class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]" parent_class="max-h-9 md:max-h-[1.25vw] md:hover:max-h-[9vw] duration-500" offset_scrollbar="true">
                                             {{ episode.name }}
                                         </coreproject-scroll-area>
-                                        <coreproject-scroll-area class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]" parent_class="max-h-9 md:max-h-[1.25vw] md:hover:max-h-[9vw] duration-500" offset_scrollbar="true" ?
-                                                                 {{ episode.japanese_name }}
-                                                                 </coreproject-scroll-area>
+                                        <coreproject-scroll-area class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]" parent_class="max-h-9 md:max-h-[1.25vw] md:hover:max-h-[9vw] duration-500" offset_scrollbar="true">
+                                            {{ episode.japanese_name }}
+                                        </coreproject-scroll-area>
                                         </episode-titles>
                                         <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.5vw] md:pt-[0.75vw]">
                                             <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
@@ -401,7 +401,7 @@
                     </button>
                 </more-infos-header>
                 <more-infos class="md:mt-[1.25vw] md:mb-[2vw]">
-                    <anime-details class="flex flex-col gap-[1.125vw] capitalize">
+                    <div class="flex flex-col gap-[1.125vw] capitalize">
                         <div class="flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none text-surface-50">
                             <p class="font-semibold text-white">format</p>
                             <p>TV</p>
@@ -446,7 +446,7 @@
                             <p class="font-semibold text-white">source</p>
                             <p>Night Novel</p>
                         </div>
-                    </anime-details>
+                    </div>
                     <voiceovercase class="mt-[2.5vw] block">
                         <section-header class="flex gap-[0.75vw]">
                             <header-title class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Voiceover Cast</header-title>

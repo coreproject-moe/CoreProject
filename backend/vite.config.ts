@@ -27,9 +27,11 @@ export default defineConfig({
             configFile: join(process.cwd(), "svelte.config.js")
         })
     ],
-    // css: {
-    //     devSourcemap: true
-    // },
+    css: {
+        devSourcemap: true,
+        // Switch to lightning.css when tailwind supports it
+        transformer: "postcss"
+    },
     build: {
         outDir: join(process.cwd(), "django_core", "static"),
         manifest: true,
@@ -37,7 +39,7 @@ export default defineConfig({
         emptyOutDir: true,
         target: "esnext",
         cssTarget: "esnext",
-        cssMinify: "lightningcss",
+
         sourcemap: true,
         rollupOptions: {
             input: [
