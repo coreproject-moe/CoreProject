@@ -36,7 +36,7 @@
     bind:this={main_element}
 >
     <button
-        on:mouseenter={() => {
+        on:mouseenter|preventDefault={() => {
             calculate_style();
         }}
         class="relative"

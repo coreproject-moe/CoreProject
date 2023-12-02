@@ -44,7 +44,7 @@
                 </div>
             </video-player-options>
         </video-player>
-        <episode-info class="col-span-12 flex flex-col gap-3 p-5 md:col-span-4 md:gap-[0.5vw] md:p-0">
+        <div class="col-span-12 flex flex-col gap-3 p-5 md:col-span-4 md:gap-[0.5vw] md:p-0">
             <header class="flex items-center justify-between">
                 <span class="text-lg font-semibold md:text-[1.35vw]" data-svelte-h="svelte-1ox2gge">Episodes</span>
                 <button class="btn !bg-transparent min-h-full flex items-center gap-2 rounded bg-surface-400 px-3 py-2 text-xs font-semibold leading-none md:gap-[0.5vw] md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.5vw] md:text-[1vw]">
@@ -53,7 +53,7 @@
 
                 </button>
             </header>
-            <episodes class="grid grid-cols-7 gap-2 md:grid-cols-6 md:gap-[0.75vw]">
+            <div class="grid grid-cols-7 gap-2 md:grid-cols-6 md:gap-[0.75vw]">
                 {% for _ in '012345678901234456789012345678902134567890123454678901234567'|make_list %}
                     <a
                         href="../{{ forloop.counter }}"
@@ -64,12 +64,12 @@
                         {{ forloop.counter }}
                     </a>
                 {% endfor %}
-            </episodes>
-        </episode-info>
+            </div>
+        </div>
     </episode-content>
-    <episode-details class="grid grid-cols-12 gap-5 p-5 md:gap-[5vw] md:p-0">
-        <episode-info class="col-span-12 flex flex-col gap-2 md:col-span-8 md:gap-[1vw]">
-            <anime-name-options class="flex items-center justify-between">
+    <div class="grid grid-cols-12 gap-5 p-5 md:gap-[5vw] md:p-0">
+        <div class="col-span-12 flex flex-col gap-2 md:col-span-8 md:gap-[1vw]">
+            <div class="flex items-center justify-between">
                 <div data-svelte-h="svelte-8kw9d2">
                     <a href="/mal/1" class="flex flex-col gap-1 text-lg leading-none md:gap-[0.25vw] md:text-[1.1vw]">
                         <span class="font-semibold uppercase">Demon Slayer S1</span>
@@ -79,7 +79,7 @@
                 <button class="btn bg-transparent p-0">
                     <coreproject-icon-share class="md:w-[1.25vw]"></coreproject-icon-share>
                 </button>
-            </anime-name-options>
+            </div>
             <div class="accordion w-full space-y-1 ">
                 <div class="accordion-item">
                     <button type="button" class="accordion-control text-start w-full flex items-center space-x-4 p-0 bg-transparent rounded-container-token text-base text-warning font-semibold md:text-[1.25vw] md:leading-[1vw] md:pb-[1vw]" id="accordion-control-0.4186117384197431" aria-expanded="true" aria-controls="accordion-panel-0.4186117384197431">
@@ -98,7 +98,7 @@
                 <coreproject-icon-chevron  class="w-3 -rotate-90 md:w-[1vw]"></coreproject-icon-chevron>
 
             </a>
-        </episode-info>
+        </div>
         <next-episode class="col-span-4 hidden flex-col md:flex">
             <span class="font-semibold uppercase md:text-[1.1vw]" data-svelte-h="svelte-1pwgppm">next episode</span>
             <a href="/anime/mal/1/episode/1/2" class="flex md:mt-[0.75vw] md:gap-[1vw]">
@@ -122,7 +122,7 @@
                 </episode-info>
             </a>
         </next-episode>
-    </episode-details>
+    </div>
     <episode-media class="grid grid-cols-12 p-5 md:gap-[5vw] md:p-0">
         <comments-section class="col-span-12 flex flex-col md:col-span-7 md:gap-[0.75vw]">
             <span class="flex gap-2 border-b-2 border-surface-50/25 pb-1 text-lg font-semibold md:gap-[0.75vw] md:border-none md:pb-0 md:text-[1.25vw] md:leading-[1.5vw]" data-svelte-h="svelte-fcwu4f">Comments</span>
