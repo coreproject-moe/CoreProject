@@ -27,9 +27,9 @@ export default defineConfig({
             configFile: join(process.cwd(), "svelte.config.js")
         })
     ],
-    css: {
-        devSourcemap: true
-    },
+    // css: {
+    //     devSourcemap: true
+    // },
     build: {
         outDir: join(process.cwd(), "django_core", "static"),
         manifest: true,
