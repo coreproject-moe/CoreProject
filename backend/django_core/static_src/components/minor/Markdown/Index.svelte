@@ -14,10 +14,10 @@
     import { cn } from "$functions/classname";
     import hljs from "highlight.js/lib/core";
     let marked: Marked;
-    
+
     onMount(async () => {
         const emojis = (await import("../../../data/emoji.json")).default;
-        
+
         marked = new Marked(
             // Highlight.js
             markedHighlight({
