@@ -32,6 +32,9 @@ export default defineConfig({
         // Switch to lightning.css when tailwind supports it
         transformer: "postcss"
     },
+    esbuild: {
+        legalComments: "external"
+    },
     build: {
         outDir: join(process.cwd(), "django_core", "static"),
         manifest: true,
