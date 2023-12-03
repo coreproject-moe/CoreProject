@@ -39,7 +39,7 @@ export default defineConfig({
         emptyOutDir: true,
         target: "esnext",
         cssTarget: "esnext",
-
+        minify: "terser",
         sourcemap: true,
         rollupOptions: {
             input: [
