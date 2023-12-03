@@ -40,7 +40,7 @@ export default defineConfig({
         target: "esnext",
         cssTarget: "esnext",
 
-        sourcemap: true,
+        // sourcemap: true,
         rollupOptions: {
             input: [
                 // Vendor packages
