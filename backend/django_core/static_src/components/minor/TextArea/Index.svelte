@@ -1,5 +1,5 @@
 <script lang="ts">
-    import emojis from "../../../data/emoji.json";
+    import { onMount } from "svelte";
     import { cn } from "$functions/classname";
     import { is_valid_url } from "$functions/is_valid_url";
     import { offset } from "caret-pos";
@@ -19,8 +19,6 @@
     // Textarea Bindings
     let textarea_element: HTMLTextAreaElement,
         textarea_value = "";
-
-    let preview_element_innerHTML = "";
 
     let emoji_matches: Array<{
             emoji: string;
@@ -129,9 +127,11 @@
             show_emoji_picker = true;
             emoji_matches = [];
 
+            const emojis: Record<string, string> = (await import("../../../data/emoji.json")).default;
+
             for (const item of Object.entries(emojis).sort()) {
                 const keyword = item[0];
-                const emoji = item[1];
+                const emoji = item[1] as string;
                 if (keyword.includes(emoji_code[1])) {
                     emoji_matches.push({
                         emoji: emoji,

@@ -3,7 +3,6 @@
     import "highlight.js/scss/github-dark.scss";
 
     // Import js codes
-    import emojis from "../../../data/emoji.json";
     import { onMount } from "svelte";
     import { sanitize } from "$functions/sanitize";
     import { Marked } from "marked";
@@ -14,8 +13,46 @@
     import { markedSmartypants } from "marked-smartypants";
     import { cn } from "$functions/classname";
     import hljs from "highlight.js/lib/core";
+    let marked: Marked;
 
     onMount(async () => {
+        const emojis = (await import("../../../data/emoji.json")).default;
+
+        marked = new Marked(
+            // Highlight.js
+            markedHighlight({
+                langPrefix: "hljs language-",
+                highlight: (code, lang) => {
+                    const language = hljs.getLanguage(lang) ? lang : "plaintext";
+                    return hljs.highlight(code, { language }).value;
+                }
+            }),
+            // Emoji plugin
+            markedEmoji({
+                emojis,
+                unicode: false
+            }),
+            {
+                extensions: [
+                    {
+                        name: "emoji",
+                        renderer: (token) => {
+                            return `<img class="inline-flex w-4 justify-center align-center -translate-y-0.5 md:w-[1vw]" alt="${token.name}" src="${token.emoji}">`;
+                        }
+                    }
+                ]
+            },
+            // Smartypants plugin
+            markedSmartypants(),
+            // XHTML plugin
+            markedXhtml(),
+            // Mangle plugin
+            mangle(),
+            // Marked defaults
+            {
+                gfm: true
+            }
+        );
         hljs.registerLanguage("1c", (await import("highlight.js/lib/languages/1c")).default);
         hljs.registerLanguage("abnf", (await import("highlight.js/lib/languages/abnf")).default);
         hljs.registerLanguage("accesslog", (await import("highlight.js/lib/languages/accesslog")).default);
@@ -213,42 +250,6 @@
     export let markdown = "";
     let klass = "";
     export { klass as class };
-
-    const marked = new Marked(
-        // Highlight.js
-        markedHighlight({
-            langPrefix: "hljs language-",
-            highlight: (code, lang) => {
-                const language = hljs.getLanguage(lang) ? lang : "plaintext";
-                return hljs.highlight(code, { language }).value;
-            }
-        }),
-        // Emoji plugin
-        markedEmoji({
-            emojis,
-            unicode: false
-        }),
-        {
-            extensions: [
-                {
-                    name: "emoji",
-                    renderer: (token) => {
-                        return `<img class="inline-flex w-4 justify-center align-center -translate-y-0.5 md:w-[1vw]" alt="${token.name}" src="${token.emoji}">`;
-                    }
-                }
-            ]
-        },
-        // Smartypants plugin
-        markedSmartypants(),
-        // XHTML plugin
-        markedXhtml(),
-        // Mangle plugin
-        mangle(),
-        // Marked defaults
-        {
-            gfm: true
-        }
-    );
 
     let html: string | Promise<string>;
     $: html = sanitize(marked.parse(markdown));
