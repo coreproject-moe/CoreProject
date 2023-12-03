@@ -2,7 +2,7 @@ import { join, resolve } from "path";
 import process from "process";
 import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
-
+import { splitVendorChunkPlugin } from "vite";
 const STATIC_SRC = resolve("./django_core/static_src");
 
 const COMPONENT_DIRECTORY = join(STATIC_SRC, "components");
@@ -20,6 +20,7 @@ export default defineConfig({
         }
     },
     plugins: [
+        splitVendorChunkPlugin(),
         svelte({
             compilerOptions: {
                 customElement: true
@@ -38,12 +39,12 @@ export default defineConfig({
     build: {
         outDir: join(process.cwd(), "django_core", "static"),
         manifest: true,
-        chunkSizeWarningLimit: 2048,
+        chunkSizeWarningLimit: 4096,
         emptyOutDir: true,
         target: "esnext",
         cssTarget: "esnext",
         minify: "terser",
-        sourcemap: true,
+        // sourcemap: true,
         rollupOptions: {
             input: [
                 // Vendor packages
