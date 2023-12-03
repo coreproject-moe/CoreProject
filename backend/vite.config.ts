@@ -43,7 +43,8 @@ export default defineConfig({
         target: "esnext",
         cssTarget: "esnext",
         minify: "terser",
-        sourcemap: true,
+        // sourcemap: true,
+
         rollupOptions: {
             input: [
                 // Vendor packages
