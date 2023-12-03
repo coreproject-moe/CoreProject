@@ -83,7 +83,7 @@ async def anime_info_view(
 
 
 async def anime_episode_view(
-    request: "HtmxHttpRequest", mal_id: int, pk: int
+    request: "HtmxHttpRequest", platform: str, mal_id: int, pk: int
 ) -> HttpResponse:
     if request.htmx:
         return render(
