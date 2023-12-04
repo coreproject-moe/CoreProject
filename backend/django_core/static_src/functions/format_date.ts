@@ -1,16 +1,14 @@
 import dayjs from "dayjs";
-import localeData from "dayjs/plugin/localeData";
-import relativeTime from "dayjs/plugin/relativeTime";
-import utc from "dayjs/plugin/utc";
+
+// Define modules
+[(await import("dayjs/plugin/localeData")).default, (await import("dayjs/plugin/relativeTime")).default, (await import("dayjs/plugin/utc")).default].forEach((item) => {
+    dayjs.extend(item);
+});
 
 export class FormatDate {
     #date: dayjs.Dayjs;
 
     constructor(date: string) {
-        dayjs.extend(localeData);
-        dayjs.extend(relativeTime);
-        dayjs.extend(utc);
-
         this.#date = dayjs(date);
     }
 
