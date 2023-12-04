@@ -1,6 +1,7 @@
 <script lang="ts">
     import { FormatDate } from "$functions/format_date";
     import Markdown from "$components/minor/Markdown/Index.svelte";
+    import { JSONToTree } from "$functions/json_to_tree";
     export let api_url: string;
 
     interface Comment {
@@ -29,6 +30,13 @@
             }
         });
         const value = (await res.json()) as Comment;
+        const formated_json = new JSONToTree(value.results).to_tree();
+
+        value.results = [];
+        Object.values(formated_json).forEach((obj) => {
+            value.results.push(obj);
+        });
+        console.log(value);
 
         if (res.ok) {
             return value;
