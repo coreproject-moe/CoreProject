@@ -9,11 +9,11 @@ from .views.anime.episode.timestamp import EpisodeTimeStampAPIView
 from .views.anime.genre import AnimeGenresAPIView, AnimeGenresSpecificAPIView
 from .views.anime.theme import AnimeThemesAPIView, AnimeThemesSpecificAPIView
 from .views.characters import CharacterViewSet
+from .views.comment import CommentViewSet
 from .views.producers import ProducerViewSet
 from .views.staffs import StaffViewSet
 from .views.user.login import LoginAPIView
 from .views.user.logout import LogoutAPIView
-from .views.comment import CommentViewSet
 
 base_router = routers.DefaultRouter()
 base_router.register(r"comments", CommentViewSet, basename="comment")
