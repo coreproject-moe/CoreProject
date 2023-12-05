@@ -1,13 +1,11 @@
 from apps.anime.models import AnimeModel
 from apps.comments.models import CommentModel
+from apps.episodes.models import EpisodeModel
 from django.http import HttpRequest
-from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
-
-from apps.episodes.models import EpisodeModel
 
 from ....serializers.episode.comment import EpisodeCommentSerializer
 
