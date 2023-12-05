@@ -17,7 +17,7 @@ class UserSerializer(serializers.ModelSerializer):
         ]
 
 
-class AnimeCommentSerializer(serializers.Serializer):
+class CommentSerializer(serializers.Serializer):
     created_at = serializers.DateTimeField(read_only=True)
     user = UserSerializer(read_only=True)
     text = serializers.CharField()

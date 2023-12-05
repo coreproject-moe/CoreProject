@@ -6,14 +6,14 @@ from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 
-from ...serializers.anime.comment import AnimeCommentSerializer
+from ...serializers.comments import CommentSerializer
 
 
 class AnimeCommentAPIView(generics.ListAPIView):
     # this is due to drf-spectacular
     queryset = CommentModel.objects.none()
 
-    serializer_class = AnimeCommentSerializer
+    serializer_class = CommentSerializer
     # Permissions
     permission_classes = (IsAuthenticatedOrReadOnly,)
     # Pagination

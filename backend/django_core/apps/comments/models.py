@@ -20,3 +20,5 @@ class CommentModel(CreatedAtMixin, TreeModel):
         indexes = [idx.GistIndex(fields=["path"])]
         verbose_name = "Anime Comment"
         verbose_name_plural = "Anime Comments"
+
+
