@@ -24,4 +24,5 @@ class CommentSerializer(serializers.Serializer):
     children = serializers.SerializerMethodField()
 
     def get_children(self, obj: CommentModel) -> int:
-        return obj.children().count()
+        if hasattr(obj, "children"):
+            return obj.children().count()

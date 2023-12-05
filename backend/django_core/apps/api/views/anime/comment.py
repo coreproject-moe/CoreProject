@@ -36,7 +36,7 @@ class AnimeCommentAPIView(generics.ListAPIView):
         }
 
         if path := serializer.validated_data.get("path"):
-            anime_comment_model_instance = CommentModel.objects.get(path__match=path)
+            anime_comment_model_instance = get_object_or_404(CommentModel, path__match=path)
             anime_comment_instance = CommentModel.objects.create_child(
                 parent=anime_comment_model_instance, **serializer_data
             )
