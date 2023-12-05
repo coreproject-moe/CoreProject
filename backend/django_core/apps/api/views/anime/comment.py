@@ -5,7 +5,7 @@ from rest_framework import generics
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
-
+from django.shortcuts import get_object_or_404
 from ...serializers.comments import CommentSerializer
 
 
@@ -20,7 +20,7 @@ class AnimeCommentAPIView(generics.ListAPIView):
     pagination_class = LimitOffsetPagination
 
     def get_queryset(self, *args, **kwargs):
-        queryset = AnimeModel.objects.get(pk=self.kwargs["pk"]).comments.all()
+        queryset = get_object_or_404(AnimeModel, pk=self.kwargs["pk"]).comments.all()
         return queryset
 
     def post(self, request: HttpRequest, pk: int) -> Response:
