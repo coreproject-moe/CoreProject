@@ -32,7 +32,9 @@
                     class="h-full w-full shrink-0 rounded-full object-cover"
                 />
             </a>
-            <div class="h-full md:w-[0.1vw] bg-neutral hover:md:w-[0.15vw] hover:bg-accent cursor-pointer transition-colors" />
+            <button class="h-full md:w-full flex justify-center group cursor-pointer active:scale-95 transition-transform">
+                <div class="bg-neutral rounded-full md:w-[0.15vw] h-full group-hover:md:w-[0.2vw] group-hover:bg-warning transition-colors" />
+            </button>
         </div>
         <div class="flex flex-col items-start gap-1 md:gap-[0.25vw]">
             <a
