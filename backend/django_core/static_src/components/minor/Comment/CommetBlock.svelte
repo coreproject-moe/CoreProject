@@ -15,14 +15,6 @@
         path: string;
         children: number;
     };
-
-    if (item.children !== 0) {
-        Object.entries(item).forEach(([key, obj]) => {
-            if (typeof obj === "object" && key !== "user") {
-                console.log(obj)
-            }
-        })
-    }
 </script>
 
 <div>
