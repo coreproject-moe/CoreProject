@@ -2,8 +2,6 @@ from apps.anime.models.anime_comment import AnimeCommentModel
 from apps.user.models import CustomUser
 from rest_framework import serializers
 
-from apps.anime.models.anime_comment import AnimeCommentModel
-
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
