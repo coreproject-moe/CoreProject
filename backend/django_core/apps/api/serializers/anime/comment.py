@@ -1,7 +1,7 @@
 from apps.user.models import CustomUser
 from rest_framework import serializers
 
-from apps.anime.models.anime_comment import AnimeCommentModel
+from apps.comments.models import CommentModel
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -24,5 +24,5 @@ class AnimeCommentSerializer(serializers.Serializer):
     path = serializers.CharField(required=False)
     children = serializers.SerializerMethodField()
 
-    def get_children(self, obj: AnimeCommentModel) -> int:
+    def get_children(self, obj: CommentModel) -> int:
         return obj.children().count()

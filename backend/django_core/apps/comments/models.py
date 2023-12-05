@@ -4,8 +4,10 @@ from django.db import models
 from django_ltree.models import TreeModel
 from mixins.models.created_at import CreatedAtMixin
 
+# Create your models here.
 
-class AnimeCommentModel(CreatedAtMixin, TreeModel):
+
+class CommentModel(CreatedAtMixin, TreeModel):
     label_size = 4
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     text = models.TextField()

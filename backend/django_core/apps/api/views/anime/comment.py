@@ -1,4 +1,5 @@
-from apps.anime.models import AnimeCommentModel, AnimeModel
+from apps.anime.models import AnimeModel
+from apps.comments.models import CommentModel
 from django.http import HttpRequest
 from rest_framework import generics
 from rest_framework.pagination import LimitOffsetPagination
@@ -10,7 +11,7 @@ from ...serializers.anime.comment import AnimeCommentSerializer
 
 class AnimeCommentAPIView(generics.ListAPIView):
     # this is due to drf-spectacular
-    queryset = AnimeCommentModel.objects.none()
+    queryset = CommentModel.objects.none()
 
     serializer_class = AnimeCommentSerializer
     # Permissions
@@ -35,15 +36,13 @@ class AnimeCommentAPIView(generics.ListAPIView):
         }
 
         if path := serializer.validated_data.get("path"):
-            anime_comment_model_instance = AnimeCommentModel.objects.get(path__match=path)
-            anime_comment_instance = AnimeCommentModel.objects.create_child(
+            anime_comment_model_instance = CommentModel.objects.get(path__match=path)
+            anime_comment_instance = CommentModel.objects.create_child(
                 parent=anime_comment_model_instance, **serializer_data
             )
 
         else:
-            anime_comment_instance = AnimeCommentModel.objects.create_child(
-                **serializer_data
-            )
+            anime_comment_instance = CommentModel.objects.create_child(**serializer_data)
 
         anime_instance.comments.add(anime_comment_instance)
 

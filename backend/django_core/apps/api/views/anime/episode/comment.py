@@ -1,5 +1,5 @@
 from apps.anime.models import AnimeModel
-from apps.episodes.models.episode_comment import EpisodeCommentModel
+from apps.comments.models import CommentModel
 from django.http import HttpRequest
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
@@ -7,7 +7,8 @@ from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 
-from ....filters.comments import EpisodeCommentFilter
+from apps.episodes.models import EpisodeModel
+
 from ....serializers.episode.comment import EpisodeCommentSerializer
 
 # If we need to revisit, take a look at our ChadGPT conversation
@@ -16,11 +17,12 @@ from ....serializers.episode.comment import EpisodeCommentSerializer
 
 class EpisodeCommentAPIView(generics.ListAPIView):
     # this is due to drf-spectacular
-    queryset = EpisodeCommentModel.objects.none()
-
+    queryset = CommentModel.objects.none()
+    # Searilizers
     serializer_class = EpisodeCommentSerializer
-    filter_backends = (DjangoFilterBackend,)
-    filterset_class = EpisodeCommentFilter
+    # Filters
+    # filter_backends = (DjangoFilterBackend,)
+    # filterset_class = EpisodeCommentFilter
     # Permissions
     permission_classes = (IsAuthenticatedOrReadOnly,)
     # Pagination
@@ -38,7 +40,7 @@ class EpisodeCommentAPIView(generics.ListAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        episode_instance = AnimeModel.objects.get(pk=pk).episodes.get(
+        episode_instance: EpisodeModel = AnimeModel.objects.get(pk=pk).episodes.get(
             episode_number=episode_number
         )
 
@@ -49,15 +51,13 @@ class EpisodeCommentAPIView(generics.ListAPIView):
         }
 
         if path := serializer.validated_data.get("path"):
-            episode_comment_model_instance = EpisodeCommentModel.objects.get(
-                path__match=path
-            )
-            episode_comment_instance = EpisodeCommentModel.objects.create_child(
+            episode_comment_model_instance = CommentModel.objects.get(path__match=path)
+            episode_comment_instance = CommentModel.objects.create_child(
                 parent=episode_comment_model_instance, **serializer_data
             )
 
         else:
-            episode_comment_instance = EpisodeCommentModel.objects.create(**serializer_data)
+            episode_comment_instance = CommentModel.objects.create_child(**serializer_data)
 
         episode_instance.episode_comments.add(episode_comment_instance)
 

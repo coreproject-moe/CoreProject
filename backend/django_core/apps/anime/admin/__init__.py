@@ -140,7 +140,6 @@ class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel]):
 #     return False
 
 
-from .anime_comment import AnimeCommentAdmin as AnimeCommentAdmin
 from .anime_genre import AnimeGenreAdmin as AnimeGenreAdmin
 from .anime_openings_and_endings import (
     AnimeEndingAdmin as AnimeEndingAdmin,

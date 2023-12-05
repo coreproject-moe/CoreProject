@@ -4,7 +4,7 @@ from dynamic_filenames import FilePattern
 from mixins.models.created_at import CreatedAtMixin
 from mixins.models.updated_at import UpdatedAtMixin
 
-from .episode_comment import EpisodeCommentModel
+from apps.comments.models import CommentModel
 from .episode_timestamp import EpisodeTimestampModel
 
 episode_pattern = FilePattern(filename_pattern="episode/{uuid:s}{ext}")
@@ -29,7 +29,7 @@ class EpisodeModel(UpdatedAtMixin, CreatedAtMixin):
 
     episode_summary = models.TextField(default="", blank=True, null=True)
 
-    episode_comments = models.ManyToManyField(EpisodeCommentModel, blank=True)
+    episode_comments = models.ManyToManyField(CommentModel, blank=True)
     episode_timestamps = models.ManyToManyField(EpisodeTimestampModel, blank=True)
 
     episode_length = models.PositiveIntegerField(
@@ -57,5 +57,4 @@ class EpisodeModel(UpdatedAtMixin, CreatedAtMixin):
         verbose_name_plural = "Episodes"
 
 
-from .episode_comment import EpisodeCommentModel as EpisodeCommentModel
 from .episode_timestamp import EpisodeTimestampModel as EpisodeTimestampModel
