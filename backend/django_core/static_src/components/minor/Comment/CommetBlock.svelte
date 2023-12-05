@@ -62,7 +62,7 @@
                     {#each Object.entries(item) as [key, obj]}
                         <!-- Avoid user object -->
                         {#if typeof obj === "object" && key !== "user"}
-                                <svelte:self item={obj} />
+                            <svelte:self item={obj} />
                         {/if}
                     {/each}
                 </div>
