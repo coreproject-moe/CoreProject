@@ -1,25 +1,27 @@
-from apps.anime.models import AnimeCommentModel, AnimeModel
+from apps.anime.models import AnimeModel
+from apps.comments.models import CommentModel
 from django.http import HttpRequest
+from django.shortcuts import get_object_or_404
 from rest_framework import generics
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 
-from ...serializers.anime.comment import AnimeCommentSerializer
+from ...serializers.comments import CommentSerializer
 
 
 class AnimeCommentAPIView(generics.ListAPIView):
     # this is due to drf-spectacular
-    queryset = AnimeCommentModel.objects.none()
+    queryset = CommentModel.objects.none()
 
-    serializer_class = AnimeCommentSerializer
+    serializer_class = CommentSerializer
     # Permissions
     permission_classes = (IsAuthenticatedOrReadOnly,)
     # Pagination
     pagination_class = LimitOffsetPagination
 
     def get_queryset(self, *args, **kwargs):
-        queryset = AnimeModel.objects.get(pk=self.kwargs["pk"]).comments.all()
+        queryset = get_object_or_404(AnimeModel, pk=self.kwargs["pk"]).comments.all()
         return queryset
 
     def post(self, request: HttpRequest, pk: int) -> Response:
@@ -35,15 +37,13 @@ class AnimeCommentAPIView(generics.ListAPIView):
         }
 
         if path := serializer.validated_data.get("path"):
-            anime_comment_model_instance = AnimeCommentModel.objects.get(path__match=path)
-            anime_comment_instance = AnimeCommentModel.objects.create_child(
+            anime_comment_model_instance = get_object_or_404(CommentModel, path__match=path)
+            anime_comment_instance = CommentModel.objects.create_child(
                 parent=anime_comment_model_instance, **serializer_data
             )
 
         else:
-            anime_comment_instance = AnimeCommentModel.objects.create_child(
-                **serializer_data
-            )
+            anime_comment_instance = CommentModel.objects.create_child(**serializer_data)
 
         anime_instance.comments.add(anime_comment_instance)
 
