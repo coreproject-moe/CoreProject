@@ -2,7 +2,7 @@
     import { FormatDate } from "$functions/format_date";
     import Markdown from "$components/minor/Markdown/Index.svelte";
     import { JSONToTree } from "$functions/json_to_tree";
-    
+
     export let api_url: string;
 
     type CommentResult = {
