@@ -15,6 +15,8 @@
         path: string;
         children: number;
     };
+
+    const comment_level = item.path.split(".").length; // this might help later
 </script>
 
 <div>
