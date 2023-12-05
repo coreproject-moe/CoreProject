@@ -6,8 +6,8 @@ from mixins.models.created_at import CreatedAtMixin
 from mixins.models.is_locked import IsLockedMixin
 from mixins.models.updated_at import UpdatedAtMixin
 
-from ...comments.models import CommentModel
 from ...characters.models import CharacterModel
+from ...comments.models import CommentModel
 from ...episodes.models import EpisodeModel
 from ...producers.models import ProducerModel
 from ...staffs.models import StaffModel

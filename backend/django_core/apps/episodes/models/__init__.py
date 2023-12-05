@@ -1,10 +1,10 @@
+from apps.comments.models import CommentModel
 from django.contrib.postgres.fields import HStoreField
 from django.db import models
 from dynamic_filenames import FilePattern
 from mixins.models.created_at import CreatedAtMixin
 from mixins.models.updated_at import UpdatedAtMixin
 
-from apps.comments.models import CommentModel
 from .episode_timestamp import EpisodeTimestampModel
 
 episode_pattern = FilePattern(filename_pattern="episode/{uuid:s}{ext}")
