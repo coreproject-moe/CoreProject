@@ -9,15 +9,15 @@ export class JSONToTree {
         this.#json = this.convert_to_tree_given_path(json);
     }
 
-    private convert_to_tree_given_path(data: Comment): Comment {
-        const tree: Comment[] = [];
+    private convert_to_tree_given_path(data: any): any {
+        const tree = [];
 
         data.forEach((node) => {
             const pathSegments = node.path.split(".");
             let currentNode = tree;
 
             pathSegments.forEach((segment, index) => {
-                const existingNode = currentNode.find((n) => n.child === segment);
+                const existingNode = currentNode.find((n) => n.segment === segment);
 
                 if (existingNode) {
                     currentNode = existingNode.children;
