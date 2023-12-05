@@ -22,6 +22,7 @@ class CommentSerializer(serializers.Serializer):
     text = serializers.CharField()
     path = serializers.CharField(required=False)
     children = serializers.SerializerMethodField()
+    ratio = serializers.IntegerField()
 
     def get_children(self, obj: CommentModel) -> int:
         if hasattr(obj, "children"):
