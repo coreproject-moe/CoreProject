@@ -16,7 +16,7 @@
         text: string;
         path: string;
         children: number;
-    }
+    };
 
     interface Comment {
         count: number;
@@ -33,17 +33,9 @@
         });
         const value = (await res.json()) as Comment;
         const formated_json = new JSONToTree(value.results).to_tree() as CommentResult[];
-
-        // clear results
-        value.results.length = 0;
-        if (typeof formated_json === "object" && formated_json !== null) {
-            Object.values(formated_json).forEach((item) => {
-                value.results.push(item);
-            })
-        }
-
+        console.log(formated_json);
         if (res.ok) {
-            return value;
+            return formated_json;
         } else {
             throw new Error(await res.text());
         }
@@ -53,9 +45,9 @@
 {#await get_comments()}
     Loading...
 {:then comment}
-    <div class="flex flex-col md:gap-[1.5vw]">
+    <!-- <div class="flex flex-col md:gap-[1.5vw]">
         {#each comment.results as item}
             <CommetBlock {item} />
         {/each}
-    </div>
+    </div> -->
 {/await}

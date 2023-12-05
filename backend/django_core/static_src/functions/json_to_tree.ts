@@ -1,16 +1,40 @@
 import set from "lodash/set";
 
+type Comment = { user: string; text: string; path: string; created_at: string; children: number; child: Comment[] };
+
 export class JSONToTree {
-    #json = {};
+    #json: Comment[] = new Array<Comment>();
 
     constructor(json: object[]) {
-        json.forEach((item) => {
-            this.convert_to_tree_given_path(item as unknown as { user: string; text: string; path: string, created_at: string, children: number });
-        });
+        this.#json = this.convert_to_tree_given_path(json);
     }
 
-    public convert_to_tree_given_path({ user, text, path, created_at, children }: { user: string; text: string; path: string, created_at: string, children: number }) {
-        set(this.#json, path, { path, user, text, created_at, children });
+    private convert_to_tree_given_path(data: Comment): Comment {
+        const tree: Comment[] = [];
+
+        data.forEach((node) => {
+            const pathSegments = node.path.split(".");
+            let currentNode = tree;
+
+            pathSegments.forEach((segment, index) => {
+                const existingNode = currentNode.find((n) => n.child === segment);
+
+                if (existingNode) {
+                    currentNode = existingNode.children;
+                } else {
+                    const newNode = { segment, children: [] };
+
+                    if (index === pathSegments.length - 1) {
+                        newNode.data = node;
+                    }
+
+                    currentNode.push(newNode);
+                    currentNode = newNode.children;
+                }
+            });
+        });
+
+        return tree;
     }
 
     public to_tree() {

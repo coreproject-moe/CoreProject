@@ -15,8 +15,6 @@
         path: string;
         children: number;
     };
-
-    const comment_level = item.path.split(".").length; // this might help later
 </script>
 
 <div>
@@ -32,8 +30,8 @@
                     class="h-full w-full shrink-0 rounded-full object-cover"
                 />
             </a>
-            <button class="h-full md:w-full flex justify-center group cursor-pointer active:scale-95 transition-transform">
-                <div class="bg-neutral rounded-full md:w-[0.15vw] h-full group-hover:md:w-[0.2vw] group-hover:bg-warning transition-colors" />
+            <button class="group flex h-full cursor-pointer justify-center transition-transform active:scale-95 md:w-full">
+                <div class="h-full rounded-full bg-neutral transition-colors group-hover:bg-warning md:w-[0.15vw] group-hover:md:w-[0.2vw]" />
             </button>
         </div>
         <div class="flex flex-col items-start gap-1 md:gap-[0.25vw]">
@@ -51,18 +49,16 @@
                 <Markdown markdown={item.text} />
             </div>
             <div class="flex items-center gap-3 md:gap-[0.75vw]">
-                <button class="btn min-h-full md:h-max !bg-transparent p-0">
+                <button class="btn min-h-full !bg-transparent p-0 md:h-max">
                     <!-- {% include "icons/like.html" with class="w-3 text-surface-300 md:w-[1vw]" %} -->
-                    <likes class="text-xs md:text-[0.75vw]">106</likes>
+                    <div class="text-xs md:text-[0.75vw]">106</div>
                 </button>
-                <button class="text-surface-50 btn min-h-full md:h-max !bg-transparent p-0 text-xs uppercase md:text-[0.8vw]">
-                    Replay
-                </button>
+                <button class="text-surface-50 btn min-h-full !bg-transparent p-0 text-xs uppercase md:h-max md:text-[0.8vw]">Replay</button>
             </div>
 
             <!-- Render replies here -->
             {#if item.children !== 0}
-                <div class="flex flex-col md:gap-[1.5vw] md:mt-[1.5vw]">
+                <div class="flex flex-col md:mt-[1.5vw] md:gap-[1.5vw]">
                     {#each Object.entries(item) as [key, obj]}
                         <!-- Avoid user object -->
                         {#if typeof obj === "object" && key !== "user"}
