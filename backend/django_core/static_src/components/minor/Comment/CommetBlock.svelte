@@ -71,8 +71,13 @@
                     ></coreproject-icon-arrow>
                 </button>
             </div>
-            <button class="text-surface-50 btn min-h-full md:h-max !bg-transparent p-0 text-xs uppercase md:text-[0.9vw]">
-                Replay
+            <button class="btn min-h-full md:h-max !bg-transparent p-0 text-xs md:text-[0.9vw] md:gap-[0.35vw]">
+                <coreproject-icon-chat class="md:w-[1vw]"></coreproject-icon-chat>
+                <span>Replay</span>
+            </button>
+            <button class="btn min-h-full md:h-max !bg-transparent p-0 text-xs md:text-[0.9vw] md:gap-[0.35vw]">
+                <coreproject-icon-share class="md:w-[1vw]"></coreproject-icon-share>
+                <span>Share</span>
             </button>
         </div>
 
