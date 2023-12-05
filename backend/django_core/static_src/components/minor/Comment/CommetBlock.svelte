@@ -13,7 +13,10 @@
         };
         text: string;
         path: string;
+        children: number;
     };
+
+    console.log(item)
 </script>
 
 <div>
