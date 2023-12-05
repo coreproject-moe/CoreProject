@@ -16,7 +16,13 @@
         children: number;
     };
 
-    console.log(item)
+    if (item.children !== 0) {
+        Object.entries(item).forEach(([key, obj]) => {
+            if (typeof obj === "object" && key !== "user") {
+                console.log(obj)
+            }
+        })
+    }
 </script>
 
 <div>
@@ -57,6 +63,18 @@
                     Replay
                 </button>
             </div>
+
+            <!-- Render replies here -->
+            {#if item.children !== 0}
+                <div class="flex flex-col md:gap-[1.5vw] md:mt-[1.5vw]">
+                    {#each Object.entries(item) as [key, obj]}
+                        <!-- Avoid user object -->
+                        {#if typeof obj === "object" && key !== "user"}
+                                <svelte:self item={obj} />
+                        {/if}
+                    {/each}
+                </div>
+            {/if}
         </div>
     </div>
 </div>
