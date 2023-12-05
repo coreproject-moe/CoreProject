@@ -13,8 +13,10 @@ from .views.producers import ProducerViewSet
 from .views.staffs import StaffViewSet
 from .views.user.login import LoginAPIView
 from .views.user.logout import LogoutAPIView
+from .views.comment import CommentViewSet
 
 base_router = routers.DefaultRouter()
+base_router.register(r"comments", CommentViewSet, basename="comment")
 base_router.register(r"anime", AnimeViewSet, basename="anime")
 base_router.register(r"character", CharacterViewSet, basename="character")
 base_router.register(r"producer", ProducerViewSet, basename="producer")
