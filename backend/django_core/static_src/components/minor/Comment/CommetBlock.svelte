@@ -79,6 +79,18 @@
                 <coreproject-icon-share class="md:w-[1vw]"></coreproject-icon-share>
                 <span>Share</span>
             </button>
+            <div class="dropdown">
+                <div tabindex="0" role="button" class="btn btn-secondary p-0 h-max min-h-max md:gap-[0.15vw]">
+                    <coreproject-icon-dot class="md:w-[0.2vw]"></coreproject-icon-dot>
+                    <coreproject-icon-dot class="md:w-[0.2vw]"></coreproject-icon-dot>
+                    <coreproject-icon-dot class="md:w-[0.2vw]"></coreproject-icon-dot>
+                </div>
+                <ul class="dropdown-content z-10 bg-neutral md:rounded-[0.25vw] overflow-hidden">
+                    <li class="md:py-[0.5vw] md:px-[1vw] md:text-[1vw] hover:bg-primary hover:text-accent transition-colors cursor-pointer">
+                        <span>Report</span>
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <!-- Render replies here -->
