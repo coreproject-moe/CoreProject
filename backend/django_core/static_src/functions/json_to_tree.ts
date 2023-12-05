@@ -1,5 +1,3 @@
-import set from "lodash/set";
-
 type Comment = { user: string; text: string; path: string; created_at: string; children: number; child: Comment[] };
 
 export class JSONToTree {
@@ -10,26 +8,28 @@ export class JSONToTree {
     }
 
     private convert_to_tree_given_path(data: any): any {
-        const tree = [];
+        const tree: Comment[] = [];
 
-        data.forEach((node) => {
-            const pathSegments = node.path.split(".");
-            let currentNode = tree;
+        data.forEach((node: Comment) => {
+            const path_segments = node.path.split(".");
+            let current_node: Comment[] = tree;
 
-            pathSegments.forEach((segment, index) => {
-                const existingNode = currentNode.find((n) => n.segment === segment);
+            path_segments.forEach((segment, index) => {
+                const existing_node = current_node.find((n) => n.path === segment);
 
-                if (existingNode) {
-                    currentNode = existingNode.children;
+                if (existing_node) {
+                    current_node = existing_node.child;
                 } else {
-                    const newNode = { segment, children: [] };
+                    let new_node: any = { path: segment, child: [] };
 
-                    if (index === pathSegments.length - 1) {
-                        newNode.data = node;
+                    if (index === path_segments.length - 1) {
+                        // Copy values
+                        new_node.text = node.text;
+                        new_node.user = node.user;
                     }
 
-                    currentNode.push(newNode);
-                    currentNode = newNode.children;
+                    current_node.push(new_node);
+                    current_node = new_node.child;
                 }
             });
         });
