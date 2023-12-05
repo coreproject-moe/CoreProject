@@ -2,24 +2,27 @@
     import { FormatDate } from "$functions/format_date";
     import Markdown from "$components/minor/Markdown/Index.svelte";
     import { JSONToTree } from "$functions/json_to_tree";
+    import { fromJSON } from "postcss";
     export let api_url: string;
+
+    type CommentResult = {
+        created_at: string;
+        user: {
+            username: string;
+            first_name: string;
+            last_name: string;
+            avatar: null | string;
+            avatar_url: string;
+        };
+        text: string;
+        path: string;
+    }
 
     interface Comment {
         count: number;
         next: null | number;
         previous: null | number;
-        results: {
-            created_at: string;
-            user: {
-                username: string;
-                first_name: string;
-                last_name: string;
-                avatar: null | string;
-                avatar_url: string;
-            };
-            text: string;
-            path: string;
-        }[];
+        results: CommentResult[];
     }
 
     async function get_comments() {
@@ -30,13 +33,15 @@
             }
         });
         const value = (await res.json()) as Comment;
-        const formated_json = new JSONToTree(value.results).to_tree();
+        const formated_json = new JSONToTree(value.results).to_tree() as CommentResult[];
 
-        value.results = [];
-        Object.values(formated_json).forEach((obj) => {
-            value.results.push(obj);
-        });
-        console.log(value);
+        // clear results
+        value.results.length = 0;
+        if (typeof formated_json === "object" && formated_json !== null) {
+            Object.values(formated_json).forEach((item) => {
+                value.results.push(item);
+            })
+        }
 
         if (res.ok) {
             return value;

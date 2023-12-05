@@ -1,9 +1,7 @@
 import set from "lodash/set";
 
-type JSON_Element = { [key: string]: string };
-
 export class JSONToTree {
-    #json: { [key: string]: JSON_Element } = {};
+    #json = {};
 
     constructor(json: object[]) {
         json.forEach((item) => {
