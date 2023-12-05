@@ -4,6 +4,7 @@ import type { SvelteComponent } from "svelte";
 import svelteRetag from "svelte-retag";
 
 const icon_map: Record<string, typeof SvelteComponent<{}>> = {
+    arrow: (await import("./Arrow/Index.svelte")).default,
     "arrow-up-right": (await import("./ArrowUpRight/Index.svelte")).default,
     animecore: (await import("./AnimeCore/index.svelte")).default,
     bold: (await import("./Bold/Index.svelte")).default,

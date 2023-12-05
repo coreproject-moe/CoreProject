@@ -56,11 +56,22 @@
             <Markdown markdown={item.text} />
         </div>
         <div class="flex items-center gap-3 md:gap-[0.75vw]">
-            <button class="btn min-h-full md:h-max !bg-transparent p-0">
-                <!-- {% include "icons/like.html" with class="w-3 text-surface-300 md:w-[1vw]" %} -->
-                <likes class="text-xs md:text-[0.75vw]">106</likes>
-            </button>
-            <button class="text-surface-50 btn min-h-full md:h-max !bg-transparent p-0 text-xs uppercase md:text-[0.8vw]">
+            <div class="flex items-center md:gap-[0.35vw]">
+                <button class="btn md:h-max min-h-full btn-secondary p-0">
+                    <coreproject-icon-arrow
+                        class="md:w-[1.25vw]"
+                        variant="outline"
+                    ></coreproject-icon-arrow>
+                </button>
+                <span class="md:text-[0.9vw] font-semibold text-accent">106</span>
+                <button class="btn md:h-max min-h-full btn-secondary p-0">
+                    <coreproject-icon-arrow
+                        class="md:w-[1.25vw] rotate-90"
+                        variant="outline"
+                    ></coreproject-icon-arrow>
+                </button>
+            </div>
+            <button class="text-surface-50 btn min-h-full md:h-max !bg-transparent p-0 text-xs uppercase md:text-[0.9vw]">
                 Replay
             </button>
         </div>
