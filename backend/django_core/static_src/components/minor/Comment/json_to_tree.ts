@@ -1,4 +1,4 @@
-type Comment = { user: string; text: string; path: string; created_at: string; children: number; child: Comment[] };
+import type { Comment } from "../../../types/comment";
 
 export class JSONToTree {
     #json: Comment[] = new Array<Comment>();

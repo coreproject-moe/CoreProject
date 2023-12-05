@@ -1,20 +1,10 @@
 <script lang="ts">
     import { FormatDate } from "$functions/format_date";
     import Markdown from "$components/minor/Markdown/Index.svelte";
+    import type { Comment } from "../../../types/comment";
 
-    export let item: {
-        created_at: string;
-        user: {
-            username: string;
-            first_name: string;
-            last_name: string;
-            avatar: null | string;
-            avatar_url: string;
-        };
-        text: string;
-        path: string;
-        children: number;
-    };
+    export let item: Comment;
+    console.log(item);
 </script>
 
 <div>

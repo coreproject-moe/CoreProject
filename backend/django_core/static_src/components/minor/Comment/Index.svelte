@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { JSONToTree } from "$functions/json_to_tree";
+    import { JSONToTree } from "./json_to_tree";
     import CommetBlock from "./CommetBlock.svelte";
+    import type { Comment } from "../../../types/comment";
 
     export let api_url: string;
 
@@ -32,8 +33,7 @@
             }
         });
         const value = (await res.json()) as Comment;
-        const formated_json = new JSONToTree(value.results).to_tree() as CommentResult[];
-        console.log(formated_json);
+        const formated_json = new JSONToTree(value.results).to_tree() as unknown as Comment[];
         if (res.ok) {
             return formated_json;
         } else {
@@ -44,10 +44,10 @@
 
 {#await get_comments()}
     Loading...
-{:then comment}
-    <!-- <div class="flex flex-col md:gap-[1.5vw]">
-        {#each comment.results as item}
-            <CommetBlock {item} />
+{:then tree_branch}
+    <div class="flex flex-col md:gap-[1.5vw]">
+        {#each tree_branch as branch}
+            <CommetBlock item={branch} />
         {/each}
-    </div> -->
+    </div>
 {/await}
