@@ -8,7 +8,6 @@
     class={klass}
     {style}
     xmlns="http://www.w3.org/2000/svg"
-    {...$$props}
     fill="none"
     viewBox="0 0 36 36"
 >
