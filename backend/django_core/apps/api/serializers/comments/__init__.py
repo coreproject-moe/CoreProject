@@ -18,13 +18,13 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.Serializer):
-    pk = serializers.IntegerField()
+    pk = serializers.IntegerField(read_only=True)
     created_at = serializers.DateTimeField(read_only=True)
     user = UserSerializer(read_only=True)
     text = serializers.CharField()
     path = serializers.CharField(required=False)
-    childrens = serializers.IntegerField()
-    ratio = serializers.IntegerField()
+    childrens = serializers.IntegerField(read_only=True)
+    ratio = serializers.IntegerField(read_only=True)
 
     user_reaction = serializers.SerializerMethodField(method_name="get_user_reaction")
 

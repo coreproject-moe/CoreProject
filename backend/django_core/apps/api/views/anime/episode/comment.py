@@ -58,5 +58,6 @@ class EpisodeCommentAPIView(generics.ListAPIView):
             episode_comment_instance = CommentModel.objects.create_child(**serializer_data)
 
         episode_instance.episode_comments.add(episode_comment_instance)
+        comment_serialier = self.get_serializer(episode_comment_instance)
 
-        return Response(status=200, data=serializer.data)
+        return Response(status=200, data=comment_serialier.data)
