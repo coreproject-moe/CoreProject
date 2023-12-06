@@ -22,6 +22,7 @@
     import Share from "$icons/Share/Index.svelte";
     import Chat from "$icons/Chat/Index.svelte";
     import Cross from "$icons/Cross/Index.svelte";
+    import { reverse } from "$functions/urls";
 
     // Object.entries(item).forEach(([key, obj]) => {
     //     if (typeof obj === "object" && key !== "user") {
@@ -62,7 +63,17 @@
         </div>
         <div class="flex items-center gap-3 md:gap-[0.75vw]">
             <div class="flex items-center md:gap-[0.35vw]">
-                <button class="btn btn-secondary min-h-full p-0 md:h-max">
+                <button
+                    class="btn btn-secondary min-h-full p-0 md:h-max"
+                    on:click={async () => {
+                        fetch(reverse(""), {
+                            method: "POST",
+                            headers: {
+                                "X-CSRFToken": window.csrfmiddlewaretoken
+                            }
+                        });
+                    }}
+                >
                     <Arrow
                         class="md:w-[1.25vw]"
                         variant="outline"
@@ -71,7 +82,7 @@
                 <span class="font-semibold text-accent md:text-[0.9vw]">106</span>
                 <button class="btn btn-secondary min-h-full p-0 md:h-max">
                     <Arrow
-                        class="rotate-90 md:w-[1.25vw]"
+                        class="rotate-180 md:w-[1.25vw]"
                         variant="outline"
                     />
                 </button>
