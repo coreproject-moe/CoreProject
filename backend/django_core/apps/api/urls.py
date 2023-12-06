@@ -14,6 +14,8 @@ from .views.producers import ProducerViewSet
 from .views.staffs import StaffViewSet
 from .views.user.login import LoginAPIView
 from .views.user.logout import LogoutAPIView
+from .views.comment.like import CommentLikeAPIView
+from .views.comment.dislike import CommentDislikeAPIView
 
 base_router = routers.DefaultRouter()
 base_router.register(r"comments", CommentViewSet, basename="comment")
@@ -50,4 +52,13 @@ urlpatterns = [
     # User routes
     path("user/login/", LoginAPIView.as_view()),
     path("user/logout/", LogoutAPIView.as_view()),
+    # Comment routes
+    path(
+        "comment/<pk:int>/like/", CommentLikeAPIView.as_view(), name="comment-like-endpoint"
+    ),
+    path(
+        "comment/<pk:int>/dislike/",
+        CommentDislikeAPIView.as_view(),
+        name="comment-dislike-endpoint",
+    ),
 ]
