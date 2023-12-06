@@ -4,6 +4,13 @@
     import type { Comment } from "../../../types/comment";
 
     export let item: Comment;
+    // Import icons
+    import Dot from "$icons/Dot/Index.svelte";
+    import Arrow from "$icons/Arrow/Index.svelte";
+    import Chat from "$icons/Chat/Index.svelte";
+    import Share from "$icons/Share/Index.svelte";
+    import Cross from "$icons/Cross/Index.svelte";
+    import { reverse } from "$functions/urls";
 </script>
 
 <div class="flex gap-3 md:gap-[0.75vw]">
@@ -38,26 +45,33 @@
         </div>
         <div class="flex items-center gap-3 md:gap-[0.75vw]">
             <div class="flex items-center md:gap-[0.35vw]">
-                <button class="btn btn-secondary min-h-full p-0 md:h-max">
-                    <coreproject-icon-arrow
+                <button
+                    on:click={() => {
+                        fetch(reverse("comment-like-endpoint"), {
+                            method: "POST"
+                        });
+                    }}
+                    class="btn btn-secondary min-h-full p-0 md:h-max"
+                >
+                    <Arrow
                         class="md:w-[1.25vw]"
                         variant="outline"
-                    ></coreproject-icon-arrow>
+                    />
                 </button>
                 <span class="font-semibold text-accent md:text-[0.9vw]">106</span>
                 <button class="btn btn-secondary min-h-full p-0 md:h-max">
-                    <coreproject-icon-arrow
-                        class="rotate-90 md:w-[1.25vw]"
+                    <Arrow
+                        class="rotate-180 md:w-[1.25vw]"
                         variant="outline"
-                    ></coreproject-icon-arrow>
+                    />
                 </button>
             </div>
             <button class="btn min-h-full !bg-transparent p-0 text-xs md:h-max md:gap-[0.35vw] md:text-[0.9vw]">
-                <coreproject-icon-chat class="md:w-[1vw]"></coreproject-icon-chat>
+                <Chat class="md:w-[1vw]" />
                 <span>Replay</span>
             </button>
             <button class="btn min-h-full !bg-transparent p-0 text-xs md:h-max md:gap-[0.35vw] md:text-[0.9vw]">
-                <coreproject-icon-share class="md:w-[1vw]"></coreproject-icon-share>
+                <Share class="md:w-[1vw]" />
                 <span>Share</span>
             </button>
             <div class="dropdown">
@@ -66,9 +80,9 @@
                     role="button"
                     class="btn btn-secondary h-max min-h-max p-0 md:gap-[0.15vw]"
                 >
-                    <coreproject-icon-dot class="md:w-[0.2vw]"></coreproject-icon-dot>
-                    <coreproject-icon-dot class="md:w-[0.2vw]"></coreproject-icon-dot>
-                    <coreproject-icon-dot class="md:w-[0.2vw]"></coreproject-icon-dot>
+                    {#each Array(3).fill(0) as _}
+                        <Dot class="md:w-[0.2vw]" />
+                    {/each}
                 </div>
                 <ul class="dropdown-content z-10 overflow-hidden bg-neutral md:rounded-[0.25vw]">
                     <li class="cursor-pointer transition-colors hover:bg-primary hover:text-accent md:px-[1vw] md:py-[0.5vw] md:text-[1vw]">
@@ -79,7 +93,7 @@
         </div>
 
         <!-- Render replies here -->
-        {#if item.children !== 0}
+        {#if item.childrens !== 0}
             <div class="flex flex-col md:mt-[1.5vw] md:gap-[1.5vw]">
                 {#each item.child as comment, index}
                     {#if index === 0}
@@ -91,7 +105,7 @@
     </div>
 </div>
 
-{#if item.children > 1}
+{#if item.childrens > 1}
     <div class="flex items-end md:ml-[0.55vw] md:gap-[0.5vw]">
         <svg
             class="text-neutral md:w-[2vw]"
@@ -108,7 +122,7 @@
 
         <button class="btn btn-secondary flex h-max min-h-max items-center p-0 md:gap-[0.75vw]">
             <div class="grid rotate-45 place-items-center rounded-full bg-neutral md:h-[1.5vw] md:w-[1.5vw]">
-                <coreproject-icon-cross class="p-0 text-accent md:w-[1vw]"></coreproject-icon-cross>
+                <Cross class="p-0 text-accent md:w-[1vw]" />
             </div>
             <span class="md:text-[1vw]">{item.child.length - 1} More</span>
         </button>

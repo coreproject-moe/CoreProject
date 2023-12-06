@@ -1,6 +1,7 @@
 from apps.comments.models import CommentModel
 from apps.user.models import CustomUser
 from rest_framework import serializers
+from django.http import HttpRequest
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -22,9 +23,17 @@ class CommentSerializer(serializers.Serializer):
     user = UserSerializer(read_only=True)
     text = serializers.CharField()
     path = serializers.CharField(required=False)
-    children = serializers.SerializerMethodField()
+    childrens = serializers.IntegerField()
     ratio = serializers.IntegerField()
 
-    def get_children(self, obj: CommentModel) -> int:
-        if hasattr(obj, "children"):
-            return obj.children().count()
+    user_reaction = serializers.SerializerMethodField(method_name="get_user_reaction")
+
+    def get_user_reaction(self, obj: CommentModel) -> str | None:
+        request: HttpRequest = self.context["request"]
+
+        if obj.likes.contains(request.user):
+            return "liked"
+        if obj.dislikes.contains(request.user):
+            return "disliked"
+
+        return None

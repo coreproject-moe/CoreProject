@@ -1,4 +1,5 @@
 export type Comment = {
+    pk: number;
     user: {
         username: string;
         first_name: string;
@@ -9,6 +10,7 @@ export type Comment = {
     text: string;
     path: string;
     created_at: string;
-    children: number;
+    childrens: number;
+    user_reaction: "liked" | "disliked" | null;
     child: Comment[];
 };

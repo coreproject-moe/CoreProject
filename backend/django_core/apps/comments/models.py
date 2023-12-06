@@ -20,6 +20,10 @@ class CommentModel(CreatedAtMixin, TreeModel):
         # Formula : <like> - <dislike>
         return self.likes.count() - self.dislikes.count()
 
+    @property
+    def childrens(self) -> int:
+        return self.children().count()
+
     def __str__(self) -> str:
         return f"{self.user} | {self.text}"
 
