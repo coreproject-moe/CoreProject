@@ -3,8 +3,6 @@ from django.contrib.postgres import indexes as idx
 from django.db import models
 from django_ltree.models import TreeModel
 from mixins.models.created_at import CreatedAtMixin
-from django.db.models import F
-from django.db.models.functions import Length
 
 # Create your models here.
 
