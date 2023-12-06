@@ -2,9 +2,8 @@ from apps.anime.models import AnimeModel
 from apps.comments.models import CommentModel
 from apps.episodes.models import EpisodeModel
 from django.http import HttpRequest
-from rest_framework import generics
+from rest_framework import generics, permissions
 from rest_framework.pagination import LimitOffsetPagination
-from rest_framework import permissions
 from rest_framework.response import Response
 
 from ....serializers.episode.comment import EpisodeCommentSerializer
