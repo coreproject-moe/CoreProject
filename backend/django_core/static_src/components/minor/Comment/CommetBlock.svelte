@@ -47,8 +47,11 @@
             <div class="flex items-center md:gap-[0.35vw]">
                 <button
                     on:click={() => {
-                        fetch(reverse("comment-like-endpoint"), {
-                            method: "POST"
+                        fetch(reverse("comment-like-endpoint", item.pk), {
+                            method: "POST",
+                            headers: {
+                                "X-CSRFToken": window.csrfmiddlewaretoken
+                            }
                         });
                     }}
                     class="btn btn-secondary min-h-full p-0 md:h-max"
@@ -61,6 +64,14 @@
                 <span class="font-semibold text-accent md:text-[0.9vw]">106</span>
                 <button class="btn btn-secondary min-h-full p-0 md:h-max">
                     <Arrow
+                        on:click={() => {
+                            fetch(reverse("comment-dislike-endpoint", item.pk), {
+                                method: "POST",
+                                headers: {
+                                    "X-CSRFToken": window.csrfmiddlewaretoken
+                                }
+                            });
+                        }}
                         class="rotate-180 md:w-[1.25vw]"
                         variant="outline"
                     />
