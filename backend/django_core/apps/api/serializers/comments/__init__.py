@@ -17,6 +17,7 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.Serializer):
+    pk = serializers.IntegerField()
     created_at = serializers.DateTimeField(read_only=True)
     user = UserSerializer(read_only=True)
     text = serializers.CharField()

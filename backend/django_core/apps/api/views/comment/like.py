@@ -18,15 +18,13 @@ from django.views.decorators.cache import never_cache
 class CommentLikeAPIView(APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    @method_decorator(never_cache)
-    def post(request: HttpRequest, pk: int) -> Response:
+    def post(self, request: HttpRequest, pk: int) -> Response:
         comment_instance = get_object_or_404(CommentModel, pk=pk)
         comment_instance.likes.add(request.user)
         comment_instance.save()
         return Response(status=200)
 
-    @method_decorator(never_cache)
-    def delete(request: HttpRequest, pk: int) -> Response:
+    def delete(self, request: HttpRequest, pk: int) -> Response:
         comment_instance = get_object_or_404(CommentModel, pk=pk)
         comment_instance.likes.remove(request.user)
         comment_instance.save()
