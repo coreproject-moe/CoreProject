@@ -10,12 +10,12 @@ from .views.anime.genre import AnimeGenresAPIView, AnimeGenresSpecificAPIView
 from .views.anime.theme import AnimeThemesAPIView, AnimeThemesSpecificAPIView
 from .views.characters import CharacterViewSet
 from .views.comment import CommentViewSet
+from .views.comment.dislike import CommentDislikeAPIView
+from .views.comment.like import CommentLikeAPIView
 from .views.producers import ProducerViewSet
 from .views.staffs import StaffViewSet
 from .views.user.login import LoginAPIView
 from .views.user.logout import LogoutAPIView
-from .views.comment.like import CommentLikeAPIView
-from .views.comment.dislike import CommentDislikeAPIView
 
 base_router = routers.DefaultRouter()
 base_router.register(r"comments", CommentViewSet, basename="comment")
