@@ -5,26 +5,13 @@
 
     export let api_url: string;
 
-    type CommentResult = {
-        created_at: string;
-        user: {
-            username: string;
-            first_name: string;
-            last_name: string;
-            avatar: null | string;
-            avatar_url: string;
-        };
-        text: string;
-        path: string;
-        children: number;
-    };
-
-    interface Comment {
+    interface CommentResponse {
         count: number;
         next: null | number;
         previous: null | number;
-        results: CommentResult[];
+        results: Comment[];
     }
+
     async function get_comments() {
         const res = await fetch(api_url, {
             method: "GET",
@@ -32,7 +19,7 @@
                 "X-CSRFToken": window.csrfmiddlewaretoken
             }
         });
-        const value = (await res.json()) as Comment;
+        const value = (await res.json()) as CommentResponse;
         const formated_json = new JSONToTree(value.results).to_tree() as unknown as Comment[];
         if (res.ok) {
             return formated_json;

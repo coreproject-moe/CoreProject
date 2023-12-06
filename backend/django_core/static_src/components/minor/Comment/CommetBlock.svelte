@@ -3,27 +3,7 @@
     import Markdown from "$components/minor/Markdown/Index.svelte";
     import type { Comment } from "../../../types/comment";
 
-    export let item: {
-        created_at: string;
-        user: {
-            username: string;
-            first_name: string;
-            last_name: string;
-            avatar: null | string;
-            avatar_url: string;
-        };
-        text: string;
-        path: string;
-        children: number;
-    };
-
-    const comment_level = item.path.split(".").length; // this might help later
-
-    // Object.entries(item).forEach(([key, obj]) => {
-    //     if (typeof obj === "object" && key !== "user") {
-    //         console.log()
-    //     }
-    // })
+    export let item: Comment;
 </script>
 
 <div class="flex gap-3 md:gap-[0.75vw]">
@@ -101,10 +81,9 @@
         <!-- Render replies here -->
         {#if item.children !== 0}
             <div class="flex flex-col md:mt-[1.5vw] md:gap-[1.5vw]">
-                {#each Object.entries(item) as [key, obj]}
-                    <!-- Avoid user object -->
-                    {#if typeof obj === "object" && key !== "user"}
-                        <svelte:self item={obj} />
+                {#each item.child as comment, index}
+                    {#if index === 0}
+                        <svelte:self item={comment} />
                     {/if}
                 {/each}
             </div>
@@ -131,7 +110,7 @@
             <div class="grid rotate-45 place-items-center rounded-full bg-neutral md:h-[1.5vw] md:w-[1.5vw]">
                 <coreproject-icon-cross class="p-0 text-accent md:w-[1vw]"></coreproject-icon-cross>
             </div>
-            <span class="md:text-[1vw]">{item.children - 1} More</span>
+            <span class="md:text-[1vw]">{item.child.length - 1} More</span>
         </button>
     </div>
 {/if}
