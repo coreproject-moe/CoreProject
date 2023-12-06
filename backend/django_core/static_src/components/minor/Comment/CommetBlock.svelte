@@ -1,6 +1,7 @@
 <script lang="ts">
     import { FormatDate } from "$functions/format_date";
     import Markdown from "$components/minor/Markdown/Index.svelte";
+    import type { Comment } from "../../../types/comment";
 
     export let item: {
         created_at: string;
@@ -16,13 +17,7 @@
         children: number;
     };
 
-    // icon import
-    import Arrow from "$icons/Arrow/Index.svelte";
-    import Dot from "$icons/Dot/Index.svelte";
-    import Share from "$icons/Share/Index.svelte";
-    import Chat from "$icons/Chat/Index.svelte";
-    import Cross from "$icons/Cross/Index.svelte";
-    import { reverse } from "$functions/urls";
+    const comment_level = item.path.split(".").length; // this might help later
 
     // Object.entries(item).forEach(([key, obj]) => {
     //     if (typeof obj === "object" && key !== "user") {
@@ -63,36 +58,26 @@
         </div>
         <div class="flex items-center gap-3 md:gap-[0.75vw]">
             <div class="flex items-center md:gap-[0.35vw]">
-                <button
-                    class="btn btn-secondary min-h-full p-0 md:h-max"
-                    on:click={async () => {
-                        fetch(reverse(""), {
-                            method: "POST",
-                            headers: {
-                                "X-CSRFToken": window.csrfmiddlewaretoken
-                            }
-                        });
-                    }}
-                >
-                    <Arrow
+                <button class="btn btn-secondary min-h-full p-0 md:h-max">
+                    <coreproject-icon-arrow
                         class="md:w-[1.25vw]"
                         variant="outline"
-                    />
+                    ></coreproject-icon-arrow>
                 </button>
                 <span class="font-semibold text-accent md:text-[0.9vw]">106</span>
                 <button class="btn btn-secondary min-h-full p-0 md:h-max">
-                    <Arrow
-                        class="rotate-180 md:w-[1.25vw]"
+                    <coreproject-icon-arrow
+                        class="rotate-90 md:w-[1.25vw]"
                         variant="outline"
-                    />
+                    ></coreproject-icon-arrow>
                 </button>
             </div>
             <button class="btn min-h-full !bg-transparent p-0 text-xs md:h-max md:gap-[0.35vw] md:text-[0.9vw]">
-                <Chat class="md:w-[1vw]" />
+                <coreproject-icon-chat class="md:w-[1vw]"></coreproject-icon-chat>
                 <span>Replay</span>
             </button>
             <button class="btn min-h-full !bg-transparent p-0 text-xs md:h-max md:gap-[0.35vw] md:text-[0.9vw]">
-                <Share class="md:w-[1vw]"></Share>
+                <coreproject-icon-share class="md:w-[1vw]"></coreproject-icon-share>
                 <span>Share</span>
             </button>
             <div class="dropdown">
@@ -101,9 +86,9 @@
                     role="button"
                     class="btn btn-secondary h-max min-h-max p-0 md:gap-[0.15vw]"
                 >
-                    <Dot class="md:w-[0.2vw]" />
-                    <Dot class="md:w-[0.2vw]" />
-                    <Dot class="md:w-[0.2vw]" />
+                    <coreproject-icon-dot class="md:w-[0.2vw]"></coreproject-icon-dot>
+                    <coreproject-icon-dot class="md:w-[0.2vw]"></coreproject-icon-dot>
+                    <coreproject-icon-dot class="md:w-[0.2vw]"></coreproject-icon-dot>
                 </div>
                 <ul class="dropdown-content z-10 overflow-hidden bg-neutral md:rounded-[0.25vw]">
                     <li class="cursor-pointer transition-colors hover:bg-primary hover:text-accent md:px-[1vw] md:py-[0.5vw] md:text-[1vw]">
@@ -144,7 +129,7 @@
 
         <button class="btn btn-secondary flex h-max min-h-max items-center p-0 md:gap-[0.75vw]">
             <div class="grid rotate-45 place-items-center rounded-full bg-neutral md:h-[1.5vw] md:w-[1.5vw]">
-                <Cross class="p-0 text-accent md:w-[1vw]" />
+                <coreproject-icon-cross class="p-0 text-accent md:w-[1vw]"></coreproject-icon-cross>
             </div>
             <span class="md:text-[1vw]">{item.children - 1} More</span>
         </button>

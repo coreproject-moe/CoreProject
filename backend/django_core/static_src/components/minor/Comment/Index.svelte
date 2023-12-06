@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { JSONToTree } from "$functions/json_to_tree";
+    import { JSONToTree } from "./json_to_tree";
     import CommetBlock from "./CommetBlock.svelte";
+    import type { Comment } from "../../../types/comment";
 
     export let api_url: string;
 
@@ -16,7 +17,7 @@
         text: string;
         path: string;
         children: number;
-    }
+    };
 
     interface Comment {
         count: number;
@@ -32,18 +33,9 @@
             }
         });
         const value = (await res.json()) as Comment;
-        const formated_json = new JSONToTree(value.results).to_tree() as CommentResult[];
-
-        // clear results
-        value.results.length = 0;
-        if (typeof formated_json === "object" && formated_json !== null) {
-            Object.values(formated_json).forEach((item) => {
-                value.results.push(item);
-            })
-        }
-
+        const formated_json = new JSONToTree(value.results).to_tree() as unknown as Comment[];
         if (res.ok) {
-            return value;
+            return formated_json;
         } else {
             throw new Error(await res.text());
         }
@@ -52,10 +44,10 @@
 
 {#await get_comments()}
     Loading...
-{:then comment}
+{:then tree_branch}
     <div class="flex flex-col md:gap-[1.5vw]">
-        {#each comment.results as item}
-            <CommetBlock {item} />
+        {#each tree_branch as branch}
+            <CommetBlock item={branch} />
         {/each}
     </div>
 {/await}
