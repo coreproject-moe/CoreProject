@@ -26,7 +26,7 @@ export class JSONToTree {
                         // Copy values
                         new_node.text = node.text;
                         new_node.user = node.user;
-                        new_node.children = node.children;
+                        new_node.children = node.childrens;
                         new_node.created_at = node.created_at;
                     }
 
