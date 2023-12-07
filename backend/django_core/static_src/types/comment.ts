@@ -7,11 +7,11 @@ export type Comment = {
         avatar: null | string;
         avatar_url: string;
     };
-    ratio:number;
+    ratio: number;
     text: string;
     path: string;
     created_at: string;
     childrens: number;
-    user_reaction: "liked" | "disliked" | null;
+    user_reaction: "upvoted" | "downvoted" | null;
     child: Comment[];
 };

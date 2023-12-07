@@ -32,8 +32,8 @@ class CommentSerializer(serializers.Serializer):
         request: HttpRequest = self.context["request"]
 
         if CommentModel.objects.filter(pk=obj.pk, upvotes=request.user.id).exists():
-            return "liked"
+            return "upvoted"
         if CommentModel.objects.filter(pk=obj.pk, downvotes=request.user.id).exists():
-            return "disliked"
+            return "downvoted"
 
         return None

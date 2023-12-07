@@ -22,21 +22,38 @@
     });
 
     const post_to_reaction_endpoint = async (reaction: "upvote" | "downvote") => {
-        const res = await fetch(reverse("comment-reaction-endpoint", item.pk), {
-            method: "POST",
-            headers: {
-                "X-CSRFToken": window.csrfmiddlewaretoken
-            },
-            body: JSON.stringify({
-                reaction: reaction
-            })
-        });
-        if (res.ok) {
-            const json = await res.json();
-            user_reaction = json.user_reaction;
-            ratio = json.ratio;
-        }
-    };
+            const res = await fetch(reverse("comment-reaction-endpoint", item.pk), {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": window.csrfmiddlewaretoken
+                },
+                body: JSON.stringify({
+                    reaction: reaction
+                })
+            });
+            if (res.ok) {
+                const json = await res.json();
+                user_reaction = json.user_reaction;
+                ratio = json.ratio;
+            }
+        },
+        delete_to_reaction_endpoint = async () => {
+            const res = await fetch(reverse("comment-reaction-endpoint", item.pk), {
+                method: "DELETE",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": window.csrfmiddlewaretoken
+                }
+            });
+            if (res.ok) {
+                const json = await res.json();
+                user_reaction = json.user_reaction;
+                ratio = json.ratio;
+            }
+        };
 </script>
 
 <div class="flex gap-3 md:gap-[0.75vw]">
@@ -73,11 +90,15 @@
             <div class="flex items-center md:gap-[0.35vw]">
                 <button
                     on:click|preventDefault={async () => {
-                        post_to_reaction_endpoint("upvote");
+                        if (user_reaction === "upvoted") {
+                            await delete_to_reaction_endpoint();
+                        } else {
+                            await post_to_reaction_endpoint("upvote");
+                        }
                     }}
                     class="btn btn-secondary min-h-full p-0 md:h-max"
                 >
-                    {#if user_reaction === "liked"}
+                    {#if user_reaction === "upvoted"}
                         <Arrow
                             variant="fill"
                             class="text-orange-500 md:w-[1.25vw]"
@@ -93,10 +114,14 @@
                 <button
                     class="btn btn-secondary min-h-full p-0 md:h-max"
                     on:click={async () => {
-                        post_to_reaction_endpoint("downvote");
+                        if (user_reaction === "downvoted") {
+                            await delete_to_reaction_endpoint();
+                        } else {
+                            await post_to_reaction_endpoint("downvote");
+                        }
                     }}
                 >
-                    {#if user_reaction === "disliked"}
+                    {#if user_reaction === "downvoted"}
                         <Arrow
                             class="rotate-180 text-orange-500 md:w-[1.25vw]"
                             variant="fill"

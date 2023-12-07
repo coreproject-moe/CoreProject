@@ -46,6 +46,8 @@ class CommentReactionAPIView(APIView):
         comment_instance.save()
         serializer = CommentSerializer(
             comment_instance,
-            context={"request": request},
+            context={
+                "request": request,
+            },
         )
         return Response(status=200, data=serializer.data)
