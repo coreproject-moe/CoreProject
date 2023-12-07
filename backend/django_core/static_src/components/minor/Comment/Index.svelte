@@ -37,4 +37,6 @@
             <CommetBlock item={branch} />
         {/each}
     </div>
+{:catch e}
+    Something is wrong {e}
 {/await}
