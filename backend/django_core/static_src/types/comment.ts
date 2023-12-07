@@ -7,6 +7,7 @@ export type Comment = {
         avatar: null | string;
         avatar_url: string;
     };
+    ratio:number;
     text: string;
     path: string;
     created_at: string;

@@ -10,12 +10,11 @@ from .views.anime.genre import AnimeGenresAPIView, AnimeGenresSpecificAPIView
 from .views.anime.theme import AnimeThemesAPIView, AnimeThemesSpecificAPIView
 from .views.characters import CharacterViewSet
 from .views.comment import CommentViewSet
-from .views.comment.dislike import CommentDislikeAPIView
-from .views.comment.like import CommentLikeAPIView
 from .views.producers import ProducerViewSet
 from .views.staffs import StaffViewSet
 from .views.user.login import LoginAPIView
 from .views.user.logout import LogoutAPIView
+from .views.comment.reaction import CommentReactionAPIView
 
 base_router = routers.DefaultRouter()
 base_router.register(r"comments", CommentViewSet, basename="comment")
@@ -54,11 +53,8 @@ urlpatterns = [
     path("user/logout/", LogoutAPIView.as_view()),
     # Comment routes
     path(
-        "comment/<int:pk>/like/", CommentLikeAPIView.as_view(), name="comment-like-endpoint"
-    ),
-    path(
-        "comment/<int:pk>/dislike/",
-        CommentDislikeAPIView.as_view(),
-        name="comment-dislike-endpoint",
+        "comment/<int:pk>/reaction/",
+        CommentReactionAPIView.as_view(),
+        name="comment-reaction-endpoint",
     ),
 ]
