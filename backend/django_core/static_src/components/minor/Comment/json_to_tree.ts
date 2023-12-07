@@ -26,7 +26,7 @@ export class JSONToTree {
 
                     if (index === path_segments.length - 1) {
                         // Copy values
-                        omit(node,'child','path')                        
+                        omit(node,'child','path')
                         assign(new_node,node);
                     }
 
