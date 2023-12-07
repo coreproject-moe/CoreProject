@@ -3,15 +3,15 @@ import svelteRetag from "svelte-retag";
 
 // Specific Components
 const mapping = [
-    { tagname: "coreproject-specific-commentbox", component: await import("$components/specific/CommentBox/Index.svelte"), attributes: [`submit_url`] },
-    { tagname: "coreproject-specific-my-anime-list", component: await import("$components/specific/MyAnime/Index.svelte"), attributes: [`anime_name`, `anime_status`, `anime_image`, `anime_current_episodes`, `anime_total_episodes`, `dropdown_class`, `anime_description`, `anime_studio`, `anime_genres`] }
+    { tagname: "specific-commentbox", component: await import("$components/specific/CommentBox/Index.svelte") },
+    { tagname: "specific-my-anime-list", component: await import("$components/specific/MyAnime/Index.svelte") }
 ];
 
 mapping.forEach((item) => {
     svelteRetag({
         component: item.component.default,
-        tagname: item.tagname,
-        attributes: item.attributes,
+        tagname: `coreproject-${item.tagname}`,
+        attributes: true,
         shadow: false,
         hydratable: true
     });

@@ -1,26 +1,26 @@
 <span class="flex items-center text-base font-bold uppercase leading-none tracking-widest text-white md:text-[1.5vw]">hey there! welcome back 👋</span>
-<form-fields class="flex flex-col gap-7 md:block">
-    <email-username-field class="flex flex-col gap-[0.3rem] md:gap-[0.5vw]">
+<div class="flex flex-col gap-7 md:block">
+    <div class="flex flex-col gap-[0.3rem] md:gap-[0.5vw]">
         <label class="text-base font-semibold leading-none md:text-[1.1vw]">
             {{ form.username.label }}
         </label>
         {{ form.username }}
-        <info class="flex items-center gap-2 md:gap-[0.5vw]">
-            <coreproject-icon-info class="w-3 opacity-70 md:w-[0.9vw]" ></coreproject-icon-info >
+        <div class="flex items-center gap-2 md:gap-[0.5vw]">
+            <coreproject-icon-info class="w-3 opacity-70 md:w-[0.9vw]" ></coreproject-icon-info>
 
             <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.8vw]">
                 {{ form.username.help_text }}
             </span>
-        </info>
-    </email-username-field>
-    <password-field class="flex flex-col gap-[0.3rem] md:mt-[1.5vw] md:gap-[0.5vw]">
+        </div>
+    </div>
+    <div class="flex flex-col gap-[0.3rem] md:mt-[1.5vw] md:gap-[0.5vw]">
         <label class="text-base font-semibold leading-none md:text-[1.1vw]">
             {{ form.password.label }}
         </label>
         <div class="relative flex flex-col">
             {{ form.password }}
         </div>
-    </password-field>
+    </div>
     <button
         hx-get="{% url 'reset_password_view' %}"
         hx-target="<content/>"
@@ -29,7 +29,7 @@
     >
         &lt; forgot password? &gt;
     </button>
-</form-fields>
+</div>
 <div class="flex items-center justify-between">
     <div class="flex flex-col gap-1 md:gap-[0.5vw]">
         <span class="text-xs leading-none text-surface-100 md:text-[0.75vw]">Don't have a core account?</span>
