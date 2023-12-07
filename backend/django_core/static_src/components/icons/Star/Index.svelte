@@ -7,18 +7,22 @@
 <svg
     class={klass}
     {style}
-    width="30"
-    height="30"
-    viewBox="0 0 30 30"
-    fill="yellow"
     xmlns="http://www.w3.org/2000/svg"
-    color="yellow"
+    fill="none"
+    viewBox="0 0 36 36"
 >
     <path
-        d="M15 2.5L18.8625 10.325L27.5 11.5875L21.25 17.675L22.725 26.275L15 22.2125L7.275 26.275L8.75 17.675L2.5 11.5875L11.1375 10.325L15 2.5Z"
         stroke="currentColor"
-        stroke-width="3"
         stroke-linecap="round"
         stroke-linejoin="round"
-    ></path>
+        stroke-width="6"
+        d="M16.5 28.5C23.1274 28.5 28.5 23.1274 28.5 16.5C28.5 9.87258 23.1274 4.5 16.5 4.5C9.87258 4.5 4.5 9.87258 4.5 16.5C4.5 23.1274 9.87258 28.5 16.5 28.5Z"
+    />
+    <path
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="6"
+        d="M31.5001 31.5001L24.9751 24.9751"
+    />
 </svg>

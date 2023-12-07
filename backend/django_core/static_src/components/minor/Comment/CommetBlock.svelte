@@ -1,0 +1,144 @@
+<script lang="ts">
+    import { FormatDate } from "$functions/format_date";
+    import Markdown from "$components/minor/Markdown/Index.svelte";
+    import type { Comment } from "../../../types/comment";
+
+    export let item: Comment;
+    // Import icons
+    import Dot from "$icons/Dot/Index.svelte";
+    import Arrow from "$icons/Arrow/Index.svelte";
+    import Chat from "$icons/Chat/Index.svelte";
+    import Share from "$icons/Share/Index.svelte";
+    import Cross from "$icons/Cross/Index.svelte";
+    import { reverse } from "$functions/urls";
+</script>
+
+<div class="flex gap-3 md:gap-[0.75vw]">
+    <div class="flex flex-col items-center md:gap-[1vw]">
+        <a
+            href="/user/"
+            class="h-7 w-7 flex-shrink-0 md:h-[2vw] md:w-[2vw]"
+        >
+            <img
+                alt=""
+                src={item.user.avatar ?? item.user.avatar_url}
+                class="h-full w-full shrink-0 rounded-full object-cover"
+            />
+        </a>
+        <button class="group flex h-full cursor-pointer justify-center transition-transform active:scale-95 md:w-full">
+            <div class="h-full rounded-full bg-neutral transition-colors group-hover:bg-warning md:w-[0.15vw] group-hover:md:w-[0.2vw]" />
+        </button>
+    </div>
+    <div class="flex flex-col items-start gap-1 md:gap-[0.25vw]">
+        <a
+            href="/user/"
+            class="flex flex-col text-xs leading-none md:text-[1vw]"
+        >
+            <div class="flex items-center md:gap-[0.5vw]">
+                <div class="text-white">{`${item.user.first_name} ${item.user.last_name}`}</div>
+                <div class="md:text-[0.75vw]">{item.user.username}</div>
+            </div>
+            <div class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">{new FormatDate(item.created_at).format_to_time_from_now}</div>
+        </a>
+        <div class="text-sm leading-snug text-accent md:text-[1vw] md:leading-[1.5vw]">
+            <Markdown markdown={item.text} />
+        </div>
+        <div class="flex items-center gap-3 md:gap-[0.75vw]">
+            <div class="flex items-center md:gap-[0.35vw]">
+                <button
+                    on:click={async () => {
+                        const res = await fetch(reverse("comment-like-endpoint", item.pk), {
+                            method: "POST",
+                            headers: {
+                                "X-CSRFToken": window.csrfmiddlewaretoken
+                            }
+                        });
+                        if (res.ok) {
+                            console.log("OK");
+                        }
+                    }}
+                    class="btn btn-secondary min-h-full p-0 md:h-max"
+                >
+                    <Arrow
+                        class="md:w-[1.25vw]"
+                        variant="outline"
+                    />
+                </button>
+                <span class="font-semibold text-accent md:text-[0.9vw]">106</span>
+                <button class="btn btn-secondary min-h-full p-0 md:h-max">
+                    <Arrow
+                        on:click={() => {
+                            fetch(reverse("comment-dislike-endpoint", item.pk), {
+                                method: "POST",
+                                headers: {
+                                    "X-CSRFToken": window.csrfmiddlewaretoken
+                                }
+                            });
+                        }}
+                        class="rotate-180 md:w-[1.25vw]"
+                        variant="outline"
+                    />
+                </button>
+            </div>
+            <button class="btn min-h-full !bg-transparent p-0 text-xs md:h-max md:gap-[0.35vw] md:text-[0.9vw]">
+                <Chat class="md:w-[1vw]" />
+                <span>Replay</span>
+            </button>
+            <button class="btn min-h-full !bg-transparent p-0 text-xs md:h-max md:gap-[0.35vw] md:text-[0.9vw]">
+                <Share class="md:w-[1vw]" />
+                <span>Share</span>
+            </button>
+            <div class="dropdown">
+                <div
+                    tabindex="0"
+                    role="button"
+                    class="btn btn-secondary h-max min-h-max p-0 md:gap-[0.15vw]"
+                >
+                    {#each Array(3).fill(0) as _}
+                        <Dot class="md:w-[0.2vw]" />
+                    {/each}
+                </div>
+                <ul class="dropdown-content z-10 overflow-hidden bg-neutral md:rounded-[0.25vw]">
+                    <li class="cursor-pointer transition-colors hover:bg-primary hover:text-accent md:px-[1vw] md:py-[0.5vw] md:text-[1vw]">
+                        <span>Report</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Render replies here -->
+        {#if item.childrens !== 0}
+            <div class="flex flex-col md:mt-[1.5vw] md:gap-[1.5vw]">
+                {#each item.child as comment, index}
+                    {#if index === 0}
+                        <svelte:self item={comment} />
+                    {/if}
+                {/each}
+            </div>
+        {/if}
+    </div>
+</div>
+
+{#if item.childrens > 1}
+    <div class="flex items-end md:ml-[0.55vw] md:gap-[0.5vw]">
+        <svg
+            class="text-neutral md:w-[2vw]"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 15 15"
+        >
+            <path
+                fill="currentColor"
+                fill-rule="evenodd"
+                d="M9.877 12H11.5a.5.5 0 0 0 0-1H9.9c-1.128 0-1.945 0-2.586-.053c-.637-.052-1.057-.152-1.403-.328a3.5 3.5 0 0 1-1.53-1.53c-.176-.346-.276-.766-.328-1.403C4 7.045 4 6.228 4 5.1V3.5a.5.5 0 0 0-1 0v1.623c0 1.1 0 1.958.056 2.645c.057.698.175 1.265.434 1.775a4.5 4.5 0 0 0 1.967 1.967c.51.26 1.077.377 1.775.434C7.92 12 8.776 12 9.877 12Z"
+                clip-rule="evenodd"
+            />
+        </svg>
+
+        <button class="btn btn-secondary flex h-max min-h-max items-center p-0 md:gap-[0.75vw]">
+            <div class="grid rotate-45 place-items-center rounded-full bg-neutral md:h-[1.5vw] md:w-[1.5vw]">
+                <Cross class="p-0 text-accent md:w-[1vw]" />
+            </div>
+            <span class="md:text-[1vw]">{item.child.length - 1} More</span>
+        </button>
+    </div>
+{/if}

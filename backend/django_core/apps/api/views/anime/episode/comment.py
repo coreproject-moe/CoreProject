@@ -2,9 +2,8 @@ from apps.anime.models import AnimeModel
 from apps.comments.models import CommentModel
 from apps.episodes.models import EpisodeModel
 from django.http import HttpRequest
-from rest_framework import generics
+from rest_framework import generics, permissions
 from rest_framework.pagination import LimitOffsetPagination
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 
 from ....serializers.episode.comment import EpisodeCommentSerializer
@@ -18,11 +17,8 @@ class EpisodeCommentAPIView(generics.ListAPIView):
     queryset = CommentModel.objects.none()
     # Searilizers
     serializer_class = EpisodeCommentSerializer
-    # Filters
-    # filter_backends = (DjangoFilterBackend,)
-    # filterset_class = EpisodeCommentFilter
     # Permissions
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     # Pagination
     pagination_class = LimitOffsetPagination
 
@@ -58,5 +54,6 @@ class EpisodeCommentAPIView(generics.ListAPIView):
             episode_comment_instance = CommentModel.objects.create_child(**serializer_data)
 
         episode_instance.episode_comments.add(episode_comment_instance)
+        comment_serialier = self.get_serializer(episode_comment_instance)
 
-        return Response(status=200, data=serializer.data)
+        return Response(status=200, data=comment_serialier.data)

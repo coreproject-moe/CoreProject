@@ -47,4 +47,5 @@ class AnimeCommentAPIView(generics.ListAPIView):
 
         anime_instance.comments.add(anime_comment_instance)
 
-        return Response(status=200, data=serializer.data)
+        comment_serialier = self.get_serializer(anime_comment_instance)
+        return Response(status=200, data=comment_serialier.data)
