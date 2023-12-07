@@ -11,6 +11,49 @@
     import Share from "$icons/Share/Index.svelte";
     import Cross from "$icons/Cross/Index.svelte";
     import { reverse } from "$functions/urls";
+    import { onMount } from "svelte";
+
+    let user_reaction: typeof item.user_reaction;
+    let ratio: typeof item.ratio;
+
+    onMount(() => {
+        user_reaction = item.user_reaction;
+        ratio = item.ratio;
+    });
+
+    const post_to_reaction_endpoint = async (reaction: "upvote" | "downvote") => {
+            const res = await fetch(reverse("comment-reaction-endpoint", item.pk), {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": window.csrfmiddlewaretoken
+                },
+                body: JSON.stringify({
+                    reaction: reaction
+                })
+            });
+            if (res.ok) {
+                const json = await res.json();
+                user_reaction = json.user_reaction;
+                ratio = json.ratio;
+            }
+        },
+        delete_to_reaction_endpoint = async () => {
+            const res = await fetch(reverse("comment-reaction-endpoint", item.pk), {
+                method: "DELETE",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": window.csrfmiddlewaretoken
+                }
+            });
+            if (res.ok) {
+                const json = await res.json();
+                user_reaction = json.user_reaction;
+                ratio = json.ratio;
+            }
+        };
 </script>
 
 <div class="flex gap-3 md:gap-[0.75vw]">
@@ -46,38 +89,49 @@
         <div class="flex items-center gap-3 md:gap-[0.75vw]">
             <div class="flex items-center md:gap-[0.35vw]">
                 <button
-                    on:click={async () => {
-                        const res = await fetch(reverse("comment-like-endpoint", item.pk), {
-                            method: "POST",
-                            headers: {
-                                "X-CSRFToken": window.csrfmiddlewaretoken
-                            }
-                        });
-                        if (res.ok) {
-                            console.log("OK");
+                    on:click|preventDefault={async () => {
+                        if (user_reaction === "upvoted") {
+                            await delete_to_reaction_endpoint();
+                        } else {
+                            await post_to_reaction_endpoint("upvote");
                         }
                     }}
                     class="btn btn-secondary min-h-full p-0 md:h-max"
                 >
-                    <Arrow
-                        class="md:w-[1.25vw]"
-                        variant="outline"
-                    />
+                    {#if user_reaction === "upvoted"}
+                        <Arrow
+                            variant="fill"
+                            class="text-orange-500 md:w-[1.25vw]"
+                        />
+                    {:else}
+                        <Arrow
+                            class="md:w-[1.25vw]"
+                            variant="outline"
+                        />
+                    {/if}
                 </button>
-                <span class="font-semibold text-accent md:text-[0.9vw]">106</span>
-                <button class="btn btn-secondary min-h-full p-0 md:h-max">
-                    <Arrow
-                        on:click={() => {
-                            fetch(reverse("comment-dislike-endpoint", item.pk), {
-                                method: "POST",
-                                headers: {
-                                    "X-CSRFToken": window.csrfmiddlewaretoken
-                                }
-                            });
-                        }}
-                        class="rotate-180 md:w-[1.25vw]"
-                        variant="outline"
-                    />
+                <span class="font-semibold text-accent md:text-[0.9vw]">{ratio}</span>
+                <button
+                    class="btn btn-secondary min-h-full p-0 md:h-max"
+                    on:click={async () => {
+                        if (user_reaction === "downvoted") {
+                            await delete_to_reaction_endpoint();
+                        } else {
+                            await post_to_reaction_endpoint("downvote");
+                        }
+                    }}
+                >
+                    {#if user_reaction === "downvoted"}
+                        <Arrow
+                            class="rotate-180 text-orange-500 md:w-[1.25vw]"
+                            variant="fill"
+                        />
+                    {:else}
+                        <Arrow
+                            class="rotate-180 md:w-[1.25vw]"
+                            variant="outline"
+                        />
+                    {/if}
                 </button>
             </div>
             <button class="btn min-h-full !bg-transparent p-0 text-xs md:h-max md:gap-[0.35vw] md:text-[0.9vw]">

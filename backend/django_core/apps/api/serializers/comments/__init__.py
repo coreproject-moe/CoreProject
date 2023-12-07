@@ -28,12 +28,12 @@ class CommentSerializer(serializers.Serializer):
 
     user_reaction = serializers.SerializerMethodField(method_name="get_user_reaction")
 
-    def get_user_reaction(self, *args, **kwargs) -> str | None:
+    def get_user_reaction(self, obj: CommentModel) -> str | None:
         request: HttpRequest = self.context["request"]
 
-        if CommentModel.objects.filter(likes=request.user.id).exists():
-            return "liked"
-        if CommentModel.objects.filter(dislikes=request.user.id).exists():
-            return "disliked"
+        if CommentModel.objects.filter(pk=obj.pk, upvotes=request.user.id).exists():
+            return "upvoted"
+        if CommentModel.objects.filter(pk=obj.pk, downvotes=request.user.id).exists():
+            return "downvoted"
 
         return None

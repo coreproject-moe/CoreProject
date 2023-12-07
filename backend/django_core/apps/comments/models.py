@@ -12,13 +12,13 @@ class CommentModel(CreatedAtMixin, TreeModel):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     text = models.TextField()
 
-    likes = models.ManyToManyField(CustomUser, blank=True, related_name="likes")
-    dislikes = models.ManyToManyField(CustomUser, blank=True, related_name="dislikes")
+    upvotes = models.ManyToManyField(CustomUser, blank=True, related_name="upvotes")
+    downvotes = models.ManyToManyField(CustomUser, blank=True, related_name="downvotes")
 
     @property
     def ratio(self) -> int:
         # Formula : <like> - <dislike>
-        return self.likes.count() - self.dislikes.count()
+        return self.upvotes.count() - self.downvotes.count()
 
     @property
     def childrens(self) -> int:
