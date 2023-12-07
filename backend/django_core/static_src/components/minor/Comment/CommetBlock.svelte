@@ -2,10 +2,10 @@
     import { FormatDate } from "$functions/format_date";
     import Markdown from "$components/minor/Markdown/Index.svelte";
     import type { Comment } from "../../../types/comment";
+    import TextArea from "$components/minor/TextArea/Index.svelte";
 
     export let item: Comment;
     // Import icons
-    import Dot from "$icons/Dot/Index.svelte";
     import Arrow from "$icons/Arrow/Index.svelte";
     import Chat from "$icons/Chat/Index.svelte";
     import Share from "$icons/Share/Index.svelte";
@@ -13,15 +13,22 @@
     import { reverse } from "$functions/urls";
     import { onMount } from "svelte";
 
-    let user_reaction: typeof item.user_reaction;
-    let ratio: typeof item.ratio;
+    // Bindings
+    let user_reaction: typeof item.user_reaction,
+        ratio: typeof item.ratio,
+        reply_shown = false;
 
     onMount(() => {
         user_reaction = item.user_reaction;
         ratio = item.ratio;
     });
 
-    const post_to_reaction_endpoint = async (reaction: "upvote" | "downvote") => {
+    const fetch_sideeffect = async (res: Response) => {
+            const json = await res.json();
+            user_reaction = json.user_reaction;
+            ratio = json.ratio;
+        },
+        post_to_reaction_endpoint = async (reaction: "upvote" | "downvote") => {
             const res = await fetch(reverse("comment-reaction-endpoint", item.pk), {
                 method: "POST",
                 headers: {
@@ -34,9 +41,7 @@
                 })
             });
             if (res.ok) {
-                const json = await res.json();
-                user_reaction = json.user_reaction;
-                ratio = json.ratio;
+                fetch_sideeffect(res);
             }
         },
         delete_to_reaction_endpoint = async () => {
@@ -49,9 +54,7 @@
                 }
             });
             if (res.ok) {
-                const json = await res.json();
-                user_reaction = json.user_reaction;
-                ratio = json.ratio;
+                fetch_sideeffect(res);
             }
         };
 </script>
@@ -134,7 +137,10 @@
                     {/if}
                 </button>
             </div>
-            <button class="btn min-h-full !bg-transparent p-0 text-xs md:h-max md:gap-[0.35vw] md:text-[0.9vw]">
+            <button
+                class="btn min-h-full !bg-transparent p-0 text-xs md:h-max md:gap-[0.35vw] md:text-[0.9vw]"
+                on:click|preventDefault={() => (reply_shown = !reply_shown)}
+            >
                 <Chat class="md:w-[1vw]" />
                 <span>Replay</span>
             </button>
@@ -142,7 +148,8 @@
                 <Share class="md:w-[1vw]" />
                 <span>Share</span>
             </button>
-            <div class="dropdown">
+
+            <!-- <div class="dropdown">
                 <div
                     tabindex="0"
                     role="button"
@@ -157,8 +164,13 @@
                         <span>Report</span>
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </div>
+        {#if reply_shown}
+            <div class="ring-surface-300/25 relative my-[1vw] flex flex-col rounded-lg ring-2 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw]">
+                <TextArea />
+            </div>
+        {/if}
 
         <!-- Render replies here -->
         {#if item.childrens !== 0}
