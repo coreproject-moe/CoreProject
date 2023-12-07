@@ -8,7 +8,7 @@ export function reverse(view: string, ...args: Array<string | number>) {
 
     // Matches the following patterns
     // <str:pk> | <int:pk>
-    const match_pattern = /\<(int|str):(\w+)>\/?/g;
+    const match_pattern = /\<(int|str):(\w+)>?/g;
     const matches = url?.match(match_pattern) ?? [];
 
     if (matches?.length === 0) {

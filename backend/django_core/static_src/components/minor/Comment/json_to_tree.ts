@@ -1,4 +1,6 @@
 import type { Comment } from "../../../types/comment";
+import omit from 'lodash/omit';
+import assign from 'lodash/assign'
 
 export class JSONToTree {
     #json: Comment[] = new Array<Comment>();
@@ -24,10 +26,8 @@ export class JSONToTree {
 
                     if (index === path_segments.length - 1) {
                         // Copy values
-                        new_node.text = node.text;
-                        new_node.user = node.user;
-                        new_node.children = node.childrens;
-                        new_node.created_at = node.created_at;
+                        omit(node,'child','path')                        
+                        assign(new_node,node);
                     }
 
                     current_node.push(new_node);

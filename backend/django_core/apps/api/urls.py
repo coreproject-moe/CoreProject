@@ -53,9 +53,11 @@ urlpatterns = [
     path("user/login/", LoginAPIView.as_view()),
     path("user/logout/", LogoutAPIView.as_view()),
     # Comment routes
-    path("comment/<pk>/like/", CommentLikeAPIView.as_view(), name="comment-like-endpoint"),
     path(
-        "comment/<pk>/dislike/",
+        "comment/<int:pk>/like/", CommentLikeAPIView.as_view(), name="comment-like-endpoint"
+    ),
+    path(
+        "comment/<int:pk>/dislike/",
         CommentDislikeAPIView.as_view(),
         name="comment-dislike-endpoint",
     ),

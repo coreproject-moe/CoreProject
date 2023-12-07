@@ -46,13 +46,16 @@
         <div class="flex items-center gap-3 md:gap-[0.75vw]">
             <div class="flex items-center md:gap-[0.35vw]">
                 <button
-                    on:click={() => {
-                        fetch(reverse("comment-like-endpoint", item.pk), {
+                    on:click={async() => {
+                        const res = await fetch(reverse("comment-like-endpoint", item.pk), {
                             method: "POST",
                             headers: {
                                 "X-CSRFToken": window.csrfmiddlewaretoken
                             }
                         });
+                        if (res.ok){
+                            console.log("OK")
+                        }
                     }}
                     class="btn btn-secondary min-h-full p-0 md:h-max"
                 >
