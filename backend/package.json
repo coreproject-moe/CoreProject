@@ -46,6 +46,7 @@
     },
     "devDependencies": {
         "@sveltejs/vite-plugin-svelte": "^3.0.1",
+        "@types/node": "^20.10.4",
         "autoprefixer": "^10.4.16",
         "highlight.js": "^11.9.0",
         "lightningcss": "^1.22.1",
