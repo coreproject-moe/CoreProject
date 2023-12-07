@@ -16,11 +16,11 @@
     let caret_offset_top: string | null = null,
         caret_offset_left: string | null = null;
 
-    // Textarea Bindings
-    let textarea_element: HTMLTextAreaElement,
-        textarea_value = "";
+    // External Bindings
+    export let textarea_value = "";
 
-    let preview_element_innerHTML = "";
+    // Textarea Bindings
+    let textarea_element: HTMLTextAreaElement;
 
     let emoji_matches: Array<{
             emoji: string;

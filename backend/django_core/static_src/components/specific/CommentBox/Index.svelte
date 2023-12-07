@@ -1,21 +1,42 @@
 <script lang="ts">
     import TextArea from "$components/minor/TextArea/Index.svelte";
-
+    import { cn } from "$functions/classname";
+    import { comment_needs_update } from "../../../stores/comment";
     // Icons
     import Info from "$icons/Info/Index.svelte";
 
-    export const submit_url = "";
+    export let submit_url = "";
 
-    let textarea_value: string;
+    let textarea_value = "";
 
-    function handle_submit() {
-        // post to `submit_url`
-    }
+    const handle_submit = async () => {
+        if (!submit_url) {
+            throw new Error("`submit_url` is needed");
+        }
+        if (!textarea_value) {
+            throw new Error("`textarea_value` is empty");
+        }
+
+        const res = await fetch(submit_url, {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                "X-CSRFToken": window.csrfmiddlewaretoken
+            },
+            body: JSON.stringify({
+                text: textarea_value
+            })
+        });
+        if (res.ok) {
+            comment_needs_update.set(true);
+        }
+    };
 </script>
 
 <div class="flex flex-col gap-3 md:gap-[0.75vw]">
     <div class="ring-surface-300/25 relative flex flex-col rounded-lg ring-2 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw]">
-        <TextArea />
+        <TextArea bind:textarea_value />
     </div>
     <div class="flex justify-between gap-5 md:gap-[1vw]">
         <comment-alert class="flex items-center gap-3 md:gap-[0.625vw]">
@@ -30,6 +51,13 @@
                 while commenting. Also please refrain from posting spoilers.
             </p>
         </comment-alert>
-        <button class="btn btn-primary h-9 min-h-full w-40 rounded text-sm font-semibold text-accent md:h-[2.2vw] md:w-[6vw] md:rounded-[0.375vw] md:text-[0.85vw]">Comment</button>
+        <button
+            on:click|preventDefault={async () => {
+                await handle_submit();
+            }}
+            class={cn(textarea_value || "btn-disabled", "btn btn-primary h-9 min-h-full w-40 rounded text-sm font-semibold text-accent md:h-[2.2vw] md:w-[6vw] md:rounded-[0.375vw] md:text-[0.85vw]")}
+        >
+            Comment
+        </button>
     </div>
 </div>
