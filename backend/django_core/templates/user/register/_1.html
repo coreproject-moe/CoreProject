@@ -10,7 +10,7 @@
     </span>
     <span class="uppercase md:text-[1vw] font-medium text-white/90">unlock the anime world - join us!</span>
 </div>
-<form-fields
+<div
     class="flex flex-col md:gap-[1.5vw]"
     _="
        init
@@ -28,7 +28,7 @@
             {% endif %}
         </span>
     </email-field>
-    <password-field class="flex flex-col gap-[0.3rem] md:gap-[0.5vw]">
+    <div class="flex flex-col gap-[0.3rem] md:gap-[0.5vw]">
         <label for="password" class="text-lg font-semibold leading-none md:text-[1.1vw]">
             {{ form.password.label }}
         </label>
@@ -141,8 +141,8 @@
                 </div>
             </div>
         </div>
-    </password-field>
-    <confirm-password-field class="flex flex-col gap-[0.3rem] md:gap-[0.5vw]" >
+    </div>
+    <div class="flex flex-col gap-[0.3rem] md:gap-[0.5vw]" >
         <label for="confirm-password" class="text-lg font-semibold leading-none md:text-[1.1vw]">
             {{ form.confirm_password.label }}
         </label>
@@ -154,8 +154,8 @@
                 {{ form.confirm_password.help_text }}
             {% endif %}
         </span>
-    </confirm-password-field>
-</form-fields>
+    </div>
+</div>
 <div class="flex items-center justify-between">
     <div class="flex flex-col gap-1 md:gap-[0.5vw]">
         <span class="text-xs leading-none text-surface-100 md:text-[0.75vw]">Already have an account?</span>
