@@ -1,13 +1,14 @@
+from typing import Literal
+
 from apps.comments.models import CommentModel
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 from rest_framework import permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from ...serializers.comments import CommentSerializer
 
+from ...serializers.comments import CommentSerializer
 from ...serializers.comments.reaction import CommentReactionSerializer
-from typing import Literal
 
 
 class CommentReactionAPIView(APIView):
