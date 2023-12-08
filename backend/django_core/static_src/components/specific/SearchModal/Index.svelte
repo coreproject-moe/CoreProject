@@ -13,8 +13,8 @@
     id="search_model"
     class="modal"
 >
-    <div class="modal-box mt-[3.5vw] flex !max-w-fit flex-col items-center bg-secondary">
-        <form class="relative flex h-[3.7vw] w-[37.5vw] items-center">
+    <div class="modal-box flex !max-w-fit flex-col items-center bg-secondary md:px-[2vw] md:py-[1vw]">
+        <form class="relative flex h-[3.5vw] w-[40vw] items-center">
             <button
                 class="btn absolute left-[1.25vw] min-h-max border-none !bg-transparent p-0"
                 aria-label="Search"
