@@ -41,36 +41,35 @@
         <div class="mt-[1.5vw] flex gap-[4vw]">
             <div>
                 <span class="text-surface-50 text-[1.2vw] font-semibold">anime</span>
-                <div class="bg-surface-400 mt-[0.2vw] h-[28.25vw] w-[21.875vw] rounded-[0.75vw] p-[1vw] shadow-lg">
-                    <ScrollArea
-                        offset_scrollbar
-                        gradient_mask
-                        class="md:pb-[2vw]"
-                    >
-                        {#each Array(6) as _}
-                            <a
-                                href="/mal/"
-                                class="flex items-center gap-[1vw] rounded-[0.7vw] p-[0.8vw] transition duration-200 hover:bg-white/10"
-                            >
-                                <img
-                                    src="/images/DemonSlayer-bg.avif"
-                                    alt={search_query}
-                                    class="h-[3.5vw] w-[3.5vw] rounded-[0.5vw] object-cover"
-                                />
-                                <div class="flex flex-col">
-                                    <span class="text-[1.1vw] font-semibold leading-none text-white">Kimetsu no Yaiba</span>
-                                    <span class="text-surface-200 text-[0.7vw] font-medium uppercase leading-[1.5vw]">Demon slayer</span>
-                                    <div class="text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw]">
-                                        <span>2006</span>
-                                        <span>TV</span>
-                                        <Circle style="width: 0.2vw;" />
-                                        <span>26 eps</span>
-                                    </div>
+                <ScrollArea
+                    offset_scrollbar
+                    gradient_mask
+                    parent_class="md:mt-[0.2vw] md:h-[30vw] md:w-[20vw]"
+                    class="w-full"
+                >
+                    {#each Array(6) as _}
+                        <a
+                            href="/mal/"
+                            class="flex w-full items-center gap-[1vw] rounded-[0.7vw] p-[0.8vw] transition duration-200 hover:bg-neutral"
+                        >
+                            <img
+                                src="https://static1.cbrimages.com/wordpress/wp-content/uploads/2021/03/demon-slayer-banner.jpg"
+                                alt={search_query}
+                                class="h-[3.5vw] w-[3.5vw] rounded-[0.5vw] object-cover"
+                            />
+                            <div class="flex w-full flex-col">
+                                <span class="text-[1.1vw] font-semibold leading-none text-white">Kimetsu no Yaiba</span>
+                                <span class="text-surface-200 text-[0.7vw] font-medium uppercase leading-[1.5vw]">Demon slayer</span>
+                                <div class="text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw]">
+                                    <span>2006</span>
+                                    <span>TV</span>
+                                    <Circle style="width: 0.2vw;" />
+                                    <span>26 eps</span>
                                 </div>
-                            </a>
-                        {/each}
-                    </ScrollArea>
-                </div>
+                            </div>
+                        </a>
+                    {/each}
+                </ScrollArea>
             </div>
 
             <div>
