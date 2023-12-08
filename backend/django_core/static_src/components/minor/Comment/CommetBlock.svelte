@@ -3,6 +3,7 @@
     import Markdown from "$components/minor/Markdown/Index.svelte";
     import type { Comment } from "../../../types/comment";
     import TextArea from "$components/minor/TextArea/Index.svelte";
+    import CommentBox from "$components/specific/CommentBox/Index.svelte";
 
     export let item: Comment;
     // Import icons
@@ -168,7 +169,7 @@
         </div>
         {#if reply_shown}
             <div class="ring-surface-300/25 relative my-[1vw] flex flex-col rounded-lg ring-2 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw]">
-                <TextArea />
+                <CommentBox />
             </div>
         {/if}
 
