@@ -2,7 +2,6 @@
     import { FormatDate } from "$functions/format_date";
     import Markdown from "$components/minor/Markdown/Index.svelte";
     import type { Comment } from "../../../types/comment";
-    import TextArea from "$components/minor/TextArea/Index.svelte";
     import CommentBox from "$components/specific/CommentBox/Index.svelte";
 
     export let item: Comment;
