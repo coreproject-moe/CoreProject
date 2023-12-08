@@ -13,10 +13,10 @@
     id="search_model"
     class="modal"
 >
-    <div class="modal-box mt-[3.5vw] flex !max-w-fit flex-col items-center">
+    <div class="modal-box mt-[3.5vw] flex !max-w-fit flex-col items-center bg-secondary">
         <form class="relative flex h-[3.7vw] w-[37.5vw] items-center">
             <button
-                class="btn absolute left-[1.25vw] p-0"
+                class="btn absolute left-[1.25vw] min-h-max border-none !bg-transparent p-0"
                 aria-label="Search"
             >
                 <Search style="width: 1.25vw;" />
@@ -25,13 +25,13 @@
                 bind:value={search_query}
                 type="text"
                 placeholder="Search for animes, mangas and musics"
-                class="bg-surface-400 placeholder:text-surface-50 h-full w-full rounded-[0.625vw] border-none pl-[3.50vw] text-[1.1vw] font-semibold text-white shadow-lg !ring-0 placeholder:font-medium"
+                class="h-full w-full rounded-[0.625vw] border-none bg-neutral pl-[3.50vw] text-[1.1vw] font-semibold text-white shadow-lg !ring-0 placeholder:font-medium placeholder:text-accent/75"
             />
 
             <button
                 type="button"
                 aria-label="Clear"
-                class="btn absolute right-[1.25vw] p-0"
+                class="btn absolute right-[1.25vw] min-h-max border-none !bg-transparent p-0"
                 on:click={() => (search_query = "")}
             >
                 <Cross style="width: 1.5vw; opacity: 0.7;" />
