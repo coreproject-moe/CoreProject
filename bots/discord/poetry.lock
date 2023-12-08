@@ -97,13 +97,13 @@ speedups = ["Brotli", "aiodns", "brotlicffi"]
 
 [[package]]
 name = "aiohttp-devtools"
-version = "1.1.1"
+version = "1.1.2"
 description = "Dev tools for aiohttp"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "aiohttp-devtools-1.1.1.tar.gz", hash = "sha256:735ab26b5f135a4058181924ccc839a3ca155bc1ce8aa0bd0e8c521591a9eb65"},
-    {file = "aiohttp_devtools-1.1.1-py38.py39.py310.py311-none-any.whl", hash = "sha256:9911da1dafe60b3c7011c88f6cfff130093e8dbc0168c99f008716d63cfadf80"},
+    {file = "aiohttp-devtools-1.1.2.tar.gz", hash = "sha256:aae66fc9dd36b6c13e1ca381004dfaa4db6ba0dd50764c8ae3a49c1ed43f9587"},
+    {file = "aiohttp_devtools-1.1.2-py38.py39.py310.py311-none-any.whl", hash = "sha256:d8545e217146df97459b3765fd786c98d0851c79d56162ad8d4145f719ab0391"},
 ]
 
 [package.dependencies]
