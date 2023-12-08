@@ -19,6 +19,11 @@
                 break;
             case "arrowup":
                 active_index = (active_index - 1 + ARR_MAX_LENGTH) % ARR_MAX_LENGTH;
+                break;
+            case "tab":
+                // do tab logic of switching core
+                console.log("Tab clicked");
+                break;
             default:
                 break;
         }
