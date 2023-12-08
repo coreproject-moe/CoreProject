@@ -24,8 +24,9 @@
         }
     }
 
-    function handle_search_key_press(e: KeyboardEvent) {
-        active_index = 0;
+    function handle_core_mouse_enter(core: typeof active_core, index: number) {
+        active_index = index;
+        active_core = core;
     }
 </script>
 
@@ -44,7 +45,7 @@
             <input
                 bind:value={search_query}
                 on:keydown={handle_search_key_down}
-                on:keypress={handle_search_key_press}
+                on:keypress={() => (active_index = 0)}
                 type="text"
                 placeholder="Search for animes, mangas and musics"
                 class="h-full w-full rounded-[0.625vw] border-none bg-neutral pl-[3.50vw] text-[1.1vw] font-semibold text-white shadow-lg !ring-0 placeholder:font-medium placeholder:text-accent/75"
@@ -72,10 +73,7 @@
                     {#each Array(ARR_MAX_LENGTH) as _, index}
                         {@const is_active = active_core === "anime" && active_index === index}
                         <a
-                            on:mouseenter={() => {
-                                active_index = index;
-                                active_core = "anime";
-                            }}
+                            on:mouseenter={handle_core_mouse_enter}
                             href="/mal/"
                             class:bg-neutral={is_active}
                             class="flex w-full items-center gap-[1vw] rounded-[0.7vw] p-[0.8vw] transition duration-200 hover:bg-neutral"
