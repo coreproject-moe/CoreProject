@@ -124,15 +124,13 @@
             </div>
         </div>
 
-        <p class="text-surface-50 mt-[2vw] text-[0.8vw]">
-            Want even advanced searching with genres, time-ranges, tags and more? Try the
-            <a
-                href="/explore"
-                class="text-surface-50 underline"
-            >
-                Explore
-            </a>
-            page
+        <p class="mt-[2vw] text-[0.8vw]">
+            <b>Note:</b>
+            Navigate through animes, mangas and sounds with
+            <b>Up Down</b>
+            and
+            <b>Tab</b>
+            keys.
         </p>
     </div>
     <form
