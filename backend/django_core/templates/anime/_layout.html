@@ -54,15 +54,7 @@
                                     <coreproject-icon-search  class="w-[1.25vw] text-black" ></coreproject-icon-search>
                                 </button>
                             </div>
-                            <dialog id="search_model" class="modal">
-                              <div class="modal-box">
-                                <h3 class="font-bold text-lg">Hello!</h3>
-                                <p class="py-4">Press ESC key or click outside to close</p>
-                              </div>
-                              <form method="dialog" class="modal-backdrop">
-                                <button>close</button>
-                              </form>
-                            </dialog>
+                            <coreproject-specific-search-modal></coreproject-specific-search-modal> 
                             {% component_block "vercel_hover" glider_container_class='mt-[2.8125vw] flex flex-col items-center gap-[0.75vw]' active_element_class='rounded-[0.75vw] bg-white/10' direction='vertical' duration=200 %}
                                 {% fill 'items' %}
                                     {% for icon in icons %}
