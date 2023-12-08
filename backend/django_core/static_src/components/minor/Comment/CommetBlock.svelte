@@ -2,7 +2,7 @@
     import { FormatDate } from "$functions/format_date";
     import Markdown from "$components/minor/Markdown/Index.svelte";
     import type { Comment } from "../../../types/comment";
-    import TextArea from "$components/minor/TextArea/Index.svelte";
+    import CommentBox from "$components/specific/CommentBox/Index.svelte";
 
     export let item: Comment;
     // Import icons
@@ -104,7 +104,7 @@
                     {#if user_reaction === "upvoted"}
                         <Arrow
                             variant="fill"
-                            class="text-orange-500 md:w-[1.25vw]"
+                            class="text-warning md:w-[1.25vw]"
                         />
                     {:else}
                         <Arrow
@@ -126,7 +126,7 @@
                 >
                     {#if user_reaction === "downvoted"}
                         <Arrow
-                            class="rotate-180 text-orange-500 md:w-[1.25vw]"
+                            class="rotate-180 text-warning md:w-[1.25vw]"
                             variant="fill"
                         />
                     {:else}
@@ -167,8 +167,8 @@
             </div> -->
         </div>
         {#if reply_shown}
-            <div class="ring-surface-300/25 relative my-[1vw] flex flex-col rounded-lg ring-2 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw]">
-                <TextArea />
+            <div class="md:mt-[1vw]">
+                <CommentBox />
             </div>
         {/if}
 
