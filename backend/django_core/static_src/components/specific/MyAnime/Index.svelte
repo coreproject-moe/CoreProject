@@ -56,7 +56,7 @@
             <div class="flex flex-col gap-1 bg-secondary/95 p-3 md:gap-[0.35vw] md:p-[1vw]">
                 <ScrollArea
                     gradient_mask={true}
-                    parent_class="flex self-start md:max-h-[1.35vw] md:leading-[1.35vw] hover:max-h-[10vw] duration-300"
+                    parent_class="flex md:max-h-[1.35vw] md:leading-[1.35vw] hover:max-h-[10vw] duration-300"
                     class="line-clamp-1 text-sm font-semibold md:line-clamp-none md:text-[1vw]"
                 >
                     {anime_name}
