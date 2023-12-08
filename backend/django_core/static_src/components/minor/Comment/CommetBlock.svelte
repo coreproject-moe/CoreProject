@@ -168,7 +168,7 @@
             </div> -->
         </div>
         {#if reply_shown}
-            <div class="ring-surface-300/25 relative my-[1vw] flex flex-col rounded-lg ring-2 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw]">
+            <div class="md:mt-[1vw]">
                 <CommentBox />
             </div>
         {/if}
