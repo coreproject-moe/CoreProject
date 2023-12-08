@@ -104,7 +104,7 @@
                     {#if user_reaction === "upvoted"}
                         <Arrow
                             variant="fill"
-                            class="text-orange-500 md:w-[1.25vw]"
+                            class="text-warning md:w-[1.25vw]"
                         />
                     {:else}
                         <Arrow
@@ -126,7 +126,7 @@
                 >
                     {#if user_reaction === "downvoted"}
                         <Arrow
-                            class="rotate-180 text-orange-500 md:w-[1.25vw]"
+                            class="rotate-180 text-warning md:w-[1.25vw]"
                             variant="fill"
                         />
                     {:else}
