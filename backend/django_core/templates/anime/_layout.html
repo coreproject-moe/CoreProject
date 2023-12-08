@@ -50,11 +50,22 @@
                     <div class="hidden h-full w-[6.25vw] flex-col justify-between py-[2vw] md:flex">
                         <div>
                             <div class="flex flex-col items-center">
-                                <button type="button" class="btn btn-warning w-[3vw] h-[3vw] p-0 rounded-[0.5vw]">
+                                <button onclick="search_model.showModal()" type="button" class="btn btn-warning w-[3vw] h-[3vw] p-0 rounded-[0.5vw]">
                                     <coreproject-icon-search  class="w-[1.25vw] text-black" ></coreproject-icon-search>
-
                                 </button>
                             </div>
+                            <dialog id="search_model" class="modal">
+                              <div class="modal-box w-11/12 max-w-5xl">
+                                <h3 class="font-bold text-lg">Hello!</h3>
+                                <p class="py-4">Click the button below to close</p>
+                                <div class="modal-action">
+                                  <form method="dialog">
+                                    <!-- if there is a button, it will close the modal -->
+                                    <button class="btn">Close</button>
+                                  </form>
+                                </div>
+                              </div>
+                            </dialog>
                             {% component_block "vercel_hover" glider_container_class='mt-[2.8125vw] flex flex-col items-center gap-[0.75vw]' active_element_class='rounded-[0.75vw] bg-white/10' direction='vertical' duration=200 %}
                                 {% fill 'items' %}
                                     {% for icon in icons %}
