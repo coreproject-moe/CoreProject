@@ -79,13 +79,13 @@
         class={cn(dropdown_class, "dropdown-content top-0 z-10 hidden flex-col leading-none md:flex md:w-[20vw]")}
         style="left:{style_left};"
     >
-        <div class="flex flex-col bg-neutral md:gap-[0.35vw] md:rounded-[0.75vw] md:rounded-t-[0.3vw] md:p-[1vw]">
+        <div class="flex flex-col bg-neutral text-start md:gap-[0.35vw] md:rounded-[0.75vw] md:rounded-t-[0.3vw] md:p-[1vw]">
             <anime-name class="font-semibold text-accent md:text-[1vw] md:leading-[1.25vw]">
                 {anime_name}
             </anime-name>
-            <div class="text-surface-50 flex items-center md:gap-[0.35vw] md:text-[0.8vw]">
+            <div class="text-surface-50 flex w-full items-center md:gap-[0.35vw] md:text-[0.8vw]">
                 <rating class="flex items-center md:gap-[0.5vw]">
-                    <Star />
+                    <Star class="md:w-[0.9vw]" />
                     <span class="text-surface-50 leading-none md:text-[0.8vw]">4.5 rating</span>
                 </rating>
                 <Circle class="w-1 md:w-[0.25vw]" />
