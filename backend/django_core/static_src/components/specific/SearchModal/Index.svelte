@@ -9,6 +9,7 @@
     const ARR_MAX_LENGTH = 6;
 
     let active_index = 0;
+    let active_core: "anime" | "manga" | "sound" = "anime";
     let search_query: string;
 
     function handle_search_key_down(e: KeyboardEvent) {
@@ -69,9 +70,12 @@
                     class="w-full"
                 >
                     {#each Array(ARR_MAX_LENGTH) as _, index}
-                        {@const is_active = active_index === index}
+                        {@const is_active = active_core === "anime" && active_index === index}
                         <a
-                            on:mouseenter={() => (active_index = index)}
+                            on:mouseenter={() => {
+                                active_index = index;
+                                active_core = "anime";
+                            }}
                             href="/mal/"
                             class:bg-neutral={is_active}
                             class="flex w-full items-center gap-[1vw] rounded-[0.7vw] p-[0.8vw] transition duration-200 hover:bg-neutral"
