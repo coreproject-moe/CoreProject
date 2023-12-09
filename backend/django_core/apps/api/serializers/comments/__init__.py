@@ -39,8 +39,8 @@ class CommentSerializer(serializers.Serializer):
                     default=Value(None),
                 )
             )
-            .filter(pk=obj.pk)
-            .values_list("ratio", flat=True)
+            .values("ratio")
+            .get(pk=obj.pk)
         )
 
-        return queryset[0]
+        return queryset["ratio"]
