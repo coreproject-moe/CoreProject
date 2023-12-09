@@ -25,6 +25,7 @@
             const comment_id = Number(url_params.get("comment")!);
             if (comment_id === item.pk) {
                 is_comment_highlighted = true;
+                document.querySelector(`#comment-${comment_id}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
             }
         }
         // user actions
