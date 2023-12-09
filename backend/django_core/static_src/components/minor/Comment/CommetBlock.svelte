@@ -11,21 +11,23 @@
     import Share from "$icons/Share/Index.svelte";
     import Cross from "$icons/Cross/Index.svelte";
     import { reverse } from "$functions/urls";
-    import { onMount } from "svelte";
+    import { onMount, tick } from "svelte";
 
     // Bindings
     let user_reaction: typeof item.user_reaction,
         ratio: typeof item.ratio,
         reply_shown = false,
-        is_comment_highlighted = false;
+        comment_highlight_el: HTMLDivElement,
+        show_comment_highlighted = false;
 
-    onMount(() => {
+    onMount(async () => {
         const url_params = new URLSearchParams(window.location.search);
         if (url_params.has("comment")) {
             const comment_id = Number(url_params.get("comment")!);
             if (comment_id === item.pk) {
-                is_comment_highlighted = true;
-                document.querySelector(`#comment-${comment_id}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+                show_comment_highlighted = true;
+                await tick();
+                comment_highlight_el?.scrollIntoView({ behavior: "smooth", block: "center" });
             }
         }
         // user actions
@@ -90,10 +92,12 @@
             id={`comment-${item.pk}`}
             class="relative flex flex-col items-start gap-1 md:gap-[0.25vw]"
         >
-            <div
-                hidden={!is_comment_highlighted}
-                class="-z-1 pointer-events-none absolute inset-0 bg-neutral/25 md:-m-[1vw] md:-mb-[0.75vw] md:rounded-[0.5vw]"
-            ></div>
+            {#if show_comment_highlighted}
+                <div
+                    bind:this={comment_highlight_el}
+                    class="-z-1 pointer-events-none absolute inset-0 bg-neutral/25 md:-m-[1vw] md:-mb-[0.75vw] md:rounded-[0.5vw]"
+                ></div>
+            {/if}
             <a
                 href="/user/"
                 class="flex flex-col text-xs leading-none md:text-[1vw]"
