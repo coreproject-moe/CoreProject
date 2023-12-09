@@ -3,7 +3,6 @@ from apps.user.models import CustomUser
 from django.db.models import Case, Value, When
 from django.http import HttpRequest
 from rest_framework import serializers
-from django.db.models import Case, Value, When
 
 
 class UserSerializer(serializers.ModelSerializer):
