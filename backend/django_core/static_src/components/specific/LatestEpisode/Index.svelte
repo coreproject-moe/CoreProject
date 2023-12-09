@@ -13,17 +13,6 @@
     export let anime_release_date: string;
     export let anime_synopsis: string;
 
-    export let anime: {
-        id: number;
-        cover: string;
-        name: string;
-        episode_number: number;
-        release_date: string;
-        synopsis: string;
-    };
-
-    console.log(anime);
-
     // Formated anime details
     const formated_episode_number = String(anime_episode_number).padStart(2, "0");
     const formated_release_date = new FormatDate(anime_release_date).format_to_time_from_now;
@@ -89,15 +78,15 @@
         alt=""
         class="absolute h-full w-full rounded-[0.75vw] object-cover object-center"
     />
-    <div class="gradient from-surface-900/75 to-surface-900/0 absolute inset-0 bg-gradient-to-t" />
-    <div class="gradient from-surface-900/50 to-surface-900/0 absolute inset-0 bg-gradient-to-r" />
+    <div class="gradient absolute inset-0 bg-gradient-to-t from-secondary/75 to-transparent" />
+    <div class="gradient absolute inset-0 bg-gradient-to-r from-secondary/50 to-transparent" />
 
     <div class="absolute inset-0 flex items-start justify-between p-[1.3125vw]">
         <div class="flex flex-col gap-[0.25vw]">
             <div class="text-[1vw] font-semibold leading-[1.1875vw] text-white">
                 {anime_name}
             </div>
-            <div class="text-surface-50 flex items-center gap-[0.35vw] text-[0.8vw]">
+            <div class="flex items-center gap-[0.35vw] text-[0.8vw] text-accent">
                 <span class="font-semibold">
                     Ep {formated_episode_number}
                 </span>
@@ -108,9 +97,9 @@
         </div>
         <a
             href="/mal/{anime_id}/episode/{anime_episode_number}"
-            class="btn-icon bg-warning-400 text-surface-900 btn h-[2.5vw] w-[2.5vw] rounded-full transition-colors duration-300 group-hover:bg-white"
+            class="btn btn-warning h-[2.5vw] min-h-max w-[2.5vw] rounded-full p-0 transition-colors duration-300 group-hover:btn-accent"
         >
-            <Play class="w-[1.25vw]" />
+            <Play class="w-[1vw]" />
         </a>
     </div>
 
@@ -123,7 +112,7 @@
         >
             <genres class="flex items-center md:my-[0.35vw] md:gap-[0.5vw]">
                 {#each ["Action", "Romance", "Hentai"] as genre}
-                    <genre class="bg-surface-50 font-semibold leading-none text-black md:rounded-[0.35vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
+                    <genre class="bg-accent font-semibold leading-none text-secondary md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
                         {genre}
                     </genre>
                 {/each}
@@ -131,7 +120,7 @@
             <ScrollArea
                 offset_scrollbar
                 gradient_mask
-                class="text-surface-50 h-[6vw] text-[0.8vw] leading-[1.15vw]"
+                class="h-[6vw] text-[0.8vw] leading-[1vw] text-accent"
             >
                 {anime_synopsis}
             </ScrollArea>
