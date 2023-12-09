@@ -6,6 +6,13 @@
     import { slide } from "svelte/transition";
 
     // Boolean flag to check if slide is last element
+    export let anime_id: number;
+    export let anime_cover: string;
+    export let anime_name: string;
+    export let anime_episode_number: number;
+    export let anime_release_date: string;
+    export let anime_synopsis: string;
+
     export let anime: {
         id: number;
         cover: string;
@@ -15,9 +22,11 @@
         synopsis: string;
     };
 
+    console.log(anime);
+
     // Formated anime details
-    const formated_episode_number = String(anime.episode_number).padStart(2, "0");
-    const formated_release_date = new FormatDate(anime.release_date).format_to_time_from_now;
+    const formated_episode_number = String(anime_episode_number).padStart(2, "0");
+    const formated_release_date = new FormatDate(anime_release_date).format_to_time_from_now;
 
     /* Bindings */
     let ANIMATION_DURATION = 300,
@@ -76,7 +85,7 @@
     class="group relative h-[5vw] duration-300 ease-in-out hover:h-[16vw]"
 >
     <img
-        src={anime.cover}
+        src={anime_cover}
         alt=""
         class="absolute h-full w-full rounded-[0.75vw] object-cover object-center"
     />
@@ -86,7 +95,7 @@
     <div class="absolute inset-0 flex items-start justify-between p-[1.3125vw]">
         <div class="flex flex-col gap-[0.25vw]">
             <div class="text-[1vw] font-semibold leading-[1.1875vw] text-white">
-                {anime.name}
+                {anime_name}
             </div>
             <div class="text-surface-50 flex items-center gap-[0.35vw] text-[0.8vw]">
                 <span class="font-semibold">
@@ -98,7 +107,7 @@
             </div>
         </div>
         <a
-            href="/mal/{anime.id}/episode/{anime.episode_number}"
+            href="/mal/{anime_id}/episode/{anime_episode_number}"
             class="btn-icon bg-warning-400 text-surface-900 btn h-[2.5vw] w-[2.5vw] rounded-full transition-colors duration-300 group-hover:bg-white"
         >
             <Play class="w-[1.25vw]" />
@@ -124,7 +133,7 @@
                 gradient_mask
                 class="text-surface-50 h-[6vw] text-[0.8vw] leading-[1.15vw]"
             >
-                {anime.synopsis}
+                {anime_synopsis}
             </ScrollArea>
         </div>
     {/if}

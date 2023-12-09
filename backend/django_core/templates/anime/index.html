@@ -122,11 +122,18 @@
                     <coreproject-icon-arrow-up-right class="w-[1vw]"></coreproject-icon-arrow-up-right>
                 </button>
             </section-header>
-            {% component_block 'scroll_area' parent_class='mt-[1vw] max-h-[22.25vw] snap-y smooth-scroll md:pr-[1vw]' scroll_area_class='flex flex-col gap-[1vw]' %}
+            <coreproject-scroll-area gradient_mask="true" parent_class="mt-[1vw] w-full max-h-[22.25vw] snap-y smooth-scroll md:pr-[1vw]" class="flex w-full flex-col gap-[1vw]">
                 {% for episode in latest_episodes %}
-                    <coreproject-specific-latest-episode anime={episode}></coreproject-specific-latest-episode>
+                <coreproject-specific-latest-episode
+                    anime_id="{{episode.id}}"
+                    anime_cover="{{episode.cover}}"
+                    anime_name="{{episode.name}}"
+                    anime_episode_number="{{episode.episode_number}}"
+                    anime_release_date="{{episode.release_date}}"
+                    anime_synopsis="{{episode.synopsis}}"
+                ></coreproject-specific-latest-episode>
                 {% endfor %}
-            {% endcomponent_block %}
+            </coreproject-scroll-area>
             <section-bottom class="mt-[0.75vw] flex items-start justify-between gap-[2vw] pr-[0.75vw]">
                 <span class="text-[0.75vw] font-semibold md:leading-[1.25vw]">showing recently aired episodes from your Anime List</span>
                 <button class="btn btn-secondary p-0 text-[0.75vw] font-semibold text-warning"> Change to All </button>
