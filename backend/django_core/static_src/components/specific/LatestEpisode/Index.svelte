@@ -5,13 +5,13 @@
     import { onMount } from "svelte";
     import { slide } from "svelte/transition";
 
-    // Boolean flag to check if slide is last element
     export let anime_id: number;
     export let anime_cover: string;
     export let anime_name: string;
     export let anime_episode_number: number;
     export let anime_release_date: string;
     export let anime_synopsis: string;
+    export let anime_index: number;
 
     // Formated anime details
     const formated_episode_number = String(anime_episode_number).padStart(2, "0");
@@ -22,7 +22,8 @@
         visible_ratio: number;
     let scroll_area_element: HTMLElement, anime_episode: HTMLElement;
     let show_more_info = false,
-        should_expand = false;
+        should_expand = false,
+        first_time_open = anime_index == 0;
 
     onMount(() => {
         // needed to drill two more layer cause of svelte-retag
@@ -47,11 +48,11 @@
     function handle_mouseleave() {
         show_more_info = false;
         should_expand = false;
+        first_time_open = false;
     }
 
     function handle_animationstart() {
         const parent_element = anime_episode.parentElement?.parentElement?.parentElement!;
-        console.log(parent_element);
 
         // Declare rects
         const parent_rect = parent_element.getBoundingClientRect(), // taking parent not scroll_area_element
@@ -74,6 +75,7 @@
     on:mouseleave={handle_mouseleave}
     role="group"
     class="group relative h-[5vw] duration-300 ease-in-out hover:h-[16vw]"
+    class:h-[16vw]={first_time_open}
 >
     <img
         src={anime_cover}
@@ -105,7 +107,7 @@
         </a>
     </div>
 
-    {#if show_more_info}
+    {#if show_more_info || first_time_open}
         <div
             in:slide={{ duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * (2 / 3) }}
             out:slide={{ duration: ANIMATION_DURATION * (2 / 3) }}
