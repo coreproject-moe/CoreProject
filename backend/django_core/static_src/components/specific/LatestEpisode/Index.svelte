@@ -25,7 +25,8 @@
         should_expand = false;
 
     onMount(() => {
-        scroll_area_element = anime_episode?.parentElement?.parentElement! as HTMLElement;
+        // needed to drill two more layer cause of svelte-retag
+        scroll_area_element = anime_episode?.parentElement?.parentElement?.parentElement?.parentElement!;
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
@@ -49,7 +50,8 @@
     }
 
     function handle_animationstart() {
-        const parent_element = anime_episode.parentElement!;
+        const parent_element = anime_episode.parentElement?.parentElement?.parentElement!;
+        console.log(parent_element);
 
         // Declare rects
         const parent_rect = parent_element.getBoundingClientRect(), // taking parent not scroll_area_element
@@ -57,7 +59,7 @@
 
         const scroll_area_center = scroll_area_element.offsetHeight / 2;
         const anime_episode_center = anime_episode_rect.top - parent_rect.top + anime_episode_rect.height / 2;
-        const target_scroll_top = anime_episode_center - scroll_area_center + parseInt(getComputedStyle(anime_episode.parentElement!).gap) || 0;
+        const target_scroll_top = anime_episode_center - scroll_area_center + parseInt(getComputedStyle(parent_element).gap) || 0;
 
         scroll_area_element.scroll({
             top: target_scroll_top,
