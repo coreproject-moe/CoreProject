@@ -56,7 +56,7 @@ mapping.forEach((item) => {
     svelteRetag({
         component: item.component.default,
         tagname: `coreproject-icon-${item.tagname}`.toLowerCase(),
-        attributes: item.attributes,
+        attributes: true,
         shadow: false,
         hydratable: false
     });
