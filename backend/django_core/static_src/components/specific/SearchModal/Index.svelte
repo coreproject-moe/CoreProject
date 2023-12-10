@@ -2,42 +2,51 @@
     import Search from "../../icons/Search/Index.svelte";
     import Circle from "../../icons/Circle/Index.svelte";
     import Cross from "../../icons/Cross/Index.svelte";
-
+    import { search_modal_state } from "../../../stores/modal";
     import ScrollArea from "../../minor/ScrollArea/Index.svelte";
 
     // demo variables
     const ARR_MAX_LENGTH = 6;
 
-    let active_index = 0;
-    let active_core: "anime" | "manga" | "sound" = "anime";
-    let search_query: string;
+    let active_index = 0,
+        active_core: "anime" | "manga" | "sound" = "anime",
+        search_query = "";
 
-    function handle_search_key_down(e: KeyboardEvent) {
-        switch (e.key.toLowerCase()) {
-            case "arrowdown":
-                active_index = (active_index + 1) % ARR_MAX_LENGTH;
-                break;
-            case "arrowup":
-                active_index = (active_index - 1 + ARR_MAX_LENGTH) % ARR_MAX_LENGTH;
-                break;
-            case "tab":
-                // do tab logic of switching core
-                console.log("Tab clicked");
-                break;
-            default:
-                break;
+    // Bindings
+    let dialog_element: HTMLDialogElement;
+
+    const handle_search_key_down = async (e: KeyboardEvent) => {
+            switch (e.key.toLowerCase()) {
+                case "arrowdown":
+                    active_index = (active_index + 1) % ARR_MAX_LENGTH;
+                    break;
+                case "arrowup":
+                    active_index = (active_index - 1 + ARR_MAX_LENGTH) % ARR_MAX_LENGTH;
+                    break;
+                case "tab":
+                    // do tab logic of switching core
+                    console.log("Tab clicked");
+                    break;
+                default:
+                    break;
+            }
+        },
+        handle_core_mouse_enter = async (core: typeof active_core, index: number) => {
+            active_index = index;
+            active_core = core;
+        };
+
+    search_modal_state.subscribe((val) => {
+        if (val) {
+            dialog_element.showModal();
+            search_modal_state.set(false);
         }
-    }
-
-    function handle_core_mouse_enter(core: typeof active_core, index: number) {
-        active_index = index;
-        active_core = core;
-    }
+    });
 </script>
 
 <dialog
-    id="search_model"
     class="modal"
+    bind:this={dialog_element}
 >
     <div class="modal-box flex !max-w-fit flex-col items-center bg-secondary md:px-[2vw] md:py-[1vw]">
         <form class="relative flex h-[3.5vw] w-[40vw] items-center">
