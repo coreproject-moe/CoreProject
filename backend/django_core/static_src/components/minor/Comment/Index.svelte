@@ -3,6 +3,7 @@
     import CommetBlock from "./CommetBlock.svelte";
     import type { Comment } from "../../../types/comment";
     import { comment_needs_update } from "../../../stores/comment";
+    import { onMount } from "svelte";
 
     export let api_url: string;
 
@@ -13,42 +14,57 @@
         results: Comment[];
     }
 
-    let tree = get_comments();
+    let loading_state: "loading" | "loaded" | "errored" = "loading",
+        error = "",
+        tree_branch: Comment[] = new Array<Comment>();
 
-    async function get_comments() {
-        const res = await fetch(api_url, {
-            method: "GET",
-            headers: {
-                "X-CSRFToken": window.csrfmiddlewaretoken
+    onMount(() => {
+        set_comments();
+    });
+
+    const get_comments = async () => {
+            const res = await fetch(api_url, {
+                method: "GET",
+                headers: {
+                    "X-CSRFToken": window.csrfmiddlewaretoken
+                }
+            });
+            const value = (await res.json()) as CommentResponse;
+            const formated_json = new JSONToTree(value.results).to_tree() as unknown as Comment[];
+            if (res.ok) {
+                return formated_json;
+            } else {
+                throw new Error(await res.text());
             }
-        });
-        const value = (await res.json()) as CommentResponse;
-        const formated_json = new JSONToTree(value.results).to_tree() as unknown as Comment[];
-        if (res.ok) {
-            return formated_json;
-        } else {
-            throw new Error(await res.text());
-        }
-    }
+        },
+        set_comments = () => {
+            get_comments()
+                .then((res) => {
+                    tree_branch = res;
+                    loading_state = "loaded";
+                })
+                .catch((err) => {
+                    loading_state = "errored";
+                    error = err;
+                });
+        };
 
-    comment_needs_update.subscribe((val) => {
+    comment_needs_update.subscribe(async (val) => {
         if (val === true) {
-            tree = get_comments();
+            set_comments();
             comment_needs_update.set(false);
         }
     });
 </script>
 
-{#key tree}
-    {#await tree}
-        Loading...
-    {:then tree_branch}
-        <div class="flex flex-col md:gap-[1.5vw]">
-            {#each tree_branch as branch}
-                <CommetBlock item={branch} />
-            {/each}
-        </div>
-    {:catch e}
-        Something is wrong {e}
-    {/await}
-{/key}
+{#if loading_state === "loading"}
+    Loading
+{:else if loading_state === "errored"}
+    Something is wrong
+{:else if loading_state === "loaded"}
+    <div class="flex flex-col md:gap-[1.5vw]">
+        {#each tree_branch as branch}
+            <CommetBlock item={branch} />
+        {/each}
+    </div>
+{/if}
