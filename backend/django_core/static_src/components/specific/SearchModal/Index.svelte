@@ -13,7 +13,7 @@
         search_query = "";
 
     // Bindings
-    let dialog_element: HTMLDialogElement;
+    let dialog_element: HTMLDialogElement | null = null;
 
     const handle_search_key_down = async (e: KeyboardEvent) => {
             switch (e.key.toLowerCase()) {
@@ -38,7 +38,7 @@
 
     search_modal_state.subscribe((val) => {
         if (val) {
-            dialog_element.showModal();
+            dialog_element?.showModal();
             search_modal_state.set(false);
         }
     });
