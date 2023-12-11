@@ -29,6 +29,7 @@
     onMount(() => {
         // needed to drill two more layer cause of svelte-retag
         scroll_area_element = anime_episode?.parentElement?.parentElement?.parentElement?.parentElement!;
+
         if (scroll_area_element.tagName !== "coreproject-scroll-area") {
             throw new Error("Parent element is not `scroll-area` component");
         }
@@ -59,14 +60,14 @@
         const parent_element = anime_episode?.parentElement?.parentElement?.parentElement!;
 
         // Declare rects
-        const parent_rect = parent_element.getBoundingClientRect(), // taking parent not scroll_area_element
+        const parent_rect = parent_element?.getBoundingClientRect(), // taking parent not scroll_area_element
             anime_episode_rect = anime_episode?.getBoundingClientRect();
 
-        const scroll_area_center = scroll_area_element!.offsetHeight / 2;
-        const anime_episode_center = anime_episode_rect!.top - parent_rect.top + anime_episode_rect!.height / 2;
-        const target_scroll_top = anime_episode_center - scroll_area_center + parseInt(getComputedStyle(parent_element).gap) || 0;
+        const scroll_area_center = scroll_area_element?.offsetHeight! / 2;
+        const anime_episode_center = anime_episode_rect?.top! - parent_rect?.top + anime_episode_rect?.height! / 2;
+        const target_scroll_top = anime_episode_center - scroll_area_center + parseInt(getComputedStyle(parent_element)?.gap) || 0;
 
-        scroll_area_element!.scroll({
+        scroll_area_element?.scroll({
             top: target_scroll_top,
             behavior: "smooth"
         });
