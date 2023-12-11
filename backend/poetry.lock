@@ -646,13 +646,13 @@ Pillow = ">=9.0.0"
 
 [[package]]
 name = "django-components"
-version = "0.29"
+version = "0.30"
 description = "A way to create simple reusable template components in Django."
 optional = false
 python-versions = "*"
 files = [
-    {file = "django_components-0.29-py3-none-any.whl", hash = "sha256:42d98ebe72f9e7cab4b3a5a6d72a17f1065716e1967ef0dff0dfd9c59bfbbca0"},
-    {file = "django_components-0.29.tar.gz", hash = "sha256:5a7220e65a75632eb6deb842f36ce690a115b6c4c5cd7ab5ffa62ee8fda46908"},
+    {file = "django_components-0.30-py3-none-any.whl", hash = "sha256:1bca610cf373bda0eda2ef1c0d5a9904df3de198d85a878f37771d0da27339b5"},
+    {file = "django_components-0.30.tar.gz", hash = "sha256:2a4e8aee197e7ae7272961a879a6cfe27f9c60b8d89b9e631e630bf231b192f5"},
 ]
 
 [package.dependencies]
