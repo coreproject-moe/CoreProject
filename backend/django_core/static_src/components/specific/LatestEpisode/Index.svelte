@@ -22,9 +22,10 @@
         visible_ratio: number;
     let scroll_area_element: HTMLElement | null = null,
         anime_episode: HTMLElement | null = null;
+
     let show_more_info = false,
         should_expand = false,
-        first_time_open = anime_index == 0;
+        first_time_open = anime_index === 0;
 
     onMount(() => {
         // needed to drill two more layer cause of svelte-retag
