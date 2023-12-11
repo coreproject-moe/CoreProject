@@ -2,7 +2,7 @@ import { join, resolve } from "path";
 import process from "process";
 import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
-
+import topLevelAwait from "vite-plugin-top-level-await";
 const STATIC_SRC = resolve("./django_core/static_src");
 
 const COMPONENT_DIRECTORY = join(STATIC_SRC, "components");
@@ -20,6 +20,12 @@ export default defineConfig({
         }
     },
     plugins: [
+        topLevelAwait({
+            // The export name of top-level await promise for each chunk module
+            promiseExportName: "__coreproject__",
+            // The function to generate import names of top-level await promise in each chunk module
+            promiseImportName: (i) => `__coreproject__${i}`
+        }),
         svelte({
             compilerOptions: {
                 customElement: true
@@ -40,11 +46,10 @@ export default defineConfig({
         manifest: true,
         chunkSizeWarningLimit: 2048,
         emptyOutDir: true,
-        target: "esnext",
+        target: "es2015",
         cssTarget: "esnext",
         minify: "terser",
         // sourcemap: true,
-
         rollupOptions: {
             input: [
                 // Vendor packages

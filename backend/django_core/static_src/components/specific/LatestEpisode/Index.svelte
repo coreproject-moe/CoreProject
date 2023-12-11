@@ -31,10 +31,6 @@
         // needed to drill two more layer cause of svelte-retag
         scroll_area_element = anime_episode?.parentElement?.parentElement?.parentElement?.parentElement!;
 
-        if (scroll_area_element.tagName !== "coreproject-scroll-area") {
-            throw new Error("Parent element is not `scroll-area` component");
-        }
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 visible_ratio = entry.intersectionRatio;

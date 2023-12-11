@@ -66,10 +66,11 @@
         "svelte-preprocess": "^5.1.1",
         "svelte-retag": "^1.5.1",
         "terser": "^5.26.0",
-        "typescript": "^5.3.3"
+        "typescript": "^5.3.3",
+        "vite-plugin-top-level-await": "^1.4.0"
     },
     "optionalDependencies": {
-      "@rollup/rollup-linux-x64-gnu": "4.8.0"
+        "@rollup/rollup-linux-x64-gnu": "4.8.0"
     },
     "engines": {
         "node": ">=20.0.0"
