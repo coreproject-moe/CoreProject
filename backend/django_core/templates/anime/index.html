@@ -122,89 +122,19 @@
                     <coreproject-icon-arrow-up-right class="w-[1vw]"></coreproject-icon-arrow-up-right>
                 </button>
             </section-header>
-            {% component_block 'scroll_area' parent_class='mt-[1vw] max-h-[22.25vw] snap-y smooth-scroll md:pr-[1vw]' scroll_area_class='flex flex-col gap-[1vw]' %}
+            <coreproject-scroll-area gradient_mask="true" parent_class="mt-[1vw] w-full max-h-[22.25vw] snap-y smooth-scroll md:pr-[1vw]" class="flex w-full flex-col gap-[1vw]">
                 {% for episode in latest_episodes %}
-                    <anime-episode
-                        role="group"
-                        class="group relative h-[5vw] duration-300 ease-in-out hover:h-[16vw]"
-                        _="
-                           on mouseenter
-                           wait 300ms
-                           set global episode_expanded to true
-                           send hyperscript:change_view to <more-anime-info/> in me
-                           js(me)
-                           const parent_element = me.parentElement;
-                           const scroll_area_element = me.parentElement.parentElement;
-
-                           // Declare rects
-                           const parent_rect = parent_element.getBoundingClientRect();
-                           const me_rect = me.getBoundingClientRect();
-
-                           const scroll_area_center = scroll_area_element.offsetHeight / 2;
-                           const me_center = me_rect.top - parent_rect.top + me_rect.height / 2;
-                           const target_scroll_top = me_center - scroll_area_center + parseInt(getComputedStyle(parent_element).gap) || 0;
-
-                           scroll_area_element.scroll({
-                           top: target_scroll_top,
-                           behavior: 'smooth'
-                           });
-                           end
-
-                           on mouseleave
-                           send hyperscript:change_view to <more-anime-info/> in me
-                           end
-                          "
-                    >
-                        <div class="absolute h-full w-full rounded-[0.75vw] object-cover object-center">
-                            <img
-                                class="absolute h-full w-full rounded-[0.75vw] object-cover object-center"
-                                src="{{ episode.cover }}" alt="" style=""
-                                loading="lazy"
-                            />
-                        </div>
-                        <gradient-overlay class="gradient absolute inset-0 bg-gradient-to-t from-secondary/75 to-secondary/0"></gradient-overlay>
-                        <gradient-overlay class="gradient absolute inset-0 bg-gradient-to-r from-secondary/50 to-secondary/0"></gradient-overlay>
-                        <episode-info class="absolute inset-0 flex items-start justify-between p-[1.3125vw]">
-                            <div class="flex flex-col gap-[0.25vw]">
-                                <episode-name class="text-[1vw] font-semibold leading-[1.1875vw] text-white">SpyxFamily</episode-name>
-                                <episode-dates class="flex items-center gap-[0.35vw] text-[0.8vw] text-accent">
-                                    <span class="font-semibold">Ep 06</span>
-                                    <span>aired 3 months ago</span>
-                                </episode-dates>
-                            </div>
-                            <a href="/anime/mal/1/episode/6" class="btn btn-warning btn-square min-h-max rounded-full text-secondary p-0">
-                                <coreproject-icon-play class="w-[1vw]"></coreproject-icon-play>
-                            </a>
-                        </episode-info>
-
-                        <more-anime-info
-                            class="invisible absolute inset-x-0 bottom-0 flex flex-col gap-[0.5vw] p-[1.3125vw]"
-                            _="
-                               on hyperscript:change_view
-                               if global episode_expanded is true and I match .invisible
-                               remove .invisible from me
-                               else add .invisible to me
-                               end
-                              "
-                        >
-                            <genres class="flex items-center md:my-[0.35vw] md:gap-[0.5vw]">
-                                <genre class="bg-accent font-semibold leading-none text-secondary md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
-                                    Horror
-                                </genre>
-                                <genre class="bg-accent font-semibold leading-none text-secondary md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
-                                    Sci-Fi
-                                </genre>
-                                <genre class="bg-accent font-semibold leading-none text-secondary md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
-                                    Thriller
-                                </genre>
-                            </genres>
-                            <coreproject-scroll-area gradient_mask='true' parent_class='md:max-h-[6vw]' class='text-accent md:text-[0.8vw] md:leading-[1vw]'>
-                                {{ episode.synopsis }}
-                            </coreproject-scroll-area>
-                        </more-anime-info>
-                    </anime-episode>
+                    <coreproject-specific-latest-episode
+                        anime_id="{{episode.id}}"
+                        anime_cover="{{episode.cover}}"
+                        anime_name="{{episode.name}}"
+                        anime_episode_number="{{episode.episode_number}}"
+                        anime_release_date="{{episode.release_date}}"
+                        anime_synopsis="{{episode.synopsis}}"
+                        anime_index="{{forloop.counter0}}"
+                    ></coreproject-specific-latest-episode>
                 {% endfor %}
-            {% endcomponent_block %}
+            </coreproject-scroll-area>
             <section-bottom class="mt-[0.75vw] flex items-start justify-between gap-[2vw] pr-[0.75vw]">
                 <span class="text-[0.75vw] font-semibold md:leading-[1.25vw]">showing recently aired episodes from your Anime List</span>
                 <button class="btn btn-secondary p-0 text-[0.75vw] font-semibold text-warning"> Change to All </button>
