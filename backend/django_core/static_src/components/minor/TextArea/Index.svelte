@@ -288,7 +288,6 @@
         }
     }
     async function paste_text(event: ClipboardEvent & { currentTarget: HTMLTextAreaElement }) {
-        event.preventDefault();
         const element = event.currentTarget;
 
         const selection_start = element.selectionStart,
@@ -462,7 +461,7 @@
 </div>
 {#if active_tab === "edit"}
     <textarea
-        on:paste={(event) => paste_text(event)}
+        on:paste|preventDefault={(event) => paste_text(event)}
         on:input={handle_input}
         on:keydown={handle_keydown}
         on:blur={handle_blur}
