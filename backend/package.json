@@ -63,7 +63,7 @@
         "prettier-plugin-tailwindcss": "^0.5.9",
         "sass": "^1.69.5",
         "svelte": "^4.2.8",
-        "svelte-preprocess": "^5.1.1",
+        "svelte-preprocess": "^5.1.2",
         "svelte-retag": "^1.5.1",
         "terser": "^5.26.0",
         "typescript": "^5.3.3",
