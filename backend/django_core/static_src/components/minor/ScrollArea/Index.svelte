@@ -23,12 +23,10 @@
 <div
     bind:this={scroll_area}
     on:scroll={handle_scroll}
-    class={cn(parent_class, offset_scrollbar && "pr-3 md:pr-[0.75vw]", "block h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:rgba(255,255,255,0.12)transparent]")}
+    class={cn(parent_class, offset_scrollbar && "pr-3 md:pr-[0.75vw]", "flex h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:rgba(255,255,255,0.12)transparent]")}
     class:[mask-image:linear-gradient(180deg,rgba(7,5,25,0.95)80%,rgba(0,0,0,0)100%)]={gradient_mask && add_mask_bottom}
 >
-    <div>
-        <div class={cn(klass)}>
-            <slot />
-        </div>
+    <div class={cn(klass)}>
+        <slot />
     </div>
 </div>

@@ -14,40 +14,45 @@
         results: Comment[];
     }
 
-    let loading_state: "loading" | "error" | "loaded";
+    let loading_state: "loading" | "error" | "loaded",
+        error = "";
     let tree_branch: Comment[] = new Array<Comment>();
 
     onMount(() => {
-        loading_state = "loading";
-        get_comments()
-            .then((res) => {
-                tree_branch = res;
-                loading_state = "loaded";
-            })
-            .catch((err) => {
-                loading_state = "error";
-            });
+        set_comments();
     });
 
-    async function get_comments() {
-        const res = await fetch(api_url, {
-            method: "GET",
-            headers: {
-                "X-CSRFToken": window.csrfmiddlewaretoken
+    const get_comments = async () => {
+            const res = await fetch(api_url, {
+                method: "GET",
+                headers: {
+                    "X-CSRFToken": window.csrfmiddlewaretoken
+                }
+            });
+            const value = (await res.json()) as CommentResponse;
+            const formated_json = new JSONToTree(value.results).to_tree() as unknown as Comment[];
+            if (res.ok) {
+                return formated_json;
+            } else {
+                throw new Error(await res.text());
             }
-        });
-        const value = (await res.json()) as CommentResponse;
-        const formated_json = new JSONToTree(value.results).to_tree() as unknown as Comment[];
-        if (res.ok) {
-            return formated_json;
-        } else {
-            throw new Error(await res.text());
-        }
-    }
+        },
+        set_comments = () => {
+            loading_state = "loading";
+            get_comments()
+                .then((res) => {
+                    tree_branch = res;
+                    loading_state = "loaded";
+                })
+                .catch((err) => {
+                    loading_state = "error";
+                    error = err;
+                });
+        };
 
     comment_needs_update.subscribe(async (val) => {
         if (val === true) {
-            tree_branch = await get_comments();
+            set_comments();
             comment_needs_update.set(false);
         }
     });
@@ -56,7 +61,7 @@
 {#if loading_state === "loading"}
     Loading..
 {:else if loading_state === "error"}
-    Something is wrong
+    Something is wrong Error : {@html error}
 {:else if loading_state === "loaded"}
     {#if tree_branch}
         <div class="flex flex-col md:gap-[1.5vw]">

@@ -1,5 +1,8 @@
+from typing import Literal
+
 from apps.comments.models import CommentModel
 from apps.user.models import CustomUser
+from django.db.models import Case, Value, When
 from django.http import HttpRequest
 from rest_framework import serializers
 
@@ -30,10 +33,18 @@ class CommentSerializer(serializers.Serializer):
 
     def get_user_reaction(self, obj: CommentModel) -> str | None:
         request: HttpRequest = self.context["request"]
+        queryset: dict[
+            Literal["ratio"], Literal["upvoted"] | Literal["downvoted"] | None
+        ] = (
+            CommentModel.objects.annotate(
+                ratio=Case(
+                    When(upvotes=request.user.pk, then=Value("upvoted")),
+                    When(downvotes=request.user.pk, then=Value("downvoted")),
+                    default=Value(None),
+                )
+            )
+            .values("ratio")
+            .get(pk=obj.pk)
+        )
 
-        if CommentModel.objects.filter(pk=obj.pk, upvotes=request.user.id).exists():
-            return "upvoted"
-        if CommentModel.objects.filter(pk=obj.pk, downvotes=request.user.id).exists():
-            return "downvoted"
-
-        return None
+        return queryset["ratio"]
