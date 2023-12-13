@@ -1,15 +1,15 @@
 {% load humanize %}
 
-<anime-info-container class="relative mt-16 block h-screen bg-cover md:mt-0">
+<div class="relative mt-16 block h-screen bg-cover md:mt-0">
     <img
         src="https://files.otakustudy.com/wp-content/uploads/2020/10/10153058/your-lie-in-april-cover.jpg"
         class="absolute hidden h-full w-full select-none rounded-tl-[1.5vw] object-cover object-center md:flex"
     />
-    <gradient-overlay class="gradient absolute inset-0 bg-gradient-to-t from-secondary to-secondary/80"></gradient-overlay>
-    <anime-info-section class="absolute inset-0 grid grid-cols-12 items-start p-5 pt-10 md:p-[5vw]">
+    <div class="gradient absolute inset-0 bg-gradient-to-t from-secondary to-secondary/80"></div>
+    <div class="absolute inset-0 grid grid-cols-12 items-start p-5 pt-10 md:p-[5vw]">
         <anime-info-episodes class="col-span-12 md:col-span-10 md:pr-[4vw]">
-            <anime-main-infos class="grid grid-cols-12 items-end justify-between">
-                <anime-titles class="relative col-span-12 grid grid-cols-12 gap-5 md:col-span-7 md:flex md:w-full md:items-end md:gap-[2vw] md:pr-[2vw]">
+            <div class="grid grid-cols-12 items-end justify-between">
+                <div class="relative col-span-12 grid grid-cols-12 gap-5 md:col-span-7 md:flex md:w-full md:items-end md:gap-[2vw] md:pr-[2vw]">
                     <anime-banner class="relative col-span-12 h-96 md:h-[18.25vw] md:w-[13vw] md:flex-shrink-0">
                         <radial-gradient class="pointer-events-none absolute inset-0 z-10 h-[150%] w-[125%] -translate-x-8 -translate-y-28 [background-image:radial-gradient(circle_at_center,rgba(255,255,255,0.1)0%,transparent_100%)] [mask-image:linear-gradient(to_bottom,rgba(7,5,25,0.95)80%,rgba(0,0,0,0)100%)] md:hidden"></radial-gradient>
                         <img
@@ -75,171 +75,166 @@
 
                             </user-options>
                         </div>
-                    </anime-titles>
-                    <anime-synopsis class="col-span-12 mt-10 md:col-span-5 md:mt-0 flex flex-col gap-[0.75vw]">
-                        <section-header class="flex gap-[0.75vw]">
-                            <header-title class="text-lg font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Synopsis</header-title>
+                    </div>
+                    <div class="col-span-12 mt-10 md:col-span-5 md:mt-0 flex flex-col gap-[0.75vw]">
+                        <div class="flex gap-[0.75vw]">
+                            <div class="text-lg font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Synopsis</div>
                             <button class="btn btn-secondary hidden rounded-[0.1875vw] p-0 md:flex md:h-[1.5vw] md:w-[1.5vw] min-h-full">
                                 <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
 
                             </button>
-                        </section-header>
-                        <coreproject-scroll-area class="text-balance text-xs md:text-[0.8vw] md:leading-[1vw]" parent_class="max-h-40 md:max-h-[10vw]" offset_scrollbar="true" gradient_mask='true'>
+                        </div>
+                        <coreproject-scroll-area class="text-justify text-xs md:text-[0.8vw] md:leading-[1vw]" parent_class="max-h-40 md:max-h-[10vw]" offset_scrollbar="true" gradient_mask='true'>
                             {{ anime.synopsis }}
                         </coreproject-scroll-area>
-                        <anime-genres class="hidden gap-[0.5vw] text-white md:flex md:text-[0.75vw] md:leading-[0.9vw]">
+                        <div class="hidden gap-[0.5vw] text-white md:flex md:text-[0.75vw] md:leading-[0.9vw]">
                             <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Action </span>
                             <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Romance </span>
                             <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Horror </span>
-                        </anime-genres>
-                        <anime-scores class="hidden w-max gap-[0.75vw] rounded-[0.25vw] bg-secondary md:flex md:px-[0.75vw] md:py-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
-                            <score class="flex gap-[0.25vw]">
+                        </div>
+                        <div class="hidden w-max gap-[0.75vw] rounded-[0.25vw] bg-secondary md:flex md:px-[0.75vw] md:py-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
+                            <div class="flex gap-[0.25vw]">
                                 <span>Score:</span>
                                 <span class="font-semibold text-warning-400">79</span>
-                            </score>
-                            <status class="flex gap-[0.25vw]">
+                            </div>
+                            <div class="flex gap-[0.25vw]">
                                 <span>Status:</span>
                                 <button class="btn !bg-transparent border-none min-h-min h-min p-0 leading-none md:text-[0.75vw]">
                                     <span class="font-semibold text-warning">Watching</span>
                                     <coreproject-icon-chevron class="w-[0.625vw] text-warning-400" ></coreproject-icon-chevron>
                                 </button>
-                            </status>
-                            <episodes-count class="flex gap-[0.25vw]">
+                            </div>
+                            <div class="flex gap-[0.25vw]">
                                 <span>Episode:</span>
                                 <span class="font-semibold text-warning-400">0/9</span>
-                            </episodes-count>
-                            <your-scrore class="flex gap-[0.25vw]">
+                            </div>
+                            <div class="flex gap-[0.25vw]">
                                 <span>Your Score:</span>
                                 <button class="btn !bg-transparent border-none min-h-min h-min p-0 leading-none md:text-[0.75vw]">
                                     <span class="font-semibold text-warning">Not Rated</span>
-                                    <coreproject-icon-chevron class="w-[0.625vw] text-warning-400" ></coreproject-icon-chevron>
-
+                                    <coreproject-icon-chevron class="w-[0.625vw] text-warning-400"></coreproject-icon-chevron>
                                 </button>
-                            </your-scrore>
-                        </anime-scores>
-                    </anime-synopsis>
-                </anime-main-infos>
-                <anime-episodes-container class="my-7 block md:my-[6vw]">
-                    <section-header class="flex border-b-2 border-surface-50/10 pb-1 md:gap-x-[0.75vw] md:border-none md:pb-0">
-                        <header-title class="text-lg font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Episodes</header-title>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="my-7 block md:my-[6vw]">
+                    <div class="flex border-b-2 border-surface-50/10 pb-1 md:gap-x-[0.75vw] md:border-none md:pb-0">
+                        <div class="text-lg font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Episodes</div>
                         <button class="btn btn-secondary min-h-full hidden rounded bg-surface-400 p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
                             <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
-
                         </button>
-                    </section-header>
-                    <episodes-options class="mt-2 flex flex-col justify-between gap-y-5 md:mt-0 md:flex-row md:gap-y-0">
-                        <episodes-available-in class="hidden items-end gap-2 md:flex md:gap-[1vw]">
+                    </div>
+                    <div class="mt-2 flex flex-col justify-between gap-y-5 md:mt-0 md:flex-row md:gap-y-0">
+                        <div class="hidden items-end gap-2 md:flex md:gap-[1vw]">
                             <p class="flex items-center gap-1 md:gap-[0.75vw]">
                                 <span class="text-base font-bold leading-none md:text-[2vw] md:leading-[1.9vw]">23</span>
                                 <span class="text-xs font-semibold md:text-[1vw]">episodes</span>
                                 <coreproject-icon-dot class='w-[0.4vw] opacity-50' ></coreproject-icon-dot>
-
                             </p>
-                            <available-formats>
+                            <div>
                                 <div class="flex w-full items-center gap-2 leading-4 md:gap-[1vw] md:leading-[1.5vw]">
                                     <span class="flex-shrink-0 text-[0.5rem] font-medium md:text-[0.75vw]">Available in</span>
                                     <div class="h-[0.1rem] w-full bg-accent opacity-25 md:h-[0.1vw]"></div>
                                 </div>
-                                <formats class="flex h-5 gap-2 text-[0.5rem] font-bold md:h-[1.8vw] md:gap-[0.5vw] md:text-[0.75vw]">
+                                <div class="flex h-5 gap-2 text-[0.5rem] font-bold md:h-[1.8vw] md:gap-[0.5vw] md:text-[0.75vw]">
                                     <span class="flex h-full place-items-center rounded bg-secondary px-2 uppercase leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">sub </span>
                                     <span class="flex h-full place-items-center rounded bg-secondary px-2 uppercase leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">dub </span>
                                     <coreproject-icon-dot class='w-[0.4vw] opacity-50' ></coreproject-icon-dot>
-
                                     <span class="flex h-full place-items-center rounded bg-secondary px-2 leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">1080p </span>
                                     <span class="flex h-full place-items-center rounded bg-secondary px-2 leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">720p </span>
                                     <span class="flex h-full place-items-center rounded bg-secondary px-2 leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">480p </span>
-                                </formats>
-                            </available-formats>
-                        </episodes-available-in>
-                        <episodes-filtering class="flex items-center justify-between gap-2 md:items-end md:gap-[0.75vw]">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between gap-2 md:items-end md:gap-[0.75vw]">
                             <p class="flex items-center gap-1 md:hidden">
                                 <span class="text-base font-bold leading-none">23</span>
                                 <span class="text-sm font-semibold text-surface-50">episodes</span>
                             </p>
-                            <by-formats class="group hidden flex-col gap-2 md:flex md:gap-[0.5vw]">
+                            <div class="group hidden flex-col gap-2 md:flex md:gap-[0.5vw]">
                                 <span class="text-[0.65rem] leading-[0.9vw] text-surface-50 transition-colors duration-300 group-hover:text-white md:text-[0.75vw]">Type</span>
                                 <button class="btn btn-secondary min-h-full h-7 rounded px-3 text-[0.65rem] font-semibold md:h-[2.5vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.9vw] md:leading-[0.9vw]">
                                     <span>Subbed</span>
                                     <coreproject-icon-chevron class="w-3 md:w-[1vw]" ></coreproject-icon-chevron>
 
                                 </button>
-                            </by-formats>
-                            <by-modes class="group hidden flex-col gap-2 md:flex md:gap-[0.5vw]">
+                            </div>
+                            <div class="group hidden flex-col gap-2 md:flex md:gap-[0.5vw]">
                                 <span class="text-[0.65rem] leading-[0.9vw] text-surface-50 transition-colors duration-300 group-hover:text-white md:text-[0.75vw]">Display Mode</span>
                                 <button class="btn btn-secondary min-h-full h-7 rounded px-3 text-[0.65rem] font-semibold leading-[0.9vw] md:h-[2.5vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.9vw]">
                                     <span>Thumbnails</span>
                                     <coreproject-icon-chevron class="w-3 md:w-[1vw]" ></coreproject-icon-chevron>
                                 </button>
-                            </by-modes>
+                            </div>
                             <button class="btn btn-secondary min-h-max h-7 w-auto rounded bg-surface-400 p-0 font-semibold md:ml-0 md:h-[2.5vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]" aria-label="Search">
                                 <coreproject-icon-search  class="w-3 md:w-[1vw]" ></coreproject-icon-search>
                             </button>
-                        </episodes-filtering>
-                    </episodes-options>
-                    <anime-episodes-cards class="mt-4 grid grid-cols-12 gap-5 md:mt-[2.5vw] md:gap-[2.5vw]">
+                        </div>
+                    </div>
+                    <div class="mt-4 grid grid-cols-12 gap-5 md:mt-[2.5vw] md:gap-[2.5vw]">
                         {% for _ in '012345'|make_list %}
                             <a
                                 href="/anime/mal/1/episode/1"
                                 class="relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4"
                             >
-                                <card-banner-info class="relative col-span-5 h-full w-full md:col-span-12 md:h-[18vw]">
-                                    <card-banner class="block h-24 md:h-[12vw] md:w-full">
+                                <div class="relative col-span-5 h-full w-full md:col-span-12 md:h-[18vw]">
+                                    <div class="block h-24 md:h-[12vw] md:w-full">
                                         <img
                                             src="{{ episode.banner }}"
                                             class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw]"
                                         >
-                                    </card-banner>
-                                    <overlay-effect class="absolute inset-0 hidden bg-gradient-to-t from-secondary/75 to-transparent md:flex md:h-[12vw]"></overlay-effect>
-                                </card-banner-info>
-                                <episode-info-card class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-secondary md:p-[1vw]">
-                                    <card-info class="absolute bottom-0 flex justify-between md:-top-[2.5vw] inset-x-0 md:px-[1vw]">
+                                    </div>
+                                    <div class="absolute inset-0 hidden bg-gradient-to-t from-secondary/75 to-transparent md:flex md:h-[12vw]"></div>
+                                </div>
+                                <div class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-secondary md:p-[1vw]">
+                                    <div class="absolute bottom-0 flex justify-between md:-top-[2.5vw] inset-x-0 md:px-[1vw]">
                                         <p class="rounded bg-secondary/75 p-1 text-xs font-bold tracking-wider text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-secondary md:px-[0.55vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">EP 01</p>
                                         <p class="rounded bg-secondary/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-secondary md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">
                                             {{ episode.duration }}
                                         </p>
-                                    </card-info>
-                                    <episode-titles class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
-                                        <coreproject-scroll-area class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw] text-balance" parent_class="max-h-9 md:max-h-[1.25vw] md:hover:max-h-[9vw] duration-500" offset_scrollbar="true" gradient_mask="true">
+                                    </div>
+                                    <div class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
+                                        <coreproject-scroll-area class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]" parent_class="max-h-9 md:max-h-[1.25vw] md:hover:max-h-[9vw] duration-500" offset_scrollbar="true" gradient_mask="true">
                                             {{ episode.name }}
                                         </coreproject-scroll-area>
-                                        <coreproject-scroll-area class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw] text-balance" parent_class="max-h-9 md:max-h-[1.25vw] md:hover:max-h-[9vw] duration-500" offset_scrollbar="true" gradient_mask="true">
+                                        <coreproject-scroll-area class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]" parent_class="max-h-9 md:max-h-[1.25vw] md:hover:max-h-[9vw] duration-500" offset_scrollbar="true" gradient_mask="true">
                                             {{ episode.japanese_name }}
                                         </coreproject-scroll-area>
-                                    </episode-titles>
-                                    <episode-available-formats class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.5vw] md:pt-[0.75vw]">
-                                        <formats class="flex gap-2 leading-none md:gap-[0.65vw]">
-                                            {% for format in episode.formats %}
+                                    </div>
+                                    <div class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.5vw] md:pt-[0.75vw]">
+                                        <div class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                            {% for format in episode.div %}
                                                 <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:text-[0.8vw]">
                                                     {{ format }}
                                                 </span>
                                             {% endfor %}
-                                        </formats>
+                                        </div>
                                         <coreproject-icon-dot class='w-1 opacity-50 md:w-[0.25vw]' ></coreproject-icon-dot>
-                                        <resolutions class="flex gap-2 leading-none md:gap-[0.65vw]">
-                                            {% for res in episode.resolutions %}
+                                        <div class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                            {% for res in episode.div %}
                                                 <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:text-[0.8vw]">
                                                     {{ res }}
                                                 </span>
                                             {% endfor %}
-                                        </resolutions>
-                                    </episode-available-formats>
-                                </episode-info-card>
+                                        </div>
+                                    </div>
+                                </div>
                             </a>
                         {% endfor %}
-                    </anime-episodes-cards>
-                    <anime-media-section class="mt-10 flex grid-cols-5 flex-col gap-10 md:mt-[3vw] md:grid md:gap-[4.375vw]">
-                        <comment-box class="md:col-span-3">
-                            <section-header class="flex gap-2 border-b-2 border-surface-50/10 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
-                                <header-title class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Comments</header-title>
+                    </div>
+                    <div class="mt-10 flex grid-cols-5 flex-col gap-10 md:mt-[3vw] md:grid md:gap-[4.375vw]">
+                        <div class="md:col-span-3">
+                            <div class="flex gap-2 border-b-2 border-surface-50/10 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
+                                <div class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">div</div>
                                 <button class="btn btn-secondary min-h-full hidden rounded bg-surface-400 p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
                                     <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
-
                                 </button>
-                            </section-header>
+                            </div>
                             <div class="mt-2 flex items-center justify-between md:hidden">
                                 <p class="flex items-center gap-1 md:hidden">
                                     <span class="text-base font-bold leading-none">69</span>
-                                    <span class="text-sm font-semibold text-surface-50">comments</span>
+                                    <span class="text-sm font-semibold text-surface-50">div</span>
                                 </p>
                                 <button class="btn btn-icon h-7 w-auto rounded bg-surface-400 p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]" aria-label="Filter">
                                     <coreproject-icon-filter class="w-3 md:w-[1vw]"></coreproject-icon-filter >
@@ -249,25 +244,24 @@
                             <div class="md:mt-[1vw]">
                                 <coreproject-specific-commentbox submit_url="{% url "anime-commment-endpoint" pk=1 %}"></coreproject-specific-commentbox>
                             </div>
-                            <comments class="flex mt-10 md:mt-[2vw]">
+                            <div class="flex mt-10 md:mt-[2vw]">
                                 <coreproject-comment api_url='{% url "anime-commment-endpoint" pk=1 %}'>
                                 </coreproject-comment>
-                            </comments>
-                        </comment-box>
-                        <forum-posts class="md:col-span-2">
-                            <section-header class="flex gap-2 border-b-2 border-surface-50/10 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
-                                <section-title class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Forum Posts</section-title>
+                            </div>
+                        </div>
+                        <div class="md:col-span-2">
+                            <div class="flex gap-2 border-b-2 border-surface-50/10 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
+                                <div class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Forum div</div>
                                 <button class="btn btn-secondary min-h-full hidden rounded bg-surface-400 p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
                                     <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
-
                                 </button>
-                            </section-header>
-                            <forum-details class="mt-2 flex items-center justify-between md:mt-[0.75vw]">
+                            </div>
+                            <div class="mt-2 flex items-center justify-between md:mt-[0.75vw]">
                                 <p class="flex items-center gap-1 md:hidden">
                                     <span class="text-base font-bold leading-none">106</span>
-                                    <span class="text-sm font-semibold text-surface-50">posts</span>
+                                    <span class="text-sm font-semibold text-surface-50">div</span>
                                 </p>
-                                <forum-options class="flex items-center gap-2 md:w-full md:justify-between">
+                                <div class="flex items-center gap-2 md:w-full md:justify-between">
                                     <button class="btn btn-secondary min-h-full h-7 gap-2 rounded bg-surface-400 px-2 text-xs font-semibold md:h-[2.4vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.875vw]">
                                         <coreproject-icon-cross class="w-4 rotate-45 md:w-[1vw]" ></coreproject-icon-cross>
                                         Create New
@@ -276,47 +270,46 @@
                                         <coreproject-icon-filter class="w-3 md:w-[1vw]"></coreproject-icon-filter >
 
                                     </button>
-                                </forum-options>
-                            </forum-details>
-                            <posts class="mt-4 grid grid-cols-2 flex-col gap-4 md:mt-[1.25vw] md:flex md:gap-[1vw]">
+                                </div>
+                            </div>
+                            <div class="mt-4 grid grid-cols-2 flex-col gap-4 md:mt-[1.25vw] md:flex md:gap-[1vw]">
                                 <a href="/" class="card w-full grid-cols-7 overflow-hidden rounded-lg !bg-neutral/50 md:grid md:rounded-[0.625vw]">
-                                    <post-banner class="col-span-2 block h-16 md:h-full md:w-full">
+                                    <div class="col-span-2 block h-16 md:h-full md:w-full">
                                         <img
                                             src="https://timelinecovers.pro/facebook-cover/download/anime-your-lie-in-april-kaori-and-arima-facebook-cover.jpg"
                                             class="h-full w-full object-cover object-center"
                                         >
-                                    </post-banner>
+                                    </div>
                                     <post-container class="flex h-36 flex-col justify-between p-3 md:col-span-5 md:h-full md:gap-[0.375vw] md:p-[1vw]">
-                                        <post-head>
-                                            <post-title class="line-clamp-2 text-xs font-extrabold md:text-[0.875vw] md:leading-[1.25vw]">Celebrating 10 years of Hyouka!</post-title>
-                                            <post-description class="mt-2 line-clamp-3 text-[0.6rem] font-medium leading-snug text-surface-50 md:mt-[0.5vw] md:line-clamp-2 md:text-[0.75vw] md:leading-[1.125vw]">Ousei Arima is a child prodigy known as the "Human Metronome" for playing the piano with precision and perfection. Guided by a strict mother and rigorous training, Kousei dominates every competition he enters</post-description>
-                                        </post-head>
-                                        <post-infos class="flex items-end justify-between text-[0.6rem] leading-none md:mt-[0.75vw] md:items-center md:text-[0.75vw]">
-                                            <post-user-infos class="flex flex-col gap-1 md:flex-row md:items-center md:gap-[0.25vw]">
-                                                <post-author-name>Posted by <span class="text-[0.65rem] font-semibold md:text-[0.85vw]">Eiennlaio</span>
-                                                </post-author-name>
-                                                <post-uploaded-date class="text-surface-50">7 months ago</post-uploaded-date>
-                                            </post-user-infos>
-                                            <post-responses class="flex items-center gap-1 md:gap-[0.25vw]">
+                                        <div>
+                                            <div class="line-clamp-2 text-xs font-extrabold md:text-[0.875vw] md:leading-[1.25vw]">Celebrating 10 years of Hyouka!</div>
+                                            <div class="mt-2 line-clamp-3 text-[0.6rem] font-medium leading-snug text-surface-50 md:mt-[0.5vw] md:line-clamp-2 md:text-[0.75vw] md:leading-[1.125vw]">Ousei Arima is a child prodigy known as the "Human Metronome" for playing the piano with precision and perfection. Guided by a strict mother and rigorous training, Kousei dominates every competition he enters</div>
+                                        </div>
+                                        <div class="flex items-end justify-between text-[0.6rem] leading-none md:mt-[0.75vw] md:items-center md:text-[0.75vw]">
+                                            <div class="flex flex-col gap-1 md:flex-row md:items-center md:gap-[0.25vw]">
+                                                <div>Posted by <span class="text-[0.65rem] font-semibold md:text-[0.85vw]">Eiennlaio</span></div>
+                                                <div class="text-surface-50">7 months ago</div>
+                                            </div>
+                                            <div class="flex items-center gap-1 md:gap-[0.25vw]">
                                                 <coreproject-icon-chat class="w-3 md:w-[1vw]"> </coreproject-icon-chat>
-                                                <responses-text>69</responses-text>
-                                            </post-responses>
-                                        </post-infos>
+                                                <div>69</div>
+                                            </div>
+                                        </div>
                                     </post-container>
                                 </a>
-                            </posts>
-                        </forum-posts>
-                    </anime-media-section>
-                </anime-episodes-container>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </anime-info-episodes>
-            <anime-more-details class="hidden flex-col md:col-span-2 md:flex flex-col gap-[1vw]">
-                <section-header class="flex gap-[0.75vw]">
-                    <header-title class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Ratings</header-title>
+            <div class="hidden flex-col md:col-span-2 md:flex flex-col gap-[1vw]">
+                <div class="flex gap-[0.75vw]">
+                    <div class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Ratings</div>
                     <button class="btn btn-secondary rounded-[0.1875vw] bg-surface-400 p-0 md:h-[1.5vw] md:w-[1.5vw] min-h-full">
                         <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
 
                     </button>
-                </section-header>
+                </div>
                 <anime-ratings class="flex flex-col gap-[0.75vw]">
                     <raing class="flex items-center gap-[0.5vw]">
                         <span class="border-b-2 border-surface-50/50 pb-[0.5vw] font-bold md:text-[2vw] md:leading-[1.5vw]">92%</span>
@@ -388,14 +381,14 @@
 
                     </button>
                 </anime-ratings>
-                <more-infos-header class="flex gap-[0.75vw] md:mt-[6vw]">
-                    <header-title class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Details</header-title>
+                <div-header class="flex gap-[0.75vw] md:mt-[6vw]">
+                    <div class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Details</div>
                     <button class="btn btn-secondary min-h-full rounded p-0 md:h-[1.5vw] md:w-[1.5vw]">
                         <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
 
                     </button>
-                </more-infos-header>
-                <more-infos class="md:mt-[1.25vw] md:mb-[2vw]">
+                </div-header>
+                <div class="md:mt-[1.25vw] md:mb-[2vw]">
                     <div class="flex flex-col gap-[1.125vw] capitalize">
                         <div class="flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none text-surface-50">
                             <p class="font-semibold text-white">format</p>
@@ -442,14 +435,14 @@
                             <p>Night Novel</p>
                         </div>
                     </div>
-                    <voiceovercase class="mt-[2.5vw] block">
-                        <section-header class="flex gap-[0.75vw]">
-                            <header-title class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Voiceover Cast</header-title>
+                    <div class="mt-[2.5vw] block">
+                        <div class="flex gap-[0.75vw]">
+                            <div class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Voiceover Cast</div>
                             <button class="btn btn-secondary min-h-full rounded bg-surface-400 p-0 md:h-[1.5vw] md:w-[1.5vw]">
                                 <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
 
                             </button>
-                        </section-header>
+                        </div>
                         <div class="mt-[1vw] flex flex-col">
                             <span class="text-[0.9375vw] text-surface-50">VAs</span>
                             <button class="btn btn-secondary min-h-full mt-[0.3vw] h-[2.25vw] w-[6.625vw] gap-1 rounded-[0.375vw] bg-surface-400 p-0 text-[0.875vw]">
@@ -458,25 +451,25 @@
 
                             </button>
                         </div>
-                        <casts class="mt-[1vw] block">
-                            <casts-cards class="relative grid h-[9vw] w-full grid-cols-2 gap-[2px] overflow-hidden rounded-[0.75vw]">
-                                <cast-image class="relative col-span-1 w-full bg-cover">
+                        <div class="mt-[1vw] block">
+                            <div class="relative grid h-[9vw] w-full grid-cols-2 gap-[2px] overflow-hidden rounded-[0.75vw]">
+                                <div class="relative col-span-1 w-full bg-cover">
                                     <img
                                         src="https://i.pinimg.com/550x/ed/47/64/ed4764a0074e785738f2797641aeb411.jpg"
                                         class="absolute h-full w-full object-cover object-center"
                                     >
                                     <span class="absolute bottom-[0.3vw] z-10 w-full text-center text-[0.9vw] font-bold leading-[1vw] md:px-[1vw] text-white">Houtarou Oreki</span>
-                                </cast-image>
-                                <cast-details class="relative col-span-1 w-full bg-cover">
+                                </div>
+                                <div class="relative col-span-1 w-full bg-cover">
                                     <img
                                         src="https://animeanime.global/wp-content/uploads/2020/10/360236.jpg"
                                         class="absolute h-full w-full object-cover object-center"
                                     >
                                     <span class="absolute bottom-[0.3vw] z-10 w-full text-center text-[0.9vw] font-bold leading-[1vw] md:px-[1vw] text-white">Yuuichi Nakamura</span>
-                                </cast-details>
-                                <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-secondary/75 to-secondary/5"></gradient-overlay>
-                            </casts-cards>
-                            <casts-options class="mt-[1vw] flex flex-col">
+                                </div>
+                                <div class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-secondary/75 to-secondary/5"></div>
+                            </div>
+                            <div class="mt-[1vw] flex flex-col">
                                 <div class="btn-group">
                                     <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">\
                                         <coreproject-icon-chevron class="w-[1vw] rotate-180"></coreproject-icon-chevron>
@@ -485,30 +478,28 @@
                                     <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">01</button>
                                     <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">
                                         <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
-
                                     </button>
                                 </div>
-                                <span class="mt-[0.5vw] text-[0.75vw] leading-none text-surface-50">Showing 1-5, out of 58 Voiceover Casts</span>
-                            </casts-options>
-                        </casts>
-                    </voiceovercase>
-                    <recommendations class="mt-[2.5vw] block">
-                        <section-header class="flex gap-3">
-                            <header-title class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Recommendations</header-title>
+                                <span class="mt-[0.5vw] text-[0.75vw] leading-none text-surface-50">Showing 1-5, out of 58 Voiceover div</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-[2.5vw] block">
+                        <div class="flex gap-3">
+                            <div class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">div</div>
                             <button class="btn btn-secondary min-h-full rounded bg-surface-400 p-0 md:h-[1.5vw] md:w-[1.5vw]">
                                 <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
-
                             </button>
-                        </section-header>
-                        <recommendations-cards class="mt-[1vw] block">
-                            <cards-container class="grid grid-cols-2 gap-[0.75vw]">
+                        </div>
+                        <div class="mt-[1vw] block">
+                            <div class="grid grid-cols-2 gap-[0.75vw]">
                                 <a href="/myanimelist/1" class="card relative col-span-1 h-[9.375vw] w-full overflow-hidden rounded-[0.75vw] bg-cover bg-center">
                                     <img
                                         src="https://cdn.myanimelist.net/images/anime/1958/107912.jpg"
                                         class="absolute h-full w-full object-cover object-center"
                                     >
                                     <span class="absolute bottom-[0.3vw] z-10 line-clamp-2 w-full px-[0.5vw] text-center text-[0.9vw] font-semibold leading-[1.25vw] text-white">Yahari Ore no Seishun Love Come wa Machigatteiru.</span>
-                                    <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-secondary/75 to-secondary/5"></gradient-overlay>
+                                    <div class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-secondary/75 to-secondary/5"></div>
                                 </a>
                                 <a href="/myanimelist/1" class="card relative col-span-1 h-[9.375vw] w-full overflow-hidden rounded-[0.75vw] bg-cover">
                                     <img
@@ -516,10 +507,10 @@
                                         class="absolute h-full w-full object-cover object-center"
                                     >
                                     <span class="absolute bottom-[0.3vw] z-10 line-clamp-2 w-full px-[0.5vw] text-center text-[0.9vw] font-semibold leading-[1.25vw] text-white">Suzumiya Haruhi no Yuuutsu</span>
-                                    <gradient-overlay class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-secondary/75 to-secondary/5"></gradient-overlay>
+                                    <div class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-secondary/75 to-secondary/5"></div>
                                 </a>
-                            </cards-container>
-                            <recommendations-options class="mt-[1vw] flex flex-col">
+                            </div>
+                            <div class="mt-[1vw] flex flex-col">
                                 <div class="btn-group">
                                     <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">
                                         <coreproject-icon-chevron class="w-[1vw] rotate-180"></coreproject-icon-chevron>
@@ -531,11 +522,11 @@
 
                                     </button>
                                 </div>
-                                <span class="mt-[0.5vw] text-[0.75vw] leading-none text-surface-50">Showing 1-8, out of 47 Recommendations</span>
-                            </recommendations-options>
-                        </recommendations-cards>
-                    </recommendations>
-                </more-infos>
-            </anime-more-details>
-        </anime-info-section>
-    </anime-info-container>
+                                <span class="mt-[0.5vw] text-[0.75vw] leading-none text-surface-50">Showing 1-8, out of 47 div</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
