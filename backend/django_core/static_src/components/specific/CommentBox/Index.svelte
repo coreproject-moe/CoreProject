@@ -30,6 +30,7 @@
         });
         if (res.ok) {
             comment_needs_update.set(true);
+            textarea_value = "";
         }
     };
 </script>

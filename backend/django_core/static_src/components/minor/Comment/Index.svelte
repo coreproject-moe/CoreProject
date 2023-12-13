@@ -14,9 +14,9 @@
         results: Comment[];
     }
 
-    let loading_state: "loading" | "loaded" | "errored" = "loading",
-        error = "",
-        tree_branch: Comment[] = new Array<Comment>();
+    let loading_state: "loading" | "error" | "loaded",
+        error = "";
+    let tree_branch: Comment[] = new Array<Comment>();
 
     onMount(() => {
         set_comments();
@@ -38,13 +38,14 @@
             }
         },
         set_comments = () => {
+            loading_state = "loading";
             get_comments()
                 .then((res) => {
                     tree_branch = res;
                     loading_state = "loaded";
                 })
                 .catch((err) => {
-                    loading_state = "errored";
+                    loading_state = "error";
                     error = err;
                 });
         };
@@ -58,13 +59,17 @@
 </script>
 
 {#if loading_state === "loading"}
-    Loading
-{:else if loading_state === "errored"}
-    Something is wrong
+    Loading..
+{:else if loading_state === "error"}
+    Something is wrong Error : {@html error}
 {:else if loading_state === "loaded"}
-    <div class="flex flex-col md:gap-[1.5vw]">
-        {#each tree_branch as branch}
-            <CommetBlock item={branch} />
-        {/each}
-    </div>
+    {#if tree_branch}
+        <div class="flex flex-col md:gap-[1.5vw]">
+            {#each tree_branch as branch}
+                <CommetBlock item={branch} />
+            {/each}
+        </div>
+    {:else}
+        No comments
+    {/if}
 {/if}
