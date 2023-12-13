@@ -129,7 +129,7 @@
             show_emoji_picker = true;
             emoji_matches = [];
 
-            for (const item of Object.entries(emojis).sort()) {
+            for (const item of Object.entries(emojis).toSorted()) {
                 const keyword = item[0];
                 const emoji = item[1];
                 if (keyword.includes(emoji_code[1])) {
