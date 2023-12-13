@@ -34,6 +34,7 @@
                 }
             });
         };
+    // TODO: Do AOT calculations on `transitionrun` to  prevent flicker
 </script>
 
 <div
