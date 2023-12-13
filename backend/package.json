@@ -38,6 +38,7 @@
         "html-entities": "^2.4.0",
         "htmx.org": "^1.9.9",
         "hyperscript.org": "^0.9.12",
+        "svelte-intersection-observer": "^0.10.1",
         "tailwind-merge": "^2.1.0",
         "tailwind-scrollbar": "^3.0.5",
         "tailwindcss": "^0.0.0-insiders.32aca91",
