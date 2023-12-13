@@ -1,7 +1,6 @@
 <script lang="ts">
     import IntersectionObserver from "svelte-intersection-observer";
     import { cn } from "$functions/classname";
-    import { get_transition_duration_as_ms } from "$functions/get_transition_durtion_as_ms";
 
     let klass = "";
     export { klass as class };
@@ -12,7 +11,7 @@
     let scroll_area: HTMLElement;
     let add_mask_bottom: boolean;
 
-    let first_element_intersecting: boolean, second_element_intersecting: boolean, first_element: HTMLElement, second_element: HTMLElement;
+    let first_element_intersecting: boolean, end_element_intersecting: boolean, first_element: HTMLElement, end_element: HTMLElement;
 
     $: add_mask_bottom = scroll_area ? scroll_area.scrollHeight > scroll_area.clientHeight : false;
 
@@ -22,25 +21,18 @@
             add_mask_bottom = clientHeight + scrollTop === scrollHeight ? false : true;
         },
         handle_mouseenter = () => {
-            const duration = get_transition_duration_as_ms({ element: scroll_area, ms: true });
-            setTimeout(
-                () => {
-                    if (first_element_intersecting && second_element_intersecting) {
-                        add_mask_bottom = false;
-                    }
-                },
-                duration ? duration / 4 : 0
-            );
+            scroll_area.addEventListener("transitionend", () => {
+                if (first_element_intersecting && end_element_intersecting) {
+                    add_mask_bottom = false;
+                }
+            });
         },
         handle_mouseleave = () => {
-            setTimeout(
-                () => {
-                    if (first_element_intersecting && second_element_intersecting) {
-                        add_mask_bottom = true;
-                    }
-                },
-                get_transition_duration_as_ms({ element: scroll_area, ms: true }) ?? 0
-            );
+            scroll_area.addEventListener("transitionend", () => {
+                if (first_element_intersecting && end_element_intersecting) {
+                    add_mask_bottom = true;
+                }
+            });
         };
 </script>
 
@@ -65,11 +57,11 @@
         <slot />
 
         <IntersectionObserver
-            element={second_element}
-            bind:intersecting={second_element_intersecting}
+            element={end_element}
+            bind:intersecting={end_element_intersecting}
             threshold={1}
         >
-            <div bind:this={second_element} />
+            <div bind:this={end_element} />
         </IntersectionObserver>
     </div>
 </div>
