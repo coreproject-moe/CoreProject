@@ -40,9 +40,9 @@
 <div
     role="contentinfo"
     bind:this={scroll_area}
-    on:scroll={handle_scroll}
-    on:mouseenter={handle_mouseenter}
-    on:mouseleave={handle_mouseleave}
+    on:scroll|preventDefault={handle_scroll}
+    on:mouseenter|preventDefault={handle_mouseenter}
+    on:mouseleave|preventDefault={handle_mouseleave}
     class={cn(parent_class, offset_scrollbar && "pr-3 md:pr-[0.75vw]", "flex h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:rgba(255,255,255,0.12)transparent]")}
     class:[mask-image:linear-gradient(180deg,rgba(7,5,25,0.95)80%,rgba(0,0,0,0)100%)]={gradient_mask && add_mask_bottom}
 >
