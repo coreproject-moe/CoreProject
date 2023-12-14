@@ -3,7 +3,7 @@
 
     type Tree = {
         class: string;
-        child: Tree[];
+        child?: Tree[];
     };
 
     export let tree: Tree = {
@@ -13,8 +13,7 @@
                 class: "md:h-[2vw] md:w-[20vw] md:rounded-[0.5vw]",
                 child: [
                     {
-                        class: "md:h-[0.75vw] md:w-[10vw]",
-                        child: []
+                        class: "md:h-[0.75vw] md:w-[10vw]"
                     }
                 ]
             }
