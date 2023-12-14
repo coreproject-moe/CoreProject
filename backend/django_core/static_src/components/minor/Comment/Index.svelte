@@ -30,7 +30,7 @@
                 }
             });
             const value = (await res.json()) as CommentResponse;
-            const formated_json = new JSONToTree(value.results).to_tree() as unknown as Comment[];
+            const formated_json = new JSONToTree({ json: value.results }).build() as unknown as Comment[];
             if (res.ok) {
                 return formated_json;
             } else {
