@@ -58,7 +58,9 @@
                 });
         },
         get_next_comments = async () => {
-            get_comments(api_url).then((res) => {});
+            get_comments(api_url).then((res) => {
+                tree_branch = res;
+            });
         };
 
     // Store to trigger updates
