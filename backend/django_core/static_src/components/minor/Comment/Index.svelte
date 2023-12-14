@@ -75,11 +75,11 @@
     });
 </script>
 
-{#if loading_state === "loading"}
-    <CommentSkeleton skeleton_count={1} />
+{#if loading_state === "loaded"}
+    <CommentSkeleton />
 {:else if loading_state === "error"}
     Something is wrong Error : {@html error}
-{:else if loading_state === "loaded"}
+{:else if loading_state === "loading"}
     {#if tree_branch}
         <div class="flex flex-col md:gap-[1.5vw]">
             {#each tree_branch as branch}
