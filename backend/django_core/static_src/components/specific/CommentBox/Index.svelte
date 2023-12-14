@@ -1,7 +1,7 @@
 <script lang="ts">
     import TextArea from "$components/minor/TextArea/Index.svelte";
     import { cn } from "$functions/classname";
-    import { comment_needs_update } from "../../../stores/comment";
+    import { comment_needs_update } from "../../minor/Comment/comment";
     // Icons
     import Info from "$icons/Info/Index.svelte";
 

@@ -40,7 +40,7 @@ export default defineConfig({
         chunkSizeWarningLimit: 2048,
         emptyOutDir: true,
         target: "es2022",
-        cssTarget: "esnext",
+        cssTarget: "es2015",
         minify: "terser",
         // sourcemap: true,
         rollupOptions: {
