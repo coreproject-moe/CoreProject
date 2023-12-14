@@ -9,7 +9,6 @@ from ...serializers.comments import CommentSerializer
 
 
 class AnimeCommentAPIView(generics.ListAPIView):
-    default_limit = 10
     # this is due to drf-spectacular
     queryset = CommentModel.objects.none()
 
