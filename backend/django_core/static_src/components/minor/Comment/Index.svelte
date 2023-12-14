@@ -1,7 +1,7 @@
 <script lang="ts">
     import { JSONToTree } from "./json_to_tree";
     import CommetBlock from "./CommetBlock.svelte";
-    import CommentBlockSkeleton from "./CommentBlockSkeleton.svelte";
+    import CommentSkeleton from "../../../skeleton/Comment.svelte";
     import type { Comment } from "../../../types/comment";
     import { comment_needs_update } from "./comment";
     import { onMount } from "svelte";
@@ -76,7 +76,7 @@
 </script>
 
 {#if loading_state === "loading"}
-    <CommentBlockSkeleton skeleton_count={1} />
+    <CommentSkeleton skeleton_count={1} />
 {:else if loading_state === "error"}
     Something is wrong Error : {@html error}
 {:else if loading_state === "loaded"}
