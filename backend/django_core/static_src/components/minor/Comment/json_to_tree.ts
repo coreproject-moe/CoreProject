@@ -5,6 +5,7 @@ export class JSONToTree {
 
     constructor({ json, old_json }: { json: Comment[]; old_json?: Comment[] }) {
         if (old_json) {
+            // DO NOT DEEP MERGE
             const new_arr = this.convert_to_tree_given_path(json);
             this.#json = old_json.concat(new_arr);
         } else {
