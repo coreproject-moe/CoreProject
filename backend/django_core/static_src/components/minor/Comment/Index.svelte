@@ -2,34 +2,42 @@
     import { JSONToTree } from "./json_to_tree";
     import CommetBlock from "./CommetBlock.svelte";
     import type { Comment } from "../../../types/comment";
-    import { comment_needs_update } from "../../../stores/comment";
+    import { comment_needs_update } from "./comment";
     import { onMount } from "svelte";
+    import IntersectionOberser from "$components/svelte/IntersectionOberser.svelte";
 
     export let api_url: string;
 
     interface CommentResponse {
         count: number;
-        next: null | number;
-        previous: null | number;
+        next: null | string;
+        previous: null | string;
         results: Comment[];
     }
+    // This is set from backend
+    let next_url: string | null;
 
     let loading_state: "loading" | "error" | "loaded",
         error = "";
+
     let tree_branch: Comment[] = new Array<Comment>();
+
+    let last_element: HTMLElement;
 
     onMount(() => {
         set_comments();
     });
 
-    const get_comments = async () => {
-            const res = await fetch(api_url, {
+    const get_comments = async (url: string) => {
+            const res = await fetch(url, {
                 method: "GET",
                 headers: {
                     "X-CSRFToken": window.csrfmiddlewaretoken
                 }
             });
             const value = (await res.json()) as CommentResponse;
+            next_url = value.next;
+
             const formated_json = new JSONToTree(value.results).to_tree() as unknown as Comment[];
             if (res.ok) {
                 return formated_json;
@@ -39,7 +47,7 @@
         },
         set_comments = () => {
             loading_state = "loading";
-            get_comments()
+            get_comments(api_url)
                 .then((res) => {
                     tree_branch = res;
                     loading_state = "loaded";
@@ -48,8 +56,14 @@
                     loading_state = "error";
                     error = err;
                 });
+        },
+        get_next_comments = async () => {
+            get_comments(api_url).then((res) => {
+                
+            });
         };
 
+    // Store to trigger updates
     comment_needs_update.subscribe(async (val) => {
         if (val === true) {
             set_comments();
@@ -73,3 +87,14 @@
         No comments
     {/if}
 {/if}
+
+<!-- Intersection observer must be at last  -->
+<IntersectionOberser
+    threshold={0.1}
+    on:intersect={() => {
+        get_next_comments();
+    }}
+    element={last_element}
+>
+    <div bind:this={last_element} />
+</IntersectionOberser>

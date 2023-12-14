@@ -2,23 +2,24 @@ from apps.anime.models import AnimeModel
 from apps.comments.models import CommentModel
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
-from rest_framework import generics
-from rest_framework.pagination import LimitOffsetPagination
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework import permissions, pagination, generics
 from rest_framework.response import Response
 
 from ...serializers.comments import CommentSerializer
 
 
 class AnimeCommentAPIView(generics.ListAPIView):
+    default_limit = 10
     # this is due to drf-spectacular
     queryset = CommentModel.objects.none()
 
     serializer_class = CommentSerializer
     # Permissions
-    permission_classes = (IsAuthenticatedOrReadOnly,)
+    permission_classes = [
+        permissions.IsAuthenticatedOrReadOnly,
+    ]
     # Pagination
-    pagination_class = LimitOffsetPagination
+    pagination_class = pagination.LimitOffsetPagination
 
     def get_queryset(self, *args, **kwargs):
         queryset = get_object_or_404(AnimeModel, pk=self.kwargs["pk"]).comments.all()
