@@ -3,7 +3,10 @@ import type { Comment } from "../../../types/comment";
 export class JSONToTree {
     #json: Comment[] = new Array<Comment>();
 
-    constructor(json: object[]) {
+    constructor({ json, old_json }: { json: object[]; old_json?: Comment[] }) {
+        if (old_json) {
+            this.#json = old_json;
+        }
         this.#json = this.convert_to_tree_given_path(json);
     }
 
@@ -36,7 +39,7 @@ export class JSONToTree {
         return tree;
     }
 
-    public to_tree() {
+    public build() {
         return this.#json;
     }
 }
