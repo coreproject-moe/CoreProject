@@ -12,6 +12,7 @@
     import Cross from "$icons/Cross/Index.svelte";
     import { reverse } from "$functions/urls";
     import { onMount, tick } from "svelte";
+    import { cn } from "$functions/classname";
 
     // Bindings
     let user_reaction: typeof item.user_reaction,
@@ -34,6 +35,8 @@
         user_reaction = item["user_reaction"];
         ratio = item["ratio"];
     });
+
+    const depth = item.path.match(/\./g)?.length;
 
     const apply_fetch_sideeffect = async (res: Response) => {
             const json = await res.json();
@@ -160,8 +163,14 @@
                     </button>
                 </div>
                 <button
-                    class="btn min-h-full !bg-transparent p-0 text-xs md:h-max md:gap-[0.35vw] md:text-[0.9vw]"
-                    on:click|preventDefault={() => (reply_shown = !reply_shown)}
+                    class={cn(
+                        `btn min-h-full !bg-transparent p-0 text-xs md:h-max md:gap-[0.35vw] md:text-[0.9vw]`,
+                        // Allow only 5 level nesting ( for now )
+                        depth && depth > 5 && "btn-disabled"
+                    )}
+                    on:click|preventDefault={() => {
+                        reply_shown = !reply_shown;
+                    }}
                 >
                     <Chat class="md:w-[1vw]" />
                     <span>Replay</span>
