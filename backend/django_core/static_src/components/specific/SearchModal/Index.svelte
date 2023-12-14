@@ -2,7 +2,7 @@
     import Search from "../../icons/Search/Index.svelte";
     import Circle from "../../icons/Circle/Index.svelte";
     import Cross from "../../icons/Cross/Index.svelte";
-    import { search_modal_state } from "../../../stores/modal";
+    import { search_modal_state } from "./store";
     import ScrollArea from "../../minor/ScrollArea/Index.svelte";
 
     // demo variables
