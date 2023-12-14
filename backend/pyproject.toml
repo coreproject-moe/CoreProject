@@ -26,8 +26,6 @@ django-ratelimit = ">=4.1.0"
 django-dynamic-filenames = "*"
 # 3rd Party ( Brute Force protection )
 django-defender = ">=0.9.7"
-# 3rd Party ( Tailwind CSS )
-django-tailwind = ">=3.5.0"
 # 3rd Party ( Middlewares )
 django_cleanup = "*"
 django_cors_headers = "*"
@@ -129,10 +127,6 @@ mypy = "mypy . --enable-incomplete-feature=Unpack"
 ## Django extensions
 graph = "python django_core/manage.py graph_models -a -o mymodel.png"
 reset_db = "python django_core/manage.py reset_db"
-## Tailwind
-tailwind_install = "python ./django_core/manage.py tailwind install"
-tailwind_start = "python ./django_core/manage.py tailwind start"
-tailwind_build = "python ./django_core/manage.py tailwind build"
 # Test
 test_shinobi = 'pytest -vv ./shinobi'
 
