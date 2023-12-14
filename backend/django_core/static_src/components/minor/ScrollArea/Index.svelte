@@ -1,5 +1,5 @@
 <script lang="ts">
-    import IntersectionObserver from "svelte-intersection-observer";
+    import IntersectionObserver from "$components/svelte/IntersectionOberser.svelte";
     import { cn } from "$functions/classname";
 
     let klass = "";
@@ -34,7 +34,7 @@
                 }
             });
         };
-    // TODO: Do AOT calculations on `transitionrun` to  prevent flicker
+    // TODO: Do AOT ( Ahead of Time ) calculations on `transitionrun` to  prevent flicker
 </script>
 
 <div
@@ -48,6 +48,7 @@
 >
     <div class={cn(klass)}>
         <IntersectionObserver
+            root={scroll_area}
             element={first_element}
             bind:intersecting={first_element_intersecting}
             threshold={1}
@@ -58,6 +59,7 @@
         <slot />
 
         <IntersectionObserver
+            root={scroll_area}
             element={end_element}
             bind:intersecting={end_element_intersecting}
             threshold={1}
