@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { search_modal_state } from "../../../stores/modal";
+    import { search_modal_state } from "./store";
 
     let klass = "";
     export { klass as class };
