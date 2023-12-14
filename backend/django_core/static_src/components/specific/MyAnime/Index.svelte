@@ -41,7 +41,7 @@
         }}
         class="relative"
         tabindex="0"
-        aria-expanded="false"
+        aria-expanded={false}
     >
         <div class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]">
             <img
