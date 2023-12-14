@@ -88,17 +88,16 @@
     {:else}
         No comments
     {/if}
-{/if}
 
-<!-- Intersection observer must be at last  -->
-{#if next_url !== null}
-    <IntersectionOberser
-        threshold={0.1}
-        on:intersect={() => {
-            get_next_comments();
-        }}
-        element={last_element}
-    >
-        <div bind:this={last_element} />
-    </IntersectionOberser>
+    <!-- Intersection observer must be at last  -->
+    {#if next_url !== null}
+        <IntersectionOberser
+            on:intersect={() => {
+                get_next_comments();
+            }}
+            element={last_element}
+        >
+            <div bind:this={last_element} />
+        </IntersectionOberser>
+    {/if}
 {/if}
