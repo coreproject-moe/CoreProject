@@ -31,11 +31,11 @@
             }
         }
         // user actions
-        user_reaction = item.user_reaction;
-        ratio = item.ratio;
+        user_reaction = item["user_reaction"];
+        ratio = item["ratio"];
     });
 
-    const fetch_sideeffect = async (res: Response) => {
+    const apply_fetch_sideeffect = async (res: Response) => {
             const json = await res.json();
             user_reaction = json.user_reaction;
             ratio = json.ratio;
@@ -53,7 +53,7 @@
                 })
             });
             if (res.ok) {
-                fetch_sideeffect(res);
+                apply_fetch_sideeffect(res);
             }
         },
         delete_to_reaction_endpoint = async () => {
@@ -66,7 +66,7 @@
                 }
             });
             if (res.ok) {
-                fetch_sideeffect(res);
+                apply_fetch_sideeffect(res);
             }
         };
 </script>
@@ -208,7 +208,7 @@
     </div>
 </div>
 
-{#if item.childrens > 1}
+{#if item.child.length === 0 && item.childrens != 0}
     <div class="flex items-end md:ml-[0.55vw] md:gap-[0.5vw]">
         <svg
             class="text-neutral md:w-[2vw]"
@@ -227,7 +227,7 @@
             <div class="grid rotate-45 place-items-center rounded-full bg-neutral md:h-[1.5vw] md:w-[1.5vw]">
                 <Cross class="p-0 text-accent md:w-[1vw]" />
             </div>
-            <span class="md:text-[1vw]">{item.child.length - 1} More</span>
+            <span class="md:text-[1vw]">{item.childrens} More</span>
         </button>
     </div>
 {/if}
