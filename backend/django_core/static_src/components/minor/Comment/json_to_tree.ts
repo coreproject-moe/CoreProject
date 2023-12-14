@@ -5,12 +5,14 @@ export class JSONToTree {
 
     constructor({ json, old_json }: { json: object[]; old_json?: Comment[] }) {
         if (old_json) {
-            this.#json = old_json;
+            const new_arr = this.convert_to_tree_given_path(json);
+            this.#json = old_json.concat(new_arr);
+        } else {
+            this.#json = this.convert_to_tree_given_path(json);
         }
-        this.#json = this.convert_to_tree_given_path(json);
     }
 
-    private convert_to_tree_given_path(data: any): any {
+    private convert_to_tree_given_path(data: any[]): any {
         const tree: Comment[] = [];
 
         data.forEach((node: Comment) => {

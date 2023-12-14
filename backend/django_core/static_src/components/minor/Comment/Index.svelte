@@ -58,9 +58,11 @@
                 });
         },
         get_next_comments = async () => {
-            get_comments(api_url).then((res) => {
-                tree_branch = res;
-            });
+            if (next_url) {
+                get_comments(next_url).then((res) => {
+                    tree_branch = res;
+                });
+            }
         };
 
     // Store to trigger updates
@@ -89,12 +91,14 @@
 {/if}
 
 <!-- Intersection observer must be at last  -->
-<IntersectionOberser
-    threshold={0.1}
-    on:intersect={() => {
-        get_next_comments();
-    }}
-    element={last_element}
->
-    <div bind:this={last_element} />
-</IntersectionOberser>
+{#if next_url !== null}
+    <IntersectionOberser
+        threshold={0.1}
+        on:intersect={() => {
+            get_next_comments();
+        }}
+        element={last_element}
+    >
+        <div bind:this={last_element} />
+    </IntersectionOberser>
+{/if}
