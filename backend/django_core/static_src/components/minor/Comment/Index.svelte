@@ -76,7 +76,7 @@
 </script>
 
 {#if loading_state === "loaded"}
-    <CommentBlockSkeleton />
+    <CommentBlockSkeleton skeleton_count={1} />
 {:else if loading_state === "error"}
     Something is wrong Error : {@html error}
 {:else if loading_state === "loading"}

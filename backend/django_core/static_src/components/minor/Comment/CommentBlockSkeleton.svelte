@@ -1,3 +1,7 @@
+<script lang="ts">
+    export let skeleton_count: number;
+</script>
+
 <div class="flex md:gap-[0.75vw]">
     <div class="flex flex-col items-center md:gap-[1vw]">
         <div class="skeleton shrink-0 rounded-full bg-neutral md:h-[2vw] md:w-[2vw]" />
@@ -13,5 +17,10 @@
             <div class="skeleton rounded-full bg-neutral md:h-[0.5vw] md:w-[2vw]" />
             <div class="skeleton rounded-full bg-neutral md:h-[0.5vw] md:w-[2vw]" />
         </div>
+        {#if skeleton_count}
+            {#each Array(skeleton_count) as _}
+                <svelte:self />
+            {/each}
+        {/if}
     </div>
 </div>
