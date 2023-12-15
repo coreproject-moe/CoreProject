@@ -97,10 +97,8 @@
                 <div class="skeleton rounded-full bg-neutral md:h-[0.5vw] md:w-[2vw]" />
                 <div class="skeleton rounded-full bg-neutral md:h-[0.5vw] md:w-[2vw]" />
             </div>
-            {#if tree.child}
-                {#each tree.child as tree_branch}
-                    <svelte:self tree={tree_branch} />
-                {/each}
+            {#if tree.child && tree.child.length !== 0}
+                <svelte:self tree_branch={tree.child} />
             {/if}
         </div>
     </div>
