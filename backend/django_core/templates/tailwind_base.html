@@ -25,7 +25,7 @@
 
             window.csrfmiddlewaretoken = `{{ csrf_token }}`;
             window.user_authenticated = `{{ request.user.is_authenticated }}`;
-            
+
             document.addEventListener('DOMContentLoaded', () => {
                 document.body.addEventListener(
                     'fetch:beforeRequest',

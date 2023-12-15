@@ -20,7 +20,8 @@
         ratio: typeof item.ratio,
         reply_shown = false,
         comment_highlight_el: HTMLDivElement,
-        show_comment_highlighted = false;
+        show_comment_highlighted = false,
+        icon_mapping = ["upvote", "downvote"];
 
     onMount(async () => {
         const url_params = new URLSearchParams(window.location.search);
@@ -73,6 +74,15 @@
                 apply_fetch_sideeffect(res);
             }
         };
+    const handle_reaction_button_click = async (reaction: string /**upvote | downvote*/) => {
+        if (!reaction && (reaction !== "upvote" || "downvote")) throw new Error("Sanity Error");
+
+        if (user_reaction === `${reaction}d` /** ${upvote}d | ${downvote}d */) {
+            await delete_to_reaction_endpoint();
+        } else {
+            await post_to_reaction_endpoint(reaction as "upvote" | "downvote");
+        }
+    };
 </script>
 
 <div class="flex gap-3 md:gap-[0.75vw]">
@@ -87,8 +97,12 @@
                 class="h-full w-full shrink-0 rounded-full object-cover"
             />
         </a>
-        <button class="group flex h-full cursor-pointer justify-center transition-transform active:scale-95 md:w-full">
-            <div class="h-full rounded-full bg-neutral transition-colors group-hover:bg-warning md:w-[0.15vw] group-hover:md:w-[0.2vw]" />
+        <button
+            class="group flex h-full cursor-pointer justify-center transition-transform active:scale-95 md:w-full"
+        >
+            <div
+                class="h-full rounded-full bg-neutral transition-colors group-hover:bg-warning md:w-[0.15vw] group-hover:md:w-[0.2vw]"
+            />
         </button>
     </div>
     <div class="flex flex-col items-start gap-1 md:gap-[0.25vw]">
@@ -110,58 +124,41 @@
                     <div class="text-white">{`${item.user.first_name} ${item.user.last_name}`}</div>
                     <div class="md:text-[0.75vw]">{item.user.username}</div>
                 </div>
-                <div class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">{new FormatDate(item.created_at).format_to_time_from_now}</div>
+                <div class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">
+                    {new FormatDate(item.created_at).format_to_time_from_now}
+                </div>
             </a>
             <div class="text-sm leading-snug text-accent md:text-[1vw] md:leading-[1.5vw]">
                 <Markdown markdown={item.text} />
             </div>
             <div class="flex items-center gap-3 md:gap-[0.75vw]">
                 <div class="flex items-center md:gap-[0.35vw]">
-                    <button
-                        on:click|preventDefault={async () => {
-                            if (user_reaction === "upvoted") {
-                                await delete_to_reaction_endpoint();
-                            } else {
-                                await post_to_reaction_endpoint("upvote");
-                            }
-                        }}
-                        class={cn("btn btn-secondary min-h-full p-0 md:h-max", string_to_boolean(window.user_authenticated) || "btn-disabled")}
-                    >
-                        {#if user_reaction === "upvoted"}
-                            <Arrow
-                                variant="fill"
-                                class="text-warning md:w-[1.25vw]"
-                            />
-                        {:else}
-                            <Arrow
-                                class="md:w-[1.25vw]"
-                                variant="outline"
-                            />
-                        {/if}
-                    </button>
-                    <span class="font-semibold text-accent md:text-[0.9vw]">{ratio}</span>
-                    <button
-                        on:click={async () => {
-                            if (user_reaction === "downvoted") {
-                                await delete_to_reaction_endpoint();
-                            } else {
-                                await post_to_reaction_endpoint("downvote");
-                            }
-                        }}
-                        class={cn("btn btn-secondary min-h-full p-0 md:h-max", string_to_boolean(window.user_authenticated) || "btn-disabled")}
-                    >
-                        {#if user_reaction === "downvoted"}
-                            <Arrow
-                                class="rotate-180 text-warning md:w-[1.25vw]"
-                                variant="fill"
-                            />
-                        {:else}
-                            <Arrow
-                                class="rotate-180 md:w-[1.25vw]"
-                                variant="outline"
-                            />
-                        {/if}
-                    </button>
+                    {#each icon_mapping as item, index}
+                        {@const is_first = index === 0}
+                        {@const is_last = index === icon_mapping.length - 1}
+                        <button
+                            on:click|preventDefault={() => handle_reaction_button_click(item)}
+                            class={cn(
+                                "btn btn-secondary min-h-full p-0 md:h-max",
+                                is_first && "order-1",
+                                is_last && "order-3",
+                                string_to_boolean(window.user_authenticated) || "btn-disabled"
+                            )}
+                        >
+                            {#if user_reaction === `${item}d`}
+                                <Arrow
+                                    variant="fill"
+                                    class="text-warning md:w-[1.25vw]"
+                                />
+                            {:else}
+                                <Arrow
+                                    class="md:w-[1.25vw]"
+                                    variant="outline"
+                                />
+                            {/if}
+                        </button>
+                    {/each}
+                    <span class="order-2 font-semibold text-accent md:text-[0.9vw]">{ratio}</span>
                 </div>
                 <button
                     class={cn(
@@ -176,7 +173,9 @@
                     <Chat class="md:w-[1vw]" />
                     <span>Replay</span>
                 </button>
-                <button class="btn min-h-full !bg-transparent p-0 text-xs md:h-max md:gap-[0.35vw] md:text-[0.9vw]">
+                <button
+                    class="btn min-h-full !bg-transparent p-0 text-xs md:h-max md:gap-[0.35vw] md:text-[0.9vw]"
+                >
                     <Share class="md:w-[1vw]" />
                     <span>Share</span>
                 </button>
@@ -234,7 +233,9 @@
         </svg>
 
         <button class="btn btn-secondary flex h-max min-h-max items-center p-0 md:gap-[0.75vw]">
-            <div class="grid rotate-45 place-items-center rounded-full bg-neutral md:h-[1.5vw] md:w-[1.5vw]">
+            <div
+                class="grid rotate-45 place-items-center rounded-full bg-neutral md:h-[1.5vw] md:w-[1.5vw]"
+            >
                 <Cross class="p-0 text-accent md:w-[1vw]" />
             </div>
             <span class="md:text-[1vw]">{item.childrens} More</span>

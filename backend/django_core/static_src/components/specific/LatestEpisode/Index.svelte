@@ -29,7 +29,8 @@
 
     onMount(() => {
         // needed to drill two more layer cause of svelte-retag
-        scroll_area_element = anime_episode?.parentElement?.parentElement?.parentElement?.parentElement!;
+        scroll_area_element =
+            anime_episode?.parentElement?.parentElement?.parentElement?.parentElement!;
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
@@ -61,8 +62,12 @@
             anime_episode_rect = anime_episode?.getBoundingClientRect();
 
         const scroll_area_center = scroll_area_element?.offsetHeight! / 2;
-        const anime_episode_center = anime_episode_rect?.top! - parent_rect?.top + anime_episode_rect?.height! / 2;
-        const target_scroll_top = anime_episode_center - scroll_area_center + parseInt(getComputedStyle(parent_element)?.gap) || 0;
+        const anime_episode_center =
+            anime_episode_rect?.top! - parent_rect?.top + anime_episode_rect?.height! / 2;
+        const target_scroll_top =
+            anime_episode_center -
+                scroll_area_center +
+                parseInt(getComputedStyle(parent_element)?.gap) || 0;
 
         scroll_area_element?.scroll({
             top: target_scroll_top,
@@ -118,7 +123,9 @@
         >
             <genres class="flex items-center md:my-[0.35vw] md:gap-[0.5vw]">
                 {#each ["Action", "Romance", "Hentai"] as genre}
-                    <genre class="bg-accent font-semibold leading-none text-secondary md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
+                    <genre
+                        class="bg-accent font-semibold leading-none text-secondary md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]"
+                    >
                         {genre}
                     </genre>
                 {/each}

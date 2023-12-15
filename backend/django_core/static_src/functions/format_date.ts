@@ -1,7 +1,11 @@
 import dayjs from "dayjs";
 
 // Define modules
-[(await import("dayjs/plugin/localeData")).default, (await import("dayjs/plugin/relativeTime")).default, (await import("dayjs/plugin/utc")).default].forEach((item) => {
+[
+    (await import("dayjs/plugin/localeData")).default,
+    (await import("dayjs/plugin/relativeTime")).default,
+    (await import("dayjs/plugin/utc")).default
+].forEach((item) => {
     dayjs.extend(item);
 });
 
@@ -13,7 +17,9 @@ export class FormatDate {
     }
 
     public get format_to_human_readable_form() {
-        return `${dayjs().localeData().monthsShort(this.#date)} ${this.#date.format("D")}, ${this.#date.format("YYYY")}`;
+        return `${dayjs().localeData().monthsShort(this.#date)} ${this.#date.format(
+            "D"
+        )}, ${this.#date.format("YYYY")}`;
     }
 
     public get format_to_time_from_now() {

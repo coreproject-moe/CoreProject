@@ -1,4 +1,6 @@
-export async function sanitize(_text: string | undefined | Promise<string | undefined>): Promise<string> {
+export async function sanitize(
+    _text: string | undefined | Promise<string | undefined>
+): Promise<string> {
     const text = await _text;
     const xss = await import("xss");
 

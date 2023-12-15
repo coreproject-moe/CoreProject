@@ -17,7 +17,10 @@ export function reverse(view: string, ...args: Array<string | number>) {
         throw new Error("`args` doesnot match with `urlpattern`");
     }
 
-    const replacements: Record<string, string> = matches.reduce((obj, k, i) => ({ ...obj, [k]: args[i] }), {});
+    const replacements: Record<string, string> = matches.reduce(
+        (obj, k, i) => ({ ...obj, [k]: args[i] }),
+        {}
+    );
 
     // Create a regular expression pattern to match all occurrences of the keys in replacements
     const pattern = new RegExp(Object.keys(replacements).join("|"), "g");
