@@ -2,6 +2,7 @@
     import { JSONToTree } from "./json_to_tree";
     import CommetBlock from "./CommetBlock.svelte";
     import CommentSkeleton from "$components/minor/Comment/Skeleton.svelte";
+    import Empty from "$icons/Empty/Index.svelte";
     import type { Comment } from "../../../types/comment";
     import { comment_needs_update } from "./store";
     import { onMount } from "svelte";
@@ -85,14 +86,17 @@
 {:else if loading_state === "error"}
     Something is wrong Error : {@html error}
 {:else if loading_state === "loaded"}
-    {#if tree_branch}
+    {#if !tree_branch}
         <div class="flex flex-col md:gap-[1.5vw]">
             {#each tree_branch as branch}
                 <CommetBlock item={branch} />
             {/each}
         </div>
     {:else}
-        No comments
+        <div class="flex w-full flex-col items-center justify-center">
+            <Empty class="stroke-accent md:w-[10vw]" />
+            <span>No comments found!</span>
+        </div>
     {/if}
 
     <!-- Intersection observer must be at last  -->
