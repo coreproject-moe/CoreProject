@@ -39,7 +39,10 @@
             const value = (await res.json()) as CommentResponse;
             next_url = value.next;
 
-            const formated_json = new JSONToTree({ json: value.results, old_json: tree_branch }).build() as unknown as Comment[];
+            const formated_json = new JSONToTree({
+                json: value.results,
+                old_json: tree_branch
+            }).build() as unknown as Comment[];
             if (res.ok) {
                 return formated_json;
             } else {

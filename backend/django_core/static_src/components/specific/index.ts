@@ -7,8 +7,14 @@ const mapping = [
     { tagname: "specific-my-anime-list", component: await import("./MyAnime/Index.svelte") },
     { tagname: "specific-latest-episode", component: await import("./LatestEpisode/Index.svelte") },
     // Modals
-    /* item */ { tagname: "specific-search-modal", component: await import("./SearchModal/Index.svelte") },
-    /* Trigger */ { tagname: "specific-search-modal-trigger", component: await import("./SearchModal/Trigger.svelte") }
+    /* item */ {
+        tagname: "specific-search-modal",
+        component: await import("./SearchModal/Index.svelte")
+    },
+    /* Trigger */ {
+        tagname: "specific-search-modal-trigger",
+        component: await import("./SearchModal/Trigger.svelte")
+    }
 ];
 
 mapping.forEach((item) => {

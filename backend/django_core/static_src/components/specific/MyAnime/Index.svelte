@@ -43,7 +43,9 @@
         tabindex="0"
         aria-expanded={false}
     >
-        <div class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]">
+        <div
+            class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]"
+        >
             <img
                 class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]"
                 src={anime_image}
@@ -61,7 +63,9 @@
                 >
                     {anime_name}
                 </ScrollArea>
-                <div class="text-surface-50 flex items-center gap-2 text-xs leading-none md:gap-[0.5vw] md:text-[0.8vw]">
+                <div
+                    class="text-surface-50 flex items-center gap-2 text-xs leading-none md:gap-[0.5vw] md:text-[0.8vw]"
+                >
                     <span class="hidden capitalize md:flex">
                         {anime_status}
                     </span>
@@ -76,10 +80,15 @@
 
     <button
         tabindex="0"
-        class={cn(dropdown_class, "dropdown-content top-0 z-10 hidden flex-col leading-none md:flex md:w-[20vw]")}
+        class={cn(
+            dropdown_class,
+            "dropdown-content top-0 z-10 hidden flex-col leading-none md:flex md:w-[20vw]"
+        )}
         style="left:{style_left};"
     >
-        <div class="flex flex-col bg-neutral text-start md:gap-[0.35vw] md:rounded-[0.75vw] md:rounded-t-[0.3vw] md:p-[1vw]">
+        <div
+            class="flex flex-col bg-neutral text-start md:gap-[0.35vw] md:rounded-[0.75vw] md:rounded-t-[0.3vw] md:p-[1vw]"
+        >
             <anime-name class="font-semibold text-accent md:text-[1vw] md:leading-[1.25vw]">
                 {anime_name}
             </anime-name>
@@ -100,7 +109,11 @@
             </studio>
             <genres class="flex items-center md:my-[0.35vw] md:gap-[0.5vw]">
                 {#each anime_genres.split(",") as item}
-                    <genre class="bg-warning font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">{item}</genre>
+                    <genre
+                        class="bg-warning font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]"
+                    >
+                        {item}
+                    </genre>
                 {/each}
             </genres>
             <ScrollArea

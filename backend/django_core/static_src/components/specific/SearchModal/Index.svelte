@@ -48,7 +48,9 @@
     class="modal"
     bind:this={dialog_element}
 >
-    <div class="modal-box flex !max-w-fit flex-col items-center bg-secondary md:px-[2vw] md:py-[1vw]">
+    <div
+        class="modal-box flex !max-w-fit flex-col items-center bg-secondary md:px-[2vw] md:py-[1vw]"
+    >
         <form class="relative flex h-[3.5vw] w-[40vw] items-center">
             <button
                 class="btn absolute left-[1.25vw] min-h-max border-none !bg-transparent p-0"
@@ -98,9 +100,17 @@
                                 class="h-[3.5vw] w-[3.5vw] rounded-[0.5vw] object-cover"
                             />
                             <div class="flex w-full flex-col">
-                                <span class="text-[1.1vw] font-semibold leading-none text-white">Kimetsu no Yaiba</span>
-                                <span class="text-surface-200 text-[0.7vw] font-medium uppercase leading-[1.5vw]">Demon slayer</span>
-                                <div class="text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw]">
+                                <span class="text-[1.1vw] font-semibold leading-none text-white">
+                                    Kimetsu no Yaiba
+                                </span>
+                                <span
+                                    class="text-surface-200 text-[0.7vw] font-medium uppercase leading-[1.5vw]"
+                                >
+                                    Demon slayer
+                                </span>
+                                <div
+                                    class="text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw]"
+                                >
                                     <span>2006</span>
                                     <span>TV</span>
                                     <Circle style="width: 0.2vw;" />
@@ -114,8 +124,12 @@
 
             <div>
                 <span class="text-surface-50 text-[1.2vw] font-semibold">manga</span>
-                <div class="bg-surface-400 mt-[0.2vw] h-[28.25vw] w-[21.875vw] rounded-[0.75vw] shadow-lg">
-                    <div class="flex h-full flex-col items-center justify-center gap-[0.2vw] text-[1.1vw]">
+                <div
+                    class="bg-surface-400 mt-[0.2vw] h-[28.25vw] w-[21.875vw] rounded-[0.75vw] shadow-lg"
+                >
+                    <div
+                        class="flex h-full flex-col items-center justify-center gap-[0.2vw] text-[1.1vw]"
+                    >
                         <span class="font-medium leading-none">mangacore integration</span>
                         <span class="font-semibold leading-none">coming soon</span>
                     </div>
@@ -124,8 +138,12 @@
 
             <div>
                 <span class="text-surface-50 text-[1.2vw] font-semibold">music</span>
-                <div class="bg-surface-400 mt-[0.2vw] h-[28.25vw] w-[21.875vw] rounded-[0.75vw] shadow-lg">
-                    <div class="flex h-full flex-col items-center justify-center gap-[0.2vw] text-[1.1vw]">
+                <div
+                    class="bg-surface-400 mt-[0.2vw] h-[28.25vw] w-[21.875vw] rounded-[0.75vw] shadow-lg"
+                >
+                    <div
+                        class="flex h-full flex-col items-center justify-center gap-[0.2vw] text-[1.1vw]"
+                    >
                         <span class="font-medium leading-none">soundcore integration</span>
                         <span class="font-semibold leading-none">coming soon</span>
                     </div>
