@@ -84,9 +84,9 @@
     <div class="flex flex-col md:gap-[1.5vw]">
         <CommentSkeleton />
     </div>
-{:else if loading_state === "loaded"}
-    <Error {error} />
 {:else if loading_state === "error"}
+    <Error {error} />
+{:else if loading_state === "loaded"}
     {#if tree_branch}
         <div class="flex flex-col md:gap-[1.5vw]">
             {#each tree_branch as branch}
