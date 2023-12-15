@@ -38,13 +38,12 @@ class CommentSerializer(serializers.Serializer):
         ] = (
             CommentModel.objects.annotate(
                 ratio=Case(
-                    When(upvotes=request.user.pk, then=Value("upvoted")),
-                    When(downvotes=request.user.pk, then=Value("downvoted")),
+                    When(upvotes__in=[request.user.pk], then=Value("upvoted")),
+                    When(downvotes__in=[request.user.pk], then=Value("downvoted")),
                     default=Value(None),
                 )
             )
             .values("ratio")
             .get(pk=obj.pk)
         )
-
         return queryset["ratio"]

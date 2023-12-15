@@ -13,6 +13,7 @@
     import { reverse } from "$functions/urls";
     import { onMount, tick } from "svelte";
     import { cn } from "$functions/classname";
+    import { string_to_boolean } from "$functions/string_to_bool";
 
     // Bindings
     let user_reaction: typeof item.user_reaction,
@@ -124,7 +125,7 @@
                                 await post_to_reaction_endpoint("upvote");
                             }
                         }}
-                        class="btn btn-secondary min-h-full p-0 md:h-max"
+                        class={cn("btn btn-secondary min-h-full p-0 md:h-max", string_to_boolean(window.user_authenticated) || "btn-disabled")}
                     >
                         {#if user_reaction === "upvoted"}
                             <Arrow
@@ -140,7 +141,6 @@
                     </button>
                     <span class="font-semibold text-accent md:text-[0.9vw]">{ratio}</span>
                     <button
-                        class="btn btn-secondary min-h-full p-0 md:h-max"
                         on:click={async () => {
                             if (user_reaction === "downvoted") {
                                 await delete_to_reaction_endpoint();
@@ -148,6 +148,7 @@
                                 await post_to_reaction_endpoint("downvote");
                             }
                         }}
+                        class={cn("btn btn-secondary min-h-full p-0 md:h-max", string_to_boolean(window.user_authenticated) || "btn-disabled")}
                     >
                         {#if user_reaction === "downvoted"}
                             <Arrow
