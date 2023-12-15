@@ -15,7 +15,8 @@ export default defineConfig({
         alias: {
             $functions: join(STATIC_SRC, "functions"),
             $components: join(STATIC_SRC, "components"),
-            $icons: join(STATIC_SRC, "components", "icons")
+            $icons: join(STATIC_SRC, "components", "icons"),
+            $skeleton: join(STATIC_SRC, "skeleton")
         }
     },
     plugins: [
