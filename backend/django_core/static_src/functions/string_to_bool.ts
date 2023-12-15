@@ -1,6 +1,5 @@
 export function string_to_boolean(string: string) {
-    const _string = string.toLowerCase();
-    switch (_string) {
+    switch (string.toLowerCase()) {
         case "true": {
             return true;
         }
