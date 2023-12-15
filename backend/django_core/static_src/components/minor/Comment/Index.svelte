@@ -93,9 +93,12 @@
             {/each}
         </div>
     {:else}
-        <div class="flex w-full flex-col items-center justify-center">
+        <div class="flex w-full items-center justify-center md:gap-[1vw]">
             <Empty class="stroke-accent md:w-[10vw]" />
-            <span>No comments found!</span>
+            <div class="flex flex-col md:gap-[0.15vw]">
+                <span class="font-semibold md:text-[1.25vw]">No comments found!</span>
+                <span class="italic md:text-[1.1vw]">"Be the first one to comment"</span>
+            </div>
         </div>
     {/if}
 
