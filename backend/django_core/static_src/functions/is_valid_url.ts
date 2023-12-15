@@ -2,7 +2,7 @@ export function is_valid_url(url_string: string) {
     /**
      * Credit : https://stackoverflow.com/a/43467144
      */
-    let url: URL;
+    let url: URL | null = null;
 
     try {
         url = new URL(url_string);

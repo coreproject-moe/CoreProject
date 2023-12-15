@@ -8,7 +8,7 @@ export function string_to_boolean(string: string) {
             return false;
         }
         default: {
-            throw Error("String is not convertable to boolean");
+            throw new Error("String is not convertable to boolean");
         }
     }
 }
