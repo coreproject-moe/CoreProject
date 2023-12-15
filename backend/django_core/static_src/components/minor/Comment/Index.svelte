@@ -76,7 +76,9 @@
 </script>
 
 {#if loading_state === "loading"}
-    <CommentSkeleton />
+    <div class="flex flex-col md:gap-[1.5vw]">
+        <CommentSkeleton />
+    </div>
 {:else if loading_state === "error"}
     Something is wrong Error : {@html error}
 {:else if loading_state === "loaded"}
