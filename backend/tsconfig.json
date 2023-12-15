@@ -21,7 +21,9 @@
             "$icons": ["./django_core/static_src/components/icons/"],
             "$icons/*": ["./django_core/static_src/components/icons/*"],
             "$components": ["./django_core/static_src/components/"],
-            "$components/*": ["./django_core/static_src/components/*"]
+            "$components/*": ["./django_core/static_src/components/*"],
+            "$skeleton": ["./django_core/static_src/skeleton/"],
+            "$skeleton/*": ["./django_core/static_src/skeleton/*"]
         }
     }
 }
