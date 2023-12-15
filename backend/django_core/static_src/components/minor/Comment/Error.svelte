@@ -1,10 +1,11 @@
 <script lang="ts">
     export let error: string;
+    import SadFishGif from "../../../public/images/gifs/sad.gif";
 </script>
 
 <div class="flex w-full items-center justify-center md:gap-[1vw]">
     <img
-        src="/static/public/images/gifs/sad.gif"
+        src={SadFishGif}
         alt=""
         class="md:h-[10vw]"
     />
