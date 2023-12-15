@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-
+import { parseIso } from "date-fns";
 // Define modules
 [
     (await import("dayjs/plugin/localeData")).default,
@@ -11,9 +11,11 @@ import dayjs from "dayjs";
 
 export class FormatDate {
     #date: dayjs.Dayjs;
+    #date_fns: any;
 
     constructor(date: string) {
         this.#date = dayjs(date);
+        this.#date_fns = parseIso(date);
     }
 
     public get format_to_human_readable_form() {
