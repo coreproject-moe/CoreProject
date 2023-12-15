@@ -1,9 +1,9 @@
 <script lang="ts">
     import { JSONToTree } from "./json_to_tree";
     import CommetBlock from "./CommetBlock.svelte";
-    import CommentSkeleton from "$skeleton/Comment.svelte";
+    import CommentSkeleton from "$components/minor/Comment/Skeleton.svelte";
     import type { Comment } from "../../../types/comment";
-    import { comment_needs_update } from "./comment";
+    import { comment_needs_update } from "./store";
     import { onMount } from "svelte";
     import IntersectionOberser from "$components/svelte/IntersectionOberser.svelte";
 
