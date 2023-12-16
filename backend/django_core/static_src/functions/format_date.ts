@@ -1,45 +1,36 @@
-import dayjs from "dayjs";
-
-// Define modules
-[
-    (await import("dayjs/plugin/localeData")).default,
-    (await import("dayjs/plugin/relativeTime")).default,
-    (await import("dayjs/plugin/utc")).default
-].forEach((item) => {
-    dayjs.extend(item);
-});
+import { parseISO, formatDistance, format } from "date-fns";
 
 export class FormatDate {
-    #date: dayjs.Dayjs;
+    #date_fns: Date;
 
     constructor(date: string) {
-        this.#date = dayjs(date);
+        this.#date_fns = parseISO(date);
     }
 
     public get format_to_human_readable_form() {
-        return `${dayjs().localeData().monthsShort(this.#date)} ${this.#date.format(
-            "D"
-        )}, ${this.#date.format("YYYY")}`;
+        return format(this.#date_fns, `MMM dd, yyyy`);
     }
 
     public get format_to_time_from_now() {
-        return dayjs.utc(this.#date).fromNow();
+        return formatDistance(this.#date_fns, new Date(), { addSuffix: true });
     }
 
     public get format_to_season() {
-        let season: string;
+        // https://chat.openai.com/share/52a90543-2a22-43b9-bbd9-4833bb778363
+        let season: string | null = null;
 
-        const month = this.#date.month();
-        if (month >= 2 && month <= 4) {
+        const month = this.#date_fns.getMonth() + 1; // Month is zero-based
+
+        if (month >= 3 && month <= 5) {
             season = "spring";
-        } else if (month >= 5 && month <= 7) {
+        } else if (month >= 6 && month <= 8) {
             season = "summer";
-        } else if (month >= 8 && month <= 10) {
+        } else if (month >= 9 && month <= 11) {
             season = "autumn";
         } else {
             season = "winter";
         }
 
-        return `${season} ${this.#date.format("YYYY")}`;
+        return `${season} ${this.#date_fns.getFullYear()}`;
     }
 }
