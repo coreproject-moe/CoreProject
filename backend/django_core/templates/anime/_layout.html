@@ -35,14 +35,17 @@
                             </search-form>
                         </div>
                     </div>
-                    <button class="avatar" aria-label="Avatar" aria-expanded="false">
-                        <figure
-                            class="avatar flex aspect-square text-surface-50 font-semibold justify-center items-center overflow-hidden isolate bg-surface-400-500-token w-12 md:w-[3.125vw] rounded-[0.4rem] md:rounded-[0.375vw]"
-                            data-testid="avatar"
-                        >
-                            <img class="avatar-image w-full h-full object-cover" style="" src="/images/Avatar.avif" alt="" />
-                        </figure>
-                    </button>
+                    <div class="dropdown dropdown-end">
+                      <div tabindex="0" role="button" class="avatar">
+                        <div class="md:w-[3vw] md:rounded-[0.5vw]">
+                          <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                        </div>
+                      </div>
+                      <ul tabindex="0" class="dropdown-content">
+                        <li><a>Item 1</a></li>
+                        <li><a>Item 2</a></li>
+                      </ul>
+                    </div> 
                 </navbar>
             </header>
             <div class="flex-auto w-full h-full flex overflow-hidden">
