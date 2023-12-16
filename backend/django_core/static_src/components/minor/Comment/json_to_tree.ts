@@ -15,28 +15,30 @@ export class JSONToTree {
 
     private convert_to_tree_given_path(data: Comment[]): Comment[] {
         const tree: Comment[] = [];
+
+        // Create a dictionary to quickly access nodes by their path
+        const nodeDictionary: { [path: string]: Comment } = {};
+
+        // First pass: Create nodes and populate the dictionary
+        data.forEach((node: Comment) => {
+            const newNode: Comment = { ...node, child: [] };
+            nodeDictionary[node.path] = newNode;
+
+            // If the node is a root-level node, add it to the tree
+            if (!node.path.includes(".")) {
+                tree.push(newNode);
+            }
+        });
+
+        // Second pass: Connect child nodes to their parent nodes
         data.forEach((node: Comment) => {
             const path_segments = node.path.split(".");
-            let current_node: Comment[] = tree;
+            const parentPath = path_segments.slice(0, -1).join(".");
+            const parentNode = nodeDictionary[parentPath];
 
-            path_segments.forEach((segment, index) => {
-                const existing_node = current_node.find((n) => n.path === segment);
-
-                if (existing_node) {
-                    current_node = existing_node.child;
-                } else {
-                    let new_node: any = { path: segment, child: [] };
-
-                    if (index === path_segments.length - 1) {
-                        // Copy values
-                        const { child, path, ...rest } = node;
-                        Object.assign(new_node, rest);
-                    }
-
-                    current_node.push(new_node);
-                    current_node = new_node.child;
-                }
-            });
+            if (parentNode) {
+                parentNode.child.push(nodeDictionary[node.path]);
+            }
         });
         return tree;
     }

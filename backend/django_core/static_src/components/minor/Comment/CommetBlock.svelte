@@ -93,7 +93,7 @@
         >
             <img
                 alt=""
-                src={item.user.avatar ?? item.user.avatar_url}
+                src={item?.user?.avatar ?? item?.user?.avatar_url}
                 class="h-full w-full shrink-0 rounded-full object-cover"
             />
         </a>
@@ -121,8 +121,10 @@
                 class="flex flex-col text-xs leading-none md:text-[1vw]"
             >
                 <div class="flex items-center md:gap-[0.5vw]">
-                    <div class="text-white">{`${item.user.first_name} ${item.user.last_name}`}</div>
-                    <div class="md:text-[0.75vw]">{item.user.username}</div>
+                    <div class="text-white">
+                        {`${item?.user?.first_name ?? ""} ${item?.user?.last_name ?? ""}`}
+                    </div>
+                    <div class="md:text-[0.75vw]">{item?.user?.username}</div>
                 </div>
                 <div class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">
                     {new FormatDate(item.created_at).format_to_time_from_now}

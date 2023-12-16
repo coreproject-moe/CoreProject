@@ -21,21 +21,15 @@
     // This is set from backend
     let next_url: string | null;
 
-    let loading_state: "loading" | "error" | "loaded",
-        error: string | null = null,
-        loaded_once = false;
+    let loading_state: "loading" | "error" | "loaded" = "loading",
+        error: string | null = null;
 
     let tree_branch: Comment[] = new Array<Comment>();
 
     let last_element: HTMLElement;
 
     onMount(() => {
-        set_comments().then(() => {
-            loaded_once = true;
-        });
-    });
-    onDestroy(() => {
-        loaded_once = false;
+        set_comments();
     });
 
     const get_comments = async (url: string) => {
@@ -66,7 +60,6 @@
             }
         },
         set_comments = async () => {
-            loaded_once || (loading_state = "loading");
             get_comments(api_url)
                 .then((res) => {
                     tree_branch = res;
