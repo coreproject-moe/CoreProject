@@ -11,6 +11,6 @@
     />
     <div class="flex flex-col md:gap-[0.1vw]">
         <span class="font-semibold md:text-[1.5vw]">Something went wrong!</span>
-        <span class="italic md:text-[1.15vw]">Error: {error}</span>
+        <span class="italic md:text-[1.15vw]">{error}</span>
     </div>
 </div>

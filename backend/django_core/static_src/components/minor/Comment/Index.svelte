@@ -12,6 +12,7 @@
     export let api_url: string;
 
     interface CommentResponse {
+        detail?: string;
         count: number;
         next: null | string;
         previous: null | string;
@@ -39,17 +40,20 @@
                 }
             });
             const value = (await res.json()) as CommentResponse;
-            next_url = value.next;
 
             if (res.status === 200) {
-                const formated_json = new JSONToTree({
+                next_url = value.next;
+
+                return new JSONToTree({
                     json: value.results,
                     old_json: tree_branch
                 }).build() as unknown as Comment[];
-                return formated_json;
             } else if (res.status === 404) {
                 // No comment exists
                 // Return empty array
+                if (!value?.detail?.toLowerCase().includes("not found")) {
+                    throw new Error(`Data fetched from backend contains error`);
+                }
                 return new Array<Comment>();
             } else {
                 throw new Error(await res.text());
