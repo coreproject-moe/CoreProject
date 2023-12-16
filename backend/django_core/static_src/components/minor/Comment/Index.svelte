@@ -3,15 +3,16 @@
     import CommetBlock from "./CommetBlock.svelte";
     import CommentSkeleton from "$components/minor/Comment/Skeleton.svelte";
     import Empty from "./Empty.svelte";
-    import Error from "./Error.svelte";
+    import ErrorSvelteComponent from "./Error.svelte";
     import type { Comment } from "../../../types/comment";
     import { comment_needs_update } from "./store";
-    import { onMount } from "svelte";
+    import { onDestroy, onMount } from "svelte";
     import IntersectionOberser from "$components/svelte/IntersectionOberser.svelte";
 
     export let api_url: string;
 
     interface CommentResponse {
+        detail?: string;
         count: number;
         next: null | string;
         previous: null | string;
@@ -21,14 +22,20 @@
     let next_url: string | null;
 
     let loading_state: "loading" | "error" | "loaded",
-        error = "";
+        error: string | null = null,
+        loaded_once = false;
 
     let tree_branch: Comment[] = new Array<Comment>();
 
     let last_element: HTMLElement;
 
     onMount(() => {
-        set_comments();
+        set_comments().then(() => {
+            loaded_once = true;
+        });
+    });
+    onDestroy(() => {
+        loaded_once = false;
     });
 
     const get_comments = async (url: string) => {
@@ -39,28 +46,35 @@
                 }
             });
             const value = (await res.json()) as CommentResponse;
-            next_url = value.next;
 
-            const formated_json = new JSONToTree({
-                json: value.results,
-                old_json: tree_branch
-            }).build() as unknown as Comment[];
-            if (res.ok) {
-                return formated_json;
+            if (res.status === 200) {
+                next_url = value.next;
+
+                return new JSONToTree({
+                    json: value.results,
+                    old_json: tree_branch
+                }).build() as unknown as Comment[];
+            } else if (res.status === 404) {
+                // No comment exists
+                // Return empty array
+                if (!value?.detail?.toLowerCase().includes("not found")) {
+                    throw new Error(`Data fetched from backend contains error`);
+                }
+                return new Array<Comment>();
             } else {
                 throw new Error(await res.text());
             }
         },
-        set_comments = () => {
-            loading_state = "loading";
+        set_comments = async () => {
+            loaded_once || (loading_state = "loading");
             get_comments(api_url)
                 .then((res) => {
                     tree_branch = res;
                     loading_state = "loaded";
                 })
-                .catch((err) => {
+                .catch((err: string) => {
                     loading_state = "error";
-                    error = err;
+                    error = err as string;
                 });
         },
         get_next_comments = async () => {
@@ -74,7 +88,15 @@
     // Store to trigger updates
     comment_needs_update.subscribe(async (val) => {
         if (val === true) {
-            set_comments();
+            // This should not trigger tree loading thing;
+            get_comments(api_url)
+                .then((res) => {
+                    tree_branch = res;
+                })
+                .catch((err: string) => {
+                    loading_state = "error";
+                    error = err as string;
+                });
             comment_needs_update.set(false);
         }
     });
@@ -85,9 +107,11 @@
         <CommentSkeleton />
     </div>
 {:else if loading_state === "error"}
-    <Error {error} />
+    {#if error}
+        <ErrorSvelteComponent {error} />
+    {/if}
 {:else if loading_state === "loaded"}
-    {#if tree_branch}
+    {#if tree_branch.length !== 0}
         <div class="flex flex-col md:gap-[1.5vw]">
             {#each tree_branch as branch}
                 <CommetBlock item={branch} />

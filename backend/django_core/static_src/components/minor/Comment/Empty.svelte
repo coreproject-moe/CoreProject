@@ -1,6 +1,10 @@
-<div class="flex w-full items-center justify-center md:gap-[1vw]">
+<script lang="ts">
+    import Fish from "../../../assets/gifs/fish.gif";
+</script>
+
+<div class="flex w-full items-center justify-between md:gap-[1vw]">
     <img
-        src="/static/public/images/gifs/fish.gif"
+        src={Fish}
         alt=""
         class="md:h-[15vw]"
     />
