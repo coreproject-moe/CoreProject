@@ -3,7 +3,7 @@
     import CommetBlock from "./CommetBlock.svelte";
     import CommentSkeleton from "$components/minor/Comment/Skeleton.svelte";
     import Empty from "./Empty.svelte";
-    import Error from "./Error.svelte";
+    import ErrorSvelteComponent from "./Error.svelte";
     import type { Comment } from "../../../types/comment";
     import { comment_needs_update } from "./store";
     import { onMount } from "svelte";
@@ -21,7 +21,7 @@
     let next_url: string | null;
 
     let loading_state: "loading" | "error" | "loaded",
-        error = "";
+        error: string | null = null;
 
     let tree_branch: Comment[] = new Array<Comment>();
 
@@ -41,12 +41,16 @@
             const value = (await res.json()) as CommentResponse;
             next_url = value.next;
 
-            const formated_json = new JSONToTree({
-                json: value.results,
-                old_json: tree_branch
-            }).build() as unknown as Comment[];
-            if (res.ok) {
+            if (res.status === 200) {
+                const formated_json = new JSONToTree({
+                    json: value.results,
+                    old_json: tree_branch
+                }).build() as unknown as Comment[];
                 return formated_json;
+            } else if (res.status === 404) {
+                // No comment exists
+                // Return empty array
+                return new Array<Comment>();
             } else {
                 throw new Error(await res.text());
             }
@@ -58,9 +62,9 @@
                     tree_branch = res;
                     loading_state = "loaded";
                 })
-                .catch((err) => {
+                .catch((err: string) => {
                     loading_state = "error";
-                    error = err;
+                    error = err as string;
                 });
         },
         get_next_comments = async () => {
@@ -85,9 +89,11 @@
         <CommentSkeleton />
     </div>
 {:else if loading_state === "error"}
-    <Error {error} />
+    {#if error}
+        <ErrorSvelteComponent {error} />
+    {/if}
 {:else if loading_state === "loaded"}
-    {#if tree_branch}
+    {#if tree_branch.length !== 0}
         <div class="flex flex-col md:gap-[1.5vw]">
             {#each tree_branch as branch}
                 <CommetBlock item={branch} />

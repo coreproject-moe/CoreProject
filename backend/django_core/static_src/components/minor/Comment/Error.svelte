@@ -1,6 +1,6 @@
 <script lang="ts">
     export let error: string;
-    import SadFishGif from "../../../public/images/gifs/sad.gif";
+    import SadFishGif from "../../../assets/gifs/sad.gif";
 </script>
 
 <div class="flex w-full items-center justify-center md:gap-[1vw]">
