@@ -1,11 +1,12 @@
 from apps.anime.models import AnimeModel
 from apps.comments.models import CommentModel
+from django.db.models import Count
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, pagination, permissions
 from rest_framework.response import Response
+
 from ...serializers.comments import CommentSerializer
-from django.db.models import F, Count, ExpressionWrapper, IntegerField
 
 
 class AnimeCommentAPIView(generics.ListAPIView):
