@@ -6,7 +6,7 @@
     import ErrorSvelteComponent from "./Error.svelte";
     import type { Comment } from "../../../types/comment";
     import { comment_needs_update } from "./store";
-    import { onMount } from "svelte";
+    import { onDestroy, onMount } from "svelte";
     import IntersectionOberser from "$components/svelte/IntersectionOberser.svelte";
 
     export let api_url: string;
@@ -22,14 +22,20 @@
     let next_url: string | null;
 
     let loading_state: "loading" | "error" | "loaded",
-        error: string | null = null;
+        error: string | null = null,
+        loaded_once = false;
 
     let tree_branch: Comment[] = new Array<Comment>();
 
     let last_element: HTMLElement;
 
     onMount(() => {
-        set_comments();
+        set_comments().then(() => {
+            loaded_once = true;
+        });
+    });
+    onDestroy(() => {
+        loaded_once = false;
     });
 
     const get_comments = async (url: string) => {
@@ -59,8 +65,8 @@
                 throw new Error(await res.text());
             }
         },
-        set_comments = () => {
-            loading_state = "loading";
+        set_comments = async () => {
+            loaded_once || (loading_state = "loading");
             get_comments(api_url)
                 .then((res) => {
                     tree_branch = res;
