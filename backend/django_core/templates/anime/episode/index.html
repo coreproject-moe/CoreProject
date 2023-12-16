@@ -137,47 +137,10 @@
                     </svg>
                 </button>
             </comments-info>
-            <comment-form class="flex flex-col md:flex-row md:gap-[1vw]">
-                <a href="/user/" class="hidden h-7 w-7 flex-shrink-0 md:mt-[0.5vw] md:flex md:h-[2vw] md:w-[2vw]">
-                    <div class="h-full w-full shrink-0 rounded-full object-cover">
-                        <img class="h-full w-full shrink-0 rounded-full object-cover" src="https://avatars.githubusercontent.com/u/114811070?s=40&v=4" alt="Avatar" style="" loading="lazy">
-                    </div>
-                </a>
-                <form class="mt-3 flex flex-col gap-3 md:mt-[1vw] md:gap-[0.75vw]">
-                    <span class="leading-none text-surface-50 md:text-[1vw]">Comment as <strong>Tokito</strong>
-                    </span>
-                    <coreproject-specific-commentbox></coreproject-specific-commentbox>
-                </form>
-            </comment-form>
-            <comments class="mt-10 flex flex-col gap-5 md:mt-[2vw] md:gap-[1.5vw]">
-                <comment class="flex gap-3 md:gap-[1vw]">
-                    <a href="/user/" class="h-7 w-7 flex-shrink-0 md:h-[2vw] md:w-[2vw]">
-                        <img
-                            src="https://avatars.githubusercontent.com/u/114811070?s=40&v=4"
-                            class="h-full w-full shrink-0 rounded-full object-cover"
-                        >
-                    </a>
-                    <comment-details class="flex flex-col items-start gap-1 md:gap-0">
-                        <a href="/user/" class="text-xs leading-none md:text-[1vw] flex flex-col">
-                            <div class="flex items-center md:gap-[0.5vw]">
-                                <name class="text-white">Tokitouq</name>
-                                <username class="md:text-[0.75vw]">@tokitouq</username>
-                            </div>
-                            <comment-time class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">10 months ago</comment-time>
-                        </a>
-                        <coreproject-markdown class="text-sm leading-snug text-accent md:text-[1vw] md:leading-[1.5vw]">
-                            I'm really happy with your determination to finish this project.
-                        </coreproject-markdown>
-                        <options class="mt-2 flex items-center gap-3 md:mt-[0.5vw] md:gap-[0.75vw]">
-                            <button class="btn !bg-transparent p-0">
-                                <coreproject-icon-like class="w-3 text-surface-300 md:w-[1vw]"></coreproject-icon-like>
-                                <likes class="text-xs md:text-[0.75vw]">106</likes>
-                            </button>
-                            <button class="btn !bg-transparent p-0 text-xs uppercase text-surface-50 md:text-[0.8vw]">Replay</button>
-                        </options>
-                    </comment-details>
-                </comment>
-            </comments>
+            <coreproject-specific-commentbox submit_url="{% url "episode-comment-endpoint" pk=1 episode_number=1 %}"></coreproject-specific-commentbox>
+
+            <coreproject-comment class="w-full" api_url='{% url "episode-comment-endpoint" pk=1 episode_number=1 %}'>
+            </coreproject-comment>
         </comments-section>
         <forum-recommendations class="col-span-12 mt-10 flex flex-col gap-5 md:col-span-5 md:mt-0 md:gap-[2vw]">
             <forum-posts>

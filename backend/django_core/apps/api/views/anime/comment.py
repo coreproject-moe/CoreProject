@@ -21,7 +21,7 @@ class AnimeCommentAPIView(generics.ListAPIView):
     # Pagination
     pagination_class = pagination.LimitOffsetPagination
 
-    def get_queryset(self, *args, **kwargs):
+    def get_queryset(self):
         queryset = (
             get_object_or_404(AnimeModel, pk=self.kwargs["pk"])
             .comments.all()
@@ -30,7 +30,6 @@ class AnimeCommentAPIView(generics.ListAPIView):
             )
             .order_by("-_ratio", "-created_at")
         )
-        print(queryset.query)
         return queryset
 
     def post(self, request: HttpRequest, pk: int) -> Response:

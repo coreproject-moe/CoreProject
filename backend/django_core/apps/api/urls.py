@@ -43,6 +43,7 @@ urlpatterns = [
     path(
         "anime/<int:pk>/episode/<int:episode_number>/comment",
         EpisodeCommentAPIView.as_view(),
+        name="episode-comment-endpoint",
     ),
     path(
         "anime/<int:pk>/episode/<int:episode_number>/timestamp",
