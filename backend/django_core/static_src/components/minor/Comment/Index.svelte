@@ -82,7 +82,15 @@
     // Store to trigger updates
     comment_needs_update.subscribe(async (val) => {
         if (val === true) {
-            set_comments();
+            // This should not trigger tree loading thing;
+            get_comments(api_url)
+                .then((res) => {
+                    tree_branch = res;
+                })
+                .catch((err: string) => {
+                    loading_state = "error";
+                    error = err as string;
+                });
             comment_needs_update.set(false);
         }
     });
