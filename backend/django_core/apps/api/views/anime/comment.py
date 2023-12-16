@@ -4,8 +4,8 @@ from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, pagination, permissions
 from rest_framework.response import Response
-
 from ...serializers.comments import CommentSerializer
+from django.db.models import F, Count, ExpressionWrapper, IntegerField
 
 
 class AnimeCommentAPIView(generics.ListAPIView):
@@ -21,7 +21,15 @@ class AnimeCommentAPIView(generics.ListAPIView):
     pagination_class = pagination.LimitOffsetPagination
 
     def get_queryset(self, *args, **kwargs):
-        queryset = get_object_or_404(AnimeModel, pk=self.kwargs["pk"]).comments.all()
+        queryset = (
+            get_object_or_404(AnimeModel, pk=self.kwargs["pk"])
+            .comments.all()
+            .annotate(
+                _ratio=Count("upvotes") - Count("downvotes"),
+            )
+            .order_by("-_ratio", "-created_at")
+        )
+        print(queryset.query)
         return queryset
 
     def post(self, request: HttpRequest, pk: int) -> Response:
