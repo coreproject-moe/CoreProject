@@ -4,15 +4,7 @@
     import Play from "$icons/Play/Index.svelte";
     import { slide } from "svelte/transition";
     import { onMount } from "svelte";
-
-    type Episode = {
-        id: number;
-        cover: string;
-        name: string;
-        episode_number: string;
-        release_date: string;
-        synopsis: string;
-    };
+    import type { Episode } from "../../../types/episode";
 
     export let episode: Episode;
 
@@ -64,7 +56,7 @@
     on:mouseenter={handle_mouseenter}
     on:mouseleave={handle_mouseleave}
     role="group"
-    class="group relative h-[5vw] shrink-0 duration-300 ease-in-out hover:h-[16vw]"
+    class="group relative h-[5vw] shrink-0 snap-center duration-300 ease-in-out hover:h-[16vw]"
 >
     <img
         src={episode.cover}
