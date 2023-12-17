@@ -35,17 +35,59 @@
                             </search-form>
                         </div>
                     </div>
-                    <div class="dropdown dropdown-end">
-                      <div tabindex="0" role="button" class="avatar">
-                        <div class="md:w-[3vw] md:rounded-[0.5vw]">
-                          <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                    {% if request.user.is_authenticated %}
+                        <div class="dropdown dropdown-end flex">
+                            <div tabindex="0" role="button" class="avatar">
+                                <div class="md:w-[3vw] md:rounded-[0.5vw]">
+                                    <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                                </div>
+                            </div>
+                            <ul tabindex="0" class="dropdown-content md:top-[4vw] md:text-[0.9vw] md:p-[0.5vw] bg-base-100 menu md:rounded-[0.75vw]">
+                                <div class="md:p-[0.75vw] md:py-[0.5vw] flex flex-col leading-none md:gap-[0.35vw]">
+                                    <span class="md:text-[1vw] font-bold">SoraLadyBoy#6969</span>
+                                    <span class="md:text-[0.75vw]">sora_ladyboy@coreproject.moe</span>
+                                </div>
+                                <div class="divider md:mb-[0.1vw] mt-0"></div>
+                                {% component_block "vercel_hover" glider_container_class='' active_element_class='rounded-[0.5vw] bg-primary' direction='vertical' duration=200 %}
+                                    {% fill 'items' %}
+                                        <li>
+                                            <a class="md:p-[0.75vw] leading-none hover:text-white hover:bg-transparent">
+                                                <coreproject-icon-user class="md:w-[1vw]"></coreproject-icon-user>
+                                                Profile
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="md:p-[0.75vw] leading-none hover:text-white hover:bg-transparent">
+                                                <coreproject-icon-list class="md:w-[1vw]"></coreproject-icon-list>
+                                                My List
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="md:p-[0.75vw] leading-none hover:text-white hover:bg-transparent">
+                                                <coreproject-icon-preference class="md:w-[1vw]"></coreproject-icon-preference>
+                                                Preference
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="md:p-[0.75vw] leading-none hover:text-white hover:bg-transparent">
+                                                <coreproject-icon-settings class="md:w-[1vw]"></coreproject-icon-settings>
+                                                Settings
+                                            </a>
+                                        </li>
+                                    {% endfill %}
+                                {% endcomponent_block %}
+                            </ul>
                         </div>
-                      </div>
-                      <ul tabindex="0" class="dropdown-content">
-                        <li><a>Item 1</a></li>
-                        <li><a>Item 2</a></li>
-                      </ul>
-                    </div> 
+                    {% else %}
+                        <div class="flex md:gap-[0.75vw]">
+                            <a href="../user/register" class="btn btn-neutral md:p-[0.9vw] md:text-[1vw] h-max min-h-max leading-none md:rounded-[0.5vw]">
+                                Register
+                            </a>
+                            <a href="../user/login" class="btn btn-primary text-accent md:p-[0.9vw] md:text-[1vw] h-max min-h-max leading-none md:rounded-[0.5vw]">
+                                Log in
+                            </a>
+                        </div>
+                    {% endif %}
                 </navbar>
             </header>
             <div class="flex-auto w-full h-full flex overflow-hidden">
