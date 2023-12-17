@@ -3,6 +3,7 @@
     import { FormatDate } from "$functions/format_date";
     import Play from "$icons/Play/Index.svelte";
     import { slide } from "svelte/transition";
+    import { onMount } from "svelte";
 
     type Episode = {
         id: number;
@@ -23,6 +24,7 @@
     let show_more_info = false;
 
     /** Bindings */
+    onMount(() => (scroll_area_element = anime_episode?.parentElement?.parentElement!));
 
     function handle_mouseenter() {
         show_more_info = true;
@@ -33,7 +35,7 @@
     }
 
     function handle_animationstart() {
-        const parent_element = anime_episode?.parentElement?.parentElement!;
+        const parent_element = anime_episode?.parentElement!;
 
         // Declare rects
         const parent_rect = parent_element?.getBoundingClientRect(), // taking parent not scroll_area_element
@@ -46,6 +48,8 @@
             anime_episode_center -
                 scroll_area_center +
                 parseInt(getComputedStyle(parent_element)?.gap) || 0;
+
+        console.log(parseInt(getComputedStyle(parent_element)?.gap));
 
         scroll_area_element?.scroll({
             top: target_scroll_top,
