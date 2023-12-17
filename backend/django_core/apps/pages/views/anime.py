@@ -1,5 +1,5 @@
-from typing import TYPE_CHECKING
 import json
+from typing import TYPE_CHECKING
 
 from django.http import HttpResponse
 from django.shortcuts import render
