@@ -37,39 +37,39 @@
                     </div>
                     {% if request.user.is_authenticated %}
                         <div class="dropdown dropdown-end flex">
-                            <div tabindex="0" role="button" class="avatar">
+                            <div tabindex="0" role="button" class="avatar btn border-none !bg-transparent p-0">
                                 <div class="md:w-[3vw] md:rounded-[0.5vw]">
                                     <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                                 </div>
                             </div>
-                            <ul tabindex="0" class="dropdown-content md:top-[4vw] md:text-[0.9vw] md:p-[0.5vw] bg-base-100 menu md:rounded-[0.75vw]">
+                            <ul tabindex="0" class="dropdown-content z-1 md:min-w-[12vw] md:top-[4vw] md:text-[0.9vw] md:p-[0.5vw] bg-base-100 menu md:rounded-[0.75vw]">
                                 <div class="md:p-[0.75vw] md:py-[0.5vw] flex flex-col leading-none md:gap-[0.35vw]">
-                                    <span class="md:text-[1vw] font-bold">SoraLadyBoy#6969</span>
-                                    <span class="md:text-[0.75vw]">sora_ladyboy@coreproject.moe</span>
+                                    <span class="md:text-[1vw] font-bold capitalize">{{ request.user.username }}</span>
+                                    <span class="md:text-[0.75vw]">{{ request.user.email }}</span>
                                 </div>
                                 <div class="divider md:mb-[0.1vw] mt-0"></div>
                                 {% component_block "vercel_hover" glider_container_class='' active_element_class='rounded-[0.5vw] bg-primary' direction='vertical' duration=200 %}
                                     {% fill 'items' %}
                                         <li>
-                                            <a class="md:p-[0.75vw] leading-none hover:text-white hover:bg-transparent">
+                                            <a class="flex items-center md:gap-[0.5vw] md:p-[0.75vw] leading-none !text-white !bg-transparent">
                                                 <coreproject-icon-user class="md:w-[1vw]"></coreproject-icon-user>
                                                 Profile
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="md:p-[0.75vw] leading-none hover:text-white hover:bg-transparent">
+                                            <a class="flex items-center md:gap-[0.5vw] md:p-[0.75vw] leading-none !text-white !bg-transparent">
                                                 <coreproject-icon-list class="md:w-[1vw]"></coreproject-icon-list>
                                                 My List
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="md:p-[0.75vw] leading-none hover:text-white hover:bg-transparent">
+                                            <a class="flex items-center md:gap-[0.5vw] md:p-[0.75vw] leading-none !text-white !bg-transparent">
                                                 <coreproject-icon-preference class="md:w-[1vw]"></coreproject-icon-preference>
                                                 Preference
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="md:p-[0.75vw] leading-none hover:text-white hover:bg-transparent">
+                                            <a class="flex items-center md:gap-[0.5vw] md:p-[0.75vw] leading-none !text-white !bg-transparent">
                                                 <coreproject-icon-settings class="md:w-[1vw]"></coreproject-icon-settings>
                                                 Settings
                                             </a>
