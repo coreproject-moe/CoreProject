@@ -64,7 +64,7 @@
     on:mouseenter={handle_mouseenter}
     on:mouseleave={handle_mouseleave}
     role="group"
-    class="group relative h-[5vw] shrink-0 duration-300 ease-in-out hover:h-[16vw]"
+    class="group relative h-[5vw] shrink-0 snap-center duration-300 ease-in-out hover:h-[16vw]"
 >
     <img
         src={episode.cover}
