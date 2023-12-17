@@ -49,10 +49,30 @@
                             <div class="divider md:mb-[0.1vw] mt-0"></div>
                             {% component_block "vercel_hover" glider_container_class='' active_element_class='rounded-[0.5vw] bg-primary' direction='vertical' duration=200 %}
                             {% fill 'items' %}
-                            <li><a class="md:p-[0.75vw] leading-none hover:text-white hover:bg-transparent">Profile</a></li>
-                            <li><a class="md:p-[0.75vw] leading-none hover:bg-primary hover:text-white hover:bg-transparent">My List</a></li>
-                            <li><a class="md:p-[0.75vw] leading-none hover:bg-primary hover:text-white hover:bg-transparent">Theme</a></li>
-                            <li><a class="md:p-[0.75vw] leading-none hover:bg-primary hover:text-white hover:bg-transparent">Settings</a></li>
+                            <li>
+                              <a class="md:p-[0.75vw] leading-none hover:text-white hover:bg-transparent">
+                                <coreproject-icon-user class="md:w-[1vw]"></coreproject-icon-user>
+                                Profile
+                              </a>
+                            </li>
+                            <li>
+                              <a class="md:p-[0.75vw] leading-none hover:text-white hover:bg-transparent">
+                                <coreproject-icon-list class="md:w-[1vw]"></coreproject-icon-list>
+                                My List
+                              </a>
+                            </li>
+                            <li>
+                              <a class="md:p-[0.75vw] leading-none hover:text-white hover:bg-transparent">
+                                <coreproject-icon-preference class="md:w-[1vw]"></coreproject-icon-preference>
+                                Preference
+                              </a>
+                            </li>
+                            <li>
+                              <a class="md:p-[0.75vw] leading-none hover:text-white hover:bg-transparent">
+                                <coreproject-icon-settings class="md:w-[1vw]"></coreproject-icon-settings>
+                                Settings
+                              </a>
+                            </li>
                             {% endfill %}
                             {% endcomponent_block %}
                         </ul>
