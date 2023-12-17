@@ -49,8 +49,6 @@
                 scroll_area_center +
                 parseInt(getComputedStyle(parent_element)?.gap) || 0;
 
-        console.log(parseInt(getComputedStyle(parent_element)?.gap));
-
         scroll_area_element?.scroll({
             top: target_scroll_top,
             behavior: "smooth"

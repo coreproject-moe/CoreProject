@@ -63,7 +63,7 @@
         >
             <div
                 bind:this={first_element}
-                hidden
+                class="hidden h-0"
             />
         </IntersectionObserver>
 
@@ -77,7 +77,7 @@
         >
             <div
                 bind:this={end_element}
-                hidden
+                class="hidden h-0"
             />
         </IntersectionObserver>
     </div>

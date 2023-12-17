@@ -17,7 +17,6 @@
 </script>
 
 <ScrollArea
-    gradient_mask
     offset_scrollbar
     parent_class="mt-[1vw] w-full max-h-[22.25vw] snap-y smooth-scroll"
     class="flex w-full flex-col gap-[1vw]"
