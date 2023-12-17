@@ -35,6 +35,7 @@
                             </search-form>
                         </div>
                     </div>
+                    {% if request.user.is_authenticated %}
                     <div class="dropdown dropdown-end flex">
                         <div tabindex="0" role="button" class="avatar">
                             <div class="md:w-[3vw] md:rounded-[0.5vw]">
@@ -77,6 +78,16 @@
                             {% endcomponent_block %}
                         </ul>
                     </div>
+                    {% else %}
+                    <div class="flex md:gap-[0.75vw]">
+                      <a href="../user/register" class="btn btn-neutral md:p-[0.9vw] md:text-[1vw] h-max min-h-max leading-none md:rounded-[0.5vw]">
+                        Register
+                      </a>
+                      <a href="../user/login" class="btn btn-primary text-accent md:p-[0.9vw] md:text-[1vw] h-max min-h-max leading-none md:rounded-[0.5vw]">
+                        Log in
+                      </a>
+                    </div>
+                    {% endif %}
                 </navbar>
             </header>
             <div class="flex-auto w-full h-full flex overflow-hidden">
