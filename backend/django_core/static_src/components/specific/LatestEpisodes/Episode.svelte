@@ -4,15 +4,7 @@
     import Play from "$icons/Play/Index.svelte";
     import { slide } from "svelte/transition";
     import { onMount } from "svelte";
-
-    type Episode = {
-        id: number;
-        cover: string;
-        name: string;
-        episode_number: string;
-        release_date: string;
-        synopsis: string;
-    };
+    import type { Episode } from "../../../types/episode";
 
     export let episode: Episode;
 
