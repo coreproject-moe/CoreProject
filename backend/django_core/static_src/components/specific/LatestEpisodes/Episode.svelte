@@ -33,7 +33,7 @@
     }
 
     function handle_animationstart() {
-        const parent_element = anime_episode?.parentElement?.parentElement?.parentElement!;
+        const parent_element = anime_episode?.parentElement?.parentElement!;
 
         // Declare rects
         const parent_rect = parent_element?.getBoundingClientRect(), // taking parent not scroll_area_element

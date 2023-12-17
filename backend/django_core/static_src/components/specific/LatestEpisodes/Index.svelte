@@ -11,7 +11,9 @@
         synopsis: string;
     }[];
 
-    export let episodes: Episodes;
+    export let episodes: string;
+    // parse string to JSON
+    let episodes_data: Episodes = JSON.parse(episodes);
 </script>
 
 <ScrollArea
@@ -19,7 +21,7 @@
     parent_class="mt-[1vw] w-full max-h-[22.25vw] snap-y smooth-scroll md:pr-[1vw]"
     class="flex w-full flex-col gap-[1vw]"
 >
-    {#each episodes as episode}
+    {#each episodes_data as episode}
         <Episode {episode} />
     {/each}
 </ScrollArea>
