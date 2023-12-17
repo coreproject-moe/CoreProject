@@ -7,95 +7,15 @@
 <svg
     class={klass}
     {style}
-    viewBox="0 0 26 24"
+    viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
 >
-    <g filter="url(#filter0_d_1011_784)">
-        <path
-            d="M9.6665 5H20.4998"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-        ></path>
-        <path
-            d="M9.6665 10H20.4998"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-        ></path>
-        <path
-            d="M9.6665 15H20.4998"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-        ></path>
-        <path
-            d="M5.5 5H5.50833"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-        ></path>
-        <path
-            d="M5.5 10H5.50833"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-        ></path>
-        <path
-            d="M5.5 15H5.50833"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-        ></path>
-    </g>
-    <defs>
-        <filter
-            id="filter0_d_1011_784"
-            x="-1"
-            y="0"
-            width="28"
-            height="28"
-            filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
-        >
-            <feFlood
-                flood-opacity="0"
-                result="BackgroundImageFix"
-            ></feFlood>
-            <feColorMatrix
-                in="SourceAlpha"
-                type="matrix"
-                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                result="hardAlpha"
-            ></feColorMatrix>
-            <feOffset dy="4"></feOffset>
-            <feGaussianBlur stdDeviation="2"></feGaussianBlur>
-            <feComposite
-                in2="hardAlpha"
-                operator="out"
-            ></feComposite>
-            <feColorMatrix
-                type="matrix"
-                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
-            ></feColorMatrix>
-            <feBlend
-                mode="normal"
-                in2="BackgroundImageFix"
-                result="effect1_dropShadow_1011_784"
-            ></feBlend>
-            <feBlend
-                mode="normal"
-                in="SourceGraphic"
-                in2="effect1_dropShadow_1011_784"
-                result="shape"
-            ></feBlend>
-        </filter>
-    </defs>
+    <path
+        d="M8 6.00067L21 6.00139M8 12.0007L21 12.0015M8 18.0007L21 18.0015M3.5 6H3.51M3.5 12H3.51M3.5 18H3.51M4 6C4 6.27614 3.77614 6.5 3.5 6.5C3.22386 6.5 3 6.27614 3 6C3 5.72386 3.22386 5.5 3.5 5.5C3.77614 5.5 4 5.72386 4 6ZM4 12C4 12.2761 3.77614 12.5 3.5 12.5C3.22386 12.5 3 12.2761 3 12C3 11.7239 3.22386 11.5 3.5 11.5C3.77614 11.5 4 11.7239 4 12ZM4 18C4 18.2761 3.77614 18.5 3.5 18.5C3.22386 18.5 3 18.2761 3 18C3 17.7239 3.22386 17.5 3.5 17.5C3.77614 17.5 4 17.7239 4 18Z"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+    />
 </svg>
