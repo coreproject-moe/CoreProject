@@ -2,60 +2,40 @@
     import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
     import { FormatDate } from "$functions/format_date";
     import Play from "$icons/Play/Index.svelte";
-    import { onMount } from "svelte";
     import { slide } from "svelte/transition";
+    import { onMount } from "svelte";
 
-    export let anime_id: number;
-    export let anime_cover: string;
-    export let anime_name: string;
-    export let anime_episode_number: number;
-    export let anime_release_date: string;
-    export let anime_synopsis: string;
-    export let anime_index: number;
+    type Episode = {
+        id: number;
+        cover: string;
+        name: string;
+        episode_number: string;
+        release_date: string;
+        synopsis: string;
+    };
 
-    // Formated anime details
-    const formated_episode_number = String(anime_episode_number).padStart(2, "0");
-    const formated_release_date = new FormatDate(anime_release_date).format_to_time_from_now;
+    export let episode: Episode;
 
     /* Bindings */
-    let ANIMATION_DURATION = 300,
-        visible_ratio: number;
+    let ANIMATION_DURATION = 300;
     let scroll_area_element: HTMLElement | null = null,
         anime_episode: HTMLElement | null = null;
 
-    let show_more_info = false,
-        should_expand = false,
-        first_time_open = anime_index === 0;
-
-    onMount(() => {
-        // needed to drill two more layer cause of svelte-retag
-        scroll_area_element =
-            anime_episode?.parentElement?.parentElement?.parentElement?.parentElement!;
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                visible_ratio = entry.intersectionRatio;
-            });
-        });
-        observer.observe(anime_episode!);
-        return () => observer.unobserve(anime_episode!);
-    });
+    let show_more_info = false;
 
     /** Bindings */
+    onMount(() => (scroll_area_element = anime_episode?.parentElement?.parentElement!));
 
     function handle_mouseenter() {
-        if (visible_ratio < 0.8) should_expand = true;
         show_more_info = true;
     }
 
     function handle_mouseleave() {
         show_more_info = false;
-        should_expand = false;
-        first_time_open = false;
     }
 
     function handle_animationstart() {
-        const parent_element = anime_episode?.parentElement?.parentElement?.parentElement!;
+        const parent_element = anime_episode?.parentElement!;
 
         // Declare rects
         const parent_rect = parent_element?.getBoundingClientRect(), // taking parent not scroll_area_element
@@ -74,6 +54,9 @@
             behavior: "smooth"
         });
     }
+
+    const formated_episode_number = String(episode.episode_number).padStart(2, "0"),
+        formated_release_date = new FormatDate(episode.release_date).format_to_time_from_now;
 </script>
 
 <div
@@ -81,11 +64,10 @@
     on:mouseenter={handle_mouseenter}
     on:mouseleave={handle_mouseleave}
     role="group"
-    class="group relative h-[5vw] duration-300 ease-in-out hover:h-[16vw]"
-    class:h-[16vw]={first_time_open}
+    class="group relative h-[5vw] shrink-0 duration-300 ease-in-out hover:h-[16vw]"
 >
     <img
-        src={anime_cover}
+        src={episode.cover}
         alt=""
         class="absolute h-full w-full rounded-[0.75vw] object-cover object-center"
     />
@@ -95,7 +77,7 @@
     <div class="absolute inset-0 flex items-start justify-between p-[1.3125vw]">
         <div class="flex flex-col gap-[0.25vw]">
             <div class="text-[1vw] font-semibold leading-[1.1875vw] text-white">
-                {anime_name}
+                {episode.name}
             </div>
             <div class="flex items-center gap-[0.35vw] text-[0.8vw] text-accent">
                 <span class="font-semibold">
@@ -107,14 +89,14 @@
             </div>
         </div>
         <a
-            href="/mal/{anime_id}/episode/{anime_episode_number}"
+            href="/mal/{episode.id}/episode/{episode.episode_number}"
             class="btn btn-warning h-[2.5vw] min-h-max w-[2.5vw] rounded-full p-0 transition-colors duration-300 group-hover:btn-accent"
         >
             <Play class="w-[1vw]" />
         </a>
     </div>
 
-    {#if show_more_info || first_time_open}
+    {#if show_more_info}
         <div
             in:slide={{ duration: ANIMATION_DURATION, delay: ANIMATION_DURATION * (2 / 3) }}
             out:slide={{ duration: ANIMATION_DURATION * (2 / 3) }}
@@ -135,7 +117,7 @@
                 gradient_mask
                 class="h-[6vw] text-[0.8vw] leading-[1vw] text-accent"
             >
-                {anime_synopsis}
+                {episode.synopsis}
             </ScrollArea>
         </div>
     {/if}

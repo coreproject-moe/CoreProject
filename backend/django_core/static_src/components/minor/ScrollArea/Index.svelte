@@ -61,7 +61,10 @@
             bind:intersecting={first_element_intersecting}
             threshold={1}
         >
-            <div bind:this={first_element} />
+            <div
+                bind:this={first_element}
+                class="hidden h-0"
+            />
         </IntersectionObserver>
 
         <slot />
@@ -72,7 +75,10 @@
             bind:intersecting={end_element_intersecting}
             threshold={1}
         >
-            <div bind:this={end_element} />
+            <div
+                bind:this={end_element}
+                class="hidden h-0"
+            />
         </IntersectionObserver>
     </div>
 </div>
