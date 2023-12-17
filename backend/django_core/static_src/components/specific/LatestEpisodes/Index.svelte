@@ -14,7 +14,11 @@
     export let episodes: Episodes;
 </script>
 
-<ScrollArea gradient_mask>
+<ScrollArea
+    gradient_mask
+    parent_class="mt-[1vw] w-full max-h-[22.25vw] snap-y smooth-scroll md:pr-[1vw]"
+    class="flex w-full flex-col gap-[1vw]"
+>
     {#each episodes as episode}
         <Episode {episode} />
     {/each}
