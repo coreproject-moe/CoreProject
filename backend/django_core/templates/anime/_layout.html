@@ -47,10 +47,14 @@
                                 <span class="md:text-[0.75vw]">sora@coreproject.moe</span>
                             </div>
                             <div class="divider md:mb-[0.1vw] mt-0"></div>
-                            <li><a class="md:p-[0.75vw] leading-none md:rounded-[0.5vw] hover:bg-primary hover:text-white">Profile</a></li>
-                            <li><a class="md:p-[0.75vw] leading-none md:rounded-[0.5vw] hover:bg-primary hover:text-white">My List</a></li>
-                            <li><a class="md:p-[0.75vw] leading-none md:rounded-[0.5vw] hover:bg-primary hover:text-white">Theme</a></li>
-                            <li><a class="md:p-[0.75vw] leading-none md:rounded-[0.5vw] hover:bg-primary hover:text-white">Settings</a></li>
+                            {% component_block "vercel_hover" glider_container_class='' active_element_class='rounded-[0.5vw] bg-primary' direction='vertical' duration=200 %}
+                            {% fill 'items' %}
+                            <li><a class="md:p-[0.75vw] leading-none hover:text-white hover:bg-transparent">Profile</a></li>
+                            <li><a class="md:p-[0.75vw] leading-none hover:bg-primary hover:text-white hover:bg-transparent">My List</a></li>
+                            <li><a class="md:p-[0.75vw] leading-none hover:bg-primary hover:text-white hover:bg-transparent">Theme</a></li>
+                            <li><a class="md:p-[0.75vw] leading-none hover:bg-primary hover:text-white hover:bg-transparent">Settings</a></li>
+                            {% endfill %}
+                            {% endcomponent_block %}
                         </ul>
                     </div>
                 </navbar>
