@@ -650,13 +650,13 @@ Pillow = ">=9.0.0"
 
 [[package]]
 name = "django-components"
-version = "0.30"
+version = "0.31"
 description = "A way to create simple reusable template components in Django."
 optional = false
 python-versions = "*"
 files = [
-    {file = "django_components-0.30-py3-none-any.whl", hash = "sha256:1bca610cf373bda0eda2ef1c0d5a9904df3de198d85a878f37771d0da27339b5"},
-    {file = "django_components-0.30.tar.gz", hash = "sha256:2a4e8aee197e7ae7272961a879a6cfe27f9c60b8d89b9e631e630bf231b192f5"},
+    {file = "django_components-0.31-py3-none-any.whl", hash = "sha256:ddec28de605ad49ed9c5c152e917d94600bb2241301e9469ff8f0c6c1b283589"},
+    {file = "django_components-0.31.tar.gz", hash = "sha256:c829a77578cae24f19b83568eee63aa9ff66c2575a004446b479f5f34dfbc58b"},
 ]
 
 [package.dependencies]
@@ -885,23 +885,6 @@ files = [
 [package.dependencies]
 django = "*"
 typing-extensions = "*"
-
-[[package]]
-name = "django-tailwind"
-version = "3.7.0"
-description = "Tailwind CSS Framework for Django projects"
-optional = false
-python-versions = ">=3.10.0,<4.0.0"
-files = [
-    {file = "django_tailwind-3.7.0-py3-none-any.whl", hash = "sha256:8f1003d74be35b4e5abe135f13599205a79e124671f57e93b7601a47c0dbab61"},
-    {file = "django_tailwind-3.7.0.tar.gz", hash = "sha256:65d80d0b41c3765a70bcfb41c94d3719e2d9b8be8aa347f0fcdb298df24e150f"},
-]
-
-[package.dependencies]
-django = ">=3.2.14"
-
-[package.extras]
-reload = ["django-browser-reload (>=1.12.1,<2.0.0)"]
 
 [[package]]
 name = "django-vite"
@@ -2451,4 +2434,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "566ae157541a97ef04fc341a40ff49b7618bfb881b2e38d49e27cd707f151e59"
+content-hash = "49f8c718912c5c7743a52274a1f8caaa41a5e0040fd58066a1696f86ccd74a20"
