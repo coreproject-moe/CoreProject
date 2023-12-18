@@ -6,13 +6,15 @@
     import ScrollArea from "../../minor/ScrollArea/Index.svelte";
     import { string_to_boolean } from "$functions/string_to_bool";
     import { reverse } from "$functions/urls";
-
-    // demo variables
-    const ARR_MAX_LENGTH = 6;
+    import { Anime } from "../../../types/anime";
+    import el from "date-fns/locale/el";
+    import { FormatDate } from "$functions/format_date";
 
     let active_index = 0,
         active_core: "anime" | "manga" | "sound" = "anime",
-        search_query = "";
+        search_query = "",
+        // search variables
+        results: Anime[] = new Array<Anime>();
 
     // Bindings
     let dialog_element: HTMLDialogElement | null = null;
@@ -22,10 +24,10 @@
 
             switch (e.key.toLowerCase()) {
                 case "arrowdown":
-                    active_index = (active_index + 1) % ARR_MAX_LENGTH;
+                    active_index = (active_index + 1) % results.length;
                     break;
                 case "arrowup":
-                    active_index = (active_index - 1 + ARR_MAX_LENGTH) % ARR_MAX_LENGTH;
+                    active_index = (active_index - 1 + results.length) % results.length;
                     break;
                 case "tab":
                     // do tab logic of switching core
@@ -56,7 +58,10 @@
                     }
                 }
             );
-            console.log(await res.json());
+            const json = await res.json();
+            if (res.ok) {
+                results = json["results"];
+            }
         };
 
     search_modal_state.subscribe((val) => {
@@ -110,39 +115,49 @@
                     parent_class="md:mt-[0.2vw] md:h-[30vw] md:w-[20vw]"
                     class="w-full"
                 >
-                    {#each Array(ARR_MAX_LENGTH) as _, index}
-                        {@const is_active = active_core === "anime" && active_index === index}
-                        <a
-                            on:mouseenter={() => handle_core_mouse_enter("anime", index)}
-                            href="/mal/"
-                            class:bg-neutral={is_active}
-                            class="flex w-full items-center gap-[1vw] rounded-[0.7vw] p-[0.8vw] transition duration-200 hover:bg-neutral"
-                        >
-                            <img
-                                src="https://static1.cbrimages.com/wordpress/wp-content/uploads/2021/03/demon-slayer-banner.jpg"
-                                alt={search_query}
-                                class="h-[3.5vw] w-[3.5vw] rounded-[0.5vw] object-cover"
-                            />
-                            <div class="flex w-full flex-col">
-                                <span class="text-[1.1vw] font-semibold leading-none text-white">
-                                    Kimetsu no Yaiba
-                                </span>
-                                <span
-                                    class="text-surface-200 text-[0.7vw] font-medium uppercase leading-[1.5vw]"
-                                >
-                                    Demon slayer
-                                </span>
-                                <div
-                                    class="text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw]"
-                                >
-                                    <span>2006</span>
-                                    <span>TV</span>
-                                    <Circle style="width: 0.2vw;" />
-                                    <span>26 eps</span>
+                    {#if results.length === 0}{:else}
+                        {#each results as item, index}
+                            {@const is_active = active_core === "anime" && active_index === index}
+                            <a
+                                on:mouseenter={() => handle_core_mouse_enter("anime", index)}
+                                href="/mal/"
+                                class:bg-neutral={is_active}
+                                class="flex w-full items-center gap-[1vw] rounded-[0.7vw] p-[0.8vw] transition duration-200 hover:bg-neutral"
+                            >
+                                <img
+                                    src="https://static1.cbrimages.com/wordpress/wp-content/uploads/2021/03/demon-slayer-banner.jpg"
+                                    alt={search_query}
+                                    class="h-[3.5vw] w-[3.5vw] rounded-[0.5vw] object-cover"
+                                />
+                                <div class="flex w-full flex-col">
+                                    <span
+                                        class="text-[1.1vw] font-semibold leading-none text-white"
+                                    >
+                                        {item.name_japanese}
+                                    </span>
+                                    <span
+                                        class="text-surface-200 text-[0.7vw] font-medium uppercase leading-[1.5vw]"
+                                    >
+                                        {item.name}
+                                    </span>
+                                    <div
+                                        class="text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw]"
+                                    >
+                                        {#if item.aired_from}
+                                            <span>
+                                                {new FormatDate(item.aired_from)
+                                                    .format_to_human_readable_form}
+                                            </span>
+                                        {/if}
+
+                                        <span>TV</span>
+                                        <Circle style="width: 0.2vw;" />
+                                        <!-- <span>26 eps</span> -->
+                                    </div>
                                 </div>
-                            </div>
-                        </a>
-                    {/each}
+                            </a>
+                        {/each}
+                    {/if}
                 </ScrollArea>
             </div>
 
