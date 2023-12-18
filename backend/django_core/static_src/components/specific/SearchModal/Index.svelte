@@ -4,6 +4,8 @@
     import Cross from "../../icons/Cross/Index.svelte";
     import { search_modal_state } from "./store";
     import ScrollArea from "../../minor/ScrollArea/Index.svelte";
+    import { string_to_boolean } from "$functions/string_to_bool";
+    import { reverse } from "$functions/urls";
 
     // demo variables
     const ARR_MAX_LENGTH = 6;
@@ -16,6 +18,8 @@
     let dialog_element: HTMLDialogElement | null = null;
 
     const handle_search_key_down = async (e: KeyboardEvent) => {
+            if (!dialog_element?.open) return;
+
             switch (e.key.toLowerCase()) {
                 case "arrowdown":
                     active_index = (active_index + 1) % ARR_MAX_LENGTH;
@@ -34,6 +38,25 @@
         handle_core_mouse_enter = async (core: typeof active_core, index: number) => {
             active_index = index;
             active_core = core;
+        },
+        handle_input = async (event: Event) => {
+            const element = event.currentTarget as HTMLInputElement;
+            const headers: { [key: string]: string } = {};
+
+            if (string_to_boolean(window.user_authenticated)) {
+                headers["X-CSRFToken"] = window.csrfmiddlewaretoken;
+            }
+            const res = await fetch(
+                reverse(`anime-list`) + "?" + new URLSearchParams({ name: element.value }),
+                {
+                    method: "GET",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json"
+                    }
+                }
+            );
+            console.log(await res.json());
         };
 
     search_modal_state.subscribe((val) => {
@@ -60,6 +83,7 @@
             </button>
             <input
                 bind:value={search_query}
+                on:input={handle_input}
                 on:keydown={handle_search_key_down}
                 on:keypress={() => (active_index = 0)}
                 type="text"
