@@ -47,7 +47,7 @@
         "@sveltejs/vite-plugin-svelte": "^3.0.1",
         "@types/node": "^20.10.4",
         "autoprefixer": "^10.4.16",
-        "date-fns": "^2.30.0",
+        "date-fns": "^3.0.0",
         "highlight.js": "^11.9.0",
         "lightningcss": "^1.22.1",
         "marked": "^11.1.0",
