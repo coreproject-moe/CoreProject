@@ -7,7 +7,6 @@
     import { string_to_boolean } from "$functions/string_to_bool";
     import { reverse } from "$functions/urls";
     import { Anime } from "../../../types/anime";
-    import el from "date-fns/locale/el";
     import { FormatDate } from "$functions/format_date";
 
     let active_index = 0,
@@ -41,15 +40,14 @@
             active_index = index;
             active_core = core;
         },
-        handle_input = async (event: Event) => {
-            const element = event.currentTarget as HTMLInputElement;
+        handle_input = async () => {
             const headers: { [key: string]: string } = {};
 
             if (string_to_boolean(window.user_authenticated)) {
                 headers["X-CSRFToken"] = window.csrfmiddlewaretoken;
             }
             const res = await fetch(
-                reverse(`anime-list`) + "?" + new URLSearchParams({ name: element.value }),
+                reverse(`anime-list`) + "?" + new URLSearchParams({ name: search_query }),
                 {
                     method: "GET",
                     headers: {
