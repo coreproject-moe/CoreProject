@@ -215,9 +215,10 @@
         <p class="mt-[2vw] text-[0.8vw]">
             <b>Note:</b>
             Navigate through animes, mangas and sounds with
-            <b>Up Down</b>
+            <kbd class="kbd kbd-xs">▲</kbd>
+            <kbd class="kbd kbd-xs">▼</kbd>
             and
-            <b>Tab</b>
+            <kbd class="kbd kbd-xs">Tab</kbd>
             keys.
         </p>
     </div>
