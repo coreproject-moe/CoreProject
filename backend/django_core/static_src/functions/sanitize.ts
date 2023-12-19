@@ -1,3 +1,11 @@
+// Synced with : https://github.com/Ultimate-Hosts-Blacklist/whitelist/blob/e5a171243f9a418cc88d836c5eaf8a08198b0fb6/domains.list
+const whitelisted_domain = [
+    `https://www.google.com/`,
+    "https://github.com",
+    "https://reddit.com",
+    `https://github.com`
+];
+
 export async function sanitize(
     _text: string | undefined | Promise<string | undefined>
 ): Promise<string> {
@@ -24,6 +32,19 @@ export async function sanitize(
             h3: ["class"],
             h4: ["class"],
             h5: ["class"]
+        },
+        onTagAttr(tag, name, value, isWhiteAttr) {
+            // Whitelist links
+            if (tag === "a" && name === "href" && isWhiteAttr) {
+                if (
+                    whitelisted_domain.some((domain) => {
+                        const check = domain.toLocaleLowerCase().includes(value.toLowerCase());
+                        return !check;
+                    })
+                ) {
+                    return "";
+                }
+            }
         }
     });
 }
