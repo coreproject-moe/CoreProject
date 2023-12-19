@@ -134,24 +134,27 @@
                                     {@const mapping = [
                                         {
                                             value: item.name,
-                                            class: "text-[1.1vw] font-semibold leading-none text-white col-span-12"
+                                            class: "text-[1.1vw] font-semibold leading-none text-white col-span-full"
                                         },
                                         {
                                             value: item.name_japanese,
-                                            class: "text-surface-200 text-[0.7vw] font-medium uppercase leading-[1.5vw] col-span-12"
+                                            class: "text-surface-200 text-[0.7vw] font-medium uppercase leading-[1.5vw] col-span-full"
                                         },
                                         {
                                             value: item.aired_from ? new FormatDate(item.aired_from).format_to_human_readable_form : null,
-                                            class: "text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw]"
+                                            class: "text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw] col-span-full"
                                         },
                                         { value: `TV`, class: `text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw] after:content-['●'] col-span-2` },
-                                        { value: item.episode_count ? item.episode_count : null, class: "text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw] col-span-2" }
+                                        {
+                                            value: item.episode_count ? `${item.episode_count} eps` : null,
+                                            class: "text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw] col-span-2"
+                                        }
                                     ]}
                                     <a
                                         on:mouseenter={() => handle_core_mouse_enter("anime", index)}
                                         href={reverse("anime_info_view", "mal", item.mal_id)}
                                         class:bg-neutral={is_active}
-                                        class="flex w-full items-center gap-[1vw] rounded-[0.7vw] p-[0.8vw] transition duration-200 hover:bg-neutral"
+                                        class="flex w-full auto-rows-max items-center gap-[1vw] rounded-[0.7vw] p-[0.8vw] transition duration-200 hover:bg-neutral"
                                     >
                                         <img
                                             src="https://static1.cbrimages.com/wordpress/wp-content/uploads/2021/03/demon-slayer-banner.jpg"
