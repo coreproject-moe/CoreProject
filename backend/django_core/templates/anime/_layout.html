@@ -109,10 +109,10 @@
                                             _="
                                                on hyperscript:change(url)
                                                if url !== '{{icon.href}}'
-                                               put 'btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 !bg-transparent' into my.classList
+                                               put 'btn relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 !bg-transparent' into my.classList
                                                remove .hidden from <span/> in me
                                                else
-                                               put 'btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500' into my.classList
+                                               put 'btn relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary' into my.classList
                                                end
 
                                                on htmx:afterRequest
@@ -129,7 +129,7 @@
                                             hx-get="{{icon.href}}"
                                             hx-target="#page"
 
-                                            class="btn btn-icon relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 {% if icon.href == request.path %} relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary-500 {% else %} !bg-transparent {% endif %}"
+                                            class="btn relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 {% if icon.href == request.path %} relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary {% else %} !bg-transparent {% endif %}"
                                         >
 
                                             <div class="inline-grid">
