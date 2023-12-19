@@ -26,4 +26,5 @@ export type Anime = {
     is_locked: boolean;
     updated_at: string;
     created_at: string;
+    episode_count: number;
 };
