@@ -148,7 +148,7 @@
                                     ]}
                                     <a
                                         on:mouseenter={() => handle_core_mouse_enter("anime", index)}
-                                        href="/mal/"
+                                        href={reverse("anime_info_view", "mal", item.mal_id)}
                                         class:bg-neutral={is_active}
                                         class="flex w-full items-center gap-[1vw] rounded-[0.7vw] p-[0.8vw] transition duration-200 hover:bg-neutral"
                                     >
