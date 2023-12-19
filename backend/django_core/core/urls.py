@@ -17,7 +17,7 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
-
+from django.conf.urls.static import static
 from . import views
 
 # from django.views import debug
@@ -73,3 +73,5 @@ if settings.DEBUG:
         path("404/", handler404),
         path("500/", handler500),
     ]
+    # Serve media
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
