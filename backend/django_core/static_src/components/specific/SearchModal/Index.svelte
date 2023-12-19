@@ -8,7 +8,6 @@
 
     // Icon imports
     import Search from "$icons/Search/Index.svelte";
-    import Circle from "$icons/Circle/Index.svelte";
     import Cross from "$icons/Cross/Index.svelte";
 
     let active_index = 0,
@@ -183,14 +182,17 @@
                             </div>
                         {/await}
                     {:else}
-                        <div class="grid h-full place-items-center">Search Away</div>
+                        <div class="flex h-full flex-col items-center justify-center gap-[0.2vw] text-[1.1vw]">
+                            <span class="font-medium leading-none">Search Away</span>
+                            <span class="font-semibold leading-none">"Find Your Anime Bliss"</span>
+                        </div>
                     {/if}
                 </ScrollArea>
             </div>
 
             <div>
                 <span class="text-surface-50 text-[1.2vw] font-semibold">manga</span>
-                <div class="bg-surface-400 mt-[0.2vw] h-[28.25vw] w-[21.875vw] rounded-[0.75vw] shadow-lg">
+                <div class="bg-surface-400 mt-[0.2vw] h-[30vw] w-[21.875vw] rounded-[0.75vw] shadow-lg">
                     <div class="flex h-full flex-col items-center justify-center gap-[0.2vw] text-[1.1vw]">
                         <span class="font-medium leading-none">mangacore integration</span>
                         <span class="font-semibold leading-none">coming soon</span>
@@ -200,8 +202,9 @@
 
             <div>
                 <span class="text-surface-50 text-[1.2vw] font-semibold">music</span>
-                <div class="bg-surface-400 mt-[0.2vw] h-[28.25vw] w-[21.875vw] rounded-[0.75vw] shadow-lg">
+                <div class="bg-surface-400 mt-[0.2vw] h-[30vw] w-[21.875vw] rounded-[0.75vw] shadow-lg">
                     <div class="flex h-full flex-col items-center justify-center gap-[0.2vw] text-[1.1vw]">
+
                         <span class="font-medium leading-none">soundcore integration</span>
                         <span class="font-semibold leading-none">coming soon</span>
                     </div>
