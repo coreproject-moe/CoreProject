@@ -134,17 +134,18 @@
                                     {@const mapping = [
                                         {
                                             value: item.name,
-                                            class: "text-[1.1vw] font-semibold leading-none text-white"
+                                            class: "text-[1.1vw] font-semibold leading-none text-white col-span-12"
                                         },
                                         {
                                             value: item.name_japanese,
-                                            class: "text-surface-200 text-[0.7vw] font-medium uppercase leading-[1.5vw]"
-                                        }
-                                    ]}
-                                    {@const nested_mapping = [
-                                        { value: item.aired_from ? new FormatDate(item.aired_from).format_to_human_readable_form : null },
-                                        { value: `TV` },
-                                        { value: item.episode_count ? item.episode_count : null }
+                                            class: "text-surface-200 text-[0.7vw] font-medium uppercase leading-[1.5vw] col-span-12"
+                                        },
+                                        {
+                                            value: item.aired_from ? new FormatDate(item.aired_from).format_to_human_readable_form : null,
+                                            class: "text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw]"
+                                        },
+                                        { value: `TV`, class: `text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw] after:content-['●'] col-span-2` },
+                                        { value: item.episode_count ? item.episode_count : null, class: "text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw] col-span-2" }
                                     ]}
                                     <a
                                         on:mouseenter={() => handle_core_mouse_enter("anime", index)}
@@ -157,26 +158,12 @@
                                             alt={search_query}
                                             class="h-[3.5vw] w-[3.5vw] rounded-[0.5vw] object-cover"
                                         />
-                                        <div class="flex w-full flex-col">
+                                        <div class="grid w-full grid-cols-12">
                                             {#each mapping as item}
                                                 {#if item.value}
                                                     <span class={item.class}>{item.value}</span>
                                                 {/if}
                                             {/each}
-                                            <!-- Do some css magic-->
-                                            <div class="text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw]">
-                                                {#each nested_mapping as item}
-                                                    {@const is_last = item === nested_mapping.at(-1)}
-                                                    {#if item.value}
-                                                        <span>
-                                                            {item.value}
-                                                        </span>
-                                                        {#if !is_last}
-                                                            <Circle style="width: 0.2vw;" />
-                                                        {/if}
-                                                    {/if}
-                                                {/each}
-                                            </div>
                                         </div>
                                     </a>
                                 {/each}
