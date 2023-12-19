@@ -23,6 +23,10 @@ class AbstractBaseAnimeSerializer(serializers.ModelSerializer):
         required=False,
         queryset=AnimeNameSynonymModel.objects.all(),
     )
+    episodes_count = serializers.SerializerMethodField(method_name="get_episode_count")
+
+    def get_episode_count(self, obj: AnimeModel) -> int:
+        return obj.episodes.count()
 
     class Meta:
         model = AnimeModel
@@ -63,12 +67,16 @@ class AbstractBaseAnimeSerializer(serializers.ModelSerializer):
             "is_locked",
             "updated_at",
             "created_at",
+            # Composed fields
+            "episodes_count",
         ]
         read_only_fields = [
             # Super fields should stay locked
             "is_locked",
             "updated_at",
             "created_at",
+            # Composed fields
+            "episodes_count",
         ]
 
 
