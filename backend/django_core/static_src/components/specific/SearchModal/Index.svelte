@@ -174,7 +174,9 @@
                                 <div class="grid h-full place-items-center">No match found</div>
                             {/if}
                         {:catch error}
-                            Oh no, something is wrong {@html error}
+                            <div class="grid h-full place-items-center">
+                                Oh no, something is wrong {@html error}
+                            </div>
                         {/await}
                     {:else}
                         <div class="grid h-full place-items-center">Search Away</div>
