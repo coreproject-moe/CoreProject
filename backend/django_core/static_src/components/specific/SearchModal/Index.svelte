@@ -28,7 +28,11 @@
             active_core = core;
         },
         handle_input = async () => {
-            search_promise = get_anime_with_serach_parameters();
+            if (search_query === "") {
+                search_promise = null;
+            } else {
+                search_promise = get_anime_with_serach_parameters();
+            }
         },
         handle_global_input = async (e: KeyboardEvent) => {
             switch (e.key.toLowerCase()) {
