@@ -1,13 +1,14 @@
 <script lang="ts">
-    import Search from "../../icons/Search/Index.svelte";
-    import Circle from "../../icons/Circle/Index.svelte";
-    import Cross from "../../icons/Cross/Index.svelte";
     import { search_modal_state } from "./store";
-    import ScrollArea from "../../minor/ScrollArea/Index.svelte";
+    import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
     import { string_to_boolean } from "$functions/string_to_bool";
     import { reverse } from "$functions/urls";
     import { Anime } from "../../../types/anime";
     import { FormatDate } from "$functions/format_date";
+    // Icon imports
+    import Search from "$icons/Search/Index.svelte";
+    import Circle from "$icons/Circle/Index.svelte";
+    import Cross from "$icons/Cross/Index.svelte";
 
     let active_index = 0,
         active_core: "anime" | "manga" | "sound" = "anime",
