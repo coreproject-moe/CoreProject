@@ -174,11 +174,15 @@
                                     </a>
                                 {/each}
                             {:else}
-                                <div class="grid h-full place-items-center">No match found</div>
+                                <div class="flex h-full flex-col items-center justify-center gap-[0.2vw] text-[1.1vw]">
+                                    <span class="font-medium leading-none">No match found!</span>
+                                    <span class="font-semibold leading-none text-center text-error">Couldn't find animes with: "{search_query}"</span>
+                                </div>
                             {/if}
                         {:catch error}
-                            <div class="grid h-full place-items-center">
-                                Oh no, something is wrong {@html error}
+                            <div class="flex h-full flex-col items-center justify-center gap-[0.2vw] text-[1.1vw]">
+                                <span class="font-medium leading-none">Oh no, something is wrong!</span>
+                                <span class="font-semibold leading-none text-center text-error">{@html error}</span>
                             </div>
                         {/await}
                     {:else}
