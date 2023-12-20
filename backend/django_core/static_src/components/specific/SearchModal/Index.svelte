@@ -17,10 +17,15 @@
         results: Anime[] = new Array<Anime>();
 
     // Bindings
-    let dialog_element: HTMLDialogElement | null = null;
+    let dialog_element: HTMLDialogElement | null = null,
+        anime_search_results_container_element: HTMLDivElement | null = null;
 
     const handle_search_key_down = async (e: KeyboardEvent) => {
             if (!dialog_element?.open) return;
+        },
+        handle_search_key_press = async (e: KeyboardEvent) => {
+            if (e.key.toLowerCase() === "enter") return;
+            active_index = 0;
         },
         handle_core_mouse_enter = async (core: typeof active_core, index: number) => {
             active_index = index;
@@ -34,19 +39,23 @@
             }
         },
         handle_global_input = async (e: KeyboardEvent) => {
-            const search_arr_length = (await search_promise)?.length;
-            if (search_arr_length === undefined) return;
+            const search_results = (await search_promise);
+            if (search_results === null) return;
 
             switch (e.key.toLowerCase()) {
                 case "arrowdown":
-                    active_index = (active_index + 1) % search_arr_length;
+                    active_index = (active_index + 1) % search_results.length;
                     break;
                 case "arrowup":
-                    active_index = (active_index - 1 + search_arr_length) % search_arr_length;
+                    active_index = (active_index - 1 + search_results.length) % search_results.length;
                     break;
                 // do tab logic of switching core
                 // case "tab":
                 //     break;
+                case "enter":
+                    const active_anime_element = anime_search_results_container_element?.children[active_index] as HTMLAnchorElement;
+                    active_anime_element.click();
+                    break;
                 default:
                     break;
             }
@@ -90,7 +99,10 @@
     bind:this={dialog_element}
 >
     <div class="modal-box flex !max-w-fit flex-col items-center bg-secondary md:px-[2vw] md:py-[1vw]">
-        <form class="relative flex h-[3.5vw] w-[40vw] items-center">
+        <form
+            on:submit|preventDefault
+            class="relative flex h-[3.5vw] w-[40vw] items-center"
+        >
             <button
                 class="btn absolute left-[1.25vw] min-h-max border-none !bg-transparent p-0"
                 aria-label="Search"
@@ -101,7 +113,7 @@
                 bind:value={search_query}
                 on:input={handle_input}
                 on:keydown={handle_search_key_down}
-                on:keypress={() => (active_index = 0)}
+                on:keypress={handle_search_key_press}
                 type="text"
                 placeholder="Search for animes, mangas and musics"
                 class="h-full w-full rounded-[0.625vw] border-none bg-neutral pl-[3.50vw] text-[1.1vw] font-semibold text-white shadow-lg !ring-0 placeholder:font-medium placeholder:text-accent/75"
@@ -133,47 +145,49 @@
                             </div>
                         {:then results}
                             {#if results.length !== 0}
-                                {#each results as item, index}
-                                    {@const is_active = active_core === "anime" && active_index === index}
-                                    {@const mapping = [
-                                        {
-                                            value: item.name,
-                                            class: "text-[1.1vw] font-semibold leading-none text-white col-span-full"
-                                        },
-                                        {
-                                            value: item.name_japanese,
-                                            class: "text-surface-200 text-[0.7vw] font-medium uppercase leading-[1.5vw] col-span-full"
-                                        },
-                                        {
-                                            value: item.aired_from ? new FormatDate(item.aired_from).format_to_human_readable_form : null,
-                                            class: "text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw] col-span-full"
-                                        },
-                                        { value: `TV`, class: `text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw] after:content-['●'] col-span-2` },
-                                        {
-                                            value: item.episode_count ? `${item.episode_count} eps` : null,
-                                            class: "text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw] col-span-2"
-                                        }
-                                    ]}
-                                    <a
-                                        on:mouseenter={() => handle_core_mouse_enter("anime", index)}
-                                        href={reverse("anime_info_view", "mal", item.mal_id)}
-                                        class:bg-neutral={is_active}
-                                        class="flex w-full auto-rows-max items-center gap-[1vw] rounded-[0.7vw] p-[0.8vw] transition duration-200 hover:bg-neutral"
-                                    >
-                                        <img
-                                            src="https://static1.cbrimages.com/wordpress/wp-content/uploads/2021/03/demon-slayer-banner.jpg"
-                                            alt={search_query}
-                                            class="h-[3.5vw] w-[3.5vw] rounded-[0.5vw] object-cover"
-                                        />
-                                        <div class="grid w-full grid-cols-12">
-                                            {#each mapping as item}
-                                                {#if item.value}
-                                                    <span class={item.class}>{item.value}</span>
-                                                {/if}
-                                            {/each}
-                                        </div>
-                                    </a>
-                                {/each}
+                                <div bind:this={anime_search_results_container_element}>
+                                    {#each results as item, index}
+                                        {@const is_active = active_core === "anime" && active_index === index}
+                                        {@const mapping = [
+                                            {
+                                                value: item.name,
+                                                class: "text-[1.1vw] font-semibold leading-none text-white col-span-full"
+                                            },
+                                            {
+                                                value: item.name_japanese,
+                                                class: "text-surface-200 text-[0.7vw] font-medium uppercase leading-[1.5vw] col-span-full"
+                                            },
+                                            {
+                                                value: item.aired_from ? new FormatDate(item.aired_from).format_to_human_readable_form : null,
+                                                class: "text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw] col-span-full"
+                                            },
+                                            { value: `TV`, class: `text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw] after:content-['●'] col-span-2` },
+                                            {
+                                                value: item.episode_count ? `${item.episode_count} eps` : null,
+                                                class: "text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw] col-span-2"
+                                            }
+                                        ]}
+                                        <a
+                                            on:mouseenter={() => handle_core_mouse_enter("anime", index)}
+                                            href={reverse("anime_info_view", "mal", item.mal_id)}
+                                            class:bg-neutral={is_active}
+                                            class="flex w-full auto-rows-max items-center gap-[1vw] rounded-[0.7vw] p-[0.8vw] transition duration-200 hover:bg-neutral"
+                                        >
+                                            <img
+                                                src="https://static1.cbrimages.com/wordpress/wp-content/uploads/2021/03/demon-slayer-banner.jpg"
+                                                alt={search_query}
+                                                class="h-[3.5vw] w-[3.5vw] rounded-[0.5vw] object-cover"
+                                            />
+                                            <div class="grid w-full grid-cols-12">
+                                                {#each mapping as item}
+                                                    {#if item.value}
+                                                        <span class={item.class}>{item.value}</span>
+                                                    {/if}
+                                                {/each}
+                                            </div>
+                                        </a>
+                                    {/each}
+                                </div>
                             {:else}
                                 <div class="flex h-full flex-col items-center justify-center gap-[0.2vw] text-[1.1vw]">
                                     <span class="font-medium leading-none">No match found!</span>
