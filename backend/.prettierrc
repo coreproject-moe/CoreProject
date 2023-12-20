@@ -7,7 +7,7 @@
     "singleAttributePerLine": true,
     "htmlWhitespaceSensitivity": "ignore",
     "arrowParens": "always",
-    "printWidth": 100,
+    "printWidth": 200,
     "plugins": ["prettier-plugin-svelte", "prettier-plugin-tailwindcss"],
     "overrides": [{ "files": "*.svelte", "options": { "parser": "svelte" } }]
 }

@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
@@ -73,3 +74,5 @@ if settings.DEBUG:
         path("404/", handler404),
         path("500/", handler500),
     ]
+    # Serve media
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
