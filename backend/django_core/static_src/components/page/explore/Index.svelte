@@ -195,12 +195,12 @@
 
                                     <button
                                         on:click={() => update_selected_items(option[0], item)}
-                                        class="btn btn-neutral h-max min-h-max leading-none flex justify-between items-center md:rounded-[0.35vw] p-3 text-sm md:px-[1vw] md:py-[0.75vw] md:text-[0.9vw]">
+                                        class="relative btn btn-neutral h-max min-h-max leading-none flex items-center justify-start md:rounded-[0.35vw] p-3 text-sm md:px-[1vw] md:py-[0.75vw] md:text-[0.9vw]">
                                         {value}
 
                                         {#if is_selected}
-                                            <div class="rounded-full bg-primary text-white p-1 md:p-[0.3vw]">
-                                                <Tick class="w-2 md:w-[0.5vw]" />
+                                            <div class="absolute right-[0.75vw] rounded-full bg-primary text-white p-1 md:p-[0.25vw]">
+                                                <Tick class="w-2 md:w-[0.75vw] text-white" />
                                             </div>
                                         {/if}
                                     </button>
