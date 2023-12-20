@@ -12,9 +12,7 @@
 
     let active_index = 0,
         active_core: "anime" | "manga" | "sound" = "anime",
-        search_query = "",
-        // search variables
-        results: Anime[] = new Array<Anime>();
+        search_query = "";
 
     // Bindings
     let dialog_element: HTMLDialogElement | null = null,
@@ -39,7 +37,7 @@
             }
         },
         handle_global_input = async (e: KeyboardEvent) => {
-            const search_results = (await search_promise);
+            const search_results = await search_promise;
             if (search_results === null) return;
 
             switch (e.key.toLowerCase()) {
@@ -91,9 +89,7 @@
     });
 </script>
 
-<svelte:window
-    on:keyup={(event) => dialog_element?.open && handle_global_input(event)}
-/>
+<svelte:window on:keyup={(event) => dialog_element?.open && handle_global_input(event)} />
 <dialog
     class="modal"
     bind:this={dialog_element}
@@ -191,13 +187,13 @@
                             {:else}
                                 <div class="flex h-full flex-col items-center justify-center gap-[0.2vw] text-[1.1vw]">
                                     <span class="font-medium leading-none">No match found!</span>
-                                    <span class="font-semibold leading-none text-center text-error">Couldn't find animes with: "{search_query}"</span>
+                                    <span class="text-center font-semibold leading-none text-error">Couldn't find animes with: "{search_query}"</span>
                                 </div>
                             {/if}
                         {:catch error}
                             <div class="flex h-full flex-col items-center justify-center gap-[0.2vw] text-[1.1vw]">
                                 <span class="font-medium leading-none">Oh no, something is wrong!</span>
-                                <span class="font-semibold leading-none text-center text-error">{@html error}</span>
+                                <span class="text-center font-semibold leading-none text-error">{@html error}</span>
                             </div>
                         {/await}
                     {:else}
@@ -223,7 +219,6 @@
                 <span class="text-surface-50 text-[1.2vw] font-semibold">music</span>
                 <div class="bg-surface-400 mt-[0.2vw] h-[30vw] w-[21.875vw] rounded-[0.75vw] shadow-lg">
                     <div class="flex h-full flex-col items-center justify-center gap-[0.2vw] text-[1.1vw]">
-
                         <span class="font-medium leading-none">soundcore integration</span>
                         <span class="font-semibold leading-none">coming soon</span>
                     </div>
