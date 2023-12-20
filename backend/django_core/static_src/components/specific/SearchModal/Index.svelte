@@ -34,12 +34,15 @@
             }
         },
         handle_global_input = async (e: KeyboardEvent) => {
+            const search_arr_length = (await search_promise)?.length;
+            if (search_arr_length === undefined) return;
+
             switch (e.key.toLowerCase()) {
                 case "arrowdown":
-                    active_index = (active_index + 1) % results.length;
+                    active_index = (active_index + 1) % search_arr_length;
                     break;
                 case "arrowup":
-                    active_index = (active_index - 1 + results.length) % results.length;
+                    active_index = (active_index - 1 + search_arr_length) % search_arr_length;
                     break;
                 // do tab logic of switching core
                 // case "tab":
@@ -80,9 +83,7 @@
 </script>
 
 <svelte:window
-    on:keyup={(event) => {
-        if (dialog_element?.open) handle_global_input(event);
-    }}
+    on:keyup={(event) => dialog_element?.open && handle_global_input(event)}
 />
 <dialog
     class="modal"
