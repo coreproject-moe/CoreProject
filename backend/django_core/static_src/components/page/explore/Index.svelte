@@ -194,6 +194,7 @@
                                     {@const is_selected = selected_items.some(selected_item => selected_item[0] === key)}
 
                                     <button
+                                        on:click={() => update_selected_items(option[0], item)}
                                         class="btn btn-neutral h-max min-h-max leading-none flex justify-between items-center md:rounded-[0.35vw] p-3 text-sm md:px-[1vw] md:py-[0.75vw] md:text-[0.9vw]">
                                         {value}
 
