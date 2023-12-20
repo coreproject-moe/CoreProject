@@ -2,6 +2,7 @@
     import { cn } from "$functions/classname";
     import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
     import Tick from "$icons/Tick/Index.svelte";
+    import MoreBox from "$icons/MoreBox/Index.svelte";
 
     // Mapping
     let filter_options_mapping: {
@@ -212,8 +213,8 @@
             {/each}
         </div>
 
-        <button class="btn btn-neutral h-max min-h-max rounded-lg p-[0.85rem] md:rounded-[0.5vw] md:p-[0.9vw]">
-            <coreproject-icon-list class="w-4 md:w-[1.1vw]"></coreproject-icon-list>
+        <button class="btn btn-neutral h-max min-h-max rounded-lg p-[0.85rem] md:rounded-[0.5vw] md:p-[0.8vw]">
+            <MoreBox class="w-4 md:w-[1.1vw]" />
         </button>
     </div>
 </section>

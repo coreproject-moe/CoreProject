@@ -34,6 +34,7 @@ const mapping = [
     { tagname: `list`, component: await import("./List/Index.svelte") },
     { tagname: `misc`, component: await import("./Misc/Index.svelte") },
     { tagname: `moon`, component: await import("./Moon/Index.svelte") },
+    { tagname: `morebox`, component: await import("./MoreBox/Index.svelte") },
     { tagname: `notification`, component: await import("./Notification/Index.svelte") },
     { tagname: `play`, component: await import("./Play/Index.svelte") },
     { tagname: `preference`, component: await import("./Preference/Index.svelte") },
