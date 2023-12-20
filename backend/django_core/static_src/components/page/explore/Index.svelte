@@ -1,5 +1,7 @@
 <script lang="ts">
     import { cn } from "$functions/classname";
+    import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
+    import Tick from "$icons/Tick/Index.svelte";
 
     // Mapping
     let filter_options_mapping: {
@@ -136,7 +138,7 @@
                 {@const selected_items = option[1].selected_items}
                 {@const filter_items = option[1].items}
 
-                <div class={cn(klass, "group")}>
+                <div class={cn(klass, "group dropdown dropdown-bottom")}>
                     <span class="font-semibold leading-none md:text-[1vw]">{title}</span>
                     <div class="relative flex items-center">
                         <span class="absolute cursor-pointer opacity-100 duration-300 group-focus-within:opacity-0">
@@ -159,6 +161,7 @@
                             bind:value={option[1].value}
                             on:blur={() => (option[1].value = "")}
                             type="text"
+                            tabindex="0" role="button"
                             class="peer w-full rounded-lg border-none bg-neutral py-3 text-base leading-none placeholder focus:ring-0 md:w-[11vw] md:rounded-[0.5vw] md:bg-neutral text-neutral-content md:py-[0.8vw] md:pl-[1vw] md:text-[1vw] placeholder:font-medium font-semibold"
                         />
                         {#if selected_items.length > 0}
@@ -172,6 +175,36 @@
                             <button class="btn !bg-transparent border-none absolute right-0 mr-3 w-4 p-0 md:mr-[1vw] md:w-[1vw]">
                                 <coreproject-icon-chevron class="md:w-[1vw]"></coreproject-icon-chevron>
                             </button>
+                        {/if}
+                    </div>
+                    <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+                    <div
+                        tabindex="0"
+                        class="dropdown-content z-10 w-[8.5rem] rounded-lg md:w-[11vw] bg-surface-900 md:rounded-[0.5vw] overflow-x-hidden"
+                    >
+                        {#if filter_items}
+                            <ScrollArea
+                                class="md:p-[0.5vw] flex flex-col"
+                                parent_class="md:max-h-[30vw] bg-surface-400/75"
+                            >
+                                {#each Object.entries(filter_items) as item}
+                                    {@const key = item[0]}
+                                    {@const value = item[1]}
+                    
+                                    {@const is_selected = selected_items.some(selected_item => selected_item[0] === key)}
+                    
+                                    <button
+                                        class="btn leading-none flex justify-between items-center hover:bg-surface-400 md:rounded-[0.35vw] p-3 text-sm md:px-[1vw] md:py-[0.75vw] md:text-[0.9vw] text-surface-50">
+                                        {value}
+                    
+                                        {#if is_selected}
+                                            <div class="rounded-full bg-primary-500 text-white p-1 md:p-[0.3vw]">
+                                                <Tick class="w-2 md:w-[0.5vw]" />
+                                            </div>
+                                        {/if}
+                                    </button>
+                                {/each}
+                            </ScrollArea>
                         {/if}
                     </div>
                 </div>
