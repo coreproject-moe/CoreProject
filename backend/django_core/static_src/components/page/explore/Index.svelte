@@ -3,6 +3,9 @@
     import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
     import Tick from "$icons/Tick/Index.svelte";
     import MoreBox from "$icons/MoreBox/Index.svelte";
+    import Search from "$icons/Search/Index.svelte";
+    import Cross from "$icons/Cross/Index.svelte";
+    import Chevron from "$icons/Chevron/Index.svelte";
 
     // Mapping
     let filter_options_mapping: {
@@ -111,7 +114,7 @@
     <div class="mt-10 flex flex-col gap-1 md:hidden">
         <span class="text-base font-semibold leading-none">Search Animes</span>
         <div class="relative flex items-center">
-            <coreproject-icon-search class="pointer-events-none absolute ml-4 w-4"></coreproject-icon-search>
+            <Search class="pointer-events-none absolute ml-4 w-4" />
             <input
                 type="text"
                 placeholder="Looking for specific anime? Start from here..."
@@ -125,7 +128,9 @@
             <div class="hidden flex-col gap-[0.35vw] md:flex">
                 <span class="text-[1vw] font-semibold leading-none">Search Animes</span>
                 <div class="relative flex items-center">
-                    <div class="absolute md:ml-[1vw]"><coreproject-icon-search class="md:w-[1.1vw]"></coreproject-icon-search></div>
+                    <div class="absolute md:ml-[1vw]">
+                        <Search class="md:w-[1.1vw]" />
+                    </div>
                     <input
                         type="text"
                         placeholder="Looking for specific anime? Start from here..."
@@ -170,11 +175,11 @@
                                 on:click={() => clear_selected_items(option[0])}
                                 class="btn !bg-transparent border-none absolute right-0 mr-3 w-4 p-0 md:mr-[1vw] md:w-[1vw]"
                             >
-                                <coreproject-icon-cross class="md:w-[1vw]"></coreproject-icon-cross>
+                                <Cross class="md:w-[1vw]" />
                             </button>
                         {:else}
                             <button class="btn !bg-transparent border-none absolute right-0 mr-3 w-4 p-0 md:mr-[1vw] md:w-[1vw]">
-                                <coreproject-icon-chevron class="md:w-[1vw]"></coreproject-icon-chevron>
+                                <Chevron class="md:w-[1vw]" />
                             </button>
                         {/if}
                     </div>
