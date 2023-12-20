@@ -190,13 +190,13 @@
                                 {#each Object.entries(filter_items) as item}
                                     {@const key = item[0]}
                                     {@const value = item[1]}
-                    
+
                                     {@const is_selected = selected_items.some(selected_item => selected_item[0] === key)}
-                    
+
                                     <button
                                         class="btn leading-none flex justify-between items-center hover:bg-surface-400 md:rounded-[0.35vw] p-3 text-sm md:px-[1vw] md:py-[0.75vw] md:text-[0.9vw] text-surface-50">
                                         {value}
-                    
+
                                         {#if is_selected}
                                             <div class="rounded-full bg-primary-500 text-white p-1 md:p-[0.3vw]">
                                                 <Tick class="w-2 md:w-[0.5vw]" />
