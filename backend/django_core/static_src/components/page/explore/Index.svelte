@@ -180,12 +180,12 @@
                     <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
                     <div
                         tabindex="0"
-                        class="dropdown-content z-10 w-[8.5rem] rounded-lg md:w-[11vw] bg-surface-900 md:rounded-[0.5vw] overflow-x-hidden"
+                        class="dropdown-content z-10 md:mt-[1vw] w-[8.5rem] rounded-lg md:w-[11vw] md:rounded-[0.5vw] overflow-x-hidden"
                     >
                         {#if filter_items}
                             <ScrollArea
-                                class="md:p-[0.5vw] flex flex-col"
-                                parent_class="md:max-h-[30vw] bg-surface-400/75"
+                                class="md:p-[0.35vw] flex flex-col w-full"
+                                parent_class="md:max-h-[30vw] bg-neutral w-full"
                             >
                                 {#each Object.entries(filter_items) as item}
                                     {@const key = item[0]}
@@ -194,11 +194,11 @@
                                     {@const is_selected = selected_items.some(selected_item => selected_item[0] === key)}
 
                                     <button
-                                        class="btn leading-none flex justify-between items-center hover:bg-surface-400 md:rounded-[0.35vw] p-3 text-sm md:px-[1vw] md:py-[0.75vw] md:text-[0.9vw] text-surface-50">
+                                        class="btn btn-neutral h-max min-h-max leading-none flex justify-between items-center md:rounded-[0.35vw] p-3 text-sm md:px-[1vw] md:py-[0.75vw] md:text-[0.9vw]">
                                         {value}
 
                                         {#if is_selected}
-                                            <div class="rounded-full bg-primary-500 text-white p-1 md:p-[0.3vw]">
+                                            <div class="rounded-full bg-primary text-white p-1 md:p-[0.3vw]">
                                                 <Tick class="w-2 md:w-[0.5vw]" />
                                             </div>
                                         {/if}
