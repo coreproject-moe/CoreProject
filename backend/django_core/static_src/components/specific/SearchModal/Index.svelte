@@ -30,11 +30,7 @@
             active_core = core;
         },
         handle_input = async () => {
-            if (search_query === "") {
-                search_promise = null;
-            } else {
-                search_promise = get_anime_with_serach_parameters();
-            }
+            search_promise = search_query === "" ? null : get_anime_with_serach_parameters();
         },
         handle_global_input = async (e: KeyboardEvent) => {
             const search_results = await search_promise;
