@@ -141,15 +141,15 @@
                 <div class={cn(klass, "group dropdown dropdown-bottom")}>
                     <span class="font-semibold leading-none md:text-[1vw]">{title}</span>
                     <div class="relative flex items-center">
-                        <span class="absolute cursor-pointer opacity-100 duration-300 group-focus-within:opacity-0">
+                        <span class="absolute flex items-center md:gap-[0.25vw] cursor-pointer opacity-100 duration-300 group-focus-within:opacity-0">
                             {#if selected_items.length > 0}
-                                <span class="ml-3 rounded bg-primary p-1 text-sm font-semibold md:ml-[0.75vw] md:rounded-[0.25vw] md:p-[0.35vw] md:text-[0.85vw]">
+                                <span class="ml-3 badge badge-primary rounded p-1 text-sm font-semibold md:ml-[0.75vw] md:rounded-[0.25vw] md:p-[0.35vw] md:text-[0.85vw] md:h-[1.5vw]">
                                     <!-- show first item -->
                                     {selected_items[0][1]}
                                 </span>
                                 <!-- show count of remaining items if exists -->
                                 {#if selected_items.length > 1}
-                                    <span class="ml-1 rounded bg-primary/50 p-1 text-sm font-semibold md:ml-[0.15vw] md:rounded-[0.25vw] md:p-[0.35vw] md:text-[0.85vw]">
+                                    <span class="ml-1 rounded badge md:h-[1.5vw] p-1 text-sm font-semibold md:ml-[0.15vw] md:rounded-[0.25vw] md:p-[0.35vw] md:text-[0.85vw]">
                                         +{selected_items.filter((item) => item !== selected_items[0]).length}
                                     </span>
                                 {/if}
