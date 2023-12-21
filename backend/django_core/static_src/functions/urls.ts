@@ -1,7 +1,7 @@
-const urls = window.urls;
+import htmx from "htmx.org";
 
 export function reverse(view: string, ...args: Array<string | number>) {
-    const url = urls.get(view);
+    const url = window.urls.get(view);
     if (!url) {
         throw new Error(`No Match found for ${view}`);
     }
@@ -17,10 +17,7 @@ export function reverse(view: string, ...args: Array<string | number>) {
         throw new Error("`args` doesnot match with `urlpattern`");
     }
 
-    const replacements: Record<string, string> = matches.reduce(
-        (obj, k, i) => ({ ...obj, [k]: args[i] }),
-        {}
-    );
+    const replacements: Record<string, string> = matches.reduce((obj, k, i) => ({ ...obj, [k]: args[i] }), {});
 
     // Create a regular expression pattern to match all occurrences of the keys in replacements
     const pattern = new RegExp(Object.keys(replacements).join("|"), "g");
@@ -30,4 +27,21 @@ export function reverse(view: string, ...args: Array<string | number>) {
     });
 
     return final_url;
+}
+
+export async function goto({ url, verb, target }: { url: string; verb?: "GET" | "POST"; target: string }): Promise<void> {
+    // WHAT KIND OF FUCKERY IS THIS
+    // FUCK HTMX
+    // related : https://github.com/bigskysoftware/htmx/discussions/2116
+    // related : https://www.reddit.com/r/htmx/comments/18np8pk/how_to_make_ajax_update_the_history_cache/
+    const btn = document.createElement("button");
+    btn.setAttribute(`hx-${verb?.toLowerCase()}`, url);
+    btn.setAttribute("hx-push-url", url);
+    btn.setAttribute("hx-target", target);
+    // Hide Button
+    btn.style.display = "hidden";
+    // Add `htmx` listener
+    htmx.process(btn);
+    document.body.appendChild(btn);
+    btn.click();
 }
