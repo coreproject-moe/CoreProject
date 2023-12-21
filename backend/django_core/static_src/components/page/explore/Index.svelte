@@ -306,7 +306,7 @@
                                 class="h-56 w-full rounded-t-lg object-cover object-center md:h-[20vw] md:rounded-l-[0.35vw] md:rounded-r-none"
                             />
                             <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-l-[0.35vw]">
-                                <div class="w-full flex flex-col bg-secondary/90 p-3 md:gap-[0.35vw] md:p-[1vw]">
+                                <div class="w-full flex flex-col bg-secondary/95 p-3 md:gap-[0.35vw] md:p-[1vw]">
                                     <HoverExpand
                                         class="text-sm font-semibold md:text-[1vw] md:leading-[1.35vw] w-full text-accent"
                                         height="md:max-h-[1.35vw] md:hover:max-h-[10vw]"

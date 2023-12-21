@@ -54,7 +54,8 @@
         <div class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
             <div class="flex flex-col gap-1 bg-secondary/95 p-3 md:gap-[0.35vw] md:p-[1vw]">
                 <ScrollArea
-                    gradient_mask={true}
+                    gradient_mask
+                    offset_scrollbar
                     parent_class="flex md:max-h-[1.35vw] md:leading-[1.35vw] hover:max-h-[10vw] duration-300"
                     class="line-clamp-1 text-sm font-semibold md:line-clamp-none md:text-[1vw]"
                 >
@@ -106,7 +107,8 @@
                 {/each}
             </genres>
             <ScrollArea
-                gradient_mask={true}
+                gradient_mask
+                offset_scrollbar
                 parent_class="md:max-h-[4vw]"
                 class="text-surface-50 md:text-[0.8vw] md:leading-[1vw]"
             >
