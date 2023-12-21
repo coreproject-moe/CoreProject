@@ -6,13 +6,7 @@
     export let anime_studio: string[];
     export let anime_genres: string[];
 
-    // Pass styles
-    export let dropdown_class: string;
-
     import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
-    import { cn } from "$functions/classname";
-
-    // Icon import
     import Star from "$icons/Star/Index.svelte";
     import Circle from "$icons/Circle/Index.svelte";
     import Play from "$icons/Play/Index.svelte";
@@ -70,7 +64,7 @@
 
     <button
         tabindex="0"
-        class={cn(dropdown_class, "dropdown-content top-0 z-10 hidden flex-col leading-none md:flex md:w-[20vw]")}
+        class="dropdown-content top-0 z-10 hidden flex-col leading-none md:flex md:w-[20vw] md:pl-[1.5vw]"
         style="left:{style_left};"
     >
         <div class="flex flex-col bg-neutral text-start md:gap-[0.35vw] md:rounded-[0.75vw] md:rounded-t-[0.3vw] md:p-[1vw]">

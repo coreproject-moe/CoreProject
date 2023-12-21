@@ -364,7 +364,6 @@
                         anime_genres={anime.genres}
                         anime_synopsis={anime.synopsis}
                         anime_total_episodes={anime.episodes_count}
-                        dropdown_class="md:pl-[1vw]"
                     />
                 {/each}
             </div>
