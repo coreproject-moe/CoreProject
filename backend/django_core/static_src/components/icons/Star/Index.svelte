@@ -2,8 +2,8 @@
     let klass = "";
     export { klass as class };
     export let style = "";
-    export let variant: "empty" | "half" | "full";
-    export let fill_color = "";
+    export let variant: "empty" | "half" | "full" = "full";
+    export let fill_color: string = "yellow";
 </script>
 
 {#if variant === "empty"}
