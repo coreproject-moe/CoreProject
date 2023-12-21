@@ -134,7 +134,7 @@
     };
 
     // Thumbnail modes
-    let thumbnail_mode: "card_with_tippy" | "detailed_card" = "card_with_tippy";
+    let thumbnail_mode: "card_with_dropdown" | "detailed_card" = "card_with_dropdown";
 </script>
 
 <section class="mt-20 flex flex-col p-5 md:mt-0 md:gap-[1.5vw] md:pb-[2.5vw] md:pl-[1.5vw] md:pr-[3.75vw] md:pt-0">
@@ -274,7 +274,7 @@
                 <div class="divider divider-horizontal"></div>
                 <button
                     class="btn p-0 !bg-transparent border-none min-h-max h-max"
-                    on:click={() => change_thumbnail_mode("card_with_tippy")}
+                    on:click={() => change_thumbnail_mode("card_with_dropdown")}
                 >
                     <SixGrids class="w-5 md:w-[1.15vw]" />
                 </button>
@@ -302,12 +302,12 @@
                             <img
                                 src={anime.cover}
                                 alt={anime.name}
-                                class="h-56 w-full rounded-t-lg object-cover object-center md:h-[20vw] md:rounded-l-[0.35vw]"
+                                class="h-56 w-full rounded-t-lg object-cover object-center md:h-[20vw] md:rounded-l-[0.35vw] md:rounded-r-none"
                             />
                             <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-l-[0.35vw]">
-                                <div class="flex flex-col bg-surface-900/90 p-3 md:gap-[0.35vw] md:p-[1vw]">
+                                <div class="w-full flex flex-col bg-secondary/90 p-3 md:gap-[0.35vw] md:p-[1vw]">
                                     <HoverExpand
-                                        class="text-sm font-semibold md:text-[1vw] md:leading-[1.35vw]"
+                                        class="text-sm font-semibold md:text-[1vw] md:leading-[1.35vw] w-full text-accent"
                                         height="md:max-h-[1.35vw] md:hover:max-h-[10vw]"
                                     >
                                         {anime.name}
@@ -319,7 +319,7 @@
                             </anime-info>
                         </div>
 
-                        <anime-details class="flex flex-col justify-between rounded-r-lg bg-surface-400/25 md:rounded-r-[0.35vw]">
+                        <anime-details class="flex flex-col justify-between rounded-r-lg bg-neutral/25 md:rounded-r-[0.35vw]">
                             <div class="flex flex-col gap-1 p-3 leading-none md:gap-[0.5vw] md:p-[1vw]">
                                 <release-time class="text-xs font-semibold capitalize md:text-[1vw]">
                                     {new FormatDate(anime.release_date).format_to_season}
@@ -341,7 +341,7 @@
 
                             <genres class="flex items-center gap-2 overflow-x-scroll p-3 scrollbar-none md:gap-[0.5vw] md:p-[1vw]">
                                 {#each anime.genres as genre}
-                                    <genre class="whitespace-nowrap rounded bg-warning-400 p-1 text-xs font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
+                                    <genre class="whitespace-nowrap rounded bg-warning p-1 text-xs font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
                                         {genre}
                                     </genre>
                                 {/each}
@@ -350,7 +350,7 @@
                     </a>
                 {/each}
             </div>
-        {:else if thumbnail_mode === "card_with_tippy"}
+        {:else if thumbnail_mode === "card_with_dropdown"}
             <div
                 class="mt-5 grid grid-cols-3 gap-3 md:mt-[1.25vw] md:grid-cols-6 md:gap-[1.5vw]"
                 bind:this={result_animes_element}
@@ -368,9 +368,9 @@
                                 class="h-60 w-full rounded-md object-cover object-center md:h-[20vw] md:rounded-[0.35vw]"
                             />
                             <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
-                                <div class="flex flex-col gap-1 bg-surface-900/90 p-3 md:gap-[0.35vw] md:p-[1vw]">
+                                <div class="flex flex-col w-full gap-1 bg-secondary/90 p-3 md:gap-[0.35vw] md:p-[1vw]">
                                     <HoverExpand
-                                        class="text-sm font-semibold md:text-[1vw] md:leading-[1.35vw]"
+                                        class="w-full text-sm font-semibold md:text-[1vw] md:leading-[1.35vw] text-accent"
                                         height="md:max-h-[1.35vw] md:hover:max-h-[10vw]"
                                     >
                                         {anime.name}
