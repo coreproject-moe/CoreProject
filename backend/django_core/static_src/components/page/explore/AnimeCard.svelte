@@ -18,11 +18,8 @@
 
     let is_overflowing: boolean;
 
-    // Styles
-
-    // Both of these functions require that parentElement is not changed
-    // Please tatoo dont change the position of the element
-    function calculate_style() {
+    // Functions
+    function handle_mouseenter() {
         const dropdown_cont_rect = dropdown_cont_el.getBoundingClientRect();
         const main_element_rect = main_element.getBoundingClientRect();
         const parent_element_gap = parseInt((getComputedStyle(main_element.parentElement!)?.gap));
@@ -39,7 +36,7 @@
     bind:this={main_element}
 >
     <button
-        on:mouseenter|preventDefault={calculate_style}
+        on:mouseenter|preventDefault={handle_mouseenter}
         class="relative"
         tabindex="0"
         aria-expanded={false}
