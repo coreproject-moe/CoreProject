@@ -263,23 +263,23 @@
     <div class="mt-16 md:mt-[1.5vw]">
         <div class="flex items-center justify-between">
             <div class="flex flex-col gap-2 md:gap-[0.35vw]">
-                <span class="text-xl font-semibold leading-none md:text-[1.35vw]">Trending Now</span>
-                <span class="text-base leading-none text-surface-50 md:text-[1vw]">Crowd Favorites: Anime Hits and Hype</span>
+                <span class="text-xl font-semibold text-accent leading-none md:text-[1.35vw]">Trending Now</span>
+                <span class="text-base leading-none md:text-[1vw]">Crowd Favorites: Anime Hits and Hype</span>
             </div>
             <div class="flex gap-3 md:gap-[1vw]">
-                <button class="btn p-0 text-surface-50">
+                <button class="btn p-0 !bg-transparent border-none min-h-max h-max">
                     <Expand class="w-5 md:w-[1.25vw]" />
                     <span class="font-semibold md:text-[1vw]">Trending</span>
                 </button>
-                <span class="divider-vertical h-7 !border-surface-50/25 md:h-[2vw]" />
+                <div class="divider divider-horizontal"></div>
                 <button
-                    class="btn p-0 text-surface-50"
+                    class="btn p-0 !bg-transparent border-none min-h-max h-max"
                     on:click={() => change_thumbnail_mode("card_with_tippy")}
                 >
                     <SixGrids class="w-5 md:w-[1.15vw]" />
                 </button>
                 <button
-                    class="btn p-0 text-surface-50"
+                    class="btn p-0 !bg-transparent border-none min-h-max h-max"
                     on:click={() => change_thumbnail_mode("detailed_card")}
                 >
                     <MoreBox class="w-[1.1rem] md:w-[1vw]" />
@@ -312,7 +312,7 @@
                                     >
                                         {anime.name}
                                     </HoverExpand>
-                                    <studio-name class="line-clamp-1 text-xs text-surface-50 md:line-clamp-none md:text-[0.8vw]">
+                                    <studio-name class="line-clamp-1 text-xs md:line-clamp-none md:text-[0.8vw]">
                                         {anime.studios}
                                     </studio-name>
                                 </div>
@@ -320,7 +320,7 @@
                         </div>
 
                         <anime-details class="flex flex-col justify-between rounded-r-lg bg-surface-400/25 md:rounded-r-[0.35vw]">
-                            <div class="flex flex-col gap-1 p-3 leading-none text-surface-50 md:gap-[0.5vw] md:p-[1vw]">
+                            <div class="flex flex-col gap-1 p-3 leading-none md:gap-[0.5vw] md:p-[1vw]">
                                 <release-time class="text-xs font-semibold capitalize md:text-[1vw]">
                                     {new FormatDate(anime.release_date).format_to_season}
                                 </release-time>
@@ -375,7 +375,7 @@
                                     >
                                         {anime.name}
                                     </HoverExpand>
-                                    <anime_info class="flex items-center gap-2 text-xs leading-none text-surface-50 md:gap-[0.5vw] md:text-[0.8vw]">
+                                    <anime_info class="flex items-center gap-2 text-xs leading-none md:gap-[0.5vw] md:text-[0.8vw]">
                                         <genre>{anime.genres[0]}</genre>
                                         <Circle class="w-1 opacity-75 md:w-[0.25vw]" />
                                         <episodes_count>{anime.episodes_count} eps</episodes_count>
