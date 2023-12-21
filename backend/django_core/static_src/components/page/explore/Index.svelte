@@ -190,8 +190,7 @@
                             </button>
                         {/if}
                     </div>
-                    <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
-                    <div
+                    <button
                         tabindex="0"
                         class="dropdown-content z-10 md:mt-[1vw] w-[8.5rem] rounded-lg md:w-[11vw] md:rounded-[0.5vw] overflow-x-hidden"
                     >
@@ -220,7 +219,7 @@
                                 {/each}
                             </ScrollArea>
                         {/if}
-                    </div>
+                    </button>
                 </div>
             {/each}
         </div>
