@@ -32,19 +32,19 @@ export function reverse(view: string, ...args: Array<string | number>) {
     return final_url;
 }
 
-// export async function goto({ url, verb, target }: { url: string; verb?: "GET" | "POST"; target: string }): Promise<void> {
-//     if (!verb) {
-//         verb = "GET";
-//     }
-//     if (!url.endsWith("/")) {
-//         url = `${url}/`;
-//     }
+export async function goto({ url, verb, target }: { url: string; verb?: "GET" | "POST"; target: string }): Promise<void> {
+    if (!verb) {
+        verb = "GET";
+    }
+    if (!url.endsWith("/")) {
+        url = `${url}/`;
+    }
 
-//     window.history.pushState({}, "", url);
+    window.history.pushState({}, "", url);
 
-//     const res = await ajax(verb, url, {
-//         target: target
-//     });
+    const res = await ajax(verb, url, {
+        target: target
+    });
 
-//     console.log(res);
-// }
+    console.log(res);
+}
