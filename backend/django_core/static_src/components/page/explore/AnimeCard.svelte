@@ -14,7 +14,6 @@
 
     // Bindings
     let main_element: HTMLElement, dropdown_cont_el: HTMLButtonElement;
-
     let is_overflowing: boolean;
 
     // Functions
