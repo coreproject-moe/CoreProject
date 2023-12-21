@@ -6,6 +6,31 @@
     import Search from "$icons/Search/Index.svelte";
     import Cross from "$icons/Cross/Index.svelte";
     import Chevron from "$icons/Chevron/Index.svelte";
+    import Circle from "$icons/Circle/Index.svelte";
+    import Expand from "$icons/ArrowUpRight/Index.svelte";
+    import SixGrids from "$icons/Settings/Index.svelte";
+    import { scale } from "svelte/transition";
+    import { FormatDate } from "$functions/format_date";
+    import HoverExpand from "$components/minor/HoverExpand/Index.svelte";
+
+    // Mock
+    const trending_animes = [
+        {
+            id: 1,
+            name: "One piece",
+            cover: "/images/cover/one_piece.webp",
+            synopsis: `Azur Lane, a combination of all the different Camps in the world, was once successful in repelling the underwater menace, the Siren. Now splintered, they must face a new threat in Red Axis, former allies who crave to wield this otherworldly Siren technology for their own nefarious desires! Who will be victorious in the never-ending war between these battleship girls!? Akagami no Shirayuki-hime depicts Shirayuki's journey toward a new life at the royal palace of Clarines, as well as Zen's endeavor to become a prince worthy of his title. As loyal friendships are forged and deadly enemies formed, Shirayuki and Zen slowly learn to support each other as they walk their own paths.`,
+            current_episode: 4,
+            episodes_count: 1071,
+            genres: ["Action", "Ecchi", "sci-Fi"],
+            type: "TV",
+            release_date: "2023-04-22T10:30:00.000Z",
+            studios: ["Bibury Animation Studios"]
+        },
+    ];
+
+    // Binding
+    let result_animes_element: HTMLDivElement;
 
     // Mapping
     let filter_options_mapping: {
@@ -103,7 +128,13 @@
     clear_selected_items = (key: string) => {
         // update filter_options_mapping
         filter_options_mapping[key].selected_items = [];
+    },
+    change_thumbnail_mode = (mode: typeof thumbnail_mode) => {
+        thumbnail_mode = mode;
     };
+
+    // Thumbnail modes
+    let thumbnail_mode: "card_with_tippy" | "detailed_card" = "card_with_tippy";
 </script>
 
 <section class="mt-20 flex flex-col p-5 md:mt-0 md:gap-[1.5vw] md:pb-[2.5vw] md:pl-[1.5vw] md:pr-[3.75vw] md:pt-0">
@@ -227,5 +258,134 @@
         <button class="btn btn-neutral h-max min-h-max rounded-lg p-[0.85rem] md:rounded-[0.5vw] md:p-[0.8vw]">
             <MoreBox class="w-4 md:w-[1.1vw]" />
         </button>
+    </div>
+
+    <div class="mt-16 md:mt-[1.5vw]">
+        <div class="flex items-center justify-between">
+            <div class="flex flex-col gap-2 md:gap-[0.35vw]">
+                <span class="text-xl font-semibold leading-none md:text-[1.35vw]">Trending Now</span>
+                <span class="text-base leading-none text-surface-50 md:text-[1vw]">Crowd Favorites: Anime Hits and Hype</span>
+            </div>
+            <div class="flex gap-3 md:gap-[1vw]">
+                <button class="btn p-0 text-surface-50">
+                    <Expand class="w-5 md:w-[1.25vw]" />
+                    <span class="font-semibold md:text-[1vw]">Trending</span>
+                </button>
+                <span class="divider-vertical h-7 !border-surface-50/25 md:h-[2vw]" />
+                <button
+                    class="btn p-0 text-surface-50"
+                    on:click={() => change_thumbnail_mode("card_with_tippy")}
+                >
+                    <SixGrids class="w-5 md:w-[1.15vw]" />
+                </button>
+                <button
+                    class="btn p-0 text-surface-50"
+                    on:click={() => change_thumbnail_mode("detailed_card")}
+                >
+                    <MoreBox class="w-[1.1rem] md:w-[1vw]" />
+                </button>
+            </div>
+        </div>
+
+        {#if thumbnail_mode === "detailed_card"}
+            <div
+                bind:this={result_animes_element}
+                class="mt-5 grid grid-cols-2 gap-3 md:mt-[1.25vw] md:grid-cols-3 md:gap-[1.5vw]"
+            >
+                {#each trending_animes as anime}
+                    <a
+                        in:scale={{ start: 0.95 }}
+                        href="/mal/{anime.id}"
+                        class="relative col-span-1 grid grid-cols-1 md:grid-cols-2"
+                    >
+                        <div class="relative">
+                            <img
+                                src={anime.cover}
+                                alt={anime.name}
+                                class="h-56 w-full rounded-t-lg object-cover object-center md:h-[20vw] md:rounded-l-[0.35vw]"
+                            />
+                            <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-l-[0.35vw]">
+                                <div class="flex flex-col bg-surface-900/90 p-3 md:gap-[0.35vw] md:p-[1vw]">
+                                    <HoverExpand
+                                        class="text-sm font-semibold md:text-[1vw] md:leading-[1.35vw]"
+                                        height="md:max-h-[1.35vw] md:hover:max-h-[10vw]"
+                                    >
+                                        {anime.name}
+                                    </HoverExpand>
+                                    <studio-name class="line-clamp-1 text-xs text-surface-50 md:line-clamp-none md:text-[0.8vw]">
+                                        {anime.studios}
+                                    </studio-name>
+                                </div>
+                            </anime-info>
+                        </div>
+
+                        <anime-details class="flex flex-col justify-between rounded-r-lg bg-surface-400/25 md:rounded-r-[0.35vw]">
+                            <div class="flex flex-col gap-1 p-3 leading-none text-surface-50 md:gap-[0.5vw] md:p-[1vw]">
+                                <release-time class="text-xs font-semibold capitalize md:text-[1vw]">
+                                    {new FormatDate(anime.release_date).format_to_season}
+                                </release-time>
+                                <div class="flex items-center gap-1 md:gap-[0.5vw]">
+                                    <type class="text-xs md:text-[0.8vw]">{anime.type}</type>
+                                    <Circle class="w-1 opacity-50 md:w-[0.25vw]" />
+                                    <episodes class="text-xs md:text-[0.8vw]">{anime.episodes_count} episodes</episodes>
+                                </div>
+                                <ScrollArea
+                                    offset_scrollbar
+                                    gradient_mask
+                                    parent_class="max-h-24 md:max-h-[11vw] md:mt-[0.5vw]"
+                                    class="text-xs leading-snug text-surface-300 md:text-justify md:text-[0.85vw] md:leading-[1vw]"
+                                >
+                                    {anime.synopsis}
+                                </ScrollArea>
+                            </div>
+
+                            <genres class="flex items-center gap-2 overflow-x-scroll p-3 scrollbar-none md:gap-[0.5vw] md:p-[1vw]">
+                                {#each anime.genres as genre}
+                                    <genre class="whitespace-nowrap rounded bg-warning-400 p-1 text-xs font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
+                                        {genre}
+                                    </genre>
+                                {/each}
+                            </genres>
+                        </anime-details>
+                    </a>
+                {/each}
+            </div>
+        {:else if thumbnail_mode === "card_with_tippy"}
+            <div
+                class="mt-5 grid grid-cols-3 gap-3 md:mt-[1.25vw] md:grid-cols-6 md:gap-[1.5vw]"
+                bind:this={result_animes_element}
+            >
+                {#each trending_animes as anime}
+                    <a
+                        in:scale={{ start: 0.95 }}
+                        href="/mal/{anime.id}"
+                        class="relative col-span-1 flex flex-col gap-2 md:gap-[0.5vw]"
+                    >
+                        <div class="relative">
+                            <img
+                                src={anime.cover}
+                                alt={anime.name}
+                                class="h-60 w-full rounded-md object-cover object-center md:h-[20vw] md:rounded-[0.35vw]"
+                            />
+                            <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
+                                <div class="flex flex-col gap-1 bg-surface-900/90 p-3 md:gap-[0.35vw] md:p-[1vw]">
+                                    <HoverExpand
+                                        class="text-sm font-semibold md:text-[1vw] md:leading-[1.35vw]"
+                                        height="md:max-h-[1.35vw] md:hover:max-h-[10vw]"
+                                    >
+                                        {anime.name}
+                                    </HoverExpand>
+                                    <anime_info class="flex items-center gap-2 text-xs leading-none text-surface-50 md:gap-[0.5vw] md:text-[0.8vw]">
+                                        <genre>{anime.genres[0]}</genre>
+                                        <Circle class="w-1 opacity-75 md:w-[0.25vw]" />
+                                        <episodes_count>{anime.episodes_count} eps</episodes_count>
+                                    </anime_info>
+                                </div>
+                            </anime-info>
+                        </div>
+                    </a>
+                {/each}
+            </div>
+        {/if}
     </div>
 </section>
