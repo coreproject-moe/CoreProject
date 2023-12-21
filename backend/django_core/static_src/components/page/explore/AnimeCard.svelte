@@ -84,7 +84,7 @@
             </anime-name>
             <div class="text-surface-50 flex w-full items-center md:gap-[0.35vw] md:text-[0.8vw]">
                 <rating class="flex items-center md:gap-[0.5vw]">
-                    <Star class="md:w-[0.9vw]" />
+                    <Star variant="full" fill_color="yellow" class="md:w-[0.9vw]" />
                     <span class="text-surface-50 leading-none md:text-[0.8vw]">4.5 rating</span>
                 </rating>
                 <Circle class="w-1 md:w-[0.25vw]" />
