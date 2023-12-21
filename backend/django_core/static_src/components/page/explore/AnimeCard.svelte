@@ -13,8 +13,7 @@
     import Info from "$icons/Info/Index.svelte";
 
     // Bindings
-    let main_element: HTMLElement,
-        dropdown_cont_el: HTMLButtonElement;
+    let main_element: HTMLElement, dropdown_cont_el: HTMLButtonElement;
 
     let is_overflowing: boolean;
 
@@ -22,7 +21,7 @@
     function handle_mouseenter() {
         const dropdown_cont_rect = dropdown_cont_el.getBoundingClientRect();
         const main_element_rect = main_element.getBoundingClientRect();
-        const parent_element_gap = parseInt((getComputedStyle(main_element.parentElement!)?.gap));
+        const parent_element_gap = parseInt(getComputedStyle(main_element.parentElement!)?.gap);
 
         // udpate position
         is_overflowing = main_element_rect.right + dropdown_cont_rect.width + parent_element_gap > window.innerWidth;

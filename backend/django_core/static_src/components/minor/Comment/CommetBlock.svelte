@@ -97,12 +97,8 @@
                 class="h-full w-full shrink-0 rounded-full object-cover"
             />
         </a>
-        <button
-            class="group flex h-full cursor-pointer justify-center transition-transform active:scale-95 md:w-full"
-        >
-            <div
-                class="h-full rounded-full bg-neutral transition-colors group-hover:bg-warning md:w-[0.15vw] group-hover:md:w-[0.2vw]"
-            />
+        <button class="group flex h-full cursor-pointer justify-center transition-transform active:scale-95 md:w-full">
+            <div class="h-full rounded-full bg-neutral transition-colors group-hover:bg-warning md:w-[0.15vw] group-hover:md:w-[0.2vw]" />
         </button>
     </div>
     <div class="flex flex-col items-start gap-1 md:gap-[0.25vw]">
@@ -140,12 +136,7 @@
                         {@const is_last = index === icon_mapping.length - 1}
                         <button
                             on:click|preventDefault={() => handle_reaction_button_click(item)}
-                            class={cn(
-                                "btn btn-secondary min-h-full p-0 md:h-max",
-                                is_first && "order-1",
-                                is_last && "order-3",
-                                string_to_boolean(window.user_authenticated) || "btn-disabled"
-                            )}
+                            class={cn("btn btn-secondary min-h-full p-0 md:h-max", is_first && "order-1", is_last && "order-3", string_to_boolean(window.user_authenticated) || "btn-disabled")}
                         >
                             {#if user_reaction === `${item}d`}
                                 <Arrow
@@ -175,9 +166,7 @@
                     <Chat class="md:w-[1vw]" />
                     <span>Replay</span>
                 </button>
-                <button
-                    class="btn min-h-full !bg-transparent p-0 text-xs md:h-max md:gap-[0.35vw] md:text-[0.9vw]"
-                >
+                <button class="btn min-h-full !bg-transparent p-0 text-xs md:h-max md:gap-[0.35vw] md:text-[0.9vw]">
                     <Share class="md:w-[1vw]" />
                     <span>Share</span>
                 </button>
@@ -235,9 +224,7 @@
         </svg>
 
         <button class="btn btn-secondary flex h-max min-h-max items-center p-0 md:gap-[0.75vw]">
-            <div
-                class="grid rotate-45 place-items-center rounded-full bg-neutral md:h-[1.5vw] md:w-[1.5vw]"
-            >
+            <div class="grid rotate-45 place-items-center rounded-full bg-neutral md:h-[1.5vw] md:w-[1.5vw]">
                 <Cross class="p-0 text-accent md:w-[1vw]" />
             </div>
             <span class="md:text-[1vw]">{item.childrens} More</span>

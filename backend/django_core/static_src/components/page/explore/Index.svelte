@@ -87,7 +87,7 @@
             type: "TV",
             release_date: "2023-04-22T10:30:00.000Z",
             studios: ["Bibury Animation Studios"]
-        },
+        }
     ];
 
     // Binding
@@ -174,25 +174,25 @@
 
     // Functions
     const update_selected_items = (key: string, selected_item: [string, string]) => {
-        let filter_option = filter_options_mapping[key];
-        let is_selected = filter_option.selected_items!.some((item) => item[0] === selected_item[0]);
+            let filter_option = filter_options_mapping[key];
+            let is_selected = filter_option.selected_items!.some((item) => item[0] === selected_item[0]);
 
-        if (is_selected) {
-            filter_option.selected_items = filter_option.selected_items!.filter((item) => item[0] !== selected_item[0]);
-        } else {
-            filter_option.selected_items = [...filter_option.selected_items!, selected_item];
-        }
+            if (is_selected) {
+                filter_option.selected_items = filter_option.selected_items!.filter((item) => item[0] !== selected_item[0]);
+            } else {
+                filter_option.selected_items = [...filter_option.selected_items!, selected_item];
+            }
 
-        // update filer_options_mapping
-        filter_options_mapping[key] = filter_option;
-    },
-    clear_selected_items = (key: string) => {
-        // update filter_options_mapping
-        filter_options_mapping[key].selected_items = [];
-    },
-    change_thumbnail_mode = (mode: typeof thumbnail_mode) => {
-        thumbnail_mode = mode;
-    };
+            // update filer_options_mapping
+            filter_options_mapping[key] = filter_option;
+        },
+        clear_selected_items = (key: string) => {
+            // update filter_options_mapping
+            filter_options_mapping[key].selected_items = [];
+        },
+        change_thumbnail_mode = (mode: typeof thumbnail_mode) => {
+            thumbnail_mode = mode;
+        };
 
     // Thumbnail modes
     let thumbnail_mode: "card_with_dropdown" | "detailed_card" = "card_with_dropdown";
@@ -229,7 +229,7 @@
                     <input
                         type="text"
                         placeholder="Looking for specific anime? Start from here..."
-                        class="w-[30vw] rounded-[0.5vw] border-none bg-neutral py-[0.8vw] pl-[3vw] text-[1vw] leading-none focus:ring-0 md:bg-neutral text-neutral-content font-semibold placeholder:text-neutral-content/75 placeholder:font-medium"
+                        class="w-[30vw] rounded-[0.5vw] border-none bg-neutral py-[0.8vw] pl-[3vw] text-[1vw] font-semibold leading-none text-neutral-content placeholder:font-medium placeholder:text-neutral-content/75 focus:ring-0 md:bg-neutral"
                     />
                 </div>
             </div>
@@ -242,19 +242,19 @@
                 <div class={cn(klass, "group dropdown dropdown-bottom")}>
                     <span class="font-semibold leading-none md:text-[1vw]">{title}</span>
                     <div class="relative flex items-center">
-                        <span class="absolute flex items-center md:gap-[0.25vw] cursor-pointer">
+                        <span class="absolute flex cursor-pointer items-center md:gap-[0.25vw]">
                             {#if selected_items}
                                 {#if selected_items.length > 0}
-                                    <span class="ml-3 badge badge-primary rounded p-1 text-sm font-semibold md:ml-[0.75vw] md:rounded-[0.25vw] md:p-[0.35vw] md:text-[0.85vw] md:h-[1.5vw]">
+                                    <span class="badge badge-primary ml-3 rounded p-1 text-sm font-semibold md:ml-[0.75vw] md:h-[1.5vw] md:rounded-[0.25vw] md:p-[0.35vw] md:text-[0.85vw]">
                                         <!-- show first item -->
                                         {selected_items[0][1]}
                                     </span>
                                 {:else}
-                                    <span class="ml-3 text-base md:ml-[1vw] md:text-[0.9vw] group-focus-within:opacity-0 duration-300">Any</span>
+                                    <span class="ml-3 text-base duration-300 group-focus-within:opacity-0 md:ml-[1vw] md:text-[0.9vw]">Any</span>
                                 {/if}
                                 <!-- show count of remaining items if exists -->
                                 {#if selected_items.length > 1}
-                                    <span class="ml-1 rounded badge md:h-[1.5vw] p-1 text-sm font-semibold md:ml-[0.15vw] md:rounded-[0.25vw] md:p-[0.35vw] md:text-[0.85vw]">
+                                    <span class="badge ml-1 rounded p-1 text-sm font-semibold md:ml-[0.15vw] md:h-[1.5vw] md:rounded-[0.25vw] md:p-[0.35vw] md:text-[0.85vw]">
                                         +{selected_items.filter((item) => item !== selected_items[0]).length}
                                     </span>
                                 {/if}
@@ -264,47 +264,49 @@
                             bind:value={option[1].value}
                             on:blur={() => (option[1].value = "")}
                             type="text"
-                            tabindex="0" role="button"
-                            class="peer w-full rounded-lg border-none bg-neutral py-3 text-base leading-none placeholder focus:ring-0 md:w-[11vw] md:rounded-[0.5vw] md:bg-neutral text-neutral-content md:py-[0.8vw] md:pl-[1vw] md:text-[1vw] placeholder:font-medium font-semibold"
+                            tabindex="0"
+                            role="button"
+                            class="peer placeholder w-full rounded-lg border-none bg-neutral py-3 text-base font-semibold leading-none text-neutral-content placeholder:font-medium focus:ring-0 md:w-[11vw] md:rounded-[0.5vw] md:bg-neutral md:py-[0.8vw] md:pl-[1vw] md:text-[1vw]"
                         />
                         {#if selected_items}
                             {#if selected_items.length > 0}
                                 <button
                                     on:click|preventDefault={() => clear_selected_items(option[0])}
-                                    class="btn !bg-transparent border-none absolute right-0 mr-3 w-4 p-0 md:mr-[1vw] md:w-[1vw]"
+                                    class="btn absolute right-0 mr-3 w-4 border-none !bg-transparent p-0 md:mr-[1vw] md:w-[1vw]"
                                 >
                                     <Cross class="md:w-[1vw]" />
                                 </button>
                             {/if}
                         {:else}
-                            <button class="btn !bg-transparent border-none absolute right-0 mr-3 w-4 p-0 md:mr-[1vw] md:w-[1vw]">
+                            <button class="btn absolute right-0 mr-3 w-4 border-none !bg-transparent p-0 md:mr-[1vw] md:w-[1vw]">
                                 <Chevron class="md:w-[1vw]" />
                             </button>
                         {/if}
                     </div>
                     <button
                         tabindex="0"
-                        class="dropdown-content z-10 md:mt-[1vw] w-[8.5rem] rounded-lg md:w-[11vw] md:rounded-[0.5vw] overflow-x-hidden"
+                        class="dropdown-content z-10 w-[8.5rem] overflow-x-hidden rounded-lg md:mt-[1vw] md:w-[11vw] md:rounded-[0.5vw]"
                     >
                         {#if filter_items}
                             <ScrollArea
-                                class="md:p-[0.35vw] flex flex-col w-full"
+                                class="flex w-full flex-col md:p-[0.35vw]"
                                 parent_class="md:max-h-[30vw] bg-neutral w-full"
                             >
                                 {#each Object.entries(filter_items) as item}
                                     {@const key = item[0]}
                                     {@const value = item[1]}
 
-                                    {@const is_selected = selected_items?.some(selected_item => selected_item[0] === key)}
+                                    {@const is_selected = selected_items?.some((selected_item) => selected_item[0] === key)}
 
                                     <button
                                         on:click|preventDefault={() => update_selected_items(option[0], item)}
-                                        class="relative btn btn-neutral h-max min-h-max leading-none flex items-center justify-start md:rounded-[0.35vw] p-3 text-sm md:px-[1vw] md:py-[0.75vw] md:text-[0.9vw]">
+                                        class="btn btn-neutral relative flex h-max min-h-max items-center justify-start p-3 text-sm leading-none md:rounded-[0.35vw] md:px-[1vw] md:py-[0.75vw] md:text-[0.9vw]"
+                                    >
                                         {value}
 
                                         {#if is_selected}
-                                            <div class="absolute right-[0.75vw] rounded-full bg-primary text-white p-1 md:p-[0.25vw]">
-                                                <Tick class="w-2 md:w-[0.75vw] text-white" />
+                                            <div class="absolute right-[0.75vw] rounded-full bg-primary p-1 text-white md:p-[0.25vw]">
+                                                <Tick class="w-2 text-white md:w-[0.75vw]" />
                                             </div>
                                         {/if}
                                     </button>
@@ -324,23 +326,23 @@
     <div class="mt-16 md:mt-[1.5vw]">
         <div class="flex items-center justify-between">
             <div class="flex flex-col gap-2 md:gap-[0.35vw]">
-                <span class="text-xl font-semibold text-accent leading-none md:text-[1.35vw]">Trending Now</span>
+                <span class="text-xl font-semibold leading-none text-accent md:text-[1.35vw]">Trending Now</span>
                 <span class="text-base leading-none md:text-[1vw]">Crowd Favorites: Anime Hits and Hype</span>
             </div>
             <div class="flex gap-3 md:gap-[1vw]">
-                <button class="btn p-0 !bg-transparent border-none min-h-max h-max">
+                <button class="btn h-max min-h-max border-none !bg-transparent p-0">
                     <Expand class="w-5 md:w-[1.25vw]" />
                     <span class="font-semibold md:text-[1vw]">Trending</span>
                 </button>
                 <div class="divider divider-horizontal"></div>
                 <button
-                    class="btn p-0 !bg-transparent border-none min-h-max h-max"
+                    class="btn h-max min-h-max border-none !bg-transparent p-0"
                     on:click={() => change_thumbnail_mode("card_with_dropdown")}
                 >
                     <SixGrids class="w-5 md:w-[1.15vw]" />
                 </button>
                 <button
-                    class="btn p-0 !bg-transparent border-none min-h-max h-max"
+                    class="btn h-max min-h-max border-none !bg-transparent p-0"
                     on:click={() => change_thumbnail_mode("detailed_card")}
                 >
                     <MoreBox class="w-[1.1rem] md:w-[1vw]" />
@@ -366,9 +368,9 @@
                                 class="h-56 w-full rounded-t-lg object-cover object-center md:h-[20vw] md:rounded-l-[0.35vw] md:rounded-r-none"
                             />
                             <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-l-[0.35vw]">
-                                <div class="w-full flex flex-col bg-secondary/95 p-3 md:gap-[0.35vw] md:p-[1vw]">
+                                <div class="flex w-full flex-col bg-secondary/95 p-3 md:gap-[0.35vw] md:p-[1vw]">
                                     <HoverExpand
-                                        class="text-sm font-semibold md:text-[1vw] md:leading-[1.35vw] w-full text-accent"
+                                        class="w-full text-sm font-semibold text-accent md:text-[1vw] md:leading-[1.35vw]"
                                         height="md:max-h-[1.35vw] md:hover:max-h-[10vw]"
                                     >
                                         {anime.name}
@@ -394,7 +396,7 @@
                                     offset_scrollbar
                                     gradient_mask
                                     parent_class="max-h-24 md:max-h-[11vw] md:mt-[0.5vw]"
-                                    class="text-xs leading-snug text-surface-300 md:text-justify md:text-[0.85vw] md:leading-[1vw]"
+                                    class="text-surface-300 text-xs leading-snug md:text-justify md:text-[0.85vw] md:leading-[1vw]"
                                 >
                                     {anime.synopsis}
                                 </ScrollArea>
@@ -402,7 +404,9 @@
 
                             <genres class="flex items-center gap-2 overflow-x-scroll p-3 scrollbar-none md:gap-[0.5vw] md:p-[1vw]">
                                 {#each anime.genres as genre}
-                                    <genre class="whitespace-nowrap rounded bg-warning p-1 text-xs font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
+                                    <genre
+                                        class="whitespace-nowrap rounded bg-warning p-1 text-xs font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]"
+                                    >
                                         {genre}
                                     </genre>
                                 {/each}

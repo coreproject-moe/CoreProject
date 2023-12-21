@@ -2,9 +2,7 @@
 import svelteRetag from "svelte-retag";
 
 // Pages
-const mapping = [
-    { tagname: `explore`, component: await import("./explore/Index.svelte") },
-]
+const mapping = [{ tagname: `explore`, component: await import("./explore/Index.svelte") }];
 
 mapping.forEach((item) => {
     svelteRetag({
