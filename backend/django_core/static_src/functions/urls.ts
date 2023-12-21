@@ -38,8 +38,9 @@ export async function goto({ url, verb, target }: { url: string; verb?: "GET" | 
     btn.setAttribute(`hx-${verb?.toLowerCase()}`, url);
     btn.setAttribute("hx-push-url", url);
     btn.setAttribute("hx-target", target);
-
+    // Hide Button
     btn.style.display = "hidden";
+    // Add `htmx` listener
     htmx.process(btn);
     document.body.appendChild(btn);
     btn.click();
