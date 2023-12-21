@@ -12,6 +12,7 @@
     import Strike from "$icons/Strike/Index.svelte";
     import Code from "$icons/Code/Index.svelte";
     import Hyperlink from "$icons/Hyperlink/Index.svelte";
+    import { goto } from "$functions/urls";
 
     let caret_offset_top: string | null = null,
         caret_offset_left: string | null = null;
@@ -150,9 +151,7 @@
                 const caret_position = offset(element);
 
                 // We need 2 times the line height to be actually effective.
-                caret_offset_top = `calc(${
-                    caret_position.top - textarea_position.top + caret_position.height
-                }px + (2 * ${line_height}))`;
+                caret_offset_top = `calc(${caret_position.top - textarea_position.top + caret_position.height}px + (2 * ${line_height}))`;
                 caret_offset_left = `calc(${caret_position.left - textarea_position.left}px)`;
             }
         }
@@ -164,8 +163,7 @@
             switch (event.key.toLowerCase()) {
                 case "arrowup": {
                     event.preventDefault();
-                    active_emoji_index =
-                        (active_emoji_index - 1 + emoji_matches.length) % emoji_matches.length;
+                    active_emoji_index = (active_emoji_index - 1 + emoji_matches.length) % emoji_matches.length;
                     break;
                 }
                 case "arrowdown": {
@@ -274,10 +272,7 @@
             selection_text = element.value.substring(selection_start, selection_end);
 
         // Handle use cases
-        if (
-            element.value.substring(selection_start - 3, selection_start) == "[](" &&
-            element.value.substring(selection_end, selection_end + 1) == ")"
-        ) {
+        if (element.value.substring(selection_start - 3, selection_start) == "[](" && element.value.substring(selection_end, selection_end + 1) == ")") {
             /**
              * [](||) -> ||
              */
@@ -288,15 +283,9 @@
             const replacement_text = `[${selection_text}]()`;
             await insert_text({
                 target: element,
-                text:
-                    element.value.substring(0, selection_start) +
-                    replacement_text +
-                    element.value.substring(selection_end)
+                text: element.value.substring(0, selection_start) + replacement_text + element.value.substring(selection_end)
             });
-            element.setSelectionRange(
-                selection_start + selection_text.length + 3,
-                selection_start + selection_text.length + 3
-            );
+            element.setSelectionRange(selection_start + selection_text.length + 3, selection_start + selection_text.length + 3);
         }
     }
     async function paste_text(event: ClipboardEvent & { currentTarget: HTMLTextAreaElement }) {
@@ -313,35 +302,20 @@
             const replacement_text = `[${selection_text}](${clipboard_data})`;
             await insert_text({
                 target: element,
-                text:
-                    element.value.substring(0, selection_start) +
-                    replacement_text +
-                    element.value.substring(selection_end)
+                text: element.value.substring(0, selection_start) + replacement_text + element.value.substring(selection_end)
             });
-            element.setSelectionRange(
-                selection_start + replacement_text.length,
-                selection_start + replacement_text.length
-            );
+            element.setSelectionRange(selection_start + replacement_text.length, selection_start + replacement_text.length);
         } else {
             const replacement_text = clipboard_data;
             await insert_text({
                 target: element,
-                text:
-                    element.value.substring(0, selection_start) +
-                    replacement_text +
-                    element.value.substring(selection_end)
+                text: element.value.substring(0, selection_start) + replacement_text + element.value.substring(selection_end)
             });
         }
     }
 
     // Functions
-    async function insert_text({
-        target,
-        text
-    }: {
-        target: HTMLTextAreaElement;
-        text: string;
-    }): Promise<void> {
+    async function insert_text({ target, text }: { target: HTMLTextAreaElement; text: string }): Promise<void> {
         /**
          * Thanks stackoverflow guy and mozilla dev ( Michal Čaplygin |myf| )
          * Stackoverflow : https://stackoverflow.com/a/56509046
@@ -351,101 +325,57 @@
         document.execCommand("insertText", false, text);
     }
 
-    async function operate_on_selected_text({
-        element,
-        starting_operator,
-        ending_operator
-    }: {
-        element: HTMLTextAreaElement;
-        starting_operator: string;
-        ending_operator: string;
-    }): Promise<void> {
+    async function operate_on_selected_text({ element, starting_operator, ending_operator }: { element: HTMLTextAreaElement; starting_operator: string; ending_operator: string }): Promise<void> {
         element.focus();
 
         const selection_start = element.selectionStart,
             selection_end = element.selectionEnd,
             selection_text = element.value.substring(selection_start, selection_end);
 
-        const regex_pattern_for_operator = new RegExp(
-            "^" +
-                starting_operator.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&") +
-                "|" +
-                ending_operator.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&") +
-                "$",
-            "g"
-        );
+        const regex_pattern_for_operator = new RegExp("^" + starting_operator.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&") + "|" + ending_operator.replace(/[|\\{}()[\]^$+*?.]/g, "\\$&") + "$", "g");
 
         // Handle use cases
         if (
-            element.value.substring(selection_start - starting_operator.length, selection_start) ==
-                starting_operator &&
-            element.value.substring(selection_end, selection_end + ending_operator.length) ==
-                ending_operator
+            element.value.substring(selection_start - starting_operator.length, selection_start) == starting_operator &&
+            element.value.substring(selection_end, selection_end + ending_operator.length) == ending_operator
         ) {
             if (selection_text) {
                 /**
                  * `<starting_operator>|hello|<ending_operator>` -> `|hello|`
                  * `_|hello|_` -> `|hello|`
                  */
-                const replacement_text = element.value
-                    .substring(
-                        selection_start - starting_operator.length,
-                        selection_end + ending_operator.length
-                    )
-                    .replace(regex_pattern_for_operator, "");
+                const replacement_text = element.value.substring(selection_start - starting_operator.length, selection_end + ending_operator.length).replace(regex_pattern_for_operator, "");
                 await insert_text({
                     target: element,
-                    text:
-                        element.value.substring(0, selection_start - starting_operator.length) +
-                        replacement_text +
-                        element.value.substring(selection_end + ending_operator.length)
+                    text: element.value.substring(0, selection_start - starting_operator.length) + replacement_text + element.value.substring(selection_end + ending_operator.length)
                 });
 
-                element.setSelectionRange(
-                    selection_start - starting_operator.length,
-                    selection_end - starting_operator.length
-                );
+                element.setSelectionRange(selection_start - starting_operator.length, selection_end - starting_operator.length);
             } else {
                 /**
                  * `<starting_operator>||<ending_operator>` -> `||`
                  * `_||_` -> `||`
                  */
                 element.focus();
-                element.setSelectionRange(
-                    selection_start - starting_operator.length,
-                    selection_end + ending_operator.length
-                );
+                element.setSelectionRange(selection_start - starting_operator.length, selection_end + ending_operator.length);
                 document.execCommand("delete", false);
             }
         } else if (
-            element.value.substring(selection_start, selection_start + starting_operator.length) ==
-                starting_operator &&
-            element.value.substring(selection_end - ending_operator.length, selection_end) ==
-                ending_operator
+            element.value.substring(selection_start, selection_start + starting_operator.length) == starting_operator &&
+            element.value.substring(selection_end - ending_operator.length, selection_end) == ending_operator
         ) {
             /**
              * `|<starting_opeator>hello<ending_operator>|` -> `|hello|`
              * `|_hello_|` -> `|hello|`
              */
 
-            const replacement_text = element.value
-                .substring(
-                    selection_start - starting_operator.length,
-                    selection_end + ending_operator.length
-                )
-                .replace(regex_pattern_for_operator, "");
+            const replacement_text = element.value.substring(selection_start - starting_operator.length, selection_end + ending_operator.length).replace(regex_pattern_for_operator, "");
             await insert_text({
                 target: element,
-                text:
-                    element.value.substring(0, selection_start) +
-                    replacement_text +
-                    element.value.substring(selection_end)
+                text: element.value.substring(0, selection_start) + replacement_text + element.value.substring(selection_end)
             });
 
-            element.setSelectionRange(
-                selection_start,
-                selection_end - (starting_operator.length + ending_operator.length)
-            );
+            element.setSelectionRange(selection_start, selection_end - (starting_operator.length + ending_operator.length));
         } else {
             /**
              * `|hello|` -> `<operator>|hello|<operator>`
@@ -454,25 +384,13 @@
             const replacement_text = starting_operator + selection_text + ending_operator;
             await insert_text({
                 target: element,
-                text:
-                    element.value.substring(0, selection_start) +
-                    replacement_text +
-                    element.value.substring(selection_end)
+                text: element.value.substring(0, selection_start) + replacement_text + element.value.substring(selection_end)
             });
-            element.setSelectionRange(
-                selection_start + starting_operator.length,
-                selection_end + starting_operator.length
-            );
+            element.setSelectionRange(selection_start + starting_operator.length, selection_end + starting_operator.length);
         }
     }
 
-    async function select_emoji({
-        emoji_index,
-        element
-    }: {
-        emoji_index: number;
-        element: HTMLElement;
-    }): Promise<void> {
+    async function select_emoji({ emoji_index, element }: { emoji_index: number; element: HTMLElement }): Promise<void> {
         const textarea_element = element as HTMLTextAreaElement;
 
         const emoji_keyword = emoji_matches[emoji_index]?.keyword,
@@ -519,10 +437,7 @@
             {@const active = tab === active_tab}
             <button
                 type="button"
-                class={cn(
-                    "btn min-h-full capitalize md:h-[2.25vw] md:text-[1vw]",
-                    active ? "btn-neutral" : "bg-secondary"
-                )}
+                class={cn("btn min-h-full capitalize md:h-[2.25vw] md:text-[1vw]", active ? "btn-neutral" : "bg-secondary")}
                 on:click={() => handle_tab_click(tab)}
             >
                 {tab}
@@ -539,11 +454,7 @@
             {@const description = item[1].description}
 
             <button
-                class={cn(
-                    icon_class,
-                    "btn h-max min-h-max border-none !bg-transparent p-0",
-                    "tooltip tooltip-top"
-                )}
+                class={cn(icon_class, "btn h-max min-h-max border-none !bg-transparent p-0", "tooltip tooltip-top")}
                 type="button"
                 data-tip={description}
                 aria-label={item_label}
@@ -568,9 +479,7 @@
         class="h-28 w-full resize-none overflow-y-scroll border-none bg-secondary px-3 text-sm leading-tight outline-none focus:ring-0 md:h-[8vw] md:px-[1vw] md:py-[0.5vw] md:text-[1vw] md:leading-[1.5vw]"
     ></textarea>
 {:else if active_tab === "preview"}
-    <div
-        class="h-28 w-full overflow-y-scroll px-3 text-sm leading-tight md:h-[8vw] md:px-[1vw] md:py-[0.5vw] md:text-[1vw] md:leading-[1.5vw] [&_img]:inline-flex [&_img]:w-[1.25vw]"
-    >
+    <div class="h-28 w-full overflow-y-scroll px-3 text-sm leading-tight md:h-[8vw] md:px-[1vw] md:py-[0.5vw] md:text-[1vw] md:leading-[1.5vw] [&_img]:inline-flex [&_img]:w-[1.25vw]">
         {#if textarea_value}
             <Markdown markdown={textarea_value} />
         {:else}
@@ -583,12 +492,13 @@
     class="flex items-center gap-[0.25vw] px-4 py-2 text-[0.65rem] font-thin leading-[1.5vw] text-accent md:px-[1vw] md:py-[0.1vw] md:text-[0.75vw]"
     style="align-self: flex-end;"
 >
-    Learn more about <a
+    Learn more about
+    <button
+        on:click={() => goto({ url: "/anime", target: "#page" })}
         class="underline"
-        href="/"
     >
         core editor
-    </a>
+    </button>
 </div>
 {#if show_emoji_picker && emoji_matches.length > 0}
     <div
