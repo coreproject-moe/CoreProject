@@ -12,6 +12,8 @@
     import { scale } from "svelte/transition";
     import { FormatDate } from "$functions/format_date";
     import HoverExpand from "$components/minor/HoverExpand/Index.svelte";
+    import Play from "$icons/Play/Index.svelte";
+    import Info from "$icons/Info/Index.svelte";
 
     // Mock
     const trending_animes = [
@@ -356,34 +358,99 @@
                 bind:this={result_animes_element}
             >
                 {#each trending_animes as anime}
-                    <a
-                        in:scale={{ start: 0.95 }}
-                        href="/mal/{anime.id}"
-                        class="relative col-span-1 flex flex-col gap-2 md:gap-[0.5vw]"
+                    <div class="dropdown dropdown-hover">
+                    <button
+                        class="relative"
+                        tabindex="0"
+                        aria-expanded={false}
                     >
-                        <div class="relative">
+                        <div
+                            class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]"
+                        >
                             <img
+                                class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]"
                                 src={anime.cover}
                                 alt={anime.name}
-                                class="h-60 w-full rounded-md object-cover object-center md:h-[20vw] md:rounded-[0.35vw]"
+                                style=""
+                                loading="lazy"
                             />
-                            <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
-                                <div class="flex flex-col w-full gap-1 bg-secondary/90 p-3 md:gap-[0.35vw] md:p-[1vw]">
-                                    <HoverExpand
-                                        class="w-full text-sm font-semibold md:text-[1vw] md:leading-[1.35vw] text-accent"
-                                        height="md:max-h-[1.35vw] md:hover:max-h-[10vw]"
-                                    >
-                                        {anime.name}
-                                    </HoverExpand>
-                                    <anime_info class="flex items-center gap-2 text-xs leading-none md:gap-[0.5vw] md:text-[0.8vw]">
-                                        <genre>{anime.genres[0]}</genre>
-                                        <Circle class="w-1 opacity-75 md:w-[0.25vw]" />
-                                        <episodes_count>{anime.episodes_count} eps</episodes_count>
-                                    </anime_info>
-                                </div>
-                            </anime-info>
                         </div>
-                    </a>
+                        <div class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
+                            <div class="flex flex-col gap-1 bg-secondary/95 p-3 md:gap-[0.35vw] md:p-[1vw]">
+                                <ScrollArea
+                                    gradient_mask={true}
+                                    parent_class="flex md:max-h-[1.35vw] md:leading-[1.35vw] hover:max-h-[10vw] duration-300"
+                                    class="line-clamp-1 text-sm font-semibold md:line-clamp-none md:text-[1vw]"
+                                >
+                                    {anime.name}
+                                </ScrollArea>
+                                <span class="text-surface-50 flex items-center gap-2 text-xs leading-none md:gap-[0.5vw] md:text-[0.8vw]">
+                                    {anime.studios}
+                                </span>
+                            </div>
+                        </div>
+                    </button>
+                
+                    <button
+                        tabindex="0"
+                        class="dropdown-content top-0 z-10 hidden flex-col leading-none md:flex md:w-[20vw]"
+                    >
+                        <div
+                            class="flex flex-col bg-neutral text-start md:gap-[0.35vw] md:rounded-[0.75vw] md:rounded-t-[0.3vw] md:p-[1vw]"
+                        >
+                            <anime-name class="font-semibold text-accent md:text-[1vw] md:leading-[1.25vw]">
+                                {anime.name}
+                            </anime-name>
+                            <div class="text-surface-50 flex w-full items-center md:gap-[0.35vw] md:text-[0.8vw]">
+                                <rating class="flex items-center md:gap-[0.5vw]">
+                                    <Expand class="md:w-[0.9vw]" />
+                                    <span class="text-surface-50 leading-none md:text-[0.8vw]">4.5 rating</span>
+                                </rating>
+                                <Circle class="w-1 md:w-[0.25vw]" />
+                                <anime-type>TV</anime-type>
+                                <Circle class="w-1 md:w-[0.25vw]" />
+                                <episodes-count>
+                                    {anime.episodes_count} eps
+                                </episodes-count>
+                            </div>
+                            <studio class="text-surface-50 md:text-[0.75vw]">
+                                <span>{anime.studios}</span>
+                            </studio>
+                            <genres class="flex items-center md:my-[0.35vw] md:gap-[0.5vw]">
+                                {#each anime.genres as genre}
+                                    <genre
+                                        class="bg-warning font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]"
+                                    >
+                                        {genre}
+                                    </genre>
+                                {/each}
+                            </genres>
+                            <ScrollArea
+                                gradient_mask={true}
+                                parent_class="md:max-h-[4vw]"
+                                class="text-surface-50 md:text-[0.8vw] md:leading-[1vw]"
+                            >
+                                {anime.synopsis}
+                            </ScrollArea>
+                            <div class="divider md:m-0 md:before:h-[0.15vw] md:after:h-[0.15vw]"></div>
+                            <options class="flex items-center md:gap-[0.5vw]">
+                                <a
+                                    href="/anime/mal/1/episode/4"
+                                    class="btn btn-primary h-[2.75vw] min-h-full flex-1 leading-none text-accent md:rounded-[0.5vw]"
+                                >
+                                    <Play class="md:w-[0.9vw]" />
+                                    <span class="font-semibold md:text-[0.9vw]">1</span>
+                                </a>
+                                <a
+                                    href="/anime/mal/{anime.id}"
+                                    class="btn btn-square h-[2.75vw] min-h-full p-0 leading-none md:rounded-[0.5vw]"
+                                >
+                                    <Info class="md:w-[1.2vw]" />
+                                </a>
+                            </options>
+                        </div>
+                    </button>
+                </div>
                 {/each}
             </div>
         {/if}
