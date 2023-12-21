@@ -172,7 +172,7 @@
                         />
                         {#if selected_items.length > 0}
                             <button
-                                on:click={() => clear_selected_items(option[0])}
+                                on:click|preventDefault={() => clear_selected_items(option[0])}
                                 class="btn !bg-transparent border-none absolute right-0 mr-3 w-4 p-0 md:mr-[1vw] md:w-[1vw]"
                             >
                                 <Cross class="md:w-[1vw]" />
