@@ -7,8 +7,8 @@
     import Cross from "$icons/Cross/Index.svelte";
     import Chevron from "$icons/Chevron/Index.svelte";
     import Circle from "$icons/Circle/Index.svelte";
-    import Expand from "$icons/ArrowUpRight/Index.svelte";
-    import SixGrids from "$icons/Settings/Index.svelte";
+    import Expand from "$icons/Expand/Index.svelte";
+    import SixGrids from "$icons/SixGrids/Index.svelte";
     import { scale } from "svelte/transition";
     import { FormatDate } from "$functions/format_date";
     import HoverExpand from "$components/minor/HoverExpand/Index.svelte";
