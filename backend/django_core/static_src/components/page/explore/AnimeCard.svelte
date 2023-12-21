@@ -79,25 +79,21 @@
         <div
             class="flex flex-col bg-neutral text-start md:gap-[0.35vw] md:rounded-[0.75vw] md:rounded-t-[0.3vw] md:p-[1vw]"
         >
-            <anime-name class="font-semibold text-accent md:text-[1vw] md:leading-[1.25vw]">
-                {anime_name}
-            </anime-name>
+            <span class="font-semibold text-accent md:text-[1vw] md:leading-[1.25vw]">{anime_name}</span>
             <div class="text-surface-50 flex w-full items-center md:gap-[0.35vw] md:text-[0.8vw]">
-                <rating class="flex items-center md:gap-[0.5vw]">
+                <div class="flex items-center md:gap-[0.5vw]">
                     <Star class="md:w-[0.9vw]" />
                     <span class="text-surface-50 leading-none md:text-[0.8vw]">4.5 rating</span>
-                </rating>
+                </div>
                 <Circle class="w-1 md:w-[0.25vw]" />
-                <anime-type>TV</anime-type>
+                <span>TV</span>
                 <Circle class="w-1 md:w-[0.25vw]" />
-                <episodes-count>
-                    {anime_total_episodes} episdoes
-                </episodes-count>
+                <span>{anime_total_episodes} episdoes</span>
             </div>
-            <studio class="text-surface-50 md:text-[0.75vw]">
+            <div class="text-surface-50 md:text-[0.75vw]">
                 <span>{anime_studio}</span>
-            </studio>
-            <genres class="flex items-center md:my-[0.35vw] md:gap-[0.5vw]">
+            </div>
+            <div class="flex items-center md:my-[0.35vw] md:gap-[0.5vw]">
                 {#each anime_genres as item}
                     <genre
                         class="bg-warning font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]"
@@ -105,7 +101,7 @@
                         {item}
                     </genre>
                 {/each}
-            </genres>
+            </div>
             <ScrollArea
                 gradient_mask
                 offset_scrollbar
@@ -115,13 +111,13 @@
                 {anime_synopsis}
             </ScrollArea>
             <div class="divider md:m-0 md:before:h-[0.15vw] md:after:h-[0.15vw]"></div>
-            <options class="flex items-center md:gap-[0.5vw]">
+            <div class="flex items-center md:gap-[0.5vw]">
                 <a
-                    href="/anime/mal/1/episode/4"
+                    href="/anime/mal/1/episode/1"
                     class="btn btn-primary h-[2.75vw] min-h-full flex-1 leading-none text-accent md:rounded-[0.5vw]"
                 >
                     <Play class="md:w-[0.9vw]" />
-                    <span class="font-semibold md:text-[0.9vw]">Episode 1</span>
+                    <span class="font-semibold md:text-[0.9vw]">Start Watching</span>
                 </a>
                 <a
                     href="/anime/mal/1"
@@ -129,7 +125,7 @@
                 >
                     <Info class="md:w-[1.2vw]" />
                 </a>
-            </options>
+            </div>
         </div>
     </button>
 </div>
