@@ -1,10 +1,7 @@
-import { ajax } from "htmx.org";
-
-// Constants
-const urls = window.urls;
+import htmx from "htmx.org";
 
 export function reverse(view: string, ...args: Array<string | number>) {
-    const url = urls.get(view);
+    const url = window.urls.get(view);
     if (!url) {
         throw new Error(`No Match found for ${view}`);
     }
@@ -33,18 +30,17 @@ export function reverse(view: string, ...args: Array<string | number>) {
 }
 
 export async function goto({ url, verb, target }: { url: string; verb?: "GET" | "POST"; target: string }): Promise<void> {
-    if (!verb) {
-        verb = "GET";
-    }
-    if (!url.endsWith("/")) {
-        url = `${url}/`;
-    }
+    // WHAT KIND OF FUCKERY IS THIS
+    // FUCK HTMX
+    // related : https://github.com/bigskysoftware/htmx/discussions/2116
+    // related : https://www.reddit.com/r/htmx/comments/18np8pk/how_to_make_ajax_update_the_history_cache/
+    const btn = document.createElement("button");
+    btn.setAttribute(`hx-${verb?.toLowerCase()}`, url);
+    btn.setAttribute("hx-push-url", url);
+    btn.setAttribute("hx-target", target);
 
-    window.history.pushState({}, "", url);
-
-    const res = await ajax(verb, url, {
-        target: target
-    });
-
-    console.log(res);
+    btn.style.display = "hidden";
+    htmx.process(btn);
+    document.body.appendChild(btn);
+    btn.click();
 }
