@@ -41,7 +41,7 @@ const mapping = [
     { tagname: `recent`, component: await import("./Recent/Index.svelte") },
     { tagname: `record`, component: await import("./Record/Index.svelte") },
     { tagname: `refresh`, component: await import("./Refresh/Index.svelte") },
-    { tagname: `search`, component: await import("./Star/Index.svelte") },
+    { tagname: `search`, component: await import("./Search/Index.svelte") },
     { tagname: `star`, component: await import("./Star/Index.svelte") },
     { tagname: `share`, component: await import("./Share/Index.svelte") },
     { tagname: `settings`, component: await import("./Settings/Index.svelte") },
