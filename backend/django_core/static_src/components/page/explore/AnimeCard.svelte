@@ -12,26 +12,34 @@
     import Play from "$icons/Play/Index.svelte";
     import Info from "$icons/Info/Index.svelte";
 
-    let main_element: HTMLElement;
+    // Bindings
+    let main_element: HTMLElement,
+        dropdown_cont_el: HTMLButtonElement;
+
+    let is_overflowing: boolean;
 
     // Styles
-    let style_left: string;
 
     // Both of these functions require that parentElement is not changed
     // Please tatoo dont change the position of the element
     function calculate_style() {
-        style_left = window.getComputedStyle(main_element).width;
+        const dropdown_cont_rect = dropdown_cont_el.getBoundingClientRect();
+        const main_element_rect = main_element.getBoundingClientRect();
+        const parent_element_gap = parseInt((getComputedStyle(main_element.parentElement!)?.gap));
+
+        // udpate position
+        is_overflowing = main_element_rect.right + dropdown_cont_rect.width + parent_element_gap > window.innerWidth;
     }
 </script>
 
 <div
     class="dropdown dropdown-hover"
+    class:dropdown-right={!is_overflowing}
+    class:dropdown-left={is_overflowing}
     bind:this={main_element}
 >
     <button
-        on:mouseenter|preventDefault={() => {
-            calculate_style();
-        }}
+        on:mouseenter|preventDefault={calculate_style}
         class="relative"
         tabindex="0"
         aria-expanded={false}
@@ -63,9 +71,9 @@
     </button>
 
     <button
+        bind:this={dropdown_cont_el}
         tabindex="0"
-        class="dropdown-content top-0 z-10 hidden flex-col leading-none md:flex md:w-[20vw] md:pl-[1.5vw]"
-        style="left:{style_left};"
+        class="dropdown-content top-0 z-10 hidden flex-col leading-none md:flex md:w-[20vw] md:px-[1.5vw]"
     >
         <div class="flex flex-col bg-neutral text-start md:gap-[0.35vw] md:rounded-[0.75vw] md:rounded-t-[0.3vw] md:p-[1vw]">
             <span class="font-semibold text-accent md:text-[1vw] md:leading-[1.25vw]">{anime_name}</span>
