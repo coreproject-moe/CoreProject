@@ -13,14 +13,15 @@
             title: string;
             class: string;
             value: string;
-            items?: Record<string, string>;
-            selected_items?: Array<[string, string]>;
+            items: Record<string, string> | null;
+            selected_items: Array<[string, string]> | null;
         };
     } = {
         time_range: {
             title: "Time Range",
             class: "hidden flex-col md:gap-[0.35vw]",
             value: "",
+            items: {},
             selected_items: []
         },
         genres: {
@@ -73,12 +74,14 @@
             title: "Airing Status",
             class: "hidden flex-col md:gap-[0.35vw]",
             value: "",
+            items: {},
             selected_items: []
         },
         sort_by: {
             title: "Sort by",
             class: "hidden flex-col md:gap-[0.35vw]",
             value: "",
+            items: {},
             selected_items: []
         }
     };
@@ -86,12 +89,12 @@
     // Functions
     const update_selected_items = (key: string, selected_item: [string, string]) => {
         let filter_option = filter_options_mapping[key];
-        let is_selected = filter_option.selected_items?.some((item) => item[0] === selected_item[0]);
+        let is_selected = filter_option.selected_items!.some((item) => item[0] === selected_item[0]);
 
         if (is_selected) {
-            filter_option.selected_items = filter_option.selected_items?.filter((item) => item[0] !== selected_item[0]);
+            filter_option.selected_items = filter_option.selected_items!.filter((item) => item[0] !== selected_item[0]);
         } else {
-            filter_option.selected_items = [...filter_option.selected_items, selected_item];
+            filter_option.selected_items = [...filter_option.selected_items!, selected_item];
         }
 
         // update filer_options_mapping
@@ -148,19 +151,21 @@
                     <span class="font-semibold leading-none md:text-[1vw]">{title}</span>
                     <div class="relative flex items-center">
                         <span class="absolute flex items-center md:gap-[0.25vw] cursor-pointer opacity-100 duration-300 group-focus-within:opacity-0">
-                            {#if selected_items.length > 0}
-                                <span class="ml-3 badge badge-primary rounded p-1 text-sm font-semibold md:ml-[0.75vw] md:rounded-[0.25vw] md:p-[0.35vw] md:text-[0.85vw] md:h-[1.5vw]">
-                                    <!-- show first item -->
-                                    {selected_items[0][1]}
-                                </span>
+                            {#if selected_items}
+                                {#if selected_items.length > 0}
+                                    <span class="ml-3 badge badge-primary rounded p-1 text-sm font-semibold md:ml-[0.75vw] md:rounded-[0.25vw] md:p-[0.35vw] md:text-[0.85vw] md:h-[1.5vw]">
+                                        <!-- show first item -->
+                                        {selected_items[0][1]}
+                                    </span>
+                                {:else}
+                                    <span class="ml-3 text-base md:ml-[1vw] md:text-[0.9vw]">Any</span>
+                                {/if}
                                 <!-- show count of remaining items if exists -->
                                 {#if selected_items.length > 1}
                                     <span class="ml-1 rounded badge md:h-[1.5vw] p-1 text-sm font-semibold md:ml-[0.15vw] md:rounded-[0.25vw] md:p-[0.35vw] md:text-[0.85vw]">
                                         +{selected_items.filter((item) => item !== selected_items[0]).length}
                                     </span>
                                 {/if}
-                            {:else}
-                                <span class="ml-3 text-base md:ml-[1vw] md:text-[0.9vw]">Any</span>
                             {/if}
                         </span>
                         <input
@@ -170,13 +175,15 @@
                             tabindex="0" role="button"
                             class="peer w-full rounded-lg border-none bg-neutral py-3 text-base leading-none placeholder focus:ring-0 md:w-[11vw] md:rounded-[0.5vw] md:bg-neutral text-neutral-content md:py-[0.8vw] md:pl-[1vw] md:text-[1vw] placeholder:font-medium font-semibold"
                         />
-                        {#if selected_items.length > 0}
-                            <button
-                                on:click|preventDefault={() => clear_selected_items(option[0])}
-                                class="btn !bg-transparent border-none absolute right-0 mr-3 w-4 p-0 md:mr-[1vw] md:w-[1vw]"
-                            >
-                                <Cross class="md:w-[1vw]" />
-                            </button>
+                        {#if selected_items}
+                            {#if selected_items.length > 0}
+                                <button
+                                    on:click|preventDefault={() => clear_selected_items(option[0])}
+                                    class="btn !bg-transparent border-none absolute right-0 mr-3 w-4 p-0 md:mr-[1vw] md:w-[1vw]"
+                                >
+                                    <Cross class="md:w-[1vw]" />
+                                </button>
+                            {/if}
                         {:else}
                             <button class="btn !bg-transparent border-none absolute right-0 mr-3 w-4 p-0 md:mr-[1vw] md:w-[1vw]">
                                 <Chevron class="md:w-[1vw]" />
@@ -197,7 +204,7 @@
                                     {@const key = item[0]}
                                     {@const value = item[1]}
 
-                                    {@const is_selected = selected_items.some(selected_item => selected_item[0] === key)}
+                                    {@const is_selected = selected_items?.some(selected_item => selected_item[0] === key)}
 
                                     <button
                                         on:click|preventDefault={() => update_selected_items(option[0], item)}
