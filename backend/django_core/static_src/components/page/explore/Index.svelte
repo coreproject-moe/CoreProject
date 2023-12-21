@@ -14,7 +14,7 @@
             class: string;
             value: string;
             items?: Record<string, string> | undefined;
-            selected_items: Array<[string, string]>;
+            selected_items?: Array<[string, string]>;
         };
     } = {
         time_range: {
