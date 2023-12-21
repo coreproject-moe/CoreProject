@@ -13,7 +13,7 @@
             title: string;
             class: string;
             value: string;
-            items?: Record<string, string> | undefined;
+            items?: Record<string, string>;
             selected_items?: Array<[string, string]>;
         };
     } = {
