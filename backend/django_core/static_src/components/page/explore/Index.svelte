@@ -105,9 +105,9 @@
 
 <section class="mt-20 flex flex-col p-5 md:mt-0 md:gap-[1.5vw] md:pb-[2.5vw] md:pl-[1.5vw] md:pr-[3.75vw] md:pt-0">
     <div class="flex flex-col gap-2 md:gap-[0.5vw]">
-        <span class="text-2xl font-bold leading-none md:text-[2vw]">
+        <div class="text-2xl font-bold leading-none md:text-[2vw]">
             Anime <span class="text-warning">Explore</span>
-        </span>
+        </div>
         <span class="text-base font-normal leading-none md:text-[1.1vw]">Unleash your inner Otaku: Explore anime wonders</span>
     </div>
 
