@@ -1,4 +1,5 @@
 <script lang="ts">
+    export let anime_mal_id: number;
     export let anime_name: string;
     export let anime_image: string;
     export let anime_total_episodes: number;
@@ -108,14 +109,14 @@
             <div class="divider md:m-0 md:before:h-[0.15vw] md:after:h-[0.15vw]"></div>
             <div class="flex items-center md:gap-[0.5vw]">
                 <a
-                    href="/anime/mal/1/episode/1"
+                    href="/anime/mal/{anime_mal_id}/episode/1"
                     class="btn btn-primary h-[2.75vw] min-h-full flex-1 leading-none text-accent md:rounded-[0.5vw]"
                 >
                     <Play class="md:w-[0.9vw]" />
                     <span class="font-semibold md:text-[0.9vw]">Start Watching</span>
                 </a>
                 <a
-                    href="/anime/mal/1"
+                    href="/anime/mal/{anime_mal_id}"
                     class="btn btn-square h-[2.75vw] min-h-full p-0 leading-none md:rounded-[0.5vw]"
                 >
                     <Info class="md:w-[1.2vw]" />

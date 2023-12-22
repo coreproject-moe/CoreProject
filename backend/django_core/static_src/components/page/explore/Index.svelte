@@ -390,6 +390,7 @@
                         >
                             {#each results as item}
                                 <AnimeCard
+                                    anime_mal_id={item.mal_id}
                                     anime_name={item.name ?? "N/A"}
                                     anime_studio={item.studios}
                                     anime_image={item.cover ?? ""}
