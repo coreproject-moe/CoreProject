@@ -127,8 +127,9 @@
             handle_input();
         },
         clear_selected_items = (key: string) => {
-            // update filter_options_mapping
             filter_options_mapping[key].selected_items = [];
+            // run fetch
+            handle_input();
         },
         change_thumbnail_mode = (mode: typeof thumbnail_mode) => {
             thumbnail_mode = mode;
