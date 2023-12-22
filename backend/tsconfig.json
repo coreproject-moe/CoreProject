@@ -1,5 +1,5 @@
 {
-    "include": ["./**/*.ts", "./**/*.tsx", "django_core/static_src/components/index.ts"],
+    "include": ["./**/*.ts", "./**/*.tsx", "django_core/static_src/components/index.ts", "django_core/static_src/functions/get_image.ts"],
     "exclude": ["node_modules", "postcss.config.cjs", "django_core/static"],
     "compilerOptions": {
         "lib": ["esnext", "DOM", "DOM.Iterable"],
@@ -16,6 +16,8 @@
         "sourceMap": true,
         "strict": true,
         "paths": {
+            "$stores": ["./django_core/static_src/stores"],
+            "$stores/*": ["./django_core/static_src/stores/*"],
             "$functions": ["./django_core/static_src/functions/"],
             "$functions/*": ["./django_core/static_src/functions/*"],
             "$icons": ["./django_core/static_src/components/icons/"],

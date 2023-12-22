@@ -3,7 +3,7 @@
     import { goto, reverse } from "$functions/urls";
     import * as _ from "lodash-es";
     import { blur } from "svelte/transition";
-    import { url } from "../../../stores/url";
+    import { url } from "$stores/url";
 
     // Import Icons
     import Home from "$icons/Home/Index.svelte";
