@@ -1,5 +1,7 @@
+import isBoolean from "lodash/isBoolean";
+
 export function string_to_boolean(variable: string | boolean): boolean {
-    if (typeof variable === "boolean") {
+    if (isBoolean(variable)) {
         return variable;
     }
 
