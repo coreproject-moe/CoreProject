@@ -27,6 +27,7 @@
 
     const handle_input = async () => {
         search_promise = get_anime_with_serach_parameters();
+        console.log(Array.from(filter_options_mapping["genres"].selected_items!));
     };
 
     onMount(async () => (search_promise = get_anime_with_serach_parameters()));
@@ -38,7 +39,7 @@
             class: string;
             value: string;
             items: Record<string, string> | null;
-            selected_items: Record<string, string>[] | null;
+            selected_items: string[] | null;
         };
     } = {
         time_range: {
@@ -114,12 +115,12 @@
     const update_selected_items = (key: string, selected_item: Record<string, string>) => {
             const selected_item_key = Object.values(selected_item)[0];
             let filter_option = filter_options_mapping[key];
-            let is_selected = filter_option.selected_items!.some(({key}) => key === selected_item_key);
+            let is_selected = filter_option.selected_items!.some((item) => item === selected_item_key);
 
             if (is_selected) {
-                filter_option.selected_items = filter_option.selected_items!.filter(({key}) => key !== selected_item_key);
+                filter_option.selected_items = filter_option.selected_items!.filter((item) => item !== selected_item_key);
             } else {
-                filter_option.selected_items = [...filter_option.selected_items!, selected_item];
+                filter_option.selected_items = [...filter_option.selected_items!, selected_item_key];
             }
 
             // update filer_options_mapping
@@ -219,9 +220,9 @@
                         <span class="absolute flex cursor-pointer items-center md:gap-[0.25vw]">
                             {#if selected_items}
                                 {#if !_.isEmpty(selected_items)}
-                                    <span class="badge badge-primary ml-3 rounded p-1 text-sm font-semibold md:ml-[0.75vw] md:h-[1.5vw] md:rounded-[0.25vw] md:p-[0.35vw] md:text-[0.85vw]">
+                                    <span class="capitalize badge badge-primary ml-3 rounded p-1 text-sm font-semibold md:ml-[0.75vw] md:h-[1.5vw] md:rounded-[0.25vw] md:p-[0.35vw] md:text-[0.85vw]">
                                         <!-- show first item -->
-                                        {selected_items[0].value}
+                                        {selected_items[0]}
                                     </span>
                                 {:else}
                                     <span class="ml-3 text-base duration-300 group-focus-within:opacity-0 md:ml-[1vw] md:text-[0.9vw]">Any</span>
