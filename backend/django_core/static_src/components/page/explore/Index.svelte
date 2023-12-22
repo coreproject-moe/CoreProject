@@ -1,4 +1,5 @@
 <script lang="ts">
+    import * as _ from "lodash-es";
     import { cn } from "$functions/classname";
     import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
     import Tick from "$icons/Tick/Index.svelte";
@@ -17,6 +18,7 @@
     import { reverse } from "$functions/urls";
     import { Anime } from "../../../types/anime";
     import { onMount } from "svelte";
+    import { isEmpty } from "lodash-es";
 
     // Binding
     let result_animes_element: HTMLDivElement;
@@ -215,7 +217,7 @@
                     <div class="relative flex items-center">
                         <span class="absolute flex cursor-pointer items-center md:gap-[0.25vw]">
                             {#if selected_items}
-                                {#if selected_items.length > 0}
+                                {#if !_.isEmpty(selected_items)}
                                     <span class="badge badge-primary ml-3 rounded p-1 text-sm font-semibold md:ml-[0.75vw] md:h-[1.5vw] md:rounded-[0.25vw] md:p-[0.35vw] md:text-[0.85vw]">
                                         <!-- show first item -->
                                         {selected_items[0][1]}
@@ -240,7 +242,7 @@
                             class="peer placeholder w-full rounded-lg border-none bg-neutral py-3 text-base font-semibold leading-none text-neutral-content placeholder:font-medium focus:ring-0 md:w-[11vw] md:rounded-[0.5vw] md:bg-neutral md:py-[0.8vw] md:pl-[1vw] md:text-[1vw]"
                         />
                         {#if selected_items}
-                            {#if selected_items.length > 0}
+                            {#if !_.isEmpty(selected_items)}
                                 <button
                                     on:click|preventDefault={() => clear_selected_items(option[0])}
                                     class="btn absolute right-0 mr-3 w-4 border-none !bg-transparent p-0 md:mr-[1vw] md:w-[1vw]"

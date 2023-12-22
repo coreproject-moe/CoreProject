@@ -15,6 +15,7 @@
     import { cn } from "$functions/classname";
     import { string_to_boolean } from "$functions/string_to_bool";
 
+    import * as _ from "lodash-es";
     // Bindings
     let user_reaction: typeof item.user_reaction,
         ratio: typeof item.ratio,
@@ -208,7 +209,7 @@
     </div>
 </div>
 
-{#if item.child.length === 0 && item.childrens != 0}
+{#if _.isEmpty(item.child) && item.childrens != 0}
     <div class="flex items-end md:ml-[0.55vw] md:gap-[0.5vw]">
         <svg
             class="text-neutral md:w-[2vw]"

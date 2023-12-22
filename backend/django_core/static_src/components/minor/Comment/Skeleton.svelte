@@ -1,6 +1,6 @@
 <script lang="ts">
     import { cn } from "$functions/classname";
-
+    import * as _ from "lodash-es";
     type Tree = {
         class: string;
         child?: Tree[];
@@ -97,7 +97,7 @@
                 <div class="skeleton rounded-full bg-neutral md:h-[0.5vw] md:w-[2vw]" />
                 <div class="skeleton rounded-full bg-neutral md:h-[0.5vw] md:w-[2vw]" />
             </div>
-            {#if tree.child && tree.child.length !== 0}
+            {#if tree.child && !_.isEmpty(tree.child)}
                 <svelte:self tree_branch={tree.child} />
             {/if}
         </div>

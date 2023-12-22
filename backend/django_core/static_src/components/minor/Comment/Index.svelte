@@ -6,7 +6,8 @@
     import ErrorSvelteComponent from "./Error.svelte";
     import type { Comment } from "../../../types/comment";
     import { comment_needs_update } from "./store";
-    import { onDestroy, onMount } from "svelte";
+    import { onMount } from "svelte";
+    import * as _ from "lodash-es";
     import IntersectionOberser from "$components/svelte/IntersectionOberser.svelte";
 
     export let api_url: string;
@@ -104,7 +105,7 @@
         <ErrorSvelteComponent {error} />
     {/if}
 {:else if loading_state === "loaded"}
-    {#if tree_branch.length !== 0}
+    {#if !_.isEmpty(tree_branch)}
         <div class="flex flex-col md:gap-[1.5vw]">
             {#each tree_branch as branch}
                 <CommetBlock item={branch} />

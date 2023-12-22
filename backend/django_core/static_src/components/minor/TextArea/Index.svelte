@@ -1,4 +1,5 @@
 <script lang="ts">
+    import * as _ from "lodash-es";
     import emojis from "../../../data/emoji.json";
     import { cn } from "$functions/classname";
     import { is_valid_url } from "$functions/is_valid_url";
@@ -500,7 +501,7 @@
         core editor
     </button>
 </div>
-{#if show_emoji_picker && emoji_matches.length > 0}
+{#if show_emoji_picker && !_.isEmpty(emoji_matches)}
     <div
         class="absolute flex min-w-[12vw] flex-col divide-y divide-accent/10 overflow-hidden rounded-[0.5vw] bg-neutral text-[1vw] text-accent"
         style:top={caret_offset_top}
