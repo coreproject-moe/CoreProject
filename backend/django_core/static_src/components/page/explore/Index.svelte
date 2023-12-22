@@ -390,12 +390,13 @@
                         >
                             {#each results as item}
                                 <AnimeCard
-                                    anime_name={item.name ?? ""}
+                                    anime_name={item.name ?? "N/A"}
                                     anime_studio={item.studios}
                                     anime_image={item.cover ?? ""}
                                     anime_genres={item.genres}
                                     anime_synopsis={item.synopsis}
                                     anime_total_episodes={item.episode_count}
+                                    anime_rating={item.rating ?? "N/A"}
                                 />
                             {/each}
                         </div>

@@ -3,8 +3,9 @@
     export let anime_image: string;
     export let anime_total_episodes: number;
     export let anime_synopsis: string;
-    export let anime_studio: string[];
-    export let anime_genres: string[];
+    export let anime_studio: any;
+    export let anime_genres: any;
+    export let anime_rating: string;
 
     import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
     import Star from "$icons/Star/Index.svelte";
@@ -54,12 +55,12 @@
                     gradient_mask
                     offset_scrollbar
                     parent_class="flex md:max-h-[1.35vw] md:leading-[1.35vw] hover:max-h-[10vw] duration-300"
-                    class="line-clamp-1 text-sm font-semibold md:line-clamp-none md:text-[1vw]"
+                    class="line-clamp-1 text-sm font-semibold md:line-clamp-none md:text-[1vw] text-accent"
                 >
                     {anime_name}
                 </ScrollArea>
                 <span class="text-surface-50 flex items-center gap-2 text-xs leading-none md:gap-[0.5vw] md:text-[0.8vw]">
-                    {anime_studio}
+                    {anime_studio[0].name}
                 </span>
             </div>
         </div>
@@ -75,7 +76,7 @@
             <div class="text-surface-50 flex w-full items-center md:gap-[0.35vw] md:text-[0.8vw]">
                 <div class="flex items-center md:gap-[0.5vw]">
                     <Star class="md:w-[0.9vw]" />
-                    <span class="text-surface-50 leading-none md:text-[0.8vw]">4.5 rating</span>
+                    <span class="text-surface-50 leading-none md:text-[0.8vw]">{anime_rating} rating</span>
                 </div>
                 <Circle class="w-1 md:w-[0.25vw]" />
                 <span>TV</span>
@@ -83,13 +84,17 @@
                 <span>{anime_total_episodes} episdoes</span>
             </div>
             <div class="text-surface-50 md:text-[0.75vw]">
-                <span>{anime_studio}</span>
+                <span>
+                    {#each anime_studio as studio}
+                        {studio.name}
+                    {/each}
+                </span>
             </div>
             <div class="flex items-center md:my-[0.35vw] md:gap-[0.5vw]">
-                {#each anime_genres as item}
-                    <genre class="bg-warning font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
-                        {item}
-                    </genre>
+                {#each anime_genres as genre}
+                    <spam class="bg-warning font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
+                        {genre.name}
+                    </spam>
                 {/each}
             </div>
             <ScrollArea
