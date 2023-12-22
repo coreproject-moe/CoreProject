@@ -1,5 +1,9 @@
-export function string_to_boolean(string: string) {
-    switch (string.toLowerCase()) {
+export function string_to_boolean(variable: string | boolean): boolean {
+    if (typeof variable === "boolean") {
+        return variable;
+    }
+
+    switch (variable.toLowerCase()) {
         case "true": {
             return true;
         }
@@ -7,7 +11,7 @@ export function string_to_boolean(string: string) {
             return false;
         }
         default: {
-            throw new Error("String is not convertable to boolean");
+            throw new Error("variable is not convertable to boolean");
         }
     }
 }
