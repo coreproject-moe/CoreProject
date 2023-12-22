@@ -22,7 +22,7 @@
     let result_animes_element: HTMLDivElement;
     let search_query = "";
 
-    const handle_input = async () => {
+    const handle_fetch = async () => {
         search_promise = get_anime_with_serach_parameters();
     };
 
@@ -120,6 +120,8 @@
 
             // update filer_options_mapping
             filter_options_mapping[key] = filter_option;
+            // run fetch
+            handle_fetch();
         },
         clear_selected_items = (key: string) => {
             // update filter_options_mapping
@@ -135,7 +137,10 @@
         if (string_to_boolean(window.user_authenticated)) {
             headers["X-CSRFToken"] = window.csrfmiddlewaretoken;
         }
-        const res = await fetch(reverse(`anime-list`) + "?" + new URLSearchParams({ name: search_query }), {
+        const res = await fetch(reverse(`anime-list`) + "?" + new URLSearchParams({ 
+            name: search_query,
+            genre: filter_options_mapping["genres"].selected_items?.join() ?? "",
+        }), {
             method: "GET",
             headers: {
                 Accept: "application/json",
@@ -187,7 +192,7 @@
                     </div>
                     <input
                         bind:value={search_query}
-                        on:input={handle_input}
+                        on:input={handle_fetch}
                         type="text"
                         placeholder="Looking for specific anime? Start from here..."
                         class="w-[30vw] rounded-[0.5vw] border-none bg-neutral py-[0.8vw] pl-[3vw] text-[1vw] font-semibold leading-none text-neutral-content placeholder:font-medium placeholder:text-neutral-content/75 focus:ring-0 md:bg-neutral"
