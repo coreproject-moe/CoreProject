@@ -5,7 +5,7 @@
 
     let klass = "";
     export { klass as class };
-    export let remove_gradient_on_mouse_enter: string | null;
+    export let remove_gradient_on_mouse_enter: string = "false";
     export let parent_class = "";
     export let offset_scrollbar = "false";
     export let gradient_mask = "false";

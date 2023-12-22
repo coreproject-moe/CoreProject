@@ -26,7 +26,7 @@
         search_promise = get_anime_with_serach_parameters();
     };
 
-    onMount(async () => search_promise = get_anime_with_serach_parameters());
+    onMount(async () => (search_promise = get_anime_with_serach_parameters()));
 
     // Mapping
     let filter_options_mapping: {
@@ -137,19 +137,24 @@
         if (string_to_boolean(window.user_authenticated)) {
             headers["X-CSRFToken"] = window.csrfmiddlewaretoken;
         }
-        const res = await fetch(reverse(`anime-list`) + "?" + new URLSearchParams({
-            name: search_query,
-            genre: filter_options_mapping["genres"].selected_items?.join() ?? "",
-        }), {
-            method: "GET",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
+        const res = await fetch(
+            reverse(`anime-list`) +
+                "?" +
+                new URLSearchParams({
+                    name: search_query,
+                    genre: filter_options_mapping["genres"].selected_items?.join() ?? ""
+                }),
+            {
+                method: "GET",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json"
+                }
             }
-        });
+        );
         const json = await res.json();
         if (res.ok) {
-            console.log(json["results"])
+            console.log(json["results"]);
             return json["results"] as Array<Anime>;
         } else {
             throw new Error("Something is wrong from the backend");
@@ -349,7 +354,7 @@
                                                     {anime.name}
                                                 </HoverExpand>
                                                 <span class="line-clamp-1 text-xs md:line-clamp-none md:text-[0.8vw]">
-                                                    {anime.studios[0].name}
+                                                    {anime?.studios?.[0].name ?? ""}
                                                 </span>
                                             </div>
                                         </div>
@@ -366,8 +371,8 @@
                                                 <span class="text-xs md:text-[0.8vw]">{anime.episode_count} eps</span>
                                             </div>
                                             <ScrollArea
-                                                offset_scrollbar
-                                                gradient_mask
+                                                offset_scrollbar="true"
+                                                gradient_mask="true"
                                                 parent_class="max-h-24 md:max-h-[11vw] md:mt-[0.5vw]"
                                                 class="text-surface-300 text-xs leading-snug md:text-justify md:text-[0.85vw] md:leading-[1vw]"
                                             >
@@ -376,9 +381,9 @@
                                         </div>
 
                                         <div class="flex items-center gap-2 overflow-x-scroll p-3 scrollbar-none md:gap-[0.5vw] md:p-[1vw]">
-                                            {#each anime.genres as genre}
+                                            {#each anime?.genres ?? [] as genre}
                                                 <span
-                                                    class="capitalize whitespace-nowrap rounded bg-warning p-1 text-xs font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]"
+                                                    class="whitespace-nowrap rounded bg-warning p-1 text-xs font-semibold capitalize leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]"
                                                 >
                                                     {genre.name}
                                                 </span>
@@ -395,13 +400,13 @@
                         >
                             {#each results as item}
                                 <AnimeCard
-                                    anime_mal_id={item.mal_id}
+                                    anime_mal_id={item?.mal_id ?? 0}
                                     anime_name={item.name ?? "N/A"}
-                                    anime_studio={item.studios}
+                                    anime_studio={item.studios ?? []}
                                     anime_image={item.cover ?? ""}
-                                    anime_genres={item.genres}
-                                    anime_synopsis={item.synopsis}
-                                    anime_total_episodes={item.episode_count}
+                                    anime_genres={item.genres ?? []}
+                                    anime_synopsis={item.synopsis ?? ""}
+                                    anime_total_episodes={item.episode_count ?? null}
                                     anime_rating={item.rating ?? "N/A"}
                                 />
                             {/each}

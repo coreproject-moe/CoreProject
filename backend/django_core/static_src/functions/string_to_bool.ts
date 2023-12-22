@@ -5,7 +5,7 @@ export function string_to_boolean(variable: string | boolean): boolean {
         return variable;
     }
 
-    if (isString(variable)) {
+    if (_.isString(variable)) {
         switch (variable.toLowerCase()) {
             case "true": {
                 return true;
