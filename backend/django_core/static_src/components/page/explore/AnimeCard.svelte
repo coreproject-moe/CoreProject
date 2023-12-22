@@ -93,7 +93,7 @@
             </div>
             <div class="flex items-center md:my-[0.35vw] md:gap-[0.5vw]">
                 {#each anime_genres as genre}
-                    <spam class="bg-warning font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
+                    <spam class="capitalize bg-warning font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
                         {genre.name}
                     </spam>
                 {/each}

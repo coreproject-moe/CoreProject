@@ -378,9 +378,9 @@
                                         <div class="flex items-center gap-2 overflow-x-scroll p-3 scrollbar-none md:gap-[0.5vw] md:p-[1vw]">
                                             {#each anime.genres as genre}
                                                 <span
-                                                    class="whitespace-nowrap rounded bg-warning p-1 text-xs font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]"
+                                                    class="capitalize whitespace-nowrap rounded bg-warning p-1 text-xs font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]"
                                                 >
-                                                    {genre}
+                                                    {genre.name}
                                                 </span>
                                             {/each}
                                         </div>
