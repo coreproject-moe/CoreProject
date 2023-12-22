@@ -126,8 +126,8 @@
             <div>
                 <span class="text-surface-50 text-[1.2vw] font-semibold">anime</span>
                 <ScrollArea
-                    offset_scrollbar="true"
-                    gradient_mask="true"
+                    offset_scrollbar
+                    gradient_mask
                     parent_class="md:mt-[0.2vw] md:h-[30vw] md:w-[20vw]"
                     class="w-full"
                 >

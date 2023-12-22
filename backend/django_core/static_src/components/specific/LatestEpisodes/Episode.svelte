@@ -107,8 +107,8 @@
                 {/each}
             </genres>
             <ScrollArea
-                offset_scrollbar="true"
-                gradient_mask="true"
+                offset_scrollbar
+                gradient_mask
                 class="h-[6vw] text-[0.8vw] leading-[1vw] text-accent"
             >
                 {episode.synopsis}

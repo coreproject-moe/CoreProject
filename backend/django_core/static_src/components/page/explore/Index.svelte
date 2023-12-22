@@ -146,7 +146,7 @@
                 "?" +
                 new URLSearchParams({
                     name: search_query,
-                    genre: filter_options_mapping["genres"].selected_items?.join() ?? "",
+                    genre: filter_options_mapping["genres"].selected_items?.join() ?? ""
                 }),
             {
                 method: "GET",
@@ -220,7 +220,7 @@
                         <span class="absolute flex cursor-pointer items-center md:gap-[0.25vw]">
                             {#if selected_items}
                                 {#if !_.isEmpty(selected_items)}
-                                    <span class="capitalize badge badge-primary ml-3 rounded p-1 text-sm font-semibold md:ml-[0.75vw] md:h-[1.5vw] md:rounded-[0.25vw] md:p-[0.35vw] md:text-[0.85vw]">
+                                    <span class="badge badge-primary ml-3 rounded p-1 text-sm font-semibold capitalize md:ml-[0.75vw] md:h-[1.5vw] md:rounded-[0.25vw] md:p-[0.35vw] md:text-[0.85vw]">
                                         <!-- show first item -->
                                         {selected_items[0]}
                                     </span>
@@ -271,7 +271,7 @@
                                     {@const is_selected = selected_items?.some((item) => item === key)}
 
                                     <button
-                                        on:click|preventDefault={() => update_selected_items(option[0], {key, value})}
+                                        on:click|preventDefault={() => update_selected_items(option[0], { key, value })}
                                         class="btn btn-neutral relative flex h-max min-h-max items-center justify-start p-3 text-sm leading-none md:rounded-[0.35vw] md:px-[1vw] md:py-[0.75vw] md:text-[0.9vw]"
                                     >
                                         {value}
@@ -372,8 +372,8 @@
                                                 <span class="text-xs md:text-[0.8vw]">{anime.episode_count} eps</span>
                                             </div>
                                             <ScrollArea
-                                                offset_scrollbar="true"
-                                                gradient_mask="true"
+                                                offset_scrollbar
+                                                gradient_mask
                                                 parent_class="max-h-24 md:max-h-[11vw] md:mt-[0.5vw]"
                                                 class="text-surface-300 text-xs leading-snug md:text-justify md:text-[0.85vw] md:leading-[1vw]"
                                             >
