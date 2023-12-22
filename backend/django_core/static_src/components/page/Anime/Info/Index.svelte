@@ -34,10 +34,15 @@
 
     // Internal logics
     const sencond_mapping = [
+        // anime.source
         { item: "TV", show_dots_after: true },
+        // anime.episode
         { item: `${string_to_number(anime_episodes_count)} eps`, show_dots_after: true },
+        // anime.status
         { item: `completed`, show_dots_after: true },
+        // anime.aired_from
         { item: `spring 2023`, show_dots_after: true },
+        // anime.aired_to
         { item: `Kuschio animation`, show_dots_after: false }
     ];
 </script>
@@ -95,26 +100,21 @@
                                     </div>
                                 </div>
                             </button>
-                            <button
-                                type="button"
-                                class="bg-secondary-100 text-surface-500 btn h-14 w-14 rounded-lg capitalize md:h-[4vw] md:w-[4vw] md:rounded-[0.625vw] md:text-[0.87vw] md:font-semibold"
-                                disabled
-                            >
-                                <div class="flex flex-col items-center gap-2 md:gap-[0.68vw]">
-                                    <Book class="text-surface-500 w-4 md:w-[1.5vw]" />
-                                    <span class="leading-none">read</span>
-                                </div>
-                            </button>
-                            <button
-                                type="button"
-                                class="bg-secondary-100 text-surface-500 btn h-14 w-14 rounded-lg capitalize md:h-[4vw] md:w-[4vw] md:rounded-[0.625vw] md:text-[0.87vw] md:font-semibold"
-                                disabled
-                            >
-                                <div class="flex flex-col items-center gap-2 md:gap-[0.68vw]">
-                                    <Headphone class="text-surface-500 w-4 md:w-[1.5vw]" />
-                                    <span class="leading-none">listen</span>
-                                </div>
-                            </button>
+                            {#each [Book, Headphone] as item}
+                                <button
+                                    type="button"
+                                    class="bg-secondary-100 text-surface-500 btn h-14 w-14 rounded-lg capitalize md:h-[4vw] md:w-[4vw] md:rounded-[0.625vw] md:text-[0.87vw] md:font-semibold"
+                                    disabled
+                                >
+                                    <div class="flex flex-col items-center gap-2 md:gap-[0.68vw]">
+                                        <svelte:component
+                                            this={item}
+                                            class="text-surface-500 w-4 md:w-[1.5vw]"
+                                        ></svelte:component>
+                                        <span class="leading-none">read</span>
+                                    </div>
+                                </button>
+                            {/each}
                         </div>
                         <div class="mt-3 flex gap-2 md:mt-[0.75vw] md:gap-[0.75vw]">
                             <!-- <button
@@ -439,7 +439,8 @@
                     <span class="font-semibold md:text-[0.9vw] md:leading-[0.9vw]">Your rating</span>
                     <div class="flex items-center gap-[0.75vw]">
                         <div>
-                            <div
+                            <!--MIGRATE TO https://daisyui.com/components/rating/-->
+                            <!-- <div
                                 class="ratings text-token fill-token flex w-full justify-center gap-[0.35vw]"
                                 data-testid="rating-bar"
                             >
@@ -551,7 +552,7 @@
                                         ></path>
                                     </svg>
                                 </span>
-                            </div>
+                            </div> -->
                         </div>
                         <span class="font-bold leading-none md:text-[0.95vw]">92%</span>
                         <button class="text-surface-500 btn btn-secondary min-h-full p-[0.3vw] md:h-[1.375vw] md:w-[1.375vw] md:rounded-[0.19vw]">
