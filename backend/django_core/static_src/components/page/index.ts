@@ -2,7 +2,10 @@
 import svelteRetag from "svelte-retag";
 
 // Pages
-const mapping = [{ tagname: `explore`, component: await import("./explore/Index.svelte") }];
+const mapping = [
+    { tagname: `explore`, component: await import("./Explore/Index.svelte") },
+    { tagname: `anime-info`, component: await import("./Anime/Info/Index.svelte") }
+];
 
 mapping.forEach((item) => {
     svelteRetag({
