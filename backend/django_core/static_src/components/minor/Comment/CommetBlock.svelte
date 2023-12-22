@@ -16,6 +16,7 @@
     import { string_to_boolean } from "$functions/string_to_bool";
 
     import * as _ from "lodash-es";
+    import { get_csrf_token } from "$functions/get_csrf_token";
     // Bindings
     let user_reaction: typeof item.user_reaction,
         ratio: typeof item.ratio,
@@ -52,7 +53,7 @@
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json",
-                    "X-CSRFToken": window.csrfmiddlewaretoken
+                    "X-CSRFToken": get_csrf_token()
                 },
                 body: JSON.stringify({
                     reaction: reaction
@@ -68,7 +69,7 @@
                 headers: {
                     Accept: "application/json",
                     "Content-Type": "application/json",
-                    "X-CSRFToken": window.csrfmiddlewaretoken
+                    "X-CSRFToken": get_csrf_token()
                 }
             });
             if (res.ok) {

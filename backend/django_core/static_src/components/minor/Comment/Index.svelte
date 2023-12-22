@@ -9,6 +9,7 @@
     import { onMount } from "svelte";
     import * as _ from "lodash-es";
     import IntersectionOberser from "$components/svelte/IntersectionOberser.svelte";
+    import { get_csrf_token } from "$functions/get_csrf_token";
 
     export let api_url: string;
 
@@ -37,7 +38,7 @@
             const res = await fetch(url, {
                 method: "GET",
                 headers: {
-                    "X-CSRFToken": window.csrfmiddlewaretoken
+                    "X-CSRFToken": get_csrf_token()
                 }
             });
             const value = (await res.json()) as CommentResponse;
