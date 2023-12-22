@@ -8,6 +8,12 @@ export function string_to_boolean(variable: string | boolean): boolean {
     if (_.isBoolean(variable)) {
         return variable;
     }
+    if (_.isUndefined(variable)) {
+        return false;
+    }
+    if (_.isNull(variable)) {
+        return false;
+    }
 
     if (_.isString(variable)) {
         switch (variable.toLowerCase()) {
