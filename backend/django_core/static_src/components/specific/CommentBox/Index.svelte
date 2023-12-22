@@ -4,6 +4,7 @@
     import { comment_needs_update } from "../../minor/Comment/store";
     // Icons
     import Info from "$icons/Info/Index.svelte";
+    import { get_csrf_token } from "$functions/get_csrf_token";
 
     export let submit_url = "";
 
@@ -22,7 +23,7 @@
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
-                "X-CSRFToken": window.csrfmiddlewaretoken
+                "X-CSRFToken": get_csrf_token()
             },
             body: JSON.stringify({
                 text: textarea_value

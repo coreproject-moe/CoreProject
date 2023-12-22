@@ -9,6 +9,7 @@
     // Icon imports
     import Search from "$icons/Search/Index.svelte";
     import Cross from "$icons/Cross/Index.svelte";
+    import { get_csrf_token } from "$functions/get_csrf_token";
 
     let active_index = 0,
         active_core: "anime" | "manga" | "sound" = "anime",
@@ -59,7 +60,7 @@
         const headers: { [key: string]: string } = {};
 
         if (string_to_boolean(window.user_authenticated)) {
-            headers["X-CSRFToken"] = window.csrfmiddlewaretoken;
+            headers["X-CSRFToken"] = get_csrf_token();
         }
         const res = await fetch(reverse(`anime-list`) + "?" + new URLSearchParams({ name: search_query }), {
             method: "GET",

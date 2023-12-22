@@ -19,6 +19,7 @@
     import { Anime } from "../../../types/anime";
     import { onMount } from "svelte";
     import { isEmpty } from "lodash-es";
+    import { get_csrf_token } from "$functions/get_csrf_token";
 
     // Binding
     let result_animes_element: HTMLDivElement;
@@ -137,7 +138,7 @@
         const headers: { [key: string]: string } = {};
 
         if (string_to_boolean(window.user_authenticated)) {
-            headers["X-CSRFToken"] = window.csrfmiddlewaretoken;
+            headers["X-CSRFToken"] = get_csrf_token();
         }
         const res = await fetch(
             reverse(`anime-list`) +
