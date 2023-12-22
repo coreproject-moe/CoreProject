@@ -38,7 +38,7 @@
             class: string;
             value: string;
             items: Record<string, string> | null;
-            selected_items: Array<[string, string]> | null;
+            selected_items: Record<string, string>[] | null;
         };
     } = {
         time_range: {
@@ -111,12 +111,13 @@
     };
 
     // Functions
-    const update_selected_items = (key: string, selected_item: [string, string]) => {
+    const update_selected_items = (key: string, selected_item: Record<string, string>) => {
+            const selected_item_key = Object.values(selected_item)[0];
             let filter_option = filter_options_mapping[key];
-            let is_selected = filter_option.selected_items!.some((item) => item[0] === selected_item[0]);
+            let is_selected = filter_option.selected_items!.some(({key}) => key === selected_item_key);
 
             if (is_selected) {
-                filter_option.selected_items = filter_option.selected_items!.filter((item) => item[0] !== selected_item[0]);
+                filter_option.selected_items = filter_option.selected_items!.filter(({key}) => key !== selected_item_key);
             } else {
                 filter_option.selected_items = [...filter_option.selected_items!, selected_item];
             }
@@ -157,7 +158,6 @@
         );
         const json = await res.json();
         if (res.ok) {
-            console.log(json["results"]);
             return json["results"] as Array<Anime>;
         } else {
             throw new Error("Something is wrong from the backend");
@@ -270,10 +270,10 @@
                                     {@const key = item[0]}
                                     {@const value = item[1]}
 
-                                    {@const is_selected = selected_items?.some((selected_item) => selected_item[0] === key)}
+                                    {@const is_selected = selected_items?.some((selected_item) => Object.values(selected_item)[0] === key)}
 
                                     <button
-                                        on:click|preventDefault={() => update_selected_items(option[0], item)}
+                                        on:click|preventDefault={() => update_selected_items(option[0], {key, value})}
                                         class="btn btn-neutral relative flex h-max min-h-max items-center justify-start p-3 text-sm leading-none md:rounded-[0.35vw] md:px-[1vw] md:py-[0.75vw] md:text-[0.9vw]"
                                     >
                                         {value}
