@@ -1,5 +1,3 @@
-
-
 latest_animes = [
     {
         "id": 1,
