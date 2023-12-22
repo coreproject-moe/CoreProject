@@ -339,7 +339,7 @@
                             bind:this={result_animes_element}
                             class="mt-5 grid grid-cols-2 gap-3 md:mt-[1.25vw] md:grid-cols-3 md:gap-[1.5vw]"
                         >
-                            {#each trending_animes as anime}
+                            {#each results as anime}
                                 <a
                                     in:scale={{ start: 0.95 }}
                                     href="/mal/{anime.id}"
@@ -351,7 +351,7 @@
                                             alt={anime.name}
                                             class="h-56 w-full rounded-t-lg object-cover object-center md:h-[20vw] md:rounded-l-[0.35vw] md:rounded-r-none"
                                         />
-                                        <anime-info class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-l-[0.35vw]">
+                                        <div class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-l-[0.35vw]">
                                             <div class="flex w-full flex-col bg-secondary/95 p-3 md:gap-[0.35vw] md:p-[1vw]">
                                                 <HoverExpand
                                                     class="w-full text-sm font-semibold text-accent md:text-[1vw] md:leading-[1.35vw]"
@@ -359,22 +359,22 @@
                                                 >
                                                     {anime.name}
                                                 </HoverExpand>
-                                                <studio-name class="line-clamp-1 text-xs md:line-clamp-none md:text-[0.8vw]">
+                                                <span class="line-clamp-1 text-xs md:line-clamp-none md:text-[0.8vw]">
                                                     {anime.studios}
-                                                </studio-name>
+                                                </span>
                                             </div>
-                                        </anime-info>
+                                        </div>
                                     </div>
             
-                                    <anime-details class="flex flex-col justify-between rounded-r-lg bg-neutral/25 md:rounded-r-[0.35vw]">
+                                    <div class="flex flex-col justify-between rounded-r-lg bg-neutral/25 md:rounded-r-[0.35vw]">
                                         <div class="flex flex-col gap-1 p-3 leading-none md:gap-[0.5vw] md:p-[1vw]">
-                                            <release-time class="text-xs font-semibold capitalize md:text-[1vw]">
-                                                {new FormatDate(anime.release_date).format_to_season}
-                                            </release-time>
+                                            <span class="text-xs font-semibold capitalize md:text-[1vw]">
+                                                {new FormatDate(anime.aired_from ?? "").format_to_season}
+                                            </span>
                                             <div class="flex items-center gap-1 md:gap-[0.5vw]">
-                                                <type class="text-xs md:text-[0.8vw]">{anime.type}</type>
+                                                <span class="text-xs md:text-[0.8vw]">{anime.source}</span>
                                                 <Circle class="w-1 opacity-50 md:w-[0.25vw]" />
-                                                <episodes class="text-xs md:text-[0.8vw]">{anime.episodes_count} episodes</episodes>
+                                                <span class="text-xs md:text-[0.8vw]">{anime.episode_count} eps</span>
                                             </div>
                                             <ScrollArea
                                                 offset_scrollbar
@@ -386,16 +386,16 @@
                                             </ScrollArea>
                                         </div>
             
-                                        <genres class="flex items-center gap-2 overflow-x-scroll p-3 scrollbar-none md:gap-[0.5vw] md:p-[1vw]">
+                                        <div class="flex items-center gap-2 overflow-x-scroll p-3 scrollbar-none md:gap-[0.5vw] md:p-[1vw]">
                                             {#each anime.genres as genre}
-                                                <genre
+                                                <span
                                                     class="whitespace-nowrap rounded bg-warning p-1 text-xs font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]"
                                                 >
                                                     {genre}
-                                                </genre>
+                                                </span>
                                             {/each}
-                                        </genres>
-                                    </anime-details>
+                                        </div>
+                                    </div>
                                 </a>
                             {/each}
                         </div>
@@ -404,14 +404,14 @@
                             class="mt-5 grid grid-cols-3 gap-3 md:mt-[1.25vw] md:grid-cols-6 md:gap-[1.5vw]"
                             bind:this={result_animes_element}
                         >
-                            {#each trending_animes as anime}
+                            {#each results as item}
                                 <AnimeCard
-                                    anime_name={anime.name}
-                                    anime_studio={anime.studios}
-                                    anime_image={anime.cover}
-                                    anime_genres={anime.genres}
-                                    anime_synopsis={anime.synopsis}
-                                    anime_total_episodes={anime.episodes_count}
+                                    anime_name={item.name ?? ""}
+                                    anime_studio={item.studios}
+                                    anime_image={item.cover ?? ""}
+                                    anime_genres={item.genres}
+                                    anime_synopsis={item.synopsis}
+                                    anime_total_episodes={item.episode_count}
                                 />
                             {/each}
                         </div>
