@@ -22,7 +22,7 @@
     let result_animes_element: HTMLDivElement;
     let search_query = "";
 
-    const handle_fetch = async () => {
+    const handle_input = async () => {
         search_promise = get_anime_with_serach_parameters();
     };
 
@@ -121,7 +121,7 @@
             // update filer_options_mapping
             filter_options_mapping[key] = filter_option;
             // run fetch
-            handle_fetch();
+            handle_input();
         },
         clear_selected_items = (key: string) => {
             // update filter_options_mapping
@@ -192,7 +192,7 @@
                     </div>
                     <input
                         bind:value={search_query}
-                        on:input={handle_fetch}
+                        on:input={handle_input}
                         type="text"
                         placeholder="Looking for specific anime? Start from here..."
                         class="w-[30vw] rounded-[0.5vw] border-none bg-neutral py-[0.8vw] pl-[3vw] text-[1vw] font-semibold leading-none text-neutral-content placeholder:font-medium placeholder:text-neutral-content/75 focus:ring-0 md:bg-neutral"
