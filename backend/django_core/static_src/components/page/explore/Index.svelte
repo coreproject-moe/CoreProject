@@ -157,7 +157,7 @@
             }
         );
         const json = await res.json();
-        
+
         if (res.ok) {
             return _.uniqBy(json["results"], "mal_id") as Array<Anime>;
         } else {
