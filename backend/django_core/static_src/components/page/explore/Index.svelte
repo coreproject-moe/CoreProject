@@ -268,7 +268,7 @@
                                 parent_class="md:max-h-[30vw] bg-neutral w-full"
                             >
                                 {#each Object.entries(filter_items) as [key, value]}
-                                    {@const is_selected = selected_items?.some((selected_item) => Object.values(selected_item)[0] === key)}
+                                    {@const is_selected = selected_items?.some((item) => item === key)}
 
                                     <button
                                         on:click|preventDefault={() => update_selected_items(option[0], {key, value})}
