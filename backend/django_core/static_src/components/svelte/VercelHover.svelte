@@ -61,11 +61,11 @@
         };
 </script>
 
-<glider-container
+<div
     bind:this={glider_container_element}
     class={glider_container_class}
 >
-    <active-glider
+    <div
         bind:this={hover_glider_element}
         class={cn(active_element_class, "absolute opacity-0 duration-200 ease-in-out")}
     />
@@ -73,4 +73,4 @@
         {handle_mouseenter}
         {handle_mouseleave}
     />
-</glider-container>
+</div>
