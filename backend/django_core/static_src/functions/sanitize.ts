@@ -1,14 +1,7 @@
 // Synced with : https://github.com/Ultimate-Hosts-Blacklist/whitelist/blob/e5a171243f9a418cc88d836c5eaf8a08198b0fb6/domains.list
-const whitelisted_domain = [
-    `https://www.google.com/`,
-    "https://github.com",
-    "https://reddit.com",
-    `https://github.com`
-];
+const whitelisted_domain = [`https://www.google.com/`, "https://github.com", "https://reddit.com", `https://github.com`];
 
-export async function sanitize(
-    _text: string | undefined | Promise<string | undefined>
-): Promise<string> {
+export async function sanitize(_text: string | undefined | Promise<string | undefined>): Promise<string> {
     const text = await _text;
     const xss = await import("xss");
 
