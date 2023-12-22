@@ -1,4 +1,4 @@
-import isBoolean from "lodash/isBoolean";
+import { isBoolean } from "lodash";
 
 export function string_to_boolean(variable: string | boolean): boolean {
     if (isBoolean(variable)) {
