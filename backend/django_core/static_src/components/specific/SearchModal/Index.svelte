@@ -35,7 +35,7 @@
         },
         handle_global_input = async (e: KeyboardEvent) => {
             const search_results = await search_promise;
-            if (search_results === null) return;
+            if (_.isNull(search_results)) return;
 
             switch (e.key.toLowerCase()) {
                 case "arrowdown":

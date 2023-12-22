@@ -143,7 +143,7 @@
             }
 
             // Popover settings
-            if (caret_offset_left === null && caret_offset_top == null) {
+            if (_.isNull(caret_offset_left) && _.isNull(caret_offset_top)) {
                 const textarea_position = element.getBoundingClientRect();
 
                 // CSS
