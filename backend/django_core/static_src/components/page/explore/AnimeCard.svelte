@@ -2,7 +2,7 @@
     export let anime_mal_id: number;
     export let anime_name: string;
     export let anime_image: string;
-    export let anime_total_episodes: number;
+    export let anime_total_episodes: number | null;
     export let anime_synopsis: string;
     export let anime_studio: Array<{ name: string }>;
     export let anime_genres: Array<{ name: string }>;
@@ -53,15 +53,15 @@
         <div class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
             <div class="flex flex-col gap-1 bg-secondary/95 p-3 md:gap-[0.35vw] md:p-[1vw]">
                 <ScrollArea
-                    gradient_mask
-                    offset_scrollbar
+                    gradient_mask={"true"}
+                    offset_scrollbar={"true"}
                     parent_class="flex md:max-h-[1.35vw] md:leading-[1.35vw] hover:max-h-[10vw] duration-300"
-                    class="line-clamp-1 text-sm font-semibold md:line-clamp-none md:text-[1vw] text-accent"
+                    class="line-clamp-1 text-sm font-semibold text-accent md:line-clamp-none md:text-[1vw]"
                 >
                     {anime_name}
                 </ScrollArea>
                 <span class="text-surface-50 flex items-center gap-2 text-xs leading-none md:gap-[0.5vw] md:text-[0.8vw]">
-                    {anime_studio[0].name}
+                    {anime_studio[0]?.name ?? ""}
                 </span>
             </div>
         </div>
@@ -93,14 +93,14 @@
             </div>
             <div class="flex items-center md:my-[0.35vw] md:gap-[0.5vw]">
                 {#each anime_genres as genre}
-                    <spam class="capitalize bg-warning font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
+                    <spam class="bg-warning font-semibold capitalize leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
                         {genre.name}
                     </spam>
                 {/each}
             </div>
             <ScrollArea
-                gradient_mask
-                offset_scrollbar
+                gradient_mask="true"
+                offset_scrollbar="true"
                 parent_class="md:max-h-[4vw]"
                 class="text-surface-50 md:text-[0.8vw] md:leading-[1vw]"
             >

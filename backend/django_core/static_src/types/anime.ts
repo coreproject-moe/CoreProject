@@ -1,4 +1,4 @@
-export type Anime = {
+export type Anime = Partial<{
     mal_id: number;
     anilist_id: number | null;
     kitsu_id: number | null;
@@ -27,4 +27,4 @@ export type Anime = {
     updated_at: string;
     created_at: string;
     episode_count: number;
-};
+}>;
