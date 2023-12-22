@@ -9,6 +9,7 @@
     export let anime_rating: string;
 
     import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
+    import HoverExpand from "$components/minor/HoverExpand/Index.svelte";
     import Star from "$icons/Star/Index.svelte";
     import Circle from "$icons/Circle/Index.svelte";
     import Play from "$icons/Play/Index.svelte";
@@ -52,16 +53,16 @@
         </div>
         <div class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
             <div class="flex flex-col gap-1 bg-secondary/95 p-3 md:gap-[0.35vw] md:p-[1vw]">
-                <ScrollArea
-                    gradient_mask={"true"}
-                    offset_scrollbar={"true"}
-                    parent_class="flex md:max-h-[1.35vw] md:leading-[1.35vw] hover:max-h-[10vw] duration-300"
-                    class="line-clamp-1 text-sm font-semibold text-accent md:line-clamp-none md:text-[1vw]"
+                <HoverExpand
+                    class="line-clamp-1 text-sm font-semibold text-accent md:line-clamp-none md:text-[1vw] md:leading-[1.35vw] w-full flex text-start"
+                    height="md:max-h-[1.35vw] hover:max-h-[10vw]"
                 >
                     {anime_name}
-                </ScrollArea>
+                </HoverExpand>
                 <span class="text-surface-50 flex items-center gap-2 text-xs leading-none md:gap-[0.5vw] md:text-[0.8vw]">
-                    {anime_studio[0]?.name ?? ""}
+                    {#each anime_studio as studio}
+                        {studio.name}
+                    {/each}
                 </span>
             </div>
         </div>
