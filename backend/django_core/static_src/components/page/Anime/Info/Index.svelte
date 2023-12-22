@@ -33,6 +33,13 @@
     import { string_to_number } from "$functions/string_to_number";
 
     // Internal logics
+    const sencond_mapping = [
+        { item: "TV", show_dots_after: true },
+        { item: `${string_to_number(anime_episodes_count)} eps`, show_dots_after: true },
+        { item: `completed`, show_dots_after: true },
+        { item: `spring 2023`, show_dots_after: true },
+        { item: `Kuschio animation`, show_dots_after: false }
+    ];
 </script>
 
 <div class="relative mt-16 block h-screen bg-cover md:mt-0">
@@ -67,15 +74,12 @@
                             {anime_japanese_name}
                         </HoverExpand>
                         <div class="mt-1 flex flex-wrap items-center gap-2 text-xs font-semibold md:mt-[0.25vw] md:gap-[0.5vw] md:pt-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
-                            <span>TV</span>
-                            <Dot class="w-[0.35rem] opacity-75" />
-                            <span>{string_to_number(anime_episodes_count)} eps</span>
-                            <Dot class="w-[0.35rem] opacity-75" />
-                            <span>Completed</span>
-                            <Dot class="w-[0.35rem] opacity-75" />
-                            <span class="capitalize">spring 2023</span>
-                            <Dot class="w-[0.35rem] opacity-75" />
-                            <span class="uppercase tracking-wider">Kuschio animation</span>
+                            {#each sencond_mapping as map}
+                                <span>{map.item}</span>
+                                {#if map.show_dots_after}
+                                    <Dot class="w-[0.35rem] opacity-75" />
+                                {/if}
+                            {/each}
                         </div>
                         <div class="mt-3 flex items-center gap-3 md:mt-[1.5vw] md:gap-[0.75vw]">
                             <button
@@ -295,7 +299,7 @@
                                     <div class="flex gap-2 leading-none md:gap-[0.65vw]">
                                         <!-- {% for format in episode.div %}
                                                 <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:text-[0.8vw]">
-                                                    <!-- {{ format }}
+                                                    <!-- {{ format }}   
                                                 </span>
                                             {% endfor %}
                                          -->
