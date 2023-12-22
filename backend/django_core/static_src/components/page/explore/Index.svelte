@@ -221,7 +221,7 @@
                                 {#if !_.isEmpty(selected_items)}
                                     <span class="badge badge-primary ml-3 rounded p-1 text-sm font-semibold md:ml-[0.75vw] md:h-[1.5vw] md:rounded-[0.25vw] md:p-[0.35vw] md:text-[0.85vw]">
                                         <!-- show first item -->
-                                        {selected_items[0][1]}
+                                        {selected_items[0].value}
                                     </span>
                                 {:else}
                                     <span class="ml-3 text-base duration-300 group-focus-within:opacity-0 md:ml-[1vw] md:text-[0.9vw]">Any</span>
@@ -266,10 +266,7 @@
                                 class="flex w-full flex-col md:p-[0.35vw]"
                                 parent_class="md:max-h-[30vw] bg-neutral w-full"
                             >
-                                {#each Object.entries(filter_items) as item}
-                                    {@const key = item[0]}
-                                    {@const value = item[1]}
-
+                                {#each Object.entries(filter_items) as [key, value]}
                                     {@const is_selected = selected_items?.some((selected_item) => Object.values(selected_item)[0] === key)}
 
                                     <button
