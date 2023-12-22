@@ -2,9 +2,14 @@
     export let pk: string | null = null,
         anime_name: string | null = null,
         anime_japanese_name: string | null = null,
+        anime_genres: string[] = new Array<string>(),
         // Is number
         anime_episodes_count: string | null = null,
         anime_synopsis: string | null = null;
+
+    import { reverse } from "$functions/urls";
+
+    // Components
     import CommentBox from "$components/specific/CommentBox/Index.svelte";
     import Comment from "$components/minor/Comment/Index.svelte";
     import HoverExpand from "$components/minor/HoverExpand/Index.svelte";
@@ -25,8 +30,9 @@
     import Cross from "$icons/Cross/Index.svelte";
     import Chat from "$icons/Chat/Index.svelte";
     import TrendingArrow from "$icons/TrendingArrow/Index.svelte";
+    import { string_to_number } from "$functions/string_to_number";
 
-    import { reverse } from "$functions/urls";
+    // Internal logics
 </script>
 
 <div class="relative mt-16 block h-screen bg-cover md:mt-0">
@@ -63,7 +69,7 @@
                         <div class="mt-1 flex flex-wrap items-center gap-2 text-xs font-semibold md:mt-[0.25vw] md:gap-[0.5vw] md:pt-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
                             <span>TV</span>
                             <Dot class="w-[0.35rem] opacity-75" />
-                            <span>{anime_episodes_count} eps</span>
+                            <span>{string_to_number(anime_episodes_count)} eps</span>
                             <Dot class="w-[0.35rem] opacity-75" />
                             <span>Completed</span>
                             <Dot class="w-[0.35rem] opacity-75" />
@@ -154,7 +160,7 @@
                         {anime_synopsis}
                     </ScrollArea>
                     <div class="hidden gap-[0.5vw] text-white md:flex md:text-[0.75vw] md:leading-[0.9vw]">
-                        {#each ["Action", "Romance", "Horror"] as item}
+                        {#each anime_genres as item}
                             <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">{item}</span>
                         {/each}
                     </div>
@@ -241,56 +247,71 @@
                     </div>
                 </div>
                 <div class="mt-4 grid grid-cols-12 gap-5 md:mt-[2.5vw] md:gap-[2.5vw]">
-                    <!-- {% for _ in '012345'|make_list %}
-                            <a
-                                href="/anime/mal/1/episode/1"
-                                class="relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4"
-                            >
-                                <div class="relative col-span-5 h-full w-full md:col-span-12 md:h-[18vw]">
-                                    <div class="block h-24 md:h-[12vw] md:w-full">
-                                        <img
-                                            src="{{ episode.banner }}"
+                    {#each Array(10).fill(0) as item}
+                        <a
+                            href="/anime/mal/1/episode/1"
+                            class="relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4"
+                        >
+                            <div class="relative col-span-5 h-full w-full md:col-span-12 md:h-[18vw]">
+                                <div class="block h-24 md:h-[12vw] md:w-full">
+                                    <!-- <img
+                                            src="{{episode_banner}}"
                                             class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw]"
-                                        >
-                                    </div>
-                                    <div class="absolute inset-0 hidden bg-gradient-to-t from-secondary/75 to-transparent md:flex md:h-[12vw]"></div>
+                                        > -->
                                 </div>
-                                <div class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-secondary md:p-[1vw]">
-                                    <div class="absolute bottom-0 flex justify-between md:-top-[2.5vw] inset-x-0 md:px-[1vw]">
-                                        <p class="rounded bg-secondary/75 p-1 text-xs font-bold tracking-wider text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-secondary md:px-[0.55vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">EP 01</p>
-                                        <p class="rounded bg-secondary/75 p-1 py-0 text-[0.7rem] font-semibold text-surface-50 md:h-max md:rounded-[0.4vw] md:bg-secondary md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none">
-                                            {{ episode.duration }}
-                                        </p>
-                                    </div>
-                                    <div class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
-                                        <coreproject-hover-expand class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]" height="md:max-h-[1.15vw] md:hover:max-h-[9vw]">
-                                            {{ episode.name }}
-                                        </coreproject-hover-expand>
-                                        <coreproject-hover-expand class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]" height="md:max-h-[1.15vw] md:hover:max-h-[9vw]">
-                                            {{ episode.japanese_name }}
-                                        </coreproject-hover-expand>
-                                    </div>
+                                <div class="absolute inset-0 hidden bg-gradient-to-t from-secondary/75 to-transparent md:flex md:h-[12vw]"></div>
+                            </div>
+                            <div
+                                class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-secondary md:p-[1vw]"
+                            >
+                                <div class="absolute inset-x-0 bottom-0 flex justify-between md:-top-[2.5vw] md:px-[1vw]">
+                                    <p
+                                        class="text-surface-50 rounded bg-secondary/75 p-1 text-xs font-bold tracking-wider md:h-max md:rounded-[0.4vw] md:bg-secondary md:px-[0.55vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none"
+                                    >
+                                        EP 01
+                                    </p>
+                                    <p
+                                        class="text-surface-50 rounded bg-secondary/75 p-1 py-0 text-[0.7rem] font-semibold md:h-max md:rounded-[0.4vw] md:bg-secondary md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none"
+                                    >
+                                        <!-- {{ episode.duration }} -->
+                                    </p>
+                                </div>
+                                <div class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
+                                    <coreproject-hover-expand
+                                        class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]"
+                                        height="md:max-h-[1.15vw] md:hover:max-h-[9vw]"
+                                    >
+                                        <!-- {{ episode.name }} -->
+                                    </coreproject-hover-expand>
+                                    <coreproject-hover-expand
+                                        class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]"
+                                        height="md:max-h-[1.15vw] md:hover:max-h-[9vw]"
+                                    >
+                                        <!-- {{ episode.japanese_name }} -->
+                                    </coreproject-hover-expand>
+                                </div>
 
-                                    <div class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.5vw] md:pt-[0.75vw]">
-                                        <div class="flex gap-2 leading-none md:gap-[0.65vw]">
-                                            {% for format in episode.div %}
+                                <div class="bg-surface-900 relative flex w-full items-center gap-2 md:gap-[0.5vw] md:pt-[0.75vw]">
+                                    <div class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                        <!-- {% for format in episode.div %}
                                                 <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:text-[0.8vw]">
-                                                    {{ format }}
+                                                    <!-- {{ format }}
                                                 </span>
                                             {% endfor %}
-                                        </div>
-                                        <coreproject-icon-dot class='w-1 opacity-50 md:w-[0.25vw]' ></coreproject-icon-dot>
-                                        <div class="flex gap-2 leading-none md:gap-[0.65vw]">
-                                            {% for res in episode.div %}
+                                         -->
+                                    </div>
+                                    <coreproject-icon-dot class="w-1 opacity-50 md:w-[0.25vw]"></coreproject-icon-dot>
+                                    <div class="flex gap-2 leading-none md:gap-[0.65vw]">
+                                        <!-- {% for res in episode.div %}
                                                 <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:text-[0.8vw]">
                                                     {{ res }}
                                                 </span>
-                                            {% endfor %}
-                                        </div>
+                                            {% endfor %} -->
                                     </div>
                                 </div>
-                            </a>
-                        {% endfor %} -->
+                            </div>
+                        </a>
+                    {/each}
                 </div>
                 <div class="mt-10 flex grid-cols-5 flex-col gap-10 md:mt-[3vw] md:grid md:gap-[4.375vw]">
                     <div class="md:col-span-3">
@@ -357,7 +378,7 @@
                                         class="h-full w-full object-cover object-center"
                                     />
                                 </div>
-                                <post-container class="flex h-36 flex-col justify-between p-3 md:col-span-5 md:h-full md:gap-[0.375vw] md:p-[1vw]">
+                                <div class="flex h-36 flex-col justify-between p-3 md:col-span-5 md:h-full md:gap-[0.375vw] md:p-[1vw]">
                                     <div>
                                         <div class="line-clamp-2 text-xs font-extrabold md:text-[0.875vw] md:leading-[1.25vw]">Celebrating 10 years of Hyouka!</div>
                                         <div class="text-surface-50 mt-2 line-clamp-3 text-[0.6rem] font-medium leading-snug md:mt-[0.5vw] md:line-clamp-2 md:text-[0.75vw] md:leading-[1.125vw]">
@@ -377,7 +398,7 @@
                                             <div>69</div>
                                         </div>
                                     </div>
-                                </post-container>
+                                </div>
                             </a>
                         </div>
                     </div>
@@ -530,13 +551,13 @@
                         </div>
                         <span class="font-bold leading-none md:text-[0.95vw]">92%</span>
                         <button class="text-surface-500 btn btn-secondary min-h-full p-[0.3vw] md:h-[1.375vw] md:w-[1.375vw] md:rounded-[0.19vw]">
-                            <coreproject-icon-edit class="w-[0.75vw]"></coreproject-icon-edit>
+                            <Edit class="w-[0.75vw]"></Edit>
                         </button>
                     </div>
                 </div>
                 <button class="btn flex h-min min-h-full w-max items-center gap-[0.5vw] border-none !bg-transparent p-0 md:text-[0.8vw]">
                     Add a review
-                    <coreproject-icon-edit class="w-[0.8vw]"></coreproject-icon-edit>
+                    <Edit class="w-[0.8vw]"></Edit>
                 </button>
             </div>
             <div class="flex gap-[0.75vw] md:mt-[6vw]">
