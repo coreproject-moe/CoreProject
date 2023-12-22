@@ -3,7 +3,8 @@ import svelteRetag from "svelte-retag";
 const mappings = [
     { tagname: "markdown", component: await import("./Markdown/Index.svelte") },
     { tagname: "scroll-area", component: await import("./ScrollArea/Index.svelte") },
-    { tagname: "comment", component: await import("./Comment/Index.svelte") }
+    { tagname: "comment", component: await import("./Comment/Index.svelte") },
+    { tagname: "sidebar", component: await import("./SideBar/Index.svelte") }
 ];
 
 mappings.forEach((item) => {

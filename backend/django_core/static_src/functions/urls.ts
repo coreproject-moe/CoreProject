@@ -1,5 +1,6 @@
 import htmx from "htmx.org";
 import * as _ from "lodash-es";
+import { url as url_store } from "../stores/url";
 
 export function reverse(view: string, ...args: Array<string | number>) {
     const url = window.urls.get(view);
@@ -30,7 +31,12 @@ export function reverse(view: string, ...args: Array<string | number>) {
     return final_url;
 }
 
-export async function goto({ url, anchor = null, verb, target }: { url: string; anchor: HTMLElement | null; verb?: "GET" | "POST"; target: string }): Promise<void> {
+export async function goto({ url, anchor = null, verb, target }: { url: string; anchor?: HTMLElement | null; verb: "GET" | "POST" | "DELETE" | "PUT"; target: string }): Promise<void> {
+    // Ignore path if it has http in name
+    if (!url.startsWith("http")) {
+        // Update store
+        url_store.set(url);
+    }
     // WHAT KIND OF FUCKERY IS THIS
     // FUCK HTMX
     // related : https://github.com/bigskysoftware/htmx/discussions/2116
@@ -43,10 +49,18 @@ export async function goto({ url, anchor = null, verb, target }: { url: string; 
     btn.style.display = "none";
     // Add `htmx` listener
     htmx.process(btn);
+    let _anchor: HTMLElement | null = null;
     if (!_.isNull(anchor)) {
-        anchor.appendChild(btn);
+        _anchor = anchor as HTMLElement;
     } else {
-        document.body.appendChild(btn);
+        _anchor = document.body as HTMLElement;
     }
-    btn.click();
+    try {
+        _anchor?.appendChild(btn);
+        btn.click();
+    } catch {
+        throw new Error("Cannot click button");
+    } finally {
+        _anchor?.removeChild(btn);
+    }
 }

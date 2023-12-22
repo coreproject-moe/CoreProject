@@ -100,69 +100,9 @@
                                 </coreproject-specific-search-modal-trigger>
                             </div>
                             <coreproject-specific-search-modal></coreproject-specific-search-modal>
-                            {% component_block "vercel_hover" glider_container_class='mt-[2.8125vw] flex flex-col items-center gap-[0.75vw]' active_element_class='rounded-[0.75vw] bg-white/10' direction='vertical' duration=200 %}
-                                {% fill 'items' %}
-                                    {% for icon in icons %}
 
-                                        <button
-                                            type="button"
-                                            _="
-                                               on hyperscript:change(url)
-                                               if url !== '{{icon.href}}'
-                                               put 'btn relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 !bg-transparent' into my.classList
-                                               remove .hidden from <span/> in me
-                                               else
-                                               put 'btn relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary' into my.classList
-                                               end
+                            <coreproject-sidebar></coreproject-sidebar>
 
-                                               on htmx:afterRequest
-                                               add .blur-sm
-                                               then wait 100ms
-
-                                               send hyperscript:change(url:event.detail.pathInfo.responsePath) to <icon/> in <glider-container/>
-                                               send hyperscript:change(url:event.detail.pathInfo.responsePath) to <button/> in <glider-container/>
-
-                                               add .hidden to <span/> in me
-                                               then remove .blur-sm
-                                              "
-                                            hx-push-url= "{{icon.href}}"
-                                            hx-get="{{icon.href}}"
-                                            hx-target="#page"
-
-                                            class="btn relative w-[4vw] h-[4vw] border-none rounded-[0.75vw] p-0 {% if icon.href == request.path %} relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary {% else %} !bg-transparent {% endif %}"
-                                        >
-
-                                            <div class="inline-grid">
-                                                <div class="absolute inset-0 flex flex-col items-center justify-center gap-[0.5vw]">
-                                                    <icon
-                                                        _="
-                                                           on hyperscript:change(url)
-                                                           if url !== '{{icon.href}}'
-                                                           put '!text-white' into my.classList
-                                                           else
-                                                           put '!text-secondary' into my.classList
-                                                           end
-                                                          "
-                                                        class="{% if icon.href == request.path %} !text-secondary {% else %} !text-white {% endif %}"
-                                                    >
-                                                        {% if icon.icon %}
-                                                            {{icon.icon|safe}}
-                                                        {% else %}
-                                                            {% include icon.html with class=icon.class %}
-                                                        {% endif %}
-                                                    </icon>
-
-                                                    <span
-                                                        class='text-[0.75vw] font-semibold capitalize leading-[1.05vw] {% if icon.href == request.path %} hidden {%endif%}'
-                                                    >
-                                                        {{ icon.label }}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </button>
-                                    {% endfor %}
-                                {% endfill %}
-                            {% endcomponent_block %}
                         </div>
                         <div class="flex flex-col items-center">
                             <button type="button" class="btn !bg-transparent border-none w-[4vw] h-[4vw] flex-col justify-center gap-[0.45vw] p-0 text-sm">
