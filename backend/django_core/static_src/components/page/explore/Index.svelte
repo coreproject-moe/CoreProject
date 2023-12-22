@@ -157,7 +157,7 @@
         );
         const json = await res.json();
         if (res.ok) {
-            return json["results"] as Array<Anime>;
+            return _.uniqBy(json["results"], "mal_id") as Array<Anime>;
         } else {
             throw new Error("Something is wrong from the backend");
         }
