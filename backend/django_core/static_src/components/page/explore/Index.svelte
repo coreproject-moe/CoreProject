@@ -365,7 +365,7 @@
                                             </div>
                                         </div>
                                     </div>
-            
+
                                     <div class="flex flex-col justify-between rounded-r-lg bg-neutral/25 md:rounded-r-[0.35vw]">
                                         <div class="flex flex-col gap-1 p-3 leading-none md:gap-[0.5vw] md:p-[1vw]">
                                             <span class="text-xs font-semibold capitalize md:text-[1vw]">
@@ -385,7 +385,7 @@
                                                 {anime.synopsis}
                                             </ScrollArea>
                                         </div>
-            
+
                                         <div class="flex items-center gap-2 overflow-x-scroll p-3 scrollbar-none md:gap-[0.5vw] md:p-[1vw]">
                                             {#each anime.genres as genre}
                                                 <span
