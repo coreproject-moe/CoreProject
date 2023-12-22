@@ -137,7 +137,7 @@
         if (string_to_boolean(window.user_authenticated)) {
             headers["X-CSRFToken"] = window.csrfmiddlewaretoken;
         }
-        const res = await fetch(reverse(`anime-list`) + "?" + new URLSearchParams({ 
+        const res = await fetch(reverse(`anime-list`) + "?" + new URLSearchParams({
             name: search_query,
             genre: filter_options_mapping["genres"].selected_items?.join() ?? "",
         }), {
