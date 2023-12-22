@@ -18,7 +18,6 @@
     import { reverse } from "$functions/urls";
     import { Anime } from "../../../types/anime";
     import { onMount } from "svelte";
-    import { isEmpty } from "lodash-es";
     import { get_csrf_token } from "$functions/get_csrf_token";
 
     // Binding
@@ -27,7 +26,6 @@
 
     const handle_input = async () => {
         search_promise = get_anime_with_serach_parameters();
-        console.log(Array.from(filter_options_mapping["genres"].selected_items!));
     };
 
     onMount(async () => (search_promise = get_anime_with_serach_parameters()));
