@@ -49,10 +49,18 @@ export async function goto({ url, anchor = null, verb, target }: { url: string; 
     btn.style.display = "none";
     // Add `htmx` listener
     htmx.process(btn);
+    let _anchor: HTMLElement | null = null;
     if (!_.isNull(anchor)) {
-        anchor.appendChild(btn);
+        _anchor = anchor as HTMLElement;
     } else {
-        document.body.appendChild(btn);
+        _anchor = document.body as HTMLElement;
     }
-    btn.click();
+    try {
+        _anchor?.appendChild(btn);
+        btn.click();
+    } catch {
+        throw new Error("Cannot click button");
+    } finally {
+        _anchor?.removeChild(btn);
+    }
 }
