@@ -17,7 +17,7 @@
 
     export let glider_container_class: string | null = null,
         active_element_class: string | null = null;
-    export let direction: string | null = null,
+    export let direction: "horizontal" | "vertical" = "horizontal",
         GLIDER_TRANSITION_DURATION = 200;
 
     let mouse_leave_timeout: NodeJS.Timeout,
@@ -88,6 +88,8 @@
                 case "horizontal":
                     hover_glider_element.style.transform = `translateX(${target.offsetLeft}px)`;
                     break;
+                default:
+                    throw Error("Method Not Implemented");
             }
 
             if (is_hovered_from_prev_el) {
