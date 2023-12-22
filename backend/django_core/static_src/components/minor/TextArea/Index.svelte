@@ -494,12 +494,7 @@
     style="align-self: flex-end;"
 >
     Learn more about
-    <button
-        on:click={() => goto({ url: "/anime", target: "#page" })}
-        class="underline"
-    >
-        core editor
-    </button>
+    <button class="underline">core editor</button>
 </div>
 {#if show_emoji_picker && !_.isEmpty(emoji_matches)}
     <div

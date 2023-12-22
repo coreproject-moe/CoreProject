@@ -1,5 +1,6 @@
 import htmx from "htmx.org";
 import * as _ from "lodash-es";
+
 export function reverse(view: string, ...args: Array<string | number>) {
     const url = window.urls.get(view);
     if (!url) {
@@ -29,7 +30,7 @@ export function reverse(view: string, ...args: Array<string | number>) {
     return final_url;
 }
 
-export async function goto({ url, verb, target }: { url: string; verb?: "GET" | "POST"; target: string }): Promise<void> {
+export async function goto({ url, anchor = null, verb, target }: { url: string; anchor: HTMLElement | null; verb?: "GET" | "POST"; target: string }): Promise<void> {
     // WHAT KIND OF FUCKERY IS THIS
     // FUCK HTMX
     // related : https://github.com/bigskysoftware/htmx/discussions/2116
@@ -42,6 +43,10 @@ export async function goto({ url, verb, target }: { url: string; verb?: "GET" | 
     btn.style.display = "hidden";
     // Add `htmx` listener
     htmx.process(btn);
-    document.body.appendChild(btn);
+    if (!_.isNull(anchor)) {
+        anchor.appendChild(btn);
+    } else {
+        document.body.appendChild(btn);
+    }
     btn.click();
 }
