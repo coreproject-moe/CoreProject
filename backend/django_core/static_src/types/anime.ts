@@ -15,10 +15,10 @@ export type Anime = {
     background: string | "";
     source: string | null;
     rating: string | null | "";
-    genres: string[];
+    genres: Array<{ name: string }>;
     themes: string[];
     characters: string[];
-    studios: string[];
+    studios: Array<{ name: string }>;
     producers: string[];
     staffs: string[];
     openings: string[];

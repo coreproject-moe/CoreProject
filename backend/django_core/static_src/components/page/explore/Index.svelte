@@ -349,7 +349,7 @@
                                                     {anime.name}
                                                 </HoverExpand>
                                                 <span class="line-clamp-1 text-xs md:line-clamp-none md:text-[0.8vw]">
-                                                    {anime.studios}
+                                                    {anime.studios[0].name}
                                                 </span>
                                             </div>
                                         </div>

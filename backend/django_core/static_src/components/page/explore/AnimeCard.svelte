@@ -4,8 +4,8 @@
     export let anime_image: string;
     export let anime_total_episodes: number;
     export let anime_synopsis: string;
-    export let anime_studio: any;
-    export let anime_genres: any;
+    export let anime_studio: Array<{ name: string }>;
+    export let anime_genres: Array<{ name: string }>;
     export let anime_rating: string;
 
     import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
