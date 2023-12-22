@@ -1,10 +1,32 @@
 <script lang="ts">
-    export let anime_name: string | null = null,
+    export let pk: string | null = null,
+        anime_name: string | null = null,
         anime_japanese_name: string | null = null,
         // Is number
         anime_episodes_count: string | null = null,
         anime_synopsis: string | null = null;
     import CommentBox from "$components/specific/CommentBox/Index.svelte";
+    import Comment from "$components/minor/Comment/Index.svelte";
+    import HoverExpand from "$components/minor/HoverExpand/Index.svelte";
+    import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
+
+    //Icons
+    import Dot from "$icons/Dot/Index.svelte";
+    import Play from "$icons/Play/Index.svelte";
+    import Edit from "$icons/Edit/Index.svelte";
+    import Book from "$icons/Book/Index.svelte";
+    import Headphone from "$icons/Headphone/Index.svelte";
+    import Download from "$icons/Download/Index.svelte";
+    import Share from "$icons/Share/Index.svelte";
+    import Settings from "$icons/Settings/Index.svelte";
+    import Chevron from "$icons/Chevron/Index.svelte";
+    import Search from "$icons/Search/Index.svelte";
+    import Filter from "$icons/Filter/Index.svelte";
+    import Cross from "$icons/Cross/Index.svelte";
+    import Chat from "$icons/Chat/Index.svelte";
+    import TrendingArrow from "$icons/TrendingArrow/Index.svelte";
+
+    import { reverse } from "$functions/urls";
 </script>
 
 <div class="relative mt-16 block h-screen bg-cover md:mt-0">
@@ -29,24 +51,24 @@
                         <div class="gradient from-surface-900/75 to-surface-900/25 absolute inset-0 bg-gradient-to-t md:hidden"></div>
                     </div>
                     <div class="absolute bottom-0 col-span-12 p-5 md:static md:p-0">
-                        <coreproject-hover-expand
+                        <HoverExpand
                             class="w-full text-2xl font-bold text-white md:text-[2vw] md:leading-[2.7vw]"
                             height="max-h-48 md:max-h-[10vw]"
                         >
                             {anime_name}
-                        </coreproject-hover-expand>
-                        <div class="flex flex-wrap gap-x-2 pt-2 text-xs font-semibold uppercase tracking-wider md:gap-x-[0.25vw] md:pt-[0.625vw] md:text-[0.75vw] md:leading-[0.9vw]">
+                        </HoverExpand>
+                        <HoverExpand class="flex flex-wrap gap-x-2 pt-2 text-xs font-semibold uppercase tracking-wider md:gap-x-[0.25vw] md:pt-[0.625vw] md:text-[0.75vw] md:leading-[0.9vw]">
                             {anime_japanese_name}
-                        </div>
+                        </HoverExpand>
                         <div class="mt-1 flex flex-wrap items-center gap-2 text-xs font-semibold md:mt-[0.25vw] md:gap-[0.5vw] md:pt-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
                             <span>TV</span>
-                            <coreproject-icon-dot class="w-[0.35rem] opacity-75"></coreproject-icon-dot>
+                            <Dot class="w-[0.35rem] opacity-75" />
                             <span>{anime_episodes_count} eps</span>
-                            <coreproject-icon-dot class="w-[0.35rem] opacity-75"></coreproject-icon-dot>
+                            <Dot class="w-[0.35rem] opacity-75" />
                             <span>Completed</span>
-                            <coreproject-icon-dot class="w-[0.35rem] opacity-75"></coreproject-icon-dot>
+                            <Dot class="w-[0.35rem] opacity-75" />
                             <span class="capitalize">spring 2023</span>
-                            <coreproject-icon-dot class="w-[0.35rem] opacity-75"></coreproject-icon-dot>
+                            <Dot class="w-[0.35rem] opacity-75" />
                             <span class="uppercase tracking-wider">Kuschio animation</span>
                         </div>
                         <div class="mt-3 flex items-center gap-3 md:mt-[1.5vw] md:gap-[0.75vw]">
@@ -55,7 +77,7 @@
                                 class="btn btn-primary h-14 w-[6.5rem] rounded-lg font-bold text-white md:h-[4vw] md:w-[7vw] md:rounded-[0.625vw]"
                             >
                                 <div class="flex gap-3 md:gap-[0.7vw]">
-                                    <coreproject-icon-play class="w-5 md:w-[1.5vw]"></coreproject-icon-play>
+                                    <Play class="w-5 md:w-[1.5vw]" />
 
                                     <div class="flex flex-col items-start gap-1">
                                         <span class="text-sm leading-none md:text-[0.9vw]">Watch</span>
@@ -69,7 +91,7 @@
                                 disabled
                             >
                                 <div class="flex flex-col items-center gap-2 md:gap-[0.68vw]">
-                                    <coreproject-icon-book class="text-surface-500 w-4 md:w-[1.5vw]"></coreproject-icon-book>
+                                    <Book class="text-surface-500 w-4 md:w-[1.5vw]" />
                                     <span class="leading-none">read</span>
                                 </div>
                             </button>
@@ -79,39 +101,39 @@
                                 disabled
                             >
                                 <div class="flex flex-col items-center gap-2 md:gap-[0.68vw]">
-                                    <coreproject-icon-headphone class="text-surface-500 w-4 md:w-[1.5vw]"></coreproject-icon-headphone>
+                                    <Headphone class="text-surface-500 w-4 md:w-[1.5vw]" />
                                     <span class="leading-none">listen</span>
                                 </div>
                             </button>
                         </div>
                         <div class="mt-3 flex gap-2 md:mt-[0.75vw] md:gap-[0.75vw]">
-                            <button
+                            <!-- <button
                                 type="button"
                                 aria-label="video"
                                 class="btn btn-warning h-7 min-h-full w-7 rounded p-0 md:h-[2vw] md:w-[2vw] md:rounded-[0.25vw]"
                             >
                                 <coreproject-icon-record class="w-4 md:w-[1.125vw]"></coreproject-icon-record>
+                            </button> -->
+                            <button
+                                type="button"
+                                aria-label="video"
+                                class="btn btn-warning h-7 min-h-full w-7 rounded p-0 md:h-[2vw] md:w-[2vw] md:rounded-[0.25vw]"
+                            >
+                                <Edit class="w-4 md:w-[1.125vw]" />
                             </button>
                             <button
                                 type="button"
                                 aria-label="video"
                                 class="btn btn-warning h-7 min-h-full w-7 rounded p-0 md:h-[2vw] md:w-[2vw] md:rounded-[0.25vw]"
                             >
-                                <coreproject-icon-edit class="w-4 md:w-[1.125vw]"></coreproject-icon-edit>
+                                <Download class="w-4 md:w-[1.125vw]" />
                             </button>
                             <button
                                 type="button"
                                 aria-label="video"
                                 class="btn btn-warning h-7 min-h-full w-7 rounded p-0 md:h-[2vw] md:w-[2vw] md:rounded-[0.25vw]"
                             >
-                                <coreproject-icon-download class="w-4 md:w-[1.125vw]"></coreproject-icon-download>
-                            </button>
-                            <button
-                                type="button"
-                                aria-label="video"
-                                class="btn btn-warning h-7 min-h-full w-7 rounded p-0 md:h-[2vw] md:w-[2vw] md:rounded-[0.25vw]"
-                            >
-                                <coreproject-icon-share class="w-4 md:w-[1.125vw]"></coreproject-icon-share>
+                                <Share class="w-4 md:w-[1.125vw]" />
                             </button>
                         </div>
                     </div>
@@ -120,21 +142,21 @@
                     <div class="flex gap-[0.75vw]">
                         <div class="text-lg font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Synopsis</div>
                         <button class="btn btn-secondary hidden min-h-full rounded-[0.1875vw] p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
-                            <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+                            <Settings class="w-[0.9vw] opacity-75" />
                         </button>
                     </div>
-                    <coreproject-scroll-area
+                    <ScrollArea
                         class="text-justify text-xs md:text-[0.8vw] md:leading-[1vw]"
                         parent_class="max-h-40 md:max-h-[10vw]"
                         offset_scrollbar="true"
                         gradient_mask="true"
                     >
                         {anime_synopsis}
-                    </coreproject-scroll-area>
+                    </ScrollArea>
                     <div class="hidden gap-[0.5vw] text-white md:flex md:text-[0.75vw] md:leading-[0.9vw]">
-                        <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Action</span>
-                        <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Romance</span>
-                        <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Horror</span>
+                        {#each ["Action", "Romance", "Horror"] as item}
+                            <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">{item}</span>
+                        {/each}
                     </div>
                     <div class="hidden w-max gap-[0.75vw] rounded-[0.25vw] bg-secondary md:flex md:px-[0.75vw] md:py-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
                         <div class="flex gap-[0.25vw]">
@@ -145,7 +167,7 @@
                             <span>Status:</span>
                             <button class="btn h-min min-h-min border-none !bg-transparent p-0 leading-none md:text-[0.75vw]">
                                 <span class="font-semibold text-warning">Watching</span>
-                                <coreproject-icon-chevron class="text-warning-400 w-[0.625vw]"></coreproject-icon-chevron>
+                                <Chevron class="text-warning-400 w-[0.625vw]" />
                             </button>
                         </div>
                         <div class="flex gap-[0.25vw]">
@@ -156,7 +178,7 @@
                             <span>Your Score:</span>
                             <button class="btn h-min min-h-min border-none !bg-transparent p-0 leading-none md:text-[0.75vw]">
                                 <span class="font-semibold text-warning">Not Rated</span>
-                                <coreproject-icon-chevron class="text-warning-400 w-[0.625vw]"></coreproject-icon-chevron>
+                                <Chevron class="text-warning-400 w-[0.625vw]" />
                             </button>
                         </div>
                     </div>
@@ -166,7 +188,7 @@
                 <div class="border-surface-50/10 flex border-b-2 pb-1 md:gap-x-[0.75vw] md:border-none md:pb-0">
                     <div class="text-lg font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Episodes</div>
                     <button class="bg-surface-400 btn btn-secondary hidden min-h-full rounded p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
-                        <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+                        <Settings class="w-[0.9vw] opacity-75" />
                     </button>
                 </div>
                 <div class="mt-2 flex flex-col justify-between gap-y-5 md:mt-0 md:flex-row md:gap-y-0">
@@ -174,7 +196,7 @@
                         <p class="flex items-center gap-1 md:gap-[0.75vw]">
                             <span class="text-base font-bold leading-none md:text-[2vw] md:leading-[1.9vw]">23</span>
                             <span class="text-xs font-semibold md:text-[1vw]">episodes</span>
-                            <coreproject-icon-dot class="w-[0.4vw] opacity-50"></coreproject-icon-dot>
+                            <Dot class="w-[0.4vw] opacity-50" />
                         </p>
                         <div>
                             <div class="flex w-full items-center gap-2 leading-4 md:gap-[1vw] md:leading-[1.5vw]">
@@ -184,7 +206,7 @@
                             <div class="flex h-5 gap-2 text-[0.5rem] font-bold md:h-[1.8vw] md:gap-[0.5vw] md:text-[0.75vw]">
                                 <span class="flex h-full place-items-center rounded bg-secondary px-2 uppercase leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">sub</span>
                                 <span class="flex h-full place-items-center rounded bg-secondary px-2 uppercase leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">dub</span>
-                                <coreproject-icon-dot class="w-[0.4vw] opacity-50"></coreproject-icon-dot>
+                                <Dot class="w-[0.4vw] opacity-50" />
                                 <span class="flex h-full place-items-center rounded bg-secondary px-2 leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">1080p</span>
                                 <span class="flex h-full place-items-center rounded bg-secondary px-2 leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">720p</span>
                                 <span class="flex h-full place-items-center rounded bg-secondary px-2 leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">480p</span>
@@ -200,21 +222,21 @@
                             <span class="text-surface-50 text-[0.65rem] leading-[0.9vw] transition-colors duration-300 group-hover:text-white md:text-[0.75vw]">Type</span>
                             <button class="btn btn-secondary h-7 min-h-full rounded px-3 text-[0.65rem] font-semibold md:h-[2.5vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.9vw] md:leading-[0.9vw]">
                                 <span>Subbed</span>
-                                <coreproject-icon-chevron class="w-3 md:w-[1vw]"></coreproject-icon-chevron>
+                                <Chevron class="w-3 md:w-[1vw]"></Chevron>
                             </button>
                         </div>
                         <div class="group hidden flex-col gap-2 md:flex md:gap-[0.5vw]">
                             <span class="text-surface-50 text-[0.65rem] leading-[0.9vw] transition-colors duration-300 group-hover:text-white md:text-[0.75vw]">Display Mode</span>
                             <button class="btn btn-secondary h-7 min-h-full rounded px-3 text-[0.65rem] font-semibold leading-[0.9vw] md:h-[2.5vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.9vw]">
                                 <span>Thumbnails</span>
-                                <coreproject-icon-chevron class="w-3 md:w-[1vw]"></coreproject-icon-chevron>
+                                <Chevron class="w-3 md:w-[1vw]"></Chevron>
                             </button>
                         </div>
                         <button
                             class="bg-surface-400 btn btn-secondary h-7 min-h-max w-auto rounded p-0 font-semibold md:ml-0 md:h-[2.5vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]"
                             aria-label="Search"
                         >
-                            <coreproject-icon-search class="w-3 md:w-[1vw]"></coreproject-icon-search>
+                            <Search class="w-3 md:w-[1vw]"></Search>
                         </button>
                     </div>
                 </div>
@@ -275,7 +297,7 @@
                         <div class="border-surface-50/10 flex gap-2 border-b-2 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
                             <div class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Comments</div>
                             <button class="bg-surface-400 btn btn-secondary hidden min-h-full rounded p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
-                                <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+                                <Settings class="w-[0.9vw] opacity-75"></Settings>
                             </button>
                         </div>
                         <div class="mt-2 flex items-center justify-between md:hidden">
@@ -287,22 +309,21 @@
                                 class="btn-icon bg-surface-400 btn h-7 w-auto rounded p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]"
                                 aria-label="Filter"
                             >
-                                <coreproject-icon-filter class="w-3 md:w-[1vw]"></coreproject-icon-filter>
+                                <Filter class="w-3 md:w-[1vw]"></Filter>
                             </button>
                         </div>
                         <div class="md:mt-[1vw]">
-                            <CommentBox></CommentBox>
+                            <CommentBox submit_url={reverse("anime-commment-endpoint", Number(pk))}></CommentBox>
                         </div>
                         <div class="mt-10 flex w-full md:mt-[2vw]">
-                            <!-- <coreproject-comment class="w-full" api_url='{% url "anime-commment-endpoint" pk=anime.id %}'>
-                                </coreproject-comment> -->
+                            <Comment api_url={reverse("anime-commment-endpoint", Number(pk))}></Comment>
                         </div>
                     </div>
                     <div class="md:col-span-2">
                         <div class="border-surface-50/10 flex gap-2 border-b-2 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
                             <div class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Forum div</div>
                             <button class="bg-surface-400 btn btn-secondary hidden min-h-full rounded p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
-                                <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+                                <Settings class="w-[0.9vw] opacity-75"></Settings>
                             </button>
                         </div>
                         <div class="mt-2 flex items-center justify-between md:mt-[0.75vw]">
@@ -314,14 +335,14 @@
                                 <button
                                     class="bg-surface-400 btn btn-secondary h-7 min-h-full gap-2 rounded px-2 text-xs font-semibold md:h-[2.4vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.875vw]"
                                 >
-                                    <coreproject-icon-cross class="w-4 rotate-45 md:w-[1vw]"></coreproject-icon-cross>
+                                    <Cross class="w-4 rotate-45 md:w-[1vw]"></Cross>
                                     Create New
                                 </button>
                                 <button
                                     class="bg-surface-400 btn btn-secondary h-7 min-h-full w-auto rounded p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]"
                                     aria-label="Filter"
                                 >
-                                    <coreproject-icon-filter class="w-3 md:w-[1vw]"></coreproject-icon-filter>
+                                    <Filter class="w-3 md:w-[1vw]"></Filter>
                                 </button>
                             </div>
                         </div>
@@ -352,7 +373,7 @@
                                             <div class="text-surface-50">7 months ago</div>
                                         </div>
                                         <div class="flex items-center gap-1 md:gap-[0.25vw]">
-                                            <coreproject-icon-chat class="w-3 md:w-[1vw]"></coreproject-icon-chat>
+                                            <Chat class="w-3 md:w-[1vw]"></Chat>
                                             <div>69</div>
                                         </div>
                                     </div>
@@ -367,7 +388,7 @@
             <div class="flex gap-[0.75vw]">
                 <div class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Ratings</div>
                 <button class="bg-surface-400 btn btn-secondary min-h-full rounded-[0.1875vw] p-0 md:h-[1.5vw] md:w-[1.5vw]">
-                    <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+                    <Settings class="w-[0.9vw] opacity-75"></Settings>
                 </button>
             </div>
             <div class="flex flex-col gap-[0.75vw]">
@@ -386,7 +407,7 @@
                     </div>
                 </div>
                 <button class="btn btn-accent min-h-full md:h-[1.5vw] md:w-max md:rounded-[0.25vw] md:text-[0.75vw]">
-                    <coreproject-icon-trending-arrow class="w-[1.25vw]"></coreproject-icon-trending-arrow>
+                    <TrendingArrow class="w-[1.25vw]"></TrendingArrow>
                     <span>Detailed Distribution</span>
                 </button>
                 <div class="flex flex-col gap-[0.5vw] leading-none">
@@ -521,7 +542,7 @@
             <div class="flex gap-[0.75vw] md:mt-[6vw]">
                 <div class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Details</div>
                 <button class="btn btn-secondary min-h-full rounded p-0 md:h-[1.5vw] md:w-[1.5vw]">
-                    <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+                    <Settings class="w-[0.9vw] opacity-75"></Settings>
                 </button>
             </div>
             <div class="md:mb-[2vw] md:mt-[1.25vw]">
@@ -575,14 +596,14 @@
                     <div class="flex gap-[0.75vw]">
                         <div class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Voiceover Cast</div>
                         <button class="bg-surface-400 btn btn-secondary min-h-full rounded p-0 md:h-[1.5vw] md:w-[1.5vw]">
-                            <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+                            <Settings class="w-[0.9vw] opacity-75"></Settings>
                         </button>
                     </div>
                     <div class="mt-[1vw] flex flex-col">
                         <span class="text-surface-50 text-[0.9375vw]">VAs</span>
                         <button class="bg-surface-400 btn btn-secondary mt-[0.3vw] h-[2.25vw] min-h-full w-[6.625vw] gap-1 rounded-[0.375vw] p-0 text-[0.875vw]">
                             Japanese
-                            <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
+                            <Chevron class="w-[1vw]"></Chevron>
                         </button>
                     </div>
                     <div class="mt-[1vw] block">
@@ -607,11 +628,11 @@
                             <div class="btn-group">
                                 <button class="btn btn-secondary min-h-full p-0 md:h-[2vw] md:w-[2vw]">
                                     \
-                                    <coreproject-icon-chevron class="w-[1vw] rotate-180"></coreproject-icon-chevron>
+                                    <Chevron class="w-[1vw] rotate-180"></Chevron>
                                 </button>
                                 <button class="btn btn-secondary min-h-full p-0 md:h-[2vw] md:w-[2vw]">01</button>
                                 <button class="btn btn-secondary min-h-full p-0 md:h-[2vw] md:w-[2vw]">
-                                    <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
+                                    <Chevron class="w-[1vw]"></Chevron>
                                 </button>
                             </div>
                             <span class="text-surface-50 mt-[0.5vw] text-[0.75vw] leading-none">Showing 1-5, out of 58 Voiceover div</span>
@@ -622,7 +643,7 @@
                     <div class="flex gap-3">
                         <div class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">div</div>
                         <button class="bg-surface-400 btn btn-secondary min-h-full rounded p-0 md:h-[1.5vw] md:w-[1.5vw]">
-                            <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+                            <Settings class="w-[0.9vw] opacity-75"></Settings>
                         </button>
                     </div>
                     <div class="mt-[1vw] block">
@@ -657,11 +678,11 @@
                         <div class="mt-[1vw] flex flex-col">
                             <div class="btn-group">
                                 <button class="btn btn-secondary min-h-full p-0 md:h-[2vw] md:w-[2vw]">
-                                    <coreproject-icon-chevron class="w-[1vw] rotate-180"></coreproject-icon-chevron>
+                                    <Chevron class="w-[1vw] rotate-180"></Chevron>
                                 </button>
                                 <button class="btn btn-secondary min-h-full p-0 md:h-[2vw] md:w-[2vw]">01</button>
                                 <button class="btn btn-secondary min-h-full p-0 md:h-[2vw] md:w-[2vw]">
-                                    <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
+                                    <Chevron class="w-[1vw]"></Chevron>
                                 </button>
                             </div>
                             <span class="text-surface-50 mt-[0.5vw] text-[0.75vw] leading-none">Showing 1-8, out of 47 div</span>
