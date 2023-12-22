@@ -194,12 +194,12 @@
                                         </p>
                                     </div>
                                     <div class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
-                                        <coreproject-scroll-area remove_gradient_on_mouse_enter="true" class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]" parent_class="max-h-9 md:max-h-[1.25vw] md:hover:max-h-[9vw] duration-500" offset_scrollbar="true" gradient_mask="true">
+                                        <coreproject-hover-expand class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]" height="md:max-h-[1.15vw] md:hover:max-h-[9vw]">
                                             {{ episode.name }}
-                                        </coreproject-scroll-area>
-                                        <coreproject-scroll-area  remove_gradient_on_mouse_enter="true" class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]" parent_class="max-h-9 md:max-h-[1.25vw] md:hover:max-h-[9vw] duration-500" offset_scrollbar="true" gradient_mask="true">
+                                        </coreproject-hover-expand>
+                                        <coreproject-hover-expand class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]" height="md:max-h-[1.15vw] md:hover:max-h-[9vw]">
                                             {{ episode.japanese_name }}
-                                        </coreproject-scroll-area>
+                                        </coreproject-hover-expand>
                                     </div>
 
                                     <div class="relative flex w-full items-center gap-2 bg-surface-900 md:gap-[0.5vw] md:pt-[0.75vw]">
@@ -307,7 +307,6 @@
                     <div class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Ratings</div>
                     <button class="btn btn-secondary rounded-[0.1875vw] bg-surface-400 p-0 md:h-[1.5vw] md:w-[1.5vw] min-h-full">
                         <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
-
                     </button>
                 </div>
                 <div class="flex flex-col gap-[0.75vw]">
