@@ -135,7 +135,7 @@
             thumbnail_mode = mode;
         };
 
-    const get_anime_with_serach_parameters = async () => {
+    const get_anime_with_serach_parameters = async (): Promise<Anime[]> => {
         const headers: { [key: string]: string } = {};
 
         if (string_to_boolean(window.user_authenticated)) {
@@ -146,7 +146,7 @@
                 "?" +
                 new URLSearchParams({
                     name: search_query,
-                    genre: filter_options_mapping["genres"].selected_items?.join() ?? ""
+                    genre: filter_options_mapping["genres"].selected_items?.join() ?? "",
                 }),
             {
                 method: "GET",
@@ -157,6 +157,7 @@
             }
         );
         const json = await res.json();
+        
         if (res.ok) {
             return _.uniqBy(json["results"], "mal_id") as Array<Anime>;
         } else {
