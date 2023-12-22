@@ -1,19 +1,22 @@
-import { isBoolean } from "lodash";
+import * as _ from "lodash-es";
 
 export function string_to_boolean(variable: string | boolean): boolean {
-    if (isBoolean(variable)) {
+    if (_.isBoolean(variable)) {
         return variable;
     }
 
-    switch (variable.toLowerCase()) {
-        case "true": {
-            return true;
-        }
-        case "false": {
-            return false;
-        }
-        default: {
-            throw new Error("variable is not convertable to boolean");
+    if (isString(variable)) {
+        switch (variable.toLowerCase()) {
+            case "true": {
+                return true;
+            }
+            case "false": {
+                return false;
+            }
+            default: {
+                throw new Error(`${`variable`} is string but not convertable to boolean | The variable in question : ${variable}`);
+            }
         }
     }
+    throw new Error(`${`variable`} is neither string nor boolean and is not convertable to boolean | The variable : ${variable}`);
 }
