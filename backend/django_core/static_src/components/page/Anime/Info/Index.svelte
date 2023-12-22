@@ -1,8 +1,17 @@
+<script lang="ts">
+    export let anime_name: string | null = null,
+        anime_japanese_name: string | null = null,
+        // Is number
+        anime_episodes_count: string | null = null,
+        anime_synopsis: string | null = null;
+    import CommentBox from "$components/specific/CommentBox/Index.svelte";
+</script>
 
 <div class="relative mt-16 block h-screen bg-cover md:mt-0">
     <img
         src="https://files.otakustudy.com/wp-content/uploads/2020/10/10153058/your-lie-in-april-cover.jpg"
         class="absolute hidden h-full w-full select-none rounded-tl-[1.5vw] object-cover object-center md:flex"
+        alt={anime_name}
     />
     <div class="gradient absolute inset-0 bg-gradient-to-t from-secondary to-secondary/80"></div>
     <div class="absolute inset-0 grid grid-cols-12 items-start p-5 pt-10 md:p-[5vw]">
@@ -10,168 +19,207 @@
             <div class="grid grid-cols-12 items-end justify-between">
                 <div class="relative col-span-12 grid grid-cols-12 gap-5 md:col-span-7 md:flex md:w-full md:items-end md:gap-[2vw] md:pr-[2vw]">
                     <div class="relative col-span-12 h-96 md:h-[18.25vw] md:w-[13vw] md:flex-shrink-0">
-                        <div class="pointer-events-none absolute inset-0 z-10 h-[150%] w-[125%] -translate-x-8 -translate-y-28 [background-image:radial-gradient(circle_at_center,rgba(255,255,255,0.1)0%,transparent_100%)] [mask-image:linear-gradient(to_bottom,rgba(7,5,25,0.95)80%,rgba(0,0,0,0)100%)] md:hidden"></div>
+                        <div
+                            class="pointer-events-none absolute inset-0 z-10 h-[150%] w-[125%] -translate-x-8 -translate-y-28 [background-image:radial-gradient(circle_at_center,rgba(255,255,255,0.1)0%,transparent_100%)] [mask-image:linear-gradient(to_bottom,rgba(7,5,25,0.95)80%,rgba(0,0,0,0)100%)] md:hidden"
+                        ></div>
                         <img
                             src="https://files.otakustudy.com/wp-content/uploads/2020/10/10153058/your-lie-in-april-cover.jpg"
                             class="h-full w-full rounded-xl object-cover object-center md:rounded-[1vw]"
                         />
-                        <div class="gradient absolute inset-0 bg-gradient-to-t from-surface-900/75 to-surface-900/25 md:hidden"></div>
+                        <div class="gradient from-surface-900/75 to-surface-900/25 absolute inset-0 bg-gradient-to-t md:hidden"></div>
                     </div>
                     <div class="absolute bottom-0 col-span-12 p-5 md:static md:p-0">
-                        <coreproject-hover-expand class="text-2xl font-bold md:text-[2vw] md:leading-[2.7vw] text-white w-full" height="max-h-48 md:max-h-[10vw]">
-                            {{ anime.name }}
+                        <coreproject-hover-expand
+                            class="w-full text-2xl font-bold text-white md:text-[2vw] md:leading-[2.7vw]"
+                            height="max-h-48 md:max-h-[10vw]"
+                        >
+                            {anime_name}
                         </coreproject-hover-expand>
-                        <anime-japanese-name class="flex flex-wrap gap-x-2 pt-2 text-xs font-semibold uppercase tracking-wider md:gap-x-[0.25vw] md:pt-[0.625vw] md:text-[0.75vw] md:leading-[0.9vw]">
-                            {{ anime.japanese_name }}
-                        </anime-japanese-name>
+                        <div class="flex flex-wrap gap-x-2 pt-2 text-xs font-semibold uppercase tracking-wider md:gap-x-[0.25vw] md:pt-[0.625vw] md:text-[0.75vw] md:leading-[0.9vw]">
+                            {anime_japanese_name}
+                        </div>
                         <div class="mt-1 flex flex-wrap items-center gap-2 text-xs font-semibold md:mt-[0.25vw] md:gap-[0.5vw] md:pt-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
                             <span>TV</span>
-                            <coreproject-icon-dot class='w-[0.35rem] opacity-75' ></coreproject-icon-dot>
-                            <span>{{ anime.episodes_count }} eps</span>
-                            <coreproject-icon-dot class='w-[0.35rem] opacity-75' ></coreproject-icon-dot>
+                            <coreproject-icon-dot class="w-[0.35rem] opacity-75"></coreproject-icon-dot>
+                            <span>{anime_episodes_count} eps</span>
+                            <coreproject-icon-dot class="w-[0.35rem] opacity-75"></coreproject-icon-dot>
                             <span>Completed</span>
-                            <coreproject-icon-dot class='w-[0.35rem] opacity-75' ></coreproject-icon-dot>
+                            <coreproject-icon-dot class="w-[0.35rem] opacity-75"></coreproject-icon-dot>
                             <span class="capitalize">spring 2023</span>
-                            <coreproject-icon-dot class='w-[0.35rem] opacity-75' ></coreproject-icon-dot>
+                            <coreproject-icon-dot class="w-[0.35rem] opacity-75"></coreproject-icon-dot>
                             <span class="uppercase tracking-wider">Kuschio animation</span>
                         </div>
                         <div class="mt-3 flex items-center gap-3 md:mt-[1.5vw] md:gap-[0.75vw]">
-                            <button type="button" class="btn btn-primary h-14 w-[6.5rem] rounded-lg font-bold text-white md:h-[4vw] md:w-[7vw] md:rounded-[0.625vw]">
+                            <button
+                                type="button"
+                                class="btn btn-primary h-14 w-[6.5rem] rounded-lg font-bold text-white md:h-[4vw] md:w-[7vw] md:rounded-[0.625vw]"
+                            >
                                 <div class="flex gap-3 md:gap-[0.7vw]">
-                                    <coreproject-icon-play class="w-5 md:w-[1.5vw]" ></coreproject-icon-play>
+                                    <coreproject-icon-play class="w-5 md:w-[1.5vw]"></coreproject-icon-play>
 
                                     <div class="flex flex-col items-start gap-1">
                                         <span class="text-sm leading-none md:text-[0.9vw]">Watch</span>
-                                        <span class="text-xs font-semibold leading-none text-surface-50 md:text-[0.75vw]">Ep 01</span>
+                                        <span class="text-surface-50 text-xs font-semibold leading-none md:text-[0.75vw]">Ep 01</span>
                                     </div>
                                 </div>
                             </button>
-                            <button type="button" class="btn h-14 w-14 rounded-lg bg-secondary-100 capitalize text-surface-500 md:h-[4vw] md:w-[4vw] md:rounded-[0.625vw] md:text-[0.87vw] md:font-semibold" disabled>
+                            <button
+                                type="button"
+                                class="bg-secondary-100 text-surface-500 btn h-14 w-14 rounded-lg capitalize md:h-[4vw] md:w-[4vw] md:rounded-[0.625vw] md:text-[0.87vw] md:font-semibold"
+                                disabled
+                            >
                                 <div class="flex flex-col items-center gap-2 md:gap-[0.68vw]">
-                                    <coreproject-icon-book class='w-4 md:w-[1.5vw] text-surface-500'></coreproject-icon-book>
+                                    <coreproject-icon-book class="text-surface-500 w-4 md:w-[1.5vw]"></coreproject-icon-book>
                                     <span class="leading-none">read</span>
                                 </div>
                             </button>
-                            <button type="button" class="btn h-14 w-14 rounded-lg bg-secondary-100 capitalize text-surface-500 md:h-[4vw] md:w-[4vw] md:rounded-[0.625vw] md:text-[0.87vw] md:font-semibold" disabled>
+                            <button
+                                type="button"
+                                class="bg-secondary-100 text-surface-500 btn h-14 w-14 rounded-lg capitalize md:h-[4vw] md:w-[4vw] md:rounded-[0.625vw] md:text-[0.87vw] md:font-semibold"
+                                disabled
+                            >
                                 <div class="flex flex-col items-center gap-2 md:gap-[0.68vw]">
-                                    <coreproject-icon-headphone class="w-4 md:w-[1.5vw] text-surface-500"></coreproject-icon-headphone>
+                                    <coreproject-icon-headphone class="text-surface-500 w-4 md:w-[1.5vw]"></coreproject-icon-headphone>
                                     <span class="leading-none">listen</span>
                                 </div>
                             </button>
                         </div>
                         <div class="mt-3 flex gap-2 md:mt-[0.75vw] md:gap-[0.75vw]">
-                            <button type="button" aria-label="video" class="btn btn-warning w-7 h-7 rounded p-0 md:w-[2vw] md:h-[2vw] md:rounded-[0.25vw] min-h-full">
+                            <button
+                                type="button"
+                                aria-label="video"
+                                class="btn btn-warning h-7 min-h-full w-7 rounded p-0 md:h-[2vw] md:w-[2vw] md:rounded-[0.25vw]"
+                            >
                                 <coreproject-icon-record class="w-4 md:w-[1.125vw]"></coreproject-icon-record>
                             </button>
-                            <button type="button" aria-label="video" class="btn btn-warning w-7 h-7 rounded p-0 md:w-[2vw] md:h-[2vw] md:rounded-[0.25vw] min-h-full">
-                                <coreproject-icon-edit class="w-4 md:w-[1.125vw]" ></coreproject-icon-edit>
+                            <button
+                                type="button"
+                                aria-label="video"
+                                class="btn btn-warning h-7 min-h-full w-7 rounded p-0 md:h-[2vw] md:w-[2vw] md:rounded-[0.25vw]"
+                            >
+                                <coreproject-icon-edit class="w-4 md:w-[1.125vw]"></coreproject-icon-edit>
                             </button>
-                            <button type="button" aria-label="video" class="btn btn-warning w-7 h-7 rounded p-0 md:w-[2vw] md:h-[2vw] md:rounded-[0.25vw] min-h-full">
+                            <button
+                                type="button"
+                                aria-label="video"
+                                class="btn btn-warning h-7 min-h-full w-7 rounded p-0 md:h-[2vw] md:w-[2vw] md:rounded-[0.25vw]"
+                            >
                                 <coreproject-icon-download class="w-4 md:w-[1.125vw]"></coreproject-icon-download>
                             </button>
-                            <button type="button" aria-label="video" class="btn btn-warning w-7 h-7 rounded p-0 md:w-[2vw] md:h-[2vw] md:rounded-[0.25vw] min-h-full">
+                            <button
+                                type="button"
+                                aria-label="video"
+                                class="btn btn-warning h-7 min-h-full w-7 rounded p-0 md:h-[2vw] md:w-[2vw] md:rounded-[0.25vw]"
+                            >
                                 <coreproject-icon-share class="w-4 md:w-[1.125vw]"></coreproject-icon-share>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-span-12 mt-10 md:col-span-5 md:mt-0 flex flex-col gap-[0.75vw]">
-                        <div class="flex gap-[0.75vw]">
-                            <div class="text-lg font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Synopsis</div>
-                            <button class="btn btn-secondary hidden rounded-[0.1875vw] p-0 md:flex md:h-[1.5vw] md:w-[1.5vw] min-h-full">
-                                <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
-
                             </button>
-                        </div>
-                        <coreproject-scroll-area class="text-justify text-xs md:text-[0.8vw] md:leading-[1vw]" parent_class="max-h-40 md:max-h-[10vw]" offset_scrollbar="true" gradient_mask='true'>
-                            {{ anime.synopsis }}
-                        </coreproject-scroll-area>
-                        <div class="hidden gap-[0.5vw] text-white md:flex md:text-[0.75vw] md:leading-[0.9vw]">
-                            <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Action </span>
-                            <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Romance </span>
-                            <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Horror </span>
-                        </div>
-                        <div class="hidden w-max gap-[0.75vw] rounded-[0.25vw] bg-secondary md:flex md:px-[0.75vw] md:py-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
-                            <div class="flex gap-[0.25vw]">
-                                <span>Score:</span>
-                                <span class="font-semibold text-warning-400">79</span>
-                            </div>
-                            <div class="flex gap-[0.25vw]">
-                                <span>Status:</span>
-                                <button class="btn !bg-transparent border-none min-h-min h-min p-0 leading-none md:text-[0.75vw]">
-                                    <span class="font-semibold text-warning">Watching</span>
-                                    <coreproject-icon-chevron class="w-[0.625vw] text-warning-400" ></coreproject-icon-chevron>
-                                </button>
-                            </div>
-                            <div class="flex gap-[0.25vw]">
-                                <span>Episode:</span>
-                                <span class="font-semibold text-warning-400">0/9</span>
-                            </div>
-                            <div class="flex gap-[0.25vw]">
-                                <span>Your Score:</span>
-                                <button class="btn !bg-transparent border-none min-h-min h-min p-0 leading-none md:text-[0.75vw]">
-                                    <span class="font-semibold text-warning">Not Rated</span>
-                                    <coreproject-icon-chevron class="w-[0.625vw] text-warning-400"></coreproject-icon-chevron>
-                                </button>
-                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="my-7 block md:my-[6vw]">
-                    <div class="flex border-b-2 border-surface-50/10 pb-1 md:gap-x-[0.75vw] md:border-none md:pb-0">
-                        <div class="text-lg font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Episodes</div>
-                        <button class="btn btn-secondary min-h-full hidden rounded bg-surface-400 p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
+                <div class="col-span-12 mt-10 flex flex-col gap-[0.75vw] md:col-span-5 md:mt-0">
+                    <div class="flex gap-[0.75vw]">
+                        <div class="text-lg font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Synopsis</div>
+                        <button class="btn btn-secondary hidden min-h-full rounded-[0.1875vw] p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
                             <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
                         </button>
                     </div>
-                    <div class="mt-2 flex flex-col justify-between gap-y-5 md:mt-0 md:flex-row md:gap-y-0">
-                        <div class="hidden items-end gap-2 md:flex md:gap-[1vw]">
-                            <p class="flex items-center gap-1 md:gap-[0.75vw]">
-                                <span class="text-base font-bold leading-none md:text-[2vw] md:leading-[1.9vw]">23</span>
-                                <span class="text-xs font-semibold md:text-[1vw]">episodes</span>
-                                <coreproject-icon-dot class='w-[0.4vw] opacity-50' ></coreproject-icon-dot>
-                            </p>
-                            <div>
-                                <div class="flex w-full items-center gap-2 leading-4 md:gap-[1vw] md:leading-[1.5vw]">
-                                    <span class="flex-shrink-0 text-[0.5rem] font-medium md:text-[0.75vw]">Available in</span>
-                                    <div class="h-[0.1rem] w-full bg-accent opacity-25 md:h-[0.1vw]"></div>
-                                </div>
-                                <div class="flex h-5 gap-2 text-[0.5rem] font-bold md:h-[1.8vw] md:gap-[0.5vw] md:text-[0.75vw]">
-                                    <span class="flex h-full place-items-center rounded bg-secondary px-2 uppercase leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">sub </span>
-                                    <span class="flex h-full place-items-center rounded bg-secondary px-2 uppercase leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">dub </span>
-                                    <coreproject-icon-dot class='w-[0.4vw] opacity-50' ></coreproject-icon-dot>
-                                    <span class="flex h-full place-items-center rounded bg-secondary px-2 leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">1080p </span>
-                                    <span class="flex h-full place-items-center rounded bg-secondary px-2 leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">720p </span>
-                                    <span class="flex h-full place-items-center rounded bg-secondary px-2 leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">480p </span>
-                                </div>
-                            </div>
+                    <coreproject-scroll-area
+                        class="text-justify text-xs md:text-[0.8vw] md:leading-[1vw]"
+                        parent_class="max-h-40 md:max-h-[10vw]"
+                        offset_scrollbar="true"
+                        gradient_mask="true"
+                    >
+                        {anime_synopsis}
+                    </coreproject-scroll-area>
+                    <div class="hidden gap-[0.5vw] text-white md:flex md:text-[0.75vw] md:leading-[0.9vw]">
+                        <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Action</span>
+                        <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Romance</span>
+                        <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">Horror</span>
+                    </div>
+                    <div class="hidden w-max gap-[0.75vw] rounded-[0.25vw] bg-secondary md:flex md:px-[0.75vw] md:py-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
+                        <div class="flex gap-[0.25vw]">
+                            <span>Score:</span>
+                            <span class="text-warning-400 font-semibold">79</span>
                         </div>
-                        <div class="flex items-center justify-between gap-2 md:items-end md:gap-[0.75vw]">
-                            <p class="flex items-center gap-1 md:hidden">
-                                <span class="text-base font-bold leading-none">23</span>
-                                <span class="text-sm font-semibold text-surface-50">episodes</span>
-                            </p>
-                            <div class="group hidden flex-col gap-2 md:flex md:gap-[0.5vw]">
-                                <span class="text-[0.65rem] leading-[0.9vw] text-surface-50 transition-colors duration-300 group-hover:text-white md:text-[0.75vw]">Type</span>
-                                <button class="btn btn-secondary min-h-full h-7 rounded px-3 text-[0.65rem] font-semibold md:h-[2.5vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.9vw] md:leading-[0.9vw]">
-                                    <span>Subbed</span>
-                                    <coreproject-icon-chevron class="w-3 md:w-[1vw]" ></coreproject-icon-chevron>
-
-                                </button>
-                            </div>
-                            <div class="group hidden flex-col gap-2 md:flex md:gap-[0.5vw]">
-                                <span class="text-[0.65rem] leading-[0.9vw] text-surface-50 transition-colors duration-300 group-hover:text-white md:text-[0.75vw]">Display Mode</span>
-                                <button class="btn btn-secondary min-h-full h-7 rounded px-3 text-[0.65rem] font-semibold leading-[0.9vw] md:h-[2.5vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.9vw]">
-                                    <span>Thumbnails</span>
-                                    <coreproject-icon-chevron class="w-3 md:w-[1vw]" ></coreproject-icon-chevron>
-                                </button>
-                            </div>
-                            <button class="btn btn-secondary min-h-max h-7 w-auto rounded bg-surface-400 p-0 font-semibold md:ml-0 md:h-[2.5vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]" aria-label="Search">
-                                <coreproject-icon-search  class="w-3 md:w-[1vw]" ></coreproject-icon-search>
+                        <div class="flex gap-[0.25vw]">
+                            <span>Status:</span>
+                            <button class="btn h-min min-h-min border-none !bg-transparent p-0 leading-none md:text-[0.75vw]">
+                                <span class="font-semibold text-warning">Watching</span>
+                                <coreproject-icon-chevron class="text-warning-400 w-[0.625vw]"></coreproject-icon-chevron>
+                            </button>
+                        </div>
+                        <div class="flex gap-[0.25vw]">
+                            <span>Episode:</span>
+                            <span class="text-warning-400 font-semibold">0/9</span>
+                        </div>
+                        <div class="flex gap-[0.25vw]">
+                            <span>Your Score:</span>
+                            <button class="btn h-min min-h-min border-none !bg-transparent p-0 leading-none md:text-[0.75vw]">
+                                <span class="font-semibold text-warning">Not Rated</span>
+                                <coreproject-icon-chevron class="text-warning-400 w-[0.625vw]"></coreproject-icon-chevron>
                             </button>
                         </div>
                     </div>
-                    <div class="mt-4 grid grid-cols-12 gap-5 md:mt-[2.5vw] md:gap-[2.5vw]">
-                        {% for _ in '012345'|make_list %}
+                </div>
+            </div>
+            <div class="my-7 block md:my-[6vw]">
+                <div class="border-surface-50/10 flex border-b-2 pb-1 md:gap-x-[0.75vw] md:border-none md:pb-0">
+                    <div class="text-lg font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Episodes</div>
+                    <button class="bg-surface-400 btn btn-secondary hidden min-h-full rounded p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
+                        <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+                    </button>
+                </div>
+                <div class="mt-2 flex flex-col justify-between gap-y-5 md:mt-0 md:flex-row md:gap-y-0">
+                    <div class="hidden items-end gap-2 md:flex md:gap-[1vw]">
+                        <p class="flex items-center gap-1 md:gap-[0.75vw]">
+                            <span class="text-base font-bold leading-none md:text-[2vw] md:leading-[1.9vw]">23</span>
+                            <span class="text-xs font-semibold md:text-[1vw]">episodes</span>
+                            <coreproject-icon-dot class="w-[0.4vw] opacity-50"></coreproject-icon-dot>
+                        </p>
+                        <div>
+                            <div class="flex w-full items-center gap-2 leading-4 md:gap-[1vw] md:leading-[1.5vw]">
+                                <span class="flex-shrink-0 text-[0.5rem] font-medium md:text-[0.75vw]">Available in</span>
+                                <div class="h-[0.1rem] w-full bg-accent opacity-25 md:h-[0.1vw]"></div>
+                            </div>
+                            <div class="flex h-5 gap-2 text-[0.5rem] font-bold md:h-[1.8vw] md:gap-[0.5vw] md:text-[0.75vw]">
+                                <span class="flex h-full place-items-center rounded bg-secondary px-2 uppercase leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">sub</span>
+                                <span class="flex h-full place-items-center rounded bg-secondary px-2 uppercase leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">dub</span>
+                                <coreproject-icon-dot class="w-[0.4vw] opacity-50"></coreproject-icon-dot>
+                                <span class="flex h-full place-items-center rounded bg-secondary px-2 leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">1080p</span>
+                                <span class="flex h-full place-items-center rounded bg-secondary px-2 leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">720p</span>
+                                <span class="flex h-full place-items-center rounded bg-secondary px-2 leading-[0.9vw] md:rounded-[0.25vw] md:px-[0.9vw]">480p</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between gap-2 md:items-end md:gap-[0.75vw]">
+                        <p class="flex items-center gap-1 md:hidden">
+                            <span class="text-base font-bold leading-none">23</span>
+                            <span class="text-surface-50 text-sm font-semibold">episodes</span>
+                        </p>
+                        <div class="group hidden flex-col gap-2 md:flex md:gap-[0.5vw]">
+                            <span class="text-surface-50 text-[0.65rem] leading-[0.9vw] transition-colors duration-300 group-hover:text-white md:text-[0.75vw]">Type</span>
+                            <button class="btn btn-secondary h-7 min-h-full rounded px-3 text-[0.65rem] font-semibold md:h-[2.5vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.9vw] md:leading-[0.9vw]">
+                                <span>Subbed</span>
+                                <coreproject-icon-chevron class="w-3 md:w-[1vw]"></coreproject-icon-chevron>
+                            </button>
+                        </div>
+                        <div class="group hidden flex-col gap-2 md:flex md:gap-[0.5vw]">
+                            <span class="text-surface-50 text-[0.65rem] leading-[0.9vw] transition-colors duration-300 group-hover:text-white md:text-[0.75vw]">Display Mode</span>
+                            <button class="btn btn-secondary h-7 min-h-full rounded px-3 text-[0.65rem] font-semibold leading-[0.9vw] md:h-[2.5vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.9vw]">
+                                <span>Thumbnails</span>
+                                <coreproject-icon-chevron class="w-3 md:w-[1vw]"></coreproject-icon-chevron>
+                            </button>
+                        </div>
+                        <button
+                            class="bg-surface-400 btn btn-secondary h-7 min-h-max w-auto rounded p-0 font-semibold md:ml-0 md:h-[2.5vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]"
+                            aria-label="Search"
+                        >
+                            <coreproject-icon-search class="w-3 md:w-[1vw]"></coreproject-icon-search>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-4 grid grid-cols-12 gap-5 md:mt-[2.5vw] md:gap-[2.5vw]">
+                    <!-- {% for _ in '012345'|make_list %}
                             <a
                                 href="/anime/mal/1/episode/1"
                                 class="relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4"
@@ -220,306 +268,407 @@
                                     </div>
                                 </div>
                             </a>
-                        {% endfor %}
+                        {% endfor %} -->
+                </div>
+                <div class="mt-10 flex grid-cols-5 flex-col gap-10 md:mt-[3vw] md:grid md:gap-[4.375vw]">
+                    <div class="md:col-span-3">
+                        <div class="border-surface-50/10 flex gap-2 border-b-2 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
+                            <div class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Comments</div>
+                            <button class="bg-surface-400 btn btn-secondary hidden min-h-full rounded p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
+                                <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+                            </button>
+                        </div>
+                        <div class="mt-2 flex items-center justify-between md:hidden">
+                            <p class="flex items-center gap-1 md:hidden">
+                                <span class="text-base font-bold leading-none">69</span>
+                                <span class="text-surface-50 text-sm font-semibold">div</span>
+                            </p>
+                            <button
+                                class="btn-icon bg-surface-400 btn h-7 w-auto rounded p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]"
+                                aria-label="Filter"
+                            >
+                                <coreproject-icon-filter class="w-3 md:w-[1vw]"></coreproject-icon-filter>
+                            </button>
+                        </div>
+                        <div class="md:mt-[1vw]">
+                            <CommentBox></CommentBox>
+                        </div>
+                        <div class="mt-10 flex w-full md:mt-[2vw]">
+                            <!-- <coreproject-comment class="w-full" api_url='{% url "anime-commment-endpoint" pk=anime.id %}'>
+                                </coreproject-comment> -->
+                        </div>
                     </div>
-                    <div class="mt-10 flex grid-cols-5 flex-col gap-10 md:mt-[3vw] md:grid md:gap-[4.375vw]">
-                        <div class="md:col-span-3">
-                            <div class="flex gap-2 border-b-2 border-surface-50/10 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
-                                <div class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Comments</div>
-                                <button class="btn btn-secondary min-h-full hidden rounded bg-surface-400 p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
-                                    <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+                    <div class="md:col-span-2">
+                        <div class="border-surface-50/10 flex gap-2 border-b-2 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
+                            <div class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Forum div</div>
+                            <button class="bg-surface-400 btn btn-secondary hidden min-h-full rounded p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
+                                <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+                            </button>
+                        </div>
+                        <div class="mt-2 flex items-center justify-between md:mt-[0.75vw]">
+                            <p class="flex items-center gap-1 md:hidden">
+                                <span class="text-base font-bold leading-none">106</span>
+                                <span class="text-surface-50 text-sm font-semibold">div</span>
+                            </p>
+                            <div class="flex items-center gap-2 md:w-full md:justify-between">
+                                <button
+                                    class="bg-surface-400 btn btn-secondary h-7 min-h-full gap-2 rounded px-2 text-xs font-semibold md:h-[2.4vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.875vw]"
+                                >
+                                    <coreproject-icon-cross class="w-4 rotate-45 md:w-[1vw]"></coreproject-icon-cross>
+                                    Create New
                                 </button>
-                            </div>
-                            <div class="mt-2 flex items-center justify-between md:hidden">
-                                <p class="flex items-center gap-1 md:hidden">
-                                    <span class="text-base font-bold leading-none">69</span>
-                                    <span class="text-sm font-semibold text-surface-50">div</span>
-                                </p>
-                                <button class="btn btn-icon h-7 w-auto rounded bg-surface-400 p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]" aria-label="Filter">
-                                    <coreproject-icon-filter class="w-3 md:w-[1vw]"></coreproject-icon-filter >
-
+                                <button
+                                    class="bg-surface-400 btn btn-secondary h-7 min-h-full w-auto rounded p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]"
+                                    aria-label="Filter"
+                                >
+                                    <coreproject-icon-filter class="w-3 md:w-[1vw]"></coreproject-icon-filter>
                                 </button>
-                            </div>
-                            <div class="md:mt-[1vw]">
-                                <coreproject-specific-commentbox submit_url="{% url "anime-commment-endpoint" pk=anime.id %}"></coreproject-specific-commentbox>
-                            </div>
-                            <div class="flex w-full mt-10 md:mt-[2vw]">
-                                <coreproject-comment class="w-full" api_url='{% url "anime-commment-endpoint" pk=anime.id %}'>
-                                </coreproject-comment>
                             </div>
                         </div>
-                        <div class="md:col-span-2">
-                            <div class="flex gap-2 border-b-2 border-surface-50/10 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
-                                <div class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Forum div</div>
-                                <button class="btn btn-secondary min-h-full hidden rounded bg-surface-400 p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
-                                    <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
-                                </button>
-                            </div>
-                            <div class="mt-2 flex items-center justify-between md:mt-[0.75vw]">
-                                <p class="flex items-center gap-1 md:hidden">
-                                    <span class="text-base font-bold leading-none">106</span>
-                                    <span class="text-sm font-semibold text-surface-50">div</span>
-                                </p>
-                                <div class="flex items-center gap-2 md:w-full md:justify-between">
-                                    <button class="btn btn-secondary min-h-full h-7 gap-2 rounded bg-surface-400 px-2 text-xs font-semibold md:h-[2.4vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.875vw]">
-                                        <coreproject-icon-cross class="w-4 rotate-45 md:w-[1vw]" ></coreproject-icon-cross>
-                                        Create New
-                                    </button>
-                                    <button class="btn btn-secondary min-h-full h-7 w-auto rounded bg-surface-400 p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]" aria-label="Filter">
-                                        <coreproject-icon-filter class="w-3 md:w-[1vw]"></coreproject-icon-filter >
-
-                                    </button>
+                        <div class="mt-4 grid grid-cols-2 flex-col gap-4 md:mt-[1.25vw] md:flex md:gap-[1vw]">
+                            <a
+                                href="/"
+                                class="card w-full grid-cols-7 overflow-hidden rounded-lg !bg-neutral/50 md:grid md:rounded-[0.625vw]"
+                            >
+                                <div class="col-span-2 block h-16 md:h-full md:w-full">
+                                    <img
+                                        src="https://timelinecovers.pro/facebook-cover/download/anime-your-lie-in-april-kaori-and-arima-facebook-cover.jpg"
+                                        class="h-full w-full object-cover object-center"
+                                    />
                                 </div>
-                            </div>
-                            <div class="mt-4 grid grid-cols-2 flex-col gap-4 md:mt-[1.25vw] md:flex md:gap-[1vw]">
-                                <a href="/" class="card w-full grid-cols-7 overflow-hidden rounded-lg !bg-neutral/50 md:grid md:rounded-[0.625vw]">
-                                    <div class="col-span-2 block h-16 md:h-full md:w-full">
-                                        <img
-                                            src="https://timelinecovers.pro/facebook-cover/download/anime-your-lie-in-april-kaori-and-arima-facebook-cover.jpg"
-                                            class="h-full w-full object-cover object-center"
-                                        >
+                                <post-container class="flex h-36 flex-col justify-between p-3 md:col-span-5 md:h-full md:gap-[0.375vw] md:p-[1vw]">
+                                    <div>
+                                        <div class="line-clamp-2 text-xs font-extrabold md:text-[0.875vw] md:leading-[1.25vw]">Celebrating 10 years of Hyouka!</div>
+                                        <div class="text-surface-50 mt-2 line-clamp-3 text-[0.6rem] font-medium leading-snug md:mt-[0.5vw] md:line-clamp-2 md:text-[0.75vw] md:leading-[1.125vw]">
+                                            Ousei Arima is a child prodigy known as the "Human Metronome" for playing the piano with precision and perfection. Guided by a strict mother and rigorous
+                                            training, Kousei dominates every competition he enters
+                                        </div>
                                     </div>
-                                    <post-container class="flex h-36 flex-col justify-between p-3 md:col-span-5 md:h-full md:gap-[0.375vw] md:p-[1vw]">
-                                        <div>
-                                            <div class="line-clamp-2 text-xs font-extrabold md:text-[0.875vw] md:leading-[1.25vw]">Celebrating 10 years of Hyouka!</div>
-                                            <div class="mt-2 line-clamp-3 text-[0.6rem] font-medium leading-snug text-surface-50 md:mt-[0.5vw] md:line-clamp-2 md:text-[0.75vw] md:leading-[1.125vw]">Ousei Arima is a child prodigy known as the "Human Metronome" for playing the piano with precision and perfection. Guided by a strict mother and rigorous training, Kousei dominates every competition he enters</div>
-                                        </div>
-                                        <div class="flex items-end justify-between text-[0.6rem] leading-none md:mt-[0.75vw] md:items-center md:text-[0.75vw]">
-                                            <div class="flex flex-col gap-1 md:flex-row md:items-center md:gap-[0.25vw]">
-                                                <div>Posted by <span class="text-[0.65rem] font-semibold md:text-[0.85vw]">Eiennlaio</span></div>
-                                                <div class="text-surface-50">7 months ago</div>
+                                    <div class="flex items-end justify-between text-[0.6rem] leading-none md:mt-[0.75vw] md:items-center md:text-[0.75vw]">
+                                        <div class="flex flex-col gap-1 md:flex-row md:items-center md:gap-[0.25vw]">
+                                            <div>
+                                                Posted by <span class="text-[0.65rem] font-semibold md:text-[0.85vw]">Eiennlaio</span>
                                             </div>
-                                            <div class="flex items-center gap-1 md:gap-[0.25vw]">
-                                                <coreproject-icon-chat class="w-3 md:w-[1vw]"> </coreproject-icon-chat>
-                                                <div>69</div>
-                                            </div>
+                                            <div class="text-surface-50">7 months ago</div>
                                         </div>
-                                    </post-container>
-                                </a>
-                            </div>
+                                        <div class="flex items-center gap-1 md:gap-[0.25vw]">
+                                            <coreproject-icon-chat class="w-3 md:w-[1vw]"></coreproject-icon-chat>
+                                            <div>69</div>
+                                        </div>
+                                    </div>
+                                </post-container>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="hidden md:col-span-2 md:flex flex-col gap-[1vw]">
-                <div class="flex gap-[0.75vw]">
-                    <div class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Ratings</div>
-                    <button class="btn btn-secondary rounded-[0.1875vw] bg-surface-400 p-0 md:h-[1.5vw] md:w-[1.5vw] min-h-full">
-                        <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
-                    </button>
+        </div>
+        <div class="hidden flex-col gap-[1vw] md:col-span-2 md:flex">
+            <div class="flex gap-[0.75vw]">
+                <div class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Ratings</div>
+                <button class="bg-surface-400 btn btn-secondary min-h-full rounded-[0.1875vw] p-0 md:h-[1.5vw] md:w-[1.5vw]">
+                    <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+                </button>
+            </div>
+            <div class="flex flex-col gap-[0.75vw]">
+                <div class="flex items-center gap-[0.5vw]">
+                    <span class="border-surface-50/50 border-b-2 pb-[0.5vw] font-bold md:text-[2vw] md:leading-[1.5vw]">92%</span>
+                    <span class="!border-surface-50/50 text-surface-50 divider-vertical m-0 font-semibold md:pl-1 md:text-[0.75vw] md:leading-[0.8vw]">2.8k ratings</span>
                 </div>
-                <div class="flex flex-col gap-[0.75vw]">
-                    <div class="flex items-center gap-[0.5vw]">
-                        <span class="border-b-2 border-surface-50/50 pb-[0.5vw] font-bold md:text-[2vw] md:leading-[1.5vw]">92%</span>
-                        <span class="divider-vertical m-0 !border-surface-50/50 font-semibold text-surface-50 md:pl-1 md:text-[0.75vw] md:leading-[0.8vw]">2.8k ratings</span>
+                <div class="block">
+                    <div class="flex items-center md:gap-[0.25vw]">
+                        <span class="font-semibold md:text-[1vw] md:leading-[1.5vw]">#80</span>
+                        <span class="text-surface-50 md:text-[0.75vw] md:leading-[0.75vw]">Trending of all time</span>
                     </div>
-                    <div class="block">
-                        <div class="flex items-center md:gap-[0.25vw]">
-                            <span class="font-semibold md:text-[1vw] md:leading-[1.5vw]">#80</span>
-                            <span class="text-surface-50 md:text-[0.75vw] md:leading-[0.75vw]">Trending of all time</span>
-                        </div>
-                        <div class="flex items-center md:gap-[0.25vw]">
-                            <span class="font-semibold md:text-[1vw] md:leading-[1.5vw]">#108</span>
-                            <span class="text-surface-50 md:text-[0.75vw] md:leading-[0.75vw]">Most popular anime</span>
-                        </div>
+                    <div class="flex items-center md:gap-[0.25vw]">
+                        <span class="font-semibold md:text-[1vw] md:leading-[1.5vw]">#108</span>
+                        <span class="text-surface-50 md:text-[0.75vw] md:leading-[0.75vw]">Most popular anime</span>
                     </div>
-                    <button class="btn btn-accent md:h-[1.5vw] md:w-max md:rounded-[0.25vw] md:text-[0.75vw] min-h-full">
-                        <coreproject-icon-trending-arrow class="w-[1.25vw]"></coreproject-icon-trending-arrow>
-                        <span>Detailed Distribution</span>
-                    </button>
-                    <div class="leading-none flex flex-col gap-[0.5vw]">
-                        <span class="font-semibold md:text-[0.9vw] md:leading-[0.9vw]">Your rating</span>
-                        <div class="flex items-center gap-[0.75vw]">
-                        {# Convert this into django component #}
-                            <div>
-                                <div class="ratings w-full flex text-token fill-token justify-center gap-[0.35vw]" data-testid="rating-bar">
-                                    <span class="rating-icon ">
-                                        <svg width="30" height="30" viewBox="0 0 30 30" fill="white" xmlns="http://www.w3.org/2000/svg" color="white" class="w-[1.25vw]">
-                                            <path d="M15 2.5L18.8625 10.325L27.5 11.5875L21.25 17.675L22.725 26.275L15 22.2125L7.275 26.275L8.75 17.675L2.5 11.5875L11.1375 10.325L15 2.5Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        </svg>
-                                    </span>
-                                    <span class="rating-icon ">
-                                        <svg width="30" height="30" viewBox="0 0 30 30" fill="white" xmlns="http://www.w3.org/2000/svg" color="white" class="w-[1.25vw]">
-                                            <path d="M15 2.5L18.8625 10.325L27.5 11.5875L21.25 17.675L22.725 26.275L15 22.2125L7.275 26.275L8.75 17.675L2.5 11.5875L11.1375 10.325L15 2.5Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        </svg>
-                                    </span>
-                                    <span class="rating-icon ">
-                                        <svg width="30" height="30" viewBox="0 0 30 30" fill="white" xmlns="http://www.w3.org/2000/svg" color="white" class="w-[1.25vw]">
-                                            <path d="M15 2.5L18.8625 10.325L27.5 11.5875L21.25 17.675L22.725 26.275L15 22.2125L7.275 26.275L8.75 17.675L2.5 11.5875L11.1375 10.325L15 2.5Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        </svg>
-                                    </span>
-                                    <span class="rating-icon ">
-                                        <svg width="30" height="30" viewBox="0 0 30 30" fill="white" xmlns="http://www.w3.org/2000/svg" color="white" class="w-[1.25vw]">
-                                            <path d="M15 2.5L18.8625 10.325L27.5 11.5875L21.25 17.675L22.725 26.275L15 22.2125L7.275 26.275L8.75 17.675L2.5 11.5875L11.1375 10.325L15 2.5Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        </svg>
-                                    </span>
-                                    <span class="rating-icon">
-                                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" color="white" class="w-[1.25vw]">
-                                            <defs>
-                                                <linearGradient id="grad">
-                                                    <stop offset="50%" stop-color="white"></stop>
-                                                    <stop offset="50%" stop-color="transparent"></stop>
-                                                </linearGradient>
-                                            </defs>
-                                            <path fill="url(#grad)" d="M15 2.5L18.8625 10.325L27.5 11.5875L21.25 17.675L22.725 26.275L15 22.2125L7.275 26.275L8.75 17.675L2.5 11.5875L11.1375 10.325L15 2.5Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        </svg>
-                                    </span>
-                                </div>
+                </div>
+                <button class="btn btn-accent min-h-full md:h-[1.5vw] md:w-max md:rounded-[0.25vw] md:text-[0.75vw]">
+                    <coreproject-icon-trending-arrow class="w-[1.25vw]"></coreproject-icon-trending-arrow>
+                    <span>Detailed Distribution</span>
+                </button>
+                <div class="flex flex-col gap-[0.5vw] leading-none">
+                    <span class="font-semibold md:text-[0.9vw] md:leading-[0.9vw]">Your rating</span>
+                    <div class="flex items-center gap-[0.75vw]">
+                        <div>
+                            <div
+                                class="ratings text-token fill-token flex w-full justify-center gap-[0.35vw]"
+                                data-testid="rating-bar"
+                            >
+                                <span class="rating-icon">
+                                    <svg
+                                        width="30"
+                                        height="30"
+                                        viewBox="0 0 30 30"
+                                        fill="white"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        color="white"
+                                        class="w-[1.25vw]"
+                                    >
+                                        <path
+                                            d="M15 2.5L18.8625 10.325L27.5 11.5875L21.25 17.675L22.725 26.275L15 22.2125L7.275 26.275L8.75 17.675L2.5 11.5875L11.1375 10.325L15 2.5Z"
+                                            stroke="currentColor"
+                                            stroke-width="3"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        ></path>
+                                    </svg>
+                                </span>
+                                <span class="rating-icon">
+                                    <svg
+                                        width="30"
+                                        height="30"
+                                        viewBox="0 0 30 30"
+                                        fill="white"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        color="white"
+                                        class="w-[1.25vw]"
+                                    >
+                                        <path
+                                            d="M15 2.5L18.8625 10.325L27.5 11.5875L21.25 17.675L22.725 26.275L15 22.2125L7.275 26.275L8.75 17.675L2.5 11.5875L11.1375 10.325L15 2.5Z"
+                                            stroke="currentColor"
+                                            stroke-width="3"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        ></path>
+                                    </svg>
+                                </span>
+                                <span class="rating-icon">
+                                    <svg
+                                        width="30"
+                                        height="30"
+                                        viewBox="0 0 30 30"
+                                        fill="white"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        color="white"
+                                        class="w-[1.25vw]"
+                                    >
+                                        <path
+                                            d="M15 2.5L18.8625 10.325L27.5 11.5875L21.25 17.675L22.725 26.275L15 22.2125L7.275 26.275L8.75 17.675L2.5 11.5875L11.1375 10.325L15 2.5Z"
+                                            stroke="currentColor"
+                                            stroke-width="3"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        ></path>
+                                    </svg>
+                                </span>
+                                <span class="rating-icon">
+                                    <svg
+                                        width="30"
+                                        height="30"
+                                        viewBox="0 0 30 30"
+                                        fill="white"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        color="white"
+                                        class="w-[1.25vw]"
+                                    >
+                                        <path
+                                            d="M15 2.5L18.8625 10.325L27.5 11.5875L21.25 17.675L22.725 26.275L15 22.2125L7.275 26.275L8.75 17.675L2.5 11.5875L11.1375 10.325L15 2.5Z"
+                                            stroke="currentColor"
+                                            stroke-width="3"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        ></path>
+                                    </svg>
+                                </span>
+                                <span class="rating-icon">
+                                    <svg
+                                        width="30"
+                                        height="30"
+                                        viewBox="0 0 30 30"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        color="white"
+                                        class="w-[1.25vw]"
+                                    >
+                                        <defs>
+                                            <linearGradient id="grad">
+                                                <stop
+                                                    offset="50%"
+                                                    stop-color="white"
+                                                ></stop>
+                                                <stop
+                                                    offset="50%"
+                                                    stop-color="transparent"
+                                                ></stop>
+                                            </linearGradient>
+                                        </defs>
+                                        <path
+                                            fill="url(#grad)"
+                                            d="M15 2.5L18.8625 10.325L27.5 11.5875L21.25 17.675L22.725 26.275L15 22.2125L7.275 26.275L8.75 17.675L2.5 11.5875L11.1375 10.325L15 2.5Z"
+                                            stroke="currentColor"
+                                            stroke-width="3"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        ></path>
+                                    </svg>
+                                </span>
                             </div>
-                            <span class="font-bold leading-none md:text-[0.95vw]">92%</span>
-                            <button class="btn btn-secondary min-h-full p-[0.3vw] text-surface-500 md:w-[1.375vw] md:h-[1.375vw] md:rounded-[0.19vw]">
-                                <coreproject-icon-edit class="w-[0.75vw]" ></coreproject-icon-edit>
-                            </button>
                         </div>
+                        <span class="font-bold leading-none md:text-[0.95vw]">92%</span>
+                        <button class="text-surface-500 btn btn-secondary min-h-full p-[0.3vw] md:h-[1.375vw] md:w-[1.375vw] md:rounded-[0.19vw]">
+                            <coreproject-icon-edit class="w-[0.75vw]"></coreproject-icon-edit>
+                        </button>
                     </div>
-                    <button class="btn !bg-transparent border-none min-h-full h-min w-max flex items-center gap-[0.5vw] p-0 md:text-[0.8vw]">
-                        Add a review
-                        <coreproject-icon-edit class="w-[0.8vw]" ></coreproject-icon-edit>
-                    </button>
                 </div>
-                <div class="flex gap-[0.75vw] md:mt-[6vw]">
-                    <div class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Details</div>
-                    <button class="btn btn-secondary min-h-full rounded p-0 md:h-[1.5vw] md:w-[1.5vw]">
-                        <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
-                    </button>
-                </div>
-                <div class="md:mt-[1.25vw] md:mb-[2vw]">
-                    <div class="flex flex-col gap-[1.125vw] capitalize">
-                        <div class="flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none text-surface-50">
-                            <p class="font-semibold text-white">format</p>
-                            <p>TV</p>
-                        </div>
-                        <div class="flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none text-surface-50">
-                            <p class="font-semibold text-white">episodes</p>
-                            <p>22</p>
-                        </div>
-                        <div class="flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none text-surface-50">
-                            <p class="font-semibold text-white">episode Duration</p>
-                            <p>26 Minutes</p>
-                        </div>
-                        <div class="flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none text-surface-50">
-                            <p class="font-semibold text-white">status</p>
-                            <p>finished</p>
-                        </div>
-                        <div class="flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none text-surface-50">
-                            <p class="font-semibold text-white">start date</p>
-                            <p>Apr 23, 2012</p>
-                        </div>
-                        <div class="flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none text-surface-50">
-                            <p class="font-semibold text-white">end date</p>
-                            <p>Sep 16, 2012</p>
-                        </div>
-                        <div class="flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none text-surface-50">
-                            <p class="font-semibold text-white">season</p>
-                            <p>spring 2012</p>
-                        </div>
-                        <div class="flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none text-surface-50">
-                            <p class="font-semibold text-white">studios</p>
-                            <p>Kyoto Animation</p>
-                        </div>
-                        <div class="flex flex-col gap-[0.75vw] text-[0.9375vw] leading-none text-surface-50">
-                            <p class="font-semibold text-white">producers</p>
-                            <p>Animation Do</p>
-                            <p>Kadokawa Shoten</p>
-                            <p>Klock Worx</p>
-                            <p>Lantis</p>
-                            <p>chara-ani.com</p>
-                        </div>
-                        <div class="flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none text-surface-50">
-                            <p class="font-semibold text-white">source</p>
-                            <p>Night Novel</p>
-                        </div>
+                <button class="btn flex h-min min-h-full w-max items-center gap-[0.5vw] border-none !bg-transparent p-0 md:text-[0.8vw]">
+                    Add a review
+                    <coreproject-icon-edit class="w-[0.8vw]"></coreproject-icon-edit>
+                </button>
+            </div>
+            <div class="flex gap-[0.75vw] md:mt-[6vw]">
+                <div class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Details</div>
+                <button class="btn btn-secondary min-h-full rounded p-0 md:h-[1.5vw] md:w-[1.5vw]">
+                    <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+                </button>
+            </div>
+            <div class="md:mb-[2vw] md:mt-[1.25vw]">
+                <div class="flex flex-col gap-[1.125vw] capitalize">
+                    <div class="text-surface-50 flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none">
+                        <p class="font-semibold text-white">format</p>
+                        <p>TV</p>
                     </div>
-                    <div class="mt-[2.5vw] block">
-                        <div class="flex gap-[0.75vw]">
-                            <div class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Voiceover Cast</div>
-                            <button class="btn btn-secondary min-h-full rounded bg-surface-400 p-0 md:h-[1.5vw] md:w-[1.5vw]">
-                                <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
-                            </button>
+                    <div class="text-surface-50 flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none">
+                        <p class="font-semibold text-white">episodes</p>
+                        <p>22</p>
+                    </div>
+                    <div class="text-surface-50 flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none">
+                        <p class="font-semibold text-white">episode Duration</p>
+                        <p>26 Minutes</p>
+                    </div>
+                    <div class="text-surface-50 flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none">
+                        <p class="font-semibold text-white">status</p>
+                        <p>finished</p>
+                    </div>
+                    <div class="text-surface-50 flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none">
+                        <p class="font-semibold text-white">start date</p>
+                        <p>Apr 23, 2012</p>
+                    </div>
+                    <div class="text-surface-50 flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none">
+                        <p class="font-semibold text-white">end date</p>
+                        <p>Sep 16, 2012</p>
+                    </div>
+                    <div class="text-surface-50 flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none">
+                        <p class="font-semibold text-white">season</p>
+                        <p>spring 2012</p>
+                    </div>
+                    <div class="text-surface-50 flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none">
+                        <p class="font-semibold text-white">studios</p>
+                        <p>Kyoto Animation</p>
+                    </div>
+                    <div class="text-surface-50 flex flex-col gap-[0.75vw] text-[0.9375vw] leading-none">
+                        <p class="font-semibold text-white">producers</p>
+                        <p>Animation Do</p>
+                        <p>Kadokawa Shoten</p>
+                        <p>Klock Worx</p>
+                        <p>Lantis</p>
+                        <p>chara-ani.com</p>
+                    </div>
+                    <div class="text-surface-50 flex flex-col gap-[0.5vw] text-[0.9375vw] leading-none">
+                        <p class="font-semibold text-white">source</p>
+                        <p>Night Novel</p>
+                    </div>
+                </div>
+                <div class="mt-[2.5vw] block">
+                    <div class="flex gap-[0.75vw]">
+                        <div class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Voiceover Cast</div>
+                        <button class="bg-surface-400 btn btn-secondary min-h-full rounded p-0 md:h-[1.5vw] md:w-[1.5vw]">
+                            <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+                        </button>
+                    </div>
+                    <div class="mt-[1vw] flex flex-col">
+                        <span class="text-surface-50 text-[0.9375vw]">VAs</span>
+                        <button class="bg-surface-400 btn btn-secondary mt-[0.3vw] h-[2.25vw] min-h-full w-[6.625vw] gap-1 rounded-[0.375vw] p-0 text-[0.875vw]">
+                            Japanese
+                            <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
+                        </button>
+                    </div>
+                    <div class="mt-[1vw] block">
+                        <div class="relative grid h-[9vw] w-full grid-cols-2 gap-[2px] overflow-hidden rounded-[0.75vw]">
+                            <div class="relative col-span-1 w-full bg-cover">
+                                <img
+                                    src="https://i.pinimg.com/550x/ed/47/64/ed4764a0074e785738f2797641aeb411.jpg"
+                                    class="absolute h-full w-full object-cover object-center"
+                                />
+                                <span class="absolute bottom-[0.3vw] z-10 w-full text-center text-[0.9vw] font-bold leading-[1vw] text-white md:px-[1vw]">Houtarou Oreki</span>
+                            </div>
+                            <div class="relative col-span-1 w-full bg-cover">
+                                <img
+                                    src="https://animeanime.global/wp-content/uploads/2020/10/360236.jpg"
+                                    class="absolute h-full w-full object-cover object-center"
+                                />
+                                <span class="absolute bottom-[0.3vw] z-10 w-full text-center text-[0.9vw] font-bold leading-[1vw] text-white md:px-[1vw]">Yuuichi Nakamura</span>
+                            </div>
+                            <div class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-secondary/75 to-secondary/5"></div>
                         </div>
                         <div class="mt-[1vw] flex flex-col">
-                            <span class="text-[0.9375vw] text-surface-50">VAs</span>
-                            <button class="btn btn-secondary min-h-full mt-[0.3vw] h-[2.25vw] w-[6.625vw] gap-1 rounded-[0.375vw] bg-surface-400 p-0 text-[0.875vw]">
-                                Japanese
-                                <coreproject-icon-chevron class="w-[1vw]" ></coreproject-icon-chevron>
-                            </button>
-                        </div>
-                        <div class="mt-[1vw] block">
-                            <div class="relative grid h-[9vw] w-full grid-cols-2 gap-[2px] overflow-hidden rounded-[0.75vw]">
-                                <div class="relative col-span-1 w-full bg-cover">
-                                    <img
-                                        src="https://i.pinimg.com/550x/ed/47/64/ed4764a0074e785738f2797641aeb411.jpg"
-                                        class="absolute h-full w-full object-cover object-center"
-                                    >
-                                    <span class="absolute bottom-[0.3vw] z-10 w-full text-center text-[0.9vw] font-bold leading-[1vw] md:px-[1vw] text-white">Houtarou Oreki</span>
-                                </div>
-                                <div class="relative col-span-1 w-full bg-cover">
-                                    <img
-                                        src="https://animeanime.global/wp-content/uploads/2020/10/360236.jpg"
-                                        class="absolute h-full w-full object-cover object-center"
-                                    >
-                                    <span class="absolute bottom-[0.3vw] z-10 w-full text-center text-[0.9vw] font-bold leading-[1vw] md:px-[1vw] text-white">Yuuichi Nakamura</span>
-                                </div>
-                                <div class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-secondary/75 to-secondary/5"></div>
+                            <div class="btn-group">
+                                <button class="btn btn-secondary min-h-full p-0 md:h-[2vw] md:w-[2vw]">
+                                    \
+                                    <coreproject-icon-chevron class="w-[1vw] rotate-180"></coreproject-icon-chevron>
+                                </button>
+                                <button class="btn btn-secondary min-h-full p-0 md:h-[2vw] md:w-[2vw]">01</button>
+                                <button class="btn btn-secondary min-h-full p-0 md:h-[2vw] md:w-[2vw]">
+                                    <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
+                                </button>
                             </div>
-                            <div class="mt-[1vw] flex flex-col">
-                                <div class="btn-group">
-                                    <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">\
-                                        <coreproject-icon-chevron class="w-[1vw] rotate-180"></coreproject-icon-chevron>
-
-                                    </button>
-                                    <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">01</button>
-                                    <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">
-                                        <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
-                                    </button>
-                                </div>
-                                <span class="mt-[0.5vw] text-[0.75vw] leading-none text-surface-50">Showing 1-5, out of 58 Voiceover div</span>
-                            </div>
+                            <span class="text-surface-50 mt-[0.5vw] text-[0.75vw] leading-none">Showing 1-5, out of 58 Voiceover div</span>
                         </div>
                     </div>
-                    <div class="mt-[2.5vw] block">
-                        <div class="flex gap-3">
-                            <div class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">div</div>
-                            <button class="btn btn-secondary min-h-full rounded bg-surface-400 p-0 md:h-[1.5vw] md:w-[1.5vw]">
-                                <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
-                            </button>
+                </div>
+                <div class="mt-[2.5vw] block">
+                    <div class="flex gap-3">
+                        <div class="font-semibold md:text-[1.25vw] md:leading-[1.5vw]">div</div>
+                        <button class="bg-surface-400 btn btn-secondary min-h-full rounded p-0 md:h-[1.5vw] md:w-[1.5vw]">
+                            <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+                        </button>
+                    </div>
+                    <div class="mt-[1vw] block">
+                        <div class="grid grid-cols-2 gap-[0.75vw]">
+                            <a
+                                href="/myanimelist/1"
+                                class="card relative col-span-1 h-[9.375vw] w-full overflow-hidden rounded-[0.75vw] bg-cover bg-center"
+                            >
+                                <img
+                                    src="https://cdn.myanimelist.net/images/anime/1958/107912.jpg"
+                                    class="absolute h-full w-full object-cover object-center"
+                                />
+                                <span class="absolute bottom-[0.3vw] z-10 line-clamp-2 w-full px-[0.5vw] text-center text-[0.9vw] font-semibold leading-[1.25vw] text-white">
+                                    Yahari Ore no Seishun Love Come wa Machigatteiru.
+                                </span>
+                                <div class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-secondary/75 to-secondary/5"></div>
+                            </a>
+                            <a
+                                href="/myanimelist/1"
+                                class="card relative col-span-1 h-[9.375vw] w-full overflow-hidden rounded-[0.75vw] bg-cover"
+                            >
+                                <img
+                                    src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx849-uXOftsjBDz2T.png"
+                                    class="absolute h-full w-full object-cover object-center"
+                                />
+                                <span class="absolute bottom-[0.3vw] z-10 line-clamp-2 w-full px-[0.5vw] text-center text-[0.9vw] font-semibold leading-[1.25vw] text-white">
+                                    Suzumiya Haruhi no Yuuutsu
+                                </span>
+                                <div class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-secondary/75 to-secondary/5"></div>
+                            </a>
                         </div>
-                        <div class="mt-[1vw] block">
-                            <div class="grid grid-cols-2 gap-[0.75vw]">
-                                <a href="/myanimelist/1" class="card relative col-span-1 h-[9.375vw] w-full overflow-hidden rounded-[0.75vw] bg-cover bg-center">
-                                    <img
-                                        src="https://cdn.myanimelist.net/images/anime/1958/107912.jpg"
-                                        class="absolute h-full w-full object-cover object-center"
-                                    >
-                                    <span class="absolute bottom-[0.3vw] z-10 line-clamp-2 w-full px-[0.5vw] text-center text-[0.9vw] font-semibold leading-[1.25vw] text-white">Yahari Ore no Seishun Love Come wa Machigatteiru.</span>
-                                    <div class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-secondary/75 to-secondary/5"></div>
-                                </a>
-                                <a href="/myanimelist/1" class="card relative col-span-1 h-[9.375vw] w-full overflow-hidden rounded-[0.75vw] bg-cover">
-                                    <img
-                                        src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx849-uXOftsjBDz2T.png"
-                                        class="absolute h-full w-full object-cover object-center"
-                                    >
-                                    <span class="absolute bottom-[0.3vw] z-10 line-clamp-2 w-full px-[0.5vw] text-center text-[0.9vw] font-semibold leading-[1.25vw] text-white">Suzumiya Haruhi no Yuuutsu</span>
-                                    <div class="gradient absolute inset-0 rounded-b-[0.45vw] bg-gradient-to-t from-secondary/75 to-secondary/5"></div>
-                                </a>
+                        <div class="mt-[1vw] flex flex-col">
+                            <div class="btn-group">
+                                <button class="btn btn-secondary min-h-full p-0 md:h-[2vw] md:w-[2vw]">
+                                    <coreproject-icon-chevron class="w-[1vw] rotate-180"></coreproject-icon-chevron>
+                                </button>
+                                <button class="btn btn-secondary min-h-full p-0 md:h-[2vw] md:w-[2vw]">01</button>
+                                <button class="btn btn-secondary min-h-full p-0 md:h-[2vw] md:w-[2vw]">
+                                    <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
+                                </button>
                             </div>
-                            <div class="mt-[1vw] flex flex-col">
-                                <div class="btn-group">
-                                    <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">
-                                        <coreproject-icon-chevron class="w-[1vw] rotate-180"></coreproject-icon-chevron>
-
-                                    </button>
-                                    <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">01</button>
-                                    <button class="btn btn-secondary min-h-full md:w-[2vw] md:h-[2vw] p-0">
-                                        <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
-
-                                    </button>
-                                </div>
-                                <span class="mt-[0.5vw] text-[0.75vw] leading-none text-surface-50">Showing 1-8, out of 47 div</span>
-                            </div>
+                            <span class="text-surface-50 mt-[0.5vw] text-[0.75vw] leading-none">Showing 1-8, out of 47 div</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
