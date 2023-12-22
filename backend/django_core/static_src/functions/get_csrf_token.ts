@@ -5,6 +5,7 @@ export function get_csrf_token() {
     let token: string | null = null;
     token = window.csrfmiddlewaretoken;
 
+    
     if (_.isNull(token)) {
         throw new Error("There is no CSRF Token set by `django`");
     }
