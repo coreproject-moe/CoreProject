@@ -1,4 +1,3 @@
-from django.urls import reverse_lazy
 
 
 latest_animes = [
