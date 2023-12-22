@@ -7,7 +7,6 @@ from django.shortcuts import render
 from ..data.anime import (
     anime,
     anime_episode,
-    icons,
     latest_animes,
     latest_episodes,
     my_list,
@@ -56,7 +55,6 @@ async def anime_home_view(request: "HtmxHttpRequest") -> HttpResponse:
         request,
         "anime/_layout.html",
         context={
-            "icons": icons,
             "latest_animes": latest_animes,
             "my_list": my_list,
             "latest_episodes": latest_episodes_json,
@@ -68,7 +66,7 @@ async def anime_explore_view(request: "HtmxHttpRequest") -> HttpResponse:
     if request.htmx:
         return render(request, "anime/explore/index.html")
 
-    return render(request, "anime/_layout.html", context={"icons": icons})
+    return render(request, "anime/_layout.html", context={})
 
 
 async def anime_info_view(
@@ -83,7 +81,7 @@ async def anime_info_view(
             context={"anime": anime, "episode": anime_episode},
         )
 
-    return render(request, "anime/_layout.html", context={"icons": icons})
+    return render(request, "anime/_layout.html", context={})
 
 
 async def anime_episode_view(
@@ -96,4 +94,4 @@ async def anime_episode_view(
             context={},
         )
 
-    return render(request, "anime/_layout.html", context={"icons": icons})
+    return render(request, "anime/_layout.html", context={})

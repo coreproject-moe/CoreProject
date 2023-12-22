@@ -1,33 +1,3 @@
-from django.urls import reverse_lazy
-
-icons = [
-    {
-        "icon": '<coreproject-icon-home class="w-[1.25vw]"></coreproject-icon-home>',
-        "label": "home",
-        "href": reverse_lazy("anime_home_view"),
-    },
-    {
-        "icon": '<coreproject-icon-compass class="w-[1.25vw]"></coreproject-icon-compass>',
-        "label": "explore",
-        "href": "/anime/explore/",
-    },
-    {
-        "icon": '<coreproject-icon-list class="w-[1.25vw]"></coreproject-icon-list>',
-        "label": "list",
-        "href": "/anime/list/",
-    },
-    {
-        "icon": '<coreproject-icon-calender class="w-[1.25vw]"></coreproject-icon-calender>',
-        "href": "/anime/shedule",
-        "label": "schedule",
-    },
-    {
-        "icon": '<coreproject-icon-chat class="w-[1.25vw]"></coreproject-icon-chat>',
-        "href": "/anime/forum",
-        "label": "forum",
-    },
-]
-
 latest_animes = [
     {
         "id": 1,
