@@ -18,22 +18,6 @@
     import { Anime } from "../../../types/anime";
     import { onMount } from "svelte";
 
-    // Mock
-    const trending_animes = [
-        {
-            id: 1,
-            name: "One piece",
-            cover: "https://i.pinimg.com/originals/04/65/2b/04652b44ea7c1275d1022d98d59ecc97.jpg",
-            synopsis: `Azur Lane, a combination of all the different Camps in the world, was once successful in repelling the underwater menace, the Siren. Now splintered, they must face a new threat in Red Axis, former allies who crave to wield this otherworldly Siren technology for their own nefarious desires! Who will be victorious in the never-ending war between these battleship girls!? Akagami no Shirayuki-hime depicts Shirayuki's journey toward a new life at the royal palace of Clarines, as well as Zen's endeavor to become a prince worthy of his title. As loyal friendships are forged and deadly enemies formed, Shirayuki and Zen slowly learn to support each other as they walk their own paths.`,
-            current_episode: 4,
-            episodes_count: 1071,
-            genres: ["Action", "Ecchi", "sci-Fi"],
-            type: "TV",
-            release_date: "2023-04-22T10:30:00.000Z",
-            studios: ["Bibury Animation Studios"]
-        },
-    ];
-
     // Binding
     let result_animes_element: HTMLDivElement;
     let search_query = "";
@@ -342,7 +326,7 @@
                             {#each results as anime}
                                 <a
                                     in:scale={{ start: 0.95 }}
-                                    href="/mal/{anime.id}"
+                                    href="/mal/{anime.mal_id}"
                                     class="relative col-span-1 grid grid-cols-1 md:grid-cols-2"
                                 >
                                     <div class="relative">
