@@ -42,7 +42,7 @@ export default defineConfig({
         emptyOutDir: true,
         target: "es2022",
         cssTarget: "es2015",
-        minify: "terser",
+        minify: "esbuild",
         // sourcemap: true,
         rollupOptions: {
             input: [
