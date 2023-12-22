@@ -299,7 +299,7 @@
                                     <div class="flex gap-2 leading-none md:gap-[0.65vw]">
                                         <!-- {% for format in episode.div %}
                                                 <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:text-[0.8vw]">
-                                                    <!-- {{ format }}   
+                                                    <!-- {{ format }}
                                                 </span>
                                             {% endfor %}
                                          -->
