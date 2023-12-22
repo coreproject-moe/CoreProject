@@ -5,7 +5,7 @@
     import { reverse } from "$functions/urls";
     import { Anime } from "../../../types/anime";
     import { FormatDate } from "$functions/format_date";
-
+    import * as _ from "lodash-es";
     // Icon imports
     import Search from "$icons/Search/Index.svelte";
     import Cross from "$icons/Cross/Index.svelte";
@@ -125,8 +125,8 @@
             <div>
                 <span class="text-surface-50 text-[1.2vw] font-semibold">anime</span>
                 <ScrollArea
-                    offset_scrollbar
-                    gradient_mask
+                    offset_scrollbar="true"
+                    gradient_mask="true"
                     parent_class="md:mt-[0.2vw] md:h-[30vw] md:w-[20vw]"
                     class="w-full"
                 >
@@ -136,7 +136,7 @@
                                 <span class="loading loading-ring loading-lg"></span>
                             </div>
                         {:then results}
-                            {#if results.length !== 0}
+                            {#if !_.isEmpty(results.length)}
                                 <div bind:this={anime_search_results_container_element}>
                                     {#each results as item, index}
                                         {@const is_active = active_core === "anime" && active_index === index}
@@ -161,7 +161,7 @@
                                         ]}
                                         <a
                                             on:mouseenter={() => handle_core_mouse_enter("anime", index)}
-                                            href={reverse("anime_info_view", "mal", item.mal_id)}
+                                            href={reverse("anime_info_view", "mal", String(item.mal_id))}
                                             class:bg-neutral={is_active}
                                             class="flex w-full auto-rows-max items-center gap-[1vw] rounded-[0.7vw] p-[0.8vw] transition duration-200 hover:bg-neutral"
                                         >

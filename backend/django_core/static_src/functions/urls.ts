@@ -1,5 +1,5 @@
 import htmx from "htmx.org";
-
+import * as _ from "lodash-es";
 export function reverse(view: string, ...args: Array<string | number>) {
     const url = window.urls.get(view);
     if (!url) {
@@ -11,7 +11,7 @@ export function reverse(view: string, ...args: Array<string | number>) {
     const match_pattern = /\<(int|str):(\w+)>?/g;
     const matches = url?.match(match_pattern) ?? [];
 
-    if (matches?.length === 0) {
+    if (_.isEmpty(matches)) {
         return url;
     } else if (matches?.length !== args.length) {
         throw new Error("`args` doesnot match with `urlpattern`");
