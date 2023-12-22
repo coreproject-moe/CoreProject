@@ -40,7 +40,7 @@ export async function goto({ url, anchor = null, verb, target }: { url: string; 
     btn.setAttribute("hx-push-url", url);
     btn.setAttribute("hx-target", target);
     // Hide Button
-    btn.style.display = "hidden";
+    btn.style.display = "none";
     // Add `htmx` listener
     htmx.process(btn);
     if (!_.isNull(anchor)) {
