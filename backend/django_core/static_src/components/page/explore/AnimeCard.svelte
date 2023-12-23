@@ -54,7 +54,7 @@
         <div class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
             <div class="flex flex-col gap-1 bg-secondary/95 p-3 md:gap-[0.35vw] md:p-[1vw]">
                 <HoverExpand
-                    class="line-clamp-1 text-sm font-semibold text-accent md:line-clamp-none md:text-[1vw] md:leading-[1.35vw] w-full flex text-start"
+                    class="line-clamp-1 flex w-full text-start text-sm font-semibold text-accent md:line-clamp-none md:text-[1vw] md:leading-[1.35vw]"
                     height="md:max-h-[1.35vw] hover:max-h-[10vw]"
                 >
                     {anime_name}

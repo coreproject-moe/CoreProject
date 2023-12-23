@@ -1,6 +1,10 @@
 import * as _ from "lodash-es";
 
 export function string_to_boolean(variable: string | boolean): boolean {
+    if (_.isUndefined(variable)) {
+        return false;
+    }
+
     if (_.isBoolean(variable)) {
         return variable;
     }
