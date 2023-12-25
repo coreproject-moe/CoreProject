@@ -13,6 +13,7 @@ export default defineConfig({
     base: "/static/",
     resolve: {
         alias: {
+            $stores: join(STATIC_SRC, "stores"),
             $functions: join(STATIC_SRC, "functions"),
             $components: join(STATIC_SRC, "components"),
             $icons: join(STATIC_SRC, "components", "icons"),
