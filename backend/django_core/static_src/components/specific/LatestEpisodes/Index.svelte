@@ -1,4 +1,5 @@
 <script lang="ts">
+    import JSON from "json5";
     import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
     import Episode from "./Episode.svelte";
 
@@ -13,7 +14,7 @@
 
     export let episodes: string;
     // parse string to JSON
-    let episodes_data: Episodes = JSON.parse(episodes);
+    const episodes_data = JSON.parse(episodes) satisfies Episodes;
 </script>
 
 <ScrollArea
