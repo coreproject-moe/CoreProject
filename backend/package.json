@@ -32,7 +32,7 @@
         "@zxcvbn-ts/language-pt-br": "^3.0.2",
         "caret-pos": "^2.0.0",
         "cssnano": "^6.0.2",
-        "daisyui": "^4.4.23",
+        "daisyui": "^4.4.24",
         "easytimer.js": "^4.6.0",
         "html-entities": "^2.4.0",
         "htmx.org": "^1.9.10",
