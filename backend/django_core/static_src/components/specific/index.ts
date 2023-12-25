@@ -21,7 +21,7 @@ mapping.forEach((item) => {
     svelteRetag({
         component: item.component.default,
         tagname: `coreproject-${item.tagname}`,
-        attributes: true,
+
         shadow: false,
         hydratable: true
     });
