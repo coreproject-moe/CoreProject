@@ -3,8 +3,8 @@ import svelteRetag from "svelte-retag";
 
 // Pages
 const mapping = [
-    { tagname: `explore`, component: await import("./Explore/Index.svelte") },
-    { tagname: `anime-info`, component: await import("./Anime/Info/Index.svelte") }
+    { tagname: `explore`, component: await import("./explore/Index.svelte") },
+    { tagname: `anime-info`, component: await import("./anime/info/Index.svelte") },
 ];
 
 mapping.forEach((item) => {
