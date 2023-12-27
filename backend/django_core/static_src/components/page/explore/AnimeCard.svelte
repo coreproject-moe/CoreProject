@@ -4,7 +4,7 @@
     export let anime_image: string;
     export let anime_total_episodes: number | null;
     export let anime_synopsis: string;
-    export let anime_studio: Array<{ name: string }>;
+    export let anime_studios: Array<{ name: string }>;
     export let anime_genres: Array<{ name: string }>;
     export let anime_rating: string;
 
@@ -59,11 +59,16 @@
                 >
                     {anime_name}
                 </HoverExpand>
-                <span class="text-surface-50 flex items-center gap-2 text-xs leading-none md:gap-[0.5vw] md:text-[0.8vw]">
-                    {#each anime_studio as studio}
-                        {studio.name}
+                <div class="text-surface-50 flex items-center gap-2 text-xs leading-none md:gap-[0.35vw] md:text-[0.8vw]">
+                    {#each anime_studios as studio, index}
+                        {@const show_dot = index !== anime_studios.length - 1}
+
+                        <span>{studio.name}</span>
+                        {#if show_dot}
+                            <Circle class="md:w-[0.25vw]" />
+                        {/if}
                     {/each}
-                </span>
+                </div>
             </div>
         </div>
     </button>
@@ -85,12 +90,15 @@
                 <Circle class="w-1 md:w-[0.25vw]" />
                 <span>{anime_total_episodes} episdoes</span>
             </div>
-            <div class="text-surface-50 md:text-[0.75vw]">
-                <span>
-                    {#each anime_studio as studio}
-                        {studio.name}
-                    {/each}
-                </span>
+            <div class="text-surface-50 flex items-center gap-2 text-xs leading-none md:gap-[0.35vw] md:text-[0.8vw]">
+                {#each anime_studios as studio, index}
+                    {@const show_dot = index !== anime_studios.length - 1}
+
+                    <span>{studio.name}</span>
+                    {#if show_dot}
+                        <Circle class="md:w-[0.25vw]" />
+                    {/if}
+                {/each}
             </div>
             <div class="flex items-center md:my-[0.35vw] md:gap-[0.5vw]">
                 {#each anime_genres as genre}

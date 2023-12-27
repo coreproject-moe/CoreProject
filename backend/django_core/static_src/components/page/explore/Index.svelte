@@ -403,7 +403,7 @@
                                 <AnimeCard
                                     anime_mal_id={item?.mal_id ?? 0}
                                     anime_name={item.name ?? "N/A"}
-                                    anime_studio={item.studios ?? []}
+                                    anime_studios={item.studios ?? []}
                                     anime_image={item.cover ?? ""}
                                     anime_genres={item.genres ?? []}
                                     anime_synopsis={item.synopsis ?? ""}
