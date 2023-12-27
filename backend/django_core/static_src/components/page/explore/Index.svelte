@@ -258,12 +258,11 @@
                             </button>
                         {/if}
                     </div>
-                    <button
-                        tabindex="0"
-                        class="dropdown-content z-10 w-[8.5rem] overflow-x-hidden rounded-lg md:mt-[1vw] md:w-[11vw] md:rounded-[0.5vw]"
-                    >
+
+                    <div class="dropdown-content z-10 w-[8.5rem] overflow-x-hidden rounded-lg md:mt-[1vw] md:w-[11vw] md:rounded-[0.5vw]">
                         {#if filter_items}
                             <ScrollArea
+                                gradient_mask={false}
                                 class="flex w-full flex-col md:p-[0.35vw]"
                                 parent_class="md:max-h-[30vw] bg-neutral w-full"
                             >
@@ -271,10 +270,10 @@
                                     {@const is_selected = selected_items?.some((item) => item === key)}
 
                                     <button
-                                        on:click|preventDefault={() => update_selected_items(option[0], { key, value })}
+                                        on:click={() => update_selected_items(option[0], { key, value })}
                                         class="btn btn-neutral relative flex h-max min-h-max items-center justify-start p-3 text-sm leading-none md:rounded-[0.35vw] md:px-[1vw] md:py-[0.75vw] md:text-[0.9vw]"
                                     >
-                                        {value}
+                                        <span>{value}</span>
 
                                         {#if is_selected}
                                             <div class="absolute right-[0.75vw] rounded-full bg-primary p-1 text-white md:p-[0.25vw]">
@@ -285,7 +284,7 @@
                                 {/each}
                             </ScrollArea>
                         {/if}
-                    </button>
+                    </div>
                 </div>
             {/each}
         </div>
