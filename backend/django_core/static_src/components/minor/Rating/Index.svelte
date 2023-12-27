@@ -10,7 +10,7 @@
 <div class="rating rating-half">
     {#each Array(RATING_COUNT) as _}
         {@const common_classes = "bg-accent checked:!bg-accent border-none mask mask-star-2"}
-        
+
         <input type="radio" name="rating-10" class={cn(klass, common_classes, "mask-half-1")} />
         <input type="radio" name="rating-10" class={cn(klass, common_classes, "mask-half-2")} />
     {/each}
