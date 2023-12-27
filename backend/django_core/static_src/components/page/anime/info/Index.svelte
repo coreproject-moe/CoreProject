@@ -63,6 +63,7 @@
                             class="pointer-events-none absolute inset-0 z-10 h-[150%] w-[125%] -translate-x-8 -translate-y-28 [background-image:radial-gradient(circle_at_center,rgba(255,255,255,0.1)0%,transparent_100%)] [mask-image:linear-gradient(to_bottom,rgba(7,5,25,0.95)80%,rgba(0,0,0,0)100%)] md:hidden"
                         ></div>
                         <img
+                            alt=""
                             src="https://files.otakustudy.com/wp-content/uploads/2020/10/10153058/your-lie-in-april-cover.jpg"
                             class="h-full w-full rounded-xl object-cover object-center md:rounded-[1vw]"
                         />
