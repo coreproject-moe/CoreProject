@@ -14,6 +14,7 @@
     import Comment from "$components/minor/Comment/Index.svelte";
     import HoverExpand from "$components/minor/HoverExpand/Index.svelte";
     import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
+    import Rating from "$components/minor/Rating/Index.svelte";
 
     //Icons
     import Dot from "$icons/Dot/Index.svelte";
@@ -379,6 +380,7 @@
                             >
                                 <div class="col-span-2 block h-16 md:h-full md:w-full">
                                     <img
+                                        alt=""
                                         src="https://timelinecovers.pro/facebook-cover/download/anime-your-lie-in-april-kaori-and-arima-facebook-cover.jpg"
                                         class="h-full w-full object-cover object-center"
                                     />
@@ -439,122 +441,7 @@
                 <div class="flex flex-col gap-[0.5vw] leading-none">
                     <span class="font-semibold md:text-[0.9vw] md:leading-[0.9vw]">Your rating</span>
                     <div class="flex items-center gap-[0.75vw]">
-                        <div>
-                            <!--MIGRATE TO https://daisyui.com/components/rating/-->
-                            <!-- <div
-                                class="ratings text-token fill-token flex w-full justify-center gap-[0.35vw]"
-                                data-testid="rating-bar"
-                            >
-                                <span class="rating-icon">
-                                    <svg
-                                        width="30"
-                                        height="30"
-                                        viewBox="0 0 30 30"
-                                        fill="white"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        color="white"
-                                        class="w-[1.25vw]"
-                                    >
-                                        <path
-                                            d="M15 2.5L18.8625 10.325L27.5 11.5875L21.25 17.675L22.725 26.275L15 22.2125L7.275 26.275L8.75 17.675L2.5 11.5875L11.1375 10.325L15 2.5Z"
-                                            stroke="currentColor"
-                                            stroke-width="3"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                        ></path>
-                                    </svg>
-                                </span>
-                                <span class="rating-icon">
-                                    <svg
-                                        width="30"
-                                        height="30"
-                                        viewBox="0 0 30 30"
-                                        fill="white"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        color="white"
-                                        class="w-[1.25vw]"
-                                    >
-                                        <path
-                                            d="M15 2.5L18.8625 10.325L27.5 11.5875L21.25 17.675L22.725 26.275L15 22.2125L7.275 26.275L8.75 17.675L2.5 11.5875L11.1375 10.325L15 2.5Z"
-                                            stroke="currentColor"
-                                            stroke-width="3"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                        ></path>
-                                    </svg>
-                                </span>
-                                <span class="rating-icon">
-                                    <svg
-                                        width="30"
-                                        height="30"
-                                        viewBox="0 0 30 30"
-                                        fill="white"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        color="white"
-                                        class="w-[1.25vw]"
-                                    >
-                                        <path
-                                            d="M15 2.5L18.8625 10.325L27.5 11.5875L21.25 17.675L22.725 26.275L15 22.2125L7.275 26.275L8.75 17.675L2.5 11.5875L11.1375 10.325L15 2.5Z"
-                                            stroke="currentColor"
-                                            stroke-width="3"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                        ></path>
-                                    </svg>
-                                </span>
-                                <span class="rating-icon">
-                                    <svg
-                                        width="30"
-                                        height="30"
-                                        viewBox="0 0 30 30"
-                                        fill="white"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        color="white"
-                                        class="w-[1.25vw]"
-                                    >
-                                        <path
-                                            d="M15 2.5L18.8625 10.325L27.5 11.5875L21.25 17.675L22.725 26.275L15 22.2125L7.275 26.275L8.75 17.675L2.5 11.5875L11.1375 10.325L15 2.5Z"
-                                            stroke="currentColor"
-                                            stroke-width="3"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                        ></path>
-                                    </svg>
-                                </span>
-                                <span class="rating-icon">
-                                    <svg
-                                        width="30"
-                                        height="30"
-                                        viewBox="0 0 30 30"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        color="white"
-                                        class="w-[1.25vw]"
-                                    >
-                                        <defs>
-                                            <linearGradient id="grad">
-                                                <stop
-                                                    offset="50%"
-                                                    stop-color="white"
-                                                ></stop>
-                                                <stop
-                                                    offset="50%"
-                                                    stop-color="transparent"
-                                                ></stop>
-                                            </linearGradient>
-                                        </defs>
-                                        <path
-                                            fill="url(#grad)"
-                                            d="M15 2.5L18.8625 10.325L27.5 11.5875L21.25 17.675L22.725 26.275L15 22.2125L7.275 26.275L8.75 17.675L2.5 11.5875L11.1375 10.325L15 2.5Z"
-                                            stroke="currentColor"
-                                            stroke-width="3"
-                                            stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                        ></path>
-                                    </svg>
-                                </span>
-                            </div> -->
-                        </div>
+                        <Rating />
                         <span class="font-bold leading-none md:text-[0.95vw]">92%</span>
                         <button class="text-surface-500 btn btn-secondary min-h-full p-[0.3vw] md:h-[1.375vw] md:w-[1.375vw] md:rounded-[0.19vw]">
                             <Edit class="w-[0.75vw]"></Edit>
@@ -637,6 +524,7 @@
                         <div class="relative grid h-[9vw] w-full grid-cols-2 gap-[2px] overflow-hidden rounded-[0.75vw]">
                             <div class="relative col-span-1 w-full bg-cover">
                                 <img
+                                    alt=""
                                     src="https://i.pinimg.com/550x/ed/47/64/ed4764a0074e785738f2797641aeb411.jpg"
                                     class="absolute h-full w-full object-cover object-center"
                                 />
@@ -644,6 +532,7 @@
                             </div>
                             <div class="relative col-span-1 w-full bg-cover">
                                 <img
+                                    alt=""
                                     src="https://animeanime.global/wp-content/uploads/2020/10/360236.jpg"
                                     class="absolute h-full w-full object-cover object-center"
                                 />
@@ -680,6 +569,7 @@
                                 class="card relative col-span-1 h-[9.375vw] w-full overflow-hidden rounded-[0.75vw] bg-cover bg-center"
                             >
                                 <img
+                                    alt=""
                                     src="https://cdn.myanimelist.net/images/anime/1958/107912.jpg"
                                     class="absolute h-full w-full object-cover object-center"
                                 />
@@ -693,6 +583,7 @@
                                 class="card relative col-span-1 h-[9.375vw] w-full overflow-hidden rounded-[0.75vw] bg-cover"
                             >
                                 <img
+                                    alt=""
                                     src="https://s4.anilist.co/file/anilistcdn/media/anime/cover/large/bx849-uXOftsjBDz2T.png"
                                     class="absolute h-full w-full object-cover object-center"
                                 />
