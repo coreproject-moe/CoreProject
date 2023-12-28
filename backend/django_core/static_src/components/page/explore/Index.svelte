@@ -22,12 +22,12 @@
 
     // Binding
     let result_animes_element: HTMLDivElement;
-    let search_query = "";
-    let active_filters: Array<string> = [];
+    let search_query = "",
+        active_filters: Array<string> = [],
+        thumbnail_mode: "card_with_dropdown" | "detailed_card" = "card_with_dropdown";
 
-    const handle_input = async () => {
-        search_promise = get_anime_with_serach_parameters();
-    };
+    let search_promise: Promise<Anime[]> | null = null;
+
 
     onMount(async () => (search_promise = get_anime_with_serach_parameters()));
 
@@ -111,7 +111,10 @@
     };
 
     // Functions
-    const update_selected_items = (key: string, selected_item: Record<string, string>) => {
+    const handle_input = async () => {
+            search_promise = get_anime_with_serach_parameters();
+        },
+        update_selected_items = (key: string, selected_item: Record<string, string>) => {
             const selected_item_key = Object.values(selected_item)[0];
             let filter_option = filter_options_mapping[key];
             let is_selected = filter_option.selected_items!.some((item) => item === selected_item_key);
@@ -169,11 +172,6 @@
             throw new Error("Something is wrong from the backend");
         }
     };
-
-    let search_promise: Promise<Anime[]> | null = null;
-
-    // Thumbnail modes
-    let thumbnail_mode: "card_with_dropdown" | "detailed_card" = "card_with_dropdown";
 </script>
 
 <section class="mt-20 flex flex-col p-5 md:mt-0 md:gap-[1.5vw] md:pb-[2.5vw] md:pl-[1.5vw] md:pr-[3.75vw] md:pt-0">
