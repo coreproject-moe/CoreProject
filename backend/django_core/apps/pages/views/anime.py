@@ -1,4 +1,3 @@
-import json
 from typing import TYPE_CHECKING
 
 from django.http import HttpResponse
@@ -37,9 +36,6 @@ async def anime_home_view_partial_slider_view(
 
 
 async def anime_home_view(request: "HtmxHttpRequest") -> HttpResponse:
-    # cant parse single quoted string
-    latest_episodes_json = json.dumps(latest_episodes)
-
     if request.htmx:
         return render(
             request,
@@ -47,7 +43,7 @@ async def anime_home_view(request: "HtmxHttpRequest") -> HttpResponse:
             context={
                 "latest_animes": latest_animes,
                 "my_list": my_list,
-                "latest_episodes": latest_episodes_json,
+                "latest_episodes": latest_episodes,
             },
         )
 
@@ -57,7 +53,7 @@ async def anime_home_view(request: "HtmxHttpRequest") -> HttpResponse:
         context={
             "latest_animes": latest_animes,
             "my_list": my_list,
-            "latest_episodes": latest_episodes_json,
+            "latest_episodes": latest_episodes,
         },
     )
 
@@ -66,7 +62,7 @@ async def anime_explore_view(request: "HtmxHttpRequest") -> HttpResponse:
     if request.htmx:
         return render(request, "anime/explore/index.html")
 
-    return render(request, "anime/_layout.html", context={})
+    return render(request, "anime/_layout.html")
 
 
 async def anime_info_view(

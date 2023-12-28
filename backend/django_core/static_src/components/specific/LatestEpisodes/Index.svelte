@@ -13,6 +13,7 @@
     }[];
 
     export let episodes: string;
+
     // parse string to JSON
     const episodes_data = JSON5.parse(episodes) satisfies Episodes;
 </script>
