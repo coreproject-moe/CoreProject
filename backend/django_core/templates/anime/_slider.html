@@ -17,28 +17,26 @@
 </div>
 <div class="absolute inset-0 bg-gradient-to-t from-secondary/90 to-secondary/50 md:to-surface-900/25"></div>
 <div class="absolute inset-0 hidden bg-gradient-to-r from-surface-900 to-surface-900/25 md:flex md:from-surface-900/50"></div>
-<div
-    class="absolute bottom-7 left-7 flex flex-col md:bottom-0 md:left-0 md:px-[3.75vw] md:py-[2.625vw]"
->
+<div class="absolute bottom-7 left-7 flex flex-col md:bottom-0 md:left-0 md:px-[3.75vw] md:py-[2.625vw]">
     <span class="text-white text-3xl font-bold md:text-[2vw] md:leading-[2.375vw]">{{ anime.name }}</span>
     <div class="text-base uppercase font-semibold text-white/90 md:hidden md:text-[2vw] md:leading-[2.375vw]">{{ anime.japanese_name }}</div>
-    <div class="pt-2 pb-4 md:pb-0 flex flex-wrap items-center gap-2 md:pt-4 text-xs font-semibold text-white/90 md:gap-[0.65vw] md:pt-[0.5vw] md:text-[0.9375vw]">
-        <span class="leading-[1.125vw]"> {{ anime.type }} </span>
+    <div class="py-2 md:pb-0 flex flex-wrap items-center gap-2 md:pt-4 text-xs font-semibold text-white/90 md:gap-[0.65vw] md:pt-[0.5vw] md:text-[0.9375vw]">
+        <span>{{ anime.type }}</span>
         <coreproject-icon-dot class='w-1 opacity-75 md:w-[0.25vw]' ></coreproject-icon-dot>
-        <span class="leading-[1.125vw]"> {{ anime.episodes }} eps </span>
+        <span>{{ anime.episodes }} eps </span>
         <coreproject-icon-dot class='w-1 opacity-75 md:w-[0.25vw]' ></coreproject-icon-dot>
-        <span class="leading-[1.125vw]"> {{ anime.status }} </span>
+        <span>{{ anime.status }}</span>
         <coreproject-icon-dot class='w-1 opacity-75 md:w-[0.25vw]' ></coreproject-icon-dot>
-        <span class="capitalize leading-[1.125vw]">
+        <span class="capitalize">
             {{ anime.release_date }}
         </span>
         <coreproject-icon-dot class='w-1 opacity-75 md:w-[0.25vw]' ></coreproject-icon-dot>
-        <span class="leading-[1.125vw] capitalize"> {{ anime.studio }} </span>
+        <span class="capitalize">{{ anime.studio }} </span>
     </div>
     <div class="hidden md:flex gap-2 pb-2 pt-3 md:gap-[0.5vw] md:pt-[0.5vw]">
         {% for genre in anime.genres %}
             <span
-                class="rounded-lg bg-secondary p-2 px-3 text-xs md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.4vw] md:text-[0.75vw] md:font-semibold capitalize"
+                class="rounded-lg bg-secondary p-2 px-3 text-xs md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.4vw] md:text-[0.75vw] md:font-semibold capitalize leading-none"
             >
                 {{ genre }}
             </span>
@@ -53,82 +51,25 @@
         {{ anime.synopsis }}
     </coreproject-scroll-area>
 
-    <div class="mb-2 mt-5 flex gap-3 md:mb-0 md:mt-[1.5vw] md:gap-[1vw]">
+    <div class="mb-2 mt-5 flex items-center gap-2 md:mb-0 md:mt-[1.5vw] md:gap-[1vw]">
         <button
-            class="btn btn-warning flex px-6 py-3 md:py-[0.75vw] md:px-[1.25vw] min-h-max h-max justify-center gap- rounded-lg text-base text-secondary font-bold md:rounded-[0.625vw] md:text-[0.875vw] md:gap-[0.5vw]"
+            class="btn btn-warning leading-none flex px-6 py-4 md:py-[1vw] md:px-[1.25vw] min-h-max h-max justify-center gap-2 rounded-xl text-base text-secondary font-bold md:rounded-[0.625vw] md:text-[0.875vw] md:gap-[0.5vw]"
         >
-            <svg
-                class="w-4 text-surface-900 md:w-[1vw]"
-                viewBox="0 0 14 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
-                <path
-                    d="M12.9615 7.89235C13.1685 7.73214 13.3361 7.52665 13.4513 7.29164C13.5666 7.05663 13.6266 6.79834 13.6266 6.53658C13.6266 6.27482 13.5666 6.01653 13.4513 5.78152C13.3361 5.54651 13.1685 5.34102 12.9615 5.18081C10.2808 3.10657 7.28748 1.47165 4.09351 0.337231L3.50952 0.129752C2.39342 -0.266427 1.21383 0.488369 1.06269 1.64113C0.640479 4.89111 0.640479 8.18205 1.06269 11.432C1.21473 12.5848 2.39342 13.3396 3.50952 12.9434L4.09351 12.7359C7.28748 11.6015 10.2808 9.96659 12.9615 7.89235Z"
-                    fill="currentColor"
-                ></path>
-            </svg>
+            <coreproject-icon-play class="w-4 text-surface-900 md:w-[1vw]"></coreproject-icon-play>
             <span>Ep 1</span>
         </button>
         <a href="/anime/mal/40748">
             <button
-                class="btn btn-secondary flex px-6 py-3 md:py-[0.75vw] md:px-[1.25vw] min-h-max h-max items-center justify-center rounded-lg bg-surface-900 text-base font-semibold text-surface-50 md:gap-[0.5vw] md:rounded-[0.5vw] md:text-[0.875vw] md:font-bold"
+                class="btn btn-secondary leading-none flex px-6 py-4 md:py-[1vw] md:px-[1.25vw] min-h-max h-max items-center justify-center rounded-xl text-base font-semibold md:gap-[0.5vw] md:rounded-[0.5vw] md:text-[0.875vw] md:font-bold"
             >
-                <svg
-                    class="w-5 text-surface-50 md:w-[1.25vw]"
-                    viewBox="0 0 30 30"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <path
-                        d="M15 27.5C21.9036 27.5 27.5 21.9036 27.5 15C27.5 8.09644 21.9036 2.5 15 2.5C8.09644 2.5 2.5 8.09644 2.5 15C2.5 21.9036 8.09644 27.5 15 27.5Z"
-                        stroke="white"
-                        stroke-width="3"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    ></path>
-                    <path
-                        d="M15 20V15"
-                        stroke="white"
-                        stroke-width="3"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    ></path>
-                    <path
-                        d="M15 10H15.0125"
-                        stroke="white"
-                        stroke-width="3"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                    ></path>
-                </svg>
+                <coreproject-icon-info class="w-5 text-surface-50 md:w-[1.25vw]"></coreproject-icon-info>
                 <span>Details</span>
             </button>
         </a>
         <button
-            class="btn btn-secondary p-4 md:p-[0.9vw] min-h-max h-max rounded-lg bg-surface-900 text-[3vw] font-bold text-surface-50s md:rounded-[0.5vw] md:text-[0.875vw]"
+            class="btn btn-secondary leading-none p-4 md:p-[0.9vw] min-h-max h-max rounded-xl bg-surface-900 text-[3vw] font-bold text-surface-50s md:rounded-[0.5vw] md:text-[0.875vw]"
         >
-            <svg
-                viewBox="0 0 18 18"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                class="w-4 text-surface-50 md:w-[1.25vw]"
-            >
-                <path
-                    d="M9 15H15.75"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                ></path>
-                <path
-                    d="M12.375 2.62517C12.6734 2.3268 13.078 2.15918 13.5 2.15918C13.7089 2.15918 13.9158 2.20033 14.1088 2.28029C14.3019 2.36024 14.4773 2.47743 14.625 2.62517C14.7727 2.77291 14.8899 2.9483 14.9699 3.14132C15.0498 3.33435 15.091 3.54124 15.091 3.75017C15.091 3.9591 15.0498 4.16599 14.9699 4.35902C14.8899 4.55204 14.7727 4.72743 14.625 4.87517L5.25 14.2502L2.25 15.0002L3 12.0002L12.375 2.62517Z"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                ></path>
-            </svg>
+            <coreproject-icon-edit class="w-4 text-surface-50 md:w-[1.25vw]"></coreproject-icon-edit>
         </button>
     </div>
 </div>
