@@ -12,32 +12,17 @@
         class="absolute h-full w-full object-cover object-center md:rounded-t-[0.875vw]"
         src="{{anime.image}}"
         alt=""
-        style=""
         loading="lazy"
     />
 </div>
-<gradient-overlay
-    class="absolute inset-0 bg-gradient-to-t from-secondary/90 to-secondary/50 md:to-surface-900/25"
-></gradient-overlay>
-<gradient-overlay
-    class="absolute inset-0 hidden bg-gradient-to-r from-surface-900 to-surface-900/25 md:flex md:from-surface-900/50"
-></gradient-overlay>
-<anime-details
+<div class="absolute inset-0 bg-gradient-to-t from-secondary/90 to-secondary/50 md:to-surface-900/25"></div>
+<div class="absolute inset-0 hidden bg-gradient-to-r from-surface-900 to-surface-900/25 md:flex md:from-surface-900/50"></div>
+<div
     class="absolute bottom-7 left-7 flex flex-col md:bottom-0 md:left-0 md:px-[3.75vw] md:py-[2.625vw]"
 >
-    <anime-name
-        class="text-white text-3xl font-bold md:text-[2vw] md:leading-[2.375vw]"
-    >
-        {{ anime.name }}
-    </anime-name>
-    <japanese-name
-        class="text-base font-semibold text-white/90 md:hidden md:text-[2vw] md:leading-[2.375vw]"
-    >
-        Sorcery Fight
-    </japanese-name>
-    <anime-infos
-        class="flex flex-wrap items-center gap-2 pt-4 text-xs font-semibold text-white/90 md:gap-[0.65vw] md:pt-[0.5vw] md:text-[0.9375vw]"
-    >
+    <span class="text-white text-3xl font-bold md:text-[2vw] md:leading-[2.375vw]">{{ anime.name }}</span>
+    <div class="text-base uppercase font-semibold text-white/90 md:hidden md:text-[2vw] md:leading-[2.375vw]">{{ anime.japanese_name }}</div>
+    <div class="pt-2 pb-4 md:pb-0 flex flex-wrap items-center gap-2 md:pt-4 text-xs font-semibold text-white/90 md:gap-[0.65vw] md:pt-[0.5vw] md:text-[0.9375vw]">
         <span class="leading-[1.125vw]"> {{ anime.type }} </span>
         <coreproject-icon-dot class='w-1 opacity-75 md:w-[0.25vw]' ></coreproject-icon-dot>
         <span class="leading-[1.125vw]"> {{ anime.episodes }} eps </span>
@@ -49,8 +34,8 @@
         </span>
         <coreproject-icon-dot class='w-1 opacity-75 md:w-[0.25vw]' ></coreproject-icon-dot>
         <span class="leading-[1.125vw] capitalize"> {{ anime.studio }} </span>
-    </anime-infos>
-    <anime-genres class="flex gap-2 pb-2 pt-3 md:gap-[0.5vw] md:pt-[0.5vw]">
+    </div>
+    <div class="hidden md:flex gap-2 pb-2 pt-3 md:gap-[0.5vw] md:pt-[0.5vw]">
         {% for genre in anime.genres %}
             <span
                 class="rounded-lg bg-secondary p-2 px-3 text-xs md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.4vw] md:text-[0.75vw] md:font-semibold capitalize"
@@ -58,19 +43,19 @@
                 {{ genre }}
             </span>
         {% endfor %}
-    </anime-genres>
+    </div>
     <coreproject-scroll-area
         gradient_mask="true"
         class="text-xs font-medium leading-4 text-surface-200 md:text-[0.85vw] md:leading-[1.1vw]"
-        parent_class="max-h-16 md:max-h-[6vw] md:mt-[0.5vw]"
+        parent_class="max-h-20 md:max-h-[6vw] md:mt-[0.5vw]"
         offset_scrollbar="true"
     >
         {{ anime.synopsis }}
     </coreproject-scroll-area>
 
-    <options class="mb-2 mt-5 flex gap-3 md:mb-0 md:mt-[1.5vw] md:gap-[1vw]">
+    <div class="mb-2 mt-5 flex gap-3 md:mb-0 md:mt-[1.5vw] md:gap-[1vw]">
         <button
-            class="btn btn-warning flex h-14 w-24 justify-center gap-1 rounded-xl text-base text-secondary font-bold md:h-[3.125vw] md:w-[5.4375vw] md:rounded-[0.625vw] md:text-[0.875vw] md:gap-[0.5vw]"
+            class="btn btn-warning flex px-6 py-3 md:py-[0.75vw] md:px-[1.25vw] min-h-max h-max justify-center gap- rounded-lg text-base text-secondary font-bold md:rounded-[0.625vw] md:text-[0.875vw] md:gap-[0.5vw]"
         >
             <svg
                 class="w-4 text-surface-900 md:w-[1vw]"
@@ -87,7 +72,7 @@
         </button>
         <a href="/anime/mal/40748">
             <button
-                class="btn btn-secondary flex h-14 w-28 items-center justify-center rounded-xl bg-surface-900 text-base font-semibold text-surface-50 md:h-[3.125vw] md:w-[7.5vw] md:gap-[0.5vw] md:rounded-[0.5vw] md:text-[0.875vw] md:font-bold"
+                class="btn btn-secondary flex px-6 py-3 md:py-[0.75vw] md:px-[1.25vw] min-h-max h-max items-center justify-center rounded-lg bg-surface-900 text-base font-semibold text-surface-50 md:gap-[0.5vw] md:rounded-[0.5vw] md:text-[0.875vw] md:font-bold"
             >
                 <svg
                     class="w-5 text-surface-50 md:w-[1.25vw]"
@@ -121,7 +106,7 @@
             </button>
         </a>
         <button
-            class="btn btn-secondary h-14 w-14 rounded-xl bg-surface-900 text-[3vw] font-bold text-surface-50 md:h-[3.125vw] md:w-[3.125vw] md:rounded-[0.5vw] md:text-[0.875vw]"
+            class="btn btn-secondary p-4 md:p-[0.9vw] min-h-max h-max rounded-lg bg-surface-900 text-[3vw] font-bold text-surface-50s md:rounded-[0.5vw] md:text-[0.875vw]"
         >
             <svg
                 viewBox="0 0 18 18"
@@ -145,5 +130,5 @@
                 ></path>
             </svg>
         </button>
-    </options>
-</anime-details>
+    </div>
+</div>
