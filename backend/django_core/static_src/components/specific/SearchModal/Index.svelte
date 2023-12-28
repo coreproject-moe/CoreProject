@@ -137,7 +137,7 @@
                                 <span class="loading loading-ring loading-lg"></span>
                             </div>
                         {:then results}
-                            {#if !_.isEmpty(results.length)}
+                            {#if !_.isEmpty(results)}
                                 <div bind:this={anime_search_results_container_element}>
                                     {#each results as item, index}
                                         {@const is_active = active_core === "anime" && active_index === index}
@@ -150,15 +150,18 @@
                                                 value: item.name_japanese,
                                                 class: "text-surface-200 text-[0.7vw] font-medium uppercase leading-[1.5vw] col-span-full"
                                             },
-                                            {
-                                                value: item.aired_from ? new FormatDate(item.aired_from).format_to_human_readable_form : null,
-                                                class: "text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw] col-span-full"
+                                            { 
+                                                value: `TV`,
+                                                class: `text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw] after:content-[' '] after:w-[0.25vw] after:h-[0.25vw] after:rounded-full after:bg-accent col-span-2`
                                             },
-                                            { value: `TV`, class: `text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw] after:content-['●'] col-span-2` },
                                             {
                                                 value: item.episode_count ? `${item.episode_count} eps` : null,
                                                 class: "text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw] col-span-2"
-                                            }
+                                            },
+                                            {
+                                                value: item.aired_from ? new FormatDate(item.aired_from).format_to_human_readable_form : null,
+                                                class: "text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw] col-span-8"
+                                            },
                                         ]}
                                         <a
                                             on:mouseenter={() => handle_core_mouse_enter("anime", index)}
@@ -173,7 +176,7 @@
                                             />
                                             <div class="grid w-full grid-cols-12">
                                                 {#each mapping as item}
-                                                    {#if item.value}
+                                                    {#if !_.isNull(item.value)}
                                                         <span class={item.class}>{item.value}</span>
                                                     {/if}
                                                 {/each}
