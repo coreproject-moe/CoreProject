@@ -143,7 +143,7 @@
                                     {#each results as item, index}
                                         {@const is_active = active_core === "anime" && active_index === index}
                                         {@const mapping = [
-                                            { 
+                                            {
                                                 value: `TV`,
                                                 class: `text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw]`
                                             },
