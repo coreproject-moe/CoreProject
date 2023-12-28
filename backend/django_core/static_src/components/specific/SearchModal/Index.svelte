@@ -9,6 +9,7 @@
     // Icon imports
     import Search from "$icons/Search/Index.svelte";
     import Cross from "$icons/Cross/Index.svelte";
+    import Circle from "$icons/Circle/Index.svelte";
     import { get_csrf_token } from "$functions/get_csrf_token";
 
     let active_index = 0,
@@ -137,28 +138,23 @@
                                 <span class="loading loading-ring loading-lg"></span>
                             </div>
                         {:then results}
-                            {#if !_.isEmpty(results.length)}
+                            {#if !_.isEmpty(results)}
                                 <div bind:this={anime_search_results_container_element}>
                                     {#each results as item, index}
                                         {@const is_active = active_core === "anime" && active_index === index}
                                         {@const mapping = [
                                             {
-                                                value: item.name,
-                                                class: "text-[1.1vw] font-semibold leading-none text-white col-span-full"
+                                                value: `TV`,
+                                                class: `text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw]`
                                             },
                                             {
-                                                value: item.name_japanese,
-                                                class: "text-surface-200 text-[0.7vw] font-medium uppercase leading-[1.5vw] col-span-full"
+                                                value: item.episode_count ? `${item.episode_count} eps` : null,
+                                                class: "text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw]"
                                             },
                                             {
                                                 value: item.aired_from ? new FormatDate(item.aired_from).format_to_human_readable_form : null,
-                                                class: "text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw] col-span-full"
+                                                class: "text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw]"
                                             },
-                                            { value: `TV`, class: `text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw] after:content-['●'] col-span-2` },
-                                            {
-                                                value: item.episode_count ? `${item.episode_count} eps` : null,
-                                                class: "text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw] leading-[1vw] col-span-2"
-                                            }
                                         ]}
                                         <a
                                             on:mouseenter={() => handle_core_mouse_enter("anime", index)}
@@ -171,12 +167,23 @@
                                                 alt={search_query}
                                                 class="h-[3.5vw] w-[3.5vw] rounded-[0.5vw] object-cover"
                                             />
-                                            <div class="grid w-full grid-cols-12">
-                                                {#each mapping as item}
-                                                    {#if item.value}
-                                                        <span class={item.class}>{item.value}</span>
-                                                    {/if}
-                                                {/each}
+                                            <div class="flex flex-col leading-none md:gap-[0.35vw]">
+                                                <span class="text-[1.1vw] font-semibold leading-none text-white">{item.name}</span>
+                                                <span class="text-surface-200 text-[0.7vw] font-medium uppercase">
+                                                    {item.name_japanese}
+                                                </span>
+                                                <div class="flex items-center md:gap-[0.35vw]">
+                                                    {#each mapping as item, index}
+                                                        {@const show_dot = index !== mapping.length - 1}
+
+                                                        {#if !_.isNull(item.value)}
+                                                            <span class={item.class}>{item.value}</span>
+                                                            {#if show_dot}
+                                                                <Circle class="md:w-[0.25vw]" />
+                                                            {/if}
+                                                        {/if}
+                                                    {/each}
+                                                </div>
                                             </div>
                                         </a>
                                     {/each}
