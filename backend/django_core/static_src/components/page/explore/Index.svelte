@@ -22,11 +22,12 @@
 
     // Binding
     let result_animes_element: HTMLDivElement;
-    let search_query = "";
+    let search_query = "",
+        active_filters: Array<string> = [],
+        thumbnail_mode: "card_with_dropdown" | "detailed_card" = "card_with_dropdown";
 
-    const handle_input = async () => {
-        search_promise = get_anime_with_serach_parameters();
-    };
+    let search_promise: Promise<Anime[]> | null = null;
+
 
     onMount(async () => (search_promise = get_anime_with_serach_parameters()));
 
@@ -110,15 +111,22 @@
     };
 
     // Functions
-    const update_selected_items = (key: string, selected_item: Record<string, string>) => {
+    const handle_input = async () => {
+            search_promise = get_anime_with_serach_parameters();
+        },
+        update_selected_items = (key: string, selected_item: Record<string, string>) => {
             const selected_item_key = Object.values(selected_item)[0];
             let filter_option = filter_options_mapping[key];
             let is_selected = filter_option.selected_items!.some((item) => item === selected_item_key);
 
             if (is_selected) {
                 filter_option.selected_items = filter_option.selected_items!.filter((item) => item !== selected_item_key);
+                // remove from active filters
+                active_filters = active_filters.filter(filter => filter !== selected_item_key);
             } else {
                 filter_option.selected_items = [...filter_option.selected_items!, selected_item_key];
+                // add to active filters
+                active_filters = [...active_filters, selected_item_key];
             }
 
             // update filer_options_mapping
@@ -164,11 +172,6 @@
             throw new Error("Something is wrong from the backend");
         }
     };
-
-    let search_promise: Promise<Anime[]> | null = null;
-
-    // Thumbnail modes
-    let thumbnail_mode: "card_with_dropdown" | "detailed_card" = "card_with_dropdown";
 </script>
 
 <section class="mt-20 flex flex-col p-5 md:mt-0 md:gap-[1.5vw] md:pb-[2.5vw] md:pl-[1.5vw] md:pr-[3.75vw] md:pt-0">
@@ -327,7 +330,7 @@
                     <span class="loading loading-ring loading-lg"></span>
                 </div>
             {:then results}
-                {#if results.length !== 0}
+                {#if !_.isEmpty(results)}
                     {#if thumbnail_mode === "detailed_card"}
                         <div
                             bind:this={result_animes_element}
@@ -412,7 +415,20 @@
                             {/each}
                         </div>
                     {/if}
+                {:else}
+                    <div class="flex h-full flex-col items-center justify-center gap-[0.5vw] text-[1.1vw]">
+                        <span class="font-medium leading-none">No match found!</span>
+                        <span class="text-center font-semibold leading-none text-error">
+                            Couldn't find animes with: "{search_query}"<br>
+                            <span class="text-accent/75">Filters: {active_filters.join(" - ")}</span>
+                        </span>
+                    </div>
                 {/if}
+            {:catch error}
+                <div class="flex h-full flex-col items-center justify-center gap-[0.2vw] text-[1.1vw]">
+                    <span class="font-medium leading-none">Oh no, something is wrong!</span>
+                    <span class="text-center font-semibold leading-none text-error">{@html error}</span>
+                </div>
             {/await}
         {/if}
     </div>
