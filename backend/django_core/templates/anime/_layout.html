@@ -23,13 +23,13 @@
                             </a>
                             <search-form>
                                 <form class="relative flex h-12 w-[65vw] items-center md:hidden">
-                                    <button class="btn absolute left-4 p-0" aria-label="Search">
-                                        <coreproject-icon-search class="w-5 opacity-75"></coreproject-icon-search>
+                                    <button class="btn absolute left-4 p-0 !bg-transparent border-none" aria-label="Search">
+                                        <coreproject-icon-search class="w-5"></coreproject-icon-search>
                                     </button>
                                     <input
                                         type="text"
                                         placeholder="Search for animes, mangas..."
-                                        class="h-full w-full rounded-[0.4rem] border-none bg-surface-400 pl-12 text-sm font-semibold text-white shadow-lg !ring-0 placeholder:font-medium placeholder:text-surface-200"
+                                        class="h-full w-full rounded-lg border-none bg-neutral pl-12 text-base font-semibold text-accent shadow-lg !ring-0 placeholder:font-medium placeholder:text-surface-200"
                                     />
                                 </form>
                             </search-form>
@@ -38,7 +38,7 @@
                     {% if request.user.is_authenticated %}
                         <div class="dropdown dropdown-end flex">
                             <div tabindex="0" role="button" class="avatar btn border-none !bg-transparent p-0">
-                                <div class="md:w-[3vw] md:rounded-[0.5vw]">
+                                <div class="w-12 rounded-lg md:w-[3vw] md:rounded-[0.5vw]">
                                     <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                                 </div>
                             </div>
