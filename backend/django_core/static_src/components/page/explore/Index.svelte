@@ -422,7 +422,7 @@
                         <span class="font-medium leading-none">No match found!</span>
                         <span class="text-center font-semibold leading-none text-error">
                             Couldn't find animes with: "{search_query}"<br>
-                            <span class="text-accent/75">Filters: {active_filters.join()}</span>
+                            <span class="text-accent/75">Filters: {active_filters.join(" - ")}</span>
                         </span>
                     </div>
                 {/if}
