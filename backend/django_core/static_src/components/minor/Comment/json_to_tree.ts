@@ -1,4 +1,4 @@
-import type { Comment } from "../../../types/comment";
+import type { Comment } from "$types/comment";
 import * as _ from "lodash-es";
 export class JSONToTree {
     #json: Comment[] = new Array<Comment>();

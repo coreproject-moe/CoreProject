@@ -17,7 +17,9 @@ export default defineConfig({
             $functions: join(STATIC_SRC, "functions"),
             $components: join(STATIC_SRC, "components"),
             $icons: join(STATIC_SRC, "components", "icons"),
-            $skeleton: join(STATIC_SRC, "skeleton")
+            $skeleton: join(STATIC_SRC, "skeleton"),
+            $types: join(STATIC_SRC, "types"),
+            $constants: join(STATIC_SRC, "constants")
         }
     },
     plugins: [

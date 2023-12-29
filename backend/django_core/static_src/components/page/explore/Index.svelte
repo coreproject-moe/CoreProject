@@ -19,6 +19,7 @@
     import { Anime } from "../../../types/anime";
     import { onMount } from "svelte";
     import { get_csrf_token } from "$functions/get_csrf_token";
+    import { FETCH_TIMEOUT } from "$constants/fetch";
 
     // Binding
     let result_animes_element: HTMLDivElement;
@@ -31,6 +32,7 @@
     onMount(async () => {
         search_promise = get_anime_with_serach_parameters();
     });
+
 
     // Mapping
     let filter_options_mapping: {
@@ -140,8 +142,10 @@
                 method: "GET",
                 headers: {
                     Accept: "application/json",
-                    "Content-Type": "application/json"
-                }
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": get_csrf_token()
+                },
+                signal: AbortSignal.timeout(FETCH_TIMEOUT)
             }
         );
         const json = await res.json();

@@ -11,6 +11,7 @@
     import Cross from "$icons/Cross/Index.svelte";
     import Circle from "$icons/Circle/Index.svelte";
     import { get_csrf_token } from "$functions/get_csrf_token";
+    import { FETCH_TIMEOUT } from "$constants/fetch";
 
     let active_index = 0,
         active_core: "anime" | "manga" | "sound" = "anime",
@@ -67,8 +68,10 @@
             method: "GET",
             headers: {
                 Accept: "application/json",
-                "Content-Type": "application/json"
-            }
+                "Content-Type": "application/json",
+                "X-CSRFToken": get_csrf_token()
+            },
+            signal: AbortSignal.timeout(FETCH_TIMEOUT)
         });
         const json = await res.json();
         if (res.ok) {
@@ -154,7 +157,7 @@
                                             {
                                                 value: item.aired_from ? new FormatDate(item.aired_from).format_to_human_readable_form : null,
                                                 class: "text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw]"
-                                            },
+                                            }
                                         ]}
                                         <a
                                             on:mouseenter={() => handle_core_mouse_enter("anime", index)}
