@@ -9,7 +9,7 @@
     export let remove_gradient_on_mouse_enter: string = "false";
     export let parent_class = "";
     export let offset_scrollbar: string | boolean = "false";
-    export let gradient_mask: string | boolean;
+    export let gradient_mask: string | boolean | null = null;
 
     let scroll_area: HTMLElement;
     let add_mask_bottom: boolean,

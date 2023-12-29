@@ -1,6 +1,6 @@
 import * as _ from "lodash-es";
 
-export function string_to_boolean(variable: string | boolean): boolean {
+export function string_to_boolean(variable: string | boolean | null | undefined): boolean {
     if (_.isUndefined(variable)) {
         return false;
     }
