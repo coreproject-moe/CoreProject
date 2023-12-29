@@ -365,7 +365,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="flex flex-col justify-between rounded-r-lg bg-neutral/25 md:rounded-r-[0.35vw]">
+                                    <div class="flex flex-col justify-between rounded-rt-none bg-neutral/25 md:rounded-r-[0.35vw] md:rounded-l-none rounded-b-lg">
                                         <div class="flex flex-col gap-1 p-3 leading-none md:gap-[0.5vw] md:p-[1vw]">
                                             <span class="text-xs font-semibold capitalize md:text-[1vw]">
                                                 {new FormatDate(anime.aired_from ?? "").format_to_season}
@@ -378,7 +378,7 @@
                                             <ScrollArea
                                                 offset_scrollbar
                                                 gradient_mask
-                                                parent_class="max-h-24 md:max-h-[11vw] md:mt-[0.5vw]"
+                                                parent_class="max-h-12 md:max-h-[11vw] md:mt-[0.5vw]"
                                                 class="text-surface-300 text-xs leading-snug md:text-justify md:text-[0.85vw] md:leading-[1vw]"
                                             >
                                                 {anime.synopsis}
@@ -388,7 +388,7 @@
                                         <div class="flex items-center gap-2 overflow-x-scroll p-3 scrollbar-none md:gap-[0.5vw] md:p-[1vw]">
                                             {#each anime?.genres ?? [] as genre}
                                                 <span
-                                                    class="whitespace-nowrap rounded bg-warning p-1 text-xs font-semibold capitalize leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]"
+                                                    class="whitespace-nowrap rounded-sm bg-warning p-1 text-xs font-semibold capitalize leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]"
                                                 >
                                                     {genre.name}
                                                 </span>
