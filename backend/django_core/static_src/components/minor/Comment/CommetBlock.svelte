@@ -1,22 +1,27 @@
 <script lang="ts">
-    import { FormatDate } from "$functions/format_date";
+    export let item: Comment;
+
     import Markdown from "$components/minor/Markdown/Index.svelte";
-    import type { Comment } from "../../../types/comment";
     import CommentBox from "$components/specific/CommentBox/Index.svelte";
 
-    export let item: Comment;
+    import type { Comment } from "../../../types/comment";
+
+    import * as _ from "lodash-es";
+    import { onMount, tick } from "svelte";
+
+    // Functions
+    import { cn } from "$functions/classname";
+    import { reverse } from "$functions/urls";
+    import { get_csrf_token } from "$functions/get_csrf_token";
+    import { string_to_boolean } from "$functions/string_to_bool";
+    import { FormatDate } from "$functions/format_date";
+
     // Import icons
     import Arrow from "$icons/Arrow/Index.svelte";
     import Chat from "$icons/Chat/Index.svelte";
     import Share from "$icons/Share/Index.svelte";
     import Cross from "$icons/Cross/Index.svelte";
-    import { reverse } from "$functions/urls";
-    import { onMount, tick } from "svelte";
-    import { cn } from "$functions/classname";
-    import { string_to_boolean } from "$functions/string_to_bool";
 
-    import * as _ from "lodash-es";
-    import { get_csrf_token } from "$functions/get_csrf_token";
     // Bindings
     let user_reaction: typeof item.user_reaction,
         ratio: typeof item.ratio,
