@@ -7,9 +7,10 @@
         anime_synopsis: string | null = null,
         anime_episodes: string | null = null;
 
-    import { reverse } from "$functions/urls";
     import JSON5 from "json5";
     import * as _ from "lodash-es";
+    import { reverse } from "$functions/urls";
+    import { string_to_number } from "$functions/string_to_number";
 
     // Components
     import CommentBox from "$components/specific/CommentBox/Index.svelte";
@@ -33,7 +34,6 @@
     import Cross from "$icons/Cross/Index.svelte";
     import Chat from "$icons/Chat/Index.svelte";
     import TrendingArrow from "$icons/TrendingArrow/Index.svelte";
-    import { string_to_number } from "$functions/string_to_number";
 
     // Internal logics
     const second_mapping = [
@@ -50,9 +50,10 @@
     ];
 
     // Parse anime_episode to Compatible JSON
-    const parse_anime_episode: () => { banner: string; name: string; japanese_name: string; duration: string; formats: string[]; resolutions: string[] }[] = () => {
+    type IAnimeEpisode = { banner: string; name: string; japanese_name: string; duration: string; formats: string[]; resolutions: string[] };
+    const parse_anime_episode: () => IAnimeEpisode[] = () => {
             if (!_.isNull(anime_episodes) && _.isString(anime_episodes)) {
-                return JSON5.parse(anime_episodes);
+                return JSON5.parse(anime_episodes) satisfies IAnimeEpisode[];
             } else {
                 throw new Error(`${`anime_episode`} is not castable to JSON`);
             }
@@ -64,6 +65,12 @@
                 throw new Error(`${`anime_genres`} is not castable to ${`string[]`}`);
             }
         };
+
+    const button_mapping = [
+        { icon: Edit, label: "edit" },
+        { icon: Download, label: "download" },
+        { icon: Share, label: "share" }
+    ];
 </script>
 
 <div class="relative mt-16 block h-screen bg-cover md:mt-0">
@@ -144,27 +151,18 @@
                             >
                                 <coreproject-icon-record class="w-4 md:w-[1.125vw]"></coreproject-icon-record>
                             </button> -->
-                            <button
-                                type="button"
-                                aria-label="video"
-                                class="btn btn-warning h-7 min-h-full w-7 rounded p-0 md:h-[2vw] md:w-[2vw] md:rounded-[0.25vw]"
-                            >
-                                <Edit class="w-4 md:w-[1.125vw]" />
-                            </button>
-                            <button
-                                type="button"
-                                aria-label="video"
-                                class="btn btn-warning h-7 min-h-full w-7 rounded p-0 md:h-[2vw] md:w-[2vw] md:rounded-[0.25vw]"
-                            >
-                                <Download class="w-4 md:w-[1.125vw]" />
-                            </button>
-                            <button
-                                type="button"
-                                aria-label="video"
-                                class="btn btn-warning h-7 min-h-full w-7 rounded p-0 md:h-[2vw] md:w-[2vw] md:rounded-[0.25vw]"
-                            >
-                                <Share class="w-4 md:w-[1.125vw]" />
-                            </button>
+                            {#each button_mapping as button}
+                                <button
+                                    type="button"
+                                    aria-label={button?.label}
+                                    class="btn btn-warning h-7 min-h-full w-7 rounded p-0 md:h-[2vw] md:w-[2vw] md:rounded-[0.25vw]"
+                                >
+                                    <svelte:component
+                                        this={button?.icon}
+                                        class="w-4 md:w-[1.125vw]"
+                                    />
+                                </button>
+                            {/each}
                         </div>
                     </div>
                 </div>
@@ -324,7 +322,7 @@
                                             </span>
                                         {/each}
                                     </div>
-                                    <coreproject-icon-dot class="w-1 opacity-50 md:w-[0.25vw]"></coreproject-icon-dot>
+                                    <Dot class="w-1 opacity-50 md:w-[0.25vw]" />
                                     <div class="flex gap-2 leading-none md:gap-[0.65vw]">
                                         {#each episode.resolutions as res}
                                             <span class="text-surface-50 md:bg-surface-400/25 text-[0.6rem] font-semibold uppercase tracking-wider md:rounded md:text-[0.8vw]">

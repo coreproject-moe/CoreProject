@@ -1,5 +1,6 @@
 <script lang="ts">
     import IntersectionObserver from "$components/svelte/IntersectionOberser.svelte";
+    import { IS_CHROMIUM, IS_FIREFOX } from "$constants/browser";
     import { cn } from "$functions/classname";
     import { string_to_boolean } from "$functions/string_to_bool";
 
@@ -8,7 +9,7 @@
     export let remove_gradient_on_mouse_enter: string = "false";
     export let parent_class = "";
     export let offset_scrollbar: string | boolean = "false";
-    export let gradient_mask: string | boolean;
+    export let gradient_mask: string | boolean = "false";
 
     let scroll_area: HTMLElement;
     let add_mask_bottom: boolean,
@@ -63,9 +64,15 @@
     on:mouseleave|preventDefault={handle_mouseleave}
     class={cn(
         parent_class,
-        string_to_boolean(offset_scrollbar) && "pr-3 md:pr-[0.75vw]",
-        "flex h-full w-full overflow-y-scroll overscroll-y-contain scrollbar-thin [scrollbar-color:rgba(255,255,255,0.12)transparent]"
+        string_to_boolean(offset_scrollbar) &&
+            // Chromium support for scrollbar sucks
+            !IS_CHROMIUM &&
+            "pr-3 md:pr-[0.75vw]",
+
+        "flex h-full w-full overflow-y-scroll overscroll-y-contain [scrollbar-color:rgba(255,255,255,0.12)transparent]"
     )}
+    class:scrollbar-none={IS_CHROMIUM}
+    class:scrollbar-thin={IS_FIREFOX}
     class:[mask-image:linear-gradient(180deg,rgba(7,5,25,0.95)80%,rgba(0,0,0,0)100%)]={string_to_boolean(gradient_mask) && add_mask_bottom}
 >
     <div class={cn(klass)}>
@@ -77,7 +84,7 @@
         >
             <div
                 bind:this={first_element}
-                class="hidden h-0"
+                class="invisible h-0"
             />
         </IntersectionObserver>
 
@@ -91,7 +98,7 @@
         >
             <div
                 bind:this={end_element}
-                class="hidden h-0"
+                class="invisible h-0"
             />
         </IntersectionObserver>
     </div>

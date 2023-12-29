@@ -14,6 +14,7 @@
     import Code from "$icons/Code/Index.svelte";
     import Hyperlink from "$icons/Hyperlink/Index.svelte";
     import { goto } from "$functions/urls";
+    import { IS_CHROMIUM } from "$constants/browser";
 
     let caret_offset_top: string | null = null,
         caret_offset_left: string | null = null;
@@ -477,6 +478,7 @@
         bind:this={textarea_element}
         spellcheck="true"
         placeholder="Leave a comment"
+        class:scrollbar-none={IS_CHROMIUM}
         class="h-28 w-full resize-none overflow-y-scroll border-none bg-secondary px-3 text-sm leading-tight outline-none focus:ring-0 md:h-[8vw] md:px-[1vw] md:py-[0.5vw] md:text-[1vw] md:leading-[1.5vw]"
     ></textarea>
 {:else if active_tab === "preview"}
