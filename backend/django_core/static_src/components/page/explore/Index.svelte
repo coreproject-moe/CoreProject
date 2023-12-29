@@ -62,7 +62,7 @@
         },
         year: {
             title: "Year",
-            class: "md:flex flex-col md:gap-[0.35vw]",
+            class: "hidden md:flex flex-col md:gap-[0.35vw]",
             value: "",
             items: {
                 2023: "2023",
@@ -265,7 +265,7 @@
                     </div>
 
                     {#if filter_items}
-                        <div class="dropdown-content z-10 w-[7.25rem] mt-2 overflow-x-hidden rounded-lg md:mt-[1vw] md:w-[11vw] md:rounded-[0.5vw]">
+                        <div class="dropdown-content z-10 w-full mt-2 overflow-x-hidden rounded-lg md:mt-[1vw] md:w-[11vw] md:rounded-[0.5vw]">
                             <ScrollArea
                                 gradient_mask={false}
                                 class="flex w-full flex-col md:p-[0.35vw]"
@@ -276,12 +276,12 @@
 
                                     <button
                                         on:click|preventDefault={() => update_selected_items(option[0], { key, value })}
-                                        class="btn btn-neutral relative flex h-max min-h-max items-center justify-start p-3 text-sm leading-none md:rounded-[0.35vw] md:px-[1vw] md:py-[0.75vw] md:text-[0.9vw]"
+                                        class="btn btn-neutral relative flex h-max min-h-max items-center justify-start p-3 text-sm leading-none md:rounded-[0.35vw] rounded-none py-3 md:px-[1vw] md:py-[0.75vw] md:text-[0.9vw]"
                                     >
                                         <span>{value}</span>
 
                                         {#if is_selected}
-                                            <div class="absolute right-[0.75vw] rounded-full bg-primary p-1 text-white md:p-[0.25vw]">
+                                            <div class="absolute right-3 md:right-[0.75vw] rounded-full bg-primary p-1 text-white md:p-[0.25vw]">
                                                 <Tick class="w-2 text-white md:w-[0.75vw]" />
                                             </div>
                                         {/if}
