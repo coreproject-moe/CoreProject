@@ -74,7 +74,7 @@ async def anime_info_view(
         return render(
             request,
             "anime/info/index.html",
-            context={"anime": anime, "episode": anime_episode},
+            context={"anime": anime, "episodes": [anime_episode for _ in range(0, 10)]},
         )
 
     return render(request, "anime/_layout.html", context={})
