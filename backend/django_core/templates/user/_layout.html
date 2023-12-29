@@ -27,13 +27,11 @@
                trigger hyperscript:change_background
                then wait 10s
                end
-
               ">
             <img
                 _="on change(image) set @src to image" src=""
                 class="absolute w-full h-full object-cover transition-all"
             />
-        {# backdrops #}
             <div class="absolute inset-0 bg-gradient-to-r from-secondary/75 to-secondary/50"></div>
             <backdrop class="absolute inset-0 bg-transparent duration-300"></backdrop>
 
@@ -44,7 +42,7 @@
                 <span class="mt-[4vw] text-[1vw] font-semibold leading-none"> With a coreproject account, you can </span>
                 <span class="mt-[0.5vw] max-w-[22vw] text-[1vw] font-medium leading-[1vw] text-surface-200"> continue on animecore, mangacore and soundcore with same account. </span>
             </div>
-            <div class="absolute bottom-[1.85vw] left-10 md:left-[2vw] md:flex">
+            <div class="absolute top-10 md:top-auto md:bottom-[1.85vw] left-10 md:left-[2vw] md:flex">
                 <div class="flex flex-col gap-2 md:gap-[0.75vw]">
                     <span class="text-[2.25vw] font-semibold uppercase leading-none tracking-widest text-white/75 md:text-[0.75vw]">Background from anime</span>
                     <div class="flex items-center gap-[2vw] md:gap-[0.5vw]">
@@ -52,13 +50,13 @@
                             <anime-name _="on change(anime_name) put anime_name into me"></anime-name>
                         </span>
                         <button _="on click trigger hyperscript:change_background">
-                            <coreproject-icon-refresh class="hidden md:flex md:w-[1vw]"></coreproject-icon-refresh>
+                            <coreproject-icon-refresh class="w-4 md:w-[1vw]"></coreproject-icon-refresh>
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="z-0 col-start-1 col-end-1 row-start-1 row-end-1 flex items-center justify-center md:col-start-2 md:col-end-2 md:block md:items-end md:px-[8vw] md:py-[2.2vw]">
+        <div class="absolute inset-x-0 md:static bg-secondary md:px-[8vw] md:py-[2.2vw] self-end md:self-auto rounded-t-3xl md:rounded-t-none">
             {% block sidebody %}{% endblock %}
         </div>
     </div>
