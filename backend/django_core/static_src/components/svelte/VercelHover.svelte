@@ -46,7 +46,9 @@
                 GLIDER_TRANSITION_DURATION = 100;
                 hover_glider_element.style.transitionDuration = `${GLIDER_TRANSITION_DURATION}ms`;
                 setTimeout(() => {
-                    hover_glider_element!.style.opacity = "100";
+                    if (hover_glider_element) {
+                        hover_glider_element.style.opacity = "100";
+                    }
                 }, GLIDER_TRANSITION_DURATION);
                 is_hovered_from_prev_el = true;
             }
@@ -55,7 +57,9 @@
         },
         handle_mouseleave = () => {
             mouse_leave_timeout = setTimeout(() => {
-                hover_glider_element!.style.opacity = "0";
+                if (hover_glider_element) {
+                    hover_glider_element.style.opacity = "0";
+                }
                 is_hovered_from_prev_el = false;
             }, GLIDER_TRANSITION_DURATION);
         };
