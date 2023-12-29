@@ -38,12 +38,12 @@
 >
     <button
         on:mouseenter|preventDefault={handle_mouseenter}
-        class="relative"
+        class="relative w-full"
         tabindex="0"
         aria-expanded={false}
     >
         <img
-            class="h-60 w-full md:h-[20vw] rounded-lg object-cover object-center md:rounded-[0.5vw]"
+            class="h-44 w-full md:h-[20vw] rounded-lg object-cover object-center md:rounded-[0.5vw]"
             src={anime_image}
             alt={anime_name}
             style=""
