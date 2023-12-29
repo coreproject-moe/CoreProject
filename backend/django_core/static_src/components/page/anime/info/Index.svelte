@@ -36,27 +36,34 @@
     import { string_to_number } from "$functions/string_to_number";
 
     // Internal logics
-    const sencond_mapping = [
+    const second_mapping = [
         // anime.source
-        { item: "TV", show_dots_after: true },
+        { item: "TV" },
         // anime.episode
-        { item: `${string_to_number(anime_episodes_count)} eps`, show_dots_after: true },
+        { item: `${string_to_number(anime_episodes_count)} eps` },
         // anime.status
-        { item: `completed`, show_dots_after: true },
+        { item: `completed` },
         // anime.aired_from
-        { item: `spring 2023`, show_dots_after: true },
+        { item: `spring 2023` },
         // anime.aired_to
-        { item: `Kuschio animation`, show_dots_after: false }
+        { item: `Kuschio animation` }
     ];
 
     // Parse anime_episode to Compatible JSON
     const parse_anime_episode: () => { banner: string; name: string; japanese_name: string; duration: string; formats: string[]; resolutions: string[] }[] = () => {
-        if (!_.isNull(anime_episodes) && _.isString(anime_episodes)) {
-            return JSON5.parse(anime_episodes);
-        } else {
-            throw new Error(`${`anime_episode`} is not castable to JSON`);
-        }
-    };
+            if (!_.isNull(anime_episodes) && _.isString(anime_episodes)) {
+                return JSON5.parse(anime_episodes);
+            } else {
+                throw new Error(`${`anime_episode`} is not castable to JSON`);
+            }
+        },
+        parse_anime_genres: () => string[] = () => {
+            if (!_.isNull(anime_genres) && _.isString(anime_genres)) {
+                return JSON5.parse(anime_genres) as string[];
+            } else {
+                throw new Error(`${`anime_genres`} is not castable to ${`string[]`}`);
+            }
+        };
 </script>
 
 <div class="relative mt-16 block h-screen bg-cover md:mt-0">
@@ -92,9 +99,9 @@
                             {anime_japanese_name}
                         </HoverExpand>
                         <div class="mt-1 flex flex-wrap items-center gap-2 text-xs font-semibold md:mt-[0.25vw] md:gap-[0.5vw] md:pt-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
-                            {#each sencond_mapping as map}
+                            {#each second_mapping as map}
                                 <span>{map.item}</span>
-                                {#if map.show_dots_after}
+                                {#if second_mapping.at(-1) !== map}
                                     <Dot class="w-[0.35rem] opacity-75" />
                                 {/if}
                             {/each}
@@ -177,11 +184,9 @@
                         {anime_synopsis}
                     </ScrollArea>
                     <div class="hidden gap-[0.5vw] text-white md:flex md:text-[0.75vw] md:leading-[0.9vw]">
-                        {#if !_.isNull(anime_genres) && _.isString(anime_genres)}
-                            {#each JSON5.parse(anime_genres) as item}
-                                <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">{item}</span>
-                            {/each}
-                        {/if}
+                        {#each parse_anime_genres() as item}
+                            <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">{item}</span>
+                        {/each}
                     </div>
                     <div class="hidden w-max gap-[0.75vw] rounded-[0.25vw] bg-secondary md:flex md:px-[0.75vw] md:py-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
                         <div class="flex gap-[0.25vw]">
