@@ -28,8 +28,9 @@
 
     let search_promise: Promise<Anime[]> | null = null;
 
-
-    onMount(async () => (search_promise = get_anime_with_serach_parameters()));
+    onMount(async () => {
+        search_promise = get_anime_with_serach_parameters();
+    });
 
     // Mapping
     let filter_options_mapping: {
@@ -37,7 +38,7 @@
             title: string;
             class: string;
             value: string;
-            items: Record<string, string> | null;
+            items?: Array<string | number>;
             selected_items: string[] | null;
         };
     } = {
@@ -45,67 +46,46 @@
             title: "Time Range",
             class: "hidden flex-col md:gap-[0.35vw]",
             value: "",
-            items: {},
             selected_items: []
         },
         genres: {
             title: "Genres",
             class: "md:flex flex-col md:gap-[0.35vw]",
             value: "",
-            items: {
-                action: "Action",
-                adventure: "Adventure",
-                hentai: "Hentai",
-                romance: "Romance"
-            },
+            items: ["Action", "Adventure", "Hentai", "Romance"],
             selected_items: []
         },
         year: {
             title: "Year",
             class: "md:flex flex-col md:gap-[0.35vw]",
             value: "",
-            items: {
-                2023: "2023",
-                2022: "2022",
-                2021: "2021",
-                2020: "2020"
-            },
+            items: [2020, 2021, 2022, 2023],
             selected_items: []
         },
         season: {
             title: "Season",
             class: "md:flex flex-col md:gap-[0.35vw]",
             value: "",
-            items: {
-                winter: "Winter",
-                spring: "Spring",
-                summer: "Summer",
-                fall: "Fall"
-            },
+            items: ["winter", "spring", "summer", "winter"],
             selected_items: []
         },
         format: {
             title: "Format",
             class: "hidden md:flex flex-col md:gap-[0.35vw]",
             value: "",
-            items: {
-                tv_show: "TV Show",
-                movie: "Movie"
-            },
+            items: ["TV Show", "Movie"],
             selected_items: []
         },
         airing_status: {
             title: "Airing Status",
             class: "hidden flex-col md:gap-[0.35vw]",
             value: "",
-            items: {},
             selected_items: []
         },
         sort_by: {
             title: "Sort by",
             class: "hidden flex-col md:gap-[0.35vw]",
             value: "",
-            items: {},
             selected_items: []
         }
     };
@@ -122,7 +102,7 @@
             if (is_selected) {
                 filter_option.selected_items = filter_option.selected_items!.filter((item) => item !== selected_item_key);
                 // remove from active filters
-                active_filters = active_filters.filter(filter => filter !== selected_item_key);
+                active_filters = active_filters.filter((filter) => filter !== selected_item_key);
             } else {
                 filter_option.selected_items = [...filter_option.selected_items!, selected_item_key];
                 // add to active filters
@@ -273,7 +253,10 @@
                                     {@const is_selected = selected_items?.some((item) => item === key)}
 
                                     <button
-                                        on:click|preventDefault={() => update_selected_items(option[0], { key, value })}
+                                        on:click|preventDefault={() => {
+                                            const val = String(value);
+                                            update_selected_items(option[0], { key, val });
+                                        }}
                                         class="btn btn-neutral relative flex h-max min-h-max items-center justify-start p-3 text-sm leading-none md:rounded-[0.35vw] md:px-[1vw] md:py-[0.75vw] md:text-[0.9vw]"
                                     >
                                         <span>{value}</span>
@@ -419,7 +402,8 @@
                     <div class="flex h-full flex-col items-center justify-center gap-[0.5vw] text-[1.1vw]">
                         <span class="font-medium leading-none">No match found!</span>
                         <span class="text-center font-semibold leading-none text-error">
-                            Couldn't find animes with: "{search_query}"<br>
+                            Couldn't find animes with: "{search_query}"
+                            <br />
                             <span class="text-accent/75">Filters: {active_filters.join(" - ")}</span>
                         </span>
                     </div>
