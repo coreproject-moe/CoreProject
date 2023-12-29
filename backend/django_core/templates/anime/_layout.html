@@ -42,35 +42,35 @@
                                     <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
                                 </div>
                             </div>
-                            <ul tabindex="0" class="dropdown-content z-1 md:min-w-[12vw] md:top-[4vw] md:text-[0.9vw] md:p-[0.5vw] bg-base-100 menu md:rounded-[0.75vw]">
-                                <div class="md:p-[0.75vw] md:py-[0.5vw] flex flex-col leading-none md:gap-[0.35vw]">
+                            <ul tabindex="0" class="dropdown-content z-1 min-w-48 md:min-w-[12vw] top-14 md:top-[4vw] md:text-[0.9vw] md:p-[0.5vw] p-4 bg-base-100 menu md:rounded-[0.75vw] rounded-lg">
+                                <div class="md:p-[0.75vw] md:py-[0.5vw] flex flex-col leading-none md:gap-[0.35vw] gap-2">
                                     <span class="md:text-[1vw] font-bold capitalize">{{ request.user.username }}</span>
                                     <span class="md:text-[0.75vw]">{{ request.user.email }}</span>
                                 </div>
-                                <div class="divider md:mb-[0.1vw] mt-0"></div>
+                                <div class="divider md:mb-[0.1vw] mb-0 mt-1"></div>
                                 {% component_block "vercel_hover" glider_container_class='' active_element_class='rounded-[0.5vw] bg-primary' direction='vertical' duration=200 %}
                                     {% fill 'items' %}
                                         <li>
-                                            <a class="flex items-center md:gap-[0.5vw] md:p-[0.75vw] leading-none !text-white !bg-transparent">
-                                                <coreproject-icon-user class="md:w-[1vw]"></coreproject-icon-user>
+                                            <a class="flex items-center gap-3 md:gap-[0.5vw] px-0 md:p-[0.75vw] leading-none !text-white !bg-transparent">
+                                                <coreproject-icon-user class="w-4 md:w-[1vw]"></coreproject-icon-user>
                                                 Profile
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="flex items-center md:gap-[0.5vw] md:p-[0.75vw] leading-none !text-white !bg-transparent">
-                                                <coreproject-icon-list class="md:w-[1vw]"></coreproject-icon-list>
+                                            <a class="flex items-center gap-3 md:gap-[0.5vw] px-0 md:p-[0.75vw] leading-none !text-white !bg-transparent">
+                                                <coreproject-icon-list class="w-4 md:w-[1vw]"></coreproject-icon-list>
                                                 My List
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="flex items-center md:gap-[0.5vw] md:p-[0.75vw] leading-none !text-white !bg-transparent">
-                                                <coreproject-icon-preference class="md:w-[1vw]"></coreproject-icon-preference>
+                                            <a class="flex items-center gap-3 md:gap-[0.5vw] px-0 md:p-[0.75vw] leading-none !text-white !bg-transparent">
+                                                <coreproject-icon-preference class="w-4 md:w-[1vw]"></coreproject-icon-preference>
                                                 Preference
                                             </a>
                                         </li>
                                         <li>
-                                            <a class="flex items-center md:gap-[0.5vw] md:p-[0.75vw] leading-none !text-white !bg-transparent">
-                                                <coreproject-icon-settings class="md:w-[1vw]"></coreproject-icon-settings>
+                                            <a class="flex items-center gap-3 md:gap-[0.5vw] px-0 md:p-[0.75vw] leading-none !text-white !bg-transparent">
+                                                <coreproject-icon-settings class="w-4 md:w-[1vw]"></coreproject-icon-settings>
                                                 Settings
                                             </a>
                                         </li>
