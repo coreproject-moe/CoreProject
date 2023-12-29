@@ -19,6 +19,7 @@
     import { Anime } from "../../../types/anime";
     import { onMount } from "svelte";
     import { get_csrf_token } from "$functions/get_csrf_token";
+    import { FETCH_TIMEOUT } from "$constants/fetch";
 
     // Binding
     let result_animes_element: HTMLDivElement;
@@ -27,7 +28,6 @@
         thumbnail_mode: "card_with_dropdown" | "detailed_card" = "card_with_dropdown";
 
     let search_promise: Promise<Anime[]> | null = null;
-
 
     onMount(async () => (search_promise = get_anime_with_serach_parameters()));
 
@@ -122,7 +122,7 @@
             if (is_selected) {
                 filter_option.selected_items = filter_option.selected_items!.filter((item) => item !== selected_item_key);
                 // remove from active filters
-                active_filters = active_filters.filter(filter => filter !== selected_item_key);
+                active_filters = active_filters.filter((filter) => filter !== selected_item_key);
             } else {
                 filter_option.selected_items = [...filter_option.selected_items!, selected_item_key];
                 // add to active filters
@@ -160,8 +160,10 @@
                 method: "GET",
                 headers: {
                     Accept: "application/json",
-                    "Content-Type": "application/json"
-                }
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": get_csrf_token()
+                },
+                signal: AbortSignal.timeout(FETCH_TIMEOUT)
             }
         );
         const json = await res.json();
@@ -419,7 +421,8 @@
                     <div class="flex h-full flex-col items-center justify-center gap-[0.5vw] text-[1.1vw]">
                         <span class="font-medium leading-none">No match found!</span>
                         <span class="text-center font-semibold leading-none text-error">
-                            Couldn't find animes with: "{search_query}"<br>
+                            Couldn't find animes with: "{search_query}"
+                            <br />
                             <span class="text-accent/75">Filters: {active_filters.join(" - ")}</span>
                         </span>
                     </div>

@@ -4,8 +4,8 @@
     import Markdown from "$components/minor/Markdown/Index.svelte";
     import CommentBox from "$components/specific/CommentBox/Index.svelte";
 
-    import type { Comment } from "../../../types/comment";
-
+    import type { Comment } from "$types/comment";
+    import { FETCH_TIMEOUT } from "$constants/fetch";
     import * as _ from "lodash-es";
     import { onMount, tick } from "svelte";
 
@@ -60,6 +60,7 @@
                     "Content-Type": "application/json",
                     "X-CSRFToken": get_csrf_token()
                 },
+                signal: AbortSignal.timeout(FETCH_TIMEOUT),
                 body: JSON.stringify({
                     reaction: reaction
                 })
