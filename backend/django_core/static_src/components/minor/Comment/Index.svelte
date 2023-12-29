@@ -4,12 +4,13 @@
     import CommentSkeleton from "$components/minor/Comment/Skeleton.svelte";
     import Empty from "./Empty.svelte";
     import ErrorSvelteComponent from "./Error.svelte";
-    import type { Comment } from "../../../types/comment";
+    import type { Comment } from "$types/comment";
     import { comment_needs_update } from "./store";
     import { onMount } from "svelte";
     import * as _ from "lodash-es";
     import IntersectionOberser from "$components/svelte/IntersectionOberser.svelte";
     import { get_csrf_token } from "$functions/get_csrf_token";
+    import { FETCH_TIMEOUT } from "$constants/fetch";
 
     export let api_url: string;
 
@@ -39,7 +40,8 @@
                 method: "GET",
                 headers: {
                     "X-CSRFToken": get_csrf_token()
-                }
+                },
+                signal: AbortSignal.timeout(FETCH_TIMEOUT)
             });
             const value = (await res.json()) as CommentResponse;
 

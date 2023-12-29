@@ -5,6 +5,7 @@
     // Icons
     import Info from "$icons/Info/Index.svelte";
     import { get_csrf_token } from "$functions/get_csrf_token";
+    import { FETCH_TIMEOUT } from "$constants/fetch";
 
     export let submit_url = "";
 
@@ -27,7 +28,8 @@
             },
             body: JSON.stringify({
                 text: textarea_value
-            })
+            }),
+            signal: AbortSignal.timeout(FETCH_TIMEOUT)
         });
         if (res.ok) {
             comment_needs_update.set(true);
