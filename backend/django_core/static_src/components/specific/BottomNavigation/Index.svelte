@@ -10,16 +10,19 @@
     const mapping = [
         {
             icon: Home,
+            name: "home",
             href: "/anime/",
             url: reverse("anime_home_view")
         },
         {
             icon: Compass,
+            name: "explore",
             href: "/anime/explore/",
             url: reverse("anime_explore_view")
         },
         {
             icon: Chat,
+            name: "forum",
             href: "/forum",
             url: reverse("anime_home_view"),
         }
@@ -44,7 +47,7 @@
             >
                 <svelte:component class="w-5" this={item.icon} />
             </div>
-            <span class="text-sm font-bold capitalize">home</span>
+            <span class="text-sm font-bold capitalize">{item.name}</span>
         </button>
     {/each}
 </footer>
