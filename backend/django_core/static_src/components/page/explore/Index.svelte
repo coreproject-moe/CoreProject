@@ -265,7 +265,7 @@
                     </div>
 
                     {#if filter_items}
-                        <div class="dropdown-content z-10 w-full mt-2 overflow-x-hidden rounded-lg md:mt-[1vw] md:w-[11vw] md:rounded-[0.5vw]">
+                        <div class="dropdown-content z-10 w-full mt-2 overflow-x-hidden rounded-lg md:mt-[1vw] md:rounded-[0.5vw]">
                             <ScrollArea
                                 gradient_mask={false}
                                 class="flex w-full flex-col md:p-[0.35vw]"
