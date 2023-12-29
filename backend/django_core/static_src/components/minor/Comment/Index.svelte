@@ -4,7 +4,7 @@
     import CommentSkeleton from "$components/minor/Comment/Skeleton.svelte";
     import Empty from "./Empty.svelte";
     import ErrorSvelteComponent from "./Error.svelte";
-    import type { Comment } from "../../../types/comment";
+    import type { Comment } from "$types/comment";
     import { comment_needs_update } from "./store";
     import { onMount } from "svelte";
     import * as _ from "lodash-es";
