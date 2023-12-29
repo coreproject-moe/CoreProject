@@ -178,13 +178,13 @@
 
 <section class="mt-20 flex flex-col p-5 md:mt-0 md:gap-[1.5vw] md:pb-[2.5vw] md:pl-[1.5vw] md:pr-[3.75vw] md:pt-0">
     <div class="flex flex-col gap-2 md:gap-[0.5vw]">
-        <div class="text-2xl font-bold leading-none md:text-[2vw]">
+        <div class="text-3xl font-bold leading-none md:text-[2vw]">
             Anime <span class="text-warning">Explore</span>
         </div>
         <span class="text-base font-normal leading-none md:text-[1.1vw]">Unleash your inner Otaku: Explore anime wonders</span>
     </div>
 
-    <div class="mt-10 flex flex-col gap-1 md:hidden">
+    <div class="mt-7 flex flex-col gap-1 md:hidden">
         <span class="text-base font-semibold leading-none">Search Animes</span>
         <div class="relative flex items-center">
             <Search class="pointer-events-none absolute ml-4 w-4" />
@@ -196,7 +196,7 @@
         </div>
     </div>
 
-    <div class="mt-3 flex items-end justify-between gap-3 md:mt-0 md:gap-0">
+    <div class="mt-2 flex items-end justify-between gap-3 md:mt-0 md:gap-0">
         <div class="flex items-center gap-3 md:gap-[1.5vw]">
             <div class="hidden flex-col gap-[0.35vw] md:flex">
                 <span class="text-[1vw] font-semibold leading-none">Search Animes</span>
@@ -265,7 +265,7 @@
                     </div>
 
                     {#if filter_items}
-                        <div class="dropdown-content z-10 w-[8.5rem] overflow-x-hidden rounded-lg md:mt-[1vw] md:w-[11vw] md:rounded-[0.5vw]">
+                        <div class="dropdown-content z-10 w-[7.25rem] mt-2 overflow-x-hidden rounded-lg md:mt-[1vw] md:w-[11vw] md:rounded-[0.5vw]">
                             <ScrollArea
                                 gradient_mask={false}
                                 class="flex w-full flex-col md:p-[0.35vw]"
