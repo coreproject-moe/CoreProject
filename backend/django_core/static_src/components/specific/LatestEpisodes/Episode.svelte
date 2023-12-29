@@ -4,6 +4,7 @@
     import Play from "$icons/Play/Index.svelte";
     import { slide } from "svelte/transition";
     import { onMount } from "svelte";
+    import { goto } from "$functions/urls";
 
     type Episode = {
         id: number;
@@ -84,12 +85,14 @@
                 </span>
             </div>
         </div>
-        <a
-            href="/mal/{episode.id}/episode/{episode.episode_number}"
+        <button
+            on:click|preventDefault={() => {
+                // goto('/mal/{episode.id}/episode/{episode.episode_number}')
+            }}
             class="btn btn-warning h-[2.5vw] min-h-max w-[2.5vw] rounded-full p-0 transition-colors duration-300 group-hover:btn-accent"
         >
             <Play class="w-[1vw]" />
-        </a>
+        </button>
     </div>
 
     {#if show_more_info}

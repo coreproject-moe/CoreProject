@@ -79,6 +79,7 @@ anime_episode = {
     "resolutions": ["sd", "hd", "fhd"],
 }
 
+
 my_list = [
     {
         "id": 1,

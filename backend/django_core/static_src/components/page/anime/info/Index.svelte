@@ -2,12 +2,14 @@
     export let pk: string | null = null,
         anime_name: string | null = null,
         anime_japanese_name: string | null = null,
-        anime_genres: string[] = new Array<string>(),
-        // Is number
-        anime_episodes_count: string | null = null,
-        anime_synopsis: string | null = null;
+        anime_genres: string | null = null,
+        anime_episodes_count: string | null = null, // Is number
+        anime_synopsis: string | null = null,
+        anime_episodes: string | null = null;
 
     import { reverse } from "$functions/urls";
+    import JSON5 from "json5";
+    import * as _ from "lodash-es";
 
     // Components
     import CommentBox from "$components/specific/CommentBox/Index.svelte";
@@ -46,6 +48,15 @@
         // anime.aired_to
         { item: `Kuschio animation`, show_dots_after: false }
     ];
+
+    // Parse anime_episode to Compatible JSON
+    const parse_anime_episode: () => { banner: string; name: string; japanese_name: string; duration: string; formats: string[]; resolutions: string[] }[] = () => {
+        if (!_.isNull(anime_episodes) && _.isString(anime_episodes)) {
+            return JSON5.parse(anime_episodes);
+        } else {
+            throw new Error(`${`anime_episode`} is not castable to JSON`);
+        }
+    };
 </script>
 
 <div class="relative mt-16 block h-screen bg-cover md:mt-0">
@@ -166,9 +177,11 @@
                         {anime_synopsis}
                     </ScrollArea>
                     <div class="hidden gap-[0.5vw] text-white md:flex md:text-[0.75vw] md:leading-[0.9vw]">
-                        {#each anime_genres as item}
-                            <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">{item}</span>
-                        {/each}
+                        {#if !_.isNull(anime_genres) && _.isString(anime_genres)}
+                            {#each JSON5.parse(anime_genres) as item}
+                                <span class="rounded-[0.25vw] bg-warning font-semibold text-black md:px-[0.75vw] md:py-[0.4vw]">{item}</span>
+                            {/each}
+                        {/if}
                     </div>
                     <div class="hidden w-max gap-[0.75vw] rounded-[0.25vw] bg-secondary md:flex md:px-[0.75vw] md:py-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
                         <div class="flex gap-[0.25vw]">
@@ -253,17 +266,18 @@
                     </div>
                 </div>
                 <div class="mt-4 grid grid-cols-12 gap-5 md:mt-[2.5vw] md:gap-[2.5vw]">
-                    {#each Array(10).fill(0) as item}
+                    {#each parse_anime_episode() as episode}
                         <a
                             href="/anime/mal/1/episode/1"
                             class="relative col-span-12 grid grid-cols-12 gap-4 md:col-span-4"
                         >
                             <div class="relative col-span-5 h-full w-full md:col-span-12 md:h-[18vw]">
                                 <div class="block h-24 md:h-[12vw] md:w-full">
-                                    <!-- <img
-                                            src="{{episode_banner}}"
-                                            class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw]"
-                                        > -->
+                                    <img
+                                        src={episode.banner}
+                                        alt=""
+                                        class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw]"
+                                    />
                                 </div>
                                 <div class="absolute inset-0 hidden bg-gradient-to-t from-secondary/75 to-transparent md:flex md:h-[12vw]"></div>
                             </div>
@@ -279,7 +293,7 @@
                                     <p
                                         class="text-surface-50 rounded bg-secondary/75 p-1 py-0 text-[0.7rem] font-semibold md:h-max md:rounded-[0.4vw] md:bg-secondary md:px-[0.5vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none"
                                     >
-                                        <!-- {{ episode.duration }} -->
+                                        {episode.duration}
                                     </p>
                                 </div>
                                 <div class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
@@ -287,32 +301,31 @@
                                         class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]"
                                         height="md:max-h-[1.15vw] md:hover:max-h-[9vw]"
                                     >
-                                        <!-- {{ episode.name }} -->
+                                        {episode.name}
                                     </coreproject-hover-expand>
                                     <coreproject-hover-expand
                                         class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]"
                                         height="md:max-h-[1.15vw] md:hover:max-h-[9vw]"
                                     >
-                                        <!-- {{ episode.japanese_name }} -->
+                                        {episode.japanese_name}
                                     </coreproject-hover-expand>
                                 </div>
 
                                 <div class="bg-surface-900 relative flex w-full items-center gap-2 md:gap-[0.5vw] md:pt-[0.75vw]">
                                     <div class="flex gap-2 leading-none md:gap-[0.65vw]">
-                                        <!-- {% for format in episode.div %}
-                                                <span class="rounded text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:bg-surface-400/50 md:text-[0.8vw]">
-                                                    <!-- {{ format }}
-                                                </span>
-                                            {% endfor %}
-                                         -->
+                                        {#each episode.formats as format}
+                                            <span class="text-surface-50 md:bg-surface-400/50 rounded text-[0.6rem] font-semibold uppercase tracking-wider md:text-[0.8vw]">
+                                                {format}
+                                            </span>
+                                        {/each}
                                     </div>
                                     <coreproject-icon-dot class="w-1 opacity-50 md:w-[0.25vw]"></coreproject-icon-dot>
                                     <div class="flex gap-2 leading-none md:gap-[0.65vw]">
-                                        <!-- {% for res in episode.div %}
-                                                <span class="text-[0.6rem] font-semibold uppercase tracking-wider text-surface-50 md:rounded md:bg-surface-400/25 md:text-[0.8vw]">
-                                                    {{ res }}
-                                                </span>
-                                            {% endfor %} -->
+                                        {#each episode.resolutions as res}
+                                            <span class="text-surface-50 md:bg-surface-400/25 text-[0.6rem] font-semibold uppercase tracking-wider md:rounded md:text-[0.8vw]">
+                                                {res}
+                                            </span>
+                                        {/each}
                                     </div>
                                 </div>
                             </div>
@@ -543,7 +556,6 @@
                         <div class="mt-[1vw] flex flex-col">
                             <div class="btn-group">
                                 <button class="btn btn-secondary min-h-full p-0 md:h-[2vw] md:w-[2vw]">
-                                    \
                                     <Chevron class="w-[1vw] rotate-180"></Chevron>
                                 </button>
                                 <button class="btn btn-secondary min-h-full p-0 md:h-[2vw] md:w-[2vw]">01</button>
