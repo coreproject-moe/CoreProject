@@ -36,7 +36,7 @@ export default defineConfig({
         transformer: "postcss"
     },
     esbuild: {
-        legalComments: "external"
+        // legalComments: "external"
     },
     build: {
         outDir: join(process.cwd(), "django_core", "static"),
