@@ -348,7 +348,7 @@
                                         <img
                                             src={anime.cover}
                                             alt={anime.name}
-                                            class="h-56 w-full rounded-t-lg object-cover object-center md:h-[20vw] md:rounded-l-[0.35vw] md:rounded-r-none"
+                                            class="h-44 w-full rounded-t-lg object-cover object-center md:h-[20vw] md:rounded-l-[0.35vw] md:rounded-r-none"
                                         />
                                         <div class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-l-[0.35vw]">
                                             <div class="flex w-full flex-col bg-secondary/95 p-3 md:gap-[0.35vw] md:p-[1vw]">
@@ -385,7 +385,7 @@
                                             </ScrollArea>
                                         </div>
 
-                                        <div class="flex items-center gap-2 overflow-x-scroll p-3 scrollbar-none md:gap-[0.5vw] md:p-[1vw]">
+                                        <div class="flex items-center gap-2 overflow-x-scroll p-3 pt-0 scrollbar-none md:gap-[0.5vw] md:p-[1vw]">
                                             {#each anime?.genres ?? [] as genre}
                                                 <span
                                                     class="whitespace-nowrap rounded-sm bg-warning p-1 text-xs font-semibold capitalize leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]"
