@@ -15,6 +15,11 @@ const mapping = [
     /* Trigger */ {
         tagname: "search-modal-trigger",
         component: await import("./SearchModal/Trigger.svelte")
+    },
+    // Sideimage
+    {
+        tagname: "side-image",
+        component: await import("./SideImage/Index.svelte")
     }
 ];
 
@@ -22,8 +27,7 @@ mapping.forEach((item) => {
     svelteRetag({
         component: item.component.default,
         tagname: `coreproject-specific-${item.tagname}`,
-
         shadow: false,
-        hydratable: true
+        hydratable: false
     });
 });

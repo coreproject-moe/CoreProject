@@ -1,16 +1,35 @@
-{% extends 'tailwind_base.html' %}
-{% block title %}
-    Register | CoreProject
-{% endblock %}
+<script>
+</script>
 
-{% block head %}
+<!--
 
-{% endblock %}
+    _="
+           on hyperscript:change_background
+           add .backdrop-blur to <backdrop/> in me
+           then wait 300ms
+           js(previous_item)
+            
+           const random_anime = (arr => {
+           const len = arr == null ? 0 : arr.length
+           return len ? arr[Math.floor(Math.random() * len)] : undefined
+           })(Array.from([{'name': 'Demon Slayer', 'cover': '/static/public/images/mock/DemonSlayer-cover.avif'}, {'name': 'Hyouka', 'cover': '/static/public/images/mock/Hyouka-bg.avif'}, {'name': 'You Lie in April', 'cover': '/static/public/images/mock/YourLieInApril-bg.avif'}, {'name': 'Attack on Titan', 'cover': '/static/public/images/mock/AttackOnTitan-bg.avif'}, {'name': 'Jujutsu Kaisen', 'cover': '/static/public/images/mock/JujutsuKaisen.avif'}, {'name': 'Death Note', 'cover': '/static/public/images/mock/DeathNote-bg.avif'}]).filter(item => item !== previous_item))
+           return random_anime
+           end
+           set local previous_item to it
+           send change(image:previous_item.cover) to <img/> in me
+           send change(anime_name:previous_item.name) to <anime-name/> in me
+           then remove .backdrop-blur from <backdrop/> in me
 
+           init
+           repeat forever
+           trigger hyperscript:change_background
+           then wait 10s
+           end
+          "
+-->
 
-{% block body %}
-    <div class="relative grid h-screen w-screen bg-secondary md:grid-cols-2">
-    <coreproject-specific-side-image class='relative h-dvh' animes="{{animes|safe}}"></coreproject-specific-side-image>
+<div class="relative grid h-screen w-screen bg-secondary md:grid-cols-2">
+    <SideImage />
     <div class="absolute inset-x-0 self-end rounded-t-3xl bg-secondary p-7 md:static md:self-auto md:rounded-t-none md:p-0 md:px-[8vw] md:py-[2.2vw]">
         <form
             class="flex h-max w-full flex-col gap-10 md:h-full md:justify-between md:rounded-none md:p-0"
@@ -363,5 +382,4 @@
             </content>
         </form>
     </div>
-    </div>
-{% endblock %}
+</div>
