@@ -8,7 +8,7 @@
            add .backdrop-blur to <backdrop/> in me
            then wait 300ms
            js(previous_item)
-            
+
            const random_anime = (arr => {
            const len = arr == null ? 0 : arr.length
            return len ? arr[Math.floor(Math.random() * len)] : undefined
@@ -107,7 +107,7 @@
                         }
                     end
                     send hyperscript:password_strength(strength:it) to <password-strength/>
-            " 
+            "
     -->
                         <input
                             type="password"
