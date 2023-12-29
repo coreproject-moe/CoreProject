@@ -303,14 +303,14 @@
         <div class="flex items-center justify-between">
             <div class="flex flex-col gap-2 md:gap-[0.35vw]">
                 <span class="text-xl font-semibold leading-none text-accent md:text-[1.35vw]">Trending Now</span>
-                <span class="text-base leading-none md:text-[1vw]">Crowd Favorites: Anime Hits and Hype</span>
+                <span class="text-sm leading-none md:text-[1vw]">Crowd Favorites: Anime Hits and Hype</span>
             </div>
             <div class="flex gap-3 md:gap-[1vw]">
                 <button class="btn h-max min-h-max border-none !bg-transparent p-0">
                     <Expand class="w-5 md:w-[1.25vw]" />
                     <span class="font-semibold md:text-[1vw]">Trending</span>
                 </button>
-                <div class="divider divider-horizontal"></div>
+                <div class="divider divider-horizontal m-0"></div>
                 <button
                     class="btn h-max min-h-max border-none !bg-transparent p-0"
                     on:click={() => change_thumbnail_mode("card_with_dropdown")}
