@@ -39,7 +39,7 @@
 </script>
 
 <div class="flex flex-col gap-3 md:gap-[0.75vw]">
-    <div class="ring-surface-300/25 relative flex flex-col rounded-lg ring-2 transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw]">
+    <div class="ring-surface-300/25 relative flex flex-col rounded-lg ring-[0.15rem] transition duration-300 focus-within:ring-primary md:rounded-[0.75vw] md:ring-[0.15vw]">
         <TextArea bind:textarea_value />
     </div>
     <div class="flex justify-between gap-5 md:gap-[1vw]">
