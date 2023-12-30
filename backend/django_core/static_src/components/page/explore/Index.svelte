@@ -33,7 +33,6 @@
         search_promise = get_anime_with_serach_parameters();
     });
 
-
     // Mapping
     let filter_options_mapping: {
         [key: string]: {
@@ -96,19 +95,18 @@
     const handle_input = async () => {
             search_promise = get_anime_with_serach_parameters();
         },
-        update_selected_items = (key: string, selected_item: Record<string, string>) => {
-            const selected_item_key = Object.values(selected_item)[0];
+        update_selected_items = (key: string, selected_item: string) => {
             let filter_option = filter_options_mapping[key];
-            let is_selected = filter_option.selected_items!.some((item) => item === selected_item_key);
+            let is_selected = filter_option.selected_items!.some((item) => item === selected_item);
 
             if (is_selected) {
-                filter_option.selected_items = filter_option.selected_items!.filter((item) => item !== selected_item_key);
+                filter_option.selected_items = filter_option.selected_items!.filter((item) => item !== selected_item);
                 // remove from active filters
-                active_filters = active_filters.filter((filter) => filter !== selected_item_key);
+                active_filters = active_filters.filter((filter) => filter !== selected_item);
             } else {
-                filter_option.selected_items = [...filter_option.selected_items!, selected_item_key];
+                filter_option.selected_items = [...filter_option.selected_items!, selected_item];
                 // add to active filters
-                active_filters = [...active_filters, selected_item_key];
+                active_filters = [...active_filters, selected_item];
             }
 
             // update filer_options_mapping
@@ -136,7 +134,12 @@
                 "?" +
                 new URLSearchParams({
                     name: search_query,
-                    genre: filter_options_mapping["genres"].selected_items?.join() ?? ""
+                    genre:
+                        filter_options_mapping["genres"].selected_items
+                            ?.map((item) => {
+                                return item.toLowerCase();
+                            })
+                            .join() ?? ""
                 }),
             {
                 method: "GET",
@@ -247,7 +250,7 @@
                     </div>
 
                     {#if filter_items}
-                        <div class="dropdown-content z-10 w-full mt-2 overflow-x-hidden rounded-lg md:mt-[1vw] md:rounded-[0.5vw]">
+                        <div class="dropdown-content z-10 mt-2 w-full overflow-x-hidden rounded-lg md:mt-[1vw] md:rounded-[0.5vw]">
                             <ScrollArea
                                 gradient_mask={false}
                                 class="flex w-full flex-col md:p-[0.35vw]"
@@ -259,16 +262,14 @@
                                     <button
                                         on:click|preventDefault={() => {
                                             const val = String(value);
-                                            update_selected_items(option[0], { key, val });
+                                            update_selected_items(option[0], val);
                                         }}
-
-                                        class="btn btn-neutral relative flex h-max min-h-max items-center justify-start p-3 text-sm leading-none md:rounded-[0.35vw] rounded-none py-3 md:px-[1vw] md:py-[0.75vw] md:text-[0.9vw]"
-
+                                        class="btn btn-neutral relative flex h-max min-h-max items-center justify-start rounded-none p-3 py-3 text-sm leading-none md:rounded-[0.35vw] md:px-[1vw] md:py-[0.75vw] md:text-[0.9vw]"
                                     >
                                         <span>{value}</span>
 
                                         {#if is_selected}
-                                            <div class="absolute right-3 md:right-[0.75vw] rounded-full bg-primary p-1 text-white md:p-[0.25vw]">
+                                            <div class="absolute right-3 rounded-full bg-primary p-1 text-white md:right-[0.75vw] md:p-[0.25vw]">
                                                 <Tick class="w-2 text-white md:w-[0.75vw]" />
                                             </div>
                                         {/if}
@@ -352,7 +353,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="flex flex-col justify-between rounded-rt-none bg-neutral/25 md:rounded-r-[0.35vw] md:rounded-l-none rounded-b-lg">
+                                    <div class="rounded-rt-none flex flex-col justify-between rounded-b-lg bg-neutral/25 md:rounded-l-none md:rounded-r-[0.35vw]">
                                         <div class="flex flex-col gap-1 p-3 leading-none md:gap-[0.5vw] md:p-[1vw]">
                                             <span class="text-xs font-semibold capitalize md:text-[1vw]">
                                                 {new FormatDate(anime.aired_from ?? "").format_to_season}
