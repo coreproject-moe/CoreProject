@@ -39,7 +39,7 @@
             title: string;
             class: string;
             value: string;
-            items?: Array<string | number>;
+            items: Array<string | number>;
             selected_items: string[] | null;
         };
     } = {
@@ -47,13 +47,14 @@
             title: "Time Range",
             class: "hidden flex-col md:gap-[0.35vw]",
             value: "",
+            items: [],
             selected_items: []
         },
         genres: {
             title: "Genres",
             class: "md:flex flex-col md:gap-[0.35vw]",
             value: "",
-            items: ["Action", "Adventure", "Hentai", "Romance"],
+            items: ["action", "adventure", "hentai", "romance"],
             selected_items: []
         },
         year: {
@@ -67,26 +68,28 @@
             title: "Season",
             class: "md:flex flex-col md:gap-[0.35vw]",
             value: "",
-            items: ["winter", "spring", "summer", "winter"],
+            items: ["winter", "spring", "summer", "fall"],
             selected_items: []
         },
         format: {
             title: "Format",
             class: "hidden md:flex flex-col md:gap-[0.35vw]",
             value: "",
-            items: ["TV Show", "Movie"],
+            items: ["tv show", "movie"],
             selected_items: []
         },
         airing_status: {
             title: "Airing Status",
             class: "hidden flex-col md:gap-[0.35vw]",
             value: "",
+            items: [],
             selected_items: []
         },
         sort_by: {
             title: "Sort by",
             class: "hidden flex-col md:gap-[0.35vw]",
             value: "",
+            items: [],
             selected_items: []
         }
     };
@@ -100,10 +103,12 @@
             let is_selected = filter_option.selected_items!.some((item) => item === selected_item);
 
             if (is_selected) {
+                // if selected: remove from seleted list
                 filter_option.selected_items = filter_option.selected_items!.filter((item) => item !== selected_item);
                 // remove from active filters
                 active_filters = active_filters.filter((filter) => filter !== selected_item);
             } else {
+                // else: add to selected list
                 filter_option.selected_items = [...filter_option.selected_items!, selected_item];
                 // add to active filters
                 active_filters = [...active_filters, selected_item];
@@ -255,7 +260,7 @@
                                 parent_class="md:max-h-[30vw] bg-neutral w-full"
                             >
                                 {#each Object.entries(filter_items) as [key, value]}
-                                    {@const is_selected = selected_items?.some((item) => item === key)}
+                                    {@const is_selected = selected_items?.some((item) => item === value)}
 
                                     <button
                                         on:click|preventDefault={() => {
@@ -264,7 +269,7 @@
                                         }}
                                         class="btn btn-neutral relative flex h-max min-h-max items-center justify-start rounded-none p-3 py-3 text-sm leading-none md:rounded-[0.35vw] md:px-[1vw] md:py-[0.75vw] md:text-[0.9vw]"
                                     >
-                                        <span>{value}</span>
+                                        <span class="capitalize">{value}</span>
 
                                         {#if is_selected}
                                             <div class="absolute right-3 rounded-full bg-primary p-1 text-white md:right-[0.75vw] md:p-[0.25vw]">
