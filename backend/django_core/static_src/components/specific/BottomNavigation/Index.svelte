@@ -41,7 +41,7 @@
             class="flex flex-col items-center gap-[0.5vh] leading-none"
         >
             <div
-                class="btn h-[3.25rem] h-max min-h-max w-20 rounded-xl text-accent"
+                class="btn h-12 w-20 rounded-xl text-accent"
                 class:btn-primary={is_active}
                 class:btn-secondary={!is_active}
             >
