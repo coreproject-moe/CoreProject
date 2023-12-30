@@ -348,22 +348,22 @@
                 </div>
                 <div class="mt-10 flex grid-cols-5 flex-col gap-10 md:mt-[3vw] md:grid md:gap-[4.375vw]">
                     <div class="md:col-span-3">
-                        <div class="border-surface-50/10 flex gap-2 border-b-2 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
+                        <div class="border-neutral flex gap-2 border-b-2 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
                             <div class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Comments</div>
                             <button class="bg-surface-400 btn btn-secondary hidden min-h-full rounded p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
                                 <Settings class="w-[0.9vw] opacity-75"></Settings>
                             </button>
                         </div>
-                        <div class="mt-2 flex items-center justify-between md:hidden">
+                        <div class="flex items-center justify-between md:hidden">
                             <p class="flex items-center gap-1 md:hidden">
                                 <span class="text-base font-bold leading-none">69</span>
-                                <span class="text-surface-50 text-sm font-semibold">div</span>
+                                <span class="text-surface-50 text-sm font-semibold">comments</span>
                             </p>
                             <button
                                 class="btn-icon bg-surface-400 btn h-7 w-auto rounded p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]"
                                 aria-label="Filter"
                             >
-                                <Filter class="w-3 md:w-[1vw]"></Filter>
+                                <Filter class="w-4 md:w-[1vw]"></Filter>
                             </button>
                         </div>
                         <div class="md:mt-[1vw]">
@@ -374,7 +374,7 @@
                         </div>
                     </div>
                     <div class="md:col-span-2">
-                        <div class="border-surface-50/10 flex gap-2 border-b-2 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
+                        <div class="border-neutral flex gap-2 border-b-2 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
                             <div class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Forum div</div>
                             <button class="bg-surface-400 btn btn-secondary hidden min-h-full rounded p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
                                 <Settings class="w-[0.9vw] opacity-75"></Settings>
@@ -383,7 +383,7 @@
                         <div class="mt-2 flex items-center justify-between md:mt-[0.75vw]">
                             <p class="flex items-center gap-1 md:hidden">
                                 <span class="text-base font-bold leading-none">106</span>
-                                <span class="text-surface-50 text-sm font-semibold">div</span>
+                                <span class="text-surface-50 text-sm font-semibold">posts</span>
                             </p>
                             <div class="flex items-center gap-2 md:w-full md:justify-between">
                                 <button
@@ -396,7 +396,7 @@
                                     class="bg-surface-400 btn btn-secondary h-7 min-h-full w-auto rounded p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]"
                                     aria-label="Filter"
                                 >
-                                    <Filter class="w-3 md:w-[1vw]"></Filter>
+                                    <Filter class="w-4 md:w-[1vw]"></Filter>
                                 </button>
                             </div>
                         </div>
