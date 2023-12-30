@@ -109,7 +109,7 @@
     {/if}
 {:else if loading_state === "loaded"}
     {#if !_.isEmpty(tree_branch)}
-        <div class="flex flex-col md:gap-[1.5vw]">
+        <div class="flex flex-col gap-5 md:gap-[1.5vw]">
             {#each tree_branch as branch}
                 <CommetBlock item={branch} />
             {/each}

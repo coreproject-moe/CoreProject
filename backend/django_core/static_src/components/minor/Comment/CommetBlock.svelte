@@ -93,8 +93,8 @@
     };
 </script>
 
-<div class="flex gap-3 md:gap-[0.75vw]">
-    <div class="flex flex-col items-center md:gap-[1vw]">
+<div class="flex gap-2 md:gap-[0.75vw]">
+    <div class="flex flex-col items-center gap-4 md:gap-[1vw]">
         <a
             href="/user/"
             class="h-7 w-7 flex-shrink-0 md:h-[2vw] md:w-[2vw]"
@@ -106,13 +106,13 @@
             />
         </a>
         <button class="group flex h-full cursor-pointer justify-center transition-transform active:scale-95 md:w-full">
-            <div class="h-full rounded-full bg-neutral transition-colors group-hover:bg-warning md:w-[0.15vw] group-hover:md:w-[0.2vw]" />
+            <div class="h-full rounded-full bg-neutral transition-colors group-hover:bg-warning w-[0.15rem] md:w-[0.15vw] group-hover:md:w-[0.2vw]" />
         </button>
     </div>
     <div class="flex flex-col items-start gap-1 md:gap-[0.25vw]">
         <div
             id={`comment-${item.pk}`}
-            class="relative flex flex-col items-start gap-1 md:gap-[0.25vw]"
+            class="relative flex flex-col items-start gap-3 md:gap-[0.25vw]"
         >
             {#if show_comment_highlighted}
                 <div
@@ -122,9 +122,9 @@
             {/if}
             <a
                 href="/user/"
-                class="flex flex-col text-xs leading-none md:text-[1vw]"
+                class="flex flex-col gap-1 md:gap-0 text-xs leading-none md:text-[1vw]"
             >
-                <div class="flex items-center md:gap-[0.5vw]">
+                <div class="flex items-center gap-2 md:gap-[0.5vw]">
                     <div class="text-white">
                         {`${item?.user?.first_name ?? ""} ${item?.user?.last_name ?? ""}`}
                     </div>
@@ -138,32 +138,32 @@
                 <Markdown markdown={item.text} />
             </div>
             <div class="flex items-center gap-3 md:gap-[0.75vw]">
-                <div class="flex items-center md:gap-[0.35vw]">
+                <div class="flex items-center gap-1 md:gap-[0.35vw]">
                     {#each icon_mapping as item, index}
                         {@const is_first = index === 0}
                         {@const is_last = index === icon_mapping.length - 1}
                         <button
                             on:click|preventDefault={() => handle_reaction_button_click(item)}
-                            class={cn("btn btn-secondary min-h-full p-0 md:h-max", is_first && "order-1", is_last && "order-3", string_to_boolean(window.user_authenticated) || "btn-disabled")}
+                            class={cn("btn btn-secondary min-h-full p-0 h-max", is_first && "order-1", is_last && "order-3", string_to_boolean(window.user_authenticated) || "btn-disabled")}
                         >
                             {#if user_reaction === `${item}d`}
                                 <Arrow
                                     variant="fill"
-                                    class="text-warning md:w-[1.25vw]"
+                                    class="text-warning w-4 md:w-[1.25vw]"
                                 />
                             {:else}
                                 <Arrow
-                                    class="md:w-[1.25vw]"
+                                    class="w-4 md:w-[1.25vw]"
                                     variant="outline"
                                 />
                             {/if}
                         </button>
                     {/each}
-                    <span class="order-2 font-semibold text-accent md:text-[0.9vw]">{ratio}</span>
+                    <span class="order-2 text-sm font-semibold text-accent md:text-[0.9vw]">{ratio}</span>
                 </div>
                 <button
                     class={cn(
-                        `btn min-h-full !bg-transparent p-0 text-xs md:h-max md:gap-[0.35vw] md:text-[0.9vw]`,
+                        `btn min-h-full !bg-transparent p-0 text-xs h-max md:gap-[0.35vw] md:text-[0.9vw]`,
                         // Allow only 5 level nesting ( for now )
                         depth && depth > 5 && "btn-disabled"
                     )}
@@ -171,11 +171,11 @@
                         reply_shown = !reply_shown;
                     }}
                 >
-                    <Chat class="md:w-[1vw]" />
+                    <Chat class="w-4 md:w-[1vw]" />
                     <span>Replay</span>
                 </button>
-                <button class="btn min-h-full !bg-transparent p-0 text-xs md:h-max md:gap-[0.35vw] md:text-[0.9vw]">
-                    <Share class="md:w-[1vw]" />
+                <button class="btn min-h-full !bg-transparent p-0 text-xs h-max md:gap-[0.35vw] md:text-[0.9vw]">
+                    <Share class="w-4 md:w-[1vw]" />
                     <span>Share</span>
                 </button>
 
@@ -205,7 +205,7 @@
 
         <!-- Render replies here -->
         {#if item.childrens !== 0}
-            <div class="flex flex-col md:mt-[1.5vw] md:gap-[1.5vw]">
+            <div class="flex flex-col mt-5 md:mt-[1.5vw] gap-5 md:gap-[1.5vw]">
                 {#each item.child as comment, index}
                     {#if index === 0}
                         <svelte:self item={comment} />
