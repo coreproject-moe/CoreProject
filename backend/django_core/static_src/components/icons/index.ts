@@ -1,5 +1,5 @@
 // @ts-ignore
-import svelteRetag from "svelte-retag";
+import { register } from "$functions/resgister";
 
 const mapping = [
     { tagname: `arrow`, component: await import("./Arrow/Index.svelte") },
@@ -55,11 +55,8 @@ const mapping = [
 
 // Register Icons
 mapping.forEach((item) => {
-    svelteRetag({
+    register({
         component: item.component.default,
-        tagname: `coreproject-icon-${item.tagname}`.toLowerCase(),
-
-        shadow: false,
-        hydratable: false
+        tagname: `coreproject-icon-${item.tagname}`.toLowerCase()
     });
 });
