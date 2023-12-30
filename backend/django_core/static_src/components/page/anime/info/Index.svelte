@@ -5,7 +5,8 @@
         anime_genres: string | null = null,
         anime_episodes_count: string | null = null, // Is number
         anime_synopsis: string | null = null,
-        anime_episodes: string | null = null;
+        anime_episodes: string | null = null,
+        dominant_color: string | null = null;
 
     import JSON5 from "json5";
     import * as _ from "lodash-es";
@@ -35,7 +36,6 @@
     import Chat from "$icons/Chat/Index.svelte";
     import TrendingArrow from "$icons/TrendingArrow/Index.svelte";
     import { onMount } from "svelte";
-    import { get_dominant_color } from "$functions/get_image";
 
     // Internal logics
     const second_mapping = [
@@ -100,7 +100,7 @@
                     <div class="relative col-span-12 h-96 md:h-[18.25vw] md:w-[13vw] md:flex-shrink-0">
                         <div
                             class="pointer-events-none absolute inset-0 z-10 h-[150%] w-[125%] -translate-x-8 -translate-y-28 [background-image:radial-gradient(circle_at_center,var(--color)0%,transparent_100%)] [mask-image:linear-gradient(to_bottom,rgba(7,5,25,0.95)80%,rgba(0,0,0,0)100%)] md:hidden"
-                            style="--color:rgba(255,255,255,0.1)"
+                            style:--color={dominant_color}
                         />
                         <img
                             alt=""
