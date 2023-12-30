@@ -1,3 +1,4 @@
+import { register } from "$functions/resgister";
 import svelteRetag from "svelte-retag";
 
 const mappings = [
@@ -9,11 +10,8 @@ const mappings = [
 ];
 
 mappings.forEach((item) => {
-    svelteRetag({
+    register({
         component: item.component.default,
-        tagname: `coreproject-${item.tagname}`,
-
-        shadow: false, // Use the light DOM
-        hydratable: false
+        tagname: `coreproject-${item.tagname}`
     });
 });
