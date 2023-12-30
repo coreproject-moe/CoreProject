@@ -135,7 +135,7 @@
                 .join()
         };
         for (const [key, val] of Object.entries(search_map)) {
-            if (!_.isNull(val) && !_.isUndefined(val) && !_.isString(val)) {
+            if (!_.isNull(val) && !_.isUndefined(val) && _.isString(val)) {
                 url.searchParams.set(key, val);
             }
         }
