@@ -1,6 +1,5 @@
 // @ts-ignore
 import { register } from "$functions/resgister";
-import svelteRetag from "svelte-retag";
 
 // Pages
 const mapping = [

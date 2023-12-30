@@ -1,5 +1,4 @@
 import { register } from "$functions/resgister";
-import svelteRetag from "svelte-retag";
 
 const mappings = [
     { tagname: "markdown", component: await import("./Markdown/Index.svelte") },
