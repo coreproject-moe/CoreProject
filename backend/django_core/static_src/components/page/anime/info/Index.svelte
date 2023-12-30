@@ -34,6 +34,8 @@
     import Cross from "$icons/Cross/Index.svelte";
     import Chat from "$icons/Chat/Index.svelte";
     import TrendingArrow from "$icons/TrendingArrow/Index.svelte";
+    import { onMount } from "svelte";
+    import { get_dominant_color } from "$functions/get_image";
 
     // Internal logics
     const second_mapping = [
@@ -71,6 +73,16 @@
         { icon: Download, label: "download" },
         { icon: Share, label: "share" }
     ];
+    import { average } from "color.js";
+
+    let image_element: HTMLImageElement | null = null;
+    $: {
+        if (image_element) {
+            average(image_element).then((res) => {
+                console.log(res);
+            });
+        }
+    }
 </script>
 
 <div class="relative mt-16 block h-screen bg-cover md:mt-0">
@@ -78,16 +90,18 @@
         src="https://files.otakustudy.com/wp-content/uploads/2020/10/10153058/your-lie-in-april-cover.jpg"
         class="absolute hidden h-full w-full select-none rounded-tl-[1.5vw] object-cover object-center md:flex"
         alt={anime_name}
+        bind:this={image_element}
     />
-    <div class="gradient absolute inset-0 bg-gradient-to-t from-secondary to-secondary/80"></div>
+    <div class="gradient absolute inset-0 bg-gradient-to-t from-secondary to-secondary/80" />
     <div class="absolute inset-0 grid grid-cols-12 items-start p-5 pt-10 md:p-[5vw]">
         <div class="col-span-12 md:col-span-10 md:pr-[4vw]">
             <div class="grid grid-cols-12 items-end justify-between">
                 <div class="relative col-span-12 grid grid-cols-12 gap-5 md:col-span-7 md:flex md:w-full md:items-end md:gap-[2vw] md:pr-[2vw]">
                     <div class="relative col-span-12 h-96 md:h-[18.25vw] md:w-[13vw] md:flex-shrink-0">
                         <div
-                            class="pointer-events-none absolute inset-0 z-10 h-[150%] w-[125%] -translate-x-8 -translate-y-28 [background-image:radial-gradient(circle_at_center,rgba(255,255,255,0.1)0%,transparent_100%)] [mask-image:linear-gradient(to_bottom,rgba(7,5,25,0.95)80%,rgba(0,0,0,0)100%)] md:hidden"
-                        ></div>
+                            class="pointer-events-none absolute inset-0 z-10 h-[150%] w-[125%] -translate-x-8 -translate-y-28 [background-image:radial-gradient(circle_at_center,var(--color)0%,transparent_100%)] [mask-image:linear-gradient(to_bottom,rgba(7,5,25,0.95)80%,rgba(0,0,0,0)100%)] md:hidden"
+                            style="--color:rgba(255,255,255,0.1)"
+                        />
                         <img
                             alt=""
                             src="https://files.otakustudy.com/wp-content/uploads/2020/10/10153058/your-lie-in-april-cover.jpg"

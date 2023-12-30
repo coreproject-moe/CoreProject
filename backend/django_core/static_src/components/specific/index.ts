@@ -1,6 +1,4 @@
-// @ts-ignore
-
-import { register } from "$functions/resgister";
+import { register } from "$functions/register";
 
 // Specific Components
 const mapping = [
