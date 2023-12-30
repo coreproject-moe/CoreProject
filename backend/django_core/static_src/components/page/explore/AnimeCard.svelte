@@ -43,21 +43,21 @@
         aria-expanded={false}
     >
         <img
-            class="h-44 w-full md:h-[20vw] rounded-lg object-cover object-center md:rounded-[0.5vw]"
+            class="h-44 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]"
             src={anime_image}
             alt={anime_name}
             style=""
             loading="lazy"
         />
         <div class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
-            <div class="flex items-start w-full flex-col gap-1 bg-secondary/95 p-3 md:gap-[0.35vw] md:p-[1vw]">
+            <div class="flex w-full flex-col items-start gap-1 bg-secondary/95 p-3 md:gap-[0.35vw] md:p-[1vw]">
                 <HoverExpand
                     class="line-clamp-1 w-full text-start text-sm font-semibold text-accent md:line-clamp-none md:text-[1vw] md:leading-[1.35vw]"
                     height="md:max-h-[1.35vw] hover:max-h-[10vw]"
                 >
                     {anime_name}
                 </HoverExpand>
-                <div class="hidden md:flex items-center gap-2 text-xs leading-none md:gap-[0.35vw] md:text-[0.8vw]">
+                <div class="hidden items-center gap-2 text-xs leading-none md:flex md:gap-[0.35vw] md:text-[0.8vw]">
                     {#each anime_studios as studio, index}
                         {@const show_dot = index !== anime_studios.length - 1}
 
@@ -67,7 +67,7 @@
                         {/if}
                     {/each}
                 </div>
-                <span class="md:hidden text-xs">{anime_studios[0].name}</span>
+                <span class="text-xs md:hidden">{anime_studios[0]?.name}</span>
             </div>
         </div>
     </button>

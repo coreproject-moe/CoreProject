@@ -48,7 +48,7 @@
     "devDependencies": {
         "@sveltejs/vite-plugin-svelte": "^3.0.1",
         "@types/lodash-es": "^4.17.12",
-        "@types/node": "^20.10.5",
+        "@types/node": "^20.10.6",
         "autoprefixer": "^10.4.16",
         "date-fns": "^3.0.6",
         "highlight.js": "^11.9.0",
