@@ -59,7 +59,7 @@
         },
         year: {
             title: "Year",
-            class: "md:flex flex-col md:gap-[0.35vw]",
+            class: "hidden md:flex flex-col md:gap-[0.35vw]",
             value: "",
             items: [2020, 2021, 2022, 2023],
             selected_items: []
@@ -247,7 +247,7 @@
                     </div>
 
                     {#if filter_items}
-                        <div class="dropdown-content z-10 w-[7.25rem] mt-2 overflow-x-hidden rounded-lg md:mt-[1vw] md:w-[11vw] md:rounded-[0.5vw]">
+                        <div class="dropdown-content z-10 w-full mt-2 overflow-x-hidden rounded-lg md:mt-[1vw] md:rounded-[0.5vw]">
                             <ScrollArea
                                 gradient_mask={false}
                                 class="flex w-full flex-col md:p-[0.35vw]"
@@ -261,12 +261,14 @@
                                             const val = String(value);
                                             update_selected_items(option[0], { key, val });
                                         }}
-                                        class="btn btn-neutral relative flex h-max min-h-max items-center justify-start p-3 text-sm leading-none md:rounded-[0.35vw] md:px-[1vw] md:py-[0.75vw] md:text-[0.9vw]"
+
+                                        class="btn btn-neutral relative flex h-max min-h-max items-center justify-start p-3 text-sm leading-none md:rounded-[0.35vw] rounded-none py-3 md:px-[1vw] md:py-[0.75vw] md:text-[0.9vw]"
+
                                     >
                                         <span>{value}</span>
 
                                         {#if is_selected}
-                                            <div class="absolute right-[0.75vw] rounded-full bg-primary p-1 text-white md:p-[0.25vw]">
+                                            <div class="absolute right-3 md:right-[0.75vw] rounded-full bg-primary p-1 text-white md:p-[0.25vw]">
                                                 <Tick class="w-2 text-white md:w-[0.75vw]" />
                                             </div>
                                         {/if}
@@ -333,7 +335,7 @@
                                         <img
                                             src={anime.cover}
                                             alt={anime.name}
-                                            class="h-56 w-full rounded-t-lg object-cover object-center md:h-[20vw] md:rounded-l-[0.35vw] md:rounded-r-none"
+                                            class="h-44 w-full rounded-t-lg object-cover object-center md:h-[20vw] md:rounded-l-[0.35vw] md:rounded-r-none"
                                         />
                                         <div class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-l-[0.35vw]">
                                             <div class="flex w-full flex-col bg-secondary/95 p-3 md:gap-[0.35vw] md:p-[1vw]">
@@ -370,7 +372,7 @@
                                             </ScrollArea>
                                         </div>
 
-                                        <div class="flex items-center gap-2 overflow-x-scroll p-3 scrollbar-none md:gap-[0.5vw] md:p-[1vw]">
+                                        <div class="flex items-center gap-2 overflow-x-scroll p-3 pt-0 scrollbar-none md:gap-[0.5vw] md:p-[1vw]">
                                             {#each anime?.genres ?? [] as genre}
                                                 <span
                                                     class="whitespace-nowrap rounded-sm bg-warning p-1 text-xs font-semibold capitalize leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]"
