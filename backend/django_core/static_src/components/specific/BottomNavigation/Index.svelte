@@ -24,12 +24,12 @@
             icon: Chat,
             name: "forum",
             href: "/forum",
-            url: reverse("anime_home_view"),
+            url: reverse("anime_home_view")
         }
     ];
 </script>
 
-<footer class="flex gap-3 h-24 items-center justify-center md:hidden">
+<footer class="flex h-24 items-center justify-center gap-3 md:hidden">
     {#each mapping as item}
         {@const is_active = item.href === $url}
 
@@ -41,11 +41,14 @@
             class="flex flex-col items-center gap-[0.5vh] leading-none"
         >
             <div
-                class="btn text-accent h-max min-h-max rounded-xl w-20 h-[3.25rem]"
+                class="btn h-[3.25rem] h-max min-h-max w-20 rounded-xl text-accent"
                 class:btn-primary={is_active}
                 class:btn-secondary={!is_active}
             >
-                <svelte:component class="w-5" this={item.icon} />
+                <svelte:component
+                    this={item.icon}
+                    class="w-5"
+                />
             </div>
             <span class="text-sm font-bold capitalize">{item.name}</span>
         </button>
