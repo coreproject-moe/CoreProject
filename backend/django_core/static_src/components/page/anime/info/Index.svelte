@@ -35,7 +35,6 @@
     import Cross from "$icons/Cross/Index.svelte";
     import Chat from "$icons/Chat/Index.svelte";
     import TrendingArrow from "$icons/TrendingArrow/Index.svelte";
-    import { onMount } from "svelte";
 
     // Internal logics
     const second_mapping = [
@@ -73,16 +72,6 @@
         { icon: Download, label: "download" },
         { icon: Share, label: "share" }
     ];
-    import { average } from "color.js";
-
-    let image_element: HTMLImageElement | null = null;
-    $: {
-        if (image_element) {
-            average(image_element).then((res) => {
-                console.log(res);
-            });
-        }
-    }
 </script>
 
 <div class="relative mt-16 block h-screen bg-cover md:mt-0">
@@ -90,7 +79,6 @@
         src="https://files.otakustudy.com/wp-content/uploads/2020/10/10153058/your-lie-in-april-cover.jpg"
         class="absolute hidden h-full w-full select-none rounded-tl-[1.5vw] object-cover object-center md:flex"
         alt={anime_name}
-        bind:this={image_element}
     />
     <div class="gradient absolute inset-0 bg-gradient-to-t from-secondary to-secondary/80" />
     <div class="absolute inset-0 grid grid-cols-12 items-start p-5 pt-10 md:p-[5vw]">
