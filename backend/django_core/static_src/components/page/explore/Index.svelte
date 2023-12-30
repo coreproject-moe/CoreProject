@@ -129,28 +129,32 @@
         if (string_to_boolean(window.user_authenticated)) {
             headers["X-CSRFToken"] = get_csrf_token();
         }
-        const res = await fetch(
-            reverse(`anime-list`) +
-                "?" +
-                new URLSearchParams({
-                    name: search_query,
-                    genre:
-                        filter_options_mapping["genres"].selected_items
-                            ?.map((item) => {
-                                return item.toLowerCase();
-                            })
-                            .join() ?? ""
-                }),
-            {
-                method: "GET",
-                headers: {
-                    Accept: "application/json",
-                    "Content-Type": "application/json",
-                    "X-CSRFToken": get_csrf_token()
-                },
-                signal: AbortSignal.timeout(FETCH_TIMEOUT)
+
+        let url = new URL(window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + reverse(`anime-list`));
+
+        const search_map = {
+            name: search_query,
+            genres: filter_options_mapping["genres"].selected_items
+                ?.map((item) => {
+                    return item.toLowerCase();
+                })
+                .join()
+        };
+        for (const [key, val] of Object.entries(search_map)) {
+            if (!_.isNull(val) && !_.isUndefined(val) && !_.isString(val)) {
+                url.searchParams.set(key, val);
             }
-        );
+        }
+
+        const res = await fetch(url, {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                "X-CSRFToken": get_csrf_token()
+            },
+            signal: AbortSignal.timeout(FETCH_TIMEOUT)
+        });
         const json = await res.json();
 
         if (res.ok) {
