@@ -40,7 +40,7 @@
             title: string;
             class: string;
             value: string;
-            items?: Array<string | number>;
+            items: Array<string | number>;
             selected_items: string[] | null;
         };
     } = {
@@ -48,13 +48,14 @@
             title: "Time Range",
             class: "hidden flex-col md:gap-[0.35vw]",
             value: "",
+            items: [],
             selected_items: []
         },
         genres: {
             title: "Genres",
             class: "md:flex flex-col md:gap-[0.35vw]",
             value: "",
-            items: ["Action", "Adventure", "Hentai", "Romance"],
+            items: ["action", "adventure", "hentai", "romance"],
             selected_items: []
         },
         year: {
@@ -68,26 +69,28 @@
             title: "Season",
             class: "md:flex flex-col md:gap-[0.35vw]",
             value: "",
-            items: ["winter", "spring", "summer", "winter"],
+            items: ["winter", "spring", "summer", "fall"],
             selected_items: []
         },
         format: {
             title: "Format",
             class: "hidden md:flex flex-col md:gap-[0.35vw]",
             value: "",
-            items: ["TV Show", "Movie"],
+            items: ["tv show", "movie"],
             selected_items: []
         },
         airing_status: {
             title: "Airing Status",
             class: "hidden flex-col md:gap-[0.35vw]",
             value: "",
+            items: [],
             selected_items: []
         },
         sort_by: {
             title: "Sort by",
             class: "hidden flex-col md:gap-[0.35vw]",
             value: "",
+            items: [],
             selected_items: []
         }
     };
@@ -96,19 +99,20 @@
     const handle_input = async () => {
             search_promise = get_anime_with_serach_parameters();
         },
-        update_selected_items = (key: string, selected_item: Record<string, string>) => {
-            const selected_item_key = Object.values(selected_item)[0];
+        update_selected_items = (key: string, selected_item: string) => {
             let filter_option = filter_options_mapping[key];
-            let is_selected = filter_option.selected_items!.some((item) => item === selected_item_key);
+            let is_selected = filter_option.selected_items!.some((item) => item === selected_item);
 
             if (is_selected) {
-                filter_option.selected_items = filter_option.selected_items!.filter((item) => item !== selected_item_key);
+                // if selected: remove from seleted list
+                filter_option.selected_items = filter_option.selected_items!.filter((item) => item !== selected_item);
                 // remove from active filters
-                active_filters = active_filters.filter((filter) => filter !== selected_item_key);
+                active_filters = active_filters.filter((filter) => filter !== selected_item);
             } else {
-                filter_option.selected_items = [...filter_option.selected_items!, selected_item_key];
+                // else: add to selected list
+                filter_option.selected_items = [...filter_option.selected_items!, selected_item];
                 // add to active filters
-                active_filters = [...active_filters, selected_item_key];
+                active_filters = [...active_filters, selected_item];
             }
 
             // update filer_options_mapping
@@ -254,18 +258,18 @@
                                 parent_class="md:max-h-[30vw] bg-neutral w-full"
                             >
                                 {#each Object.entries(filter_items) as [key, value]}
-                                    {@const is_selected = selected_items?.some((item) => item === key)}
+                                    {@const is_selected = selected_items?.some((item) => item === value)}
 
                                     <button
                                         on:click|preventDefault={() => {
                                             const val = String(value);
-                                            update_selected_items(option[0], { key, val });
+                                            update_selected_items(option[0], val);
                                         }}
 
                                         class="btn btn-neutral relative flex h-max min-h-max items-center justify-start p-3 text-sm leading-none md:rounded-[0.35vw] rounded-none py-3 md:px-[1vw] md:py-[0.75vw] md:text-[0.9vw]"
 
                                     >
-                                        <span>{value}</span>
+                                        <span class="capitalize">{value}</span>
 
                                         {#if is_selected}
                                             <div class="absolute right-3 md:right-[0.75vw] rounded-full bg-primary p-1 text-white md:p-[0.25vw]">
