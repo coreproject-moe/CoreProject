@@ -124,11 +124,6 @@
         };
 
     const get_anime_with_serach_parameters = async (): Promise<Anime[]> => {
-        const headers: { [key: string]: string } = {
-            // We do not care if user is authenticated or not
-            "X-CSRFToken": get_csrf_token()
-        };
-
         let url = new URL(window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + reverse(`anime-list`));
 
         const search_map = {
