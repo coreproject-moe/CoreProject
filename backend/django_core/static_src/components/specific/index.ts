@@ -1,5 +1,6 @@
 // @ts-ignore
-import svelteRetag from "svelte-retag";
+
+import { register } from "$functions/resgister";
 
 // Specific Components
 const mapping = [
@@ -19,11 +20,8 @@ const mapping = [
 ];
 
 mapping.forEach((item) => {
-    svelteRetag({
+    register({
         component: item.component.default,
-        tagname: `coreproject-specific-${item.tagname}`,
-
-        shadow: false,
-        hydratable: true
+        tagname: `coreproject-specific-${item.tagname}`
     });
 });

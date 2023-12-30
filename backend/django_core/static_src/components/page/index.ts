@@ -1,4 +1,5 @@
 // @ts-ignore
+import { register } from "$functions/resgister";
 import svelteRetag from "svelte-retag";
 
 // Pages
@@ -8,10 +9,8 @@ const mapping = [
 ];
 
 mapping.forEach((item) => {
-    svelteRetag({
+    register({
         component: item.component.default,
-        tagname: `coreproject-page-${item.tagname}`,
-        attributes: true,
-        shadow: false
+        tagname: `coreproject-page-${item.tagname}`
     });
 });

@@ -1,4 +1,5 @@
 // @ts-ignore
+import { register } from "$functions/resgister";
 import svelteRetag from "svelte-retag";
 
 const mapping = [
@@ -55,11 +56,8 @@ const mapping = [
 
 // Register Icons
 mapping.forEach((item) => {
-    svelteRetag({
+    register({
         component: item.component.default,
-        tagname: `coreproject-icon-${item.tagname}`.toLowerCase(),
-
-        shadow: false,
-        hydratable: false
+        tagname: `coreproject-icon-${item.tagname}`.toLowerCase()
     });
 });
