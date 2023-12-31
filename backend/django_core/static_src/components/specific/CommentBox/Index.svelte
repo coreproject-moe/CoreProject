@@ -59,7 +59,10 @@
             on:click|preventDefault={async () => {
                 await handle_submit();
             }}
-            class={cn(textarea_value || "btn-disabled", "btn btn-primary h-9 min-h-full w-24 rounded-md text-sm font-semibold text-accent md:h-[2.2vw] md:w-[6vw] md:rounded-[0.375vw] md:text-[0.85vw]")}
+            class={cn(
+                textarea_value || "btn-disabled",
+                "btn btn-primary h-9 min-h-full w-24 rounded-md text-sm font-semibold text-accent md:h-[2.2vw] md:w-[6vw] md:rounded-[0.375vw] md:text-[0.85vw]"
+            )}
         >
             Comment
         </button>

@@ -439,7 +439,7 @@
             {@const active = tab === active_tab}
             <button
                 type="button"
-                class={cn("btn md:rounded-[0.5vw] min-h-full h-9 capitalize md:h-[2.25vw] md:text-[1vw]", active ? "btn-neutral" : "bg-secondary")}
+                class={cn("btn h-9 min-h-full capitalize md:h-[2.25vw] md:rounded-[0.5vw] md:text-[1vw]", active ? "btn-neutral" : "bg-secondary")}
                 on:click={() => handle_tab_click(tab)}
             >
                 {tab}

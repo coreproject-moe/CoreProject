@@ -95,8 +95,8 @@
                             src="https://files.otakustudy.com/wp-content/uploads/2020/10/10153058/your-lie-in-april-cover.jpg"
                             class="h-full w-full rounded-xl object-cover object-center md:rounded-[1vw]"
                         />
-                        <div class="gradient from-secondary/75 to-surface-900/25 absolute inset-0 bg-gradient-to-t md:hidden"></div>
-                        <div class="gradient from-secondary/50 to-transparent absolute inset-0 bg-gradient-to-r md:hidden"></div>
+                        <div class="gradient to-surface-900/25 absolute inset-0 bg-gradient-to-t from-secondary/75 md:hidden"></div>
+                        <div class="gradient absolute inset-0 bg-gradient-to-r from-secondary/50 to-transparent md:hidden"></div>
                     </div>
                     <div class="absolute bottom-0 col-span-12 p-5 md:static md:p-0">
                         <HoverExpand
@@ -216,7 +216,7 @@
                 </div>
             </div>
             <div class="my-7 block md:my-[6vw]">
-                <div class="border-neutral flex border-b-2 pb-1 md:gap-x-[0.75vw] md:border-none md:pb-0">
+                <div class="flex border-b-2 border-neutral pb-1 md:gap-x-[0.75vw] md:border-none md:pb-0">
                     <div class="text-lg font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Episodes</div>
                     <button class="bg-surface-400 btn btn-secondary hidden min-h-full rounded p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
                         <Settings class="w-[0.9vw] opacity-75" />
@@ -285,12 +285,10 @@
                                         class="h-full w-full shrink-0 rounded-md bg-cover bg-center md:rounded-t-[0.625vw]"
                                     />
                                 </div>
-                                <div class="absolute inset-0 bg-gradient-to-t from-secondary/75 to-transparent flex md:h-[12vw]"></div>
-                                <div class="absolute inset-x-0 bottom-2 px-2 flex items-center justify-between">
-                                    <span class="text-accent bg-secondary text-sm font-semibold px-2 py-1 rounded">
-                                        01
-                                    </span>
-                                    <span class="text-accent bg-secondary text-sm font-semibold px-2 py-1 rounded">
+                                <div class="absolute inset-0 flex bg-gradient-to-t from-secondary/75 to-transparent md:h-[12vw]"></div>
+                                <div class="absolute inset-x-0 bottom-2 flex items-center justify-between px-2">
+                                    <span class="rounded bg-secondary px-2 py-1 text-sm font-semibold text-accent">01</span>
+                                    <span class="rounded bg-secondary px-2 py-1 text-sm font-semibold text-accent">
                                         {episode.duration}
                                     </span>
                                 </div>
@@ -298,7 +296,7 @@
                             <div
                                 class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-secondary md:p-[1vw]"
                             >
-                                <div class="absolute inset-x-0 bottom-0 hidden md:flex justify-between md:-top-[2.5vw] md:px-[1vw]">
+                                <div class="absolute inset-x-0 bottom-0 hidden justify-between md:-top-[2.5vw] md:flex md:px-[1vw]">
                                     <p
                                         class="text-surface-50 rounded bg-secondary/75 p-1 text-xs font-bold tracking-wider md:h-max md:rounded-[0.4vw] md:bg-secondary md:px-[0.55vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none"
                                     >
@@ -310,7 +308,7 @@
                                         {episode.duration}
                                     </p>
                                 </div>
-                                <div class="relative flex h-max gap-2 w-full flex-col items-start md:gap-[0.25vw]">
+                                <div class="relative flex h-max w-full flex-col items-start gap-2 md:gap-[0.25vw]">
                                     <HoverExpand
                                         class="text-sm font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]"
                                         height="md:max-h-[1.15vw] md:hover:max-h-[9vw]"
@@ -348,7 +346,7 @@
                 </div>
                 <div class="mt-10 flex grid-cols-5 flex-col gap-10 md:mt-[3vw] md:grid md:gap-[4.375vw]">
                     <div class="md:col-span-3">
-                        <div class="border-neutral flex gap-2 border-b-2 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
+                        <div class="flex gap-2 border-b-2 border-neutral pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
                             <div class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Comments</div>
                             <button class="bg-surface-400 btn btn-secondary hidden min-h-full rounded p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
                                 <Settings class="w-[0.9vw] opacity-75"></Settings>
@@ -374,7 +372,7 @@
                         </div>
                     </div>
                     <div class="md:col-span-2">
-                        <div class="border-neutral flex gap-2 border-b-2 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
+                        <div class="flex gap-2 border-b-2 border-neutral pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
                             <div class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Forum div</div>
                             <button class="bg-surface-400 btn btn-secondary hidden min-h-full rounded p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
                                 <Settings class="w-[0.9vw] opacity-75"></Settings>
