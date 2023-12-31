@@ -7,7 +7,12 @@
 
     export let animes: string | null = null;
 
-    let _anime: { name: string; cover: string }[], picked_anime: (typeof _anime)[0];
+    type Anime = {
+        name: string;
+        cover: string;
+    }
+
+    let _anime: Anime[], picked_anime: Anime;
 
     beforeUpdate(() => {
         if (!_.isNull(animes) && _.isString(animes)) {
