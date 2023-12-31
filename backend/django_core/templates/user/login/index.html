@@ -21,18 +21,6 @@
             </div>
         </div>
     {% else %}
-        <form
-            class="flex h-max w-full flex-col gap-10 bg-surface-900 md:h-full md:justify-between md:gap-0 md:rounded-none md:p-0"
-            hx-post="{{request.get_full_path }}"
-            enctype="application/x-www-form-urlencoded"
-        >
-            <content class='contents'>
-                <div
-                    hx-get="{{request.get_full_path}}"
-                    hx-target="<content/>"
-                    hx-trigger="load"
-                ></div>
-            </content>
-        </form>
+        <coreproject-specific-login-form></coreproject-specific-login-form>
     {% endif %}
 {% endblock %}

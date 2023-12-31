@@ -3,7 +3,7 @@ import { register } from "$functions/register";
 // Pages
 const mapping = [
     { tagname: `explore`, component: await import("./explore/Index.svelte") },
-    { tagname: `anime-info`, component: await import("./anime/info/Index.svelte") }
+    { tagname: `anime-info`, component: await import("./anime/info/Index.svelte") },
 ];
 
 mapping.forEach((item) => {

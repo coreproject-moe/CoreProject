@@ -15,7 +15,9 @@ const mapping = [
     /* Trigger */ {
         tagname: "search-modal-trigger",
         component: await import("./SearchModal/Trigger.svelte")
-    }
+    },
+    // User Forms
+    { tagname: "login-form", component: await import("./UserForm/Login/Index.svelte") },
 ];
 
 mapping.forEach((item) => {
