@@ -1,9 +1,44 @@
-<div class="relative duration-200 h-dvh">
-    <img
-        class="absolute w-full h-full object-cover transition-all"
-        src="/static/public/images/mock/DeathNote-bg.avif"
-        alt="/static/public/images/mock/DeathNote-bg.avif"
-    />
+<script lang="ts">
+    import Refresh from "$icons/Refresh/Index.svelte";
+    import { beforeUpdate } from "svelte";
+    import JSON5 from "json5";
+    import { blur } from "svelte/transition";
+    import * as _ from "lodash-es";
+    export let animes: string | null = null;
+
+
+    let _anime: { name: string; cover: string }[];
+    beforeUpdate(() => {
+        if (!_.isNull(animes) && _.isString(animes)) {
+            _anime = JSON5.parse(animes) satisfies typeof _anime;
+        } else {
+            throw new Error("`animes` not provided for `side-image`");
+        }
+        get_random_anime();
+    });
+    let picked_anime: (typeof _anime)[0];
+    const get_random_anime = () => {
+        const array_without_element = _.isUndefined(picked_anime) ? _anime : _.without(_anime, picked_anime);
+        const sample = _.sample(array_without_element);
+        if (_.isUndefined(sample)) {
+            get_random_anime();
+        } else {
+            picked_anime = sample;
+        }
+
+        console.log(picked_anime);
+    };
+</script>
+
+<div class="h-dvh">
+    {#key picked_anime}
+        <img
+            transition:blur
+            src={picked_anime.cover}
+            alt="{picked_anime.name} image"
+            class="absolute h-full w-full object-cover transition-all"
+        />
+    {/key}
     <div class="absolute inset-0 bg-gradient-to-r from-secondary/75 to-secondary/50"></div>
     <backdrop class="absolute inset-0 bg-transparent duration-300"></backdrop>
 
@@ -17,13 +52,23 @@
     <div class="absolute top-7 md:top-auto md:bottom-[1.85vw] left-7 md:left-[2vw] md:flex">
         <div class="flex flex-col gap-2 md:gap-[0.75vw]">
             <span class="text-[2.25vw] font-semibold uppercase leading-none tracking-widest text-white/75 md:text-[0.75vw]">Background from anime</span>
-            <div class="flex items-center gap-[2vw] md:gap-[0.5vw]">
-                <span class="text-[3vw] font-bold uppercase leading-none tracking-widest text-warning md:text-[1vw]">
-                    <anime-name _="on change(anime_name) put anime_name into me"></anime-name>
-                </span>
-                <button _="on click trigger hyperscript:change_background">
-                    <coreproject-icon-refresh class="w-4 md:w-[1vw]"></coreproject-icon-refresh>
-                </button>
+            <div class="grid">
+                {#key picked_anime}
+                    <div
+                        transition:blur
+                        class="col-start-1 row-start-1 text-[3vw] font-bold uppercase leading-none tracking-widest text-warning md:text-[1vw]"
+                    >
+                        {picked_anime.name}
+                        <button
+                            on:click={() => {
+                                // Change background
+                                get_random_anime();
+                            }}
+                        >
+                            <Refresh class="w-4 md:w-[1vw]" />
+                        </button>
+                    </div>
+                {/key}
             </div>
         </div>
     </div>

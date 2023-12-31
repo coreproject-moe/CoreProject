@@ -3,7 +3,11 @@
 
 {% block body %}
     <div class="relative grid h-screen w-screen md:grid-cols-2 bg-secondary">
-        <coreproject-specific-side-image></coreproject-specific-side-image>
+        <coreproject-specific-side-image
+            class="relative h-dvh"
+            animes="{{animes|safe}}"
+        ></coreproject-specific-side-image>
+        
         <div class="absolute inset-x-0 md:static bg-secondary md:px-[8vw] md:py-[2.2vw] self-end md:self-auto rounded-t-3xl md:rounded-t-none p-7 md:p-0">
             {% block sidebody %}{% endblock %}
         </div>
