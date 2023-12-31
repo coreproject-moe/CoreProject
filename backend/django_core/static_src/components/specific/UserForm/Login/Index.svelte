@@ -1,3 +1,8 @@
+<script lang="ts">
+    import Info from "$icons/Info/Index.svelte";
+    import ArrowUpRight from "$icons/ArrowUpRight/Index.svelte";
+</script>
+
 <form class="flex flex-col justify-between h-full">
     <span class="flex items-center text-lg font-bold uppercase leading-none tracking-widest text-white md:text-[1.5vw]">hey there! welcome back 👋</span>
 
@@ -11,7 +16,7 @@
                 class="h-12 w-full rounded-xl border-2 border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
             <div class="flex items-center gap-2 md:gap-[0.5vw]">
-                <coreproject-icon-info class="w-3 opacity-70 md:w-[0.9vw]" ></coreproject-icon-info>
+                <Info class="w-3 opacity-70 md:w-[0.9vw]" />
                 <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.8vw]">
                     we’ll send you a verification email, so please ensure it’s active
                 </span>
@@ -49,7 +54,7 @@
             class="btn btn-primary text-accent rounded-lg text-base font-semibold md:rounded-[0.5vw] md:text-[0.95vw] leading-none h-max min-h-max md:p-[1vw] p-4"
         >
             <span>Continue</span>
-            <coreproject-icon-arrow-up-right class="w-4 rotate-45 md:w-[1vw]"></coreproject-icon-arrow-up-right>
+            <ArrowUpRight class="w-4 rotate-45 md:w-[1vw]" />
         </button>
     </div>
 </form>
