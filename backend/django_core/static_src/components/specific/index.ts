@@ -6,6 +6,7 @@ const mapping = [
     { tagname: "my-anime-list", component: await import("./MyAnime/Index.svelte") },
     { tagname: "latest-episodes", component: await import("./LatestEpisodes/Index.svelte") },
     { tagname: "bottom-navigation", component: await import("./BottomNavigation/Index.svelte") },
+    { tagname: "side-image", component: await import("./SideImage/Index.svelte") },
     // Modals
     /* item */ {
         tagname: "search-modal",
