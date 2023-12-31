@@ -12,7 +12,7 @@
     <div class="relative h-dvh bg-secondary">
         <div class="w-full h-full flex flex-col overflow-hidden">
             <header class="flex-none z-10">
-                <navbar class="absolute top-0 flex h-[4.5rem] w-full items-center justify-between bg-surface-900/95 px-4 backdrop-blur-3xl md:static md:h-[10vh] md:bg-surface-900 md:py-[0.9375vw] md:pl-[2.1vw] md:pr-[3.75vw]">
+                <navbar class="absolute top-0 flex h-[4.5rem] w-full items-center justify-between bg-secondary/95 px-4 backdrop-blur-3xl md:static md:h-[10vh] md:bg-secondary md:py-[0.9375vw] md:pl-[2.1vw] md:pr-[3.75vw]">
                     <a href="/">
                         <coreproject-icon-coreproject class="w-9 md:w-[2.25vw] md:pt-[0.75vw]"></coreproject-icon-coreproject>
                     </a>
@@ -79,13 +79,39 @@
                             </ul>
                         </div>
                     {% else %}
-                        <div class="flex md:gap-[0.75vw]">
+                        <div class="hidden md:flex md:gap-[0.75vw]">
                             <a href="../user/register" class="btn btn-neutral md:p-[0.9vw] md:text-[1vw] h-max min-h-max leading-none md:rounded-[0.5vw]">
                                 Register
                             </a>
                             <a href="../user/login" class="btn btn-primary text-accent md:p-[0.9vw] md:text-[1vw] h-max min-h-max leading-none md:rounded-[0.5vw]">
                                 Log in
                             </a>
+                        </div>
+
+                        <div class="dropdown dropdown-end flex md:hidden">
+                            <div tabindex="0" role="button" class="avatar btn border-none !bg-transparent p-0">
+                                <div class="w-12 rounded-lg md:w-[3vw] md:rounded-[0.5vw]">
+                                    <img src="https://i.pinimg.com/1200x/a8/2d/aa/a82daa4b726d8f02d8ce28f3e3b3677a.jpg" />
+                                </div>
+                            </div>
+                            <ul tabindex="0" class="dropdown-content z-1 min-w-36 top-14 p-4 bg-base-100 menu rounded-lg">
+                                {% component_block "vercel_hover" glider_container_class='flex flex-col gap-3' active_element_class='rounded-[0.5vw] bg-primary' direction='vertical' duration=200 %}
+                                    {% fill 'items' %}
+                                        <li>
+                                            <a class="flex items-center gap-3 p-0 leading-none !text-white !bg-transparent">
+                                                <coreproject-icon-login class="w-4 md:w-[1vw]"></coreproject-icon-login>
+                                                Log in
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="flex items-center gap-3 p-0 leading-none !text-white !bg-transparent">
+                                                <coreproject-icon-register class="w-4 md:w-[1vw]"></coreproject-icon-register>
+                                                Register
+                                            </a>
+                                        </li>
+                                    {% endfill %}
+                                {% endcomponent_block %}
+                            </ul>
                         </div>
                     {% endif %}
                 </navbar>

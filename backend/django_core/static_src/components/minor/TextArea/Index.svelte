@@ -432,14 +432,14 @@
 
 <div
     role="navigation"
-    class="flex items-center justify-between rounded-t-lg md:rounded-t-[0.75vw]"
+    class="flex items-center justify-between"
 >
-    <div class="md:p-[0.25vw] md:pl-[0.3vw]">
+    <div class="p-1 pl-[0.35rem] md:p-[0.25vw] md:pl-[0.3vw]">
         {#each ["edit", "preview"] as tab}
             {@const active = tab === active_tab}
             <button
                 type="button"
-                class={cn("btn min-h-full capitalize md:h-[2.25vw] md:text-[1vw]", active ? "btn-neutral" : "bg-secondary")}
+                class={cn("btn md:rounded-[0.5vw] min-h-full h-9 capitalize md:h-[2.25vw] md:text-[1vw]", active ? "btn-neutral" : "bg-secondary")}
                 on:click={() => handle_tab_click(tab)}
             >
                 {tab}
@@ -482,7 +482,7 @@
         class="h-28 w-full resize-none overflow-y-scroll border-none bg-secondary px-3 text-sm leading-tight outline-none focus:ring-0 md:h-[8vw] md:px-[1vw] md:py-[0.5vw] md:text-[1vw] md:leading-[1.5vw]"
     ></textarea>
 {:else if active_tab === "preview"}
-    <div class="h-28 w-full overflow-y-scroll px-3 text-sm leading-tight md:h-[8vw] md:px-[1vw] md:py-[0.5vw] md:text-[1vw] md:leading-[1.5vw] [&_img]:inline-flex [&_img]:w-[1.25vw]">
+    <div class="h-28 w-full overflow-y-scroll px-3 py-2 text-sm leading-tight md:h-[8vw] md:px-[1vw] md:py-[0.5vw] md:text-[1vw] md:leading-[1.5vw] [&_img]:inline-flex [&_img]:w-[1.25vw]">
         {#if textarea_value}
             <Markdown markdown={textarea_value} />
         {:else}

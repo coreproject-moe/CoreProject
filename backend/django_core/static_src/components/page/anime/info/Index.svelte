@@ -35,7 +35,6 @@
     import Cross from "$icons/Cross/Index.svelte";
     import Chat from "$icons/Chat/Index.svelte";
     import TrendingArrow from "$icons/TrendingArrow/Index.svelte";
-    import { onMount } from "svelte";
 
     // Internal logics
     const second_mapping = [
@@ -96,7 +95,8 @@
                             src="https://files.otakustudy.com/wp-content/uploads/2020/10/10153058/your-lie-in-april-cover.jpg"
                             class="h-full w-full rounded-xl object-cover object-center md:rounded-[1vw]"
                         />
-                        <div class="gradient from-surface-900/75 to-surface-900/25 absolute inset-0 bg-gradient-to-t md:hidden"></div>
+                        <div class="gradient from-secondary/75 to-surface-900/25 absolute inset-0 bg-gradient-to-t md:hidden"></div>
+                        <div class="gradient from-secondary/50 to-transparent absolute inset-0 bg-gradient-to-r md:hidden"></div>
                     </div>
                     <div class="absolute bottom-0 col-span-12 p-5 md:static md:p-0">
                         <HoverExpand
@@ -105,7 +105,7 @@
                         >
                             {anime_name}
                         </HoverExpand>
-                        <HoverExpand class="flex flex-wrap gap-x-2 pt-2 text-xs font-semibold uppercase tracking-wider md:gap-x-[0.25vw] md:pt-[0.625vw] md:text-[0.75vw] md:leading-[0.9vw]">
+                        <HoverExpand class="w-full pt-2 text-xs font-semibold uppercase tracking-wider md:gap-x-[0.25vw] md:pt-[0.625vw] md:text-[0.75vw] md:leading-[0.9vw]">
                             {anime_japanese_name}
                         </HoverExpand>
                         <div class="mt-1 flex flex-wrap items-center gap-2 text-xs font-semibold md:mt-[0.25vw] md:gap-[0.5vw] md:pt-[0.5vw] md:text-[0.75vw] md:leading-[0.75vw]">
@@ -178,7 +178,7 @@
                     </div>
                     <ScrollArea
                         class="text-justify text-xs md:text-[0.8vw] md:leading-[1vw]"
-                        parent_class="max-h-40 md:max-h-[10vw]"
+                        parent_class="max-h-28 md:max-h-[10vw]"
                         offset_scrollbar="true"
                         gradient_mask="true"
                     >
@@ -216,7 +216,7 @@
                 </div>
             </div>
             <div class="my-7 block md:my-[6vw]">
-                <div class="border-surface-50/10 flex border-b-2 pb-1 md:gap-x-[0.75vw] md:border-none md:pb-0">
+                <div class="border-neutral flex border-b-2 pb-1 md:gap-x-[0.75vw] md:border-none md:pb-0">
                     <div class="text-lg font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Episodes</div>
                     <button class="bg-surface-400 btn btn-secondary hidden min-h-full rounded p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
                         <Settings class="w-[0.9vw] opacity-75" />
@@ -267,7 +267,7 @@
                             class="bg-surface-400 btn btn-secondary h-7 min-h-max w-auto rounded p-0 font-semibold md:ml-0 md:h-[2.5vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]"
                             aria-label="Search"
                         >
-                            <Search class="w-3 md:w-[1vw]"></Search>
+                            <Search class="w-4 md:w-[1vw]"></Search>
                         </button>
                     </div>
                 </div>
@@ -282,15 +282,23 @@
                                     <img
                                         src={episode.banner}
                                         alt=""
-                                        class="h-full w-full shrink-0 rounded-lg bg-cover bg-center md:rounded-t-[0.625vw]"
+                                        class="h-full w-full shrink-0 rounded-md bg-cover bg-center md:rounded-t-[0.625vw]"
                                     />
                                 </div>
-                                <div class="absolute inset-0 hidden bg-gradient-to-t from-secondary/75 to-transparent md:flex md:h-[12vw]"></div>
+                                <div class="absolute inset-0 bg-gradient-to-t from-secondary/75 to-transparent flex md:h-[12vw]"></div>
+                                <div class="absolute inset-x-0 bottom-2 px-2 flex items-center justify-between">
+                                    <span class="text-accent bg-secondary text-sm font-semibold px-2 py-1 rounded">
+                                        01
+                                    </span>
+                                    <span class="text-accent bg-secondary text-sm font-semibold px-2 py-1 rounded">
+                                        {episode.duration}
+                                    </span>
+                                </div>
                             </div>
                             <div
                                 class="col-span-7 flex h-full w-full flex-col items-start justify-between md:absolute md:bottom-0 md:col-span-12 md:h-auto md:rounded-b-[0.625vw] md:bg-secondary md:p-[1vw]"
                             >
-                                <div class="absolute inset-x-0 bottom-0 flex justify-between md:-top-[2.5vw] md:px-[1vw]">
+                                <div class="absolute inset-x-0 bottom-0 hidden md:flex justify-between md:-top-[2.5vw] md:px-[1vw]">
                                     <p
                                         class="text-surface-50 rounded bg-secondary/75 p-1 text-xs font-bold tracking-wider md:h-max md:rounded-[0.4vw] md:bg-secondary md:px-[0.55vw] md:py-[0.55vw] md:text-[0.8vw] md:leading-none"
                                     >
@@ -302,25 +310,25 @@
                                         {episode.duration}
                                     </p>
                                 </div>
-                                <div class="relative flex h-full w-full flex-col items-start md:gap-[0.25vw]">
-                                    <coreproject-hover-expand
-                                        class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]"
+                                <div class="relative flex h-max gap-2 w-full flex-col items-start md:gap-[0.25vw]">
+                                    <HoverExpand
+                                        class="text-sm font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]"
                                         height="md:max-h-[1.15vw] md:hover:max-h-[9vw]"
                                     >
                                         {episode.name}
-                                    </coreproject-hover-expand>
-                                    <coreproject-hover-expand
-                                        class="text-xs font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]"
+                                    </HoverExpand>
+                                    <HoverExpand
+                                        class="text-sm font-medium leading-4 text-white md:text-[0.9vw] md:leading-[1.1vw]"
                                         height="md:max-h-[1.15vw] md:hover:max-h-[9vw]"
                                     >
                                         {episode.japanese_name}
-                                    </coreproject-hover-expand>
+                                    </HoverExpand>
                                 </div>
 
                                 <div class="bg-surface-900 relative flex w-full items-center gap-2 md:gap-[0.5vw] md:pt-[0.75vw]">
                                     <div class="flex gap-2 leading-none md:gap-[0.65vw]">
                                         {#each episode.formats as format}
-                                            <span class="text-surface-50 md:bg-surface-400/50 rounded text-[0.6rem] font-semibold uppercase tracking-wider md:text-[0.8vw]">
+                                            <span class="text-surface-50 md:bg-surface-400/50 rounded text-sm font-semibold uppercase tracking-wider md:text-[0.8vw]">
                                                 {format}
                                             </span>
                                         {/each}
@@ -328,7 +336,7 @@
                                     <Dot class="w-1 opacity-50 md:w-[0.25vw]" />
                                     <div class="flex gap-2 leading-none md:gap-[0.65vw]">
                                         {#each episode.resolutions as res}
-                                            <span class="text-surface-50 md:bg-surface-400/25 text-[0.6rem] font-semibold uppercase tracking-wider md:rounded md:text-[0.8vw]">
+                                            <span class="text-surface-50 md:bg-surface-400/25 text-sm font-semibold uppercase tracking-wider md:rounded md:text-[0.8vw]">
                                                 {res}
                                             </span>
                                         {/each}
@@ -340,22 +348,22 @@
                 </div>
                 <div class="mt-10 flex grid-cols-5 flex-col gap-10 md:mt-[3vw] md:grid md:gap-[4.375vw]">
                     <div class="md:col-span-3">
-                        <div class="border-surface-50/10 flex gap-2 border-b-2 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
+                        <div class="border-neutral flex gap-2 border-b-2 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
                             <div class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Comments</div>
                             <button class="bg-surface-400 btn btn-secondary hidden min-h-full rounded p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
                                 <Settings class="w-[0.9vw] opacity-75"></Settings>
                             </button>
                         </div>
-                        <div class="mt-2 flex items-center justify-between md:hidden">
+                        <div class="flex items-center justify-between md:hidden">
                             <p class="flex items-center gap-1 md:hidden">
                                 <span class="text-base font-bold leading-none">69</span>
-                                <span class="text-surface-50 text-sm font-semibold">div</span>
+                                <span class="text-surface-50 text-sm font-semibold">comments</span>
                             </p>
                             <button
                                 class="btn-icon bg-surface-400 btn h-7 w-auto rounded p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]"
                                 aria-label="Filter"
                             >
-                                <Filter class="w-3 md:w-[1vw]"></Filter>
+                                <Filter class="w-4 md:w-[1vw]"></Filter>
                             </button>
                         </div>
                         <div class="md:mt-[1vw]">
@@ -366,7 +374,7 @@
                         </div>
                     </div>
                     <div class="md:col-span-2">
-                        <div class="border-surface-50/10 flex gap-2 border-b-2 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
+                        <div class="border-neutral flex gap-2 border-b-2 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
                             <div class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Forum div</div>
                             <button class="bg-surface-400 btn btn-secondary hidden min-h-full rounded p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
                                 <Settings class="w-[0.9vw] opacity-75"></Settings>
@@ -375,7 +383,7 @@
                         <div class="mt-2 flex items-center justify-between md:mt-[0.75vw]">
                             <p class="flex items-center gap-1 md:hidden">
                                 <span class="text-base font-bold leading-none">106</span>
-                                <span class="text-surface-50 text-sm font-semibold">div</span>
+                                <span class="text-surface-50 text-sm font-semibold">posts</span>
                             </p>
                             <div class="flex items-center gap-2 md:w-full md:justify-between">
                                 <button
@@ -388,7 +396,7 @@
                                     class="bg-surface-400 btn btn-secondary h-7 min-h-full w-auto rounded p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]"
                                     aria-label="Filter"
                                 >
-                                    <Filter class="w-3 md:w-[1vw]"></Filter>
+                                    <Filter class="w-4 md:w-[1vw]"></Filter>
                                 </button>
                             </div>
                         </div>
