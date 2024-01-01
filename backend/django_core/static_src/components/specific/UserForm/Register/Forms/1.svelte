@@ -87,5 +87,5 @@
             <span>Continue</span>
             <coreproject-icon-arrow-up-right class="w-4 rotate-45 md:w-[1vw]"></coreproject-icon-arrow-up-right>
         </button>
-    </div>    
+    </div>
 </form>
