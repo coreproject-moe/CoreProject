@@ -1,3 +1,9 @@
+<script lang="ts">
+    import CoreText from "$icons/CoreText/Index.svelte";
+    import Tick from "$icons/Tick/Index.svelte";
+    import ArrowUpRight from "$icons/ArrowUpRight/Index.svelte";
+</script>
+
 <form
     on:submit|preventDefault
     class="flex flex-col justify-between h-full"
@@ -5,7 +11,7 @@
     <div class="flex flex-col gap-2 whitespace-nowrap font-bold uppercase leading-none tracking-widest text-white md:text-[1.2vw] md:gap-[0.5vw]">
         <span class="inline-flex gap-2 md:gap-[0.5vw]">
             create your
-            <coreproject-icon-core-text></coreproject-icon-core-text>
+            <CoreText />
             account
         </span>
         <span class="uppercase text-xs md:text-[1vw] font-medium text-white/90">unlock the anime world - join us!</span>
@@ -44,19 +50,19 @@
 
                     <div class="flex flex-col gap-1 md:gap-[0.3vw] md:mt-[0.5vw]">
                         <div class="flex items-center gap-2 md:gap-[0.5vw]">
-                            <coreproject-icon-tick class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity"></coreproject-icon-tick>
+                            <Tick class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" />
                             <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 8 characters</span>
                         </div>
                         <div class="flex items-center gap-2 md:gap-[0.5vw]">
-                            <coreproject-icon-tick class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity"></coreproject-icon-tick>
+                            <Tick class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" />
                             <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 1 special character</span>
                         </div>
                         <div class="flex items-center gap-2 md:gap-[0.5vw]">
-                            <coreproject-icon-tick class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity"></coreproject-icon-tick>
+                            <Tick class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" />
                             <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 1 number</span>
                         </div>
                         <div class="flex items-center gap-2 md:gap-[0.5vw]">
-                            <coreproject-icon-tick class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity"></coreproject-icon-tick>
+                            <Tick class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" />
                             <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 1 lower-case or upper-case character</span>
                         </div>
                     </div>
@@ -88,7 +94,7 @@
             class="btn btn-primary text-accent rounded-lg text-base font-semibold md:rounded-[0.5vw] md:text-[0.95vw] leading-none h-max min-h-max md:p-[1vw] p-4"
         >
             <span>Continue</span>
-            <coreproject-icon-arrow-up-right class="w-4 rotate-45 md:w-[1vw]"></coreproject-icon-arrow-up-right>
+            <ArrowUpRight class="w-4 rotate-45 md:w-[1vw]" />
         </button>
     </div>
 </form>
