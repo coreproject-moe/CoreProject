@@ -106,7 +106,7 @@
             />
         </a>
         <button class="group flex h-full cursor-pointer justify-center transition-transform active:scale-95 md:w-full">
-            <div class="h-full rounded-full bg-neutral transition-colors group-hover:bg-warning w-[0.15rem] md:w-[0.15vw] group-hover:md:w-[0.2vw]" />
+            <div class="h-full w-[0.15rem] rounded-full bg-neutral transition-colors group-hover:bg-warning md:w-[0.15vw] group-hover:md:w-[0.2vw]" />
         </button>
     </div>
     <div class="flex flex-col items-start gap-1 md:gap-[0.25vw]">
@@ -122,7 +122,7 @@
             {/if}
             <a
                 href="/user/"
-                class="flex flex-col gap-1 md:gap-0 text-xs leading-none md:text-[1vw]"
+                class="flex flex-col gap-1 text-xs leading-none md:gap-0 md:text-[1vw]"
             >
                 <div class="flex items-center gap-2 md:gap-[0.5vw]">
                     <div class="text-white">
@@ -144,12 +144,12 @@
                         {@const is_last = index === icon_mapping.length - 1}
                         <button
                             on:click|preventDefault={() => handle_reaction_button_click(item)}
-                            class={cn("btn btn-secondary min-h-full p-0 h-max", is_first && "order-1", is_last && "order-3", string_to_boolean(window.user_authenticated) || "btn-disabled")}
+                            class={cn("btn btn-secondary h-max min-h-full p-0", is_first && "order-1", is_last && "order-3", string_to_boolean(window.user_authenticated) || "btn-disabled")}
                         >
                             {#if user_reaction === `${item}d`}
                                 <Arrow
                                     variant="fill"
-                                    class="text-warning w-4 md:w-[1.25vw]"
+                                    class="w-4 text-warning md:w-[1.25vw]"
                                 />
                             {:else}
                                 <Arrow
@@ -163,7 +163,7 @@
                 </div>
                 <button
                     class={cn(
-                        `btn min-h-full !bg-transparent p-0 text-xs h-max md:gap-[0.35vw] md:text-[0.9vw]`,
+                        `btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw]`,
                         // Allow only 5 level nesting ( for now )
                         depth && depth > 5 && "btn-disabled"
                     )}
@@ -174,7 +174,7 @@
                     <Chat class="w-4 md:w-[1vw]" />
                     <span>Replay</span>
                 </button>
-                <button class="btn min-h-full !bg-transparent p-0 text-xs h-max md:gap-[0.35vw] md:text-[0.9vw]">
+                <button class="btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw]">
                     <Share class="w-4 md:w-[1vw]" />
                     <span>Share</span>
                 </button>
@@ -205,7 +205,7 @@
 
         <!-- Render replies here -->
         {#if item.childrens !== 0}
-            <div class="flex flex-col mt-5 md:mt-[1.5vw] gap-5 md:gap-[1.5vw]">
+            <div class="mt-5 flex flex-col gap-5 md:mt-[1.5vw] md:gap-[1.5vw]">
                 {#each item.child as comment, index}
                     {#if index === 0}
                         <svelte:self item={comment} />
