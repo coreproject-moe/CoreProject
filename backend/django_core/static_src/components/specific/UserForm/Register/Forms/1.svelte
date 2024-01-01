@@ -1,4 +1,7 @@
-<form class="flex flex-col justify-between h-full">
+<form
+    on:submit|preventDefault
+    class="flex flex-col justify-between h-full"
+>
     <div class="flex flex-col gap-2 whitespace-nowrap font-bold uppercase leading-none tracking-widest text-white md:text-[1.2vw] md:gap-[0.5vw]">
         <span class="inline-flex gap-2 md:gap-[0.5vw]">
             create your
