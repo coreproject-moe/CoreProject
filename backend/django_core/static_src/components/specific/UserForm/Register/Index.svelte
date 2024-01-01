@@ -14,14 +14,14 @@
     let pages_state: { [key: number]: Record<string, string | number> } = [];
 
     // Our handlers
-    function onSubmit(values: CustomEvent) {
+    function handleSubmit(e: CustomEvent) {
         if (page === pages.length - 1) {
             // end of the page. do something.. Maybe seek for anime girls with stockings and leggings
             // XD
             console.log("ho ho ho, Wheres my anime girl?");
         } else {
             // If we're not on the last page, store our data and increase a step
-            pages_state[page] = values.detail;
+            pages_state[page] = e.detail;
             page += 1;
         }
     }
@@ -40,7 +40,7 @@
 {:then Module}
     <svelte:component
         this={Module.default}
-        on:submit={onSubmit}
+        on:submit={handleSubmit}
         {pages_state}
     />
 {/await}
