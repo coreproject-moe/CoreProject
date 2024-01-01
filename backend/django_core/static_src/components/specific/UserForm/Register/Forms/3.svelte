@@ -1,6 +1,13 @@
 <script lang="ts">
     import CoreText from "$icons/CoreText/Index.svelte";
     import ArrowUpRight from "$icons/ArrowUpRight/Index.svelte";
+
+    export let pages_state: [
+        { email: string },
+        { username: string }
+    ];
+
+    const combined_state = Object.assign({}, ...pages_state);
 </script>
 
 <form
@@ -21,13 +28,13 @@
             <div class="flex flex-col md:gap-[0.5vw]">
                 <span class="text-lg font-medium md:text-[1.1vw] leading-none">Username:</span>
                 <span class="text-base font-medium text-accent md:text-[1.1vw] leading-none">
-                    dummy username
+                    { combined_state.username }
                 </span>
             </div>
             <div class="flex flex-col md:gap-[0.5vw]">
                 <span class="text-lg font-medium md:text-[1.1vw] leading-none">Email:</span>
                 <span class="text-base font-medium text-accent md:text-[1.1vw] leading-none">
-                    dummy email
+                    { combined_state.email }
                 </span>
             </div>
         </div>

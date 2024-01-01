@@ -2,10 +2,23 @@
     import CoreText from "$icons/CoreText/Index.svelte";
     import Tick from "$icons/Tick/Index.svelte";
     import ArrowUpRight from "$icons/ArrowUpRight/Index.svelte";
+    import { createEventDispatcher } from "svelte";
+
+    const dispatch = createEventDispatcher();
+
+    function handleSubmit(e: SubmitEvent) {
+        const form_data = new FormData(e.currentTarget as HTMLFormElement);
+
+        dispatch("submit", {
+            email: form_data.get("email"),
+            password: form_data.get("password"),
+            confirm_password: form_data.get("confirm_password")
+        });
+    }
 </script>
 
 <form
-    on:submit|preventDefault
+    on:submit|preventDefault={handleSubmit}
     class="flex flex-col justify-between h-full"
 >
     <div class="flex flex-col gap-2 whitespace-nowrap font-bold uppercase leading-none tracking-widest text-white md:text-[1.2vw] md:gap-[0.5vw]">
@@ -22,6 +35,7 @@
                 Email:
             </label>
             <input
+                name="email"
                 placeholder="Email address"
                 class="h-12 w-full rounded-xl border-2 border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
@@ -34,6 +48,7 @@
                 Password:
             </label>
             <input
+                name="password"
                 placeholder="Password"
                 class="h-12 w-full rounded-xl border-2 border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
@@ -74,6 +89,7 @@
                 Confirm Password:
             </label>
             <input
+                name="confirm_password"
                 placeholder="Confirm Password"
                 class="h-12 w-full rounded-xl border-2 border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
