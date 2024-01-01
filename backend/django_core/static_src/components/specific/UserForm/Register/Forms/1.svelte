@@ -8,7 +8,7 @@
 
     function handleSubmit(e: SubmitEvent) {
         const form_data = new FormData(e.currentTarget as HTMLFormElement);
-        
+
         dispatch("submit", {
             email: form_data.get("email"),
             password: form_data.get("password"),
