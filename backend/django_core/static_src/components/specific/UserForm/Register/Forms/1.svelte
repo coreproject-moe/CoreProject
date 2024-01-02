@@ -5,14 +5,13 @@
     import { createEventDispatcher } from "svelte";
     import * as z from "zod";
     import Markdown from "$components/minor/Markdown/Index.svelte";
+    import * as  _ from "lodash-es";
 
     let form_data = {
         email: "",
         password: "",
         confirm_password: ""
-    };
-
-    let errors: {
+    }, form_errors: {
         email?: string[],
         password?: string[],
         confirm_password?: string[]
@@ -26,15 +25,16 @@
 
             password: z
                 .string()
+                .trim()
                 .min(8, "atleast_8")
                 .refine((val) => /(?=.*[!@#$%^&*()_+|~\-=?;:'",.<>{}[\]\\/])/.test(val), "missing_one_special_character")
                 .refine((val) => /(?=.*\d)/.test(val), "missing_one_number")
                 .refine((val) => /(?=.*[A-Z])|(?=.*[a-z])/.test(val), "missing_one_upper_or_lowercase"),
 
-            confirm_password: z.string()
+            confirm_password: z.string().trim()
         })
         .superRefine(({ password, confirm_password }, ctx) => {
-            if (confirm_password !== password) {
+            if (!_.isEqual(password, confirm_password)) {
                 ctx.addIssue({
                     code: z.ZodIssueCode.custom,
                     message: "<b>Password</b> and <b>Confirm Password</b> doesn't match",
@@ -55,19 +55,20 @@
             schema.parse(form_data);
         } catch (err) {
             if (err instanceof z.ZodError) {
-                errors = err.formErrors.fieldErrors;
+                form_errors = err.formErrors.fieldErrors;
+                console.log(form_errors);
             }
         }
     }
 
-    function handleSubmit(e: SubmitEvent) {
-        const form_data = new FormData(e.currentTarget as HTMLFormElement);
+    function handleSubmit() {
+        if (form_errors) return;
 
-        // dispatch("submit", {
-        //     email: form_data.get("email"),
-        //     password: form_data.get("password"),
-        //     confirm_password: form_data.get("confirm_password")
-        // });
+        dispatch("submit", {
+            email: form_data.email,
+            password: form_data.password,
+            confirm_password: form_data.confirm_password
+        });
     }
 </script>
 
@@ -96,8 +97,8 @@
                 class="h-12 w-full rounded-xl border-2 border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
             <div class="mt-[0.75vw] text-xs leading-none text-base-content md:mt-0 md:text-[0.75vw]">
-                {#if errors.email}
-                    <span>{errors.email[0]}</span>
+                {#if form_errors.email}
+                    <span>{form_errors.email[0]}</span>
                 {:else}
                     <span>helptext</span>
                 {/if}
@@ -131,8 +132,8 @@
                             {@const value = item[1]}
 
                             <div class="flex items-center gap-2 md:gap-[0.5vw]">
-                                {#if errors.password || form_data.password}
-                                    {#if errors.password && errors.password.includes(key)}
+                                {#if form_errors.password || form_data.password}
+                                    {#if form_errors.password && form_errors.password.includes(key)}
                                         <Tick class="opacity-30 w-3 text-primary md:w-[1vw] transition-opacity" />
                                     {:else}
                                         <Tick class="w-3 text-primary md:w-[1vw] transition-opacity" />
@@ -159,8 +160,8 @@
                 class="h-12 w-full rounded-xl border-2 border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
             <div class="leading-none text-xs md:text-[0.75vw]">
-                {#if errors.confirm_password}
-                    <Markdown markdown={errors.confirm_password[0]} />
+                {#if form_errors.confirm_password}
+                    <Markdown markdown={form_errors.confirm_password[0]} />
                 {:else}
                     <span>help text</span>
                 {/if}
