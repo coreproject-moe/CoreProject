@@ -1,6 +1,7 @@
 <script lang="ts">
     import CoreText from "$icons/CoreText/Index.svelte";
     import Tick from "$icons/Tick/Index.svelte";
+    import Info from "$icons/Info/Index.svelte";
     import ArrowUpRight from "$icons/ArrowUpRight/Index.svelte";
     import { createEventDispatcher } from "svelte";
     import z from "zod";
@@ -104,12 +105,13 @@
                 placeholder="Email address"
                 class="h-12 w-full rounded-xl border-2 border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
-            <div class="mt-[0.75vw] text-xs leading-none text-base-content md:mt-0 md:text-[0.75vw]">
-                    {#if form_errors.email}
-                        <span>{form_errors.email[0]}</span>
-                    {:else}
-                        <span>helptext</span>
-                    {/if}
+            <div class="flex items-center gap-2 md:gap-[0.5vw] leading-none text-xs md:text-[0.75vw]">
+                <Info class="w-3 opacity-70 md:w-[0.9vw]" />
+                {#if form_errors.email}
+                    <span>{form_errors.email[0]}</span>
+                {:else}
+                    <span>we’ll send you a verification email, so please ensure it’s active</span>
+                {/if}
             </div>
         </div>
         <div class="flex flex-col gap-1 md:gap-[0.5vw]">
@@ -167,11 +169,12 @@
                 placeholder="Confirm Password"
                 class="h-12 w-full rounded-xl border-2 border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
-            <div class="leading-none text-xs md:text-[0.75vw]">
+            <div class="flex items-center gap-2 md:gap-[0.5vw] leading-none text-xs md:text-[0.75vw]">
+                <Info class="w-3 opacity-70 md:w-[0.9vw]" />
                 {#if form_errors.confirm_password}
                     <Markdown markdown={form_errors.confirm_password[0]} />
                 {:else}
-                    <span>help text</span>
+                    <span>Please make sure you enter the same password in both fields</span>
                 {/if}
             </div>
         </div>
