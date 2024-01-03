@@ -49,7 +49,8 @@
         missing_one_upper_or_lowercase: "minimum 1 lower-case or upper-case character"
     };
 
-    function handleInput() {
+    // Functions
+    function validateZod() {
         try {
             schema.parse(form_data);
             // clear errors if valid
@@ -62,23 +63,20 @@
         }
     }
 
-    function handleSubmit() {
-        // try {
-        //     const result = schema.parse(form_data);
-        //     console.log(result);
-        // } catch (err) {
-        //     if (err instanceof z.ZodError) {
-        //         // form_errors = err.formErrors.fieldErrors;
-        //         console.log(err.flatten().fieldErrors);
-        //     }
-        // }
-        // if (Object.values(form_errors).some((err) => err)) return;
+    // Bindings
+    function handleInput() {
+        validateZod();
+    }
 
-        // dispatch("submit", {
-        //     email: form_data.email,
-        //     password: form_data.password,
-        //     confirm_password: form_data.confirm_password
-        // });
+    function handleSubmit() {
+        validateZod();
+
+        if (Object.values(form_errors).some((err) => err)) return;
+        dispatch("submit", {
+            email: form_data.email,
+            password: form_data.password,
+            confirm_password: form_data.confirm_password
+        });
     }
 </script>
 
