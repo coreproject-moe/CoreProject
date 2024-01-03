@@ -18,7 +18,9 @@
 
     const schema = z.object({
         username: z.string()
-            .min(1, "Username can't be empty"),
+            .min(1, "Username can't be empty")
+            .refine((val) => /(?=.*^[a-zA-Z0-9_-]+#[0-9]{4}$)/.test(val), "Username is not valid for this regex `^[a-zA-Z0-9_-]+#[0-9]{4}$`"),
+
         otp: z.string()
             .length(OTP_LENGTH, `OTP must contain ${OTP_LENGTH} numbers`)
     });
