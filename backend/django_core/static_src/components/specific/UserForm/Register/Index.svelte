@@ -8,7 +8,7 @@
 
     let pages = [form_first, form_second, form_third];
     // current page
-    let page = 1;
+    let page = 0;
 
     // The state of all of our pages
     let pages_state: { [key: number]: Record<string, string | number> } = [];
