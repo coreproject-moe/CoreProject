@@ -18,12 +18,12 @@
 
     const schema = z.object({
         username: z.string()
-            .min(1, "Username can't be empty")
-            .refine((val) => /(?=.*^[a-zA-Z0-9_-]+#[0-9]{4}$)/.test(val), "Username is not valid for this regex `^[a-zA-Z0-9_-]+#[0-9]{4}$`"),
+            .min(4, "**Username** must be at least 4 characters long")
+            .refine((val) => /(?=.*^[a-zA-Z0-9_-]+#[0-9]{4}$)/.test(val), "**Username** is not valid for this regex `^[a-zA-Z0-9_-]+#[0-9]{4}$`"),
 
         otp: z.string()
-            .refine((val) => /^\d+$/.test(val), "OTP must be a number")
-            .refine((val) => new RegExp(`^\\d{${OTP_LENGTH}}$`).test(val), `OTP must contain ${OTP_LENGTH} numbers`),
+            .refine((val) => /^\d+$/.test(val), "**OTP** must be a number")
+            .refine((val) => new RegExp(`^\\d{${OTP_LENGTH}}$`).test(val), `**OTP** must contain ${OTP_LENGTH} numbers`),
     });
 
     // Functions
@@ -75,10 +75,10 @@
                 placeholder="Username eg: sora#4444"
                 class="h-12 w-full rounded-xl border-2 border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
-            <div class="flex items-start gap-2 md:gap-[0.5vw] text-xs text-surface-300 md:text-[0.75vw]">
+            <div class="flex items-start gap-2 md:gap-[0.5vw] text-xs text-surface-300 md:text-[0.75vw] leading-none">
                 <Info class="w-3 opacity-70 md:w-[0.9vw]" />
                 {#if form_errors.username}
-                    <span class="text-error">{form_errors.username[0]}</span>
+                    <Markdown class="text-error" markdown={form_errors.username[0]} />
                 {:else}
                     <span>you can change username in your user settings later, so go bonkers!</span>
                 {/if}
@@ -95,10 +95,10 @@
                 placeholder="One Time Password"
                 class="h-12 w-full rounded-xl border-2 border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
-            <div class="flex items-start gap-2 md:gap-[0.5vw] text-xs text-surface-300 md:text-[0.75vw]">
+            <div class="flex items-start gap-2 md:gap-[0.5vw] text-xs text-surface-300 md:text-[0.75vw] leading-none">
                 <Info class="w-3 opacity-70 md:w-[0.9vw]" />
                 {#if form_errors.otp}
-                    <span class="text-error">{form_errors.otp[0]}</span>
+                    <Markdown class="text-error" markdown={form_errors.otp[0]} />
                 {:else}
                     <span>if you didn’t receive the code, check your spam folder. Or use the resend button</span>
                 {/if}

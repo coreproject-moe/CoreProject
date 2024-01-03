@@ -108,7 +108,7 @@
             <div class="flex items-center gap-2 md:gap-[0.5vw] leading-none text-xs md:text-[0.75vw]">
                 <Info class="w-3 opacity-70 md:w-[0.9vw]" />
                 {#if form_errors.email}
-                    <span>{form_errors.email[0]}</span>
+                    <span class="text-error">{form_errors.email[0]}</span>
                 {:else}
                     <span>we’ll send you a verification email, so please ensure it’s active</span>
                 {/if}
@@ -172,7 +172,7 @@
             <div class="flex items-center gap-2 md:gap-[0.5vw] leading-none text-xs md:text-[0.75vw]">
                 <Info class="w-3 opacity-70 md:w-[0.9vw]" />
                 {#if form_errors.confirm_password}
-                    <Markdown markdown={form_errors.confirm_password[0]} />
+                    <Markdown class="text-error" markdown={form_errors.confirm_password[0]} />
                 {:else}
                     <span>Please make sure you enter the same password in both fields</span>
                 {/if}
