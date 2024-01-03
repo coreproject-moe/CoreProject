@@ -21,10 +21,9 @@
             .min(1, "Username can't be empty")
             .refine((val) => /(?=.*^[a-zA-Z0-9_-]+#[0-9]{4}$)/.test(val), "Username is not valid for this regex `^[a-zA-Z0-9_-]+#[0-9]{4}$`"),
 
-        otp: z.coerce.number()
-            .int()
-            .lt(OTP_LENGTH, `OTP must contain only ${OTP_LENGTH} numbers`)
-            .gt(OTP_LENGTH, `OTP must contain only ${OTP_LENGTH} numbers`)
+        otp: z.string()
+            .refine((val) => /^\d+$/.test(val), "OTP must be a number")
+            .refine((val) => new RegExp(`^\\d{${OTP_LENGTH}}$`).test(val), `OTP must contain ${OTP_LENGTH} numbers`),
     });
 
     // Functions
