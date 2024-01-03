@@ -3,7 +3,7 @@
     import Tick from "$icons/Tick/Index.svelte";
     import ArrowUpRight from "$icons/ArrowUpRight/Index.svelte";
     import { createEventDispatcher } from "svelte";
-    import * as z from "zod";
+    import z from "zod";
     import Markdown from "$components/minor/Markdown/Index.svelte";
     import * as  _ from "lodash-es";
 
@@ -25,19 +25,18 @@
 
             password: z
                 .string()
-                .trim()
                 .min(8, "atleast_8")
                 .refine((val) => /(?=.*[!@#$%^&*()_+|~\-=?;:'",.<>{}[\]\\/])/.test(val), "missing_one_special_character")
                 .refine((val) => /(?=.*\d)/.test(val), "missing_one_number")
                 .refine((val) => /(?=.*[A-Z])|(?=.*[a-z])/.test(val), "missing_one_upper_or_lowercase"),
 
-            confirm_password: z.string().trim()
+            confirm_password: z.string()
         })
         .superRefine(({ password, confirm_password }, ctx) => {
             if (!_.isEqual(password, confirm_password)) {
                 ctx.addIssue({
                     code: z.ZodIssueCode.custom,
-                    message: "<b>Password</b> and <b>Confirm Password</b> doesn't match",
+                    message: "<b>Password</b> and <b>Confirm Password</b> must be same",
                     path: ["confirm_password"]
                 });
             }
@@ -53,22 +52,33 @@
     function handleInput() {
         try {
             schema.parse(form_data);
+            // clear errors if valid
+            form_errors = {};
         } catch (err) {
             if (err instanceof z.ZodError) {
-                form_errors = err.formErrors.fieldErrors;
-                console.log(form_errors);
+                form_errors = err.flatten().fieldErrors;
+                // console.log(err.flatten().fieldErrors);
             }
         }
     }
 
     function handleSubmit() {
-        if (form_errors) return;
+        // try {
+        //     const result = schema.parse(form_data);
+        //     console.log(result);
+        // } catch (err) {
+        //     if (err instanceof z.ZodError) {
+        //         // form_errors = err.formErrors.fieldErrors;
+        //         console.log(err.flatten().fieldErrors);
+        //     }
+        // }
+        // if (Object.values(form_errors).some((err) => err)) return;
 
-        dispatch("submit", {
-            email: form_data.email,
-            password: form_data.password,
-            confirm_password: form_data.confirm_password
-        });
+        // dispatch("submit", {
+        //     email: form_data.email,
+        //     password: form_data.password,
+        //     confirm_password: form_data.confirm_password
+        // });
     }
 </script>
 
@@ -97,11 +107,11 @@
                 class="h-12 w-full rounded-xl border-2 border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
             <div class="mt-[0.75vw] text-xs leading-none text-base-content md:mt-0 md:text-[0.75vw]">
-                {#if form_errors.email}
-                    <span>{form_errors.email[0]}</span>
-                {:else}
-                    <span>helptext</span>
-                {/if}
+                    {#if form_errors.email}
+                        <span>{form_errors.email[0]}</span>
+                    {:else}
+                        <span>helptext</span>
+                    {/if}
             </div>
         </div>
         <div class="flex flex-col gap-1 md:gap-[0.5vw]">
