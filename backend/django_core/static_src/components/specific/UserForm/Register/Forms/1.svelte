@@ -1,18 +1,82 @@
 <script lang="ts">
     import CoreText from "$icons/CoreText/Index.svelte";
     import Tick from "$icons/Tick/Index.svelte";
+    import Info from "$icons/Info/Index.svelte";
     import ArrowUpRight from "$icons/ArrowUpRight/Index.svelte";
     import { createEventDispatcher } from "svelte";
+    import Markdown from "$components/minor/Markdown/Index.svelte";
+    import * as  _ from "lodash-es";
+    import * as z from "zod";
+
+    let form_data = {
+        email: "",
+        password: "",
+        confirm_password: ""
+    }, form_errors: {
+        email?: string[],
+        password?: string[],
+        confirm_password?: string[]
+    } = {};
 
     const dispatch = createEventDispatcher();
 
-    function handleSubmit(e: SubmitEvent) {
-        const form_data = new FormData(e.currentTarget as HTMLFormElement);
+    const schema = z
+        .object({
+            email: z.string().email("Please enter a valid email address"),
 
+            password: z
+                .string()
+                .min(8, "atleast_8")
+                .refine((val) => /(?=.*[!@#$%^&*()_+|~\-=?;:'",.<>{}[\]\\/])/.test(val), "missing_one_special_character")
+                .refine((val) => /(?=.*\d)/.test(val), "missing_one_number")
+                .refine((val) => /(?=.*[A-Z])|(?=.*[a-z])/.test(val), "missing_one_upper_or_lowercase"),
+
+            confirm_password: z.string()
+        })
+        .superRefine(({ password, confirm_password }, ctx) => {
+            if (!_.isEqual(password, confirm_password)) {
+                ctx.addIssue({
+                    code: z.ZodIssueCode.custom,
+                    message: "<b>Password</b> and <b>Confirm Password</b> must be same",
+                    path: ["confirm_password"]
+                });
+            }
+        });
+
+    const password_error_mapping: { [key: string]: string } = {
+        atleast_8: "minimum 8 characters",
+        missing_one_special_character: "minimum 1 special character",
+        missing_one_number: "minimum 1 number",
+        missing_one_upper_or_lowercase: "minimum 1 lower-case or upper-case character"
+    };
+
+    // Functions
+    function validateZod() {
+        try {
+            schema.parse(form_data);
+            // clear errors if valid
+            form_errors = {};
+        } catch (err) {
+            if (err instanceof z.ZodError) {
+                form_errors = err.flatten().fieldErrors;
+                // console.log(err.flatten().fieldErrors);
+            }
+        }
+    }
+
+    // Bindings
+    function handleInput() {
+        validateZod();
+    }
+
+    function handleSubmit() {
+        validateZod();
+
+        if (Object.values(form_errors).some((err) => err)) return;
         dispatch("submit", {
-            email: form_data.get("email"),
-            password: form_data.get("password"),
-            confirm_password: form_data.get("confirm_password")
+            email: form_data.email,
+            password: form_data.password,
+            confirm_password: form_data.confirm_password
         });
     }
 </script>
@@ -35,19 +99,28 @@
                 Email:
             </label>
             <input
+                bind:value={form_data.email}
+                on:input={handleInput}
                 name="email"
                 placeholder="Email address"
                 class="h-12 w-full rounded-xl border-2 border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
-            <span class="mt-[0.75vw] text-xs leading-none text-base-content md:mt-0 md:text-[0.75vw]">
-                help text or errors here
-            </span>
+            <div class="flex items-center gap-2 md:gap-[0.5vw] leading-none text-xs md:text-[0.75vw]">
+                <Info class="w-3 opacity-70 md:w-[0.9vw]" />
+                {#if form_errors.email}
+                    <span class="text-error">{form_errors.email[0]}</span>
+                {:else}
+                    <span>we’ll send you a verification email, so please ensure it’s active</span>
+                {/if}
+            </div>
         </div>
         <div class="flex flex-col gap-1 md:gap-[0.5vw]">
             <label for="password" class="text-lg font-semibold leading-none md:text-[1.1vw]">
                 Password:
             </label>
             <input
+                bind:value={form_data.password}
+                on:input={handleInput}
                 name="password"
                 placeholder="Password"
                 class="h-12 w-full rounded-xl border-2 border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
@@ -64,22 +137,23 @@
                     <span class="text-sm font-semibold uppercase leading-none tracking-wider text-surface-50 md:text-[1vw]">must contain</span>
 
                     <div class="flex flex-col gap-1 md:gap-[0.3vw] md:mt-[0.5vw]">
-                        <div class="flex items-center gap-2 md:gap-[0.5vw]">
-                            <Tick class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" />
-                            <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 8 characters</span>
-                        </div>
-                        <div class="flex items-center gap-2 md:gap-[0.5vw]">
-                            <Tick class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" />
-                            <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 1 special character</span>
-                        </div>
-                        <div class="flex items-center gap-2 md:gap-[0.5vw]">
-                            <Tick class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" />
-                            <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 1 number</span>
-                        </div>
-                        <div class="flex items-center gap-2 md:gap-[0.5vw]">
-                            <Tick class="opacity-30 w-3 text-primary md:w-[0.7vw] transition-opacity" />
-                            <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">minimum 1 lower-case or upper-case character</span>
-                        </div>
+                        {#each Object.entries(password_error_mapping) as item}
+                            {@const key = item[0]}
+                            {@const value = item[1]}
+
+                            <div class="flex items-center gap-2 md:gap-[0.5vw]">
+                                {#if form_errors.password || form_data.password}
+                                    {#if form_errors.password && form_errors.password.includes(key)}
+                                        <Tick class="opacity-30 w-3 text-primary md:w-[1vw] transition-opacity" />
+                                    {:else}
+                                        <Tick class="w-3 text-primary md:w-[1vw] transition-opacity" />
+                                    {/if}
+                                {:else}
+                                    <Tick class="opacity-30 w-3 text-primary md:w-[1vw] transition-opacity" />
+                                {/if}
+                                <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">{value}</span>
+                            </div>
+                        {/each}
                     </div>
                 </div>
             </div>
@@ -89,13 +163,20 @@
                 Confirm Password:
             </label>
             <input
+                bind:value={form_data.confirm_password}
+                on:input={handleInput}
                 name="confirm_password"
                 placeholder="Confirm Password"
                 class="h-12 w-full rounded-xl border-2 border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
-            <span class="leading-none text-xs md:text-[0.75vw]">
-                help text or errors here
-            </span>
+            <div class="flex items-center gap-2 md:gap-[0.5vw] leading-none text-xs md:text-[0.75vw]">
+                <Info class="w-3 opacity-70 md:w-[0.9vw]" />
+                {#if form_errors.confirm_password}
+                    <Markdown class="text-error" markdown={form_errors.confirm_password[0]} />
+                {:else}
+                    <span>Please make sure you enter the same password in both fields</span>
+                {/if}
+            </div>
         </div>
     </div>
     <div class="flex items-center justify-between">

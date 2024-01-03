@@ -2,15 +2,55 @@
     import Info from "$icons/Info/Index.svelte";
     import ArrowUpRight from "$icons/ArrowUpRight/Index.svelte";
     import { createEventDispatcher } from "svelte";
+    import * as z from "zod";
+    import Markdown from "$components/minor/Markdown/Index.svelte";
 
     const dispatch = createEventDispatcher();
+    const OTP_LENGTH = 5;
 
-    function handleSubmit(e: SubmitEvent) {
-        const form_data = new FormData(e.currentTarget as HTMLFormElement);
+    let form_data = {
+        username: "",
+        otp: "",
+    }, form_errors: {
+        username?: string;
+        otp?: string;
+    } = {};
 
+    const schema = z.object({
+        username: z.string()
+            .min(4, "**Username** must be at least 4 characters long")
+            .refine((val) => /(?=.*^[a-zA-Z0-9_-]+#[0-9]{4}$)/.test(val), "**Username** is not valid for this regex `^[a-zA-Z0-9_-]+#[0-9]{4}$`"),
+
+        otp: z.string()
+            .refine((val) => /^\d+$/.test(val), "**OTP** must be a number")
+            .refine((val) => new RegExp(`^\\d{${OTP_LENGTH}}$`).test(val), `**OTP** must contain ${OTP_LENGTH} numbers`),
+    });
+
+    // Functions
+    function validateZod() {
+        try {
+            schema.parse(form_data);
+            // if valid
+            form_errors = {};
+        } catch (err) {
+            if (err instanceof z.ZodError) {
+                form_errors = err.flatten().fieldErrors;
+            }
+        }
+    }
+
+    // Bindings
+    function handleInput() {
+        validateZod();
+    }
+
+    function handleSubmit() {
+        validateZod();
+
+        if (Object.values(form_errors).some((err) => err)) return;
         dispatch("submit", {
-            username: form_data.get("username"),
-            otp: form_data.get("otp")
+            username: form_data.username,
+            otp: form_data.otp
         });
     }
 </script>
@@ -29,35 +69,40 @@
                 Username:
             </label>
             <input
+                bind:value={form_data.username}
+                on:input={handleInput}
                 name="username"
-                placeholder="Username"
+                placeholder="Username eg: sora#4444"
                 class="h-12 w-full rounded-xl border-2 border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
-            <info class="flex items-start gap-2 md:gap-[0.5vw]">
+            <div class="flex items-start gap-2 md:gap-[0.5vw] text-xs text-surface-300 md:text-[0.75vw] leading-none">
                 <Info class="w-3 opacity-70 md:w-[0.9vw]" />
-                <span
-                    id="username_help_text"
-                    class="text-xs text-surface-300 md:text-[0.75vw]"
-                >
-                    help text or error
-                </span>
-            </info>
+                {#if form_errors.username}
+                    <Markdown class="text-error" markdown={form_errors.username[0]} />
+                {:else}
+                    <span>you can change username in your user settings later, so go bonkers!</span>
+                {/if}
+            </div>
         </div>
         <div class="flex flex-col gap-[0.3rem] md:gap-[0.35vw] w-full">
             <label for="otp" class="text-lg font-semibold md:text-[1.1vw] leading-none">
                 OTP:
             </label>
             <input
+                bind:value={form_data.otp}
+                on:input={handleInput}
                 name="otp"
                 placeholder="One Time Password"
                 class="h-12 w-full rounded-xl border-2 border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
-            <info class="flex items-start gap-2 md:gap-[0.5vw]">
+            <div class="flex items-start gap-2 md:gap-[0.5vw] text-xs text-surface-300 md:text-[0.75vw] leading-none">
                 <Info class="w-3 opacity-70 md:w-[0.9vw]" />
-                <span class="text-xs text-surface-300 md:text-[0.75vw]">
-                    help text
-                </span>
-            </info>
+                {#if form_errors.otp}
+                    <Markdown class="text-error" markdown={form_errors.otp[0]} />
+                {:else}
+                    <span>if you didn’t receive the code, check your spam folder. Or use the resend button</span>
+                {/if}
+            </div>
         </div>
         <div class="mt-3 flex flex-col gap-2 md:gap-[0.5vw] items-start md:mt-0">
             <button class="btn btn-secondary p-0 h-max min-h-max text-base font-semibold leading-none text-primary underline md:text-[1vw] flex flex-col items-start">
