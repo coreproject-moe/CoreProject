@@ -10,7 +10,7 @@
 
     let form_data = {
         username: "",
-        otp: ""
+        otp: "",
     }, form_errors: {
         username?: string;
         otp?: string;
@@ -21,8 +21,10 @@
             .min(1, "Username can't be empty")
             .refine((val) => /(?=.*^[a-zA-Z0-9_-]+#[0-9]{4}$)/.test(val), "Username is not valid for this regex `^[a-zA-Z0-9_-]+#[0-9]{4}$`"),
 
-        otp: z.string()
-            .length(OTP_LENGTH, `OTP must contain ${OTP_LENGTH} numbers`)
+        otp: z.coerce.number()
+            .int()
+            .lt(OTP_LENGTH, `OTP must contain only ${OTP_LENGTH} numbers`)
+            .gt(OTP_LENGTH, `OTP must contain only ${OTP_LENGTH} numbers`)
     });
 
     // Functions
@@ -71,13 +73,13 @@
                 bind:value={form_data.username}
                 on:input={handleInput}
                 name="username"
-                placeholder="Username"
+                placeholder="Username eg: sora#4444"
                 class="h-12 w-full rounded-xl border-2 border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
             <div class="flex items-start gap-2 md:gap-[0.5vw] text-xs text-surface-300 md:text-[0.75vw]">
                 <Info class="w-3 opacity-70 md:w-[0.9vw]" />
                 {#if form_errors.username}
-                    <span>{form_errors.username[0]}</span>
+                    <span class="text-error">{form_errors.username[0]}</span>
                 {:else}
                     <span>you can change username in your user settings later, so go bonkers!</span>
                 {/if}
@@ -97,7 +99,7 @@
             <div class="flex items-start gap-2 md:gap-[0.5vw] text-xs text-surface-300 md:text-[0.75vw]">
                 <Info class="w-3 opacity-70 md:w-[0.9vw]" />
                 {#if form_errors.otp}
-                    <span>{form_errors.otp[0]}</span>
+                    <span class="text-error">{form_errors.otp[0]}</span>
                 {:else}
                     <span>if you didn’t receive the code, check your spam folder. Or use the resend button</span>
                 {/if}
