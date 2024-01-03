@@ -4,9 +4,9 @@
     import Info from "$icons/Info/Index.svelte";
     import ArrowUpRight from "$icons/ArrowUpRight/Index.svelte";
     import { createEventDispatcher } from "svelte";
-    import z from "zod";
     import Markdown from "$components/minor/Markdown/Index.svelte";
     import * as  _ from "lodash-es";
+    import * as z from "zod";
 
     let form_data = {
         email: "",
