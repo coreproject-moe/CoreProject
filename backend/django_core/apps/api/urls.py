@@ -50,7 +50,7 @@ urlpatterns = [
         EpisodeTimeStampAPIView.as_view(),
     ),
     # User routes
-    path("user/login/", LoginAPIView.as_view()),
+    path("user/login/", LoginAPIView.as_view(), name="login-endpoint"),
     path("user/logout/", LogoutAPIView.as_view()),
     # Comment routes
     path(

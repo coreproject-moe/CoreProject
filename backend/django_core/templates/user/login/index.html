@@ -6,21 +6,7 @@
 
 
 {% block sidebody %}
-    {% if request.user.is_authenticated %}
-        <div class='flex flex-col items-start justify-center gap-[2vw]'>
-            <div class='flex items-center text-base font-bold uppercase leading-none tracking-widest text-white md:text-[1.5vw]'>welcome back {{request.user}}</div>
-            <div>
-                Perhaps you meant to
-                <a
-                    href="{% url "logout_view" %}"
-                    class="text-base leading-none md:text-[1.1vw] text-primary underline"
-                >
-                    Logout
-                </a>
-                ?
-            </div>
-        </div>
-    {% else %}
-        <coreproject-specific-login-form></coreproject-specific-login-form>
-    {% endif %}
+
+    <coreproject-specific-login-form></coreproject-specific-login-form>
+
 {% endblock %}
