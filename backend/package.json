@@ -31,7 +31,7 @@
         "@zxcvbn-ts/language-pl": "^3.0.2",
         "@zxcvbn-ts/language-pt-br": "^3.0.2",
         "caret-pos": "^2.0.0",
-        "cssnano": "^6.0.2",
+        "cssnano": "^6.0.3",
         "daisyui": "^4.5.0",
         "detect-browser": "^5.3.0",
         "easytimer.js": "^4.6.0",
