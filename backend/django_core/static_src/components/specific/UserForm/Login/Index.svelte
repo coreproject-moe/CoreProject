@@ -7,7 +7,14 @@
     import * as _ from "lodash-es";
     import { reverse } from "$functions/urls";
     import { get_csrf_token } from "$functions/get_csrf_token";
+    import { onMount } from "svelte";
+    import { string_to_boolean } from "$functions/string_to_bool";
 
+    let user_authenticated: boolean | null = null;
+
+    onMount(() => {
+        user_authenticated = string_to_boolean(window.user_authenticated);
+    });
     let form_data: {
         email_or_username: string;
         password: string;
@@ -62,87 +69,108 @@
                 "X-CSRFToken": get_csrf_token()
             }
         });
-        if (!res.ok) {
+        if (res.ok) {
+            user_authenticated = true;
+        } else {
             throw new Error("Login failed");
         }
     };
 </script>
 
-<form
-    on:submit|preventDefault={handleSubmit}
-    class="flex h-full flex-col justify-between"
->
-    <span class="flex items-center text-lg font-bold uppercase leading-none tracking-widest text-white md:text-[1.5vw]">hey there! welcome back 👋</span>
-
-    <div class="flex flex-col gap-5 md:block">
-        <div class="flex flex-col gap-2 md:gap-[0.5vw]">
-            <label
-                for="username"
-                class="text-base font-semibold leading-none md:text-[1.1vw]"
-            >
-                Email address / Username:
-            </label>
-            <input
-                bind:value={form_data.email_or_username}
-                on:input={handleInput}
-                placeholder="sora_amamiya@coreproject.moe / soraamamiya#0001"
-                class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
-            />
-            <div class="text-surface-300 flex items-center gap-2 text-[0.7rem] leading-none md:gap-[0.5vw] md:text-[0.8vw]">
-                <Info class="w-3 opacity-70 md:w-[0.9vw]" />
-                {#if form_errors.email_or_username}
-                    <Markdown
-                        class="text-error"
-                        markdown={form_errors.email_or_username[0]}
-                    />
-                {:else}
-                    <span>we’ll send you a verification email, so please ensure it’s active</span>
-                {/if}
-            </div>
+{#if user_authenticated}
+    <div class="flex h-full flex-col items-start justify-center gap-[2vw]">
+        <div class="flex items-center text-base font-bold uppercase leading-none tracking-widest text-white md:text-[1.5vw]">
+            welcome back
+            <!-- Show request.user -->
         </div>
-        <div class="flex flex-col gap-[0.3rem] md:mt-[1.5vw] md:gap-[0.5vw]">
-            <label
-                for="username"
-                class="text-base font-semibold leading-none md:text-[1.1vw]"
+        <div>
+            Perhaps you meant to
+            <a
+                href={reverse("logout_view")}
+                class="text-base leading-none text-primary underline md:text-[1.1vw]"
             >
-                Password:
-            </label>
-            <div class="relative flex flex-col">
+                logout
+            </a>
+            ?
+        </div>
+    </div>
+{:else}
+    <form
+        on:submit|preventDefault={handleSubmit}
+        class="flex h-full flex-col justify-between"
+    >
+        <span class="flex items-center text-lg font-bold uppercase leading-none tracking-widest text-white md:text-[1.5vw]">hey there! welcome back 👋</span>
+
+        <div class="flex flex-col gap-5 md:block">
+            <div class="flex flex-col gap-2 md:gap-[0.5vw]">
+                <label
+                    for="username"
+                    class="text-base font-semibold leading-none md:text-[1.1vw]"
+                >
+                    Email address / Username:
+                </label>
                 <input
-                    bind:value={form_data.password}
+                    bind:value={form_data.email_or_username}
                     on:input={handleInput}
-                    placeholder="enter your existing password"
+                    placeholder="sora_amamiya@coreproject.moe / soraamamiya#0001"
                     class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
                 />
+                <div class="text-surface-300 flex items-center gap-2 text-[0.7rem] leading-none md:gap-[0.5vw] md:text-[0.8vw]">
+                    <Info class="w-3 opacity-70 md:w-[0.9vw]" />
+                    {#if form_errors.email_or_username}
+                        <Markdown
+                            class="text-error"
+                            markdown={form_errors.email_or_username[0]}
+                        />
+                    {:else}
+                        <span>we’ll send you a verification email, so please ensure it’s active</span>
+                    {/if}
+                </div>
             </div>
-            <div class="text-surface-300 flex items-center gap-2 text-[0.7rem] leading-none md:gap-[0.5vw] md:text-[0.8vw]">
-                <Info class="w-3 opacity-70 md:w-[0.9vw]" />
-                {#if form_errors.password}
-                    <Markdown
-                        class="text-error"
-                        markdown={form_errors.password[0]}
+            <div class="flex flex-col gap-[0.3rem] md:mt-[1.5vw] md:gap-[0.5vw]">
+                <label
+                    for="username"
+                    class="text-base font-semibold leading-none md:text-[1.1vw]"
+                >
+                    Password:
+                </label>
+                <div class="relative flex flex-col">
+                    <input
+                        bind:value={form_data.password}
+                        on:input={handleInput}
+                        placeholder="enter your existing password"
+                        class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
                     />
-                {:else}
-                    <span>enter password of your account</span>
-                {/if}
+                </div>
+                <div class="text-surface-300 flex items-center gap-2 text-[0.7rem] leading-none md:gap-[0.5vw] md:text-[0.8vw]">
+                    <Info class="w-3 opacity-70 md:w-[0.9vw]" />
+                    {#if form_errors.password}
+                        <Markdown
+                            class="text-error"
+                            markdown={form_errors.password[0]}
+                        />
+                    {:else}
+                        <span>enter password of your account</span>
+                    {/if}
+                </div>
             </div>
+            <button class="btn btn-secondary flex h-max min-h-max flex-col items-start p-0 text-start text-base font-semibold leading-none text-primary underline md:mt-[2vw] md:text-[1vw]">
+                &lt; forgot password? &gt;
+            </button>
         </div>
-        <button class="btn btn-secondary flex h-max min-h-max flex-col items-start p-0 text-start text-base font-semibold leading-none text-primary underline md:mt-[2vw] md:text-[1vw]">
-            &lt; forgot password? &gt;
-        </button>
-    </div>
 
-    <div class="flex items-center justify-between">
-        <div class="flex flex-col gap-1 md:gap-[0.5vw]">
-            <span class="text-surface-100 text-xs leading-none md:text-[0.75vw]">Don't have a core account?</span>
-            <button class="text-start text-base leading-none text-primary underline md:text-[1.1vw]">Register</button>
+        <div class="flex items-center justify-between">
+            <div class="flex flex-col gap-1 md:gap-[0.5vw]">
+                <span class="text-surface-100 text-xs leading-none md:text-[0.75vw]">Don't have a core account?</span>
+                <button class="text-start text-base leading-none text-primary underline md:text-[1.1vw]">Register</button>
+            </div>
+            <button
+                type="submit"
+                class="btn btn-primary h-max min-h-max rounded-lg p-4 text-base font-semibold leading-none text-accent md:rounded-[0.5vw] md:p-[1vw] md:text-[0.95vw]"
+            >
+                <span>Continue</span>
+                <ArrowUpRight class="w-4 rotate-45 md:w-[1vw]" />
+            </button>
         </div>
-        <button
-            type="submit"
-            class="btn btn-primary h-max min-h-max rounded-lg p-4 text-base font-semibold leading-none text-accent md:rounded-[0.5vw] md:p-[1vw] md:text-[0.95vw]"
-        >
-            <span>Continue</span>
-            <ArrowUpRight class="w-4 rotate-45 md:w-[1vw]" />
-        </button>
-    </div>
-</form>
+    </form>
+{/if}
