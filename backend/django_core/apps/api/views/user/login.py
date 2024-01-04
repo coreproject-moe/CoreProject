@@ -12,5 +12,4 @@ class LoginAPIView(rest_framework_authtoken_views.ObtainAuthToken):
             user = serializer.validated_data["user"]
             if user is not None:
                 login(request, user)
-                print(1)
         return super().post(request, *args, **kwargs)

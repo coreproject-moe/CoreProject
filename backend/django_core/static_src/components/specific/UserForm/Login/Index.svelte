@@ -5,6 +5,8 @@
     import Markdown from "$components/minor/Markdown/Index.svelte";
     import { object_to_form_data } from "$functions/object_to_form_data";
     import * as _ from "lodash-es";
+    import { reverse } from "$functions/urls";
+    import { get_csrf_token } from "$functions/get_csrf_token";
 
     let form_data: {
         email_or_username: string;
@@ -48,11 +50,17 @@
             throw new Error("`form_data` contains empty strings");
         }
 
-        const _form_data = await object_to_form_data(form_data);
+        const _form_data = await object_to_form_data({
+            username: form_data?.email_or_username,
+            password: form_data?.password
+        });
 
-        const res = await fetch("", {
+        const res = await fetch(reverse("login-endpoint"), {
             method: "POST",
-            body: _form_data
+            body: _form_data,
+            headers: {
+                "X-CSRFToken": get_csrf_token()
+            }
         });
         if (!res.ok) {
             throw new Error("Login failed");
