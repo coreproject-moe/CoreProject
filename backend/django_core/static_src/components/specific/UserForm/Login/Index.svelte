@@ -6,14 +6,17 @@
     import { object_to_form_data } from "$functions/object_to_form_data";
     import * as _ from "lodash-es";
 
-    let form_data = {
-            email_or_username: "",
-            password: ""
-        },
-        form_errors: {
-            email_or_username?: string[];
-            password?: string[];
-        } = {};
+    let form_data: {
+        email_or_username: string;
+        password: string;
+    } = {
+        email_or_username: "",
+        password: ""
+    };
+    let form_errors: {
+        email_or_username?: string[];
+        password?: string[];
+    } = {};
 
     const schema = z.object({
         email_or_username: z.string().min(1, "Please enter a **Email address** or **Username**"),
@@ -41,15 +44,15 @@
 
         if (Object.values(form_errors).some((err) => err)) return;
         // do submit logic
+        if (_.every(_.values(form_data), _.isEmpty)) {
+            throw new Error("`form_data` contains empty strings");
+        }
 
-        const form_data = await object_to_form_data({
-            username: username,
-            password: password
-        });
+        const _form_data = await object_to_form_data(form_data);
 
         const res = await fetch("", {
             method: "POST",
-            body: form_data
+            body: _form_data
         });
         if (!res.ok) {
             throw new Error("Login failed");
