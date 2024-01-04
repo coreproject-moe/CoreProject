@@ -32,7 +32,7 @@
             const schema = z.string().min(1, "Please enter a **Email address** or **Username**");
             try {
                 schema.parse(target.value);
-                username_or_email.error = [];
+                username_or_email.error = new Array<string>();
             } catch (err) {
                 if (err instanceof z.ZodError) {
                     username_or_email.error = Object.values(err.flatten().formErrors) as unknown as string[];
@@ -45,6 +45,7 @@
             const schema = z.string().min(1, "**Password** can't be empty");
             try {
                 schema.parse(target.value);
+                password.error = new Array<string>();
             } catch (err) {
                 if (err instanceof z.ZodError) {
                     password.error = Object.values(err.flatten().fieldErrors) as unknown as string[];
