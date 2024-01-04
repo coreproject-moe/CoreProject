@@ -1,5 +1,5 @@
 <script lang="ts">
-    import IntersectionObserver from "$components/svelte/IntersectionOberser.svelte";
+    import IntersectionObserver from "svelte-intersection-observer";
     import { IS_CHROMIUM, IS_FIREFOX } from "$constants/browser";
     import { cn } from "$functions/classname";
     import { string_to_boolean } from "$functions/string_to_bool";

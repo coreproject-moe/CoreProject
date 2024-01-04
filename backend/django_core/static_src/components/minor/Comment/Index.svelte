@@ -8,7 +8,7 @@
     import { comment_needs_update } from "./store";
     import { onMount } from "svelte";
     import * as _ from "lodash-es";
-    import IntersectionOberser from "$components/svelte/IntersectionOberser.svelte";
+    import IntersectionOberser from "svelte-intersection-observer";
     import { get_csrf_token } from "$functions/get_csrf_token";
     import { FETCH_TIMEOUT } from "$constants/fetch";
 
