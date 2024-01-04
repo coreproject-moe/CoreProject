@@ -40,6 +40,7 @@
         "hyperscript.org": "^0.9.12",
         "json5": "^2.2.3",
         "lodash-es": "^4.17.21",
+        "svelte-intersection-observer": "^1.0.0",
         "tailwind-merge": "^2.2.0",
         "tailwind-scrollbar": "^3.0.5",
         "tailwindcss": "^3.4.0",
