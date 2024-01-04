@@ -15,65 +15,87 @@
     onMount(() => {
         user_authenticated = string_to_boolean(window.user_authenticated);
     });
-    let form_data: {
-        email_or_username: string;
-        password: string;
-    } = {
-        email_or_username: "",
-        password: ""
-    };
-    let form_errors: {
-        email_or_username?: string[];
-        password?: string[];
-    } = {};
+    let username_or_email: {
+            value: string;
+            error: string[];
+        } = {
+            value: "",
+            error: new Array<string>()
+        },
+        password: {
+            value: string;
+            error: string[];
+        } = {
+            value: "",
+            error: new Array<string>()
+        };
 
     const schema = z.object({
         email_or_username: z.string().min(1, "Please enter a **Email address** or **Username**"),
         password: z.string().min(1, "**Password** can't be empty")
     });
 
-    function validateZod() {
-        try {
-            schema.parse(form_data);
-            // if valid
-            form_errors = {};
-        } catch (err) {
-            if (err instanceof z.ZodError) {
-                form_errors = err.flatten().fieldErrors;
+    // function validateZod() {
+    //     try {
+    //         schema.parse(form_data);
+    //         // if valid
+    //         form_errors = {};
+    //     } catch (err) {
+    //         if (err instanceof z.ZodError) {
+    //             form_errors = err.flatten().fieldErrors;
+    //         }
+    //     }
+    // }
+
+    // function handleInput() {
+    //     validateZod();
+    // }
+    const handle_password_input = (event: Event) => {
+            const target = event.target as HTMLInputElement;
+
+            const schema = z.string().min(1, "**Password** can't be empty");
+            try {
+                schema.parse(target.value);
+            } catch (err) {
+                if (err instanceof z.ZodError) {
+                    password.error = Object.values(err.flatten().fieldErrors) as unknown as string[];
+                }
             }
-        }
-    }
+        },
+        handle_username_input = (event: Event) => {
+            const target = event.target as HTMLInputElement;
 
-    function handleInput() {
-        validateZod();
-    }
-
+            const schema = z.string().min(1, "Please enter a **Email address** or **Username**");
+            try {
+                schema.parse(target.value);
+            } catch (err) {
+                if (err instanceof z.ZodError) {
+                    username_or_email.error = Object.values(err.flatten().fieldErrors) as unknown as string[];
+                }
+            }
+        };
     const handleSubmit = async () => {
-        validateZod();
-
-        if (Object.values(form_errors).some((err) => err)) return;
-        // do submit logic
-        if (_.every(_.values(form_data), _.isEmpty)) {
-            throw new Error("`form_data` contains empty strings");
-        }
-
-        const _form_data = await object_to_form_data({
-            username: form_data?.email_or_username,
-            password: form_data?.password
-        });
-
-        const res = await fetch(reverse("login-endpoint"), {
-            method: "POST",
-            body: _form_data,
-            headers: {
-                "X-CSRFToken": get_csrf_token()
-            }
-        });
-        if (res.ok) {
-            user_authenticated = true;
-        } else {
-            throw new Error("Login failed");
-        }
+        // if (Object.values(form_errors).some((err) => err)) return;
+        // // do submit logic
+        // if (_.every(_.values(form_data), _.isEmpty)) {
+        //     throw new Error("`form_data` contains empty strings");
+        // }
+        // const _form_data = await object_to_form_data({
+        //     username: form_data?.email_or_username,
+        //     password: form_data?.password
+        // });
+        // const res = await fetch(reverse("login-endpoint"), {
+        //     method: "POST",
+        //     body: _form_data,
+        //     headers: {
+        //         "X-CSRFToken": get_csrf_token()
+        //     }
+        // });
+        // if (res.ok) {
+        //     user_authenticated = true;
+        // } else {
+        //     throw new Error("Login failed");
+        // }
     };
 </script>
 
@@ -110,17 +132,17 @@
                     Email address / Username:
                 </label>
                 <input
-                    bind:value={form_data.email_or_username}
-                    on:input={handleInput}
+                    bind:value={username_or_email.value}
+                    on:input={handle_username_input}
                     placeholder="sora_amamiya@coreproject.moe / soraamamiya#0001"
                     class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
                 />
                 <div class="text-surface-300 flex items-center gap-2 text-[0.7rem] leading-none md:gap-[0.5vw] md:text-[0.8vw]">
                     <Info class="w-3 opacity-70 md:w-[0.9vw]" />
-                    {#if form_errors.email_or_username}
+                    {#if username_or_email.error}
                         <Markdown
                             class="text-error"
-                            markdown={form_errors.email_or_username[0]}
+                            markdown={username_or_email.error.join("")}
                         />
                     {:else}
                         <span>we’ll send you a verification email, so please ensure it’s active</span>
@@ -136,18 +158,18 @@
                 </label>
                 <div class="relative flex flex-col">
                     <input
-                        bind:value={form_data.password}
-                        on:input={handleInput}
+                        bind:value={password.value}
+                        on:input={handle_password_input}
                         placeholder="enter your existing password"
                         class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
                     />
                 </div>
                 <div class="text-surface-300 flex items-center gap-2 text-[0.7rem] leading-none md:gap-[0.5vw] md:text-[0.8vw]">
                     <Info class="w-3 opacity-70 md:w-[0.9vw]" />
-                    {#if form_errors.password}
+                    {#if password.error}
                         <Markdown
                             class="text-error"
-                            markdown={form_errors.password[0]}
+                            markdown={password.error.join("")}
                         />
                     {:else}
                         <span>enter password of your account</span>
