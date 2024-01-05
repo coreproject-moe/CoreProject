@@ -5,7 +5,6 @@ export function handle_input({ event, schema, error_field }: { event: Event; sch
 
     try {
         schema.parse(target.value);
-        console.log(1);
         error_field.error = new Array<string>();
     } catch (err) {
         if (err instanceof z.ZodError) {

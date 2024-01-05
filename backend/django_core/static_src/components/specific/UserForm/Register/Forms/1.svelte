@@ -174,7 +174,7 @@
                             {@const value = item[1]}
 
                             <div class="flex items-center gap-2 md:gap-[0.5vw]">
-                                {#if _.isEmpty(password.error)}
+                                {#if _.isEmpty(password.error) && _.isEmpty(password.value)}
                                     <Tick class="w-3 text-primary opacity-30 transition-opacity md:w-[1vw]" />
                                 {:else if password.value && password.error.includes(key)}
                                     <Tick class="w-3 text-primary opacity-30 transition-opacity md:w-[1vw]" />
