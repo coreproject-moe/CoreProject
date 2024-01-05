@@ -1,7 +1,7 @@
 <script lang="ts">
     import Info from "$icons/Info/Index.svelte";
     import ArrowUpRight from "$icons/ArrowUpRight/Index.svelte";
-    import * as z from "zod";
+    import { z } from "zod";
     import Markdown from "$components/minor/Markdown/Index.svelte";
     import { object_to_form_data } from "$functions/object_to_form_data";
     import * as _ from "lodash-es";

@@ -1,4 +1,4 @@
-import * as z from "zod";
+import { z } from "zod";
 
 export function handle_input({ event, schema, error_field }: { event: Event; schema: z.Schema; error_field: { error: string[] } }) {
     const target = event.target as HTMLInputElement;

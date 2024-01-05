@@ -3,11 +3,54 @@
     import Tick from "$icons/Tick/Index.svelte";
     import Info from "$icons/Info/Index.svelte";
     import ArrowUpRight from "$icons/ArrowUpRight/Index.svelte";
-    import { createEventDispatcher } from "svelte";
+    import { beforeUpdate, createEventDispatcher } from "svelte";
     import Markdown from "$components/minor/Markdown/Index.svelte";
     import * as _ from "lodash-es";
-    import * as z from "zod";
+    import { z } from "zod";
     import { handle_input } from "../../functions/handle_input";
+    import { zxcvbn, zxcvbnOptions, type OptionsType } from "@zxcvbn-ts/core";
+
+    beforeUpdate(async () => {
+        const zxcvbnCommonPackage = await import("@zxcvbn-ts/language-common");
+        const zxcvbnEnPackage = await import("@zxcvbn-ts/language-en");
+        const zxcvbnCsPackage = await import("@zxcvbn-ts/language-cs");
+        const zxcvbnDePackage = await import("@zxcvbn-ts/language-de");
+        const zxcvbnEsEsPackage = await import("@zxcvbn-ts/language-es-es");
+        const zxcvbnFiPackage = await import("@zxcvbn-ts/language-fi");
+        const zxcvbnFrPackage = await import("@zxcvbn-ts/language-fr");
+        const zxcvbnIdPackage = await import("@zxcvbn-ts/language-id");
+        const zxcvbnItPackage = await import("@zxcvbn-ts/language-it");
+        const zxcvbnJaPackage = await import("@zxcvbn-ts/language-ja");
+        const zxcvbnNlBePackage = await import("@zxcvbn-ts/language-nl-be");
+        const zxcvbnPlPackage = await import("@zxcvbn-ts/language-pl");
+        const zxcvbnPtBrPackage = await import("@zxcvbn-ts/language-pt-br");
+
+        const options: OptionsType = {
+            translations: zxcvbnEnPackage.translations,
+            graphs: zxcvbnCommonPackage.adjacencyGraphs,
+            dictionary: {
+                ...zxcvbnCommonPackage.dictionary,
+                ...zxcvbnCsPackage.dictionary,
+                ...zxcvbnDePackage.dictionary,
+                ...zxcvbnEsEsPackage.dictionary,
+                ...zxcvbnFiPackage.dictionary,
+                ...zxcvbnFrPackage.dictionary,
+                ...zxcvbnIdPackage.dictionary,
+                ...zxcvbnItPackage.dictionary,
+                ...zxcvbnJaPackage.dictionary,
+                ...zxcvbnNlBePackage.dictionary,
+                ...zxcvbnPlPackage.dictionary,
+                ...zxcvbnPtBrPackage.dictionary,
+                ...zxcvbnEnPackage.dictionary,
+
+                // Check inputs
+                userInputs: [password.value, email.value, confirm_password.value]
+            },
+            useLevenshteinDistance: true
+        };
+
+        zxcvbnOptions.setOptions(options);
+    });
 
     let email = {
             value: "",
@@ -23,17 +66,6 @@
         };
     let password_strength = 0;
 
-    let form_data = {
-            email: "",
-            password: "",
-            confirm_password: ""
-        },
-        form_errors: {
-            email?: string[];
-            password?: string[];
-            confirm_password?: string[];
-        } = {};
-
     const dispatch = createEventDispatcher();
 
     const password_error_mapping: { [key: string]: string } = {
@@ -45,11 +77,13 @@
 
     // Bindings
 
-    function handleSubmit() {
-        dispatch("submit", {
-            email: form_data.email,
-            password: form_data.password
-        });
+    function handle_submit() {
+        if (password.value === confirm_password.value) {
+            dispatch("submit", {
+                email: email.value,
+                password: password.value
+            });
+        }
     }
 
     const handle_email_input = (event: Event) => {
@@ -66,6 +100,8 @@
                     .refine((val) => /(?=.*[A-Z])|(?=.*[a-z])/.test(val), "missing_one_upper_or_lowercase"),
                 error_field: password
             });
+
+            password_strength = zxcvbn((event.target as HTMLInputElement).value).score;
         },
         handle_confirm_password = (event: Event) => {
             handle_input({
@@ -80,7 +116,7 @@
 </script>
 
 <form
-    on:submit|preventDefault={handleSubmit}
+    on:submit|preventDefault={handle_submit}
     class="flex h-full flex-col justify-between"
 >
     <div class="flex flex-col gap-2 whitespace-nowrap font-bold uppercase leading-none tracking-widest text-white md:gap-[0.5vw] md:text-[1.2vw]">

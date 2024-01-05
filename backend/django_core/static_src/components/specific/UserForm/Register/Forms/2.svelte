@@ -2,7 +2,7 @@
     import Info from "$icons/Info/Index.svelte";
     import ArrowUpRight from "$icons/ArrowUpRight/Index.svelte";
     import { createEventDispatcher } from "svelte";
-    import * as z from "zod";
+    import { z } from "zod";
     import Markdown from "$components/minor/Markdown/Index.svelte";
 
     const dispatch = createEventDispatcher();
