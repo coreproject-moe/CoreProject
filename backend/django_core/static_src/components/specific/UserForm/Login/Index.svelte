@@ -10,6 +10,7 @@
     import { onMount } from "svelte";
     import { string_to_boolean } from "$functions/string_to_bool";
     import { cn } from "$functions/classname";
+    import { handle_input } from "../functions/handle_input";
 
     let user_authenticated: boolean | null = null,
         form_is_submitable = false;
@@ -27,32 +28,12 @@
         };
 
     const handle_username_input = (event: Event) => {
-            const target = event.target as HTMLInputElement;
-
-            const schema = z.string().min(1, "Please enter a **Email address** or **Username**");
-            try {
-                schema.parse(target.value);
-                username_or_email.error = new Array<string>();
-            } catch (err) {
-                if (err instanceof z.ZodError) {
-                    username_or_email.error = Object.values(err.flatten().formErrors) as unknown as string[];
-                }
-            }
+            handle_input({ event, schema: z.string().min(1, "Please enter a **Email address** or **Username**"), error_field: username_or_email });
         },
         handle_password_input = (event: Event) => {
-            const target = event.target as HTMLInputElement;
-
-            const schema = z.string().min(1, "**Password** can't be empty");
-            try {
-                schema.parse(target.value);
-                password.error = new Array<string>();
-            } catch (err) {
-                if (err instanceof z.ZodError) {
-                    password.error = Object.values(err.flatten().fieldErrors) as unknown as string[];
-                }
-            }
+            handle_input({ event, schema: z.string().min(1, "**Password** can't be empty"), error_field: password });
         };
-    const handleSubmit = async () => {
+    const handle_submit = async () => {
         const form_data = await object_to_form_data({
             username: username_or_email.value,
             password: password.value
@@ -95,7 +76,7 @@
     </div>
 {:else}
     <form
-        on:submit|preventDefault={handleSubmit}
+        on:submit|preventDefault={handle_submit}
         class="flex h-full flex-col justify-between"
     >
         <span class="flex items-center text-lg font-bold uppercase leading-none tracking-widest text-white md:text-[1.5vw]">hey there! welcome back 👋</span>

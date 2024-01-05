@@ -76,8 +76,7 @@
         if (Object.values(form_errors).some((err) => err)) return;
         dispatch("submit", {
             email: form_data.email,
-            password: form_data.password,
-            confirm_password: form_data.confirm_password
+            password: form_data.password
         });
     }
 </script>
