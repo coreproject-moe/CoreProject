@@ -3,45 +3,73 @@
     import Tick from "$icons/Tick/Index.svelte";
     import Info from "$icons/Info/Index.svelte";
     import ArrowUpRight from "$icons/ArrowUpRight/Index.svelte";
-    import { createEventDispatcher } from "svelte";
+    import { beforeUpdate, createEventDispatcher } from "svelte";
     import Markdown from "$components/minor/Markdown/Index.svelte";
-    import * as  _ from "lodash-es";
-    import * as z from "zod";
+    import * as _ from "lodash-es";
+    import { z } from "zod";
+    import { handle_input } from "../../functions/handle_input";
+    import { zxcvbn, zxcvbnOptions, type OptionsType } from "@zxcvbn-ts/core";
+    import { cn } from "$functions/classname";
 
-    let form_data = {
-        email: "",
-        password: "",
-        confirm_password: ""
-    }, form_errors: {
-        email?: string[],
-        password?: string[],
-        confirm_password?: string[]
-    } = {};
+    beforeUpdate(async () => {
+        const zxcvbnCommonPackage = await import("@zxcvbn-ts/language-common");
+        const zxcvbnEnPackage = await import("@zxcvbn-ts/language-en");
+        const zxcvbnCsPackage = await import("@zxcvbn-ts/language-cs");
+        const zxcvbnDePackage = await import("@zxcvbn-ts/language-de");
+        const zxcvbnEsEsPackage = await import("@zxcvbn-ts/language-es-es");
+        const zxcvbnFiPackage = await import("@zxcvbn-ts/language-fi");
+        const zxcvbnFrPackage = await import("@zxcvbn-ts/language-fr");
+        const zxcvbnIdPackage = await import("@zxcvbn-ts/language-id");
+        const zxcvbnItPackage = await import("@zxcvbn-ts/language-it");
+        const zxcvbnJaPackage = await import("@zxcvbn-ts/language-ja");
+        const zxcvbnNlBePackage = await import("@zxcvbn-ts/language-nl-be");
+        const zxcvbnPlPackage = await import("@zxcvbn-ts/language-pl");
+        const zxcvbnPtBrPackage = await import("@zxcvbn-ts/language-pt-br");
 
+        const options: OptionsType = {
+            translations: zxcvbnEnPackage.translations,
+            graphs: zxcvbnCommonPackage.adjacencyGraphs,
+            dictionary: {
+                ...zxcvbnCommonPackage.dictionary,
+                ...zxcvbnCsPackage.dictionary,
+                ...zxcvbnDePackage.dictionary,
+                ...zxcvbnEsEsPackage.dictionary,
+                ...zxcvbnFiPackage.dictionary,
+                ...zxcvbnFrPackage.dictionary,
+                ...zxcvbnIdPackage.dictionary,
+                ...zxcvbnItPackage.dictionary,
+                ...zxcvbnJaPackage.dictionary,
+                ...zxcvbnNlBePackage.dictionary,
+                ...zxcvbnPlPackage.dictionary,
+                ...zxcvbnPtBrPackage.dictionary,
+                ...zxcvbnEnPackage.dictionary,
+
+                // Check inputs
+                userInputs: [password.value, email.value, confirm_password.value]
+            },
+            useLevenshteinDistance: true
+        };
+
+        zxcvbnOptions.setOptions(options);
+    });
+
+    let email = {
+            value: "",
+            error: new Array<string>()
+        },
+        password = {
+            value: "",
+            error: new Array<string>()
+        },
+        confirm_password = {
+            value: "",
+            error: new Array<string>()
+        };
+    let password_strength = 0;
+    let form_is_submitable: boolean | null = null;
+    $: form_is_submitable = [email, password, confirm_password].every((field) => field.value && !field.error);
+    
     const dispatch = createEventDispatcher();
-
-    const schema = z
-        .object({
-            email: z.string().email("Please enter a valid email address"),
-
-            password: z
-                .string()
-                .min(8, "atleast_8")
-                .refine((val) => /(?=.*[!@#$%^&*()_+|~\-=?;:'",.<>{}[\]\\/])/.test(val), "missing_one_special_character")
-                .refine((val) => /(?=.*\d)/.test(val), "missing_one_number")
-                .refine((val) => /(?=.*[A-Z])|(?=.*[a-z])/.test(val), "missing_one_upper_or_lowercase"),
-
-            confirm_password: z.string()
-        })
-        .superRefine(({ password, confirm_password }, ctx) => {
-            if (!_.isEqual(password, confirm_password)) {
-                ctx.addIssue({
-                    code: z.ZodIssueCode.custom,
-                    message: "<b>Password</b> and <b>Confirm Password</b> must be same",
-                    path: ["confirm_password"]
-                });
-            }
-        });
 
     const password_error_mapping: { [key: string]: string } = {
         atleast_8: "minimum 8 characters",
@@ -50,145 +78,175 @@
         missing_one_upper_or_lowercase: "minimum 1 lower-case or upper-case character"
     };
 
-    // Functions
-    function validateZod() {
-        try {
-            schema.parse(form_data);
-            // clear errors if valid
-            form_errors = {};
-        } catch (err) {
-            if (err instanceof z.ZodError) {
-                form_errors = err.flatten().fieldErrors;
-                // console.log(err.flatten().fieldErrors);
-            }
+    // Bindings
+
+    function handle_submit() {
+        if (password.value === confirm_password.value) {
+            dispatch("submit", {
+                email: email.value,
+                password: password.value
+            });
         }
     }
 
-    // Bindings
-    function handleInput() {
-        validateZod();
-    }
+    const handle_email_input = (event: Event) => {
+            handle_input({ event: event, schema: z.string().email("Please enter a valid email address"), error_field: email });
+        },
+        handle_password_input = (event: Event) => {
+            handle_input({
+                event: event,
+                schema: z
+                    .string()
+                    .min(8, "atleast_8")
+                    .refine((val) => /(?=.*[!@#$%^&*()_+|~\-=?;:'",.<>{}[\]\\/])/.test(val), "missing_one_special_character")
+                    .refine((val) => /(?=.*\d)/.test(val), "missing_one_number")
+                    .refine((val) => /(?=.*[A-Z])|(?=.*[a-z])/.test(val), "missing_one_upper_or_lowercase"),
+                error_field: password
+            });
 
-    function handleSubmit() {
-        validateZod();
-
-        if (Object.values(form_errors).some((err) => err)) return;
-        dispatch("submit", {
-            email: form_data.email,
-            password: form_data.password,
-            confirm_password: form_data.confirm_password
-        });
-    }
+            if (password.value) {
+                password_strength = zxcvbn(password.value).score;
+            } else {
+                password_strength = 0;
+            }
+        },
+        handle_confirm_password = (event: Event) => {
+            handle_input({
+                event: event,
+                schema: z.string(),
+                error_field: confirm_password
+            });
+            if (confirm_password.value !== password.value) {
+                confirm_password.error = [...confirm_password.error, `**Password** and **Confirm Password** must match`];
+            }
+        };
 </script>
 
 <form
-    on:submit|preventDefault={handleSubmit}
-    class="flex flex-col justify-between h-full"
+    on:submit|preventDefault={handle_submit}
+    class="flex h-full flex-col justify-between"
 >
-    <div class="flex flex-col gap-2 whitespace-nowrap font-bold uppercase leading-none tracking-widest text-white md:text-[1.2vw] md:gap-[0.5vw]">
+    <div class="flex flex-col gap-2 whitespace-nowrap font-bold uppercase leading-none tracking-widest text-white md:gap-[0.5vw] md:text-[1.2vw]">
         <span class="inline-flex gap-2 md:gap-[0.5vw]">
             create your
             <CoreText />
             account
         </span>
-        <span class="uppercase text-xs md:text-[1vw] font-medium text-white/90">unlock the anime world - join us!</span>
+        <span class="text-xs font-medium uppercase text-white/90 md:text-[1vw]">unlock the anime world - join us!</span>
     </div>
     <div class="flex flex-col gap-5 md:gap-[1.5vw]">
         <div class="flex flex-col gap-1 md:gap-[0.5vw]">
-            <label for="email" class="mt-4 text-lg font-semibold leading-none md:mt-[1.1vw] md:text-[1.1vw]">
+            <label
+                for="email"
+                class="mt-4 text-lg font-semibold leading-none md:mt-[1.1vw] md:text-[1.1vw]"
+            >
                 Email:
             </label>
             <input
-                bind:value={form_data.email}
-                on:input={handleInput}
-                name="email"
+                bind:value={email.value}
+                on:input|preventDefault={handle_email_input}
                 placeholder="Email address"
-                class="h-12 w-full rounded-xl border-2 border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
+                class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
-            <div class="flex items-center gap-2 md:gap-[0.5vw] leading-none text-xs md:text-[0.75vw]">
+            <div class="flex items-center gap-2 text-xs leading-none md:gap-[0.5vw] md:text-[0.75vw]">
                 <Info class="w-3 opacity-70 md:w-[0.9vw]" />
-                {#if form_errors.email}
-                    <span class="text-error">{form_errors.email[0]}</span>
-                {:else}
+                {#if _.isEmpty(email.error) || _.isEmpty(email.value)}
                     <span>we’ll send you a verification email, so please ensure it’s active</span>
+                {:else}
+                    <span class="text-error">{email.error.join("")}</span>
                 {/if}
             </div>
         </div>
         <div class="flex flex-col gap-1 md:gap-[0.5vw]">
-            <label for="password" class="text-lg font-semibold leading-none md:text-[1.1vw]">
+            <label
+                for="password"
+                class="text-lg font-semibold leading-none md:text-[1.1vw]"
+            >
                 Password:
             </label>
             <input
-                bind:value={form_data.password}
-                on:input={handleInput}
-                name="password"
+                bind:value={password.value}
+                on:input={handle_password_input}
                 placeholder="Password"
-                class="h-12 w-full rounded-xl border-2 border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
+                class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
             <div class="flex flex-col">
                 <div class="grid grid-cols-4 gap-[1.5vw] md:gap-[0.75vw]">
-                    <span class="h-[1.75vw] rounded-[0.5vw] md:h-[0.75vw] md:rounded-[0.1875vw] transition-colors md:border-[0.15vw] border-white/25"></span>
-                    <span class="h-[1.75vw] rounded-[0.5vw] md:h-[0.75vw] md:rounded-[0.1875vw] transition-colors md:border-[0.15vw] border-white/25"></span>
-                    <span class="h-[1.75vw] rounded-[0.5vw] md:h-[0.75vw] md:rounded-[0.1875vw] transition-colors md:border-[0.15vw] border-white/25"></span>
-                    <span class="h-[1.75vw] rounded-[0.5vw] md:h-[0.75vw] md:rounded-[0.1875vw] transition-colors md:border-[0.15vw] border-white/25"></span>
-                </div >
+                    {#each Array(password_strength) as _, index}
+                        {@const backgrounds = ["bg-primary opacity-60", "bg-primary opacity-70", "bg-primary opacity-80", "bg-primary opacity-90"]}
+                        <span class={cn(backgrounds[index], "col-span-1 h-[1.75vw] w-full rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw]")} />
+                    {/each}
+                    {#each Array(4 - password_strength) as _}
+                        <span class="h-[1.75vw] rounded-[0.5vw] border-white/25 transition-colors md:h-[0.75vw] md:rounded-[0.1875vw] md:border-[0.15vw]"></span>
+                    {/each}
+                </div>
 
                 <div class="mt-3 md:mt-[1.25vw]">
-                    <span class="text-sm font-semibold uppercase leading-none tracking-wider text-surface-50 md:text-[1vw]">must contain</span>
+                    <span class="text-surface-50 text-sm font-semibold uppercase leading-none tracking-wider md:text-[1vw]">must contain</span>
 
-                    <div class="flex flex-col gap-1 md:gap-[0.3vw] md:mt-[0.5vw]">
+                    <div class="flex flex-col gap-1 md:mt-[0.5vw] md:gap-[0.3vw]">
                         {#each Object.entries(password_error_mapping) as item}
                             {@const key = item[0]}
                             {@const value = item[1]}
 
                             <div class="flex items-center gap-2 md:gap-[0.5vw]">
-                                {#if form_errors.password || form_data.password}
-                                    {#if form_errors.password && form_errors.password.includes(key)}
-                                        <Tick class="opacity-30 w-3 text-primary md:w-[1vw] transition-opacity" />
-                                    {:else}
-                                        <Tick class="w-3 text-primary md:w-[1vw] transition-opacity" />
-                                    {/if}
+                                {#if (_.isEmpty(password.error) && _.isEmpty(password.value)) || (password.value && password.error.includes(key))}
+                                    <div>
+                                        <Tick class="w-3 text-primary opacity-30 transition-opacity md:w-[1vw]" />
+                                    </div>
                                 {:else}
-                                    <Tick class="opacity-30 w-3 text-primary md:w-[1vw] transition-opacity" />
+                                    <!-- Filled tick  -->
+                                    <div>
+                                        <Tick class="w-3 text-primary transition-opacity md:w-[1vw]" />
+                                    </div>
                                 {/if}
-                                <span class="text-[0.7rem] leading-none text-surface-300 md:text-[0.75vw]">{value}</span>
+
+                                <span class="text-surface-300 text-[0.7rem] leading-none md:text-[0.75vw]">{value}</span>
                             </div>
                         {/each}
                     </div>
                 </div>
             </div>
         </div>
-        <div class="flex flex-col gap-[0.3rem] md:gap-[0.5vw]" >
-            <label for="confirm-password" class="text-lg font-semibold leading-none md:text-[1.1vw]">
+        <div class="flex flex-col gap-[0.3rem] md:gap-[0.5vw]">
+            <label
+                for="confirm-password"
+                class="text-lg font-semibold leading-none md:text-[1.1vw]"
+            >
                 Confirm Password:
             </label>
             <input
-                bind:value={form_data.confirm_password}
-                on:input={handleInput}
-                name="confirm_password"
+                bind:value={confirm_password.value}
+                on:input={handle_confirm_password}
                 placeholder="Confirm Password"
-                class="h-12 w-full rounded-xl border-2 border-primary-500 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 focus:border-primary-400 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
+                class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
-            <div class="flex items-center gap-2 md:gap-[0.5vw] leading-none text-xs md:text-[0.75vw]">
-                <Info class="w-3 opacity-70 md:w-[0.9vw]" />
-                {#if form_errors.confirm_password}
-                    <Markdown class="text-error" markdown={form_errors.confirm_password[0]} />
-                {:else}
+            <div class="flex items-center gap-2 text-xs leading-none md:gap-[0.5vw] md:text-[0.75vw]">
+                {#if _.isEmpty(confirm_password.error)}
+                    <Info class="w-3 opacity-70 md:w-[0.9vw]" />
                     <span>Please make sure you enter the same password in both fields</span>
+                {:else}
+                    <Info class="w-3 opacity-70 md:w-[0.9vw]" />
+
+                    <Markdown
+                        class="text-error"
+                        markdown={confirm_password.error.join("")}
+                    />
                 {/if}
             </div>
         </div>
     </div>
     <div class="flex items-center justify-between">
         <div class="flex flex-col gap-1 md:gap-[0.5vw]">
-            <span class="text-xs leading-none text-surface-100 md:text-[0.75vw]">Already have an account?</span>
-            <button class="text-start text-base leading-none md:text-[1.1vw] text-primary underline">
-                Login
-            </button>
+            <span class="text-surface-100 text-xs leading-none md:text-[0.75vw]">Already have an account?</span>
+            <button class="text-start text-base leading-none text-primary underline md:text-[1.1vw]">Login</button>
         </div>
         <button
             type="submit"
-            class="btn btn-primary text-accent rounded-lg text-base font-semibold md:rounded-[0.5vw] md:text-[0.95vw] leading-none h-max min-h-max md:p-[1vw] p-4"
+            class={cn(
+                form_is_submitable || "btn-disabled",
+                `btn btn-primary h-max min-h-max rounded-lg p-4 text-base font-semibold leading-none text-accent md:rounded-[0.5vw] md:p-[1vw] md:text-[0.95vw]`
+            )}
         >
             <span>Continue</span>
             <ArrowUpRight class="w-4 rotate-45 md:w-[1vw]" />

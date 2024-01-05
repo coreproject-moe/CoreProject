@@ -34,10 +34,8 @@
 </script>
 
 <!-- We display the current step here -->
-{#await current_page}
-    <!-- SHow skeleton loader here -->
-    <span>Form Loading...</span>
-{:then Module}
+<!-- We do not need skeleton loader or anything, since this is not hydratable -->
+{#await current_page then Module}
     <svelte:component
         this={Module.default}
         on:submit={handleSubmit}

@@ -1,18 +1,20 @@
 <script lang="ts">
     import Info from "$icons/Info/Index.svelte";
     import ArrowUpRight from "$icons/ArrowUpRight/Index.svelte";
-    import * as z from "zod";
+    import { z } from "zod";
     import Markdown from "$components/minor/Markdown/Index.svelte";
     import { object_to_form_data } from "$functions/object_to_form_data";
     import * as _ from "lodash-es";
-    import { reverse } from "$functions/urls";
+    import { goto, reverse } from "$functions/urls";
     import { get_csrf_token } from "$functions/get_csrf_token";
     import { onMount } from "svelte";
     import { string_to_boolean } from "$functions/string_to_bool";
     import { cn } from "$functions/classname";
+    import { handle_input } from "../functions/handle_input";
 
     let user_authenticated: boolean | null = null,
-        form_is_submitable = false;
+        form_is_submitable: boolean | null = null;
+    $: form_is_submitable = [username_or_email, password].every((field) => field.value && !field.error);
 
     onMount(() => {
         user_authenticated = string_to_boolean(window.user_authenticated);
@@ -27,32 +29,12 @@
         };
 
     const handle_username_input = (event: Event) => {
-            const target = event.target as HTMLInputElement;
-
-            const schema = z.string().min(1, "Please enter a **Email address** or **Username**");
-            try {
-                schema.parse(target.value);
-                username_or_email.error = new Array<string>();
-            } catch (err) {
-                if (err instanceof z.ZodError) {
-                    username_or_email.error = Object.values(err.flatten().formErrors) as unknown as string[];
-                }
-            }
+            handle_input({ event, schema: z.string().min(1, "Please enter a **Email address** or **Username**"), error_field: username_or_email });
         },
         handle_password_input = (event: Event) => {
-            const target = event.target as HTMLInputElement;
-
-            const schema = z.string().min(1, "**Password** can't be empty");
-            try {
-                schema.parse(target.value);
-                password.error = new Array<string>();
-            } catch (err) {
-                if (err instanceof z.ZodError) {
-                    password.error = Object.values(err.flatten().fieldErrors) as unknown as string[];
-                }
-            }
+            handle_input({ event, schema: z.string().min(1, "**Password** can't be empty"), error_field: password });
         };
-    const handleSubmit = async () => {
+    const handle_submit = async () => {
         const form_data = await object_to_form_data({
             username: username_or_email.value,
             password: password.value
@@ -70,10 +52,6 @@
             throw new Error("Login failed");
         }
     };
-
-    $: {
-        form_is_submitable = _.isEmpty(username_or_email.error) && _.isEmpty(password.error) && !_.isEmpty(username_or_email.value) && !_.isEmpty(password.value);
-    }
 </script>
 
 {#if user_authenticated}
@@ -95,7 +73,7 @@
     </div>
 {:else}
     <form
-        on:submit|preventDefault={handleSubmit}
+        on:submit|preventDefault={handle_submit}
         class="flex h-full flex-col justify-between"
     >
         <span class="flex items-center text-lg font-bold uppercase leading-none tracking-widest text-white md:text-[1.5vw]">hey there! welcome back 👋</span>
@@ -161,7 +139,15 @@
         <div class="flex items-center justify-between">
             <div class="flex flex-col gap-1 md:gap-[0.5vw]">
                 <span class="text-surface-100 text-xs leading-none md:text-[0.75vw]">Don't have a core account?</span>
-                <button class="text-start text-base leading-none text-primary underline md:text-[1.1vw]">Register</button>
+                <button
+                    type="button"
+                    class="text-start text-base leading-none text-primary underline md:text-[1.1vw]"
+                    on:click|preventDefault={() => {
+                        goto({ url: reverse("register_view"), verb: "GET", target: "body" });
+                    }}
+                >
+                    Register
+                </button>
             </div>
             <button
                 type="submit"

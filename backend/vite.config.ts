@@ -57,8 +57,6 @@ export default defineConfig({
                 // Tailwind.css
                 join(CSS_DIRECTORY, "index.postcss"),
 
-                // Register Page
-                join(JS_DIRECTORY, "register.ts"),
                 // join(IMAGE_DIRECTORY, 'favicon', 'favicon.svg'),
                 // Components
                 join(COMPONENT_DIRECTORY, "index.ts")
