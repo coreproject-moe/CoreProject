@@ -160,7 +160,7 @@
             />
             <div class="flex flex-col">
                 <div class="grid grid-cols-4 gap-[1.5vw] md:gap-[0.75vw]">
-                    {#each Array(3).fill(0) as _}
+                    {#each Array(4).fill(0) as _}
                         <span class="h-[1.75vw] rounded-[0.5vw] border-white/25 transition-colors md:h-[0.75vw] md:rounded-[0.1875vw] md:border-[0.15vw]"></span>
                     {/each}
                 </div>
@@ -174,15 +174,15 @@
                             {@const value = item[1]}
 
                             <div class="flex items-center gap-2 md:gap-[0.5vw]">
-                                {#if form_errors.password || form_data.password}
-                                    {#if form_errors.password && form_errors.password.includes(key)}
-                                        <Tick class="w-3 text-primary opacity-30 transition-opacity md:w-[1vw]" />
-                                    {:else}
-                                        <Tick class="w-3 text-primary transition-opacity md:w-[1vw]" />
-                                    {/if}
-                                {:else}
+                                {#if _.isEmpty(password.error)}
                                     <Tick class="w-3 text-primary opacity-30 transition-opacity md:w-[1vw]" />
+                                {:else if password.value && password.error.includes(key)}
+                                    <Tick class="w-3 text-primary opacity-30 transition-opacity md:w-[1vw]" />
+                                {:else}
+                                    <!-- Filled tick  -->
+                                    <Tick class="w-3 text-primary transition-opacity md:w-[1vw]" />
                                 {/if}
+
                                 <span class="text-surface-300 text-[0.7rem] leading-none md:text-[0.75vw]">{value}</span>
                             </div>
                         {/each}
