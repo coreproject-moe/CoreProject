@@ -67,9 +67,8 @@
         };
     let password_strength = 0;
     let form_is_submitable: boolean | null = null;
-    $: form_is_submitable =
-        _.isEmpty(email.error) && _.isEmpty(password.error) && _.isEmpty(confirm_password.error) && !_.isEmpty(email.value) && !_.isEmpty(password.value) && !_.isEmpty(confirm_password.value);
-
+    $: form_is_submitable = [email, password, confirm_password].every((field) => field.value && !field.error);
+    
     const dispatch = createEventDispatcher();
 
     const password_error_mapping: { [key: string]: string } = {
