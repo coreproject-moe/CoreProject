@@ -16,6 +16,10 @@
         password = {
             value: "",
             error: new Array<string>()
+        },
+        confirm_password = {
+            value: "",
+            error: new Array<string>()
         };
     let password_strength = 0;
 
@@ -32,29 +36,6 @@
 
     const dispatch = createEventDispatcher();
 
-    const schema = z
-        .object({
-            email: z.string().email("Please enter a valid email address"),
-
-            password: z
-                .string()
-                .min(8, "atleast_8")
-                .refine((val) => /(?=.*[!@#$%^&*()_+|~\-=?;:'",.<>{}[\]\\/])/.test(val), "missing_one_special_character")
-                .refine((val) => /(?=.*\d)/.test(val), "missing_one_number")
-                .refine((val) => /(?=.*[A-Z])|(?=.*[a-z])/.test(val), "missing_one_upper_or_lowercase"),
-
-            confirm_password: z.string()
-        })
-        .superRefine(({ password, confirm_password }, ctx) => {
-            if (!_.isEqual(password, confirm_password)) {
-                ctx.addIssue({
-                    code: z.ZodIssueCode.custom,
-                    message: "<b>Password</b> and <b>Confirm Password</b> must be same",
-                    path: ["confirm_password"]
-                });
-            }
-        });
-
     const password_error_mapping: { [key: string]: string } = {
         atleast_8: "minimum 8 characters",
         missing_one_special_character: "minimum 1 special character",
@@ -62,29 +43,9 @@
         missing_one_upper_or_lowercase: "minimum 1 lower-case or upper-case character"
     };
 
-    // Functions
-    function validateZod() {
-        try {
-            schema.parse(form_data);
-            // clear errors if valid
-            form_errors = {};
-        } catch (err) {
-            if (err instanceof z.ZodError) {
-                form_errors = err.flatten().fieldErrors;
-                // console.log(err.flatten().fieldErrors);
-            }
-        }
-    }
-
     // Bindings
-    function handleInput() {
-        validateZod();
-    }
 
     function handleSubmit() {
-        validateZod();
-
-        if (Object.values(form_errors).some((err) => err)) return;
         dispatch("submit", {
             email: form_data.email,
             password: form_data.password
@@ -105,6 +66,16 @@
                     .refine((val) => /(?=.*[A-Z])|(?=.*[a-z])/.test(val), "missing_one_upper_or_lowercase"),
                 error_field: password
             });
+        },
+        handle_confirm_password = (event: Event) => {
+            handle_input({
+                event: event,
+                schema: z.string(),
+                error_field: confirm_password
+            });
+            if (confirm_password.value !== password.value) {
+                confirm_password.error = [...confirm_password.error, `**Password** and **Confirm Password** must match`];
+            }
         };
 </script>
 
@@ -131,7 +102,6 @@
             <input
                 bind:value={email.value}
                 on:input|preventDefault={handle_email_input}
-                name="email"
                 placeholder="Email address"
                 class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
@@ -154,7 +124,6 @@
             <input
                 bind:value={password.value}
                 on:input={handle_password_input}
-                name="password"
                 placeholder="Password"
                 class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
@@ -174,9 +143,7 @@
                             {@const value = item[1]}
 
                             <div class="flex items-center gap-2 md:gap-[0.5vw]">
-                                {#if _.isEmpty(password.error) && _.isEmpty(password.value)}
-                                    <Tick class="w-3 text-primary opacity-30 transition-opacity md:w-[1vw]" />
-                                {:else if password.value && password.error.includes(key)}
+                                {#if (_.isEmpty(password.error) && _.isEmpty(password.value)) || (password.value && password.error.includes(key))}
                                     <Tick class="w-3 text-primary opacity-30 transition-opacity md:w-[1vw]" />
                                 {:else}
                                     <!-- Filled tick  -->
@@ -198,21 +165,20 @@
                 Confirm Password:
             </label>
             <input
-                bind:value={form_data.confirm_password}
-                on:input={handleInput}
-                name="confirm_password"
+                bind:value={confirm_password.value}
+                on:input={handle_confirm_password}
                 placeholder="Confirm Password"
                 class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
             <div class="flex items-center gap-2 text-xs leading-none md:gap-[0.5vw] md:text-[0.75vw]">
                 <Info class="w-3 opacity-70 md:w-[0.9vw]" />
-                {#if form_errors.confirm_password}
+                {#if _.isEmpty(confirm_password.error) || _.isEmpty(confirm_password.value)}
+                    <span>Please make sure you enter the same password in both fields</span>
+                {:else}
                     <Markdown
                         class="text-error"
-                        markdown={form_errors.confirm_password[0]}
+                        markdown={confirm_password.error.join("")}
                     />
-                {:else}
-                    <span>Please make sure you enter the same password in both fields</span>
                 {/if}
             </div>
         </div>
