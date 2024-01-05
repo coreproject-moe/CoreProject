@@ -13,7 +13,8 @@
     import { handle_input } from "../functions/handle_input";
 
     let user_authenticated: boolean | null = null,
-        form_is_submitable = false;
+        form_is_submitable: boolean | null = null;
+    $: form_is_submitable = _.isEmpty(username_or_email.error) && _.isEmpty(password.error) && !_.isEmpty(username_or_email.value) && !_.isEmpty(password.value);
 
     onMount(() => {
         user_authenticated = string_to_boolean(window.user_authenticated);
@@ -51,10 +52,6 @@
             throw new Error("Login failed");
         }
     };
-
-    $: {
-        form_is_submitable = _.isEmpty(username_or_email.error) && _.isEmpty(password.error) && !_.isEmpty(username_or_email.value) && !_.isEmpty(password.value);
-    }
 </script>
 
 {#if user_authenticated}

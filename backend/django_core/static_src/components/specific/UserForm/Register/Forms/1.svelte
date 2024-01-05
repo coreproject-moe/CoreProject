@@ -9,6 +9,7 @@
     import { z } from "zod";
     import { handle_input } from "../../functions/handle_input";
     import { zxcvbn, zxcvbnOptions, type OptionsType } from "@zxcvbn-ts/core";
+    import { cn } from "$functions/classname";
 
     beforeUpdate(async () => {
         const zxcvbnCommonPackage = await import("@zxcvbn-ts/language-common");
@@ -65,6 +66,9 @@
             error: new Array<string>()
         };
     let password_strength = 0;
+    let form_is_submitable: boolean | null = null;
+    $: form_is_submitable =
+        _.isEmpty(email.error) && _.isEmpty(password.error) && _.isEmpty(confirm_password.error) && !_.isEmpty(email.value) && !_.isEmpty(password.value) && !_.isEmpty(confirm_password.value);
 
     const dispatch = createEventDispatcher();
 
@@ -169,7 +173,11 @@
             />
             <div class="flex flex-col">
                 <div class="grid grid-cols-4 gap-[1.5vw] md:gap-[0.75vw]">
-                    {#each Array(4).fill(0) as _}
+                    {#each Array(password_strength) as _, index}
+                        {@const backgrounds = ["bg-primary opacity-60", "bg-primary opacity-70", "bg-primary opacity-80", "bg-primary opacity-90"]}
+                        <span class={cn(backgrounds[index], "col-span-1 h-[1.75vw] w-full rounded-[0.5vw] md:h-[0.625vw] md:rounded-[0.1875vw]")} />
+                    {/each}
+                    {#each Array(4 - password_strength) as _}
                         <span class="h-[1.75vw] rounded-[0.5vw] border-white/25 transition-colors md:h-[0.75vw] md:rounded-[0.1875vw] md:border-[0.15vw]"></span>
                     {/each}
                 </div>
@@ -184,10 +192,14 @@
 
                             <div class="flex items-center gap-2 md:gap-[0.5vw]">
                                 {#if (_.isEmpty(password.error) && _.isEmpty(password.value)) || (password.value && password.error.includes(key))}
-                                    <Tick class="w-3 text-primary opacity-30 transition-opacity md:w-[1vw]" />
+                                    <div>
+                                        <Tick class="w-3 text-primary opacity-30 transition-opacity md:w-[1vw]" />
+                                    </div>
                                 {:else}
                                     <!-- Filled tick  -->
-                                    <Tick class="w-3 text-primary transition-opacity md:w-[1vw]" />
+                                    <div>
+                                        <Tick class="w-3 text-primary transition-opacity md:w-[1vw]" />
+                                    </div>
                                 {/if}
 
                                 <span class="text-surface-300 text-[0.7rem] leading-none md:text-[0.75vw]">{value}</span>
@@ -211,10 +223,12 @@
                 class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
             <div class="flex items-center gap-2 text-xs leading-none md:gap-[0.5vw] md:text-[0.75vw]">
-                <Info class="w-3 opacity-70 md:w-[0.9vw]" />
-                {#if _.isEmpty(confirm_password.error) || _.isEmpty(confirm_password.value)}
+                {#if _.isEmpty(confirm_password.error)}
+                    <Info class="w-3 opacity-70 md:w-[0.9vw]" />
                     <span>Please make sure you enter the same password in both fields</span>
                 {:else}
+                    <Info class="w-3 opacity-70 md:w-[0.9vw]" />
+
                     <Markdown
                         class="text-error"
                         markdown={confirm_password.error.join("")}
@@ -230,7 +244,10 @@
         </div>
         <button
             type="submit"
-            class="btn btn-primary h-max min-h-max rounded-lg p-4 text-base font-semibold leading-none text-accent md:rounded-[0.5vw] md:p-[1vw] md:text-[0.95vw]"
+            class={cn(
+                form_is_submitable || "btn-disabled",
+                `btn btn-primary h-max min-h-max rounded-lg p-4 text-base font-semibold leading-none text-accent md:rounded-[0.5vw] md:p-[1vw] md:text-[0.95vw]`
+            )}
         >
             <span>Continue</span>
             <ArrowUpRight class="w-4 rotate-45 md:w-[1vw]" />
