@@ -14,7 +14,7 @@ from django_htmx.http import HttpResponseClientRedirect, HttpResponseClientRefre
 if TYPE_CHECKING:
     from ..request import HtmxHttpRequest
 
-from ..forms.user import FirstRegisterForm, LoginForm, ResetPasswordForm, SecondRegisterForm
+from ..forms.user import FirstRegisterForm, ResetPasswordForm, SecondRegisterForm
 
 animes = [
     {"name": "Demon Slayer", "cover": static("/public/images/mock/DemonSlayer-cover.avif")},
@@ -34,91 +34,13 @@ animes = [
 
 @never_cache
 def login_view(request: "HtmxHttpRequest") -> HttpResponse:
-    form = LoginForm(request.POST or None)
-    login_unsuccessful = False
-
-    if request.htmx:
-        if form.is_valid():
-            username = form.cleaned_data["username"]
-            user = authenticate(
-                username=username,
-                password=form.cleaned_data["password"],
-            )
-
-            if utils.is_already_locked(request, username=username):
-                message = (
-                    f"You have attempted to login {config.FAILURE_LIMIT} times, with no success."
-                    f"Your account is locked for {utils.get_lockout_cooloff_time(username=username)} seconds"
-                )
-
-            if user is not None:
-                login(request, user)
-
-                redirect_location = request.GET.get("next")
-                url_is_safe = url_has_allowed_host_and_scheme(
-                    url=redirect_location,
-                    allowed_hosts=settings.ALLOWED_HOSTS,
-                    require_https=request.is_secure(),
-                )
-                if redirect_location and url_is_safe:
-                    return HttpResponseClientRedirect(redirect_location)
-                else:
-                    return HttpResponseClientRefresh()
-
-            else:
-                login_unsuccessful = True
-                utils.add_login_attempt_to_db(
-                    request,
-                    login_valid=False,
-                    username=username,
-                )
-
-                login_attempts = int(config.FAILURE_LIMIT) - int(
-                    utils.get_user_attempts(request, username=username)
-                )
-
-                if login_attempts == 0:
-                    message = f"Your account is locked for {utils.get_lockout_cooloff_time(username=username)} seconds"
-                else:
-                    message = (
-                        "User not found!\n"
-                        f"You have {login_attempts} attempts left for {username}"
-                    )
-
-            utils.check_request(
-                request,
-                login_unsuccessful=login_unsuccessful,
-                username=username,
-            )
-            response = render(
-                request,
-                "components/toast.html",
-                {"message": message},
-            )
-        elif form.errors:
-            response = render(
-                request,
-                "components/toast.html",
-                {"message": form.non_field_errors().as_text()},
-            )
-        else:
-            return render(
-                request,
-                "user/login/_partial.html",
-                context={
-                    "form": form,
-                },
-            )
-        return retarget(response, "#toast")
-
-    else:
-        return render(
-            request,
-            "user/login/index.html",
-            context={
-                "animes": animes,
-            },
-        )
+    return render(
+        request,
+        "user/login/index.html",
+        context={
+            "animes": animes,
+        },
+    )
 
 
 @never_cache
