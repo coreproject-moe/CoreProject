@@ -101,7 +101,11 @@
                 error_field: password
             });
 
-            password_strength = zxcvbn((event.target as HTMLInputElement).value).score;
+            if (password.value) {
+                password_strength = zxcvbn(password.value).score;
+            } else {
+                password_strength = 0;
+            }
         },
         handle_confirm_password = (event: Event) => {
             handle_input({
