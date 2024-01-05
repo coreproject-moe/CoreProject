@@ -10,9 +10,14 @@
     import { handle_input } from "../../functions/handle_input";
 
     let email = {
-        value: "",
-        error: new Array<string>()
-    };
+            value: "",
+            error: new Array<string>()
+        },
+        password = {
+            value: "",
+            error: new Array<string>()
+        };
+    let password_strength = 0;
 
     let form_data = {
             email: "",
@@ -86,9 +91,21 @@
         });
     }
 
-    const handle_email = (event: Event) => {
-        handle_input({ event: event, schema: z.string().email("Please enter a valid email address"), error_field: email });
-    };
+    const handle_email_input = (event: Event) => {
+            handle_input({ event: event, schema: z.string().email("Please enter a valid email address"), error_field: email });
+        },
+        handle_password_input = (event: Event) => {
+            handle_input({
+                event: event,
+                schema: z
+                    .string()
+                    .min(8, "atleast_8")
+                    .refine((val) => /(?=.*[!@#$%^&*()_+|~\-=?;:'",.<>{}[\]\\/])/.test(val), "missing_one_special_character")
+                    .refine((val) => /(?=.*\d)/.test(val), "missing_one_number")
+                    .refine((val) => /(?=.*[A-Z])|(?=.*[a-z])/.test(val), "missing_one_upper_or_lowercase"),
+                error_field: password
+            });
+        };
 </script>
 
 <form
@@ -113,17 +130,17 @@
             </label>
             <input
                 bind:value={email.value}
-                on:input={handle_email}
+                on:input|preventDefault={handle_email_input}
                 name="email"
                 placeholder="Email address"
                 class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
             <div class="flex items-center gap-2 text-xs leading-none md:gap-[0.5vw] md:text-[0.75vw]">
                 <Info class="w-3 opacity-70 md:w-[0.9vw]" />
-                {#if form_errors.email}
-                    <span class="text-error">{form_errors.email[0]}</span>
-                {:else}
+                {#if _.isEmpty(email.error) || _.isEmpty(email.value)}
                     <span>we’ll send you a verification email, so please ensure it’s active</span>
+                {:else}
+                    <span class="text-error">{email.error.join("")}</span>
                 {/if}
             </div>
         </div>
@@ -135,18 +152,17 @@
                 Password:
             </label>
             <input
-                bind:value={form_data.password}
-                on:input={handleInput}
+                bind:value={password.value}
+                on:input={handle_password_input}
                 name="password"
                 placeholder="Password"
                 class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
             <div class="flex flex-col">
                 <div class="grid grid-cols-4 gap-[1.5vw] md:gap-[0.75vw]">
-                    <span class="h-[1.75vw] rounded-[0.5vw] border-white/25 transition-colors md:h-[0.75vw] md:rounded-[0.1875vw] md:border-[0.15vw]"></span>
-                    <span class="h-[1.75vw] rounded-[0.5vw] border-white/25 transition-colors md:h-[0.75vw] md:rounded-[0.1875vw] md:border-[0.15vw]"></span>
-                    <span class="h-[1.75vw] rounded-[0.5vw] border-white/25 transition-colors md:h-[0.75vw] md:rounded-[0.1875vw] md:border-[0.15vw]"></span>
-                    <span class="h-[1.75vw] rounded-[0.5vw] border-white/25 transition-colors md:h-[0.75vw] md:rounded-[0.1875vw] md:border-[0.15vw]"></span>
+                    {#each Array(3).fill(0) as _}
+                        <span class="h-[1.75vw] rounded-[0.5vw] border-white/25 transition-colors md:h-[0.75vw] md:rounded-[0.1875vw] md:border-[0.15vw]"></span>
+                    {/each}
                 </div>
 
                 <div class="mt-3 md:mt-[1.25vw]">
