@@ -5,7 +5,7 @@
     import Markdown from "$components/minor/Markdown/Index.svelte";
     import { object_to_form_data } from "$functions/object_to_form_data";
     import * as _ from "lodash-es";
-    import { reverse } from "$functions/urls";
+    import { goto, reverse } from "$functions/urls";
     import { get_csrf_token } from "$functions/get_csrf_token";
     import { onMount } from "svelte";
     import { string_to_boolean } from "$functions/string_to_bool";
@@ -142,7 +142,15 @@
         <div class="flex items-center justify-between">
             <div class="flex flex-col gap-1 md:gap-[0.5vw]">
                 <span class="text-surface-100 text-xs leading-none md:text-[0.75vw]">Don't have a core account?</span>
-                <button class="text-start text-base leading-none text-primary underline md:text-[1.1vw]">Register</button>
+                <button
+                    type="button"
+                    class="text-start text-base leading-none text-primary underline md:text-[1.1vw]"
+                    on:click|preventDefault={() => {
+                        goto({ url: reverse("register_view"), verb: "GET", target: "body" });
+                    }}
+                >
+                    Register
+                </button>
             </div>
             <button
                 type="submit"

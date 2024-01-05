@@ -7,6 +7,12 @@
     import Markdown from "$components/minor/Markdown/Index.svelte";
     import * as _ from "lodash-es";
     import * as z from "zod";
+    import { handle_input } from "../../functions/handle_input";
+
+    let email = {
+        value: "",
+        error: new Array<string>()
+    };
 
     let form_data = {
             email: "",
@@ -79,6 +85,10 @@
             password: form_data.password
         });
     }
+
+    const handle_email = (event: Event) => {
+        handle_input({ event: event, schema: z.string().email("Please enter a valid email address"), error_field: email });
+    };
 </script>
 
 <form
@@ -102,8 +112,8 @@
                 Email:
             </label>
             <input
-                bind:value={form_data.email}
-                on:input={handleInput}
+                bind:value={email.value}
+                on:input={handle_email}
                 name="email"
                 placeholder="Email address"
                 class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
