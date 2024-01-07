@@ -78,9 +78,7 @@ INSTALLED_APPS = [
     # Whitenoise
     "whitenoise.runserver_nostatic",
     # Components
-    "django_components",
-    "django_components.safer_staticfiles",  # <-- ADD
-    # "django.contrib.staticfiles",
+    "django.contrib.staticfiles",
     # 3rd party rest framework stuff
     "corsheaders",
     # 3rd party Django stuff
@@ -206,7 +204,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [BASE_DIR / "templates"],
-        "APP_DIRS": False,
+        "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
                 "django.template.context_processors.debug",
@@ -215,19 +213,6 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 # Custom
                 "apps.pages.context_processors.urls",
-            ],
-            "builtins": [
-                "django_components.templatetags.component_tags",
-            ],
-            "loaders": [
-                (
-                    "django.template.loaders.cached.Loader",
-                    [
-                        "django.template.loaders.filesystem.Loader",
-                        "django.template.loaders.app_directories.Loader",
-                        "django_components.template_loader.Loader",
-                    ],
-                )
             ],
         },
     },
@@ -337,7 +322,6 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
-    Path(BASE_DIR.parent, "components"),
     Path(BASE_DIR, "static_src"),
 ]
 

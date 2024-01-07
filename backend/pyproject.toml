@@ -65,7 +65,6 @@ drf-spectacular-sidecar = ">=2023.10.1"
 django-filter = ">=23.3"
 crispy-bootstrap4 = ">=2023.1"
 # Components
-django-components = ">=0.29"
 django-htmx = ">=1.17.0"
 # Markdown
 django-vite = "^3.0.1"
