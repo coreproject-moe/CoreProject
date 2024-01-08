@@ -43,7 +43,7 @@
         "svelte-intersection-observer": "^1.0.0",
         "tailwind-merge": "^2.2.0",
         "tailwind-scrollbar": "^3.0.5",
-        "tailwindcss": "^3.4.0",
+        "tailwindcss": "^3.4.1",
         "vite": "^5.0.11",
         "xss": "^1.0.14"
     },
