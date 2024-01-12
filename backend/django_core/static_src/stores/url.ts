@@ -1,5 +1,4 @@
 import { writable } from "svelte/store";
-import htmx from "htmx.org";
 export const url = writable(window.location.pathname);
 
 // Hacky way

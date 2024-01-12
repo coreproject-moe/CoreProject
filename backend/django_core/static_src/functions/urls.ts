@@ -40,6 +40,7 @@ export async function goto({ url, anchor = null, verb, target }: { url: string; 
     btn.setAttribute(`hx-${verb?.toLowerCase()}`, url);
     btn.setAttribute("hx-push-url", url);
     btn.setAttribute("hx-target", target);
+    btn.setAttribute("hx-indicator", ".progress");
     // Hide Button
     btn.style.display = "none";
     // Add `htmx` listener
