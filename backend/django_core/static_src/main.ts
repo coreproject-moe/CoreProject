@@ -23,9 +23,16 @@ nProgress.configure({
 });
 
 // Register web components
-const components = import.meta.glob("./components/**/*/index.ts", { eager: true });
-console.log(`Registered : ${Object.keys(components).length} web-components`);
+const components = import.meta.glob("./components/**/*/index.ts");
 
 // Register event listeners
-const events = import.meta.glob("./event/**/*.ts", { eager: true });
-console.log(`Registered : ${Object.keys(events).length} events`);
+const events = import.meta.glob("./event/**/*.ts");
+
+// Register
+[components, events].forEach((item) => {
+    // console.log(`Registered : ${Object.keys(item).length} ${String(item)}`);
+
+    Object.values(item).forEach(async (module) => {
+        await module();
+    });
+});
