@@ -60,9 +60,11 @@ export async function goto({ url, anchor = null, verb, target }: { url: string; 
         _anchor = document.body as HTMLElement;
     }
 
-    _anchor.addEventListener("htmx:afterSwap", async (event: any) =>
-        update_store(url, event).then(() => {
-            _anchor?.removeEventListener("htmx:afterSwap", async (event: any) => await update_store(url, event));
+    _anchor.addEventListener("htmx:afterSwap", async () =>
+        update_store(url).then(() => {
+            _anchor?.removeEventListener("htmx:afterSwap", async () => {
+                await update_store(url);
+            });
         })
     );
 
