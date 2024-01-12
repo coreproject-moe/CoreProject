@@ -2,6 +2,15 @@ import htmx from "htmx.org";
 import * as _ from "lodash-es";
 import { url as url_store } from "$stores/url";
 
+const update_store = async (url: string, event: any) => {
+    console.log(1);
+    // Ignore path if it has http in name
+    if (!url.startsWith("http")) {
+        // Update store
+        url_store.set(url);
+    }
+};
+
 export function reverse(view: string, ...args: Array<string | number>) {
     const url = window.urls.get(view);
     if (!url) {
@@ -52,13 +61,11 @@ export async function goto({ url, anchor = null, verb, target }: { url: string; 
         _anchor = document.body as HTMLElement;
     }
 
-    _anchor.addEventListener("htmx:afterSwap", async (event: any) => {
-        // Ignore path if it has http in name
-        if (!url.startsWith("http") && event.detail.xhr.status === 200) {
-            // Update store
-            url_store.set(url);
-        }
-    });
+    _anchor.addEventListener("htmx:afterSwap", async (event: any) =>
+        update_store(url, event).then(() => {
+            _anchor?.removeEventListener("htmx:afterSwap", async (event: any) => await update_store(url, event));
+        })
+    );
 
     try {
         _anchor?.appendChild(btn);
