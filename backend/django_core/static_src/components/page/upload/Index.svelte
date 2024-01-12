@@ -6,8 +6,9 @@
     import Login from "./Login.svelte";
     import Edit from "$icons/Edit/Index.svelte";
     import prettyBytes from "pretty-bytes";
+    import { upload_file_to_doodstream } from "./functions/doodsteam_upload";
 
-    let has_token = true;
+    let has_token = false;
     let file_array = new Array<File>();
     let table_file_array = new Array<File>();
     let upload_state: "null" | "selecting" | "uploading" = "null";
@@ -29,6 +30,8 @@
         Array.from(files).forEach((item) => {
             file_array = [...file_array, item];
         });
+
+        upload_file_to_doodstream({ api_key: tokens.doodstream, file: file_array[0] });
     };
 </script>
 
@@ -101,7 +104,7 @@
                             class="absolute left-2 p-0 md:left-[1vw]"
                             aria-label="Search"
                         >
-                            <!-- <Search class="opacity-75 md:w-[1.25vw]" /> -->
+                            <Cross class="opacity-75 md:w-[1.25vw]" />
                         </button>
                         <input
                             type="text"
