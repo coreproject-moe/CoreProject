@@ -1,5 +1,21 @@
 <script lang="ts">
+    import prettyBytes from "pretty-bytes";
     let has_token = false;
+    let file_size = 0;
+    let file_array = new Array<File>();
+
+    const handle_file_input = (event: Event) => {
+        const target = event.target as HTMLInputElement;
+        const files = target.files;
+        if (!files) {
+            return;
+        }
+
+        Array.from(files).forEach((item) => {
+            file_size += item.size;
+            file_array = [...file_array, item];
+        });
+    };
 </script>
 
 {#if has_token}
@@ -57,12 +73,21 @@
                         max="100"
                     ></progress>
                     <div class="mt-5 flex flex-col gap-3 leading-none md:mt-[1.5vw] md:gap-[0.5vw]">
-                        <span class="font-semibold md:text-[1vw]">300.69B</span>
-                        <span class="text-surface-50 md:text-[1vw]">7 files</span>
+                        <span class="font-semibold md:text-[1vw]">
+                            {prettyBytes(file_array?.reduce((total, current) => total + current.size, 0))}
+                        </span>
+                        <span class="text-surface-50 md:text-[1vw]">{file_array.length}</span>
                     </div>
                 </div>
             </div>
-            <div class="col-span-12 flex cursor-pointer flex-col items-center justify-center bg-neutral md:col-span-5 md:h-[12vw] md:gap-[0.25vw] md:rounded-[0.75vw]">
+
+            <div class="relative col-span-12 flex cursor-pointer flex-col items-center justify-center bg-neutral md:col-span-5 md:h-[12vw] md:gap-[0.25vw] md:rounded-[0.75vw]">
+                <input
+                    type="file"
+                    multiple={true}
+                    class="absolute bottom-0 left-0 right-0 top-0 z-10 w-full cursor-pointer opacity-0"
+                    on:input|preventDefault={handle_file_input}
+                />
                 <coreproject-icon-upload class="text-white md:w-[2vw]"></coreproject-icon-upload>
                 <span class="font-semibold md:mt-[1vw] md:text-[1.1vw]">Drag and Drop files</span>
                 <div class="divider m-0 before:bg-accent/25 after:bg-accent/25 md:px-[10vw] md:text-[0.9vw] md:before:h-[0.15vw] md:after:h-[0.15vw]">Or</div>
@@ -70,8 +95,8 @@
             </div>
         </div>
         <div class="divider md:m-0 md:before:h-[0.2vw] md:after:h-[0.2vw]"></div>
-        <uploads>
-            <uploads-options class="flex flex-col justify-between md:flex-row">
+        <div>
+            <div class="flex flex-col justify-between md:flex-row">
                 <div class="flex items-center justify-between md:justify-start md:gap-[3vw]">
                     <form class="relative flex items-center">
                         <button
@@ -107,9 +132,9 @@
                         <span>Delete</span>
                     </button>
                 </div>
-            </uploads-options>
+            </div>
 
-            <uploads-table
+            <div
                 hidden
                 class="mt-10 block md:mt-[3vw]"
             >
@@ -177,7 +202,7 @@
                     <!-- spacing -->
                     <tbody></tbody>
                 </table>
-            </uploads-table>
+            </div>
             <empty-ui class="flex w-full flex-col items-center justify-center md:flex-row md:gap-[2vw]">
                 <coreproject-icon-empty class="w-32 stroke-accent stroke-[0.15vw] md:w-[10vw] md:stroke-accent/50"></coreproject-icon-empty>
                 <div class="flex flex-col items-center gap-2 md:items-start md:gap-[0.75vw]">
@@ -185,6 +210,6 @@
                     <span class="text-sm leading-none text-accent/50 md:text-[1.1vw]">Upload something to make kokoro-chan happy</span>
                 </div>
             </empty-ui>
-        </uploads>
+        </div>
     </div>
 {/if}
