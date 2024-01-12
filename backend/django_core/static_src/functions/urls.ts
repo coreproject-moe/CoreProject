@@ -45,6 +45,7 @@ export async function goto({ url, anchor = null, verb, target }: { url: string; 
     // Add `htmx` listener
     htmx.process(btn);
     let _anchor: HTMLElement | null = null;
+
     if (!_.isNull(anchor)) {
         _anchor = anchor as HTMLElement;
     } else {
