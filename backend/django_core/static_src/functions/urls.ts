@@ -1,6 +1,5 @@
 import htmx from "htmx.org";
 import * as _ from "lodash-es";
-import { url as url_store } from "$stores/url";
 
 export function reverse(view: string, ...args: Array<string | number>) {
     const url = window.urls.get(view);

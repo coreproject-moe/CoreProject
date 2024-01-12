@@ -17,6 +17,13 @@ window.addEventListener("popstate", function () {
     url.set(this.location.pathname);
 });
 
+document.addEventListener("htmx:beforeRequest", () => {
+    console.log("hello");
+});
+
+document.addEventListener("htmx:afterSettle", () => {
+    console.log("world");
+});
 // window.document.addEventListener("htmx:confirm", (event: any) => {
 //     url.set(event.detail.path);
 //     // https://htmx.org/events/#htmx:confirm
