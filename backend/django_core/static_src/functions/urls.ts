@@ -2,8 +2,7 @@ import htmx from "htmx.org";
 import * as _ from "lodash-es";
 import { url as url_store } from "$stores/url";
 
-const update_store = async (url: string, event: any) => {
-    console.log(1);
+const update_store = async (url: string) => {
     // Ignore path if it has http in name
     if (!url.startsWith("http")) {
         // Update store
