@@ -69,14 +69,14 @@
                 <div class="w-full text-center md:text-left">
                     <progress
                         class="progress progress-primary w-full md:h-[0.75vw]"
-                        value="75"
+                        value="0"
                         max="100"
                     ></progress>
                     <div class="mt-5 flex flex-col gap-3 leading-none md:mt-[1.5vw] md:gap-[0.5vw]">
                         <span class="font-semibold md:text-[1vw]">
                             {prettyBytes(file_array?.reduce((total, current) => total + current.size, 0))}
                         </span>
-                        <span class="text-surface-50 md:text-[1vw]">{file_array.length}</span>
+                        <span class="text-surface-50 md:text-[1vw]">{file_array.length} files</span>
                     </div>
                 </div>
             </div>
