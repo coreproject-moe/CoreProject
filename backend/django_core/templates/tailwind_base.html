@@ -54,9 +54,9 @@
 
         {% vite_asset 'js/vendor/htmx.ts' %}
         {% vite_asset 'js/vendor/hyperscript.ts' %}
-        {% vite_asset 'components/index.ts' %}
+        {% vite_asset 'main.ts' %}
 
-        <link rel='stylesheet' href='{% vite_asset_url 'css/index.postcss' %}'/>
+   
 
         {% django_htmx_script %}
         {% block head %}{% endblock %}

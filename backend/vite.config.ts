@@ -59,7 +59,7 @@ export default defineConfig({
 
                 // join(IMAGE_DIRECTORY, 'favicon', 'favicon.svg'),
                 // Components
-                join(COMPONENT_DIRECTORY, "index.ts")
+                join(STATIC_SRC, "main.ts")
             ],
             output: {
                 manualChunks: undefined,

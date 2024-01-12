@@ -15,6 +15,7 @@
         "skipLibCheck": false,
         "sourceMap": true,
         "strict": true,
+        "types": ["vite/client"],
         "paths": {
             "$stores": ["./django_core/static_src/stores"],
             "$stores/*": ["./django_core/static_src/stores/*"],
