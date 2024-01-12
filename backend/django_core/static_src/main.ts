@@ -31,7 +31,6 @@ const events = import.meta.glob("./event/**/*.ts");
 // Register
 [components, events].forEach((item) => {
     // console.log(`Registered : ${Object.keys(item).length} ${String(item)}`);
-
     Object.values(item).forEach(async (module) => {
         await module();
     });
