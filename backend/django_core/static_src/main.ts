@@ -26,7 +26,7 @@ nProgress.configure({
 const components = import.meta.glob("./components/**/*/index.ts");
 
 // Register event listeners
-const events = import.meta.glob("./event/**/*.ts");
+const events = import.meta.glob("./events/**/*.ts");
 
 // Register
 [components, events].forEach((item) => {
