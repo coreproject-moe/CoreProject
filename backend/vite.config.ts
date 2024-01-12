@@ -50,8 +50,6 @@ export default defineConfig({
         rollupOptions: {
             input: [
                 // Vendor packages
-                join(JS_DIRECTORY, "vendor", "htmx.ts"),
-                join(JS_DIRECTORY, "vendor", "hyperscript.ts"),
                 join(JS_DIRECTORY, "vendor", "easytimer.ts"),
 
                 // Tailwind.css
@@ -59,7 +57,7 @@ export default defineConfig({
 
                 // join(IMAGE_DIRECTORY, 'favicon', 'favicon.svg'),
                 // Components
-                join(COMPONENT_DIRECTORY, "index.ts")
+                join(STATIC_SRC, "main.ts")
             ],
             output: {
                 manualChunks: undefined,
