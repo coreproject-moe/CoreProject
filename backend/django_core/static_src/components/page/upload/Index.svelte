@@ -1,9 +1,18 @@
 <script lang="ts">
+    import Login from "./Login.svelte";
     import prettyBytes from "pretty-bytes";
-    let has_token = false;
-    let file_size = 0;
-    let file_array = new Array<File>();
 
+    let has_token = false;
+    let file_array = new Array<File>();
+    let tokens: { [key in "doodstream"]: string };
+
+    $: {
+        console.log(1);
+        if (tokens) {
+            console.log(2);
+            has_token = true;
+        }
+    }
     const handle_file_input = (event: Event) => {
         const target = event.target as HTMLInputElement;
         const files = target.files;
@@ -12,56 +21,17 @@
         }
 
         Array.from(files).forEach((item) => {
-            file_size += item.size;
             file_array = [...file_array, item];
         });
     };
 </script>
 
-{#if has_token}
-    <div class="h-screen w-screen md:grid md:grid-cols-[2fr_1fr] md:gap-[5vw] md:px-[5vw] md:pt-[5vw]">
-        <form class="h-full w-full">
-            <span class="text-2xl font-semibold md:text-[1.5vw] md:leading-[1.5vw]">
-                Paste your
-                <span class="text-warning-400 inline-flex">API</span>
-                token
-            </span>
-            <span class="text-surface-50 text-xl md:text-[1vw] md:leading-[2vw]">for seamless integration</span>
-
-            <div class="mt-10 flex md:mt-[5vw]">
-                <div class="flex w-full flex-col md:gap-[0.35vw]">
-                    <span class="text-xl font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Stream SB</span>
-                    <div class="flex justify-between gap-5 md:gap-[1vw]">
-                        <input
-                            name="streamsb"
-                            placeholder="StreamSB token"
-                            class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.5vw] md:rounded-[0.6vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
-                        />
-                        <button
-                            type="submit"
-                            class="btn btn-primary font-semibold leading-none md:h-[3.5vw] md:w-[9vw] md:rounded-[0.6vw] md:text-[1vw]"
-                        >
-                            <span>Continue</span>
-                            <!-- {% include "icons/chevron.html" with class="w-4 -rotate-90 md:w-[1.25vw]" %} -->
-                        </button>
-                    </div>
-                    <div class="flex items-center gap-2 md:gap-[0.5vw]">
-                        <coreproject-icon-info class="w-3 opacity-70 md:w-[1vw]"></coreproject-icon-info>
-
-                        <span class="text-surface-300 text-[0.7rem] leading-none md:text-[0.9vw]">Insert your unique API token here to unlock the full potential of Streamsb's video services</span>
-                    </div>
-                </div>
-            </div>
-        </form>
-        <div class="flex flex-col items-end justify-end">
-            <gradient class="pointer-events-none absolute [background:var(--mobile-gradient)] md:[background:var(--desktop-gradient)]"></gradient>
-
-            <img
-                src="https://github-production-user-asset-6210df.s3.amazonaws.com/114811070/281985715-a3a0f410-bf85-4d99-b736-6a386cba716d.png"
-                alt="Fish"
-            />
-        </div>
-    </div>
+{#if !has_token}
+    <Login
+        on:submit={(event) => {
+            tokens = event.detail;
+        }}
+    />
 {:else}
     <div class="flex h-screen w-screen flex-col bg-secondary p-5 md:gap-[3vw] md:px-[5vw] md:py-[3vw]">
         <div class="grid grid-cols-12 gap-7 md:gap-[5vw] md:px-[10vw]">
@@ -195,21 +165,20 @@
                     </thead>
                     <!-- spacing -->
                     <tbody>
-                        <tr>
-                            <td class="h-5 md:h-[1vw]" />
-                        </tr>
+                        <tr></tr>
                     </tbody>
                     <!-- spacing -->
-                    <tbody></tbody>
                 </table>
+                {#if file_array.length === 0}
+                    <div class="flex w-full flex-col items-center justify-center md:flex-row md:gap-[2vw]">
+                        <coreproject-icon-empty class="w-32 stroke-accent stroke-[0.15vw] md:w-[10vw] md:stroke-accent/50"></coreproject-icon-empty>
+                        <div class="flex flex-col items-center gap-2 md:items-start md:gap-[0.75vw]">
+                            <span class="text-base font-semibold leading-none text-accent md:text-[1.4vw]">Empty!</span>
+                            <span class="text-sm leading-none text-accent/50 md:text-[1.1vw]">Upload something to make kokoro-chan happy</span>
+                        </div>
+                    </div>
+                {/if}
             </div>
-            <empty-ui class="flex w-full flex-col items-center justify-center md:flex-row md:gap-[2vw]">
-                <coreproject-icon-empty class="w-32 stroke-accent stroke-[0.15vw] md:w-[10vw] md:stroke-accent/50"></coreproject-icon-empty>
-                <div class="flex flex-col items-center gap-2 md:items-start md:gap-[0.75vw]">
-                    <span class="text-base font-semibold leading-none text-accent md:text-[1.4vw]">Empty!</span>
-                    <span class="text-sm leading-none text-accent/50 md:text-[1.1vw]">Upload something to make kokoro-chan happy</span>
-                </div>
-            </empty-ui>
         </div>
     </div>
 {/if}
