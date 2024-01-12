@@ -45,19 +45,12 @@ export async function goto({ url, anchor = null, verb, target }: { url: string; 
     // Add `htmx` listener
     htmx.process(btn);
     let _anchor: HTMLElement | null = null;
+
     if (!_.isNull(anchor)) {
         _anchor = anchor as HTMLElement;
     } else {
         _anchor = document.body as HTMLElement;
     }
-
-    _anchor.addEventListener("htmx:afterSwap", async (event: any) => {
-        // Ignore path if it has http in name
-        if (!url.startsWith("http") && event.detail.xhr.status === 200) {
-            // Update store
-            url_store.set(url);
-        }
-    });
 
     try {
         _anchor?.appendChild(btn);
