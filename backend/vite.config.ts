@@ -50,8 +50,6 @@ export default defineConfig({
         rollupOptions: {
             input: [
                 // Vendor packages
-                join(JS_DIRECTORY, "vendor", "htmx.ts"),
-                join(JS_DIRECTORY, "vendor", "hyperscript.ts"),
                 join(JS_DIRECTORY, "vendor", "easytimer.ts"),
 
                 // Tailwind.css
