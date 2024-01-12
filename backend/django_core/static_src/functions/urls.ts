@@ -32,11 +32,6 @@ export function reverse(view: string, ...args: Array<string | number>) {
 }
 
 export async function goto({ url, anchor = null, verb, target }: { url: string; anchor?: HTMLElement | null; verb: "GET" | "POST" | "DELETE" | "PUT"; target: string }): Promise<void> {
-    // Ignore path if it has http in name
-    if (!url.startsWith("http")) {
-        // Update store
-        url_store.set(url);
-    }
     // WHAT KIND OF FUCKERY IS THIS
     // FUCK HTMX
     // related : https://github.com/bigskysoftware/htmx/discussions/2116
@@ -55,6 +50,15 @@ export async function goto({ url, anchor = null, verb, target }: { url: string; 
     } else {
         _anchor = document.body as HTMLElement;
     }
+
+    _anchor.addEventListener("htmx:afterSwap", async (event: any) => {
+        // Ignore path if it has http in name
+        if (!url.startsWith("http") && event.detail.xhr.status === 200) {
+            // Update store
+            url_store.set(url);
+        }
+    });
+
     try {
         _anchor?.appendChild(btn);
         btn.click();
