@@ -1,15 +1,19 @@
 <script lang="ts">
+    import Upload from "$icons/Upload/Index.svelte";
+    import Search from "$icons/Search/Index.svelte";
+    import Cross from "$icons/Cross/Index.svelte";
     import Login from "./Login.svelte";
+    import Edit from "$icons/Edit/Index.svelte";
     import prettyBytes from "pretty-bytes";
 
-    let has_token = false;
+    let has_token = true;
     let file_array = new Array<File>();
+    let table_file_array = new Array<File>();
+
     let tokens: { [key in "doodstream"]: string };
 
     $: {
-        console.log(1);
         if (tokens) {
-            console.log(2);
             has_token = true;
         }
     }
@@ -58,7 +62,7 @@
                     class="absolute bottom-0 left-0 right-0 top-0 z-10 w-full cursor-pointer opacity-0"
                     on:input|preventDefault={handle_file_input}
                 />
-                <coreproject-icon-upload class="text-white md:w-[2vw]"></coreproject-icon-upload>
+                <Upload class="text-white md:w-[2vw]" />
                 <span class="font-semibold md:mt-[1vw] md:text-[1.1vw]">Drag and Drop files</span>
                 <div class="divider m-0 before:bg-accent/25 after:bg-accent/25 md:px-[10vw] md:text-[0.9vw] md:before:h-[0.15vw] md:after:h-[0.15vw]">Or</div>
                 <span class="font-semibold md:text-[1.1vw]">Browse</span>
@@ -73,7 +77,7 @@
                             class="absolute left-2 p-0 md:left-[1vw]"
                             aria-label="Search"
                         >
-                            <coreproject-icon-search class="opacity-75 md:w-[1.25vw]"></coreproject-icon-search>
+                            <Search class="opacity-75 md:w-[1.25vw]" />
                         </button>
                         <input
                             type="text"
@@ -82,19 +86,19 @@
                         />
                     </form>
                     <button class="text-surface-50 btn flex min-h-full gap-2 !bg-transparent p-0 capitalize leading-none md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]">
-                        <coreproject-icon-cross class="w-4 rotate-45 md:w-[1vw]"></coreproject-icon-cross>
+                        <Cross class="w-4 rotate-45 md:w-[1vw]" />
                         New folder
                     </button>
                 </div>
 
                 <div class="mt-5 flex justify-between md:mt-0 md:justify-start md:gap-[3vw]">
                     <button class="text-surface-50 btn flex min-h-full gap-3 !bg-transparent p-0 text-base font-semibold capitalize leading-none md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]">
-                        <coreproject-icon-edit class="w-4 md:w-[1vw]"></coreproject-icon-edit>
+                        <Edit class="w-4 md:w-[1vw]" />
 
                         <span>Rename</span>
                     </button>
                     <button class="text-surface-50 btn flex min-h-full gap-3 !bg-transparent p-0 text-base font-semibold capitalize leading-none md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]">
-                        <coreproject-icon-edit class="w-4 md:w-[1vw]"></coreproject-icon-edit>
+                        <Edit class="w-4 md:w-[1vw]"></Edit>
                         <span>Edit Details</span>
                     </button>
                     <button class="text-surface-50 btn flex min-h-full gap-3 !bg-transparent p-0 text-base font-semibold capitalize leading-none md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]">
@@ -163,11 +167,14 @@
                             </th>
                         </tr>
                     </thead>
-                    <!-- spacing -->
                     <tbody>
-                        <tr></tr>
+                        <tr>
+                            {#each table_file_array as item}
+                            
+                            
+                            {/each}
+                        </tr>
                     </tbody>
-                    <!-- spacing -->
                 </table>
                 {#if file_array.length === 0}
                     <div class="flex w-full flex-col items-center justify-center md:flex-row md:gap-[2vw]">
