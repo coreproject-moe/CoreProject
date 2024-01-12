@@ -5,7 +5,7 @@ export const url = writable(window.location.pathname);
 // Hacky way
 
 document.addEventListener("htmx:afterSwap", (event: any) => {
-    const _url = new URL(event.detail.xhr.responseURL);
+    const _url = new URL(event.detail.xhr.responseURL as string);
     // Ignore path if it has http in name
     if (_url.origin == window.location.origin) {
         // Update store
