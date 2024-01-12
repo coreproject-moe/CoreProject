@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { FormatDate } from "$functions/format_date";
     import Upload from "$icons/Upload/Index.svelte";
     import Search from "$icons/Search/Index.svelte";
     import Cross from "$icons/Cross/Index.svelte";
@@ -9,7 +10,7 @@
     let has_token = true;
     let file_array = new Array<File>();
     let table_file_array = new Array<File>();
-
+    let upload_state: "null" | "selecting" | "uploading" = "null";
     let tokens: { [key in "doodstream"]: string };
 
     $: {
@@ -17,6 +18,7 @@
             has_token = true;
         }
     }
+    $: table_file_array = file_array;
     const handle_file_input = (event: Event) => {
         const target = event.target as HTMLInputElement;
         const files = target.files;
@@ -41,11 +43,20 @@
         <div class="grid grid-cols-12 gap-7 md:gap-[5vw] md:px-[10vw]">
             <div class="col-span-12 mt-20 flex items-end md:col-span-7 md:pb-[1.5vw]">
                 <div class="w-full text-center md:text-left">
-                    <progress
-                        class="progress progress-primary w-full md:h-[0.75vw]"
-                        value="0"
-                        max="100"
-                    ></progress>
+                    {#if upload_state === "selecting"}
+                        <progress class="progress progress-primary w-full md:h-[0.75vw]" />
+                    {:else if upload_state === "null"}
+                        <progress
+                            class="progress progress-primary w-full md:h-[0.75vw]"
+                            value="0"
+                        />
+                    {:else if upload_state === "uploading"}
+                        <progress
+                            class="progress progress-primary w-full md:h-[0.75vw]"
+                            value="0"
+                            max="100"
+                        />
+                    {/if}
                     <div class="mt-5 flex flex-col gap-3 leading-none md:mt-[1.5vw] md:gap-[0.5vw]">
                         <span class="font-semibold md:text-[1vw]">
                             {prettyBytes(file_array?.reduce((total, current) => total + current.size, 0))}
@@ -85,10 +96,19 @@
                             class="placeholder:text-surface-50 h-full w-56 rounded-lg border-none bg-neutral pl-12 text-base leading-none text-white shadow-lg !ring-0 placeholder:font-medium md:w-full md:rounded-[0.5vw] md:py-[0.75vw] md:pl-[3vw] md:text-[1.1vw]"
                         />
                     </form>
-                    <button class="text-surface-50 btn flex min-h-full gap-2 !bg-transparent p-0 capitalize leading-none md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]">
-                        <Cross class="w-4 rotate-45 md:w-[1vw]" />
-                        New folder
-                    </button>
+                    <div class="relative flex items-center">
+                        <button
+                            class="absolute left-2 p-0 md:left-[1vw]"
+                            aria-label="Search"
+                        >
+                            <!-- <Search class="opacity-75 md:w-[1.25vw]" /> -->
+                        </button>
+                        <input
+                            type="text"
+                            placeholder="Folder Name"
+                            class="placeholder:text-surface-50 h-full w-56 rounded-lg border-none bg-neutral pl-12 text-base leading-none text-white shadow-lg !ring-0 placeholder:font-medium md:w-full md:rounded-[0.5vw] md:py-[0.75vw] md:pl-[3vw] md:text-[1.1vw]"
+                        />
+                    </div>
                 </div>
 
                 <div class="mt-5 flex justify-between md:mt-0 md:justify-start md:gap-[3vw]">
@@ -134,17 +154,6 @@
                             </th>
                             <th>
                                 <div class="flex items-center md:gap-[0.5vw]">
-                                    <span class="capitalize">type</span>
-                                    <button class="btn min-h-full !bg-transparent p-0">
-                                        <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
-                                    </button>
-                                    <button class="btn min-h-full !bg-transparent p-0">
-                                        <coreproject-icon-chevron class="rotate-180 opacity-50 md:w-[1vw]"></coreproject-icon-chevron>
-                                    </button>
-                                </div>
-                            </th>
-                            <th>
-                                <div class="flex items-center md:gap-[0.5vw]">
                                     <span class="capitalize">date modified</span>
                                     <button class="btn min-h-full !bg-transparent p-0">
                                         <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
@@ -168,12 +177,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            {#each table_file_array as item}
-                            
-                            
-                            {/each}
-                        </tr>
+                        {#each table_file_array as item}
+                            <tr>
+                                <td></td>
+                                <td>{item.name}</td>
+                                <td>{new FormatDate(new Date(item.lastModified).toISOString()).format_to_human_readable_form}</td>
+                                <td>{prettyBytes(item.size)}</td>
+                            </tr>
+                        {/each}
                     </tbody>
                 </table>
                 {#if file_array.length === 0}
