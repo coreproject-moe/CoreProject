@@ -23,9 +23,9 @@ nProgress.configure({
 });
 
 // Register web components
-const components = import.meta.glob("./components/**/*/index.ts");
+const components = import.meta.glob("./components/**/*/index.ts", { eager: true });
 console.log(`Registered : ${Object.keys(components).length} web-components`);
 
 // Register event listeners
-const events = import.meta.glob("./event/**/*.ts");
+const events = import.meta.glob("./event/**/*.ts", { eager: true });
 console.log(`Registered : ${Object.keys(events).length} events`);
