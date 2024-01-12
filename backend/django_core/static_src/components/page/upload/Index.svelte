@@ -3,7 +3,7 @@
 </script>
 
 {#if has_token}
-    <login-container class="h-screen w-screen md:grid md:grid-cols-[2fr_1fr] md:gap-[5vw] md:px-[5vw] md:pt-[5vw]">
+    <div class="h-screen w-screen md:grid md:grid-cols-[2fr_1fr] md:gap-[5vw] md:px-[5vw] md:pt-[5vw]">
         <form class="h-full w-full">
             <span class="text-2xl font-semibold md:text-[1.5vw] md:leading-[1.5vw]">
                 Paste your
@@ -12,10 +12,10 @@
             </span>
             <span class="text-surface-50 text-xl md:text-[1vw] md:leading-[2vw]">for seamless integration</span>
 
-            <providers class="mt-10 flex md:mt-[5vw]">
-                <streamsb class="flex w-full flex-col md:gap-[0.35vw]">
+            <div class="mt-10 flex md:mt-[5vw]">
+                <div class="flex w-full flex-col md:gap-[0.35vw]">
                     <span class="text-xl font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Stream SB</span>
-                    <token-input class="flex justify-between gap-5 md:gap-[1vw]">
+                    <div class="flex justify-between gap-5 md:gap-[1vw]">
                         <input
                             name="streamsb"
                             placeholder="StreamSB token"
@@ -28,47 +28,47 @@
                             <span>Continue</span>
                             <!-- {% include "icons/chevron.html" with class="w-4 -rotate-90 md:w-[1.25vw]" %} -->
                         </button>
-                    </token-input>
-                    <info class="flex items-center gap-2 md:gap-[0.5vw]">
+                    </div>
+                    <div class="flex items-center gap-2 md:gap-[0.5vw]">
                         <coreproject-icon-info class="w-3 opacity-70 md:w-[1vw]"></coreproject-icon-info>
 
                         <span class="text-surface-300 text-[0.7rem] leading-none md:text-[0.9vw]">Insert your unique API token here to unlock the full potential of Streamsb's video services</span>
-                    </info>
-                </streamsb>
-            </providers>
+                    </div>
+                </div>
+            </div>
         </form>
-        <character-image class="flex flex-col items-end justify-end">
+        <div class="flex flex-col items-end justify-end">
             <gradient class="pointer-events-none absolute [background:var(--mobile-gradient)] md:[background:var(--desktop-gradient)]"></gradient>
 
             <img
                 src="https://github-production-user-asset-6210df.s3.amazonaws.com/114811070/281985715-a3a0f410-bf85-4d99-b736-6a386cba716d.png"
                 alt="Fish"
             />
-        </character-image>
-    </login-container>
+        </div>
+    </div>
 {:else}
     <div class="flex h-screen w-screen flex-col bg-secondary p-5 md:gap-[3vw] md:px-[5vw] md:py-[3vw]">
-        <upload-area class="grid grid-cols-12 gap-7 md:gap-[5vw] md:px-[10vw]">
-            <upload-progress class="col-span-12 mt-20 flex items-end md:col-span-7 md:pb-[1.5vw]">
+        <div class="grid grid-cols-12 gap-7 md:gap-[5vw] md:px-[10vw]">
+            <div class="col-span-12 mt-20 flex items-end md:col-span-7 md:pb-[1.5vw]">
                 <div class="w-full text-center md:text-left">
                     <progress
                         class="progress progress-primary w-full md:h-[0.75vw]"
                         value="75"
                         max="100"
                     ></progress>
-                    <progress-info class="mt-5 flex flex-col gap-3 leading-none md:mt-[1.5vw] md:gap-[0.5vw]">
+                    <div class="mt-5 flex flex-col gap-3 leading-none md:mt-[1.5vw] md:gap-[0.5vw]">
                         <span class="font-semibold md:text-[1vw]">300.69B</span>
                         <span class="text-surface-50 md:text-[1vw]">7 files</span>
-                    </progress-info>
+                    </div>
                 </div>
-            </upload-progress>
-            <upload-input class="col-span-12 flex cursor-pointer flex-col items-center justify-center bg-neutral md:col-span-5 md:h-[12vw] md:gap-[0.25vw] md:rounded-[0.75vw]">
+            </div>
+            <div class="col-span-12 flex cursor-pointer flex-col items-center justify-center bg-neutral md:col-span-5 md:h-[12vw] md:gap-[0.25vw] md:rounded-[0.75vw]">
                 <coreproject-icon-upload class="text-white md:w-[2vw]"></coreproject-icon-upload>
                 <span class="font-semibold md:mt-[1vw] md:text-[1.1vw]">Drag and Drop files</span>
                 <div class="divider m-0 before:bg-accent/25 after:bg-accent/25 md:px-[10vw] md:text-[0.9vw] md:before:h-[0.15vw] md:after:h-[0.15vw]">Or</div>
                 <span class="font-semibold md:text-[1.1vw]">Browse</span>
-            </upload-input>
-        </upload-area>
+            </div>
+        </div>
         <div class="divider md:m-0 md:before:h-[0.2vw] md:after:h-[0.2vw]"></div>
         <uploads>
             <uploads-options class="flex flex-col justify-between md:flex-row">
