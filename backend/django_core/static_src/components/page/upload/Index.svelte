@@ -20,6 +20,7 @@
         }
     }
     $: table_file_array = file_array;
+    
     const handle_file_input = (event: Event) => {
         const target = event.target as HTMLInputElement;
         const files = target.files;
