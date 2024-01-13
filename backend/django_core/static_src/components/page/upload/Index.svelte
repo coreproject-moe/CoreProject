@@ -9,8 +9,6 @@
     import Dropzone from "svelte-file-dropzone/Dropzone.svelte";
 
     let has_token = false;
-    let file_array = new Array<File>();
-    let table_file_array = new Array<File>();
     let upload_state: "null" | "selecting" | "uploading" = "null";
     let tokens: { [key in "doodstream"]: string };
 
@@ -19,21 +17,6 @@
             has_token = true;
         }
     }
-    $: table_file_array = file_array;
-
-    const handle_file_input = (event: Event) => {
-        const target = event.target as HTMLInputElement;
-        const files = target.files;
-        if (!files) {
-            return;
-        }
-
-        Array.from(files).forEach((item) => {
-            file_array = [...file_array, item];
-        });
-
-        upload_file_to_doodstream({ api_key: tokens.doodstream, file: file_array[0] });
-    };
 
     let files: {
         accepted: any[],
@@ -43,8 +26,10 @@
         rejected: []
     };
 
-    function handleFilesSelect(e: CustomEvent) {
+    function handle_select_files(e: CustomEvent) {
         const { acceptedFiles, fileRejections } = e.detail;
+        if (!acceptedFiles) return;
+
         files.accepted = [...files.accepted, ...acceptedFiles];
         files.rejected = [...files.rejected, ...fileRejections];
     }
@@ -77,9 +62,9 @@
                     {/if}
                     <div class="mt-5 flex flex-col gap-3 leading-none md:mt-[1.5vw] md:gap-[0.5vw]">
                         <span class="font-semibold md:text-[1vw]">
-                            {prettyBytes(file_array?.reduce((total, current) => total + current.size, 0))}
+                            {prettyBytes(files.accepted?.reduce((total, current) => total + current.size, 0))}
                         </span>
-                        <span class="text-surface-50 md:text-[1vw]">{file_array.length} files</span>
+                        <span class="text-surface-50 md:text-[1vw]">{files.accepted.length} files</span>
                     </div>
                 </div>
             </div>
@@ -88,7 +73,7 @@
             <Dropzone
                 containerClasses="relative col-span-12 flex cursor-pointer flex-col items-center justify-center bg-neutral md:col-span-5 md:h-[12vw] md:gap-[0.25vw] md:rounded-[0.75vw]"
                 disableDefaultStyles={true}
-                on:drop={handleFilesSelect}
+                on:drop={handle_select_files}
             >
                 <Upload class="text-white md:w-[2vw]" />
                 <span class="font-semibold md:mt-[1vw] md:text-[1.1vw]">Drag and Drop files</span>
@@ -194,7 +179,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {#each table_file_array as item}
+                        {#each files.accepted as item}
                             <tr class="md:text-[1vw]">
                                 <td>
                                     <input
@@ -209,7 +194,7 @@
                         {/each}
                     </tbody>
                 </table>
-                {#if file_array.length === 0}
+                {#if files.accepted.length === 0}
                     <div class="flex w-full flex-col items-center justify-center md:flex-row md:gap-[2vw]">
                         <coreproject-icon-empty class="w-32 stroke-accent stroke-[0.15vw] md:w-[10vw] md:stroke-accent/50"></coreproject-icon-empty>
                         <div class="flex flex-col items-center gap-2 md:items-start md:gap-[0.75vw]">
