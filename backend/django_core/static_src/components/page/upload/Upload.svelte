@@ -112,7 +112,7 @@
         checkboxes = Array(files.length).fill(false);
         main_checkbox.indeterminate = false;
         main_checkbox.checked = false;
-    };
+    }
 </script>
 
 <svelte:window
