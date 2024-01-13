@@ -2,11 +2,11 @@
     import { FormatDate } from "$functions/format_date";
     import Upload from "$icons/Upload/Index.svelte";
     import Search from "$icons/Search/Index.svelte";
-    import Cross from "$icons/Cross/Index.svelte";
     import Login from "./Login.svelte";
     import Edit from "$icons/Edit/Index.svelte";
     import prettyBytes from "pretty-bytes";
     import { upload_file_to_doodstream } from "./functions/doodsteam_upload";
+    import Dropzone from "svelte-file-dropzone/Dropzone.svelte";
 
     let has_token = false;
     let file_array = new Array<File>();
@@ -34,6 +34,20 @@
 
         upload_file_to_doodstream({ api_key: tokens.doodstream, file: file_array[0] });
     };
+
+    let files: {
+        accepted: any[],
+        rejected: any[]
+    } = {
+        accepted: [],
+        rejected: []
+    };
+
+    function handleFilesSelect(e: CustomEvent) {
+        const { acceptedFiles, fileRejections } = e.detail;
+        files.accepted = [...files.accepted, ...acceptedFiles];
+        files.rejected = [...files.rejected, ...fileRejections];
+    }
 </script>
 
 {#if has_token}
@@ -70,18 +84,17 @@
                 </div>
             </div>
 
-            <div class="relative col-span-12 flex cursor-pointer flex-col items-center justify-center bg-neutral md:col-span-5 md:h-[12vw] md:gap-[0.25vw] md:rounded-[0.75vw]">
-                <input
-                    type="file"
-                    multiple={true}
-                    class="absolute bottom-0 left-0 right-0 top-0 z-10 w-full cursor-pointer opacity-0"
-                    on:input|preventDefault={handle_file_input}
-                />
+            <!-- add more props: https://github.com/thecodejack/svelte-file-dropzone#props -->
+            <Dropzone
+                containerClasses="relative col-span-12 flex cursor-pointer flex-col items-center justify-center bg-neutral md:col-span-5 md:h-[12vw] md:gap-[0.25vw] md:rounded-[0.75vw]"
+                disableDefaultStyles={true}
+                on:drop={handleFilesSelect}
+            >
                 <Upload class="text-white md:w-[2vw]" />
                 <span class="font-semibold md:mt-[1vw] md:text-[1.1vw]">Drag and Drop files</span>
                 <div class="divider m-0 before:bg-accent/25 after:bg-accent/25 md:px-[10vw] md:text-[0.9vw] md:before:h-[0.15vw] md:after:h-[0.15vw]">Or</div>
                 <span class="font-semibold md:text-[1.1vw]">Browse</span>
-            </div>
+            </Dropzone>
         </div>
         <div class="divider md:m-0 md:before:h-[0.2vw] md:after:h-[0.2vw]"></div>
         <div>
