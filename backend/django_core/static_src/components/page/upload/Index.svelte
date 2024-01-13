@@ -28,12 +28,14 @@
     };
 
     function handle_select_files(e: CustomEvent) {
-        const { acceptedFiles, fileRejections } = e.detail;
+        const { acceptedFiles } = e.detail;
         if (!acceptedFiles) return;
-
-        files.accepted = _.uniqBy([...files.accepted, ...acceptedFiles], "name");
-        files.rejected = _.uniqBy([...files.rejected, ...fileRejections], "name");
+        handle_files(acceptedFiles);
     }
+
+    function handle_files(new_files: File[]) {
+        files.accepted = _.uniqBy([...files.accepted, ...new_files], "name");
+    };
 </script>
 
 {#if has_token}
