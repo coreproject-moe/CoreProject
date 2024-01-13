@@ -6,10 +6,18 @@
     import prettyBytes from "pretty-bytes";
     import Dropzone from "svelte-file-dropzone/Dropzone.svelte";
     import * as _ from "lodash-es";
+    import { blur } from "svelte/transition";
 
-    let upload_state: "null" | "selecting" | "uploading" = "null";
+    let upload_state: "null" | "selecting" | "uploading" = "null",
+        show_dropzone = false,
+        dropzone_active = false;
 
     let files: File[] = [];
+    // A key-value pair that includes mimetype and extension
+    const file_whitelist = {
+        "video/mp4": ".mp4",
+        "video/x-matroska": ".mkv"
+    };
 
     function handle_select_files(e: CustomEvent) {
         const { acceptedFiles } = e.detail;
@@ -20,7 +28,90 @@
     function handle_files(new_files: File[]) {
         files = _.uniqBy([...files, ...new_files], "name");
     };
+
+    // file drag and drop
+    function on_drop_handler(event: DragEvent): void {
+        show_dropzone = false;
+        dropzone_active = false;
+
+        const event_files = event.dataTransfer?.items as unknown as DataTransferItemList;
+        const file_list_names = files.map((file) => {
+            return file.name;
+        });
+
+        Array.from(event_files).forEach(async (item) => {
+            const entry = item.webkitGetAsEntry();
+
+            if (entry?.isDirectory) {
+                scan_directory(entry as FileSystemDirectoryEntry);
+            } else if (entry?.isFile) {
+                const file_entry = entry as FileSystemFileEntry;
+                file_entry.file((file) => {
+                    if (Object.keys(file_whitelist).includes(file.type)) {
+                        if (!file_list_names.includes(file.name)) {
+                            files = files.concat(file);
+                        }
+                    }
+                });
+            }
+        });
+    };
+
+    async function scan_directory(item: FileSystemDirectoryEntry) {
+        let directory_reader = item.createReader();
+        const file_list_names = files.map((file) => {
+            return file.name;
+        });
+
+        directory_reader.readEntries((entries) => {
+            entries.forEach(async (entry) => {
+                if (entry.isFile) {
+                    const item = entry as FileSystemFileEntry;
+                    item.file(async (file) => {
+                        const file_type = file.name.split(".")[1];
+
+                        if (Object.values(file_whitelist).includes(`.${file_type}`)) {
+                            if (!file_list_names.includes(file.name)) {
+                                files = files.concat(file);
+                            }
+                        }
+                    });
+                } else if (entry.isDirectory) {
+                    await scan_directory(entry as FileSystemDirectoryEntry);
+                }
+            });
+        });
+    }
 </script>
+
+<svelte:window
+    on:dragover|preventDefault={() => (show_dropzone = true)}
+    on:dragleave|preventDefault={() => (show_dropzone = false)}
+    on:drop|preventDefault={() => (show_dropzone = false)}
+/>
+
+{#if show_dropzone}
+    <div
+        transition:blur|local={{ duration: 200 }}
+        class="absolute inset-0 z-50 flex items-center justify-center bg-secondary/80"
+    >
+        <div class="rounded-[1vw] bg-neutral p-[1.25vw]">
+            <div
+                role="button"
+                tabindex="0"
+                on:dragover|preventDefault={() => (dropzone_active = true)}
+                on:drop|preventDefault={on_drop_handler}
+                on:dragleave|preventDefault={() => (dropzone_active = false)}
+                class="flex w-[50vw] flex-col place-items-center gap-[0.75vw] rounded-[1vw] border-[0.2vw] border-dashed border-white/50 bg-neutral py-[4vw] transition duration-300 ease-in-out"
+                class:bg-base-200={dropzone_active}
+            >
+                <Upload class="mb-[1.5vw] w-[5vw]" />
+                <span class="text-[1.25vw] font-semibold leading-none">Drop your files here to upload</span>
+                <span class="text-[1vw] leading-none text-surface-50">Allowed formats: mp4, mkv</span>
+            </div>
+        </div>
+    </div>
+{/if}
 
 <div class="flex h-screen w-screen flex-col bg-secondary p-5 md:gap-[2vw] md:px-[5vw] md:py-[3vw]">
     <div class="grid grid-cols-12 gap-7 md:gap-[5vw] md:px-[10vw]">
