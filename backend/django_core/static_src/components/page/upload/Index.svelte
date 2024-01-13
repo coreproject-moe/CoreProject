@@ -20,7 +20,7 @@
         }
     }
     $: table_file_array = file_array;
-    
+
     const handle_file_input = (event: Event) => {
         const target = event.target as HTMLInputElement;
         const files = target.files;
@@ -36,27 +36,27 @@
     };
 </script>
 
-{#if !has_token}
+{#if has_token}
     <Login
         on:submit={(event) => {
             tokens = event.detail;
         }}
     />
 {:else}
-    <div class="flex h-screen w-screen flex-col bg-secondary p-5 md:gap-[3vw] md:px-[5vw] md:py-[3vw]">
+    <div class="flex h-screen w-screen flex-col bg-secondary p-5 md:gap-[2vw] md:px-[5vw] md:py-[3vw]">
         <div class="grid grid-cols-12 gap-7 md:gap-[5vw] md:px-[10vw]">
             <div class="col-span-12 mt-20 flex items-end md:col-span-7 md:pb-[1.5vw]">
                 <div class="w-full text-center md:text-left">
                     {#if upload_state === "selecting"}
-                        <progress class="progress progress-primary w-full md:h-[0.75vw]" />
+                        <progress class="progress progress-primary w-full md:h-[1vw] md:rounded-[0.25vw]" />
                     {:else if upload_state === "null"}
                         <progress
-                            class="progress progress-primary w-full md:h-[0.75vw]"
+                            class="progress progress-primary w-full md:h-[1vw] md:rounded-[0.25vw]"
                             value="0"
                         />
                     {:else if upload_state === "uploading"}
                         <progress
-                            class="progress progress-primary w-full md:h-[0.75vw]"
+                            class="progress progress-primary w-full md:h-[1vw] md:rounded-[0.25vw]"
                             value="0"
                             max="100"
                         />
@@ -86,7 +86,7 @@
         <div class="divider md:m-0 md:before:h-[0.2vw] md:after:h-[0.2vw]"></div>
         <div>
             <div class="flex flex-col justify-between md:flex-row">
-                <div class="flex items-center justify-between md:justify-start md:gap-[3vw]">
+                <div class="flex items-center justify-between md:justify-start md:gap-[1vw]">
                     <form class="relative flex items-center">
                         <button
                             class="absolute left-2 p-0 md:left-[1vw]"
@@ -105,12 +105,12 @@
                             class="absolute left-2 p-0 md:left-[1vw]"
                             aria-label="Search"
                         >
-                            <Cross class="opacity-75 md:w-[1.25vw]" />
+                            <Search class="opacity-75 md:w-[1.25vw]" />
                         </button>
                         <input
                             type="text"
                             placeholder="Folder Name"
-                            class="placeholder:text-surface-50 h-full w-56 rounded-lg border-none bg-neutral pl-12 text-base leading-none text-white shadow-lg !ring-0 placeholder:font-medium md:w-full md:rounded-[0.5vw] md:py-[0.75vw] md:pl-[3vw] md:text-[1.1vw]"
+                            class="placeholder:text-surface-50 h-full w-56 rounded-lg border-none bg-neutral/50 pl-12 text-base leading-none text-white shadow-lg !ring-0 placeholder:font-medium md:w-full md:rounded-[0.5vw] md:py-[0.75vw] md:pl-[3vw] md:text-[1.1vw]"
                         />
                     </div>
                 </div>
@@ -136,7 +136,7 @@
                 hidden
                 class="mt-10 block md:mt-[3vw]"
             >
-                <table class="text-surface-50 w-full border-separate border-spacing-y-2 leading-none md:border-spacing-y-[0.25vw]">
+                <table class="text-surface-50 w-full border-separate border-spacing-y-2 leading-none md:border-spacing-y-[0.5vw]">
                     <thead>
                         <tr class="text-left md:text-[1vw]">
                             <th>
@@ -182,8 +182,13 @@
                     </thead>
                     <tbody>
                         {#each table_file_array as item}
-                            <tr>
-                                <td></td>
+                            <tr class="md:text-[1vw]">
+                                <td>
+                                    <input
+                                        type="checkbox"
+                                        class="cursor-pointer rounded border-2 bg-transparent focus:ring-0 focus:ring-offset-0 md:h-[1.25vw] md:w-[1.25vw] md:border-[0.2vw]"
+                                    />
+                                </td>
                                 <td>{item.name}</td>
                                 <td>{new FormatDate(new Date(item.lastModified).toISOString()).format_to_human_readable_form}</td>
                                 <td>{prettyBytes(item.size)}</td>
