@@ -13,37 +13,36 @@
         show_dropzone = false,
         dropzone_active = false;
 
-    let files: File[] = [];
+    let files: File[] = [],
+        selected_files: File[] = [];
     // A key-value pair that includes mimetype and extension
     const file_whitelist = {
         "video/mp4": ".mp4",
         "video/x-matroska": ".mkv"
     };
 
-    let main_checkbox: HTMLInputElement,
-        checkbox_elements: Array<HTMLInputElement> = new Array<HTMLInputElement>();
+    let main_checkbox: HTMLInputElement;
+    let checkboxes = Array(files.length).fill(false);
 
     function handle_main_checkbox_change(event: Event) {
         const target = event.target as HTMLInputElement;
 
         if (target.checked) {
-            checkbox_elements.forEach((element) => {
-                element.checked = true;
-            });
+            checkboxes = Array(files.length).fill(true);
+            selected_files = files;
         } else {
-            checkbox_elements.forEach((element) => {
-                element.checked = false;
-            });
+            checkboxes = Array(files.length).fill(false);
+            selected_files = [];
         }
     }
 
     function handle_sub_checkbox_change(): void {
-        const truthy_checkbox_array = checkbox_elements.filter((item) => item.checked);
+        const checks = checkboxes.filter((checked) => checked);
 
-        if (truthy_checkbox_array.length === files.length) {
+        if (checks.length === files.length) {
             main_checkbox.indeterminate = false;
             main_checkbox.checked = true;
-        } else if (truthy_checkbox_array.length !== 0) {
+        } else if (checks.length !== 0) {
             main_checkbox.indeterminate = true;
             main_checkbox.checked = false;
         } else {
@@ -108,13 +107,12 @@
     }
 
     function handle_delete() {
-        const active_files_indexes = checkbox_elements.filter((item) => item.checked).map((item) => checkbox_elements.indexOf(item));
-        files = files.filter((file, index) => !active_files_indexes.includes(index));
-        // uncheck all checkboxes
+        files = files.filter((file) => !selected_files.includes(file));
+        // uncheck
+        checkboxes = Array(files.length).fill(false);
         main_checkbox.indeterminate = false;
         main_checkbox.checked = false;
-        checkbox_elements.forEach((item) => (item.checked = false));
-    }
+    };
 </script>
 
 <svelte:window
@@ -303,7 +301,9 @@
                     <tr class="md:text-[1vw]">
                         <td>
                             <input
-                                bind:this={checkbox_elements[index]}
+                                bind:checked={checkboxes[index]}
+                                bind:group={selected_files}
+                                value={file}
                                 on:change={handle_sub_checkbox_change}
                                 type="checkbox"
                                 class="cursor-pointer rounded border-2 bg-transparent focus:ring-0 focus:ring-offset-0 md:h-[1.25vw] md:w-[1.25vw] md:border-[0.2vw]"
