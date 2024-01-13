@@ -16,6 +16,7 @@
         dropzone_active = false;
 
     let files: File[] = [];
+
     // A key-value pair that includes mimetype and extension
     const file_whitelist = {
         "video/mp4": ".mp4",
@@ -58,6 +59,7 @@
         const { acceptedFiles } = e.detail;
         if (!acceptedFiles) return;
         update_files(acceptedFiles);
+        upload_state = "selecting";
     }
 
     function update_files(new_files: File[]) {
@@ -118,7 +120,11 @@
         checkbox_elements.forEach((item) => (item.checked = false));
     }
 
-    const table_head_mapping = [{ name: "name" }, { name: "date modified" }];
+    const table_head_mapping = [
+        { name: "name", left_button_click: () => {}, right_button_click: () => {} },
+        { name: "date modified", left_button_click: () => {}, right_button_click: () => {} },
+        { name: "size", left_button_click: () => {}, right_button_click: () => {} }
+    ];
 </script>
 
 <svelte:window
@@ -271,10 +277,16 @@
                         <th>
                             <div class="flex items-center md:gap-[0.5vw]">
                                 <span class="capitalize">{item.name}</span>
-                                <button class="btn min-h-full !bg-transparent p-0">
+                                <button
+                                    on:click|preventDefault={item.left_button_click}
+                                    class="btn min-h-full !bg-transparent p-0"
+                                >
                                     <Chevron class="w-[1vw]"></Chevron>
                                 </button>
-                                <button class="btn min-h-full !bg-transparent p-0">
+                                <button
+                                    on:click|preventDefault={item.left_button_click}
+                                    class="btn min-h-full !bg-transparent p-0"
+                                >
                                     <Chevron class="rotate-180 opacity-50 md:w-[1vw]"></Chevron>
                                 </button>
                             </div>
