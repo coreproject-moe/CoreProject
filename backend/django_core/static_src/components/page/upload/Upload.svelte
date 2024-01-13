@@ -4,16 +4,19 @@
     import Search from "$icons/Search/Index.svelte";
     import Edit from "$icons/Edit/Index.svelte";
     import prettyBytes from "pretty-bytes";
+    // @ts-expect-errorF
     import Dropzone from "svelte-file-dropzone/Dropzone.svelte";
     import * as _ from "lodash-es";
     import { blur } from "svelte/transition";
     import Delete from "$icons/Delete/Index.svelte";
+    import Chevron from "$icons/Chevron/Index.svelte";
 
     let upload_state: "null" | "selecting" | "uploading" = "null",
         show_dropzone = false,
         dropzone_active = false;
 
     let files: File[] = [];
+
     // A key-value pair that includes mimetype and extension
     const file_whitelist = {
         "video/mp4": ".mp4",
@@ -35,7 +38,7 @@
                 element.checked = false;
             });
         }
-    };
+    }
 
     function handle_sub_checkbox_change(): void {
         const truthy_checkbox_array = checkbox_elements.filter((item) => item.checked);
@@ -56,11 +59,12 @@
         const { acceptedFiles } = e.detail;
         if (!acceptedFiles) return;
         update_files(acceptedFiles);
+        upload_state = "selecting";
     }
 
     function update_files(new_files: File[]) {
         files = _.uniqBy([...files, ...new_files], "name");
-    };
+    }
 
     // file drag and drop
     function on_drop_handler(event: DragEvent): void {
@@ -83,7 +87,7 @@
                 });
             }
         });
-    };
+    }
 
     async function scan_directory(item: FileSystemDirectoryEntry) {
         let directory_reader = item.createReader();
@@ -105,18 +109,22 @@
                 }
             });
         });
-    };
+    }
 
     function handle_delete() {
-        const active_files_indexes = checkbox_elements
-                                        .filter((item) => item.checked)
-                                        .map((item) => checkbox_elements.indexOf(item));
+        const active_files_indexes = checkbox_elements.filter((item) => item.checked).map((item) => checkbox_elements.indexOf(item));
         files = files.filter((file, index) => !active_files_indexes.includes(index));
         // uncheck all checkboxes
         main_checkbox.indeterminate = false;
         main_checkbox.checked = false;
-        checkbox_elements.forEach((item) => item.checked = false);
-    };
+        checkbox_elements.forEach((item) => (item.checked = false));
+    }
+
+    const table_head_mapping = [
+        { name: "name", left_button_click: () => {}, right_button_click: () => {} },
+        { name: "date modified", left_button_click: () => {}, right_button_click: () => {} },
+        { name: "size", left_button_click: () => {}, right_button_click: () => {} }
+    ];
 </script>
 
 <svelte:window
@@ -142,7 +150,7 @@
             >
                 <Upload class="mb-[1.5vw] w-[5vw]" />
                 <span class="text-[1.25vw] font-semibold leading-none">Drop your files here to upload</span>
-                <span class="text-[1vw] leading-none text-surface-50">Allowed formats: {Object.values(file_whitelist)}</span>
+                <span class="text-surface-50 text-[1vw] leading-none">Allowed formats: {Object.values(file_whitelist)}</span>
             </div>
         </div>
     </div>
@@ -238,7 +246,7 @@
                 </button>
                 <button
                     disabled={_.isEmpty(files)}
-                    on:click={handle_delete}
+                    on:click|preventDefault={handle_delete}
                     class="text-surface-50 btn flex min-h-full gap-3 !bg-transparent p-0 text-base font-semibold capitalize leading-none md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]"
                 >
                     <Delete class="w-4 md:w-[1vw]" />
@@ -246,7 +254,7 @@
                 </button>
                 <button
                     disabled={_.isEmpty(files)}
-                    class="btn btn-primary h-max min-h-full md:px-[1vw] md:text-[1vw] md:rounded-[0.5vw]"
+                    class="btn btn-primary h-max min-h-full md:rounded-[0.5vw] md:px-[1vw] md:text-[1vw]"
                 >
                     <Upload class="md:w-[1.25vw]" />
                     Upload
@@ -265,39 +273,25 @@
                             class="cursor-pointer rounded border-2 bg-transparent focus:ring-0 focus:ring-offset-0 md:h-[1.25vw] md:w-[1.25vw] md:border-[0.2vw]"
                         />
                     </th>
-                    <th>
-                        <div class="flex items-center md:gap-[0.5vw]">
-                            <span class="capitalize">name</span>
-                            <button class="btn min-h-full !bg-transparent p-0">
-                                <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
-                            </button>
-                            <button class="btn min-h-full !bg-transparent p-0">
-                                <coreproject-icon-chevron class="rotate-180 opacity-50 md:w-[1vw]"></coreproject-icon-chevron>
-                            </button>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="flex items-center md:gap-[0.5vw]">
-                            <span class="capitalize">date modified</span>
-                            <button class="btn min-h-full !bg-transparent p-0">
-                                <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
-                            </button>
-                            <button class="btn min-h-full !bg-transparent p-0">
-                                <coreproject-icon-chevron class="rotate-180 opacity-50 md:w-[1vw]"></coreproject-icon-chevron>
-                            </button>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="flex items-center md:gap-[0.5vw]">
-                            <span class="capitalize">size</span>
-                            <button class="btn min-h-full !bg-transparent p-0">
-                                <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
-                            </button>
-                            <button class="btn min-h-full !bg-transparent p-0">
-                                <coreproject-icon-chevron class="rotate-180 opacity-50 md:w-[1vw]"></coreproject-icon-chevron>
-                            </button>
-                        </div>
-                    </th>
+                    {#each table_head_mapping as item}
+                        <th>
+                            <div class="flex items-center md:gap-[0.5vw]">
+                                <span class="capitalize">{item.name}</span>
+                                <button
+                                    on:click|preventDefault={item.left_button_click}
+                                    class="btn min-h-full !bg-transparent p-0"
+                                >
+                                    <Chevron class="w-[1vw]"></Chevron>
+                                </button>
+                                <button
+                                    on:click|preventDefault={item.left_button_click}
+                                    class="btn min-h-full !bg-transparent p-0"
+                                >
+                                    <Chevron class="rotate-180 opacity-50 md:w-[1vw]"></Chevron>
+                                </button>
+                            </div>
+                        </th>
+                    {/each}
                 </tr>
             </thead>
             <tbody>

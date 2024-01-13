@@ -1,14 +1,13 @@
 <script lang="ts">
-    import { createEventDispatcher } from "svelte";
     import Chevron from "$icons/Chevron/Index.svelte";
     import Info from "$icons/Info/Index.svelte";
     import FishGradient from "../../../public/images/fish/fish-gradient.png";
 
-    const dispatch = createEventDispatcher();
+    import { provider } from "./store/provider";
 
     let doodsteam_token = "";
     const handle_submit = () => {
-        dispatch("submit", {
+        provider.set({
             doodstream: doodsteam_token
         });
     };
@@ -22,7 +21,7 @@
         <div class="flex flex-col md:gap-[0.2vw]">
             <span class="text-2xl font-semibold md:text-[1.5vw] md:leading-[1.5vw]">
                 Paste your
-                <span class="text-warning inline-flex">API</span>
+                <span class="inline-flex text-warning">API</span>
                 token
             </span>
             <span class="text-xl md:text-[1.1vw] md:leading-[2vw]">for seamless integration</span>
@@ -36,7 +35,7 @@
                         name="doodstream"
                         bind:value={doodsteam_token}
                         placeholder="Doodstream token"
-                        class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.5vw] md:rounded-[0.6vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw] text-white"
+                        class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium text-white outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.5vw] md:rounded-[0.6vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
                     />
                     <button
                         type="submit"
