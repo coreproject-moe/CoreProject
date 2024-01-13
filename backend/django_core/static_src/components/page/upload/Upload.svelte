@@ -107,7 +107,7 @@
             >
                 <Upload class="mb-[1.5vw] w-[5vw]" />
                 <span class="text-[1.25vw] font-semibold leading-none">Drop your files here to upload</span>
-                <span class="text-[1vw] leading-none text-surface-50">Allowed formats: mp4, mkv</span>
+                <span class="text-[1vw] leading-none text-surface-50">Allowed formats: {Object.values(file_whitelist)}</span>
             </div>
         </div>
     </div>
@@ -144,6 +144,7 @@
         <Dropzone
             containerClasses="relative col-span-12 flex cursor-pointer flex-col items-center justify-center bg-neutral md:col-span-5 md:h-[12vw] md:gap-[0.25vw] md:rounded-[0.75vw]"
             disableDefaultStyles={true}
+            accept=".mp4,.mkv"
             on:drop={handle_select_files}
         >
             <Upload class="text-white md:w-[2vw]" />
