@@ -19,13 +19,7 @@
         }
     }
 
-    let files: {
-        accepted: any[],
-        rejected: any[]
-    } = {
-        accepted: [],
-        rejected: []
-    };
+    let files: File[] = [];
 
     function handle_select_files(e: CustomEvent) {
         const { acceptedFiles } = e.detail;
@@ -34,7 +28,7 @@
     }
 
     function handle_files(new_files: File[]) {
-        files.accepted = _.uniqBy([...files.accepted, ...new_files], "name");
+        files = _.uniqBy([...files, ...new_files], "name");
     };
 </script>
 
@@ -65,9 +59,9 @@
                     {/if}
                     <div class="mt-5 flex flex-col gap-3 leading-none md:mt-[1.5vw] md:gap-[0.5vw]">
                         <span class="font-semibold md:text-[1vw]">
-                            {prettyBytes(files.accepted?.reduce((total, current) => total + current.size, 0))}
+                            {prettyBytes(files?.reduce((total, current) => total + current.size, 0))}
                         </span>
-                        <span class="text-surface-50 md:text-[1vw]">{files.accepted.length} files</span>
+                        <span class="text-surface-50 md:text-[1vw]">{files.length} files</span>
                     </div>
                 </div>
             </div>
@@ -182,7 +176,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        {#each files.accepted as item}
+                        {#each files as file}
                             <tr class="md:text-[1vw]">
                                 <td>
                                     <input
@@ -190,14 +184,14 @@
                                         class="cursor-pointer rounded border-2 bg-transparent focus:ring-0 focus:ring-offset-0 md:h-[1.25vw] md:w-[1.25vw] md:border-[0.2vw]"
                                     />
                                 </td>
-                                <td>{item.name}</td>
-                                <td>{new FormatDate(new Date(item.lastModified).toISOString()).format_to_human_readable_form}</td>
-                                <td>{prettyBytes(item.size)}</td>
+                                <td>{file.name}</td>
+                                <td>{new FormatDate(new Date(file.lastModified).toISOString()).format_to_human_readable_form}</td>
+                                <td>{prettyBytes(file.size)}</td>
                             </tr>
                         {/each}
                     </tbody>
                 </table>
-                {#if files.accepted.length === 0}
+                {#if files.length === 0}
                     <div class="flex w-full flex-col items-center justify-center md:flex-row md:gap-[2vw]">
                         <coreproject-icon-empty class="w-32 stroke-accent stroke-[0.15vw] md:w-[10vw] md:stroke-accent/50"></coreproject-icon-empty>
                         <div class="flex flex-col items-center gap-2 md:items-start md:gap-[0.75vw]">
