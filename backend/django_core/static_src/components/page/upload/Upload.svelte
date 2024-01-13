@@ -7,6 +7,7 @@
     import Dropzone from "svelte-file-dropzone/Dropzone.svelte";
     import * as _ from "lodash-es";
     import { blur } from "svelte/transition";
+    import Delete from "$icons/Delete/Index.svelte";
 
     let upload_state: "null" | "selecting" | "uploading" = "null",
         show_dropzone = false,
@@ -104,7 +105,18 @@
                 }
             });
         });
-    }
+    };
+
+    function handle_delete() {
+        const active_files_indexes = checkbox_elements
+                                        .filter((item) => item.checked)
+                                        .map((item) => checkbox_elements.indexOf(item));
+        files = files.filter((file, index) => !active_files_indexes.includes(index));
+        // uncheck all checkboxes
+        main_checkbox.indeterminate = false;
+        main_checkbox.checked = false;
+        checkbox_elements.forEach((item) => item.checked = false);
+    };
 </script>
 
 <svelte:window
@@ -209,17 +221,27 @@
             </div>
 
             <div class="mt-5 flex justify-between md:mt-0 md:justify-start md:gap-[3vw]">
-                <button class="text-surface-50 btn flex min-h-full gap-3 !bg-transparent p-0 text-base font-semibold capitalize leading-none md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]">
+                <button
+                    disabled={_.isEmpty(files)}
+                    class="text-surface-50 btn flex min-h-full gap-3 !bg-transparent p-0 text-base font-semibold capitalize leading-none md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]"
+                >
                     <Edit class="w-4 md:w-[1vw]" />
 
                     <span>Rename</span>
                 </button>
-                <button class="text-surface-50 btn flex min-h-full gap-3 !bg-transparent p-0 text-base font-semibold capitalize leading-none md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]">
+                <button
+                    disabled={_.isEmpty(files)}
+                    class="text-surface-50 btn flex min-h-full gap-3 !bg-transparent p-0 text-base font-semibold capitalize leading-none md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]"
+                >
                     <Edit class="w-4 md:w-[1vw]"></Edit>
                     <span>Edit Details</span>
                 </button>
-                <button class="text-surface-50 btn flex min-h-full gap-3 !bg-transparent p-0 text-base font-semibold capitalize leading-none md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]">
-                    <coreproject-icon-delete class="w-4 md:w-[1vw]"></coreproject-icon-delete>
+                <button
+                    disabled={_.isEmpty(files)}
+                    on:click={handle_delete}
+                    class="text-surface-50 btn flex min-h-full gap-3 !bg-transparent p-0 text-base font-semibold capitalize leading-none md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]"
+                >
+                    <Delete class="w-4 md:w-[1vw]" />
                     <span>Delete</span>
                 </button>
                 <button
