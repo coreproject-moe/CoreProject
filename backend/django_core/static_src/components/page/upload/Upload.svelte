@@ -22,10 +22,10 @@
     function handle_select_files(e: CustomEvent) {
         const { acceptedFiles } = e.detail;
         if (!acceptedFiles) return;
-        handle_files(acceptedFiles);
+        update_files(acceptedFiles);
     }
 
-    function handle_files(new_files: File[]) {
+    function update_files(new_files: File[]) {
         files = _.uniqBy([...files, ...new_files], "name");
     };
 
@@ -35,9 +35,6 @@
         dropzone_active = false;
 
         const event_files = event.dataTransfer?.items as unknown as DataTransferItemList;
-        const file_list_names = files.map((file) => {
-            return file.name;
-        });
 
         Array.from(event_files).forEach(async (item) => {
             const entry = item.webkitGetAsEntry();
@@ -48,9 +45,7 @@
                 const file_entry = entry as FileSystemFileEntry;
                 file_entry.file((file) => {
                     if (Object.keys(file_whitelist).includes(file.type)) {
-                        if (!file_list_names.includes(file.name)) {
-                            files = files.concat(file);
-                        }
+                        update_files([file]);
                     }
                 });
             }
@@ -59,9 +54,6 @@
 
     async function scan_directory(item: FileSystemDirectoryEntry) {
         let directory_reader = item.createReader();
-        const file_list_names = files.map((file) => {
-            return file.name;
-        });
 
         directory_reader.readEntries((entries) => {
             entries.forEach(async (entry) => {
@@ -69,10 +61,9 @@
                     const item = entry as FileSystemFileEntry;
                     item.file(async (file) => {
                         const file_type = file.name.split(".")[1];
-
                         if (Object.values(file_whitelist).includes(`.${file_type}`)) {
-                            if (!file_list_names.includes(file.name)) {
-                                files = files.concat(file);
+                            if (Object.keys(file_whitelist).includes(file.type)) {
+                                update_files([file]);
                             }
                         }
                     });
