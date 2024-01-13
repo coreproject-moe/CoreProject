@@ -8,6 +8,7 @@
     import * as _ from "lodash-es";
     import { blur } from "svelte/transition";
     import Delete from "$icons/Delete/Index.svelte";
+    import Chevron from "$icons/Chevron/Index.svelte";
 
     let upload_state: "null" | "selecting" | "uploading" = "null",
         show_dropzone = false,
@@ -242,7 +243,7 @@
                 </button>
                 <button
                     disabled={_.isEmpty(files)}
-                    class="btn btn-primary h-max min-h-full md:rounded-[0.5vw] md:px-[1vw] md:text-[1vw]"
+                    class="btn btn-primary h-max min-h-max md:rounded-[0.5vw] md:p-[1vw] md:text-[1vw]"
                 >
                     <Upload class="md:w-[1.25vw]" />
                     Upload
@@ -265,10 +266,10 @@
                         <div class="flex items-center md:gap-[0.5vw]">
                             <span class="capitalize">name</span>
                             <button class="btn min-h-full !bg-transparent p-0">
-                                <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
+                                <Chevron class="w-[1vw]" />
                             </button>
                             <button class="btn min-h-full !bg-transparent p-0">
-                                <coreproject-icon-chevron class="rotate-180 opacity-50 md:w-[1vw]"></coreproject-icon-chevron>
+                                <Chevron class="rotate-180 opacity-50 md:w-[1vw]" />
                             </button>
                         </div>
                     </th>
@@ -276,10 +277,10 @@
                         <div class="flex items-center md:gap-[0.5vw]">
                             <span class="capitalize">date modified</span>
                             <button class="btn min-h-full !bg-transparent p-0">
-                                <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
+                                <Chevron class="w-[1vw]" />
                             </button>
                             <button class="btn min-h-full !bg-transparent p-0">
-                                <coreproject-icon-chevron class="rotate-180 opacity-50 md:w-[1vw]"></coreproject-icon-chevron>
+                                <Chevron class="rotate-180 opacity-50 md:w-[1vw]" />
                             </button>
                         </div>
                     </th>
@@ -287,10 +288,10 @@
                         <div class="flex items-center md:gap-[0.5vw]">
                             <span class="capitalize">size</span>
                             <button class="btn min-h-full !bg-transparent p-0">
-                                <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
+                                <Chevron class="w-[1vw]" />
                             </button>
                             <button class="btn min-h-full !bg-transparent p-0">
-                                <coreproject-icon-chevron class="rotate-180 opacity-50 md:w-[1vw]"></coreproject-icon-chevron>
+                                <Chevron class="rotate-180 opacity-50 md:w-[1vw]" />
                             </button>
                         </div>
                     </th>
