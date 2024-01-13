@@ -28,27 +28,34 @@
             href: "/settings",
             icon: Settings,
             text: "Settings"
-        },
+        }
     };
 </script>
 
 {#if window.user_authenticated}
     <div class="dropdown dropdown-end flex">
-        <div tabindex="0" role="button" class="avatar btn border-none !bg-transparent p-0">
+        <div
+            tabindex="0"
+            role="button"
+            class="avatar btn border-none !bg-transparent p-0"
+        >
             <div class="w-12 rounded-lg md:w-[3vw] md:rounded-[0.5vw]">
-                <img alt="" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                <img
+                    alt=""
+                    src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                />
             </div>
         </div>
-        <div role="button" tabindex="0" class="dropdown-content z-1 menu min-w-48 md:min-w-[12vw] top-14 md:top-[4vw] md:text-[0.9vw] md:p-[0.5vw] p-4 bg-base-100 md:rounded-[0.75vw] rounded-lg">
-            <div class="md:p-[0.75vw] md:py-[0.5vw] flex flex-col items-start leading-none md:gap-[0.35vw] gap-2">
-                <span class="md:text-[1vw] font-bold capitalize">
-                    sora_amamiya#4444
-                </span>
-                <span class="md:text-[0.75vw]">
-                    sora_amamiya@coreproject.moe
-                </span>
+        <div
+            role="button"
+            tabindex="0"
+            class="z-1 menu dropdown-content top-14 min-w-48 rounded-lg bg-base-100 p-4 md:top-[4vw] md:min-w-[12vw] md:rounded-[0.75vw] md:p-[0.5vw] md:text-[0.9vw]"
+        >
+            <div class="flex flex-col items-start gap-2 leading-none md:gap-[0.35vw] md:p-[0.75vw] md:py-[0.5vw]">
+                <span class="font-bold capitalize md:text-[1vw]">sora_amamiya#4444</span>
+                <span class="md:text-[0.75vw]">sora_amamiya@coreproject.moe</span>
             </div>
-            <div class="divider md:mb-[0.1vw] mb-0 mt-1"></div>
+            <div class="divider mb-0 mt-1 md:mb-[0.1vw]"></div>
             <VercelHover
                 glider_container_class="flex flex-col"
                 active_element_class="rounded-[0.5vw] bg-primary"
@@ -66,9 +73,12 @@
                             on:click={() => {
                                 goto({ target: "#page", url: item.href, verb: "GET" });
                             }}
-                            class="flex items-center gap-3 md:gap-[0.5vw] px-0 md:p-[0.75vw] leading-none !text-white !bg-transparent"
+                            class="flex items-center gap-3 !bg-transparent px-0 leading-none !text-white md:gap-[0.5vw] md:p-[0.75vw]"
                         >
-                            <svelte:component this={item.icon} class="w-4 md:w-[1vw]" />
+                            <svelte:component
+                                this={item.icon}
+                                class="w-4 md:w-[1vw]"
+                            />
                             {item.text}
                         </button>
                     </li>
@@ -80,12 +90,14 @@
     <div class="hidden md:flex md:gap-[0.75vw]">
         <a
             href="/user/register"
-            class="btn btn-neutral md:p-[0.9vw] md:text-[1vw] h-max min-h-max leading-none md:rounded-[0.5vw]">
+            class="btn btn-neutral h-max min-h-max leading-none md:rounded-[0.5vw] md:p-[0.9vw] md:text-[1vw]"
+        >
             Register
         </a>
         <a
             href="/user/login"
-            class="btn btn-primary text-accent md:p-[0.9vw] md:text-[1vw] h-max min-h-max leading-none md:rounded-[0.5vw]">
+            class="btn btn-primary h-max min-h-max leading-none text-accent md:rounded-[0.5vw] md:p-[0.9vw] md:text-[1vw]"
+        >
             Log in
         </a>
     </div>
@@ -97,18 +109,21 @@
             class="avatar btn border-none !bg-transparent p-0"
         >
             <div class="w-12 rounded-lg md:w-[3vw] md:rounded-[0.5vw]">
-                <img alt="" src="https://i.pinimg.com/1200x/a8/2d/aa/a82daa4b726d8f02d8ce28f3e3b3677a.jpg" />
+                <img
+                    alt=""
+                    src="https://i.pinimg.com/1200x/a8/2d/aa/a82daa4b726d8f02d8ce28f3e3b3677a.jpg"
+                />
             </div>
         </div>
         <div
             role="button"
             tabindex="0"
-            class="dropdown-content z-1 min-w-36 top-14 p-4 bg-base-100 menu rounded-lg flex flex-col gap-3"
+            class="z-1 menu dropdown-content top-14 flex min-w-36 flex-col gap-3 rounded-lg bg-base-100 p-4"
         >
             <li>
                 <a
                     href="/user/login"
-                    class="flex items-center gap-3 p-0 leading-none !text-white !bg-transparent"
+                    class="flex items-center gap-3 !bg-transparent p-0 leading-none !text-white"
                 >
                     <Login class="w-4 md:w-[1vw]" />
                     Log in
@@ -117,7 +132,7 @@
             <li>
                 <a
                     href="/user/register"
-                    class="flex items-center gap-3 p-0 leading-none !text-white !bg-transparent"
+                    class="flex items-center gap-3 !bg-transparent p-0 leading-none !text-white"
                 >
                     <Register class="w-4 md:w-[1vw]" />
                     Register

@@ -35,7 +35,7 @@
                 element.checked = false;
             });
         }
-    };
+    }
 
     function handle_sub_checkbox_change(): void {
         const truthy_checkbox_array = checkbox_elements.filter((item) => item.checked);
@@ -60,7 +60,7 @@
 
     function update_files(new_files: File[]) {
         files = _.uniqBy([...files, ...new_files], "name");
-    };
+    }
 
     // file drag and drop
     function on_drop_handler(event: DragEvent): void {
@@ -83,7 +83,7 @@
                 });
             }
         });
-    };
+    }
 
     async function scan_directory(item: FileSystemDirectoryEntry) {
         let directory_reader = item.createReader();
@@ -105,18 +105,16 @@
                 }
             });
         });
-    };
+    }
 
     function handle_delete() {
-        const active_files_indexes = checkbox_elements
-                                        .filter((item) => item.checked)
-                                        .map((item) => checkbox_elements.indexOf(item));
+        const active_files_indexes = checkbox_elements.filter((item) => item.checked).map((item) => checkbox_elements.indexOf(item));
         files = files.filter((file, index) => !active_files_indexes.includes(index));
         // uncheck all checkboxes
         main_checkbox.indeterminate = false;
         main_checkbox.checked = false;
-        checkbox_elements.forEach((item) => item.checked = false);
-    };
+        checkbox_elements.forEach((item) => (item.checked = false));
+    }
 </script>
 
 <svelte:window
@@ -142,7 +140,7 @@
             >
                 <Upload class="mb-[1.5vw] w-[5vw]" />
                 <span class="text-[1.25vw] font-semibold leading-none">Drop your files here to upload</span>
-                <span class="text-[1vw] leading-none text-surface-50">Allowed formats: {Object.values(file_whitelist)}</span>
+                <span class="text-surface-50 text-[1vw] leading-none">Allowed formats: {Object.values(file_whitelist)}</span>
             </div>
         </div>
     </div>
@@ -246,7 +244,7 @@
                 </button>
                 <button
                     disabled={_.isEmpty(files)}
-                    class="btn btn-primary h-max min-h-full md:px-[1vw] md:text-[1vw] md:rounded-[0.5vw]"
+                    class="btn btn-primary h-max min-h-full md:rounded-[0.5vw] md:px-[1vw] md:text-[1vw]"
                 >
                     <Upload class="md:w-[1.25vw]" />
                     Upload
