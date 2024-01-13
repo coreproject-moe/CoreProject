@@ -177,7 +177,7 @@
         </Dropzone>
     </div>
     <div class="divider md:m-0 md:before:h-[0.2vw] md:after:h-[0.2vw]"></div>
-    <div>
+    <div class="flex flex-col md:gap-[1vw]">
         <div class="flex flex-col justify-between md:flex-row">
             <div class="flex items-center justify-between md:justify-start md:gap-[1vw]">
                 <form class="relative flex items-center">
@@ -222,86 +222,88 @@
                     <coreproject-icon-delete class="w-4 md:w-[1vw]"></coreproject-icon-delete>
                     <span>Delete</span>
                 </button>
+                <button
+                    disabled={_.isEmpty(files)}
+                    class="btn btn-primary h-max min-h-full md:px-[1vw] md:text-[1vw] md:rounded-[0.5vw]"
+                >
+                    <Upload class="md:w-[1.25vw]" />
+                    Upload
+                </button>
             </div>
         </div>
 
-        <div
-            hidden
-            class="mt-10 block md:mt-[3vw]"
-        >
-            <table class="text-surface-50 w-full border-separate border-spacing-y-2 leading-none md:border-spacing-y-[0.5vw]">
-                <thead>
-                    <tr class="text-left md:text-[1vw]">
-                        <th>
+        <table class="text-surface-50 w-full border-separate border-spacing-y-2 leading-none md:border-spacing-y-[0.75vw]">
+            <thead>
+                <tr class="text-left md:text-[1vw]">
+                    <th>
+                        <input
+                            bind:this={main_checkbox}
+                            on:change={handle_main_checkbox_change}
+                            type="checkbox"
+                            class="cursor-pointer rounded border-2 bg-transparent focus:ring-0 focus:ring-offset-0 md:h-[1.25vw] md:w-[1.25vw] md:border-[0.2vw]"
+                        />
+                    </th>
+                    <th>
+                        <div class="flex items-center md:gap-[0.5vw]">
+                            <span class="capitalize">name</span>
+                            <button class="btn min-h-full !bg-transparent p-0">
+                                <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
+                            </button>
+                            <button class="btn min-h-full !bg-transparent p-0">
+                                <coreproject-icon-chevron class="rotate-180 opacity-50 md:w-[1vw]"></coreproject-icon-chevron>
+                            </button>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex items-center md:gap-[0.5vw]">
+                            <span class="capitalize">date modified</span>
+                            <button class="btn min-h-full !bg-transparent p-0">
+                                <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
+                            </button>
+                            <button class="btn min-h-full !bg-transparent p-0">
+                                <coreproject-icon-chevron class="rotate-180 opacity-50 md:w-[1vw]"></coreproject-icon-chevron>
+                            </button>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="flex items-center md:gap-[0.5vw]">
+                            <span class="capitalize">size</span>
+                            <button class="btn min-h-full !bg-transparent p-0">
+                                <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
+                            </button>
+                            <button class="btn min-h-full !bg-transparent p-0">
+                                <coreproject-icon-chevron class="rotate-180 opacity-50 md:w-[1vw]"></coreproject-icon-chevron>
+                            </button>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {#each files as file, index}
+                    <tr class="md:text-[1vw]">
+                        <td>
                             <input
-                                bind:this={main_checkbox}
-                                on:change={handle_main_checkbox_change}
+                                bind:this={checkbox_elements[index]}
+                                on:change={handle_sub_checkbox_change}
                                 type="checkbox"
                                 class="cursor-pointer rounded border-2 bg-transparent focus:ring-0 focus:ring-offset-0 md:h-[1.25vw] md:w-[1.25vw] md:border-[0.2vw]"
                             />
-                        </th>
-                        <th>
-                            <div class="flex items-center md:gap-[0.5vw]">
-                                <span class="capitalize">name</span>
-                                <button class="btn min-h-full !bg-transparent p-0">
-                                    <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
-                                </button>
-                                <button class="btn min-h-full !bg-transparent p-0">
-                                    <coreproject-icon-chevron class="rotate-180 opacity-50 md:w-[1vw]"></coreproject-icon-chevron>
-                                </button>
-                            </div>
-                        </th>
-                        <th>
-                            <div class="flex items-center md:gap-[0.5vw]">
-                                <span class="capitalize">date modified</span>
-                                <button class="btn min-h-full !bg-transparent p-0">
-                                    <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
-                                </button>
-                                <button class="btn min-h-full !bg-transparent p-0">
-                                    <coreproject-icon-chevron class="rotate-180 opacity-50 md:w-[1vw]"></coreproject-icon-chevron>
-                                </button>
-                            </div>
-                        </th>
-                        <th>
-                            <div class="flex items-center md:gap-[0.5vw]">
-                                <span class="capitalize">size</span>
-                                <button class="btn min-h-full !bg-transparent p-0">
-                                    <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
-                                </button>
-                                <button class="btn min-h-full !bg-transparent p-0">
-                                    <coreproject-icon-chevron class="rotate-180 opacity-50 md:w-[1vw]"></coreproject-icon-chevron>
-                                </button>
-                            </div>
-                        </th>
+                        </td>
+                        <td>{file.name}</td>
+                        <td>{new FormatDate(new Date(file.lastModified).toISOString()).format_to_human_readable_form}</td>
+                        <td>{prettyBytes(file.size)}</td>
                     </tr>
-                </thead>
-                <tbody>
-                    {#each files as file, index}
-                        <tr class="md:text-[1vw]">
-                            <td>
-                                <input
-                                    bind:this={checkbox_elements[index]}
-                                    on:change={handle_sub_checkbox_change}
-                                    type="checkbox"
-                                    class="cursor-pointer rounded border-2 bg-transparent focus:ring-0 focus:ring-offset-0 md:h-[1.25vw] md:w-[1.25vw] md:border-[0.2vw]"
-                                />
-                            </td>
-                            <td>{file.name}</td>
-                            <td>{new FormatDate(new Date(file.lastModified).toISOString()).format_to_human_readable_form}</td>
-                            <td>{prettyBytes(file.size)}</td>
-                        </tr>
-                    {/each}
-                </tbody>
-            </table>
-            {#if files.length === 0}
-                <div class="flex w-full flex-col items-center justify-center md:flex-row md:gap-[2vw]">
-                    <coreproject-icon-empty class="w-32 stroke-accent stroke-[0.15vw] md:w-[10vw] md:stroke-accent/50"></coreproject-icon-empty>
-                    <div class="flex flex-col items-center gap-2 md:items-start md:gap-[0.75vw]">
-                        <span class="text-base font-semibold leading-none text-accent md:text-[1.4vw]">Empty!</span>
-                        <span class="text-sm leading-none text-accent/50 md:text-[1.1vw]">Upload something to make kokoro-chan happy</span>
-                    </div>
+                {/each}
+            </tbody>
+        </table>
+        {#if files.length === 0}
+            <div class="flex w-full flex-col items-center justify-center md:flex-row md:gap-[2vw]">
+                <coreproject-icon-empty class="w-32 stroke-accent stroke-[0.15vw] md:w-[10vw] md:stroke-accent/50"></coreproject-icon-empty>
+                <div class="flex flex-col items-center gap-2 md:items-start md:gap-[0.75vw]">
+                    <span class="text-base font-semibold leading-none text-accent md:text-[1.4vw]">Empty!</span>
+                    <span class="text-sm leading-none text-accent/50 md:text-[1.1vw]">Upload something to make kokoro-chan happy</span>
                 </div>
-            {/if}
-        </div>
+            </div>
+        {/if}
     </div>
 </div>
