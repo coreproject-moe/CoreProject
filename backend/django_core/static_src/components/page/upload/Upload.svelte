@@ -19,6 +19,38 @@
         "video/x-matroska": ".mkv"
     };
 
+    let main_checkbox: HTMLInputElement,
+        checkbox_elements: Array<HTMLInputElement> = new Array<HTMLInputElement>();
+
+    function handle_main_checkbox_change(event: Event) {
+        const target = event.target as HTMLInputElement;
+
+        if (target.checked) {
+            checkbox_elements.forEach((element) => {
+                element.checked = true;
+            });
+        } else {
+            checkbox_elements.forEach((element) => {
+                element.checked = false;
+            });
+        }
+    };
+
+    function handle_sub_checkbox_change(): void {
+        const truthy_checkbox_array = checkbox_elements.filter((item) => item.checked);
+
+        if (truthy_checkbox_array.length === files.length) {
+            main_checkbox.indeterminate = false;
+            main_checkbox.checked = true;
+        } else if (truthy_checkbox_array.length !== 0) {
+            main_checkbox.indeterminate = true;
+            main_checkbox.checked = false;
+        } else {
+            main_checkbox.indeterminate = false;
+            main_checkbox.checked = false;
+        }
+    }
+
     function handle_select_files(e: CustomEvent) {
         const { acceptedFiles } = e.detail;
         if (!acceptedFiles) return;
@@ -202,6 +234,8 @@
                     <tr class="text-left md:text-[1vw]">
                         <th>
                             <input
+                                bind:this={main_checkbox}
+                                on:change={handle_main_checkbox_change}
                                 type="checkbox"
                                 class="cursor-pointer rounded border-2 bg-transparent focus:ring-0 focus:ring-offset-0 md:h-[1.25vw] md:w-[1.25vw] md:border-[0.2vw]"
                             />
@@ -242,10 +276,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {#each files as file}
+                    {#each files as file, index}
                         <tr class="md:text-[1vw]">
                             <td>
                                 <input
+                                    bind:this={checkbox_elements[index]}
+                                    on:change={handle_sub_checkbox_change}
                                     type="checkbox"
                                     class="cursor-pointer rounded border-2 bg-transparent focus:ring-0 focus:ring-offset-0 md:h-[1.25vw] md:w-[1.25vw] md:border-[0.2vw]"
                                 />
