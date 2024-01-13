@@ -7,6 +7,7 @@
     import prettyBytes from "pretty-bytes";
     import { upload_file_to_doodstream } from "./functions/doodsteam_upload";
     import Dropzone from "svelte-file-dropzone/Dropzone.svelte";
+    import * as _ from "lodash-es";
 
     let has_token = false;
     let upload_state: "null" | "selecting" | "uploading" = "null";
@@ -30,8 +31,8 @@
         const { acceptedFiles, fileRejections } = e.detail;
         if (!acceptedFiles) return;
 
-        files.accepted = [...files.accepted, ...acceptedFiles];
-        files.rejected = [...files.rejected, ...fileRejections];
+        files.accepted = _.uniqBy([...files.accepted, ...acceptedFiles], "name");
+        files.rejected = _.uniqBy([...files.rejected, ...fileRejections], "name");
     }
 </script>
 
