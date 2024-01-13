@@ -1,14 +1,13 @@
 <script lang="ts">
-    import { createEventDispatcher } from "svelte";
     import Chevron from "$icons/Chevron/Index.svelte";
     import Info from "$icons/Info/Index.svelte";
     import FishGradient from "../../../public/images/fish/fish-gradient.png";
 
-    const dispatch = createEventDispatcher();
+    import { provider } from "./store/provider";
 
     let doodsteam_token = "";
     const handle_submit = () => {
-        dispatch("submit", {
+        provider.set({
             doodstream: doodsteam_token
         });
     };

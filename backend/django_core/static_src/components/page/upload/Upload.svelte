@@ -4,6 +4,7 @@
     import Search from "$icons/Search/Index.svelte";
     import Edit from "$icons/Edit/Index.svelte";
     import prettyBytes from "pretty-bytes";
+    // @ts-expect-errorF
     import Dropzone from "svelte-file-dropzone/Dropzone.svelte";
     import * as _ from "lodash-es";
     import { blur } from "svelte/transition";
@@ -16,6 +17,7 @@
 
     let files: File[] = [],
         selected_files: File[] = [];
+  
     // A key-value pair that includes mimetype and extension
     const file_whitelist = {
         "video/mp4": ".mp4",
@@ -56,6 +58,7 @@
         const { acceptedFiles } = e.detail;
         if (!acceptedFiles) return;
         update_files(acceptedFiles);
+        upload_state = "selecting";
     }
 
     function update_files(new_files: File[]) {
@@ -114,6 +117,12 @@
         main_checkbox.indeterminate = false;
         main_checkbox.checked = false;
     }
+
+    const table_head_mapping = [
+        { name: "name", left_button_click: () => {}, right_button_click: () => {} },
+        { name: "date modified", left_button_click: () => {}, right_button_click: () => {} },
+        { name: "size", left_button_click: () => {}, right_button_click: () => {} }
+    ];
 </script>
 
 <svelte:window
@@ -235,7 +244,7 @@
                 </button>
                 <button
                     disabled={_.isEmpty(files)}
-                    on:click={handle_delete}
+                    on:click|preventDefault={handle_delete}
                     class="text-surface-50 btn flex min-h-full gap-3 !bg-transparent p-0 text-base font-semibold capitalize leading-none md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]"
                 >
                     <Delete class="w-4 md:w-[1vw]" />
@@ -262,39 +271,25 @@
                             class="cursor-pointer rounded border-2 bg-transparent focus:ring-0 focus:ring-offset-0 md:h-[1.25vw] md:w-[1.25vw] md:border-[0.2vw]"
                         />
                     </th>
-                    <th>
-                        <div class="flex items-center md:gap-[0.5vw]">
-                            <span class="capitalize">name</span>
-                            <button class="btn min-h-full !bg-transparent p-0">
-                                <Chevron class="w-[1vw]" />
-                            </button>
-                            <button class="btn min-h-full !bg-transparent p-0">
-                                <Chevron class="rotate-180 opacity-50 md:w-[1vw]" />
-                            </button>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="flex items-center md:gap-[0.5vw]">
-                            <span class="capitalize">date modified</span>
-                            <button class="btn min-h-full !bg-transparent p-0">
-                                <Chevron class="w-[1vw]" />
-                            </button>
-                            <button class="btn min-h-full !bg-transparent p-0">
-                                <Chevron class="rotate-180 opacity-50 md:w-[1vw]" />
-                            </button>
-                        </div>
-                    </th>
-                    <th>
-                        <div class="flex items-center md:gap-[0.5vw]">
-                            <span class="capitalize">size</span>
-                            <button class="btn min-h-full !bg-transparent p-0">
-                                <Chevron class="w-[1vw]" />
-                            </button>
-                            <button class="btn min-h-full !bg-transparent p-0">
-                                <Chevron class="rotate-180 opacity-50 md:w-[1vw]" />
-                            </button>
-                        </div>
-                    </th>
+                    {#each table_head_mapping as item}
+                        <th>
+                            <div class="flex items-center md:gap-[0.5vw]">
+                                <span class="capitalize">{item.name}</span>
+                                <button
+                                    on:click|preventDefault={item.left_button_click}
+                                    class="btn min-h-full !bg-transparent p-0"
+                                >
+                                    <Chevron class="w-[1vw]"></Chevron>
+                                </button>
+                                <button
+                                    on:click|preventDefault={item.left_button_click}
+                                    class="btn min-h-full !bg-transparent p-0"
+                                >
+                                    <Chevron class="rotate-180 opacity-50 md:w-[1vw]"></Chevron>
+                                </button>
+                            </div>
+                        </th>
+                    {/each}
                 </tr>
             </thead>
             <tbody>
