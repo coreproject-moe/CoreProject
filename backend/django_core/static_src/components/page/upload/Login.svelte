@@ -13,7 +13,7 @@
     };
 </script>
 
-<div class="h-screen w-screen bg-secondary md:grid md:grid-cols-2 md:px-[5vw] md:pt-[5vw]">
+<div class="bg-secondary md:grid md:grid-cols-2 md:px-[5vw] md:pt-[5vw]">
     <form
         class="h-full w-full"
         on:submit|preventDefault={handle_submit}
