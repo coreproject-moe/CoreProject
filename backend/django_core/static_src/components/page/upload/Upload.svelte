@@ -154,7 +154,7 @@
     </div>
 {/if}
 
-<div class="flex h-screen w-screen flex-col bg-secondary p-5 md:gap-[2vw] md:px-[5vw] md:py-[3vw]">
+<div class="flex min-h-dvh flex-col bg-secondary p-5 md:gap-[2vw] md:px-[5vw] md:py-[3vw]">
     <div class="grid grid-cols-12 gap-7 md:gap-[5vw] md:px-[10vw]">
         <div class="col-span-12 mt-20 flex items-end md:col-span-7 md:pb-[1.5vw]">
             <div class="w-full text-center md:text-left">
