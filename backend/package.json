@@ -67,7 +67,7 @@
         "marked-xhtml": "^1.0.8",
         "postcss": "^8.4.33",
         "postcss-load-config": "^5.0.2",
-        "prettier": "^3.1.1",
+        "prettier": "^3.2.2",
         "prettier-plugin-svelte": "^3.1.2",
         "prettier-plugin-tailwindcss": "^0.5.11",
         "sass": "^1.69.7",
