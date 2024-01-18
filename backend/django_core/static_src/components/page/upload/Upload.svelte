@@ -4,7 +4,6 @@
     import Search from "$icons/Search/Index.svelte";
     import Edit from "$icons/Edit/Index.svelte";
     import prettyBytes from "pretty-bytes";
-    // @ts-expect-errorF
     import Dropzone from "svelte-file-dropzone/Dropzone.svelte";
     import * as _ from "lodash-es";
     import { blur } from "svelte/transition";
@@ -17,7 +16,7 @@
 
     let files: File[] = [],
         selected_files: File[] = [];
-  
+
     // A key-value pair that includes mimetype and extension
     const file_whitelist = {
         "video/mp4": ".mp4",
@@ -172,7 +171,7 @@
                         max="100"
                     />
                 {/if}
-                <div class="mt-2 flex md:flex-col gap-3 leading-none md:mt-[1.5vw] md:gap-[0.5vw] justify-center">
+                <div class="mt-2 flex justify-center gap-3 leading-none md:mt-[1.5vw] md:flex-col md:gap-[0.5vw]">
                     <span class="font-semibold md:text-[1vw]">
                         {prettyBytes(files?.reduce((total, current) => total + current.size, 0))}
                     </span>
@@ -188,10 +187,10 @@
             accept=".mp4,.mkv"
             on:drop={handle_select_files}
         >
-            <Upload class="text-white/75 md:text-white w-20 md:w-[2vw]" />
-            <div class="flex flex-col md:w-full items-center gap-1 md:gap-[0.35vw] leading-none">
-                <span class="font-semibold md:mt-[1vw] text-lg md:text-[1.1vw]">Drag and Drop files</span>
-                <div class="divider m-0 before:bg-accent/25 after:bg-accent/25 md:px-[10vw] text-sm md:text-[0.9vw] md:before:h-[0.15vw] md:after:h-[0.15vw]">Or</div>
+            <Upload class="w-20 text-white/75 md:w-[2vw] md:text-white" />
+            <div class="flex flex-col items-center gap-1 leading-none md:w-full md:gap-[0.35vw]">
+                <span class="text-lg font-semibold md:mt-[1vw] md:text-[1.1vw]">Drag and Drop files</span>
+                <div class="divider m-0 text-sm before:bg-accent/25 after:bg-accent/25 md:px-[10vw] md:text-[0.9vw] md:before:h-[0.15vw] md:after:h-[0.15vw]">Or</div>
                 <span class="font-semibold md:text-[1.1vw]">Browse</span>
             </div>
         </Dropzone>
@@ -199,13 +198,13 @@
     <div class="divider md:m-0 md:before:h-[0.2vw] md:after:h-[0.2vw]"></div>
     <div class="flex flex-col md:gap-[1vw]">
         <div class="flex flex-col justify-between md:flex-row">
-            <div class="flex items-center justify-between md:justify-start gap-3 md:gap-[1vw]">
+            <div class="flex items-center justify-between gap-3 md:justify-start md:gap-[1vw]">
                 <form class="relative flex items-center">
                     <button
                         class="absolute left-2 p-0 md:left-[1vw]"
                         aria-label="Search"
                     >
-                        <Search class="opacity-75 w-4 md:w-[1.25vw]" />
+                        <Search class="w-4 opacity-75 md:w-[1.25vw]" />
                     </button>
                     <input
                         type="text"
@@ -218,7 +217,7 @@
                         class="absolute left-2 p-0 md:left-[1vw]"
                         aria-label="Search"
                     >
-                        <Search class="opacity-75 w-4 md:w-[1.25vw]" />
+                        <Search class="w-4 opacity-75 md:w-[1.25vw]" />
                     </button>
                     <input
                         type="text"
@@ -254,7 +253,7 @@
                 </button>
                 <button
                     disabled={_.isEmpty(files)}
-                    class="btn btn-primary md:h-max min-h-max md:rounded-[0.5vw] md:p-[1vw] md:text-[1vw]"
+                    class="btn btn-primary min-h-max md:h-max md:rounded-[0.5vw] md:p-[1vw] md:text-[1vw]"
                 >
                     <Upload class="w-4 md:w-[1.25vw]" />
                     Upload
@@ -262,7 +261,7 @@
             </div>
         </div>
 
-        <table class="table-auto break-all border-separate border-spacing-2 leading-none md:border-spacing-y-[0.75vw]">
+        <table class="table-auto border-separate border-spacing-2 break-all leading-none md:border-spacing-y-[0.75vw]">
             <thead>
                 <tr class="text-left md:text-[1vw]">
                     <th>
@@ -276,7 +275,7 @@
                     {#each table_head_mapping as item}
                         <th>
                             <div class="flex items-center md:gap-[0.5vw]">
-                                <span class="capitalize whitespace-nowrap">{item.name}</span>
+                                <span class="whitespace-nowrap capitalize">{item.name}</span>
                                 <button
                                     on:click|preventDefault={item.left_button_click}
                                     class="btn min-h-full !bg-transparent p-0"
@@ -287,7 +286,7 @@
                                     on:click|preventDefault={item.left_button_click}
                                     class="btn min-h-full !bg-transparent p-0"
                                 >
-                                    <Chevron class="rotate-180 opacity-50 w-4 md:w-[1vw]"></Chevron>
+                                    <Chevron class="w-4 rotate-180 opacity-50 md:w-[1vw]"></Chevron>
                                 </button>
                             </div>
                         </th>
