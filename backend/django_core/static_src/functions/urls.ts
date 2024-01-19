@@ -51,6 +51,13 @@ export async function goto({ url, anchor = null, verb, target }: { url: string; 
         _anchor = document.body as HTMLElement;
     }
 
+    // Redirect to 404 page in case of error
+    btn.addEventListener("htmx:afterRequest", (event: any) => {
+        if (event.detail.failed) {
+            console.log("Wamp wamp");
+        }
+    });
+
     try {
         _anchor?.appendChild(btn);
         btn.click();
