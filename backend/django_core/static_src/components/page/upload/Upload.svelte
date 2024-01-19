@@ -4,7 +4,7 @@
     import Search from "$icons/Search/Index.svelte";
     import Edit from "$icons/Edit/Index.svelte";
     import prettyBytes from "pretty-bytes";
-    import Dropzone from "svelte-file-dropzone/Dropzone.svelte";
+    import Dropzone from "svelte-file-dropzone";
     import * as _ from "lodash-es";
     import { blur } from "svelte/transition";
     import Delete from "$icons/Delete/Index.svelte";
@@ -188,7 +188,7 @@
             on:drop={handle_select_files}
         >
             <Upload class="w-20 text-white/75 md:w-[2vw] md:text-white" />
-            <div class="flex flex-col items-center gap-1 leading-none md:w-full md:gap-[0.35vw]">
+            <div class="flex select-none flex-col items-center gap-1 leading-none md:w-full md:gap-[0.35vw]">
                 <span class="text-lg font-semibold md:mt-[1vw] md:text-[1.1vw]">Drag and Drop files</span>
                 <div class="divider m-0 text-sm before:bg-accent/25 after:bg-accent/25 md:px-[10vw] md:text-[0.9vw] md:before:h-[0.15vw] md:after:h-[0.15vw]">Or</div>
                 <span class="font-semibold md:text-[1.1vw]">Browse</span>
