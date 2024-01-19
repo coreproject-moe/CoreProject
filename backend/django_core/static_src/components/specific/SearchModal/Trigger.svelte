@@ -1,6 +1,6 @@
 <script lang="ts">
     import { search_modal_state } from "./store";
-
+    import Search from "$icons/Search/Index.svelte";
     let klass = "";
     export { klass as class };
     export let style = "";
@@ -15,5 +15,5 @@
     {style}
     on:click|preventDefault={handle_button_click}
 >
-    <slot />
+    <Search class="w-[1.25vw] text-black" />
 </button>
