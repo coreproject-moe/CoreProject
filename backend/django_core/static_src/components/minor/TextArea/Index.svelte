@@ -22,7 +22,7 @@
         caret_offset_left: string | null = null;
 
     // External Bindings
-    let textarea_value = "";
+    export let textarea_value = "";
 
     onMount(() => {
         const comment_store_value = get(commentbox_value);

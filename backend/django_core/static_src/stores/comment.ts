@@ -14,4 +14,3 @@ export function clear_commentbox_if_needed() {
         commentbox_value.set("");
     }
 }
-clear_commentbox_if_needed();
