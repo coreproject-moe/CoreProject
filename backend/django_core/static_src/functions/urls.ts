@@ -1,3 +1,4 @@
+import { commentbox_value } from "$stores/comment";
 import htmx from "htmx.org";
 import * as _ from "lodash-es";
 
@@ -32,10 +33,10 @@ export function reverse(view: string, ...args: Array<string | number>) {
 
 export async function goto({
     url,
-    anchor = null,
-    history = true,
     verb,
-    target
+    target,
+    anchor = null,
+    history = true
 }: {
     url: string;
     history?: boolean;
