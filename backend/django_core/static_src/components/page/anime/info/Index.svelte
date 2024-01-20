@@ -35,9 +35,6 @@
     import Cross from "$icons/Cross/Index.svelte";
     import Chat from "$icons/Chat/Index.svelte";
     import TrendingArrow from "$icons/TrendingArrow/Index.svelte";
-    import { onMount } from "svelte";
-
-    onMount(() => {});
 
     // Internal logics
     const second_mapping = [
