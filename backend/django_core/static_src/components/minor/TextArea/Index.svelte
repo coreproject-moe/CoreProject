@@ -6,6 +6,8 @@
     import { offset } from "caret-pos";
     import type { SvelteComponent } from "svelte";
     import Markdown from "$components/minor/Markdown/Index.svelte";
+    import { commentbox_value } from "$stores/comment";
+
     // Icons import
     import Bold from "$icons/Bold/Index.svelte";
     import Italic from "$icons/Italic/Index.svelte";
@@ -20,7 +22,7 @@
         caret_offset_left: string | null = null;
 
     // External Bindings
-    export let textarea_value = "";
+    let textarea_value = $commentbox_value;
 
     // Textarea Bindings
     let textarea_element: HTMLTextAreaElement;
@@ -472,6 +474,9 @@
     <textarea
         on:paste|preventDefault={(event) => paste_text(event)}
         on:input={handle_input}
+        on:input={(event) => {
+            $commentbox_value = event.currentTarget.value;
+        }}
         on:keydown={handle_keydown}
         on:blur={handle_blur}
         bind:value={textarea_value}
