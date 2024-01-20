@@ -9,7 +9,7 @@
 
     export let submit_url = "";
 
-    let textarea_value = "";
+    export let textarea_value = "";
 
     const handle_submit = async () => {
         if (!submit_url) {

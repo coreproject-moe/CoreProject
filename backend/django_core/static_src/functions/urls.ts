@@ -56,11 +56,6 @@ export async function goto({
         btn.setAttribute("hx-push-url", url);
     }
 
-    // Clear commentbox
-    if (clear_commentbox) {
-        commentbox_value.set(null);
-    }
-
     // Hide Button
     btn.style.display = "none";
     // Add `htmx` listener

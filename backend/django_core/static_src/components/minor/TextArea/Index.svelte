@@ -4,7 +4,7 @@
     import { cn } from "$functions/classname";
     import { is_valid_url } from "$functions/is_valid_url";
     import { offset } from "caret-pos";
-    import type { SvelteComponent } from "svelte";
+    import { onMount, type SvelteComponent } from "svelte";
     import Markdown from "$components/minor/Markdown/Index.svelte";
     import { commentbox_value } from "$stores/comment";
 
@@ -15,14 +15,21 @@
     import Strike from "$icons/Strike/Index.svelte";
     import Code from "$icons/Code/Index.svelte";
     import Hyperlink from "$icons/Hyperlink/Index.svelte";
-    import { goto } from "$functions/urls";
     import { IS_CHROMIUM } from "$constants/browser";
+    import { get } from "svelte/store";
 
     let caret_offset_top: string | null = null,
         caret_offset_left: string | null = null;
 
     // External Bindings
-    let textarea_value = $commentbox_value;
+    let textarea_value = "";
+
+    onMount(() => {
+        const comment_store_value = get(commentbox_value);
+        if (comment_store_value) {
+            textarea_value = comment_store_value;
+        }
+    });
 
     // Textarea Bindings
     let textarea_element: HTMLTextAreaElement;
