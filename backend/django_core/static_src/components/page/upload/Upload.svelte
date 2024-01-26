@@ -9,7 +9,8 @@
     import { blur } from "svelte/transition";
     import Delete from "$icons/Delete/Index.svelte";
     import Chevron from "$icons/Chevron/Index.svelte";
-
+    import { upload_file_to_doodstream } from "./functions/doodsteam_upload";
+    import { provider } from "./store/provider";
     let upload_state: "null" | "selecting" | "uploading" = "null",
         show_dropzone = false,
         dropzone_active = false;
@@ -58,6 +59,13 @@
         if (!acceptedFiles) return;
         update_files(acceptedFiles);
         upload_state = "selecting";
+    }
+
+    async function handle_upload_button_click() {
+        files.forEach(async (file) => {
+            await upload_file_to_doodstream({ api_key: $provider.doodstream, file: file });
+        });
+        upload_state = "uploading";
     }
 
     function update_files(new_files: File[]) {
@@ -253,6 +261,7 @@
                 </button>
                 <button
                     disabled={_.isEmpty(files)}
+                    on:click|preventDefault={handle_upload_button_click}
                     class="btn btn-primary min-h-max md:h-max md:rounded-[0.5vw] md:p-[1vw] md:text-[1vw]"
                 >
                     <Upload class="w-4 md:w-[1.25vw]" />
