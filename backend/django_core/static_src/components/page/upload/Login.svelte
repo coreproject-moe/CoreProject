@@ -1,7 +1,7 @@
 <script lang="ts">
     import Chevron from "$icons/Chevron/Index.svelte";
     import Info from "$icons/Info/Index.svelte";
-    import FishGradient from "../../../public/images/fish/fish-gradient.png";
+    import FishGradient from "../../../public/images/fish/fish-gradient.png?url";
 
     import { provider } from "./store/provider";
 
@@ -13,9 +13,9 @@
     };
 </script>
 
-<div class="min-h-screen w-screen bg-secondary flex flex-col gap-20 md:gap-0 justify-between md:grid md:grid-cols-2 md:p-[5vw] p-5 !pb-0">
+<div class="flex min-h-screen w-screen flex-col justify-between gap-20 bg-secondary p-5 !pb-0 md:grid md:grid-cols-2 md:gap-0 md:p-[5vw]">
     <form
-        class="md:h-full w-full"
+        class="w-full md:h-full"
         on:submit|preventDefault={handle_submit}
     >
         <div class="flex flex-col md:gap-[0.2vw]">
@@ -29,7 +29,7 @@
 
         <div class="mt-10 flex md:mt-[3vw]">
             <div class="flex w-full flex-col gap-1 md:gap-[0.35vw]">
-                <span class="text-lg font-semibold md:text-[1.25vw] leading-none md:leading-[1.5vw]">Doodstream Token</span>
+                <span class="text-lg font-semibold leading-none md:text-[1.25vw] md:leading-[1.5vw]">Doodstream Token</span>
                 <div class="flex justify-between gap-3 md:gap-[0.75vw]">
                     <input
                         name="doodstream"
@@ -39,7 +39,7 @@
                     />
                     <button
                         type="submit"
-                        class="btn btn-primary font-semibold leading-none md:h-[3.5vw] min-h-full md:rounded-[0.6vw] md:text-[1vw]"
+                        class="btn btn-primary min-h-full font-semibold leading-none md:h-[3.5vw] md:rounded-[0.6vw] md:text-[1vw]"
                     >
                         <span>Continue</span>
                         <Chevron class="w-4 -rotate-90 md:w-[1.25vw]" />
