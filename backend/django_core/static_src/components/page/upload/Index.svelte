@@ -5,7 +5,7 @@
     import { provider } from "./store/provider";
 </script>
 
-{#if _.some($provider, _.isEmpty)}
+{#if !_.some($provider, _.isEmpty)}
     <Login />
 {:else}
     <Upload />

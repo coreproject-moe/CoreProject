@@ -163,7 +163,7 @@
 
 <div class="flex min-h-dvh flex-col bg-secondary p-5 md:gap-[2vw] md:px-[5vw] md:py-[3vw]">
     <div class="grid grid-cols-12 gap-7 md:gap-[5vw] md:px-[10vw]">
-        <div class="col-span-12 mt-20 flex items-end md:col-span-7 md:pb-[1.5vw]">
+        <div class="col-span-12 flex items-end md:col-span-7 md:pb-[1.5vw]">
             <div class="w-full text-center md:text-left">
                 {#if upload_state === "selecting"}
                     <progress class="progress progress-primary w-full md:h-[1vw] md:rounded-[0.25vw]" />
@@ -235,10 +235,10 @@
                 </div>
             </div>
 
-            <div class="mt-5 flex justify-between md:mt-0 md:justify-start md:gap-[3vw]">
+            <div class="mt-5 flex items-center justify-between md:mt-0 md:justify-start md:gap-[3vw]">
                 <button
                     disabled={_.isEmpty(files)}
-                    class="text-surface-50 btn flex min-h-full gap-3 !bg-transparent p-0 text-base font-semibold capitalize leading-none md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]"
+                    class="text-surface-50 btn flex h-min min-h-min gap-2 !bg-transparent p-0 text-base font-semibold capitalize leading-none md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]"
                 >
                     <Edit class="w-4 md:w-[1vw]" />
 
@@ -246,7 +246,7 @@
                 </button>
                 <button
                     disabled={_.isEmpty(files)}
-                    class="text-surface-50 btn flex min-h-full gap-3 !bg-transparent p-0 text-base font-semibold capitalize leading-none md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]"
+                    class="text-surface-50 btn flex h-min min-h-min gap-2 !bg-transparent p-0 text-base font-semibold capitalize leading-none md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]"
                 >
                     <Edit class="w-4 md:w-[1vw]"></Edit>
                     <span>Edit Details</span>
@@ -254,15 +254,15 @@
                 <button
                     disabled={_.isEmpty(files)}
                     on:click|preventDefault={handle_delete}
-                    class="text-surface-50 btn flex min-h-full gap-3 !bg-transparent p-0 text-base font-semibold capitalize leading-none md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]"
+                    class="text-surface-50 btn flex h-min min-h-min gap-2 !bg-transparent p-0 text-base font-semibold capitalize leading-none md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]"
                 >
                     <Delete class="w-4 md:w-[1vw]" />
                     <span>Delete</span>
                 </button>
                 <button
                     disabled={_.isEmpty(files)}
+                    class="btn btn-sm md:btn-xl btn-primary h-min md:min-h-min md:rounded-[0.5vw] md:p-[1vw] md:text-[1vw]"
                     on:click|preventDefault={handle_upload_button_click}
-                    class="btn btn-primary min-h-max md:h-max md:rounded-[0.5vw] md:p-[1vw] md:text-[1vw]"
                 >
                     <Upload class="w-4 md:w-[1.25vw]" />
                     Upload
