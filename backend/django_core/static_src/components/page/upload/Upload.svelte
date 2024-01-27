@@ -17,7 +17,7 @@
 
     let files: File[] = [],
         selected_files: File[] = [];
-
+    
     // A key-value pair that includes mimetype and extension
     const file_whitelist = {
         "video/mp4": ".mp4",
@@ -25,7 +25,7 @@
     };
 
     let main_checkbox: HTMLInputElement;
-    let checkboxes = Array(files.length).fill(false);
+    $: checkboxes = Array(files.length).fill(false);
 
     function handle_main_checkbox_change(event: Event) {
         const target = event.target as HTMLInputElement;
@@ -112,6 +112,7 @@
 
     function handle_delete() {
         files = files.filter((file) => !selected_files.includes(file));
+        console.log(selected_files);
         // uncheck
         checkboxes = Array(files.length).fill(false);
         main_checkbox.indeterminate = false;
@@ -314,11 +315,17 @@
             <tbody>
                 {#each files as file, index}
                     <TableRow
-                        {selected_files}
                         {file}
-                        {checkboxes}
-                        {index}
-                        on:change={handle_sub_checkbox_change}
+                        checked={checkboxes[index]}
+                        on:change={() => {
+                            // add bind checkbox
+                            checkboxes[index] = !checkboxes[index];
+                            // select file
+                            if (selected_files.includes(file)) selected_files.splice(selected_files.indexOf(file), 1);
+                            else selected_files.push(file);
+                            // control change
+                            handle_sub_checkbox_change();
+                        }}
                     />
                 {/each}
             </tbody>
