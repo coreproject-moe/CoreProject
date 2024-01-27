@@ -120,10 +120,8 @@
     const table_head_mapping = [
         {
             name: "name",
-            left_button_click: () => {
-                console.log("Name sorting left clicked!")
-            },
-            right_button_click: () => {}
+            left_button_click: () => files = files.toSorted((a, b) => a.name.localeCompare(b.name)),
+            right_button_click: () => files = files.toSorted((a, b) => -1 * a.name.localeCompare(b.name)),
         },
         { name: "date modified", left_button_click: () => {}, right_button_click: () => {} },
         { name: "size", left_button_click: () => {}, right_button_click: () => {} }
