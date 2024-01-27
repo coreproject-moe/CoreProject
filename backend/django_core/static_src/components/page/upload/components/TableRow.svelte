@@ -19,9 +19,6 @@
     <td class="whitespace-nowrap">{new FormatDate(new Date(file.lastModified).toISOString()).format_to_human_readable_form}</td>
     <td class="whitespace-nowrap">{prettyBytes(file.size)}</td>
     <td>
-        <progress
-            class="progress progress-primary w-full md:h-[0.35vw] md:rounded-[0.25vw]"
-            value="0"
-        />
+        <progress class="progress progress-primary w-full md:h-[0.35vw] md:rounded-[0.25vw]" />
     </td>
 </tr>

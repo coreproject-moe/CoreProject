@@ -112,7 +112,7 @@
 
     function handle_delete() {
         files = files.filter((file) => !selected_files.includes(file));
-        console.log(selected_files);
+        if (_.isEmpty(files)) upload_state = "null";
         // uncheck
         checkboxes = Array(files.length).fill(false);
         main_checkbox.indeterminate = false;
@@ -136,8 +136,8 @@
         },
         {
             name: "size",
-            left_button_click: () => (files = files.toSorted((a, b) => a.size - b.size)),
-            right_button_click: () => (files = files.toSorted((a, b) => b.size - a.size))
+            left_button_click: () => (files = files.toSorted((a, b) => b.size - a.size)),
+            right_button_click: () => (files = files.toSorted((a, b) => a.size - b.size))
         }
     ];
 </script>
