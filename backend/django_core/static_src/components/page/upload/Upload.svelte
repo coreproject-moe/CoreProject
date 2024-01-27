@@ -9,6 +9,7 @@
     import { blur } from "svelte/transition";
     import Delete from "$icons/Delete/Index.svelte";
     import Chevron from "$icons/Chevron/Index.svelte";
+    import TableRow from "./components/TableRow.svelte";
 
     let upload_state: "null" | "selecting" | "uploading" = "null",
         show_dropzone = false,
@@ -307,25 +308,18 @@
                             </div>
                         </th>
                     {/each}
+                    <th>Progress</th>
                 </tr>
             </thead>
             <tbody>
                 {#each files as file, index}
-                    <tr class="md:text-[1vw]">
-                        <td>
-                            <input
-                                bind:checked={checkboxes[index]}
-                                bind:group={selected_files}
-                                value={file}
-                                on:change={handle_sub_checkbox_change}
-                                type="checkbox"
-                                class="cursor-pointer rounded border-2 bg-transparent focus:ring-0 focus:ring-offset-0 md:h-[1.25vw] md:w-[1.25vw] md:border-[0.2vw]"
-                            />
-                        </td>
-                        <td class="line-clamp-1">{file.name}</td>
-                        <td class="whitespace-nowrap">{new FormatDate(new Date(file.lastModified).toISOString()).format_to_human_readable_form}</td>
-                        <td class="whitespace-nowrap">{prettyBytes(file.size)}</td>
-                    </tr>
+                    <TableRow
+                        {selected_files}
+                        {file}
+                        {checkboxes}
+                        {index}
+                        on:change={handle_sub_checkbox_change}
+                    />
                 {/each}
             </tbody>
         </table>
