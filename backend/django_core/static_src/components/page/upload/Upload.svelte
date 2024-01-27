@@ -120,11 +120,23 @@
     const table_head_mapping = [
         {
             name: "name",
-            left_button_click: () => files = files.toSorted((a, b) => a.name.localeCompare(b.name)),
-            right_button_click: () => files = files.toSorted((a, b) => -1 * a.name.localeCompare(b.name)),
+            left_button_click: () => (files = files.toSorted((a, b) => a.name.localeCompare(b.name))),
+            right_button_click: () => (files = files.toSorted((a, b) => -1 * a.name.localeCompare(b.name)))
         },
-        { name: "date modified", left_button_click: () => {}, right_button_click: () => {} },
-        { name: "size", left_button_click: () => {}, right_button_click: () => {} }
+        {
+            name: "date modified",
+            left_button_click: () => {
+                files = files.toSorted((a, b) => new Date(a.lastModified).getTime() - new Date(b.lastModified).getTime());
+            },
+            right_button_click: () => {
+                files = files.toSorted((a, b) => new Date(b.lastModified).getTime() - new Date(a.lastModified).getTime());
+            }
+        },
+        {
+            name: "size",
+            left_button_click: () => (files = files.toSorted((a, b) => a.size - b.size)),
+            right_button_click: () => (files = files.toSorted((a, b) => b.size - a.size))
+        }
     ];
 </script>
 
