@@ -9,6 +9,7 @@
     import { blur } from "svelte/transition";
     import Delete from "$icons/Delete/Index.svelte";
     import Chevron from "$icons/Chevron/Index.svelte";
+    import TableRow from "./components/TableRow.svelte";
 
     let upload_state: "null" | "selecting" | "uploading" = "null",
         show_dropzone = false,
@@ -16,7 +17,7 @@
 
     let files: File[] = [],
         selected_files: File[] = [];
-
+    
     // A key-value pair that includes mimetype and extension
     const file_whitelist = {
         "video/mp4": ".mp4",
@@ -24,7 +25,7 @@
     };
 
     let main_checkbox: HTMLInputElement;
-    let checkboxes = Array(files.length).fill(false);
+    $: checkboxes = Array(files.length).fill(false);
 
     function handle_main_checkbox_change(event: Event) {
         const target = event.target as HTMLInputElement;
@@ -111,6 +112,7 @@
 
     function handle_delete() {
         files = files.filter((file) => !selected_files.includes(file));
+        if (_.isEmpty(files)) upload_state = "null";
         // uncheck
         checkboxes = Array(files.length).fill(false);
         main_checkbox.indeterminate = false;
@@ -118,9 +120,25 @@
     }
 
     const table_head_mapping = [
-        { name: "name", left_button_click: () => {}, right_button_click: () => {} },
-        { name: "date modified", left_button_click: () => {}, right_button_click: () => {} },
-        { name: "size", left_button_click: () => {}, right_button_click: () => {} }
+        {
+            name: "name",
+            left_button_click: () => (files = files.toSorted((a, b) => a.name.localeCompare(b.name))),
+            right_button_click: () => (files = files.toSorted((a, b) => -1 * a.name.localeCompare(b.name)))
+        },
+        {
+            name: "date modified",
+            left_button_click: () => {
+                files = files.toSorted((a, b) => new Date(a.lastModified).getTime() - new Date(b.lastModified).getTime());
+            },
+            right_button_click: () => {
+                files = files.toSorted((a, b) => new Date(b.lastModified).getTime() - new Date(a.lastModified).getTime());
+            }
+        },
+        {
+            name: "size",
+            left_button_click: () => (files = files.toSorted((a, b) => b.size - a.size)),
+            right_button_click: () => (files = files.toSorted((a, b) => a.size - b.size))
+        }
     ];
 </script>
 
@@ -155,7 +173,7 @@
 
 <div class="flex min-h-dvh flex-col bg-secondary p-5 md:gap-[2vw] md:px-[5vw] md:py-[3vw]">
     <div class="grid grid-cols-12 gap-7 md:gap-[5vw] md:px-[10vw]">
-        <div class="col-span-12 mt-20 flex items-end md:col-span-7 md:pb-[1.5vw]">
+        <div class="col-span-12 flex items-end md:col-span-7 md:pb-[1.5vw]">
             <div class="w-full text-center md:text-left">
                 {#if upload_state === "selecting"}
                     <progress class="progress progress-primary w-full md:h-[1vw] md:rounded-[0.25vw]" />
@@ -283,7 +301,7 @@
                                     <Chevron class="w-4 md:w-[1vw]"></Chevron>
                                 </button>
                                 <button
-                                    on:click|preventDefault={item.left_button_click}
+                                    on:click|preventDefault={item.right_button_click}
                                     class="btn min-h-full !bg-transparent p-0"
                                 >
                                     <Chevron class="w-4 rotate-180 opacity-50 md:w-[1vw]"></Chevron>
@@ -291,25 +309,24 @@
                             </div>
                         </th>
                     {/each}
+                    <th class="hidden md:flex">Progress</th>
                 </tr>
             </thead>
             <tbody>
                 {#each files as file, index}
-                    <tr class="md:text-[1vw]">
-                        <td>
-                            <input
-                                bind:checked={checkboxes[index]}
-                                bind:group={selected_files}
-                                value={file}
-                                on:change={handle_sub_checkbox_change}
-                                type="checkbox"
-                                class="cursor-pointer rounded border-2 bg-transparent focus:ring-0 focus:ring-offset-0 md:h-[1.25vw] md:w-[1.25vw] md:border-[0.2vw]"
-                            />
-                        </td>
-                        <td class="line-clamp-1">{file.name}</td>
-                        <td class="whitespace-nowrap">{new FormatDate(new Date(file.lastModified).toISOString()).format_to_human_readable_form}</td>
-                        <td class="whitespace-nowrap">{prettyBytes(file.size)}</td>
-                    </tr>
+                    <TableRow
+                        {file}
+                        checked={checkboxes[index]}
+                        on:change={() => {
+                            // add bind checkbox
+                            checkboxes[index] = !checkboxes[index];
+                            // select file
+                            if (selected_files.includes(file)) selected_files.splice(selected_files.indexOf(file), 1);
+                            else selected_files.push(file);
+                            // control change
+                            handle_sub_checkbox_change();
+                        }}
+                    />
                 {/each}
             </tbody>
         </table>
