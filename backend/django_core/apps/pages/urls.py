@@ -10,8 +10,11 @@ from .views.anime import (
 from .views.stack import stack_view
 from .views.upload import upload_view
 from .views.user import login_view, logout_view, register_view, reset_password_view
+from .views.home import home_view
 
 urlpatterns = [
+    # Home page
+    path("", home_view, name="home_view"),
     # Anime pages
     path(
         "anime/",
