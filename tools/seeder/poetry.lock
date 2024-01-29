@@ -528,21 +528,21 @@ yaml = ["pyyaml (>=5.4)"]
 
 [[package]]
 name = "requests-ratelimiter"
-version = "0.4.2"
+version = "0.5.1"
 description = "Rate-limiting for the requests library"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "requests_ratelimiter-0.4.2-py3-none-any.whl", hash = "sha256:1cf68b02cca692f8dfa8eca12653a3ee177bea3208f8dd7533bb52a3ab14d16c"},
-    {file = "requests_ratelimiter-0.4.2.tar.gz", hash = "sha256:7b804c9484617e3e7c372eba81b9dedfe6d34904d1ceb8b7c4a4f3b864dc0dbd"},
+    {file = "requests_ratelimiter-0.5.1-py3-none-any.whl", hash = "sha256:0ecddcf84ed9388bcebe8d6185362791bec509e4a56ff217a65ec570a503fefa"},
+    {file = "requests_ratelimiter-0.5.1.tar.gz", hash = "sha256:271617ee804a3848f14e351a9f7bee8bfd4c823663f1d94cf914ec7c8ef0cffe"},
 ]
 
 [package.dependencies]
-pyrate-limiter = ">=2.8,<3.0"
+pyrate-limiter = "<3.0"
 requests = ">=2.20"
 
 [package.extras]
-docs = ["furo (>=2022.12,<2023.0)", "myst-parser (>=0.17)", "sphinx (>=5.2,<6.0)", "sphinx-autodoc-typehints (>=1.22,<2.0)", "sphinx-copybutton (>=0.5)"]
+docs = ["furo (>=2023.3,<2024.0)", "myst-parser (>=1.0)", "sphinx (>=5.2,<6.0)", "sphinx-autodoc-typehints (>=1.22,<2.0)", "sphinx-copybutton (>=0.5)"]
 
 [[package]]
 name = "selectolax"
