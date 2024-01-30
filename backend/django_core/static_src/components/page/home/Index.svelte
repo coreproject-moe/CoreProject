@@ -58,7 +58,7 @@
 <main class="bg-secondary">
 	<section class="h-screen relative overflow-hidden">
 		<div bind:this={gradient_el} class="bg-gradient-to-b from-[#2A1E80] to-[#EA76B3] absolute inset-0" />
-		<img bind:this={sky_el} class="sky absolute top-0 inset-x-0 w-4/5 mx-auto" src={Sky} alt="Sky" />
+		<img bind:this={sky_el} class="sky absolute top-0 inset-x-0 mx-auto" src={Sky} alt="Sky" />
 		
 		<div bind:this={content_el} class="absolute inset-0 flex flex-col items-center top-[5vw] leading-none gap-[0.75vw]">
 			<h2 class="text-white text-[5vw] font-bold">Imagine a new platform.</h2>
