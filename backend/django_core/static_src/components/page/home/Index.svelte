@@ -45,6 +45,7 @@
 		
 		sky_el.style.top = value * 0.75 + "px";
 		content_el.style.marginTop = value * 0.85 + "px";
+		gradient_el.style.top = value * 0.75 + "px";
 
 		background_el.style.bottom = value * 0.15 + "px";
 		mid_ground_el.style.bottom = value * 0 + "px";
