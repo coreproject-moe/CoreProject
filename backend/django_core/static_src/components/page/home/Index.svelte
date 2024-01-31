@@ -9,13 +9,14 @@
     import Typewriter from "typewriter-effect/dist/core";
     import { blur } from "svelte/transition";
 
-	let sky_el: HTMLImageElement,
-		background_el: HTMLImageElement,
-		mid_ground_el: HTMLImageElement,
+	let sky_el: HTMLDivElement,
+		background_el: HTMLDivElement,
+		fore_ground_el: HTMLDivElement,
 		floating_1_el: HTMLImageElement,
 		floating_2_el: HTMLImageElement,
 		gradient_el: HTMLDivElement,
-		content_el: HTMLDivElement;
+		content_el: HTMLDivElement,
+		heavy_svg: HTMLImageElement;
 
 	let svg_loaded = false;
 
@@ -55,7 +56,7 @@
 		gradient_el.style.top = value * 0.75 + "px";
 
 		background_el.style.bottom = value * 0.15 + "px";
-		mid_ground_el.style.bottom = value * 0 + "px";
+		fore_ground_el.style.bottom = value * 0 + "px";
 		floating_1_el.style.marginTop = value * 0.5 + "px";
 		floating_2_el.style.marginTop = value * 0.25 + "px";
 	};
@@ -73,27 +74,48 @@
 	</div>
 {/if}
 
-<main class="bg-secondary">
-	<section class="h-screen relative overflow-hidden">
+<main class="bg-secondary w-screen h-screen">
+	<section class="h-full w-full relative overflow-hidden">
 		<div bind:this={gradient_el} class="bg-gradient-to-b from-[#2A1E80] to-[#EA76B3] absolute inset-0" />
-		<img bind:this={sky_el} class="sky absolute top-0 inset-x-0 mx-auto" src={Sky} alt="Sky" />
+		<div
+			bind:this={sky_el}
+			class="sky absolute inset-x-0 mx-auto transform -translate-x-1/2 left-1/2 w-[75rem] md:w-full"
+		>
+			<img
+				class="w-full"
+				src={Sky} alt="Sky"
+			/>
+		</div>
 		
-		<div bind:this={content_el} class="absolute inset-0 flex flex-col items-center top-[5vw] leading-none gap-[0.75vw]">
-			<h2 class="text-white text-[5vw] font-bold">Imagine a new platform.</h2>
-			<p class="text-[2.5vw] text-accent" id="typing_text"></p>
-			<button class="btn btn-neutral p-[1.1vw] text-[1.1vw] uppercase min-h-max h-max rounded-[1vw]">Get Started</button>
+		<div bind:this={content_el} class="absolute inset-0 flex flex-col items-center top-1/4 md:top-[5vw] md:leading-none gap-3 md:gap-[0.75vw] text-center">
+			<h2 class="text-white text-5xl md:text-[5vw] font-bold">Imagine a new platform.</h2>
+			<p class="text-2xl md:text-[2.5vw] text-accent" id="typing_text"></p>
+			<button class="btn btn-neutral md:p-[1.1vw] p-4 leading-none text-lg md:text-[1.1vw] min-h-max h-max md:rounded-[1vw]">Get Started</button>
 		</div>
 
-		<img bind:this={floating_1_el} class="floating pointer-events-none floating-1 absolute top-1/4 left-[15vw] inset-x-0 w-[10vw]" src={Floating1} alt="Floating1" />
+		<img bind:this={floating_1_el} class="floating pointer-events-none floating-1 absolute top-[28rem] md:top-1/4 left-10 md:left-[15vw] inset-x-0 w-32 md:w-[10vw]" src={Floating1} alt="Floating1" />
 		<!-- this is the heaviest svg -->
-		<img
+		<div
 			bind:this={background_el}
-			on:load={handle_svg_load}
-			class="pointer-events-none background absolute bottom-0 inset-x-0 w-full"
-			src={BackGround} alt="Background"
-		/>
-		<img bind:this={floating_2_el} class="floating pointer-events-none floating-2 absolute top-2/4 left-2/4 inset-x-0 w-[7vw]" src={Floating2} alt="Floating2" />
-		<img bind:this={mid_ground_el} class="pointer-events-none mid-ground absolute bottom-0 inset-x-0 w-full" src={ForeGround} alt="ForeGround" />
+			class="pointer-events-none background absolute bottom-0 -left-20 md:left-0 md:inset-x-0 w-[75rem] md:w-full"
+		>
+			<img
+				bind:this={heavy_svg}
+				on:load={handle_svg_load}
+				class="w-full"
+				src={BackGround} alt="Background"
+			/>
+		</div>
+		<img bind:this={floating_2_el} class="floating pointer-events-none floating-2 absolute top-[37rem] md:top-2/4 left-64 md:left-2/4 inset-x-0 w-20 md:w-[7vw]" src={Floating2} alt="Floating2" />
+		<div
+			bind:this={fore_ground_el}
+			class="pointer-events-none mid-ground absolute bottom-0 -left-20 md:left-0 inset-x-0 w-[90rem] md:w-full"
+		>
+			<img
+				class="w-full"
+				src={ForeGround} alt="ForeGround"
+			/>
+		</div>
 	</section>
 	<section class="h-screen"></section>
 </main>
