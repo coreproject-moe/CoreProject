@@ -1,7 +1,7 @@
 <script lang="ts">
     import Sky from "../../../public/images/paralax/sky.svg";
 	import BackGround from "../../../public/images/paralax/back-ground.svg"
-	import MidGround from "../../../public/images/paralax/mid-ground.svg";
+	import ForeGround from "../../../public/images/paralax/fore-ground.svg";
 	import Floating1 from "../../../public/images/paralax/floating-1.svg";
 	import Floating2 from "../../../public/images/paralax/floating-2.svg";
 	import { onMount } from "svelte";
@@ -93,7 +93,7 @@
 			src={BackGround} alt="Background"
 		/>
 		<img bind:this={floating_2_el} class="floating pointer-events-none floating-2 absolute top-2/4 left-2/4 inset-x-0 w-[7vw]" src={Floating2} alt="Floating2" />
-		<img bind:this={mid_ground_el} class="pointer-events-none mid-ground absolute bottom-0 inset-x-0 w-full" src={MidGround} alt="MidGround" />
+		<img bind:this={mid_ground_el} class="pointer-events-none mid-ground absolute bottom-0 inset-x-0 w-full" src={ForeGround} alt="ForeGround" />
 	</section>
 	<section class="h-screen"></section>
 </main>
