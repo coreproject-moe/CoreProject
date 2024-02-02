@@ -15,6 +15,7 @@ from .views.producers import ProducerViewSet
 from .views.staffs import StaffViewSet
 from .views.user.login import LoginAPIView
 from .views.user.logout import LogoutAPIView
+from .views.upload.doodstream import DoodstreamAPIView
 
 base_router = routers.DefaultRouter()
 base_router.register(r"comments", CommentViewSet, basename="comment")
@@ -57,5 +58,11 @@ urlpatterns = [
         "comment/<int:pk>/reaction/",
         CommentReactionAPIView.as_view(),
         name="comment-reaction-endpoint",
+    ),
+    # Upload route
+    path(
+        "upload/",
+        DoodstreamAPIView.as_view(),
+        name="doodstream-provider-endpoint",
     ),
 ]
