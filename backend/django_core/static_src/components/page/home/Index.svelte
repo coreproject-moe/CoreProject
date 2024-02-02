@@ -18,12 +18,10 @@
         content_el: HTMLDivElement,
         heavy_svg: HTMLImageElement;
 
-    let svg_loaded = false;
-
     onMount(() => {
-        var app = document.getElementById("typing_text");
+        let app = document.getElementById("typing_text");
 
-        var typewriter = new Typewriter(app, {
+        let typewriter = new Typewriter(app, {
             loop: true,
             delay: 75
         });
@@ -43,11 +41,6 @@
             .start();
     });
 
-    const handle_svg_load = (e: Event) => {
-        console.log("Loaded");
-        svg_loaded = true;
-    };
-
     function handle_window_scroll(e: Event) {
         let value = window.scrollY;
 
@@ -64,7 +57,7 @@
 
 <svelte:window on:scroll={handle_window_scroll} />
 
-{#if !svg_loaded}
+<!-- {#if !svg_loaded}
     <div
         transition:blur
         class="fixed inset-0 z-[999] grid place-items-center bg-secondary"
@@ -75,7 +68,7 @@
             </div>
         </div>
     </div>
-{/if}
+{/if} -->
 
 <main class="h-screen w-screen bg-secondary">
     <section class="relative h-full w-full overflow-hidden">
@@ -119,7 +112,6 @@
         >
             <img
                 bind:this={heavy_svg}
-                on:load={handle_svg_load}
                 class="w-full"
                 src={BackGround}
                 alt="Background"
