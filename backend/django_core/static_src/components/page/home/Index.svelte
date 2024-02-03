@@ -8,6 +8,7 @@
     // @ts-ignore
     import Typewriter from "typewriter-effect/dist/core";
     import { blur } from "svelte/transition";
+    import { beforeUpdate } from "svelte";
 
     let typewritter_element: HTMLParagraphElement,
         sky_element: HTMLDivElement,
@@ -18,6 +19,12 @@
         gradient_element: HTMLDivElement,
         content_element: HTMLDivElement,
         heavy_svg_element: HTMLImageElement;
+
+    let floating_1_element_svelte: any;
+
+    beforeUpdate(() => {
+        floating_1_element_svelte = import("../../vectors/paralax/Floating1.svelte");
+    });
 
     let loading_state = {
         sky_element: false,
@@ -106,15 +113,12 @@
             </div>
         {/if}
 
-        <img
+        <svelte:component
+            this={floating_1_element_svelte}
             bind:this={floating_1_element}
-            on:load={() => {
-                loading_state.floating_1_element = true;
-            }}
             class="pointer-events-none absolute inset-x-0 left-10 top-[28rem] w-32 animate-[floating_3s_ease-in-out_infinite] [animation-delay:0s] md:left-[15vw] md:top-1/4 md:w-[10vw]"
-            src={Floating1}
-            alt="Floating1"
         />
+        
         <div
             bind:this={background_element}
             class="background pointer-events-none absolute -left-20 bottom-0 w-[75rem] md:inset-x-0 md:left-0 md:w-full"
