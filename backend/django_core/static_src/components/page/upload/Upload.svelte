@@ -17,7 +17,7 @@
 
     let files: File[] = [],
         selected_files: File[] = [];
-    
+
     // A key-value pair that includes mimetype and extension
     const file_whitelist = {
         "video/mp4": ".mp4",

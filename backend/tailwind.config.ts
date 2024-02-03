@@ -57,11 +57,11 @@ module.exports = {
             },
             keyframes: {
                 floating: {
-                    '0%': { transform: 'translate(0, 0px)' },
-                    '50%': { transform: 'translate(0, 1rem)' },
-                    '100%': { transform: 'translate(0, -0px)' },
-                },
-            },
+                    "0%": { transform: "translate(0, 0px)" },
+                    "50%": { transform: "translate(0, 1rem)" },
+                    "100%": { transform: "translate(0, -0px)" }
+                }
+            }
         }
     },
     plugins: [

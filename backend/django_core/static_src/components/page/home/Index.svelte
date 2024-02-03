@@ -111,7 +111,7 @@
             on:load={() => {
                 loading_state.floating_1_element = true;
             }}
-            class="pointer-events-none absolute inset-x-0 left-10 top-[28rem] w-32 [animation-delay:0s] md:left-[15vw] md:top-1/4 md:w-[10vw] animate-[floating_3s_ease-in-out_infinite]"
+            class="pointer-events-none absolute inset-x-0 left-10 top-[28rem] w-32 animate-[floating_3s_ease-in-out_infinite] [animation-delay:0s] md:left-[15vw] md:top-1/4 md:w-[10vw]"
             src={Floating1}
             alt="Floating1"
         />
@@ -131,7 +131,7 @@
         </div>
         <img
             bind:this={floating_2_element}
-            class="floating pointer-events-none absolute inset-x-0 left-64 top-[37rem] w-20 [animation-delay:1s] md:left-2/4 md:top-2/4 md:w-[7vw] animate-[floating_3s_ease-in-out_infinite]"
+            class="floating pointer-events-none absolute inset-x-0 left-64 top-[37rem] w-20 animate-[floating_3s_ease-in-out_infinite] [animation-delay:1s] md:left-2/4 md:top-2/4 md:w-[7vw]"
             src={Floating2}
             alt="Floating2"
             on:load={() => {
