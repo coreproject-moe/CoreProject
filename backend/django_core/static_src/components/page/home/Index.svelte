@@ -23,7 +23,9 @@
     let floating_1_element_svelte: any;
 
     beforeUpdate(() => {
-        floating_1_element_svelte = import("../../vectors/paralax/Floating1.svelte");
+        import("../../vectors/paralax/Floating1.svelte").then((res) => {
+            floating_1_element_svelte = res.default;
+        });
     });
 
     let loading_state = {
@@ -113,12 +115,13 @@
             </div>
         {/if}
 
-        <svelte:component
-            this={floating_1_element_svelte}
-            bind:this={floating_1_element}
-            class="pointer-events-none absolute inset-x-0 left-10 top-[28rem] w-32 animate-[floating_3s_ease-in-out_infinite] [animation-delay:0s] md:left-[15vw] md:top-1/4 md:w-[10vw]"
-        />
-        
+        {#if floating_1_element_svelte !== null}
+            <svelte:component
+                this={floating_1_element_svelte}
+                bind:this={floating_1_element}
+                class="pointer-events-none absolute inset-x-0 left-10 top-[28rem] w-32 animate-[floating_3s_ease-in-out_infinite] [animation-delay:0s] md:left-[15vw] md:top-1/4 md:w-[10vw]"
+            />
+        {/if}
         <div
             bind:this={background_element}
             class="background pointer-events-none absolute -left-20 bottom-0 w-[75rem] md:inset-x-0 md:left-0 md:w-full"
