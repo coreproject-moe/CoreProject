@@ -4,7 +4,7 @@
     import ForeGround from "./paralax/fore-ground.svg";
     import Floating1 from "./paralax/floating-1.svg";
     import Floating2 from "./paralax/floating-2.svg";
-    import { onMount } from "svelte";
+
     // @ts-ignore
     import Typewriter from "typewriter-effect/dist/core";
     import { blur } from "svelte/transition";
