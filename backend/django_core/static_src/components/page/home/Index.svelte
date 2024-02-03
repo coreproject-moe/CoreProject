@@ -34,10 +34,10 @@
         content_element.style.marginTop = value * 0.85 + "px";
         gradient_element.style.top = value * 0.75 + "px";
 
-        background_element.style.bottom = value * 0.15 + "px";
+        background_element.style.bottom = value * -0.5 + "px";
         fore_ground_element.style.bottom = value * 0 + "px";
-        floating_1_element.style.marginTop = value * 0.5 + "px";
-        floating_2_element.style.marginTop = value * 0.25 + "px";
+        floating_1_element.style.marginTop = value * 0.75 + "px";
+        floating_2_element.style.marginTop = value * 0.5 + "px";
     }
     let loaded = false;
     $: loaded = Object.values(loading_state).every((item) => item === true);
@@ -69,19 +69,6 @@
 </script>
 
 <svelte:window on:scroll={handle_window_scroll} />
-
-<!-- {#if !svg_loaded}
-    <div
-        transition:blur
-        class="fixed inset-0 z-[999] grid place-items-center bg-secondary"
-    >
-        <div class="animate-spin rounded-full bg-gradient-to-tr from-green-500 via-purple-500 to-blue-500 p-[0.25vw]">
-            <div class="rounded-full bg-secondary">
-                <div class="size-[7vw] rounded-full"></div>
-            </div>
-        </div>
-    </div>
-{/if} -->
 
 <div class="h-screen w-screen bg-secondary">
     <div class="relative h-full w-full overflow-hidden">
