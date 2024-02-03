@@ -70,8 +70,8 @@
 
 <svelte:window on:scroll={handle_window_scroll} />
 
-<div class="h-screen w-screen bg-secondary">
-    <div class="relative h-full w-full overflow-hidden">
+<div class="bg-secondary">
+    <div class="relative h-dvh w-screen overflow-hidden">
         <div
             bind:this={gradient_element}
             class="absolute inset-0 bg-gradient-to-b from-[#2A1E80] to-[#EA76B3]"
