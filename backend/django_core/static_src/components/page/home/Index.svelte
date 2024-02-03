@@ -14,17 +14,23 @@
         background_element: HTMLDivElement,
         fore_ground_element: HTMLDivElement,
         floating_1_element: HTMLDivElement,
-        floating_2_element: HTMLImageElement,
+        floating_2_element: HTMLDivElement,
         gradient_element: HTMLDivElement,
         content_element: HTMLDivElement,
         heavy_svg_element: HTMLImageElement;
 
-    let floating_1_element_svelte: any = null;
+    let floating_1_element_svelte: any = null,
+        floating_2_element_svelte: any = null;
 
     onMount(() => {
-        import("../../vectors/paralax/Floating1.svelte").then((res) => {
+        import("./svg/Floating_1.svelte").then((res) => {
             floating_1_element_svelte = res.default;
             loading_state.floating_1_element = true;
+        });
+
+        import("./svg/Floating_2.svelte").then((res) => {
+            floating_2_element_svelte = res.default;
+            loading_state.floating_2_element = true;
         });
     });
 
@@ -137,15 +143,14 @@
                 alt="Background"
             />
         </div>
-        <img
-            bind:this={floating_2_element}
-            class="floating pointer-events-none absolute inset-x-0 left-64 top-[37rem] w-20 animate-[floating_3s_ease-in-out_infinite] [animation-delay:1s] md:left-2/4 md:top-2/4 md:w-[7vw]"
-            src={Floating2}
-            alt="Floating2"
-            on:load={() => {
-                loading_state.floating_2_element = true;
-            }}
-        />
+        {#if floating_2_element_svelte}
+            <div
+                bind:this={floating_2_element}
+                class="pointer-events-none absolute inset-x-0 left-64 top-[37rem] w-20 animate-[floating_3s_ease-in-out_infinite] [animation-delay:1s] md:left-2/4 md:top-2/4 md:w-[7vw]"
+            >
+                <svelte:component this={floating_2_element_svelte} />
+            </div>
+        {/if}
         <div
             bind:this={fore_ground_element}
             class="mid-ground pointer-events-none absolute inset-x-0 -left-20 bottom-0 w-[90rem] md:left-0 md:w-full"
