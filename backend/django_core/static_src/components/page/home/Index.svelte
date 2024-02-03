@@ -111,11 +111,10 @@
             on:load={() => {
                 loading_state.floating_1_element = true;
             }}
-            class="floating pointer-events-none absolute inset-x-0 left-10 top-[28rem] w-32 [animation-delay:0s] md:left-[15vw] md:top-1/4 md:w-[10vw]"
+            class="pointer-events-none absolute inset-x-0 left-10 top-[28rem] w-32 [animation-delay:0s] md:left-[15vw] md:top-1/4 md:w-[10vw] animate-[floating_3s_ease-in-out_infinite]"
             src={Floating1}
             alt="Floating1"
         />
-        <!-- this is the heaviest svg -->
         <div
             bind:this={background_element}
             class="background pointer-events-none absolute -left-20 bottom-0 w-[75rem] md:inset-x-0 md:left-0 md:w-full"
@@ -132,7 +131,7 @@
         </div>
         <img
             bind:this={floating_2_element}
-            class="floating pointer-events-none absolute inset-x-0 left-64 top-[37rem] w-20 [animation-delay:1s] md:left-2/4 md:top-2/4 md:w-[7vw]"
+            class="floating pointer-events-none absolute inset-x-0 left-64 top-[37rem] w-20 [animation-delay:1s] md:left-2/4 md:top-2/4 md:w-[7vw] animate-[floating_3s_ease-in-out_infinite]"
             src={Floating2}
             alt="Floating2"
             on:load={() => {
@@ -155,26 +154,3 @@
     </div>
     <div class="h-dvh"></div>
 </div>
-
-<style lang="scss">
-    .floating {
-        animation-name: floating;
-        animation-duration: 3s;
-        animation-iteration-count: infinite;
-        animation-timing-function: ease-in-out;
-        margin-left: 30px;
-        margin-top: 5px;
-    }
-
-    @keyframes floating {
-        0% {
-            transform: translate(0, 0px);
-        }
-        50% {
-            transform: translate(0, 1rem);
-        }
-        100% {
-            transform: translate(0, -0px);
-        }
-    }
-</style>
