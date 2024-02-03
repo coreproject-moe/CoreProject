@@ -8,7 +8,7 @@
     // @ts-ignore
     import Typewriter from "typewriter-effect/dist/core";
     import { blur } from "svelte/transition";
-    import { beforeUpdate } from "svelte";
+    import { beforeUpdate, onMount } from "svelte";
 
     let typewritter_element: HTMLParagraphElement,
         sky_element: HTMLDivElement,
@@ -20,9 +20,9 @@
         content_element: HTMLDivElement,
         heavy_svg_element: HTMLImageElement;
 
-    let floating_1_element_svelte: any;
+    let floating_1_element_svelte: any = null;
 
-    beforeUpdate(() => {
+    onMount(() => {
         import("../../vectors/paralax/Floating1.svelte").then((res) => {
             floating_1_element_svelte = res.default;
         });
@@ -115,7 +115,7 @@
             </div>
         {/if}
 
-        {#if floating_1_element_svelte !== null}
+        {#if floating_1_element_svelte}
             <svelte:component
                 this={floating_1_element_svelte}
                 bind:this={floating_1_element}
