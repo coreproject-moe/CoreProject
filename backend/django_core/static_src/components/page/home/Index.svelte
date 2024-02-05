@@ -2,22 +2,37 @@
     import Sky from "./paralax/sky.svg";
     import BackGround from "./paralax/back-ground.svg";
     import ForeGround from "./paralax/fore-ground.svg";
-    import Floating1 from "./paralax/floating-1.svg";
     import Floating2 from "./paralax/floating-2.svg";
 
     // @ts-ignore
     import Typewriter from "typewriter-effect/dist/core";
     import { blur } from "svelte/transition";
+    import { onMount } from "svelte";
 
     let typewritter_element: HTMLParagraphElement,
         sky_element: HTMLDivElement,
         background_element: HTMLDivElement,
         fore_ground_element: HTMLDivElement,
-        floating_1_element: HTMLImageElement,
-        floating_2_element: HTMLImageElement,
+        floating_1_element: HTMLDivElement,
+        floating_2_element: HTMLDivElement,
         gradient_element: HTMLDivElement,
         content_element: HTMLDivElement,
         heavy_svg_element: HTMLImageElement;
+
+    let floating_1_element_svelte: any = null,
+        floating_2_element_svelte: any = null;
+
+    onMount(() => {
+        import("./svg/Floating_1.svelte").then((res) => {
+            floating_1_element_svelte = res.default;
+            loading_state.floating_1_element = true;
+        });
+
+        import("./svg/Floating_2.svelte").then((res) => {
+            floating_2_element_svelte = res.default;
+            loading_state.floating_2_element = true;
+        });
+    });
 
     let loading_state = {
         sky_element: false,
@@ -34,18 +49,18 @@
         content_element.style.marginTop = value * 0.85 + "px";
         gradient_element.style.top = value * 0.75 + "px";
 
-        background_element.style.bottom = value * 0.15 + "px";
+        background_element.style.bottom = value * -0.5 + "px";
         fore_ground_element.style.bottom = value * 0 + "px";
-        floating_1_element.style.marginTop = value * 0.5 + "px";
-        floating_2_element.style.marginTop = value * 0.25 + "px";
-    }
+        floating_1_element.style.marginTop = value * 0.75 + "px";
+        floating_2_element.style.marginTop = value * 0.5 + "px";
+    };
+
     let loaded = false;
     $: loaded = Object.values(loading_state).every((item) => item === true);
 
     $: {
         if (typewritter_element) {
             let app = document.getElementById("typing_text");
-            console.log(app);
             let typewriter = new Typewriter(app, {
                 loop: true,
                 delay: 75
@@ -70,21 +85,8 @@
 
 <svelte:window on:scroll={handle_window_scroll} />
 
-<!-- {#if !svg_loaded}
-    <div
-        transition:blur
-        class="fixed inset-0 z-[999] grid place-items-center bg-secondary"
-    >
-        <div class="animate-spin rounded-full bg-gradient-to-tr from-green-500 via-purple-500 to-blue-500 p-[0.25vw]">
-            <div class="rounded-full bg-secondary">
-                <div class="size-[7vw] rounded-full"></div>
-            </div>
-        </div>
-    </div>
-{/if} -->
-
-<div class="h-screen w-screen bg-secondary">
-    <div class="relative h-full w-full overflow-hidden">
+<div class="bg-secondary">
+    <div class="relative h-dvh overflow-hidden">
         <div
             bind:this={gradient_element}
             class="absolute inset-0 bg-gradient-to-b from-[#2A1E80] to-[#EA76B3]"
@@ -119,16 +121,14 @@
             </div>
         {/if}
 
-        <img
-            bind:this={floating_1_element}
-            on:load={() => {
-                loading_state.floating_1_element = true;
-            }}
-            class="floating pointer-events-none absolute inset-x-0 left-10 top-[28rem] w-32 [animation-delay:0s] md:left-[15vw] md:top-1/4 md:w-[10vw]"
-            src={Floating1}
-            alt="Floating1"
-        />
-        <!-- this is the heaviest svg -->
+        {#if floating_1_element_svelte}
+            <div
+                bind:this={floating_1_element}
+                class="pointer-events-none absolute inset-x-0 left-10 top-[28rem] w-32 animate-[floating_3s_ease-in-out_infinite] [animation-delay:0s] md:left-[15vw] md:top-1/4 md:w-[10vw]"
+            >
+                <svelte:component this={floating_1_element_svelte} />
+            </div>
+        {/if}
         <div
             bind:this={background_element}
             class="background pointer-events-none absolute -left-20 bottom-0 w-[75rem] md:inset-x-0 md:left-0 md:w-full"
@@ -143,15 +143,14 @@
                 alt="Background"
             />
         </div>
-        <img
-            bind:this={floating_2_element}
-            class="floating pointer-events-none absolute inset-x-0 left-64 top-[37rem] w-20 [animation-delay:1s] md:left-2/4 md:top-2/4 md:w-[7vw]"
-            src={Floating2}
-            alt="Floating2"
-            on:load={() => {
-                loading_state.floating_2_element = true;
-            }}
-        />
+        {#if floating_2_element_svelte}
+            <div
+                bind:this={floating_2_element}
+                class="pointer-events-none absolute inset-x-0 left-64 top-[37rem] w-20 animate-[floating_3s_ease-in-out_infinite] [animation-delay:1s] md:left-2/4 md:top-2/4 md:w-[7vw]"
+            >
+                <svelte:component this={floating_2_element_svelte} />
+            </div>
+        {/if}
         <div
             bind:this={fore_ground_element}
             class="mid-ground pointer-events-none absolute inset-x-0 -left-20 bottom-0 w-[90rem] md:left-0 md:w-full"
@@ -166,28 +165,5 @@
             />
         </div>
     </div>
-    <div class="h-screen"></div>
+    <div class="h-dvh"></div>
 </div>
-
-<style lang="scss">
-    .floating {
-        animation-name: floating;
-        animation-duration: 3s;
-        animation-iteration-count: infinite;
-        animation-timing-function: ease-in-out;
-        margin-left: 30px;
-        margin-top: 5px;
-    }
-
-    @keyframes floating {
-        0% {
-            transform: translate(0, 0px);
-        }
-        50% {
-            transform: translate(0, 1rem);
-        }
-        100% {
-            transform: translate(0, -0px);
-        }
-    }
-</style>
