@@ -2,12 +2,12 @@
     import Sky from "./paralax/sky.svg";
     import BackGround from "./paralax/back-ground.svg";
     import ForeGround from "./paralax/fore-ground.svg";
+    import Floating1 from "./paralax/floating-1.svg";
     import Floating2 from "./paralax/floating-2.svg";
 
     // @ts-ignore
     import Typewriter from "typewriter-effect/dist/core";
     import { blur } from "svelte/transition";
-    import { onMount } from "svelte";
 
     let typewritter_element: HTMLParagraphElement,
         sky_element: HTMLDivElement,
@@ -18,21 +18,6 @@
         gradient_element: HTMLDivElement,
         content_element: HTMLDivElement,
         heavy_svg_element: HTMLImageElement;
-
-    let floating_1_element_svelte: any = null,
-        floating_2_element_svelte: any = null;
-
-    onMount(() => {
-        import("./svg/Floating_1.svelte").then((res) => {
-            floating_1_element_svelte = res.default;
-            loading_state.floating_1_element = true;
-        });
-
-        import("./svg/Floating_2.svelte").then((res) => {
-            floating_2_element_svelte = res.default;
-            loading_state.floating_2_element = true;
-        });
-    });
 
     let loading_state = {
         sky_element: false,
@@ -121,14 +106,19 @@
             </div>
         {/if}
 
-        {#if floating_1_element_svelte}
-            <div
-                bind:this={floating_1_element}
-                class="pointer-events-none absolute inset-x-0 left-10 top-[28rem] w-32 animate-[floating_3s_ease-in-out_infinite] [animation-delay:0s] md:left-[15vw] md:top-1/4 md:w-[10vw]"
-            >
-                <svelte:component this={floating_1_element_svelte} />
-            </div>
-        {/if}
+        <div
+            bind:this={floating_1_element}
+            class="pointer-events-none absolute inset-x-0 left-10 top-[28rem] w-32 animate-[floating_3s_ease-in-out_infinite] [animation-delay:0s] md:left-[15vw] md:top-1/4 md:w-[10vw]"
+        >
+            <img
+                on:load={() => {
+                    loading_state.floating_1_element = true;
+                }}
+                class="w-full"
+                src={Floating1}
+                alt="Floating1"
+            />
+        </div>
         <div
             bind:this={background_element}
             class="background pointer-events-none absolute -left-20 bottom-0 w-[75rem] md:inset-x-0 md:left-0 md:w-full"
@@ -143,14 +133,19 @@
                 alt="Background"
             />
         </div>
-        {#if floating_2_element_svelte}
-            <div
-                bind:this={floating_2_element}
-                class="pointer-events-none absolute inset-x-0 left-64 top-[37rem] w-20 animate-[floating_3s_ease-in-out_infinite] [animation-delay:1s] md:left-2/4 md:top-2/4 md:w-[7vw]"
-            >
-                <svelte:component this={floating_2_element_svelte} />
-            </div>
-        {/if}
+        <div
+            bind:this={floating_2_element}
+            class="pointer-events-none absolute inset-x-0 left-64 top-[37rem] w-20 animate-[floating_3s_ease-in-out_infinite] [animation-delay:1s] md:left-2/4 md:top-2/4 md:w-[7vw]"
+        >
+            <img
+                on:load={() => {
+                    loading_state.floating_2_element = true;
+                }}
+                class="w-full"
+                src={Floating2}
+                alt="Floating2"
+            />
+        </div>
         <div
             bind:this={fore_ground_element}
             class="mid-ground pointer-events-none absolute inset-x-0 -left-20 bottom-0 w-[90rem] md:left-0 md:w-full"
