@@ -60,7 +60,7 @@
         "highlight.js": "^11.9.0",
         "lightningcss": "^1.23.0",
         "marked": "^12.0.0",
-        "marked-emoji": "^1.3.1",
+        "marked-emoji": "^1.3.2",
         "marked-highlight": "^2.1.0",
         "marked-mangle": "^1.1.6",
         "marked-smartypants": "^1.1.5",
