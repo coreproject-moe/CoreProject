@@ -1,5 +1,12 @@
-<div class="mt-[1vw] items-center justify-center">
-    <div class="select-none gap-[0.25vw] text-[1.5vw] font-bold leading-none">
+<script lang="ts">
+    import { cn } from "$functions/classname";
+
+    let klass = "";
+    export { klass as class };
+</script>
+
+<div class={cn(klass, "mt-[1vw] items-center justify-center text-[1.5vw]")}>
+    <div class="select-none inline-flex gap-[0.35vw] font-bold leading-none">
         <p class="inline-flex">
             <span class="text-accent opacity-75">c</span>
             <span class="text-warning">o</span>
