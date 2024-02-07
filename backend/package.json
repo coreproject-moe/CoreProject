@@ -64,7 +64,7 @@
         "marked-highlight": "^2.1.1",
         "marked-mangle": "^1.1.7",
         "marked-smartypants": "^1.1.6",
-        "marked-xhtml": "^1.0.8",
+        "marked-xhtml": "^1.0.9",
         "postcss": "^8.4.34",
         "postcss-load-config": "^5.0.2",
         "prettier": "^3.2.5",
