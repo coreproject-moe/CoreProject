@@ -74,9 +74,9 @@
             Bridging the gap between streaming and torrenting sites with a modern and clean interface.
         </p>
         <div class="relative flex items-center">
-            <button class="md:mt-[1vw] btn border-none bg-gradient-to-r from-rose-500 to-blue-500 text-accent h-max min-h-max md:p-[1.25vw] md:text-[1vw] md:rounded-[1vw] shadow-lg shadow-rose-500/25 leading-none">
+            <a href="#explore-our-trio" class="md:mt-[1vw] btn border-none bg-gradient-to-r from-rose-500 to-blue-500 text-accent h-max min-h-max md:p-[1.25vw] md:text-[1vw] md:rounded-[1vw] shadow-lg shadow-rose-500/25 leading-none">
                 Start Exploring Now!
-            </button>
+            </a>
             <div class="size-[4vw] absolute -right-[4vw]">
                 <LottiePlayer
                     src={StarLottie}
@@ -98,7 +98,10 @@
         </div>
     </section>
 
-    <section class="relative md:mt-[10vw] flex flex-col items-center justify-center bg-secondary/75s md:py-[3vw]">
+    <section
+        id="explore-our-trio"
+        class="relative md:mt-[10vw] flex flex-col items-center justify-center bg-secondary/75s md:py-[3vw]"
+    >
         <h2 class="md:text-[2.5vw] font-bold bg-gradient-to-r from-rose-500 from-[35%] to-[65%] to-blue-500 inline-block text-transparent bg-clip-text">Explore Our Trio.</h2>
         <div class="flex items-end justify-center md:mt-[1vw] md:gap-[1.5vw]">
             <div class="relative flex items-center justify-center flex-col bg-secondary md:rounded-[1vw] md:p-[1vw] md:w-[20vw] text-center md:gap-[1vw]">
