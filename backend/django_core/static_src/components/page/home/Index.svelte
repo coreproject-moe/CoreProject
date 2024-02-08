@@ -70,15 +70,15 @@
         <p class="md:text-[1.25vw] md:mt-[3vw] md:max-w-[45vw] text-center opacity-90">
             Bridging the gap between streaming and torrenting sites with a modern and clean interface.
         </p>
-        <div class="relative">
+        <div class="relative flex items-center">
             <button class="md:mt-[1vw] btn border-none bg-gradient-to-r from-rose-500 to-blue-500 text-accent h-max min-h-max md:p-[1.25vw] md:text-[1vw] md:rounded-[1vw] shadow-lg shadow-rose-500/25 leading-none">
                 Start Exploring Now!
             </button>
-            <div class="size-[4vw] absolute -right-[2.5vw] top-0">
+            <div class="size-[4vw] absolute -right-[4vw]">
                 <LottiePlayer
                     src={StarLottie}
                     autoplay="{true}"
-                    loop="{true}"
+                    loop="{false}"
                     renderer="svg"
                     background="transparent"
                 />
