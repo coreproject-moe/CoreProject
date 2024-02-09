@@ -74,7 +74,7 @@
         id="explore-our-trio"
         class="relative mt-16 md:mt-[10vw] flex flex-col items-center justify-center md:py-[3vw]"
     >
-        <h2 class="md:text-[2.5vw] text-2xl font-bold bg-gradient-to-r from-rose-500 from-[35%] to-[65%] to-blue-500 inline-block text-transparent bg-clip-text">Explore Our Trio.</h2>
+        <h2 class="md:text-[2.5vw] text-2xl font-bold bg-gradient-to-r from-rose-500 from-[35%] to-[65%] to-blue-500 text-transparent bg-clip-text">Explore Our Trio.</h2>
         <div class="flex flex-col md:flex-row items-end justify-center mt-2 p-5 md:mt-[1vw] md:gap-[1.5vw]">
             <div class="relative flex items-center justify-center flex-col bg-secondary md:rounded-[1vw] md:p-[1vw] p-5 md:w-[20vw] gap-2 text-center md:gap-[1vw]">
                 <MangaCore class="!text-3xl md:!text-[2.5vw] !m-0" />
