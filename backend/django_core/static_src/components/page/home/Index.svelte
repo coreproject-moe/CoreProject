@@ -81,9 +81,9 @@
                 <p class="text-sm line-clamp-3 md:text-[1.1vw] md:leading-[1.5vw] md:line-clamp-4">
                     Dive into the captivating world of manga with our streaming service. Access a diverse collection of manga titles, from timeless classics to the latest releases, and lose yourself in the art of storytelling.
                 </p>
-                <button class="relative w-full btn border-none bg-gradient-to-r from-rose-500 to-blue-500 text-accent h-max min-h-max md:p-[1.25vw] md:text-[1.25vw] md:rounded-[1vw] leading-none p-3 text-lg rounded-xl">
+                <a href="#" class="relative w-full btn border-none bg-gradient-to-r from-rose-500 to-blue-500 text-accent h-max min-h-max md:p-[1.25vw] md:text-[1.25vw] md:rounded-[1vw] leading-none p-3 text-lg rounded-xl">
                     Coming soon
-                </button>
+                </a>
                 <div class="absolute inset-0 bg-secondary/75" />
             </div>
             <div class="flex items-center justify-center flex-col bg-secondary md:border-[0.15vw] md:rounded-[1vw] border-error md:p-[1vw] border-dashed md:w-[25vw] text-center md:gap-[1vw] relative p-5 gap-2 rounded-2xl border-2">
@@ -91,9 +91,9 @@
                 <p class="text-sm md:text-[1.1vw] md:leading-[1.5vw] line-clamp-4">
                     Immerse yourself in a world of endless anime streaming. Explore a vast library of your favorite shows and discover new ones, all at your fingertips.
                 </p>
-                <button class="relative w-full btn border-none bg-gradient-to-r from-rose-500 to-blue-500 text-accent h-max min-h-max md:p-[1.25vw] md:text-[1.25vw] md:rounded-[1vw] shadow-lg shadow-rose-500/25 leading-none p-4 text-lg rounded-xl">
+                <a href="/anime" class="relative w-full btn border-none bg-gradient-to-r from-rose-500 to-blue-500 text-accent h-max min-h-max md:p-[1.25vw] md:text-[1.25vw] md:rounded-[1vw] shadow-lg shadow-rose-500/25 leading-none p-4 text-lg rounded-xl">
                     Explore
-                </button>
+                </a>
                 <div class="md:size-[4vw] size-10 absolute md:-right-[1.5vw] right-0 top-0 md:-top-[1.75vw]">
                     <LottiePlayer
                         src={StarLottie}
@@ -109,9 +109,9 @@
                 <p class="text-sm line-clamp-3 md:text-[1.1vw] md:leading-[1.5vw] md:line-clamp-4">
                     Elevate your auditory experience with our music streaming platform. Explore a rich tapestry of sounds, from chart-toppers to hidden gems, and let the music transport you to new dimensions of sonic bliss.
                 </p>
-                <button class="relative w-full btn border-none bg-gradient-to-r from-rose-500 to-blue-500 text-accent h-max min-h-max md:p-[1.25vw] md:text-[1.25vw] md:rounded-[1vw] leading-none p-3 text-lg rounded-xl">
+                <a href="#" class="relative w-full btn border-none bg-gradient-to-r from-rose-500 to-blue-500 text-accent h-max min-h-max md:p-[1.25vw] md:text-[1.25vw] md:rounded-[1vw] leading-none p-3 text-lg rounded-xl">
                     Coming soon
-                </button>
+                </a>
                 <div class="absolute inset-0 bg-secondary/75" />
             </div>
         </div>
