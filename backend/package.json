@@ -52,6 +52,7 @@
         "xss": "^1.0.14"
     },
     "devDependencies": {
+        "@lottiefiles/svelte-lottie-player": "^0.3.1",
         "@sveltejs/vite-plugin-svelte": "^3.0.2",
         "@types/lodash-es": "^4.17.12",
         "@types/node": "^20.11.16",

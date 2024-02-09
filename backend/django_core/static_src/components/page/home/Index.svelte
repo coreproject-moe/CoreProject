@@ -1,164 +1,147 @@
 <script lang="ts">
-    import Sky from "./paralax/sky.svg";
-    import BackGround from "./paralax/back-ground.svg";
-    import ForeGround from "./paralax/fore-ground.svg";
-    import Floating1 from "./paralax/floating-1.svg";
-    import Floating2 from "./paralax/floating-2.svg";
+    //@ts-ignore
+    import { LottiePlayer } from "@lottiefiles/svelte-lottie-player";
 
-    // @ts-ignore
-    import Typewriter from "typewriter-effect/dist/core";
-    import { blur } from "svelte/transition";
+    import AnimeCore from "$icons/AnimeCore/index.svelte";
+    import MangaCore from "$icons/MangaCore/Index.svelte";
+    import SoundCore from "$icons/SoundCore/Index.svelte";
 
-    let typewritter_element: HTMLParagraphElement,
-        sky_element: HTMLDivElement,
-        background_element: HTMLDivElement,
-        fore_ground_element: HTMLDivElement,
-        floating_1_element: HTMLDivElement,
-        floating_2_element: HTMLDivElement,
-        gradient_element: HTMLDivElement,
-        content_element: HTMLDivElement,
-        heavy_svg_element: HTMLImageElement;
-
-    let loading_state = {
-        sky_element: false,
-        fore_ground_element: false,
-        floating_1_element: false,
-        floating_2_element: false,
-        heavy_svg_element: false
-    };
-
-    function handle_window_scroll(e: Event) {
-        let value = window.scrollY;
-
-        sky_element.style.top = value * 0.75 + "px";
-        content_element.style.marginTop = value * 0.85 + "px";
-        gradient_element.style.top = value * 0.75 + "px";
-
-        background_element.style.bottom = value * -0.5 + "px";
-        fore_ground_element.style.bottom = value * 0 + "px";
-        floating_1_element.style.marginTop = value * 0.75 + "px";
-        floating_2_element.style.marginTop = value * 0.5 + "px";
-    };
-
-    let loaded = false;
-    $: loaded = Object.values(loading_state).every((item) => item === true);
-
-    $: {
-        if (typewritter_element) {
-            let app = document.getElementById("typing_text");
-            let typewriter = new Typewriter(app, {
-                loop: true,
-                delay: 75
-            });
-
-            typewriter
-                .typeString("For watching <b>Animes.</b>")
-                .pauseFor(2000)
-                .deleteChars(16)
-                .typeString("reading <b>Mangas.</b>")
-                .pauseFor(2000)
-                .deleteChars(15)
-                .typeString("listening to <b>Musics.</b>")
-                .pauseFor(2000)
-                .deleteAll()
-                .typeString("Welcome to <b>CoreProject.</b>")
-                .pauseFor(5000)
-                .start();
+    const products_mapping = [
+        {
+            icon: MangaCore,
+            div_class: "order-2 md:order-1",
+            icon_class: "!text-3xl md:!text-[2.5vw] !m-0",
+            description:
+                "Dive into the captivating world of manga with our streaming service. Access a diverse collection of manga titles, from timeless classics to the latest releases, and lose yourself in the art of storytelling.",
+            href: "/manga",
+            available: false
+        },
+        {
+            icon: AnimeCore,
+            div_class: "order-1 md:order-2",
+            icon_class: "w-48 md:w-[15vw]",
+            description: "Immerse yourself in a world of endless anime streaming. Explore a vast library of your favorite shows and discover new ones, all at your fingertips.",
+            href: "/anime",
+            available: true
+        },
+        {
+            icon: SoundCore,
+            div_class: "order-3 md:order-3",
+            icon_class: "!text-3xl md:!text-[2.5vw] !m-0",
+            description:
+                "Elevate your auditory experience with our music streaming platform. Explore a rich tapestry of sounds, from chart-toppers to hidden gems, and let the music transport you to new dimensions of sonic bliss.",
+            href: "/sound",
+            available: false
         }
-    }
+    ];
 </script>
 
-<svelte:window on:scroll={handle_window_scroll} />
-
-<div class="bg-secondary">
-    <div class="relative h-dvh overflow-hidden">
-        <div
-            bind:this={gradient_element}
-            class="absolute inset-0 bg-gradient-to-b from-[#2A1E80] to-[#EA76B3]"
-        />
-        <div
-            bind:this={sky_element}
-            class="sky absolute inset-x-0 left-1/2 mx-auto w-[75rem] -translate-x-1/2 transform md:w-full"
-        >
-            <img
-                on:load={() => {
-                    loading_state.sky_element = true;
-                }}
-                class="w-full"
-                src={Sky}
-                alt="Sky"
+<div class="relative min-h-dvh overflow-x-hidden bg-secondary">
+    <div class="absolute inset-0 overflow-hidden">
+        {#await import("./lotties/bg-lottie.json") then item}
+            <LottiePlayer
+                src={item.default}
+                autoplay={true}
+                loop={false}
+                renderer="svg"
+                background="transparent"
+                style={{ height: "100%", width: "100%", "object-fit": "contain" }}
             />
-        </div>
-
-        {#if loaded}
-            <div
-                transition:blur={{ duration: 500 }}
-                bind:this={content_element}
-                class="absolute inset-0 top-1/4 flex flex-col items-center gap-3 text-center md:top-[5vw] md:gap-[0.75vw] md:leading-none"
-            >
-                <h2 class="text-5xl font-bold text-white md:text-[5vw]">Imagine a new platform.</h2>
-                <p
-                    class="text-2xl text-accent md:text-[2.5vw]"
-                    id="typing_text"
-                    bind:this={typewritter_element}
-                />
-                <button class="btn btn-neutral h-max min-h-max p-4 text-lg leading-none md:rounded-[1vw] md:p-[1.1vw] md:text-[1.1vw]">Get Started</button>
-            </div>
-        {/if}
-
-        <div
-            bind:this={floating_1_element}
-            class="pointer-events-none absolute inset-x-0 left-10 top-[28rem] w-32 animate-[floating_3s_ease-in-out_infinite] [animation-delay:0s] md:left-[15vw] md:top-1/4 md:w-[10vw]"
-        >
-            <img
-                on:load={() => {
-                    loading_state.floating_1_element = true;
-                }}
-                class="w-full"
-                src={Floating1}
-                alt="Floating1"
-            />
-        </div>
-        <div
-            bind:this={background_element}
-            class="background pointer-events-none absolute -left-20 bottom-0 w-[75rem] md:inset-x-0 md:left-0 md:w-full"
-        >
-            <img
-                on:load={() => {
-                    loading_state.heavy_svg_element = true;
-                }}
-                bind:this={heavy_svg_element}
-                class="w-full"
-                src={BackGround}
-                alt="Background"
-            />
-        </div>
-        <div
-            bind:this={floating_2_element}
-            class="pointer-events-none absolute inset-x-0 left-64 top-[37rem] w-20 animate-[floating_3s_ease-in-out_infinite] [animation-delay:1s] md:left-2/4 md:top-2/4 md:w-[7vw]"
-        >
-            <img
-                on:load={() => {
-                    loading_state.floating_2_element = true;
-                }}
-                class="w-full"
-                src={Floating2}
-                alt="Floating2"
-            />
-        </div>
-        <div
-            bind:this={fore_ground_element}
-            class="mid-ground pointer-events-none absolute inset-x-0 -left-20 bottom-0 w-[90rem] md:left-0 md:w-full"
-        >
-            <img
-                on:load={() => {
-                    loading_state.fore_ground_element = true;
-                }}
-                class="w-full"
-                src={ForeGround}
-                alt="ForeGround"
-            />
-        </div>
+        {/await}
     </div>
-    <div class="h-dvh"></div>
+
+    <section class="relative mt-20 flex w-full flex-col items-center justify-center md:mt-[10vh]">
+        <div class="flex flex-col text-center text-5xl font-bold leading-none md:mt-[3vw] md:text-[8vw]">
+            <h2 class="inline-block bg-gradient-to-r from-rose-500 from-[35%] to-blue-500 to-[65%] bg-clip-text text-transparent">Imagine a new</h2>
+            <h2 class="relative inline-block bg-gradient-to-r from-blue-500 from-[35%] to-yellow-600 to-[65%] bg-clip-text text-transparent">
+                Platform.
+                <div class="absolute bottom-2 right-3 size-12 -rotate-45 md:bottom-[2vw] md:right-[5vw] md:size-[5vw]">
+                    {#await import("./lotties/squiggle.json") then item}
+                        <LottiePlayer
+                            src={item.default}
+                            autoplay={true}
+                            loop={false}
+                            mode={"bounce"}
+                            speed={0.75}
+                            renderer="svg"
+                            background="transparent"
+                        />
+                    {/await}
+                </div>
+            </h2>
+        </div>
+        <p class="mt-2 max-w-72 text-center text-base opacity-90 md:mt-[3vw] md:max-w-[45vw] md:text-[1.25vw]">
+            Bridging the gap between streaming and torrenting sites with a modern and clean interface.
+        </p>
+        <div class="relative flex items-center">
+            <a
+                href="#explore-our-trio"
+                class="btn mt-4 h-max min-h-max rounded-xl border-none bg-gradient-to-r from-rose-500 to-blue-500 p-4 text-base leading-none text-accent shadow-lg shadow-rose-500/25 md:mt-[1vw] md:rounded-[1vw] md:p-[1.25vw] md:text-[1vw]"
+            >
+                Start Exploring Now!
+            </a>
+            <div class="absolute -right-14 size-14 md:-right-[4vw] md:size-[4vw]">
+                {#await import("./lotties/stars.json") then item}
+                    <LottiePlayer
+                        src={item.default}
+                        autoplay={true}
+                        loop={false}
+                        renderer="svg"
+                        background="transparent"
+                    />
+                {/await}
+            </div>
+        </div>
+        <div class="mt-5 size-6 opacity-75 md:mt-[3vw] md:size-[2vw]">
+            {#await import("./lotties/scroll.json") then item}
+                <LottiePlayer
+                    src={item.default}
+                    autoplay={true}
+                    loop={true}
+                    renderer="svg"
+                    background="transparent"
+                />
+            {/await}
+        </div>
+    </section>
+
+    <section
+        id="explore-our-trio"
+        class="relative mt-16 flex flex-col items-center justify-center md:mt-[10vw] md:py-[3vw]"
+    >
+        <h2 class="bg-gradient-to-r from-rose-500 from-[35%] to-blue-500 to-[65%] bg-clip-text text-2xl font-bold leading-none text-transparent md:text-[2.5vw]">Explore Our Trio.</h2>
+        <div class="mt-2 flex flex-col items-end justify-center p-5 md:mt-[1vw] md:flex-row md:gap-[1.5vw]">
+            {#each products_mapping as item}
+                <div
+                    class="relative flex flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed border-error bg-secondary p-5 text-center md:w-[20vw] md:gap-[1vw] md:rounded-[1vw] md:border-[0.15vw] md:p-[1vw]"
+                    class:md:!w-[25vw]={item.available}
+                    class:!border-none={!item.available}
+                >
+                    <svelte:component
+                        this={item.icon}
+                        class={item.icon_class}
+                    />
+                    <p class="line-clamp-3 text-sm md:line-clamp-4 md:text-[1.1vw] md:leading-[1.5vw]">
+                        {item.description}
+                    </p>
+                    {#if item.available}
+                        <a
+                            href={item.href}
+                            class="btn relative h-max min-h-max w-full rounded-xl border-none bg-gradient-to-r from-rose-500 to-blue-500 p-4 text-lg leading-none text-accent shadow-lg shadow-rose-500/25 md:rounded-[1vw] md:p-[1.25vw] md:text-[1.25vw]"
+                        >
+                            Explore
+                        </a>
+                    {:else}
+                        <a
+                            href="/"
+                            class="btn relative h-max min-h-max w-full rounded-xl border-none bg-gradient-to-r from-rose-500 to-blue-500 p-3 text-lg leading-none text-accent md:rounded-[1vw] md:p-[1.25vw] md:text-[1.25vw]"
+                        >
+                            Coming soon
+                        </a>
+                        <div class="absolute inset-0 bg-secondary/75" />
+                    {/if}
+                </div>
+            {/each}
+        </div>
+    </section>
 </div>
