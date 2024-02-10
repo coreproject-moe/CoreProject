@@ -5,7 +5,8 @@ const mapping = [
     { tagname: `explore`, component: await import("./explore/Index.svelte") },
     { tagname: `anime-info`, component: await import("./anime/info/Index.svelte") },
     { tagname: `upload`, component: await import("./upload/Index.svelte") },
-    { tagname: `home`, component: await import("./home/Index.svelte") }
+    { tagname: `home`, component: await import("./home/Index.svelte") },
+    { tagname: `anime`, component: await import("./anime/Index.svelte") },
 ];
 
 mapping.forEach((item) => {
