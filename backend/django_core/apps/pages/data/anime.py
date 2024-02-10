@@ -88,6 +88,9 @@ my_list = [
         "status": "watching",
         "current_ep": 612,
         "total_ep": 1086,
+        "synopsis": "Azur Lane, a combination of all the different Camps in the world, was once successful in repelling the underwater menace, the Siren. Now splintered, they must face a new threat in Red Axis, former allies who crave to wield this otherworldly Siren technology for their own nefarious desires! Who will be victorious in the never-ending war between these battleship girls!? Akagami no Shirayuki-hime depicts Shirayuki's journey toward a new life at the royal palace of Clarines, as well as Zen's endeavor to become a prince worthy of his title. As loyal friendships are forged and deadly enemies formed, Shirayuki and Zen slowly learn to support each other as they walk their own paths.",
+        "studio": "Bibury Animation Studios",
+        "genres": ["action", "ecchi", "sci-fi"],
     },
     {
         "id": 2,
@@ -96,6 +99,9 @@ my_list = [
         "status": "watching",
         "current_ep": 13,
         "total_ep": 25,
+        "synopsis": "Azur Lane, a combination of all the different Camps in the world, was once successful in repelling the underwater menace, the Siren. Now splintered, they must face a new threat in Red Axis, former allies who crave to wield this otherworldly Siren technology for their own nefarious desires! Who will be victorious in the never-ending war between these battleship girls!? Akagami no Shirayuki-hime depicts Shirayuki's journey toward a new life at the royal palace of Clarines, as well as Zen's endeavor to become a prince worthy of his title. As loyal friendships are forged and deadly enemies formed, Shirayuki and Zen slowly learn to support each other as they walk their own paths.",
+        "studio": "Bibury Animation Studios",
+        "genres": ["action", "ecchi", "sci-fi"],
     },
 ]
 

@@ -12,9 +12,11 @@
 
     import LatestEpisodes from "$components/specific/LatestEpisodes/Index.svelte";
     import LatestAnimes from "$components/specific/LatestAnimes/Index.svelte";
+    import MyAnimeList from "$components/specific/MyAnimeList/Index.svelte";
 
     export let latest_animes: string;
     export let latest_episodes: string;
+    export let my_anime_list: string;
 </script>
 
 <div class="mt-16 block md:mt-0 md:p-[1.25vw] md:pr-[3.75vw]">
@@ -125,6 +127,10 @@
             </div>
         </div>
         <div class="relative mt-4 grid grid-cols-3 gap-3 md:mt-[1vw] md:grid-cols-5 md:gap-[1.25vw]">
+            <MyAnimeList
+                {my_anime_list}
+                dropdown_class='pl-3'
+            />
         </div>
     </div>
 </div>
