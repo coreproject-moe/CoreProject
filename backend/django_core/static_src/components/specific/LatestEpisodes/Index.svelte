@@ -1,10 +1,8 @@
 <script lang="ts">
-    import JSON5 from "json5";
     import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
     import Episode from "./Episode.svelte";
     import { reverse } from "$functions/urls";
     import { FETCH_TIMEOUT } from "$constants/fetch";
-    import { get_csrf_token } from "$functions/get_csrf_token";
 
     type Episodes = {
         id: number;

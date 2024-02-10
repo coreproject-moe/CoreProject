@@ -75,7 +75,7 @@
     let progress_value = 0,
         tweened_progress_value = tweened(progress_value);
     $: tweened_progress_value.set(progress_value);
-
+    timer.start();
     timer.on("targetAchieved", () => {
         // change slider
         add_one_to_main_hero_slide_active_index();
