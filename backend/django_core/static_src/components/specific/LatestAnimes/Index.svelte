@@ -1,4 +1,6 @@
 <script lang="ts">
+    import JSON5 from "json5";
+
     import Chevron from "$icons/Chevron/Index.svelte";
     import Circle from "$icons/Circle/Index.svelte";
     import Play from "$icons/Play/Index.svelte";
@@ -13,7 +15,7 @@
     import { FormatDate } from "$functions/format_date";
     import { blur } from "svelte/transition";
 
-    export let latest_animes: {
+    type LatestAnimes = {
         id: number;
         name: string;
         type: string;
@@ -25,6 +27,10 @@
         synopsis: string;
         image: string;
     }[];
+
+    export let latest_animes: string;
+    // parse to JSON
+    const latest_animes_data = JSON5.parse(latest_animes) satisfies LatestAnimes;
 
     const slider_delay = 10,
         timer = new EasyTimer({
@@ -47,7 +53,7 @@
         main_hero_slide_active_index = 0;
 
     const add_one_to_main_hero_slide_active_index = () => {
-            if (main_hero_slide_active_index + 1 === latest_animes.length) {
+            if (main_hero_slide_active_index + 1 === latest_animes_data.length) {
                 main_hero_slide_active_index = 0;
                 return;
             }
@@ -55,7 +61,7 @@
         },
         minus_one_to_main_hero_slide_active_index = () => {
             if (main_hero_slide_active_index === 0) {
-                main_hero_slide_active_index = latest_animes.length - 1;
+                main_hero_slide_active_index = latest_animes_data.length - 1;
                 return;
             }
             main_hero_slide_active_index -= 1;
@@ -96,7 +102,7 @@
     on:swipe={swipe_handler}
     bind:this={main_hero_slider_element}
 >
-    {#each latest_animes as anime, index}
+    {#each latest_animes_data as anime, index}
         {@const active = index === main_hero_slide_active_index}
         {@const formated_aired_on = new FormatDate(anime.release_date).format_to_season}
 
@@ -204,7 +210,7 @@
         />
 
         <div class="hidden w-full grid-cols-6 gap-[0.9375vw] md:mt-[1.25vw] md:grid">
-            {#each latest_animes as _, index}
+            {#each latest_animes_data as _, index}
                 <button
                     class="col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] {slide_buttons[index].border} transition duration-300 hover:border-surface-50/50 {index === main_hero_slide_active_index ? slide_buttons[index].background : ''}"
                     on:click={() => {

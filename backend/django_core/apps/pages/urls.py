@@ -5,8 +5,6 @@ from .views.anime import (
     anime_explore_view,
     anime_home_view,
     anime_info_view,
-    anime_latest_episodes,
-    anime_latest_animes,
 )
 from .views.stack import stack_view
 from .views.upload import upload_view
@@ -22,8 +20,6 @@ urlpatterns = [
         include(
             [
                 path("", anime_home_view, name="anime_home_view"),
-                path("latest-episodes/", anime_latest_episodes, name="anime_latest_episodes"),
-                path("latest-animes/", anime_latest_animes, name="anime_latest_animes"),
                 path("explore/", anime_explore_view, name="anime_explore_view"),
                 path(
                     "<str:platform>/",

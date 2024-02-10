@@ -13,43 +13,14 @@
     import LatestEpisodes from "$components/specific/LatestEpisodes/Index.svelte";
     import LatestAnimes from "$components/specific/LatestAnimes/Index.svelte";
 
-    import { reverse } from "$functions/urls";
-    import { get_csrf_token } from "$functions/get_csrf_token";
-    import { FETCH_TIMEOUT } from "$constants/fetch";
-
-    type ILatestAnimes = {
-        id: number;
-        name: string;
-        type: string;
-        episodes: number;
-        status: string;
-        release_date: string;
-        studio: string;
-        genres: string[];
-        synopsis: string;
-        image: string;
-    }[];
-
-    async function fetch_latest_animes() {
-        const res = await fetch(reverse("anime_latest_animes"), {
-            method: "GET",
-            headers: {
-                "X-CSRFToken": get_csrf_token()
-            },
-            signal: AbortSignal.timeout(FETCH_TIMEOUT)
-        });
-
-        return await res.json() as ILatestAnimes;
-    };
-
-    const fetch_anime_promise = fetch_latest_animes();
+    export let latest_animes: string;
+    export let latest_episodes: string;
 </script>
 
 <div class="mt-16 block md:mt-0 md:p-[1.25vw] md:pr-[3.75vw]">
     <div class="flex flex-col justify-between md:flex-row">
-        {#await fetch_anime_promise then latest_animes}
-            <LatestAnimes {latest_animes} />
-        {/await}
+        <LatestAnimes {latest_animes} />
+        
         <div class="hidden w-[21.5625vw] md:block">
             <div class="flex items-center justify-between pr-[0.75vw]">
                 <div class="flex items-center gap-[0.625vw]">
@@ -63,7 +34,8 @@
                     <ArrowUpRight class="w-[1vw]" />
                 </button>
             </div>
-            <LatestEpisodes />
+            <LatestEpisodes {latest_episodes} />
+
             <div class="mt-[0.75vw] flex items-start justify-between gap-[2vw] pr-[0.75vw]">
                 <span class="text-[0.75vw] font-semibold md:leading-[1.25vw]">showing recently aired episodes from your Anime List</span>
                 <button class="btn btn-secondary p-0 text-[0.75vw] font-semibold text-warning"> Change to All </button>
