@@ -16,26 +16,6 @@ if TYPE_CHECKING:
     from ..request import HtmxHttpRequest
 
 
-async def anime_home_view_partial_slider_view(
-    request: "HtmxHttpRequest",
-    pk: int,
-) -> HttpResponse:
-    anime = latest_animes[pk]
-    next_index = (pk + 1) % len(latest_animes)
-    previous_index = (pk - 1) % len(latest_animes)
-
-    return render(
-        request,
-        "anime/_slider.html",
-        context={
-            "anime": anime,
-            "next_index": next_index,
-            "previous_index": previous_index,
-            "current_index": pk,
-        },
-    )
-
-
 async def anime_home_view(request: "HtmxHttpRequest") -> HttpResponse:
     if request.htmx:
         return render(
