@@ -1,112 +1,29 @@
-{% load static %}
-
-{% block head %}
-    <title>AnimeCore</title>
-{% endblock %}
-
-<!-- <home-container
+<home-container
     class="mt-16 block md:mt-0 md:p-[1.25vw] md:pr-[3.75vw]"
-    _="init call window.timer.start() end"
 >
     <hero-section class="flex flex-col justify-between md:flex-row">
         <latest-animes-slider class="relative h-96 w-full md:h-[26vw] md:w-[42vw]">
             <slider
-                class="h-full duration-300 flex md:rounded-t-[0.875vw]"
-                _="
-                   on fetch:beforeRequest(headers)
-                   add .bg-neutral to me
-                   add .backdrop-blur-sm to next <backdrop/>
-                   then call window.timer.reset()
-
-                   on fetch:afterResponse
-                   wait 300ms
-                   remove .bg-neutral from me
-                   send hyperscript:change_active(index:current_index) to .slider-brick
-                   then remove .backdrop-blur-sm from next <backdrop/>
-
-                   on hyperscript:slide_next
-                   fetch `{{ request.get_full_path }}_slider/${next_index}`
-                   put result into my innerHTML
-                   call _hyperscript.processNode(my)
-                   end
-
-                   on hyperscript:slide_prev
-                   fetch `{{ request.get_full_path }}_slider/${previous_index}`
-                   put result into my innerHTML
-                   call _hyperscript.processNode(my)
-                   end
-
-                   on hyperscript:slide_to(index)
-                   fetch `{{ request.get_full_path }}_slider/${index}`
-                   put result into my innerHTML
-                   call _hyperscript.processNode(my)
-                   end
-
-                   init
-                   set global touch_start_x to 0
-                   set global touch_end_x to 0
-                   get global current_index
-                   if not current_index
-                   set global current_index to 0
-                   end
-                   fetch `{{ request.get_full_path }}_slider/${current_index}`
-                   put result into my innerHTML
-                   call _hyperscript.processNode(my)
-                   end
-
-                   on mouseenter call window.timer.pause() end
-                   on mouseleave call window.timer.start() end
-
-                   on touchstart set global touch_start_x to event.changedTouches[0].screenX end
-                   on touchend
-                   set global touch_end_x to event.changedTouches[0].screenX
-                   send hyperscript:check_direction to me
-                   end
-
-                   on hyperscript:check_direction
-                   if touch_end_x < touch_start_x
-                   send hyperscript:slide_prev to me
-                   else send hyperscript:slide_next to me
-                   end
-                  "
+                class="h-full duration-300 flex md:rounded-t-[0.875vw] bg-neutral"
             ></slider>
             <backdrop class="absolute inset-0 bg-transparent duration-300 md:rounded-t-[0.875vw] pointer-events-none"></backdrop>
             <slide-progress class="flex w-full flex-col">
                 <progress-bar
                     class="h-[0.2rem] md:h-[0.145vw] bg-warning duration-300 ease-linear"
-                    _="
-                       on hyperscript:timer_updated(value)
-                       set my *width to value%
-                      "
                 ></progress-bar>
                 <animes-boxes class="hidden w-full grid-cols-6 gap-[0.9375vw] md:mt-[1.25vw] md:grid">
-                    {% for _ in latest_animes %}
-                        <button
-                            class="slider-brick col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-secondary-300 transition duration-300 hover:border-surface-50/50"
-                            _="
-                               on click
-                               send hyperscript:slide_to(index:{{ forloop.counter0 }}) to <slider/>
-                               end
-
-                               on hyperscript:change_active(index)
-                               if {{ forloop.counter0 }} is equal to index
-                               add .bg-warning to me
-                               else remove .bg-warning from me
-                               end
-                              "
-                        ></button>
-                    {% endfor %}
+                    <button
+                        class="slider-brick col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-secondary-300 transition duration-300 hover:border-surface-50/50"
+                    ></button>
                 </animes-boxes>
             </slide-progress>
             <button
                 class="btn btn-primary text-accent min-h-max p-0 absolute -left-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] md:flex"
-                _="on click send hyperscript:slide_prev to <slider/>"
             >
                 <coreproject-icon-chevron class="w-[1.25vw] rotate-45"></coreproject-icon-chevron>
             </button>
             <button
                 class="btn btn-primary text-accent min-h-max p-0 absolute -right-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] bg-secondary-800 md:flex"
-                _="on click send hyperscript:slide_next to <slider/>"
             >
                 <coreproject-icon-chevron class="w-[1.25vw] -rotate-45"></coreproject-icon-chevron>
 
@@ -126,7 +43,7 @@
                     <coreproject-icon-arrow-up-right class="w-[1vw]"></coreproject-icon-arrow-up-right>
                 </button>
             </section-header>
-            <coreproject-specific-latest-episodes episodes="{{ latest_episodes }}"></coreproject-specific-latest-episodes>
+            <!-- <coreproject-specific-latest-episodes episodes="{{ latest_episodes }}"></coreproject-specific-latest-episodes> -->
             <section-bottom class="mt-[0.75vw] flex items-start justify-between gap-[2vw] pr-[0.75vw]">
                 <span class="text-[0.75vw] font-semibold md:leading-[1.25vw]">showing recently aired episodes from your Anime List</span>
                 <button class="btn btn-secondary p-0 text-[0.75vw] font-semibold text-warning"> Change to All </button>
@@ -176,7 +93,7 @@
 
                         </button>
                         <button class="btn btn-accent min-h-max h-[2.5vw] w-[2.5vw] rounded-[0.375vw] p-0">
-                            <coreproject-icon-preference class="text-surface-900 w-[1.25vw]" ></coreproject-icon-play>
+                            <!-- <coreproject-icon-preference class="text-surface-900 w-[1.25vw]" ></coreproject-icon-play> -->
                         </button>
                         <button class="btn btn-accent min-h-max h-[2.5vw] w-[2.5vw] rounded-[0.375vw] p-0">
                             <coreproject-icon-moon class="text-surface-900 w-[1.25vw]" ></coreproject-icon-moon>
@@ -217,10 +134,6 @@
             </see-all>
         </my-list-info>
         <my-list-animes class="relative mt-4 grid grid-cols-3 gap-3 md:mt-[1vw] md:grid-cols-5 md:gap-[1.25vw]">
-            {% for anime in my_list %}
-                <coreproject-specific-my-anime-list dropdown_class='pl-3' anime_name='{{anime.name}}' anime_status="{{anime.status}}" anime_image='{{ anime.image }}' anime_current_episodes="{{ anime.current_ep }}" anime_total_episodes="{{ anime.total_ep }}" anime_description="Azur Lane, a combination of all the different Camps in the world, was once successful in repelling the underwater menace, the Siren. Now splintered, they must face a new threat in Red Axis, former allies who crave to wield this otherworldly Siren technology for their own nefarious desires! Who will be victorious in the never-ending war between these battleship girls!? Akagami no Shirayuki-hime depicts Shirayuki's journey toward a new life at the royal palace of Clarines, as well as Zen's endeavor to become a prince worthy of his title. As loyal friendships are forged and deadly enemies formed, Shirayuki and Zen slowly learn to support each other as they walk their own paths." anime_studio="Bibury Animation Studios" anime_genres='Action,Ecchi,sci-Fi'></coreproject-specific-my-anime-list>
-            {% endfor %}
         </my-list-animes>
     </my-list>
-</home-container> -->
-<coreproject-page-anime></coreproject-page-anime>
+</home-container>
