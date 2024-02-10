@@ -16,16 +16,12 @@
     }[];
 
     async function fetch_latest_episodes() {
-        try {
-            const res = await fetch(reverse("anime_latest_episodes"), {
-                method: "GET",
-                signal: AbortSignal.timeout(FETCH_TIMEOUT),
-            });
+        const res = await fetch(reverse("anime_latest_episodes"), {
+            method: "GET",
+            signal: AbortSignal.timeout(FETCH_TIMEOUT),
+        });
 
-            return await res.json() as Episodes;
-        } catch (err) {
-            console.log(err);
-        };
+        return await res.json() as Episodes;
     };
 
     const fetch_promise = fetch_latest_episodes();
@@ -38,10 +34,8 @@
     class="flex w-full flex-col gap-[1vw]"
 >
     {#await fetch_promise then episodes}
-        {#if episodes}
-            {#each episodes as episode}
-                <Episode {episode} />
-            {/each}
-        {/if}
+        {#each episodes as episode}
+            <Episode {episode} />
+        {/each}
     {/await}
 </ScrollArea>
