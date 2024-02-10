@@ -11,36 +11,45 @@
     import CoreProjectText from "$icons/CoreProjectText/Index.svelte";
 
     import LatestEpisodes from "$components/specific/LatestEpisodes/Index.svelte";
+    import LatestAnimes from "$components/specific/LatestAnimes/Index.svelte";
+
+    import { reverse } from "$functions/urls";
+    import { get_csrf_token } from "$functions/get_csrf_token";
+    import { FETCH_TIMEOUT } from "$constants/fetch";
+
+    type ILatestAnimes = {
+        id: number;
+        name: string;
+        type: string;
+        episodes: number;
+        status: string;
+        release_date: string;
+        studio: string;
+        genres: string[];
+        synopsis: string;
+        image: string;
+    }[];
+
+    async function fetch_latest_animes() {
+        const res = await fetch(reverse("anime_latest_animes"), {
+            method: "GET",
+            headers: {
+                "X-CSRFToken": get_csrf_token()
+            },
+            signal: AbortSignal.timeout(FETCH_TIMEOUT)
+        });
+
+        return await res.json() as ILatestAnimes;
+    };
+
+    const fetch_anime_promise = fetch_latest_animes();
 </script>
 
 <div class="mt-16 block md:mt-0 md:p-[1.25vw] md:pr-[3.75vw]">
     <div class="flex flex-col justify-between md:flex-row">
-        <div class="relative h-96 w-full md:h-[26vw] md:w-[42vw]">
-            <slider
-                class="h-full duration-300 flex md:rounded-t-[0.875vw] bg-neutral"
-            ></slider>
-            <div class="absolute inset-0 bg-transparent duration-300 md:rounded-t-[0.875vw] pointer-events-none"></div>
-            <div class="flex w-full flex-col">
-                <progress-bar
-                    class="h-[0.2rem] md:h-[0.145vw] bg-warning duration-300 ease-linear"
-                ></progress-bar>
-                <div class="hidden w-full grid-cols-6 gap-[0.9375vw] md:mt-[1.25vw] md:grid">
-                    <button
-                        class="slider-brick col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] border-secondary-300 transition duration-300 hover:border-surface-50/50"
-                    ></button>
-                </div>
-            </div>
-            <button
-                class="btn btn-primary text-accent min-h-max p-0 absolute -left-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] md:flex"
-            >
-                <Chevron class="w-[1.25vw] rotate-45" />
-            </button>
-            <button
-                class="btn btn-primary text-accent min-h-max p-0 absolute -right-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] bg-secondary-800 md:flex"
-            >
-                <Chevron class="w-[1.25vw] -rotate-45" />
-            </button>
-        </div>
+        {#await fetch_anime_promise then latest_animes}
+            <LatestAnimes {latest_animes} />
+        {/await}
         <div class="hidden w-[21.5625vw] md:block">
             <div class="flex items-center justify-between pr-[0.75vw]">
                 <div class="flex items-center gap-[0.625vw]">

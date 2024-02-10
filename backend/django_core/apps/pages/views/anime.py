@@ -96,3 +96,6 @@ async def anime_episode_view(
 
 async def anime_latest_episodes(request: HttpRequest):
     return JsonResponse(latest_episodes, safe=False)
+
+async def anime_latest_animes(request: HttpRequest):
+    return JsonResponse(latest_animes, safe=False)
