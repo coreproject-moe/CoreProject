@@ -1,3 +1,16 @@
+<script lang="ts">
+    import Chevron from "$icons/Chevron/Index.svelte";
+    import Settings from "$icons/Settings/Index.svelte";
+    import ArrowUpRight from "$icons/ArrowUpRight/Index.svelte";
+    import Chat from "$icons/Chat/Index.svelte";
+    import Recent from "$icons/Recent/Index.svelte";
+    import Notification from "$icons/Notification/Index.svelte";
+    import Language from "$icons/Language/Index.svelte";
+    import Preference from "$icons/Preference/Index.svelte";
+    import Moon from "$icons/Moon/Index.svelte";
+    import CoreProjectText from "$icons/CoreProjectText/Index.svelte";
+</script>
+
 <home-container
     class="mt-16 block md:mt-0 md:p-[1.25vw] md:pr-[3.75vw]"
 >
@@ -20,13 +33,12 @@
             <button
                 class="btn btn-primary text-accent min-h-max p-0 absolute -left-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] md:flex"
             >
-                <coreproject-icon-chevron class="w-[1.25vw] rotate-45"></coreproject-icon-chevron>
+                <Chevron class="w-[1.25vw] rotate-45" />
             </button>
             <button
                 class="btn btn-primary text-accent min-h-max p-0 absolute -right-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] bg-secondary-800 md:flex"
             >
-                <coreproject-icon-chevron class="w-[1.25vw] -rotate-45"></coreproject-icon-chevron>
-
+                <Chevron class="w-[1.25vw] -rotate-45" />
             </button>
         </latest-animes-slider>
         <latest-episodes class="hidden w-[21.5625vw] md:block">
@@ -34,13 +46,12 @@
                 <header-title class="flex items-center gap-[0.625vw]">
                     <span class="text-[1.25vw] font-bold">Latest Episodes</span>
                     <button class="btn btn-secondary hidden rounded-[0.1875vw] p-0 md:flex md:h-[1.5vw] md:w-[1.5vw] min-h-full">
-                        <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
-
+                        <Settings class="w-[0.9vw] opacity-75" />
                     </button>
                 </header-title>
                 <button class="btn btn-neutral rounded-[0.3vw] text-[0.9vw] font-semibold p-0 min-h-max md:h-[2vw] md:px-[0.5vw]">
                     <span>Full List</span>
-                    <coreproject-icon-arrow-up-right class="w-[1vw]"></coreproject-icon-arrow-up-right>
+                    <ArrowUpRight class="w-[1vw]" />
                 </button>
             </section-header>
             <!-- <coreproject-specific-latest-episodes episodes="{{ latest_episodes }}"></coreproject-specific-latest-episodes> -->
@@ -68,19 +79,19 @@
                 <navigation-left-buttons class="mt-[1vw] flex flex-col gap-[0.75vw]">
                     <div class="flex items-center gap-[1vw]">
                         <button class="btn btn-warning min-h-max h-[2.5vw] w-[2.5vw] rounded-[0.375vw] p-0">
-                            <coreproject-icon-chat class="text-surface-900 w-[1.25vw]"> </coreproject-icon-chat>
+                            <Chat class="text-surface-900 w-[1.25vw]" />
                         </button>
                         <span class="text-[1vw] font-bold">Forums</span>
                     </div>
                     <div class="flex items-center gap-[1vw]">
                         <button class="btn btn-warning min-h-max h-[2.5vw] w-[2.5vw] rounded-[0.375vw] bg-surface-50 p-0">
-                            <coreproject-icon-recent class="text-surface-900 w-[1.25vw]"></coreproject-icon-recent>
+                            <Recent class="text-surface-900 w-[1.25vw]" />
                         </button>
                         <span class="text-[1vw] font-bold">Last watched anime</span>
                     </div>
                     <div class="flex items-center gap-[1vw]">
                         <button class="btn btn-warning min-h-max h-[2.5vw] w-[2.5vw] rounded-[0.375vw] bg-surface-50 p-0">
-                            <coreproject-icon-notification class="text-surface-900 w-[1.25vw]"></coreproject-icon-notification >
+                            <Notification class="text-surface-900 w-[1.25vw]" />
                         </button>
                         <span class="text-[1vw] font-bold">Notifications</span>
                     </div>
@@ -89,21 +100,20 @@
                     <span class="text-[0.9vw] font-semibold leading-none">More</span>
                     <div class="mt-[0.75vw] flex gap-[0.9375vw]">
                         <button class="btn btn-accent min-h-max h-[2.5vw] w-[2.5vw] rounded-[0.375vw] p-0">
-                            <coreproject-icon-language class="text-surface-900 w-[1.25vw]" ></coreproject-icon-language >
-
+                            <Language class="text-surface-900 w-[1.25vw]" />
                         </button>
                         <button class="btn btn-accent min-h-max h-[2.5vw] w-[2.5vw] rounded-[0.375vw] p-0">
-                            <!-- <coreproject-icon-preference class="text-surface-900 w-[1.25vw]" ></coreproject-icon-play> -->
+                            <Preference class="text-surface-900 w-[1.25vw]" />
                         </button>
                         <button class="btn btn-accent min-h-max h-[2.5vw] w-[2.5vw] rounded-[0.375vw] p-0">
-                            <coreproject-icon-moon class="text-surface-900 w-[1.25vw]" ></coreproject-icon-moon>
+                            <Moon class="text-surface-900 w-[1.25vw]" />
                         </button>
                         <button class="btn btn-accent min-h-max h-[2.5vw] w-[2.5vw] rounded-[0.375vw] bg-surface-50 p-0">
-                            <coreproject-icon-settings class="text-surface-900 w-[1.25vw]" ></coreproject-icon-settings>
+                            <Settings class="text-surface-900 w-[1.25vw]" />
                         </button>
                     </div>
                 </navigation-right-buttons>
-                <coreproject-icon-coreproject-text></coreproject-icon-coreproject-text>
+                <CoreProjectText />
             </navigation-content>
         </navigation-card>
     </hero-section>
@@ -111,7 +121,7 @@
         <section-header class="flex items-center gap-[0.625vw]">
             <header-title class="text-lg font-bold md:text-[1.25vw]">My List</header-title>
             <button class="btn btn-secondary hidden rounded-[0.1875vw] p-0 md:flex md:h-[1.5vw] md:w-[1.5vw] min-h-full">
-                <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+                <Settings class="w-[0.9vw] opacity-75" />
             </button>
         </section-header>
         <my-list-info class="flex items-center justify-between">
@@ -119,17 +129,17 @@
             <my-list-options class="hidden items-center gap-[1vw] md:flex">
                 <button class="btn btn-neutral min-h-max h-[2.25vw] w-[6.625vw] gap-[0.625vw] rounded-[0.375vw] bg-surface-400 p-0 text-[0.875vw] font-semibold">
                     Watching
-                    <coreproject-icon-chevron class="w-[1vw]"></coreproject-icon-chevron>
+                    <Chevron class="w-[1vw]" />
                 </button>
                 <button class="btn btn-neutral min-h-max h-[2.25vw] w-[5.625vw] gap-[0.625vw] rounded-[0.375vw] bg-surface-400 p-0 text-[0.875vw] font-semibold">
                     Full List
-                    <coreproject-icon-arrow-up-right class="w-[1vw]"></coreproject-icon-arrow-up-right>
+                    <ArrowUpRight class="w-[1vw]" />
                 </button>
             </my-list-options>
             <see-all class="md:hidden">
                 <button class="btn btn-secondary min-h-max h-max gap-2 p-0 text-sm">
                     See all
-                    <coreproject-icon-chevron class="w-4 -rotate-90 text-primary-400"></coreproject-icon-chevron>
+                    <Chevron class="w-4 -rotate-90 text-primary-400" />
                 </button>
             </see-all>
         </my-list-info>
