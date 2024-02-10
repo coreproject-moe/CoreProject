@@ -1,7 +1,8 @@
 from typing import TYPE_CHECKING
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest, JsonResponse
 from django.shortcuts import render
+from rest_framework.response import Response
 
 from ..data.anime import (
     anime,
@@ -91,3 +92,7 @@ async def anime_episode_view(
         )
 
     return render(request, "anime/_layout.html", context={})
+
+
+async def anime_latest_episodes(request: HttpRequest):
+    return JsonResponse(latest_episodes, safe=False)

@@ -9,6 +9,8 @@
     import Preference from "$icons/Preference/Index.svelte";
     import Moon from "$icons/Moon/Index.svelte";
     import CoreProjectText from "$icons/CoreProjectText/Index.svelte";
+
+    import LatestEpisodes from "$components/specific/LatestEpisodes/Index.svelte";
 </script>
 
 <div class="mt-16 block md:mt-0 md:p-[1.25vw] md:pr-[3.75vw]">
@@ -52,7 +54,7 @@
                     <ArrowUpRight class="w-[1vw]" />
                 </button>
             </div>
-            <!-- <coreproject-specific-latest-episodes episodes="{{ latest_episodes }}"></coreproject-specific-latest-episodes> -->
+            <LatestEpisodes />
             <div class="mt-[0.75vw] flex items-start justify-between gap-[2vw] pr-[0.75vw]">
                 <span class="text-[0.75vw] font-semibold md:leading-[1.25vw]">showing recently aired episodes from your Anime List</span>
                 <button class="btn btn-secondary p-0 text-[0.75vw] font-semibold text-warning"> Change to All </button>
