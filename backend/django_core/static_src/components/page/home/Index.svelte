@@ -5,6 +5,7 @@
     import AnimeCore from "$icons/AnimeCore/index.svelte";
     import MangaCore from "$icons/MangaCore/Index.svelte";
     import SoundCore from "$icons/SoundCore/Index.svelte";
+    import { goto } from "$functions/urls";
 
     const products_mapping = [
         {
@@ -125,12 +126,18 @@
                         {item.description}
                     </p>
                     {#if item.available}
-                        <a
-                            href={item.href}
+                        <button
+                            on:click|preventDefault={() => {
+                                goto({
+                                    url: item.href,
+                                    verb: "GET",
+                                    target: "body"
+                                });
+                            }}
                             class="btn relative h-max min-h-max w-full rounded-xl border-none bg-gradient-to-r from-rose-500 to-blue-500 p-4 text-lg leading-none text-accent shadow-lg shadow-rose-500/25 md:rounded-[1vw] md:p-[1.25vw] md:text-[1.25vw]"
                         >
                             Explore
-                        </a>
+                        </button>
                     {:else}
                         <a
                             href="/"
