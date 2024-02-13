@@ -80,10 +80,8 @@ django_debug_toolbar = "*"
 django_dbbackup = "*"
 django_cprofile_middleware = "*"
 ## Code formatting
-# Black
-black = ">=23.10.1"
 # Linting
-ruff = ">=0.1.3"
+ruff = ">=0.2.0"
 # Mypy
 mypy = ">=1.6.1"
 # Stubs
@@ -205,24 +203,17 @@ exclude = [
     '**/test/*'
 ]
 
-# Allow unused variables when underscore-prefixed.
-dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
 # Assume Python 3.11
 target-version = "py311"
 
-select = [
-  "E",  # pycodestyle
-  "F",  # pyflakes
-  "I",  # isort
-]
 
-[tool.ruff.per-file-ignores]
-"*/__init__.py" = ["E402",'E501']
-"*/settings.py" = ["E402"]
-"*/api_v1.py" = ["E402"]
-"*/urls.py" = ['E402']
-
-[tool.ruff.mccabe]
-# Unlike Flake8, default to a complexity level of 10.
-max-complexity = 10
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
