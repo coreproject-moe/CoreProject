@@ -24,7 +24,7 @@
             icon: Chat,
             name: "forum",
             href: "/forum",
-            url: reverse("anime_home_view")
+            url: ""
         }
     ];
 </script>
