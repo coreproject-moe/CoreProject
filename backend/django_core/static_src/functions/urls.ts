@@ -1,4 +1,3 @@
-import { commentbox_value } from "$stores/comment";
 import htmx from "htmx.org";
 import * as _ from "lodash-es";
 
@@ -6,6 +5,10 @@ import * as _ from "lodash-es";
 
 function handle_404() {
     goto({ url: "/404", target: "body", verb: "GET" });
+}
+
+function handle_500() {
+    goto({ url: "/500", target: "body", verb: "GET" });
 }
 
 export function reverse(view: string, ...args: Array<string | number>) {
@@ -82,7 +85,14 @@ export async function goto({
     // Redirect to 404 page in case of error
     btn.addEventListener("htmx:afterRequest", (event: any) => {
         if (event.detail.failed) {
-            handle_404();
+            switch (event.detail.xhr.status) {
+                case 404:
+                    handle_404();
+                    break;
+                case 500:
+                    handle_500();
+                    break;
+            }
         }
     });
 
