@@ -14,7 +14,6 @@
 
     let user_authenticated: boolean | null = null,
         form_is_submitable: boolean | null = null;
-    $: form_is_submitable = [username_or_email, password].every((field) => field.value && !field.error);
 
     onMount(() => {
         user_authenticated = string_to_boolean(window.user_authenticated);
@@ -34,6 +33,13 @@
         handle_password_input = (event: Event) => {
             handle_input({ event, schema: z.string().min(1, "**Password** can't be empty"), error_field: password });
         };
+
+    const check_if_form_is_submittable = () => {
+        form_is_submitable = [username_or_email, password].every((field) => {
+            return field.value && _.isEmpty(field.error);
+        });
+    };
+
     const handle_submit = async () => {
         const form_data = await object_to_form_data({
             username: username_or_email.value,
@@ -62,12 +68,20 @@
         </div>
         <div>
             Perhaps you meant to
-            <a
-                href={reverse("logout_view")}
+            <button
+                on:click|preventDefault={() => {
+                    goto({
+                        url: reverse("logout_view"),
+                        verb: "GET",
+                        target: "body"
+                    });
+
+                    user_authenticated = false;
+                }}
                 class="text-base leading-none text-primary underline md:text-[1.1vw]"
             >
                 logout
-            </a>
+            </button>
             ?
         </div>
     </div>
@@ -89,6 +103,7 @@
                 <input
                     bind:value={username_or_email.value}
                     on:input={handle_username_input}
+                    on:input={check_if_form_is_submittable}
                     placeholder="sora_amamiya@coreproject.moe / soraamamiya#0001"
                     class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
                 />
@@ -115,6 +130,7 @@
                     <input
                         bind:value={password.value}
                         on:input={handle_password_input}
+                        on:input={check_if_form_is_submittable}
                         placeholder="enter your existing password"
                         class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
                     />
