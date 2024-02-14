@@ -67,7 +67,12 @@
         };
     let password_strength = 0;
     let form_is_submitable: boolean | null = null;
-    $: form_is_submitable = [email, password, confirm_password].every((field) => field.value && !field.error);
+
+    function check_if_form_is_submitable() {
+        form_is_submitable = [email, password, confirm_password].every((field) => {
+            return field.value && _.isEmpty(field.error);
+        });
+    }
 
     const dispatch = createEventDispatcher();
 
@@ -145,6 +150,7 @@
             <input
                 bind:value={email.value}
                 on:input|preventDefault={handle_email_input}
+                on:input={check_if_form_is_submitable}
                 placeholder="Email address"
                 class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
@@ -167,6 +173,7 @@
             <input
                 bind:value={password.value}
                 on:input={handle_password_input}
+                on:input={check_if_form_is_submitable}
                 placeholder="Password"
                 class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
@@ -218,6 +225,7 @@
             <input
                 bind:value={confirm_password.value}
                 on:input={handle_confirm_password}
+                on:input={check_if_form_is_submitable}
                 placeholder="Confirm Password"
                 class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />

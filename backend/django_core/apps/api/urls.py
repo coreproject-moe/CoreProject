@@ -1,6 +1,7 @@
 from django.urls import include, path
 from rest_framework import routers
 
+from .views.user.username_validity import UsernameValiditiyAPIView
 from .views.anime import AnimeViewSet
 from .views.anime.comment import AnimeCommentAPIView
 from .views.anime.episode import EpisodeAPIView
@@ -52,7 +53,12 @@ urlpatterns = [
     ),
     # User routes
     path("user/login/", LoginAPIView.as_view(), name="login-endpoint"),
-    path("user/logout/", LogoutAPIView.as_view()),
+    path("user/logout/", LogoutAPIView.as_view(), name="logout-endpoint"),
+    path(
+        "user/username_validity",
+        UsernameValiditiyAPIView.as_view(),
+        name="username-validity-endpoint",
+    ),
     # Comment routes
     path(
         "comment/<int:pk>/reaction/",
