@@ -98,21 +98,20 @@
             handle_input({ event: event, schema: z.string().email("Please enter a valid email address"), error_field: email });
         },
         handle_password_input = (event: Event) => {
-            handle_input({
-                event: event,
-                schema: z
-                    .string()
-                    .min(8, "atleast_8")
-                    .refine((val) => /(?=.*[!@#$%^&*()_+|~\-=?;:'",.<>{}[\]\\/])/.test(val), "missing_one_special_character")
-                    .refine((val) => /(?=.*\d)/.test(val), "missing_one_number")
-                    .refine((val) => /(?=.*[A-Z])|(?=.*[a-z])/.test(val), "missing_one_upper_or_lowercase"),
-                error_field: password
-            });
-
             if (password.value) {
+                handle_input({
+                    event: event,
+                    schema: z
+                        .string()
+                        .min(8, "atleast_8")
+                        .refine((val) => /(?=.*[!@#$%^&*()_+|~\-=?;:'",.<>{}[\]\\/])/.test(val), "missing_one_special_character")
+                        .refine((val) => /(?=.*\d)/.test(val), "missing_one_number")
+                        .refine((val) => /(?=.*[A-Z])|(?=.*[a-z])/.test(val), "missing_one_upper_or_lowercase"),
+                    error_field: password
+                });
                 password_strength = zxcvbn(password.value).score;
             } else {
-                password_strength = 0;
+                password_strength = password.error.length = 0;
             }
         },
         handle_confirm_password = (event: Event) => {
