@@ -6,7 +6,7 @@
 </script>
 
 <div class={cn(klass, "mt-[1vw] items-center justify-center text-[1.5vw]")}>
-    <div class="select-none inline-flex gap-[0.25vw] font-bold leading-none">
+    <div class="inline-flex select-none gap-[0.25vw] font-bold leading-none">
         <p class="inline-flex">
             <span class="text-white">m</span>
             <span class="text-white">a</span>
