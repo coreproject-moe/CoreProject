@@ -68,12 +68,20 @@
         </div>
         <div>
             Perhaps you meant to
-            <a
-                href={reverse("logout_view")}
+            <button
+                on:click|preventDefault={() => {
+                    goto({
+                        url: reverse("logout_view"),
+                        verb: "GET",
+                        target: "body"
+                    });
+
+                    user_authenticated = false;
+                }}
                 class="text-base leading-none text-primary underline md:text-[1.1vw]"
             >
                 logout
-            </a>
+            </button>
             ?
         </div>
     </div>
