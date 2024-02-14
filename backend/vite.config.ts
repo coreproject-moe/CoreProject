@@ -49,9 +49,6 @@ export default defineConfig({
         // sourcemap: true,
         rollupOptions: {
             input: [
-                // Vendor packages
-                join(JS_DIRECTORY, "vendor", "easytimer.ts"),
-
                 // Tailwind.css
                 join(CSS_DIRECTORY, "index.postcss"),
 
