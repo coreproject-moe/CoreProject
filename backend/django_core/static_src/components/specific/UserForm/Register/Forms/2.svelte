@@ -152,8 +152,8 @@
             </div>
         </div>
         <div class="mt-3 flex flex-col items-start gap-2 md:mt-0 md:gap-[0.5vw]">
-            {#each [`&lt; resend code &gt;`, `&lt; change email &gt;`] as item}
-                <button class="btn btn-secondary flex h-max min-h-max flex-col items-start p-0 text-base font-semibold leading-none text-primary underline md:text-[1vw]">{@html item}</button>
+            {#each [`< resend code >`, `< change email >`] as item}
+                <button class="btn btn-secondary flex h-max min-h-max flex-col items-start p-0 text-base font-semibold leading-none text-primary underline md:text-[1vw]">{item}</button>
             {/each}
         </div>
     </div>
