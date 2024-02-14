@@ -10,7 +10,7 @@
     import { reverse } from "$functions/urls";
     import { get_csrf_token } from "$functions/get_csrf_token";
     import { FETCH_TIMEOUT } from "$constants/fetch";
-    
+
     export let pages_state: [{ otp: string }, { username: string }];
 
     let form_is_submitable: boolean | null = null;
@@ -18,11 +18,11 @@
     const dispatch = createEventDispatcher();
 
     let username = {
-            value: "",
+            value: pages_state.find((item) => ("username" in item ? item.username : "")),
             error: new Array<string>()
         },
         otp = {
-            value: "",
+            value: pages_state.find((item) => ("otp" in item ? item.otp : "")),
             error: new Array<string>()
         };
 
