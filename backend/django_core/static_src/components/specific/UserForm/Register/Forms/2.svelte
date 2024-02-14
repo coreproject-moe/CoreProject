@@ -50,11 +50,10 @@
         };
 
     function handle_submit() {
-        // if (Object.values(form_errors).some((err) => err)) return;
-        // dispatch("submit", {
-        //     username: form_data.username,
-        //     otp: form_data.otp
-        // });
+        dispatch("submit", {
+            username: username.value,
+            otp: otp.value
+        });
     }
 </script>
 
