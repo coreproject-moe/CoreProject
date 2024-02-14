@@ -7,6 +7,9 @@
     import { handle_input } from "../../functions/handle_input";
     import _ from "lodash-es";
     import { OTP_LENGTH } from "$constants/otp";
+    import { reverse } from "$functions/urls";
+    import { get_csrf_token } from "$functions/get_csrf_token";
+    import { FETCH_TIMEOUT } from "$constants/fetch";
 
     let form_is_submitable: boolean | null = null;
 
@@ -28,7 +31,7 @@
     }
     // Functions
 
-    const handle_username_input = (event: Event) => {
+    const handle_username_input = async (event: Event) => {
             handle_input({
                 event: event,
                 schema: z
@@ -37,6 +40,34 @@
                     .refine((val) => /(?=.*^[a-zA-Z0-9_-]+#[0-9]{4}$)/.test(val), "**Username** is not valid for this regex `^[a-zA-Z0-9_-]+#[0-9]{4}$`"),
                 error_field: username
             });
+
+            if (username.value) {
+                const res = await fetch(reverse("username-validity-endpoint"), {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": get_csrf_token()
+                    },
+                    signal: AbortSignal.timeout(FETCH_TIMEOUT),
+                    body: JSON.stringify({
+                        username: username.value
+                    })
+                });
+
+                // 302 = username found
+                // 404 = not found
+
+                switch (Number(res.status)) {
+                    case 302:
+                        username.error = [...username.error, `Username **${username.value}** is already taken`];
+                        break;
+                    case 404:
+                        break;
+                    default:
+                        throw new Error("Not Implemented");
+                }
+            }
         },
         handle_otp_input = (event: Event) => {
             handle_input({
