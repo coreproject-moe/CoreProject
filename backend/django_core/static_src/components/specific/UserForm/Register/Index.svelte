@@ -14,8 +14,8 @@
     let pages_state: { [key: number]: Record<string, string | number> } = [];
 
     // Our handlers
-    function goToPage(page: number) {
-        page = page;
+    function goToPage(e: CustomEvent) {
+        page = e.detail.page;
     }
 
     function handleSubmit(e: CustomEvent) {
