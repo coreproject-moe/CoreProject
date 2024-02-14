@@ -11,6 +11,10 @@
     import { zxcvbn, zxcvbnOptions, type OptionsType } from "@zxcvbn-ts/core";
     import { cn } from "$functions/classname";
 
+    export let pages_state: [{ email: string }, { password: string }, { confirm_password: string }];
+
+    const combined_state = Object.assign({}, ...pages_state);
+
     beforeUpdate(async () => {
         const zxcvbnCommonPackage = await import("@zxcvbn-ts/language-common");
         const zxcvbnEnPackage = await import("@zxcvbn-ts/language-en");
@@ -54,15 +58,15 @@
     });
 
     let email = {
-            value: "",
+            value: combined_state.email ?? "",
             error: new Array<string>()
         },
         password = {
-            value: "",
+            value: combined_state.password ?? "",
             error: new Array<string>()
         },
         confirm_password = {
-            value: "",
+            value: combined_state.confirm_password ?? "",
             error: new Array<string>()
         };
 

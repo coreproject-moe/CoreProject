@@ -12,17 +12,18 @@
     import { FETCH_TIMEOUT } from "$constants/fetch";
 
     export let pages_state: [{ otp: string }, { username: string }];
+    const combined_state = Object.assign({}, ...pages_state);
 
     let form_is_submitable: boolean | null = null;
 
     const dispatch = createEventDispatcher();
 
     let username = {
-            value: pages_state.find((item) => ("username" in item ? item.username : "")),
+            value: combined_state.otp ?? "",
             error: new Array<string>()
         },
         otp = {
-            value: pages_state.find((item) => ("otp" in item ? item.otp : "")),
+            value: combined_state.username ?? "",
             error: new Array<string>()
         };
 
