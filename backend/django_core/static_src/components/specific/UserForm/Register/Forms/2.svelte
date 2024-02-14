@@ -10,6 +10,8 @@
     import { reverse } from "$functions/urls";
     import { get_csrf_token } from "$functions/get_csrf_token";
     import { FETCH_TIMEOUT } from "$constants/fetch";
+    
+    export let pages_state: [{ otp: string }, { username: string }];
 
     let form_is_submitable: boolean | null = null;
 
@@ -29,6 +31,22 @@
             return field.value && _.isEmpty(field.error);
         });
     }
+
+    const button_mapping = [
+        {
+            value: `< resend code >`,
+            action: () => {}
+        },
+        {
+            value: `< change email >`,
+            action: () => {
+                dispatch("go_to_page", {
+                    page: 0
+                });
+            }
+        }
+    ];
+
     // Functions
 
     const handle_username_input = async (event: Event) => {
@@ -152,8 +170,13 @@
             </div>
         </div>
         <div class="mt-3 flex flex-col items-start gap-2 md:mt-0 md:gap-[0.5vw]">
-            {#each [`< resend code >`, `< change email >`] as item}
-                <button class="btn btn-secondary flex h-max min-h-max flex-col items-start p-0 text-base font-semibold leading-none text-primary underline md:text-[1vw]">{item}</button>
+            {#each button_mapping as item}
+                <button
+                    class="btn btn-secondary flex h-max min-h-max flex-col items-start p-0 text-base font-semibold leading-none text-primary underline md:text-[1vw]"
+                    on:click|preventDefault={item.action}
+                >
+                    {item.value}
+                </button>
             {/each}
         </div>
     </div>
