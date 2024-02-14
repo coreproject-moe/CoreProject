@@ -4,62 +4,62 @@
     import { createEventDispatcher } from "svelte";
     import { z } from "zod";
     import Markdown from "$components/minor/Markdown/Index.svelte";
+    import { handle_input } from "../../functions/handle_input";
+    import _ from "lodash-es";
+    import { OTP_LENGTH } from "$constants/otp";
+
+    let form_is_submitable: boolean | null = null;
 
     const dispatch = createEventDispatcher();
-    const OTP_LENGTH = 5;
 
-    let form_data = {
-            username: "",
-            otp: ""
+    let username = {
+            value: "",
+            error: new Array<string>()
         },
-        form_errors: {
-            username?: string;
-            otp?: string;
-        } = {};
+        otp = {
+            value: "",
+            error: new Array<string>()
+        };
 
-    const schema = z.object({
-        username: z
-            .string()
-            .min(4, "**Username** must be at least 4 characters long")
-            .refine((val) => /(?=.*^[a-zA-Z0-9_-]+#[0-9]{4}$)/.test(val), "**Username** is not valid for this regex `^[a-zA-Z0-9_-]+#[0-9]{4}$`"),
-
-        otp: z
-            .string()
-            .refine((val) => /^\d+$/.test(val), "**OTP** must be a number")
-            .refine((val) => new RegExp(`^\\d{${OTP_LENGTH}}$`).test(val), `**OTP** must contain ${OTP_LENGTH} numbers`)
-    });
-
-    // Functions
-    function validateZod() {
-        try {
-            schema.parse(form_data);
-            // if valid
-            form_errors = {};
-        } catch (err) {
-            if (err instanceof z.ZodError) {
-                form_errors = err.flatten().fieldErrors;
-            }
-        }
-    }
-
-    // Bindings
-    function handleInput() {
-        validateZod();
-    }
-
-    function handleSubmit() {
-        validateZod();
-
-        if (Object.values(form_errors).some((err) => err)) return;
-        dispatch("submit", {
-            username: form_data.username,
-            otp: form_data.otp
+    function check_if_form_is_submitable() {
+        form_is_submitable = [username, otp].every((field) => {
+            return field.value && _.isEmpty(field.error);
         });
+    }
+    // Functions
+
+    const handle_username_input = (event: Event) => {
+            handle_input({
+                event: event,
+                schema: z
+                    .string()
+                    .min(4, "**Username** must be at least 4 characters long")
+                    .refine((val) => /(?=.*^[a-zA-Z0-9_-]+#[0-9]{4}$)/.test(val), "**Username** is not valid for this regex `^[a-zA-Z0-9_-]+#[0-9]{4}$`"),
+                error_field: username
+            });
+        },
+        handle_otp_input = (event: Event) => {
+            handle_input({
+                event: event,
+                schema: z
+                    .string()
+                    .refine((val) => /^\d+$/.test(val), "**OTP** must be a number")
+                    .refine((val) => new RegExp(`^\\d{${OTP_LENGTH}}$`).test(val), `**OTP** must contain ${OTP_LENGTH} numbers`),
+                error_field: otp
+            });
+        };
+
+    function handle_submit() {
+        // if (Object.values(form_errors).some((err) => err)) return;
+        // dispatch("submit", {
+        //     username: form_data.username,
+        //     otp: form_data.otp
+        // });
     }
 </script>
 
 <form
-    on:submit|preventDefault={handleSubmit}
+    on:submit|preventDefault={handle_submit}
     class="flex h-full flex-col justify-between"
 >
     <div class="flex flex-col gap-2 whitespace-nowrap font-bold uppercase leading-none tracking-widest text-white md:gap-[0.5vw] md:text-[1.2vw]">
@@ -75,18 +75,19 @@
                 Username:
             </label>
             <input
-                bind:value={form_data.username}
-                on:input={handleInput}
+                bind:value={username.value}
+                on:input|preventDefault={handle_username_input}
+                on:input={check_if_form_is_submitable}
                 name="username"
                 placeholder="Username eg: sora#4444"
                 class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
             <div class="text-surface-300 flex items-start gap-2 text-xs leading-none md:gap-[0.5vw] md:text-[0.75vw]">
                 <Info class="w-3 opacity-70 md:w-[0.9vw]" />
-                {#if form_errors.username}
+                {#if !_.isEmpty(username.error)}
                     <Markdown
                         class="text-error"
-                        markdown={form_errors.username[0]}
+                        markdown={username.error.join("")}
                     />
                 {:else}
                     <span>you can change username in your user settings later, so go bonkers!</span>
@@ -101,18 +102,19 @@
                 OTP:
             </label>
             <input
-                bind:value={form_data.otp}
-                on:input={handleInput}
+                bind:value={otp.value}
+                on:input={handle_otp_input}
+                on:input={check_if_form_is_submitable}
                 name="otp"
                 placeholder="One Time Password"
                 class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
             <div class="text-surface-300 flex items-start gap-2 text-xs leading-none md:gap-[0.5vw] md:text-[0.75vw]">
                 <Info class="w-3 opacity-70 md:w-[0.9vw]" />
-                {#if form_errors.otp}
+                {#if !_.isEmpty(otp.error)}
                     <Markdown
                         class="text-error"
-                        markdown={form_errors.otp[0]}
+                        markdown={otp.error.join("")}
                     />
                 {:else}
                     <span>if you didn’t receive the code, check your spam folder. Or use the resend button</span>
@@ -132,6 +134,7 @@
         </div>
         <button
             type="submit"
+            class:btn-disabled={!form_is_submitable}
             class="btn btn-primary h-max min-h-max rounded-lg p-4 text-base font-semibold leading-none text-accent md:rounded-[0.5vw] md:p-[1vw] md:text-[0.95vw]"
         >
             <span>Continue</span>

@@ -5,7 +5,7 @@ export async function sanitize(_text: string | undefined | Promise<string | unde
     const text = await _text;
     const xss = await import("xss");
 
-    return xss.filterXSS(text ?? "", {
+    return xss?.filterXSS(text ?? "", {
         whiteList: {
             blockquote: ["class"],
             del: ["class"],
