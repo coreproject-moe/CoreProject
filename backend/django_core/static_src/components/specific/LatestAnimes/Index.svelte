@@ -10,7 +10,7 @@
     import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
 
     import { swipe } from "svelte-gestures";
-    import { Timer as EasyTimer} from "easytimer.js";
+    import { Timer as EasyTimer } from "easytimer.js";
     import { tweened } from "svelte/motion";
     import { FormatDate } from "$functions/format_date";
     import { blur } from "svelte/transition";
@@ -48,7 +48,7 @@
             { background: "bg-error", border: "border-error" }
         ];
 
-        /* Slider codes */
+    /* Slider codes */
     let main_hero_slider_element: HTMLElement,
         main_hero_slide_active_index = 0;
 
@@ -130,15 +130,15 @@
                     class="absolute h-full w-full object-cover object-center md:rounded-t-[0.875vw]"
                 />
 
-                <div class="absolute inset-0 bg-gradient-to-t from-secondary/90 to-secondary/50 md:to-surface-900/25" />
-                <div class="absolute inset-0 hidden bg-gradient-to-r from-surface-900 to-surface-900/25 md:flex md:from-surface-900/50" />
+                <div class="md:to-surface-900/25 absolute inset-0 bg-gradient-to-t from-secondary/90 to-secondary/50" />
+                <div class="from-surface-900 to-surface-900/25 md:from-surface-900/50 absolute inset-0 hidden bg-gradient-to-r md:flex" />
 
                 <div class="absolute bottom-7 left-7 flex flex-col md:bottom-0 md:left-0 md:px-[3.75vw] md:py-[2.625vw]">
-                    <span class="text-white text-3xl font-bold md:text-[2vw] md:leading-[2.375vw]">{anime.name}</span>
-                    <div class="text-base uppercase font-semibold text-white/90 md:hidden md:text-[2vw] md:leading-[2.375vw]">
-                        { anime.name }
+                    <span class="text-3xl font-bold text-white md:text-[2vw] md:leading-[2.375vw]">{anime.name}</span>
+                    <div class="text-base font-semibold uppercase text-white/90 md:hidden md:text-[2vw] md:leading-[2.375vw]">
+                        {anime.name}
                     </div>
-                    <div class="py-2 md:pb-0 flex flex-wrap items-center gap-2 md:pt-4 text-xs font-semibold text-white/90 md:gap-[0.65vw] md:pt-[0.5vw] md:text-[0.9375vw]">
+                    <div class="flex flex-wrap items-center gap-2 py-2 text-xs font-semibold text-white/90 md:gap-[0.65vw] md:pb-0 md:pt-[0.5vw] md:text-[0.9375vw]">
                         <span class="leading-[1.125vw]">
                             {anime.type}
                         </span>
@@ -156,47 +156,46 @@
                         <span class="leading-[1.125vw]">
                             {anime.studio}
                         </span>
-                    <div>
+                        <div>
+                            <anime-genres class="flex gap-2 pb-2 pt-3 md:gap-[0.5vw] md:pt-0">
+                                {#each anime.genres as genre}
+                                    <span class="rounded-lg bg-secondary p-2 px-3 text-xs capitalize leading-none md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.4vw] md:text-[0.75vw] md:font-semibold">
+                                        {genre}
+                                    </span>
+                                {/each}
+                            </anime-genres>
 
-                    <anime-genres class="flex gap-2 pb-2 pt-3 md:gap-[0.5vw] md:pt-0">
-                        {#each anime.genres as genre}
-                            <span
-                                class="rounded-lg bg-secondary p-2 px-3 text-xs md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.4vw] md:text-[0.75vw] md:font-semibold capitalize leading-none"
+                            <ScrollArea
+                                gradient_mask
+                                offset_scrollbar
+                                parent_class="max-h-16 md:max-h-[6vw] hidden md:flex"
+                                class="text-surface-200 text-xs font-medium leading-4 md:pt-[0.75vw] md:text-[0.85vw] md:leading-[1.1vw]"
                             >
-                                { genre }
-                            </span>
-                        {/each}
-                    </anime-genres>
+                                {anime.synopsis}
+                            </ScrollArea>
 
-                    <ScrollArea
-                        gradient_mask
-                        offset_scrollbar
-                        parent_class="max-h-16 md:max-h-[6vw] hidden md:flex"
-                        class="text-xs font-medium leading-4 text-surface-200 md:pt-[0.75vw] md:text-[0.85vw] md:leading-[1.1vw]"
-                    >
-                        {anime.synopsis}
-                    </ScrollArea>
-
-                    <div class="mb-2 mt-5 flex items-center gap-2 md:mb-0 md:mt-[1.5vw] md:gap-[1vw]">
-                        <button
-                            class="btn btn-warning leading-none flex px-6 py-4 md:py-[1vw] md:px-[1.25vw] min-h-max h-max justify-center gap-2 rounded-xl text-base text-secondary font-bold md:rounded-[0.625vw] md:text-[0.875vw] md:gap-[0.5vw]"
-                        >
-                            <Play class="w-4 text-surface-900 md:w-[1vw]" />
-                            <span>Ep 1</span>
-                        </button>
-                        <a href="/anime/mal/40748">
-                            <button
-                                class="btn btn-secondary leading-none flex px-6 py-4 md:py-[1vw] md:px-[1.25vw] min-h-max h-max items-center justify-center rounded-xl text-base font-semibold md:gap-[0.5vw] md:rounded-[0.5vw] md:text-[0.875vw] md:font-bold"
-                            >
-                                <Info class="w-5 text-surface-50 md:w-[1.25vw]" />
-                                <span>Details</span>
-                            </button>
-                        </a>
-                        <button
-                            class="btn btn-secondary leading-none p-4 md:p-[0.9vw] min-h-max h-max rounded-xl bg-surface-900 text-[3vw] font-bold text-surface-50s md:rounded-[0.5vw] md:text-[0.875vw]"
-                        >
-                            <Edit class="w-4 text-surface-50 md:w-[1.25vw]" />
-                        </button>
+                            <div class="mb-2 mt-5 flex items-center gap-2 md:mb-0 md:mt-[1.5vw] md:gap-[1vw]">
+                                <button
+                                    class="btn btn-warning flex h-max min-h-max justify-center gap-2 rounded-xl px-6 py-4 text-base font-bold leading-none text-secondary md:gap-[0.5vw] md:rounded-[0.625vw] md:px-[1.25vw] md:py-[1vw] md:text-[0.875vw]"
+                                >
+                                    <Play class="text-surface-900 w-4 md:w-[1vw]" />
+                                    <span>Ep 1</span>
+                                </button>
+                                <a href="/anime/mal/40748">
+                                    <button
+                                        class="btn btn-secondary flex h-max min-h-max items-center justify-center rounded-xl px-6 py-4 text-base font-semibold leading-none md:gap-[0.5vw] md:rounded-[0.5vw] md:px-[1.25vw] md:py-[1vw] md:text-[0.875vw] md:font-bold"
+                                    >
+                                        <Info class="text-surface-50 w-5 md:w-[1.25vw]" />
+                                        <span>Details</span>
+                                    </button>
+                                </a>
+                                <button
+                                    class="bg-surface-900 text-surface-50s btn btn-secondary h-max min-h-max rounded-xl p-4 text-[3vw] font-bold leading-none md:rounded-[0.5vw] md:p-[0.9vw] md:text-[0.875vw]"
+                                >
+                                    <Edit class="text-surface-50 w-4 md:w-[1.25vw]" />
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </anime-slides>
@@ -205,14 +204,17 @@
 
     <div class="absolute bottom-0 flex w-full flex-col">
         <div
-            class="bg-warning h-[0.2rem] md:h-[0.145vw] {slide_buttons[main_hero_slide_active_index].background}"
+            class="h-[0.2rem] bg-warning md:h-[0.145vw] {slide_buttons[main_hero_slide_active_index].background}"
             style="width: {$tweened_progress_value}%;"
         />
 
         <div class="hidden w-full grid-cols-6 gap-[0.9375vw] md:mt-[1.25vw] md:grid">
             {#each latest_animes_data as _, index}
                 <button
-                    class="col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] {slide_buttons[index].border} transition duration-300 hover:border-surface-50/50 {index === main_hero_slide_active_index ? slide_buttons[index].background : ''}"
+                    class="col-span-1 h-[0.625vw] w-full rounded-[0.1875vw] border-[0.15vw] {slide_buttons[index].border} hover:border-surface-50/50 transition duration-300 {index ===
+                    main_hero_slide_active_index
+                        ? slide_buttons[index].background
+                        : ''}"
                     on:click={() => {
                         timer?.reset();
                         timer?.start();
@@ -224,7 +226,7 @@
     </div>
 
     <button
-        class="btn btn-primary text-accent min-h-max p-0 absolute -left-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] md:flex"
+        class="btn btn-primary absolute -left-[1vw] top-[12vw] z-20 hidden h-[2.25vw] min-h-max w-[2.25vw] rounded-[0.375vw] p-0 text-accent md:flex"
         on:click={() => {
             timer?.reset();
             timer?.start();
@@ -234,7 +236,7 @@
         <Chevron class="w-[1.25vw] rotate-90" />
     </button>
     <button
-        class="btn btn-primary text-accent min-h-max p-0 absolute -right-[1vw] top-[12vw] z-20 hidden h-[2.25vw] w-[2.25vw] rounded-[0.375vw] bg-secondary-800 md:flex"
+        class="bg-secondary-800 btn btn-primary absolute -right-[1vw] top-[12vw] z-20 hidden h-[2.25vw] min-h-max w-[2.25vw] rounded-[0.375vw] p-0 text-accent md:flex"
         on:click={async () => {
             timer?.reset();
             timer?.start();

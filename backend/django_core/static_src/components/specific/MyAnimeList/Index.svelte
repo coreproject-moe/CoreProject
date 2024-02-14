@@ -43,7 +43,7 @@
     <div
         class="dropdown dropdown-hover"
         bind:this={main_element}
-        >
+    >
         <button
             on:mouseenter|preventDefault={() => {
                 calculate_style();
