@@ -2,6 +2,12 @@ import { commentbox_value } from "$stores/comment";
 import htmx from "htmx.org";
 import * as _ from "lodash-es";
 
+// Internal Function
+
+function handle_404() {
+    goto({ url: "/404", target: "body", verb: "GET" });
+}
+
 export function reverse(view: string, ...args: Array<string | number>) {
     const url = window.urls.get(view);
     if (!url) {
@@ -44,6 +50,11 @@ export async function goto({
     verb: "GET" | "POST" | "DELETE" | "PUT";
     target: string;
 }): Promise<void> {
+    // In case of empty url, send user to 404 page
+    if (_.isEmpty(url)) {
+        handle_404();
+    }
+
     // WHAT KIND OF FUCKERY IS THIS
     // FUCK HTMX
     // related : https://github.com/bigskysoftware/htmx/discussions/2116
@@ -71,7 +82,7 @@ export async function goto({
     // Redirect to 404 page in case of error
     btn.addEventListener("htmx:afterRequest", (event: any) => {
         if (event.detail.failed) {
-            goto({ url: "/404", target: "body", verb: "GET" });
+            handle_404();
         }
     });
 
