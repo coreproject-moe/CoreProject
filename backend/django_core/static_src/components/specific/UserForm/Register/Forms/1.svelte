@@ -10,6 +10,7 @@
     import { handle_input } from "../../functions/handle_input";
     import { zxcvbn, zxcvbnOptions, type OptionsType } from "@zxcvbn-ts/core";
     import { cn } from "$functions/classname";
+    import { goto, reverse } from "$functions/urls";
 
     export let pages_state: [{ email: string }, { password: string }, { confirm_password: string }];
 
@@ -252,7 +253,14 @@
     <div class="flex items-center justify-between">
         <div class="flex flex-col gap-1 md:gap-[0.5vw]">
             <span class="text-surface-100 text-xs leading-none md:text-[0.75vw]">Already have an account?</span>
-            <button class="text-start text-base leading-none text-primary underline md:text-[1.1vw]">Login</button>
+            <button
+                class="text-start text-base leading-none text-primary underline md:text-[1.1vw]"
+                on:click|preventDefault={() => {
+                    goto({ url: reverse("login_view"), verb: "GET", target: "body" });
+                }}
+            >
+                Login
+            </button>
         </div>
         <button
             type="submit"
