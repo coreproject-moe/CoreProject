@@ -9,12 +9,12 @@ from django.templatetags.static import static
 from django.urls import reverse_lazy
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.cache import never_cache
-from django_htmx.http import HttpResponseClientRedirect, HttpResponseClientRefresh, retarget
+from django_htmx.http import  HttpResponseClientRefresh
 
 if TYPE_CHECKING:
     from ..request import HtmxHttpRequest
 
-from ..forms.user import FirstRegisterForm, ResetPasswordForm, SecondRegisterForm
+from ..forms.user import ResetPasswordForm
 
 animes = [
     {"name": "Demon Slayer", "cover": static("/public/images/mock/DemonSlayer-cover.avif")},
@@ -59,69 +59,6 @@ def logout_view(request: "HtmxHttpRequest") -> HttpResponse:
 
 
 async def register_view(request: "HtmxHttpRequest") -> HttpResponse:
-    if request.htmx:
-        _internal_state_ = request.session["_internal_state_"]
-
-        if _internal_state_ == 1:
-            form = FirstRegisterForm(request.POST or None)
-
-            if form.is_valid():
-                request.session["_internal_state_"] = _internal_state_ + 1
-                request.session["_form_"] = dict(form.data)
-                return await register_view(request)
-
-            elif form.errors:
-                if form.errors.get("email"):
-                    form.fields["email"].widget.attrs["class"] += " focus:border-error"
-
-                elif form.errors.get("confirm_password"):
-                    form.fields["confirm_password"].widget.attrs[
-                        "class"
-                    ] += " focus:border-error"
-                    form.fields["confirm_password"].widget.attrs["_"] = "init focus() me"
-
-            return render(
-                request,
-                "user/register/_1.html",
-                context={
-                    "form": form,
-                },
-            )
-
-        elif _internal_state_ == 2:
-            form = SecondRegisterForm(request.POST or None)
-
-            if form.is_valid():
-                request.session["_internal_state_"] = 3
-                request.session["_form_"] = request.session["_form_"] | form.data
-                return await register_view(request)
-
-            elif form.errors:
-                if form.fields["username"].error_messages:
-                    form.fields["username"].widget.attrs["class"] += " focus:border-error"
-
-            return render(request, "user/register/_2.html", context={"form": form})
-
-        elif _internal_state_ == 3:
-            form_data = request.session["_form_"]
-            username = form_data.get("username", [None])[0]
-            email = form_data.get("email", [None])[0]
-
-            # TODO: Finish register logics
-
-            return render(
-                request,
-                "user/register/_3.html",
-                context={
-                    "username": username,
-                    "email": email,
-                },
-            )
-    else:
-        # Fresh state
-        request.session["_internal_state_"] = 1
-        request.session["_form_"] = {}
-
     return render(
         request,
         "user/register/index.html",
