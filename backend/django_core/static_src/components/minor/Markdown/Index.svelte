@@ -256,7 +256,7 @@
     );
 
     let html: string | Promise<string>;
-    $: html = sanitize(marked.parse(markdown ?? ""));
+    $: html = sanitize(marked.parse(markdown) ?? "");
 </script>
 
 <div class={cn(klass)}>

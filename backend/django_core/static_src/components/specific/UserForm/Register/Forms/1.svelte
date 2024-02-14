@@ -65,8 +65,9 @@
             value: "",
             error: new Array<string>()
         };
+
     let password_strength = 0;
-    let form_is_submitable: boolean | null = null;
+    let form_is_submitable = false;
 
     function check_if_form_is_submitable() {
         form_is_submitable = [email, password, confirm_password].every((field) => {
@@ -86,12 +87,13 @@
     // Bindings
 
     function handle_submit() {
-        if (password.value === confirm_password.value) {
+        if (form_is_submitable) {
             dispatch("submit", {
                 email: email.value,
                 password: password.value
             });
         }
+        // Show some errors here
     }
 
     const handle_email_input = (event: Event) => {
@@ -250,10 +252,8 @@
         </div>
         <button
             type="submit"
-            class={cn(
-                form_is_submitable || "btn-disabled",
-                `btn btn-primary h-max min-h-max rounded-lg p-4 text-base font-semibold leading-none text-accent md:rounded-[0.5vw] md:p-[1vw] md:text-[0.95vw]`
-            )}
+            class:btn-disabled={!form_is_submitable}
+            class={cn(`btn btn-primary h-max min-h-max rounded-lg p-4 text-base font-semibold leading-none text-accent md:rounded-[0.5vw] md:p-[1vw] md:text-[0.95vw]`)}
         >
             <span>Continue</span>
             <ArrowUpRight class="w-4 rotate-45 md:w-[1vw]" />
