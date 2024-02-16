@@ -24,5 +24,5 @@ class AnimeViewSet(viewsets.ModelViewSet):
     def get_serializer_class(self) -> type[AnimeGETSerializer] | type[AnimePOSTSerializer]:
         if self.request.method == "GET":
             return AnimeGETSerializer
-        else:
+        elif self.request.method == "POST":
             return AnimePOSTSerializer

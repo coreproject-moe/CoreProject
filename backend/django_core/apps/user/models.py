@@ -69,7 +69,7 @@ class CustomUser(
         null=True,
     )
     avatar_provider = models.URLField(
-        default="https://seccdn.libravatar.org/avatar/{EMAIL}?s=512"
+        default="https://seccdn.libravatar.org/avatar/{EMAIL}?s=512",
     )
 
     date_joined = models.DateTimeField(
