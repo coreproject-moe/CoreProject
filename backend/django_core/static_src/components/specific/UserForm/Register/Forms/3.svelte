@@ -6,7 +6,8 @@
 
     export let pages_state: [{ email: string }, { username: string }];
 
-    const combined_state = Object.assign({}, ...pages_state);
+    let combined_state: { [key: string]: string } | null = null;
+    $: combined_state = Object.assign({}, ...pages_state);
 
     const button_mapping = [
         {
@@ -19,12 +20,11 @@
         },
         { value: "< resend code >", action: () => {} }
     ];
+
+    function handle_submit() {}
 </script>
 
-<form
-    on:submit|preventDefault
-    class="flex h-full flex-col justify-between"
->
+<div class="flex h-full flex-col justify-between">
     <div class="flex flex-col gap-2 whitespace-nowrap font-bold uppercase leading-none tracking-widest text-white md:gap-[0.5vw] md:text-[1.2vw]">
         <span class="flex items-center text-base font-bold uppercase tracking-widest text-white md:text-[1.2vw]">
             welcome to&nbsp;
@@ -39,13 +39,13 @@
             <div class="flex flex-col md:gap-[0.5vw]">
                 <span class="text-lg font-medium leading-none md:text-[1.1vw]">Username:</span>
                 <span class="text-base font-medium leading-none text-accent md:text-[1.1vw]">
-                    {combined_state.username}
+                    {combined_state?.username}
                 </span>
             </div>
             <div class="flex flex-col md:gap-[0.5vw]">
                 <span class="text-lg font-medium leading-none md:text-[1.1vw]">Email:</span>
                 <span class="text-base font-medium leading-none text-accent md:text-[1.1vw]">
-                    {combined_state.email}
+                    {combined_state?.email}
                 </span>
             </div>
         </div>
@@ -66,11 +66,11 @@
             <button class="text-start text-base leading-none text-primary underline md:text-[1.1vw]">Login</button>
         </div>
         <button
-            type="submit"
+            on:click|preventDefault={handle_submit}
             class="btn btn-primary h-max min-h-max rounded-lg p-4 text-base font-semibold leading-none text-accent md:rounded-[0.5vw] md:p-[1vw] md:text-[0.95vw]"
         >
             <span>Finish</span>
             <ArrowUpRight class="w-4 rotate-45 md:w-[1vw]" />
         </button>
     </div>
-</form>
+</div>

@@ -14,7 +14,10 @@
 
     export let pages_state: [{ email: string }, { password: string }, { confirm_password: string }];
 
-    const combined_state = Object.assign({}, ...pages_state);
+    let combined_state: { [key: string]: string } | null = null;
+    $: combined_state = Object.assign({}, ...pages_state);
+
+    let confirm_password_element: HTMLInputElement | null = null;
 
     beforeUpdate(async () => {
         const zxcvbnCommonPackage = await import("@zxcvbn-ts/language-common");
@@ -59,15 +62,15 @@
     });
 
     let email = {
-            value: combined_state.email ?? "",
+            value: combined_state?.email ?? "",
             error: new Array<string>()
         },
         password = {
-            value: combined_state.password ?? "",
+            value: combined_state?.password ?? "",
             error: new Array<string>()
         },
         confirm_password = {
-            value: combined_state.confirm_password ?? "",
+            value: combined_state?.confirm_password ?? "",
             error: new Array<string>()
         };
 
@@ -119,6 +122,10 @@
                 password_strength = zxcvbn(password.value).score;
             } else {
                 password_strength = password.error.length = 0;
+            }
+            if (confirm_password.value) {
+                const event = new Event("input", {});
+                confirm_password_element?.dispatchEvent(event);
             }
         },
         handle_confirm_password = (event: Event) => {
@@ -230,6 +237,7 @@
             </label>
             <input
                 bind:value={confirm_password.value}
+                bind:this={confirm_password_element}
                 on:input={handle_confirm_password}
                 on:input={check_if_form_is_submitable}
                 placeholder="Confirm Password"

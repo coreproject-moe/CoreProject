@@ -12,18 +12,20 @@
     import { FETCH_TIMEOUT } from "$constants/fetch";
 
     export let pages_state: [{ otp: string }, { username: string }];
-    const combined_state = Object.assign({}, ...pages_state);
+
+    let combined_state: { [key: string]: string } | null = null;
+    $: combined_state = Object.assign({}, ...pages_state);
 
     let form_is_submitable: boolean | null = null;
 
     const dispatch = createEventDispatcher();
 
     let username = {
-            value: combined_state.otp ?? "",
+            value: combined_state?.otp ?? "",
             error: new Array<string>()
         },
         otp = {
-            value: combined_state.username ?? "",
+            value: combined_state?.username ?? "",
             error: new Array<string>()
         };
 
@@ -60,7 +62,7 @@
                 error_field: username
             });
 
-            if (username.value) {
+            if (username.value && _.isEmpty(username.error)) {
                 const res = await fetch(reverse("username-validity-endpoint"), {
                     method: "POST",
                     headers: {
@@ -128,6 +130,7 @@
                 on:input|preventDefault={handle_username_input}
                 on:input={check_if_form_is_submitable}
                 name="username"
+                autocomplete="off"
                 placeholder="Username eg: sora#4444"
                 class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
