@@ -4,6 +4,6 @@ from ...serializers.user.register import RegisterSerializer
 from apps.user.models import CustomUser
 
 
-class RegisterViewSet(viewsets.GenericViewSet, mixins.CreateModelMixin):
+class RegisterViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = CustomUser.objects.none()
     serializer_class = RegisterSerializer

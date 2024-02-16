@@ -31,10 +31,12 @@ base_router.register(r"staff", StaffViewSet, basename="staff")
 user_router = routers.DefaultRouter()
 user_router.register(r"user/register", RegisterViewSet, basename="register")
 
+# https://stackoverflow.com/a/65186703
+base_router.registry.extend(user_router.registry)
+
 urlpatterns = [
     # Routers
     path("", include(base_router.urls)),
-    path("", include(user_router.urls)),
     # Anime specific routes
     path(
         "anime/<int:pk>/comment",

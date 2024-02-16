@@ -2,6 +2,8 @@
     import CoreText from "$icons/CoreText/Index.svelte";
     import ArrowUpRight from "$icons/ArrowUpRight/Index.svelte";
     import { createEventDispatcher } from "svelte";
+    import { get_csrf_token } from "$functions/get_csrf_token";
+    import { FETCH_TIMEOUT } from "$constants/fetch";
     const dispatch = createEventDispatcher();
 
     export let pages_state: [{ email: string }, { username: string }];
@@ -21,7 +23,21 @@
         { value: "< resend code >", action: () => {} }
     ];
 
-    function handle_submit() {}
+    async function handle_submit() {
+        const res = await fetch("register-list", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                "X-CSRFToken": get_csrf_token()
+            },
+            signal: AbortSignal.timeout(FETCH_TIMEOUT),
+            body: JSON.stringify(combined_state)
+        });
+
+        if (res.ok) {
+        }
+    }
 </script>
 
 <div class="flex h-full flex-col justify-between">
