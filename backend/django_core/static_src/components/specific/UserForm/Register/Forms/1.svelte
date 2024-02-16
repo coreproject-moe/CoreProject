@@ -10,6 +10,16 @@
     import { handle_input } from "../../functions/handle_input";
     import { zxcvbn, zxcvbnOptions, type OptionsType } from "@zxcvbn-ts/core";
     import { cn } from "$functions/classname";
+    import { goto, reverse } from "$functions/urls";
+    import { get_csrf_token } from "$functions/get_csrf_token";
+    import { FETCH_TIMEOUT } from "$constants/fetch";
+
+    export let pages_state: [{ email: string }, { password: string }, { confirm_password: string }];
+
+    let combined_state: { [key: string]: string } | null = null;
+    $: combined_state = Object.assign({}, ...pages_state);
+
+    let confirm_password_element: HTMLInputElement | null = null;
 
     beforeUpdate(async () => {
         const zxcvbnCommonPackage = await import("@zxcvbn-ts/language-common");
@@ -54,20 +64,26 @@
     });
 
     let email = {
-            value: "",
+            value: combined_state?.email ?? "",
             error: new Array<string>()
         },
         password = {
-            value: "",
+            value: combined_state?.password ?? "",
             error: new Array<string>()
         },
         confirm_password = {
-            value: "",
+            value: combined_state?.confirm_password ?? "",
             error: new Array<string>()
         };
+
     let password_strength = 0;
-    let form_is_submitable: boolean | null = null;
-    $: form_is_submitable = [email, password, confirm_password].every((field) => field.value && !field.error);
+    let form_is_submitable = false;
+
+    function check_if_form_is_submitable() {
+        form_is_submitable = [email, password, confirm_password].every((field) => {
+            return field.value && _.isEmpty(field.error);
+        });
+    }
 
     const dispatch = createEventDispatcher();
 
@@ -81,33 +97,64 @@
     // Bindings
 
     function handle_submit() {
-        if (password.value === confirm_password.value) {
+        if (form_is_submitable) {
             dispatch("submit", {
                 email: email.value,
                 password: password.value
             });
         }
+        // Show some errors here
     }
 
-    const handle_email_input = (event: Event) => {
+    const handle_email_input = async (event: Event) => {
             handle_input({ event: event, schema: z.string().email("Please enter a valid email address"), error_field: email });
+            if (_.isEmpty(email.error)) {
+                const res = await fetch(reverse("email-validity-endpoint"), {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": get_csrf_token()
+                    },
+                    signal: AbortSignal.timeout(FETCH_TIMEOUT),
+                    body: JSON.stringify({
+                        email: email.value
+                    })
+                });
+
+                // 302 = username found
+                // 404 = not found
+
+                switch (Number(res.status)) {
+                    case 302:
+                        email.error = [...email.error, `Email **${email.value}** is already taken. Perhaps you want to **[login](${reverse("login_view")})**`];
+                        break;
+                    case 404:
+                        break;
+                    default:
+                        throw new Error("Not Implemented");
+                }
+            }
         },
         handle_password_input = (event: Event) => {
-            handle_input({
-                event: event,
-                schema: z
-                    .string()
-                    .min(8, "atleast_8")
-                    .refine((val) => /(?=.*[!@#$%^&*()_+|~\-=?;:'",.<>{}[\]\\/])/.test(val), "missing_one_special_character")
-                    .refine((val) => /(?=.*\d)/.test(val), "missing_one_number")
-                    .refine((val) => /(?=.*[A-Z])|(?=.*[a-z])/.test(val), "missing_one_upper_or_lowercase"),
-                error_field: password
-            });
-
             if (password.value) {
+                handle_input({
+                    event: event,
+                    schema: z
+                        .string()
+                        .min(8, "atleast_8")
+                        .refine((val) => /(?=.*[!@#$%^&*()_+|~\-=?;:'",.<>{}[\]\\/])/.test(val), "missing_one_special_character")
+                        .refine((val) => /(?=.*\d)/.test(val), "missing_one_number")
+                        .refine((val) => /(?=.*[A-Z])|(?=.*[a-z])/.test(val), "missing_one_upper_or_lowercase"),
+                    error_field: password
+                });
                 password_strength = zxcvbn(password.value).score;
             } else {
-                password_strength = 0;
+                password_strength = password.error.length = 0;
+            }
+            if (confirm_password.value) {
+                const event = new Event("input", {});
+                confirm_password_element?.dispatchEvent(event);
             }
         },
         handle_confirm_password = (event: Event) => {
@@ -145,6 +192,7 @@
             <input
                 bind:value={email.value}
                 on:input|preventDefault={handle_email_input}
+                on:input={check_if_form_is_submitable}
                 placeholder="Email address"
                 class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
@@ -153,7 +201,12 @@
                 {#if _.isEmpty(email.error) || _.isEmpty(email.value)}
                     <span>we’ll send you a verification email, so please ensure it’s active</span>
                 {:else}
-                    <span class="text-error">{email.error.join("")}</span>
+                    <span class="text-error">
+                        <Markdown
+                            markdown={email.error.join("")}
+                            unsafe={true}
+                        ></Markdown>
+                    </span>
                 {/if}
             </div>
         </div>
@@ -167,6 +220,7 @@
             <input
                 bind:value={password.value}
                 on:input={handle_password_input}
+                on:input={check_if_form_is_submitable}
                 placeholder="Password"
                 class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
@@ -217,7 +271,9 @@
             </label>
             <input
                 bind:value={confirm_password.value}
+                bind:this={confirm_password_element}
                 on:input={handle_confirm_password}
+                on:input={check_if_form_is_submitable}
                 placeholder="Confirm Password"
                 class="border-primary-500 focus:border-primary-400 h-12 w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-all placeholder:text-white/50 md:h-[3.125vw] md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1vw] md:text-[1.1vw]"
             />
@@ -239,14 +295,19 @@
     <div class="flex items-center justify-between">
         <div class="flex flex-col gap-1 md:gap-[0.5vw]">
             <span class="text-surface-100 text-xs leading-none md:text-[0.75vw]">Already have an account?</span>
-            <button class="text-start text-base leading-none text-primary underline md:text-[1.1vw]">Login</button>
+            <button
+                class="text-start text-base leading-none text-primary underline md:text-[1.1vw]"
+                on:click|preventDefault={() => {
+                    goto({ url: reverse("login_view"), verb: "GET", target: "body" });
+                }}
+            >
+                Login
+            </button>
         </div>
         <button
             type="submit"
-            class={cn(
-                form_is_submitable || "btn-disabled",
-                `btn btn-primary h-max min-h-max rounded-lg p-4 text-base font-semibold leading-none text-accent md:rounded-[0.5vw] md:p-[1vw] md:text-[0.95vw]`
-            )}
+            class:btn-disabled={!form_is_submitable}
+            class={cn(`btn btn-primary h-max min-h-max rounded-lg p-4 text-base font-semibold leading-none text-accent md:rounded-[0.5vw] md:p-[1vw] md:text-[0.95vw]`)}
         >
             <span>Continue</span>
             <ArrowUpRight class="w-4 rotate-45 md:w-[1vw]" />

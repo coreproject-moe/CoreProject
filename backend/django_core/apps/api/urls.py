@@ -1,6 +1,10 @@
 from django.urls import include, path
 from rest_framework import routers
 
+
+from .views.user.register import RegisterViewSet
+from .views.user.validity.username import UsernameValiditiyAPIView
+from .views.user.validity.email import EmailValiditiyAPIView
 from .views.anime import AnimeViewSet
 from .views.anime.comment import AnimeCommentAPIView
 from .views.anime.episode import EpisodeAPIView
@@ -24,7 +28,14 @@ base_router.register(r"character", CharacterViewSet, basename="character")
 base_router.register(r"producer", ProducerViewSet, basename="producer")
 base_router.register(r"staff", StaffViewSet, basename="staff")
 
+user_router = routers.DefaultRouter()
+user_router.register(r"user/register", RegisterViewSet, basename="register")
+
+# https://stackoverflow.com/a/65186703
+base_router.registry.extend(user_router.registry)
+
 urlpatterns = [
+    # Routers
     path("", include(base_router.urls)),
     # Anime specific routes
     path(
@@ -52,7 +63,17 @@ urlpatterns = [
     ),
     # User routes
     path("user/login/", LoginAPIView.as_view(), name="login-endpoint"),
-    path("user/logout/", LogoutAPIView.as_view()),
+    path("user/logout/", LogoutAPIView.as_view(), name="logout-endpoint"),
+    path(
+        "user/validity/username",
+        UsernameValiditiyAPIView.as_view(),
+        name="username-validity-endpoint",
+    ),
+    path(
+        "user/validity/email",
+        EmailValiditiyAPIView.as_view(),
+        name="email-validity-endpoint",
+    ),
     # Comment routes
     path(
         "comment/<int:pk>/reaction/",

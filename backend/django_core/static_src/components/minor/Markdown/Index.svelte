@@ -216,6 +216,7 @@
     });
 
     export let markdown = "";
+    export let unsafe = false;
     let klass = "";
     export { klass as class };
 
@@ -256,7 +257,7 @@
     );
 
     let html: string | Promise<string>;
-    $: html = sanitize(marked.parse(markdown ?? ""));
+    $: html = unsafe ? marked.parse(markdown) ?? "" : sanitize(marked.parse(markdown) ?? "");
 </script>
 
 <div class={cn(klass)}>

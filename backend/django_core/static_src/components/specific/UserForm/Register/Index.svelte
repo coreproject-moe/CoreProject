@@ -14,6 +14,10 @@
     let pages_state: { [key: number]: Record<string, string | number> } = [];
 
     // Our handlers
+    function goToPage(e: CustomEvent) {
+        page = e.detail.page;
+    }
+
     function handleSubmit(e: CustomEvent) {
         if (page === pages.length - 1) {
             // end of the page. do something.. Maybe seek for anime girls with stockings and leggings
@@ -38,7 +42,9 @@
 {#await current_page then Module}
     <svelte:component
         this={Module.default}
+        on:go_to_page={goToPage}
         on:submit={handleSubmit}
         {pages_state}
+        {page}
     />
 {/await}
