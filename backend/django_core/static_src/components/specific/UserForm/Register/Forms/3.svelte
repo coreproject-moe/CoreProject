@@ -4,6 +4,8 @@
     import { createEventDispatcher } from "svelte";
     import { get_csrf_token } from "$functions/get_csrf_token";
     import { FETCH_TIMEOUT } from "$constants/fetch";
+    import { goto } from "$functions/urls";
+    import { reverse } from "$functions/urls";
     const dispatch = createEventDispatcher();
 
     export let pages_state: [{ email: string }, { username: string }];
@@ -24,7 +26,7 @@
     ];
 
     async function handle_submit() {
-        const res = await fetch("register-list", {
+        const res = await fetch(reverse("register-list"), {
             method: "POST",
             headers: {
                 Accept: "application/json",
@@ -36,6 +38,7 @@
         });
 
         if (res.ok) {
+            goto({ url: reverse("login_view"), verb: "GET", target: "body" });
         }
     }
 </script>
