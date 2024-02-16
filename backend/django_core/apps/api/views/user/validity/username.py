@@ -26,6 +26,6 @@ class UsernameValiditiyAPIView(views.APIView):
 
         return (
             Response(status=status.HTTP_302_FOUND)
-            if CustomUser.objects.filter(username=username).exists()
+            if CustomUser.objects.filter(username__icontains=username).exists()
             else Response(status=status.HTTP_404_NOT_FOUND)
         )

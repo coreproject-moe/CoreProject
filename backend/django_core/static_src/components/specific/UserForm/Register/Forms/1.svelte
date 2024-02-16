@@ -11,6 +11,8 @@
     import { zxcvbn, zxcvbnOptions, type OptionsType } from "@zxcvbn-ts/core";
     import { cn } from "$functions/classname";
     import { goto, reverse } from "$functions/urls";
+    import { get_csrf_token } from "$functions/get_csrf_token";
+    import { FETCH_TIMEOUT } from "$constants/fetch";
 
     export let pages_state: [{ email: string }, { password: string }, { confirm_password: string }];
 
@@ -104,8 +106,35 @@
         // Show some errors here
     }
 
-    const handle_email_input = (event: Event) => {
+    const handle_email_input = async (event: Event) => {
             handle_input({ event: event, schema: z.string().email("Please enter a valid email address"), error_field: email });
+            if (_.isEmpty(email.error)) {
+                const res = await fetch(reverse("email-validity-endpoint"), {
+                    method: "POST",
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": get_csrf_token()
+                    },
+                    signal: AbortSignal.timeout(FETCH_TIMEOUT),
+                    body: JSON.stringify({
+                        email: email.value
+                    })
+                });
+
+                // 302 = username found
+                // 404 = not found
+
+                switch (Number(res.status)) {
+                    case 302:
+                        email.error = [...email.error, `Email **${email.value}** is already taken. Perhaps you want to **[login](${reverse("login_view")})**`];
+                        break;
+                    case 404:
+                        break;
+                    default:
+                        throw new Error("Not Implemented");
+                }
+            }
         },
         handle_password_input = (event: Event) => {
             if (password.value) {
@@ -172,7 +201,12 @@
                 {#if _.isEmpty(email.error) || _.isEmpty(email.value)}
                     <span>we’ll send you a verification email, so please ensure it’s active</span>
                 {:else}
-                    <span class="text-error">{email.error.join("")}</span>
+                    <span class="text-error">
+                        <Markdown
+                            markdown={email.error.join("")}
+                            unsafe={true}
+                        ></Markdown>
+                    </span>
                 {/if}
             </div>
         </div>

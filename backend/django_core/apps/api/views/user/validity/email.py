@@ -26,6 +26,6 @@ class EmailValiditiyAPIView(views.APIView):
 
         return (
             Response(status=status.HTTP_302_FOUND)
-            if CustomUser.objects.filter(email=email).exists()
+            if CustomUser.objects.filter(email__icontains=email).exists()
             else Response(status=status.HTTP_404_NOT_FOUND)
         )

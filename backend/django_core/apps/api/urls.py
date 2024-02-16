@@ -63,7 +63,7 @@ urlpatterns = [
     path(
         "user/validity/email",
         EmailValiditiyAPIView.as_view(),
-        name="username-validity-endpoint",
+        name="email-validity-endpoint",
     ),
     # Comment routes
     path(
