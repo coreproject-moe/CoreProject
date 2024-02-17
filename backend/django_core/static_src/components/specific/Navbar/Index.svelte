@@ -30,9 +30,11 @@
             text: "Settings"
         }
     };
+
+    let is_authenticated = Boolean(window.user_authenticated);
 </script>
 
-{#if window.user_authenticated}
+{#if is_authenticated}
     <div class="dropdown dropdown-end flex">
         <div
             tabindex="0"
