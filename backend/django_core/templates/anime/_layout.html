@@ -33,7 +33,10 @@
                             </search-form>
                         </div>
                     </div>
-                    <coreproject-specific-navbar></coreproject-specific-navbar>
+                    <coreproject-specific-navbar
+                        email="{{request.user.email}}"
+                        username="{{request.user.username}}"
+                    ></coreproject-specific-navbar>
                 </navbar>
             </header>
             <div class="flex-auto w-full h-full flex overflow-hidden">

@@ -7,6 +7,7 @@
     import Login from "$icons/Login/Index.svelte";
     import Register from "$icons/Register/Index.svelte";
     import { goto } from "$functions/urls";
+    import { string_to_boolean } from "$functions/string_to_bool";
 
     const profile_mapping = {
         profile: {
@@ -31,7 +32,9 @@
         }
     };
 
-    let is_authenticated = Boolean(window.user_authenticated);
+    let is_authenticated = string_to_boolean(window.user_authenticated);
+    export let username: string;
+    export let email: string;
 </script>
 
 {#if is_authenticated}
@@ -51,11 +54,11 @@
         <div
             role="button"
             tabindex="0"
-            class="z-1 menu dropdown-content top-14 min-w-48 rounded-lg bg-base-100 p-4 md:top-[4vw] md:min-w-[12vw] md:rounded-[0.75vw] md:p-[0.5vw] md:text-[0.9vw]"
+            class="z-20 menu dropdown-content top-14 min-w-48 rounded-lg bg-base-100 p-4 md:top-[4vw] md:min-w-[12vw] md:rounded-[0.75vw] md:p-[0.5vw] md:text-[0.9vw]"
         >
             <div class="flex flex-col items-start gap-2 leading-none md:gap-[0.35vw] md:p-[0.75vw] md:py-[0.5vw]">
-                <span class="font-bold capitalize md:text-[1vw]">sora_amamiya#4444</span>
-                <span class="md:text-[0.75vw]">sora_amamiya@coreproject.moe</span>
+                <span class="font-bold capitalize md:text-[1vw]">{username}</span>
+                <span class="md:text-[0.75vw]">{email}</span>
             </div>
             <div class="divider mb-0 mt-1 md:mb-[0.1vw]"></div>
             <VercelHover
