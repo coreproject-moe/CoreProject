@@ -52,6 +52,8 @@ class CommentSerializer(serializers.Serializer):
         return queryset["ratio"]
 
     def create(self, validated_data):
+        # This is a sanity check
+        # UNDER NO CIRCUSTANCES REMOVE THIS
         if self.context.get("allow_no_comments_without_path", None):
             if not {"path", "text"} <= set(validated_data):
                 error = (
@@ -74,6 +76,9 @@ class CommentSerializer(serializers.Serializer):
             comment_instance: "CommentModel" = CommentModel.objects.create_child(
                 **serializer_data
             )
-
         comment_instance.save()
+
+        if m2m_fields := self.context.get("m2m_field", None):
+            m2m_fields.add(comment_instance)
+
         return comment_instance

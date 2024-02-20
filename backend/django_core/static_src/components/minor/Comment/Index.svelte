@@ -13,6 +13,7 @@
     import { FETCH_TIMEOUT } from "$constants/fetch";
 
     export let api_url: string;
+    export let submit_url = "";
 
     interface CommentResponse {
         detail?: string;
@@ -111,7 +112,10 @@
     {#if !_.isEmpty(tree_branch)}
         <div class="flex flex-col gap-5 md:gap-[1.5vw]">
             {#each tree_branch as branch}
-                <CommentBlock item={branch} />
+                <CommentBlock
+                    item={branch}
+                    {submit_url}
+                />
             {/each}
         </div>
     {:else}

@@ -1,5 +1,7 @@
 <script lang="ts">
     export let item: Comment;
+    export let submit_url = "";
+    import { clear_commentbox_if_needed } from "$stores/comment";
 
     import Markdown from "$components/minor/Markdown/Index.svelte";
     import CommentBox from "$components/specific/CommentBox/Index.svelte";
@@ -200,7 +202,7 @@
         {#if reply_shown}
             <div class="md:mt-[1vw]">
                 <CommentBox
-                    submit_url={reverse("comment-list")}
+                    {submit_url}
                     path={item.path ?? ""}
                 />
             </div>
@@ -211,7 +213,10 @@
             <div class="mt-5 flex flex-col gap-5 md:mt-[1.5vw] md:gap-[1.5vw]">
                 {#each item.child as comment, index}
                     {#if index === 0}
-                        <svelte:self item={comment} />
+                        <svelte:self
+                            {submit_url}
+                            item={comment}
+                        />
                     {/if}
                 {/each}
             </div>

@@ -6,6 +6,7 @@
     import Info from "$icons/Info/Index.svelte";
     import { get_csrf_token } from "$functions/get_csrf_token";
     import { FETCH_TIMEOUT } from "$constants/fetch";
+    import { commentbox_value } from "$stores/comment";
 
     export let submit_url = "";
     export let path = "";
@@ -38,6 +39,7 @@
         if (res.ok) {
             comment_needs_update.set(true);
             textarea_value = "";
+            commentbox_value.set("");
         }
     };
 </script>
