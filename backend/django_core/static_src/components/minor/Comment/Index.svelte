@@ -46,22 +46,25 @@
             });
             const value = (await res.json()) as CommentResponse;
 
-            if (res.status === 200) {
-                next_url = value.next;
+            switch (res.status) {
+                case 200:
+                    next_url = value.next;
 
-                return new JSONToTree({
-                    json: value.results,
-                    old_json: tree_branch
-                }).build() as unknown as Comment[];
-            } else if (res.status === 404) {
-                // No comment exists
-                // Return empty array
-                if (!value?.detail?.toLowerCase().includes("not found")) {
-                    throw new Error(`Data fetched from backend contains error`);
-                }
-                return new Array<Comment>();
-            } else {
-                throw new Error(await res.text());
+                    return new JSONToTree({
+                        json: value.results,
+                        old_json: tree_branch
+                    }).build() as unknown as Comment[];
+
+                case 404:
+                    // No comment exists
+                    // Return empty array
+                    if (!value?.detail?.toLowerCase().includes("not found")) {
+                        throw new Error(`Data fetched from backend contains error`);
+                    }
+                    return new Array<Comment>();
+
+                default:
+                    throw new Error(await res.text());
             }
         },
         set_comments = async () => {
