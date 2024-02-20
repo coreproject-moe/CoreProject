@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import generics, pagination, permissions
 from rest_framework.response import Response
 
+from ...serializers.anime.comment import AnimeCommentPOSTSerializer
 from ...serializers.comments import CommentSerializer
 
 
@@ -20,6 +21,12 @@ class AnimeCommentAPIView(generics.ListAPIView):
     ]
     # Pagination
     pagination_class = pagination.LimitOffsetPagination
+
+    def get_serializer_class(self):
+        if self.request.method == "GET":
+            return CommentSerializer
+        elif self.request.method == "POST":
+            return AnimeCommentPOSTSerializer
 
     def get_queryset(self):
         queryset = (
@@ -44,14 +51,7 @@ class AnimeCommentAPIView(generics.ListAPIView):
             "text": serializer.validated_data["text"],
         }
 
-        if path := serializer.validated_data.get("path"):
-            anime_comment_model_instance = get_object_or_404(CommentModel, path__match=path)
-            anime_comment_instance = CommentModel.objects.create_child(
-                parent=anime_comment_model_instance, **serializer_data
-            )
-
-        else:
-            anime_comment_instance = CommentModel.objects.create_child(**serializer_data)
+        anime_comment_instance = CommentModel.objects.create_child(**serializer_data)
 
         anime_instance.comments.add(anime_comment_instance)
 

@@ -47,3 +47,4 @@ class CommentSerializer(serializers.Serializer):
             .get(pk=obj.pk)
         )
         return queryset["ratio"]
+    

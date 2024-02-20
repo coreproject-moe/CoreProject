@@ -199,7 +199,10 @@
         </div>
         {#if reply_shown}
             <div class="md:mt-[1vw]">
-                <CommentBox />
+                <CommentBox
+                    submit_url={reverse("comment-list")}
+                    path={item.path ?? ""}
+                />
             </div>
         {/if}
 

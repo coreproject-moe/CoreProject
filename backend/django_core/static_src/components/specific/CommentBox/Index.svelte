@@ -8,7 +8,7 @@
     import { FETCH_TIMEOUT } from "$constants/fetch";
 
     export let submit_url = "";
-
+    export let path = "";
     export let textarea_value = "";
 
     const handle_submit = async () => {
@@ -19,6 +19,12 @@
             throw new Error("`textarea_value` is empty");
         }
 
+        let body: { [key: string]: string } = {
+            text: textarea_value
+        };
+
+        if (path) body["path"] = path;
+
         const res = await fetch(submit_url, {
             method: "POST",
             headers: {
@@ -26,9 +32,7 @@
                 "Content-Type": "application/json",
                 "X-CSRFToken": get_csrf_token()
             },
-            body: JSON.stringify({
-                text: textarea_value
-            }),
+            body: JSON.stringify(body),
             signal: AbortSignal.timeout(FETCH_TIMEOUT)
         });
         if (res.ok) {
