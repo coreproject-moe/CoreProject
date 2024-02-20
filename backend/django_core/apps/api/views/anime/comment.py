@@ -5,6 +5,7 @@ from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 from rest_framework import generics, pagination, permissions
 from rest_framework.response import Response
+from rest_framework import status
 
 from ...serializers.comments import CommentSerializer
 
@@ -43,15 +44,7 @@ class AnimeCommentAPIView(generics.ListAPIView):
 
         anime_instance = AnimeModel.objects.get(pk=pk)
 
-        # Serializer Data
-        serializer_data = {
-            "user": request.user,
-            "text": serializer.validated_data["text"],
-        }
-
-        anime_comment_instance = CommentModel.objects.create_child(**serializer_data)
-
+        anime_comment_instance = serializer.save()
         anime_instance.comments.add(anime_comment_instance)
 
-        comment_serialier = self.get_serializer(anime_comment_instance)
-        return Response(status=200, data=comment_serialier.data)
+        return Response(status=status.HTTP_201_CREATED, data=serializer.data)
