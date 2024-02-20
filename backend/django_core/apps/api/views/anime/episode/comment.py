@@ -30,6 +30,11 @@ class EpisodeCommentAPIView(generics.ListAPIView):
         ).episode_comments.all()
         return queryset
 
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context.update({"request": self.request})
+        return context
+
     def post(self, request: HttpRequest, pk: int, episode_number: int) -> Response:
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)

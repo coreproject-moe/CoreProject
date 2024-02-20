@@ -6,7 +6,6 @@ from django.shortcuts import get_object_or_404
 from rest_framework import generics, pagination, permissions
 from rest_framework.response import Response
 
-from ...serializers.anime.comment import AnimeCommentPOSTSerializer
 from ...serializers.comments import CommentSerializer
 
 
@@ -14,19 +13,18 @@ class AnimeCommentAPIView(generics.ListAPIView):
     # this is due to drf-spectacular
     queryset = CommentModel.objects.none()
 
-    serializer_class = CommentSerializer
     # Permissions
     permission_classes = [
         permissions.IsAuthenticatedOrReadOnly,
     ]
     # Pagination
     pagination_class = pagination.LimitOffsetPagination
+    serializer_class = CommentSerializer
 
-    def get_serializer_class(self):
-        if self.request.method == "GET":
-            return CommentSerializer
-        elif self.request.method == "POST":
-            return AnimeCommentPOSTSerializer
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context.update({"request": self.request})
+        return context
 
     def get_queryset(self):
         queryset = (
