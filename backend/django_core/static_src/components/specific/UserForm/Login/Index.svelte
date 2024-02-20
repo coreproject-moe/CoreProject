@@ -7,17 +7,12 @@
     import * as _ from "lodash-es";
     import { goto, reverse } from "$functions/urls";
     import { get_csrf_token } from "$functions/get_csrf_token";
-    import { onMount } from "svelte";
-    import { string_to_boolean } from "$functions/string_to_bool";
     import { cn } from "$functions/classname";
     import { handle_input } from "../functions/handle_input";
+    import { user_authenticated } from "$stores/user";
 
-    let user_authenticated: boolean | null = null,
-        form_is_submitable: boolean | null = null;
+    let form_is_submitable: boolean | null = null;
 
-    onMount(() => {
-        user_authenticated = string_to_boolean(window.user_authenticated);
-    });
     let username_or_email = {
             value: "",
             error: new Array<string>()
@@ -53,14 +48,14 @@
             }
         });
         if (res.ok) {
-            user_authenticated = true;
+            user_authenticated.set(true);
         } else {
             throw new Error("Login failed");
         }
     };
 </script>
 
-{#if user_authenticated}
+{#if $user_authenticated}
     <div class="flex h-full flex-col items-start justify-center gap-[2vw]">
         <div class="flex items-center text-base font-bold uppercase leading-none tracking-widest text-white md:text-[1.5vw]">
             welcome back
@@ -76,7 +71,7 @@
                         target: "body"
                     });
 
-                    user_authenticated = false;
+                    user_authenticated.set(false);
                 }}
                 class="text-base leading-none text-primary underline md:text-[1.1vw]"
             >
