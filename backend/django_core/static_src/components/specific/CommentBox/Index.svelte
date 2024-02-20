@@ -6,10 +6,14 @@
     import Info from "$icons/Info/Index.svelte";
     import { get_csrf_token } from "$functions/get_csrf_token";
     import { FETCH_TIMEOUT } from "$constants/fetch";
+    import { commentbox_value } from "$stores/comment";
+    import { createEventDispatcher } from "svelte";
 
     export let submit_url = "";
-
+    export let path = "";
     export let textarea_value = "";
+
+    const dispatch = createEventDispatcher();
 
     const handle_submit = async () => {
         if (!submit_url) {
@@ -19,6 +23,12 @@
             throw new Error("`textarea_value` is empty");
         }
 
+        let body: { [key: string]: string } = {
+            text: textarea_value
+        };
+
+        if (path) body["path"] = path;
+
         const res = await fetch(submit_url, {
             method: "POST",
             headers: {
@@ -26,14 +36,14 @@
                 "Content-Type": "application/json",
                 "X-CSRFToken": get_csrf_token()
             },
-            body: JSON.stringify({
-                text: textarea_value
-            }),
+            body: JSON.stringify(body),
             signal: AbortSignal.timeout(FETCH_TIMEOUT)
         });
         if (res.ok) {
             comment_needs_update.set(true);
             textarea_value = "";
+            commentbox_value.set("");
+            dispatch("submit");
         }
     };
 </script>

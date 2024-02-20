@@ -368,7 +368,10 @@
                             <CommentBox submit_url={reverse("anime-commment-endpoint", Number(pk))}></CommentBox>
                         </div>
                         <div class="mt-10 flex w-full md:mt-[2vw]">
-                            <Comment api_url={reverse("anime-commment-endpoint", Number(pk))}></Comment>
+                            <Comment
+                                api_url={reverse("anime-commment-endpoint", Number(pk))}
+                                submit_url={reverse("anime-commment-endpoint", Number(pk))}
+                            ></Comment>
                         </div>
                     </div>
                     <div class="md:col-span-2">

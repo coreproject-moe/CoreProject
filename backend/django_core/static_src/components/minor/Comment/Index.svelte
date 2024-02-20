@@ -1,6 +1,6 @@
 <script lang="ts">
     import { JSONToTree } from "./json_to_tree";
-    import CommetBlock from "./CommetBlock.svelte";
+    import CommentBlock from "./CommentBlock.svelte";
     import CommentSkeleton from "$components/minor/Comment/Skeleton.svelte";
     import Empty from "./Empty.svelte";
     import ErrorSvelteComponent from "./Error.svelte";
@@ -13,6 +13,7 @@
     import { FETCH_TIMEOUT } from "$constants/fetch";
 
     export let api_url: string;
+    export let submit_url = "";
 
     interface CommentResponse {
         detail?: string;
@@ -45,22 +46,25 @@
             });
             const value = (await res.json()) as CommentResponse;
 
-            if (res.status === 200) {
-                next_url = value.next;
+            switch (res.status) {
+                case 200:
+                    next_url = value.next;
 
-                return new JSONToTree({
-                    json: value.results,
-                    old_json: tree_branch
-                }).build() as unknown as Comment[];
-            } else if (res.status === 404) {
-                // No comment exists
-                // Return empty array
-                if (!value?.detail?.toLowerCase().includes("not found")) {
-                    throw new Error(`Data fetched from backend contains error`);
-                }
-                return new Array<Comment>();
-            } else {
-                throw new Error(await res.text());
+                    return new JSONToTree({
+                        json: value.results,
+                        old_json: tree_branch
+                    }).build() as unknown as Comment[];
+
+                case 404:
+                    // No comment exists
+                    // Return empty array
+                    if (!value?.detail?.toLowerCase().includes("not found")) {
+                        throw new Error(`Data fetched from backend contains error`);
+                    }
+                    return new Array<Comment>();
+
+                default:
+                    throw new Error(await res.text());
             }
         },
         set_comments = async () => {
@@ -111,7 +115,10 @@
     {#if !_.isEmpty(tree_branch)}
         <div class="flex flex-col gap-5 md:gap-[1.5vw]">
             {#each tree_branch as branch}
-                <CommetBlock item={branch} />
+                <CommentBlock
+                    item={branch}
+                    {submit_url}
+                />
             {/each}
         </div>
     {:else}

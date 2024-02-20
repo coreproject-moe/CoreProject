@@ -9,7 +9,7 @@ from django.templatetags.static import static
 from django.urls import reverse_lazy
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.views.decorators.cache import never_cache
-from django_htmx.http import  HttpResponseClientRefresh
+from django_htmx.http import HttpResponseClientRefresh
 
 if TYPE_CHECKING:
     from ..request import HtmxHttpRequest

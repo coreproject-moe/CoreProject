@@ -8,7 +8,7 @@ export class JSONToTree {
         if (old_json) {
             // DO NOT DEEP MERGE
             const new_arr = this.convert_to_tree_given_path(json);
-            this.#json = _.concat(old_json, new_arr);
+            this.#json = _.merge(old_json, new_arr);
         } else {
             this.#json = this.convert_to_tree_given_path(json);
         }
