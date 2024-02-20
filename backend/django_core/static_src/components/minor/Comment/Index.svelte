@@ -1,6 +1,6 @@
 <script lang="ts">
     import { JSONToTree } from "./json_to_tree";
-    import CommetBlock from "./CommetBlock.svelte";
+    import CommentBlock from "./CommentBlock.svelte";
     import CommentSkeleton from "$components/minor/Comment/Skeleton.svelte";
     import Empty from "./Empty.svelte";
     import ErrorSvelteComponent from "./Error.svelte";
@@ -111,7 +111,7 @@
     {#if !_.isEmpty(tree_branch)}
         <div class="flex flex-col gap-5 md:gap-[1.5vw]">
             {#each tree_branch as branch}
-                <CommetBlock item={branch} />
+                <CommentBlock item={branch} />
             {/each}
         </div>
     {:else}
