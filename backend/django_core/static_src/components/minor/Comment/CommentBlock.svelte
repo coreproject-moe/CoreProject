@@ -215,12 +215,10 @@
         {#if item.childrens !== 0}
             <div class="mt-5 flex flex-col gap-5 md:mt-[1.5vw] md:gap-[1.5vw]">
                 {#each item.child as comment, index}
-                    {#if index === 0}
-                        <svelte:self
-                            {submit_url}
-                            item={comment}
-                        />
-                    {/if}
+                    <svelte:self
+                        {submit_url}
+                        item={comment}
+                    />
                 {/each}
             </div>
         {/if}
