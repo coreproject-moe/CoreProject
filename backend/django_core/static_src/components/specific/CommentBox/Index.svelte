@@ -7,10 +7,13 @@
     import { get_csrf_token } from "$functions/get_csrf_token";
     import { FETCH_TIMEOUT } from "$constants/fetch";
     import { commentbox_value } from "$stores/comment";
+    import { createEventDispatcher } from "svelte";
 
     export let submit_url = "";
     export let path = "";
     export let textarea_value = "";
+
+    const dispatch = createEventDispatcher();
 
     const handle_submit = async () => {
         if (!submit_url) {
@@ -40,6 +43,7 @@
             comment_needs_update.set(true);
             textarea_value = "";
             commentbox_value.set("");
+            dispatch("submit");
         }
     };
 </script>

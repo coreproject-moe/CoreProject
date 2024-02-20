@@ -202,6 +202,9 @@
         {#if reply_shown}
             <div class="md:mt-[1vw]">
                 <CommentBox
+                    on:submit={() => {
+                        reply_shown = false;
+                    }}
                     {submit_url}
                     path={item.path ?? ""}
                 />
