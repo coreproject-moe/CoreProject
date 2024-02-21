@@ -205,7 +205,7 @@ exclude = [
 
 
 # Assume Python 3.11
-target-version = "py311"
+target-version = "py312"
 
 
 [tool.ruff.format]
@@ -217,3 +217,12 @@ indent-style = "space"
 skip-magic-trailing-comma = false
 # Like Black, automatically detect the appropriate line ending.
 line-ending = "auto"
+
+[tool.ruff.lint.isort]
+case-sensitive = true
+combine-as-imports = true
+force-sort-within-sections = true
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402"]
+"settings.py" = ["E402"]

@@ -1,8 +1,7 @@
 from typing import TYPE_CHECKING
 
-from defender import config, utils
 from django.conf import settings
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import logout
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.templatetags.static import static

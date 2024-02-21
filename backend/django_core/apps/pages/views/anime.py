@@ -1,8 +1,7 @@
 from typing import TYPE_CHECKING
 
-from django.http import HttpResponse, HttpRequest, JsonResponse
+from django.http import HttpResponse
 from django.shortcuts import render
-from rest_framework.response import Response
 
 from ..data.anime import (
     anime,
