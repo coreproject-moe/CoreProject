@@ -6,7 +6,7 @@ from django.db.models import Case, Value, When
 from django.http import HttpRequest
 from rest_framework import serializers
 from django.shortcuts import get_object_or_404
-
+from rest_framework.exceptions import ValidationError
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -51,17 +51,6 @@ class CommentSerializer(serializers.Serializer):
         return queryset["ratio"]
 
     def create(self, validated_data):
-        # This is a sanity check
-        # UNDER NO CIRCUSTANCES REMOVE THIS
-        # if self.context.get("allow_no_comments_without_path", None):
-        #     if not {"path", "text"} <= set(validated_data):
-        #         error = (
-        #             "`allow_no_comments_without_path` is `True` and there is no"
-        #             + (" `path`" if not validated_data.get("path") else "")
-        #             + (" `text`" if not validated_data.get("text") else "")
-        #         )
-        #         raise ValidationError(error)
-
         serializer_data = {
             "user": self.context["request"].user,
             "text": validated_data["text"],
@@ -78,3 +67,13 @@ class CommentSerializer(serializers.Serializer):
         comment_instance.save()
 
         return comment_instance
+
+    def update(self, instance: CommentModel, validated_data) -> CommentModel:
+        if instance.user != self.context["request"].user:
+            raise ValidationError("`user` and instance `user` are different")
+
+        # Only texts can be updated
+        instance.text = validated_data["text"]
+
+        instance.save()
+        return instance

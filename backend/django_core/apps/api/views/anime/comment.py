@@ -42,7 +42,7 @@ class AnimeCommentAPIView(generics.ListAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
 
-        anime_instance = AnimeModel.objects.get(pk=pk)
+        anime_instance = get_object_or_404(AnimeModel, pk=pk)
 
         anime_comment_instance = serializer.save()
         anime_instance.comments.add(anime_comment_instance)

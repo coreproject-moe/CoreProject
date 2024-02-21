@@ -1,6 +1,4 @@
-from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.http import HttpRequest
 from ...serializers.upload import ProviderSerializer
 from rest_framework import generics
 from django.utils.decorators import method_decorator
@@ -22,5 +20,5 @@ class DoodstreamAPIView(generics.CreateAPIView):
             res = requests.get(url)
 
             return Response(status=200, data={"url": res.json()["result"]})
-        except:
+        except Exception:
             return Response(status=504)
