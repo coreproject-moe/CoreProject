@@ -24,10 +24,5 @@ class CommentViewSet(viewsets.ModelViewSet):
 
     def get_serializer_context(self):
         context = super().get_serializer_context()
-        context.update(
-            {
-                "request": self.request,
-                "allow_no_comments_without_path": True,
-            }
-        )
+        context.update({"request": self.request})
         return context

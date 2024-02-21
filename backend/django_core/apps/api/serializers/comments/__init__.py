@@ -8,7 +8,6 @@ from rest_framework import serializers
 from django.shortcuts import get_object_or_404
 
 
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
@@ -51,16 +50,6 @@ class CommentSerializer(serializers.Serializer):
         return queryset["ratio"]
 
     def create(self, validated_data):
-        # This is a sanity check
-        # UNDER NO CIRCUSTANCES REMOVE THIS
-        # if self.context.get("allow_no_comments_without_path", None):
-        #     if not {"path", "text"} <= set(validated_data):
-        #         error = (
-        #             "`allow_no_comments_without_path` is `True` and there is no"
-        #             + (" `path`" if not validated_data.get("path") else "")
-        #             + (" `text`" if not validated_data.get("text") else "")
-        #         )
-        #         raise ValidationError(error)
 
         serializer_data = {
             "user": self.context["request"].user,
