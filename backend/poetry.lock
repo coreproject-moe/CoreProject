@@ -762,22 +762,19 @@ asgiref = ">=3.6"
 Django = ">=3.2"
 
 [[package]]
-name = "django-ltree"
-version = "0.5.3"
-description = "Django app to support ltree postgres extension"
+name = "django-ltree-2"
+version = "0.1.1"
+description = "Continual of django-ltree"
 optional = false
-python-versions = ">=2.7"
+python-versions = ">=3.10"
 files = [
-    {file = "django_ltree-0.5.3-py2.py3-none-any.whl", hash = "sha256:9bc8b801d7c26cb38f1f10d80330e29cc5bf83969ff62dd50d2e842e22dcd8c7"},
-    {file = "django_ltree-0.5.3.tar.gz", hash = "sha256:8e47e33f812c14bbb9405b21fb5b7695a15945edca161fbd0b06075adbdf7732"},
+    {file = "django_ltree_2-0.1.1-py3-none-any.whl", hash = "sha256:a45287f6d8f58608449502a3993a176f412c97ff1df48751e09ba2a79adce153"},
+    {file = "django_ltree_2-0.1.1.tar.gz", hash = "sha256:424c80e091eab20b187ac544d52844b05d0430ade9aabf730bf3a10202893841"},
 ]
 
 [package.dependencies]
-django = ">=1.11"
-six = "*"
-
-[package.extras]
-develop = ["tox", "twine"]
+django = ">=5.0.2"
+psycopg = ">=3.1.18"
 
 [[package]]
 name = "django-ratelimit"
@@ -1569,7 +1566,6 @@ files = [
     {file = "PyYAML-6.0.1-cp311-cp311-win_amd64.whl", hash = "sha256:bf07ee2fef7014951eeb99f56f39c9bb4af143d8aa3c21b1677805985307da34"},
     {file = "PyYAML-6.0.1-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:855fb52b0dc35af121542a76b9a84f8d1cd886ea97c84703eaa6d88e37a2ad28"},
     {file = "PyYAML-6.0.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:40df9b996c2b73138957fe23a16a4f0ba614f4c0efce1e9406a184b6d07fa3a9"},
-    {file = "PyYAML-6.0.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:a08c6f0fe150303c1c6b71ebcd7213c2858041a7e01975da3a99aed1e7a378ef"},
     {file = "PyYAML-6.0.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6c22bec3fbe2524cde73d7ada88f6566758a8f7227bfbf93a408a9d86bcc12a0"},
     {file = "PyYAML-6.0.1-cp312-cp312-musllinux_1_1_x86_64.whl", hash = "sha256:8d4e9c88387b0f5c7d5f281e55304de64cf7f9c0021a3525bd3b1c542da3b0e4"},
     {file = "PyYAML-6.0.1-cp312-cp312-win32.whl", hash = "sha256:d483d2cdf104e7c9fa60c544d92981f12ad66a457afae824d146093b8c294c54"},
@@ -2381,4 +2377,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "7193546e38c5ecdba6ca8e2984831a6da1156df623d5698b88607df8e832427b"
+content-hash = "40ea67d95dfc71be8107dcaa6813af77cb3633097de194ab9d2272793bdf8b8d"
