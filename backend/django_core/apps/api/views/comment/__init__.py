@@ -35,6 +35,9 @@ class CommentViewSet(
         return context
 
     def perform_destroy(self, instance: CommentModel) -> None:
+        if instance.children == 0:
+            instance.delete()
+            
         instance.deleted = True
         instance.text = ""
         instance.user = None
