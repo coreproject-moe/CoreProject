@@ -8,6 +8,8 @@ from rest_framework import mixins
 from ...filters.comments import CommentFilter
 from ...serializers.comments import CommentSerializer
 
+from django.db.models import Count
+
 
 class CommentViewSet(
     mixins.RetrieveModelMixin,
@@ -35,5 +37,15 @@ class CommentViewSet(
         return context
 
     def perform_destroy(self, instance: CommentModel) -> None:
-        CommentModel.objects.filter(path__descendants=instance.path).delete()
-        instance.delete()
+        if instance.childrens == 0:
+            instance.delete()
+
+        else:
+            instance.deleted = True
+            instance.text = ""
+            instance.user = None
+            instance.save()
+
+        for item in CommentModel.objects.filter(deleted=True):
+            if item.childrens == 0:
+                item.delete()

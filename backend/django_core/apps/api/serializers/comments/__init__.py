@@ -31,6 +31,7 @@ class CommentSerializer(serializers.Serializer):
     childrens = serializers.IntegerField(read_only=True)
     ratio = serializers.IntegerField(read_only=True)
 
+    deleted = serializers.BooleanField(read_only=True)
     user_reaction = serializers.SerializerMethodField(method_name="get_user_reaction")
 
     def get_user_reaction(self, obj: CommentModel) -> str | None:
