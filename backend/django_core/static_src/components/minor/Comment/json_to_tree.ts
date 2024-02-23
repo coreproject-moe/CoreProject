@@ -22,7 +22,7 @@ export class JSONToTree {
 
         // First pass: Create nodes and populate the dictionary
         data.forEach((node: Comment) => {
-            const new_node: Comment = { ...node, child: [], collapse: false };
+            const new_node: Comment = { ...node, child: [] };
             node_dictionary[node.path] = new_node;
 
             // If the node is a root-level node, add it to the tree
