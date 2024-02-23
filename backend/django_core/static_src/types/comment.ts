@@ -14,4 +14,5 @@ export type Comment = {
     childrens: number;
     user_reaction: "upvoted" | "downvoted" | null;
     child: Comment[];
+    collapse: boolean;
 };
