@@ -3,12 +3,19 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework import mixins
 
 from ...filters.comments import CommentFilter
 from ...serializers.comments import CommentSerializer
 
 
-class CommentViewSet(viewsets.ModelViewSet):
+class CommentViewSet(
+    mixins.RetrieveModelMixin,
+    mixins.UpdateModelMixin,
+    mixins.DestroyModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet,
+):
     queryset = CommentModel.objects.all()
     serializer_class = CommentSerializer
 
@@ -26,3 +33,7 @@ class CommentViewSet(viewsets.ModelViewSet):
         context = super().get_serializer_context()
         context.update({"request": self.request})
         return context
+
+    def perform_destroy(self, instance: CommentModel) -> None:
+        CommentModel.objects.filter(path__descendants=instance.path).delete()
+        instance.delete()
