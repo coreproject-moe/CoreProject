@@ -116,7 +116,7 @@
             class="group flex h-full cursor-pointer justify-center transition-transform active:scale-95 md:w-full"
         >
             {#if item.collapse}
-                <Expand class="md:w-[1.25vw] -rotate-45" />
+                <Expand class="md:w-[1.25vw] -rotate-45 text-neutral-content/75 hover:text-warning transition-colors" />
             {:else}
                 <div class="h-full w-[0.15rem] rounded-full bg-neutral transition-colors group-hover:bg-warning md:w-[0.15vw] group-hover:md:w-[0.2vw]" />
             {/if}
