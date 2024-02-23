@@ -54,7 +54,7 @@
         "@lottiefiles/svelte-lottie-player": "^0.3.1",
         "@sveltejs/vite-plugin-svelte": "^3.0.2",
         "@types/lodash-es": "^4.17.12",
-        "@types/node": "^20.11.19",
+        "@types/node": "^20.11.20",
         "autoprefixer": "^10.4.17",
         "date-fns": "^3.3.1",
         "easytimer.js": "^4.6.0",
