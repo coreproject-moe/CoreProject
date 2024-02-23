@@ -1,7 +1,6 @@
 <script lang="ts">
     export let item: Comment;
     export let submit_url = "";
-    import { clear_commentbox_if_needed } from "$stores/comment";
 
     import Markdown from "$components/minor/Markdown/Index.svelte";
     import CommentBox from "$components/specific/CommentBox/Index.svelte";
@@ -23,6 +22,7 @@
     import Chat from "$icons/Chat/Index.svelte";
     import Share from "$icons/Share/Index.svelte";
     import Cross from "$icons/Cross/Index.svelte";
+    import Expand from "$icons/Expand/Index.svelte";
 
     // Bindings
     let user_reaction: typeof item.user_reaction,
@@ -30,7 +30,8 @@
         reply_shown = false,
         comment_highlight_el: HTMLDivElement,
         show_comment_highlighted = false,
-        icon_mapping = ["upvote", "downvote"];
+        icon_mapping = ["upvote", "downvote"],
+        collapse = false;
 
     onMount(async () => {
         const url_params = new URLSearchParams(window.location.search);
@@ -96,7 +97,11 @@
 </script>
 
 <div class="flex gap-2 md:gap-[0.75vw]">
-    <div class="flex flex-col items-center gap-4 md:gap-[1vw]">
+    <div
+        class="flex items-center gap-4 md:gap-[1vw]"
+        class:flex-col={!collapse}
+        class:flex-row-reverse={collapse}
+    >
         <a
             href="/user/"
             class="h-7 w-7 flex-shrink-0 md:h-[2vw] md:w-[2vw]"
@@ -107,8 +112,15 @@
                 class="h-full w-full shrink-0 rounded-full object-cover"
             />
         </a>
-        <button class="group flex h-full cursor-pointer justify-center transition-transform active:scale-95 md:w-full">
-            <div class="h-full w-[0.15rem] rounded-full bg-neutral transition-colors group-hover:bg-warning md:w-[0.15vw] group-hover:md:w-[0.2vw]" />
+        <button
+            on:click={() => collapse = !collapse}
+            class="group flex h-full cursor-pointer justify-center transition-transform active:scale-95 md:w-full"
+        >
+            {#if collapse}
+                <Expand class="md:w-[1.25vw] -rotate-45" />
+            {:else}
+                <div class="h-full w-[0.15rem] rounded-full bg-neutral transition-colors group-hover:bg-warning md:w-[0.15vw] group-hover:md:w-[0.2vw]" />
+            {/if}
         </button>
     </div>
     <div class="flex flex-col items-start gap-1 md:gap-[0.25vw]">
@@ -136,10 +148,16 @@
                     {new FormatDate(item.created_at).format_to_time_from_now}
                 </div>
             </a>
-            <div class="text-sm leading-snug text-accent md:text-[1vw] md:leading-[1.5vw]">
+            <div
+                class="text-sm leading-snug text-accent md:text-[1vw] md:leading-[1.5vw]"
+                class:hidden={collapse}
+            >
                 <Markdown markdown={item.text} />
             </div>
-            <div class="flex items-center gap-3 md:gap-[0.75vw]">
+            <div
+                class="flex items-center gap-3 md:gap-[0.75vw]"
+                class:hidden={collapse}
+            >
                 <div class="flex items-center gap-1 md:gap-[0.35vw]">
                     {#each icon_mapping as item, index}
                         {@const is_first = index === 0}
@@ -180,23 +198,6 @@
                     <Share class="w-4 md:w-[1vw]" />
                     <span>Share</span>
                 </button>
-
-                <!-- <div class="dropdown">
-                <div
-                    tabindex="0"
-                    role="button"
-                    class="btn btn-secondary h-max min-h-max p-0 md:gap-[0.15vw]"
-                >
-                    {#each Array(3).fill(0) as _}
-                        <Dot class="md:w-[0.2vw]" />
-                    {/each}
-                </div>
-                <ul class="dropdown-content z-10 overflow-hidden bg-neutral md:rounded-[0.25vw]">
-                    <li class="cursor-pointer transition-colors hover:bg-primary hover:text-accent md:px-[1vw] md:py-[0.5vw] md:text-[1vw]">
-                        <span>Report</span>
-                    </li>
-                </ul>
-            </div> -->
             </div>
         </div>
         {#if reply_shown}
@@ -212,7 +213,7 @@
         {/if}
 
         <!-- Render replies here -->
-        {#if item.childrens !== 0}
+        {#if item.childrens !== 0 && !collapse}
             <div class="mt-5 flex flex-col gap-5 md:mt-[1.5vw] md:gap-[1.5vw]">
                 {#each item.child as comment, index}
                     <svelte:self
