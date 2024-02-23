@@ -97,7 +97,8 @@
 
 <div
     class="flex gap-2 md:gap-[0.75vw] duration-300"
-    class:pl-[2vw]={item.collapse}
+    class:md:pl-[2vw]={item.collapse}
+    class:pl-7={item.collapse}
 >
     <div
         class="flex items-center gap-4 md:gap-[1vw] relative"
@@ -116,12 +117,13 @@
         </a>
         <button
             on:click={() => item.collapse = !item.collapse}
-            class="group flex h-full cursor-pointer justify-center transition-transform active:scale-95 md:w-full"
+            class="group flex h-full cursor-pointer justify-center transition-transform active:scale-95 w-full"
             class:absolute={item.collapse}
-            class:-left-[2.25vw]={item.collapse}
+            class:md:-left-[2.25vw]={item.collapse}
+            class:-left-7={item.collapse}
         >
             {#if item.collapse}
-                <Expand class="md:w-[1.25vw] -rotate-45 text-neutral-content/75 hover:text-warning transition-colors" />
+                <Expand class="md:w-[1.25vw] w-5 -rotate-45 text-neutral-content/75 hover:text-warning transition-colors" />
             {:else}
                 <div class="h-full w-[0.15rem] rounded-full bg-neutral transition-colors group-hover:bg-warning md:w-[0.15vw] group-hover:md:w-[0.2vw]" />
             {/if}
