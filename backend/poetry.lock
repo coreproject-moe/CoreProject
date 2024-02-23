@@ -763,13 +763,13 @@ Django = ">=3.2"
 
 [[package]]
 name = "django-ltree-2"
-version = "0.1.3"
+version = "0.1.4"
 description = "Continual of django-ltree"
 optional = false
 python-versions = ">=3.10"
 files = [
-    {file = "django_ltree_2-0.1.3-py3-none-any.whl", hash = "sha256:a8430c6d5e2eb431c8cab8f59c2bf46413242a233a50cc06c4ac5ace7fc44f30"},
-    {file = "django_ltree_2-0.1.3.tar.gz", hash = "sha256:e4e119196a2719ec9fbab7ca9817b1380ac8742391c5c26dc72d8c730024f9cb"},
+    {file = "django_ltree_2-0.1.4-py3-none-any.whl", hash = "sha256:c554f0d6d3e85b7c667fcea3c6a341dce8ce6d137112282f25503df058a8e83d"},
+    {file = "django_ltree_2-0.1.4.tar.gz", hash = "sha256:fbe0909cb1724fd89af2e7ab6f81a2afa047aa790f90857f46ea392c94fd650d"},
 ]
 
 [package.dependencies]
