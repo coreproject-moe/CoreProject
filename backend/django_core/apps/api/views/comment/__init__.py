@@ -35,5 +35,7 @@ class CommentViewSet(
         return context
 
     def perform_destroy(self, instance: CommentModel) -> None:
-        CommentModel.objects.filter(path__descendants=instance.path).delete()
-        instance.delete()
+        instance.deleted = True
+        instance.text = ""
+        instance.user = None
+        instance.save()

@@ -9,11 +9,13 @@ from mixins.models.created_at import CreatedAtMixin
 
 
 class CommentModel(CreatedAtMixin, TreeModel):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True)
     text = models.TextField()
 
     upvotes = models.ManyToManyField(CustomUser, blank=True, related_name="upvotes")
     downvotes = models.ManyToManyField(CustomUser, blank=True, related_name="downvotes")
+
+    deleted = models.BooleanField(default=False)
 
     @property
     def ratio(self) -> int:
