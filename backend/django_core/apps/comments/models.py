@@ -9,7 +9,6 @@ from mixins.models.created_at import CreatedAtMixin
 
 
 class CommentModel(CreatedAtMixin, TreeModel):
-    label_size = 4
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     text = models.TextField()
 
