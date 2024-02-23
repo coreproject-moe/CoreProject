@@ -763,13 +763,13 @@ Django = ">=3.2"
 
 [[package]]
 name = "django-ltree-2"
-version = "0.1.3"
+version = "0.1.4"
 description = "Continual of django-ltree"
 optional = false
 python-versions = ">=3.10"
 files = [
-    {file = "django_ltree_2-0.1.3-py3-none-any.whl", hash = "sha256:a8430c6d5e2eb431c8cab8f59c2bf46413242a233a50cc06c4ac5ace7fc44f30"},
-    {file = "django_ltree_2-0.1.3.tar.gz", hash = "sha256:e4e119196a2719ec9fbab7ca9817b1380ac8742391c5c26dc72d8c730024f9cb"},
+    {file = "django_ltree_2-0.1.4-py3-none-any.whl", hash = "sha256:c554f0d6d3e85b7c667fcea3c6a341dce8ce6d137112282f25503df058a8e83d"},
+    {file = "django_ltree_2-0.1.4.tar.gz", hash = "sha256:fbe0909cb1724fd89af2e7ab6f81a2afa047aa790f90857f46ea392c94fd650d"},
 ]
 
 [package.dependencies]
@@ -1566,6 +1566,7 @@ files = [
     {file = "PyYAML-6.0.1-cp311-cp311-win_amd64.whl", hash = "sha256:bf07ee2fef7014951eeb99f56f39c9bb4af143d8aa3c21b1677805985307da34"},
     {file = "PyYAML-6.0.1-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:855fb52b0dc35af121542a76b9a84f8d1cd886ea97c84703eaa6d88e37a2ad28"},
     {file = "PyYAML-6.0.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:40df9b996c2b73138957fe23a16a4f0ba614f4c0efce1e9406a184b6d07fa3a9"},
+    {file = "PyYAML-6.0.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:a08c6f0fe150303c1c6b71ebcd7213c2858041a7e01975da3a99aed1e7a378ef"},
     {file = "PyYAML-6.0.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6c22bec3fbe2524cde73d7ada88f6566758a8f7227bfbf93a408a9d86bcc12a0"},
     {file = "PyYAML-6.0.1-cp312-cp312-musllinux_1_1_x86_64.whl", hash = "sha256:8d4e9c88387b0f5c7d5f281e55304de64cf7f9c0021a3525bd3b1c542da3b0e4"},
     {file = "PyYAML-6.0.1-cp312-cp312-win32.whl", hash = "sha256:d483d2cdf104e7c9fa60c544d92981f12ad66a457afae824d146093b8c294c54"},
@@ -2377,4 +2378,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "59b6acb7e9841fbf8394c1eef35c41a990d7d95f974f14734f5acc963dcd9cbf"
+content-hash = "0754894470d57b8361ae3658f49c6d99b7af1d71b619cd454461dd6befba929d"

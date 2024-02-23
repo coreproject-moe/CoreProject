@@ -19,7 +19,7 @@ pillow = ">=10.1.0"
 # First Party ( Database )
 psycopg = {extras = ["binary"], version = ">=3.1.12"}
 # Database Integrations
-django-ltree-2 = "^0.1.3"
+django-ltree-2 = "^0.1.4"
 # 3rd Party ( Rate Limit )
 django-ratelimit = ">=4.1.0"
 # 3rd Party ( Files )
