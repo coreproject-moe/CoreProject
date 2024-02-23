@@ -30,8 +30,7 @@
         reply_shown = false,
         comment_highlight_el: HTMLDivElement,
         show_comment_highlighted = false,
-        icon_mapping = ["upvote", "downvote"],
-        collapse = false;
+        icon_mapping = ["upvote", "downvote"];
 
     onMount(async () => {
         const url_params = new URLSearchParams(window.location.search);
@@ -99,8 +98,8 @@
 <div class="flex gap-2 md:gap-[0.75vw]">
     <div
         class="flex items-center gap-4 md:gap-[1vw]"
-        class:flex-col={!collapse}
-        class:flex-row-reverse={collapse}
+        class:flex-col={!item.collapse}
+        class:flex-row-reverse={item.collapse}
     >
         <a
             href="/user/"
@@ -113,10 +112,10 @@
             />
         </a>
         <button
-            on:click={() => collapse = !collapse}
+            on:click={() => item.collapse = !item.collapse}
             class="group flex h-full cursor-pointer justify-center transition-transform active:scale-95 md:w-full"
         >
-            {#if collapse}
+            {#if item.collapse}
                 <Expand class="md:w-[1.25vw] -rotate-45" />
             {:else}
                 <div class="h-full w-[0.15rem] rounded-full bg-neutral transition-colors group-hover:bg-warning md:w-[0.15vw] group-hover:md:w-[0.2vw]" />
@@ -150,13 +149,13 @@
             </a>
             <div
                 class="text-sm leading-snug text-accent md:text-[1vw] md:leading-[1.5vw]"
-                class:hidden={collapse}
+                class:hidden={item.collapse}
             >
                 <Markdown markdown={item.text} />
             </div>
             <div
                 class="flex items-center gap-3 md:gap-[0.75vw]"
-                class:hidden={collapse}
+                class:hidden={item.collapse}
             >
                 <div class="flex items-center gap-1 md:gap-[0.35vw]">
                     {#each icon_mapping as item, index}
@@ -213,7 +212,7 @@
         {/if}
 
         <!-- Render replies here -->
-        {#if item.childrens !== 0 && !collapse}
+        {#if item.childrens !== 0 && !item.collapse}
             <div class="mt-5 flex flex-col gap-5 md:mt-[1.5vw] md:gap-[1.5vw]">
                 {#each item.child as comment, index}
                     <svelte:self
