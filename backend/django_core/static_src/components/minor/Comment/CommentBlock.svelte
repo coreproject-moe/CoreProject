@@ -101,6 +101,20 @@
             await post_to_reaction_endpoint(reaction as "upvote" | "downvote");
         }
     };
+
+    const handle_report_comment_click = async () => {
+        const res = await fetch(reverse("comment-report-endpoint", item.pk), {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                "X-CSRFToken": get_csrf_token()
+            }
+        });
+        if (res.ok) {
+            report_dialog.showModal();
+        };
+    };
 </script>
 
 <div
@@ -230,7 +244,7 @@
                     </div>
                     <ul class="dropdown-content z-10 md:mt-[0.25vw] overflow-hidden bg-neutral md:rounded-[0.5vw]">
                         <button
-                            on:click={() => report_dialog.showModal()}
+                            on:click={handle_report_comment_click}
                             class="cursor-pointer flex items-center md:gap-[0.5vw] transition-colors hover:bg-secondary/25 md:px-[1vw] md:py-[0.5vw] md:text-[1vw] w-full"
                         >
                             <Report class="md:size-[1.25vw]" />
