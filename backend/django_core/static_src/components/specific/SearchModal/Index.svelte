@@ -1,7 +1,6 @@
 <script lang="ts">
     import { search_modal_state } from "./store";
     import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
-    import { string_to_boolean } from "$functions/string_to_bool";
     import { reverse } from "$functions/urls";
     import { Anime } from "../../../types/anime";
     import { FormatDate } from "$functions/format_date";
@@ -12,6 +11,7 @@
     import Circle from "$icons/Circle/Index.svelte";
     import { get_csrf_token } from "$functions/get_csrf_token";
     import { FETCH_TIMEOUT } from "$constants/fetch";
+    import { user_authenticated } from "$stores/user";
 
     let active_index = 0,
         active_core: "anime" | "manga" | "sound" = "anime",
@@ -61,7 +61,7 @@
     const get_anime_with_serach_parameters = async () => {
         const headers: { [key: string]: string } = {};
 
-        if (string_to_boolean(window.user_authenticated)) {
+        if ($user_authenticated) {
             headers["X-CSRFToken"] = get_csrf_token();
         }
         const res = await fetch(reverse(`anime-list`) + "?" + new URLSearchParams({ name: search_query }), {

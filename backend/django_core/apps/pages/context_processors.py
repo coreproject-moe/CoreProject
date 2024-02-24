@@ -1,6 +1,6 @@
 import functools
 import re
-
+import json
 from django.conf import settings
 from django.contrib.admindocs.views import simplify_regex
 from django.core.exceptions import ViewDoesNotExist
@@ -76,7 +76,7 @@ def extract_views_from_urlpatterns(urlpatterns: list[str], base="", namespace=No
     return views
 
 
-def urls(request: HttpRequest):
+def urls(request: HttpRequest) -> dict[str, str]:
     urlpatterns = []
     urlconf = __import__(getattr(request, "urlconf", settings.ROOT_URLCONF), {}, {}, [""])
     view_functions = extract_views_from_urlpatterns(urlconf.urlpatterns)
@@ -97,3 +97,17 @@ def urls(request: HttpRequest):
             urlpatterns.append({"url": url, "name": url_name})
 
     return {"urlpatterns": urlpatterns}
+
+
+def request_dict(request: HttpRequest):
+    data_dict = {
+        "user": {
+            "is_authenticated": request.user.is_authenticated,
+            "is_superuser": request.user.is_superuser,
+            "is_staff": request.user.is_staff,
+        },
+    }
+
+    return {
+        "request_dict": json.dumps(data_dict),
+    }

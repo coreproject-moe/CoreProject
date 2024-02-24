@@ -9,12 +9,12 @@
     import { FETCH_TIMEOUT } from "$constants/fetch";
     import * as _ from "lodash-es";
     import { onMount, tick } from "svelte";
+    import { user_authenticated } from "$stores/user";
 
     // Functions
     import { cn } from "$functions/classname";
     import { reverse } from "$functions/urls";
     import { get_csrf_token } from "$functions/get_csrf_token";
-    import { string_to_boolean } from "$functions/string_to_bool";
     import { FormatDate } from "$functions/format_date";
 
     // import Images
@@ -99,12 +99,12 @@
 </script>
 
 <div
-    class="flex gap-2 md:gap-[0.75vw] duration-300"
+    class="flex gap-2 duration-300 md:gap-[0.75vw]"
     class:md:pl-[2vw]={item.collapse}
     class:pl-7={item.collapse}
 >
     <div
-        class="flex items-center gap-4 md:gap-[1vw] relative"
+        class="relative flex items-center gap-4 md:gap-[1vw]"
         class:flex-col={!item.collapse}
         class:flex-row-reverse={item.collapse}
     >
@@ -119,14 +119,14 @@
             />
         </a>
         <button
-            on:click={() => item.collapse = !item.collapse}
-            class="group flex h-full cursor-pointer justify-center transition-transform active:scale-95 w-full"
+            on:click={() => (item.collapse = !item.collapse)}
+            class="group flex h-full w-full cursor-pointer justify-center transition-transform active:scale-95"
             class:absolute={item.collapse}
             class:md:-left-[2.25vw]={item.collapse}
             class:-left-7={item.collapse}
         >
             {#if item.collapse}
-                <Expand class="md:w-[1.25vw] w-5 -rotate-45 text-neutral-content/75 hover:text-warning transition-colors" />
+                <Expand class="w-5 -rotate-45 text-neutral-content/75 transition-colors hover:text-warning md:w-[1.25vw]" />
             {:else}
                 <div class="h-full w-[0.15rem] rounded-full bg-neutral transition-colors group-hover:bg-warning md:w-[0.15vw] group-hover:md:w-[0.2vw]" />
             {/if}
@@ -177,7 +177,7 @@
                         {@const is_last = index === icon_mapping.length - 1}
                         <button
                             on:click|preventDefault={() => handle_reaction_button_click(item)}
-                            class={cn("btn btn-secondary h-max min-h-full p-0", is_first && "order-1", is_last && "order-3", string_to_boolean(window.user_authenticated) || "btn-disabled")}
+                            class={cn("btn btn-secondary h-max min-h-full p-0", is_first && "order-1", is_last && "order-3", $user_authenticated || "btn-disabled")}
                         >
                             <div class:rotate-180={item === "downvote"}>
                                 {#if user_reaction === `${item}d`}
@@ -209,7 +209,10 @@
                     <Chat class="w-4 md:w-[1vw]" />
                     <span>Replay</span>
                 </button>
-                <button disabled class="btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw]">
+                <button
+                    disabled
+                    class="btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw]"
+                >
                     <Share class="w-4 md:w-[1vw]" />
                     <span>Share</span>
                 </button>
