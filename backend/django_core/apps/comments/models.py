@@ -34,3 +34,18 @@ class CommentModel(CreatedAtMixin, TreeModel):
         indexes = [idx.GistIndex(fields=["path"])]
         verbose_name = "Comment"
         verbose_name_plural = "Comments"
+
+class ReportedCommentModel(CreatedAtMixin, models.Model):
+    class ReasonChoices(models.TextChoices):
+        RACISM = "racism", "Racism"
+
+    comment = models.ForeignKey(CommentModel, on_delete=models.CASCADE, null=True, blank=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
+    reason = models.CharField(max_length=255, choices=ReasonChoices, null=True, blank=True)
+
+    def __str__(self) -> str:
+        return f"{self.user} reported a comment by {self.comment.user}"
+
+    class Meta:
+        verbose_name = "Reported Comment"
+        verbose_name_plural = "Reported Comments"
