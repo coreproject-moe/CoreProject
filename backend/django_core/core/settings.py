@@ -213,6 +213,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 # Custom
                 "apps.pages.context_processors.urls",
+                "apps.pages.context_processors.request_dict",
             ],
         },
     },

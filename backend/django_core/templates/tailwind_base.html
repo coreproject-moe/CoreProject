@@ -21,22 +21,10 @@
             type="image/svg+xml"
             href="{% vite_asset_url 'images/favicon/favicon.svg' %}"
         />
-        <script>
-            window.csrfmiddlewaretoken = `{{ csrf_token }}`;
-            window.user_authenticated = `{{ request.user.is_authenticated }}`;
 
-            /*
-            document.addEventListener('DOMContentLoaded', () => {
-                document.body.addEventListener(
-                    'fetch:beforeRequest',
-                    (event) => {
-                        event.detail.headers[
-                            'X-CSRFToken'
-                        ] = window.csrfmiddlewaretoken;
-                    }
-                );
-            });
-            */
+        <script type='module'>
+            window.csrfmiddlewaretoken = `{{ csrf_token }}`;
+            window.request = JSON.parse(`{{ request_dict|safe }}`)
         </script>
 
         <script>
@@ -50,11 +38,9 @@
             {% endautoescape %}
 
         </script>
+
         {% vite_hmr_client %}
-
         {% vite_asset 'main.ts' %}
-
-   
 
         {% django_htmx_script %}
         {% block head %}{% endblock %}

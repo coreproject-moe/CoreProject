@@ -5,6 +5,12 @@ declare global {
         _hyperscript: typeof _hyperscript;
         csrfmiddlewaretoken: string;
         urls: Map<string, string>;
-        user_authenticated: string; // is Boolean
+        request: {
+            user: {
+                is_authenticated: string;
+                is_superuser: string;
+                is_staff: string;
+            };
+        };
     }
 }
