@@ -26,6 +26,9 @@
     import Share from "$icons/Share/Index.svelte";
     import Cross from "$icons/Cross/Index.svelte";
     import Expand from "$icons/Expand/Index.svelte";
+    import Dot from "$icons/Dot/Index.svelte";
+    import Report from "$icons/Report/Index.svelte";
+    import Save from "$icons/Save/Index.svelte";
 
     // Bindings
     let user_reaction: typeof item.user_reaction,
@@ -213,6 +216,27 @@
                     <Share class="w-4 md:w-[1vw]" />
                     <span>Share</span>
                 </button>
+                <div class="dropdown">
+                    <div
+                        tabindex="0"
+                        role="button"
+                        class="btn btn-ghost h-max min-h-max md:p-[0.5vw] md:gap-[0.15vw] rounded-full"
+                    >
+                        {#each Array(3).fill(0) as _}
+                            <Dot class="md:w-[0.2vw]" />
+                        {/each}
+                    </div>
+                    <ul class="dropdown-content z-10 md:mt-[0.25vw] overflow-hidden bg-neutral md:rounded-[0.5vw]">
+                        <li class="cursor-pointer flex items-center md:gap-[0.5vw] transition-colors hover:bg-secondary/25 md:px-[1vw] md:py-[0.5vw] md:text-[1vw]">
+                            <Report class="md:size-[1.25vw]" />
+                            <span>Report</span>
+                        </li>
+                        <li class="cursor-pointer flex items-center md:gap-[0.5vw] transition-colors hover:bg-secondary/25 md:px-[1vw] md:py-[0.5vw] md:text-[1vw]">
+                            <Save class="md:size-[1.25vw]" />
+                            <span>Save</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
         {#if reply_shown}
