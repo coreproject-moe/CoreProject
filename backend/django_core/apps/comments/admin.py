@@ -12,6 +12,4 @@ class CommentAdmin(admin.ModelAdmin[CommentModel]):
 
 @admin.register(ReportedCommentModel)
 class ReportedCommentAdmin(admin.ModelAdmin[ReportedCommentModel]):
-    autocomplete_fields = ["user"]
-    search_fields = ["reason", "user__username"]
-    list_display = ["user", "reason", "created_at"]
+    pass

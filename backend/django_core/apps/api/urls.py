@@ -15,6 +15,7 @@ from .views.anime.theme import AnimeThemesAPIView, AnimeThemesSpecificAPIView
 from .views.characters import CharacterViewSet
 from .views.comment import CommentViewSet
 from .views.comment.reaction import CommentReactionAPIView
+from .views.comment.report import CommentReportAPIView
 from .views.producers import ProducerViewSet
 from .views.staffs import StaffViewSet
 from .views.user.login import LoginAPIView
@@ -79,6 +80,11 @@ urlpatterns = [
         "comment/<int:pk>/reaction/",
         CommentReactionAPIView.as_view(),
         name="comment-reaction-endpoint",
+    ),
+    path(
+        "comment/<int:pk>/report/",
+        CommentReportAPIView.as_view(),
+        name="comment-report-endpoint",
     ),
     # Upload route
     path(
