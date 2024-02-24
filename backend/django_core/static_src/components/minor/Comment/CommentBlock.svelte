@@ -179,17 +179,19 @@
                             on:click|preventDefault={() => handle_reaction_button_click(item)}
                             class={cn("btn btn-secondary h-max min-h-full p-0", is_first && "order-1", is_last && "order-3", string_to_boolean(window.user_authenticated) || "btn-disabled")}
                         >
-                            {#if user_reaction === `${item}d`}
-                                <Arrow
-                                    variant="fill"
-                                    class="w-4 text-warning md:w-[1.25vw]"
-                                />
-                            {:else}
-                                <Arrow
-                                    class="w-4 md:w-[1.25vw]"
-                                    variant="outline"
-                                />
-                            {/if}
+                            <div class:rotate-180={item === "downvote"}>
+                                {#if user_reaction === `${item}d`}
+                                    <Arrow
+                                        variant="fill"
+                                        class="w-4 text-warning md:w-[1.25vw]"
+                                    />
+                                {:else}
+                                    <Arrow
+                                        class="w-4 md:w-[1.25vw]"
+                                        variant="outline"
+                                    />
+                                {/if}
+                            </div>
                         </button>
                     {/each}
                     <span class="order-2 text-sm font-semibold text-accent md:text-[0.9vw]">{ratio}</span>
