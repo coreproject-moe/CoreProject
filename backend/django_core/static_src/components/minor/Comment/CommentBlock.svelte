@@ -17,6 +17,9 @@
     import { string_to_boolean } from "$functions/string_to_bool";
     import { FormatDate } from "$functions/format_date";
 
+    // import Images
+    import DefaultAvatar from "../../../public/images/defaults/avatar.png";
+
     // Import icons
     import Arrow from "$icons/Arrow/Index.svelte";
     import Chat from "$icons/Chat/Index.svelte";
@@ -111,7 +114,7 @@
         >
             <img
                 alt=""
-                src={item?.user?.avatar ?? item?.user?.avatar_url}
+                src={!item.deleted ? item?.user?.avatar_url : DefaultAvatar}
                 class="h-full w-full shrink-0 rounded-full object-cover"
             />
         </a>
@@ -145,10 +148,14 @@
                 class="flex flex-col gap-1 text-xs leading-none md:gap-0 md:text-[1vw]"
             >
                 <div class="flex items-center gap-2 md:gap-[0.5vw]">
-                    <div class="text-white">
-                        {`${item?.user?.first_name ?? ""} ${item?.user?.last_name ?? ""}`}
-                    </div>
-                    <div class="md:text-[0.75vw]">{item?.user?.username}</div>
+                    {#if item.deleted}
+                        <div class="md:text-[0.9vw]">[deleted]</div>
+                    {:else}
+                        <div class="text-white">
+                            {`${item?.user?.first_name ?? ""} ${item?.user?.last_name ?? ""}`}
+                        </div>
+                        <div class="md:text-[0.75vw]">{item?.user?.username}</div>
+                    {/if}
                 </div>
                 <div class="text-surface-300 md:text-[0.75vw] md:leading-[1.5vw]">
                     {new FormatDate(item.created_at).format_to_time_from_now}
@@ -200,7 +207,7 @@
                     <Chat class="w-4 md:w-[1vw]" />
                     <span>Replay</span>
                 </button>
-                <button class="btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw]">
+                <button disabled class="btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw]">
                     <Share class="w-4 md:w-[1vw]" />
                     <span>Share</span>
                 </button>

@@ -6,7 +6,7 @@ export type Comment = {
         last_name: string;
         avatar: null | string;
         avatar_url: string;
-    };
+    } | null;
     ratio: number;
     text: string;
     path: string;
@@ -15,4 +15,5 @@ export type Comment = {
     user_reaction: "upvoted" | "downvoted" | null;
     child: Comment[];
     collapse: boolean;
+    deleted: boolean;
 };
