@@ -44,7 +44,7 @@ class ReportedCommentModel(CreatedAtMixin, models.Model):
         return self.reports.count()
 
     def __str__(self) -> str:
-        return f"Comment by {self.comment.user}"
+        return f"Comment by {self.comment.user} | {self.reports_count} reports"
 
     class Meta:
         verbose_name = "Reported Comment"

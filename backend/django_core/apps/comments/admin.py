@@ -12,4 +12,4 @@ class CommentAdmin(admin.ModelAdmin[CommentModel]):
 
 @admin.register(ReportedCommentModel)
 class ReportedCommentAdmin(admin.ModelAdmin[ReportedCommentModel]):
-    pass
+    search_fields = ["comment__user__username", "comment__text"]
