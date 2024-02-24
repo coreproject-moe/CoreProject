@@ -114,7 +114,7 @@
         >
             <img
                 alt=""
-                src={!item.deleted ? item?.user?.avatar_url : DefaultAvatar}
+                src={item.deleted ? DefaultAvatar : item?.user?.avatar_url}
                 class="h-full w-full shrink-0 rounded-full object-cover"
             />
         </a>
