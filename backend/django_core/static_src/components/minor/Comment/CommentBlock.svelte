@@ -50,8 +50,6 @@
         ratio = item["ratio"];
     });
 
-    const depth = item.path.match(/\./g)?.length;
-
     const apply_fetch_sideeffect = async (res: Response) => {
             const json = await res.json();
             user_reaction = json.user_reaction;
@@ -200,7 +198,7 @@
                     class={cn(
                         `btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw]`,
                         // Allow only 5 level nesting ( for now )
-                        depth && depth > 5 && "btn-disabled"
+                        item.depth && item.depth > 5 && "btn-disabled"
                     )}
                     on:click|preventDefault={() => {
                         reply_shown = !reply_shown;
@@ -231,7 +229,7 @@
         {/if}
 
         <!-- Render replies here -->
-        {#if item.childrens !== 0 && !item.collapse}
+        {#if !_.isEmpty(item.child) && item.childrens !== 0 && !item.collapse}
             <div class="mt-5 flex flex-col gap-5 md:mt-[1.5vw] md:gap-[1.5vw]">
                 {#each item.child as comment, index}
                     <svelte:self
@@ -244,7 +242,7 @@
     </div>
 </div>
 
-{#if _.isEmpty(item.child) && item.childrens != 0}
+{#if _.isEmpty(item.child) && item.childrens !== 0 && !item.collapse}
     <div class="flex items-end md:ml-[0.55vw] md:gap-[0.5vw]">
         <svg
             class="text-neutral md:w-[2vw]"
