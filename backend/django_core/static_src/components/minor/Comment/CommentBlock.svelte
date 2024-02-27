@@ -26,14 +26,17 @@
     import Share from "$icons/Share/Index.svelte";
     import Cross from "$icons/Cross/Index.svelte";
     import Expand from "$icons/Expand/Index.svelte";
+    import { IS_DESKTOP, IS_MOBILE, IS_TABLET } from "$constants/device";
 
     // Bindings
     let user_reaction: typeof item.user_reaction,
         ratio: typeof item.ratio,
         reply_shown = false,
         comment_highlight_el: HTMLDivElement,
+        comment_reply_dialog_el: HTMLDialogElement,
         show_comment_highlighted = false,
-        icon_mapping = ["upvote", "downvote"];
+        icon_mapping = ["upvote", "downvote"],
+        reply_box_or_modal: "box" | "modal" = "box";
 
     onMount(async () => {
         const url_params = new URLSearchParams(window.location.search);
@@ -48,6 +51,10 @@
         // user actions
         user_reaction = item["user_reaction"];
         ratio = item["ratio"];
+
+        if (IS_MOBILE && item.depth > 1) reply_box_or_modal = "modal";
+        else if (IS_TABLET && item.depth > 3) reply_box_or_modal = "modal";
+        else if (IS_DESKTOP && item.depth > 5) reply_box_or_modal = "modal";
     });
 
     const apply_fetch_sideeffect = async (res: Response) => {
@@ -195,13 +202,10 @@
                     <span class="order-2 text-sm font-semibold text-accent md:text-[0.9vw]">{ratio}</span>
                 </div>
                 <button
-                    class={cn(
-                        `btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw]`,
-                        // Allow only 5 level nesting ( for now )
-                        item.depth && item.depth > 5 && "btn-disabled"
-                    )}
+                    class={cn(`btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw]`)}
                     on:click|preventDefault={() => {
                         reply_shown = !reply_shown;
+                        if (reply_box_or_modal === "modal") comment_reply_dialog_el.showModal();
                     }}
                 >
                     <Chat class="w-4 md:w-[1vw]" />
@@ -216,7 +220,7 @@
                 </button>
             </div>
         </div>
-        {#if reply_shown}
+        {#if reply_shown && reply_box_or_modal === "box"}
             <div class="md:mt-[1vw]">
                 <CommentBox
                     on:submit={() => {
@@ -264,4 +268,59 @@
             <span class="md:text-[1vw]">{item.childrens} More</span>
         </button>
     </div>
+{/if}
+
+{#if reply_box_or_modal === "modal"}
+    <dialog bind:this={comment_reply_dialog_el} class="modal modal-bottom">
+        <div class="modal-box overflow-x-hidden bg-secondary p-4 rounded-xl">
+            <span class="text-sm text-warning">Reply to:</span>
+            <div class="flex gap-2 w-full mt-2">
+                <a
+                    href="/user/"
+                    class="h-7 w-7 flex-shrink-0"
+                >
+                    <img
+                        alt=""
+                        src={item.deleted ? DefaultAvatar : item?.user?.avatar_url}
+                        class="h-full w-full shrink-0 rounded-full object-cover"
+                    />
+                </a>
+                <div class="flex w-full flex-col items-start gap-2">
+                    <a
+                        href="/user/"
+                        class="flex flex-col gap-1 text-xs leading-none"
+                    >
+                        <div class="flex items-center gap-2">
+                            {#if item.deleted}
+                                <div>[deleted]</div>
+                            {:else}
+                                <div class="text-white">
+                                    {`${item?.user?.first_name ?? ""} ${item?.user?.last_name ?? ""}`}
+                                </div>
+                                <div>{item?.user?.username}</div>
+                            {/if}
+                        </div>
+                        <div class="text-surface-300">
+                            {new FormatDate(item.created_at).format_to_time_from_now}
+                        </div>
+                    </a>
+                    <div class="text-sm leading-snug text-accent">
+                        <Markdown markdown={item.text} />
+                    </div>
+                </div>
+            </div>
+            <div class="mt-5 flex w-full">
+                <CommentBox
+                    on:submit={() => {
+                        reply_shown = false;
+                    }}
+                    {submit_url}
+                    path={item.path ?? ""}
+                />
+            </div>
+        </div>
+        <form method="dialog" class="modal-backdrop">
+            <button>close</button>
+        </form>
+    </dialog>
 {/if}
