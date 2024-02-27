@@ -243,9 +243,9 @@
 </div>
 
 {#if _.isEmpty(item.child) && item.childrens !== 0 && !item.collapse}
-    <div class="flex items-end md:ml-[0.55vw] md:gap-[0.5vw]">
+    <div class="flex items-end ml-2 md:ml-[0.55vw] md:gap-[0.5vw]">
         <svg
-            class="text-neutral md:w-[2vw]"
+            class="text-neutral w-7 md:w-[2vw]"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 15 15"
         >
@@ -257,9 +257,9 @@
             />
         </svg>
 
-        <button class="btn btn-secondary flex h-max min-h-max items-center p-0 md:gap-[0.75vw]">
-            <div class="grid rotate-45 place-items-center rounded-full bg-neutral md:h-[1.5vw] md:w-[1.5vw]">
-                <Cross class="p-0 text-accent md:w-[1vw]" />
+        <button class="btn btn-secondary flex h-max min-h-max items-center p-0 gap-2 md:gap-[0.75vw]">
+            <div class="grid rotate-45 place-items-center rounded-full bg-neutral size-5 md:size-[1.5vw]">
+                <Cross class="p-0 text-accent w-4 md:w-[1vw]" />
             </div>
             <span class="md:text-[1vw]">{item.childrens} More</span>
         </button>
