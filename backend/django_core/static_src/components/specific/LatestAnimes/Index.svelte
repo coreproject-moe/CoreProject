@@ -96,7 +96,7 @@
     });
 </script>
 
-<latest-anime-swiper
+<div
     class="relative h-96 w-full md:h-[27.875vw] md:w-[42.1875vw]"
     use:swipe={{ timeframe: 300, minSwipeDistance: 100, touchAction: "pan-y" }}
     on:swipe={swipe_handler}
@@ -245,4 +245,4 @@
     >
         <Chevron class="w-[1.25vw] -rotate-90" />
     </button>
-</latest-anime-swiper>
+</div>
