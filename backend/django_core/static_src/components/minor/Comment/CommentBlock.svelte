@@ -27,6 +27,7 @@
     import Cross from "$icons/Cross/Index.svelte";
     import Expand from "$icons/Expand/Index.svelte";
     import { breakpoint } from "$stores/breakpoints";
+    import { get } from "svelte/store";
 
     // Bindings
     let user_reaction: typeof item.user_reaction,
@@ -55,8 +56,7 @@
         // if (IS_MOBILE && item.depth > 1) reply_box_or_modal = "modal";
         // else if (IS_TABLET && item.depth > 3) reply_box_or_modal = "modal";
         // else if (IS_DESKTOP && item.depth > 5) reply_box_or_modal = "modal";
-
-        console.log(breakpoint);
+        console.log(get(breakpoint));
     });
 
     const apply_fetch_sideeffect = async (res: Response) => {

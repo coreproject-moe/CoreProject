@@ -6,6 +6,13 @@
  */
 import type { Config } from "tailwindcss";
 
+// Import plugins
+import forms from "@tailwindcss/aspect-ratio";
+import typography from "@tailwindcss/typography";
+import aspectRatio from "@tailwindcss/aspect-ratio";
+import scrollbar from "tailwind-scrollbar";
+import daisyui from "daisyui";
+
 export default {
     content: [
         /**
@@ -71,11 +78,11 @@ export default {
          * for forms. If you don't like it or have own styling for forms,
          * comment the line below to disable '@tailwindcss/forms'.
          */
-        require("@tailwindcss/forms"),
-        require("@tailwindcss/typography"),
-        require("@tailwindcss/aspect-ratio"),
-        require("tailwind-scrollbar"),
-        require("daisyui")
+        forms,
+        typography,
+        aspectRatio,
+        scrollbar,
+        daisyui
     ],
     daisyui: {
         themes: [
