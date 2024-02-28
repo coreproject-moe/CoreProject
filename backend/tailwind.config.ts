@@ -4,6 +4,7 @@
  * If you need the full config, get it from here:
  * https://unpkg.com/browse/tailwindcss@latest/stubs/defaultConfig.stub.js
  */
+import type { Config } from "tailwindcss";
 
 export default {
     content: [
@@ -93,4 +94,4 @@ export default {
             }
         ]
     }
-};
+} satisfies Config;
