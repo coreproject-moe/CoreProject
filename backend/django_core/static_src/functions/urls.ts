@@ -1,13 +1,15 @@
 import htmx from "htmx.org";
 import * as _ from "lodash-es";
-
+import nProgress from "nprogress";
 // Internal Function
 
 function handle_404() {
+    nProgress.done();
     goto({ url: "/404", target: "body", verb: "GET" });
 }
 
 function handle_500() {
+    nProgress.done();
     goto({ url: "/500", target: "body", verb: "GET" });
 }
 
