@@ -26,7 +26,7 @@
     import Share from "$icons/Share/Index.svelte";
     import Cross from "$icons/Cross/Index.svelte";
     import Expand from "$icons/Expand/Index.svelte";
-    import { IS_DESKTOP, IS_MOBILE, IS_TABLET } from "$constants/device";
+    import { breakpoint } from "$stores/breakpoints";
 
     // Bindings
     let user_reaction: typeof item.user_reaction,
@@ -52,9 +52,11 @@
         user_reaction = item["user_reaction"];
         ratio = item["ratio"];
 
-        if (IS_MOBILE && item.depth > 1) reply_box_or_modal = "modal";
-        else if (IS_TABLET && item.depth > 3) reply_box_or_modal = "modal";
-        else if (IS_DESKTOP && item.depth > 5) reply_box_or_modal = "modal";
+        // if (IS_MOBILE && item.depth > 1) reply_box_or_modal = "modal";
+        // else if (IS_TABLET && item.depth > 3) reply_box_or_modal = "modal";
+        // else if (IS_DESKTOP && item.depth > 5) reply_box_or_modal = "modal";
+
+        console.log(breakpoint);
     });
 
     const apply_fetch_sideeffect = async (res: Response) => {
@@ -247,9 +249,9 @@
 </div>
 
 {#if _.isEmpty(item.child) && item.childrens !== 0 && !item.collapse}
-    <div class="flex items-end ml-2 md:ml-[0.55vw] md:gap-[0.5vw]">
+    <div class="ml-2 flex items-end md:ml-[0.55vw] md:gap-[0.5vw]">
         <svg
-            class="text-neutral w-7 md:w-[2vw]"
+            class="w-7 text-neutral md:w-[2vw]"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 15 15"
         >
@@ -261,9 +263,9 @@
             />
         </svg>
 
-        <button class="btn btn-secondary flex h-max min-h-max items-center p-0 gap-2 md:gap-[0.75vw]">
-            <div class="grid rotate-45 place-items-center rounded-full bg-neutral size-5 md:size-[1.5vw]">
-                <Cross class="p-0 text-accent w-4 md:w-[1vw]" />
+        <button class="btn btn-secondary flex h-max min-h-max items-center gap-2 p-0 md:gap-[0.75vw]">
+            <div class="grid size-5 rotate-45 place-items-center rounded-full bg-neutral md:size-[1.5vw]">
+                <Cross class="w-4 p-0 text-accent md:w-[1vw]" />
             </div>
             <span class="md:text-[1vw]">{item.childrens} More</span>
         </button>
@@ -271,10 +273,13 @@
 {/if}
 
 {#if reply_box_or_modal === "modal"}
-    <dialog bind:this={comment_reply_dialog_el} class="modal modal-bottom">
-        <div class="modal-box overflow-x-hidden bg-secondary p-4 rounded-xl">
+    <dialog
+        bind:this={comment_reply_dialog_el}
+        class="modal modal-bottom"
+    >
+        <div class="modal-box overflow-x-hidden rounded-xl bg-secondary p-4">
             <span class="text-sm text-warning">Reply to:</span>
-            <div class="flex gap-2 w-full mt-2">
+            <div class="mt-2 flex w-full gap-2">
                 <a
                     href="/user/"
                     class="h-7 w-7 flex-shrink-0"
@@ -319,7 +324,10 @@
                 />
             </div>
         </div>
-        <form method="dialog" class="modal-backdrop">
+        <form
+            method="dialog"
+            class="modal-backdrop"
+        >
             <button>close</button>
         </form>
     </dialog>

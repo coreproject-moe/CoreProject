@@ -30,7 +30,8 @@
             "$types": ["./django_core/static_src/types"],
             "$types/*": ["./django_core/static_src/types/*"],
             "$constants": ["./django_core/static_src/constants"],
-            "$constants/*": ["./django_core/static_src/constants/*"]
+            "$constants/*": ["./django_core/static_src/constants/*"],
+            "$tailwind": ["./tailwind.config.ts"]
         }
     }
 }

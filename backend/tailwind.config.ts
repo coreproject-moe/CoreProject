@@ -5,7 +5,7 @@
  * https://unpkg.com/browse/tailwindcss@latest/stubs/defaultConfig.stub.js
  */
 
-module.exports = {
+export default {
     content: [
         /**
          * HTML. Paths to Django template files that will contain Tailwind CSS classes.
