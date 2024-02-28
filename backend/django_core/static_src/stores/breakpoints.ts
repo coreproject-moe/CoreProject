@@ -7,17 +7,28 @@ type BreakpointKey = keyof typeof breakpoints;
 type Breakpoints = Record<BreakpointKey, string>;
 
 function transformBreakpointsToMediaQueries(): Breakpoints {
-    const mediaQueries = {};
+    const mediaQueries: Record<string, string> = {};
 
-    const keys = Object.keys(breakpoints);
-    const values = Object.values(breakpoints);
+    // Get the keys of the breakpoints
+    const breakpointKeys = Object.keys(breakpoints);
 
-    for (let i = 0; i < keys.length; i++) {
-        mediaQueries[keys[i]] = `(min-width: ${values[i]})`;
+    // Loop through the breakpoints to create media queries
+    for (let i = 0; i < breakpointKeys.length; i++) {
+        const currentKey = breakpointKeys[i] as BreakpointKey;
+        const currentValue = breakpoints[currentKey];
+        const nextKey = breakpointKeys[i + 1] as BreakpointKey;
+
+        if (nextKey) {
+            // For intermediate breakpoints
+            mediaQueries[currentKey] = `(min-width: ${currentValue}) and (max-width: ${breakpoints[nextKey]})`;
+        } else {
+            // For the last breakpoint
+            mediaQueries[currentKey] = `(max-width: ${currentValue})`;
+        }
     }
 
     return mediaQueries as Breakpoints;
 }
-
 console.log(transformBreakpointsToMediaQueries());
+
 export const breakpoint = createMediaStore<Breakpoints>(transformBreakpointsToMediaQueries());
