@@ -38,7 +38,6 @@
         "detect-browser": "^5.3.0",
         "html-entities": "^2.4.0",
         "htmx.org": "^1.9.10",
-        "hyperscript.org": "^0.9.12",
         "json5": "^2.2.3",
         "lodash-es": "^4.17.21",
         "nprogress": "^0.2.0",
