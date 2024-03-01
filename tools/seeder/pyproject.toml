@@ -16,7 +16,7 @@ requests-ratelimiter = "*"
 python-dotenv = "^1.0.1"
 selectolax = "*"
 httpx = "^0.27.0"
-python-dateutil = "^2.8.2"
+python-dateutil = "^2.9.0"
 bing-image-downloader = "^1.1.2"
 youtube-search = "^2.1.2"
 
