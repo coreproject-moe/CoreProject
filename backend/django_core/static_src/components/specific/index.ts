@@ -19,7 +19,8 @@ const mapping = [
     },
     // User Forms
     { tagname: "login-form", component: await import("./UserForm/Login/Index.svelte") },
-    { tagname: "register-form", component: await import("./UserForm/Register/Index.svelte") }
+    { tagname: "register-form", component: await import("./UserForm/Register/Index.svelte") },
+    { tagname: "reset-password-form", component: await import("./UserForm/ResetPassword/Index.svelte") }
 ];
 
 mapping.forEach((item) => {

@@ -66,29 +66,11 @@ async def register_view(request: "HtmxHttpRequest") -> HttpResponse:
     )
 
 
-# UNDEFINED
 async def reset_password_view(request: "HtmxHttpRequest") -> HttpResponse:
-    if request.htmx:
-        if form.is_valid():
-            pass
-
-        elif form.errors:
-            if form.fields["email"].error_messages:
-                form.fields["email"].widget.attrs["class"] += " focus:border-error"
-
-        return render(
-            request,
-            "user/reset_password/_partial.html",
-            context={
-                "form": form,
-            },
-        )
-
     return render(
         request,
         "user/reset_password/index.html",
         context={
             "animes": animes,
-            "form": form,
         },
     )
