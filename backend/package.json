@@ -36,7 +36,7 @@
         "cssnano": "^6.0.5",
         "daisyui": "^4.7.2",
         "detect-browser": "^5.3.0",
-        "html-entities": "^2.4.0",
+        "html-entities": "^2.5.2",
         "htmx.org": "^1.9.10",
         "json5": "^2.2.3",
         "lodash-es": "^4.17.21",
