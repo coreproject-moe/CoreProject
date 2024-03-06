@@ -202,10 +202,20 @@
                     <span class="order-2 text-sm font-semibold text-accent md:text-[0.9vw]">{ratio}</span>
                 </div>
                 <button
-                    class={cn(`btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw]`)}
+                    class={cn(`btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw] md:flex`)}
+                    class:hidden={item.depth > 1}
                     on:click|preventDefault={() => {
                         reply_shown = !reply_shown;
-                        if (reply_box_or_modal === "modal") comment_reply_dialog_el.showModal();
+                    }}
+                >
+                    <Chat class="w-4 md:w-[1vw]" />
+                    <span>Replay</span>
+                </button>
+                <button
+                    class={cn(`btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw] md:hidden`)}
+                    class:hidden={item.depth === 1}
+                    on:click|preventDefault={() => {
+                        comment_reply_dialog_el.showModal();
                     }}
                 >
                     <Chat class="w-4 md:w-[1vw]" />
@@ -220,7 +230,8 @@
                 </button>
             </div>
         </div>
-        {#if reply_shown && reply_box_or_modal === "box"}
+
+        {#if reply_shown}
             <div class="md:mt-[1vw]">
                 <CommentBox
                     on:submit={() => {
@@ -270,57 +281,58 @@
     </div>
 {/if}
 
-{#if reply_box_or_modal === "modal"}
-    <dialog bind:this={comment_reply_dialog_el} class="modal modal-bottom">
-        <div class="modal-box overflow-x-hidden bg-secondary p-4 rounded-xl">
-            <span class="text-sm text-warning">Reply to:</span>
-            <div class="flex gap-2 w-full mt-2">
+<dialog
+    bind:this={comment_reply_dialog_el}
+    class="modal modal-bottom md:hidden"
+>
+    <div class="modal-box overflow-x-hidden bg-secondary p-4 rounded-xl">
+        <span class="text-sm text-warning">Reply to:</span>
+        <div class="flex gap-2 w-full mt-2">
+            <a
+                href="/user/"
+                class="h-7 w-7 flex-shrink-0"
+            >
+                <img
+                    alt=""
+                    src={item.deleted ? DefaultAvatar : item?.user?.avatar_url}
+                    class="h-full w-full shrink-0 rounded-full object-cover"
+                />
+            </a>
+            <div class="flex w-full flex-col items-start gap-2">
                 <a
                     href="/user/"
-                    class="h-7 w-7 flex-shrink-0"
+                    class="flex flex-col gap-1 text-xs leading-none"
                 >
-                    <img
-                        alt=""
-                        src={item.deleted ? DefaultAvatar : item?.user?.avatar_url}
-                        class="h-full w-full shrink-0 rounded-full object-cover"
-                    />
-                </a>
-                <div class="flex w-full flex-col items-start gap-2">
-                    <a
-                        href="/user/"
-                        class="flex flex-col gap-1 text-xs leading-none"
-                    >
-                        <div class="flex items-center gap-2">
-                            {#if item.deleted}
-                                <div>[deleted]</div>
-                            {:else}
-                                <div class="text-white">
-                                    {`${item?.user?.first_name ?? ""} ${item?.user?.last_name ?? ""}`}
-                                </div>
-                                <div>{item?.user?.username}</div>
-                            {/if}
-                        </div>
-                        <div class="text-surface-300">
-                            {new FormatDate(item.created_at).format_to_time_from_now}
-                        </div>
-                    </a>
-                    <div class="text-sm leading-snug text-accent">
-                        <Markdown markdown={item.text} />
+                    <div class="flex items-center gap-2">
+                        {#if item.deleted}
+                            <div>[deleted]</div>
+                        {:else}
+                            <div class="text-white">
+                                {`${item?.user?.first_name ?? ""} ${item?.user?.last_name ?? ""}`}
+                            </div>
+                            <div>{item?.user?.username}</div>
+                        {/if}
                     </div>
+                    <div class="text-surface-300">
+                        {new FormatDate(item.created_at).format_to_time_from_now}
+                    </div>
+                </a>
+                <div class="text-sm leading-snug text-accent">
+                    <Markdown markdown={item.text} />
                 </div>
             </div>
-            <div class="mt-5 flex w-full">
-                <CommentBox
-                    on:submit={() => {
-                        reply_shown = false;
-                    }}
-                    {submit_url}
-                    path={item.path ?? ""}
-                />
-            </div>
         </div>
-        <form method="dialog" class="modal-backdrop">
-            <button>close</button>
-        </form>
-    </dialog>
-{/if}
+        <div class="mt-5 flex w-full">
+            <CommentBox
+                on:submit={() => {
+                    reply_shown = false;
+                }}
+                {submit_url}
+                path={item.path ?? ""}
+            />
+        </div>
+    </div>
+    <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+    </form>
+</dialog>
