@@ -8,7 +8,8 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from dynamic_filenames import FilePattern
-
+from drf_spectacular.utils import extend_schema_field
+from drf_spectacular.types import OpenApiTypes
 from .managers import UserManager
 from .validators import username_validator
 
@@ -86,7 +87,7 @@ class CustomUser(
     def save(self, *args: Any, **kwargs: Any) -> None:
         super().save(*args, **kwargs)
 
-    @property
+    @extend_schema_field(OpenApiTypes.STR)
     def avatar_url(self):
         hashed_email = hashlib.md5(self.email.encode()).hexdigest()
 
