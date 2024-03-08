@@ -13,6 +13,7 @@ from ...serializers.comments.reaction import CommentReactionSerializer
 
 class CommentReactionAPIView(APIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    serializer_class = CommentReactionSerializer
 
     def post(self, request: HttpRequest, pk: int) -> Response:
         reaction_serailizer = CommentReactionSerializer(data=request.data)
