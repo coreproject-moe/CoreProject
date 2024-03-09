@@ -13,7 +13,6 @@ from django_htmx.http import HttpResponseClientRefresh
 if TYPE_CHECKING:
     from ..request import HtmxHttpRequest
 
-from ..forms.user import ResetPasswordForm
 
 animes = [
     {"name": "Demon Slayer", "cover": static("/public/images/mock/DemonSlayer-cover.avif")},
@@ -68,29 +67,10 @@ async def register_view(request: "HtmxHttpRequest") -> HttpResponse:
 
 
 async def reset_password_view(request: "HtmxHttpRequest") -> HttpResponse:
-    form = ResetPasswordForm(request.POST or None)
-
-    if request.htmx:
-        if form.is_valid():
-            pass
-
-        elif form.errors:
-            if form.fields["email"].error_messages:
-                form.fields["email"].widget.attrs["class"] += " focus:border-error"
-
-        return render(
-            request,
-            "user/reset_password/_partial.html",
-            context={
-                "form": form,
-            },
-        )
-
     return render(
         request,
         "user/reset_password/index.html",
         context={
             "animes": animes,
-            "form": form,
         },
     )

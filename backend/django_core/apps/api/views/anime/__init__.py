@@ -3,7 +3,6 @@ from apps.api.permissions import IsSuperUserOrReadOnly
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets
 from rest_framework.pagination import LimitOffsetPagination
-
 from ...filters.anime import AnimeFilter
 from ...serializers.anime import AnimeGETSerializer, AnimePOSTSerializer
 
@@ -22,7 +21,7 @@ class AnimeViewSet(viewsets.ModelViewSet):
     pagination_class = LimitOffsetPagination
 
     def get_serializer_class(self) -> type[AnimeGETSerializer] | type[AnimePOSTSerializer]:
-        if self.request.method == "GET":
-            return AnimeGETSerializer
-        elif self.request.method == "POST":
+        if self.request.method == "POST":
             return AnimePOSTSerializer
+
+        return AnimeGETSerializer
