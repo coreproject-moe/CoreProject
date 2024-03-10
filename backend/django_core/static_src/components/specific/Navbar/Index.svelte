@@ -6,8 +6,8 @@
     import Settings from "$icons/Settings/Index.svelte";
     import Login from "$icons/Login/Index.svelte";
     import Register from "$icons/Register/Index.svelte";
-    import { goto } from "$functions/urls";
     import { user_authenticated } from "$stores/user";
+    import { enhance_anchor } from "$functions/anchor_enhancements";
 
     const profile_mapping = {
         profile: {
@@ -73,10 +73,9 @@
                         on:mouseenter|preventDefault={handle_mouseenter}
                         on:mouseleave|preventDefault={handle_mouseleave}
                     >
-                        <button
-                            on:click={() => {
-                                goto({ target: "#page", url: item.href, verb: "GET" });
-                            }}
+                        <a
+                            href={item.href}
+                            use:enhance_anchor={{ target: "#page", verb: "GET" }}
                             class="flex items-center gap-3 !bg-transparent px-0 leading-none !text-white md:gap-[0.5vw] md:p-[0.75vw]"
                         >
                             <svelte:component
@@ -84,7 +83,7 @@
                                 class="w-4 md:w-[1vw]"
                             />
                             {item.text}
-                        </button>
+                        </a>
                     </li>
                 {/each}
             </VercelHover>
@@ -93,12 +92,14 @@
 {:else}
     <div class="hidden md:flex md:gap-[0.75vw]">
         <a
+            use:enhance_anchor={{ verb: "GET", target: "body" }}
             href="/user/register"
             class="btn btn-neutral h-max min-h-max leading-none md:rounded-[0.5vw] md:p-[0.9vw] md:text-[1vw]"
         >
             Register
         </a>
         <a
+            use:enhance_anchor={{ verb: "GET", target: "body" }}
             href="/user/login"
             class="btn btn-primary h-max min-h-max leading-none text-accent md:rounded-[0.5vw] md:p-[0.9vw] md:text-[1vw]"
         >

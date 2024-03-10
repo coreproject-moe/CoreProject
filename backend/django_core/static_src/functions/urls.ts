@@ -4,12 +4,10 @@ import nProgress from "nprogress";
 // Internal Function
 
 function handle_404() {
-    nProgress.done();
     goto({ url: "/404", target: "body", verb: "GET" });
 }
 
 function handle_500() {
-    nProgress.done();
     goto({ url: "/500", target: "body", verb: "GET" });
 }
 
@@ -51,7 +49,7 @@ export async function goto({
 }: {
     url: string;
     history?: boolean;
-    anchor?: HTMLElement | null;
+    anchor?: HTMLElement | null | undefined;
     verb: "GET" | "POST" | "DELETE" | "PUT";
     target: string;
 }): Promise<void> {
@@ -78,7 +76,7 @@ export async function goto({
     htmx.process(btn);
     let _anchor: HTMLElement | null = null;
 
-    if (!_.isNull(anchor)) {
+    if (!_.isNull(anchor) && !_.isUndefined(anchor)) {
         _anchor = anchor as HTMLElement;
     } else {
         _anchor = document.body as HTMLElement;

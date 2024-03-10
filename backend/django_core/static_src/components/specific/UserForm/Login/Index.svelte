@@ -1,16 +1,17 @@
 <script lang="ts">
     import Info from "$icons/Info/Index.svelte";
     import ArrowUpRight from "$icons/ArrowUpRight/Index.svelte";
-    
+
     import { z } from "zod";
     import Markdown from "$components/minor/Markdown/Index.svelte";
     import { object_to_form_data } from "$functions/object_to_form_data";
     import * as _ from "lodash-es";
-    import { goto, reverse } from "$functions/urls";
+    import { reverse } from "$functions/urls";
     import { get_csrf_token } from "$functions/get_csrf_token";
     import { cn } from "$functions/classname";
     import { handle_input } from "../functions/handle_input";
     import { user_authenticated } from "$stores/user";
+    import { enhance_anchor } from "$functions/anchor_enhancements";
 
     let form_is_submitable: boolean | null = null;
 
@@ -64,20 +65,16 @@
         </div>
         <div>
             Perhaps you meant to
-            <button
+            <a
+                href={reverse("logout_view")}
+                use:enhance_anchor={{ verb: "GET", target: "body" }}
                 on:click|preventDefault={() => {
-                    goto({
-                        url: reverse("logout_view"),
-                        verb: "GET",
-                        target: "body"
-                    });
-
                     user_authenticated.set(false);
                 }}
                 class="text-base leading-none text-primary underline md:text-[1.1vw]"
             >
                 logout
-            </button>
+            </a>
             ?
         </div>
     </div>
@@ -151,15 +148,14 @@
         <div class="flex items-center justify-between">
             <div class="flex flex-col gap-1 md:gap-[0.5vw]">
                 <span class="text-surface-100 text-xs leading-none md:text-[0.75vw]">Don't have a core account?</span>
-                <button
+                <a
+                    href={reverse("register_view")}
+                    use:enhance_anchor={{ verb: "GET", target: "body" }}
                     type="button"
                     class="text-start text-base leading-none text-primary underline md:text-[1.1vw]"
-                    on:click|preventDefault={() => {
-                        goto({ url: reverse("register_view"), verb: "GET", target: "body" });
-                    }}
                 >
                     Register
-                </button>
+                </a>
             </div>
             <button
                 type="submit"
