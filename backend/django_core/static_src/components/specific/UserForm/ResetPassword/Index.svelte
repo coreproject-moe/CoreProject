@@ -1,7 +1,8 @@
 <script lang="ts">
-    import { goto, reverse } from "$functions/urls";
+    import { reverse } from "$functions/urls";
     import Info from "$icons/Info/Index.svelte";
     import ArrowUpRight from "$icons/ArrowUpRight/Index.svelte";
+    import { enhance_anchor } from "$functions/anchor_enhancements";
 </script>
 
 <form class="bg-surface-900 flex h-max w-full flex-col gap-[15vw] p-10 md:h-full md:justify-between md:gap-0 md:rounded-none md:p-0">
@@ -31,14 +32,13 @@
     <div class="flex items-center justify-between">
         <div class="flex flex-col gap-1 md:gap-[0.5vw]">
             <span class="text-surface-100 text-xs leading-none md:text-[0.75vw]">Don't have a core account?</span>
-            <button
-                on:click|preventDefault={() => {
-                    goto({ url: reverse("register_view"), verb: "GET", target: "body" });
-                }}
+            <a
+                href={reverse("register_view")}
+                use:enhance_anchor={{ verb: "GET", target: "body" }}
                 class="text-start text-base leading-none text-primary underline md:text-[1.1vw]"
             >
                 Register
-            </button>
+            </a>
         </div>
         <button
             type="submit"

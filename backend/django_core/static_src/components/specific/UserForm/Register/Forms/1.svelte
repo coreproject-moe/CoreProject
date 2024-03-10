@@ -10,9 +10,10 @@
     import { handle_input } from "../../functions/handle_input";
     import { zxcvbn, zxcvbnOptions, type OptionsType } from "@zxcvbn-ts/core";
     import { cn } from "$functions/classname";
-    import { goto, reverse } from "$functions/urls";
+    import { reverse } from "$functions/urls";
     import { get_csrf_token } from "$functions/get_csrf_token";
     import { FETCH_TIMEOUT } from "$constants/fetch";
+    import { enhance_anchor } from "$functions/anchor_enhancements";
 
     export let pages_state: [{ email: string }, { password: string }, { confirm_password: string }];
 
@@ -295,14 +296,13 @@
     <div class="flex items-center justify-between">
         <div class="flex flex-col gap-1 md:gap-[0.5vw]">
             <span class="text-surface-100 text-xs leading-none md:text-[0.75vw]">Already have an account?</span>
-            <button
+            <a
+                href={reverse("login_view")}
+                use:enhance_anchor={{ verb: "GET", target: "body" }}
                 class="text-start text-base leading-none text-primary underline md:text-[1.1vw]"
-                on:click|preventDefault={() => {
-                    goto({ url: reverse("login_view"), verb: "GET", target: "body" });
-                }}
             >
                 Login
-            </button>
+            </a>
         </div>
         <button
             type="submit"
