@@ -1,5 +1,6 @@
 import tailwind from "$functions/tailwind";
 import { createMediaStore } from "svelte-media-queries";
+import { get } from "svelte/store";
 
 const breakpoints = tailwind.theme.screens;
 
@@ -15,20 +16,26 @@ function transformBreakpointsToMediaQueries(): Breakpoints {
     // Loop through the breakpoints to create media queries
     for (let i = 0; i < breakpointKeys.length; i++) {
         const currentKey = breakpointKeys[i] as BreakpointKey;
-        const currentValue = breakpoints[currentKey];
+
+        const prevKey = breakpointKeys[i - 1] as BreakpointKey;
         const nextKey = breakpointKeys[i + 1] as BreakpointKey;
 
-        if (nextKey) {
-            // For intermediate breakpoints
-            mediaQueries[currentKey] = `(min-width: ${currentValue}) and (max-width: ${breakpoints[nextKey]})`;
+        if (i == 0) {
+            mediaQueries[currentKey] = `(max-width: ${breakpoints[currentKey]})`;
         } else {
-            // For the last breakpoint
-            mediaQueries[currentKey] = `(max-width: ${currentValue})`;
+            if (nextKey) {
+                // For intermediate breakpoints
+                mediaQueries[currentKey] = `(min-width: ${breakpoints[prevKey]}) and (max-width: ${parseInt(breakpoints[currentKey])}px)`;
+            } else {
+                // For the last breakpoint
+                mediaQueries[currentKey] = `(min-width: ${breakpoints[currentKey]})`;
+            }
         }
     }
 
     return mediaQueries as Breakpoints;
 }
-console.log(transformBreakpointsToMediaQueries());
 
 export const breakpoint = createMediaStore<Breakpoints>(transformBreakpointsToMediaQueries());
+console.log(transformBreakpointsToMediaQueries());
+console.log(get(breakpoint));
