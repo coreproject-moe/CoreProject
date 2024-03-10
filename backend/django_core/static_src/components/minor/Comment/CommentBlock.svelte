@@ -28,6 +28,7 @@
     import Expand from "$icons/Expand/Index.svelte";
     import { breakpoint } from "$stores/breakpoints";
     import { get } from "svelte/store";
+    import { IS_DESKTOP, IS_MOBILE, IS_TABLET } from "$constants/device";
 
     // Bindings
     let user_reaction: typeof item.user_reaction,
@@ -53,10 +54,10 @@
         user_reaction = item["user_reaction"];
         ratio = item["ratio"];
 
-        // if (IS_MOBILE && item.depth > 1) reply_box_or_modal = "modal";
-        // else if (IS_TABLET && item.depth > 3) reply_box_or_modal = "modal";
-        // else if (IS_DESKTOP && item.depth > 5) reply_box_or_modal = "modal";
         console.log(get(breakpoint));
+        if (IS_MOBILE && item.depth > 1) reply_box_or_modal = "modal";
+        else if (IS_TABLET && item.depth > 3) reply_box_or_modal = "modal";
+        else if (IS_DESKTOP && item.depth > 5) reply_box_or_modal = "modal";
     });
 
     const apply_fetch_sideeffect = async (res: Response) => {
@@ -204,10 +205,21 @@
                     <span class="order-2 text-sm font-semibold text-accent md:text-[0.9vw]">{ratio}</span>
                 </div>
                 <button
-                    class={cn(`btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw]`)}
+                    class={cn(`btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw] md:flex`)}
+                    class:hidden={item.depth > 1}
                     on:click|preventDefault={() => {
                         reply_shown = !reply_shown;
                         if (reply_box_or_modal === "modal") comment_reply_dialog_el.showModal();
+                    }}
+                >
+                    <Chat class="w-4 md:w-[1vw]" />
+                    <span>Replay</span>
+                </button>
+                <button
+                    class={cn(`btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw] md:hidden`)}
+                    class:hidden={item.depth === 1}
+                    on:click|preventDefault={() => {
+                        comment_reply_dialog_el.showModal();
                     }}
                 >
                     <Chat class="w-4 md:w-[1vw]" />
@@ -222,7 +234,8 @@
                 </button>
             </div>
         </div>
-        {#if reply_shown && reply_box_or_modal === "box"}
+
+        {#if reply_shown}
             <div class="md:mt-[1vw]">
                 <CommentBox
                     on:submit={() => {
@@ -249,9 +262,9 @@
 </div>
 
 {#if _.isEmpty(item.child) && item.childrens !== 0 && !item.collapse}
-    <div class="ml-2 flex items-end md:ml-[0.55vw] md:gap-[0.5vw]">
+    <div class="flex items-end ml-2 md:ml-[0.55vw] md:gap-[0.5vw]">
         <svg
-            class="w-7 text-neutral md:w-[2vw]"
+            class="text-neutral w-7 md:w-[2vw]"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 15 15"
         >
@@ -263,9 +276,9 @@
             />
         </svg>
 
-        <button class="btn btn-secondary flex h-max min-h-max items-center gap-2 p-0 md:gap-[0.75vw]">
-            <div class="grid size-5 rotate-45 place-items-center rounded-full bg-neutral md:size-[1.5vw]">
-                <Cross class="w-4 p-0 text-accent md:w-[1vw]" />
+        <button class="btn btn-secondary flex h-max min-h-max items-center p-0 gap-2 md:gap-[0.75vw]">
+            <div class="grid rotate-45 place-items-center rounded-full bg-neutral size-5 md:size-[1.5vw]">
+                <Cross class="p-0 text-accent w-4 md:w-[1vw]" />
             </div>
             <span class="md:text-[1vw]">{item.childrens} More</span>
         </button>
