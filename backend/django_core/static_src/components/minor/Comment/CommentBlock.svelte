@@ -28,7 +28,6 @@
     import Expand from "$icons/Expand/Index.svelte";
     import { breakpoint } from "$stores/breakpoints";
     import { get } from "svelte/store";
-    import { IS_DESKTOP, IS_MOBILE, IS_TABLET } from "$constants/device";
 
     // Bindings
     let user_reaction: typeof item.user_reaction,
@@ -38,7 +37,7 @@
         comment_reply_dialog_el: HTMLDialogElement,
         show_comment_highlighted = false,
         icon_mapping = ["upvote", "downvote"],
-        reply_box_or_modal: "box" | "modal" = "box";
+        reply_type: "box" | "modal" | "link" = "box";
 
     onMount(async () => {
         const url_params = new URLSearchParams(window.location.search);
@@ -54,10 +53,14 @@
         user_reaction = item["user_reaction"];
         ratio = item["ratio"];
 
-        console.log(get(breakpoint));
-        if (IS_MOBILE && item.depth > 1) reply_box_or_modal = "modal";
-        else if (IS_TABLET && item.depth > 3) reply_box_or_modal = "modal";
-        else if (IS_DESKTOP && item.depth > 5) reply_box_or_modal = "modal";
+        // reply type
+        const is_small_screen = $breakpoint?.sm;
+        const is_medium_screen = $breakpoint?.md;
+        const is_large_screen = $breakpoint?.lg || $breakpoint?.xl || $breakpoint?.["2xl"];
+
+        if (is_small_screen && item.depth > 1) reply_type = "modal";
+        else if (is_medium_screen && item.depth > 5) reply_type = "link";
+        else if (is_large_screen && item.depth > 4) reply_type = "link";
     });
 
     const apply_fetch_sideeffect = async (res: Response) => {
@@ -104,6 +107,8 @@
             await post_to_reaction_endpoint(reaction as "upvote" | "downvote");
         }
     };
+
+    $: console.log($breakpoint);
 </script>
 
 <div
@@ -205,21 +210,21 @@
                     <span class="order-2 text-sm font-semibold text-accent md:text-[0.9vw]">{ratio}</span>
                 </div>
                 <button
-                    class={cn(`btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw] md:flex`)}
-                    class:hidden={item.depth > 1}
+                    class={cn(`btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw]`)}
                     on:click|preventDefault={() => {
-                        reply_shown = !reply_shown;
-                        if (reply_box_or_modal === "modal") comment_reply_dialog_el.showModal();
-                    }}
-                >
-                    <Chat class="w-4 md:w-[1vw]" />
-                    <span>Replay</span>
-                </button>
-                <button
-                    class={cn(`btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw] md:hidden`)}
-                    class:hidden={item.depth === 1}
-                    on:click|preventDefault={() => {
-                        comment_reply_dialog_el.showModal();
+                        switch(reply_type) {
+                            case "box":
+                                reply_shown = !reply_shown;
+                                break;
+                            case "modal":
+                                comment_reply_dialog_el.showModal();
+                                break;
+                            case "link":
+                                // navigate to specific comment url with open query
+                                break;
+                            default:
+                                break;
+                        };
                     }}
                 >
                     <Chat class="w-4 md:w-[1vw]" />
@@ -235,7 +240,7 @@
             </div>
         </div>
 
-        {#if reply_shown}
+        {#if reply_shown && reply_type === "box"}
             <div class="md:mt-[1vw]">
                 <CommentBox
                     on:submit={() => {
@@ -285,7 +290,7 @@
     </div>
 {/if}
 
-{#if reply_box_or_modal === "modal"}
+{#if reply_type === "modal"}
     <dialog
         bind:this={comment_reply_dialog_el}
         class="modal modal-bottom"

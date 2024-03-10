@@ -1,6 +1,5 @@
 import tailwind from "$functions/tailwind";
 import { createMediaStore } from "svelte-media-queries";
-import { get } from "svelte/store";
 
 const breakpoints = tailwind.theme.screens;
 
@@ -37,5 +36,3 @@ function transformBreakpointsToMediaQueries(): Breakpoints {
 }
 
 export const breakpoint = createMediaStore<Breakpoints>(transformBreakpointsToMediaQueries());
-console.log(transformBreakpointsToMediaQueries());
-console.log(get(breakpoint));
