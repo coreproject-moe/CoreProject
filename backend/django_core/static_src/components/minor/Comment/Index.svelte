@@ -6,7 +6,7 @@
     import ErrorSvelteComponent from "./Error.svelte";
     import type { Comment } from "$types/comment";
     import { comment_needs_update } from "./store";
-    import { onMount } from "svelte";
+    import { onDestroy, onMount } from "svelte";
     import * as _ from "lodash-es";
     import IntersectionOberser from "svelte-intersection-observer";
     import { get_csrf_token } from "$functions/get_csrf_token";
@@ -34,6 +34,10 @@
 
     onMount(() => {
         set_comments();
+    });
+    onDestroy(() => {
+        // Clean up
+        tree_branch = new Array<Comment>();
     });
 
     const get_comments = async (url: string) => {
