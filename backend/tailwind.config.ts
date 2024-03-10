@@ -4,8 +4,16 @@
  * If you need the full config, get it from here:
  * https://unpkg.com/browse/tailwindcss@latest/stubs/defaultConfig.stub.js
  */
+import type { Config } from "tailwindcss";
 
-module.exports = {
+// Import plugins
+import forms from "@tailwindcss/aspect-ratio";
+import typography from "@tailwindcss/typography";
+import aspectRatio from "@tailwindcss/aspect-ratio";
+import scrollbar from "tailwind-scrollbar";
+import daisyui from "daisyui";
+
+export default {
     content: [
         /**
          * HTML. Paths to Django template files that will contain Tailwind CSS classes.
@@ -70,11 +78,11 @@ module.exports = {
          * for forms. If you don't like it or have own styling for forms,
          * comment the line below to disable '@tailwindcss/forms'.
          */
-        require("@tailwindcss/forms"),
-        require("@tailwindcss/typography"),
-        require("@tailwindcss/aspect-ratio"),
-        require("tailwind-scrollbar"),
-        require("daisyui")
+        forms,
+        typography,
+        aspectRatio,
+        scrollbar,
+        daisyui
     ],
     daisyui: {
         themes: [
@@ -93,4 +101,4 @@ module.exports = {
             }
         ]
     }
-};
+} satisfies Config;

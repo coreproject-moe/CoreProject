@@ -26,6 +26,8 @@
     import Share from "$icons/Share/Index.svelte";
     import Cross from "$icons/Cross/Index.svelte";
     import Expand from "$icons/Expand/Index.svelte";
+    import { breakpoint } from "$stores/breakpoints";
+    import { get } from "svelte/store";
     import { IS_DESKTOP, IS_MOBILE, IS_TABLET } from "$constants/device";
 
     // Bindings
@@ -52,6 +54,7 @@
         user_reaction = item["user_reaction"];
         ratio = item["ratio"];
 
+        console.log(get(breakpoint));
         if (IS_MOBILE && item.depth > 1) reply_box_or_modal = "modal";
         else if (IS_TABLET && item.depth > 3) reply_box_or_modal = "modal";
         else if (IS_DESKTOP && item.depth > 5) reply_box_or_modal = "modal";
@@ -206,6 +209,7 @@
                     class:hidden={item.depth > 1}
                     on:click|preventDefault={() => {
                         reply_shown = !reply_shown;
+                        if (reply_box_or_modal === "modal") comment_reply_dialog_el.showModal();
                     }}
                 >
                     <Chat class="w-4 md:w-[1vw]" />
@@ -281,58 +285,63 @@
     </div>
 {/if}
 
-<dialog
-    bind:this={comment_reply_dialog_el}
-    class="modal modal-bottom md:hidden"
->
-    <div class="modal-box overflow-x-hidden bg-secondary p-4 rounded-xl">
-        <span class="text-sm text-warning">Reply to:</span>
-        <div class="flex gap-2 w-full mt-2">
-            <a
-                href="/user/"
-                class="h-7 w-7 flex-shrink-0"
-            >
-                <img
-                    alt=""
-                    src={item.deleted ? DefaultAvatar : item?.user?.avatar_url}
-                    class="h-full w-full shrink-0 rounded-full object-cover"
-                />
-            </a>
-            <div class="flex w-full flex-col items-start gap-2">
+{#if reply_box_or_modal === "modal"}
+    <dialog
+        bind:this={comment_reply_dialog_el}
+        class="modal modal-bottom"
+    >
+        <div class="modal-box overflow-x-hidden rounded-xl bg-secondary p-4">
+            <span class="text-sm text-warning">Reply to:</span>
+            <div class="mt-2 flex w-full gap-2">
                 <a
                     href="/user/"
-                    class="flex flex-col gap-1 text-xs leading-none"
+                    class="h-7 w-7 flex-shrink-0"
                 >
-                    <div class="flex items-center gap-2">
-                        {#if item.deleted}
-                            <div>[deleted]</div>
-                        {:else}
-                            <div class="text-white">
-                                {`${item?.user?.first_name ?? ""} ${item?.user?.last_name ?? ""}`}
-                            </div>
-                            <div>{item?.user?.username}</div>
-                        {/if}
-                    </div>
-                    <div class="text-surface-300">
-                        {new FormatDate(item.created_at).format_to_time_from_now}
-                    </div>
+                    <img
+                        alt=""
+                        src={item.deleted ? DefaultAvatar : item?.user?.avatar_url}
+                        class="h-full w-full shrink-0 rounded-full object-cover"
+                    />
                 </a>
-                <div class="text-sm leading-snug text-accent">
-                    <Markdown markdown={item.text} />
+                <div class="flex w-full flex-col items-start gap-2">
+                    <a
+                        href="/user/"
+                        class="flex flex-col gap-1 text-xs leading-none"
+                    >
+                        <div class="flex items-center gap-2">
+                            {#if item.deleted}
+                                <div>[deleted]</div>
+                            {:else}
+                                <div class="text-white">
+                                    {`${item?.user?.first_name ?? ""} ${item?.user?.last_name ?? ""}`}
+                                </div>
+                                <div>{item?.user?.username}</div>
+                            {/if}
+                        </div>
+                        <div class="text-surface-300">
+                            {new FormatDate(item.created_at).format_to_time_from_now}
+                        </div>
+                    </a>
+                    <div class="text-sm leading-snug text-accent">
+                        <Markdown markdown={item.text} />
+                    </div>
                 </div>
             </div>
+            <div class="mt-5 flex w-full">
+                <CommentBox
+                    on:submit={() => {
+                        reply_shown = false;
+                    }}
+                    {submit_url}
+                    path={item.path ?? ""}
+                />
+            </div>
         </div>
-        <div class="mt-5 flex w-full">
-            <CommentBox
-                on:submit={() => {
-                    reply_shown = false;
-                }}
-                {submit_url}
-                path={item.path ?? ""}
-            />
-        </div>
-    </div>
-    <form method="dialog" class="modal-backdrop">
-        <button>close</button>
-    </form>
-</dialog>
+        <form
+            method="dialog"
+            class="modal-backdrop"
+        >
+            <button>close</button>
+        </form>
+    </dialog>
+{/if}
