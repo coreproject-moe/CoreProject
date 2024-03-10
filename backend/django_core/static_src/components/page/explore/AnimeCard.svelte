@@ -14,6 +14,7 @@
     import Circle from "$icons/Circle/Index.svelte";
     import Play from "$icons/Play/Index.svelte";
     import Info from "$icons/Info/Index.svelte";
+    import { enhance_anchor } from "$functions/anchor_enhancements";
 
     // Bindings
     let main_element: HTMLElement, dropdown_cont_el: HTMLButtonElement;
@@ -117,6 +118,7 @@
             <div class="divider md:m-0 md:before:h-[0.15vw] md:after:h-[0.15vw]"></div>
             <div class="flex items-center md:gap-[0.5vw]">
                 <a
+                    use:enhance_anchor={{ verb: "GET", target: "#page" }}
                     href="/anime/mal/{anime_mal_id}/episode/1"
                     class="btn btn-primary h-[2.75vw] min-h-full flex-1 leading-none text-accent md:rounded-[0.5vw]"
                 >

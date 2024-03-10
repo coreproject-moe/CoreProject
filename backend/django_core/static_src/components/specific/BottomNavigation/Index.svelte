@@ -1,11 +1,12 @@
 <script>
-    import { goto, reverse } from "$functions/urls";
+    import {  reverse } from "$functions/urls";
     import { url } from "$stores/url";
 
     // Icons
     import Home from "$icons/Home/Index.svelte";
     import Compass from "$icons/Compass/Index.svelte";
     import Chat from "$icons/Chat/Index.svelte";
+    import { enhance_anchor } from "$functions/anchor_enhancements";
 
     const mapping = [
         {
@@ -33,10 +34,9 @@
     {#each mapping as item}
         {@const is_active = item.href === $url}
 
-        <button
-            on:click={() => {
-                goto({ target: "#page", verb: "GET", url: item.url });
-            }}
+        <a
+            href={item.url}
+            use:enhance_anchor={{ verb: "GET", target: "#page" }}
             type="button"
             class="flex flex-col items-center gap-[0.5vh] leading-none"
         >
@@ -51,6 +51,6 @@
                 />
             </div>
             <span class="text-sm font-bold capitalize">{item.name}</span>
-        </button>
+        </a>
     {/each}
 </footer>

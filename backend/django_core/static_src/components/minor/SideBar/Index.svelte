@@ -1,6 +1,6 @@
 <script lang="ts">
     import { cn } from "$functions/classname";
-    import { goto, reverse } from "$functions/urls";
+    import { reverse } from "$functions/urls";
     import * as _ from "lodash-es";
     import { blur } from "svelte/transition";
     import { url } from "$stores/url";
@@ -12,6 +12,7 @@
     import Calender from "$icons/Calender/Index.svelte";
     import Chat from "$icons/Chat/Index.svelte";
     import VercelHover from "$components/svelte/VercelHover.svelte";
+    import { enhance_anchor } from "$functions/anchor_enhancements";
 
     const mappings = [
         {
@@ -68,13 +69,11 @@
 >
     {#each mappings as item}
         {@const is_active = item.href === $url}
-        <button
+        <a
             on:mouseenter|preventDefault={handle_mouseenter}
             on:mouseleave|preventDefault={handle_mouseleave}
-            on:click={() => {
-                goto({ target: "#page", url: item.href, verb: "GET" });
-            }}
-            type="button"
+            href={item.href}
+            use:enhance_anchor={{ verb: "GET", target: "#page" }}
             class="{cn(
                 'btn relative h-[4vw] w-[4vw] rounded-[0.75vw] border-none p-0',
                 is_active ? 'relative !bg-accent before:absolute before:-left-[0.15vw] before:z-10 before:h-[1.25vw] before:w-[0.25vw] before:rounded-full before:bg-primary' : '!bg-transparent'
@@ -109,6 +108,6 @@
                     </div>
                 {/if}
             </div>
-        </button>
+        </a>
     {/each}
 </VercelHover>

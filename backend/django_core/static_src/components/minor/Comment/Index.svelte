@@ -34,7 +34,6 @@
 
     onMount(() => {
         set_comments();
-        console.log(tree_branch);
     });
 
     const get_comments = async (url: string) => {

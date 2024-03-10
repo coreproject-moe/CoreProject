@@ -4,7 +4,6 @@
     import Play from "$icons/Play/Index.svelte";
     import { slide } from "svelte/transition";
     import { onMount } from "svelte";
-    import { goto } from "$functions/urls";
 
     type Episode = {
         id: number;
