@@ -4,17 +4,19 @@ import * as _ from "lodash-es";
 export class JSONToTree {
     #json: Comment[] = new Array<Comment>();
 
-    constructor({ json, old_json }: { json: Comment[]; old_json?: Comment[] }) {
+    constructor({ json, old_json, specific_path }:
+        { json: Comment[]; old_json?: Comment[], specific_path?: string }
+    ) {
         if (old_json) {
             // DO NOT DEEP MERGE
-            const new_arr = this.convert_to_tree_given_path(json);
+            const new_arr = this.convert_to_tree_given_path(json, specific_path);
             this.#json = _.merge(old_json, new_arr);
         } else {
-            this.#json = this.convert_to_tree_given_path(json);
+            this.#json = this.convert_to_tree_given_path(json, specific_path);
         }
     }
 
-    private convert_to_tree_given_path(data: Comment[]): Comment[] {
+    private convert_to_tree_given_path(data: Comment[], specific_path?: string): Comment[] {
         const tree: Comment[] = [];
 
         // Create a dictionary to quickly access nodes by their path
@@ -26,14 +28,14 @@ export class JSONToTree {
                 ...node,
                 child: [],
                 depth: node.path.split(".").length,
-                collapse: node.depth > 1 && node.ratio < 0 || node.ratio < 0,
+                collapse: node.depth > 1 && node.ratio < 0 || node.ratio < 0 && specific_path !== node.path,
             };
             node_dictionary[node.path] = new_node;
 
             // If the node is a root-level node, add it to the tree
-            if (!node.path.includes(".")) {
+            if (specific_path === node.path || !node.path.includes(".")) {
                 tree.push(new_node);
-            }
+            };
         });
 
         // Second pass: Connect child nodes to their parent nodes
@@ -46,6 +48,7 @@ export class JSONToTree {
                 parent_node.child.push(node_dictionary[node.path]);
             }
         });
+
         return tree;
     }
 

@@ -32,9 +32,20 @@
 
     let last_element: HTMLElement;
 
+    let specific_comment_path: string | undefined;
+
     onMount(() => {
+        const url_params = new URLSearchParams(window.location.search);
+        if (url_params.has("comment")) {
+            const comment_path = url_params.get("comment");
+            const updated_api_url = `/api/v2/comments/?path=${comment_path}`;
+            api_url = updated_api_url;
+            specific_comment_path = comment_path!;
+        };
+
         set_comments();
     });
+
     onDestroy(() => {
         // Clean up
         tree_branch = new Array<Comment>();
@@ -49,6 +60,7 @@
                 signal: AbortSignal.timeout(FETCH_TIMEOUT)
             });
             const value = (await res.json()) as CommentResponse;
+            console.log(value);
 
             switch (res.status) {
                 case 200:
@@ -56,7 +68,8 @@
 
                     return new JSONToTree({
                         json: value.results,
-                        old_json: tree_branch
+                        old_json: tree_branch,
+                        specific_path: specific_comment_path,
                     }).build() as unknown as Comment[];
 
                 case 404:
@@ -75,6 +88,7 @@
             get_comments(api_url)
                 .then((res) => {
                     tree_branch = res;
+                    console.log(res);
                     loading_state = "loaded";
                 })
                 .catch((err: string) => {
