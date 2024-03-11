@@ -60,7 +60,6 @@
                 signal: AbortSignal.timeout(FETCH_TIMEOUT)
             });
             const value = (await res.json()) as CommentResponse;
-            console.log(value);
 
             switch (res.status) {
                 case 200:
@@ -102,6 +101,9 @@
                     tree_branch = res;
                 });
             }
+        },
+        get_more_comments = (e: CustomEvent) => {
+            console.log("Get more paths for" + e.detail);
         };
 
     // Store to trigger updates
@@ -136,6 +138,7 @@
                 <CommentBlock
                     item={branch}
                     {submit_url}
+                    on:moreComments={get_more_comments}
                 />
             {/each}
         </div>

@@ -11,6 +11,8 @@
     import { onMount } from "svelte";
     import { user_authenticated } from "$stores/user";
 
+    import { createEventDispatcher } from "svelte";
+
     // Functions
     import { cn } from "$functions/classname";
     import { reverse } from "$functions/urls";
@@ -27,6 +29,8 @@
     import Cross from "$icons/Cross/Index.svelte";
     import Expand from "$icons/Expand/Index.svelte";
     import { breakpoint } from "$stores/breakpoints";
+
+    const dispatch = createEventDispatcher();
 
     // Bindings
     let user_reaction: typeof item.user_reaction,
@@ -94,6 +98,12 @@
         } else {
             await post_to_reaction_endpoint(reaction as "upvote" | "downvote");
         }
+    };
+
+    const handle_more_click = async () => {
+        dispatch("moreComments", {
+            path: item.path,
+        });
     };
 </script>
 
@@ -261,7 +271,10 @@
             />
         </svg>
 
-        <button class="btn btn-secondary flex h-max min-h-max items-center p-0 gap-2 md:gap-[0.75vw]">
+        <button
+            on:click={handle_more_click}
+            class="btn btn-secondary flex h-max min-h-max items-center p-0 gap-2 md:gap-[0.75vw]"
+        >
             <div class="grid rotate-45 place-items-center rounded-full bg-neutral size-5 md:size-[1.5vw]">
                 <Cross class="p-0 text-accent w-4 md:w-[1vw]" />
             </div>
