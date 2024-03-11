@@ -32,8 +32,8 @@ export class JSONToTree {
             };
             node_dictionary[node.path] = new_node;
 
-            // If the node is a root-level node, add it to the tree
-            if (specific_path === node.path || !node.path.includes(".")) {
+            // If the node is a root-level node or specific node, add it to the tree
+            if (specific_path && specific_path === node.path || !node.path.includes(".")) {
                 tree.push(new_node);
             };
         });
