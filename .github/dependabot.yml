@@ -10,14 +10,14 @@ updates:
     - package-ecosystem: pip
       directory: /backend/
       schedule:
-          interval: daily
+          interval: weekly
       open-pull-requests-limit: 100
 
     # Backend (nodejs)
     - package-ecosystem: npm
       directory: /backend/
       schedule:
-          interval: daily
+          interval: weekly
       open-pull-requests-limit: 100
 
     # Android
@@ -25,7 +25,7 @@ updates:
     - package-ecosystem: pip
       directory: /android/AnimeCore(kivy)/
       schedule:
-          interval: daily
+          interval: weekly
       open-pull-requests-limit: 100
 
     # Tools
@@ -34,7 +34,7 @@ updates:
     - package-ecosystem: pip
       directory: /tools/seeder/
       schedule:
-          interval: daily
+          interval: weekly
       open-pull-requests-limit: 100
 
     # Bots
@@ -42,19 +42,19 @@ updates:
     - package-ecosystem: pip
       directory: /bots/discord/
       schedule:
-          interval: daily
+          interval: weekly
       open-pull-requests-limit: 100
 
     #Frontend
     #- package-ecosystem: 'npm'
     #  directory: '/frontend'
     #  schedule:
-    #      interval: 'daily'
+    #      interval: 'weekly'
 
     # Actions
     - package-ecosystem: 'github-actions'
       directory: '/'
       schedule:
-          interval: 'daily'
+          interval: 'weekly'
 
     
