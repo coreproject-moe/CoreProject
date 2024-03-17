@@ -28,14 +28,13 @@ class Query:
 
 @strawberry.type
 class Mutation:
-    @strawberry_django.mutations.create(
+    @strawberry_django.mutation(
         handle_django_errors=True,
-        permission_classes=[
-            # IsSuperUser
-        ],
+        permission_classes=[IsSuperUser],
     )
     def add_anime(self, info: Info, data: AnimeInput) -> Anime:
-        return cast(Anime, AnimeModel.objects.first())
+        instance = AnimeModel.objects.first()
+        return cast(Anime, instance)
 
 
 schema = strawberry.Schema(

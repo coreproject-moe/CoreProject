@@ -21,8 +21,8 @@ class Anime:
     name_japanese: auto
 
     source: auto
-    aired_from: datetime.datetime | None = None
-    aired_to: datetime.datetime | None = None
+    aired_from: auto
+    aired_to: auto
 
     banner: auto
     cover: auto
