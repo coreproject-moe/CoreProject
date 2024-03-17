@@ -533,18 +533,18 @@ test-randomorder = ["pytest-randomly"]
 
 [[package]]
 name = "django"
-version = "5.0.3"
+version = "5.0"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
 optional = false
 python-versions = ">=3.10"
 files = [
-    {file = "Django-5.0.3-py3-none-any.whl", hash = "sha256:5c7d748ad113a81b2d44750ccc41edc14e933f56581683db548c9257e078cc83"},
-    {file = "Django-5.0.3.tar.gz", hash = "sha256:5fb37580dcf4a262f9258c1f4373819aacca906431f505e4688e37f3a99195df"},
+    {file = "Django-5.0-py3-none-any.whl", hash = "sha256:3a9fd52b8dbeae335ddf4a9dfa6c6a0853a1122f1fb071a8d5eca979f73a05c8"},
+    {file = "Django-5.0.tar.gz", hash = "sha256:7d29e14dfbc19cb6a95a4bd669edbde11f5d4c6a71fdaa42c2d40b6846e807f7"},
 ]
 
 [package.dependencies]
 argon2-cffi = {version = ">=19.1.0", optional = true, markers = "extra == \"argon2\""}
-asgiref = ">=3.7.0,<4"
+asgiref = ">=3.7.0"
 sqlparse = ">=0.3.1"
 tzdata = {version = "*", markers = "sys_platform == \"win32\""}
 
@@ -763,17 +763,17 @@ Django = ">=3.2"
 
 [[package]]
 name = "django-ltree-2"
-version = "0.1.5"
+version = "0.1.6"
 description = "Continual of django-ltree"
 optional = false
 python-versions = ">=3.10"
 files = [
-    {file = "django_ltree_2-0.1.5-py3-none-any.whl", hash = "sha256:4fc8c874fd65155472ea611580e3dada3e7a4e41fdc1699e8a0c7353300b1f0c"},
-    {file = "django_ltree_2-0.1.5.tar.gz", hash = "sha256:1379346fcd1eebad70a67b02565547186e67c110dc033265d2a7d20e932f8ceb"},
+    {file = "django_ltree_2-0.1.6-py3-none-any.whl", hash = "sha256:01b34d34bca09166a1a797e4fe3e872e18c14e9b060892e53527e3a891f81fca"},
+    {file = "django_ltree_2-0.1.6.tar.gz", hash = "sha256:fe55677ac631e08ba2732ab5c2d170cde4b0c08b5c59c0585e0e42c9a4de3774"},
 ]
 
 [package.dependencies]
-django = ">=5.0.2"
+django = ">=4.2"
 psycopg = ">=3.1.18"
 
 [[package]]
@@ -1460,6 +1460,23 @@ files = [
 ]
 
 [[package]]
+name = "pyjwt"
+version = "2.8.0"
+description = "JSON Web Token implementation in Python"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "PyJWT-2.8.0-py3-none-any.whl", hash = "sha256:59127c392cc44c2da5bb3192169a91f429924e17aff6534d70fdc02ab3e04320"},
+    {file = "PyJWT-2.8.0.tar.gz", hash = "sha256:57e28d156e3d5c10088e0c68abb90bfac3df82b40a71bd0daa20c65ccd5c23de"},
+]
+
+[package.extras]
+crypto = ["cryptography (>=3.4.0)"]
+dev = ["coverage[toml] (==5.0.4)", "cryptography (>=3.4.0)", "pre-commit", "pytest (>=6.0.0,<7.0.0)", "sphinx (>=4.5.0,<5.0.0)", "sphinx-rtd-theme", "zope.interface"]
+docs = ["sphinx (>=4.5.0,<5.0.0)", "sphinx-rtd-theme", "zope.interface"]
+tests = ["coverage[toml] (==5.0.4)", "pytest (>=6.0.0,<7.0.0)"]
+
+[[package]]
 name = "pyrate-limiter"
 version = "2.10.0"
 description = "Python Rate-Limiter using Leaky-Bucket Algorithm"
@@ -1576,6 +1593,7 @@ files = [
     {file = "PyYAML-6.0.1-cp311-cp311-win_amd64.whl", hash = "sha256:bf07ee2fef7014951eeb99f56f39c9bb4af143d8aa3c21b1677805985307da34"},
     {file = "PyYAML-6.0.1-cp312-cp312-macosx_10_9_x86_64.whl", hash = "sha256:855fb52b0dc35af121542a76b9a84f8d1cd886ea97c84703eaa6d88e37a2ad28"},
     {file = "PyYAML-6.0.1-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:40df9b996c2b73138957fe23a16a4f0ba614f4c0efce1e9406a184b6d07fa3a9"},
+    {file = "PyYAML-6.0.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:a08c6f0fe150303c1c6b71ebcd7213c2858041a7e01975da3a99aed1e7a378ef"},
     {file = "PyYAML-6.0.1-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:6c22bec3fbe2524cde73d7ada88f6566758a8f7227bfbf93a408a9d86bcc12a0"},
     {file = "PyYAML-6.0.1-cp312-cp312-musllinux_1_1_x86_64.whl", hash = "sha256:8d4e9c88387b0f5c7d5f281e55304de64cf7f9c0021a3525bd3b1c542da3b0e4"},
     {file = "PyYAML-6.0.1-cp312-cp312-win32.whl", hash = "sha256:d483d2cdf104e7c9fa60c544d92981f12ad66a457afae824d146093b8c294c54"},
@@ -1948,6 +1966,26 @@ files = [
 dev = ["build", "flake8"]
 doc = ["sphinx"]
 test = ["pytest", "pytest-cov"]
+
+[[package]]
+name = "strawberry-django-auth"
+version = "0.376.5"
+description = "Graphql authentication system with Strawberry for Django."
+optional = false
+python-versions = ">=3.8,<3.13"
+files = [
+    {file = "strawberry_django_auth-0.376.5-py3-none-any.whl", hash = "sha256:e2e57d44f7ccec4b6aa831aa4229bb9755c3b15da15c696cb8b7e8ec6617838c"},
+    {file = "strawberry_django_auth-0.376.5.tar.gz", hash = "sha256:2bdf0f43136facdd20dcdf1bd85053d7bb334a6271cee6759c17e13580ee32e7"},
+]
+
+[package.dependencies]
+Django = ">=3.2,<=5.0"
+django-stubs = {version = ">=4.2.0,<5.0.0", extras = ["compatible-mypy"]}
+PyJWT = ">=2.6.0,<3.0"
+strawberry-graphql-django = ">=0.10.5"
+
+[package.extras]
+captcha = ["pillow[captcha] (>=9.5,<11.0)"]
 
 [[package]]
 name = "strawberry-graphql"
@@ -2441,4 +2479,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.12,<3.13"
-content-hash = "9057346bfbb567fa631c033b6449ef5d0ce1da1c8f78c5c56d48eb2b7251466b"
+content-hash = "5bb613fc0c4f1b36640afb85b7300a0d6357ffff9ce8681c2bd8546d8ad09754"
