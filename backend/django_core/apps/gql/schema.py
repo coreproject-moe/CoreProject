@@ -5,6 +5,7 @@ from .types.character import Character
 from .types.producer import Producer
 from .types.staff import Staff
 import strawberry_django
+from strawberry.schema.config import StrawberryConfig
 
 
 @strawberry.type
@@ -21,5 +22,6 @@ class Mutation: ...
 
 schema = strawberry.Schema(
     query=Query,
-    #    mutation=Mutation
+    #    mutation=Mutation,
+    config=StrawberryConfig(auto_camel_case=False),
 )
