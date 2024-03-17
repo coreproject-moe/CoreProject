@@ -8,7 +8,7 @@ from django.db.models.functions import Greatest
 T = TypeVar("T")
 
 
-@strawberry.filter(CharacterModel)
+@strawberry.django.filter(CharacterModel)
 class CharacterFilter:
     mal_id: int | None
     kitsu_id: int | None

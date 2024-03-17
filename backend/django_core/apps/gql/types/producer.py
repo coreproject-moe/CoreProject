@@ -1,11 +1,12 @@
 import strawberry
+import strawberry_django
 from apps.producers.models import ProducerModel
 from strawberry import auto
 
 from ..filters.producer import ProducerFilter
 
 
-@strawberry.type(ProducerModel, filters=ProducerFilter)
+@strawberry_django.type(ProducerModel, filters=ProducerFilter)
 class Producer:
     mal_id: int
     kitsu_id: int

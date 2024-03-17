@@ -1,15 +1,14 @@
 from typing import TypeVar
 
-import strawberry
 from apps.staffs.models import StaffModel
 from django.contrib.postgres.search import TrigramSimilarity
 from django.db.models.functions import Greatest
-from strawberry import auto
+import strawberry_django
 
 T = TypeVar("T")
 
 
-@strawberry.filter(StaffModel)
+@strawberry_django.filters.filter(StaffModel)
 class StaffFilter:
     mal_id: int | None
     kitsu_id: int | None
