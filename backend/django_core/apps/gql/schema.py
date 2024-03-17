@@ -1,34 +1,21 @@
-from gqlauth.user.queries import UserQueries
-from gqlauth.user import relay as mutations
 import strawberry
 
+from .types.anime import Anime
+from .types.character import Character
+from .types.producer import Producer
+from .types.staff import Staff
+
 
 @strawberry.type
-class Query(UserQueries):
-    # you can add your queries here
-    ...
+class Query:
+    animes: list[Anime] = strawberry.field(pagination=True)
+    characters: list[Character] = strawberry.field(pagination=True)
+    staffs: list[Staff] = strawberry.field(pagination=True)
+    producers: list[Producer] = strawberry.field(pagination=True)
 
 
 @strawberry.type
-class Mutation:
-    # include what-ever mutations you want.
-    verify_token = mutations.VerifyToken.field
-    update_account = mutations.UpdateAccount.field
-    archive_account = mutations.ArchiveAccount.field
-    delete_account = mutations.DeleteAccount.field
-    password_change = mutations.PasswordChange.field
-    # swap_emails = mutations.SwapEmails.field
-    # verify_secondary_email = mutations.VerifySecondaryEmail.field
-    # captcha = Captcha.field
-    token_auth = mutations.ObtainJSONWebToken.field
-    register = mutations.Register.field
-    verify_account = mutations.VerifyAccount.field
-    resend_activation_email = mutations.ResendActivationEmail.field
-    send_password_reset_email = mutations.SendPasswordResetEmail.field
-    password_reset = mutations.PasswordReset.field
-    password_set = mutations.PasswordSet.field
-    refresh_token = mutations.RefreshToken.field
-    revoke_token = mutations.RevokeToken.field
+class Mutation: ...
 
 
 schema = strawberry.Schema(query=Query, mutation=Mutation)
