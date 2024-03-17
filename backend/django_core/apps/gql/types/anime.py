@@ -5,11 +5,11 @@ import strawberry_django
 from ..filters.anime import AnimeFilter
 import datetime
 
-__all__ = ["Anime"]
+__all__ = ["AnimeType"]
 
 
 @strawberry_django.type(AnimeModel, filters=AnimeFilter)
-class Anime:
+class AnimeType:
     id: int
 
     mal_id: auto
