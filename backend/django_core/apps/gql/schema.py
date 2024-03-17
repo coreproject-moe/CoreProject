@@ -1,6 +1,8 @@
 import strawberry
-
+from typing import cast
 import datetime
+
+from apps.anime.models import AnimeModel
 from .permissions import IsAuthenticated, IsSuperUser
 
 from .types.anime import Anime
@@ -12,6 +14,7 @@ from strawberry.schema.config import StrawberryConfig
 from .mutations.anime import AnimeInput
 from strawberry.file_uploads import Upload
 
+import strawberry_django
 from strawberry.types import Info
 
 
@@ -25,9 +28,14 @@ class Query:
 
 @strawberry.type
 class Mutation:
-    @strawberry.mutation(permission_classes=[IsSuperUser])
+    @strawberry_django.mutations.create(
+        handle_django_errors=True,
+        permission_classes=[
+            # IsSuperUser
+        ],
+    )
     def add_anime(self, info: Info, data: AnimeInput) -> Anime:
-        return
+        return cast(Anime, AnimeModel.objects.first())
 
 
 schema = strawberry.Schema(

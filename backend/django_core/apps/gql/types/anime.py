@@ -3,6 +3,7 @@ from apps.anime.models import AnimeModel
 from strawberry import auto
 import strawberry_django
 from ..filters.anime import AnimeFilter
+import datetime
 
 __all__ = ["Anime"]
 
@@ -20,8 +21,8 @@ class Anime:
     name_japanese: auto
 
     source: auto
-    aired_from: auto
-    aired_to: auto
+    aired_from: datetime.datetime | None = None
+    aired_to: datetime.datetime | None = None
 
     banner: auto
     cover: auto
