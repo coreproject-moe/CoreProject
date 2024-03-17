@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -39,6 +40,8 @@ handler500 = views.five_zero_zero_view
 urlpatterns = [
     # Default django welcome page
     # path("", debug.default_urlconf),
+    # Graphql
+    path("graphql/", include("apps.gql.urls")),
     #   Admin
     # ================
     path("admin/", admin.site.urls),

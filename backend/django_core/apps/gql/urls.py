@@ -1,8 +1,8 @@
 from django.urls import path
 
 from strawberry.django.views import AsyncGraphQLView
-from api.schema import schema
+from .schema import schema as schema
 
 urlpatterns = [
-    path("graphql/", AsyncGraphQLView.as_view(schema={})),
+    path("", AsyncGraphQLView.as_view(schema=schema)),
 ]

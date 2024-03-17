@@ -83,6 +83,7 @@ class CustomUser(
     # Django specific fields
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ["email"]
+    EMAIL_FIELD = "email"
 
     def save(self, *args: Any, **kwargs: Any) -> None:
         super().save(*args, **kwargs)
