@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+
 import os
 from pathlib import Path
 
@@ -89,6 +90,9 @@ INSTALLED_APPS = [
     "django_admin_hstore_widget",
     # Block users
     "defender",
+    # GQL
+    "strawberry_django",
+    "gqlauth",
     # Tree
     "django_ltree",
     # Api
@@ -168,8 +172,15 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     # Django defender
     "defender.middleware.FailedLoginMiddleware",
+    # GQL
+    "gqlauth.core.middlewares.django_jwt_middleware",
 ]
+from gqlauth.settings_type import GqlAuthSettings
 
+GQL_AUTH = GqlAuthSettings(
+    LOGIN_REQUIRE_CAPTCHA=False,
+    REGISTER_REQUIRE_CAPTCHA=False,
+)
 if DEBUG:
     MIDDLEWARE += (
         # Debug Toolbar Middleware
