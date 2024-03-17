@@ -122,6 +122,7 @@ class AnimeInfoAdmin(admin.ModelAdmin[AnimeModel]):
                     "recommendations",
                     "openings",
                     "endings",
+                    "comments",
                 )
             },
         ),

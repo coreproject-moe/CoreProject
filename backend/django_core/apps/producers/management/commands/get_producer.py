@@ -1,5 +1,6 @@
 import sys
-from typing import NoReturn
+from argparse import ArgumentParser
+from typing import Any
 
 from django.core.management.base import BaseCommand
 
@@ -16,11 +17,11 @@ def get_periodic_producers():
 class Command(BaseCommand):
     help = "Django command that gets the Producer Information given mal_id"
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         self.client = session
         super().__init__(*args, **kwargs)
 
-    def add_arguments(self, parser):
+    def add_arguments(self, parser: ArgumentParser) -> None:
         parser.add_argument(
             "producer_id",
             type=int,
@@ -38,19 +39,19 @@ class Command(BaseCommand):
             help="Flag to periodic task will be created",
         )
 
-    def handle(self, *args, **options) -> NoReturn:
-        periodic: bool = options["periodic"]
+    def handle(self, *args: Any, **options: dict[str, Any]) -> None:
+        periodic: bool = bool(options["periodic"])
         if periodic:
             get_periodic_producers.delay()
             self.stdout.write("Successfully stated preiodic celery commands")
             sys.exit(0)
 
-        producer_id: int = options["producer_id"]
+        producer_id = str(options["producer_id"])
         if not producer_id:
             self.stdout.write(self.style.ERROR("No producer_id provided"))
             sys.exit(1)
 
-        create: bool = options["create"]
+        create: bool = bool(options["create"])
         if create:
             producer_instance, _ = ProducerModel.objects.get_or_create(mal_id=producer_id)
         else:

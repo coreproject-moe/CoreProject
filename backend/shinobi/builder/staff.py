@@ -53,7 +53,7 @@ class StaffBuilder:
             .matches
         )
         anchors = [anchor.attributes["href"] for anchor in node]
-        return anchors
+        return [item for item in anchors if item is not None]
 
     def _build_word_list(self) -> list[str]:
         alphabet_list = list(string.ascii_uppercase)
@@ -75,7 +75,8 @@ class StaffBuilder:
         for staff_node in staff_nodes:
             staff_href = staff_node.attributes["href"]
             if (
-                staff_href not in self.anchors
+                staff_href
+                and staff_href not in self.anchors
                 and self.regex_helper.check_if_string_contains_integer(staff_href)
             ):
                 self.anchors.append(self.add_myanimelist_if_not_already_there(staff_href))
@@ -94,7 +95,7 @@ class StaffBuilder:
         return [self.regex_helper.get_first_integer_from_url(item) for item in self.anchors]
 
     def build_dictionary(
-        self, excluded_ids: list[int] | None = None, sort=False
+        self, excluded_ids: list[int] | None = None, sort: bool = False
     ) -> dict[int, str]:
         for url in self._build_word_list():
             self.__build_urls(url)

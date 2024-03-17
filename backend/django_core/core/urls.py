@@ -13,9 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+
 from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 from . import views
 
@@ -37,7 +40,8 @@ handler500 = views.five_zero_zero_view
 urlpatterns = [
     # Default django welcome page
     # path("", debug.default_urlconf),
-    path("", views.home_view, name="home_view"),
+    # Graphql
+    path("graphql/", include("apps.gql.urls")),
     #   Admin
     # ================
     path("admin/", admin.site.urls),
@@ -47,9 +51,19 @@ urlpatterns = [
     #   HTTP
     # =========
     path("user/", include("apps.user.urls")),
-    #   Graphql
-    # ============
-    path("graphql", include("apps.graphql.urls")),
+    #   API
+    # ========
+    path("api/v2/", include("apps.api.urls")),
+    # Swagger
+    path("api/v2/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path(
+        "api/v2/schema/swagger-ui/",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
+    ),
+    #  Pages
+    # =======
+    path("", include("apps.pages.urls")),
 ]
 
 if settings.DEBUG:
@@ -63,3 +77,5 @@ if settings.DEBUG:
         path("404/", handler404),
         path("500/", handler500),
     ]
+    # Serve media
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

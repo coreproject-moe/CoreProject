@@ -1,15 +1,13 @@
 {% extends 'tailwind_base.html' %}
-
-{%block title%} CoreProject | {{error_status_code}} {%endblock%}
-
-{%block body%}
+{% block title %}CoreProject | {{ error_status_code }}{% endblock %}
+{% block body %}
     <div class="flex items-center justify-center flex-col text-center h-screen m-0">
-        <img src="{{svg.file}}" width="{{svg.width}}" height="{{svg.height}}" />
+        <img src="{{ svg.file }}"
+             width="{{ svg.width }}"
+             height="{{ svg.height }}" />
         <div class="font-bold w-[70vw]">
-            <h1 class="text-indigo-800 text-3xl m-7">
-                {{error_status_code}} - {{error_status}}
-            </h1>
-            <p>{{error_text|safe}}</p>
+            <h1 class="text-indigo-800 text-3xl m-7">{{ error_status_code }} - {{ error_status }}</h1>
+            <p>{{ error_text|safe }}</p>
         </div>
     </div>
-{%endblock%}
+{% endblock %}

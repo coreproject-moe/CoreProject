@@ -11,7 +11,7 @@ from .models import CharacterModel
 
 
 @shared_task()
-def get_periodic_character():
+def get_periodic_character() -> None:
     builder = CharacterBuilder()
 
     # TODO Order the first query higher
@@ -29,7 +29,7 @@ def get_periodic_character():
     )
 
     dictionary = builder.build_dictionary(
-        excluded_ids=instances.values_list("pk", flat=True),
+        excluded_ids=list(instances.values_list("pk", flat=True)),
         sort=True,
     )
 
@@ -41,5 +41,5 @@ def get_periodic_character():
 
 
 @shared_task()
-def call_character_command(id: int):
+def call_character_command(id: int) -> None:
     call_command("get_character", id, create=True)

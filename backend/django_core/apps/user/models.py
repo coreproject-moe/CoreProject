@@ -1,13 +1,16 @@
+import hashlib
 from typing import Any
 
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
+from django.conf import settings
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.core.validators import RegexValidator
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from dynamic_filenames import FilePattern
-from mixins.models.created_at import CreatedAtMixin
-
+from drf_spectacular.utils import extend_schema_field
+from drf_spectacular.types import OpenApiTypes
+from .managers import UserManager
 from .validators import username_validator
 
 avatar = FilePattern(filename_pattern="avatar/{uuid:s}{ext}")
@@ -19,19 +22,18 @@ avatar = FilePattern(filename_pattern="avatar/{uuid:s}{ext}")
 class CustomUser(
     AbstractBaseUser,
     PermissionsMixin,
-    CreatedAtMixin,
 ):
     username = models.CharField(
         _("username"),
-        unique=True,
         max_length=150,
         help_text=_(
             "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
         ),
+        unique=True,
         validators=[
             username_validator,
             RegexValidator(
-                r"^[a-zA-Z0-9_-]+#[0-9]{4}$",
+                rf"^[a-zA-Z0-9_-]+#[0-9]{{{settings.DISCRIMINATOR_LENGTH}}}$",
                 message="Username is not valid for this regex `^[a-zA-Z0-9_-]+#[0-9]{4}$`",
             ),
         ],
@@ -68,7 +70,7 @@ class CustomUser(
         null=True,
     )
     avatar_provider = models.URLField(
-        default="https://seccdn.libravatar.org/avatar/{EMAIL}?s=512"
+        default="https://seccdn.libravatar.org/avatar/{EMAIL}?s=512",
     )
 
     date_joined = models.DateTimeField(
@@ -80,13 +82,20 @@ class CustomUser(
 
     # Django specific fields
     USERNAME_FIELD = "username"
+    REQUIRED_FIELDS = ["email"]
     EMAIL_FIELD = "email"
 
     def save(self, *args: Any, **kwargs: Any) -> None:
         super().save(*args, **kwargs)
 
+    @extend_schema_field(OpenApiTypes.STR)
+    def avatar_url(self):
+        hashed_email = hashlib.md5(self.email.encode()).hexdigest()
+
+        return self.avatar_provider.format(EMAIL=hashed_email)
+
     def __str__(self) -> str:
-        return str(self.username)
+        return self.username
 
     class Meta:
         db_table = "user"

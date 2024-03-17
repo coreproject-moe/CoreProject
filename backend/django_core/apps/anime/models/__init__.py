@@ -7,6 +7,7 @@ from mixins.models.is_locked import IsLockedMixin
 from mixins.models.updated_at import UpdatedAtMixin
 
 from ...characters.models import CharacterModel
+from ...comments.models import CommentModel
 from ...episodes.models import EpisodeModel
 from ...producers.models import ProducerModel
 from ...staffs.models import StaffModel
@@ -45,12 +46,14 @@ class AnimeModel(CreatedAtMixin, UpdatedAtMixin, IsLockedMixin):
         unique=True,
         null=False,
         max_length=1024,
+        db_index=True,
     )
     name_japanese = models.CharField(
         default="",
         null=False,
         blank=True,
         max_length=1024,
+        db_index=True,
     )
     name_synonyms = models.ManyToManyField(AnimeNameSynonymModel, blank=True)
 
@@ -96,11 +99,12 @@ class AnimeModel(CreatedAtMixin, UpdatedAtMixin, IsLockedMixin):
     openings = models.ManyToManyField(AnimeOpeningModel, blank=True)
     endings = models.ManyToManyField(AnimeEndingModel, blank=True)
 
+    comments = models.ManyToManyField(CommentModel, blank=True)
+
     def __str__(self) -> str:
         return f"{self.name}"
 
     class Meta:
-        verbose_name = "Anime"
         indexes = [
             GinIndex(
                 fields=["name", "name_japanese"],
@@ -108,3 +112,4 @@ class AnimeModel(CreatedAtMixin, UpdatedAtMixin, IsLockedMixin):
                 opclasses=["gin_trgm_ops", "gin_trgm_ops"],
             ),
         ]
+        verbose_name = "Anime"

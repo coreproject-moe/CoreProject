@@ -45,7 +45,7 @@ class AnimeBuilder:
         else:
             return url
 
-    def get_all_pages_in_span_tag(self, html):
+    def get_all_pages_in_span_tag(self, html: str) -> list[str]:
         parser = self.get_parser(html)
         node = (
             parser.css_first("div.normal_header > div.fl-r > div > span.bgColor1")
@@ -53,7 +53,7 @@ class AnimeBuilder:
             .matches
         )
         anchors = [anchor.attributes["href"] for anchor in node]
-        return anchors
+        return [item for item in anchors if item is not None]
 
     def _build_word_list(self) -> list[str]:
         alphabet_list = list("." + string.ascii_uppercase)
@@ -72,7 +72,8 @@ class AnimeBuilder:
         for anime_node in anime_nodes:
             anime_href = anime_node.attributes["href"]
             if (
-                anime_href not in self.anchors
+                anime_href
+                and anime_href not in self.anchors
                 and self.regex_helper.check_if_string_contains_integer(anime_href)
             ):
                 self.anchors.append(self.add_myanimelist_if_not_already_there(anime_href))
@@ -91,7 +92,7 @@ class AnimeBuilder:
         return [self.regex_helper.get_first_integer_from_url(item) for item in self.anchors]
 
     def build_dictionary(
-        self, excluded_ids: list[int] | None = None, sort=False
+        self, excluded_ids: list[int] | None = None, sort: bool = False
     ) -> dict[int, str]:
         for url in self._build_word_list():
             self.__build_urls(url)

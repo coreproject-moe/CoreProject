@@ -1,5 +1,6 @@
 import sys
-from typing import NoReturn
+from argparse import ArgumentParser
+from typing import Any
 
 from apps.characters.models import CharacterModel
 from apps.producers.models import ProducerModel
@@ -22,11 +23,11 @@ class Command(BaseCommand):
 
     help = "Django command that gets the Anime Information given mal_id"
 
-    def __init__(self, *args, **kwargs) -> None:
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
         self.client = session
         super().__init__(*args, **kwargs)
 
-    def add_arguments(self, parser):
+    def add_arguments(self, parser: ArgumentParser) -> None:
         parser.add_argument(
             "anime_id",
             type=int,
@@ -43,19 +44,19 @@ class Command(BaseCommand):
             help="Flag to periodic task will be created",
         )
 
-    def handle(self, *args, **options) -> NoReturn:
-        periodic: bool = options.get("periodic")
+    def handle(self, *args: Any, **options: dict[str, Any]) -> None:
+        periodic: bool = bool(options.get("periodic"))
         if periodic:
             get_periodic_anime.delay()
             self.stdout.write("Successfully stated preiodic celery commands")
             sys.exit(0)
 
-        anime_id: int = options["anime_id"]
+        anime_id: str = str(options["anime_id"])
         if not anime_id:
             self.stdout.write(self.style.ERROR("No anime_id provided"))
             sys.exit(1)
 
-        create: bool = options.get("create")
+        create: bool = bool(options.get("create"))
         if create:
             anime_instance, _ = AnimeModel.objects.get_or_create(mal_id=anime_id)
 
@@ -69,7 +70,10 @@ class Command(BaseCommand):
         res = self.client.get(f"https://myanimelist.net/anime/{anime_id}/")
 
         parser = AnimeParser(res.text)
-        data_dictionary = {k: v for k, v in parser.build_dictionary().items() if v}
+        # Refractor this to AnimeDictionary
+        data_dictionary: dict[str, Any] = {
+            k: v for k, v in parser.build_dictionary().items() if v
+        }
 
         if alternate_name := data_dictionary.pop("name_synonyms"):
             for name in alternate_name:

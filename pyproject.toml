@@ -1,0 +1,3 @@
+[tool.ruff]
+# Extend the `pyproject.toml` file in the parent directory.
+extend = "./backend/pyproject.toml"

@@ -4,7 +4,7 @@ from shinobi.builder.anime import AnimeBuilder
 
 
 @pytest.mark.long
-def test_anime_dictionary_builder():
+def test_anime_dictionary_builder() -> None:
     builder = AnimeBuilder()
     dictionary = builder.build_dictionary(excluded_ids=[54915])
 

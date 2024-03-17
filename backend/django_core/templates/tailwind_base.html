@@ -1,8 +1,6 @@
-{% load static tailwind_tags %}
-
+{% load static django_htmx django_vite %}
 <!DOCTYPE html>
-
-<html lang="en" data-theme="kokoro">
+<html lang="en" data-theme="kokoro" class="scroll-smooth" style='background-color:black !important;'>
     <head>
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -18,22 +16,42 @@
             name="description"
             content="Bridging the gap between streaming & torrenting sevices, with a modern and clean interface"
         />
-
         <link
             rel="icon"
             type="image/svg+xml"
-            href="{% static 'images/favicon/favicon.svg' %}"
-        />
-        <link
-            rel="stylesheet"
-            href="{% static 'fonts/Kokoro/stylesheet.css' %}"
+            href="{% vite_asset_url 'images/favicon/favicon.svg' %}"
         />
 
-        {% block head %} {% endblock %}
-        <title>{% block title %} {% endblock %}</title>
-        {% tailwind_css %}
+        <script type='module'>
+            window.csrfmiddlewaretoken = `{{ csrf_token }}`;
+            window.request = JSON.parse(`{{ request_dict|safe }}`)
+        </script>
+
+        <script>
+            window.urls = new Map();
+            {% autoescape off %}
+                {% for pattern in urlpatterns %}
+                    {% if pattern.name %}
+                        window.urls.set(`{{pattern.name}}`, `{{pattern.url}}`);
+                    {% endif %}
+                {% endfor %}
+            {% endautoescape %}
+
+        </script>
+
+        {% vite_hmr_client %}
+        {% vite_asset 'main.ts' %}
+
+        {% django_htmx_script %}
+        {% block head %}{% endblock %}
+        <title>{% block title %}{% endblock %}</title>
     </head>
-    <body>
-        {% block body %}{% endblock %} {% block js %} {% endblock %}
+
+    <body style='background-color:black !important;'>
+        {% block body %}{% endblock %} {% block js %}{% endblock %}
+        <div id="toast" class="toast p-0 absolute bottom-[0.75vw] right-[0.75vw]"></div>
+        <script>
+
+        </script>
     </body>
 </html>

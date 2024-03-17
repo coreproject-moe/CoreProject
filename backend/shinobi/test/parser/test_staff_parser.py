@@ -11,15 +11,16 @@ def get_staff_res_given_mal_id(mal_id: int) -> requests.Response:
 
 
 # noqa: E501
-def test_first_person_parser():
+def test_first_person_parser() -> None:
     res = get_staff_res_given_mal_id(1)
     parser = StaffParser(res.text)
     data = parser.build_dictionary()
 
-    assert data["mal_id"] == 1
+    assert int(data["mal_id"]) == 1
     assert data["name"] == "Tomokazu Seki"
     assert (
-        data["staff_image"] == "https://cdn.myanimelist.net/images/voiceactors/1/55486.jpg"
+        str(data["staff_image"])
+        == "https://cdn.myanimelist.net/images/voiceactors/1/55486.jpg"
     )
     assert data["given_name"] == "智一"
     assert data["family_name"] == "関"
@@ -33,7 +34,7 @@ def test_first_person_parser():
 
 
 # noqa: E501
-def test_second_person_parser():
+def test_second_person_parser() -> None:
     res = get_staff_res_given_mal_id(2)
     parser = StaffParser(res.text)
     data = parser.build_dictionary()
@@ -54,7 +55,7 @@ def test_second_person_parser():
 
 
 # noqa: E501
-def test_sora_amamiya():
+def test_sora_amamiya() -> None:
     """
     Sora-chan UwU
     It makes sure dat the sora-chan's ID is 21517 and dat dere is an image of hew.
@@ -81,7 +82,7 @@ def test_sora_amamiya():
     )
 
 
-def test_natsukawa_shiina():
+def test_natsukawa_shiina() -> None:
     """
     Dis function tests da information abou' Natsukawa Shiina, a seiyuu in da anime industry.
     It makes suwe dat hew ID is currect and dat hew name and biwthday awe currect.
@@ -106,7 +107,7 @@ def test_natsukawa_shiina():
     )
 
 
-def test_momo_asakura():
+def test_momo_asakura() -> None:
     """
     Haii! This function checks the details about Asakura Momo, anothew amazing seiyuu in da anime industry!
     It confirms if her ID is correct and if her name and birthday are accurate. It also checks if there is an image of her and if she has any alternate names.

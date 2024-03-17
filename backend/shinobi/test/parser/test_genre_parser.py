@@ -4,11 +4,11 @@ from shinobi.utilities.session import session
 res = session.get("https://myanimelist.net/anime/genre/1")
 
 
-def test_anime_genre_parser():
+def test_anime_genre_parser() -> None:
     parser = AnimeGenreParser(res.text)
     data = parser.build_dictionary()
 
-    assert data["mal_id"] == 1
+    assert int(data["mal_id"]) == 1
     assert data["name"] == "Action"
     assert (
         data["description"]

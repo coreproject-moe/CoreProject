@@ -29,11 +29,11 @@ def format_kokoro_color(input: str) -> str:
 
     # Parse each letter in the word
     for letter in WORD:
-        color = KOKORO_WORD_COLOR_MAP.get(letter)
-        color_class = TAILWIND_COLOR_MAP.get(color)
+        color = KOKORO_WORD_COLOR_MAP[letter]
+        color_class = TAILWIND_COLOR_MAP[color]
         color_formated_string += f"<span class='inline-flex {color_class}'>{letter}</span>"
 
     # Color the font.
-    input = re.sub(KOKORO_REGEX, color_formated_string, input)
+    text = re.sub(KOKORO_REGEX, color_formated_string, input)
     # Hyperlink the home
-    return input
+    return text

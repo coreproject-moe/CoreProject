@@ -32,7 +32,7 @@ class EmailOrUsernameModelBackend(ModelBackend):
             )
 
             # If password matches then return user
-            if user_model.check_password(password):
+            if user_model.check_password(password) and password:
                 query = user_model
 
         return query

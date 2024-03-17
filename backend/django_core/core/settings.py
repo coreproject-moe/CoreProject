@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+
 import os
 from pathlib import Path
 
@@ -20,9 +21,6 @@ django_stubs_ext.monkeypatch()
 from dotenv import load_dotenv
 
 load_dotenv()
-
-
-from gqlauth.settings_type import GqlAuthSettings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -72,10 +70,15 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    # Humanize
+    "django.contrib.humanize",
     # Postgres
     "django.contrib.postgres",
+    # HTMX
+    "django_htmx",
     # Whitenoise
     "whitenoise.runserver_nostatic",
+    # Components
     "django.contrib.staticfiles",
     # 3rd party rest framework stuff
     "corsheaders",
@@ -87,17 +90,25 @@ INSTALLED_APPS = [
     "django_admin_hstore_widget",
     # Block users
     "defender",
-    # Tree
-    "treenode",
-    # Tailwind CSS
-    "tailwind",
-    "tailwind_src",  # Our custom app
-    # Grahpql
-    "strawberry.django",
+    # GQL
     "strawberry_django",
-    "gqlauth",
-    "apps.graphql",
+    # Tree
+    "django_ltree",
+    # Api
+    "rest_framework",
+    "rest_framework.authtoken",
+    "drf_spectacular",
+    "drf_spectacular_sidecar",
+    "django_filters",
+    # Crispy forms
+    "crispy_forms",
+    "crispy_bootstrap4",
+    # Vite Plugin
+    "django_vite",
     # Models
+    "apps.gql",
+    "apps.comments",
+    "apps.pages",
     "apps.anime",
     "apps.trackers",
     "apps.characters",
@@ -106,6 +117,28 @@ INSTALLED_APPS = [
     "apps.episodes",
 ]
 
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+SILENCED_SYSTEM_CHECKS = [
+    "rest_framework.W001",
+]
+# Rest framework
+REST_FRAMEWORK = {
+    # YOUR SETTINGS
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ),
+    "PAGE_SIZE": 100,
+}
+SPECTACULAR_SETTINGS = {
+    "SWAGGER_UI_DIST": "SIDECAR",  # shorthand to use the sidecar instead
+    "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
+    "REDOC_DIST": "SIDECAR",
+    # OTHER SETTINGS
+}
 # Debug Toolbar Add
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install-the-app
 if DEBUG:
@@ -120,6 +153,8 @@ if DEBUG:
 
 
 MIDDLEWARE = [
+    # HTMX
+    "django_htmx.middleware.HtmxMiddleware",
     # Django Specific
     "django.middleware.security.SecurityMiddleware",
     # Whitenoise
@@ -133,8 +168,6 @@ MIDDLEWARE = [
     "django.middleware.cache.FetchFromCacheMiddleware",  # Cache
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
-    # GQL Auth
-    "gqlauth.core.middlewares.django_jwt_middleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     # Django defender
@@ -144,8 +177,8 @@ MIDDLEWARE = [
 if DEBUG:
     MIDDLEWARE += (
         # Debug Toolbar Middleware
-        # https://strawberry-graphql.github.io/strawberry-graphql-django/guides/debug-toolbar/
-        "strawberry_django.middlewares.debug_toolbar.DebugToolbarMiddleware",
+        # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#add-the-middleware
+        "debug_toolbar.middleware.DebugToolbarMiddleware",
         # CProfile middleware
         # https://github.com/omarish/django-cprofile-middleware/blob/80e27f3876949e0d9c452c0e48ed03d73e026b73/README.md#installing
         "django_cprofile_middleware.middleware.ProfilerMiddleware",
@@ -182,6 +215,9 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                # Custom
+                "apps.pages.context_processors.urls",
+                "apps.pages.context_processors.request_dict",
             ],
         },
     },
@@ -219,7 +255,8 @@ if CACHE_MIDDLEWARE_SECONDS != 0:
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.environ.get("POSTGRES_NAME", "postgres"),
+        # Database name
+        "NAME": os.environ.get("POSTGRES_NAME", "coreproject"),
         "USER": os.environ.get("POSTGRES_USER", "postgres"),
         "PASSWORD": os.environ.get("POSTGRES_PASSWORD", "supersecretpassword"),
         "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
@@ -290,7 +327,7 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 STATICFILES_DIRS = [
-    Path(BASE_DIR, "static"),
+    Path(BASE_DIR, "static_src"),
 ]
 
 STATIC_ROOT = Path(BASE_DIR, "staticfiles")
@@ -358,17 +395,26 @@ if os.name == "nt":
 elif os.name == "posix":
     NPM_BIN_PATH = "/usr/bin/npm"
 
-# Graphql
-STRAWBERRY_DJANGO = {
-    "FIELD_DESCRIPTION_FROM_HELP_TEXT": True,
-    "TYPE_DESCRIPTION_FROM_MODEL_DOCSTRING": True,
-}
+# WhiteNoise Patch
 
-# Graphql
-GQL_AUTH = GqlAuthSettings(
-    LOGIN_REQUIRE_CAPTCHA=False,
-    REGISTER_REQUIRE_CAPTCHA=False,
-    ALLOW_LOGIN_NOT_VERIFIED=True,
-    # Not necessary
-    SEND_ACTIVATION_EMAIL=False,
-)
+import re
+
+# Vite generates files with 8 hash digits
+# http://whitenoise.evans.io/en/stable/django.html#WHITENOISE_IMMUTABLE_FILE_TEST
+
+
+def immutable_file_test(path, url):
+    # Match filename with 12 hex digits before the extension
+    # e.g. app.db8f2edc0c8a.js
+    return re.match(r"^.+\.[0-9a-f]{8,12}\..+$", url)
+
+
+WHITENOISE_IMMUTABLE_FILE_TEST = immutable_file_test
+DJANGO_VITE = {
+    "default": {
+        "dev_mode": DEBUG,
+        "dev_server_port": 5173,
+    },
+}
+# Where ViteJS assets are built.
+DJANGO_VITE_ASSETS_PATH = BASE_DIR / "static"

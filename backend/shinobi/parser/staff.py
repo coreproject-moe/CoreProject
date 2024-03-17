@@ -1,7 +1,7 @@
 import datetime
 import re
 from io import BytesIO
-from typing import TypedDict
+from typing import Any, TypedDict
 
 from dateutil import parser
 from selectolax.parser import HTMLParser
@@ -131,7 +131,7 @@ class StaffParser:
         birthday = parser.parse(self.string_helper.cleanse(matches[0].next.text()))
         return birthday
 
-    def build_dictionary(self) -> StaffDictionary:
+    def build_dictionary(self) -> dict[str, Any]:
         dictionary: StaffDictionary = {
             "mal_id": self.get_staff_id,
             "name": self.get_staff_name,

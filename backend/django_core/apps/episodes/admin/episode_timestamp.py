@@ -9,8 +9,8 @@ from ..models.episode_timestamp import EpisodeTimestampModel
 
 @admin.register(EpisodeTimestampModel)
 class EpisodeTimestampAdmin(admin.ModelAdmin[EpisodeTimestampModel]):
-    autocomplete_fields = ["user", "episode"]
-    list_filter = ["user", "episode"]
+    autocomplete_fields = ["user"]
+    list_filter = ["user"]
     search_fields = ["user__username"]
 
     def get_search_results(
@@ -25,20 +25,16 @@ class EpisodeTimestampAdmin(admin.ModelAdmin[EpisodeTimestampModel]):
             search_term,
         )
         if "#" in search_term:
-            queryset = (
-                self.model.objects.get_username_with_discriminator(prefix="user")
-                .filter(
-                    username_with_discriminator__in=[
-                        # Remove trailing whitespace
-                        # We might have something like
-                        # user = ['baseplate-admin ', ' baseplate-foot']
-                        # make it
-                        # user = ['baseplate-admin','baseplate-foot']
-                        item.strip()
-                        for item in search_term.split(",")
-                    ]
-                )
-                .distinct()
-            )
+            queryset = self.model.objects.filter(
+                user__username__in=[
+                    # Remove trailing whitespace
+                    # We might have something like
+                    # user = ['baseplate-admin ', ' baseplate-foot']
+                    # make it
+                    # user = ['baseplate-admin','baseplate-foot']
+                    item.strip()
+                    for item in search_term.split(",")
+                ]
+            ).distinct()
 
         return queryset, may_have_duplicates

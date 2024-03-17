@@ -4,7 +4,7 @@ from shinobi.utilities.session import session
 res = session.get("https://myanimelist.net/anime/1/")
 
 
-def test_first_anime_character_list():
+def test_first_anime_character_list() -> None:
     parser = AnimeCharacterAndStaffListParser(res.text)
     data = parser.build_dictionary()
 
