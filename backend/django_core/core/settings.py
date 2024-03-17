@@ -106,6 +106,7 @@ INSTALLED_APPS = [
     # Vite Plugin
     "django_vite",
     # Models
+    "apps.gql",
     "apps.comments",
     "apps.pages",
     "apps.anime",
