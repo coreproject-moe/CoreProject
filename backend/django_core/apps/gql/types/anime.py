@@ -1,9 +1,7 @@
-import strawberry
 from apps.anime.models import AnimeModel
 from strawberry import auto
 import strawberry_django
 from ..filters.anime import AnimeFilter
-import datetime
 
 __all__ = ["AnimeType"]
 

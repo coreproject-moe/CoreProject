@@ -1,5 +1,4 @@
 import strawberry
-from typing import cast
 
 import strawberry_django.permissions
 
@@ -10,9 +9,7 @@ from .types.producer import Producer
 from .types.staff import Staff
 import strawberry_django
 from strawberry.schema.config import StrawberryConfig
-from .input.anime import AnimeInput
 
-import strawberry_django
 
 
 @strawberry.type

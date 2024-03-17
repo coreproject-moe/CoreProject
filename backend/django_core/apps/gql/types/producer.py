@@ -1,4 +1,3 @@
-import strawberry
 import strawberry_django
 from apps.producers.models import ProducerModel
 from strawberry import auto

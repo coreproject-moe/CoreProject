@@ -1,8 +1,6 @@
 import typing
-import strawberry
 from strawberry.permission import BasePermission
 from strawberry.types import Info
-from django.http import HttpRequest
 from apps.user.models import CustomUser
 
 
