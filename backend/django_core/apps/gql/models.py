@@ -21,7 +21,7 @@ class Token(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="user")
 
     def __str__(self) -> str:
-        return f"User : {self.user.username} | Token : {self.token}"
+        return f"Token : {self.token}"
 
     class Meta:
         indexes = [

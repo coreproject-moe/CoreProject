@@ -1,9 +1,9 @@
-import strawberry
+import strawberry_django
 from strawberry import auto
 from apps.anime.models import AnimeModel
 
 
-@strawberry.input(AnimeModel)
+@strawberry_django.input(AnimeModel)
 class AnimeInput:
     mal_id: auto
     anilist_id: auto
