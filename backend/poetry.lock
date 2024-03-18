@@ -763,17 +763,17 @@ Django = ">=3.2"
 
 [[package]]
 name = "django-ltree-2"
-version = "0.1.5"
+version = "0.1.6"
 description = "Continual of django-ltree"
 optional = false
 python-versions = ">=3.10"
 files = [
-    {file = "django_ltree_2-0.1.5-py3-none-any.whl", hash = "sha256:4fc8c874fd65155472ea611580e3dada3e7a4e41fdc1699e8a0c7353300b1f0c"},
-    {file = "django_ltree_2-0.1.5.tar.gz", hash = "sha256:1379346fcd1eebad70a67b02565547186e67c110dc033265d2a7d20e932f8ceb"},
+    {file = "django_ltree_2-0.1.6-py3-none-any.whl", hash = "sha256:01b34d34bca09166a1a797e4fe3e872e18c14e9b060892e53527e3a891f81fca"},
+    {file = "django_ltree_2-0.1.6.tar.gz", hash = "sha256:fe55677ac631e08ba2732ab5c2d170cde4b0c08b5c59c0585e0e42c9a4de3774"},
 ]
 
 [package.dependencies]
-django = ">=5.0.2"
+django = ">=4.2"
 psycopg = ">=3.1.18"
 
 [[package]]
@@ -2378,4 +2378,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "e0b45593cc7811514379fcb2f8363c647d27e7145427cdad9d8680dcf4cddc09"
+content-hash = "58a3c717eb4b909eacec0600c272cc5cf5037878d293a1b8f1b2a5f000cdaccc"
