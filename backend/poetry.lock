@@ -1952,13 +1952,13 @@ files = [
 
 [[package]]
 name = "types-markdown"
-version = "3.5.0.20240311"
+version = "3.6.0.20240316"
 description = "Typing stubs for Markdown"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "types-Markdown-3.5.0.20240311.tar.gz", hash = "sha256:4c58ef33ee278183c540a58e599cbe97090f655302b6ef65a1084c4b32d748a4"},
-    {file = "types_Markdown-3.5.0.20240311-py3-none-any.whl", hash = "sha256:508fedc02601aa8943d0adbb390e2b4f00deab07870a51b411f6653d8e29e390"},
+    {file = "types-Markdown-3.6.0.20240316.tar.gz", hash = "sha256:de9fb84860b55b647b170ca576895fcca61b934a6ecdc65c31932c6795b440b8"},
+    {file = "types_Markdown-3.6.0.20240316-py3-none-any.whl", hash = "sha256:d3ecd26a940781787c7b57a0e3c9d77c150db64e12989ef687059edc83dfd78a"},
 ]
 
 [[package]]
@@ -2377,4 +2377,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "58a3c717eb4b909eacec0600c272cc5cf5037878d293a1b8f1b2a5f000cdaccc"
+content-hash = "2b2cf4153732c45d8554c1de3ec236d7b2e02158d4e0f759c20da6a59dda843d"
