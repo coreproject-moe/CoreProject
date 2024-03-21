@@ -1,5 +1,6 @@
 from typing import TypeVar
 
+import strawberry_django
 import strawberry
 from apps.anime.models import AnimeModel
 from django.contrib.postgres.search import TrigramSimilarity
@@ -14,7 +15,7 @@ from .staff import StaffFilter
 T = TypeVar("T")
 
 
-@strawberry.django.filters.filter(AnimeModel)
+@strawberry_django.filters.filter(AnimeModel)
 class AnimeFilter:
     id: int | None
 

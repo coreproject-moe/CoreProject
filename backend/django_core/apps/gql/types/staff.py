@@ -2,14 +2,15 @@ import strawberry
 from apps.staffs.models import StaffAlternateNameModel, StaffModel
 
 from ..filters.staff import StaffFilter
+import strawberry_django
 
 
-@strawberry.django.type(StaffAlternateNameModel)
+@strawberry_django.type(StaffAlternateNameModel)
 class StaffAlternateName:
     name: str
 
 
-@strawberry.django.type(StaffModel, filters=StaffFilter)
+@strawberry_django.type(StaffModel, filters=StaffFilter)
 class Staff:
     mal_id: int
     kitsu_id: int

@@ -3,13 +3,14 @@ from typing import Any
 from django.http import HttpRequest, HttpResponse
 from apps.user.models import CustomUser
 from .models import Token
-
+from functools import cached_property
 # Create your views here.
 
 
 class GraphQLView(StrawberryDjangoGraphQLView):
-    def get_user(self, request: HttpRequest) -> CustomUser | None:
-        token = request.headers.get("Authorization", None)
+    @cached_property
+    def get_user(self) -> CustomUser | None:
+        token = self.request.headers.get("Authorization", None)
         try:
             token_instance = Token.objects.get(token=token.split(" ")[-1])
             return token_instance.user
@@ -18,6 +19,6 @@ class GraphQLView(StrawberryDjangoGraphQLView):
             return None
 
     def get_context(self, request: HttpRequest, response: HttpResponse) -> Any:
-        context = {"user": self.get_user(request), request: request, response: response}
+        context = {"user": self.get_user, request: request, response: response}
 
         return context
