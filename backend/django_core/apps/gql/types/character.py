@@ -1,10 +1,10 @@
-import strawberry
+import strawberry_django
 from apps.characters.models import CharacterModel
 
 from ..filters.character import CharacterFilter
 
 
-@strawberry.django.type(CharacterModel, filters=CharacterFilter)
+@strawberry_django.type(CharacterModel, filters=CharacterFilter)
 class Character:
     mal_id: int
     kitsu_id: int

@@ -1,6 +1,7 @@
 from typing import TypeVar
 
 import strawberry
+import strawberry_django
 from apps.characters.models import CharacterModel
 from django.contrib.postgres.search import TrigramSimilarity
 from django.db.models.functions import Greatest
@@ -8,7 +9,7 @@ from django.db.models.functions import Greatest
 T = TypeVar("T")
 
 
-@strawberry.django.filter(CharacterModel)
+@strawberry_django.filter(CharacterModel)
 class CharacterFilter:
     mal_id: int | None
     kitsu_id: int | None
