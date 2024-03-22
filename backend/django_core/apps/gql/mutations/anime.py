@@ -8,6 +8,7 @@ from apps.anime.models.anime_theme import AnimeThemeModel
 from apps.characters.models import CharacterModel
 from apps.producers.models import ProducerModel
 from apps.staffs.models import StaffModel
+from apps.gql.functions.dictionary import clean_dictionary
 
 import strawberry
 import strawberry_django
@@ -49,11 +50,10 @@ class AnimeMutation:
             "characters": data.characters,
             "name_synonyms": data.name_synonyms,
         }
-        model_data = {
-            key: value
-            for key, value in kwargs.items()
-            if key
-            not in [
+
+        model_data = clean_dictionary(
+            dictionary=kwargs,
+            ignored_keys=[
                 # Ignore M2M relations
                 "name_synonyms",
                 "genres",
@@ -62,10 +62,8 @@ class AnimeMutation:
                 "producers",
                 "characters",
                 "staffs",
-            ]
-            and value != UNSET
-        }
-
+            ],
+        )
         instance = AnimeModel.objects.create(**model_data)
 
         if name_synonyms_list := kwargs.get("name_synonyms", None):
