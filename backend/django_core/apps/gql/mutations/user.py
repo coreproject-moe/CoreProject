@@ -30,9 +30,8 @@ class UserMutation:
         request: HttpRequest = cast(HttpRequest, info.context["request"])
         try:
             token_instance = Token.objects.get(token=token)
-            if token_instance.user == request.user:
-                token_instance.delete()
-                django_logout(request)
-                return True
+            token_instance.delete()
+            django_logout(request)
+            return True
         except Token.DoesNotExist:
             return False
