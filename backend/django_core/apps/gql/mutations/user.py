@@ -22,3 +22,7 @@ class UserMutation:
             django_login(request, user)
             token, _ = Token.objects.get_or_create(user=user.pk)
             return token
+
+    @strawberry_django.mutation()
+    def logout(self, info: Info, data: TokenType) -> bool:
+        pass
