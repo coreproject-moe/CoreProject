@@ -7,14 +7,40 @@ export class JSONToTree {
     constructor({ json, old_json, specific_path }:
         { json: Comment[]; old_json?: Comment[], specific_path?: string }
     ) {
-        if (old_json) {
+        if (old_json && specific_path) {
             // DO NOT DEEP MERGE
             const new_arr = this.convert_to_tree_given_path(json, specific_path);
-            this.#json = _.merge(old_json, new_arr);
+            this.#json = this.merge_tree_branches(new_arr, old_json);
         } else {
             this.#json = this.convert_to_tree_given_path(json, specific_path);
-        }
-    }
+        };
+    };
+
+    private merge_tree_branches(new_branch: Comment[], old_branch: Comment[]) {
+        function merge(branch: Comment, target: Comment[]) {
+            const path = branch.path;
+            const existing_branch_idx = target.findIndex((t) => t.path === path);
+            // if branch found, then modify its reference arr
+            if (existing_branch_idx !== -1) {
+                target[existing_branch_idx] = branch;
+                return;
+            };
+
+            // chcek for children
+            for (let i = 0; i < target.length; i++) {
+                const child_branch = target[i];
+                if (child_branch.child && child_branch.child.length > 0) {
+                    merge(branch, child_branch.child);
+                };
+            };
+        };
+
+        new_branch.forEach((branch) => {
+            merge(branch, old_branch);
+        });
+
+        return old_branch;
+    };
 
     private convert_to_tree_given_path(data: Comment[], specific_path?: string): Comment[] {
         const tree: Comment[] = [];
@@ -50,9 +76,9 @@ export class JSONToTree {
         });
 
         return tree;
-    }
+    };
 
     public build() {
         return this.#json;
-    }
-}
+    };
+};

@@ -100,9 +100,9 @@
         }
     };
 
-    const handle_more_click = async () => {
+    const handle_more_click = async (path: string) => {
         dispatch("moreComments", {
-            path: item.path,
+            path: path,
         });
     };
 </script>
@@ -245,10 +245,11 @@
         <!-- Render replies here -->
         {#if !_.isEmpty(item.child) && item.childrens !== 0 && !item.collapse}
             <div class="mt-5 flex flex-col gap-5 md:mt-[1.5vw] md:gap-[1.5vw]">
-                {#each item.child as comment, index}
+                {#each item.child as comment}
                     <svelte:self
                         {submit_url}
                         item={comment}
+                        on:moreComments={(e) => handle_more_click(e.detail.path)}
                     />
                 {/each}
             </div>
@@ -272,7 +273,7 @@
         </svg>
 
         <button
-            on:click={handle_more_click}
+            on:click={() => handle_more_click(item.path)}
             class="btn btn-secondary flex h-max min-h-max items-center p-0 gap-2 md:gap-[0.75vw]"
         >
             <div class="grid rotate-45 place-items-center rounded-full bg-neutral size-5 md:size-[1.5vw]">

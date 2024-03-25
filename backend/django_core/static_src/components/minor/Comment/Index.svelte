@@ -102,8 +102,13 @@
                 });
             }
         },
-        get_more_comments = (e: CustomEvent) => {
-            console.log("Get more paths for" + e.detail);
+        get_more_comments = async (e: CustomEvent) => {
+            const comment_path = e.detail.path;
+            const comment_api_url = `/api/v2/comments/?path=${comment_path}`;
+            specific_comment_path = comment_path;
+            get_comments(comment_api_url).then((res) => {
+                tree_branch = res;
+            });
         };
 
     // Store to trigger updates
