@@ -101,7 +101,7 @@
     };
 
     const handle_more_click = async (path: string) => {
-        dispatch("moreComments", {
+        dispatch("more_comments", {
             path: path,
         });
     };
@@ -249,7 +249,7 @@
                     <svelte:self
                         {submit_url}
                         item={comment}
-                        on:moreComments={(e) => handle_more_click(e.detail.path)}
+                        on:more_comments={(e) => handle_more_click(e.detail.path)}
                     />
                 {/each}
             </div>

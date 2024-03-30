@@ -143,7 +143,7 @@
                 <CommentBlock
                     item={branch}
                     {submit_url}
-                    on:moreComments={get_more_comments}
+                    on:more_comments={get_more_comments}
                 />
             {/each}
         </div>
