@@ -3,14 +3,21 @@ import * as _ from "lodash-es";
 
 export class JSONToTree {
     #json: Comment[] = new Array<Comment>();
+    #root_path: string | undefined | null = null;
 
-    constructor({ json, specific_path }:
-        { json: Comment[]; specific_path?: string }
-    ) {
-        this.#json = this.convert_to_tree_given_path(json, specific_path);
-    };
+    constructor({ json, old_json, root_path }: { json: Comment[]; old_json?: Comment[]; root_path?: string }) {
+        this.#root_path = root_path;
 
-    private convert_to_tree_given_path(data: Comment[], specific_path?: string): Comment[] {
+        if (old_json) {
+            // DO NOT DEEP MERGE
+            const new_arr = this.convert_to_tree_given_path(json);
+            this.#json = _.merge(old_json, new_arr);
+        } else {
+            this.#json = this.convert_to_tree_given_path(json);
+        }
+    }
+
+    private convert_to_tree_given_path(data: Comment[]): Comment[] {
         const tree: Comment[] = [];
 
         // Create a dictionary to quickly access nodes by their path
@@ -22,14 +29,14 @@ export class JSONToTree {
                 ...node,
                 child: [],
                 depth: node.path.split(".").length,
-                collapse: node.depth > 1 && node.ratio < 0 || node.ratio < 0 && specific_path !== node.path,
+                collapse: (node.depth > 1 && node.ratio < 0) || node.ratio < 0
             };
             node_dictionary[node.path] = new_node;
 
-            // If the node is a root-level node or specific node, add it to the tree
-            if (specific_path && specific_path === node.path || !node.path.includes(".")) {
+            // If the node is a root-level node, add it to the tree
+            if (!node.path.includes(".") || node.path == this.#root_path) {
                 tree.push(new_node);
-            };
+            }
         });
 
         // Second pass: Connect child nodes to their parent nodes
@@ -42,11 +49,10 @@ export class JSONToTree {
                 parent_node.child.push(node_dictionary[node.path]);
             }
         });
-
         return tree;
-    };
+    }
 
     public build() {
         return this.#json;
-    };
-};
+    }
+}
