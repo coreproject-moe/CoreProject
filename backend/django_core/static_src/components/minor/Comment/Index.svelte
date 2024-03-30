@@ -110,7 +110,7 @@
 
     // Store to trigger updates
     comment_needs_update.subscribe(async (val) => {
-        if (val === true) {
+        if (val) {
             // This should not trigger tree loading thing;
             get_comments(api_url)
                 .then((res) => {
@@ -149,7 +149,7 @@
     {/if}
 
     <!-- Intersection observer must be at last  -->
-    {#if next_url !== null}
+    {#if !_.isNull(next_url)}
         <IntersectionOberser
             on:intersect={() => {
                 get_next_comments();
