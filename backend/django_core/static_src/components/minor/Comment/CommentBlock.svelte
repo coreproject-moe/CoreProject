@@ -11,8 +11,6 @@
     import { onMount } from "svelte";
     import { user_authenticated } from "$stores/user";
 
-    import { createEventDispatcher } from "svelte";
-
     // Functions
     import { cn } from "$functions/classname";
     import { reverse } from "$functions/urls";
@@ -29,9 +27,9 @@
     import Cross from "$icons/Cross/Index.svelte";
     import Expand from "$icons/Expand/Index.svelte";
     import { breakpoint } from "$stores/breakpoints";
-
-    const dispatch = createEventDispatcher();
-
+    import { JSONToTree } from "./json_to_tree";
+    import { get } from "svelte/store";
+    import { tree_branch } from "./store";
     // Bindings
     let user_reaction: typeof item.user_reaction,
         ratio: typeof item.ratio,
@@ -100,10 +98,39 @@
         }
     };
 
-    const handle_more_click = async (path: string) => {
-        dispatch("more_comments", {
-            path: path,
+    const handle_more_click = async () => {
+        const comment_path = item.path;
+        const comment_api_url = `/api/v2/comments/?path=${comment_path}`;
+
+        const res = await fetch(comment_api_url, {
+            method: "GET",
+            headers: {
+                "X-CSRFToken": get_csrf_token()
+            },
+            signal: AbortSignal.timeout(FETCH_TIMEOUT)
         });
+        const value = (await res.json()) as any;
+
+        switch (res.status) {
+            case 200:
+                const js_object = {
+                    json: value.results,
+                    old_json: get(tree_branch)
+                };
+
+                tree_branch.set(new JSONToTree(js_object).build() as unknown as Comment[]);
+
+            case 404:
+                // No comment exists
+                // Return empty array
+                if (!value?.detail?.toLowerCase().includes("not found")) {
+                    throw new Error(`Data fetched from backend contains error`);
+                }
+                return new Array<Comment>();
+
+            default:
+                throw new Error(await res.text());
+        }
     };
 </script>
 
@@ -202,7 +229,7 @@
                 <button
                     class={cn(`btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw]`)}
                     on:click|preventDefault={() => {
-                        switch(reply_type) {
+                        switch (reply_type) {
                             case "box":
                                 reply_shown = !reply_shown;
                                 break;
@@ -214,7 +241,7 @@
                                 break;
                             default:
                                 break;
-                        };
+                        }
                     }}
                 >
                     <Chat class="w-4 md:w-[1vw]" />
@@ -249,7 +276,6 @@
                     <svelte:self
                         {submit_url}
                         item={comment}
-                        on:more_comments={(e) => handle_more_click(e.detail.path)}
                     />
                 {/each}
             </div>
@@ -258,9 +284,9 @@
 </div>
 
 {#if _.isEmpty(item.child) && item.childrens !== 0 && !item.collapse}
-    <div class="flex items-end ml-2 md:ml-[0.55vw] md:gap-[0.5vw]">
+    <div class="ml-2 flex items-end md:ml-[0.55vw] md:gap-[0.5vw]">
         <svg
-            class="text-neutral w-7 md:w-[2vw]"
+            class="w-7 text-neutral md:w-[2vw]"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 15 15"
         >
@@ -273,11 +299,11 @@
         </svg>
 
         <button
-            on:click={() => handle_more_click(item.path)}
-            class="btn btn-secondary flex h-max min-h-max items-center p-0 gap-2 md:gap-[0.75vw]"
+            on:click={handle_more_click}
+            class="btn btn-secondary flex h-max min-h-max items-center gap-2 p-0 md:gap-[0.75vw]"
         >
-            <div class="grid rotate-45 place-items-center rounded-full bg-neutral size-5 md:size-[1.5vw]">
-                <Cross class="p-0 text-accent w-4 md:w-[1vw]" />
+            <div class="grid size-5 rotate-45 place-items-center rounded-full bg-neutral md:size-[1.5vw]">
+                <Cross class="w-4 p-0 text-accent md:w-[1vw]" />
             </div>
             <span class="md:text-[1vw]">{item.childrens} More</span>
         </button>
