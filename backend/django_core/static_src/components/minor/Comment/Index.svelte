@@ -11,7 +11,7 @@
     import IntersectionOberser from "svelte-intersection-observer";
     import { get_csrf_token } from "$functions/get_csrf_token";
     import { FETCH_TIMEOUT } from "$constants/fetch";
-
+    import { tree_branch } from "./store";
     export let api_url: string;
     export let submit_url = "";
 
@@ -27,8 +27,6 @@
 
     let loading_state: "loading" | "error" | "loaded" = "loading",
         error: string | null = null;
-
-    let tree_branch: Comment[] = new Array<Comment>();
 
     let last_element: HTMLElement;
 
@@ -46,7 +44,7 @@
 
     onDestroy(() => {
         // Clean up
-        tree_branch = new Array<Comment>();
+        tree_branch.set(new Array<Comment>());
     });
 
     const get_comments = async (url: string) => {
@@ -86,7 +84,7 @@
         set_comments = async () => {
             get_comments(api_url)
                 .then((res) => {
-                    tree_branch = res;
+                    tree_branch.set(res);
                     loading_state = "loaded";
                 })
                 .catch((err: string) => {
@@ -97,7 +95,7 @@
         get_next_comments = async () => {
             if (next_url) {
                 get_comments(next_url).then((res) => {
-                    tree_branch = res;
+                    tree_branch.set(res);
                 });
             }
         },
@@ -105,7 +103,7 @@
             const comment_path = e.detail.path;
             const comment_api_url = `/api/v2/comments/?path=${comment_path}`;
             get_comments(comment_api_url).then((res) => {
-                tree_branch = res;
+                tree_branch.set(res);
             });
         };
 
@@ -115,7 +113,7 @@
             // This should not trigger tree loading thing;
             get_comments(api_url)
                 .then((res) => {
-                    tree_branch = res;
+                    tree_branch.set(res);
                 })
                 .catch((err: string) => {
                     loading_state = "error";
@@ -137,7 +135,7 @@
 {:else if loading_state === "loaded"}
     {#if !_.isEmpty(tree_branch)}
         <div class="flex flex-col gap-5 md:gap-[1.5vw]">
-            {#each tree_branch as branch}
+            {#each $tree_branch as branch}
                 <CommentBlock
                     item={branch}
                     {submit_url}

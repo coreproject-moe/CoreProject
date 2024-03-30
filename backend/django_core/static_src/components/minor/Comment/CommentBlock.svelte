@@ -28,7 +28,7 @@
     import Expand from "$icons/Expand/Index.svelte";
     import { breakpoint } from "$stores/breakpoints";
     import { JSONToTree } from "./json_to_tree";
-
+    import 
     // Bindings
     let user_reaction: typeof item.user_reaction,
         ratio: typeof item.ratio,
