@@ -3,8 +3,11 @@ import * as _ from "lodash-es";
 
 export class JSONToTree {
     #json: Comment[] = new Array<Comment>();
+    #root_path: string | undefined | null = null;
 
-    constructor({ json, old_json }: { json: Comment[]; old_json?: Comment[] }) {
+    constructor({ json, old_json, root_path }: { json: Comment[]; old_json?: Comment[]; root_path?: string }) {
+        this.#root_path = root_path;
+
         if (old_json) {
             // DO NOT DEEP MERGE
             const new_arr = this.convert_to_tree_given_path(json);
@@ -31,7 +34,7 @@ export class JSONToTree {
             node_dictionary[node.path] = new_node;
 
             // If the node is a root-level node, add it to the tree
-            if (!node.path.includes(".")) {
+            if (!node.path.includes(".") || node.path == this.#root_path) {
                 tree.push(new_node);
             }
         });

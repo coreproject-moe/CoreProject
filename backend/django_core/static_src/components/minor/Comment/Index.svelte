@@ -61,12 +61,14 @@
             switch (res.status) {
                 case 200:
                     next_url = value.next;
-
-                    return new JSONToTree({
+                    const x = new JSONToTree({
                         json: value.results,
-                        old_json: tree_branch
+                        old_json: tree_branch,
+                        root_path:
                     }).build() as unknown as Comment[];
 
+                
+                    return x;
                 case 404:
                     // No comment exists
                     // Return empty array
@@ -83,6 +85,7 @@
             get_comments(api_url)
                 .then((res) => {
                     tree_branch = res;
+                    console.log(res);
                     loading_state = "loaded";
                 })
                 .catch((err: string) => {
