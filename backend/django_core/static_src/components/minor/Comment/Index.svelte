@@ -134,7 +134,7 @@
         <ErrorSvelteComponent {error} />
     {/if}
 {:else if loading_state === "loaded"}
-    {#if $tree_branch.length != 0}
+    {#if !_.isEmpty($tree_branch)}
         <div class="flex flex-col gap-5 md:gap-[1.5vw]">
             {#each $tree_branch as branch}
                 <CommentBlock
