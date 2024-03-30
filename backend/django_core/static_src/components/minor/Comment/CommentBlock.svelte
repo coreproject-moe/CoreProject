@@ -28,7 +28,8 @@
     import Expand from "$icons/Expand/Index.svelte";
     import { breakpoint } from "$stores/breakpoints";
     import { JSONToTree } from "./json_to_tree";
-    import 
+    import { get } from "svelte/store";
+    import { tree_branch } from "./store";
     // Bindings
     let user_reaction: typeof item.user_reaction,
         ratio: typeof item.ratio,
@@ -101,16 +102,36 @@
         const comment_path = item.path;
         const comment_api_url = `/api/v2/comments/?path=${comment_path}`;
 
-
-        
-        fetch_comments(comment_api_url).then((res) => {
-            const new_comment = new JSONToTree({
-                json: res.results,
-                specific_path: comment_path
-            }).build() as unknown as Comment[];
-
-            item = new_comment[0];
+        const res = await fetch(comment_api_url, {
+            method: "GET",
+            headers: {
+                "X-CSRFToken": get_csrf_token()
+            },
+            signal: AbortSignal.timeout(FETCH_TIMEOUT)
         });
+        const value = (await res.json()) as any;
+
+        switch (res.status) {
+            case 200:
+                const next_url = value.next;
+                const js_object = {
+                    json: value.results,
+                    old_json: get(tree_branch)
+                };
+
+                tree_branch.set(new JSONToTree(js_object).build() as unknown as Comment[]);
+
+            case 404:
+                // No comment exists
+                // Return empty array
+                if (!value?.detail?.toLowerCase().includes("not found")) {
+                    throw new Error(`Data fetched from backend contains error`);
+                }
+                return new Array<Comment>();
+
+            default:
+                throw new Error(await res.text());
+        }
     };
 </script>
 
