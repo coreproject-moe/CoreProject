@@ -32,15 +32,12 @@
 
     let last_element: HTMLElement;
 
-    let specific_comment_path: string | undefined;
-
     onMount(() => {
         const url_params = new URLSearchParams(window.location.search);
         if (url_params.has("comment")) {
             const comment_path = url_params.get("comment");
             const updated_api_url = `/api/v2/comments/?path=${comment_path}`;
             api_url = updated_api_url;
-            specific_comment_path = comment_path!;
         }
 
         set_comments();
@@ -86,7 +83,6 @@
             get_comments(api_url)
                 .then((res) => {
                     tree_branch = res;
-                    console.log(res);
                     loading_state = "loaded";
                 })
                 .catch((err: string) => {
@@ -104,7 +100,6 @@
         get_more_comments = async (e: CustomEvent) => {
             const comment_path = e.detail.path;
             const comment_api_url = `/api/v2/comments/?path=${comment_path}`;
-            specific_comment_path = comment_path;
             get_comments(comment_api_url).then((res) => {
                 tree_branch = res;
             });
