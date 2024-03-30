@@ -41,7 +41,7 @@
             const updated_api_url = `/api/v2/comments/?path=${comment_path}`;
             api_url = updated_api_url;
             specific_comment_path = comment_path!;
-        };
+        }
 
         set_comments();
     });
@@ -67,8 +67,7 @@
 
                     return new JSONToTree({
                         json: value.results,
-                        old_json: tree_branch,
-                        specific_path: specific_comment_path,
+                        old_json: tree_branch
                     }).build() as unknown as Comment[];
 
                 case 404:
