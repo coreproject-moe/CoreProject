@@ -32,10 +32,11 @@
 
     let last_element: HTMLElement;
 
+    const url_params = new URLSearchParams(window.location.search);
+    const comment_path = url_params.get("comment");
+
     onMount(() => {
-        const url_params = new URLSearchParams(window.location.search);
         if (url_params.has("comment")) {
-            const comment_path = url_params.get("comment");
             const updated_api_url = `/api/v2/comments/?path=${comment_path}`;
             api_url = updated_api_url;
         }
@@ -61,13 +62,15 @@
             switch (res.status) {
                 case 200:
                     next_url = value.next;
-                    const x = new JSONToTree({
+                    const js_object = {
                         json: value.results,
-                        old_json: tree_branch,
-                        root_path:
-                    }).build() as unknown as Comment[];
+                        old_json: tree_branch
+                    };
+                    if (url_params.has("comment")) {
+                        Object.assign(js_object, { root_path: comment_path });
+                    }
+                    const x = new JSONToTree(js_object).build() as unknown as Comment[];
 
-                
                     return x;
                 case 404:
                     // No comment exists
