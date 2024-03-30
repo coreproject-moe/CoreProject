@@ -113,7 +113,6 @@
 
         switch (res.status) {
             case 200:
-                const next_url = value.next;
                 const js_object = {
                     json: value.results,
                     old_json: get(tree_branch)
