@@ -63,15 +63,14 @@
                 case 200:
                     next_url = value.next;
                     const js_object = {
-                        json: value.results,
-                        old_json: tree_branch
+                        json: value.results
                     };
-                    if (url_params.has("comment")) {
-                        Object.assign(js_object, { root_path: comment_path });
-                    }
-                    const x = new JSONToTree(js_object).build() as unknown as Comment[];
 
-                    return x;
+                    if (!_.isEmpty(tree_branch)) Object.assign(js_object, { old_json: tree_branch });
+                    if (url_params.has("comment")) Object.assign(js_object, { root_path: comment_path });
+
+                    return new JSONToTree(js_object).build() as unknown as Comment[];
+
                 case 404:
                     // No comment exists
                     // Return empty array
