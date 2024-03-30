@@ -11,6 +11,7 @@
     import IntersectionOberser from "svelte-intersection-observer";
     import { get_csrf_token } from "$functions/get_csrf_token";
     import { FETCH_TIMEOUT } from "$constants/fetch";
+    import { fetch_comments } from "./functions";
 
     export let api_url: string;
     export let submit_url = "";
@@ -52,42 +53,23 @@
     });
 
     const get_comments = async (url: string) => {
-            const res = await fetch(url, {
-                method: "GET",
-                headers: {
-                    "X-CSRFToken": get_csrf_token()
-                },
-                signal: AbortSignal.timeout(FETCH_TIMEOUT)
-            });
-            const value = (await res.json()) as CommentResponse;
-
-            switch (res.status) {
-                case 200:
-                    next_url = value.next;
+            return fetch_comments(url)
+                .then((res) => {
+                    next_url = res.next;
 
                     return new JSONToTree({
-                        json: value.results,
-                        old_json: tree_branch,
+                        json: res.results,
                         specific_path: specific_comment_path,
                     }).build() as unknown as Comment[];
-
-                case 404:
-                    // No comment exists
-                    // Return empty array
-                    if (!value?.detail?.toLowerCase().includes("not found")) {
-                        throw new Error(`Data fetched from backend contains error`);
-                    }
-                    return new Array<Comment>();
-
-                default:
-                    throw new Error(await res.text());
-            }
+                })
+                .catch((err) => {
+                    throw err;
+                });
         },
         set_comments = async () => {
             get_comments(api_url)
                 .then((res) => {
                     tree_branch = res;
-                    console.log(res);
                     loading_state = "loaded";
                 })
                 .catch((err: string) => {

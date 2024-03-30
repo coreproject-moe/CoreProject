@@ -4,16 +4,10 @@ import * as _ from "lodash-es";
 export class JSONToTree {
     #json: Comment[] = new Array<Comment>();
 
-    constructor({ json, old_json, specific_path }:
-        { json: Comment[]; old_json?: Comment[], specific_path?: string }
+    constructor({ json, specific_path }:
+        { json: Comment[]; specific_path?: string }
     ) {
-        if (old_json && specific_path) {
-            // DO NOT DEEP MERGE
-            const new_arr = this.convert_to_tree_given_path(json, specific_path);
-            this.#json = this.merge_tree_branches(new_arr, old_json);
-        } else {
-            this.#json = this.convert_to_tree_given_path(json, specific_path);
-        };
+        this.#json = this.convert_to_tree_given_path(json, specific_path);
     };
 
     private merge_tree_branches(new_branch: Comment[], old_branch: Comment[]) {

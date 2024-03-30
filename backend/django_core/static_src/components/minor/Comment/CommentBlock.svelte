@@ -11,8 +11,6 @@
     import { onMount } from "svelte";
     import { user_authenticated } from "$stores/user";
 
-    import { createEventDispatcher } from "svelte";
-
     // Functions
     import { cn } from "$functions/classname";
     import { reverse } from "$functions/urls";
@@ -29,8 +27,8 @@
     import Cross from "$icons/Cross/Index.svelte";
     import Expand from "$icons/Expand/Index.svelte";
     import { breakpoint } from "$stores/breakpoints";
-
-    const dispatch = createEventDispatcher();
+    import { fetch_comments } from "./functions";
+    import { JSONToTree } from "./json_to_tree";
 
     // Bindings
     let user_reaction: typeof item.user_reaction,
@@ -100,9 +98,17 @@
         }
     };
 
-    const handle_more_click = async (path: string) => {
-        dispatch("more_comments", {
-            path: path,
+    const handle_more_click = async () => {
+        const comment_path = item.path;
+        const comment_api_url = `/api/v2/comments/?path=${comment_path}`;
+
+        fetch_comments(comment_api_url).then((res) => {
+            const new_comment = new JSONToTree({
+                json: res.results,
+                specific_path: comment_path,
+            }).build() as unknown as Comment[];
+
+            item = new_comment[0];
         });
     };
 </script>
@@ -249,7 +255,6 @@
                     <svelte:self
                         {submit_url}
                         item={comment}
-                        on:more_comments={(e) => handle_more_click(e.detail.path)}
                     />
                 {/each}
             </div>
@@ -273,7 +278,7 @@
         </svg>
 
         <button
-            on:click={() => handle_more_click(item.path)}
+            on:click={handle_more_click}
             class="btn btn-secondary flex h-max min-h-max items-center p-0 gap-2 md:gap-[0.75vw]"
         >
             <div class="grid rotate-45 place-items-center rounded-full bg-neutral size-5 md:size-[1.5vw]">
