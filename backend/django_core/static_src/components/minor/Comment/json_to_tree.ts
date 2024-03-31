@@ -39,8 +39,6 @@ export class JSONToTree {
             };
         });
 
-        console.log("tree", tree);
-
         // Second pass: Connect child nodes to their parent nodes
         data.forEach((node: Comment) => {
             const path_segments = node.path.split(".");
