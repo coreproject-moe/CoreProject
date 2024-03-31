@@ -65,10 +65,11 @@
                     next_url = value.next;
                     const js_object = {
                         json: value.results,
-                        root_path: root_path,
                     };
 
                     if (!_.isEmpty(tree_branch)) Object.assign(js_object, { old_json: tree_branch });
+                    if (url_params.has("comment")) Object.assign(js_object, { root_path: root_path });
+
                     return new JSONToTree(js_object).build() as unknown as Comment[];
 
                 case 404:
@@ -100,16 +101,6 @@
                     tree_branch = res;
                 });
             }
-        },
-        get_more_comments = async (e: CustomEvent) => {
-            const comment_path = e.detail.path;
-            const comment_api_url = `/api/v2/comments/?path=${comment_path}`;
-
-            root_path = comment_path;
-            get_comments(comment_api_url).then((res) => {
-                console.log(res);
-                tree_branch = res;
-            });
         };
 
     // Store to trigger updates
@@ -144,7 +135,6 @@
                 <CommentBlock
                     item={branch}
                     {submit_url}
-                    on:more_comments={get_more_comments}
                 />
             {/each}
         </div>
