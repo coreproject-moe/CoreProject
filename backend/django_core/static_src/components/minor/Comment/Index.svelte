@@ -32,15 +32,13 @@
 
     let last_element: HTMLElement;
 
-    const url_params = new URLSearchParams(window.location.search);
-    let root_path: string | undefined;
+    let url_params = new URLSearchParams(window.location.search);
+    let root_path = url_params.get("comment");
 
     onMount(() => {
         if (url_params.has("comment")) {
-            root_path = String(url_params.get("comment"));
-            const updated_api_url = `/api/v2/comments/?path=${root_path}`;
-            api_url = updated_api_url;
-        }
+            api_url = `/api/v2/comments/?path=${root_path}`;
+        };
 
         set_comments();
     });
