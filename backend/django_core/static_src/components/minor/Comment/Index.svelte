@@ -33,11 +33,12 @@
     let last_element: HTMLElement;
 
     const url_params = new URLSearchParams(window.location.search);
-    const comment_path = url_params.get("comment");
+    let root_path: string | undefined;
 
     onMount(() => {
         if (url_params.has("comment")) {
-            const updated_api_url = `/api/v2/comments/?path=${comment_path}`;
+            root_path = String(url_params.get("comment"));
+            const updated_api_url = `/api/v2/comments/?path=${root_path}`;
             api_url = updated_api_url;
         }
 
@@ -63,11 +64,12 @@
                 case 200:
                     next_url = value.next;
                     const js_object = {
-                        json: value.results
+                        json: value.results,
+                        root_path: root_path,
                     };
 
                     if (!_.isEmpty(tree_branch)) Object.assign(js_object, { old_json: tree_branch });
-                    if (url_params.has("comment")) Object.assign(js_object, { root_path: comment_path });
+                    if (url_params.has("comment")) Object.assign(js_object);
 
                     return new JSONToTree(js_object).build() as unknown as Comment[];
 
@@ -87,7 +89,6 @@
             get_comments(api_url)
                 .then((res) => {
                     tree_branch = res;
-                    console.log(res);
                     loading_state = "loaded";
                 })
                 .catch((err: string) => {
@@ -105,7 +106,10 @@
         get_more_comments = async (e: CustomEvent) => {
             const comment_path = e.detail.path;
             const comment_api_url = `/api/v2/comments/?path=${comment_path}`;
+
+            root_path = comment_path;
             get_comments(comment_api_url).then((res) => {
+                console.log(res);
                 tree_branch = res;
             });
         };
