@@ -5,7 +5,7 @@
     import Markdown from "$components/minor/Markdown/Index.svelte";
     import CommentBox from "$components/specific/CommentBox/Index.svelte";
 
-    import type { Comment } from "$types/comment";
+    import type { Comment, CommentResponse } from "$types/comment";
     import { FETCH_TIMEOUT } from "$constants/fetch";
     import * as _ from "lodash-es";
     import { onMount } from "svelte";
@@ -27,6 +27,7 @@
     import Cross from "$icons/Cross/Index.svelte";
     import Expand from "$icons/Expand/Index.svelte";
     import { breakpoint } from "$stores/breakpoints";
+    import { JSONToTree } from "./json_to_tree";
 
     // Bindings
     let user_reaction: typeof item.user_reaction,
@@ -97,8 +98,43 @@
         }
     };
 
-    const handle_more_click = () => {
-        console.log("CLicked");
+    const handle_more_click = async () => {
+        const url = `/api/v2/comments/?path=${item.path}`;
+
+        const res = await fetch(url, {
+            method: "GET",
+            headers: {
+                "X-CSRFToken": get_csrf_token()
+            },
+            signal: AbortSignal.timeout(FETCH_TIMEOUT)
+        });
+        const value = (await res.json()) as CommentResponse;
+
+        switch (res.status) {
+            case 200:
+                const js_object = {
+                    json: value.results,
+                    root_path: item.path,
+                };
+
+                const tree_item = new JSONToTree(js_object).build() as unknown as Comment[];
+                // JSONToTree always returns an array
+                // Processed item is always first (no other elements exists)
+                item = tree_item[0];
+                break;
+
+            case 404:
+                // No comment exists
+                // Return empty array
+                if (!value?.detail?.toLowerCase().includes("not found")) {
+                    throw new Error(`Data fetched from backend contains error`);
+                }
+                // return new Array<Comment>();
+                break;
+
+            default:
+                throw new Error(await res.text());
+        };
     };
 </script>
 

@@ -4,7 +4,7 @@
     import CommentSkeleton from "$components/minor/Comment/Skeleton.svelte";
     import Empty from "./Empty.svelte";
     import ErrorSvelteComponent from "./Error.svelte";
-    import type { Comment } from "$types/comment";
+    import type { Comment, CommentResponse } from "$types/comment";
     import { comment_needs_update } from "./store";
     import { onDestroy, onMount } from "svelte";
     import * as _ from "lodash-es";
@@ -15,13 +15,6 @@
     export let api_url: string;
     export let submit_url = "";
 
-    interface CommentResponse {
-        detail?: string;
-        count: number;
-        next: null | string;
-        previous: null | string;
-        results: Comment[];
-    }
     // This is set from backend
     let next_url: string | null;
 
