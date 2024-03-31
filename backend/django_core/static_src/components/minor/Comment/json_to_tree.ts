@@ -29,15 +29,17 @@ export class JSONToTree {
                 ...node,
                 child: [],
                 depth: node.path.split(".").length,
-                collapse: (node.depth > 1 && node.ratio < 0) || node.ratio < 0
+                collapse: (node.depth > 1 && node.ratio < 0) || node.ratio < 0 && this.#root_path !== node.path,
             };
             node_dictionary[node.path] = new_node;
 
             // If the node is a root-level node, add it to the tree
-            if (!node.path.includes(".") || node.path == this.#root_path) {
+            if (!node.path.includes(".") || node.path === this.#root_path) {
                 tree.push(new_node);
-            }
+            };
         });
+
+        console.log("tree", tree);
 
         // Second pass: Connect child nodes to their parent nodes
         data.forEach((node: Comment) => {
