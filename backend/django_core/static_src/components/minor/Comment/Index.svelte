@@ -69,8 +69,6 @@
                     };
 
                     if (!_.isEmpty(tree_branch)) Object.assign(js_object, { old_json: tree_branch });
-                    if (url_params.has("comment")) Object.assign(js_object);
-
                     return new JSONToTree(js_object).build() as unknown as Comment[];
 
                 case 404:
