@@ -18,3 +18,11 @@ export type Comment = {
     collapse: boolean;
     depth: number;
 };
+
+export interface CommentResponse {
+    detail?: string;
+    count: number;
+    next: null | string;
+    previous: null | string;
+    results: Comment[];
+}
