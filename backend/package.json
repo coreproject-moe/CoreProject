@@ -15,7 +15,7 @@
         "@macfja/svelte-persistent-store": "^2.4.1",
         "@tailwindcss/aspect-ratio": "^0.4.2",
         "@tailwindcss/forms": "^0.5.7",
-        "@tailwindcss/typography": "^0.5.10",
+        "@tailwindcss/typography": "^0.5.12",
         "@types/nprogress": "^0.2.3",
         "@zxcvbn-ts/core": "^3.0.4",
         "@zxcvbn-ts/language-ar": "^3.1.0",
