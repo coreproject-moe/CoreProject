@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+
 import os
 from pathlib import Path
 
@@ -89,6 +90,8 @@ INSTALLED_APPS = [
     "django_admin_hstore_widget",
     # Block users
     "defender",
+    # GQL
+    "strawberry_django",
     # Tree
     "django_ltree",
     # Api
@@ -103,6 +106,7 @@ INSTALLED_APPS = [
     # Vite Plugin
     "django_vite",
     # Models
+    "apps.gql",
     "apps.comments",
     "apps.pages",
     "apps.anime",

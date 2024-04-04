@@ -8,8 +8,6 @@ from rest_framework import mixins
 from ...filters.comments import CommentFilter
 from ...serializers.comments import CommentSerializer
 
-from django.db.models import Count
-
 
 class CommentViewSet(
     mixins.RetrieveModelMixin,

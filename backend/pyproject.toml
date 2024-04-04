@@ -8,7 +8,7 @@ license = "AGPL-3.0-only"
 
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = ">=3.12,<3.13"
 django = {version = '>=5.0b1', extras = ['argon2']}
 # First Party ( Redis )
 # redis = {extras = ['hiredis'], version = ">=4.5.4"}
@@ -68,6 +68,9 @@ crispy-bootstrap4 = ">=2023.1"
 django-htmx = ">=1.17.0"
 # Markdown
 django-vite = "^3.0.3"
+# Graphql
+strawberry-graphql = "^0.220.0"
+strawberry-graphql-django = "^0.34.0"
 
 
 [tool.poetry.group.dev.dependencies]
