@@ -4,7 +4,7 @@
     import CommentSkeleton from "$components/minor/Comment/Skeleton.svelte";
     import Empty from "./Empty.svelte";
     import ErrorSvelteComponent from "./Error.svelte";
-    import type { Comment } from "$types/comment";
+    import type { Comment, CommentResponse } from "$types/comment";
     import { comment_needs_update } from "./store";
     import { onDestroy, onMount } from "svelte";
     import * as _ from "lodash-es";
@@ -15,13 +15,6 @@
     export let api_url: string;
     export let submit_url = "";
 
-    interface CommentResponse {
-        detail?: string;
-        count: number;
-        next: null | string;
-        previous: null | string;
-        results: Comment[];
-    }
     // This is set from backend
     let next_url: string | null;
 
@@ -32,9 +25,17 @@
 
     let last_element: HTMLElement;
 
+    let url_params = new URLSearchParams(window.location.search);
+    let root_path = url_params.get("comment");
+
     onMount(() => {
+        if (url_params.has("comment")) {
+            api_url = `/api/v2/comments/?path=${root_path}`;
+        };
+
         set_comments();
     });
+
     onDestroy(() => {
         // Clean up
         tree_branch = new Array<Comment>();
@@ -53,11 +54,14 @@
             switch (res.status) {
                 case 200:
                     next_url = value.next;
-
-                    return new JSONToTree({
+                    const js_object = {
                         json: value.results,
-                        old_json: tree_branch
-                    }).build() as unknown as Comment[];
+                    };
+
+                    if (!_.isEmpty(tree_branch)) Object.assign(js_object, { old_json: tree_branch });
+                    if (url_params.has("comment")) Object.assign(js_object, { root_path: root_path });
+
+                    return new JSONToTree(js_object).build() as unknown as Comment[];
 
                 case 404:
                     // No comment exists

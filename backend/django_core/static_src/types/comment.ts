@@ -14,6 +14,15 @@ export type Comment = {
     childrens: number;
     user_reaction: "upvoted" | "downvoted" | null;
     child: Comment[];
-    collapse: boolean;
     deleted: boolean;
+    collapse: boolean;
+    depth: number;
 };
+
+export interface CommentResponse {
+    detail?: string;
+    count: number;
+    next: null | string;
+    previous: null | string;
+    results: Comment[];
+}

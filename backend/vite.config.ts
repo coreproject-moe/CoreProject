@@ -2,6 +2,7 @@ import { join, resolve } from "path";
 import process from "process";
 import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
+
 const STATIC_SRC = resolve("./django_core/static_src");
 
 const COMPONENT_DIRECTORY = join(STATIC_SRC, "components");
@@ -13,6 +14,7 @@ export default defineConfig({
     base: "/static/",
     resolve: {
         alias: {
+            $tailwind: join(resolve("./tailwind.config.ts")),
             $stores: join(STATIC_SRC, "stores"),
             $functions: join(STATIC_SRC, "functions"),
             $components: join(STATIC_SRC, "components"),
@@ -39,6 +41,9 @@ export default defineConfig({
         // legalComments: "external"
     },
     build: {
+        commonjsOptions: {
+            transformMixedEsModules: true
+        },
         outDir: join(process.cwd(), "django_core", "static"),
         manifest: true,
         chunkSizeWarningLimit: 2048,
