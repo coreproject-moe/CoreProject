@@ -16,7 +16,7 @@
     class={cn(`btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw] sm:hidden`)}
 >
     <Chat class="w-4 md:w-[1vw]" />
-    <span>Replay mob</span>
+    <span>Replay</span>
 </button>
 
 <button
@@ -24,7 +24,7 @@
     class={cn(`btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw] hidden sm:flex md:hidden`)}
 >
     <Chat class="w-4 md:w-[1vw]" />
-    <span>Replay tab</span>
+    <span>Replay</span>
 </button>
 
 <button
@@ -32,5 +32,5 @@
     class={cn(`btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw] hidden md:flex`)}
 >
     <Chat class="w-4 md:w-[1vw]" />
-    <span>Replay desk</span>
+    <span>Replay</span>
 </button>
