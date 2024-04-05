@@ -129,32 +129,33 @@
         };
     };
 
+    const toggle_reply_shown = () => reply_shown = !reply_shown;
+
     const handle_reply_click = (e: CustomEvent) => {
         const device: string = e.detail;
-
+        
         switch(device) {
             case DeviceEnum.Mobile:
-                if (item.depth > 1) reply_type = "modal";
+                if (item.depth > 1) {
+                    comment_reply_dialog_el.showModal();
+                } else {
+                    toggle_reply_shown();
+                };
                 break;
+            // navigate to specific comment url with open query;
             case DeviceEnum.Tablet:
-                if (item.depth > 5) reply_type = "link";
+                if (item.depth > 5) {
+                    return;
+                } else {
+                    toggle_reply_shown();
+                };
                 break;
             case DeviceEnum.Desktop:
-                if (item.depth > 4) reply_type = "link";
-                break;
-            default:
-                break;
-        };
-
-        switch(reply_type) {
-            case "box":
-                reply_shown = !reply_shown;
-                break;
-            case "modal":
-                comment_reply_dialog_el.showModal();
-                break;
-            case "link":
-                // navigate to specific comment url with open query
+                if (item.depth > 4) {
+                    return;
+                } else {
+                    toggle_reply_shown();
+                };
                 break;
             default:
                 break;
