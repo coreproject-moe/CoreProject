@@ -27,7 +27,6 @@
     import Expand from "$icons/Expand/Index.svelte";
     import { JSONToTree } from "./json_to_tree";
     import ReplyButton from "./ReplyButton.svelte";
-    import { DEVICE_STATE, DeviceStateType } from "$constants/device";
 
     // Bindings
     let user_reaction: typeof item.user_reaction,
@@ -129,36 +128,27 @@
 
     const toggle_reply_shown = () => reply_shown = !reply_shown;
 
-    const handle_reply_click = (e: CustomEvent) => {
-        const device: DeviceStateType = e.detail;
-
-        switch(device) {
-            case DEVICE_STATE.Mobile:
-                if (item.depth > 1) {
-                    comment_reply_dialog_el.showModal();
-                } else {
-                    toggle_reply_shown();
-                };
-                break;
-            // navigate to specific comment url with open query;
-            case DEVICE_STATE.Tablet:
-                if (item.depth > 5) {
-                    return;
-                } else {
-                    toggle_reply_shown();
-                };
-                break;
-            case DEVICE_STATE.Desktop:
-                if (item.depth > 4) {
-                    return;
-                } else {
-                    toggle_reply_shown();
-                };
-                break;
-            default:
-                break;
+    const handle_mobile_click = () => {
+            if (item.depth > 1) {
+                comment_reply_dialog_el.showModal();
+            } else {
+                toggle_reply_shown();
+            };
+        },
+        handle_tablet_click = () => {
+            if (item.depth > 5) {
+                return; // link
+            } else {
+                toggle_reply_shown();
+            };
+        },
+        handle_desktop_click = () => {
+            if (item.depth > 4) {
+                return; // link
+            } else {
+                toggle_reply_shown();
+            };
         };
-    };
 </script>
 
 <div
@@ -253,7 +243,11 @@
                     {/each}
                     <span class="order-2 text-sm font-semibold text-accent md:text-[0.9vw]">{ratio}</span>
                 </div>
-                <ReplyButton on:reply={handle_reply_click} />
+                <ReplyButton
+                    on:mobile_reply={handle_mobile_click}
+                    on:tablet_reply={handle_tablet_click}
+                    on:desktop_reply={handle_desktop_click}
+                />
                 <button
                     disabled
                     class="btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw]"

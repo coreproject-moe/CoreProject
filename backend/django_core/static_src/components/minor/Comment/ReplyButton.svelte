@@ -1,35 +1,41 @@
 <script lang="ts">
     import { cn } from "$functions/classname";
-    import { DEVICE_STATE, DeviceStateType } from "$constants/device";
     import { createEventDispatcher } from "svelte";
     // Icons
     import Chat from "$icons/Chat/Index.svelte";
 
     const dispatch = createEventDispatcher();
+    export const handle_mobile = () => console.log(1);
+
+    const handle_mobile_click = () => {
+            dispatch("mobile_reply");
+        },
+        handle_tablet_click = () => {
+            dispatch("tablet_reply");
+        },
+        handle_desktop_click = () => {
+            dispatch("desktop_reply");
+        };
 
     const button_mapping = [
         {
-            device: DEVICE_STATE.Mobile,
+            action: handle_mobile_click,
             class: "sm:hidden"
         },
         {
-            device: DEVICE_STATE.Tablet,
+            action: handle_tablet_click,
             class: "hidden sm:flex md:hidden"
         },
         {
-            device: DEVICE_STATE.Desktop,
+            action: handle_desktop_click,
             class: "hidden md:flex"
         },
     ];
-
-    const handle_click = (device: DeviceStateType) => {
-        dispatch("reply", device);
-    };
 </script>
 
 {#each button_mapping as item}
     <button
-        on:click={() => handle_click(item.device)}
+        on:click={item.action}
         class={cn(item.class, "btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw]")}
     >
         <Chat class="w-4 md:w-[1vw]" />
