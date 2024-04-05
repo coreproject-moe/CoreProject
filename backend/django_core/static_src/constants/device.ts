@@ -1,9 +1,3 @@
-export enum DeviceEnum  {
-    Mobile = "mobile",
-    Tablet = "tablet",
-    Desktop = "desktop",
-};
-
 export const DEVICE_STATE = {
     Mobile: "mobile",
     Tablet: "tablet",

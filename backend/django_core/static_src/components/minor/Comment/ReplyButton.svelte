@@ -1,6 +1,6 @@
 <script lang="ts">
     import { cn } from "$functions/classname";
-    import { DEVICE_STATE, DeviceEnum, DeviceStateType } from "$constants/device";
+    import { DEVICE_STATE, DeviceStateType } from "$constants/device";
     import { createEventDispatcher } from "svelte";
     // Icons
     import Chat from "$icons/Chat/Index.svelte";
