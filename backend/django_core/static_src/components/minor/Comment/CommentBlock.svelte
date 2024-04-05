@@ -22,34 +22,23 @@
 
     // Import icons
     import Arrow from "$icons/Arrow/Index.svelte";
-    import Chat from "$icons/Chat/Index.svelte";
     import Share from "$icons/Share/Index.svelte";
     import Cross from "$icons/Cross/Index.svelte";
     import Expand from "$icons/Expand/Index.svelte";
-    import { breakpoint } from "$stores/breakpoints";
     import { JSONToTree } from "./json_to_tree";
+    import ReplyButton from "./ReplyButton.svelte";
 
     // Bindings
     let user_reaction: typeof item.user_reaction,
         ratio: typeof item.ratio,
-        reply_shown = false,
         comment_reply_dialog_el: HTMLDialogElement,
         icon_mapping = ["upvote", "downvote"],
-        reply_type: "box" | "modal" | "link" = "box";
+        reply_shown = false;
 
     onMount(async () => {
         // user actions
         user_reaction = item["user_reaction"];
         ratio = item["ratio"];
-
-        // reply type
-        const is_small_screen = $breakpoint?.sm;
-        const is_medium_screen = $breakpoint?.md;
-        const is_large_screen = $breakpoint?.lg || $breakpoint?.xl || $breakpoint?.["2xl"];
-
-        if (is_small_screen && item.depth > 1) reply_type = "modal";
-        else if (is_medium_screen && item.depth > 5) reply_type = "link";
-        else if (is_large_screen && item.depth > 4) reply_type = "link";
     });
 
     const apply_fetch_sideeffect = async (res: Response) => {
@@ -136,6 +125,30 @@
                 throw new Error(await res.text());
         };
     };
+
+    const toggle_reply_shown = () => reply_shown = !reply_shown;
+
+    const handle_mobile_click = () => {
+            if (item.depth > 1) {
+                comment_reply_dialog_el.showModal();
+            } else {
+                toggle_reply_shown();
+            };
+        },
+        handle_tablet_click = () => {
+            if (item.depth > 5) {
+                return; // link
+            } else {
+                toggle_reply_shown();
+            };
+        },
+        handle_desktop_click = () => {
+            if (item.depth > 4) {
+                return; // link
+            } else {
+                toggle_reply_shown();
+            };
+        };
 </script>
 
 <div
@@ -230,27 +243,11 @@
                     {/each}
                     <span class="order-2 text-sm font-semibold text-accent md:text-[0.9vw]">{ratio}</span>
                 </div>
-                <button
-                    class={cn(`btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw]`)}
-                    on:click|preventDefault={() => {
-                        switch(reply_type) {
-                            case "box":
-                                reply_shown = !reply_shown;
-                                break;
-                            case "modal":
-                                comment_reply_dialog_el.showModal();
-                                break;
-                            case "link":
-                                // navigate to specific comment url with open query
-                                break;
-                            default:
-                                break;
-                        };
-                    }}
-                >
-                    <Chat class="w-4 md:w-[1vw]" />
-                    <span>Replay</span>
-                </button>
+                <ReplyButton
+                    on:mobile_reply={handle_mobile_click}
+                    on:tablet_reply={handle_tablet_click}
+                    on:desktop_reply={handle_desktop_click}
+                />
                 <button
                     disabled
                     class="btn h-max min-h-full !bg-transparent p-0 text-xs md:gap-[0.35vw] md:text-[0.9vw]"
@@ -261,7 +258,7 @@
             </div>
         </div>
 
-        {#if reply_shown && reply_type === "box"}
+        {#if reply_shown}
             <div class="md:mt-[1vw]">
                 <CommentBox
                     on:submit={() => {
@@ -314,63 +311,61 @@
     </div>
 {/if}
 
-{#if reply_type === "modal"}
-    <dialog
-        bind:this={comment_reply_dialog_el}
-        class="modal modal-bottom"
-    >
-        <div class="modal-box overflow-x-hidden rounded-xl bg-secondary p-4">
-            <span class="text-sm text-warning">Reply to:</span>
-            <div class="mt-2 flex w-full gap-2">
+<dialog
+    bind:this={comment_reply_dialog_el}
+    class="modal modal-bottom"
+>
+    <div class="modal-box overflow-x-hidden rounded-xl bg-secondary p-4">
+        <span class="text-sm text-warning">Reply to:</span>
+        <div class="mt-2 flex w-full gap-2">
+            <a
+                href="/user/"
+                class="h-7 w-7 flex-shrink-0"
+            >
+                <img
+                    alt=""
+                    src={item.deleted ? DefaultAvatar : item?.user?.avatar_url}
+                    class="h-full w-full shrink-0 rounded-full object-cover"
+                />
+            </a>
+            <div class="flex w-full flex-col items-start gap-2">
                 <a
                     href="/user/"
-                    class="h-7 w-7 flex-shrink-0"
+                    class="flex flex-col gap-1 text-xs leading-none"
                 >
-                    <img
-                        alt=""
-                        src={item.deleted ? DefaultAvatar : item?.user?.avatar_url}
-                        class="h-full w-full shrink-0 rounded-full object-cover"
-                    />
-                </a>
-                <div class="flex w-full flex-col items-start gap-2">
-                    <a
-                        href="/user/"
-                        class="flex flex-col gap-1 text-xs leading-none"
-                    >
-                        <div class="flex items-center gap-2">
-                            {#if item.deleted}
-                                <div>[deleted]</div>
-                            {:else}
-                                <div class="text-white">
-                                    {`${item?.user?.first_name ?? ""} ${item?.user?.last_name ?? ""}`}
-                                </div>
-                                <div>{item?.user?.username}</div>
-                            {/if}
-                        </div>
-                        <div class="text-surface-300">
-                            {new FormatDate(item.created_at).format_to_time_from_now}
-                        </div>
-                    </a>
-                    <div class="text-sm leading-snug text-accent">
-                        <Markdown markdown={item.text} />
+                    <div class="flex items-center gap-2">
+                        {#if item.deleted}
+                            <div>[deleted]</div>
+                        {:else}
+                            <div class="text-white">
+                                {`${item?.user?.first_name ?? ""} ${item?.user?.last_name ?? ""}`}
+                            </div>
+                            <div>{item?.user?.username}</div>
+                        {/if}
                     </div>
+                    <div class="text-surface-300">
+                        {new FormatDate(item.created_at).format_to_time_from_now}
+                    </div>
+                </a>
+                <div class="text-sm leading-snug text-accent">
+                    <Markdown markdown={item.text} />
                 </div>
             </div>
-            <div class="mt-5 flex w-full">
-                <CommentBox
-                    on:submit={() => {
-                        reply_shown = false;
-                    }}
-                    {submit_url}
-                    path={item.path ?? ""}
-                />
-            </div>
         </div>
-        <form
-            method="dialog"
-            class="modal-backdrop"
-        >
-            <button>close</button>
-        </form>
-    </dialog>
-{/if}
+        <div class="mt-5 flex w-full">
+            <CommentBox
+                on:submit={() => {
+                    reply_shown = false;
+                }}
+                {submit_url}
+                path={item.path ?? ""}
+            />
+        </div>
+    </div>
+    <form
+        method="dialog"
+        class="modal-backdrop"
+    >
+        <button>close</button>
+    </form>
+</dialog>
