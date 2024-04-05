@@ -22,20 +22,18 @@
 
     // Import icons
     import Arrow from "$icons/Arrow/Index.svelte";
-    import Chat from "$icons/Chat/Index.svelte";
     import Share from "$icons/Share/Index.svelte";
     import Cross from "$icons/Cross/Index.svelte";
     import Expand from "$icons/Expand/Index.svelte";
     import { JSONToTree } from "./json_to_tree";
     import ReplyButton from "./ReplyButton.svelte";
-    import { DeviceEnum } from "$types/device";
+    import { DEVICE_STATE, DeviceStateType } from "$constants/device";
 
     // Bindings
     let user_reaction: typeof item.user_reaction,
         ratio: typeof item.ratio,
         comment_reply_dialog_el: HTMLDialogElement,
         icon_mapping = ["upvote", "downvote"],
-        reply_type: "box" | "modal" | "link" = "box",
         reply_shown = false;
 
     onMount(async () => {
@@ -132,10 +130,10 @@
     const toggle_reply_shown = () => reply_shown = !reply_shown;
 
     const handle_reply_click = (e: CustomEvent) => {
-        const device: string = e.detail;
-        
+        const device: DeviceStateType = e.detail;
+
         switch(device) {
-            case DeviceEnum.Mobile:
+            case DEVICE_STATE.Mobile:
                 if (item.depth > 1) {
                     comment_reply_dialog_el.showModal();
                 } else {
@@ -143,14 +141,14 @@
                 };
                 break;
             // navigate to specific comment url with open query;
-            case DeviceEnum.Tablet:
+            case DEVICE_STATE.Tablet:
                 if (item.depth > 5) {
                     return;
                 } else {
                     toggle_reply_shown();
                 };
                 break;
-            case DeviceEnum.Desktop:
+            case DEVICE_STATE.Desktop:
                 if (item.depth > 4) {
                     return;
                 } else {

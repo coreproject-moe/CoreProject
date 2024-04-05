@@ -1,8 +1,7 @@
 <script lang="ts">
     import { cn } from "$functions/classname";
-    import { DeviceEnum } from "$types/device";
+    import { DEVICE_STATE, DeviceEnum, DeviceStateType } from "$constants/device";
     import { createEventDispatcher } from "svelte";
-    
     // Icons
     import Chat from "$icons/Chat/Index.svelte";
 
@@ -10,20 +9,20 @@
 
     const button_mapping = [
         {
-            device: DeviceEnum.Mobile,
+            device: DEVICE_STATE.Mobile,
             class: "sm:hidden"
         },
         {
-            device: DeviceEnum.Tablet,
+            device: DEVICE_STATE.Tablet,
             class: "hidden sm:flex md:hidden"
         },
         {
-            device: DeviceEnum.Desktop,
+            device: DEVICE_STATE.Desktop,
             class: "hidden md:flex"
         },
-    ]
+    ];
 
-    const handle_click = (device: DeviceEnum) => {
+    const handle_click = (device: DeviceStateType) => {
         dispatch("reply", device);
     };
 </script>
