@@ -136,6 +136,7 @@
                         </span>
                     </a>
                     <a
+                        use:enhance_anchor={{ verb: "GET", target: "#page" }}
                         href="/anime/mal/1"
                         class="btn btn-square h-[2.75vw] min-h-full p-0 leading-none md:rounded-[0.5vw]"
                     >
