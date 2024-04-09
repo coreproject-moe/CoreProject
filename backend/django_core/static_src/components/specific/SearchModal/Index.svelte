@@ -13,6 +13,7 @@
     import { FETCH_TIMEOUT } from "$constants/fetch";
     import { user_authenticated } from "$stores/user";
     import { cn } from "$functions/classname";
+    import { enhance_anchor } from "$functions/anchor_enhancements";
 
     let active_index = 0,
         active_core: "anime" | "manga" | "sound" = "anime",
@@ -89,6 +90,10 @@
             search_modal_state.set(false);
         }
     });
+
+    const handle_click = () => {
+        dialog_element?.close();
+    };
 </script>
 
 <svelte:window on:keyup={(event) => dialog_element?.open && handle_global_input(event)} />
@@ -161,7 +166,9 @@
                                             }
                                         ]}
                                         <a
+                                            use:enhance_anchor={{ verb: "GET", target: "#page" }}
                                             on:mouseenter={() => handle_core_mouse_enter("anime", index)}
+                                            on:click={handle_click}
                                             href={reverse("anime_info_view", "mal", String(item.mal_id))}
                                             class={cn(is_active && "bg-neutral/50", "flex w-full auto-rows-max items-center gap-[1vw] rounded-[0.7vw] p-[0.8vw] transition duration-200 hover:bg-neutral/75")}
                                         >
