@@ -1,3 +1,18 @@
+<script lang="ts">
+    import Chevron from "$icons/Chevron/Index.svelte";
+    import Download from "$icons/Download/Index.svelte";
+    import DoubleArrow from "$icons/DoubleArrow/Index.svelte";
+    import Share from "$icons/Share/Index.svelte";
+    import Play from "$icons/Play/Index.svelte";
+    import Settings from "$icons/Settings/Index.svelte";
+    import Cross from "$icons/Cross/Index.svelte";
+    import Filter from "$icons/Filter/Index.svelte";
+    import Chat from "$icons/Chat/Index.svelte";
+
+    import CommentBox from "$components/specific/CommentBox/Index.svelte";
+    import Comment from "$components/minor/Comment/Index.svelte";
+</script>
+
 <div class="mt-16 flex flex-col md:mt-0 md:gap-[3.5vw] md:py-[2vw] md:pl-[1vw] md:pr-[3.75vw]">
     <div class="grid grid-cols-12 md:gap-[5vw]">
         <div class="col-span-12 flex flex-col md:col-span-8 md:gap-[0.75vw]">
@@ -15,10 +30,9 @@
                 <div class="flex gap-2 md:items-center md:gap-[1vw]">
                     <div class="hidden items-center gap-[0.75vw] md:flex">
                         <span class="text-[1vw] font-semibold uppercase">sub/dub:</span>
-                        <button class="btn !bg-transparent min-h-full flex items-center gap-[0.5vw] rounded-[0.35vw] px-[0.75vw] py-[0.5vw] text-[1vw] leading-none">Vidstreaming (sub) 
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-[1vw]">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" d="M6 9L12 15L18 9"></path>
-                        </svg>
+                        <button class="btn !bg-transparent min-h-full flex items-center gap-[0.5vw] rounded-[0.35vw] px-[0.75vw] py-[0.5vw] text-[1vw] leading-none">
+                            Vidstreaming (sub) 
+                            <Chevron class="w-[1vw]" />
                         </button>
                     </div>
                     <button class="btn !bg-transparent min-h-full hidden items-center p-0 text-xs leading-none md:flex md:text-[0.9vw]">
@@ -31,19 +45,18 @@
                         <span class="text-xs font-semibold uppercase">sub/dub:</span>
                         <button class="btn flex items-center gap-2 rounded bg-surface-400 px-3 py-2 text-xs leading-none">
                             Vidstreaming (sub)
-                            <coreproject-icon-chevron ></coreproject-icon-chevron>
+                            <Chevron />
                         </button>
                     </div>
                     <div class="flex items-center gap-3 md:gap-[0.75vw]">
                         <a href="/anime/mal/1/episode/1">
-                            <coreproject-icon-download class="w-4 md:w-[1.4vw]"></coreproject-icon-download>
-
+                            <Download class="w-4 md:w-[1.4vw]" />
                         </a>
                         <a href="/anime/mal/1/episode/1">
-                            <coreproject-icon-double-arrow class="w-4 md:w-[1.4vw] rotate-180"></coreproject-icon-double-arrow>
+                            <DoubleArrow class="w-4 md:w-[1.4vw] rotate-180" />
                         </a>
                         <a href="/anime/mal/1/episode/1">
-                            <coreproject-icon-double-arrow class="w-4 md:w-[1.4vw]"></coreproject-icon-double-arrow>
+                            <DoubleArrow class="w-4 md:w-[1.4vw]" />
                         </a>
                     </div>
                 </div>
@@ -54,8 +67,7 @@
                 <span class="text-lg font-semibold md:text-[1.35vw]">Episodes</span>
                 <button class="btn !bg-transparent min-h-full flex items-center gap-2 rounded bg-surface-400 px-3 py-2 text-xs font-semibold leading-none md:gap-[0.5vw] md:rounded-[0.35vw] md:px-[0.75vw] md:py-[0.5vw] md:text-[1vw]">
                     EPS: 1 - 60
-                    <coreproject-icon-chevron class="w-3 md:w-[1vw]"></coreproject-icon-chevron>
-
+                    <Chevron class="w-3 md:w-[1vw]" />
                 </button>
             </header>
             <div class="grid grid-cols-7 gap-2 md:grid-cols-6 md:gap-[0.75vw]">
@@ -81,7 +93,7 @@
                     </a>
                 </div>
                 <button class="btn bg-transparent p-0">
-                    <coreproject-icon-share class="md:w-[1.25vw]"></coreproject-icon-share>
+                    <Share class="md:w-[1.25vw]" />
                 </button>
             </div>
             <div class="accordion w-full space-y-1 ">
@@ -90,8 +102,7 @@
                         <div class="accordion-lead">EP1</div>
                         <div class="accordion-summary flex-1">Monotone/Colorful</div>
                         <div class="accordion-summary-caret fill-current w-3 transition-transform duration-[200ms] md:w-[1.25vw] rotate-180">
-                            <coreproject-icon-chevron ></coreproject-icon-chevron>
-
+                            <Chevron />
                         </div>
                     </button>
                     <div class="accordion-panel  p-0 rounded-container-token text-surface-50 text-sm leading-snug md:text-[1vw] md:leading-[1.35vw]" id="accordion-panel-0.4186117384197431" role="region" aria-hidden="false" aria-labelledby="accordion-control-0.4186117384197431">The autumn he was twelve, piano prodigy Kousei Arima suddenly found himself unable to play the piano after his mother's death. Ever since then, it's like he's been frozen in time. His childhood friend, Tsubaki Sawabe, watches over him with concern; one day, she invites him on a double date. Kousei's other childhood friend, Ryouta Watari, is being introduced to a certain girl. Kousei reluctantly heads over to the rendezvous spot. There, he sees a girl playing a melodica. This girl, who allegedly has a crush on Watari, is Kaori Miyazono. And she turns out to be a violinist!</div>
@@ -99,8 +110,7 @@
             </div>
             <a href="/mal/1" class="btn btn-neutral md:h-[3vw] min-h-max md:w-[10vw] rounded-md text-sm font-semibold leading-none md:rounded-[0.5vw] md:text-[1vw]">
                 <span>View detail</span>
-                <coreproject-icon-chevron  class="w-3 -rotate-90 md:w-[1vw]"></coreproject-icon-chevron>
-
+                <Chevron class="w-3 -rotate-90 md:w-[1vw]" />
             </a>
         </div>
         <div class="col-span-4 hidden flex-col md:flex">
@@ -112,8 +122,7 @@
                     </div>
                     <overlay class="absolute inset-0 flex items-center justify-center bg-secondary/50">
                         <play class="rounded-full bg-secondary/75 md:p-[1vw]">
-                            <coreproject-icon-play class="md:w-[1.25vw] text-white" ></coreproject-icon-play>
-
+                            <Play class="md:w-[1.25vw] text-white" />
                         </play>
                     </overlay>
                 </div>
@@ -141,17 +150,15 @@
                     </svg>
                 </button>
             </div>
-            <coreproject-specific-commentbox submit_url=""></coreproject-specific-commentbox>
-
-            <coreproject-comment class="w-full" api_url="">
-            </coreproject-comment>
+            <CommentBox />
+            <Comment api_url="" />
         </div>
         <div class="col-span-12 mt-10 flex flex-col gap-5 md:col-span-5 md:mt-0 md:gap-[2vw]">
             <div>
                 <div class="flex gap-2 border-b-2 border-surface-50/10 pb-1 md:gap-[0.75vw] md:border-none md:pb-0">
                     <div class="text-base font-semibold md:text-[1.25vw] md:leading-[1.5vw]">Forum Posts</div>
                     <button class="btn btn-secondary min-h-full hidden rounded bg-surface-400 p-0 md:flex md:h-[1.5vw] md:w-[1.5vw]">
-                        <coreproject-icon-settings class="w-[0.9vw] opacity-75"></coreproject-icon-settings>
+                        <Settings class="w-[0.9vw] opacity-75" />
                     </button>
                 </div>
                 <div class="mt-2 flex items-center justify-between md:mt-[0.75vw]">
@@ -161,11 +168,11 @@
                     </p>
                     <div class="flex items-center gap-2 md:w-full md:justify-between">
                         <button class="btn btn-secondary min-h-full h-7 gap-2 rounded bg-surface-400 px-2 text-xs font-semibold md:h-[2.4vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.875vw]">
-                            <coreproject-icon-cross class="w-4 rotate-45 md:w-[1vw]" ></coreproject-icon-cross>
+                            <Cross class="w-4 rotate-45 md:w-[1vw]" />
                             Create New
                         </button>
                         <button class="btn btn-secondary min-h-full h-7 w-auto rounded bg-surface-400 p-0 font-semibold md:ml-0 md:h-[2.4vw] md:w-[2.4vw] md:rounded-[0.5vw] md:leading-[0.9vw]" aria-label="Filter">
-                            <coreproject-icon-filter class="w-3 md:w-[1vw]"></coreproject-icon-filter >
+                            <Filter class="w-3 md:w-[1vw]" />
                         </button>
                     </div>
                 </div>
@@ -190,7 +197,7 @@
                                     <div class="text-surface-50">7 months ago</div>
                                 </div>
                                 <div class="flex items-center gap-1 md:gap-[0.25vw]">
-                                    <coreproject-icon-chat class="w-3 md:w-[1vw]"> </coreproject-icon-chat>
+                                    <Chat class="w-3 md:w-[1vw]" />
                                     <div>69</div>
                                 </div>
                             </div>
@@ -219,7 +226,7 @@
                 <div class="mt-3 flex w-full justify-center md:mt-[1vw]">
                     <button class="btn btn-neutral min-h-full h-7 gap-2 rounded px-3 text-xs font-semibold md:h-[2.4vw] md:rounded-[0.5vw] md:px-[0.9vw] md:text-[0.875vw]">
                         Load more
-                        <coreproject-icon-chevron class="w-4 md:w-[1vw]"></coreproject-icon-chevron>
+                        <Chevron class="w-4 md:w-[1vw]" />
                     </button>
                 </div>
             </div>
