@@ -21,7 +21,7 @@
     let scroll_area_element: HTMLElement | null = null,
         anime_episode: HTMLElement | null = null;
 
-    export let show_more_info = false;
+    export let show_more_info: boolean;
 
     /** Bindings */
     onMount(() => (scroll_area_element = anime_episode?.parentElement?.parentElement!));
@@ -61,7 +61,7 @@
     on:mouseleave={handle_mouseleave}
     role="group"
     class="group relative h-[5vw] shrink-0 snap-center duration-300 ease-in-out"
-    class:h-[16vw]={show_more_info}
+    class:!h-[16vw]={show_more_info}
 >
     <img
         src={episode.cover}
