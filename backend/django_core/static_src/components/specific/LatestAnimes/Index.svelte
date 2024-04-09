@@ -143,11 +143,8 @@
                 <div class="md:to-surface-900/25 absolute inset-0 bg-gradient-to-t from-secondary/90 to-secondary/50" />
                 <div class="from-surface-900 to-surface-900/25 md:from-surface-900/50 absolute inset-0 hidden bg-gradient-to-r md:flex" />
 
-                <div class="absolute bottom-7 left-7 flex flex-col md:bottom-0 md:left-0 md:px-[3.75vw] md:py-[2.625vw]">
+                <div class="absolute flex flex-col bottom-0 md:left-0 p-4 md:px-[3.75vw] md:py-[2.625vw]">
                     <span class="text-3xl font-bold text-white md:text-[2vw] md:leading-[2.375vw]">{anime.name}</span>
-                    <div class="text-base font-semibold uppercase text-white/90 md:hidden md:text-[2vw] md:leading-[2.375vw]">
-                        {anime.name}
-                    </div>
                     <div class="flex flex-wrap items-center gap-2 py-2 text-xs font-semibold text-white/90 md:gap-[0.65vw] md:pb-0 md:pt-[0.5vw] md:text-[0.9375vw]">
                         <span class="leading-[1.125vw]">
                             {anime.type}
