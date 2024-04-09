@@ -2,8 +2,9 @@
     import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
     import { FormatDate } from "$functions/format_date";
     import Play from "$icons/Play/Index.svelte";
-    import { slide } from "svelte/transition";
+    import { scale, slide } from "svelte/transition";
     import { onMount } from "svelte";
+    import { enhance_anchor } from "$functions/anchor_enhancements";
 
     type Episode = {
         id: number;
@@ -85,14 +86,14 @@
                 </span>
             </div>
         </div>
-        <button
-            on:click|preventDefault={() => {
-                // goto('/mal/{episode.id}/episode/{episode.episode_number}')
-            }}
-            class="btn btn-warning h-[2.5vw] min-h-max w-[2.5vw] rounded-full p-0 transition-colors duration-300 group-hover:btn-accent"
+        <a
+            use:enhance_anchor={{ verb: "GET", target: "#page" }}
+            href="mal/{episode.id}/episode/{episode.episode_number}"
+            class="btn btn-warning size-[2.5vw] min-h-max rounded-full p-0 transition-colors duration-300 group-hover:btn-accent"
+            class:!btn-accent={show_more_info}
         >
             <Play class="w-[1vw]" />
-        </button>
+        </a>
     </div>
 
     {#if show_more_info}
@@ -104,7 +105,7 @@
         >
             <genres class="flex items-center md:my-[0.35vw] md:gap-[0.5vw]">
                 {#each ["Action", "Romance", "Hentai"] as genre}
-                    <genre class="bg-accent font-semibold leading-none text-secondary md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
+                    <genre class="bg-warning font-semibold leading-none text-secondary md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
                         {genre}
                     </genre>
                 {/each}
