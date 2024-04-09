@@ -67,7 +67,7 @@ crispy-bootstrap4 = ">=2023.1"
 # Components
 django-htmx = ">=1.17.0"
 # Markdown
-django-vite = "^3.0.3"
+django-vite = "^3.0.4"
 # Graphql
 strawberry-graphql = "^0.220.0"
 strawberry-graphql-django = "^0.37.0"
