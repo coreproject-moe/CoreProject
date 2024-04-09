@@ -126,7 +126,7 @@
                 </button>
             </div>
         </div>
-        <div class="relative mt-4 grid grid-cols-3 gap-3 md:mt-[1vw] md:grid-cols-5 md:gap-[1.25vw]">
+        <div class="relative mt-3 grid grid-cols-3 gap-3 md:mt-[1vw] md:grid-cols-5 md:gap-[1.25vw]">
             <MyAnimeList
                 {my_anime_list}
                 dropdown_class="pl-3"
