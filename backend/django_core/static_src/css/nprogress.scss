@@ -1,6 +1,4 @@
 $nprogress-bar-color: oklch(var(--in));
-$nprogress-bar-seconday-color: oklch(var(--n));
-$nprogress-bar-success-color: oklch(var(--su));
 $nprogress-bar-warning-color: oklch(var(--wa));
 
 $animation-duration: 2s;
@@ -13,7 +11,7 @@ $nprogress-height: 0.2rem;
 
 #nprogress .bar {
     background: $nprogress-bar-color;
-    animation: $animation-duration linear infinite change-bg;
+    animation: change-bg $animation-duration linear infinite;
 
     position: fixed;
     z-index: 1031;
@@ -28,13 +26,7 @@ $nprogress-height: 0.2rem;
         100% {
             background: $nprogress-bar-color;
         }
-        25% {
-            background: $nprogress-bar-seconday-color;
-        }
         50% {
-            background: $nprogress-bar-success-color;
-        }
-        75% {
             background: $nprogress-bar-warning-color;
         }
     }
