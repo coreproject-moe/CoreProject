@@ -92,13 +92,13 @@
 
 <svelte:window on:keyup={(event) => dialog_element?.open && handle_global_input(event)} />
 <dialog
-    class="modal"
+    class="modal modal-bottom bg-secondary/50 backdrop-blur"
     bind:this={dialog_element}
 >
-    <div class="modal-box flex !max-w-fit flex-col items-center bg-secondary md:px-[2vw] md:py-[1vw]">
+    <div class="modal-box max-h-max flex w-max mx-auto flex-col bg-secondary items-center md:p-[2vw]">
         <form
             on:submit|preventDefault
-            class="relative flex h-[3.5vw] w-[40vw] items-center"
+            class="relative flex w-[40vw] items-center"
         >
             <button
                 class="btn absolute left-[1.25vw] min-h-max border-none !bg-transparent p-0"
@@ -113,7 +113,7 @@
                 on:keypress={handle_search_key_press}
                 type="text"
                 placeholder="Search for animes, mangas and musics"
-                class="h-full w-full rounded-[0.625vw] border-none bg-neutral pl-[3.50vw] text-[1.1vw] font-semibold text-white shadow-lg !ring-0 placeholder:font-medium placeholder:text-accent/75"
+                class="w-full rounded-[0.625vw] border-none bg-neutral pl-[3.50vw] p-[1vw] text-[1.1vw] font-semibold text-white shadow-lg !ring-0 placeholder:font-medium placeholder:text-accent/75 outline-none"
             />
 
             <button
@@ -236,10 +236,10 @@
         <p class="mt-[2vw] text-[0.8vw]">
             <b>Note:</b>
             Navigate through animes, mangas and sounds with
-            <kbd class="kbd kbd-xs">▲</kbd>
-            <kbd class="kbd kbd-xs">▼</kbd>
+            <kbd class="kbd kbd-xs text-[0.8vw] rounded-full">▲</kbd>
+            <kbd class="kbd kbd-xs text-[0.8vw] rounded-full">▼</kbd>
             and
-            <kbd class="kbd kbd-xs">Tab</kbd>
+            <kbd class="kbd kbd-xs text-[0.8vw] rounded-full">Tab</kbd>
             keys.
         </p>
     </div>
