@@ -75,7 +75,7 @@
     class:scrollbar-thin={IS_FIREFOX}
     class:[mask-image:linear-gradient(180deg,rgba(7,5,25,0.95)80%,rgba(0,0,0,0)100%)]={string_to_boolean(gradient_mask) && add_mask_bottom}
 >
-    <div class={cn(klass)}>
+    <div class="w-full">
         <IntersectionObserver
             root={scroll_area}
             element={first_element}
@@ -88,7 +88,9 @@
             />
         </IntersectionObserver>
 
-        <slot />
+        <div class={cn(klass)}>
+            <slot />
+        </div>
 
         <IntersectionObserver
             root={scroll_area}

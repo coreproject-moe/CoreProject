@@ -24,7 +24,10 @@
     parent_class="mt-[1vw] w-full max-h-[23vw] snap-y smooth-scroll snap-mandatory"
     class="flex w-full flex-col gap-[1vw]"
 >
-    {#each latest_episodes_data as episode}
-        <Episode {episode} />
+    {#each latest_episodes_data as episode, index}
+        <Episode
+            {episode}
+            show_more_info={index === 0}
+        />
     {/each}
 </ScrollArea>
