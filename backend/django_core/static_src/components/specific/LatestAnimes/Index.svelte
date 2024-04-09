@@ -14,6 +14,7 @@
     import { tweened } from "svelte/motion";
     import { FormatDate } from "$functions/format_date";
     import { blur } from "svelte/transition";
+    import { enhance_anchor } from "$functions/anchor_enhancements";
 
     type LatestAnimes = {
         id: number;
@@ -184,19 +185,21 @@
                             </ScrollArea>
 
                             <div class="mb-2 mt-5 flex items-center gap-2 md:mb-0 md:mt-[1.5vw] md:gap-[1vw]">
-                                <button
+                                <a
+                                    href="mal/{anime.id}/episode/1"
+                                    use:enhance_anchor={{ verb: "GET", target: "#page" }}
                                     class="btn btn-warning flex h-max min-h-max justify-center gap-2 rounded-xl px-6 py-4 text-base font-bold leading-none text-secondary md:gap-[0.5vw] md:rounded-[0.625vw] md:px-[1.25vw] md:py-[1vw] md:text-[0.875vw]"
                                 >
                                     <Play class="text-surface-900 w-4 md:w-[1vw]" />
                                     <span>Ep 1</span>
-                                </button>
-                                <a href="/anime/mal/40748">
-                                    <button
-                                        class="btn btn-secondary flex h-max min-h-max items-center justify-center rounded-xl px-6 py-4 text-base font-semibold leading-none md:gap-[0.5vw] md:rounded-[0.5vw] md:px-[1.25vw] md:py-[1vw] md:text-[0.875vw] md:font-bold"
-                                    >
-                                        <Info class="text-surface-50 w-5 md:w-[1.25vw]" />
-                                        <span>Details</span>
-                                    </button>
+                                </a>
+                                <a
+                                    href="mal/{anime.id}"
+                                    use:enhance_anchor={{ verb: "GET", target: "#page" }}
+                                    class="btn btn-secondary flex h-max min-h-max items-center justify-center rounded-xl px-6 py-4 text-base font-semibold leading-none md:gap-[0.5vw] md:rounded-[0.5vw] md:px-[1.25vw] md:py-[1vw] md:text-[0.875vw] md:font-bold"
+                                >
+                                    <Info class="text-surface-50 w-5 md:w-[1.25vw]" />
+                                    <span>Details</span>
                                 </a>
                                 <button
                                     class="bg-surface-900 text-surface-50s btn btn-secondary h-max min-h-max rounded-xl p-4 text-[3vw] font-bold leading-none md:rounded-[0.5vw] md:p-[0.9vw] md:text-[0.875vw]"
