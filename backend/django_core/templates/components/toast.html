@@ -1,9 +1,0 @@
-<div
-    _="init wait 5s then transition my opacity to 0 over 300ms then remove me"
-    class="flex items-center md:gap-[0.75vw] glass bg-primary-focus px-[1vw] py-[0.75vw] rounded-[0.5vw]"
->
-    <coreproject-icon-info class="md:w-[1.25vw]" ></coreproject-icon-info >
-    {% autoescape off %}
-        <coreproject-markdown class="leading-none text-white font-semibold select-none text-[0.9vw]" markdown="{{ message|safe }}"></coreproject-markdown>
-    {% endautoescape %}
-</div>
