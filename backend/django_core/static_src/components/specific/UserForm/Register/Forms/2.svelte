@@ -13,6 +13,7 @@
     import { get_csrf_token } from "$functions/get_csrf_token";
     import { FETCH_TIMEOUT } from "$constants/fetch";
     import { autofocus } from "$functions/autofocus";
+    import { enhance_anchor } from "$functions/anchor_enhancements";
 
     export let pages_state: [{ otp: string }, { username: string }];
 
@@ -203,7 +204,13 @@
     <div class="flex items-center justify-between">
         <div class="flex flex-col gap-1 md:gap-[0.5vw]">
             <span class="text-surface-100 text-xs leading-none md:text-[0.75vw]">Already have an account?</span>
-            <button class="btn btn-link p-0 size-max min-h-full text-base leading-none md:text-[1.1vw]">Login</button>
+            <a
+                href={reverse("login_view")}
+                use:enhance_anchor={{ verb: "GET", target: "body" }}
+                class="btn btn-link p-0 size-max min-h-full text-base leading-none md:text-[1.1vw]"
+            >
+                Login
+            </a>
         </div>
         <button
             type="submit"

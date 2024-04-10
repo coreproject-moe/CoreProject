@@ -8,6 +8,7 @@
     import { FETCH_TIMEOUT } from "$constants/fetch";
     import { goto } from "$functions/urls";
     import { reverse } from "$functions/urls";
+    import { enhance_anchor } from "$functions/anchor_enhancements";
     const dispatch = createEventDispatcher();
 
     export let pages_state: [{ email: string }, { username: string }];
@@ -109,7 +110,13 @@
     <div class="flex items-center justify-between">
         <div class="flex flex-col gap-1 md:gap-[0.5vw]">
             <span class="text-surface-100 text-xs leading-none md:text-[0.75vw]">Already have an account?</span>
-            <button class="btn btn-link p-0 size-max min-h-full text-base leading-none md:text-[1.1vw]">Login</button>
+            <a
+                href={reverse("login_view")}
+                use:enhance_anchor={{ verb: "GET", target: "body" }}
+                class="btn btn-link p-0 size-max min-h-full text-base leading-none md:text-[1.1vw]"
+            >
+                Login
+            </a>
         </div>
         <button
             on:click|preventDefault={handle_submit}
