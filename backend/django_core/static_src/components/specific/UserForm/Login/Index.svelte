@@ -87,7 +87,7 @@
         class="flex h-full flex-col justify-between"
     >
         <div>
-            <span class="flex items-center text-lg font-bold uppercase leading-none tracking-widest text-warning md:text-[1.5vw]">hey there! let's login</span>
+            <span class="flex items-center text-lg font-bold uppercase leading-none tracking-widest text-warning md:text-[1.25vw]">hey there! let's login</span>
             <button
                 on:click={() => window.history.back()}
                 class="btn btn-link p-0 h-max min-h-full md:text-[1.25vw] md:gap-[0.5vw]"

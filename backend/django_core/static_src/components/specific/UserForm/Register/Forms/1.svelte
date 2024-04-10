@@ -179,7 +179,7 @@
     class="flex h-full flex-col justify-between"
 >
     <div class="flex flex-col items-start">
-        <span class="text-lg font-bold uppercase leading-none tracking-widest text-warning md:text-[1.5vw]">
+        <span class="text-lg font-bold uppercase leading-none tracking-widest text-warning md:text-[1.25vw]">
             create your
             <CoreText />
             account

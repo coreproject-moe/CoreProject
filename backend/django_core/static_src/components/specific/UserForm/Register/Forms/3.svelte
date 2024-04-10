@@ -1,6 +1,8 @@
 <script lang="ts">
     import CoreText from "$icons/CoreText/Index.svelte";
     import ArrowUpRight from "$icons/ArrowUpRight/Index.svelte";
+    import Arrow from "$icons/Arrow/Index.svelte";
+
     import { createEventDispatcher } from "svelte";
     import { get_csrf_token } from "$functions/get_csrf_token";
     import { FETCH_TIMEOUT } from "$constants/fetch";
@@ -10,8 +12,10 @@
 
     export let pages_state: [{ email: string }, { username: string }];
 
-    let combined_state: { [key: string]: string } | null = null;
-    $: combined_state = Object.assign({}, ...pages_state);
+    let combined_state: { [key: string]: string } = Object.assign({}, ...pages_state);
+
+    let form_is_submitable = ["username", "email"].every((item) => Object.keys(combined_state).includes(item));
+    console.log(form_is_submitable);
 
     const button_mapping = [
         {
@@ -22,7 +26,14 @@
                 });
             }
         },
-        { value: "< resend code >", action: () => {} }
+        {
+            value: "< change username >",
+            action: () => {
+                dispatch("go_to_page", {
+                    page: 1
+                });
+            }
+        },
     ];
 
     async function handle_submit() {
@@ -44,27 +55,43 @@
 </script>
 
 <div class="flex h-full flex-col justify-between">
-    <div class="flex flex-col gap-2 whitespace-nowrap font-bold uppercase leading-none tracking-widest text-white md:gap-[0.5vw] md:text-[1.2vw]">
-        <span class="flex items-center text-base font-bold uppercase tracking-widest text-white md:text-[1.2vw]">
+    <div class="flex flex-col items-start">
+        <span class="text-lg font-bold uppercase leading-none tracking-widest text-warning md:text-[1.25vw]">
             welcome to&nbsp;
             <CoreText />
             project
         </span>
-        <span class="text-xs font-medium uppercase text-white/90 md:text-[1vw]">Your Anime Sanctuary Awaits!</span>
+        <button
+            on:click={() => {
+                dispatch("go_to_page", {
+                    page: 1
+                });
+            }}
+            class="btn btn-link p-0 h-max min-h-full md:text-[1.25vw] md:gap-[0.5vw]"
+        >
+            <Arrow variant="fill" class="md:size-[1.25vw] -rotate-90" />
+            Go Back
+        </button>
     </div>
     <div class="flex flex-col items-start gap-5 md:gap-[3vw]">
         <div class="flex flex-col md:gap-[1.5vw]">
             <span class="text-primary-500 text-lg font-semibold leading-none md:text-[1.5vw]">Account Summary</span>
             <div class="flex flex-col md:gap-[0.5vw]">
                 <span class="text-lg font-medium leading-none md:text-[1.1vw]">Username:</span>
-                <span class="text-base font-medium leading-none text-accent md:text-[1.1vw]">
-                    {combined_state?.username}
+                <span
+                    class="text-base font-medium leading-none text-accent md:text-[1.1vw]"
+                    class:text-error={!combined_state?.username}
+                >
+                    {combined_state?.username ?? "not provided"}
                 </span>
             </div>
             <div class="flex flex-col md:gap-[0.5vw]">
                 <span class="text-lg font-medium leading-none md:text-[1.1vw]">Email:</span>
-                <span class="text-base font-medium leading-none text-accent md:text-[1.1vw]">
-                    {combined_state?.email}
+                <span
+                    class="text-base font-medium leading-none text-accent md:text-[1.1vw]"
+                    class:text-error={!combined_state?.email}
+                >
+                    {combined_state?.email ?? "not provided"}
                 </span>
             </div>
         </div>
@@ -86,7 +113,8 @@
         </div>
         <button
             on:click|preventDefault={handle_submit}
-            class="btn btn-primary h-max min-h-max rounded-lg p-4 text-base font-semibold leading-none text-accent md:rounded-[0.5vw] md:p-[1vw] md:text-[0.95vw]"
+            class:btn-disabled={!form_is_submitable}
+            class="btn btn-primary h-max min-h-max rounded-lg p-4 text-base font-semibold leading-none text-accent md:rounded-[0.75vw] md:py-[1vw] md:px-[1.25vw] md:text-[0.95vw]"
         >
             <span>Finish</span>
             <ArrowUpRight class="w-4 rotate-45 md:w-[1vw]" />
