@@ -12,6 +12,8 @@
     import { get_csrf_token } from "$functions/get_csrf_token";
     import { FETCH_TIMEOUT } from "$constants/fetch";
     import { user_authenticated } from "$stores/user";
+    import { cn } from "$functions/classname";
+    import { enhance_anchor } from "$functions/anchor_enhancements";
 
     let active_index = 0,
         active_core: "anime" | "manga" | "sound" = "anime",
@@ -92,13 +94,13 @@
 
 <svelte:window on:keyup={(event) => dialog_element?.open && handle_global_input(event)} />
 <dialog
-    class="modal"
+    class="modal modal-bottom bg-secondary/50 backdrop-blur"
     bind:this={dialog_element}
 >
-    <div class="modal-box flex !max-w-fit flex-col items-center bg-secondary md:px-[2vw] md:py-[1vw]">
+    <div class="modal-box max-h-max flex w-max mx-auto flex-col bg-secondary items-center md:p-[2vw]">
         <form
             on:submit|preventDefault
-            class="relative flex h-[3.5vw] w-[40vw] items-center"
+            class="relative flex w-[40vw] items-center"
         >
             <button
                 class="btn absolute left-[1.25vw] min-h-max border-none !bg-transparent p-0"
@@ -113,7 +115,7 @@
                 on:keypress={handle_search_key_press}
                 type="text"
                 placeholder="Search for animes, mangas and musics"
-                class="h-full w-full rounded-[0.625vw] border-none bg-neutral pl-[3.50vw] text-[1.1vw] font-semibold text-white shadow-lg !ring-0 placeholder:font-medium placeholder:text-accent/75"
+                class="w-full rounded-[0.625vw] border-none bg-neutral pl-[3.50vw] p-[1vw] text-[1.1vw] font-semibold text-white shadow-lg !ring-0 placeholder:font-medium placeholder:text-accent/75 outline-none"
             />
 
             <button
@@ -133,7 +135,7 @@
                     offset_scrollbar
                     gradient_mask
                     parent_class="md:mt-[0.2vw] md:h-[30vw] md:w-[20vw]"
-                    class="w-full"
+                    class="size-full"
                 >
                     {#if search_promise}
                         {#await search_promise}
@@ -148,34 +150,35 @@
                                         {@const mapping = [
                                             {
                                                 value: `TV`,
-                                                class: `text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw]`
+                                                class: `flex items-center gap-[0.3vw]`
                                             },
                                             {
                                                 value: item.episode_count ? `${item.episode_count} eps` : null,
-                                                class: "text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw]"
+                                                class: "flex items-center gap-[0.3vw]"
                                             },
                                             {
                                                 value: item.aired_from ? new FormatDate(item.aired_from).format_to_human_readable_form : null,
-                                                class: "text-surface-200 flex items-center gap-[0.3vw] text-[0.7vw]"
+                                                class: "flex items-center gap-[0.3vw]"
                                             }
                                         ]}
                                         <a
+                                            use:enhance_anchor={{ verb: "GET", target: "#page" }}
                                             on:mouseenter={() => handle_core_mouse_enter("anime", index)}
+                                            on:click={() => dialog_element?.close()}
                                             href={reverse("anime_info_view", "mal", String(item.mal_id))}
-                                            class:bg-neutral={is_active}
-                                            class="flex w-full auto-rows-max items-center gap-[1vw] rounded-[0.7vw] p-[0.8vw] transition duration-200 hover:bg-neutral"
+                                            class={cn(is_active && "bg-neutral/50", "flex w-full auto-rows-max items-center gap-[1vw] rounded-[0.7vw] p-[0.8vw] transition duration-200 hover:bg-neutral/75")}
                                         >
                                             <img
-                                                src="https://static1.cbrimages.com/wordpress/wp-content/uploads/2021/03/demon-slayer-banner.jpg"
+                                                src={item.cover}
                                                 alt={search_query}
-                                                class="h-[3.5vw] w-[3.5vw] rounded-[0.5vw] object-cover"
+                                                class="size-[3.5vw] flex-shrink-0 rounded-[0.5vw] object-cover"
                                             />
-                                            <div class="flex flex-col leading-none md:gap-[0.35vw]">
-                                                <span class="text-[1.1vw] font-semibold leading-none text-white">{item.name}</span>
-                                                <span class="text-surface-200 text-[0.7vw] font-medium uppercase">
-                                                    {item.name_japanese}
+                                            <div class="flex flex-col leading-none md:gap-[0.5vw]">
+                                                <span class="text-[1.1vw] line-clamp-1 font-semibold leading-none text-white">
+                                                    {item.name}
+                                                    <span class="text-accent/50 font-medium">({item.name_japanese})</span>
                                                 </span>
-                                                <div class="flex items-center md:gap-[0.35vw]">
+                                                <div class="flex items-center md:gap-[0.35vw] md:text-[0.9vw]">
                                                     {#each mapping as item, index}
                                                         {@const show_dot = index !== mapping.length - 1}
 
@@ -236,10 +239,10 @@
         <p class="mt-[2vw] text-[0.8vw]">
             <b>Note:</b>
             Navigate through animes, mangas and sounds with
-            <kbd class="kbd kbd-xs">▲</kbd>
-            <kbd class="kbd kbd-xs">▼</kbd>
+            <kbd class="kbd kbd-xs text-[0.8vw] rounded-full">▲</kbd>
+            <kbd class="kbd kbd-xs text-[0.8vw] rounded-full">▼</kbd>
             and
-            <kbd class="kbd kbd-xs">Tab</kbd>
+            <kbd class="kbd kbd-xs text-[0.8vw] rounded-full">Tab</kbd>
             keys.
         </p>
     </div>

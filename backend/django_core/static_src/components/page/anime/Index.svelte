@@ -38,9 +38,9 @@
             </div>
             <LatestEpisodes {latest_episodes} />
 
-            <div class="mt-[0.75vw] flex items-start justify-between gap-[2vw] pr-[0.75vw]">
-                <span class="text-[0.75vw] font-semibold md:leading-[1.25vw]">showing recently aired episodes from your Anime List</span>
-                <button class="btn btn-secondary p-0 text-[0.75vw] font-semibold text-warning">Change to All</button>
+            <div class="mt-[0.75vw] flex items-center justify-between gap-[2vw] pr-[0.75vw]">
+                <span class="text-[0.75vw] font-semibold md:leading-[1.25vw]">Showing recently aired episodes from your Anime List</span>
+                <button class="btn btn-secondary min-h-full h-max p-0 text-[0.75vw] font-semibold text-warning">Change to All</button>
             </div>
         </div>
         <div class="relative mt-[2.75vw] hidden h-[24.5vw] w-[16.625vw] md:block">
@@ -126,7 +126,7 @@
                 </button>
             </div>
         </div>
-        <div class="relative mt-4 grid grid-cols-3 gap-3 md:mt-[1vw] md:grid-cols-5 md:gap-[1.25vw]">
+        <div class="relative mt-3 grid grid-cols-3 gap-3 md:mt-[1vw] md:grid-cols-5 md:gap-[1.25vw]">
             <MyAnimeList
                 {my_anime_list}
                 dropdown_class="pl-3"

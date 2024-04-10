@@ -2,8 +2,9 @@
     import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
     import { FormatDate } from "$functions/format_date";
     import Play from "$icons/Play/Index.svelte";
-    import { slide } from "svelte/transition";
+    import { scale, slide } from "svelte/transition";
     import { onMount } from "svelte";
+    import { enhance_anchor } from "$functions/anchor_enhancements";
 
     type Episode = {
         id: number;
@@ -21,7 +22,7 @@
     let scroll_area_element: HTMLElement | null = null,
         anime_episode: HTMLElement | null = null;
 
-    let show_more_info = false;
+    export let show_more_info: boolean;
 
     /** Bindings */
     onMount(() => (scroll_area_element = anime_episode?.parentElement?.parentElement!));
@@ -60,7 +61,8 @@
     on:mouseenter={handle_mouseenter}
     on:mouseleave={handle_mouseleave}
     role="group"
-    class="group relative h-[5vw] shrink-0 snap-center duration-300 ease-in-out hover:h-[16vw]"
+    class="group relative h-[5vw] shrink-0 snap-center duration-300 ease-in-out"
+    class:!h-[16vw]={show_more_info}
 >
     <img
         src={episode.cover}
@@ -84,14 +86,14 @@
                 </span>
             </div>
         </div>
-        <button
-            on:click|preventDefault={() => {
-                // goto('/mal/{episode.id}/episode/{episode.episode_number}')
-            }}
-            class="btn btn-warning h-[2.5vw] min-h-max w-[2.5vw] rounded-full p-0 transition-colors duration-300 group-hover:btn-accent"
+        <a
+            use:enhance_anchor={{ verb: "GET", target: "#page" }}
+            href="mal/{episode.id}/episode/{episode.episode_number}"
+            class="btn btn-warning size-[2.5vw] min-h-max rounded-full p-0 transition-colors duration-300 group-hover:btn-accent"
+            class:!btn-accent={show_more_info}
         >
             <Play class="w-[1vw]" />
-        </button>
+        </a>
     </div>
 
     {#if show_more_info}
@@ -103,7 +105,7 @@
         >
             <genres class="flex items-center md:my-[0.35vw] md:gap-[0.5vw]">
                 {#each ["Action", "Romance", "Hentai"] as genre}
-                    <genre class="bg-accent font-semibold leading-none text-secondary md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
+                    <genre class="bg-warning font-semibold leading-none text-secondary md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
                         {genre}
                     </genre>
                 {/each}

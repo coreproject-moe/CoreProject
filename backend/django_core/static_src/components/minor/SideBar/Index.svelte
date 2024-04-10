@@ -30,7 +30,7 @@
             },
 
             label: "explore",
-            href: "/anime/explore/"
+            href: reverse("anime_explore_view"),
         },
         {
             icon: {

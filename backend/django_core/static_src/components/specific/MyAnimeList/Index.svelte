@@ -27,6 +27,7 @@
     import Play from "$icons/Play/Index.svelte";
     import Info from "$icons/Info/Index.svelte";
     import { enhance_anchor } from "$functions/anchor_enhancements";
+    import HoverExpand from "$components/minor/HoverExpand/Index.svelte";
 
     let main_element: HTMLElement;
 
@@ -42,47 +43,42 @@
 
 {#each my_anime_list_data as anime}
     <div
-        class="dropdown dropdown-hover"
+        class="dropdown dropdown-hover w-full"
         bind:this={main_element}
     >
-        <button
+        <a
             on:mouseenter|preventDefault={() => {
                 calculate_style();
             }}
-            class="relative"
+            href="mal/1"
+            class="relative w-full"
             tabindex="0"
             aria-expanded={false}
         >
-            <div class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]">
-                <img
-                    class="h-60 w-full rounded-lg object-cover object-center md:h-[20vw] md:rounded-[0.5vw]"
-                    src={anime.image}
-                    alt={anime.name}
-                    style=""
-                    loading="lazy"
-                />
-            </div>
-            <div class="absolute inset-x-0 bottom-0 rounded-b-lg backdrop-blur md:rounded-b-[0.5vw]">
-                <div class="flex flex-col gap-1 bg-secondary/95 p-3 md:gap-[0.35vw] md:p-[1vw]">
-                    <ScrollArea
-                        gradient_mask={true}
-                        parent_class="flex md:max-h-[1.35vw] md:leading-[1.35vw] hover:max-h-[10vw] duration-300"
-                        class="line-clamp-1 text-sm font-semibold md:line-clamp-none md:text-[1vw]"
-                    >
-                        {anime.name}
-                    </ScrollArea>
-                    <div class="text-surface-50 flex items-center gap-2 text-xs leading-none md:gap-[0.5vw] md:text-[0.8vw]">
-                        <span class="hidden capitalize md:flex">
-                            {anime.status}
-                        </span>
-                        <Dot class="hidden opacity-75 md:flex md:w-[0.25vw]" />
-                        <span>
-                            {`${anime.current_ep}/${anime.total_ep}`}
-                        </span>
-                    </div>
+            <img
+                class="w-full h-44 rounded-lg object-cover object-center md:h-[15vw] md:rounded-[0.75vw] md:rounded-b-none"
+                src={anime.image}
+                alt={anime.name}
+                loading="lazy"
+            />
+            <div class="flex flex-col gap-1 pt-2 md:gap-[0.35vw] md:p-[1vw] md:bg-neutral/50 md:rounded-b-[0.75vw]">
+                <HoverExpand
+                    class="line-clamp-1 w-full text-start text-sm font-semibold text-accent md:line-clamp-none md:text-[1vw] md:leading-[1.35vw]"
+                    height="md:max-h-[1.35vw] hover:max-h-[10vw]"
+                >
+                    {anime.name}
+                </HoverExpand>
+                <div class="text-surface-50 flex items-center gap-2 text-xs leading-none md:gap-[0.5vw] md:text-[0.8vw]">
+                    <span class="hidden capitalize md:flex">
+                        {anime.status}
+                    </span>
+                    <Dot class="hidden opacity-75 md:flex md:w-[0.25vw]" />
+                    <span>
+                        {`${anime.current_ep}/${anime.total_ep}`}
+                    </span>
                 </div>
             </div>
-        </button>
+        </a>
 
         <button
             tabindex="0"
@@ -110,7 +106,7 @@
                 </studio>
                 <genres class="flex items-center md:my-[0.35vw] md:gap-[0.5vw]">
                     {#each anime.genres as genre}
-                        <genre class="bg-warning font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
+                        <genre class="capitalize bg-warning font-semibold leading-none text-black md:rounded-[0.25vw] md:px-[0.6vw] md:py-[0.3vw] md:text-[0.8vw]">
                             {genre}
                         </genre>
                     {/each}
@@ -136,6 +132,7 @@
                         </span>
                     </a>
                     <a
+                        use:enhance_anchor={{ verb: "GET", target: "#page" }}
                         href="/anime/mal/1"
                         class="btn btn-square h-[2.75vw] min-h-full p-0 leading-none md:rounded-[0.5vw]"
                     >

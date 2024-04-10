@@ -10,11 +10,9 @@
     import Circle from "$icons/Circle/Index.svelte";
     import Expand from "$icons/Expand/Index.svelte";
     import SixGrids from "$icons/SixGrids/Index.svelte";
-    import { scale } from "svelte/transition";
     import { FormatDate } from "$functions/format_date";
     import HoverExpand from "$components/minor/HoverExpand/Index.svelte";
     import AnimeCard from "./AnimeCard.svelte";
-    import { string_to_boolean } from "$functions/string_to_bool";
     import { reverse } from "$functions/urls";
     import { Anime } from "../../../types/anime";
     import { onMount } from "svelte";
@@ -22,7 +20,6 @@
     import { FETCH_TIMEOUT } from "$constants/fetch";
 
     // Binding
-    let result_animes_element: HTMLDivElement;
     let search_query = "",
         active_filters: Array<string> = [],
         thumbnail_mode: "card_with_dropdown" | "detailed_card" = "card_with_dropdown";
@@ -325,13 +322,9 @@
             {:then results}
                 {#if !_.isEmpty(results)}
                     {#if thumbnail_mode === "detailed_card"}
-                        <div
-                            bind:this={result_animes_element}
-                            class="mt-5 grid grid-cols-2 gap-3 md:mt-[1.25vw] md:grid-cols-3 md:gap-[1.5vw]"
-                        >
+                        <div class="mt-5 grid grid-cols-2 gap-3 md:mt-[1.25vw] md:grid-cols-3 md:gap-[1.5vw]">
                             {#each results as anime}
                                 <a
-                                    in:scale={{ start: 0.95 }}
                                     href="/mal/{anime.mal_id}"
                                     class="relative col-span-1 grid grid-cols-1 md:grid-cols-2"
                                 >
@@ -350,7 +343,9 @@
                                                     {anime.name}
                                                 </HoverExpand>
                                                 <span class="line-clamp-1 text-xs md:line-clamp-none md:text-[0.8vw]">
-                                                    {anime?.studios?.[0].name ?? ""}
+                                                    {#if anime.studios?.length}
+                                                        {anime.studios[0]}
+                                                    {/if}
                                                 </span>
                                             </div>
                                         </div>
@@ -390,10 +385,7 @@
                             {/each}
                         </div>
                     {:else if thumbnail_mode === "card_with_dropdown"}
-                        <div
-                            class="mt-5 grid grid-cols-3 gap-3 md:mt-[1.25vw] md:grid-cols-6 md:gap-[1.5vw]"
-                            bind:this={result_animes_element}
-                        >
+                        <div class="mt-5 grid grid-cols-3 gap-3 md:mt-[1.25vw] md:grid-cols-6 md:gap-[1.5vw]">
                             {#each results as item}
                                 <AnimeCard
                                     anime_mal_id={item?.mal_id ?? 0}
