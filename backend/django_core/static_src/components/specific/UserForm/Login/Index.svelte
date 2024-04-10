@@ -13,6 +13,7 @@
     import { handle_input } from "../functions/handle_input";
     import { user_authenticated } from "$stores/user";
     import { enhance_anchor } from "$functions/anchor_enhancements";
+    import { autofocus } from "$functions/autofocus";
 
     let form_is_submitable: boolean | null = null;
 
@@ -81,6 +82,7 @@
     </div>
 {:else}
     <form
+        use:autofocus
         on:submit|preventDefault={handle_submit}
         class="flex h-full flex-col justify-between"
     >
