@@ -309,7 +309,7 @@
             <a
                 href={reverse("login_view")}
                 use:enhance_anchor={{ verb: "GET", target: "body" }}
-                class="text-start text-base leading-none text-primary underline md:text-[1.1vw]"
+                class="btn btn-link p-0 size-max min-h-full text-base leading-none md:text-[1.1vw]"
             >
                 Login
             </a>

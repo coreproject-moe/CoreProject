@@ -109,7 +109,7 @@
     <div class="flex items-center justify-between">
         <div class="flex flex-col gap-1 md:gap-[0.5vw]">
             <span class="text-surface-100 text-xs leading-none md:text-[0.75vw]">Already have an account?</span>
-            <button class="text-start text-base leading-none text-primary underline md:text-[1.1vw]">Login</button>
+            <button class="btn btn-link p-0 size-max min-h-full text-base leading-none md:text-[1.1vw]">Login</button>
         </div>
         <button
             on:click|preventDefault={handle_submit}
