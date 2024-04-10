@@ -1,7 +1,7 @@
 <script lang="ts">
     import Info from "$icons/Info/Index.svelte";
     import ArrowUpRight from "$icons/ArrowUpRight/Index.svelte";
-    import CoreProject from "$icons/CoreProjectText/Index.svelte";
+    import Arrow from "$icons/Arrow/Index.svelte";
 
     import { z } from "zod";
     import Markdown from "$components/minor/Markdown/Index.svelte";
@@ -85,8 +85,14 @@
         class="flex h-full flex-col justify-between"
     >
         <div>
-            <CoreProject class="!text-[2vw]" />
-            <span class="flex items-center text-lg font-bold uppercase leading-none tracking-widest text-warning md:text-[1.5vw]">hey there! welcome back</span>
+            <span class="flex items-center text-lg font-bold uppercase leading-none tracking-widest text-warning md:text-[1.5vw]">hey there! let's login</span>
+            <button
+                on:click={() => window.history.back()}
+                class="btn btn-link p-0 h-max min-h-full md:text-[1.25vw] md:gap-[0.5vw]"
+            >
+                <Arrow variant="fill" class="md:size-[1.25vw] -rotate-90" />
+                Go Back
+            </button>
         </div>
 
         <div class="flex flex-col gap-5 md:block">
