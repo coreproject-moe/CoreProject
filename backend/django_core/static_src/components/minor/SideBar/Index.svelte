@@ -1,7 +1,6 @@
 <script lang="ts">
     import { cn } from "$functions/classname";
     import { reverse } from "$functions/urls";
-    import * as _ from "lodash-es";
     import { blur } from "svelte/transition";
     import { url } from "$stores/url";
 

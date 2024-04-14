@@ -1,5 +1,4 @@
 <script lang="ts">
-    import * as _ from "lodash-es";
     import { cn } from "$functions/classname";
     import ScrollArea from "$components/minor/ScrollArea/Index.svelte";
     import Tick from "$icons/Tick/Index.svelte";
@@ -18,6 +17,7 @@
     import { onMount } from "svelte";
     import { get_csrf_token } from "$functions/get_csrf_token";
     import { FETCH_TIMEOUT } from "$constants/fetch";
+    import * as _ from "lodash-es";
 
     // Binding
     let search_query = "",
@@ -137,7 +137,7 @@
                 .join()
         };
         for (const [key, val] of Object.entries(search_map)) {
-            if (!_.isEmpty(val) && !_.isUndefined(val)) {
+            if (val != undefined && val.length !== 0) {
                 url.searchParams.set(key, val);
             }
         }
@@ -209,7 +209,7 @@
                     <div class="relative flex items-center">
                         <span class="absolute flex cursor-pointer items-center md:gap-[0.25vw]">
                             {#if selected_items}
-                                {#if !_.isEmpty(selected_items)}
+                                {#if selected_items.length !== 0}
                                     <span class="badge badge-primary ml-3 rounded p-1 text-sm font-semibold capitalize md:ml-[0.75vw] md:h-[1.5vw] md:rounded-[0.25vw] md:p-[0.35vw] md:text-[0.85vw]">
                                         <!-- show first item -->
                                         {selected_items[0]}
@@ -234,7 +234,7 @@
                             class="peer placeholder w-full rounded-lg border-none bg-neutral py-3 text-base font-semibold leading-none text-neutral-content placeholder:font-medium focus:ring-0 md:w-[11vw] md:rounded-[0.5vw] md:bg-neutral md:py-[0.8vw] md:pl-[1vw] md:text-[1vw]"
                         />
                         {#if selected_items}
-                            {#if !_.isEmpty(selected_items)}
+                            {#if selected_items.length !== 0}
                                 <button
                                     on:click|preventDefault={() => clear_selected_items(option[0])}
                                     class="btn absolute right-0 mr-3 w-4 border-none !bg-transparent p-0 md:mr-[1vw] md:w-[1vw]"
@@ -320,7 +320,7 @@
                     <span class="loading loading-ring loading-lg"></span>
                 </div>
             {:then results}
-                {#if !_.isEmpty(results)}
+                {#if results.length !== 0}
                     {#if thumbnail_mode === "detailed_card"}
                         <div class="mt-5 grid grid-cols-2 gap-3 md:mt-[1.25vw] md:grid-cols-3 md:gap-[1.5vw]">
                             {#each results as anime}

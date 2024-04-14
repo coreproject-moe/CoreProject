@@ -7,7 +7,6 @@
 
     import type { Comment, CommentResponse } from "$types/comment";
     import { FETCH_TIMEOUT } from "$constants/fetch";
-    import * as _ from "lodash-es";
     import { onMount } from "svelte";
     import { user_authenticated } from "$stores/user";
 
@@ -103,7 +102,7 @@
             case 200:
                 const js_object = {
                     json: value.results,
-                    root_path: item.path,
+                    root_path: item.path
                 };
 
                 const tree_item = new JSONToTree(js_object).build() as unknown as Comment[];
@@ -123,31 +122,31 @@
 
             default:
                 throw new Error(await res.text());
-        };
+        }
     };
 
-    const toggle_reply_shown = () => reply_shown = !reply_shown;
+    const toggle_reply_shown = () => (reply_shown = !reply_shown);
 
     const handle_mobile_click = () => {
             if (item.depth > 1) {
                 comment_reply_dialog_el.showModal();
             } else {
                 toggle_reply_shown();
-            };
+            }
         },
         handle_tablet_click = () => {
             if (item.depth > 5) {
                 return; // link
             } else {
                 toggle_reply_shown();
-            };
+            }
         },
         handle_desktop_click = () => {
             if (item.depth > 4) {
                 return; // link
             } else {
                 toggle_reply_shown();
-            };
+            }
         };
 </script>
 
@@ -271,7 +270,7 @@
         {/if}
 
         <!-- Render replies here -->
-        {#if !_.isEmpty(item.child) && item.childrens !== 0 && !item.collapse}
+        {#if item.child.length !== 0 && item.childrens !== 0 && !item.collapse}
             <div class="mt-5 flex flex-col gap-5 md:mt-[1.5vw] md:gap-[1.5vw]">
                 {#each item.child as comment}
                     <svelte:self
@@ -284,10 +283,10 @@
     </div>
 </div>
 
-{#if _.isEmpty(item.child) && item.childrens !== 0 && !item.collapse}
-    <div class="flex items-end ml-2 md:ml-[0.55vw] md:gap-[0.5vw]">
+{#if item.child.length == 0 && item.childrens !== 0 && !item.collapse}
+    <div class="ml-2 flex items-end md:ml-[0.55vw] md:gap-[0.5vw]">
         <svg
-            class="text-neutral w-7 md:w-[2vw]"
+            class="w-7 text-neutral md:w-[2vw]"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 15 15"
         >
@@ -301,10 +300,10 @@
 
         <button
             on:click={handle_more_click}
-            class="btn btn-secondary flex h-max min-h-max items-center p-0 gap-2 md:gap-[0.75vw]"
+            class="btn btn-secondary flex h-max min-h-max items-center gap-2 p-0 md:gap-[0.75vw]"
         >
-            <div class="grid rotate-45 place-items-center rounded-full bg-neutral size-5 md:size-[1.5vw]">
-                <Cross class="p-0 text-accent w-4 md:w-[1vw]" />
+            <div class="grid size-5 rotate-45 place-items-center rounded-full bg-neutral md:size-[1.5vw]">
+                <Cross class="w-4 p-0 text-accent md:w-[1vw]" />
             </div>
             <span class="md:text-[1vw]">{item.childrens} More</span>
         </button>

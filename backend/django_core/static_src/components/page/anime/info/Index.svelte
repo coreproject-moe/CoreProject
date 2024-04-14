@@ -9,7 +9,6 @@
         dominant_color: string | null = null;
 
     import JSON5 from "json5";
-    import * as _ from "lodash-es";
     import { reverse } from "$functions/urls";
     import { string_to_number } from "$functions/string_to_number";
 
@@ -53,14 +52,14 @@
     // Parse anime_episode to Compatible JSON
     type IAnimeEpisode = { banner: string; name: string; japanese_name: string; duration: string; formats: string[]; resolutions: string[] };
     const parse_anime_episode: () => IAnimeEpisode[] = () => {
-            if (!_.isNull(anime_episodes) && _.isString(anime_episodes)) {
+            if (anime_episodes != null && typeof anime_episodes === "string") {
                 return JSON5.parse(anime_episodes) satisfies IAnimeEpisode[];
             } else {
                 throw new Error(`${`anime_episode`} is not castable to JSON`);
             }
         },
         parse_anime_genres: () => string[] = () => {
-            if (!_.isNull(anime_genres) && _.isString(anime_genres)) {
+            if (anime_genres != null && typeof anime_genres === "string") {
                 return JSON5.parse(anime_genres) as string[];
             } else {
                 throw new Error(`${`anime_genres`} is not castable to ${`string[]`}`);

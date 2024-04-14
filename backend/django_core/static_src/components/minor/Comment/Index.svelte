@@ -7,7 +7,6 @@
     import type { Comment, CommentResponse } from "$types/comment";
     import { comment_needs_update } from "./store";
     import { onDestroy, onMount } from "svelte";
-    import * as _ from "lodash-es";
     import IntersectionOberser from "svelte-intersection-observer";
     import { get_csrf_token } from "$functions/get_csrf_token";
     import { FETCH_TIMEOUT } from "$constants/fetch";
@@ -31,7 +30,7 @@
     onMount(() => {
         if (url_params.has("comment")) {
             api_url = `/api/v2/comments/?path=${root_path}`;
-        };
+        }
 
         set_comments();
     });
@@ -55,10 +54,10 @@
                 case 200:
                     next_url = value.next;
                     const js_object = {
-                        json: value.results,
+                        json: value.results
                     };
 
-                    if (!_.isEmpty(tree_branch)) Object.assign(js_object, { old_json: tree_branch });
+                    if (tree_branch.length !== 0) Object.assign(js_object, { old_json: tree_branch });
                     if (url_params.has("comment")) Object.assign(js_object, { root_path: root_path });
 
                     return new JSONToTree(js_object).build() as unknown as Comment[];
@@ -120,7 +119,7 @@
         <ErrorSvelteComponent {error} />
     {/if}
 {:else if loading_state === "loaded"}
-    {#if !_.isEmpty(tree_branch)}
+    {#if tree_branch.length !== 0}
         <div class="flex flex-col gap-5 md:gap-[1.5vw]">
             {#each tree_branch as branch}
                 <CommentBlock

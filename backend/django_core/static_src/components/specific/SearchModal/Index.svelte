@@ -4,7 +4,6 @@
     import { reverse } from "$functions/urls";
     import { Anime } from "../../../types/anime";
     import { FormatDate } from "$functions/format_date";
-    import * as _ from "lodash-es";
     // Icon imports
     import Search from "$icons/Search/Index.svelte";
     import Cross from "$icons/Cross/Index.svelte";
@@ -39,7 +38,7 @@
         },
         handle_global_input = async (e: KeyboardEvent) => {
             const search_results = await search_promise;
-            if (_.isNull(search_results)) return;
+            if (search_results === null) return;
 
             switch (e.key.toLowerCase()) {
                 case "arrowdown":
@@ -143,7 +142,7 @@
                                 <span class="loading loading-ring loading-lg"></span>
                             </div>
                         {:then results}
-                            {#if !_.isEmpty(results)}
+                            {#if results.length !== 0}
                                 <div bind:this={anime_search_results_container_element}>
                                     {#each results as item, index}
                                         {@const is_active = active_core === "anime" && active_index === index}
@@ -182,7 +181,7 @@
                                                     {#each mapping as item, index}
                                                         {@const show_dot = index !== mapping.length - 1}
 
-                                                        {#if !_.isNull(item.value)}
+                                                        {#if item.value !== null}
                                                             <span class={item.class}>{item.value}</span>
                                                             {#if show_dot}
                                                                 <Circle class="md:w-[0.25vw]" />
