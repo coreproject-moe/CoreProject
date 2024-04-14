@@ -6,7 +6,7 @@
     import JSON5 from "json5";
     import { blur } from "svelte/transition";
     import * as _ from "lodash-es";
-
+    
     export let animes: string | null = null;
 
     type Anime = {
@@ -17,7 +17,7 @@
     let _anime: Anime[], picked_anime: Anime;
 
     beforeUpdate(() => {
-        if (!_.isNull(animes) && _.isString(animes)) {
+        if (animes !== null && typeof animes === "string") {
             _anime = JSON5.parse(animes) satisfies typeof _anime;
         } else {
             throw new Error("`animes` not provided for `side-image`");
@@ -28,9 +28,9 @@
     });
 
     const get_random_anime = () => {
-        const array_without_element = _.isUndefined(picked_anime) ? _anime : _.without(_anime, picked_anime);
+        const array_without_element = picked_anime === undefined ? _anime : _anime.filter((item) => item !== picked_anime);
         const sample = _.sample(array_without_element);
-        if (_.isUndefined(sample)) {
+        if (sample == undefined) {
             get_random_anime();
         } else {
             picked_anime = sample;
@@ -53,7 +53,7 @@
 
         <div class="absolute inset-0 bottom-[6vw] hidden flex-col items-center justify-center text-center text-white md:flex">
             <span class="text-[0.9vw] font-semibold uppercase leading-none">welcome to</span>
-            <CoreProject class="!leading-none md:!text-[1.5vw] !mt-[0.5vw]" />
+            <CoreProject class="!mt-[0.5vw] !leading-none md:!text-[1.5vw]" />
             <span class="mt-[2.875vw] max-w-[22vw] text-[1.25vw] font-semibold leading-[1.75vw]">Bridging the gap between streaming and torrenting sites with a modern and clean interface.</span>
             <span class="mt-[4vw] text-[1vw] font-semibold leading-none">With a coreproject account, you can</span>
             <span class="text-surface-200 mt-[0.5vw] max-w-[22vw] text-[1vw] font-medium leading-[1vw]">continue on animecore, mangacore and soundcore with same account.</span>

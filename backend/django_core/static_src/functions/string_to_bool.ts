@@ -1,21 +1,19 @@
-import * as _ from "lodash-es";
-
 export function string_to_boolean(variable: string | boolean | null | undefined): boolean {
-    if (_.isUndefined(variable)) {
+    if (variable === undefined) {
         return false;
     }
 
-    if (_.isBoolean(variable)) {
+    if (typeof variable === "boolean") {
         return variable;
     }
-    if (_.isUndefined(variable)) {
+    if (typeof variable === "undefined") {
         return false;
     }
-    if (_.isNull(variable)) {
+    if (variable === null) {
         return false;
     }
 
-    if (_.isString(variable)) {
+    if (typeof variable === "string") {
         switch (variable.toLowerCase()) {
             case "true": {
                 return true;

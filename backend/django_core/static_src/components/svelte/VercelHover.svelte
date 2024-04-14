@@ -1,6 +1,5 @@
 <script lang="ts">
     import { cn } from "$functions/classname";
-    import * as _ from "lodash-es";
 
     let hover_glider_element: HTMLElement | null = null,
         glider_container_element: HTMLElement | null = null;
@@ -17,7 +16,7 @@
     const handle_mouseenter = (event: Event) => {
             const target = event.target as HTMLElement;
             const target_computed_style = getComputedStyle(target);
-            if (_.isNull(glider_container_element) || _.isNull(hover_glider_element)) return;
+            if (glider_container_element === null || hover_glider_element === null) return;
 
             glider_container_element.style.position = "relative";
 

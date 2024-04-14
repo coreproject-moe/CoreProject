@@ -1,6 +1,4 @@
 import htmx from "htmx.org";
-import * as _ from "lodash-es";
-import nProgress from "nprogress";
 // Internal Function
 
 function handle_404() {
@@ -22,7 +20,7 @@ export function reverse(view: string, ...args: Array<string | number>) {
     const match_pattern = /\<(int|str):(\w+)>?/g;
     const matches = url?.match(match_pattern) ?? [];
 
-    if (_.isEmpty(matches)) {
+    if (matches.length === 0) {
         return url;
     } else if (matches?.length !== args.length) {
         throw new Error("`args` doesnot match with `urlpattern`");
@@ -54,7 +52,7 @@ export async function goto({
     target: string;
 }): Promise<void> {
     // In case of empty url, send user to 404 page
-    if (_.isEmpty(url)) {
+    if (url.length === 0) {
         handle_404();
     }
 
@@ -76,7 +74,7 @@ export async function goto({
     htmx.process(btn);
     let _anchor: HTMLElement | null = null;
 
-    if (!_.isNull(anchor) && !_.isUndefined(anchor)) {
+    if (anchor !== null && anchor !== undefined) {
         _anchor = anchor as HTMLElement;
     } else {
         _anchor = document.body as HTMLElement;

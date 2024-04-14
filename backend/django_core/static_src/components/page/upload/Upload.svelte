@@ -5,11 +5,11 @@
     import Edit from "$icons/Edit/Index.svelte";
     import prettyBytes from "pretty-bytes";
     import Dropzone from "svelte-file-dropzone";
-    import * as _ from "lodash-es";
     import { blur } from "svelte/transition";
     import Delete from "$icons/Delete/Index.svelte";
     import Chevron from "$icons/Chevron/Index.svelte";
     import TableRow from "./components/TableRow.svelte";
+    import * as _ from "lodash-es";
 
     let upload_state: "null" | "selecting" | "uploading" = "null",
         show_dropzone = false,
@@ -112,7 +112,7 @@
 
     function handle_delete() {
         files = files.filter((file) => !selected_files.includes(file));
-        if (_.isEmpty(files)) upload_state = "null";
+        if (files.length === 0) upload_state = "null";
         // uncheck
         checkboxes = Array(files.length).fill(false);
         main_checkbox.indeterminate = false;
@@ -247,7 +247,7 @@
 
             <div class="mt-5 flex justify-between md:mt-0 md:justify-start md:gap-[3vw]">
                 <button
-                    disabled={_.isEmpty(files)}
+                    disabled={files.length == 0}
                     class="text-surface-50 btn flex min-h-full gap-3 !bg-transparent p-0 text-base font-semibold capitalize leading-none md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]"
                 >
                     <Edit class="w-4 md:w-[1vw]" />
@@ -255,14 +255,14 @@
                     <span>Rename</span>
                 </button>
                 <button
-                    disabled={_.isEmpty(files)}
+                    disabled={files.length === 0}
                     class="text-surface-50 btn flex min-h-full gap-3 !bg-transparent p-0 text-base font-semibold capitalize leading-none md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]"
                 >
                     <Edit class="w-4 md:w-[1vw]"></Edit>
                     <span>Edit Details</span>
                 </button>
                 <button
-                    disabled={_.isEmpty(files)}
+                    disabled={files.length === 0}
                     on:click|preventDefault={handle_delete}
                     class="text-surface-50 btn flex min-h-full gap-3 !bg-transparent p-0 text-base font-semibold capitalize leading-none md:gap-[0.5vw] md:rounded-[0.25vw] md:text-[1vw]"
                 >
@@ -270,7 +270,7 @@
                     <span>Delete</span>
                 </button>
                 <button
-                    disabled={_.isEmpty(files)}
+                    disabled={files.length === 0}
                     class="btn btn-primary min-h-max md:h-max md:rounded-[0.5vw] md:p-[1vw] md:text-[1vw]"
                 >
                     <Upload class="w-4 md:w-[1.25vw]" />
