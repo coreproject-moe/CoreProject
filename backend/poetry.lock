@@ -93,13 +93,13 @@ tests = ["pytest"]
 
 [[package]]
 name = "asgiref"
-version = "3.7.2"
+version = "3.8.1"
 description = "ASGI specs, helper code, and adapters"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "asgiref-3.7.2-py3-none-any.whl", hash = "sha256:89b2ef2247e3b562a16eef663bc0e2e703ec6468e2fa8a5cd61cd449786d4f6e"},
-    {file = "asgiref-3.7.2.tar.gz", hash = "sha256:9e0ce3aa93a819ba5b45120216b23878cf6e8525eb3848653452b4192b92afed"},
+    {file = "asgiref-3.8.1-py3-none-any.whl", hash = "sha256:3e1e3ecc849832fe52ccf2cb6686b7a55f82bb1d6aee72a58826471390335e47"},
+    {file = "asgiref-3.8.1.tar.gz", hash = "sha256:c343bd80a0bec947a9860adb4c432ffa7db769836c64238fc34bdc3fec84d590"},
 ]
 
 [package.extras]
@@ -1988,16 +1988,17 @@ starlite = ["starlite (>=1.48.0)"]
 
 [[package]]
 name = "strawberry-graphql-django"
-version = "0.37.0"
+version = "0.37.1"
 description = "Strawberry GraphQL Django extension"
 optional = false
 python-versions = "<4.0,>=3.8"
 files = [
-    {file = "strawberry_graphql_django-0.37.0-py3-none-any.whl", hash = "sha256:ff30fcb48ff0148e57c36c9e1aa8103ad3d2bd46a72b129ca16b527b0b55c0d1"},
-    {file = "strawberry_graphql_django-0.37.0.tar.gz", hash = "sha256:c9d33c2212b23c8ff40a9e8d92225e651736dd83746f8826b07d8a1dead5e167"},
+    {file = "strawberry_graphql_django-0.37.1-py3-none-any.whl", hash = "sha256:03ff1bf19a9a041ac86cc5985dc72576bede11b893f7cbb2f124bb63014de322"},
+    {file = "strawberry_graphql_django-0.37.1.tar.gz", hash = "sha256:cb4ef4ad2bcf26210da73faaa88ca5e51c21e8b3d052a4fa8ed579817d006cbd"},
 ]
 
 [package.dependencies]
+asgiref = ">=3.8"
 django = ">=3.2"
 strawberry-graphql = ">=0.212.0"
 
@@ -2443,4 +2444,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "1a370f067135c2ff90d5302011c1c69d1c310b8ee58d9737f6d5dc54ddefe9cc"
+content-hash = "19db19a7430492d6219c3c8303b6d48f9c5c1c0e62b631c0d0af699be8269cc1"
