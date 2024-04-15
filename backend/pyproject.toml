@@ -69,7 +69,7 @@ django-htmx = ">=1.17.0"
 # Markdown
 django-vite = "^3.0.4"
 # Graphql
-strawberry-graphql = "^0.224.1"
+strawberry-graphql = "^0.225.1"
 strawberry-graphql-django = "^0.37.1"
 
 
