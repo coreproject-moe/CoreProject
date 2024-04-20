@@ -5,6 +5,7 @@
     import AnimeCore from "$icons/AnimeCore/index.svelte";
     import MangaCore from "$icons/MangaCore/Index.svelte";
     import SoundCore from "$icons/SoundCore/Index.svelte";
+    import { onMount } from "svelte";
 
     const products_mapping = [
         {
@@ -34,20 +35,37 @@
             available: false
         }
     ];
+    let bg_lottie: object;
+    let scroll: object;
+    let squiggle: object;
+    let stars: object;
+
+    onMount(async () => {
+        import("./lotties/bg-lottie.json").then((res) => {
+            bg_lottie = res.default;
+        });
+        import("./lotties/squiggle.json").then((res) => {
+            squiggle = res.default;
+        });
+        import("./lotties/stars.json").then((res) => {
+            stars = res.default;
+        });
+        import("./lotties/scroll.json").then((res) => {
+            scroll = res.default;
+        });
+    });
 </script>
 
 <div class="relative min-h-dvh overflow-x-hidden bg-secondary">
     <div class="absolute inset-0 overflow-hidden">
-        {#await import("./lotties/bg-lottie.json") then item}
-            <LottiePlayer
-                src={item.default}
-                autoplay={true}
-                loop={false}
-                renderer="svg"
-                background="transparent"
-                style={{ height: "100%", width: "100%", "object-fit": "contain" }}
-            />
-        {/await}
+        <LottiePlayer
+            src={bg_lottie}
+            autoplay={true}
+            loop={false}
+            renderer="svg"
+            background="transparent"
+            style={{ height: "100%", width: "100%", "object-fit": "contain" }}
+        />
     </div>
 
     <section class="relative mt-20 flex w-full flex-col items-center justify-center md:mt-[10vh]">
@@ -56,17 +74,15 @@
             <h2 class="relative inline-block bg-gradient-to-r from-blue-500 from-[35%] to-yellow-600 to-[65%] bg-clip-text text-transparent">
                 Platform.
                 <div class="absolute bottom-2 right-3 size-12 -rotate-45 md:bottom-[2vw] md:right-[5vw] md:size-[5vw]">
-                    {#await import("./lotties/squiggle.json") then item}
-                        <LottiePlayer
-                            src={item.default}
-                            autoplay={true}
-                            loop={false}
-                            mode={"bounce"}
-                            speed={0.75}
-                            renderer="svg"
-                            background="transparent"
-                        />
-                    {/await}
+                    <LottiePlayer
+                        src={squiggle}
+                        autoplay={true}
+                        loop={false}
+                        mode={"bounce"}
+                        speed={0.75}
+                        renderer="svg"
+                        background="transparent"
+                    />
                 </div>
             </h2>
         </div>
@@ -81,27 +97,23 @@
                 Start Exploring Now!
             </a>
             <div class="absolute -right-14 size-14 md:-right-[4vw] md:size-[4vw]">
-                {#await import("./lotties/stars.json") then item}
-                    <LottiePlayer
-                        src={item.default}
-                        autoplay={true}
-                        loop={false}
-                        renderer="svg"
-                        background="transparent"
-                    />
-                {/await}
-            </div>
-        </div>
-        <div class="mt-5 size-6 opacity-75 md:mt-[3vw] md:size-[2vw]">
-            {#await import("./lotties/scroll.json") then item}
                 <LottiePlayer
-                    src={item.default}
+                    src={stars}
                     autoplay={true}
-                    loop={true}
+                    loop={false}
                     renderer="svg"
                     background="transparent"
                 />
-            {/await}
+            </div>
+        </div>
+        <div class="mt-5 size-6 opacity-75 md:mt-[3vw] md:size-[2vw]">
+            <LottiePlayer
+                src={scroll}
+                autoplay={true}
+                loop={true}
+                renderer="svg"
+                background="transparent"
+            />
         </div>
     </section>
 

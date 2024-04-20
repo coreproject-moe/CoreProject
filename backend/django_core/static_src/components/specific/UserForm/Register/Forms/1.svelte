@@ -186,9 +186,12 @@
         </span>
         <button
             on:click={() => window.history.back()}
-            class="btn btn-link p-0 h-max min-h-full md:text-[1.25vw] md:gap-[0.5vw]"
+            class="btn btn-link h-max min-h-full p-0 md:gap-[0.5vw] md:text-[1.25vw]"
         >
-            <Arrow variant="fill" class="md:size-[1.25vw] -rotate-90" />
+            <Arrow
+                variant="fill"
+                class="-rotate-90 md:size-[1.25vw]"
+            />
             Go Back
         </button>
     </div>
@@ -205,7 +208,7 @@
                 on:input|preventDefault={handle_email_input}
                 on:input={check_if_form_is_submitable}
                 placeholder="Email address"
-                class="border-neutral focus:border-primary w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-colors duration-300 placeholder:text-white/50 md:rounded-[0.75vw] md:border-[0.2vw] p-3.5 md:px-[1.1vw] md:py-[0.8vw] leading-none md:text-[1.1vw]"
+                class="w-full rounded-xl border-2 border-neutral bg-transparent p-3.5 px-5 text-base font-medium leading-none outline-none !ring-0 transition-colors duration-300 placeholder:text-white/50 focus:border-primary md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1.1vw] md:py-[0.8vw] md:text-[1.1vw]"
             />
             <div class="flex items-center gap-2 text-xs leading-none md:gap-[0.5vw] md:text-[0.75vw]">
                 <Info class="w-3 opacity-70 md:w-[0.9vw]" />
@@ -233,7 +236,7 @@
                 on:input={handle_password_input}
                 on:input={check_if_form_is_submitable}
                 placeholder="Password"
-                class="border-neutral focus:border-primary w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-colors duration-300 placeholder:text-white/50 md:rounded-[0.75vw] md:border-[0.2vw] p-3.5 md:px-[1.1vw] md:py-[0.8vw] leading-none md:text-[1.1vw]"
+                class="w-full rounded-xl border-2 border-neutral bg-transparent p-3.5 px-5 text-base font-medium leading-none outline-none !ring-0 transition-colors duration-300 placeholder:text-white/50 focus:border-primary md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1.1vw] md:py-[0.8vw] md:text-[1.1vw]"
             />
             <div class="flex flex-col">
                 <div class="grid grid-cols-4 gap-[1.5vw] md:gap-[0.75vw]">
@@ -286,7 +289,7 @@
                 on:input={handle_confirm_password}
                 on:input={check_if_form_is_submitable}
                 placeholder="Confirm Password"
-                class="border-neutral focus:border-primary w-full rounded-xl border-2 bg-transparent px-5 text-base font-medium outline-none !ring-0 transition-colors duration-300 placeholder:text-white/50 md:rounded-[0.75vw] md:border-[0.2vw] p-3.5 md:px-[1.1vw] md:py-[0.8vw] leading-none md:text-[1.1vw]"
+                class="w-full rounded-xl border-2 border-neutral bg-transparent p-3.5 px-5 text-base font-medium leading-none outline-none !ring-0 transition-colors duration-300 placeholder:text-white/50 focus:border-primary md:rounded-[0.75vw] md:border-[0.2vw] md:px-[1.1vw] md:py-[0.8vw] md:text-[1.1vw]"
             />
             <div class="flex items-center gap-2 text-xs leading-none md:gap-[0.5vw] md:text-[0.75vw]">
                 {#if _.isEmpty(confirm_password.error)}
@@ -309,7 +312,7 @@
             <a
                 href={reverse("login_view")}
                 use:enhance_anchor={{ verb: "GET", target: "body" }}
-                class="btn btn-link p-0 size-max min-h-full text-base leading-none md:text-[1.1vw]"
+                class="btn btn-link size-max min-h-full p-0 text-base leading-none md:text-[1.1vw]"
             >
                 Login
             </a>
@@ -317,7 +320,7 @@
         <button
             type="submit"
             class:btn-disabled={!form_is_submitable}
-            class={cn(`btn btn-primary h-max min-h-max rounded-lg p-4 text-base font-semibold leading-none text-accent md:rounded-[0.75vw] md:py-[1vw] md:px-[1.25vw] md:text-[0.95vw]`)}
+            class={cn(`btn btn-primary h-max min-h-max rounded-lg p-4 text-base font-semibold leading-none text-accent md:rounded-[0.75vw] md:px-[1.25vw] md:py-[1vw] md:text-[0.95vw]`)}
         >
             <span>Continue</span>
             <ArrowUpRight class="w-4 rotate-45 md:w-[1vw]" />
