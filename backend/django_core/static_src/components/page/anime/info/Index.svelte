@@ -88,12 +88,16 @@
             canvas.width = img.width;
             canvas.height = img.height;
 
+            // If you want to control the brightness, control this variable here.
+            // if (ctx) ctx.filter = "brightness(25%)";
+
             ctx?.drawImage(img, 0, 0);
+
             let imageData = ctx?.getImageData(0, 0, canvas.width, canvas.height);
 
             if (imageData) {
                 const colors = get_color_thief(new Uint8Array(imageData.data), 64 * 64, 10, 5);
-                dominant_color = `rgb(${colors[0][0]},${colors[0][1]},${colors[0][2]})`;
+                dominant_color = `rgba(${colors[0][0]},${colors[0][1]},${colors[0][2]}, 0.15)`;
             }
         });
     };
