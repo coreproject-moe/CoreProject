@@ -5,7 +5,7 @@
     import ArrowUpRight from "$icons/ArrowUpRight/Index.svelte";
     import Arrow from "$icons/Arrow/Index.svelte";
 
-    import { createEventDispatcher, onMount } from "svelte";
+    import { beforeUpdate, createEventDispatcher } from "svelte";
     import Markdown from "$components/minor/Markdown/Index.svelte";
     import * as _ from "lodash-es";
     import { z } from "zod";
@@ -25,7 +25,7 @@
 
     let confirm_password_element: HTMLInputElement | null = null;
 
-    onMount(async () => {
+    beforeUpdate(async () => {
         const zxcvbnCommonPackage = await import("@zxcvbn-ts/language-common");
         const zxcvbnEnPackage = await import("@zxcvbn-ts/language-en");
         const zxcvbnCsPackage = await import("@zxcvbn-ts/language-cs");
