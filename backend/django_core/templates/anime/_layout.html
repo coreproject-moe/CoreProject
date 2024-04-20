@@ -16,10 +16,10 @@
                     </a>
                     <div class="relative flex items-center md:static">
                         <div class="absolute left-1/2 -translate-x-1/2">
-                            <a href="/anime" class="hidden md:flex">
+                            <a hx-get="/anime" hx-target="#page" href="/anime" class="hidden md:flex">
                                 <coreproject-icon-animecore class="w-[10vw]" ></coreproject-icon-animecore>
                             </a>
-                            <search-form>
+                            <div>
                                 <form class="relative flex h-12 w-[65vw] items-center md:hidden">
                                     <button class="btn absolute left-4 p-0 !bg-transparent border-none" aria-label="Search">
                                         <coreproject-icon-search class="w-5"></coreproject-icon-search>
@@ -30,7 +30,7 @@
                                         class="h-full w-full rounded-lg border-none bg-neutral pl-12 text-base font-semibold text-accent shadow-lg !ring-0 placeholder:font-medium placeholder:text-surface-200"
                                     />
                                 </form>
-                            </search-form>
+                            </div>
                         </div>
                     </div>
                     <coreproject-specific-navbar
