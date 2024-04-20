@@ -5,7 +5,7 @@
     import AnimeCore from "$icons/AnimeCore/index.svelte";
     import MangaCore from "$icons/MangaCore/Index.svelte";
     import SoundCore from "$icons/SoundCore/Index.svelte";
-    import { beforeUpdate, onMount } from "svelte";
+    import { onMount } from "svelte";
 
     const products_mapping = [
         {
@@ -40,7 +40,7 @@
     let squiggle: object;
     let stars: object;
 
-    beforeUpdate(async () => {
+    onMount(async () => {
         import("./lotties/bg-lottie.json").then((res) => {
             bg_lottie = res.default;
         });
