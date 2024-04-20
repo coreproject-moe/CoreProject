@@ -1,5 +1,4 @@
 import type { Comment } from "$types/comment";
-import * as _ from "lodash-es";
 
 export class JSONToTree {
     #json: Comment[] = new Array<Comment>();
@@ -11,7 +10,7 @@ export class JSONToTree {
         if (old_json) {
             // DO NOT DEEP MERGE
             const new_arr = this.convert_to_tree_given_path(json);
-            this.#json = _.merge(old_json, new_arr);
+            this.#json = Object.assign(old_json, new_arr);
         } else {
             this.#json = this.convert_to_tree_given_path(json);
         }
@@ -29,14 +28,14 @@ export class JSONToTree {
                 ...node,
                 child: [],
                 depth: node.path.split(".").length,
-                collapse: (node.depth > 1 && node.ratio < 0) || node.ratio < 0 && this.#root_path !== node.path,
+                collapse: (node.depth > 1 && node.ratio < 0) || (node.ratio < 0 && this.#root_path !== node.path)
             };
             node_dictionary[node.path] = new_node;
 
             // If the node is a root-level node, add it to the tree
             if (!node.path.includes(".") || node.path === this.#root_path) {
                 tree.push(new_node);
-            };
+            }
         });
 
         // Second pass: Connect child nodes to their parent nodes
