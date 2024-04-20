@@ -12,6 +12,9 @@ const CSS_DIRECTORY = join(STATIC_SRC, "css");
 export default defineConfig({
     root: resolve("./django_core/static_src"),
     base: "/static/",
+    optimizeDeps: {
+        exclude: ["color-thief-wasm-web"]
+    },
     resolve: {
         alias: {
             $tailwind: join(resolve("./tailwind.config.ts")),
@@ -51,6 +54,7 @@ export default defineConfig({
         target: "es2022",
         cssTarget: "es2015",
         minify: "terser",
+
         // sourcemap: true,
         rollupOptions: {
             input: [

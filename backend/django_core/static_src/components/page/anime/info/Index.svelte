@@ -5,8 +5,8 @@
         anime_genres: string | null = null,
         anime_episodes_count: string | null = null, // Is number
         anime_synopsis: string | null = null,
-        anime_episodes: string | null = null,
-        dominant_color: string | null = null;
+        anime_episodes: string | null = null;
+    import init, { get_color_thief } from "color-thief-wasm-web";
 
     import JSON5 from "json5";
     import * as _ from "lodash-es";
@@ -35,6 +35,9 @@
     import Cross from "$icons/Cross/Index.svelte";
     import Chat from "$icons/Chat/Index.svelte";
     import TrendingArrow from "$icons/TrendingArrow/Index.svelte";
+
+    // Unnecessary
+    import img from "../../../../assets/img/your-lie-in-april-cover.jpg";
 
     // Internal logics
     const second_mapping = [
@@ -72,6 +75,29 @@
         { icon: Download, label: "download" },
         { icon: Share, label: "share" }
     ];
+
+    let dominant_color: string;
+
+    const handle_image_load = async (event: Event) => {
+        let img = event.currentTarget as HTMLImageElement;
+
+        init().then(() => {
+            let canvas = document.createElement("canvas");
+            let ctx = canvas.getContext("2d");
+
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            ctx?.drawImage(img, 0, 0);
+            let imageData = ctx?.getImageData(0, 0, canvas.width, canvas.height);
+
+            if (imageData) {
+                const colors = get_color_thief(new Uint8Array(imageData.data), 64 * 64, 10, 5);
+                dominant_color = `rgb(${colors[0][0]},${colors[0][1]},${colors[0][2]})`;
+            }
+        });
+    };
+    $: console.log(dominant_color);
 </script>
 
 <div class="relative mt-16 block h-screen bg-cover md:mt-0">
@@ -91,8 +117,10 @@
                             style:--color={dominant_color}
                         />
                         <img
+                            crossorigin="anonymous"
                             alt=""
-                            src="https://files.otakustudy.com/wp-content/uploads/2020/10/10153058/your-lie-in-april-cover.jpg"
+                            src={img}
+                            on:load={handle_image_load}
                             class="h-full w-full rounded-xl object-cover object-center md:rounded-[1vw]"
                         />
                         <div class="gradient to-surface-900/25 absolute inset-0 bg-gradient-to-t from-secondary/75 md:hidden"></div>
