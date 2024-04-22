@@ -40,7 +40,7 @@
 
             <div class="mt-[0.75vw] flex items-center justify-between gap-[2vw] pr-[0.75vw]">
                 <span class="text-[0.75vw] font-semibold md:leading-[1.25vw]">Showing recently aired episodes from your Anime List</span>
-                <button class="btn btn-secondary min-h-full h-max p-0 text-[0.75vw] font-semibold text-warning">Change to All</button>
+                <button class="btn btn-secondary h-max min-h-full p-0 text-[0.75vw] font-semibold text-warning">Change to All</button>
             </div>
         </div>
         <div class="relative mt-[2.75vw] hidden h-[24.5vw] w-[16.625vw] md:block">
@@ -126,10 +126,15 @@
                 </button>
             </div>
         </div>
-        <div class="relative mt-3 grid grid-cols-3 gap-3 md:mt-[1vw] md:grid-cols-5 md:gap-[1.25vw]">
+        <!-- DANGER -->
+        <!-- For the love of god, don't modify the gap property from the bottom, it is there to keep the dropdown in sync -->
+        <div
+            style="--gap:1.25vw"
+            class="relative mt-3 grid grid-cols-3 gap-3 md:mt-[1vw] md:grid-cols-5 md:gap-[var(--gap)]"
+        >
             <MyAnimeList
                 {my_anime_list}
-                dropdown_class="pl-3"
+                dropdown_class="pl-[var(--gap)]"
             />
         </div>
     </div>
