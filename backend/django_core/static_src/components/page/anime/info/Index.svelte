@@ -5,8 +5,8 @@
         anime_genres: string | null = null,
         anime_episodes_count: string | null = null, // Is number
         anime_synopsis: string | null = null,
-        anime_episodes: string | null = null,
-        dominant_color: string | null = null;
+        anime_episodes: string | null = null;
+    import init, { get_color_thief } from "color-thief-wasm-web";
 
     import JSON5 from "json5";
     import * as _ from "lodash-es";
@@ -35,6 +35,40 @@
     import Cross from "$icons/Cross/Index.svelte";
     import Chat from "$icons/Chat/Index.svelte";
     import TrendingArrow from "$icons/TrendingArrow/Index.svelte";
+
+    // Unnecessary
+    import image from "../../../../assets/img/your-lie-in-april-cover.jpg";
+    import { beforeUpdate } from "svelte";
+
+    beforeUpdate(async () => {
+        let img = document.createElement("img");
+        img.crossOrigin = "anonymous";
+
+        img.onload = () => {
+            init().then(() => {
+                let canvas = document.createElement("canvas");
+                let ctx = canvas.getContext("2d");
+
+                canvas.width = img.width;
+                canvas.height = img.height;
+
+                // If you want to control the brightness, control this variable here.
+                // if (ctx) ctx.filter = "brightness(25%)";
+
+                ctx?.drawImage(img, 0, 0);
+
+                let imageData = ctx?.getImageData(0, 0, canvas.width, canvas.height);
+
+                if (imageData) {
+                    const colors = get_color_thief(new Uint8Array(imageData.data), 64 * 64, 10, 5);
+                    dominant_color = `rgba(${colors[0][0]},${colors[0][1]},${colors[0][2]}, 0.15)`;
+                    image_loaded = true;
+                }
+            });
+        };
+
+        img.src = image;
+    });
 
     // Internal logics
     const second_mapping = [
@@ -72,6 +106,9 @@
         { icon: Download, label: "download" },
         { icon: Share, label: "share" }
     ];
+
+    let dominant_color: string;
+    let image_loaded: boolean = false;
 </script>
 
 <div class="relative mt-16 block h-screen bg-cover md:mt-0">
@@ -91,9 +128,10 @@
                             style:--color={dominant_color}
                         />
                         <img
+                            crossorigin="anonymous"
                             alt=""
-                            src="https://files.otakustudy.com/wp-content/uploads/2020/10/10153058/your-lie-in-april-cover.jpg"
-                            class="h-full w-full rounded-xl object-cover object-center md:rounded-[1vw]"
+                            src={image}
+                            class="h-full w-full rounded-xl object-cover object-center md:rounded-[1vw] {image_loaded ? 'visible' : 'invisible'}"
                         />
                         <div class="gradient to-surface-900/25 absolute inset-0 bg-gradient-to-t from-secondary/75 md:hidden"></div>
                         <div class="gradient absolute inset-0 bg-gradient-to-r from-secondary/50 to-transparent md:hidden"></div>
