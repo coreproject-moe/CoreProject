@@ -14,7 +14,7 @@ alembic = "^1.13.1"
 
 
 [tool.poetry.group.dev.dependencies]
-black = "^24.4.0"
+black = "^24.4.2"
 aiohttp-devtools = "^1.1"
 poethepoet = "^0.25.1"
 
