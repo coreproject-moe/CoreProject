@@ -80,7 +80,7 @@
         "terser": "^5.30.4",
         "typescript": "^5.4.5",
         "typewriter-effect": "^2.21.0",
-        "zod": "^3.23.0"
+        "zod": "^3.23.4"
     },
     "optionalDependencies": {
         "@rollup/rollup-linux-x64-gnu": "4.16.2"
