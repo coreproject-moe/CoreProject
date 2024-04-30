@@ -10,7 +10,7 @@ class IsAuthenticated(BasePermission):
     # This method can also be async!
     def has_permission(self, source: typing.Any, info: Info, **kwargs) -> bool:
         user: CustomUser = info.context.get("user", None)
-        return True if user else False
+        return True if user.is_authenticated else False
 
 
 class IsSuperUser(BasePermission):
@@ -19,4 +19,4 @@ class IsSuperUser(BasePermission):
     # This method can also be async!
     def has_permission(self, source: typing.Any, info: Info, **kwargs) -> bool:
         user: CustomUser = info.context.get("user", None)
-        return True if user and user.is_superuser else False
+        return True if user.is_authenticated and user.is_superuser else False

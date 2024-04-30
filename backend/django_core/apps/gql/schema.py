@@ -4,6 +4,7 @@ import strawberry_django.permissions
 
 from .mutations.user import UserMutation
 from .mutations.anime import AnimeMutation
+from .mutations.comment import CommentMutation
 from .types.anime import AnimeType
 from .types.character import Character
 from .types.producer import Producer
@@ -31,7 +32,7 @@ class Query:
 
 
 @strawberry.type
-class Mutation(AnimeMutation, UserMutation): ...
+class Mutation(AnimeMutation, UserMutation, CommentMutation): ...
 
 
 schema = strawberry.Schema(
