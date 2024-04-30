@@ -141,7 +141,7 @@
             }}
             element={last_element}
         >
-            <div bind:this={last_element} />
+            <div bind:this={last_element}></div>
         </IntersectionOberser>
     {/if}
 {/if}
