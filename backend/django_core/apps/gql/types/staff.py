@@ -1,4 +1,3 @@
-import strawberry
 from apps.staffs.models import StaffAlternateNameModel, StaffModel
 
 from ..filters.staff import StaffFilter

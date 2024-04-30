@@ -9,9 +9,9 @@ class RegisterSerializer(serializers.ModelSerializer):
         exclude = (
             "is_staff",
             "is_active",
-            "date_joined",
             "last_login",
             "is_superuser",
             "groups",
+            "created_at",
             "user_permissions",
         )

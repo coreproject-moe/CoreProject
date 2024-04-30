@@ -12,6 +12,7 @@ from drf_spectacular.utils import extend_schema_field
 from drf_spectacular.types import OpenApiTypes
 from .managers import UserManager
 from .validators import username_validator
+from mixins.models.created_at import CreatedAtMixin
 
 avatar = FilePattern(filename_pattern="avatar/{uuid:s}{ext}")
 
@@ -19,10 +20,7 @@ avatar = FilePattern(filename_pattern="avatar/{uuid:s}{ext}")
 # Create your models here.
 
 
-class CustomUser(
-    AbstractBaseUser,
-    PermissionsMixin,
-):
+class CustomUser(AbstractBaseUser, PermissionsMixin, CreatedAtMixin):
     username = models.CharField(
         _("username"),
         max_length=150,
@@ -71,11 +69,6 @@ class CustomUser(
     )
     avatar_provider = models.URLField(
         default="https://seccdn.libravatar.org/avatar/{EMAIL}?s=512",
-    )
-
-    date_joined = models.DateTimeField(
-        _("date joined"),
-        default=timezone.now,
     )
 
     objects = UserManager()

@@ -21,5 +21,4 @@ class GraphQLView(StrawberryDjangoGraphQLView):
 
     def get_context(self, request: HttpRequest, response: HttpResponse) -> Any:
         context = {"user": self.get_user, "request": request, "response": response}
-
         return context
