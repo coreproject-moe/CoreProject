@@ -9,6 +9,7 @@ from .types.character import Character
 from .types.producer import Producer
 from .types.staff import Staff
 from .types.user import User
+from .types.comment import Comment
 import strawberry_django
 from strawberry.schema.config import StrawberryConfig
 
@@ -25,6 +26,8 @@ class Query:
     @strawberry_django.field()
     def user(self, info: strawberry.Info) -> User:
         return CustomUser.objects.get(id=info.context["user"].id)
+
+    comments: list[Comment] = strawberry_django.field(pagination=True)
 
 
 @strawberry.type
