@@ -40,8 +40,6 @@ handler500 = views.five_zero_zero_view
 urlpatterns = [
     # Default django welcome page
     # path("", debug.default_urlconf),
-    # Graphql
-    path("graphql/", include("apps.gql.urls")),
     #   Admin
     # ================
     path("admin/", admin.site.urls),

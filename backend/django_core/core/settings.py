@@ -90,8 +90,6 @@ INSTALLED_APPS = [
     "django_admin_hstore_widget",
     # Block users
     "defender",
-    # GQL
-    "strawberry_django",
     # Tree
     "django_ltree",
     # Api
@@ -106,7 +104,6 @@ INSTALLED_APPS = [
     # Vite Plugin
     "django_vite",
     # Models
-    "apps.gql",
     "apps.comments",
     "apps.pages",
     "apps.anime",
