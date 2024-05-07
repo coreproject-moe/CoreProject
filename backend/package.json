@@ -76,7 +76,7 @@
         "svelte-file-dropzone": "^2.0.7",
         "svelte-gestures": "^4.0.0",
         "svelte-preprocess": "^5.1.4",
-        "svelte-retag": "^1.5.4",
+        "svelte-retag": "^1.6.0",
         "terser": "^5.31.0",
         "typescript": "^5.4.5",
         "typewriter-effect": "^2.21.0",
