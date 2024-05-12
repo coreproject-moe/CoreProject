@@ -26,7 +26,7 @@ class Query:
 
     @strawberry_django.field()
     def user(self, info: strawberry.Info) -> User:
-        return CustomUser.objects.get(id=info.context["user"].id)
+        return CustomUser.objects.get(pk=info.context["user"].pk)
 
     comments: list[Comment] = strawberry_django.field(pagination=True)
 
