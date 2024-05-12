@@ -33,5 +33,6 @@ class UserMutation:
             token_instance.delete()
             django_logout(request)
             return True
+
         except Token.DoesNotExist:
             return False
