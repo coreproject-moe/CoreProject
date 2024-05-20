@@ -35,8 +35,6 @@ user_router.register(r"user/register", RegisterViewSet, basename="register")
 base_router.registry.extend(user_router.registry)
 
 urlpatterns = [
-    # Routers
-    path("", include(base_router.urls)),
     # Anime specific routes
     path(
         "anime/<int:pk>/comment",
@@ -86,4 +84,7 @@ urlpatterns = [
         DoodstreamAPIView.as_view(),
         name="doodstream-provider-endpoint",
     ),
+    # ROUTERS SHOULD BE INCLUDED AT THE BOTTOM TO PREVENT OVERRIDES
+    # Routers
+    path("", include(base_router.urls)),
 ]
