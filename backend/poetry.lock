@@ -1104,17 +1104,65 @@ zookeeper = ["kazoo (>=2.8.0)"]
 
 [[package]]
 name = "modern-colorthief"
-version = "0.1.2"
-description = "Colorthief reimagined"
+version = "0.1.4"
+description = ""
 optional = false
-python-versions = ">=3.8,<4.0"
+python-versions = ">3.8"
 files = [
-    {file = "modern_colorthief-0.1.2-py3-none-any.whl", hash = "sha256:a57d82184708d926d3f4e47f83956a5fccf339af788e91e97e88013cf46ac1c6"},
-    {file = "modern_colorthief-0.1.2.tar.gz", hash = "sha256:bce71acb9611c2e7af029606d5bdbad786f72776841ebcf2ab4910d2a01de066"},
+    {file = "modern_colorthief-0.1.4-cp310-cp310-macosx_10_12_x86_64.whl", hash = "sha256:249fe850ed796ef632c0bc604a31debed88da78155591c1bcb60d03842a29493"},
+    {file = "modern_colorthief-0.1.4-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:b1e94e0f927c363b80a81e2c1b3462534f62e5ec55e62c2b6f060bf13ce3e64a"},
+    {file = "modern_colorthief-0.1.4-cp310-cp310-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:82904b53c05c9de52f3614def7a65d43d1235ed99eff99c58d4fac875964531b"},
+    {file = "modern_colorthief-0.1.4-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:fb555da84921d2707641e3d04292cf6cc836fe7f22c99b0d6730b70f608126ca"},
+    {file = "modern_colorthief-0.1.4-cp310-cp310-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:02537ca7d78a0e92600ce763b4a12b63a162cacb889cd62008040959299a408a"},
+    {file = "modern_colorthief-0.1.4-cp310-cp310-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:d49147ccc2deb23f89066398d997aa4ba5a69a8bc2d0dee6e7151e6fe3ec18dd"},
+    {file = "modern_colorthief-0.1.4-cp310-cp310-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:4fd1e459e309cd5fb054824a9413fc1e191eb3dd6a6cd33b7636bd3fc2411a8e"},
+    {file = "modern_colorthief-0.1.4-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f9d4e7e7100341513e30c101ae322619169f67a0ffba69dffca9043ff324cc08"},
+    {file = "modern_colorthief-0.1.4-cp310-none-win32.whl", hash = "sha256:6ec022beec8fdcee9e2af5113414ec82185967c73456e03a5c8f6c6c460a1257"},
+    {file = "modern_colorthief-0.1.4-cp310-none-win_amd64.whl", hash = "sha256:a1ab48fba94e2c18be6c10438511f4c7426f34d63164654f6577f94fcec32d0e"},
+    {file = "modern_colorthief-0.1.4-cp311-cp311-macosx_10_12_x86_64.whl", hash = "sha256:c6f3ffe06b651a45bdc4b733734196d11fe91274556d937b772654003029f129"},
+    {file = "modern_colorthief-0.1.4-cp311-cp311-macosx_11_0_arm64.whl", hash = "sha256:7947bca0d2c76976bfc59057495df77fdab30329373a34545d36f9ec2a3eb5b4"},
+    {file = "modern_colorthief-0.1.4-cp311-cp311-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:0fc0a22a7f4b24ab3383503c476a8f83b7eb34f0af432be2aec5ad632fb06c3e"},
+    {file = "modern_colorthief-0.1.4-cp311-cp311-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:895c877c844981bc7e14057ddd50a1f30855d396084e093f59c0fd8a7c5e5663"},
+    {file = "modern_colorthief-0.1.4-cp311-cp311-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:f1a86389e41394f5a2d6bf5418ac0f5458a7d99973115c52f01ae0624f47a7b4"},
+    {file = "modern_colorthief-0.1.4-cp311-cp311-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:6596e7342a22fc8e5430491d0b6a18dd3d8e9822a6ace46fe0029fd45b87971c"},
+    {file = "modern_colorthief-0.1.4-cp311-cp311-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:c56e6d2f84f6ae2922f2fa96c78358d82b24003ea13960f6200294a25f586ccd"},
+    {file = "modern_colorthief-0.1.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:0c2cdfd9a38e5bd5e15b6ff04ee3e4e05b7e859269363f9d2a4de9fb303a6197"},
+    {file = "modern_colorthief-0.1.4-cp311-none-win32.whl", hash = "sha256:74081570124e5bb7491f85404b1b0dcb7773887280b08c3d7144d2b8d3cf8d68"},
+    {file = "modern_colorthief-0.1.4-cp311-none-win_amd64.whl", hash = "sha256:f6c5651ba3c289c096162fbc819e80d2a053e402cd41dfadd1f83bc91b1e6e92"},
+    {file = "modern_colorthief-0.1.4-cp312-cp312-macosx_10_12_x86_64.whl", hash = "sha256:81516786e7fa1bb82641ca9c4f0afb1391223c288fd71ec5e84266778bca9cd7"},
+    {file = "modern_colorthief-0.1.4-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:460dfbb5596f31b086b3283028f57fe7c3c0d8edd7f5072435ced8a6fafa45a5"},
+    {file = "modern_colorthief-0.1.4-cp312-cp312-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:abd800c61dc38d5575f1150a9445df9b82966e8fc3f8963900013617977ee613"},
+    {file = "modern_colorthief-0.1.4-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:c720cb19ee1de82ea24f5e3826cc7367706a99be001704235c41c10ea4aec49c"},
+    {file = "modern_colorthief-0.1.4-cp312-cp312-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:6f62cbceecae2f1dd44e4844bedb7dd7d6f5943337b0dabb79d3fb9ac9e1cf10"},
+    {file = "modern_colorthief-0.1.4-cp312-cp312-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:d415aa69787b4856f0df85b21589d1122ef35de5ed162cb71cf8d613c9269760"},
+    {file = "modern_colorthief-0.1.4-cp312-cp312-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:e0451422e6cb85d60804953b30f3172dc14359f293979f8f8fc77f1bda071100"},
+    {file = "modern_colorthief-0.1.4-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:d86834b896fc8287dcc99fe6f36cc4a6d870fc59d533eb59daa20ed21ad63ae4"},
+    {file = "modern_colorthief-0.1.4-cp312-none-win32.whl", hash = "sha256:cac486d1e2f1d87b7ab3745703259ff601440732f685e6294b3f84dfeefb903e"},
+    {file = "modern_colorthief-0.1.4-cp312-none-win_amd64.whl", hash = "sha256:2fb71596a912056fc270cfc0252a7bf5387d0b6ccd176c62ded60ca6d7856d78"},
+    {file = "modern_colorthief-0.1.4-cp39-cp39-macosx_10_12_x86_64.whl", hash = "sha256:196badb4aad55c0b96ff697f9053f1c53ebad7848e648c1d9c53104feb178565"},
+    {file = "modern_colorthief-0.1.4-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:0e2e5ecc6a1fb9704efffcfa4f935e6ce4e5488e4c8391f1b67e7273ecbeaffa"},
+    {file = "modern_colorthief-0.1.4-cp39-cp39-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:b8da6409223ebf610fbaa413a540b3ad769a0dfaa094e41c48e019be947dc3aa"},
+    {file = "modern_colorthief-0.1.4-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:366cd957323c83cdfcb17ed9c6c912f121151b4ef9a256e46451e152237a7e5e"},
+    {file = "modern_colorthief-0.1.4-cp39-cp39-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:1e7a08b5ea8959d0116ce134aafb00a4dfafb7ef91f790539892c2cadad8e960"},
+    {file = "modern_colorthief-0.1.4-cp39-cp39-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:b35afc2e8ada5ce5e0ded7c1f1a219afad9fd93669bdf37c097a1659811fc103"},
+    {file = "modern_colorthief-0.1.4-cp39-cp39-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:4ebcfdb2b8ca801b6a8005ca3167ab39d378c810271033ac1423c3b1b3ac46e6"},
+    {file = "modern_colorthief-0.1.4-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:3982b9ab933e7a18595cb95d392ecb2dce35f41bd0815c3eeebfc8affbc76aa2"},
+    {file = "modern_colorthief-0.1.4-cp39-none-win32.whl", hash = "sha256:9de65b0ca49073ac6be4b55bd4143e626a000d4dd8680f3f75fc461123ede7db"},
+    {file = "modern_colorthief-0.1.4-cp39-none-win_amd64.whl", hash = "sha256:719a8174b30e7ddcdeccfdcd1613430e8bebf06c524a96eca57324f518b1b322"},
+    {file = "modern_colorthief-0.1.4-pp310-pypy310_pp73-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:5a6aa8d4f9375d8b9cfb601fda60766c3656b1f0ccf3646b07ee510ae6229d79"},
+    {file = "modern_colorthief-0.1.4-pp310-pypy310_pp73-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:097ea988e765b2285feba1a5902866112a3d1c0b4811cc28cc66979313b8903c"},
+    {file = "modern_colorthief-0.1.4-pp310-pypy310_pp73-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:37e16de9a892e348118e2dcec6ba68e10d1d4513b134bbe992a89d4ef5779c8b"},
+    {file = "modern_colorthief-0.1.4-pp310-pypy310_pp73-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:591a52d58d2b8f617126b7247391f6ceee8089c8a8d0f11d9389d9802cc408f7"},
+    {file = "modern_colorthief-0.1.4-pp310-pypy310_pp73-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:24f5faf1e216da1a005808cf4b3f2ad13cffd9a34503a40a3f82c10b3d3c7591"},
+    {file = "modern_colorthief-0.1.4-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:041647335a97774423f7107255027d5bf67fd2d38ae95ac78c4fc7840b0b506e"},
+    {file = "modern_colorthief-0.1.4-pp39-pypy39_pp73-manylinux_2_12_i686.manylinux2010_i686.whl", hash = "sha256:3804bf3e1971da87b9c561e6b9aa12e5db7a2ee9809bf84d5ef2b2c4caf0e0ae"},
+    {file = "modern_colorthief-0.1.4-pp39-pypy39_pp73-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:df7d4723de0164050c97951929470a7bede0d301654e0c06877f777cbea4da19"},
+    {file = "modern_colorthief-0.1.4-pp39-pypy39_pp73-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:3b0315aa4e79c7370390d33d686b3180207973312951625217f672347dfd37e8"},
+    {file = "modern_colorthief-0.1.4-pp39-pypy39_pp73-manylinux_2_17_ppc64le.manylinux2014_ppc64le.whl", hash = "sha256:d30c959613e2018ee5d683535d479e3cda67809fa11d1bfd32808647d30edefa"},
+    {file = "modern_colorthief-0.1.4-pp39-pypy39_pp73-manylinux_2_17_s390x.manylinux2014_s390x.whl", hash = "sha256:cd15826d9a4f6b062bda51b256e2eb3083ecde5cf2371afb9cf0595ec9d33c2c"},
+    {file = "modern_colorthief-0.1.4-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:a38f9bdfaaae7fbf81d53d33a395e1c896e3b475b9882b96dcdf7caebb38f884"},
+    {file = "modern_colorthief-0.1.4.tar.gz", hash = "sha256:19a7e4359fe9b50e65f237e4879dc9682d604c180b464d33b7ad84fdcf610db6"},
 ]
-
-[package.dependencies]
-pillow = ">=10.1.0,<11.0.0"
 
 [[package]]
 name = "mypy"
@@ -2394,4 +2442,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.12,<3.13"
-content-hash = "dc231f3c0e7df8470736f83a918192d86a6462f97255177f943da3208ed39317"
+content-hash = "0d3abe3aa9043356e211289d9f4eaa2e1e0f1f1b5bd22b1e46c360d9b18b4017"
