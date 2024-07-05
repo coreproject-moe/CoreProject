@@ -2,10 +2,10 @@ name: Seeder Test build for various platforms
 
 on:
     push:
-        branches: ["master"]
+        branches: ["master", "chore/move_seeder"]
     pull_request:
         # The branches below must be a subset of the branches above
-        branches: ["master"]
+        branches: ["master", "chore/move_seeder"]
     # workflow_dispatch:
 
 permissions:
