@@ -1,4 +1,4 @@
-name: Seeder Test build for various platforms
+name: Seeder Build
 
 on:
     push:
