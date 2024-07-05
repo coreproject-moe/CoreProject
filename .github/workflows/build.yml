@@ -2,11 +2,14 @@ name: Seeder Test build for various platforms
 
 on:
     push:
+        paths:
+          - "seeder/**"
         branches: ["master"]
     pull_request:
-        # The branches below must be a subset of the branches above
+        paths:
+          - "seeder/**"
         branches: ["master"]
-    # workflow_dispatch:
+    workflow_dispatch:
 
 permissions:
     contents: read
