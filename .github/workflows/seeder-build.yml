@@ -26,7 +26,7 @@ jobs:
                 sparse-checkout-cone-mode: false
 
             - name: Setup Python 3.12
-              uses: actions/setup-python@v2
+              uses: actions/setup-python@v5
               with:
                   python-version: 3.12.x
 
@@ -66,7 +66,7 @@ jobs:
                 sparse-checkout-cone-mode: false
 
             - name: Setup Python 3.12
-              uses: actions/setup-python@v2
+              uses: actions/setup-python@v5
               with:
                   python-version: 3.12.x
 
