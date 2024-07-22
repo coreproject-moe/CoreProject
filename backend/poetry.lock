@@ -631,13 +631,13 @@ files = [
 
 [[package]]
 name = "django-crispy-forms"
-version = "2.2"
+version = "2.3"
 description = "Best way to have Django DRY forms"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django_crispy_forms-2.2-py3-none-any.whl", hash = "sha256:a681cffd5af270b3082bda02cf8f81bdb5717ed66d2265e87e3df2f4ccf46277"},
-    {file = "django_crispy_forms-2.2.tar.gz", hash = "sha256:92cb7b7786fb82646bad739343fd17a99a04b0b736a09e34f3b91f26cbca7e4a"},
+    {file = "django_crispy_forms-2.3-py3-none-any.whl", hash = "sha256:efc4c31e5202bbec6af70d383a35e12fc80ea769d464fb0e7fe21768bb138a20"},
+    {file = "django_crispy_forms-2.3.tar.gz", hash = "sha256:2db17ae08527201be1273f0df789e5f92819e23dd28fec69cffba7f3762e1a38"},
 ]
 
 [package.dependencies]
