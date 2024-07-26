@@ -1,12 +1,15 @@
+import asyncio
 import flet as ft
 
 __all__ = ["login_view"]
 
 
-def handle_login_click(e, username: str, password: str, backend: str):
+async def handle_login_click(username: str, password: str, backend: str):
     "Try to login with backend"
     ...
 
+def handle_login_click_wrapper(e, username: str, password: str, backend: str):
+    asyncio.run(handle_login_click(username, password, backend))
 
 async def login_view():
     username_or_email_field = ft.TextField(
@@ -61,7 +64,7 @@ async def login_view():
                             color={ft.MaterialState.DEFAULT: ft.colors.BLUE_100},
                             bgcolor=ft.colors.TERTIARY,
                         ),
-                        on_click=lambda e: handle_login_click(
+                        on_click=lambda e: handle_login_click_wrapper(
                             e,
                             username=username_or_email_field.value,
                             password=password_field.value,
