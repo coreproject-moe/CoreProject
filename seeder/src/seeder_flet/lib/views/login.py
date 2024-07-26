@@ -65,9 +65,9 @@ async def login_view():
                         on_click=lambda e: asyncio.run(
                             handle_login_click(
                                 e,
-                                username=username_or_email_field.value,
-                                password=password_field.value,
-                                backend=backend_url_field.value,
+                                username_or_email_field.value,
+                                password_field.value,
+                                backend_url_field.value,
                             )
                         ),
                         height=40,
