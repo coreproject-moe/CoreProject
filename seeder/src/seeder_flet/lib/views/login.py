@@ -5,7 +5,7 @@ __all__ = ["login_view"]
 
 def handle_login_click(e, username: str, password: str, backend: str):
     "Try to login with backend"
-    print(username, password, backend)
+    ...
 
 
 async def login_view():
