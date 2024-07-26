@@ -4,7 +4,10 @@ from seeder_flet.lib.views.login import login_view
 
 
 async def main(page: ft.Page):
-    page.title = "Flet counter example"
+    page.title = "coreproject seeder"
+
+    page.window_width = 1000
+    page.window_height = 600
 
     page.fonts = {
         "Kokoro": "fonts/Kokoro/Regular.ttf",

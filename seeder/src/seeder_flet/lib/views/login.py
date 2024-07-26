@@ -3,9 +3,9 @@ import flet as ft
 __all__ = ["login_view"]
 
 
-async def handle_login_click(username: str, password: str, backend: str):
+def handle_login_click(e, username: str, password: str, backend: str):
     "Try to login with backend"
-    ...
+    print(username, password, backend)
 
 
 async def login_view():
@@ -13,23 +13,25 @@ async def login_view():
         label="Username/Email address",
         width=400,
         height=50,
-        # hint_text="soraamamiya#4444",
+        hint_text="enter email address or username",
         border_color=ft.colors.TERTIARY,
         focused_border_color=ft.colors.PRIMARY,
         border_radius=10,
         label_style=ft.TextStyle(color=ft.colors.BLUE_100),
+        hint_style=ft.TextStyle(color=ft.colors.with_opacity(0.35, ft.colors.BLUE_100)),
     )
     password_field = ft.TextField(
         label="Password",
         password=True,
         can_reveal_password=True,
-        # hint_text="soraamamiya",
+        hint_text="password#0000",
         width=400,
         height=50,
         border_color=ft.colors.TERTIARY,
         focused_border_color=ft.colors.PRIMARY,
         border_radius=10,
         label_style=ft.TextStyle(color=ft.colors.BLUE_100),
+        hint_style=ft.TextStyle(color=ft.colors.with_opacity(0.35, ft.colors.BLUE_100)),
     )
     backend_url_field = ft.TextField(
         label="Backend URL",
@@ -40,6 +42,7 @@ async def login_view():
         focused_border_color=ft.colors.PRIMARY,
         border_radius=10,
         label_style=ft.TextStyle(color=ft.colors.BLUE_100),
+        hint_style=ft.TextStyle(color=ft.colors.with_opacity(0.35, ft.colors.BLUE_100)),
     )
 
     return ft.Row(
@@ -47,7 +50,7 @@ async def login_view():
         controls=[
             ft.Column(
                 [
-                    ft.Text("Login to Continue", color=ft.colors.BLUE_100, size=20),
+                    ft.Text("Login to Backend", color=ft.colors.BLUE_100, size=20),
                     username_or_email_field,
                     password_field,
                     backend_url_field,
@@ -58,7 +61,8 @@ async def login_view():
                             color={ft.MaterialState.DEFAULT: ft.colors.BLUE_100},
                             bgcolor=ft.colors.TERTIARY,
                         ),
-                        on_click=handle_login_click(
+                        on_click=lambda e: handle_login_click(
+                            e,
                             username=username_or_email_field.value,
                             password=password_field.value,
                             backend=backend_url_field.value,
