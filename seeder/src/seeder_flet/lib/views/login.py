@@ -4,7 +4,9 @@ import flet as ft
 __all__ = ["login_view"]
 
 
-async def handle_login_click(e, username: str, password: str, backend: str):
+async def handle_login_click(
+    e: ft.ControlEvent, username: str, password: str, backend: str
+):
     "Try to login with backend"
     ...
 
