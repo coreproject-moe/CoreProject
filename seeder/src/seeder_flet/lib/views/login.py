@@ -13,6 +13,7 @@ async def handle_login_click(
 
 async def login_view():
     username_or_email_field = ft.TextField(
+        autofocus=True,
         label="Username/Email address",
         width=400,
         height=50,
@@ -53,16 +54,16 @@ async def login_view():
         controls=[
             ft.Column(
                 [
-                    ft.Text("Login to Backend", color=ft.colors.BLUE_100, size=20),
+                    ft.Container(content=ft.Text("Login to Continue", color=ft.colors.BLUE_100, size=20), margin=ft.margin.only(bottom=20)),
                     username_or_email_field,
                     password_field,
                     backend_url_field,
                     ft.FilledButton(
-                        "Log in",
+                        content=ft.Text("Continue", size=18),
                         style=ft.ButtonStyle(
                             shape=ft.RoundedRectangleBorder(radius=10),
-                            color={ft.MaterialState.DEFAULT: ft.colors.BLUE_100},
-                            bgcolor=ft.colors.TERTIARY,
+                            color={ft.MaterialState.DEFAULT: ft.colors.WHITE},
+                            bgcolor=ft.colors.PRIMARY,
                         ),
                         on_click=lambda e: asyncio.run(
                             handle_login_click(
@@ -72,8 +73,7 @@ async def login_view():
                                 backend_url_field.value,
                             )
                         ),
-                        height=40,
-                        width=200,
+                        height=50,
                     ),
                 ],
                 expand=True,
