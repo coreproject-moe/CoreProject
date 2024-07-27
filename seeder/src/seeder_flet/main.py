@@ -1,6 +1,7 @@
 import flet as ft
 
 from seeder_flet.lib.views.login import login_view
+from seeder_flet.lib.views.home import home_view
 
 
 async def main(page: ft.Page):
@@ -21,6 +22,9 @@ async def main(page: ft.Page):
         ),
     )
 
+    # NOTE: remove this after implementation
+    page.go("/home")
+
     async def route_change(event: ft.RouteChangeEvent):
         page.views.clear()
         page.views.append(
@@ -38,8 +42,7 @@ async def main(page: ft.Page):
                 ft.View(
                     "/",
                     [
-                        ft.Text("Home", color=ft.colors.BLUE_100),
-                        ft.TextButton("Login", on_click=lambda _: page.go("/")),
+                        await home_view(page)
                     ],
                     bgcolor=ft.colors.SECONDARY,
                     padding=0,
