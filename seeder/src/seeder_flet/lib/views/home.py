@@ -21,10 +21,10 @@ async def home_view(page: ft.Page):
                                 content=ft.Text("Anime"),
                                 style=ft.ButtonStyle(
                                     shape=ft.RoundedRectangleBorder(radius=10),
-                                    color={ft.MaterialState.DEFAULT: ft.colors.WHITE},
+                                    color={"": ft.colors.WHITE},
                                     bgcolor={
-                                        ft.MaterialState.DEFAULT: ft.colors.BLUE_900,
-                                        ft.MaterialState.HOVERED: ft.colors.PRIMARY,
+                                        "": ft.colors.BLUE_900,
+                                        "hovered": ft.colors.PRIMARY,
                                     },
                                     animation_duration=300,
                                 ),
@@ -34,10 +34,10 @@ async def home_view(page: ft.Page):
                                 content=ft.Text("Manga"),
                                 style=ft.ButtonStyle(
                                     shape=ft.RoundedRectangleBorder(radius=10),
-                                    color={ft.MaterialState.DEFAULT: ft.colors.WHITE},
+                                    color={"": ft.colors.WHITE},
                                     bgcolor={
-                                        ft.MaterialState.DEFAULT: ft.colors.BLUE_900,
-                                        ft.MaterialState.HOVERED: ft.colors.PRIMARY,
+                                        "": ft.colors.BLUE_900,
+                                        "hovered": ft.colors.PRIMARY,
                                     },
                                 ),
                                 on_click=lambda _: page.go("/manga"),
@@ -46,10 +46,10 @@ async def home_view(page: ft.Page):
                                 content=ft.Text("Sound"),
                                 style=ft.ButtonStyle(
                                     shape=ft.RoundedRectangleBorder(radius=10),
-                                    color={ft.MaterialState.DEFAULT: ft.colors.WHITE},
+                                    color={"": ft.colors.WHITE},
                                     bgcolor={
-                                        ft.MaterialState.DEFAULT: ft.colors.BLUE_900,
-                                        ft.MaterialState.HOVERED: ft.colors.PRIMARY,
+                                        "": ft.colors.BLUE_900,
+                                        "hovered": ft.colors.PRIMARY,
                                     },
                                 ),
                                 on_click=lambda _: page.go("/sound"),
