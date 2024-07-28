@@ -1,5 +1,10 @@
+import asyncio
 import flet as ft
 
+async def handle_logout(e: ft.ControlEvent, page: ft.Page):
+    "Logout me!!!"
+    ...
+    page.go("/login")
 
 async def navbar(page: ft.Page):
     return ft.Container(
@@ -24,7 +29,7 @@ async def navbar(page: ft.Page):
                         },
                         animation_duration=300,
                     ),
-                    on_click=lambda _: page.go("/login"),
+                    on_click=lambda e: asyncio.run(handle_logout(e, page))
                 ),
             ],
         ),
