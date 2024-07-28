@@ -22,26 +22,23 @@ async def main(page: ft.Page):
         ),
     )
 
-    # NOTE: remove this after implementation
-    page.go("/home")
-
     async def route_change(event: ft.RouteChangeEvent):
         page.views.clear()
         page.views.append(
             ft.View(
                 "/",
-                [
-                    await login_view(),
-                ],
+                [await home_view(page)],
                 bgcolor=ft.colors.SECONDARY,
                 padding=0,
             )
         )
-        if event.route == "/home":
+        if event.route == "/login":
             page.views.append(
                 ft.View(
-                    "/",
-                    [await home_view(page)],
+                    "/login",
+                    [
+                        await login_view(),
+                    ],
                     bgcolor=ft.colors.SECONDARY,
                     padding=0,
                 )
