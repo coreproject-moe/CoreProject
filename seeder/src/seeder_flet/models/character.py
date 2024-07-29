@@ -1,14 +1,14 @@
 # models.py
-from sqlalchemy import Column, BigInteger, String, UniqueConstraint
+from sqlalchemy import Column, BigInteger, String, UniqueConstraint, Integer
 from ._base import Base
 
 
 class Character(Base):
     __tablename__ = "character"
 
-    id = Column(BigInteger, primary_key=True, index=True, autoincrement=True)
-    mal_id = Column(BigInteger, index=True)
-    name = Column(String, index=True)
+    id = Column(BigInteger().with_variant(Integer, "sqlite"), primary_key=True)
+    mal_id = Column(BigInteger)
+    name = Column(String)
     name_kanji = Column(String)
     character_image = Column(String)
     about = Column(String)
