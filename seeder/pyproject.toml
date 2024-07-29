@@ -9,7 +9,7 @@ readme = "README.md"
 python = "^3.12"
 flet = ">=0.22.1"
 selectolax = "^0.3.21"
-requests-ratelimiter = "^0.6.0"
+requests-ratelimiter = "^0.7.0"
 requests = "^2.32.3"
 requests-cache = "^1.2.1"
 

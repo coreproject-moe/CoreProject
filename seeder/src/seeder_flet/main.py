@@ -1,8 +1,8 @@
 import flet as ft
 
-from seeder_flet.lib.views.login import login_view
-from seeder_flet.lib.views.home import home_view
-from seeder_flet.lib.components.navbar import navbar
+from lib.views.login import login_view
+from lib.views.home import home_view
+from lib.components.navbar import navbar
 
 
 async def main(page: ft.Page):
@@ -37,9 +37,7 @@ async def main(page: ft.Page):
             page.views.append(
                 ft.View(
                     "/login",
-                    [
-                        await login_view(),
-                    ],
+                    [await login_view()],
                     bgcolor=ft.colors.SECONDARY,
                     padding=0,
                 )
