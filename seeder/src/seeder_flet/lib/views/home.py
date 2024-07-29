@@ -10,9 +10,7 @@ async def home_view(page: ft.Page):
                 alignment=ft.MainAxisAlignment.CENTER,
                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                 controls=[
-                    ft.Text(
-                        "Welcome to core-seeder", color=ft.colors.BLUE_100, size=20
-                    ),
+                    ft.Text("Welcome to core-seeder", color=ft.colors.BLUE_100, size=20),
                     ft.Text("Select a platform:", color=ft.colors.BLUE_200, size=15),
                     ft.Row(
                         alignment=ft.MainAxisAlignment.CENTER,

@@ -21,17 +21,12 @@ class AnimeThemeBuilder:
         return HTMLParser(html)
 
     def __build_ids(self) -> list[int]:
-        return [
-            self.regex_helper.get_first_integer_from_url(item) for item in self.anchors
-        ]
+        return [self.regex_helper.get_first_integer_from_url(item) for item in self.anchors]
 
     def __build_urls(self, html: str) -> list[str]:
         parser = self.get_parser(html)
         theme_parent_node = (
-            parser.select("div.normal_header")
-            .text_contains("Themes")
-            .matches[0]
-            .next.next
+            parser.select("div.normal_header").text_contains("Themes").matches[0].next.next
         )
         theme_anchor_nodes = theme_parent_node.css('a[href*="genre"]')
 
