@@ -12,7 +12,7 @@ async def navbar(page: ft.Page):
     return ft.Container(
         padding=10,
         height=55,
-        border=ft.border.all(0.75, ft.colors.with_opacity(1, ft.colors.PRIMARY)),
+        border=ft.border.all(1, ft.colors.with_opacity(1, ft.colors.PRIMARY)),
         content=ft.Stack(
             controls=[
                 ft.Row(
@@ -23,15 +23,22 @@ async def navbar(page: ft.Page):
                                 ft.Image(src="/icons/core_icon.svg", width=25),
                             ]
                         ),
-                        ft.ElevatedButton(
-                            content=ft.Text("Logout"),
+                        ft.FilledButton(
+                            content=ft.Row(
+                                controls=[
+                                    ft.Icon(name=ft.icons.LOGOUT, size=15),
+                                    ft.Text("Logout"),
+                                ],
+                                width=75,
+                            ),
                             style=ft.ButtonStyle(
                                 shape=ft.RoundedRectangleBorder(radius=0),
-                                side=ft.BorderSide(0, ft.colors.PRIMARY),
-                                color=ft.colors.WHITE,
-                                bgcolor=ft.colors.PRIMARY,
-                                padding=ft.padding.symmetric(horizontal=20),
-                                animation_duration=300,
+                                color={ft.MaterialState.DEFAULT: ft.colors.WHITE},
+                                bgcolor={
+                                    "": ft.colors.with_opacity(0.25, ft.colors.PRIMARY)
+                                },
+                                side=ft.BorderSide(1, ft.colors.PRIMARY),
+                                padding=ft.padding.symmetric(horizontal=15),
                             ),
                             on_click=lambda e: asyncio.run(handle_logout(e, page)),
                         ),
