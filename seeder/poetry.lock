@@ -1208,7 +1208,7 @@ description = ""
 optional = false
 python-versions = "^3.12"
 files = []
-develop = false
+develop = true
 
 [package.dependencies]
 requests = "^2.32.3"
@@ -1635,4 +1635,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "8b31f38bf8052f01fee12d5d85c82278d5baf79c2a415fda275bbbe8a2ef2626"
+content-hash = "1138fae0f37818f6f860ca3120353955d2ff1be0ddfdc17fc7553f71b3888fba"
