@@ -17,9 +17,9 @@ async def main(page: ft.Page):
     page.theme = ft.Theme(
         font_family="Kokoro",
         color_scheme=ft.ColorScheme(
-            secondary="#03020c",
-            tertiary="#1E2036",
+            secondary="#070519",
             primary="#7569E1",
+            error="#EB5757",
         ),
     )
 
