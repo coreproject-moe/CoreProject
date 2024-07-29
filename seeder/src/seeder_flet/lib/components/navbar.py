@@ -10,7 +10,6 @@ async def handle_logout(e: ft.ControlEvent, page: ft.Page):
 
 async def navbar(page: ft.Page):
     return ft.Container(
-        margin=10,
         padding=10,
         height=55,
         border=ft.border.all(0.75, ft.colors.with_opacity(1, ft.colors.PRIMARY)),

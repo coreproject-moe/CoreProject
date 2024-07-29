@@ -22,6 +22,7 @@ async def main(page: ft.Page):
             error="#EB5757",
         ),
     )
+    page.padding = ft.padding.all(10)
 
     async def route_change(event: ft.RouteChangeEvent):
         page.views.clear()
@@ -30,7 +31,7 @@ async def main(page: ft.Page):
                 "/",
                 [await navbar(page), await home_view(page)],
                 bgcolor=ft.colors.SECONDARY,
-                padding=0,
+                padding=10,
             )
         )
         if event.route == "/login":
@@ -39,7 +40,7 @@ async def main(page: ft.Page):
                     "/login",
                     [await login_view()],
                     bgcolor=ft.colors.SECONDARY,
-                    padding=0,
+                    padding=10,
                 )
             )
 
