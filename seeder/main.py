@@ -1,9 +1,5 @@
 import flet as ft
-
 import os
-from pathlib import Path
-
-BASE_DIR = Path(__file__).resolve().parent
 
 os.environ["DATABASE_URL"] = "sqlite+aiosqlite:///./default.db"
 
