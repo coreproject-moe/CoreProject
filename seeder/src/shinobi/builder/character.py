@@ -81,9 +81,7 @@ class CharacterBuilder:
                 and self.regex_helper.check_if_string_contains_integer(character_href)
             ):
                 self.anchors.append(
-                    self.string_helper.add_myanimelist_if_not_already_there(
-                        character_href
-                    )
+                    self.string_helper.add_myanimelist_if_not_already_there(character_href)
                 )
 
         if self.has_next_page(html):
@@ -97,9 +95,7 @@ class CharacterBuilder:
             self.__build_urls(next_url)
 
     def __build_ids(self) -> list[int]:
-        return [
-            self.regex_helper.get_first_integer_from_url(item) for item in self.anchors
-        ]
+        return [self.regex_helper.get_first_integer_from_url(item) for item in self.anchors]
 
     def build_dictionary(
         self, excluded_ids: list[int] | None = None, sort: bool = False
@@ -114,9 +110,7 @@ class CharacterBuilder:
 
         if excluded_ids:
             dictionary = {
-                key: value
-                for key, value in dictionary.items()
-                if key not in excluded_ids
+                key: value for key, value in dictionary.items() if key not in excluded_ids
             }
 
         return dictionary

@@ -44,9 +44,7 @@ retry_strategy = Retry(
     status_forcelist=RETRY_STATUSES,
 )
 adapter = HTTPAdapter(max_retries=retry_strategy)
-redis_pool = ConnectionPool.from_url(
-    os.environ.get("REDIS_URL", "redis://localhost:6379")
-)
+redis_pool = ConnectionPool.from_url(os.environ.get("REDIS_URL", "redis://localhost:6379"))
 
 session = CachedLimiterSession(
     bucket_class=RedisBucket,
