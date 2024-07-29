@@ -1,13 +1,15 @@
+import os
 import flet as ft
 
-from lib.views.login import login_view
-from lib.views.home import home_view
-from lib.components.navbar import navbar
+from .lib.views.login import login_view
+from .lib.views.home import home_view
+from .lib.components.navbar import navbar
 
 from sqlalchemy import create_engine
 
-DATABASE_URL = "sqlite:///./test.db"
-engine = create_engine(DATABASE_URL)
+
+engine = create_engine(os.environ.get("DATABASE_URL"))
+
 
 
 async def main(page: ft.Page):
