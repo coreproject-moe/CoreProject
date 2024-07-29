@@ -12,7 +12,7 @@ async def navbar(page: ft.Page):
     return ft.Container(
         padding=10,
         height=55,
-        border=ft.border.all(1, ft.colors.with_opacity(1, ft.colors.PRIMARY)),
+        border=ft.border.all(1, ft.colors.with_opacity(0.5, ft.colors.PRIMARY)),
         content=ft.Stack(
             controls=[
                 ft.Row(
