@@ -2,6 +2,7 @@ import asyncio
 import flet as ft
 
 
+
 async def handle_logout(e: ft.ControlEvent, page: ft.Page):
     "Logout me!!!"
     ...
@@ -18,9 +19,7 @@ async def navbar(page: ft.Page):
                     controls=[
                         ft.Row(
                             controls=[
-                                ft.Image(
-                                    src="/icons/core_icon.svg", width=40, height=40
-                                ),
+                                ft.Image(src="/icons/core_icon.svg", width=40, height=40),
                             ]
                         ),
                         ft.ElevatedButton(
@@ -38,9 +37,7 @@ async def navbar(page: ft.Page):
                     alignment=ft.MainAxisAlignment.CENTER,
                     controls=[
                         ft.Container(
-                            content=ft.Image(
-                                src="/icons/coreseeder_text.svg", height=15
-                            ),
+                            content=ft.Image(src="/icons/coreseeder_text.svg", height=15),
                             margin=ft.margin.only(top=10),
                         ),
                     ],
