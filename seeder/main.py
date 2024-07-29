@@ -5,7 +5,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
 
-os.environ["DATABASE_URL"] = "sqlite:////" + str(os.path.join(BASE_DIR, "default.db"))
+os.environ["DATABASE_URL"] = "sqlite+aiosqlite:///./default.db"
 
 # This must be imported after os.environ
 from src.seeder_flet.main import main  # noqa: E402

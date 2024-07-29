@@ -4,8 +4,12 @@ from sqlalchemy.orm import Session
 
 
 async def home_view(page: ft.Page, session: Session):
-    with session() as session:
-        
+    async with session() as db:
+        db_user = models.Character(
+            mal_id=10, name="Sora", name_kanji="Rando", character_image="", about="bal"
+        )
+        db.add(db_user)
+        await db.commit()
 
     return ft.Row(
         expand=True,
