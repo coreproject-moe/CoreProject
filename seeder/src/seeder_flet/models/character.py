@@ -12,5 +12,6 @@ class Character(Base):
     name_kanji = Column(String)
     character_image = Column(String)
     about = Column(String)
+    lol = Column(String)
 
     __table_args__ = (UniqueConstraint("mal_id", "name", "name_kanji", name="_name_uc"),)
