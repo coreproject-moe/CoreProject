@@ -41,7 +41,7 @@ async def navbar(page: ft.Page):
                             content=ft.Image(
                                 src="/icons/coreseeder_text.svg", height=15
                             ),
-                            margin=ft.margin.only(top=5),
+                            margin=ft.margin.only(top=10),
                         ),
                     ],
                 ),
