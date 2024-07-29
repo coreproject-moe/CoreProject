@@ -42,7 +42,8 @@ def test_second_person_parser() -> None:
     assert data["mal_id"] == 2
     assert data["name"] == "Tomokazu Sugita"
     assert (
-        data["staff_image"] == "https://cdn.myanimelist.net/images/voiceactors/2/60638.jpg"
+        data["staff_image"]
+        == "https://cdn.myanimelist.net/images/voiceactors/2/60638.jpg"
     )
     assert data["given_name"] == "智和"
     assert data["family_name"] == "杉田"
@@ -78,7 +79,8 @@ def test_sora_amamiya() -> None:
         == "Blood type: AB\nBirth place: Tokyo, Japan\n\nSora Amamiya was introduced to the seiyuu profession in high school by a friend who enjoyed anime. She decided to become a seiyuu after seeing the voice roles of Miyuki Sawashiro.\n\nIn 2011, Amamiya passed the 2nd Music Ray'n Super Seiyuu Audition and joined the talent agency. She debuted the following year voicing minor characters in Aikatsu!, Shinsekai yori, and Tonari no Kaibutsu-kun. Amamiya won her first lead role in Isshuukan Friends. in 2014. Later that year, she joined the unit TrySail with seiyuu Momo Asakura and Shiina Natsukawa, both of whom passed the same Music Ray'n audition.\n\nAmamiya was named a winner of the Best New Actress award in the 9th Seiyuu Awards. She is nicknamed Ten-chan, as her given name can also be read as \"Ten.\"\n\nBlog: http://ameblo.jp/amamiyasorablog/\nYoutube: https://www.youtube.com/channel/UCc4xpujLxnUBSI1XX-SdldQ\nTwitter: Amamiyastaff"
     )
     assert (
-        data["staff_image"] == "https://cdn.myanimelist.net/images/voiceactors/2/64457.jpg"
+        data["staff_image"]
+        == "https://cdn.myanimelist.net/images/voiceactors/2/64457.jpg"
     )
 
 
@@ -103,7 +105,8 @@ def test_natsukawa_shiina() -> None:
         == "Birth place: Chiba Prefecture, Japan\n\nBlog: ameblo.jp/natsukawashii..."
     )
     assert (
-        data["staff_image"] == "https://cdn.myanimelist.net/images/voiceactors/2/40873.jpg"
+        data["staff_image"]
+        == "https://cdn.myanimelist.net/images/voiceactors/2/40873.jpg"
     )
 
 
@@ -125,5 +128,6 @@ def test_momo_asakura() -> None:
     assert data["birthday"] == datetime.datetime(1994, 6, 25, 0, 0)
     assert data["about"] == "Blood type: O\nBirth place: Fukuoka Prefecture, Japan"
     assert (
-        data["staff_image"] == "https://cdn.myanimelist.net/images/voiceactors/3/40866.jpg"
+        data["staff_image"]
+        == "https://cdn.myanimelist.net/images/voiceactors/3/40866.jpg"
     )

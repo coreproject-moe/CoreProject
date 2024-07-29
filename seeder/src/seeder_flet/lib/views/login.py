@@ -54,7 +54,12 @@ async def login_view():
         controls=[
             ft.Column(
                 [
-                    ft.Container(content=ft.Text("Login to Continue", color=ft.colors.BLUE_100, size=20), margin=ft.margin.only(bottom=20)),
+                    ft.Container(
+                        content=ft.Text(
+                            "Login to Continue", color=ft.colors.BLUE_100, size=20
+                        ),
+                        margin=ft.margin.only(bottom=20),
+                    ),
                     username_or_email_field,
                     password_field,
                     backend_url_field,
