@@ -7,7 +7,7 @@ from .lib.components.navbar import navbar
 # Engine must be imported
 from .models._base import (
     engine as engine,
-    Session
+    Session,
 )  # noqa
 
 
@@ -34,7 +34,7 @@ async def main(page: ft.Page):
         page.views.append(
             ft.View(
                 "/",
-                [await navbar(page), await home_view(page)],
+                [await navbar(page=page), await home_view(page=page, session=Session)],
                 bgcolor=ft.colors.SECONDARY,
                 padding=0,
             )
