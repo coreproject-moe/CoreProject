@@ -5,10 +5,7 @@ from .lib.views.home import home_view
 from .lib.components.navbar import navbar
 
 # Engine must be imported
-from .models._base import (
-    engine as engine,
-    Session,
-)  # noqa
+from .models._engine import Session
 
 
 async def main(page: ft.Page):

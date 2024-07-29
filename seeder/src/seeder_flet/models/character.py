@@ -6,7 +6,7 @@ from ._base import Base
 class Character(Base):
     __tablename__ = "character"
 
-    id = Column(BigInteger, primary_key=True, index=True)
+    id = Column(BigInteger, primary_key=True, index=True, autoincrement=True)
     mal_id = Column(BigInteger, index=True)
     name = Column(String, index=True)
     name_kanji = Column(String)
