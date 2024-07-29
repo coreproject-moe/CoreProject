@@ -4,11 +4,10 @@ on:
     push:
         paths:
             - 'seeder/**'
-        branches: ['master']
-    pull_request:
-        paths:
-            - 'seeder/**'
-        branches: ['master']
+            - '.github/**'
+        branches:
+            - '*'
+
     workflow_dispatch:
 
 permissions:
