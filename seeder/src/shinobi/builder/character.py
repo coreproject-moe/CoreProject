@@ -5,9 +5,10 @@ from selectolax.parser import HTMLParser
 from shinobi.decorators.return_error_decorator import return_on_error
 from shinobi.utilities.regex import RegexHelper
 from shinobi.utilities.session import session
+from shinobi.utilities.string import StringHelper
 
 
-class StaffBuilder:
+class CharacterBuilder:
     def __init__(self) -> None:
         self.anchors: list[str] = []
         self.visited_urls: set[str] = set()
@@ -17,17 +18,11 @@ class StaffBuilder:
 
         # Facades
         self.regex_helper = RegexHelper()
+        self.string_helper = StringHelper()
 
     @staticmethod
     def get_parser(html: str) -> HTMLParser:
         return HTMLParser(html)
-
-    @staticmethod
-    def add_myanimelist_if_not_already_there(url: str) -> str:
-        if "myanimelist.net" not in url:
-            return "https://myanimelist.net" + url
-        else:
-            return url
 
     @return_on_error("")
     def has_next_page(self, html: str) -> bool:
@@ -58,7 +53,7 @@ class StaffBuilder:
     def _build_word_list(self) -> list[str]:
         alphabet_list = list(string.ascii_uppercase)
         return [
-            f"https://myanimelist.net/people.php?letter={letter}"
+            f"https://myanimelist.net/character.php?letter={letter}"
             for letter in alphabet_list
         ]
 
@@ -68,18 +63,28 @@ class StaffBuilder:
         res = self.client.get(url)
         html = res.text
 
-        staff_nodes = self.get_parser(html).css("a[href*='/people/']")
+        character_nodes = self.get_parser(html).css("a[href*='/character/']")
 
-        # MyAnimeList Blocked us
-        # Exponential delay
-        for staff_node in staff_nodes:
-            staff_href = staff_node.attributes["href"]
+        if len(character_nodes) == 0:
+            print(
+                f"""
+                Status : {res.status_code}
+                URL : {url}
+            """
+            )
+
+        for character_node in character_nodes:
+            character_href = character_node.attributes["href"]
             if (
-                staff_href
-                and staff_href not in self.anchors
-                and self.regex_helper.check_if_string_contains_integer(staff_href)
+                character_href
+                and character_href not in self.anchors
+                and self.regex_helper.check_if_string_contains_integer(character_href)
             ):
-                self.anchors.append(self.add_myanimelist_if_not_already_there(staff_href))
+                self.anchors.append(
+                    self.string_helper.add_myanimelist_if_not_already_there(
+                        character_href
+                    )
+                )
 
         if self.has_next_page(html):
             all_pages = self.get_all_pages_in_span_tag(html)
@@ -92,7 +97,9 @@ class StaffBuilder:
             self.__build_urls(next_url)
 
     def __build_ids(self) -> list[int]:
-        return [self.regex_helper.get_first_integer_from_url(item) for item in self.anchors]
+        return [
+            self.regex_helper.get_first_integer_from_url(item) for item in self.anchors
+        ]
 
     def build_dictionary(
         self, excluded_ids: list[int] | None = None, sort: bool = False
@@ -107,7 +114,9 @@ class StaffBuilder:
 
         if excluded_ids:
             dictionary = {
-                key: value for key, value in dictionary.items() if key not in excluded_ids
+                key: value
+                for key, value in dictionary.items()
+                if key not in excluded_ids
             }
 
         return dictionary

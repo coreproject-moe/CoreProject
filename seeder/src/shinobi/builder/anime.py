@@ -5,10 +5,9 @@ from selectolax.parser import HTMLParser
 from shinobi.decorators.return_error_decorator import return_on_error
 from shinobi.utilities.regex import RegexHelper
 from shinobi.utilities.session import session
-from shinobi.utilities.string import StringHelper
 
 
-class CharacterBuilder:
+class AnimeBuilder:
     def __init__(self) -> None:
         self.anchors: list[str] = []
         self.visited_urls: set[str] = set()
@@ -18,7 +17,6 @@ class CharacterBuilder:
 
         # Facades
         self.regex_helper = RegexHelper()
-        self.string_helper = StringHelper()
 
     @staticmethod
     def get_parser(html: str) -> HTMLParser:
@@ -40,6 +38,13 @@ class CharacterBuilder:
 
         return True
 
+    @staticmethod
+    def add_myanimelist_if_not_already_there(url: str) -> str:
+        if "myanimelist.net" not in url:
+            return "https://myanimelist.net" + url
+        else:
+            return url
+
     def get_all_pages_in_span_tag(self, html: str) -> list[str]:
         parser = self.get_parser(html)
         node = (
@@ -51,9 +56,9 @@ class CharacterBuilder:
         return [item for item in anchors if item is not None]
 
     def _build_word_list(self) -> list[str]:
-        alphabet_list = list(string.ascii_uppercase)
+        alphabet_list = list("." + string.ascii_uppercase)
         return [
-            f"https://myanimelist.net/character.php?letter={letter}"
+            f"https://myanimelist.net/anime.php?letter={letter}"
             for letter in alphabet_list
         ]
 
@@ -63,25 +68,17 @@ class CharacterBuilder:
         res = self.client.get(url)
         html = res.text
 
-        character_nodes = self.get_parser(html).css("a[href*='/character/']")
+        anime_nodes = self.get_parser(html).css("a[href*='/anime/']")
 
-        if len(character_nodes) == 0:
-            print(
-                f"""
-                Status : {res.status_code}
-                URL : {url}
-            """
-            )
-
-        for character_node in character_nodes:
-            character_href = character_node.attributes["href"]
+        for anime_node in anime_nodes:
+            anime_href = anime_node.attributes["href"]
             if (
-                character_href
-                and character_href not in self.anchors
-                and self.regex_helper.check_if_string_contains_integer(character_href)
+                anime_href
+                and anime_href not in self.anchors
+                and self.regex_helper.check_if_string_contains_integer(anime_href)
             ):
                 self.anchors.append(
-                    self.string_helper.add_myanimelist_if_not_already_there(character_href)
+                    self.add_myanimelist_if_not_already_there(anime_href)
                 )
 
         if self.has_next_page(html):
@@ -95,7 +92,9 @@ class CharacterBuilder:
             self.__build_urls(next_url)
 
     def __build_ids(self) -> list[int]:
-        return [self.regex_helper.get_first_integer_from_url(item) for item in self.anchors]
+        return [
+            self.regex_helper.get_first_integer_from_url(item) for item in self.anchors
+        ]
 
     def build_dictionary(
         self, excluded_ids: list[int] | None = None, sort: bool = False
@@ -110,7 +109,9 @@ class CharacterBuilder:
 
         if excluded_ids:
             dictionary = {
-                key: value for key, value in dictionary.items() if key not in excluded_ids
+                key: value
+                for key, value in dictionary.items()
+                if key not in excluded_ids
             }
 
         return dictionary
