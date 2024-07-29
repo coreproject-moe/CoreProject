@@ -26,8 +26,8 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v4
               with:
-                sparse-checkout: "seeder"
-                sparse-checkout-cone-mode: false
+                  sparse-checkout: 'seeder'
+                  sparse-checkout-cone-mode: false
 
             - name: Setup Python 3.12
               uses: actions/setup-python@v5
@@ -55,7 +55,7 @@ jobs:
             - name: Flet Build Linux
               run: |
                   cd seeder
-                  poetry run flet build linux ./src/seeder_flet
+                  poetry run flet build linux ./src/seeder_flet --v
 
     windows:
         runs-on: windows-latest
@@ -66,8 +66,8 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v4
               with:
-                sparse-checkout: "seeder"
-                sparse-checkout-cone-mode: false
+                  sparse-checkout: 'seeder'
+                  sparse-checkout-cone-mode: false
 
             - name: Setup Python 3.12
               uses: actions/setup-python@v5
@@ -93,4 +93,4 @@ jobs:
             - name: Flet Build Windows
               run: |
                   cd seeder
-                  poetry run flet build windows ./src/seeder_flet
+                  poetry run flet build windows ./src/seeder_flet --v
