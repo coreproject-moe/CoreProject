@@ -20,11 +20,12 @@ async def main(page: ft.Page):
     page.theme = ft.Theme(
         font_family="Kokoro",
         color_scheme=ft.ColorScheme(
-            secondary="#03020c",
-            tertiary="#1E2036",
+            secondary="#070519",
             primary="#7569E1",
+            error="#EB5757",
         ),
     )
+    page.padding = ft.padding.all(10)
 
     async def route_change(event: ft.RouteChangeEvent):
         page.views.clear()
@@ -33,7 +34,7 @@ async def main(page: ft.Page):
                 "/",
                 [await navbar(page=page), await home_view(page=page, session=Session)],
                 bgcolor=ft.colors.SECONDARY,
-                padding=0,
+                padding=10,
             )
         )
         if event.route == "/login":
@@ -42,7 +43,7 @@ async def main(page: ft.Page):
                     "/login",
                     [await login_view()],
                     bgcolor=ft.colors.SECONDARY,
-                    padding=0,
+                    padding=10,
                 )
             )
 
