@@ -18,9 +18,12 @@ async def login_view():
         width=400,
         height=50,
         hint_text="enter email address or username",
-        border_color=ft.colors.TERTIARY,
+        bgcolor=ft.colors.TRANSPARENT,
+        hover_color=ft.colors.with_opacity(0.1, ft.colors.PRIMARY),
+        focused_bgcolor=ft.colors.with_opacity(0.25, ft.colors.PRIMARY),
+        border_color=ft.colors.with_opacity(0.5, ft.colors.PRIMARY),
         focused_border_color=ft.colors.PRIMARY,
-        border_radius=10,
+        border_radius=0,
         label_style=ft.TextStyle(color=ft.colors.BLUE_100),
         hint_style=ft.TextStyle(color=ft.colors.with_opacity(0.35, ft.colors.BLUE_100)),
     )
@@ -31,9 +34,12 @@ async def login_view():
         hint_text="password#0000",
         width=400,
         height=50,
-        border_color=ft.colors.TERTIARY,
+        bgcolor=ft.colors.TRANSPARENT,
+        hover_color=ft.colors.with_opacity(0.1, ft.colors.PRIMARY),
+        focused_bgcolor=ft.colors.with_opacity(0.25, ft.colors.PRIMARY),
+        border_color=ft.colors.with_opacity(0.5, ft.colors.PRIMARY),
         focused_border_color=ft.colors.PRIMARY,
-        border_radius=10,
+        border_radius=0,
         label_style=ft.TextStyle(color=ft.colors.BLUE_100),
         hint_style=ft.TextStyle(color=ft.colors.with_opacity(0.35, ft.colors.BLUE_100)),
     )
@@ -42,9 +48,12 @@ async def login_view():
         hint_text="backend.coreproject.moe",
         width=400,
         height=50,
-        border_color=ft.colors.TERTIARY,
+        bgcolor=ft.colors.TRANSPARENT,
+        hover_color=ft.colors.with_opacity(0.1, ft.colors.PRIMARY),
+        focused_bgcolor=ft.colors.with_opacity(0.25, ft.colors.PRIMARY),
+        border_color=ft.colors.with_opacity(0.5, ft.colors.PRIMARY),
         focused_border_color=ft.colors.PRIMARY,
-        border_radius=10,
+        border_radius=0,
         label_style=ft.TextStyle(color=ft.colors.BLUE_100),
         hint_style=ft.TextStyle(color=ft.colors.with_opacity(0.35, ft.colors.BLUE_100)),
     )
@@ -55,20 +64,27 @@ async def login_view():
             ft.Column(
                 [
                     ft.Container(
-                        content=ft.Text(
-                            "Login to Continue", color=ft.colors.BLUE_100, size=20
-                        ),
-                        margin=ft.margin.only(bottom=20),
+                        content=ft.Image(src="/icons/coreseeder_text.svg", height=20),
+                        margin=ft.margin.only(bottom=40),
                     ),
                     username_or_email_field,
                     password_field,
                     backend_url_field,
                     ft.FilledButton(
-                        content=ft.Text("Continue", size=18),
+                        content=ft.Row(
+                            controls=[
+                                ft.Icon(name=ft.icons.LOGIN, size=20),
+                                ft.Text("Login", size=15),
+                            ],
+                            width=75,
+                        ),
                         style=ft.ButtonStyle(
-                            shape=ft.RoundedRectangleBorder(radius=10),
+                            shape=ft.RoundedRectangleBorder(radius=0),
                             color={ft.MaterialState.DEFAULT: ft.colors.WHITE},
-                            bgcolor=ft.colors.PRIMARY,
+                            bgcolor={
+                                "": ft.colors.with_opacity(0.25, ft.colors.PRIMARY)
+                            },
+                            side=ft.BorderSide(1, ft.colors.PRIMARY),
                         ),
                         on_click=lambda e: asyncio.run(
                             handle_login_click(
@@ -78,7 +94,7 @@ async def login_view():
                                 backend_url_field.value,
                             )
                         ),
-                        height=50,
+                        height=40,
                     ),
                 ],
                 expand=True,

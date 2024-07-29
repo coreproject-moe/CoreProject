@@ -27,6 +27,7 @@ async def navbar(page: ft.Page):
                             content=ft.Text("Logout"),
                             style=ft.ButtonStyle(
                                 shape=ft.RoundedRectangleBorder(radius=0),
+                                side=ft.BorderSide(0, ft.colors.PRIMARY),
                                 color=ft.colors.WHITE,
                                 bgcolor=ft.colors.PRIMARY,
                                 padding=ft.padding.symmetric(horizontal=20),
