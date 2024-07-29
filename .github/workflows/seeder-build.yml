@@ -12,6 +12,7 @@ on:
             - 'seeder/**'
             - '.github/**'
         branches: ['master']
+
     workflow_dispatch:
 
 permissions:
