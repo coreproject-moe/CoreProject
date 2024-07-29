@@ -1307,6 +1307,17 @@ pygments = ">=2.13.0,<3.0.0"
 jupyter = ["ipywidgets (>=7.5.1,<9)"]
 
 [[package]]
+name = "rx"
+version = "3.2.0"
+description = "Reactive Extensions (Rx) for Python"
+optional = false
+python-versions = ">=3.6.0"
+files = [
+    {file = "Rx-3.2.0-py3-none-any.whl", hash = "sha256:922c5f4edb3aa1beaa47bf61d65d5380011ff6adcd527f26377d05cb73ed8ec8"},
+    {file = "Rx-3.2.0.tar.gz", hash = "sha256:b657ca2b45aa485da2f7dcfd09fac2e554f7ac51ff3c2f8f2ff962ecd963d91c"},
+]
+
+[[package]]
 name = "selectolax"
 version = "0.3.21"
 description = "Fast HTML5 parser with CSS selectors."
@@ -1975,4 +1986,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "3749f4fcb8621f22aacb067b0d443f22c71bb74f625791f2dc54ce206e523c07"
+content-hash = "c0ccbc2da42350c5fa29b798497745a7049e153db131272bdfe62f62963e18d8"
