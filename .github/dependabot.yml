@@ -20,6 +20,14 @@ updates:
           interval: weekly
       open-pull-requests-limit: 100
 
+    # Seeder
+    # =======
+    - package-ecosystem: pip
+      directory: /seeder/
+      schedule:
+          interval: weekly
+      open-pull-requests-limit: 100
+
     # Android
     # =======
     - package-ecosystem: pip
@@ -56,5 +64,3 @@ updates:
       directory: '/'
       schedule:
           interval: 'weekly'
-
-    
