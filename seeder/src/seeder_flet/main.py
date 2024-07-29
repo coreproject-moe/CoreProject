@@ -4,9 +4,6 @@ from .lib.views.login import login_view
 from .lib.views.home import home_view
 from .lib.components.navbar import navbar
 
-# Engine must be imported
-from .models._engine import Session
-
 
 async def main(page: ft.Page):
     page.title = "coreproject seeder"
@@ -32,7 +29,7 @@ async def main(page: ft.Page):
         page.views.append(
             ft.View(
                 "/",
-                [await navbar(page=page), await home_view(page=page, session=Session)],
+                [await navbar(page=page), await home_view(page=page)],
                 bgcolor=ft.colors.SECONDARY,
                 padding=10,
             )
