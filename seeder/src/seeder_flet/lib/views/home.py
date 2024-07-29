@@ -1,7 +1,8 @@
 import flet as ft
+from sqlalchemy.orm import Session
 
 
-async def home_view(page: ft.Page):
+async def home_view(page: ft.Page, session: Session):
     return ft.Row(
         expand=True,
         controls=[
