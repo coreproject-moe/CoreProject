@@ -7,6 +7,11 @@ on:
             - '.github/**'
         branches:
             - '*'
+    pull_request:
+        paths:
+            - 'seeder/**'
+            - '.github/**'
+        branches: ['master']
 
     workflow_dispatch:
 
