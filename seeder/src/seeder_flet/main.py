@@ -1,8 +1,8 @@
 import flet as ft
 
-from lib.views.login import login_view
-from lib.views.home import home_view
-from lib.components.navbar import navbar
+from .lib.views.login import login_view
+from .lib.views.home import home_view
+from .lib.components.navbar import navbar
 
 
 async def main(page: ft.Page):
@@ -53,7 +53,3 @@ async def main(page: ft.Page):
     page.on_route_change = route_change
     page.on_view_pop = view_pop
     page.go(page.route)
-
-
-if __name__ == "__main__":
-    ft.app(main, assets_dir="assets/")

@@ -50,7 +50,7 @@ jobs:
             - name: Flet Build Linux
               run: |
                   cd seeder
-                  poetry run flet build linux ./src/seeder_flet --v
+                  poetry run flet build linux -v
 
     windows:
         runs-on: windows-latest
@@ -88,4 +88,4 @@ jobs:
             - name: Flet Build Windows
               run: |
                   cd seeder
-                  poetry run flet build windows ./src/seeder_flet --v
+                  poetry run flet build windows -v
