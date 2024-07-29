@@ -1,16 +1,8 @@
 import flet as ft
-from ...models import _models as models
 from sqlalchemy.orm import Session
 
 
 async def home_view(page: ft.Page, session: Session):
-    async with session() as db:
-        db_user = models.Character(
-            mal_id=10, name="Sora", name_kanji="Rando", character_image="", about="bal"
-        )
-        db.add(db_user)
-        await db.commit()
-
     return ft.Row(
         expand=True,
         controls=[
