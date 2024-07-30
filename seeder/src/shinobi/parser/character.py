@@ -4,11 +4,10 @@
 from io import BytesIO
 from typing import TypedDict
 
-from selectolax.parser import HTMLParser
 
 from shinobi.decorators.return_error_decorator import return_on_error
-from shinobi.utilities.regex import RegexHelper
 from shinobi.utilities.session import session
+from shinobi.mixins.base_parser import BaseParser
 
 
 class CharacterImageDictionary(TypedDict):
@@ -24,18 +23,11 @@ class CharacterDictionary(TypedDict):
     about: str
 
 
-class CharacterParser:
+class CharacterParser(BaseParser):
     def __init__(self, html: str):
         self.parser = self.get_parser(html)
 
-        # Facades
-        self.regex_helper = RegexHelper()
-
         self.client = session
-
-    @staticmethod
-    def get_parser(html: str) -> HTMLParser:
-        return HTMLParser(html)
 
     @property
     @return_on_error("")
