@@ -1,5 +1,6 @@
 import asyncio
 from rx.subject import BehaviorSubject
+from rx.scheduler.eventloop import AsyncIOThreadSafeScheduler
 
 
 class Store:
@@ -8,7 +9,7 @@ class Store:
         self.__lock = asyncio.Lock()
 
     def subscribe(self, observer):
-        return self.__subject.subscribe(observer)
+        return self.__subject.subscribe(observer, scheduler=AsyncIOThreadSafeScheduler())
 
     def get_value(self):
         return self.__subject.value
