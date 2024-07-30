@@ -1,7 +1,7 @@
 import flet as ft
 
 
-async def get_people_data():
+async def get_staff_data():
     return [
         {
             "data": {
@@ -48,12 +48,12 @@ async def get_people_data():
     ]
 
 
-async def people_view():
+async def staff_view():
     return ft.DataTable(
         show_checkbox_column=True,
         columns=[
             ft.DataColumn(ft.Text("mal_id")),
-            ft.DataColumn(ft.Text("People")),
+            ft.DataColumn(ft.Text("Staff")),
             ft.DataColumn(ft.Text("Birthday")),
             ft.DataColumn(ft.Text("Favorites")),
         ],
@@ -66,6 +66,6 @@ async def people_view():
                     ft.DataCell(ft.Text(item["data"]["favorites"])),
                 ]
             )
-            for item in await get_people_data()
+            for item in await get_staff_data()
         ],
     )

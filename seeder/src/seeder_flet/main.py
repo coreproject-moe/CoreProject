@@ -2,7 +2,7 @@ import flet as ft
 
 from .lib.views.login import login_view
 from .lib.views.home import home_view
-from .lib.views.people import people_view
+from .lib.views.staff import staff_view
 
 from .lib.components.navbar import navbar
 
@@ -30,7 +30,7 @@ async def main(page: ft.Page):
     page.padding = ft.padding.all(10)
 
     # NOTE: remove after complete
-    page.go("/people")
+    page.go("/staff")
 
     async def route_change(event: ft.RouteChangeEvent):
         page.views.clear()
@@ -51,11 +51,11 @@ async def main(page: ft.Page):
                     padding=10,
                 )
             )
-        if event.route == "/people":
+        if event.route == "/staff":
             page.views.append(
                 ft.View(
-                    "/people",
-                    [await people_view()],
+                    "/staff",
+                    [await staff_view()],
                     bgcolor=ft.colors.SECONDARY,
                     padding=10,
                 )
