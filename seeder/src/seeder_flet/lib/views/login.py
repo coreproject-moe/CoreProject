@@ -1,7 +1,6 @@
 import asyncio
 import flet as ft
 
-from ..store.login import login_store
 
 __all__ = ["login_view"]
 
@@ -11,23 +10,21 @@ async def handle_login_click(
 ):
     "Try to login with backend"
     ...
-    login_store.set_value(False)
 
 
-async def handle_logout_click():
-    await login_store.async_set_value(not await login_store.async_get_value())
-
-
-async def login_view(page):
+async def login_view():
     username_or_email_field = ft.TextField(
         autofocus=True,
         label="Username/Email address",
         width=400,
         height=50,
         hint_text="enter email address or username",
-        border_color=ft.colors.TERTIARY,
+        bgcolor=ft.colors.TRANSPARENT,
+        hover_color=ft.colors.with_opacity(0.1, ft.colors.PRIMARY),
+        focused_bgcolor=ft.colors.with_opacity(0.25, ft.colors.PRIMARY),
+        border_color=ft.colors.with_opacity(0.5, ft.colors.PRIMARY),
         focused_border_color=ft.colors.PRIMARY,
-        border_radius=10,
+        border_radius=0,
         label_style=ft.TextStyle(color=ft.colors.BLUE_100),
         hint_style=ft.TextStyle(color=ft.colors.with_opacity(0.35, ft.colors.BLUE_100)),
     )
@@ -38,9 +35,12 @@ async def login_view(page):
         hint_text="password#0000",
         width=400,
         height=50,
-        border_color=ft.colors.TERTIARY,
+        bgcolor=ft.colors.TRANSPARENT,
+        hover_color=ft.colors.with_opacity(0.1, ft.colors.PRIMARY),
+        focused_bgcolor=ft.colors.with_opacity(0.25, ft.colors.PRIMARY),
+        border_color=ft.colors.with_opacity(0.5, ft.colors.PRIMARY),
         focused_border_color=ft.colors.PRIMARY,
-        border_radius=10,
+        border_radius=0,
         label_style=ft.TextStyle(color=ft.colors.BLUE_100),
         hint_style=ft.TextStyle(color=ft.colors.with_opacity(0.35, ft.colors.BLUE_100)),
     )
@@ -49,70 +49,56 @@ async def login_view(page):
         hint_text="backend.coreproject.moe",
         width=400,
         height=50,
-        border_color=ft.colors.TERTIARY,
+        bgcolor=ft.colors.TRANSPARENT,
+        hover_color=ft.colors.with_opacity(0.1, ft.colors.PRIMARY),
+        focused_bgcolor=ft.colors.with_opacity(0.25, ft.colors.PRIMARY),
+        border_color=ft.colors.with_opacity(0.5, ft.colors.PRIMARY),
         focused_border_color=ft.colors.PRIMARY,
-        border_radius=10,
+        border_radius=0,
         label_style=ft.TextStyle(color=ft.colors.BLUE_100),
         hint_style=ft.TextStyle(color=ft.colors.with_opacity(0.35, ft.colors.BLUE_100)),
     )
 
-    ret = ft.Row(
+    return ft.Row(
         expand=True,
-        controls=[],
+        controls=[
+            ft.Column(
+                [
+                    ft.Container(
+                        content=ft.Image(src="/icons/coreseeder_text.svg", height=20),
+                        margin=ft.margin.only(bottom=40),
+                    ),
+                    username_or_email_field,
+                    password_field,
+                    backend_url_field,
+                    ft.FilledButton(
+                        content=ft.Row(
+                            controls=[
+                                ft.Icon(name=ft.icons.LOGIN, size=20),
+                                ft.Text("Login", size=15),
+                            ],
+                            width=75,
+                        ),
+                        style=ft.ButtonStyle(
+                            shape=ft.RoundedRectangleBorder(radius=0),
+                            color={ft.MaterialState.DEFAULT: ft.colors.WHITE},
+                            bgcolor={"": ft.colors.with_opacity(0.25, ft.colors.PRIMARY)},
+                            side=ft.BorderSide(1, ft.colors.PRIMARY),
+                        ),
+                        on_click=lambda e: asyncio.run(
+                            handle_login_click(
+                                e,
+                                username_or_email_field.value,
+                                password_field.value,
+                                backend_url_field.value,
+                            )
+                        ),
+                        height=40,
+                    ),
+                ],
+                expand=True,
+                alignment=ft.MainAxisAlignment.CENTER,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            )
+        ],
     )
-
-    def observer(value):
-        if value:
-            ret.controls.clear()
-            ret.controls.append(
-                ft.Column(
-                    [
-                        ft.Container(
-                            content=ft.Text(
-                                "Login to Continue", color=ft.colors.BLUE_100, size=20
-                            ),
-                            margin=ft.margin.only(bottom=20),
-                        ),
-                        username_or_email_field,
-                        password_field,
-                        backend_url_field,
-                        ft.FilledButton(
-                            content=ft.Text("Continue", size=18),
-                            style=ft.ButtonStyle(
-                                shape=ft.RoundedRectangleBorder(radius=10),
-                                color={ft.MaterialState.DEFAULT: ft.colors.WHITE},
-                                bgcolor=ft.colors.PRIMARY,
-                            ),
-                            on_click=lambda e: asyncio.run(
-                                handle_login_click(
-                                    e,
-                                    username_or_email_field.value,
-                                    password_field.value,
-                                    backend_url_field.value,
-                                )
-                            ),
-                            height=50,
-                        ),
-                    ],
-                    expand=True,
-                    alignment=ft.MainAxisAlignment.CENTER,
-                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-                )
-            )
-        else:
-            ret.controls.clear()
-            ret.controls.append(
-                ft.Column(
-                    [
-                        ft.FilledButton(
-                            content=ft.Text("Log out?"),
-                            on_click=lambda e: asyncio.run(handle_logout_click()),
-                        )
-                    ]
-                )
-            )
-        page.update()
-
-    login_store.subscribe(observer)
-
-    return ret
