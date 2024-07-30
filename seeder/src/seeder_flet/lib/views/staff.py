@@ -1,7 +1,7 @@
 import flet as ft
 
 
-async def get_staff_data():
+def get_staff_data():
     return [
         {
             "data": {
@@ -48,24 +48,28 @@ async def get_staff_data():
     ]
 
 
-async def staff_view():
-    return ft.DataTable(
-        show_checkbox_column=True,
-        columns=[
-            ft.DataColumn(ft.Text("mal_id")),
-            ft.DataColumn(ft.Text("Staff")),
-            ft.DataColumn(ft.Text("Birthday")),
-            ft.DataColumn(ft.Text("Favorites")),
-        ],
-        rows=[
-            ft.DataRow(
-                cells=[
-                    ft.DataCell(ft.Text(item["data"]["mal_id"])),
-                    ft.DataCell(ft.Text(item["data"]["name"])),
-                    ft.DataCell(ft.Text(item["data"]["birthday"])),
-                    ft.DataCell(ft.Text(item["data"]["favorites"])),
-                ]
-            )
-            for item in await get_staff_data()
-        ],
-    )
+class StaffView:
+    def __init__(self): ...
+
+    @staticmethod
+    def create_view():
+        return ft.DataTable(
+            show_checkbox_column=True,
+            columns=[
+                ft.DataColumn(ft.Text("mal_id")),
+                ft.DataColumn(ft.Text("Staff")),
+                ft.DataColumn(ft.Text("Birthday")),
+                ft.DataColumn(ft.Text("Favorites")),
+            ],
+            rows=[
+                ft.DataRow(
+                    cells=[
+                        ft.DataCell(ft.Text(item["data"]["mal_id"])),
+                        ft.DataCell(ft.Text(item["data"]["name"])),
+                        ft.DataCell(ft.Text(item["data"]["birthday"])),
+                        ft.DataCell(ft.Text(item["data"]["favorites"])),
+                    ]
+                )
+                for item in get_staff_data()
+            ],
+        )

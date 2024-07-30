@@ -2,7 +2,7 @@ import flet as ft
 
 from .lib.views.login import login_view
 from .lib.views.home import home_view
-from .lib.views.staff import staff_view
+from .lib.views.staff import StaffView
 
 from .lib.components.navbar import navbar
 
@@ -55,7 +55,7 @@ async def main(page: ft.Page):
             page.views.append(
                 ft.View(
                     "/staff",
-                    [await staff_view()],
+                    [StaffView.create_view()],
                     bgcolor=ft.colors.SECONDARY,
                     padding=10,
                 )
