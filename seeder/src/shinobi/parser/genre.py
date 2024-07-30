@@ -1,10 +1,8 @@
 from typing import TypedDict
 
-from selectolax.parser import HTMLParser
 
 from shinobi.decorators.return_error_decorator import return_on_error
-from shinobi.utilities.regex import RegexHelper
-from shinobi.utilities.string import StringHelper
+from shinobi.mixins.base_parser import BaseParser
 
 
 class GenreDictionary(TypedDict):
@@ -14,17 +12,9 @@ class GenreDictionary(TypedDict):
     type: str
 
 
-class AnimeGenreParser:
+class AnimeGenreParser(BaseParser):
     def __init__(self, html: str):
-        self.parser = HTMLParser(html)
-
-        # Facads
-        self.regex_helper = RegexHelper()
-        self.string_helper = StringHelper()
-
-    @staticmethod
-    def get_parser(html):
-        return HTMLParser(html)
+        self.parser = self.get_parser(html)
 
     @property
     @return_on_error("")
@@ -42,9 +32,7 @@ class AnimeGenreParser:
         html = self.parser.css_first("span.di-ib.mt4")
         # Remove span nodes
         html.strip_tags(["span.fw-n"])
-        actual_text = self.regex_helper.remove_anime_from_the_end_of_a_string(
-            html.text()
-        )
+        actual_text = self.regex_helper.remove_anime_from_the_end_of_a_string(html.text())
         return self.string_helper.cleanse(actual_text)
 
     @property
