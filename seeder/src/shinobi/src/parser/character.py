@@ -4,11 +4,10 @@
 from io import BytesIO
 from typing import TypedDict
 
-from selectolax.parser import HTMLParser
 
 from shinobi.decorators.return_error_decorator import return_on_error
-from shinobi.utilities.regex import RegexHelper
-from shinobi.utilities.session import session
+from shinobi.mixins.parser.base import BaseParser
+from selectolax.parser import HTMLParser
 
 
 class CharacterImageDictionary(TypedDict):
@@ -24,18 +23,11 @@ class CharacterDictionary(TypedDict):
     about: str
 
 
-class CharacterParser:
+class CharacterParser(BaseParser):
     def __init__(self, html: str):
+        super().__init__()
+
         self.parser = self.get_parser(html)
-
-        # Facades
-        self.regex_helper = RegexHelper()
-
-        self.client = session
-
-    @staticmethod
-    def get_parser(html: str) -> HTMLParser:
-        return HTMLParser(html)
 
     @property
     @return_on_error("")
@@ -71,8 +63,9 @@ class CharacterParser:
     @return_on_error("")
     def get_about(self) -> str:
         html = self.parser.css_first("#content table tbody tr > td:nth-of-type(2)")
-        tags = ["div", "br", "table", "h2"]
+        tags = ["div", "br", "table", "h2", "script"]
         html.strip_tags(tags)
+
         sentences = html.text().split("\n")
         return "\n\n".join(sentences).strip()
 

@@ -1,8 +1,6 @@
-from selectolax.parser import HTMLParser
-
 from shinobi.decorators.return_error_decorator import return_on_error
-from shinobi.utilities.regex import RegexHelper
-from shinobi.utilities.string import StringHelper
+
+from shinobi.mixins.parser.base import BaseParser
 
 
 class AnimeCharacterAndStaffListDictionary:
@@ -10,17 +8,10 @@ class AnimeCharacterAndStaffListDictionary:
     staffs: list[int]
 
 
-class AnimeCharacterAndStaffListParser:
+class AnimeCharacterAndStaffListParser(BaseParser):
     def __init__(self, html: str) -> None:
+        super().__init__()
         self.parser = self.get_parser(html)
-
-        # Facades
-        self.regex_helper = RegexHelper()
-        self.string_helper = StringHelper()
-
-    @staticmethod
-    def get_parser(html: str) -> HTMLParser:
-        return HTMLParser(html)
 
     @property
     @return_on_error([])

@@ -4,11 +4,9 @@ from io import BytesIO
 from typing import Any, TypedDict
 
 from dateutil import parser
-from selectolax.parser import HTMLParser
 
 from shinobi.decorators.return_error_decorator import return_on_error
-from shinobi.utilities.regex import RegexHelper
-from shinobi.utilities.string import StringHelper
+from shinobi.mixins.parser.base import BaseParser
 
 
 class StaffImageDictionary(TypedDict):
@@ -27,17 +25,10 @@ class StaffDictionary(TypedDict):
     about: str
 
 
-class StaffParser:
+class StaffParser(BaseParser):
     def __init__(self, html: str):
+        super().__init__()
         self.parser = self.get_parser(html)
-
-        # Facades
-        self.regex_helper = RegexHelper()
-        self.string_helper = StringHelper()
-
-    @staticmethod
-    def get_parser(html) -> HTMLParser:
-        return HTMLParser(html)
 
     @property
     @return_on_error("")

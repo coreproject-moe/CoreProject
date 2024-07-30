@@ -6,7 +6,7 @@ from requests import Session
 from requests.adapters import HTTPAdapter
 from requests.structures import CaseInsensitiveDict
 from requests.utils import DEFAULT_ACCEPT_ENCODING
-from requests_cache import RedisCache  # type: ignore
+from requests_cache import RedisCache
 from requests_ratelimiter import LimiterMixin, RedisBucket
 from urllib3.util import Retry
 
@@ -44,9 +44,7 @@ retry_strategy = Retry(
     status_forcelist=RETRY_STATUSES,
 )
 adapter = HTTPAdapter(max_retries=retry_strategy)
-redis_pool = ConnectionPool.from_url(
-    os.environ.get("REDIS_URL", "redis://localhost:6379")
-)
+redis_pool = ConnectionPool.from_url(os.environ.get("REDIS_URL", "redis://localhost:6379"))
 
 session = CachedLimiterSession(
     bucket_class=RedisBucket,

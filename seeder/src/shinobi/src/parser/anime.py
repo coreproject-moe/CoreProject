@@ -3,12 +3,10 @@ from functools import lru_cache
 from typing import TypedDict
 
 from dateutil import parser
-from selectolax.parser import HTMLParser, Node
+from selectolax.parser import Node
 
 from shinobi.decorators.return_error_decorator import return_on_error
-from shinobi.utilities.regex import RegexHelper
-from shinobi.utilities.session import session
-from shinobi.utilities.string import StringHelper
+from shinobi.mixins.parser.base import BaseParser
 
 
 class AnimeDictionary(TypedDict):
@@ -32,16 +30,11 @@ class AnimeDictionary(TypedDict):
     endings: list[int]
 
 
-class AnimeParser:
+class AnimeParser(BaseParser):
     def __init__(self, html: str) -> None:
+        super().__init__()
+
         self.parser = self.get_parser(html)
-
-        # Facades
-        self.regex_helper = RegexHelper()
-        self.string_helper = StringHelper()
-
-        # Clients
-        self.client = session
 
     @property
     @return_on_error("")
@@ -54,10 +47,6 @@ class AnimeParser:
             raise ValueError("There are multiple aired node")
 
         return self.string_helper.cleanse(node[0].next.text())
-
-    @staticmethod
-    def get_parser(html: str) -> HTMLParser:
-        return HTMLParser(html)
 
     @property
     @return_on_error("")
