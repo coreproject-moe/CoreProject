@@ -52,9 +52,9 @@ class StaffView(ft.Container):
     def __init__(self):
         super().__init__()
 
-        self.render_datatable()
+        self.render()
 
-    def render_datatable(self):
+    def render(self):
         self.content = ft.DataTable(
             show_checkbox_column=True,
             columns=[
