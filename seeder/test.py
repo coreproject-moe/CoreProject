@@ -24,13 +24,11 @@ dictionary = builder.build_dictionary(sort=True)
 # noqa: E501
 
 
-async def create(i):
+async def create():
     async with Session() as _session:
-        db = Staff(mal_id=i)
+        db_obs = [Staff(mal_id=i) for i in dictionary]
         _session.add(db)
         await _session.commit()
 
 
-for i in dictionary:
-    print(i)
-    asyncio.run(create(i))
+asyncio.run(create())
