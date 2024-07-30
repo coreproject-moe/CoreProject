@@ -53,6 +53,9 @@ class StaffView(ft.Container):
 
     def render(self):
         self.content = ft.DataTable(
+            # events
+            on_select_all=lambda e: print(e.data),
+            # properties
             show_checkbox_column=True,
             border=ft.border.all(1, ft.colors.PRIMARY),
             vertical_lines=ft.BorderSide(
