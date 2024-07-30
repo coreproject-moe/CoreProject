@@ -3,22 +3,34 @@ import requests
 from shinobi.parser.staff import StaffParser
 from shinobi.utilities.session import session
 
+import flet as ft
+import os
+import asyncio
+
+os.environ["DATABASE_URL"] = "sqlite+aiosqlite:///./default.db"
+
 
 from src.seeder_flet.models._engine import Session
 from src.seeder_flet.models._models import Staff
 
 
-def get_staff_res_given_mal_id(mal_id: int) -> requests.Response:
-    return session.get(f"https://myanimelist.net/people/{mal_id}")
+from shinobi.builder.staff import StaffBuilder
+
+
+builder = StaffBuilder()
+dictionary = builder.build_dictionary(sort=True)
 
 
 # noqa: E501
-res = get_staff_res_given_mal_id(1)
-parser = StaffParser(res.text)
-data = parser.build_dictionary()
 
-for i in data:
-    with Session() as _session:
+
+async def create(i):
+    async with Session() as _session:
         db = Staff(mal_id=i)
         _session.add(db)
-        _session.commit()
+        await _session.commit()
+
+
+for i in dictionary:
+    print(i)
+    asyncio.run(create(i))
