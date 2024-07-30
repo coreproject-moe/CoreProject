@@ -82,7 +82,9 @@ async def login_view():
                         style=ft.ButtonStyle(
                             shape=ft.RoundedRectangleBorder(radius=0),
                             color={ft.MaterialState.DEFAULT: ft.colors.WHITE},
-                            bgcolor={"": ft.colors.with_opacity(0.25, ft.colors.PRIMARY)},
+                            bgcolor={
+                                "": ft.colors.with_opacity(0.25, ft.colors.PRIMARY)
+                            },
                             side=ft.BorderSide(1, ft.colors.PRIMARY),
                         ),
                         on_click=lambda e: asyncio.run(
