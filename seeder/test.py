@@ -26,8 +26,9 @@ dictionary = builder.build_dictionary(sort=True)
 
 async def create():
     async with Session() as _session:
-        db_obs = [Staff(mal_id=i) for i in dictionary]
-        _session.add(db)
+        for i in dictionary:
+            db_obs = Staff(mal_id=i)
+            _session.add(db_obs)
         await _session.commit()
 
 
