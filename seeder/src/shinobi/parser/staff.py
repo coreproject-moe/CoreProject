@@ -27,6 +27,7 @@ class StaffDictionary(TypedDict):
 
 class StaffParser(BaseParser):
     def __init__(self, html: str):
+        super().__init__()
         self.parser = self.get_parser(html)
 
     @property
