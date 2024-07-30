@@ -70,7 +70,8 @@ class StaffView(ft.Container):
                         ft.DataCell(ft.Text(item["data"]["name"])),
                         ft.DataCell(ft.Text(item["data"]["birthday"])),
                         ft.DataCell(ft.Text(item["data"]["favorites"])),
-                    ]
+                    ],
+                    on_select_changed=lambda e: print(f"row select changed: {e.data}"),
                 )
                 for item in get_staff_data()
             ],
