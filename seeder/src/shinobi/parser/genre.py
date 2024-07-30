@@ -2,7 +2,7 @@ from typing import TypedDict
 
 
 from shinobi.decorators.return_error_decorator import return_on_error
-from shinobi.mixins.base_parser import BaseParser
+from shinobi.mixins.parser.base import BaseParser
 
 
 class GenreDictionary(TypedDict):
@@ -14,6 +14,8 @@ class GenreDictionary(TypedDict):
 
 class AnimeGenreParser(BaseParser):
     def __init__(self, html: str):
+        super().__init__()
+
         self.parser = self.get_parser(html)
 
     @property

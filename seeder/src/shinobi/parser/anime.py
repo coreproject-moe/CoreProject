@@ -6,8 +6,7 @@ from dateutil import parser
 from selectolax.parser import Node
 
 from shinobi.decorators.return_error_decorator import return_on_error
-from shinobi.utilities.session import session
-from shinobi.mixins.base_parser import BaseParser
+from shinobi.mixins.parser.base import BaseParser
 
 
 class AnimeDictionary(TypedDict):
@@ -36,8 +35,6 @@ class AnimeParser(BaseParser):
         super().__init__()
 
         self.parser = self.get_parser(html)
-        # Clients
-        self.client = session
 
     @property
     @return_on_error("")

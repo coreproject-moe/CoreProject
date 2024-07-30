@@ -5,10 +5,8 @@ from typing import TypedDict
 
 from dateutil import parser
 from decorators.return_error_decorator import return_on_error
-from selectolax.parser import HTMLParser
 
-from shinobi.utilities.regex import RegexHelper
-from shinobi.utilities.string import StringHelper
+from shinobi.mixins.parser.base import BaseParser
 
 
 class ProducerDictionary(TypedDict):
@@ -19,17 +17,11 @@ class ProducerDictionary(TypedDict):
     about: str
 
 
-class ProducerParser:
+class ProducerParser(BaseParser):
     def __init__(self, html: str):
+        super().__init__()
+
         self.parser = self.get_parser(html)
-
-        # Facades
-        self.regex_helper = RegexHelper()
-        self.string_helper = StringHelper()
-
-    @staticmethod
-    def get_parser(html):
-        return HTMLParser(html)
 
     @property
     @return_on_error("")
