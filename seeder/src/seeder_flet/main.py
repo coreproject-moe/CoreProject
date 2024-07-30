@@ -55,7 +55,7 @@ async def main(page: ft.Page):
             page.views.append(
                 ft.View(
                     "/staff",
-                    [StaffView.create_view()],
+                    [StaffView()],
                     bgcolor=ft.colors.SECONDARY,
                     padding=10,
                 )

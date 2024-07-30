@@ -48,11 +48,13 @@ def get_staff_data():
     ]
 
 
-class StaffView:
-    def __init__(self): ...
+class StaffView(ft.Container):
+    def __init__(self):
+        super().__init__()
 
-    @staticmethod
-    def create_view():
+        self.content = self.create_datatable()
+
+    def create_datatable(self):
         return ft.DataTable(
             show_checkbox_column=True,
             columns=[
