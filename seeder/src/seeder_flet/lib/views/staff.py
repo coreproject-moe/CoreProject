@@ -7,21 +7,17 @@ def get_staff_data():
         {
             "data": {
                 "mal_id": 1,
-                "url": "https:\/\/myanimelist.net\/people\/1\/Tomokazu_Seki",
+                "url": "https://myanimelist.net/people/1/Tomokazu_Seki",
                 "website_url": None,
                 "images": {
                     "jpg": {
-                        "image_url": "https:\/\/cdn.myanimelist.net\/images\/voiceactors\/1\/55486.jpg"
+                        "image_url": "https://cdn.myanimelist.net/images/voiceactors/1/55486.jpg"
                     }
                 },
                 "name": "Tomokazu Seki",
-                "given_name": "\u667a\u4e00",
-                "family_name": "\u95a2",
-                "alternate_names": [
-                    "Seki Mondoya",
-                    "\u9580\u6238 \u958b",
-                    "Monto Hiraku",
-                ],
+                "given_name": "智一",
+                "family_name": "関",
+                "alternate_names": ["Seki Mondoya", "門戸 開", "Monto Hiraku"],
                 "birthday": "1972-09-08T00:00:00+00:00",
                 "favorites": 6188,
                 "about": "Hometown: Tokyo, Japan\nBlood type: AB\n\nTwitter: @seki0908\nInstagram: @sekitomokazu\nProfile: Atomic Monkey",
@@ -30,16 +26,16 @@ def get_staff_data():
         {
             "data": {
                 "mal_id": 2,
-                "url": "https:\/\/myanimelist.net\/people\/2\/Tomokazu_Sugita",
-                "website_url": "https:\/\/agrs.co.jp\/",
+                "url": "https://myanimelist.net/people/2/Tomokazu_Sugita",
+                "website_url": "https://agrs.co.jp/",
                 "images": {
                     "jpg": {
-                        "image_url": "https:\/\/cdn.myanimelist.net\/images\/voiceactors\/1\/81054.jpg"
+                        "image_url": "https://cdn.myanimelist.net/images/voiceactors/1/81054.jpg"
                     }
                 },
                 "name": "Tomokazu Sugita",
-                "given_name": "\u667a\u548c",
-                "family_name": "\u6749\u7530",
+                "given_name": "智和",
+                "family_name": "杉田",
                 "alternate_names": [],
                 "birthday": "1980-10-11T00:00:00+00:00",
                 "favorites": 47217,
@@ -77,7 +73,30 @@ class StaffView(ft.Container):
                 ft.DataRow(
                     cells=[
                         ft.DataCell(ft.Text(item["data"]["mal_id"])),
-                        ft.DataCell(ft.Text(item["data"]["name"])),
+                        ft.DataCell(
+                            ft.Row(
+                                controls=[
+                                    ft.Image(
+                                        src=item["data"]["images"]["jpg"]["image_url"],
+                                    ),
+                                    ft.Column(
+                                        alignment=ft.MainAxisAlignment.CENTER,
+                                        spacing=0,
+                                        controls=[
+                                            ft.Text(item["data"]["name"]),
+                                            ft.Text(
+                                                ", ".join(
+                                                    item["data"]["alternate_names"]
+                                                ),
+                                                color=ft.colors.with_opacity(
+                                                    0.5, ft.colors.WHITE
+                                                ),
+                                            ),
+                                        ],
+                                    ),
+                                ]
+                            )
+                        ),
                         ft.DataCell(
                             ft.Text(
                                 datetime.fromisoformat(
@@ -85,7 +104,7 @@ class StaffView(ft.Container):
                                 ).strftime("%b %d, %Y")
                             )
                         ),
-                        ft.DataCell(ft.Text(item["data"]["favorites"])),
+                        ft.DataCell(ft.Text("{:,}".format(item["data"]["favorites"]))),
                     ],
                     on_select_changed=lambda e: print(f"row select changed: {e.data}"),
                 )
