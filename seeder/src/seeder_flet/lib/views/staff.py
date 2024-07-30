@@ -1,6 +1,10 @@
 from datetime import datetime
 import flet as ft
 
+from shinobi.builder.staff import StaffBuilder
+
+from ...models._models import Staff
+
 
 def get_staff_data():
     return [
@@ -46,10 +50,27 @@ def get_staff_data():
 
 
 class StaffView(ft.Container):
-    def __init__(self):
+    def __init__(self, session):
         super().__init__()
 
+        self.session = session
         self.render()
+
+    def did_mount(self):
+        self.page.run_task(self.fetch_all_people)
+
+    def will_unmount(self):
+        pass
+
+    async def fetch_all_people(self):
+        builder = StaffBuilder()
+        dictionary = builder.build_dictionary(sort=True)
+
+        async with self.session() as _session:
+            for i in dictionary:
+                db_obs = Staff(mal_id=i)
+                _session.add(db_obs)
+            await _session.commit()
 
     def render(self):
         self.content = ft.DataTable(
@@ -58,9 +79,7 @@ class StaffView(ft.Container):
             # properties
             show_checkbox_column=True,
             border=ft.border.all(1, ft.colors.PRIMARY),
-            vertical_lines=ft.BorderSide(
-                1, ft.colors.with_opacity(0.5, ft.colors.PRIMARY)
-            ),
+            vertical_lines=ft.BorderSide(1, ft.colors.with_opacity(0.5, ft.colors.PRIMARY)),
             horizontal_lines=ft.BorderSide(
                 1, ft.colors.with_opacity(0.5, ft.colors.PRIMARY)
             ),
@@ -88,9 +107,7 @@ class StaffView(ft.Container):
                                         controls=[
                                             ft.Text(item["data"]["name"]),
                                             ft.Text(
-                                                ", ".join(
-                                                    item["data"]["alternate_names"]
-                                                ),
+                                                ", ".join(item["data"]["alternate_names"]),
                                                 color=ft.colors.with_opacity(
                                                     0.5, ft.colors.WHITE
                                                 ),
@@ -102,9 +119,9 @@ class StaffView(ft.Container):
                         ),
                         ft.DataCell(
                             ft.Text(
-                                datetime.fromisoformat(
-                                    item["data"]["birthday"]
-                                ).strftime("%b %d, %Y")
+                                datetime.fromisoformat(item["data"]["birthday"]).strftime(
+                                    "%b %d, %Y"
+                                )
                             )
                         ),
                         ft.DataCell(ft.Text("{:,}".format(item["data"]["favorites"]))),
