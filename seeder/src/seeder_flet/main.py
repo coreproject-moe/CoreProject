@@ -41,7 +41,7 @@ async def main(page: ft.Page):
             page.views.append(
                 ft.View(
                     "/login",
-                    [await login_view(page)],
+                    [await login_view()],
                     bgcolor=ft.colors.SECONDARY,
                     padding=10,
                 )
