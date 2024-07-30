@@ -55,7 +55,7 @@ async def main(page: ft.Page):
             page.views.append(
                 ft.View(
                     "/staff",
-                    [StaffView()],
+                    [await navbar(page), StaffView()],
                     bgcolor=ft.colors.SECONDARY,
                     padding=10,
                 )

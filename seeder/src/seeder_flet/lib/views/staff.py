@@ -1,3 +1,4 @@
+from datetime import datetime
 import flet as ft
 
 
@@ -57,6 +58,15 @@ class StaffView(ft.Container):
     def render(self):
         self.content = ft.DataTable(
             show_checkbox_column=True,
+            border=ft.border.all(1, ft.colors.PRIMARY),
+            vertical_lines=ft.BorderSide(
+                1, ft.colors.with_opacity(0.5, ft.colors.PRIMARY)
+            ),
+            horizontal_lines=ft.BorderSide(
+                1, ft.colors.with_opacity(0.5, ft.colors.PRIMARY)
+            ),
+            heading_row_color=ft.colors.with_opacity(0.10, ft.colors.PRIMARY),
+            data_row_color=ft.colors.with_opacity(0, ft.colors.PRIMARY),
             columns=[
                 ft.DataColumn(ft.Text("mal_id")),
                 ft.DataColumn(ft.Text("Staff")),
@@ -68,7 +78,13 @@ class StaffView(ft.Container):
                     cells=[
                         ft.DataCell(ft.Text(item["data"]["mal_id"])),
                         ft.DataCell(ft.Text(item["data"]["name"])),
-                        ft.DataCell(ft.Text(item["data"]["birthday"])),
+                        ft.DataCell(
+                            ft.Text(
+                                datetime.fromisoformat(
+                                    item["data"]["birthday"]
+                                ).strftime("%b %d, %Y")
+                            )
+                        ),
                         ft.DataCell(ft.Text(item["data"]["favorites"])),
                     ],
                     on_select_changed=lambda e: print(f"row select changed: {e.data}"),
