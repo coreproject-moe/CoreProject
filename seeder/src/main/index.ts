@@ -3,7 +3,7 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { spawn } from "child_process"
-import { isLinux, isMac, isWindows } from './constants'
+import { IS_LINUX, IS_MAC, IS_WINDOWS } from './constants'
 
 function createWindow(): void {
   // Create the browser window.
@@ -55,9 +55,9 @@ app.whenReady().then(() => {
   ipcMain.handle('get-staff-urls', async () => {
     return new Promise((resolve, reject) => {
       const shiinobiExePath = "../../resources/bin/" +
-        (isLinux ? 'linux/shiinobi' :
-          (isWindows ? 'win32/shiinobi.exe' :
-            (isMac ? 'darwin/shiinobi' : '')
+        (IS_LINUX ? 'linux/shiinobi' :
+          (IS_WINDOWS ? 'win32/shiinobi.exe' :
+            (IS_MAC ? 'darwin/shiinobi' : '')
           )
         )
       const binExePath = join(__dirname, shiinobiExePath)
