@@ -12,7 +12,15 @@
     "strict": false,
     "allowJs": true,
     "checkJs": true,
-    "lib": ["ESNext", "DOM", "DOM.Iterable"]
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/renderer/*"],
+      "@assets/*": ["./src/renderer/assets/*"],
+      "@components/*": ["./src/renderer/components/*"],
+      "@routes/*": ["./src/renderer/routes/*"],
+      "@layouts/*": ["./src/renderer/layouts/*"]
+    }
   },
   "references": [{ "path": "./tsconfig.node.json" }]
 }
