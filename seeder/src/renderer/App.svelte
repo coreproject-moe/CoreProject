@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Router, Route } from 'svelte-routing'
-  import Staffs from './routes/staffs/Index.svelte'
-  import HomeLayout from './layouts/HomeLayout.svelte'
+  import Staffs from '@routes/staffs/Index.svelte'
+  import HomeLayout from '@layouts/HomeLayout.svelte'
 </script>
 
 <Router>

@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte'
-  import Navbar from '../components/navbar/Index.svelte'
+  import Navbar from '@components/navbar/Index.svelte'
 
   const {
     children

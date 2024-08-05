@@ -1,6 +1,6 @@
 <script lang="ts">
-  import CoreLogoPath from '../../assets/icons/core/logo.svg'
-  import CoreSeederLogoPath from '../../assets/icons/core/coreseeder.svg'
+  import CoreLogoPath from '@assets/icons/core/logo.svg'
+  import CoreSeederLogoPath from '@assets/icons/core/coreseeder.svg'
 </script>
 
 <div class="w-full md:h-[6vw] flex items-center justify-between relative md:p-[1.5vw]">
