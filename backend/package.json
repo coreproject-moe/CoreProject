@@ -55,7 +55,7 @@
         "@sveltejs/vite-plugin-svelte": "^3.1.1",
         "@types/lodash-es": "^4.17.12",
         "@types/node": "^22.0.0",
-        "autoprefixer": "^10.4.19",
+        "autoprefixer": "^10.4.20",
         "date-fns": "^3.6.0",
         "easytimer.js": "^4.6.0",
         "highlight.js": "^11.10.0",
@@ -83,7 +83,7 @@
         "zod": "^3.23.8"
     },
     "optionalDependencies": {
-        "@rollup/rollup-linux-x64-gnu": "4.19.1"
+        "@rollup/rollup-linux-x64-gnu": "4.20.0"
     },
     "engines": {
         "node": ">=21.5.0"
