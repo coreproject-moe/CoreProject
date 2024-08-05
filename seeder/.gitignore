@@ -1,3 +1,4 @@
+http_cache.sqlite
 node_modules
 dist
 out
