@@ -51,7 +51,6 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
-  // IPC test
   ipcMain.handle('get-staff-urls', async () => {
     return new Promise((resolve, reject) => {
       const shiinobiExePath = "../../resources/bin/" +

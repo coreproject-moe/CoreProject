@@ -1,14 +1,12 @@
 <script lang="ts">
-  import { Router, Route, Link } from 'svelte-routing'
+  import { Router, Route } from 'svelte-routing'
   import Staffs from './routes/staffs/Index.svelte'
+  import HomeLayout from './layouts/HomeLayout.svelte'
 </script>
 
 <Router>
-  <h1 class="text-3xl font-semibold text-blue-500">core seeder</h1>
-  <Link to="/">Home</Link>
-  <Link to="/staffs">Staffs</Link>
-  <div>
+  <HomeLayout>
     <Route path="/">Home route</Route>
     <Route path="/staffs" component={Staffs} />
-  </div>
+  </HomeLayout>
 </Router>
