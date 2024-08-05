@@ -3,6 +3,7 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { spawn } from "child_process"
+import { isLinux, isMac, isWindows } from './constants'
 
 function createWindow(): void {
   // Create the browser window.
@@ -53,10 +54,16 @@ app.whenReady().then(() => {
   // IPC test
   ipcMain.handle('get-staff-urls', async () => {
     return new Promise((resolve, reject) => {
-      const shiinobiPath = join(__dirname, "../../resources/shiinobi/shiinobi")
+      const shiinobiExePath = "../../resources/bin/" +
+        (isLinux ? 'linux/shiinobi' :
+          (isWindows ? 'win32/shiinobi.exe' :
+            (isMac ? 'darwin/shiinobi' : '')
+          )
+        )
+      const binExePath = join(__dirname, shiinobiExePath)
       const args = ['get-staff-urls']
 
-      const process = spawn(shiinobiPath, args)
+      const process = spawn(binExePath, args)
 
       let output = ''
 
