@@ -9,7 +9,7 @@
   "compilerOptions": {
     "verbatimModuleSyntax": true,
     "useDefineForClassFields": true,
-    "strict": false,
+    "strict": true,
     "allowJs": true,
     "checkJs": true,
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
