@@ -1,7 +1,7 @@
 import { Component } from "solid-js";
 
 const DemoGraphics: Component = () => {
-  return "DemoGraphics"
-}
+	return "DemoGraphics";
+};
 
-export default DemoGraphics
+export default DemoGraphics;
