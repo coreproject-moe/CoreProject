@@ -2,6 +2,7 @@
 	import type { Snippet } from "svelte";
 	import Navbar from "@components/navbar/Index.svelte";
 	import { COMMANDS } from "@constants/commands";
+	import { link } from "svelte-routing";
 
 	const {
 		children
@@ -14,18 +15,27 @@
 	<Navbar />
 	<div class="flex-1 flex md:p-3 md:gap-3">
 		<div class="md:w-60 flex flex-col md:gap-1">
+			<a
+				use:link
+				href="/"
+				class="btn w-full bg-transparent border-none md:p-2 h-max min-h-max justify-start rounded hover:bg-primary font-normal hover:text-accent transition-none"
+				><span class="text-warning font-semibold uppercase text-xs">//</span>Home</a
+			>
 			{#each Object.entries(COMMANDS) as item}
 				{@const command_cat = item[0]}
 				{@const commands = item[1]}
 
 				<details class="collapse outline-none border-none rounded-none" open>
-					<summary class="collapse-title min-h-max p-0 text-info">{command_cat}</summary>
+					<summary class="collapse-title min-h-max p-0 text-info text-sm">{command_cat}</summary>
 					<div class="collapse-content pl-2 pt-1 pr-0">
 						{#each commands as command}
+							{@const is_active = window.location.pathname === `/${command}`}
+
 							<a
+								use:link
 								href={command}
-								class="btn w-full !bg-transparent border-none md:p-2 h-max min-h-max justify-start rounded hover:!bg-primary font-normal hover:text-accent transition-none"
-								><span class="text-warning font-semibold uppercase">get</span>{command
+								class="btn w-full bg-transparent border-none md:p-2 h-max min-h-max justify-start rounded hover:bg-primary font-normal hover:text-accent transition-none"
+								><span class="text-warning font-semibold uppercase text-xs">get</span>{command
 									.replaceAll("-", " ")
 									.replace("get ", "")}</a
 							>
