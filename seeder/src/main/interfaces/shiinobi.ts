@@ -50,11 +50,7 @@ class Shiinobi {
 	}
 
 	public async get_staff_information() {
-		try {
-			return await this.spawn("get-staff-urls");
-		} catch (err) {
-			throw err;
-		}
+		return await this.spawn("get-staff-urls");
 	}
 }
 
