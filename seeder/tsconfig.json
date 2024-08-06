@@ -19,7 +19,8 @@
       "@assets/*": ["./src/renderer/assets/*"],
       "@components/*": ["./src/renderer/components/*"],
       "@routes/*": ["./src/renderer/routes/*"],
-      "@layouts/*": ["./src/renderer/layouts/*"]
+      "@layouts/*": ["./src/renderer/layouts/*"],
+      "@constants/*": ["./src/renderer/constants/*"]
     }
   },
   "references": [{ "path": "./tsconfig.node.json" }]
