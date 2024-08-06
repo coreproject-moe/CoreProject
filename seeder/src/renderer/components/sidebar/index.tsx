@@ -15,13 +15,8 @@ const Sidebar: Component = () => {
       </A>
       <For each={Object.entries(COMMANDS)}>
         {([command_cat, commands]) => (
-          <details
-            class="collapse rounded-none border-none outline-none"
-            open
-          >
-            <summary class="collapse-title min-h-max p-0 text-sm text-info">
-              {command_cat}
-            </summary>
+          <details class="collapse rounded-none border-none outline-none" open>
+            <summary class="collapse-title min-h-max p-0 text-sm text-info">{command_cat}</summary>
             <div class="collapse-content pl-2 pr-0 pt-1">
               <For each={commands}>
                 {(command) => (
@@ -30,9 +25,7 @@ const Sidebar: Component = () => {
                     activeClass="!bg-primary text-accent"
                     class="btn h-max min-h-max w-full justify-start rounded border-none bg-transparent font-normal transition-none hover:bg-primary/10 md:p-2"
                   >
-                    <span class="text-xs font-semibold uppercase text-warning">
-                      get
-                    </span>
+                    <span class="text-xs font-semibold uppercase text-warning">get</span>
                     {command.replaceAll("-", " ").replace("get ", "")}
                   </A>
                 )}
@@ -42,7 +35,7 @@ const Sidebar: Component = () => {
         )}
       </For>
     </div>
-  )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;

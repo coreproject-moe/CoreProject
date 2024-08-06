@@ -1,7 +1,7 @@
 import { Component } from "solid-js";
 
 const AnimeThemes: Component = () => {
-  return "AnimeThemes"
-}
+  return "AnimeThemes";
+};
 
-export default AnimeThemes
+export default AnimeThemes;

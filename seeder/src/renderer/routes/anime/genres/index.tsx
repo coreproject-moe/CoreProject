@@ -1,7 +1,7 @@
 import { Component } from "solid-js";
 
 const AnimeGenres: Component = () => {
-  return "AnimeGenres"
-}
+  return "AnimeGenres";
+};
 
-export default AnimeGenres
+export default AnimeGenres;

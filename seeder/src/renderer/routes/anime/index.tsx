@@ -1,7 +1,7 @@
 import { Component } from "solid-js";
 
 const Anime: Component = () => {
-  return "Anime"
-}
+  return "Anime";
+};
 
-export default Anime
+export default Anime;

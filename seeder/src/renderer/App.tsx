@@ -1,15 +1,15 @@
-import { Route, Router } from '@solidjs/router'
-import { type Component } from 'solid-js'
-import RootLayout from '@layouts/RootLayout'
+import { Route, Router } from "@solidjs/router";
+import { type Component } from "solid-js";
+import RootLayout from "@layouts/RootLayout";
 // Routes
-import Home from '@routes/home'
-import Character from '@routes/character'
-import DemoGraphics from '@routes/demographics'
-import Staff from '@routes/staff'
-import AnimeExplicitGenres from '@routes/anime/explicit-genres'
-import AnimeGenres from '@routes/anime/genres'
-import Anime from '@routes/anime'
-import AnimeThemes from '@routes/anime/themes'
+import Home from "@routes/home";
+import Character from "@routes/character";
+import DemoGraphics from "@routes/demographics";
+import Staff from "@routes/staff";
+import AnimeExplicitGenres from "@routes/anime/explicit-genres";
+import AnimeGenres from "@routes/anime/genres";
+import Anime from "@routes/anime";
+import AnimeThemes from "@routes/anime/themes";
 
 const App: Component = () => {
   return (
@@ -27,7 +27,7 @@ const App: Component = () => {
         <Route path="/get-anime-themes" component={AnimeThemes} />
       </Route>
     </Router>
-  )
-}
+  );
+};
 
-export default App
+export default App;

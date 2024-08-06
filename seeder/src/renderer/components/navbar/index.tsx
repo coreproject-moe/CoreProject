@@ -1,4 +1,4 @@
-import type { Component } from "solid-js"
+import type { Component } from "solid-js";
 import CoreLogoPath from "@assets/icons/core/logo.svg";
 import CoreSeederLogoPath from "@assets/icons/core/coreseeder.svg";
 
@@ -10,7 +10,7 @@ const Navbar: Component = () => {
         <img src={CoreSeederLogoPath} class="w-auto md:h-4" alt="" />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;
