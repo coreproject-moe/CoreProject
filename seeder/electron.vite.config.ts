@@ -59,7 +59,8 @@ export default defineConfig({
         "@components": path.resolve(__dirname, "./src/renderer/components"),
         "@routes": path.resolve(__dirname, "./src/renderer/routes"),
         "@layouts": path.resolve(__dirname, "./src/renderer/layouts"),
-        "@constants": path.resolve(__dirname, "./src/renderer/constants")
+        "@constants": path.resolve(__dirname, "./src/renderer/constants"),
+        "@utils": path.resolve(__dirname, "./src/renderer/utils")
       }
     },
     plugins: [svelte()]
