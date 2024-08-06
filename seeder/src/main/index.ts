@@ -2,7 +2,9 @@ import { app, shell, BrowserWindow, ipcMain } from "electron";
 import { join } from "path";
 import { electronApp, optimizer, is } from "@electron-toolkit/utils";
 import icon from "../../resources/icon.png?asset";
+import { Shiinobi as _Shiinobi } from "$interfaces/shiinobi";
 
+const Shiinobi = new _Shiinobi();
 
 function createWindow(): void {
 	// Create the browser window.
@@ -51,7 +53,7 @@ app.whenReady().then(() => {
 	});
 
 	// IPC test
-	ipcMain.handle("get-staff-urls", async () => {});
+	ipcMain.handle("get-staff-urls", Shiinobi.get_staff_information);
 
 	createWindow();
 

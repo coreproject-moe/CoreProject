@@ -2,7 +2,7 @@ import { spawn } from "child_process";
 import { IS_LINUX, IS_MAC, IS_WINDOWS } from "$constants/os";
 import { join } from "path";
 
-class Shiinobi {
+export class Shiinobi {
 	private get shiinobi() {
 		if (IS_LINUX) {
 			return join(__dirname, "../../resources/bin/", "linux/shiinobi");
@@ -17,7 +17,7 @@ class Shiinobi {
 
 	private spawn(args: "get-staff-urls") {
 		return new Promise((resolve, reject) => {
-			const process = spawn(this.shiinobi, args);
+			const process = spawn(this.shiinobi, [args]);
 			let output = "";
 
 			process.stdout.on("data", (data: Buffer) => {
@@ -50,8 +50,10 @@ class Shiinobi {
 	}
 
 	public async get_staff_information() {
-		return new Promise((resolve, reject) => {
-			this.spawn("get-staff-urls");
-		});
+		try {
+			return await this.spawn("get-staff-urls");
+		} catch (err) {
+			throw err;
+		}
 	}
 }
