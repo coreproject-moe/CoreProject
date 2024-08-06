@@ -11,4 +11,6 @@ type ClassValue =
 
 const clsx = (...args: ClassValue[]) =>
 	args.filter((arg) => arg && typeof arg === "string").join(" ");
-export const cn = (...classes: ClassValue[]) => twMerge(clsx(...classes));
+const cn = (...classes: ClassValue[]) => twMerge(clsx(...classes));
+
+export { cn };
