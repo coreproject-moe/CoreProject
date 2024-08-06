@@ -12,22 +12,22 @@ import Anime from "@routes/anime";
 import AnimeThemes from "@routes/anime/themes";
 
 const App: Component = () => {
-	return (
-		<Router>
-			<Route path="/" component={RootLayout}>
-				<Route path="/" component={Home} />
+  return (
+    <Router>
+      <Route path="/" component={RootLayout}>
+        <Route path="/" component={Home} />
 
-				<Route path="/get-character-urls" component={Character} />
-				<Route path="/get-demographics" component={DemoGraphics} />
-				<Route path="/get-staff-urls" component={Staff} />
+        <Route path="/get-character-urls" component={Character} />
+        <Route path="/get-demographics" component={DemoGraphics} />
+        <Route path="/get-staff-urls" component={Staff} />
 
-				<Route path="/get-anime-explicit-genres" component={AnimeExplicitGenres} />
-				<Route path="/get-anime-genres" component={AnimeGenres} />
-				<Route path="/get-anime-urls" component={Anime} />
-				<Route path="/get-anime-themes" component={AnimeThemes} />
-			</Route>
-		</Router>
-	);
+        <Route path="/get-anime-explicit-genres" component={AnimeExplicitGenres} />
+        <Route path="/get-anime-genres" component={AnimeGenres} />
+        <Route path="/get-anime-urls" component={Anime} />
+        <Route path="/get-anime-themes" component={AnimeThemes} />
+      </Route>
+    </Router>
+  );
 };
 
 export default App;
