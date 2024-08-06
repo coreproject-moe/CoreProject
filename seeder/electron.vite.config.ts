@@ -4,17 +4,56 @@ import path from "path";
 
 export default defineConfig({
 	main: {
-		plugins: [externalizeDepsPlugin()]
-	},
-	preload: {
-		plugins: [externalizeDepsPlugin()]
-	},
-	renderer: {
+		plugins: [externalizeDepsPlugin()],
+		esbuild: {
+			target: "esnext",
+			legalComments: "external"
+		},
+		build: {
+			commonjsOptions: {
+				transformMixedEsModules: true
+			},
+			chunkSizeWarningLimit: undefined
+			//minify: "terser"
+		},
 		resolve: {
 			alias: {
-				/// Main
-				"@constants": path.resolve(__dirname, "./src/main/constants"),
-				/// Renderer
+				$constants: path.resolve(__dirname, "./src/main/constants"),
+				$interfaces: path.resolve(__dirname, "./src/main/interfaces")
+			}
+		}
+	},
+	preload: {
+		plugins: [externalizeDepsPlugin()],
+		esbuild: {
+			target: "esnext",
+			legalComments: "external"
+		},
+		build: {
+			commonjsOptions: {
+				transformMixedEsModules: true
+			},
+			chunkSizeWarningLimit: undefined
+			//minify: "terser"
+		}
+	},
+
+	renderer: {
+		esbuild: {
+			target: "esnext",
+			legalComments: "external"
+		},
+		build: {
+			commonjsOptions: {
+				transformMixedEsModules: true
+			},
+			chunkSizeWarningLimit: 2048,
+			target: "esnext",
+			cssTarget: "esnext"
+			//minify: "terser"
+		},
+		resolve: {
+			alias: {
 				"@": path.resolve(__dirname, "./src/renderer"),
 				"@assets": path.resolve(__dirname, "./src/renderer/assets"),
 				"@components": path.resolve(__dirname, "./src/renderer/components"),
