@@ -10,8 +10,6 @@
 	}: {
 		children: Snippet;
 	} = $props();
-
-	console.log(window.location.pathname);
 </script>
 
 <div class="flex h-screen w-screen flex-col">
