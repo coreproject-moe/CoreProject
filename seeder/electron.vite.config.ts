@@ -12,6 +12,9 @@ export default defineConfig({
 	renderer: {
 		resolve: {
 			alias: {
+				/// Main
+				"@constants": path.resolve(__dirname, "./src/main/constants"),
+				/// Renderer
 				"@": path.resolve(__dirname, "./src/renderer"),
 				"@assets": path.resolve(__dirname, "./src/renderer/assets"),
 				"@components": path.resolve(__dirname, "./src/renderer/components"),

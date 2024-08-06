@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Router, Route, Link } from "svelte-routing";
-	import Staffs from "./routes/staffs/Index.svelte";
+	import Staffs from "@routes/staffs/Index.svelte";
 </script>
 
 <Router>

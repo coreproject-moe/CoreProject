@@ -3,7 +3,7 @@ import { join } from "path";
 import { electronApp, optimizer, is } from "@electron-toolkit/utils";
 import icon from "../../resources/icon.png?asset";
 import { spawn } from "child_process";
-import { IS_LINUX, IS_MAC, IS_WINDOWS } from "./constants";
+import { IS_LINUX, IS_MAC, IS_WINDOWS } from "$constants/os";
 
 function createWindow(): void {
 	// Create the browser window.
