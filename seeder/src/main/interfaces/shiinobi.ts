@@ -2,7 +2,7 @@ import { spawn } from "child_process";
 import { IS_LINUX, IS_MAC, IS_WINDOWS } from "$constants/os";
 import { join } from "path";
 
-export class Shiinobi {
+class Shiinobi {
 	private get shiinobi() {
 		if (IS_LINUX) {
 			return join(__dirname, "../../resources/bin/", "linux/shiinobi");
@@ -57,3 +57,5 @@ export class Shiinobi {
 		}
 	}
 }
+
+export { Shiinobi };
