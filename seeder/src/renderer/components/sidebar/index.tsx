@@ -7,8 +7,9 @@ const Sidebar: Component = () => {
     <div class="flex flex-col md:w-60 md:gap-1">
       <A
         href="/"
-        class="btn h-max min-h-max w-full justify-start rounded border-none bg-transparent font-normal transition-none hover:bg-primary hover:bg-primary/10 md:p-2"
+        class="btn h-max min-h-max w-full justify-start rounded border-none font-normal outline-none transition-none hover:bg-primary hover:bg-primary/10 md:p-2"
         activeClass="!bg-primary text-accent"
+        inactiveClass="bg-transparent"
         end
       >
         <span class="text-xs font-semibold uppercase text-warning">&#47;&#47;</span>Home
@@ -22,8 +23,8 @@ const Sidebar: Component = () => {
                 {(command) => (
                   <A
                     href={command}
+                    class="btn h-max min-h-max w-full justify-start rounded border-none bg-transparent font-normal outline-none transition-none hover:bg-primary/10 md:p-2"
                     activeClass="!bg-primary text-accent"
-                    class="btn h-max min-h-max w-full justify-start rounded border-none bg-transparent font-normal transition-none hover:bg-primary/10 md:p-2"
                   >
                     <span class="text-xs font-semibold uppercase text-warning">get</span>
                     {command.replaceAll("-", " ").replace("get ", "")}
