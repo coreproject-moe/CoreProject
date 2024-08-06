@@ -14,6 +14,8 @@ export default defineConfig({
 			alias: {
 				/// Main
 				"@constants": path.resolve(__dirname, "./src/main/constants"),
+				"@interfaces": path.resolve(__dirname, "./src/main/interfaces"),
+
 				/// Renderer
 				"@": path.resolve(__dirname, "./src/renderer"),
 				"@assets": path.resolve(__dirname, "./src/renderer/assets"),

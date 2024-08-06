@@ -2,8 +2,7 @@ import { app, shell, BrowserWindow, ipcMain } from "electron";
 import { join } from "path";
 import { electronApp, optimizer, is } from "@electron-toolkit/utils";
 import icon from "../../resources/icon.png?asset";
-import { spawn } from "child_process";
-import { IS_LINUX, IS_MAC, IS_WINDOWS } from "$constants/os";
+
 
 function createWindow(): void {
 	// Create the browser window.
@@ -52,54 +51,7 @@ app.whenReady().then(() => {
 	});
 
 	// IPC test
-	ipcMain.handle("get-staff-urls", async () => {
-		return new Promise((resolve, reject) => {
-			let shiinobiExePath: string | null = null;
-			if (IS_LINUX) {
-				shiinobiExePath = join("../../resources/bin/", "linux/shiinobi");
-			} else if (IS_WINDOWS) {
-				shiinobiExePath = join("../../resources/bin/", "win32/shiinobi.exe");
-			} else if (IS_MAC) {
-				shiinobiExePath = join("../../resources/bin/", "darwin/shiinobi");
-			} else {
-				throw new Error("System architecture not supported for shiinobi");
-			}
-
-			const binExePath = join(__dirname, shiinobiExePath);
-			const args = ["get-staff-urls"];
-
-			const process = spawn(binExePath, args);
-
-			let output = "";
-
-			process.stdout.on("data", (data: Buffer) => {
-				output += data.toString();
-			});
-
-			process.stderr.on("data", (data: Buffer) => {
-				console.error("Err: ", data.toString());
-			});
-
-			process.on("close", (code) => {
-				if (code === 0) {
-					try {
-						const parsedJson = JSON.parse(output);
-						resolve(parsedJson);
-					} catch (err) {
-						console.error("JSONError: ", err);
-					}
-				} else {
-					console.error("Process exited with code: ", code);
-					reject(new Error("Process exited with code: " + code));
-				}
-			});
-
-			process.on("error", (err) => {
-				console.log("Process err: ", err);
-				reject(err);
-			});
-		});
-	});
+	ipcMain.handle("get-staff-urls", async () => {});
 
 	createWindow();
 
