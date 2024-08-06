@@ -29,8 +29,6 @@
 					<summary class="collapse-title min-h-max p-0 text-info text-sm">{command_cat}</summary>
 					<div class="collapse-content pl-2 pt-1 pr-0">
 						{#each commands as command}
-							{@const is_active = window.location.pathname === `/${command}`}
-
 							<a
 								use:link
 								href={command}
