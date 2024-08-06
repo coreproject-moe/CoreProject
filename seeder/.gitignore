@@ -4,3 +4,14 @@ dist
 out
 .DS_Store
 *.log*
+/build
+/.svelte-kit
+/package
+.env
+.env.*
+!.env.example
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+stats.html
+# package-lock.json
+pnpm-lock.yaml
