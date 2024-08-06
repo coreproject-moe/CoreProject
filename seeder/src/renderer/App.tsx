@@ -2,7 +2,7 @@ import { Route, Router } from "@solidjs/router";
 import { lazy, type Component } from "solid-js";
 import RootLayout from "@layouts/RootLayout";
 // Routes
-const Home = lazy(() => import("@routes/home"))
+const Home = lazy(() => import("@routes/home"));
 const Character = lazy(() => import("@routes/character"));
 const DemoGraphics = lazy(() => import("@routes/demographics"));
 const Staff = lazy(() => import("@routes/staff"));
