@@ -31,7 +31,7 @@ class Shiinobi {
 	}
 
 	#spawn({ command, id }: { command: _COMMANDS; id?: number }) {
-		let _command: string[] = [command];
+		const _command: string[] = [command];
 		if (id) _command.push(String(id));
 
 		return new Promise((resolve, reject) => {
