@@ -2,6 +2,21 @@ import { spawn } from "child_process";
 import { IS_LINUX, IS_MAC, IS_WINDOWS } from "@constants/os";
 import { join } from "path";
 
+type _COMMANDS =
+	| "get-myanimelist-anime-explicit-genres"
+	| "get-myanimelist-anime-genres"
+	| "get-myanimelist-anime-themes"
+	| "get-myanimelist-anime-urls"
+	| "get-myanimelist-character-urls"
+	| "get-myanimelist-demographics"
+	| "get-myanimelist-specific-anime-character-and-staff-list-information"
+	| "get-myanimelist-specific-anime-genre-information"
+	| "get-myanimelist-specific-anime-information"
+	| "get-myanimelist-specific-character-information"
+	| "get-myanimelist-specific-producer-information"
+	| "get-myanimelist-specific-staff-information"
+	| "get-myanimelist-staff-urls";
+
 class Shiinobi {
 	private get shiinobi() {
 		if (IS_LINUX) {
@@ -15,9 +30,12 @@ class Shiinobi {
 		}
 	}
 
-	private spawn(args: string[]) {
+	private spawn({ command, id }: { command: _COMMANDS; id?: number }) {
+		let _command: string[] = [command];
+		if (id) _command.push(String(id));
+
 		return new Promise((resolve, reject) => {
-			const process = spawn(this.shiinobi, args);
+			const process = spawn(this.shiinobi, _command);
 			let output = "";
 
 			process.stdout.on("data", (data: Buffer) => {
@@ -49,8 +67,8 @@ class Shiinobi {
 		});
 	}
 
-	public async get_staff_urls() {
-		return await this.spawn(["get-staff-urls"]);
+	public async get_myanimelist_staff_urls() {
+		return await this.spawn({ command: "get-myanimelist-staff-urls" });
 	}
 }
 

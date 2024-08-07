@@ -53,7 +53,7 @@ app.whenReady().then(() => {
 	});
 
 	// IPC handlers
-	ipcMain.handle("get-staff-urls", Shiinobi.get_staff_urls);
+	ipcMain.handle("get-staff-urls", Shiinobi.get_myanimelist_staff_urls);
 
 	createWindow();
 
