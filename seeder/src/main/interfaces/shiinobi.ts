@@ -30,8 +30,8 @@ class Shiinobi {
 		}
 	}
 
-	private spawn({ commands, id }: { commands: _COMMANDS; id?: number }) {
-		let _command: string[] = [commands];
+	private spawn({ command, id }: { command: _COMMANDS; id?: number }) {
+		let _command: string[] = [command];
 		if (id) _command.push(String(id));
 
 		return new Promise((resolve, reject) => {
@@ -68,7 +68,7 @@ class Shiinobi {
 	}
 
 	public async get_myanimelist_staff_urls() {
-		return await this.spawn({ commands: "get-myanimelist-staff-urls" });
+		return await this.spawn({ command: "get-myanimelist-staff-urls" });
 	}
 }
 
