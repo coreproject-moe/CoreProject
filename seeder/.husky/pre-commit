@@ -1,1 +1,2 @@
 cd seeder && npx lint-staged
+cd ..
