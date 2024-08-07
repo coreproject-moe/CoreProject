@@ -18,7 +18,7 @@ type _COMMANDS =
 	| "get-myanimelist-staff-urls";
 
 class Shiinobi {
-	private get shiinobi() {
+	get #shiinobi() {
 		if (IS_LINUX) {
 			return join(__dirname, "../../resources/bin/", "linux/shiinobi");
 		} else if (IS_WINDOWS) {
@@ -30,12 +30,12 @@ class Shiinobi {
 		}
 	}
 
-	private spawn({ command, id }: { command: _COMMANDS; id?: number }) {
+	#spawn({ command, id }: { command: _COMMANDS; id?: number }) {
 		let _command: string[] = [command];
 		if (id) _command.push(String(id));
 
 		return new Promise((resolve, reject) => {
-			const process = spawn(this.shiinobi, _command);
+			const process = spawn(this.#shiinobi, _command);
 			let output = "";
 
 			process.stdout.on("data", (data: Buffer) => {
@@ -68,7 +68,7 @@ class Shiinobi {
 	}
 
 	public async get_myanimelist_staff_urls() {
-		return await this.spawn({ command: "get-myanimelist-staff-urls" });
+		return await this.#spawn({ command: "get-myanimelist-staff-urls" });
 	}
 }
 
