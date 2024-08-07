@@ -9,6 +9,6 @@ type ClassValue =
 	| boolean
 	| undefined;
 
-const clsx = (...args: ClassValue[]) =>
+const clsx = (...args: ClassValue[]): string =>
 	args.filter((arg) => arg && typeof arg === "string").join(" ");
-export const cn = (...classes: ClassValue[]) => twMerge(clsx(...classes));
+export const cn = (...classes: ClassValue[]): string => twMerge(clsx(...classes));

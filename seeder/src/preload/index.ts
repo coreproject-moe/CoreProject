@@ -3,7 +3,7 @@ import { electronAPI } from "@electron-toolkit/preload";
 
 // Custom APIs for renderer
 const api = {
-	get_staff_urls: () => ipcRenderer.invoke("get-staff-urls")
+	get_staff_urls: (): Promise<unknown> => ipcRenderer.invoke("get-staff-urls")
 };
 
 // Use `contextBridge` APIs to expose Electron APIs to

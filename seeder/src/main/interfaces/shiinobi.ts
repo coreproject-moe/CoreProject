@@ -18,7 +18,7 @@ type _COMMANDS =
 	| "get-myanimelist-staff-urls";
 
 class Shiinobi {
-	get #shiinobi() {
+	get #shiinobi(): string {
 		if (IS_LINUX) {
 			return join(__dirname, "../../resources/bin/", "linux/shiinobi");
 		} else if (IS_WINDOWS) {
@@ -30,8 +30,8 @@ class Shiinobi {
 		}
 	}
 
-	#spawn({ command, id }: { command: _COMMANDS; id?: number }) {
-		let _command: string[] = [command];
+	#spawn({ command, id }: { command: _COMMANDS; id?: number }): Promise<unknown> {
+		const _command: string[] = [command];
 		if (id) _command.push(String(id));
 
 		return new Promise((resolve, reject) => {
@@ -67,7 +67,7 @@ class Shiinobi {
 		});
 	}
 
-	public async get_myanimelist_staff_urls() {
+	public async get_myanimelist_staff_urls(): Promise<unknown> {
 		return await this.#spawn({ command: "get-myanimelist-staff-urls" });
 	}
 }
