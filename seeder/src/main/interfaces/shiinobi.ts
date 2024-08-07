@@ -67,7 +67,7 @@ class Shiinobi {
 		});
 	}
 
-	public async get_staff_urls() {
+	public async get_myanimelist_staff_urls() {
 		return await this.spawn({ commands: "get-myanimelist-staff-urls" });
 	}
 }
