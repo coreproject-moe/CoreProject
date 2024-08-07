@@ -51,6 +51,6 @@
 		"vite-plugin-solid-svg": "^0.8.1"
 	},
 	"lint-staged": {
-		"*": "prettier --write"
+		"*.{js,jsx,ts,tsx,json,css,md}": "prettier --write"
 	}
 }
