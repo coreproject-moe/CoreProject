@@ -1,7 +1,7 @@
 import { Component } from "solid-js";
 
 const Staff: Component = () => {
-  return "Staff";
+	return "Staff";
 };
 
 export default Staff;

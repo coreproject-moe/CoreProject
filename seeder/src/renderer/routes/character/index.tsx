@@ -1,7 +1,7 @@
 import { Component } from "solid-js";
 
 const Character: Component = () => {
-  return "Character";
+	return "Character";
 };
 
 export default Character;

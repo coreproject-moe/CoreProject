@@ -1,7 +1,7 @@
 import { Component } from "solid-js";
 
 const Home: Component = () => {
-  return "Home";
+	return "Home";
 };
 
 export default Home;
