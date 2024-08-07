@@ -1,6 +1,7 @@
 import { resolve } from "path";
 import { defineConfig, externalizeDepsPlugin } from "electron-vite";
 import solid from "vite-plugin-solid";
+import svg from "vite-plugin-solid-svg";
 
 export default defineConfig({
 	main: {
@@ -64,6 +65,6 @@ export default defineConfig({
 				"@utils": resolve(__dirname, "./src/renderer/utils")
 			}
 		},
-		plugins: [solid()]
+		plugins: [solid(), svg()]
 	}
 });

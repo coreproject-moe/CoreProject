@@ -7,6 +7,10 @@
     "src/preload/*.d.ts"
   ],
   "compilerOptions": {
+    "types": [
+      "vite-plugin-solid-svg/types-component-solid",
+      "vite/client",
+    ],
     "composite": true,
     "jsxImportSource": "solid-js",
     "baseUrl": ".",
