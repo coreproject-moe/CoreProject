@@ -23,3 +23,8 @@
 	font-style: normal;
 	font-display: swap;
 }
+
+* {
+	outline: none !important;
+	box-sizing: border-box;
+}

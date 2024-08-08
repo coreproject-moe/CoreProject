@@ -9,7 +9,7 @@ const HomeLayout: Component<RouteSectionProps> = ({ children }) => {
 			<Navbar />
 			<div class="flex flex-1 md:gap-3 md:p-3">
 				<Sidebar />
-				<div class="w-full overflow-y-scroll">{children}</div>
+				<div class="w-full">{children}</div>
 			</div>
 		</div>
 	);
