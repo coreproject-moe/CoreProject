@@ -9,6 +9,9 @@ const Navbar: Component = () => {
 				<CoreLogo class="h-full w-auto" />
 				<CoreSeederLogo class="w-auto md:h-4" />
 			</div>
+			<div class="h-full">
+				<button class="btn btn-neutral h-full min-h-full rounded">Logout</button>
+			</div>
 		</div>
 	);
 };

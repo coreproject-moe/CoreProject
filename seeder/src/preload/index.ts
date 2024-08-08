@@ -3,6 +3,8 @@ import { electronAPI } from "@electron-toolkit/preload";
 
 // Custom APIs for renderer
 const api = {
+	get_app_version: () => ipcRenderer.invoke("get-app-version"),
+	// Shiinobi
 	get_staff_urls: () => ipcRenderer.invoke("get-staff-urls")
 };
 
