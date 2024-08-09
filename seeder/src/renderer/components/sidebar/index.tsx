@@ -1,4 +1,4 @@
-import { COMMANDS, COMMANDS_MAPPING } from "@constants/shiinobi";
+import { COMMANDS_MAPPING } from "@constants/shiinobi";
 import { VERSION } from "@renderer/constants/version";
 import { A } from "@solidjs/router";
 import { Component, For } from "solid-js";
