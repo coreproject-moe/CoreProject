@@ -4,6 +4,8 @@ import { render } from "solid-js/web";
 import { RouteDefinition, Router } from "@solidjs/router";
 import { lazy } from "solid-js";
 
+import { defineCustomElements } from "@coreproject-moe/icons/loader";
+
 const routes: RouteDefinition[] = [
 	{
 		path: "/",
@@ -44,5 +46,7 @@ const routes: RouteDefinition[] = [
 		]
 	}
 ];
+
+defineCustomElements();
 
 render(() => <Router>{routes}</Router>, document.getElementById("root") as HTMLElement);
