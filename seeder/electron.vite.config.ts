@@ -42,7 +42,6 @@ export default defineConfig({
 
 	renderer: {
 		esbuild: {
-			target: "esnext",
 			legalComments: "external"
 		},
 		build: {
@@ -50,7 +49,7 @@ export default defineConfig({
 				transformMixedEsModules: true
 			},
 			chunkSizeWarningLimit: 2048,
-			target: "esnext",
+			target: "es2022",
 			cssTarget: "esnext"
 			//minify: "terser"
 		},

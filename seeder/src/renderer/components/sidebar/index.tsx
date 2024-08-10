@@ -14,6 +14,8 @@ const Sidebar: Component = () => {
 					inactiveClass="bg-transparent"
 					end
 				>
+					{/* 
+					// @ts-expect-error */}
 					<coreproject-shape-home class="md:size-3"></coreproject-shape-home>
 					Home
 				</A>
