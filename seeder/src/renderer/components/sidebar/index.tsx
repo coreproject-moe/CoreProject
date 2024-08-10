@@ -16,7 +16,7 @@ const Sidebar: Component = () => {
 				>
 					{/*
 					// @ts-expect-error */}
-					<coreproject-shape-home class="md:size-3"></coreproject-shape-home>
+					<coreproject-shape-home class="text-warning md:size-3"></coreproject-shape-home>
 					Home
 				</A>
 				<For each={Object.entries(COMMANDS_MAPPING)}>
@@ -30,10 +30,10 @@ const Sidebar: Component = () => {
 									{([command_title, obj]) => (
 										<A
 											href={obj.command}
-											class="btn h-max min-h-max w-full justify-start rounded border-none bg-transparent font-normal outline-none transition-none hover:bg-primary/10 md:gap-1 md:p-2"
+											class="btn h-max min-h-max w-full justify-start rounded border-none bg-transparent font-normal outline-none transition-none hover:bg-primary/10 md:p-2"
 											activeClass="!bg-primary text-accent"
 										>
-											<span innerHTML={obj.icon}></span>
+											<span innerHTML={obj.icon} class="text-warning"></span>
 											{command_title.replaceAll("-", " ")}
 										</A>
 									)}
