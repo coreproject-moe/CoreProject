@@ -1,4 +1,4 @@
-import { COMMANDS } from "@constants/commands";
+import { COMMANDS } from "@constants/shiinobi";
 import { VERSION } from "@renderer/constants/version";
 import { A } from "@solidjs/router";
 import { Component, For } from "solid-js";
@@ -31,7 +31,7 @@ const Sidebar: Component = () => {
 											activeClass="!bg-primary text-accent"
 										>
 											<span class="text-xs font-semibold uppercase text-warning">get</span>
-											{command.replaceAll("-", " ").replace("get ", "")}
+											{command.replaceAll("-", " ")}
 										</A>
 									)}
 								</For>
