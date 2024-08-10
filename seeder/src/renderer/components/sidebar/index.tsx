@@ -2,7 +2,6 @@ import { COMMANDS_MAPPING } from "@constants/shiinobi";
 import { VERSION } from "@renderer/constants/version";
 import { A } from "@solidjs/router";
 import { Component, For } from "solid-js";
-import { Dynamic } from "solid-js/web";
 
 const Sidebar: Component = () => {
 	return (
@@ -15,7 +14,7 @@ const Sidebar: Component = () => {
 					inactiveClass="bg-transparent"
 					end
 				>
-					{/* 
+					{/*
 					// @ts-expect-error */}
 					<coreproject-shape-home class="md:size-3"></coreproject-shape-home>
 					Home
