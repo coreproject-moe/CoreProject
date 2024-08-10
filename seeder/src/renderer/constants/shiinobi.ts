@@ -9,7 +9,6 @@ export const COMMANDS_MAPPING = {
 	anime: {
 		Animes: "anime-urls",
 		Genres: "anime-genres",
-		"Explicit Genres": "anime-explicit-genres",
 		Themes: "anime-themes"
 	}
 };

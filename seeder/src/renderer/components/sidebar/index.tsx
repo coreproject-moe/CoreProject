@@ -14,7 +14,9 @@ const Sidebar: Component = () => {
 					inactiveClass="bg-transparent"
 					end
 				>
-					<span class="text-xs font-bold text-warning">&sol;</span>
+					<span class="text-xs font-bold text-warning">
+						<coreproject-icon-arrow class="md:size-3"></coreproject-icon-arrow>
+					</span>
 					Home
 				</A>
 				<For each={Object.entries(COMMANDS_MAPPING)}>
