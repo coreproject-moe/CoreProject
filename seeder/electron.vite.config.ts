@@ -14,8 +14,8 @@ export default defineConfig({
 			commonjsOptions: {
 				transformMixedEsModules: true
 			},
-			chunkSizeWarningLimit: undefined
-			//minify: "terser"
+			chunkSizeWarningLimit: undefined,
+			minify: "terser"
 		},
 		resolve: {
 			alias: {
@@ -35,8 +35,8 @@ export default defineConfig({
 			commonjsOptions: {
 				transformMixedEsModules: true
 			},
-			chunkSizeWarningLimit: undefined
-			//minify: "terser"
+			chunkSizeWarningLimit: undefined,
+			minify: "terser"
 		}
 	},
 
