@@ -22,16 +22,8 @@ updates:
 
     # Seeder
     # =======
-    - package-ecosystem: pip
+    - package-ecosystem: npm
       directory: /seeder/
-      schedule:
-          interval: weekly
-      open-pull-requests-limit: 100
-
-    # Android
-    # =======
-    - package-ecosystem: pip
-      directory: /android/AnimeCore(kivy)/
       schedule:
           interval: weekly
       open-pull-requests-limit: 100
