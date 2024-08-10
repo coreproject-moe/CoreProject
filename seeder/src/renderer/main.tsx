@@ -1,10 +1,9 @@
 import "./main.css";
 
 import { render } from "solid-js/web";
-import { RouteDefinition, Router } from "@solidjs/router";
-import { lazy } from "solid-js";
-
-import { defineCustomElements } from "@coreproject-moe/icons/loader";
+import { RouteDefinition, HashRouter } from "@solidjs/router";
+import { lazy, onMount } from "solid-js";
+import { defineCustomElements } from "@coreproject-moe/icons/components";
 
 const routes: RouteDefinition[] = [
 	{
@@ -47,6 +46,14 @@ const routes: RouteDefinition[] = [
 	}
 ];
 
-defineCustomElements();
+render(() => {
+	onMount(() => {
+		defineCustomElements(window);
+	});
 
-render(() => <Router>{routes}</Router>, document.getElementById("root") as HTMLElement);
+	return (
+		<HashRouter preload={true} explicitLinks={true}>
+			{routes}
+		</HashRouter>
+	);
+}, document.getElementById("root")!);

@@ -50,8 +50,8 @@ export default defineConfig({
 			},
 			chunkSizeWarningLimit: 2048,
 			target: "es2022",
-			cssTarget: "esnext"
-			//minify: "terser"
+			cssTarget: "esnext",
+			minify: "terser"
 		},
 		resolve: {
 			alias: {
