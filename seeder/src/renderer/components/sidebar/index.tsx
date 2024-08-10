@@ -15,8 +15,8 @@ const Sidebar: Component = () => {
 					end
 				>
 					{/*
-					// @ts-expect-error */}
-					<coreproject-shape-home class="text-warning md:size-3"></coreproject-shape-home>
+					// @ts-ignore: solid-js doesn't support web-component with typescript */}
+					<coreproject-shape-home class="text-warning md:size-3" />
 					Home
 				</A>
 				<For each={Object.entries(COMMANDS_MAPPING)}>
@@ -33,7 +33,7 @@ const Sidebar: Component = () => {
 											class="btn h-max min-h-max w-full justify-start rounded border-none bg-transparent font-normal outline-none transition-none hover:bg-primary/10 md:p-2"
 											activeClass="!bg-primary text-accent"
 										>
-											<span innerHTML={obj.icon} class="text-warning"></span>
+											<span textContent={obj.icon} class="text-warning" />
 											{command_title.replaceAll("-", " ")}
 										</A>
 									)}
