@@ -28,7 +28,7 @@
 		"@electron-toolkit/eslint-config-ts": "^2.0.0",
 		"@electron-toolkit/tsconfig": "^1.0.1",
 		"@solidjs/router": "^0.14.1",
-		"@types/node": "^20.14.8",
+		"@types/node": "^22.2.0",
 		"autoprefixer": "^10.4.20",
 		"daisyui": "^4.12.10",
 		"electron": "^31.0.2",
