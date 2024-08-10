@@ -22,7 +22,7 @@ updates:
 
     # Seeder
     # =======
-    - package-ecosystem: pip
+    - package-ecosystem: npm
       directory: /seeder/
       schedule:
           interval: weekly
