@@ -2,6 +2,7 @@ import { COMMANDS_MAPPING } from "@constants/shiinobi";
 import { VERSION } from "@renderer/constants/version";
 import { A } from "@solidjs/router";
 import { Component, For } from "solid-js";
+import { Dynamic } from "solid-js/web";
 
 const Sidebar: Component = () => {
 	return (
@@ -27,12 +28,13 @@ const Sidebar: Component = () => {
 							</summary>
 							<div class="collapse-content pl-0 pr-0 pt-1">
 								<For each={Object.entries(commands_obj)}>
-									{([command_title, command]) => (
+									{([command_title, obj]) => (
 										<A
-											href={command}
+											href={obj.command}
 											class="btn h-max min-h-max w-full justify-start rounded border-none bg-transparent font-normal outline-none transition-none hover:bg-primary/10 md:gap-1 md:p-2"
 											activeClass="!bg-primary text-accent"
 										>
+											<span innerHTML={obj.icon}></span>
 											{command_title.replaceAll("-", " ")}
 										</A>
 									)}
