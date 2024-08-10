@@ -33,7 +33,8 @@ const Sidebar: Component = () => {
 											class="btn h-max min-h-max w-full justify-start rounded border-none bg-transparent font-normal outline-none transition-none hover:bg-primary/10 md:p-2"
 											activeClass="!bg-primary text-accent"
 										>
-											<span textContent={obj.icon} class="text-warning" />
+											{/** @ts-ignore: this is safe to do here */}
+											<span innerHTML={obj.icon} class="text-warning" />
 											{command_title.replaceAll("-", " ")}
 										</A>
 									)}
