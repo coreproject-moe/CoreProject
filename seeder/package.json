@@ -19,6 +19,7 @@
 		"build:linux": "electron-vite build && electron-builder --linux"
 	},
 	"dependencies": {
+		"@coreproject-moe/icons": "^0.0.11",
 		"@electron-toolkit/preload": "^3.0.1",
 		"@electron-toolkit/utils": "^3.0.0",
 		"electron-updater": "^6.1.7"
