@@ -5,18 +5,16 @@ import { Component, For } from "solid-js";
 
 const Sidebar: Component = () => {
 	return (
-		<div class="flex flex-col md:w-44 md:gap-1">
+		<div class="flex flex-col md:w-40 md:gap-1">
 			<div class="flex h-full flex-col md:gap-1">
 				<A
 					href="/"
-					class="btn h-max min-h-max w-full justify-start rounded border-none font-normal outline-none transition-none hover:bg-primary hover:bg-primary/10 md:gap-1 md:p-2"
+					class="btn h-max min-h-max w-full justify-start rounded border-none font-normal outline-none transition-none hover:bg-primary hover:bg-primary/10 md:p-2"
 					activeClass="!bg-primary text-accent"
 					inactiveClass="bg-transparent"
 					end
 				>
-					<span class="text-xs font-bold text-warning">
-						<coreproject-icon-arrow class="md:size-3"></coreproject-icon-arrow>
-					</span>
+					<coreproject-shape-home class="md:size-3"></coreproject-shape-home>
 					Home
 				</A>
 				<For each={Object.entries(COMMANDS_MAPPING)}>
@@ -33,7 +31,6 @@ const Sidebar: Component = () => {
 											class="btn h-max min-h-max w-full justify-start rounded border-none bg-transparent font-normal outline-none transition-none hover:bg-primary/10 md:gap-1 md:p-2"
 											activeClass="!bg-primary text-accent"
 										>
-											<span class="text-xs font-bold text-warning">&sol;</span>
 											{command_title.replaceAll("-", " ")}
 										</A>
 									)}

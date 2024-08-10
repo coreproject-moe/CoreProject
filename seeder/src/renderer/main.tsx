@@ -46,6 +46,7 @@ const routes: RouteDefinition[] = [
 		]
 	}
 ];
+
 defineCustomElements();
 
 render(() => <Router>{routes}</Router>, document.getElementById("root") as HTMLElement);
