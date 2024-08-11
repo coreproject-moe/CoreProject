@@ -8,10 +8,6 @@ on:
     branches: ["master"]
     # paths: ["seeder/**"]
 
-defaults:
-  run:
-    working-directory: ./seeder
-
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -24,16 +20,21 @@ jobs:
           - windows-latest
         node-version:
           - latest
-      name: Node ${{ matrix.node-version }} on ${{ matrix }}
-      steps:
-        - name: Checkout Seeder
-          uses: actions/checkout@4
-        - name: Setup Node
-          uses: actions/setup-node@v3
-          with:
-            node-version: ${{ matrix.node-version }}
-            cache: "npm"
-        - run: npm ci
+    name: Node ${{ matrix.node-version }} on ${{ matrix.os }}
+    steps:
+      - name: Checkout Seeder
+        uses: actions/checkout@v4
+        with:
+          path: ./seeder
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - name: Install Dependencies
+        run: npm ci
+        working-directory: ./seeder
+      - name: Run Build
+        run: npm run build
+        working-directory: ./seeder
 
-        - name: Run Build
-          run: npm run build
