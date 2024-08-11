@@ -23,7 +23,7 @@ jobs:
           - macos-latest
           - windows-latest
         node-version:
-          - 22.x
+          - latest
       name: Node ${{ matrix.node-version }} on ${{ matrix }}
       steps:
         - name: Checkout Seeder
@@ -33,7 +33,7 @@ jobs:
           with:
             node-version: ${{ matrix.node-version }}
             cache: "npm"
-        - run: npm i
+        - run: npm ci
 
         - name: Run Build
           run: npm run build
