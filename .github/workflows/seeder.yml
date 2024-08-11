@@ -30,7 +30,7 @@ jobs:
               uses: actions/setup-node@v3
               with:
                   cache: 'npm'
-                  # cache-dependency-path: seeder/package-lock.json
+                  cache-dependency-path: seeder/package-lock.json
             - name: Install Dependencies
               run: npm ci
             - name: Run Build
