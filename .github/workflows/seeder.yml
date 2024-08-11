@@ -8,6 +8,10 @@ on:
     branches: ["master"]
     # paths: ["seeder/**"]
 
+defaults:
+  run:
+    working-directory: seeder
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -22,18 +26,14 @@ jobs:
     steps:
       - name: Checkout Seeder
         uses: actions/checkout@v4
-        with:
-          path: ./seeder
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-        working-directory: ./seeder
+          cache-dependency-path: seeder/package-lock.json
       - name: Install Dependencies
         run: npm ci
-        working-directory: ./seeder
       - name: Run Build
         run: npm run build
-        working-directory: ./seeder
 
