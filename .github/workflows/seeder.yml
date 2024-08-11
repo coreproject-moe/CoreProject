@@ -31,7 +31,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-          cache-dependency-path: seeder/package-lock.json
       - name: Install Dependencies
         run: npm ci
       - name: Run Build
