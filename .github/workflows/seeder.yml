@@ -11,9 +11,6 @@ on:
 jobs:
   build:
     runs-on: ${{ matrix.os }}
-    defaults:
-      run:
-        working-directory: ./seeder
     strategy:
       fail-fast: false
       matrix:
@@ -28,14 +25,13 @@ jobs:
         with:
           path: ./seeder
       - name: Setup Node
+        working-directory: ./seeder
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
       - name: Install Dependencies
         run: npm ci
-        working-directory: ./seeder
       - name: Run Build
         run: npm run build
-        working-directory: ./seeder
 
