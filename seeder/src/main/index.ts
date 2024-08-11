@@ -6,6 +6,10 @@ import { Shiinobi as _Shiinobi } from "@interfaces/shiinobi";
 
 const Shiinobi = new _Shiinobi();
 
+const IPC_MAPPING = {
+	"get-staff-urls": Shiinobi.get_myanimelist_staff_urls
+};
+
 function createWindow(): void {
 	// Create the browser window.
 	const mainWindow = new BrowserWindow({
@@ -56,7 +60,9 @@ app.whenReady().then(() => {
 	// IPC handlers
 	ipcMain.handle("get-app-version", () => app.getVersion());
 	// Shiinobi
-	ipcMain.handle("get-staff-urls", Shiinobi.get_myanimelist_staff_urls);
+	Object.entries(IPC_MAPPING).forEach((item) => {
+		ipcMain.handle(item[0], item[1]);
+	});
 
 	createWindow();
 

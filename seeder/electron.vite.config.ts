@@ -7,7 +7,7 @@ export default defineConfig({
 	main: {
 		plugins: [externalizeDepsPlugin()],
 		esbuild: {
-			target: "es2017",
+			target: "esnext",
 			legalComments: "external"
 		},
 		build: {
