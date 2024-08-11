@@ -1,0 +1,39 @@
+name: Seeder
+
+on:
+  push:
+    branches: ["master"]
+    paths: ["seeder/**"]
+  pull_request:
+    branches: ["master]
+    paths: ["seeder/**"]
+
+defaults:
+  run:
+    working-directory: ./seeder
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - macos-latest
+          - windows-latest
+        node-version:
+          - 22.x
+      name: Node ${{ matrix.node-version }} on ${{ matrix }}
+      steps:
+        - name: Checkout Seeder
+          uses: actions/checkout@4
+        - name: Setup Node
+          uses: actions/setup-node@v3
+          with:
+            node-version: ${{ matrix.node-version }}
+            cache: "npm"
+        - run: npm i
+
+        - name: Run Build
+          run: npm run build
