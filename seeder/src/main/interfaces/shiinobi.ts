@@ -1,6 +1,7 @@
 import { spawn } from "node:child_process";
 import { IS_LINUX, IS_MAC, IS_WINDOWS } from "$constants/os";
 import { join } from "path";
+import { isEmpty } from "lodash-es";
 
 export const COMMANDS = [
 	"get-myanimelist-anime-explicit-genres",
@@ -42,7 +43,7 @@ class Shiinobi {
 
 	#spawn({ command, id }: { command: (typeof COMMANDS)[0]; id?: number }) {
 		const _command: string[] = [command];
-		if (id) _command.push(String(id));
+		if (!isEmpty(id)) _command.push(String(id));
 
 		return new Promise((resolve, reject) => {
 			const process = spawn(this.#shiinobi, _command);
