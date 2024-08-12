@@ -5,6 +5,7 @@
     "composite": true,
     "types": ["electron-vite/node"],
     "paths": {
+      "$main/*": ["./src/main/*"],
       "$constants/*": ["./src/main/constants/*"],
       "$interfaces/*": ["./src/main/interfaces/*"],
       "$workers/*":["./src/main/workers/*"],
