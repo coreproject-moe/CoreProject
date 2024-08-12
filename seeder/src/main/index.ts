@@ -3,6 +3,8 @@ import { join } from "path";
 import { electronApp, optimizer, is } from "@electron-toolkit/utils";
 import icon from "../../resources/icon.png?asset";
 import { Shiinobi as _Shiinobi } from "@interfaces/shiinobi";
+import { get_free_port } from "./utils/port";
+import ExpressWorder from "./worker/express_worker?nodeWorker";
 
 const Shiinobi = new _Shiinobi();
 
@@ -10,7 +12,7 @@ const IPC_MAPPING = {
 	"get-staff-urls": Shiinobi.get_myanimelist_staff_urls
 };
 
-function createWindow(): void {
+async function createWindow(): Promise<void> {
 	// Create the browser window.
 	const mainWindow = new BrowserWindow({
 		width: 900,
@@ -20,6 +22,7 @@ function createWindow(): void {
 		...(process.platform === "linux" ? { icon } : {}),
 		webPreferences: {
 			preload: join(__dirname, "../preload/index.js"),
+			nodeIntegrationInWorker: true,
 			sandbox: false
 		}
 	});
@@ -46,7 +49,7 @@ function createWindow(): void {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
 	// Set app user model id for windows
 	electronApp.setAppUserModelId("com.electron");
 
@@ -64,7 +67,14 @@ app.whenReady().then(() => {
 		ipcMain.handle(item[0], async () => await item[1]());
 	});
 
-	createWindow();
+	const express_port = await get_free_port();
+	ExpressWorder({ workerData: { port: express_port } })
+		.on("message", (message) => {
+			console.log(`\nMessage from worker: ${message}`);
+		})
+		.postMessage("");
+
+	await createWindow();
 
 	app.on("activate", function () {
 		// On macOS it's common to re-create a window in the app when the
