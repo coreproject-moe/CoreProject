@@ -1,4 +1,4 @@
-import { app, shell, BrowserWindow, ipcMain } from "electron";
+import { app, shell, BrowserWindow, ipcMain, utilityProcess, MessageChannelMain } from "electron";
 import { join } from "path";
 import { electronApp, optimizer, is } from "@electron-toolkit/utils";
 import icon from "../../resources/icon.png?asset";
@@ -9,6 +9,7 @@ const Shiinobi = new _Shiinobi();
 const IPC_MAPPING = {
 	"get-staff-urls": Shiinobi.get_myanimelist_staff_urls
 };
+
 
 function createWindow(): void {
 	// Create the browser window.
@@ -23,7 +24,8 @@ function createWindow(): void {
 			sandbox: false
 		}
 	});
-
+	const child = utilityProcess.fork(path.join(__dirname, "test.js"));
+	
 	mainWindow.on("ready-to-show", () => {
 		mainWindow.show();
 	});
