@@ -61,7 +61,7 @@ app.whenReady().then(() => {
 	ipcMain.handle("get-app-version", () => app.getVersion());
 	// Shiinobi
 	Object.entries(IPC_MAPPING).forEach((item) => {
-		ipcMain.handle(item[0], item[1]);
+		ipcMain.handle(item[0], async () => await item[1]());
 	});
 
 	createWindow();
