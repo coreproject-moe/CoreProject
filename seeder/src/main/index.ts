@@ -2,9 +2,9 @@ import { app, shell, BrowserWindow, ipcMain } from "electron";
 import { join } from "path";
 import { electronApp, optimizer, is } from "@electron-toolkit/utils";
 import icon from "../../resources/icon.png?asset";
-import { Shiinobi as _Shiinobi } from "@interfaces/shiinobi";
-import { get_free_port } from "./utils/port";
-import ExpressWorder from "./worker/express_worker?nodeWorker";
+import { Shiinobi as _Shiinobi } from "$interfaces/shiinobi";
+import { get_free_port } from "$utils/port";
+import ExpressWorder from "$worker/express_worker?nodeWorker";
 
 const Shiinobi = new _Shiinobi();
 

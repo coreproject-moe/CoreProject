@@ -1,5 +1,5 @@
-import { parentPort, workerData } from "worker_threads";
-import { app } from "../backend/index";
+import { parentPort, workerData } from "node:worker_threads";
+import { app } from "$backend/index";
 
 const port = parentPort;
 if (!port) throw new Error("IllegalState");
