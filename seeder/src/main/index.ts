@@ -62,8 +62,10 @@ app.whenReady().then(async () => {
 	// Shiinobi
 	SHIINOBI_COMMANDS.forEach((item) => {
 		const function_name = item.replaceAll("-", "_");
-		ipcMain.handle(function_name, async () => {
-			return Shiinobi[function_name]();
+		// @ts-ignore
+		ipcMain.handle(function_name, async (event, ...args) => {
+			console.log(args);
+			Shiinobi[function_name](...args);
 		});
 	});
 

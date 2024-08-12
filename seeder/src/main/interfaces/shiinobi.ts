@@ -1,6 +1,7 @@
 import { spawn } from "child_process";
 import { IS_LINUX, IS_MAC, IS_WINDOWS } from "$constants/os";
 import { join } from "path";
+import { isEmpty } from "lodash-es";
 
 export const COMMANDS = [
 	"get-myanimelist-anime-explicit-genres",
@@ -19,6 +20,15 @@ export const COMMANDS = [
 ];
 
 class Shiinobi {
+	constructor() {
+		COMMANDS.forEach((command) => {
+			this[command.replaceAll("-", "_")] = async (...args: any[]) => {
+				const id = args[0];
+				return await this.#spawn({ command, id: id });
+			};
+		});
+	}
+
 	get #shiinobi() {
 		if (IS_LINUX) {
 			return join(__dirname, "../../resources/bin/", "linux/shiinobi");
@@ -33,7 +43,7 @@ class Shiinobi {
 
 	#spawn({ command, id }: { command: (typeof COMMANDS)[0]; id?: number }) {
 		const _command: string[] = [command];
-		if (id) _command.push(String(id));
+		if (!isEmpty(id)) _command.push(String(id));
 
 		return new Promise((resolve, reject) => {
 			const process = spawn(this.#shiinobi, _command);
@@ -67,10 +77,6 @@ class Shiinobi {
 			});
 		});
 	}
-
-	public get_myanimelist_staff_urls = async () => {
-		return await this.#spawn({ command: "get-myanimelist-staff-urls" });
-	};
 }
 
 export { Shiinobi };

@@ -9,14 +9,14 @@
 		"typecheck:node": "tsc --noEmit -p tsconfig.node.json --composite false",
 		"typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false",
 		"typecheck": "npm run typecheck:node && npm run typecheck:web",
-		"start": "electron-vite preview",
 		"dev": "electron-vite dev",
 		"build": "npm run typecheck && electron-vite build",
 		"postinstall": "electron-builder install-app-deps",
 		"build:unpack": "npm run build && electron-builder --dir",
 		"build:win": "npm run build && electron-builder --win",
 		"build:mac": "electron-vite build && electron-builder --mac",
-		"build:linux": "electron-vite build && electron-builder --linux"
+		"build:linux": "electron-vite build && electron-builder --linux",
+		"start": "electron-vite preview"
 	},
 	"dependencies": {
 		"@electron-toolkit/preload": "^3.0.1",
@@ -42,6 +42,7 @@
 		"electron-vite": "^2.3.0",
 		"eslint": "^9.9.0",
 		"eslint-plugin-solid": "^0.14.1",
+		"lodash-es": "^4.17.21",
 		"postcss": "^8.4.41",
 		"prettier": "^3.3.2",
 		"prettier-plugin-tailwindcss": "^0.6.6",
