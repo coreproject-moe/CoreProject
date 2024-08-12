@@ -2,15 +2,12 @@ import { app, shell, BrowserWindow, ipcMain } from "electron";
 import { join } from "path";
 import { electronApp, optimizer, is } from "@electron-toolkit/utils";
 import icon from "../../resources/icon.png?asset";
-import { Shiinobi as _Shiinobi } from "$interfaces/shiinobi";
 import { get_free_port } from "$utils/port";
-import ExpressWorder from "$worker/express_worker?nodeWorker";
+import { Shiinobi as _Shiinobi, COMMANDS as SHIINOBI_COMMANDS } from "./interfaces/shiinobi";
+
+import ExpressWorder from "$workers/express_worker?nodeWorker";
 
 const Shiinobi = new _Shiinobi();
-
-const IPC_MAPPING = {
-	"get-staff-urls": Shiinobi.get_myanimelist_staff_urls
-};
 
 async function createWindow(): Promise<void> {
 	// Create the browser window.
@@ -63,8 +60,11 @@ app.whenReady().then(async () => {
 	// IPC handlers
 	ipcMain.handle("get-app-version", () => app.getVersion());
 	// Shiinobi
-	Object.entries(IPC_MAPPING).forEach((item) => {
-		ipcMain.handle(item[0], item[1]);
+	SHIINOBI_COMMANDS.forEach((item) => {
+		const function_name = item.replaceAll("-", "_");
+		ipcMain.handle(function_name, async () => {
+			return Shiinobi[function_name]();
+		});
 	});
 
 	const express_port = await get_free_port();
