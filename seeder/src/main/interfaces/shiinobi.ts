@@ -1,7 +1,6 @@
 import { spawn } from "child_process";
 import { IS_LINUX, IS_MAC, IS_WINDOWS } from "$constants/os";
 import { join } from "path";
-import { isEmpty } from "lodash-es";
 
 export const COMMANDS = [
 	"get-myanimelist-anime-explicit-genres",
