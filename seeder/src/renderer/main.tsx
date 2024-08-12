@@ -3,7 +3,7 @@ import "./main.css";
 import { render } from "solid-js/web";
 import { RouteDefinition, HashRouter } from "@solidjs/router";
 import { lazy, onMount } from "solid-js";
-import { defineCustomElements } from "@coreproject-moe/icons/components";
+import { defineCustomElements } from "@coreproject-moe/icons/loader";
 
 const routes: RouteDefinition[] = [
 	{
