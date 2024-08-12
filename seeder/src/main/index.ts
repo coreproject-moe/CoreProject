@@ -3,8 +3,7 @@ import { join } from "path";
 import { electronApp, optimizer, is } from "@electron-toolkit/utils";
 import icon from "../../resources/icon.png?asset";
 import { get_free_port } from "$utils/port";
-import { Shiinobi as _Shiinobi, COMMANDS as SHIINOBI_COMMANDS } from "./interfaces/shiinobi";
-
+import { Shiinobi as _Shiinobi, COMMANDS as SHIINOBI_COMMANDS } from "$interfaces/shiinobi";
 import ExpressWorder from "$workers/express_worker?nodeWorker";
 
 const Shiinobi = new _Shiinobi();
