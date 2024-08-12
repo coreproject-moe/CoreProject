@@ -42,7 +42,7 @@ class Shiinobi {
 
 	#spawn({ command, id }: { command: (typeof COMMANDS)[0]; id?: number }) {
 		const _command: string[] = [command];
-		if (!isEmpty(id)) _command.push(String(id));
+		if (id) _command.push(String(id));
 
 		return new Promise((resolve, reject) => {
 			const process = spawn(this.#shiinobi, _command);
