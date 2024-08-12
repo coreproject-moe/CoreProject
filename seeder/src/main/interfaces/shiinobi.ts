@@ -1,5 +1,5 @@
 import { spawn } from "child_process";
-import { IS_LINUX, IS_MAC, IS_WINDOWS } from "@constants/os";
+import { IS_LINUX, IS_MAC, IS_WINDOWS } from "$constants/os";
 import { join } from "path";
 
 type _COMMANDS =

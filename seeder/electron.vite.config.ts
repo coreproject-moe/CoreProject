@@ -19,9 +19,11 @@ export default defineConfig({
 		},
 		resolve: {
 			alias: {
-				"@main": resolve(__dirname, "./src/main"),
-				"@constants": resolve(__dirname, "./src/main/constants"),
-				"@interfaces": resolve(__dirname, "./src/main/interfaces")
+				$constants: resolve(__dirname, "./src/main/constants"),
+				$interfaces: resolve(__dirname, "./src/main/interfaces"),
+				$backend: resolve(__dirname, "./src/main/backend"),
+				$worker: resolve(__dirname, "./src/main/workers"),
+				$utils: resolve(__dirname, "./src/main/utils")
 			}
 		}
 	},
