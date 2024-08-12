@@ -8,4 +8,8 @@ app.get("/", (_, res) => {
 	res.send("Hello World!");
 });
 
+app.get("/shiinobi-healthcheck", (_, res) => {
+	res.send("We are friends");
+});
+
 export { app };
