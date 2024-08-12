@@ -3,9 +3,8 @@ import { join } from "path";
 import { electronApp, optimizer, is } from "@electron-toolkit/utils";
 import icon from "../../resources/icon.png?asset";
 import { Shiinobi as _Shiinobi } from "@interfaces/shiinobi";
-
 import { get_free_port } from "./utils/port";
-import { app as express_app } from "./backend/index";
+import ExpressWorder from "./worker/express_worker?nodeWorker";
 
 const Shiinobi = new _Shiinobi();
 
@@ -23,12 +22,9 @@ async function createWindow(): Promise<void> {
 		...(process.platform === "linux" ? { icon } : {}),
 		webPreferences: {
 			preload: join(__dirname, "../preload/index.js"),
+			nodeIntegrationInWorker: true,
 			sandbox: false
 		}
-	});
-	const express_port = await get_free_port();
-	express_app.listen(express_port, () => {
-		console.log(`Listening on port ${express_port}`);
 	});
 
 	mainWindow.on("ready-to-show", () => {
@@ -70,6 +66,13 @@ app.whenReady().then(async () => {
 	Object.entries(IPC_MAPPING).forEach((item) => {
 		ipcMain.handle(item[0], async () => await item[1]());
 	});
+
+	const express_port = await get_free_port();
+	ExpressWorder({ workerData: { port: express_port } })
+		.on("message", (message) => {
+			console.log(`\nMessage from worker: ${message}`);
+		})
+		.postMessage("");
 
 	await createWindow();
 
