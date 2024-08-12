@@ -1,14 +1,17 @@
-import { app, shell, BrowserWindow, ipcMain } from "electron";
+import { app, shell, BrowserWindow, ipcMain, utilityProcess, MessageChannelMain } from "electron";
 import { join } from "path";
 import { electronApp, optimizer, is } from "@electron-toolkit/utils";
 import icon from "../../resources/icon.png?asset";
-import { get_free_port } from "$utils/port";
-import { Shiinobi as _Shiinobi, COMMANDS as SHIINOBI_COMMANDS } from "$interfaces/shiinobi";
-import ExpressWorder from "$workers/express_worker?nodeWorker";
+import { Shiinobi as _Shiinobi } from "@interfaces/shiinobi";
 
 const Shiinobi = new _Shiinobi();
 
-async function createWindow(): Promise<void> {
+const IPC_MAPPING = {
+	"get-staff-urls": Shiinobi.get_myanimelist_staff_urls
+};
+
+
+function createWindow(): void {
 	// Create the browser window.
 	const mainWindow = new BrowserWindow({
 		width: 900,
@@ -18,11 +21,11 @@ async function createWindow(): Promise<void> {
 		...(process.platform === "linux" ? { icon } : {}),
 		webPreferences: {
 			preload: join(__dirname, "../preload/index.js"),
-			nodeIntegrationInWorker: true,
 			sandbox: false
 		}
 	});
-
+	const child = utilityProcess.fork(path.join(__dirname, "test.js"));
+	
 	mainWindow.on("ready-to-show", () => {
 		mainWindow.show();
 	});
@@ -45,7 +48,7 @@ async function createWindow(): Promise<void> {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.whenReady().then(async () => {
+app.whenReady().then(() => {
 	// Set app user model id for windows
 	electronApp.setAppUserModelId("com.electron");
 
@@ -59,23 +62,11 @@ app.whenReady().then(async () => {
 	// IPC handlers
 	ipcMain.handle("get-app-version", () => app.getVersion());
 	// Shiinobi
-	SHIINOBI_COMMANDS.forEach((item) => {
-		const function_name = item.replaceAll("-", "_");
-		// @ts-ignore
-		ipcMain.handle(function_name, async (event, ...args) => {
-			console.log(args);
-			Shiinobi[function_name](...args);
-		});
+	Object.entries(IPC_MAPPING).forEach((item) => {
+		ipcMain.handle(item[0], item[1]);
 	});
 
-	const express_port = await get_free_port();
-	ExpressWorder({ workerData: { port: express_port } })
-		.on("message", (message) => {
-			console.log(`\nMessage from worker: ${message}`);
-		})
-		.postMessage("");
-
-	await createWindow();
+	createWindow();
 
 	app.on("activate", function () {
 		// On macOS it's common to re-create a window in the app when the
