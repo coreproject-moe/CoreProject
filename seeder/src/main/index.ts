@@ -7,7 +7,7 @@ import { Shiinobi as _Shiinobi } from "@interfaces/shiinobi";
 const Shiinobi = new _Shiinobi();
 
 const IPC_MAPPING = {
-	"get-staff-urls": Shiinobi.get_myanimelist_staff_urls
+	"get-staff-urls": Shiinobi.test_private
 };
 
 function createWindow(): void {

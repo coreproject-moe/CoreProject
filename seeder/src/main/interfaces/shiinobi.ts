@@ -18,6 +18,12 @@ type _COMMANDS =
 	| "get-myanimelist-staff-urls";
 
 class Shiinobi {
+	#testPrivate = "Private var";
+
+	public async test_private() {
+		return this.#testPrivate;
+	}
+
 	get #shiinobi() {
 		if (IS_LINUX) {
 			return join(__dirname, "../../resources/bin/", "linux/shiinobi");
