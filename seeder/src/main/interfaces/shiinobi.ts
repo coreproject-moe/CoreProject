@@ -1,23 +1,33 @@
-import { spawn } from "child_process";
+import { spawn } from "node:child_process";
 import { IS_LINUX, IS_MAC, IS_WINDOWS } from "$constants/os";
 import { join } from "path";
 
-type _COMMANDS =
-	| "get-myanimelist-anime-explicit-genres"
-	| "get-myanimelist-anime-genres"
-	| "get-myanimelist-anime-themes"
-	| "get-myanimelist-anime-urls"
-	| "get-myanimelist-character-urls"
-	| "get-myanimelist-demographics"
-	| "get-myanimelist-specific-anime-character-and-staff-list-information"
-	| "get-myanimelist-specific-anime-genre-information"
-	| "get-myanimelist-specific-anime-information"
-	| "get-myanimelist-specific-character-information"
-	| "get-myanimelist-specific-producer-information"
-	| "get-myanimelist-specific-staff-information"
-	| "get-myanimelist-staff-urls";
+export const COMMANDS = [
+	"get-myanimelist-anime-explicit-genres",
+	"get-myanimelist-anime-genres",
+	"get-myanimelist-anime-themes",
+	"get-myanimelist-anime-urls",
+	"get-myanimelist-character-urls",
+	"get-myanimelist-demographics",
+	"get-myanimelist-specific-anime-character-and-staff-list-information",
+	"get-myanimelist-specific-anime-genre-information",
+	"get-myanimelist-specific-anime-information",
+	"get-myanimelist-specific-character-information",
+	"get-myanimelist-specific-producer-information",
+	"get-myanimelist-specific-staff-information",
+	"get-myanimelist-staff-urls"
+];
 
 class Shiinobi {
+	constructor() {
+		COMMANDS.forEach((command) => {
+			this[command.replaceAll("-", "_")] = async (...args: any[]) => {
+				const id = args[0];
+				return await this.#spawn({ command, id: id });
+			};
+		});
+	}
+
 	get #shiinobi() {
 		if (IS_LINUX) {
 			return join(__dirname, "../../resources/bin/", "linux/shiinobi");
@@ -30,7 +40,7 @@ class Shiinobi {
 		}
 	}
 
-	#spawn({ command, id }: { command: _COMMANDS; id?: number }) {
+	#spawn({ command, id }: { command: (typeof COMMANDS)[0]; id?: number }) {
 		const _command: string[] = [command];
 		if (id) _command.push(String(id));
 
@@ -66,10 +76,6 @@ class Shiinobi {
 			});
 		});
 	}
-
-	public get_myanimelist_staff_urls = async () => {
-		return await this.#spawn({ command: "get-myanimelist-staff-urls" });
-	};
 }
 
 export { Shiinobi };

@@ -1,5 +1,4 @@
-import net from "net";
-import { AddressInfo } from "net";
+import net, { AddressInfo } from "node:net";
 
 export function get_free_port() {
 	return new Promise((resolve) => {

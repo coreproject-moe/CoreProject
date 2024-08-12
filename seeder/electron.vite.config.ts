@@ -22,7 +22,7 @@ export default defineConfig({
 				$constants: resolve(__dirname, "./src/main/constants"),
 				$interfaces: resolve(__dirname, "./src/main/interfaces"),
 				$backend: resolve(__dirname, "./src/main/backend"),
-				$worker: resolve(__dirname, "./src/main/workers"),
+				$workers: resolve(__dirname, "./src/main/workers"),
 				$utils: resolve(__dirname, "./src/main/utils")
 			}
 		}
@@ -39,6 +39,15 @@ export default defineConfig({
 			},
 			chunkSizeWarningLimit: undefined,
 			minify: "terser"
+		},
+		resolve: {
+			alias: {
+				$constants: resolve(__dirname, "./src/main/constants"),
+				$interfaces: resolve(__dirname, "./src/main/interfaces"),
+				$backend: resolve(__dirname, "./src/main/backend"),
+				$workers: resolve(__dirname, "./src/main/workers"),
+				$utils: resolve(__dirname, "./src/main/utils")
+			}
 		}
 	},
 

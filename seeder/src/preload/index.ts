@@ -1,12 +1,16 @@
 import { contextBridge, ipcRenderer } from "electron";
 import { electronAPI } from "@electron-toolkit/preload";
+import { COMMANDS as SHIINOBI_COMMANDS } from "$interfaces/shiinobi";
 
 // Custom APIs for renderer
 const api = {
-	get_app_version: () => ipcRenderer.invoke("get-app-version"),
-	// Shiinobi
-	get_staff_urls: () => ipcRenderer.invoke("get-staff-urls")
+	get_app_version: () => ipcRenderer.invoke("get-app-version")
 };
+
+SHIINOBI_COMMANDS.forEach((item) => {
+	const function_name = item.replaceAll("-", "_");
+	api[function_name] = (...args: any[]) => ipcRenderer.invoke(function_name, ...args);
+});
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise
