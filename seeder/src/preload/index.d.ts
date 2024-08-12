@@ -1,4 +1,5 @@
 import { ElectronAPI } from "@electron-toolkit/preload";
+import { COMMANDS as SHIINOBI_COMMANDS } from "$interfaces/shiinobi";
 
 declare global {
 	interface Window {
@@ -6,7 +7,7 @@ declare global {
 		api: {
 			get_app_version: () => Promise<string>;
 			// Shiinobi
-			get_staff_urls: () => Promise<object>;
+			[key in typeof SHIINOBI_COMMANDS[number]]: () => Promise<object>;
 		};
 	}
 }

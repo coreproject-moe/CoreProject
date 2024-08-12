@@ -2,20 +2,21 @@ import { spawn } from "child_process";
 import { IS_LINUX, IS_MAC, IS_WINDOWS } from "$constants/os";
 import { join } from "path";
 
-type _COMMANDS =
-	| "get-myanimelist-anime-explicit-genres"
-	| "get-myanimelist-anime-genres"
-	| "get-myanimelist-anime-themes"
-	| "get-myanimelist-anime-urls"
-	| "get-myanimelist-character-urls"
-	| "get-myanimelist-demographics"
-	| "get-myanimelist-specific-anime-character-and-staff-list-information"
-	| "get-myanimelist-specific-anime-genre-information"
-	| "get-myanimelist-specific-anime-information"
-	| "get-myanimelist-specific-character-information"
-	| "get-myanimelist-specific-producer-information"
-	| "get-myanimelist-specific-staff-information"
-	| "get-myanimelist-staff-urls";
+export const COMMANDS = [
+	"get-myanimelist-anime-explicit-genres",
+	"get-myanimelist-anime-genres",
+	"get-myanimelist-anime-themes",
+	"get-myanimelist-anime-urls",
+	"get-myanimelist-character-urls",
+	"get-myanimelist-demographics",
+	"get-myanimelist-specific-anime-character-and-staff-list-information",
+	"get-myanimelist-specific-anime-genre-information",
+	"get-myanimelist-specific-anime-information",
+	"get-myanimelist-specific-character-information",
+	"get-myanimelist-specific-producer-information",
+	"get-myanimelist-specific-staff-information",
+	"get-myanimelist-staff-urls"
+];
 
 class Shiinobi {
 	get #shiinobi() {
@@ -30,7 +31,7 @@ class Shiinobi {
 		}
 	}
 
-	#spawn({ command, id }: { command: _COMMANDS; id?: number }) {
+	#spawn({ command, id }: { command: (typeof COMMANDS)[0]; id?: number }) {
 		const _command: string[] = [command];
 		if (id) _command.push(String(id));
 
