@@ -1,8 +1,11 @@
-import { app, shell, BrowserWindow, ipcMain, utilityProcess, MessageChannelMain } from "electron";
+import { app, shell, BrowserWindow, ipcMain } from "electron";
 import { join } from "path";
 import { electronApp, optimizer, is } from "@electron-toolkit/utils";
 import icon from "../../resources/icon.png?asset";
 import { Shiinobi as _Shiinobi } from "@interfaces/shiinobi";
+
+import { get_free_port } from "./utils/port";
+import { app as express_app } from "./backend/index";
 
 const Shiinobi = new _Shiinobi();
 
@@ -10,8 +13,7 @@ const IPC_MAPPING = {
 	"get-staff-urls": Shiinobi.get_myanimelist_staff_urls
 };
 
-
-function createWindow(): void {
+async function createWindow(): Promise<void> {
 	// Create the browser window.
 	const mainWindow = new BrowserWindow({
 		width: 900,
@@ -24,8 +26,11 @@ function createWindow(): void {
 			sandbox: false
 		}
 	});
-	const child = utilityProcess.fork(path.join(__dirname, "test.js"));
-	
+	const express_port = await get_free_port();
+	express_app.listen(express_port, () => {
+		console.log(`Listening on port ${express_port}`);
+	});
+
 	mainWindow.on("ready-to-show", () => {
 		mainWindow.show();
 	});
@@ -48,7 +53,7 @@ function createWindow(): void {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
 	// Set app user model id for windows
 	electronApp.setAppUserModelId("com.electron");
 
@@ -66,7 +71,7 @@ app.whenReady().then(() => {
 		ipcMain.handle(item[0], async () => await item[1]());
 	});
 
-	createWindow();
+	await createWindow();
 
 	app.on("activate", function () {
 		// On macOS it's common to re-create a window in the app when the
