@@ -7,7 +7,7 @@ declare global {
 		api: {
 			get_app_version: () => Promise<string>;
 			// Shiinobi
-			[key in typeof SHIINOBI_COMMANDS[number]]: () => Promise<object>;
+			[key in typeof SHIINOBI_COMMANDS[number]]: (...args: any[]) => Promise<object>;
 		};
 	}
 }
