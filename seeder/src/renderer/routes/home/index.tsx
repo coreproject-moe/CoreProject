@@ -3,10 +3,10 @@ import { Component } from "solid-js";
 
 const Home: Component = () => {
 	return (
-		<div class="flex size-full flex-col md:gap-10 md:px-10">
+		<div class="flex size-full flex-col gap-10 px-10">
 			<div>
-				<h1 class="font-bold text-warning md:text-3xl">Hello, Sora</h1>
-				<span class="md:text-sm">{get_humanize_time()}!</span>
+				<h1 class="text-3xl font-bold text-warning">Hello, Sora</h1>
+				<span class="text-sm">{get_humanize_time()}!</span>
 			</div>
 		</div>
 	);
