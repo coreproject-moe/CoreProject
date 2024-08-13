@@ -24,7 +24,7 @@ app.get("/shiinobi-healthcheck", (_, res) => {
 });
 
 app.get("/staff", (_, res) => {
-	const item = orm.get_all_staff_given_mal_id();
+	const item = orm.get_all_null_staff();
 	res.json(item);
 });
 
