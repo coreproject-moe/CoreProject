@@ -23,7 +23,8 @@
 		"@electron-toolkit/utils": "^3.0.0",
 		"cors": "^2.8.5",
 		"electron-updater": "^6.1.7",
-		"express": "^4.19.2"
+		"express": "^4.19.2",
+		"local-devices": "^4.0.0"
 	},
 	"devDependencies": {
 		"@coreproject-moe/icons": "^0.0.13",
