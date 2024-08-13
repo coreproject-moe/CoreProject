@@ -24,6 +24,7 @@
 		"@electron-toolkit/utils": "^3.0.0",
 		"better-sqlite3": "^11.1.2",
 		"cors": "^2.8.5",
+		"diff": "^5.2.0",
 		"electron-updater": "^6.1.7",
 		"express": "^4.19.2",
 		"local-devices": "^4.0.0"
@@ -39,7 +40,9 @@
 		"@solidjs/router": "^0.14.1",
 		"@types/better-sqlite3": "^7.6.11",
 		"@types/cors": "^2.8.17",
+		"@types/diff": "^5.2.1",
 		"@types/express": "^4.17.21",
+		"@types/json-diff": "^1.0.3",
 		"@types/node": "^22.2.0",
 		"@typescript-eslint/eslint-plugin": "^8.0.1",
 		"autoprefixer": "^10.4.20",
