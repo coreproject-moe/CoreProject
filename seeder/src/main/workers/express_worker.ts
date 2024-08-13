@@ -8,7 +8,7 @@ port.on("message", () => {
 	const _port = workerData.port;
 	try {
 		app.listen(_port, () => {
-			port.postMessage(`Listening on ${_port}`);
+			port.postMessage(`Listening on http://localhost:${_port}/`);
 		});
 	} catch (err) {
 		port.postMessage(`Couldnot launch express.js, reason ${err}`);

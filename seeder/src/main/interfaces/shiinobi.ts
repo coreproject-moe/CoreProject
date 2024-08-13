@@ -2,7 +2,7 @@ import { spawn } from "node:child_process";
 import { IS_LINUX, IS_MAC, IS_WINDOWS } from "$constants/os";
 import { join } from "path";
 
-export const COMMANDS = [
+const COMMANDS = [
 	"get-myanimelist-anime-explicit-genres",
 	"get-myanimelist-anime-genres",
 	"get-myanimelist-anime-themes",
@@ -77,5 +77,4 @@ class Shiinobi {
 		});
 	}
 }
-
-export { Shiinobi };
+export { Shiinobi, COMMANDS };

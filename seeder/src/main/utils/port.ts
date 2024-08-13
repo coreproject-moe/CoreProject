@@ -8,7 +8,7 @@ const PORT_START = 49152,
 export function get_free_port() {
 	return new Promise((resolve, reject) => {
 		const server = net.createServer();
-		let port = Math.floor(Math.random() * (PORT_START - PORT_END + 1)) + PORT_START;
+		let port = Math.floor(Math.random() * (PORT_END - PORT_START + 1)) + PORT_START;
 
 		// Try to listen on a random port within the range
 		server.listen(port, () => {

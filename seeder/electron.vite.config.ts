@@ -4,52 +4,53 @@ import solid from "vite-plugin-solid";
 import svg from "vite-plugin-solid-svg";
 
 export default defineConfig({
-  main: {
-    plugins: [externalizeDepsPlugin()],
-    esbuild: {
-      target: "esnext",
-      legalComments: "external"
-    },
-    build: {
-      commonjsOptions: {
-        transformMixedEsModules: true
-      },
-      chunkSizeWarningLimit: undefined,
-      minify: "terser"
-    },
-    resolve: {
-      alias: {
-        $constants: resolve(__dirname, "./src/main/constants"),
-        $interfaces: resolve(__dirname, "./src/main/interfaces"),
-        $backend: resolve(__dirname, "./src/main/backend"),
-        $workers: resolve(__dirname, "./src/main/workers"),
-        $utils: resolve(__dirname, "./src/main/utils")
-      }
-    }
-  },
-  preload: {
-    plugins: [externalizeDepsPlugin()],
-    esbuild: {
-      target: "esnext",
-      legalComments: "external"
-    },
-    build: {
-      commonjsOptions: {
-        transformMixedEsModules: true
-      },
-      chunkSizeWarningLimit: undefined,
-      minify: "terser"
-    },
-    resolve: {
-      alias: {
-        $constants: resolve(__dirname, "./src/main/constants"),
-        $interfaces: resolve(__dirname, "./src/main/interfaces"),
-        $backend: resolve(__dirname, "./src/main/backend"),
-        $workers: resolve(__dirname, "./src/main/workers"),
-        $utils: resolve(__dirname, "./src/main/utils")
-      }
-    }
-  },
+	main: {
+		plugins: [externalizeDepsPlugin()],
+		esbuild: {
+			target: "esnext",
+			legalComments: "external"
+		},
+		build: {
+			commonjsOptions: {
+				transformMixedEsModules: true
+			},
+			chunkSizeWarningLimit: undefined,
+			minify: "terser"
+		},
+		resolve: {
+			alias: {
+				$constants: resolve(__dirname, "./src/main/constants"),
+				$interfaces: resolve(__dirname, "./src/main/interfaces"),
+				$backend: resolve(__dirname, "./src/main/backend"),
+				$workers: resolve(__dirname, "./src/main/workers"),
+				$utils: resolve(__dirname, "./src/main/utils"),
+				$database: resolve(__dirname, "./src/main/database")
+			}
+		}
+	},
+	preload: {
+		plugins: [externalizeDepsPlugin()],
+		esbuild: {
+			target: "esnext",
+			legalComments: "external"
+		},
+		build: {
+			commonjsOptions: {
+				transformMixedEsModules: true
+			},
+			chunkSizeWarningLimit: undefined,
+			minify: "terser"
+		},
+		resolve: {
+			alias: {
+				$constants: resolve(__dirname, "./src/main/constants"),
+				$interfaces: resolve(__dirname, "./src/main/interfaces"),
+				$backend: resolve(__dirname, "./src/main/backend"),
+				$workers: resolve(__dirname, "./src/main/workers"),
+				$utils: resolve(__dirname, "./src/main/utils")
+			}
+		}
+	},
 
   renderer: {
     esbuild: {

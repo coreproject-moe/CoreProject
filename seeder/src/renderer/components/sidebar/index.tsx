@@ -21,7 +21,10 @@ const Sidebar: Component = () => {
 				</A>
 				<For each={Object.entries(COMMANDS_MAPPING)}>
 					{([command_cat, commands_obj]) => (
-						<details class="collapse collapse-arrow rounded-none border-none !outline-none" open>
+						<details
+							class="collapse collapse-arrow rounded-none border-none !outline-none"
+							open
+						>
 							<summary class="collapse-title min-h-max p-0 text-sm text-info after:!right-1 after:!top-1/2 after:!size-1.5">
 								{command_cat}
 							</summary>
