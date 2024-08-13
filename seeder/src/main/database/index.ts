@@ -8,7 +8,10 @@ class InternalDatabase {
 	}
 
 	public migrate = async () => {
-		const staff_data = this.#db.prepare(`
+		let migration_queue: any[] = [];
+
+		migration_queue.push(
+			this.#db.prepare(`
             CREATE TABLE IF NOT EXISTS Staff(
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 mal_id INTEGER,
@@ -19,9 +22,12 @@ class InternalDatabase {
                 birthday DATETIME,
                 about TEXT
             )    
-        `);
+            `)
+		);
 
-		staff_data.run();
+		migration_queue.forEach((item) => {
+			item.run();
+		});
 	};
 }
 
