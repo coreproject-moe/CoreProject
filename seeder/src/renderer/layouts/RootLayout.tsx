@@ -2,7 +2,7 @@ import Navbar from "@components/navbar";
 import Sidebar from "@components/sidebar";
 import { RouteSectionProps } from "@solidjs/router";
 import { Component, Show } from "solid-js";
-import sidebarStore from "@renderer/stores/sidebar";
+import sidebarStore from "@stores/sidebar";
 
 const HomeLayout: Component<RouteSectionProps> = (props) => {
   return (

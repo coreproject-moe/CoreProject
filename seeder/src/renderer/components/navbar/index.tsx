@@ -1,7 +1,7 @@
 import type { Component } from "solid-js";
 import CoreLogo from "@assets/icons/core/logo.svg?component-solid";
 import CoreSeederLogo from "@assets/icons/core/coreseeder.svg?component-solid";
-import sidebarStore from "@renderer/stores/sidebar";
+import sidebarStore from "@stores/sidebar";
 
 const Navbar: Component = () => {
   const { open, setOpen } = sidebarStore;

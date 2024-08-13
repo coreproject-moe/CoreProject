@@ -10,17 +10,17 @@
     "types": [
       "vite-plugin-solid-svg/types",
       "vite/client",
-    ],		
+    ],
     "allowJs": true,
 		"checkJs": true,
-    "composite": true,	
+    "composite": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,
 		"module": "esnext",
-		"target": "esnext",		
+		"target": "esnext",
     "moduleResolution": "bundler",
     "jsxImportSource": "solid-js",
     "baseUrl": ".",
@@ -31,7 +31,8 @@
       "@routes/*": ["./src/renderer/routes/*"],
       "@layouts/*": ["./src/renderer/layouts/*"],
       "@constants/*": ["./src/renderer/constants/*"],
-      "@utils/*": ["./src/renderer/utils/*"]
+      "@utils/*": ["./src/renderer/utils/*"],
+      "@stores/*": ["./src/renderer/stores/*"]
     }
   }
 }
