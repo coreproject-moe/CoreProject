@@ -1,6 +1,6 @@
 import CommandInitializer from "@renderer/components/CommandInitializer";
 import { Component } from "solid-js";
-import { diffLines } from "diff";
+import { Change, diffLines } from "diff";
 
 // MOCK data
 const staff_db = {
@@ -38,17 +38,15 @@ const Staff: Component = () => {
     console.log(e.detail);
   };
 
-  // const diffResult = diffJson(staff_db, staff_mal)
-  // console.log(diffResult)
-  const diff = {
+  const diff: {
+    [key: string]: Change[];
+  } = {
     name: diffLines(staff_db.name, staff_mal.name),
     given_name: diffLines(staff_db.given_name, staff_mal.given_name),
     family_name: diffLines(staff_db.family_name, staff_mal.family_name),
     alternate_name: diffLines(staff_db.alternate_name.join(", "), staff_mal.alternate_name.join(", ")),
     about: diffLines(staff_db.about, staff_mal.about),
   };
-
-  console.log(diff)
 
   const renderDiff = (field: string, type: "old" | "new") => {
     return (
