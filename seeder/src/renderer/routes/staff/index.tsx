@@ -1,3 +1,4 @@
+import CommandInitializer from "@renderer/components/CommandInitializer";
 import { Component } from "solid-js";
 
 // MOCK data
@@ -15,7 +16,11 @@ const staff_mock_data = {
 }
 
 const Staff: Component = () => {
-  return "Staff";
+  return (
+    <div>
+      <CommandInitializer />
+    </div>
+  );
 };
 
 export default Staff;
