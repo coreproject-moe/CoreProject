@@ -5,3 +5,5 @@ out
 *.log*
 http_cache.sqlite
 seeder.db
+*.db-shm
+*.db-wal
