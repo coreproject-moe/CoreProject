@@ -29,6 +29,12 @@ class InternalDatabase {
 		});
 	};
 
+	public get_all_staff_given_mal_id = () => {
+		const stmt = this.#db.prepare("SELECT mal_id FROM Staff");
+		const rows = stmt.all();
+		return rows.map((row) => (row as { mal_id: number }).mal_id);
+	};
+
 	public get_staff = (id: number) => {
 		const staff = this.#db.prepare("SELECT * FROM Staff WHERE id = ?").get(id);
 		return staff;

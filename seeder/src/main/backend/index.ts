@@ -23,6 +23,11 @@ app.get("/shiinobi-healthcheck", (_, res) => {
 	res.send("We are friends");
 });
 
+app.get("/staff", (req, res) => {
+	const item = orm.get_all_staff_given_mal_id();
+	res.json(item);
+});
+
 app.get("/staff/:id", (req, res) => {
 	const item = orm.get_staff(Number(req.params.id));
 	res.json(item);
