@@ -23,7 +23,8 @@ export default defineConfig({
 				$interfaces: resolve(__dirname, "./src/main/interfaces"),
 				$backend: resolve(__dirname, "./src/main/backend"),
 				$workers: resolve(__dirname, "./src/main/workers"),
-				$utils: resolve(__dirname, "./src/main/utils")
+				$utils: resolve(__dirname, "./src/main/utils"),
+				$database: resolve(__dirname, "./src/main/database")
 			}
 		}
 	},

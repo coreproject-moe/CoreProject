@@ -77,5 +77,3 @@ class Shiinobi {
 		});
 	}
 }
-
-export { Shiinobi };
