@@ -1,8 +1,8 @@
 import BetterSqlite3 from "better-sqlite3";
 
 export class BaseDatabase {
-	migration_queue: any[] = [];
-	db: BetterSqlite3.Database;
+	protected migration_queue: any[] = [];
+	protected db: BetterSqlite3.Database;
 
 	constructor(db: BetterSqlite3.Database) {
 		this.db = db;

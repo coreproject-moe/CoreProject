@@ -36,13 +36,13 @@ export class StaffDatabase extends BaseDatabase {
 	};
 	public get_all_null_staff = () => {
 		const stmt = this.db.prepare(`
-            SELECT * FROM ${this.#table_name} WHERE
-                name IS NULL OR
-                staff_image IS NULL OR
-                given_name IS NULL OR
-                alternate_name IS NULL OR
-                birthday IS NULL OR
-                about IS NULL
+			SELECT * FROM ${this.#table_name} WHERE
+				name IS NULL OR
+				staff_image IS NULL OR
+				given_name IS NULL OR
+				alternate_name IS NULL OR
+				birthday IS NULL OR
+				about IS NULL
             `);
 		const rows = stmt.all();
 		return rows;

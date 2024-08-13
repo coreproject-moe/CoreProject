@@ -10,7 +10,9 @@ const Navbar: Component = () => {
 				<CoreSeederLogo class="w-auto md:h-4" />
 			</div>
 			<div class="h-full">
-				<button class="btn btn-neutral h-full min-h-full rounded outline-none">Logout</button>
+				<button class="btn btn-neutral h-full min-h-full rounded outline-none">
+					Logout
+				</button>
 			</div>
 		</div>
 	);
