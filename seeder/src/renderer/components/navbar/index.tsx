@@ -9,7 +9,7 @@ const Navbar: Component = () => {
   return (
     <div class="relative flex h-14 w-full items-center justify-between p-3">
       <div class="flex h-full items-center gap-3">
-        <button onClick={() => setOpen(!open())} class="btn aspect-square btn-neutral h-full min-h-full rounded">
+        <button onClick={() => setOpen(!open())} class="outline-none btn aspect-square btn-neutral h-full min-h-full rounded">
           {/* @ts-ignore: solid support issue */}
           <coreproject-shape-list class="size-5"></coreproject-shape-list>
         </button>
