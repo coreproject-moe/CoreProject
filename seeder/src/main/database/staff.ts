@@ -2,6 +2,8 @@ import BetterSqlite3 from "better-sqlite3";
 import { BaseDatabase } from "./_base";
 
 export class StaffDatabase extends BaseDatabase {
+	#table_name = "Staff";
+
 	constructor(db: BetterSqlite3.Database) {
 		super(db);
 	}
@@ -9,7 +11,7 @@ export class StaffDatabase extends BaseDatabase {
 	public create_table = async () => {
 		this.migration_queue.push(
 			this.db.prepare(`
-			CREATE TABLE IF NOT EXISTS Staff(
+			CREATE TABLE IF NOT EXISTS ${this.#table_name}(
 				id INTEGER PRIMARY KEY AUTOINCREMENT,
 				mal_id INTEGER NOT NULL,
 				name TEXT,
@@ -23,14 +25,27 @@ export class StaffDatabase extends BaseDatabase {
 	};
 
 	public get_all_staff_given_mal_id = () => {
-		const stmt = this.db.prepare("SELECT mal_id FROM Staff");
+		const stmt = this.db.prepare(`SELECT mal_id FROM ${this.#table_name}`);
 		const rows = stmt.all();
 		return rows.map((row) => (row as { mal_id: number }).mal_id);
 	};
 
 	public get_staff = (id: number) => {
-		const staff = this.db.prepare("SELECT * FROM Staff WHERE id = ?").get(id);
+		const staff = this.db.prepare(`SELECT * FROM ${this.#table_name} WHERE id = ?`).get(id);
 		return staff;
+	};
+	public get_all_null_staff = () => {
+		const stmt = this.db.prepare(`
+            SELECT * FROM ${this.#table_name} WHERE
+                name IS NULL OR
+                staff_image IS NULL OR
+                given_name IS NULL OR
+                alternate_name IS NULL OR
+                birthday IS NULL OR
+                about IS NULL
+            `);
+		const rows = stmt.all();
+		return rows;
 	};
 
 	public create_staff = ({
@@ -51,7 +66,7 @@ export class StaffDatabase extends BaseDatabase {
 		about?: string;
 	}) => {
 		const stmt = this.db.prepare(`
-			INSERT INTO Staff (mal_id,name, staff_image, given_name, alternate_name, birthday, about)
+			INSERT INTO ${this.#table_name} (mal_id,name, staff_image, given_name, alternate_name, birthday, about)
 			VALUES (?, ?, ?, ?, ?, ?, ?)
 		`);
 		const alternate_name_json = alternate_name ? JSON.stringify(alternate_name) : null;
