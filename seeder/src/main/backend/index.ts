@@ -23,7 +23,7 @@ app.get("/shiinobi-healthcheck", (_, res) => {
 	res.send("We are friends");
 });
 
-app.get("/staff", (req, res) => {
+app.get("/staff", (_, res) => {
 	const item = orm.get_all_staff_given_mal_id();
 	res.json(item);
 });
