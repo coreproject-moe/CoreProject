@@ -10,6 +10,7 @@
 		"typecheck:web": "tsc --noEmit -p tsconfig.web.json --composite false",
 		"typecheck": "npm run typecheck:node && npm run typecheck:web",
 		"dev": "electron-vite dev",
+		"prestart": "electron-builder install-app-deps",
 		"build": "npm run typecheck && electron-vite build",
 		"postinstall": "electron-builder install-app-deps",
 		"build:unpack": "npm run build && electron-builder --dir",
@@ -21,6 +22,7 @@
 	"dependencies": {
 		"@electron-toolkit/preload": "^3.0.1",
 		"@electron-toolkit/utils": "^3.0.0",
+		"better-sqlite3": "^11.1.2",
 		"cors": "^2.8.5",
 		"electron-updater": "^6.1.7",
 		"express": "^4.19.2",
@@ -35,6 +37,7 @@
 		"@eslint/js": "^9.9.0",
 		"@solid-primitives/event-dispatcher": "^0.0.107",
 		"@solidjs/router": "^0.14.1",
+		"@types/better-sqlite3": "^7.6.11",
 		"@types/cors": "^2.8.17",
 		"@types/express": "^4.17.21",
 		"@types/node": "^22.2.0",

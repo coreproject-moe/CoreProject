@@ -4,3 +4,4 @@ out
 .DS_Store
 *.log*
 http_cache.sqlite
+seeder.db
