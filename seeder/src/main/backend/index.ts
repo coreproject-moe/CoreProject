@@ -2,15 +2,11 @@
 
 import express from "express";
 import cors from "cors";
-import Database from "better-sqlite3";
 import { Database as ORM } from "$database/index";
-
-const db = new Database("seeder.db");
-db.pragma("journal_mode = WAL");
 
 const app = express();
 
-const orm = new ORM(db);
+const orm = new ORM();
 orm.migrate();
 
 app.use(cors());

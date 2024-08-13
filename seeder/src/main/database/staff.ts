@@ -1,11 +1,10 @@
-import BetterSqlite3 from "better-sqlite3";
 import { BaseDatabase } from "./_base";
 
 export class StaffDatabase extends BaseDatabase {
 	#table_name = "Staff";
 
-	constructor(db: BetterSqlite3.Database) {
-		super(db);
+	constructor() {
+		super();
 	}
 
 	public create_table = async () => {
