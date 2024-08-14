@@ -1,4 +1,4 @@
-export const PLATFORMS = ["myanimelist"];
+export const PLATFORMS = ["myanimelist", "anilist", "kitsu"];
 
 export const COMMANDS_MAPPING = {
 	shared: {

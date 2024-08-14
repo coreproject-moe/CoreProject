@@ -73,7 +73,8 @@ export default defineConfig({
 				"@routes": resolve(__dirname, "./src/renderer/routes"),
 				"@layouts": resolve(__dirname, "./src/renderer/layouts"),
 				"@constants": resolve(__dirname, "./src/renderer/constants"),
-				"@utils": resolve(__dirname, "./src/renderer/utils")
+				"@utils": resolve(__dirname, "./src/renderer/utils"),
+				"@stores": resolve(__dirname, "./src/renderer/stores")
 			}
 		},
 		plugins: [solid(), svg()]
