@@ -28,7 +28,10 @@ const CommandInitializer: Component<Props> = (props) => {
 					// @ts-ignore: solid-js doesn't support web-component with typescript */}
 						<coreproject-shape-chevron class="size-3"></coreproject-shape-chevron>
 					</div>
-					<ul tabindex="0" class="dropdown-content mt-1 min-w-full rounded bg-neutral p-1">
+					<ul
+						tabindex="0"
+						class="dropdown-content mt-1 min-w-full rounded bg-neutral p-1"
+					>
 						<For each={PLATFORMS.filter((pl) => pl !== platform())}>
 							{(pl) => (
 								<li
