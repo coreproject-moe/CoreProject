@@ -62,11 +62,11 @@ const Staff: Component = () => {
 							<RenderDiffField diff={diff} field="name" type="old" />
 							<RenderDiffField diff={diff} field="given_name" type="old" />
 							<span class="text-sm">
-								Alternate names:{" "}
+								Alternate names:
 								<RenderDiffField diff={diff} field="alternate_name" type="old" />
 							</span>
 							<span class="text-sm">
-								Family name:{" "}
+								Family name:
 								<RenderDiffField diff={diff} field="family_name" type="old" />
 							</span>
 							<p class="mt-4 text-sm">
@@ -83,11 +83,11 @@ const Staff: Component = () => {
 							<RenderDiffField diff={diff} field="name" type="new" />
 							<RenderDiffField diff={diff} field="given_name" type="new" />
 							<span class="text-sm">
-								Alternate names:{" "}
+								Alternate names:
 								<RenderDiffField diff={diff} field="alternate_name" type="new" />
 							</span>
 							<span class="text-sm">
-								Family name:{" "}
+								Family name:
 								<RenderDiffField diff={diff} field="family_name" type="new" />
 							</span>
 							<p class="mt-4 text-sm">
