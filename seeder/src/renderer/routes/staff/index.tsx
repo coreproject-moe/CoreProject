@@ -48,6 +48,8 @@ const Staff: Component = () => {
     about: diffLines(staff_db.about, staff_mal.about),
   };
 
+  const hasDiff = Object.values(diff).some((field) => field.some((part: Change) => part.added || part.removed))
+
   const renderDiff = (field: string, type: "old" | "new") => {
     return (
       <div class="flex flex-col gap-1">
