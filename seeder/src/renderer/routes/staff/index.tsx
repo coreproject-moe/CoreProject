@@ -1,6 +1,7 @@
-import CommandInitializer from "@renderer/components/CommandInitializer";
-import { Component, For } from "solid-js";
+import CommandInitializer from "@components/CommandInitializer";
+import { Component } from "solid-js";
 import { Change, diffLines } from "diff";
+import RenderDiffField from "@components/RenderDiffField";
 
 // MOCK data
 const staff_db = {
@@ -50,24 +51,6 @@ const Staff: Component = () => {
 
   const hasDiff = Object.values(diff).some((field) => field.some((part: Change) => part.added || part.removed))
 
-  const renderDiff = (field: string, type: "old" | "new") => {
-    return (
-      <div class="flex flex-col gap-1">
-        <For each={diff[field].filter((part) => type === "old" ? !part.added : !part.removed)}>
-          {(part) => (
-            <span classList={{
-              "text-accent w-max leading-none p-1 rounded whitespace-pre-line break-words": part.removed || part.added,
-              "bg-error/35": part.removed,
-              "bg-success/25": part.added,
-            }}>
-              {part.removed ? "-" : part.added ? "+" : ""} {part.value}
-            </span>
-          )}
-        </For>
-      </div>
-    )
-  };
-
   return (
     <div class="flex h-full flex-col gap-2 flex-1">
       <CommandInitializer onFetchClick={handleFetchEvent} title={"Staffs"} />
@@ -79,11 +62,11 @@ const Staff: Component = () => {
               src={`data:image/${staff_db.staff_image.mimetype};base64,${staff_db.staff_image.image}`}
             />
             <div class="flex flex-col">
-              {renderDiff("name", "old")}
-              {renderDiff("given_name", "old")}
-              <span class="text-sm">Alternate names: {renderDiff("alternate_name", "old")}</span>
-              <span class="text-sm">Family name: {renderDiff("family_name", "old")}</span>
-              <p class="mt-4 text-sm ">{renderDiff("about", "old")}</p>
+              <RenderDiffField diff={diff} field="name" type="old" />
+              <RenderDiffField diff={diff} field="given_name" type="old" />
+              <span class="text-sm">Alternate names: <RenderDiffField diff={diff} field="alternate_name" type="old" /></span>
+              <span class="text-sm">Family name: <RenderDiffField diff={diff} field="family_name" type="old" /></span>
+              <p class="mt-4 text-sm "><RenderDiffField diff={diff} field="about" type="old" /></p>
             </div>
           </div>
           <div class="overflow-x-scroll flex gap-2 rounded bg-neutral/25 p-2">
@@ -92,11 +75,11 @@ const Staff: Component = () => {
               src={`data:image/${staff_mal.staff_image.mimetype};base64,${staff_mal.staff_image.image}`}
             />
             <div class="flex flex-col">
-              {renderDiff("name", "new")}
-              {renderDiff("given_name", "new")}
-              <span class="text-sm">Alternate names: {renderDiff("alternate_name", "new")}</span>
-              <span class="text-sm">Family name: {renderDiff("family_name", "new")}</span>
-              <p class="mt-4 text-sm">{renderDiff("about", "new")}</p>
+              <RenderDiffField diff={diff} field="name" type="new" />
+              <RenderDiffField diff={diff} field="given_name" type="new" />
+              <span class="text-sm">Alternate names: <RenderDiffField diff={diff} field="alternate_name" type="new" /></span>
+              <span class="text-sm">Family name: <RenderDiffField diff={diff} field="family_name" type="new" /></span>
+              <p class="mt-4 text-sm"><RenderDiffField diff={diff} field="about" type="new" /></p>
             </div>
           </div>
         </div>
