@@ -2,6 +2,7 @@ import CommandInitializer from "@components/CommandInitializer";
 import { Component } from "solid-js";
 import { Change, diffLines, diffWords } from "diff";
 import RenderDiffField from "@components/RenderDiffField";
+import RenderDiff from "@renderer/components/RenderDiff";
 
 // MOCK data
 const staff_db = {
@@ -56,21 +57,6 @@ const Staff: Component = () => {
     about: diffLines(staff_db.about, staff_mal.about)
   };
 
-  function renderDiff(diffProp: Change[], options: { type: "add" | "remove" }) {
-    return (
-      <span>
-        {diffProp.filter((part) => options.type === "add" ? !part.removed : !part.added).map((part) => (
-          <span classList={{
-            "text-accent w-max leading-none p-1 rounded whitespace-pre-line break-words":
-              part.removed || part.added, "bg-error/35": part.removed, "bg-success/25": part.added
-          }}>
-            {part.value}
-          </span>
-        ))}
-      </span>
-    )
-  }
-
   return (
     <div class="flex h-full flex-1 flex-col gap-2">
       <CommandInitializer onFetchClick={handleFetchEvent} title={"Staffs"} />
@@ -82,7 +68,7 @@ const Staff: Component = () => {
               src={`data:image/${staff_db.staff_image.mimetype};base64,${staff_db.staff_image.image}`}
             />
             <div class="flex flex-col">
-              {renderDiff(diffTest.name, { type: "remove" })}
+              <RenderDiff diff={diffTest.name} options={{ type: "remove" }} />
               <RenderDiffField diff={diff} field="given_name" type="old" />
               <span class="text-sm">
                 Alternate names:
@@ -103,7 +89,7 @@ const Staff: Component = () => {
               src={`data:image/${staff_mal.staff_image.mimetype};base64,${staff_mal.staff_image.image}`}
             />
             <div class="flex flex-col">
-              {renderDiff(diffTest.name, { type: "add" })}
+              <RenderDiff diff={diffTest.name} options={{ type: "add" }} />
               <RenderDiffField diff={diff} field="given_name" type="new" />
               <span class="text-sm">
                 Alternate names:

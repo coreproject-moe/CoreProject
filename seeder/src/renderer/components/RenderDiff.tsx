@@ -1,0 +1,28 @@
+import { Change } from "diff"
+import { Component } from "solid-js";
+
+type Props = {
+  diff: Change[];
+  options: {
+    type: "add" | "remove";
+  }
+}
+
+const RenderDiff: Component<Props> = (props) => {
+  return (
+    <span>
+      {props.diff.filter((part) => props.options.type === "add" ? !part.removed : !part.added).map((part) => (
+        <span classList={{
+          "text-accent w-max leading-none p-1 rounded whitespace-pre-line break-words":
+            part.removed || part.added,
+          "bg-error/35": part.removed,
+          "bg-success/25": part.added
+        }}>
+          {part.value}
+        </span>
+      ))}
+    </span>
+  )
+};
+
+export default RenderDiff;
