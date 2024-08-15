@@ -51,7 +51,7 @@ const Staff: Component = () => {
 			<CommandInitializer onFetchClick={handleFetchEvent} title={"Staffs"} />
 			<div class="overflow-x-hidden overflow-y-scroll">
 				<div class="grid w-full grid-cols-[1fr_1fr] gap-2">
-					<div class="flex select-text gap-2 overflow-x-scroll rounded bg-neutral/25 p-2">
+					<div class="flex select-text gap-2 overflow-x-scroll rounded bg-error/10 p-2">
 						<img
 							class="h-20 rounded"
 							src={`data:image/${staff_db.staff_image.mimetype};base64,${staff_db.staff_image.image}`}
@@ -75,7 +75,7 @@ const Staff: Component = () => {
 							</p>
 						</div>
 					</div>
-					<div class="flex select-text gap-2 overflow-x-scroll rounded bg-neutral/25 p-2">
+					<div class="flex select-text gap-2 overflow-x-scroll rounded bg-success/10 p-2">
 						<img
 							class="h-20 rounded"
 							src={`data:image/${staff_mal.staff_image.mimetype};base64,${staff_mal.staff_image.image}`}
