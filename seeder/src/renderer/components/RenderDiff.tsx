@@ -1,5 +1,5 @@
 import { Change } from "diff";
-import { Component } from "solid-js";
+import { Component, For } from "solid-js";
 
 type Props = {
 	diff: Change[];
@@ -11,9 +11,12 @@ type Props = {
 const RenderDiff: Component<Props> = (props) => {
 	return (
 		<span>
-			{props.diff
-				.filter((part) => (props.options.type === "add" ? !part.removed : !part.added))
-				.map((part) => (
+			<For
+				each={props.diff.filter((part) =>
+					props.options.type === "add" ? !part.removed : !part.added
+				)}
+			>
+				{(part) => (
 					<span
 						classList={{
 							"text-accent w-max leading-none p-0.5 rounded":
@@ -24,7 +27,8 @@ const RenderDiff: Component<Props> = (props) => {
 					>
 						{part.value}
 					</span>
-				))}
+				)}
+			</For>
 		</span>
 	);
 };
