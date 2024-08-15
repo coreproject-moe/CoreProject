@@ -26,7 +26,7 @@ const CommandInitializer: Component<Props> = (props) => {
 						{platform()}
 						{/*
 					// @ts-ignore: solid-js doesn't support web-component with typescript */}
-						<coreproject-shape-chevron class="size-3"></coreproject-shape-chevron>
+						<coreproject-shape-chevron class="size-3" />
 					</div>
 					<ul
 						tabindex="0"
@@ -52,7 +52,7 @@ const CommandInitializer: Component<Props> = (props) => {
 				Fetch
 				{/*
 					// @ts-ignore: solid-js doesn't support web-component with typescript */}
-				<coreproject-shape-upload class="size-3"></coreproject-shape-upload>
+				<coreproject-shape-upload class="size-3" />
 			</button>
 		</div>
 	);

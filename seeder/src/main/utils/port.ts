@@ -24,7 +24,7 @@ export function get_free_port() {
 	});
 }
 export async function get_all_devices_running_shiinobi() {
-	let friends = new Array<string>();
+	const friends = new Array<string>();
 	const devices = await find();
 
 	for (const device of devices) {

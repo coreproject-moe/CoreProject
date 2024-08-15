@@ -12,7 +12,7 @@ const Navbar: Component = () => {
 					class="btn btn-neutral aspect-square h-full min-h-full rounded outline-none"
 				>
 					{/* @ts-ignore: solid support issue */}
-					<coreproject-shape-list class="size-5"></coreproject-shape-list>
+					<coreproject-shape-list class="size-5" />
 				</button>
 				<CoreLogo class="h-full w-auto" />
 			</div>

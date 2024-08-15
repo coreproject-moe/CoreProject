@@ -61,7 +61,7 @@ app.whenReady().then(async () => {
 	// Shiinobi
 	SHIINOBI_COMMANDS.forEach((item) => {
 		const function_name = item.replaceAll("-", "_");
-		// @ts-ignore
+		// @ts-ignore: no event use atm
 		ipcMain.handle(function_name, async (event, ...args) => {
 			console.log(args);
 			Shiinobi[function_name](...args);
