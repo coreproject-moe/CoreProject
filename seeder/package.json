@@ -54,7 +54,7 @@
 		"postcss": "^8.4.41",
 		"prettier": "^3.3.2",
 		"prettier-plugin-tailwindcss": "^0.6.6",
-		"solid-js": "^1.8.20",
+		"solid-js": "^1.8.21",
 		"tailwind-merge": "^2.5.2",
 		"tailwindcss": "^3.4.10",
 		"terser": "^5.31.6",
