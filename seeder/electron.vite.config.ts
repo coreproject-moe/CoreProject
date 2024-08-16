@@ -1,5 +1,5 @@
 import { resolve } from "path";
-import { defineConfig, externalizeDepsPlugin } from "electron-vite";
+import { defineConfig, swcPlugin, externalizeDepsPlugin } from "electron-vite";
 import solid from "vite-plugin-solid";
 import svg from "vite-plugin-solid-svg";
 
@@ -14,7 +14,7 @@ const node_alias = {
 
 export default defineConfig({
 	main: {
-		plugins: [externalizeDepsPlugin()],
+		plugins: [externalizeDepsPlugin(), swcPlugin()],
 		esbuild: {
 			target: "esnext",
 			legalComments: "external"
@@ -57,7 +57,6 @@ export default defineConfig({
 			alias: node_alias
 		}
 	},
-
 	renderer: {
 		esbuild: {
 			legalComments: "external"
