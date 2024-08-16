@@ -2,9 +2,9 @@ import { app, shell, BrowserWindow, ipcMain } from "electron";
 import { join } from "path";
 import { electronApp, optimizer, is } from "@electron-toolkit/utils";
 import icon from "../../resources/icon.png?asset";
-import { get_free_port } from "$utils/port";
 import { Shiinobi as _Shiinobi, COMMANDS as SHIINOBI_COMMANDS } from "$interfaces/shiinobi";
 import ExpressWorder from "$workers/express_worker?nodeWorker";
+import { express_port, EXPRESS_URLS } from "$interfaces/express_urls";
 
 const Shiinobi = new _Shiinobi();
 
@@ -17,7 +17,7 @@ async function createWindow(): Promise<void> {
 		autoHideMenuBar: true,
 		...(process.platform === "linux" ? { icon } : {}),
 		webPreferences: {
-			preload: join(__dirname, "../preload/index.js"),
+			preload: join(__dirname, "../preload/index.mjs"),
 			nodeIntegrationInWorker: true,
 			sandbox: false
 		}
@@ -68,18 +68,11 @@ app.whenReady().then(async () => {
 		});
 	});
 
-	const express_port = await get_free_port();
-
 	ExpressWorder({ workerData: { port: express_port } })
 		.on("message", (message) => {
 			console.log(`\nMessage from worker: ${message}`);
 		})
 		.postMessage("");
-
-	const EXPRESS_URLS = {
-		shiinobi_healthcheck: `http://localhost:${express_port}/shiinobi-healthcheck`,
-		staff: `http://localhost:${express_port}/staff`
-	};
 
 	ipcMain.handle("get-express-urls", () => EXPRESS_URLS);
 

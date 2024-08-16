@@ -3,6 +3,15 @@ import { defineConfig, externalizeDepsPlugin } from "electron-vite";
 import solid from "vite-plugin-solid";
 import svg from "vite-plugin-solid-svg";
 
+const node_alias = {
+	$constants: resolve(__dirname, "./src/main/constants"),
+	$interfaces: resolve(__dirname, "./src/main/interfaces"),
+	$backend: resolve(__dirname, "./src/main/backend"),
+	$workers: resolve(__dirname, "./src/main/workers"),
+	$utils: resolve(__dirname, "./src/main/utils"),
+	$database: resolve(__dirname, "./src/main/database")
+};
+
 export default defineConfig({
 	main: {
 		plugins: [externalizeDepsPlugin()],
@@ -15,17 +24,15 @@ export default defineConfig({
 				transformMixedEsModules: true
 			},
 			chunkSizeWarningLimit: undefined,
-			minify: "terser"
+			minify: "terser",
+			rollupOptions: {
+				output: {
+					format: "es"
+				}
+			}
 		},
 		resolve: {
-			alias: {
-				$constants: resolve(__dirname, "./src/main/constants"),
-				$interfaces: resolve(__dirname, "./src/main/interfaces"),
-				$backend: resolve(__dirname, "./src/main/backend"),
-				$workers: resolve(__dirname, "./src/main/workers"),
-				$utils: resolve(__dirname, "./src/main/utils"),
-				$database: resolve(__dirname, "./src/main/database")
-			}
+			alias: node_alias
 		}
 	},
 	preload: {
@@ -39,16 +46,15 @@ export default defineConfig({
 				transformMixedEsModules: true
 			},
 			chunkSizeWarningLimit: undefined,
-			minify: "terser"
+			minify: "terser",
+			rollupOptions: {
+				output: {
+					format: "es"
+				}
+			}
 		},
 		resolve: {
-			alias: {
-				$constants: resolve(__dirname, "./src/main/constants"),
-				$interfaces: resolve(__dirname, "./src/main/interfaces"),
-				$backend: resolve(__dirname, "./src/main/backend"),
-				$workers: resolve(__dirname, "./src/main/workers"),
-				$utils: resolve(__dirname, "./src/main/utils")
-			}
+			alias: node_alias
 		}
 	},
 
@@ -62,8 +68,8 @@ export default defineConfig({
 			},
 			chunkSizeWarningLimit: 2048,
 			target: "es2022",
-			cssTarget: "esnext",
-			minify: "terser"
+			cssTarget: "esnext"
+			//minify: "terser"
 		},
 		resolve: {
 			alias: {
