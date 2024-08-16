@@ -2,6 +2,7 @@ import CommandInitializer from "@components/CommandInitializer";
 import { Component } from "solid-js";
 import { diffWords } from "diff";
 import RenderDiff from "@components/RenderDiff";
+import { EXPRESS_API_URL } from "@constants/urls";
 
 // MOCK data
 const staff_db = {
@@ -34,6 +35,8 @@ const Staff: Component = () => {
 	const handleFetchEvent = (e: CustomEvent<string>) => {
 		console.log(e.detail);
 	};
+
+	console.log(EXPRESS_API_URL);
 
 	const diff = {
 		name: diffWords(staff_db.name, staff_mal.name),

@@ -6,6 +6,7 @@ declare global {
 		electron: ElectronAPI;
 		api: {
 			get_app_version: () => Promise<string>;
+			get_express_port: () => Promise<string>;
 			// Shiinobi
 			[key in typeof SHIINOBI_COMMANDS[number]]: (...args: any[]) => Promise<object>;
 		};

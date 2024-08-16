@@ -4,7 +4,8 @@ import { COMMANDS as SHIINOBI_COMMANDS } from "$interfaces/shiinobi";
 
 // Custom APIs for renderer
 const api = {
-	get_app_version: () => ipcRenderer.invoke("get-app-version")
+	get_app_version: () => ipcRenderer.invoke("get-app-version"),
+	get_express_port: () => ipcRenderer.invoke("get-express-port")
 };
 
 SHIINOBI_COMMANDS.forEach((item) => {

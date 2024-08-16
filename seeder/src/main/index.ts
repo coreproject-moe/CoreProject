@@ -69,11 +69,14 @@ app.whenReady().then(async () => {
 	});
 
 	const express_port = await get_free_port();
+
 	ExpressWorder({ workerData: { port: express_port } })
 		.on("message", (message) => {
 			console.log(`\nMessage from worker: ${message}`);
 		})
 		.postMessage("");
+
+	ipcMain.handle("get-express-port", () => express_port);
 
 	await createWindow();
 
