@@ -23,8 +23,16 @@
 		"target": "esnext",
     "moduleResolution": "bundler",
     "jsxImportSource": "solid-js",
-    "paths": {
-      "@renderer/*": ["./src/renderer/*"],
+    "baseUrl": ".",
+    "paths": {     
+      "$constants/*": ["./src/main/constants/*"],
+      "$interfaces/*": ["./src/main/interfaces/*"],
+      "$workers/*":["./src/main/workers/*"],
+      "$backend/*":["./src/main/backend/*"],
+      "$utils/*":["./src/main/utils/*"],
+      "$database/*":["./src/main/database/*"],
+
+      "@renderer/*": ["src/renderer/*"],
       "@assets/*": ["./src/renderer/assets/*"],
       "@components/*": ["./src/renderer/components/*"],
       "@routes/*": ["./src/renderer/routes/*"],

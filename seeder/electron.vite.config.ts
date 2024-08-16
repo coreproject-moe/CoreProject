@@ -3,13 +3,23 @@ import { defineConfig, swcPlugin, externalizeDepsPlugin } from "electron-vite";
 import solid from "vite-plugin-solid";
 import svg from "vite-plugin-solid-svg";
 
-const node_alias = {
+const alias_mappinh = {
+	// Node
 	$constants: resolve(__dirname, "./src/main/constants"),
 	$interfaces: resolve(__dirname, "./src/main/interfaces"),
 	$backend: resolve(__dirname, "./src/main/backend"),
 	$workers: resolve(__dirname, "./src/main/workers"),
 	$utils: resolve(__dirname, "./src/main/utils"),
-	$database: resolve(__dirname, "./src/main/database")
+	$database: resolve(__dirname, "./src/main/database"),
+	// Web
+	"@renderer": resolve(__dirname, "./src/renderer"),
+	"@assets": resolve(__dirname, "./src/renderer/assets"),
+	"@components": resolve(__dirname, "./src/renderer/components"),
+	"@routes": resolve(__dirname, "./src/renderer/routes"),
+	"@layouts": resolve(__dirname, "./src/renderer/layouts"),
+	"@constants": resolve(__dirname, "./src/renderer/constants"),
+	"@utils": resolve(__dirname, "./src/renderer/utils"),
+	"@stores": resolve(__dirname, "./src/renderer/stores")
 };
 
 export default defineConfig({
@@ -32,7 +42,7 @@ export default defineConfig({
 			}
 		},
 		resolve: {
-			alias: node_alias
+			alias: alias_mappinh
 		}
 	},
 	preload: {
@@ -54,7 +64,7 @@ export default defineConfig({
 			}
 		},
 		resolve: {
-			alias: node_alias
+			alias: alias_mappinh
 		}
 	},
 	renderer: {
@@ -71,16 +81,7 @@ export default defineConfig({
 			//minify: "terser"
 		},
 		resolve: {
-			alias: {
-				"@renderer": resolve(__dirname, "./src/renderer"),
-				"@assets": resolve(__dirname, "./src/renderer/assets"),
-				"@components": resolve(__dirname, "./src/renderer/components"),
-				"@routes": resolve(__dirname, "./src/renderer/routes"),
-				"@layouts": resolve(__dirname, "./src/renderer/layouts"),
-				"@constants": resolve(__dirname, "./src/renderer/constants"),
-				"@utils": resolve(__dirname, "./src/renderer/utils"),
-				"@stores": resolve(__dirname, "./src/renderer/stores")
-			}
+			alias: alias_mappinh
 		},
 		plugins: [solid(), svg()]
 	}
