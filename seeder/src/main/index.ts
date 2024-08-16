@@ -76,7 +76,12 @@ app.whenReady().then(async () => {
 		})
 		.postMessage("");
 
-	ipcMain.handle("get-express-port", () => express_port);
+	const EXPRESS_URLS = {
+		shiinobi_healthcheck: `http://localhost:${express_port}/shiinobi-healthcheck`,
+		staff: `http://localhost:${express_port}/staff`
+	};
+
+	ipcMain.handle("get-express-urls", () => EXPRESS_URLS);
 
 	await createWindow();
 
