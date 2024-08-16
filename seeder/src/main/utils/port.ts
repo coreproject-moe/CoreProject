@@ -23,6 +23,7 @@ export function get_free_port() {
 		});
 	});
 }
+
 export async function get_all_devices_running_shiinobi() {
 	const friends = new Array<string>();
 	const devices = await find();
