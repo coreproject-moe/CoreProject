@@ -15,7 +15,12 @@ export default defineConfig({
 				transformMixedEsModules: true
 			},
 			chunkSizeWarningLimit: undefined,
-			minify: "terser"
+			minify: "terser",
+			rollupOptions: {
+				output: {
+					format: "es"
+				}
+			}
 		},
 		resolve: {
 			alias: {
@@ -39,7 +44,12 @@ export default defineConfig({
 				transformMixedEsModules: true
 			},
 			chunkSizeWarningLimit: undefined,
-			minify: "terser"
+			minify: "terser",
+			rollupOptions: {
+				output: {
+					format: "es"
+				}
+			}
 		},
 		resolve: {
 			alias: {
