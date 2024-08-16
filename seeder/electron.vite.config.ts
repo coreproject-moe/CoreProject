@@ -1,11 +1,11 @@
 import { resolve } from "path";
-import { defineConfig, externalizeDepsPlugin } from "electron-vite";
+import { defineConfig, swcPlugin, externalizeDepsPlugin } from "electron-vite";
 import solid from "vite-plugin-solid";
 import svg from "vite-plugin-solid-svg";
 
 export default defineConfig({
 	main: {
-		plugins: [externalizeDepsPlugin()],
+		plugins: [externalizeDepsPlugin(), swcPlugin()],
 		esbuild: {
 			target: "esnext",
 			legalComments: "external"
@@ -72,8 +72,8 @@ export default defineConfig({
 			},
 			chunkSizeWarningLimit: 2048,
 			target: "es2022",
-			cssTarget: "esnext",
-			minify: "terser"
+			cssTarget: "esnext"
+			//minify: "terser"
 		},
 		resolve: {
 			alias: {
