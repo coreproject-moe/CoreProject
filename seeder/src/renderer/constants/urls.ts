@@ -1,3 +1,1 @@
-const EXPRESS_PORT = await window.api.get_express_port();
-
-export const EXPRESS_API_URL = `http://localhost:${EXPRESS_PORT}/`;
+export const EXPRESS_URLS = await window.api.get_express_urls();
