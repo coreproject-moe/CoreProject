@@ -1,4 +1,4 @@
-import { get_free_port } from "$utils/port";
+import { get_free_port } from "../utils/port";
 
 export const express_port = await get_free_port();
 

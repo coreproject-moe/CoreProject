@@ -1,20 +1,11 @@
 import { resolve } from "path";
-import { defineConfig, externalizeDepsPlugin } from "electron-vite";
+import { defineConfig, swcPlugin, externalizeDepsPlugin } from "electron-vite";
 import solid from "vite-plugin-solid";
 import svg from "vite-plugin-solid-svg";
 
-const node_alias = {
-	$constants: resolve(__dirname, "./src/main/constants"),
-	$interfaces: resolve(__dirname, "./src/main/interfaces"),
-	$backend: resolve(__dirname, "./src/main/backend"),
-	$workers: resolve(__dirname, "./src/main/workers"),
-	$utils: resolve(__dirname, "./src/main/utils"),
-	$database: resolve(__dirname, "./src/main/database")
-};
-
 export default defineConfig({
 	main: {
-		plugins: [externalizeDepsPlugin()],
+		plugins: [externalizeDepsPlugin(), swcPlugin()],
 		esbuild: {
 			target: "esnext",
 			legalComments: "external"
@@ -32,7 +23,14 @@ export default defineConfig({
 			}
 		},
 		resolve: {
-			alias: node_alias
+			alias: {
+				$constants: resolve(__dirname, "./src/main/constants"),
+				$interfaces: resolve(__dirname, "./src/main/interfaces"),
+				$backend: resolve(__dirname, "./src/main/backend"),
+				$workers: resolve(__dirname, "./src/main/workers"),
+				$utils: resolve(__dirname, "./src/main/utils"),
+				$database: resolve(__dirname, "./src/main/database")
+			}
 		}
 	},
 	preload: {
@@ -54,10 +52,15 @@ export default defineConfig({
 			}
 		},
 		resolve: {
-			alias: node_alias
+			alias: {
+				$constants: resolve(__dirname, "./src/main/constants"),
+				$interfaces: resolve(__dirname, "./src/main/interfaces"),
+				$backend: resolve(__dirname, "./src/main/backend"),
+				$workers: resolve(__dirname, "./src/main/workers"),
+				$utils: resolve(__dirname, "./src/main/utils")
+			}
 		}
 	},
-
 	renderer: {
 		esbuild: {
 			legalComments: "external"

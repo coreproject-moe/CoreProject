@@ -23,9 +23,8 @@
 		"target": "esnext",
     "moduleResolution": "bundler",
     "jsxImportSource": "solid-js",
-    "baseUrl": ".",
     "paths": {
-      "@renderer/*": ["src/renderer/*"],
+      "@renderer/*": ["./src/renderer/*"],
       "@assets/*": ["./src/renderer/assets/*"],
       "@components/*": ["./src/renderer/components/*"],
       "@routes/*": ["./src/renderer/routes/*"],
