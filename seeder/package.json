@@ -1,6 +1,7 @@
 {
 	"name": "core-seeder",
 	"version": "1.0.0",
+	"type": "module",
 	"description": "",
 	"main": "./out/main/index.js",
 	"scripts": {
