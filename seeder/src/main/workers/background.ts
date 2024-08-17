@@ -10,7 +10,6 @@ port.on("message", async () => {
   const _port = workerData.port;
   try {
     port.postMessage(`Listening on http://localhost:${_port}/`);
-    // @ts-ignore
     const cmd = await shiinobi.get_myanimelist_staff_urls();
     console.log(cmd)
   } catch (err) {
