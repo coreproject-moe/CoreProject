@@ -3,7 +3,7 @@ import { defineConfig, swcPlugin, externalizeDepsPlugin } from "electron-vite";
 import solid from "vite-plugin-solid";
 import svg from "vite-plugin-solid-svg";
 
-const alias_mappinh = {
+const alias_mapping = {
 	// Node
 	$constants: resolve(__dirname, "./src/main/constants"),
 	$interfaces: resolve(__dirname, "./src/main/interfaces"),
@@ -42,7 +42,7 @@ export default defineConfig({
 			}
 		},
 		resolve: {
-			alias: alias_mappinh
+			alias: alias_mapping
 		}
 	},
 	preload: {
@@ -64,7 +64,7 @@ export default defineConfig({
 			}
 		},
 		resolve: {
-			alias: alias_mappinh
+			alias: alias_mapping
 		}
 	},
 	renderer: {
@@ -81,7 +81,7 @@ export default defineConfig({
 			//minify: "terser"
 		},
 		resolve: {
-			alias: alias_mappinh
+			alias: alias_mapping
 		},
 		plugins: [solid(), svg()]
 	}
