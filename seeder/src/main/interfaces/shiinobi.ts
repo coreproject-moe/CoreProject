@@ -18,15 +18,15 @@ const COMMANDS = [
 	"get-myanimelist-staff-urls"
 ] as const;
 
-type Command = typeof COMMANDS[number];
+type Command = (typeof COMMANDS)[number];
 
 type ReplaceHyphens<T extends string> = T extends `${infer P1}-${infer P2}`
-  ? `${P1}_${ReplaceHyphens<P2>}`
-  : T;
+	? `${P1}_${ReplaceHyphens<P2>}`
+	: T;
 
 type ShiinobiProperties = {
-  [K in Command as ReplaceHyphens<K>]: (id?: number) => Promise<any>;
-}
+	[K in Command as ReplaceHyphens<K>]: (id?: number) => Promise<any>;
+};
 
 interface Shiinobi extends ShiinobiProperties {}
 
