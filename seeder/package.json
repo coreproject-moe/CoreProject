@@ -31,7 +31,7 @@
 		"local-devices": "^4.0.0"
 	},
 	"devDependencies": {
-		"@coreproject-moe/icons": "^0.0.16",
+		"@coreproject-moe/icons": "^0.0.22",
 		"@electron-toolkit/eslint-config-prettier": "^2.0.0",
 		"@electron-toolkit/eslint-config-ts": "^2.0.0",
 		"@electron-toolkit/tsconfig": "^1.0.1",
