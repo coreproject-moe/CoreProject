@@ -48,7 +48,7 @@
 		"@typescript-eslint/eslint-plugin": "^8.2.0",
 		"autoprefixer": "^10.4.20",
 		"daisyui": "^4.12.10",
-		"electron": "^31.4.0",
+		"electron": "^32.0.1",
 		"electron-builder": "^24.13.3",
 		"electron-vite": "^2.3.0",
 		"eslint": "^9.9.1",
