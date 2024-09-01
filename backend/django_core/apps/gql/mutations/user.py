@@ -22,7 +22,7 @@ class UserMutation:
         user = django_authenticate(request, username=username, password=password)
         if user is not None:
             django_login(request, user)
-            token, _ = Token.objects.get_or_create(user=user.pk)
+            token, _ = Token.objects.get_or_create(user=user)
             return token
 
     @strawberry_django.mutation(permission_classes=[IsAuthenticated])

@@ -1438,6 +1438,7 @@ files = [
 ]
 
 [package.dependencies]
+psycopg-binary = {version = "3.2.1", optional = true, markers = "implementation_name != \"pypy\" and extra == \"binary\""}
 typing-extensions = ">=4.4"
 tzdata = {version = "*", markers = "sys_platform == \"win32\""}
 
@@ -2549,4 +2550,4 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.12,<3.13"
-content-hash = "29aed2e24dada0654cadfaa84b49c0c5d11552ee88c472d4e0b01472aea7b189"
+content-hash = "4ebf8ec0c5daa6464adc409457b13d879a4a97f022350484efc7f56d79fd0026"
