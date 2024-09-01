@@ -1,5 +1,4 @@
 from typing import cast
-from strawberry import UNSET
 from strawberry.types import Info
 
 from apps.anime.models import AnimeModel, AnimeNameSynonymModel
