@@ -21,3 +21,8 @@ class EpisodeInput:
     episode_type: auto
 
     # providers: auto
+
+
+@strawberry_django.input(EpisodeModel)
+class EpisodeTimestampModel:
+    pass

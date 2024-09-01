@@ -32,3 +32,10 @@ class EpisodeMutation:
         instance = EpisodeModel.objects.create(**model_data)
 
         return cast(EpisodeType, instance)
+
+    @strawberry_django.mutation(
+        permission_classes=[IsSuperUser],
+        extensions=[strawberry_django.permissions.IsSuperuser()],
+    )
+    def add_timestamp(self, info: Info, data: EpisodeTimestampInput) -> bool:
+        pass
