@@ -4,7 +4,7 @@ from celery import shared_task
 from django.core.management import call_command
 from django.db.models import Q
 from django.utils import timezone
-from modern_colorthief import ColorThief
+from modern_colorthief import get_color
 from PIL import Image, ImageStat
 from utilities.rgb_to_hex import rgb_to_hex
 
@@ -78,7 +78,7 @@ def set_field_color(
     instance = AnimeModel.objects.get(pk=pk)
 
     if image_field := getattr(instance, image_field_name):
-        color = ColorThief(image_field.path).get_color(quality=1)
+        color = get_color(image_field.path, quality=1)
         rgb_value_to_hex = rgb_to_hex(color[0], color[1], color[2])
         setattr(
             instance,
