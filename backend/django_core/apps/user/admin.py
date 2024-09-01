@@ -32,7 +32,7 @@ class CustomUserAdmin(DjangoUserAdmin):
         "is_active",
     )
     readonly_fields = (
-        "created_at",
+        # "created_at",
         "last_login",
     )
 
@@ -74,7 +74,7 @@ class CustomUserAdmin(DjangoUserAdmin):
             _("Important dates"),
             {
                 "fields": (
-                    "created_at",
+                    # "created_at",
                     "last_login",
                 )
             },
