@@ -1,5 +1,5 @@
-import strawberry_django
 from apps.anime.models.anime_genre import AnimeGenreModel
+import strawberry_django
 
 
 @strawberry_django.filters.filter(AnimeGenreModel, lookups=True)

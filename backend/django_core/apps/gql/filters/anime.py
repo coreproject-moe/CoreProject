@@ -1,10 +1,10 @@
 from typing import TypeVar
 
-import strawberry_django
-import strawberry
 from apps.anime.models import AnimeModel
 from django.contrib.postgres.search import TrigramSimilarity
 from django.db.models.functions import Greatest
+import strawberry
+import strawberry_django
 
 from .anime_genre import AnimeGenreFilter
 from .anime_theme import AnimeThemeFilter

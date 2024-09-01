@@ -1,20 +1,17 @@
 from typing import cast
-from django.shortcuts import get_object_or_404
-from strawberry import Info
-from strawberry import UNSET
-from apps.anime.models import AnimeModel
 
-from django.http import Http404
-from apps.episodes.models import EpisodeModel
+from apps.anime.models import AnimeModel
 from apps.comments.models import CommentModel
+from apps.episodes.models import EpisodeModel
+from django.http import Http404
+from django.shortcuts import get_object_or_404
 import strawberry
+from strawberry import UNSET, Info
 import strawberry_django
 
-from ..types.comment import CommentType
-
 from ..input.comment import CommentInput
-
 from ..permissions import IsAuthenticated
+from ..types.comment import CommentType
 
 
 @strawberry.type

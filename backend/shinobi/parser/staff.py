@@ -1,6 +1,6 @@
 import datetime
-import re
 from io import BytesIO
+import re
 from typing import Any, TypedDict
 
 from dateutil import parser

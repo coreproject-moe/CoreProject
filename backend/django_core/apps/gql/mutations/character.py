@@ -1,13 +1,14 @@
+from typing import cast
+
+from apps.characters.models import CharacterModel
+from apps.gql.functions.dictionary import clean_dictionary
 import strawberry
 from strawberry import Info
 import strawberry_django
-from ..types.character import CharacterType
-from ..permissions import IsSuperUser
-from ..input.character import CharacterInput
-from apps.characters.models import CharacterModel
-from apps.gql.functions.dictionary import clean_dictionary
 
-from typing import cast
+from ..input.character import CharacterInput
+from ..permissions import IsSuperUser
+from ..types.character import CharacterType
 
 
 @strawberry.type

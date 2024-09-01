@@ -1,6 +1,7 @@
 import functools
-import re
 import json
+import re
+
 from django.conf import settings
 from django.contrib.admindocs.views import simplify_regex
 from django.core.exceptions import ViewDoesNotExist

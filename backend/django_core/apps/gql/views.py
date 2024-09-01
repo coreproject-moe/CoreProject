@@ -1,10 +1,13 @@
-from strawberry.django.views import GraphQLView as StrawberryDjangoGraphQLView
+from functools import cached_property
 from typing import Any
+
+from apps.user.models import CustomUser
 from django.contrib.auth.models import AnonymousUser
 from django.http import HttpRequest, HttpResponse
-from apps.user.models import CustomUser
+from strawberry.django.views import GraphQLView as StrawberryDjangoGraphQLView
+
 from .models import Token
-from functools import cached_property
+
 # Create your views here.
 
 

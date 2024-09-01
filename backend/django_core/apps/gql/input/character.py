@@ -1,7 +1,7 @@
-import strawberry_django
-from strawberry import auto
 from apps.characters.models import CharacterModel
+from strawberry import auto
 from strawberry.file_uploads import Upload
+import strawberry_django
 
 
 @strawberry_django.input(CharacterModel)

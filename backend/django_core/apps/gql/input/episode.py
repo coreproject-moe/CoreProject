@@ -1,8 +1,10 @@
-import strawberry_django
-from strawberry import auto
-from apps.episodes.models import EpisodeModel
-from .comment import CommentInput
 import datetime
+
+from apps.episodes.models import EpisodeModel
+from strawberry import auto
+import strawberry_django
+
+from .comment import CommentInput
 
 
 @strawberry_django.input(EpisodeModel)

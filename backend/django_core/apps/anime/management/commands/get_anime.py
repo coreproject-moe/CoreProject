@@ -1,5 +1,5 @@
-import sys
 from argparse import ArgumentParser
+import sys
 from typing import Any
 
 from apps.characters.models import CharacterModel

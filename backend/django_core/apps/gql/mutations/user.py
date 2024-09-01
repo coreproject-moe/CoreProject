@@ -1,17 +1,18 @@
-import strawberry
-from strawberry.types import Info
-import strawberry_django
+from typing import cast
 
-from ..types.token import TokenType
-from ..models import Token
-from ..permissions import IsAuthenticated
 from django.contrib.auth import (
     authenticate as django_authenticate,
     login as django_login,
     logout as django_logout,
 )
 from django.http.request import HttpRequest
-from typing import cast
+import strawberry
+from strawberry.types import Info
+import strawberry_django
+
+from ..models import Token
+from ..permissions import IsAuthenticated
+from ..types.token import TokenType
 
 
 @strawberry.type

@@ -1,5 +1,5 @@
-import strawberry_django
 from apps.comments.models import CommentModel
+import strawberry_django
 
 
 @strawberry_django.input(CommentModel)

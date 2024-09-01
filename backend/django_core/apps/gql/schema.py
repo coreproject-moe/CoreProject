@@ -1,21 +1,19 @@
+from apps.user.models import CustomUser
 import strawberry
+from strawberry.schema.config import StrawberryConfig
+import strawberry_django
 
-
-from .mutations.user import UserMutation
 from .mutations.anime import AnimeMutation
-from .mutations.comment import CommentMutation
 from .mutations.character import CharacterMutation
+from .mutations.comment import CommentMutation
 from .mutations.episode import EpisodeMutation
+from .mutations.user import UserMutation
 from .types.anime import AnimeType
 from .types.character import CharacterType
+from .types.comment import CommentType
 from .types.producer import ProducerType
 from .types.staff import StaffType
 from .types.user import UserType
-from .types.comment import CommentType
-import strawberry_django
-from strawberry.schema.config import StrawberryConfig
-
-from apps.user.models import CustomUser
 
 
 @strawberry.type

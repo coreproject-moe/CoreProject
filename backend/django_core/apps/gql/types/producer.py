@@ -1,6 +1,6 @@
-import strawberry_django
 from apps.producers.models import ProducerModel
 from strawberry import auto
+import strawberry_django
 
 from ..filters.producer import ProducerFilter
 

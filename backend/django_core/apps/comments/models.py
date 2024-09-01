@@ -4,7 +4,6 @@ from django.db import models
 from django_ltree.models import TreeModel
 from mixins.models.created_at import CreatedAtMixin
 
-
 # Create your models here.
 
 

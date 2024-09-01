@@ -1,7 +1,7 @@
-import strawberry_django
-from apps.comments.models import CommentModel
 from typing import TypeVar
 
+from apps.comments.models import CommentModel
+import strawberry_django
 
 T = TypeVar("T")
 

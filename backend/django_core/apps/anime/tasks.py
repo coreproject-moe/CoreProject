@@ -1,11 +1,11 @@
 import math
 
+from PIL import Image, ImageStat
 from celery import shared_task
 from django.core.management import call_command
 from django.db.models import Q
 from django.utils import timezone
 from modern_colorthief import get_color
-from PIL import Image, ImageStat
 from utilities.rgb_to_hex import rgb_to_hex
 
 from shinobi.builder.anime import AnimeBuilder

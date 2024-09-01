@@ -1,22 +1,19 @@
 from typing import cast
-from strawberry.types import Info
 
 from apps.anime.models import AnimeModel, AnimeNameSynonymModel
 from apps.anime.models.anime_genre import AnimeGenreModel
 from apps.anime.models.anime_theme import AnimeThemeModel
 from apps.characters.models import CharacterModel
+from apps.gql.functions.dictionary import clean_dictionary
 from apps.producers.models import ProducerModel
 from apps.staffs.models import StaffModel
-from apps.gql.functions.dictionary import clean_dictionary
-
 import strawberry
+from strawberry.types import Info
 import strawberry_django
 
-from ..types.anime import AnimeType
-
 from ..input.anime import AnimeInput
-
 from ..permissions import IsSuperUser
+from ..types.anime import AnimeType
 
 
 @strawberry.type

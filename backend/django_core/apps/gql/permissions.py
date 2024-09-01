@@ -1,7 +1,8 @@
 import typing
+
+from apps.user.models import CustomUser
 from strawberry.permission import BasePermission
 from strawberry.types import Info
-from apps.user.models import CustomUser
 
 
 class IsAuthenticated(BasePermission):

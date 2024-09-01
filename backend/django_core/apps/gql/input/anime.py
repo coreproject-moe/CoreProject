@@ -1,6 +1,6 @@
-import strawberry_django
-from strawberry import auto
 from apps.anime.models import AnimeModel
+from strawberry import auto
+import strawberry_django
 
 
 @strawberry_django.input(AnimeModel)

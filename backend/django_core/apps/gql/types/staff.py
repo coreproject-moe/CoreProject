@@ -1,7 +1,7 @@
 from apps.staffs.models import StaffAlternateNameModel, StaffModel
+import strawberry_django
 
 from ..filters.staff import StaffFilter
-import strawberry_django
 
 
 @strawberry_django.type(StaffAlternateNameModel)

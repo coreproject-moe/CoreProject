@@ -1,12 +1,12 @@
+from collections.abc import Iterator
 import hashlib
 import textwrap
-from collections.abc import Iterator
 
-import requests
 from django.core.management.utils import get_random_secret_key
 from django.core.validators import URLValidator
 from django.http import FileResponse, HttpRequest, HttpResponse, StreamingHttpResponse
 from django.shortcuts import render
+import requests
 
 from .models import CustomUser
 

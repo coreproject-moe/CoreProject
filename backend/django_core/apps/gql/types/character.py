@@ -1,5 +1,5 @@
-import strawberry_django
 from apps.characters.models import CharacterModel
+import strawberry_django
 
 from ..filters.character import CharacterFilter
 
