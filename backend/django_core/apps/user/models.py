@@ -12,7 +12,6 @@ from drf_spectacular.utils import extend_schema_field
 from drf_spectacular.types import OpenApiTypes
 from .managers import UserManager
 from .validators import username_validator
-from mixins.models.created_at import CreatedAtMixin
 
 avatar = FilePattern(filename_pattern="avatar/{uuid:s}{ext}")
 
@@ -20,7 +19,7 @@ avatar = FilePattern(filename_pattern="avatar/{uuid:s}{ext}")
 # Create your models here.
 
 
-class CustomUser(AbstractBaseUser, PermissionsMixin, CreatedAtMixin):
+class CustomUser(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(
         _("username"),
         max_length=150,
@@ -60,6 +59,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin, CreatedAtMixin):
             "Unselect this instead of deleting accounts."
         ),
     )
+    date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
 
     avatar = models.ImageField(
         upload_to=avatar,
