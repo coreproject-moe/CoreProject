@@ -3,7 +3,9 @@ import { join } from "path";
 import { electronApp, optimizer, is } from "@electron-toolkit/utils";
 import icon from "../../resources/icon.png?asset";
 import { Shiinobi as _Shiinobi, COMMANDS as SHIINOBI_COMMANDS } from "$interfaces/shiinobi";
-import ExpressWorder from "$workers/express_worker?nodeWorker";
+import ExpressWorder from "$workers/express?nodeWorker";
+import BackgroundWorker from "$workers/background?nodeWorker";
+
 import { express_port, EXPRESS_URLS } from "$interfaces/express_urls";
 
 const Shiinobi = new _Shiinobi();
@@ -70,7 +72,14 @@ app.whenReady().then(async () => {
 
 	ExpressWorder({ workerData: { port: express_port } })
 		.on("message", (message) => {
-			console.log(`\nMessage from worker: ${message}`);
+			console.log(`\nMessage from express worker: ${message}`);
+
+			// Start background worker after express starts
+			BackgroundWorker({ workerData: { port: express_port } })
+				.on("message", (message) => {
+					console.log(`\nMessage from background worker: ${message}`);
+				})
+				.postMessage("");
 		})
 		.postMessage("");
 

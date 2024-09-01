@@ -16,7 +16,19 @@ const COMMANDS = [
 	"get-myanimelist-specific-producer-information",
 	"get-myanimelist-specific-staff-information",
 	"get-myanimelist-staff-urls"
-];
+] as const;
+
+type Command = (typeof COMMANDS)[number];
+
+type ReplaceHyphens<T extends string> = T extends `${infer P1}-${infer P2}`
+	? `${P1}_${ReplaceHyphens<P2>}`
+	: T;
+
+type ShiinobiProperties = {
+	[K in Command as ReplaceHyphens<K>]: (id?: number) => Promise<any>;
+};
+
+interface Shiinobi extends ShiinobiProperties {}
 
 class Shiinobi {
 	constructor() {
@@ -40,7 +52,7 @@ class Shiinobi {
 		}
 	}
 
-	#spawn({ command, id }: { command: (typeof COMMANDS)[0]; id?: number }) {
+	#spawn({ command, id }: { command: Command; id?: number }) {
 		const _command: string[] = [command];
 		if (id) _command.push(String(id));
 
