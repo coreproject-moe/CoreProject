@@ -9,7 +9,7 @@ license = "AGPL-3.0-only"
 
 [tool.poetry.dependencies]
 python = ">=3.12,<3.13"
-django = {version = '>=5.0', extras = ['argon2']}
+django = {version = '>=5.1', extras = ['argon2']}
 # First Party ( Redis )
 # redis = {extras = ['hiredis'], version = ">=4.5.4"}
 # https://github.com/redis/hiredis-py/issues/172
