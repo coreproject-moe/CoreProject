@@ -95,10 +95,6 @@ INSTALLED_APPS = [
     # Tree
     "django_ltree",
     # Api
-    "rest_framework",
-    "rest_framework.authtoken",
-    "drf_spectacular",
-    "drf_spectacular_sidecar",
     "django_filters",
     # Crispy forms
     "crispy_forms",
@@ -120,19 +116,9 @@ INSTALLED_APPS = [
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-SILENCED_SYSTEM_CHECKS = [
-    "rest_framework.W001",
-]
+
 # Rest framework
-REST_FRAMEWORK = {
-    # YOUR SETTINGS
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework.authentication.TokenAuthentication",
-        "rest_framework.authentication.SessionAuthentication",
-    ),
-    "PAGE_SIZE": 100,
-}
+
 SPECTACULAR_SETTINGS = {
     "SWAGGER_UI_DIST": "SIDECAR",  # shorthand to use the sidecar instead
     "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
