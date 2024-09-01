@@ -5,12 +5,12 @@ import strawberry_django
 
 
 @strawberry_django.type(StaffAlternateNameModel)
-class StaffAlternateName:
+class StaffAlternateNameType:
     name: str
 
 
 @strawberry_django.type(StaffModel, filters=StaffFilter)
-class Staff:
+class StaffType:
     mal_id: int
     kitsu_id: int
     anilist_id: int
@@ -18,7 +18,7 @@ class Staff:
     name: str
     given_name: str
     family_name: str
-    alternate_names: StaffAlternateName
+    alternate_names: "StaffAlternateNameType"
 
     character_image: str
     about: str

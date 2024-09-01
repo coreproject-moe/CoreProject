@@ -7,7 +7,7 @@ from django.db.models import Count
 
 
 @strawberry_django.type(CommentModel, filters=CommentFilter)
-class Comment:
+class CommentType:
     user: auto
     text: auto
 

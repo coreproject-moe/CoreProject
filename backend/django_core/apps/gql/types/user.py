@@ -4,7 +4,7 @@ import strawberry_django
 
 
 @strawberry_django.type(CustomUser)
-class User:
+class UserType:
     username: auto
     email: auto
     first_name: auto

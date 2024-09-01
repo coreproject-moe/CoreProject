@@ -10,7 +10,7 @@ from apps.comments.models import CommentModel
 import strawberry
 import strawberry_django
 
-from ..types.comment import Comment
+from ..types.comment import CommentType
 
 from ..input.comment import CommentInput
 
@@ -23,7 +23,7 @@ class CommentMutation:
         permission_classes=[IsAuthenticated],
         extensions=[strawberry_django.permissions.IsAuthenticated()],
     )
-    def add_comments(self, info: Info, data: CommentInput) -> Comment:
+    def add_comments(self, info: Info, data: CommentInput) -> CommentType:
         serializer_data = {
             "user": info.context["user"],
             "text": data.text,
@@ -48,4 +48,4 @@ class CommentMutation:
             # Raise this only if user tries to input something that we dont support
             raise Http404
 
-        return cast(Comment, comment_instance)
+        return cast(CommentType, comment_instance)

@@ -6,7 +6,7 @@ from ..filters.producer import ProducerFilter
 
 
 @strawberry_django.type(ProducerModel, filters=ProducerFilter)
-class Producer:
+class ProducerType:
     mal_id: int
     kitsu_id: int
     anilist_id: int

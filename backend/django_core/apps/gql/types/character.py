@@ -5,7 +5,7 @@ from ..filters.character import CharacterFilter
 
 
 @strawberry_django.type(CharacterModel, filters=CharacterFilter)
-class Character:
+class CharacterType:
     mal_id: int
     kitsu_id: int
     anilist_id: int

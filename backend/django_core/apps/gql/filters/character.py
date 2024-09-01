@@ -1,6 +1,5 @@
 from typing import TypeVar
 
-import strawberry
 import strawberry_django
 from apps.characters.models import CharacterModel
 from django.contrib.postgres.search import TrigramSimilarity
