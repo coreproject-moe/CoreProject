@@ -7,6 +7,8 @@ from ..input.character import CharacterInput
 from apps.characters.models import CharacterModel
 from apps.gql.functions.dictionary import clean_dictionary
 
+from typing import cast
+
 
 @strawberry.type
 class CharacterMutation:
@@ -27,4 +29,4 @@ class CharacterMutation:
         model_data = clean_dictionary(dictionary=kwargs)
 
         instance = CharacterModel.objects.create(**model_data)
-        return instance
+        return cast(CharacterType, instance)

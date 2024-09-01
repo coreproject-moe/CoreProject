@@ -1,6 +1,6 @@
 from typing import cast
 from django.shortcuts import get_object_or_404
-from strawberry.types import Info
+from strawberry import Info
 from strawberry import UNSET
 from apps.anime.models import AnimeModel
 

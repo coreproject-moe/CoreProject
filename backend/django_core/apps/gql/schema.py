@@ -5,6 +5,7 @@ from .mutations.user import UserMutation
 from .mutations.anime import AnimeMutation
 from .mutations.comment import CommentMutation
 from .mutations.character import CharacterMutation
+from .mutations.episode import EpisodeMutation
 from .types.anime import AnimeType
 from .types.character import CharacterType
 from .types.producer import ProducerType
@@ -32,7 +33,13 @@ class Query:
 
 
 @strawberry.type
-class Mutation(AnimeMutation, UserMutation, CommentMutation, CharacterMutation): ...
+class Mutation(
+    AnimeMutation,
+    UserMutation,
+    CommentMutation,
+    CharacterMutation,
+    EpisodeMutation,
+): ...
 
 
 schema = strawberry.Schema(
