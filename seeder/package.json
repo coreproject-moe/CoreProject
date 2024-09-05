@@ -49,7 +49,7 @@
 		"autoprefixer": "^10.4.20",
 		"daisyui": "^4.12.10",
 		"electron": "^32.0.1",
-		"electron-builder": "^24.13.3",
+		"electron-builder": "^25.0.5",
 		"electron-vite": "^2.3.0",
 		"eslint": "^9.9.1",
 		"eslint-plugin-solid": "^0.14.3",
