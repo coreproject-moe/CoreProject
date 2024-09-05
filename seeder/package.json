@@ -39,7 +39,7 @@
 		"@eslint/js": "^9.9.1",
 		"@solid-primitives/event-dispatcher": "^0.0.107",
 		"@solidjs/router": "^0.14.3",
-		"@swc/core": "^1.7.22",
+		"@swc/core": "^1.7.23",
 		"@types/better-sqlite3": "^7.6.11",
 		"@types/cors": "^2.8.17",
 		"@types/diff": "^5.2.2",
