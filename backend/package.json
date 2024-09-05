@@ -60,7 +60,7 @@
         "easytimer.js": "^4.6.0",
         "highlight.js": "^11.10.0",
         "lightningcss": "^1.26.0",
-        "marked": "^14.1.0",
+        "marked": "^14.1.1",
         "marked-emoji": "^1.4.2",
         "marked-highlight": "^2.1.4",
         "marked-mangle": "^1.1.9",
