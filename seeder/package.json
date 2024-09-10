@@ -27,7 +27,7 @@
 		"cors": "^2.8.5",
 		"diff": "^7.0.0",
 		"electron-updater": "^6.3.4",
-		"express": "^4.19.2",
+		"express": "^4.20.0",
 		"local-devices": "^4.0.0"
 	},
 	"devDependencies": {
