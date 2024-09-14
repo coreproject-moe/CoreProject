@@ -1,3 +1,4 @@
+import re
 from functools import cached_property
 from typing import Any
 
@@ -9,17 +10,21 @@ from strawberry.django.views import GraphQLView as StrawberryDjangoGraphQLView
 from .models import Token
 
 # Create your views here.
+token_pattern = re.compile(r"^Bearer\s+(.+)$")
 
 
 class GraphQLView(StrawberryDjangoGraphQLView):
     @cached_property
     def get_user(self) -> CustomUser | AnonymousUser:
-        token = self.request.headers.get("Authorization", None)
-        try:
-            token_instance = Token.objects.get(token=token.split(" ")[-1])
-            return token_instance.user
-
-        except (Token.DoesNotExist, AttributeError):
+        token = self.request.headers.get("Authorization", "")
+        token_match = token_pattern.match(token)
+        if token_match:
+            try:
+                token_instance = Token.objects.get(token=token_match.group(1))
+                return token_instance.user
+            except Token.DoesNotExist:
+                return AnonymousUser
+        else:
             return AnonymousUser
 
     def get_context(self, request: HttpRequest, response: HttpResponse) -> Any:

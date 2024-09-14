@@ -19,12 +19,14 @@ from ..types.token import TokenType
 class UserMutation:
     @strawberry_django.mutation()
     def login(self, info: Info, username: str, password: str) -> TokenType | None:
-        request: HttpRequest = cast(HttpRequest, info.context["request"])
+        request = cast(HttpRequest, info.context["request"])
         user = django_authenticate(request, username=username, password=password)
         if user is not None:
             django_login(request, user)
             token, _ = Token.objects.get_or_create(user=user)
             return token
+        else:
+            return None
 
     @strawberry_django.mutation(permission_classes=[IsAuthenticated])
     def logout(self, info: Info, token: str) -> bool:

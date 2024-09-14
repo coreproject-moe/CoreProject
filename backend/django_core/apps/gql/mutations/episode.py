@@ -49,7 +49,6 @@ class EpisodeMutation:
         episode_instance = get_object_or_404(EpisodeModel, pk=data.episode_pk)
         episode_timestamp_instance = EpisodeTimestampModel.objects.create(**kwargs)
         episode_instance.episode_timestamps.add(episode_timestamp_instance)
-
         return True
 
     def add_comments(self, info: Info, data: Info):
