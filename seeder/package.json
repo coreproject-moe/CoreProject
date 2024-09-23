@@ -51,7 +51,7 @@
 		"electron": "^32.1.2",
 		"electron-builder": "^25.0.5",
 		"electron-vite": "^2.3.0",
-		"eslint": "^9.10.0",
+		"eslint": "^9.11.0",
 		"eslint-plugin-solid": "^0.14.3",
 		"postcss": "^8.4.47",
 		"prettier": "^3.3.2",
