@@ -83,7 +83,7 @@
         "zod": "^3.23.8"
     },
     "optionalDependencies": {
-        "@rollup/rollup-linux-x64-gnu": "4.21.3"
+        "@rollup/rollup-linux-x64-gnu": "4.22.4"
     },
     "engines": {
         "node": ">=21.5.0"
