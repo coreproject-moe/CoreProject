@@ -87,7 +87,7 @@ INSTALLED_APPS = [
     # 3rd Party Models
     "colorfield",
     # 3rd party adminpanel
-    "django_admin_hstore_widget",
+    "django_hstore_widget",
     # Block users
     "defender",
     # Tree
