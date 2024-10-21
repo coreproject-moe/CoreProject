@@ -45,7 +45,7 @@
 		"@types/diff": "^5.2.3",
 		"@types/express": "^5.0.0",
 		"@types/node": "^22.7.5",
-		"@typescript-eslint/eslint-plugin": "^8.9.0",
+		"@typescript-eslint/eslint-plugin": "^8.10.0",
 		"autoprefixer": "^10.4.20",
 		"daisyui": "^4.12.13",
 		"electron": "^32.2.0",
