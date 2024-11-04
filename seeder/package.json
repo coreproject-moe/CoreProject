@@ -42,7 +42,7 @@
 		"@swc/core": "^1.7.40",
 		"@types/better-sqlite3": "^7.6.11",
 		"@types/cors": "^2.8.17",
-		"@types/diff": "^5.2.3",
+		"@types/diff": "^6.0.0",
 		"@types/express": "^5.0.0",
 		"@types/node": "^22.8.1",
 		"@typescript-eslint/eslint-plugin": "^8.11.0",
