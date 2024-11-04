@@ -75,7 +75,7 @@ django-vite = "^3.0.5"
 # https://github.com/adamchainz/django-watchfiles/issues/12
 # django-watchfiles = "*"
 # Django
-django-browser-reload = "^1.12.1"
+django-browser-reload = "^1.17.0"
 django_debug_toolbar = "*"
 django_dbbackup = "*"
 django_cprofile_middleware = "*"

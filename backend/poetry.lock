@@ -581,18 +581,18 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 name = "django-browser-reload"
-version = "1.16.0"
+version = "1.17.0"
 description = "Automatically reload your browser in development."
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "django_browser_reload-1.16.0-py3-none-any.whl", hash = "sha256:abda653c5ac958cab8505a0d67b25a6935402d35036f8f47588594487648189c"},
-    {file = "django_browser_reload-1.16.0.tar.gz", hash = "sha256:2c8fc0f7e678dd5e03f78bedc96dd2efb363379a966e5de68308f3ab0fc8e61b"},
+    {file = "django_browser_reload-1.17.0-py3-none-any.whl", hash = "sha256:d372c12c1c5962c02279a53cac7e8a020c48f104592c637a06d0768b28d2d6be"},
+    {file = "django_browser_reload-1.17.0.tar.gz", hash = "sha256:3667939cde0eee1a6d698dbe3b78cf10b573dabc4e711fb7933f1ba91fb98da4"},
 ]
 
 [package.dependencies]
 asgiref = ">=3.6"
-django = ">=3.2"
+django = ">=4.2"
 
 [[package]]
 name = "django-cleanup"
@@ -2467,4 +2467,4 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.12,<3.14"
-content-hash = "aa0651ee1347a48e756307516ca7ffbd5e5cc1c0f66784b58129cecd2618c710"
+content-hash = "6021e9f0bcac9b73d59806070c2b928ad7a047bfe62fafd54a013eba4bc1ee3b"
