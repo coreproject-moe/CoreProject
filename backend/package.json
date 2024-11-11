@@ -47,7 +47,7 @@
         "tailwind-merge": "^2.5.4",
         "tailwind-scrollbar": "^3.1.0",
         "tailwindcss": "^3.4.14",
-        "vite": "^5.4.10",
+        "vite": "^5.4.11",
         "xss": "^1.0.15"
     },
     "devDependencies": {
