@@ -62,7 +62,7 @@
         "lightningcss": "^1.28.1",
         "marked": "^15.0.0",
         "marked-emoji": "^1.4.3",
-        "marked-highlight": "^2.2.0",
+        "marked-highlight": "^2.2.1",
         "marked-mangle": "^1.1.10",
         "marked-smartypants": "^1.1.9",
         "marked-xhtml": "^1.0.12",
