@@ -797,13 +797,13 @@ django = ">=4.2"
 
 [[package]]
 name = "django-ltree-2"
-version = "0.1.9"
+version = "0.1.10"
 description = "Continual of django-ltree"
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "django_ltree_2-0.1.9-py3-none-any.whl", hash = "sha256:2490c453d8afef1412d70dac77d61d8e2dbc8dde0ac3d8db8390736d51feba91"},
-    {file = "django_ltree_2-0.1.9.tar.gz", hash = "sha256:66e7f6a9d90cb1be004a9cdb2f80b45572a579ca61ca0693d6659c2d97b71d1e"},
+    {file = "django_ltree_2-0.1.10-py3-none-any.whl", hash = "sha256:1b3b51c5b97beda5254cdf0dcef83a5c4258c791e3b2b6c331d1e52a8b1dd6a2"},
+    {file = "django_ltree_2-0.1.10.tar.gz", hash = "sha256:1540aced6564429865b6330dfe7bbacbb3cedfdff3823b546859265117c9f048"},
 ]
 
 [package.dependencies]
@@ -2467,4 +2467,4 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.12,<3.14"
-content-hash = "6021e9f0bcac9b73d59806070c2b928ad7a047bfe62fafd54a013eba4bc1ee3b"
+content-hash = "59365defaaeb8b65d20acf5bad42a993782a3e2190f06aee45e82c47080a4627"
