@@ -66,7 +66,7 @@
         "marked-mangle": "^1.1.10",
         "marked-smartypants": "^1.1.9",
         "marked-xhtml": "^1.0.12",
-        "postcss": "^8.4.48",
+        "postcss": "^8.4.49",
         "postcss-load-config": "^6.0.1",
         "prettier": "^3.3.3",
         "prettier-plugin-svelte": "^3.2.8",
