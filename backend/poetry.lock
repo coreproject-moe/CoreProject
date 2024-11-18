@@ -768,13 +768,13 @@ typing-extensions = ">=3.7.4"
 
 [[package]]
 name = "django-hstore-widget"
-version = "0.0.13"
+version = "0.0.14"
 description = "Human friendly HStoreWidget. Continual of django-admin-hstore-widget."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "django_hstore_widget-0.0.13-py3-none-any.whl", hash = "sha256:f71758d688b44c314422b406a4233e9c1c631e324e0471e2f20898367f3361a9"},
-    {file = "django_hstore_widget-0.0.13.tar.gz", hash = "sha256:be43488be2bfb05f2a0198652138154b82960e714ee0c066e945f41473fa8bbf"},
+    {file = "django_hstore_widget-0.0.14-py3-none-any.whl", hash = "sha256:776b2b199d52ad75e67a7a96b9412d5530d5b31564b3d6cb612101a775c4265a"},
+    {file = "django_hstore_widget-0.0.14.tar.gz", hash = "sha256:2a2e7d62e12e0f594eedfc16a0448ca341385eb31438a41ac1090048a2980648"},
 ]
 
 [package.dependencies]
