@@ -71,7 +71,7 @@
         "prettier": "^3.3.3",
         "prettier-plugin-svelte": "^3.2.8",
         "prettier-plugin-tailwindcss": "^0.6.8",
-        "sass": "^1.80.6",
+        "sass": "^1.81.0",
         "svelte": "^5.2.3",
         "svelte-file-dropzone": "^2.0.9",
         "svelte-gestures": "^5.0.6",
