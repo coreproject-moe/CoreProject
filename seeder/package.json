@@ -52,7 +52,7 @@
 		"electron-builder": "^25.1.8",
 		"electron-vite": "^2.3.0",
 		"eslint": "^9.15.0",
-		"eslint-plugin-solid": "^0.14.3",
+		"eslint-plugin-solid": "^0.14.4",
 		"postcss": "^8.4.49",
 		"prettier": "^3.3.2",
 		"prettier-plugin-tailwindcss": "^0.6.8",
