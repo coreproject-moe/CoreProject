@@ -60,7 +60,7 @@
 		"tailwind-merge": "^2.5.5",
 		"tailwindcss": "^3.4.15",
 		"terser": "^5.36.0",
-		"typescript": "^5.6.3",
+		"typescript": "^5.7.2",
 		"vite": "^5.4.11",
 		"vite-plugin-solid": "^2.10.2",
 		"vite-plugin-solid-svg": "^0.8.1"
