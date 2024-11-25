@@ -70,7 +70,7 @@
         "postcss-load-config": "^6.0.1",
         "prettier": "^3.3.3",
         "prettier-plugin-svelte": "^3.3.2",
-        "prettier-plugin-tailwindcss": "^0.6.8",
+        "prettier-plugin-tailwindcss": "^0.6.9",
         "sass": "^1.81.0",
         "svelte": "^5.2.7",
         "svelte-file-dropzone": "^2.0.9",
