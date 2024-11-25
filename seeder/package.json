@@ -40,7 +40,7 @@
 		"@solid-primitives/event-dispatcher": "^0.0.107",
 		"@solidjs/router": "^0.15.1",
 		"@swc/core": "^1.9.3",
-		"@types/better-sqlite3": "^7.6.11",
+		"@types/better-sqlite3": "^7.6.12",
 		"@types/cors": "^2.8.17",
 		"@types/diff": "^6.0.0",
 		"@types/express": "^5.0.0",
