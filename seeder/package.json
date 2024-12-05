@@ -23,7 +23,7 @@
 	"dependencies": {
 		"@electron-toolkit/preload": "^3.0.1",
 		"@electron-toolkit/utils": "^3.0.0",
-		"better-sqlite3": "^11.5.0",
+		"better-sqlite3": "^11.6.0",
 		"cors": "^2.8.5",
 		"diff": "^7.0.0",
 		"electron-updater": "^6.3.9",
