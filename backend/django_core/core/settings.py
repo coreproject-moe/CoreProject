@@ -112,6 +112,7 @@ INSTALLED_APPS = [
     "apps.producers",
     "apps.staffs",
     "apps.episodes",
+    "apps.torrent",
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"

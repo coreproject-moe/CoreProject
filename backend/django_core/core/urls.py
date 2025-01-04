@@ -49,6 +49,9 @@ urlpatterns = [
     #   HTTP
     # =========
     path("user/", include("apps.user.urls")),
+    #   Torrents
+    # ============
+    path("torrent/", include("apps.torrent.urls")),
     #   API
     # ========
     path("api/v2/", include("apps.api.urls")),
