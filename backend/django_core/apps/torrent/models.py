@@ -14,3 +14,14 @@ class Peer(UpdatedAtMixin):
     ip = models.GenericIPAddressField()
     port = models.PositiveIntegerField()
     torrent = models.ForeignKey(Torrent, on_delete=models.CASCADE, related_name="peers")
+    is_seeding = models.BooleanField(default=False)
+
+    class Meta:
+        unique_together = (
+            "torrent",
+            "ip",
+            "port",
+        )
+
+    def __str__(self):
+        return f"{self.ip}:{self.port} - {'Seeding' if self.is_seeding else 'Leeching'}"
