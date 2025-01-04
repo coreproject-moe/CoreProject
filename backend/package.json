@@ -38,7 +38,7 @@
         "daisyui": "^4.12.23",
         "detect-browser": "^5.3.0",
         "html-entities": "^2.5.2",
-        "htmx.org": "^2.0.3",
+        "htmx.org": "^2.0.4",
         "json5": "^2.2.3",
         "lodash-es": "^4.17.21",
         "nprogress": "^0.2.0",
