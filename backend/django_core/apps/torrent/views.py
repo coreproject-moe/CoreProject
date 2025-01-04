@@ -48,7 +48,14 @@ class AnnounceView(APIView):
         instances = torrent.peers.all()
         serializer = PeerSerializer(instances, many=True)
 
-        output_data = bencodepy.bencode({"peers": serializer.data})
+        if isinstance(serializer.data, list):
+            data_dict = [dict(item) for item in serializer.data]
+        else:
+            data_dict = dict(serializer.data)
+
+        normal_output = {"peers": data_dict}
+        # print(normal_output)
+        output_data = bencodepy.bencode(normal_output)
         return Response(output_data)
 
 
