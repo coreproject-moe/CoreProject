@@ -34,7 +34,7 @@ def announce_view(request: HttpRequest) -> HttpResponse:
     peer_port = serializer.validated_data["port"]
 
     peer_ip = request.META.get("REMOTE_ADDR")
-    if _left := params.get("left", None) == 0:
+    if params.get("left", None) == 0:
         is_seeding = True
     else:
         is_seeding = False
@@ -55,16 +55,24 @@ def announce_view(request: HttpRequest) -> HttpResponse:
     timeout = now() - timedelta(minutes=settings.TORRENT_TIMEOUT)
     torrent.peers.filter(updated_at__lt=timeout).delete()
 
+    # Separate seeds and leeches based on downloaded data and seeding status
+    seeds = torrent.peers.filter(is_seeding=True)
+    leeches = torrent.peers.filter(is_seeding=False)
+
     # Serialize peers
-    instances = torrent.peers.all()
-    peer_serializer = PeerSerializer(instances, many=True)
+    peer_instances = torrent.peers.all()
+    peer_serializer = PeerSerializer(peer_instances, many=True)
 
     if isinstance(peer_serializer.data, list):
         data_dict = [dict(item) for item in peer_serializer.data]
     else:
         data_dict = dict(peer_serializer.data)
 
-    normal_output = {"peers": data_dict}
+    normal_output = {
+        "peers": data_dict,
+        "seeds": len(seeds),
+        "leeches": len(leeches),
+    }
 
     output_data = bencodepy.bencode(normal_output)
     return HttpResponse(output_data, content_type="text/plain")
