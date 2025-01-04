@@ -42,21 +42,15 @@ DEBUG = False if os.environ.get("DEBUG") else True
 # If you increase this make sure to run `migrations`
 DISCRIMINATOR_LENGTH = 4
 
+# Timeout Length for torrent
+
+TORRENT_TIMEOUT = 30 * 60  # 30 mins ( 3600 seconds )
 
 # Our Secret Keys
 MAL_CLIENT_ID = os.environ.get("MAL_CLIENT_ID")
 MAL_CLIENT_SECRET = os.environ.get("MAL_CLIENT_SECRET")
-# Stream SB
-STREAMSB_KEY = os.environ.get("STREAMSB_KEY")
-# Stream Tape
-STREAMTAPE_LOGIN = os.getenv("STREAMTAPE_LOGIN")
-STREAMTAPE_KEY = os.getenv("STREAMTAPE_KEY")
-STREAMTAPE_PARENT_FOLDER_ID = os.getenv("STREAMTAPE_PARENT_FOLDER_ID")
 
-
-# HOST configurations
 # We are using this to hyperlink model relations
-
 SITE_ADDRESS = os.environ.get("SITE_ADDRESS")
 
 # Application definition
@@ -112,6 +106,7 @@ INSTALLED_APPS = [
     "apps.producers",
     "apps.staffs",
     "apps.episodes",
+    "apps.torrent",
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
