@@ -58,7 +58,7 @@
         "autoprefixer": "^10.4.20",
         "date-fns": "^4.1.0",
         "easytimer.js": "^4.6.0",
-        "highlight.js": "^11.10.0",
+        "highlight.js": "^11.11.1",
         "lightningcss": "^1.28.2",
         "marked": "^15.0.4",
         "marked-emoji": "^1.4.3",
