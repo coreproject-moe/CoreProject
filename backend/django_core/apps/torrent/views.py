@@ -10,53 +10,57 @@ import bencodepy
 import hashlib
 from datetime import timedelta
 from http import HTTPStatus
-from django.http import HttpRequest
+from django.http import HttpRequest, HttpResponse
 from .helper import get_params
 import urllib.parse
+from django.views.decorators.http import require_http_methods
 
 
-class AnnounceView(APIView):
-    def get(self, request: HttpRequest):
-        params = get_params(request)  # what a shitty way to do things
-        data = {
-            "info_hash": urllib.parse.unquote_to_bytes(params["info_hash"]).hex(),
-            "port": params["port"],
-        }
+@require_http_methods(["GET"])
+def announce_view(request: HttpRequest) -> HttpResponse:
+    params = get_params(request)  # What a shitty way to do things
+    data = {
+        "info_hash": urllib.parse.unquote_to_bytes(params["info_hash"]).hex(),
+        "port": params["port"],
+    }
 
-        # Validate request data
-        serializer = AnnounceRequestSerializer(data=data)
-        serializer.is_valid(raise_exception=True)
-        info_hash = serializer.validated_data["info_hash"]
-        peer_port = serializer.validated_data["port"]
-        peer_ip = request.META.get("REMOTE_ADDR")
+    # Validate request data
+    serializer = AnnounceRequestSerializer(data=data)
+    if not serializer.is_valid():
+        return HttpResponse(status=400)  # Bad request if invalid data
 
-        torrent = get_object_or_404(Torrent, info_hash=info_hash)
+    info_hash = serializer.validated_data["info_hash"]
+    peer_port = serializer.validated_data["port"]
+    peer_ip = request.META.get("REMOTE_ADDR")
 
-        # Update or create peer
-        Peer.objects.update_or_create(
-            ip=peer_ip,
-            port=peer_port,
-            torrent=torrent,
-            defaults={"updated_at": now()},
-        )
+    # Fetch the torrent
+    torrent = get_object_or_404(Torrent, info_hash=info_hash)
 
-        # Remove stale peers
-        timeout = now() - timedelta(minutes=settings.TORRENT_TIMEOUT)
-        torrent.peers.filter(updated_at__lt=timeout).delete()
+    # Update or create the peer
+    Peer.objects.update_or_create(
+        ip=peer_ip,
+        port=peer_port,
+        torrent=torrent,
+        defaults={"updated_at": now()},
+    )
 
-        # Serialize peers
-        instances = torrent.peers.all()
-        serializer = PeerSerializer(instances, many=True)
+    # Remove stale peers
+    timeout = now() - timedelta(minutes=settings.TORRENT_TIMEOUT)
+    torrent.peers.filter(updated_at__lt=timeout).delete()
 
-        if isinstance(serializer.data, list):
-            data_dict = [dict(item) for item in serializer.data]
-        else:
-            data_dict = dict(serializer.data)
+    # Serialize peers
+    instances = torrent.peers.all()
+    peer_serializer = PeerSerializer(instances, many=True)
 
-        normal_output = {"peers": data_dict}
-        # print(normal_output)
-        output_data = bencodepy.bencode(normal_output)
-        return Response(output_data)
+    if isinstance(peer_serializer.data, list):
+        data_dict = [dict(item) for item in peer_serializer.data]
+    else:
+        data_dict = dict(peer_serializer.data)
+
+    normal_output = {"peers": data_dict}
+
+    output_data = bencodepy.bencode(normal_output)
+    return HttpResponse(output_data, content_type="text/plain")
 
 
 class TorrentView(APIView):
@@ -80,7 +84,9 @@ class TorrentView(APIView):
             torrent_data = bencodepy.decode(torrent_file.read())
         except Exception as e:
             return Response(
-                {"error": f"Failed to parse .torrent file: {str(e)}"},
+                {
+                    "error": f"Failed to parse .torrent file: {str(e)}",
+                },
                 status=HTTPStatus.BAD_REQUEST,
             )
 
