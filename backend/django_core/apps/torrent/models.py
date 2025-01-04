@@ -1,5 +1,6 @@
 from django.db import models
 from mixins.models.created_at import CreatedAtMixin
+from mixins.models.updated_at import UpdatedAtMixin
 
 # Create your models here.
 
@@ -9,8 +10,7 @@ class Torrent(CreatedAtMixin):
     info_hash = models.CharField(max_length=40, unique=True)
 
 
-class Peer(models.Model):
+class Peer(UpdatedAtMixin):
     ip = models.GenericIPAddressField()
     port = models.PositiveIntegerField()
     torrent = models.ForeignKey(Torrent, on_delete=models.CASCADE, related_name="peers")
-    last_seen = models.DateTimeField(auto_now=True)

@@ -20,9 +20,9 @@ class CommentReactionAPIView(APIView):
         comment_instance = get_object_or_404(CommentModel, pk=pk)
 
         if reaction_serailizer.is_valid(raise_exception=True):
-            reaction: Literal["upvote"] | Literal[
-                "downvote"
-            ] = reaction_serailizer.validated_data["reaction"]
+            reaction: Literal["upvote"] | Literal["downvote"] = (
+                reaction_serailizer.validated_data["reaction"]
+            )
 
             if reaction == "upvote":
                 comment_instance.downvotes.remove(request.user)

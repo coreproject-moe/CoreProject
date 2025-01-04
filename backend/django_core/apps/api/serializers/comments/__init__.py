@@ -9,6 +9,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.exceptions import ValidationError
 from drf_spectacular.utils import extend_schema_serializer
 
+
 @extend_schema_serializer()
 class UserSerializer(serializers.ModelSerializer):
     class Meta:

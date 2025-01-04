@@ -1,11 +1,11 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.exceptions import NotFound
 from django.utils.timezone import now
 from datetime import timedelta
-
+from django.conf import settings
 from .models import Torrent, Peer
 from .serializers import AnnounceRequestSerializer, PeerSerializer, TorrentSerializer
+from django.shortcuts import get_object_or_404
 
 
 class AnnounceView(APIView):
@@ -17,28 +17,26 @@ class AnnounceView(APIView):
         peer_port = serializer.validated_data["port"]
         peer_ip = request.META.get("REMOTE_ADDR")
 
-        try:
-            torrent = Torrent.objects.get(info_hash=info_hash)
-        except Torrent.DoesNotExist:
-            raise NotFound({"error": "Torrent not found"})
+        torrent = get_object_or_404(Torrent, info_hash=info_hash)
 
         # Update or create peer
         Peer.objects.update_or_create(
             ip=peer_ip,
             port=peer_port,
             torrent=torrent,
-            defaults={"last_seen": now()},
+            defaults={"updated_at": now()},
         )
 
         # Remove stale peers
-        timeout = now() - timedelta(minutes=30)
-        torrent.peers.filter(last_seen__lt=timeout).delete()
+        # TODO: Might be better to offload to celery
+        timeout = now() - timedelta(minutes=settings.TORRENT_TIMEOUT)
+        torrent.peers.filter(updated_at__lt=timeout).delete()
 
         # Serialize peers
-        peers = torrent.peers.all()
-        peers_data = PeerSerializer(peers, many=True).data
+        instances = torrent.peers.all()
+        serializer = PeerSerializer(instances, many=True)
 
-        return Response({"peers": peers_data})
+        return Response({"peers": serializer.data})
 
 
 class TorrentView(APIView):
