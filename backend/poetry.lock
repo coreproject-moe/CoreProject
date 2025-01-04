@@ -125,6 +125,16 @@ tests = ["cloudpickle", "hypothesis", "mypy (>=1.11.1)", "pympler", "pytest (>=4
 tests-mypy = ["mypy (>=1.11.1)", "pytest-mypy-plugins"]
 
 [[package]]
+name = "bencodepy"
+version = "0.9.5"
+description = "Bencode encoder/decoder written in Python 3 under the GPLv2."
+optional = false
+python-versions = "*"
+files = [
+    {file = "bencodepy-0.9.5.zip", hash = "sha256:af472134d73ea58edab3c2cb2f2cf61eb9d783908284c3d2d5b1cfd38df864b8"},
+]
+
+[[package]]
 name = "billiard"
 version = "4.2.1"
 description = "Python multiprocessing fork with improvements and bugfixes"
@@ -2473,4 +2483,4 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.12,<3.14"
-content-hash = "b417cfadf596d661c862b73ea1dc07b369dd72e1c19e4d6827aa4f8a1d8aac8e"
+content-hash = "218cc7384dae249cd2c0960a6a4acc5f99eae81e214ebb489556e5468879baed"

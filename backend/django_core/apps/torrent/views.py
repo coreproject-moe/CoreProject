@@ -1,11 +1,15 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser, FormParser
 from django.utils.timezone import now
-from datetime import timedelta
 from django.conf import settings
 from .models import Torrent, Peer
 from .serializers import AnnounceRequestSerializer, PeerSerializer, TorrentSerializer
 from django.shortcuts import get_object_or_404
+import bencodepy
+import hashlib
+from datetime import timedelta
+from http import HTTPStatus
 
 
 class AnnounceView(APIView):
@@ -28,7 +32,6 @@ class AnnounceView(APIView):
         )
 
         # Remove stale peers
-        # TODO: Might be better to offload to celery
         timeout = now() - timedelta(minutes=settings.TORRENT_TIMEOUT)
         torrent.peers.filter(updated_at__lt=timeout).delete()
 
@@ -40,18 +43,38 @@ class AnnounceView(APIView):
 
 
 class TorrentView(APIView):
+    parser_classes = [MultiPartParser, FormParser]  # Handle file upload
+
     def get(self, request):
         torrents = Torrent.objects.all()
         serializer = TorrentSerializer(torrents, many=True)
         return Response(serializer.data)
 
     def post(self, request):
-        serializer = TorrentSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        # Ensure file is present
+        torrent_file = request.FILES.get("torrent_file")
+        if not torrent_file:
+            return Response(
+                {"error": "No .torrent file provided."}, status=HTTPStatus.BAD_REQUEST
+            )
 
+        # Parse the .torrent file
+        try:
+            torrent_data = bencodepy.decode(torrent_file.read())
+        except Exception as e:
+            return Response(
+                {"error": f"Failed to parse .torrent file: {str(e)}"},
+                status=HTTPStatus.BAD_REQUEST,
+            )
+
+        # Extract info_hash and name from the torrent data
+        info_hash = hashlib.sha1(bencodepy.encode(torrent_data["info"])).hexdigest()
+        name = torrent_data["info"].get("name", "Unknown")
+
+        # Check if torrent already exists
         torrent, created = Torrent.objects.get_or_create(
-            info_hash=serializer.validated_data["info_hash"],
-            defaults={"name": serializer.validated_data["name"]},
+            info_hash=info_hash,
+            defaults={"name": name},
         )
 
         return Response({"id": torrent.id, "created": created})
