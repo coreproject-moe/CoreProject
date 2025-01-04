@@ -6,7 +6,7 @@ from mixins.models.updated_at import UpdatedAtMixin
 
 
 class Torrent(CreatedAtMixin):
-    name = models.CharField(max_length=255)
+    name = models.TextField()
     info_hash = models.CharField(unique=True)
 
 
@@ -14,14 +14,16 @@ class Peer(UpdatedAtMixin):
     ip = models.GenericIPAddressField()
     port = models.PositiveIntegerField()
     torrent = models.ForeignKey(Torrent, on_delete=models.CASCADE, related_name="peers")
-    is_seeding = models.BooleanField(default=False)
+    is_seeding = models.BooleanField()
+    peer_id = models.TextField()
 
     class Meta:
         unique_together = (
             "torrent",
             "ip",
             "port",
+            "peer_id",
         )
 
     def __str__(self):
-        return f"{self.ip}:{self.port} - {'Seeding' if self.is_seeding else 'Leeching'}"
+        return f"{self.ip}:{self.port} - {self.peer_id} - {'Seeding' if self.is_seeding else 'Leeching'}"

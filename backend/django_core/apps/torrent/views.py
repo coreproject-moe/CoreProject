@@ -22,16 +22,22 @@ def announce_view(request: HttpRequest) -> HttpResponse:
     data = {
         "info_hash": urllib.parse.unquote_to_bytes(params["info_hash"]).hex(),
         "port": params["port"],
+        "peer_id": params["peer_id"],
     }
 
     # Validate request data
     serializer = AnnounceRequestSerializer(data=data)
     if not serializer.is_valid():
-        return HttpResponse(status=400)  # Bad request if invalid data
+        return HttpResponse(serializer.errors, status=HTTPStatus.BAD_REQUEST)
 
     info_hash = serializer.validated_data["info_hash"]
     peer_port = serializer.validated_data["port"]
+
     peer_ip = request.META.get("REMOTE_ADDR")
+    if _left := params.get("left", None) == 0:
+        is_seeding = True
+    else:
+        is_seeding = False
 
     # Fetch the torrent
     torrent = get_object_or_404(Torrent, info_hash=info_hash)
@@ -41,6 +47,7 @@ def announce_view(request: HttpRequest) -> HttpResponse:
         ip=peer_ip,
         port=peer_port,
         torrent=torrent,
+        is_seeding=is_seeding,
         defaults={"updated_at": now()},
     )
 
