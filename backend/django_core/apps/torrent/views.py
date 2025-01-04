@@ -11,23 +11,25 @@ import hashlib
 from datetime import timedelta
 from http import HTTPStatus
 from django.http import HttpRequest
-from urllib.parse import unquote_to_bytes
+from .helper import get_params
+import urllib.parse
 
 
 class AnnounceView(APIView):
     def get(self, request: HttpRequest):
+        params = get_params(request)  # what a shitty way to do things
         data = {
-            "info_hash": unquote_to_bytes(request.query_params.get("info_hash")).hex(),
-            "port": request.query_params["port"],
+            "info_hash": urllib.parse.unquote_to_bytes(params["info_hash"]).hex(),
+            "port": params["port"],
         }
-        print(data)
+
         # Validate request data
         serializer = AnnounceRequestSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         info_hash = serializer.validated_data["info_hash"]
         peer_port = serializer.validated_data["port"]
         peer_ip = request.META.get("REMOTE_ADDR")
-        print(serializer.validated_data)
+
         torrent = get_object_or_404(Torrent, info_hash=info_hash)
 
         # Update or create peer
@@ -46,7 +48,8 @@ class AnnounceView(APIView):
         instances = torrent.peers.all()
         serializer = PeerSerializer(instances, many=True)
 
-        return Response({"peers": serializer.data})
+        output_data = bencodepy.bencode({"peers": serializer.data})
+        return Response(output_data)
 
 
 class TorrentView(APIView):
@@ -65,7 +68,7 @@ class TorrentView(APIView):
                 {"error": "No .torrent file provided."}, status=HTTPStatus.BAD_REQUEST
             )
 
-        # Parse the .torrent file
+        # Parse the .torrent file using bencode.py
         try:
             torrent_data = bencodepy.decode(torrent_file.read())
         except Exception as e:
@@ -74,16 +77,20 @@ class TorrentView(APIView):
                 status=HTTPStatus.BAD_REQUEST,
             )
 
+        # Extract 'info' dictionary from the bencoded torrent data
         torrent_info = torrent_data[b"info"]
+
         # Extract info_hash and name from the torrent data
         info_hash = hashlib.sha1(bencodepy.encode(torrent_info)).hexdigest()
         name = torrent_info.get(b"name", b"Unknown").decode()
 
-        # Check if torrent already exists
+        # Check if torrent already exists, if not create it
         torrent, created = Torrent.objects.get_or_create(
             info_hash=info_hash,
             defaults={"name": name},
         )
 
+        # Create magnet URI
         magnet_uri = f"magnet:?xt=urn:btih:{info_hash}&dn={name}"
+
         return Response({"id": torrent.id, "created": created, "magneturi": magnet_uri})

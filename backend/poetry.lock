@@ -125,13 +125,14 @@ tests = ["cloudpickle", "hypothesis", "mypy (>=1.11.1)", "pympler", "pytest (>=4
 tests-mypy = ["mypy (>=1.11.1)", "pytest-mypy-plugins"]
 
 [[package]]
-name = "bencodepy"
-version = "0.9.5"
-description = "Bencode encoder/decoder written in Python 3 under the GPLv2."
+name = "bencode-py"
+version = "4.0.0"
+description = "Simple bencode parser (for Python 2, Python 3 and PyPy)"
 optional = false
 python-versions = "*"
 files = [
-    {file = "bencodepy-0.9.5.zip", hash = "sha256:af472134d73ea58edab3c2cb2f2cf61eb9d783908284c3d2d5b1cfd38df864b8"},
+    {file = "bencode.py-4.0.0-py2.py3-none-any.whl", hash = "sha256:99c06a55764e85ffe81622fdf9ee78bd737bad3ea61d119784a54bb28860d962"},
+    {file = "bencode.py-4.0.0.tar.gz", hash = "sha256:2a24ccda1725a51a650893d0b63260138359eaa299bb6e7a09961350a2a6e05c"},
 ]
 
 [[package]]
@@ -2483,4 +2484,4 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.12,<3.14"
-content-hash = "218cc7384dae249cd2c0960a6a4acc5f99eae81e214ebb489556e5468879baed"
+content-hash = "02230752b59bbad9b334846229b1bf097e2c94dbe1b39416a6011866e06739a8"
