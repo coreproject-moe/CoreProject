@@ -7,7 +7,7 @@ class PeerSerializer(serializers.Serializer):
 
 
 class AnnounceRequestSerializer(serializers.Serializer):
-    info_hash = serializers.CharField(max_length=40)
+    info_hash = serializers.CharField()
     port = serializers.IntegerField()
 
 

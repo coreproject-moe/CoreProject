@@ -7,7 +7,7 @@ from mixins.models.updated_at import UpdatedAtMixin
 
 class Torrent(CreatedAtMixin):
     name = models.CharField(max_length=255)
-    info_hash = models.CharField(max_length=40, unique=True)
+    info_hash = models.CharField(unique=True)
 
 
 class Peer(UpdatedAtMixin):

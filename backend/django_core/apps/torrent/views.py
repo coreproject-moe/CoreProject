@@ -10,17 +10,24 @@ import bencodepy
 import hashlib
 from datetime import timedelta
 from http import HTTPStatus
+from django.http import HttpRequest
+from urllib.parse import unquote_to_bytes
 
 
 class AnnounceView(APIView):
-    def get(self, request):
+    def get(self, request: HttpRequest):
+        data = {
+            "info_hash": unquote_to_bytes(request.query_params.get("info_hash")).hex(),
+            "port": request.query_params["port"],
+        }
+        print(data)
         # Validate request data
-        serializer = AnnounceRequestSerializer(data=request.query_params)
+        serializer = AnnounceRequestSerializer(data=data)
         serializer.is_valid(raise_exception=True)
         info_hash = serializer.validated_data["info_hash"]
         peer_port = serializer.validated_data["port"]
         peer_ip = request.META.get("REMOTE_ADDR")
-
+        print(serializer.validated_data)
         torrent = get_object_or_404(Torrent, info_hash=info_hash)
 
         # Update or create peer
@@ -67,9 +74,10 @@ class TorrentView(APIView):
                 status=HTTPStatus.BAD_REQUEST,
             )
 
+        torrent_info = torrent_data[b"info"]
         # Extract info_hash and name from the torrent data
-        info_hash = hashlib.sha1(bencodepy.encode(torrent_data["info"])).hexdigest()
-        name = torrent_data["info"].get("name", "Unknown")
+        info_hash = hashlib.sha1(bencodepy.encode(torrent_info)).hexdigest()
+        name = torrent_info.get(b"name", b"Unknown").decode()
 
         # Check if torrent already exists
         torrent, created = Torrent.objects.get_or_create(
@@ -77,4 +85,5 @@ class TorrentView(APIView):
             defaults={"name": name},
         )
 
-        return Response({"id": torrent.id, "created": created})
+        magnet_uri = f"magnet:?xt=urn:btih:{info_hash}&dn={name}"
+        return Response({"id": torrent.id, "created": created, "magneturi": magnet_uri})
