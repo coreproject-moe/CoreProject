@@ -25,7 +25,6 @@ def announce_view(request: HttpRequest) -> HttpResponse:
         "peer_id": params["peer_id"],
         "left": params["left"],
     }
-
     # Validate request data
     serializer = AnnounceRequestSerializer(data=data)
     if not serializer.is_valid():
@@ -56,7 +55,7 @@ def announce_view(request: HttpRequest) -> HttpResponse:
     )
 
     # Remove stale peers
-    timeout = now() - timedelta(minutes=settings.TORRENT_TIMEOUT)
+    timeout = now() - timedelta(seconds=settings.TORRENT_TIMEOUT)
     torrent.peers.filter(updated_at__lt=timeout).delete()
 
     seeds = torrent.peers.filter(is_seeding=True)
@@ -76,7 +75,7 @@ def announce_view(request: HttpRequest) -> HttpResponse:
 
     normal_output = {
         "peers": data_dict,
-        "min interval": settings.TORRENT_TIMEOUT,
+        "min interval": 60,
         "complete": len(seeds),
         "incomplete": len(leeches),
     }
