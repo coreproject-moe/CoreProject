@@ -76,8 +76,9 @@ def announce_view(request: HttpRequest) -> HttpResponse:
 
     normal_output = {
         "peers": data_dict,
-        "seeds": len(seeds),
-        "leeches": len(leeches),
+        "min interval": settings.TORRENT_TIMEOUT,
+        "complete": len(seeds),
+        "incomplete": len(leeches),
     }
     output_data = bencodepy.bencode(normal_output)
     return HttpResponse(output_data, content_type="text/plain")
