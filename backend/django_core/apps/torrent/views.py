@@ -14,44 +14,57 @@ from django.http import HttpRequest, HttpResponse
 from .helper import get_params
 import urllib.parse
 from django.views.decorators.http import require_http_methods
+from django.http import JsonResponse
 
 
-@require_http_methods(["GET"])
-def announce_view(request: HttpRequest) -> HttpResponse:
-    params = get_params(request)  # What a shitty way to do things
+@require_http_methods(["GET", "POST"])
+def announce_view(request: HttpRequest):
+    # Get parameters for WebRTC or HTTP-based peer
+    params = get_params(request)
     data = {
         "info_hash": urllib.parse.unquote_to_bytes(params["info_hash"]).hex(),
-        "port": params["port"],
+        "port": params.get("port"),
         "peer_id": params["peer_id"],
         "left": params["left"],
+        "peer_ip": request.META.get("REMOTE_ADDR"),
     }
+
+    if request.method == "POST":
+        # Handle WebRTC signaling data
+        data["sdp"] = params.get("sdp")
+        data["candidate"] = params.get("candidate")
+
     # Validate request data
     serializer = AnnounceRequestSerializer(data=data)
     if not serializer.is_valid():
         return HttpResponse(serializer.errors, status=HTTPStatus.BAD_REQUEST)
 
-    peer_ip = request.META.get("REMOTE_ADDR")
     info_hash = serializer.validated_data["info_hash"]
-    peer_port = serializer.validated_data["port"]
     peer_id = serializer.validated_data["peer_id"]
+    peer_ip = serializer.validated_data["peer_ip"]
     left = serializer.validated_data["left"]
 
-    if left == 0:
-        is_seeding = True
-    else:
-        is_seeding = False
+    is_seeding = left == 0
 
     # Fetch the torrent
     torrent = get_object_or_404(Torrent, info_hash=info_hash)
 
     # Update or create the peer
+    peer_data = {
+        "ip": peer_ip,
+        "peer_id": peer_id,
+        "is_seeding": is_seeding,
+        "updated_at": now(),
+    }
+    if "sdp" in data:
+        peer_data["sdp"] = data["sdp"]
+    if "candidate" in data:
+        peer_data["candidate"] = data["candidate"]
+
     Peer.objects.update_or_create(
         ip=peer_ip,
-        port=peer_port,
         torrent=torrent,
-        is_seeding=is_seeding,
-        peer_id=peer_id,
-        defaults={"updated_at": now()},
+        defaults=peer_data,
     )
 
     # Remove stale peers
@@ -61,26 +74,36 @@ def announce_view(request: HttpRequest) -> HttpResponse:
     seeds = torrent.peers.filter(is_seeding=True)
     leeches = torrent.peers.filter(is_seeding=False)
 
-    if numwant := params.get("numwant", None):
-        peer_instances = torrent.peers.all()[: int(numwant)]
-    else:
-        peer_instances = torrent.peers.all()
+    # Select peers to return
+    numwant = int(params.get("numwant", 50))
+    selected_peers = torrent.peers.all()[:numwant]
 
-    peer_serializer = PeerSerializer(peer_instances, many=True)
+    # Serialize selected peers
+    peer_serializer = PeerSerializer(selected_peers, many=True)
+    response_peers = []
+    for peer in peer_serializer.data:
+        peer_info = {
+            "peer_id": peer["peer_id"],
+            "ip": peer["ip"],
+            "port": peer["port"],
+        }
+        if "sdp" in peer:
+            peer_info["sdp"] = peer["sdp"]
+        if "candidate" in peer:
+            peer_info["candidate"] = peer["candidate"]
+        response_peers.append(peer_info)
 
-    if isinstance(peer_serializer.data, list):
-        data_dict = [dict(item) for item in peer_serializer.data]
-    else:
-        data_dict = dict(peer_serializer.data)
-
-    normal_output = {
-        "peers": data_dict,
-        "min interval": 60,
-        "complete": len(seeds),
-        "incomplete": len(leeches),
+    response_data = {
+        "interval": 60,
+        "complete": seeds.count(),
+        "incomplete": leeches.count(),
+        "peers": response_peers,
     }
-    output_data = bencodepy.bencode(normal_output)
-    return HttpResponse(output_data, content_type="text/plain")
+
+    if request.method == "GET":
+        return JsonResponse(response_data)
+    elif request.method == "POST":
+        return JsonResponse({"status": "success", "message": "Peer updated or added."})
 
 
 class TorrentView(APIView):

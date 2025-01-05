@@ -16,6 +16,8 @@ class Peer(UpdatedAtMixin):
     torrent = models.ForeignKey(Torrent, on_delete=models.CASCADE, related_name="peers")
     is_seeding = models.BooleanField()
     peer_id = models.TextField()
+    sdp = models.TextField(null=True, blank=True)
+    candidate = models.TextField(null=True, blank=True)
 
     class Meta:
         unique_together = (
