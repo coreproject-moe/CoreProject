@@ -24,16 +24,18 @@ def announce_view(request: HttpRequest) -> HttpResponse:
         "port": params["port"],
         "peer_id": params["peer_id"],
         "left": params["left"],
+        "peer_ip": request.META.get("REMOTE_ADDR"),
     }
+
     # Validate request data
     serializer = AnnounceRequestSerializer(data=data)
     if not serializer.is_valid():
         return HttpResponse(serializer.errors, status=HTTPStatus.BAD_REQUEST)
 
-    peer_ip = request.META.get("REMOTE_ADDR")
     info_hash = serializer.validated_data["info_hash"]
     peer_port = serializer.validated_data["port"]
     peer_id = serializer.validated_data["peer_id"]
+    peer_ip = serializer.validated_data["peer_ip"]
     left = serializer.validated_data["left"]
 
     if left == 0:
