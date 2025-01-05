@@ -23,6 +23,7 @@ def announce_view(request: HttpRequest) -> HttpResponse:
         "info_hash": urllib.parse.unquote_to_bytes(params["info_hash"]).hex(),
         "port": params["port"],
         "peer_id": params["peer_id"],
+        "left": params["left"],
     }
 
     # Validate request data
@@ -30,11 +31,13 @@ def announce_view(request: HttpRequest) -> HttpResponse:
     if not serializer.is_valid():
         return HttpResponse(serializer.errors, status=HTTPStatus.BAD_REQUEST)
 
+    peer_ip = request.META.get("REMOTE_ADDR")
     info_hash = serializer.validated_data["info_hash"]
     peer_port = serializer.validated_data["port"]
+    peer_id = serializer.validated_data["peer_id"]
+    left = serializer.validated_data["left"]
 
-    peer_ip = request.META.get("REMOTE_ADDR")
-    if params.get("left", None) == 0:
+    if left == 0:
         is_seeding = True
     else:
         is_seeding = False
@@ -48,6 +51,7 @@ def announce_view(request: HttpRequest) -> HttpResponse:
         port=peer_port,
         torrent=torrent,
         is_seeding=is_seeding,
+        peer_id=peer_id,
         defaults={"updated_at": now()},
     )
 
@@ -55,12 +59,14 @@ def announce_view(request: HttpRequest) -> HttpResponse:
     timeout = now() - timedelta(minutes=settings.TORRENT_TIMEOUT)
     torrent.peers.filter(updated_at__lt=timeout).delete()
 
-    # Separate seeds and leeches based on downloaded data and seeding status
     seeds = torrent.peers.filter(is_seeding=True)
     leeches = torrent.peers.filter(is_seeding=False)
 
-    # Serialize peers
-    peer_instances = torrent.peers.all()
+    if numwant := params.get("numwant", None):
+        peer_instances = torrent.peers.all()[: int(numwant)]
+    else:
+        peer_instances = torrent.peers.all()
+
     peer_serializer = PeerSerializer(peer_instances, many=True)
 
     if isinstance(peer_serializer.data, list):
@@ -73,7 +79,6 @@ def announce_view(request: HttpRequest) -> HttpResponse:
         "seeds": len(seeds),
         "leeches": len(leeches),
     }
-
     output_data = bencodepy.bencode(normal_output)
     return HttpResponse(output_data, content_type="text/plain")
 
@@ -109,7 +114,7 @@ class TorrentView(APIView):
         torrent_info = torrent_data[b"info"]
 
         # Extract info_hash and name from the torrent data
-        info_hash = hashlib.sha1(bencodepy.encode(torrent_info)).hexdigest()
+        info_hash = hashlib.sha1(bencodepy.bencode(torrent_info)).hexdigest()
         name = torrent_info.get(b"name", b"Unknown").decode()
 
         # Check if torrent already exists, if not create it
