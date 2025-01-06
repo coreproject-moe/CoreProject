@@ -7,10 +7,11 @@ class PeerSerializer(serializers.Serializer):
 
 
 class AnnounceRequestSerializer(serializers.Serializer):
-    info_hash = serializers.CharField()
-    port = serializers.IntegerField()
+    info_hash = serializers.CharField(max_length=20)
+    port = serializers.IntegerField(min_value=0, max_value=65535)
     peer_id = serializers.CharField()
     left = serializers.IntegerField()
+    peer_ip = serializers.IPAddressField()
 
 
 class TorrentSerializer(serializers.Serializer):
