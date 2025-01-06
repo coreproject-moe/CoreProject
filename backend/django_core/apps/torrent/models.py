@@ -24,7 +24,6 @@ class Peer(UpdatedAtMixin):
             "torrent",
             "ip",
             "port",
-            "peer_id",
         )
 
     def __str__(self):

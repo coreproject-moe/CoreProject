@@ -37,11 +37,12 @@ def announce_view(request: HttpRequest):
     # Validate request data
     serializer = AnnounceRequestSerializer(data=data)
     if not serializer.is_valid():
-        return HttpResponse(serializer.errors, status=HTTPStatus.BAD_REQUEST)
+        return HttpResponse(serializer.error_messages, status=HTTPStatus.BAD_REQUEST)
 
     info_hash = serializer.validated_data["info_hash"]
     peer_id = serializer.validated_data["peer_id"]
     peer_ip = serializer.validated_data["peer_ip"]
+    peer_port = serializer.validated_data["port"]
     left = serializer.validated_data["left"]
 
     is_seeding = left == 0
@@ -52,6 +53,7 @@ def announce_view(request: HttpRequest):
     # Update or create the peer
     peer_data = {
         "ip": peer_ip,
+        "port": peer_port,
         "peer_id": peer_id,
         "is_seeding": is_seeding,
         "updated_at": now(),
