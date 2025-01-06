@@ -14,7 +14,7 @@ from django.http import HttpRequest, HttpResponse
 from .helper import get_params
 import urllib.parse
 from django.views.decorators.http import require_http_methods
-from django.http import JsonResponse
+from .response import BencodeResponse
 
 
 @require_http_methods(["GET", "POST"])
@@ -101,9 +101,9 @@ def announce_view(request: HttpRequest):
     }
 
     if request.method == "GET":
-        return JsonResponse(response_data)
+        return BencodeResponse(response_data)
     elif request.method == "POST":
-        return JsonResponse({"status": "success", "message": "Peer updated or added."})
+        return BencodeResponse({"status": "success", "message": "Peer updated or added."})
 
 
 class TorrentView(APIView):

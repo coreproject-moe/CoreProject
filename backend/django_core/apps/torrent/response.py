@@ -5,4 +5,4 @@ import bencodepy
 class BencodeResponse(HttpResponse):
     def __init__(self, data, **kwargs):
         data = bencodepy.bencode(data)
-        super().__init__(content=data, **kwargs)
+        super().__init__(content=data, content_type="text/plain", **kwargs)
