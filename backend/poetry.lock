@@ -873,13 +873,13 @@ typing-extensions = "*"
 
 [[package]]
 name = "django-vite"
-version = "3.0.5"
+version = "3.0.6"
 description = "Integration of Vite in a Django project."
 optional = false
 python-versions = "*"
 files = [
-    {file = "django_vite-3.0.5-py3-none-any.whl", hash = "sha256:049b74f38c999cbfcf0e2c21b254c2e059bb97bfd7e4049caf2d0f9fba0b482f"},
-    {file = "django_vite-3.0.5.tar.gz", hash = "sha256:431c1212e7627adc20666d150578f1a8983f043e90f3905778fb3c5c0ffe6963"},
+    {file = "django_vite-3.0.6-py3-none-any.whl", hash = "sha256:3ad3716e2afe4569353cda8080f557bac37a5b29ab7a5826d5defd67bfbe8e72"},
+    {file = "django_vite-3.0.6.tar.gz", hash = "sha256:363ca9fd774eb228b27f710a9179c68f61e27bb95b41b1f790ee5a0a0e215b14"},
 ]
 
 [package.dependencies]
@@ -2484,4 +2484,4 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.12,<3.14"
-content-hash = "02230752b59bbad9b334846229b1bf097e2c94dbe1b39416a6011866e06739a8"
+content-hash = "0fa4abd00f529026b18b15c1fa2d3bfb65e9612d7db2a0bf10007e84b8c4b932"
