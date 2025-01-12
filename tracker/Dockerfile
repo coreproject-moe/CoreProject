@@ -1,5 +1,7 @@
 FROM python:3.13-alpine AS builder
 
+ENV PATH="/root/.local/bin:$PATH"
+
 # Install system dependencies
 RUN apk update && apk add --no-cache curl gcc musl-dev
 

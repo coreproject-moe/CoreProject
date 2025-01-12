@@ -6,7 +6,6 @@ authors = [
     { name = "baseplate-admin", email = "61817579+baseplate-admin@users.noreply.github.com" },
 ]
 requires-python = ">=3.13"
-license = "AGPL-v3"
 dependencies = [
     "twisted>=24.11.0,<25",
     "autobahn[twisted]>=24.4.2,<25",
