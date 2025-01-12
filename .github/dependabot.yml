@@ -8,22 +8,17 @@ updates:
     # Backend
     # =======
     - package-ecosystem: pip
-      directory: /backend/
+      directory: /packages/backend/
       schedule:
           interval: weekly
       open-pull-requests-limit: 100
 
-    # Backend (nodejs)
-    - package-ecosystem: npm
-      directory: /backend/
-      schedule:
-          interval: weekly
-      open-pull-requests-limit: 100
+
 
     # Seeder
     # =======
     - package-ecosystem: npm
-      directory: /seeder/
+      directory: /packages/seeder/
       schedule:
           interval: weekly
       open-pull-requests-limit: 100
@@ -32,7 +27,7 @@ updates:
     # Seeder
     # =======
     - package-ecosystem: pip
-      directory: /tools/seeder/
+      directory: /packages/tools/seeder/
       schedule:
           interval: weekly
       open-pull-requests-limit: 100
@@ -40,11 +35,12 @@ updates:
     # Bots
     # =====
     - package-ecosystem: pip
-      directory: /bots/discord/
+      directory: /packages/bots/discord/
       schedule:
           interval: weekly
       open-pull-requests-limit: 100
 
+    
     #Frontend
     #- package-ecosystem: 'npm'
     #  directory: '/frontend'
