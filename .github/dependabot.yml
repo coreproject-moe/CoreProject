@@ -35,7 +35,7 @@ updates:
     # Bots
     # =====
     - package-ecosystem: pip
-      directory: /packages/bots/discord/
+      directory: /packages/discord/
       schedule:
           interval: weekly
       open-pull-requests-limit: 100
