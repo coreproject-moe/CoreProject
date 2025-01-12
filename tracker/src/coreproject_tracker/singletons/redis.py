@@ -1,8 +1,10 @@
 from typing import Optional
 
+from packaging import version
 from redis import Redis
 
-from coreproject_tracker.constants import REDIS_HOST, REDIS_PORT
+from coreproject_tracker.constants import REDIS_SERVER_VERSION
+from coreproject_tracker.env import REDIS_HOST, REDIS_PORT
 
 
 class RedisConnectionManager:
@@ -17,13 +19,17 @@ class RedisConnectionManager:
     @classmethod
     def initialize(cls):
         """Initialize the Redis connection if it doesn't exist"""
-        from coreproject_tracker.functions import compare_versions
 
         if cls._redis_client is None:
             client = Redis(host=REDIS_HOST, port=REDIS_PORT, decode_responses=True)
-            redis_version = client.info().get("redis_version")
-            if compare_versions("7.4.2", redis_version) == -1:
-                raise RuntimeError("Redis needs to be at least 7.4.2")
+            REDIS_SERVER_VERSION = client.info().get("REDIS_SERVER_VERSION")
+            if version.parse(REDIS_SERVER_VERSION) < version.parse(
+                REDIS_SERVER_VERSION
+            ):
+                raise RuntimeError(
+                    f"`redis-server` needs to be at least {REDIS_SERVER_VERSION}, "
+                    f"current `redis-server` version is {REDIS_SERVER_VERSION}"
+                )
 
             cls._redis_client = client
 

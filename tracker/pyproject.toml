@@ -16,6 +16,7 @@ twisted = "^24.11.0"
 autobahn = { extras = ["twisted"], version = "^24.4.2" }
 bencode-py = "^4.0.0"
 redis = { extras = ["hiredis"], version = "^5.2.1" }
+packaging = "^24.2"
 
 
 [tool.poetry.group.dev.dependencies]
