@@ -1,30 +1,38 @@
-[tool.poetry]
+[project]
 name = "coreproject-py-tracker"
 version = "0.1.0"
 description = ""
 authors = [
-    "baseplate-admin <61817579+baseplate-admin@users.noreply.github.com>",
+    { name = "baseplate-admin", email = "61817579+baseplate-admin@users.noreply.github.com" },
 ]
-# readme = "README.md"
-packages = [{ include = "coreproject_tracker", from = "./src" }]
+requires-python = ">=3.13"
 license = "AGPL-v3"
-package-mode = false
+dependencies = [
+    "twisted>=24.11.0,<25",
+    "autobahn[twisted]>=24.4.2,<25",
+    "bencode-py>=4.0.0,<5",
+    "redis[hiredis]>=5.2.1,<6",
+    "packaging~=24.2",
+]
 
-[tool.poetry.dependencies]
-python = ">=3.13"
-twisted = "^24.11.0"
-autobahn = { extras = ["twisted"], version = "^24.4.2" }
-bencode-py = "^4.0.0"
-redis = { extras = ["hiredis"], version = "^5.2.1" }
-packaging = "^24.2"
+[dependency-groups]
+dev = ["poethepoet>=0.32.0,<0.33"]
 
+[tool.uv]
+package = false
 
-[tool.poetry.group.dev.dependencies]
-poethepoet = "^0.32.0"
+[tool.hatch.build.targets.sdist]
+include = ["./src/coreproject_tracker"]
+
+[tool.hatch.build.targets.wheel]
+include = ["./src/coreproject_tracker"]
+
+[tool.hatch.build.targets.wheel.sources]
+"./src/coreproject_tracker" = "coreproject_tracker"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.poe.tasks]
 dev = "python ./src/run.py"
