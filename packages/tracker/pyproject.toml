@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "coreproject-py-tracker"
+version = "0.1.0"
+description = ""
+authors = [
+    "baseplate-admin <61817579+baseplate-admin@users.noreply.github.com>",
+]
+# readme = "README.md"
+packages = [{ include = "coreproject_tracker", from = "./src" }]
+license = "AGPL-v3"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.13"
+twisted = "^24.11.0"
+autobahn = { extras = ["twisted"], version = "^24.4.2" }
+bencode-py = "^4.0.0"
+redis = { extras = ["hiredis"], version = "^5.2.1" }
+
+
+[tool.poetry.group.dev.dependencies]
+poethepoet = "^0.32.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poe.tasks]
+dev = "python ./src/run.py"
+
+[tool.ruff]
+line-length = 88
+
+[tool.ruff.lint]
+ignore = ["E501", "C901"]
+select = ["I", "E", "F", "W", "C"]
+
+[tool.pyright]
+venvPath = "./"
+venv = ".venv"
+pythonVersion = "3.13"
