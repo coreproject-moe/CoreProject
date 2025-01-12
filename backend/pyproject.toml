@@ -98,7 +98,7 @@ types-pyyaml = "^6.0.12.20241230"
 types-python-dateutil = "^2.9.0.20241206"
 
 # Task Runner
-poethepoet = "^0.32.0"
+poethepoet = "^0.32.1"
 # Django extensions
 django-extensions = "^3.2.3"
 # pygraphviz = "^1.10"
