@@ -1,9 +1,0 @@
-node_modules
-
-*.exe
-
-/logs
-
-/media
-
-/data
