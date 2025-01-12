@@ -1364,13 +1364,13 @@ testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
 name = "poethepoet"
-version = "0.32.0"
+version = "0.32.1"
 description = "A task runner that works well with poetry."
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "poethepoet-0.32.0-py3-none-any.whl", hash = "sha256:fba84c72d923feac228d1ea7734c5a54701f2e71fad42845f027c0fbf998a073"},
-    {file = "poethepoet-0.32.0.tar.gz", hash = "sha256:a700be02e932e1a8907ae630928fc769ea9a77986189ba6867e6e3fd8f60e5b7"},
+    {file = "poethepoet-0.32.1-py3-none-any.whl", hash = "sha256:d1e0a52a2f677870fac17dfb26bfe4910242756ac821443ef31f90ad26227c2d"},
+    {file = "poethepoet-0.32.1.tar.gz", hash = "sha256:471e1a025812dcd3d2997e30989681be5ab0a49232ee5fba94859629671c9584"},
 ]
 
 [package.dependencies]
@@ -1378,7 +1378,7 @@ pastel = ">=0.2.1,<0.3.0"
 pyyaml = ">=6.0.2,<7.0.0"
 
 [package.extras]
-poetry-plugin = ["poetry (>=1.0,<2.0)"]
+poetry-plugin = ["poetry (>=1.0,<3.0)"]
 
 [[package]]
 name = "prompt-toolkit"
@@ -2480,4 +2480,4 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.12,<3.14"
-content-hash = "0fa4abd00f529026b18b15c1fa2d3bfb65e9612d7db2a0bf10007e84b8c4b932"
+content-hash = "4b70a9bbe6b3e3c1faad5f24a169a94b3edfdb57792835934be25c5ccbc91d11"
