@@ -13,12 +13,7 @@ from .peers import (
 from .redis import (
     HASH_EXPIRE_TIME as HASH_EXPIRE_TIME,
 )
-from .redis import (
-    REDIS_HOST as REDIS_HOST,
-)
-from .redis import (
-    REDIS_PORT as REDIS_PORT,
-)
+from .redis import REDIS_SERVER_VERSION as REDIS_SERVER_VERSION
 from .ttl import CONNECTION_TTL as CONNECTION_TTL
 from .ttl import PEER_TTL as PEER_TTL
 from .udp import CONNECTION_ID as CONNECTION_ID
