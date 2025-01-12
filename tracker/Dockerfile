@@ -4,7 +4,7 @@ FROM python:3.13-alpine AS builder
 RUN apk update && apk add --no-cache curl
 
 # Install Poetry
-ENV POETRY_VERSION=1.8.5
+ENV POETRY_VERSION=2.0.1
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
 # Add Poetry to PATH
