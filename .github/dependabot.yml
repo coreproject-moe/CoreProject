@@ -13,12 +13,7 @@ updates:
           interval: weekly
       open-pull-requests-limit: 100
 
-    # Backend (nodejs)
-    - package-ecosystem: npm
-      directory: /backend/
-      schedule:
-          interval: weekly
-      open-pull-requests-limit: 100
+
 
     # Seeder
     # =======
@@ -40,11 +35,12 @@ updates:
     # Bots
     # =====
     - package-ecosystem: pip
-      directory: /bots/discord/
+      directory: /discord/
       schedule:
           interval: weekly
       open-pull-requests-limit: 100
 
+    
     #Frontend
     #- package-ecosystem: 'npm'
     #  directory: '/frontend'

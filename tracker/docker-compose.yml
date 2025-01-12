@@ -1,0 +1,20 @@
+services:
+    redis:
+        image: redis:7.4.2-alpine
+        container_name: coreproject-tracker-redis
+        network_mode: 'host'
+        restart: always
+        command: redis-server --port 16379 
+
+    tracker:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: coreproject-tracker
+        network_mode: 'host'
+        restart: always
+        environment:
+            # Example environment variables
+            REDIS_HOST: localhost
+            REDIS_PORT: 16379
+
