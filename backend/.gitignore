@@ -119,7 +119,8 @@ dmypy.json
 !Pipfile.lock
 # Nor Poetry
 !poetry.lock
-
+# Nor uv
+!uv.lock
 
 # Tattoo sucks
 *.rdb
