@@ -126,8 +126,6 @@ mypy = "mypy . --enable-incomplete-feature=Unpack"
 ## Django extensions
 graph = "python django_core/manage.py graph_models -a -o mymodel.png"
 reset_db = "python django_core/manage.py reset_db"
-# Test
-test_shinobi = 'pytest -vv ./shinobi'
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
@@ -137,7 +135,7 @@ requires = [
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "core.settings"
-pythonpath = 'django_core shinobi'
+pythonpath = 'django_core'
 python_files = ["test_*.py", "*_test.py", "testing/python/*.py"]
 
 [tool.black]
