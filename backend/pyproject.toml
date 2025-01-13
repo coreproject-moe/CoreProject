@@ -34,6 +34,7 @@ dependencies = [
     "crispy-bootstrap4>=2023.1",
     "django-htmx>=1.17.0",
     "django-vite>=3.0.6,<4",
+    "gunicorn; sys_platform != 'win32'"
 ]
 
 [dependency-groups]
