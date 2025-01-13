@@ -88,18 +88,6 @@ wheels = [
 ]
 
 [[package]]
-name = "cattrs"
-version = "24.1.2"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "attrs" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/64/65/af6d57da2cb32c076319b7489ae0958f746949d407109e3ccf4d115f147c/cattrs-24.1.2.tar.gz", hash = "sha256:8028cfe1ff5382df59dd36474a86e02d817b06eaf8af84555441bac915d2ef85", size = 426462 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/c8/d5/867e75361fc45f6de75fe277dd085627a9db5ebb511a87f27dc1396b5351/cattrs-24.1.2-py3-none-any.whl", hash = "sha256:67c7495b760168d931a10233f979b28dc04daf853b30752246f4f8471c6d68d0", size = 66446 },
-]
-
-[[package]]
 name = "celery"
 version = "5.4.0"
 source = { registry = "https://pypi.org/simple" }
@@ -283,15 +271,13 @@ dependencies = [
     { name = "djangorestframework" },
     { name = "drf-spectacular" },
     { name = "drf-spectacular-sidecar" },
-    { name = "gunicorn" },
+    { name = "gunicorn", marker = "sys_platform != 'win32'" },
     { name = "modern-colorthief" },
     { name = "pillow" },
     { name = "psycopg", extra = ["binary"] },
     { name = "python-dotenv" },
     { name = "redis" },
     { name = "requests" },
-    { name = "requests-cache" },
-    { name = "requests-ratelimiter" },
     { name = "uvicorn", extra = ["standard"] },
     { name = "whitenoise" },
 ]
@@ -341,15 +327,13 @@ requires-dist = [
     { name = "djangorestframework", specifier = ">=3.14.0" },
     { name = "drf-spectacular", specifier = ">=0.26.5" },
     { name = "drf-spectacular-sidecar", specifier = ">=2023.10.1" },
-    { name = "gunicorn", extras = ["setproctile"] },
+    { name = "gunicorn", marker = "sys_platform != 'win32'" },
     { name = "modern-colorthief", specifier = ">=0.1.2,<0.2" },
     { name = "pillow", specifier = ">=10.1.0" },
     { name = "psycopg", extras = ["binary"], specifier = ">=3.1.12" },
     { name = "python-dotenv" },
     { name = "redis", specifier = ">=4.5.4" },
     { name = "requests", specifier = ">=2.31.0" },
-    { name = "requests-cache", specifier = ">=1.1.0" },
-    { name = "requests-ratelimiter", extras = ["redis"], specifier = ">=0.4.2" },
     { name = "uvicorn", extras = ["standard"], specifier = ">=0.21.1" },
     { name = "whitenoise", specifier = ">=6.6.0" },
 ]
@@ -991,15 +975,6 @@ wheels = [
 ]
 
 [[package]]
-name = "platformdirs"
-version = "4.3.6"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/13/fc/128cc9cb8f03208bdbf93d3aa862e16d376844a14f9a0ce5cf4507372de4/platformdirs-4.3.6.tar.gz", hash = "sha256:357fb2acbc885b0419afd3ce3ed34564c13c9b95c89360cd9563f73aa5e2b907", size = 21302 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/3c/a6/bc1012356d8ece4d66dd75c4b9fc6c1f6650ddd5991e421177d9f8f671be/platformdirs-4.3.6-py3-none-any.whl", hash = "sha256:73e575e1408ab8103900836b97580d5307456908a03e92031bab39e4554cc3fb", size = 18439 },
-]
-
-[[package]]
 name = "pluggy"
 version = "1.5.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1087,15 +1062,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/1d/b2/31537cf4b1ca988837256c910a668b553fceb8f069bedc4b1c826024b52c/pycparser-2.22.tar.gz", hash = "sha256:491c8be9c040f5390f5bf44a5b07752bd07f56edf992381b05c701439eec10f6", size = 172736 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/13/a3/a812df4e2dd5696d1f351d58b8fe16a405b234ad2886a0dab9183fb78109/pycparser-2.22-py3-none-any.whl", hash = "sha256:c3702b6d3dd8c7abc1afa565d7e63d53a1d0bd86cdc24edd75470f4de499cfcc", size = 117552 },
-]
-
-[[package]]
-name = "pyrate-limiter"
-version = "2.10.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/c0/a2/bb73c385e6d68cbe0ebe6ff16c22c96a79194c1298b2942005fcaf3eda9d/pyrate_limiter-2.10.0.tar.gz", hash = "sha256:98cc52cdbe058458e945ae87d4fd5a73186497ffa545ee6e98372f8599a5bd34", size = 49915 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/4f/2e/cad6d72ca044bff3b0d53b491f5116582e0704fea59672906d44b9600514/pyrate_limiter-2.10.0-py3-none-any.whl", hash = "sha256:a99e52159f5ed5eb58118bed8c645e30818e7c0e0d127a0585c8277c776b0f7f", size = 16376 },
 ]
 
 [[package]]
@@ -1216,36 +1182,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/63/70/2bf7780ad2d390a8d301ad0b550f1581eadbd9a20f896afe06353c2a2913/requests-2.32.3.tar.gz", hash = "sha256:55365417734eb18255590a9ff9eb97e9e1da868d4ccd6402399eaf68af20a760", size = 131218 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f9/9b/335f9764261e915ed497fcdeb11df5dfd6f7bf257d4a6a2a686d80da4d54/requests-2.32.3-py3-none-any.whl", hash = "sha256:70761cfe03c773ceb22aa2f671b4757976145175cdfca038c02654d061d6dcc6", size = 64928 },
-]
-
-[[package]]
-name = "requests-cache"
-version = "1.2.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "attrs" },
-    { name = "cattrs" },
-    { name = "platformdirs" },
-    { name = "requests" },
-    { name = "url-normalize" },
-    { name = "urllib3" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/1a/be/7b2a95a9e7a7c3e774e43d067c51244e61dea8b120ae2deff7089a93fb2b/requests_cache-1.2.1.tar.gz", hash = "sha256:68abc986fdc5b8d0911318fbb5f7c80eebcd4d01bfacc6685ecf8876052511d1", size = 3018209 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/4e/2e/8f4051119f460cfc786aa91f212165bb6e643283b533db572d7b33952bd2/requests_cache-1.2.1-py3-none-any.whl", hash = "sha256:1285151cddf5331067baa82598afe2d47c7495a1334bfe7a7d329b43e9fd3603", size = 61425 },
-]
-
-[[package]]
-name = "requests-ratelimiter"
-version = "0.7.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "pyrate-limiter" },
-    { name = "requests" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/0a/9b/06ef6289f3b774593354286b2d032ca7df30e28a5aeb9423c97bcd13c676/requests_ratelimiter-0.7.0.tar.gz", hash = "sha256:a070c8a359a6f3a001b0ccb08f17228b7ae0a6e21d8df5b6f6bd58389cddde45", size = 14200 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/ae/81/2d9e20bfc065fe083494e656c1c396a33303d10d1ccfc11efe886ba51458/requests_ratelimiter-0.7.0-py3-none-any.whl", hash = "sha256:1a7ef2faaa790272722db8539728690046237766fcc479f85b9591e5356a8185", size = 9314 },
 ]
 
 [[package]]
@@ -1458,18 +1394,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/d2/5a/4742fdba39cd02a56226815abfa72fe0aa81c33bed16ed045647d6000eba/uritemplate-4.1.1.tar.gz", hash = "sha256:4346edfc5c3b79f694bccd6d6099a322bbeb628dbf2cd86eea55a456ce5124f0", size = 273898 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/81/c0/7461b49cd25aeece13766f02ee576d1db528f1c37ce69aee300e075b485b/uritemplate-4.1.1-py2.py3-none-any.whl", hash = "sha256:830c08b8d99bdd312ea4ead05994a38e8936266f84b9a7878232db50b044e02e", size = 10356 },
-]
-
-[[package]]
-name = "url-normalize"
-version = "1.4.3"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "six" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/ec/ea/780a38c99fef750897158c0afb83b979def3b379aaac28b31538d24c4e8f/url-normalize-1.4.3.tar.gz", hash = "sha256:d23d3a070ac52a67b83a1c59a0e68f8608d1cd538783b401bc9de2c0fac999b2", size = 6024 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/65/1c/6c6f408be78692fc850006a2b6dea37c2b8592892534e09996e401efc74b/url_normalize-1.4.3-py2.py3-none-any.whl", hash = "sha256:ec3c301f04e5bb676d333a7fa162fa977ad2ca04b7e652bfc9fac4e405728eed", size = 6804 },
 ]
 
 [[package]]
