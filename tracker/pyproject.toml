@@ -7,7 +7,7 @@ authors = [
 ]
 requires-python = ">=3.13"
 dependencies = [
-    "twisted>=24.11.0,<25",
+    "twisted>=24.11.0",
     "autobahn[twisted]>=24.4.2,<25",
     "bencode-py>=4.0.0,<5",
     "redis[hiredis]>=5.2.1,<6",
