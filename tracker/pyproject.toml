@@ -11,7 +11,7 @@ dependencies = [
     "autobahn[twisted]>=24.4.2,<25",
     "bencode-py>=4.0.0,<5",
     "redis[hiredis]>=5.2.1,<6",
-    "packaging~=24.2",
+    "packaging>=24.2",
 ]
 
 [dependency-groups]
