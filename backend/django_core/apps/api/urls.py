@@ -1,4 +1,3 @@
-from django.urls import path
 from django.utils.module_loading import import_string
 from ninja import NinjaAPI
 

@@ -60,34 +60,34 @@ class AnimeInfoGETSchema(ModelSchema):
     @staticmethod
     def resolve_staffs(obj: AnimeModel) -> str:
         url = resolve_url("api-1.0.0:get_individual_anime_staff_info", anime_id=obj.pk)
-        return f"{url}"
+        return url
 
     @staticmethod
     def resolve_genres(obj: AnimeModel) -> str:
         url = resolve_url("api-1.0.0:get_individual_anime_genre_info", anime_id=obj.pk)
-        return f"{url}"
+        return url
 
     @staticmethod
     def resolve_producers(obj: AnimeModel) -> str:
         url = resolve_url("api-1.0.0:get_individual_anime_producer_info", anime_id=obj.pk)
-        return f"{url}"
+        return url
 
     @staticmethod
     def resolve_studios(obj: AnimeModel) -> str:
         url = resolve_url("api-1.0.0:get_individual_anime_studio_info", anime_id=obj.pk)
-        return f"{url}"
+        return url
 
     @staticmethod
     def resolve_characters(obj: AnimeModel) -> str:
         url = resolve_url("api-1.0.0:get_individual_anime_character_info", anime_id=obj.pk)
-        return f"{url}"
+        return url
 
     @staticmethod
     def resolve_themes(obj: AnimeModel) -> str:
         url = resolve_url("api-1.0.0:get_individual_anime_theme_info", anime_id=obj.pk)
-        return f"{url}"
+        return url
 
     @staticmethod
     def resolve_episodes(obj: AnimeModel) -> str:
         url = resolve_url("api-1.0.0:get_individual_episodes", anime_id=obj.pk)
-        return f"{url}"
+        return url
