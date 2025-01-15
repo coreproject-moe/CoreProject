@@ -14,7 +14,7 @@ api = NinjaAPI(
 
 # ___ ANIME ROUTER _____
 
-from .views.anime import router as anime_router
+from .views.anime import router as anime_router  # noqa
 
 api.add_router(
     "/anime",
@@ -106,25 +106,11 @@ anime_router.add_router(
     ),
     tags=["episodes"],
 )
-anime_router.add_router(
-    "",
-    import_string(
-        "apps.api.views.anime.episode_comment.router",
-    ),
-    tags=["episodes"],
-)
-anime_router.add_router(
-    "",
-    import_string(
-        "apps.api.views.anime.episode_timestamp.router",
-    ),
-    tags=["episodes"],
-)
 
 
 # __ CHARACTER ROUTER ___
 
-from .views.characters import router as character_router
+from .views.characters import router as character_router  # noqa
 
 api.add_router(
     "/characters",
@@ -134,7 +120,7 @@ api.add_router(
 
 # __ PRODUCER ROUTER ___
 
-from .views.producers import router as producer_router
+from .views.producers import router as producer_router  # noqa
 
 api.add_router(
     "/producers",
@@ -145,7 +131,7 @@ api.add_router(
 
 # __ STAFF ROUTER __
 
-from .views.staffs import router as staff_router
+from .views.staffs import router as staff_router  # noqa
 
 api.add_router(
     "/staffs",
@@ -155,7 +141,7 @@ api.add_router(
 
 # __ USER ROUTER __
 
-from .views.user import router as user_router
+from .views.user import router as user_router  # noqa
 
 api.add_router("/user", user_router, tags=["user"])
 
@@ -187,58 +173,6 @@ user_router.add_router(
     ),
     tags=["user"],
 )
-# __ TRACKER ROUTER __
-
-from .views.trackers import router as tracker_router
-
-api.add_router(
-    "/trackers",
-    tracker_router,
-    tags=["trackers"],
-)
-
-tracker_router.add_router(
-    "",
-    import_string(
-        "apps.api.views.trackers.anilist.router",
-    ),
-    tags=["trackers"],
-)
-tracker_router.add_router(
-    "",
-    import_string(
-        "apps.api.views.trackers.kitsu.router",
-    ),
-    tags=["trackers"],
-)
-tracker_router.add_router(
-    "",
-    import_string(
-        "apps.api.views.trackers.mal.router",
-    ),
-    tags=["trackers"],
-)
-
-
-# __ EPISODE ROUTER ___
-from .views.episodes.comment import router as episode_comment_router
-
-api.add_router(
-    "/episode/comment",
-    episode_comment_router,
-    tags=["episodes"],
-)
-
-
-# __ FEED ROUTER __
-# May be powered by Machine learning in future
-from .views.feeds.featured import router as feature_router
-
-api.add_router(
-    "/feed/featured",
-    feature_router,
-    tags=["feed"],
-)
 
 
 # __ STATS ROUTER __
@@ -253,10 +187,3 @@ api.add_router(
     import_string("apps.api.views.stats.id.router"),
     tags=["stats"],
 )
-
-urlpatterns = [
-    path(
-        "v1/",
-        api.urls,
-    ),
-]

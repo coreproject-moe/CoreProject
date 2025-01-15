@@ -87,6 +87,8 @@ INSTALLED_APPS = [
     # Api
     # Vite Plugin
     "django_vite",
+    # API
+    "apps.api",
     # Models
     "apps.comments",
     "apps.anime",

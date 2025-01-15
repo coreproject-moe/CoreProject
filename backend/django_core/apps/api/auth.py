@@ -28,8 +28,7 @@ class AuthBearer(HttpBearer):
 
 class OptionalAuthBearer(AuthBearer):
     def __call__(self, request: HttpRequest) -> Any | None:
-        headers = get_headers(request)
-        auth_value = headers.get(self.header)
+        auth_value = request.headers.get(self.header)
         if not auth_value:
             return AnonymousUser()  # if there is no key, we return AnonymousUser object
         parts = auth_value.split(" ")
