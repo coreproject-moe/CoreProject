@@ -3,7 +3,7 @@ from apps.api.auth import AuthBearer
 from apps.api.decorator import permission_required
 from apps.api.permissions import IsSuperUser
 from apps.characters.models import CharacterModel
-from django.http import HttpRequest
+from apps.api.http import HttpRequest
 from django.shortcuts import get_list_or_404, get_object_or_404
 from ninja import Router
 

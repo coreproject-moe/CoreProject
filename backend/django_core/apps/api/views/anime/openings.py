@@ -2,7 +2,7 @@ from apps.anime.models.anime_openings_and_endings import AnimeOpeningModel
 from apps.api.auth import AuthBearer
 from apps.api.decorator import permission_required
 from apps.api.permissions import IsSuperUser
-from django.http import HttpRequest
+from apps.api.http import HttpRequest
 from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile
 from pydantic import AnyUrl

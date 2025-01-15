@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.http import HttpRequest
+from apps.api.http import HttpRequest
 
 SAFE_METHODS = ("GET", "HEAD", "OPTIONS")
 

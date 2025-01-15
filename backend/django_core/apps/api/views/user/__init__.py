@@ -1,5 +1,5 @@
 from apps.user.models import CustomUser
-from django.http import HttpRequest
+from apps.api.http import HttpRequest
 from django.shortcuts import get_object_or_404
 from ninja import File, Form, Router, UploadedFile
 from pydantic import AnyUrl, EmailStr

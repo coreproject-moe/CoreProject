@@ -4,6 +4,7 @@ from apps.anime.models import AnimeModel, AnimeNameSynonymModel
 from apps.anime.models.anime_genre import AnimeGenreModel
 from apps.anime.models.anime_theme import AnimeThemeModel
 from apps.api.auth import AuthBearer
+from apps.api.http import HttpRequest
 from apps.api.decorator import permission_required
 from apps.api.filters.anime import AnimeInfoFilters
 from apps.api.permissions import IsSuperUser
@@ -13,7 +14,7 @@ from apps.staffs.models import StaffModel
 from django.contrib.postgres.search import TrigramSimilarity
 from django.db.models import Q, QuerySet
 from django.db.models.functions import Greatest
-from django.http import Http404, HttpRequest
+from django.http import Http404
 from django.shortcuts import get_object_or_404
 from ninja import File, Form, Query, Router, UploadedFile
 from ninja.pagination import paginate

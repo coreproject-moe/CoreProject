@@ -1,4 +1,4 @@
-from django.http import HttpRequest
+from apps.api.http import HttpRequest
 from ninja.parser import Parser
 from ninja.types import DictStrAny
 

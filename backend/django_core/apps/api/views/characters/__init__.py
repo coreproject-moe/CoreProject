@@ -4,7 +4,7 @@ from apps.api.permissions import IsSuperUser
 from apps.characters.models import CharacterModel
 from django.contrib.postgres.search import TrigramSimilarity
 from django.db.models import Q, QuerySet
-from django.http import HttpRequest
+from apps.api.http import HttpRequest
 from django.shortcuts import get_object_or_404
 from ninja import File, Form, Query, Router
 from ninja.files import UploadedFile

@@ -2,7 +2,7 @@ from apps.anime.models.anime_theme import AnimeThemeModel
 from apps.api.auth import AuthBearer
 from apps.api.decorator import permission_required
 from apps.api.permissions import IsSuperUser
-from django.http import HttpRequest
+from apps.api.http import HttpRequest
 from ninja import Query, Router
 
 from ...filters.themes import ThemeFilter

@@ -1,6 +1,6 @@
 from apps.user.models import CustomUser
 from django.conf import settings
-from django.http import HttpRequest
+from apps.api.http import HttpRequest
 from ninja import Form, Router
 from pydantic import EmailStr
 
