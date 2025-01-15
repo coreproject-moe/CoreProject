@@ -173,17 +173,3 @@ user_router.add_router(
     ),
     tags=["user"],
 )
-
-
-# __ STATS ROUTER __
-
-api.add_router(
-    "/stats/histogram",
-    import_string("apps.api.views.stats.histogram.router"),
-    tags=["stats"],
-)
-api.add_router(
-    "/stats/id",
-    import_string("apps.api.views.stats.id.router"),
-    tags=["stats"],
-)

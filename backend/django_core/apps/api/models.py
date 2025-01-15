@@ -16,9 +16,7 @@ class Token(models.Model):
         max_length=16,
         editable=False,
     )
-    user = models.OneToOneField(
-        CustomUser, on_delete=models.CASCADE, related_name="user"
-    )
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="user")
 
     def __str__(self) -> str:
         return f"User : {self.user.username} | Token : {self.token}"
