@@ -1,15 +1,9 @@
 import math
 
 from celery import shared_task
-from django.core.management import call_command
-from django.db.models import Q
-from django.utils import timezone
 from PIL import Image, ImageStat
 from utilities.rgb_to_hex import rgb_to_hex
 
-from shinobi.builder.anime import AnimeBuilder
-from shinobi.builder.genre import AnimeGenreBuilder
-from shinobi.builder.theme import AnimeThemeBuilder
 
 from .models import AnimeModel
 
@@ -17,57 +11,6 @@ try:
     from modern_colorthief import get_color
 except ImportError:
     pass
-# Beat tasks
-
-
-@shared_task()
-def get_periodic_anime_genres() -> None:
-    builder = AnimeGenreBuilder()
-    dictionary = builder.build_dictionary()
-
-    for genre in list(dictionary.keys()):
-        call_anime_genre_command.delay(genre)
-
-
-@shared_task()
-def get_periodic_anime_themes() -> None:
-    builder = AnimeThemeBuilder()
-    dictionary = builder.build_dictionary()
-
-    for theme in list(dictionary.keys()):
-        call_anime_theme_command.delay(theme)
-
-
-@shared_task()
-def get_periodic_anime() -> None:
-    builder = AnimeBuilder()
-    instances = AnimeModel.objects.filter(
-        Q(updated_at__gte=timezone.now() - timezone.timedelta(days=7)) & Q(is_locked=False)
-    )
-
-    dictionary = builder.build_dictionary(
-        excluded_ids=list(instances.values_list("pk", flat=True))
-    )
-
-    for anime in list(dictionary.keys()):
-        call_anime_command.delay(anime)
-
-
-# Calls
-@shared_task()
-def call_anime_genre_command(id: int) -> None:
-    call_command("get_anime_genre", id)
-
-
-@shared_task()
-def call_anime_theme_command(id: int) -> None:
-    call_command("get_anime_theme", id)
-
-
-@shared_task()
-def call_anime_command(id: int) -> None:
-    call_command("get_anime", id, create=True)
-
 
 # Setters
 

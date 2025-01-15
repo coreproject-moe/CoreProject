@@ -68,8 +68,6 @@ INSTALLED_APPS = [
     "django.contrib.humanize",
     # Postgres
     "django.contrib.postgres",
-    # HTMX
-    "django_htmx",
     # Whitenoise
     "whitenoise.runserver_nostatic",
     # Components
@@ -87,49 +85,18 @@ INSTALLED_APPS = [
     # Tree
     "django_ltree",
     # Api
-    "rest_framework",
-    "rest_framework.authtoken",
-    "drf_spectacular",
-    "drf_spectacular_sidecar",
-    "django_filters",
-    # Crispy forms
-    "crispy_forms",
-    "crispy_bootstrap4",
     # Vite Plugin
     "django_vite",
     # Models
     "apps.comments",
-    "apps.pages",
     "apps.anime",
-    "apps.trackers",
     "apps.characters",
     "apps.producers",
     "apps.staffs",
     "apps.episodes",
 ]
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
-CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-SILENCED_SYSTEM_CHECKS = [
-    "rest_framework.W001",
-]
-# Rest framework
-REST_FRAMEWORK = {
-    # YOUR SETTINGS
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework.authentication.TokenAuthentication",
-        "rest_framework.authentication.SessionAuthentication",
-    ),
-    "PAGE_SIZE": 100,
-}
-SPECTACULAR_SETTINGS = {
-    "SWAGGER_UI_DIST": "SIDECAR",  # shorthand to use the sidecar instead
-    "SWAGGER_UI_FAVICON_HREF": "SIDECAR",
-    "REDOC_DIST": "SIDECAR",
-    # OTHER SETTINGS
-}
 # Debug Toolbar Add
 # https://django-debug-toolbar.readthedocs.io/en/latest/installation.html#install-the-app
 if DEBUG:
@@ -144,8 +111,6 @@ if DEBUG:
 
 
 MIDDLEWARE = [
-    # HTMX
-    "django_htmx.middleware.HtmxMiddleware",
     # Django Specific
     "django.middleware.security.SecurityMiddleware",
     # Whitenoise
