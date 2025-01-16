@@ -1,90 +1,174 @@
-from django.urls import include, path
-from rest_framework import routers
+from django.utils.module_loading import import_string
+from ninja import NinjaAPI
+
+from .parser import CustomParser
+
+api = NinjaAPI(
+    title="CoreProjectAPI",
+    parser=CustomParser(),
+)
+
+# Router Configurations
 
 
-from .views.user.register import RegisterViewSet
-from .views.user.validity.username import UsernameValiditiyAPIView
-from .views.user.validity.email import EmailValiditiyAPIView
-from .views.anime import AnimeViewSet
-from .views.anime.comment import AnimeCommentAPIView
-from .views.anime.episode import EpisodeAPIView
-from .views.anime.episode.comment import EpisodeCommentAPIView
-from .views.anime.episode.timestamp import EpisodeTimeStampAPIView
-from .views.anime.genre import AnimeGenresAPIView, AnimeGenresSpecificAPIView
-from .views.anime.theme import AnimeThemesAPIView, AnimeThemesSpecificAPIView
-from .views.characters import CharacterViewSet
-from .views.comment import CommentViewSet
-from .views.comment.reaction import CommentReactionAPIView
-from .views.producers import ProducerViewSet
-from .views.staffs import StaffViewSet
-from .views.user.login import LoginAPIView
-from .views.user.logout import LogoutAPIView
-from .views.upload.doodstream import DoodstreamAPIView
+# ___ ANIME ROUTER _____
 
-base_router = routers.DefaultRouter()
-base_router.register(r"comments", CommentViewSet, basename="comment")
-base_router.register(r"anime", AnimeViewSet, basename="anime")
-base_router.register(r"character", CharacterViewSet, basename="character")
-base_router.register(r"producer", ProducerViewSet, basename="producer")
-base_router.register(r"staff", StaffViewSet, basename="staff")
+from .views.anime import router as anime_router  # noqa
 
-user_router = routers.DefaultRouter()
-user_router.register(r"user/register", RegisterViewSet, basename="register")
+api.add_router(
+    "/anime",
+    anime_router,
+    tags=["anime_info"],
+)
+anime_router.add_router(
+    "",
+    import_string(
+        "apps.api.views.anime.genres.router",
+    ),
+    tags=["anime_info"],
+)
+anime_router.add_router(
+    "",
+    import_string(
+        "apps.api.views.anime.themes.router",
+    ),
+    tags=["anime_info"],
+)
+anime_router.add_router(
+    "",
+    import_string(
+        "apps.api.views.anime.anime_staff.router",
+    ),
+    tags=["anime_info"],
+)
+anime_router.add_router(
+    "",
+    import_string(
+        "apps.api.views.anime.anime_genre.router",
+    ),
+    tags=["anime_info"],
+)
+anime_router.add_router(
+    "",
+    import_string(
+        "apps.api.views.anime.anime_character.router",
+    ),
+    tags=["anime_info"],
+)
+anime_router.add_router(
+    "",
+    import_string(
+        "apps.api.views.anime.anime_producer.router",
+    ),
+    tags=["anime_info"],
+)
+anime_router.add_router(
+    "",
+    import_string(
+        "apps.api.views.anime.anime_studio.router",
+    ),
+    tags=["anime_info"],
+)
+anime_router.add_router(
+    "",
+    import_string(
+        "apps.api.views.anime.anime_theme.router",
+    ),
+    tags=["anime_info"],
+)
+anime_router.add_router(
+    "",
+    import_string("apps.api.views.anime.openings.router"),
+    tags=["anime_info"],
+)
+anime_router.add_router(
+    "",
+    import_string("apps.api.views.anime.anime_openings.router"),
+    tags=["anime_info"],
+)
+anime_router.add_router(
+    "",
+    import_string("apps.api.views.anime.endings.router"),
+    tags=["anime_info"],
+)
+anime_router.add_router(
+    "",
+    import_string("apps.api.views.anime.anime_endings.router"),
+    tags=["anime_info"],
+)
+# Episodes
 
-# https://stackoverflow.com/a/65186703
-base_router.registry.extend(user_router.registry)
+anime_router.add_router(
+    "",
+    import_string(
+        "apps.api.views.anime.episode.router",
+    ),
+    tags=["episodes"],
+)
 
-urlpatterns = [
-    # Anime specific routes
-    path(
-        "anime/<int:pk>/comment",
-        AnimeCommentAPIView.as_view(),
-        name="anime-commment-endpoint",
+
+# __ CHARACTER ROUTER ___
+
+from .views.characters import router as character_router  # noqa
+
+api.add_router(
+    "/characters",
+    character_router,
+    tags=["characters"],
+)
+
+# __ PRODUCER ROUTER ___
+
+from .views.producers import router as producer_router  # noqa
+
+api.add_router(
+    "/producers",
+    producer_router,
+    tags=["producers"],
+)
+
+
+# __ STAFF ROUTER __
+
+from .views.staffs import router as staff_router  # noqa
+
+api.add_router(
+    "/staffs",
+    staff_router,
+    tags=["staffs"],
+)
+
+# __ USER ROUTER __
+
+from .views.user import router as user_router  # noqa
+
+api.add_router("/user", user_router, tags=["user"])
+
+user_router.add_router(
+    "",
+    import_string(
+        "apps.api.views.user.login.router",
     ),
-    path("anime/genres/", AnimeGenresAPIView.as_view()),
-    path("anime/genres/<int:pk>/", AnimeGenresSpecificAPIView.as_view()),
-    path("anime/themes/", AnimeThemesAPIView.as_view()),
-    path("anime/themes/<int:pk>/", AnimeThemesSpecificAPIView.as_view()),
-    # Episode
-    path(
-        "anime/<int:pk>/episode/",
-        EpisodeAPIView.as_view(),
+    tags=["user"],
+)
+user_router.add_router(
+    "",
+    import_string(
+        "apps.api.views.user.logout.router",
     ),
-    path(
-        "anime/<int:pk>/episode/<int:episode_number>/comment",
-        EpisodeCommentAPIView.as_view(),
-        name="episode-comment-endpoint",
+    tags=["user"],
+)
+user_router.add_router(
+    "",
+    import_string(
+        "apps.api.views.user.signup.router",
     ),
-    path(
-        "anime/<int:pk>/episode/<int:episode_number>/timestamp",
-        EpisodeTimeStampAPIView.as_view(),
+    tags=["user"],
+)
+user_router.add_router(
+    "/username_validity",
+    import_string(
+        "apps.api.views.user.username_validity.router",
     ),
-    # User routes
-    path("user/login/", LoginAPIView.as_view(), name="login-endpoint"),
-    path("user/logout/", LogoutAPIView.as_view(), name="logout-endpoint"),
-    path(
-        "user/validity/username",
-        UsernameValiditiyAPIView.as_view(),
-        name="username-validity-endpoint",
-    ),
-    path(
-        "user/validity/email",
-        EmailValiditiyAPIView.as_view(),
-        name="email-validity-endpoint",
-    ),
-    # Comment routes
-    path(
-        "comment/<int:pk>/reaction/",
-        CommentReactionAPIView.as_view(),
-        name="comment-reaction-endpoint",
-    ),
-    # Upload route
-    path(
-        "upload/",
-        DoodstreamAPIView.as_view(),
-        name="doodstream-provider-endpoint",
-    ),
-    # ROUTERS SHOULD BE INCLUDED AT THE BOTTOM TO PREVENT OVERRIDES
-    # Routers
-    path("", include(base_router.urls)),
-]
+    tags=["user"],
+)

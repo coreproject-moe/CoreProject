@@ -18,8 +18,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
-from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
-
+from apps.api.urls import api
 from . import views
 
 # from django.views import debug
@@ -49,22 +48,9 @@ urlpatterns = [
     #   HTTP
     # =========
     path("user/", include("apps.user.urls")),
-    #   Torrents
-    # ============
-    path("torrent/", include("apps.torrent.urls")),
     #   API
     # ========
-    path("api/v2/", include("apps.api.urls")),
-    # Swagger
-    path("api/v2/schema/", SpectacularAPIView.as_view(), name="schema"),
-    path(
-        "api/v2/schema/swagger-ui/",
-        SpectacularSwaggerView.as_view(url_name="schema"),
-        name="swagger-ui",
-    ),
-    #  Pages
-    # =======
-    path("", include("apps.pages.urls")),
+    path("api/v3/", api.urls),
 ]
 
 if settings.DEBUG:
