@@ -86,7 +86,6 @@ celerybeat-schedule
 # Environments
 .env
 .venv
-env/
 venv/
 ENV/
 env.bak/
@@ -118,7 +117,7 @@ dmypy.json
 # But not Pipfile
 !Pipfile.lock
 # Nor Poetry
-!poetry.lock
+!uv.lock
 
 
 # Tattoo sucks

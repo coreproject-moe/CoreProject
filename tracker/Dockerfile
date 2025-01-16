@@ -1,25 +1,21 @@
 FROM python:3.13-alpine AS builder
 
-# Install system dependencies
-RUN apk update && apk add --no-cache curl
-
-# Install Poetry
-ENV POETRY_VERSION=1.8.5
-RUN curl -sSL https://install.python-poetry.org | python3 -
-
-# Add Poetry to PATH
 ENV PATH="/root/.local/bin:$PATH"
+
+# Install system dependencies
+RUN apk update && apk add --no-cache curl gcc musl-dev
+
+# Install uv
+RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Set working directory
 WORKDIR /app
 
-# Copy project files
-COPY pyproject.toml poetry.lock ./
+# Copy dependency files
+COPY pyproject.toml uv.lock ./
 
-# Install dependencies (no virtual environment)
-RUN poetry config virtualenvs.create false
-RUN poetry install --only=main --no-root
-RUN rm poetry.lock
+# Install dependencies using the lockfile
+RUN uv pip install --system .
 
 # Stage 2: Final stage
 FROM python:3.13-alpine
