@@ -7,7 +7,7 @@ const config = {
     // for more information about preprocessors
     preprocess: vitePreprocess(),
     compilerOptions: {
-        runes: true
+        // runes: true
     },
 
     kit: {

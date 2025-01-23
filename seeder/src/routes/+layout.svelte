@@ -5,4 +5,6 @@
     const { children }: { children: Snippet } = $props();
 </script>
 
-{@render children()}
+<main class="flex h-screen items-center justify-center">
+    {@render children()}
+</main>
