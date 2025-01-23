@@ -22,6 +22,9 @@ const config = {
         },
         router: {
             type: 'hash'
+        },
+        alias: {
+            '@/*': './src/lib'
         }
     }
 };
