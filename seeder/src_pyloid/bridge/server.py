@@ -1,21 +1,26 @@
 from pyloid import Bridge, PyloidAPI
-from ..managers import PortManager
 from ..server import WebSocketServer
-
-port_manger = PortManager()
+from ..functions.port import find_free_port
 
 
 class Server(PyloidAPI):
+    def __init__(self):
+        super().__init__()
+        self.port = find_free_port()
+
     @Bridge(result=dict)
     def get_server_port(self):
-        return {"host": "localhost", "port": port_manger.get_port()}
+        return {"host": "localhost", "port": self.port}
 
-    @Bridge(result=bool | str)
+    @Bridge(result=str)
     def start_websocket_server(self):
+        worker = WebSocketServer(self.port)
+
+        print(f"Started websocket server {self.port}")
+
         try:
-            worker = WebSocketServer()
             worker.start()
             print("Started websocket server")
-            return True
+            return "true"
         except Exception as e:
             return e

@@ -1,13 +1,14 @@
 from PySide6.QtCore import QThread
 from websockets.sync.server import serve
-from ..managers import PortManager
 from typing import Optional
-
-port_manager = PortManager()
 
 
 class WebSocketServer(QThread):
     _instance: Optional["WebSocketServer"] = None
+
+    def __init__(self, *args, port: int, **kwargs):
+        self.port = port
+        super().__init__(*args, **kwargs)
 
     def __new__(cls):
         if cls._instance is None:
@@ -19,7 +20,5 @@ class WebSocketServer(QThread):
             websocket.send(message)
 
     def run(self):
-        port = port_manager.get_port()
-
-        with serve(self.echo, "localhost", port) as server:
+        with serve(self.echo, "localhost", self.port) as server:
             server.serve_forever()
