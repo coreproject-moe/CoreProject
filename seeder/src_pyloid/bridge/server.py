@@ -7,15 +7,15 @@ class Server(PyloidAPI):
     def __init__(self):
         super().__init__()
 
-        self.port = find_free_port()
+        self.__port = find_free_port()
 
     @Bridge(result=dict)
     def get_server_port(self):
-        return {"host": "localhost", "port": self.port}
+        return {"host": "localhost", "port": self.__port}
 
     @Bridge(result=str)
     def start_websocket_server(self):
-        worker = WebSocketServer(self.port)
+        worker = WebSocketServer(self.__port)
 
         try:
             worker.start()
