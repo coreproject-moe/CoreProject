@@ -6,12 +6,12 @@ from typing import Optional
 port_manager = PortManager()
 
 
-class WorkerThread(QThread):
-    _instance: Optional["WorkerThread"] = None
+class WebSocketServer(QThread):
+    _instance: Optional["WebSocketServer"] = None
 
     def __new__(cls):
         if cls._instance is None:
-            cls._instance = super(WorkerThread, cls).__new__(cls)
+            cls._instance = super(WebSocketServer, cls).__new__(cls)
         return cls._instance
 
     def echo(websocket):
