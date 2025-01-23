@@ -1,7 +1,8 @@
 from pyloid import Bridge, PyloidAPI
+from ..functions import find_free_port
 
 
 class Server(PyloidAPI):
-    @Bridge(result=tuple[str, int])
+    @Bridge(result=dict)
     def get_server_port(self):
-        return ("localhost", 10000)
+        return {"host": "localhost", "port": find_free_port()}

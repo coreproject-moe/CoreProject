@@ -1,6 +1,10 @@
 declare global {
     interface Window {
-        pyloid: any;
+        pyloid: {
+            JSApi: {
+                get_server_port: () => Promise<{ host: string; port: number }>;
+            };
+        };
     }
 }
 
