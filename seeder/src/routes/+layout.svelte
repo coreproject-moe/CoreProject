@@ -1,6 +1,7 @@
 <script lang="ts">
+    import { goto } from '$app/navigation';
     import '../app.css';
-    import { type Snippet } from 'svelte';
+    import { onMount, type Snippet } from 'svelte';
 
     const { children }: { children: Snippet } = $props();
 </script>
