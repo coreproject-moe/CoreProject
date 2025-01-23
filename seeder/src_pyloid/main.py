@@ -1,9 +1,16 @@
 import os
 from pyloid import Pyloid, get_production_path, is_production
 from .bridge import JSApi
-from .functions import find_free_port
+from .server.websocket import WorkerThread
 
-PORT = find_free_port()
+
+def on_start():
+    print("Websocket Server started")
+
+
+worker = WorkerThread()
+worker.started.connect(on_start)
+worker.start()
 
 app = Pyloid(app_name="Pyloid-App", single_instance=True)
 production_path = get_production_path()
