@@ -22,13 +22,13 @@ class RedisConnectionManager:
 
         if cls._redis_client is None:
             client = Redis(host=REDIS_HOST, port=REDIS_PORT, decode_responses=True)
-            REDIS_SERVER_VERSION = client.info().get("REDIS_SERVER_VERSION")
-            if version.parse(REDIS_SERVER_VERSION) < version.parse(
+            redis_server_version = client.info().get("redis_version")
+            if version.parse(redis_server_version) < version.parse(
                 REDIS_SERVER_VERSION
             ):
                 raise RuntimeError(
                     f"`redis-server` needs to be at least {REDIS_SERVER_VERSION}, "
-                    f"current `redis-server` version is {REDIS_SERVER_VERSION}"
+                    f"current `redis-server` version is {redis_server_version}"
                 )
 
             cls._redis_client = client

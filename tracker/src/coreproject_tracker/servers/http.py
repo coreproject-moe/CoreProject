@@ -32,9 +32,6 @@ log = Logger(namespace="coreproject_tracker")
 class HTTPServer(resource.Resource):
     isLeaf = True
 
-    def __init__(self):
-        super().__init__()
-
     def render_GET(self, request: Request):
         deferred = threads.deferToThread(self.__render_GET, request)
         deferred.addCallback(self.on_task_done, request)
