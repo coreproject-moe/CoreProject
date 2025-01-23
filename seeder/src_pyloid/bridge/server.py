@@ -7,6 +7,7 @@ class Server(PyloidAPI):
     def __init__(self):
         super().__init__()
 
+        # Local states
         self.__port = find_free_port()
 
     @Bridge(result=dict)
