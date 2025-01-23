@@ -6,6 +6,7 @@ from ..functions.port import find_free_port
 class Server(PyloidAPI):
     def __init__(self):
         super().__init__()
+
         self.port = find_free_port()
 
     @Bridge(result=dict)
@@ -15,8 +16,6 @@ class Server(PyloidAPI):
     @Bridge(result=str)
     def start_websocket_server(self):
         worker = WebSocketServer(self.port)
-
-        print(f"Started websocket server {self.port}")
 
         try:
             worker.start()
