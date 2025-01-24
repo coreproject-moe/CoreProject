@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { is_running_on_pyloid } from '@/interface/pyloid';
+    import { is_running_on_pyloid } from '$lib/interface/pyloid';
     import { onMount } from 'svelte';
 
     let host = $state<null | string>(null);

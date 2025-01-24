@@ -1,7 +1,7 @@
 <script lang="ts">
     import { Server, Laptop } from 'lucide-svelte';
 
-    import { Separator } from '@/components/ui/separator';
+    import { Separator } from '$lib/components/ui/separator';
 
     const items = [
         { name: 'server', icon: Server },

@@ -24,7 +24,7 @@ const config = {
             type: 'hash'
         },
         alias: {
-            '@/*': './src/lib'
+            // '@/*': './src/lib'
         }
     }
 };
