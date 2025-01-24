@@ -1,18 +1,21 @@
 <script lang="ts">
-    import { is_running_on_pyloid } from '$lib/interface/pyloid';
+    import { JSApi } from '$lib/interface/pyloid';
     import { onMount } from 'svelte';
 
     let host = $state<null | string>(null);
     let port = $state<null | number>(null);
 
     onMount(async () => {
-        const response = await window.pyloid.JSApi.get_server_port();
+        const api = new JSApi();
+        const response = await api.get_server_port();
+        if (!response) return;
+
         host = response['host'];
         port = response['port'];
     });
 </script>
 
-{#if is_running_on_pyloid()}
+{#if host || port}
     Listening on {host}:{port}
 {:else}
     Is pyloid running?
