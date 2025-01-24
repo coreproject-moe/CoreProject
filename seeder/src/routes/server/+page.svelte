@@ -8,7 +8,7 @@
     onMount(async () => {
         const api = new JSApi();
         const response = await api.get_server_port();
-        if (!response) return;
+        if (response === null) return;
 
         host = response['host'];
         port = response['port'];

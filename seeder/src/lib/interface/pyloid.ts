@@ -1,5 +1,3 @@
-import type { PyloidJSApi } from '$lib/types/pyloid';
-
 function require_pyloid() {
     return function (
         _: any,
@@ -31,14 +29,14 @@ function require_pyloid() {
     };
 }
 
-export class JSApi implements PyloidJSApi {
+export class JSApi {
     @require_pyloid()
-    async get_server_port() {
+    async get_server_port(): Promise<{ host: string; port: number } | null> {
         return await window.pyloid.JSApi.get_server_port();
     }
 
     @require_pyloid()
-    async start_websocket_server() {
+    async start_websocket_server(): Promise<boolean | null> {
         return await window.pyloid.JSApi.start_websocket_server();
     }
 }
