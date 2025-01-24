@@ -7,7 +7,7 @@ const config = {
     // for more information about preprocessors
     preprocess: vitePreprocess(),
     compilerOptions: {
-        runes: true
+        // runes: true
     },
 
     kit: {
@@ -24,7 +24,7 @@ const config = {
             type: 'hash'
         },
         alias: {
-            '@/*': './src/lib'
+            // '@/*': './src/lib'
         }
     }
 };

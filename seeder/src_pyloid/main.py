@@ -1,9 +1,7 @@
 import os
 from pyloid import Pyloid, get_production_path, is_production
 from .bridge import JSApi
-from .functions import find_free_port
 
-PORT = find_free_port()
 
 app = Pyloid(app_name="Pyloid-App", single_instance=True)
 production_path = get_production_path()

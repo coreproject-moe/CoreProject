@@ -1,5 +1,5 @@
-from .url import URL
+from .server import Server
 
 
-class JSApi(URL):
+class JSApi(Server):
     pass
