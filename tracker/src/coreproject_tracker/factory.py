@@ -15,7 +15,7 @@ from coreproject_tracker.singletons.redis import RedisConnectionManager
 
 def make_app(udp_port=8001, http_port=9000, websocket_port=8080):
     console_observer = textFileLogObserver(sys.stdout)
-    globalLogPublisher.addObserver(console_observer) # type: ignore
+    globalLogPublisher.addObserver(console_observer)  # type: ignore
 
     RedisConnectionManager.initialize()
 

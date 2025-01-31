@@ -13,7 +13,7 @@ def convert_str_to_ip_object(ip: str) -> bool:
         return False
 
 
-def addr_to_ip_port(addr: list[str]) -> (str, int):
+def addr_to_ip_port(addr: list[str]) -> tuple[str, int]:
     """Convert address in the format [IP]:[PORT] to a tuple (IP, PORT)."""
     if not isinstance(addr, str):
         raise ValueError("Address must be a string in the format [IP]:[PORT]")
@@ -41,7 +41,7 @@ def addrs_to_compact(addrs: str | list[str]) -> bytes:
     return bytes(compact)
 
 
-def convert_ipv4_coded_ipv6_to_ipv4(ip):
+def convert_ipv4_coded_ipv6_to_ipv4(ip) -> bool | str:
     if not (ip_obj := convert_str_to_ip_object(ip)):
         return False
 
@@ -50,7 +50,7 @@ def convert_ipv4_coded_ipv6_to_ipv4(ip):
         return str(ip_obj.ipv4_mapped)
 
 
-def check_ip_type(ip):
+def check_ip_type(ip) -> bool | IP:
     if not (ip_obj := convert_str_to_ip_object(ip)):
         return False
 

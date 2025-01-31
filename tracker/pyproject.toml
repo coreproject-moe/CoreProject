@@ -42,8 +42,3 @@ line-length = 88
 [tool.ruff.lint]
 ignore = ["E501", "C901"]
 select = ["I", "E", "F", "W", "C"]
-
-[tool.pyright]
-venvPath = "./"
-venv = ".venv"
-pythonVersion = "3.13"

@@ -7,7 +7,7 @@ from coreproject_tracker.constants import (
 from coreproject_tracker.singletons import RedisConnectionManager
 
 
-def hset(hash_key, field, value):
+def hset(hash_key: str, field: str, value: str) -> None:
     r = RedisConnectionManager.get_client()
 
     expiration = int(time.time() + PEER_TTL)
@@ -17,7 +17,7 @@ def hset(hash_key, field, value):
     r.expire(hash_key, HASH_EXPIRE_TIME)
 
 
-def hget(hash_key):
+def hget(hash_key: str) -> None | dict[str, str | int]:
     r = RedisConnectionManager.get_client()
 
     # Retrieve all fields and their values from the hash
