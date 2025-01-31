@@ -45,9 +45,7 @@ class HTTPServer(resource.Resource):
     def on_task_error(self, failure, request):
         print(failure)
         request.setResponseCode(HTTPStatus.BAD_REQUEST)
-        request.write(
-            bencodepy.bencode({"failure reason": failure.getErrorMessage()}).encode()
-        )
+        request.write(bencodepy.bencode({"failure reason": failure.getErrorMessage()}))
         request.finish()
 
     def __render_GET(self, request: Request) -> bytes:
@@ -120,7 +118,7 @@ class HTTPServer(resource.Resource):
         }
         return bencodepy.bencode(output)
 
-    def parse_data(self, request: Request) -> dict[str, str | int] | bytes:
+    def parse_data(self, request: Request) -> dict[str, str | int] | str:
         params = {}
 
         info_hash_raw = request.args[b"info_hash"][0]
