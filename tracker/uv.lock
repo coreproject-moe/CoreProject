@@ -102,9 +102,9 @@ dev = [
 requires-dist = [
     { name = "autobahn", extras = ["twisted"], specifier = ">=24.4.2,<25" },
     { name = "bencode-py", specifier = ">=4.0.0,<5" },
-    { name = "packaging", specifier = "~=24.2" },
+    { name = "packaging", specifier = ">=24.2" },
     { name = "redis", extras = ["hiredis"], specifier = ">=5.2.1,<6" },
-    { name = "twisted", specifier = ">=24.11.0,<25" },
+    { name = "twisted", specifier = ">=24.11.0" },
 ]
 
 [package.metadata.requires-dev]
