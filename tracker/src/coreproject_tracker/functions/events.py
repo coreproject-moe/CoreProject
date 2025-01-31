@@ -1,7 +1,7 @@
 from coreproject_tracker.enums import EVENT_NAMES
 
 
-def convert_event_id_to_event_enum(event_id):
+def convert_event_id_to_event_enum(event_id: int) -> EVENT_NAMES:
     match event_id:
         case 0:
             return EVENT_NAMES.UPDATE
@@ -17,7 +17,7 @@ def convert_event_id_to_event_enum(event_id):
             raise ValueError("`event_id` is not supported")
 
 
-def convert_event_name_to_event_enum(event_name: str):
+def convert_event_name_to_event_enum(event_name: str) -> EVENT_NAMES:
     match event_name.lower():
         case "update":
             return EVENT_NAMES.UPDATE
