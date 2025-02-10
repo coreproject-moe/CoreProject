@@ -28,7 +28,7 @@
         "eslint-config-prettier": "^10.0.1",
         "eslint-plugin-svelte": "^2.46.1",
         "globals": "^15.14.0",
-        "lucide-svelte": "^0.474.0",
+        "lucide-svelte": "^0.475.0",
         "prettier": "^3.4.2",
         "prettier-plugin-svelte": "^3.3.2",
         "prettier-plugin-tailwindcss": "^0.6.11",
