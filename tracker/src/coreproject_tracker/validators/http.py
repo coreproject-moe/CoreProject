@@ -7,7 +7,7 @@ from coreproject_tracker.functions import (
 from coreproject_tracker.enums import EVENT_NAMES
 
 
-def convert_ip(value: str):
+def convert_ip(value: str) -> str:
     if ipv4_address := convert_ipv4_coded_ipv6_to_ipv4(value):
         return ipv4_address
     else:

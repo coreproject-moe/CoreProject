@@ -26,3 +26,4 @@ from .ip import convert_ipv4_coded_ipv6_to_ipv4 as convert_ipv4_coded_ipv6_to_ip
 from .ip import (
     convert_str_to_ip_object as convert_str_to_ip_object,
 )
+from .redis import hdel as hdel, hget as hget, hset as hset
