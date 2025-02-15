@@ -1,6 +1,6 @@
-from quart import Blueprint
-from quart import request
-from coreproject_tracker.parser.http import parse_data
+from quart import Blueprint, request
+from coreproject_tracker.validators import HttpValidator
+from http import HTTPStatus
 
 http_blueprint = Blueprint("http", __name__)
 
@@ -9,10 +9,12 @@ http_blueprint = Blueprint("http", __name__)
 async def hello():
     if len(request.args) == 0:
         return "🐟🐈 ⸜(｡˃ ᵕ ˂ )⸝♡".encode("utf-8")
+
     try:
-        data = await parse_data(request.args)
-        print(data)
+        data = HttpValidator(**request.args, peer_ip=request.remote_addr)
     except Exception as e:
-        print(e)
+        return str(e), HTTPStatus.BAD_REQUEST
+
+    print(data)
 
     return "yi"

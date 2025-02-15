@@ -4,4 +4,10 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
-dependencies = ["hypercorn[trio]>=0.17.3", "quart>=0.20.0", "trio>=0.29.0"]
+dependencies = [
+    "attrs>=25.1.0",
+    "hypercorn[trio]>=0.17.3",
+    "quart>=0.20.0",
+    "quart-trio>=0.12.0",
+    "trio>=0.29.0",
+]
