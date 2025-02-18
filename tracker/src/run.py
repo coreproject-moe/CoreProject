@@ -1,4 +1,4 @@
-import trio
+import anyio
 from coreproject_tracker.main import main
 
-trio.run(main)
+anyio.run(main)

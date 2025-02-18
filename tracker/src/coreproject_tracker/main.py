@@ -1,19 +1,19 @@
-import trio
+import anyio
 from coreproject_tracker.server.http import http_blueprint
 from coreproject_tracker.server.websocket import ws_blueprint
 from coreproject_tracker.server.udp import run_udp_server
-from coreproject_tracker.env import REDIS_HOST, REDIS_PORT
-from quart_trio import QuartTrio
-from hypercorn.trio import serve
+from coreproject_tracker.env import REDIS_HOST, REDIS_PORT, REDIS_DATABASE
+from quart import Quart
+from hypercorn.asyncio import serve
 from hypercorn.config import Config
 from quart_redis import RedisHandler
 
-app = QuartTrio(__name__)
+app = Quart(__name__)
 app.register_blueprint(http_blueprint)
 app.register_blueprint(ws_blueprint)
 
 # Config
-app.config["REDIS_URI"] = f"redis://{REDIS_HOST}:{REDIS_PORT}"
+app.config["REDIS_URI"] = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DATABASE}"
 
 # Handler
 RedisHandler(app)
@@ -26,6 +26,6 @@ async def run_web_server():
 
 
 async def main():
-    async with trio.open_nursery() as nursery:
+    async with anyio.create_task_group() as nursery:
         nursery.start_soon(run_web_server)
         nursery.start_soon(run_udp_server)

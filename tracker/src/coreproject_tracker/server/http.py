@@ -20,9 +20,6 @@ http_blueprint = Blueprint("http", __name__)
 
 @http_blueprint.route("/")
 async def http_endpoint():
-    redis = get_redis()
-    print(redis.client_info())
-
     if len(request.args) == 0:
         return "🐟🐈 ⸜(｡˃ ᵕ ˂ )⸝♡"
 
