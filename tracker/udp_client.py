@@ -3,10 +3,10 @@ import socket
 
 def udp_client():
     # Create a UDP socket
-    client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    client_socket = socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)
 
     # Server address (replace with the actual server's IP and port)
-    server_address = ("localhost", 5000)
+    server_address = ("[::1]", 5000)
 
     try:
         # Message to send

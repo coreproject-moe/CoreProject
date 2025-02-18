@@ -1,4 +1,5 @@
 import anyio
+import socket
 from coreproject_tracker.validators import UdpValidator
 from coreproject_tracker.functions import (
     from_uint16,
@@ -89,7 +90,10 @@ async def make_udp_packet(params: UdpValidator) -> bytes:
 async def run_udp_server(server_host: str, server_port: int):
     print(f"Running UDP server on `udp://{server_host}:{server_port}`")
     async with await anyio.create_udp_socket(
-        local_host="[::1]", local_port=server_port
+        # local_host="127.0.0.1",
+        local_host="::",
+        local_port=server_port,
+        # family=socket.AF_INET6,
     ) as udp:
         async for packet, (host, port) in udp:
             if len(packet) < 16:
@@ -174,4 +178,4 @@ async def run_udp_server(server_host: str, server_port: int):
 
             packet = await make_udp_packet(data)
             await udp.sendto(packet, host, port)
-            print(f"Sent data to {host}:{port} with {data}")
+            print(f"Sent data to {host}:{port} with {packet}")
