@@ -6,7 +6,7 @@ def udp_client():
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
     # Server address (replace with the actual server's IP and port)
-    server_address = ("127.0.0.1", 5000)
+    server_address = ("localhost", 5000)
 
     try:
         # Message to send

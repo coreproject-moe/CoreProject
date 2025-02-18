@@ -89,11 +89,13 @@ async def make_udp_packet(params: UdpValidator) -> bytes:
 async def run_udp_server(server_host: str, server_port: int):
     print(f"Running UDP server on `udp://{server_host}:{server_port}`")
     async with await anyio.create_udp_socket(
-        local_host=server_host, local_port=server_port
+        local_host="[::1]", local_port=server_port
     ) as udp:
         async for packet, (host, port) in udp:
             if len(packet) < 16:
-                print(f"received packet length is {packet} is shorter than 16 bytes")
+                # log.error(
+                #     f"received packet length is {packet} is shorter than 16 bytes"
+                # )
                 await udp.sendto(b"", host, port)
 
             _data = {
@@ -104,13 +106,12 @@ async def run_udp_server(server_host: str, server_port: int):
             data = UdpValidator(**_data)
 
             if data.action == ACTIONS.ANNOUNCE:
-                print("hello")
                 _data = (
                     _data
                     | {
                         "info_hash": packet[16:36].hex(),  # 20 bytes
                         "peer_id": packet[36:56].hex(),  # 20 bytes
-                        "downloaded": from_uint64(
+                        "downloaded": await from_uint64(
                             packet[56:64]  # Convert 64-bit unsigned integer
                         ),
                         "left": await from_uint64(

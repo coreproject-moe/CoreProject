@@ -9,23 +9,18 @@ from coreproject_tracker.constants import (
 import struct
 
 
-def max_20_length(instance: "UdpValidator", attribute: str, value: bytes | None):
-    if value and (length := len(value) != 20):
-        raise ValueError(f"{attribute} of {instance} is larger than 20. It is {length}")
-
-
 @define
 class UdpValidator:
+    # CONSTANT
+    interval: int = field(init=False, default=ANNOUNCE_INTERVAL)
+
     connection_id: bytes = field()
     action: int = field()
     transaction_id: int = field()
 
-    # Inherited from constants
-    interval: int = field(default=ANNOUNCE_INTERVAL)
-
     # Only available on ANNOUNCE
-    info_hash: bytes = field(default=None, validator=[max_20_length])  # 20 bytes
-    peer_id: bytes = field(default=None, validator=[max_20_length])  # 20 bytes
+    info_hash: bytes = field(default=None)  # 20 bytes
+    peer_id: bytes = field(default=None)  # 20 bytes
     downloaded: int = field(default=None)
     left: int = field(default=None)
     uploaded: int = field(default=None)
