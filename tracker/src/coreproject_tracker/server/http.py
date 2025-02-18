@@ -24,7 +24,7 @@ async def http_endpoint():
 
     try:
         _data = {
-            "info_hash": request.args.get("info_hash"),
+            "info_hash_raw": request.args.get("info_hash"),
             "port": request.args.get("port"),
             "left": request.args.get("left"),
             "numwant": request.args.get("numwant"),
@@ -114,5 +114,4 @@ async def http_endpoint():
         "complete": seeders,
         "incomplete": leechers,
     }
-    print(output)
     return bencodepy.bencode(output)

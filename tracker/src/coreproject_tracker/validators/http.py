@@ -26,7 +26,7 @@ def convert_event(value: str):
 
 @define
 class HttpValidator:
-    info_hash: bytes = field(converter=convert_to_url_bytes)
+    info_hash_raw: bytes = field(converter=convert_to_url_bytes)
     port: int = field(converter=int)
     left: str = field(converter=int)
     numwant: str = field(converter=int)
@@ -34,9 +34,11 @@ class HttpValidator:
     peer_ip: str = field(converter=convert_ip)
     event: EVENT_NAMES = field(default=None, converter=convert_event)
 
-    @info_hash.validator
+    # Derived
+    info_hash: bytes = field(init=False)
+
+    @info_hash_raw.validator
     def _check_info_hash(self, attribute: str, value: bytes):
-        print(value)
         if len(value) > 20:
             raise ValueError(
                 f"`info_hash` of `{attribute}` length is {len(value)} which is greater than 20"
@@ -50,5 +52,5 @@ class HttpValidator:
             )
 
     def __attrs_post_init__(self):
-        self.info_hash = self.info_hash.hex()
         self.numwant = min(self.numwant or DEFAULT_ANNOUNCE_PEERS, MAX_ANNOUNCE_PEERS)
+        self.info_hash = self.info_hash_raw.hex()
