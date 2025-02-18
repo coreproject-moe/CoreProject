@@ -34,7 +34,7 @@ class HttpValidator:
         info_hash = value.encode()
         if len(info_hash) > 20:
             raise ValueError(
-                f"`info_hash` of `{attribute}` length is {info_hash} which is greater than 20"
+                f"`info_hash` of `{attribute}` length is {len(info_hash)} which is greater than 20"
             )
 
     @port.validator

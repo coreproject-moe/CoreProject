@@ -9,8 +9,8 @@ from coreproject_tracker.constants import (
 import struct
 
 
-def max_20_length(instance: "UdpValidator", attribute: str, value: bytes):
-    if (length := len(value)) != 20:
+def max_20_length(instance: "UdpValidator", attribute: str, value: bytes | None):
+    if value and (length := len(value) != 20):
         raise ValueError(f"{attribute} of {instance} is larger than 20. It is {length}")
 
 
@@ -46,7 +46,7 @@ class UdpValidator:
     @connection_id.validator
     def _check_connection_id(self, attribute: str, value: bytes):
         connection_id_unpacked = struct.unpack(">Q", value)[0]
-        if value != CONNECTION_ID:
+        if connection_id_unpacked != CONNECTION_ID:
             raise ValueError(
                 f"`{connection_id_unpacked}` of `{attribute}` is not same as `{CONNECTION_ID}`"
             )

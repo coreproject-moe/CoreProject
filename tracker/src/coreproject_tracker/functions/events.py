@@ -1,7 +1,7 @@
 from coreproject_tracker.enums import EVENT_NAMES
 
 
-def convert_event_id_to_event_enum(event_id):
+async def convert_event_id_to_event_enum(event_id):
     match event_id:
         case 0:
             return EVENT_NAMES.UPDATE

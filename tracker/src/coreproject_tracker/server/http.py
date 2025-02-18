@@ -19,12 +19,24 @@ http_blueprint = Blueprint("http", __name__)
 
 @http_blueprint.route("/")
 async def http_endpoint():
+    print(request.args)
+
     if len(request.args) == 0:
         return "🐟🐈 ⸜(｡˃ ᵕ ˂ )⸝♡"
 
     try:
-        data = HttpValidator(**request.args, peer_ip=request.remote_addr)
+        _data = {
+            "info_hash": request.args.get("info_hash"),
+            "port": request.args.get("port"),
+            "left": request.args.get("left"),
+            "numwant": request.args.get("numwant"),
+            "peer_ip": request.remote_addr,
+            "peer_id": request.args.get("peer_id"),
+            "event": request.args.get("event"),
+        }
+        data = HttpValidator(**_data)
     except Exception as e:
+        print(e)
         return str(e), HTTPStatus.BAD_REQUEST
 
     if data.event == EVENT_NAMES.STOP:
@@ -104,4 +116,5 @@ async def http_endpoint():
         "complete": seeders,
         "incomplete": leechers,
     }
+    print(output)
     return bencodepy.bencode(output)
