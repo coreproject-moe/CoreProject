@@ -5,6 +5,11 @@ from coreproject_tracker.functions import (
     convert_ipv4_coded_ipv6_to_ipv4,
 )
 from coreproject_tracker.enums import EVENT_NAMES
+import urllib.parse
+
+
+def convert_to_url_bytes(value: str) -> bytes:
+    return urllib.parse.unquote_to_bytes(value)
 
 
 def convert_ip(value: str) -> str:
@@ -21,7 +26,7 @@ def convert_event(value: str):
 
 @define
 class HttpValidator:
-    info_hash: str = field()
+    info_hash: bytes = field(converter=convert_to_url_bytes)
     port: int = field(converter=int)
     left: str = field(converter=int)
     numwant: str = field(converter=int)
@@ -30,9 +35,12 @@ class HttpValidator:
     event: EVENT_NAMES = field(default=None, converter=convert_event)
 
     @info_hash.validator
-    def _check_info_hash(self, attribute: str, value: str):
-        print(value.encode().hex())
-        info_hash = value.encode()
+    def _check_info_hash(self, attribute: str, value: bytes):
+        # b'#4\xe7\xad\x97\xe1\x83{r\xdd^\x1a\n\xf2\x03\xd0\xd9l\xdbj'
+        print(value)
+        info_hash = value.hex()
+        print(info_hash)
+        print(len(info_hash))
         if len(info_hash) > 20:
             raise ValueError(
                 f"`info_hash` of `{attribute}` length is {len(info_hash)} which is greater than 20"
@@ -46,5 +54,5 @@ class HttpValidator:
             )
 
     def __attrs_post_init__(self):
-        self.info_hash = self.info_hash.encode().hex()
+        self.info_hash = self.info_hash.hex()
         self.numwant = min(self.numwant or DEFAULT_ANNOUNCE_PEERS, MAX_ANNOUNCE_PEERS)
