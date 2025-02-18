@@ -19,8 +19,6 @@ http_blueprint = Blueprint("http", __name__)
 
 @http_blueprint.route("/")
 async def http_endpoint():
-    print(request.args)
-
     if len(request.args) == 0:
         return "🐟🐈 ⸜(｡˃ ᵕ ˂ )⸝♡"
 

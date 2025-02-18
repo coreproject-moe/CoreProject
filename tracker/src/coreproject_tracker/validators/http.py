@@ -31,6 +31,7 @@ class HttpValidator:
 
     @info_hash.validator
     def _check_info_hash(self, attribute: str, value: str):
+        print(value.encode().hex())
         info_hash = value.encode()
         if len(info_hash) > 20:
             raise ValueError(
