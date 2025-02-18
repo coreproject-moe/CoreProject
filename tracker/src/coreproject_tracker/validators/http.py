@@ -36,14 +36,10 @@ class HttpValidator:
 
     @info_hash.validator
     def _check_info_hash(self, attribute: str, value: bytes):
-        # b'#4\xe7\xad\x97\xe1\x83{r\xdd^\x1a\n\xf2\x03\xd0\xd9l\xdbj'
         print(value)
-        info_hash = value.hex()
-        print(info_hash)
-        print(len(info_hash))
-        if len(info_hash) > 20:
+        if len(value) > 20:
             raise ValueError(
-                f"`info_hash` of `{attribute}` length is {len(info_hash)} which is greater than 20"
+                f"`info_hash` of `{attribute}` length is {len(value)} which is greater than 20"
             )
 
     @port.validator
