@@ -10,6 +10,5 @@ dependencies = [
     "bencode-py>=4.0.0",
     "hypercorn>=0.17.3",
     "quart>=0.20.0",
-    "quart-redis>=2.0.0",
-    "redis[hiredis]>=4.6.0",
+    "redis[hiredis]>=5.2.1",
 ]

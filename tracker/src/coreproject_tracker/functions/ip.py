@@ -50,7 +50,7 @@ def convert_ipv4_coded_ipv6_to_ipv4(ip):
         return str(ip_obj.ipv4_mapped)
 
 
-def check_ip_type(ip):
+async def check_ip_type(ip):
     if not (ip_obj := convert_str_to_ip_object(ip)):
         return False
 

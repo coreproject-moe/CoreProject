@@ -253,25 +253,12 @@ wheels = [
 ]
 
 [[package]]
-name = "quart-redis"
-version = "2.0.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "quart" },
-    { name = "redis" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/4e/c7/a68e4e7f5b375d4c24c05b8b2e266b720297d83dd85f6c2524aaa4cb8c42/quart-redis-2.0.0.tar.gz", hash = "sha256:c5bf5d23da973e415a65e2b342242ebacb3734aeb61cde58bcce099dec66a1a9", size = 3683 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/71/ae/f5dac578068a6aad7a9489104fef8fe25258c2a22a6eec751c9b43503a89/quart_redis-2.0.0-py3-none-any.whl", hash = "sha256:13fcd66245c20dc3c292245f5c3de8b7ecd1353ab64052883e9c051a39091de8", size = 3826 },
-]
-
-[[package]]
 name = "redis"
-version = "4.6.0"
+version = "5.2.1"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/73/88/63d802c2b18dd9eaa5b846cbf18917c6b2882f20efda398cc16a7500b02c/redis-4.6.0.tar.gz", hash = "sha256:585dc516b9eb042a619ef0a39c3d7d55fe81bdb4df09a52c9cdde0d07bf1aa7d", size = 4561721 }
+sdist = { url = "https://files.pythonhosted.org/packages/47/da/d283a37303a995cd36f8b92db85135153dc4f7a8e4441aa827721b442cfb/redis-5.2.1.tar.gz", hash = "sha256:16f2e22dff21d5125e8481515e386711a34cbec50f0e44413dd7d9c060a54e0f", size = 4608355 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/20/2e/409703d645363352a20c944f5d119bdae3eb3034051a53724a7c5fee12b8/redis-4.6.0-py3-none-any.whl", hash = "sha256:e2b03db868160ee4591de3cb90d40ebb50a90dd302138775937f6a42b7ed183c", size = 241149 },
+    { url = "https://files.pythonhosted.org/packages/3c/5f/fa26b9b2672cbe30e07d9a5bdf39cf16e3b80b42916757c5f92bca88e4ba/redis-5.2.1-py3-none-any.whl", hash = "sha256:ee7e1056b9aea0f04c6c2ed59452947f34c4940ee025f5dd83e6a6418b6989e4", size = 261502 },
 ]
 
 [package.optional-dependencies]
@@ -298,7 +285,6 @@ dependencies = [
     { name = "bencode-py" },
     { name = "hypercorn" },
     { name = "quart" },
-    { name = "quart-redis" },
     { name = "redis", extra = ["hiredis"] },
 ]
 
@@ -309,8 +295,7 @@ requires-dist = [
     { name = "bencode-py", specifier = ">=4.0.0" },
     { name = "hypercorn", specifier = ">=0.17.3" },
     { name = "quart", specifier = ">=0.20.0" },
-    { name = "quart-redis", specifier = ">=2.0.0" },
-    { name = "redis", extras = ["hiredis"], specifier = ">=4.6.0" },
+    { name = "redis", extras = ["hiredis"], specifier = ">=5.2.1" },
 ]
 
 [[package]]

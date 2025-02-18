@@ -13,7 +13,6 @@ from coreproject_tracker.validators import HttpValidator
 from http import HTTPStatus
 import json
 from coreproject_tracker.enums import EVENT_NAMES, IP
-from quart_redis import get_redis
 
 http_blueprint = Blueprint("http", __name__)
 
@@ -33,7 +32,7 @@ async def http_endpoint():
         return ""
 
     await hset(
-        data["info_hash"],
+        data.info_hash,
         f"{data.peer_ip}:{data.port}",
         json.dumps(
             {
@@ -51,35 +50,51 @@ async def http_endpoint():
     seeders = 0
     leechers = 0
 
-    redis_data = hget(data.info_hash)
-    peers_list = get_n_random_items(redis_data.values(), data.numwant)
+    redis_data = await hget(data.info_hash)
+    peers_list = await get_n_random_items(redis_data.values(), data.numwant)
 
     for peer in peers_list:
-        peer_data = json.loads(peer)
+        # Local variables to make undo possible
+        _peers = []
+        _peers6 = []
+        _seeders = 0
+        _leechers = 0
 
-        if peer_data["left"] == 0:
-            seeders += 1
-        else:
-            leechers += 1
+        try:
+            peer_data = json.loads(peer)
 
-        peer_ip = peer_data["peer_ip"]
-        peer_ip_type = check_ip_type(peer_ip)
-        if peer_ip_type == IP.IPV4:
-            peers.append(
-                {
-                    "peer id": hex_to_bin(peer_data["peer_id"]),
-                    "ip": peer_data["peer_ip"],
-                    "port": peer_data["port"],
-                }
-            )
-        elif peer_ip_type == IP.IPV6:
-            peers6.append(
-                {
-                    "peer id": hex_to_bin(peer_data["peer_id"]),
-                    "ip": peer_data["peer_ip"],
-                    "port": peer_data["port"],
-                }
-            )
+            if peer_data["left"] == 0:
+                _seeders += 1
+            else:
+                _leechers += 1
+
+            peer_ip = peer_data["peer_ip"]
+            peer_ip_type = await check_ip_type(peer_ip)
+            if peer_ip_type == IP.IPV4:
+                _peers.append(
+                    {
+                        "peer id": await hex_to_bin(peer_data["peer_id"]),
+                        "ip": peer_data["peer_ip"],
+                        "port": peer_data["port"],
+                    }
+                )
+            elif peer_ip_type == IP.IPV6:
+                _peers6.append(
+                    {
+                        "peer id": await hex_to_bin(peer_data["peer_id"]),
+                        "ip": peer_data["peer_ip"],
+                        "port": peer_data["port"],
+                    }
+                )
+
+        except (ValueError, KeyError):
+            continue
+
+        # This is here to make undo possible
+        peers.extend(_peers)
+        peers6.extend(_peers6)
+        seeders += _seeders
+        leechers += _leechers
 
     output = {
         "peers": peers,
