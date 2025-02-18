@@ -37,7 +37,7 @@ async def http_endpoint():
         print(e)
         return str(e), HTTPStatus.BAD_REQUEST
 
-    if data.event == EVENT_NAMES.STOP:
+    if data.event_name == EVENT_NAMES.STOP:
         await hdel(data.info_hash, f"{data.peer_ip}:{data.port}")
         return ""
 

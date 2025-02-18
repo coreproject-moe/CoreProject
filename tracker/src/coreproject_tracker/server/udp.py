@@ -93,9 +93,7 @@ async def run_udp_server(server_host: str, server_port: int):
     ) as udp:
         async for packet, (host, port) in udp:
             if len(packet) < 16:
-                # log.error(
-                #     f"received packet length is {packet} is shorter than 16 bytes"
-                # )
+                print(f"received packet length is {packet} is shorter than 16 bytes")
                 await udp.sendto(b"", host, port)
 
             _data = {
@@ -106,6 +104,7 @@ async def run_udp_server(server_host: str, server_port: int):
             data = UdpValidator(**_data)
 
             if data.action == ACTIONS.ANNOUNCE:
+                print("hello")
                 _data = (
                     _data
                     | {
@@ -173,5 +172,5 @@ async def run_udp_server(server_host: str, server_port: int):
                 await hdel(data.info_hash, f"{data.ip}:{data.port}")
 
             packet = await make_udp_packet(data)
-            print(f"Sent data to {host}:{port} with {data}")
             await udp.sendto(packet, host, port)
+            print(f"Sent data to {host}:{port} with {data}")

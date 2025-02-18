@@ -41,7 +41,6 @@ class UdpValidator:
     # Might not need these
     ip: str = field(default=None)
     port: int = field(default=None)
-    addr: str = field(default=None)
 
     @connection_id.validator
     def _check_connection_id(self, attribute: str, value: bytes):
