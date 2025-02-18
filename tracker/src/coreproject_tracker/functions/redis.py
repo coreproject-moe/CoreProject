@@ -36,7 +36,6 @@ async def hget(hash_key: str) -> None | dict[str, str | int]:
     return valid_fields
 
 
-async def hdel(hash_key, field_name):
+async def hdel(hash_key, field_name) -> None:
     r = get_redis()
-
     await r.hdel(hash_key, field_name)

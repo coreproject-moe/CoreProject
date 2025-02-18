@@ -1,4 +1,4 @@
 import anyio
 from coreproject_tracker.main import main
 
-anyio.run(main)
+anyio.run(main, backend="asyncio")

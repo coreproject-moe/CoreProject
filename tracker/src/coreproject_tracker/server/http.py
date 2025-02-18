@@ -70,22 +70,23 @@ async def http_endpoint():
 
             peer_ip = peer_data["peer_ip"]
             peer_ip_type = await check_ip_type(peer_ip)
-            if peer_ip_type == IP.IPV4:
-                _peers.append(
-                    {
-                        "peer id": await hex_to_bin(peer_data["peer_id"]),
-                        "ip": peer_data["peer_ip"],
-                        "port": peer_data["port"],
-                    }
-                )
-            elif peer_ip_type == IP.IPV6:
-                _peers6.append(
-                    {
-                        "peer id": await hex_to_bin(peer_data["peer_id"]),
-                        "ip": peer_data["peer_ip"],
-                        "port": peer_data["port"],
-                    }
-                )
+            match peer_ip_type:
+                case IP.IPV4:
+                    _peers.append(
+                        {
+                            "peer id": await hex_to_bin(peer_data["peer_id"]),
+                            "ip": peer_data["peer_ip"],
+                            "port": peer_data["port"],
+                        }
+                    )
+                case IP.IPV6:
+                    _peers6.append(
+                        {
+                            "peer id": await hex_to_bin(peer_data["peer_id"]),
+                            "ip": peer_data["peer_ip"],
+                            "port": peer_data["port"],
+                        }
+                    )
 
         except (ValueError, KeyError):
             continue

@@ -34,13 +34,15 @@ class HttpValidator:
         info_hash = value.encode()
         if len(info_hash) > 20:
             raise ValueError(
-                f"`info_hash` length is {info_hash} which is greater than 20"
+                f"`info_hash` of `{attribute}` length is {info_hash} which is greater than 20"
             )
 
     @port.validator
     def _check_port(self, attribute: str, value: int):
         if value <= 0 and value >= 65535:
-            raise ValueError(f"`port` is {value} which is not in range(0, 65535)")
+            raise ValueError(
+                f"`port` of {attribute} is {value} which is not in range(0, 65535)"
+            )
 
     def __attrs_post_init__(self):
         self.info_hash = self.info_hash.encode().hex()

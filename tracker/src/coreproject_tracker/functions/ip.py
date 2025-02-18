@@ -13,7 +13,7 @@ def convert_str_to_ip_object(ip: str) -> bool:
         return False
 
 
-def addr_to_ip_port(addr: list[str]) -> (str, int):
+def addr_to_ip_port(addr: list[str]) -> tuple[str, int]:
     """Convert address in the format [IP]:[PORT] to a tuple (IP, PORT)."""
     if not isinstance(addr, str):
         raise ValueError("Address must be a string in the format [IP]:[PORT]")
