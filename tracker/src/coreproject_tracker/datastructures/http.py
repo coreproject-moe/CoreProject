@@ -11,7 +11,7 @@ from coreproject_tracker.enums import EVENT_NAMES
 from coreproject_tracker.functions import (
     convert_event_name_to_event_enum,
 )
-from coreproject_tracker.validators import validate_ip
+from coreproject_tracker.validators import validate_ip, validate_port
 
 
 @define
@@ -19,7 +19,7 @@ class HttpDatastructure:
     info_hash_raw: bytes = field(
         converter=convert_to_url_bytes, validator=validators.instance_of(bytes)
     )
-    port: int = field(converter=int)
+    port: int = field(converter=int, validator=[validate_port])
     left: str = field(converter=int, validator=validators.instance_of(int))
     numwant: str = field(converter=int, validator=validators.instance_of(int))
     peer_id: str = field(validator=validators.instance_of(str))
@@ -35,13 +35,6 @@ class HttpDatastructure:
         if len(value) > 20:
             raise ValueError(
                 f"`info_hash` of `{attribute}` length is {len(value)} which is greater than 20"
-            )
-
-    @port.validator
-    def _check_port(self, attribute: str, value: int) -> NoReturn:
-        if value <= 0 and value >= 65535:
-            raise ValueError(
-                f"`port` of {attribute} is {value} which is not in range(0, 65535)"
             )
 
     def __attrs_post_init__(self) -> NoReturn:

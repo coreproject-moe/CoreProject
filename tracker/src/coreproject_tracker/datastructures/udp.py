@@ -11,7 +11,7 @@ from coreproject_tracker.constants import (
 )
 from coreproject_tracker.enums import EVENT_NAMES
 from coreproject_tracker.functions import convert_event_id_to_event_enum
-from coreproject_tracker.validators import validate_nullable_ip
+from coreproject_tracker.validators import validate_ip, validate_port
 
 
 @define
@@ -41,8 +41,8 @@ class UdpDatastructure:
     complete: int = field(default=0)
 
     # Might not need these
-    ip: str = field(default=None, validator=[validate_nullable_ip])
-    port: int = field(default=None)
+    ip: str = field(default=None, validator=[validate_ip])
+    port: int = field(default=None, validator=[validate_port])
 
     # Derived
     event_name: EVENT_NAMES = field(init=False)
