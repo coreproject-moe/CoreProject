@@ -1,9 +1,6 @@
 import time
 
-from coreproject_tracker.constants import (
-    HASH_EXPIRE_TIME,
-    PEER_TTL,
-)
+from coreproject_tracker.constants import HASH_EXPIRE_TIME, PEER_TTL
 from quart_redis import get_redis
 
 

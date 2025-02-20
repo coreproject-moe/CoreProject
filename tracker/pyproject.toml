@@ -5,10 +5,18 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "anyio>=4.8.0",
     "attrs>=25.1.0",
     "bencode-py>=4.0.0",
     "hypercorn>=0.17.3",
     "quart>=0.20.0",
     "redis[hiredis]>=5.2.1",
 ]
+
+[tool.ruff.lint]
+extend-select = ["I"]  # Enables isort rules
+
+[tool.ruff.format]
+skip-magic-trailing-comma = false  # Avoids conflict with isort.split-on-trailing-comma
+
+[tool.ruff.lint.isort]
+split-on-trailing-comma = true  # Keep this aligned with format.skip-magic-trailing-comma

@@ -1,12 +1,13 @@
+import struct
+
 from attrs import define, field
+
 from coreproject_tracker.constants import (
+    ANNOUNCE_INTERVAL,
     CONNECTION_ID,
     DEFAULT_ANNOUNCE_PEERS,
     MAX_ANNOUNCE_PEERS,
-    ANNOUNCE_INTERVAL,
 )
-
-import struct
 
 
 @define

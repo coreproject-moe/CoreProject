@@ -1,196 +1,132 @@
-import anyio
-import socket
-from coreproject_tracker.validators import UdpValidator
+import asyncio
+import json
+
+from coreproject_tracker.enums import ACTIONS, EVENT_NAMES
 from coreproject_tracker.functions import (
+    addrs_to_compact,
+    convert_event_id_to_event_enum,
     from_uint16,
     from_uint32,
     from_uint64,
-    to_uint32,
-    hset,
-    hget,
-    hdel,
     get_n_random_items,
-    convert_event_id_to_event_enum,
-    addrs_to_compact,
+    hdel,
+    hget,
+    hset,
+    to_uint32,
 )
-import json
-from coreproject_tracker.enums import ACTIONS, EVENT_NAMES
+from coreproject_tracker.validators import UdpValidator
 
 
-async def make_udp_packet(params: UdpValidator) -> bytes:
-    """
-    Create UDP packets for BitTorrent tracker protocol.
+class UDPServerProtocol(asyncio.DatagramProtocol):
+    def __init__(self) -> None:
+        self.transport: asyncio.DatagramTransport | None = None
 
-    Args:
-        params: Dictionary containing packet parameters including 'action' and other
-            action-specific parameters.
+    def connection_made(self, transport: asyncio.DatagramTransport) -> None:
+        self.transport = transport
 
-    Returns:
-        bytes: The constructed UDP packet
+    async def make_udp_packet(self, params: UdpValidator) -> bytes:
+        if params.action == ACTIONS.CONNECT:
+            packet: bytes = b"".join(
+                [
+                    await to_uint32(ACTIONS.CONNECT),
+                    await to_uint32(params.transaction_id),
+                    params.connection_id,
+                ]
+            )
+        elif params.action == ACTIONS.ANNOUNCE:
+            packet = b"".join(
+                [
+                    await to_uint32(ACTIONS.ANNOUNCE),
+                    await to_uint32(params.transaction_id),
+                    await to_uint32(params.interval),
+                    await to_uint32(params.incomplete),
+                    await to_uint32(params.complete),
+                    params.peers,
+                ]
+            )
+        else:
+            raise ValueError(f"Action not implemented: {params.action}")
+        return packet
 
-    Raises:
-        ValueError: If the action is not implemented
-    """
+    async def handle_packet(self, data: bytes, addr: tuple[str, int]) -> None:
+        if len(data) < 16:
+            self.transport.sendto(b"Too small payload", addr)
+            return
 
-    if params.action == ACTIONS.CONNECT:
-        print(
-            [
-                ACTIONS.CONNECT,
-                params.transaction_id,
-                params.connection_id,
-            ]
-        )
-        print(
-            [
-                await to_uint32(ACTIONS.CONNECT),
-                await to_uint32(params.transaction_id),
-                params.connection_id,
-            ]
-        )
+        _data = {
+            "connection_id": data[0:8],
+            "action": await from_uint32(data[8:12]),
+            "transaction_id": await from_uint32(data[12:16]),
+        }
+        data_obj = UdpValidator(**_data)
 
-        packet = b"".join(
-            [
-                await to_uint32(ACTIONS.CONNECT),
-                await to_uint32(params.transaction_id),
-                params.connection_id,
-            ]
-        )
-
-    elif params.action == ACTIONS.ANNOUNCE:
-        packet = b"".join(
-            [
-                await to_uint32(ACTIONS.ANNOUNCE),
-                await to_uint32(params.transaction_id),
-                await to_uint32(params.interval),
-                await to_uint32(params.incomplete),
-                await to_uint32(params.complete),
-                params.peers,
-            ]
-        )
-
-    # elif params.action == ACTIONS.SCRAPE:
-    #     scrape_response = [
-    #         to_uint32(ACTIONS.SCRAPE),
-    #         to_uint32(params.transaction_id),
-    #     ]
-
-    #     for info_hash, file in params["files"].items():
-    #         scrape_response.extend(
-    #             [
-    #                 to_uint32(file.complete),
-    #                 to_uint32(
-    #                     file.downloaded
-    #                 ),  # Note: this only provides a lower-bound
-    #                 to_uint32(file.incomplete),
-    #             ]
-    #         )
-
-    #     packet = b"".join(scrape_response)
-
-    # elif params.action == ACTIONS.ERROR:
-    #     packet = b"".join(
-    #         [
-    #             to_uint32(ACTIONS.ERROR),
-    #             to_uint32(params.transaction_id),
-    #             str(params.get("failure_reason", "")).encode(),
-    #         ]
-    #     )
-
-    else:
-        raise ValueError(f"Action not implemented: {params.action}")
-
-    return packet
-
-
-async def run_udp_server(server_host: str, server_port: int):
-    print(f"Running UDP server on `udp://{server_host}:{server_port}`")
-    async with await anyio.create_udp_socket(
-        local_host=server_host,
-        local_port=server_port,
-    ) as udp:
-        async for packet, (host, port) in udp:
-            if len(packet) < 16:
-                # log.error(
-                #     f"received packet length is {packet} is shorter than 16 bytes"
-                # )
-                await udp.sendto("Too small payload".encode(), "localhost", port)
-                await udp.receive()
-
-            _data = {
-                "connection_id": packet[0:8],
-                "action": await from_uint32(packet[8:12]),
-                "transaction_id": await from_uint32(packet[12:16]),
+        if data_obj.action == ACTIONS.ANNOUNCE:
+            _data |= {
+                "info_hash": data[16:36].hex(),
+                "peer_id": data[36:56].hex(),
+                "downloaded": await from_uint64(data[56:64]),
+                "left": await from_uint64(data[64:72]),
+                "uploaded": await from_uint64(data[72:80]),
+                "event_id": await from_uint32(data[80:84]),
+                "ip": await from_uint32(data[84:88]) or addr[0],
+                "key": await from_uint32(data[88:92]),
+                "numwant": await from_uint32(data[92:96]),
+                "port": await from_uint16(data[96:98]) or addr[1],
             }
-            data = UdpValidator(**_data)
-
-            if data.action == ACTIONS.ANNOUNCE:
-                _data = (
-                    _data
-                    | {
-                        "info_hash": packet[16:36].hex(),  # 20 bytes
-                        "peer_id": packet[36:56].hex(),  # 20 bytes
-                        "downloaded": await from_uint64(
-                            packet[56:64]  # Convert 64-bit unsigned integer
-                        ),
-                        "left": await from_uint64(
-                            packet[64:72]  # Convert 64-bit unsigned integer
-                        ),
-                        "uploaded": await from_uint64(
-                            packet[72:80]  # Convert 64-bit unsigned integer
-                        ),
-                        "event_id": await from_uint32(
-                            packet[80:84]  # Read 4-byte unsigned int (big-endian)
-                        ),
-                        "ip": await from_uint32(packet[84:88]) or host,
-                        "key": await from_uint32(packet[88:92]),
-                        "numwant": await from_uint32(packet[92:96]),
-                        "port": await from_uint16(packet[96:98]) or port,
+            data_obj = UdpValidator(**_data)
+            await hset(
+                data_obj.info_hash,
+                f"{data_obj.ip}:{data_obj.port}",
+                json.dumps(
+                    {
+                        "peer_id": data_obj.peer_id,
+                        "info_hash": data_obj.info_hash,
+                        "peer_ip": data_obj.ip,
+                        "port": data_obj.port,
+                        "left": data_obj.left,
                     }
-                )
-                data = UdpValidator(**_data)
-                await hset(
-                    data.info_hash,
-                    f"{data.ip}:{data.port}",
-                    json.dumps(
-                        {
-                            "peer_id": data.peer_id,
-                            "info_hash": data.info_hash,
-                            "peer_ip": data.ip,
-                            "port": data.port,
-                            "left": data.left,
-                        }
-                    ),
-                )
-                redis_data = await hget(data.info_hash)
-                peers_list = await get_n_random_items(redis_data.values(), data.numwant)
+                ),
+            )
+            redis_data = await hget(data_obj.info_hash)
+            peers_list = await get_n_random_items(redis_data.values(), data_obj.numwant)
+            peers: list[str] = []
+            seeders: int = 0
+            leechers: int = 0
 
-                peers = []
-                seeders = 0
-                leechers = 0
+            for peer in peers_list:
+                peer_data = json.loads(peer)
+                if peer_data["left"] == 0:
+                    seeders += 1
+                else:
+                    leechers += 1
+                peers.append(f"{peer_data['peer_ip']}:{peer_data['port']}")
 
-                for peer in peers_list:
-                    peer_data = json.loads(peer)
+            _data |= {
+                "peers": await addrs_to_compact(peers),
+                "complete": seeders,
+                "incomplete": leechers,
+            }
+            data_obj = UdpValidator(**_data)
 
-                    if peer_data["left"] == 0:
-                        seeders += 1
-                    else:
-                        leechers += 1
+        if (event_id := data_obj.event_id) and (
+            await convert_event_id_to_event_enum(event_id) == EVENT_NAMES.STOP
+        ):
+            await hdel(data_obj.info_hash, f"{data_obj.ip}:{data_obj.port}")
 
-                    peers.append(f"{peer_data['peer_ip']}:{peer_data['port']}")
+        packet = await self.make_udp_packet(data_obj)
+        self.transport.sendto(packet, addr)
 
-                _data = _data | {
-                    "peers": await addrs_to_compact(peers),
-                    "complete": seeders,
-                    "incomplete": leechers,
-                }
-                data = UdpValidator(**_data)
+    def datagram_received(self, data: bytes, addr: tuple[str, int]) -> None:
+        asyncio.create_task(self.handle_packet(data, addr))
 
-            if (event_id := data.event_id) and (
-                await convert_event_id_to_event_enum(event_id) == EVENT_NAMES.STOP
-            ):
-                await hdel(data.info_hash, f"{data.ip}:{data.port}")
 
-            packet = await make_udp_packet(data)
-            print(data.ip)
-            await udp.sendto(packet, host, port)
-            print(f"Sent data to {host}:{port} with {packet}")
+async def run_udp_server(server_host: str, server_port: int) -> None:
+    loop = asyncio.get_running_loop()
+    print(f"Running UDP server on `udp://{server_host}:{server_port}`")
+    transport, protocol = await loop.create_datagram_endpoint(
+        lambda: UDPServerProtocol(), local_addr=(server_host, server_port)
+    )
+    try:
+        await asyncio.Future()  # Keep running
+    finally:
+        transport.close()

@@ -62,10 +62,7 @@ class RedisHandler:
         async def init_redis():
             RedisHandler._connection = from_url(conn_uri, **kwargs)
             if conn_attempts >= 0:
-                await self.__attempt_to_connect(
-                    RedisHandler._connection,
-                    conn_attempts,
-                )
+                await self.__attempt_to_connect(RedisHandler._connection, conn_attempts)
             logger.info("Redis started")
 
         @app.after_serving

@@ -1,18 +1,20 @@
+import json
+from http import HTTPStatus
+
 import bencodepy
 from quart import Blueprint, request
-from coreproject_tracker.functions import (
-    hset,
-    hget,
-    hdel,
-    get_n_random_items,
-    check_ip_type,
-    hex_to_bin,
-)
+
 from coreproject_tracker.constants import ANNOUNCE_INTERVAL
-from coreproject_tracker.validators import HttpValidator
-from http import HTTPStatus
-import json
 from coreproject_tracker.enums import EVENT_NAMES, IP
+from coreproject_tracker.functions import (
+    check_ip_type,
+    get_n_random_items,
+    hdel,
+    hex_to_bin,
+    hget,
+    hset,
+)
+from coreproject_tracker.validators import HttpValidator
 
 http_blueprint = Blueprint("http", __name__)
 

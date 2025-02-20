@@ -1,14 +1,15 @@
-import anyio
-from coreproject_tracker.server.http import http_blueprint
-from coreproject_tracker.server.websocket import ws_blueprint
-from coreproject_tracker.server.udp import run_udp_server
-from coreproject_tracker.env import REDIS_HOST, REDIS_PORT, REDIS_DATABASE
-from quart import Quart
+import asyncio
+from typing import NoReturn
+
 from hypercorn.asyncio import serve
 from hypercorn.config import Config
+from quart import Quart
+
+from coreproject_tracker.env import REDIS_DATABASE, REDIS_HOST, REDIS_PORT
+from coreproject_tracker.server.http import http_blueprint
+from coreproject_tracker.server.udp import run_udp_server
+from coreproject_tracker.server.websocket import ws_blueprint
 from quart_redis import RedisHandler
-import functools
-from typing import NoReturn
 
 app = Quart(__name__)
 app.register_blueprint(http_blueprint)
@@ -31,6 +32,6 @@ async def main():
     host = "[::1]"
     port = 5000
 
-    async with anyio.create_task_group() as tg:
-        tg.start_soon(functools.partial(run_web_server, host, port))
-        tg.start_soon(functools.partial(run_udp_server, host, port))
+    async with asyncio.TaskGroup() as tg:
+        tg.create_task(run_web_server(host, port))
+        tg.create_task(run_udp_server(host, port))

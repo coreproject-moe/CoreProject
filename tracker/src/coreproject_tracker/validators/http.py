@@ -1,11 +1,13 @@
+import urllib.parse
+
 from attrs import define, field
+
 from coreproject_tracker.constants import DEFAULT_ANNOUNCE_PEERS, MAX_ANNOUNCE_PEERS
+from coreproject_tracker.enums import EVENT_NAMES
 from coreproject_tracker.functions import (
     convert_event_name_to_event_enum,
     convert_ipv4_coded_ipv6_to_ipv4,
 )
-from coreproject_tracker.enums import EVENT_NAMES
-import urllib.parse
 
 
 def convert_to_url_bytes(value: str) -> bytes:
