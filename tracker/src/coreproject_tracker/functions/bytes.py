@@ -16,6 +16,6 @@ async def from_uint32(data: bytes) -> int:
     return struct.unpack(">I", data)[0]
 
 
-async def from_uint64(buf: bytes) -> int:
+def from_uint64(buf: bytes) -> int:
     """Convert an 8-byte `unsigned long long` buffer into an integer."""
     return struct.unpack(">Q", buf)[0]

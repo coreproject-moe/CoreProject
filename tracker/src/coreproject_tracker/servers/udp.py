@@ -61,11 +61,11 @@ class UDPServerProtocol(asyncio.DatagramProtocol):
 
         if data_obj.action == ACTIONS.ANNOUNCE:
             _data |= {
-                "info_hash": data[16:36].hex(),
+                "info_hash": data[16:36],
                 "peer_id": data[36:56].hex(),
-                "downloaded": await from_uint64(data[56:64]),
-                "left": await from_uint64(data[64:72]),
-                "uploaded": await from_uint64(data[72:80]),
+                "downloaded": from_uint64(data[56:64]),
+                "left": from_uint64(data[64:72]),
+                "uploaded": from_uint64(data[72:80]),
                 "event_id": await from_uint32(data[80:84]),
                 "ip": await from_uint32(data[84:88]) or addr[0],
                 "key": await from_uint32(data[88:92]),
@@ -74,19 +74,20 @@ class UDPServerProtocol(asyncio.DatagramProtocol):
             }
             data_obj = UdpDatastructure(**_data)
             await hset(
-                data_obj.info_hash,
+                data_obj.info_hash.hex(),
                 f"{data_obj.ip}:{data_obj.port}",
                 json.dumps(
                     {
                         "peer_id": data_obj.peer_id,
-                        "info_hash": data_obj.info_hash,
+                        "info_hash": data_obj.info_hash.hex(),
                         "peer_ip": data_obj.ip,
                         "port": data_obj.port,
                         "left": data_obj.left,
                     }
                 ),
             )
-            redis_data = await hget(data_obj.info_hash)
+
+            redis_data = await hget(data_obj.info_hash.hex())
             peers_list = await get_n_random_items(redis_data.values(), data_obj.numwant)
             peers: list[str] = []
             seeders: int = 0

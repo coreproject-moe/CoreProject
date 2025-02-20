@@ -11,13 +11,18 @@ from coreproject_tracker.enums import EVENT_NAMES
 from coreproject_tracker.functions import (
     convert_event_name_to_event_enum,
 )
-from coreproject_tracker.validators import validate_ip, validate_port
+from coreproject_tracker.validators import (
+    validate_info_hash,
+    validate_ip,
+    validate_port,
+)
 
 
 @define
 class HttpDatastructure:
     info_hash_raw: bytes = field(
-        converter=convert_to_url_bytes, validator=validators.instance_of(bytes)
+        converter=convert_to_url_bytes,
+        validator=[validators.instance_of(bytes), validate_info_hash],
     )
     port: int = field(converter=int, validator=[validate_port])
     left: str = field(converter=int, validator=validators.instance_of(int))
@@ -29,13 +34,6 @@ class HttpDatastructure:
     # Derived
     info_hash: bytes = field(init=False)
     event_name: EVENT_NAMES = field(init=False)
-
-    @info_hash_raw.validator
-    def _check_info_hash(self, attribute: str, value: bytes) -> NoReturn:
-        if len(value) > 20:
-            raise ValueError(
-                f"`info_hash` of `{attribute}` length is {len(value)} which is greater than 20"
-            )
 
     def __attrs_post_init__(self) -> NoReturn:
         self.numwant = min(self.numwant or DEFAULT_ANNOUNCE_PEERS, MAX_ANNOUNCE_PEERS)

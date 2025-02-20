@@ -1,17 +1,18 @@
-import struct
-from typing import NoReturn
-
 from attrs import define, field, validators
 
 from coreproject_tracker.constants import (
     ANNOUNCE_INTERVAL,
-    CONNECTION_ID,
     DEFAULT_ANNOUNCE_PEERS,
     MAX_ANNOUNCE_PEERS,
 )
 from coreproject_tracker.enums import EVENT_NAMES
 from coreproject_tracker.functions import convert_event_id_to_event_enum
-from coreproject_tracker.validators import validate_ip, validate_port
+from coreproject_tracker.validators import (
+    validate_connection_id,
+    validate_info_hash,
+    validate_ip,
+    validate_port,
+)
 
 
 @define
@@ -21,12 +22,14 @@ class UdpDatastructure:
         init=False, default=ANNOUNCE_INTERVAL, validator=validators.instance_of(int)
     )
 
-    connection_id: bytes = field(validator=validators.instance_of(bytes))
+    connection_id: bytes = field(
+        validator=[validators.instance_of(bytes), validate_connection_id]
+    )
     action: int = field(validator=validators.instance_of(int))
     transaction_id: int = field(validator=validators.instance_of(int))
 
     # Only available on ANNOUNCE
-    info_hash: bytes = field(default=None)  # 20 bytes
+    info_hash: bytes = field(default=None, validator=[validate_info_hash])  # 20 bytes
     peer_id: bytes = field(default=None)  # 20 bytes
     downloaded: int = field(default=None)
     left: int = field(default=None)
@@ -46,14 +49,6 @@ class UdpDatastructure:
 
     # Derived
     event_name: EVENT_NAMES = field(init=False)
-
-    @connection_id.validator
-    def _check_connection_id(self, attribute: str, value: bytes) -> NoReturn:
-        connection_id_unpacked = struct.unpack(">Q", value)[0]
-        if connection_id_unpacked != CONNECTION_ID:
-            raise ValueError(
-                f"`{connection_id_unpacked}` of `{attribute}` is not same as `{CONNECTION_ID}`"
-            )
 
     def __attrs_post_init__(self):
         self.numwant = min(self.numwant, MAX_ANNOUNCE_PEERS)
