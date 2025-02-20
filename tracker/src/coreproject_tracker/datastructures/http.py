@@ -1,6 +1,6 @@
 from typing import NoReturn
 
-from attrs import define, field
+from attrs import define, field, validators
 
 from coreproject_tracker.constants import DEFAULT_ANNOUNCE_PEERS, MAX_ANNOUNCE_PEERS
 from coreproject_tracker.converters import (
@@ -16,11 +16,13 @@ from coreproject_tracker.validators import validate_ip
 
 @define
 class HttpDatastructure:
-    info_hash_raw: bytes = field(converter=convert_to_url_bytes)
+    info_hash_raw: bytes = field(
+        converter=convert_to_url_bytes, validator=validators.instance_of(bytes)
+    )
     port: int = field(converter=int)
-    left: str = field(converter=int)
-    numwant: str = field(converter=int)
-    peer_id: str = field()
+    left: str = field(converter=int, validator=validators.instance_of(int))
+    numwant: str = field(converter=int, validator=validators.instance_of(int))
+    peer_id: str = field(validator=validators.instance_of(str))
     peer_ip: str = field(converter=convert_ip, validator=[validate_ip])
     event: int = field(default=None)
 
