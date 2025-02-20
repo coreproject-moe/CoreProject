@@ -1,24 +1,16 @@
-import urllib.parse
+from typing import NoReturn
 
 from attrs import define, field
 
 from coreproject_tracker.constants import DEFAULT_ANNOUNCE_PEERS, MAX_ANNOUNCE_PEERS
+from coreproject_tracker.converters import (
+    convert_ip,
+    convert_to_url_bytes,
+)
 from coreproject_tracker.enums import EVENT_NAMES
 from coreproject_tracker.functions import (
     convert_event_name_to_event_enum,
-    convert_ipv4_coded_ipv6_to_ipv4,
 )
-
-
-def convert_to_url_bytes(value: str) -> bytes:
-    return urllib.parse.unquote_to_bytes(value)
-
-
-def convert_ip(value: str) -> str:
-    if ipv4_address := convert_ipv4_coded_ipv6_to_ipv4(value):
-        return ipv4_address
-    else:
-        return value
 
 
 @define
@@ -36,20 +28,20 @@ class HttpValidator:
     event_name: EVENT_NAMES = field(init=False)
 
     @info_hash_raw.validator
-    def _check_info_hash(self, attribute: str, value: bytes):
+    def _check_info_hash(self, attribute: str, value: bytes) -> NoReturn:
         if len(value) > 20:
             raise ValueError(
                 f"`info_hash` of `{attribute}` length is {len(value)} which is greater than 20"
             )
 
     @port.validator
-    def _check_port(self, attribute: str, value: int):
+    def _check_port(self, attribute: str, value: int) -> NoReturn:
         if value <= 0 and value >= 65535:
             raise ValueError(
                 f"`port` of {attribute} is {value} which is not in range(0, 65535)"
             )
 
-    def __attrs_post_init__(self):
+    def __attrs_post_init__(self) -> NoReturn:
         self.numwant = min(self.numwant or DEFAULT_ANNOUNCE_PEERS, MAX_ANNOUNCE_PEERS)
 
         # Derived Data

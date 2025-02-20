@@ -6,9 +6,9 @@ from hypercorn.config import Config
 from quart import Quart
 
 from coreproject_tracker.env import REDIS_DATABASE, REDIS_HOST, REDIS_PORT
-from coreproject_tracker.server.http import http_blueprint
-from coreproject_tracker.server.udp import run_udp_server
-from coreproject_tracker.server.websocket import ws_blueprint
+from coreproject_tracker.servers.http import http_blueprint
+from coreproject_tracker.servers.udp import run_udp_server
+from coreproject_tracker.servers.websocket import ws_blueprint
 from quart_redis import RedisHandler
 
 app = Quart(__name__)
