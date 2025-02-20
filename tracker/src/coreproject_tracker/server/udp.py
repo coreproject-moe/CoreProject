@@ -123,7 +123,9 @@ class UDPServerProtocol(asyncio.DatagramProtocol):
 async def run_udp_server(server_host: str, server_port: int) -> None:
     loop = asyncio.get_running_loop()
     print(f"Running UDP server on `udp://{server_host}:{server_port}`")
-    transport, protocol = await loop.create_datagram_endpoint(
+
+    # transport, protocol
+    transport, _ = await loop.create_datagram_endpoint(
         lambda: UDPServerProtocol(), local_addr=(server_host, server_port)
     )
     try:
