@@ -10,7 +10,7 @@ def udp_client():
 
     try:
         # Message to send
-        message = "Hello, UDP Server!"
+        message = "h"
 
         # Send data
         print(f"Sending: {message}")

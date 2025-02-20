@@ -33,6 +33,21 @@ async def make_udp_packet(params: UdpValidator) -> bytes:
     """
 
     if params.action == ACTIONS.CONNECT:
+        print(
+            [
+                ACTIONS.CONNECT,
+                params.transaction_id,
+                params.connection_id,
+            ]
+        )
+        print(
+            [
+                await to_uint32(ACTIONS.CONNECT),
+                await to_uint32(params.transaction_id),
+                params.connection_id,
+            ]
+        )
+
         packet = b"".join(
             [
                 await to_uint32(ACTIONS.CONNECT),
@@ -98,7 +113,8 @@ async def run_udp_server(server_host: str, server_port: int):
                 # log.error(
                 #     f"received packet length is {packet} is shorter than 16 bytes"
                 # )
-                await udp.sendto(b"", host, port)
+                await udp.sendto("Too small payload".encode(), "localhost", port)
+                await udp.receive()
 
             _data = {
                 "connection_id": packet[0:8],
