@@ -28,7 +28,7 @@ async def run_web_server(host: str, port: int) -> NoReturn:
 
 
 async def main():
-    host = "[::1]"
+    host = "localhost"
     port = 5000
 
     async with anyio.create_task_group() as tg:
