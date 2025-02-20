@@ -5,6 +5,7 @@ import bencodepy
 from quart import Blueprint, request
 
 from coreproject_tracker.constants import ANNOUNCE_INTERVAL
+from coreproject_tracker.datastructures import HttpDatastructure
 from coreproject_tracker.enums import EVENT_NAMES, IP
 from coreproject_tracker.functions import (
     check_ip_type,
@@ -14,7 +15,6 @@ from coreproject_tracker.functions import (
     hget,
     hset,
 )
-from coreproject_tracker.validators import HttpValidator
 
 http_blueprint = Blueprint("http", __name__)
 
@@ -34,7 +34,7 @@ async def http_endpoint():
             "peer_id": request.args.get("peer_id"),
             "event": request.args.get("event"),
         }
-        data = HttpValidator(**_data)
+        data = HttpDatastructure(**_data)
     except Exception as e:
         print(e)
         return str(e), HTTPStatus.BAD_REQUEST

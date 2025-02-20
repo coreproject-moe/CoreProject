@@ -11,16 +11,17 @@ from coreproject_tracker.enums import EVENT_NAMES
 from coreproject_tracker.functions import (
     convert_event_name_to_event_enum,
 )
+from coreproject_tracker.validators import validate_ip
 
 
 @define
-class HttpValidator:
+class HttpDatastructure:
     info_hash_raw: bytes = field(converter=convert_to_url_bytes)
     port: int = field(converter=int)
     left: str = field(converter=int)
     numwant: str = field(converter=int)
     peer_id: str = field()
-    peer_ip: str = field(converter=convert_ip)
+    peer_ip: str = field(converter=convert_ip, validator=[validate_ip])
     event: int = field(default=None)
 
     # Derived

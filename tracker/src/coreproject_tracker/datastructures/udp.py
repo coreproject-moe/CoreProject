@@ -1,6 +1,7 @@
 import struct
+from typing import NoReturn
 
-from attrs import define, field
+from attrs import define, field, validators
 
 from coreproject_tracker.constants import (
     ANNOUNCE_INTERVAL,
@@ -8,16 +9,21 @@ from coreproject_tracker.constants import (
     DEFAULT_ANNOUNCE_PEERS,
     MAX_ANNOUNCE_PEERS,
 )
+from coreproject_tracker.enums import EVENT_NAMES
+from coreproject_tracker.functions import convert_event_id_to_event_enum
+from coreproject_tracker.validators import validate_nullable_ip
 
 
 @define
-class UdpValidator:
+class UdpDatastructure:
     # CONSTANT
-    interval: int = field(init=False, default=ANNOUNCE_INTERVAL)
+    interval: int = field(
+        init=False, default=ANNOUNCE_INTERVAL, validator=validators.instance_of(int)
+    )
 
-    connection_id: bytes = field()
-    action: int = field()
-    transaction_id: int = field()
+    connection_id: bytes = field(validator=validators.instance_of(bytes))
+    action: int = field(validator=validators.instance_of(int))
+    transaction_id: int = field(validator=validators.instance_of(int))
 
     # Only available on ANNOUNCE
     info_hash: bytes = field(default=None)  # 20 bytes
@@ -35,11 +41,14 @@ class UdpValidator:
     complete: int = field(default=0)
 
     # Might not need these
-    ip: str = field(default=None)
+    ip: str = field(default=None, validator=[validate_nullable_ip])
     port: int = field(default=None)
 
+    # Derived
+    event_name: EVENT_NAMES = field(init=False)
+
     @connection_id.validator
-    def _check_connection_id(self, attribute: str, value: bytes):
+    def _check_connection_id(self, attribute: str, value: bytes) -> NoReturn:
         connection_id_unpacked = struct.unpack(">Q", value)[0]
         if connection_id_unpacked != CONNECTION_ID:
             raise ValueError(
@@ -48,3 +57,5 @@ class UdpValidator:
 
     def __attrs_post_init__(self):
         self.numwant = min(self.numwant, MAX_ANNOUNCE_PEERS)
+        if self.event_id:
+            self.event_name = convert_event_id_to_event_enum(self.event_id)

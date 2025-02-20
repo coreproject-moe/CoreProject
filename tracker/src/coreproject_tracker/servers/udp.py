@@ -1,10 +1,10 @@
 import asyncio
 import json
 
+from coreproject_tracker.datastructures import UdpDatastructure
 from coreproject_tracker.enums import ACTIONS, EVENT_NAMES
 from coreproject_tracker.functions import (
     addrs_to_compact,
-    convert_event_id_to_event_enum,
     from_uint16,
     from_uint32,
     from_uint64,
@@ -14,7 +14,6 @@ from coreproject_tracker.functions import (
     hset,
     to_uint32,
 )
-from coreproject_tracker.validators import UdpValidator
 
 
 class UDPServerProtocol(asyncio.DatagramProtocol):
@@ -24,7 +23,7 @@ class UDPServerProtocol(asyncio.DatagramProtocol):
     def connection_made(self, transport: asyncio.DatagramTransport) -> None:
         self.transport = transport
 
-    async def make_udp_packet(self, params: UdpValidator) -> bytes:
+    async def make_udp_packet(self, params: UdpDatastructure) -> bytes:
         if params.action == ACTIONS.CONNECT:
             packet: bytes = b"".join(
                 [
@@ -58,7 +57,7 @@ class UDPServerProtocol(asyncio.DatagramProtocol):
             "action": await from_uint32(data[8:12]),
             "transaction_id": await from_uint32(data[12:16]),
         }
-        data_obj = UdpValidator(**_data)
+        data_obj = UdpDatastructure(**_data)
 
         if data_obj.action == ACTIONS.ANNOUNCE:
             _data |= {
@@ -73,7 +72,7 @@ class UDPServerProtocol(asyncio.DatagramProtocol):
                 "numwant": await from_uint32(data[92:96]),
                 "port": await from_uint16(data[96:98]) or addr[1],
             }
-            data_obj = UdpValidator(**_data)
+            data_obj = UdpDatastructure(**_data)
             await hset(
                 data_obj.info_hash,
                 f"{data_obj.ip}:{data_obj.port}",
@@ -106,11 +105,9 @@ class UDPServerProtocol(asyncio.DatagramProtocol):
                 "complete": seeders,
                 "incomplete": leechers,
             }
-            data_obj = UdpValidator(**_data)
+            data_obj = UdpDatastructure(**_data)
 
-        if (event_id := data_obj.event_id) and (
-            await convert_event_id_to_event_enum(event_id) == EVENT_NAMES.STOP
-        ):
+        if data_obj.event_id and (data_obj.event_name == EVENT_NAMES.STOP):
             await hdel(data_obj.info_hash, f"{data_obj.ip}:{data_obj.port}")
 
         packet = await self.make_udp_packet(data_obj)
