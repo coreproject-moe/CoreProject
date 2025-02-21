@@ -1,6 +1,7 @@
-import asyncio
+import functools
 from typing import NoReturn
 
+import anyio
 from hypercorn.asyncio import serve
 from hypercorn.config import Config
 from quart import Quart
@@ -29,9 +30,9 @@ async def run_web_server(host: str, port: int) -> NoReturn:
 
 
 async def main():
-    host = "[::1]"
+    host = "127.0.0.1"
     port = 5000
 
-    async with asyncio.TaskGroup() as tg:
-        tg.create_task(run_web_server(host, port))
-        tg.create_task(run_udp_server(host, port))
+    async with anyio.create_task_group() as tg:
+        tg.start_soon(functools.partial(run_web_server, host, port))
+        tg.start_soon(functools.partial(run_udp_server, host, port))

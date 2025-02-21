@@ -1,132 +1,148 @@
-import asyncio
-import json
-
+import anyio
+import socket
 from coreproject_tracker.datastructures import UdpDatastructure
-from coreproject_tracker.enums import ACTIONS, EVENT_NAMES
 from coreproject_tracker.functions import (
-    addrs_to_compact,
     from_uint16,
     from_uint32,
     from_uint64,
-    get_n_random_items,
-    hdel,
-    hget,
-    hset,
     to_uint32,
+    hset,
+    hget,
+    hdel,
+    get_n_random_items,
+    convert_event_id_to_event_enum,
+    addrs_to_compact,
 )
+import json
+from coreproject_tracker.enums import ACTIONS, EVENT_NAMES
 
 
-class UDPServerProtocol(asyncio.DatagramProtocol):
-    def __init__(self) -> None:
-        self.transport: asyncio.DatagramTransport | None = None
+async def make_udp_packet(params: UdpDatastructure) -> bytes:
+    """
+    Create UDP packets for BitTorrent tracker protocol.
 
-    def connection_made(self, transport: asyncio.DatagramTransport) -> None:
-        self.transport = transport
+    Args:
+        params: Dictionary containing packet parameters including 'action' and other
+            action-specific parameters.
 
-    async def make_udp_packet(self, params: UdpDatastructure) -> bytes:
-        if params.action == ACTIONS.CONNECT:
-            packet: bytes = b"".join(
-                [
-                    await to_uint32(ACTIONS.CONNECT),
-                    await to_uint32(params.transaction_id),
-                    params.connection_id,
-                ]
-            )
-        elif params.action == ACTIONS.ANNOUNCE:
-            packet = b"".join(
-                [
-                    await to_uint32(ACTIONS.ANNOUNCE),
-                    await to_uint32(params.transaction_id),
-                    await to_uint32(params.interval),
-                    await to_uint32(params.incomplete),
-                    await to_uint32(params.complete),
-                    params.peers,
-                ]
-            )
-        else:
-            raise ValueError(f"Action not implemented: {params.action}")
-        return packet
+    Returns:
+        bytes: The constructed UDP packet
 
-    async def handle_packet(self, data: bytes, addr: tuple[str, int]) -> None:
-        if len(data) < 16:
-            self.transport.sendto(b"Too small payload", addr)
-            return
+    Raises:
+        ValueError: If the action is not implemented
+    """
 
-        _data = {
-            "connection_id": data[0:8],
-            "action": await from_uint32(data[8:12]),
-            "transaction_id": await from_uint32(data[12:16]),
-        }
-        data_obj = UdpDatastructure(**_data)
+    if params.action == ACTIONS.CONNECT:
+        packet = b"".join(
+            [
+                await to_uint32(ACTIONS.CONNECT),
+                await to_uint32(params.transaction_id),
+                params.connection_id,
+            ]
+        )
 
-        if data_obj.action == ACTIONS.ANNOUNCE:
-            _data |= {
-                "info_hash": data[16:36],
-                "peer_id": data[36:56].hex(),
-                "downloaded": from_uint64(data[56:64]),
-                "left": from_uint64(data[64:72]),
-                "uploaded": from_uint64(data[72:80]),
-                "event_id": await from_uint32(data[80:84]),
-                "ip": await from_uint32(data[84:88]) or addr[0],
-                "key": await from_uint32(data[88:92]),
-                "numwant": await from_uint32(data[92:96]),
-                "port": await from_uint16(data[96:98]) or addr[1],
-            }
-            data_obj = UdpDatastructure(**_data)
-            await hset(
-                data_obj.info_hash.hex(),
-                f"{data_obj.ip}:{data_obj.port}",
-                json.dumps(
-                    {
-                        "peer_id": data_obj.peer_id,
-                        "info_hash": data_obj.info_hash.hex(),
-                        "peer_ip": data_obj.ip,
-                        "port": data_obj.port,
-                        "left": data_obj.left,
-                    }
-                ),
-            )
+    elif params.action == ACTIONS.ANNOUNCE:
+        packet = b"".join(
+            [
+                await to_uint32(ACTIONS.ANNOUNCE),
+                await to_uint32(params.transaction_id),
+                await to_uint32(params.interval),
+                await to_uint32(params.incomplete),
+                await to_uint32(params.complete),
+                params.peers,
+            ]
+        )
 
-            redis_data = await hget(data_obj.info_hash.hex())
-            peers_list = await get_n_random_items(redis_data.values(), data_obj.numwant)
-            peers: list[str] = []
-            seeders: int = 0
-            leechers: int = 0
+    else:
+        raise ValueError(f"Action not implemented: {params.action}")
 
-            for peer in peers_list:
-                peer_data = json.loads(peer)
-                if peer_data["left"] == 0:
-                    seeders += 1
-                else:
-                    leechers += 1
-                peers.append(f"{peer_data['peer_ip']}:{peer_data['port']}")
-
-            _data |= {
-                "peers": await addrs_to_compact(peers),
-                "complete": seeders,
-                "incomplete": leechers,
-            }
-            data_obj = UdpDatastructure(**_data)
-
-        if data_obj.event_id and (data_obj.event_name == EVENT_NAMES.STOP):
-            await hdel(data_obj.info_hash, f"{data_obj.ip}:{data_obj.port}")
-
-        packet = await self.make_udp_packet(data_obj)
-        self.transport.sendto(packet, addr)
-
-    def datagram_received(self, data: bytes, addr: tuple[str, int]) -> None:
-        asyncio.create_task(self.handle_packet(data, addr))
+    return packet
 
 
-async def run_udp_server(server_host: str, server_port: int) -> None:
-    loop = asyncio.get_running_loop()
+async def run_udp_server(server_host: str, server_port: int):
     print(f"Running UDP server on `udp://{server_host}:{server_port}`")
+    async with await anyio.create_udp_socket(
+        local_host=server_host,
+        local_port=server_port,
+    ) as udp:
+        async for packet, (host, port) in udp:
+            if len(packet) < 16:
+                await udp.sendto("Too small payload".encode(), host, port)
+                continue
 
-    # transport, protocol
-    transport, _ = await loop.create_datagram_endpoint(
-        lambda: UDPServerProtocol(), local_addr=(server_host, server_port)
-    )
-    try:
-        await asyncio.Future()  # Keep running
-    finally:
-        transport.close()
+            _data = {
+                "connection_id": packet[0:8],
+                "action": await from_uint32(packet[8:12]),
+                "transaction_id": await from_uint32(packet[12:16]),
+            }
+            data = UdpDatastructure(**_data)
+
+            if data.action == ACTIONS.ANNOUNCE:
+                _data = (
+                    _data
+                    | {
+                        "info_hash": packet[16:36].hex(),  # 20 bytes
+                        "peer_id": packet[36:56].hex(),  # 20 bytes
+                        "downloaded": await from_uint64(
+                            packet[56:64]  # Convert 64-bit unsigned integer
+                        ),
+                        "left": await from_uint64(
+                            packet[64:72]  # Convert 64-bit unsigned integer
+                        ),
+                        "uploaded": await from_uint64(
+                            packet[72:80]  # Convert 64-bit unsigned integer
+                        ),
+                        "event_id": await from_uint32(
+                            packet[80:84]  # Read 4-byte unsigned int (big-endian)
+                        ),
+                        "ip": await from_uint32(packet[84:88]) or host,
+                        "key": await from_uint32(packet[88:92]),
+                        "numwant": await from_uint32(packet[92:96]),
+                        "port": await from_uint16(packet[96:98]) or port,
+                    }
+                )
+                data = UdpDatastructure(**_data)
+                await hset(
+                    data.info_hash,
+                    f"{data.ip}:{data.port}",
+                    json.dumps(
+                        {
+                            "peer_id": data.peer_id,
+                            "info_hash": data.info_hash,
+                            "peer_ip": data.ip,
+                            "port": data.port,
+                            "left": data.left,
+                        }
+                    ),
+                )
+                redis_data = await hget(data.info_hash)
+                peers_list = await get_n_random_items(redis_data.values(), data.numwant)
+
+                peers = []
+                seeders = 0
+                leechers = 0
+
+                for peer in peers_list:
+                    peer_data = json.loads(peer)
+
+                    if peer_data["left"] == 0:
+                        seeders += 1
+                    else:
+                        leechers += 1
+
+                    peers.append(f"{peer_data['peer_ip']}:{peer_data['port']}")
+
+                _data = _data | {
+                    "peers": await addrs_to_compact(peers),
+                    "complete": seeders,
+                    "incomplete": leechers,
+                }
+                data = UdpDatastructure(**_data)
+
+            if (event_id := data.event_id) and (
+                await convert_event_id_to_event_enum(event_id) == EVENT_NAMES.STOP
+            ):
+                await hdel(data.info_hash, f"{data.ip}:{data.port}")
+
+            packet = await make_udp_packet(data)
+            await udp.sendto(packet, host, port)
