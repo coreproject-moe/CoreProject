@@ -1,10 +1,10 @@
 import random
-from typing import TypeVar
-
-T = TypeVar("T")
 
 
-async def get_n_random_items(array: T, n: int) -> T:
+async def get_n_random_items[T](array: T, n: int) -> T:
+    """Given a set of array elements, returns n random elements from array"""
+
+    # If we pass only one element to the array
     if not isinstance(array, list):
         array = list(array)
 

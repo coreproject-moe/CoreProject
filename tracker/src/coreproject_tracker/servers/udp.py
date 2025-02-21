@@ -83,13 +83,13 @@ async def run_udp_server(server_host: str, server_port: int):
                     | {
                         "info_hash": packet[16:36].hex(),  # 20 bytes
                         "peer_id": packet[36:56].hex(),  # 20 bytes
-                        "downloaded": await from_uint64(
+                        "downloaded": from_uint64(
                             packet[56:64]  # Convert 64-bit unsigned integer
                         ),
-                        "left": await from_uint64(
+                        "left": from_uint64(
                             packet[64:72]  # Convert 64-bit unsigned integer
                         ),
-                        "uploaded": await from_uint64(
+                        "uploaded": from_uint64(
                             packet[72:80]  # Convert 64-bit unsigned integer
                         ),
                         "event_id": await from_uint32(
@@ -123,14 +123,27 @@ async def run_udp_server(server_host: str, server_port: int):
                 leechers = 0
 
                 for peer in peers_list:
-                    peer_data = json.loads(peer)
+                    _peers = []
+                    _seeders = 0
+                    _leechers = 0
 
-                    if peer_data["left"] == 0:
-                        seeders += 1
-                    else:
-                        leechers += 1
+                    try:
+                        peer_data = json.loads(peer)
 
-                    peers.append(f"{peer_data['peer_ip']}:{peer_data['port']}")
+                        if peer_data["left"] == 0:
+                            _seeders += 1
+                        else:
+                            _leechers += 1
+
+                        _peers.append(f"{peer_data['peer_ip']}:{peer_data['port']}")
+
+                    except (ValueError, KeyError):
+                        continue
+
+                    # This is here to make undo possible
+                    peers.extend(_peers)
+                    seeders += _seeders
+                    leechers += _leechers
 
                 _data = _data | {
                     "peers": await addrs_to_compact(peers),
