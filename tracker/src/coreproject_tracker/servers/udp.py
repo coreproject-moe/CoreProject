@@ -1,20 +1,22 @@
-import anyio
+import json
 import socket
+
+import anyio
+
 from coreproject_tracker.datastructures import UdpDatastructure
+from coreproject_tracker.enums import ACTIONS, EVENT_NAMES
 from coreproject_tracker.functions import (
+    addrs_to_compact,
+    convert_event_id_to_event_enum,
     from_uint16,
     from_uint32,
     from_uint64,
-    to_uint32,
-    hset,
-    hget,
-    hdel,
     get_n_random_items,
-    convert_event_id_to_event_enum,
-    addrs_to_compact,
+    hdel,
+    hget,
+    hset,
+    to_uint32,
 )
-import json
-from coreproject_tracker.enums import ACTIONS, EVENT_NAMES
 
 
 async def make_udp_packet(params: UdpDatastructure) -> bytes:
@@ -81,7 +83,7 @@ async def run_udp_server(server_host: str, server_port: int):
                 _data = (
                     _data
                     | {
-                        "info_hash": packet[16:36].hex(),  # 20 bytes
+                        "info_hash": packet[16:36],  # 20 bytes
                         "peer_id": packet[36:56].hex(),  # 20 bytes
                         "downloaded": from_uint64(
                             packet[56:64]  # Convert 64-bit unsigned integer
@@ -103,19 +105,19 @@ async def run_udp_server(server_host: str, server_port: int):
                 )
                 data = UdpDatastructure(**_data)
                 await hset(
-                    data.info_hash,
+                    data.info_hash.hex(),
                     f"{data.ip}:{data.port}",
                     json.dumps(
                         {
                             "peer_id": data.peer_id,
-                            "info_hash": data.info_hash,
+                            "info_hash": data.info_hash.hex(),
                             "peer_ip": data.ip,
                             "port": data.port,
                             "left": data.left,
                         }
                     ),
                 )
-                redis_data = await hget(data.info_hash)
+                redis_data = await hget(data.info_hash.hex())
                 peers_list = await get_n_random_items(redis_data.values(), data.numwant)
 
                 peers = []
@@ -152,9 +154,7 @@ async def run_udp_server(server_host: str, server_port: int):
                 }
                 data = UdpDatastructure(**_data)
 
-            if (event_id := data.event_id) and (
-                await convert_event_id_to_event_enum(event_id) == EVENT_NAMES.STOP
-            ):
+            if data.event_id and data.event_name == EVENT_NAMES.STOP:
                 await hdel(data.info_hash, f"{data.ip}:{data.port}")
 
             packet = await make_udp_packet(data)

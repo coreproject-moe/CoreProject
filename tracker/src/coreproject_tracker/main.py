@@ -1,4 +1,5 @@
 import functools
+import sys
 from typing import NoReturn
 
 import anyio
@@ -6,10 +7,10 @@ from hypercorn.asyncio import serve
 from hypercorn.config import Config
 from quart import Quart
 
+from coreproject_tracker.enums import IP
 from coreproject_tracker.env import REDIS_DATABASE, REDIS_HOST, REDIS_PORT
-from coreproject_tracker.servers.http import http_blueprint
-from coreproject_tracker.servers.udp import run_udp_server
-from coreproject_tracker.servers.websocket import ws_blueprint
+from coreproject_tracker.functions import check_ip_type
+from coreproject_tracker.servers import http_blueprint, run_udp_server, ws_blueprint
 from quart_redis import RedisHandler
 
 app = Quart(__name__)
@@ -32,6 +33,17 @@ async def run_web_server(host: str, port: int) -> NoReturn:
 async def main():
     host = "127.0.0.1"
     port = 5000
+
+    match await check_ip_type(host):
+        case False:
+            raise ValueError(f"{host} is not a valid `host`")
+        case IP.IPV6:
+            if sys.platform == "win32":
+                raise ValueError(
+                    f"`ip` is {host}, which is `IPV6`",
+                    "`IPV6` is not supported on windows under `anyio`.",
+                    "Check: https://github.com/agronholm/anyio/discussions/872",
+                )
 
     async with anyio.create_task_group() as tg:
         tg.start_soon(functools.partial(run_web_server, host, port))
