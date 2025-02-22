@@ -1,5 +1,4 @@
 import json
-import socket
 
 import anyio
 
@@ -7,7 +6,6 @@ from coreproject_tracker.datastructures import UdpDatastructure
 from coreproject_tracker.enums import ACTIONS, EVENT_NAMES
 from coreproject_tracker.functions import (
     addrs_to_compact,
-    convert_event_id_to_event_enum,
     from_uint16,
     from_uint32,
     from_uint64,
