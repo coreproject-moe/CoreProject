@@ -1,7 +1,6 @@
 import asyncio
 
-from quart import Blueprint, Websocket
-
+from quart import Blueprint, Websocket, websocket
 from quart_redis import get_redis
 
 ws_blueprint = Blueprint("websocket", __name__)
@@ -28,4 +27,5 @@ async def redis_subscriber(ws: Websocket, channel_name: str) -> None:
 @ws_blueprint.websocket("/")
 async def ws():
     """WebSocket endpoint that listens for incoming messages and publishes them."""
-    pass
+    initial_message = await websocket.receive()
+    data = self.parse_websocket(initial_message)

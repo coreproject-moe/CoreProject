@@ -6,12 +6,12 @@ import anyio
 from hypercorn.asyncio import serve
 from hypercorn.config import Config
 from quart import Quart
+from quart_redis import RedisHandler
 
 from coreproject_tracker.enums import IP
 from coreproject_tracker.env import REDIS_DATABASE, REDIS_HOST, REDIS_PORT
 from coreproject_tracker.functions import check_ip_type
 from coreproject_tracker.servers import http_blueprint, run_udp_server, ws_blueprint
-from quart_redis import RedisHandler
 
 app = Quart(__name__)
 app.register_blueprint(http_blueprint)
