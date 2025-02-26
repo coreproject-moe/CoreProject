@@ -28,4 +28,4 @@ async def redis_subscriber(ws: Websocket, channel_name: str) -> None:
 async def ws():
     """WebSocket endpoint that listens for incoming messages and publishes them."""
     initial_message = await websocket.receive()
-    data = self.parse_websocket(initial_message)
+    data = parse_websocket(initial_message)

@@ -1,4 +1,4 @@
-from attrs import define, field, validators
+from attrs import define, field
 
 from coreproject_tracker.validators import validate_info_hash
 from coreproject_tracker.functions import bin_to_hex
@@ -9,7 +9,7 @@ class WebsocketDatastructure:
     info_hash_raw: str = field()
     action: str = field(default=None)
     peer_id: str = field()
-    
+
     # Derived
     info_hash = field(init=False)
 
