@@ -1,6 +1,7 @@
-
 from quart import Blueprint, Websocket, websocket
 from quart_redis import get_redis
+
+from coreproject_tracker.datastructures import WebsocketDatastructure
 
 ws_blueprint = Blueprint("websocket", __name__)
 
@@ -27,4 +28,5 @@ async def redis_subscriber(ws: Websocket, channel_name: str) -> None:
 async def ws():
     """WebSocket endpoint that listens for incoming messages and publishes them."""
     initial_message = await websocket.receive()
-    data = parse_websocket(initial_message)
+    data = WebsocketDatastructure(initial_message)
+    print(data)
