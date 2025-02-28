@@ -13,7 +13,8 @@
         <!-- magnet:?xt=urn:btih:59a42642ac8d10810fe62a039479aebc7a9c54c3&dn=2025-01-07_07-30-34.mp4&tr=wss%3A%2F%2Ftracker.btorrent.xyz&tr=wss%3A%2F%2Ftracker.openwebtorrent.com&tr=udp%3A%2F%2Ftracker.leechers-paradise.org%3A6969&tr=udp%3A%2F%2Ftracker.coppersurfer.tk%3A6969&tr=udp%3A%2F%2Ftracker.opentrackr.org%3A1337&tr=udp%3A%2F%2Fexplodie.org%3A6969&tr=udp%3A%2F%2Ftracker.empire-js.us%3A1337 -->
         <script src="https://cdn.jsdelivr.net/npm/webtorrent@latest/webtorrent.min.js"></script>
         <script>
-            const trackerURLs = ['ws://localhost:5000'];
+            // const trackerURLs = ['ws://localhost:8080'];
+            const trackerURLs = ['ws://127.0.0.1:5000'];
             const client = new WebTorrent();
 
             const status = document.getElementById('status');

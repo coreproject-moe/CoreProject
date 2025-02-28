@@ -1,4 +1,4 @@
-async def bin_str_to_hex_str(binary_string: str) -> str:
+def bin_str_to_hex_str(binary_string: str) -> str:
     # Ensure the input is treated as bytes
     binary_bytes = binary_string.encode(
         "latin1"

@@ -1,76 +1,45 @@
-import time
-from threading import Lock
-from typing import Optional
+import asyncio
 
 from quart import Websocket
 
-from coreproject_tracker.constants import CONNECTION_TTL
-
 
 class WebsocketConnectionManager:
-    _instance: Optional["WebsocketConnectionManager"] = None
+    _instance = None
+    _connections = {}
+    _ttl = 60  # Time to live for stale connections in seconds
 
-    def __new__(cls):
-        if cls._instance is None:
+    def __new__(cls, *args, **kwargs):
+        if not cls._instance:
             cls._instance = super(WebsocketConnectionManager, cls).__new__(cls)
         return cls._instance
 
-    def __init__(self):
-        """Initialize the connection manager with a storage dictionary and a lock."""
-        self._connections: dict[
-            str, (Websocket, float)
-        ] = {}  # Store Websocket directly
-        self._inactive_timeout = CONNECTION_TTL
-        self._lock = Lock()
+    def add_connection(self, peer_id, ws):
+        self._connections[peer_id] = {
+            "websocket": ws,
+            "last_active": asyncio.get_event_loop().time(),
+        }
 
-    def add_connection(self, identifier: str, connection: Websocket) -> None:
-        """
-        Store a websocket connection with an identifier and current timestamp.
-        """
-        with self._lock:
-            self._connections[identifier] = (connection, time.time())
-            self._cleanup_stale_connections()
+    def get_connection(self, peer_id) -> Websocket:
+        return self._connections.get(peer_id, {}).get("websocket")
 
-    def remove_connection(self, identifier: str) -> None:
-        """Remove a connection from storage."""
-        with self._lock:
-            self._connections.pop(identifier, None)
+    def remove_connection(self, peer_id):
+        self._connections.pop(peer_id, None)
 
-    def get_connection(self, identifier: str) -> Optional[Websocket]:
-        """
-        Retrieve a connection by its identifier.
-        Updates the last activity timestamp when connection is accessed.
-        """
-        with self._lock:
-            if identifier in self._connections:
-                connection, _ = self._connections[identifier]
+    async def _cleanup_stale_connections(self):
+        while True:
+            await asyncio.sleep(self._ttl)
+            current_time = asyncio.get_running_loop().time()
+            for peer_id in list(self._connections.keys()):
+                if current_time - self._connections[peer_id]["last_active"] > self._ttl:
+                    self.remove_connection(peer_id)
 
-                if connection is not None and connection.connected:
-                    # Update last activity time
-                    self._connections[identifier] = (connection, time.time())
-                    return connection
-                else:
-                    # Clean up dead reference
-                    self.remove_connection(identifier)
+    async def start_cleanup_task(self):
+        """Start cleanup task only when an event loop is running."""
+        await asyncio.sleep(1)  # Small delay to ensure the event loop is running
+        asyncio.create_task(self._cleanup_stale_connections())
 
-            self._cleanup_stale_connections()
-            return None
-
-    def _cleanup_stale_connections(self) -> None:
-        """Remove connections that haven't been active for longer than the timeout."""
-        current_time = time.time()
-        dead_connections = []
-
-        with self._lock:
-            for identifier, (connection, last_active) in self._connections.items():
-                # Remove if connection is dead or inactive
-                if (
-                    connection is None
-                    or not connection.connected
-                    or (current_time - last_active) > self._inactive_timeout
-                ):
-                    dead_connections.append(identifier)
-
-            # Clean up identified dead/stale connections
-            for identifier in dead_connections:
-                self.remove_connection(identifier)
+    async def close_all(self):
+        for peer_id, conn_data in self._connections.items():
+            ws = conn_data["websocket"]
+            await ws.close()
+        self._connections.clear()

@@ -26,10 +26,11 @@ class WebsocketDatastructure:
     offer_id = field()
     ip: str = field()
     uploaded: int = field()
-    event: str = field()
     addr: str = field()
 
     # Optional
+    event: str = field(default=None)
+
     answer = field(default=None)
     to_peer_id: bytes = field(
         default=None,

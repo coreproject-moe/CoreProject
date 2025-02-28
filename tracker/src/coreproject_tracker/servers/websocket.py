@@ -5,7 +5,7 @@ from quart import Blueprint, websocket
 
 from coreproject_tracker.constants import WEBSOCKET_INTERVAL
 from coreproject_tracker.datastructures import WebsocketDatastructure
-from coreproject_tracker.functions import hdel, hget, hset
+from coreproject_tracker.functions import hdel, hget, hset, hex_str_to_bin_str
 from coreproject_tracker.managers import WebsocketConnectionManager
 
 ws_blueprint = Blueprint("websocket", __name__)
@@ -27,7 +27,7 @@ async def ws():
         "peer_id": initial_message["peer_id"],
         # "numwant": initial_message["numwant"],
         "uploaded": initial_message["uploaded"],
-        "event": initial_message["event"],
+        "event": initial_message.get("event"),
         "offers": initial_message["offers"],
         "left": initial_message["left"],
         "answer": initial_message.get("answer"),
@@ -72,12 +72,12 @@ async def ws():
 
     if data.action == "announce":
         response |= {
-            "info_hash": data.info_hash,
+            "info_hash": await hex_str_to_bin_str(data.info_hash),
             "interval": WEBSOCKET_INTERVAL,
         }
         await websocket.send_json(response)
 
-    if not data.answer:
+    if initial_message.get("answer"):
         await websocket.send_json(response)
 
     connection_manager.add_connection(data.peer_id.hex(), websocket)
@@ -89,24 +89,28 @@ async def ws():
 
                 for offer in offers:
                     # Peer doesn't exist in connection manager raises AttributeError
-                    with contextlib.suppress(AttributeError):
-                        peer_instance = connection_manager.get_connection(data.peer_id)
-                        await peer_instance.send_json(
-                            {
-                                "action": "announce",
-                                "offer": offer["offer"],
-                                "offer_id": offer["offer_id"],
-                                "peer_id": data.peer_id.hex(),
-                                "info_hash": data.info_hash,
-                            }
-                        )
+                    peer_instance = connection_manager.get_connection(
+                        data.peer_id.hex()
+                    )
+                    await peer_instance.send_json(
+                        {
+                            "action": "announce",
+                            "offer": offer["offer"],
+                            "offer_id": offer["offer_id"],
+                            "peer_id": await hex_str_to_bin_str(data.peer_id.hex()),
+                            "info_hash": await hex_str_to_bin_str(data.info_hash),
+                        }
+                    )
 
             # Cleanup stale peers
-            except Exception:
+            except Exception as e:
+                print(e)
                 await hdel(data.info_hash, key)
+    print(data)
+    print(data.answer)
 
     if data.answer:
-        to_peer = connection_manager.get_connection(data.to_peer_id)
+        to_peer = connection_manager.get_connection(data.to_peer_id.hex())
 
         if to_peer:
             await to_peer.send_json(
@@ -114,7 +118,7 @@ async def ws():
                     "action": "announce",
                     "answer": data.answer,
                     "offer_id": data.offer_id,
-                    "peer_id": data.peer_id.hex(),
-                    "info_hash": data.info_hash,
+                    "peer_id": await hex_str_to_bin_str(data.peer_id.hex()),
+                    "info_hash": await hex_str_to_bin_str(data.info_hash),
                 }
             )
