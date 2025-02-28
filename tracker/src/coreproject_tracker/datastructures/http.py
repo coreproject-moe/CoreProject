@@ -22,11 +22,11 @@ from coreproject_tracker.validators import (
 class HttpDatastructure:
     info_hash_raw: bytes = field(
         converter=convert_to_url_bytes,
-        validator=[validators.instance_of(bytes), validate_info_hash],
+        validator=[validate_info_hash],
     )
     port: int = field(converter=int, validator=[validate_port])
-    left: str = field(converter=int, validator=validators.instance_of(int))
-    numwant: str = field(converter=int, validator=validators.instance_of(int))
+    left: str = field(converter=int)
+    numwant: str = field(converter=int)
     peer_id: str = field(validator=validators.instance_of(str))
     peer_ip: str = field(converter=convert_ip, validator=[validate_ip])
     event: int = field(default=None)

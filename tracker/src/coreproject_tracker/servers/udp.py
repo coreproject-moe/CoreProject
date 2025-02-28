@@ -78,29 +78,26 @@ async def run_udp_server(server_host: str, server_port: int):
             data = UdpDatastructure(**_data)
 
             if data.action == ACTIONS.ANNOUNCE:
-                _data = (
-                    _data
-                    | {
-                        "info_hash": packet[16:36],  # 20 bytes
-                        "peer_id": packet[36:56].hex(),  # 20 bytes
-                        "downloaded": from_uint64(
-                            packet[56:64]  # Convert 64-bit unsigned integer
-                        ),
-                        "left": from_uint64(
-                            packet[64:72]  # Convert 64-bit unsigned integer
-                        ),
-                        "uploaded": from_uint64(
-                            packet[72:80]  # Convert 64-bit unsigned integer
-                        ),
-                        "event_id": await from_uint32(
-                            packet[80:84]  # Read 4-byte unsigned int (big-endian)
-                        ),
-                        "ip": await from_uint32(packet[84:88]) or host,
-                        "key": await from_uint32(packet[88:92]),
-                        "numwant": await from_uint32(packet[92:96]),
-                        "port": await from_uint16(packet[96:98]) or port,
-                    }
-                )
+                _data |= {
+                    "info_hash": packet[16:36],  # 20 bytes
+                    "peer_id": packet[36:56].hex(),  # 20 bytes
+                    "downloaded": from_uint64(
+                        packet[56:64]  # Convert 64-bit unsigned integer
+                    ),
+                    "left": from_uint64(
+                        packet[64:72]  # Convert 64-bit unsigned integer
+                    ),
+                    "uploaded": from_uint64(
+                        packet[72:80]  # Convert 64-bit unsigned integer
+                    ),
+                    "event_id": await from_uint32(
+                        packet[80:84]  # Read 4-byte unsigned int (big-endian)
+                    ),
+                    "ip": await from_uint32(packet[84:88]) or host,
+                    "key": await from_uint32(packet[88:92]),
+                    "numwant": await from_uint32(packet[92:96]),
+                    "port": await from_uint16(packet[96:98]) or port,
+                }
                 data = UdpDatastructure(**_data)
                 await hset(
                     data.info_hash.hex(),
@@ -145,7 +142,7 @@ async def run_udp_server(server_host: str, server_port: int):
                     seeders += _seeders
                     leechers += _leechers
 
-                _data = _data | {
+                _data |= {
                     "peers": await addrs_to_compact(peers),
                     "complete": seeders,
                     "incomplete": leechers,

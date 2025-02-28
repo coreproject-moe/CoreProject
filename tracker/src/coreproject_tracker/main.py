@@ -6,6 +6,7 @@ import anyio
 from hypercorn.asyncio import serve
 from hypercorn.config import Config
 from quart import Quart
+from quart_cors import cors
 from quart_redis import RedisHandler
 
 from coreproject_tracker.enums import IP
@@ -14,6 +15,8 @@ from coreproject_tracker.functions import check_ip_type
 from coreproject_tracker.servers import http_blueprint, run_udp_server, ws_blueprint
 
 app = Quart(__name__)
+# app = cors(app, allow_origin="*")
+
 app.register_blueprint(http_blueprint)
 app.register_blueprint(ws_blueprint)
 

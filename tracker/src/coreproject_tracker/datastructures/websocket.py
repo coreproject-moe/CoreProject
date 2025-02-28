@@ -1,33 +1,49 @@
-from attrs import define, field
+from attrs import define, field, validators
 
 from coreproject_tracker.constants import DEFAULT_ANNOUNCE_PEERS, MAX_ANNOUNCE_PEERS
+from coreproject_tracker.converters import convert_binary_string_to_bytes
 from coreproject_tracker.functions import (
-    bin_str_to_hex_str,
     convert_ipv4_coded_ipv6_to_ipv4,
 )
-from coreproject_tracker.validators import validate_peer_length
+from coreproject_tracker.validators import validate_info_hash, validate_peer_length
 
 
 @define
 class WebsocketDatastructure:
-    info_hash_raw: str = field()
+    info_hash_raw: bytes = field(
+        converter=convert_binary_string_to_bytes,
+        validator=[validate_info_hash],
+    )
     action: str = field()
-    peer_id: str = field(validator=validate_peer_length)
+    peer_id: bytes = field(
+        converter=convert_binary_string_to_bytes,
+        validator=[validate_peer_length],
+    )
 
-    answer = field()
-
-    to_peer_id = field(validator=validate_peer_length)
     left: int = field()
 
-    offers = field()
+    offers: list[dict[str, str | dict[str, str]]] = field()
+    offer_id = field()
     ip: str = field()
+    uploaded: int = field()
+    event: str = field()
+
+    # Optional
+    answer = field(default=None)
+    to_peer_id: bytes = field(
+        default=None,
+        converter=convert_binary_string_to_bytes,
+        validator=[validate_peer_length],
+    )
 
     # Derived
-    info_hash = field(init=False)
+    info_hash: str = field(init=False)
     numwant: int = field(init=False)
 
     def __attrs_post_init__(self):
-        self.info_hash = bin_str_to_hex_str(self.info_hash_raw)
+        # Derived Data
+        self.info_hash = self.info_hash_raw.hex()
+
         if offers := self.offers:
             self.numwant = min(
                 len(offers) if offers else DEFAULT_ANNOUNCE_PEERS,
