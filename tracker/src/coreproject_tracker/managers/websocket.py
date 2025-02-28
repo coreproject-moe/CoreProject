@@ -8,7 +8,7 @@ class WebsocketConnectionManager:
     _connections = {}
     _ttl = 60  # Time to live for stale connections in seconds
 
-    def __new__(cls, *args, **kwargs):
+    def __new__(cls):
         if not cls._instance:
             cls._instance = super(WebsocketConnectionManager, cls).__new__(cls)
         return cls._instance

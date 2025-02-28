@@ -86,12 +86,10 @@ async def ws():
         for key, peer in redis_data.items():
             try:
                 peer = json.loads(peer)
+                # Peer doesn't exist in connection manager raises AttributeError
+                peer_instance = connection_manager.get_connection(data.peer_id.hex())
 
                 for offer in offers:
-                    # Peer doesn't exist in connection manager raises AttributeError
-                    peer_instance = connection_manager.get_connection(
-                        data.peer_id.hex()
-                    )
                     await peer_instance.send_json(
                         {
                             "action": "announce",
@@ -106,8 +104,6 @@ async def ws():
             except Exception as e:
                 print(e)
                 await hdel(data.info_hash, key)
-    print(data)
-    print(data.answer)
 
     if data.answer:
         to_peer = connection_manager.get_connection(data.to_peer_id.hex())
