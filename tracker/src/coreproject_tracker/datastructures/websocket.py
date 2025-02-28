@@ -27,6 +27,7 @@ class WebsocketDatastructure:
     ip: str = field()
     uploaded: int = field()
     event: str = field()
+    addr: str = field()
 
     # Optional
     answer = field(default=None)

@@ -33,6 +33,7 @@ async def ws():
         "answer": initial_message.get("answer"),
         "offer_id": initial_message.get("offer_id"),
         "ip": client_ip,
+        "addr": f"{client_ip}:{client_port}",
     }
     data = WebsocketDatastructure(**_data)
 
@@ -42,7 +43,7 @@ async def ws():
 
     await hset(
         data.info_hash,
-        f"{client_ip}:{client_port}",
+        data.addr,
         json.dumps(
             {
                 "peer_id": data.peer_id.hex(),
@@ -77,7 +78,7 @@ async def ws():
         await websocket.send_json(response)
 
     if not data.answer:
-        await websocket.send(response)
+        await websocket.send_json(response)
 
     connection_manager.add_connection(data.peer_id.hex(), websocket)
 
