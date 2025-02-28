@@ -1,7 +1,8 @@
 import time
 
-from coreproject_tracker.constants import HASH_EXPIRE_TIME, PEER_TTL
 from quart_redis import get_redis
+
+from coreproject_tracker.constants import HASH_EXPIRE_TIME, PEER_TTL
 
 
 async def hset(hash_key: str, field: str, value: str) -> None:

@@ -34,3 +34,4 @@ skip-magic-trailing-comma = false  # Avoids conflict with isort.split-on-trailin
 
 [tool.ruff.lint.isort]
 split-on-trailing-comma = true  # Keep this aligned with format.skip-magic-trailing-comma
+combine-as-imports = true

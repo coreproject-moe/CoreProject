@@ -1,7 +1,6 @@
 from attrs import define, field
 
-from coreproject_tracker.validators import validate_info_hash
-from coreproject_tracker.functions import bin_to_hex
+from coreproject_tracker.functions import bin_str_to_hex_str
 
 
 @define
@@ -14,4 +13,4 @@ class WebsocketDatastructure:
     info_hash = field(init=False)
 
     def __attrs_post_init__(self):
-        self.info_hash = bin_to_hex(self.info_hash_raw)
+        self.info_hash = bin_str_to_hex_str(self.info_hash_raw)

@@ -1,4 +1,3 @@
-import asyncio
 
 from quart import Blueprint, Websocket, websocket
 from quart_redis import get_redis
