@@ -2,9 +2,6 @@ from attrs import define, field
 
 from coreproject_tracker.constants import DEFAULT_ANNOUNCE_PEERS, MAX_ANNOUNCE_PEERS
 from coreproject_tracker.converters import convert_binary_string_to_bytes
-from coreproject_tracker.functions import (
-    convert_ipv4_coded_ipv6_to_ipv4,
-)
 from coreproject_tracker.validators import validate_info_hash, validate_peer_length
 
 
@@ -19,8 +16,9 @@ class WebsocketDatastructure:
         converter=convert_binary_string_to_bytes,
         validator=[validate_peer_length],
     )
-
     ip: str = field()
+    port: int = field()  # TODO:Add port validator
+    addr: str = field()
 
     # Hardcoded
     left: float = field(default=float("inf"))
@@ -49,8 +47,3 @@ class WebsocketDatastructure:
                 len(offers) if offers else DEFAULT_ANNOUNCE_PEERS,
                 MAX_ANNOUNCE_PEERS,
             )
-
-        if ipv4_address := convert_ipv4_coded_ipv6_to_ipv4(self.ip):
-            self.ip = ipv4_address
-        else:
-            self.ip = self.ip

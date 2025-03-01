@@ -6,6 +6,7 @@ from .bytes import (
     to_uint32 as to_uint32,
 )
 from .convertion import (
+    bytes_to_bin_str as bytes_to_bin_str,
     hex_str_to_bin_str as hex_str_to_bin_str,
 )
 from .events import (

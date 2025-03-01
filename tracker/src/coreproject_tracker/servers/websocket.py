@@ -1,13 +1,14 @@
 import asyncio
 import json
 
-from quart import Blueprint, websocket
+from quart import Blueprint, copy_current_websocket_context, websocket
 
 from coreproject_tracker.constants import WEBSOCKET_INTERVAL
 from coreproject_tracker.datastructures import WebsocketDatastructure
 from coreproject_tracker.functions import (
     hdel,
     hex_str_to_bin_str,
+    bytes_to_bin_str,
     hget,
     hset,
 )
@@ -21,49 +22,52 @@ connection_manager = WebsocketConnectionManager()
 async def ws():
     """WebSocket endpoint that listens for incoming messages and publishes them."""
 
-    try:
+    @copy_current_websocket_context
+    async def parse_websocket():
         initial_message = await websocket.receive_json()
         client_ip, client_port = websocket.scope.get("client")
 
         _data = {
             # Constants
             "ip": client_ip,
+            "port": client_port,
+            "addr": f"{client_ip}:{client_port}",
             # Required attributes
             "info_hash_raw": initial_message["info_hash"],
             "action": initial_message["action"],
             "peer_id": initial_message["peer_id"],
             "numwant": initial_message.get("numwant"),
-            "uploaded": initial_message["uploaded"],
-            "offers": initial_message["offers"],
+            "uploaded": initial_message.get("uploaded"),
+            "offers": initial_message.get("offers"),
             "left": initial_message.get("left"),
             "event": initial_message.get("event"),
         }
+        if initial_message.get("answer"):
+            _data |= {
+                "answer": initial_message["answer"],
+                "to_peer_id": initial_message["to_peer_id"],
+                "offer_id": initial_message["offer_id"],
+            }
 
-        data = WebsocketDatastructure(**_data)
+        return WebsocketDatastructure(**_data)
 
+    data = await parse_websocket()
+    try:
         ws_obj = websocket._get_current_object()
         await connection_manager.add_connection(data.peer_id.hex(), ws_obj)
 
         while True:
-            if initial_message.get("answer"):
-                _data |= {
-                    "answer": initial_message["answer"],
-                    "to_peer_id": initial_message["to_peer_id"],
-                    "offer_id": initial_message["offer_id"],
-                }
-                data = WebsocketDatastructure(**_data)
-
             response = {"action": data.action}
 
             await hset(
                 data.info_hash,
-                f"{client_ip}:{client_port}",
+                data.addr,
                 json.dumps(
                     {
                         "peer_id": data.peer_id.hex(),
                         "info_hash": data.info_hash,
                         "peer_ip": data.ip,
-                        "port": client_port,
+                        "port": data.port,
                         "left": data.left,
                     }
                 ),
@@ -90,7 +94,7 @@ async def ws():
                 }
                 await websocket.send_json(response)
 
-            if not initial_message.get("answer"):
+            if not data.answer:
                 await websocket.send_json(response)
 
             if offers := data.offers:
@@ -110,7 +114,7 @@ async def ws():
                                 "action": "announce",
                                 "offer": offer["offer"],
                                 "offer_id": offer["offer_id"],
-                                "peer_id": await hex_str_to_bin_str(data.peer_id.hex()),
+                                "peer_id": await bytes_to_bin_str(data.peer_id),
                                 "info_hash": await hex_str_to_bin_str(data.info_hash),
                             }
                         )
@@ -124,25 +128,12 @@ async def ws():
                             "action": "announce",
                             "answer": data.answer,
                             "offer_id": data.offer_id,
-                            "peer_id": await hex_str_to_bin_str(data.peer_id.hex()),
+                            "peer_id": await bytes_to_bin_str(data.peer_id),
                             "info_hash": await hex_str_to_bin_str(data.info_hash),
                         }
                     )
 
-            initial_message = await websocket.receive_json()
-            _data = {
-                "ip": client_ip,
-                # Required attributes
-                "info_hash_raw": initial_message["info_hash"],
-                "action": initial_message["action"],
-                "peer_id": initial_message["peer_id"],
-                "numwant": initial_message.get("numwant"),
-                "offers": initial_message.get("offers"),  # Default to empty list
-                "left": initial_message.get("left"),
-                "event": initial_message.get("event"),
-            }
-
-            data = WebsocketDatastructure(**_data)
+            data = await parse_websocket()
 
     except asyncio.CancelledError:
         print("Connection closed")
