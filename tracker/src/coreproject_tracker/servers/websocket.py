@@ -26,7 +26,7 @@ async def ws():
         "info_hash_raw": initial_message["info_hash"],
         "action": initial_message["action"],
         "peer_id": initial_message["peer_id"],
-        # "numwant": initial_message["numwant"],
+        "numwant": initial_message["numwant"],
         "uploaded": initial_message["uploaded"],
         "event": initial_message.get("event"),
         "offers": initial_message["offers"],
@@ -88,7 +88,7 @@ async def ws():
             try:
                 peer = json.loads(peer)
                 # Peer doesn't exist in connection manager raises AttributeError
-                peer_instance = connection_manager.get_connection(data.peer_id.hex())
+                peer_instance = connection_manager.get_connection(peer["peer_id"])
 
                 for offer in offers:
                     await peer_instance.send_json(

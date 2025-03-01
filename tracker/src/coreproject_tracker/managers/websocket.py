@@ -2,11 +2,13 @@ import asyncio
 
 from quart import Websocket
 
+from coreproject_tracker.constants import CONNECTION_TTL
+
 
 class WebsocketConnectionManager:
     _instance = None
     _connections = {}
-    _ttl = 60  # Time to live for stale connections in seconds
+    _ttl = CONNECTION_TTL
 
     def __new__(cls):
         if not cls._instance:

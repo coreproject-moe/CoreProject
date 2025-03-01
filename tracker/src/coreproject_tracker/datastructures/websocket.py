@@ -27,6 +27,7 @@ class WebsocketDatastructure:
     ip: str = field()
     uploaded: int = field()
     addr: str = field()
+    numwant: int = field()
 
     # Optional
     event: str = field(default=None)
@@ -40,7 +41,6 @@ class WebsocketDatastructure:
 
     # Derived
     info_hash: str = field(init=False)
-    numwant: int = field(init=False)
 
     def __attrs_post_init__(self):
         # Derived Data
