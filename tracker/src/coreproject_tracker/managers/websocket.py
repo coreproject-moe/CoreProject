@@ -1,47 +1,48 @@
 import asyncio
-
-from quart import Websocket
-
-from coreproject_tracker.constants import CONNECTION_TTL
+import time
 
 
 class WebsocketConnectionManager:
     _instance = None
-    _connections = {}
-    _ttl = CONNECTION_TTL
 
-    def __new__(cls):
-        if not cls._instance:
+    def __new__(cls, ttl: int = 60):
+        if cls._instance is None:
             cls._instance = super(WebsocketConnectionManager, cls).__new__(cls)
         return cls._instance
 
-    def add_connection(self, peer_id, ws):
-        self._connections[peer_id] = {
-            "websocket": ws,
-            "last_active": asyncio.get_event_loop().time(),
-        }
+    def __init__(self, ttl: int = 60):
+        self.connections = {}
+        self.ttl = ttl
 
-    def get_connection(self, peer_id) -> Websocket:
-        return self._connections.get(peer_id, {}).get("websocket")
+    async def add_connection(self, identifier: str, ws):
+        self.connections[identifier] = (ws, time.time())
+        await self._cleanup_stale_connections()
 
-    def remove_connection(self, peer_id):
-        self._connections.pop(peer_id, None)
+    async def remove_connection(self, identifier: str):
+        self.connections.pop(identifier, None)
+
+    async def get_connection(self, identifier: str):
+        if identifier in self.connections:
+            connection, _ = self.connections[identifier]
+            if connection is not None:
+                self.connections[identifier] = (connection, time.time())
+                return connection
+            else:
+                await self.remove_connection(identifier)
+        await self._cleanup_stale_connections()
+        return None
+
+    async def _cleanup(self):
+        while True:
+            await asyncio.sleep(self.ttl)
+            await self._cleanup_stale_connections()
 
     async def _cleanup_stale_connections(self):
-        while True:
-            await asyncio.sleep(self._ttl)
-            current_time = asyncio.get_running_loop().time()
-            for peer_id in list(self._connections.keys()):
-                if current_time - self._connections[peer_id]["last_active"] > self._ttl:
-                    self.remove_connection(peer_id)
-
-    async def start_cleanup_task(self):
-        """Start cleanup task only when an event loop is running."""
-        await asyncio.sleep(1)  # Small delay to ensure the event loop is running
-        asyncio.create_task(self._cleanup_stale_connections())
-
-    async def close_all(self):
-        for peer_id, conn_data in self._connections.items():
-            ws = conn_data["websocket"]
-            await ws.close()
-        self._connections.clear()
+        current_time = time.time()
+        to_remove = [
+            identifier
+            for identifier, (connection, last_active) in self.connections.items()
+            if connection is None or (current_time - last_active) > self.ttl
+        ]
+        for identifier in to_remove:
+            del self.connections[identifier]

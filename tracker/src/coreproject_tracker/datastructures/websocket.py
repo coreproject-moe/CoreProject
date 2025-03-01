@@ -1,4 +1,4 @@
-from attrs import define, field, validators
+from attrs import define, field
 
 from coreproject_tracker.constants import DEFAULT_ANNOUNCE_PEERS, MAX_ANNOUNCE_PEERS
 from coreproject_tracker.converters import convert_binary_string_to_bytes

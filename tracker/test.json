@@ -1,0 +1,22 @@
+[
+    {
+        "action": "announce",
+        "offer": {
+            "type": "offer",
+            "sdp": "v=0\r\no=- 2825647457051617452 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=application 52942 UDP/DTLS/SCTP webrtc-datachannel\r\nc=IN IP4 118.179.63.17\r\na=candidate:147991589 1 udp 2113937151 02d7d923-6a04-40c3-ae75-68ff1af0ebeb.local 52942 typ host generation 0 network-cost 999\r\na=candidate:2593369234 1 udp 1677729535 118.179.63.17 52942 typ srflx raddr 0.0.0.0 rport 0 generation 0 network-cost 999\r\na=ice-ufrag:xTu3\r\na=ice-pwd:KIgV4LkkRbHVAC4C6pZ6oXbW\r\na=fingerprint:sha-256 35:78:AF:BF:8B:A4:AB:8B:97:7A:6A:8E:59:38:B5:1E:C3:BE:AF:11:64:F5:EC:66:E2:F9:A2:6F:71:1F:A4:1B\r\na=setup:actpass\r\na=mid:0\r\na=sctp-port:5000\r\na=max-message-size:262144\r\n"
+        },
+        "offer_id": "`!\u0080\n.\u0006\u00bc]\u0097\u00d8\u008e\u00d2b\u0096\u0019\u00f2<[\u00d5H",
+        "peer_id": "-WW0109-VKEr5uh+IgM2",
+        "info_hash": "\u00d8\u008a\u0005\u00c8\u00f4w\u0080x<\u00a8\u00e7\u00aa\u0083\u0015\u0018\u0017\u001d03D"
+    },
+    {
+        "action": "announce",
+        "info_hash": "\u00d8\u008a\u0005\u00c8\u00f4w\u0080x<\u00a8\u00e7\u00aa\u0083\u0015\u0018\u0017\u001d03D",
+        "offer": {
+            "sdp": "v=0\r\no=- 886567292728541853 2 IN IP4 127.0.0.1\r\ns=-\r\nt=0 0\r\na=group:BUNDLE 0\r\na=extmap-allow-mixed\r\na=msid-semantic: WMS\r\nm=application 56444 UDP/DTLS/SCTP webrtc-datachannel\r\nc=IN IP4 118.179.63.17\r\na=candidate:3108968985 1 udp 2113937151 99122f44-d1ac-4739-b8f9-5a7736e7eefe.local 56444 typ host generation 0 network-cost 999\r\na=candidate:3973610934 1 udp 1677729535 118.179.63.17 56444 typ srflx raddr 0.0.0.0 rport 0 generation 0 network-cost 999\r\na=ice-ufrag:Fhho\r\na=ice-pwd:dn97WokradijWDOdz23om80N\r\na=fingerprint:sha-256 0C:1C:D0:6D:39:C5:2A:E2:FE:AD:CC:E2:84:5F:3E:67:81:82:D2:8D:2A:9C:0D:C3:62:44:43:AC:6C:05:13:06\r\na=setup:actpass\r\na=mid:0\r\na=sctp-port:5000\r\na=max-message-size:262144\r\n",
+            "type": "offer"
+        },
+        "offer_id": "T/B\u00e7nZM!\u00a2V\u0005Dm\u00a7\u0093\u00f7KO=v",
+        "peer_id": "-WW0109-SiIVlHf3Qk9T"
+    }
+]
