@@ -1,6 +1,7 @@
 import json
+import contextlib
 
-from quart import Blueprint, Websocket, websocket
+from quart import Blueprint, Websocket, websocket, copy_current_websocket_context
 
 from coreproject_tracker.constants import WEBSOCKET_INTERVAL
 from coreproject_tracker.datastructures import WebsocketDatastructure
@@ -11,8 +12,7 @@ from coreproject_tracker.functions import (
     hget,
     hset,
 )
-from collections import defaultdict
-
+import asyncio
 from coreproject_tracker.managers import WebsocketConnectionManager
 
 ws_blueprint = Blueprint("websocket", __name__)
@@ -22,6 +22,7 @@ connection_manager = WebsocketConnectionManager()
 
 @ws_blueprint.websocket("/")
 async def ws():
+    global connections
     """WebSocket endpoint that listens for incoming messages and publishes them."""
     try:
         initial_message = await websocket.receive_json()
@@ -85,6 +86,7 @@ async def ws():
                 "completed": seeders,
                 "incompleted": leechers,
             }
+
             if data.action == "announce":
                 response |= {
                     "info_hash": await hex_str_to_bin_str(data.info_hash),
@@ -99,12 +101,16 @@ async def ws():
                 for key, value in redis_data.items():
                     peer = json.loads(value)
 
-                    peer_instance = connections[peer["peer_id"]]
-                    if not peer_instance:
-                        continue
-
-                    print(peer_instance)
                     for offer in offers:
+                        try:
+                            peer_instance = connections[peer["peer_id"]]
+                        except Exception:
+                            continue
+
+                        if not peer_instance:
+                            continue
+
+                        print(peer_instance)
                         await peer_instance.send(
                             json.dumps(
                                 {
@@ -139,8 +145,10 @@ async def ws():
                         )
                     )
 
-            await websocket.receive_json()
-    except Exception:
-        pass
+            initial_message = await websocket.receive_json()
+
+    except asyncio.CancelledError:
+        print("Connection closed")
+
     finally:
         del connections[data.peer_id.hex()]
