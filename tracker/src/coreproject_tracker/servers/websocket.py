@@ -1,14 +1,13 @@
-import json
-import contextlib
 import asyncio
+import json
 
-from quart import Blueprint, websocket, copy_current_websocket_context
+from quart import Blueprint, websocket
+
 from coreproject_tracker.constants import WEBSOCKET_INTERVAL
 from coreproject_tracker.datastructures import WebsocketDatastructure
 from coreproject_tracker.functions import (
     hdel,
     hex_str_to_bin_str,
-    bin_str_to_hex_str,
     hget,
     hset,
 )
