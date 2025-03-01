@@ -23,18 +23,22 @@ async def ws():
     client_ip, client_port = websocket.scope.get("client")
 
     _data = {
+        # Constants
+        "ip": client_ip,
+        "addr": f"{client_ip}:{client_port}",
+        # Must arrtibutes
         "info_hash_raw": initial_message["info_hash"],
         "action": initial_message["action"],
         "peer_id": initial_message["peer_id"],
         "numwant": initial_message["numwant"],
         "uploaded": initial_message["uploaded"],
-        "event": initial_message.get("event"),
         "offers": initial_message["offers"],
         "left": initial_message["left"],
+        "event": initial_message.get("event"),
+        # Optional
         "answer": initial_message.get("answer"),
         "offer_id": initial_message.get("offer_id"),
-        "ip": client_ip,
-        "addr": f"{client_ip}:{client_port}",
+        "to_peer_id": initial_message.get("to_peer_id"),
     }
     data = WebsocketDatastructure(**_data)
 
