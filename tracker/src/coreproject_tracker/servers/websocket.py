@@ -1,3 +1,4 @@
+import asyncio
 import contextlib
 import json
 
@@ -5,7 +6,7 @@ from quart import Blueprint, websocket
 
 from coreproject_tracker.constants import WEBSOCKET_INTERVAL
 from coreproject_tracker.datastructures import WebsocketDatastructure
-from coreproject_tracker.functions import hdel, hget, hset, hex_str_to_bin_str
+from coreproject_tracker.functions import hdel, hex_str_to_bin_str, hget, hset
 from coreproject_tracker.managers import WebsocketConnectionManager
 
 ws_blueprint = Blueprint("websocket", __name__)
@@ -118,3 +119,13 @@ async def ws():
                     "info_hash": await hex_str_to_bin_str(data.info_hash),
                 }
             )
+
+
+async def test():
+    try:
+        while True:
+            data = await websocket.receive()
+            await websocket.send(data)
+    except asyncio.CancelledError:
+        # Handle disconnection here
+        raise

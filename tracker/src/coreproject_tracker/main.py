@@ -1,4 +1,5 @@
 import functools
+import logging
 import sys
 from typing import NoReturn
 
@@ -14,6 +15,9 @@ from coreproject_tracker.env import REDIS_DATABASE, REDIS_HOST, REDIS_PORT
 from coreproject_tracker.functions import check_ip_type
 from coreproject_tracker.servers import http_blueprint, run_udp_server, ws_blueprint
 
+logging.basicConfig(
+    level=logging.INFO, format="[%(asctime)s] [%(process)d] [%(levelname)s] %(message)s"
+)
 app = Quart(__name__)
 # app = cors(app, allow_origin="*")
 
