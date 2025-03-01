@@ -24,26 +24,27 @@ async def ws():
     """WebSocket endpoint that listens for incoming messages and publishes them."""
     _initial_message = await websocket.receive()
     initial_message = json.loads(_initial_message)
-
     client_ip, client_port = websocket.scope.get("client")
 
     _data = {
         # Constants
         "ip": client_ip,
         # Required attributes
-        "info_hash": bin_str_to_hex_str(initial_message["info_hash"]),
+        "info_hash_raw": initial_message["info_hash"],
         "action": initial_message["action"],
-        "peer_id": bin_str_to_hex_str(initial_message["peer_id"]),
+        "peer_id": initial_message["peer_id"],
         "numwant": initial_message.get("numwant"),  # Ensure default value
         "uploaded": initial_message["uploaded"],
-        "offers": initial_message.get("offers"),  # Default to empty list
+        "offers": initial_message["offers"],  # Default to empty list
         "left": initial_message["left"],
         "event": initial_message.get("event"),
     }
-    if initial_message.get('answer'):
+
+    if initial_message.get("answer"):
         _data |= {
-            to_peer
+            "to_peer_id": initial_message["to_peer_id"],
         }
+
     data = WebsocketDatastructure(**_data)
 
     await connection_manager.add_connection(data.peer_id.hex(), websocket)
@@ -89,7 +90,7 @@ async def ws():
         }
         await websocket.send(json.dumps(response))
 
-    if not data.answer:
+    if not initial_message.get("answer"):
         await websocket.send(json.dumps(response))
 
     if offers := data.offers:
@@ -99,6 +100,7 @@ async def ws():
             peer_instance: Websocket = await connection_manager.get_connection(
                 peer["peer_id"]
             )
+            print(peer_instance)
 
             if not peer_instance:
                 await hdel(data.info_hash, key)
@@ -116,9 +118,12 @@ async def ws():
                         }
                     )
                 )
+                print("sent data")
 
     if data.answer:
-        to_peer = await connection_manager.get_connection(data.to_peer_id.hex())
+        to_peer = await connection_manager.get_connection(
+            await bin_str_to_hex_str(data.to_peer_id)
+        )
 
         if to_peer:
             await to_peer.send(
@@ -127,7 +132,7 @@ async def ws():
                         "action": "announce",
                         "answer": data.answer,
                         "offer_id": data.offer_id,
-                        "peer_id": await hex_str_to_bin_str(data.peer_id.hex()),
+                        "peer_id": await hex_str_to_bin_str(data.peer_id),
                         "info_hash": await hex_str_to_bin_str(data.info_hash),
                     }
                 )

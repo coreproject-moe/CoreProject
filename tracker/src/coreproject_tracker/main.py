@@ -38,19 +38,20 @@ async def run_web_server(host: str, port: int) -> NoReturn:
 
 
 async def main():
-    host = "127.0.0.1"
+    host = "localhost"
     port = 5000
 
-    match await check_ip_type(host):
-        case False:
-            raise ValueError(f"{host} is not a valid `host`")
-        case IP.IPV6:
-            if sys.platform == "win32":
-                raise ValueError(
-                    f"`ip` is {host}, which is `IPV6`",
-                    "`IPV6` is not supported on windows under `anyio`.",
-                    "Check: https://github.com/agronholm/anyio/discussions/872",
-                )
+    if not host == "localhost":
+        match await check_ip_type(host):
+            case False:
+                raise ValueError(f"{host} is not a valid `host`")
+            case IP.IPV6:
+                if sys.platform == "win32":
+                    raise ValueError(
+                        f"`ip` is {host}, which is `IPV6`",
+                        "`IPV6` is not supported on windows under `anyio`.",
+                        "Check: https://github.com/agronholm/anyio/discussions/872",
+                    )
 
     async with anyio.create_task_group() as tg:
         tg.start_soon(functools.partial(run_web_server, host, port))
