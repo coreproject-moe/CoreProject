@@ -62,7 +62,7 @@ async def http_endpoint():
     seeders = 0
     leechers = 0
 
-    redis_data = await hget(data.info_hash)
+    redis_data = await hget(data.info_hash) or {}
     peers_list = await get_n_random_items(redis_data.values(), data.numwant)
 
     for peer in peers_list:

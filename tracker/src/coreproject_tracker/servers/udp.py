@@ -112,7 +112,7 @@ async def run_udp_server(server_host: str, server_port: int):
                         }
                     ),
                 )
-                redis_data = await hget(data.info_hash.hex())
+                redis_data = await hget(data.info_hash.hex()) or {}
                 peers_list = await get_n_random_items(redis_data.values(), data.numwant)
 
                 peers = []

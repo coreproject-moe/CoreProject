@@ -1,5 +1,6 @@
 import asyncio
 import time
+from quart import Websocket
 
 
 class WebsocketConnectionManager:
@@ -14,7 +15,7 @@ class WebsocketConnectionManager:
         self.connections = {}
         self.ttl = ttl
 
-    async def add_connection(self, identifier: str, ws):
+    async def add_connection(self, identifier: str, ws: Websocket):
         self.connections[identifier] = (ws, time.time())
         await self._cleanup_stale_connections()
 
