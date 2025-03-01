@@ -1,8 +1,8 @@
 import json
 import contextlib
+import asyncio
 
-from quart import Blueprint, Websocket, websocket, copy_current_websocket_context
-
+from quart import Blueprint, websocket, copy_current_websocket_context
 from coreproject_tracker.constants import WEBSOCKET_INTERVAL
 from coreproject_tracker.datastructures import WebsocketDatastructure
 from coreproject_tracker.functions import (
@@ -12,11 +12,9 @@ from coreproject_tracker.functions import (
     hget,
     hset,
 )
-import asyncio
 from coreproject_tracker.managers import WebsocketConnectionManager
 
 ws_blueprint = Blueprint("websocket", __name__)
-connections = {}
 connection_manager = WebsocketConnectionManager()
 
 
@@ -43,18 +41,16 @@ async def ws():
         }
 
         data = WebsocketDatastructure(**_data)
-        connections[data.peer_id.hex()] = websocket
+        # Use the actual websocket connection object
+        ws_obj = websocket._get_current_object()
+        await connection_manager.add_connection(data.peer_id.hex(), ws_obj)
 
         while True:
             if initial_message.get("answer"):
-                _data |= {
-                    "to_peer_id": initial_message["to_peer_id"],
-                }
+                _data |= {"to_peer_id": initial_message["to_peer_id"]}
                 data = WebsocketDatastructure(**_data)
 
-            response = {
-                "action": data.action,
-            }
+            response = {"action": data.action}
 
             await hset(
                 data.info_hash,
@@ -82,10 +78,7 @@ async def ws():
                 else:
                     leechers += 1
 
-            response |= {
-                "completed": seeders,
-                "incompleted": leechers,
-            }
+            response |= {"completed": seeders, "incompleted": leechers}
 
             if data.action == "announce":
                 response |= {
@@ -95,22 +88,20 @@ async def ws():
                 await websocket.send(json.dumps(response))
 
             if not initial_message.get("answer"):
-                await websocket.send(json.dumps(response))
+                await websocket.send_json(response)
 
             if offers := data.offers:
                 for key, value in redis_data.items():
                     peer = json.loads(value)
 
                     for offer in offers:
-                        try:
-                            peer_instance = connections[peer["peer_id"]]
-                        except Exception:
-                            continue
-
+                        peer_instance = await connection_manager.get_connection(
+                            peer["peer_id"]
+                        )
                         if not peer_instance:
+                            await hdel(data["info_hash"], key)
                             continue
 
-                        print(peer_instance)
                         await peer_instance.send(
                             json.dumps(
                                 {
@@ -128,6 +119,7 @@ async def ws():
                         )
 
             if data.answer:
+                print("HELLO")
                 to_peer = await connection_manager.get_connection(
                     await bin_str_to_hex_str(data.to_peer_id)
                 )
@@ -151,4 +143,4 @@ async def ws():
         print("Connection closed")
 
     finally:
-        del connections[data.peer_id.hex()]
+        await connection_manager.remove_connection(data.peer_id.hex())
