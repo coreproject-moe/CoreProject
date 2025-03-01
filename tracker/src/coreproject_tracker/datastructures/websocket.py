@@ -24,19 +24,19 @@ class WebsocketDatastructure:
 
     offers: list[dict[str, str | dict[str, str]]] = field()
     ip: str = field()
-    uploaded: int = field()
+
     numwant: int = field()
 
     # Optional
     event: str = field(default=None)
-
+    uploaded: int = field(default=None)
     answer = field(default=None)
     to_peer_id: bytes = field(
         default=None,
         converter=convert_binary_string_to_bytes,
         validator=[validate_peer_length],
     )
-
+    offer_id: bytes = field(default=None)
     # Derived
     info_hash: str = field(init=False)
 
