@@ -11,129 +11,128 @@ from coreproject_tracker.functions import (
     hget,
     hset,
 )
+from collections import defaultdict
+
 from coreproject_tracker.managers import WebsocketConnectionManager
 
 ws_blueprint = Blueprint("websocket", __name__)
-
+connections = defaultdict(set)
 connection_manager = WebsocketConnectionManager()
-weboscket_dict = {}
 
 
 @ws_blueprint.websocket("/")
 async def ws():
     """WebSocket endpoint that listens for incoming messages and publishes them."""
-    _initial_message = await websocket.receive()
-    initial_message = json.loads(_initial_message)
-    client_ip, client_port = websocket.scope.get("client")
+    while True:
+        _initial_message = await websocket.receive()
+        initial_message = json.loads(_initial_message)
+        client_ip, client_port = websocket.scope.get("client")
 
-    _data = {
-        # Constants
-        "ip": client_ip,
-        # Required attributes
-        "info_hash_raw": initial_message["info_hash"],
-        "action": initial_message["action"],
-        "peer_id": initial_message["peer_id"],
-        "numwant": initial_message.get("numwant"),  # Ensure default value
-        "uploaded": initial_message["uploaded"],
-        "offers": initial_message["offers"],  # Default to empty list
-        "left": initial_message["left"],
-        "event": initial_message.get("event"),
-    }
-
-    if initial_message.get("answer"):
-        _data |= {
-            "to_peer_id": initial_message["to_peer_id"],
+        _data = {
+            # Constants
+            "ip": client_ip,
+            # Required attributes
+            "info_hash_raw": initial_message["info_hash"],
+            "action": initial_message["action"],
+            "peer_id": initial_message["peer_id"],
+            "numwant": initial_message.get("numwant"),  # Ensure default value
+            "uploaded": initial_message["uploaded"],
+            "offers": initial_message["offers"],  # Default to empty list
+            "left": initial_message["left"],
+            "event": initial_message.get("event"),
         }
 
-    data = WebsocketDatastructure(**_data)
-
-    await connection_manager.add_connection(data.peer_id.hex(), websocket)
-
-    response = {
-        "action": data.action,
-    }
-
-    await hset(
-        data.info_hash,
-        f"{client_ip}:{client_port}",
-        json.dumps(
-            {
-                "peer_id": data.peer_id.hex(),
-                "info_hash": data.info_hash,
-                "peer_ip": data.ip,
-                "port": client_port,
-                "left": data.left,
+        if initial_message.get("answer"):
+            _data |= {
+                "to_peer_id": initial_message["to_peer_id"],
             }
-        ),
-    )
 
-    seeders = 0
-    leechers = 0
+        data = WebsocketDatastructure(**_data)
+        print(data.peer_id.hex())
+        connections[data.peer_id.hex()].add(websocket)
 
-    redis_data = await hget(data.info_hash) or {}  # Ensure non-None value
-
-    for peer in redis_data.values():
-        peer = json.loads(peer)
-        if peer["left"] == 0:
-            seeders += 1
-        else:
-            leechers += 1
-
-    response |= {
-        "completed": seeders,
-        "incompleted": leechers,
-    }
-    if data.action == "announce":
-        response |= {
-            "info_hash": await hex_str_to_bin_str(data.info_hash),
-            "interval": WEBSOCKET_INTERVAL,
+        response = {
+            "action": data.action,
         }
-        await websocket.send(json.dumps(response))
 
-    if not initial_message.get("answer"):
-        await websocket.send(json.dumps(response))
+        await hset(
+            data.info_hash,
+            f"{client_ip}:{client_port}",
+            json.dumps(
+                {
+                    "peer_id": data.peer_id.hex(),
+                    "info_hash": data.info_hash,
+                    "peer_ip": data.ip,
+                    "port": client_port,
+                    "left": data.left,
+                }
+            ),
+        )
 
-    if offers := data.offers:
-        for key, value in redis_data.items():
-            peer = json.loads(value)
+        seeders = 0
+        leechers = 0
 
-            peer_instance: Websocket = await connection_manager.get_connection(
-                peer["peer_id"]
+        redis_data = await hget(data.info_hash) or {}  # Ensure non-None value
+
+        for peer in redis_data.values():
+            peer = json.loads(peer)
+            if peer["left"] == 0:
+                seeders += 1
+            else:
+                leechers += 1
+
+        response |= {
+            "completed": seeders,
+            "incompleted": leechers,
+        }
+        if data.action == "announce":
+            response |= {
+                "info_hash": await hex_str_to_bin_str(data.info_hash),
+                "interval": WEBSOCKET_INTERVAL,
+            }
+            await websocket.send(json.dumps(response))
+
+        if not initial_message.get("answer"):
+            await websocket.send(json.dumps(response))
+
+        if offers := data.offers:
+            for key, value in redis_data.items():
+                peer = json.loads(value)
+
+                peer_instance = connections.get(peer["peer_id"])
+                if peer_instance:
+                    peer_instance = peer_instance.pop()
+                    print(peer_instance)
+                else:
+                    continue
+
+                for offer in offers:
+                    await peer_instance.send(
+                        json.dumps(
+                            {
+                                "action": "announce",
+                                "offer": offer["offer"],
+                                "offer_id": offer["offer_id"],
+                                "peer_id": await hex_str_to_bin_str(data.peer_id.hex()),
+                                "info_hash": await hex_str_to_bin_str(data.info_hash),
+                            }
+                        )
+                    )
+
+        if data.answer:
+            to_peer = await connection_manager.get_connection(
+                await bin_str_to_hex_str(data.to_peer_id)
             )
-            print(peer_instance)
 
-            if not peer_instance:
-                await hdel(data.info_hash, key)
-                continue
-
-            for offer in offers:
-                await peer_instance.send(
+            if to_peer:
+                await to_peer.send(
                     json.dumps(
                         {
                             "action": "announce",
-                            "offer": offer["offer"],
-                            "offer_id": offer["offer_id"],
-                            "peer_id": await hex_str_to_bin_str(data.peer_id.hex()),
+                            "answer": data.answer,
+                            "offer_id": data.offer_id,
+                            "peer_id": await hex_str_to_bin_str(data.peer_id),
                             "info_hash": await hex_str_to_bin_str(data.info_hash),
                         }
                     )
                 )
-                print("sent data")
-
-    if data.answer:
-        to_peer = await connection_manager.get_connection(
-            await bin_str_to_hex_str(data.to_peer_id)
-        )
-
-        if to_peer:
-            await to_peer.send(
-                json.dumps(
-                    {
-                        "action": "announce",
-                        "answer": data.answer,
-                        "offer_id": data.offer_id,
-                        "peer_id": await hex_str_to_bin_str(data.peer_id),
-                        "info_hash": await hex_str_to_bin_str(data.info_hash),
-                    }
-                )
-            )
