@@ -20,12 +20,12 @@ class WebsocketDatastructure:
         validator=[validate_peer_length],
     )
 
-    left: int = field()
-
-    offers: list[dict[str, str | dict[str, str]]] = field()
     ip: str = field()
 
-    numwant: int = field()
+    # Hardcoded
+    left: float = field(default=float("inf"))
+    numwant: int = field(default=DEFAULT_ANNOUNCE_PEERS)
+    offers: list[dict[str, str | dict[str, str]]] = field(default=[])
 
     # Optional
     event: str = field(default=None)
