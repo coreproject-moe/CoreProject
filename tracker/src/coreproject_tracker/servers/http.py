@@ -2,7 +2,7 @@ import json
 from http import HTTPStatus
 
 import bencodepy
-from quart import Blueprint, request
+from quart import Blueprint, render_template, request
 
 from coreproject_tracker.constants import ANNOUNCE_INTERVAL
 from coreproject_tracker.datastructures import HttpDatastructure
@@ -55,7 +55,6 @@ async def http_endpoint():
         json.dumps(
             {
                 "peer_id": data.peer_id,
-                "info_hash": data.info_hash,
                 "peer_ip": data.peer_ip,
                 "port": data.port,
                 "left": data.left,
@@ -123,3 +122,8 @@ async def http_endpoint():
         "incomplete": leechers,
     }
     return bencodepy.bencode(output)
+
+
+@http_blueprint.route("/stats")
+async def stats():
+    return await render_template("stats.html")

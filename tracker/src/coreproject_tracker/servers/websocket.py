@@ -74,7 +74,6 @@ async def ws():
                 json.dumps(
                     {
                         "peer_id": data.peer_id.hex(),
-                        "info_hash": data.info_hash,
                         "peer_ip": data.ip,
                         "port": data.port,
                         "left": data.left,

@@ -18,7 +18,6 @@ logging.basicConfig(
     level=logging.INFO, format="[%(asctime)s] [%(process)d] [%(levelname)s] %(message)s"
 )
 app = Quart(__name__)
-# app = cors(app, allow_origin="*")
 
 app.register_blueprint(http_blueprint)
 app.register_blueprint(ws_blueprint)

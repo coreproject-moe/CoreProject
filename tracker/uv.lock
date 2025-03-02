@@ -328,18 +328,6 @@ wheels = [
 ]
 
 [[package]]
-name = "quart-cors"
-version = "0.8.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "quart" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/14/b1/2a65be601f3c92c913f3321ee186d10c2da4325447b4b0fca83e0c493c60/quart_cors-0.8.0.tar.gz", hash = "sha256:ac32c4931da6fba944e9e2d3f856f2db4fd82e3fb905a09646086780c221a118", size = 12466 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/ea/31/da390a5a10674481dea2909178973de81fa3a246c0eedcc0e1e4114f52f8/quart_cors-0.8.0-py3-none-any.whl", hash = "sha256:62dc811768e2e1704d2b99d5880e3eb26fc776832305a19ea53db66f63837767", size = 8698 },
-]
-
-[[package]]
 name = "quart-redis"
 version = "3.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -413,7 +401,6 @@ dependencies = [
     { name = "bencode-py" },
     { name = "hypercorn" },
     { name = "quart" },
-    { name = "quart-cors" },
     { name = "quart-redis" },
     { name = "redis", extra = ["hiredis"] },
 ]
@@ -433,7 +420,6 @@ requires-dist = [
     { name = "bencode-py", specifier = ">=4.0.0" },
     { name = "hypercorn", specifier = ">=0.17.3" },
     { name = "quart", specifier = ">=0.20.0" },
-    { name = "quart-cors", specifier = ">=0.8.0" },
     { name = "quart-redis", specifier = ">=3.0.0" },
     { name = "redis", extras = ["hiredis"], specifier = ">=5.2.1" },
 ]
