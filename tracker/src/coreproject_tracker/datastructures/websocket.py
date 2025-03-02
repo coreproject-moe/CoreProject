@@ -1,24 +1,30 @@
-from attrs import define, field
+from attrs import define, field, validators
 
 from coreproject_tracker.constants import DEFAULT_ANNOUNCE_PEERS, MAX_ANNOUNCE_PEERS
 from coreproject_tracker.converters import convert_binary_string_to_bytes
-from coreproject_tracker.validators import validate_info_hash, validate_peer_length
+from coreproject_tracker.enums import EVENT_NAMES
+from coreproject_tracker.validators import (
+    validate_20_length,
+    validate_ip,
+    validate_peer_length,
+    validate_port,
+)
 
 
 @define
 class WebsocketDatastructure:
     info_hash_raw: bytes = field(
         converter=convert_binary_string_to_bytes,
-        validator=[validate_info_hash],
+        validator=[validate_20_length],
     )
-    action: str = field()
+    action: str = field(validator=[validators.instance_of(str)])
     peer_id: bytes = field(
         converter=convert_binary_string_to_bytes,
         validator=[validate_peer_length],
     )
-    ip: str = field()
-    port: int = field()  # TODO:Add port validator
-    addr: str = field()
+    ip: str = field(validator=[validate_ip])
+    port: int = field(validator=[validate_port])
+    addr: str = field(validator=[validators.instance_of(str)])
 
     # Hardcoded
     left: float = field(default=float("inf"))
@@ -26,7 +32,7 @@ class WebsocketDatastructure:
     offers: list[dict[str, str | dict[str, str]]] = field(default=[])
 
     # Optional
-    event: str = field(default=None)
+    event: EVENT_NAMES = field(default=None)
     uploaded: int = field(default=None)
     answer = field(default=None)
     to_peer_id: bytes = field(
@@ -35,6 +41,7 @@ class WebsocketDatastructure:
         validator=[validate_peer_length],
     )
     offer_id: bytes = field(default=None)
+
     # Derived
     info_hash: str = field(init=False)
 
@@ -44,6 +51,7 @@ class WebsocketDatastructure:
 
         if offers := self.offers:
             self.numwant = min(
+                self.numwant,
                 len(offers) if offers else DEFAULT_ANNOUNCE_PEERS,
                 MAX_ANNOUNCE_PEERS,
             )

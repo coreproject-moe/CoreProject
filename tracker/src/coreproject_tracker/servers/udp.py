@@ -6,6 +6,7 @@ from coreproject_tracker.datastructures import UdpDatastructure
 from coreproject_tracker.enums import ACTIONS, EVENT_NAMES
 from coreproject_tracker.functions import (
     addrs_to_compact,
+    convert_event_id_to_event_enum,
     from_uint16,
     from_uint32,
     from_uint64,
@@ -90,8 +91,10 @@ async def run_udp_server(server_host: str, server_port: int):
                     "uploaded": from_uint64(
                         packet[72:80]  # Convert 64-bit unsigned integer
                     ),
-                    "event_id": await from_uint32(
-                        packet[80:84]  # Read 4-byte unsigned int (big-endian)
+                    "event_name": await convert_event_id_to_event_enum(
+                        await from_uint32(
+                            packet[80:84]  # Read 4-byte unsigned int (big-endian)
+                        ),
                     ),
                     "ip": await from_uint32(packet[84:88]) or host,
                     "key": await from_uint32(packet[88:92]),
@@ -149,7 +152,7 @@ async def run_udp_server(server_host: str, server_port: int):
                 }
                 data = UdpDatastructure(**_data)
 
-            if data.event_id and data.event_name == EVENT_NAMES.STOP:
+            if data.event_name == EVENT_NAMES.STOP:
                 await hdel(data.info_hash, f"{data.ip}:{data.port}")
 
             packet = await make_udp_packet(data)

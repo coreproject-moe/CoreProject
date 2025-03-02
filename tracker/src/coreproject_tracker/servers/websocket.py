@@ -5,10 +5,12 @@ from quart import Blueprint, copy_current_websocket_context, websocket
 
 from coreproject_tracker.constants import WEBSOCKET_INTERVAL
 from coreproject_tracker.datastructures import WebsocketDatastructure
+from coreproject_tracker.enums import ACTIONS, EVENT_NAMES
 from coreproject_tracker.functions import (
+    bytes_to_bin_str,
+    convert_event_name_to_event_enum,
     hdel,
     hex_str_to_bin_str,
-    bytes_to_bin_str,
     hget,
     hset,
 )
@@ -40,7 +42,6 @@ async def ws():
             "uploaded": initial_message.get("uploaded"),
             "offers": initial_message.get("offers"),
             "left": initial_message.get("left"),
-            "event": initial_message.get("event"),
         }
         if initial_message.get("answer"):
             _data |= {
@@ -48,15 +49,23 @@ async def ws():
                 "to_peer_id": initial_message["to_peer_id"],
                 "offer_id": initial_message["offer_id"],
             }
+        if event := initial_message.get("event"):
+            _data |= {
+                "event": await convert_event_name_to_event_enum(event),
+            }
 
         return WebsocketDatastructure(**_data)
 
-    data = await parse_websocket()
+    data: WebsocketDatastructure = await parse_websocket()
     try:
         ws_obj = websocket._get_current_object()
         await connection_manager.add_connection(data.peer_id.hex(), ws_obj)
 
         while True:
+            if data.event == EVENT_NAMES.STOP:
+                await connection_manager.remove_connection(data.peer_id.hex())
+                await websocket.close()
+
             response = {"action": data.action}
 
             await hset(
@@ -87,7 +96,7 @@ async def ws():
 
             response |= {"completed": seeders, "incompleted": leechers}
 
-            if data.action == "announce":
+            if data.action == ACTIONS.ANNOUNCE:
                 response |= {
                     "info_hash": await hex_str_to_bin_str(data.info_hash),
                     "interval": WEBSOCKET_INTERVAL,
@@ -133,7 +142,7 @@ async def ws():
                         }
                     )
 
-            data = await parse_websocket()
+            data: WebsocketDatastructure = await parse_websocket()
 
     except asyncio.CancelledError:
         print("Connection closed")

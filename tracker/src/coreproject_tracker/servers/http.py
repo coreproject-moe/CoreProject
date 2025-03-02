@@ -9,6 +9,7 @@ from coreproject_tracker.datastructures import HttpDatastructure
 from coreproject_tracker.enums import EVENT_NAMES, IP
 from coreproject_tracker.functions import (
     check_ip_type,
+    convert_event_name_to_event_enum,
     get_n_random_items,
     hdel,
     hex_str_to_bin_str,
@@ -32,8 +33,13 @@ async def http_endpoint():
             "numwant": request.args.get("numwant"),
             "peer_ip": request.remote_addr,
             "peer_id": request.args.get("peer_id"),
-            "event": request.args.get("event"),
         }
+        if request.args.get("event"):
+            _data |= {
+                "event_name": await convert_event_name_to_event_enum(
+                    request.args.get("event")
+                ),
+            }
         data = HttpDatastructure(**_data)
     except Exception as e:
         print(e)
