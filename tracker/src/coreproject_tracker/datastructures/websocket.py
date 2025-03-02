@@ -10,6 +10,8 @@ from coreproject_tracker.validators import (
     validate_port,
 )
 
+__all__ = ["WebsocketDatastructure"]
+
 
 @define
 class WebsocketDatastructure:

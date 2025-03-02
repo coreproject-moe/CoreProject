@@ -1,5 +1,7 @@
 import enum
 
+__all__ = ["ACTIONS"]
+
 
 class ACTIONS(enum.IntEnum):
     CONNECT = 0

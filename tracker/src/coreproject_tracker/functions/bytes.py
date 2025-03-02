@@ -1,5 +1,7 @@
 import struct
 
+__all__ = ["to_uint32", "from_uint16", "from_uint32", "from_uint64"]
+
 
 async def to_uint32(value: int) -> bytes:
     """Convert an integer to a 4-byte unsigned integer in network byte order."""
@@ -16,6 +18,6 @@ async def from_uint32(data: bytes) -> int:
     return struct.unpack(">I", data)[0]
 
 
-def from_uint64(buf: bytes) -> int:
+def from_uint64(data: bytes) -> int:
     """Convert an 8-byte `unsigned long long` buffer into an integer."""
-    return struct.unpack(">Q", buf)[0]
+    return struct.unpack(">Q", data)[0]

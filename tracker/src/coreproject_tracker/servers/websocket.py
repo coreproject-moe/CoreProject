@@ -1,7 +1,8 @@
 import asyncio
 import json
+from typing import cast
 
-from quart import Blueprint, copy_current_websocket_context, websocket
+from quart import Blueprint, Websocket, copy_current_websocket_context, websocket
 
 from coreproject_tracker.constants import WEBSOCKET_INTERVAL
 from coreproject_tracker.datastructures import WebsocketDatastructure
@@ -25,7 +26,7 @@ async def ws():
     """WebSocket endpoint that listens for incoming messages and publishes them."""
 
     @copy_current_websocket_context
-    async def parse_websocket():
+    async def parse_websocket() -> WebsocketDatastructure:
         initial_message = await websocket.receive_json()
         client_ip, client_port = websocket.scope.get("client")
 
@@ -43,12 +44,14 @@ async def ws():
             "offers": initial_message.get("offers"),
             "left": initial_message.get("left"),
         }
+
         if initial_message.get("answer"):
             _data |= {
                 "answer": initial_message["answer"],
                 "to_peer_id": initial_message["to_peer_id"],
                 "offer_id": initial_message["offer_id"],
             }
+
         if event := initial_message.get("event"):
             _data |= {
                 "event": await convert_event_name_to_event_enum(event),
@@ -56,9 +59,9 @@ async def ws():
 
         return WebsocketDatastructure(**_data)
 
-    data: WebsocketDatastructure = await parse_websocket()
+    data = await parse_websocket()
     try:
-        ws_obj = websocket._get_current_object()
+        ws_obj = cast(Websocket, websocket._get_current_object())
         await connection_manager.add_connection(data.peer_id.hex(), ws_obj)
 
         while True:
@@ -141,7 +144,7 @@ async def ws():
                         }
                     )
 
-            data: WebsocketDatastructure = await parse_websocket()
+            data = await parse_websocket()
 
     except asyncio.CancelledError:
         print("Connection closed")

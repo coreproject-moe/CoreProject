@@ -14,6 +14,8 @@ from coreproject_tracker.validators import (
     validate_port,
 )
 
+__all__ = ["HttpDatastructure"]
+
 
 @define
 class HttpDatastructure:

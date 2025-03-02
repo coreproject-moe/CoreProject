@@ -13,6 +13,8 @@ from coreproject_tracker.validators import (
     validate_port,
 )
 
+__all__ = ["UdpDatastructure"]
+
 
 @define
 class UdpDatastructure:
