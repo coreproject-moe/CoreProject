@@ -7,14 +7,14 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-discord-py = "^2.4.0"
-sqlalchemy = {extras = ["postgresql-asyncpg"], version = "^2.0.37"}
+discord-py = "^2.5.0"
+sqlalchemy = {extras = ["postgresql-asyncpg"], version = "^2.0.38"}
 aiohttp-jinja2 = "^1.6"
 alembic = "^1.14.1"
 
 
 [tool.poetry.group.dev.dependencies]
-black = "^24.10.0"
+black = "^25.1.0"
 aiohttp-devtools = "^1.1"
 poethepoet = "^0.32.2"
 
