@@ -12,6 +12,7 @@ dependencies = [
     "quart>=0.20.0",
     "quart-redis>=3.0.0",
     "redis[hiredis]>=5.2.1",
+    "uvloop>=0.21.0 ; sys_platform == 'linux'",
 ]
 
 [dependency-groups]
