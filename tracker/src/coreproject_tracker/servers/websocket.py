@@ -112,14 +112,15 @@ async def ws():
                 for key, value in redis_data.items():
                     peer = json.loads(value)
 
-                    for offer in offers:
-                        peer_instance = await connection_manager.get_connection(
-                            peer["peer_id"]
-                        )
-                        if not peer_instance:
-                            await hdel(data.info_hash, key)
-                            continue
+                    peer_instance = await connection_manager.get_connection(
+                        peer["peer_id"]
+                    )
 
+                    if not peer_instance:
+                        await hdel(data.info_hash, key)
+                        continue
+
+                    for offer in offers:
                         await peer_instance.send_json(
                             {
                                 "action": "announce",

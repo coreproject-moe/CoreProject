@@ -1,4 +1,5 @@
 import json
+import sys
 
 import anyio
 
@@ -62,10 +63,16 @@ async def make_udp_packet(params: UdpDatastructure) -> bytes:
 
 async def run_udp_server(server_host: str, server_port: int):
     print(f"Running UDP server on `udp://{server_host}:{server_port}`")
-    async with await anyio.create_udp_socket(
-        local_host=server_host,
-        local_port=server_port,
-    ) as udp:
+    opts = {
+        "local_host": server_host,
+        "local_port": server_port,
+    }
+    if sys.platform != "win32":
+        opts |= {
+            "reuse_port": True,
+        }
+
+    async with await anyio.create_udp_socket(**opts) as udp:
         async for packet, (host, port) in udp:
             if len(packet) < 16:
                 await udp.sendto("Too small payload".encode(), host, port)

@@ -19,4 +19,4 @@ class WebsocketConnectionManager:
         self.connections.pop(identifier, None)
 
     async def get_connection(self, identifier: str) -> Websocket:
-        return self.connections[identifier]
+        return self.connections.get(identifier, None)
